@@ -1069,6 +1069,15 @@ GncSchedDef::~GncSchedDef() {}
 /************************************************************************************************
                          XML Reader
 ************************************************************************************************/
+XmlReader::XmlReader(MyMoneyGncReader *pM) :
+    m_source(0),
+    m_reader(0),
+    m_co(0),
+    pMain(pM),
+    m_headerFound(false)
+{
+}
+
 void XmlReader::processFile(QIODevice* pDevice)
 {
   m_source = new QXmlInputSource(pDevice);  // set up the Qt XML reader

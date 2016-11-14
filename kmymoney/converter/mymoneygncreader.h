@@ -791,7 +791,7 @@ class XmlReader : public QXmlDefaultHandler
 {
 protected:
   friend class MyMoneyGncReader;
-  XmlReader(MyMoneyGncReader *pM) : pMain(pM) {}   // keep pointer to 'main'
+  XmlReader(MyMoneyGncReader *pM);                 // keep pointer to 'main'
   void processFile(QIODevice*);  // main entry point of reader
   //  define xml content handler functions
   bool startDocument();
