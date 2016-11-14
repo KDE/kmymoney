@@ -109,7 +109,16 @@ void MyMoneyGncReader::setOptions()
 #endif // _GNCFILEANON
 }
 
-GncObject::GncObject()
+GncObject::GncObject() :
+    pMain(0),
+    m_subElementList(0),
+    m_subElementListCount(0),
+    m_dataElementList(0),
+    m_dataElementListCount(0),
+    m_dataPtr(0),
+    m_state(0),
+    m_anonClassList(0),
+    m_anonClass(0)
 {
 }
 
