@@ -969,7 +969,8 @@ void GncFreqSpec::terminate()
   return ;
 }
 //************* GncRecurrence********************************************
-GncRecurrence::GncRecurrence()
+GncRecurrence::GncRecurrence() :
+    m_vpStartDate(0)
 {
   m_subElementListCount = END_Recurrence_SELS;
   static const QString subEls[] = {"recurrence:start"};
