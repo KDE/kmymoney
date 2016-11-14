@@ -1228,7 +1228,22 @@ bool XmlReader::endDocument()
   Controls overall operation of the importer
 ********************************************************************************************/
 //***************** Constructor ***********************
-MyMoneyGncReader::MyMoneyGncReader()
+MyMoneyGncReader::MyMoneyGncReader() :
+    m_dropSuspectSchedules(0),
+    m_investmentOption(0),
+    m_useFinanceQuote(0),
+    m_useTxNotes(0),
+    gncdebug(0),
+    xmldebug(0),
+    bAnonymize(0),
+    developerDebug(0),
+    m_xr(0),
+    m_progressCallback(0),
+    m_ccCount(0),
+    m_orCount(0),
+    m_scCount(0),
+    m_potentialTransfer(0),
+    m_suspectSchedule(false)
 {
 #ifndef _GNCFILEANON
   m_storage = 0;
