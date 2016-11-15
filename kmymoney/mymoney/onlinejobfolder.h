@@ -57,8 +57,7 @@ private:
   };
 
   onlineJobFolder();
-  onlineJobFolder(const onlineJobFolders& folder)
-      : m_folder(folder) {}
+  onlineJobFolder(const onlineJobFolders& folder);
 
   onlineJobFolders m_folder;
 };
