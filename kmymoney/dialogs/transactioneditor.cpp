@@ -63,6 +63,16 @@
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
+TransactionEditor::TransactionEditor() :
+    m_paymentMethod(MyMoneySchedule::STYPE_ANY),
+    m_regForm(0),
+    m_item(0),
+    m_initialAction(ActionNone),
+    m_openEditSplits(false),
+    m_memoChanged(false)
+{
+}
+
 TransactionEditor::TransactionEditor(TransactionEditorContainer* regForm, KMyMoneyRegister::Transaction* item, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) :
     m_paymentMethod(MyMoneySchedule::STYPE_ANY),
     m_transactions(list),
