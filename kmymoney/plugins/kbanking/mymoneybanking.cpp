@@ -96,7 +96,11 @@ K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
 class KBankingPlugin::Private
 {
 public:
-  Private() : passwordCacheTimer(0) {
+  Private() :
+      passwordCacheTimer(0),
+      jobList(),
+      fileId()
+  {
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {
       QScopedPointer<KConfig> cfg(new KConfig("kioslaverc"));
@@ -151,7 +155,12 @@ public:
 KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::OnlinePluginExtended(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private),
-    m_accountSettings(0)
+    m_configAction(0),
+    m_importAction(0),
+    // m_kbanking(), set below
+    m_protocolConversionMap(),
+    m_accountSettings(0),
+    m_onlineJobQueue()
 {
   m_kbanking = new KMyMoneyBanking(this, "KMyMoney");
 
