@@ -90,6 +90,8 @@ public:
   MyMoneyMoney(const MyMoneyMoney& Amount);
   MyMoneyMoney(const AlkValue& Amount);
 
+  virtual ~MyMoneyMoney();
+
   const MyMoneyMoney abs() const {
     return AlkValue::abs();
   };

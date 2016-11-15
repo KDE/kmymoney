@@ -65,8 +65,10 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
   m_email     = email;
 }
 
-MyMoneyPayee::MyMoneyPayee(const QDomElement& node)
-  : MyMoneyObject(node)
+MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
+    MyMoneyObject(node),
+    m_usingMatchKey(false),
+    m_matchKeyIgnoreCase(true)
 {
   if ("PAYEE" != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not PAYEE");

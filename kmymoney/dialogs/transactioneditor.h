@@ -43,7 +43,7 @@ class TransactionEditor : public QObject
 {
   Q_OBJECT
 public:
-  TransactionEditor() {}
+  TransactionEditor();
   TransactionEditor(TransactionEditorContainer* regForm, KMyMoneyRegister::Transaction* item, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
   virtual ~TransactionEditor();
 

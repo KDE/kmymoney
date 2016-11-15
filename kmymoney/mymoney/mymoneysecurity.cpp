@@ -46,7 +46,9 @@ MyMoneySecurity::MyMoneySecurity() :
 MyMoneySecurity::MyMoneySecurity(const QString& id, const QString& name, const QString& symbol, const int partsPerUnit, const int smallestCashFraction, const int smallestAccountFraction) :
     MyMoneyObject(id),
     m_name(name),
-    m_securityType(SECURITY_CURRENCY)
+    m_securityType(SECURITY_CURRENCY),
+    m_smallestCashFraction(100),
+    m_partsPerUnit(100)
 {
   if (symbol.isEmpty())
     m_tradingSymbol = id;

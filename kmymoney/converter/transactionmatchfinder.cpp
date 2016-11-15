@@ -22,8 +22,9 @@
 
 #include "mymoneyfile.h"
 
-TransactionMatchFinder::TransactionMatchFinder(int matchWindow)
-    : matchWindow(matchWindow)
+TransactionMatchFinder::TransactionMatchFinder(int _matchWindow) :
+    matchWindow(_matchWindow),
+    matchResult(MatchNotFound)
 {
 }
 

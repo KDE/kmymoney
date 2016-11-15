@@ -82,11 +82,6 @@ private:
   bool m_categoryEditor;
   bool m_isEditing;
 
-  int m_idPropFutureValue;
-  int m_idPropLastValue;
-  int m_idPropMaxCredit;
-  int m_idPropMinBalance;
-
   void loadVatAccounts();
   void storeKVP(const QString& key, kMyMoneyEdit* widget);
   void storeKVP(const QString& key, KLineEdit* widget);

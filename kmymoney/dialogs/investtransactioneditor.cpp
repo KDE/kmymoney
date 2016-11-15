@@ -93,6 +93,7 @@ public:
 
 
 InvestTransactionEditor::InvestTransactionEditor() :
+    m_transactionType(MyMoneySplit::UnknownTransactionType),
     d(new Private(this))
 {
 }

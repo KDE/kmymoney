@@ -60,7 +60,7 @@ public:
   QString m_memoText;
 
 protected:
-  Activity(InvestTransactionEditor* editor) {
+  Activity(InvestTransactionEditor* editor) : m_memoChanged(false) {
     m_parent = editor;
   }
   QWidget* haveWidget(const QString& name) const {

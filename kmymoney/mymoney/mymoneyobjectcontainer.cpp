@@ -25,7 +25,9 @@
 #include <mymoneyobjectcontainer.h>
 
 struct MyMoneyObjectContainer::Private {
-  Private(MyMoneyObjectContainer *p) : pub(p) {
+  Private(MyMoneyObjectContainer *p) :
+      storage(0),
+      pub(p) {
   }
 
   void assignFraction(MyMoneyAccount* acc) {

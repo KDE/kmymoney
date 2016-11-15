@@ -40,7 +40,8 @@
 #include "mymoneymoney.h"
 
 KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent)
-    : kNewEquityEntryDecl(parent)
+    : kNewEquityEntryDecl(parent),
+      m_fraction(0)
 {
   setModal(true);
   edtFraction->setCalculatorButtonVisible(false);

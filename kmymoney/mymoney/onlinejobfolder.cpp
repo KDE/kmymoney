@@ -18,6 +18,13 @@
 
 #include "onlinejobfolder.h"
 
-onlineJobFolder::onlineJobFolder()
+onlineJobFolder::onlineJobFolder() :
+    m_folder(folderOutbox)
 {
 }
+
+onlineJobFolder::onlineJobFolder(const onlineJobFolders& folder) :
+    m_folder(folder)
+{
+}
+

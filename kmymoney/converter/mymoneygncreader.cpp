@@ -110,7 +110,16 @@ void MyMoneyGncReader::setOptions()
 #endif // _GNCFILEANON
 }
 
-GncObject::GncObject()
+GncObject::GncObject() :
+    pMain(0),
+    m_subElementList(0),
+    m_subElementListCount(0),
+    m_dataElementList(0),
+    m_dataElementListCount(0),
+    m_dataPtr(0),
+    m_state(0),
+    m_anonClassList(0),
+    m_anonClass(0)
 {
 }
 
@@ -970,7 +979,8 @@ void GncFreqSpec::terminate()
   return ;
 }
 //************* GncRecurrence********************************************
-GncRecurrence::GncRecurrence()
+GncRecurrence::GncRecurrence() :
+    m_vpStartDate(0)
 {
   m_subElementListCount = END_Recurrence_SELS;
   static const QString subEls[] = {"recurrence:start"};
@@ -1060,6 +1070,15 @@ GncSchedDef::~GncSchedDef() {}
 /************************************************************************************************
                          XML Reader
 ************************************************************************************************/
+XmlReader::XmlReader(MyMoneyGncReader *pM) :
+    m_source(0),
+    m_reader(0),
+    m_co(0),
+    pMain(pM),
+    m_headerFound(false)
+{
+}
+
 void XmlReader::processFile(QIODevice* pDevice)
 {
   m_source = new QXmlInputSource(pDevice);  // set up the Qt XML reader
@@ -1228,7 +1247,22 @@ bool XmlReader::endDocument()
   Controls overall operation of the importer
 ********************************************************************************************/
 //***************** Constructor ***********************
-MyMoneyGncReader::MyMoneyGncReader()
+MyMoneyGncReader::MyMoneyGncReader() :
+    m_dropSuspectSchedules(0),
+    m_investmentOption(0),
+    m_useFinanceQuote(0),
+    m_useTxNotes(0),
+    gncdebug(0),
+    xmldebug(0),
+    bAnonymize(0),
+    developerDebug(0),
+    m_xr(0),
+    m_progressCallback(0),
+    m_ccCount(0),
+    m_orCount(0),
+    m_scCount(0),
+    m_potentialTransfer(0),
+    m_suspectSchedule(false)
 {
 #ifndef _GNCFILEANON
   m_storage = 0;

@@ -118,6 +118,10 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 {
 }
 
+MyMoneyMoney::~MyMoneyMoney()
+{
+}
+
 QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator) const
 {
   return formatMoney("", denomToPrec(denom), showThousandSeparator);

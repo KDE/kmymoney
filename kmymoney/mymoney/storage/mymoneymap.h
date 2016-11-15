@@ -241,7 +241,8 @@ private:
   public:
     MyMoneyMapStart(QMap<Key, T>* container, unsigned long* id) :
         MyMoneyMapAction(container),
-        m_idPtr(id) {
+        m_idPtr(id),
+        m_id(0) {
       if (id != 0)
         m_id = *id;
     }

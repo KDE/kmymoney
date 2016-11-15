@@ -1046,7 +1046,8 @@ public:
   Private() :
       m_hideClosedAccounts(true),
       m_hideEquityAccounts(true),
-      m_hideUnusedIncomeExpenseAccounts(false) {
+      m_hideUnusedIncomeExpenseAccounts(false),
+      m_haveHiddenUnusedIncomeExpenseAccounts(false) {
   }
 
   ~Private() {
