@@ -312,5 +312,6 @@ void MyMoneyStorageANON::writeReport(QDomElement& reports, const MyMoneyReport& 
 
 void MyMoneyStorageANON::writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job)
 {
+  Q_UNUSED(onlineJobs);
+  Q_UNUSED(job);
 }
-
