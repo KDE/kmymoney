@@ -104,7 +104,7 @@ private:
   * for stock prices or currency exchange rates.
   */
 struct WebPriceQuoteSource {
-  WebPriceQuoteSource() {}
+  WebPriceQuoteSource() : m_skipStripping(false) {}
   explicit WebPriceQuoteSource(const QString& name);
   WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
   ~WebPriceQuoteSource() {}
