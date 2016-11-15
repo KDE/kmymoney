@@ -43,9 +43,9 @@
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 MyMoneyAccount::MyMoneyAccount() :
+    m_accountType(UnknownAccountType),
     m_fraction(-1)
 {
-  m_accountType = UnknownAccountType;
 }
 
 MyMoneyAccount::~MyMoneyAccount()
@@ -62,6 +62,7 @@ MyMoneyAccount::MyMoneyAccount(const QString& id, const MyMoneyAccount& right) :
 MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     MyMoneyObject(node),
     MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement()),
+    m_accountType(UnknownAccountType),
     m_fraction(-1)
 {
   if ("ACCOUNT" != node.tagName())
