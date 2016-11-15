@@ -64,13 +64,16 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 TransactionEditor::TransactionEditor(TransactionEditorContainer* regForm, KMyMoneyRegister::Transaction* item, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) :
+    m_paymentMethod(MyMoneySchedule::STYPE_ANY),
     m_transactions(list),
     m_regForm(regForm),
     m_item(item),
     m_transaction(item->transaction()),
     m_split(item->split()),
     m_lastPostDate(lastPostDate),
-    m_openEditSplits(false)
+    m_initialAction(ActionNone),
+    m_openEditSplits(false),
+    m_memoChanged(false)
 {
   m_item->startEditMode();
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotUpdateAccount()));
