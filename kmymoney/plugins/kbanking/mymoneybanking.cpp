@@ -99,7 +99,11 @@ K_PLUGIN_FACTORY_WITH_JSON(KBankingFactory, "kmm_kbanking.json", registerPlugin<
 class KBankingPlugin::Private
 {
 public:
-  Private() : passwordCacheTimer(0) {
+  Private()
+  : passwordCacheTimer(nullptr),
+  jobList(),
+  fileId()
+  {
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {
       std::unique_ptr<KConfig> cfg = std::unique_ptr<KConfig>(new KConfig("kioslaverc"));
@@ -155,7 +159,12 @@ public:
 KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::OnlinePluginExtended(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private),
-    m_accountSettings(nullptr)
+    m_configAction(nullptr),
+    m_importAction(nullptr),
+    // m_kbanking(), set below
+    m_protocolConversionMap(),
+    m_accountSettings(nullptr),
+    m_onlineJobQueue()
 {
   m_kbanking = new KMyMoneyBanking(this, "KMyMoney");
 
