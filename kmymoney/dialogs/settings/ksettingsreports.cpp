@@ -31,7 +31,7 @@ class KSettingsReports::Private
 {
 public:
 
-  Private() {}
+  Private() : m_fileKLineEdit(0) {}
 
   ~Private() {}
 

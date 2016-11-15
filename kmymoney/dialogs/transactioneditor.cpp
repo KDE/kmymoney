@@ -774,7 +774,8 @@ void TransactionEditor::resizeForm()
   }
 }
 
-StdTransactionEditor::StdTransactionEditor()
+StdTransactionEditor::StdTransactionEditor() :
+    m_inUpdateVat(false)
 {
 }
 
