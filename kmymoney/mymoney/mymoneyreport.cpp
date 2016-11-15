@@ -105,6 +105,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_reportType(kTypeArray[_rt]),
     m_rowType(_rt),
     m_columnsAreDays(false),
+    m_queryColumns(eQCnone),
     m_dateLock(_dl),
     m_accountGroupFilter(false),
     m_chartType(eChartLine),
