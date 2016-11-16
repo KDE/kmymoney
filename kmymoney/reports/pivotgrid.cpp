@@ -35,9 +35,8 @@ const unsigned PivotOuterGroup::m_kDefaultSortOrder = 100;
 PivotCell::PivotCell(const MyMoneyMoney& value) :
     MyMoneyMoney(value),
     m_stockSplit(MyMoneyMoney::ONE),
-    m_cellUsed(false)
+    m_cellUsed(!value.isZero())
 {
-  m_cellUsed |= !value.isZero();
 }
 
 PivotCell::~PivotCell()
