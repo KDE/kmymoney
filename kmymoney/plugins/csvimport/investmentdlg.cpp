@@ -62,7 +62,13 @@
 #include "ui_completionwizardpage.h"
 #include "ui_investmentwizardpage.h"
 
-InvestmentDlg::InvestmentDlg()
+InvestmentDlg::InvestmentDlg() :
+    m_csvDialog(0),
+    m_convertDat(0),
+    m_redefine(0),
+    m_investProcessing(0),
+    m_round(0),
+    m_lastHeight(0)
 {
 }
 
