@@ -1363,7 +1363,11 @@ void BankingPage::slotCategoryColChanged(int col)
   emit completeChanged();
 }
 
-InvestmentPage::InvestmentPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::InvestmentPage)
+InvestmentPage::InvestmentPage(QWidget *parent) :
+    QWizardPage(parent),
+    ui(new Ui::InvestmentPage),
+    m_investPageInitialized(false),
+    m_wizDlg(0)
 {
   ui->setupUi(this);
 
