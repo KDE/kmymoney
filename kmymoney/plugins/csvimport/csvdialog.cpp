@@ -75,7 +75,34 @@
 
 // ----------------------------------------------------------------------------
 
-CSVDialog::CSVDialog() : ui(new Ui::CSVDialog)
+CSVDialog::CSVDialog() :
+    ui(new Ui::CSVDialog),
+    m_startHeight(0),
+    m_vHeaderWidth(0),
+    m_possibleDelimiter(0),
+    m_lastDelimiterIndex(0),
+    m_errorColumn(0),
+    m_pluginWidth(0),
+    m_pluginHeight(0),
+    m_windowHeight(0),
+    m_comboBoxEncode(0),
+    m_inFile(0),
+    m_clearAll(0),
+    m_firstIsValid(0),
+    m_secondIsValid(0),
+    m_initWindow(0),
+    m_vScrollBarVisible(0),
+    m_maxRowWidth(0),
+    m_rowWidth(0),
+    m_decimalSymbolIndex(0),
+    m_lineNum(0),
+    m_memoColCopy(0),
+    m_lastHeight(0),
+    m_round(0),
+    m_minimumHeight(0),
+    m_windowWidth(0),
+    m_initialHeight(0),
+    m_rectWidth(0)
 {
   ui->setupUi(this);
 
