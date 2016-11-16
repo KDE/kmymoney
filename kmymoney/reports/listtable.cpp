@@ -58,7 +58,7 @@ class GroupIterator
 {
 public:
   GroupIterator(const QString& _group, const QString& _subtotal, unsigned _depth) : m_depth(_depth), m_groupField(_group), m_subtotalField(_subtotal) {}
-  GroupIterator() {}
+  GroupIterator() : m_depth(0) {}
   void update(const ListTable::TableRow& _row) {
     m_previousGroup = m_currentGroup;
     m_currentGroup = _row[m_groupField];
