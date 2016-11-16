@@ -29,7 +29,14 @@
 #include "transactioneditor.h"
 #include "mymoneyaccount.h"
 
-Parse::Parse() : m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
+Parse::Parse() :
+    m_csvDialog(0),
+    m_decimalSymbolIndex(0),
+    m_fieldDelimiterIndex(0),
+    m_lastLine(0),
+    m_textDelimiterIndex(0),
+    m_thousandsSeparatorIndex(0),
+    m_symbolFound(false)
 {
   m_fieldDelimiterCharList << "," << ";" << ":" << "\t";
   m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
