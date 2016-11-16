@@ -1100,7 +1100,10 @@ void IntroPage::slotLineEditingFinished()
   m_action.clear();
 }
 
-SeparatorPage::SeparatorPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::SeparatorPage)
+SeparatorPage::SeparatorPage(QWidget *parent) :
+    QWizardPage(parent),
+    ui(new Ui::SeparatorPage),
+    m_wizDlg(0)
 {
   ui->setupUi(this);
 
