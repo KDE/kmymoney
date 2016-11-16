@@ -74,6 +74,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
     m_layout(new QVBoxLayout(this)),
     m_report(report),
     m_deleteMe(false),
+    m_chartEnabled(false),
     m_showingChart(false),
     m_needReload(true),
     m_table(0)
