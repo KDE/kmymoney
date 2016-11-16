@@ -51,9 +51,12 @@ using namespace reports;
 
 KReportChartView::KReportChartView(QWidget* parent) :
     KDChart::Chart(parent),
+    m_accountSeries(0),
+    m_seriesTotals(0),
+    m_numColumns(0),
+    m_skipZero(0),
     m_backgroundBrush(KColorScheme(QPalette::Current).background()),
     m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
-
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults
