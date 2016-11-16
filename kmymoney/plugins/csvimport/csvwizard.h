@@ -183,7 +183,17 @@ namespace Ui
 class IntroPage;
 }
 
-class IntroPage : public QWizardPage
+class CSVWizardPage : public QWizardPage {
+public:
+  CSVWizardPage(QWidget *parent = 0) : QWizardPage(parent), m_wizDlg(0) {}
+
+  virtual void setParent(CSVWizard* dlg) { m_wizDlg = dlg; }
+
+protected:
+  CSVWizard*         m_wizDlg;
+};
+
+class IntroPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -200,8 +210,6 @@ public:
   QString             m_activity;
   QStringList         m_sourceList;
 
-  bool                m_set;
-
   int                 addItem(QString txt);
   int                 m_index;
 
@@ -215,7 +223,6 @@ signals:
   bool             isSet();
 
 private:
-  CSVWizard*       m_wizDlg;
   bool             validatePage();
   bool             m_messageBoxJustCancelled;
   bool             m_firstEdit;
@@ -248,7 +255,7 @@ namespace Ui
 class SeparatorPage;
 }
 
-class SeparatorPage : public QWizardPage
+class SeparatorPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -260,7 +267,6 @@ public:
 
   QVBoxLayout         *m_pageLayout;
 
-  void                setParent(CSVWizard* dlg);
   void                initializePage();
   bool                isComplete() const;
 
@@ -271,7 +277,6 @@ signals:
   void                completeChanged();
 
 private:
-  CSVWizard*          m_wizDlg;
   void                cleanupPage();
   bool                validatePage();
   int                 nextId() const;
@@ -286,7 +291,7 @@ namespace Ui
 class BankingPage;
 }
 
-class BankingPage : public QWizardPage
+class BankingPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -298,7 +303,6 @@ public:
   QVBoxLayout         *m_pageLayout;
 
   bool                m_bankingPageInitialized;
-  void                setParent(CSVWizard* dlg);
 
   void                initializePage();
 
@@ -306,13 +310,9 @@ signals:
   void                clicked();
 
 private:
-  CSVWizard*          m_wizDlg;
-
-
   void                cleanupPage();
   int                 nextId() const;
   bool                isComplete() const;
-  bool                m_reloadNeeded;
 
 private slots:
   void                slotDateColChanged(int col);
@@ -328,7 +328,7 @@ namespace Ui
 class InvestmentPage;
 }
 
-class InvestmentPage : public QWizardPage
+class InvestmentPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -341,7 +341,6 @@ public:
   QVBoxLayout         *m_pageLayout;
 
   bool                m_investPageInitialized;
-  void                setParent(CSVWizard* dlg);
   void                initializePage();
 
 signals:
@@ -349,8 +348,6 @@ signals:
 public slots:
   void                slotsecurityNameChanged(int index);
 private:
-  CSVWizard*          m_wizDlg;
-
   bool                isComplete() const;
   void                cleanupPage();
 
@@ -370,7 +367,7 @@ namespace Ui
 class LinesDatePage;
 }
 
-class LinesDatePage : public QWizardPage
+class LinesDatePage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -383,7 +380,6 @@ public:
   QVBoxLayout         *m_pageLayout;
 
   void                initializePage();
-  void                setParent(CSVWizard* dlg);
   bool                validatePage();
   int                 nextId() const;
   bool                m_isColumnSelectionComplete;
@@ -394,8 +390,6 @@ signals:
   bool                isImportable();
 
 private:
-  CSVWizard*          m_wizDlg;
-
   void                cleanupPage();
 
 };
@@ -405,7 +399,7 @@ namespace Ui
 class CompletionPage;
 }
 
-class CompletionPage : public QWizardPage
+class CompletionPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -417,7 +411,6 @@ public:
 
   QVBoxLayout*        m_pageLayout;
 
-  void                setParent(CSVWizard* dlg);
   void                initializePage();
 
 signals:
@@ -436,7 +429,6 @@ private:
   void                cleanupPage();
 
   bool                validatePage();
-  CSVWizard*          m_wizDlg;
 };
 
 #endif // CSVWIZARD_H

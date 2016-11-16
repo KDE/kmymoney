@@ -575,7 +575,12 @@ void CSVWizard::resizeEvent(QResizeEvent* ev)
 }
 
 //-------------------------------------------------------------------------------------------------------
-IntroPage::IntroPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::IntroPage)
+IntroPage::IntroPage(QWidget *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::IntroPage),
+    m_pageLayout(0),
+    m_firstEdit(false),
+    m_editAccepted(false)
 {
   ui->setupUi(this);
   m_priorIndex = 0;
@@ -600,8 +605,7 @@ IntroPage::~IntroPage()
 
 void IntroPage::setParent(CSVWizard* dlg)
 {
-  m_wizDlg = dlg;
-  m_set = true;
+  CSVWizardPage::setParent(dlg);
 
   if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
     m_wizDlg->resize(m_wizDlg->width() - 100, m_wizDlg->height() - 80);
@@ -1101,9 +1105,8 @@ void IntroPage::slotLineEditingFinished()
 }
 
 SeparatorPage::SeparatorPage(QWidget *parent) :
-    QWizardPage(parent),
-    ui(new Ui::SeparatorPage),
-    m_wizDlg(0)
+    CSVWizardPage(parent),
+    ui(new Ui::SeparatorPage)
 {
   ui->setupUi(this);
 
@@ -1114,11 +1117,6 @@ SeparatorPage::SeparatorPage(QWidget *parent) :
 SeparatorPage::~SeparatorPage()
 {
   delete ui;
-}
-
-void SeparatorPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
 }
 
 void SeparatorPage::initializePage()
@@ -1246,7 +1244,10 @@ int SeparatorPage::nextId() const
   return ret;
 }
 
-BankingPage::BankingPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::BankingPage)
+BankingPage::BankingPage(QWidget *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::BankingPage),
+    m_bankingPageInitialized(false)
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
@@ -1279,11 +1280,6 @@ BankingPage::BankingPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::Bank
 BankingPage::~BankingPage()
 {
   delete ui;
-}
-
-void BankingPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
 }
 
 void BankingPage::initializePage()
@@ -1364,10 +1360,9 @@ void BankingPage::slotCategoryColChanged(int col)
 }
 
 InvestmentPage::InvestmentPage(QWidget *parent) :
-    QWizardPage(parent),
+    CSVWizardPage(parent),
     ui(new Ui::InvestmentPage),
-    m_investPageInitialized(false),
-    m_wizDlg(0)
+    m_investPageInitialized(false)
 {
   ui->setupUi(this);
 
@@ -1506,11 +1501,6 @@ void InvestmentPage::slotFilterEditingFinished()
   m_wizDlg->m_csvDialog->m_detailFilter = ui->lineEdit_filter->text();
 }
 
-void InvestmentPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
-}
-
 bool InvestmentPage::isComplete() const
 {
   bool ret = (((field("symbolCol").toInt() > -1) && (field("detailCol").toInt() > -1)) || ((field("securityNameIndex").toInt()) > -1)) &&
@@ -1519,7 +1509,10 @@ bool InvestmentPage::isComplete() const
   return ret;
 }
 
-LinesDatePage::LinesDatePage(QWidget *parent) : QWizardPage(parent), ui(new Ui::LinesDatePage)
+LinesDatePage::LinesDatePage(QWidget *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::LinesDatePage),
+    m_isColumnSelectionComplete(false)
 {
   ui->setupUi(this);
 
@@ -1558,12 +1551,6 @@ void LinesDatePage::initializePage()
     m_wizDlg->m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_wizDlg->m_investProcessing->m_endLine);
   }
 }
-
-void LinesDatePage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
-}
-
 
 bool LinesDatePage::validatePage()
 {
@@ -1746,7 +1733,7 @@ int LinesDatePage::nextId() const
   return CSVWizard::Page_Completion;
 }
 
-CompletionPage::CompletionPage(QWidget* parent) : QWizardPage(parent), ui(new Ui::CompletionPage)
+CompletionPage::CompletionPage(QWidget* parent) : CSVWizardPage(parent), ui(new Ui::CompletionPage)
 {
   ui->setupUi(this);
 
@@ -1757,11 +1744,6 @@ CompletionPage::CompletionPage(QWidget* parent) : QWizardPage(parent), ui(new Ui
 CompletionPage::~CompletionPage()
 {
   delete ui;
-}
-
-void CompletionPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
 }
 
 void CompletionPage::initializePage()
