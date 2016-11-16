@@ -286,7 +286,8 @@ public:
 KReportsView::KReportsView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Reports")),
     d(new Private),
-    m_needReload(false)
+    m_needReload(false),
+    m_reportListView(0)
 {
   // build reports toc
 
