@@ -44,7 +44,16 @@
 #include "ui_completionwizardpage.h"
 #include "ui_investmentwizardpage.h"
 
-CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
+CSVWizard::CSVWizard() :
+    ui(new Ui::CSVWizard),
+    m_investProcessing(0),
+    m_pageIntro(0),
+    m_pageSeparator(0),
+    m_pageBanking(0),
+    m_pageInvestment(0),
+    m_pageLinesDate(0),
+    m_pageCompletion(0),
+    m_csvDialog(0)
 {
   ui->setupUi(this);
 
