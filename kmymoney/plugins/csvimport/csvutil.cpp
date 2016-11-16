@@ -314,7 +314,9 @@ bool Parse::invalidConversion()
 
 //--------------------------------------------------------------------------------------------------------------------------------
 
-CsvUtil::CsvUtil()
+CsvUtil::CsvUtil() :
+    m_investTransactionEditor(0),
+    m_scannedCategories(false)
 {
 }
 
