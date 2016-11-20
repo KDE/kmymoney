@@ -57,7 +57,7 @@
      <item>
       <widget class="QPushButton" name="m_okButton">
        <property name="text">
-        <string>O&amp;K</string>
+        <string>&amp;OK</string>
        </property>
       </widget>
      </item>
