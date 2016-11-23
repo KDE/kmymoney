@@ -26,12 +26,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-TocItem::TocItem(QTreeWidget* parent, QStringList columns):
-    QTreeWidgetItem(parent, columns)
+TocItem::TocItem(QTreeWidget* parent, QStringList columns) :
+    QTreeWidgetItem(parent, columns),
+    type(GROUP)
 {}
 
-TocItem::TocItem(QTreeWidgetItem* parent, QStringList columns):
-    QTreeWidgetItem(parent, columns)
+TocItem::TocItem(QTreeWidgetItem* parent, QStringList columns) :
+    QTreeWidgetItem(parent, columns),
+    type(GROUP)
 {}
 
 bool TocItem::isReport()

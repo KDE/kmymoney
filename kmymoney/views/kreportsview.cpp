@@ -75,6 +75,7 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
     m_layout(new QVBoxLayout(this)),
     m_report(report),
     m_deleteMe(false),
+    m_chartEnabled(false),
     m_showingChart(false),
     m_needReload(true),
     m_table(0)
@@ -287,7 +288,8 @@ public:
 KReportsView::KReportsView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Reports")),
     d(new Private),
-    m_needReload(false)
+    m_needReload(false),
+    m_reportListView(0)
 {
   // build reports toc
 

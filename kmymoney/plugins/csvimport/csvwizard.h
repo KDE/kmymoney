@@ -252,7 +252,17 @@ namespace Ui
 class IntroPage;
 }
 
-class IntroPage : public QWizardPage
+class CSVWizardPage : public QWizardPage {
+public:
+  CSVWizardPage(QWidget *parent = 0) : QWizardPage(parent), m_wizDlg(0) {}
+
+  virtual void setParent(CSVWizard* dlg) { m_wizDlg = dlg; }
+
+protected:
+  CSVWizard*         m_wizDlg;
+};
+
+class IntroPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -272,7 +282,6 @@ signals:
   void             returnPressed();
 
 private:
-  CSVWizard*       m_wizDlg;
   bool             validatePage();
   int              nextId() const;
 
@@ -297,7 +306,7 @@ namespace Ui
 class SeparatorPage;
 }
 
-class SeparatorPage : public QWizardPage
+class SeparatorPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -309,7 +318,6 @@ public:
 
   QVBoxLayout         *m_pageLayout;
 
-  void                setParent(CSVWizard* dlg);
   void                initializePage();
   bool                isComplete() const;
 
@@ -329,7 +337,6 @@ signals:
   void                completeChanged();
 
 private:
-  CSVWizard*          m_wizDlg;
   void                cleanupPage();
   bool                validatePage();
 
@@ -343,7 +350,7 @@ namespace Ui
 class RowsPage;
 }
 
-class RowsPage : public QWizardPage
+class RowsPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -356,7 +363,6 @@ public:
   QVBoxLayout         *m_pageLayout;
 
   void                initializePage();
-  void                setParent(CSVWizard* dlg);
   int                 nextId() const;
 
 signals:
@@ -372,8 +378,6 @@ public slots:
   */
   void           endRowChanged(int val);
 private:
-  CSVWizard*          m_wizDlg;
-
   void                cleanupPage();
 };
 
@@ -382,7 +386,7 @@ namespace Ui
 class FormatsPage;
 }
 
-class FormatsPage : public QWizardPage
+class FormatsPage : public CSVWizardPage
 {
   Q_OBJECT
 
@@ -395,7 +399,6 @@ public:
   QVBoxLayout         *m_pageLayout;
 
   void                initializePage();
-  void                setParent(CSVWizard* dlg);
 
   /**
   * This method is called when the user selects a new decimal symbol.  The
@@ -426,7 +429,6 @@ public slots:
   */
   void           dateFormatChanged(int index);
 private:
-  CSVWizard*          m_wizDlg;
   bool                m_isDecimalSymbolOK;
   bool                m_isDateFormatOK;
 

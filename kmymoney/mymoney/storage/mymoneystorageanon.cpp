@@ -310,7 +310,8 @@ void MyMoneyStorageANON::writeReport(QDomElement& reports, const MyMoneyReport& 
   MyMoneyStorageXML::writeReport(reports, rn);
 }
 
-void MyMoneyStorageANON::writeOnlineJob(QDomElement&, const onlineJob&)
+void MyMoneyStorageANON::writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job)
 {
+  Q_UNUSED(onlineJobs);
+  Q_UNUSED(job);
 }
-

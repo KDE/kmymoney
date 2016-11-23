@@ -99,10 +99,10 @@ K_PLUGIN_FACTORY_WITH_JSON(KBankingFactory, "kmm_kbanking.json", registerPlugin<
 class KBankingPlugin::Private
 {
 public:
-  Private()
-  : passwordCacheTimer(nullptr),
-  jobList(),
-  fileId()
+  Private() :
+     passwordCacheTimer(nullptr),
+     jobList(),
+     fileId()
   {
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {

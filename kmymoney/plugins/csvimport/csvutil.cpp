@@ -28,7 +28,13 @@
 #include "transactioneditor.h"
 #include "mymoneyaccount.h"
 
-Parse::Parse() : m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
+Parse::Parse() :
+    m_decimalSymbolIndex(0),
+    m_fieldDelimiterIndex(0),
+    m_lastLine(0),
+    m_textDelimiterIndex(0),
+    m_thousandsSeparatorIndex(0),
+    m_symbolFound(false)
 {
   m_fieldDelimiterCharList << "," << ";" << ":" << "\t";
   m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
@@ -309,7 +315,9 @@ bool Parse::invalidConversion()
 
 //--------------------------------------------------------------------------------------------------------------------------------
 
-CsvUtil::CsvUtil()
+CsvUtil::CsvUtil() :
+    m_investTransactionEditor(0),
+    m_scannedCategories(false)
 {
 }
 

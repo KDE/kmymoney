@@ -36,6 +36,8 @@
 
 MyMoneyDatabaseMgr::MyMoneyDatabaseMgr() :
     m_creationDate(QDate::currentDate()),
+    m_currentFixVersion(0),
+    m_fileFixVersion(0),
     m_lastModificationDate(QDate::currentDate()),
     m_sql(0)
 { }

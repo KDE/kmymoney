@@ -48,7 +48,12 @@
 #include "ui_formatswizardpage.h"
 #include "ui_investmentwizardpage.h"
 
-CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
+CSVWizard::CSVWizard() :
+    ui(new Ui::CSVWizard),
+    m_pageIntro(0),
+    m_pageSeparator(0),
+    m_pageBanking(0),
+    m_pageInvestment(0)
 {
   ui->setupUi(this);
 
@@ -919,7 +924,10 @@ void CSVWizard::resizeEvent(QResizeEvent* ev)
 }
 
 //-------------------------------------------------------------------------------------------------------
-IntroPage::IntroPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::IntroPage)
+IntroPage::IntroPage(QDialog *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::IntroPage),
+    m_pageLayout(0)
 {
   ui->setupUi(this);
 }
@@ -931,7 +939,7 @@ IntroPage::~IntroPage()
 
 void IntroPage::setParent(CSVWizard* dlg)
 {
-  m_wizDlg = dlg;
+  CSVWizardPage::setParent(dlg);
   m_wizDlg->showStage();
 
   wizard()->button(QWizard::CustomButton1)->setEnabled(false);
@@ -1118,7 +1126,9 @@ int IntroPage::nextId() const
   return CSVWizard::PageSeparator;
 }
 
-SeparatorPage::SeparatorPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::SeparatorPage)
+SeparatorPage::SeparatorPage(QDialog *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::SeparatorPage)
 {
   ui->setupUi(this);
 
@@ -1129,11 +1139,6 @@ SeparatorPage::SeparatorPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::
 SeparatorPage::~SeparatorPage()
 {
   delete ui;
-}
-
-void SeparatorPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
 }
 
 void SeparatorPage::initializePage()
@@ -1206,7 +1211,9 @@ void SeparatorPage::cleanupPage()
   m_wizDlg->m_pageIntro->initializePage();  //  Need to show button(QWizard::CustomButton1) not 'NextButton'
 }
 
-RowsPage::RowsPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::RowsPage)
+RowsPage::RowsPage(QDialog *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::RowsPage)
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
@@ -1240,11 +1247,6 @@ void RowsPage::initializePage()
             QWizard::NextButton <<
             QWizard::CancelButton;
   wizard()->setButtonLayout(layout);
-}
-
-void RowsPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
 }
 
 void RowsPage::startRowChanged(int val)
@@ -1299,7 +1301,9 @@ int RowsPage::nextId() const
   return ret;
 }
 
-FormatsPage::FormatsPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::FormatsPage)
+FormatsPage::FormatsPage(QDialog *parent) :
+    CSVWizardPage(parent),
+    ui(new Ui::FormatsPage)
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
@@ -1346,11 +1350,6 @@ void FormatsPage::initializePage()
   if (m_wizDlg->m_skipSetup &&
       wizard()->button(QWizard::CustomButton2)->isEnabled())
     slotImportClicked();
-}
-
-void FormatsPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
 }
 
 void FormatsPage::decimalSymbolChanged(int index)
