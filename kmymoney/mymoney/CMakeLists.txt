@@ -47,9 +47,6 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   onlinejobfolder.h
   )
 
-KDE4_ADD_LIBRARY(kmm_mymoney SHARED
-  ${kmm_mymoney_LIB_SRCS})
-
 kde4_add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
 generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 
