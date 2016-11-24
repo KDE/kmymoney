@@ -40,12 +40,15 @@ RedefineDlg::RedefineDlg()
   m_amountColumn = 0;
   m_columnTotalWidth = 0;
   m_maxWidth = 0;
+  m_maxCol = 0;
   m_mainHeight = 0;
   m_mainWidth = 0;
   m_priceColumn = 0;
   m_quantityColumn = 0;
   m_ret = 0;
   m_typeColumn = 0;
+  m_symbolColumn = 0;
+  m_detailColumn = 0;
 
   m_price = 0;
   m_quantity = 0;
