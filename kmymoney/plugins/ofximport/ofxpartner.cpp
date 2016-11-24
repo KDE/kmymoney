@@ -376,7 +376,8 @@ public:
 
 OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
     d(new Private),
-    m_dst(dst)
+    m_dst(dst),
+    m_error(QHttp::NoError)
 {
   Q_UNUSED(type);
   Q_UNUSED(metaData);
