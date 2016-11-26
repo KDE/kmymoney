@@ -27,11 +27,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <kguiutils.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -49,11 +46,9 @@ KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWid
     KPayeeReassignDlgDecl(parent),
     m_type(type)
 {
-  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
-  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(payeeCombo);
-  mandatory->setOkButton(buttonOk);
+  mandatory->setOkButton(buttonBox->button(QDialogButtonBox::Ok));
   textLabel1->setText(i18n(labelText[m_type]));
 }
 
@@ -84,7 +79,7 @@ QString KPayeeReassignDlg::show(const QList<MyMoneyPayee>& payeeslist)
 void KPayeeReassignDlg::accept()
 {
   // force update of payeeCombo
-  buttonOk->setFocus();
+  buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
   if (m_type == TypeDelete && payeeCombo->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new payees to be created. Please pick a payee from the list."), i18n("Payee creation"));

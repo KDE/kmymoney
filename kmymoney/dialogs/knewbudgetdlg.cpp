@@ -21,6 +21,7 @@
 // QT Includes
 
 #include <QCheckBox>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -58,6 +59,9 @@ KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
   iYear = dToday.year();
   for (int i = 0; i <= icPastYears; i++)
     d->ui.m_cbYear->addItem(QString::number(--iYear));
+
+  connect(d->ui.buttonBox, SIGNAL(accepted()), this, SLOT(m_pbOk_clicked()));
+  connect(d->ui.buttonBox, SIGNAL(rejected()), this, SLOT(m_pbCancel_clicked()));
 }
 
 KNewBudgetDlg::~KNewBudgetDlg()
@@ -73,7 +77,7 @@ void KNewBudgetDlg::m_pbCancel_clicked()
 void KNewBudgetDlg::m_pbOk_clicked()
 {
   // force focus change to update all data
-  d->ui.m_pbOk->setFocus();
+  d->ui.buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
   if (d->ui.m_leBudgetName->displayText().isEmpty()) {
     KMessageBox::information(this, i18n("Please specify a budget name"));

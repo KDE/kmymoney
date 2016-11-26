@@ -32,6 +32,7 @@
 // KDE includes
 #include <khtmlview.h>
 #include <khtml_part.h>
+#include <KStandardGuiItem>
 
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)
 {
@@ -50,8 +51,11 @@ KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const 
   m_detailsHTMLPart->write(detailsReportHTML);
   m_detailsHTMLPart->end();
 
+  QPushButton* printButton = m_buttonBox->addButton(QString(), QDialogButtonBox::ActionRole);
+  KGuiItem::assign(printButton, KStandardGuiItem::print());
+
   // signals and slots connections
-  connect(m_printButton, SIGNAL(clicked()), this, SLOT(print()));
+  connect(printButton, SIGNAL(clicked()), this, SLOT(print()));
 }
 
 KReportDlg::~KReportDlg()

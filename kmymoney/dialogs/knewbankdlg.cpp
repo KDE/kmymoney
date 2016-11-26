@@ -29,8 +29,6 @@
 #include <kmessagebox.h>
 #include <klineedit.h>
 #include <kguiutils.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -42,8 +40,6 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
     : KNewBankDlgDecl(parent), m_institution(institution)
 {
   setModal(true);
-  KGuiItem::assign(okBtn, KStandardGuiItem::ok());
-  KGuiItem::assign(cancelBtn, KStandardGuiItem::cancel());
 
   nameEdit->setFocus();
   nameEdit->setText(institution.name());
@@ -54,19 +50,19 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
   bicEdit->setText(institution.value("bic"));
   sortCodeEdit->setText(institution.sortcode());
 
-  connect(okBtn, SIGNAL(clicked()), SLOT(okClicked()));
-  connect(cancelBtn, SIGNAL(clicked()), SLOT(reject()));
+  connect(buttonBox, SIGNAL(accepted()), SLOT(okClicked()));
+  connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
   connect(nameEdit, SIGNAL(textChanged(QString)), SLOT(institutionNameChanged(QString)));
   institutionNameChanged(nameEdit->text());
 
   kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup(this);
-  requiredFields->setOkButton(okBtn); // button to be enabled when all fields present
+  requiredFields->setOkButton(buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
   requiredFields->add(nameEdit);
 }
 
 void KNewBankDlg::institutionNameChanged(const QString &_text)
 {
-  okBtn->setEnabled(!_text.isEmpty());
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!_text.isEmpty());
 }
 
 KNewBankDlg::~KNewBankDlg()

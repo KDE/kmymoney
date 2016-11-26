@@ -38,7 +38,6 @@
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KSharedConfig>
 #include <KLocalizedString>
 
@@ -50,10 +49,6 @@ KBackupDlg::KBackupDlg(QWidget* parent)
 {
   readConfig();
 
-  // add icons to buttons
-  KGuiItem::assign(btnOK, KStandardGuiItem::ok());
-  KGuiItem::assign(btnCancel, KStandardGuiItem::cancel());
-
   KGuiItem chooseButtenItem(i18n("C&hoose..."),
                             QIcon::fromTheme("folder"),
                             i18n("Select mount point"),
@@ -61,8 +56,8 @@ KBackupDlg::KBackupDlg(QWidget* parent)
   KGuiItem::assign(chooseButton, chooseButtenItem);
 
   connect(chooseButton, SIGNAL(clicked()), this, SLOT(chooseButtonClicked()));
-  connect(btnOK, SIGNAL(clicked()), this, SLOT(accept()));
-  connect(btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 KBackupDlg::~KBackupDlg()

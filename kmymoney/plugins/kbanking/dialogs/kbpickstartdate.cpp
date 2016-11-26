@@ -36,10 +36,7 @@
 #include <QPushButton>
 
 // KDE includes
-#include <kguiitem.h>
 #include <KLocalizedString>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 
 // KMyMoney includes
 #include "kmymoneydateinput.h"
@@ -70,11 +67,7 @@ KBPickStartDate::KBPickStartDate(KMyMoneyBanking* qb,
 
   d->banking = qb;
 
-  KGuiItem::assign(d->ui.buttonOk, KStandardGuiItem::ok());
-  KGuiItem::assign(d->ui.buttonCancel, KStandardGuiItem::cancel());
-  KGuiItem::assign(d->ui.buttonHelp, KStandardGuiItem::help());
-
-  QObject::connect(d->ui.buttonHelp, SIGNAL(clicked()),
+  QObject::connect(d->ui.buttonBox, SIGNAL(helpRequested()),
                    this, SLOT(slotHelpClicked()));
   d->ui.label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
 

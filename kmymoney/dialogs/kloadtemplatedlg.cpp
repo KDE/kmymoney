@@ -19,14 +19,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
 #include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KGuiItem>
-#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -36,11 +32,7 @@
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
     KLoadTemplateDlgDecl(parent)
 {
-  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
-  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
-  KGuiItem::assign(buttonHelp, KStandardGuiItem::help());
-
-  connect(buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
+  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
 }
 
 QList<MyMoneyTemplate> KLoadTemplateDlg::templates() const

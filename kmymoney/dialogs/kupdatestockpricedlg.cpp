@@ -28,9 +28,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KGuiItem>
-#include <KStandardGuiItem>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -50,11 +47,8 @@ KUpdateStockPriceDlg::~KUpdateStockPriceDlg()
 
 void KUpdateStockPriceDlg::init()
 {
-  KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
-  KGuiItem::assign(m_cancelButton, KStandardGuiItem::cancel());
-
-  connect(m_okButton, SIGNAL(clicked()), this, SLOT(accept()));
-  connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
   connect(m_security, SIGNAL(activated(int)), this, SLOT(slotCheckData()));
   connect(m_currency, SIGNAL(activated(int)), this, SLOT(slotCheckData()));
@@ -77,5 +71,5 @@ void KUpdateStockPriceDlg::slotCheckData()
   QString from = m_security->security().id();
   QString to   = m_currency->security().id();
 
-  m_okButton->setEnabled(!from.isEmpty() && !to.isEmpty() && from != to);
+  m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!from.isEmpty() && !to.isEmpty() && from != to);
 }

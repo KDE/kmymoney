@@ -24,11 +24,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <kguiutils.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -41,11 +38,9 @@
 KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
     KCategoryReassignDlgDecl(parent)
 {
-  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
-  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(m_category);
-  mandatory->setOkButton(buttonOk);
+  mandatory->setOkButton(buttonBox->button(QDialogButtonBox::Ok));
 }
 
 KCategoryReassignDlg::~KCategoryReassignDlg()
@@ -96,7 +91,7 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
 void KCategoryReassignDlg::accept()
 {
   // force update of payeeCombo
-  buttonOk->setFocus();
+  buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
   if (m_category->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new categories to be created. Please pick a category from the list."), i18n("Category creation"));

@@ -86,9 +86,6 @@ KSortOptionDlg::~KSortOptionDlg()
 
 void KSortOptionDlg::init()
 {
-  KGuiItem::assign(d->ui.m_cancelButton, KStandardGuiItem::cancel());
-  KGuiItem::assign(d->ui.m_okButton, KStandardGuiItem::ok());
-  KGuiItem::assign(d->ui.m_helpButton, KStandardGuiItem::help());
 }
 
 void KSortOptionDlg::setSortOption(const QString& option, const QString& def)

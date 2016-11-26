@@ -252,44 +252,11 @@ your KMyMoney file.</string>
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout">
-     <item>
-      <spacer name="Spacer1">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>360</width>
-         <height>16</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="okBtn">
-       <property name="text">
-        <string>OK</string>
-       </property>
-       <property name="autoDefault">
-        <bool>true</bool>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="cancelBtn">
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -310,8 +277,6 @@ your KMyMoney file.</string>
   <tabstop>telephoneEdit</tabstop>
   <tabstop>emailEdit</tabstop>
   <tabstop>kabcBtn</tabstop>
-  <tabstop>okBtn</tabstop>
-  <tabstop>cancelBtn</tabstop>
  </tabstops>
  <resources/>
  <connections/>

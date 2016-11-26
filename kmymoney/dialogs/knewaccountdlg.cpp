@@ -41,8 +41,6 @@
 #include <kiconloader.h>
 #include <kled.h>
 #include <kguiutils.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -410,12 +408,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   if (!title.isEmpty())
     setWindowTitle(title);
 
-  // load button icons
-  KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
-  KGuiItem::assign(createButton, KStandardGuiItem::ok());
-
-  connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
-  connect(createButton, SIGNAL(clicked()), this, SLOT(okClicked()));
+  connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(okClicked()));
   connect(m_parentAccounts->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
           this, SLOT(slotSelectionChanged(QItemSelection,QItemSelection)));
   connect(m_qbuttonNew, SIGNAL(clicked()), this, SLOT(slotNewClicked()));
@@ -480,7 +474,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   slotCheckFinished();
 
   kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup(this);
-  requiredFields->setOkButton(createButton); // button to be enabled when all fields present
+  requiredFields->setOkButton(buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
   requiredFields->add(accountNameEdit);
 }
 
@@ -822,7 +816,7 @@ void KNewAccountDlg::slotCheckFinished()
     if (m_vatAssignment->isChecked() && m_vatAccount->selectedItems().isEmpty())
       showButton = false;
   }
-  createButton->setEnabled(showButton);
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(showButton);
 }
 
 void KNewAccountDlg::slotVatChanged(bool state)

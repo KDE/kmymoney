@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <KLocalizedString>
 #include <KLocalizedString>
@@ -72,17 +71,14 @@ EditPersonalDataDlg::EditPersonalDataDlg(QString userName, QString userStreet,
 
 void EditPersonalDataDlg::init(const QString& title)
 {
-  KGuiItem::assign(d->ui.okBtn, KStandardGuiItem::ok());
-  KGuiItem::assign(d->ui.cancelBtn, KStandardGuiItem::cancel());
-
   if (!title.isEmpty())
     setWindowTitle(title);
 
   d->ui.kabcBtn->setEnabled(d->m_contact->ownerExists());
   d->ui.userNameEdit->setFocus();
 
-  connect(d->ui.cancelBtn, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(d->ui.okBtn, SIGNAL(clicked()), this, SLOT(okClicked()));
+  connect(d->ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(d->ui.buttonBox, SIGNAL(accepted()), this, SLOT(okClicked()));
   connect(d->ui.kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromAddressBook()));
 }
 
