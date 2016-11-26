@@ -129,7 +129,7 @@ Click OK to perform the backup. If your system does not use an automounter, make
         <item>
          <widget class="QPushButton" name="chooseButton">
           <property name="text">
-           <string>Choose...</string>
+           <string>C&amp;hoose...</string>
           </property>
          </widget>
         </item>

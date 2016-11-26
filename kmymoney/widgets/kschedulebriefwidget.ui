@@ -267,7 +267,7 @@
                     <item>
                       <widget class="QPushButton" name="m_skipButton">
                         <property name="text">
-                          <string>Skip</string>
+                          <string>&amp;Skip</string>
                         </property>
                       </widget>
                     </item>

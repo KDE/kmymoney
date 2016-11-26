@@ -149,7 +149,7 @@
      <item>
       <widget class="QPushButton" name="m_kButtonAbort">
        <property name="text">
-        <string>Abort</string>
+        <string>&amp;Abort</string>
        </property>
       </widget>
      </item>
@@ -179,7 +179,7 @@
      <item>
       <widget class="QPushButton" name="m_qbuttonCancel">
        <property name="text">
-        <string>Skip</string>
+        <string>&amp;Skip</string>
        </property>
       </widget>
      </item>

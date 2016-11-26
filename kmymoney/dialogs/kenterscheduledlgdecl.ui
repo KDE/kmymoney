@@ -266,7 +266,7 @@
           <item>
             <widget class="QPushButton" name="buttonSkip">
               <property name="text">
-                <string>Skip</string>
+                <string>&amp;Skip</string>
               </property>
               <property name="isDragEnabled" stdset="0">
                 <bool>true</bool>

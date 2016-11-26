@@ -93,7 +93,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
           <item>
             <widget class="QPushButton" name="m_qbuttonBrowse">
               <property name="text">
-                <string>Browse...</string>
+                <string>&amp;Browse...</string>
               </property>
             </widget>
           </item>
@@ -346,7 +346,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
           <item>
             <widget class="QPushButton" name="m_qbuttonOk">
               <property name="text">
-                <string>Export</string>
+                <string>&amp;Export</string>
               </property>
               <property name="autoDefault">
                 <bool>true</bool>

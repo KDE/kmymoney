@@ -96,7 +96,7 @@
             </size>
           </property>
           <property name="text">
-            <string>Export</string>
+            <string>&amp;Export</string>
           </property>
           <property name="toolTip" stdset="0">
             <string>Export this report as an HTML or CSV file</string>
