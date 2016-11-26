@@ -1,90 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="1">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>KLoadTemplateDlgDecl</class>
-  <widget class="QDialog" name="KLoadTemplateDlgDecl">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>636</width>
-        <height>509</height>
-      </rect>
-    </property>
-    <property name="windowTitle">
-      <string>MyDialog</string>
-    </property>
-    <property name="sizeGripEnabled">
-      <bool>true</bool>
-    </property>
-    <layout class="QVBoxLayout">
-      <item>
-        <widget class="KAccountTemplateSelector" name="m_templateSelector"/>
-      </item>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QPushButton" name="buttonHelp">
-              <property name="text">
-                <string>Help</string>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <spacer name="Horizontal Spacing2">
-              <property name="sizeHint">
-                <size>
-                  <width>228</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-          <item>
-            <widget class="QPushButton" name="buttonOk">
-              <property name="text">
-                <string>OK</string>
-              </property>
-              <property name="autoDefault">
-                <bool>true</bool>
-              </property>
-              <property name="default">
-                <bool>true</bool>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="QPushButton" name="buttonCancel">
-              <property name="text">
-                <string>Cancel</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </item>
+<ui version="4.0">
+ <class>KLoadTemplateDlgDecl</class>
+ <widget class="QDialog" name="KLoadTemplateDlgDecl">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>636</width>
+    <height>509</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MyDialog</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <widget class="KAccountTemplateSelector" name="m_templateSelector" native="true"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QPushButton" name="buttonHelp">
+       <property name="text">
+        <string>Help</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="Horizontal Spacing2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>228</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonOk">
+       <property name="text">
+        <string>OK</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonCancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
     </layout>
-  </widget>
-  <layoutdefault spacing="6" margin="11"/>
-    <connections>
-    <connection>
-      <sender>buttonCancel</sender>
-      <signal>clicked()</signal>
-      <receiver>KLoadTemplateDlgDecl</receiver>
-      <slot>reject()</slot>
-    </connection>
-    <connection>
-      <sender>buttonOk</sender>
-      <signal>clicked()</signal>
-      <receiver>KLoadTemplateDlgDecl</receiver>
-      <slot>accept()</slot>
-    </connection>
-  </connections>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KAccountTemplateSelector</class>
+   <extends>QWidget</extends>
+   <header>kaccounttemplateselector.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>KLoadTemplateDlgDecl</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonOk</sender>
+   <signal>clicked()</signal>
+   <receiver>KLoadTemplateDlgDecl</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -42,14 +42,14 @@
       <item row="0" column="0" colspan="2">
        <widget class="QRadioButton" name="noDateButton">
         <property name="text">
-         <string>No date (let the bank determine the start date)</string>
+         <string>&amp;No date (let the bank determine the start date)</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QRadioButton" name="lastUpdateButton">
         <property name="text">
-         <string>Last Update</string>
+         <string>&amp;Last Update</string>
         </property>
        </widget>
       </item>
@@ -72,7 +72,7 @@
       <item row="2" column="0">
        <widget class="QRadioButton" name="firstDateButton">
         <property name="text">
-         <string>First possible date</string>
+         <string>F&amp;irst possible date</string>
         </property>
        </widget>
       </item>
@@ -95,7 +95,7 @@
       <item row="3" column="0">
        <widget class="QRadioButton" name="pickDateButton">
         <property name="text">
-         <string>Pick date</string>
+         <string>Pick &amp;date</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -103,7 +103,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="kMyMoneyDateInput" name="pickDateEdit"/>
+       <widget class="kMyMoneyDateInput" name="pickDateEdit" native="true"/>
       </item>
      </layout>
     </widget>
@@ -161,7 +161,7 @@
  <customwidgets>
   <customwidget>
    <class>kMyMoneyDateInput</class>
-   <extends>QFrame</extends>
+   <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>
   </customwidget>

@@ -62,7 +62,16 @@
           <string>Opening information</string>
          </property>
          <layout class="QGridLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
            <number>6</number>
           </property>
           <property name="spacing">
@@ -121,7 +130,7 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="kMyMoneyDateInput" name="m_openingDateEdit"/>
+           <widget class="kMyMoneyDateInput" name="m_openingDateEdit" native="true"/>
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="m_openingBalanceLabel">
@@ -134,7 +143,7 @@
            </widget>
           </item>
           <item row="1" column="3">
-           <widget class="kMyMoneyEdit" name="m_openingBalanceEdit"/>
+           <widget class="kMyMoneyEdit" name="m_openingBalanceEdit" native="true"/>
           </item>
          </layout>
         </widget>
@@ -232,7 +241,7 @@
                </widget>
               </item>
               <item>
-               <widget class="KMyMoneyGeneralCombo" name="m_priceMode">
+               <widget class="KMyMoneyGeneralCombo" name="m_priceMode" native="true">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -299,7 +308,16 @@
             <property name="spacing">
              <number>6</number>
             </property>
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <item>
@@ -451,7 +469,7 @@
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="kMyMoneyEdit" name="m_minBalanceAbsoluteEdit">
+          <widget class="kMyMoneyEdit" name="m_minBalanceAbsoluteEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
@@ -478,21 +496,21 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="kMyMoneyEdit" name="m_maxCreditEarlyEdit">
+          <widget class="kMyMoneyEdit" name="m_maxCreditEarlyEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="kMyMoneyEdit" name="m_maxCreditAbsoluteEdit">
+          <widget class="kMyMoneyEdit" name="m_maxCreditAbsoluteEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="kMyMoneyEdit" name="m_minBalanceEarlyEdit">
+          <widget class="kMyMoneyEdit" name="m_minBalanceEarlyEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
@@ -577,7 +595,16 @@
                <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout">
-               <property name="margin">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
                 <number>0</number>
                </property>
                <item>
@@ -593,7 +620,7 @@
                <item>
                 <layout class="QHBoxLayout">
                  <item>
-                  <widget class="kMyMoneyEdit" name="m_vatRate"/>
+                  <widget class="kMyMoneyEdit" name="m_vatRate" native="true"/>
                  </item>
                  <item>
                   <spacer name="spacer17">
@@ -643,7 +670,16 @@
              <enum>QFrame::Plain</enum>
             </property>
             <layout class="QHBoxLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -768,7 +804,16 @@
      <property name="spacing">
       <number>6</number>
      </property>
-     <property name="margin">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
@@ -820,19 +865,14 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>QPushButton</header>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KTextEdit</class>
@@ -840,14 +880,20 @@
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
+   <class>kMyMoneyEdit</class>
+   <extends>QWidget</extends>
+   <header>../widgets/kmymoneyedit.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>kMyMoneyDateInput</class>
-   <extends>QFrame</extends>
+   <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>
   </customwidget>
@@ -855,18 +901,6 @@
    <class>KMyMoneySecuritySelector</class>
    <extends>KComboBox</extends>
    <header>kmymoneycurrencyselector.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>kMyMoneyEdit</class>
-   <extends>QFrame</extends>
-   <header>kmymoneyedit.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyGeneralCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
