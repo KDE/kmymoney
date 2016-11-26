@@ -71,7 +71,7 @@ bool MyMoneyTemplate::loadTemplate(const QUrl &url)
     filename = url.toLocalFile();
 
   } else {
-    bool rc;
+    bool rc = false;
     // TODO: port to kf5
     //rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
     if (!rc) {
