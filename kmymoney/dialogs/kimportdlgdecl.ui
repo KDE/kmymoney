@@ -163,57 +163,17 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout">
-     <property name="spacing">
-      <number>6</number>
+    <widget class="QDialogButtonBox" name="m_buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
-     <property name="margin">
-      <number>0</number>
-     </property>
-     <item>
-      <spacer name="Spacer1">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>411</width>
-         <height>0</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_qbuttonOk">
-       <property name="text">
-        <string>Import</string>
-       </property>
-       <property name="autoDefault">
-        <bool>true</bool>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_qbuttonCancel">
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-       <property name="autoDefault">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    </widget>
    </item>
   </layout>
+  <zorder>m_optionGroupBox</zorder>
   <zorder>qLabel1</zorder>
   <zorder>Line1</zorder>
+  <zorder>m_buttonBox</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

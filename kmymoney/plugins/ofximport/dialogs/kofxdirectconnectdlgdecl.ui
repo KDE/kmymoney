@@ -31,53 +31,14 @@
     <widget class="QProgressBar" name="kProgress1"/>
    </item>
    <item>
-    <layout class="QHBoxLayout">
-     <item>
-      <spacer name="spacer4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>51</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonCancel">
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-       <property name="shortcut">
-        <string/>
-       </property>
-       <property name="autoDefault">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="spacer3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>61</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel</set>
+     </property>
+     <property name="centerButtons">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -85,18 +46,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonCancel</sender>
-   <signal>clicked()</signal>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
    <receiver>KOfxDirectConnectDlgDecl</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>175</x>
+     <y>92</y>
     </hint>
     <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
+     <x>101</x>
+     <y>103</y>
     </hint>
    </hints>
   </connection>

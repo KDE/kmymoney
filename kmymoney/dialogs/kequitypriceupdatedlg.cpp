@@ -84,9 +84,6 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 
   btnUpdateAll->setEnabled(false);
 
-  KGuiItem::assign(btnOK, KStandardGuiItem::ok());
-  KGuiItem::assign(btnCancel, KStandardGuiItem::cancel());
-
   MyMoneyFile* file = MyMoneyFile::instance();
 
   //
@@ -133,8 +130,8 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
     addPricePair(currencyIds, true);
   }
 
-  connect(btnOK, SIGNAL(clicked()), this, SLOT(accept()));
-  connect(btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   connect(btnUpdateSelected, SIGNAL(clicked()), this, SLOT(slotUpdateSelectedClicked()));
   connect(btnUpdateAll, SIGNAL(clicked()), this, SLOT(slotUpdateAllClicked()));
 
@@ -162,7 +159,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   }
 
   // Hide OK button until we have received the first update
-  btnOK->setEnabled(false);
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
   slotUpdateSelection();
 
@@ -525,7 +522,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       item->setText(DATE_COL, date.toString(Qt::ISODate));
       logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
       // make sure to make OK button available
-      btnOK->setEnabled(true);
+      buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     } else {
       logErrorMessage(i18n("Received an invalid price for %1, unable to update.", _symbol));
     }

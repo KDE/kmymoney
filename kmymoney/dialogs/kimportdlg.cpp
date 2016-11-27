@@ -37,7 +37,6 @@
 #include <kiconloader.h>
 #include <kconfiggroup.h>
 #include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -59,13 +58,11 @@ KImportDlg::KImportDlg(QWidget *parent)
   loadProfiles(true);
 
   // load button icons
-  KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
-
   KGuiItem okButtenItem(i18n("&Import"),
                         QIcon::fromTheme("document-import"),
                         i18n("Start operation"),
                         i18n("Use this to start the import operation"));
-  KGuiItem::assign(m_qbuttonOk, okButtenItem);
+  KGuiItem::assign(m_buttonBox->button(QDialogButtonBox::Ok), okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
                             QIcon::fromTheme("document-open"),
@@ -81,8 +78,8 @@ KImportDlg::KImportDlg(QWidget *parent)
 
   // connect the buttons to their functionality
   connect(m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
-  connect(m_qbuttonOk, SIGNAL(clicked()), this, SLOT(slotOkClicked()));
-  connect(m_qbuttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(slotOkClicked()));
+  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   connect(m_profileEditorButton, SIGNAL(clicked()), this, SLOT(slotNewProfile()));
 
   // connect the change signals to the check slot and perform initial check
@@ -145,11 +142,11 @@ void KImportDlg::slotFileTextChanged(const QString& text)
 #if 0
   if (!text.isEmpty() && KIO::NetAccess::exists(file(), KIO::NetAccess::SourceSide, KMyMoneyUtils::mainWindow())) {
     // m_qcomboboxDateFormat->setEnabled(true);
-    m_qbuttonOk->setEnabled(true);
+    m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     m_qlineeditFile->setText(text);
   } else {
     // m_qcomboboxDateFormat->setEnabled(false);
-    m_qbuttonOk->setEnabled(false);
+    m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
   }
 #endif
 }

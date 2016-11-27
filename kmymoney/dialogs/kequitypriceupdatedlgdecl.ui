@@ -113,47 +113,11 @@
     <widget class="QProgressBar" name="prgOnlineProgress"/>
    </item>
    <item>
-    <layout class="QHBoxLayout">
-     <item>
-      <spacer name="spacer3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>91</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnOK">
-       <property name="text">
-        <string>&amp;OK</string>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-       <property name="stdItem" stdset="0">
-        <number>1</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnCancel">
-       <property name="text">
-        <string>&amp;Cancel</string>
-       </property>
-       <property name="stdItem" stdset="0">
-        <number>2</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

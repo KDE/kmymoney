@@ -25,11 +25,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <kguiutils.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -40,11 +37,9 @@
 KTagReassignDlg::KTagReassignDlg(QWidget* parent) :
     KTagReassignDlgDecl(parent)
 {
-  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
-  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(tagCombo);
-  mandatory->setOkButton(buttonOk);
+  mandatory->setOkButton(buttonBox->button(QDialogButtonBox::Ok));
 }
 
 KTagReassignDlg::~KTagReassignDlg()
@@ -70,7 +65,7 @@ QString KTagReassignDlg::show(const QList<MyMoneyTag>& tagslist)
 void KTagReassignDlg::accept()
 {
   // force update of tagCombo
-  buttonOk->setFocus();
+  buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
   if (tagCombo->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new tags to be created. Please pick a tag from the list."), i18n("Tag creation"));
