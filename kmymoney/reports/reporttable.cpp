@@ -47,12 +47,12 @@ QString reports::ReportTable::cssFileNameGet()
     cssfilename = KMyMoneyUtils::findResource(QStandardPaths::DataLocation, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
   }
 
-  if (cssfilename.isEmpty()) {
+  if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
     // if no report specific stylesheet was found, try to use the configured one
     cssfilename = KMyMoneyGlobalSettings::cssFileDefault();
   }
 
-  if (cssfilename.isEmpty()) {
+  if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
     // if there still is nothing, try to use the installation default
     cssfilename = KMyMoneyUtils::findResource(QStandardPaths::DataLocation, m_resourceHtml + '/' + m_cssFileDefault);
   }

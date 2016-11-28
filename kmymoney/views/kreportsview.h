@@ -156,11 +156,6 @@ public:
   };
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
-
   bool m_needReload;
 
   QListWidget* m_reportListView;
@@ -169,6 +164,7 @@ private:
   QVBoxLayout* m_listTabLayout;
   QTreeWidget* m_tocTreeWidget;
   QMap<QString, TocItemGroup*> m_allTocItemGroups;
+  QString m_selectedExportFilter;
 
   bool m_columnsAlreadyAdjusted;
 
@@ -186,15 +182,6 @@ public:
     * @see ~KReportsView
     */
   explicit KReportsView(QWidget *parent = 0, const char *name = 0);
-
-  /**
-    * Standard destructor.
-    *
-    * @return Nothing.
-    *
-    * @see KReportsView
-    */
-  ~KReportsView();
 
   /**
     * Overridden so we can reload the view if necessary.
@@ -232,9 +219,6 @@ public slots:
   void slotConfigureFromList();
   void slotNewFromList();
   void slotDeleteFromList();
-
-protected slots:
-  void slotSaveFilterChanged(const QString&);
 
 signals:
   /**
