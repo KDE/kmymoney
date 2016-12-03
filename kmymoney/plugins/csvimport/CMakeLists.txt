@@ -1,6 +1,4 @@
-if (KDE4_BUILD_TESTS)
-  add_subdirectory(tests)
-endif(KDE4_BUILD_TESTS)
+add_subdirectory(tests)
 
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimport.json.in ${CMAKE_CURRENT_BINARY_DIR}/csvimport.json @ONLY)

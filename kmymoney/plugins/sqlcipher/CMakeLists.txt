@@ -58,9 +58,7 @@ target_link_libraries(sqlcipherdriver PUBLIC
   ${SQLCIPHER_LIBRARIES}
 )
 
-if (KDE4_BUILD_TESTS)
-  add_subdirectory(tests)
-endif(KDE4_BUILD_TESTS)
+add_subdirectory(tests)
 
 #### Install files ####
 
