@@ -17,7 +17,7 @@ target_link_libraries(kmm_printcheck
 )
 
 install(TARGETS kmm_printcheck
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 install(FILES kmm_printcheck.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_printcheck")
@@ -48,7 +48,7 @@ target_link_libraries(kcm_kmm_printcheck
                       )
 
 install(TARGETS kcm_kmm_printcheck
-        DESTINATION "${PLUGIN_INSTALL_DIR}")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}")
 
 install(FILES kcm_kmm_printcheck.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")

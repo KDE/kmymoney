@@ -48,7 +48,7 @@ target_link_libraries(konlinetasks_sepa
 )
 
 install(TARGETS konlinetasks_sepa
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 install(FILES ${sepaOnlineTasks_HEADER}
         DESTINATION "${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/sepa/"

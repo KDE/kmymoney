@@ -22,7 +22,7 @@ target_link_libraries( payeeidentifier_nationalAccount_ui
 )
 
 install(TARGETS payeeidentifier_nationalAccount_ui
-        DESTINATION ${PLUGIN_INSTALL_DIR})
+        DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccount-delegate.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

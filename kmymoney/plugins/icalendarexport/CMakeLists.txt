@@ -24,7 +24,7 @@ install(FILES kmm_icalendarexport.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_icalendarexport")
 
 install(TARGETS kmm_icalendarexport
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 # the KCM module
 
@@ -48,7 +48,7 @@ target_link_libraries(kcm_kmm_icalendarexport
 )
 
 install(TARGETS kcm_kmm_icalendarexport
-        DESTINATION ${PLUGIN_INSTALL_DIR})
+        DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
 install(FILES kcm_kmm_icalendarexport.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

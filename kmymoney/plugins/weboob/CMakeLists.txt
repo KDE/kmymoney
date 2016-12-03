@@ -34,5 +34,5 @@ install(FILES kmm_weboob.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_weboob")
 
 install(TARGETS kmm_weboob
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 

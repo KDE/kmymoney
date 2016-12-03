@@ -63,5 +63,5 @@ add_subdirectory(tests)
 #### Install files ####
 
 install(TARGETS sqlcipherdriver
-        DESTINATION ${PLUGIN_INSTALL_DIR}/sqldrivers/
+        DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/sqldrivers/
 )

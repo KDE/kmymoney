@@ -21,4 +21,4 @@ target_link_libraries(kmm_reconciliationreport
 )
 
 install(TARGETS kmm_reconciliationreport
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

@@ -54,7 +54,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc
         DESTINATION ${KXMLGUI_INSTALL_DIR}/kmm_kbanking)
 
 install(TARGETS kmm_kbanking
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 install(FILES kbanking.kcfg
         DESTINATION ${KCFG_INSTALL_DIR})

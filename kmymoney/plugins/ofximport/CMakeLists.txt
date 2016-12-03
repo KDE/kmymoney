@@ -45,4 +45,4 @@ install(FILES kmm_ofximport.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_ofximport")
 
 install(TARGETS kmm_ofximport
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

@@ -55,7 +55,7 @@ install(FILES kmm_csvimport.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_csvimport")
 
 install(TARGETS kmm_csvimport
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 # the KCM module
 set(kcm_kmm_csvimport_PART_SRCS
@@ -76,7 +76,7 @@ target_link_libraries(kcm_kmm_csvimport
                       )
 
 install(TARGETS kcm_kmm_csvimport
-        DESTINATION ${PLUGIN_INSTALL_DIR})
+        DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
 install(FILES kcm_kmm_csvimport.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

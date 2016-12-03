@@ -17,4 +17,4 @@ target_link_libraries(kmm_onlinejobpluginmockup
 ########### install files ###############
 
 install(TARGETS kmm_onlinejobpluginmockup
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

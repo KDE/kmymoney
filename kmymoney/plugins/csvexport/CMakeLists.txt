@@ -28,7 +28,7 @@ install(FILES kmm_csvexport.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_csvexport")
 
 install(TARGETS kmm_csvexport
-        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 
 #INSTALL(FILES csvexporterrc

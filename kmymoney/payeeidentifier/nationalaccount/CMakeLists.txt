@@ -50,7 +50,7 @@ kcoreaddons_desktop_to_json(payeeidentifier_nationalaccount_storageplugin
 )
 
 install(TARGETS payeeidentifier_nationalaccount_storageplugin
-  DESTINATION ${PLUGIN_INSTALL_DIR})
+  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccount-storageplugin.desktop

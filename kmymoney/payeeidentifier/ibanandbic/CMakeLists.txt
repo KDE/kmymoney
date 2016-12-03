@@ -55,7 +55,7 @@ kcoreaddons_desktop_to_json(payeeidentifier_ibanbic_storageplugin
   )
 
 install(TARGETS payeeidentifier_ibanbic_storageplugin
-  DESTINATION ${PLUGIN_INSTALL_DIR})
+  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
 install(FILES
   "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop"
