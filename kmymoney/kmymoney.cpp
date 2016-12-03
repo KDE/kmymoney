@@ -97,17 +97,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyadaptor.h"
 
-#include "dialogs/settings/ksettingsgeneral.h"
-#include "dialogs/settings/ksettingsregister.h"
-#include "dialogs/settings/ksettingsgpg.h"
-#include "dialogs/settings/ksettingscolors.h"
-#include "dialogs/settings/ksettingsfonts.h"
-#include "dialogs/settings/ksettingsschedules.h"
-#include "dialogs/settings/ksettingsonlinequotes.h"
-#include "dialogs/settings/ksettingshome.h"
-#include "dialogs/settings/ksettingsforecast.h"
-#include "dialogs/settings/ksettingsplugins.h"
-#include "dialogs/settings/ksettingsreports.h"
+#include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/kbackupdlg.h"
 #include "dialogs/kexportdlg.h"
 #include "dialogs/kimportdlg.h"
@@ -2514,44 +2504,8 @@ void KMyMoneyApp::slotSettings()
     return;
 
   // otherwise, we have to create it
-  KConfigDialog* dlg = new KConfigDialog(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
-
-  // create the pages ...
-  KSettingsGeneral* generalPage = new KSettingsGeneral();
-  KSettingsRegister* registerPage = new KSettingsRegister();
-  KSettingsHome* homePage = new KSettingsHome();
-  KSettingsSchedules* schedulesPage = new KSettingsSchedules();
-  KSettingsGpg* encryptionPage = new KSettingsGpg();
-  KSettingsColors* colorsPage = new KSettingsColors();
-  KSettingsFonts* fontsPage = new KSettingsFonts();
-  KSettingsOnlineQuotes* onlineQuotesPage = new KSettingsOnlineQuotes();
-  KSettingsForecast* forecastPage = new KSettingsForecast();
-  KSettingsPlugins* pluginsPage = new KSettingsPlugins();
-  KSettingsReports* reportsPage = new KSettingsReports();
-
-  dlg->addPage(generalPage, i18nc("General settings", "General"), "system-run");
-  dlg->addPage(homePage, i18n("Home"), "go-home");
-  dlg->addPage(registerPage, i18nc("Ledger view settings", "Ledger"), "view-financial-list");
-
-  dlg->addPage(schedulesPage, i18n("Scheduled transactions"), "view-pim-calendar");
-
-  dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  dlg->addPage(reportsPage, i18nc("Report settings", "Reports"), "office-chart-bar");
-  dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "view-financial-forecast");
-  dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
-  dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
-  dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
-  dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
-
-  // TODO: port KF5
-  //dlg->setHelp("details.settings", "kmymoney");
-
+  KConfigDialog* dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
   connect(dlg, &KConfigDialog::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
-  connect(dlg, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
-  connect(dlg, &KConfigDialog::accepted, pluginsPage, &KSettingsPlugins::slotSavePlugins);
-  //! @todo: Port KF5
-  //connect(dlg, &KConfigDialog::defaultClicked, pluginsPage, &KSettingsPlugins::slotDefaultsPlugins);
-
   dlg->show();
 }
 

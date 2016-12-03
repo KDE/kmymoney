@@ -80,7 +80,7 @@ void KSettingsSchedules::slotSetRegion(const QString &region)
 void KSettingsSchedules::slotLoadRegion(const QString &region)
 {
   // only need this once
-  disconnect(kcfg_HolidayRegion, SIGNAL(textChanged(QString)), this, SLOT(slotLoadRegion(QString)));
+  disconnect(kcfg_HolidayRegion, &KLineEdit::textChanged, this, &KSettingsSchedules::slotLoadRegion);
   int i = 0;
   if (!region.isEmpty())
     i = m_holidayRegion->findText(m_regionMap.key(region));
