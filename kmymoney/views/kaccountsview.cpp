@@ -66,8 +66,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
   KGuiItem::assign(m_collapseButton, collapseGuiItem);
   KGuiItem::assign(m_expandButton, expandGuiItem);
 
-  m_needReload = false;
-
   connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(MyMoneyMoney)), this, SLOT(slotNetWorthChanged(MyMoneyMoney)));
 
   // the proxy filter model
@@ -133,19 +131,6 @@ void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
 }
 
 void KAccountsView::slotLoadAccounts()
-{
-  m_needReload = true;
-}
-
-void KAccountsView::loadAccounts()
-{
-  if (m_needReload) {
-    loadListView();
-    m_needReload = false;
-  }
-}
-
-void KAccountsView::loadListView()
 {
   // TODO: check why the invalidate is needed here
   m_filterProxyModel->invalidate();

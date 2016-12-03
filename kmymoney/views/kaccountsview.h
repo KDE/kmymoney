@@ -54,8 +54,6 @@ protected:
     reconcileRole = Qt::UserRole + 1
   };
 
-  void loadAccounts();
-  void loadListView();
   void loadIconGroups();
 
 protected slots:
@@ -95,8 +93,6 @@ signals:
   void aboutToShow();
 
 private:
-  /// set if a view needs to be reloaded during show()
-  bool                                m_needReload;
   bool                                m_haveUnusedCategories;
 
   AccountsViewFilterProxyModel        *m_filterProxyModel;
