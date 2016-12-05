@@ -172,6 +172,10 @@ install(FILES org.kde.kmymoney.appdata.xml
 install(FILES x-kmymoney.xml
   DESTINATION ${XDG_MIME_INSTALL_DIR})
 
+install(FILES
+   tips
+   DESTINATION ${CMAKE_INSTALL_DATADIR}/kmymoney)
+
 #UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
 
 
