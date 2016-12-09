@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="reference">
 <chapterinfo>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2016-12-05</date>
+  <releaseinfo>5.0</releaseinfo>
 </chapterinfo>
 
 <title>Reference</title>
@@ -14,7 +14,7 @@
 <title>Menus</title>
 
 <para>
-  Below is a complete list of the menu selections in &kappname;, with a very
+  Below is a complete list of the menu selections in &kmymoney;, with a very
   brief description of what each one does.  Note that many of these menu choices
   will be unavailable, or grayed out, depending on the current display or state
   of the application.  For example, you are not able to edit an account unless
@@ -33,8 +33,8 @@
       <guimenu>File</guimenu><guimenuitem>New</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action> Creates a new empty &kappname; data file. Only one
-      &kappname; file can be open at once, so this will close your current file
+      <para><action> Creates a new empty &kmymoney; data file. Only one
+      &kmymoney; file can be open at once, so this will close your current file
       first, if one is open.  </action></para>
     </listitem>
   </varlistentry>
@@ -47,7 +47,7 @@
       <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Opens an existing &kappname; data file.</action></para>
+      <para><action>Opens an existing &kmymoney; data file.</action></para>
     </listitem>
   </varlistentry>
 
@@ -86,6 +86,9 @@
 
   <varlistentry>
     <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Shift;<keycap>S</keycap></keycombo>
+      </shortcut>
       <guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem>
     </menuchoice></term>
     <listitem>
@@ -165,11 +168,11 @@
       <guimenu>File</guimenu><guimenuitem>File information</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Displays information about the currently open &kappname;
+      <para><action>Displays information about the currently open &kmymoney;
         file.</action></para>
     </listitem>
   </varlistentry>
-
+  <!--Dump Memory what i sthis?-->
   <varlistentry>
     <term><menuchoice>
       <shortcut>
@@ -190,7 +193,7 @@
       <guimenu>File</guimenu><guimenuitem>Quit</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Quit &kappname;</action></para>
+      <para><action>Quit &kmymoney;</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -459,6 +462,7 @@
         accounts.</action></para>
     </listitem>
   </varlistentry>
+  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
@@ -511,7 +515,7 @@
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>&Ctrl;<keycap>Ins</keycap></keycombo>
+        <keycombo>&Ctrl;&Ins;</keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu><guimenuitem>New</guimenuitem>
     </menuchoice></term>
@@ -572,7 +576,7 @@
     <term><menuchoice>
       <shortcut>
         <keycombo>
-          &Ctrl;&Shift;<keycap>Space</keycap>
+          &Ctrl;&Alt;<keycap>Space</keycap>
         </keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu>
@@ -588,7 +592,7 @@
     <term><menuchoice>
       <shortcut>
         <keycombo>
-          &Alt;&Ctrl;<keycap>Space</keycap>
+          &Ctrl;&Shift;<keycap>Space</keycap>
         </keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu>
@@ -644,7 +648,7 @@
     </menuchoice></term>
     <listitem>
       <para>
-        <action>Unmatches a transactions that &kappname; has proposed
+        <action>Unmatches a transactions that &kmymoney; has proposed
         as a match of imported transactions.</action> Note that this
         menu choice is only present if a matched transaction exists.
       </para>
@@ -710,7 +714,7 @@
       <guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Lists the currencies known to &kappname;.</action></para>
+      <para><action>Lists the currencies known to &kmymoney;.</action></para>
     </listitem>
   </varlistentry>
 
@@ -755,31 +759,20 @@
         results.</action></para>
     </listitem>
   </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings">
-<title>Settings Menu</title>
+<sect2 id="reference.menus.settings.help">
+<title>Settings and Help Menu</title>
+
+<para>&kmymoney; has the default &kde; Settings and Help menu as described in the
+<ulink url="help:/fundamentals/ui.html#menus">&kde; Fundamentals</ulink>
+with one additional entry:</para>
 
 <variablelist>
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Settings</guimenu><guimenuitem>Hide/Show Toolbar</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Toggles the toolbar on or off.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Settings</guimenu><guimenuitem>Hide/Show Statusbar</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Toggles the bottom status bar on or off.</action></para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term><menuchoice>
       <guimenu>Settings</guimenu><guimenuitem>Enable all messages</guimenuitem>
@@ -791,53 +784,9 @@
     </listitem>
   </varlistentry>
 
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Settings</guimenu>
-        <guimenuitem>&kde; Language Settings...</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Allows to change many locale based settings.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Settings</guimenu>
-        <guimenuitem>Configure Shortcuts...</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Configures custom shortcuts.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Settings</guimenu>
-        <guimenuitem>Configure Toolbars...</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Customizes &kappname; toolbars.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Settings</guimenu>
-        <guimenuitem>Configure &kappname;...</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Configures <link linkend="details.settings">&kappname;
-      settings</link>.</action></para>
-    </listitem>
-  </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.help">
-<title>Help Menu</title>
-&help.menu.documentation;
-</sect2>
 </sect1>
 
 &details-widgets;
