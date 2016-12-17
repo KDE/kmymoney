@@ -24,7 +24,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 
-QTEST_MAIN(MyMoneySplitTest)
+QTEST_GUILESS_MAIN(MyMoneySplitTest)
 
 void MyMoneySplitTest::init()
 {

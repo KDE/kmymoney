@@ -26,7 +26,7 @@
 using namespace reports;
 using namespace test;
 
-QTEST_MAIN(PivotGridTest)
+QTEST_GUILESS_MAIN(PivotGridTest)
 
 void PivotGridTest::init()
 {

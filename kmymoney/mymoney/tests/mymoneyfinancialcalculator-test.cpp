@@ -23,7 +23,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyfinancialcalculator.h"
 
-QTEST_MAIN(MyMoneyFinancialCalculatorTest)
+QTEST_GUILESS_MAIN(MyMoneyFinancialCalculatorTest)
 
 void MyMoneyFinancialCalculatorTest::init()
 {

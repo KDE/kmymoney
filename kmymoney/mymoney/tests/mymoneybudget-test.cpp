@@ -22,7 +22,7 @@
 
 #include "mymoneybudget.h"
 
-QTEST_MAIN(MyMoneyBudgetTest)
+QTEST_GUILESS_MAIN(MyMoneyBudgetTest)
 
 void MyMoneyBudgetTest::init()
 {

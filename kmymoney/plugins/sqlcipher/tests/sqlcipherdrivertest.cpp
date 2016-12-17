@@ -33,7 +33,7 @@
 #include <QSqlResult>
 #include <QSqlRecord>
 
-QTEST_MAIN(sqlcipherdrivertest);
+QTEST_GUILESS_MAIN(sqlcipherdrivertest);
 
 static const QString passphrase = QLatin1String("blue valentines");
 

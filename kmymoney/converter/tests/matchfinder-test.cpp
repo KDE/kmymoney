@@ -21,7 +21,7 @@
 
 #include "mymoneyfile.h"
 
-QTEST_MAIN(MatchFinderTest)
+QTEST_GUILESS_MAIN(MatchFinderTest)
 
 void MatchFinderTest::init()
 {

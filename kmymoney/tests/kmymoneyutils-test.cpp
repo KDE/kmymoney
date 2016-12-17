@@ -21,7 +21,7 @@
 
 #include <QtTest/QtTest>
 
-QTEST_MAIN(KMyMoneyUtilsTest)
+QTEST_GUILESS_MAIN(KMyMoneyUtilsTest)
 
 void KMyMoneyUtilsTest::init()
 {

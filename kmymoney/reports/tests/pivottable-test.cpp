@@ -38,7 +38,7 @@
 using namespace reports;
 using namespace test;
 
-QTEST_MAIN(PivotTableTest)
+QTEST_GUILESS_MAIN(PivotTableTest)
 
 void PivotTableTest::init()
 {

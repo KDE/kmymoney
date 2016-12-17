@@ -29,7 +29,7 @@
 #include <QtTest>
 #include <QSqlDatabase>
 
-QTEST_MAIN(SqlCipherDriverInstallTest);
+QTEST_GUILESS_MAIN(SqlCipherDriverInstallTest);
 
 void SqlCipherDriverInstallTest::findDriver()
 {

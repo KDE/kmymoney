@@ -22,7 +22,7 @@
 
 #include "mymoneytestutils.h"
 
-QTEST_MAIN(MyMoneyTransactionTest)
+QTEST_GUILESS_MAIN(MyMoneyTransactionTest)
 
 void MyMoneyTransactionTest::init()
 {

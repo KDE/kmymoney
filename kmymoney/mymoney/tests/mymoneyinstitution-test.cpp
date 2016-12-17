@@ -20,7 +20,7 @@
 
 #include "mymoneyexception.h"
 
-QTEST_MAIN(MyMoneyInstitutionTest)
+QTEST_GUILESS_MAIN(MyMoneyInstitutionTest)
 
 void MyMoneyInstitutionTest::init()
 {

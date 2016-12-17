@@ -26,7 +26,7 @@
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 
-QTEST_MAIN(payeeidentifier_test);
+QTEST_GUILESS_MAIN(payeeidentifier_test);
 
 void payeeidentifier_test::initTestCase()
 {

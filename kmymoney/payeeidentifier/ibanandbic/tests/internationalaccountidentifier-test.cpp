@@ -22,7 +22,7 @@
 
 #include <QtTest>
 
-QTEST_MAIN(internationalAccountIdentifierTest);
+QTEST_GUILESS_MAIN(internationalAccountIdentifierTest);
 
 bool internationalAccountIdentifierTest::dataInstalled(const QString& countryCode)
 {

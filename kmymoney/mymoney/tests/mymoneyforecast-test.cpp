@@ -30,7 +30,7 @@
 
 using namespace test;
 
-QTEST_MAIN(MyMoneyForecastTest)
+QTEST_GUILESS_MAIN(MyMoneyForecastTest)
 
 MyMoneyForecastTest::MyMoneyForecastTest()
 {

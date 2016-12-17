@@ -24,7 +24,7 @@
 #include "mymoneytestutils.h"
 #include "mymoneybalancecache.h"
 
-QTEST_MAIN(MyMoneyBalanceCacheTest)
+QTEST_GUILESS_MAIN(MyMoneyBalanceCacheTest)
 
 void MyMoneyBalanceCacheTest::init()
 {

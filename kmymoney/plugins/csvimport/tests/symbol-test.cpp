@@ -21,7 +21,7 @@
 #include <QtCore/QString>
 #include <QtCore/QLocale>
 
-QTEST_MAIN(SymbolTest);
+QTEST_GUILESS_MAIN(SymbolTest);
 
 Parse* m_parse;
 

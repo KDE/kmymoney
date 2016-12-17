@@ -28,7 +28,7 @@
 #include "mymoneymoney.h"
 
 
-QTEST_MAIN(MyMoneyMoneyTest)
+QTEST_GUILESS_MAIN(MyMoneyMoneyTest)
 
 void MyMoneyMoneyTest::init()
 {

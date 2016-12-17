@@ -32,7 +32,7 @@ public:
   virtual void writeXML(QDomDocument&, QDomElement&) const {}
 };
 
-QTEST_MAIN(MyMoneyObjectTest)
+QTEST_GUILESS_MAIN(MyMoneyObjectTest)
 
 void MyMoneyObjectTest::testEmptyConstructor()
 {

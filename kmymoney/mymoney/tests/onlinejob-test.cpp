@@ -23,7 +23,7 @@
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
-QTEST_MAIN(onlineJobTest)
+QTEST_GUILESS_MAIN(onlineJobTest)
 
 void onlineJobTest::testDefaultConstructor()
 {

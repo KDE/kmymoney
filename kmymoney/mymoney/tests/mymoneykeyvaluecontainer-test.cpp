@@ -23,7 +23,7 @@
 #include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
 
-QTEST_MAIN(MyMoneyKeyValueContainerTest)
+QTEST_GUILESS_MAIN(MyMoneyKeyValueContainerTest)
 
 void MyMoneyKeyValueContainerTest::init()
 {

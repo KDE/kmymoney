@@ -23,7 +23,7 @@
 #include "onlinejobtyped.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
-QTEST_MAIN(onlineJobTypedTest)
+QTEST_GUILESS_MAIN(onlineJobTypedTest)
 
 class dummyTask2 : public dummyTask {};
 

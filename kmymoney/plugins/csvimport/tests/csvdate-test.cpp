@@ -22,7 +22,7 @@ email                : agander93@gmail.com
 
 #include "../convdate.h"
 
-QTEST_MAIN(CsvDateTest);
+QTEST_GUILESS_MAIN(CsvDateTest);
 
 CsvDateTest::CsvDateTest()
 {

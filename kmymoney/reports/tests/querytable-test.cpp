@@ -35,7 +35,7 @@
 using namespace reports;
 using namespace test;
 
-QTEST_MAIN(QueryTableTest)
+QTEST_GUILESS_MAIN(QueryTableTest)
 
 void QueryTableTest::init()
 {

@@ -25,7 +25,7 @@
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
-QTEST_MAIN(MyMoneyDatabaseMgrTest)
+QTEST_GUILESS_MAIN(MyMoneyDatabaseMgrTest)
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
     : m_dbAttached(false),

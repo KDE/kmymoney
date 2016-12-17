@@ -19,7 +19,7 @@
 
 #include <QtTest/QtTest>
 
-QTEST_MAIN(MyMoneyExceptionTest)
+QTEST_GUILESS_MAIN(MyMoneyExceptionTest)
 
 void MyMoneyExceptionTest::init()
 {

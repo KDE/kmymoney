@@ -21,7 +21,7 @@
 
 #include "../csvutil.h"
 
-QTEST_MAIN(ParseDataTest);
+QTEST_GUILESS_MAIN(ParseDataTest);
 
 ParseDataTest::ParseDataTest()
 {

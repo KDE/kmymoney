@@ -27,7 +27,7 @@
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
 
-QTEST_MAIN(MyMoneyScheduleTest)
+QTEST_GUILESS_MAIN(MyMoneyScheduleTest)
 
 void MyMoneyScheduleTest::testEmptyConstructor()
 {

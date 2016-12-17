@@ -24,7 +24,7 @@
 
 using namespace std;
 
-QTEST_MAIN(MyMoneyPayeeTest)
+QTEST_GUILESS_MAIN(MyMoneyPayeeTest)
 
 void MyMoneyPayeeTest::testXml()
 {

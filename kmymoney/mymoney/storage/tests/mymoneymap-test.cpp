@@ -18,7 +18,7 @@
 #include <iostream>
 #include <QtTest/QtTest>
 
-QTEST_MAIN(MyMoneyMapTest)
+QTEST_GUILESS_MAIN(MyMoneyMapTest)
 
 void MyMoneyMapTest::init()
 {

@@ -18,7 +18,7 @@
 
 #include <QtTest/QtTest>
 
-QTEST_MAIN(MyMoneySecurityTest)
+QTEST_GUILESS_MAIN(MyMoneySecurityTest)
 
 void MyMoneySecurityTest::init()
 {

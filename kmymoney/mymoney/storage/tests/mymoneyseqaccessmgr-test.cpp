@@ -23,7 +23,7 @@
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
-QTEST_MAIN(MyMoneySeqAccessMgrTest)
+QTEST_GUILESS_MAIN(MyMoneySeqAccessMgrTest)
 
 void MyMoneySeqAccessMgrTest::init()
 {

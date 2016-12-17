@@ -29,7 +29,7 @@
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 
-QTEST_MAIN(MyMoneyFileTest)
+QTEST_GUILESS_MAIN(MyMoneyFileTest)
 
 void MyMoneyFileTest::objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj)
 {

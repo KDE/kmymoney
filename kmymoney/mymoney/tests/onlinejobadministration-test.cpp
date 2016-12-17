@@ -25,7 +25,7 @@
 #include "mymoney/storage/mymoneyseqaccessmgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
-QTEST_MAIN(onlineJobAdministrationTest)
+QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
 void onlineJobAdministrationTest::initTestCase()
 {

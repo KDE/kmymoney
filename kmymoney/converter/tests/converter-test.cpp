@@ -32,7 +32,7 @@ using namespace test;
 #include "storage/mymoneystoragedump.h"
 #include "webpricequote.h"
 
-QTEST_MAIN(ConverterTest)
+QTEST_GUILESS_MAIN(ConverterTest)
 
 using namespace convertertest;
 

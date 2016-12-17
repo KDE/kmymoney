@@ -24,7 +24,7 @@
 
 using namespace std;
 
-QTEST_MAIN(MyMoneyTagTest)
+QTEST_GUILESS_MAIN(MyMoneyTagTest)
 
 void MyMoneyTagTest::testXml()
 {
