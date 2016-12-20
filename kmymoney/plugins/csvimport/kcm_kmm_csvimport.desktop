@@ -35,6 +35,7 @@ X-KDE-ParentComponents=csvimport
 Comment=Configuration for CSV Importer plugin
 Comment[ca]=Configuració del connector d'importació de CSV
 Comment[ca@valencia]=Configuració del connector d'importació de CSV
+Comment[de]=Einrichtung des CSV-Importmoduls
 Comment[en_GB]=Configuration for CSV Importer plugin
 Comment[es]=Configuración para el complemento de importación CSV
 Comment[nl]=Instellingen voor plug-in voor CSV importeren
