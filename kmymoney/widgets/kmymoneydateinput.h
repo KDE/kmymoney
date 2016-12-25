@@ -38,31 +38,40 @@
 // Respective authors are credited.
 // Some ideas/code have been borrowed from Calendar-0.13 (phoenix.bmedesign.com/~qt)
 
-/**
-  * Provided to be able to catch the focusOut events before the contents gets changed
-  */
-class KMyMoneyDateEdit : public QDateEdit
-{
-  Q_OBJECT
-public:
-  explicit KMyMoneyDateEdit(const QDate& date, QWidget *parent = 0) : QDateEdit(date, parent) {}
-
-protected:
-  /** if the date was cleared (a state which is not supported by QDateEdit)
-    * make sure that a date can be entered again
+namespace KMyMoney {
+  /**
+    * Provided to be able to catch the focusOut events before the contents gets changed
     */
-  virtual void keyPressEvent(QKeyEvent* k);
+  class OldDateEdit : public QDateEdit
+  {
+    Q_OBJECT
+  public:
+    explicit OldDateEdit(const QDate& date, QWidget *parent = 0)
+      : QDateEdit(date, parent)
+      , m_initialSection(QDateTimeEdit::NoSection)
+    {}
 
-  /** reimplemented for internal reasons */
-  virtual bool event(QEvent* e);
+    void setInitialSection(Section section) { m_initialSection = section; }
 
-  /** reimplemented for internal reasons */
-  virtual bool focusNextPrevChild(bool next);
+  protected:
+    /** if the date was cleared (a state which is not supported by QDateEdit)
+      * make sure that a date can be entered again
+      */
+    virtual void keyPressEvent(QKeyEvent* k);
 
-  /** reimplemented for internal reasons */
-  virtual void focusInEvent(QFocusEvent *event);
+    /** reimplemented for internal reasons */
+    virtual bool event(QEvent* e);
 
-};
+    /** reimplemented for internal reasons */
+    virtual bool focusNextPrevChild(bool next);
+
+    /** reimplemented for internal reasons */
+    virtual void focusInEvent(QFocusEvent *event);
+
+  private:
+    QDateTimeEdit::Section  m_initialSection;
+  };
+}; // namespace
 
 /**
   * This class provides the general widget used for date selection

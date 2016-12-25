@@ -57,7 +57,7 @@ const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
-void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
+void KMyMoney::OldDateEdit::keyPressEvent(QKeyEvent* k)
 {
   if ((lineEdit()->text().isEmpty() || lineEdit()->selectedText() == lineEdit()->text()) && QChar(k->key()).isDigit()) {
     // the line edit is empty which means that the date was cleared
@@ -65,18 +65,18 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
     // (the same meaning as clearing the date) - in this case set the date
     // to the current date and let the editor do the actual work
     setDate(QDate::currentDate());
-    setSelectedSection(QDateTimeEdit::DaySection); // start as when focused in if the date was cleared
+    setSelectedSection(m_initialSection); // start as when focused in if the date was cleared
   }
   QDateEdit::keyPressEvent(k);
 }
 
-void KMyMoneyDateEdit::focusInEvent(QFocusEvent * event)
+void KMyMoney::OldDateEdit::focusInEvent(QFocusEvent * event)
 {
   QDateEdit::focusInEvent(event);
-  setSelectedSection(QDateTimeEdit::DaySection);
+  setSelectedSection(m_initialSection);
 }
 
-bool KMyMoneyDateEdit::event(QEvent* e)
+bool KMyMoney::OldDateEdit::event(QEvent* e)
 {
   // make sure that we keep the current date setting of a kMyMoneyDateInput object
   // across the QDateEdit::event(FocusOutEvent)
@@ -95,14 +95,14 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   return rc;
 }
 
-bool KMyMoneyDateEdit::focusNextPrevChild(bool next)
+bool KMyMoney::OldDateEdit::focusNextPrevChild(bool next)
 {
   Q_UNUSED(next)
   return true;
 }
 
 struct kMyMoneyDateInput::Private {
-  QDateEdit *m_dateEdit;
+  KMyMoney::OldDateEdit *m_dateEdit;
   KDatePicker *m_datePicker;
   QDate m_date;
   QDate m_prevDate;
@@ -118,7 +118,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_qtalignment = flags;
   d->m_date = QDate::currentDate();
 
-  d->m_dateEdit = new KMyMoneyDateEdit(d->m_date, this);
+  d->m_dateEdit = new KMyMoney::OldDateEdit(d->m_date, this);
   setFocusProxy(d->m_dateEdit);
   d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
 
@@ -168,12 +168,16 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   // see if we find a known format. If it's unknown, then we use YMD (international)
   if (order == "mdy") {
     d->m_dateEdit->setDisplayFormat(QString("MM%1dd%2yyyy").arg(separator, separator));
+    d->m_dateEdit->setInitialSection(QDateTimeEdit::MonthSection);
   } else if (order == "dmy") {
     d->m_dateEdit->setDisplayFormat(QString("dd%1MM%2yyyy").arg(separator, separator));
+    d->m_dateEdit->setInitialSection(QDateTimeEdit::DaySection);
   } else if (order == "ydm") {
     d->m_dateEdit->setDisplayFormat(QString("yyyy%1dd%2MM").arg(separator, separator));
+    d->m_dateEdit->setInitialSection(QDateTimeEdit::YearSection);
   } else {
     d->m_dateEdit->setDisplayFormat(QString("yyyy%1MM%2dd").arg(separator, separator));
+    d->m_dateEdit->setInitialSection(QDateTimeEdit::YearSection);
   }
 
   d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
