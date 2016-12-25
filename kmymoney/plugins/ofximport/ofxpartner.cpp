@@ -376,7 +376,8 @@ public:
 
 OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
     d(new Private),
-    m_dst(dst)
+    m_dst(dst),
+    m_error(QHttp::NoError)
 {
   Q_UNUSED(type);
   Q_UNUSED(metaData);
@@ -478,7 +479,8 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 
 
 
-OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo)
+OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
+    m_job(0)
 {
   Q_UNUSED(showProgressInfo);
 
@@ -508,6 +510,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
       errorMsg = m_job->errorString();
 
     delete m_job;
+    m_job = 0;
   } else {
     m_error = QHttp::Aborted;
     errorMsg = i18n("Cannot open file %1 for writing", dst.path());

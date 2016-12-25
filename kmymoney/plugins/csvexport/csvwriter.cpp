@@ -40,7 +40,11 @@
 
 #include "mymoneyfile.h"
 
-CsvWriter::CsvWriter()
+CsvWriter::CsvWriter() :
+    m_plugin(0),
+    m_firstSplit(false),
+    m_highestSplitCount(0),
+    m_noError(true)
 {
 }
 

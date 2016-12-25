@@ -37,12 +37,13 @@
 #include <ui_csvdialog.h>
 
 
-SymbolTableDlg::SymbolTableDlg()
+SymbolTableDlg::SymbolTableDlg() :
+    m_widget(new SymbolTableDlgDecl),
+    m_csvDialog(0),
+    m_firstPass(true)
 {
-  m_widget = new SymbolTableDlgDecl;
   setMainWidget(m_widget);
   m_widget->tableWidget->setToolTip(i18n("Symbols and Security Names present"));
-  m_firstPass = true;
 
   setButtons(KDialog::Cancel | KDialog::Ok);
   setButtonsOrientation(Qt::Horizontal);
