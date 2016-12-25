@@ -761,7 +761,7 @@ bool InvestmentPage::validateSecurities()
       return false;
     } else {
       for (int row = 0; row < symbolTable->rowCount(); ++row) {
-        QString symbol = symbolTable->item(row, 0)->text();
+        QString symbol = symbolTable->item(row, 1)->text();
         QString name = symbolTable->item(row, 2)->text();
         m_mapSymbolName.insert(symbol, name);
       }
