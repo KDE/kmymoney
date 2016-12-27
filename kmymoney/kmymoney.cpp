@@ -3708,20 +3708,29 @@ void KMyMoneyApp::slotAccountEdit()
         connect(wizard, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
         connect(wizard, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
         if (wizard->exec() == QDialog::Accepted && wizard != 0) {
-          MyMoneySchedule sch = file->schedule(d->m_selectedAccount.value("schedule").toLatin1());
+          MyMoneySchedule sch;
+          try {
+            MyMoneySchedule sch = file->schedule(d->m_selectedAccount.value("schedule").toLatin1());
+          } catch (const MyMoneyException &e) {
+            qDebug() << "schedule" << d->m_selectedAccount.value("schedule").toLatin1() << "not found";
+          }
           if (!(d->m_selectedAccount == wizard->account())
               || !(sch == wizard->schedule())) {
             MyMoneyFileTransaction ft;
             try {
               file->modifyAccount(wizard->account());
-              sch = wizard->schedule();
+              if (!sch.id().isEmpty()) {
+                sch = wizard->schedule();
+              }
               try {
                 file->schedule(sch.id());
                 file->modifySchedule(sch);
                 ft.commit();
               } catch (const MyMoneyException &) {
                 try {
-                  file->addSchedule(sch);
+                  if(sch.transaction().splitCount() >= 2) {
+                    file->addSchedule(sch);
+                  }
                   ft.commit();
                 } catch (const MyMoneyException &e) {
                   qDebug("Cannot add schedule: '%s'", qPrintable(e.what()));
