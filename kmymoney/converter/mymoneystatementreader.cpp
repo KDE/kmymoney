@@ -917,7 +917,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           case MyMoneyPayee::matchKey:
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-              if (exp.indexIn(payeename) != -1) {
+              if (exp.exactMatch(payeename)) { // only exact matches are allowed, otherwise payee "Apple" could be inadvertently matched with payee "Pineapple"
                 qDebug("Found match with '%s' on '%s'", qPrintable(payeename), qPrintable((*it_p).name()));
                 matchMap[exp.matchedLength()] = (*it_p).id();
               }
