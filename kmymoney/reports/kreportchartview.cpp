@@ -258,6 +258,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
   }
 
+  const bool blocked = m_model.blockSignals(true); // don't emit dataChanged() signal during each drawPivotRowSet
   switch (config.detailLevel()) {
     case MyMoneyReport::eDetailNone:
     case MyMoneyReport::eDetailEnd:
@@ -438,6 +439,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
   }
+  m_model.blockSignals(blocked); // reenable dataChanged() signal
 
   //assign model to the diagram
   planeDiagram->setModel(&m_model);
