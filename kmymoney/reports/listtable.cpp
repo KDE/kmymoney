@@ -262,7 +262,7 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["currentbalance"] = i18n("Current Balance");
 
   // the list of columns which represent money, so we can display them correctly
-  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance").split(',');
+  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal").split(',');
 
   // the list of columns which represent shares, which is like money except the
   // transaction currency will not be displayed

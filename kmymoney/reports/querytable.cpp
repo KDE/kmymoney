@@ -373,8 +373,10 @@ void QueryTable::init()
     m_columns += ",shares";
   if (qc & MyMoneyReport::eQCprice)
     m_columns += ",price";
-  if (qc & MyMoneyReport::eQCperformance)
+  if (qc & MyMoneyReport::eQCperformance) {
     m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment";
+    m_subtotal = "endingbal";
+  }
   if (qc & MyMoneyReport::eQCloan) {
     m_columns += ",payment,interest,fees";
     m_postcolumns = "balance";
@@ -925,9 +927,7 @@ void QueryTable::constructTransactionTable()
 void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneySecurity security = file->security(account.currencyId());
-
-  result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
+  MyMoneySecurity security;
 
   //get fraction depending on type of account
   int fraction = account.currency().smallestAccountFraction();
@@ -979,7 +979,6 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     price = account.deepCurrencyPrice(startingDate);
   }
 
-
   MyMoneyMoney startingBal = file->balance(account.id(), startingDate) * price;
 
   //convert to lowest fraction
@@ -996,9 +995,6 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   //convert to lowest fraction
   endingBal = endingBal.convert(fraction);
 
-  //add start balance to calculate return on investment
-  MyMoneyMoney returnInvestment = startingBal;
-  MyMoneyMoney paidDividend;
   CashFlowList buys;
   CashFlowList sells;
   CashFlowList reinvestincome;
@@ -1014,6 +1010,13 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     // s is the split for the stock account
     MyMoneySplit s = (*it_transaction).splitByAccount(account.id());
 
+    MyMoneySplit assetAccountSplit;
+    QList<MyMoneySplit> feeSplits;
+    QList<MyMoneySplit> interestSplits;
+    MyMoneySecurity currency;
+    MyMoneySplit::investTransactionTypeE transactionType;
+    KMyMoneyUtils::dissectTransaction((*it_transaction), s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+
     //get price for the day of the transaction if we have to calculate base currency
     //we are using the value of the split which is in deep currency
     if (m_config.isConvertCurrency()) {
@@ -1022,64 +1025,18 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
       price = MyMoneyMoney::ONE;
     }
 
-    MyMoneyMoney value = s.value() * price;
+    MyMoneyMoney value = assetAccountSplit.value() * price;
 
-    const QString& action = s.action();
-    if (action == MyMoneySplit::ActionBuyShares) {
-      if (s.value().isPositive()) {
-        buys += CashFlowListItem((*it_transaction).postDate(), -value);
-      } else {
-        sells += CashFlowListItem((*it_transaction).postDate(), -value);
-      }
-      returnInvestment += value;
-      //convert to lowest fraction
-      returnInvestment = returnInvestment.convert(fraction);
-    } else if (action == MyMoneySplit::ActionReinvestDividend) {
+    if (transactionType == MyMoneySplit::BuyShares)
+      buys += CashFlowListItem((*it_transaction).postDate(), value);
+    else if (transactionType == MyMoneySplit::SellShares)
+      sells += CashFlowListItem((*it_transaction).postDate(), value);
+    else if (transactionType == MyMoneySplit::ReinvestDividend)
       reinvestincome += CashFlowListItem((*it_transaction).postDate(), value);
-    } else if (action == MyMoneySplit::ActionDividend || action == MyMoneySplit::ActionYield) {
-      // find the split with the category, which has the actual amount of the dividend
-      QList<MyMoneySplit> splits = (*it_transaction).splits();
-      QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
-      while (it_split != splits.constEnd()) {
-        ReportAccount acc = (*it_split).accountId();
-        if (acc.isIncomeExpense()) {
-          cashincome += CashFlowListItem((*it_transaction).postDate(), -(*it_split).value() * price);
-          paidDividend += ((-(*it_split).value()) * price).convert(fraction);
-        }
-        ++it_split;
-      }
-    } else if (action == MyMoneySplit::ActionAddShares) {
-      // Add shares is not a buy operation, do nothing
-    } else {
-      //if the split does not match any action above, add it as buy or sell depending on sign
-
-      //if value is zero, get the price for that date
-      if (s.value().isZero()) {
-        if (m_config.isConvertCurrency()) {
-          price = account.deepCurrencyPrice((*it_transaction).postDate()) * account.baseCurrencyPrice((*it_transaction).postDate());
-        } else {
-          price = account.deepCurrencyPrice((*it_transaction).postDate());
-        }
-        value = s.shares() * price;
-        if (s.shares().isPositive()) {
-          buys += CashFlowListItem((*it_transaction).postDate(), -value);
-        } else {
-          sells += CashFlowListItem((*it_transaction).postDate(), -value);
-        }
-        returnInvestment += value;
-      } else {
-        value = s.value() * price;
-        if (s.value().isPositive()) {
-          buys += CashFlowListItem((*it_transaction).postDate(), -value);
-        } else {
-          sells += CashFlowListItem((*it_transaction).postDate(), -value);
-        }
-        returnInvestment += value;
-      }
-    }
+    else if (transactionType == MyMoneySplit::Dividend || transactionType == MyMoneySplit::Yield)
+      cashincome += CashFlowListItem((*it_transaction).postDate(), value);
     ++it_transaction;
   }
-
   // Note that reinvested dividends are not included , because these do not
   // represent a cash flow event.
   CashFlowList all;
@@ -1089,13 +1046,15 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   all += CashFlowListItem(startingDate, -startingBal);
   all += CashFlowListItem(endingDate, endingBal);
 
-  //check if no activity on that term
-  if (!returnInvestment.isZero() && !endingBal.isZero()) {
-    returnInvestment = ((endingBal + paidDividend) - returnInvestment) / returnInvestment;
+  MyMoneyMoney returnInvestment;
+  MyMoneyMoney buysTotal = buys.total();
+  MyMoneyMoney sellsTotal = sells.total();
+  MyMoneyMoney cashincomeTotal = cashincome.total();
+  if (!buysTotal.isZero()) {
+    returnInvestment = (sellsTotal + buysTotal + cashincomeTotal + endingBal - startingBal) / (startingBal - buysTotal);
     returnInvestment = returnInvestment.convert(10000);
-  } else {
-    returnInvestment = MyMoneyMoney();
-  }
+  } else
+    returnInvestment = MyMoneyMoney(); // if no investment then no return on investment
 
   try {
     double irr = all.IRR();
@@ -1110,12 +1069,13 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     qDebug() << e;
   }
 
-  result["buys"] = (-(buys.total())).toString();
-  result["sells"] = (-(sells.total())).toString();
-  result["cashincome"] = (cashincome.total()).toString();
-  result["reinvestincome"] = (reinvestincome.total()).toString();
-  result["startingbal"] = (startingBal).toString();
-  result["endingbal"] = (endingBal).toString();
+  result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
+  result["buys"] = buys.total().toString();
+  result["sells"] = sells.total().toString();
+  result["cashincome"] = cashincome.total().toString();
+  result["reinvestincome"] = reinvestincome.total().toString();
+  result["startingbal"] = startingBal.toString();
+  result["endingbal"] = endingBal.toString();
 }
 
 void QueryTable::constructAccountTable()
@@ -1187,9 +1147,7 @@ void QueryTable::constructAccountTable()
 
       qaccountrow["type"] = KMyMoneyUtils::accountTypeToString((*it_account).accountType());
 
-      // TODO: Only do this if the report we're making really needs performance.  Otherwise
-      // it's an expensive calculation done for no reason
-      if (account.isInvest()) {
+      if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
         constructPerformanceRow(account, qaccountrow);
       } else
         qaccountrow["equitytype"].clear();
