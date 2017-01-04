@@ -896,7 +896,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
   QString payeename = statementTransactionUnderImport.m_strPayee;
   if (!payeename.isEmpty()) {
-    qDebug("Start matching payee");
+    qDebug() << QLatin1String("Start matching payee") << payeename;
     QString payeeid;
     try {
       QList<MyMoneyPayee> pList = file->payeeList();
@@ -917,7 +917,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           case MyMoneyPayee::matchKey:
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-              if (exp.indexIn(payeename)) {
+              if (exp.indexIn(payeename) != -1) {
                 qDebug("Found match with '%s' on '%s'", qPrintable(payeename), qPrintable((*it_p).name()));
                 matchMap[exp.matchedLength()] = (*it_p).id();
               }
