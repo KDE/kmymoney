@@ -1168,7 +1168,6 @@ bool InvestmentPage::processInvestLine(const QString &line, MyMoneyStatement &st
       tr.m_strSymbol = m_mapSymbolName.key(txt);   // it's all about getting the right symbol
     }
     tr.m_strSecurity = m_mapSymbolName.value(tr.m_strSymbol); // take name from prepared names to avoid potential name mismatch
-    tr.m_strPayee = tr.m_strSecurity;
 
     // process memo field
     if (m_colTypeNum.value(ColumnMemo) != -1)
