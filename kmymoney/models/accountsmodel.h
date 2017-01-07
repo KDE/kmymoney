@@ -30,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KF5/KItemModels/KRecursiveFilterProxyModel>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -227,7 +229,7 @@ private:
   * @author Cristian Onet 2010
   *
   */
-class AccountsFilterProxyModel : public QSortFilterProxyModel
+class AccountsFilterProxyModel : public KRecursiveFilterProxyModel
 {
   Q_OBJECT
 

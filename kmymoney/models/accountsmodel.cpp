@@ -1061,7 +1061,7 @@ public:
 };
 
 AccountsFilterProxyModel::AccountsFilterProxyModel(QObject *parent /*= 0*/)
-    : QSortFilterProxyModel(parent), d(new Private)
+  : KRecursiveFilterProxyModel(parent), d(new Private)
 {
   setDynamicSortFilter(true);
   setFilterKeyColumn(-1);
