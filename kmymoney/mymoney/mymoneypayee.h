@@ -83,7 +83,8 @@ public:
   typedef enum {
     matchDisabled = 0,
     matchName,
-    matchKey
+    matchKey,
+    matchNameExact
   } payeeMatchType;
 
   MyMoneyPayee();

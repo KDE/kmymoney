@@ -906,12 +906,18 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         bool ignoreCase;
         QStringList keys;
         QStringList::const_iterator it_s;
-        switch ((*it_p).matchData(ignoreCase, keys)) {
+        const MyMoneyPayee::payeeMatchType matchType = (*it_p).matchData(ignoreCase, keys);
+        switch (matchType) {
           case MyMoneyPayee::matchDisabled:
             break;
 
           case MyMoneyPayee::matchName:
+          case MyMoneyPayee::matchNameExact:
             keys << QString("%1").arg(QRegExp::escape((*it_p).name()));
+            if(matchType == MyMoneyPayee::matchNameExact) {
+              keys.clear();
+              keys << QString("^%1$").arg(QRegExp::escape((*it_p).name()));
+            }
             // tricky fall through here
 
           case MyMoneyPayee::matchKey:

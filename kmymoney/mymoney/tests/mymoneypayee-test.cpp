@@ -193,3 +193,16 @@ void MyMoneyPayeeTest::testMatchKeyAllowSpaceAtEnd()
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("payee "));
 }
+
+void MyMoneyPayeeTest::testMatchNameExact()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchNameExact, false, keys);
+  keys = QLatin1String("payee ");
+  QCOMPARE(payee.matchData(ignoreCase, keys), MyMoneyPayee::matchNameExact);
+  QCOMPARE(ignoreCase, false);
+  QVERIFY(keys.isEmpty());
+}

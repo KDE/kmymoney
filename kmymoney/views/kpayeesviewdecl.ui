@@ -6,358 +6,166 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
-    <height>402</height>
+    <width>885</width>
+    <height>567</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QSplitter" name="m_splitter">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="childrenCollapsible">
-        <bool>false</bool>
-       </property>
-       <widget class="QGroupBox" name="groupBox1">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>1</horstretch>
-          <verstretch>1</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="title">
-         <string>Your payees</string>
-        </property>
-        <layout class="QVBoxLayout">
+    <widget class="QSplitter" name="m_splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="childrenCollapsible">
+      <bool>false</bool>
+     </property>
+     <widget class="QGroupBox" name="groupBox1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="title">
+       <string>Your payees</string>
+      </property>
+      <layout class="QVBoxLayout">
+       <item>
+        <layout class="QHBoxLayout">
          <item>
-          <layout class="QHBoxLayout">
-           <item>
-            <widget class="QPushButton" name="m_newButton">
-             <property name="text">
-              <string comment="New payee">New</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="m_renameButton">
-             <property name="text">
-              <string>Ren</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="m_deleteButton">
-             <property name="text">
-              <string>Del</string>
-             </property>
-             <property name="shortcut">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="m_mergeButton">
-             <property name="text">
-              <string>Merge</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QPushButton" name="m_newButton">
+           <property name="text">
+            <string comment="New payee">New</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="m_listTopHLayout">
-           <item>
-            <widget class="KComboBox" name="m_filterBox"/>
-           </item>
-          </layout>
+          <widget class="QPushButton" name="m_renameButton">
+           <property name="text">
+            <string>Ren</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="m_payeesList">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>1</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
+          <widget class="QPushButton" name="m_deleteButton">
+           <property name="text">
+            <string>Del</string>
            </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
+           <property name="shortcut">
+            <string/>
            </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::ExtendedSelection</enum>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_mergeButton">
+           <property name="text">
+            <string>Merge</string>
            </property>
           </widget>
          </item>
         </layout>
-       </widget>
-       <widget class="QTabWidget" name="m_tabWidget">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>2</horstretch>
-          <verstretch>1</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="currentIndex">
-         <number>2</number>
-        </property>
-        <widget class="QWidget" name="tab">
-         <attribute name="title">
-          <string>Transactions</string>
-         </attribute>
-         <layout class="QVBoxLayout">
-          <item>
-           <widget class="QGroupBox" name="transactionGroup">
-            <property name="title">
-             <string>Transactions</string>
-            </property>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="m_listTopHLayout">
+         <item>
+          <widget class="KComboBox" name="m_filterBox"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QListWidget" name="m_payeesList">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QTabWidget" name="m_tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>2</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Transactions</string>
+       </attribute>
+       <layout class="QVBoxLayout">
+        <item>
+         <widget class="QGroupBox" name="transactionGroup">
+          <property name="title">
+           <string>Transactions</string>
+          </property>
+          <layout class="QVBoxLayout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="leftMargin">
+            <number>11</number>
+           </property>
+           <property name="topMargin">
+            <number>11</number>
+           </property>
+           <property name="rightMargin">
+            <number>11</number>
+           </property>
+           <property name="bottomMargin">
+            <number>11</number>
+           </property>
+           <item>
             <layout class="QVBoxLayout">
              <property name="spacing">
               <number>6</number>
              </property>
              <property name="leftMargin">
-              <number>11</number>
+              <number>0</number>
              </property>
              <property name="topMargin">
-              <number>11</number>
+              <number>0</number>
              </property>
              <property name="rightMargin">
-              <number>11</number>
+              <number>0</number>
              </property>
              <property name="bottomMargin">
-              <number>11</number>
+              <number>0</number>
              </property>
              <item>
-              <layout class="QVBoxLayout">
-               <property name="spacing">
-                <number>6</number>
-               </property>
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="KMyMoneyRegister::Register" name="m_register">
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="m_balanceLabel">
-                 <property name="text">
-                  <string>Balance: </string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tab1">
-         <attribute name="title">
-          <string comment="Street address">Address</string>
-         </attribute>
-         <layout class="QVBoxLayout">
-          <item>
-           <widget class="QGroupBox" name="detailsGroup">
-            <property name="title">
-             <string>Payee Information</string>
-            </property>
-            <layout class="QGridLayout">
-             <property name="leftMargin">
-              <number>11</number>
-             </property>
-             <property name="topMargin">
-              <number>11</number>
-             </property>
-             <property name="rightMargin">
-              <number>11</number>
-             </property>
-             <property name="bottomMargin">
-              <number>11</number>
-             </property>
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <item row="3" column="0">
-              <widget class="QLabel" name="TextLabel7">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>90</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string comment="E-mail address">E-Mail:</string>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
+              <widget class="KMyMoneyRegister::Register" name="m_register">
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
+               <column/>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="TextLabel5">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>90</width>
-                 <height>0</height>
-                </size>
-               </property>
+             <item>
+              <widget class="QLabel" name="m_balanceLabel">
                <property name="text">
-                <string>Postal Code:</string>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="TextLabel6">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>90</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Telephone/Fax:</string>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="TextLabel4_2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>90</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Notes</string>
+                <string>Balance: </string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="KLineEdit" name="postcodeEdit"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="KLineEdit" name="telephoneEdit"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="KLineEdit" name="emailEdit"/>
-             </item>
-             <item row="0" column="1">
-              <widget class="KTextEdit" name="addressEdit">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>1</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="KTextEdit" name="notesEdit">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>1</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="TextLabel4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>90</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string comment="Street address">Address:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
                <property name="wordWrap">
                 <bool>false</bool>
@@ -365,236 +173,377 @@
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item>
-           <spacer name="spacer6">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>21</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="TabPage">
-         <attribute name="title">
-          <string>Matching</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QGroupBox" name="m_matchTypeGroupBox">
-            <property name="title">
-             <string>Transaction Matching</string>
-            </property>
-            <layout class="QVBoxLayout" name="horizontalLayout">
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab1">
+       <attribute name="title">
+        <string comment="Street address">Address</string>
+       </attribute>
+       <layout class="QVBoxLayout">
+        <item>
+         <widget class="QGroupBox" name="detailsGroup">
+          <property name="title">
+           <string>Payee Information</string>
+          </property>
+          <layout class="QGridLayout">
+           <property name="leftMargin">
+            <number>11</number>
+           </property>
+           <property name="topMargin">
+            <number>11</number>
+           </property>
+           <property name="rightMargin">
+            <number>11</number>
+           </property>
+           <property name="bottomMargin">
+            <number>11</number>
+           </property>
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item row="3" column="0">
+            <widget class="QLabel" name="TextLabel7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string comment="E-mail address">E-Mail:</string>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="TextLabel5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Postal Code:</string>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="TextLabel6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Telephone/Fax:</string>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="TextLabel4_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Notes</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="KLineEdit" name="postcodeEdit"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="KLineEdit" name="telephoneEdit"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="KLineEdit" name="emailEdit"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="KTextEdit" name="addressEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="KTextEdit" name="notesEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="TextLabel4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string comment="Street address">Address:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>21</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="TabPage">
+       <attribute name="title">
+        <string>Matching</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="m_matchTypeGroupBox">
+          <property name="title">
+           <string>Transaction Matching</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,1">
              <item>
-              <widget class="QRadioButton" name="radioNoMatch">
+              <widget class="QLabel" name="label">
                <property name="text">
-                <string>No matching</string>
+                <string>Match method</string>
                </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">m_matchType</string>
-               </attribute>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioNameMatch">
-               <property name="text">
-                <string>Match on Payee name</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">m_matchType</string>
-               </attribute>
-              </widget>
+              <widget class="QComboBox" name="matchTypeCombo"/>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioKeyMatch">
+              <widget class="QCheckBox" name="checkMatchIgnoreCase">
                <property name="text">
-                <string>Match on a name listed below</string>
+                <string>Ignore Case</string>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">m_matchType</string>
-               </attribute>
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="title">
-             <string>List of matching names</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="KEditListWidget" name="matchKeyEditList">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>1</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="whatsThis">
-                <string>This list contains the names that will match this payee if a transaction is imported from an external source. Keep in mind, that you can specify regular expressions here.</string>
-               </property>
-               <property name="title" stdset="0">
-                <string>List of matching names</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkMatchIgnoreCase">
-            <property name="text">
-             <string>Ignore Case</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="spacer7">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="TabPage2">
-         <attribute name="title">
-          <string>Default Account</string>
-         </attribute>
-         <layout class="QVBoxLayout">
-          <item>
-           <widget class="QCheckBox" name="checkEnableDefaultCategory">
-            <property name="text">
-             <string>Use the default category for
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>List of matching names</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="KEditListWidget" name="matchKeyEditList">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>1</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="whatsThis">
+                 <string>This list contains the names that will match this payee if a transaction is imported from an external source. Keep in mind, that you can specify regular expressions here.</string>
+                </property>
+                <property name="title" stdset="0">
+                 <string>List of matching names</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="TabPage2">
+       <attribute name="title">
+        <string>Default Account</string>
+       </attribute>
+       <layout class="QVBoxLayout">
+        <item>
+         <widget class="QCheckBox" name="checkEnableDefaultCategory">
+          <property name="text">
+           <string>Use the default category for
 new transactions with this payee</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelDefaultCategory">
+            <property name="text">
+             <string>Default category:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item>
-           <layout class="QGridLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelDefaultCategory">
-              <property name="text">
-               <string>Default category:</string>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="KMyMoneyAccountCombo" name="comboDefaultCategory"/>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="buttonSuggestACategory">
-              <property name="text">
-               <string>Suggest a category</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <item row="0" column="1">
+           <widget class="KMyMoneyAccountCombo" name="comboDefaultCategory"/>
           </item>
-          <item>
-           <spacer name="spacer5">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="buttonSuggestACategory">
+            <property name="text">
+             <string>Suggest a category</string>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>31</height>
-             </size>
-            </property>
-           </spacer>
+           </widget>
           </item>
          </layout>
-        </widget>
-        <widget class="QWidget" name="tabPayeeIdentifiers">
-         <attribute name="title">
-          <string>Account Numbers</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="KPayeeIdentifierView" name="payeeIdentifiers" native="true"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
+        </item>
+        <item>
+         <spacer name="spacer5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>31</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabPayeeIdentifiers">
+       <attribute name="title">
+        <string>Account Numbers</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="KPayeeIdentifierView" name="payeeIdentifiers" native="true"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="m_helpButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Help</string>
+       </property>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout">
-       <item>
-        <widget class="QPushButton" name="m_helpButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Help</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="spacer14">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>260</width>
-           <height>21</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="m_updateButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <spacer name="spacer14">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>260</width>
+         <height>21</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_updateButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -602,19 +551,6 @@ new transactions with this payee</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-  </customwidget>
   <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
@@ -626,9 +562,25 @@ new transactions with this payee</string>
    <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyRegister::Register</class>
+   <extends>QTableWidget</extends>
+   <header>register.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KPayeeIdentifierView</class>
@@ -642,7 +594,4 @@ new transactions with this payee</string>
  </includes>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="m_matchType"/>
- </buttongroups>
 </ui>

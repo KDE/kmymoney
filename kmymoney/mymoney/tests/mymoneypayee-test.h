@@ -30,6 +30,7 @@ private slots:
   void testMatchKeyDisallowMultipleSpace();
   void testMatchKeyAllowSpaceAtStart();
   void testMatchKeyAllowSpaceAtEnd();
+  void testMatchNameExact();
 };
 
 #endif

@@ -196,8 +196,11 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringLi
 
   if (m_matchingEnabled) {
     type = m_usingMatchKey ? matchKey : matchName;
-    if (type == matchKey)
+    if (type == matchKey) {
       keys = m_matchKey.split(';');
+    } else if (m_matchKey.compare(QLatin1String("^$")) == 0) {
+      type = matchNameExact;
+    }
   }
 
   return type;
@@ -223,6 +226,8 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
       QRegExp validKeyRegExp("[^ ]");
       QStringList filteredKeys = keys.filter(validKeyRegExp);
       m_matchKey = filteredKeys.join(";");
+    } else if(type == matchNameExact) {
+      m_matchKey = QLatin1String("^$");
     }
   }
 }
