@@ -67,6 +67,7 @@ public:
 protected:
   void constructAccountTable();
   void constructTransactionTable();
+  void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
   void constructPerformanceRow(const ReportAccount& account, TableRow& result) const;
   void constructSplitsTable();
 

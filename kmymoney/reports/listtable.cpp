@@ -260,9 +260,10 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["periodicpayment"] = i18n("Periodic Payment");
   i18nHeaders["finalpayment"] = i18n("Final Payment");
   i18nHeaders["currentbalance"] = i18n("Current Balance");
+  i18nHeaders["capitalgain"] = i18n("Capital Gain");
 
   // the list of columns which represent money, so we can display them correctly
-  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal").split(',');
+  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal,capitalgain").split(',');
 
   // the list of columns which represent shares, which is like money except the
   // transaction currency will not be displayed

@@ -377,6 +377,10 @@ void QueryTable::init()
     m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment";
     m_subtotal = "endingbal";
   }
+  if (qc & MyMoneyReport::eQCcapitalgain) {
+    m_columns += ",buys,sells";
+    m_subtotal = "capitalgain";
+  }
   if (qc & MyMoneyReport::eQCloan) {
     m_columns += ",payment,interest,fees";
     m_postcolumns = "balance";
@@ -1078,6 +1082,112 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   result["endingbal"] = endingBal.toString();
 }
 
+void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow& result) const
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneySecurity security;
+  MyMoneyMoney price;
+  MyMoneyMoney sellValue;
+  MyMoneyMoney buyValue;
+  MyMoneyMoney sellShares;
+  MyMoneyMoney buyShares;
+
+  //
+  // Calculate capital gain
+  //
+
+  // The following columns are created:
+  //    Account, Buys, Sells, Capital Gain
+
+  MyMoneyReport report = m_config;
+  QDate startingDate;
+  QDate endingDate;
+  QDate newStartingDate;
+  QDate newEndingDate;
+  report.validDateRange(startingDate, endingDate);
+  newStartingDate = startingDate;
+  newEndingDate = endingDate;
+  MyMoneyMoney endingShares = file->balance(account.id(), endingDate); // get how many shares there are over zero value
+
+  bool reportedDateRange = true;  // flag marking sell transactions between startingDate and endingDate
+  report.setReportAllSplits(false);
+  report.setConsiderCategory(true);
+  report.clearAccountFilter();
+  report.addAccount(account.id());
+
+  do {
+    QList<MyMoneyTransaction> transactions = file->transactionList(report);
+    for (QList<MyMoneyTransaction>::const_reverse_iterator  it_t = transactions.crbegin(); it_t != transactions.crend(); ++it_t) {
+      MyMoneySplit shareSplit = (*it_t).splitByAccount(account.id());
+      MyMoneySplit assetAccountSplit;
+      QList<MyMoneySplit> feeSplits;
+      QList<MyMoneySplit> interestSplits;
+      MyMoneySecurity currency;
+      MyMoneySplit::investTransactionTypeE transactionType;
+      KMyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      //get price for the day of the transaction if we have to calculate base currency
+      //we are using the value of the split which is in deep currency
+      if (m_config.isConvertCurrency())
+        price = account.baseCurrencyPrice((*it_t).postDate()); //we only need base currency because the value is in deep currency
+      else
+        price = MyMoneyMoney::ONE;
+
+      MyMoneyMoney value = assetAccountSplit.value() * price;
+      MyMoneyMoney shares = shareSplit.shares();
+
+      if (transactionType == MyMoneySplit::BuyShares) {
+        if (endingShares.isZero()) {    // add sold shares
+          if (buyShares + shares > sellShares.abs()) { // add partially sold shares
+            buyValue += (((sellShares.abs() - buyShares)) / shares) * value;
+            buyShares = sellShares.abs();
+          } else {                      // add wholly sold shares
+            buyValue += value;
+            buyShares += shares;
+          }
+        } else if (endingShares >= shares) { // substract not-sold shares
+          endingShares -= shares;
+        } else {                        // substract partially not-sold shares
+          buyValue += ((shares - endingShares) / shares) * value;
+          buyShares += (shares - endingShares);
+          endingShares = MyMoneyMoney(0);
+        }
+      } else if (transactionType == MyMoneySplit::SellShares && reportedDateRange) {
+        sellValue += value;
+        sellShares += shares;
+      } else if (transactionType == MyMoneySplit::SplitShares) { // shares variable is denominator of split ratio here
+        sellShares /= shares;
+        buyShares /= shares;
+      } else if (transactionType == MyMoneySplit::AddShares) { // added shares, when sold give 100% capital gain
+        if (endingShares.isZero()) {    // add added shares
+          if (buyShares + shares > sellShares.abs()) { // add partially added shares
+            buyShares = sellShares.abs();
+          } else {                      // add wholly added shares
+            buyShares += shares;
+          }
+        } else if (endingShares >= shares) { // substract not-added shares
+          endingShares -= shares;
+        } else {                        // substract partially not-added shares
+          buyShares += (shares - endingShares);
+          endingShares = MyMoneyMoney(0);
+        }
+      } else if (transactionType == MyMoneySplit::RemoveShares && reportedDateRange) { // removed shares give no value in return so no capital gain on them
+        sellShares += shares;
+      }
+    }
+    reportedDateRange = false;
+    newEndingDate = newStartingDate;
+    newStartingDate = newStartingDate.addYears(-1);
+    report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
+  } while (!sellShares.isZero() && account.openingDate() <= newEndingDate && sellShares.abs() > buyShares.abs());
+
+  result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
+  result["buys"] = buyValue.toString();
+  result["sells"] = sellValue.toString();
+  result["capitalgain"] = (buyValue + sellValue).toString();
+
+  report.setDateFilter(startingDate, endingDate); // reset data filter for next security
+}
+
 void QueryTable::constructAccountTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -1149,6 +1259,8 @@ void QueryTable::constructAccountTable()
 
       if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
         constructPerformanceRow(account, qaccountrow);
+      } else if (m_config.queryColumns() == MyMoneyReport::eQCcapitalgain) {
+        constructCapitalGainRow(account, qaccountrow);
       } else
         qaccountrow["equitytype"].clear();
 

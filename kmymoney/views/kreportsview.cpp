@@ -1320,6 +1320,27 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setInvestmentsOnly(true);
+
+    list.push_back(MyMoneyReport(
+                     MyMoneyReport::eAccountByTopAccount,
+                     MyMoneyReport::eQCcapitalgain,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Capital Gains by Account"),
+                     i18n("Default Report")
+                   ));
+    list.back().setInvestmentsOnly(true);
+
+    list.push_back(MyMoneyReport(
+                     MyMoneyReport::eEquityType,
+                     MyMoneyReport::eQCcapitalgain,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Capital Gains by Type"),
+                     i18n("Default Report")
+                   ));
+    list.back().setInvestmentsOnly(true);
+
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
                      MyMoneyReport::eMonths,

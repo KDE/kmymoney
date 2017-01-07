@@ -62,7 +62,7 @@ public:
 
   // if you add bits to this bitmask, start with the value currently assigned to eQCend and update its value afterwards
   // also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
-  enum EQueryColumns { eQCnone = 0x0, eQCbegin = 0x1, eQCnumber = 0x1, eQCpayee = 0x2, eQCcategory = 0x4, eQCtag = 0x8, eQCmemo = 0x10, eQCaccount = 0x20, eQCreconciled = 0x40, eQCaction = 0x80, eQCshares = 0x100, eQCprice = 0x200, eQCperformance = 0x400, eQCloan = 0x800, eQCbalance = 0x1000, eQCend = 0x2000 };
+  enum EQueryColumns { eQCnone = 0x0, eQCbegin = 0x1, eQCnumber = 0x1, eQCpayee = 0x2, eQCcategory = 0x4, eQCtag = 0x8, eQCmemo = 0x10, eQCaccount = 0x20, eQCreconciled = 0x40, eQCaction = 0x80, eQCshares = 0x100, eQCprice = 0x200, eQCperformance = 0x400, eQCloan = 0x800, eQCbalance = 0x1000, eQCcapitalgain = 0x2000, eQCend = 0x4000 };
 
   enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
