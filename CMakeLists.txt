@@ -124,7 +124,7 @@ if(ENABLE_KBANKING)
   find_package(Qt5QuickWidgets) # Includes Qt5Qml
 
   find_package(AQBANKING 5.6.5)
-  find_package(GWENHYWFAR 4.15.3)
+  find_package(gwenhywfar 4.15.3)
   find_package(gwengui-cpp)
   find_package(gwengui-qt5)
   if (AQBANKING_FOUND AND gwengui-cpp_FOUND AND gwengui-qt5_FOUND AND Qt5QuickWidgets_FOUND)
