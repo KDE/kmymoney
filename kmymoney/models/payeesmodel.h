@@ -1,8 +1,8 @@
 /***************************************************************************
-                             costcentermodel.h
+                             payeesmodel.h
                              -------------------
-    begin                : Sun Dec 27 2015
-    copyright            : (C) 2015 by Thomas Baumgart
+    begin                : Mon Oct 03 2016
+    copyright            : (C) 2016 by Thomas Baumgart
     email                : Thomas Baumgart <tbaumgart@kde.org>
  ***************************************************************************/
 
@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COSTCENTERMODEL_H
-#define COSTCENTERMODEL_H
+#ifndef PAYEESMODEL_H
+#define PAYEESMODEL_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -33,17 +33,16 @@
 
 /**
   */
-class CostCenterModel : public QAbstractListModel
+class PayeesModel : public QAbstractListModel
 {
   Q_OBJECT
 
 public:
-  explicit CostCenterModel(QObject* parent = 0);
-  virtual ~CostCenterModel();
+  explicit PayeesModel(QObject* parent = 0);
+  virtual ~PayeesModel();
 
   enum Roles {
-    CostCenterIdRole = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
-    ShortNameRole,
+    PayeeIdRole = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem,
   };
 
   virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
@@ -71,5 +70,5 @@ private:
   QScopedPointer<Private> d;
 };
 
-#endif // COSTCENTERMODEL_H
+#endif // PAYEESMODEL_H
 

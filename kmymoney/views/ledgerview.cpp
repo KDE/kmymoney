@@ -45,29 +45,24 @@ public:
   , filterModel(new LedgerSortFilterProxyModel(parent))
   , adjustableColumn(LedgerModel::DetailColumn)
   , adjustingColumn(false)
-  , invertSign(false)
+  , showValuesInverted(false)
   , balanceCalculationPending(false)
   {
-    filterModel->setFilterRole(LedgerModel::AccountIdRole);
+    filterModel->setFilterRole(LedgerRole::AccountIdRole);
     filterModel->setSourceModel(Models::instance()->ledgerModel());
   }
 
   void recalculateBalances()
   {
     QModelIndex start = filterModel->index(0, 0);
-    QModelIndexList indexes = filterModel->match(start, LedgerModel::AccountIdRole, account.id(), -1);
+    QModelIndexList indexes = filterModel->match(start, LedgerRole::AccountIdRole, account.id(), -1);
     MyMoneyMoney balance;
     Q_FOREACH(QModelIndex index, indexes) {
-      if(invertSign) {
-        balance -= filterModel->data(index, LedgerModel::SplitSharesRole).value<MyMoneyMoney>();
+      if(showValuesInverted) {
+        balance -= filterModel->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>();
       } else {
-        balance += filterModel->data(index, LedgerModel::SplitSharesRole).value<MyMoneyMoney>();
+        balance += filterModel->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>();
       }
-      const int fraction = account.fraction();
-      if(fraction < 0) {
-        // qDebug() << "Hit";
-      }
-      // qDebug() << "Account fraction" << fraction;
       QString txt = balance.formatMoney(account.fraction());
       QModelIndex dispIndex = filterModel->index(index.row(), LedgerModel::BalanceColumn);
       filterModel->setData(dispIndex, txt, Qt::DisplayRole);
@@ -82,7 +77,7 @@ public:
   MyMoneyAccount              account;
   int                         adjustableColumn;
   bool                        adjustingColumn;
-  bool                        invertSign;
+  bool                        showValuesInverted;
   bool                        balanceCalculationPending;
 };
 
@@ -124,15 +119,14 @@ LedgerView::~LedgerView()
   delete d;
 }
 
-bool LedgerView::isSignInverted() const
+bool LedgerView::showValuesInverted() const
 {
-  return d->invertSign;
+  return d->showValuesInverted;
 }
 
 void LedgerView::setAccount(const MyMoneyAccount& acc)
 {
   d->account = acc;
-  d->invertSign = false;
   switch(acc.accountType()) {
     case MyMoneyAccount::Investment:
       break;
@@ -151,17 +145,22 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
       break;
   }
 
+  d->showValuesInverted = false;
   if(acc.accountGroup() == MyMoneyAccount::Liability
   || acc.accountGroup() == MyMoneyAccount::Income) {
-    d->invertSign = true;
+    d->showValuesInverted = true;
   }
 
-  d->filterModel->setFilterRole(LedgerModel::AccountIdRole);
+  d->filterModel->setFilterRole(LedgerRole::AccountIdRole);
   d->filterModel->setFilterFixedString(acc.id());
-  d->filterModel->setSortRole(LedgerModel::PostDateRole);
+  d->filterModel->setAccountType(acc.accountType());
+  d->filterModel->setSortRole(LedgerRole::PostDateRole);
   d->filterModel->sort(LedgerModel::DateColumn);
 
-  // if balance calculation has not been trigger, then run it immediately
+  // set the delegate for the markers by finding them in the model
+  /// @todo logic needs to be implemented
+
+  // if balance calculation has not been triggered, then run it immediately
   if(!d->balanceCalculationPending) {
     recalculateBalances();
   }
@@ -172,7 +171,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
     int row = d->filterModel->rowCount()-1;
     while(row >= 0) {
       QModelIndex index = d->filterModel->index(row, 0);
-      if(index.model()->data(index, LedgerModel::ScheduleIdRole).toString().isEmpty()) {
+      if(index.model()->data(index, LedgerRole::ScheduleIdRole).toString().isEmpty()) {
         setCurrentIndex(index);
         selectRow(index.row());
         scrollTo(index, PositionAtBottom);
@@ -186,7 +185,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
 QString LedgerView::accountId() const
 {
   QString id;
-  if(d->filterModel->filterRole() == LedgerModel::AccountIdRole)
+  if(d->filterModel->filterRole() == LedgerRole::AccountIdRole)
     id = d->account.id();
   return id;
 }
@@ -234,8 +233,6 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
       setSpan(index.row(), 0, 1, horizontalHeader()->count());
       QModelIndex editIndex = model()->index(index.row(), 0);
       rc = QTableView::edit(editIndex, trigger, event);
-
-      qDebug() << selectionModel()->selectedRows();
 
       // make sure that the row gets resized according to the requirements of the editor
       // and is completely visible
@@ -297,8 +294,7 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
   if(current.isValid()) {
     QModelIndex index = current.model()->index(current.row(), 0);
     scrollTo(index, EnsureVisible);
-    QString id = current.model()->data(index, LedgerModel::TransactionSplitIdRole).toString();
-    qDebug() << "Select transaction" << id;
+    QString id = current.model()->data(index, LedgerRole::TransactionSplitIdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
     if(id.isEmpty() || id.endsWith('-')) {

@@ -48,12 +48,12 @@ public:
   Private()
   : m_editor(0)
   , m_editorRow(-1)
-  , m_inverseViewOfAmounts(false)
+  , m_showValuesInverted(false)
   {}
 
   NewSplitEditor*               m_editor;
   int                           m_editorRow;
-  bool                          m_inverseViewOfAmounts;
+  bool                          m_showValuesInverted;
 };
 
 
@@ -87,7 +87,8 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
 
       /**
        * @todo replace the following three lines with the creation of a special
-       * editor that can handle multiple splits at once
+       * editor that can handle multiple splits at once or show a message to the user
+       * that this is not possible
        */
       d->m_editor = 0;
       SplitDelegate* const that = const_cast<SplitDelegate* const>(this);
@@ -151,8 +152,8 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
 
   QStringList lines;
   if(index.column() == SplitModel::DetailColumn) {
-    lines << index.model()->data(index, SplitModel::AccountRole).toString();
-    lines << index.model()->data(index, SplitModel::SingleLineMemoRole).toString();
+    lines << index.model()->data(index, LedgerRole::AccountRole).toString();
+    lines << index.model()->data(index, LedgerRole::SingleLineMemoRole).toString();
     lines.removeAll(QString());
   }
 
@@ -306,8 +307,8 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   if(view) {
     QModelIndex currentIndex = view->currentIndex();
     if(currentIndex.isValid()) {
-      QString currentId = currentIndex.model()->data(currentIndex, SplitModel::TransactionSplitIdRole).toString();
-      QString myId = index.model()->data(index, SplitModel::TransactionSplitIdRole).toString();
+      QString currentId = currentIndex.model()->data(currentIndex, LedgerRole::TransactionSplitIdRole).toString();
+      QString myId = index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString();
       fullDisplay = (currentId == myId);
     }
   }
@@ -332,9 +333,9 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   int rows = 1;
   if(fullDisplay) {
     initStyleOption(&opt, index);
-    QString payee = index.data(SplitModel::PayeeNameRole).toString();
-    QString account = index.data(SplitModel::AccountRole).toString();
-    QString memo = index.data(SplitModel::SingleLineMemoRole).toString();
+    QString payee = index.data(LedgerRole::PayeeNameRole).toString();
+    QString account = index.data(LedgerRole::AccountRole).toString();
+    QString memo = index.data(LedgerRole::SingleLineMemoRole).toString();
 
     rows = (payee.length() > 0 ? 1 : 0) + (account.length() > 0 ? 1 : 0) + (memo.length() > 0 ? 1 : 0);
     // make sure we show at least one row
@@ -364,8 +365,6 @@ void SplitDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionView
   r.setWidth(opt.widget->width() - ofs);
   editor->setGeometry(r);
   editor->update();
-  // int flags = editor->windowFlags();
-  // qDebug() << "updateEditorGeometry" << r << QString("%1").arg(flags, 8, 16, QChar('0'));
 }
 
 void SplitDelegate::endEdit()
@@ -385,11 +384,12 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
   NewSplitEditor* editor = qobject_cast<NewSplitEditor*>(editWidget);
 
   if(model && editor) {
-    editor->setInversedViewOfAmounts(d->m_inverseViewOfAmounts);
-    editor->setMemo(model->data(index, SplitModel::MemoRole).toString());
-    editor->setAccountId(model->data(index, SplitModel::AccountIdRole).toString());
-    editor->setAmount(model->data(index, SplitModel::SplitValueRole).value<MyMoneyMoney>());
-    editor->setCostCenterId(model->data(index, SplitModel::CostCenterIdRole).toString());
+    editor->setShowValuesInverted(d->m_showValuesInverted);
+    editor->setMemo(model->data(index, LedgerRole::MemoRole).toString());
+    editor->setAccountId(model->data(index, LedgerRole::AccountIdRole).toString());
+    editor->setAmount(model->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>());
+    editor->setCostCenterId(model->data(index, LedgerRole::CostCenterIdRole).toString());
+    editor->setNumber(model->data(index, LedgerRole::NumberRole).toString());
   }
 }
 
@@ -397,11 +397,30 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
 {
   NewSplitEditor* splitEditor = qobject_cast< NewSplitEditor* >(editor);
   if(splitEditor) {
-    QString transactionSplitId = splitEditor->splitId();
-    qDebug() << "SplitDelegate::setModelData" << transactionSplitId;
-    model->setData(index, splitEditor->memo(), SplitModel::MemoRole);
-    model->setData(index, splitEditor->accountId(), SplitModel::AccountIdRole);
-    model->setData(index, splitEditor->costCenterId(), SplitModel::CostCenterIdRole);
+    model->setData(index, splitEditor->number(), LedgerRole::NumberRole);
+    model->setData(index, splitEditor->memo(), LedgerRole::MemoRole);
+    model->setData(index, splitEditor->accountId(), LedgerRole::AccountIdRole);
+    model->setData(index, splitEditor->costCenterId(), LedgerRole::CostCenterIdRole);
+    model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), LedgerRole::SplitSharesRole);
+    model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), LedgerRole::SplitValueRole);
+
+    const QString transactionCommodity = model->data(index, LedgerRole::TransactionCommodityRole).toString();
+    QModelIndex accIndex = Models::instance()->accountsModel()->accountById(splitEditor->accountId());
+    if(accIndex.isValid()) {
+      MyMoneyAccount acc = Models::instance()->accountsModel()->data(accIndex, AccountsModel::AccountRole).value<MyMoneyAccount>();
+      if(transactionCommodity != acc.currencyId()) {
+#if 0
+        ///  @todo call KCurrencyConversionDialog and update the model data
+        MyMoneyMoney value;
+        model->setData(index, QVariant::fromValue<MyMoneyMoney>(value), SplitModel::SplitValueRole);
+#endif
+      }
+    } else {
+      qWarning() << "Unable to get account index in SplitDelegate::setModelData";
+    }
+
+    // the following forces to send a dataChanged signal
+    model->setData(index, QVariant(), LedgerRole::EmitDataChangedRole);
 
     // in case this was a new split, we nned to create a new empty one
     SplitModel* splitModel = qobject_cast<SplitModel*>(model);
@@ -420,12 +439,12 @@ bool SplitDelegate::eventFilter(QObject* o, QEvent* event)
   return QAbstractItemDelegate::eventFilter(o, event);
 }
 
-void SplitDelegate::setInversedViewOfAmounts(bool inverse)
+void SplitDelegate::setShowValuesInverted(bool inverse)
 {
-  d->m_inverseViewOfAmounts = inverse;
+  d->m_showValuesInverted = inverse;
 }
 
-bool SplitDelegate::isInversedViewOfAmounts()
+bool SplitDelegate::showValuesInverted()
 {
-  return d->m_inverseViewOfAmounts;
+  return d->m_showValuesInverted;
 }

@@ -174,7 +174,6 @@ QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewIte
 
     } else {
       d->m_editor = new NewTransactionEditor(parent, view->accountId());
-      d->m_editor->setInvertSign(view->isSignInverted());
     }
 
     if(d->m_editor) {
@@ -226,25 +225,36 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     return;
   }
 
-  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
+  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
   const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
+  const bool selected = opt.state & QStyle::State_Selected;
 
   QStringList lines;
   if(index.column() == LedgerModel::DetailColumn) {
-    lines << index.model()->data(index, LedgerModel::PayeeNameRole).toString();
-    lines << index.model()->data(index, LedgerModel::CounterAccountRole).toString();
-    lines << index.model()->data(index, LedgerModel::SingleLineMemoRole).toString();
+    lines << index.model()->data(index, LedgerRole::PayeeNameRole).toString();
+    if(selected) {
+      lines << index.model()->data(index, LedgerRole::CounterAccountRole).toString();
+      lines << index.model()->data(index, LedgerRole::SingleLineMemoRole).toString();
+
+    } else {
+      if(lines.at(0).isEmpty()) {
+        lines.clear();
+        lines << index.model()->data(index, LedgerRole::SingleLineMemoRole).toString();
+      }
+      if(lines.at(0).isEmpty()) {
+        lines << index.model()->data(index, LedgerRole::CounterAccountRole).toString();
+      }
+    }
     lines.removeAll(QString());
   }
 
-  const bool erroneous = index.model()->data(index, LedgerModel::ErroneousRole).toBool();
-  const bool selected = opt.state & QStyle::State_Selected;
+  const bool erroneous = index.model()->data(index, LedgerRole::ErroneousRole).toBool();
 
   // draw the text items
   if(!opt.text.isEmpty() || !lines.isEmpty()) {
 
     // check if it is a scheduled transaction and display it as inactive
-    if(!index.model()->data(index, LedgerModel::ScheduleIdRole).toString().isEmpty()) {
+    if(!index.model()->data(index, LedgerRole::ScheduleIdRole).toString().isEmpty()) {
       opt.state &= ~QStyle::State_Enabled;
     }
 
@@ -273,7 +283,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     // collect data for the various colums
     if(index.column() == LedgerModel::DetailColumn) {
       for(int i = 0; i < lines.count(); ++i) {
-        painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
+        painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 2) * i, 0, 0), opt.displayAlignment, lines[i]);
       }
 
     } else {
@@ -397,8 +407,8 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   if(view) {
     QModelIndex currentIndex = view->currentIndex();
     if(currentIndex.isValid()) {
-      QString currentId = currentIndex.model()->data(currentIndex, LedgerModel::TransactionSplitIdRole).toString();
-      QString myId = index.model()->data(index, LedgerModel::TransactionSplitIdRole).toString();
+      QString currentId = currentIndex.model()->data(currentIndex, LedgerRole::TransactionSplitIdRole).toString();
+      QString myId = index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString();
       fullDisplay = (currentId == myId);
     }
   }
@@ -421,21 +431,22 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   }
 
   int rows = 1;
+  initStyleOption(&opt, index);
+  size = QSize(100, (opt.fontMetrics.lineSpacing()));
   if(fullDisplay) {
-    initStyleOption(&opt, index);
-    QString payee = index.data(LedgerModel::PayeeNameRole).toString();
-    QString counterAccount = index.data(LedgerModel::CounterAccountRole).toString();
-    QString memo = index.data(LedgerModel::SingleLineMemoRole).toString();
+    QString payee = index.data(LedgerRole::PayeeNameRole).toString();
+    QString counterAccount = index.data(LedgerRole::CounterAccountRole).toString();
+    QString memo = index.data(LedgerRole::SingleLineMemoRole).toString();
 
     rows = (payee.length() > 0 ? 1 : 0) + (counterAccount.length() > 0 ? 1 : 0) + (memo.length() > 0 ? 1 : 0);
     // make sure we show at least one row
     if(!rows) {
       rows = 1;
     }
+    // leave a few pixels as margin for each row
+    size.setHeight((size.height() + 5) * rows);
   }
 
-  // leave a 5 pixel margin for each row
-  size = QSize(100, (opt.fontMetrics.lineSpacing() + 5) * rows);
   return size;
 }
 
@@ -479,3 +490,18 @@ bool LedgerDelegate::eventFilter(QObject* o, QEvent* event)
   return QAbstractItemDelegate::eventFilter(o, event);
 }
 
+void LedgerDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index) const
+{
+  NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
+  if(editor) {
+    editor->loadTransaction(index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString());
+  }
+}
+
+void LedgerDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* model, const QModelIndex& index) const
+{
+  NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
+  if(editor) {
+    editor->saveTransaction();
+  }
+}

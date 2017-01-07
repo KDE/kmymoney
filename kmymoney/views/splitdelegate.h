@@ -55,8 +55,8 @@ public:
    */
   virtual int editorRow() const;
 
-  void setInversedViewOfAmounts(bool inverse);
-  bool isInversedViewOfAmounts();
+  void setShowValuesInverted(bool inverse);
+  bool showValuesInverted();
 
   static void setErroneousColor(const QColor& color);
   static void setImportedColor(const QColor& color);

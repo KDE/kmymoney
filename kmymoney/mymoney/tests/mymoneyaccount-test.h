@@ -47,8 +47,6 @@ private slots:
   void specialAccountTypes_data();
   void addReconciliation();
   void reconciliationHistory();
-  void amountType();
-  void amountType_data();
 };
 
 #endif

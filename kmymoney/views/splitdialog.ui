@@ -552,7 +552,7 @@
        </item>
        <item row="2" column="0">
         <property name="text">
-         <string>Transaction&amp;nbsp;amount</string>
+         <string>Transaction amount</string>
         </property>
         <property name="textAlignment">
          <set>AlignRight|AlignVCenter</set>
@@ -587,6 +587,9 @@
       </property>
       <item>
        <widget class="QPushButton" name="newSplitButton">
+        <property name="toolTip">
+         <string>Create a new split</string>
+        </property>
         <property name="text">
          <string>New</string>
         </property>
@@ -607,6 +610,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="mergeButton">
+        <property name="toolTip">
+         <string>Merges splits with the same category to one split</string>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In case you have multiple split entries to the same category and you like to keep them as a single split, press this button. The amount for identical categories will be added and stored in a single split for that category.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>&amp;Merge</string>
         </property>
@@ -614,6 +623,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="deleteZeroButton">
+        <property name="toolTip">
+         <string>Removes all splits that have a value of zero</string>
+        </property>
         <property name="text">
          <string>Delete &amp;Zero</string>
         </property>
@@ -628,6 +640,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="deleteAllButton">
+        <property name="toolTip">
+         <string>Clear all splits</string>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use this to delete all splits of this transaction.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Delete &amp;All</string>
         </property>

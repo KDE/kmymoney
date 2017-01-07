@@ -39,11 +39,21 @@ class SplitDialog : public QDialog
 {
   Q_OBJECT
 public:
-  explicit SplitDialog(const MyMoneyAccount& account, NewTransactionEditor* parent, Qt::WindowFlags f = 0);
+  explicit SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& mainAmount, NewTransactionEditor* parent, Qt::WindowFlags f = 0);
   virtual ~SplitDialog();
+
 
   void setModel(QAbstractItemModel* model);
   void setAccountId(const QString& id);
+
+  /**
+   * Returns the amount for the transaction.
+   */
+  MyMoneyMoney transactionAmount() const;
+
+public Q_SLOTS:
+  virtual void accept();
+  virtual int exec();
 
 private Q_SLOTS:
   void adjustSummary();
@@ -52,6 +62,19 @@ private Q_SLOTS:
   void enableButtons();
 
   void newSplit();
+
+protected Q_SLOTS:
+  void deleteSelectedSplits();
+  void deleteAllSplits();
+  void deleteZeroSplits();
+  void mergeSplits();
+  void selectionChanged();
+  void updateButtonState();
+
+protected:
+  virtual void resizeEvent(QResizeEvent* ev);
+  void adjustSummaryWidth();
+
 private:
   class Private;
   QScopedPointer<Private> d;

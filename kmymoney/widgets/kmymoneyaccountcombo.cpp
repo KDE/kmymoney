@@ -50,6 +50,7 @@ public:
   Private(KMyMoneyAccountCombo* q)
     : m_q(q)
     , m_popupView(0)
+    , m_inMakeCompletion(false)
   {
     m_q->setInsertPolicy(QComboBox::NoInsert);
     m_q->setMinimumWidth(m_q->fontMetrics().width(QLatin1Char('W')) * 15);
@@ -59,6 +60,7 @@ public:
   KMyMoneyAccountCombo*           m_q;
   QTreeView*                      m_popupView;
   QString                         m_lastSelectedAccount;
+  bool                            m_inMakeCompletion;
 
   QString fullAccountName(const QAbstractItemModel* model, const QModelIndex& index, bool includeMainCategory = false) const;
   void selectFirstMatchingItem();
@@ -88,30 +90,32 @@ QString KMyMoneyAccountCombo::Private::fullAccountName(const QAbstractItemModel*
 
 void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
 {
-  for (int i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
-    QModelIndex childIndex = m_q->model()->index(i, 0);
-    if (m_q->model()->hasChildren(childIndex)) {
-      // search the first leaf
-      do {
-        childIndex = m_q->model()->index(0, 0, childIndex);
-      } while(m_q->model()->hasChildren(childIndex));
+  if(m_popupView) {
+    bool isBlocked = m_popupView->blockSignals(true);
+    m_popupView->setCurrentIndex(QModelIndex());
+    for (int i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
+      QModelIndex childIndex = m_q->model()->index(i, 0);
+      if (m_q->model()->hasChildren(childIndex)) {
+        // search the first leaf
+        do {
+          childIndex = m_q->model()->index(0, 0, childIndex);
+        } while(m_q->model()->hasChildren(childIndex));
 
-      // make it the current selection
-      bool isBlocked = m_popupView->blockSignals(true);
-      m_popupView->setCurrentIndex(childIndex);
-      m_popupView->blockSignals(isBlocked);
-      break;
+        // make it the current selection if it's selectable
+        if(m_q->model()->flags(childIndex) & Qt::ItemIsSelectable) {
+          m_popupView->setCurrentIndex(childIndex);
+        }
+        break;
+      }
     }
+    m_popupView->blockSignals(isBlocked);
   }
 }
 
 
 
 
-
-
-
-KMyMoneyAccountCombo::KMyMoneyAccountCombo(QAbstractItemModel *model, QWidget *parent/* = 0*/)
+KMyMoneyAccountCombo::KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget *parent)
   : KComboBox(parent)
   , d(new Private(this))
 {
@@ -183,6 +187,20 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
       if(forLineEdit) {
         return lineEdit()->event(e);
       }
+    } else if(e->type() == QEvent::KeyRelease) {
+      QKeyEvent* kev = static_cast<QKeyEvent*>(e);
+      switch(kev->key()) {
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+          hidePopup();
+          break;
+      }
+
+    } else if(e->type() == QEvent::FocusOut) {
+      // if we tab out and have a selection in the popup view
+      // than we use that entry completely
+      activated();
+      hidePopup();
     }
   }
   return KComboBox::eventFilter(o, e);
@@ -226,23 +244,19 @@ const QString& KMyMoneyAccountCombo::getSelected() const
   return d->m_lastSelectedAccount;
 }
 
-void KMyMoneyAccountCombo::setModel(QAbstractItemModel *model)
+void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 {
   delete d->m_popupView;
 
   KComboBox::setModel(model);
 
-  AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model);
-  if(filterModel) {
-    filterModel->setFilterKeyColumn(AccountsModel::Account);
-    filterModel->setFilterRole(AccountsModel::FullNameRole);
-  }
+  model->setFilterKeyColumn(AccountsModel::Account);
+  model->setFilterRole(AccountsModel::FullNameRole);
 
   d->m_popupView = new QTreeView(this);
+  d->m_popupView->setModel(model);
   d->m_popupView->setSelectionMode(QAbstractItemView::SingleSelection);
   setView(d->m_popupView);
-
-  d->m_popupView->installEventFilter(this);
 
   d->m_popupView->setHeaderHidden(true);
   d->m_popupView->setRootIsDecorated(false);
@@ -262,51 +276,85 @@ void KMyMoneyAccountCombo::setModel(QAbstractItemModel *model)
 
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
 {
-  if(index.isValid()) {
+  if(index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
     setSelected(model()->data(index, AccountsModel::AccountIdRole).toString());
   }
 }
 
 void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
 {
-  AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
+  if(!d->m_inMakeCompletion) {
+    d->m_inMakeCompletion = true;
+    AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
 
-  if(filterModel) {
-    if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
-      // for some reason it helps to avoid internal errors if we
-      // clear the filter before setting it to a new value
-      filterModel->setFilterFixedString("");
-      filterModel->setFilterRegExp(QRegExp(QString("%1%2%3").arg(".*").arg(QRegExp::escape(txt)).arg(".*"), Qt::CaseInsensitive));
-    } else {
-      QStringList parts = txt.split(MyMoneyFile::AccountSeperator /*, QString::SkipEmptyParts */);
-      QString pattern;
-      QStringList::iterator it;
-      for (it = parts.begin(); it != parts.end(); ++it) {
-        if (pattern.length() > 1)
-          pattern += MyMoneyFile::AccountSeperator;
-        pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
-      }
-      filterModel->setFilterFixedString("");
-      filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
-      // if we don't have a match, we try it again, but this time
-      // we add a wildcard for the top level
-      if (filterModel->visibleItems() == 0) {
-        pattern = pattern.prepend(QString(".*") + MyMoneyFile::AccountSeperator);
-        filterModel->setFilterFixedString("");
+    if(filterModel) {
+      if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
+        // for some reason it helps to avoid internal errors if we
+        // clear the filter before setting it to a new value
+        filterModel->setFilterFixedString(QString());
+        const QString filterString = QString("%1%2%3").arg(".*").arg(QRegExp::escape(txt)).arg(".*");
+        filterModel->setFilterRegExp(QRegExp(filterString, Qt::CaseInsensitive));
+      } else {
+        QStringList parts = txt.split(MyMoneyFile::AccountSeperator /*, QString::SkipEmptyParts */);
+        QString pattern;
+        QStringList::iterator it;
+        for (it = parts.begin(); it != parts.end(); ++it) {
+          if (pattern.length() > 1)
+            pattern += MyMoneyFile::AccountSeperator;
+          pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
+        }
+        // for some reason it helps to avoid internal errors if we
+        // clear the filter before setting it to a new value
+        filterModel->setFilterFixedString(QString());
         filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
+        // if we don't have a match, we try it again, but this time
+        // we add a wildcard for the top level
+        if (filterModel->visibleItems() == 0) {
+          // for some reason it helps to avoid internal errors if we
+          // clear the filter before setting it to a new value
+          pattern = pattern.prepend(QString(".*") + MyMoneyFile::AccountSeperator);
+          filterModel->setFilterFixedString(QString());
+          filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
+        }
       }
+
+      // if nothing is shown, we might as well close the popup
+      switch(filterModel->visibleItems()) {
+        case 0:
+          hidePopup();
+          break;
+        default:
+          setMaxVisibleItems(15);
+          expandAll();
+          showPopup();
+          break;
+      }
+      d->selectFirstMatchingItem();
+
+      // keep current text in edit widget no matter what
+      bool blocked = lineEdit()->signalsBlocked();
+      lineEdit()->blockSignals(true);
+      lineEdit()->setText(txt);
+      lineEdit()->blockSignals(blocked);
     }
-    const int visibleAccounts = filterModel->visibleItems();
-    switch(visibleAccounts) {
-      case 0:
-        hidePopup();
-        break;
-      default:
-        setMaxVisibleItems(15);
-        expandAll();
-        showPopup();
-        d->selectFirstMatchingItem();
-        break;
-    }
+    d->m_inMakeCompletion = false;
   }
+}
+
+void KMyMoneyAccountCombo::showPopup()
+{
+  if(d->m_popupView) {
+    d->m_popupView->show();
+    d->m_popupView->installEventFilter(this);
+  }
+  KComboBox::showPopup();
+}
+
+void KMyMoneyAccountCombo::hidePopup()
+{
+  if(d->m_popupView) {
+    d->m_popupView->hide();
+    d->m_popupView->removeEventFilter(this);
+  }
+  KComboBox::hidePopup();
 }

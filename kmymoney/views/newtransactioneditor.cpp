@@ -38,10 +38,13 @@
 #include "models.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
+#include "payeesmodel.h"
 #include "mymoneysplit.h"
 #include "ui_newtransactioneditor.h"
 #include "splitdialog.h"
 #include "widgethintframe.h"
+
+Q_GLOBAL_STATIC(QDate, lastUsedPostDate);
 
 class NewTransactionEditor::Private
 {
@@ -50,17 +53,21 @@ public:
   : ui(new Ui_NewTransactionEditor)
   , accountsModel(new AccountNamesFilterProxyModel(parent))
   , costCenterModel(new QSortFilterProxyModel(parent))
+  , payeesModel(new QSortFilterProxyModel(parent))
   , accepted(false)
   , costCenterRequired(false)
-  , invertSign(false)
   {
-    accountsModel->setObjectName("AccountNamesFilterProxyModel");
+    accountsModel->setObjectName("NewTransactionEditor::accountsModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
+    payeesModel->setObjectName("SortedPayeesModel");
     statusModel.setObjectName("StatusModel");
     splitModel.setObjectName("SplitModel");
 
     costCenterModel->setSortLocaleAware(true);
     costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+
+    payeesModel->setSortLocaleAware(true);
+    payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
 
     createStatusEntry(MyMoneySplit::NotReconciled);
     createStatusEntry(MyMoneySplit::Cleared);
@@ -73,25 +80,26 @@ public:
   bool checkForValidTransaction(bool doUserInteraction = true);
   bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
 
-  int amountTypeCreditIndex() const { return 0; }
-  int amountTypeDebitIndex() const { return 1; }
-
   bool postdateChanged(const QDate& date);
   bool costCenterChanged(int costCenterIndex);
   bool categoryChanged(const QString& accountId);
   bool numberChanged(const QString& newNumber);
+  bool valueChanged(CreditDebitHelper* valueHelper);
 
   Ui_NewTransactionEditor*      ui;
   AccountNamesFilterProxyModel* accountsModel;
   QSortFilterProxyModel*        costCenterModel;
+  QSortFilterProxyModel*        payeesModel;
   bool                          accepted;
   bool                          costCenterRequired;
   bool                          costCenterOk;
-  bool                          invertSign;
   SplitModel                    splitModel;
   QStandardItemModel            statusModel;
   QString                       transactionSplitId;
-  QString                       accountId;
+  MyMoneyAccount                account;
+  MyMoneyTransaction            transaction;
+  MyMoneySplit                  split;
+  CreditDebitHelper*            amountHelper;
 };
 
 void NewTransactionEditor::Private::createStatusEntry(MyMoneySplit::reconcileFlagE status)
@@ -118,7 +126,7 @@ void NewTransactionEditor::Private::updateWidgetState()
       break;
     case 1:
       index = splitModel.index(0, 0);
-      ui->accountCombo->setSelected(splitModel.data(index, SplitModel::AccountIdRole).toString());
+      ui->accountCombo->setSelected(splitModel.data(index, LedgerRole::AccountIdRole).toString());
       break;
     default:
       index = splitModel.index(0, 0);
@@ -130,13 +138,14 @@ void NewTransactionEditor::Private::updateWidgetState()
       ui->costCenterLabel->setDisabled(true);
       break;
   }
+  ui->accountCombo->hidePopup();
 
   // update the costcenter combo box
   if(ui->costCenterCombo->isEnabled()) {
     // extract the cost center
     index = splitModel.index(0, 0);
     QModelIndexList ccList = costCenterModel->match(costCenterModel->index(0, 0), CostCenterModel::CostCenterIdRole,
-                                      splitModel.data(index, LedgerModel::CostCenterIdRole),
+                                                    splitModel.data(index, LedgerRole::CostCenterIdRole),
                                       1,
                                       Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (ccList.count() > 0) {
@@ -192,10 +201,10 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 
   // collect all account ids
   QStringList accountIds;
-  accountIds << accountId;
+  accountIds << account.id();
   for(int row = 0; row < splitModel.rowCount(); ++row) {
     QModelIndex index = splitModel.index(row, 0);
-    accountIds << splitModel.data(index, LedgerModel::AccountIdRole).toString();;
+    accountIds << splitModel.data(index, LedgerRole::AccountIdRole).toString();;
   }
 
   Q_FOREACH(QString accountId, accountIds) {
@@ -219,7 +228,14 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
       WidgetHintFrame::show(ui->costCenterCombo, i18n("A cost center assignment is required for a transaction in the selected category."));
       rc = false;
     }
+    if(rc == true && splitModel.rowCount() == 1) {
+      QModelIndex index = costCenterModel->index(costCenterIndex, 0);
+      QString costCenterId = costCenterModel->data(index, CostCenterModel::CostCenterIdRole).toString();
+      index = splitModel.index(0, 0);
+      splitModel.setData(index, costCenterId, LedgerRole::CostCenterIdRole);
+    }
   }
+
   return rc;
 }
 
@@ -236,7 +252,29 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
       rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
       rc &= postdateChanged(ui->dateEdit->date());
 
-      // update the split model
+      // make sure we have a split in the model
+      bool newSplit = false;
+      if(splitModel.rowCount() == 0) {
+        splitModel.addEmptySplitEntry();
+        newSplit = true;
+      }
+
+      const QModelIndex index = splitModel.index(0, 0);
+      splitModel.setData(index, accountId, LedgerRole::AccountIdRole);
+      if(newSplit) {
+        costCenterChanged(ui->costCenterCombo->currentIndex());
+
+        if(amountHelper->haveValue()) {
+          splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitValueRole);
+
+          /// @todo make sure to convert initial value to shares according to price information
+
+          splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitSharesRole);
+        }
+      }
+
+      /// @todo we need to make sure to support multiple currencies here
+
 
     } catch (MyMoneyException &e) {
       qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
@@ -251,15 +289,14 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
     const LedgerModel* model = Models::instance()->ledgerModel();
-    QModelIndexList list = model->match(model->index(0, 0), LedgerModel::NumberRole,
+    QModelIndexList list = model->match(model->index(0, 0), LedgerRole::NumberRole,
                                         QVariant(newNumber),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     foreach(QModelIndex index, list) {
-      qDebug() << model->data(index, LedgerModel::AccountIdRole).toString();
-      if(model->data(index, LedgerModel::AccountIdRole) == accountId
-      && model->data(index, LedgerModel::TransactionSplitIdRole) != transactionSplitId) {
+      if(model->data(index, LedgerRole::AccountIdRole) == account.id()
+        && model->data(index, LedgerRole::TransactionSplitIdRole) != transactionSplitId) {
         WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.").arg(newNumber));
         rc = false;
         break;
@@ -269,14 +306,42 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
   return rc;
 }
 
+bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
+{
+  bool rc = true;
+  if(valueHelper->haveValue()  && splitModel.rowCount() <= 1) {
+    rc = false;
+    try {
+      MyMoneyMoney shares;
+      if(splitModel.rowCount() == 1) {
+        const QModelIndex index = splitModel.index(0, 0);
+        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitValueRole);
 
+        /// @todo make sure to support multiple currencies
+
+        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitSharesRole);
+      } else {
+        /// @todo ask what to do: if the rest of the splits is the same amount we could simply reverse the sign
+        /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
+      }
+      rc = true;
+
+    } catch (MyMoneyException &e) {
+      qDebug() << "Ooops: somwthing went wrong in" << Q_FUNC_INFO;
+    }
+  }
+  return rc;
+}
 
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
-  d->accountId = accountId;
+  // extract account information from model
+  QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
+  d->account = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+
   d->ui->setupUi(this);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
@@ -297,12 +362,25 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->costCenterCombo->setModelColumn(0);
   d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
+  d->payeesModel->setSortRole(Qt::DisplayRole);
+  d->payeesModel->setSourceModel(Models::instance()->payeesModel());
+  d->payeesModel->sort(0);
+
+  d->ui->payeeEdit->setEditable(true);
+  d->ui->payeeEdit->setModel(d->payeesModel);
+  d->ui->payeeEdit->setModelColumn(0);
+  d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
+
   d->ui->enterButton->setIcon(QIcon::fromTheme("dialog-ok"));
   d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
 
   d->ui->statusCombo->setModel(&d->statusModel);
 
   d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
+
+  d->ui->amountEditCredit->setAllowEmpty(true);
+  d->ui->amountEditDebit->setAllowEmpty(true);
+  d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
   WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
   frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
@@ -314,6 +392,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
   connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
   connect(d->ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(postdateChanged(QDate)));
+  connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(valueChanged()));
 
   connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
@@ -326,7 +405,6 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
 NewTransactionEditor::~NewTransactionEditor()
 {
-  delete d;
 }
 
 bool NewTransactionEditor::accepted() const
@@ -378,52 +456,53 @@ void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
   }
 }
 
-
-void NewTransactionEditor::setAccountId(const QString& id)
-{
-  d->accountId = id;
-}
-
-void NewTransactionEditor::setTransactionId(const QString& id)
+void NewTransactionEditor::loadTransaction(const QString& id)
 {
   const LedgerModel* model = Models::instance()->ledgerModel();
   const QString transactionId = model->transactionIdFromTransactionSplitId(id);
 
   if(id.isEmpty()) {
-    d->ui->dateEdit->setDate(QDate::currentDate());
+    d->transactionSplitId.clear();
+    d->transaction = MyMoneyTransaction();
+    if(lastUsedPostDate()->isValid()) {
+      d->ui->dateEdit->setDate(*lastUsedPostDate());
+    } else {
+      d->ui->dateEdit->setDate(QDate::currentDate());
+    }
     bool blocked = d->ui->accountCombo->lineEdit()->blockSignals(true);
     d->ui->accountCombo->lineEdit()->clear();
     d->ui->accountCombo->lineEdit()->blockSignals(blocked);
 
   } else {
     // find which item has this id and set is as the current item
-    QModelIndexList list = model->match(model->index(0, 0), LedgerModel::TransactionIdRole,
+    QModelIndexList list = model->match(model->index(0, 0), LedgerRole::TransactionIdRole,
                                         QVariant(transactionId),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     Q_FOREACH(QModelIndex index, list) {
       // the selected split?
-      const QString transactionSplitId = model->data(index, LedgerModel::TransactionSplitIdRole).toString();
+      const QString transactionSplitId = model->data(index, LedgerRole::TransactionSplitIdRole).toString();
       if(transactionSplitId == id) {
         d->transactionSplitId = id;
-        d->ui->dateEdit->setDate(model->data(index, LedgerModel::PostDateRole).toDate());
-        d->ui->payeeEdit->lineEdit()->setText(model->data(index, LedgerModel::PayeeNameRole).toString());
+        d->transaction = model->data(index, LedgerRole::TransactionRole).value<MyMoneyTransaction>();
+        d->split = model->data(index, LedgerRole::SplitRole).value<MyMoneySplit>();
+        d->ui->dateEdit->setDate(model->data(index, LedgerRole::PostDateRole).toDate());
+        d->ui->payeeEdit->lineEdit()->setText(model->data(index, LedgerRole::PayeeNameRole).toString());
         d->ui->memoEdit->clear();
-        d->ui->memoEdit->insertPlainText(model->data(index, LedgerModel::MemoRole).toString());
+        d->ui->memoEdit->insertPlainText(model->data(index, LedgerRole::MemoRole).toString());
         d->ui->memoEdit->moveCursor(QTextCursor::Start);
         d->ui->memoEdit->ensureCursorVisible();
 
         // The calculator for the amount field can simply be added as an icon to the line edit widget.
         // See http://stackoverflow.com/questions/11381865/how-to-make-an-extra-icon-in-qlineedit-like-this howto do it
-        d->ui->amountEdit->setText(model->data(index, LedgerModel::ShareAmountRole).toString());
+        d->ui->amountEditCredit->setText(model->data(model->index(index.row(), LedgerModel::PaymentColumn)).toString());
+        d->ui->amountEditDebit->setText(model->data(model->index(index.row(), LedgerModel::DepositColumn)).toString());
 
-        d->ui->amountTypeCombo->setCurrentIndex(model->data(index, LedgerModel::ShareAmountSuffixRole).toString() == i18nc("Debit suffix", "Dr.") ? 1 : 0);
+        d->ui->numberEdit->setText(model->data(index, LedgerRole::NumberRole).toString());
+        d->ui->statusCombo->setCurrentIndex(model->data(index, LedgerRole::NumberRole).toInt());
 
-        d->ui->numberEdit->setText(model->data(index, LedgerModel::NumberRole).toString());
-
-        d->ui->statusCombo->setCurrentIndex(0);   // not reconciled is the default
-        QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, model->data(index, LedgerModel::ReconciliationRole).toInt());
+        QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, model->data(index, LedgerRole::ReconciliationRole).toInt());
         if(stList.count()) {
           QModelIndex stIndex = stList.front();
           d->ui->statusCombo->setCurrentIndex(stIndex.row());
@@ -437,13 +516,6 @@ void NewTransactionEditor::setTransactionId(const QString& id)
 
   // set focus to payee edit once we return to event loop
   QMetaObject::invokeMethod(d->ui->payeeEdit, "setFocus", Qt::QueuedConnection);
-}
-
-
-QString NewTransactionEditor::transactionId() const
-{
-  qDebug() << "transactionId";
-  return QString();
 }
 
 void NewTransactionEditor::numberChanged(const QString& newNumber)
@@ -466,53 +538,42 @@ void NewTransactionEditor::postdateChanged(const QDate& date)
   d->postdateChanged(date);
 }
 
+void NewTransactionEditor::valueChanged()
+{
+  d->valueChanged(d->amountHelper);
+}
+
 void NewTransactionEditor::editSplits()
 {
-  const int previousSplitCount = d->splitModel.rowCount();
-
-  const bool isDepositTransaction = d->ui->amountTypeCombo->currentIndex() == d->amountTypeDebitIndex();
   SplitModel splitModel;
 
-  splitModel.deepCopy(d->splitModel, isDepositTransaction);
+  splitModel.deepCopy(d->splitModel, true);
 
   // create an empty split at the end
   splitModel.addEmptySplitEntry();
 
-  MyMoneyAccount account = MyMoneyFile::instance()->account(d->accountId);
-
-  QPointer<SplitDialog> splitDialog = new SplitDialog(account, this);
+  QPointer<SplitDialog> splitDialog = new SplitDialog(d->account, transactionAmount(), this);
   splitDialog->setModel(&splitModel);
 
-  do {
-    int rc = splitDialog->exec();
+  int rc = splitDialog->exec();
 
-    if(splitDialog && (rc == QDialog::Accepted)) {
-      // check if we have a mismatch of values
-      MyMoneyMoney splitSum;
-      for(int row = 0; row < splitModel.rowCount(); ++row) {
-        QModelIndex index = splitModel.index(row, 0);
-        splitSum += splitModel.data(index, SplitModel::SplitValueRole).value<MyMoneyMoney>();
-      }
-      if(!isDepositTransaction) {
-        splitSum = -splitSum;
-      }
-
-      if(transactionAmount() != splitSum) {
-        /// @todo we need to add that KSplitTransactionDlg logic here
-        qDebug() << "Problem" << splitSum.formatMoney(100);
-      }
-
+  if(splitDialog && (rc == QDialog::Accepted)) {
       // remove that empty split again before we update the splits
       splitModel.removeEmptySplitEntry();
 
-      d->splitModel.deepCopy(splitModel, isDepositTransaction);
-      d->updateWidgetState();
-      break;
+      // copy the splits model contents
+      d->splitModel.deepCopy(splitModel, true);
 
-    } else {
-      break;
-    }
-  } while(1);
+      // update the transaction amount
+      d->amountHelper->setValue(splitDialog->transactionAmount());
+
+      d->updateWidgetState();
+      QWidget *next = d->ui->tagComboBox;
+      if(d->ui->costCenterCombo->isEnabled()) {
+        next = d->ui->costCenterCombo;
+      }
+      next->setFocus();
+  }
 
   if(splitDialog) {
     splitDialog->deleteLater();
@@ -521,20 +582,108 @@ void NewTransactionEditor::editSplits()
 
 MyMoneyMoney NewTransactionEditor::transactionAmount() const
 {
-  MyMoneyMoney rc = d->ui->amountEdit->value();
-  qDebug() << "transactionAmount is " << rc.formatMoney(100);
-  if(d->ui->amountTypeCombo->currentIndex() == d->amountTypeCreditIndex()) {
-    rc = -rc;
-    qDebug() << "Amount type is credit. Value change to" << rc.formatMoney(100);
-  }
-  if(d->invertSign) {
-    rc = -rc;
-    qDebug() << "Invert sign set. Value change to" << rc.formatMoney(100);
-  }
-  return rc;
+  return d->amountHelper->value();
 }
 
-void NewTransactionEditor::setInvertSign(bool invertSign)
+void NewTransactionEditor::saveTransaction()
 {
-  d->invertSign = invertSign;
+  MyMoneyTransaction t;
+
+  if(!d->transactionSplitId.isEmpty()) {
+    t = d->transaction;
+  } else {
+    // we keep the date when adding a new transaction
+    // for the next new one
+    *lastUsedPostDate() = d->ui->dateEdit->date();
+  }
+
+  QList<MyMoneySplit> splits = t.splits();
+  // first remove the splits that are gone
+  QList<MyMoneySplit>::iterator it;
+  for(it = splits.begin(); it != splits.end(); ++it) {
+    if((*it).id() == d->split.id()) {
+      continue;
+    }
+    int row;
+    for(row = 0; row < d->splitModel.rowCount(); ++row) {
+      QModelIndex index = d->splitModel.index(row, 0);
+      if(d->splitModel.data(index, LedgerRole::SplitIdRole).toString() == (*it).id()) {
+        break;
+      }
+    }
+
+    // if the split is not in the model, we get rid of it
+    if(d->splitModel.rowCount() == row) {
+      t.removeSplit(*it);
+    }
+  }
+
+  MyMoneyFileTransaction ft;
+  try {
+    // new we update the split we are opened for
+    MyMoneySplit sp(d->split);
+    sp.setNumber(d->ui->numberEdit->text());
+    sp.setMemo(d->ui->memoEdit->toPlainText());
+    sp.setShares(d->amountHelper->value());
+    if(t.commodity().isEmpty()) {
+      t.setCommodity(d->account.currencyId());
+      sp.setValue(d->amountHelper->value());
+    } else {
+      /// @todo check that the transactions commodity is the same
+      /// as the one of the account this split references. If
+      /// that is not the case, the next statement would create
+      /// a problem
+      sp.setValue(d->amountHelper->value());
+    }
+
+    if(sp.reconcileFlag() != MyMoneySplit::Reconciled
+    && !sp.reconcileDate().isValid()
+    && d->ui->statusCombo->currentIndex() == MyMoneySplit::Reconciled) {
+      sp.setReconcileDate(QDate::currentDate());
+    }
+    sp.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(d->ui->statusCombo->currentIndex()));
+    // sp.setPayeeId(d->ui->payeeEdit->cu)
+    if(sp.id().isEmpty()) {
+      t.addSplit(sp);
+    } else {
+      t.modifySplit(sp);
+    }
+    t.setPostDate(d->ui->dateEdit->date());
+
+    // now update and add what we have in the model
+    const SplitModel * model = &d->splitModel;
+    for(int row = 0; row < model->rowCount(); ++row) {
+      QModelIndex index = model->index(row, 0);
+      MyMoneySplit s;
+      const QString splitId = model->data(index, LedgerRole::SplitIdRole).toString();
+      if(!SplitModel::isNewSplitId(splitId)) {
+        s = t.splitById(splitId);
+      }
+      s.setNumber(model->data(index, LedgerRole::NumberRole).toString());
+      s.setMemo(model->data(index, LedgerRole::MemoRole).toString());
+      s.setAccountId(model->data(index, LedgerRole::AccountIdRole).toString());
+      s.setShares(model->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>());
+      s.setValue(model->data(index, LedgerRole::SplitValueRole).value<MyMoneyMoney>());
+      s.setCostCenterId(model->data(index, LedgerRole::CostCenterIdRole).toString());
+      s.setPayeeId(model->data(index, LedgerRole::PayeeIdRole).toString());
+
+      // reconcile flag and date
+      if(s.id().isEmpty()) {
+        t.addSplit(s);
+      } else {
+        t.modifySplit(s);
+      }
+    }
+
+    if(t.id().isEmpty()) {
+      MyMoneyFile::instance()->addTransaction(t);
+    } else {
+      MyMoneyFile::instance()->modifyTransaction(t);
+    }
+    ft.commit();
+
+  } catch (const MyMoneyException &e) {
+    qDebug() << Q_FUNC_INFO << "something went wrong" << e.what();
+  }
+
 }

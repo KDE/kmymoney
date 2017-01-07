@@ -26,6 +26,8 @@
 #include <QPixmap>
 #include <QToolButton>
 #include <QFrame>
+#include <QLocale>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -58,20 +60,18 @@ AmountValidator::AmountValidator(double bottom, double top, int decimals,
  */
 QValidator::State AmountValidator::validate(QString & input, int & _p) const
 {
-  // TODO: port KF5
-#if 0
   QString s = input;
-  KLocale * l = KLocale::global();
+  QLocale locale;
   // ok, we have to re-format the number to have:
   // 1. decimalSymbol == '.'
   // 2. negativeSign  == '-'
   // 3. positiveSign  == <empty>
   // 4. thousandsSeparator() == <empty> (we don't check that there
   //    are exactly three decimals between each separator):
-  QString dec = l->monetaryDecimalSymbol(),
-              n = l->negativeSign(),
-                  p = l->positiveSign(),
-                      t = l->monetaryThousandsSeparator();
+  QString dec = locale.decimalPoint(),
+              n = locale.negativeSign(),
+                  p = locale.positiveSign(),
+                      t = locale.groupSeparator();
   // first, delete p's and t's:
   if (!p.isEmpty())
     for (int idx = s.indexOf(p) ; idx >= 0 ; idx = s.indexOf(p, idx))
@@ -86,7 +86,7 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
   if ((!n.isEmpty() && n.indexOf('.') != -1) ||
       (!dec.isEmpty() && dec.indexOf('-') != -1)) {
     // make sure we don't replace something twice:
-    kWarning() << "KDoubleValidator: decimal symbol contains '-' or "
+    qWarning() << "KDoubleValidator: decimal symbol contains '-' or "
     "negative sign contains '.' -> improve algorithm" << endl;
     return Invalid;
   }
@@ -99,6 +99,8 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
     for (int idx = s.indexOf(n) ; idx >= 0 ; idx = s.indexOf(n, idx + 1))
       s.replace(idx, n.length(), "-");
 
+  // TODO: port KF5
+#if 0
   // Take care of monetary parens around the value if selected via
   // the locale settings.
   // If the lead-in or lead-out paren is present, remove it
@@ -110,6 +112,7 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
       s = regExp.cap(2);
     }
   }
+#endif
 
   // check for non numeric values (QDoubleValidator allows an 'e', we don't)
   QRegExp nonNumeric("[^\\d-\\.]+");
@@ -136,6 +139,8 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
     return Acceptable;
 
   QValidator::State rc = QDoubleValidator::validate(s, _p);
+  // TODO: port KF5
+#if 0
   if (rc == Acceptable) {
     // If the numeric value is acceptable, we check if the parens
     // are ok. If only the lead-in is present, the return value
@@ -151,10 +156,8 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
         rc = Invalid;
     }
   }
-  return rc;
-#else
-  return Acceptable;
 #endif
+  return rc;
 }
 
 
@@ -201,8 +204,9 @@ AmountEdit::AmountEdit(QWidget *parent, const int prec)
 {
   d->m_prec = prec;
   // TODO: port KF5
-  if (prec < -1 || prec > 20)
+  if (prec < -1 || prec > 20) {
     d->m_prec = 2;//KLocale::global()->monetaryDecimalPlaces();
+  }
   init();
 }
 
@@ -378,19 +382,12 @@ void AmountEdit::resetText()
 
 void AmountEdit::theTextChanged(const QString & theText)
 {
-  // TODO: port KF5
-#if 0
-  KLocale * l = KLocale::global();
-  QString dec = l->monetaryDecimalSymbol();
+  QLocale locale;
+  QString dec = locale.groupSeparator();
   QString l_text = theText;
   QString nsign, psign;
-  if (l->negativeMonetarySignPosition() == KLocale::ParensAround
-      || l->positiveMonetarySignPosition() == KLocale::ParensAround) {
-    nsign = psign = '(';
-  } else {
-    nsign = l->negativeSign();
-    psign = l->positiveSign();
-  }
+  nsign = locale.negativeSign();
+  psign = locale.positiveSign();
 
   int i = 0;
   if (isEnabled()) {
@@ -405,10 +402,9 @@ void AmountEdit::theTextChanged(const QString & theText)
       QLineEdit::setText(d->m_previousText);
     else {
       d->m_previousText = l_text;
-      emit textChanged(text());
+      emit validatedTextChanged(text());
     }
   }
-#endif
 }
 
 void AmountEdit::ensureFractionalPart()
@@ -501,4 +497,88 @@ bool AmountEdit::isEmptyAllowed() const
 bool AmountEdit::isCalculatorButtonVisible() const
 {
   return d->m_calculatorButton->isVisible();
+}
+
+
+
+
+
+
+CreditDebitHelper::CreditDebitHelper(QObject* parent, AmountEdit* credit, AmountEdit* debit)
+  : QObject(parent)
+  , m_credit(credit)
+  , m_debit(debit)
+{
+  connect(m_credit, SIGNAL(valueChanged(QString)), this, SLOT(creditChanged()));
+  connect(m_debit, SIGNAL(valueChanged(QString)), this, SLOT(debitChanged()));
+}
+
+CreditDebitHelper::~CreditDebitHelper()
+{
+}
+
+void CreditDebitHelper::creditChanged()
+{
+  widgetChanged(m_credit, m_debit);
+}
+
+void CreditDebitHelper::debitChanged()
+{
+  widgetChanged(m_debit, m_credit);
+}
+
+void CreditDebitHelper::widgetChanged(AmountEdit* src, AmountEdit* dst)
+{
+  // make sure the objects exist
+  if(!src || !dst) {
+    return;
+  }
+
+  // in case both are filled with text, the src wins
+  if(!src->text().isEmpty() && !dst->text().isEmpty()) {
+    dst->clear();
+  }
+
+  // in case the source is negative, we negate the value
+  // and load it into destination.
+  if(src->value().isNegative()) {
+    dst->setValue(-(src->value()));
+    src->clear();
+  }
+  emit valueChanged();
+}
+
+bool CreditDebitHelper::haveValue() const
+{
+  return (!m_credit->text().isEmpty()) || (!m_debit->text().isEmpty());
+}
+
+MyMoneyMoney CreditDebitHelper::value() const
+{
+  MyMoneyMoney value;
+  if(m_credit && m_debit) {
+    if(!m_credit->text().isEmpty()) {
+      value = -m_credit->value();
+    } else {
+      value = m_debit->value();
+    }
+  } else {
+    qWarning() << "CreditDebitHelper::value() called with no objects attached. Zero returned.";
+  }
+  return value;
+}
+
+void CreditDebitHelper::setValue(const MyMoneyMoney& value)
+{
+  if(m_credit && m_debit) {
+    if(value.isNegative()) {
+      m_credit->setValue(-value);
+      m_debit->clear();
+    } else {
+      m_debit->setValue(value);
+      m_credit->clear();
+    }
+  } else {
+    qWarning() << "CreditDebitHelper::setValue() called with no objects attached. Skipped.";
+  }
 }

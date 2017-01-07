@@ -57,7 +57,7 @@ public:
    * Returns true if the sign of the values displayed has
    * been inverted depending on the account type.
    */
-  bool isSignInverted() const;
+  bool showValuesInverted() const;
 
 public Q_SLOTS:
   /**

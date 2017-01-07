@@ -3,6 +3,7 @@ add_subdirectory( settings )
 ########### next target ###############
 
 set(libdialogs_a_SOURCES
+  splitadjustdialog.cpp
   investactivities.cpp
   investtransactioneditor.cpp
   kaccountselectdlg.cpp
@@ -48,10 +49,12 @@ set(libdialogs_a_SOURCES
 )
 
 set(dialogs_HEADERS
+  splitadjustdialog.h
   investtransactioneditor.h kcurrencycalculator.h transactioneditor.h
   )
 
 set(dialogs_UI
+  splitadjustdialog.ui
   kaccountselectdlgdecl.ui kbackupdlgdecl.ui
   kcategoryreassigndlgdecl.ui kchooseimportexportdlgdecl.ui
   kconfirmmanualenterdlgdecl.ui

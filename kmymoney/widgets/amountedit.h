@@ -24,6 +24,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <QLineEdit>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -207,11 +208,59 @@ public Q_SLOTS:
 Q_SIGNALS:
   /**
     * This signal is sent, when the focus leaves this widget and
-    * the amount has been changed by user during this session.
+    * the amount has been changed by user during this focus possesion.
     */
   void valueChanged(const QString& text);
 
-  void textChanged(const QString& text);
+  /**
+   * This signal is emitted when the contents of the widget
+   * changed and was validated. Use this in favor of textChanged()
+   * in your application.
+   */
+  void validatedTextChanged(const QString& text);
+};
+
+
+class KMM_WIDGETS_EXPORT CreditDebitHelper : public QObject
+{
+  Q_OBJECT
+public:
+  explicit CreditDebitHelper(QObject* parent, AmountEdit* credit, AmountEdit* debit);
+  virtual ~CreditDebitHelper();
+
+  /**
+   * Retruns the value of the widget that is filled.
+   * A credit is retruned as negative, a debit as positive value.
+   */
+  MyMoneyMoney value() const;
+
+  /**
+   * Loads the widgets with the @a value passed. If
+   * @a value is negative it is loaded into the credit
+   * widget, otherwise into the debit widget.
+   */
+  void setValue(const MyMoneyMoney& value);
+
+  /**
+   * This method returns true if at least one
+   * of the two widgets is filled with text.
+   * It returns false if both widgets are empty.
+   */
+  bool haveValue() const;
+
+Q_SIGNALS:
+  void valueChanged();
+
+private Q_SLOTS:
+  void creditChanged();
+  void debitChanged();
+
+private:
+  void widgetChanged(AmountEdit* src, AmountEdit* dst);
+
+private:
+  QPointer<AmountEdit>  m_credit;
+  QPointer<AmountEdit>  m_debit;
 };
 
 #endif

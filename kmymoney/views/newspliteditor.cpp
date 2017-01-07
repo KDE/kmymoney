@@ -53,7 +53,7 @@ struct NewSplitEditor::Private
   , accepted(false)
   , costCenterRequired(false)
   , costCenterOk(false)
-  , inverseAmounts(false)
+  , showValuesInverted(false)
   {
     accountsModel->setObjectName("AccountNamesFilterProxyModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
@@ -71,13 +71,10 @@ struct NewSplitEditor::Private
   void createStatusEntry(MyMoneySplit::reconcileFlagE status);
   bool checkForValidSplit(bool doUserInteraction = true);
 
-  int amountTypeDebitIndex() const { return 1; }
-  int amountTypeCreditIndex() const { return 0; }
-
   bool costCenterChanged(int costCenterIndex);
   bool categoryChanged(const QString& accountId);
   bool numberChanged(const QString& newNumber);
-  bool amountChanged(const QString& newAmount);
+  bool amountChanged(CreditDebitHelper* valueHelper);
 
   Ui_NewSplitEditor*            ui;
   AccountNamesFilterProxyModel* accountsModel;
@@ -86,10 +83,12 @@ struct NewSplitEditor::Private
   bool                          accepted;
   bool                          costCenterRequired;
   bool                          costCenterOk;
-  bool                          inverseAmounts;
+  bool                          showValuesInverted;
   QStandardItemModel            statusModel;
   QString                       transactionSplitId;
-  QString                       accountId;
+  MyMoneyAccount                counterAccount;
+  MyMoneyAccount                category;
+  CreditDebitHelper*            amountHelper;
 };
 
 void NewSplitEditor::Private::createStatusEntry(MyMoneySplit::reconcileFlagE status)
@@ -132,10 +131,14 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
   bool rc = true;
   if(!accountId.isEmpty()) {
     try {
-      MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
+      QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
+      category = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
       const bool isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
       ui->costCenterLabel->setEnabled(isIncomeExpense);
+      ui->numberEdit->setDisabled(isIncomeExpense);
+      ui->numberLabel->setDisabled(isIncomeExpense);
+
       costCenterRequired = category.isCostCenterRequired();
       rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
     } catch (MyMoneyException &e) {
@@ -151,15 +154,14 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
     const LedgerModel* model = Models::instance()->ledgerModel();
-    QModelIndexList list = model->match(model->index(0, 0), LedgerModel::NumberRole,
+    QModelIndexList list = model->match(model->index(0, 0), LedgerRole::NumberRole,
                                         QVariant(newNumber),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     foreach(QModelIndex index, list) {
-      qDebug() << model->data(index, LedgerModel::AccountIdRole).toString();
-      if(model->data(index, LedgerModel::AccountIdRole) == ui->accountCombo->getSelected()
-      && model->data(index, LedgerModel::TransactionSplitIdRole) != transactionSplitId) {
+      if(model->data(index, LedgerRole::AccountIdRole) == ui->accountCombo->getSelected()
+        && model->data(index, LedgerRole::TransactionSplitIdRole) != transactionSplitId) {
         WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.").arg(newNumber));
         rc = false;
         break;
@@ -169,23 +171,16 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
   return rc;
 }
 
-bool NewSplitEditor::Private::amountChanged(const QString& newAmount)
+bool NewSplitEditor::Private::amountChanged(CreditDebitHelper* valueHelper)
 {
-  Q_UNUSED(newAmount);
-
+  Q_UNUSED(valueHelper);
   bool rc = true;
-  if(ui->amountEdit->value().isNegative()) {
-    // switch the type
-    ui->amountTypeCombo->setCurrentIndex(ui->amountTypeCombo->currentIndex() ? 0 : 1);
-    // and reverse the sign
-    ui->amountEdit->setValue(ui->amountEdit->value().abs());
-  }
   return rc;
 }
 
 
 
-NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& accountId)
+NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
@@ -193,7 +188,9 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& accountId)
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
-  d->accountId = accountId;
+  QModelIndex index = Models::instance()->accountsModel()->accountById(counterAccountId);
+  d->counterAccount = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(QIcon::fromTheme("dialog-ok"));
   d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
@@ -221,10 +218,12 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& accountId)
   frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
   frameCollection->addWidget(d->ui->enterButton);
 
+  d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
+
   connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
   connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
   connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
-  connect(d->ui->amountEdit, SIGNAL(valueChanged(QString)), this, SLOT(amountChanged(QString)));
+  connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(amountChanged()));
 
   connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
@@ -234,14 +233,14 @@ NewSplitEditor::~NewSplitEditor()
 {
 }
 
-void NewSplitEditor::setInversedViewOfAmounts(bool inverse)
+void NewSplitEditor::setShowValuesInverted(bool inverse)
 {
-  d->inverseAmounts = inverse;
+  d->showValuesInverted = inverse;
 }
 
-bool NewSplitEditor::isInversedViewOfAmounts()
+bool NewSplitEditor::showValuesInverted()
 {
-  return d->inverseAmounts;
+  return d->showValuesInverted;
 }
 
 bool NewSplitEditor::accepted() const
@@ -300,6 +299,7 @@ QString NewSplitEditor::accountId() const
 
 void NewSplitEditor::setAccountId(const QString& id)
 {
+  d->ui->accountCombo->clearEditText();
   d->ui->accountCombo->setSelected(id);
 }
 
@@ -316,23 +316,12 @@ void NewSplitEditor::setMemo(const QString& memo)
 
 MyMoneyMoney NewSplitEditor::amount() const
 {
-  MyMoneyMoney value = d->ui->amountEdit->value();
-  if(d->ui->amountTypeCombo->currentIndex() == d->amountTypeCreditIndex())
-    value = -value;
-  return value;
+  return d->amountHelper->value();
 }
 
 void NewSplitEditor::setAmount(MyMoneyMoney value)
 {
-  if(d->inverseAmounts) {
-    value = -value;
-  }
-  d->ui->amountTypeCombo->setCurrentIndex(d->amountTypeDebitIndex());
-  d->ui->amountEdit->setValue(value);
-  if(value.isNegative()) {
-    d->ui->amountTypeCombo->setCurrentIndex(d->amountTypeCreditIndex());
-    d->ui->amountEdit->setValue(-value);
-  }
+  d->amountHelper->setValue(value);
 }
 
 QString NewSplitEditor::costCenterId() const
@@ -348,6 +337,16 @@ void NewSplitEditor::setCostCenterId(const QString& id)
   if(index.isValid()) {
     d->ui->costCenterCombo->setCurrentIndex(index.row());
   }
+}
+
+QString NewSplitEditor::number() const
+{
+  return d->ui->numberEdit->text();
+}
+
+void NewSplitEditor::setNumber(const QString& number)
+{
+  d->ui->numberEdit->setText(number);
 }
 
 
@@ -371,7 +370,7 @@ void NewSplitEditor::costCenterChanged(int costCenterIndex)
   d->costCenterChanged(costCenterIndex);
 }
 
-void NewSplitEditor::amountChanged(const QString& newAmount)
+void NewSplitEditor::amountChanged()
 {
-  d->amountChanged(newAmount);
+  d->amountChanged(d->amountHelper);
 }

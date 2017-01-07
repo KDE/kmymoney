@@ -103,14 +103,14 @@ class KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  explicit KMyMoneyAccountCombo(QAbstractItemModel *model, QWidget *parent = 0);
+  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget *parent = 0);
   explicit KMyMoneyAccountCombo(QWidget *parent = 0);
   ~KMyMoneyAccountCombo();
 
   void setSelected(const QString& id);
   const QString& getSelected() const;
 
-  void setModel(QAbstractItemModel *model);
+  void setModel(QSortFilterProxyModel *model);
 
   /**
    * Overridden to get specific behavior
@@ -122,6 +122,8 @@ public:
 public slots:
   void expandAll();
   void collapseAll();
+  virtual void showPopup();
+  virtual void hidePopup();
 
 protected:
   virtual void wheelEvent(QWheelEvent *ev);

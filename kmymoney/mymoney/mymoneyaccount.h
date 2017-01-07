@@ -113,11 +113,6 @@ public:
     MaxAccountTypes       /**< Denotes the number of different account types */
   } accountTypeE;
 
-  typedef enum {
-    amountTypeCredit = 0,
-    amountTypeDebit = 1
-  } amountTypeE;
-
   /**
     * This is the constructor for a new empty account
     */
@@ -621,12 +616,6 @@ public:
     */
   const QMap<QDate, MyMoneyMoney>& reconciliationHistory();
 
-  /**
-   * Returns the amount type (debit or credit) as seen from this account
-   * for the @a value passed as argument.
-   */
-  amountTypeE amountType(MyMoneyMoney value) const;
-
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);
 
@@ -802,6 +791,5 @@ QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::paye
  */
 Q_DECLARE_METATYPE(MyMoneyAccount)
 Q_DECLARE_METATYPE(MyMoneyAccount::accountTypeE)
-Q_DECLARE_METATYPE(MyMoneyAccount::amountTypeE)
 
 #endif

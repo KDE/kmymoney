@@ -60,6 +60,7 @@ target_link_libraries(kmm_config KF5::WidgetsAddons KF5::ConfigWidgets Qt5::Sql 
 
 set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
 add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
+
 target_link_libraries(kmymoney_common
   PUBLIC
     Qt5::Core
@@ -128,6 +129,7 @@ target_link_libraries(kmymoney
   KF5::WidgetsAddons
   KF5::CoreAddons
   KChart
+  $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
   $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
 )
 

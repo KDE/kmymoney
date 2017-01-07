@@ -39,6 +39,9 @@ class NewSplitEditor : public QFrame
   Q_OBJECT
 
 public:
+  /**
+   * @a accountId is the current account displayed for the transaction
+   */
   explicit NewSplitEditor(QWidget* parent, const QString& accountId = QString());
   virtual ~NewSplitEditor();
 
@@ -48,8 +51,8 @@ public:
    */
   virtual bool accepted() const;
 
-  void setInversedViewOfAmounts(bool inverse);
-  bool isInversedViewOfAmounts();
+  void setShowValuesInverted(bool inverse);
+  bool showValuesInverted();
 
 protected:
   virtual void keyPressEvent(QKeyEvent* e);
@@ -79,6 +82,9 @@ public Q_SLOTS:
   QString costCenterId() const;
   void setCostCenterId(const QString& id);
 
+  QString number() const;
+  void setNumber(const QString& id);
+
 protected Q_SLOTS:
   virtual void reject();
   virtual void acceptEdit();
@@ -87,7 +93,7 @@ protected Q_SLOTS:
   virtual void numberChanged(const QString& newNumber);
   virtual void categoryChanged(const QString& accountId);
   virtual void costCenterChanged(int costCenterIndex);
-  virtual void amountChanged(const QString& newAmount);
+  virtual void amountChanged();
 
 Q_SIGNALS:
   void done();

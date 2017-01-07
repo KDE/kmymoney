@@ -1,5 +1,5 @@
 [Desktop Entry]
-Type=Service
+Type=ServiceType
 ServiceType=KMyMoney/NationalAccountNumberPlugin
 Name=A plugin which gives access to account number and bank code related information
 

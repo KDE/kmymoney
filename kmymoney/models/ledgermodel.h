@@ -36,6 +36,7 @@
 // Project Includes
 
 #include "mymoneytransaction.h"
+#include "mymoneyaccount.h"
 #include "mymoneysplit.h"
 #include "mymoneyschedule.h"
 #include "mymoneyfile.h"
@@ -50,6 +51,16 @@ class LedgerItem
 public:
   explicit LedgerItem();
   virtual ~LedgerItem();
+
+  /**
+   * This method returns the complete raw transaction from the engine
+   */
+  virtual MyMoneyTransaction transaction() const = 0;
+
+  /**
+   * This method returns the complete raw split from the engine
+   */
+  virtual const MyMoneySplit& split() const = 0;
 
   /**
    * Returns the postDate of the object. This can be used for sorting purposes.
@@ -208,6 +219,11 @@ public:
    */
   virtual bool isNewTransactionEntry() const = 0;
 
+  /**
+   * Returns the symbol of the commodity this transaction is kept in
+   */
+  virtual QString transactionCommodity() const = 0;
+
 };
 
 class LedgerTransaction : public LedgerItem
@@ -221,7 +237,10 @@ public:
   /// @copydoc LedgerItem::postDate()
   virtual QDate postDate() const;
 
-  const MyMoneyTransaction& transaction() const { return m_transaction; }
+  /// @copydoc LedgerItem::transaction()
+  MyMoneyTransaction transaction() const { return m_transaction; }
+
+  /// @copydoc LedgerItem::split()
   const MyMoneySplit& split() const { return m_split; }
 
   /// @copydoc LedgerItem::accountId()
@@ -308,6 +327,9 @@ public:
   /// @copydoc LedgerItem::isNewTransactionEntry()
   virtual bool isNewTransactionEntry() const;
 
+  /// @copydoc LedgerItem::transactionCommodity()
+  virtual QString transactionCommodity() const;
+
 protected:
   void setupValueDisplay();
 
@@ -357,6 +379,46 @@ public:
   virtual QString memo() const;
 };
 
+namespace LedgerRole {
+  enum Roles {
+    // Roles returning values
+    PostDateRole = Qt::UserRole,
+    PayeeNameRole,
+    AccountRole,
+    CounterAccountRole,
+    SplitCountRole,
+    ReconciliationRole,
+    ReconciliationRoleShort,
+    ReconciliationRoleLong,
+    SplitSharesRole,
+    ShareAmountRole,
+    ShareAmountSuffixRole,
+    SplitValueRole,
+    MemoRole,
+    SingleLineMemoRole,
+    NumberRole,
+    ErroneousRole,
+    ImportRole,
+    SplitRole,
+    TransactionRole,
+
+    // Roles returning ids
+    TransactionIdRole,
+    SplitIdRole,
+    TransactionSplitIdRole,
+    PayeeIdRole,
+    AccountIdRole,
+    CounterAccountIdRole,
+    CostCenterIdRole,
+    ScheduleIdRole,
+    TransactionCommodityRole,
+
+    // A pseudo role to emit the dataChanged() signal when
+    // used with setData()
+    EmitDataChangedRole
+  };
+
+} // namespace LedgerRole
 
 /**
   */
@@ -385,37 +447,6 @@ public:
 
     // insert new columns above this line
     NumberOfLedgerColumns
-  };
-
-  enum Roles {
-    // Roles returning values
-    PostDateRole = Qt::UserRole,
-    PayeeNameRole,
-    AccountRole,
-    CounterAccountRole,
-    SplitCountRole,
-    ReconciliationRole,
-    ReconciliationRoleShort,
-    ReconciliationRoleLong,
-    SplitSharesRole,
-    ShareAmountRole,
-    ShareAmountSuffixRole,
-    SplitValueRole,
-    MemoRole,
-    SingleLineMemoRole,
-    NumberRole,
-    ErroneousRole,
-    ImportRole,
-
-    // Roles returning ids
-    TransactionIdRole,
-    SplitIdRole,
-    TransactionSplitIdRole,
-    PayeeIdRole,
-    AccountIdRole,
-    CounterAccountIdRole,
-    CostCenterIdRole,
-    ScheduleIdRole
   };
 
   virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
@@ -482,22 +513,30 @@ class LedgerSortFilterProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 public:
-  explicit LedgerSortFilterProxyModel(QObject* parent = 0);
+  LedgerSortFilterProxyModel(QObject* parent = 0);
   virtual ~LedgerSortFilterProxyModel();
 
   void setShowNewTransaction(bool show);
+  void setAccountType(MyMoneyAccount::accountTypeE type);
 
   /**
-   * This method maps the @a index to the base model and call setData on it
+   * This method maps the @a index to the base model and calls setData on it
    */
   virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+
+  /**
+   * This method returns the headerData adjusted to the current
+   * accountType
+   */
+  QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
 protected:
   virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
   virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
 
 private:
-  bool m_showNewTransaction;
+  bool                            m_showNewTransaction;
+  MyMoneyAccount::accountTypeE    m_accountType;
 };
 
 
@@ -523,41 +562,6 @@ public:
 
     // insert new columns above this line
     NumberOfLedgerColumns
-  };
-
-  enum Roles {
-    // Roles returning values
-    PostDateRole = Qt::UserRole,
-    PayeeNameRole,
-    AccountRole,
-    CounterAccountRole,
-    SplitCountRole,
-    ReconciliationRole,
-    ReconciliationRoleShort,
-    ReconciliationRoleLong,
-    SplitSharesRole,
-    ShareAmountRole,
-    ShareAmountSuffixRole,
-    SplitValueRole,
-    MemoRole,
-    SingleLineMemoRole,
-    NumberRole,
-    ErroneousRole,
-    ImportRole,
-
-    // Roles returning ids
-    TransactionIdRole,
-    SplitIdRole,
-    TransactionSplitIdRole,
-    PayeeIdRole,
-    AccountIdRole,
-    CounterAccountIdRole,
-    CostCenterIdRole,
-    ScheduleIdRole,
-
-    // A pseudo role to emit the dataChanged() signal when
-    // used with setData()
-    EmitDataChangedRole
   };
 
   explicit SplitModel(QObject* parent = 0);

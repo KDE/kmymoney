@@ -1,6 +1,7 @@
 set(libmodels_a_SOURCES
     ledgermodel.cpp
     costcentermodel.cpp
+    payeesmodel.cpp
     accountsmodel.cpp
     onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp

@@ -123,30 +123,10 @@ void LedgerTransaction::setupValueDisplay()
   }
 
   // figure out if it is a debit or credit split. s.a. https://en.wikipedia.org/wiki/Debits_and_credits#Aspects_of_transactions
-  MyMoneyAccount account = file->account(m_split.accountId());
-  switch(account.accountGroup()) {
-    default:
-      qWarning() << "Unknown account group" << account.accountGroup() <<  "for account" << account.name() << "in" << __FILE__ << "line" << __LINE__ << ", assuming asset";
-
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Expense:
-      if(m_split.shares().isNegative()) {
-        m_sharesSuffix = i18nc("Credit suffix", "Cr.");
-      } else {
-        m_sharesSuffix = i18nc("Debit suffix", "Dr.");
-      }
-      break;
-
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Equity:
-      if(m_split.shares().isNegative()) {
-        m_sharesSuffix = i18nc("Debit suffix", "Dr.");
-      } else {
-        m_sharesSuffix = i18nc("Credit suffix", "Cr.");
-      }
-      break;
-
+  if(m_split.shares().isNegative()) {
+    m_sharesSuffix = i18nc("Credit suffix", "Cr.");
+  } else {
+    m_sharesSuffix = i18nc("Debit suffix", "Dr.");
   }
 }
 
@@ -238,6 +218,10 @@ bool LedgerTransaction::isNewTransactionEntry() const
   return m_transaction.id().isEmpty() && m_split.id().isEmpty();
 }
 
+QString LedgerTransaction::transactionCommodity() const
+{
+  return m_transaction.commodity();
+}
 
 
 
@@ -297,10 +281,11 @@ QString LedgerSplit::memo() const
 LedgerSortFilterProxyModel::LedgerSortFilterProxyModel(QObject* parent)
   : QSortFilterProxyModel(parent)
   , m_showNewTransaction(false)
+  , m_accountType(MyMoneyAccount::Asset)
 {
-  setFilterRole(LedgerModel::AccountIdRole);
+  setFilterRole(LedgerRole::AccountIdRole);
   setFilterKeyColumn(0);
-  setSortRole(LedgerModel::PostDateRole);
+  setSortRole(LedgerRole::PostDateRole);
   setDynamicSortFilter(true);
 }
 
@@ -308,23 +293,80 @@ LedgerSortFilterProxyModel::~LedgerSortFilterProxyModel()
 {
 }
 
+void LedgerSortFilterProxyModel::setAccountType(MyMoneyAccount::accountTypeE type)
+{
+  m_accountType = type;
+}
+
+QVariant LedgerSortFilterProxyModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+    switch(section) {
+      case LedgerModel::PaymentColumn:
+        switch(m_accountType) {
+          case MyMoneyAccount::CreditCard:
+            return i18nc("Payment made with credit card", "Charge");
+
+          case MyMoneyAccount::Asset:
+          case MyMoneyAccount::AssetLoan:
+            return i18nc("Decrease of asset/liability value", "Decrease");
+
+          case MyMoneyAccount::Liability:
+          case MyMoneyAccount::Loan:
+            return i18nc("Increase of asset/liability value", "Increase");
+
+          case MyMoneyAccount::Income:
+          case MyMoneyAccount::Expense:
+            return i18n("Income");
+
+          default:
+            break;
+        }
+        break;
+
+      case LedgerModel::DepositColumn:
+        switch(m_accountType) {
+          case MyMoneyAccount::CreditCard:
+            return i18nc("Payment towards credit card", "Payment");
+
+          case MyMoneyAccount::Asset:
+          case MyMoneyAccount::AssetLoan:
+            return i18nc("Increase of asset/liability value", "Increase");
+
+          case MyMoneyAccount::Liability:
+          case MyMoneyAccount::Loan:
+            return i18nc("Decrease of asset/liability value", "Decrease");
+
+          case MyMoneyAccount::Income:
+          case MyMoneyAccount::Expense:
+            return i18n("Expense");
+
+          default:
+            break;
+        }
+        break;
+    }
+  }
+  return QSortFilterProxyModel::headerData(section, orientation, role);
+}
+
 bool LedgerSortFilterProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
   // make sure that the dummy transaction is shown last in any case
-  if(left.data(LedgerModel::TransactionSplitIdRole).toString().isEmpty()) {
+  if(left.data(LedgerRole::TransactionSplitIdRole).toString().isEmpty()) {
     return false;
-  } else if(right.data(LedgerModel::TransactionSplitIdRole).toString().isEmpty()) {
+  } else if(right.data(LedgerRole::TransactionSplitIdRole).toString().isEmpty()) {
     return true;
   }
 
   // make sure schedules are shown past real transactions
-  if(!left.data(LedgerModel::ScheduleIdRole).toString().isEmpty()
-  && right.data(LedgerModel::ScheduleIdRole).toString().isEmpty()) {
+  if(!left.data(LedgerRole::ScheduleIdRole).toString().isEmpty()
+  && right.data(LedgerRole::ScheduleIdRole).toString().isEmpty()) {
     // left is schedule, right is not
     return false;
 
-  } else if(left.data(LedgerModel::ScheduleIdRole).toString().isEmpty()
-         && !right.data(LedgerModel::ScheduleIdRole).toString().isEmpty()) {
+  } else if(left.data(LedgerRole::ScheduleIdRole).toString().isEmpty()
+         && !right.data(LedgerRole::ScheduleIdRole).toString().isEmpty()) {
     // right is schedule, left is not
     return true;
   }
@@ -337,7 +379,7 @@ bool LedgerSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelIn
 {
   if(m_showNewTransaction) {
     QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-    if(idx.data(LedgerModel::TransactionSplitIdRole).toString().isEmpty()) {
+    if(idx.data(LedgerRole::TransactionSplitIdRole).toString().isEmpty()) {
       return true;
     }
   }
@@ -441,8 +483,7 @@ QVariant LedgerModel::headerData(int section, Qt::Orientation orientation, int r
   if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
     switch(section) {
       case NumberColumn:
-        return i18n("No");
-        break;
+        return i18nc("Cheque Number", "No.");
       case DateColumn:
         return i18n("Date");
         break;
@@ -459,10 +500,10 @@ QVariant LedgerModel::headerData(int section, Qt::Orientation orientation, int r
         return i18n("C");
         break;
       case PaymentColumn:
-        return i18n("Payment");
+        return i18nc("Payment made from account", "Payment");
         break;
       case DepositColumn:
-        return i18n("Deposit");
+        return i18nc("Deposit into account", "Deposit");
         break;
       case QuantityColumn:
         return i18n("Quantity");
@@ -549,71 +590,71 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
       }
       break;
 
-    case CounterAccountRole:
+    case LedgerRole::CounterAccountRole:
       rc = d->m_ledgerItems[index.row()]->counterAccount();
       break;
 
-    case SplitCountRole:
+    case LedgerRole::SplitCountRole:
       rc = d->m_ledgerItems[index.row()]->splitCount();
 
-    case CostCenterIdRole:
+    case LedgerRole::CostCenterIdRole:
       rc = d->m_ledgerItems[index.row()]->costCenterId();
       break;
 
-    case PostDateRole:
+    case LedgerRole::PostDateRole:
       rc = d->m_ledgerItems[index.row()]->postDate();
       break;
 
-    case PayeeNameRole:
+    case LedgerRole::PayeeNameRole:
       rc = d->m_ledgerItems[index.row()]->payeeName();
       break;
 
-    case PayeeIdRole:
+    case LedgerRole::PayeeIdRole:
       rc = d->m_ledgerItems[index.row()]->payeeId();
       break;
 
-    case AccountIdRole:
+    case LedgerRole::AccountIdRole:
       rc = d->m_ledgerItems[index.row()]->accountId();
       break;
 
     case Qt::EditRole:
-    case TransactionSplitIdRole:
+    case LedgerRole::TransactionSplitIdRole:
       rc = d->m_ledgerItems[index.row()]->transactionSplitId();
       break;
 
-    case TransactionIdRole:
+    case LedgerRole::TransactionIdRole:
       rc = d->m_ledgerItems[index.row()]->transactionId();
       break;
 
-    case ReconciliationRole:
+    case LedgerRole::ReconciliationRole:
       rc = d->m_ledgerItems[index.row()]->reconciliationState();
       break;
 
-    case ReconciliationRoleShort:
+    case LedgerRole::ReconciliationRoleShort:
       rc = d->m_ledgerItems[index.row()]->reconciliationStateShort();
       break;
 
-    case ReconciliationRoleLong:
+    case LedgerRole::ReconciliationRoleLong:
       rc = d->m_ledgerItems[index.row()]->reconciliationStateLong();
       break;
 
-    case SplitValueRole:
+    case LedgerRole::SplitValueRole:
       rc.setValue(d->m_ledgerItems[index.row()]->value());
       break;
 
-    case SplitSharesRole:
+    case LedgerRole::SplitSharesRole:
       rc.setValue(d->m_ledgerItems[index.row()]->shares());
       break;
 
-    case ShareAmountRole:
+    case LedgerRole::ShareAmountRole:
       rc.setValue(d->m_ledgerItems[index.row()]->sharesAmount());
       break;
 
-    case ShareAmountSuffixRole:
+    case LedgerRole::ShareAmountSuffixRole:
       rc.setValue(d->m_ledgerItems[index.row()]->sharesSuffix());
       break;
 
-    case ScheduleIdRole:
+    case LedgerRole::ScheduleIdRole:
       {
       LedgerSchedule* schedule = 0;
       schedule = dynamic_cast<LedgerSchedule*>(d->m_ledgerItems[index.row()]);
@@ -623,10 +664,10 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
       break;
     }
 
-    case MemoRole:
-    case SingleLineMemoRole:
+    case LedgerRole::MemoRole:
+    case LedgerRole::SingleLineMemoRole:
       rc.setValue(d->m_ledgerItems[index.row()]->memo());
-      if(role == SingleLineMemoRole) {
+      if(role == LedgerRole::SingleLineMemoRole) {
         QString txt = rc.toString();
         // remove empty lines
         txt.replace("\n\n", "\n");
@@ -636,20 +677,32 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
       }
       break;
 
-    case NumberRole:
+    case LedgerRole::NumberRole:
       rc = d->m_ledgerItems[index.row()]->transactionNumber();
       break;
 
-    case ErroneousRole:
+    case LedgerRole::ErroneousRole:
       rc = d->m_ledgerItems[index.row()]->isErroneous();
       break;
 
-    case ImportRole:
+    case LedgerRole::ImportRole:
       rc = d->m_ledgerItems[index.row()]->isImported();
       break;
 
-    case CounterAccountIdRole:
+    case LedgerRole::CounterAccountIdRole:
       rc = d->m_ledgerItems[index.row()]->counterAccountId();
+      break;
+
+    case LedgerRole::TransactionCommodityRole:
+      rc = d->m_ledgerItems[index.row()]->transactionCommodity();
+      break;
+
+    case LedgerRole::TransactionRole:
+      rc.setValue(d->m_ledgerItems[index.row()]->transaction());
+      break;
+
+    case LedgerRole::SplitRole:
+      rc.setValue(d->m_ledgerItems[index.row()]->split());
       break;
   }
   return rc;
@@ -845,7 +898,7 @@ void LedgerModel::modifyTransaction(MyMoneyFile::notificationObjectT objType, co
 
   const MyMoneyTransaction * const t = static_cast<const MyMoneyTransaction * const>(obj);
   // get indexes of all existing splits for this transaction
-  QModelIndexList list = match(index(0, 0), TransactionIdRole, obj->id(), -1);
+  QModelIndexList list = match(index(0, 0), LedgerRole::TransactionIdRole, obj->id(), -1);
   // get list of splits to be stored
   QList<MyMoneySplit> splits = t->splits();
 
@@ -897,7 +950,7 @@ void LedgerModel::modifyTransaction(MyMoneyFile::notificationObjectT objType, co
       ++count;
       QModelIndex index = list.takeFirst();
       // get rid of the old split and store new split
-      qDebug() << "Delete split in row:" << index.row() << data(index, TransactionSplitIdRole).toString();
+      qDebug() << "Delete split in row:" << index.row() << data(index, LedgerRole::TransactionSplitIdRole).toString();
       delete d->m_ledgerItems[index.row()];
     }
     d->m_ledgerItems.remove(firstRowUsed, count);
@@ -914,7 +967,7 @@ void LedgerModel::removeTransaction(MyMoneyFile::notificationObjectT objType, co
     return;
   }
 
-  QModelIndexList list = match(index(0, 0), TransactionIdRole, id, -1);
+  QModelIndexList list = match(index(0, 0), LedgerRole::TransactionIdRole, id, -1);
 
   if(list.count()) {
     const int firstRowUsed = list[0].row();
@@ -1131,14 +1184,16 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
             rc = KMyMoneyUtils::reconcileStateToString(split.reconcileFlag(), false);
             break;
           case PaymentColumn:
-            // rc = d->m_ledgerItems[index.row()]->payment();
+            if(split.value().isNegative()) {
+              acc = MyMoneyFile::instance()->account(split.accountId());
+              rc = (-split).value(d->m_transaction.commodity(), acc.currencyId()).formatMoney(acc.fraction());
+            }
             break;
           case DepositColumn:
-            // rc = d->m_ledgerItems[index.row()]->deposit();
-            break;
-          case AmountColumn:
-            acc = MyMoneyFile::instance()->account(split.accountId());
-            rc = split.value(d->m_transaction.commodity(), acc.currencyId()).formatMoney(acc.fraction());
+            if(!split.value().isNegative()) {
+              acc = MyMoneyFile::instance()->account(split.accountId());
+              rc = split.value(d->m_transaction.commodity(), acc.currencyId()).formatMoney(acc.fraction());
+            }
             break;
           default:
             break;
@@ -1164,30 +1219,30 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
       }
       break;
 
-    case SplitModel::AccountIdRole:
+    case LedgerRole::AccountIdRole:
       rc = split.accountId();
       break;
 
-    case SplitModel::AccountRole:
+    case LedgerRole::AccountRole:
       rc = MyMoneyFile::instance()->accountToCategory(split.accountId());
       break;
 
-    case SplitModel::TransactionIdRole:
+    case LedgerRole::TransactionIdRole:
       rc = QString("%1").arg(d->m_transaction.id());
       break;
 
-    case SplitModel::TransactionSplitIdRole:
+    case LedgerRole::TransactionSplitIdRole:
       rc = QString("%1-%2").arg(d->m_transaction.id()).arg(split.id());
       break;
 
-    case SplitModel::SplitIdRole:
+    case LedgerRole::SplitIdRole:
       rc = split.id();
       break;
 
-    case SplitModel::MemoRole:
-    case SingleLineMemoRole:
+    case LedgerRole::MemoRole:
+    case LedgerRole::SingleLineMemoRole:
       rc = split.memo();
-      if(role == SingleLineMemoRole) {
+      if(role == LedgerRole::SingleLineMemoRole) {
         QString txt = rc.toString();
         // remove empty lines
         txt.replace("\n\n", "\n");
@@ -1197,32 +1252,41 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
       }
       break;
 
-    case SplitModel::ShareAmountRole:
-      break;
-
-    case SplitModel::SplitSharesRole:
+    case LedgerRole::SplitSharesRole:
       rc = QVariant::fromValue<MyMoneyMoney>(split.shares());
       break;
 
-    case SplitModel::SplitValueRole:
+    case LedgerRole::SplitValueRole:
       acc = MyMoneyFile::instance()->account(split.accountId());
       rc = QVariant::fromValue<MyMoneyMoney>(split.value(d->m_transaction.commodity(), acc.currencyId()));
       break;
 
-    case SplitModel::PayeeNameRole:
+    case LedgerRole::PayeeNameRole:
       try {
         rc = MyMoneyFile::instance()->payee(split.payeeId()).name();
       } catch(MyMoneyException&e) {
       }
       break;
 
-    case SplitModel::CostCenterIdRole:
+    case LedgerRole::CostCenterIdRole:
       rc = split.costCenterId();
+      break;
+
+    case LedgerRole::TransactionCommodityRole:
+      return d->m_transaction.commodity();
+      break;
+
+    case LedgerRole::NumberRole:
+      rc = split.number();
+      break;
+
+    case LedgerRole::PayeeIdRole:
+      rc = split.payeeId();
       break;
 
     default:
       if(role >= Qt::UserRole) {
-        qWarning() << "Undefined role" << role << "in SplitModel::data";
+        qWarning() << "Undefined role" << role << "(" << role-Qt::UserRole << ") in SplitModel::data";
       }
       break;
   }
@@ -1240,40 +1304,40 @@ bool SplitModel::setData(const QModelIndex& index, const QVariant& value, int ro
     QString val;
     rc = true;
     switch(role) {
-      case SplitModel::PayeeIdRole:
+      case LedgerRole::PayeeIdRole:
         split.setPayeeId(value.toString());
         break;
 
-      case SplitModel::AccountIdRole:
+      case LedgerRole::AccountIdRole:
         split.setAccountId(value.toString());
         break;
 
-      case SplitModel::MemoRole:
+      case LedgerRole::MemoRole:
         split.setMemo(value.toString());
         break;
 
-      case SplitModel::CostCenterIdRole:
+      case LedgerRole::CostCenterIdRole:
         val = value.toString();
         split.setCostCenterId(value.toString());
         break;
 
-      case SplitModel::NumberRole:
+      case LedgerRole::NumberRole:
         split.setNumber(value.toString());
         break;
 
-      case SplitModel::ShareAmountRole:
+      case LedgerRole::SplitSharesRole:
         split.setShares(value.value<MyMoneyMoney>());
         break;
 
-      case SplitModel::SplitValueRole:
+      case LedgerRole::SplitValueRole:
         split.setValue(value.value<MyMoneyMoney>());
         break;
 
-      case SplitModel::EmitDataChangedRole:
+      case LedgerRole::EmitDataChangedRole:
         {
           // the whole row changed
           QModelIndex topLeft = this->index(index.row(), 0);
-          QModelIndex bottomRight = this->index(index.row(), this->columnCount());
+          QModelIndex bottomRight = this->index(index.row(), this->columnCount()-1);
           emit dataChanged(topLeft, bottomRight);
         }
         break;
@@ -1313,7 +1377,7 @@ void SplitModel::addSplit(const QString& transactionSplitId)
 
 void SplitModel::addEmptySplitEntry()
 {
-  QModelIndexList list = match(index(0, 0), SplitIdRole, QString(), -1, Qt::MatchExactly);
+  QModelIndexList list = match(index(0, 0), LedgerRole::SplitIdRole, QString(), -1, Qt::MatchExactly);
   if(list.count() == 0) {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     // d->m_splits.append(MyMoneySplit(d->newSplitEntryId(), MyMoneySplit()));
@@ -1325,7 +1389,7 @@ void SplitModel::addEmptySplitEntry()
 void SplitModel::removeEmptySplitEntry()
 {
   // QModelIndexList list = match(index(0, 0), SplitIdRole, d->newSplitEntryId(), -1, Qt::MatchExactly);
-  QModelIndexList list = match(index(0, 0), SplitIdRole, QString(), -1, Qt::MatchExactly);
+  QModelIndexList list = match(index(0, 0), LedgerRole::SplitIdRole, QString(), -1, Qt::MatchExactly);
   if(list.count()) {
     QModelIndex index = list.at(0);
     beginRemoveRows(QModelIndex(), index.row(), index.row());

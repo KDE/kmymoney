@@ -23,17 +23,7 @@
 
 #include <QFrame>
 class QWidget;
-#if 0
-#include <QObject>
-#include <QAbstractTableModel>
-#include <QSortFilterProxyModel>
-#include <QStyledItemDelegate>
-#include <QTableView>
 
-// ----------------------------------------------------------------------------
-// KDE Includes
-
-#endif
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -42,7 +32,6 @@ class QWidget;
 class NewTransactionEditor : public QFrame
 {
   Q_OBJECT
-  Q_PROPERTY(QString transactionId READ transactionId WRITE setTransactionId NOTIFY transactionChanged USER true)
 
 public:
   explicit NewTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
@@ -54,31 +43,18 @@ public:
    */
   virtual bool accepted() const;
 
-  QString transactionId() const;
-
-  /**
-   * This method returns the transaction if the user left
-   * the editor via the save button.
-   */
-  MyMoneyTransaction transaction() const;
-
   /**
    * Returns the currently entered amount
    */
   MyMoneyMoney transactionAmount() const;
 
   /**
-   * Used to invert the sign of the value depending on the
-   * account one is working in
    */
-  void setInvertSign(bool invertSign);
+  void loadTransaction(const QString& id);
+  void saveTransaction();
 
 protected:
   virtual void keyPressEvent(QKeyEvent* e);
-
-public Q_SLOTS:
-  void setTransactionId(const QString& id);
-  void setAccountId(const QString& id);
 
 protected Q_SLOTS:
   virtual void reject();
@@ -91,13 +67,16 @@ protected Q_SLOTS:
   virtual void costCenterChanged(int costCenterIndex);
   virtual void postdateChanged(const QDate& date);
 
+  void valueChanged();
+
 Q_SIGNALS:
   void done();
   void transactionChanged(const QString&);
 
 private:
   class Private;
-  Private * const d;
+  QScopedPointer<Private> const d;
+  static QDate  m_lastPostDateUsed;
 };
 
 #endif // NEWTRANSACTIONEDITOR_H

@@ -35,6 +35,7 @@
 #include "onlinejobmodel.h"
 #include "ledgermodel.h"
 #include "costcentermodel.h"
+#include "payeesmodel.h"
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -49,6 +50,7 @@ struct Models::Private {
   , m_onlineJobModel(0)
   , m_ledgerModel(0)
   , m_costCenterModel(0)
+  , m_payeesModel(0)
   {}
 
   AccountsModel *m_accountsModel;
@@ -56,6 +58,7 @@ struct Models::Private {
   onlineJobModel *m_onlineJobModel;
   LedgerModel *m_ledgerModel;
   CostCenterModel *m_costCenterModel;
+  PayeesModel *m_payeesModel;
 };
 
 
@@ -93,6 +96,11 @@ AccountsModel* Models::accountsModel()
   return d->m_accountsModel;
 }
 
+/**
+ * This is the function to get a reference to the core @ref InstitutionsModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
 InstitutionsModel* Models::institutionsModel()
 {
   if (!d->m_institutionsModel) {
@@ -116,6 +124,11 @@ onlineJobModel* Models::onlineJobsModel()
   return d->m_onlineJobModel;
 }
 
+/**
+ * This is the function to get a reference to the core @ref LedgerModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
 LedgerModel* Models::ledgerModel()
 {
   if (!d->m_ledgerModel) {
@@ -127,6 +140,11 @@ LedgerModel* Models::ledgerModel()
   return d->m_ledgerModel;
 }
 
+/**
+ * This is the function to get a reference to the core @ref CostCenterModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
 CostCenterModel* Models::costCenterModel()
 {
   if (!d->m_costCenterModel) {
@@ -137,6 +155,23 @@ CostCenterModel* Models::costCenterModel()
   }
   return d->m_costCenterModel;
 }
+
+/**
+ * This is the function to get a reference to the core @ref PayeesModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+PayeesModel* Models::payeesModel()
+{
+  if (!d->m_payeesModel) {
+    d->m_payeesModel = new PayeesModel(this);
+    #ifdef KMM_MODELTEST
+    new ModelTest(d->m_payeesModel, Models::instance());
+    #endif
+  }
+  return d->m_payeesModel;
+}
+
 
 QModelIndex Models::indexById(QAbstractItemModel* model, int role, const QString& id)
 {
@@ -160,6 +195,7 @@ void Models::fileOpened()
   onlineJobsModel()->load();
   costCenterModel()->load();
   ledgerModel()->load();
+  payeesModel()->load();
 
   emit modelsLoaded();
 }
@@ -172,4 +208,6 @@ void Models::fileClosed()
   institutionsModel()->removeRows(0, institutionsModel()->rowCount());
   onlineJobsModel()->unload();
   ledgerModel()->unload();
+  costCenterModel()->unload();
+  payeesModel()->unload();
 }

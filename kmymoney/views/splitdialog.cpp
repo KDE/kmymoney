@@ -39,6 +39,7 @@
 #include "accountsmodel.h"
 #include "splitdelegate.h"
 #include "newtransactioneditor.h"
+#include "splitadjustdialog.h"
 
 class SplitDialog::Private
 {
@@ -48,6 +49,9 @@ public:
   , ui(new Ui_SplitDialog)
   {
   }
+
+  void deleteSplits(QModelIndexList indexList);
+
   SplitDialog*                parent;
   Ui_SplitDialog*             ui;
   SplitDelegate*              splitDelegate;
@@ -61,29 +65,48 @@ public:
    * The parent transaction editor which opened the split editor
    */
   NewTransactionEditor*       transactionEditor;
+
+  MyMoneyMoney                transactionTotal;
+  MyMoneyMoney                splitsTotal;
 };
 
+static const int SumRow = 0;
+static const int DiffRow = 1;
+static const int AmountRow = 2;
+static const int HeaderCol = 0;
+static const int ValueCol = 1;
 
 
-SplitDialog::SplitDialog(const MyMoneyAccount& account, NewTransactionEditor* parent, Qt::WindowFlags f)
+void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
+{
+  foreach(auto index, indexList) {
+    ui->splitView->model()->removeRow(index.row());
+  }
+}
+
+
+SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amount, NewTransactionEditor* parent, Qt::WindowFlags f)
   : QDialog(parent, f)
   , d(new Private(this))
 {
   d->transactionEditor = parent;
   d->account = account;
+  d->transactionTotal = amount;
   d->ui->setupUi(this);
 
   d->ui->splitView->setColumnHidden(LedgerModel::DateColumn, true);
   d->ui->splitView->setColumnHidden(LedgerModel::NumberColumn, true);
   d->ui->splitView->setColumnHidden(LedgerModel::SecurityColumn, true);
   d->ui->splitView->setColumnHidden(LedgerModel::ReconciliationColumn, true);
-  d->ui->splitView->setColumnHidden(LedgerModel::PaymentColumn, true);
-  d->ui->splitView->setColumnHidden(LedgerModel::DepositColumn, true);
+  d->ui->splitView->setColumnHidden(LedgerModel::PaymentColumn, false);
+  d->ui->splitView->setColumnHidden(LedgerModel::DepositColumn, false);
   d->ui->splitView->setColumnHidden(LedgerModel::QuantityColumn, true);
-  d->ui->splitView->setColumnHidden(LedgerModel::DepositColumn, true);
   d->ui->splitView->setColumnHidden(LedgerModel::PriceColumn, true);
+  d->ui->splitView->setColumnHidden(LedgerModel::AmountColumn, true);
   d->ui->splitView->setColumnHidden(LedgerModel::ValueColumn, true);
   d->ui->splitView->setColumnHidden(LedgerModel::BalanceColumn, true);
+  d->ui->splitView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+  d->ui->splitView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
   // setup the item delegate
   d->splitDelegate = new SplitDelegate(d->ui->splitView);
@@ -95,6 +118,11 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, NewTransactionEditor* pa
   // setup some connections
   connect(d->ui->splitView, SIGNAL(aboutToStartEdit()), this, SLOT(disableButtons()));
   connect(d->ui->splitView, SIGNAL(aboutToFinishEdit()), this, SLOT(enableButtons()));
+
+  connect(d->ui->deleteAllButton, SIGNAL(pressed()), this, SLOT(deleteAllSplits()));
+  connect(d->ui->deleteButton, SIGNAL(pressed()), this, SLOT(deleteSelectedSplits()));
+  connect(d->ui->deleteZeroButton, SIGNAL(pressed()), this, SLOT(deleteZeroSplits()));
+  connect(d->ui->mergeButton, SIGNAL(pressed()), this, SLOT(mergeSplits()));
   connect(d->ui->newSplitButton, SIGNAL(pressed()), this, SLOT(newSplit()));
 
   // finish polishing the widgets
@@ -103,6 +131,50 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, NewTransactionEditor* pa
 
 SplitDialog::~SplitDialog()
 {
+}
+
+int SplitDialog::exec()
+{
+  if(!d->ui->splitView->model()) {
+    qWarning() << "SplitDialog::exec() executed without a model. Use setModel() before calling exec().";
+    return QDialog::Rejected;
+  }
+  return QDialog::exec();
+}
+
+void SplitDialog::accept()
+{
+  adjustSummary();
+  bool accept = true;
+  if(d->transactionTotal != d->splitsTotal) {
+    QPointer<SplitAdjustDialog> dlg = new SplitAdjustDialog(this);
+    dlg->setValues(d->ui->summaryView->item(AmountRow, ValueCol)->data(Qt::DisplayRole).toString(),
+                  d->ui->summaryView->item(SumRow, ValueCol)->data(Qt::DisplayRole).toString(),
+                  d->ui->summaryView->item(DiffRow, ValueCol)->data(Qt::DisplayRole).toString(),
+                  d->ui->splitView->model()->rowCount());
+    accept = false;
+    if(dlg->exec() == QDialog::Accepted && dlg) {
+      switch(dlg->selectedOption()) {
+        case SplitAdjustDialog::SplitAdjustContinue:
+          break;
+        case SplitAdjustDialog::SplitAdjustChange:
+          d->transactionTotal = d->splitsTotal;
+          accept = true;
+          break;
+        case SplitAdjustDialog::SplitAdjustDistribute:
+          qWarning() << "SplitDialog::accept needs to implement the case SplitAdjustDialog::SplitAdjustDistribute";
+          accept = true;
+          break;
+        case SplitAdjustDialog::SplitAdjustLeaveAsIs:
+          accept = true;
+          break;
+      }
+    }
+    delete dlg;
+    updateButtonState();
+  }
+  if(accept)
+    QDialog::accept();
 }
 
 void SplitDialog::enableButtons()
@@ -127,47 +199,50 @@ void SplitDialog::setModel(QAbstractItemModel* model)
   adjustSummary();
 
   // force an update of the summary if data changes in the model
-  connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(adjustSummary()));
+  connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)), this, SLOT(adjustSummary()));
+  connect(d->ui->splitView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), this, SLOT(selectionChanged()));
 }
 
 void SplitDialog::adjustSummary()
 {
-  const int SumRow = 0;
-  const int DiffRow = 1;
-  const int AmountRow = 2;
-  const int HeaderCol = 0;
-  const int ValueCol = 1;
-
-  MyMoneyMoney sum;
+  d->splitsTotal = 0;
   for(int row = 0; row < d->ui->splitView->model()->rowCount(); ++row) {
     QModelIndex index = d->ui->splitView->model()->index(row, 0);
     if(index.isValid()) {
-      sum += d->ui->splitView->model()->data(index, SplitModel::SplitValueRole).value<MyMoneyMoney>();
+      d->splitsTotal += d->ui->splitView->model()->data(index, LedgerRole::SplitValueRole).value<MyMoneyMoney>();
     }
   }
-  QString formattedValue = sum.formatMoney(d->account.fraction());
+  QString formattedValue = d->splitsTotal.formatMoney(d->account.fraction());
   d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
-  MyMoneyMoney amount;
   if(d->transactionEditor) {
-    amount = d->transactionEditor->transactionAmount();
-    d->splitDelegate->setInversedViewOfAmounts(amount.isNegative());
-
-    amount = amount.abs();
-    formattedValue = amount.formatMoney(d->account.fraction());
+    d->transactionTotal = d->transactionEditor->transactionAmount();
+    formattedValue = d->transactionTotal.formatMoney(d->account.fraction());
     d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
-    if((amount - sum).isNegative()) {
+    if((d->transactionTotal - d->splitsTotal).isNegative()) {
       d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Assigned too much"));
     } else {
       d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Unassigned"));
     }
-    formattedValue = (amount - sum).abs().formatMoney(d->account.fraction());
+    formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(d->account.fraction());
     d->ui->summaryView->item(DiffRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
   } else {
     d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, QString());
     d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, QString());
   }
 
+  adjustSummaryWidth();
+  updateButtonState();
+}
+
+void SplitDialog::resizeEvent(QResizeEvent* ev)
+{
+  QDialog::resizeEvent(ev);
+  adjustSummaryWidth();
+}
+
+void SplitDialog::adjustSummaryWidth()
+{
   d->ui->summaryView->resizeColumnToContents(1);
   d->ui->summaryView->horizontalHeader()->resizeSection(0, d->ui->summaryView->width() - d->ui->summaryView->horizontalHeader()->sectionSize(1) - 10);
 }
@@ -189,4 +264,94 @@ void SplitDialog::newSplit()
   } else {
     d->ui->splitView->selectRow(d->ui->splitView->model()->rowCount()-1);
   }
+}
+
+MyMoneyMoney SplitDialog::transactionAmount() const
+{
+  return d->transactionTotal;
+}
+
+void SplitDialog::selectionChanged()
+{
+  updateButtonState();
+}
+
+void SplitDialog::updateButtonState()
+{
+  d->ui->deleteButton->setEnabled(false);
+  d->ui->deleteAllButton->setEnabled(false);
+  d->ui->mergeButton->setEnabled(false);
+  d->ui->deleteZeroButton->setEnabled(false);
+
+  if(d->ui->splitView->selectionModel()->selectedRows().count() >= 1) {
+    d->ui->deleteButton->setEnabled(true);
+  }
+
+  if(d->ui->splitView->model()->rowCount() > 2) {
+    d->ui->deleteAllButton->setEnabled(true);
+  }
+
+  QAbstractItemModel* model = d->ui->splitView->model();
+  QSet<QString> accountIDs;
+  for(int row = 0; row < model->rowCount(); ++row) {
+    const QModelIndex index = model->index(row,0);
+    // don't check the empty line at the end
+    if(model->data(index, LedgerRole::SplitIdRole).toString().isEmpty())
+      continue;
+
+    const QString accountID = model->data(index, LedgerRole::AccountIdRole).toString();
+    const MyMoneyMoney value = model->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>();
+    if(accountIDs.contains(accountID)) {
+      d->ui->mergeButton->setEnabled(true);
+    }
+    if(value.isZero()) {
+      d->ui->deleteZeroButton->setEnabled(true);
+    }
+  }
+}
+
+void SplitDialog::deleteSelectedSplits()
+{
+  d->deleteSplits(d->ui->splitView->selectionModel()->selectedRows());
+  adjustSummary();
+}
+
+void SplitDialog::deleteAllSplits()
+{
+  QAbstractItemModel* model = d->ui->splitView->model();
+  QModelIndexList list = model->match(model->index(0,0),
+                                      LedgerRole::SplitIdRole,
+                                      QLatin1String(".+"),
+                                      -1,
+                                      Qt::MatchRegExp
+                                     );
+  d->deleteSplits(list);
+  adjustSummary();
+}
+
+void SplitDialog::deleteZeroSplits()
+{
+  QAbstractItemModel* model = d->ui->splitView->model();
+  QModelIndexList list = model->match(model->index(0,0),
+                                      LedgerRole::SplitIdRole,
+                                      QLatin1String(".+"),
+                                      -1,
+                                      Qt::MatchRegExp
+                                     );
+  for(int idx = 0; idx < list.count();) {
+    QModelIndex index = list.at(idx);
+    if(!model->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+      list.removeAt(idx);
+    } else {
+      ++idx;
+    }
+  }
+  d->deleteSplits(list);
+  adjustSummary();
+}
+
+void SplitDialog::mergeSplits()
+{
+  qDebug() << "Merge splits not yet implemented.";
+  adjustSummary();
 }
