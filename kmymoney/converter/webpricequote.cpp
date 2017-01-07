@@ -884,13 +884,34 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
       case 'm':
         month = (*it_scanned).toUInt(&ok);
         if (!ok) {
+          month = 0;
           // maybe it's a textual date
           unsigned i = 1;
+          // search the name in the current selected locale
+          QLocale locale;
           while (i <= 12) {
-            if (QLocale().monthName(i).toLower() == *it_scanned
-                || QLocale().monthName(i, QLocale::ShortFormat).toLower() == *it_scanned)
+            if (locale.standaloneMonthName(i).toLower() == *it_scanned
+                || locale.standaloneMonthName(i, QLocale::ShortFormat).toLower() == *it_scanned) {
               month = i;
+              break;
+            }
             ++i;
+          }
+          // in case we did not find the month in the current locale,
+          // we look for it in the C locale
+          if(month == 0) {
+            QLocale localeC(QLocale::C);
+            if( !(locale == localeC)) {
+              i = 1;
+              while (i <= 12) {
+                if (localeC.standaloneMonthName(i).toLower() == *it_scanned
+                    || localeC.standaloneMonthName(i, QLocale::ShortFormat).toLower() == *it_scanned) {
+                  month = i;
+                  break;
+                }
+                ++i;
+              }
+            }
           }
         }
 
