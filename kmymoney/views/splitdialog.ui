@@ -614,7 +614,7 @@
          <string>Merges splits with the same category to one split</string>
         </property>
         <property name="whatsThis">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In case you have multiple split entries to the same category and you like to keep them as a single split, press this button. The amount for identical categories will be added and stored in a single split for that category.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>In case you have multiple split entries to the same category and you like to keep them as a single split, press this button. The amount for identical categories will be added and stored in a single split for that category.</string>
         </property>
         <property name="text">
          <string>&amp;Merge</string>
@@ -644,7 +644,7 @@
          <string>Clear all splits</string>
         </property>
         <property name="whatsThis">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use this to delete all splits of this transaction.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Use this to delete all splits of this transaction.</string>
         </property>
         <property name="text">
          <string>Delete &amp;All</string>
