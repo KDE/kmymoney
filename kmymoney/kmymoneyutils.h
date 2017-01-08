@@ -420,7 +420,7 @@ public:
     */
   static QPixmap overlayIcon(const QString source, const QString overlay, const Qt::Corner corner = Qt::BottomRightCorner, int size = 0);
 
-
+  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
 
 };
 

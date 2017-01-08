@@ -37,6 +37,7 @@ target_link_libraries(kmm_csvimport
   PUBLIC
     kmm_mymoney
     kmm_plugin
+    kmymoney_common
     Qt5::Core
     Qt5::Widgets
 )
@@ -45,6 +46,7 @@ add_library(kmm_csvimport_static STATIC ${kmm_csvimport_PART_SRCS})
 
 target_link_libraries(kmm_csvimport_static
     kmm_plugin
+    kmymoney_common
     Qt5::Core
     Qt5::Widgets
 )

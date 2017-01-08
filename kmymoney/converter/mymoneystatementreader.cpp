@@ -214,7 +214,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneySecurity security;
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
-      InvestTransactionEditor::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      KMyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       if (feeSplits.count() == 1) {
         feesId = feeSplits.first().accountId();
       }

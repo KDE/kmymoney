@@ -54,6 +54,7 @@
 #include "kcurrencycalculator.h"
 #include "kmymoneyglobalsettings.h"
 #include "investactivities.h"
+#include "kmymoneyutils.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
@@ -111,13 +112,13 @@ InvestTransactionEditor::InvestTransactionEditor(TransactionEditorContainer* reg
   connect(m_regForm, SIGNAL(geometriesUpdated()), this, SLOT(slotTransactionContainerGeometriesUpdated()));
 
   // dissect the transaction into its type, splits, currency, security etc.
-  dissectTransaction(m_transaction, m_split,
-                     m_assetAccountSplit,
-                     m_feeSplits,
-                     m_interestSplits,
-                     m_security,
-                     m_currency,
-                     m_transactionType);
+  KMyMoneyUtils::dissectTransaction(m_transaction, m_split,
+                                    m_assetAccountSplit,
+                                    m_feeSplits,
+                                    m_interestSplits,
+                                    m_security,
+                                    m_currency,
+                                    m_transactionType);
 
   // determine initial activity object
   activityFactory(m_transactionType);
@@ -155,54 +156,6 @@ void InvestTransactionEditor::activityFactory(MyMoneySplit::investTransactionTyp
         d->m_activity = new IntInc(this);
         break;
     }
-  }
-}
-
-void InvestTransactionEditor::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType)
-{
-  // collect the splits. split references the stock account and should already
-  // be set up. assetAccountSplit references the corresponding asset account (maybe
-  // empty), feeSplits is the list of all expenses and interestSplits
-  // the list of all incomes
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
-    MyMoneyAccount acc = file->account((*it_s).accountId());
-    if ((*it_s).id() == split.id()) {
-      security = file->security(acc.currencyId());
-    } else if (acc.accountGroup() == MyMoneyAccount::Expense) {
-      feeSplits.append(*it_s);
-      // feeAmount += (*it_s).value();
-    } else if (acc.accountGroup() == MyMoneyAccount::Income) {
-      interestSplits.append(*it_s);
-      // interestAmount += (*it_s).value();
-    } else {
-      assetAccountSplit = *it_s;
-    }
-  }
-
-  // determine transaction type
-  if (split.action() == MyMoneySplit::ActionAddShares) {
-    transactionType = (!split.shares().isNegative()) ? MyMoneySplit::AddShares : MyMoneySplit::RemoveShares;
-  } else if (split.action() == MyMoneySplit::ActionBuyShares) {
-    transactionType = (!split.value().isNegative()) ? MyMoneySplit::BuyShares : MyMoneySplit::SellShares;
-  } else if (split.action() == MyMoneySplit::ActionDividend) {
-    transactionType = MyMoneySplit::Dividend;
-  } else if (split.action() == MyMoneySplit::ActionReinvestDividend) {
-    transactionType = MyMoneySplit::ReinvestDividend;
-  } else if (split.action() == MyMoneySplit::ActionYield) {
-    transactionType = MyMoneySplit::Yield;
-  } else if (split.action() == MyMoneySplit::ActionSplitShares) {
-    transactionType = MyMoneySplit::SplitShares;
-  } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
-    transactionType = MyMoneySplit::InterestIncome;
-  } else
-    transactionType = MyMoneySplit::BuyShares;
-
-  currency.setTradingSymbol("???");
-  try {
-    currency = file->security(transaction.commodity());
-  } catch (const MyMoneyException &) {
   }
 }
 
@@ -1057,7 +1010,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   MyMoneySplit::investTransactionTypeE transactionType;
 
   // extract the splits from the original transaction
-  dissectTransaction(torig, sorig,
+  KMyMoneyUtils::dissectTransaction(torig, sorig,
                      assetAccountSplit,
                      feeSplits,
                      interestSplits,

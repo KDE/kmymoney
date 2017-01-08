@@ -444,7 +444,7 @@ void CsvUtil::previouslyUsedCategories(const QString& investmentAccount, QString
       MyMoneySecurity security;
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
-      dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      KMyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       if (feeSplits.count() == 1) {
         feesId = feeSplits.first().accountId();
       }
@@ -455,54 +455,6 @@ void CsvUtil::previouslyUsedCategories(const QString& investmentAccount, QString
   } catch (const MyMoneyException &) {
   }
 }
-
-
-void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType)
-{
-  // collect the splits. split references the stock account and should already
-  // be set up. assetAccountSplit references the corresponding asset account (maybe
-  // empty), feeSplits is the list of all expenses and interestSplits
-  // the list of all incomes
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-    MyMoneyAccount acc = file->account((*it_s).accountId());
-    if ((*it_s).id() == split.id()) {
-      security = file->security(acc.currencyId());
-    } else if (acc.accountGroup() == MyMoneyAccount::Expense) {
-      feeSplits.append(*it_s);
-    } else if (acc.accountGroup() == MyMoneyAccount::Income) {
-      interestSplits.append(*it_s);
-    } else {
-      assetAccountSplit = *it_s;
-    }
-  }
-
-  // determine transaction type
-  if (split.action() == MyMoneySplit::ActionAddShares) {
-    transactionType = (!split.shares().isNegative()) ? MyMoneySplit::AddShares : MyMoneySplit::RemoveShares;
-  } else if (split.action() == MyMoneySplit::ActionBuyShares) {
-    transactionType = (!split.value().isNegative()) ? MyMoneySplit::BuyShares : MyMoneySplit::SellShares;
-  } else if (split.action() == MyMoneySplit::ActionDividend) {
-    transactionType = MyMoneySplit::Dividend;
-  } else if (split.action() == MyMoneySplit::ActionReinvestDividend) {
-    transactionType = MyMoneySplit::ReinvestDividend;
-  } else if (split.action() == MyMoneySplit::ActionYield) {
-    transactionType = MyMoneySplit::Yield;
-  } else if (split.action() == MyMoneySplit::ActionSplitShares) {
-    transactionType = MyMoneySplit::SplitShares;
-  } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
-    transactionType = MyMoneySplit::InterestIncome;
-  } else
-    transactionType = MyMoneySplit::BuyShares;
-
-  currency.setTradingSymbol("???");
-  try {
-    currency = file->security(transaction.commodity());
-  } catch (const MyMoneyException &) {
-  }
-}
-
 
 const QString CsvUtil::checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2)
 {

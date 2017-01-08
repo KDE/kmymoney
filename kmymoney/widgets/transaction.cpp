@@ -1376,13 +1376,13 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
 {
 #ifndef KMM_DESIGNER
   // dissect the transaction into its type, splits, currency, security etc.
-  InvestTransactionEditor::dissectTransaction(m_transaction, m_split,
-      m_assetAccountSplit,
-      m_feeSplits,
-      m_interestSplits,
-      m_security,
-      m_currency,
-      m_transactionType);
+  KMyMoneyUtils::dissectTransaction(m_transaction, m_split,
+                                    m_assetAccountSplit,
+                                    m_feeSplits,
+                                    m_interestSplits,
+                                    m_security,
+                                    m_currency,
+                                    m_transactionType);
 #endif
 
   QList<MyMoneySplit>::ConstIterator it_s;

@@ -74,8 +74,6 @@ public:
 
   void totalAmount(MyMoneyMoney& amount) const;
 
-  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
-
   bool setupPrice(const MyMoneyTransaction& t, MyMoneySplit& split);
 
   /**
