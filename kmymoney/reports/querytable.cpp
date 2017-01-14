@@ -4,6 +4,7 @@
     begin                : Fri Jul 23 2004
     copyright            : (C) 2004-2005 by Ace Jones <acejones@users.sourceforge.net>
                            (C) 2007 Sascha Pfau <MrPeacock@gmail.com>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -1035,9 +1036,10 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
       buys += CashFlowListItem((*it_transaction).postDate(), value);
     else if (transactionType == MyMoneySplit::SellShares)
       sells += CashFlowListItem((*it_transaction).postDate(), value);
-    else if (transactionType == MyMoneySplit::ReinvestDividend)
-      reinvestincome += CashFlowListItem((*it_transaction).postDate(), value);
-    else if (transactionType == MyMoneySplit::Dividend || transactionType == MyMoneySplit::Yield)
+    else if (transactionType == MyMoneySplit::ReinvestDividend) {
+      value = interestSplits.first().value() * price;
+      reinvestincome += CashFlowListItem((*it_transaction).postDate(), -value);
+    } else if (transactionType == MyMoneySplit::Dividend || transactionType == MyMoneySplit::Yield)
       cashincome += CashFlowListItem((*it_transaction).postDate(), value);
     ++it_transaction;
   }
