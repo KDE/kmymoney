@@ -601,14 +601,11 @@ void KReportChartView::setLineWidth(const int lineWidth)
 {
   if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
     LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
-    const int currentCols = m_model.columnCount();
-    const int currentRows = m_model.rowCount();
-    for (int col = 0; col < currentCols; ++col) {
-      for (int row = 0; row < currentRows; ++row) {
-        QPen pen(lineDiagram->pen(m_model.index(row, col, QModelIndex())));
-        pen.setWidth(lineWidth);
-        lineDiagram->setPen(m_model.index(row, col, QModelIndex()), pen);
-      }
+    QList <QPen> pens;
+    pens = lineDiagram->datasetPens();
+    for (int i = 0; i < pens.count(); ++i) {
+      pens[i].setWidth(lineWidth);
+      lineDiagram->setPen(i, pens.at(i));
     }
   }
 }
