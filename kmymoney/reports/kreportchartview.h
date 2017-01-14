@@ -81,14 +81,9 @@ private:
   unsigned drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn = 1, int endColumn = 0);
 
   /**
-    * Set the data value
+    * Set cell data
     */
-  void setDataCell(int row, int column, const double data);
-
-  /**
-    * Set the tooltip for a data value
-    */
-  void setCellTip(int row, int column, QString tip);
+  void setDataCell(int row, int column, const double value, QString tip = QString());
 
   /**
     * Make sure the model has the right size

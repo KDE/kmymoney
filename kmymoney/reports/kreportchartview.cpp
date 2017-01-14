@@ -4,6 +4,7 @@
     begin                : Sun Aug 14 2005
     copyright            : (C) 2004-2005 by Ace Jones
     email                : <ace.j@hotpop.com>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -265,7 +266,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             //
             // Rows
             //
-            QString innergroupdata;
             PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
             while (it_row != (*it_innergroup).end()) {
               //Do not include investments accounts in the chart because they are merely container of stock and other accounts
@@ -283,11 +283,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                       legendText = QString(it_row.key().name());
                     }
 
-                    //set the cell value and tooltip
-                    rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns());
-
                     //set the legend text
-                    legend->setText(rowNum - 1, legendText);
+                    legend->setText(rowNum, legendText);
+
+                    //clear to speed up drawPivotRowSet
+                    if (!config.isChartDataLabels())
+                      legendText.clear();
+
+                    //set the cell value and tooltip
+                    rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns() - 1);
                   }
                 }
               }
@@ -324,11 +328,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   legendText = QString(it_innergroup.key());
                 }
 
-                //set the cell value and tooltip
-                rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
-
                 //set the legend text
-                legend->setText(rowNum - 1, legendText);
+                legend->setText(rowNum, legendText);
+
+                //clear to speed up drawPivotRowSet
+                if (!config.isChartDataLabels())
+                  legendText.clear();
+
+                //set the cell value and tooltip
+                rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
               }
             }
             ++it_innergroup;
@@ -357,11 +365,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 legendText = QString(it_outergroup.key());
               }
 
-              //set the cell value and tooltip
-              rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
+              //set the legend text
+              legend->setText(rowNum, legendText);
 
-              //set the legend
-              legend->setText(rowNum - 1, legendText);
+              //clear to speed up drawPivotRowSet
+              if (!config.isChartDataLabels())
+                legendText.clear();
+
+              //set the cell value and tooltip
+              rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
             }
           }
           ++it_outergroup;
@@ -382,12 +394,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 legendText = QString(i18nc("Total balance", "Total"));
               }
 
+              //set the legend text
+              legend->setText(rowNum, legendText);
+
+              //clear to speed up drawPivotRowSet
+              if (!config.isChartDataLabels())
+                legendText.clear();
+
               //set the cell value
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
-
-              //set the legend
-              legend->setText(rowNum - 1, legendText);
-
+              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
             }
           }
         }
@@ -410,21 +425,25 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               legendText = QString(i18nc("Total balance", "Total"));
             }
 
+            //set the legend
+            legend->setText(rowNum, legendText);
+
+            //clear to speed up drawPivotRowSet
+            if (!config.isChartDataLabels())
+              legendText.clear();
+
             if (config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
               if (rowTypeList[i] == eActual) {
                 rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn());
               } else if (rowTypeList[i] == eForecast) {
-                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns());
+                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns() - 1);
               } else {
-                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
+                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
               }
             } else {
               //set cell value
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
+              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
             }
-
-            //set legend text
-            legend->setText(rowNum - 1, legendText);
           }
         }
       }
@@ -508,49 +527,55 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
 unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
 {
+  if (coordinatePlane()->diagram()->datasetDimension() != 1)
+    return ++rowNum;
   //if endColumn is invalid, make it the same as numColumns
-  if (endColumn == 0) {
+  if (endColumn == 0)
     endColumn = numColumns();
+
+  double value;
+  QString toolTip;
+
+  if (( accountSeries() && !seriesTotals()) ||
+      (!accountSeries() &&  seriesTotals())) {
+    justifyModelSize(endColumn > numColumns() - 1 ? endColumn + 1 : numColumns(), rowNum + 1);
+  } else {
+    justifyModelSize(rowNum + 1, endColumn > numColumns() - 1 ? endColumn + 1 : numColumns());
   }
 
   // Columns
   if (seriesTotals()) {
-    double value = rowSet[rowType].m_total.toDouble();
+    value = rowSet[rowType].m_total.toDouble();
 
     //set the tooltip
-    QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
-                      .arg(legendText)
-                      .arg(value, 0, 'f', 2);
+    if (!legendText.isEmpty())
+      toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
+          .arg(legendText)
+          .arg(value, 0, 'f', 2);
 
-    if (accountSeries()) {
-      //set the cell value
-      this->setDataCell(rowNum, 0, value);
-      this->setCellTip(rowNum, 0, toolTip);
-    } else {
-      this->setDataCell(0, rowNum, value);
-      this->setCellTip(0, rowNum, toolTip);
-    }
+    //set the cell value
+    if (accountSeries())
+      this->setDataCell(rowNum, 0, value, toolTip);
+    else
+      this->setDataCell(0, rowNum, value, toolTip);
   } else {
     int column = startColumn;
     while (column <= endColumn && column < numColumns()) {
-      double value = rowSet[rowType][column].toDouble();
-
       //if zero and set to skip, increase column and continue with next value
       if (m_skipZero && rowSet[rowType][column].isZero()) {
         ++column;
         continue;
       } else {
-        QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
-                          .arg(legendText)
-                          .arg(value, 0, 'f', 2);
+        value = rowSet[rowType][column].toDouble();
+        if (!legendText.isEmpty())
+          toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
+              .arg(legendText)
+              .arg(value, 0, 'f', 2);
 
-        if (accountSeries()) {
-          this->setDataCell(column - 1, rowNum, value);
-          this->setCellTip(column - 1, rowNum, toolTip);
-        } else {
-          this->setDataCell(rowNum, column - 1, value);
-          this->setCellTip(rowNum, column - 1, toolTip);
-        }
+        if (accountSeries())
+          this->setDataCell(column, rowNum, value, toolTip);
+        else
+          this->setDataCell(rowNum, column, value, toolTip);
       }
       ++column;
     }
@@ -558,26 +583,14 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
   return ++rowNum;
 }
 
-void KReportChartView::setDataCell(int row, int column, const double data)
+void KReportChartView::setDataCell(int row, int column, const double value, QString tip)
 {
-  if (coordinatePlane()->diagram()->datasetDimension() != 1)
-    return;
-
-  justifyModelSize(row + 1, column + 1);
-
+  QMap<int, QVariant> data;
+  data.insert(Qt::DisplayRole, QVariant(value));
+  if (!tip.isEmpty())
+    data.insert(Qt::ToolTipRole, QVariant(tip));
   const QModelIndex index = m_model.index(row, column);
-  m_model.setData(index, QVariant(data), Qt::DisplayRole);
-}
-
-void KReportChartView::setCellTip(int row, int column, QString tip)
-{
-  if (coordinatePlane()->diagram()->datasetDimension() != 1)
-    return;
-
-  justifyModelSize(row + 1, column + 1);
-
-  const QModelIndex index = m_model.index(row, column);
-  m_model.setData(index, QVariant(tip), Qt::ToolTipRole);
+  m_model.setItemData(index, data);
 }
 
 /**
@@ -617,6 +630,8 @@ void KReportChartView::setLineWidth(const int lineWidth)
 
 void KReportChartView::drawLimitLine(const double limit)
 {
+  if (coordinatePlane()->diagram()->datasetDimension() != 1)
+    return;
   // temporarily disconnect the view from the model to aovid update of view on
   // emission of the dataChanged() signal for each call of setDataCell().
   // This speeds up the runtime of drawLimitLine() by a factor of
@@ -626,7 +641,7 @@ void KReportChartView::drawLimitLine(const double limit)
 
   //we get the current number of rows and we add one after that
   int row = m_model.rowCount();
-
+  justifyModelSize(m_numColumns, row + 1);
   for (int col = 0; col < m_numColumns; ++col) {
     setDataCell(col, row, limit);
   }
