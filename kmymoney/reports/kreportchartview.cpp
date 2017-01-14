@@ -210,15 +210,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxisRulerAttr.setShowRulerLine(true);
     xAxis->setRulerAttributes(xAxisRulerAttr);
 
-    // Set up X axis labels (ie "abscissa" to use the technical term)
-    QStringList abscissaNames;
-    if (accountSeries()) { // if not, we will set these up while putting in the chart values.
-      int column = 1;
-      while (column < numColumns()) {
-        abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
-      }
-      xAxis->setLabels(abscissaNames);
-    }
 
     //set y axis
     KBalanceAxis *yAxis = new KBalanceAxis();
@@ -440,6 +431,21 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       break;
   }
   m_model.blockSignals(blocked); // reenable dataChanged() signal
+
+  if (config.chartType() == MyMoneyReport::eChartLine ||
+      config.chartType() == MyMoneyReport::eChartBar ||
+      config.chartType() == MyMoneyReport::eChartStackedBar) {
+    // Set up X axis labels (ie "abscissa" to use the technical term)
+    QStringList abscissaNames;
+    if (accountSeries()) { // if not, we will set these up while putting in the chart values.
+      int column = 1;
+      while (column < numColumns()) {
+        abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
+      }
+      qDebug() << "rows: " << m_model.rowCount() << "columns: " << m_model.columnCount();
+      m_model.setVerticalHeaderLabels(abscissaNames);
+    }
+  }
 
   //assign model to the diagram
   planeDiagram->setModel(&m_model);
