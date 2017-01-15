@@ -1177,7 +1177,8 @@ bool InvestmentPage::processInvestLine(const QString &line, MyMoneyStatement &st
       if (m_wiz->m_memoColList[i] != m_colTypeNum[ColumnMemo]) {
         if (!memo.isEmpty())
           memo.append(QChar(QLatin1Char('\n')));
-        memo.append(m_columnList[m_wiz->m_memoColList[i]]);
+        if (m_wiz->m_memoColList[i] < m_columnList.count())
+          memo.append(m_columnList[m_wiz->m_memoColList[i]]);
       }
     }
     tr.m_strMemo = memo;
