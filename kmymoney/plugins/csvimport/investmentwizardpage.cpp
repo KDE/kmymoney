@@ -193,7 +193,8 @@ bool InvestmentPage::isComplete() const
           ui->comboBoxInv_typeCol->currentIndex() > -1 &&
           ui->comboBoxInv_quantityCol->currentIndex() > -1 &&
           ui->comboBoxInv_priceCol->currentIndex() > -1 &&
-          ui->comboBoxInv_amountCol->currentIndex() > -1;
+          ui->comboBoxInv_amountCol->currentIndex() > -1 &&
+          ui->comboBoxInv_priceFraction->currentIndex() > -1;
 }
 
 bool InvestmentPage::validatePage()
@@ -299,6 +300,7 @@ void InvestmentPage::slotFractionChanged(int col)
 {
   m_priceFraction = col;
   m_priceFractionValue = ui->comboBoxInv_priceFraction->itemText(col);
+  emit completeChanged();
 }
 
 void InvestmentPage::slotClearColumns()
@@ -515,6 +517,7 @@ bool InvestmentPage::validateSelectedColumn(int col, columnTypeE type)
 
   if (col == -1) { // user only wanted to reset his column so allow him
     m_colTypeNum[type] = col;  // assign new column 'number' to this 'type'
+    emit completeChanged();
     return true;
   }
 
@@ -865,7 +868,7 @@ void InvestmentPage::readSettings(const KSharedConfigPtr& config)
     if (!list.isEmpty())
       m_shrsoutList = list;
 
-    m_priceFraction = profilesGroup.readEntry("PriceFraction", -1);
+    m_priceFraction = profilesGroup.readEntry("PriceFraction", 2);
     m_colTypeNum[ColumnDate] = profilesGroup.readEntry("DateCol", -1);
     m_colTypeNum[ColumnType] = profilesGroup.readEntry("PayeeCol", -1);  //use for type col.
     m_colTypeNum[ColumnPrice] = profilesGroup.readEntry("PriceCol", -1);
