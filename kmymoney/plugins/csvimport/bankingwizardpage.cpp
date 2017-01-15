@@ -287,15 +287,6 @@ void BankingPage::slotOppositeSignsClicked(bool checked)
   m_oppositeSigns = checked;
 }
 
-void CSVWizard::slotClose()
-{
-  if (m_profileType == ProfileBank)
-    m_pageBanking->saveSettings();
-  else if (m_profileType == ProfileInvest)
-    m_pageInvestment->saveSettings();
-  close();
-}
-
 void BankingPage::slotClearColumns()
 {
   ui->comboBoxBnk_dateCol->setCurrentIndex(-1);

@@ -10,10 +10,13 @@ set(kmm_csvimport_PART_SRCS
   csvwizard.cpp
   bankingwizardpage.cpp
   investmentwizardpage.cpp
+  priceswizardpage.cpp
   transactiondlg.cpp
   convdate.cpp
   csvutil.cpp
   securitiesdlg.cpp
+  securitydlg.cpp
+  currenciesdlg.cpp
 )
 
 kconfig_add_kcfg_files(kmm_csvimport_PART_SRCS pluginsettings.kcfgc)
@@ -26,8 +29,11 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
   rowswizardpage.ui
   bankingwizardpage.ui
   investmentwizardpage.ui
+  priceswizardpage.ui
   formatswizardpage.ui
   securitiesdlg.ui
+  securitydlg.ui
+  currenciesdlg.ui
 )
 
 # Use static library for tests only

@@ -31,8 +31,9 @@
 #include <KSharedConfig>
 
 #include "csvimporterplugin.h"
-#include "investmentwizardpage.h"
 #include "bankingwizardpage.h"
+#include "investmentwizardpage.h"
+#include "priceswizardpage.h"
 
 class ConvertDate;
 class Parse;
@@ -57,10 +58,10 @@ public:
   virtual ~CSVWizard();
 
   enum { PageIntro, PageSeparator, PageRows,
-         PageBanking, PageInvestment, PageFormats
+         PageBanking, PageInvestment, PagePrices, PageFormats
        };
 
-  typedef enum:int { ProfileInvest, ProfileBank, ProfileNone = 0xFF,
+  typedef enum:int { ProfileInvest, ProfileBank, ProfileCurrencyPrices, ProfileStockPrices, ProfileNone = 0xFF,
        } profileTypeE;
 
   typedef enum:uchar { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
@@ -74,6 +75,7 @@ public:
   RowsPage*           m_pageRows;
   QPointer<BankingPage>        m_pageBanking;
   QPointer<InvestmentPage>     m_pageInvestment;
+  QPointer<PricesPage>         m_pagePrices;
   FormatsPage*        m_pageFormats;
   ConvertDate*        m_convertDate;
   CsvUtil*            m_csvUtil;
@@ -298,8 +300,9 @@ private slots:
   void             slotComboSourceIndexChanged(int idx);
   void             slotBankRadioToggled(bool toggled);
   void             slotInvestRadioToggled(bool toggled);
+  void             slotCurrencyPricesRadioToggled(bool toggled);
+  void             slotStockPricesRadioToggled(bool toggled);
 };
-
 
 namespace Ui
 {

@@ -47,6 +47,7 @@
 #include "ui_bankingwizardpage.h"
 #include "ui_formatswizardpage.h"
 #include "ui_investmentwizardpage.h"
+#include "ui_priceswizardpage.h"
 
 CSVWizard::CSVWizard() :
     ui(new Ui::CSVWizard),
@@ -108,7 +109,7 @@ void CSVWizard::init()
   m_wizard->setPage(PageFormats, m_pageFormats);
   m_pageFormats->setParent(this);
 
-  m_stageLabels << ui->label_intro << ui->label_separators << ui->label_rows << ui->label_columns << ui->label_columns << ui->label_formats;
+  m_stageLabels << ui->label_intro << ui->label_separators << ui->label_rows << ui->label_columns << ui->label_columns << ui->label_columns << ui->label_formats;
   m_pageFormats->setFinalPage(true);
 
   this->setAttribute(Qt::WA_DeleteOnClose, true);
@@ -317,8 +318,10 @@ void CSVWizard::validateConfigFile(const KSharedConfigPtr& config)
   if (!profileNamesGroup.exists()) {
     profileNamesGroup.writeEntry("Bank", QStringList());
     profileNamesGroup.writeEntry("Invest", QStringList());
+    profileNamesGroup.writeEntry("SPrices", QStringList());
     profileNamesGroup.writeEntry("PriorBank", int());
     profileNamesGroup.writeEntry("PriorInvest", int());
+    profileNamesGroup.writeEntry("PriorSPrices", int());
     profileNamesGroup.sync();
   }
 
@@ -903,6 +906,14 @@ void CSVWizard::slotFileDialogClicked()
     m_pageBanking->setParent(this);
     m_pageBanking->readSettings(m_config);
   }
+  else if (m_profileType == CSVWizard::ProfileStockPrices ||
+           m_profileType == CSVWizard::ProfileCurrencyPrices) {
+    m_pagePrices = new PricesPage;
+    m_wizard->setPage(PagePrices, m_pagePrices);
+    m_pagePrices->setParent(this);
+    m_pagePrices->readSettings(m_config);
+  }
+
 
   if (!getInFileName(m_inFileName))
     return;
@@ -921,6 +932,18 @@ void CSVWizard::resizeEvent(QResizeEvent* ev)
     ev->ignore();
     return;
   }
+}
+
+void CSVWizard::slotClose()
+{
+  if (m_profileType == ProfileBank)
+    m_pageBanking->saveSettings();
+  else if (m_profileType == ProfileInvest)
+    m_pageInvestment->saveSettings();
+  else if (m_profileType == ProfileStockPrices ||
+           m_profileType == ProfileCurrencyPrices)
+    m_pagePrices->saveSettings();
+  close();
 }
 
 //-------------------------------------------------------------------------------------------------------
@@ -972,6 +995,10 @@ void IntroPage::profileChanged(const profileActionsE& action)
     profileTypeStr = "Bank";
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     profileTypeStr = "Invest";
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices)
+    profileTypeStr = "SPrices";
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices)
+    profileTypeStr = "CPrices";
 
   KConfigGroup profileNamesGroup(m_wizDlg->m_config, "ProfileNames");
   KConfigGroup currentProfileName(m_wizDlg->m_config, profileTypeStr + '-' + cbText);
@@ -1049,10 +1076,24 @@ void IntroPage::profileTypeChanged(const CSVWizard::profileTypeE profileType, bo
   int priorProfile;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
     ui->radioButton_invest->setChecked(false);
+    ui->radioButton_stockprices->setChecked(false);
+    ui->radioButton_currencyprices->setChecked(false);
     profileTypeStr = "Bank";
   } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
     ui->radioButton_bank->setChecked(false);
+    ui->radioButton_stockprices->setChecked(false);
+    ui->radioButton_currencyprices->setChecked(false);
     profileTypeStr = "Invest";
+  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices) {
+    ui->radioButton_bank->setChecked(false);
+    ui->radioButton_invest->setChecked(false);
+    ui->radioButton_currencyprices->setChecked(false);
+    profileTypeStr = "SPrices";
+  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices) {
+    ui->radioButton_bank->setChecked(false);
+    ui->radioButton_invest->setChecked(false);
+    ui->radioButton_stockprices->setChecked(false);
+    profileTypeStr = "CPrices";
   }
 
   m_wizDlg->m_profileList = profilesGroup.readEntry(profileTypeStr, QStringList());
@@ -1074,6 +1115,16 @@ void IntroPage::slotInvestRadioToggled(bool toggled)
   profileTypeChanged(CSVWizard::ProfileInvest, toggled);
 }
 
+void IntroPage::slotCurrencyPricesRadioToggled(bool toggled)
+{
+  profileTypeChanged(CSVWizard::ProfileCurrencyPrices, toggled);
+}
+
+void IntroPage::slotStockPricesRadioToggled(bool toggled)
+{
+  profileTypeChanged(CSVWizard::ProfileStockPrices, toggled);
+}
+
 void IntroPage::initializePage()
 {
   m_wizDlg->ui->tableWidget->clear();
@@ -1090,7 +1141,6 @@ void IntroPage::initializePage()
             QWizard::CancelButton;
   wizard()->setButtonLayout(layout);
 
-
   m_wizDlg->m_importError = false;
   ui->combobox_source->lineEdit()->setClearButtonEnabled(true);
 
@@ -1100,6 +1150,8 @@ void IntroPage::initializePage()
   connect(ui->buttonRename, SIGNAL(clicked()), this, SLOT(slotRenameProfile()));
   connect(ui->radioButton_bank, SIGNAL(toggled(bool)), this, SLOT(slotBankRadioToggled(bool)));
   connect(ui->radioButton_invest, SIGNAL(toggled(bool)), this, SLOT(slotInvestRadioToggled(bool)));
+  connect(ui->radioButton_currencyprices, SIGNAL(toggled(bool)), this, SLOT(slotCurrencyPricesRadioToggled(bool)));
+  connect(ui->radioButton_stockprices, SIGNAL(toggled(bool)), this, SLOT(slotStockPricesRadioToggled(bool)));
   if (m_wizDlg->m_initialHeight == -1 || m_wizDlg->m_initialWidth == -1) {
     m_wizDlg->m_initialHeight = m_wizDlg->geometry().height();
     m_wizDlg->m_initialWidth = m_wizDlg->geometry().width();
@@ -1192,6 +1244,10 @@ bool SeparatorPage::isComplete() const
     if (m_wizDlg->m_profileType == CSVWizard::ProfileBank && m_wizDlg->m_endColumn > 2)
       return true;
     else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest && m_wizDlg->m_endColumn > 3)
+      return true;
+    else if ((m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices ||
+              m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices) &&
+              m_wizDlg->m_endColumn > 1)
       return true;
   }
   return false;
@@ -1293,12 +1349,15 @@ void RowsPage::cleanupPage()
 int RowsPage::nextId() const
 {
   int ret;
-  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     ret = CSVWizard::PageBanking;
-  } else {
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     ret = CSVWizard::PageInvestment;
-  }
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices ||
+           m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices)
+    ret = CSVWizard::PagePrices;
   return ret;
+
 }
 
 FormatsPage::FormatsPage(QDialog *parent) :
@@ -1388,6 +1447,9 @@ void FormatsPage::decimalSymbolChanged(int index)
     columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnQuantity);
     if (m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee) != -1)
       columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee);
+  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices ||
+             m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices) {
+    columnList << m_wizDlg->m_pagePrices->m_colTypeNum.value(PricesPage::ColumnPrice);
   }
 
   for (QList<int>::const_iterator col = columnList.constBegin(); col < columnList.constEnd(); ++col) {
@@ -1467,8 +1529,11 @@ void FormatsPage::dateFormatChanged(int index)
   int col;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     col = m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnDate);
-  else
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     col = m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnDate);
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices ||
+           m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices)
+    col = m_wizDlg->m_pagePrices->m_colTypeNum.value(PricesPage::ColumnDate);
 
   m_wizDlg->m_convertDate->setDateFormatIndex(index);
   m_isDateFormatOK = validateDateFormat(col);
@@ -1510,12 +1575,14 @@ void FormatsPage::slotImportClicked()
     isOK = m_wizDlg->m_pageBanking->createStatement(m_wizDlg->st);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     isOK = m_wizDlg->m_pageInvestment->createStatement(m_wizDlg->st);
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices ||
+           m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices)
+    isOK = m_wizDlg->m_pagePrices->createStatement(m_wizDlg->st);
 
   if (!isOK) {
     m_wizDlg->st = MyMoneyStatement(); // statement is invalid so erase it
     return;
   }
-
 
   m_wizDlg->hide(); //hide wizard so it will not cover accountselector
   emit m_wizDlg->statementReady(m_wizDlg->st);
@@ -1552,7 +1619,9 @@ bool FormatsPage::isComplete() const
 {
   const bool enable = m_isDecimalSymbolOK && m_isDateFormatOK;
   wizard()->button(QWizard::CustomButton2)->setEnabled(enable);
-  wizard()->button(QWizard::CustomButton3)->setEnabled(enable);
+  if (m_wizDlg->m_profileType != CSVWizard::ProfileStockPrices &&
+      m_wizDlg->m_profileType != CSVWizard::ProfileCurrencyPrices)
+    wizard()->button(QWizard::CustomButton3)->setEnabled(enable);
   return enable;
 }
 
@@ -1576,6 +1645,10 @@ void FormatsPage::cleanupPage()
                   m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnDate);
     if (m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee) != -1)
       columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee);
+  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileStockPrices ||
+             m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices) {
+    columnList << m_wizDlg->m_pagePrices->m_colTypeNum.value(PricesPage::ColumnPrice) <<
+                  m_wizDlg->m_pagePrices->m_colTypeNum.value(PricesPage::ColumnDate);
   }
   m_wizDlg->clearColumnsBackground(columnList);
   m_wizDlg->st = MyMoneyStatement();  // any change on investment/banking page invalidates created statement
