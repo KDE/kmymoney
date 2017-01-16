@@ -72,7 +72,7 @@
         "Name[x-test]": "xxcsvexportxx",
         "Name[zh_TW]": "csvexport",
         "ServiceTypes": [
-            "KMyMoneyPlugin"
+            "KMyMoney/Plugin"
         ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "http://kmymoney.org/plugins.html"

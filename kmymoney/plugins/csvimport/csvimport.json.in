@@ -78,7 +78,7 @@
         "Name[zh_CN]": "csv 导入",
         "Name[zh_TW]": "csvimport",
         "ServiceTypes": [
-            "KMyMoneyPlugin"
+            "KMyMoney/Plugin"
         ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "http://kmymoney.org/plugins.html"

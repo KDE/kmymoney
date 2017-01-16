@@ -76,7 +76,7 @@
         "Name[zh_CN]": "KMyMoney OFX",
         "Name[zh_TW]": "KMyMoney OFX",
         "ServiceTypes": [
-            "KMyMoneyPlugin"
+            "KMyMoney/Plugin"
         ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "http://kmymoney.org/plugins.html"
