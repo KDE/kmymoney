@@ -530,23 +530,25 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
 void MyMoneyStatementReader::processPriceEntry(const MyMoneyStatement::Price& p_in)
 {
-  if (d->securitiesBySymbol.contains(p_in.m_strSecurity)) {
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString currency = file->baseCurrency().id();
+  QString security;
 
-    MyMoneyPrice price(d->securitiesBySymbol[p_in.m_strSecurity].id(),
-                       MyMoneyFile::instance()->baseCurrency().id(),
-                       p_in.m_date,
-                       p_in.m_amount, "QIF");
-    MyMoneyFile::instance()->addPrice(price);
+  if (!p_in.m_strCurrency.isEmpty()) {
+    security = p_in.m_strSecurity;
+    currency = p_in.m_strCurrency;
+  } else if (d->securitiesBySymbol.contains(p_in.m_strSecurity))
+    security = d->securitiesBySymbol[p_in.m_strSecurity].id();
+  else if (d->securitiesByName.contains(p_in.m_strSecurity))
+    security = d->securitiesByName[p_in.m_strSecurity].id();
+  else
+    return;
 
-  } else if (d->securitiesByName.contains(p_in.m_strSecurity)) {
-
-    MyMoneyPrice price(d->securitiesByName[p_in.m_strSecurity].id(),
-                       MyMoneyFile::instance()->baseCurrency().id(),
-                       p_in.m_date,
-                       p_in.m_amount, "QIF");
-    MyMoneyFile::instance()->addPrice(price);
-  }
-
+  MyMoneyPrice price(security,
+                     currency,
+                     p_in.m_date,
+                     p_in.m_amount, i18n("Prices Importer"));
+  MyMoneyFile::instance()->addPrice(price);
 }
 
 void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Security& sec_in)
