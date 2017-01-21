@@ -86,6 +86,7 @@ public:
     VAT,
     CostCenter,
     TotalBalance,
+    PostedValue,
     TotalValue,
     LastColumnMarker
   };

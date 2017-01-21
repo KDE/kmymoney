@@ -199,10 +199,17 @@ public:
     model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
     // Total Value
-    newIndex = model->index(index.row(), index.column() + TotalValue, index.parent());
+    newIndex = model->index(index.row(), index.column() + TotalValue , index.parent());
+    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), Qt::DisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), AccountValueDisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), AccountTotalValueDisplayRole);
+    model->setData(newIndex, font, Qt::FontRole);
+    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+
+    //Posted Value
+    newIndex = model->index(index.row(), index.column() + PostedValue , index.parent());
     model->setData(newIndex, MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()), Qt::DisplayRole);
     model->setData(newIndex, MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()), AccountValueDisplayRole);
-    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), AccountTotalValueDisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
     model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
   }
@@ -422,6 +429,9 @@ void AccountsModel::init()
         break;
       case TotalBalance:
         headerLabels << i18n("Total Balance");
+        break;
+      case PostedValue:
+        headerLabels << i18n("Posted Value");
         break;
       case TotalValue:
         headerLabels << i18n("Total Value");
