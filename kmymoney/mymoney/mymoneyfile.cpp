@@ -2365,6 +2365,8 @@ const QStringList MyMoneyFile::consistencyCheck()
   //look for accounts which have currencies other than the base currency but no price on the opening date
   //all accounts using base currency are excluded, since that's the base used for foreing currency calculation
   //thus it is considered as always present
+  //accounts that represent Income/Expense categories are also excluded as price is irrelevant for their
+  //fake opening date since a forex rate is required for all multi-currency transactions
 
   //get all currencies in use
   QStringList currencyList;
@@ -2374,7 +2376,8 @@ const QStringList MyMoneyFile::consistencyCheck()
   QList<MyMoneyAccount>::const_iterator account_it;
   for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
     MyMoneyAccount account = *account_it;
-    if (!currencyList.contains(account.currencyId())
+    if (!account.isIncomeExpense()
+        && !currencyList.contains(account.currencyId())
         && account.currencyId() != baseCurrency().id()
         && !account.currencyId().isEmpty()) {
       //add the currency and the account-currency pair
