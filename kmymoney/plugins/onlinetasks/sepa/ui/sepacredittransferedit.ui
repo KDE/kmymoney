@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>340</width>
-    <height>411</height>
+    <height>438</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Beneficiary Name</string>
+      <string>Beneficiary &amp;Name</string>
      </property>
      <property name="buddy">
       <cstring>beneficiaryName</cstring>
@@ -213,6 +213,9 @@
  </customwidgets>
  <tabstops>
   <tabstop>beneficiaryName</tabstop>
+  <tabstop>beneficiaryIban</tabstop>
+  <tabstop>beneficiaryBankCode</tabstop>
+  <tabstop>sepaReference</tabstop>
   <tabstop>purpose</tabstop>
  </tabstops>
  <resources/>
