@@ -139,6 +139,7 @@ void KImportDlg::writeConfig()
 void KImportDlg::slotFileTextChanged(const QString& text)
 {
   // TODO: port to kf5
+  Q_UNUSED(text)
 #if 0
   if (!text.isEmpty() && KIO::NetAccess::exists(file(), KIO::NetAccess::SourceSide, KMyMoneyUtils::mainWindow())) {
     // m_qcomboboxDateFormat->setEnabled(true);

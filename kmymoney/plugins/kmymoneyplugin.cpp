@@ -35,6 +35,8 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
     QObject(),
     KXMLGUIClient()
 {
+  Q_UNUSED(parent)
+
   setObjectName(name);
 }
 

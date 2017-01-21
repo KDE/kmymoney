@@ -82,6 +82,8 @@ void CsvExporterPlugin::slotCsvExport()
 
 bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
 {
+  Q_UNUSED(url)
+
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 

@@ -18,14 +18,14 @@
 #include "splitadjustdialog.h"
 #include "ui_splitadjustdialog.h"
 
-#include <KLocalizedString>>
+#include <KLocalizedString>
 
 class SplitAdjustDialog::Private {
 public:
   Private()
     : ui(new Ui_SplitAdjustDialog)
     {}
-    
+
   Ui_SplitAdjustDialog*	ui;
   QButtonGroup* buttonGroup;
 };

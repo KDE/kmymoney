@@ -157,8 +157,6 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
     lines.removeAll(QString());
   }
 
-  const bool selected = opt.state & QStyle::State_Selected;
-
   // draw the text items
   if(!opt.text.isEmpty() || !lines.isEmpty()) {
 

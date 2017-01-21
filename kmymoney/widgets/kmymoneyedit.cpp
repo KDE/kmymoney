@@ -67,6 +67,7 @@ kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(double bottom, double top, int de
  */
 QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) const
 {
+  Q_UNUSED(_p)
   QString s = input;
   // TODO: port this to kf5
 #if 0

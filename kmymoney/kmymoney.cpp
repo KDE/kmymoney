@@ -1512,6 +1512,8 @@ void KMyMoneyApp::slotFileNew()
 
 QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget)
 {
+  Q_UNUSED(mask)
+  Q_UNUSED(mode)
   QString path(_path);
 
   // if the path is not specified open the file dialog in the last used directory
@@ -2486,6 +2488,8 @@ void KMyMoneyApp::slotQifExport()
 
 bool KMyMoneyApp::okToWriteFile(const QUrl &url)
 {
+  Q_UNUSED(url)
+
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
@@ -7219,6 +7223,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
   // can be importing using that method.  If so, it will import it using that
   // plugin
   //
+
+  Q_UNUSED(asn_id)
 
   d->m_importUrlsQueue.enqueue(sourceUrl);
 

@@ -500,6 +500,9 @@ void LedgerDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index
 
 void LedgerDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* model, const QModelIndex& index) const
 {
+  Q_UNUSED(model)
+  Q_UNUSED(index)
+
   NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
   if(editor) {
     editor->saveTransaction();
