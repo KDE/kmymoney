@@ -54,7 +54,8 @@ using KWallet::Wallet;
 class OfxImporterPlugin::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0) {}
+  Private() : m_valid(false), m_preferName(PreferId), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
+              m_updateStartDate(QDate(1900,1,1)) {}
 
   bool m_valid;
   enum NamePreference {
@@ -71,6 +72,7 @@ public:
   QStringList m_errors;
   KOnlineBankingStatus* m_statusDlg;
   Wallet *m_wallet;
+  QDate m_updateStartDate;
 };
 
 
@@ -235,6 +237,13 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
     QDateTime dt;
     dt.setTime_t(data.date_initiated);
     t.m_datePosted = dt.date();
+  }
+  if (t.m_datePosted.isValid()) {
+    // verify the transaction date is one we want
+    if (t.m_datePosted < pofx->d->m_updateStartDate) {
+      //kDebug(0) << "discarding transaction dated" << qPrintable(t.m_datePosted.toString(Qt::ISODate));
+      return 0;
+    }
   }
 
   if (data.amount_valid) {
@@ -696,9 +705,34 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
       connect(dlg, SIGNAL(statementReady(QString)),
               this, SLOT(slotImportFile(QString)));
 
+      // get the the date of the earliest transaction that we are interested in
+      // from the settings for this account
+      MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
+      if (!settings.value("provider").isEmpty()) {
+        if ((settings.value("kmmofx-todayMinus").toInt() != 0) && !settings.value("kmmofx-numRequestDays").isEmpty()) {
+          //kDebug(0) << "start date = today minus";
+          d->m_updateStartDate = QDate::currentDate().addDays(-settings.value("kmmofx-numRequestDays").toInt());
+        } else if ((settings.value("kmmofx-lastUpdate").toInt() != 0) && !acc.value("lastImportedTransactionDate").isEmpty()) {
+          //kDebug(0) << "start date = last update";
+          d->m_updateStartDate = QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate);
+        } else if ((settings.value("kmmofx-pickDate").toInt() != 0) && !settings.value("kmmofx-specificDate").isEmpty()) {
+          //kDebug(0) << "start date = pick date";
+          d->m_updateStartDate = QDate::fromString(settings.value("kmmofx-specificDate"));
+        }
+        else {
+          //kDebug(0) << "start date = today - 2 months";
+          d->m_updateStartDate = QDate::currentDate().addMonths(-2);
+        }
+      }
+      //kDebug(0) << "ofx plugin: account" << acc.name() << "earliest transaction date to process =" << qPrintable(d->m_updateStartDate.toString(Qt::ISODate));
+
       if (dlg->init())
         dlg->exec();
       delete dlg;
+
+      // reset the earliest-interesting-transaction date to the non-specific account setting
+      d->m_updateStartDate = QDate(1900,1,1);
+
     }
   } catch (const MyMoneyException &e) {
     KMessageBox::information(0 , i18n("Error connecting to bank: %1", e.what()));
