@@ -2,8 +2,8 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "aganders93@gmail.com",
-                "Name": "Allan Anderson"
+                "Email": "aganders93@gmail.com,lukasz.wojnilowicz@gmail.com",
+                "Name": "Allan Anderson,Łukasz Wojniłowicz"
             }
         ],
         "Description": "Add CSV importing to KMyMoney",
@@ -42,7 +42,7 @@
         "Icon": "document-import",
         "Id": "csvimport",
         "License": "GPL",
-        "Name": "csvimport",
+        "Name": "CSV Importer",
         "Name[ar]": "استيراد CSV",
         "Name[bs]": "csvimport",
         "Name[ca@valencia]": "csvimport",

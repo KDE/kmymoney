@@ -40,7 +40,7 @@
         "Icon": "document-export",
         "Id": "csvexport",
         "License": "GPL",
-        "Name": "csvexport",
+        "Name": "CSV Exporter",
         "Name[ar]": "تصدير CSV",
         "Name[bs]": "csvexport",
         "Name[ca@valencia]": "csvexport",
