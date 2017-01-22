@@ -552,7 +552,7 @@ void QueryTableTest::testInvestment()
 
     rows = invhold.rows();
 
-    QVERIFY(rows.count() == 2);
+    QVERIFY(rows.count() == 1);
     QVERIFY(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
     QVERIFY(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(-210000.00));
     QVERIFY(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(44000.00));
