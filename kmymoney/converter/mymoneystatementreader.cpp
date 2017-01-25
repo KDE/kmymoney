@@ -909,7 +909,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           case MyMoneyPayee::matchKey:
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-              if (exp.exactMatch(payeename)) { // only exact matches are allowed, otherwise payee "Apple" could be inadvertently matched with payee "Pineapple"
+              if (exp.indexIn(payeename)) {
                 qDebug("Found match with '%s' on '%s'", qPrintable(payeename), qPrintable((*it_p).name()));
                 matchMap[exp.matchedLength()] = (*it_p).id();
               }
@@ -973,7 +973,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         // is called in the context of an automatic procedure it
         // might distract the user.
         payee.setName(payeename);
-        payee.setMatchData(MyMoneyPayee::matchName, true, QStringList());
+        payee.setMatchData(MyMoneyPayee::matchKey, true, QStringList() << QString("^%1$").arg(QRegExp::escape(payeename)));
         if (m_askPayeeCategory) {
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
@@ -1294,7 +1294,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   } else {
     type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::asset | KMyMoneyUtils::liability);
   }
-  
+
   QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney);
   accountSelect->setHeader(i18n("Import transactions"));
   accountSelect->setDescription(msg);
