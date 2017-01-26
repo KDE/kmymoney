@@ -1529,7 +1529,7 @@ void KMyMoneyView::loadDefaultCurrencies()
   loadDefaultCurrency(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")), create);
   loadDefaultCurrency(MyMoneySecurity("BBD", i18n("Barbados Dollar"),        "$"), create);
   loadDefaultCurrency(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC"), create);
-  loadDefaultCurrency(MyMoneySecurity("BYR", i18n("Belarusian Ruble"),       "BYR", 1, 1), create);
+  loadDefaultCurrency(MyMoneySecurity("BYN", i18n("Belarusian Ruble"),       "Br"), create);
   loadDefaultCurrency(MyMoneySecurity("BZD", i18n("Belize Dollar"),          "$"), create);
   loadDefaultCurrency(MyMoneySecurity("BMD", i18n("Bermudian Dollar"),       "$"), create);
   loadDefaultCurrency(MyMoneySecurity("BTN", i18n("Bhutan Ngultrum")), create);
@@ -1746,6 +1746,9 @@ void KMyMoneyView::loadAncientCurrencies()
 
   // Source: https://en.wikipedia.org/wiki/Litas
   loadAncientCurrency("LTL", i18n("Lithuanian Litas"), "Lt", QDate(2015, 1, 1), MyMoneyMoney(100000, 345280), "EUR");
+
+  // Source: https://en.wikipedia.org/wiki/Belarusian_ruble
+  loadAncientCurrency("BYR", i18n("Belarusian Ruble (old)"), "BYR", QDate(2016, 7, 1), MyMoneyMoney(1, 10000), "BYN");
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
