@@ -1056,7 +1056,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   MyMoneyMoney buysTotal = buys.total();
   MyMoneyMoney sellsTotal = sells.total();
   MyMoneyMoney cashincomeTotal = cashincome.total();
-  if (!buysTotal.isZero()) {
+  if (!buysTotal.isZero() || !startingBal.isZero()) {
     returnInvestment = (sellsTotal + buysTotal + cashincomeTotal + endingBal - startingBal) / (startingBal - buysTotal);
     returnInvestment = returnInvestment.convert(10000);
   } else
