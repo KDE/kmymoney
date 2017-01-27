@@ -25,25 +25,15 @@ class CsvDateTest : public QObject
 {
   Q_OBJECT
 
-public:
-  CsvDateTest();
-
 private slots:
   void init();
   void cleanup();
-  void testDefaultConstructor();
-  void testConstructor();
 
   /**
-  * This method is used to test a series of valid and invalid UK/EU format dates,
+  * This method is used to test a series of valid and invalid dates,
   * including alpha month names, and different field separators.
   */
-  void testDateConvert();
-
-  /**
-  * This method is used to test USA and ISO date formats.
-  */
-  void testDateConvertFormats();
+  void testConvertDate();
 
 private:
   ConvertDate* m_convert;

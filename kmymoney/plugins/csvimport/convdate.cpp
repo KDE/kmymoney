@@ -2,8 +2,10 @@
                                         convDate.cpp
                                       -------------------
     begin                        : Sat Jan 01 2010
-    copyright                : (C) 2010 by Allan Anderson
-    email                      : agander93@gmail.com
+    copyright                    : (C) 2010 by Allan Anderson
+    email                        : agander93@gmail.com
+    copyright                    : (C) 2017 by Łukasz Wojniłowicz
+    email                        : lukasz.wojnilowicz@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -109,6 +111,33 @@ QDate ConvertDate::convertDate(const QString& txt)
         aDay =   dateSplit[0];
         aMonth = dateSplit[1];
         aYear =  dateSplit[2];
+        break;
+      default:
+        qDebug("ConvertDate - not a valid date format");
+    }
+  } else if (dateSplit.count() == 2) { //                  it can be date and time without separators
+    QString date;
+    if (dateSplit.at(0).length() == 8)
+      date = dateSplit.at(0);
+    else if (dateSplit.at(1).length() == 8)
+      date = dateSplit.at(1);
+    else
+      return QDate();
+    switch (m_dateFormatIndex) {
+      case(0) :   //                                 %y %m %d
+        aYear =  date.left(4);
+        aMonth = date.mid(4,2);
+        aDay =   date.right(2);
+        break;
+      case(1) :   //                                 %m %d %y
+        aMonth = date.left(2);
+        aDay =   date.mid(2,2);
+        aYear =  date.right(4);
+        break;
+      case(2) :   //                                 %d %m %y
+        aDay =   date.left(2);
+        aMonth = date.mid(2,2);
+        aYear =  date.right(4);
         break;
       default:
         qDebug("ConvertDate - not a valid date format");
