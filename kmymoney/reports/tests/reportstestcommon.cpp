@@ -70,11 +70,16 @@ QString acJpyCash;
 QString inBank;
 QString eqStock1;
 QString eqStock2;
+QString eqStock3;
+QString eqStock4;
 QString acInvestment;
 QString acStock1;
 QString acStock2;
+QString acStock3;
+QString acStock4;
 QString acDividends;
 QString acInterest;
+QString acFees;
 QString acTax;
 QString acCash;
 
@@ -135,12 +140,12 @@ void TransactionHelper::update()
   ft.commit();
 }
 
-InvTransactionHelper::InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid)
+InvTransactionHelper::InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid, MyMoneyMoney _fee)
 {
-  init(_date, _action, _shares, _price, _stockaccountid, _transferid, _categoryid);
+  init(_date, _action, _shares, _price, _fee, _stockaccountid, _transferid, _categoryid);
 }
 
-void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid)
+void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, MyMoneyMoney _fee, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount stockaccount = file->account(_stockaccountid);
@@ -184,13 +189,22 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
     addSplit(s3);
   } else if (_action == MyMoneySplit::ActionBuyShares) {
     s1.setShares(_shares);
+    s1.setValue(value + _fee);
     s1.setAction(MyMoneySplit::ActionBuyShares);
 
     MyMoneySplit s3;
     s3.setAccountId(_transferid);
-    s3.setShares(-value);
-    s3.setValue(-value);
+    s3.setShares(-value - _fee);
+    s3.setValue(-value - _fee);
     addSplit(s3);
+
+    if (!_categoryid.isEmpty() && !_fee.isZero()) {
+      MyMoneySplit s2;
+      s2.setAccountId(_categoryid);
+      s2.setValue(_fee);
+      s2.setShares(_fee);
+      addSplit(s2);
+    }
   }
   addSplit(s1);
 

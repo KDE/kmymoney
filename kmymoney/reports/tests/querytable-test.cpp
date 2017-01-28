@@ -417,20 +417,28 @@ void QueryTableTest::testInvestment()
     // Equities
     eqStock1 = makeEquity("Stock1", "STK1");
     eqStock2 = makeEquity("Stock2", "STK2");
+    eqStock3 = makeEquity("Stock3", "STK3");
+    eqStock4 = makeEquity("Stock4", "STK4");
 
     // Accounts
-    acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2004, 1, 1), acAsset);
+    acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2003, 11, 1), acAsset);
     acStock1 = makeAccount("Stock 1", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock1);
     acStock2 = makeAccount("Stock 2", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock2);
+    acStock3 = makeAccount("Stock 3", MyMoneyAccount::Stock, moZero, QDate(2003, 11, 1), acInvestment, eqStock3);
+    acStock4 = makeAccount("Stock 4", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock4);
     acDividends = makeAccount("Dividends", MyMoneyAccount::Income, moZero, QDate(2004, 1, 1), acIncome);
     acInterest = makeAccount("Interest", MyMoneyAccount::Income, moZero, QDate(2004, 1, 1), acIncome);
+    acFees = makeAccount("Fees", MyMoneyAccount::Expense, moZero, QDate(2003, 11, 1), acExpense);
 
     // Transactions
     //                         Date             Action                                               Shares                Price   Stock     Asset       Income
-    InvTransactionHelper s1b1(QDate(2004, 2, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-    InvTransactionHelper s1b2(QDate(2004, 3, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1b1(QDate(2003, 12, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock3, acChecking, QString());
+    InvTransactionHelper s1b2(QDate(2004, 1, 30), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock4, acChecking, acFees, MyMoneyMoney(100.00));
+    InvTransactionHelper s1b3(QDate(2004, 2, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1b4(QDate(2004, 3, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString());
     InvTransactionHelper s1s1(QDate(2004, 4, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString());
     InvTransactionHelper s1s2(QDate(2004, 5, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1s3(QDate(2004, 5, 30), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-1000.00), MyMoneyMoney(120.00), acStock4, acChecking, acFees, MyMoneyMoney(200.00));
     InvTransactionHelper s1r1(QDate(2004, 6, 1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends);
     InvTransactionHelper s1r2(QDate(2004, 7, 1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(50.00), MyMoneyMoney(80.00), acStock1, QString(), acDividends);
     InvTransactionHelper s1c1(QDate(2004, 8, 1), MyMoneySplit::ActionDividend,         MyMoneyMoney(10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends);
@@ -438,6 +446,8 @@ void QueryTableTest::testInvestment()
     InvTransactionHelper s1y1(QDate(2004, 9, 15), MyMoneySplit::ActionYield,           MyMoneyMoney(10.00), MyMoneyMoney(110.00), acStock1, acChecking, acInterest);
 
     makeEquityPrice(eqStock1, QDate(2004, 10, 1), MyMoneyMoney(100.00));
+    makeEquityPrice(eqStock3, QDate(2004, 10, 1), MyMoneyMoney(110.00));
+    makeEquityPrice(eqStock4, QDate(2004, 10, 1), MyMoneyMoney(110.00));
 
     //
     // Investment Transactions Report
@@ -461,13 +471,14 @@ void QueryTableTest::testInvestment()
 
     QList<ListTable::TableRow> rows = invtran.rows();
 
-    QVERIFY(rows.count() == 17);
+    QVERIFY(rows.count() == 25);
     QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(100000.00));
     QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(110000.00));
     QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-24000.00));
     QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(-20000.00));
     QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(5000.00));
     QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(4000.00));
+    QVERIFY(MyMoneyMoney(rows[18]["value"]) == MyMoneyMoney(100000.00));
     // need to fix these... fundamentally different from the original test
     //QVERIFY(MyMoneyMoney(invtran.m_rows[8]["value"])==MyMoneyMoney( -1000.00));
     //QVERIFY(MyMoneyMoney(invtran.m_rows[11]["value"])==MyMoneyMoney( -1200.00));
@@ -478,18 +489,21 @@ void QueryTableTest::testInvestment()
     QVERIFY(MyMoneyMoney(rows[5]["price"]) == MyMoneyMoney(100.00));
     QVERIFY(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney(100.00));
     QVERIFY(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[18]["price"]) == MyMoneyMoney(100.00));
 
     QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(1000.00));
     QVERIFY(MyMoneyMoney(rows[4]["shares"]) == MyMoneyMoney(-200.00));
     QVERIFY(MyMoneyMoney(rows[6]["shares"]) == MyMoneyMoney(50.00));
     QVERIFY(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
     QVERIFY(MyMoneyMoney(rows[11]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[18]["shares"]) == MyMoneyMoney(1000.00));
 
     QVERIFY(rows[1]["action"] == "Buy");
     QVERIFY(rows[3]["action"] == "Sell");
     QVERIFY(rows[5]["action"] == "Reinvest");
     QVERIFY(rows[7]["action"] == "Dividend");
     QVERIFY(rows[13]["action"] == "Yield");
+    QVERIFY(rows[18]["action"] == "Buy");
 #else
     QVERIFY(rows.count() == 9);
     QVERIFY(MyMoneyMoney(rows[0]["value"]) == MyMoneyMoney(100000.00));
@@ -525,7 +539,8 @@ void QueryTableTest::testInvestment()
 #if 1
     // i think this is the correct amount. different treatment of dividend and yield
     QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(175000.00));
-    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(175000.00));
+    QVERIFY(searchHTML(html, i18n("Total Stock 4")) == MyMoneyMoney(-20000.00));
+    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(155000.00));
 #else
     QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(171700.00));
     QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(171700.00));
@@ -552,8 +567,9 @@ void QueryTableTest::testInvestment()
 
     rows = invhold.rows();
 
-    QVERIFY(rows.count() == 1);
+    QVERIFY(rows.count() == 3);
     QVERIFY(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
+    QVERIFY(MyMoneyMoney(rows[0]["returninvestment"]) == MyMoneyMoney("87/2500"));
     QVERIFY(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(-210000.00));
     QVERIFY(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(44000.00));
     QVERIFY(MyMoneyMoney(rows[0]["reinvestincome"]) == MyMoneyMoney(9000.00));
@@ -561,8 +577,22 @@ void QueryTableTest::testInvestment()
     QVERIFY(MyMoneyMoney(rows[0]["shares"]) == MyMoneyMoney(1700.00));
     QVERIFY(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
 
+    QVERIFY(MyMoneyMoney(rows[1]["return"]) == MyMoneyMoney("1349/10000"));
+    QVERIFY(MyMoneyMoney(rows[1]["returninvestment"]) == MyMoneyMoney("1/10"));
+    QVERIFY(MyMoneyMoney(rows[1]["shares"]) == MyMoneyMoney(1000.00));
+    QVERIFY(MyMoneyMoney(rows[1]["price"]) == MyMoneyMoney(110.00));
+    QVERIFY(MyMoneyMoney(rows[1]["startingbal"]) == MyMoneyMoney(100000.00));
+
+    QVERIFY(MyMoneyMoney(rows[2]["return"]) == MyMoneyMoney("7193/10000"));
+    QVERIFY(MyMoneyMoney(rows[2]["returninvestment"]) == MyMoneyMoney("123/625"));
+    QVERIFY(MyMoneyMoney(rows[2]["buys"]) == MyMoneyMoney(-100100.00));
+    QVERIFY(MyMoneyMoney(rows[2]["sells"]) == MyMoneyMoney(119800.00));
+    QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[2]["price"]) == MyMoneyMoney(110.00));
+    QVERIFY(MyMoneyMoney(rows[2]["endingbal"]) == MyMoneyMoney(0.00));
+
     html = invhold.renderBody();
-    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(170000.00));
+    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(280000.00));
 
 #if 0
     // Dump file & reports

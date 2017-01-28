@@ -68,11 +68,16 @@ extern QString acJpyCash;
 extern QString inBank;
 extern QString eqStock1;
 extern QString eqStock2;
+extern QString eqStock3;
+extern QString eqStock4;
 extern QString acInvestment;
 extern QString acStock1;
 extern QString acStock2;
+extern QString acStock3;
+extern QString acStock4;
 extern QString acDividends;
 extern QString acInterest;
+extern QString acFees;
 extern QString acTax;
 extern QString acCash;
 
@@ -91,8 +96,8 @@ protected:
 class InvTransactionHelper: public TransactionHelper
 {
 public:
-  InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
-  void init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
+  InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid, MyMoneyMoney _fee = MyMoneyMoney());
+  void init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, MyMoneyMoney _fee, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
 };
 
 class BudgetEntryHelper
