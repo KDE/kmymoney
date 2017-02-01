@@ -73,16 +73,33 @@ bool Activity::haveCategoryAndAmount(const QString& category, const QString& amo
   KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget(category));
 
   bool rc = true;
-  if (!isMultiSelection() && !optional)
-    rc = !cat->currentText().isEmpty();
 
-  if (rc && !cat->currentText().isEmpty()) {
+  if (!cat->currentText().isEmpty()) {
     rc = cat->selector()->contains(cat->currentText()) || cat->isSplitTransaction();
-    if (rc && !amount.isEmpty()) {
-      MyMoneyMoney value = dynamic_cast<kMyMoneyEdit*>(haveWidget(amount))->value();
-      if (!isMultiSelection())
+    if (rc && !amount.isEmpty() && !isMultiSelection()) {
+      if (cat->isSplitTransaction()) {
+        QList<MyMoneySplit>::const_iterator split;
+        QList<MyMoneySplit>::const_iterator splitEnd;
+
+        if (category == "fee-account") {
+          split = m_parent->feeSplits().cbegin();
+          splitEnd = m_parent->feeSplits().cend();
+        } else if (category == "interest-account") {
+          split = m_parent->interestSplits().cbegin();
+          splitEnd = m_parent->interestSplits().cend();
+        }
+
+        for (; split != splitEnd; ++split) {
+          if ((*split).value().isZero())
+            rc = false;
+        }
+      } else {
+        MyMoneyMoney value = dynamic_cast<kMyMoneyEdit*>(haveWidget(amount))->value();
         rc = !value.isZero();
+      }
     }
+  } else if (!isMultiSelection() && !optional) {
+    rc = false;
   }
   return rc;
 }

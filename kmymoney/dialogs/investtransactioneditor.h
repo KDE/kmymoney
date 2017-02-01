@@ -103,6 +103,14 @@ public:
     return m_security;
   }
 
+  const QList<MyMoneySplit>& feeSplits() const {
+    return m_feeSplits;
+  }
+
+  const QList<MyMoneySplit>& interestSplits() const {
+    return m_interestSplits;
+  }
+
 protected slots:
   void slotCreateSecurity(const QString& name, QString& id);
   void slotCreateFeeCategory(const QString& name, QString& id);
