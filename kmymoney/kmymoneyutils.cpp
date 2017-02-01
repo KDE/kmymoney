@@ -627,6 +627,7 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   // be set up. assetAccountSplit references the corresponding asset account (maybe
   // empty), feeSplits is the list of all expenses and interestSplits
   // the list of all incomes
+  assetAccountSplit = MyMoneySplit(); // set to none to check later if it was assigned
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySplit>::ConstIterator it_s;
   for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
@@ -640,7 +641,12 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
       interestSplits.append(*it_s);
       // interestAmount += (*it_s).value();
     } else {
-      assetAccountSplit = *it_s;
+      if (assetAccountSplit == MyMoneySplit()) // first asset Account should be our requested brokerage account
+        assetAccountSplit = *it_s;
+      else if ((*it_s).value().isNegative())  // the rest (if present) is handled as fee or interest
+        feeSplits.append(*it_s);              // and shouldn't be allowed to override assetAccountSplit
+      else if ((*it_s).value().isPositive())
+        interestSplits.append(*it_s);
     }
   }
 
