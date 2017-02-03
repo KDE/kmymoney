@@ -14,6 +14,13 @@ ecm_install_icons(
   THEME "oxygen"
 )
 
+file(GLOB_RECURSE KMYMONEY_TANGO_ICONS "Tango/*")
+ecm_install_icons(
+  ICONS ${KMYMONEY_TANGO_ICONS}
+  DESTINATION ${ICON_INSTALL_DIR}
+  THEME "Tango"
+)
+
 file(GLOB_RECURSE KMYMONEY_ICONS "kmymoney/*.png")
 ecm_install_icons(
   ICONS ${KMYMONEY_ICONS}
