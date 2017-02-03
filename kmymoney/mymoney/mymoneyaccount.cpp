@@ -24,12 +24,12 @@
 #include <QPixmap>
 #include <QPixmapCache>
 #include <QPainter>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KIconLoader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -659,78 +659,105 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 
 QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
 {
-  QString icon;
+  QIcon icon;
   switch (accountType()) {
-    default:
-      if (accountGroup() == MyMoneyAccount::Asset)
-        icon = "view-bank-account";
-      else
-        icon = "view-loan";
-      break;
+  default:
+    if (accountGroup() == MyMoneyAccount::Asset)
+      icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                              QIcon::fromTheme(QStringLiteral("account-types-asset")));
+    else
+      icon = QIcon::fromTheme(QStringLiteral("view-loan"),
+                              QIcon::fromTheme(QStringLiteral("account-types-liability")));
+    break;
 
-    case MyMoneyAccount::Investment:
-    case MyMoneyAccount::Stock:
-    case MyMoneyAccount::MoneyMarket:
-    case MyMoneyAccount::CertificateDep:
-      icon = "view-stock-account";
-      break;
+  case MyMoneyAccount::Investment:
+  case MyMoneyAccount::Stock:
+  case MyMoneyAccount::MoneyMarket:
+  case MyMoneyAccount::CertificateDep:
+    icon = QIcon::fromTheme(QStringLiteral("view-stock-account"),
+                            QIcon::fromTheme(QStringLiteral("account-types-investments")));
+    break;
 
-    case MyMoneyAccount::Checkings:
-      icon = "view-bank-account-checking";
-      break;
-    case MyMoneyAccount::Savings:
-      icon = "view-bank-account-savings";
-      break;
+  case MyMoneyAccount::Checkings:
+    icon = QIcon::fromTheme(QStringLiteral("view-bank-account-checking"),
+                            QIcon::fromTheme(QStringLiteral("account-types-checking")));
+    break;
+  case MyMoneyAccount::Savings:
+    icon = QIcon::fromTheme(QStringLiteral("view-bank-account-savings"),
+                            QIcon::fromTheme(QStringLiteral("account-types-savings")));
+    break;
 
-    case MyMoneyAccount::AssetLoan:
-      icon = "view-loan-asset";
-      break;
+  case MyMoneyAccount::AssetLoan:
+    icon = QIcon::fromTheme(QStringLiteral("view-loan-asset"),
+                            QIcon::fromTheme(QStringLiteral("account-types-loan")));
+    break;
 
-    case MyMoneyAccount::Loan:
-      icon = "view-loan";
-      break;
+  case MyMoneyAccount::Loan:
+    icon = QIcon::fromTheme(QStringLiteral("view-loan"),
+                            QIcon::fromTheme(QStringLiteral("account-types-loan")));
+    break;
 
-    case MyMoneyAccount::CreditCard:
-      icon = "view-credit-card-account";
-      break;
+  case MyMoneyAccount::CreditCard:
+    icon = QIcon::fromTheme(QStringLiteral("view-credit-card-account"),
+                            QIcon::fromTheme(QStringLiteral("account-types-credit-card")));
+    break;
 
-    case MyMoneyAccount::Asset:
-      icon = "view-bank-account";
-      break;
+  case MyMoneyAccount::Asset:
+    icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                            QIcon::fromTheme(QStringLiteral("account-types-asset")));
+    break;
 
-    case MyMoneyAccount::Cash:
-      icon = "account-types-cash";
-      break;
+  case MyMoneyAccount::Cash:
+    icon = QIcon::fromTheme(QStringLiteral("account-types-cash"));
+    break;
 
-    case MyMoneyAccount::Income:
-      icon = "view-income-categories";
-      break;
+  case MyMoneyAccount::Income:
+    icon = QIcon::fromTheme(QStringLiteral("view-income-categories"),
+                            QIcon::fromTheme(QStringLiteral("account-types-income")));
+    break;
 
-    case MyMoneyAccount::Expense:
-      icon = "view-expenses-categories";
-      break;
+  case MyMoneyAccount::Expense:
+    icon = QIcon::fromTheme(QStringLiteral("view-expenses-categories"),
+                            QIcon::fromTheme(QStringLiteral("account-types-expense")));
+    break;
 
-    case MyMoneyAccount::Equity:
-      icon = "view-bank-account";
-      break;
+  case MyMoneyAccount::Equity:
+    icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                            QIcon::fromTheme(QStringLiteral("account")));
+    break;
   }
 
-  QString iconKey = icon + QString(size);
+  if (icon.isNull())
+    icon = QIcon::fromTheme(QStringLiteral("unknown"));
+
+  QString iconKey = icon.name() + QString(size);
   QPixmap result;
+
   if (!QPixmapCache::find(iconKey, result)) {
-    result = DesktopIcon(icon, size);
+    if (!icon.availableSizes().isEmpty())
+      result = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size)); // hack: Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap so get it manually
     QPixmapCache::insert(iconKey, result);
   }
 
   QPainter pixmapPainter(&result);
+  QPixmap ovly;
   if (isClosed()) {
-    QPixmap ovly = DesktopIcon("dialog-close", size);
+    icon = QIcon::fromTheme(QStringLiteral("dialog-close"),
+                            QIcon::fromTheme(QStringLiteral("account-types-closed")));
+    if (!icon.availableSizes().isEmpty())
+      ovly = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
     pixmapPainter.drawPixmap(ovly.width() / 2, ovly.height() / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   } else if (reconcileFlag) {
-    QPixmap ovly = DesktopIcon("flag-green", size);
+    icon = QIcon::fromTheme(QStringLiteral("flag-green"),
+                            QIcon::fromTheme(QStringLiteral("reconciled")));
+    if (!icon.availableSizes().isEmpty())
+      ovly = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
     pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   } else if (!onlineBankingSettings().value("provider").isEmpty()) {
-    QPixmap ovly = DesktopIcon("download", size);
+    icon = QIcon::fromTheme(QStringLiteral("download"),
+                            QIcon::fromTheme(QStringLiteral("go-down")));
+    if (!icon.availableSizes().isEmpty())
+      ovly = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
     pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   }
   return result;

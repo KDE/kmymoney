@@ -86,14 +86,6 @@ public:
 
   KSharedConfigPtr m_config;
 
-  QPixmap        m_iconBack;
-  QPixmap        m_iconCancel;
-  QPixmap        m_iconCSV;
-  QPixmap        m_iconFinish;
-  QPixmap        m_iconImport;
-  QPixmap        m_iconNext;
-  QPixmap        m_iconQIF;
-
   QList<QLabel*>   m_stageLabels;
   QScrollBar*      m_vScrollBar;
   QList<QTextCodec *>   m_codecs;

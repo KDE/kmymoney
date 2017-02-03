@@ -35,7 +35,6 @@
 
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 #include <KGuiItem>
 #include <KSharedConfig>

@@ -71,7 +71,6 @@
 // KDE Includes
 
 #include <ktoolbar.h>
-#include <kiconloader.h>
 #include <kmessagebox.h>
 #include <KLocalizedString>
 #include <kconfig.h>
@@ -686,7 +685,8 @@ void KMyMoneyApp::initActions()
   // note : action "category_new" is included in this menu but defined below
   QAction *account_open = actionCollection()->addAction("account_open");
   account_open->setText(i18n("Open ledger"));
-  account_open->setIcon(QIcon::fromTheme("view-financial-list"));
+  account_open->setIcon(QIcon::fromTheme("view-financial-list",
+                                         QIcon::fromTheme(QStringLiteral("ledger"))));
   connect(account_open, SIGNAL(triggered()), this, SLOT(slotAccountOpen()));
 
   QAction *account_reconcile = actionCollection()->addAction("account_reconcile");
@@ -727,12 +727,14 @@ void KMyMoneyApp::initActions()
 
   QAction *account_transaction_report = actionCollection()->addAction("account_transaction_report");
   account_transaction_report->setText(i18n("Transaction report"));
-  account_transaction_report->setIcon(QIcon::fromTheme("view-financial-list"));
+  account_transaction_report->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
+                                                       QIcon::fromTheme(QStringLiteral("ledger"))));
   connect(account_transaction_report, SIGNAL(triggered()), this, SLOT(slotAccountTransactionReport()));
 
   QAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
-  account_chart->setIcon(QIcon::fromTheme("office-chart-line"));
+  account_chart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
+                                          QIcon::fromTheme(QStringLiteral("report-line"))));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 
   QAction *account_online_map = actionCollection()->addAction("account_online_map");
@@ -868,17 +870,20 @@ void KMyMoneyApp::initActions()
 
   QAction *transaction_enter = actionCollection()->addAction("transaction_enter");
   transaction_enter->setText(i18nc("Enter transaction", "Enter"));
-  transaction_enter->setIcon(QIcon::fromTheme("dialog-ok"));
+  transaction_enter->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                              QIcon::fromTheme(QStringLiteral("finish"))));
   connect(transaction_enter, SIGNAL(triggered()), this, SLOT(slotTransactionsEnter()));
 
   QAction *transaction_editsplits = actionCollection()->addAction("transaction_editsplits");
   transaction_editsplits->setText(i18nc("Edit split button", "Edit splits"));
-  transaction_editsplits->setIcon(QIcon::fromTheme("split"));
+  transaction_editsplits->setIcon(QIcon::fromTheme(QStringLiteral("split"),
+                                                   QIcon::fromTheme(QStringLiteral("transaction-split"))));
   connect(transaction_editsplits, SIGNAL(triggered()), this, SLOT(slotTransactionsEditSplits()));
 
   QAction *transaction_cancel = actionCollection()->addAction("transaction_cancel");
   transaction_cancel->setText(i18nc("Cancel transaction edit", "Cancel"));
-  transaction_cancel->setIcon(QIcon::fromTheme("dialog-cancel"));
+  transaction_cancel->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                               QIcon::fromTheme(QStringLiteral("stop"))));
   connect(transaction_cancel, SIGNAL(triggered()), this, SLOT(slotTransactionsCancel()));
 
   QAction *transaction_delete = actionCollection()->addAction("transaction_delete");
@@ -1085,7 +1090,8 @@ void KMyMoneyApp::initActions()
 
   QAction *currency_rename = actionCollection()->addAction("currency_rename");
   currency_rename->setText(i18n("Rename currency"));
-  currency_rename->setIcon(QIcon::fromTheme("edit-rename"));
+  currency_rename->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename"),
+                                            QIcon::fromTheme(QStringLiteral("text-editor"))));
   connect(currency_rename, SIGNAL(triggered()), this, SIGNAL(currencyRename()));
 
   QAction *currency_delete = actionCollection()->addAction("currency_delete");

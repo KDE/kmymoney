@@ -28,7 +28,6 @@
 // KDE Headers
 
 #include <KLocalizedString>
-#include <KIconLoader>
 #include <KColorScheme>
 
 TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol,
@@ -50,8 +49,17 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
                  MyMoneyStatement::Transaction::eaShrsout <<
                  MyMoneyStatement::Transaction::eaInterest;
 
-  m_iconYes = QPixmap(KIconLoader::global()->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::DefaultState));
-  m_iconNo = QPixmap(KIconLoader::global()->loadIcon("dialog-cancel", KIconLoader::Small, KIconLoader::DefaultState));
+  QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-ok"), QIcon::fromTheme(QStringLiteral("finish")));
+  if (!icon.availableSizes().isEmpty())
+    m_iconYes = icon.pixmap(icon.availableSizes().first());
+  else
+    m_iconYes = QPixmap();
+
+  icon = QIcon::fromTheme(QStringLiteral("dialog-cancel"), QIcon::fromTheme(QStringLiteral("stop")));
+  if (!icon.availableSizes().isEmpty())
+    m_iconNo = icon.pixmap(icon.availableSizes().first());
+  else
+    m_iconNo = QPixmap();
 
   m_buttonOK = ui->buttonBox->button(QDialogButtonBox::Ok);
   m_buttonCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);

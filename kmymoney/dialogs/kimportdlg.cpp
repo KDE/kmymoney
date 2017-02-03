@@ -34,7 +34,6 @@
 
 #include <kcombobox.h>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kconfiggroup.h>
 #include <KGuiItem>
 #include <KLocalizedString>

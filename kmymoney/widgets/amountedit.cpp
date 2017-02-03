@@ -34,7 +34,6 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KIconLoader>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -233,8 +232,7 @@ void AmountEdit::init()
   int btnSize = sizeHint().height() - 5;
 
   d->m_calculatorButton = new QToolButton(this);
-  KIconLoader* il = KIconLoader::global();
-  d->m_calculatorButton->setIcon(QIcon(il->loadIcon("accessories-calculator.png", KIconLoader::Small, KIconLoader::SizeSmall)));
+  d->m_calculatorButton->setIcon(QIcon::fromTheme(QStringLiteral("accessories-calculator")));
   d->m_calculatorButton->setCursor(Qt::ArrowCursor);
   d->m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
   d->m_calculatorButton->setFixedSize(btnSize, btnSize);

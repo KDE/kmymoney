@@ -42,7 +42,6 @@
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kstandardguiitem.h>
-#include <kiconloader.h>
 #include <khelpclient.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

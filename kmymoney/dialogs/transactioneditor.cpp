@@ -39,7 +39,6 @@
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 
 // ----------------------------------------------------------------------------
@@ -625,7 +624,8 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           if (askForSchedule && (*it_ts).postDate() > QDate::currentDate()) {
             KGuiItem enterItem;
             KGuiItem enterButton(i18n("&Enter"),
-                                 QIcon::fromTheme("dialog-ok"),
+                                 QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                                  QIcon::fromTheme(QStringLiteral("finish"))),
                                  i18n("Accepts the entered data and stores it"),
                                  i18n("Use this to enter the transaction into the ledger."));
             KGuiItem scheduleButton(i18n("&Schedule"),

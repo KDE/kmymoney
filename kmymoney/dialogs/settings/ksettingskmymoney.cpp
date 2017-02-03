@@ -51,13 +51,30 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
 
   addPage(generalPage, i18nc("General settings", "General"), "system-run");
   addPage(homePage, i18n("Home"), "go-home");
-  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), "view-financial-list");
 
-  addPage(schedulesPage, i18n("Scheduled transactions"), "view-pim-calendar");
+  QString iconName;
+  iconName = "view-financial-list";
+  if (!QIcon::hasThemeIcon(iconName))
+    iconName = "ledger";
+  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), iconName);
+
+  iconName = "view-pim-calendar";
+  if (!QIcon::hasThemeIcon(iconName))
+    iconName = "schedule";
+  addPage(schedulesPage, i18n("Scheduled transactions"), iconName);
 
   addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  addPage(reportsPage, i18nc("Report settings", "Reports"), "office-chart-bar");
-  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "view-financial-forecast");
+
+  iconName = "office-chart-bar";
+  if (!QIcon::hasThemeIcon(iconName))
+    iconName = "report";
+  addPage(reportsPage, i18nc("Report settings", "Reports"), iconName);
+
+  iconName = "view-financial-forecast";
+  if (!QIcon::hasThemeIcon(iconName))
+    iconName = "forecast";
+  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), iconName);
+
   addPage(encryptionPage, i18n("Encryption"), "kgpg");
   addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");

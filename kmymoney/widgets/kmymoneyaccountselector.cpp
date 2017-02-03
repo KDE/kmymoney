@@ -35,12 +35,12 @@
 #include <QVBoxLayout>
 #include <QPixmapCache>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KIconLoader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -278,7 +278,11 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   //get the account icon from cache or insert it if it is not there
   QPixmap accountPixmap;
   if (!QPixmapCache::find("account", accountPixmap)) {
-    accountPixmap = DesktopIcon("view-bank-account");
+    QIcon icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                                  QIcon::fromTheme(QStringLiteral("account"),
+                                                   QIcon::fromTheme(QStringLiteral("unknown"))));
+    if (!icon.availableSizes().isEmpty())
+      accountPixmap = icon.pixmap(icon.availableSizes().first());
     QPixmapCache::insert("account", accountPixmap);
   }
   m_favorites->setIcon(0, QIcon(accountPixmap));

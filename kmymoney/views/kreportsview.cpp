@@ -89,13 +89,15 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
-  m_control->buttonChart->setIcon(QIcon::fromTheme("office-chart-line"));
-  m_control->buttonClose->setIcon(QIcon::fromTheme("document-close"));
-  m_control->buttonConfigure->setIcon(QIcon::fromTheme("configure"));
-  m_control->buttonCopy->setIcon(QIcon::fromTheme("edit-copy"));
-  m_control->buttonDelete->setIcon(QIcon::fromTheme("edit-delete"));
-  m_control->buttonExport->setIcon(QIcon::fromTheme("document-export"));
-  m_control->buttonNew->setIcon(QIcon::fromTheme("document-new"));
+  m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
+                                                   QIcon::fromTheme(QStringLiteral("report-line"))));
+  m_control->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("document-close")));
+  m_control->buttonConfigure->setIcon(QIcon::fromTheme(QStringLiteral("configure"),
+                                                       QIcon::fromTheme(QStringLiteral("preferences-system"))));
+  m_control->buttonCopy->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+  m_control->buttonDelete->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
+  m_control->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+  m_control->buttonNew->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
@@ -215,7 +217,8 @@ void KReportsView::KReportTab::toggleChart()
 
     m_control->buttonChart->setText(i18n("Chart"));
     m_control->buttonChart->setToolTip(i18n("Show the chart version of this report"));
-    m_control->buttonChart->setIcon(QIcon::fromTheme("office-chart-line"));
+    m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
+                                                     QIcon::fromTheme(QStringLiteral("report-line"))));
   } else {
     m_part->view()->hide();
 
@@ -223,7 +226,8 @@ void KReportsView::KReportTab::toggleChart()
 
     m_control->buttonChart->setText(i18n("Report"));
     m_control->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->buttonChart->setIcon(QIcon::fromTheme("view-financial-list"));
+    m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
+                                                     QIcon::fromTheme(QStringLiteral("ledger"))));
   }
   m_showingChart = ! m_showingChart;
 }

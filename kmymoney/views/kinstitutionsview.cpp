@@ -46,11 +46,13 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
-                           QIcon::fromTheme("zoom-out"),
+                           QIcon::fromTheme(QStringLiteral("zoom-out"),
+                                            QIcon::fromTheme(QStringLiteral("list-remove"))),
                            QString(),
                            QString());
   KGuiItem expandGuiItem("",
-                         QIcon::fromTheme("zoom-in"),
+                         QIcon::fromTheme(QStringLiteral("zoom-in"),
+                                          QIcon::fromTheme(QStringLiteral("list-add"))),
                          QString(),
                          QString());
   KGuiItem::assign(m_collapseButton, collapseGuiItem);

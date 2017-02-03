@@ -23,11 +23,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QIcon>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KIconLoader>
 #include <KColorScheme>
 
 // ----------------------------------------------------------------------------
@@ -124,7 +125,11 @@ public:
     model->setData(newIndex, KMyMoneyUtils::accountTypeToString(account.accountType()), Qt::DisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
 
-    QPixmap checkMark = QPixmap(KIconLoader::global()->loadIcon("dialog-ok", KIconLoader::Small));
+    QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                  QIcon::fromTheme(QStringLiteral("finish")));
+    QPixmap checkMark;
+    if (!icon.availableSizes().isEmpty())
+      checkMark = icon.pixmap(icon.availableSizes().first());
     switch (account.accountType()) {
       case MyMoneyAccount::Income:
       case MyMoneyAccount::Expense:
@@ -464,7 +469,8 @@ void AccountsModel::load()
   setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
   setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
   favoriteAccountsItem->setColumnCount(columnCount());
-  favoriteAccountsItem->setIcon(QIcon(DesktopIcon("view-bank-account")));
+  favoriteAccountsItem->setIcon(QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                                                 QIcon::fromTheme(QStringLiteral("account"))));
   favoriteAccountsItem->setEditable(false);
   favoriteAccountsItem->setFont(font);
 

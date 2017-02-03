@@ -34,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kiconloader.h>
 #include <kguiitem.h>
 #include <kmessagebox.h>
 #include <KSharedConfig>

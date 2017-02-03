@@ -22,11 +22,10 @@
 
 #include <QPixmap>
 #include <QPixmapCache>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KIconLoader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -182,9 +181,14 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 QPixmap MyMoneyInstitution::pixmap() const
 {
   QPixmap institution;
-  if (!QPixmapCache::find("view-bank", institution)) {
-    institution = DesktopIcon("view-bank");
-    QPixmapCache::insert("view-bank", institution);
+  QString iconName = "view-bank";
+  if (!QPixmapCache::find(iconName, institution)) {
+    QIcon icon = QIcon::fromTheme(iconName,
+                                  QIcon::fromTheme(QStringLiteral("institution"),
+                                                   QIcon::fromTheme(QStringLiteral("unknown"))));
+    if (!icon.availableSizes().isEmpty())
+      institution = icon.pixmap(icon.availableSizes().first());
+    QPixmapCache::insert(iconName, institution);
   }
   return institution;
 }

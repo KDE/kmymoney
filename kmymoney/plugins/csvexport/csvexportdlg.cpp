@@ -34,7 +34,6 @@
 // KDE Headers
 
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kmymoneydateinput.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

@@ -38,7 +38,6 @@
 
 #include <kmessagebox.h>
 #include <kcombobox.h>
-#include <kiconloader.h>
 #include <kled.h>
 #include <kguiutils.h>
 #include <KLocalizedString>

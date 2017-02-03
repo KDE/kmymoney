@@ -36,7 +36,6 @@
 // KDE Includes
 
 #include <klineedit.h>
-#include <kiconloader.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <KSharedConfig>

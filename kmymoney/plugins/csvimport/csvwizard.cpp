@@ -28,7 +28,6 @@
 #include <QTextCodec>
 
 #include <KMessageBox>
-#include <KIconLoader>
 #include <KLocalizedString>
 #include <KConfigGroup>
 #include <KColorScheme>
@@ -75,20 +74,15 @@ CSVWizard::CSVWizard() :
   ui->horizontalLayout->addWidget(m_wizard);
   m_wizard->installEventFilter(this); // event filter for escape key presses
 
-  m_iconBack = QPixmap(KIconLoader::global()->loadIcon("go-previous", KIconLoader::Small, KIconLoader::DefaultState));
-  m_iconFinish = QPixmap(KIconLoader::global()->loadIcon("dialog-ok-apply", KIconLoader::Small, KIconLoader::DefaultState));
-  m_iconCancel = QPixmap(KIconLoader::global()->loadIcon("dialog-cancel", KIconLoader::Small, KIconLoader::DefaultState));
-  m_iconCSV = QPixmap(KIconLoader::global()->loadIcon("kmymoney", KIconLoader::Small, KIconLoader::DefaultState));
-  m_iconImport = QPixmap(KIconLoader::global()->loadIcon("system-file-manager.", KIconLoader::Small, KIconLoader::DefaultState));
-  m_iconQIF = QPixmap(KIconLoader::global()->loadIcon("invest-applet", KIconLoader::Small, KIconLoader::DefaultState));
-
-  m_wizard->button(QWizard::BackButton)->setIcon(m_iconBack);
-  m_wizard->button(QWizard::CancelButton)->setIcon(m_iconCancel);
-  m_wizard->button(QWizard::CustomButton2)->setIcon(m_iconCSV);
-  m_wizard->button(QWizard::FinishButton)->setIcon(m_iconFinish);
-  m_wizard->button(QWizard::CustomButton1)->setIcon(m_iconImport);
-  m_wizard->button(QWizard::CustomButton3)->setIcon(m_iconQIF);
-  m_wizard->button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
+  m_wizard->button(QWizard::BackButton)->setIcon(QIcon::fromTheme(QStringLiteral("go-previous")));
+  m_wizard->button(QWizard::CancelButton)->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                                                    QIcon::fromTheme(QStringLiteral("stop"))));
+  m_wizard->button(QWizard::CustomButton2)->setIcon(QIcon::fromTheme(QStringLiteral("kmymoney")));
+  m_wizard->button(QWizard::FinishButton)->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
+                                                                    QIcon::fromTheme(QStringLiteral("finish"))));
+  m_wizard->button(QWizard::CustomButton1)->setIcon(QIcon::fromTheme(QStringLiteral("system-file-manager")));
+  m_wizard->button(QWizard::CustomButton3)->setIcon(QIcon::fromTheme(QStringLiteral("invest-applet")));
+  m_wizard->button(QWizard::NextButton)->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
 }
 
 void CSVWizard::init()

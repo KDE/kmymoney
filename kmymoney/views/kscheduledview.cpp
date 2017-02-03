@@ -42,7 +42,6 @@
 
 #include <KLocalizedString>
 #include <kconfig.h>
-#include <kiconloader.h>
 #include <kmessagebox.h>
 #include <KSharedConfig>
 
@@ -156,7 +155,8 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     m_scheduleTree->setSortingEnabled(false);
 
     KScheduleTreeItem *itemBills = new KScheduleTreeItem(m_scheduleTree);
-    itemBills->setIcon(0, QIcon::fromTheme("view-expenses-categories"));
+    itemBills->setIcon(0, QIcon::fromTheme(QStringLiteral("view-expenses-categories"),
+                                           QIcon::fromTheme(QStringLiteral("account-types-expense"))));
     itemBills->setText(0, i18n("Bills"));
     itemBills->setData(0, KScheduleTreeItem::OrderRole, QVariant("0"));
     itemBills->setFirstColumnSpanned(true);
@@ -165,14 +165,16 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     bold.setBold(true);
     itemBills->setFont(0, bold);
     KScheduleTreeItem *itemDeposits = new KScheduleTreeItem(m_scheduleTree);
-    itemDeposits->setIcon(0, QIcon::fromTheme("view-income-categories"));
+    itemDeposits->setIcon(0, QIcon::fromTheme(QStringLiteral("view-income-categories"),
+                                              QIcon::fromTheme(QStringLiteral("account-types-income"))));
     itemDeposits->setText(0, i18n("Deposits"));
     itemDeposits->setData(0, KScheduleTreeItem::OrderRole, QVariant("1"));
     itemDeposits->setFirstColumnSpanned(true);
     itemDeposits->setFlags(Qt::ItemIsEnabled);
     itemDeposits->setFont(0, bold);
     KScheduleTreeItem *itemLoans = new KScheduleTreeItem(m_scheduleTree);
-    itemLoans->setIcon(0, QIcon::fromTheme("view-loan"));
+    itemLoans->setIcon(0, QIcon::fromTheme(QStringLiteral("view-loan"),
+                                           QIcon::fromTheme(QStringLiteral("account-types-loan"))));
     itemLoans->setText(0, i18n("Loans"));
     itemLoans->setData(0, KScheduleTreeItem::OrderRole, QVariant("2"));
     itemLoans->setFirstColumnSpanned(true);
@@ -289,7 +291,8 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
         item->setForeground(i, brush);
       }
     } else {
-      item->setIcon(0, QIcon::fromTheme("view-calendar-day"));
+      item->setIcon(0, QIcon::fromTheme(QStringLiteral("view-calendar-day"),
+                                        QIcon::fromTheme(QStringLiteral("office-calendar"))));
     }
   } else {
     item->setIcon(0, QIcon::fromTheme("dialog-close"));

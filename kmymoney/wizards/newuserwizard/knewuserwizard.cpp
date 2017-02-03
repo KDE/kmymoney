@@ -222,7 +222,9 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     QTreeWidgetItem* p = insertCurrency(*it);
     if ((*it).id() == baseCurrency) {
       first = p;
-      QIcon icon = static_cast<QIcon>(QIcon::fromTheme("view-bank-account"));
+      QIcon icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                                    QIcon::fromTheme(QStringLiteral("account"),
+                                                     QIcon::fromTheme(QStringLiteral("unknown"))));
       p->setIcon(0, icon);
     } else {
       p->setIcon(0, QIcon());

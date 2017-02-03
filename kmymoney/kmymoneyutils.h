@@ -418,7 +418,7 @@ public:
     * This method overlays an icon over another one, to get a composite one
     * eg. an icon to add accounts
     */
-  static QPixmap overlayIcon(const QString source, const QString overlay, const Qt::Corner corner = Qt::BottomRightCorner, int size = 0);
+  static QPixmap overlayIcon(const QString iconName, const QString overlayName, const Qt::Corner corner = Qt::BottomRightCorner, int size = 0);
 
   static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
 

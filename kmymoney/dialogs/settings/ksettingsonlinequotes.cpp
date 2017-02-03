@@ -28,7 +28,6 @@
 // KDE Includes
 
 #include <kconfig.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 #include <KLocalizedString>
 
@@ -48,7 +47,8 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   m_updateButton->setEnabled(false);
 
   KGuiItem updateButtenItem(i18nc("Accepts the entered data and stores it", "&Update"),
-                            QIcon::fromTheme("dialog-ok"),
+                            QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                             QIcon::fromTheme(QStringLiteral("finish"))),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtenItem);

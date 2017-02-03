@@ -41,7 +41,6 @@
 
 #include <KLocalizedString>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 #include <khelpclient.h>
 #include <KSharedConfig>
@@ -109,28 +108,30 @@ KTagsView::KTagsView(QWidget *parent) :
   m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
   KGuiItem newButtonItem(QString(""),
-                         QIcon::fromTheme("list-add-tag"),
+                         QIcon::fromTheme(QStringLiteral("list-add-tag")),
                          i18n("Creates a new tag"),
                          i18n("Use this to create a new tag."));
   KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
-                            QIcon::fromTheme("edit-rename"),
+                            QIcon::fromTheme(QStringLiteral("edit-rename"),
+                                             QIcon::fromTheme(QStringLiteral("text-editor"))),
                             i18n("Rename the current selected tag"),
                             i18n("Use this to start renaming the selected tag."));
   KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(""),
-                            QIcon::fromTheme("list-remove-tag"),
+                            QIcon::fromTheme(QStringLiteral("list-remove-tag")),
                             i18n("Delete the current selected tag"),
                             i18n("Use this to delete the selected tag."));
   KGuiItem::assign(m_deleteButton, deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update tag", "Update"),
-                            QIcon::fromTheme("dialog-ok"),
+                            QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                             QIcon::fromTheme(QStringLiteral("finish"))),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);

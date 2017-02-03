@@ -36,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <KColorScheme>
@@ -533,11 +532,13 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, const Qt::Corner corner, int size)
+QPixmap KMyMoneyUtils::overlayIcon(const QString iconName, const QString overlayName, const Qt::Corner corner, int size)
 {
   int x, y;
   QPixmap result;
-  QString overlaidIcon = icon + '-' + overlay;
+  QIcon icon;
+  QPixmap ovly;
+  QString overlaidIcon = iconName + '-' + overlayName;
 
   // If found in the cache, return quickly
   if (QPixmapCache::find(overlaidIcon, result)) {
@@ -545,13 +546,53 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, co
   }
 
   // try to retrieve the main icon from cache
-  if (!QPixmapCache::find(icon, result)) {
-    result = DesktopIcon(icon, size);
-    QPixmapCache::insert(icon, result);
+  if (!QPixmapCache::find(iconName, result)) {
+    icon = QIcon::fromTheme(iconName);
+    if (icon.isNull()) {
+      QString iconReplacement;
+      if (iconName.compare(QLatin1String("view-bank-account")) == 0)
+        iconReplacement = "account";
+      else if (iconName.compare(QLatin1String("view-investment")) == 0)
+        iconReplacement = "investment";
+      else if (iconName.compare(QLatin1String("view-financial-categories")) == 0)
+        iconReplacement = "categories";
+      else if (iconName.compare(QLatin1String("view-bank")) == 0)
+        iconReplacement = "bank";
+      else if (iconName.compare(QLatin1String("view-time-schedule-calculus")) == 0)
+        iconReplacement = "budget";
+      else
+        iconReplacement = "unknown";
+      icon = QIcon::fromTheme(iconReplacement);
+      if (icon.isNull())
+        icon = QIcon::fromTheme("unknown");
+    }
+
+    if (!icon.availableSizes().isEmpty())
+      result = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
+    QPixmapCache::insert(iconName, result);
   }
 
   QPainter pixmapPainter(&result);
-  QPixmap ovly = DesktopIcon(overlay, size);
+  icon = QIcon::fromTheme(overlayName);
+  if (icon.isNull()) {
+    QString overlayReplacement;
+    if (overlayName.compare(QLatin1String("document-import")) == 0)
+      overlayReplacement = "format-indent-less";
+    else if (overlayName.compare(QLatin1String("document-edit")) == 0)
+      overlayReplacement = "text-editor";
+    else if (overlayName.compare(QLatin1String("dialog-ok-apply")) == 0)
+      overlayReplacement = "finish";
+    else if (overlayName.compare(QLatin1String("download")) == 0)
+      overlayReplacement = "go-down";
+    else
+      overlayReplacement = "unknown";
+    icon = QIcon::fromTheme(overlayReplacement);
+    if (icon.isNull())
+      icon = QIcon::fromTheme("unknown");
+  }
+
+  if (!icon.availableSizes().isEmpty())
+    ovly = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
 
   switch (corner) {
     case Qt::TopLeftCorner:

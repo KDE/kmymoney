@@ -45,7 +45,6 @@
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kguiitem.h>
-#include <kiconloader.h>
 #include <kstandardguiitem.h>
 #include <khelpclient.h>
 #include <KLocalizedString>

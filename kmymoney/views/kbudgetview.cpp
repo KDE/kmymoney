@@ -42,7 +42,6 @@
 #include <KLocalizedString>
 #include <kconfig.h>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 #include <kcombobox.h>
 #include <KSharedConfig>
@@ -349,11 +348,13 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_resetButton->setToolTip(resetButtonItem.toolTip());
 
   KGuiItem collapseGuiItem("",
-                           QIcon::fromTheme("zoom-out"),
+                           QIcon::fromTheme(QStringLiteral("zoom-out"),
+                                            QIcon::fromTheme(QStringLiteral("list-remove"))),
                            QString(),
                            QString());
   KGuiItem expandGuiItem("",
-                         QIcon::fromTheme("zoom-in"),
+                         QIcon::fromTheme(QStringLiteral("zoom-in"),
+                                          QIcon::fromTheme(QStringLiteral("list-add"))),
                          QString(),
                          QString());
   KGuiItem::assign(m_collapseButton, collapseGuiItem);

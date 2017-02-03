@@ -47,7 +47,6 @@
 // KDE Includes
 
 #include <kicontheme.h>
-#include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kfilterdev.h>
 #include <kfilterbase.h>
@@ -153,7 +152,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 0
   m_homeView = new KHomeView();
   m_homeViewFrame = m_model->addPage(m_homeView, i18n("Home"));
-  m_homeViewFrame->setIcon(QIcon::fromTheme("go-home"));
+  m_homeViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("go-home"),
+                                            QIcon::fromTheme(QStringLiteral("home"))));
   connect(m_homeView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_homeView, SIGNAL(scheduleSelected(QString)),
@@ -165,7 +165,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 1
   m_institutionsView = new KInstitutionsView();
   m_institutionsViewFrame = m_model->addPage(m_institutionsView, i18n("Institutions"));
-  m_institutionsViewFrame->setIcon(QIcon::fromTheme("view-bank"));
+  m_institutionsViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-bank"),
+                                                    QIcon::fromTheme(QStringLiteral("institution"))));
 
   connect(m_institutionsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_institutionsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
@@ -178,7 +179,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 2
   m_accountsView = new KAccountsView();
   m_accountsViewFrame = m_model->addPage(m_accountsView, i18n("Accounts"));
-  m_accountsViewFrame->setIcon(QIcon::fromTheme("view-bank-account"));
+  m_accountsViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                                                QIcon::fromTheme(QStringLiteral("account"))));
 
   connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
@@ -191,7 +193,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_scheduledView = new KScheduledView();
 //this is to solve the way long strings are handled differently among versions of KPageWidget
   m_scheduleViewFrame = m_model->addPage(m_scheduledView, i18n("Scheduled transactions"));
-  m_scheduleViewFrame->setIcon(QIcon::fromTheme("view-pim-calendar"));
+  m_scheduleViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-pim-calendar"),
+                                                QIcon::fromTheme(QStringLiteral("schedule"))));
 
   connect(m_scheduledView, SIGNAL(scheduleSelected(MyMoneySchedule)), kmymoney, SLOT(slotSelectSchedule(MyMoneySchedule)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowScheduleContextMenu()));
@@ -203,7 +206,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 4
   m_categoriesView = new KCategoriesView();
   m_categoriesViewFrame = m_model->addPage(m_categoriesView, i18n("Categories"));
-  m_categoriesViewFrame->setIcon(QIcon::fromTheme("view-financial-categories"));
+  m_categoriesViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-categories"),
+                                                  QIcon::fromTheme(QStringLiteral("categories"))));
 
   connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
@@ -215,7 +219,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 // Page 5
   m_tagsView = new KTagsView();
   m_tagsViewFrame = m_model->addPage(m_tagsView, i18n("Tags"));
-  m_tagsViewFrame->setIcon(QIcon::fromTheme("mail-tagged"));
+  m_tagsViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("mail-tagged"),
+                                                           QIcon::fromTheme(QStringLiteral("bookmark-new"))));
 
   connect(kmymoney, SIGNAL(tagCreated(QString)), m_tagsView, SLOT(slotSelectTagAndTransaction(QString)));
   connect(kmymoney, SIGNAL(tagRename()), m_tagsView, SLOT(slotRenameButtonCliked()));
@@ -228,7 +233,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 6
   m_payeesView = new KPayeesView();
   m_payeesViewFrame = m_model->addPage(m_payeesView, i18n("Payees"));
-  m_payeesViewFrame->setIcon(QIcon::fromTheme("system-users"));
+  m_payeesViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("system-users"),
+                                              QIcon::fromTheme(QStringLiteral("payee"))));
 
   connect(kmymoney, SIGNAL(payeeCreated(QString)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(QString)));
   connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotRenameButtonCliked()));
@@ -241,7 +247,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 7
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
-  m_ledgerViewFrame->setIcon(QIcon::fromTheme("view-financial-list"));
+  m_ledgerViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
+                                              QIcon::fromTheme(QStringLiteral("ledger"))));
 
   connect(m_ledgerView, SIGNAL(accountSelected(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowTransactionContextMenu()));
@@ -259,7 +266,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 8
   m_investmentView = new KInvestmentView();
   m_investmentViewFrame = m_model->addPage(m_investmentView, i18n("Investments"));
-  m_investmentViewFrame->setIcon(QIcon::fromTheme("view-investment"));
+  m_investmentViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-investment"),
+                                                  QIcon::fromTheme(QStringLiteral("investment"))));
 
   connect(m_investmentView, SIGNAL(accountSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
@@ -270,7 +278,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 9
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
-  m_reportsViewFrame->setIcon(QIcon::fromTheme("office-chart-bar"));
+  m_reportsViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-bar"),
+                                               QIcon::fromTheme(QStringLiteral("report"))));
   connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
@@ -278,7 +287,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 10
   m_budgetView = new KBudgetView();
   m_budgetViewFrame = m_model->addPage(m_budgetView, i18n("Budgets"));
-  m_budgetViewFrame->setIcon(QIcon::fromTheme("view-time-schedule-calculus"));
+  m_budgetViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-time-schedule-calculus"),
+                                              QIcon::fromTheme(QStringLiteral("budget"))));
 
   connect(m_budgetView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(QList<MyMoneyBudget>)), kmymoney, SLOT(slotSelectBudget(QList<MyMoneyBudget>)));
@@ -288,13 +298,14 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 11
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage(m_forecastView, i18n("Forecast"));
-  m_forecastViewFrame->setIcon(QIcon::fromTheme("view-financial-forecast"));
+  m_forecastViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-forecast"),
+                                                QIcon::fromTheme(QStringLiteral("forecast"))));
   connect(m_forecastView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 12
   m_onlineJobOutboxView = new KOnlineJobOutbox();
   m_onlineJobOutboxViewFrame = m_model->addPage(m_onlineJobOutboxView, i18n("Outbox"));
-  m_onlineJobOutboxViewFrame->setIcon(QIcon::fromTheme("online-banking"));
+  m_onlineJobOutboxViewFrame->setIcon(QIcon::fromTheme(QStringLiteral("online-banking")));
   connect(m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT(slotOnlineJobSend(QList<onlineJob>)));
   connect(m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)));
   connect(m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()));

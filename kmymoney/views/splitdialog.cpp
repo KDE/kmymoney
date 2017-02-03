@@ -112,8 +112,10 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amou
   d->splitDelegate = new SplitDelegate(d->ui->splitView);
   d->ui->splitView->setItemDelegate(d->splitDelegate);
 
-  d->ui->okButton->setIcon(QIcon::fromTheme("dialog-ok"));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
+  d->ui->okButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                            QIcon::fromTheme(QStringLiteral("finish"))));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                                QIcon::fromTheme(QStringLiteral("stop"))));
 
   // setup some connections
   connect(d->ui->splitView, SIGNAL(aboutToStartEdit()), this, SLOT(disableButtons()));

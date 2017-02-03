@@ -37,7 +37,6 @@
 
 #include <KLocalizedString>
 #include <klineedit.h>
-#include <KIconLoader>
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
@@ -391,7 +390,7 @@ KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
     QFrame(parent)
 {
   QToolButton *t = new QToolButton(this);
-  t->setIcon(QIcon(SmallIcon("dialog-close")));
+  t->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
   t->setAutoRaise(true);
   QLabel *l = new QLabel(name, this);
   m_tagId = id;

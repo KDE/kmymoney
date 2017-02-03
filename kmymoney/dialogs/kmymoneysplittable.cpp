@@ -45,7 +45,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kcompletionbox.h>
 #include <kstandardshortcut.h>
@@ -832,8 +831,12 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
   l->setContentsMargins(0, 0, 0, 0);
   l->setSpacing(0);
-  m_registerEnterButton = new QPushButton(QIcon::fromTheme("dialog-ok"), QString(), m_registerButtonFrame);
-  m_registerCancelButton = new QPushButton(QIcon::fromTheme("dialog-cancel"), QString(), m_registerButtonFrame);
+  m_registerEnterButton = new QPushButton(QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                                           QIcon::fromTheme(QStringLiteral("finish")))
+                                          , QString(), m_registerButtonFrame);
+  m_registerCancelButton = new QPushButton(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                                            QIcon::fromTheme(QStringLiteral("stop")))
+                                           , QString(), m_registerButtonFrame);
 
   l->addWidget(m_registerEnterButton);
   l->addWidget(m_registerCancelButton);

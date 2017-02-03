@@ -49,10 +49,14 @@ TransactionSortOption::~TransactionSortOption()
 
 void TransactionSortOption::init()
 {
-  ui->m_addButton->setIcon(QIcon::fromTheme("arrow-right"));
-  ui->m_removeButton->setIcon(QIcon::fromTheme("arrow-left"));
-  ui->m_upButton->setIcon(QIcon::fromTheme("arrow-up"));
-  ui->m_downButton->setIcon(QIcon::fromTheme("arrow-down"));
+  ui->m_addButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-right"),
+                                            QIcon::fromTheme(QStringLiteral("go-next"))));
+  ui->m_removeButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-left"),
+                                               QIcon::fromTheme(QStringLiteral("go-previous"))));
+  ui->m_upButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-up"),
+                                           QIcon::fromTheme(QStringLiteral("go-up"))));
+  ui->m_downButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-down"),
+                                             QIcon::fromTheme(QStringLiteral("go-down"))));
 
   // don't allow sorting of the selected entries
   ui->m_selectedList->setSortingEnabled(false);
@@ -168,9 +172,11 @@ void TransactionSortOption::toggleDirection(QListWidgetItem* item)
 void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 {
   if (item->data(Qt::UserRole).toInt() > 0) {
-    item->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    item->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-ascending"),
+                                   QIcon::fromTheme(QStringLiteral("go-up"))));
   } else {
-    item->setIcon(QIcon::fromTheme("view-sort-descending"));
+    item->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-descending"),
+                                   QIcon::fromTheme(QStringLiteral("go-down"))));
   }
 }
 

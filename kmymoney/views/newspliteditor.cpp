@@ -192,8 +192,10 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->counterAccount = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
-  d->ui->enterButton->setIcon(QIcon::fromTheme("dialog-ok"));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
+  d->ui->enterButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok"),
+                                               QIcon::fromTheme(QStringLiteral("finish"))));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                                QIcon::fromTheme(QStringLiteral("stop"))));
   d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Income);

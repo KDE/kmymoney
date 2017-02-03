@@ -37,7 +37,6 @@
 #include <kmessagebox.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
-#include <kiconloader.h>
 #include <khelpclient.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
@@ -90,9 +89,8 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   KGuiItem::assign(m_deleteButton, KStandardGuiItem::del());
   KGuiItem::assign(m_helpButton, KStandardGuiItem::help());
 
-  KIconLoader* il = KIconLoader::global();
   KGuiItem newButtenItem(i18nc("New profile", "&New"),
-                         il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall),
+                         QIcon::fromTheme(QStringLiteral("document-new")),
                          i18n("Create a new profile"),
                          i18n("Use this to create a new QIF import/export profile"));
   KGuiItem::assign(m_newButton, newButtenItem);

@@ -34,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kiconloader.h>
 #include <kguiitem.h>
 #include <KLocalizedString>
 
@@ -81,7 +80,8 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 
     // create button
     KGuiItem splitButtonItem("",
-                             QIcon::fromTheme("split"), "", "");
+                             QIcon::fromTheme(QStringLiteral("split"),
+                                              QIcon::fromTheme(QStringLiteral("transaction-split"))), "", "");
     d->splitButton = new QPushButton(d->frame);
     d->splitButton->setObjectName("splitButton");
     KGuiItem::assign(d->splitButton, splitButtonItem);

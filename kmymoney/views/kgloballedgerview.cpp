@@ -43,7 +43,6 @@
 #include <KLocalizedString>
 #include <kcombobox.h>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <ktoolbar.h>
 #include <kpassivepopup.h>
 #include <ktoggleaction.h>

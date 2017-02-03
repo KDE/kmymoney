@@ -129,7 +129,9 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId, QIcon::fromTheme("view-bank-account"), display);
+      insertItem(itemId,  QIcon::fromTheme(QStringLiteral("view-bank-account"),
+                                           QIcon::fromTheme(QStringLiteral("account"),
+                                                            QIcon::fromTheme(QStringLiteral("unknown")))), display);
     } else {
       insertItem(itemId, emptyIcon, display);
     }
