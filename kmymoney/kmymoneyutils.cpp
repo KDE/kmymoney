@@ -600,20 +600,20 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString iconName, const QString overlay
       y = 0;
       break;
     case Qt::TopRightCorner:
-      x = ovly.width() / 2;
+      x = result.width() / 2;
       y = 0;
       break;
     case Qt::BottomLeftCorner:
       x = 0;
-      y = ovly.height() / 2;
+      y = result.height() / 2;
       break;
     case Qt::BottomRightCorner:
     default:
-      x = ovly.width() / 2;
-      y = ovly.height() / 2;
+      x = result.width() / 2;
+      y = result.height() / 2;
       break;
   }
-  pixmapPainter.drawPixmap(x, y, ovly.width() / 2, ovly.height() / 2, ovly);
+  pixmapPainter.drawPixmap(x, y, result.width() / 2, result.height() / 2, ovly);
 
   //save for later use
   QPixmapCache::insert(overlaidIcon, result);
