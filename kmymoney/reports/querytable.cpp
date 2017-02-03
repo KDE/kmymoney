@@ -525,11 +525,21 @@ void QueryTable::constructTransactionTable()
     QString a_fullname = "";
     QString a_memo = "";
     int pass = 1;
-    QString myBeginCurrency = (file->account((*myBegin).accountId())).currencyId(); //currency of the main split
 
+    QString myBeginCurrency;
+    QString baseCurrency = file->baseCurrency().id();
+
+    QMap<QString, MyMoneyMoney> xrMap; // container for conversion rates from given currency to myBeginCurrency
     do {
       MyMoneyMoney xr;
       ReportAccount splitAcc = (* it_split).accountId();
+      QString splitCurrency;
+      if (splitAcc.isInvest())
+        splitCurrency = file->account(file->account((*it_split).accountId()).parentAccountId()).currencyId();
+      else
+        splitCurrency = file->account((*it_split).accountId()).currencyId();
+      if (it_split == myBegin)
+        myBeginCurrency = splitCurrency;
 
       //get fraction for account
       int fraction = splitAcc.currency().smallestAccountFraction();
@@ -545,39 +555,93 @@ void QueryTable::constructTransactionTable()
 
       //convert to base currency
       if (m_config.isConvertCurrency()) {
-        xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate()) * splitAcc.baseCurrencyPrice((*it_transaction).postDate())).reduce();
-      } else {
-        xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate())).reduce();
-      }
+        xr = xrMap.value(splitCurrency, xr);  // check if there is conversion rate to myBeginCurrency already stored...
+        if (xr == MyMoneyMoney())             // ...if not...
+            xr = (*it_split).price();         // ...take conversion rate to myBeginCurrency from split
+        else if (splitAcc.isInvest())         // if it's stock split...
+          xr *= (*it_split).price();          // ...multiply it by stock price stored in split
 
-      if (splitAcc.isInvest()) {
-
-        // use the institution of the parent for stock accounts
-        institution = splitAcc.parent().institutionId();
-        MyMoneyMoney shares = (*it_split).shares();
-
-        qA["action"] = (*it_split).action();
-        qA["shares"] = shares.isZero() ? "" : (*it_split).shares().toString();
-        qA["price"] = shares.isZero() ? "" : xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
-
-        if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && (*it_split).shares().isNegative())
-          qA["action"] = "Sell";
-
-        qA["investaccount"] = splitAcc.parent().name();
-      }
+        if (myBeginCurrency != baseCurrency) {                             // myBeginCurrency can differ from baseCurrency...
+          MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency,
+                                           (*it_transaction).postDate());  // ...so check conversion rate...
+          if (price.isValid())
+            xr *= price.rate(baseCurrency);                                // ...and multiply it by current price...
+          else
+            qA["currency"] = qS["currency"] = myBeginCurrency;             // ...or set information about non-baseCurrency
+        }
+      } else if (splitAcc.isInvest())
+        xr = (*it_split).price();
+      else
+        xr = MyMoneyMoney::ONE;
 
       if (it_split == myBegin) {
-
         include_me = m_config.includes(splitAcc);
+        if (include_me)
+          // track accts that will need opening and closing balances
+          //FIXME in some cases it will show the opening and closing
+          //balances but no transactions if the splits are all filtered out -- asoliverez
+          accts.insert(splitAcc.id(), splitAcc);
+
+        qA["account"] = splitAcc.name();
+        qA["accountid"] = splitAcc.id();
+        qA["topaccount"] = splitAcc.topParentName();
+
+        if (splitAcc.isInvest()) {
+          // use the institution of the parent for stock accounts
+          institution = splitAcc.parent().institutionId();
+          MyMoneyMoney shares = (*it_split).shares();
+
+          qA["action"] = (*it_split).action();
+          qA["shares"] = shares.isZero() ? "" : shares.toString();
+          qA["price"] = shares.isZero() ? "" : xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+
+          if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && shares.isNegative())
+            qA["action"] = "Sell";
+
+          qA["investaccount"] = splitAcc.parent().name();
+
+          MyMoneySplit stockSplit = (*it_split);
+          MyMoneySplit assetAccountSplit;
+          QList<MyMoneySplit> feeSplits;
+          QList<MyMoneySplit> interestSplits;
+          MyMoneySecurity currency;
+          MyMoneySecurity security;
+          MyMoneySplit::investTransactionTypeE transactionType;
+          KMyMoneyUtils::dissectTransaction((*it_transaction), stockSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+          if (!(assetAccountSplit == MyMoneySplit())) {
+            for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
+              if ((*it_split) == assetAccountSplit) {
+                splitAcc = assetAccountSplit.accountId(); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
+                myBegin = it_split;                       // set myBegin to asset split, so stock split can be listed in details under splits
+                myBeginCurrency = (file->account((*myBegin).accountId())).currencyId();
+                if (m_config.isConvertCurrency()) {
+                  if (myBeginCurrency != baseCurrency) {
+                    MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency, (*it_transaction).postDate());
+                    if (price.isValid()) {
+                      xr = price.rate(baseCurrency);
+                      qA["currency"] = qS["currency"] = "";
+                    } else
+                      qA["currency"] = qS["currency"] = myBeginCurrency;
+                  } else
+                    xr = MyMoneyMoney::ONE;
+
+                  qA["price"] = shares.isZero() ? "" : (stockSplit.price() * xr / (*it_split).price()).toString();
+                  // put conversion rate for all splits with this currency, so...
+                  // every split of transaction have the same conversion rate
+                  xrMap.insert(splitCurrency, MyMoneyMoney::ONE / (*it_split).price());
+                } else
+                  xr = (*it_split).price();
+                break;
+              }
+            }
+          }
+        } else
+          qA["price"] = xr.toString();
+
         a_fullname = splitAcc.fullName();
         a_memo = (*it_split).memo();
 
         transaction_text = m_config.match(&(*it_split));
-
-        qA["price"] = xr.toString();
-        qA["account"] = splitAcc.name();
-        qA["accountid"] = splitAcc.id();
-        qA["topaccount"] = splitAcc.topParentName();
 
         qA["institution"] = institution.isEmpty()
                             ? i18n("No Institution")
@@ -602,7 +666,7 @@ void QueryTable::constructTransactionTable()
 
         qA["memo"] = a_memo;
 
-        qA["value"] = (((*it_split).shares()) * xr).convert(fraction).toString();
+        qA["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
 
         qS["reconciledate"] = qA["reconciledate"];
         qS["reconcileflag"] = qA["reconcileflag"];
@@ -617,7 +681,7 @@ void QueryTable::constructTransactionTable()
           if (loan_special_case) {
 
             // put the principal amount in the "value" column and convert to lowest fraction
-            qA["value"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
+            qA["value"] = (-(*it_split).shares() * xr).convert(fraction).toString();
 
             qA["rank"] = '0';
             qA["split"] = "";
@@ -628,7 +692,6 @@ void QueryTable::constructTransactionTable()
               // add the "summarized" split transaction
               // this is the sub-total of the split detail
               // convert to lowest fraction
-              qA["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
               qA["rank"] = '0';
               qA["category"] = i18n("[Split Transaction]");
               qA["topcategory"] = i18nc("Split transaction", "Split");
@@ -637,11 +700,6 @@ void QueryTable::constructTransactionTable()
               m_rows += qA;
             }
           }
-
-          // track accts that will need opening and closing balances
-          //FIXME in some cases it will show the opening and closing
-          //balances but no transactions if the splits are all filtered out -- asoliverez
-          accts.insert(splitAcc.id(), splitAcc);
         }
 
       } else {
@@ -649,7 +707,7 @@ void QueryTable::constructTransactionTable()
         if (include_me) {
 
           if (loan_special_case) {
-            MyMoneyMoney value = ((-(* it_split).shares()) * xr).convert(fraction);
+            MyMoneyMoney value = (-(* it_split).shares() * xr).convert(fraction);
 
             if ((*it_split).action() == MyMoneySplit::ActionAmortization) {
               // put the payment in the "payment" column and convert to lowest fraction
@@ -687,7 +745,7 @@ void QueryTable::constructTransactionTable()
               qA["value"] = "";
 
               //convert to lowest fraction
-              qA["split"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
+              qA["split"] = (-(*it_split).shares() * xr).convert(fraction).toString();
               qA["rank"] = '1';
             } else {
               //this applies when the transaction has only 2 splits, or each split is going to be
@@ -698,14 +756,9 @@ void QueryTable::constructTransactionTable()
               // multiply by currency and convert to lowest fraction
               // but only for income and expense
               // transfers are dealt with somewhere else below
-              if (splitAcc.isIncomeExpense()) {
-                // if the currency of the split is different from the currency of the main split, then convert to the currency of the main split
-                MyMoneyMoney ieXr(xr);
-                if (!m_config.isConvertCurrency() && splitAcc.currency().id() != myBeginCurrency) {
-                  ieXr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
-                }
-                qA["value"] = ((-(*it_split).shares()) * ieXr).convert(fraction).toString();
-              }
+              if (splitAcc.isIncomeExpense())
+                qA["value"] = (-(*it_split).shares() * xr).convert(fraction).toString();
+
               qA["rank"] = '0';
             }
 
@@ -760,7 +813,8 @@ void QueryTable::constructTransactionTable()
           }
         }
 
-        if (m_config.includes(splitAcc) && use_transfers) {
+        if (m_config.includes(splitAcc) && use_transfers &&
+            !(splitAcc.isInvest() && include_me)) { // otherwise stock split is displayed twice in report
           if (! splitAcc.isIncomeExpense()) {
             //multiply by currency and convert to lowest fraction
             qS["value"] = ((*it_split).shares() * xr).convert(fraction).toString();

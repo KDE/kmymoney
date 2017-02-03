@@ -189,7 +189,7 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
     addSplit(s3);
   } else if (_action == MyMoneySplit::ActionBuyShares) {
     s1.setShares(_shares);
-    s1.setValue(value + _fee);
+    s1.setValue(value);
     s1.setAction(MyMoneySplit::ActionBuyShares);
 
     MyMoneySplit s3;

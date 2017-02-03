@@ -472,13 +472,13 @@ void QueryTableTest::testInvestment()
     QList<ListTable::TableRow> rows = invtran.rows();
 
     QVERIFY(rows.count() == 25);
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(100000.00));
-    QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(110000.00));
-    QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-24000.00));
-    QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(-20000.00));
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(-100000.00));
+    QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(-110000.00));
+    QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(24000.00));
+    QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(20000.00));
     QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(5000.00));
     QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(4000.00));
-    QVERIFY(MyMoneyMoney(rows[18]["value"]) == MyMoneyMoney(100000.00));
+    QVERIFY(MyMoneyMoney(rows[18]["value"]) == MyMoneyMoney(-100100.00));
     // need to fix these... fundamentally different from the original test
     //QVERIFY(MyMoneyMoney(invtran.m_rows[8]["value"])==MyMoneyMoney( -1000.00));
     //QVERIFY(MyMoneyMoney(invtran.m_rows[11]["value"])==MyMoneyMoney( -1200.00));
@@ -487,8 +487,8 @@ void QueryTableTest::testInvestment()
     QVERIFY(MyMoneyMoney(rows[1]["price"]) == MyMoneyMoney(100.00));
     QVERIFY(MyMoneyMoney(rows[3]["price"]) == MyMoneyMoney(120.00));
     QVERIFY(MyMoneyMoney(rows[5]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney());
+    QVERIFY(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney());
     QVERIFY(MyMoneyMoney(rows[18]["price"]) == MyMoneyMoney(100.00));
 
     QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(1000.00));
