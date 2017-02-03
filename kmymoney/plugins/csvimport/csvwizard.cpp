@@ -462,7 +462,7 @@ QList<MyMoneyAccount> CSVWizard::findAccounts(QList<MyMoneyAccount::accountTypeE
   QRegExp filterOutChars = QRegExp("-., ");
 
   for (account = accountList.begin(); account != accountList.end(); ++account) {
-    if (accountTypes.contains((*account).accountType()))
+    if (accountTypes.contains((*account).accountType()) && !(*account).isClosed())
         filteredTypes << *account;
   }
 
