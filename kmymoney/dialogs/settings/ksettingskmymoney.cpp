@@ -25,6 +25,7 @@
 #include "ksettingsgpg.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
+#include "ksettingsicons.h"
 #include "ksettingsschedules.h"
 #include "ksettingsonlinequotes.h"
 #include "ksettingshome.h"
@@ -44,6 +45,7 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   KSettingsGpg* encryptionPage = new KSettingsGpg();
   KSettingsColors* colorsPage = new KSettingsColors();
   KSettingsFonts* fontsPage = new KSettingsFonts();
+  KSettingsIcons* iconsPage = new KSettingsIcons();
   KSettingsOnlineQuotes* onlineQuotesPage = new KSettingsOnlineQuotes();
   KSettingsForecast* forecastPage = new KSettingsForecast();
   KPluginSelector* pluginsPage = KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget();
@@ -78,12 +80,14 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   addPage(encryptionPage, i18n("Encryption"), "kgpg");
   addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
+  addPage(iconsPage, i18n("Icons"), "preferences-desktop-icon");
   addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
   setHelp("details.settings", "kmymoney");
 
   QAbstractButton* defaultButton = button(QDialogButtonBox::RestoreDefaults);
   connect(this, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
+  connect(this, &KConfigDialog::rejected, iconsPage, &KSettingsIcons::slotResetTheme);
 
   connect(this, &KConfigDialog::accepted, pluginsPage, &KPluginSelector::save);
   connect(defaultButton, &QAbstractButton::clicked, pluginsPage, &KPluginSelector::defaults);

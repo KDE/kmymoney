@@ -400,6 +400,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
+  QIcon::setThemeName(KMyMoneySettings::iconsTheme());
   initStatusBar();
   initActions();
 

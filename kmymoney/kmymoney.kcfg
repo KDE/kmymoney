@@ -302,6 +302,10 @@
   <entry name="listHeaderFont" type="Font">
    <label>Header font</label>
   </entry>
+  <entry name="IconsTheme" type="String">
+   <label>Icon theme</label>
+   <default></default>
+  </entry>
   <entry name="sortNormalView" type="String">
    <label>Sort order of register in normal view</label>
    <default>1,-9,-4</default>
