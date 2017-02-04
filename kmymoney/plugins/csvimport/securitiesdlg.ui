@@ -33,7 +33,7 @@
    <item>
     <widget class="QLabel" name="label_info">
      <property name="text">
-      <string>The following securities' names and symbols aren't known to KMyMoney.
+      <string>The following securities' names and symbols are not known to KMyMoney.
 Please complete every missing name or symbol.</string>
      </property>
      <property name="alignment">

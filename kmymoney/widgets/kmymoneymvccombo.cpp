@@ -359,7 +359,7 @@ void KMyMoneyTagCombo::checkCurrentText()
   if (!contains(currentText())) {
     if (m_closedTagNameList.contains(currentText())) {
       // Tell the user what's happened
-      QString msg = QString("<qt>") + i18n("Closed tags can't be used.") + QString("</qt>");
+      QString msg = QString("<qt>") + i18n("Closed tags cannot be used.") + QString("</qt>");
       KMessageBox::information(this, msg, i18n("Closed tag"), "Closed tag");
       setCurrentText();
       return;

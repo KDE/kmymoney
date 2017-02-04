@@ -81,7 +81,7 @@
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>Don't ask next time</string>
+        <string>Do not ask next time</string>
        </property>
       </widget>
      </item>

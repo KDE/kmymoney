@@ -241,7 +241,7 @@ bool CSVWizard::updateConfigFile(const KSharedConfigPtr& config, const QList<int
             continue;
         invalidProfileResponse = QMessageBox::warning(m_wizard, i18n("CSV import"),
                                        i18n("<center>During update of <b>%1</b><br>"
-                                            "the profile type for <b>%2</b> couldn't be recognized.<br>"
+                                            "the profile type for <b>%2</b> could not be recognized.<br>"
                                             "The profile cannot be used because of that.<br>"
                                             "Do you want to delete it?</center>",
                                             configFilePath, *profileName),
@@ -1450,7 +1450,7 @@ void FormatsPage::decimalSymbolChanged(int index)
     int detectedSymbol = m_wizDlg->m_decimalSymbolIndex;
     if (!m_wizDlg->detectDecimalSymbol(*col, detectedSymbol)) {
       isOk = false;
-      KMessageBox::sorry(this, i18n("<center>Autodetect couldn't detect your decimal symbol in column %1.</center>"
+      KMessageBox::sorry(this, i18n("<center>Autodetect could not detect your decimal symbol in column %1.</center>"
                                     "<center>Try manual selection to see problematic cells and correct your data.</center>", *col + 1), i18n("CSV import"));
       ui->comboBox_decimalSymbol->blockSignals(true);
       ui->comboBox_decimalSymbol->setCurrentIndex(-1);

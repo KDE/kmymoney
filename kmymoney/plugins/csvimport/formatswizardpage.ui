@@ -37,7 +37,7 @@
        <property name="text">
         <string>Please select the decimal symbol used in your file.
 The thousands separator changes automatically.
-If all is OK, you'll be able to click import.
+If all is OK, you will be able to click 'Import'.
 If required, a QIF file may then be produced.</string>
        </property>
        <property name="alignment">

@@ -68,7 +68,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Statement header will be scanned for names and numbers of accounts you've already setup.</string>
+         <string>Statement header will be scanned for names and numbers of accounts you have already setup.</string>
         </property>
         <property name="text">
          <string>Account in investment statement</string>
@@ -84,7 +84,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Statement header will be scanned for names and numbers of accounts you've already setup.</string>
+         <string>Statement header will be scanned for names and numbers of accounts you have already setup.</string>
         </property>
         <property name="text">
          <string>Account in bank statement</string>
