@@ -41,6 +41,7 @@
 // ----------------------------------------------------------------------------
 
 class TransactionDlg;
+class SecurityDlg;
 class SecuritiesDlg;
 class CSVWizard;
 class InvestmentPage;
@@ -88,6 +89,7 @@ public:
   bool                createStatement(MyMoneyStatement& st);
 
 private:
+  QPointer<SecurityDlg>     m_securityDlg;
   QPointer<SecuritiesDlg>   m_securitiesDlg;
 
   QMap<QString, QString> m_mapSymbolName;
@@ -106,9 +108,12 @@ private:
   QString             m_priceFractionValue;
   QString             m_feeRate;
   QString             m_minFee;
+  QString             m_securityName;
+  QString             m_securitySymbol;
 
   int                 m_feeIsPercentage;
   int                 m_priceFraction;
+  int                 m_dontAsk;
 
   void                initializePage();
   bool                isComplete() const;
@@ -173,6 +178,7 @@ private:
   /**
   * This method ensures that every security has symbol and name.
   */
+  bool                validateSecurity();
   bool                validateSecurities();
 
 public slots:

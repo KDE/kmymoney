@@ -42,6 +42,7 @@
 #include "csvutil.h"
 
 #include "transactiondlg.h"
+#include "securitydlg.h"
 #include "securitiesdlg.h"
 
 #include "ui_investmentwizardpage.h"
@@ -187,9 +188,7 @@ void InvestmentPage::initializePage()
 
 bool InvestmentPage::isComplete() const
 {
-  return (ui->comboBoxInv_symbolCol->currentIndex() > -1 ||
-          ui->comboBoxInv_nameCol->currentIndex() > -1) &&
-          ui->comboBoxInv_dateCol->currentIndex() > -1 &&
+  return  ui->comboBoxInv_dateCol->currentIndex() > -1 &&
           ui->comboBoxInv_typeCol->currentIndex() > -1 &&
           ui->comboBoxInv_quantityCol->currentIndex() > -1 &&
           ui->comboBoxInv_priceCol->currentIndex() > -1 &&
@@ -199,7 +198,11 @@ bool InvestmentPage::isComplete() const
 
 bool InvestmentPage::validatePage()
 {
-  return validateSecurities();
+  if (ui->comboBoxInv_symbolCol->currentIndex() == -1 &&
+      ui->comboBoxInv_nameCol->currentIndex() == -1)
+    return validateSecurity();
+  else
+    return validateSecurities();
 }
 
 void InvestmentPage::cleanupPage()
@@ -775,6 +778,44 @@ bool InvestmentPage::validateSecurities()
   return true;
 }
 
+bool InvestmentPage::validateSecurity()
+{
+  if (!m_securitySymbol.isEmpty() &&
+      !m_securityName.isEmpty())
+    m_mapSymbolName.insert(m_securitySymbol, m_securityName);
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+  if (m_securityDlg.isNull() &&
+      (m_mapSymbolName.isEmpty() ||
+      !(m_dontAsk && m_wiz->m_skipSetup))) {
+    m_securityDlg = new SecurityDlg;
+    m_securityDlg->initializeSecurities(m_securitySymbol, m_securityName);
+    m_securityDlg->ui->cbDontAsk->setChecked(m_dontAsk);
+  }
+
+  if (!m_securityDlg.isNull()) {
+    if (m_securityDlg->exec() == QDialog::Rejected) {
+      return false;
+    } else {
+      QString securityID = m_securityDlg->security();
+      if (!securityID.isEmpty()) {
+        m_securityName = file->security(securityID).name();
+        m_securitySymbol = file->security(securityID).tradingSymbol();
+      } else {
+        m_securityName = m_securityDlg->name();
+        m_securitySymbol = m_securityDlg->symbol();
+      }
+      m_dontAsk = m_securityDlg->dontAsk();
+      m_mapSymbolName.clear();
+      m_mapSymbolName.insert(m_securitySymbol, m_securityName); // probably we should check if security with given symbol and name exists...
+      delete m_securityDlg;                                     // ...but KMM allows creating duplicates, so don't bother
+    }
+  }
+  if (m_mapSymbolName.isEmpty())
+    return false;
+  return true;
+}
+
 void InvestmentPage::saveSettings()
 {
   KConfigGroup profileNamesGroup(m_wiz->m_config, "ProfileNames");
@@ -831,6 +872,10 @@ void InvestmentPage::saveSettings()
   profilesGroup.writeEntry("FeeIsPercentage", int(ui->checkBoxInv_feeIsPercentage->isChecked()));
   profilesGroup.writeEntry("FeeRate", ui->lineEdit_feeRate->text());
   profilesGroup.writeEntry("MinFee", ui->lineEdit_minFee->text());
+
+  profilesGroup.writeEntry("SecurityName", m_securityName);
+  profilesGroup.writeEntry("SecuritySymbol", m_securitySymbol);
+  profilesGroup.writeEntry("DontAsk", int(m_dontAsk));
   profilesGroup.config()->sync();
 }
 
@@ -906,6 +951,10 @@ void InvestmentPage::readSettings(const KSharedConfigPtr& config)
     m_wiz->m_startLine = profilesGroup.readEntry("StartLine", 0) + 1;
     m_wiz->m_trailerLines = profilesGroup.readEntry("TrailerLines", 0);
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
+
+    m_securityName = profilesGroup.readEntry("SecurityName", QString());
+    m_securitySymbol = profilesGroup.readEntry("SecuritySymbol", QString());
+    m_dontAsk = profilesGroup.readEntry("DontAsk", 0);
     break;
   }
 }
@@ -1169,7 +1218,10 @@ bool InvestmentPage::processInvestLine(const QString &line, MyMoneyStatement &st
         tr.m_strSymbol.isEmpty()) { // case in which symbol field is empty
       txt = m_columnList[m_colTypeNum[ColumnName]];
       tr.m_strSymbol = m_mapSymbolName.key(txt);   // it's all about getting the right symbol
-    }
+    } else if (!m_securitySymbol.isEmpty())
+      tr.m_strSymbol = m_securitySymbol;
+    else
+      return false;
     tr.m_strSecurity = m_mapSymbolName.value(tr.m_strSymbol); // take name from prepared names to avoid potential name mismatch
 
     // process memo field
