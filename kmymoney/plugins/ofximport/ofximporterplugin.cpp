@@ -699,7 +699,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
       connect(dlg, SIGNAL(statementReady(QString)),
               this, SLOT(slotImportFile(QString)));
 
-      // get the the date of the earliest transaction that we are interested in
+      // get the date of the earliest transaction that we are interested in
       // from the settings for this account
       MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
       if (!settings.value("provider").isEmpty()) {

@@ -973,7 +973,7 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
   }
   // single user mode; read some of the data into memory
   // FIXME - readFile no longer relevant?
-  // tried removing it but then then got no indication that loading was complete
+  // tried removing it but then got no indication that loading was complete
   // also, didn't show home page
   reader->setProgressCallback(&KMyMoneyView::progressCallback);
   if (!reader->readFile()) {

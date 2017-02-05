@@ -57,7 +57,7 @@ public:
   AmountValidator(QObject * parent);
   /**
     * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
-    * top] and a precision of @p decimals decimals after the decimal
+    * top] and a precision of @p digits after the decimal
     * point.
     */
   AmountValidator(double bottom, double top, int decimals,
