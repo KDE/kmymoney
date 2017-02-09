@@ -107,7 +107,7 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
   // make both operands based on the same budget level
   if (m_budgetlevel != r.m_budgetlevel) {
     if (m_budgetlevel == eMonthly) {        // my budget is monthly
-      if (r.m_budgetlevel == eYearly) {     // his his yearly
+      if (r.m_budgetlevel == eYearly) {     // his is yearly
         r.convertToMonthly();
       } else if (r.m_budgetlevel == eMonthByMonth) { // his is month by month
         convertToMonthByMonth();
