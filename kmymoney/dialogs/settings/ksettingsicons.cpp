@@ -53,7 +53,7 @@ void KSettingsIcons::loadList()
   for (int i = 0; i < searchPaths.count(); ++i) {
     for (int j = 0; j < themes.count(); ++j) {
       QDir themeDir = QDir(searchPaths.at(i)).filePath(themes.at(j));
-      if (themeDir.exists()) {
+      if (themeDir.exists(QStringLiteral("index.theme"))) {
         m_IconsTheme->addItem(themes.at(j));
         m_themesMap.insert(m_themesMap.count(), themes.at(j));
       }
