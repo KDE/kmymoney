@@ -91,12 +91,18 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   //set button icons
   m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
                                                    QIcon::fromTheme(QStringLiteral("report-line"))));
-  m_control->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("document-close")));
+  if (QIcon::hasThemeIcon(QStringLiteral("document-close")))
+    m_control->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("document-close")));
+  else
+    m_control->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("stop")));
   m_control->buttonConfigure->setIcon(QIcon::fromTheme(QStringLiteral("configure"),
                                                        QIcon::fromTheme(QStringLiteral("preferences-system"))));
   m_control->buttonCopy->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
   m_control->buttonDelete->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
-  m_control->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+  if (QIcon::hasThemeIcon(QStringLiteral("document-export")))
+    m_control->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+  else
+    m_control->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-more")));
   m_control->buttonNew->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

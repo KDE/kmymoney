@@ -58,7 +58,8 @@ KImportDlg::KImportDlg(QWidget *parent)
 
   // load button icons
   KGuiItem okButtenItem(i18n("&Import"),
-                        QIcon::fromTheme("document-import"),
+                        QIcon::fromTheme(QStringLiteral("document-import"),
+                                         QIcon::fromTheme(QStringLiteral("format-indent-less"))),
                         i18n("Start operation"),
                         i18n("Use this to start the import operation"));
   KGuiItem::assign(m_buttonBox->button(QDialogButtonBox::Ok), okButtenItem);

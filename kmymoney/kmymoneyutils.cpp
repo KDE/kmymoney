@@ -556,10 +556,14 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString iconName, const QString overlay
         iconReplacement = "investment";
       else if (iconName.compare(QLatin1String("view-financial-categories")) == 0)
         iconReplacement = "categories";
+      else if (iconName.compare(QLatin1String("view-financial-transfer")) == 0)
+        iconReplacement = "ledger";
       else if (iconName.compare(QLatin1String("view-bank")) == 0)
         iconReplacement = "bank";
       else if (iconName.compare(QLatin1String("view-time-schedule-calculus")) == 0)
         iconReplacement = "budget";
+      else if (iconName.compare(QLatin1String("merge")) == 0)
+        iconReplacement = "reconcile";
       else
         iconReplacement = "unknown";
       icon = QIcon::fromTheme(iconReplacement);

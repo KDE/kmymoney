@@ -400,7 +400,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
-  QIcon::setThemeName(KMyMoneySettings::iconsTheme());
+  if (KMyMoneySettings::iconsTheme().compare(QLatin1Literal("system")) != 0)
+    QIcon::setThemeName(KMyMoneySettings::iconsTheme());
+
   initStatusBar();
   initActions();
 
@@ -460,6 +462,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   slotDateChanged();
 
   connect(this, SIGNAL(fileLoaded(QUrl)), onlineJobAdministration::instance(), SLOT(updateOnlineTaskProperties()));
+
 }
 
 KMyMoneyApp::~KMyMoneyApp()
@@ -580,7 +583,8 @@ void KMyMoneyApp::initActions()
 
   QAction *file_backup = actionCollection()->addAction("file_backup");
   file_backup->setText(i18n("Backup..."));
-  file_backup->setIcon(QIcon::fromTheme("utilities-file-archiver"));
+  file_backup->setIcon(QIcon::fromTheme(QStringLiteral("utilities-file-archiver"),
+                                        QIcon::fromTheme(QStringLiteral("package"))));
   connect(file_backup, SIGNAL(triggered()), this, SLOT(slotFileBackup()));
 
   QAction *file_import_qif = actionCollection()->addAction("file_import_qif");
@@ -609,7 +613,8 @@ void KMyMoneyApp::initActions()
 
   QAction *view_personal_data = actionCollection()->addAction("view_personal_data");
   view_personal_data->setText(i18n("Personal Data..."));
-  view_personal_data->setIcon(QIcon::fromTheme("user-properties"));
+  view_personal_data->setIcon(QIcon::fromTheme(QStringLiteral("user-properties"),
+                                               QIcon::fromTheme(QStringLiteral("system-users"))));
   connect(view_personal_data, SIGNAL(triggered()), this, SLOT(slotFileViewPersonal()));
 
 #ifdef KMM_DEBUG
@@ -636,19 +641,26 @@ void KMyMoneyApp::initActions()
   // The View menu
   // *************
   KToggleAction *view_show_transaction_detail = actionCollection()->add<KToggleAction>("view_show_transaction_detail");
-  view_show_transaction_detail->setIcon(QIcon::fromTheme("zoom-in"));
+  view_show_transaction_detail->setIcon(QIcon::fromTheme(QStringLiteral("zoom-in"),
+                                                         QIcon::fromTheme(QStringLiteral("edit-find"))));
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
   actionCollection()->setDefaultShortcut(view_show_transaction_detail, QKeySequence("Ctrl+T"));
 
   KToggleAction *view_hide_reconciled_transactions = actionCollection()->add<KToggleAction>("view_hide_reconciled_transactions");
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
-  view_hide_reconciled_transactions->setIcon(KMyMoneyUtils::overlayIcon("merge", "view-close"));
+  if (QIcon::hasThemeIcon(QStringLiteral("hide-reconciled")))
+    view_hide_reconciled_transactions->setIcon(QIcon::fromTheme(QStringLiteral("hide-reconciled")));
+  else
+    view_hide_reconciled_transactions->setIcon(KMyMoneyUtils::overlayIcon("merge", "view-close"));
   actionCollection()->setDefaultShortcut(view_hide_reconciled_transactions, QKeySequence("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   KToggleAction *view_hide_unused_categories = actionCollection()->add<KToggleAction>("view_hide_unused_categories");
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
-  view_hide_unused_categories->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "view-close"));
+  if (QIcon::hasThemeIcon(QStringLiteral("hide-categories")))
+    view_hide_unused_categories->setIcon(QIcon::fromTheme(QStringLiteral("hide-categories")));
+  else
+    view_hide_unused_categories->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "view-close"));
   actionCollection()->setDefaultShortcut(view_hide_unused_categories, QKeySequence("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
@@ -692,7 +704,8 @@ void KMyMoneyApp::initActions()
 
   QAction *account_reconcile = actionCollection()->addAction("account_reconcile");
   account_reconcile->setText(i18n("Reconcile..."));
-  account_reconcile->setIcon(QIcon::fromTheme("merge"));
+  account_reconcile->setIcon(QIcon::fromTheme(QStringLiteral("merge"),
+                                              QIcon::fromTheme(QStringLiteral("reconcile"))));
   actionCollection()->setDefaultShortcut(account_reconcile, QKeySequence("Ctrl+Shift+R"));
   connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
 
@@ -735,7 +748,8 @@ void KMyMoneyApp::initActions()
   QAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
   account_chart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
-                                          QIcon::fromTheme(QStringLiteral("report-line"))));
+                                          QIcon::fromTheme(QStringLiteral("report-line"),
+                                                           QIcon::fromTheme(QStringLiteral("account-types-investments")))));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 
   QAction *account_online_map = actionCollection()->addAction("account_online_map");
@@ -848,7 +862,8 @@ void KMyMoneyApp::initActions()
   // *************
   QAction *help_show_tip = actionCollection()->addAction("help_show_tip");
   help_show_tip->setText(i18n("&Show tip of the day"));
-  help_show_tip->setIcon(QIcon::fromTheme("ktip"));
+  help_show_tip->setIcon(QIcon::fromTheme(QStringLiteral("ktip"),
+                                          QIcon::fromTheme(QStringLiteral("info"))));
   connect(help_show_tip, SIGNAL(triggered()), this, SLOT(slotShowTipOfTheDay()));
 
   // ***************************
@@ -1174,6 +1189,19 @@ void KMyMoneyApp::initActions()
 
   // use the absolute path to your kmymoneyui.rc file for testing purpose in createGUI();
   setupGUI();
+
+  QMenu *menuContainer;
+  menuContainer = static_cast<QMenu*>(factory()->container("import", this));
+  if (QIcon::hasThemeIcon(QStringLiteral("document-import")))
+    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
+  else
+    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-less")));
+
+  menuContainer = static_cast<QMenu*>(factory()->container("export", this));
+  if (QIcon::hasThemeIcon(QStringLiteral("document-export")))
+    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+  else
+    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-more")));
 }
 
 void KMyMoneyApp::connectActionsAndViews()

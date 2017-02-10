@@ -50,7 +50,6 @@
 #include <kactioncollection.h>
 #include <kmessagebox.h>
 #include <kcodecs.h>
-#include <kiconloader.h>
 #include <ktoolinvocation.h>
 #include <KToggleAction>
 #include <khtml_part.h>
@@ -594,8 +593,9 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-        QString pathEnter = QPixmapToDataUri(KIconLoader::global()->loadIcon(QStringLiteral("key-enter"), KIconLoader::Group::Small));
-        QString pathSkip = QPixmapToDataUri(KIconLoader::global()->loadIcon(QStringLiteral("media-seek-forward"), KIconLoader::Group::Small));
+        QString pathEnter = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("key-enter"),
+                                                              QIcon::fromTheme(QStringLiteral("input-keyboard"))).pixmap(QSize(16,16)));
+        QString pathSkip = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("media-skip-forward")).pixmap(QSize(16,16)));
 
         //show payment date
         tmp = QString("<td>") +
@@ -733,8 +733,8 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += "<tr class=\"item\">";
 
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
-      QString pathStatusHeader;
-      KIconLoader::global()->loadIcon(QString("download"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
+      QString pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("download"),
+                                                            QIcon::fromTheme(QStringLiteral("go-down"))).pixmap(QSize(16,16)));
       d->m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
     }
 
@@ -846,9 +846,12 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
   if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
     //show account's online-status
-    KIconLoader::global()->loadIcon(QString("dialog-ok-apply"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathOK);
-    KIconLoader::global()->loadIcon(QString("mail-receive"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathTODO);
-    KIconLoader::global()->loadIcon(QString("dialog-cancel"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathNotOK);
+    pathOK = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
+                                                          QIcon::fromTheme(QStringLiteral("go-down"))).pixmap(QSize(16,16)));
+    pathTODO = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
+                                                          QIcon::fromTheme(QStringLiteral("finish"))).pixmap(QSize(16,16)));
+    pathNotOK = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                                          QIcon::fromTheme(QStringLiteral("stop"))).pixmap(QSize(16,16)));
 
     if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
       cellStatus = '-';
@@ -1280,7 +1283,7 @@ void KHomeView::showAssetsLiabilities()
     QString statusHeader;
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
-      KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
+      pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("online-banking")).pixmap(QSize(16,16)));
       statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
     }
 
