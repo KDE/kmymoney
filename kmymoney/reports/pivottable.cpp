@@ -1893,6 +1893,11 @@ void PivotTable::drawChart(KReportChartView& chartView) const
   chartView.drawPivotChart(m_grid, m_config_f, m_numColumns, m_columnHeadings, m_rowTypeList, m_columnTypeHeaderList);
 }
 
+QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol) const
+{
+  return coloredAmount(amount, currencySymbol, KMyMoneyGlobalSettings::pricePrecision());
+}
+
 QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const
 {
   QString result;

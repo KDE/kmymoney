@@ -515,7 +515,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueTextAttr.setPen(m_foregroundBrush.color());
   dataValueAttr.setTextAttributes(dataValueTextAttr);
   dataValueAttr.setVisible(config.isChartDataLabels());
-  dataValueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+  dataValueAttr.setDecimalDigits(KMyMoneyGlobalSettings::pricePrecision());
   planeDiagram->setDataValueAttributes(dataValueAttr);
   planeDiagram->setAllowOverlappingDataValueTexts(true);
 
@@ -551,7 +551,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
     if (!legendText.isEmpty())
       toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
           .arg(legendText)
-          .arg(value, 0, 'f', 2);
+          .arg(value, 0, 'g', KMyMoneyGlobalSettings::pricePrecision());
 
     //set the cell value
     if (accountSeries())
@@ -570,7 +570,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
         if (!legendText.isEmpty())
           toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
               .arg(legendText)
-              .arg(value, 0, 'f', 2);
+              .arg(value, 0, 'g', KMyMoneyGlobalSettings::pricePrecision());
 
         if (accountSeries())
           this->setDataCell(column, rowNum, value, toolTip);

@@ -161,7 +161,8 @@ private:
     *          with $red, $green and $blue being the actual value for the
     *          chosen color.
     */
-  QString coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol = QString(), int prec = 2) const;
+  QString coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol = QString()) const;
+  QString coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const;
 
 protected:
   /**
