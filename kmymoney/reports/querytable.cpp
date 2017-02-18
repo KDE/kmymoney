@@ -752,13 +752,6 @@ void QueryTable::constructTransactionTable()
               //shown separately, eg. transactions by category
 
               qA["split"] = "";
-
-              // multiply by currency and convert to lowest fraction
-              // but only for income and expense
-              // transfers are dealt with somewhere else below
-              if (splitAcc.isIncomeExpense())
-                qA["value"] = (-(*it_split).shares() * xr).convert(fraction).toString();
-
               qA["rank"] = '0';
             }
 
