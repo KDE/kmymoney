@@ -380,13 +380,20 @@ void KInvestmentView::loadInvestmentTab()
   MyMoneyFile* file = MyMoneyFile::instance();
   bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
                             || !KMyMoneyGlobalSettings::hideClosedAccounts();
+  const bool hideZeroBalance = KMyMoneyGlobalSettings::hideZeroBalanceEquities();
+
   try {
     d->m_account = file->account(d->m_account.id());
     QStringList securities = d->m_account.accountList();
 
     for (QStringList::ConstIterator it = securities.constBegin(); it != securities.constEnd(); ++it) {
       MyMoneyAccount acc = file->account(*it);
-      if (!acc.isClosed() || showClosedAccounts)
+      bool displayThisBalance = true;
+      if (hideZeroBalance) {
+        const MyMoneyMoney &balance = file->balance(acc.id());
+        displayThisBalance = !balance.isZero();
+      }
+      if ((!acc.isClosed() || showClosedAccounts) && displayThisBalance)
         loadInvestmentItem(acc);
     }
   } catch (const MyMoneyException &) {

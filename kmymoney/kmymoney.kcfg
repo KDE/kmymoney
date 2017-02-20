@@ -208,6 +208,10 @@
    <label>Show categories in the accounts view</label>
    <default>false</default>
   </entry>
+  <entry name="HideZeroBalanceEquities" type="Bool">
+   <label>Hide zero balance equities</label>
+   <default>false</default>
+  </entry>
   <entry name="HideFinishedSchedules" type="Bool">
    <label>Hide finished schedules</label>
    <default>false</default>

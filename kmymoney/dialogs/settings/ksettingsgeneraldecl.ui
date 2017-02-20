@@ -482,6 +482,13 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_HideZeroBalanceEquities">
+            <property name="text">
+             <string>Do not show zero balance equities</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
