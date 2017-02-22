@@ -1240,11 +1240,12 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneyGlobalSettings::matchInterval());
     result = existingTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
-      MyMoneySplit matchedSplit = existingTrMatchFinder.getMatchedSplit();
       MyMoneyTransaction matchedTransaction = existingTrMatchFinder.getMatchedTransaction();
-
-      handleMatchingOfExistingTransaction(matcher, matchedTransaction, matchedSplit, transactionUnderImport, s1, result);
-      return;
+      if (!matchedTransaction.isImported() || result == TransactionMatchFinder::MatchPrecise) { // don't match with just imported transaction
+        MyMoneySplit matchedSplit = existingTrMatchFinder.getMatchedSplit();
+        handleMatchingOfExistingTransaction(matcher, matchedTransaction, matchedSplit, transactionUnderImport, s1, result);
+        return;
+      }
     }
 
     addTransaction(transactionUnderImport);
