@@ -207,7 +207,24 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
     QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
     for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       const MyMoneyTransaction& t = (*it_t).first;
-      const MyMoneySplit&s = (*it_t).second;
+      MyMoneySplit s = (*it_t).second;
+
+      MyMoneyAccount acc = file->account(s.accountId());
+      // stock split shouldn't be fee or interest bacause it won't play nice with dissectTransaction
+      // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
+      if (acc.accountGroup() == MyMoneyAccount::Expense || acc.accountGroup() == MyMoneyAccount::Income) {
+        foreach (auto sNew , t.splits()) {
+          acc = file->account(sNew.accountId());
+          if (acc.accountGroup() != MyMoneyAccount::Expense && // shouldn't be fee
+              acc.accountGroup() != MyMoneyAccount::Income &&  // shouldn't be interest
+              (sNew.value() != sNew.shares() ||                 // shouldn't be checking account...
+              (sNew.value() == sNew.shares() && sNew.price() != MyMoneyMoney::ONE))) { // ...but sometimes it may look like checking account
+            s = sNew;
+            break;
+          }
+        }
+      }
+
       MyMoneySplit assetAccountSplit;
       QList<MyMoneySplit> feeSplits;
       QList<MyMoneySplit> interestSplits;
@@ -215,11 +232,15 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
       KMyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-      if (feeSplits.count() == 1) {
+      if (!feeSplits.isEmpty()) {
         feesId = feeSplits.first().accountId();
+        if (!interestId.isEmpty())
+          break;
       }
-      if (interestSplits.count() == 1) {
+      if (!interestSplits.isEmpty()) {
         interestId = interestSplits.first().accountId();
+        if (!feesId.isEmpty())
+          break;
       }
     }
   } catch (const MyMoneyException &) {
@@ -620,6 +641,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   transactionUnderImport.setMemo(statementTransactionUnderImport.m_strMemo);
 
   MyMoneySplit s1;
+  MyMoneySplit s2;
+  MyMoneySplit sFees;
+  MyMoneySplit sBrokerage;
 
   s1.setMemo(statementTransactionUnderImport.m_strMemo);
   s1.setValue(statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees);
@@ -763,8 +787,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPrice((total / statementTransactionUnderImport.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
       }
 
-
-      MyMoneySplit s2;
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s2.setAccountId(d->interestId(thisaccount));
@@ -773,7 +795,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       s2.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
       s2.setValue(s2.shares());
-      transactionUnderImport.addSplit(s2);
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaCashDividend) {
       // Cash dividends require setting 2 splits to get all of the information
       // in.  Split #1 will be the income split, and we'll set it to the first
@@ -791,11 +812,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
-      MyMoneySplit s2;
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
       s2.setAction(MyMoneySplit::ActionDividend);
       s2.setAccountId(thisaccount.id());
-      transactionUnderImport.addSplit(s2);
 
       /*  at this point any fees have been taken into account already
        *  so don't deduct them again.
@@ -818,13 +837,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
-      MyMoneySplit s2;
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
       s2.setAction(MyMoneySplit::ActionInterestIncome);
       s2.setAccountId(thisaccount.id());
-      transactionUnderImport.addSplit(s2);
-
-
       transfervalue = statementTransactionUnderImport.m_amount;
 
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaFees) {
@@ -879,12 +894,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       }
     }
     if (!statementTransactionUnderImport.m_fees.isZero()) {
-      MyMoneySplit s;
-      s.setMemo(i18n("(Fees) %1", statementTransactionUnderImport.m_strMemo));
-      s.setValue(statementTransactionUnderImport.m_fees);
-      s.setShares(statementTransactionUnderImport.m_fees);
-      s.setAccountId(d->feeId(thisaccount));
-      transactionUnderImport.addSplit(s);
+      sFees.setMemo(i18n("(Fees) %1", statementTransactionUnderImport.m_strMemo));
+      sFees.setValue(statementTransactionUnderImport.m_fees);
+      sFees.setShares(statementTransactionUnderImport.m_fees);
+      sFees.setAccountId(d->feeId(thisaccount));
     }
   } else {
     // For non-investment accounts, just use the selected account
@@ -1162,7 +1175,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   }
 
   s1.setReconcileFlag(statementTransactionUnderImport.m_reconcile);
-  transactionUnderImport.addSplit(s1);
 
   // Add the 'account' split if it's needed
   if (! transfervalue.isZero()) {
@@ -1176,17 +1188,26 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
 //  There is no BrokerageAccount so have to nowhere to put this split.
     if (!brokerageactid.isEmpty()) {
-      MyMoneySplit s;
-      s.setMemo(statementTransactionUnderImport.m_strMemo);
-      s.setValue(transfervalue);
-      s.setShares(transfervalue);
-      s.setAccountId(brokerageactid);
-      s.setReconcileFlag(statementTransactionUnderImport.m_reconcile);
-      MyMoneyAccount splitAccount = file->account(s.accountId());
-      d->setupPrice(s, splitAccount, m_account, statementTransactionUnderImport.m_datePosted);
-      transactionUnderImport.addSplit(s);
+      sBrokerage.setMemo(statementTransactionUnderImport.m_strMemo);
+      sBrokerage.setValue(transfervalue);
+      sBrokerage.setShares(transfervalue);
+      sBrokerage.setAccountId(brokerageactid);
+      sBrokerage.setReconcileFlag(statementTransactionUnderImport.m_reconcile);
+      MyMoneyAccount splitAccount = file->account(sBrokerage.accountId());
+      d->setupPrice(sBrokerage, splitAccount, m_account, statementTransactionUnderImport.m_datePosted);
     }
   }
+
+  if (!(sBrokerage == MyMoneySplit()))
+    transactionUnderImport.addSplit(sBrokerage);
+
+  if (!(sFees == MyMoneySplit()))
+    transactionUnderImport.addSplit(sFees);
+
+  if (!(s2 == MyMoneySplit()))
+    transactionUnderImport.addSplit(s2);
+
+  transactionUnderImport.addSplit(s1);
 
   if ((statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaReinvestDividend) && (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaCashDividend) && (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaInterest)
      ) {
@@ -1196,16 +1217,16 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
     QList<MyMoneyStatement::Split>::const_iterator it_s;
     for (it_s = statementTransactionUnderImport.m_listSplits.begin(); it_s != statementTransactionUnderImport.m_listSplits.end(); ++it_s) {
-      MyMoneySplit s2;
-      s2.setAccountId((*it_s).m_accountId);
-      MyMoneyAccount acc = file->account(s2.accountId());
-      s2.setPayeeId(s1.payeeId());
-      s2.setMemo((*it_s).m_strMemo);
-      s2.setShares((*it_s).m_amount);
-      s2.setValue((*it_s).m_amount);
-      s2.setReconcileFlag((*it_s).m_reconcile);
-      d->setupPrice(s2, acc, m_account, statementTransactionUnderImport.m_datePosted);
-      transactionUnderImport.addSplit(s2);
+      MyMoneySplit s3;
+      s3.setAccountId((*it_s).m_accountId);
+      MyMoneyAccount acc = file->account(s3.accountId());
+      s3.setPayeeId(s1.payeeId());
+      s3.setMemo((*it_s).m_strMemo);
+      s3.setShares((*it_s).m_amount);
+      s3.setValue((*it_s).m_amount);
+      s3.setReconcileFlag((*it_s).m_reconcile);
+      d->setupPrice(s3, acc, m_account, statementTransactionUnderImport.m_datePosted);
+      transactionUnderImport.addSplit(s3);
     }
   }
 
