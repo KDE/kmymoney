@@ -2,6 +2,7 @@
 Name=Weboob
 Name[ca]=Weboob
 Name[ca@valencia]=Weboob
+Name[cs]=Weboob
 Name[de]=Weboob
 Name[en_GB]=Weboob
 Name[es]=Weboob
@@ -19,6 +20,7 @@ Name[x-test]=xxWeboobxx
 Comment=Plugin for weboob
 Comment[ca]=Connector pel Weboob
 Comment[ca@valencia]=Connector pel Weboob
+Comment[cs]=Modul pro weboob
 Comment[de]=Modul für Weboob
 Comment[en_GB]=Plugin for weboob
 Comment[es]=Complemento para weboob
