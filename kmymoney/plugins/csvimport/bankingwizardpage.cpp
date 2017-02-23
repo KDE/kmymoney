@@ -337,23 +337,21 @@ bool BankingPage::validateSelectedColumn(int col, columnTypeE type)
   if (m_colTypeNum.value(type) != -1)        // check if this 'type' has any column 'number' assigned...
     m_colNumType.remove(m_colTypeNum[type]); // ...if true remove 'type' assigned to this column 'number'
 
+  bool ret = true;
   if (col == -1) { // user only wanted to reset his column so allow him
     m_colTypeNum[type] = col;  // assign new column 'number' to this 'type'
-    return true;
-  }
-
-  if (m_colNumType.contains(col)) { // if this column 'number' has already 'type' assigned
+  } else if (m_colNumType.contains(col)) { // if this column 'number' has already 'type' assigned
     KMessageBox::information(m_wiz, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>",
                                      m_colTypeName.value(m_colNumType[col])));
     resetComboBox(m_colNumType[col]);
     resetComboBox(type);
-    return false;
+    ret = false;
+  } else {
+    m_colTypeNum[type] = col; // assign new column 'number' to this 'type'
+    m_colNumType[col] = type; // assign new 'type' to this column 'number'
   }
-
-  m_colTypeNum[type] = col; // assign new column 'number' to this 'type'
-  m_colNumType[col] = type; // assign new 'type' to this column 'number'
   emit completeChanged();
-  return true;
+  return ret;
 }
 
 void BankingPage::saveSettings()
