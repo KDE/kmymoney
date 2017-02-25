@@ -189,6 +189,9 @@ void GeneralPage::slotLoadFromAddressBook()
 
 void GeneralPage::slotContactFetched(const ContactData &identity)
 {
+  m_loadAddressButton->setEnabled(true);
+  if (identity.email.isEmpty())
+    return;
   m_telephoneEdit->setText(identity.phoneNumber);
   QString sep;
   if (!identity.country.isEmpty() && !identity.region.isEmpty())
@@ -197,7 +200,6 @@ void GeneralPage::slotContactFetched(const ContactData &identity)
   m_postcodeEdit->setText(identity.postalCode);
   m_townEdit->setText(identity.locality);
   m_streetEdit->setText(identity.street);
-  m_loadAddressButton->setEnabled(true);
 }
 
 KMyMoneyWizardPage* GeneralPage::nextPage() const

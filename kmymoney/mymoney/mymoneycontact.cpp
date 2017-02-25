@@ -30,6 +30,7 @@
 #include <AkonadiCore/ItemFetchScope>
 #include <AkonadiCore/Collection>
 #include <KContacts/Addressee>
+#include <QRegularExpression>
 #endif
 
 MyMoneyContact::MyMoneyContact(QObject *parent) : QObject(parent)
@@ -72,16 +73,21 @@ QString MyMoneyContact::ownerFullName() const
 void MyMoneyContact::fetchContact(const QString &email)
 {
 #ifdef KMM_ADDRESSBOOK_FOUND
-  // fetch the contact data
-  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KContacts::Addressee::mimeType());
-  job->fetchScope().fetchFullPayload();
-  job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
-  job->setProperty("MyMoneyContact_email", email);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
-  job->start();
+  QRegularExpression re(".+@.+");
+  if (!re.match(email).hasMatch()) {
+    ContactData contact;
+    emit contactFetched(contact);
+  } else {
+    // fetch the contact data
+    Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KContacts::Addressee::mimeType());
+    job->fetchScope().fetchFullPayload();
+    job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+    job->setProperty("MyMoneyContact_email", email);
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
+    job->start();
+  }
 #else
   ContactData contact;
-  contact.email = email;
   emit contactFetched(contact);
 #endif
 }
@@ -98,9 +104,53 @@ void MyMoneyContact::searchContactResult(KJob *job)
   foreach (const Akonadi::Item &item, items) {
     const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
     if (contact.emails().contains(contactData.email)) {
-      KContacts::PhoneNumber phone = contact.phoneNumber(KContacts::PhoneNumber::Home);
+      KContacts::PhoneNumber phone;
+      KContacts::PhoneNumber::List phones = contact.phoneNumbers();
+      if (phones.count() == 1)
+        phone = phones.first();
+      else {
+        QList<KContacts::PhoneNumber::Type> typesList = {KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Pref,
+                                                         KContacts::PhoneNumber::Work,
+                                                         KContacts::PhoneNumber::Home | KContacts::PhoneNumber::Pref,
+                                                         KContacts::PhoneNumber::Home};
+        foreach (auto type,  typesList) {
+          foreach (auto phn, phones) {
+            if (phn.type() & type) {
+              phone = phn;
+              break;
+            }
+          }
+          if (!phone.isEmpty())
+            break;
+        }
+      }
+      if (phone.isEmpty() && !phones.isEmpty())
+        phone = phones.first();
+
       contactData.phoneNumber = phone.number();
-      const KContacts::Address &address = contact.address(KContacts::Address::Home);
+      KContacts::Address address;
+      KContacts::Address::List addresses = contact.addresses();
+      if (addresses.count() == 1)
+        address = addresses.first();
+      else {
+        QList<KContacts::Address::Type> typesList = {KContacts::Address::Work | KContacts::Address::Pref,
+                                                     KContacts::Address::Work,
+                                                     KContacts::Address::Home | KContacts::Address::Pref,
+                                                     KContacts::Address::Home};
+        foreach (auto type,  typesList) {
+          foreach (auto addr, addresses) {
+            if (addr.type() & type) {
+              address = addr;
+              break;
+            }
+          }
+          if (!address.isEmpty())
+            break;
+        }
+      }
+      if (address.isEmpty() && !addresses.isEmpty())
+        address = addresses.first();
+
       contactData.street = address.street();
       contactData.locality = address.locality();
       contactData.country = address.country();

@@ -43,6 +43,7 @@
 
 #include "ui_kpayeesviewdecl.h"
 #include "mymoneypayee.h"
+#include "mymoneycontact.h"
 
 /**
   * @author Michael Edwardes, Thomas Baumgart
@@ -154,6 +155,17 @@ private slots:
 
   void slotChooseDefaultAccount();
 
+  /**
+    * Fetches the payee data from addressbook.
+    */
+  void slotSyncAddressBook();
+  void slotContactFetched(const ContactData &identity);
+
+  /**
+    * Creates mail to payee.
+    */
+  void slotSendMail();
+
 signals:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);
@@ -167,6 +179,9 @@ signals:
 private:
   MyMoneyPayee m_payee;
   QString      m_newName;
+  MyMoneyContact *m_contact;
+  int          m_payeeRow;
+  QList<int>   m_payeeRows;
 
   /**
     * List of selected payees

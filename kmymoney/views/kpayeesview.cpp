@@ -41,6 +41,7 @@
 #include <QtAlgorithms>
 #include <QTimer>
 #include <QIcon>
+#include <QDesktopServices>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -82,7 +83,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
     m_needReload(false),
     m_inSelection(false),
     m_allowEditing(true),
-    m_payeeFilterType(0)
+    m_payeeFilterType(0),
+    m_contact(new MyMoneyContact(this))
 {
   setupUi(this);
 
@@ -150,7 +152,24 @@ KPayeesView::KPayeesView(QWidget *parent) :
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);
 
+  KGuiItem syncButtonItem(i18nc("Sync payee", "Sync"),
+                            QIcon::fromTheme(QStringLiteral("view-refresh")),
+                            i18n("Fetches the payee's data from your addressbook."),
+                            i18n("Use this to fetch payee's data."));
+  KGuiItem::assign(m_syncAddressbook, syncButtonItem);
+
+  KGuiItem sendMailButtonItem(i18nc("Send mail", "Send"),
+                            QIcon::fromTheme(QStringLiteral("mail-message"),
+                                             QIcon::fromTheme(QStringLiteral("internet-mail"))),
+                            i18n("Creates new e-mail to your payee."),
+                            i18n("Use this to create new e-mail to your payee."));
+  KGuiItem::assign(m_sendMail, sendMailButtonItem);
+
   m_updateButton->setEnabled(false);
+  m_syncAddressbook->setEnabled(false);
+  #ifndef KMM_ADDRESSBOOK_FOUND
+  m_syncAddressbook->hide();
+  #endif
   matchTypeCombo->setCurrentIndex(0);
 
   checkMatchIgnoreCase->setEnabled(false);
@@ -170,6 +189,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_register->setSelectionMode(QTableWidget::SingleSelection);
   m_register->setDetailsColumnType(KMyMoneyRegister::AccountFirst);
   m_balanceLabel->hide();
+
+  connect(m_contact, SIGNAL(contactFetched(ContactData)), this, SLOT(slotContactFetched(ContactData)));
 
   connect(m_payeesList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(slotSelectPayee(QListWidgetItem*,QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectPayee()));
@@ -197,7 +218,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(buttonSuggestACategory, SIGNAL(clicked()), this, SLOT(slotChooseDefaultAccount()));
 
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdatePayee()));
+  connect(m_syncAddressbook, SIGNAL(clicked()), this, SLOT(slotSyncAddressBook()));
   connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
+  connect(m_sendMail, SIGNAL(clicked()), this, SLOT(slotSendMail()));
 
   connect(m_register, SIGNAL(editTransaction()), this, SLOT(slotSelectTransaction()));
 
@@ -405,10 +428,13 @@ void KPayeesView::slotSelectPayee()
     m_mergeButton->setEnabled(false);
     clearItemData();
     m_payee = MyMoneyPayee();
+    m_syncAddressbook->setEnabled(false);
     return; // make sure we don't access an undefined payee
   }
 
   m_deleteButton->setEnabled(true); //re-enable delete button
+
+  m_syncAddressbook->setEnabled(true);
 
   // if we have multiple payees selected, clear and disable the payee information
   if (m_selectedPayeesList.count() > 1) {
@@ -673,6 +699,83 @@ void KPayeesView::slotUpdatePayee()
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
+}
+
+void KPayeesView::slotSyncAddressBook()
+{
+  if (m_payeeRows.isEmpty()) {                            // empty list means no syncing is pending...
+    foreach (auto item, m_payeesList->selectedItems()) {
+      m_payeeRows.append(m_payeesList->row(item));        // ...so initialize one
+    }
+    m_payeesList->clearSelection();                       // otherwise slotSelectPayee will be run after every payee update
+//    m_syncAddressbook->setEnabled(false);                 // disallow concurent syncs
+  }
+
+  if (m_payeeRows.count() <= m_payeeRow) {
+    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(m_payeesList->currentItem());
+
+    if (item) { // update ui if something is selected
+      m_payee = item->payee();
+      addressEdit->setText(m_payee.address());
+      postcodeEdit->setText(m_payee.postcode());
+      telephoneEdit->setText(m_payee.telephone());
+    }
+    m_payeeRows.clear();  // that means end of sync
+    m_payeeRow = 0;
+    return;
+  }
+
+  KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(m_payeesList->item(m_payeeRows.at(m_payeeRow)));
+  if (item)
+    m_payee = item->payee();
+  ++m_payeeRow;
+
+  m_contact->fetchContact(m_payee.email()); // search for payee's data in addressbook and receive it in slotContactFetched
+}
+
+void KPayeesView::slotContactFetched(const ContactData &identity)
+{
+  if (!identity.email.isEmpty()) {  // empty e-mail means no identity fetched
+    QString txt;
+    if (!identity.street.isEmpty())
+      txt.append(identity.street + "\n");
+    if (!identity.locality.isEmpty()) {
+      txt.append(identity.locality);
+      if (!identity.postalCode.isEmpty())
+        txt.append(' ' + identity.postalCode + "\n");
+      else
+        txt.append("\n");
+    }
+    if (!identity.country.isEmpty())
+      txt.append(identity.country + "\n");
+
+    if (!txt.isEmpty() && m_payee.address().compare(txt) != 0)
+      m_payee.setAddress(txt);
+
+    if (!identity.postalCode.isEmpty() && m_payee.postcode().compare(identity.postalCode) != 0)
+      m_payee.setPostcode(identity.postalCode);
+
+    if (!identity.phoneNumber.isEmpty() && m_payee.telephone().compare(identity.phoneNumber) != 0)
+      m_payee.setTelephone(identity.phoneNumber);
+
+    MyMoneyFileTransaction ft;
+    try {
+      MyMoneyFile::instance()->modifyPayee(m_payee);
+      ft.commit();
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    }
+  }
+
+  slotSyncAddressBook();  // process next payee
+}
+
+void KPayeesView::slotSendMail()
+{
+  QRegularExpression re(".+@.+");
+  if (re.match(m_payee.email()).hasMatch())
+    QDesktopServices::openUrl(QUrl(QStringLiteral("mailto:?to=") + m_payee.email(), QUrl::TolerantMode));
 }
 
 void KPayeesView::showEvent(QShowEvent* event)

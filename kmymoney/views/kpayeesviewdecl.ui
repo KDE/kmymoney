@@ -98,7 +98,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -296,34 +296,8 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="KLineEdit" name="postcodeEdit"/>
-           </item>
-           <item row="2" column="1">
-            <widget class="KLineEdit" name="telephoneEdit"/>
-           </item>
            <item row="3" column="1">
             <widget class="KLineEdit" name="emailEdit"/>
-           </item>
-           <item row="0" column="1">
-            <widget class="KTextEdit" name="addressEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>1</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="KTextEdit" name="notesEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>1</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="TextLabel4">
@@ -347,6 +321,35 @@
              </property>
              <property name="wordWrap">
               <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QPushButton" name="m_sendMail"/>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="KLineEdit" name="telephoneEdit"/>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="KLineEdit" name="postcodeEdit"/>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="KTextEdit" name="addressEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="KTextEdit" name="notesEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
              </property>
             </widget>
            </item>
@@ -533,15 +536,15 @@ new transactions with this payee</string>
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="m_syncAddressbook"/>
+     </item>
+     <item>
       <widget class="QPushButton" name="m_updateButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
        </property>
       </widget>
      </item>
@@ -557,14 +560,14 @@ new transactions with this payee</string>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KEditListWidget</class>
-   <extends>QWidget</extends>
-   <header>keditlistwidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KComboBox</class>
