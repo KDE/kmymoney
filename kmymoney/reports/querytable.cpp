@@ -1102,33 +1102,41 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   MyMoneyMoney returnInvestment;
   MyMoneyMoney buysTotal = buys.total();
   MyMoneyMoney sellsTotal = sells.total();
-  MyMoneyMoney cashincomeTotal = cashincome.total();
+  MyMoneyMoney cashIncomeTotal = cashincome.total();
+  MyMoneyMoney reinvestIncomeTotal = reinvestincome.total();
+
   if (!buysTotal.isZero() || !startingBal.isZero()) {
-    returnInvestment = (sellsTotal + buysTotal + cashincomeTotal + endingBal - startingBal) / (startingBal - buysTotal);
+    returnInvestment = (sellsTotal + buysTotal + cashIncomeTotal + endingBal - startingBal) / (startingBal - buysTotal);
     returnInvestment = returnInvestment.convert(10000);
   } else
     returnInvestment = MyMoneyMoney(); // if no investment then no return on investment
 
+  MyMoneyMoney annualReturn;
   try {
     double irr = all.IRR();
 #ifdef Q_CC_MSVC
-    MyMoneyMoney annualReturn = MyMoneyMoney(_isnan(irr) ? 0 : irr, 10000);
+    annualReturn = MyMoneyMoney(_isnan(irr) ? 0 : irr, 10000);
 #else
-    MyMoneyMoney annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
+    annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
 #endif
-    result["return"] = annualReturn.toString();
-    result["returninvestment"] = returnInvestment.toString();
   } catch (QString e) {
     qDebug() << e;
   }
 
-  result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
-  result["buys"] = buys.total().toString();
-  result["sells"] = sells.total().toString();
-  result["cashincome"] = cashincome.total().toString();
-  result["reinvestincome"] = reinvestincome.total().toString();
-  result["startingbal"] = startingBal.toString();
-  result["endingbal"] = endingBal.toString();
+  // check if there are any meaningfull values before adding them to results
+  if (!(buysTotal.isZero() && sellsTotal.isZero() &&
+        cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero() &&
+        startingBal.isZero() && endingBal.isZero())) {
+    result["return"] = annualReturn.toString();
+    result["returninvestment"] = returnInvestment.toString();
+    result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
+    result["buys"] = buysTotal.toString();
+    result["sells"] = sellsTotal.toString();
+    result["cashincome"] = cashIncomeTotal.toString();
+    result["reinvestincome"] = reinvestIncomeTotal.toString();
+    result["startingbal"] = startingBal.toString();
+    result["endingbal"] = endingBal.toString();
+  }
 }
 
 void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow& result) const
@@ -1229,11 +1237,13 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
     report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
   } while (!sellShares.isZero() && account.openingDate() <= newEndingDate && sellShares.abs() > buyShares.abs());
 
-  result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
-  result["buys"] = buyValue.toString();
-  result["sells"] = sellValue.toString();
-  result["capitalgain"] = (buyValue + sellValue).toString();
-
+  // check if there are any meaningfull values before adding them to results
+  if (!(buyValue.isZero() && sellValue.isZero())) {
+    result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
+    result["buys"] = buyValue.toString();
+    result["sells"] = sellValue.toString();
+    result["capitalgain"] = (buyValue + sellValue).toString();
+  }
   report.setDateFilter(startingDate, endingDate); // reset data filter for next security
 }
 
@@ -1246,26 +1256,32 @@ void QueryTable::constructAccountTable()
 
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
-  while (it_account != accounts.constEnd()) {
-    ReportAccount account = *it_account;
-
-    //get fraction for account
-    int fraction = account.currency().smallestAccountFraction();
-
-    //use base currency fraction if not initialized
-    if (fraction == -1)
-      fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
-
+  for (auto it_account = accounts.constBegin(); it_account != accounts.constEnd(); ++it_account) {
     // Note, "Investment" accounts are never included in account rows because
     // they don't contain anything by themselves.  In reports, they are only
     // useful as a "topaccount" aggregator of stock accounts
-    if (account.isAssetLiability() && m_config.includes(account) && account.accountType() != MyMoneyAccount::Investment) {
+    if ((*it_account).isAssetLiability() && m_config.includes((*it_account)) && (*it_account).accountType() != MyMoneyAccount::Investment) {
+      // don't add the account if it is closed. In fact, the business logic
+      // should prevent that an account can be closed with a balance not equal
+      // to zero, but we never know.
+      MyMoneyMoney shares = file->balance((*it_account).id(), m_config.toDate());
+      if (shares.isZero() && (*it_account).isClosed())
+        continue;
+
+      ReportAccount account(*it_account);
       TableRow qaccountrow;
+      if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
+        constructPerformanceRow(account, qaccountrow);
+      } else if (m_config.queryColumns() == MyMoneyReport::eQCcapitalgain) {
+        constructCapitalGainRow(account, qaccountrow);
+      } else
+        qaccountrow["equitytype"].clear();
+
+      if (qaccountrow.isEmpty()) // don't add the account if there are no calculated values
+        continue;
 
       // help for sort and render functions
       qaccountrow["rank"] = '0';
-
       //
       // Handle currency conversion
       //
@@ -1284,8 +1300,14 @@ void QueryTable::constructAccountTable()
       qaccountrow["accountid"] = account.id();
       qaccountrow["topaccount"] = account.topParentName();
 
-      MyMoneyMoney shares = file->balance(account.id(), m_config.toDate());
       qaccountrow["shares"] = shares.toString();
+
+      //get fraction for account
+      int fraction = account.currency().smallestAccountFraction();
+
+      //use base currency fraction if not initialized
+      if (fraction == -1)
+        fraction = file->baseCurrency().smallestAccountFraction();
 
       MyMoneyMoney netprice = account.deepCurrencyPrice(m_config.toDate()).reduce() * displayprice;
       qaccountrow["price"] = (netprice.reduce()).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
@@ -1306,21 +1328,8 @@ void QueryTable::constructAccountTable()
 
       qaccountrow["type"] = KMyMoneyUtils::accountTypeToString((*it_account).accountType());
 
-      if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
-        constructPerformanceRow(account, qaccountrow);
-      } else if (m_config.queryColumns() == MyMoneyReport::eQCcapitalgain) {
-        constructCapitalGainRow(account, qaccountrow);
-      } else
-        qaccountrow["equitytype"].clear();
-
-      // don't add the account if it is closed. In fact, the business logic
-      // should prevent that an account can be closed with a balance not equal
-      // to zero, but we never know.
-      if (!(shares.isZero() && account.isClosed()))
-        m_rows += qaccountrow;
+      m_rows += qaccountrow;
     }
-
-    ++it_account;
   }
 }
 
