@@ -28,7 +28,7 @@
 #include "ui_kmymoneyreportconfigtab3decl.h"
 #include "ui_kmymoneyreportconfigtabchartdecl.h"
 #include "ui_kmymoneyreportconfigtabrangedecl.h"
-#include "ui_daterangedlgdecl.h"
+#include "dialogs/ui_daterangedlgdecl.h"
 
 #include "mymoney/mymoneyreport.h"
 
