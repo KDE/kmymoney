@@ -46,6 +46,7 @@ const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,rin
 const QStringList kTypeText = QString("all,payments,deposits,transfers,none").split(',');
 const QStringList kStateText = QString("all,notreconciled,cleared,reconciled,frozen,none").split(',');
 const QStringList kDateLockText = QString("alldates,untiltoday,currentmonth,currentyear,monthtodate,yeartodate,yeartomonth,lastmonth,lastyear,last7days,last30days,last3months,last6months,last12months,next7days,next30days,next3months,next6months,next12months,userdefined,last3tonext3months,last11Months,currentQuarter,lastQuarter,nextQuarter,currentFiscalYear,lastFiscalYear,today,next18months").split(',');
+const QStringList kDataLockText = QString("automatic,userdefined").split(',');
 const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(',');
 
 MyMoneyReport::MyMoneyReport() :
@@ -61,12 +62,15 @@ MyMoneyReport::MyMoneyReport() :
     m_columnType(eMonths),
     m_columnsAreDays(false),
     m_queryColumns(eQCnone),
-    m_dateLock(userDefined),
+    m_dateLock(MyMoneyTransactionFilter::userDefined),
+    m_dataLock(MyMoneyReport::automatic),
     m_accountGroupFilter(false),
     m_chartType(eChartLine),
     m_chartDataLabels(true),
-    m_chartGridLines(true),
+    m_chartCHGridLines(true),
+    m_chartSVGridLines(true),
     m_chartByDefault(false),
+    m_logYaxis(false),
     m_includeSchedules(false),
     m_includeTransfers(false),
     m_includeBudgetActuals(false),
@@ -107,11 +111,14 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_columnsAreDays(false),
     m_queryColumns(eQCnone),
     m_dateLock(_dl),
+    m_dataLock(MyMoneyReport::automatic),
     m_accountGroupFilter(false),
     m_chartType(eChartLine),
     m_chartDataLabels(true),
-    m_chartGridLines(true),
+    m_chartCHGridLines(true),
+    m_chartSVGridLines(true),
     m_chartByDefault(false),
+    m_logYaxis(false),
     m_includeSchedules(false),
     m_includeTransfers(false),
     m_includeBudgetActuals(false),
@@ -342,6 +349,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("loans", m_loans);
   e.setAttribute("rowtype", kRowTypeText[m_rowType]);
   e.setAttribute("datelock", kDateLockText[m_dateLock]);
+  e.setAttribute("datalock", kDataLockText[m_dataLock]);
   e.setAttribute("includeschedules", m_includeSchedules);
   e.setAttribute("columnsaredays", m_columnsAreDays);
   e.setAttribute("includestransfers", m_includeTransfers);
@@ -364,9 +372,16 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     e.setAttribute("charttype", kChartTypeText[m_chartType]);
   }
   e.setAttribute("chartdatalabels", m_chartDataLabels);
-  e.setAttribute("chartgridlines", m_chartGridLines);
+  e.setAttribute("chartchgridlines", m_chartCHGridLines);
+  e.setAttribute("chartsvgridlines", m_chartSVGridLines);
   e.setAttribute("chartbydefault", m_chartByDefault);
   e.setAttribute("chartlinewidth", m_chartLineWidth);
+  e.setAttribute("logYaxis", m_logYaxis);
+  e.setAttribute("dataRangeStart", m_dataRangeStart);
+  e.setAttribute("dataRangeEnd", m_dataRangeEnd);
+  e.setAttribute("dataMajorTick", m_dataMajorTick);
+  e.setAttribute("dataMinorTick", m_dataMinorTick);
+  e.setAttribute("dataLock", m_dataLock);
   e.setAttribute("skipZero", m_skipZero);
 
   if (m_reportType == ePivotTable) {
@@ -559,7 +574,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   // Date Filter
   //
 
-  if (m_dateLock == userDefined) {
+  if (m_dateLock == MyMoneyTransactionFilter::userDefined) {
     QDate dateFrom, dateTo;
     if (dateFilter(dateFrom, dateTo)) {
       QDomElement f = doc->createElement("DATES");
@@ -663,14 +678,22 @@ bool MyMoneyReport::read(const QDomElement& e)
         m_chartType = eChartLine;
 
       m_chartDataLabels = e.attribute("chartdatalabels", "1").toUInt();
-      m_chartGridLines = e.attribute("chartgridlines", "1").toUInt();
+      m_chartCHGridLines = e.attribute("chartchgridlines", "1").toUInt();
+      m_chartSVGridLines = e.attribute("chartsvgridlines", "1").toUInt();
       m_chartByDefault = e.attribute("chartbydefault", "0").toUInt();
       m_chartLineWidth = e.attribute("chartlinewidth", QString(m_lineWidth)).toUInt();
+      m_logYaxis = e.attribute("logYaxis", "0").toUInt();
+      m_dataRangeStart = e.attribute("dataRangeStart", "0");
+      m_dataRangeEnd = e.attribute("dataRangeEnd", "0");
+      m_dataMajorTick = e.attribute("dataMajorTick", "0");
+      m_dataMinorTick = e.attribute("dataMinorTick", "0");
     } else {
       m_chartDataLabels = true;
-      m_chartGridLines = true;
+      m_chartCHGridLines = true;
+      m_chartSVGridLines = true;
       m_chartByDefault = false;
       m_chartLineWidth = 1;
+      m_logYaxis = false;
     }
 
     QString datelockstr = e.attribute("datelock", "userdefined");
@@ -681,9 +704,19 @@ bool MyMoneyReport::read(const QDomElement& e)
     if (!ok) {
       i = kDateLockText.indexOf(datelockstr);
       if (i == -1)
-        i = userDefined;
+        i = MyMoneyTransactionFilter::userDefined;
     }
     setDateFilter(static_cast<dateOptionE>(i));
+
+    QString datalockstr = e.attribute("dataLock", "userdefined");
+    ok = false;
+    i = datalockstr.toUInt(&ok);
+    if (!ok) {
+      i = kDataLockText.indexOf(datalockstr);
+      if (i == -1)
+        i = MyMoneyReport::userDefined;
+    }
+    setDataFilter(static_cast<dataOptionE>(i));
 
     i = kRowTypeText.indexOf(e.attribute("rowtype", "expenseincome"));
     if (i != -1) {

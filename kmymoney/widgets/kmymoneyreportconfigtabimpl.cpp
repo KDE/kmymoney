@@ -18,13 +18,17 @@
 */
 
 #include "kmymoneyreportconfigtabimpl.h"
+#include "kmymoneyglobalsettings.h"
 
 #include <klocalizedstring.h>
+#include <daterangedlg.h>
 
 #include "ui_kmymoneyreportconfigtab1decl.h"
 #include "ui_kmymoneyreportconfigtab2decl.h"
 #include "ui_kmymoneyreportconfigtab3decl.h"
 #include "ui_kmymoneyreportconfigtabchartdecl.h"
+#include "ui_kmymoneyreportconfigtabrangedecl.h"
+#include "ui_daterangedlgdecl.h"
 
 #include "mymoney/mymoneyreport.h"
 
@@ -86,6 +90,8 @@ kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *pare
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
+  connect(ui->m_comboType, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChartTypeChanged(int)));
+  emit ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
 }
 
 kMyMoneyReportConfigTabChartDecl::~kMyMoneyReportConfigTabChartDecl()
@@ -93,3 +99,138 @@ kMyMoneyReportConfigTabChartDecl::~kMyMoneyReportConfigTabChartDecl()
   delete ui;
 }
 
+void kMyMoneyReportConfigTabChartDecl::slotChartTypeChanged(int index)
+{
+  if (index == MyMoneyReport::EChartType::eChartPie ||
+      index == MyMoneyReport::EChartType::eChartRing) {
+    ui->m_checkCHGridLines->setText(i18n("Show circular grid lines"));
+    ui->m_checkSVGridLines->setText(i18n("Show sagittal grid lines"));
+    ui->m_logYaxis->setChecked(false);
+    ui->m_logYaxis->setEnabled(false);
+  } else {
+    ui->m_checkCHGridLines->setText(i18n("Show horizontal grid lines"));
+    ui->m_checkSVGridLines->setText(i18n("Show vertical grid lines"));
+    ui->m_logYaxis->setEnabled(true);
+  }
+}
+
+kMyMoneyReportConfigTabRangeDecl::kMyMoneyReportConfigTabRangeDecl(QWidget *parent)
+    : QWidget(parent)
+{
+  ui = new Ui::kMyMoneyReportConfigTabRangeDecl;
+  ui->setupUi(this);
+  m_dateRange = new DateRangeDlg(this->parentWidget());
+  ui->dateRangeGrid->addWidget(m_dateRange,0,0,1,2);
+  MyDoubleValidator *dblVal = new MyDoubleValidator(KMyMoneyGlobalSettings::pricePrecision());
+  ui->m_dataRangeStart->setValidator(dblVal);
+  ui->m_dataRangeEnd->setValidator(dblVal);
+  ui->m_dataMajorTick->setValidator(dblVal);
+  ui->m_dataMinorTick->setValidator(dblVal);
+  connect(ui->m_dataRangeStart, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedStart()));
+  connect(ui->m_dataRangeEnd, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedEnd()));
+  connect(ui->m_dataMajorTick, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedMajor()));
+  connect(ui->m_dataMinorTick, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedMinor()));
+  connect(ui->m_dataLock, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDataLockChanged(int)));
+  emit ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
+}
+
+kMyMoneyReportConfigTabRangeDecl::~kMyMoneyReportConfigTabRangeDecl()
+{
+  delete ui;
+}
+
+void kMyMoneyReportConfigTabRangeDecl::setRangeLogarythmic(bool set)
+{
+  // major and minor tick have no influence if axis is logarithmic so hide them
+  if (set) {
+    ui->lblDataMajorTick->hide();
+    ui->lblDataMinorTick->hide();
+    ui->m_dataMajorTick->hide();
+    ui->m_dataMinorTick->hide();
+  } else {
+    ui->lblDataMajorTick->show();
+    ui->lblDataMinorTick->show();
+    ui->m_dataMajorTick->show();
+    ui->m_dataMinorTick->show();
+  }
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotEditingFinished(EDimension dim)
+{
+  qreal dataRangeStart = locale().toDouble(ui->m_dataRangeStart->text());
+  qreal dataRangeEnd = locale().toDouble(ui->m_dataRangeEnd->text());
+  qreal dataMajorTick = locale().toDouble(ui->m_dataMajorTick->text());
+  qreal dataMinorTick = locale().toDouble(ui->m_dataMinorTick->text());
+  if (dataRangeEnd < dataRangeStart) {  // end must be higher than start
+    if (dim == eRangeEnd) {
+      ui->m_dataRangeStart->setText(ui->m_dataRangeEnd->text());
+      dataRangeStart = dataRangeEnd;
+    } else {
+      ui->m_dataRangeEnd->setText(ui->m_dataRangeStart->text());
+      dataRangeEnd = dataRangeStart;
+    }
+  }
+  if ((dataRangeStart != 0 || dataRangeEnd != 0)) { // if data range isn't going to be reset
+    if ((dataRangeEnd - dataRangeStart) < dataMajorTick) // major tick cannot be greater than data range
+      dataMajorTick = dataRangeEnd - dataRangeStart;
+
+    if (dataMajorTick != 0 && // if major tick isn't going to be reset
+        dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
+      dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;   // that should produce more than 256 Y labels in KReportChartView::slotNeedUpdate
+
+    ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', KMyMoneySettings::pricePrecision()).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+  }
+
+  if (dataMajorTick < dataMinorTick) { // major tick must be higher than minor
+    if (dim == eMinorTick) {
+      ui->m_dataMajorTick->setText(ui->m_dataMinorTick->text());
+      dataMajorTick = dataMinorTick;
+    } else {
+      ui->m_dataMinorTick->setText(ui->m_dataMajorTick->text());
+      dataMinorTick = dataMajorTick;
+    }
+  }
+
+  if (dataMinorTick < dataMajorTick * 0.1) { // constraint minor tick to be greater or equal to 10% of major tick
+    dataMinorTick = dataMajorTick * 0.1;
+    ui->m_dataMinorTick->setText(locale().toString(dataMinorTick, 'f', KMyMoneySettings::pricePrecision()).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+  }
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedStart()
+{
+  slotEditingFinished(eRangeStart);
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedEnd()
+{
+  slotEditingFinished(eRangeEnd);
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedMajor()
+{
+  slotEditingFinished(eMajorTick);
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedMinor()
+{
+  slotEditingFinished(eMinorTick);
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotDataLockChanged(int index) {
+  if (index == MyMoneyReport::dataOptionE::automatic) {
+    ui->m_dataRangeStart->setText(QStringLiteral("0"));
+    ui->m_dataRangeEnd->setText(QStringLiteral("0"));
+    ui->m_dataMajorTick->setText(QStringLiteral("0"));
+    ui->m_dataMinorTick->setText(QStringLiteral("0"));
+    ui->m_dataRangeStart->setEnabled(false);
+    ui->m_dataRangeEnd->setEnabled(false);
+    ui->m_dataMajorTick->setEnabled(false);
+    ui->m_dataMinorTick->setEnabled(false);
+  } else {
+    ui->m_dataRangeStart->setEnabled(true);
+    ui->m_dataRangeEnd->setEnabled(true);
+    ui->m_dataMajorTick->setEnabled(true);
+    ui->m_dataMinorTick->setEnabled(true);
+  }
+}

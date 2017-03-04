@@ -58,7 +58,11 @@
 #include <kmymoneyaccountselector.h>
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
+#include <daterangedlg.h>
+
 #include "ui_kfindtransactiondlgdecl.h"
+#include "ui_daterangedlgdecl.h"
+#include "ui_kmymoneyreportconfigtabrangedecl.h"
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
@@ -66,6 +70,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_tab2(0),
     m_tab3(0),
     m_tabChart(0),
+    m_tabRange(0),
     m_initialState(report),
     m_currentState(report)
 {
@@ -75,7 +80,6 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
 
   setWindowTitle(i18n("Report Configuration"));
   delete m_ui->TextLabel1;
-
   //
   // Rework the buttons
   //
@@ -99,15 +103,29 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_tab2->setObjectName("kMyMoneyReportConfigTab2");
     m_ui->m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
     connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(activated(int)), this, SLOT(slotRowTypeChanged(int)));
-    connect(m_tab2->findChild<KComboBox*>("m_comboColumns"), SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
     connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
-    connect(m_tab2->findChild<KComboBox*>("m_comboColumns"), SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
     //control the state of the includeTransfer check
     connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
 
     m_tabChart = new kMyMoneyReportConfigTabChartDecl(m_ui->m_criteriaTab);
     m_tabChart->setObjectName("kMyMoneyReportConfigTabChart");
     m_ui->m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
+
+    m_tabRange = new kMyMoneyReportConfigTabRangeDecl(m_ui->m_criteriaTab);
+    m_tabRange->setObjectName("kMyMoneyReportConfigTabRange");
+    m_ui->m_criteriaTab->insertTab(3, m_tabRange, i18n("Range"));
+
+    // date tab is going to be replaced by range tab, so delete it
+    m_ui->dateRangeLayout->removeWidget(m_dateRange);
+    m_dateRange->deleteLater();
+    m_ui->m_criteriaTab->removeTab(m_ui->m_criteriaTab->indexOf(m_ui->m_dateTab));
+    m_ui->m_dateTab->deleteLater();
+
+    m_dateRange = m_tabRange->m_dateRange;
+
+    connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
+    connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
+    connect(m_tabChart->findChild<QCheckBox*>("m_logYaxis"), SIGNAL(stateChanged(int)), this, SLOT(slotLogAxisChanged(int)));
   } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
@@ -166,13 +184,6 @@ void KReportConfigurationFilterDlg::slotSearch()
     m_currentState.setShowingRowTotals(false);
     if (m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex() == 0)
       m_currentState.setShowingRowTotals(m_tab2->findChild<QCheckBox*>("m_checkTotalColumn")->isChecked());
-
-    MyMoneyReport::EColumnType ct[6] = { MyMoneyReport::eDays, MyMoneyReport::eWeeks, MyMoneyReport::eMonths, MyMoneyReport::eBiMonths, MyMoneyReport::eQuarters, MyMoneyReport::eYears };
-    bool dy[6] = { true, true, false, false, false, false };
-    m_currentState.setColumnType(ct[m_tab2->findChild<KComboBox*>("m_comboColumns")->currentIndex()]);
-
-    //TODO (Ace) This should be implicit in the call above.  MMReport needs fixin'
-    m_currentState.setColumnsAreDays(dy[m_tab2->findChild<KComboBox*>("m_comboColumns")->currentIndex()]);
 
     m_currentState.setIncludingSchedules(m_tab2->findChild<QCheckBox*>("m_checkScheduled")->isChecked());
 
@@ -237,14 +248,31 @@ void KReportConfigurationFilterDlg::slotSearch()
     MyMoneyReport::EChartType ct[5] = { MyMoneyReport::eChartLine, MyMoneyReport::eChartBar, MyMoneyReport::eChartStackedBar, MyMoneyReport::eChartPie, MyMoneyReport::eChartRing };
     m_currentState.setChartType(ct[m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_comboType")->currentIndex()]);
 
-    m_currentState.setChartGridLines(m_tabChart->findChild<QCheckBox*>("m_checkGridLines")->isChecked());
+    m_currentState.setChartCHGridLines(m_tabChart->findChild<QCheckBox*>("m_checkCHGridLines")->isChecked());
+    m_currentState.setChartSVGridLines(m_tabChart->findChild<QCheckBox*>("m_checkSVGridLines")->isChecked());
     m_currentState.setChartDataLabels(m_tabChart->findChild<QCheckBox*>("m_checkValues")->isChecked());
     m_currentState.setChartByDefault(m_tabChart->findChild<QCheckBox*>("m_checkShowChart")->isChecked());
     m_currentState.setChartLineWidth(m_tabChart->findChild<QSpinBox*>("m_lineWidth")->value());
+    m_currentState.setLogYAxis(m_tabChart->findChild<QCheckBox*>("m_logYaxis")->isChecked());
+  }
+
+  if (m_tabRange) {
+    m_currentState.setDataRangeStart(m_tabRange->ui->m_dataRangeStart->text());
+    m_currentState.setDataRangeEnd(m_tabRange->ui->m_dataRangeEnd->text());
+    m_currentState.setDataMajorTick(m_tabRange->ui->m_dataMajorTick->text());
+    m_currentState.setDataMinorTick(m_tabRange->ui->m_dataMinorTick->text());
+    m_currentState.setDataFilter((MyMoneyReport::dataOptionE)m_tabRange->ui->m_dataLock->currentIndex());
+
+    MyMoneyReport::EColumnType ct[6] = { MyMoneyReport::eDays, MyMoneyReport::eWeeks, MyMoneyReport::eMonths, MyMoneyReport::eBiMonths, MyMoneyReport::eQuarters, MyMoneyReport::eYears };
+    bool dy[6] = { true, true, false, false, false, false };
+    m_currentState.setColumnType(ct[m_tabRange->ui->m_comboColumns->currentIndex()]);
+
+    //TODO (Ace) This should be implicit in the call above.  MMReport needs fixin'
+    m_currentState.setColumnsAreDays(dy[m_tabRange->ui->m_comboColumns->currentIndex()]);
   }
 
   // setup the date lock
-  MyMoneyTransactionFilter::dateOptionE range = m_ui->m_dateRange->currentItem();
+  MyMoneyTransactionFilter::dateOptionE range = m_dateRange->m_ui->m_dateRange->currentItem();
   m_currentState.setDateFilter(range);
 
   done(true);
@@ -258,7 +286,7 @@ void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)
 void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
 {
   if ((m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled() && row < 2)) {
-    m_tab2->findChild<KComboBox*>("m_comboColumns")->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
+    m_tabRange->ui->m_comboColumns->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
   }
 }
 
@@ -267,9 +295,17 @@ void KReportConfigurationFilterDlg::slotUpdateColumnsCombo()
   const int monthlyIndex = 2;
   const int incomeExpenseIndex = 0;
   const bool isIncomeExpenseForecast = m_currentState.isIncludingForecast() && m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex() == incomeExpenseIndex;
-  if (isIncomeExpenseForecast && m_tab2->findChild<KComboBox*>("m_comboColumns")->currentIndex() != monthlyIndex) {
-    m_tab2->findChild<KComboBox*>("m_comboColumns")->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
+  if (isIncomeExpenseForecast && m_tabRange->ui->m_comboColumns->currentIndex() != monthlyIndex) {
+    m_tabRange->ui->m_comboColumns->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
   }
+}
+
+void KReportConfigurationFilterDlg::slotLogAxisChanged(int state)
+{
+  if (state == Qt::Checked)
+    m_tabRange->setRangeLogarythmic(true);
+  else
+    m_tabRange->setRangeLogarythmic(false);
 }
 
 void KReportConfigurationFilterDlg::slotReset()
@@ -327,39 +363,6 @@ void KReportConfigurationFilterDlg::slotReset()
     m_tab2->findChild<QCheckBox*>("m_checkTotalColumn")->setChecked(m_initialState.isShowingRowTotals());
 
     slotRowTypeChanged(combo->currentIndex());
-
-    combo = m_tab2->findChild<KComboBox*>("m_comboColumns");
-    if (m_initialState.isColumnsAreDays()) {
-      switch (m_initialState.columnType()) {
-        case MyMoneyReport::eNoColumns:
-        case MyMoneyReport::eDays:
-          combo->setCurrentItem(i18nc("@item the columns will display daily data", "Daily"), false);
-          break;
-        case MyMoneyReport::eWeeks:
-          combo->setCurrentItem(i18nc("@item the columns will display weekly data", "Weekly"), false);
-          break;
-        default:
-          break;
-      }
-    } else {
-      switch (m_initialState.columnType()) {
-        case MyMoneyReport::eNoColumns:
-        case MyMoneyReport::eMonths:
-          combo->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
-          break;
-        case MyMoneyReport::eBiMonths:
-          combo->setCurrentItem(i18nc("@item the columns will display bi-monthly data", "Bi-Monthly"), false);
-          break;
-        case MyMoneyReport::eQuarters:
-          combo->setCurrentItem(i18nc("@item the columns will display quarterly data", "Quarterly"), false);
-          break;
-        case MyMoneyReport::eYears:
-          combo->setCurrentItem(i18nc("@item the columns will display yearly data", "Yearly"), false);
-          break;
-        default:
-          break;
-      }
-    }
 
     //load budgets combo
     if (m_initialState.rowType() == MyMoneyReport::eBudget
@@ -456,10 +459,53 @@ void KReportConfigurationFilterDlg::slotReset()
       case MyMoneyReport::eChartEnd:
         throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
-    m_tabChart->findChild<QCheckBox*>("m_checkGridLines")->setChecked(m_initialState.isChartGridLines());
+    m_tabChart->findChild<QCheckBox*>("m_checkCHGridLines")->setChecked(m_initialState.isChartCHGridLines());
+    m_tabChart->findChild<QCheckBox*>("m_checkSVGridLines")->setChecked(m_initialState.isChartSVGridLines());
     m_tabChart->findChild<QCheckBox*>("m_checkValues")->setChecked(m_initialState.isChartDataLabels());
     m_tabChart->findChild<QCheckBox*>("m_checkShowChart")->setChecked(m_initialState.isChartByDefault());
     m_tabChart->findChild<QSpinBox*>("m_lineWidth")->setValue(m_initialState.chartLineWidth());
+    m_tabChart->findChild<QCheckBox*>("m_logYaxis")->setChecked(m_initialState.isLogYAxis());
+  }
+
+  if (m_tabRange) {
+    m_tabRange->ui->m_dataRangeStart->setText(m_initialState.dataRangeStart());
+    m_tabRange->ui->m_dataRangeEnd->setText(m_initialState.dataRangeEnd());
+    m_tabRange->ui->m_dataMajorTick->setText(m_initialState.dataMajorTick());
+    m_tabRange->ui->m_dataMinorTick->setText(m_initialState.dataMinorTick());
+    m_tabRange->ui->m_dataLock->setCurrentIndex((int)m_initialState.dataFilter());
+
+    KComboBox *combo = m_tabRange->ui->m_comboColumns;
+    if (m_initialState.isColumnsAreDays()) {
+      switch (m_initialState.columnType()) {
+        case MyMoneyReport::eNoColumns:
+        case MyMoneyReport::eDays:
+          combo->setCurrentItem(i18nc("@item the columns will display daily data", "Daily"), false);
+          break;
+        case MyMoneyReport::eWeeks:
+          combo->setCurrentItem(i18nc("@item the columns will display weekly data", "Weekly"), false);
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (m_initialState.columnType()) {
+        case MyMoneyReport::eNoColumns:
+        case MyMoneyReport::eMonths:
+          combo->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
+          break;
+        case MyMoneyReport::eBiMonths:
+          combo->setCurrentItem(i18nc("@item the columns will display bi-monthly data", "Bi-Monthly"), false);
+          break;
+        case MyMoneyReport::eQuarters:
+          combo->setCurrentItem(i18nc("@item the columns will display quarterly data", "Quarterly"), false);
+          break;
+        case MyMoneyReport::eYears:
+          combo->setCurrentItem(i18nc("@item the columns will display yearly data", "Yearly"), false);
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   //
@@ -621,18 +667,18 @@ void KReportConfigurationFilterDlg::slotReset()
   m_initialState.updateDateFilter();
   QDate dateFrom, dateTo;
   if (m_initialState.dateFilter(dateFrom, dateTo)) {
-    if (m_initialState.isUserDefined()) {
-      m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
-      m_ui->m_fromDate->setDate(dateFrom);
-      m_ui->m_toDate->setDate(dateTo);
+    if (m_initialState.isDateUserDefined()) {
+      m_dateRange->m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
+      m_dateRange->m_ui->m_fromDate->setDate(dateFrom);
+      m_dateRange->m_ui->m_toDate->setDate(dateTo);
     } else {
-      m_ui->m_fromDate->setDate(dateFrom);
-      m_ui->m_toDate->setDate(dateTo);
-      KFindTransactionDlg::slotDateChanged();
+      m_dateRange->m_ui->m_fromDate->setDate(dateFrom);
+      m_dateRange->m_ui->m_toDate->setDate(dateTo);
+      m_dateRange->slotDateChanged();
     }
   } else {
-    m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
-    slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
+    m_dateRange->m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
+    m_dateRange->slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
   }
 
   slotRightSize();
@@ -640,8 +686,8 @@ void KReportConfigurationFilterDlg::slotReset()
 
 void KReportConfigurationFilterDlg::slotDateChanged()
 {
-  if (m_ui->m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
-    KFindTransactionDlg::slotDateChanged();
+  if (m_dateRange->m_ui->m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
+    m_dateRange->slotDateChanged();
   }
   slotUpdateSelections();
 }

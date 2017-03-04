@@ -39,6 +39,7 @@
 
 class QTreeWidget;
 class QTreeWidgetItem;
+class DateRangeDlg;
 
 /**
   * @author Thomas Baumgart
@@ -69,37 +70,6 @@ class KFindTransactionDlg : public QDialog
 
 public:
 
-  /*
-  // Make sure to keep the following enum valus in sync with the values
-  // used by the GUI in kfindtransactiondlgdecl.ui
-  enum dateOptionE {
-    allDates = 0,
-    asOfToday,
-    currentMonth,
-    currentYear,
-    monthToDate,
-    yearToDate,
-    yearToMonth,
-    lastMonth,
-    lastYear,
-    last7Days,
-    last30Days,
-    last3Months,
-    last6Months,
-    last12Months,
-    next7Days,
-    next30Days,
-    next3Months,
-    next6Months,
-    next12Months,
-    userDefined,
-    last3ToNext3Months,
-    last11Months,
-    next18Months,
-    // insert new constants above of this line
-    dateOptionCount
-  };
-  */
   KFindTransactionDlg(QWidget *parent = 0);
   ~KFindTransactionDlg();
 
@@ -121,9 +91,6 @@ protected slots:
 
 
   void slotUpdateSelections();
-
-  virtual void slotDateRangeChanged(int);
-  virtual void slotDateChanged();
 
   virtual void slotAmountSelected();
   virtual void slotAmountRangeSelected();
@@ -169,7 +136,6 @@ protected:
   };
 
   void setupCategoriesPage();
-  void setupDatePage();
   void setupAccountsPage();
   void setupAmountPage();
   void setupPayeesPage();
@@ -234,6 +200,7 @@ protected:
   bool                            m_needReload;
 
   Ui::KFindTransactionDlgDecl*    m_ui;
+  DateRangeDlg *m_dateRange;
 };
 
 #endif

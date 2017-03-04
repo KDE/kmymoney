@@ -43,8 +43,12 @@ using namespace KChart;
 namespace reports
 {
 
+
 class KReportChartView: public Chart
 {
+  Q_OBJECT
+public slots:
+  void slotNeedUpdate();
 public:
   KReportChartView(QWidget* parent);
   ~KReportChartView() {}

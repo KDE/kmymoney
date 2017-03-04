@@ -238,6 +238,30 @@ void KReportsView::KReportTab::toggleChart()
   m_showingChart = ! m_showingChart;
 }
 
+void KReportsView::KReportTab::updateDataRange()
+{
+  QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();
+  if (grids.isEmpty())
+    return;
+  QChar separator = locale().groupSeparator();
+  QChar decimalPoint = locale().decimalPoint();
+  int precision = KMyMoneyGlobalSettings().pricePrecision();
+  QList<QPair<QString, qreal>> dims;
+  dims.append(qMakePair(QString(), grids.at(1).start));
+  dims.append(qMakePair(QString(), grids.at(1).end));
+  dims.append(qMakePair(QString(), grids.at(1).stepWidth));
+  dims.append(qMakePair(QString(), grids.at(1).subStepWidth));
+
+  for (int i = 0; i < 4; ++i) {
+    dims[i].first = locale().toString(dims.at(i).second, 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$"));
+  }
+
+  m_report.setDataRangeStart(dims.at(0).first);
+  m_report.setDataRangeEnd(dims.at(1).first);
+  m_report.setDataMajorTick(dims.at(2).first);
+  m_report.setDataMinorTick(dims.at(3).first);
+}
+
 /**
   * KReportsView Implementation
   */
@@ -662,6 +686,8 @@ void KReportsView::slotConfigure()
     // nothing to do
     return;
   }
+
+  tab->updateDataRange(); // range will be needed during configuration, but cannot be obtained earlier
 
   MyMoneyReport report = tab->report();
   if (report.comment() == i18n("Default Report") || report.comment() == i18n("Generated Report")) {
@@ -1173,7 +1199,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
 
     list.push_back(MyMoneyReport(
@@ -1361,7 +1388,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartPie);
     list.back().setInvestmentsOnly(true);
 
@@ -1374,7 +1402,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
@@ -1388,7 +1417,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
@@ -1407,7 +1437,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
@@ -1425,7 +1456,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Investment Moving Average"),
                      i18n("Default Report")
                    ));
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
@@ -1442,7 +1474,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
@@ -1571,7 +1604,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setBudget("Any", true);
     list.back().setChartType(MyMoneyReport::eChartLine);
 
@@ -1622,7 +1656,8 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setColumnsAreDays(true);
     list.back().setIncludingForecast(true);
     list.back().setChartByDefault(true);
-    list.back().setChartGridLines(false);
+    list.back().setChartCHGridLines(false);
+    list.back().setChartSVGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
     groups.push_back(list);
   }

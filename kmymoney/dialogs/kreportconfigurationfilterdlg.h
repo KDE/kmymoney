@@ -28,6 +28,7 @@
 // QT Includes
 
 #include <QVector>
+#include <QDoubleValidator>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -45,6 +46,7 @@ class kMyMoneyReportConfigTab1Decl;
 class kMyMoneyReportConfigTab2Decl;
 class kMyMoneyReportConfigTab3Decl;
 class kMyMoneyReportConfigTabChartDecl;
+class kMyMoneyReportConfigTabRangeDecl;
 class MyMoneyBudget;
 
 /**
@@ -66,6 +68,7 @@ protected:
   kMyMoneyReportConfigTab2Decl* m_tab2;
   kMyMoneyReportConfigTab3Decl* m_tab3;
   kMyMoneyReportConfigTabChartDecl* m_tabChart;
+  kMyMoneyReportConfigTabRangeDecl* m_tabRange;
 
   MyMoneyReport m_initialState;
   MyMoneyReport m_currentState;
@@ -84,9 +87,9 @@ protected slots:
 
   void slotUpdateCheckTransfers();
   void slotUpdateColumnsCombo();
+  void slotLogAxisChanged(int state);
 
 private:
   QVector<MyMoneyBudget> m_budgets;
 };
-
 #endif

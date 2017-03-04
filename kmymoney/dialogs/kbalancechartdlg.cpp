@@ -96,7 +96,8 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
                               i18n("Generated Report")
                             );
   reportCfg.setChartByDefault(true);
-  reportCfg.setChartGridLines(false);
+  reportCfg.setChartCHGridLines(false);
+  reportCfg.setChartSVGridLines(false);
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingForecast(true);

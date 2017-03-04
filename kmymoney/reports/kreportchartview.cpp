@@ -24,11 +24,13 @@
 #include <QFrame>
 #include <QStandardItemModel>
 #include <QFontDatabase>
+#include <QtMath>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kcolorscheme.h>
 #include <KLocalizedString>
+#include <math.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -114,6 +116,96 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   // an account in a COLUMN, while line/bar prefer it in a ROW.
   setAccountSeries(true);
 
+  CartesianAxis *xAxis;
+  KBalanceAxis *yAxis;
+  switch (config.chartType()) {
+    case MyMoneyReport::eChartNone:
+    case MyMoneyReport::eChartEnd:
+    case MyMoneyReport::eChartLine:
+    case MyMoneyReport::eChartBar:
+    case MyMoneyReport::eChartStackedBar: {
+      CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
+      replaceCoordinatePlane(cartesianPlane);
+
+      // set-up axis type
+      if (config.isLogYAxis())
+        cartesianPlane->setAxesCalcModeY(KChart::AbstractCoordinatePlane::Logarithmic);
+      else
+        cartesianPlane->setAxesCalcModeY(KChart::AbstractCoordinatePlane::Linear);
+
+      // set-up grid
+      GridAttributes ga = cartesianPlane->gridAttributes(Qt::Vertical);
+      ga.setGridVisible(config.isChartCHGridLines());
+      ga.setGridStepWidth(locale().toDouble(config.dataMajorTick()));
+      ga.setGridSubStepWidth(locale().toDouble(config.dataMinorTick()));
+      cartesianPlane->setGridAttributes(Qt::Vertical, ga);
+
+      ga = cartesianPlane->gridAttributes(Qt::Horizontal);
+      ga.setGridVisible(config.isChartSVGridLines());
+      cartesianPlane->setGridAttributes(Qt::Horizontal, ga);
+
+      // set-up data range
+      cartesianPlane->setVerticalRange(qMakePair(locale().toDouble(config.dataRangeStart()), locale().toDouble(config.dataRangeEnd())));
+
+      //set-up x axis
+      xAxis = new CartesianAxis();
+      xAxis->setPosition(CartesianAxis::Bottom);
+      xAxis->setTitleText(i18n("Time"));
+      TextAttributes xAxisTitleTextAttr(xAxis->titleTextAttributes());
+      xAxisTitleTextAttr.setMinimalFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize());
+      xAxisTitleTextAttr.setPen(m_foregroundBrush.color());
+      xAxis->setTitleTextAttributes(xAxisTitleTextAttr);
+      TextAttributes xAxisTextAttr(xAxis->textAttributes());
+      xAxisTextAttr.setPen(m_foregroundBrush.color());
+      xAxis->setTextAttributes(xAxisTextAttr);
+      RulerAttributes xAxisRulerAttr(xAxis->rulerAttributes());
+      xAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
+      xAxisRulerAttr.setShowRulerLine(true);
+      xAxis->setRulerAttributes(xAxisRulerAttr);
+
+      //set-up y axis
+      yAxis = new KBalanceAxis();
+      yAxis->setPosition(CartesianAxis::Left);
+
+      // TODO
+      // if the chart shows prices and no balance
+      // the axis title should be 'Price'
+      if (config.isIncludingPrice())
+        yAxis->setTitleText(i18n("Price"));
+      else
+        yAxis->setTitleText(i18n("Balance"));
+
+      TextAttributes yAxisTitleTextAttr(yAxis->titleTextAttributes());
+      yAxisTitleTextAttr.setMinimalFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize());
+      yAxisTitleTextAttr.setPen(m_foregroundBrush.color());
+      yAxis->setTitleTextAttributes(yAxisTitleTextAttr);
+      TextAttributes yAxisTextAttr(yAxis->textAttributes());
+      yAxisTextAttr.setPen(m_foregroundBrush.color());
+      yAxis->setTextAttributes(yAxisTextAttr);
+      RulerAttributes yAxisRulerAttr(yAxis->rulerAttributes());
+      yAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
+      yAxisRulerAttr.setShowRulerLine(true);
+      yAxis->setRulerAttributes(yAxisRulerAttr);
+      break;
+    }
+    case MyMoneyReport::eChartPie:
+    case MyMoneyReport::eChartRing:{
+      PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
+      replaceCoordinatePlane(polarPlane);
+
+      // set-up grid
+      GridAttributes ga = polarPlane->gridAttributes(true);
+      ga.setGridVisible(config.isChartCHGridLines());
+      polarPlane->setGridAttributes(true, ga);
+
+      ga = polarPlane->gridAttributes(false);
+      ga.setGridVisible(config.isChartSVGridLines());
+      polarPlane->setGridAttributes(false, ga);
+
+      break;
+    }
+  }
+
   switch (config.chartType()) {
     case MyMoneyReport::eChartNone:
     case MyMoneyReport::eChartEnd:
@@ -125,31 +217,28 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
           attributes.setMissingValuesPolicy(LineAttributes::MissingValuesAreBridged);
           diagram->setLineAttributes(attributes);
         }
-
-        CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
-        replaceCoordinatePlane(cartesianPlane);
         coordinatePlane()->replaceDiagram(diagram);
+        diagram->addAxis(xAxis);
+        diagram->addAxis(yAxis);
         break;
       }
     case MyMoneyReport::eChartBar: {
         KChart::BarDiagram* diagram = new KChart::BarDiagram;
-        CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
-        replaceCoordinatePlane(cartesianPlane);
         coordinatePlane()->replaceDiagram(diagram);
+        diagram->addAxis(xAxis);
+        diagram->addAxis(yAxis);
         break;
       }
     case MyMoneyReport::eChartStackedBar: {
         KChart::BarDiagram* diagram = new KChart::BarDiagram;
-        CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
-        replaceCoordinatePlane(cartesianPlane);
         diagram->setType(BarDiagram::Stacked);
         coordinatePlane()->replaceDiagram(diagram);
+        diagram->addAxis(xAxis);
+        diagram->addAxis(yAxis);
         break;
       }
     case MyMoneyReport::eChartPie: {
         KChart::PieDiagram* diagram = new KChart::PieDiagram;
-        PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
-        replaceCoordinatePlane(polarPlane);
         coordinatePlane()->replaceDiagram(diagram);
         setAccountSeries(false);
         setSeriesTotals(true);
@@ -157,9 +246,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
     case MyMoneyReport::eChartRing: {
         KChart::RingDiagram* diagram = new KChart::RingDiagram;
-        PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
-        replaceCoordinatePlane(polarPlane);
-        polarPlane->replaceDiagram(diagram);
+        coordinatePlane()->replaceDiagram(diagram);
         //chartView.params()->setRelativeRingThickness( true );
         setAccountSeries(false);
         break;
@@ -167,11 +254,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   }
   //get the diagram for later use
   AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
-
-  //set grid attributes
-  GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
-  gridAttr.setGridVisible(config.isChartGridLines());
-  coordinatePlane()->setGlobalGridAttributes(gridAttr);
 
   //the palette - we set it here because it is a property of the diagram
   switch (KMyMoneySettings::chartsPalette()) {
@@ -190,65 +272,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //the legend will be used later
   Legend* legend = new Legend(planeDiagram, this);
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
-
-  //set up the axes for cartesian diagrams
-  if (config.chartType() == MyMoneyReport::eChartLine ||
-      config.chartType() == MyMoneyReport::eChartBar ||
-      config.chartType() == MyMoneyReport::eChartStackedBar) {
-    //set x axis
-    CartesianAxis *xAxis = new CartesianAxis();
-    xAxis->setPosition(CartesianAxis::Bottom);
-    xAxis->setTitleText(i18n("Time"));
-    TextAttributes xAxisTitleTextAttr(xAxis->titleTextAttributes());
-    xAxisTitleTextAttr.setMinimalFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize());
-    xAxisTitleTextAttr.setPen(m_foregroundBrush.color());
-    xAxis->setTitleTextAttributes(xAxisTitleTextAttr);
-    TextAttributes xAxisTextAttr(xAxis->textAttributes());
-    xAxisTextAttr.setPen(m_foregroundBrush.color());
-    xAxis->setTextAttributes(xAxisTextAttr);
-    RulerAttributes xAxisRulerAttr(xAxis->rulerAttributes());
-    xAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
-    xAxisRulerAttr.setShowRulerLine(true);
-    xAxis->setRulerAttributes(xAxisRulerAttr);
-
-
-    //set y axis
-    KBalanceAxis *yAxis = new KBalanceAxis();
-    yAxis->setPosition(CartesianAxis::Left);
-
-    // TODO
-    // if the chart shows prices and no balance
-    // the axis title should be 'Price'
-    if (config.isIncludingPrice()) {
-      yAxis->setTitleText(i18n("Price"));
-    } else {
-      yAxis->setTitleText(i18n("Balance"));
-    }
-
-    TextAttributes yAxisTitleTextAttr(yAxis->titleTextAttributes());
-    yAxisTitleTextAttr.setMinimalFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize());
-    yAxisTitleTextAttr.setPen(m_foregroundBrush.color());
-    yAxis->setTitleTextAttributes(yAxisTitleTextAttr);
-    TextAttributes yAxisTextAttr(yAxis->textAttributes());
-    yAxisTextAttr.setPen(m_foregroundBrush.color());
-    yAxis->setTextAttributes(yAxisTextAttr);
-    RulerAttributes yAxisRulerAttr(yAxis->rulerAttributes());
-    yAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
-    yAxisRulerAttr.setShowRulerLine(true);
-    yAxis->setRulerAttributes(yAxisRulerAttr);
-
-    //add the axes to the corresponding diagram
-    if (config.chartType() == MyMoneyReport::eChartLine) {
-      KChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
-      lineDiagram->addAxis(xAxis);
-      lineDiagram->addAxis(yAxis);
-    } else if (config.chartType() == MyMoneyReport::eChartBar ||
-               config.chartType() == MyMoneyReport::eChartStackedBar) {
-      KChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
-      barDiagram->addAxis(xAxis);
-      barDiagram->addAxis(yAxis);
-    }
-  }
 
   const bool blocked = m_model.blockSignals(true); // don't emit dataChanged() signal during each drawPivotRowSet
   switch (config.detailLevel()) {
@@ -390,8 +413,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               //only show the column type in the header if there is more than one type
               if (rowTypeList.size() > 1) {
                 legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
-              } else {
                 legendText = QString(i18nc("Total balance", "Total"));
+              } else {
               }
 
               //set the legend text
@@ -523,6 +546,55 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     // the legend is needed only if at least two data sets are rendered
     removeLegend();
   }
+
+  // connect needLayoutPlanes, so dimension of chart can be known, so custom Y labels can be generated
+  connect(coordinatePlane(), SIGNAL(needLayoutPlanes()), this, SLOT(slotNeedUpdate()));
+  planeDiagram->update();
+}
+void KReportChartView::slotNeedUpdate()
+{
+  disconnect(coordinatePlane(), SIGNAL(needLayoutPlanes()), this, SLOT(slotNeedUpdate())); // this won't cause hang-up in KReportsView::slotConfigure
+  QList<DataDimension> grids = coordinatePlane()->gridDimensionsList();
+  if (grids.isEmpty())  // ring and pie charts have no dimensions
+    return;
+
+  if (grids.at(1).stepWidth == 0) // no labels?
+    return;
+
+  QChar separator = locale().groupSeparator();
+  QChar decimalPoint = locale().decimalPoint();
+  int precision = KMyMoneyGlobalSettings().pricePrecision();
+
+  QStringList labels;
+
+  CartesianCoordinatePlane* cartesianplane = qobject_cast<CartesianCoordinatePlane*>(coordinatePlane());
+  if (cartesianplane) {
+    if (cartesianplane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
+      qreal labelValue = qFloor(log10(grids.at(1).start)); // first label is 10 to power of labelValue
+      uchar labelCount = qFloor(log10(grids.at(1).end)) - qFloor(log10(grids.at(1).start)) + 1;
+      for (uchar i = 0; i < labelCount; ++i) {
+        labels.append(locale().toString(qPow(10.0, labelValue), 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
+        ++labelValue; // next label is 10 to power of previous exponent + 1
+      }
+    } else {
+      qreal labelValue = grids.at(1).start; // first label is start value
+      qreal step = grids.at(1).stepWidth;
+      uchar labelCount = qFloor((grids.at(1).end - grids.at(1).start) / grids.at(1).stepWidth) + 1;
+      for (uchar i = 0; i < labelCount; ++i) {
+        labels.append(locale().toString(labelValue, 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
+        labelValue += step; // next label is previous value + step value
+      }
+    }
+  } else
+    return; // nothing but cartesian plane is handled
+
+  KChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
+  if (lineDiagram)
+    lineDiagram->axes().at(1)->setLabels(labels);
+
+  KChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(coordinatePlane()->diagram());
+  if (barDiagram)
+    barDiagram->axes().at(1)->setLabels(labels);
 }
 
 unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)

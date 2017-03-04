@@ -170,6 +170,7 @@ set(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
+  kmymoneyreportconfigtabrangedecl.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic

@@ -59,9 +59,11 @@
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 #include <transaction.h>
+#include <daterangedlg.h>
 
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_ksortoptiondlg.h"
+#include "ui_daterangedlgdecl.h"
 
 enum ItemRoles {
   ItemIdRole = Qt::UserRole
@@ -119,6 +121,8 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
     m_ui(new Ui::KFindTransactionDlgDecl)
 {
   m_ui->setupUi(this);
+  m_dateRange = new DateRangeDlg(m_ui->m_dateTab);
+  m_ui->dateRangeLayout->insertWidget(0, m_dateRange);
 
   m_ui->ButtonGroup1->setId(m_ui->m_amountButton, 0);
   m_ui->ButtonGroup1->setId(m_ui->m_amountRangeButton, 1);
@@ -133,7 +137,6 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
 
   setupAccountsPage();
   setupCategoriesPage();
-  setupDatePage();
   setupAmountPage();
   setupPayeesPage();
   setupTagsPage();
@@ -232,8 +235,8 @@ void KFindTransactionDlg::slotReset()
 
   // the following call implies a call to slotUpdateSelections,
   // that's why we call it last
-  m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
-  slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
+  m_dateRange->slotReset();
+  slotUpdateSelections();
 }
 
 void KFindTransactionDlg::slotUpdateSelections()
@@ -259,12 +262,7 @@ void KFindTransactionDlg::slotUpdateSelections()
     txt += i18n("Account");
   }
 
-  // Date tab
-  if (m_ui->m_dateRange->currentItem() != 0) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Date");
-  }
+  m_dateRange->slotUpdateSelections(txt);
 
   // Amount tab
   if ((m_ui->m_amountButton->isChecked() && m_ui->m_amountEdit->isValid())
@@ -433,55 +431,6 @@ void KFindTransactionDlg::selectSubItems(QTreeWidgetItem* item, const QStringLis
       it_v->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     selectSubItems(it_v, list, state);
   }
-}
-
-void KFindTransactionDlg::setupDatePage()
-{
-  int i;
-  for (i = MyMoneyTransactionFilter::allDates; i < MyMoneyTransactionFilter::dateOptionCount; ++i) {
-    MyMoneyTransactionFilter::translateDateRange(static_cast<MyMoneyTransactionFilter::dateOptionE>(i), m_startDates[i], m_endDates[i]);
-  }
-
-  connect(m_ui->m_dateRange, SIGNAL(itemSelected(int)), this, SLOT(slotDateRangeChanged(int)));
-  connect(m_ui->m_fromDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChanged()));
-  connect(m_ui->m_toDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChanged()));
-
-  slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
-}
-
-void KFindTransactionDlg::slotDateRangeChanged(int idx)
-{
-  switch (idx) {
-    case MyMoneyTransactionFilter::allDates:
-    case MyMoneyTransactionFilter::userDefined:
-      m_ui->m_fromDate->loadDate(QDate());
-      m_ui->m_toDate->loadDate(QDate());
-      break;
-    default:
-      m_ui->m_fromDate->loadDate(m_startDates[idx]);
-      m_ui->m_toDate->loadDate(m_endDates[idx]);
-      break;
-  }
-  slotUpdateSelections();
-}
-
-void KFindTransactionDlg::slotDateChanged()
-{
-  int idx;
-  for (idx = MyMoneyTransactionFilter::asOfToday; idx < MyMoneyTransactionFilter::dateOptionCount; ++idx) {
-    if (m_ui->m_fromDate->date() == m_startDates[idx]
-        && m_ui->m_toDate->date() == m_endDates[idx]) {
-      break;
-    }
-  }
-  //if no filter matched, set to user defined
-  if (idx == MyMoneyTransactionFilter::dateOptionCount)
-    idx = MyMoneyTransactionFilter::userDefined;
-
-  m_ui->m_dateRange->blockSignals(true);
-  m_ui->m_dateRange->setCurrentItem(static_cast<MyMoneyTransactionFilter::dateOptionE>(idx));
-  m_ui->m_dateRange->blockSignals(false);
-  slotUpdateSelections();
 }
 
 void KFindTransactionDlg::setupAmountPage()
@@ -717,8 +666,8 @@ void KFindTransactionDlg::setupFilter()
   }
 
   // Date tab
-  if (m_ui->m_dateRange->currentItem() != 0) {
-    m_filter.setDateFilter(m_ui->m_fromDate->date(), m_ui->m_toDate->date());
+  if (m_dateRange->m_ui->m_dateRange->currentItem() != 0) {
+    m_filter.setDateFilter(m_dateRange->m_ui->m_fromDate->date(), m_dateRange->m_ui->m_toDate->date());
   }
 
   // Amount tab

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DateRangeDlgDecl</class>
+ <widget class="QWidget" name="DateRangeDlgDecl">
+  <layout class="QGridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="TextLabel4">
+     <property name="text">
+      <string>Range</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="KMyMoneyPeriodCombo" name="m_dateRange" native="true"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="TextLabel5">
+     <property name="text">
+      <string comment="From (Date)">From</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="kMyMoneyDateInput" name="m_fromDate" native="true"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="TextLabel6">
+     <property name="text">
+      <string comment="To (Date)">To</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="kMyMoneyDateInput" name="m_toDate" native="true"/>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KMyMoneyPeriodCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneymvccombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyDateInput</class>
+   <extends>QWidget</extends>
+   <header>kmymoneydateinput.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

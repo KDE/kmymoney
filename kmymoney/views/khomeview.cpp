@@ -302,7 +302,8 @@ void KHomeView::showNetWorthGraph()
                               i18n("Generated Report"));
 
   reportCfg.setChartByDefault(true);
-  reportCfg.setChartGridLines(false);
+  reportCfg.setChartCHGridLines(false);
+  reportCfg.setChartSVGridLines(false);
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingSchedules(false);

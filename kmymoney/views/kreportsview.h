@@ -108,6 +108,7 @@ public:
     }
     void print();
     void toggleChart();
+    void updateDataRange();
     void copyToClipboard();
     void saveAs(const QString& filename, bool includeCSS = false);
     void updateReport();

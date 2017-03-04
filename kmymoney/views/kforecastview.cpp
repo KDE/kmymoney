@@ -1021,7 +1021,8 @@ void KForecastView::loadChartView()
                               i18n("Generated Report"));
 
   reportCfg.setChartByDefault(true);
-  reportCfg.setChartGridLines(false);
+  reportCfg.setChartCHGridLines(false);
+  reportCfg.setChartSVGridLines(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingSchedules(false);
   // FIXME: this causes a crash

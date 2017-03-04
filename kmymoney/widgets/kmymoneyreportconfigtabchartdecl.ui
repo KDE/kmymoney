@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>174</height>
+    <height>234</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,7 +42,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KMyMoneyGeneralCombo" name="m_comboType"/>
+      <widget class="KMyMoneyGeneralCombo" name="m_comboType" native="true"/>
      </item>
      <item>
       <spacer name="spacer1">
@@ -63,34 +63,52 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="m_checkGridLines">
-     <property name="toolTip">
-      <string>&lt;p&gt;Select this option to show horizontal and vertical grid lines on the chart.&lt;/p&gt;</string>
-     </property>
-     <property name="text">
-      <string>Show grid lines</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="m_checkValues">
-     <property name="toolTip">
-      <string>&lt;p&gt;Select this option to draw the numeric values for data points next to their plot location.&lt;/p&gt;</string>
-     </property>
-     <property name="text">
-      <string>Draw values on chart</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="m_checkShowChart">
-     <property name="toolTip">
-      <string>&lt;p&gt;Select this option to cause the report to be shown as a chart when you first open the report.  Otherwise, it will come up as a text report.&lt;/p&gt;</string>
-     </property>
-     <property name="text">
-      <string>Show as chart by default</string>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="m_checkValues">
+       <property name="toolTip">
+        <string>&lt;p&gt;Select this option to draw the numeric values for data points next to their plot location.&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string>Draw values on chart</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="m_checkShowChart">
+       <property name="toolTip">
+        <string>&lt;p&gt;Select this option to cause the report to be shown as a chart when you first open the report.  Otherwise, it will come up as a text report.&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string>Show as chart by default</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="m_checkSVGridLines">
+       <property name="text">
+        <string notr="true">SV grid lines</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="m_checkCHGridLines">
+       <property name="toolTip">
+        <string>&lt;p&gt;Select this option to show horizontal and vertical grid lines on the chart.&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string notr="true">CH grid lines</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QCheckBox" name="m_logYaxis">
+       <property name="text">
+        <string>Logarithmic vertical axis</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <layout class="QHBoxLayout">
@@ -163,13 +181,9 @@
  <customwidgets>
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
-   <extends>KComboBox</extends>
+   <extends>QWidget</extends>
    <header>kmymoneymvccombo.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -21,6 +21,9 @@
 #define KMYMONEYREPORTCONFIGTABIMPL_H
 
 #include <QWidget>
+#include <QDoubleValidator>
+
+class DateRangeDlg;
 
 namespace Ui
 {
@@ -28,7 +31,8 @@ class kMyMoneyReportConfigTab1Decl;
 class kMyMoneyReportConfigTab2Decl;
 class kMyMoneyReportConfigTab3Decl;
 class kMyMoneyReportConfigTabChartDecl;
-};
+class kMyMoneyReportConfigTabRangeDecl;
+}
 
 class kMyMoneyReportConfigTab1Decl : public QWidget
 {
@@ -59,12 +63,69 @@ private:
 
 class kMyMoneyReportConfigTabChartDecl : public QWidget
 {
+  Q_OBJECT
 public:
   kMyMoneyReportConfigTabChartDecl(QWidget *parent);
   virtual ~kMyMoneyReportConfigTabChartDecl();
-private:
   Ui::kMyMoneyReportConfigTabChartDecl* ui;
+private slots:
+  void slotChartTypeChanged(int index);
 };
 
+class kMyMoneyReportConfigTabRangeDecl : public QWidget
+{
+  Q_OBJECT
+public:
+  kMyMoneyReportConfigTabRangeDecl(QWidget *parent);
+  virtual ~kMyMoneyReportConfigTabRangeDecl();
+  Ui::kMyMoneyReportConfigTabRangeDecl* ui;
+  DateRangeDlg *m_dateRange;
+  void setRangeLogarythmic(bool set);
+private:
+  enum EDimension { eRangeStart = 0, eRangeEnd, eMajorTick, eMinorTick};
+private slots:
+  void slotEditingFinished(EDimension dim);
+  void slotEditingFinishedStart();
+  void slotEditingFinishedEnd();
+  void slotEditingFinishedMajor();
+  void slotEditingFinishedMinor();
+  void slotDataLockChanged(int index);
+};
+
+class MyDoubleValidator : public QDoubleValidator
+{
+public:
+  MyDoubleValidator(int decimals, QObject * parent = 0) :
+    QDoubleValidator(0, 0, decimals, parent)
+  {
+  }
+
+  QValidator::State validate(QString &s, int &i) const
+  {
+    Q_UNUSED(i);
+    if (s.isEmpty() || s == "-") {
+      return QValidator::Intermediate;
+    }
+
+    QChar decimalPoint = locale().decimalPoint();
+
+    if(s.indexOf(decimalPoint) != -1) {
+      int charsAfterPoint = s.length() - s.indexOf(decimalPoint) - 1;
+
+      if (charsAfterPoint > decimals()) {
+        return QValidator::Invalid;
+      }
+    }
+
+    bool ok;
+    locale().toDouble(s, &ok);
+
+    if (ok) {
+      return QValidator::Acceptable;
+    } else {
+      return QValidator::Invalid;
+    }
+  }
+};
 #endif /* KMYMONEYREPORTCONFIGTABIMPL_H */
 

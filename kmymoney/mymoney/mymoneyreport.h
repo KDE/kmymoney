@@ -67,6 +67,8 @@ public:
   enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
+  enum dataOptionE { automatic = 0, userDefined, dataOptionCount };
+
   static const QStringList kRowTypeText;
   static const QStringList kColumnTypeText;
   static const QStringList kQueryColumnsText;
@@ -144,8 +146,11 @@ public:
   bool isChartDataLabels() const {
     return m_chartDataLabels;
   }
-  bool isChartGridLines() const {
-    return m_chartGridLines;
+  bool isChartCHGridLines() const {
+    return m_chartCHGridLines;
+  }
+  bool isChartSVGridLines() const {
+    return m_chartSVGridLines;
   }
   bool isChartByDefault() const {
     return m_chartByDefault;
@@ -153,7 +158,22 @@ public:
   uint chartLineWidth() const {
     return m_chartLineWidth;
   }
-  bool isIncludingSchedules() const {
+  bool isLogYAxis() const {
+    return m_logYaxis;
+  }
+  const QString& dataRangeStart() const {
+    return m_dataRangeStart;
+  }
+  const QString& dataRangeEnd() const {
+    return m_dataRangeEnd;
+  }
+  const QString& dataMajorTick() const {
+    return m_dataMajorTick;
+  }
+  const QString& dataMinorTick() const {
+    return m_dataMinorTick;
+  }
+    bool isIncludingSchedules() const {
     return m_includeSchedules;
   }
   bool isColumnsAreDays() const {
@@ -189,8 +209,11 @@ public:
   bool isIncludingAveragePrice() const {
     return m_includeAveragePrice;
   }
-  bool isUserDefined() const {
-    return m_dateLock == userDefined;
+  bool isDateUserDefined() const {
+    return m_dateLock == MyMoneyTransactionFilter::userDefined;
+  }
+  bool isDataUserDefined() const {
+    return m_dataLock == MyMoneyReport::userDefined;
   }
   bool isMixedTime() const {
     return m_mixedTime;
@@ -246,14 +269,32 @@ public:
   void setChartDataLabels(bool _f) {
     m_chartDataLabels = _f;
   }
-  void setChartGridLines(bool _f) {
-    m_chartGridLines = _f;
+  void setChartCHGridLines(bool _f) {
+    m_chartCHGridLines = _f;
+  }
+  void setChartSVGridLines(bool _f) {
+    m_chartSVGridLines = _f;
   }
   void setChartByDefault(bool _f) {
     m_chartByDefault = _f;
   }
   void setChartLineWidth(uint _f) {
     m_chartLineWidth = _f;
+  }
+  void setLogYAxis(bool _f) {
+    m_logYaxis = _f;
+  }
+  void setDataRangeStart(const QString& _f) {
+   m_dataRangeStart = _f;
+  }
+  void setDataRangeEnd(const QString& _f) {
+   m_dataRangeEnd = _f;
+  }
+  void setDataMajorTick(const QString& _f) {
+   m_dataMajorTick = _f;
+  }
+  void setDataMinorTick(const QString& _f) {
+   m_dataMinorTick = _f;
   }
   void setIncludingSchedules(bool _f) {
     m_includeSchedules = _f;
@@ -345,8 +386,12 @@ public:
 
   void setDateFilter(dateOptionE _u) {
     m_dateLock = _u;
-    if (_u != userDefined)
+    if (_u != MyMoneyTransactionFilter::userDefined)
       MyMoneyTransactionFilter::setDateFilter(_u);
+  }
+
+  void setDataFilter(dataOptionE _u) {
+    m_dataLock = _u;
   }
 
   /**
@@ -375,7 +420,11 @@ public:
     * as is proper.
     */
   void updateDateFilter() {
-    if (m_dateLock != userDefined) MyMoneyTransactionFilter::setDateFilter(m_dateLock);
+    if (m_dateLock != MyMoneyTransactionFilter::userDefined) MyMoneyTransactionFilter::setDateFilter(m_dateLock);
+  }
+
+  MyMoneyReport::dataOptionE dataFilter() {
+    return m_dataLock;
   }
 
   /**
@@ -590,7 +639,8 @@ private:
   /**
     * Whether grid lines should be drawn on the chart
     */
-  bool m_chartGridLines;
+  bool m_chartCHGridLines;
+  bool m_chartSVGridLines;
   /**
     * Whether this report should be shown as a chart by default (otherwise it
     * should be shown as a textual report)
@@ -600,6 +650,29 @@ private:
    * Width of the chart lines
    */
   uint m_chartLineWidth;
+
+  /**
+    * Whether Y axis is logarithmic or linear
+    */
+  bool m_logYaxis;
+
+  /**
+    * Y data range
+    */
+  QString m_dataRangeStart;
+  QString m_dataRangeEnd;
+
+  /**
+    * Y data range division
+    */
+  QString m_dataMajorTick;
+  QString m_dataMinorTick;
+
+  /**
+    * Whether data range should be calculated automatically or is user defined
+    */
+  dataOptionE m_dataLock;
+
   /**
     * Whether to include scheduled transactions
     */
