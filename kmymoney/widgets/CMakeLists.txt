@@ -171,6 +171,7 @@ set(libwidgets_a_UI
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
   kmymoneyreportconfigtabrangedecl.ui
+  ../dialogs/daterangedlgdecl.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic
