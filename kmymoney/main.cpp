@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
   aboutData.addCredit(i18n("Laurent Montel"), i18n("Patches and port to kde4"), "montel@kde.org");
   aboutData.addCredit(i18n("Wolfgang Rohdewald"), i18n("Patches"), "woro@users.sourceforge.net");
   aboutData.addCredit(i18n("Marko Käning"), i18n("Patches, packaging and KF5-CI for OS X"), "mk-lists@email.de");
-  aboutData.addCredit(i18n("Allan Anderson"), i18n("CSV import/export"), "agander93@gmail.com");
+  aboutData.addCredit(i18n("Allan Anderson ✝"), i18n("CSV import/export"), "");
   aboutData.addCredit(i18n("Jack Ostroff"), i18n("Documentation and user support"), "ostroffjh@users.sourceforge.net");
   aboutData.setOrganizationDomain("kde.org");
 
