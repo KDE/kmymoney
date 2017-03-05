@@ -526,7 +526,10 @@ void KInvestmentView::slotUpdateSecuritiesButtons()
   if (item) {
     MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
     m_editSecurityButton->setEnabled(item->text(eMarketColumn) != m_currencyMarket);
-    m_deleteSecurityButton->setEnabled(!MyMoneyFile::instance()->isReferenced(security));
+    MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+    skip.fill(false);
+    skip.setBit(IMyMoneyStorage::RefCheckPrice);
+    m_deleteSecurityButton->setEnabled(!MyMoneyFile::instance()->isReferenced(security, skip));
 
   } else {
     m_editSecurityButton->setEnabled(false);
@@ -566,23 +569,50 @@ void KInvestmentView::slotDeleteSecurity()
   QTreeWidgetItem* item = m_securitiesList->currentItem();
   if (item) {
     MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
-    QString msg;
-    QString dontAsk;
+    QString msg, msg2;
+    QString dontAsk, dontAsk2;
     if (security.isCurrency()) {
       msg = i18n("<p>Do you really want to remove the currency <b>%1</b> from the file?</p><p><i>Note: adding currencies is not currently supported.</i></p>", security.name());
+      msg2 = i18n("<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you still want to continue?</p>", security.name());
       dontAsk = "DeleteCurrency";
+      dontAsk2 = "DeleteCurrencyRates";
     } else {
       msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>", KMyMoneyUtils::securityTypeToString(security.securityType()), security.name());
+      msg2 = i18n("<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want to continue?</p>", KMyMoneyUtils::securityTypeToString(security.securityType()), security.name());
       dontAsk = "DeleteSecurity";
+      dontAsk2 = "DeleteSecurityPrices";
     }
     if (KMessageBox::questionYesNo(this, msg, i18n("Delete security"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk) == KMessageBox::Yes) {
       MyMoneyFileTransaction ft;
+      MyMoneyFile* file = MyMoneyFile::instance();
+
+      MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+      skip.fill(true);
+      skip.clearBit(IMyMoneyStorage::RefCheckPrice);
+      if (file->isReferenced(security, skip)) {
+        if (KMessageBox::questionYesNo(this, msg2, i18n("Delete prices"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk2) == KMessageBox::Yes) {
+          try {
+            QString secID = security.id();
+            foreach (auto priceEntry, file->priceList()) {
+              const MyMoneyPrice& price = priceEntry.first();
+              if (price.from() == secID || price.to() == secID)
+                file->removePrice(price);
+            }
+            ft.commit();
+          } catch (const MyMoneyException &) {
+            qDebug("Cannot delete price");
+            return;
+          }
+        } else
+          return;
+      }
+      MyMoneyFileTransaction ft2;
       try {
         if (security.isCurrency())
-          MyMoneyFile::instance()->removeCurrency(security);
+          file->removeCurrency(security);
         else
-          MyMoneyFile::instance()->removeSecurity(security);
-        ft.commit();
+          file->removeSecurity(security);
+        ft2.commit();
       } catch (const MyMoneyException &) {
       }
     }
