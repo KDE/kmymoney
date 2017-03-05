@@ -16,7 +16,7 @@
    <string/>
   </property>
   <property name="whatsThis">
-   <string>&lt;p&gt;On this tab, you configure how you'd like the rows and columns to be selected and organized.&lt;/p&gt;</string>
+   <string>&lt;p&gt;On this tab, you configure how you would like the rows and columns to be selected and organized.&lt;/p&gt;</string>
   </property>
   <layout class="QVBoxLayout">
    <item>
