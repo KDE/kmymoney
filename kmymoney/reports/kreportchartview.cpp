@@ -563,7 +563,7 @@ void KReportChartView::slotNeedUpdate()
 
   QChar separator = locale().groupSeparator();
   QChar decimalPoint = locale().decimalPoint();
-  int precision = KMyMoneyGlobalSettings().pricePrecision();
+  int precision = KMyMoneyGlobalSettings::pricePrecision();
 
   QStringList labels;
 

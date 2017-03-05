@@ -245,7 +245,7 @@ void KReportsView::KReportTab::updateDataRange()
     return;
   QChar separator = locale().groupSeparator();
   QChar decimalPoint = locale().decimalPoint();
-  int precision = KMyMoneyGlobalSettings().pricePrecision();
+  int precision = KMyMoneyGlobalSettings::pricePrecision();
   QList<QPair<QString, qreal>> dims;
   dims.append(qMakePair(QString(), grids.at(1).start));
   dims.append(qMakePair(QString(), grids.at(1).end));
