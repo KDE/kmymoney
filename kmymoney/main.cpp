@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
   aboutData.addCredit(ki18n("Laurent Montel"), ki18n("Patches and port to kde4"), "montel@kde.org");
   aboutData.addCredit(ki18n("Wolfgang Rohdewald"), ki18n("Patches"), "woro@users.sourceforge.net");
   aboutData.addCredit(ki18n("Marko Käning"), ki18n("Patches, packaging and KF5-CI for OS X"), "mk-lists@email.de");
-  aboutData.addCredit(ki18n("Allan Anderson"), ki18n("CSV import/export"), "agander93@gmail.com");
+  aboutData.addCredit(ki18n("Allan Anderson ✝"), ki18n("CSV import/export"));
   aboutData.addCredit(ki18n("Jack Ostroff"), ki18n("Documentation and user support"), "ostroffjh@users.sourceforge.net");
   aboutData.setOrganizationDomain("kde.org");
   KCmdLineOptions options;
