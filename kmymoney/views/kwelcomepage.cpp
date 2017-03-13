@@ -69,7 +69,7 @@ const QString KWelcomePage::welcomePage()
   const QString logoFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(QUrl::fromLocalFile(logoFilename).url());
   body += QString("<h3 id=\"title\">" + i18n("Welcome to KMyMoney") + "</h3>");
-  body += QString("<h4 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager for KDE") + "</h4>");
+  body += QString("<h4 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager by KDE") + "</h4>");
   const QString backArrowFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><a href=\"/home\"><img src=\"%1\">").arg(QUrl::fromLocalFile(backArrowFilename).url());
   body += QString(i18n("Go to My Financial Summary"));
