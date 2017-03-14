@@ -64,31 +64,6 @@
     <p>
       KMyMoney is a personal finance manager by KDE.
     </p>
-    <p xml:lang="ar">أموالك هو مدير ماليّة شخصيّ لِكدي.</p>
-    <p xml:lang="bs">KMyMoney je personalni finansijski menadžer za KDE.</p>
-    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals pel KDE.</p>
-    <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals pel KDE.</p>
-    <p xml:lang="da">KMyMoney er styring af privatøkonomien til KDE</p>
-    <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung für KDE.</p>
-    <p xml:lang="en-GB">KMyMoney is a personal finance manager for KDE.</p>
-    <p xml:lang="es">KMyMoney es un gestor de finanzas personales para KDE.</p>
-    <p xml:lang="et">KMyMoney on KDE isiklike rahaasjade haldur.</p>
-    <p xml:lang="fi">KMyMoney on henkilökohtainen talouskirjanpito-ohjelma KDE:lle.</p>
-    <p xml:lang="fr">KMyMoney est un gestionnaire de finances personnelles pour KDE.</p>
-    <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais para KDE.</p>
-    <p xml:lang="hu">A KMyMoney egy személyes pénzügyi kezelő KDE felülethez.</p>
-    <p xml:lang="it">KMyMoney è un gestore delle finanze personali per KDE.</p>
-    <p xml:lang="lt">KMyMoney yra asmeninių finansų tvarkymo programa skirta KDE.</p>
-    <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder voor KDE.</p>
-    <p xml:lang="pl">KMyMoney służy do zarządzania finansami osobistymi w KDE.</p>
-    <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais para o KDE.</p>
-    <p xml:lang="pt-BR">KMyMoney é um gerenciador de finanças pessoais para o KDE.</p>
-    <p xml:lang="ro">KMyMoney este un gestionar de finanțe personale pentru KDE.</p>
-    <p xml:lang="sk">KMyMoney je osobný správca financií pre KDE.</p>
-    <p xml:lang="sv">KMyMoney är en hemekonomihanterare för KDE.</p>
-    <p xml:lang="tr">KMyMoney, KDE için bir kişisel finans yöneticisidir.</p>
-    <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами для KDE.</p>
-    <p xml:lang="x-test">xxKMyMoney is a personal finance manager for KDE.xx</p>
     <p>
       It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format.
       Direct download using the OFX and HBCI formats is also possible via plugins.
