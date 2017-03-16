@@ -44,6 +44,7 @@ namespace reports
 {
 
 class ReportAccount;
+class CashFlowList;
 
 /**
   * Calculates a query of information about the transaction database.
@@ -66,9 +67,12 @@ public:
 
 protected:
   void constructAccountTable();
+  void constructTotalRows();
   void constructTransactionTable();
   void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
-  void constructPerformanceRow(const ReportAccount& account, TableRow& result) const;
+  MyMoneyMoney helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
+  MyMoneyMoney helperIRR(const CashFlowList& all) const;
+  void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
   void constructSplitsTable();
 
 };

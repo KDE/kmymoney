@@ -338,7 +338,7 @@ void QueryTable::init()
       throw MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
   }
 
-  QString sort = m_group + ',' + m_columns + ",id,rank";
+  QString sort = m_group + ",id,rank," + m_columns;
 
   switch (m_config.rowType()) {
     case MyMoneyReport::eAccountByTopAccount:
@@ -375,12 +375,12 @@ void QueryTable::init()
   if (qc & MyMoneyReport::eQCprice)
     m_columns += ",price";
   if (qc & MyMoneyReport::eQCperformance) {
-    m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment";
-    m_subtotal = "endingbal";
+    m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment,endingbal";
+    m_subtotal = "startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment,endingbal";
   }
   if (qc & MyMoneyReport::eQCcapitalgain) {
-    m_columns += ",buys,sells";
-    m_subtotal = "capitalgain";
+    m_columns += ",buys,sells,capitalgain";
+    m_subtotal = "buys,sells,capitalgain";
   }
   if (qc & MyMoneyReport::eQCloan) {
     m_columns += ",payment,interest,fees";
@@ -390,8 +390,149 @@ void QueryTable::init()
     m_postcolumns = "balance";
 
   TableRow::setSortCriteria(sort);
-
   qSort(m_rows);
+
+  constructTotalRows(); // adds total rows to m_rows
+}
+
+void QueryTable::constructTotalRows()
+{
+  if (m_rows.isEmpty())
+    return;
+
+  // qSort places grand total at last position, because it doesn't belong to any group
+  if (m_rows.at(0)["rank"] == "4")      // it should be unlikely that total row is at the top of rows, so...
+    m_rows.move(0, m_rows.count() - 1); // ...move it at the bottom
+
+  QStringList subtotals = m_subtotal.split(',');
+  QStringList groups = m_group.split(',');
+  QStringList columns = m_columns.split(',');
+  if (!m_subtotal.isEmpty() && subtotals.count() == 1)
+    columns += m_subtotal;
+  QStringList postcolumns = m_postcolumns.split(',');
+  if (!m_postcolumns.isEmpty())
+    columns += postcolumns;
+
+  QList<QMap<QString, MyMoneyMoney>> totalGroups;
+  QMap<QString, MyMoneyMoney> totalsValues;
+
+  // initialize all total values under summed columns to be zero
+  foreach (auto subtotal, subtotals) {
+    totalsValues.insert(subtotal, MyMoneyMoney());
+  }
+
+  // create total groups containing totals row for each group
+  totalGroups.append(totalsValues);  // prepend with extra group for grand total
+  for (int j = 0; j < groups.count(); ++j) {
+    totalGroups.append(totalsValues);
+  }
+
+  QList<TableRow> stashedTotalRows;
+  QList<TableRow>::iterator current_row, next_row;
+  for (current_row  = m_rows.begin();
+       current_row != m_rows.end();) {
+
+    next_row = std::next(current_row);
+
+    // total rows are useless at summing so remove whole block of them at once
+    while (next_row != m_rows.end() && (*next_row)["rank"] == "4") {
+      stashedTotalRows.append((*next_row)); // ...but stash them just in case
+      next_row = m_rows.erase(next_row);
+    }
+
+    bool lastRow = (next_row == m_rows.end());
+
+    // sum all subtotal values for lowest group
+    foreach (auto subtotal, subtotals) {
+      totalGroups.last()[subtotal] += MyMoneyMoney((*current_row)[subtotal]);
+    }
+
+    // iterate over groups from the lowest to the highest to find group change
+    for (int i = groups.count() - 1; i >= 0 ; --i) {
+      // if any of groups from next row changes (or next row is the last row), then it's time to put totals row
+      if (lastRow || (*current_row)[groups.at(i)] != (*next_row)[groups.at(i)]) {
+        TableRow totalsRow;
+        // custom total values calculations
+        foreach (auto subtotal, subtotals) {
+          if (subtotal == "returninvestment")
+            totalGroups[i + 1]["returninvestment"] = helperROI(totalGroups[i + 1]["buys"], totalGroups[i + 1]["sells"],
+                                                          totalGroups[i + 1]["startingbal"], totalGroups[i + 1]["endingbal"],
+                                                          totalGroups[i + 1]["cashincome"]);
+        }
+
+        // total values that aren't calculated here, but are taken untouched from external source, e.g. constructPerformanceRow
+        if (!stashedTotalRows.isEmpty()) {
+          foreach (auto subtotal, subtotals) {
+            if (subtotal == "return")
+              totalsRow["return"] = stashedTotalRows.first()["return"];
+          }
+          stashedTotalRows.removeFirst();
+        }
+
+        // sum all subtotal values for higher groups (excluding grand total) and reset lowest group values
+        QMap<QString, MyMoneyMoney>::iterator upperGrp = totalGroups[i].begin();
+        QMap<QString, MyMoneyMoney>::iterator lowerGrp = totalGroups[i + 1].begin();
+
+        while(upperGrp != totalGroups[i].end()) {
+          totalsRow[lowerGrp.key()] = lowerGrp.value().toString();  // fill totals row with subtotal values...
+          (*upperGrp) += (*lowerGrp);
+          (*lowerGrp) = MyMoneyMoney();
+          ++upperGrp;
+          ++lowerGrp;
+        }
+
+        for (int j = 0; j < groups.count(); ++j) {
+          totalsRow[groups.at(j)] = (*current_row)[groups.at(j)];   // ...and identification
+        }
+
+        totalsRow["rank"] = "4";
+        totalsRow["depth"] = QString::number(i);
+
+        if (lastRow)
+          m_rows.append(totalsRow);
+        else {
+          next_row = m_rows.insert(next_row, totalsRow);    // current_row and next_row can diverge here by more than one
+          ++next_row;
+        }
+      }
+    }
+
+    // code to put grand total row
+    if (lastRow) {
+      TableRow totalsRow;
+
+      foreach (auto subtotal, subtotals) {
+        if (subtotal == "returninvestment")
+          totalGroups[0]["returninvestment"] = helperROI(totalGroups[0]["buys"], totalGroups[0]["sells"],
+                                                        totalGroups[0]["startingbal"], totalGroups[0]["endingbal"],
+                                                        totalGroups[0]["cashincome"]);
+      }
+
+      if (!stashedTotalRows.isEmpty()) {
+        foreach (auto subtotal, subtotals) {
+          if (subtotal == "return")
+            totalsRow["return"] = stashedTotalRows.first()["return"];
+        }
+        stashedTotalRows.removeFirst();
+      }
+
+      QMap<QString, MyMoneyMoney>::const_iterator grandTotalGrp = totalGroups[0].begin();
+      while(grandTotalGrp != totalGroups[0].end()) {
+        totalsRow[grandTotalGrp.key()] = grandTotalGrp.value().toString();
+        ++grandTotalGrp;
+      }
+
+      for (int j = 0; j < groups.count(); ++j) {
+        totalsRow[groups.at(j)] = QString();      // no identification
+      }
+
+      totalsRow["rank"] = "4";
+      totalsRow["depth"] = "";
+      m_rows.append(totalsRow);
+      break;                                      // no use to loop further
+    }
+    current_row = next_row;                       // current_row makes here a leap forward by at least one
+  }
 }
 
 void QueryTable::constructTransactionTable()
@@ -683,7 +824,7 @@ void QueryTable::constructTransactionTable()
             // put the principal amount in the "value" column and convert to lowest fraction
             qA["value"] = (-(*it_split).shares() * xr).convert(fraction).toString();
 
-            qA["rank"] = '0';
+            qA["rank"] = '1';
             qA["split"] = "";
 
           } else {
@@ -692,7 +833,7 @@ void QueryTable::constructTransactionTable()
               // add the "summarized" split transaction
               // this is the sub-total of the split detail
               // convert to lowest fraction
-              qA["rank"] = '0';
+              qA["rank"] = '1';
               qA["category"] = i18n("[Split Transaction]");
               qA["topcategory"] = i18nc("Split transaction", "Split");
               qA["categorytype"] = i18nc("Split transaction", "Split");
@@ -746,13 +887,13 @@ void QueryTable::constructTransactionTable()
 
               //convert to lowest fraction
               qA["split"] = (-(*it_split).shares() * xr).convert(fraction).toString();
-              qA["rank"] = '1';
+              qA["rank"] = '2';
             } else {
               //this applies when the transaction has only 2 splits, or each split is going to be
               //shown separately, eg. transactions by category
 
               qA["split"] = "";
-              qA["rank"] = '0';
+              qA["rank"] = '1';
             }
 
             qA ["memo"] = (*it_split).memo();
@@ -812,7 +953,7 @@ void QueryTable::constructTransactionTable()
             //multiply by currency and convert to lowest fraction
             qS["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
 
-            qS["rank"] = '0';
+            qS["rank"] = '1';
 
             qS["account"] = splitAcc.name();
             qS["accountid"] = splitAcc.id();
@@ -949,7 +1090,7 @@ void QueryTable::constructTransactionTable()
     qA["account"] = account.name();
     qA["topaccount"] = account.topParentName();
     qA["institution"] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-    qA["rank"] = "-2";
+    qA["rank"] = "0";
 
     qA["price"] = startPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
     if (account.isInvest()) {
@@ -971,12 +1112,40 @@ void QueryTable::constructTransactionTable()
 
     qA["postdate"] = strEndDate;
     qA["balance"] = endBalance.toString();
+    qA["rank"] = "3";
     qA["id"] = 'Z';
     m_rows += qA;
   }
 }
 
-void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result) const
+MyMoneyMoney QueryTable::helperROI(const MyMoneyMoney &buys, const MyMoneyMoney &sells, const MyMoneyMoney &startingBal, const MyMoneyMoney &endingBal, const MyMoneyMoney &cashIncome) const
+{
+  MyMoneyMoney returnInvestment;
+  if (!buys.isZero() || !startingBal.isZero()) {
+    returnInvestment = (sells + buys + cashIncome + endingBal - startingBal) / (startingBal - buys);
+    returnInvestment = returnInvestment.convert(10000);
+  } else
+    returnInvestment = MyMoneyMoney(); // if no investment then no return on investment
+  return returnInvestment;
+}
+
+MyMoneyMoney QueryTable::helperIRR(const CashFlowList &all) const
+{
+  MyMoneyMoney annualReturn;
+  try {
+    double irr = all.IRR();
+#ifdef Q_CC_MSVC
+    annualReturn = MyMoneyMoney(_isnan(irr) ? 0 : irr, 10000);
+#else
+    annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
+#endif
+  } catch (QString e) {
+    qDebug() << e;
+  }
+  return annualReturn;
+}
+
+void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneySecurity security;
@@ -1092,36 +1261,19 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   }
   // Note that reinvested dividends are not included , because these do not
   // represent a cash flow event.
-  CashFlowList all;
   all += buys;
   all += sells;
   all += cashincome;
   all += CashFlowListItem(startingDate, -startingBal);
   all += CashFlowListItem(endingDate, endingBal);
 
-  MyMoneyMoney returnInvestment;
   MyMoneyMoney buysTotal = buys.total();
   MyMoneyMoney sellsTotal = sells.total();
   MyMoneyMoney cashIncomeTotal = cashincome.total();
   MyMoneyMoney reinvestIncomeTotal = reinvestincome.total();
 
-  if (!buysTotal.isZero() || !startingBal.isZero()) {
-    returnInvestment = (sellsTotal + buysTotal + cashIncomeTotal + endingBal - startingBal) / (startingBal - buysTotal);
-    returnInvestment = returnInvestment.convert(10000);
-  } else
-    returnInvestment = MyMoneyMoney(); // if no investment then no return on investment
-
-  MyMoneyMoney annualReturn;
-  try {
-    double irr = all.IRR();
-#ifdef Q_CC_MSVC
-    annualReturn = MyMoneyMoney(_isnan(irr) ? 0 : irr, 10000);
-#else
-    annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
-#endif
-  } catch (QString e) {
-    qDebug() << e;
-  }
+  MyMoneyMoney returnInvestment = helperROI(buysTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
+  MyMoneyMoney annualReturn = helperIRR(all);
 
   // check if there are any meaningfull values before adding them to results
   if (!(buysTotal.isZero() && sellsTotal.isZero() &&
@@ -1254,6 +1406,8 @@ void QueryTable::constructAccountTable()
   //make sure we have all subaccounts of investment accounts
   includeInvestmentSubAccounts();
 
+
+  QMap<QString, CashFlowList> topAccounts; // for total calculation
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
   for (auto it_account = accounts.constBegin(); it_account != accounts.constEnd(); ++it_account) {
@@ -1270,8 +1424,9 @@ void QueryTable::constructAccountTable()
 
       ReportAccount account(*it_account);
       TableRow qaccountrow;
+      CashFlowList accountCashflow; // for total calculation
       if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
-        constructPerformanceRow(account, qaccountrow);
+        constructPerformanceRow(account, qaccountrow, accountCashflow);
       } else if (m_config.queryColumns() == MyMoneyReport::eQCcapitalgain) {
         constructCapitalGainRow(account, qaccountrow);
       } else
@@ -1281,7 +1436,7 @@ void QueryTable::constructAccountTable()
         continue;
 
       // help for sort and render functions
-      qaccountrow["rank"] = '0';
+      qaccountrow["rank"] = '1';
       //
       // Handle currency conversion
       //
@@ -1328,9 +1483,35 @@ void QueryTable::constructAccountTable()
 
       qaccountrow["type"] = KMyMoneyUtils::accountTypeToString((*it_account).accountType());
 
+      // assuming that that report is grouped by topaccount
+      if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
+        if (!topAccounts.contains(qaccountrow["topaccount"]))
+          topAccounts.insert(qaccountrow["topaccount"], accountCashflow);   // create cashflow for unknown account...
+        else
+          topAccounts[qaccountrow["topaccount"]] += accountCashflow;        // ...or add cashflow for known account
+      }
+
       m_rows += qaccountrow;
     }
   }
+
+  if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
+    TableRow qtotalsrow;
+    qtotalsrow["rank"] = "4"; // add identification of row as total
+    CashFlowList grandCashflow;
+
+    // convert map of top accounts with cashflows to TableRow
+    for (QMap<QString, CashFlowList>::iterator topAccount = topAccounts.begin(); topAccount != topAccounts.end(); ++topAccount) {
+      qtotalsrow["topaccount"] = topAccount.key();
+      qtotalsrow["return"] = helperIRR(topAccount.value()).toString();
+      grandCashflow += topAccount.value();  // cumulative sum of cashflows of each topaccount
+      m_rows += qtotalsrow;                 // rows aren't sorted yet, so no problem with adding them randomly at the end
+    }
+    qtotalsrow["topaccount"] = "";          // empty topaccount because it's grand cashflow
+    qtotalsrow["return"] = helperIRR(grandCashflow).toString();
+    m_rows += qtotalsrow;
+  }
+
 }
 
 void QueryTable::constructSplitsTable()
@@ -1522,7 +1703,7 @@ void QueryTable::constructSplitsTable()
         // this is the sub-total of the split detail
         // convert to lowest fraction
         qA["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
-        qA["rank"] = '0';
+        qA["rank"] = '1';
 
         //fill in account information
         if (! splitAcc.isIncomeExpense() && it_split != myBegin) {
@@ -1654,7 +1835,7 @@ void QueryTable::constructSplitsTable()
     qA["account"] = account.name();
     qA["topaccount"] = account.topParentName();
     qA["institution"] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-    qA["rank"] = "-2";
+    qA["rank"] = "0";
 
     qA["price"] = startPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
     if (account.isInvest()) {
@@ -1667,6 +1848,7 @@ void QueryTable::constructSplitsTable()
     qA["id"] = 'A';
     m_rows += qA;
 
+    qA["rank"] = "3";
     //ending balance
     qA["price"] = endPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
 

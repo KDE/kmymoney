@@ -4,6 +4,7 @@
     begin                : Sat 28 jun 2008
     copyright            : (C) 2004-2005 by Ace Jones <acejones@users.sourceforge.net>
                                2008 by Alvaro Soliverez <asoliverez@gmail.com>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -45,68 +46,6 @@ namespace reports
 {
 
 QStringList ListTable::TableRow::m_sortCriteria;
-
-// ****************************************************************************
-//
-// Group Iterator
-//
-// ****************************************************************************
-
-class GroupIterator
-{
-public:
-  GroupIterator(const QString& _group, const QString& _subtotal, unsigned _depth) : m_depth(_depth), m_groupField(_group), m_subtotalField(_subtotal) {}
-  GroupIterator() : m_depth(0) {}
-  void update(const ListTable::TableRow& _row) {
-    m_previousGroup = m_currentGroup;
-    m_currentGroup = _row[m_groupField];
-    if (isSubtotal()) {
-      m_previousSubtotal = m_currentSubtotal;
-      m_currentSubtotal = MyMoneyMoney();
-    }
-    m_currentSubtotal += MyMoneyMoney(_row[m_subtotalField]);
-  }
-
-  bool isNewHeader() const {
-    return (m_currentGroup != m_previousGroup);
-  }
-  bool isSubtotal() const {
-    return (m_currentGroup != m_previousGroup) && (!m_previousGroup.isEmpty());
-  }
-  const MyMoneyMoney& subtotal() const {
-    return m_previousSubtotal;
-  }
-  const MyMoneyMoney& currenttotal() const {
-    return m_currentSubtotal;
-  }
-  unsigned depth() const {
-    return m_depth;
-  }
-  const QString& name() const {
-    return m_currentGroup;
-  }
-  const QString& oldName() const {
-    return m_previousGroup;
-  }
-  const QString& groupField() const {
-    return m_groupField;
-  }
-  const QString& subtotalField() const {
-    return m_subtotalField;
-  }
-  // ***DV*** HACK make the currentGroup test different but look the same
-  void force() {
-    m_currentGroup += ' ';
-  }
-private:
-  MyMoneyMoney m_currentSubtotal;
-  MyMoneyMoney m_previousSubtotal;
-  unsigned m_depth;
-  QString m_currentGroup;
-  QString m_previousGroup;
-  QString m_groupField;
-  QString m_subtotalField;
-};
 
 // ****************************************************************************
 //
@@ -165,7 +104,6 @@ ListTable::ListTable(const MyMoneyReport& _report):
 
 void ListTable::render(QString& result, QString& csv) const
 {
-  MyMoneyMoney grandtotal;
   MyMoneyFile* file = MyMoneyFile::instance();
 
   result = "";
@@ -201,9 +139,11 @@ void ListTable::render(QString& result, QString& csv) const
   // to subtotal on
   QStringList groups = m_group.split(',');
   QStringList columns = m_columns.split(',');
-  columns += m_subtotal;
+  if (!m_subtotal.isEmpty() && m_subtotal.split(',').count() == 1) // constructPerformanceRow has subtotal columns already in columns
+    columns += m_subtotal;
   QStringList postcolumns = m_postcolumns.split(',');
-  columns += postcolumns;
+  if (!m_postcolumns.isEmpty()) // prevent creation of empty column
+    columns += postcolumns;
 
   //
   // Table header
@@ -291,22 +231,10 @@ void ListTable::render(QString& result, QString& csv) const
   csv = csv.left(csv.length() - 1);
   csv += '\n';
 
-  //
-  // Set up group iterators
-  //
-  // There is one active iterator for each level of grouping.
-  // As we step through the rows
-  // we update the group iterators each time based on the row data.  If
-  // the group iterator changes and it had a previous value, we print a
-  // subtotal.  Whether or not it had a previous value, we print a group
-  // header.  The group iterator keeps track of a subtotal also.
-
-  int depth = 1;
-  QList<GroupIterator> groupIteratorList;
-  QStringList::const_iterator it_grouplevel = groups.constBegin();
-  while (it_grouplevel != groups.constEnd()) {
-    groupIteratorList += GroupIterator((*it_grouplevel), m_subtotal, depth++);
-    ++it_grouplevel;
+  // initialize group names to empty, so any group will have to display its header
+  QStringList prevGrpNames;
+  for (int i = 0; i < groups.count(); ++i) {
+    prevGrpNames.append(QString());
   }
 
   //
@@ -317,6 +245,7 @@ void ListTable::render(QString& result, QString& csv) const
 
   // ***DV***
   MyMoneyMoney startingBalance;
+  MyMoneyMoney balanceChange = MyMoneyMoney();
   for (QList<TableRow>::const_iterator it_row = m_rows.begin();
        it_row != m_rows.end();
        ++it_row) {
@@ -328,75 +257,17 @@ void ListTable::render(QString& result, QString& csv) const
     if ((*it_row).find("fraction") != (*it_row).end())
       fraction = (*it_row)["fraction"].toInt();
 
-    //
-    // Process Groups
-    //
-
-    // ***DV*** HACK to force a subtotal and header, since this render doesn't
-    // always detect a group change for different accounts with the same name
-    // (as occurs with the same stock purchased from different investment accts)
-    if (it_row != m_rows.begin())
-      if (((* it_row)["rank"] == "-2") && ((* it_row)["id"] == "A"))
-        (groupIteratorList.last()).force();
-
-    // There's a subtle bug here.  If an earlier group gets a new group,
-    // then we need to force all the downstream groups to get one too.
-
-    // Update the group iterators with the current row value
-    QList<GroupIterator>::iterator it_group = groupIteratorList.begin();
-    while (it_group != groupIteratorList.end()) {
-      (*it_group).update(*it_row);
-      ++it_group;
-    }
-
-    // Do subtotals backwards
-    if (m_config.isConvertCurrency()) {
-      it_group = groupIteratorList.end();
-      if (it_group != groupIteratorList.begin())
-        --it_group;
-      while (it_group != groupIteratorList.end()) {
-        if ((*it_group).isSubtotal()) {
-          if ((*it_group).depth() == 1)
-            grandtotal += (*it_group).subtotal();
-          grandtotal = grandtotal.convert(fraction);
-
-          QString subtotal_html = (*it_group).subtotal().formatMoney(fraction);
-          QString subtotal_csv = (*it_group).subtotal().formatMoney(fraction, false);
-
-          // ***DV*** HACK fix the side-effiect from .force() method above
-          QString oldName = QString((*it_group).oldName()).trimmed();
-
-          result +=
-            "<tr class=\"sectionfooter\">"
-            "<td class=\"left" + QString::number(((*it_group).depth() - 1)) + "\" "
-            "colspan=\"" +
-            QString::number(columns.count() - 1 - postcolumns.count()) + "\">" +
-            i18nc("Total balance", "Total") + ' ' + oldName + "</td>"
-            "<td>" + subtotal_html + "</td></tr>\n";
-
-          csv +=
-            "\"" + i18nc("Total balance", "Total") + " " + oldName + "\",\"" + subtotal_csv + "\"\n";
-        }
-
-        // going beyond begin() is not caught by the iterator
-        if (it_group == groupIteratorList.begin())
-          break;
-        --it_group;
-      }
-    }
-
-    // And headers forwards
-    it_group = groupIteratorList.begin();
-    while (it_group != groupIteratorList.end()) {
-      if ((*it_group).isNewHeader()) {
+    // detect whether any of groups changed and display new group header in that case
+    for (int i = 0; i < groups.count(); ++i) {
+      if (prevGrpNames.at(i) != (*it_row)[groups.at(i)]) {
         row_odd = true;
         result += "<tr class=\"sectionheader\">"
-                  "<td class=\"left" + QString::number(((*it_group).depth() - 1)) + "\" "
+                  "<td class=\"left" + QString::number(i) + "\" "
                   "colspan=\"" + QString::number(columns.count()) + "\">" +
-                  (*it_group).name() + "</td></tr>\n";
-        csv += "\"" + (*it_group).name() + "\"\n";
+                  (*it_row)[groups.at(i)] + "</td></tr>\n";
+        csv += "\"" + (*it_row)[groups.at(i)] + "\"\n";
+        prevGrpNames.replace(i, (*it_row)[groups.at(i)]);
       }
-      ++it_group;
     }
 
     //
@@ -405,24 +276,31 @@ void ListTable::render(QString& result, QString& csv) const
 
     // skip the opening and closing balance row,
     // if the balance column is not shown
-    if ((columns.contains("balance") == 0) && ((*it_row)["rank"] == "-2"))
+    // rank = 0 for opening balance, rank = 3 for closing balance
+    if ((columns.contains("balance") == 0) && ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3"))
       continue;
 
     bool need_label = true;
 
     QString tlink;  // link information to account and transaction
     // ***DV***
-    if ((* it_row)["rank"] == "0") {
+    if ((* it_row)["rank"] == "1") {
       row_odd = ! row_odd;
       tlink = QString("id=%1&tid=%2")
               .arg((* it_row)["accountid"], (* it_row)["id"]);
     }
 
-    if ((* it_row)["rank"] == "-2")
+    if ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3")
       result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
-    else if ((* it_row)["rank"] == "1")
+    else if ((* it_row)["rank"] == "2")
       result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
-    else
+    else if ((* it_row)["rank"] == "4") {
+      if (m_config.rowType() == MyMoneyReport::eTag || //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
+          !m_config.isConvertCurrency() && std::next(it_row) == m_rows.end())// grand total may be invalid if multiple currencies are used, so don't display it
+        continue;
+      else
+        result += QString("<tr class=\"sectionfooter\">");
+    } else
       result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
 
     QStringList::const_iterator it_column = columns.constBegin();
@@ -430,7 +308,7 @@ void ListTable::render(QString& result, QString& csv) const
       QString data = (*it_row)[*it_column];
 
       // ***DV***
-      if ((* it_row)["rank"] == "1") {
+      if ((* it_row)["rank"] == "2") {
         if (* it_column == "value")
           data = (* it_row)["split"];
         else if (*it_column == "postdate"
@@ -448,11 +326,13 @@ void ListTable::render(QString& result, QString& csv) const
       }
 
       // ***DV***
-      if ((* it_row)["rank"] == "-2") {
+      else if ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3") {
         if (*it_column == "balance") {
           data = (* it_row)["balance"];
-          if ((* it_row)["id"] == "A")          // opening balance?
+          if ((* it_row)["id"] == "A") {          // opening balance?
             startingBalance = MyMoneyMoney(data);
+            balanceChange = MyMoneyMoney();
+          }
         }
 
         if (need_label) {
@@ -472,13 +352,24 @@ void ListTable::render(QString& result, QString& csv) const
           }
         }
       }
-
       // The 'balance' column is calculated at render-time
       // but not printed on split lines
-      else if (*it_column == "balance" && (* it_row)["rank"] == "0") {
+      else if (*it_column == "balance" && (* it_row)["rank"] == "1") {
         // Take the balance off the deepest group iterator
-        data = (groupIteratorList.back().currenttotal() + startingBalance).toString();
+        balanceChange += MyMoneyMoney((*it_row).value("value", "0"));
+        data = (balanceChange + startingBalance).toString();
       }
+
+      // display total title but only if first column doesn't contain any data
+      else if (it_column == columns.constBegin() && data.isEmpty() && (*it_row)["rank"] == "4") {
+        result += "<td class=\"left" + (*it_row)["depth"] + "\">";
+              if (!(*it_row)["depth"].isEmpty())
+                result += i18nc("Total balance", "Total") + ' ' + prevGrpNames.at((*it_row)["depth"].toInt()) + "</td>";
+              else
+                result += i18n("Grand Total") + "</td>";
+              ++it_column;
+              continue;
+            }
 
       // Figure out how to render the value in this column, depending on
       // what its properties are.
@@ -488,8 +379,8 @@ void ListTable::render(QString& result, QString& csv) const
       // vector of a properties class.
       QString tlinkBegin, tlinkEnd;
       if (!tlink.isEmpty()) {
-        tlinkBegin = QString("<a href=ledger?%1>").arg(tlink);
-        tlinkEnd = QLatin1String("</a>");
+          tlinkBegin = QString("<a href=ledger?%1>").arg(tlink);
+          tlinkEnd = QLatin1String("</a>");
       }
 
       if (sharesColumns.contains(*it_column)) {
@@ -523,9 +414,14 @@ void ListTable::render(QString& result, QString& csv) const
           csv += "\"" + (*it_row)["currency"] + " " + MyMoneyMoney(data).formatMoney(fraction, false) + "\",";
         }
       } else if (percentColumns.contains(*it_column)) {
-        data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
-        result += QString("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd);
-        csv += data + "%,";
+        if (data.isEmpty()) {
+          result += QString("<td></td>");
+          csv += "\"\",";
+        } else {
+          data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
+          result += QString("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd);
+          csv += data + "%,";
+        }
       } else if (dateColumns.contains(*it_column)) {
         // do this before we possibly change data
         csv += "\"" + data + "\",";
@@ -535,9 +431,9 @@ void ListTable::render(QString& result, QString& csv) const
           QDate qd = QDate::fromString(data, Qt::ISODate);
           data = QLocale().toString(qd, QLocale::ShortFormat);
         }
-        result += QString("<td class=\"left\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
+        result += QString("<td class=\"left" + QString::number(prevGrpNames.count()- 1) + "\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
       } else {
-        result += QString("<td class=\"left\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
+        result += QString("<td class=\"left" + QString::number(prevGrpNames.count()- 1) + "\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
         csv += "\"" + data + "\",";
       }
       ++it_column;
@@ -547,59 +443,6 @@ void ListTable::render(QString& result, QString& csv) const
     result += "</tr>\n";
     csv = csv.left(csv.length() - 1);    // remove final comma
     csv += '\n';
-  }
-
-  //
-  // Final group totals
-  //
-
-  // Do subtotals backwards
-  if (m_config.isConvertCurrency()) {
-    int fraction = file->baseCurrency().smallestAccountFraction();
-    QList<GroupIterator>::iterator it_group = groupIteratorList.end();
-    if (it_group != groupIteratorList.begin())
-      --it_group;
-    while (it_group != groupIteratorList.end()) {
-      (*it_group).update(TableRow());
-
-      if ((*it_group).depth() == 1) {
-        grandtotal += (*it_group).subtotal();
-        grandtotal = grandtotal.convert(fraction);
-      }
-
-
-      QString subtotal_html = (*it_group).subtotal().formatMoney(fraction);
-      QString subtotal_csv = (*it_group).subtotal().formatMoney(fraction, false);
-
-      result += "<tr class=\"sectionfooter\">"
-                "<td class=\"left" + QString::number((*it_group).depth() - 1) + "\" "
-                "colspan=\"" + QString::number(columns.count() - 1 - postcolumns.count()) + "\">" +
-                i18nc("Total balance", "Total") + ' ' + (*it_group).oldName() + "</td>"
-                "<td>" + subtotal_html + "</td></tr>\n";
-      csv += "\"" + i18nc("Total balance", "Total") + " " + (*it_group).oldName() + "\",\"" + subtotal_csv + "\"\n";
-
-      // going beyond begin() is not caught by the iterator
-      if (it_group == groupIteratorList.begin())
-        break;
-      --it_group;
-    }
-
-    //
-    // Grand total
-    //
-
-    QString grandtotal_html = grandtotal.formatMoney(fraction);
-    QString grandtotal_csv = grandtotal.formatMoney(fraction, false);
-
-    //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
-    if (m_config.rowType() != MyMoneyReport::eTag) {
-      result += "<tr class=\"sectionfooter\">"
-                "<td class=\"left0\" "
-                "colspan=\"" + QString::number(columns.count() - 1 - postcolumns.count()) + "\">" +
-                i18n("Grand Total") + "</td>"
-                "<td>" + grandtotal_html + "</td></tr>\n";
-      csv += "\"" + i18n("Grand Total") + "\",\"" + grandtotal_csv + "\"\n";
-    }
   }
   result += "</table>\n";
 }
