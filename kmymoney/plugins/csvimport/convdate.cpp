@@ -162,7 +162,7 @@ QDate ConvertDate::convertDate(const QString& txt)
   //                                               check day
   if (aDay.length() == 1)
     aDay = '0' + aDay;//                           add a leading '0'
-  if ((aDay < "0") || (aDay > "31")      //              check day value
+  if ((aDay.toInt() < 0) || (aDay.toInt() > 31)      //              check day value
       || (aDay.length()  < 1) || (aDay.length()  > 2)) {
     return QDate();//                              not a valid day
   }
@@ -171,18 +171,19 @@ QDate ConvertDate::convertDate(const QString& txt)
     aMonth = '0' + aMonth;
     aFormat = "MM";
   } else if (aMonth.length() == 2) {      //             assume numeric
-    bool datefound = ((aMonth > "0") && (aMonth < "13"));
+    bool datefound = ((aMonth.toUInt() > 0) && (aMonth.toUInt() < 13));
     if (!datefound) {
       return QDate();//                            not a valid day
     }
     aFormat = "MM";//                              aMonth is numeric
-  }
 
-  else//                                           aMonth NOT numeric
+  } else {//                                           aMonth NOT numeric
     if (aMonth.length() == 3)
       aFormat = "MMM";
     else
       aFormat = "MMMM";
+  }
+
   QString dateFormat;
   switch (m_dateFormatIndex) {
     case(0) :   //                                 %y %m %d
