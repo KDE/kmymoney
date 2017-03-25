@@ -77,7 +77,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
       }
       // if the shares are still 0, we need to change that
       if (toValue.isZero()) {
-        const MyMoneyPrice &price = file->price(fromCurrency.id(), toCurrency.id());
+        const MyMoneyPrice &price = file->price(fromCurrency.id(), toCurrency.id(), t.postDate());
         // if the price is valid calculate the shares. If it is invalid
         // assume a conversion rate of 1.0
         if (price.isValid()) {
