@@ -110,20 +110,20 @@ void QueryTableTest::testQueryBasics()
 
     QList<ListTable::TableRow> rows = qtbl_1.rows();
 
-    QVERIFY(rows.count() == 12);
+    QVERIFY(rows.count() == 19);
     QVERIFY(rows[0]["categorytype"] == "Expense");
     QVERIFY(rows[0]["category"] == "Parent");
     QVERIFY(rows[0]["postdate"] == "2004-02-01");
-    QVERIFY(rows[11]["categorytype"] == "Expense");
-    QVERIFY(rows[11]["category"] == "Solo");
-    QVERIFY(rows[11]["postdate"] == "2005-01-01");
+    QVERIFY(rows[14]["categorytype"] == "Expense");
+    QVERIFY(rows[14]["category"] == "Solo");
+    QVERIFY(rows[14]["postdate"] == "2005-01-01");
 
-    QString html = qtbl_1.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Parent: Child") == -(moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[6]["value"]) == -(moParent1 + moParent2) * 3);
+    QVERIFY(MyMoneyMoney(rows[10]["value"]) == -(moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[16]["value"]) == -(moSolo) * 3);
+    QVERIFY(MyMoneyMoney(rows[17]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[18]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+
     filter.setRowType(MyMoneyReport::eTopCategory);
     cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
     filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
@@ -135,22 +135,21 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_2.rows();
 
-    QVERIFY(rows.count() == 12);
+    QVERIFY(rows.count() == 16);
     QVERIFY(rows[0]["categorytype"] == "Expense");
     QVERIFY(rows[0]["topcategory"] == "Parent");
     QVERIFY(rows[0]["postdate"] == "2004-02-01");
-    QVERIFY(rows[8]["categorytype"] == "Expense");
-    QVERIFY(rows[8]["topcategory"] == "Parent");
-    QVERIFY(rows[8]["postdate"] == "2005-09-01");
-    QVERIFY(rows[11]["categorytype"] == "Expense");
-    QVERIFY(rows[11]["topcategory"] == "Solo");
-    QVERIFY(rows[11]["postdate"] == "2005-01-01");
+    QVERIFY(rows[7]["categorytype"] == "Expense");
+    QVERIFY(rows[7]["topcategory"] == "Parent");
+    QVERIFY(rows[7]["postdate"] == "2005-09-01");
+    QVERIFY(rows[12]["categorytype"] == "Expense");
+    QVERIFY(rows[12]["topcategory"] == "Solo");
+    QVERIFY(rows[12]["postdate"] == "2005-01-01");
 
-    html = qtbl_2.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2 + moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[9]["value"]) == -(moParent1 + moParent2 + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[13]["value"]) == -(moSolo) * 3);
+    QVERIFY(MyMoneyMoney(rows[14]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[15]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eAccount);
     filter.setName("Transactions by Account");
@@ -164,7 +163,7 @@ void QueryTableTest::testQueryBasics()
     rows = qtbl_3.rows();
 
 #if 1
-    QVERIFY(rows.count() == 16);
+    QVERIFY(rows.count() == 19);
     QVERIFY(rows[1]["account"] == "Checking Account");
     QVERIFY(rows[1]["category"] == "Solo");
     QVERIFY(rows[1]["postdate"] == "2004-01-01");
@@ -181,10 +180,9 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(rows[11]["postdate"] == "2005-09-01");
 #endif
 
-    html = qtbl_3.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance for checking account", "Total") + " Checking Account") == -(moSolo) * 3 + moCheckingOpen);
-    QVERIFY(searchHTML(html, i18nc("Total balance for credit card", "Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[5]["value"]) == -(moSolo) * 3 + moCheckingOpen);
+    QVERIFY(MyMoneyMoney(rows[17]["value"]) == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[18]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::ePayee);
     filter.setName("Transactions by Payee");
@@ -197,20 +195,19 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_4.rows();
 
-    QVERIFY(rows.count() == 12);
+    QVERIFY(rows.count() == 14);
     QVERIFY(rows[0]["payee"] == "Test Payee");
     QVERIFY(rows[0]["category"] == "Solo");
     QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[8]["payee"] == "Test Payee");
-    QVERIFY(rows[8]["category"] == "Parent: Child");
-    QVERIFY(rows[8]["postdate"] == "2004-11-07");
-    QVERIFY(rows[11]["payee"] == "Test Payee");
-    QVERIFY(rows[11]["category"] == "Parent");
-    QVERIFY(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows[7]["payee"] == "Test Payee");
+    QVERIFY(rows[7]["category"] == "Parent: Child");
+    QVERIFY(rows[7]["postdate"] == "2004-11-07");
+    QVERIFY(rows[10]["payee"] == "Test Payee");
+    QVERIFY(rows[10]["category"] == "Parent");
+    QVERIFY(rows[10]["postdate"] == "2005-09-01");
 
-    html = qtbl_4.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[12]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[13]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eMonth);
     filter.setName("Transactions by Month");
@@ -223,22 +220,21 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_5.rows();
 
-    QVERIFY(rows.count() == 12);
+    QVERIFY(rows.count() == 23);
     QVERIFY(rows[0]["payee"] == "Test Payee");
     QVERIFY(rows[0]["category"] == "Solo");
     QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[8]["payee"] == "Test Payee");
-    QVERIFY(rows[8]["category"] == "Parent: Child");
-    QVERIFY(rows[8]["postdate"] == "2004-11-07");
-    QVERIFY(rows[11]["payee"] == "Test Payee");
-    QVERIFY(rows[11]["category"] == "Parent");
-    QVERIFY(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows[12]["payee"] == "Test Payee");
+    QVERIFY(rows[12]["category"] == "Parent: Child");
+    QVERIFY(rows[12]["postdate"] == "2004-11-07");
+    QVERIFY(rows[20]["payee"] == "Test Payee");
+    QVERIFY(rows[20]["category"] == "Parent");
+    QVERIFY(rows[20]["postdate"] == "2005-09-01");
 
-    html = qtbl_5.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-01-01") == -moSolo);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-11-01") == -(moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-05-01") == -moParent1 + moCheckingOpen);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == -moSolo);
+    QVERIFY(MyMoneyMoney(rows[15]["value"]) == -(moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[9]["value"]) == -moParent1 + moCheckingOpen);
+    QVERIFY(MyMoneyMoney(rows[22]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eWeek);
     filter.setName("Transactions by Week");
@@ -251,19 +247,18 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_6.rows();
 
-    QVERIFY(rows.count() == 12);
+    QVERIFY(rows.count() == 23);
     QVERIFY(rows[0]["payee"] == "Test Payee");
     QVERIFY(rows[0]["category"] == "Solo");
     QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[11]["payee"] == "Test Payee");
-    QVERIFY(rows[11]["category"] == "Parent");
-    QVERIFY(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows[20]["payee"] == "Test Payee");
+    QVERIFY(rows[20]["category"] == "Parent");
+    QVERIFY(rows[20]["postdate"] == "2005-09-01");
 
-    html = qtbl_6.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2003-12-29") == -moSolo);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2004-11-01") == -(moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2005-08-29") == -moParent2);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == -moSolo);
+    QVERIFY(MyMoneyMoney(rows[15]["value"]) == -(moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[21]["value"]) == -moParent2);
+    QVERIFY(MyMoneyMoney(rows[22]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
   }
@@ -338,17 +333,16 @@ void QueryTableTest::testAccountQuery()
 
     QList<ListTable::TableRow> rows = qtbl_1.rows();
 
-    QVERIFY(rows.count() == 2);
+    QVERIFY(rows.count() == 6);
     QVERIFY(rows[0]["account"] == "Checking Account");
     QVERIFY(MyMoneyMoney(rows[0]["value"]) == moCheckingOpen);
     QVERIFY(rows[0]["equitytype"].isEmpty());
-    QVERIFY(rows[1]["account"] == "Credit Card");
+    QVERIFY(rows[2]["account"] == "Credit Card");
     QVERIFY(MyMoneyMoney(rows[1]["value"]) == moCreditOpen);
-    QVERIFY(rows[1]["equitytype"].isEmpty());
+    QVERIFY(rows[2]["equitytype"].isEmpty());
 
-    QString html = qtbl_1.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " None") == moCheckingOpen + moCreditOpen);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[4]["value"]) == moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[5]["value"]) == moCheckingOpen + moCreditOpen);
 
     //
     // Adding in transactions
@@ -376,14 +370,13 @@ void QueryTableTest::testAccountQuery()
 
     rows = qtbl_2.rows();
 
-    QVERIFY(rows.count() == 2);
+    QVERIFY(rows.count() == 6);
     QVERIFY(rows[0]["account"] == "Checking Account");
     QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
-    QVERIFY(rows[1]["account"] == "Credit Card");
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
+    QVERIFY(rows[2]["account"] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[2]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
-    html = qtbl_2.renderBody();
-    QVERIFY(searchHTML(html, i18n("Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[5]["value"]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
 
     //
     // Account TYPES
@@ -396,16 +389,15 @@ void QueryTableTest::testAccountQuery()
 
     rows = qtbl_3.rows();
 
-    QVERIFY(rows.count() == 2);
+    QVERIFY(rows.count() == 5);
     QVERIFY(rows[0]["account"] == "Checking Account");
-    QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
-    QVERIFY(rows[1]["account"] == "Credit Card");
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
+    QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo * 3));
+    QVERIFY(rows[2]["account"] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[2]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
-    html = qtbl_3.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Checking")) == moCheckingOpen - moSolo*3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Credit Card")) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == moCheckingOpen - moSolo * 3);
+    QVERIFY(MyMoneyMoney(rows[3]["value"]) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[4]["value"]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
   }
@@ -472,15 +464,15 @@ void QueryTableTest::testInvestment()
 
     QList<ListTable::TableRow> rows = invtran.rows();
 
-    QVERIFY(rows.count() == 28);
+    QVERIFY(rows.count() == 32);
     QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(-100000.00));
     QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(-110000.00));
     QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(24000.00));
     QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(20000.00));
     QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(5000.00));
     QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(4000.00));
-    QVERIFY(MyMoneyMoney(rows[18]["value"]) == MyMoneyMoney(-50100.00));
-    QVERIFY(MyMoneyMoney(rows[21]["value"]) == MyMoneyMoney(-45100.00));
+    QVERIFY(MyMoneyMoney(rows[19]["value"]) == MyMoneyMoney(-50100.00));
+    QVERIFY(MyMoneyMoney(rows[22]["value"]) == MyMoneyMoney(-45100.00));
     // need to fix these... fundamentally different from the original test
     //QVERIFY(MyMoneyMoney(invtran.m_rows[8]["value"])==MyMoneyMoney( -1000.00));
     //QVERIFY(MyMoneyMoney(invtran.m_rows[11]["value"])==MyMoneyMoney( -1200.00));
@@ -491,24 +483,24 @@ void QueryTableTest::testInvestment()
     QVERIFY(MyMoneyMoney(rows[5]["price"]) == MyMoneyMoney(100.00));
     QVERIFY(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney());
     QVERIFY(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney());
-    QVERIFY(MyMoneyMoney(rows[18]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[21]["price"]) == MyMoneyMoney(90.00));
+    QVERIFY(MyMoneyMoney(rows[19]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[22]["price"]) == MyMoneyMoney(90.00));
 
     QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(1000.00));
     QVERIFY(MyMoneyMoney(rows[4]["shares"]) == MyMoneyMoney(-200.00));
     QVERIFY(MyMoneyMoney(rows[6]["shares"]) == MyMoneyMoney(50.00));
     QVERIFY(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
     QVERIFY(MyMoneyMoney(rows[11]["shares"]) == MyMoneyMoney(0.00));
-    QVERIFY(MyMoneyMoney(rows[18]["shares"]) == MyMoneyMoney(500.00));
-    QVERIFY(MyMoneyMoney(rows[21]["shares"]) == MyMoneyMoney(500.00));
+    QVERIFY(MyMoneyMoney(rows[19]["shares"]) == MyMoneyMoney(500.00));
+    QVERIFY(MyMoneyMoney(rows[22]["shares"]) == MyMoneyMoney(500.00));
 
     QVERIFY(rows[1]["action"] == "Buy");
     QVERIFY(rows[3]["action"] == "Sell");
     QVERIFY(rows[5]["action"] == "Reinvest");
     QVERIFY(rows[7]["action"] == "Dividend");
     QVERIFY(rows[13]["action"] == "Yield");
-    QVERIFY(rows[18]["action"] == "Buy");
-    QVERIFY(rows[21]["action"] == "Buy");
+    QVERIFY(rows[19]["action"] == "Buy");
+    QVERIFY(rows[22]["action"] == "Buy");
 #else
     QVERIFY(rows.count() == 9);
     QVERIFY(MyMoneyMoney(rows[0]["value"]) == MyMoneyMoney(100000.00));
@@ -540,12 +532,11 @@ void QueryTableTest::testInvestment()
     QVERIFY(rows[8]["action"] == "Yield");
 #endif
 
-    QString html = invtran.renderBody();
 #if 1
     // i think this is the correct amount. different treatment of dividend and yield
-    QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(-153700.00));
-    QVERIFY(searchHTML(html, i18n("Total Stock 4")) == MyMoneyMoney(24600.00));
-    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(-129100.00));
+    QVERIFY(MyMoneyMoney(rows[17]["value"]) == MyMoneyMoney(-153700.00));
+    QVERIFY(MyMoneyMoney(rows[29]["value"]) == MyMoneyMoney(24600.00));
+    QVERIFY(MyMoneyMoney(rows[31]["value"]) == MyMoneyMoney(-129100.00));
 #else
     QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(171700.00));
     QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(171700.00));
@@ -572,7 +563,7 @@ void QueryTableTest::testInvestment()
 
     rows = invhold.rows();
 
-    QVERIFY(rows.count() == 3);
+    QVERIFY(rows.count() == 5);
     QVERIFY(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
     QVERIFY(MyMoneyMoney(rows[0]["returninvestment"]) == MyMoneyMoney("87/2500"));
     QVERIFY(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(-210000.00));
@@ -596,8 +587,7 @@ void QueryTableTest::testInvestment()
     QVERIFY(MyMoneyMoney(rows[2]["price"]) == MyMoneyMoney(110.00));
     QVERIFY(MyMoneyMoney(rows[2]["endingbal"]) == MyMoneyMoney(0.00)); // this should stay zero to check if investment performance is calculated at zero ending balance
 
-    html = invhold.renderBody();
-    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(280000.00));
+    QVERIFY(MyMoneyMoney(rows[4]["endingbal"]) == MyMoneyMoney(280000.00));
 
 #if 0
     // Dump file & reports
@@ -653,14 +643,14 @@ void QueryTableTest::testBalanceColumn()
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
-    QVERIFY(rows.count() == 16);
+    QVERIFY(rows.count() == 19);
 
     //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
     QString openingDate = QLocale().toString(QDate(2004, 1, 1), QLocale::ShortFormat);
     QString closingDate = QLocale().toString(QDate(2005, 9, 1), QLocale::ShortFormat);
-    QVERIFY(html.indexOf(openingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance")) > 0);
-    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
+    QVERIFY(html.indexOf(openingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance")) > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
 
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
@@ -717,38 +707,38 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
-    QVERIFY(rows.count() == 19);
+    QVERIFY(rows.count() == 23);
 
     //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
     QString openingDateString = QLocale().toString(openingDate, QLocale::ShortFormat);
     QString intermediateDateString = QLocale().toString(intermediateDate, QLocale::ShortFormat);
     QString closingDateString = QLocale().toString(closingDate, QLocale::ShortFormat);
     // check the opening and closing balances
-    QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;0.00</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;304.00</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-300.00</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>JPY&nbsp;-400.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;0.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;304.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-300.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>JPY&nbsp;-400.00</td></tr>") > 0);
 
     // after a transfer of 100 JPY the balance should be 1.00 - price is 0.010 (precision of 2)
-    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000001>" + openingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;1.00</td><td>&nbsp;1.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000001>" + openingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;1.00</td><td>&nbsp;1.00</td></tr>") > 0);
 
     // after a transfer of 100 the balance should be 101.00
-    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000002>" + openingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;101.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000002>" + openingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;101.00</td></tr>") > 0);
 
     // after a transfer of 100 JPY the balance should be 102.00 - price is 0.011 (precision of 2)
-    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000003>" + intermediateDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;1.00</td><td>&nbsp;102.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000003>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;1.00</td><td>&nbsp;102.00</td></tr>") > 0);
 
     // after a transfer of 100 the balance should be 202.00
-    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000004>" + intermediateDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;202.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000004>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;202.00</td></tr>") > 0);
 
     // after a transfer of 100 JPY the balance should be 204.00 - price is 0.024 (precision of 2)
-    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000005>" + closingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;2.00</td><td>&nbsp;204.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000005>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;2.00</td><td>&nbsp;204.00</td></tr>") > 0);
 
     // after a transfer of 100 the balance should be 304.00
-    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000006>" + closingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;304.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000006>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;304.00</td></tr>") > 0);
 
     // a 100.00 JPY withdrawal should be displayed as such even if the expense account uses another currency
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Solo</td><td class=\"value\">JPY&nbsp;-100.00</td><td>JPY&nbsp;-300.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">JPY&nbsp;-100.00</td><td>JPY&nbsp;-400.00</td></tr>") > 0);
 
     // now run the same report again but this time convert all values to the base currency and make sure the values are correct
     filter.setConvertCurrency(true);
@@ -761,26 +751,26 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
     rows = qtbl_4.rows();
 
-    QVERIFY(rows.count() == 19);
+    QVERIFY(rows.count() == 23);
 
     // check the opening and closing balances
-    QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;0.00</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;304.00</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-300.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;0.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;304.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-300.00</td></tr>") > 0);
     // although the balance should be -5.00 it's -8.00 because the foreign currency balance is converted using the closing date price (0.024)
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-8.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-8.00</td></tr>") > 0);
 
     // a 100.00 JPY transfer should be displayed as -1.00 when converted to the base currency using the opening date price
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000001>" + openingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-1.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000001>" + openingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-1.00</td></tr>") > 0);
 
     // a 100.00 JPY transfer should be displayed as -1.00 when converted to the base currency using the intermediate date price
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000003>" + intermediateDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-2.00</td></tr>") > 0);
-
-    // a 100.00 JPY withdrawal should be displayed as -1.00 when converted to the base currency using the intermediate date price
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Solo</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-3.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000003>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-2.00</td></tr>") > 0);
 
     // a 100.00 JPY transfer should be displayed as -2.00 when converted to the base currency using the closing date price (notice the balance is -5.00)
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000005>" + closingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-2.00</td><td>&nbsp;-5.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000005>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-2.00</td><td>&nbsp;-4.00</td></tr>") > 0);
+
+    // a 100.00 JPY withdrawal should be displayed as -1.00 when converted to the base currency using the intermediate date price
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-5.00</td></tr>") > 0);
 
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
@@ -810,7 +800,7 @@ void QueryTableTest::testTaxReport()
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
     QString html = qtbl_3.renderBody();
-    QVERIFY(rows.count() == 1);
+    QVERIFY(rows.count() == 5);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
   }

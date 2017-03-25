@@ -428,29 +428,26 @@ void QueryTable::constructTotalRows()
   }
 
   QList<TableRow> stashedTotalRows;
-  QList<TableRow>::iterator current_row, next_row;
-  for (current_row  = m_rows.begin();
-       current_row != m_rows.end();) {
-
-    next_row = std::next(current_row);
+  int iCurrent, iNext;
+  for (iCurrent = 0; iCurrent < m_rows.count();) {
+    iNext = iCurrent + 1;
 
     // total rows are useless at summing so remove whole block of them at once
-    while (next_row != m_rows.end() && (*next_row)["rank"] == "4") {
-      stashedTotalRows.append((*next_row)); // ...but stash them just in case
-      next_row = m_rows.erase(next_row);
+    while (iNext != m_rows.count() && m_rows.at(iNext)["rank"] == "4") {
+      stashedTotalRows.append(m_rows.takeAt(iNext)); // ...but stash them just in case
     }
 
-    bool lastRow = (next_row == m_rows.end());
+    bool lastRow = (iNext == m_rows.count());
 
     // sum all subtotal values for lowest group
     foreach (auto subtotal, subtotals) {
-      totalGroups.last()[subtotal] += MyMoneyMoney((*current_row)[subtotal]);
+      totalGroups.last()[subtotal] += MyMoneyMoney(m_rows.at(iCurrent)[subtotal]);
     }
 
     // iterate over groups from the lowest to the highest to find group change
     for (int i = groups.count() - 1; i >= 0 ; --i) {
       // if any of groups from next row changes (or next row is the last row), then it's time to put totals row
-      if (lastRow || (*current_row)[groups.at(i)] != (*next_row)[groups.at(i)]) {
+      if (lastRow || m_rows.at(iCurrent)[groups.at(i)] != m_rows.at(iNext)[groups.at(i)]) {
         TableRow totalsRow;
         // custom total values calculations
         foreach (auto subtotal, subtotals) {
@@ -482,18 +479,13 @@ void QueryTable::constructTotalRows()
         }
 
         for (int j = 0; j < groups.count(); ++j) {
-          totalsRow[groups.at(j)] = (*current_row)[groups.at(j)];   // ...and identification
+          totalsRow[groups.at(j)] = m_rows.at(iCurrent)[groups.at(j)];   // ...and identification
         }
 
         totalsRow["rank"] = "4";
         totalsRow["depth"] = QString::number(i);
 
-        if (lastRow)
-          m_rows.append(totalsRow);
-        else {
-          next_row = m_rows.insert(next_row, totalsRow);    // current_row and next_row can diverge here by more than one
-          ++next_row;
-        }
+        m_rows.insert(iNext++, totalsRow); // iCurrent and iNext can diverge here by more than one
       }
     }
 
@@ -531,7 +523,7 @@ void QueryTable::constructTotalRows()
       m_rows.append(totalsRow);
       break;                                      // no use to loop further
     }
-    current_row = next_row;                       // current_row makes here a leap forward by at least one
+    iCurrent = iNext;                             // iCurrent makes here a leap forward by at least one
   }
 }
 
