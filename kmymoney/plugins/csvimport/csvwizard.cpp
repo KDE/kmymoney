@@ -1342,7 +1342,7 @@ void RowsPage::cleanupPage()
 
 int RowsPage::nextId() const
 {
-  int ret;
+  int ret = CSVWizard::PageBanking;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     ret = CSVWizard::PageBanking;
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
@@ -1351,7 +1351,6 @@ int RowsPage::nextId() const
            m_wizDlg->m_profileType == CSVWizard::ProfileCurrencyPrices)
     ret = CSVWizard::PagePrices;
   return ret;
-
 }
 
 FormatsPage::FormatsPage(QDialog *parent) :
@@ -1520,7 +1519,7 @@ void FormatsPage::dateFormatChanged(int index)
     m_wizDlg->m_date = m_wizDlg->m_dateFormats[m_wizDlg->m_dateFormatIndex];
   }
 
-  int col;
+  int col = 0;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     col = m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnDate);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)

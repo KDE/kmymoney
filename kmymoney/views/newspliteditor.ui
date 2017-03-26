@@ -221,7 +221,6 @@
   <zorder>costCenterCombo</zorder>
   <zorder>memoLabel</zorder>
   <zorder>comboBox</zorder>
-  <zorder>verticalSpacer</zorder>
  </widget>
  <customwidgets>
   <customwidget>

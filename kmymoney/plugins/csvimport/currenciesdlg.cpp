@@ -75,6 +75,7 @@ int CurrenciesDlg::dontAsk() {
 
 void CurrenciesDlg::slotIndexChanged(int index)
 {
+  Q_UNUSED(index);
   if (ui->cbFrom->currentIndex() != ui->cbTo->currentIndex() &&
       ui->cbFrom->currentIndex() != -1 && ui->cbTo->currentIndex() != -1)
     m_buttonOK->setEnabled(true);

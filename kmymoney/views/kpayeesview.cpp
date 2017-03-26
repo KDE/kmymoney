@@ -80,11 +80,11 @@ KPayeeListItem::~KPayeeListItem()
 
 KPayeesView::KPayeesView(QWidget *parent) :
     QWidget(parent),
+    m_contact(new MyMoneyContact(this)),
     m_needReload(false),
     m_inSelection(false),
     m_allowEditing(true),
-    m_payeeFilterType(0),
-    m_contact(new MyMoneyContact(this))
+    m_payeeFilterType(0)
 {
   setupUi(this);
 

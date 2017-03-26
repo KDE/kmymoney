@@ -116,8 +116,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   // an account in a COLUMN, while line/bar prefer it in a ROW.
   setAccountSeries(true);
 
-  CartesianAxis *xAxis;
-  KBalanceAxis *yAxis;
+  CartesianAxis *xAxis = 0;
+  KBalanceAxis *yAxis = 0;
   switch (config.chartType()) {
     case MyMoneyReport::eChartNone:
     case MyMoneyReport::eChartEnd:
