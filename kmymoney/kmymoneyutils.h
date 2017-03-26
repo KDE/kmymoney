@@ -181,6 +181,28 @@ public:
   static const QString securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType);
 
   /**
+    * This method is used to convert a rounding method from its
+    * string form to the internal used numeric value.
+    *
+    * @param txt reference to a QString containing the string to convert
+    * @return RoundingMethod containing the internal used numeric value. For possible
+    *         values see AlkValue::RoundingMethod
+    */
+  static AlkValue::RoundingMethod stringToRoundingMethod(const QString& txt);
+
+  /**
+    * This method is used to convert the internal representation of
+    * an rounding method into a human readable format
+    *
+    * @param roundingMethod enumerated representation of the rounding method.
+    *                     For possible values, see AlkValue::RoundingMethod
+    * @return QString representing the human readable form translated according to the language cataglogue
+    *
+    * @sa MyMoneySecurity::roundingMethodToString()
+    */
+  static const QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
+
+  /**
     * This method is used to convert the occurrence type from its
     * internal representation into a human readable format.
     *

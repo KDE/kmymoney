@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -82,6 +83,7 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
   setName(QStringEmpty(node.attribute("name")));
   setTradingSymbol(QStringEmpty(node.attribute("symbol")));
   setSecurityType(static_cast<eSECURITYTYPE>(node.attribute("type").toInt()));
+  setRoundingMethod(static_cast<AlkValue::RoundingMethod>(node.attribute("rounding-method").toInt()));
   setSmallestAccountFraction(node.attribute("saf").toInt());
 
   if (isCurrency()) {
@@ -103,6 +105,7 @@ bool MyMoneySecurity::operator == (const MyMoneySecurity& r) const
          && (m_name == r.m_name)
          && (m_tradingSymbol == r.m_tradingSymbol)
          && (m_tradingMarket == r.m_tradingMarket)
+         && (m_roundingMethod == r.m_roundingMethod)
          && (m_tradingSymbol == r.m_tradingSymbol)
          && (m_tradingCurrency == r.m_tradingCurrency)
          && (m_securityType == r.m_securityType)
@@ -139,6 +142,7 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
   el.setAttribute("name", m_name);
   el.setAttribute("symbol", m_tradingSymbol);
   el.setAttribute("type", static_cast<int>(m_securityType));
+  el.setAttribute("rounding-method", static_cast<int>(m_roundingMethod));
   el.setAttribute("saf", m_smallestAccountFraction);
   if (isCurrency()) {
     el.setAttribute("ppu", m_partsPerUnit);
@@ -181,3 +185,38 @@ QString MyMoneySecurity::securityTypeToString(const eSECURITYTYPE securityType)
   return returnString;
 }
 
+QString MyMoneySecurity::roundingMethodToString(const AlkValue::RoundingMethod roundingMethod)
+{
+  QString returnString;
+
+  switch (roundingMethod) {
+    case AlkValue::RoundNever:
+      returnString = I18N_NOOP("Never");
+      break;
+    case AlkValue::RoundFloor:
+      returnString = I18N_NOOP("Floor");
+      break;
+    case AlkValue::RoundCeil:
+      returnString = I18N_NOOP("Ceil");
+      break;
+    case AlkValue::RoundTruncate:
+      returnString = I18N_NOOP("Truncate");
+      break;
+    case AlkValue::RoundPromote:
+      returnString = I18N_NOOP("Promote");
+      break;
+    case AlkValue::RoundHalfDown:
+      returnString = I18N_NOOP("HalfDown");
+      break;
+    case AlkValue::RoundHalfUp:
+      returnString = I18N_NOOP("HalfUp");
+      break;
+    case AlkValue::RoundRound:
+      returnString = I18N_NOOP("Round");
+      break;
+    default:
+      returnString = I18N_NOOP("Unknown");
+  }
+
+  return returnString;
+}

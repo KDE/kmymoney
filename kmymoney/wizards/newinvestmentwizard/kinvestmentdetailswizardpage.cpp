@@ -3,6 +3,7 @@
                             -------------------
    begin                : Sun Jun 27 2010
    copyright            : (C) 2010 by Fernando Vilas
+                          (C) 2017 by Łukasz Wojniłowicz
    email                : kmymoney-devel@kde.org
 ***************************************************************************/
 
@@ -65,6 +66,12 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
 
   registerField("tradingMarket", m_tradingMarket, "currentText", SIGNAL(currentIndexChanged(QString)));
 
+  m_roundingMethod->addItem(i18nc("Rounding method", "Round"), AlkValue::RoundRound);
+  m_roundingMethod->addItem(i18nc("Rounding method", "Ceil"), AlkValue::RoundCeil);
+  m_roundingMethod->addItem(i18nc("Rounding method", "Floor"), AlkValue::RoundFloor);
+  m_roundingMethod->addItem(i18nc("Rounding method", "Truncate"), AlkValue::RoundTruncate);
+  registerField("roundingMethod", m_roundingMethod, "currentData", SIGNAL(currentIndexChanged(int)));
+
   registerField("fraction", m_fraction, "value", SIGNAL(textChanged()));
   connect(m_fraction, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
@@ -78,6 +85,10 @@ void KInvestmentDetailsWizardPage::init2(const MyMoneySecurity& security)
   MyMoneySecurity tradingCurrency = MyMoneyFile::instance()->currency(security.tradingCurrency());
   m_investmentSymbol->setText(security.tradingSymbol());
   m_tradingMarket->setCurrentIndex(m_tradingMarket->findText(security.tradingMarket(), Qt::MatchExactly));
+  if (security.roundingMethod() == AlkValue::RoundNever)
+    m_roundingMethod->setCurrentIndex(0);
+  else
+    m_roundingMethod->setCurrentIndex(m_roundingMethod->findData(security.roundingMethod()));
   m_fraction->setValue(MyMoneyMoney(security.smallestAccountFraction(), 1));
   m_tradingCurrencyEdit->setSecurity(tradingCurrency);
 

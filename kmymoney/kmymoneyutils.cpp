@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -124,6 +125,36 @@ MyMoneySecurity::eSECURITYTYPE KMyMoneyUtils::stringToSecurity(const QString& tx
 const QString KMyMoneyUtils::securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType)
 {
   return i18n(MyMoneySecurity::securityTypeToString(securityType).toLatin1());
+}
+
+AlkValue::RoundingMethod KMyMoneyUtils::stringToRoundingMethod(const QString& txt)
+{
+  AlkValue::RoundingMethod rc = AlkValue::RoundNever;
+  QString tmp = txt.toLower();
+
+  if (tmp == i18n("Never").toLower())
+    rc = AlkValue::RoundNever;
+  else if (tmp == i18n("Floor").toLower())
+    rc = AlkValue::RoundFloor;
+  else if (tmp == i18n("Ceil").toLower())
+    rc = AlkValue::RoundCeil;
+  else if (tmp == i18n("Truncate").toLower())
+    rc = AlkValue::RoundTruncate;
+  else if (tmp == i18n("Promote").toLower())
+    rc = AlkValue::RoundPromote;
+  else if (tmp == i18n("HalfDown").toLower())
+    rc = AlkValue::RoundHalfDown;
+  else if (tmp == i18n("HalfUp").toLower())
+    rc = AlkValue::RoundHalfUp;
+  else if (tmp == i18n("Round").toLower())
+    rc = AlkValue::RoundRound;
+
+  return rc;
+}
+
+const QString KMyMoneyUtils::roundingMethodToString(const AlkValue::RoundingMethod roundingMethod)
+{
+  return i18n(MyMoneySecurity::roundingMethodToString(roundingMethod).toLatin1());
 }
 
 const QString KMyMoneyUtils::occurrenceToString(const MyMoneySchedule::occurrenceE occurrence)

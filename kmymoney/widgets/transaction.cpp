@@ -2,8 +2,8 @@
                           transaction.cpp  -  description
                              -------------------
     begin                : Tue Jun 13 2006
-    copyright            : (C) 2000-2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+    copyright            : (C) 2000-2006 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -1656,7 +1656,8 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
         case ValueColumn2:
           align |= Qt::AlignRight;
           if ((fieldEditable = haveAmount()) == true) {
-            txt = MyMoneyUtils::formatMoney(m_assetAccountSplit.value().abs(), m_currency);
+            txt = m_assetAccountSplit.value().abs()
+                .formatMoney(m_currency.tradingSymbol(), MyMoneyMoney::denomToPrec(m_currency.smallestAccountFraction()));
           }
       }
       break;

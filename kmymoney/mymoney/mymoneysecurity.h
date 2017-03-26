@@ -108,6 +108,13 @@ public:
     return m_securityType == SECURITY_CURRENCY;
   };
 
+  AlkValue::RoundingMethod roundingMethod() const  {
+    return m_roundingMethod;
+  }
+  void           setRoundingMethod(const AlkValue::RoundingMethod& rnd) {
+    m_roundingMethod = rnd;
+  }
+
   const QString& tradingMarket() const  {
     return m_tradingMarket;
   }
@@ -167,16 +174,28 @@ public:
    */
   static QString securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType);
 
+  /**
+   * This method is used to convert the internal representation of
+   * an rounding method into a human readable format
+   *
+   * @param roundingMethod enumerated representation of the rouding method.
+   *                     For possible values, see AlkValue::RoundingMethod
+   *
+   * @return QString representing the human readable form
+   */
+  static QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
+
 
 protected:
-  QString               m_name;
-  QString               m_tradingSymbol;
-  QString               m_tradingMarket;
-  QString               m_tradingCurrency;
-  eSECURITYTYPE         m_securityType;
-  int                   m_smallestAccountFraction;
-  int                   m_smallestCashFraction;
-  int                   m_partsPerUnit;
+  QString                   m_name;
+  QString                   m_tradingSymbol;
+  QString                   m_tradingMarket;
+  QString                   m_tradingCurrency;
+  eSECURITYTYPE             m_securityType;
+  AlkValue::RoundingMethod  m_roundingMethod;
+  int                       m_smallestAccountFraction;
+  int                       m_smallestCashFraction;
+  int                       m_partsPerUnit;
 };
 
 /**

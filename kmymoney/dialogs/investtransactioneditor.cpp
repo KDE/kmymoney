@@ -803,7 +803,8 @@ void InvestTransactionEditor::slotUpdateTotalAmount()
   if (total && total->isVisible()) {
     MyMoneyMoney amount;
     totalAmount(amount);
-    total->setText(amount.formatMoney(m_currency.tradingSymbol(), MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction())));
+    total->setText(amount.convert(m_currency.smallestAccountFraction(), static_cast<MyMoneyMoney::roundingMethod>(m_security.roundingMethod()))
+                   .formatMoney(m_currency.tradingSymbol(), MyMoneyMoney::denomToPrec(m_currency.smallestAccountFraction())));
   }
 }
 
@@ -935,9 +936,9 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
 
     // update shares if the transaction commodity is the currency
     // of the current selected account
-    split.setShares((split.value() * price).convert(fract));
+    split.setShares(split.value() * price);
   } else {
-    split.setShares(split.value().convert(fract));
+    split.setShares(split.value());
   }
 
   return true;
@@ -1056,21 +1057,37 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
   // add the splits to the transaction
   if (rc) {
-    if (!assetAccountSplit.accountId().isEmpty()) {
-      assetAccountSplit.clearId();
-      t.addSplit(assetAccountSplit);
+    if (security.name().isEmpty())                                              // new transaction has no security filled...
+      security = file->security(file->account(s0.accountId()).currencyId());    // ...so fetch it from s0 split
+
+    QList<MyMoneySplit> resultSplits;  // concatenates splits for easy processing
+
+    if (!assetAccountSplit.accountId().isEmpty())
+      resultSplits.append(assetAccountSplit);
+
+    if (!feeSplits.isEmpty())
+      resultSplits.append(feeSplits);
+
+    if (!interestSplits.isEmpty())
+      resultSplits.append(interestSplits);
+
+    AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
+    if (security.roundingMethod() != AlkValue::RoundNever)
+      roundingMethod = security.roundingMethod();
+
+    int currencyFraction = currency.smallestAccountFraction();
+    int securityFraction = security.smallestAccountFraction();
+
+    // assuming that all non-stock splits are monetary
+    foreach (auto split, resultSplits) {
+      split.clearId();
+      split.setShares(split.shares().convertDenominator(currencyFraction, roundingMethod));
+      split.setValue(split.value().convertDenominator(currencyFraction, roundingMethod));
+      t.addSplit(split);
     }
 
-    QList<MyMoneySplit>::iterator it_s;
-    for (it_s = feeSplits.begin(); it_s != feeSplits.end(); ++it_s) {
-      (*it_s).clearId();
-      t.addSplit(*it_s);
-    }
-
-    for (it_s = interestSplits.begin(); it_s != interestSplits.end(); ++it_s) {
-      (*it_s).clearId();
-      t.addSplit(*it_s);
-    }
+    s0.setShares(s0.shares().convertDenominator(securityFraction, roundingMethod)); // only shares variable from stock split isn't evaluated in currency
+    s0.setValue(s0.value().convertDenominator(currencyFraction, roundingMethod));
     t.addSplit(s0);
   }
 

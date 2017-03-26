@@ -332,6 +332,7 @@ void MyMoneyDbDef::Securities()
   appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
   appendField(MyMoneyDbTextColumn("symbol"));
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
+  appendField(MyMoneyDbIntColumn("roundingMethod", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("typeString"));
   appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
   appendField(MyMoneyDbTextColumn("tradingMarket"));

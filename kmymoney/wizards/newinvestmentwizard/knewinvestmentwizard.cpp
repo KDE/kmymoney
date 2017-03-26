@@ -171,6 +171,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
   QList<MyMoneySecurity>::ConstIterator it;
 
   MyMoneySecurity::eSECURITYTYPE type = KMyMoneyUtils::stringToSecurity(field("securityType").toString());
+  AlkValue::RoundingMethod roudingMethod = static_cast<AlkValue::RoundingMethod>(field("roundingMethod").toInt());
   MyMoneyFileTransaction ft;
   try {
     // update all relevant attributes only, if we create a stock
@@ -182,6 +183,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     newSecurity.setSmallestAccountFraction(field("fraction").value<MyMoneyMoney>().formatMoney("", 0, false).toUInt());
     newSecurity.setTradingCurrency(field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
     newSecurity.setSecurityType(type);
+    newSecurity.setRoundingMethod(roudingMethod);
     newSecurity.deletePair("kmm-online-source");
     newSecurity.deletePair("kmm-online-quote-system");
     newSecurity.deletePair("kmm-online-factor");

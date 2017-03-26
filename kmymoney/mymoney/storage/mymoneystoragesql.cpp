@@ -2245,6 +2245,7 @@ void MyMoneyStorageSql::writeSecurity(const MyMoneySecurity& security, QSqlQuery
   q.bindValue(":symbol", security.tradingSymbol());
   q.bindValue(":type", static_cast<int>(security.securityType()));
   q.bindValue(":typeString", MyMoneySecurity::securityTypeToString(security.securityType()));
+  q.bindValue(":roundingMethod", static_cast<int>(security.roundingMethod()));
   q.bindValue(":smallestAccountFraction", security.smallestAccountFraction());
   q.bindValue(":tradingCurrency", security.tradingCurrency());
   q.bindValue(":tradingMarket", security.tradingMarket());
@@ -4277,6 +4278,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
   int nameCol = t.fieldNumber("name");
   int symbolCol = t.fieldNumber("symbol");
   int typeCol = t.fieldNumber("type");
+  int roundingMethodCol = t.fieldNumber("roundingMethod");
   int smallestAccountFractionCol = t.fieldNumber("smallestAccountFraction");
   int tradingCurrencyCol = t.fieldNumber("tradingCurrency");
   int tradingMarketCol = t.fieldNumber("tradingMarket");
@@ -4289,6 +4291,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
     e.setName(GETSTRING(nameCol));
     e.setTradingSymbol(GETSTRING(symbolCol));
     e.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT(typeCol)));
+    e.setRoundingMethod(static_cast<AlkValue::RoundingMethod>(GETINT(roundingMethodCol)));
     saf = GETINT(smallestAccountFractionCol);
     e.setTradingCurrency(GETSTRING(tradingCurrencyCol));
     e.setTradingMarket(GETSTRING(tradingMarketCol));
