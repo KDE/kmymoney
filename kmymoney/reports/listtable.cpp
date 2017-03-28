@@ -242,6 +242,7 @@ void ListTable::render(QString& result, QString& csv) const
   //
 
   bool row_odd = true;
+  bool isHigherGroupTotal = false;  // hack to inform whether to put separator line or not
 
   // ***DV***
   MyMoneyMoney startingBalance;
@@ -260,12 +261,18 @@ void ListTable::render(QString& result, QString& csv) const
     // detect whether any of groups changed and display new group header in that case
     for (int i = 0; i < groups.count(); ++i) {
       if (prevGrpNames.at(i) != (*it_row)[groups.at(i)]) {
-        row_odd = true;
-        result += "<tr class=\"sectionheader\">"
-                  "<td class=\"left" + QString::number(i) + "\" "
-                  "colspan=\"" + QString::number(columns.count()) + "\">" +
-                  (*it_row)[groups.at(i)] + "</td></tr>\n";
-        csv += "\"" + (*it_row)[groups.at(i)] + "\"\n";
+        // group header of lowest group doesn't bring any useful information
+        // if hide transaction is enabled, so don't display it
+        if (!m_config.isHideTransactions() || i != groups.count() - 1) {
+          row_odd = true;
+          result += "<tr class=\"sectionheader\">"
+                    "<td class=\"left" + QString::number(i) + "\" "
+                    "colspan=\"" + QString::number(columns.count()) + "\">" +
+              (*it_row)[groups.at(i)] + "</td></tr>\n";
+          csv += "\"" + (*it_row)[groups.at(i)] + "\"\n";
+        }
+        if (i == groups.count() - 1)  // lowest group has been switched...
+          isHigherGroupTotal = false; // ...so expect lowest group total
         prevGrpNames.replace(i, (*it_row)[groups.at(i)]);
       }
     }
@@ -274,34 +281,40 @@ void ListTable::render(QString& result, QString& csv) const
     // Columns
     //
 
-    // skip the opening and closing balance row,
-    // if the balance column is not shown
-    // rank = 0 for opening balance, rank = 3 for closing balance
-    if ((columns.contains("balance") == 0) && ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3"))
-      continue;
-
     bool need_label = true;
 
     QString tlink;  // link information to account and transaction
-    // ***DV***
-    if ((* it_row)["rank"] == "1") {
-      row_odd = ! row_odd;
-      tlink = QString("id=%1&tid=%2")
-              .arg((* it_row)["accountid"], (* it_row)["id"]);
-    }
 
-    if ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3")
-      result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
-    else if ((* it_row)["rank"] == "2")
-      result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
-    else if ((* it_row)["rank"] == "4") {
-      if (m_config.rowType() == MyMoneyReport::eTag || //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
-          !m_config.isConvertCurrency() && std::next(it_row) == m_rows.end())// grand total may be invalid if multiple currencies are used, so don't display it
-        continue;
-      else
-        result += QString("<tr class=\"sectionfooter\">");
+    if (!m_config.isHideTransactions() || (*it_row)["rank"] == "4") { // if hide transaction is enabled display only total rows i.e. rank = 4
+      if ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3") {
+        // skip the opening and closing balance row,
+        // if the balance column is not shown
+        // rank = 0 for opening balance, rank = 3 for closing balance
+        if (!columns.contains("balance"))
+          continue;
+        result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
+      // ***DV***
+      } else if ((* it_row)["rank"] == "1") {
+        row_odd = ! row_odd;
+        tlink = QString("id=%1&tid=%2")
+                .arg((* it_row)["accountid"], (* it_row)["id"]);
+        result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
+      } else if ((* it_row)["rank"] == "2")
+        result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
+      else if ((* it_row)["rank"] == "4") {
+        if ((m_config.rowType() == MyMoneyReport::eTag) || //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
+            (!m_config.isConvertCurrency() && std::next(it_row) == m_rows.end()))// grand total may be invalid if multiple currencies are used, so don't display it
+          continue;
+        // display special footer (i.e. without horizontal separator) only for lowest group totals
+        else if (m_config.isHideTransactions() && !isHigherGroupTotal && std::next(it_row) != m_rows.end()) {
+          result += QString("<tr class=\"sectionfooterbasic\">");
+          isHigherGroupTotal = true;
+        } else
+          result += QString("<tr class=\"sectionfooter\">");
+      } else
+        result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
     } else
-      result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
+      continue;
 
     QStringList::const_iterator it_column = columns.constBegin();
     while (it_column != columns.constEnd()) {

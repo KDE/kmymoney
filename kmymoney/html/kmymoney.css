@@ -216,6 +216,11 @@ table.report tr#topparent td.left {/*parent label for each row group containing 
     color:WindowText;
   }
 
+  table.report tr.sectionfooterbasic td { /* totals for without top border */
+    padding: 0 0.5em 0.5em 0.5em;
+    color:WindowText;
+  }
+
   table.report tr.sectionfooter td { /* totals for each section -subtotals */
     border-top: 1px solid black;
     padding: 0 0.5em 0.5em 0.5em;

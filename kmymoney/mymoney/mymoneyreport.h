@@ -140,6 +140,9 @@ public:
   EDetailLevel detailLevel() const {
     return m_detailLevel;
   }
+  bool isHideTransactions() const {
+    return m_hideTransactions;
+  }
   EChartType chartType() const {
     return m_chartType;
   }
@@ -262,6 +265,9 @@ public:
   }
   void setDetailLevel(EDetailLevel _detail) {
     m_detailLevel = _detail;
+  }
+  void setHideTransactions(bool _f) {
+    m_hideTransactions = _f;
   }
   void setChartType(EChartType _type) {
     m_chartType = _type;
@@ -558,6 +564,10 @@ private:
     * How much detail to show in the accounts
     */
   enum EDetailLevel m_detailLevel;
+  /**
+    * Whether to show transactions or just totals.
+    */
+  bool m_hideTransactions;
   /**
     * Whether to convert all currencies to the base currency of the file (true).
     * If this is false, it's up to the report generator to decide how to handle

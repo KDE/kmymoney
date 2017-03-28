@@ -242,6 +242,7 @@ void KReportConfigurationFilterDlg::slotSearch()
 
     m_currentState.setDetailLevel(m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->isChecked() ?
                                   MyMoneyReport::eDetailNone : MyMoneyReport::eDetailAll);
+    m_currentState.setHideTransactions(m_tab3->findChild<QCheckBox*>("m_checkHideTransactions")->isChecked());
   }
 
   if (m_tabChart) {
@@ -439,8 +440,11 @@ void KReportConfigurationFilterDlg::slotReset()
     m_tab3->findChild<QCheckBox*>("m_checkInvestments")->setChecked(m_initialState.isInvestmentsOnly());
     m_tab3->findChild<QCheckBox*>("m_checkLoans")->setChecked(m_initialState.isLoansOnly());
 
+    m_tab3->findChild<QCheckBox*>("m_checkHideTransactions")->setChecked(m_initialState.isHideTransactions());
+    m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->setEnabled(!m_initialState.isHideTransactions());
+
     m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->setChecked
-    (m_initialState.detailLevel() == MyMoneyReport::eDetailNone);
+    (m_initialState.detailLevel() == MyMoneyReport::eDetailNone || m_initialState.isHideTransactions());
   }
 
   if (m_tabChart) {

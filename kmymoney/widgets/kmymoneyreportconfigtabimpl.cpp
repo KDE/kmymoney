@@ -72,6 +72,14 @@ kMyMoneyReportConfigTab3Decl::kMyMoneyReportConfigTab3Decl(QWidget *parent)
   ui->buttonGroup1->setId(ui->m_checkCategory, 7);
   ui->buttonGroup1->setId(ui->m_checkAction, 8);
   ui->buttonGroup1->setId(ui->m_checkBalance, 9);
+  connect(ui->m_checkHideTransactions, SIGNAL(toggled(bool)), this, SLOT(slotHideTransactionsChanged(bool)));
+}
+
+void kMyMoneyReportConfigTab3Decl::slotHideTransactionsChanged(bool checked)
+{
+  if (checked)                                          // toggle m_checkHideSplitDetails only if it's mandatory
+    ui->m_checkHideSplitDetails->setChecked(checked);
+  ui->m_checkHideSplitDetails->setEnabled(!checked);    // hiding transactions without hiding splits isn't allowed
 }
 
 kMyMoneyReportConfigTab3Decl::~kMyMoneyReportConfigTab3Decl()

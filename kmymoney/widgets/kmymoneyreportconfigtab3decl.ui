@@ -1,460 +1,520 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="1">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>kMyMoneyReportConfigTab3Decl</class>
-  <widget class="QWidget" name="kMyMoneyReportConfigTab3Decl">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>617</width>
-        <height>267</height>
-      </rect>
-    </property>
-    <property name="sizePolicy">
-      <sizepolicy>
-        <hsizetype>1</hsizetype>
-        <vsizetype>1</vsizetype>
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-      </sizepolicy>
-    </property>
-    <property name="windowTitle">
-      <string>Rows/Columns Tab</string>
-    </property>
-    <property name="toolTip" stdset="0">
-      <string/>
-    </property>
-    <property name="whatsThis" stdset="0">
-      <string>&lt;p&gt;On this tab, you configure how you would like the rows and columns to be selected and organized.&lt;/p&gt;</string>
-    </property>
-    <layout class="QVBoxLayout">
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QLabel" name="textLabel3">
-              <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>1</hsizetype>
-                  <vsizetype>0</vsizetype>
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="font">
-                <font/>
-              </property>
-              <property name="text">
-                <string>Organize by:</string>
-              </property>
-              <property name="wordWrap">
-                <bool>false</bool>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="KComboBox" name="m_comboOrganizeBy">
-              <property name="enabled">
-                <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>1</hsizetype>
-                  <vsizetype>0</vsizetype>
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>&lt;p&gt;Choose how to group the transactions in this report&lt;/p&gt;</string>
-              </property>
-              <item>
-                <property name="text">
-                  <string>Categories</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Top Categories</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Tags</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Payees</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Accounts</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Top Accounts</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Month</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Week</string>
-                </property>
-              </item>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer10_2">
-              <property name="sizeHint">
-                <size>
-                  <width>358</width>
-                  <height>16</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QGroupBox" name="buttonGroupBox1">
-              <property name="enabled">
-                <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>1</hsizetype>
-                  <vsizetype>0</vsizetype>
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="title">
-                <string>Show Columns</string>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>&lt;p&gt;Choose which columns should be shown in the report.&lt;/p&gt;&lt;p&gt;The date and transaction amount are always shown.&lt;/p&gt;</string>
-              </property>
-              <layout class="QGridLayout">
-                <property name="spacing">
-                  <number>2</number>
-                </property>
-                <item row="1" column="1">
-                  <widget class="QCheckBox" name="m_checkMemo">
-                    <property name="minimumSize">
-                      <size>
-                        <width>0</width>
-                        <height>0</height>
-                      </size>
-                    </property>
-                    <property name="text">
-                      <string>Memo</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Memo column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="0" column="4">
-                  <widget class="QCheckBox" name="m_checkShares">
-                    <property name="text">
-                      <string>Shares</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Shares column for investments&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="1" column="3">
-                  <widget class="QCheckBox" name="m_checkPrice">
-                    <property name="text">
-                      <string>Price</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Price column for investments&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="1" column="2">
-                  <widget class="QCheckBox" name="m_checkReconciled">
-                    <property name="text">
-                      <string>Reconciled</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Reconciled column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="0" column="3">
-                  <widget class="QCheckBox" name="m_checkAccount">
-                    <property name="text">
-                      <string>Account</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Account column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="0" column="0">
-                  <widget class="QCheckBox" name="m_checkNumber">
-                    <property name="minimumSize">
-                      <size>
-                        <width>0</width>
-                        <height>0</height>
-                      </size>
-                    </property>
-                    <property name="text">
-                      <string>Number</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Number column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="0" column="2">
-                  <widget class="QCheckBox" name="m_checkTag">
-                    <property name="minimumSize">
-                      <size>
-                        <width>0</width>
-                        <height>0</height>
-                      </size>
-                    </property>
-                    <property name="text">
-                      <string>Tag</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Tag column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="1" column="0">
-                  <widget class="QCheckBox" name="m_checkPayee">
-                    <property name="minimumSize">
-                      <size>
-                        <width>0</width>
-                        <height>0</height>
-                      </size>
-                    </property>
-                    <property name="text">
-                      <string>Payee</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Payee column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="0" column="1">
-                  <widget class="QCheckBox" name="m_checkCategory">
-                    <property name="minimumSize">
-                      <size>
-                        <width>0</width>
-                        <height>0</height>
-                      </size>
-                    </property>
-                    <property name="text">
-                      <string>Category</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Category column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="0" column="5">
-                  <widget class="QCheckBox" name="m_checkAction">
-                    <property name="text">
-                      <string>Action</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Action column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-                <item row="1" column="4">
-                  <widget class="QCheckBox" name="m_checkBalance">
-                    <property name="text">
-                      <string>Balance</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                      <string>&lt;p&gt;Select this option to show the Running balance column&lt;/p&gt;</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
-                    </attribute>
-                  </widget>
-                </item>
-              </layout>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer10">
-              <property name="sizeHint">
-                <size>
-                  <width>205</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <layout class="QGridLayout">
-          <item row="2" column="0">
-            <widget class="QCheckBox" name="m_checkLoans">
-              <property name="text">
-                <string>Include only Loan accounts</string>
-              </property>
-            </widget>
-          </item>
-          <item row="1" column="0">
-            <widget class="QCheckBox" name="m_checkInvestments">
-              <property name="text">
-                <string>Include only Investment accounts</string>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>&lt;p&gt;Check this box to include only those categories which have been marked to &quot;Include on Tax Reports&quot;&lt;/p&gt;</string>
-              </property>
-            </widget>
-          </item>
-          <item row="0" column="1">
-            <widget class="QCheckBox" name="m_checkHideSplitDetails">
-              <property name="text">
-                <string>Hide Split Transaction Details</string>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>Do not display the individual transactions that make up a split transaction</string>
-              </property>
-            </widget>
-          </item>
-          <item row="0" column="0">
-            <widget class="QCheckBox" name="m_checkTax">
-              <property name="text">
-                <string>Include only Tax categories</string>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>&lt;p&gt;Check this box to include only those categories which have been marked to &quot;Include on Tax Reports&quot;&lt;/p&gt;</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <spacer name="spacer4">
-          <property name="sizeHint">
-            <size>
-              <width>20</width>
-              <height>16</height>
-            </size>
-          </property>
-          <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="orientation">
-            <enum>Qt::Vertical</enum>
-          </property>
-        </spacer>
-      </item>
+<ui version="4.0">
+ <class>kMyMoneyReportConfigTab3Decl</class>
+ <widget class="QWidget" name="kMyMoneyReportConfigTab3Decl">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>267</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Rows/Columns Tab</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="whatsThis">
+   <string>&lt;p&gt;On this tab, you configure how you would like the rows and columns to be selected and organized.&lt;/p&gt;</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="textLabel3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font/>
+       </property>
+       <property name="text">
+        <string>Organize by:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KComboBox" name="m_comboOrganizeBy">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;p&gt;Choose how to group the transactions in this report&lt;/p&gt;</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Categories</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Top Categories</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tags</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Payees</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Accounts</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Top Accounts</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Month</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Week</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer10_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>358</width>
+         <height>16</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
-  </widget>
-  <layoutdefault spacing="6" margin="11"/>
-    <connections>
-    <connection>
-      <sender>m_checkTax</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>m_checkInvestments</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>m_checkTax</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>m_checkLoans</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>m_checkInvestments</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>m_checkTax</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>m_checkInvestments</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>m_checkLoans</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>m_checkLoans</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>m_checkTax</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>m_checkLoans</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>m_checkInvestments</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-  </connections>
-  <customwidgets>
-    <customwidget>
-      <class>KComboBox</class>
-      <extends>QComboBox</extends>
-      <header location="global">kcombobox.h</header>
-    </customwidget>
-  </customwidgets>
-  <buttongroups>
-    <buttongroup name="buttonGroup1"/>
-  </buttongroups>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QGroupBox" name="buttonGroupBox1">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;p&gt;Choose which columns should be shown in the report.&lt;/p&gt;&lt;p&gt;The date and transaction amount are always shown.&lt;/p&gt;</string>
+       </property>
+       <property name="title">
+        <string>Show Columns</string>
+       </property>
+       <layout class="QGridLayout">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="m_checkMemo">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Memo column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Memo</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QCheckBox" name="m_checkShares">
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Shares column for investments&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Shares</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QCheckBox" name="m_checkPrice">
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Price column for investments&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Price</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QCheckBox" name="m_checkReconciled">
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Reconciled column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Reconciled</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QCheckBox" name="m_checkAccount">
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Account column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Account</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="m_checkNumber">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Number column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Number</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QCheckBox" name="m_checkTag">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Tag column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Tag</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="m_checkPayee">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Payee column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Payee</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="m_checkCategory">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Category column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Category</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QCheckBox" name="m_checkAction">
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Action column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Action</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QCheckBox" name="m_checkBalance">
+          <property name="toolTip">
+           <string>&lt;p&gt;Select this option to show the Running balance column&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Balance</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup1</string>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer10">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>205</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout">
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="m_checkLoans">
+       <property name="text">
+        <string>Include only Loan accounts</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="m_checkInvestments">
+       <property name="toolTip">
+        <string>&lt;p&gt;Check this box to include only those categories which have been marked to &quot;Include on Tax Reports&quot;&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string>Include only Investment accounts</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QCheckBox" name="m_checkHideSplitDetails">
+       <property name="toolTip">
+        <string>Do not display the individual transactions that make up a split transaction</string>
+       </property>
+       <property name="text">
+        <string>Hide Split Transaction Details</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="m_checkTax">
+       <property name="toolTip">
+        <string>&lt;p&gt;Check this box to include only those categories which have been marked to &quot;Include on Tax Reports&quot;&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string>Include only Tax categories</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="m_checkHideTransactions">
+       <property name="toolTip">
+        <string>Do not display the transactions, leaving only totals displayed.</string>
+       </property>
+       <property name="text">
+        <string>Hide Transactions</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="spacer4">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_checkTax</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_checkInvestments</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkTax</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_checkLoans</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkInvestments</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_checkTax</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkInvestments</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_checkLoans</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkLoans</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_checkTax</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkLoans</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_checkInvestments</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroup1"/>
+ </buttongroups>
 </ui>

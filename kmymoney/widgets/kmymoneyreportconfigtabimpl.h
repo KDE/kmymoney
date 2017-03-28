@@ -54,11 +54,14 @@ private:
 
 class kMyMoneyReportConfigTab3Decl : public QWidget
 {
+  Q_OBJECT
 public:
   kMyMoneyReportConfigTab3Decl(QWidget *parent);
   virtual ~kMyMoneyReportConfigTab3Decl();
 private:
   Ui::kMyMoneyReportConfigTab3Decl* ui;
+private slots:
+  void slotHideTransactionsChanged(bool checked);
 };
 
 class kMyMoneyReportConfigTabChartDecl : public QWidget

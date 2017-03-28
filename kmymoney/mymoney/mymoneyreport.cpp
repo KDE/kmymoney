@@ -57,6 +57,7 @@ MyMoneyReport::MyMoneyReport() :
     m_tax(false),
     m_investments(false),
     m_loans(false),
+    m_hideTransactions(false),
     m_reportType(kTypeArray[eExpenseIncome]),
     m_rowType(eExpenseIncome),
     m_columnType(eMonths),
@@ -106,6 +107,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_tax(false),
     m_investments(false),
     m_loans(false),
+    m_hideTransactions(false),
     m_reportType(kTypeArray[_rt]),
     m_rowType(_rt),
     m_columnsAreDays(false),
@@ -347,6 +349,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("tax", m_tax);
   e.setAttribute("investments", m_investments);
   e.setAttribute("loans", m_loans);
+  e.setAttribute("hidetransactions", m_hideTransactions);
   e.setAttribute("rowtype", kRowTypeText[m_rowType]);
   e.setAttribute("datelock", kDateLockText[m_dateLock]);
   e.setAttribute("datalock", kDataLockText[m_dataLock]);
@@ -383,10 +386,10 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("dataMinorTick", m_dataMinorTick);
   e.setAttribute("dataLock", m_dataLock);
   e.setAttribute("skipZero", m_skipZero);
+  e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
 
   if (m_reportType == ePivotTable) {
     e.setAttribute("type", "pivottable 1.15");
-    e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
     e.setAttribute("columntype", kColumnTypeText[m_columnType]);
     e.setAttribute("showrowtotals", m_showRowTotals);
   } else if (m_reportType == eQueryTable) {
@@ -405,7 +408,6 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     e.setAttribute("querycolumns", columns.join(","));
   } else if (m_reportType == eInfoTable) {
     e.setAttribute("type", "infotable 1.0");
-    e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
     e.setAttribute("showrowtotals", m_showRowTotals);
   }
 
@@ -649,6 +651,7 @@ bool MyMoneyReport::read(const QDomElement& e)
     m_tax = e.attribute("tax", "0").toUInt();
     m_investments = e.attribute("investments", "0").toUInt();
     m_loans = e.attribute("loans", "0").toUInt();
+    m_hideTransactions = e.attribute("hidetransactions", "0").toUInt();
     m_includeSchedules = e.attribute("includeschedules", "0").toUInt();
     m_columnsAreDays = e.attribute("columnsaredays", "0").toUInt();
     m_includeTransfers = e.attribute("includestransfers", "0").toUInt();
