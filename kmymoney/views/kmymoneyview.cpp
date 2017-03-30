@@ -1674,6 +1674,7 @@ void KMyMoneyView::loadDefaultCurrencies()
   loadDefaultCurrency(MyMoneySecurity("USD", i18n("US Dollar"),              "$"), create);
   loadDefaultCurrency(MyMoneySecurity("UGX", i18n("Uganda Shilling")), create);
   loadDefaultCurrency(MyMoneySecurity("UAH", i18n("Ukraine Hryvnia")), create);
+  loadDefaultCurrency(MyMoneySecurity("CLF", i18n("Unidad de Fometo")), create);
   loadDefaultCurrency(MyMoneySecurity("AED", i18n("United Arab Emirates Dirham")), create);
   loadDefaultCurrency(MyMoneySecurity("UYU", i18n("Uruguayan Peso")), create);
   loadDefaultCurrency(MyMoneySecurity("UZS", i18n("Uzbekistani Sum")), create);
