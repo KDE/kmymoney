@@ -1398,7 +1398,6 @@ void QueryTable::constructAccountTable()
   //make sure we have all subaccounts of investment accounts
   includeInvestmentSubAccounts();
 
-
   QMap<QString, CashFlowList> topAccounts; // for total calculation
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
@@ -1417,73 +1416,65 @@ void QueryTable::constructAccountTable()
       ReportAccount account(*it_account);
       TableRow qaccountrow;
       CashFlowList accountCashflow; // for total calculation
-      if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
-        constructPerformanceRow(account, qaccountrow, accountCashflow);
-      } else if (m_config.queryColumns() == MyMoneyReport::eQCcapitalgain) {
-        constructCapitalGainRow(account, qaccountrow);
-      } else
-        qaccountrow["equitytype"].clear();
+      switch(m_config.queryColumns()) {
+        case MyMoneyReport::eQCperformance:
+        {
+          constructPerformanceRow(account, qaccountrow, accountCashflow);
+          if (!qaccountrow.isEmpty()) {
+            // assuming that that report is grouped by topaccount
+            qaccountrow["topaccount"] = account.topParentName();
+            if (!topAccounts.contains(qaccountrow["topaccount"]))
+              topAccounts.insert(qaccountrow["topaccount"], accountCashflow);   // create cashflow for unknown account...
+            else
+              topAccounts[qaccountrow["topaccount"]] += accountCashflow;        // ...or add cashflow for known account
+          }
+          break;
+        }
+        case MyMoneyReport::eQCcapitalgain:
+          constructCapitalGainRow(account, qaccountrow);
+          break;
+        default:
+        {
+          //get fraction for account
+          int fraction = account.currency().smallestAccountFraction() != -1 ?
+                account.currency().smallestAccountFraction() : file->baseCurrency().smallestAccountFraction();
+
+          MyMoneyMoney netprice = account.deepCurrencyPrice(m_config.toDate());
+          if (m_config.isConvertCurrency() && account.isForeignCurrency())
+            netprice *= account.baseCurrencyPrice(m_config.toDate()); // display currency is base currency, so set the price
+
+          netprice = netprice.reduce();
+          shares = shares.reduce();
+
+          qaccountrow["price"] = netprice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+          qaccountrow["value"] = (netprice * shares).convert(fraction).toString();
+          qaccountrow["shares"] = shares.toString();
+
+          QString iid = account.institutionId();
+
+          // If an account does not have an institution, get it from the top-parent.
+          if (iid.isEmpty() && !account.isTopLevel())
+            iid = account.topParent().institutionId();
+
+          if (iid.isEmpty())
+            qaccountrow["institution"] = i18nc("No institution", "None");
+          else
+            qaccountrow["institution"] = file->institution(iid).name();
+
+          qaccountrow["type"] = KMyMoneyUtils::accountTypeToString(account.accountType());
+        }
+      }
 
       if (qaccountrow.isEmpty()) // don't add the account if there are no calculated values
         continue;
 
-      // help for sort and render functions
       qaccountrow["rank"] = '1';
-      //
-      // Handle currency conversion
-      //
-
-      MyMoneyMoney displayprice(1, 1);
-      if (m_config.isConvertCurrency()) {
-        // display currency is base currency, so set the price
-        if (account.isForeignCurrency())
-          displayprice = account.baseCurrencyPrice(m_config.toDate()).reduce();
-      } else {
-        // display currency is the account's deep currency.  display this fact in the report
-        qaccountrow["currency"] = account.currency().id();
-      }
-
       qaccountrow["account"] = account.name();
       qaccountrow["accountid"] = account.id();
       qaccountrow["topaccount"] = account.topParentName();
-
-      qaccountrow["shares"] = shares.toString();
-
-      //get fraction for account
-      int fraction = account.currency().smallestAccountFraction();
-
-      //use base currency fraction if not initialized
-      if (fraction == -1)
-        fraction = file->baseCurrency().smallestAccountFraction();
-
-      MyMoneyMoney netprice = account.deepCurrencyPrice(m_config.toDate()).reduce() * displayprice;
-      qaccountrow["price"] = (netprice.reduce()).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
-      qaccountrow["value"] = (netprice.reduce() * shares.reduce()).convert(fraction).toString();
-
-      QString iid = (*it_account).institutionId();
-
-      // If an account does not have an institution, get it from the top-parent.
-      if (iid.isEmpty() && ! account.isTopLevel()) {
-        ReportAccount topaccount = account.topParent();
-        iid = topaccount.institutionId();
-      }
-
-      if (iid.isEmpty())
-        qaccountrow["institution"] = i18nc("No institution", "None");
-      else
-        qaccountrow["institution"] = file->institution(iid).name();
-
-      qaccountrow["type"] = KMyMoneyUtils::accountTypeToString((*it_account).accountType());
-
-      // assuming that that report is grouped by topaccount
-      if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
-        if (!topAccounts.contains(qaccountrow["topaccount"]))
-          topAccounts.insert(qaccountrow["topaccount"], accountCashflow);   // create cashflow for unknown account...
-        else
-          topAccounts[qaccountrow["topaccount"]] += accountCashflow;        // ...or add cashflow for known account
-      }
-
-      m_rows += qaccountrow;
+      if (!m_config.isConvertCurrency())
+        qaccountrow["currency"] = account.currency().id();
+      m_rows.append(qaccountrow);
     }
   }
 
@@ -1497,13 +1488,12 @@ void QueryTable::constructAccountTable()
       qtotalsrow["topaccount"] = topAccount.key();
       qtotalsrow["return"] = helperIRR(topAccount.value()).toString();
       grandCashflow += topAccount.value();  // cumulative sum of cashflows of each topaccount
-      m_rows += qtotalsrow;                 // rows aren't sorted yet, so no problem with adding them randomly at the end
+      m_rows.append(qtotalsrow);            // rows aren't sorted yet, so no problem with adding them randomly at the end
     }
     qtotalsrow["topaccount"] = "";          // empty topaccount because it's grand cashflow
     qtotalsrow["return"] = helperIRR(grandCashflow).toString();
-    m_rows += qtotalsrow;
+    m_rows.append(qtotalsrow);
   }
-
 }
 
 void QueryTable::constructSplitsTable()

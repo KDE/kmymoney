@@ -570,21 +570,15 @@ void QueryTableTest::testInvestment()
     QVERIFY(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(44000.00));
     QVERIFY(MyMoneyMoney(rows[0]["reinvestincome"]) == MyMoneyMoney(9000.00));
     QVERIFY(MyMoneyMoney(rows[0]["cashincome"]) == MyMoneyMoney(3300.00));
-    QVERIFY(MyMoneyMoney(rows[0]["shares"]) == MyMoneyMoney(1700.00));
-    QVERIFY(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
 
     QVERIFY(MyMoneyMoney(rows[1]["return"]) == MyMoneyMoney("1349/10000"));
     QVERIFY(MyMoneyMoney(rows[1]["returninvestment"]) == MyMoneyMoney("1/10"));
-    QVERIFY(MyMoneyMoney(rows[1]["shares"]) == MyMoneyMoney(1000.00));
-    QVERIFY(MyMoneyMoney(rows[1]["price"]) == MyMoneyMoney(110.00));
     QVERIFY(MyMoneyMoney(rows[1]["startingbal"]) == MyMoneyMoney(100000.00)); // this should stay non-zero to check if investment performance is calculated at non-zero starting balance
 
     QVERIFY(MyMoneyMoney(rows[2]["return"]) == MyMoneyMoney("2501/2500"));
     QVERIFY(MyMoneyMoney(rows[2]["returninvestment"]) == MyMoneyMoney("323/1250"));
     QVERIFY(MyMoneyMoney(rows[2]["buys"]) == MyMoneyMoney(-95200.00));
     QVERIFY(MyMoneyMoney(rows[2]["sells"]) == MyMoneyMoney(119800.00));
-    QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(0.00));
-    QVERIFY(MyMoneyMoney(rows[2]["price"]) == MyMoneyMoney(110.00));
     QVERIFY(MyMoneyMoney(rows[2]["endingbal"]) == MyMoneyMoney(0.00)); // this should stay zero to check if investment performance is calculated at zero ending balance
 
     QVERIFY(MyMoneyMoney(rows[4]["endingbal"]) == MyMoneyMoney(280000.00));
