@@ -212,7 +212,8 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     WizardPage<Wizard>(stepCount++, this, wizard)
 {
   QTreeWidgetItem *first = 0;
-  QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
+
+  QList<MyMoneySecurity> list = MyMoneyFile::instance()->availableCurrencyList();
   QList<MyMoneySecurity>::const_iterator it;
 
   QString localCurrency(QLocale().currencySymbol(QLocale::CurrencyIsoCode));
@@ -251,10 +252,16 @@ void CurrencyPage::enterPage()
   m_currencyList->setFocus();
 }
 
-
 KMyMoneyWizardPage* CurrencyPage::nextPage() const
 {
-  m_wizard->m_baseCurrency = MyMoneyFile::instance()->security(selectedCurrency());
+  QString selCur = selectedCurrency();
+  QList<MyMoneySecurity> currencies = MyMoneyFile::instance()->availableCurrencyList();
+  foreach (auto currency, currencies) {
+    if (selCur == currency.id()) {
+      m_wizard->m_baseCurrency = currency;
+      break;
+    }
+  }
   m_wizard->m_accountPage->m_accountCurrencyLabel->setText(m_wizard->m_baseCurrency.tradingSymbol());
   return m_wizard->m_accountPage;
 }

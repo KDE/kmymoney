@@ -15,6 +15,7 @@ set(libdialogs_a_SOURCES
   kconfirmmanualenterdlg.cpp
   kcurrencycalculator.cpp
   kcurrencyeditdlg.cpp
+  kavailablecurrencydlg.cpp
   keditscheduledlg.cpp
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp
@@ -59,7 +60,7 @@ set(dialogs_UI
   kaccountselectdlgdecl.ui kbackupdlgdecl.ui
   kcategoryreassigndlgdecl.ui kchooseimportexportdlgdecl.ui
   kconfirmmanualenterdlgdecl.ui
-  kcurrencycalculatordecl.ui kcurrencyeditdlgdecl.ui
+  kcurrencycalculatordecl.ui kcurrencyeditdlg.ui kavailablecurrencydlg.ui
   keditscheduledlgdecl.ui
   kenterscheduledlgdecl.ui
   kequitypriceupdatedlgdecl.ui kexportdlgdecl.ui

@@ -826,10 +826,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
                   m_fileType = KmmXML;
                 } else if (gncexp.indexIn(txt) != -1) {
                   MyMoneyFile::instance()->attachStorage(storage);
-                  MyMoneyFileTransaction ft;
-                  loadDefaultCurrencies(); // currency list required for gnc
-                  loadAncientCurrencies(); // these too
-                  ft.commit();
+                  loadAllCurrencies(); // currency list required for gnc
                   MyMoneyFile::instance()->detachStorage(storage);
 
                   pReader = new MyMoneyGncReader;
@@ -997,8 +994,7 @@ bool KMyMoneyView::initializeStorage()
   // all the default currencies we know.
   MyMoneyFileTransaction ft;
   try {
-    loadDefaultCurrencies();
-    loadAncientCurrencies();
+    updateCurrencyNames();
     ft.commit();
   } catch (const MyMoneyException &) {
     MyMoneyFile::instance()->blockSignals(blocked);
@@ -1495,272 +1491,50 @@ void KMyMoneyView::selectBaseCurrency()
   }
 }
 
-void KMyMoneyView::loadDefaultCurrency(const MyMoneySecurity& currency, const bool create)
+void KMyMoneyView::updateCurrencyNames()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneySecurity sec;
   MyMoneyFileTransaction ft;
+
+  QList<MyMoneySecurity> storedCurrencies = MyMoneyFile::instance()->currencyList();
+  QList<MyMoneySecurity> availableCurrencies = MyMoneyFile::instance()->availableCurrencyList();
+  QStringList currencyIDs;
+
+  foreach (auto currency, availableCurrencies)
+    currencyIDs.append(currency.id());
+
   try {
-    sec = file->currency(currency.id());
-    if (sec.name() != currency.name()) {
-      sec.setName(currency.name());
-      file->modifyCurrency(sec);
+    foreach (auto currency, storedCurrencies) {
+      int i = currencyIDs.indexOf(currency.id());
+      if (i != -1 && availableCurrencies.at(i).name() != currency.name()) {
+        currency.setName(availableCurrencies.at(i).name());
+        file->modifyCurrency(currency);
+      }
     }
     ft.commit();
-  } catch (const MyMoneyException &) {
-    try {
-      if (create) {
-        file->addCurrency(currency);
-      }
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      qDebug("Error %s loading default currency", qPrintable(e.what()));
-    }
+  } catch (const MyMoneyException &e) {
+    qDebug("Error %s updating currency names", qPrintable(e.what()));
   }
 }
 
-void KMyMoneyView::loadDefaultCurrencies()
-{
-  // more information can be obtained from http://en.wikipedia.org/wiki/Currency_codes
-
-  bool create = MyMoneyFile::instance()->currencyList().count() == 0;
-  loadDefaultCurrency(MyMoneySecurity("AFA", i18n("Afghanistan Afghani")), create);
-  loadDefaultCurrency(MyMoneySecurity("ALL", i18n("Albanian Lek")), create);
-  loadDefaultCurrency(MyMoneySecurity("ANG", i18n("Netherland Antillian Guilder")), create);
-  loadDefaultCurrency(MyMoneySecurity("DZD", i18n("Algerian Dinar")), create);
-  loadDefaultCurrency(MyMoneySecurity("ADF", i18n("Andorran Franc")), create);
-  loadDefaultCurrency(MyMoneySecurity("ADP", i18n("Andorran Peseta")), create);
-  loadDefaultCurrency(MyMoneySecurity("AON", i18n("Angolan New Kwanza")), create);
-  loadDefaultCurrency(MyMoneySecurity("ARS", i18n("Argentine Peso"),         "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("AWG", i18n("Aruban Florin")), create);
-  loadDefaultCurrency(MyMoneySecurity("AUD", i18n("Australian Dollar"),      "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("AZN", i18n("Azerbaijani Manat"),      "m."), create);
-  loadDefaultCurrency(MyMoneySecurity("BSD", i18n("Bahamian Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BHD", i18n("Bahraini Dinar"),         "BHD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")), create);
-  loadDefaultCurrency(MyMoneySecurity("BBD", i18n("Barbados Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC"), create);
-  loadDefaultCurrency(MyMoneySecurity("BYN", i18n("Belarusian Ruble"),       "Br"), create);
-  loadDefaultCurrency(MyMoneySecurity("BZD", i18n("Belize Dollar"),          "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BMD", i18n("Bermudian Dollar"),       "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BTN", i18n("Bhutan Ngultrum")), create);
-  loadDefaultCurrency(MyMoneySecurity("BOB", i18n("Bolivian Boliviano")), create);
-  loadDefaultCurrency(MyMoneySecurity("BAM", i18n("Bosnian Convertible Mark")), create);
-  loadDefaultCurrency(MyMoneySecurity("BWP", i18n("Botswana Pula")), create);
-  loadDefaultCurrency(MyMoneySecurity("BRL", i18n("Brazilian Real"),         "R$"), create);
-  loadDefaultCurrency(MyMoneySecurity("GBP", i18n("British Pound"),          QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("BND", i18n("Brunei Dollar"),          "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BGN", i18n("Bulgarian Lev (new)")), true);
-  loadDefaultCurrency(MyMoneySecurity("BIF", i18n("Burundi Franc")), create);
-  loadDefaultCurrency(MyMoneySecurity("XAF", i18n("CFA Franc BEAC")), create);
-  loadDefaultCurrency(MyMoneySecurity("XOF", i18n("CFA Franc BCEAO")), create);
-  loadDefaultCurrency(MyMoneySecurity("XPF", i18n("CFP Franc Pacifique"), "F", 1, 1, 100), create);
-  loadDefaultCurrency(MyMoneySecurity("KHR", i18n("Cambodia Riel")), create);
-  loadDefaultCurrency(MyMoneySecurity("CAD", i18n("Canadian Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("CVE", i18n("Cape Verde Escudo")), create);
-  loadDefaultCurrency(MyMoneySecurity("KYD", i18n("Cayman Islands Dollar"),  "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("CLP", i18n("Chilean Peso")), create);
-  loadDefaultCurrency(MyMoneySecurity("CNY", i18n("Chinese Yuan Renminbi")), create);
-  loadDefaultCurrency(MyMoneySecurity("COP", i18n("Colombian Peso")), create);
-  loadDefaultCurrency(MyMoneySecurity("KMF", i18n("Comoros Franc")), create);
-  loadDefaultCurrency(MyMoneySecurity("CRC", i18n("Costa Rican Colon"),      QChar(0x20A1)), create);
-  loadDefaultCurrency(MyMoneySecurity("HRK", i18n("Croatian Kuna")), create);
-  loadDefaultCurrency(MyMoneySecurity("CUP", i18n("Cuban Peso")), create);
-  loadDefaultCurrency(MyMoneySecurity("CZK", i18n("Czech Koruna")), create);
-  loadDefaultCurrency(MyMoneySecurity("DKK", i18n("Danish Krone"),           "kr"), create);
-  loadDefaultCurrency(MyMoneySecurity("DJF", i18n("Djibouti Franc")), create);
-  loadDefaultCurrency(MyMoneySecurity("DOP", i18n("Dominican Peso")), create);
-  loadDefaultCurrency(MyMoneySecurity("XCD", i18n("East Caribbean Dollar"),  "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("EGP", i18n("Egyptian Pound"),         QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("SVC", i18n("El Salvador Colon")), create);
-  loadDefaultCurrency(MyMoneySecurity("ERN", i18n("Eritrean Nakfa")), create);
-  loadDefaultCurrency(MyMoneySecurity("EEK", i18n("Estonian Kroon")), create);
-  loadDefaultCurrency(MyMoneySecurity("ETB", i18n("Ethiopian Birr")), create);
-  loadDefaultCurrency(MyMoneySecurity("EUR", i18n("Euro"),                   QChar(0x20ac)), true);
-  loadDefaultCurrency(MyMoneySecurity("FKP", i18n("Falkland Islands Pound"), QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("FJD", i18n("Fiji Dollar"),            "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("GMD", i18n("Gambian Dalasi")), create);
-  loadDefaultCurrency(MyMoneySecurity("GEL", i18n("Georgian Lari")), create);
-  loadDefaultCurrency(MyMoneySecurity("GHC", i18n("Ghanaian Cedi")), create);
-  loadDefaultCurrency(MyMoneySecurity("GIP", i18n("Gibraltar Pound"),        QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("GTQ", i18n("Guatemalan Quetzal")), create);
-  loadDefaultCurrency(MyMoneySecurity("GWP", i18n("Guinea-Bissau Peso")), create);
-  loadDefaultCurrency(MyMoneySecurity("GYD", i18n("Guyanan Dollar"),         "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("HTG", i18n("Haitian Gourde")), create);
-  loadDefaultCurrency(MyMoneySecurity("HNL", i18n("Honduran Lempira")), create);
-  loadDefaultCurrency(MyMoneySecurity("HKD", i18n("Hong Kong Dollar"),       "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("HUF", i18n("Hungarian Forint"),       "HUF", 1, 1, 100), create);
-  loadDefaultCurrency(MyMoneySecurity("ISK", i18n("Iceland Krona")), create);
-  loadDefaultCurrency(MyMoneySecurity("INR", i18n("Indian Rupee"),           QChar(0x20A8)), create);
-  loadDefaultCurrency(MyMoneySecurity("IDR", i18n("Indonesian Rupiah"),      "IDR", 100, 1), create);
-  loadDefaultCurrency(MyMoneySecurity("IRR", i18n("Iranian Rial"),           "IRR", 1, 1), create);
-  loadDefaultCurrency(MyMoneySecurity("IQD", i18n("Iraqi Dinar"),            "IQD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("ILS", i18n("Israeli New Shekel"),     QChar(0x20AA)), create);
-  loadDefaultCurrency(MyMoneySecurity("JMD", i18n("Jamaican Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("JPY", i18n("Japanese Yen"),           QChar(0x00A5), 100, 1), create);
-  loadDefaultCurrency(MyMoneySecurity("JOD", i18n("Jordanian Dinar"),        "JOD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("KZT", i18n("Kazakhstan Tenge")), create);
-  loadDefaultCurrency(MyMoneySecurity("KES", i18n("Kenyan Shilling")), create);
-  loadDefaultCurrency(MyMoneySecurity("KWD", i18n("Kuwaiti Dinar"),          "KWD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("KGS", i18n("Kyrgyzstan Som")), create);
-  loadDefaultCurrency(MyMoneySecurity("LAK", i18n("Laos Kip"),               QChar(0x20AD)), create);
-  loadDefaultCurrency(MyMoneySecurity("LVL", i18n("Latvian Lats")), create);
-  loadDefaultCurrency(MyMoneySecurity("LBP", i18n("Lebanese Pound"),         QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("LSL", i18n("Lesotho Loti")), create);
-  loadDefaultCurrency(MyMoneySecurity("LRD", i18n("Liberian Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("LYD", i18n("Libyan Dinar"),           "LYD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("MOP", i18n("Macau Pataca")), create);
-  loadDefaultCurrency(MyMoneySecurity("MKD", i18n("Macedonian Denar")), create);
-  loadDefaultCurrency(MyMoneySecurity("MGF", i18n("Malagasy Franc"),         "MGF", 500, 500), create);
-  loadDefaultCurrency(MyMoneySecurity("MWK", i18n("Malawi Kwacha")), create);
-  loadDefaultCurrency(MyMoneySecurity("MYR", i18n("Malaysian Ringgit")), create);
-  loadDefaultCurrency(MyMoneySecurity("MVR", i18n("Maldive Rufiyaa")), create);
-  loadDefaultCurrency(MyMoneySecurity("MLF", i18n("Mali Republic Franc")), create);
-  loadDefaultCurrency(MyMoneySecurity("MRO", i18n("Mauritanian Ouguiya"),    "MRO", 5, 5), create);
-  loadDefaultCurrency(MyMoneySecurity("MUR", i18n("Mauritius Rupee")), create);
-  loadDefaultCurrency(MyMoneySecurity("MXN", i18n("Mexican Peso"),           "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("MDL", i18n("Moldavian Leu")), create);
-  loadDefaultCurrency(MyMoneySecurity("MNT", i18n("Mongolian Tugrik"),       QChar(0x20AE)), create);
-  loadDefaultCurrency(MyMoneySecurity("MAD", i18n("Moroccan Dirham")), create);
-  loadDefaultCurrency(MyMoneySecurity("MZN", i18n("Mozambique Metical"),     "MT"), create);
-  loadDefaultCurrency(MyMoneySecurity("MMK", i18n("Myanmar Kyat")), create);
-  loadDefaultCurrency(MyMoneySecurity("NAD", i18n("Namibian Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("NPR", i18n("Nepalese Rupee")), create);
-  loadDefaultCurrency(MyMoneySecurity("NZD", i18n("New Zealand Dollar"),     "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("NIC", i18n("Nicaraguan Cordoba Oro")), create);
-  loadDefaultCurrency(MyMoneySecurity("NGN", i18n("Nigerian Naira"),         QChar(0x20A6)), create);
-  loadDefaultCurrency(MyMoneySecurity("KPW", i18n("North Korean Won"),       QChar(0x20A9)), create);
-  loadDefaultCurrency(MyMoneySecurity("NOK", i18n("Norwegian Kroner"),       "kr"), create);
-  loadDefaultCurrency(MyMoneySecurity("OMR", i18n("Omani Rial"),             "OMR", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("PKR", i18n("Pakistan Rupee")), create);
-  loadDefaultCurrency(MyMoneySecurity("PAB", i18n("Panamanian Balboa")), create);
-  loadDefaultCurrency(MyMoneySecurity("PGK", i18n("Papua New Guinea Kina")), create);
-  loadDefaultCurrency(MyMoneySecurity("PYG", i18n("Paraguay Guarani")), create);
-  loadDefaultCurrency(MyMoneySecurity("PEN", i18n("Peruvian Nuevo Sol")), create);
-  loadDefaultCurrency(MyMoneySecurity("PHP", i18n("Philippine Peso"),        QChar(0x20B1)), create);
-  loadDefaultCurrency(MyMoneySecurity("PLN", i18n("Polish Zloty")), create);
-  loadDefaultCurrency(MyMoneySecurity("QAR", i18n("Qatari Rial")), create);
-  loadDefaultCurrency(MyMoneySecurity("RON", i18n("Romanian Leu (new)")), true);
-  loadDefaultCurrency(MyMoneySecurity("RUB", i18n("Russian Ruble")), true);
-  loadDefaultCurrency(MyMoneySecurity("RWF", i18n("Rwanda Franc")), create);
-  loadDefaultCurrency(MyMoneySecurity("WST", i18n("Samoan Tala")), create);
-  loadDefaultCurrency(MyMoneySecurity("STD", i18n("Sao Tome and Principe Dobra")), create);
-  loadDefaultCurrency(MyMoneySecurity("SAR", i18n("Saudi Riyal")), create);
-  loadDefaultCurrency(MyMoneySecurity("RSD", i18n("Serbian Dinar")), create);
-  loadDefaultCurrency(MyMoneySecurity("SCR", i18n("Seychelles Rupee")), create);
-  loadDefaultCurrency(MyMoneySecurity("SLL", i18n("Sierra Leone Leone")), create);
-  loadDefaultCurrency(MyMoneySecurity("SGD", i18n("Singapore Dollar"),       "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("SBD", i18n("Solomon Islands Dollar"), "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("SOS", i18n("Somali Shilling")), create);
-  loadDefaultCurrency(MyMoneySecurity("ZAR", i18n("South African Rand")), create);
-  loadDefaultCurrency(MyMoneySecurity("KRW", i18n("South Korean Won"),       QChar(0x20A9)), create);
-  loadDefaultCurrency(MyMoneySecurity("LKR", i18n("Sri Lanka Rupee")), create);
-  loadDefaultCurrency(MyMoneySecurity("SHP", i18n("St. Helena Pound"),       QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("SDD", i18n("Sudanese Dinar")), create);
-  loadDefaultCurrency(MyMoneySecurity("SRG", i18n("Suriname Guilder")), create);
-  loadDefaultCurrency(MyMoneySecurity("SZL", i18n("Swaziland Lilangeni")), create);
-  loadDefaultCurrency(MyMoneySecurity("SEK", i18n("Swedish Krona")), create);
-  loadDefaultCurrency(MyMoneySecurity("CHF", i18n("Swiss Franc"),            "SFr"), create);
-  loadDefaultCurrency(MyMoneySecurity("SYP", i18n("Syrian Pound"),           QChar(0x00A3)), create);
-  loadDefaultCurrency(MyMoneySecurity("TWD", i18n("Taiwan Dollar"),          "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("TJS", i18n("Tajikistan Somoni")), create);
-  loadDefaultCurrency(MyMoneySecurity("TZS", i18n("Tanzanian Shilling")), create);
-  loadDefaultCurrency(MyMoneySecurity("THB", i18n("Thai Baht"),              QChar(0x0E3F)), create);
-  loadDefaultCurrency(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")), create);
-  loadDefaultCurrency(MyMoneySecurity("TTD", i18n("Trinidad and Tobago Dollar"), "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("TND", i18n("Tunisian Dinar"),         "TND", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira"), QChar(0x20BA)), create);
-  loadDefaultCurrency(MyMoneySecurity("TMM", i18n("Turkmenistan Manat")), create);
-  loadDefaultCurrency(MyMoneySecurity("USD", i18n("US Dollar"),              "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("UGX", i18n("Uganda Shilling")), create);
-  loadDefaultCurrency(MyMoneySecurity("UAH", i18n("Ukraine Hryvnia")), create);
-  loadDefaultCurrency(MyMoneySecurity("CLF", i18n("Unidad de Fometo")), create);
-  loadDefaultCurrency(MyMoneySecurity("AED", i18n("United Arab Emirates Dirham")), create);
-  loadDefaultCurrency(MyMoneySecurity("UYU", i18n("Uruguayan Peso")), create);
-  loadDefaultCurrency(MyMoneySecurity("UZS", i18n("Uzbekistani Sum")), create);
-  loadDefaultCurrency(MyMoneySecurity("VUV", i18n("Vanuatu Vatu")), create);
-  loadDefaultCurrency(MyMoneySecurity("VEB", i18n("Venezuelan Bolivar")), create);
-  loadDefaultCurrency(MyMoneySecurity("VND", i18n("Vietnamese Dong"),        QChar(0x20AB)), create);
-  loadDefaultCurrency(MyMoneySecurity("ZMK", i18n("Zambian Kwacha")), create);
-  loadDefaultCurrency(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"), create);
-
-  loadDefaultCurrency(MyMoneySecurity("XAU", i18n("Gold"),       "XAU", 1, 1000000), create);
-  loadDefaultCurrency(MyMoneySecurity("XPD", i18n("Palladium"),  "XPD", 1, 1000000), create);
-  loadDefaultCurrency(MyMoneySecurity("XPT", i18n("Platinum"),   "XPT", 1, 1000000), create);
-  loadDefaultCurrency(MyMoneySecurity("XAG", i18n("Silver"),     "XAG", 1, 1000000), create);
-}
-
-void KMyMoneyView::loadAncientCurrency(const QString& id, const QString& name, const QString& sym, const QDate& date, const MyMoneyMoney& rate, const QString& newId, const int partsPerUnit, const int smallestCashFraction, const int smallestAccountFraction)
+void KMyMoneyView::loadAllCurrencies()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyPrice price(id, newId, date, rate, "KMyMoney");
   MyMoneyFileTransaction ft;
+  if (!file->currencyList().isEmpty())
+    return;
+  QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies = file->ancientCurrencies();
   try {
-    // make sure if entry exists
-    file->currency(id);
-    // make sure we have the right price
-    if (file->price(id, newId, date, true) != price) {
+  foreach (auto currency, file->availableCurrencyList()) {
+    file->addCurrency(currency);
+    MyMoneyPrice price = ancientCurrencies.value(currency, MyMoneyPrice());
+    if (price != MyMoneyPrice())
       file->addPrice(price);
-    }
-    ft.commit();
-  } catch (const MyMoneyException &) {
-    try {
-      file->addCurrency(MyMoneySecurity(id, name, sym, partsPerUnit, smallestCashFraction, smallestAccountFraction));
-      if (date.isValid()) {
-        file->addPrice(price);
-      }
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      qDebug("Error loading currency: %s", qPrintable(e.what()));
-    }
   }
-}
-
-void KMyMoneyView::loadAncientCurrencies()
-{
-  loadAncientCurrency("ATS", i18n("Austrian Schilling"), "ÖS", QDate(1998, 12, 31), MyMoneyMoney(10000, 137603), "EUR");
-  loadAncientCurrency("DEM", i18n("German Mark"), "DM", QDate(1998, 12, 31), MyMoneyMoney(100000, 195583), "EUR");
-  loadAncientCurrency("FRF", i18n("French Franc"), "FF", QDate(1998, 12, 31), MyMoneyMoney(100000, 655957), "EUR");
-  loadAncientCurrency("ITL", i18n("Italian Lira"), QChar(0x20A4), QDate(1998, 12, 31), MyMoneyMoney(100, 193627), "EUR");
-  loadAncientCurrency("ESP", i18n("Spanish Peseta"), QString(), QDate(1998, 12, 31), MyMoneyMoney(1000, 166386), "EUR");
-  loadAncientCurrency("NLG", i18n("Dutch Guilder"), QString(), QDate(1998, 12, 31), MyMoneyMoney(100000, 220371), "EUR");
-  loadAncientCurrency("BEF", i18n("Belgian Franc"), "Fr", QDate(1998, 12, 31), MyMoneyMoney(10000, 403399), "EUR");
-  loadAncientCurrency("LUF", i18n("Luxembourg Franc"), "Fr", QDate(1998, 12, 31), MyMoneyMoney(10000, 403399), "EUR");
-  loadAncientCurrency("PTE", i18n("Portuguese Escudo"), QString(), QDate(1998, 12, 31), MyMoneyMoney(1000, 200482), "EUR");
-  loadAncientCurrency("IEP", i18n("Irish Pound"), QChar(0x00A3), QDate(1998, 12, 31), MyMoneyMoney(1000000, 787564), "EUR");
-  loadAncientCurrency("FIM", i18n("Finnish Markka"), QString(), QDate(1998, 12, 31), MyMoneyMoney(100000, 594573), "EUR");
-  loadAncientCurrency("GRD", i18n("Greek Drachma"), QChar(0x20AF), QDate(1998, 12, 31), MyMoneyMoney(100, 34075), "EUR");
-
-  // http://en.wikipedia.org/wiki/Bulgarian_lev
-  loadAncientCurrency("BGL", i18n("Bulgarian Lev"), "BGL", QDate(1999, 7, 5), MyMoneyMoney(1, 1000), "BGN");
-
-  loadAncientCurrency("ROL", i18n("Romanian Leu"), "ROL", QDate(2005, 6, 30), MyMoneyMoney(1, 10000), "RON");
-
-  loadAncientCurrency("RUR", i18n("Russian Ruble (old)"), "RUR", QDate(1998, 1, 1), MyMoneyMoney(1, 1000), "RUB");
-
-  loadAncientCurrency("SIT", i18n("Slovenian Tolar"), "SIT", QDate(2006, 12, 31), MyMoneyMoney(100, 23964), "EUR");
-
-  // Source: http://www.tf-portfoliosolutions.net/products/turkishlira.aspx
-  loadAncientCurrency("TRL", i18n("Turkish Lira (old)"), "TL", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), "TRY");
-
-  // Source: http://www.focus.de/finanzen/news/malta-und-zypern_aid_66058.html
-  loadAncientCurrency("MTL", i18n("Maltese Lira"), "MTL", QDate(2008, 1, 1), MyMoneyMoney(429300, 1000000), "EUR");
-  loadAncientCurrency("CYP", i18n("Cyprus Pound"), QString("C%1").arg(QChar(0x00A3)), QDate(2008, 1, 1), MyMoneyMoney(585274, 1000000), "EUR");
-
-  // Source: http://www.focus.de/finanzen/news/waehrungszone-slowakei-ist-neuer-euro-staat_aid_359025.html
-  loadAncientCurrency("SKK", i18n("Slovak Koruna"), "SKK", QDate(2008, 12, 31), MyMoneyMoney(1000, 30126), "EUR");
-
-  // Source: http://en.wikipedia.org/wiki/Mozambican_metical
-  loadAncientCurrency("MZM", i18n("Mozambique Metical"), "MT", QDate(2006, 7, 1), MyMoneyMoney(1, 1000), "MZN");
-
-  // Source https://en.wikipedia.org/wiki/Azerbaijani_manat
-  loadAncientCurrency("AZM", i18n("Azerbaijani Manat"), "m.", QDate(2006, 1, 1), MyMoneyMoney(1, 5000), "AZN");
-
-  // Source: https://en.wikipedia.org/wiki/Litas
-  loadAncientCurrency("LTL", i18n("Lithuanian Litas"), "Lt", QDate(2015, 1, 1), MyMoneyMoney(100000, 345280), "EUR");
-
-  // Source: https://en.wikipedia.org/wiki/Belarusian_ruble
-  loadAncientCurrency("BYR", i18n("Belarusian Ruble (old)"), "BYR", QDate(2016, 7, 1), MyMoneyMoney(1, 10000), "BYN");
+  ft.commit();
+  } catch (const MyMoneyException &e) {
+    qDebug("Error %s loading currency", qPrintable(e.what()));
+  }
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)

@@ -40,7 +40,8 @@ MyMoneySecurity::MyMoneySecurity() :
     m_securityType(SECURITY_NONE),
     m_smallestAccountFraction(100),
     m_smallestCashFraction(100),
-    m_partsPerUnit(100)
+    m_partsPerUnit(100),
+    m_roundingMethod(AlkValue::RoundRound)
 {
 }
 
@@ -49,7 +50,8 @@ MyMoneySecurity::MyMoneySecurity(const QString& id, const QString& name, const Q
     m_name(name),
     m_securityType(SECURITY_CURRENCY),
     m_smallestCashFraction(100),
-    m_partsPerUnit(100)
+    m_partsPerUnit(100),
+    m_roundingMethod(AlkValue::RoundRound)
 {
   if (symbol.isEmpty())
     m_tradingSymbol = id;

@@ -182,23 +182,6 @@ private:
   void ungetString(QIODevice *qfile, char * buf, int len);
 
   /**
-    * This method creates the currency @p curr if it does not exist and
-    * @p create is @p true. If the currency already exists, it checks
-    * if the name is equal. If it is not, the name of the object in the
-    * engine is updated to the name passed with @p curr.
-    *
-    * @param curr MyMoneySecurity to be checked
-    * @param create If true and currency does not exist it will be created
-                    If false currency will not be created even if it does not exist
-    */
-  void loadDefaultCurrency(const MyMoneySecurity& curr, const bool create);
-
-  /**
-    *
-    */
-  void loadAncientCurrency(const QString& id, const QString& name, const QString& sym, const QDate& date, const MyMoneyMoney& rate, const QString& newId, const int partsPerUnit = 100, const int smallestCashFraction = 100, const int smallestAccountFraction = 0);
-
-  /**
     * if no base currency is defined, start the dialog and force it to be set
     */
   void selectBaseCurrency();
@@ -432,11 +415,14 @@ public:
   void finishReconciliation(const MyMoneyAccount& account);
 
   /**
-    * This method preloads all known currencies into the engine.
+    * This method updates names of currencies from file to localized names
     */
-  void loadDefaultCurrencies();
+  void updateCurrencyNames();
 
-  void loadAncientCurrencies();
+  /**
+    * This method loads all known currencies and saves them to the storage
+    */
+  void loadAllCurrencies();
 
   void showTitleBar(bool show);
 

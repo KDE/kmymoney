@@ -2672,6 +2672,228 @@ const MyMoneySecurity& MyMoneyFile::currency(const QString& id) const
   return curr;
 }
 
+const QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
+{
+  QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies;
+
+  ancientCurrencies.insert(MyMoneySecurity("ATS", i18n("Austrian Schilling"), "ÖS"),     MyMoneyPrice("ATS", "EUR", QDate(1998, 12, 31), MyMoneyMoney(10000, 137603), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("DEM", i18n("German Mark"), "DM"),            MyMoneyPrice("ATS", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 195583), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("FRF", i18n("French Franc"), "FF"),           MyMoneyPrice("FRF", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 655957), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("ITL", i18n("Italian Lira"), QChar(0x20A4)),  MyMoneyPrice("ITL", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100, 193627), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("ESP", i18n("Spanish Peseta"), QString()),    MyMoneyPrice("ESP", "EUR", QDate(1998, 12, 31), MyMoneyMoney(1000, 166386), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("NLG", i18n("Dutch Guilder"), QString()),     MyMoneyPrice("NLG", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 220371), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("BEF", i18n("Belgian Franc"), "Fr"),          MyMoneyPrice("BEF", "EUR", QDate(1998, 12, 31), MyMoneyMoney(10000, 403399), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("LUF", i18n("Luxembourg Franc"), "Fr"),       MyMoneyPrice("LUF", "EUR", QDate(1998, 12, 31), MyMoneyMoney(10000, 403399), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("PTE", i18n("Portuguese Escudo"), QString()), MyMoneyPrice("PTE", "EUR", QDate(1998, 12, 31), MyMoneyMoney(1000, 200482), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("IEP", i18n("Irish Pound"), QChar(0x00A3)),   MyMoneyPrice("IEP", "EUR", QDate(1998, 12, 31), MyMoneyMoney(1000000, 787564), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("FIM", i18n("Finnish Markka"), QString()),    MyMoneyPrice("FIM", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 594573), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("GRD", i18n("Greek Drachma"), QChar(0x20AF)), MyMoneyPrice("GRD", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100, 34075), QLatin1Literal("KMyMoney")));
+
+    // http://en.wikipedia.org/wiki/Bulgarian_lev
+  ancientCurrencies.insert(MyMoneySecurity("BGL", i18n("Bulgarian Lev"), "BGL"), MyMoneyPrice("BGL", "BGN", QDate(1999, 7, 5), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
+
+  ancientCurrencies.insert(MyMoneySecurity("ROL", i18n("Romanian Leu"), "ROL"), MyMoneyPrice("ROL", "RON", QDate(2005, 6, 30), MyMoneyMoney(1, 10000), QLatin1Literal("KMyMoney")));
+
+  ancientCurrencies.insert(MyMoneySecurity("RUR", i18n("Russian Ruble (old)"), "RUR"), MyMoneyPrice("RUR", "RUB", QDate(1998, 1, 1), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
+
+  ancientCurrencies.insert(MyMoneySecurity("SIT", i18n("Slovenian Tolar"), "SIT"), MyMoneyPrice("SIT", "EUR", QDate(2006, 12, 31), MyMoneyMoney(1, 23964), QLatin1Literal("KMyMoney")));
+
+    // Source: http://www.tf-portfoliosolutions.net/products/turkishlira.aspx
+  ancientCurrencies.insert(MyMoneySecurity("TRL", i18n("Turkish Lira (old)"), "TL"), MyMoneyPrice("TRL", "TRY", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), QLatin1Literal("KMyMoney")));
+
+    // Source: http://www.focus.de/finanzen/news/malta-und-zypern_aid_66058.html
+  ancientCurrencies.insert(MyMoneySecurity("MTL", i18n("Maltese Lira"), "MTL"), MyMoneyPrice("MTL", "EUR", QDate(2008, 1, 1), MyMoneyMoney(429300, 1000000), QLatin1Literal("KMyMoney")));
+  ancientCurrencies.insert(MyMoneySecurity("CYP", i18n("Cyprus Pound"), QString("C%1").arg(QChar(0x00A3))), MyMoneyPrice("CYP", "EUR", QDate(2008, 1, 1), MyMoneyMoney(585274, 1000000), QLatin1Literal("KMyMoney")));
+
+    // Source: http://www.focus.de/finanzen/news/waehrungszone-slowakei-ist-neuer-euro-staat_aid_359025.html
+  ancientCurrencies.insert(MyMoneySecurity("SKK", i18n("Slovak Koruna"), "SKK"), MyMoneyPrice("SKK", "EUR", QDate(2008, 12, 31), MyMoneyMoney(1000, 30126), QLatin1Literal("KMyMoney")));
+
+    // Source: http://en.wikipedia.org/wiki/Mozambican_metical
+  ancientCurrencies.insert(MyMoneySecurity("MZM", i18n("Mozambique Metical"), "MT"), MyMoneyPrice("MZM", "MZN", QDate(2006, 7, 1), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
+
+    // Source https://en.wikipedia.org/wiki/Azerbaijani_manat
+  ancientCurrencies.insert(MyMoneySecurity("AZM", i18n("Azerbaijani Manat"), "m."), MyMoneyPrice("AZM", "AZN", QDate(2006, 1, 1), MyMoneyMoney(1, 5000), QLatin1Literal("KMyMoney")));
+
+    // Source: https://en.wikipedia.org/wiki/Litas
+  ancientCurrencies.insert(MyMoneySecurity("LTL", i18n("Lithuanian Litas"), "Lt"), MyMoneyPrice("LTL", "EUR", QDate(2015, 1, 1), MyMoneyMoney(100000, 345280), QLatin1Literal("KMyMoney")));
+
+    // Source: https://en.wikipedia.org/wiki/Belarusian_ruble
+  ancientCurrencies.insert(MyMoneySecurity("BYR", i18n("Belarusian Ruble (old)"), "BYR"), MyMoneyPrice("BYR", "BYN", QDate(2016, 7, 1), MyMoneyMoney(1, 10000), QLatin1Literal("KMyMoney")));
+  return ancientCurrencies;
+}
+
+const QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
+{
+  QList<MyMoneySecurity> currencyList;
+  currencyList.append(MyMoneySecurity("AFA", i18n("Afghanistan Afghani")));
+  currencyList.append(MyMoneySecurity("ALL", i18n("Albanian Lek")));
+  currencyList.append(MyMoneySecurity("ANG", i18n("Netherland Antillian Guilder")));
+  currencyList.append(MyMoneySecurity("DZD", i18n("Algerian Dinar")));
+  currencyList.append(MyMoneySecurity("ADF", i18n("Andorran Franc")));
+  currencyList.append(MyMoneySecurity("ADP", i18n("Andorran Peseta")));
+  currencyList.append(MyMoneySecurity("AON", i18n("Angolan New Kwanza")));
+  currencyList.append(MyMoneySecurity("ARS", i18n("Argentine Peso"),         "$"));
+  currencyList.append(MyMoneySecurity("AWG", i18n("Aruban Florin")));
+  currencyList.append(MyMoneySecurity("AUD", i18n("Australian Dollar"),      "$"));
+  currencyList.append(MyMoneySecurity("AZN", i18n("Azerbaijani Manat"),      "m."));
+  currencyList.append(MyMoneySecurity("BSD", i18n("Bahamian Dollar"),        "$"));
+  currencyList.append(MyMoneySecurity("BHD", i18n("Bahraini Dinar"),         "BHD", 1000, 1000));
+  currencyList.append(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")));
+  currencyList.append(MyMoneySecurity("BBD", i18n("Barbados Dollar"),        "$"));
+  currencyList.append(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC"));
+  currencyList.append(MyMoneySecurity("BYN", i18n("Belarusian Ruble"),       "Br"));
+  currencyList.append(MyMoneySecurity("BZD", i18n("Belize Dollar"),          "$"));
+  currencyList.append(MyMoneySecurity("BMD", i18n("Bermudian Dollar"),       "$"));
+  currencyList.append(MyMoneySecurity("BTN", i18n("Bhutan Ngultrum")));
+  currencyList.append(MyMoneySecurity("BOB", i18n("Bolivian Boliviano")));
+  currencyList.append(MyMoneySecurity("BAM", i18n("Bosnian Convertible Mark")));
+  currencyList.append(MyMoneySecurity("BWP", i18n("Botswana Pula")));
+  currencyList.append(MyMoneySecurity("BRL", i18n("Brazilian Real"),         "R$"));
+  currencyList.append(MyMoneySecurity("GBP", i18n("British Pound"),          QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("BND", i18n("Brunei Dollar"),          "$"));
+  currencyList.append(MyMoneySecurity("BGN", i18n("Bulgarian Lev (new)")));
+  currencyList.append(MyMoneySecurity("BIF", i18n("Burundi Franc")));
+  currencyList.append(MyMoneySecurity("XAF", i18n("CFA Franc BEAC")));
+  currencyList.append(MyMoneySecurity("XOF", i18n("CFA Franc BCEAO")));
+  currencyList.append(MyMoneySecurity("XPF", i18n("CFP Franc Pacifique"), "F", 1, 1, 100));
+  currencyList.append(MyMoneySecurity("KHR", i18n("Cambodia Riel")));
+  currencyList.append(MyMoneySecurity("CAD", i18n("Canadian Dollar"),        "$"));
+  currencyList.append(MyMoneySecurity("CVE", i18n("Cape Verde Escudo")));
+  currencyList.append(MyMoneySecurity("KYD", i18n("Cayman Islands Dollar"),  "$"));
+  currencyList.append(MyMoneySecurity("CLP", i18n("Chilean Peso")));
+  currencyList.append(MyMoneySecurity("CNY", i18n("Chinese Yuan Renminbi")));
+  currencyList.append(MyMoneySecurity("COP", i18n("Colombian Peso")));
+  currencyList.append(MyMoneySecurity("KMF", i18n("Comoros Franc")));
+  currencyList.append(MyMoneySecurity("CRC", i18n("Costa Rican Colon"),      QChar(0x20A1)));
+  currencyList.append(MyMoneySecurity("HRK", i18n("Croatian Kuna")));
+  currencyList.append(MyMoneySecurity("CUP", i18n("Cuban Peso")));
+  currencyList.append(MyMoneySecurity("CZK", i18n("Czech Koruna")));
+  currencyList.append(MyMoneySecurity("DKK", i18n("Danish Krone"),           "kr"));
+  currencyList.append(MyMoneySecurity("DJF", i18n("Djibouti Franc")));
+  currencyList.append(MyMoneySecurity("DOP", i18n("Dominican Peso")));
+  currencyList.append(MyMoneySecurity("XCD", i18n("East Caribbean Dollar"),  "$"));
+  currencyList.append(MyMoneySecurity("EGP", i18n("Egyptian Pound"),         QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("SVC", i18n("El Salvador Colon")));
+  currencyList.append(MyMoneySecurity("ERN", i18n("Eritrean Nakfa")));
+  currencyList.append(MyMoneySecurity("EEK", i18n("Estonian Kroon")));
+  currencyList.append(MyMoneySecurity("ETB", i18n("Ethiopian Birr")));
+  currencyList.append(MyMoneySecurity("EUR", i18n("Euro"),                   QChar(0x20ac)));
+  currencyList.append(MyMoneySecurity("FKP", i18n("Falkland Islands Pound"), QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("FJD", i18n("Fiji Dollar"),            "$"));
+  currencyList.append(MyMoneySecurity("GMD", i18n("Gambian Dalasi")));
+  currencyList.append(MyMoneySecurity("GEL", i18n("Georgian Lari")));
+  currencyList.append(MyMoneySecurity("GHC", i18n("Ghanaian Cedi")));
+  currencyList.append(MyMoneySecurity("GIP", i18n("Gibraltar Pound"),        QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("GTQ", i18n("Guatemalan Quetzal")));
+  currencyList.append(MyMoneySecurity("GWP", i18n("Guinea-Bissau Peso")));
+  currencyList.append(MyMoneySecurity("GYD", i18n("Guyanan Dollar"),         "$"));
+  currencyList.append(MyMoneySecurity("HTG", i18n("Haitian Gourde")));
+  currencyList.append(MyMoneySecurity("HNL", i18n("Honduran Lempira")));
+  currencyList.append(MyMoneySecurity("HKD", i18n("Hong Kong Dollar"),       "$"));
+  currencyList.append(MyMoneySecurity("HUF", i18n("Hungarian Forint"),       "HUF", 1, 1, 100));
+  currencyList.append(MyMoneySecurity("ISK", i18n("Iceland Krona")));
+  currencyList.append(MyMoneySecurity("INR", i18n("Indian Rupee"),           QChar(0x20A8)));
+  currencyList.append(MyMoneySecurity("IDR", i18n("Indonesian Rupiah"),      "IDR", 100, 1));
+  currencyList.append(MyMoneySecurity("IRR", i18n("Iranian Rial"),           "IRR", 1, 1));
+  currencyList.append(MyMoneySecurity("IQD", i18n("Iraqi Dinar"),            "IQD", 1000, 1000));
+  currencyList.append(MyMoneySecurity("ILS", i18n("Israeli New Shekel"),     QChar(0x20AA)));
+  currencyList.append(MyMoneySecurity("JMD", i18n("Jamaican Dollar"),        "$"));
+  currencyList.append(MyMoneySecurity("JPY", i18n("Japanese Yen"),           QChar(0x00A5), 100, 1));
+  currencyList.append(MyMoneySecurity("JOD", i18n("Jordanian Dinar"),        "JOD", 1000, 1000));
+  currencyList.append(MyMoneySecurity("KZT", i18n("Kazakhstan Tenge")));
+  currencyList.append(MyMoneySecurity("KES", i18n("Kenyan Shilling")));
+  currencyList.append(MyMoneySecurity("KWD", i18n("Kuwaiti Dinar"),          "KWD", 1000, 1000));
+  currencyList.append(MyMoneySecurity("KGS", i18n("Kyrgyzstan Som")));
+  currencyList.append(MyMoneySecurity("LAK", i18n("Laos Kip"),               QChar(0x20AD)));
+  currencyList.append(MyMoneySecurity("LVL", i18n("Latvian Lats")));
+  currencyList.append(MyMoneySecurity("LBP", i18n("Lebanese Pound"),         QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("LSL", i18n("Lesotho Loti")));
+  currencyList.append(MyMoneySecurity("LRD", i18n("Liberian Dollar"),        "$"));
+  currencyList.append(MyMoneySecurity("LYD", i18n("Libyan Dinar"),           "LYD", 1000, 1000));
+  currencyList.append(MyMoneySecurity("MOP", i18n("Macau Pataca")));
+  currencyList.append(MyMoneySecurity("MKD", i18n("Macedonian Denar")));
+  currencyList.append(MyMoneySecurity("MGF", i18n("Malagasy Franc"),         "MGF", 500, 500));
+  currencyList.append(MyMoneySecurity("MWK", i18n("Malawi Kwacha")));
+  currencyList.append(MyMoneySecurity("MYR", i18n("Malaysian Ringgit")));
+  currencyList.append(MyMoneySecurity("MVR", i18n("Maldive Rufiyaa")));
+  currencyList.append(MyMoneySecurity("MLF", i18n("Mali Republic Franc")));
+  currencyList.append(MyMoneySecurity("MRO", i18n("Mauritanian Ouguiya"),    "MRO", 5, 5));
+  currencyList.append(MyMoneySecurity("MUR", i18n("Mauritius Rupee")));
+  currencyList.append(MyMoneySecurity("MXN", i18n("Mexican Peso"),           "$"));
+  currencyList.append(MyMoneySecurity("MDL", i18n("Moldavian Leu")));
+  currencyList.append(MyMoneySecurity("MNT", i18n("Mongolian Tugrik"),       QChar(0x20AE)));
+  currencyList.append(MyMoneySecurity("MAD", i18n("Moroccan Dirham")));
+  currencyList.append(MyMoneySecurity("MZN", i18n("Mozambique Metical"),     "MT"));
+  currencyList.append(MyMoneySecurity("MMK", i18n("Myanmar Kyat")));
+  currencyList.append(MyMoneySecurity("NAD", i18n("Namibian Dollar"),        "$"));
+  currencyList.append(MyMoneySecurity("NPR", i18n("Nepalese Rupee")));
+  currencyList.append(MyMoneySecurity("NZD", i18n("New Zealand Dollar"),     "$"));
+  currencyList.append(MyMoneySecurity("NIC", i18n("Nicaraguan Cordoba Oro")));
+  currencyList.append(MyMoneySecurity("NGN", i18n("Nigerian Naira"),         QChar(0x20A6)));
+  currencyList.append(MyMoneySecurity("KPW", i18n("North Korean Won"),       QChar(0x20A9)));
+  currencyList.append(MyMoneySecurity("NOK", i18n("Norwegian Kroner"),       "kr"));
+  currencyList.append(MyMoneySecurity("OMR", i18n("Omani Rial"),             "OMR", 1000, 1000));
+  currencyList.append(MyMoneySecurity("PKR", i18n("Pakistan Rupee")));
+  currencyList.append(MyMoneySecurity("PAB", i18n("Panamanian Balboa")));
+  currencyList.append(MyMoneySecurity("PGK", i18n("Papua New Guinea Kina")));
+  currencyList.append(MyMoneySecurity("PYG", i18n("Paraguay Guarani")));
+  currencyList.append(MyMoneySecurity("PEN", i18n("Peruvian Nuevo Sol")));
+  currencyList.append(MyMoneySecurity("PHP", i18n("Philippine Peso"),        QChar(0x20B1)));
+  currencyList.append(MyMoneySecurity("PLN", i18n("Polish Zloty")));
+  currencyList.append(MyMoneySecurity("QAR", i18n("Qatari Rial")));
+  currencyList.append(MyMoneySecurity("RON", i18n("Romanian Leu (new)")));
+  currencyList.append(MyMoneySecurity("RUB", i18n("Russian Ruble")));
+  currencyList.append(MyMoneySecurity("RWF", i18n("Rwanda Franc")));
+  currencyList.append(MyMoneySecurity("WST", i18n("Samoan Tala")));
+  currencyList.append(MyMoneySecurity("STD", i18n("Sao Tome and Principe Dobra")));
+  currencyList.append(MyMoneySecurity("SAR", i18n("Saudi Riyal")));
+  currencyList.append(MyMoneySecurity("RSD", i18n("Serbian Dinar")));
+  currencyList.append(MyMoneySecurity("SCR", i18n("Seychelles Rupee")));
+  currencyList.append(MyMoneySecurity("SLL", i18n("Sierra Leone Leone")));
+  currencyList.append(MyMoneySecurity("SGD", i18n("Singapore Dollar"),       "$"));
+  currencyList.append(MyMoneySecurity("SBD", i18n("Solomon Islands Dollar"), "$"));
+  currencyList.append(MyMoneySecurity("SOS", i18n("Somali Shilling")));
+  currencyList.append(MyMoneySecurity("ZAR", i18n("South African Rand")));
+  currencyList.append(MyMoneySecurity("KRW", i18n("South Korean Won"),       QChar(0x20A9)));
+  currencyList.append(MyMoneySecurity("LKR", i18n("Sri Lanka Rupee")));
+  currencyList.append(MyMoneySecurity("SHP", i18n("St. Helena Pound"),       QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("SDD", i18n("Sudanese Dinar")));
+  currencyList.append(MyMoneySecurity("SRG", i18n("Suriname Guilder")));
+  currencyList.append(MyMoneySecurity("SZL", i18n("Swaziland Lilangeni")));
+  currencyList.append(MyMoneySecurity("SEK", i18n("Swedish Krona")));
+  currencyList.append(MyMoneySecurity("CHF", i18n("Swiss Franc"),            "SFr"));
+  currencyList.append(MyMoneySecurity("SYP", i18n("Syrian Pound"),           QChar(0x00A3)));
+  currencyList.append(MyMoneySecurity("TWD", i18n("Taiwan Dollar"),          "$"));
+  currencyList.append(MyMoneySecurity("TJS", i18n("Tajikistan Somoni")));
+  currencyList.append(MyMoneySecurity("TZS", i18n("Tanzanian Shilling")));
+  currencyList.append(MyMoneySecurity("THB", i18n("Thai Baht"),              QChar(0x0E3F)));
+  currencyList.append(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")));
+  currencyList.append(MyMoneySecurity("TTD", i18n("Trinidad and Tobago Dollar"), "$"));
+  currencyList.append(MyMoneySecurity("TND", i18n("Tunisian Dinar"),         "TND", 1000, 1000));
+  currencyList.append(MyMoneySecurity("TRY", i18n("Turkish Lira"), QChar(0x20BA)));
+  currencyList.append(MyMoneySecurity("TMM", i18n("Turkmenistan Manat")));
+  currencyList.append(MyMoneySecurity("USD", i18n("US Dollar"),              "$"));
+  currencyList.append(MyMoneySecurity("UGX", i18n("Uganda Shilling")));
+  currencyList.append(MyMoneySecurity("UAH", i18n("Ukraine Hryvnia")));
+  currencyList.append(MyMoneySecurity("CLF", i18n("Unidad de Fometo")));
+  currencyList.append(MyMoneySecurity("AED", i18n("United Arab Emirates Dirham")));
+  currencyList.append(MyMoneySecurity("UYU", i18n("Uruguayan Peso")));
+  currencyList.append(MyMoneySecurity("UZS", i18n("Uzbekistani Sum")));
+  currencyList.append(MyMoneySecurity("VUV", i18n("Vanuatu Vatu")));
+  currencyList.append(MyMoneySecurity("VEB", i18n("Venezuelan Bolivar")));
+  currencyList.append(MyMoneySecurity("VND", i18n("Vietnamese Dong"),        QChar(0x20AB)));
+  currencyList.append(MyMoneySecurity("ZMK", i18n("Zambian Kwacha")));
+  currencyList.append(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"));
+
+  currencyList.append(MyMoneySecurity("XAU", i18n("Gold"),       "XAU", 1, 1000000));
+  currencyList.append(MyMoneySecurity("XPD", i18n("Palladium"),  "XPD", 1, 1000000));
+  currencyList.append(MyMoneySecurity("XPT", i18n("Platinum"),   "XPT", 1, 1000000));
+  currencyList.append(MyMoneySecurity("XAG", i18n("Silver"),     "XAG", 1, 1000000));
+
+  currencyList.append(ancientCurrencies().keys());
+  return currencyList;
+}
+
 const QList<MyMoneySecurity> MyMoneyFile::currencyList() const
 {
   d->checkStorage();

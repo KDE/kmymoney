@@ -10,6 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Alvaro Soliverez <asoliverez@gmail.com>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -31,14 +32,12 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QBitmap>
-#include <QLabel>
 #include <QList>
 #include <QTreeWidget>
 #include <QStyledItemDelegate>
 #include <QIcon>
-#include <QDialogButtonBox>
 #include <QPushButton>
-#include <QVBoxLayout>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -51,6 +50,8 @@
 
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
+#include <kavailablecurrencydlg.h>
+#include <kmymoneyutils.h>
 
 // this delegate is needed to disable editing the currency id (column 1)
 // since QTreeWidgetItem has only one set of flags for the whole row
@@ -75,35 +76,27 @@ QWidget *KCurrencyEditDelegate::createEditor(QWidget *parent, const QStyleOption
   return QStyledItemDelegate::createEditor(parent, option, index);
 }
 
-KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
-    KCurrencyEditDlgDecl(parent)
+KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) : ui(new Ui::KCurrencyEditDlg)
 {
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
-  QVBoxLayout *mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-  mainLayout->addWidget(m_layoutWidget);
-  m_selectBaseCurrencyButton = new QPushButton;
-  buttonBox->addButton(m_selectBaseCurrencyButton, QDialogButtonBox::ActionRole);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  mainLayout->addWidget(buttonBox);
-  m_selectBaseCurrencyButton->setText(i18n("Select as base currency"));
-
-  // create the searchline widget
-  // and insert it into the existing layout
-  m_searchWidget = new KTreeWidgetSearchLineWidget(this, m_currencyList);
+  Q_UNUSED(parent);
+  ui->setupUi(this);
+  m_searchWidget = new KTreeWidgetSearchLineWidget(this, ui->m_currencyList);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-  m_listLayout->insertWidget(0, m_searchWidget);
+  ui->verticalLayout->insertWidget(0, m_searchWidget);
+  ui->m_currencyList->setItemDelegate(new KCurrencyEditDelegate(ui->m_currencyList));
+  ui->m_closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close"),
+                                              QIcon::fromTheme(QStringLiteral("stop"))));
+  ui->m_selectBaseCurrencyButton->setIcon(QIcon::fromTheme(QStringLiteral("kmymoney")));
 
-  m_currencyList->header()->setStretchLastSection(true);
-  m_currencyList->setContextMenuPolicy(Qt::CustomContextMenu);
-  m_currencyList->setItemDelegate(new KCurrencyEditDelegate(m_currencyList));
-
-  connect(m_currencyList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
+  connect(ui->m_currencyList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadCurrencies()));
-  connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
+  connect(ui->m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
+  connect(ui->m_currencyList, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
 
-  connect(m_selectBaseCurrencyButton, SIGNAL(clicked()), this, SLOT(slotSelectBaseCurrency()));
+  connect(ui->m_selectBaseCurrencyButton, SIGNAL(clicked()), this, SLOT(slotSelectBaseCurrency()));
+  connect(ui->m_addCurrencyButton, SIGNAL(clicked()), this, SLOT(slotAddCurrency()));
+  connect(ui->m_removeCurrencyButton, SIGNAL(clicked()), this, SLOT(slotRemoveCurrency()));
+  connect(ui->m_removeUnusedCurrencyButton, SIGNAL(clicked()), this, SLOT(slotRemoveUnusedCurrency()));
 
   QTimer::singleShot(10, this, SLOT(timerDone()));
 }
@@ -113,16 +106,15 @@ void KCurrencyEditDlg::timerDone()
   slotLoadCurrencies();
 
   //resize the column widths
-  m_currencyList->resizeColumnToContents(0);
-  m_currencyList->resizeColumnToContents(1);
-  m_currencyList->resizeColumnToContents(2);
+  for (int i = 0; i < 3; ++i)
+    ui->m_currencyList->resizeColumnToContents(i);
 
   if (!m_currency.id().isEmpty()) {
-    QTreeWidgetItemIterator it(m_currencyList);
+    QTreeWidgetItemIterator it(ui->m_currencyList);
     QTreeWidgetItem* q;
     while ((q = *it) != 0) {
       if (q->text(1) == m_currency.id()) {
-        m_currencyList->scrollToItem(q);
+        ui->m_currencyList->scrollToItem(q);
         break;
       }
       ++it;
@@ -136,8 +128,8 @@ KCurrencyEditDlg::~KCurrencyEditDlg()
 
 void KCurrencyEditDlg::slotLoadCurrencies()
 {
-  disconnect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
-  disconnect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
+  disconnect(ui->m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
+  disconnect(ui->m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
   QList<MyMoneySecurity>::ConstIterator it;
   QTreeWidgetItem *first = 0;
@@ -158,9 +150,9 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   mask.clear();
   empty.setMask(mask);
 
-  m_currencyList->clear();
+  ui->m_currencyList->clear();
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    QTreeWidgetItem *p = new QTreeWidgetItem(m_currencyList);
+    QTreeWidgetItem *p = new QTreeWidgetItem(ui->m_currencyList);
     p->setText(0, (*it).name());
     p->setData(0, Qt::UserRole, QVariant::fromValue(*it));
     p->setFlags(p->flags() | Qt::ItemIsEditable);
@@ -168,7 +160,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     p->setText(2, (*it).tradingSymbol());
 
     if ((*it).id() == baseCurrency) {
-      p->setData(0, Qt::DecorationRole, QIcon::fromTheme("kmymoney"));
+      p->setData(0, Qt::DecorationRole, QIcon::fromTheme(QStringLiteral("kmymoney")));
       if (m_currency.id().isEmpty())
         first = p;
     } else {
@@ -182,17 +174,17 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     } else if ((*it).id() == localCurrency && !first)
       first = p;
   }
+  ui->m_removeUnusedCurrencyButton->setDisabled(list.count() <= 1);
+  ui->m_currencyList->sortItems(0, Qt::AscendingOrder);
 
-  m_currencyList->sortItems(0, Qt::AscendingOrder);
-
-  connect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
-  connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
+  connect(ui->m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
+  connect(ui->m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
 
   if (first == 0)
-    first = m_currencyList->invisibleRootItem()->child(0);
+    first = ui->m_currencyList->invisibleRootItem()->child(0);
   if (first != 0) {
-    m_currencyList->setCurrentItem(first);
-    m_currencyList->scrollToItem(first);
+    ui->m_currencyList->setCurrentItem(first);
+    ui->m_currencyList->scrollToItem(first);
   }
 
   slotSelectCurrency(first);
@@ -201,19 +193,19 @@ void KCurrencyEditDlg::slotLoadCurrencies()
 void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* item)
 {
   //if there is no current item selected, exit
-  if (!m_currencyList->currentItem() || item != m_currencyList->currentItem())
+  if (!ui->m_currencyList->currentItem() || item != ui->m_currencyList->currentItem())
     return;
 
   //verify that the stored currency id is not empty and the edited fields are not empty either
   if (!m_currency.id().isEmpty()
-      && !m_currencyList->currentItem()->text(2).isEmpty()
-      && !m_currencyList->currentItem()->text(0).isEmpty()) {
+      && !ui->m_currencyList->currentItem()->text(2).isEmpty()
+      && !ui->m_currencyList->currentItem()->text(0).isEmpty()) {
     //check that either the name or the id have changed
-    if (m_currencyList->currentItem()->text(2) != m_currency.tradingSymbol()
-        || m_currencyList->currentItem()->text(0) != m_currency.name()) {
+    if (ui->m_currencyList->currentItem()->text(2) != m_currency.tradingSymbol()
+        || ui->m_currencyList->currentItem()->text(0) != m_currency.name()) {
       //update the name and the id
-      m_currency.setName(m_currencyList->currentItem()->text(0));
-      m_currency.setTradingSymbol(m_currencyList->currentItem()->text(2));
+      m_currency.setName(ui->m_currencyList->currentItem()->text(0));
+      m_currency.setTradingSymbol(ui->m_currencyList->currentItem()->text(2));
 
       emit updateCurrency(m_currency.id(), m_currency.name(), m_currency.tradingSymbol());
     }
@@ -222,15 +214,15 @@ void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* item)
 
 void KCurrencyEditDlg::slotSelectCurrency(const QString& id)
 {
-  QTreeWidgetItemIterator it(m_currencyList);
+  QTreeWidgetItemIterator it(ui->m_currencyList);
 
   while (*it) {
     if ((*it)->text(1) == id) {
-      m_currencyList->blockSignals(true);
+      ui->m_currencyList->blockSignals(true);
       slotSelectCurrency(*it);
-      m_currencyList->setCurrentItem(*it);
-      m_currencyList->scrollToItem(*it);
-      m_currencyList->blockSignals(false);
+      ui->m_currencyList->setCurrentItem(*it);
+      ui->m_currencyList->scrollToItem(*it);
+      ui->m_currencyList->blockSignals(false);
       break;
     }
     ++it;
@@ -253,23 +245,42 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
     } catch (const MyMoneyException &) {
       m_currency = MyMoneySecurity();
     }
-    m_selectBaseCurrencyButton->setDisabled(m_currency.id() == baseId);
+
+    MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+    skip.fill(false);
+    skip.setBit(IMyMoneyStorage::RefCheckPrice);
+
+    const bool rc1 = m_currency.id() == baseId;
+    const bool rc2 = file->isReferenced(m_currency, skip);
+    const int count = ui->m_currencyList->selectedItems().count();
+
+    ui->m_selectBaseCurrencyButton->setDisabled(rc1 || count != 1);
+    ui->m_removeCurrencyButton->setDisabled((rc1 || rc2) && count <= 1);
     emit selectObject(m_currency);
   }
 }
 
+void KCurrencyEditDlg::slotItemSelectionChanged()
+{
+  int count = ui->m_currencyList->selectedItems().count();
+  if (!ui->m_selectBaseCurrencyButton->isEnabled() && count == 1)
+    slotSelectCurrency(ui->m_currencyList->currentItem());
+  if (count > 1)
+    ui->m_removeCurrencyButton->setEnabled(true);
+}
+
 void KCurrencyEditDlg::slotStartRename()
 {
-  QTreeWidgetItemIterator it_l(m_currencyList, QTreeWidgetItemIterator::Selected);
+  QTreeWidgetItemIterator it_l(ui->m_currencyList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   if ((it_v = *it_l) != 0) {
-    m_currencyList->editItem(it_v, 0);
+    ui->m_currencyList->editItem(it_v, 0);
   }
 }
 
 void KCurrencyEditDlg::slotOpenContextMenu(const QPoint& p)
 {
-  QTreeWidgetItem* item = m_currencyList->itemAt(p);
+  QTreeWidgetItem* item = ui->m_currencyList->itemAt(p);
   if (item)
     emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneySecurity>());
 }
@@ -277,11 +288,69 @@ void KCurrencyEditDlg::slotOpenContextMenu(const QPoint& p)
 void KCurrencyEditDlg::slotSelectBaseCurrency()
 {
   if (!m_currency.id().isEmpty()) {
-    QTreeWidgetItem* p = m_currencyList->currentItem();
+    QTreeWidgetItem* p = ui->m_currencyList->currentItem();
     emit selectBaseCurrency(m_currency);
     // in case the dataChanged() signal was not sent out (nested FileTransaction)
     // we update the list manually
-    if (p == m_currencyList->currentItem())
+    if (p == ui->m_currencyList->currentItem())
       slotLoadCurrencies();
   }
+}
+
+void KCurrencyEditDlg::slotAddCurrency()
+{
+  m_availableCurrencyDlg = new KAvailableCurrencyDlg;                                   // create new dialog for selecting currencies to add
+  if (m_availableCurrencyDlg->exec() != QDialog::Rejected) {
+    MyMoneyFile* file = MyMoneyFile::instance();
+    QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies = file->ancientCurrencies();
+    MyMoneyFileTransaction ft;
+    QList<QTreeWidgetItem *> currencyRows = m_availableCurrencyDlg->ui->m_currencyList->selectedItems(); // get selected currencies from new dialog
+    foreach (auto currencyRow, currencyRows) {
+      MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
+      file->addCurrency(currency);
+      if (ancientCurrencies.value(currency, MyMoneyPrice()) != MyMoneyPrice()) // if ancient currency is added...
+        file->addPrice(ancientCurrencies[currency]);                           // ...we want to add last known exchange rate as well
+    }
+    ft.commit();
+    ui->m_removeUnusedCurrencyButton->setDisabled(file->currencyList().count() <= 1);
+  }
+  delete m_availableCurrencyDlg;
+}
+
+void KCurrencyEditDlg::removeCurrency(const removalModeE& mode)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyFileTransaction ft;
+  MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+  skip.fill(false);                                 // check reference to all...
+  skip.setBit(IMyMoneyStorage::RefCheckPrice);      // ...except price
+
+  QTreeWidgetItemIterator it (ui->m_currencyList);  // iterate over whole tree
+  if (mode == RemoveUnused) {
+    while (*it) {
+      MyMoneySecurity currency = (*it)->data(0, Qt::UserRole).value<MyMoneySecurity>();
+      if (file->baseCurrency() != currency && !file->isReferenced(currency, skip))
+        KMyMoneyUtils::deleteSecurity(currency, this);
+      ++it;
+    }
+  } else if (mode == RemoveSelected) {
+    QList<QTreeWidgetItem*> currencyRows = ui->m_currencyList->selectedItems();
+    foreach(auto currencyRow, currencyRows) {
+      MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
+      if (file->baseCurrency() != currency && !file->isReferenced(currency, skip))
+        KMyMoneyUtils::deleteSecurity(currency, this);
+    }
+  }
+  ft.commit();
+  ui->m_removeUnusedCurrencyButton->setDisabled(file->currencyList().count() <= 1);
+}
+
+void KCurrencyEditDlg::slotRemoveCurrency()
+{
+  removeCurrency(RemoveSelected);
+}
+
+void KCurrencyEditDlg::slotRemoveUnusedCurrency()
+{
+  removeCurrency(RemoveUnused);
 }

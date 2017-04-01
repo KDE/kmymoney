@@ -444,6 +444,10 @@ public:
 
   static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
 
+  /**
+    * This method deletes security and associated price list but asks beforehand.
+    */
+  static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = NULL);
 };
 
 #endif

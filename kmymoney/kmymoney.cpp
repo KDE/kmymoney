@@ -1466,22 +1466,17 @@ void KMyMoneyApp::slotFileNew()
     d->m_fileName = QUrl();
     updateCaption();
 
-    // before we create the wizard, we need to preload the currencies
-    MyMoneyFileTransaction ft;
-    d->m_myMoneyView->loadDefaultCurrencies();
-    d->m_myMoneyView->loadAncientCurrencies();
-    ft.commit();
-
     NewUserWizard::Wizard *wizard = new NewUserWizard::Wizard();
 
     if (wizard->exec() == QDialog::Accepted) {
+      MyMoneyFileTransaction ft;
       MyMoneyFile* file = MyMoneyFile::instance();
-      ft.restart();
       try {
         // store the user info
         file->setUser(wizard->user());
 
-        // setup base currency
+        // create and setup base currency
+        file->addCurrency(wizard->baseCurrency());
         file->setBaseCurrency(wizard->baseCurrency());
 
         // create a possible institution

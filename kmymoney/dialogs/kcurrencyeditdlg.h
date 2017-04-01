@@ -10,6 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Alvaro Soliverez <asoliverez@gmail.com>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -36,28 +37,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kcurrencyeditdlgdecl.h"
+#include "ui_kcurrencyeditdlg.h"
+#include "ui_kavailablecurrencydlg.h"
 #include "mymoneysecurity.h"
 
-class QTreeWidgetItem;
-
-class KCurrencyEditDlgDecl : public QDialog, public Ui::KCurrencyEditDlgDecl
+namespace Ui
 {
-public:
-  KCurrencyEditDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
+class KCurrencyEditDlg;
+}
+
+class QTreeWidgetItem;
+class KAvailableCurrencyDlg;
 
 /**
   * @author Thomas Baumgart
   */
-class KCurrencyEditDlg : public KCurrencyEditDlgDecl
+class KCurrencyEditDlg : public QDialog
 {
   Q_OBJECT
 public:
   KCurrencyEditDlg(QWidget *parent = 0);
   ~KCurrencyEditDlg();
+
+  Ui::KCurrencyEditDlg*   ui;
 
 public slots:
   void slotSelectCurrency(const QString& id);
@@ -67,6 +69,7 @@ protected:
 
 protected slots:
   void slotSelectCurrency(QTreeWidgetItem *);
+  void slotItemSelectionChanged();
   void slotStartRename();
   void slotOpenContextMenu(const QPoint& p);
   void slotLoadCurrencies();
@@ -75,6 +78,9 @@ protected slots:
 private slots:
   void timerDone();
   void slotSelectBaseCurrency();
+  void slotAddCurrency();
+  void slotRemoveCurrency();
+  void slotRemoveUnusedCurrency();
 
 signals:
   void selectObject(const MyMoneySecurity& currency);
@@ -83,12 +89,14 @@ signals:
   void selectBaseCurrency(const MyMoneySecurity& currency);
 
 private:
-  MyMoneySecurity               m_currency;
+  typedef enum:int { RemoveSelected, RemoveUnused} removalModeE;
+  KAvailableCurrencyDlg*          m_availableCurrencyDlg;
+  MyMoneySecurity                 m_currency;
   /**
     * Search widget for the list
     */
-  KTreeWidgetSearchLineWidget*  m_searchWidget;
-  QPushButton*                  m_selectBaseCurrencyButton;
+  KTreeWidgetSearchLineWidget*    m_searchWidget;
+  void                            removeCurrency(const removalModeE& mode);
 };
 
 #endif

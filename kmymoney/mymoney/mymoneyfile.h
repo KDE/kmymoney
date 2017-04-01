@@ -1193,7 +1193,27 @@ public:
   const MyMoneySecurity& currency(const QString& id) const;
 
   /**
-    * This method is used to retrieve the list of all currencies
+    * This method is used to retrieve the map of ancient currencies (together with their last prices)
+    * known to the engine.
+    *
+    * An exception will be thrown upon erroneous situations.
+    *
+    * @return QMap of all MyMoneySecurity and MyMoneyPrice objects.
+    */
+  const QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies() const;
+
+  /**
+    * This method is used to retrieve the list of available currencies
+    * known to the engine.
+    *
+    * An exception will be thrown upon erroneous situations.
+    *
+    * @return QList of all MyMoneySecurity objects.
+    */
+  const QList<MyMoneySecurity> availableCurrencyList() const;
+
+  /**
+    * This method is used to retrieve the list of stored currencies
     * known to the engine.
     *
     * An exception will be thrown upon erroneous situations.

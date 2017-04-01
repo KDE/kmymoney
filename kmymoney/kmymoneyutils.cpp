@@ -709,3 +709,54 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   } catch (const MyMoneyException &) {
   }
 }
+
+void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* parent)
+{
+  QString msg, msg2;
+  QString dontAsk, dontAsk2;
+  if (security.isCurrency()) {
+    msg = i18n("<p>Do you really want to remove the currency <b>%1</b> from the file?</p>", security.name());
+    msg2 = i18n("<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you still want to continue?</p>", security.name());
+    dontAsk = "DeleteCurrency";
+    dontAsk2 = "DeleteCurrencyRates";
+  } else {
+    msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>", KMyMoneyUtils::securityTypeToString(security.securityType()), security.name());
+    msg2 = i18n("<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want to continue?</p>", KMyMoneyUtils::securityTypeToString(security.securityType()), security.name());
+    dontAsk = "DeleteSecurity";
+    dontAsk2 = "DeleteSecurityPrices";
+  }
+  if (KMessageBox::questionYesNo(parent, msg, i18n("Delete security"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk) == KMessageBox::Yes) {
+    MyMoneyFileTransaction ft;
+    MyMoneyFile* file = MyMoneyFile::instance();
+
+    MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+    skip.fill(true);
+    skip.clearBit(IMyMoneyStorage::RefCheckPrice);
+    if (file->isReferenced(security, skip)) {
+      if (KMessageBox::questionYesNo(parent, msg2, i18n("Delete prices"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk2) == KMessageBox::Yes) {
+        try {
+          QString secID = security.id();
+          foreach (auto priceEntry, file->priceList()) {
+            const MyMoneyPrice& price = priceEntry.first();
+            if (price.from() == secID || price.to() == secID)
+              file->removePrice(price);
+          }
+          ft.commit();
+          ft.restart();
+        } catch (const MyMoneyException &) {
+          qDebug("Cannot delete price");
+          return;
+        }
+      } else
+        return;
+    }
+    try {
+      if (security.isCurrency())
+        file->removeCurrency(security);
+      else
+        file->removeSecurity(security);
+      ft.commit();
+    } catch (const MyMoneyException &) {
+    }
+  }
+}
