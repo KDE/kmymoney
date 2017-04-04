@@ -96,8 +96,8 @@ MyMoneyMoney CashFlowList::NPV(double _rate) const
 {
   MyMoneyMoney result;
 
-  const_iterator it_cash = begin();
-  while (it_cash != end()) {
+  const_iterator it_cash = constBegin();
+  while (it_cash != constEnd()) {
     result += (*it_cash).NPV(_rate);
     ++it_cash;
   }
@@ -163,8 +163,8 @@ double CashFlowList::xirrResult(double& rate) const
   double r = rate + 1.0;
   double res = 0.00000;//back().value().toDouble();
 
-  QList<CashFlowListItem>::const_iterator list_it = begin();
-  while (list_it != end()) {
+  QList<CashFlowListItem>::const_iterator list_it = constBegin();
+  while (list_it != constEnd()) {
     double e_i = ((* list_it).today().daysTo((* list_it).date())) / 365.0;
     MyMoneyMoney val = (* list_it).value();
 
@@ -187,8 +187,8 @@ double CashFlowList::xirrResultDerive(double& rate) const
   double r = rate + 1.0;
   double res = 0.00000;
 
-  QList<CashFlowListItem>::const_iterator list_it = begin();
-  while (list_it != end()) {
+  QList<CashFlowListItem>::const_iterator list_it = constBegin();
+  while (list_it != constEnd()) {
     double e_i = ((* list_it).today().daysTo((* list_it).date())) / 365.0;
     MyMoneyMoney val = (* list_it).value();
 
@@ -214,8 +214,8 @@ MyMoneyMoney CashFlowList::total() const
 {
   MyMoneyMoney result;
 
-  const_iterator it_cash = begin();
-  while (it_cash != end()) {
+  const_iterator it_cash = constBegin();
+  while (it_cash != constEnd()) {
     result += (*it_cash).value();
     ++it_cash;
   }
@@ -225,8 +225,8 @@ MyMoneyMoney CashFlowList::total() const
 
 void CashFlowList::dumpDebug() const
 {
-  const_iterator it_item = begin();
-  while (it_item != end()) {
+  const_iterator it_item = constBegin();
+  while (it_item != constEnd()) {
     qDebug() << (*it_item).date().toString(Qt::ISODate) << " " << (*it_item).value().toString();
     ++it_item;
   }
@@ -508,8 +508,8 @@ void QueryTable::constructTotalRows()
         stashedTotalRows.removeFirst();
       }
 
-      QMap<QString, MyMoneyMoney>::const_iterator grandTotalGrp = totalGroups[0].begin();
-      while(grandTotalGrp != totalGroups[0].end()) {
+      QMap<QString, MyMoneyMoney>::const_iterator grandTotalGrp = totalGroups[0].constBegin();
+      while(grandTotalGrp != totalGroups[0].constEnd()) {
         totalsRow[grandTotalGrp.key()] = grandTotalGrp.value().toString();
         ++grandTotalGrp;
       }
@@ -606,7 +606,7 @@ void QueryTable::constructTransactionTable()
     const QList<MyMoneySplit>& splits = (*it_transaction).splits();
     QList<MyMoneySplit>::const_iterator myBegin, it_split;
 
-    for (it_split = splits.begin(), myBegin = splits.end(); it_split != splits.end(); ++it_split) {
+    for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
       ReportAccount splitAcc = (* it_split).accountId();
       // always put split with a "stock" account if it exists
       if (splitAcc.isInvest())
@@ -1544,7 +1544,7 @@ void QueryTable::constructSplitsTable()
     QList<MyMoneySplit>::const_iterator myBegin, it_split;
     //S_end = splits.end();
 
-    for (it_split = splits.begin(), myBegin = splits.end(); it_split != splits.end(); ++it_split) {
+    for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
       ReportAccount splitAcc = (* it_split).accountId();
       // always put split with a "stock" account if it exists
       if (splitAcc.isInvest())
@@ -1699,7 +1699,7 @@ void QueryTable::constructSplitsTable()
             qA["account"] = i18n("[Split Transaction]");
           } else {
             //fill the account name of the second split
-            QList<MyMoneySplit>::const_iterator tempSplit = splits.begin();
+            QList<MyMoneySplit>::const_iterator tempSplit = splits.constBegin();
 
             //there are supposed to be only 2 splits if we ever get here
             if (tempSplit == myBegin && splits.count() > 1)
