@@ -242,7 +242,7 @@ void ListTable::render(QString& result, QString& csv) const
   //
 
   bool row_odd = true;
-  bool isHigherGroupTotal = false;  // hack to inform whether to put separator line or not
+  bool isLowestGroupTotal = true;  // hack to inform whether to put separator line or not
 
   // ***DV***
   MyMoneyMoney startingBalance;
@@ -251,42 +251,44 @@ void ListTable::render(QString& result, QString& csv) const
        it_row != m_rows.end();
        ++it_row) {
 
-    // the standard fraction is the fraction of an non-cash account in the base currency
-    // this could be overridden using the "fraction" element of a row for each row.
-    // Currently (2008-02-21) this override is not used at all (ipwizard)
-    int fraction = file->baseCurrency().smallestAccountFraction();
-    if ((*it_row).find("fraction") != (*it_row).end())
-      fraction = (*it_row)["fraction"].toInt();
-
+    /** rank can be:
+     * 0 - opening balance
+     * 1 - major split of transaction
+     * 2 - minor split of transaction
+     * 3 - closing balance
+     * 4 - first totals row
+     * 5 - middle totals row
+     */
+    const QString rowRank = (*it_row)["rank"];
     // detect whether any of groups changed and display new group header in that case
     for (int i = 0; i < groups.count(); ++i) {
-      if (prevGrpNames.at(i) != (*it_row)[groups.at(i)]) {
+      QString curGrpName = (*it_row).value(groups.at(i));
+      if (curGrpName.isEmpty()) // it could be grand total
+        continue;
+      if (prevGrpNames.at(i) != curGrpName) {
         // group header of lowest group doesn't bring any useful information
         // if hide transaction is enabled, so don't display it
-        if (!m_config.isHideTransactions() || i != groups.count() - 1) {
+        int lowestGroup = groups.count() - 1;
+        if (!m_config.isHideTransactions() || i != lowestGroup) {
           row_odd = true;
           result += "<tr class=\"sectionheader\">"
                     "<td class=\"left" + QString::number(i) + "\" "
                     "colspan=\"" + QString::number(columns.count()) + "\">" +
-              (*it_row)[groups.at(i)] + "</td></tr>\n";
-          csv += "\"" + (*it_row)[groups.at(i)] + "\"\n";
+              curGrpName + "</td></tr>\n";
+          csv += "\"" + curGrpName + "\"\n";
         }
-        if (i == groups.count() - 1)  // lowest group has been switched...
-          isHigherGroupTotal = false; // ...so expect lowest group total
-        prevGrpNames.replace(i, (*it_row)[groups.at(i)]);
+        if (i == lowestGroup)         // lowest group has been switched...
+          isLowestGroupTotal = true;  // ...so expect lowest group total
+        prevGrpNames.replace(i, curGrpName);
       }
     }
-
-    //
-    // Columns
-    //
 
     bool need_label = true;
 
     QString tlink;  // link information to account and transaction
 
-    if (!m_config.isHideTransactions() || (*it_row)["rank"] == "4") { // if hide transaction is enabled display only total rows i.e. rank = 4
-      if ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3") {
+    if (!m_config.isHideTransactions() || rowRank == "4" || rowRank == "5") { // if hide transaction is enabled display only total rows i.e. rank = 4 || rank = 5
+      if (rowRank == "0" || rowRank == "3") {
         // skip the opening and closing balance row,
         // if the balance column is not shown
         // rank = 0 for opening balance, rank = 3 for closing balance
@@ -294,21 +296,35 @@ void ListTable::render(QString& result, QString& csv) const
           continue;
         result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
       // ***DV***
-      } else if ((* it_row)["rank"] == "1") {
+      } else if (rowRank == "1") {
         row_odd = ! row_odd;
         tlink = QString("id=%1&tid=%2")
                 .arg((* it_row)["accountid"], (* it_row)["id"]);
         result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
-      } else if ((* it_row)["rank"] == "2")
+      } else if (rowRank == "2")
         result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
-      else if ((* it_row)["rank"] == "4") {
-        if ((m_config.rowType() == MyMoneyReport::eTag) || //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
-            (!m_config.isConvertCurrency() && std::next(it_row) == m_rows.end()))// grand total may be invalid if multiple currencies are used, so don't display it
+      else if (rowRank == "4" || rowRank == "5") {
+        QList<TableRow>::const_iterator nextRow = std::next(it_row);
+        if ((m_config.rowType() == MyMoneyReport::eTag)) //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
           continue;
-        // display special footer (i.e. without horizontal separator) only for lowest group totals
-        else if (m_config.isHideTransactions() && !isHigherGroupTotal && std::next(it_row) != m_rows.end()) {
-          result += QString("<tr class=\"sectionfooterbasic\">");
-          isHigherGroupTotal = true;
+        else if (rowRank == "4") {
+          if (nextRow != m_rows.end()) {
+            if (isLowestGroupTotal && m_config.isHideTransactions()) {
+              result += QString("<tr class=\"sectionfootermiddle\">");
+              isLowestGroupTotal = false;
+            } else if ((*nextRow)["rank"] == "5")
+              result += QString("<tr class=\"sectionfooterfirst\">");
+            else
+              result += QString("<tr class=\"sectionfooter\">");
+          } else
+            result += QString("<tr class=\"sectionfooter\">");
+        } else if (rowRank == "5") {
+          if (nextRow != m_rows.end()) {
+            if ((*nextRow)["rank"] == "5")
+              result += QString("<tr class=\"sectionfootermiddle\">");
+            else
+              result += QString("<tr class=\"sectionfooterlast\">");
+          }
         } else
           result += QString("<tr class=\"sectionfooter\">");
       } else
@@ -316,12 +332,16 @@ void ListTable::render(QString& result, QString& csv) const
     } else
       continue;
 
+    //
+    // Columns
+    //
+
     QStringList::const_iterator it_column = columns.constBegin();
     while (it_column != columns.constEnd()) {
       QString data = (*it_row)[*it_column];
 
       // ***DV***
-      if ((* it_row)["rank"] == "2") {
+      if (rowRank == "2") {
         if (* it_column == "value")
           data = (* it_row)["split"];
         else if (*it_column == "postdate"
@@ -339,7 +359,7 @@ void ListTable::render(QString& result, QString& csv) const
       }
 
       // ***DV***
-      else if ((*it_row)["rank"] == "0" || (*it_row)["rank"] == "3") {
+      else if (rowRank == "0" || rowRank == "3") {
         if (*it_column == "balance") {
           data = (* it_row)["balance"];
           if ((* it_row)["id"] == "A") {          // opening balance?
@@ -367,22 +387,29 @@ void ListTable::render(QString& result, QString& csv) const
       }
       // The 'balance' column is calculated at render-time
       // but not printed on split lines
-      else if (*it_column == "balance" && (* it_row)["rank"] == "1") {
+      else if (*it_column == "balance" && rowRank == "1") {
         // Take the balance off the deepest group iterator
         balanceChange += MyMoneyMoney((*it_row).value("value", "0"));
         data = (balanceChange + startingBalance).toString();
+      } else if ((rowRank == "4" || rowRank == "5")) {
+        // display total title but only if first column doesn't contain any data
+        if (it_column == columns.constBegin() && data.isEmpty()) {
+          result += "<td class=\"left" + (*it_row)["depth"] + "\">";
+          if (rowRank == "4") {
+            if (!(*it_row)["depth"].isEmpty())
+              result += i18nc("Total balance", "Total") + ' ' + prevGrpNames.at((*it_row)["depth"].toInt());
+            else
+              result += i18n("Grand Total");
+          }
+          result.append(QLatin1Literal("</td>"));
+          ++it_column;
+          continue;
+        } else if (!m_subtotal.contains(*it_column)) {  // don't display e.g. account in totals row
+          result.append(QLatin1Literal("<td></td>"));
+          ++it_column;
+          continue;
+        }
       }
-
-      // display total title but only if first column doesn't contain any data
-      else if (it_column == columns.constBegin() && data.isEmpty() && (*it_row)["rank"] == "4") {
-        result += "<td class=\"left" + (*it_row)["depth"] + "\">";
-              if (!(*it_row)["depth"].isEmpty())
-                result += i18nc("Total balance", "Total") + ' ' + prevGrpNames.at((*it_row)["depth"].toInt()) + "</td>";
-              else
-                result += i18n("Grand Total") + "</td>";
-              ++it_column;
-              continue;
-            }
 
       // Figure out how to render the value in this column, depending on
       // what its properties are.
@@ -396,13 +423,23 @@ void ListTable::render(QString& result, QString& csv) const
           tlinkEnd = QLatin1String("</a>");
       }
 
+      QString currencyID = (*it_row)["currency"];
+
+      if (currencyID.isEmpty())
+        currencyID = file->baseCurrency().id();
+      int fraction = file->currency(currencyID).smallestAccountFraction();
+
+      if (m_config.isConvertCurrency()) // don't show currency id, if there is only single currency
+        currencyID.clear();
+
       if (sharesColumns.contains(*it_column)) {
         if (data.isEmpty()) {
           result += QString("<td></td>");
           csv += "\"\",";
         } else {
-          result += QString("<td>%2%1%3</td>").arg(MyMoneyMoney(data).formatMoney("", 3), tlinkBegin, tlinkEnd);
-          csv += "\"" + MyMoneyMoney(data).formatMoney("", 3, false) + "\",";
+          int sharesPrecision = MyMoneyMoney::denomToPrec(file->security(file->account((*it_row)["accountid"]).currencyId()).smallestAccountFraction());
+          result += QString("<td>%2%1%3</td>").arg(MyMoneyMoney(data).formatMoney("", sharesPrecision), tlinkBegin, tlinkEnd);
+          csv += "\"" + MyMoneyMoney(data).formatMoney("", sharesPrecision, false) + "\",";
         }
       } else if (moneyColumns.contains(*it_column)) {
         if (data.isEmpty()) {
@@ -415,16 +452,16 @@ void ListTable::render(QString& result, QString& csv) const
                     .arg(i18n("Calculated"), tlinkBegin, tlinkEnd);
           csv += "\"" + i18n("Calculated") + "\",";
         } else if (*it_column == "price") {
-          result += QString("<td>%2%1%3</td>")
-                    .arg(MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())), tlinkBegin, tlinkEnd);
-          csv += "\"" + (*it_row)["currency"] + " " + MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()), false) + "\",";
+          result += QString("<td>%3%2&nbsp;%1%4</td>")
+                    .arg(MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())), currencyID, tlinkBegin, tlinkEnd);
+          csv += "\"" + currencyID + " " + MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()), false) + "\",";
         } else {
           result += QString("<td%1>%4%2&nbsp;%3%5</td>")
                     .arg((*it_column == "value") ? " class=\"value\"" : "")
-                    .arg((*it_row)["currency"])
+                    .arg(currencyID)
                     .arg(MyMoneyMoney(data).formatMoney(fraction))
                     .arg(tlinkBegin, tlinkEnd);
-          csv += "\"" + (*it_row)["currency"] + " " + MyMoneyMoney(data).formatMoney(fraction, false) + "\",";
+          csv += "\"" + currencyID + " " + MyMoneyMoney(data).formatMoney(fraction, false) + "\",";
         }
       } else if (percentColumns.contains(*it_column)) {
         if (data.isEmpty()) {
