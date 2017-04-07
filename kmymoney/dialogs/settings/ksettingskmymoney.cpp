@@ -88,6 +88,7 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   QAbstractButton* defaultButton = button(QDialogButtonBox::RestoreDefaults);
   connect(this, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
   connect(this, &KConfigDialog::rejected, iconsPage, &KSettingsIcons::slotResetTheme);
+  connect(this, &KConfigDialog::settingsChanged, generalPage, &KSettingsGeneral::slotUpdateEquitiesVisibility);
 
   connect(this, &KConfigDialog::accepted, pluginsPage, &KPluginSelector::save);
   connect(defaultButton, &QAbstractButton::clicked, pluginsPage, &KPluginSelector::defaults);

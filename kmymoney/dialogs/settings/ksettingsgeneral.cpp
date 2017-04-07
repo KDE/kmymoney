@@ -29,6 +29,8 @@
 // Project Includes
 
 #include <kmymoneydateinput.h>
+#include "models.h"
+#include "accountsmodel.h"
 
 KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
     KSettingsGeneralDecl(parent)
@@ -41,6 +43,8 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
 
   // setup connections, so that changes by the user are forwarded to the (hidden) edit fields
   connect(m_startDateEdit, SIGNAL(dateChanged(QDate)), kcfg_StartDate, SLOT(setDate(QDate)));
+
+  initialHideZeroBalanceEquities = kcfg_HideZeroBalanceEquities->isChecked();
 }
 
 KSettingsGeneral::~KSettingsGeneral()
@@ -52,4 +56,28 @@ void KSettingsGeneral::slotLoadStartDate(const QDate&)
   // only need this once
   disconnect(kcfg_StartDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotLoadStartDate(QDate)));
   m_startDateEdit->setDate(kcfg_StartDate->date());
+}
+
+void KSettingsGeneral::slotUpdateEquitiesVisibility()
+{
+  if (initialHideZeroBalanceEquities == kcfg_HideZeroBalanceEquities->isChecked())      // setting hasn't been changed, so return
+    return;
+  initialHideZeroBalanceEquities = kcfg_HideZeroBalanceEquities->isChecked();
+  AccountsModel* accountsModel = Models::instance()->accountsModel();                   // items' model for accounts' page
+  InstitutionsModel* institutionsModel = Models::instance()->institutionsModel();       // items' model for institutions' page
+  MyMoneyFile *file = MyMoneyFile::instance();
+  QList<MyMoneyAccount> accountsList;
+  file->accountList(accountsList);
+
+  foreach (const auto account, accountsList) {
+    if (account.isInvest() && account.balance().isZero()) {                             // search only for zero balance stocks
+      if (initialHideZeroBalanceEquities) {
+        accountsModel->slotObjectRemoved(MyMoneyFile::notifyAccount, account.id());     // remove item from accounts' page
+        institutionsModel->slotObjectRemoved(MyMoneyFile::notifyAccount, account.id()); // remove item from institutions' page
+      } else {
+        accountsModel->slotObjectAdded(MyMoneyFile::notifyAccount, dynamic_cast<const MyMoneyObject* const>(&account));     // add item to accounts' page
+        institutionsModel->slotObjectAdded(MyMoneyFile::notifyAccount, dynamic_cast<const MyMoneyObject* const>(&account)); // add item to institutions' page
+      }
+    }
+  }
 }

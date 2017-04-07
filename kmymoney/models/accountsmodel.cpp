@@ -532,9 +532,17 @@ void AccountsModel::load()
       accountsItem->appendRow(item);
       item->setColumnCount(columnCount());
       item->setEditable(false);
-      if (acc.accountList().count() > 0) {
-        d->loadSubAccounts(this, item, favoriteAccountsItem, acc.accountList());
+      QStringList subaccountsList = acc.accountList();
+      // filter out stocks with zero balance if requested by user
+      for (QStringList::Iterator it = subaccountsList.begin(); it != subaccountsList.end();) {
+        const MyMoneyAccount& subAcc = d->m_file->account(*it);
+        if (subAcc.isInvest() && KMyMoneyGlobalSettings::hideZeroBalanceEquities() && subAcc.balance().isZero())
+          it = subaccountsList.erase(it);
+        else
+          ++it;
       }
+      if (!subaccountsList.isEmpty())
+        d->loadSubAccounts(this, item, favoriteAccountsItem, subaccountsList);
       d->setAccountData(this, item->index(), acc);
       // set the account data after the children have been loaded
       if (acc.value("PreferredAccount") == "Yes") {
@@ -915,15 +923,22 @@ void InstitutionsModel::load()
   MyMoneyInstitution none;
   none.setName(i18n("Accounts with no institution assigned"));
   institutionList.append(none);
-  foreach (const MyMoneyInstitution &institution, institutionList) {
+  foreach (const auto institution, institutionList)
     static_cast<InstitutionsPrivate *>(d)->addInstitutionItem(this, institution);
+
+  QList<MyMoneyAccount> accountsList;
+  QList<MyMoneyAccount> stocksList;
+  d->m_file->accountList(accountsList);
+  foreach (const auto account, accountsList) {  // create items for all the accounts...
+    if (account.isInvest())                     // ...but wait with stocks until investment accounts appear
+      stocksList.append(account);
+    else
+      static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, account);
   }
 
-  // create items for all the accounts
-  QList<MyMoneyAccount> list;
-  d->m_file->accountList(list);
-  for (QList<MyMoneyAccount>::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
-    static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *it_l);
+  foreach (const auto stock, stocksList) {
+    if (!(KMyMoneyGlobalSettings::hideZeroBalanceEquities() && stock.balance().isZero()))
+      static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, stock);
   }
 }
 

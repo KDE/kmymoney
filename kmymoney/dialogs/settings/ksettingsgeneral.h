@@ -39,7 +39,8 @@ public:
 class KSettingsGeneral : public KSettingsGeneralDecl
 {
   Q_OBJECT
-
+private:
+  bool initialHideZeroBalanceEquities;
 public:
   KSettingsGeneral(QWidget* parent = 0);
   ~KSettingsGeneral();
@@ -47,6 +48,8 @@ public:
 protected slots:
   void slotLoadStartDate(const QDate&);
 
+public slots:
+  void slotUpdateEquitiesVisibility();
 };
 #endif
 
