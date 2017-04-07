@@ -492,7 +492,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       if (date > QDate::currentDate())
         date = QDate::currentDate();
 
-      MyMoneyMoney price = MyMoneyMoney(_price);
+      MyMoneyMoney price = MyMoneyMoney(_price, MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
       QString id = _id.toUtf8();
       MyMoneySecurity sec;
       if (_id.contains(" ") == 0) {
