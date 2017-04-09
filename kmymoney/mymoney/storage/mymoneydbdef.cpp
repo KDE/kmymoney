@@ -335,6 +335,7 @@ void MyMoneyDbDef::Securities()
   appendField(MyMoneyDbIntColumn("roundingMethod", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("typeString"));
   appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
+  appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("tradingMarket"));
   appendField(MyMoneyDbColumn("tradingCurrency", "char(3)"));
   MyMoneyDbTable t("kmmSecurities", fields);
@@ -367,9 +368,9 @@ void MyMoneyDbDef::Currencies()
   appendField(MyMoneyDbIntColumn("symbol2", MyMoneyDbIntColumn::SMALL, UNSIGNED));
   appendField(MyMoneyDbIntColumn("symbol3", MyMoneyDbIntColumn::SMALL, UNSIGNED));
   appendField(MyMoneyDbColumn("symbolString", "varchar(255)"));
-  appendField(MyMoneyDbColumn("partsPerUnit", "varchar(24)"));
   appendField(MyMoneyDbColumn("smallestCashFraction", "varchar(24)"));
   appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
+  appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED));
   MyMoneyDbTable t("kmmCurrencies", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;

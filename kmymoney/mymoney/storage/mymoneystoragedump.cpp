@@ -263,6 +263,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
     s << "    Type = " << MyMoneySecurity::securityTypeToString((*it_e).securityType()) << "\n";
     s << "    smallest account fraction = " << (*it_e).smallestAccountFraction() << "\n";
+    s << "    price precision = " << (*it_e).pricePrecision() << "\n";
 
     s << "    KVP: " << "\n";
     QMap<QString, QString>kvp = (*it_e).pairs();

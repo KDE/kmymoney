@@ -776,7 +776,7 @@ void QueryTable::constructTransactionTable()
 
           qA["action"] = (*it_split).action();
           qA["shares"] = shares.isZero() ? "" : shares.toString();
-          qA["price"] = shares.isZero() ? "" : xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+          qA["price"] = shares.isZero() ? "" : xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
 
           if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && shares.isNegative())
             qA["action"] = "Sell";
@@ -1132,7 +1132,7 @@ void QueryTable::constructTransactionTable()
     qA["institution"] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
     qA["rank"] = "0";
 
-    qA["price"] = startPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+    qA["price"] = startPrice.convertPrecision(account.currency().pricePrecision()).toString();
     if (account.isInvest()) {
       qA["shares"] = startShares.toString();
     }
@@ -1144,7 +1144,7 @@ void QueryTable::constructTransactionTable()
     m_rows += qA;
 
     //ending balance
-    qA["price"] = endPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+    qA["price"] = endPrice.convertPrecision(account.currency().pricePrecision()).toString();
 
     if (account.isInvest()) {
       qA["shares"] = endShares.toString();
@@ -1499,7 +1499,7 @@ void QueryTable::constructAccountTable()
           netprice = netprice.reduce();
           shares = shares.reduce();
 
-          qaccountrow["price"] = netprice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+          qaccountrow["price"] = netprice.convertPrecision(account.currency().pricePrecision()).toString();
           qaccountrow["value"] = (netprice * shares).convert(fraction).toString();
           qaccountrow["shares"] = shares.toString();
 
@@ -1697,7 +1697,7 @@ void QueryTable::constructSplitsTable()
 
         qA["action"] = (*it_split).action();
         qA["shares"] = shares.isZero() ? "" : (*it_split).shares().toString();
-        qA["price"] = shares.isZero() ? "" : xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+        qA["price"] = shares.isZero() ? "" : xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
 
         if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && (*it_split).shares().isNegative())
           qA["action"] = "Sell";
@@ -1709,7 +1709,7 @@ void QueryTable::constructSplitsTable()
       a_fullname = splitAcc.fullName();
       a_memo = (*it_split).memo();
 
-      qA["price"] = xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+      qA["price"] = xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
       qA["account"] = splitAcc.name();
       qA["accountid"] = splitAcc.id();
       qA["topaccount"] = splitAcc.topParentName();
@@ -1884,7 +1884,7 @@ void QueryTable::constructSplitsTable()
     qA["institution"] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
     qA["rank"] = "0";
 
-    qA["price"] = startPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+    qA["price"] = startPrice.convertPrecision(account.currency().pricePrecision()).toString();
     if (account.isInvest()) {
       qA["shares"] = startShares.toString();
     }
@@ -1897,7 +1897,7 @@ void QueryTable::constructSplitsTable()
 
     qA["rank"] = "3";
     //ending balance
-    qA["price"] = endPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
+    qA["price"] = endPrice.convertPrecision(account.currency().pricePrecision()).toString();
 
     if (account.isInvest()) {
       qA["shares"] = endShares.toString();

@@ -2550,7 +2550,6 @@ void KMyMoneyApp::slotUpdateConfiguration()
   d->m_myMoneyView->updateViewType();
 
   // update the sql storage module settings
-  MyMoneyStorageSql::setPrecision(KMyMoneyGlobalSettings::pricePrecision());
   MyMoneyStorageSql::setStartDate(KMyMoneyGlobalSettings::startDate().date());
 
   // update the report module settings
@@ -3330,10 +3329,9 @@ void KMyMoneyApp::slotManualPriceUpdate()
       MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedInvestment.currencyId());
       MyMoneySecurity currency = MyMoneyFile::instance()->security(security.tradingCurrency());
       const MyMoneyPrice &price = MyMoneyFile::instance()->price(security.id(), currency.id());
-      signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
 
       QPointer<KCurrencyCalculator> calc =
-        new KCurrencyCalculator(security, currency, MyMoneyMoney::ONE, price.rate(currency.id()), price.date(), fract);
+        new KCurrencyCalculator(security, currency, MyMoneyMoney::ONE, price.rate(currency.id()), price.date(), MyMoneyMoney::precToDenom(security.pricePrecision()));
       calc->setupPriceEditor();
 
       // The dialog takes care of adding the price if necessary

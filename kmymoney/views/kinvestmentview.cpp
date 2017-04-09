@@ -149,7 +149,6 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
                           i18n("Change the security information of the selected entry."));
   KGuiItem::assign(m_editSecurityButton, editButtonItem);
 
-  connect(m_showCurrencyButton, SIGNAL(toggled(bool)), this, SLOT(slotLoadView()));
   connect(m_securitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateSecuritiesButtons()));
   connect(m_editSecurityButton, SIGNAL(clicked()), this, SLOT(slotEditSecurity()));
   connect(m_deleteSecurityButton, SIGNAL(clicked()), this, SLOT(slotDeleteSecurity()));
@@ -444,7 +443,7 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
 
   //column 4 is the current price
   // Get the price precision from the configuration
-  prec = KMyMoneyGlobalSettings::pricePrecision();
+  prec = security.pricePrecision();
 
   // prec = MyMoneyMoney::denomToPrec(m_tradingCurrency.smallestAccountFraction());
   if (price.isValid()) {
@@ -483,9 +482,6 @@ void KInvestmentView::loadSecuritiesList()
 
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
   QList<MyMoneySecurity>::ConstIterator it;
-  if (m_showCurrencyButton->isChecked()) {
-    list += MyMoneyFile::instance()->currencyList();
-  }
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     QTreeWidgetItem* newItem = new QTreeWidgetItem(m_securitiesList);
     loadSecurityItem(newItem, *it);

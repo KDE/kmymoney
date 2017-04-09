@@ -598,7 +598,6 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   if (security.id().isEmpty()) {
     security.setName(sec_in.m_strName);
     security.setTradingSymbol(sec_in.m_strSymbol);
-    security.setSmallestAccountFraction(1000);
     security.setTradingCurrency(file->baseCurrency().id());
     security.setValue("kmm-security-id", sec_in.m_strId);
     security.setValue("kmm-online-source", "Yahoo");
@@ -784,7 +783,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           return;
         }
         MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
-        s1.setPrice((total / statementTransactionUnderImport.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+        s1.setPrice((total / statementTransactionUnderImport.m_shares).convertPrecision(file->security(thisaccount.currencyId()).pricePrecision()));
       }
 
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
@@ -859,7 +858,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else if (!statementTransactionUnderImport.m_shares.isZero()) {
         MyMoneyMoney total = statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees.abs();
-        s1.setPrice((total / statementTransactionUnderImport.m_shares).abs().convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+        s1.setPrice((total / statementTransactionUnderImport.m_shares).abs().convertPrecision(file->security(thisaccount.currencyId()).pricePrecision()));
       }
       if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaBuy)
           s1.setShares(statementTransactionUnderImport.m_shares.abs());

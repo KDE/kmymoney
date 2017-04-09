@@ -191,7 +191,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
     priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
     priceTreeItem->setText(KPriceTreeItem::ePriceDate, QLocale().toString(price.date(), QLocale::ShortFormat));
     priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
-    priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()));
+    priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", from.pricePrecision()));
     priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);
     priceTreeItem->setData(KPriceTreeItem::ePricePrice, KPriceTreeItem::OrderRole, QVariant::fromValue(price.rate(priceBase)));
     priceTreeItem->setText(KPriceTreeItem::ePriceSource, price.source());
@@ -268,7 +268,7 @@ int KMyMoneyPriceDlg::slotEditPrice()
   if (item) {
     MyMoneySecurity from(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from()));
     MyMoneySecurity to(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to()));
-    signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
+    signed64 fract = MyMoneyMoney::precToDenom(from.pricePrecision());
 
     QPointer<KCurrencyCalculator> calc =
       new KCurrencyCalculator(from,

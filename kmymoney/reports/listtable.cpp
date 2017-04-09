@@ -452,9 +452,10 @@ void ListTable::render(QString& result, QString& csv) const
                     .arg(i18n("Calculated"), tlinkBegin, tlinkEnd);
           csv += "\"" + i18n("Calculated") + "\",";
         } else if (*it_column == "price") {
+          int pricePrecision = file->security(file->account((*it_row)["accountid"]).currencyId()).pricePrecision();
           result += QString("<td>%3%2&nbsp;%1%4</td>")
-                    .arg(MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())), currencyID, tlinkBegin, tlinkEnd);
-          csv += "\"" + currencyID + " " + MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()), false) + "\",";
+                    .arg(MyMoneyMoney(data).formatMoney(QString(), pricePrecision), currencyID, tlinkBegin, tlinkEnd);
+          csv += "\"" + currencyID + " " + MyMoneyMoney(data).formatMoney(QString(), pricePrecision, false) + "\",";
         } else {
           result += QString("<td%1>%4%2&nbsp;%3%5</td>")
                     .arg((*it_column == "value") ? " class=\"value\"" : "")

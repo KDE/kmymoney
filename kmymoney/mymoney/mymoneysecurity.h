@@ -54,7 +54,10 @@ class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyK
 public:
   MyMoneySecurity();
   MyMoneySecurity(const QString& id, const MyMoneySecurity& equity);
-  MyMoneySecurity(const QString& id, const QString& name, const QString& symbol = QString(), const int partsPerUnit = 100, const int smallestCashFraction = 100, const int smallestAccountFraction = 0);
+  MyMoneySecurity(const QString& id, const QString& name, const QString& symbol = QString(),
+                  const int smallestCashFraction = DEFAULT_CASH_FRACTION,
+                  const int smallestAccountFraction = DEFAULT_ACCOUNT_FRACTION,
+                  const int pricePrecision = DEFAULT_PRICE_PRECISION);
   MyMoneySecurity(const QDomElement& node);
   virtual ~MyMoneySecurity();
 
@@ -87,6 +90,7 @@ public:
   const QString& name() const                 {
     return m_name;
   }
+
   void           setName(const QString& str)   {
     m_name = str;
   }
@@ -94,6 +98,7 @@ public:
   const QString&  tradingSymbol() const               {
     return m_tradingSymbol;
   }
+
   void            setTradingSymbol(const QString& str) {
     m_tradingSymbol = str;
   }
@@ -101,16 +106,19 @@ public:
   eSECURITYTYPE securityType() const                {
     return m_securityType;
   }
+
   void          setSecurityType(const eSECURITYTYPE& s)   {
     m_securityType = s;
   }
+
   bool    isCurrency() const {
     return m_securityType == SECURITY_CURRENCY;
-  };
+  }
 
   AlkValue::RoundingMethod roundingMethod() const  {
     return m_roundingMethod;
   }
+
   void           setRoundingMethod(const AlkValue::RoundingMethod& rnd) {
     m_roundingMethod = rnd;
   }
@@ -118,37 +126,42 @@ public:
   const QString& tradingMarket() const  {
     return m_tradingMarket;
   }
+
   void           setTradingMarket(const QString& str) {
     m_tradingMarket = str;
   }
 
   const QString& tradingCurrency() const {
     return m_tradingCurrency;
-  };
+  }
+
   void           setTradingCurrency(const QString& str) {
     m_tradingCurrency = str;
-  };
+  }
 
   int smallestAccountFraction() const {
     return m_smallestAccountFraction;
-  };
+  }
+
   void setSmallestAccountFraction(const int sf) {
     m_smallestAccountFraction = sf;
-  };
+  }
 
-  int partsPerUnit() const {
-    return m_partsPerUnit;
-  };
   int smallestCashFraction() const {
     return m_smallestCashFraction;
-  };
+  }
 
-  void setPartsPerUnit(const int ppu) {
-    m_partsPerUnit = ppu;
-  };
   void setSmallestCashFraction(const int sf) {
     m_smallestCashFraction = sf;
-  };
+  }
+
+  int pricePrecision() const {
+    return m_pricePrecision;
+  }
+
+  void setPricePrecision(const int pp) {
+    m_pricePrecision = pp;
+  }
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
@@ -185,17 +198,23 @@ public:
    */
   static QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
 
-
 protected:
   QString                   m_name;
   QString                   m_tradingSymbol;
   QString                   m_tradingMarket;
   QString                   m_tradingCurrency;
   eSECURITYTYPE             m_securityType;
-  AlkValue::RoundingMethod  m_roundingMethod;
-  int                       m_smallestAccountFraction;
   int                       m_smallestCashFraction;
-  int                       m_partsPerUnit;
+  int                       m_smallestAccountFraction;
+  int                       m_pricePrecision;
+  AlkValue::RoundingMethod  m_roundingMethod;
+
+private:
+  enum DefaultValues {
+      DEFAULT_CASH_FRACTION = 100,
+      DEFAULT_ACCOUNT_FRACTION = 100,
+      DEFAULT_PRICE_PRECISION = 4,
+  };
 };
 
 /**

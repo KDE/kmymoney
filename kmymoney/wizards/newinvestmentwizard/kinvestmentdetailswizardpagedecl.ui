@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>216</width>
-    <height>266</height>
+    <height>304</height>
    </rect>
   </property>
   <property name="title">
-   <string>In&amp;vestment details</string>
+   <string>Investment details</string>
   </property>
   <layout class="QVBoxLayout">
    <item>
@@ -201,17 +201,37 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="8" column="1">
+      <widget class="QComboBox" name="m_roundingMethod">
+       <property name="toolTip">
+        <string>This controls what to do with digit situated after precision digits in amount values.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
       <widget class="QLabel" name="textLabel4">
        <property name="text">
         <string>Remainder</string>
        </property>
       </widget>
      </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="textLabel2_6">
+       <property name="text">
+        <string>Price precision</string>
+       </property>
+      </widget>
+     </item>
      <item row="7" column="1">
-      <widget class="QComboBox" name="m_roundingMethod">
+      <widget class="QSpinBox" name="m_pricePrecision">
        <property name="toolTip">
-        <string>This controls what to do with digit situated after precision digits in amount values.</string>
+        <string>This determines how many digits after decimal symbol price can have.</string>
+       </property>
+       <property name="minimum">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <number>10</number>
        </property>
       </widget>
      </item>

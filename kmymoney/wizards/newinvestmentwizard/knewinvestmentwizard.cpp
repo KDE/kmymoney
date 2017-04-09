@@ -181,6 +181,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     newSecurity.setTradingSymbol(field("investmentSymbol").toString());
     newSecurity.setTradingMarket(field("tradingMarket").toString());
     newSecurity.setSmallestAccountFraction(field("fraction").value<MyMoneyMoney>().formatMoney("", 0, false).toUInt());
+    newSecurity.setPricePrecision(MyMoneyMoney(field("pricePrecision").toUInt()).formatMoney("", 0, false).toUInt());
     newSecurity.setTradingCurrency(field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
     newSecurity.setSecurityType(type);
     newSecurity.setRoundingMethod(roudingMethod);

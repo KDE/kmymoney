@@ -36,30 +36,30 @@
 
 #include "mymoneyexception.h"
 
-MyMoneySecurity::MyMoneySecurity()
-  : m_securityType(SECURITY_NONE)
-  , m_roundingMethod(AlkValue::RoundRound)
-  , m_smallestAccountFraction(100)
-  , m_smallestCashFraction(100)
-  , m_partsPerUnit(100)
+MyMoneySecurity::MyMoneySecurity() :
+    m_securityType(SECURITY_NONE),
+    m_smallestCashFraction(DEFAULT_CASH_FRACTION),
+    m_smallestAccountFraction(DEFAULT_ACCOUNT_FRACTION),
+    m_pricePrecision(DEFAULT_PRICE_PRECISION),
+    m_roundingMethod(AlkValue::RoundRound)
 {
 }
 
-MyMoneySecurity::MyMoneySecurity(const QString& id, const QString& name, const QString& symbol, const int partsPerUnit, const int smallestCashFraction, const int smallestAccountFraction)
-  : MyMoneyObject(id)
-  , m_name(name)
-  , m_securityType(SECURITY_CURRENCY)
-  , m_roundingMethod(AlkValue::RoundRound)
-  , m_smallestCashFraction(100)
-  , m_partsPerUnit(100)
+MyMoneySecurity::MyMoneySecurity(const QString& id, const QString& name, const QString& symbol,
+                                 const int smallestCashFraction, const int smallestAccountFraction, const int pricePrecision) :
+    MyMoneyObject(id),
+    m_name(name),
+    m_securityType(SECURITY_CURRENCY),
+    m_smallestCashFraction(smallestCashFraction),
+    m_smallestAccountFraction(smallestAccountFraction),
+    m_pricePrecision(pricePrecision),
+    m_roundingMethod(AlkValue::RoundRound)
 {
   if (symbol.isEmpty())
     m_tradingSymbol = id;
   else
     m_tradingSymbol = symbol;
 
-  m_partsPerUnit = partsPerUnit;
-  m_smallestCashFraction = smallestCashFraction;
   if (smallestAccountFraction)
     m_smallestAccountFraction = smallestAccountFraction;
   else
@@ -86,11 +86,20 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
   setTradingSymbol(QStringEmpty(node.attribute("symbol")));
   setSecurityType(static_cast<eSECURITYTYPE>(node.attribute("type").toInt()));
   setRoundingMethod(static_cast<AlkValue::RoundingMethod>(node.attribute("rounding-method").toInt()));
-  setSmallestAccountFraction(node.attribute("saf").toInt());
+  int saf = node.attribute("saf").toUInt();
+  int pp = node.attribute("pp").toUInt();
+  if (saf == 0)
+    saf = 100;
+  if (pp == 0 || pp > 10)
+    pp = 4;
+  setSmallestAccountFraction(saf);
+  setPricePrecision(pp);
 
   if (isCurrency()) {
-    setPartsPerUnit(node.attribute("ppu").toInt());
-    setSmallestCashFraction(node.attribute("scf").toInt());
+    int scf = node.attribute("scf").toUInt();
+    if (scf == 0)
+      scf = 100;
+    setSmallestCashFraction(scf);
   } else {
     setTradingCurrency(QStringEmpty(node.attribute("trading-currency")));
     setTradingMarket(QStringEmpty(node.attribute("trading-market")));
@@ -113,9 +122,8 @@ bool MyMoneySecurity::operator == (const MyMoneySecurity& r) const
          && (m_securityType == r.m_securityType)
          && (m_smallestAccountFraction == r.m_smallestAccountFraction)
          && (m_smallestCashFraction == r.m_smallestCashFraction)
-         && (m_partsPerUnit == r.m_partsPerUnit)
+         && (m_pricePrecision == r.m_pricePrecision)
          && this->MyMoneyKeyValueContainer::operator == (r);
-
 }
 
 bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const
@@ -146,10 +154,10 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
   el.setAttribute("type", static_cast<int>(m_securityType));
   el.setAttribute("rounding-method", static_cast<int>(m_roundingMethod));
   el.setAttribute("saf", m_smallestAccountFraction);
-  if (isCurrency()) {
-    el.setAttribute("ppu", m_partsPerUnit);
+  el.setAttribute("pp", m_pricePrecision);
+  if (isCurrency())
     el.setAttribute("scf", m_smallestCashFraction);
-  } else {
+  else {
     el.setAttribute("trading-currency", m_tradingCurrency);
     el.setAttribute("trading-market", m_tradingMarket);
   }

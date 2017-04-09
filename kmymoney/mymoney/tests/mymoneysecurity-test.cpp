@@ -35,7 +35,6 @@ void MyMoneySecurityTest::testEmptyConstructor()
   QVERIFY(m->tradingCurrency().isEmpty());
   QVERIFY(m->smallestCashFraction() == 100);
   QVERIFY(m->smallestAccountFraction() == 100);
-  QVERIFY(m->partsPerUnit() == 100);
 }
 
 void MyMoneySecurityTest::testCopyConstructor()
@@ -76,7 +75,6 @@ void MyMoneySecurityTest::testSetFunctions()
   m->setSecurityType(MyMoneySecurity::SECURITY_STOCK);
   m->setSmallestAccountFraction(50);
   m->setSmallestCashFraction(2);
-  m->setPartsPerUnit(30);
 
   QVERIFY(m->name() == "Name");
   QVERIFY(m->tradingSymbol() == "Symbol");
@@ -85,7 +83,6 @@ void MyMoneySecurityTest::testSetFunctions()
   QVERIFY(m->securityType() == MyMoneySecurity::SECURITY_STOCK);
   QVERIFY(m->smallestAccountFraction() == 50);
   QVERIFY(m->smallestCashFraction() == 2);
-  QVERIFY(m->partsPerUnit() == 30);
 }
 
 /*
@@ -122,13 +119,10 @@ void MyMoneySecurityTest::testEquality()
   n.setSecurityType(MyMoneySecurity::SECURITY_CURRENCY);
   QVERIFY(!(n == *m));
   n = *m;
-  n.setSmallestAccountFraction(40);
+  n.setPricePrecision(8);
   QVERIFY(!(n == *m));
   n = *m;
   n.setSmallestCashFraction(20);
-  QVERIFY(!(n == *m));
-  n = *m;
-  n.setPartsPerUnit(3);
   QVERIFY(!(n == *m));
   n = *m;
   n.setValue("Key", "NewValue");
@@ -163,9 +157,6 @@ void MyMoneySecurityTest::testInequality()
   QVERIFY(n != *m);
   n = *m;
   n.setSmallestCashFraction(20);
-  QVERIFY(n != *m);
-  n = *m;
-  n.setPartsPerUnit(3);
   QVERIFY(n != *m);
   n = *m;
   n.setValue("Key", "NewValue");

@@ -287,7 +287,7 @@ public:
       QList<MyMoneyPrice>::const_iterator it_p;
       QString security = account.currencyId();
       for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
-        value = (value * (MyMoneyMoney::ONE / (*it_p).rate(security))).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
+        value = (value * (MyMoneyMoney::ONE / (*it_p).rate(security))).convertPrecision(m_file->security(security).pricePrecision());
         if ((*it_p).from() == security)
           security = (*it_p).to();
         else

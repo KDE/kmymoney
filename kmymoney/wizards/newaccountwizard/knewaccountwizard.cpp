@@ -484,7 +484,6 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
   m_mandatoryGroup->add(m_accountName);
   m_mandatoryGroup->add(m_conversionRate->lineedit());
 
-  m_conversionRate->setPrecision(KMyMoneyGlobalSettings::pricePrecision());
   m_conversionRate->setValue(MyMoneyMoney::ONE);
   slotUpdateCurrency();
 
@@ -541,6 +540,7 @@ void AccountTypePage::slotUpdateCurrency()
   m_conversionExample->setVisible(show);
   m_onlineQuote->setVisible(show);
   m_conversionRate->setEnabled(show);       // make sure to include/exclude in mandatoryGroup
+  m_conversionRate->setPrecision(m_currencyComboBox->security().pricePrecision());
   m_mandatoryGroup->changed();
   slotUpdateConversionRate(m_conversionRate->lineedit()->text());
 }
@@ -576,7 +576,7 @@ void AccountTypePage::priceWarning(bool always)
 
 void AccountTypePage::slotUpdateConversionRate(const QString& txt)
 {
-  m_conversionExample->setText(i18n("1 %1 equals %2", MyMoneyFile::instance()->baseCurrency().tradingSymbol(), MyMoneyMoney(txt).formatMoney(m_currencyComboBox->security().tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision())));
+  m_conversionExample->setText(i18n("1 %1 equals %2", MyMoneyFile::instance()->baseCurrency().tradingSymbol(), MyMoneyMoney(txt).formatMoney(m_currencyComboBox->security().tradingSymbol(), m_currencyComboBox->security().pricePrecision())));
 }
 
 bool AccountTypePage::isComplete() const
@@ -1577,7 +1577,7 @@ void AccountSummaryPage::enterPage()
   m_dataList->append(i18n("Currency: %1", m_wizard->currency().name()));
   m_dataList->append(i18n("Opening date: %1", QLocale().toString(acc.openingDate())));
   if (m_wizard->currency().id() != MyMoneyFile::instance()->baseCurrency().id()) {
-    m_dataList->append(i18n("Conversion rate: %1", m_wizard->conversionRate().rate(QString()).formatMoney("", KMyMoneyGlobalSettings::pricePrecision())));
+    m_dataList->append(i18n("Conversion rate: %1", m_wizard->conversionRate().rate(QString()).formatMoney("", m_wizard->currency().pricePrecision())));
   }
   if (!acc.isLoan() || !m_wizard->openingBalance().isZero())
     m_dataList->append(i18n("Opening balance: %1", MyMoneyUtils::formatMoney(m_wizard->openingBalance(), acc, sec)));

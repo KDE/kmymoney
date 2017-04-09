@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>439</width>
-    <height>140</height>
+    <height>164</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,16 @@
        <string>Equities</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -181,18 +190,6 @@
              <string>Fraction</string>
             </property>
            </column>
-           <column>
-            <property name="text">
-             <string>Cash Fraction</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="m_showCurrencyButton">
-           <property name="text">
-            <string>Show national currencies</string>
-           </property>
           </widget>
          </item>
         </layout>
@@ -256,20 +253,14 @@
  <layoutdefault spacing="6" margin="0"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-  </customwidget>
-  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

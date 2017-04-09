@@ -45,7 +45,7 @@ void QueryTableTest::init()
   MyMoneyFileTransaction ft;
   file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
   file->addCurrency(MyMoneySecurity("USD", "US Dollar",              "$"));
-  file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen",           QChar(0x00A5), 100, 100));
+  file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen",           QChar(0x00A5), 1));
   file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
   file->setBaseCurrency(file->currency("USD"));
 

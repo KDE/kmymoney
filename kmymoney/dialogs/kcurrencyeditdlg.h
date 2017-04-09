@@ -39,6 +39,7 @@
 
 #include "ui_kcurrencyeditdlg.h"
 #include "ui_kavailablecurrencydlg.h"
+#include "ui_kcurrencyeditordlg.h"
 #include "mymoneysecurity.h"
 
 namespace Ui
@@ -48,6 +49,7 @@ class KCurrencyEditDlg;
 
 class QTreeWidgetItem;
 class KAvailableCurrencyDlg;
+class KCurrencyEditorDlg;
 
 /**
   * @author Thomas Baumgart
@@ -81,6 +83,7 @@ private slots:
   void slotAddCurrency();
   void slotRemoveCurrency();
   void slotRemoveUnusedCurrency();
+  void slotEditCurrency();
 
 signals:
   void selectObject(const MyMoneySecurity& currency);
@@ -91,6 +94,7 @@ signals:
 private:
   typedef enum:int { RemoveSelected, RemoveUnused} removalModeE;
   KAvailableCurrencyDlg*          m_availableCurrencyDlg;
+  KCurrencyEditorDlg*             m_currencyEditorDlg;
   MyMoneySecurity                 m_currency;
   /**
     * Search widget for the list

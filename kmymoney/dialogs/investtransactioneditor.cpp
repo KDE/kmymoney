@@ -229,7 +229,6 @@ void InvestTransactionEditor::createEditWidgets()
   value = new kMyMoneyEdit;
   value->setPlaceholderText(i18n("Price"));
   value->setResetButtonVisible(false);
-  value->setPrecision(KMyMoneyGlobalSettings::pricePrecision());
   m_editWidgets["price"] = value;
   connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateTotalAmount()));
@@ -1107,14 +1106,15 @@ void InvestTransactionEditor::updatePriceMode(const MyMoneySplit& split)
       price = priceEdit->value().abs();
 
     if (priceMode() == PricePerTransaction) {
+      priceEdit->setPrecision(m_currency.pricePrecision());
       label->setText(i18n("Transaction amount"));
       if (!sharesEdit->value().isZero())
         priceEdit->setValue(sharesEdit->value().abs() * price);
 
     } else if (priceMode() == PricePerShare) {
+      priceEdit->setPrecision(m_security.pricePrecision());
       label->setText(i18n("Price/Share"));
       priceEdit->setValue(price);
-
     } else
       priceEdit->setValue(price);
   }

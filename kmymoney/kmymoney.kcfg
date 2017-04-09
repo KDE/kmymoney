@@ -88,12 +88,6 @@
    <label>Use the ledger lens</label>
    <default>false</default>
   </entry>
-  <entry name="PricePrecision" type="Int">
-   <label>Price Precision</label>
-   <default>4</default>
-   <min>4</min>
-   <max>10</max>
-  </entry>
   <entry name="PriceHistoryUpdate" type="Bool">
    <label>Update price history</label>
    <default>true</default>

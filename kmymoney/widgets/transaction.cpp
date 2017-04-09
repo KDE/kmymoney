@@ -1561,7 +1561,7 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
         case ValueColumn2:
           align |= Qt::AlignRight;
           if ((fieldEditable = havePrice()) == true && !m_split.shares().isZero()) {
-            txt = m_split.price().formatMoney("", KMyMoneyGlobalSettings::pricePrecision());
+            txt = m_split.price().formatMoney("", m_security.pricePrecision());
           }
           break;
       }
@@ -1718,7 +1718,7 @@ void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int
         case PriceColumn:
           align |= Qt::AlignRight;
           if (havePrice() && !m_split.shares().isZero()) {
-            txt = m_split.price().formatMoney(m_currency.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision());
+            txt = m_split.price().formatMoney(m_currency.tradingSymbol(), m_security.pricePrecision());
           }
           break;
 

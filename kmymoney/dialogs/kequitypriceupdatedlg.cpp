@@ -217,7 +217,8 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
         item->setText(SYMBOL_COL, symbol);
         item->setText(NAME_COL, i18n("%1 units in %2", pair.first, pair.second));
         if (pr.isValid()) {
-          item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(file->currency(pair.second).tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
+          MyMoneySecurity currency = file->currency(pair.second);
+          item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(currency.tradingSymbol(), currency.pricePrecision()));
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
         }
         item->setText(ID_COL, id);
@@ -254,7 +255,7 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
       const MyMoneyPrice &pr = file->price(id.toUtf8(), inv.tradingCurrency());
       if (pr.isValid()) {
-        item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
+        item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), currency.pricePrecision()));
         item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
       }
       item->setText(ID_COL, id);
@@ -492,7 +493,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       if (date > QDate::currentDate())
         date = QDate::currentDate();
 
-      MyMoneyMoney price = MyMoneyMoney(_price, MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
+      MyMoneyMoney price = MyMoneyMoney::ONE;
       QString id = _id.toUtf8();
       MyMoneySecurity sec;
       if (_id.contains(" ") == 0) {
@@ -518,7 +519,9 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
           }
         }
       }
-      item->setText(PRICE_COL, price.formatMoney(sec.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
+      price *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(sec.pricePrecision()));
+
+      item->setText(PRICE_COL, price.formatMoney(sec.tradingSymbol(), sec.pricePrecision()));
       item->setText(DATE_COL, date.toString(Qt::ISODate));
       logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
       // make sure to make OK button available

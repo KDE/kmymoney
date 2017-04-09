@@ -1968,14 +1968,14 @@ void MyMoneyStorageSql::writeSplitList
     sharesList << s.shares().toString();
     MyMoneyAccount acc = m_storagePtr->account(s.accountId());
     MyMoneySecurity sec = m_storagePtr->security(acc.currencyId());
-    sharesFormattedList << s.shares().
+    sharesFormattedList << s.price().
     formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
     replace(QChar(','), QChar('.'));
     MyMoneyMoney price = s.actualPrice();
     if (!price.isZero()) {
       priceList << price.toString();
       priceFormattedList << price.formatMoney
-      ("", m_precision, false)
+      ("", sec.pricePrecision(), false)
       .replace(QChar(','), QChar('.'));
     } else {
       priceList << QString();
@@ -2247,6 +2247,7 @@ void MyMoneyStorageSql::writeSecurity(const MyMoneySecurity& security, QSqlQuery
   q.bindValue(":typeString", MyMoneySecurity::securityTypeToString(security.securityType()));
   q.bindValue(":roundingMethod", static_cast<int>(security.roundingMethod()));
   q.bindValue(":smallestAccountFraction", security.smallestAccountFraction());
+  q.bindValue(":pricePrecision", security.pricePrecision());
   q.bindValue(":tradingCurrency", security.tradingCurrency());
   q.bindValue(":tradingMarket", security.tradingMarket());
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Securities"))); // krazy:exclude=crashy
@@ -2312,8 +2313,9 @@ void MyMoneyStorageSql::addPrice(const MyMoneyPrice& p)
   q.bindValue(":toId", p.to());
   q.bindValue(":priceDate", p.date().toString(Qt::ISODate));
   q.bindValue(":price", p.rate(QString()).toString());
+  const MyMoneySecurity sec = m_storagePtr->security(p.to());
   q.bindValue(":priceFormatted",
-              p.rate(QString()).formatMoney("", m_precision));
+              p.rate(QString()).formatMoney("", sec.pricePrecision()));
   q.bindValue(":priceSource", p.source());
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Price"))); // krazy:exclude=crashy
 
@@ -2433,9 +2435,9 @@ void MyMoneyStorageSql::writeCurrency(const MyMoneySecurity& currency, QSqlQuery
   q.bindValue(":symbol2", symutf[1]);
   q.bindValue(":symbol3", symutf[2]);
   q.bindValue(":symbolString", symbol);
-  q.bindValue(":partsPerUnit", currency.partsPerUnit());
   q.bindValue(":smallestCashFraction", currency.smallestCashFraction());
   q.bindValue(":smallestAccountFraction", currency.smallestAccountFraction());
+  q.bindValue(":pricePrecision", currency.pricePrecision());
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Currencies"))); // krazy:exclude=crashy
 }
 
@@ -4280,19 +4282,20 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
   int typeCol = t.fieldNumber("type");
   int roundingMethodCol = t.fieldNumber("roundingMethod");
   int smallestAccountFractionCol = t.fieldNumber("smallestAccountFraction");
+  int pricePrecisionCol = t.fieldNumber("pricePrecision");
   int tradingCurrencyCol = t.fieldNumber("tradingCurrency");
   int tradingMarketCol = t.fieldNumber("tradingMarket");
 
   while (q.next()) {
     MyMoneySecurity e;
     QString eid;
-    int saf = 0;
     eid = GETSTRING(idCol);
     e.setName(GETSTRING(nameCol));
     e.setTradingSymbol(GETSTRING(symbolCol));
     e.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT(typeCol)));
     e.setRoundingMethod(static_cast<AlkValue::RoundingMethod>(GETINT(roundingMethodCol)));
-    saf = GETINT(smallestAccountFractionCol);
+    int saf = GETINT(smallestAccountFractionCol);
+    int pp = GETINT(pricePrecisionCol);
     e.setTradingCurrency(GETSTRING(tradingCurrencyCol));
     e.setTradingMarket(GETSTRING(tradingMarketCol));
 
@@ -4300,7 +4303,10 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
       e.setTradingCurrency(m_storage->pairs()["kmm-baseCurrency"]);
     if (saf == 0)
       saf = 100;
+    if (pp == 0 || pp > 10)
+      pp = 4;
     e.setSmallestAccountFraction(saf);
+    e.setPricePrecision(pp);
 
     // Process any key value pairs
     e.setPairs(readKeyValuePairs("SECURITY", eid).pairs());
@@ -4498,9 +4504,9 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QS
   int symbol1Col = t.fieldNumber("symbol1");
   int symbol2Col = t.fieldNumber("symbol2");
   int symbol3Col = t.fieldNumber("symbol3");
-  int partsPerUnitCol = t.fieldNumber("partsPerUnit");
   int smallestCashFractionCol = t.fieldNumber("smallestCashFraction");
   int smallestAccountFractionCol = t.fieldNumber("smallestAccountFraction");
+  int pricePrecisionCol = t.fieldNumber("pricePrecision");
 
   while (q.next()) {
     QString id;
@@ -4512,9 +4518,9 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QS
     symbol[0] = QChar(GETINT(symbol1Col));
     symbol[1] = QChar(GETINT(symbol2Col));
     symbol[2] = QChar(GETINT(symbol3Col));
-    c.setPartsPerUnit(GETINT(partsPerUnitCol));
     c.setSmallestCashFraction(GETINT(smallestCashFractionCol));
     c.setSmallestAccountFraction(GETINT(smallestAccountFractionCol));
+    c.setPricePrecision(GETINT(pricePrecisionCol));
     c.setTradingSymbol(QString(symbol, 3).trimmed());
 
     cList[id] = MyMoneySecurity(id, c);
@@ -4920,13 +4926,7 @@ QString& MyMoneyStorageSql::buildError(const QSqlQuery& q, const QString& functi
   return (const_cast <MyMoneyStorageSql*>(this)->m_error);
 }
 
-int MyMoneyStorageSql::m_precision = 4;
 QDate MyMoneyStorageSql::m_startDate = QDate(1900, 1, 1);
-
-void MyMoneyStorageSql::setPrecision(int prec)
-{
-  m_precision = prec;
-}
 
 void MyMoneyStorageSql::setStartDate(const QDate& startDate)
 {

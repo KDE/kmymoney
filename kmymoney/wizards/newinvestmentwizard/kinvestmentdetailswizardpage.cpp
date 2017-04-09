@@ -75,6 +75,8 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
   registerField("fraction", m_fraction, "value", SIGNAL(textChanged()));
   connect(m_fraction, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
+
+  registerField("pricePrecision", m_pricePrecision, "value", SIGNAL(valueChanged()));
 }
 
 /**
@@ -90,6 +92,7 @@ void KInvestmentDetailsWizardPage::init2(const MyMoneySecurity& security)
   else
     m_roundingMethod->setCurrentIndex(m_roundingMethod->findData(security.roundingMethod()));
   m_fraction->setValue(MyMoneyMoney(security.smallestAccountFraction(), 1));
+  m_pricePrecision->setValue(security.pricePrecision());
   m_tradingCurrencyEdit->setSecurity(tradingCurrency);
 
   m_investmentIdentification->setText(security.value("kmm-security-id"));

@@ -51,6 +51,7 @@
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
 #include <kavailablecurrencydlg.h>
+#include <kcurrencyeditordlg.h>
 #include <kmymoneyutils.h>
 
 // this delegate is needed to disable editing the currency id (column 1)
@@ -86,6 +87,8 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) : ui(new Ui::KCurrencyEditDl
   ui->m_currencyList->setItemDelegate(new KCurrencyEditDelegate(ui->m_currencyList));
   ui->m_closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close"),
                                               QIcon::fromTheme(QStringLiteral("stop"))));
+  ui->m_editCurrencyButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit"),
+                                              QIcon::fromTheme(QStringLiteral("text-editor"))));
   ui->m_selectBaseCurrencyButton->setIcon(QIcon::fromTheme(QStringLiteral("kmymoney")));
 
   connect(ui->m_currencyList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
@@ -96,6 +99,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) : ui(new Ui::KCurrencyEditDl
   connect(ui->m_selectBaseCurrencyButton, SIGNAL(clicked()), this, SLOT(slotSelectBaseCurrency()));
   connect(ui->m_addCurrencyButton, SIGNAL(clicked()), this, SLOT(slotAddCurrency()));
   connect(ui->m_removeCurrencyButton, SIGNAL(clicked()), this, SLOT(slotRemoveCurrency()));
+  connect(ui->m_editCurrencyButton, SIGNAL(clicked()), this, SLOT(slotEditCurrency()));
   connect(ui->m_removeUnusedCurrencyButton, SIGNAL(clicked()), this, SLOT(slotRemoveUnusedCurrency()));
 
   QTimer::singleShot(10, this, SLOT(timerDone()));
@@ -255,6 +259,7 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
     const int count = ui->m_currencyList->selectedItems().count();
 
     ui->m_selectBaseCurrencyButton->setDisabled(rc1 || count != 1);
+    ui->m_editCurrencyButton->setDisabled(count != 1);
     ui->m_removeCurrencyButton->setDisabled((rc1 || rc2) && count <= 1);
     emit selectObject(m_currency);
   }
@@ -353,4 +358,22 @@ void KCurrencyEditDlg::slotRemoveCurrency()
 void KCurrencyEditDlg::slotRemoveUnusedCurrency()
 {
   removeCurrency(RemoveUnused);
+}
+
+void KCurrencyEditDlg::slotEditCurrency()
+{
+  MyMoneySecurity currency = ui->m_currencyList->currentItem()->data(0, Qt::UserRole).value<MyMoneySecurity>();
+  m_currencyEditorDlg = new KCurrencyEditorDlg(currency);                                   // create new dialog for editing currency
+  if (m_currencyEditorDlg->exec() != QDialog::Rejected) {
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyFileTransaction ft;
+    currency.setPricePrecision(m_currencyEditorDlg->ui->m_pricePrecision->value());
+    try {
+      file->modifyCurrency(currency);
+      ft.commit();
+    } catch (const MyMoneyException &e) {
+      qDebug("%s", qPrintable(e.what()));
+    }
+  }
+  delete m_currencyEditorDlg;
 }

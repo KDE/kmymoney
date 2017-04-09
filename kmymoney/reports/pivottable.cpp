@@ -1536,6 +1536,10 @@ QString PivotTable::renderBody() const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
+  MyMoneyFile* file = MyMoneyFile::instance();
+  int pricePrecision = 0;
+  int currencyPrecision = 0;
+  int precision = 2;
   QString colspan = QString(" colspan=\"%1\"").arg(m_numColumns + 1 + (m_config_f.isShowingRowTotals() ? 1 : 0));
 
   //
@@ -1626,6 +1630,7 @@ QString PivotTable::renderBody() const
     //
     // I hope this doesn't bog the performance of reports, given that we're copying the entire report
     // data.  If this is a perf hit, we could change to storing outergroup pointers, I think.
+
     QList<PivotOuterGroup> outergroups;
     PivotGrid::const_iterator it_outergroup_map = m_grid.begin();
     while (it_outergroup_map != m_grid.end()) {
@@ -1670,27 +1675,47 @@ QString PivotTable::renderBody() const
 
             QString rowdata;
             int column = 1;
+            pricePrecision = 0; // new row => new account => new precision
+            currencyPrecision = 0;
             bool isUsed = it_row.value()[eActual][0].isUsed();
             while (column < m_numColumns) {
               QString lb;
-              if (column != 1)
+              if (column > 1)
                 lb = leftborder;
 
-              for (int i = 0; i < m_rowTypeList.size(); ++i) {
+              foreach (const auto rowType, m_rowTypeList) {
+                if (rowType == ePrice) {
+                  if (pricePrecision == 0) {
+                    if (it_row.key().isInvest()) {
+                      pricePrecision = file->currency(it_row.key().currencyId()).pricePrecision();
+                      precision = pricePrecision;
+                    } else
+                      precision = 2;
+                  } else
+                    precision = pricePrecision;
+                } else {
+                  if (currencyPrecision == 0) {
+                    if (it_row.key().isInvest()) // stock account isn't eveluated in currency, so take investment account instead
+                      currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
+                    else
+                      currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());
+                    precision = currencyPrecision;
+                  } else
+                    precision = currencyPrecision;
+                }
                 rowdata += QString("<td%2>%1</td>")
-                           .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ][column]))
-                           .arg(i == 0 ? lb : QString());
-
-                isUsed |= it_row.value()[ m_rowTypeList[i] ][column].isUsed();
+                           .arg(coloredAmount(it_row.value()[rowType][column], QString(), precision))
+                           .arg(lb);
+                lb.clear();
+                isUsed |= it_row.value()[rowType][column].isUsed();
               }
-
-              column++;
+              ++column;
             }
 
             if (m_config_f.isShowingRowTotals()) {
               for (int i = 0; i < m_rowTypeList.size(); ++i) {
                 rowdata += QString("<td%2>%1</td>")
-                           .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ].m_total))
+                           .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ].m_total, QString(), precision))
                            .arg(i == 0 ? leftborder : QString());
               }
             }
@@ -1774,7 +1799,7 @@ QString PivotTable::renderBody() const
 
               for (int i = 0; i < m_rowTypeList.size(); ++i) {
                 finalRow += QString("<td%2>%1</td>")
-                            .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ][column]))
+                            .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ][column], QString(), precision))
                             .arg(i == 0 ? lb : QString());
                 isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][column].isUsed();
               }
@@ -1785,7 +1810,7 @@ QString PivotTable::renderBody() const
             if (m_config_f.isShowingRowTotals()) {
               for (int i = 0; i < m_rowTypeList.size(); ++i) {
                 finalRow += QString("<td%2>%1</td>")
-                            .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total))
+                            .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total, QString(), precision))
                             .arg(i == 0 ? leftborder : QString());
               }
             }
@@ -1817,7 +1842,7 @@ QString PivotTable::renderBody() const
 
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
             result += QString("<td%2>%1</td>")
-                      .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ][column]))
+                      .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ][column], QString(), precision))
                       .arg(i == 0 ? lb : QString());
           }
 
@@ -1827,7 +1852,7 @@ QString PivotTable::renderBody() const
         if (m_config_f.isShowingRowTotals()) {
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
             result += QString("<td%2>%1</td>")
-                      .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total))
+                      .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total, QString(), precision))
                       .arg(i == 0 ? leftborder : QString());
           }
         }
@@ -1855,7 +1880,7 @@ QString PivotTable::renderBody() const
 
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
-                  .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn]))
+                  .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn], QString(), precision))
                   .arg(i == 0 ? lb : QString());
       }
 
@@ -1865,7 +1890,7 @@ QString PivotTable::renderBody() const
     if (m_config_f.isShowingRowTotals()) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
-                  .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ].m_total))
+                  .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ].m_total, QString(), precision))
                   .arg(i == 0 ? leftborder : QString());
       }
     }
@@ -1891,11 +1916,6 @@ void PivotTable::dump(const QString& file, const QString& /* context */) const
 void PivotTable::drawChart(KReportChartView& chartView) const
 {
   chartView.drawPivotChart(m_grid, m_config_f, m_numColumns, m_columnHeadings, m_rowTypeList, m_columnTypeHeaderList);
-}
-
-QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol) const
-{
-  return coloredAmount(amount, currencySymbol, KMyMoneyGlobalSettings::pricePrecision());
 }
 
 QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const

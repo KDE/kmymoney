@@ -298,13 +298,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   //skip the budget difference rowset
                   if (rowTypeList[i] != eBudgetDiff) {
                     QString legendText;
+                    QString rowName = it_row.key().name();
 
                     //only show the column type in the header if there is more than one type
-                    if (rowTypeList.size() > 1) {
-                      legendText = QString(columnTypeHeaderList[i] + " - " + it_row.key().name());
-                    } else {
-                      legendText = QString(it_row.key().name());
-                    }
+                    if (rowTypeList.size() > 1)
+                      legendText = QString(columnTypeHeaderList.at(i) + QLatin1Literal(" - ") + rowName);
+                    else
+                      legendText = rowName;
 
                     //set the legend text
                     legend->setText(rowNum, legendText);
@@ -314,7 +314,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                       legendText.clear();
 
                     //set the cell value and tooltip
-                    rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns() - 1);
+                    rowNum = drawPivotRowSet(it_row.key().id(), rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns() - 1);
                   }
                 }
               }
@@ -342,14 +342,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               //skip the budget difference rowset
               if (rowTypeList[i] != eBudgetDiff) {
                 QString legendText;
-
+                QString rowName = it_innergroup.key();
 
                 //only show the column type in the header if there is more than one type
-                if (rowTypeList.size() > 1) {
-                  legendText = QString(columnTypeHeaderList[i] + " - " + it_innergroup.key());
-                } else {
-                  legendText = QString(it_innergroup.key());
-                }
+                if (rowTypeList.size() > 1)
+                  legendText = QString(columnTypeHeaderList.at(i) + QLatin1Literal(" - ") + rowName);
+                else
+                  legendText = rowName;
 
                 //set the legend text
                 legend->setText(rowNum, legendText);
@@ -359,7 +358,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   legendText.clear();
 
                 //set the cell value and tooltip
-                rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+                rowNum = drawPivotRowSet(QString(), rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
               }
             }
             ++it_innergroup;
@@ -380,13 +379,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             //skip the budget difference rowset
             if (rowTypeList[i] != eBudgetDiff) {
               QString legendText;
+              QString rowName = it_outergroup.key();
 
               //only show the column type in the header if there is more than one type
-              if (rowTypeList.size() > 1) {
-                legendText = QString(columnTypeHeaderList[i] + " - " + it_outergroup.key());
-              } else {
-                legendText = QString(it_outergroup.key());
-              }
+              if (rowTypeList.size() > 1)
+                legendText = QString(columnTypeHeaderList.at(i) + QLatin1Literal(" - ") + rowName);
+              else
+                legendText = rowName;
 
               //set the legend text
               legend->setText(rowNum, legendText);
@@ -396,7 +395,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 legendText.clear();
 
               //set the cell value and tooltip
-              rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+              rowNum = drawPivotRowSet(QString(), rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
             }
           }
           ++it_outergroup;
@@ -411,11 +410,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               QString legendText;
 
               //only show the column type in the header if there is more than one type
-              if (rowTypeList.size() > 1) {
-                legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
+              if (rowTypeList.size() > 1)
+                legendText = QString(columnTypeHeaderList.at(i) + QLatin1Literal(" - ") + i18nc("Total balance", "Total"));
+              else
                 legendText = QString(i18nc("Total balance", "Total"));
-              } else {
-              }
 
               //set the legend text
               legend->setText(rowNum, legendText);
@@ -425,7 +423,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 legendText.clear();
 
               //set the cell value
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+              rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
             }
           }
         }
@@ -442,11 +440,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             QString legendText;
 
             //only show the column type in the header if there is more than one type
-            if (rowTypeList.size() > 1) {
-              legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
-            } else {
+            if (rowTypeList.size() > 1)
+              legendText = QString(columnTypeHeaderList.at(i) + QLatin1Literal(" - ") + i18nc("Total balance", "Total"));
+            else
               legendText = QString(i18nc("Total balance", "Total"));
-            }
 
             //set the legend
             legend->setText(rowNum, legendText);
@@ -457,15 +454,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             if (config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
               if (rowTypeList[i] == eActual) {
-                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn());
+                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn());
               } else if (rowTypeList[i] == eForecast) {
-                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns() - 1);
+                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns() - 1);
               } else {
-                rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
               }
             } else {
               //set cell value
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+              rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
             }
           }
         }
@@ -597,7 +594,7 @@ void KReportChartView::slotNeedUpdate()
     barDiagram->axes().at(1)->setLabels(labels);
 }
 
-unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
+unsigned KReportChartView::drawPivotRowSet(const QString& rowAcc, int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
 {
   if (coordinatePlane()->diagram()->datasetDimension() != 1)
     return ++rowNum;
@@ -605,6 +602,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
   if (endColumn == 0)
     endColumn = numColumns();
 
+  MyMoneyFile* file = MyMoneyFile::instance();
   double value;
   QString toolTip;
 
@@ -615,6 +613,22 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
     justifyModelSize(rowNum + 1, endColumn > numColumns() - 1 ? endColumn + 1 : numColumns());
   }
 
+  int precision = 0;
+  if (!rowAcc.isEmpty()) {
+    const MyMoneyAccount acc = file->account(rowAcc);
+    if (rowType == ePrice) {
+      if (acc.isInvest())
+        precision = file->currency(acc.currencyId()).pricePrecision();
+    } else {
+      if (acc.isInvest()) // stock account isn't eveluated in currency, so take investment account instead
+        precision = MyMoneyMoney::denomToPrec(file->account(acc.parentAccountId()).fraction());
+      else
+        precision = MyMoneyMoney::denomToPrec(acc.fraction());
+    }
+  }
+  if (precision == 0)
+    precision = file->baseCurrency().pricePrecision();
+
   // Columns
   if (seriesTotals()) {
     value = rowSet[rowType].m_total.toDouble();
@@ -623,7 +637,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
     if (!legendText.isEmpty())
       toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
           .arg(legendText)
-          .arg(value, 0, 'g', KMyMoneyGlobalSettings::pricePrecision());
+          .arg(value, 0, 'f', precision);
 
     //set the cell value
     if (accountSeries())
@@ -642,7 +656,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
         if (!legendText.isEmpty())
           toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
               .arg(legendText)
-              .arg(value, 0, 'g', KMyMoneyGlobalSettings::pricePrecision());
+              .arg(value, 0, 'f', precision);
 
         if (accountSeries())
           this->setDataCell(column, rowNum, value, toolTip);

@@ -937,7 +937,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
         MyMoneyMoney balance = file->balance(stock.id(), QDate::currentDate());
         MyMoneySecurity security = file->security(stock.currencyId());
         const MyMoneyPrice &price = file->price(stock.currencyId(), security.tradingCurrency());
-        val = (balance * price.rate(security.tradingCurrency())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
+        val = (balance * price.rate(security.tradingCurrency())).convertPrecision(security.pricePrecision());
         // adjust value of security to the currency of the account
         MyMoneySecurity accountCurrency = file->currency(acc.currencyId());
         val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());

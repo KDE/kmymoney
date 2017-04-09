@@ -82,7 +82,7 @@ private:
   /**
     * Draw a PivotGridRowSet in a chart
     */
-  unsigned drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn = 1, int endColumn = 0);
+  unsigned drawPivotRowSet(const QString& rowAcc, int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn = 1, int endColumn = 0);
 
   /**
     * Set cell data
