@@ -61,7 +61,7 @@
 #include <daterangedlg.h>
 
 #include "ui_kfindtransactiondlgdecl.h"
-#include "ui_daterangedlgdecl.h"
+#include <ui_daterangedlgdecl.h>
 #include <ui_reporttabgeneral.h>
 #include <ui_reporttabrowcolpivot.h>
 #include <ui_reporttabrowcolquery.h>

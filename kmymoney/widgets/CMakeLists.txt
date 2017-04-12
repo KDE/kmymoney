@@ -164,6 +164,7 @@ set(libwidgets_a_SOURCES
   transactioneditorcontainer.cpp
   reporttabimpl.cpp
   reportcontrolimpl.cpp
+  daterangedlg.cpp
   )
 
 set(libwidgets_a_UI
@@ -171,7 +172,7 @@ set(libwidgets_a_UI
   reporttabgeneral.ui
   reporttabrowcolquery.ui reporttabrowcolpivot.ui
   reporttabrange.ui reporttabchart.ui
-  ../dialogs/daterangedlgdecl.ui
+  daterangedlgdecl.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic

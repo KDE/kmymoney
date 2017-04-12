@@ -63,7 +63,7 @@
 
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_ksortoptiondlg.h"
-#include "ui_daterangedlgdecl.h"
+#include <ui_daterangedlgdecl.h>
 
 enum ItemRoles {
   ItemIdRole = Qt::UserRole

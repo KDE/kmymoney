@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfindtransactiondlg.h
+                          daterange.h
                              -------------------
     copyright            : (C) 2003 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
