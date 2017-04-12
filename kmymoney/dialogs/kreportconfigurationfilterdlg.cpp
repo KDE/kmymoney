@@ -62,13 +62,17 @@
 
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_daterangedlgdecl.h"
-#include "ui_kmymoneyreportconfigtabrangedecl.h"
+#include <ui_reporttabgeneral.h>
+#include <ui_reporttabrowcolpivot.h>
+#include <ui_reporttabrowcolquery.h>
+#include <ui_reporttabchart.h>
+#include <ui_reporttabrange.h>
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
     : KFindTransactionDlg(parent),
-    m_tab2(0),
-    m_tab3(0),
+    m_tabRowColPivot(0),
+    m_tabRowColQuery(0),
     m_tabChart(0),
     m_tabRange(0),
     m_initialState(report),
@@ -94,25 +98,17 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   // Add new tabs
   //
 
-  m_tab1 = new kMyMoneyReportConfigTab1Decl(m_ui->m_criteriaTab);
-  m_tab1->setObjectName("kMyMoneyReportConfigTab1");
-  m_ui->m_criteriaTab->insertTab(0, m_tab1, i18n("Report"));
+  m_tabGeneral = new ReportTabGeneral(m_ui->m_criteriaTab);
+  m_ui->m_criteriaTab->insertTab(0, m_tabGeneral, i18nc("General tab", "General"));
 
   if (m_initialState.reportType() == MyMoneyReport::ePivotTable) {
-    m_tab2 = new kMyMoneyReportConfigTab2Decl(m_ui->m_criteriaTab);
-    m_tab2->setObjectName("kMyMoneyReportConfigTab2");
-    m_ui->m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
-    connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(activated(int)), this, SLOT(slotRowTypeChanged(int)));
-    connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
-    //control the state of the includeTransfer check
-    connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
+    m_tabRowColPivot = new ReportTabRowColPivot(m_ui->m_criteriaTab);
+    m_ui->m_criteriaTab->insertTab(1, m_tabRowColPivot, i18n("Rows/Columns"));
 
-    m_tabChart = new kMyMoneyReportConfigTabChartDecl(m_ui->m_criteriaTab);
-    m_tabChart->setObjectName("kMyMoneyReportConfigTabChart");
+    m_tabChart = new ReportTabChart(m_ui->m_criteriaTab);
     m_ui->m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
 
-    m_tabRange = new kMyMoneyReportConfigTabRangeDecl(m_ui->m_criteriaTab);
-    m_tabRange->setObjectName("kMyMoneyReportConfigTabRange");
+    m_tabRange = new ReportTabRange(m_ui->m_criteriaTab);
     m_ui->m_criteriaTab->insertTab(3, m_tabRange, i18n("Range"));
 
     // date tab is going to be replaced by range tab, so delete it
@@ -125,18 +121,23 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
 
     connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
     connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
-    connect(m_tabChart->findChild<QCheckBox*>("m_logYaxis"), SIGNAL(stateChanged(int)), this, SLOT(slotLogAxisChanged(int)));
+    connect(m_tabChart->ui->m_logYaxis, SIGNAL(stateChanged(int)), this, SLOT(slotLogAxisChanged(int)));
+
+    connect(m_tabRowColPivot->ui->m_comboRows, SIGNAL(activated(int)), this, SLOT(slotRowTypeChanged(int)));
+    connect(m_tabRowColPivot->ui->m_comboRows, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
+    //control the state of the includeTransfer check
+    connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
+
   } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
     if (m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount) {
-      m_tab3 = new kMyMoneyReportConfigTab3Decl(m_ui->m_criteriaTab);
-      m_tab3->setObjectName("kMyMoneyReportConfigTab3");
-      m_ui->m_criteriaTab->insertTab(1, m_tab3, i18n("Rows/Columns"));
+      m_tabRowColQuery = new ReportTabRowColQuery(m_ui->m_criteriaTab);
+      m_ui->m_criteriaTab->insertTab(1, m_tabRowColQuery, i18n("Rows/Columns"));
     }
   }
 
-  m_ui->m_criteriaTab->setCurrentIndex(m_ui->m_criteriaTab->indexOf(m_tab1));
+  m_ui->m_criteriaTab->setCurrentIndex(m_ui->m_criteriaTab->indexOf(m_tabGeneral));
   m_ui->m_criteriaTab->setMinimumSize(500, 200);
 
   QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
@@ -164,46 +165,46 @@ void KReportConfigurationFilterDlg::slotSearch()
   m_currentState.assignFilter(m_filter);
 
   // Then extract the report properties
-  m_currentState.setName(m_tab1->findChild<KLineEdit*>("m_editName")->text());
-  m_currentState.setComment(m_tab1->findChild<KLineEdit*>("m_editComment")->text());
-  m_currentState.setConvertCurrency(m_tab1->findChild<QCheckBox*>("m_checkCurrency")->isChecked());
-  m_currentState.setFavorite(m_tab1->findChild<QCheckBox*>("m_checkFavorite")->isChecked());
-  m_currentState.setSkipZero(m_tab1->findChild<QCheckBox*>("m_skipZero")->isChecked());
+  m_currentState.setName(m_tabGeneral->ui->m_editName->text());
+  m_currentState.setComment(m_tabGeneral->ui->m_editComment->text());
+  m_currentState.setConvertCurrency(m_tabGeneral->ui->m_checkCurrency->isChecked());
+  m_currentState.setFavorite(m_tabGeneral->ui->m_checkFavorite->isChecked());
+  m_currentState.setSkipZero(m_tabGeneral->ui->m_skipZero->isChecked());
 
-  if (m_tab2) {
+  if (m_tabRowColPivot) {
     MyMoneyReport::EDetailLevel dl[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
 
-    m_currentState.setDetailLevel(dl[m_tab2->findChild<KComboBox*>("m_comboDetail")->currentIndex()]);
+    m_currentState.setDetailLevel(dl[m_tabRowColPivot->ui->m_comboDetail->currentIndex()]);
 
     // modify the rowtype only if the widget is enabled
-    if (m_tab2->findChild<KComboBox*>("m_comboRows")->isEnabled()) {
+    if (m_tabRowColPivot->ui->m_comboRows->isEnabled()) {
       MyMoneyReport::ERowType rt[2] = { MyMoneyReport::eExpenseIncome, MyMoneyReport::eAssetLiability };
-      m_currentState.setRowType(rt[m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex()]);
+      m_currentState.setRowType(rt[m_tabRowColPivot->ui->m_comboRows->currentIndex()]);
     }
 
     m_currentState.setShowingRowTotals(false);
-    if (m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex() == 0)
-      m_currentState.setShowingRowTotals(m_tab2->findChild<QCheckBox*>("m_checkTotalColumn")->isChecked());
+    if (m_tabRowColPivot->ui->m_comboRows->currentIndex() == 0)
+      m_currentState.setShowingRowTotals(m_tabRowColPivot->ui->m_checkTotalColumn->isChecked());
 
-    m_currentState.setIncludingSchedules(m_tab2->findChild<QCheckBox*>("m_checkScheduled")->isChecked());
+    m_currentState.setIncludingSchedules(m_tabRowColPivot->ui->m_checkScheduled->isChecked());
 
-    m_currentState.setIncludingTransfers(m_tab2->findChild<QCheckBox*>("m_checkTransfers")->isChecked());
+    m_currentState.setIncludingTransfers(m_tabRowColPivot->ui->m_checkTransfers->isChecked());
 
-    m_currentState.setIncludingUnusedAccounts(m_tab2->findChild<QCheckBox*>("m_checkUnused")->isChecked());
+    m_currentState.setIncludingUnusedAccounts(m_tabRowColPivot->ui->m_checkUnused->isChecked());
 
-    if (m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled()) {
-      m_currentState.setBudget(m_budgets[m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->currentItem()].id(), m_initialState.rowType() == MyMoneyReport::eBudgetActual);
+    if (m_tabRowColPivot->ui->m_comboBudget->isEnabled()) {
+      m_currentState.setBudget(m_budgets[m_tabRowColPivot->ui->m_comboBudget->currentItem()].id(), m_initialState.rowType() == MyMoneyReport::eBudgetActual);
     } else {
       m_currentState.setBudget(QString(), false);
     }
 
     //set moving average days
-    if (m_tab2->findChild<QSpinBox*>("m_movingAverageDays")->isEnabled()) {
-      m_currentState.setMovingAverageDays(m_tab2->findChild<QSpinBox*>("m_movingAverageDays")->value());
+    if (m_tabRowColPivot->ui->m_movingAverageDays->isEnabled()) {
+      m_currentState.setMovingAverageDays(m_tabRowColPivot->ui->m_movingAverageDays->value());
     }
-  } else if (m_tab3) {
+  } else if (m_tabRowColQuery) {
     MyMoneyReport::ERowType rtq[8] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::eTag, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
-    m_currentState.setRowType(rtq[m_tab3->findChild<KComboBox*>("m_comboOrganizeBy")->currentIndex()]);
+    m_currentState.setRowType(rtq[m_tabRowColQuery->ui->m_comboOrganizeBy->currentIndex()]);
 
     unsigned qc = MyMoneyReport::eQCnone;
 
@@ -211,50 +212,50 @@ void KReportConfigurationFilterDlg::slotSearch()
       // once a loan report, always a loan report
       qc = MyMoneyReport::eQCloan;
 
-    if (m_tab3->findChild<QCheckBox*>("m_checkNumber")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkNumber->isChecked())
       qc |= MyMoneyReport::eQCnumber;
-    if (m_tab3->findChild<QCheckBox*>("m_checkPayee")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkPayee->isChecked())
       qc |= MyMoneyReport::eQCpayee;
-    if (m_tab3->findChild<QCheckBox*>("m_checkTag")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkTag->isChecked())
       qc |= MyMoneyReport::eQCtag;
-    if (m_tab3->findChild<QCheckBox*>("m_checkCategory")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkCategory->isChecked())
       qc |= MyMoneyReport::eQCcategory;
-    if (m_tab3->findChild<QCheckBox*>("m_checkMemo")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkMemo->isChecked())
       qc |= MyMoneyReport::eQCmemo;
-    if (m_tab3->findChild<QCheckBox*>("m_checkAccount")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkAccount->isChecked())
       qc |= MyMoneyReport::eQCaccount;
-    if (m_tab3->findChild<QCheckBox*>("m_checkReconciled")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkReconciled->isChecked())
       qc |= MyMoneyReport::eQCreconciled;
-    if (m_tab3->findChild<QCheckBox*>("m_checkAction")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkAction->isChecked())
       qc |= MyMoneyReport::eQCaction;
-    if (m_tab3->findChild<QCheckBox*>("m_checkShares")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkShares->isChecked())
       qc |= MyMoneyReport::eQCshares;
-    if (m_tab3->findChild<QCheckBox*>("m_checkPrice")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkPrice->isChecked())
       qc |= MyMoneyReport::eQCprice;
-    if (m_tab3->findChild<QCheckBox*>("m_checkBalance")->isChecked())
+    if (m_tabRowColQuery->ui->m_checkBalance->isChecked())
       qc |= MyMoneyReport::eQCbalance;
 
     m_currentState.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(qc));
 
-    m_currentState.setTax(m_tab3->findChild<QCheckBox*>("m_checkTax")->isChecked());
-    m_currentState.setInvestmentsOnly(m_tab3->findChild<QCheckBox*>("m_checkInvestments")->isChecked());
-    m_currentState.setLoansOnly(m_tab3->findChild<QCheckBox*>("m_checkLoans")->isChecked());
+    m_currentState.setTax(m_tabRowColQuery->ui->m_checkTax->isChecked());
+    m_currentState.setInvestmentsOnly(m_tabRowColQuery->ui->m_checkInvestments->isChecked());
+    m_currentState.setLoansOnly(m_tabRowColQuery->ui->m_checkLoans->isChecked());
 
-    m_currentState.setDetailLevel(m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->isChecked() ?
+    m_currentState.setDetailLevel(m_tabRowColQuery->ui->m_checkHideSplitDetails->isChecked() ?
                                   MyMoneyReport::eDetailNone : MyMoneyReport::eDetailAll);
-    m_currentState.setHideTransactions(m_tab3->findChild<QCheckBox*>("m_checkHideTransactions")->isChecked());
+    m_currentState.setHideTransactions(m_tabRowColQuery->ui->m_checkHideTransactions->isChecked());
   }
 
   if (m_tabChart) {
     MyMoneyReport::EChartType ct[5] = { MyMoneyReport::eChartLine, MyMoneyReport::eChartBar, MyMoneyReport::eChartStackedBar, MyMoneyReport::eChartPie, MyMoneyReport::eChartRing };
-    m_currentState.setChartType(ct[m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_comboType")->currentIndex()]);
+    m_currentState.setChartType(ct[m_tabChart->ui->m_comboType->currentIndex()]);
 
-    m_currentState.setChartCHGridLines(m_tabChart->findChild<QCheckBox*>("m_checkCHGridLines")->isChecked());
-    m_currentState.setChartSVGridLines(m_tabChart->findChild<QCheckBox*>("m_checkSVGridLines")->isChecked());
-    m_currentState.setChartDataLabels(m_tabChart->findChild<QCheckBox*>("m_checkValues")->isChecked());
-    m_currentState.setChartByDefault(m_tabChart->findChild<QCheckBox*>("m_checkShowChart")->isChecked());
-    m_currentState.setChartLineWidth(m_tabChart->findChild<QSpinBox*>("m_lineWidth")->value());
-    m_currentState.setLogYAxis(m_tabChart->findChild<QCheckBox*>("m_logYaxis")->isChecked());
+    m_currentState.setChartCHGridLines(m_tabChart->ui->m_checkCHGridLines->isChecked());
+    m_currentState.setChartSVGridLines(m_tabChart->ui->m_checkSVGridLines->isChecked());
+    m_currentState.setChartDataLabels(m_tabChart->ui->m_checkValues->isChecked());
+    m_currentState.setChartByDefault(m_tabChart->ui->m_checkShowChart->isChecked());
+    m_currentState.setChartLineWidth(m_tabChart->ui->m_lineWidth->value());
+    m_currentState.setLogYAxis(m_tabChart->ui->m_logYaxis->isChecked());
   }
 
   if (m_tabRange) {
@@ -282,12 +283,12 @@ void KReportConfigurationFilterDlg::slotSearch()
 
 void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)
 {
-  m_tab2->findChild<QCheckBox*>("m_checkTotalColumn")->setEnabled(row == 0);
+  m_tabRowColPivot->ui->m_checkTotalColumn->setEnabled(row == 0);
 }
 
 void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
 {
-  if ((m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled() && row < 2)) {
+  if ((m_tabRowColPivot->ui->m_comboBudget->isEnabled() && row < 2)) {
     m_tabRange->ui->m_comboColumns->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
   }
 }
@@ -296,7 +297,7 @@ void KReportConfigurationFilterDlg::slotUpdateColumnsCombo()
 {
   const int monthlyIndex = 2;
   const int incomeExpenseIndex = 0;
-  const bool isIncomeExpenseForecast = m_currentState.isIncludingForecast() && m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex() == incomeExpenseIndex;
+  const bool isIncomeExpenseForecast = m_currentState.isIncludingForecast() && m_tabRowColPivot->ui->m_comboRows->currentIndex() == incomeExpenseIndex;
   if (isIncomeExpenseForecast && m_tabRange->ui->m_comboColumns->currentIndex() != monthlyIndex) {
     m_tabRange->ui->m_comboColumns->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
   }
@@ -321,19 +322,19 @@ void KReportConfigurationFilterDlg::slotReset()
   // Report Properties
   //
 
-  m_tab1->findChild<KLineEdit*>("m_editName")->setText(m_initialState.name());
-  m_tab1->findChild<KLineEdit*>("m_editComment")->setText(m_initialState.comment());
-  m_tab1->findChild<QCheckBox*>("m_checkCurrency")->setChecked(m_initialState.isConvertCurrency());
-  m_tab1->findChild<QCheckBox*>("m_checkFavorite")->setChecked(m_initialState.isFavorite());
+  m_tabGeneral->ui->m_editName->setText(m_initialState.name());
+  m_tabGeneral->ui->m_editComment->setText(m_initialState.comment());
+  m_tabGeneral->ui->m_checkCurrency->setChecked(m_initialState.isConvertCurrency());
+  m_tabGeneral->ui->m_checkFavorite->setChecked(m_initialState.isFavorite());
 
   if (m_initialState.isIncludingPrice() || m_initialState.isSkippingZero()) {
-    m_tab1->findChild<QCheckBox*>("m_skipZero")->setChecked(m_initialState.isSkippingZero());
+    m_tabGeneral->ui->m_skipZero->setChecked(m_initialState.isSkippingZero());
   } else {
-    m_tab1->findChild<QCheckBox*>("m_skipZero")->setEnabled(false);
+    m_tabGeneral->ui->m_skipZero->setEnabled(false);
   }
 
-  if (m_tab2) {
-    KComboBox *combo = m_tab2->findChild<KComboBox*>("m_comboDetail");
+  if (m_tabRowColPivot) {
+    KComboBox *combo = m_tabRowColPivot->ui->m_comboDetail;
     switch (m_initialState.detailLevel()) {
       case MyMoneyReport::eDetailNone:
       case MyMoneyReport::eDetailEnd:
@@ -351,7 +352,7 @@ void KReportConfigurationFilterDlg::slotReset()
         break;
     }
 
-    combo = m_tab2->findChild<KComboBox*>("m_comboRows");
+    combo = m_tabRowColPivot->ui->m_comboRows;
     switch (m_initialState.rowType()) {
       case MyMoneyReport::eExpenseIncome:
       case MyMoneyReport::eBudget:
@@ -362,38 +363,38 @@ void KReportConfigurationFilterDlg::slotReset()
         combo->setCurrentItem(i18n("Assets & Liabilities"), false); // asset / liability
         break;
     }
-    m_tab2->findChild<QCheckBox*>("m_checkTotalColumn")->setChecked(m_initialState.isShowingRowTotals());
+    m_tabRowColPivot->ui->m_checkTotalColumn->setChecked(m_initialState.isShowingRowTotals());
 
     slotRowTypeChanged(combo->currentIndex());
 
     //load budgets combo
     if (m_initialState.rowType() == MyMoneyReport::eBudget
         || m_initialState.rowType() == MyMoneyReport::eBudgetActual) {
-      m_tab2->findChild<KComboBox*>("m_comboRows")->setEnabled(false);
-      m_tab2->findChild<QFrame*>("m_budgetFrame")->setEnabled(!m_budgets.empty());
+      m_tabRowColPivot->ui->m_comboRows->setEnabled(false);
+      m_tabRowColPivot->ui->m_budgetFrame->setEnabled(!m_budgets.empty());
       int i = 0;
       for (QVector<MyMoneyBudget>::const_iterator it_b = m_budgets.constBegin(); it_b != m_budgets.constEnd(); ++it_b) {
-        m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->insertItem((*it_b).name(), i);
+        m_tabRowColPivot->ui->m_comboBudget->insertItem((*it_b).name(), i);
         //set the current selected item
         if ((m_initialState.budget() == "Any" && (*it_b).budgetStart().year() == QDate::currentDate().year())
             || m_initialState.budget() == (*it_b).id())
-          m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->setCurrentItem(i);
+          m_tabRowColPivot->ui->m_comboBudget->setCurrentItem(i);
         i++;
       }
     }
 
     //set moving average days spinbox
-    QSpinBox *spinbox = m_tab2->findChild<QSpinBox*>("m_movingAverageDays");
+    QSpinBox *spinbox = m_tabRowColPivot->ui->m_movingAverageDays;
     spinbox->setEnabled(m_initialState.isIncludingMovingAverage());
     if (m_initialState.isIncludingMovingAverage()) {
       spinbox->setValue(m_initialState.movingAverageDays());
     }
 
-    m_tab2->findChild<QCheckBox*>("m_checkScheduled")->setChecked(m_initialState.isIncludingSchedules());
-    m_tab2->findChild<QCheckBox*>("m_checkTransfers")->setChecked(m_initialState.isIncludingTransfers());
-    m_tab2->findChild<QCheckBox*>("m_checkUnused")->setChecked(m_initialState.isIncludingUnusedAccounts());
-  } else if (m_tab3) {
-    KComboBox *combo = m_tab3->findChild<KComboBox*>("m_comboOrganizeBy");
+    m_tabRowColPivot->ui->m_checkScheduled->setChecked(m_initialState.isIncludingSchedules());
+    m_tabRowColPivot->ui->m_checkTransfers->setChecked(m_initialState.isIncludingTransfers());
+    m_tabRowColPivot->ui->m_checkUnused->setChecked(m_initialState.isIncludingUnusedAccounts());
+  } else if (m_tabRowColQuery) {
+    KComboBox *combo = m_tabRowColQuery->ui->m_comboOrganizeBy;
     switch (m_initialState.rowType()) {
       case MyMoneyReport::eNoColumns:
       case MyMoneyReport::eCategory:
@@ -425,31 +426,31 @@ void KReportConfigurationFilterDlg::slotReset()
     }
 
     unsigned qc = m_initialState.queryColumns();
-    m_tab3->findChild<QCheckBox*>("m_checkNumber")->setChecked(qc & MyMoneyReport::eQCnumber);
-    m_tab3->findChild<QCheckBox*>("m_checkPayee")->setChecked(qc & MyMoneyReport::eQCpayee);
-    m_tab3->findChild<QCheckBox*>("m_checkTag")->setChecked(qc & MyMoneyReport::eQCtag);
-    m_tab3->findChild<QCheckBox*>("m_checkCategory")->setChecked(qc & MyMoneyReport::eQCcategory);
-    m_tab3->findChild<QCheckBox*>("m_checkMemo")->setChecked(qc & MyMoneyReport::eQCmemo);
-    m_tab3->findChild<QCheckBox*>("m_checkAccount")->setChecked(qc & MyMoneyReport::eQCaccount);
-    m_tab3->findChild<QCheckBox*>("m_checkReconciled")->setChecked(qc & MyMoneyReport::eQCreconciled);
-    m_tab3->findChild<QCheckBox*>("m_checkAction")->setChecked(qc & MyMoneyReport::eQCaction);
-    m_tab3->findChild<QCheckBox*>("m_checkShares")->setChecked(qc & MyMoneyReport::eQCshares);
-    m_tab3->findChild<QCheckBox*>("m_checkPrice")->setChecked(qc & MyMoneyReport::eQCprice);
-    m_tab3->findChild<QCheckBox*>("m_checkBalance")->setChecked(qc & MyMoneyReport::eQCbalance);
+    m_tabRowColQuery->ui->m_checkNumber->setChecked(qc & MyMoneyReport::eQCnumber);
+    m_tabRowColQuery->ui->m_checkPayee->setChecked(qc & MyMoneyReport::eQCpayee);
+    m_tabRowColQuery->ui->m_checkTag->setChecked(qc & MyMoneyReport::eQCtag);
+    m_tabRowColQuery->ui->m_checkCategory->setChecked(qc & MyMoneyReport::eQCcategory);
+    m_tabRowColQuery->ui->m_checkMemo->setChecked(qc & MyMoneyReport::eQCmemo);
+    m_tabRowColQuery->ui->m_checkAccount->setChecked(qc & MyMoneyReport::eQCaccount);
+    m_tabRowColQuery->ui->m_checkReconciled->setChecked(qc & MyMoneyReport::eQCreconciled);
+    m_tabRowColQuery->ui->m_checkAction->setChecked(qc & MyMoneyReport::eQCaction);
+    m_tabRowColQuery->ui->m_checkShares->setChecked(qc & MyMoneyReport::eQCshares);
+    m_tabRowColQuery->ui->m_checkPrice->setChecked(qc & MyMoneyReport::eQCprice);
+    m_tabRowColQuery->ui->m_checkBalance->setChecked(qc & MyMoneyReport::eQCbalance);
 
-    m_tab3->findChild<QCheckBox*>("m_checkTax")->setChecked(m_initialState.isTax());
-    m_tab3->findChild<QCheckBox*>("m_checkInvestments")->setChecked(m_initialState.isInvestmentsOnly());
-    m_tab3->findChild<QCheckBox*>("m_checkLoans")->setChecked(m_initialState.isLoansOnly());
+    m_tabRowColQuery->ui->m_checkTax->setChecked(m_initialState.isTax());
+    m_tabRowColQuery->ui->m_checkInvestments->setChecked(m_initialState.isInvestmentsOnly());
+    m_tabRowColQuery->ui->m_checkLoans->setChecked(m_initialState.isLoansOnly());
 
-    m_tab3->findChild<QCheckBox*>("m_checkHideTransactions")->setChecked(m_initialState.isHideTransactions());
-    m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->setEnabled(!m_initialState.isHideTransactions());
+    m_tabRowColQuery->ui->m_checkHideTransactions->setChecked(m_initialState.isHideTransactions());
+    m_tabRowColQuery->ui->m_checkHideSplitDetails->setEnabled(!m_initialState.isHideTransactions());
 
-    m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->setChecked
+    m_tabRowColQuery->ui->m_checkHideSplitDetails->setChecked
     (m_initialState.detailLevel() == MyMoneyReport::eDetailNone || m_initialState.isHideTransactions());
   }
 
   if (m_tabChart) {
-    KMyMoneyGeneralCombo* combo = m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_comboType");
+    KMyMoneyGeneralCombo* combo = m_tabChart->ui->m_comboType;
     switch (m_initialState.chartType()) {
       case MyMoneyReport::eChartNone:
         combo->setCurrentItem(MyMoneyReport::eChartLine);
@@ -464,12 +465,12 @@ void KReportConfigurationFilterDlg::slotReset()
       case MyMoneyReport::eChartEnd:
         throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
-    m_tabChart->findChild<QCheckBox*>("m_checkCHGridLines")->setChecked(m_initialState.isChartCHGridLines());
-    m_tabChart->findChild<QCheckBox*>("m_checkSVGridLines")->setChecked(m_initialState.isChartSVGridLines());
-    m_tabChart->findChild<QCheckBox*>("m_checkValues")->setChecked(m_initialState.isChartDataLabels());
-    m_tabChart->findChild<QCheckBox*>("m_checkShowChart")->setChecked(m_initialState.isChartByDefault());
-    m_tabChart->findChild<QSpinBox*>("m_lineWidth")->setValue(m_initialState.chartLineWidth());
-    m_tabChart->findChild<QCheckBox*>("m_logYaxis")->setChecked(m_initialState.isLogYAxis());
+    m_tabChart->ui->m_checkCHGridLines->setChecked(m_initialState.isChartCHGridLines());
+    m_tabChart->ui->m_checkSVGridLines->setChecked(m_initialState.isChartSVGridLines());
+    m_tabChart->ui->m_checkValues->setChecked(m_initialState.isChartDataLabels());
+    m_tabChart->ui->m_checkShowChart->setChecked(m_initialState.isChartByDefault());
+    m_tabChart->ui->m_lineWidth->setValue(m_initialState.chartLineWidth());
+    m_tabChart->ui->m_logYaxis->setChecked(m_initialState.isLogYAxis());
   }
 
   if (m_tabRange) {
@@ -706,7 +707,7 @@ void KReportConfigurationFilterDlg::slotShowHelp()
 //TODO Fix the reports and engine to include transfers even if categories are filtered - bug #1523508
 void KReportConfigurationFilterDlg::slotUpdateCheckTransfers()
 {
-  QCheckBox* cb = m_tab2->findChild<QCheckBox*>("m_checkTransfers");
+  QCheckBox* cb = m_tabRowColPivot->ui->m_checkTransfers;
   if (!m_ui->m_categoriesView->allItemsSelected()) {
     cb->setChecked(false);
     cb->setDisabled(true);

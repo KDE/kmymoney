@@ -17,24 +17,16 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KMYMONEYREPORTCONTROLIMPL_H
-#define KMYMONEYREPORTCONTROLIMPL_H
+#ifndef REPORTCONTROLIMPL_H
+#define REPORTCONTROLIMPL_H
 
-#include "ui_kmymoneyreportcontroldecl.h"
+#include "ui_reportcontrol.h"
 
-class kMyMoneyReportControlDecl : public QWidget, public Ui::kMyMoneyReportControlDecl
-{
-public:
-  kMyMoneyReportControlDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class kMyMoneyReportControl : public kMyMoneyReportControlDecl
+class ReportControl : public QWidget
 {
   Q_OBJECT
 public:
-  kMyMoneyReportControl(QWidget *parent);
-
+  ReportControl(QWidget *parent);
+  Ui::ReportControl* ui;
 };
-#endif /* KMYMONEYREPORTCONTROLIMPL_H */
+#endif /* REPORTCONTROLIMPL_H */

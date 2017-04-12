@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>kMyMoneyReportConfigTabRangeDecl</class>
- <widget class="QWidget" name="kMyMoneyReportConfigTabRangeDecl">
+ <class>ReportTabRange</class>
+ <widget class="QWidget" name="ReportTabRange">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>250</height>
+    <height>288</height>
    </rect>
   </property>
   <property name="windowTitle">

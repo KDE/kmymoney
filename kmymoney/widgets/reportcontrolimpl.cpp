@@ -17,13 +17,14 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "kmymoneyreportcontrolimpl.h"
+#include "reportcontrolimpl.h"
+#include "ui_reportcontrol.h"
 
-
-kMyMoneyReportControl::kMyMoneyReportControl(QWidget *parent)
-    : kMyMoneyReportControlDecl(parent)
+ReportControl::ReportControl(QWidget *parent)
+  : QWidget(parent)
 {
-
+  ui = new Ui::ReportControl;
+  ui->setupUi(this);
 }
 
 

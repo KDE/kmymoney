@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ReportTabGeneral</class>
+ <widget class="QWidget" name="ReportTabGeneral">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>176</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Report Tab</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="whatsThis">
+   <string>&lt;p&gt;On this tab, you set the basic properties of this report.&lt;/p&gt;</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="textLabel6">
+       <property name="text">
+        <string>Report Name</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KLineEdit" name="m_editName">
+       <property name="toolTip">
+        <string>&lt;p&gt;Choose a name for this report.&lt;/p&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="textLabel7">
+       <property name="text">
+        <string>Comment</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KLineEdit" name="m_editComment">
+       <property name="toolTip">
+        <string>&lt;p&gt;Enter a comment to help you remember the details of this report.&lt;/p&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_checkCurrency">
+     <property name="toolTip">
+      <string comment="Convert 'em!!">&lt;p&gt;Select this option to convert all values in the report to your base currency.&lt;/p&gt;&lt;p&gt;Leave it unchecked if you would like to see values in their original currency.&lt;/p&gt;&lt;p&gt;If currencies are not converted, then subtotals will not be shown.&lt;/p&gt;</string>
+     </property>
+     <property name="text">
+      <string>Convert values to base currency</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_checkFavorite">
+     <property name="toolTip">
+      <string>&lt;p&gt;Select this option to notate this report as one of your favorites.&lt;/p&gt;&lt;p&gt;All your favorite reports are grouped in one place on the report list for easy access.&lt;/p&gt;</string>
+     </property>
+     <property name="text">
+      <string>Mark as a favorite report</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_skipZero">
+     <property name="toolTip">
+      <string>
+              &lt;p&gt;
+              This option is for investments reports only which
+              show prices instead of balances as all other reports do.
+              &lt;/p&gt;
+              &lt;p&gt;
+              Select this option to include prices only if there is an actual price for the date.
+              If not, 0 will be shown. In the graph, the value will be skipped.
+              &lt;/p&gt;
+              &lt;p&gt;
+              If this option is off the last existing price is shown for a period, if
+              it is on, in a table the value is '0' shown and in a chart a linear
+              interpolation for the missing values will be performed.
+              &lt;br&gt;Example:
+              &lt;br&gt;There are prices for January and March, but there is no price for
+              February.
+              &lt;ul&gt;
+              &lt;li&gt;&lt;b&gt;OFF&lt;/b&gt;: shows the price for February as the last price of
+              January
+              &lt;li&gt;&lt;b&gt;ON&lt;/b&gt;: in a table the value is '0', in a chart a linear
+              interpolation for the February-price will be performed
+              (so it makes a kind of average-value using the January- and the
+              March-price in the chart)
+              &lt;/ul&gt;
+              &lt;/p&gt;
+            </string>
+     </property>
+     <property name="text">
+      <string>Skip value if price is zero</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer15">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

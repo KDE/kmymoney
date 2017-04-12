@@ -51,7 +51,7 @@
 #include <mymoneyreport.h>
 #include "pivottable.h"
 #include "querytable.h"
-#include "../widgets/kmymoneyreportcontrolimpl.h"
+#include "../widgets/reportcontrolimpl.h"
 #include "kreportchartview.h"
 #include "kmymoneyview.h"
 
@@ -86,7 +86,7 @@ public:
   private:
     KHTMLPart* m_part;
     reports::KReportChartView* m_chartView;
-    kMyMoneyReportControl* m_control;
+    ReportControl* m_control;
     QVBoxLayout* m_layout;
     MyMoneyReport m_report;
     bool m_deleteMe;
@@ -116,7 +116,7 @@ public:
     void saveAs(const QString& filename, bool includeCSS = false);
     void updateReport();
     QString createTable(const QString& links = QString());
-    const kMyMoneyReportControlDecl* control() const {
+    const ReportControl* control() const {
       return m_control;
     }
     bool isReadyToDelete() const {

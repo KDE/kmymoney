@@ -76,7 +76,7 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
     QWidget(parent),
     m_part(new KHTMLPart(this)),
     m_chartView(new KReportChartView(this)),
-    m_control(new kMyMoneyReportControl(this)),
+    m_control(new ReportControl(this)),
     m_layout(new QVBoxLayout(this)),
     m_report(report),
     m_deleteMe(false),
@@ -89,21 +89,21 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
-  m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
+  m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
                                                    QIcon::fromTheme(QStringLiteral("report-line"))));
   if (QIcon::hasThemeIcon(QStringLiteral("document-close")))
-    m_control->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("document-close")));
+    m_control->ui->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("document-close")));
   else
-    m_control->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("stop")));
-  m_control->buttonConfigure->setIcon(QIcon::fromTheme(QStringLiteral("configure"),
+    m_control->ui->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("stop")));
+  m_control->ui->buttonConfigure->setIcon(QIcon::fromTheme(QStringLiteral("configure"),
                                                        QIcon::fromTheme(QStringLiteral("preferences-system"))));
-  m_control->buttonCopy->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
-  m_control->buttonDelete->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
+  m_control->ui->buttonCopy->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+  m_control->ui->buttonDelete->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
   if (QIcon::hasThemeIcon(QStringLiteral("document-export")))
-    m_control->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+    m_control->ui->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   else
-    m_control->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-more")));
-  m_control->buttonNew->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+    m_control->ui->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-more")));
+  m_control->ui->buttonNew->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
@@ -207,7 +207,7 @@ void KReportsView::KReportTab::updateReport()
   m_part->end();
 
   m_table->drawChart(*m_chartView);
-  m_control->buttonChart->setEnabled(m_chartEnabled);
+  m_control->ui->buttonChart->setEnabled(m_chartEnabled);
 
   if (m_report.isChartByDefault() && !m_showingChart)
     toggleChart();
@@ -221,18 +221,18 @@ void KReportsView::KReportTab::toggleChart()
     m_part->view()->show();
     m_chartView->hide();
 
-    m_control->buttonChart->setText(i18n("Chart"));
-    m_control->buttonChart->setToolTip(i18n("Show the chart version of this report"));
-    m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
+    m_control->ui->buttonChart->setText(i18n("Chart"));
+    m_control->ui->buttonChart->setToolTip(i18n("Show the chart version of this report"));
+    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
                                                      QIcon::fromTheme(QStringLiteral("report-line"))));
   } else {
     m_part->view()->hide();
 
     m_chartView->show();
 
-    m_control->buttonChart->setText(i18n("Report"));
-    m_control->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
+    m_control->ui->buttonChart->setText(i18n("Report"));
+    m_control->ui->buttonChart->setToolTip(i18n("Show the report version of this chart"));
+    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
                                                      QIcon::fromTheme(QStringLiteral("ledger"))));
   }
   m_showingChart = ! m_showingChart;
@@ -990,25 +990,25 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 {
   KReportTab* tab = new KReportTab(m_reportTabWidget, report);
 
-  connect(tab->control()->buttonChart, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonChart, SIGNAL(clicked()),
           this, SLOT(slotToggleChart()));
 
-  connect(tab->control()->buttonConfigure, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonConfigure, SIGNAL(clicked()),
           this, SLOT(slotConfigure()));
 
-  connect(tab->control()->buttonNew, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonNew, SIGNAL(clicked()),
           this, SLOT(slotDuplicate()));
 
-  connect(tab->control()->buttonCopy, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonCopy, SIGNAL(clicked()),
           this, SLOT(slotCopyView()));
 
-  connect(tab->control()->buttonExport, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonExport, SIGNAL(clicked()),
           this, SLOT(slotSaveView()));
 
-  connect(tab->control()->buttonDelete, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonDelete, SIGNAL(clicked()),
           this, SLOT(slotDelete()));
 
-  connect(tab->control()->buttonClose, SIGNAL(clicked()),
+  connect(tab->control()->ui->buttonClose, SIGNAL(clicked()),
           this, SLOT(slotCloseCurrent()));
 
   connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
@@ -1016,7 +1016,7 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())
-    tab->control()->buttonDelete->setEnabled(false);
+    tab->control()->ui->buttonDelete->setEnabled(false);
 
   m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab));
 }

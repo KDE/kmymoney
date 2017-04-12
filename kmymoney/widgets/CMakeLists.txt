@@ -12,7 +12,7 @@ set(kmymoney_STAT_HEADERS
   scheduledtransaction.h selectedtransaction.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h transactionsortoptionimpl.h
-  kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
+  reporttabimpl.h reportcontrolimpl.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   kmymoneydateedit.h
@@ -162,15 +162,15 @@ set(libwidgets_a_SOURCES
   kmymoneybriefschedule.cpp
   registersearchline.cpp
   transactioneditorcontainer.cpp
-  kmymoneyreportconfigtabimpl.cpp
-  kmymoneyreportcontrolimpl.cpp
+  reporttabimpl.cpp
+  reportcontrolimpl.cpp
   )
 
 set(libwidgets_a_UI
-  kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
-  kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
-  kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
-  kmymoneyreportconfigtabrangedecl.ui
+  kschedulebriefwidget.ui reportcontrol.ui
+  reporttabgeneral.ui
+  reporttabrowcolquery.ui reporttabrowcolpivot.ui
+  reporttabrange.ui reporttabchart.ui
   ../dialogs/daterangedlgdecl.ui
   )
 

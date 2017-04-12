@@ -39,14 +39,13 @@
 #include "kfindtransactiondlg.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
-#include "kmymoneyreportconfigtabimpl.h"
+#include "reporttabimpl.h"
 
-
-class kMyMoneyReportConfigTab1Decl;
-class kMyMoneyReportConfigTab2Decl;
-class kMyMoneyReportConfigTab3Decl;
-class kMyMoneyReportConfigTabChartDecl;
-class kMyMoneyReportConfigTabRangeDecl;
+class ReportTabGeneral;
+class ReportTabRowColPivot;
+class ReportTabRowColQuery;
+class ReportTabChart;
+class ReportTabRange;
 class MyMoneyBudget;
 
 /**
@@ -64,11 +63,11 @@ public:
   }
 
 protected:
-  kMyMoneyReportConfigTab1Decl* m_tab1;
-  kMyMoneyReportConfigTab2Decl* m_tab2;
-  kMyMoneyReportConfigTab3Decl* m_tab3;
-  kMyMoneyReportConfigTabChartDecl* m_tabChart;
-  kMyMoneyReportConfigTabRangeDecl* m_tabRange;
+  QPointer<ReportTabGeneral>     m_tabGeneral;
+  QPointer<ReportTabRowColPivot> m_tabRowColPivot;
+  QPointer<ReportTabRowColQuery> m_tabRowColQuery;
+  QPointer<ReportTabChart>       m_tabChart;
+  QPointer<ReportTabRange>       m_tabRange;
 
   MyMoneyReport m_initialState;
   MyMoneyReport m_currentState;

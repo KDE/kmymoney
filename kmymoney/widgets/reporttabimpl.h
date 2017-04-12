@@ -17,8 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KMYMONEYREPORTCONFIGTABIMPL_H
-#define KMYMONEYREPORTCONFIGTABIMPL_H
+#ifndef REPORTTABIMPL_H
+#define REPORTTABIMPL_H
 
 #include <QWidget>
 #include <QDoubleValidator>
@@ -27,61 +27,58 @@ class DateRangeDlg;
 
 namespace Ui
 {
-class kMyMoneyReportConfigTab1Decl;
-class kMyMoneyReportConfigTab2Decl;
-class kMyMoneyReportConfigTab3Decl;
-class kMyMoneyReportConfigTabChartDecl;
-class kMyMoneyReportConfigTabRangeDecl;
+class ReportTabGeneral;
+class ReportTabRowColPivot;
+class ReportTabRowColQuery;
+class ReportTabChart;
+class ReportTabRange;
 }
 
-class kMyMoneyReportConfigTab1Decl : public QWidget
+class ReportTabGeneral : public QWidget
 {
 public:
-  kMyMoneyReportConfigTab1Decl(QWidget *parent);
-  virtual ~kMyMoneyReportConfigTab1Decl();
-private:
-  Ui::kMyMoneyReportConfigTab1Decl* ui;
+  ReportTabGeneral(QWidget *parent);
+  virtual ~ReportTabGeneral();
+  Ui::ReportTabGeneral* ui;
 };
 
-class kMyMoneyReportConfigTab2Decl : public QWidget
+class ReportTabRowColPivot : public QWidget
 {
 public:
-  kMyMoneyReportConfigTab2Decl(QWidget *parent);
-  virtual ~kMyMoneyReportConfigTab2Decl();
-private:
-  Ui::kMyMoneyReportConfigTab2Decl* ui;
+  ReportTabRowColPivot(QWidget *parent);
+  virtual ~ReportTabRowColPivot();
+  Ui::ReportTabRowColPivot* ui;
 };
 
-class kMyMoneyReportConfigTab3Decl : public QWidget
+class ReportTabRowColQuery : public QWidget
 {
   Q_OBJECT
 public:
-  kMyMoneyReportConfigTab3Decl(QWidget *parent);
-  virtual ~kMyMoneyReportConfigTab3Decl();
-private:
-  Ui::kMyMoneyReportConfigTab3Decl* ui;
+  ReportTabRowColQuery(QWidget *parent);
+  virtual ~ReportTabRowColQuery();
+  Ui::ReportTabRowColQuery* ui;
 private slots:
   void slotHideTransactionsChanged(bool checked);
 };
 
-class kMyMoneyReportConfigTabChartDecl : public QWidget
+class ReportTabChart : public QWidget
 {
   Q_OBJECT
 public:
-  kMyMoneyReportConfigTabChartDecl(QWidget *parent);
-  virtual ~kMyMoneyReportConfigTabChartDecl();
-  Ui::kMyMoneyReportConfigTabChartDecl* ui;
+  ReportTabChart(QWidget *parent);
+  virtual ~ReportTabChart();
+  Ui::ReportTabChart* ui;
 private slots:
   void slotChartTypeChanged(int index);
 };
 
-class kMyMoneyReportConfigTabRangeDecl : public QWidget
+class ReportTabRange : public QWidget
 {
   Q_OBJECT
 public:
-  kMyMoneyReportConfigTabRangeDecl(QWidget *parent);
-  virtual ~kMyMoneyReportConfigTabRangeDecl();
-  Ui::kMyMoneyReportConfigTabRangeDecl* ui;
+  ReportTabRange(QWidget *parent);
+  virtual ~ReportTabRange();
+  Ui::ReportTabRange* ui;
   DateRangeDlg *m_dateRange;
   void setRangeLogarythmic(bool set);
 private:
@@ -131,5 +128,5 @@ public:
     }
   }
 };
-#endif /* KMYMONEYREPORTCONFIGTABIMPL_H */
+#endif /* REPORTTABIMPL_H */
 

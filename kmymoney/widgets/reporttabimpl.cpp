@@ -17,49 +17,49 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "kmymoneyreportconfigtabimpl.h"
+#include "reporttabimpl.h"
 #include "kmymoneyglobalsettings.h"
 
 #include <klocalizedstring.h>
 #include <daterangedlg.h>
 
-#include "ui_kmymoneyreportconfigtab1decl.h"
-#include "ui_kmymoneyreportconfigtab2decl.h"
-#include "ui_kmymoneyreportconfigtab3decl.h"
-#include "ui_kmymoneyreportconfigtabchartdecl.h"
-#include "ui_kmymoneyreportconfigtabrangedecl.h"
+#include "ui_reporttabgeneral.h"
+#include "ui_reporttabrowcolpivot.h"
+#include "ui_reporttabrowcolquery.h"
+#include "ui_reporttabchart.h"
+#include "ui_reporttabrange.h"
 #include <ui_daterangedlgdecl.h>
 
 #include "mymoney/mymoneyreport.h"
 
-kMyMoneyReportConfigTab1Decl::kMyMoneyReportConfigTab1Decl(QWidget *parent)
+ReportTabGeneral::ReportTabGeneral(QWidget *parent)
     : QWidget(parent)
 {
-  ui = new Ui::kMyMoneyReportConfigTab1Decl;
+  ui = new Ui::ReportTabGeneral;
   ui->setupUi(this);
 }
 
-kMyMoneyReportConfigTab1Decl::~kMyMoneyReportConfigTab1Decl()
+ReportTabGeneral::~ReportTabGeneral()
 {
   delete ui;
 }
 
-kMyMoneyReportConfigTab2Decl::kMyMoneyReportConfigTab2Decl(QWidget *parent)
+ReportTabRowColPivot::ReportTabRowColPivot(QWidget *parent)
     : QWidget(parent)
 {
-  ui = new Ui::kMyMoneyReportConfigTab2Decl;
+  ui = new Ui::ReportTabRowColPivot;
   ui->setupUi(this);
 }
 
-kMyMoneyReportConfigTab2Decl::~kMyMoneyReportConfigTab2Decl()
+ReportTabRowColPivot::~ReportTabRowColPivot()
 {
   delete ui;
 }
 
-kMyMoneyReportConfigTab3Decl::kMyMoneyReportConfigTab3Decl(QWidget *parent)
+ReportTabRowColQuery::ReportTabRowColQuery(QWidget *parent)
     : QWidget(parent)
 {
-  ui = new Ui::kMyMoneyReportConfigTab3Decl;
+  ui = new Ui::ReportTabRowColQuery;
   ui->setupUi(this);
   ui->buttonGroup1->setExclusive(false);
   ui->buttonGroup1->setId(ui->m_checkMemo, 0);
@@ -75,22 +75,22 @@ kMyMoneyReportConfigTab3Decl::kMyMoneyReportConfigTab3Decl(QWidget *parent)
   connect(ui->m_checkHideTransactions, SIGNAL(toggled(bool)), this, SLOT(slotHideTransactionsChanged(bool)));
 }
 
-void kMyMoneyReportConfigTab3Decl::slotHideTransactionsChanged(bool checked)
+void ReportTabRowColQuery::slotHideTransactionsChanged(bool checked)
 {
   if (checked)                                          // toggle m_checkHideSplitDetails only if it's mandatory
     ui->m_checkHideSplitDetails->setChecked(checked);
   ui->m_checkHideSplitDetails->setEnabled(!checked);    // hiding transactions without hiding splits isn't allowed
 }
 
-kMyMoneyReportConfigTab3Decl::~kMyMoneyReportConfigTab3Decl()
+ReportTabRowColQuery::~ReportTabRowColQuery()
 {
   delete ui;
 }
 
-kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *parent)
+ReportTabChart::ReportTabChart(QWidget *parent)
     : QWidget(parent)
 {
-  ui = new Ui::kMyMoneyReportConfigTabChartDecl;
+  ui = new Ui::ReportTabChart;
   ui->setupUi(this);
 
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::eChartLine);
@@ -102,12 +102,12 @@ kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *pare
   emit ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
 }
 
-kMyMoneyReportConfigTabChartDecl::~kMyMoneyReportConfigTabChartDecl()
+ReportTabChart::~ReportTabChart()
 {
   delete ui;
 }
 
-void kMyMoneyReportConfigTabChartDecl::slotChartTypeChanged(int index)
+void ReportTabChart::slotChartTypeChanged(int index)
 {
   if (index == MyMoneyReport::EChartType::eChartPie ||
       index == MyMoneyReport::EChartType::eChartRing) {
@@ -122,10 +122,10 @@ void kMyMoneyReportConfigTabChartDecl::slotChartTypeChanged(int index)
   }
 }
 
-kMyMoneyReportConfigTabRangeDecl::kMyMoneyReportConfigTabRangeDecl(QWidget *parent)
+ReportTabRange::ReportTabRange(QWidget *parent)
     : QWidget(parent)
 {
-  ui = new Ui::kMyMoneyReportConfigTabRangeDecl;
+  ui = new Ui::ReportTabRange;
   ui->setupUi(this);
   m_dateRange = new DateRangeDlg(this->parentWidget());
   ui->dateRangeGrid->addWidget(m_dateRange, 0, 0, 1, 2);
@@ -139,12 +139,12 @@ kMyMoneyReportConfigTabRangeDecl::kMyMoneyReportConfigTabRangeDecl(QWidget *pare
   emit ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
 }
 
-kMyMoneyReportConfigTabRangeDecl::~kMyMoneyReportConfigTabRangeDecl()
+ReportTabRange::~ReportTabRange()
 {
   delete ui;
 }
 
-void kMyMoneyReportConfigTabRangeDecl::setRangeLogarythmic(bool set)
+void ReportTabRange::setRangeLogarythmic(bool set)
 {
   // major and minor tick have no influence if axis is logarithmic so hide them
   if (set) {
@@ -160,7 +160,7 @@ void kMyMoneyReportConfigTabRangeDecl::setRangeLogarythmic(bool set)
   }
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotEditingFinished(EDimension dim)
+void ReportTabRange::slotEditingFinished(EDimension dim)
 {
   qreal dataRangeStart = locale().toDouble(ui->m_dataRangeStart->text());
   qreal dataRangeEnd = locale().toDouble(ui->m_dataRangeEnd->text());
@@ -203,27 +203,27 @@ void kMyMoneyReportConfigTabRangeDecl::slotEditingFinished(EDimension dim)
   }
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedStart()
+void ReportTabRange::slotEditingFinishedStart()
 {
   slotEditingFinished(eRangeStart);
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedEnd()
+void ReportTabRange::slotEditingFinishedEnd()
 {
   slotEditingFinished(eRangeEnd);
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedMajor()
+void ReportTabRange::slotEditingFinishedMajor()
 {
   slotEditingFinished(eMajorTick);
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedMinor()
+void ReportTabRange::slotEditingFinishedMinor()
 {
   slotEditingFinished(eMinorTick);
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotYLabelsPrecisionChanged(const int& value)
+void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
 {
   ui->m_dataRangeStart->setValidator(0);
   ui->m_dataRangeEnd->setValidator(0);
@@ -238,7 +238,7 @@ void kMyMoneyReportConfigTabRangeDecl::slotYLabelsPrecisionChanged(const int& va
   ui->m_dataMinorTick->setValidator(dblVal2);
 }
 
-void kMyMoneyReportConfigTabRangeDecl::slotDataLockChanged(int index) {
+void ReportTabRange::slotDataLockChanged(int index) {
   if (index == MyMoneyReport::dataOptionE::automatic) {
     ui->m_dataRangeStart->setText(QStringLiteral("0"));
     ui->m_dataRangeEnd->setText(QStringLiteral("0"));
