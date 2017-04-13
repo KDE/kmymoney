@@ -67,6 +67,7 @@
 #include <ui_reporttabrowcolquery.h>
 #include <ui_reporttabchart.h>
 #include <ui_reporttabrange.h>
+#include <ui_reporttabcapitalgain.h>
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
@@ -134,6 +135,10 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     if (m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount) {
       m_tabRowColQuery = new ReportTabRowColQuery(m_ui->m_criteriaTab);
       m_ui->m_criteriaTab->insertTab(1, m_tabRowColQuery, i18n("Rows/Columns"));
+    }
+    if (m_initialState.queryColumns() & MyMoneyReport::eQCcapitalgain) {
+      m_tabCapitalGain = new ReportTabCapitalGain(m_ui->m_criteriaTab);
+      m_ui->m_criteriaTab->insertTab(1, m_tabCapitalGain, i18n("Report"));
     }
   }
 
@@ -278,6 +283,11 @@ void KReportConfigurationFilterDlg::slotSearch()
   MyMoneyTransactionFilter::dateOptionE range = m_dateRange->m_ui->m_dateRange->currentItem();
   m_currentState.setDateFilter(range);
 
+  if (m_tabCapitalGain) {
+    m_currentState.setTermSeparator(m_tabCapitalGain->ui->m_termSeparator->date());
+    m_currentState.setShowSTLTCapitalGains(m_tabCapitalGain->ui->m_showSTLTCapitalGains->isChecked());
+    m_currentState.setSettlementPeriod(m_tabCapitalGain->ui->m_settlementPeriod->value());
+  }
   done(true);
 }
 
@@ -513,6 +523,12 @@ void KReportConfigurationFilterDlg::slotReset()
           break;
       }
     }
+  }
+
+  if (m_tabCapitalGain) {
+    m_tabCapitalGain->ui->m_termSeparator->setDate(m_initialState.termSeparator());
+    m_tabCapitalGain->ui->m_showSTLTCapitalGains->setChecked(m_initialState.isShowingSTLTCapitalGains());
+    m_tabCapitalGain->ui->m_settlementPeriod->setValue(m_initialState.settlementPeriod());
   }
 
   //

@@ -28,6 +28,7 @@
 #include "ui_reporttabrowcolquery.h"
 #include "ui_reporttabchart.h"
 #include "ui_reporttabrange.h"
+#include "ui_reporttabcapitalgain.h"
 #include <ui_daterangedlgdecl.h>
 
 #include "mymoney/mymoneyreport.h"
@@ -255,3 +256,16 @@ void ReportTabRange::slotDataLockChanged(int index) {
     ui->m_dataMinorTick->setEnabled(true);
   }
 }
+
+ReportTabCapitalGain::ReportTabCapitalGain(QWidget *parent)
+    : QWidget(parent)
+{
+  ui = new Ui::ReportTabCapitalGain;
+  ui->setupUi(this);
+}
+
+ReportTabCapitalGain::~ReportTabCapitalGain()
+{
+  delete ui;
+}
+

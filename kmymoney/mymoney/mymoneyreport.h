@@ -227,6 +227,15 @@ public:
   int currentDateColumn() const {
     return m_currentDateColumn;
   }
+  uint settlementPeriod() const {
+    return m_settlementPeriod;
+  }
+  bool isShowingSTLTCapitalGains() const {
+    return m_showSTLTCapitalGains;
+  }
+  const QDate& termSeparator() const {
+    return m_tseparator;
+  }
   /**
    * @see #m_skipZero
    */
@@ -346,6 +355,15 @@ public:
   }
   void setCurrentDateColumn(int _f) {
     m_currentDateColumn = _f;
+  }
+  void setSettlementPeriod(uint _days) {
+    m_settlementPeriod = _days;
+  }
+  void setShowSTLTCapitalGains(bool _f) {
+    m_showSTLTCapitalGains = _f;
+  }
+  void setTermSeparator(const QDate& _date) {
+    m_tseparator = _date;
   }
   /**
    * @see #m_skipZero
@@ -749,7 +767,18 @@ private:
    * This value is calculated dinamically and thus it is not saved in the file
    */
   int m_currentDateColumn;
-
+  /**
+   * Time in days between the settlement date and the transaction date.
+   */
+  uint m_settlementPeriod;
+  /**
+   * Controls showing short-term and long-term capital gains.
+   */
+  bool m_showSTLTCapitalGains;
+  /**
+   * Date separating shot-term from long-term gains.
+   */
+  QDate m_tseparator;
   /**
     * This member keeps the current setting for line graphs lineWidth.
     * @sa setLineWidth()

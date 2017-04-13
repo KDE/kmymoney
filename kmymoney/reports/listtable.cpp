@@ -169,6 +169,10 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["netinvvalue"] = i18n("Net Value");
   i18nHeaders["buys"] = i18n("Buys");
   i18nHeaders["sells"] = i18n("Sells");
+  i18nHeaders["buysST"] = i18n("Short-term Buys");
+  i18nHeaders["sellsST"] = i18n("Short-term Sells");
+  i18nHeaders["buysLT"] = i18n("Long-term Buys");
+  i18nHeaders["sellsLT"] = i18n("Long-term Sells");
   i18nHeaders["reinvestincome"] = i18n("Dividends Reinvested");
   i18nHeaders["cashincome"] = i18n("Dividends Paid Out");
   i18nHeaders["startingbal"] = i18n("Starting Balance");
@@ -201,9 +205,11 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["finalpayment"] = i18n("Final Payment");
   i18nHeaders["currentbalance"] = i18n("Current Balance");
   i18nHeaders["capitalgain"] = i18n("Capital Gain");
+  i18nHeaders["capitalgainST"] = i18n("Short-term Gain");
+  i18nHeaders["capitalgainLT"] = i18n("Long-term Gain");
 
   // the list of columns which represent money, so we can display them correctly
-  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal,capitalgain").split(',');
+  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,buysST,buysLT,sells,sellsST,sellsLT,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal,capitalgain,capitalgainST,capitalgainLT").split(',');
 
   // the list of columns which represent shares, which is like money except the
   // transaction currency will not be displayed

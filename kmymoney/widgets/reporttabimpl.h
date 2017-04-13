@@ -32,6 +32,7 @@ class ReportTabRowColPivot;
 class ReportTabRowColQuery;
 class ReportTabChart;
 class ReportTabRange;
+class ReportTabCapitalGain;
 }
 
 class ReportTabGeneral : public QWidget
@@ -91,6 +92,14 @@ private slots:
   void slotEditingFinishedMinor();
   void slotYLabelsPrecisionChanged(const int &value);
   void slotDataLockChanged(int index);
+};
+
+class ReportTabCapitalGain : public QWidget
+{
+public:
+  ReportTabCapitalGain(QWidget *parent);
+  virtual ~ReportTabCapitalGain();
+  Ui::ReportTabCapitalGain* ui;
 };
 
 class MyDoubleValidator : public QDoubleValidator

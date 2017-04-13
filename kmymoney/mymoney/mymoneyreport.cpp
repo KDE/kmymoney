@@ -84,6 +84,9 @@ MyMoneyReport::MyMoneyReport() :
     m_includeAveragePrice(false),
     m_mixedTime(false),
     m_currentDateColumn(0),
+    m_settlementPeriod(3),
+    m_showSTLTCapitalGains(false),
+    m_tseparator(QDate::currentDate().addYears(-1)),
     m_skipZero(false)
 {
   m_chartLineWidth = m_lineWidth;
@@ -133,6 +136,9 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_includeAveragePrice(false),
     m_mixedTime(false),
     m_currentDateColumn(0),
+    m_settlementPeriod(3),
+    m_showSTLTCapitalGains(false),
+    m_tseparator(QDate::currentDate().addYears(-1)),
     m_skipZero(false)
 {
   //set initial values
@@ -407,6 +413,12 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
       index++;
     }
     e.setAttribute("querycolumns", columns.join(","));
+
+    if (m_queryColumns & eQCcapitalgain) {
+      e.setAttribute("settlementperiod", m_settlementPeriod);
+      e.setAttribute("showSTLTCapitalGains", m_showSTLTCapitalGains);
+      e.setAttribute("tseparator", m_tseparator.toString(Qt::ISODate));
+    }
   } else if (m_reportType == eInfoTable) {
     e.setAttribute("type", "infotable 1.0");
     e.setAttribute("showrowtotals", m_showRowTotals);
@@ -751,6 +763,12 @@ bool MyMoneyReport::read(const QDomElement& e)
       ++it_column;
     }
     setQueryColumns(static_cast<EQueryColumns>(qc));
+
+    if (m_reportType == eQueryTable && m_queryColumns & eQCcapitalgain) {
+      m_showSTLTCapitalGains = e.attribute("showSTLTCapitalGains", "0").toUInt();
+      m_settlementPeriod = e.attribute("settlementperiod", "3").toUInt();
+      m_tseparator = QDate::fromString(e.attribute("tseparator", QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
+    }
 
     QDomNode child = e.firstChild();
     while (!child.isNull() && child.isElement()) {
