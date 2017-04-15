@@ -911,7 +911,7 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
       MyMoneyMoney fromValue, toValue;
 
       fromValue = split.value();
-      const MyMoneyPrice &priceInfo = MyMoneyFile::instance()->price(fromCurrency.id(), toCurrency.id());
+      const MyMoneyPrice &priceInfo = MyMoneyFile::instance()->price(fromCurrency.id(), toCurrency.id(), t.postDate());
       toValue = split.value() * priceInfo.rate(toCurrency.id());
 
       QPointer<KCurrencyCalculator> calc =
