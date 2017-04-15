@@ -240,9 +240,8 @@ void Buy::showWidgets() const
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
-  if (havePrice()) {
+  if (dynamic_cast<QLabel*>(haveWidget("price-label")))
     setLabelText("price-label", priceLabel());
-  }
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
@@ -326,9 +325,8 @@ void Sell::showWidgets() const
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
-  if (havePrice()) {
+  if (dynamic_cast<QLabel*>(haveWidget("price-label")))
     setLabelText("price-label", priceLabel());
-  }
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
@@ -476,9 +474,8 @@ void Reinvest::showWidgets() const
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("shares-label", i18n("Shares"));
-  if (havePrice()) {
+  if (dynamic_cast<QLabel*>(haveWidget("price-label")))
     setLabelText("price-label", priceLabel());
-  }
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
