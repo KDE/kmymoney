@@ -176,7 +176,10 @@ public:
   const QString& dataMinorTick() const {
     return m_dataMinorTick;
   }
-    bool isIncludingSchedules() const {
+  uint yLabelsPrecision() const {
+    return m_yLabelsPrecision;
+  }
+  bool isIncludingSchedules() const {
     return m_includeSchedules;
   }
   bool isColumnsAreDays() const {
@@ -301,6 +304,9 @@ public:
   }
   void setDataMinorTick(const QString& _f) {
    m_dataMinorTick = _f;
+  }
+  void setYLabelsPrecision(int _f) {
+   m_yLabelsPrecision = _f;
   }
   void setIncludingSchedules(bool _f) {
     m_includeSchedules = _f;
@@ -677,6 +683,11 @@ private:
     */
   QString m_dataMajorTick;
   QString m_dataMinorTick;
+
+  /**
+    * Y labels precision
+    */
+  uint m_yLabelsPrecision;
 
   /**
     * Whether data range should be calculated automatically or is user defined

@@ -384,6 +384,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("dataRangeEnd", m_dataRangeEnd);
   e.setAttribute("dataMajorTick", m_dataMajorTick);
   e.setAttribute("dataMinorTick", m_dataMinorTick);
+  e.setAttribute("yLabelsPrecision", m_yLabelsPrecision);
   e.setAttribute("dataLock", m_dataLock);
   e.setAttribute("skipZero", m_skipZero);
   e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
@@ -690,6 +691,7 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_dataRangeEnd = e.attribute("dataRangeEnd", "0");
       m_dataMajorTick = e.attribute("dataMajorTick", "0");
       m_dataMinorTick = e.attribute("dataMinorTick", "0");
+      m_yLabelsPrecision = e.attribute("yLabelsPrecision", "2").toUInt();
     } else {
       m_chartDataLabels = true;
       m_chartCHGridLines = true;

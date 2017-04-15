@@ -128,12 +128,9 @@ kMyMoneyReportConfigTabRangeDecl::kMyMoneyReportConfigTabRangeDecl(QWidget *pare
   ui = new Ui::kMyMoneyReportConfigTabRangeDecl;
   ui->setupUi(this);
   m_dateRange = new DateRangeDlg(this->parentWidget());
-  ui->dateRangeGrid->addWidget(m_dateRange,0,0,1,2);
-  MyDoubleValidator *dblVal = new MyDoubleValidator(KMyMoneyGlobalSettings::pricePrecision());
-  ui->m_dataRangeStart->setValidator(dblVal);
-  ui->m_dataRangeEnd->setValidator(dblVal);
-  ui->m_dataMajorTick->setValidator(dblVal);
-  ui->m_dataMinorTick->setValidator(dblVal);
+  ui->dateRangeGrid->addWidget(m_dateRange, 0, 0, 1, 2);
+  connect(ui->m_yLabelsPrecision, SIGNAL(valueChanged(int)), this, SLOT(slotYLabelsPrecisionChanged(int)));
+  emit ui->m_yLabelsPrecision->valueChanged(ui->m_yLabelsPrecision->value());
   connect(ui->m_dataRangeStart, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedStart()));
   connect(ui->m_dataRangeEnd, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedEnd()));
   connect(ui->m_dataMajorTick, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedMajor()));
@@ -186,7 +183,8 @@ void kMyMoneyReportConfigTabRangeDecl::slotEditingFinished(EDimension dim)
         dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
       dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;   // that should produce more than 256 Y labels in KReportChartView::slotNeedUpdate
 
-    ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', KMyMoneySettings::pricePrecision()).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+    //set precision of major tick to be greater by 1
+    ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
   }
 
   if (dataMajorTick < dataMinorTick) { // major tick must be higher than minor
@@ -199,9 +197,9 @@ void kMyMoneyReportConfigTabRangeDecl::slotEditingFinished(EDimension dim)
     }
   }
 
-  if (dataMinorTick < dataMajorTick * 0.1) { // constraint minor tick to be greater or equal to 10% of major tick
+  if (dataMinorTick < dataMajorTick * 0.1) { // constraint minor tick to be greater or equal to 10% of major tick, and set precision to be greater by 1
     dataMinorTick = dataMajorTick * 0.1;
-    ui->m_dataMinorTick->setText(locale().toString(dataMinorTick, 'f', KMyMoneySettings::pricePrecision()).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+    ui->m_dataMinorTick->setText(locale().toString(dataMinorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
   }
 }
 
@@ -223,6 +221,21 @@ void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedMajor()
 void kMyMoneyReportConfigTabRangeDecl::slotEditingFinishedMinor()
 {
   slotEditingFinished(eMinorTick);
+}
+
+void kMyMoneyReportConfigTabRangeDecl::slotYLabelsPrecisionChanged(const int& value)
+{
+  ui->m_dataRangeStart->setValidator(0);
+  ui->m_dataRangeEnd->setValidator(0);
+  ui->m_dataMajorTick->setValidator(0);
+  ui->m_dataMinorTick->setValidator(0);
+
+  MyDoubleValidator *dblVal = new MyDoubleValidator(value);
+  ui->m_dataRangeStart->setValidator(dblVal);
+  ui->m_dataRangeEnd->setValidator(dblVal);
+  MyDoubleValidator *dblVal2 = new MyDoubleValidator(value + 1);
+  ui->m_dataMajorTick->setValidator(dblVal2);
+  ui->m_dataMinorTick->setValidator(dblVal2);
 }
 
 void kMyMoneyReportConfigTabRangeDecl::slotDataLockChanged(int index) {

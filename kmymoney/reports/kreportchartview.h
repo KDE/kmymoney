@@ -189,6 +189,11 @@ private:
     * The cached foreground brush obtained from the style.
     */
   QBrush m_foregroundBrush;
+
+  /**
+    * The cached precision obtained from report's data
+    */
+  int m_precision;
 };
 
 } // end namespace reports

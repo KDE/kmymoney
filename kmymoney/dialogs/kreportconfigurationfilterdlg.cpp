@@ -262,6 +262,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     m_currentState.setDataRangeEnd(m_tabRange->ui->m_dataRangeEnd->text());
     m_currentState.setDataMajorTick(m_tabRange->ui->m_dataMajorTick->text());
     m_currentState.setDataMinorTick(m_tabRange->ui->m_dataMinorTick->text());
+    m_currentState.setYLabelsPrecision(m_tabRange->ui->m_yLabelsPrecision->value());
     m_currentState.setDataFilter((MyMoneyReport::dataOptionE)m_tabRange->ui->m_dataLock->currentIndex());
 
     MyMoneyReport::EColumnType ct[6] = { MyMoneyReport::eDays, MyMoneyReport::eWeeks, MyMoneyReport::eMonths, MyMoneyReport::eBiMonths, MyMoneyReport::eQuarters, MyMoneyReport::eYears };
@@ -476,6 +477,7 @@ void KReportConfigurationFilterDlg::slotReset()
     m_tabRange->ui->m_dataRangeEnd->setText(m_initialState.dataRangeEnd());
     m_tabRange->ui->m_dataMajorTick->setText(m_initialState.dataMajorTick());
     m_tabRange->ui->m_dataMinorTick->setText(m_initialState.dataMinorTick());
+    m_tabRange->ui->m_yLabelsPrecision->setValue(m_initialState.yLabelsPrecision());
     m_tabRange->ui->m_dataLock->setCurrentIndex((int)m_initialState.dataFilter());
 
     KComboBox *combo = m_tabRange->ui->m_comboColumns;

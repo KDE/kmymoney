@@ -240,22 +240,31 @@ void KReportsView::KReportTab::toggleChart()
 
 void KReportsView::KReportTab::updateDataRange()
 {
-  QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();
+  QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();    // get dimmensions of ploted graph
   if (grids.isEmpty())
     return;
   QChar separator = locale().groupSeparator();
   QChar decimalPoint = locale().decimalPoint();
-  int precision = KMyMoneyGlobalSettings::pricePrecision();
-  QList<QPair<QString, qreal>> dims;
+  int precision = m_report.yLabelsPrecision();
+  QList<QPair<QString, qreal>> dims;  // create list of dimension values in string and qreal
+
+  // get qreal values
   dims.append(qMakePair(QString(), grids.at(1).start));
   dims.append(qMakePair(QString(), grids.at(1).end));
   dims.append(qMakePair(QString(), grids.at(1).stepWidth));
   dims.append(qMakePair(QString(), grids.at(1).subStepWidth));
 
+  // convert qreal values to string variables
   for (int i = 0; i < 4; ++i) {
-    dims[i].first = locale().toString(dims.at(i).second, 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$"));
+    if (i > 2)
+      ++precision;
+    if (precision == 0)
+      dims[i].first = locale().toString(qRound(dims.at(i).second));
+    else
+      dims[i].first = locale().toString(dims.at(i).second, 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$"));
   }
 
+  // save string variables in report's data
   m_report.setDataRangeStart(dims.at(0).first);
   m_report.setDataRangeEnd(dims.at(1).first);
   m_report.setDataMajorTick(dims.at(2).first);

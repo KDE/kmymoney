@@ -538,7 +538,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueTextAttr.setPen(m_foregroundBrush.color());
   dataValueAttr.setTextAttributes(dataValueTextAttr);
   dataValueAttr.setVisible(config.isChartDataLabels());
-  dataValueAttr.setDecimalDigits(KMyMoneyGlobalSettings::pricePrecision());
+  m_precision = config.yLabelsPrecision();
+  dataValueAttr.setDecimalDigits(config.yLabelsPrecision());
   planeDiagram->setDataValueAttributes(dataValueAttr);
   planeDiagram->setAllowOverlappingDataValueTexts(true);
 
@@ -563,7 +564,6 @@ void KReportChartView::slotNeedUpdate()
 
   QChar separator = locale().groupSeparator();
   QChar decimalPoint = locale().decimalPoint();
-  int precision = KMyMoneyGlobalSettings::pricePrecision();
 
   QStringList labels;
 
@@ -573,7 +573,7 @@ void KReportChartView::slotNeedUpdate()
       qreal labelValue = qFloor(log10(grids.at(1).start)); // first label is 10 to power of labelValue
       uchar labelCount = qFloor(log10(grids.at(1).end)) - qFloor(log10(grids.at(1).start)) + 1;
       for (uchar i = 0; i < labelCount; ++i) {
-        labels.append(locale().toString(qPow(10.0, labelValue), 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
+        labels.append(locale().toString(qPow(10.0, labelValue), 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
         ++labelValue; // next label is 10 to power of previous exponent + 1
       }
     } else {
@@ -581,7 +581,7 @@ void KReportChartView::slotNeedUpdate()
       qreal step = grids.at(1).stepWidth;
       uchar labelCount = qFloor((grids.at(1).end - grids.at(1).start) / grids.at(1).stepWidth) + 1;
       for (uchar i = 0; i < labelCount; ++i) {
-        labels.append(locale().toString(labelValue, 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
+        labels.append(locale().toString(labelValue, 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
         labelValue += step; // next label is previous value + step value
       }
     }

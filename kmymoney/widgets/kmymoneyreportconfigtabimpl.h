@@ -92,6 +92,7 @@ private slots:
   void slotEditingFinishedEnd();
   void slotEditingFinishedMajor();
   void slotEditingFinishedMinor();
+  void slotYLabelsPrecisionChanged(const int &value);
   void slotDataLockChanged(int index);
 };
 
