@@ -230,7 +230,9 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
           m_account.setValue("priceMode", QString("%1").arg(m_investmentDetailsPage->priceMode()));
           break;
       }
-
+      // update account's fraction in case its security fraction has changed
+      // otherwise KMM restart is required because this won't happen automatically
+      m_account.fraction(m_security);
       if (m_account.id().isEmpty()) {
         MyMoneyAccount parent = file->account(parentId);
         file->addAccount(m_account, parent);
