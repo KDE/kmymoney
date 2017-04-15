@@ -45,8 +45,7 @@ KStartupLogo::KStartupLogo() :
     return;
 
   QString filename = QStandardPaths::locate(QStandardPaths::DataLocation, "pics/startlogo.png");
-  // TODO: port KF5
-  QString localeFilename = filename;//KLocale::global()->localizedFilePath(filename);
+  QString localeFilename = KLocalizedString::localizedFilePath(filename);
   QPixmap logoOverlay(localeFilename);
 
   QPixmap logoPixmap(logoOverlay.size());
