@@ -203,10 +203,10 @@ void PivotTableTest::testSingleTransaction()
   PivotTable spending_f(filter);
   writeTabletoHTML(spending_f, "Spending with Single Transaction.html");
 
-  QVERIFY(spending_f.m_grid["Expense"]["Solo"][acSolo][eActual][2] == moSolo);
-  QVERIFY(spending_f.m_grid["Expense"]["Solo"].m_total[eActual][2] == moSolo);
-  QVERIFY(spending_f.m_grid["Expense"]["Solo"].m_total[eActual][1] == moZero);
-  QVERIFY(spending_f.m_grid.m_total[eActual][2] == (-moSolo));
+  QVERIFY(spending_f.m_grid["Expense"]["Solo"][acSolo][eActual][1] == moSolo);
+  QVERIFY(spending_f.m_grid["Expense"]["Solo"].m_total[eActual][1] == moSolo);
+  QVERIFY(spending_f.m_grid["Expense"]["Solo"].m_total[eActual][0] == moZero);
+  QVERIFY(spending_f.m_grid.m_total[eActual][1] == (-moSolo));
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == (-moSolo));
 
   filter.clearTransactionFilter();
@@ -234,12 +234,12 @@ void PivotTableTest::testSubAccount()
   PivotTable spending_f(filter);
   writeTabletoHTML(spending_f, "Spending with Sub-Account.html");
 
-  QVERIFY(spending_f.m_grid["Expense"]["Parent"][acParent][eActual][3] == moParent);
-  QVERIFY(spending_f.m_grid["Expense"]["Parent"][acChild][eActual][3] == moChild);
-  QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][3] == moParent + moChild);
-  QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][2] == moZero);
+  QVERIFY(spending_f.m_grid["Expense"]["Parent"][acParent][eActual][2] == moParent);
+  QVERIFY(spending_f.m_grid["Expense"]["Parent"][acChild][eActual][2] == moChild);
+  QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][2] == moParent + moChild);
+  QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][1] == moZero);
   QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual].m_total == moParent + moChild);
-  QVERIFY(spending_f.m_grid.m_total[eActual][3] == (-moParent - moChild));
+  QVERIFY(spending_f.m_grid.m_total[eActual][2] == (-moParent - moChild));
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == (-moParent - moChild));
 
   filter.clearTransactionFilter();
@@ -269,8 +269,8 @@ void PivotTableTest::testFilterIEvsIE()
   XMLandback(filter);
   PivotTable spending_f(filter);
 
-  QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][3] == moChild);
-  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][2] == moSolo);
+  QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][2] == moChild);
+  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][1] == moSolo);
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo - moChild);
 
 }
@@ -290,7 +290,7 @@ void PivotTableTest::testFilterALvsAL()
   filter.addCategory(acSolo);
   XMLandback(filter);
   PivotTable networth_f(filter);
-  QVERIFY(networth_f.m_grid.m_total[eActual][3] == -moSolo + moCheckingOpen);
+  QVERIFY(networth_f.m_grid.m_total[eActual][2] == -moSolo + moCheckingOpen);
 }
 
 void PivotTableTest::testFilterALvsIE()
@@ -309,8 +309,8 @@ void PivotTableTest::testFilterALvsIE()
   XMLandback(filter);
   PivotTable spending_f(filter);
 
-  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][3] == moZero);
-  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][2] == moSolo);
+  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][2] == moZero);
+  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][1] == moSolo);
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo);
 }
 
@@ -329,8 +329,8 @@ void PivotTableTest::testFilterAllvsIE()
   filter.addCategory(acChild);
   PivotTable spending_f(filter);
 
-  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][2] == moZero);
-  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][3] == moChild);
+  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][1] == moZero);
+  QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][2] == moChild);
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moChild);
 }
 
@@ -371,15 +371,15 @@ void PivotTableTest::testFilterBasics()
 
 void PivotTableTest::testMultipleCurrencies()
 {
-  MyMoneyMoney moCanOpening(0.0, 100);
-  MyMoneyMoney moJpyOpening(0.0, 100);
+  MyMoneyMoney moCanOpening(0.0, 10);
+  MyMoneyMoney moJpyOpening(0.0, 10);
   MyMoneyMoney moCanPrice(0.75, 100);
-  MyMoneyMoney moJpyPrice(0.010, 100);
-  MyMoneyMoney moJpyPrice2(0.011, 100);
-  MyMoneyMoney moJpyPrice3(0.014, 100);
-  MyMoneyMoney moJpyPrice4(0.0395, 100);
-  MyMoneyMoney moCanTransaction(100.0, 100);
-  MyMoneyMoney moJpyTransaction(100.0, 100);
+  MyMoneyMoney moJpyPrice(0.010, 1000);
+  MyMoneyMoney moJpyPrice2(0.011, 1000);
+  MyMoneyMoney moJpyPrice3(0.014, 1000);
+  MyMoneyMoney moJpyPrice4(0.0395, 10000);
+  MyMoneyMoney moCanTransaction(100.0, 10);
+  MyMoneyMoney moJpyTransaction(100.0, 10);
 
   QString acCanChecking = makeAccount(QString("Canadian Checking"), MyMoneyAccount::Checkings, moCanOpening, QDate(2003, 11, 15), acAsset, "CAD");
   QString acJpyChecking = makeAccount(QString("Japanese Checking"), MyMoneyAccount::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
@@ -421,15 +421,15 @@ void PivotTableTest::testMultipleCurrencies()
   writeTabletoCSV(spending_f);
 
   // test single foreign currency
+  QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acCanCash][eActual][1] == (moCanTransaction*moCanPrice));
   QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acCanCash][eActual][2] == (moCanTransaction*moCanPrice));
   QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acCanCash][eActual][3] == (moCanTransaction*moCanPrice));
-  QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acCanCash][eActual][4] == (moCanTransaction*moCanPrice));
 
   // test multiple foreign currencies under a common parent
+  QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acJpyCash][eActual][1] == (moJpyTransaction*moJpyPrice));
   QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acJpyCash][eActual][2] == (moJpyTransaction*moJpyPrice));
   QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acJpyCash][eActual][3] == (moJpyTransaction*moJpyPrice));
-  QVERIFY(spending_f.m_grid["Expense"]["Foreign"][acJpyCash][eActual][4] == (moJpyTransaction*moJpyPrice));
-  QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual][2] == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
+  QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual][1] == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
   QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual].m_total == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice + moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice + moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
 
   // Test the report type where we DO NOT convert the currency
@@ -440,12 +440,12 @@ void PivotTableTest::testMultipleCurrencies()
   PivotTable spending_fnc(filter);
   writeTabletoCSV(spending_fnc);
 
+  QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acCanCash][eActual][1] == (moCanTransaction));
   QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acCanCash][eActual][2] == (moCanTransaction));
   QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acCanCash][eActual][3] == (moCanTransaction));
-  QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acCanCash][eActual][4] == (moCanTransaction));
+  QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acJpyCash][eActual][1] == (moJpyTransaction));
   QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acJpyCash][eActual][2] == (moJpyTransaction));
   QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acJpyCash][eActual][3] == (moJpyTransaction));
-  QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acJpyCash][eActual][4] == (moJpyTransaction));
 
   filter.setConvertCurrency(true);
   filter.clearTransactionFilter();
@@ -514,7 +514,7 @@ void PivotTableTest::testAdvancedFilter()
     PivotTable spending_f(filter);
     writeTabletoHTML(spending_f, "Spending with Payee Filter.html");
 
-    QVERIFY(spending_f.m_grid["Expense"]["Parent"][acParent][eActual][11] == moThomas);
+    QVERIFY(spending_f.m_grid["Expense"]["Parent"][acParent][eActual][10] == moThomas);
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moThomas);
   }
   // payee (no payee)
@@ -530,7 +530,7 @@ void PivotTableTest::testAdvancedFilter()
     filter.addPayee(QString());
     XMLandback(filter);
     PivotTable spending_f(filter);
-    QVERIFY(spending_f.m_grid["Expense"]["Parent"][acParent][eActual][11] == moNoPayee);
+    QVERIFY(spending_f.m_grid["Expense"]["Parent"][acParent][eActual][10] == moNoPayee);
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moNoPayee);
   }
 
@@ -584,8 +584,8 @@ void PivotTableTest::testAdvancedFilter()
 
     QVERIFY(networth_f4.m_grid["Asset"].m_total[eActual][11] == moCheckingOpen + moChild);
     QVERIFY(networth_f4.m_grid["Liability"].m_total[eActual][11] == - moCreditOpen + moChild);
+    QVERIFY(networth_f4.m_grid.m_total[eActual][9] == moCheckingOpen + moCreditOpen);
     QVERIFY(networth_f4.m_grid.m_total[eActual][10] == moCheckingOpen + moCreditOpen);
-    QVERIFY(networth_f4.m_grid.m_total[eActual][11] == moCheckingOpen + moCreditOpen);
   }
 
   // state (reconciled, cleared, not)
@@ -734,33 +734,33 @@ void PivotTableTest::testColumnType()
   XMLandback(filter);
   PivotTable spending_b(filter);
 
-  QVERIFY(spending_b.m_grid.m_total[eActual][1] == moZero);
-  QVERIFY(spending_b.m_grid.m_total[eActual][2] == -moParent1 - moSolo);
-  QVERIFY(spending_b.m_grid.m_total[eActual][3] == -moParent2 - moSolo);
-  QVERIFY(spending_b.m_grid.m_total[eActual][4] == -moParent);
+  QVERIFY(spending_b.m_grid.m_total[eActual][0] == moZero);
+  QVERIFY(spending_b.m_grid.m_total[eActual][1] == -moParent1 - moSolo);
+  QVERIFY(spending_b.m_grid.m_total[eActual][2] == -moParent2 - moSolo);
+  QVERIFY(spending_b.m_grid.m_total[eActual][3] == -moParent);
+  QVERIFY(spending_b.m_grid.m_total[eActual][4] == moZero);
   QVERIFY(spending_b.m_grid.m_total[eActual][5] == moZero);
   QVERIFY(spending_b.m_grid.m_total[eActual][6] == moZero);
-  QVERIFY(spending_b.m_grid.m_total[eActual][7] == moZero);
-  QVERIFY(spending_b.m_grid.m_total[eActual][8] == -moSolo);
-  QVERIFY(spending_b.m_grid.m_total[eActual][9] == moZero);
-  QVERIFY(spending_b.m_grid.m_total[eActual][10] == -moParent1);
-  QVERIFY(spending_b.m_grid.m_total[eActual][11] == moZero);
-  QVERIFY(spending_b.m_grid.m_total[eActual][12] == -moParent2);
-  QVERIFY(spending_b.m_grid.m_total[eActual][13] == moZero);
+  QVERIFY(spending_b.m_grid.m_total[eActual][7] == -moSolo);
+  QVERIFY(spending_b.m_grid.m_total[eActual][8] == moZero);
+  QVERIFY(spending_b.m_grid.m_total[eActual][9] == -moParent1);
+  QVERIFY(spending_b.m_grid.m_total[eActual][10] == moZero);
+  QVERIFY(spending_b.m_grid.m_total[eActual][11] == -moParent2);
+  QVERIFY(spending_b.m_grid.m_total[eActual][12] == moZero);
 
   filter.setColumnType(MyMoneyReport::eQuarters);
   XMLandback(filter);
   PivotTable spending_q(filter);
 
-  QVERIFY(spending_q.m_grid.m_total[eActual][1] == moZero);
+  QVERIFY(spending_q.m_grid.m_total[eActual][0] == moZero);
+  QVERIFY(spending_q.m_grid.m_total[eActual][1] == -moSolo - moParent);
   QVERIFY(spending_q.m_grid.m_total[eActual][2] == -moSolo - moParent);
-  QVERIFY(spending_q.m_grid.m_total[eActual][3] == -moSolo - moParent);
+  QVERIFY(spending_q.m_grid.m_total[eActual][3] == moZero);
   QVERIFY(spending_q.m_grid.m_total[eActual][4] == moZero);
-  QVERIFY(spending_q.m_grid.m_total[eActual][5] == moZero);
-  QVERIFY(spending_q.m_grid.m_total[eActual][6] == -moSolo);
-  QVERIFY(spending_q.m_grid.m_total[eActual][7] == -moParent1);
-  QVERIFY(spending_q.m_grid.m_total[eActual][8] == -moParent2);
-  QVERIFY(spending_q.m_grid.m_total[eActual][9] == moZero);
+  QVERIFY(spending_q.m_grid.m_total[eActual][5] == -moSolo);
+  QVERIFY(spending_q.m_grid.m_total[eActual][6] == -moParent1);
+  QVERIFY(spending_q.m_grid.m_total[eActual][7] == -moParent2);
+  QVERIFY(spending_q.m_grid.m_total[eActual][8] == moZero);
 
   filter.setRowType(MyMoneyReport::eAssetLiability);
   filter.setName("Net Worth by Quarter");
@@ -783,9 +783,9 @@ void PivotTableTest::testColumnType()
   XMLandback(filter);
   PivotTable spending_y(filter);
 
-  QVERIFY(spending_y.m_grid.m_total[eActual][1] == moZero);
-  QVERIFY(spending_y.m_grid.m_total[eActual][2] == -moSolo - moParent - moSolo - moParent);
-  QVERIFY(spending_y.m_grid.m_total[eActual][3] == -moSolo - moParent);
+  QVERIFY(spending_y.m_grid.m_total[eActual][0] == moZero);
+  QVERIFY(spending_y.m_grid.m_total[eActual][1] == -moSolo - moParent - moSolo - moParent);
+  QVERIFY(spending_y.m_grid.m_total[eActual][2] == -moSolo - moParent);
   QVERIFY(spending_y.m_grid.m_total[eActual].m_total == -moSolo - moParent - moSolo - moParent - moSolo - moParent);
 
   filter.setRowType(MyMoneyReport::eAssetLiability);
@@ -820,8 +820,8 @@ void PivotTableTest::testColumnType()
   PivotTable spending_days(filter);
   writeTabletoHTML(spending_days, "Spending by Days.html");
 
-  QVERIFY(spending_days.m_grid.m_total[eActual][3] == -moParent2);
-  QVERIFY(spending_days.m_grid.m_total[eActual][13] == -moSolo);
+  QVERIFY(spending_days.m_grid.m_total[eActual][2] == -moParent2);
+  QVERIFY(spending_days.m_grid.m_total[eActual][12] == -moSolo);
   QVERIFY(spending_days.m_grid.m_total[eActual].m_total == -moSolo - moParent2);
 
   // set the first day of the week to 1
@@ -840,12 +840,11 @@ void PivotTableTest::testColumnType()
   // restore the locale
   QLocale::setDefault(QLocale::system());
 
-  QVERIFY(spending_weeks.m_grid.m_total[eActual][0] == moZero);
-  QVERIFY(spending_weeks.m_grid.m_total[eActual][1] == -moParent2);
-  QVERIFY(spending_weeks.m_grid.m_total[eActual][2] == moZero);
-  QVERIFY(spending_weeks.m_grid.m_total[eActual][3] == -moSolo - moParent1);
-  QVERIFY(spending_weeks.m_grid.m_total[eActual][4] == -moParent2);
-  QVERIFY(spending_weeks.m_grid.m_total[eActual][5] == moZero);
+  QVERIFY(spending_weeks.m_grid.m_total[eActual][0] == -moParent2);
+  QVERIFY(spending_weeks.m_grid.m_total[eActual][1] == moZero);
+  QVERIFY(spending_weeks.m_grid.m_total[eActual][2] == -moSolo - moParent1);
+  QVERIFY(spending_weeks.m_grid.m_total[eActual][3] == -moParent2);
+  QVERIFY(spending_weeks.m_grid.m_total[eActual][4] == moZero);
   QVERIFY(spending_weeks.m_grid.m_total[eActual].m_total == -moSolo - moParent - moParent2);
 
 }

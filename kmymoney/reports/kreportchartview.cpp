@@ -315,7 +315,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                       legendText.clear();
 
                     //set the cell value and tooltip
-                    rowNum = drawPivotRowSet(it_row.key().id(), rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns() - 1);
+                    rowNum = drawPivotRowSet(it_row.key().id(), rowNum, it_row.value(), rowTypeList[i], legendText, 0, numColumns());
                   }
                 }
               }
@@ -359,7 +359,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   legendText.clear();
 
                 //set the cell value and tooltip
-                rowNum = drawPivotRowSet(QString(), rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+                rowNum = drawPivotRowSet(QString(), rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 0, numColumns());
               }
             }
             ++it_innergroup;
@@ -396,7 +396,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 legendText.clear();
 
               //set the cell value and tooltip
-              rowNum = drawPivotRowSet(QString(), rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+              rowNum = drawPivotRowSet(QString(), rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 0, numColumns());
             }
           }
           ++it_outergroup;
@@ -424,7 +424,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 legendText.clear();
 
               //set the cell value
-              rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+              rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 0, numColumns());
             }
           }
         }
@@ -455,15 +455,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             if (config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
               if (rowTypeList[i] == eActual) {
-                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn());
+                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 0, config.currentDateColumn());
               } else if (rowTypeList[i] == eForecast) {
-                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns() - 1);
+                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns() - config.currentDateColumn());
               } else {
-                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+                rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 0, numColumns());
               }
             } else {
               //set cell value
-              rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns() - 1);
+              rowNum = drawPivotRowSet(QString(), rowNum, grid.m_total, rowTypeList[i], legendText, 0, numColumns());
             }
           }
         }
@@ -478,7 +478,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     // Set up X axis labels (ie "abscissa" to use the technical term)
     QStringList abscissaNames;
     if (accountSeries()) { // if not, we will set these up while putting in the chart values.
-      int column = 1;
+      int column = 0;
       while (column < numColumns()) {
         abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
       }
@@ -595,24 +595,23 @@ void KReportChartView::slotNeedUpdate()
     barDiagram->axes().at(1)->setLabels(labels);
 }
 
-unsigned KReportChartView::drawPivotRowSet(const QString& rowAcc, int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
+unsigned KReportChartView::drawPivotRowSet(const QString& rowAcc, int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int columnsToDraw)
 {
   if (coordinatePlane()->diagram()->datasetDimension() != 1)
     return ++rowNum;
-  //if endColumn is invalid, make it the same as numColumns
-  if (endColumn == 0)
-    endColumn = numColumns();
+  //if columnsToDraw is invalid, make it the same as numColumns
+  if (columnsToDraw == 0)
+    columnsToDraw = numColumns();
 
   MyMoneyFile* file = MyMoneyFile::instance();
   double value;
   QString toolTip;
 
   if (( accountSeries() && !seriesTotals()) ||
-      (!accountSeries() &&  seriesTotals())) {
-    justifyModelSize(endColumn > numColumns() - 1 ? endColumn + 1 : numColumns(), rowNum + 1);
-  } else {
-    justifyModelSize(rowNum + 1, endColumn > numColumns() - 1 ? endColumn + 1 : numColumns());
-  }
+      (!accountSeries() &&  seriesTotals()))
+    justifyModelSize(columnsToDraw, rowNum + 1);
+  else
+    justifyModelSize(rowNum + 1, columnsToDraw);
 
   int precision = 0;
   if (!rowAcc.isEmpty()) {
@@ -628,7 +627,7 @@ unsigned KReportChartView::drawPivotRowSet(const QString& rowAcc, int rowNum, co
     }
   }
   if (precision == 0)
-    precision = file->baseCurrency().pricePrecision();
+    precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
 
   // Columns
   if (seriesTotals()) {
@@ -647,7 +646,7 @@ unsigned KReportChartView::drawPivotRowSet(const QString& rowAcc, int rowNum, co
       this->setDataCell(0, rowNum, value, toolTip);
   } else {
     int column = startColumn;
-    while (column <= endColumn && column < numColumns()) {
+    while (column <= columnsToDraw && column < numColumns()) {
       //if zero and set to skip, increase column and continue with next value
       if (m_skipZero && rowSet[rowType][column].isZero()) {
         ++column;

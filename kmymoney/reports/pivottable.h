@@ -127,7 +127,7 @@ private:
   QDate m_beginDate;
   QDate m_endDate;
   bool m_runningSumsCalculated;
-
+  int m_startColumn;
   /**
     * For budget-vs-actual reports only, maps each account to the account which holds
     * the budget for it.  If an account is not contained in this map, it is not included
