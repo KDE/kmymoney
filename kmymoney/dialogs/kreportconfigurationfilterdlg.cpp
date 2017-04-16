@@ -472,7 +472,7 @@ void KReportConfigurationFilterDlg::slotReset()
       case MyMoneyReport::eChartRing:
         combo->setCurrentItem(m_initialState.chartType());
         break;
-      case MyMoneyReport::eChartEnd:
+      default:
         throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
     m_tabChart->ui->m_checkCHGridLines->setChecked(m_initialState.isChartCHGridLines());

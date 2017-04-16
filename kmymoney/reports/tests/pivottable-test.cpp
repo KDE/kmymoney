@@ -209,7 +209,7 @@ void PivotTableTest::testSingleTransaction()
   QVERIFY(spending_f.m_grid.m_total[eActual][2] == (-moSolo));
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == (-moSolo));
 
-  filter.clear();
+  filter.clearTransactionFilter();
   filter.setRowType(MyMoneyReport::eAssetLiability);
   filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
   XMLandback(filter);
@@ -242,7 +242,7 @@ void PivotTableTest::testSubAccount()
   QVERIFY(spending_f.m_grid.m_total[eActual][3] == (-moParent - moChild));
   QVERIFY(spending_f.m_grid.m_total[eActual].m_total == (-moParent - moChild));
 
-  filter.clear();
+  filter.clearTransactionFilter();
   filter.setRowType(MyMoneyReport::eAssetLiability);
   filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
   filter.setName("Net Worth with Sub-Account");
@@ -448,7 +448,7 @@ void PivotTableTest::testMultipleCurrencies()
   QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][acJpyCash][eActual][4] == (moJpyTransaction));
 
   filter.setConvertCurrency(true);
-  filter.clear();
+  filter.clearTransactionFilter();
   filter.setName("Multiple currency net worth");
   filter.setRowType(MyMoneyReport::eAssetLiability);
   filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
@@ -563,14 +563,14 @@ void PivotTableTest::testAdvancedFilter()
 
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo);
 
-    filter.clear();
+    filter.clearTransactionFilter();
     filter.addType(MyMoneyTransactionFilter::deposits);
     XMLandback(filter);
     PivotTable spending_f2(filter);
 
     QVERIFY(spending_f2.m_grid.m_total[eActual].m_total == moParent1);
 
-    filter.clear();
+    filter.clearTransactionFilter();
     filter.addType(MyMoneyTransactionFilter::transfers);
     XMLandback(filter);
     PivotTable spending_f3(filter);
@@ -625,7 +625,7 @@ void PivotTableTest::testAdvancedFilter()
 
     QVERIFY(spending_f2.m_grid.m_total[eActual].m_total == -moSolo - moParent1);
 
-    filter.clear();
+    filter.clearTransactionFilter();
     filter.addState(MyMoneyTransactionFilter::notReconciled);
     XMLandback(filter);
     PivotTable spending_f3(filter);
@@ -701,7 +701,7 @@ void PivotTableTest::testAdvancedFilter()
     PivotTable spending_f(filter);
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2);
 
-    filter.clear();
+    filter.clearTransactionFilter();
     XMLandback(filter);
     PivotTable spending_f2(filter);
     QVERIFY(spending_f2.m_grid.m_total[eActual].m_total == -moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2);

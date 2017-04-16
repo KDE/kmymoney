@@ -390,7 +390,7 @@ public:
   /**
     * This method allows you to clear the underlying transaction filter
     */
-  void clear();
+  void clearTransactionFilter();
 
   /**
     * This method allows you to set the underlying transaction filter
