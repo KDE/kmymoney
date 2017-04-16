@@ -217,8 +217,9 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
         item->setText(SYMBOL_COL, symbol);
         item->setText(NAME_COL, i18n("%1 units in %2", pair.first, pair.second));
         if (pr.isValid()) {
-          MyMoneySecurity currency = file->currency(pair.second);
-          item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(currency.tradingSymbol(), currency.pricePrecision()));
+          MyMoneySecurity fromCurrency = file->currency(pair.second);
+          MyMoneySecurity toCurrency = file->currency(pair.first);
+          item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
         }
         item->setText(ID_COL, id);
@@ -255,7 +256,7 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
       const MyMoneyPrice &pr = file->price(id.toUtf8(), inv.tradingCurrency());
       if (pr.isValid()) {
-        item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), currency.pricePrecision()));
+        item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), inv.pricePrecision()));
         item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
       }
       item->setText(ID_COL, id);
@@ -495,7 +496,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
 
       MyMoneyMoney price = MyMoneyMoney::ONE;
       QString id = _id.toUtf8();
-      MyMoneySecurity sec;
+      MyMoneySecurity fromCurrency, toCurrency;
       if (_id.contains(" ") == 0) {
         MyMoneySecurity security = MyMoneyFile::instance()->security(id);
         QString factor = security.value("kmm-online-factor");
@@ -503,25 +504,26 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
           price = price * MyMoneyMoney(factor);
         }
         try {
-          sec = MyMoneyFile::instance()->security(id);
-          sec = MyMoneyFile::instance()->security(sec.tradingCurrency());
+          toCurrency = MyMoneyFile::instance()->security(id);
+          fromCurrency = MyMoneyFile::instance()->security(toCurrency.tradingCurrency());
         } catch (const MyMoneyException &) {
-          sec = MyMoneySecurity();
+          fromCurrency = toCurrency = MyMoneySecurity();
         }
 
       } else {
         QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
         if (splitrx.indexIn(_id) != -1) {
           try {
-            sec = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
+            fromCurrency = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
+            toCurrency = MyMoneyFile::instance()->security(splitrx.cap(1).toUtf8());
           } catch (const MyMoneyException &) {
-            sec = MyMoneySecurity();
+            fromCurrency = toCurrency = MyMoneySecurity();
           }
         }
       }
-      price *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(sec.pricePrecision()));
+      price *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(toCurrency.pricePrecision()));
 
-      item->setText(PRICE_COL, price.formatMoney(sec.tradingSymbol(), sec.pricePrecision()));
+      item->setText(PRICE_COL, price.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
       item->setText(DATE_COL, date.toString(Qt::ISODate));
       logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
       // make sure to make OK button available
