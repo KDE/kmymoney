@@ -125,6 +125,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     case MyMoneyReport::eChartBar:
     case MyMoneyReport::eChartStackedBar: {
       CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
+      cartesianPlane->setAutoAdjustVerticalRangeToData(2);
       replaceCoordinatePlane(cartesianPlane);
 
       // set-up axis type
@@ -137,8 +138,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       // set-up grid
       GridAttributes ga = cartesianPlane->gridAttributes(Qt::Vertical);
       ga.setGridVisible(config.isChartCHGridLines());
-      ga.setGridStepWidth(loc.toDouble(config.dataMajorTick()));
-      ga.setGridSubStepWidth(loc.toDouble(config.dataMinorTick()));
+      ga.setGridStepWidth(config.isDataUserDefined() ? loc.toDouble(config.dataMajorTick()) : 0.0);
+      ga.setGridSubStepWidth(config.isDataUserDefined() ? loc.toDouble(config.dataMinorTick()) : 0.0);
       cartesianPlane->setGridAttributes(Qt::Vertical, ga);
 
       ga = cartesianPlane->gridAttributes(Qt::Horizontal);
@@ -146,7 +147,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       cartesianPlane->setGridAttributes(Qt::Horizontal, ga);
 
       // set-up data range
-      cartesianPlane->setVerticalRange(qMakePair(loc.toDouble(config.dataRangeStart()), loc.toDouble(config.dataRangeEnd())));
+      cartesianPlane->setVerticalRange(qMakePair(config.isDataUserDefined() ? loc.toDouble(config.dataRangeStart()) : 0.0,
+                                                 config.isDataUserDefined() ? loc.toDouble(config.dataRangeEnd()) : 0.0));
 
       //set-up x axis
       xAxis = new CartesianAxis();
