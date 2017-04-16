@@ -133,11 +133,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       else
         cartesianPlane->setAxesCalcModeY(KChart::AbstractCoordinatePlane::Linear);
 
+      QLocale loc = locale();
       // set-up grid
       GridAttributes ga = cartesianPlane->gridAttributes(Qt::Vertical);
       ga.setGridVisible(config.isChartCHGridLines());
-      ga.setGridStepWidth(locale().toDouble(config.dataMajorTick()));
-      ga.setGridSubStepWidth(locale().toDouble(config.dataMinorTick()));
+      ga.setGridStepWidth(loc.toDouble(config.dataMajorTick()));
+      ga.setGridSubStepWidth(loc.toDouble(config.dataMinorTick()));
       cartesianPlane->setGridAttributes(Qt::Vertical, ga);
 
       ga = cartesianPlane->gridAttributes(Qt::Horizontal);
@@ -145,7 +146,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       cartesianPlane->setGridAttributes(Qt::Horizontal, ga);
 
       // set-up data range
-      cartesianPlane->setVerticalRange(qMakePair(locale().toDouble(config.dataRangeStart()), locale().toDouble(config.dataRangeEnd())));
+      cartesianPlane->setVerticalRange(qMakePair(loc.toDouble(config.dataRangeStart()), loc.toDouble(config.dataRangeEnd())));
 
       //set-up x axis
       xAxis = new CartesianAxis();
@@ -558,9 +559,9 @@ void KReportChartView::slotNeedUpdate()
 
   if (grids.at(1).stepWidth == 0) // no labels?
     return;
-
-  QChar separator = locale().groupSeparator();
-  QChar decimalPoint = locale().decimalPoint();
+  QLocale loc = locale();
+  QChar separator = loc.groupSeparator();
+  QChar decimalPoint = loc.decimalPoint();
 
   QStringList labels;
 
@@ -568,17 +569,17 @@ void KReportChartView::slotNeedUpdate()
   if (cartesianplane) {
     if (cartesianplane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
       qreal labelValue = qFloor(log10(grids.at(1).start)); // first label is 10 to power of labelValue
-      uchar labelCount = qFloor(log10(grids.at(1).end)) - qFloor(log10(grids.at(1).start)) + 1;
-      for (uchar i = 0; i < labelCount; ++i) {
-        labels.append(locale().toString(qPow(10.0, labelValue), 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
+      int labelCount = qFloor(log10(grids.at(1).end)) - qFloor(log10(grids.at(1).start)) + 1;
+      for (auto i = 0; i < labelCount; ++i) {
+        labels.append(loc.toString(qPow(10.0, labelValue), 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
         ++labelValue; // next label is 10 to power of previous exponent + 1
       }
     } else {
       qreal labelValue = grids.at(1).start; // first label is start value
       qreal step = grids.at(1).stepWidth;
-      uchar labelCount = qFloor((grids.at(1).end - grids.at(1).start) / grids.at(1).stepWidth) + 1;
-      for (uchar i = 0; i < labelCount; ++i) {
-        labels.append(locale().toString(labelValue, 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
+      int labelCount = qFloor((grids.at(1).end - grids.at(1).start) / grids.at(1).stepWidth) + 1;
+      for (auto i = 0; i < labelCount; ++i) {
+        labels.append(loc.toString(labelValue, 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
         labelValue += step; // next label is previous value + step value
       }
     }
