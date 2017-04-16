@@ -938,7 +938,7 @@ void KForecastView::setNegative(QTreeWidgetItem *item, bool isNegative)
 
 void KForecastView::showAmount(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount, const MyMoneySecurity& security)
 {
-  item->setText(column, MyMoneyUtils::formatMoney(amount, item->data(0, AccountRole).value<MyMoneyAccount>(), security));
+  item->setText(column, MyMoneyUtils::formatMoney(amount, security));
   item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
   item->setFont(column, item->font(0));
   if (amount.isNegative()) {
