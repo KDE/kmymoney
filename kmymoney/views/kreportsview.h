@@ -101,7 +101,7 @@ public:
     QByteArray m_encoding;
 
   public:
-    KReportTab(QTabWidget* parent, const MyMoneyReport& report);
+    KReportTab(QTabWidget* parent, const MyMoneyReport& report, int &tabNr);
     ~KReportTab();
     const MyMoneyReport& report() const {
       return m_report;

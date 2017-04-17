@@ -71,8 +71,7 @@ using namespace reports;
 /**
   * KReportsView::KReportTab Implementation
   */
-
-KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report):
+KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, int& tabNr):
     QWidget(parent),
     m_part(new KHTMLPart(this)),
     m_chartView(new KReportChartView(this)),
@@ -111,8 +110,10 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   m_layout->addWidget(m_part->view());
   m_layout->addWidget(m_chartView);
 
-  parent->addTab(this, QIcon::fromTheme("application-vnd.oasis.opendocument.spreadsheet"), report.name());
-  parent->setTabEnabled(parent->indexOf(this), true);
+  tabNr = parent->addTab(this,
+                         QIcon::fromTheme(QStringLiteral("application-vnd.oasis.opendocument.spreadsheet")),
+                         report.name());
+  parent->setTabEnabled(tabNr, true);
 
   // get users character set encoding
   m_encoding = QTextCodec::codecForLocale()->name();
@@ -691,10 +692,9 @@ void KReportsView::slotConfigure()
 
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
-  if (!tab) {
-    // nothing to do
+  if (!tab) // nothing to do
     return;
-  }
+  int tabNr = m_reportTabWidget->currentIndex();
 
   tab->updateDataRange(); // range will be needed during configuration, but cannot be obtained earlier
 
@@ -717,8 +717,8 @@ void KReportsView::slotConfigure()
         ft.commit();
         tab->modifyReport(newreport);
 
-        m_reportTabWidget->setTabText(m_reportTabWidget->indexOf(tab), newreport.name());
-        m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab)) ;
+        m_reportTabWidget->setTabText(tabNr, newreport.name());
+        m_reportTabWidget->setCurrentIndex(tabNr) ;
       } else {
         MyMoneyFile::instance()->addReport(newreport);
         ft.commit();
@@ -873,7 +873,7 @@ void KReportsView::slotOpenReport(const QString& id)
 
   // Show the tab, or create a new one, as needed
   if (page)
-    m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
+    m_reportTabWidget->setCurrentIndex(index);
   else
     addReportTab(MyMoneyFile::instance()->report(id));
 }
@@ -898,7 +898,7 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
 
   // Show the tab, or create a new one, as needed
   if (page)
-    m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
+    m_reportTabWidget->setCurrentIndex(index);
   else
     addReportTab(report);
 
@@ -947,7 +947,7 @@ void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 
   // Show the tab, or create a new one, as needed
   if (page)
-    m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
+    m_reportTabWidget->setCurrentIndex(index);
   else
     addReportTab(report);
 }
@@ -977,18 +977,22 @@ void KReportsView::slotClose(int index)
 
 void KReportsView::slotCloseAll()
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
-  while (tab) {
-    m_reportTabWidget->removeTab(m_reportTabWidget->indexOf(tab));
-    tab->setReadyToDelete(true);
-
-    tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
+  while (true) {
+    KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
+    if (tab) {
+      m_reportTabWidget->removeTab(1);
+      tab->setReadyToDelete(true);
+    } else
+      break;
   }
 }
 
 void KReportsView::addReportTab(const MyMoneyReport& report)
 {
-  KReportTab* tab = new KReportTab(m_reportTabWidget, report);
+  int tabNr;
+  KReportTab* tab = new KReportTab(m_reportTabWidget, report, tabNr);
+  if (!tab)
+    return;
 
   connect(tab->control()->ui->buttonChart, SIGNAL(clicked()),
           this, SLOT(slotToggleChart()));
@@ -1018,7 +1022,7 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
   if (report.id().isEmpty())
     tab->control()->ui->buttonDelete->setEnabled(false);
 
-  m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab));
+  m_reportTabWidget->setCurrentIndex(tabNr);
 }
 
 void KReportsView::slotListContextMenu(const QPoint & p)
