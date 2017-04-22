@@ -44,8 +44,9 @@ class KReportChartView;
   * This class serves as base class definition for the concrete report classes
   * This class is abstract but it contains common code used by all children classes
   */
-class ReportTable
+class ReportTable : public QObject
 {
+  Q_OBJECT
 private:
 
   /**

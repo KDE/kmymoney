@@ -39,6 +39,7 @@
 
 #include <KHTMLPart>
 #include <kfilefiltercombo.h>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -84,7 +85,7 @@ public:
   class KReportTab: public QWidget
   {
   private:
-    KHTMLPart* m_part;
+    QPointer<KHTMLPart> m_part;
     reports::KReportChartView* m_chartView;
     ReportControl* m_control;
     QVBoxLayout* m_layout;
@@ -93,7 +94,7 @@ public:
     bool m_chartEnabled;
     bool m_showingChart;
     bool m_needReload;
-    reports::ReportTable* m_table;
+    QPointer<reports::ReportTable> m_table;
 
     /**
      * Users character set encoding.
@@ -101,7 +102,7 @@ public:
     QByteArray m_encoding;
 
   public:
-    KReportTab(QTabWidget* parent, const MyMoneyReport& report, int &tabNr);
+    KReportTab(QTabWidget* parent, const MyMoneyReport& report, const QObject* eventHandler);
     ~KReportTab();
     const MyMoneyReport& report() const {
       return m_report;
