@@ -34,6 +34,7 @@
 #include "storage/mymoneystoragesql.h"
 #include "kguiutils.h"
 
+class QDialogButtonBox;
 
 class KSelectDatabaseDlgDecl : public QWidget, public Ui::KSelectDatabaseDlgDecl
 {
@@ -49,24 +50,32 @@ class KSelectDatabaseDlg : public QDialog
 public:
   explicit KSelectDatabaseDlg(int openMode, QUrl openURL = QUrl(), QWidget *parent = 0);
   ~KSelectDatabaseDlg();
+
   /**
-    * Check whether we have required database drivers
-    * @return - false, no drivers available, true, can proceed
-  **/
+   * Check whether we have required database drivers
+   * @return - false, no drivers available, true, can proceed
+   */
   bool checkDrivers();
-  /** Return URL of database
-    * @return - pseudo-URL of database selected by user
-  **/
+
+  /**
+   * Return URL of database
+   * @return - pseudo-URL of database selected by user
+   */
   const QUrl selectedURL();
-  /** Execute the database selection dialog
-    * @return - as QDialog::exec()
-  **/
+
+  /**
+   * Execute the database selection dialog
+   * @return - as QDialog::exec()
+   */
   int exec();
+
 public slots:
   void slotDriverSelected(QListWidgetItem *driver);
   void slotHelp();
+
 private:
   KSelectDatabaseDlgDecl* m_widget;
+  QDialogButtonBox* m_buttonBox;
   int m_mode;
   QUrl m_url;
   QStringList m_supportedDrivers;

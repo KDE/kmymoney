@@ -55,17 +55,18 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
   QVBoxLayout *mainLayout = new QVBoxLayout;
   setLayout(mainLayout);
   mainLayout->addWidget(m_widget);
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
   QWidget *mainWidget = new QWidget(this);
   mainLayout->addWidget(mainWidget);
-  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  QPushButton *okButton = m_buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  mainLayout->addWidget(buttonBox);
-  connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
-  m_requiredFields = 0;
+  connect(m_buttonBox, &QDialogButtonBox::accepted, this, &KSelectDatabaseDlg::accept);
+  connect(m_buttonBox, &QDialogButtonBox::rejected, this, &KSelectDatabaseDlg::reject);
+  connect(m_buttonBox->button(QDialogButtonBox::Help), &QPushButton::clicked, this, &KSelectDatabaseDlg::slotHelp);
+
+  mainLayout->addWidget(m_buttonBox);
+  m_requiredFields = nullptr;
   m_url = openURL;
   m_mode = openMode;
   m_sqliteSelected = false;
@@ -130,8 +131,7 @@ int KSelectDatabaseDlg::exec()
       m_widget->textUserName->setText(QString(pwd->pw_name));
     m_widget->textPassword->setText("");
     m_requiredFields = new kMandatoryFieldGroup(this);
-    // TODO: port to kf5
-    //m_requiredFields->setOkButton(button(QDialogButtonBox::Ok));
+    m_requiredFields->setOkButton(m_buttonBox->button(QDialogButtonBox::Ok));
     m_requiredFields->add(m_widget->listDrivers);
     m_requiredFields->add(m_widget->textDbName);
     connect(m_widget->listDrivers, SIGNAL(itemClicked(QListWidgetItem*)),
@@ -162,8 +162,7 @@ int KSelectDatabaseDlg::exec()
     // set password required
     m_requiredFields = new kMandatoryFieldGroup(this);
     m_requiredFields->add(m_widget->textPassword);
-    // TODO: port to kf5
-    //m_requiredFields->setOkButton(button(QDialog::Ok));
+    m_requiredFields->setOkButton(m_buttonBox->button(QDialogButtonBox::Ok));
 
     m_widget->checkPreLoad->setChecked(false);
     m_sqliteSelected = !m_widget->urlSqlite->text().isEmpty();
@@ -211,10 +210,9 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     // currently, only sqlite requres an external file
     m_sqliteSelected = true;
     if (m_mode == QIODevice::WriteOnly) {
-      /// @fixme KFile::Files not supported on KF5
-      m_widget->urlSqlite->setMode(KFile::Modes(KFile::File));
+      m_widget->urlSqlite->setMode(KFile::Mode::File);
     } else {
-      m_widget->urlSqlite->setMode(KFile::Modes(KFile::File | KFile::ExistingOnly));
+      m_widget->urlSqlite->setMode(KFile::Mode::File | KFile::Mode::ExistingOnly);
     }
 
     m_requiredFields->remove(m_widget->textDbName);
