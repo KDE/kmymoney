@@ -71,7 +71,7 @@ using namespace reports;
 /**
   * KReportsView::KReportTab Implementation
   */
-KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, int& tabNr):
+KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const QObject* eventHandler):
     QWidget(parent),
     m_part(new KHTMLPart(this)),
     m_chartView(new KReportChartView(this)),
@@ -110,10 +110,39 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   m_layout->addWidget(m_part->view());
   m_layout->addWidget(m_chartView);
 
-  tabNr = parent->addTab(this,
+  connect(m_control->ui->buttonChart, SIGNAL(clicked()),
+          eventHandler, SLOT(slotToggleChart()));
+
+  connect(m_control->ui->buttonConfigure, SIGNAL(clicked()),
+          eventHandler, SLOT(slotConfigure()));
+
+  connect(m_control->ui->buttonNew, SIGNAL(clicked()),
+          eventHandler, SLOT(slotDuplicate()));
+
+  connect(m_control->ui->buttonCopy, SIGNAL(clicked()),
+          eventHandler, SLOT(slotCopyView()));
+
+  connect(m_control->ui->buttonExport, SIGNAL(clicked()),
+          eventHandler, SLOT(slotSaveView()));
+
+  connect(m_control->ui->buttonDelete, SIGNAL(clicked()),
+          eventHandler, SLOT(slotDelete()));
+
+  connect(m_control->ui->buttonClose, SIGNAL(clicked()),
+          eventHandler, SLOT(slotCloseCurrent()));
+
+  connect(m_part->browserExtension(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+          eventHandler, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
+
+  // if this is a default report, then you can't delete it!
+  if (report.id().isEmpty())
+    m_control->ui->buttonDelete->setEnabled(false);
+
+  int tabNr = parent->addTab(this,
                          QIcon::fromTheme(QStringLiteral("application-vnd.oasis.opendocument.spreadsheet")),
                          report.name());
   parent->setTabEnabled(tabNr, true);
+  parent->setCurrentIndex(tabNr);
 
   // get users character set encoding
   m_encoding = QTextCodec::codecForLocale()->name();
@@ -989,40 +1018,7 @@ void KReportsView::slotCloseAll()
 
 void KReportsView::addReportTab(const MyMoneyReport& report)
 {
-  int tabNr;
-  KReportTab* tab = new KReportTab(m_reportTabWidget, report, tabNr);
-  if (!tab)
-    return;
-
-  connect(tab->control()->ui->buttonChart, SIGNAL(clicked()),
-          this, SLOT(slotToggleChart()));
-
-  connect(tab->control()->ui->buttonConfigure, SIGNAL(clicked()),
-          this, SLOT(slotConfigure()));
-
-  connect(tab->control()->ui->buttonNew, SIGNAL(clicked()),
-          this, SLOT(slotDuplicate()));
-
-  connect(tab->control()->ui->buttonCopy, SIGNAL(clicked()),
-          this, SLOT(slotCopyView()));
-
-  connect(tab->control()->ui->buttonExport, SIGNAL(clicked()),
-          this, SLOT(slotSaveView()));
-
-  connect(tab->control()->ui->buttonDelete, SIGNAL(clicked()),
-          this, SLOT(slotDelete()));
-
-  connect(tab->control()->ui->buttonClose, SIGNAL(clicked()),
-          this, SLOT(slotCloseCurrent()));
-
-  connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          this, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
-
-  // if this is a default report, then you can't delete it!
-  if (report.id().isEmpty())
-    tab->control()->ui->buttonDelete->setEnabled(false);
-
-  m_reportTabWidget->setCurrentIndex(tabNr);
+  new KReportTab(m_reportTabWidget, report, this);
 }
 
 void KReportsView::slotListContextMenu(const QPoint & p)
