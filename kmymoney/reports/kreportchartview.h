@@ -80,9 +80,9 @@ public:
 private:
 
   /**
-    * Draw a PivotGridRowSet in a chart
+    * Draw a PivotGridRow in a chart
     */
-  unsigned drawPivotRowSet(const QString& rowAcc, int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn = 1, int endColumn = 0);
+  int drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, const QString& legendText, const int startColumn = 0, const int columnsToDraw = 0, const int precision = 2);
 
   /**
     * Set cell data
