@@ -37,12 +37,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneyinstitution.h>
-#include <mymoneytransaction.h>
+#include "config-kmymoney.h"
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
+#include "mymoneytransaction.h"
 #include "mymoneyschedule.h"
-#include <mymoneysecurity.h>
-#include <selectedtransaction.h>
+#include "mymoneysecurity.h"
+#include "selectedtransaction.h"
 
 #ifdef KF5Activities_FOUND
 namespace KActivities

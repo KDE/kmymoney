@@ -55,6 +55,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney.h"
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"

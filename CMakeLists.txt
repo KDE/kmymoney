@@ -48,12 +48,6 @@ if(NOT MSVC)
   add_compile_options(-std=c++11)
 endif()
 
-string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if(CMAKE_BUILD_TYPE_TOLOWER MATCHES "debugfull")
-  add_definitions("-DQT_STRICT_ITERATORS")
-  set(KMM_DEBUG 1)
-endif()
-
 # use DBus only on Linux
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(KMM_DBUS 1)
@@ -188,9 +182,6 @@ set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
 Possible values are: 'Release' 'RelWithDebInfo' 'Debug' 'Debugfull' 'Profile'
 The default value is: 'RelWithDebInfo'" FORCE)
 
-# tell the KMyMoney sources that a config.h is present:
-add_definitions( -DHAVE_CONFIG_H )
-
 # tells gcc to enable exception handling
 include(KDECompilerSettings)
 kde_enable_exceptions()
@@ -223,9 +214,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # preprocessor definitions in case this is a debug build
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DKMM_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
-set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -DKMM_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS")
 
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
@@ -244,6 +233,10 @@ endif()
 ######################### Output Results #############################
 
 # create the config.h file out of the config.h.cmake
+string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
+if(CMAKE_BUILD_TYPE_TOLOWER MATCHES "debugfull" OR CMAKE_BUILD_TYPE_TOLOWER MATCHES "debug")
+  set(KMM_DEBUG 1)
+endif()
 configure_file("config-kmymoney.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h")
 configure_file("config-kmymoney-version.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h")
 

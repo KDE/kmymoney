@@ -46,6 +46,7 @@ email                : mte@users.sourceforge.net
 
 // ------------------------------------------------------------Box21----------------
 // Project Includes
+#include "config-kmymoney.h"
 #ifndef _GNCFILEANON
 #include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"

@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
+#include "config-kmymoney.h"
 
 #include "kfindtransactiondlg.h"
 
