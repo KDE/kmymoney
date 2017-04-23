@@ -207,7 +207,7 @@ protected:
   // store data for data element
   void storeData(const QString& pData) { // NB - data MAY come in chunks, and may need to be anonymized
     if (m_dataPtr != 0)
-      m_dataPtr->append(hide(pData, m_anonClass)); return ;
+      m_dataPtr->append(hide(pData, m_anonClass));
   }
   // following is provided only for a future file anonymizer
   QString getData() const {
