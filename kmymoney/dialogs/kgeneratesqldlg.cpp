@@ -46,49 +46,47 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#define createTables User1
-#define saveSQL User2
-
 KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
 {
+  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+  m_createTablesButton = m_buttonBox->addButton(i18n("Create Tables"), QDialogButtonBox::ButtonRole::AcceptRole);
+  m_saveSqlButton = m_buttonBox->addButton(i18n("Save SQL"), QDialogButtonBox::ButtonRole::ActionRole);
+  Q_ASSERT(m_createTablesButton);
+  Q_ASSERT(m_saveSqlButton);
+
+  QPushButton *okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
   m_widget = new KGenerateSqlDlgDecl();
   QVBoxLayout *mainLayout = new QVBoxLayout;
   setLayout(mainLayout);
   mainLayout->addWidget(m_widget);
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+
   QWidget *mainWidget = new QWidget(this);
   setLayout(mainLayout);
   mainLayout->addWidget(mainWidget);
-  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  // TODO: check and port to kf5
-  //button(createTables)->setText(i18n("Create Tables"));
-  //button(saveSQL)->setText(i18n("Save SQL"));
-  //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-  mainLayout->addWidget(buttonBox);
-  m_requiredFields = 0;
+  mainLayout->addWidget(m_buttonBox);
   initializeForm();
 }
 
 KGenerateSqlDlg::~KGenerateSqlDlg()
 {
-  delete m_requiredFields;
+  // Stub required to delete m_requiredFields
 }
 
 void KGenerateSqlDlg::initializeForm()
 {
-  delete m_requiredFields;
-  m_requiredFields = 0;
-  // TODO: port to kf5
-#if 0
+  m_requiredFields = nullptr;
   // at this point, we don't know which fields are required, so disable everything but the list
-  button(saveSQL)->setEnabled(false);
-  button(createTables)->setEnabled(false);
+  m_saveSqlButton->setEnabled(false);
+  m_createTablesButton->setEnabled(false);
+  QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  Q_ASSERT(okButton);
   okButton->setEnabled(false);
-#endif
+
   m_widget->urlSqlite->clear();
   m_widget->textDbName->clear();
   m_widget->textHostName->clear();
@@ -101,8 +99,8 @@ void KGenerateSqlDlg::initializeForm()
   m_widget->textPassword->setEnabled(false);
   m_widget->textUserName->setEnabled(false);
   m_widget->textSQL->setEnabled(false);
-  // TODO: port to kf5
-  // connect(button(Help), SIGNAL(clicked()), this, SLOT(slotHelp()));
+
+  connect(m_buttonBox->button(QDialogButtonBox::Help), &QPushButton::clicked, this, &KGenerateSqlDlg::slotHelp);
 }
 
 int  KGenerateSqlDlg::exec()
@@ -148,8 +146,9 @@ void KGenerateSqlDlg::slotcreateTables()
   }
   // check that the database has been pre-created
   { // all queries etc. must be in a block - see 'remove database' API doc
-    //FIXME: test the dbName
-    QSqlDatabase dbase = QSqlDatabase::addDatabase(m_dbName, "creation");
+    Q_ASSERT(!selectedDriver().isEmpty());
+
+    QSqlDatabase dbase = QSqlDatabase::addDatabase(selectedDriver(), "creation");
     dbase.setHostName(m_widget->textHostName->text());
     dbase.setDatabaseName(m_dbName);
     dbase.setUserName(m_widget->textUserName->text());
@@ -157,8 +156,8 @@ void KGenerateSqlDlg::slotcreateTables()
     if (!dbase.open()) {
       KMessageBox::error(this,
                          i18n("Unable to open database.\n"
-                              "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
-                              "Click Help for more information."));
+                              "You must use an SQL CREATE DATABASE statement before creating the tables.\n")
+                        );
       return;
     }
     QSqlQuery q(dbase);
@@ -182,8 +181,10 @@ void KGenerateSqlDlg::slotcreateTables()
     KMessageBox::information(this, message);
   }
   QSqlDatabase::removeDatabase("creation");
-  // TODO: port to kf5
-  //okButton->setEnabled(true);
+
+  QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  Q_ASSERT(okButton);
+  okButton->setEnabled(true);
 }
 
 void KGenerateSqlDlg::slotsaveSQL()
@@ -200,25 +201,37 @@ void KGenerateSqlDlg::slotsaveSQL()
   MyMoneyDbDef db;
   s << m_widget->textSQL->toPlainText();
   out.close();
-  // TODO: port to kf5
-  //okButton->setEnabled(true);
+
+  QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  Q_ASSERT(okButton);
+  okButton->setEnabled(true);
+}
+
+QString KGenerateSqlDlg::selectedDriver()
+{
+  QList<QListWidgetItem *> drivers = m_widget->listDrivers->selectedItems();
+  if (drivers.count() != 1) {
+    return QString();
+  }
+
+  return drivers[0]->text().section(' ', 0, 0);
 }
 
 void KGenerateSqlDlg::slotdriverSelected()
 {
-  QList<QListWidgetItem *> drivers = m_widget->listDrivers->selectedItems();
-  if (drivers.count() != 1) {
+  const QString driverName = selectedDriver();
+  if (driverName.isEmpty()) {
     initializeForm();
     return;
   }
 
-  m_dbDriver = MyMoneyDbDriver::create(drivers[0]->text().section(' ', 0, 0));
+  m_dbDriver = MyMoneyDbDriver::create(driverName);
   if (!m_dbDriver->isTested()) {
     int rc = KMessageBox::warningContinueCancel(0,
              i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
                   "Please make sure you have adequate backups of your data.\n"
                   "Please report any problems to the developer mailing list at "
-                  "kmymoney-devel@kde.org", m_dbDriver),
+                  "kmymoney-devel@kde.org", driverName),
              "");
     if (rc == KMessageBox::Cancel) {
       m_widget->listDrivers->clearSelection();
@@ -227,13 +240,17 @@ void KGenerateSqlDlg::slotdriverSelected()
     }
   }
 
-  m_requiredFields = new kMandatoryFieldGroup(this);
+  m_requiredFields.reset(new kMandatoryFieldGroup(this));
   // currently, only sqlite need an external file
   if (m_dbDriver->requiresExternalFile()) {
     m_sqliteSelected = true;
-    m_widget->urlSqlite->setMode(KFile::Modes(KFile::File));
+    m_widget->urlSqlite->setMode(KFile::Mode::File);
     m_widget->urlSqlite->setEnabled(true);
     m_requiredFields->add(m_widget->urlSqlite);
+
+    m_widget->textDbName->setEnabled(false);
+    m_widget->textHostName->setEnabled(false);
+    m_widget->textUserName->setEnabled(false);
   } else {                         // not sqlite3
     m_sqliteSelected = false;
     m_widget->urlSqlite->setEnabled(false);
@@ -247,14 +264,13 @@ void KGenerateSqlDlg::slotdriverSelected()
     m_widget->textHostName->setText("localhost");
     m_widget->textUserName->setText("");
     struct passwd * pwd = getpwuid(geteuid());
-    if (pwd != 0)
+    if (pwd != nullptr)
       m_widget->textUserName->setText(QString(pwd->pw_name));
     m_widget->textPassword->setText("");
   }
 
   m_widget->textPassword->setEnabled(m_dbDriver->isPasswordSupported());
-  // TODO: port to kf5
-  //m_requiredFields->setOkButton(button(createTables));
+  m_requiredFields->setOkButton(m_createTablesButton);
   m_widget->textSQL->setEnabled(true);
   // check if we have a storage; if not, create a skeleton one
   // we need a storage for MyMoneyDbDef to generate standard accounts
@@ -272,10 +288,10 @@ void KGenerateSqlDlg::slotdriverSelected()
     MyMoneyFile::instance()->detachStorage();
   }
   delete m_storage;
-  // TODO: port to kf5
-  //button(saveSQL)->setEnabled(true);
-  //connect(button(saveSQL), SIGNAL(clicked()), this, SLOT(slotsaveSQL()));
-  //connect(button(createTables), SIGNAL(clicked()), this, SLOT(slotcreateTables()));
+
+  m_saveSqlButton->setEnabled(true);
+  connect(m_saveSqlButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotsaveSQL);
+  connect(m_createTablesButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotcreateTables);
 }
 
 void KGenerateSqlDlg::slotHelp()

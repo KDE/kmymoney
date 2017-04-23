@@ -18,6 +18,11 @@
 #define KGENERATESQLDLG_H
 
 // ----------------------------------------------------------------------------
+// Std Includes
+
+#include <memory>
+
+// ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QLabel>
@@ -33,6 +38,8 @@
 #include "storage/mymoneystoragesql.h"
 #include "storage/mymoneyseqaccessmgr.h"
 #include "kguiutils.h"
+
+class QDialogButtonBox;
 
 class KGenerateSqlDlgDecl : public QWidget, public Ui::KGenerateSqlDlgDecl
 {
@@ -59,11 +66,16 @@ public slots:
   void slotsaveSQL();
 private:
   void initializeForm();
+  QString selectedDriver();
 
   KGenerateSqlDlgDecl* m_widget;
+  QDialogButtonBox* m_buttonBox;
+  QPushButton* m_createTablesButton;
+  QPushButton* m_saveSqlButton;
+
   QList<QString> m_supportedDrivers;
   //MyMoneyDbDrivers m_map;
-  kMandatoryFieldGroup* m_requiredFields;
+  std::unique_ptr<kMandatoryFieldGroup> m_requiredFields;
   bool m_sqliteSelected;
   QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
   QString m_dbName;
