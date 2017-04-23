@@ -85,7 +85,7 @@ public:
   class KReportTab: public QWidget
   {
   private:
-    QPointer<KHTMLPart> m_part;
+    QPointer<KHTMLPart> m_tableView;
     reports::KReportChartView* m_chartView;
     ReportControl* m_control;
     QVBoxLayout* m_layout;
@@ -94,6 +94,8 @@ public:
     bool m_chartEnabled;
     bool m_showingChart;
     bool m_needReload;
+    bool m_isChartViewValid;
+    bool m_isTableViewValid;
     QPointer<reports::ReportTable> m_table;
 
     /**
@@ -132,7 +134,7 @@ public:
     void showEvent(QShowEvent * event);
     void loadTab();
     KParts::BrowserExtension* browserExtenstion() const {
-      return m_part->browserExtension();
+      return m_tableView->browserExtension();
     }
   };
 

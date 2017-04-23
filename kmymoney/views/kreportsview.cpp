@@ -73,19 +73,19 @@ using namespace reports;
   */
 KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const QObject* eventHandler):
     QWidget(parent),
-    m_part(new KHTMLPart(this)),
+    m_tableView(new KHTMLPart(this)),
     m_chartView(new KReportChartView(this)),
     m_control(new ReportControl(this)),
     m_layout(new QVBoxLayout(this)),
     m_report(report),
     m_deleteMe(false),
     m_chartEnabled(false),
-    m_showingChart(false),
+    m_showingChart(!report.isChartByDefault()),
     m_needReload(true),
     m_table(0)
 {
   m_layout->setSpacing(6);
-  m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
+  m_tableView->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
   m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
@@ -106,8 +106,9 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
+  m_tableView->view()->hide();
   m_layout->addWidget(m_control);
-  m_layout->addWidget(m_part->view());
+  m_layout->addWidget(m_tableView->view());
   m_layout->addWidget(m_chartView);
 
   connect(m_control->ui->buttonChart, SIGNAL(clicked()),
@@ -131,7 +132,7 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   connect(m_control->ui->buttonClose, SIGNAL(clicked()),
           eventHandler, SLOT(slotCloseCurrent()));
 
-  connect(m_part->browserExtension(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+  connect(m_tableView->browserExtension(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
           eventHandler, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
 
   // if this is a default report, then you can't delete it!
@@ -152,13 +153,13 @@ KReportsView::KReportTab::~KReportTab()
 {
   delete m_table;
   //This is to prevent a crash on exit with KDE 4.3.2
-  delete m_part;
+  delete m_tableView;
 }
 
 void KReportsView::KReportTab::print()
 {
-  if (m_part && m_part->view())
-    m_part->view()->print();
+  if (m_tableView && m_tableView->view())
+    m_tableView->view()->print();
 }
 
 void KReportsView::KReportTab::copyToClipboard()
@@ -207,6 +208,8 @@ void KReportsView::KReportTab::showEvent(QShowEvent * event)
 
 void KReportsView::KReportTab::updateReport()
 {
+  m_isChartViewValid = false;
+  m_isTableViewValid = false;
   // reload the report from the engine. It might have
   // been changed by the user
 
@@ -231,16 +234,9 @@ void KReportsView::KReportTab::updateReport()
     m_chartEnabled = false;
   }
 
-  m_part->begin();
-  m_part->write(m_table->renderHTML(qobject_cast<QWidget*>(this),
-                                    m_encoding, m_report.name()));
-  m_part->end();
-
-  m_table->drawChart(*m_chartView);
   m_control->ui->buttonChart->setEnabled(m_chartEnabled);
 
-  if (m_report.isChartByDefault() && !m_showingChart)
-    toggleChart();
+  toggleChart();
 }
 
 void KReportsView::KReportTab::toggleChart()
@@ -248,7 +244,14 @@ void KReportsView::KReportTab::toggleChart()
   // for now it will just SHOW the chart.  In the future it actually has to toggle it.
 
   if (m_showingChart) {
-    m_part->view()->show();
+    if (!m_isTableViewValid) {
+      m_tableView->begin();
+      m_tableView->write(m_table->renderHTML(qobject_cast<QWidget*>(this),
+                                        m_encoding, m_report.name()));
+      m_tableView->end();
+    }
+    m_isTableViewValid = true;
+    m_tableView->view()->show();
     m_chartView->hide();
 
     m_control->ui->buttonChart->setText(i18n("Chart"));
@@ -256,8 +259,10 @@ void KReportsView::KReportTab::toggleChart()
     m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
                                                      QIcon::fromTheme(QStringLiteral("report-line"))));
   } else {
-    m_part->view()->hide();
-
+    if (!m_isChartViewValid)
+      m_table->drawChart(*m_chartView);
+    m_isChartViewValid = true;
+    m_tableView->view()->hide();
     m_chartView->show();
 
     m_control->ui->buttonChart->setText(i18n("Report"));
