@@ -9,8 +9,6 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #cmakedefine HAVE_UNISTD_H 1
 
-#cmakedefine KMM_DEBUG 1
-
 #cmakedefine KMM_DESIGNER 1
 
 #cmakedefine KMM_DBUS 1

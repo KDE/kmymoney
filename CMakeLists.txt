@@ -214,7 +214,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # preprocessor definitions in case this is a debug build
-set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS")
+set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
 
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
@@ -233,10 +234,6 @@ endif()
 ######################### Output Results #############################
 
 # create the config.h file out of the config.h.cmake
-string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if(CMAKE_BUILD_TYPE_TOLOWER MATCHES "debugfull" OR CMAKE_BUILD_TYPE_TOLOWER MATCHES "debug")
-  set(KMM_DEBUG 1)
-endif()
 configure_file("config-kmymoney.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h")
 configure_file("config-kmymoney-version.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h")
 
