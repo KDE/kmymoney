@@ -54,7 +54,6 @@
 #include "kmymoneyglobalsettings.h"
 
 
-QTime timer;
 bool timersOn = false;
 
 KMyMoneyApp* kmymoney;
@@ -64,7 +63,6 @@ static int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, co
 int main(int argc, char *argv[])
 {
   KLocalizedString::setApplicationDomain("kmymoney");
-  timer.start();
 
   {
     // Copy KDE 4 config files to the KF5 location
@@ -349,16 +347,4 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
 
   const int rc = a->exec();
   return rc;
-}
-
-void timestamp_reset()
-{
-  timer.restart();
-}
-
-void timestamp(char const *txt)
-{
-  if (timersOn) {
-    qDebug("Time(%s): %d", txt, timer.elapsed());
-  }
 }
