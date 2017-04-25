@@ -1295,9 +1295,9 @@ int PivotTable::columnValue(const QDate& _date) const
 QDate PivotTable::columnDate(int column) const
 {
   if (m_config_f.isColumnsAreDays())
-    return m_beginDate.addDays(m_config_f.columnPitch() * column - 1);
+    return m_beginDate.addDays(m_config_f.columnPitch() * column - m_startColumn);
   else
-    return m_beginDate.addMonths(m_config_f.columnPitch() * column).addDays(-1);
+    return m_beginDate.addMonths(m_config_f.columnPitch() * column).addDays(-m_startColumn);
 }
 
 QString PivotTable::renderCSV() const
