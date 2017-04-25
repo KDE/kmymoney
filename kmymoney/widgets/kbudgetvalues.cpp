@@ -39,6 +39,7 @@
 #include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
+#include <kmymoneyglobalsettings.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,7 +50,7 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
     KBudgetValuesDecl(parent),
     m_currentTab(m_monthlyButton)
 {
-  m_budgetDate = QDate(2007, 1, 1);
+  m_budgetDate = QDate(2007, KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
   m_field[0] = m_amount1;
   m_field[1] = m_amount2;
@@ -290,7 +291,7 @@ void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBu
     case MyMoneyBudget::AccountGroup::eMonthByMonth:
       m_individualButton->setChecked(true);
       slotChangePeriod(m_periodGroup->id(m_individualButton));
-      date.setDate(m_budgetDate.year(), 1, 1);
+      date.setDate(m_budgetDate.year(), m_budgetDate.month(), m_budgetDate.day());
       for (int i = 0; i < 12; ++i) {
         m_field[i]->setValue(budgetAccount.period(date).amount());
         date = date.addMonths(1);
@@ -320,7 +321,7 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
     budgetAccount.addPeriod(m_budgetDate, period);
   } else if (tab == m_periodGroup->id(m_individualButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-    date.setDate(m_budgetDate.year(), 1, 1);
+    date.setDate(m_budgetDate.year(), m_budgetDate.month(), m_budgetDate.day());
     for (int i = 0; i < 12; ++i) {
       period.setStartDate(date);
       period.setAmount(m_field[i]->value());

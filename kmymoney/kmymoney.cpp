@@ -5284,8 +5284,8 @@ void KMyMoneyApp::slotCurrencySetBase()
 void KMyMoneyApp::slotBudgetNew()
 {
   QDate date = QDate::currentDate();
-  date.setDate(date.year(), 1, 1);
-  QString newname = i18n("Budget <numid>%1</numid>", date.year());
+  date.setDate(date.year(), KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  QString newname = i18n("Budget %1", date.year());
 
   MyMoneyBudget budget;
 
@@ -5295,7 +5295,7 @@ void KMyMoneyApp::slotBudgetNew()
     // Exception thrown when the name is not found
     while (1) {
       MyMoneyFile::instance()->budgetByName(newname);
-      newname = i18n("Budget <numid>%1</numid> (<numid>%2</numid>)", date.year(), i++);
+      newname = i18n("Budget %1 %2", date.year(), i++);
     }
   } catch (const MyMoneyException &) {
     // all ok, the name is unique
@@ -5384,7 +5384,7 @@ void KMyMoneyApp::slotBudgetChangeYear()
 
     if (ok) {
       int year = yearString.toInt(0, 0);
-      QDate newYear = QDate(year, 1, 1);
+      QDate newYear = QDate(year, budget.budgetStart().month(), budget.budgetStart().day());
       if (newYear != budget.budgetStart()) {
         MyMoneyFileTransaction ft;
         try {

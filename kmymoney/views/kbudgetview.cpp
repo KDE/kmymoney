@@ -649,12 +649,16 @@ void KBudgetView::slotStartRename()
 
 void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
 {
-  // if we don't have an item or something changed in the year column
-  // we actually don't care about it
-  if (!p || col != 0)
+  // if we don't have an item we actually don't care about it
+  if (!p)
     return;
 
   KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
+  if (col == 1) {
+    pBudget->setText(1, QString().setNum(pBudget->budget().budgetStart().year()));
+    return;
+  }
+
   // create a copy of the new name without leading and trailing whitespaces
   QString new_name = p->text(0).trimmed();
 
