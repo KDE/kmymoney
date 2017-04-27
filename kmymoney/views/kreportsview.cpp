@@ -80,7 +80,7 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
     m_report(report),
     m_deleteMe(false),
     m_chartEnabled(false),
-    m_showingChart(!report.isChartByDefault()),
+    m_showingChart(report.isChartByDefault()),
     m_needReload(true),
     m_table(0)
 {
@@ -236,6 +236,7 @@ void KReportsView::KReportTab::updateReport()
 
   m_control->ui->buttonChart->setEnabled(m_chartEnabled);
 
+  m_showingChart = !m_showingChart;
   toggleChart();
 }
 
