@@ -103,14 +103,21 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   m_ui->m_criteriaTab->insertTab(0, m_tabGeneral, i18nc("General tab", "General"));
 
   if (m_initialState.reportType() == MyMoneyReport::ePivotTable) {
-    m_tabRowColPivot = new ReportTabRowColPivot(m_ui->m_criteriaTab);
-    m_ui->m_criteriaTab->insertTab(1, m_tabRowColPivot, i18n("Rows/Columns"));
+    int tabNr = 1;
+    if (!(m_initialState.isIncludingPrice() || m_initialState.isIncludingAveragePrice())) {
+      m_tabRowColPivot = new ReportTabRowColPivot(m_ui->m_criteriaTab);
+      m_ui->m_criteriaTab->insertTab(tabNr++, m_tabRowColPivot, i18n("Rows/Columns"));
+      connect(m_tabRowColPivot->ui->m_comboRows, SIGNAL(activated(int)), this, SLOT(slotRowTypeChanged(int)));
+      connect(m_tabRowColPivot->ui->m_comboRows, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
+      //control the state of the includeTransfer check
+      connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
+    }
 
     m_tabChart = new ReportTabChart(m_ui->m_criteriaTab);
-    m_ui->m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
+    m_ui->m_criteriaTab->insertTab(tabNr++, m_tabChart, i18n("Chart"));
 
     m_tabRange = new ReportTabRange(m_ui->m_criteriaTab);
-    m_ui->m_criteriaTab->insertTab(3, m_tabRange, i18n("Range"));
+    m_ui->m_criteriaTab->insertTab(tabNr++, m_tabRange, i18n("Range"));
 
     // date tab is going to be replaced by range tab, so delete it
     m_ui->dateRangeLayout->removeWidget(m_dateRange);
@@ -123,12 +130,6 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
     connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
     connect(m_tabChart->ui->m_logYaxis, SIGNAL(stateChanged(int)), this, SLOT(slotLogAxisChanged(int)));
-
-    connect(m_tabRowColPivot->ui->m_comboRows, SIGNAL(activated(int)), this, SLOT(slotRowTypeChanged(int)));
-    connect(m_tabRowColPivot->ui->m_comboRows, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
-    //control the state of the includeTransfer check
-    connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
-
   } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
