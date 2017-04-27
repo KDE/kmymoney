@@ -1304,6 +1304,11 @@ QString PivotTable::renderCSV() const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
+  MyMoneyFile* file = MyMoneyFile::instance();
+  int pricePrecision = 0;
+  int currencyPrecision = 0;
+  int precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
+
   //
   // Report Title
   //
@@ -1354,8 +1359,6 @@ QString PivotTable::renderCSV() const
     result += '\n';
   }
 
-  int fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
-
   //
   // Outer groups
   //
@@ -1384,7 +1387,6 @@ QString PivotTable::renderCSV() const
       PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
         ReportAccount rowname = it_row.key();
-        int fraction = rowname.currency().smallestAccountFraction();
 
         //
         // Columns
@@ -1397,18 +1399,43 @@ QString PivotTable::renderCSV() const
         for (int i = 0; i < m_rowTypeList.size(); ++i)
           isUsed |= it_row.value()[ m_rowTypeList[i] ][0].isUsed();
 
-        while (column < m_numColumns) {
-          //show columns
-          for (int i = 0; i < m_rowTypeList.size(); ++i) {
-            isUsed |= it_row.value()[ m_rowTypeList[i] ][column].isUsed();
-            rowdata += QString(",\"%1\"").arg(it_row.value()[ m_rowTypeList[i] ][column].formatMoney(fraction, false));
-          }
-          column++;
-        }
+        if (it_row.key().accountType() != MyMoneyAccount::Investment) {
+          while (column < m_numColumns) {
 
-        if (m_config_f.isShowingRowTotals()) {
-          for (int i = 0; i < m_rowTypeList.size(); ++i)
-            rowdata += QString(",\"%1\"").arg((*it_row)[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
+            //show columns
+            foreach (const auto rowType, m_rowTypeList) {
+              if (rowType == ePrice) {
+                if (pricePrecision == 0) {
+                  if (it_row.key().isInvest()) {
+                    pricePrecision = file->currency(it_row.key().currencyId()).pricePrecision();
+                    precision = pricePrecision;
+                  } else
+                    precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
+                } else
+                  precision = pricePrecision;
+              } else {
+                if (currencyPrecision == 0) {
+                  if (it_row.key().isInvest()) // stock account isn't eveluated in currency, so take investment account instead
+                    currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
+                  else
+                    currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());
+                  precision = currencyPrecision;
+                } else
+                  precision = currencyPrecision;
+              }
+              rowdata += QString(",\"%1\"").arg(it_row.value()[rowType][column].formatMoney(QString(), precision, false));
+              isUsed |= it_row.value()[rowType][column].isUsed();
+            }
+            column++;
+          }
+
+          if (m_config_f.isShowingRowTotals()) {
+            for (int i = 0; i < m_rowTypeList.size(); ++i)
+              rowdata += QString(",\"%1\"").arg((*it_row)[ m_rowTypeList[i] ].m_total.formatMoney(QString(), precision, false));
+          }
+        } else {
+          for (auto i = 0; i < m_numColumns + m_rowTypeList.size(); ++i)
+            rowdata.append(',');;
         }
 
         //
@@ -1474,14 +1501,14 @@ QString PivotTable::renderCSV() const
         while (column < m_numColumns) {
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
             isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][column].isUsed();
-            finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(fraction, false));
+            finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(QString(), precision, false));
           }
           column++;
         }
 
         if (m_config_f.isShowingRowTotals()) {
           for (int i = 0; i < m_rowTypeList.size(); ++i)
-            finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
+            finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(QString(), precision, false));
         }
 
         finalRow += '\n';
@@ -1503,14 +1530,14 @@ QString PivotTable::renderCSV() const
       int column = m_startColumn;
       while (column < m_numColumns) {
         for (int i = 0; i < m_rowTypeList.size(); ++i)
-          result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(fraction, false));
+          result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(QString(), precision, false));
 
         column++;
       }
 
       if (m_config_f.isShowingRowTotals()) {
         for (int i = 0; i < m_rowTypeList.size(); ++i)
-          result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
+          result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(QString(), precision, false));
       }
 
       result += '\n';
@@ -1527,14 +1554,14 @@ QString PivotTable::renderCSV() const
     int totalcolumn = m_startColumn;
     while (totalcolumn < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i)
-        result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn].formatMoney(fraction, false));
+        result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn].formatMoney(QString(), precision, false));
 
       totalcolumn++;
     }
 
     if (m_config_f.isShowingRowTotals()) {
       for (int i = 0; i < m_rowTypeList.size(); ++i)
-        result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
+        result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ].m_total.formatMoney(QString(), precision, false));
     }
 
     result += '\n';
@@ -1550,7 +1577,7 @@ QString PivotTable::renderBody() const
   MyMoneyFile* file = MyMoneyFile::instance();
   int pricePrecision = 0;
   int currencyPrecision = 0;
-  int precision = 2;
+  int precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
   QString colspan = QString(" colspan=\"%1\"").arg(m_numColumns + 1 + (m_config_f.isShowingRowTotals() ? 1 : 0));
 
   //
@@ -1679,6 +1706,7 @@ QString PivotTable::renderBody() const
 
           QString innergroupdata;
           PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
+
           while (it_row != (*it_innergroup).end()) {
             //
             // Columns
