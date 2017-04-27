@@ -95,6 +95,9 @@ public:
   bool isShowingRowTotals() const {
     return (m_showRowTotals);
   }
+  bool isShowingColumnTotals() const {
+    return m_showColumnTotals;
+  }
   EReportType reportType() const {
     return m_reportType;
   }
@@ -112,9 +115,6 @@ public:
   }
   unsigned columnPitch() const {
     return static_cast<unsigned>(m_columnType);
-  }
-  bool isShowingColumnTotals() const {
-    return m_convertCurrency;
   }
   const QString& comment() const {
     return m_comment;
@@ -331,6 +331,9 @@ public:
   }
   void setShowingRowTotals(bool _f) {
     m_showRowTotals = _f;
+  }
+  void setShowingColumnTotals(bool _f) {
+    m_showColumnTotals = _f;
   }
   void setIncludingBudgetActuals(bool _f) {
     m_includeBudgetActuals = _f;
@@ -738,6 +741,10 @@ private:
    * Whether this report should include columns for row totals
    */
   bool m_showRowTotals;
+  /**
+   * Whether this report should include rows for column totals
+   */
+  bool m_showColumnTotals;
   /**
    * Whether this report should include forecast balance
    */

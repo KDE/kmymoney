@@ -82,6 +82,7 @@ MyMoneyReport::MyMoneyReport() :
     m_includeBudgetActuals(false),
     m_includeUnusedAccounts(false),
     m_showRowTotals(false),
+    m_showColumnTotals(true),
     m_includeForecast(false),
     m_includeMovingAverage(false),
     m_movingAverageDays(0),
@@ -139,6 +140,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_includeBudgetActuals(false),
     m_includeUnusedAccounts(false),
     m_showRowTotals(false),
+    m_showColumnTotals(true),
     m_includeForecast(false),
     m_includeMovingAverage(false),
     m_movingAverageDays(0),
@@ -698,6 +700,7 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_showRowTotals = e.attribute("showrowtotals").toUInt();
     else if (rowType() == eExpenseIncome) // for backward compatibility
       m_showRowTotals = true;
+    m_showColumnTotals = e.attribute("showcolumntotals", "1").toUInt();
 
     //check for reports with older settings which didn't have the detail attribute
     i = kDetailLevelText.indexOf(e.attribute("detail"));

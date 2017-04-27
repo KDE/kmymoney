@@ -191,6 +191,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     if (m_tabRowColPivot->ui->m_comboRows->currentIndex() == 0)
       m_currentState.setShowingRowTotals(m_tabRowColPivot->ui->m_checkTotalColumn->isChecked());
 
+    m_currentState.setShowingColumnTotals(m_tabRowColPivot->ui->m_checkTotalRow->isChecked());
     m_currentState.setIncludingSchedules(m_tabRowColPivot->ui->m_checkScheduled->isChecked());
 
     m_currentState.setIncludingTransfers(m_tabRowColPivot->ui->m_checkTransfers->isChecked());
@@ -249,6 +250,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     m_currentState.setDetailLevel(m_tabRowColQuery->ui->m_checkHideSplitDetails->isChecked() ?
                                   MyMoneyReport::eDetailNone : MyMoneyReport::eDetailAll);
     m_currentState.setHideTransactions(m_tabRowColQuery->ui->m_checkHideTransactions->isChecked());
+    m_currentState.setShowingColumnTotals(!m_tabRowColQuery->ui->m_checkHideTotals->isChecked());
   }
 
   if (m_tabChart) {
@@ -374,6 +376,7 @@ void KReportConfigurationFilterDlg::slotReset()
         break;
     }
     m_tabRowColPivot->ui->m_checkTotalColumn->setChecked(m_initialState.isShowingRowTotals());
+    m_tabRowColPivot->ui->m_checkTotalRow->setChecked(m_initialState.isShowingColumnTotals());
 
     slotRowTypeChanged(combo->currentIndex());
 
@@ -453,6 +456,7 @@ void KReportConfigurationFilterDlg::slotReset()
     m_tabRowColQuery->ui->m_checkLoans->setChecked(m_initialState.isLoansOnly());
 
     m_tabRowColQuery->ui->m_checkHideTransactions->setChecked(m_initialState.isHideTransactions());
+    m_tabRowColQuery->ui->m_checkHideTotals->setChecked(!m_initialState.isShowingColumnTotals());
     m_tabRowColQuery->ui->m_checkHideSplitDetails->setEnabled(!m_initialState.isHideTransactions());
 
     m_tabRowColQuery->ui->m_checkHideSplitDetails->setChecked

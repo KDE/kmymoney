@@ -1445,7 +1445,7 @@ QString PivotTable::renderCSV() const
         // Print the individual rows
         result += innergroupdata;
 
-        if (m_config_f.isShowingColumnTotals()) {
+        if (m_config_f.isConvertCurrency() && m_config_f.isShowingColumnTotals()) {
           // Start the TOTALS row
           finalRow = i18nc("Total balance", "Total");
           isUsed = true;
@@ -1498,7 +1498,7 @@ QString PivotTable::renderCSV() const
     // Outer Row Group Totals
     //
 
-    if (m_config_f.isShowingColumnTotals()) {
+    if (m_config_f.isConvertCurrency() && m_config_f.isShowingColumnTotals()) {
       result += QString("%1 %2").arg(i18nc("Total balance", "Total")).arg(it_outergroup.key());
       int column = m_startColumn;
       while (column < m_numColumns) {
@@ -1522,7 +1522,7 @@ QString PivotTable::renderCSV() const
   // Report Totals
   //
 
-  if (m_config_f.isShowingColumnTotals()) {
+  if (m_config_f.isConvertCurrency() && m_config_f.isShowingColumnTotals()) {
     result += i18n("Grand Total");
     int totalcolumn = m_startColumn;
     while (totalcolumn < m_numColumns) {
@@ -1770,7 +1770,7 @@ QString PivotTable::renderBody() const
             // Print the individual rows
             result += innergroupdata;
 
-            if (m_config_f.isShowingColumnTotals()) {
+            if (m_config_f.isConvertCurrency() && m_config_f.isShowingColumnTotals()) {
               // Start the TOTALS row
               finalRow = QString("<tr class=\"row-%1\" id=\"subtotal\"><td class=\"left\">&nbsp;&nbsp;%2</td>")
                          .arg(rownum & 0x01 ? "even" : "odd")
@@ -1843,7 +1843,7 @@ QString PivotTable::renderBody() const
       // Outer Row Group Totals
       //
 
-      if (m_config_f.isShowingColumnTotals()) {
+      if (m_config_f.isConvertCurrency() && m_config_f.isShowingColumnTotals()) {
         result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18nc("Total balance", "Total")).arg((*it_outergroup).m_displayName);
         int column = m_startColumn;
         while (column < m_numColumns) {
@@ -1880,7 +1880,7 @@ QString PivotTable::renderBody() const
   // Report Totals
   //
 
-  if (m_config_f.isShowingColumnTotals()) {
+  if (m_config_f.isConvertCurrency() && m_config_f.isShowingColumnTotals()) {
     result += QString("<tr class=\"spacer\"><td>&nbsp;</td></tr>\n");
     result += QString("<tr class=\"reportfooter\"><td class=\"left\">%1</td>").arg(i18n("Grand Total"));
     int totalcolumn = m_startColumn;

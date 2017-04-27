@@ -395,8 +395,8 @@ void QueryTable::init()
 
   TableRow::setSortCriteria(sort);
   qSort(m_rows);
-
-  constructTotalRows(); // adds total rows to m_rows
+  if (m_config.isShowingColumnTotals())
+    constructTotalRows(); // adds total rows to m_rows
 }
 
 void QueryTable::constructTotalRows()
@@ -1631,7 +1631,7 @@ void QueryTable::constructAccountTable()
     }
   }
 
-  if (m_config.queryColumns() == MyMoneyReport::eQCperformance) {
+  if (m_config.queryColumns() == MyMoneyReport::eQCperformance && m_config.isShowingColumnTotals()) {
     TableRow qtotalsrow;
     qtotalsrow["rank"] = "4"; // add identification of row as total
     QMap<QString, CashFlowList> currencyGrandCashFlow;
