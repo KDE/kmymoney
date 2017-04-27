@@ -1370,7 +1370,8 @@ QString PivotTable::renderCSV() const
     // Outer Group Header
     //
 
-    result += it_outergroup.key() + '\n';
+    if (!(m_config_f.isIncludingPrice() || m_config_f.isIncludingAveragePrice()))
+      result += it_outergroup.key() + '\n';
 
     //
     // Inner Groups
@@ -1688,7 +1689,8 @@ QString PivotTable::renderBody() const
       // Outer Group Header
       //
 
-      result += QString("<tr class=\"sectionheader\"><td class=\"left\"%1>%2</td></tr>\n").arg(colspan).arg((*it_outergroup).m_displayName);
+      if (!(m_config_f.isIncludingPrice() || m_config_f.isIncludingAveragePrice()))
+        result += QString("<tr class=\"sectionheader\"><td class=\"left\"%1>%2</td></tr>\n").arg(colspan).arg((*it_outergroup).m_displayName);
 
       // Skip the inner groups if the report only calls for outer group totals to be shown
       if (m_config_f.detailLevel() != MyMoneyReport::eDetailGroup) {
@@ -1717,47 +1719,50 @@ QString PivotTable::renderBody() const
             pricePrecision = 0; // new row => new account => new precision
             currencyPrecision = 0;
             bool isUsed = it_row.value()[eActual][0].isUsed();
-            while (column < m_numColumns) {
-              QString lb;
-              if (column > m_startColumn)
-                lb = leftborder;
+            if (it_row.key().accountType() != MyMoneyAccount::Investment) {
+              while (column < m_numColumns) {
+                QString lb;
+                if (column > m_startColumn)
+                  lb = leftborder;
 
-              foreach (const auto rowType, m_rowTypeList) {
-                if (rowType == ePrice) {
-                  if (pricePrecision == 0) {
-                    if (it_row.key().isInvest()) {
-                      pricePrecision = file->currency(it_row.key().currencyId()).pricePrecision();
-                      precision = pricePrecision;
+                foreach (const auto rowType, m_rowTypeList) {
+                  if (rowType == ePrice) {
+                    if (pricePrecision == 0) {
+                      if (it_row.key().isInvest()) {
+                        pricePrecision = file->currency(it_row.key().currencyId()).pricePrecision();
+                        precision = pricePrecision;
+                      } else
+                        precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
                     } else
-                      precision = 2;
-                  } else
-                    precision = pricePrecision;
-                } else {
-                  if (currencyPrecision == 0) {
-                    if (it_row.key().isInvest()) // stock account isn't eveluated in currency, so take investment account instead
-                      currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
-                    else
-                      currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());
-                    precision = currencyPrecision;
-                  } else
-                    precision = currencyPrecision;
+                      precision = pricePrecision;
+                  } else {
+                    if (currencyPrecision == 0) {
+                      if (it_row.key().isInvest()) // stock account isn't eveluated in currency, so take investment account instead
+                        currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
+                      else
+                        currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());
+                      precision = currencyPrecision;
+                    } else
+                      precision = currencyPrecision;
+                  }
+                  rowdata += QString("<td%2>%1</td>")
+                      .arg(coloredAmount(it_row.value()[rowType][column], QString(), precision))
+                      .arg(lb);
+                  lb.clear();
+                  isUsed |= it_row.value()[rowType][column].isUsed();
                 }
-                rowdata += QString("<td%2>%1</td>")
-                           .arg(coloredAmount(it_row.value()[rowType][column], QString(), precision))
-                           .arg(lb);
-                lb.clear();
-                isUsed |= it_row.value()[rowType][column].isUsed();
+                ++column;
               }
-              ++column;
-            }
 
-            if (m_config_f.isShowingRowTotals()) {
-              for (int i = 0; i < m_rowTypeList.size(); ++i) {
-                rowdata += QString("<td%2>%1</td>")
-                           .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ].m_total, QString(), precision))
-                           .arg(i == 0 ? leftborder : QString());
+              if (m_config_f.isShowingRowTotals()) {
+                for (int i = 0; i < m_rowTypeList.size(); ++i) {
+                  rowdata += QString("<td%2>%1</td>")
+                      .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ].m_total, QString(), precision))
+                      .arg(i == 0 ? leftborder : QString());
+                }
               }
-            }
+            } else
+              rowdata += QString(QLatin1Literal("<td colspan=%1></td>")).arg(m_numColumns + m_rowTypeList.size());
 
             //
             // Row Header
