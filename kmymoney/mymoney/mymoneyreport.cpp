@@ -382,6 +382,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     e.setAttribute("includesprice", m_includePrice);
     e.setAttribute("includesaverageprice", m_includeAveragePrice);
     e.setAttribute("mixedtime", m_mixedTime);
+    e.setAttribute("investments", m_investments); // it's setable in rows/columns tab of querytable, but here it is internal setting
 
     // write rows/columns tab
     if (!m_budgetId.isEmpty())
@@ -681,6 +682,7 @@ bool MyMoneyReport::read(const QDomElement& e)
     m_includePrice = e.attribute("includesprice", "0").toUInt();
     m_includeAveragePrice = e.attribute("includesaverageprice", "0").toUInt();
     m_mixedTime = e.attribute("mixedtime", "0").toUInt();
+    m_investments = e.attribute("investments", "0").toUInt();
 
     // read rows/columns tab
     if (e.hasAttribute("budget"))
