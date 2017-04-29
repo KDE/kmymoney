@@ -39,10 +39,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyreport.h>
-#include <pivottable.h>
-#include <kmymoneyglobalsettings.h>
-#include <kreportchartview.h>
+#include "mymoneyreport.h"
+#include "pivottable.h"
+#include "kmymoneyglobalsettings.h"
+#include "kreportchartview.h"
 
 using namespace reports;
 
@@ -126,23 +126,23 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   if (account.accountGroup() == MyMoneyAccount::Asset)
     factor = -factor;
 
-  if (account.value("maxCreditEarly").length() > 0) {
+  if (!account.value("maxCreditEarly").isEmpty()) {
     needRow = true;
     haveMaxCredit = true;
     maxCredit = MyMoneyMoney(account.value("maxCreditEarly")) * factor;
   }
-  if (account.value("maxCreditAbsolute").length() > 0) {
+  if (!account.value("maxCreditAbsolute").isEmpty()) {
     needRow = true;
     haveMaxCredit = true;
     maxCredit = MyMoneyMoney(account.value("maxCreditAbsolute")) * factor;
   }
 
-  if (account.value("minBalanceEarly").length() > 0) {
+  if (!account.value("minBalanceEarly").isEmpty()) {
     needRow = true;
     haveMinBalance = true;
     minBalance = MyMoneyMoney(account.value("minBalanceEarly"));
   }
-  if (account.value("minBalanceAbsolute").length() > 0) {
+  if (!account.value("minBalanceAbsolute").isEmpty()) {
     needRow = true;
     haveMinBalance = true;
     minBalance = MyMoneyMoney(account.value("minBalanceAbsolute"));
