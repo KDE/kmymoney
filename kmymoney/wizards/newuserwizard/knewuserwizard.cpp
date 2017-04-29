@@ -28,6 +28,7 @@
 #include <QDir>
 #include <QLabel>
 #include <QList>
+#include <QFileInfo>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -327,15 +328,13 @@ FilePage::FilePage(Wizard* wizard) :
     folder = QDir::homePath();
   m_dataFileEdit->setStartDir(QUrl::fromLocalFile(folder));
   m_dataFileEdit->setUrl(QUrl::fromLocalFile(folder + QLatin1Char('/') + user.loginName() + QLatin1String(".kmy")));
-
-  //! FIXME: Currently we cannot prevent the file dialog from selecting existing files (without using deprecated functions)
   m_dataFileEdit->setFilter(i18n("*.kmy *.xml|KMyMoney files\n*|All files"));
-  //m_dataFileEdit->fileDialog()->setFilter(); ?
   m_dataFileEdit->setMode(KFile::File);
 }
 
 bool FilePage::isComplete() const
 {
+  //! @todo Allow to overwrite files
   bool rc = m_mandatoryGroup->isEnabled();
   m_existingFileLabel->hide();
   m_finishLabel->show();
@@ -343,13 +342,22 @@ bool FilePage::isComplete() const
     // if a filename is present, check that
     // a) the file does not exist
     // b) the directory does exist
+    // c) the file is stored locally (because we cannot check previous conditions if it is not)
     const QUrl fullPath = m_dataFileEdit->url();
-    const QUrl directory = fullPath.adjusted(QUrl::RemoveFilename);
-    // TODO: port to kf5
-    rc = fullPath.isValid()
-         //&& !KIO::NetAccess::exists(fullPath, KIO::NetAccess::DestinationSide, m_wizard)
-         && directory.isValid();
-         //&& KIO::NetAccess::exists(directory, KIO::NetAccess::SourceSide, m_wizard);
+    QFileInfo directory{fullPath.adjusted(QUrl::RemoveFilename).toLocalFile()};
+    qDebug() << "Selected fileptah: " << fullPath << " " << directory.absoluteFilePath() << " dir: " << directory.isDir();
+    rc = false;
+    if (!fullPath.isValid() || !fullPath.isLocalFile()) {
+      m_dataFileEdit->setToolTip(i18n("The path has to be valid and cannot be on a remote location."));
+    } else if (QFileInfo::exists(fullPath.toLocalFile())) {
+      m_dataFileEdit->setToolTip(i18n("The file exists already. Please create a new file."));
+    } else if (!directory.isDir()) {
+      m_dataFileEdit->setToolTip(i18n("The destination directory does not exist or cannot be written to."));
+    } else {
+      m_dataFileEdit->setToolTip("");
+      rc = true;
+    }
+
     m_existingFileLabel->setHidden(rc);
     m_finishLabel->setVisible(rc);
   }
