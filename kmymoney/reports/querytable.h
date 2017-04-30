@@ -69,11 +69,14 @@ protected:
   void constructAccountTable();
   void constructTotalRows();
   void constructTransactionTable();
+  void sumInvestmentValues(const ReportAccount &account, QList<CashFlowList> &cfList, QList<MyMoneyMoney> &shList) const;
+  void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
   void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
   MyMoneyMoney helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
   MyMoneyMoney helperIRR(const CashFlowList& all) const;
-  void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
   void constructSplitsTable();
+private:
+  enum InvestmentValue {Buys = 0, Sells, BuysOfSells, SellsOfBuys, LongTermBuysOfSells, LongTermSellsOfBuys, BuysOfOwned, ReinvestIncome, CashIncome, End};
 
 };
 

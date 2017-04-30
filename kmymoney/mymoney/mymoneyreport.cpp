@@ -52,6 +52,7 @@ const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,cre
 MyMoneyReport::MyMoneyReport() :
     m_name("Unconfigured Pivot Table Report"),
     m_detailLevel(eDetailNone),
+    m_investmentSum(eSumSold),
     m_hideTransactions(false),
     m_convertCurrency(true),
     m_favorite(false),
@@ -111,6 +112,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_name(_name),
     m_comment(_comment),
     m_detailLevel(_ss),
+    m_investmentSum(_ct & eQCcapitalgain ? eSumSold : eSumPeriod),
     m_hideTransactions(false),
     m_convertCurrency(true),
     m_favorite(false),
@@ -392,6 +394,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
     e.setAttribute("rowtype", kRowTypeText[m_rowType]);
     e.setAttribute("showrowtotals", m_showRowTotals);
+    e.setAttribute("showcolumntotals", m_showColumnTotals);
     e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
 
     e.setAttribute("includesmovingaverage", m_includeMovingAverage);
@@ -442,13 +445,20 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     e.setAttribute("investments", m_investments);
     e.setAttribute("loans", m_loans);
     e.setAttribute("hidetransactions", m_hideTransactions);
+    e.setAttribute("showcolumntotals", m_showColumnTotals);
     e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
+
+    // write performance tab
+    if (m_queryColumns & eQCperformance || m_queryColumns & eQCcapitalgain)
+      e.setAttribute("investmentsum", m_investmentSum);
 
     // write capital gains tab
     if (m_queryColumns & eQCcapitalgain) {
-      e.setAttribute("settlementperiod", m_settlementPeriod);
-      e.setAttribute("showSTLTCapitalGains", m_showSTLTCapitalGains);
-      e.setAttribute("tseparator", m_tseparator.toString(Qt::ISODate));
+      if (m_investmentSum == MyMoneyReport::eSumSold) {
+        e.setAttribute("settlementperiod", m_settlementPeriod);
+        e.setAttribute("showSTLTCapitalGains", m_showSTLTCapitalGains);
+        e.setAttribute("tseparator", m_tseparator.toString(Qt::ISODate));
+      }
     }
   } else if (m_reportType == eInfoTable)
     e.setAttribute("showrowtotals", m_showRowTotals);
@@ -770,13 +780,21 @@ bool MyMoneyReport::read(const QDomElement& e)
     m_investments = e.attribute("investments", "0").toUInt();
     m_loans = e.attribute("loans", "0").toUInt();
     m_hideTransactions = e.attribute("hidetransactions", "0").toUInt();
+    m_showColumnTotals = e.attribute("showcolumntotals", "1").toUInt();
     m_detailLevel = kDetailLevelText.indexOf(e.attribute("detail", "none")) == eDetailAll ? eDetailAll : eDetailNone;
+
+    // read performance or capital gains tab
+    if (m_queryColumns & eQCperformance)
+      m_investmentSum = static_cast<EInvestmentSum>(e.attribute("investmentsum", QString().setNum(MyMoneyReport::eSumPeriod)).toInt());
 
     // read capital gains tab
     if (m_queryColumns & eQCcapitalgain) {
-      m_showSTLTCapitalGains = e.attribute("showSTLTCapitalGains", "0").toUInt();
-      m_settlementPeriod = e.attribute("settlementperiod", "3").toUInt();
-      m_tseparator = QDate::fromString(e.attribute("tseparator", QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
+      m_investmentSum = static_cast<EInvestmentSum>(e.attribute("investmentsum", QString().setNum(MyMoneyReport::eSumSold)).toInt());
+      if (m_investmentSum == MyMoneyReport::eSumSold) {
+        m_showSTLTCapitalGains = e.attribute("showSTLTCapitalGains", "0").toUInt();
+        m_settlementPeriod = e.attribute("settlementperiod", "3").toUInt();
+        m_tseparator = QDate::fromString(e.attribute("tseparator", QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
+      }
     }
   } else if (m_reportType == eInfoTable) {
     if (e.hasAttribute("showrowtotals"))

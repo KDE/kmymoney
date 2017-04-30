@@ -375,15 +375,41 @@ void QueryTable::init()
   if (qc & MyMoneyReport::eQCprice)
     m_columns += ",price";
   if (qc & MyMoneyReport::eQCperformance) {
-    m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment,endingbal";
-    m_subtotal = "startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment,endingbal";
+    switch (m_config.investmentSum()) {
+    case MyMoneyReport::eSumOwnedAndSold:
+      m_columns += ",buys,sells,reinvestincome,cashincome,endingbal,return,returninvestment";
+      m_subtotal = "buys,sells,reinvestincome,cashincome,endingbal,return,returninvestment";
+      break;
+    case MyMoneyReport::eSumOwned:
+      m_columns += ",buys,reinvestincome,marketvalue,return,returninvestment";
+      m_subtotal = "buys,reinvestincome,marketvalue,return,returninvestment";
+      break;
+    case MyMoneyReport::eSumSold:
+      m_columns += ",buys,sells,cashincome,return,returninvestment";
+      m_subtotal = "buys,sells,cashincome,return,returninvestment";
+      break;
+    case MyMoneyReport::eSumPeriod:
+    default:
+      m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,endingbal,return,returninvestment";
+      m_subtotal = "startingbal,buys,sells,reinvestincome,cashincome,endingbal,return,returninvestment";
+      break;
+    }
   }
   if (qc & MyMoneyReport::eQCcapitalgain) {
-    m_columns += ",buys,sells,capitalgain";
-    m_subtotal = "buys,sells,capitalgain";
-    if (m_config.isShowingSTLTCapitalGains()) {
-      m_columns += ",buysST,sellsST,capitalgainST,buysLT,sellsLT,capitalgainLT";
-      m_subtotal += ",buysST,sellsST,capitalgainST,buysLT,sellsLT,capitalgainLT";
+    switch (m_config.investmentSum()) {
+    case MyMoneyReport::eSumOwned:
+      m_columns += ",shares,buyprice,lastprice,buys,marketvalue,percentagegain,capitalgain";
+      m_subtotal = "buys,marketvalue,percentagegain,capitalgain";
+      break;
+    case MyMoneyReport::eSumSold:
+    default:
+      m_columns += ",buys,sells,capitalgain";
+      m_subtotal = "buys,sells,capitalgain";
+      if (m_config.isShowingSTLTCapitalGains()) {
+        m_columns += ",buysST,sellsST,capitalgainST,buysLT,sellsLT,capitalgainLT";
+        m_subtotal += ",buysST,sellsST,capitalgainST,buysLT,sellsLT,capitalgainLT";
+      }
+      break;
     }
   }
   if (qc & MyMoneyReport::eQCloan) {
@@ -485,9 +511,11 @@ void QueryTable::constructTotalRows()
             // custom total values calculations
             foreach (auto subtotal, subtotals) {
               if (subtotal == "returninvestment")
-                totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value("buys"),        (*currencyGrp).at(i + 1).value("sells"),
-                                                (*currencyGrp).at(i + 1).value("startingbal"), (*currencyGrp).at(i + 1).value("endingbal"),
+                totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value("buys") - (*currencyGrp).at(i + 1).value("reinvestincome"), (*currencyGrp).at(i + 1).value("sells"),
+                                                (*currencyGrp).at(i + 1).value("startingbal"), (*currencyGrp).at(i + 1).value("endingbal") + (*currencyGrp).at(i + 1).value("marketvalue"),
                                                 (*currencyGrp).at(i + 1).value("cashincome")).toString();
+              else if (subtotal == "percentagegain")
+                totalsRow[subtotal] = (((*currencyGrp).at(i + 1).value("buys") + (*currencyGrp).at(i + 1).value("marketvalue")) / (*currencyGrp).at(i + 1).value("buys").abs()).toString();
               else if (subtotal == "price")
                 totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(i + 1).value("price") / (*currencyGrp).at(i + 1).value("rows_count")).toString();
             }
@@ -543,9 +571,11 @@ void QueryTable::constructTotalRows()
 
         foreach (auto subtotal, subtotals) {
           if (subtotal == "returninvestment")
-            totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value("buys"),        (*currencyGrp).at(0).value("sells"),
-                                            (*currencyGrp).at(0).value("startingbal"), (*currencyGrp).at(0).value("endingbal"),
+            totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value("buys") - (*currencyGrp).at(0).value("reinvestincome"), (*currencyGrp).at(0).value("sells"),
+                                            (*currencyGrp).at(0).value("startingbal"), (*currencyGrp).at(0).value("endingbal") + (*currencyGrp).at(0).value("marketvalue"),
                                             (*currencyGrp).at(0).value("cashincome")).toString();
+          else if (subtotal == "percentagegain")
+            totalsRow[subtotal] = (((*currencyGrp).at(0).value("buys") + (*currencyGrp).at(0).value("marketvalue")) / (*currencyGrp).at(0).value("buys").abs()).toString();
           else if (subtotal == "price")
             totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(0).value("price") / (*currencyGrp).at(0).value("rows_count")).toString();
         }
@@ -1189,173 +1219,14 @@ MyMoneyMoney QueryTable::helperIRR(const CashFlowList &all) const
   return annualReturn;
 }
 
-void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const
+void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlowList>& cfList, QList<MyMoneyMoney>& shList) const
 {
+  for (int i = InvestmentValue::Buys; i < InvestmentValue::End; ++i)
+    cfList.append(CashFlowList());
+  for (int i = InvestmentValue::Buys; i <= InvestmentValue::BuysOfOwned; ++i)
+    shList.append(MyMoneyMoney());
+
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneySecurity security;
-
-  //get fraction depending on type of account
-  int fraction = account.currency().smallestAccountFraction();
-
-  //
-  // Calculate performance
-  //
-
-  // The following columns are created:
-  //    Account, Value on <Opening>, Buys, Sells, Income, Value on <Closing>, Return%
-
-  MyMoneyReport report = m_config;
-  QDate startingDate;
-  QDate endingDate;
-  MyMoneyMoney price;
-  report.validDateRange(startingDate, endingDate);
-  startingDate = startingDate.addDays(-1);
-
-  //calculate starting balance
-  if (m_config.isConvertCurrency()) {
-    price = account.deepCurrencyPrice(startingDate) * account.baseCurrencyPrice(startingDate);
-  } else {
-    price = account.deepCurrencyPrice(startingDate);
-  }
-
-  //work around if there is no price for the starting balance
-  if (!(file->balance(account.id(), startingDate)).isZero()
-      && account.deepCurrencyPrice(startingDate) == MyMoneyMoney::ONE) {
-    MyMoneyTransactionFilter filter;
-    //get the transactions for the time before the report
-    filter.setDateFilter(QDate(), startingDate);
-    filter.addAccount(account.id());
-    filter.setReportAllSplits(true);
-
-    QList<MyMoneyTransaction> startTransactions = file->transactionList(filter);
-    if (startTransactions.size() > 0) {
-      //get the last transaction
-      MyMoneyTransaction startTrans = startTransactions.back();
-      MyMoneySplit s = startTrans.splitByAccount(account.id());
-      //get the price from the split of that account
-      price = s.price();
-      if (m_config.isConvertCurrency())
-        price = price * account.baseCurrencyPrice(startingDate);
-    }
-  }
-  if (m_config.isConvertCurrency()) {
-    price = account.deepCurrencyPrice(startingDate) * account.baseCurrencyPrice(startingDate);
-  } else {
-    price = account.deepCurrencyPrice(startingDate);
-  }
-
-  MyMoneyMoney startingBal = file->balance(account.id(), startingDate) * price;
-
-  //convert to lowest fraction
-  startingBal = startingBal.convert(fraction);
-
-  //calculate ending balance
-  if (m_config.isConvertCurrency()) {
-    price = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
-  } else {
-    price = account.deepCurrencyPrice(endingDate);
-  }
-  MyMoneyMoney endingBal = file->balance((account).id(), endingDate) * price;
-
-  //convert to lowest fraction
-  endingBal = endingBal.convert(fraction);
-
-  CashFlowList buys;
-  CashFlowList sells;
-  CashFlowList reinvestincome;
-  CashFlowList cashincome;
-
-  report.setReportAllSplits(false);
-  report.setConsiderCategory(true);
-  report.clearAccountFilter();
-  report.addAccount(account.id());
-  QList<MyMoneyTransaction> transactions = file->transactionList(report);
-  QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
-  while (it_transaction != transactions.constEnd()) {
-    // s is the split for the stock account
-    MyMoneySplit s = (*it_transaction).splitByAccount(account.id());
-
-    MyMoneySplit assetAccountSplit;
-    QList<MyMoneySplit> feeSplits;
-    QList<MyMoneySplit> interestSplits;
-    MyMoneySecurity currency;
-    MyMoneySplit::investTransactionTypeE transactionType;
-    KMyMoneyUtils::dissectTransaction((*it_transaction), s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-
-    //get price for the day of the transaction if we have to calculate base currency
-    //we are using the value of the split which is in deep currency
-    if (m_config.isConvertCurrency()) {
-      price = account.baseCurrencyPrice((*it_transaction).postDate()); //we only need base currency because the value is in deep currency
-    } else {
-      price = MyMoneyMoney::ONE;
-    }
-
-    MyMoneyMoney value = assetAccountSplit.value() * price;
-
-    if (transactionType == MyMoneySplit::BuyShares)
-      buys += CashFlowListItem((*it_transaction).postDate(), value);
-    else if (transactionType == MyMoneySplit::SellShares)
-      sells += CashFlowListItem((*it_transaction).postDate(), value);
-    else if (transactionType == MyMoneySplit::ReinvestDividend) {
-      value = interestSplits.first().value() * price;
-      reinvestincome += CashFlowListItem((*it_transaction).postDate(), -value);
-    } else if (transactionType == MyMoneySplit::Dividend || transactionType == MyMoneySplit::Yield)
-      cashincome += CashFlowListItem((*it_transaction).postDate(), value);
-    ++it_transaction;
-  }
-  // Note that reinvested dividends are not included , because these do not
-  // represent a cash flow event.
-  all += buys;
-  all += sells;
-  all += cashincome;
-  all += CashFlowListItem(startingDate, -startingBal);
-  all += CashFlowListItem(endingDate, endingBal);
-
-  MyMoneyMoney buysTotal = buys.total();
-  MyMoneyMoney sellsTotal = sells.total();
-  MyMoneyMoney cashIncomeTotal = cashincome.total();
-  MyMoneyMoney reinvestIncomeTotal = reinvestincome.total();
-
-  MyMoneyMoney returnInvestment = helperROI(buysTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
-  MyMoneyMoney annualReturn = helperIRR(all);
-
-  // check if there are any meaningfull values before adding them to results
-  if (!(buysTotal.isZero() && sellsTotal.isZero() &&
-        cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero() &&
-        startingBal.isZero() && endingBal.isZero())) {
-    result["return"] = annualReturn.toString();
-    result["returninvestment"] = returnInvestment.toString();
-    result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
-    result["buys"] = buysTotal.toString();
-    result["sells"] = sellsTotal.toString();
-    result["cashincome"] = cashIncomeTotal.toString();
-    result["reinvestincome"] = reinvestIncomeTotal.toString();
-    result["startingbal"] = startingBal.toString();
-    result["endingbal"] = endingBal.toString();
-  }
-}
-
-void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow& result) const
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneySecurity security;
-  MyMoneyMoney price;
-  MyMoneyMoney sellValue;
-  MyMoneyMoney buyValue;
-  MyMoneyMoney sellShares;
-  MyMoneyMoney buyShares;
-
-  MyMoneyMoney sellLongValue;
-  MyMoneyMoney buyLongValue;
-  MyMoneyMoney sellLongShares;
-  MyMoneyMoney buyLongShares;
-
-  //
-  // Calculate capital gain
-  //
-
-  // The following columns are created:
-  //    Account, Buys, Sells, Capital Gain
 
   MyMoneyReport report = m_config;
   QDate startingDate;
@@ -1366,23 +1237,28 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
   const int settlementPeriod = report.settlementPeriod();
   QDate termSeparator = report.termSeparator().addDays(-settlementPeriod);
   report.validDateRange(startingDate, endingDate);
-  // Saturday and Sunday aren't valid settlement dates
-  if (endingDate.dayOfWeek() == Qt::Saturday)
-    endingDate.addDays(-1);
-  else if (endingDate.dayOfWeek() == Qt::Sunday)
-    endingDate.addDays(-2);
-
-  if (termSeparator.dayOfWeek() == Qt::Saturday)
-    termSeparator.addDays(-1);
-  else if (termSeparator.dayOfWeek() == Qt::Sunday)
-    termSeparator.addDays(-2);
-
-  if (startingDate.daysTo(endingDate) <= settlementPeriod) // no days to check for
-    return;
   newStartingDate = startingDate;
-  newEndingDate = endingDate.addDays(-settlementPeriod);
-  termSeparator = termSeparator.addDays(-settlementPeriod);
-  MyMoneyMoney endingShares = file->balance(account.id(), newEndingDate); // get how many shares there are over zero value
+  newEndingDate = endingDate;
+
+  if (report.queryColumns() & MyMoneyReport::eQCcapitalgain) {
+    // Saturday and Sunday aren't valid settlement dates
+    if (endingDate.dayOfWeek() == Qt::Saturday)
+      endingDate.addDays(-1);
+    else if (endingDate.dayOfWeek() == Qt::Sunday)
+      endingDate.addDays(-2);
+
+    if (termSeparator.dayOfWeek() == Qt::Saturday)
+      termSeparator.addDays(-1);
+    else if (termSeparator.dayOfWeek() == Qt::Sunday)
+      termSeparator.addDays(-2);
+    if (startingDate.daysTo(endingDate) <= settlementPeriod)        // no days to check for
+      return;
+    termSeparator = termSeparator.addDays(-settlementPeriod);
+    newEndingDate = endingDate.addDays(-settlementPeriod);
+  }
+
+  shList[BuysOfOwned] = file->balance(account.id(), newEndingDate); // get how many shares there are at the end of period
+  MyMoneyMoney stashedBuysOfOwned = shList.at(BuysOfOwned);
 
   bool reportedDateRange = true;  // flag marking sell transactions between startingDate and endingDate
   report.setReportAllSplits(false);
@@ -1398,143 +1274,365 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
       MyMoneySplit assetAccountSplit;
       QList<MyMoneySplit> feeSplits;
       QList<MyMoneySplit> interestSplits;
+      MyMoneySecurity security;
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
       KMyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      QDate postDate = (*it_t).postDate();
+      MyMoneyMoney price;
       //get price for the day of the transaction if we have to calculate base currency
       //we are using the value of the split which is in deep currency
       if (m_config.isConvertCurrency())
-        price = account.baseCurrencyPrice((*it_t).postDate()); //we only need base currency because the value is in deep currency
+        price = account.baseCurrencyPrice(postDate); //we only need base currency because the value is in deep currency
       else
         price = MyMoneyMoney::ONE;
       MyMoneyMoney value = assetAccountSplit.value() * price;
       MyMoneyMoney shares = shareSplit.shares();
 
       if (transactionType == MyMoneySplit::BuyShares) {
-        if (endingShares.isZero()) {    // add sold shares
-          if (buyShares + shares > sellShares.abs()) { // add partially sold shares
-            MyMoneyMoney tempVal = (((sellShares.abs() - buyShares)) / shares) * value;
-            buyValue += tempVal;
-            buyShares = sellShares.abs();
-            if (isSTLT && (*it_t).postDate() < termSeparator) {
-              buyLongValue += tempVal;
-              buyLongShares = buyShares;
+        if (reportedDateRange) {
+          cfList[Buys].append(CashFlowListItem(postDate, value));
+          shList[Buys] += shares;
+        }
+
+        if (shList.at(BuysOfOwned).isZero()) {                      // add sold shares
+          if (shList.at(BuysOfSells) + shares > shList.at(Sells).abs()) { // add partially sold shares
+            MyMoneyMoney tempVal = (((shList.at(Sells).abs() - shList.at(BuysOfSells))) / shares) * value;
+            cfList[BuysOfSells].append(CashFlowListItem(postDate, tempVal));
+            shList[BuysOfSells] = shList.at(Sells).abs();
+            if (isSTLT && postDate < termSeparator) {
+              cfList[LongTermBuysOfSells].append(CashFlowListItem(postDate, tempVal));
+              shList[LongTermBuysOfSells] = shList.at(BuysOfSells);
             }
-          } else {                      // add wholly sold shares
-            buyValue += value;
-            buyShares += shares;
-            if (isSTLT && (*it_t).postDate() < termSeparator) {
-              buyLongValue += value;
-              buyLongShares += shares;
+          } else {                                                  // add wholly sold shares
+            cfList[BuysOfSells].append(CashFlowListItem(postDate, value));
+            shList[BuysOfSells] += shares;
+            if (isSTLT && postDate < termSeparator) {
+              cfList[LongTermBuysOfSells].append(CashFlowListItem(postDate, value));
+              shList[LongTermBuysOfSells] += shares;
             }
           }
-        } else if (endingShares >= shares) { // substract not-sold shares
-          endingShares -= shares;
-        } else {                        // substract partially not-sold shares
-          MyMoneyMoney tempVal = ((shares - endingShares) / shares) * value;
-          MyMoneyMoney tempVal2 = (shares - endingShares);
-          buyValue += tempVal;
-          buyShares += tempVal2;
-          if (isSTLT && (*it_t).postDate() < termSeparator) {
-            buyLongValue += tempVal;
-            buyLongShares += tempVal2;
+        } else if (shList.at(BuysOfOwned) >= shares) {              // substract not-sold shares
+          shList[BuysOfOwned] -= shares;
+          cfList[BuysOfOwned].append(CashFlowListItem(postDate, value));
+        } else {                                                    // substract partially not-sold shares
+          MyMoneyMoney tempVal = ((shares - shList.at(BuysOfOwned)) / shares) * value;
+          MyMoneyMoney tempVal2 = (shares - shList.at(BuysOfOwned));
+          cfList[BuysOfSells].append(CashFlowListItem(postDate, tempVal));
+          shList[BuysOfSells] += tempVal2;
+          if (isSTLT && postDate < termSeparator) {
+            cfList[LongTermBuysOfSells].append(CashFlowListItem(postDate, tempVal));
+            shList[LongTermBuysOfSells] += tempVal2;
           }
-          endingShares = MyMoneyMoney();
+          cfList[BuysOfOwned].append(CashFlowListItem(postDate, (shList.at(BuysOfOwned) / shares) * value));
+          shList[BuysOfOwned] = MyMoneyMoney();
         }
       } else if (transactionType == MyMoneySplit::SellShares && reportedDateRange) {
-        sellValue += value;
-        sellShares += shares;
-      } else if (transactionType == MyMoneySplit::SplitShares) { // shares variable is denominator of split ratio here
-        sellShares /= shares;
-        buyShares /= shares;
-        buyLongShares /= shares;
-      } else if (transactionType == MyMoneySplit::AddShares) { // added shares, when sold give 100% capital gain
-        if (endingShares.isZero()) {    // add added shares
-          if (buyShares + shares > sellShares.abs()) { // add partially added shares
-            buyShares = sellShares.abs();
-            if ((*it_t).postDate() < termSeparator)
-              buyLongShares = buyShares;
-          } else {                      // add wholly added shares
-            buyShares += shares;
-            if ((*it_t).postDate() < termSeparator)
-              buyLongShares += shares;
+        cfList[Sells].append(CashFlowListItem(postDate, value));
+        shList[Sells] += shares;
+      } else if (transactionType == MyMoneySplit::SplitShares) {          // shares variable is denominator of split ratio here
+        for (int i = Buys; i <= InvestmentValue::BuysOfOwned; ++i)
+          shList[i] /= shares;
+      } else if (transactionType == MyMoneySplit::AddShares ||            // added shares, when sold give 100% capital gain
+                 transactionType == MyMoneySplit::ReinvestDividend) {
+        if (shList.at(BuysOfOwned).isZero()) {                            // add added/reinvested shares
+          if (shList.at(BuysOfSells) + shares > shList.at(Sells).abs()) { // add partially added/reinvested shares
+            shList[BuysOfSells] = shList.at(Sells).abs();
+            if (postDate < termSeparator)
+              shList[LongTermBuysOfSells] = shList[BuysOfSells];
+          } else {                                                        // add wholly added/reinvested shares
+            shList[BuysOfSells] += shares;
+            if (postDate < termSeparator)
+              shList[LongTermBuysOfSells] += shares;
           }
-        } else if (endingShares >= shares) { // substract not-added shares
-          endingShares -= shares;
-        } else {                        // substract partially not-added shares
-          MyMoneyMoney tempVal = (shares - endingShares);
-          buyShares += tempVal;
-          if ((*it_t).postDate() < termSeparator)
-            buyLongShares += tempVal;
-          endingShares = MyMoneyMoney();
+        } else if (shList.at(BuysOfOwned) >= shares) {                    // substract not-added/not-reinvested shares
+          shList[BuysOfOwned] -= shares;
+          cfList[BuysOfOwned].append(CashFlowListItem(postDate, value));
+        } else {                                                          // substract partially not-added/not-reinvested shares
+          MyMoneyMoney tempVal = (shares - shList.at(BuysOfOwned));
+          shList[BuysOfSells] += tempVal;
+          if (postDate < termSeparator)
+            shList[LongTermBuysOfSells] += tempVal;
+
+          cfList[BuysOfOwned].append(CashFlowListItem(postDate, (shList.at(BuysOfOwned) / shares) * value));
+          shList[BuysOfOwned] = MyMoneyMoney();
         }
-      } else if (transactionType == MyMoneySplit::RemoveShares && reportedDateRange) { // removed shares give no value in return so no capital gain on them
-        sellShares += shares;
-      }
+        qDebug() << "szeres: " << shares.toDouble() << "prais: " << price.toDouble() << "value:" << value.toDouble();
+        if (transactionType == MyMoneySplit::ReinvestDividend) {
+          value = MyMoneyMoney();
+          foreach (const auto split, interestSplits)
+            value += split.value();
+          value *= price;
+          cfList[ReinvestIncome].append(CashFlowListItem(postDate, -value));
+        }
+      } else if (transactionType == MyMoneySplit::RemoveShares && reportedDateRange) // removed shares give no value in return so no capital gain on them
+        shList[Sells] += shares;
+      else if (transactionType == MyMoneySplit::Dividend || transactionType == MyMoneySplit::Yield)
+        cfList[CashIncome].append(CashFlowListItem(postDate, value));
+
     }
     reportedDateRange = false;
     newEndingDate = newStartingDate;
     newStartingDate = newStartingDate.addYears(-1);
     report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
-  } while (!sellShares.isZero() && account.openingDate() <= newEndingDate && sellShares.abs() > buyShares.abs());
+
+  } while (
+           (
+             (report.investmentSum() == MyMoneyReport::eSumOwned && !shList[BuysOfOwned].isZero()) ||
+             (report.investmentSum() == MyMoneyReport::eSumSold && !shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs()) ||
+             (report.investmentSum() == MyMoneyReport::eSumOwnedAndSold && (!shList[BuysOfOwned].isZero() || (!shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs())))
+           ) && account.openingDate() <= newEndingDate
+          );
 
   // we've got buy value and no sell value of long-term shares, so get them
-  if (isSTLT && !buyLongShares.isZero()) {
+  if (isSTLT && !shList[LongTermBuysOfSells].isZero()) {
     newStartingDate = startingDate;
     newEndingDate = endingDate.addDays(-settlementPeriod);
     report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
     QList<MyMoneyTransaction> transactions = file->transactionList(report);
-    endingShares = buyLongShares;
+    shList[BuysOfOwned] = shList[LongTermBuysOfSells];
 
     foreach (const auto transaction, transactions) {
       MyMoneySplit shareSplit = transaction.splitByAccount(account.id());
       MyMoneySplit assetAccountSplit;
       QList<MyMoneySplit> feeSplits;
       QList<MyMoneySplit> interestSplits;
+      MyMoneySecurity security;
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
       KMyMoneyUtils::dissectTransaction(transaction, shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      QDate postDate = transaction.postDate();
+      MyMoneyMoney price;
       if (m_config.isConvertCurrency())
-        price = account.baseCurrencyPrice(transaction.postDate()); //we only need base currency because the value is in deep currency
+        price = account.baseCurrencyPrice(postDate); //we only need base currency because the value is in deep currency
       else
         price = MyMoneyMoney::ONE;
       MyMoneyMoney value = assetAccountSplit.value() * price;
       MyMoneyMoney shares = shareSplit.shares();
+
       if (transactionType == MyMoneySplit::SellShares) {
-        if ((sellLongShares + shares).abs() >= buyLongShares) { // add partially sold long-term shares
-          sellLongValue += (sellLongShares.abs() - buyLongShares) / shares * value;
-          sellLongShares = buyLongShares;
+        if ((shList.at(LongTermSellsOfBuys) + shares).abs() >= shList.at(LongTermBuysOfSells)) { // add partially sold long-term shares
+          cfList[LongTermSellsOfBuys].append(CashFlowListItem(postDate, (shList.at(LongTermSellsOfBuys).abs() - shList.at(LongTermBuysOfSells)) / shares * value));
+          shList[LongTermSellsOfBuys] = shList.at(LongTermBuysOfSells);
           break;
         } else {                      // add wholly sold long-term shares
-          sellLongValue += value;
-          sellLongShares += shares;
+          cfList[LongTermSellsOfBuys].append(CashFlowListItem(postDate, value));
+          shList[LongTermSellsOfBuys] += shares;
         }
       } else if (transactionType == MyMoneySplit::RemoveShares) {
-        if ((sellLongShares + shares).abs() >= buyLongShares) {
-          sellLongShares = buyLongShares;
+        if ((shList.at(LongTermSellsOfBuys) + shares).abs() >= shList.at(LongTermBuysOfSells)) {
+          shList[LongTermSellsOfBuys] = shList.at(LongTermBuysOfSells);
           break;
         } else
-          sellLongShares += shares;
+          shList[LongTermSellsOfBuys] += shares;
       }
     }
   }
 
-  // check if there are any meaningfull values before adding them to results
-  if (!(buyValue.isZero() && sellValue.isZero())) {
-    result["equitytype"] = KMyMoneyUtils::securityTypeToString(security.securityType());
-    result["buys"] = buyValue.toString();
-    result["sells"] = sellValue.toString();
-    result["capitalgain"] = (buyValue + sellValue).toString();
-    if (isSTLT) {
-      result["buysLT"] = buyLongValue.toString();
-      result["sellsLT"] = sellLongValue.toString();
-      result["capitalgainLT"] = (buyLongValue + sellLongValue).toString();
-      result["buysST"] = (buyValue - buyLongValue).toString();
-      result["sellsST"] = (sellValue - sellLongValue).toString();
-      result["capitalgainST"] = ((buyValue - buyLongValue) + (sellValue - sellLongValue)).toString();
-    }
-  }
+  shList[BuysOfOwned] = stashedBuysOfOwned;
   report.setDateFilter(startingDate, endingDate); // reset data filter for next security
+  return;
+}
+
+void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const
+{
+  MyMoneyReport report = m_config;
+  QDate startingDate;
+  QDate endingDate;
+  report.validDateRange(startingDate, endingDate);
+  startingDate = startingDate.addDays(-1);
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+  //get fraction depending on type of account
+  int fraction = account.currency().smallestAccountFraction();
+  MyMoneyMoney price;
+  if (m_config.isConvertCurrency())
+    price = account.deepCurrencyPrice(startingDate) * account.baseCurrencyPrice(startingDate);
+  else
+    price = account.deepCurrencyPrice(startingDate);
+
+  MyMoneyMoney startingBal = file->balance(account.id(), startingDate) * price;
+
+  //convert to lowest fraction
+  startingBal = startingBal.convert(fraction);
+
+  //calculate ending balance
+  if (m_config.isConvertCurrency())
+    price = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
+  else
+    price = account.deepCurrencyPrice(endingDate);
+
+  MyMoneyMoney endingBal = file->balance((account).id(), endingDate) * price;
+
+  //convert to lowest fraction
+  endingBal = endingBal.convert(fraction);
+
+  QList<CashFlowList> cfList;
+  QList<MyMoneyMoney> shList;
+  sumInvestmentValues(account, cfList, shList);
+
+  MyMoneyMoney buysTotal;
+  MyMoneyMoney sellsTotal;
+  MyMoneyMoney cashIncomeTotal;
+  MyMoneyMoney reinvestIncomeTotal;
+
+  switch (m_config.investmentSum()) {
+  case MyMoneyReport::eSumOwnedAndSold:
+    buysTotal = cfList.at(BuysOfSells).total() + cfList.at(BuysOfOwned).total();
+    sellsTotal = cfList.at(Sells).total();
+    cashIncomeTotal = cfList.at(CashIncome).total();
+    reinvestIncomeTotal = cfList.at(ReinvestIncome).total();
+    startingBal = MyMoneyMoney();
+    if (buysTotal.isZero() && sellsTotal.isZero() &&
+        cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero())
+      return;
+
+    all.append(cfList.at(BuysOfSells));
+    all.append(cfList.at(BuysOfOwned));
+    all.append(cfList.at(Sells));
+    all.append(cfList.at(CashIncome));
+
+    result[QLatin1String("sells")] = sellsTotal.toString();
+    result[QLatin1String("cashincome")] = cashIncomeTotal.toString();
+    result[QLatin1String("reinvestincome")] = reinvestIncomeTotal.toString();
+    result[QLatin1String("endingbal")] = endingBal.toString();
+    break;
+  case MyMoneyReport::eSumOwned:
+    buysTotal = cfList.at(BuysOfOwned).total();
+    startingBal = MyMoneyMoney();
+    if (buysTotal.isZero() && endingBal.isZero())
+      return;
+    all.append(cfList.at(BuysOfOwned));
+    all.append(CashFlowListItem(endingDate, endingBal));
+
+    result[QLatin1String("reinvestincome")] = reinvestIncomeTotal.toString();
+    result[QLatin1String("marketvalue")] = endingBal.toString();
+    break;
+  case MyMoneyReport::eSumSold:
+    buysTotal = cfList.at(BuysOfSells).total();
+    sellsTotal = cfList.at(Sells).total();
+    cashIncomeTotal = cfList.at(CashIncome).total();
+    startingBal = endingBal = MyMoneyMoney();
+    // check if there are any meaningfull values before adding them to results
+    if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero())
+      return;
+    all.append(cfList.at(BuysOfSells));
+    all.append(cfList.at(Sells));
+    all.append(cfList.at(CashIncome));
+
+    result[QLatin1String("sells")] = sellsTotal.toString();
+    result[QLatin1String("cashincome")] = cashIncomeTotal.toString();
+    break;
+  case MyMoneyReport::eSumPeriod:
+  default:
+    buysTotal = cfList.at(Buys).total();
+    sellsTotal = cfList.at(Sells).total();
+    cashIncomeTotal = cfList.at(CashIncome).total();
+    reinvestIncomeTotal = cfList.at(ReinvestIncome).total();
+    if (buysTotal.isZero() && sellsTotal.isZero() &&
+        cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero() &&
+        startingBal.isZero() && endingBal.isZero())
+      return;
+
+    all.append(cfList.at(Buys));
+    all.append(cfList.at(Sells));
+    all.append(cfList.at(CashIncome));
+    all.append(CashFlowListItem(startingDate, -startingBal));
+    all.append(CashFlowListItem(endingDate, endingBal));
+
+    result[QLatin1String("sells")] = sellsTotal.toString();
+    result[QLatin1String("cashincome")] = cashIncomeTotal.toString();
+    result[QLatin1String("reinvestincome")] = reinvestIncomeTotal.toString();
+    result[QLatin1String("startingbal")] = startingBal.toString();
+    result[QLatin1String("endingbal")] = endingBal.toString();
+    break;
+  }
+
+  MyMoneyMoney returnInvestment = helperROI(buysTotal - reinvestIncomeTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
+  MyMoneyMoney annualReturn = helperIRR(all);
+
+  result[QLatin1String("buys")] = buysTotal.toString();
+  result[QLatin1String("return")] = annualReturn.toString();
+  result[QLatin1String("returninvestment")] = returnInvestment.toString();
+  result[QLatin1String("equitytype")] = KMyMoneyUtils::securityTypeToString(file->security(account.currencyId()).securityType());
+}
+
+void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow& result) const
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QList<CashFlowList> cfList;
+  QList<MyMoneyMoney> shList;
+  sumInvestmentValues(account, cfList, shList);
+
+  MyMoneyMoney buysTotal = cfList.at(BuysOfSells).total();
+  MyMoneyMoney sellsTotal = cfList.at(Sells).total();
+  MyMoneyMoney longTermBuysOfSellsTotal = cfList.at(LongTermBuysOfSells).total();
+  MyMoneyMoney longTermSellsOfBuys = cfList.at(LongTermSellsOfBuys).total();
+
+  switch (m_config.investmentSum()) {
+  case MyMoneyReport::eSumOwned:
+  {
+    if (shList.at(BuysOfOwned).isZero())
+      return;
+
+    MyMoneyReport report = m_config;
+    QDate startingDate;
+    QDate endingDate;
+    report.validDateRange(startingDate, endingDate);
+
+    //get fraction depending on type of account
+    int fraction = account.currency().smallestAccountFraction();
+    MyMoneyMoney price;
+
+    //calculate ending balance
+    if (m_config.isConvertCurrency())
+      price = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
+    else
+      price = account.deepCurrencyPrice(endingDate);
+
+    MyMoneyMoney endingBal = shList.at(BuysOfOwned) * price;
+
+    //convert to lowest fraction
+    endingBal = endingBal.convert(fraction);
+
+    buysTotal = cfList.at(BuysOfOwned).total() - cfList.at(ReinvestIncome).total();
+
+    int pricePrecision = file->security(account.currencyId()).pricePrecision();
+    result[QLatin1String("buys")] = buysTotal.toString();
+    result[QLatin1String("shares")] = shList.at(BuysOfOwned).toString();
+    result[QLatin1String("buyprice")] = (buysTotal.abs() / shList.at(BuysOfOwned)).convertPrecision(pricePrecision).toString();
+    result[QLatin1String("lastprice")] = price.toString();
+    result[QLatin1String("marketvalue")] = endingBal.toString();
+    result[QLatin1String("capitalgain")] = (buysTotal + endingBal).toString();
+    result[QLatin1String("percentagegain")] = ((buysTotal + endingBal)/buysTotal.abs()).toString();
+    break;
+  }
+  case MyMoneyReport::eSumSold:
+  default:
+    buysTotal = cfList.at(BuysOfSells).total() - cfList.at(ReinvestIncome).total();
+    sellsTotal = cfList.at(Sells).total();
+    longTermBuysOfSellsTotal = cfList.at(LongTermBuysOfSells).total();
+    longTermSellsOfBuys = cfList.at(LongTermSellsOfBuys).total();
+    // check if there are any meaningfull values before adding them to results
+    if (buysTotal.isZero() && sellsTotal.isZero() &&
+        longTermBuysOfSellsTotal.isZero() && longTermSellsOfBuys.isZero())
+      return;
+
+    result[QLatin1String("buys")] = buysTotal.toString();
+    result[QLatin1String("sells")] = sellsTotal.toString();
+    result[QLatin1String("capitalgain")] = (buysTotal + sellsTotal).toString();
+    if (m_config.isShowingSTLTCapitalGains()) {
+      result[QLatin1String("buysLT")] = longTermBuysOfSellsTotal.toString();
+      result[QLatin1String("sellsLT")] = longTermSellsOfBuys.toString();
+      result[QLatin1String("capitalgainLT")] = (longTermBuysOfSellsTotal + longTermSellsOfBuys).toString();
+      result[QLatin1String("buysST")] = (buysTotal - longTermBuysOfSellsTotal).toString();
+      result[QLatin1String("sellsST")] = (sellsTotal - longTermSellsOfBuys).toString();
+      result[QLatin1String("capitalgainST")] = ((buysTotal - longTermBuysOfSellsTotal) + (sellsTotal - longTermSellsOfBuys)).toString();
+    }
+    break;
+  }
+
+  result[QLatin1String("equitytype")] = KMyMoneyUtils::securityTypeToString(file->security(account.currencyId()).securityType());
 }
 
 void QueryTable::constructAccountTable()

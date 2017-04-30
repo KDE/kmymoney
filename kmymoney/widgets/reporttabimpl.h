@@ -33,6 +33,7 @@ class ReportTabRowColQuery;
 class ReportTabChart;
 class ReportTabRange;
 class ReportTabCapitalGain;
+class ReportTabPerformance;
 }
 
 class ReportTabGeneral : public QWidget
@@ -96,10 +97,21 @@ private slots:
 
 class ReportTabCapitalGain : public QWidget
 {
+  Q_OBJECT
 public:
   ReportTabCapitalGain(QWidget *parent);
   virtual ~ReportTabCapitalGain();
   Ui::ReportTabCapitalGain* ui;
+private slots:
+  void slotInvestmentSumChanged(int index);
+};
+
+class ReportTabPerformance : public QWidget
+{
+public:
+  ReportTabPerformance(QWidget *parent);
+  virtual ~ReportTabPerformance();
+  Ui::ReportTabPerformance* ui;
 };
 
 class MyDoubleValidator : public QDoubleValidator

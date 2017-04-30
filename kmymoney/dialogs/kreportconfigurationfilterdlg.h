@@ -69,6 +69,7 @@ protected:
   QPointer<ReportTabChart>       m_tabChart;
   QPointer<ReportTabRange>       m_tabRange;
   QPointer<ReportTabCapitalGain> m_tabCapitalGain;
+  QPointer<ReportTabPerformance> m_tabPerformance;
 
   MyMoneyReport m_initialState;
   MyMoneyReport m_currentState;

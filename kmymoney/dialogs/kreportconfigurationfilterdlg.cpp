@@ -68,6 +68,7 @@
 #include <ui_reporttabchart.h>
 #include <ui_reporttabrange.h>
 #include <ui_reporttabcapitalgain.h>
+#include <ui_reporttabperformance.h>
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
@@ -140,6 +141,10 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     if (m_initialState.queryColumns() & MyMoneyReport::eQCcapitalgain) {
       m_tabCapitalGain = new ReportTabCapitalGain(m_ui->m_criteriaTab);
       m_ui->m_criteriaTab->insertTab(1, m_tabCapitalGain, i18n("Report"));
+    }
+    if (m_initialState.queryColumns() & MyMoneyReport::eQCperformance) {
+      m_tabPerformance = new ReportTabPerformance(m_ui->m_criteriaTab);
+      m_ui->m_criteriaTab->insertTab(1, m_tabPerformance, i18n("Report"));
     }
   }
 
@@ -290,7 +295,15 @@ void KReportConfigurationFilterDlg::slotSearch()
     m_currentState.setTermSeparator(m_tabCapitalGain->ui->m_termSeparator->date());
     m_currentState.setShowSTLTCapitalGains(m_tabCapitalGain->ui->m_showSTLTCapitalGains->isChecked());
     m_currentState.setSettlementPeriod(m_tabCapitalGain->ui->m_settlementPeriod->value());
+    m_currentState.setShowingColumnTotals(!m_tabCapitalGain->ui->m_checkHideTotals->isChecked());
+    m_currentState.setInvestmentSum(static_cast<MyMoneyReport::EInvestmentSum>(m_tabCapitalGain->ui->m_investmentSum->currentData().toInt()));
   }
+
+  if (m_tabPerformance) {
+    m_currentState.setShowingColumnTotals(!m_tabPerformance->ui->m_checkHideTotals->isChecked());
+    m_currentState.setInvestmentSum(static_cast<MyMoneyReport::EInvestmentSum>(m_tabPerformance->ui->m_investmentSum->currentData().toInt()));
+  }
+
   done(true);
 }
 
@@ -534,6 +547,25 @@ void KReportConfigurationFilterDlg::slotReset()
     m_tabCapitalGain->ui->m_termSeparator->setDate(m_initialState.termSeparator());
     m_tabCapitalGain->ui->m_showSTLTCapitalGains->setChecked(m_initialState.isShowingSTLTCapitalGains());
     m_tabCapitalGain->ui->m_settlementPeriod->setValue(m_initialState.settlementPeriod());
+    m_tabCapitalGain->ui->m_checkHideTotals->setChecked(!m_initialState.isShowingColumnTotals());
+    m_tabCapitalGain->ui->m_investmentSum->blockSignals(true);
+    m_tabCapitalGain->ui->m_investmentSum->clear();
+    m_tabCapitalGain->ui->m_investmentSum->addItem(i18n("Only owned"), MyMoneyReport::eSumOwned);
+    m_tabCapitalGain->ui->m_investmentSum->addItem(i18n("Only sold"), MyMoneyReport::eSumSold);
+    m_tabCapitalGain->ui->m_investmentSum->blockSignals(false);
+    m_tabCapitalGain->ui->m_investmentSum->setCurrentIndex(m_tabCapitalGain->ui->m_investmentSum->findData(m_initialState.investmentSum()));
+  }
+
+  if (m_tabPerformance) {
+    m_tabPerformance->ui->m_checkHideTotals->setChecked(!m_initialState.isShowingColumnTotals());
+    m_tabPerformance->ui->m_investmentSum->blockSignals(true);
+    m_tabPerformance->ui->m_investmentSum->clear();
+    m_tabPerformance->ui->m_investmentSum->addItem(i18n("From period"), MyMoneyReport::eSumPeriod);
+    m_tabPerformance->ui->m_investmentSum->addItem(i18n("Owned and sold"), MyMoneyReport::eSumOwnedAndSold);
+    m_tabPerformance->ui->m_investmentSum->addItem(i18n("Only owned"), MyMoneyReport::eSumOwned);
+    m_tabPerformance->ui->m_investmentSum->addItem(i18n("Only sold"), MyMoneyReport::eSumSold);
+    m_tabPerformance->ui->m_investmentSum->blockSignals(false);
+    m_tabPerformance->ui->m_investmentSum->setCurrentIndex(m_tabPerformance->ui->m_investmentSum->findData(m_initialState.investmentSum()));
   }
 
   //

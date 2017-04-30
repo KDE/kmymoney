@@ -172,7 +172,7 @@ set(libwidgets_a_UI
   reporttabgeneral.ui
   reporttabrowcolquery.ui reporttabrowcolpivot.ui
   reporttabrange.ui reporttabchart.ui
-  reporttabcapitalgain.ui
+  reporttabcapitalgain.ui reporttabperformance.ui
   daterangedlgdecl.ui
   )
 

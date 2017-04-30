@@ -29,6 +29,7 @@
 #include "ui_reporttabchart.h"
 #include "ui_reporttabrange.h"
 #include "ui_reporttabcapitalgain.h"
+#include "ui_reporttabperformance.h"
 #include <ui_daterangedlgdecl.h>
 
 #include "mymoney/mymoneyreport.h"
@@ -262,6 +263,7 @@ ReportTabCapitalGain::ReportTabCapitalGain(QWidget *parent)
 {
   ui = new Ui::ReportTabCapitalGain;
   ui->setupUi(this);
+  connect(ui->m_investmentSum, SIGNAL(currentIndexChanged(int)), this, SLOT(slotInvestmentSumChanged(int)));
 }
 
 ReportTabCapitalGain::~ReportTabCapitalGain()
@@ -269,3 +271,29 @@ ReportTabCapitalGain::~ReportTabCapitalGain()
   delete ui;
 }
 
+void ReportTabCapitalGain::slotInvestmentSumChanged(int index) {
+  Q_UNUSED(index);
+  if (ui->m_investmentSum->currentData() == MyMoneyReport::eSumOwned) {
+    ui->m_settlementPeriod->setValue(0);
+    ui->m_settlementPeriod->setEnabled(false);
+    ui->m_showSTLTCapitalGains->setChecked(false);
+    ui->m_showSTLTCapitalGains->setEnabled(false);
+    ui->m_termSeparator->setEnabled(false);
+  } else {
+    ui->m_settlementPeriod->setEnabled(true);
+    ui->m_showSTLTCapitalGains->setEnabled(true);
+    ui->m_termSeparator->setEnabled(true);
+  }
+}
+
+ReportTabPerformance::ReportTabPerformance(QWidget *parent)
+    : QWidget(parent)
+{
+  ui = new Ui::ReportTabPerformance;
+  ui->setupUi(this);
+}
+
+ReportTabPerformance::~ReportTabPerformance()
+{
+  delete ui;
+}

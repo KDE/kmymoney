@@ -65,6 +65,7 @@ public:
   enum EQueryColumns { eQCnone = 0x0, eQCbegin = 0x1, eQCnumber = 0x1, eQCpayee = 0x2, eQCcategory = 0x4, eQCtag = 0x8, eQCmemo = 0x10, eQCaccount = 0x20, eQCreconciled = 0x40, eQCaction = 0x80, eQCshares = 0x100, eQCprice = 0x200, eQCperformance = 0x400, eQCloan = 0x800, eQCbalance = 0x1000, eQCcapitalgain = 0x2000, eQCend = 0x4000 };
 
   enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
+  enum EInvestmentSum { eSumPeriod = 0, eSumOwnedAndSold, eSumOwned, eSumSold, eSumBought};
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
   enum dataOptionE { automatic = 0, userDefined, dataOptionCount };
@@ -139,6 +140,9 @@ public:
   }
   EDetailLevel detailLevel() const {
     return m_detailLevel;
+  }
+  EInvestmentSum investmentSum() const {
+    return m_investmentSum;
   }
   bool isHideTransactions() const {
     return m_hideTransactions;
@@ -277,6 +281,9 @@ public:
   }
   void setDetailLevel(EDetailLevel _detail) {
     m_detailLevel = _detail;
+  }
+  void setInvestmentSum(EInvestmentSum _sum) {
+    m_investmentSum = _sum;
   }
   void setHideTransactions(bool _f) {
     m_hideTransactions = _f;
@@ -591,6 +598,10 @@ private:
     * How much detail to show in the accounts
     */
   enum EDetailLevel m_detailLevel;
+  /**
+    * Whether to sum: all, sold, bought or owned value
+    */
+  enum EInvestmentSum m_investmentSum;
   /**
     * Whether to show transactions or just totals.
     */

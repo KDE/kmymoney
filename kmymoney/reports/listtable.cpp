@@ -165,18 +165,20 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["action"] = i18n("Action");
   i18nHeaders["shares"] = i18n("Shares");
   i18nHeaders["price"] = i18n("Price");
-  i18nHeaders["latestprice"] = i18n("Price");
+  i18nHeaders["lastprice"] = i18n("Last Price");
+  i18nHeaders["buyprice"] = i18n("Buy Price");
   i18nHeaders["netinvvalue"] = i18n("Net Value");
-  i18nHeaders["buys"] = i18n("Buys");
-  i18nHeaders["sells"] = i18n("Sells");
-  i18nHeaders["buysST"] = i18n("Short-term Buys");
-  i18nHeaders["sellsST"] = i18n("Short-term Sells");
-  i18nHeaders["buysLT"] = i18n("Long-term Buys");
-  i18nHeaders["sellsLT"] = i18n("Long-term Sells");
+  i18nHeaders["buys"] = i18n("Buy Value");
+  i18nHeaders["sells"] = i18n("Sell Value");
+  i18nHeaders["buysST"] = i18n("Short-term Buy Value");
+  i18nHeaders["sellsST"] = i18n("Short-term Sell Value");
+  i18nHeaders["buysLT"] = i18n("Long-term Buy Value");
+  i18nHeaders["sellsLT"] = i18n("Long-term Sell Value");
   i18nHeaders["reinvestincome"] = i18n("Dividends Reinvested");
   i18nHeaders["cashincome"] = i18n("Dividends Paid Out");
   i18nHeaders["startingbal"] = i18n("Starting Balance");
   i18nHeaders["endingbal"] = i18n("Ending Balance");
+  i18nHeaders["marketvalue"] = i18n("Market Value");
   i18nHeaders["return"] = i18n("Annualized Return");
   i18nHeaders["returninvestment"] = i18n("Return On Investment");
   i18nHeaders["fees"] = i18n("Fees");
@@ -205,18 +207,19 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["finalpayment"] = i18n("Final Payment");
   i18nHeaders["currentbalance"] = i18n("Current Balance");
   i18nHeaders["capitalgain"] = i18n("Capital Gain");
+  i18nHeaders["percentagegain"] = i18n("Percentage Gain");
   i18nHeaders["capitalgainST"] = i18n("Short-term Gain");
   i18nHeaders["capitalgainLT"] = i18n("Long-term Gain");
 
   // the list of columns which represent money, so we can display them correctly
-  QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,buysST,buysLT,sells,sellsST,sellsLT,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal,capitalgain,capitalgainST,capitalgainLT").split(',');
+  QStringList moneyColumns = QString("value,price,lastprice,buyprice,netinvvalue,buys,buysST,buysLT,sells,sellsST,sellsLT,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal,capitalgain,capitalgainST,capitalgainLT,marketvalue").split(',');
 
   // the list of columns which represent shares, which is like money except the
   // transaction currency will not be displayed
   QStringList sharesColumns = QString("shares").split(',');
 
   // the list of columns which represent a percentage, so we can display them correctly
-  QStringList percentColumns = QString("return,returninvestment,interestrate").split(',');
+  QStringList percentColumns = QString("return,returninvestment,interestrate,percentagegain").split(',');
 
   // the list of columns which represent dates, so we can display them correctly
   QStringList dateColumns = QString("postdate,entrydate,nextduedate,openingdate,nextinterestchange").split(',');
@@ -457,7 +460,7 @@ void ListTable::render(QString& result, QString& csv) const
                     .arg((*it_column == "value") ? " class=\"value\"" : "")
                     .arg(i18n("Calculated"), tlinkBegin, tlinkEnd);
           csv += "\"" + i18n("Calculated") + "\",";
-        } else if (*it_column == "price") {
+        } else if ((*it_column).endsWith(QLatin1String("price"))) {
           int pricePrecision = file->security(file->account((*it_row)["accountid"]).currencyId()).pricePrecision();
           result += QString("<td>%3%2&nbsp;%1%4</td>")
                     .arg(MyMoneyMoney(data).formatMoney(QString(), pricePrecision), currencyID, tlinkBegin, tlinkEnd);
