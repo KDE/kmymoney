@@ -197,7 +197,10 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringLi
   if (m_matchingEnabled) {
     type = m_usingMatchKey ? matchKey : matchName;
     if (type == matchKey) {
-      keys = m_matchKey.split(';');
+      if (m_matchKey.contains(QLatin1Char('\n')))
+        keys = m_matchKey.split(QLatin1Char('\n'));
+      else
+        keys = m_matchKey.split(QLatin1Char(';'));  // for compatibility with 4.8.0
     } else if (m_matchKey.compare(QLatin1String("^$")) == 0) {
       type = matchNameExact;
     }
@@ -210,7 +213,7 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QString& 
 {
   QStringList keys;
   payeeMatchType type = matchData(ignorecase, keys);
-  keyString = keys.join(";");
+  keyString = keys.join(QLatin1Char('\n'));
   return type;
 }
 
@@ -225,7 +228,7 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
     if (m_usingMatchKey) {
       QRegExp validKeyRegExp("[^ ]");
       QStringList filteredKeys = keys.filter(validKeyRegExp);
-      m_matchKey = filteredKeys.join(";");
+      m_matchKey = filteredKeys.join(QLatin1Char('\n'));
     } else if(type == matchNameExact) {
       m_matchKey = QLatin1String("^$");
     }
@@ -234,7 +237,10 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 
 void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QString& keys)
 {
-  setMatchData(type, ignorecase, keys.split(';'));
+  if (keys.contains(QLatin1Char('\n')))
+    setMatchData(type, ignorecase, keys.split(QLatin1Char('\n')));
+  else
+    setMatchData(type, ignorecase, keys.split(QLatin1Char(';'))); // for compatibility with 4.8.0
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:
