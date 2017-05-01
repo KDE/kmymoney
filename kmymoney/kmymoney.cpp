@@ -1752,7 +1752,7 @@ void KMyMoneyApp::slotFileSaveAsFilterChanged(const QString& filter)
 {
   if (!d->m_saveEncrypted)
     return;
-  if (filter != "*.kmy") {
+  if (filter.compare(QLatin1String("*.kmy"), Qt::CaseInsensitive) != 0) {
     d->m_saveEncrypted->setCurrentItem(0);
     d->m_saveEncrypted->setEnabled(false);
   } else {
@@ -1789,9 +1789,6 @@ bool KMyMoneyApp::slotFileSaveAs()
   if (d->m_myMoneyView->isDatabase())
     dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage())->fillStorage();
   KMSTATUS(i18n("Saving file with a new filename..."));
-  QString prevDir = ""; // don't prompt file name if not a native file
-  if (d->m_myMoneyView->isNativeFile())
-    prevDir = readLastUsedDir();
 
   // fill the additional key list with the default
   d->m_additionalGpgKeys = KMyMoneyGlobalSettings::gpgRecipientList();
@@ -1841,96 +1838,67 @@ bool KMyMoneyApp::slotFileSaveAs()
     }
   }
 
-  // the following code is copied from KFileDialog::getSaveFileName,
-  // adjust to our local needs (filetypes etc.) and
-  // enhanced to show the d->m_saveEncrypted combo box
-  bool specialDir = !prevDir.isEmpty() && prevDir.at(0) == QLatin1Char(':');
-  // TODO: port KF5
+  QString prevDir; // don't prompt file name if not a native file
+  if (d->m_myMoneyView->isNativeFile())
+    prevDir = readLastUsedDir();
+
   QPointer<QFileDialog> dlg =
-    new QFileDialog(this, i18n("Save As"), specialDir ? prevDir : QString(),
-                    QString("%1|%2\n").arg("*.kmy").arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
-                    QString("%1|%2\n").arg("*.xml").arg(i18nc("XML (Filefilter)", "XML files")) +
-                    QString("%1|%2\n").arg("*.anon.xml").arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
-                    QString("%1|%2\n").arg("*").arg(i18nc("All files (Filefilter)", "All files")));
+    new QFileDialog(this, i18n("Save As"), prevDir,
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.kmy")).arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml")).arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
   dlg->setAcceptMode(QFileDialog::AcceptSave);
   connect(dlg, SIGNAL(filterChanged(QString)), this, SLOT(slotFileSaveAsFilterChanged(QString)));
 
-  // TODO: port KF5
-  //if (!specialDir)
-  //  dlg->setSelection(prevDir);   // may also be a filename
-
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+    QUrl newURL = dlg->selectedUrls().first();
+    if (!newURL.fileName().isEmpty()) {
+      d->consistencyCheck(false);
+      // deleting the dialog will delete the combobox pointed to by d->m_saveEncrypted so get the key name here
+      QString selectedKeyName;
+      if (d->m_saveEncrypted && d->m_saveEncrypted->currentIndex() != 0)
+        selectedKeyName = d->m_saveEncrypted->currentText();
 
-    d->consistencyCheck(false);
+      d->m_saveEncrypted = 0;
 
-    QUrl newURL = dlg->selectedUrls().isEmpty() ? QUrl() : dlg->selectedUrls().first();
-
-    // deleting the dialog will delete the combobox pointed to by d->m_saveEncrypted so get the key name here
-    QString selectedKeyName;
-    if (d->m_saveEncrypted && d->m_saveEncrypted->currentIndex() != 0)
-      selectedKeyName = d->m_saveEncrypted->currentText();
-
-    d->m_saveEncrypted = 0;
-
-    delete dlg;
-
-    if (!newURL.isEmpty()) {
       QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
-      // end of copy
+      // append extension if not present
+      if (!newName.endsWith(QLatin1String(".kmy"), Qt::CaseInsensitive) &&
+          !newName.endsWith(QLatin1String(".xml"), Qt::CaseInsensitive))
+        newName.append(QLatin1String(".kmy"));
+      newURL = QUrl::fromUserInput(newName);
+      d->m_recentFiles->addUrl(newURL);
 
-      // find last . delimiter
-      int nLoc = newName.lastIndexOf('.');
-      if (nLoc != -1) {
-        QString strExt, strTemp;
-        strTemp = newName.left(nLoc + 1);
-        strExt = newName.right(newName.length() - (nLoc + 1));
-        if (!strExt.contains("kmy", Qt::CaseInsensitive) && !strExt.contains("xml", Qt::CaseInsensitive)) {
-
-          strTemp.append("kmy");
-          //append to make complete file name
-          newName = strTemp;
+      setEnabled(false);
+      // If this is the anonymous file export, just save it, don't actually take the
+      // name, or remember it! Don't even try to encrypt it
+      if (newName.endsWith(QLatin1String(".anon.xml"), Qt::CaseInsensitive))
+        rc = d->m_myMoneyView->saveFile(newURL);
+      else {
+        d->m_fileName = newURL;
+        QString encryptionKeys;
+        QRegExp keyExp(".* \\((.*)\\)");
+        if (keyExp.indexIn(selectedKeyName) != -1) {
+          encryptionKeys = keyExp.cap(1);
         }
-      } else {
-        newName.append(".kmy");
-      }
-
-      if (okToWriteFile(QUrl::fromUserInput(newName))) {
-        //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-        //if(p)
-        d->m_recentFiles->addUrl(QUrl::fromUserInput(newName));
-
-        setEnabled(false);
-        // If this is the anonymous file export, just save it, don't actually take the
-        // name, or remember it! Don't even try to encrypt it
-        if (newName.right(9).toLower() == ".anon.xml") {
-          rc = d->m_myMoneyView->saveFile(QUrl::fromUserInput(newName));
-        } else {
-
-          d->m_fileName = QUrl::fromUserInput(newName);
-          QString encryptionKeys;
-          QRegExp keyExp(".* \\((.*)\\)");
-          if (keyExp.indexIn(selectedKeyName) != -1) {
-            encryptionKeys = keyExp.cap(1);
-          }
-          if (!d->m_additionalGpgKeys.isEmpty()) {
-            if (!encryptionKeys.isEmpty())
-              encryptionKeys += ',';
-            encryptionKeys += d->m_additionalGpgKeys.join(",");
-          }
-          rc = d->m_myMoneyView->saveFile(d->m_fileName, encryptionKeys);
-          //write the directory used for this file as the default one for next time.
-          writeLastUsedDir(newName);
-          writeLastUsedFile(newName);
+        if (!d->m_additionalGpgKeys.isEmpty()) {
+          if (!encryptionKeys.isEmpty())
+            encryptionKeys.append(QLatin1Char(','));
+          encryptionKeys.append(d->m_additionalGpgKeys.join(QLatin1Char(',')));
         }
-        d->m_autoSaveTimer->stop();
-        setEnabled(true);
+        rc = d->m_myMoneyView->saveFile(d->m_fileName, encryptionKeys);
+        //write the directory used for this file as the default one for next time.
+        writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
+        writeLastUsedFile(newName);
       }
+      d->m_autoSaveTimer->stop();
+      setEnabled(true);
     }
-  } else {
-    delete dlg;
   }
 
+  delete dlg;
   updateCaption();
   return rc;
 }
