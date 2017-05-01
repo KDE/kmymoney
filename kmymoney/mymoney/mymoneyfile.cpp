@@ -3200,7 +3200,6 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
     return;
   }
   d->addCacheNotification(job.id(), false);
-  d->m_cache.clear(job.id());
   d->m_changeSet += MyMoneyNotification(notifyRemove, job);
   d->m_storage->removeOnlineJob(job);
 }
@@ -3366,6 +3365,7 @@ void MyMoneyFile::preloadCache()
   d->m_cache.preloadSecurity(d->m_storage->securityList() +
                              d->m_storage->currencyList());
   d->m_cache.preloadSchedule(d->m_storage->scheduleList());
+  d->m_cache.preloadOnlineJob(d->m_storage->onlineJobList());
 }
 
 bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
