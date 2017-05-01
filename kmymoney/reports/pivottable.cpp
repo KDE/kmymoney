@@ -972,7 +972,10 @@ void PivotTable::convertToBaseCurrency()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
-  int fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
+  MyMoneyFile* file = MyMoneyFile::instance();
+  int fraction = file->baseCurrency().smallestAccountFraction();
+  QList<ERowType> rowTypeList = m_rowTypeList;
+  rowTypeList.removeOne(eAverage);
 
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while (it_outergroup != m_grid.end()) {
@@ -989,21 +992,25 @@ void PivotTable::convertToBaseCurrency()
 
           //get base price for that date
           MyMoneyMoney conversionfactor = it_row.key().baseCurrencyPrice(valuedate, m_config_f.isSkippingZero());
+          int pricePrecision;
+          if (it_row.key().isInvest())
+            pricePrecision = file->security(it_row.key().currencyId()).pricePrecision();
+          else
+            pricePrecision = MyMoneyMoney::denomToPrec(fraction);
 
-          for (int i = 0; i < m_rowTypeList.size(); ++i) {
-            if (m_rowTypeList[i] != eAverage) {
-              //calculate base value
-              MyMoneyMoney oldval = it_row.value()[ m_rowTypeList[i] ][column];
-              MyMoneyMoney value = (oldval * conversionfactor).reduce();
+          foreach (const auto rowType, rowTypeList) {
+            //calculate base value
+            MyMoneyMoney oldval = it_row.value()[rowType][column];
+            MyMoneyMoney value = (oldval * conversionfactor).reduce();
 
-              //convert to lowest fraction
-              it_row.value()[ m_rowTypeList[i] ][column] = PivotCell(value.convert(fraction));
+            //convert to lowest fraction
+            if (rowType == ePrice)
+              it_row.value()[rowType][column] = PivotCell(value.convertPrecision(pricePrecision));
+            else
+              it_row.value()[rowType][column] = PivotCell(value.convert(fraction));
 
-              DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[m_rowTypeList[i]][column].toDouble())));
-            }
+            DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[rowType][column].toDouble())));
           }
-
-
           ++column;
         }
         ++it_row;
