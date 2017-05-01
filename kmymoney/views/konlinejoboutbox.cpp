@@ -123,15 +123,12 @@ void KOnlineJobOutbox::updateNewCreditTransferButton()
 
 void KOnlineJobOutbox::slotRemoveJob()
 {
+  QAbstractItemModel* model = ui->m_onlineJobView->model();
   QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedRows();
 
-  if (indexes.isEmpty())
-    return;
-
-  QAbstractItemModel* model = ui->m_onlineJobView->model();
-  const int count = indexes.count();
-  for (int i = count - 1; i >= 0; --i) {
-    model->removeRow(indexes.at(i).row());
+  while (!indexes.isEmpty()) {
+    model->removeRow(indexes.at(0).row());
+    indexes = ui->m_onlineJobView->selectionModel()->selectedRows();
   }
 }
 
