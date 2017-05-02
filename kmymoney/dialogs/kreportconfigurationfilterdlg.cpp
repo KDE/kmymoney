@@ -127,9 +127,10 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_ui->m_dateTab->deleteLater();
 
     m_dateRange = m_tabRange->m_dateRange;
-
-    connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
-    connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
+    if (!(m_initialState.isIncludingPrice() || m_initialState.isIncludingAveragePrice())) {
+      connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
+      connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
+    }
     connect(m_tabChart->ui->m_logYaxis, SIGNAL(stateChanged(int)), this, SLOT(slotLogAxisChanged(int)));
   } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
