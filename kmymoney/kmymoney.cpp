@@ -1578,7 +1578,8 @@ void KMyMoneyApp::slotFileOpen()
 {
   KMSTATUS(i18n("Open a file."));
 
-  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), QStringLiteral("kfiledialog:///kmymoney-open"),
+  QString prevDir = readLastUsedDir();
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), prevDir,
                                                  i18n("KMyMoney files (*.kmy *.xml);;All files"));
   dialog->setFileMode(QFileDialog::ExistingFile);
   dialog->setAcceptMode(QFileDialog::AcceptOpen);
