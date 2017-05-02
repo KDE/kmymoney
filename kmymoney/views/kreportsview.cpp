@@ -1104,6 +1104,14 @@ void KReportsView::slotDeleteFromList()
     // If this report does not have an ID, it's a default report and cannot be deleted
     if (! report.id().isEmpty() &&
         KMessageBox::Continue == deleteReportDialog(report.name())) {
+      // check if report's tab is open; start from 1 because 0 is toc tab
+      for (int i = 1; i < m_reportTabWidget->count(); ++i) {
+        KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(i));
+        if (tab->report().id() == report.id()) {
+          slotClose(i); // if open, close it, so no crash when switching to it
+          break;
+        }
+      }
       MyMoneyFileTransaction ft;
       MyMoneyFile::instance()->removeReport(report);
       ft.commit();
