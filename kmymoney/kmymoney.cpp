@@ -2425,7 +2425,7 @@ bool KMyMoneyApp::slotStatementImport(const QString& url)
   return result;
 }
 
-bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s)
+bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s, bool silent)
 {
   bool result = false;
 
@@ -2457,7 +2457,7 @@ bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s)
   // re-enable all standard widgets
   setEnabled(true);
 
-  if (!d->m_collectingStatements)
+  if (!d->m_collectingStatements && !silent)
     KMessageBox::informationList(this, i18n("The statement has been processed with the following results:"), messages, i18n("Statement stats"));
   else if (transactionAdded)
     d->m_statementResults += messages;

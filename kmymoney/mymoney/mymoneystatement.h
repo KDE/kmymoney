@@ -93,6 +93,7 @@ public:
 
   struct Price {
     QDate m_date;
+    QString m_sourceName;
     QString m_strSecurity;
     QString m_strCurrency;
     MyMoneyMoney m_amount;

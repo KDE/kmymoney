@@ -7,6 +7,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimport.json.in ${CMAKE_CURRENT_BIN
 
 set(kmm_csvimport_PART_SRCS
   csvimporterplugin.cpp
+  csvimporter.cpp
   csvwizard.cpp
   bankingwizardpage.cpp
   investmentwizardpage.cpp
@@ -36,7 +37,7 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
   currenciesdlg.ui
 )
 
-# Use static library for tests only
+# Use static library for tests and prices importer only
 add_library(kmm_csvimport MODULE ${kmm_csvimport_PART_SRCS})
 
 target_link_libraries(kmm_csvimport

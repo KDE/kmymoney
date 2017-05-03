@@ -4,6 +4,8 @@
     begin                : Sat Jan 01 2010
     copyright            : (C) 2010 by Allan Anderson
     email                : agander93@gmail.com
+    copyright            : (C) 2016-2017 by Łukasz Wojniłowicz
+    email                : lukasz.wojnilowicz@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,7 +28,12 @@
 
 // Project Includes
 
+#include "csvimporter.h"
 #include "kmymoneyplugin.h"
+#include "csvwizard.h"
+
+class CSVImporter;
+class CSVWizard;
 
 class CsvImporterPlugin : public KMyMoneyPlugin::Plugin
 {
@@ -38,17 +45,18 @@ public:
   ~CsvImporterPlugin();
 
   QAction*          m_action;
-
+  CSVWizard*        m_wizard;
+  CSVImporter*      m_importer;
+private:
+  bool              m_silent;
 public slots:
   bool slotGetStatement(MyMoneyStatement& s);
 
 protected slots:
-  void slotImportFile();
+  void startWizardRun();
 
 protected:
   void createActions();
-  bool importStatement(const MyMoneyStatement& s);
-  void processStatement(const MyMoneyStatement& s);
 };
 
 #endif

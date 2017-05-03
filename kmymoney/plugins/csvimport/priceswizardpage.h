@@ -23,78 +23,41 @@
 
 #include <QtCore/QFile>
 #include <QPointer>
-#include <QWizardPage>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KSharedConfig>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneystatement.h>
+#include <csvimporter.h>
 
 // ----------------------------------------------------------------------------
 
+class PricesProfile;
 class SecurityDlg;
 class CurrenciesDlg;
-class CSVWizard;
-class PricesPage;
 
 namespace Ui
 {
 class PricesPage;
 }
 
-class PricesPage : public QWizardPage
+class PricesPage : public CSVWizardPage
 {
   Q_OBJECT
 
 public:
-  explicit PricesPage(QDialog *parent = 0);
+  explicit PricesPage(CSVWizard *dlg, CSVImporter *imp);
   ~PricesPage();
 
-  Ui::PricesPage  *ui;
+  Ui::PricesPage      *ui;
 
   QVBoxLayout         *m_pageLayout;
 
-  CSVWizard*          m_wiz;
-  typedef enum:uchar { ColumnDate, ColumnPrice,
-         ColumnEmpty = 0xFE, ColumnInvalid = 0xFF
-       } columnTypeE;
-
-  QMap<columnTypeE, int>   m_colTypeNum;
-  QMap<int ,columnTypeE>   m_colNumType;
-  QMap<columnTypeE, QString> m_colTypeName;
-
-  void                saveSettings();
-  void                readSettings(const KSharedConfigPtr &config);
-  void                setParent(CSVWizard* dlg);
-
-  /**
-  * This method feeds file buffer in prices lines parser.
-  */
-  bool                createStatement(MyMoneyStatement& st);
-
 private:
-  QPointer<SecurityDlg>     m_securityDlg;
-  QPointer<CurrenciesDlg>   m_currenciesDlg;
-
-  QMap<QString, QString> m_mapSymbolName;
-
-  QStringList         m_columnList;
-
-  QString             m_priceFractionValue;
-  QString             m_fromCurrency;
-  QString             m_toCurrency;
-  QString             m_securityName;
-  QString             m_securitySymbol;
-
-  int                 m_priceFraction;
-  int                 m_dontAsk;
-
   void                initializePage();
   bool                isComplete() const;
   bool                validatePage();
@@ -106,13 +69,7 @@ private:
   * This method is called column on prices page is selected.
   * It sets m_colTypeNum, m_colNumType and runs column validation.
   */
-  bool                validateSelectedColumn(int col, columnTypeE type);
-
-  /**
-  * This method is called when the user clicks 'Import'.
-  * It will evaluate an input line and append it to a statement.
-  */
-  bool                processPriceLine(const QString& line, MyMoneyStatement& st);
+  bool                validateSelectedColumn(const int col, const columnTypeE type);
 
   /**
   * This method ensures that there is security for price import.
@@ -124,13 +81,16 @@ private:
   */
   bool                validateCurrencies();
 
-public slots:
+  PricesProfile      *m_profile;
+
+  QPointer<SecurityDlg>    m_securityDlg;
+  QPointer<CurrenciesDlg>  m_currenciesDlg;
 
 private slots:
-  void                slotDateColSelected(int col);
-  void                slotPriceColSelected(int col);
-  void                slotFractionChanged(int col);
-  void                slotClearColumns();
+  void                dateColSelected(int col);
+  void                priceColSelected(int col);
+  void                fractionChanged(int col);
+  void                clearColumns();
 };
 
 #endif // PRICESWIZARDPAGE_H

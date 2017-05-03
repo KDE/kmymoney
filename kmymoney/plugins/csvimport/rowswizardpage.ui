@@ -100,7 +100,7 @@ Ensure that statement header and footer is excluded.</string>
        <item>
         <layout class="QGridLayout" name="gridLayout" columnstretch="10,0">
          <item row="0" column="0">
-          <widget class="QLabel" name="labelSet_skip">
+          <widget class="QLabel" name="lblStartLine">
            <property name="text">
             <string>Start line</string>
            </property>
@@ -110,7 +110,7 @@ Ensure that statement header and footer is excluded.</string>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="labelSet_skipToLast">
+          <widget class="QLabel" name="lblEndLine">
            <property name="text">
             <string>End line</string>
            </property>
@@ -120,7 +120,7 @@ Ensure that statement header and footer is excluded.</string>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QSpinBox" name="spinBox_skip">
+          <widget class="QSpinBox" name="m_startLine">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -137,7 +137,7 @@ Will not accept value greater than the End Line value.</string>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QSpinBox" name="spinBox_skipToLast">
+          <widget class="QSpinBox" name="m_endLine">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>

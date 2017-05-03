@@ -902,7 +902,7 @@ public slots:
     * UI to handle account matching, payee creation, and someday
     * payee and transaction matching.
     */
-  bool slotStatementImport(const MyMoneyStatement& s);
+  bool slotStatementImport(const MyMoneyStatement& s, bool silent = false);
 
   /**
     * Essentially similar to the above slot, except this will load the file

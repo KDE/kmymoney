@@ -558,17 +558,19 @@ void MyMoneyStatementReader::processPriceEntry(const MyMoneyStatement::Price& p_
   if (!p_in.m_strCurrency.isEmpty()) {
     security = p_in.m_strSecurity;
     currency = p_in.m_strCurrency;
-  } else if (d->securitiesBySymbol.contains(p_in.m_strSecurity))
+  } else if (d->securitiesBySymbol.contains(p_in.m_strSecurity)) {
     security = d->securitiesBySymbol[p_in.m_strSecurity].id();
-  else if (d->securitiesByName.contains(p_in.m_strSecurity))
+    currency = file->security(file->security(security).tradingCurrency()).id();
+  } else if (d->securitiesByName.contains(p_in.m_strSecurity)) {
     security = d->securitiesByName[p_in.m_strSecurity].id();
-  else
+    currency = file->security(file->security(security).tradingCurrency()).id();
+  } else
     return;
 
   MyMoneyPrice price(security,
                      currency,
                      p_in.m_date,
-                     p_in.m_amount, i18n("Prices Importer"));
+                     p_in.m_amount, p_in.m_sourceName.isEmpty() ? i18n("Prices Importer") : p_in.m_sourceName);
   MyMoneyFile::instance()->addPrice(price);
 }
 

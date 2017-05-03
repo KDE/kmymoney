@@ -107,7 +107,7 @@ Otherwise, select the column for the symbol, and for the description or name.</s
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QComboBox" name="comboBoxInv_amountCol">
+        <widget class="QComboBox" name="m_amountCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -123,7 +123,7 @@ Otherwise, select the column for the symbol, and for the description or name.</s
         </widget>
        </item>
        <item row="1" column="5">
-        <widget class="QComboBox" name="comboBoxInv_priceFraction">
+        <widget class="QComboBox" name="m_priceFraction">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -138,31 +138,6 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          <property name="maxVisibleItems">
           <number>5</number>
          </property>
-         <item>
-          <property name="text">
-           <string>0.01</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>0.10</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>10</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>100</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="1" column="0">
@@ -204,7 +179,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBoxInv_dateCol">
+        <widget class="QComboBox" name="m_dateCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -233,7 +208,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QComboBox" name="comboBoxInv_quantityCol">
+        <widget class="QComboBox" name="m_quantityCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -249,7 +224,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QComboBox" name="comboBoxInv_priceCol">
+        <widget class="QComboBox" name="m_priceCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -265,7 +240,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="2" column="5">
-        <widget class="QComboBox" name="comboBoxInv_symbolCol">
+        <widget class="QComboBox" name="m_symbolCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -280,7 +255,7 @@ select it here.</string>
         </widget>
        </item>
        <item row="3" column="6">
-        <widget class="QPushButton" name="button_clear">
+        <widget class="QPushButton" name="m_clear">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -338,7 +313,7 @@ select it here.</string>
         </widget>
        </item>
        <item row="3" column="5">
-        <widget class="QComboBox" name="comboBoxInv_nameCol">
+        <widget class="QComboBox" name="m_nameCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -388,7 +363,7 @@ See also Filter text field.</string>
         </widget>
        </item>
        <item row="7" column="3" alignment="Qt::AlignRight">
-        <widget class="QCheckBox" name="checkBoxInv_feeIsPercentage">
+        <widget class="QCheckBox" name="m_feeIsPercentage">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -404,7 +379,7 @@ See also Filter text field.</string>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QComboBox" name="comboBoxInv_typeCol">
+        <widget class="QComboBox" name="m_typeCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -420,7 +395,7 @@ See also Filter text field.</string>
         </widget>
        </item>
        <item row="7" column="1">
-        <widget class="QComboBox" name="comboBoxInv_feeCol">
+        <widget class="QComboBox" name="m_feeCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -438,7 +413,7 @@ incorporated into the price.</string>
         </widget>
        </item>
        <item row="8" column="1">
-        <widget class="QLineEdit" name="lineEdit_feeRate">
+        <widget class="QLineEdit" name="m_feeRate">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -458,7 +433,7 @@ incorporated into the price.</string>
         </widget>
        </item>
        <item row="8" column="3">
-        <widget class="QLineEdit" name="lineEdit_minFee">
+        <widget class="QLineEdit" name="m_minFee">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -481,7 +456,7 @@ incorporated into the price.</string>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QComboBox" name="comboBoxInv_memoCol">
+        <widget class="QComboBox" name="m_memoCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -522,7 +497,7 @@ May also be selected to contain a copy of the type or name column.</string>
         </widget>
        </item>
        <item row="7" column="6">
-        <widget class="QPushButton" name="buttonInv_clearFee">
+        <widget class="QPushButton" name="m_clearFee">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -535,7 +510,7 @@ May also be selected to contain a copy of the type or name column.</string>
         </widget>
        </item>
        <item row="8" column="6">
-        <widget class="QPushButton" name="buttonInv_calculateFee">
+        <widget class="QPushButton" name="m_calculateFee">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>

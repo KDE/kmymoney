@@ -38,10 +38,10 @@ KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(KMyMoneyApp* app, Q
 {
 }
 
-bool KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s)
+bool KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s, bool silent)
 {
   qDebug("KMyMoneyPlugin::KMMStatementInterface::import start");
-  return m_app->slotStatementImport(s);
+  return m_app->slotStatementImport(s, silent);
 }
 
 const MyMoneyAccount& KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const

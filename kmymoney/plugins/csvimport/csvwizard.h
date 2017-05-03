@@ -20,29 +20,54 @@
 #ifndef CSVWIZARD_H
 #define CSVWIZARD_H
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QDialog>
 #include <QWizard>
 #include <QLabel>
-#include <QVBoxLayout>
 #include <QScrollBar>
-#include <QUrl>
+#include <QVBoxLayout>
 
-#include <QComboBox>
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <KSharedConfig>
 
+// ----------------------------------------------------------------------------
+// Project Includes
+
+#include "transactiondlg.h"
+#include "securitydlg.h"
+#include "securitiesdlg.h"
+#include "currenciesdlg.h"
+
+//#include "csvimporter.h"
 #include "csvimporterplugin.h"
 #include "bankingwizardpage.h"
 #include "investmentwizardpage.h"
 #include "priceswizardpage.h"
 
-class ConvertDate;
-class Parse;
-class CsvUtil;
-class FormatsPage;
+
+class CsvImporterPlugin;
+class CSVImporter;
+
+class TransactionDlg;
+class SecurityDlg;
+class SecuritiesDlg;
+class CurrenciesDlg;
+
+class BankingProfile;
+class InvestmentProfile;
+class PricesProfile;
+
 class IntroPage;
 class SeparatorPage;
 class RowsPage;
-class CsvImporterPlugin;
+class BankingPage;
+class InvestmentPage;
+class PricesPage;
+class FormatsPage;
 
 namespace Ui
 {
@@ -54,41 +79,31 @@ class CSVWizard : public QDialog
   Q_OBJECT
 
 public:
-  explicit CSVWizard();
-  virtual ~CSVWizard();
+  CSVWizard(CsvImporterPlugin *plugin, CSVImporter *importer);
+  ~CSVWizard();
 
-  enum { PageIntro, PageSeparator, PageRows,
-         PageBanking, PageInvestment, PagePrices, PageFormats
-       };
-
-  typedef enum:int { ProfileInvest, ProfileBank, ProfileCurrencyPrices, ProfileStockPrices, ProfileNone = 0xFF,
-       } profileTypeE;
-
-  typedef enum:uchar { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
-                       AutoAccountInvest, AutoAccountBank,
-       } autodetectTypeE;
+  enum wizardPageE  { PageIntro, PageSeparator, PageRows,
+                      PageBanking, PageInvestment, PagePrices, PageFormats
+                    };
 
   Ui::CSVWizard*   ui;
-  QWizard*            m_wizard;
-  IntroPage*          m_pageIntro;
-  SeparatorPage*      m_pageSeparator;
-  RowsPage*           m_pageRows;
+
+  CsvImporterPlugin*  m_plugin;
+  CSVImporter*        m_imp;
+  QWizard*            m_wiz;
+
+  IntroPage                   *m_pageIntro;
+  SeparatorPage               *m_pageSeparator;
+  RowsPage                    *m_pageRows;
   QPointer<BankingPage>        m_pageBanking;
   QPointer<InvestmentPage>     m_pageInvestment;
   QPointer<PricesPage>         m_pagePrices;
-  FormatsPage*        m_pageFormats;
-  ConvertDate*        m_convertDate;
-  CsvUtil*            m_csvUtil;
-  Parse*              m_parse;
-  CsvImporterPlugin*  m_plugin;
+  FormatsPage                 *m_pageFormats;
 
-  MyMoneyStatement st;
+  MyMoneyStatement m_st;
 
-  KSharedConfigPtr m_config;
-
-  QList<QLabel*>   m_stageLabels;
-  QScrollBar*      m_vScrollBar;
-  QList<QTextCodec *>   m_codecs;
+  QList<QLabel *>  m_stageLabels;
+  QScrollBar      *m_vScrollBar;
 
   QBrush           m_clearBrush;
   QBrush           m_clearBrushText;
@@ -97,147 +112,48 @@ public:
   QBrush           m_errorBrush;
   QBrush           m_errorBrushText;
 
-  QString          m_fieldDelimiterCharacter;
-  QString          m_textDelimiterCharacter;
-  QString          m_decimalSymbol;
-  QString          m_inFileName;
-  int              m_profileType;
-  QString          m_date;
-  QString          m_profileName;
-  QStringList      m_lineList;
-  QStringList      m_dateFormats;
-  QStringList      m_profileList;
-  QList<int>       m_memoColList;
-  QUrl             m_url;
-
   int              m_initialHeight;
   int              m_initialWidth;
-  int              m_fieldDelimiterIndex;
-  int              m_textDelimiterIndex;
-  int              m_decimalSymbolIndex;
-  QMap<int, int>   m_decimalSymbolIndexMap;
-  int              m_row;
-  int              m_maxColumnCount;
-  int              m_endColumn;
-  int              m_encodeIndex;
-  int              m_startLine;
-  int              m_endLine;
-  int              m_trailerLines;
-  int              m_fileEndLine;
-  int              m_dateFormatIndex;
-  int              m_memoColumn;
-  int              m_dateColumn;
 
-  QMap<autodetectTypeE, bool> m_autodetect;
-
-  bool             m_accept;
-  bool             m_importError;
+  QMap <columnTypeE, QString> m_colTypeName;
   bool             m_skipSetup;
-  bool             m_acceptAllInvalid;
-
-  /**
-  * This method is called after startup, to initialise some parameters.
-  */
-  void           init();
 
   void           showStage();
 
-  void           readMiscSettings(const KSharedConfigPtr& config);
-  void           saveWindowSize(const KSharedConfigPtr& config);
-
-  /**
-  * This method contains routines to update configuration file
-  * from kmmVer to latest.
-  */
-  bool           updateConfigFile(const KSharedConfigPtr &config, const QList<int> &kmmVer);
-
-  /**
-  * This method ensures that configuration file contains all neccesary fields
-  * and that it is up to date.
-  */
-  void           validateConfigFile(const KSharedConfigPtr &config);
-
-  /**
-  * This method is called on opening the plugin.
-  * It will add all codec names to the encoding combobox.
-  */
-  void           setCodecList(const QList<QTextCodec *> &list, QComboBox *comboBoxEncode);
-
-  /**
-  * This method is called on opening the plugin.
-  * It will populate a list with all available codecs.
-  */
-  void           findCodecs();
-
-  void           clearColumnsBackground(int col);
-  void           clearColumnsBackground(QList<int>& columnList);
+  void           clearColumnsBackground(const int col);
+  void           clearColumnsBackground(const QList<int> &columnList);
   void           clearBackground();
   void           markUnwantedRows();
-  QList<MyMoneyAccount> findAccounts(QList<MyMoneyAccount::accountTypeE> &accountTypes, QString& statementHeader);
-  bool                detectAccount(MyMoneyStatement& st);
 
-signals:
-  void           statementReady(MyMoneyStatement&);
 public slots:
-
-  /**
-  * This method is called when the user clicks 'Encoding' and selects an
-  * encoding setting.  The file is re-read with the corresponding codec.
-  */
-  void           encodingChanged(int);
-
-  bool           detectDecimalSymbol(const int col, int& symbol);
 
   /**
   * This method is called when 'Exit' is clicked.  The plugin settings will
   * be saved and the plugin will be terminated.
   */
-  void           slotClose();
-
-  /**
-  * If delimiter = -1 this method tries different fild
-  * delimiters to get the one with which file has the most columns.
-  * Otherwise it gets only column count for specified delimiter.
-  */
-  int            getMaxColumnCount(QStringList &lineList, int &delimiter);
-
-  /**
-  * This method gets the filename of
-  * the financial statement.
-  */
-  bool getInFileName(QString &startDir);
-
-  /**
-  * This method gets file into buffer
-  * It will laso store file's end column and row.
-  */
-  void           readFile(const QString& fname);
-
-  /**
-  * It will display lines list in the UI table widget.
-  */
-  void           displayLines(const QStringList &lineList, Parse *parse);
+  void slotClose();
 
   /**
   * Called in order to adjust window size to suit the file,
   */
-  void           updateWindowSize();
+  void updateWindowSize();
 
-  /**
-  * This method is called when the user clicks 'Open File'. It ends
-  * in importing ready bank statement.
-  */
-  void           slotFileDialogClicked();
+  void readWindowSize(const KSharedConfigPtr& config);
+  void saveWindowSize(const KSharedConfigPtr& config);
 
-  void           slotIdChanged(int id);
 
+  void slotIdChanged(int id);
+
+  void fileDialogClicked();
+  void importClicked();
+  void saveAsQIFClicked();
 private:
-  int              m_curId;
-  int              m_lastId;
+  int m_curId;
+  int m_lastId;
 
-  void             closeEvent(QCloseEvent *event);
-  bool             eventFilter(QObject *object, QEvent *event);
-  void             resizeEvent(QResizeEvent* ev);
+  void closeEvent(QCloseEvent *event);
+  bool eventFilter(QObject *object, QEvent *event);
+//  void             resizeEvent(QResizeEvent* ev);
 }
 ;
 
@@ -246,29 +162,20 @@ namespace Ui
 class IntroPage;
 }
 
-class CSVWizardPage : public QWizardPage {
-public:
-  CSVWizardPage(QWidget *parent = 0) : QWizardPage(parent), m_wizDlg(0) {}
-
-  virtual void setParent(CSVWizard* dlg) { m_wizDlg = dlg; }
-
-protected:
-  CSVWizard*         m_wizDlg;
-};
-
 class IntroPage : public CSVWizardPage
 {
   Q_OBJECT
 
 public:
-  explicit IntroPage(QDialog *parent = 0);
+  explicit IntroPage(CSVWizard *dlg, CSVImporter *imp);
   ~IntroPage();
 
   Ui::IntroPage       *ui;
   void                initializePage();
-  void                setParent(CSVWizard* dlg);
+//  void                setParent(CSVWizard* dlg, CSVImporter *imp);
 
   QVBoxLayout*        m_pageLayout;
+  profileTypeE          m_profileType;
 
 signals:
   void             signalBankClicked(bool);
@@ -279,11 +186,12 @@ private:
   bool             validatePage();
   int              nextId() const;
 
-  typedef enum:uchar { ProfileAdd, ProfileRemove, ProfileRename,
-       } profileActionsE;
+  QStringList      m_profiles;
 
-  void             profileChanged(const profileActionsE& action);
-  void             profileTypeChanged(const CSVWizard::profileTypeE profileType, bool toggled);
+  void             profileChanged(const profilesActionE action);
+  void             profileTypeChanged(const profileTypeE profileType, bool toggled);
+
+public slots:
 
 private slots:
   void             slotAddProfile();
@@ -306,7 +214,7 @@ class SeparatorPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit SeparatorPage(QDialog *parent = 0);
+  explicit SeparatorPage(CSVWizard *dlg, CSVImporter *imp);
   ~SeparatorPage();
 
   Ui::SeparatorPage   *ui;
@@ -317,21 +225,15 @@ public:
   bool                isComplete() const;
 
 public slots:
-  /**
-  * This method is called when a text delimiter is changed.
-  */
-  void           textDelimiterChanged(const int index);
-
-  /**
-  * This method is called when a field delimiter is changed.  The
-  * input file is redisplayed using the new delimiter.
-  */
+  void           encodingChanged(const int index);
   void           fieldDelimiterChanged(const int index);
+  void           textDelimiterChanged(const int index);
 
 signals:
   void                completeChanged();
 
 private:
+  void                initializeEncodingCombobox();
   void                cleanupPage();
   bool                validatePage();
 
@@ -350,7 +252,7 @@ class RowsPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit RowsPage(QDialog *parent = 0);
+  explicit RowsPage(CSVWizard *dlg, CSVImporter *imp);
   ~RowsPage();
 
   Ui::RowsPage   *ui;
@@ -376,6 +278,8 @@ private:
   void                cleanupPage();
 };
 
+
+
 namespace Ui
 {
 class FormatsPage;
@@ -386,7 +290,7 @@ class FormatsPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit FormatsPage(QDialog *parent = 0);
+  explicit FormatsPage(CSVWizard *dlg, CSVImporter *imp);
   ~FormatsPage();
 
   Ui::FormatsPage   *ui;
@@ -400,29 +304,20 @@ public:
   * UI is updated using the new symbol, and on importing, the new symbol
   * also will be used.
   */
-  bool           validateDecimalSymbol(int col);
+  bool validateDecimalSymbols(const QList<int> &columns);
 
   /**
   * This method checks if all dates in date column are valid.
   */
-  bool            validateDateFormat(int index);
+  bool            validateDateFormat(const int index);
 
 signals:
 void                completeChanged();
 public slots:
-  void           slotImportClicked();
-  void           slotSaveAsQIFClicked();
-  /**
-  * This method is called when the user selects a new decimal symbol.  The
-  * UI is updated using the new symbol.
-  */
-  void           decimalSymbolChanged(int);
 
-  /**
-  * This method is called when the user clicks 'Date format' and selects a
-  * format, which is used by convertDate().
-  */
-  void           dateFormatChanged(int index);
+
+  void           decimalSymbolChanged(int);
+  void           dateFormatChanged(const int index);
 private:
   bool                m_isDecimalSymbolOK;
   bool                m_isDateFormatOK;

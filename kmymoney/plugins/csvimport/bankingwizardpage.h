@@ -24,73 +24,44 @@
 // QT Includes
 
 #include <QtCore/QFile>
-#include <QPointer>
-#include <QWizardPage>
 #include <QVBoxLayout>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneystatement.h>
+#include <csvimporter.h>
 
 // ----------------------------------------------------------------------------
 
-class CSVWizard;
-class BankingPage;
+class BankingProfile;
 
 namespace Ui
 {
 class BankingPage;
 }
 
-class BankingPage : public QWizardPage
+class BankingPage : public CSVWizardPage
 {
   Q_OBJECT
 
 public:
-  explicit BankingPage(QDialog *parent = 0);
+  explicit BankingPage(CSVWizard *dlg, CSVImporter *imp);
   ~BankingPage();
 
   Ui::BankingPage     *ui;
   QVBoxLayout         *m_pageLayout;
 
-  CSVWizard*          m_wiz;
-
-  typedef enum:uchar { ColumnNumber, ColumnDate, ColumnPayee, ColumnAmount,
-         ColumnCredit, ColumnDebit, ColumnCategory,
-         ColumnMemo, ColumnEmpty = 0xFE, ColumnInvalid = 0xFF
-       } columnTypeE;
-
-  QMap<columnTypeE, int>   m_colTypeNum;
-  QMap<int ,columnTypeE>   m_colNumType;
-  QMap<columnTypeE, QString> m_colTypeName;
-
-  void                saveSettings();
-  void                readSettings(const KSharedConfigPtr &config);
-  void                setParent(CSVWizard* dlg);
-
+  bool validateCreditDebit();
   /**
   * This method fills QIF file with bank/credit card data
   */
   void                makeQIF(MyMoneyStatement &st, QFile &file);
 
-  /**
-  * This method feeds file buffer in banking lines parser.
-  */
-  bool                createStatement(MyMoneyStatement& st);
-
 private:
-
-  QStringList         m_columnList;
-  QSet<QString>       m_hashSet;
-  int                 m_oppositeSigns;
-
   void                initializePage();
   bool                isComplete() const;
   int                 nextId() const;
@@ -98,34 +69,23 @@ private:
   void                initializeComboBoxes();
   bool                validateMemoComboBox();
   void                resetComboBox(const columnTypeE comboBox);
-  bool                validateSelectedColumn(int col, columnTypeE type);
+  bool                validateSelectedColumn(const int col, const columnTypeE type);
 
-  /**
-  * This method is called during processing. It ensures that processed credit/debit
-  * are valid.
-  */
-  bool                processCreditDebit(QString& credit, QString& debit , MyMoneyMoney& amount);
-
-  /**
-  * This method is called when the user clicks 'import'.
-  * or 'Make QIF' It will evaluate a line and prepare it to be added to a statement,
-  * and to a QIF file, if required.
-  */
-  bool                processBankLine(const QString &line, MyMoneyStatement &st);
+  BankingProfile       *m_profile;
 
 private slots:
-  void                slotMemoColSelected(int col);
-  void                slotCategoryColSelected(int col);
-  void                slotNumberColSelected(int col);
-  void                slotPayeeColSelected(int col);
-  void                slotDateColSelected(int col);
-  void                slotDebitColSelected(int col);
-  void                slotCreditColSelected(int col);
-  void                slotAmountColSelected(int col);
-  void                slotAmountToggled(bool checked);
-  void                slotDebitCreditToggled(bool checked);
-  void                slotOppositeSignsClicked(bool checked);
-  void                slotClearColumns();
+  void                memoColSelected(int col);
+  void                categoryColSelected(int col);
+  void                numberColSelected(int col);
+  void                payeeColSelected(int col);
+  void                dateColSelected(int col);
+  void                debitColSelected(int col);
+  void                creditColSelected(int col);
+  void                amountColSelected(int col);
+  void                amountToggled(bool checked);
+  void                debitCreditToggled(bool checked);
+  void                oppositeSignsClicked(bool checked);
+  void                clearColumns();
 };
 
 #endif // BANKINGWIZARDPAGE_H

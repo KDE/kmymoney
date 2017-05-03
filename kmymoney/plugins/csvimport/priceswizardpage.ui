@@ -90,7 +90,7 @@
         </widget>
        </item>
        <item row="1" column="5">
-        <widget class="QComboBox" name="comboBoxPrc_priceFraction">
+        <widget class="QComboBox" name="m_priceFraction">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -108,35 +108,10 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          <property name="maxVisibleItems">
           <number>5</number>
          </property>
-         <item>
-          <property name="text">
-           <string>0.01</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>0.10</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>10</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>100</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="labelPrc_date">
+        <widget class="QLabel" name="lbldateCol">
          <property name="toolTip">
           <string comment="verb, Select column containing date field">Select column containing date field</string>
          </property>
@@ -152,7 +127,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLabel" name="labelPrc_price">
+        <widget class="QLabel" name="lblpriceCol">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -174,7 +149,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBoxPrc_dateCol">
+        <widget class="QComboBox" name="m_dateCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -190,7 +165,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QComboBox" name="comboBoxPrc_priceCol">
+        <widget class="QComboBox" name="m_priceCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -206,7 +181,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
         </widget>
        </item>
        <item row="1" column="4">
-        <widget class="QLabel" name="labelPrc_priceFraction">
+        <widget class="QLabel" name="lblpriceFraction">
          <property name="maximumSize">
           <size>
            <width>16777215</width>

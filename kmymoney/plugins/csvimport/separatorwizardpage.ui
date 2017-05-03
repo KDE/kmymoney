@@ -101,7 +101,7 @@ changed, except possibly when within a field.</string>
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout" columnstretch="10,10">
-         <item row="0" column="0">
+         <item row="1" column="0">
           <widget class="QLabel" name="labelSet_fieldDelim">
            <property name="text">
             <string>Field Delimiter</string>
@@ -111,16 +111,13 @@ changed, except possibly when within a field.</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_fieldDelimiter">
+         <item row="1" column="1">
+          <widget class="QComboBox" name="m_fieldDelimiter">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
            </property>
            <item>
             <property name="text">
@@ -144,7 +141,7 @@ changed, except possibly when within a field.</string>
            </item>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QLabel" name="labelSet_textDelim">
            <property name="accessibleName">
             <string comment="punctuation mark used as field delimiter" extracomment="punctuation mark used as field delimiter"/>
@@ -157,8 +154,8 @@ changed, except possibly when within a field.</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_textDelimiter">
+         <item row="2" column="1">
+          <widget class="QComboBox" name="m_textDelimiter">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -168,9 +165,6 @@ changed, except possibly when within a field.</string>
            <property name="toolTip">
             <string>Select field delimiter/separator character.
 This will reset any existing field choices.</string>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
            </property>
            <item>
             <property name="text">
@@ -182,6 +176,16 @@ This will reset any existing field choices.</string>
              <string>apostrophe (')</string>
             </property>
            </item>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="m_encoding"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lblEncoding">
+           <property name="text">
+            <string>Encoding</string>
+           </property>
           </widget>
          </item>
         </layout>

@@ -51,7 +51,7 @@ public:
   /**
     * This method imports a MyMoneyStatement into the engine
     */
-  bool import(const MyMoneyStatement& s);
+  bool import(const MyMoneyStatement& s, bool silent = false);
 
   /**
    * This method returns the account for a given @a key - @a value pair.

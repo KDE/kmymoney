@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>BankingPage</class>
  <widget class="QWidget" name="BankingPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>681</width>
+    <height>253</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
@@ -85,7 +93,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QComboBox" name="comboBoxBnk_dateCol">
+        <widget class="QComboBox" name="m_dateCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -101,7 +109,7 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QComboBox" name="comboBoxBnk_categoryCol">
+        <widget class="QComboBox" name="m_categoryCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -133,7 +141,7 @@
         </widget>
        </item>
        <item row="4" column="5">
-        <widget class="QComboBox" name="comboBoxBnk_creditCol">
+        <widget class="QComboBox" name="m_creditCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -165,7 +173,7 @@
         </spacer>
        </item>
        <item row="3" column="3">
-        <widget class="QRadioButton" name="radioBnk_debCred">
+        <widget class="QRadioButton" name="m_radioDebitCredit">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -205,7 +213,7 @@
         </widget>
        </item>
        <item row="2" column="5">
-        <widget class="QComboBox" name="comboBoxBnk_amountCol">
+        <widget class="QComboBox" name="m_amountCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -221,7 +229,7 @@
         </widget>
        </item>
        <item row="3" column="5">
-        <widget class="QComboBox" name="comboBoxBnk_debitCol">
+        <widget class="QComboBox" name="m_debitCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -237,7 +245,7 @@
         </widget>
        </item>
        <item row="4" column="6">
-        <widget class="QPushButton" name="button_clear">
+        <widget class="QPushButton" name="m_clear">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -266,7 +274,7 @@
         </widget>
        </item>
        <item row="6" column="1">
-        <widget class="QComboBox" name="comboBoxBnk_memoCol">
+        <widget class="QComboBox" name="m_memoCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -282,7 +290,7 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QComboBox" name="comboBoxBnk_payeeCol">
+        <widget class="QComboBox" name="m_payeeCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -311,7 +319,7 @@
         </widget>
        </item>
        <item row="6" column="3">
-        <widget class="QCheckBox" name="checkBoxBnk_oppositeSigns">
+        <widget class="QCheckBox" name="m_oppositeSigns">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -330,7 +338,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QComboBox" name="comboBoxBnk_numberCol">
+        <widget class="QComboBox" name="m_numberCol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -375,7 +383,7 @@
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QRadioButton" name="radioBnk_amount">
+        <widget class="QRadioButton" name="m_radioAmount">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>

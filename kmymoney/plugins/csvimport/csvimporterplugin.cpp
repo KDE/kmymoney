@@ -25,19 +25,22 @@
 
 #include <QFile>
 #include <QAction>
+#include <QTextCodec>
+#include <QTextStream>
+#include <QMessageBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KActionCollection>
-#include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneystatementreader.h"
 #include "mymoneystatement.h"
-#include "csvwizard.h"
+#include "mymoneyfile.h"
 
 CsvImporterPlugin::CsvImporterPlugin() :
     KMyMoneyPlugin::Plugin(nullptr, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -57,23 +60,24 @@ void CsvImporterPlugin::createActions()
 {
   m_action = actionCollection()->addAction("file_import_csv");
   m_action->setText(i18n("CSV..."));
-  connect(m_action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
+  connect(m_action, SIGNAL(triggered(bool)), this, SLOT(startWizardRun()));
 }
 
-void CsvImporterPlugin::slotImportFile()
+void CsvImporterPlugin::startWizardRun()
 {
   m_action->setEnabled(false);
-  CSVWizard *csvImporter = new CSVWizard;
-  csvImporter->m_plugin = this;
-  csvImporter->init();
-
-  connect(csvImporter, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
+  m_importer = new CSVImporter;
+  m_wizard = new CSVWizard(this, m_importer);
+  m_silent = false;
+  connect(m_importer, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
   m_action->setEnabled(false);//  don't allow further plugins to start while this is open
 }
 
 bool CsvImporterPlugin::slotGetStatement(MyMoneyStatement& s)
 {
-  return statementInterface()->import(s);
+  bool ret = statementInterface()->import(s, m_silent);
+  delete m_importer;
+  return ret;
 }
 
 #include "csvimporterplugin.moc"

@@ -82,7 +82,7 @@ Then open the file you wish to import.</string>
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
-          <widget class="QRadioButton" name="radioButton_bank">
+          <widget class="QRadioButton" name="m_profilesBank">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -93,12 +93,12 @@ Then open the file you wish to import.</string>
             </size>
            </property>
            <property name="text">
-            <string>&amp;Banking</string>
+            <string>Ban&amp;king</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QRadioButton" name="radioButton_invest">
+          <widget class="QRadioButton" name="m_profilesInvest">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -109,12 +109,12 @@ Then open the file you wish to import.</string>
             </size>
            </property>
            <property name="text">
-            <string>&amp;Investment</string>
+            <string>In&amp;vestment</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QRadioButton" name="radioButton_stockprices">
+          <widget class="QRadioButton" name="m_profilesStockPrices">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -127,7 +127,7 @@ Then open the file you wish to import.</string>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QRadioButton" name="radioButton_currencyprices">
+          <widget class="QRadioButton" name="m_profilesCurrencyPrices">
            <property name="text">
             <string>C&amp;urrency prices</string>
            </property>
@@ -153,7 +153,7 @@ Then open the file you wish to import.</string>
      <item>
       <layout class="QGridLayout" name="gridLayout">
        <item row="2" column="0">
-        <widget class="QPushButton" name="buttonAdd">
+        <widget class="QPushButton" name="m_add">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -172,7 +172,7 @@ Then open the file you wish to import.</string>
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QCheckBox" name="checkBoxSkipSetup">
+        <widget class="QCheckBox" name="m_skipSetup">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -189,7 +189,7 @@ Only useful if a profile has already been setup.</string>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QPushButton" name="buttonRemove">
+        <widget class="QPushButton" name="m_remove">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -208,7 +208,7 @@ Only useful if a profile has already been setup.</string>
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QPushButton" name="buttonRename">
+        <widget class="QPushButton" name="m_rename">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -227,7 +227,7 @@ Only useful if a profile has already been setup.</string>
         </widget>
        </item>
        <item row="1" column="0" colspan="3">
-        <widget class="QComboBox" name="combobox_source">
+        <widget class="QComboBox" name="m_profiles">
          <property name="enabled">
           <bool>false</bool>
          </property>
