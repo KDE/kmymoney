@@ -2221,12 +2221,16 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
         // in case of a category we simply copy the new value over the old.
         // in case we don't even have an account id, we just skip because
         // the split will be removed later on anyway.
-        if (!s1.memo().isEmpty()) {
+        if (!s1.memo().isEmpty() && s1.memo() != s0.memo()) {
           if (!s1.accountId().isEmpty()) {
             MyMoneyAccount acc = MyMoneyFile::instance()->account(s1.accountId());
-            if (acc.isIncomeExpense()) {
+            if (acc.isIncomeExpense())
               s1.setMemo(s0.memo());
-            }
+            else if (KMessageBox::questionYesNo(m_regForm,
+                                                i18n("Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the other split?", s1.memo(), s0.memo()), i18n("Copy memo"),
+                                                KStandardGuiItem::yes(), KStandardGuiItem::no(),
+                                                QLatin1String("CopyMemoOver")) == KMessageBox::Yes)
+              s1.setMemo(s0.memo());
           }
         } else {
           s1.setMemo(s0.memo());
