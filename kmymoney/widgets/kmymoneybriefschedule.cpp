@@ -45,7 +45,8 @@
 #include "kmymoneyutils.h"
 
 KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
-    : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/)
+    : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/),
+      m_index(0)
 {
   m_nextButton->setIcon(KIcon(QString::fromLatin1("arrow-right")));
   m_prevButton->setIcon(KIcon(QString::fromLatin1("arrow-left")));
