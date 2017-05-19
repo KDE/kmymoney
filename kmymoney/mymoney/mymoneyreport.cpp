@@ -104,6 +104,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_loans(false),
     m_reportType(kTypeArray[_rt]),
     m_rowType(_rt),
+    m_columnType(eMonths),
     m_columnsAreDays(false),
     m_queryColumns(eQCnone),
     m_dateLock(_dl),
