@@ -42,7 +42,9 @@
 class KAccountTemplateSelector::Private
 {
 public:
-  Private(KAccountTemplateSelector* p) {
+  Private(KAccountTemplateSelector* p) :
+      id(0)
+  {
     m_parent = p;
   }
 #ifndef KMM_DESIGNER
