@@ -10,6 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <acejones@users.sourceforge.net>
+                           2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -49,6 +50,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
@@ -135,6 +137,11 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   connect(btnUpdateSelected, SIGNAL(clicked()), this, SLOT(slotUpdateSelectedClicked()));
   connect(btnUpdateAll, SIGNAL(clicked()), this, SLOT(slotUpdateAllClicked()));
 
+  connect(m_fromDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChanged()));
+  connect(m_toDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChanged()));
+
+  connect(&m_webQuote, &WebPriceQuote::csvquote,
+          this, &KEquityPriceUpdateDlg::slotReceivedCSVQuote);
   connect(&m_webQuote, SIGNAL(quote(QString,QString,QDate,double)),
           this, SLOT(slotReceivedQuote(QString,QString,QDate,double)));
   connect(&m_webQuote, SIGNAL(failed(QString,QString)),
@@ -146,9 +153,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 
   connect(lvEquityList, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateSelection()));
 
-  // Not implemented yet.
-  btnConfigure->hide();
-  //connect(btnConfigure, SIGNAL(clicked()), this, SLOT(slotConfigureClicked()));
+  connect(btnConfigure, &QAbstractButton::clicked, this, &KEquityPriceUpdateDlg::slotConfigureClicked);
 
   if (!securityId.isEmpty()) {
     btnUpdateSelected->hide();
@@ -168,11 +173,21 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Notification Messages");
   grp.deleteEntry("KEquityPriceUpdateDlg::slotQuoteFailed::Price Update Failed");
+  grp.sync();
+  grp = config->group("Equity Price Update");
+  int policyValue = grp.readEntry("PriceUpdatingPolicy", QString().setNum(eUpdateMissingPrices)).toInt();
+  if (policyValue >= eUpdatingPricePolicyEnd || policyValue < eUpdateAllPrices)
+    m_updatingPricePolicy = eUpdateMissingPrices;
+  else
+    m_updatingPricePolicy = static_cast<updatingPricePolicyE>(policyValue);
 }
 
 KEquityPriceUpdateDlg::~KEquityPriceUpdateDlg()
 {
-
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup grp = config->group("Equity Price Update");
+  grp.writeEntry("PriceUpdatingPolicy", static_cast<int>(m_updatingPricePolicy));
+  grp.sync();
 }
 
 void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool dontCheckExistance)
@@ -369,6 +384,14 @@ void KEquityPriceUpdateDlg::storePrices()
   }
 }
 
+void KEquityPriceUpdateDlg::slotConfigureClicked()
+{
+  EquityPriceUpdateConfDlg *dlg = new EquityPriceUpdateConfDlg(m_updatingPricePolicy);
+  if (dlg->exec() == QDialog::Accepted)
+    m_updatingPricePolicy = dlg->policy();
+  delete dlg;
+}
+
 void KEquityPriceUpdateDlg::slotUpdateSelection()
 {
   // Only enable the update button if there is a selection
@@ -389,11 +412,12 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked()
     item = lvEquityList->invisibleRootItem()->child(skipCnt);
     ++skipCnt;
   }
-
+  m_webQuote.setDate(m_fromDate->date(), m_toDate->date());
   if (item) {
     prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
     prgOnlineProgress->setValue(skipCnt);
     m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
+
   } else {
 
     logErrorMessage("No security selected.");
@@ -415,6 +439,18 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked()
   } else {
     logErrorMessage("Security list is empty.");
   }
+}
+
+void KEquityPriceUpdateDlg::slotDateChanged()
+{
+  m_fromDate->blockSignals(true);
+  m_toDate->blockSignals(true);
+  if (m_toDate->date() > QDate::currentDate())
+    m_toDate->setDate(QDate::currentDate());
+  if (m_toDate->date() < m_fromDate->date())
+    m_fromDate->setDate(m_toDate->date());
+  m_fromDate->blockSignals(false);
+  m_toDate->blockSignals(false);
 }
 
 void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _symbol)
@@ -473,6 +509,139 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
     } else {
       finishUpdate();
     }
+  } else {
+    finishUpdate();
+  }
+}
+
+void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _id, const QString& _symbol, MyMoneyStatement& st)
+{
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_id, Qt::MatchExactly, ID_COL);
+  QTreeWidgetItem* item = 0;
+
+  if (! foundItems.empty())
+    item = foundItems.at(0);
+
+  QTreeWidgetItem* next = 0;
+
+  if (item) {
+    MyMoneyFile *file = MyMoneyFile::instance();
+    MyMoneySecurity fromCurrency, toCurrency;
+
+    if (!_id.contains(QLatin1Char(' '))) {
+      try {
+        toCurrency = MyMoneyFile::instance()->security(_id);
+        fromCurrency = MyMoneyFile::instance()->security(toCurrency.tradingCurrency());
+      } catch (const MyMoneyException &) {
+        fromCurrency = toCurrency = MyMoneySecurity();
+      }
+
+    } else {
+      QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
+      if (splitrx.indexIn(_id) != -1) {
+        try {
+          fromCurrency = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
+          toCurrency = MyMoneyFile::instance()->security(splitrx.cap(1).toUtf8());
+        } catch (const MyMoneyException &) {
+          fromCurrency = toCurrency = MyMoneySecurity();
+        }
+      }
+    }
+
+    if (m_updatingPricePolicy != eUpdateAllPrices) {
+      QStringList qSources = WebPriceQuote::quoteSources();
+      for (auto it = st.m_listPrices.begin(); it != st.m_listPrices.end();) {
+        MyMoneyPrice storedPrice = file->price(toCurrency.id(), fromCurrency.id(), (*it).m_date, true);
+        bool priceValid = storedPrice.isValid();
+        if (!priceValid)
+          ++it;
+        else {
+          switch(m_updatingPricePolicy) {
+            case eUpdateMissingPrices:
+              it = st.m_listPrices.erase(it);
+              break;
+            case eUpdateDownloadedPrices:
+              if (!qSources.contains(storedPrice.source()))
+                it = st.m_listPrices.erase(it);
+              else
+                ++it;
+              break;
+            case eUpdateSameSourcePrices:
+              if (storedPrice.source().compare((*it).m_sourceName) != 0)
+                it = st.m_listPrices.erase(it);
+              else
+                ++it;
+              break;
+            case eAsk:
+            {
+              int result = KMessageBox::questionYesNoCancel(this,
+                                                            i18n("For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>"
+                                                                 "Do you want to replace it with <b>%4</b>?",
+                                                                 storedPrice.from(), storedPrice.date().toString(Qt::ISODate),
+                                                                 QString().setNum(storedPrice.rate(storedPrice.to()).toDouble(), 'g', 10),
+                                                                 QString().setNum((*it).m_amount.toDouble(), 'g', 10)),
+                                                            i18n("Price Already Exists"));
+              switch(result) {
+                case KStandardGuiItem::Yes:
+                  ++it;
+                  break;
+                case KStandardGuiItem::No:
+                  it = st.m_listPrices.erase(it);
+                  break;
+                default:
+                case KStandardGuiItem::Cancel:
+                  finishUpdate();
+                  return;
+                  break;
+              }
+              break;
+            }
+            default:
+              ++it;
+              break;
+          }
+        }
+      }
+    }
+
+    if (!st.m_listPrices.isEmpty()) {
+      kmymoney->slotStatementImport(st, true);
+
+      MyMoneyStatement::Price priceClass;
+      if (st.m_listPrices.first().m_date > st.m_listPrices.last().m_date)
+        priceClass = st.m_listPrices.first();
+      else
+        priceClass = st.m_listPrices.last();
+
+      QDate latestDate = QDate::fromString(item->text(DATE_COL),Qt::ISODate);
+      if (latestDate <= priceClass.m_date && priceClass.m_amount.isPositive()) {
+        item->setText(PRICE_COL, priceClass.m_amount.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
+        item->setText(DATE_COL, priceClass.m_date.toString(Qt::ISODate));
+        item->setText(SOURCE_COL, priceClass.m_sourceName);
+      }
+      logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
+      // make sure to make OK button available
+    }
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+
+    prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
+    item->setSelected(false);
+
+    // launch the NEXT one ... in case of m_fUpdateAll == false, we
+    // need to parse the list to find the next selected one
+    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item) + 1);
+    if (!m_fUpdateAll) {
+      while (next && !next->isSelected()) {
+        prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
+        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next) + 1);
+      }
+    }
+  } else {
+    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list. Aborting entire update.", _symbol, _id));
+  }
+
+  if (next) {
+    m_webQuote.launch(next->text(SYMBOL_COL), next->text(ID_COL), next->text(SOURCE_COL));
   } else {
     finishUpdate();
   }

@@ -53,6 +53,7 @@ public:
   void resetConfig();
 
 protected slots:
+  void slotDumpCSVProfile();
   void slotUpdateEntry();
   void slotLoadWidgets();
   void slotEntryChanged();

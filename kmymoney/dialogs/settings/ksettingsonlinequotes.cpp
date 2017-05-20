@@ -30,6 +30,7 @@
 #include <kconfig.h>
 #include <kguiitem.h>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -65,6 +66,7 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
                          i18n("Use this to create a new entry for online quotes"));
   KGuiItem::assign(m_newButton, newButtenItem);
 
+  connect(m_dumpCSVProfile, SIGNAL(clicked()), this, SLOT(slotDumpCSVProfile()));
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateEntry()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewEntry()));
 
@@ -73,6 +75,7 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   connect(m_quoteSourceList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
 
   connect(m_editURL, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editCSVURL, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editSymbol, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editDate, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editDateFormat, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
@@ -136,12 +139,14 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
   QListWidgetItem* item = m_quoteSourceList->currentItem();
 
   m_editURL->setEnabled(true);
+  m_editCSVURL->setEnabled(true);
   m_editSymbol->setEnabled(true);
   m_editPrice->setEnabled(true);
   m_editDate->setEnabled(true);
   m_editDateFormat->setEnabled(true);
   m_skipStripping->setEnabled(true);
   m_editURL->setText(QString());
+  m_editCSVURL->setText(QString());
   m_editSymbol->setText(QString());
   m_editPrice->setText(QString());
   m_editDate->setText(QString());
@@ -150,6 +155,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
   if (item) {
     m_currentItem = WebPriceQuoteSource(item->text());
     m_editURL->setText(m_currentItem.m_url);
+    m_editCSVURL->setText(m_currentItem.m_csvUrl);
     m_editSymbol->setText(m_currentItem.m_sym);
     m_editPrice->setText(m_currentItem.m_price);
     m_editDate->setText(m_currentItem.m_date);
@@ -157,6 +163,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
     m_skipStripping->setChecked(m_currentItem.m_skipStripping);
   } else {
     m_editURL->setEnabled(false);
+    m_editCSVURL->setEnabled(false);
     m_editSymbol->setEnabled(false);
     m_editPrice->setEnabled(false);
     m_editDate->setEnabled(false);
@@ -171,6 +178,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
 void KSettingsOnlineQuotes::slotEntryChanged()
 {
   bool modified = m_editURL->text() != m_currentItem.m_url
+                  || m_editCSVURL->text() != m_currentItem.m_csvUrl
                   || m_editSymbol->text() != m_currentItem.m_sym
                   || m_editDate->text() != m_currentItem.m_date
                   || m_editDateFormat->text() != m_currentItem.m_dateformat
@@ -180,9 +188,45 @@ void KSettingsOnlineQuotes::slotEntryChanged()
   m_updateButton->setEnabled(modified);
 }
 
+void KSettingsOnlineQuotes::slotDumpCSVProfile()
+{
+  KSharedConfigPtr config = CSVImporter::configFile();
+  PricesProfile profile;
+  profile.m_profileName = m_currentItem.m_name;
+  profile.m_profileType = ProfileStockPrices;
+  bool profileExists = false;
+  bool writeProfile = true;
+
+  if (profile.readSettings(config))
+    profileExists = true;
+  else {
+    profile.m_profileType = ProfileCurrencyPrices;
+    if (profile.readSettings(config))
+      profileExists = true;
+  }
+
+  if (profileExists)
+    writeProfile = (KMessageBox::questionYesNoCancel(this,
+                                                     i18n("CSV profile <b>%1</b> already exists.<br>"
+                                                          "Do you want to overwrite it?",
+                                                          m_currentItem.m_name),
+                                                     i18n("CSV Profile Already Exists")) == KMessageBox::Yes ? true : false);
+
+  if (writeProfile) {
+    QMap<QString, PricesProfile> quoteSources = WebPriceQuote::defaultCSVQuoteSources();
+    profile = quoteSources.value(m_currentItem.m_name);
+    if (profile.m_profileName.compare(m_currentItem.m_name, Qt::CaseInsensitive) == 0) {
+      profile.writeSettings(config);
+      CSVImporter::profilesAction(profile.type(), ProfilesAdd, profile.m_profileName, profile.m_profileName);
+    }
+  }
+  CSVImporter::profilesAction(profile.type(), ProfilesUpdateLastUsed, profile.m_profileName, profile.m_profileName);
+}
+
 void KSettingsOnlineQuotes::slotUpdateEntry()
 {
   m_currentItem.m_url = m_editURL->text();
+  m_currentItem.m_csvUrl = m_editCSVURL->text();
   m_currentItem.m_sym = m_editSymbol->text();
   m_currentItem.m_date = m_editDate->text();
   m_currentItem.m_dateformat = m_editDateFormat->text();

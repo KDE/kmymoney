@@ -35,6 +35,9 @@
 // Project Headers
 
 #include "mymoneymoney.h"
+#include "mymoneystatement.h"
+#include "csvimport/csvimporter.h"
+
 class KJob;
 /**
 Helper class to attend the process which is running the script, in the case
@@ -104,7 +107,7 @@ private:
 struct WebPriceQuoteSource {
   WebPriceQuoteSource() : m_skipStripping(false) {}
   explicit WebPriceQuoteSource(const QString& name);
-  WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
+  WebPriceQuoteSource(const QString& name, const QString& url, const QString& csvUrl, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
   ~WebPriceQuoteSource() {}
 
   void write() const;
@@ -113,6 +116,7 @@ struct WebPriceQuoteSource {
 
   QString    m_name;
   QString    m_url;
+  QString    m_csvUrl;
   QString    m_sym;
   QString    m_price;
   QString    m_date;
@@ -137,6 +141,7 @@ public:
     FinanceQuote
   } quoteSystemE;
 
+  void setDate(const QDate& _from, const QDate& _to);
   /**
     * This launches a web-based quote update for the given @p _symbol.
     * When the quote is received back from the web source, it will be
@@ -161,21 +166,26 @@ public:
    * @return QStringList of quote source names
     */
   static const QStringList quoteSources(const _quoteSystemE _system = Native);
+  static const QMap<QString, PricesProfile> defaultCSVQuoteSources();
 
 signals:
+  void csvquote(const QString&, const QString&, MyMoneyStatement&);
   void quote(const QString&, const QString&, const QDate&, const double&);
   void failed(const QString&, const QString&);
   void status(const QString&);
   void error(const QString&);
 
 protected slots:
+  void slotParseCSVQuote(const QString& filename);
   void slotParseQuote(const QString&);
+  void downloadCSV(KJob* job);
   void downloadResult(KJob* job);
 
 protected:
   static const QMap<QString, WebPriceQuoteSource> defaultQuoteSources();
 
 private:
+  bool launchCSV(const QString& _symbol, const QString& _id, const QString& _source = QString());
   bool launchNative(const QString& _symbol, const QString& _id, const QString& _source = QString());
   bool launchFinanceQuote(const QString& _symbol, const QString& _id, const QString& _source = QString());
   void enter_loop();

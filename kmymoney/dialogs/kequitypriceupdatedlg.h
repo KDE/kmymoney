@@ -39,6 +39,7 @@
 #include "webpricequote.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
+#include "kequitypriceupdateconfdlg.h"
 #include "ui_kequitypriceupdatedlgdecl.h"
 
 /**
@@ -62,12 +63,15 @@ public:
   MyMoneyPrice price(const QString& id) const;
 
 protected slots:
+  void slotConfigureClicked();
   void slotUpdateSelectedClicked();
   void slotUpdateAllClicked();
   void slotUpdateSelection();
+  void slotDateChanged();
 
   void logStatusMessage(const QString&);
   void logErrorMessage(const QString&);
+  void slotReceivedCSVQuote(const QString& _id, const QString& _symbol, MyMoneyStatement& st);
   void slotReceivedQuote(const QString&, const QString&, const QDate&, const double&);
   void slotQuoteFailed(const QString& _id, const QString& _symbol);
 
@@ -78,6 +82,7 @@ protected:
 
 private:
   bool m_fUpdateAll;
+  updatingPricePolicyE m_updatingPricePolicy;
   WebPriceQuote m_webQuote;
 };
 

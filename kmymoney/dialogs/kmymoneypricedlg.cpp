@@ -308,31 +308,10 @@ void KMyMoneyPriceDlg::slotDeletePrice()
 
 void KMyMoneyPriceDlg::slotOnlinePriceUpdate()
 {
-  QList<QTreeWidgetItem*> itemList = m_priceList->selectedItems();
-  QTreeWidgetItem* item;
-  if (itemList.count() > 0) {
-    item = itemList.at(0);
-    if (item) {
-      //check whether the price is a currency or not
-      MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
-      MyMoneySecurity security = MyMoneyFile::instance()->security(price.from());
-
-      //if it is not a currency, send a null string, which will trigger the update for all prices
-      QString stringId;
-      if (security.isCurrency()) {
-        stringId = QString(item->text(KPriceTreeItem::ePriceCommodity) + ' ' + item->text(KPriceTreeItem::ePriceCurrency)).toUtf8();
-      }
-      QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, stringId);
-      if (dlg->exec() == Accepted)
-        dlg->storePrices();
-      delete dlg;
-    }
-  } else {
-    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
-    if (dlg->exec() == Accepted && dlg)
-      dlg->storePrices();
-    delete dlg;
-  }
+  QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
+  if (dlg->exec() == Accepted && dlg)
+    dlg->storePrices();
+  delete dlg;
 }
 
 void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)

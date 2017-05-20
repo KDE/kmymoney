@@ -4,6 +4,8 @@
     begin                : Thu Dec 30 2004
     copyright            : (C) 2004 by Ace Jones
     email                : Ace Jones <acejones@users.sourceforge.net>
+    copyright            : (C) 2017 by Łukasz Wojniłowicz
+    email                : Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -51,6 +53,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneyqifprofile.h"
+#include "mymoneyfile.h"
 
 Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)
 Q_LOGGING_CATEGORY(WEBPRICEQUOTE, "kmymoney_webpricequote")
@@ -67,8 +70,11 @@ public:
   QString m_symbol;
   QString m_id;
   QDate m_date;
+  QDate m_fromDate;
+  QDate m_toDate;
   double m_price;
   WebPriceQuoteSource m_source;
+  PricesProfile    m_CSVSource;
 };
 
 WebPriceQuote::WebPriceQuote(QObject* _parent):
@@ -88,12 +94,140 @@ WebPriceQuote::~WebPriceQuote()
   delete d;
 }
 
+void WebPriceQuote::setDate(const QDate& _from, const QDate& _to)
+{
+  d->m_fromDate = _from;
+  d->m_toDate = _to;
+}
+
 bool WebPriceQuote::launch(const QString& _symbol, const QString& _id, const QString& _sourcename)
 {
   if (_sourcename.contains("Finance::Quote"))
     return (launchFinanceQuote(_symbol, _id, _sourcename));
-  else
+  else if ((!d->m_fromDate.isValid() || !d->m_toDate.isValid()) ||
+           (d->m_fromDate == d->m_toDate && d->m_toDate == QDate::currentDate()))
     return (launchNative(_symbol, _id, _sourcename));
+  else
+    return launchCSV(_symbol, _id, _sourcename);
+}
+
+bool WebPriceQuote::launchCSV(const QString& _symbol, const QString& _id, const QString& _sourcename)
+{
+  d->m_symbol = _symbol;
+  d->m_id = _id;
+
+//   emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
+
+  // Get sources from the config file
+  QString sourcename = _sourcename;
+  if (sourcename.isEmpty())
+    return false;
+  if (sourcename == QLatin1String("Yahoo Currency"))
+    sourcename = QLatin1String("Stooq Currency");
+
+  if (quoteSources().contains(sourcename))
+    d->m_source = WebPriceQuoteSource(sourcename);
+  else
+    emit error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
+
+  int monthOffset = 0;
+  if (sourcename.contains(QLatin1String("Yahoo"), Qt::CaseInsensitive))
+    monthOffset = -1;
+
+  QUrl url;
+  QString urlStr = d->m_source.m_csvUrl;
+  int i = urlStr.indexOf(QLatin1String("%y"));
+  if (i != -1)
+    urlStr.replace(i, 2, QString().setNum(d->m_fromDate.year()));
+  i = urlStr.indexOf(QLatin1String("%y"));
+  if (i != -1)
+    urlStr.replace(i, 2, QString().setNum(d->m_toDate.year()));
+
+  i = urlStr.indexOf(QLatin1String("%m"));
+  if (i != -1)
+    urlStr.replace(i, 2, QString().setNum(d->m_fromDate.month() + monthOffset).rightJustified(2, QLatin1Char('0')));
+  i = urlStr.indexOf(QLatin1String("%m"));
+  if (i != -1)
+    urlStr.replace(i, 2, QString().setNum(d->m_toDate.month() + monthOffset).rightJustified(2, QLatin1Char('0')));
+
+  i = urlStr.indexOf(QLatin1String("%d"));
+  if (i != -1)
+    urlStr.replace(i, 2, QString().setNum(d->m_fromDate.day()).rightJustified(2, QLatin1Char('0')));
+  i = urlStr.indexOf(QLatin1String("%d"));
+  if (i != -1)
+    urlStr.replace(i, 2, QString().setNum(d->m_toDate.day()).rightJustified(2, QLatin1Char('0')));
+
+  if (urlStr.contains(QLatin1String("%y")) || urlStr.contains(QLatin1String("%m")) || urlStr.contains(QLatin1String("%d"))) {
+    emit error(i18n("Cannot resolve input date."));
+    emit failed(d->m_id, d->m_symbol);
+    return false;
+  }
+
+  bool isCurrency = false;
+  if (urlStr.contains(QLatin1String("%2"))) {
+    d->m_CSVSource.m_profileType = ProfileCurrencyPrices;
+    isCurrency = true;
+  } else
+    d->m_CSVSource.m_profileType = ProfileStockPrices;
+
+  d->m_CSVSource.m_profileName = sourcename;
+  if (!d->m_CSVSource.readSettings(CSVImporter::configFile())) {
+    QMap<QString, PricesProfile> result = defaultCSVQuoteSources();
+    d->m_CSVSource = result.value(sourcename);
+    if (d->m_CSVSource.m_profileName.isEmpty()) {
+      emit error(i18n("CSV source <placeholder>%1</placeholder> does not exist.", sourcename));
+      emit failed(d->m_id, d->m_symbol);
+      return false;
+    }
+  }
+
+  if (isCurrency) {
+    // this is a two-symbol quote.  split the symbol into two.  valid symbol
+    // characters are: 0-9, A-Z and the dot.  anything else is a separator
+    QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
+    // if we've truly found 2 symbols delimited this way...
+    if (splitrx.indexIn(d->m_symbol) != -1) {
+      url = QUrl(urlStr.arg(splitrx.cap(1), splitrx.cap(2)));
+      d->m_CSVSource.m_currencySymbol = splitrx.cap(2);
+      d->m_CSVSource.m_securitySymbol = splitrx.cap(1);
+    } else {
+      qCDebug(WEBPRICEQUOTE) << "WebPriceQuote::launch() did not find 2 symbols";
+      emit error(i18n("Cannot find from and to currency."));
+      emit failed(d->m_id, d->m_symbol);
+      return false;
+    }
+
+  } else {
+    // a regular one-symbol quote
+    url = QUrl(urlStr.arg(d->m_symbol));
+    d->m_CSVSource.m_securityName = MyMoneyFile::instance()->security(d->m_id).name();
+    d->m_CSVSource.m_securitySymbol = d->m_symbol;
+  }
+
+  if (url.isLocalFile()) {
+    emit error(i18n("Local quote sources aren't supported."));
+    emit failed(d->m_id, d->m_symbol);
+    return false;
+  } else {
+    //silent download
+    emit status(i18n("Fetching URL %1...", url.toDisplayString()));
+    QString tmpFile;
+    {
+      QTemporaryFile tmpFileFile;
+      tmpFileFile.setAutoRemove(false);
+      if (tmpFileFile.open())
+          qDebug() << "created tmpfile";
+
+      tmpFile = tmpFileFile.fileName();
+    }
+    QFile::remove(tmpFile);
+    const QUrl dest = QUrl::fromLocalFile(tmpFile);
+    KIO::Scheduler::checkSlaveOnHold(true);
+    KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
+    connect(job, SIGNAL(result(KJob*)),
+            this, SLOT(downloadCSV(KJob*)));
+  }
+  return true;
 }
 
 bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, const QString& _sourcename)
@@ -171,6 +305,27 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   return true;
 }
 
+void WebPriceQuote::downloadCSV(KJob* job)
+{
+  QString tmpFile = dynamic_cast<KIO::FileCopyJob*>(job)->destUrl().toLocalFile();
+  QUrl url = dynamic_cast<KIO::FileCopyJob*>(job)->srcUrl();
+  if (!job->error())
+  {
+    qDebug() << "Downloaded" << tmpFile << "from" << url;
+    QFile f(tmpFile);
+    if (f.open(QIODevice::ReadOnly)) {
+      f.close();
+      slotParseCSVQuote(tmpFile);
+    } else {
+      emit error(i18n("Failed to open downloaded file"));
+      slotParseCSVQuote(QString());
+    }
+  } else {
+    emit error(job->errorString());
+    slotParseCSVQuote(QString());
+  }
+}
+
 void WebPriceQuote::downloadResult(KJob* job)
 {
   QString tmpFile = dynamic_cast<KIO::FileCopyJob*>(job)->destUrl().toLocalFile();
@@ -208,7 +363,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
   d->m_symbol = _symbol;
   d->m_id = _id;
   QString FQSource = _sourcename.section(' ', 1);
-  d->m_source = WebPriceQuoteSource(_sourcename, m_financeQuoteScriptPath,
+  d->m_source = WebPriceQuoteSource(_sourcename, m_financeQuoteScriptPath, m_financeQuoteScriptPath,
                                     "\"([^,\"]*)\",.*",  // symbol regexp
                                     "[^,]*,[^,]*,\"([^\"]*)\"", // price regexp
                                     "[^,]*,([^,]*),.*", // date regexp
@@ -233,6 +388,29 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
   }
 
   return result;
+}
+
+void WebPriceQuote::slotParseCSVQuote(const QString& filename)
+{
+  bool isOK = true;
+  if (filename.isEmpty())
+    isOK = false;
+  else {
+    MyMoneyStatement st;
+    CSVImporter* csvImporter = new CSVImporter;
+    st = csvImporter->unattendedPricesImport(filename, &d->m_CSVSource);
+    if (!st.m_listPrices.isEmpty())
+      emit csvquote(d->m_id, d->m_symbol, st);
+    else
+      isOK = false;
+    delete csvImporter;
+    QFile::remove(filename);
+  }
+
+  if (!isOK) {
+    emit error(i18n("Unable to update price for %1", d->m_symbol));
+    emit failed(d->m_id, d->m_symbol);
+  }
 }
 
 void WebPriceQuote::slotParseQuote(const QString& _quotedata)
@@ -323,12 +501,34 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
   }
 }
 
+const QMap<QString, PricesProfile> WebPriceQuote::defaultCSVQuoteSources()
+{
+  QMap<QString, PricesProfile> result;
+
+  result[QLatin1String("Stooq")] = PricesProfile(QLatin1String("Stooq"),
+                                                 106, 1, 0, 0, 1, 0, 0,
+                                                 QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
+                                                 2, ProfileStockPrices);
+
+  result[QLatin1String("Stooq Currency")] = PricesProfile(QLatin1String("Stooq Currency"),
+                                                          106, 1, 0, 0, 1, 0, 0,
+                                                          QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
+                                                          2, ProfileCurrencyPrices);
+
+  result[QLatin1String("Yahoo")] = PricesProfile(QLatin1String("Yahoo"),
+                                                      106, 1, 0, 0, 0, 0, 0,
+                                                      QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
+                                                      2, ProfileStockPrices);
+  return result;
+}
+
 const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
 {
   QMap<QString, WebPriceQuoteSource> result;
 
   result["Yahoo"] = WebPriceQuoteSource("Yahoo",
                                         "http://finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1",
+                                        "http://ichart.finance.yahoo.com/table.csv?s=%1&a=%m&b=%d&c=%y&d=%m&e=%d&f=%y&g=d&ignore=.csv",
                                         "\"([^,\"]*)\",.*",  // symbolregexp
                                         "[^,]*,([^,]*),.*", // priceregexp
                                         "[^,]*,[^,]*,\"([^\"]*)\"", // dateregexp
@@ -336,44 +536,49 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                        );
 
   result["Yahoo Currency"] = WebPriceQuoteSource("Yahoo Currency",
-                             "http://finance.yahoo.com/d/quotes.csv?s=%1%2=X&f=sl1d1",
-                             "\"([^,\"]*)\",.*",  // symbolregexp
-                             "[^,]*,([^,]*),.*", // priceregexp
-                             "[^,]*,[^,]*,\"([^\"]*)\"", // dateregexp
-                             "%m %d %y" // dateformat
-                                                );
+                                                 "http://finance.yahoo.com/d/quotes.csv?s=%1%2=X&f=sl1d1",
+                                                 "",
+                                                 "\"([^,\"]*)\",.*",  // symbolregexp
+                                                 "[^,]*,([^,]*),.*", // priceregexp
+                                                 "[^,]*,[^,]*,\"([^\"]*)\"", // dateregexp
+                                                 "%m %d %y" // dateformat
+                                                 );
 
   // 2009-08-20 Yahoo UK has no quotes and has comma separators
   // sl1d1 format for Yahoo UK doesn't seem to give a date ever
   // sl1d3 gives US locale time (9:99pm) and date (mm/dd/yyyy)
   result["Yahoo UK"] = WebPriceQuoteSource("Yahoo UK",
-                       "http://uk.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
-                       "^([^,]*),.*",  // symbolregexp
-                       "^[^,]*,([^,]*),.*", // priceregexp
-                       "^[^,]*,[^,]*, [^ ]* (../../....).*", // dateregexp
-                       "%m/%d/%y" // dateformat
-                                          );
+                                           "http://uk.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
+                                           "",
+                                           "^([^,]*),.*",  // symbolregexp
+                                           "^[^,]*,([^,]*),.*", // priceregexp
+                                           "^[^,]*,[^,]*, [^ ]* (../../....).*", // dateregexp
+                                           "%m/%d/%y" // dateformat
+                                           );
 
   // sl1d1 format for Yahoo France doesn't seem to give a date ever
   // sl1d3 gives us time (99h99) and date
   result["Yahoo France"] = WebPriceQuoteSource("Yahoo France",
-                           "http://fr.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
-                           "([^;]*).*",             // symbolregexp
-                           "[^;]*.([^;]*),*",       // priceregexp
-                           "[^;]*.[^;]*...h...([^;]*)", // dateregexp
-                           "%d/%m/%y"               // dateformat
-                                              );
+                                               "http://fr.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
+                                               "",
+                                               "([^;]*).*",             // symbolregexp
+                                               "[^;]*.([^;]*),*",       // priceregexp
+                                               "[^;]*.[^;]*...h...([^;]*)", // dateregexp
+                                               "%d/%m/%y"               // dateformat
+                                               );
 
   result["Globe & Mail"] = WebPriceQuoteSource("Globe & Mail",
-                           "http://globefunddb.theglobeandmail.com/gishome/plsql/gis.price_history?pi_fund_id=%1",
-                           QString(),  // symbolregexp
-                           "Reinvestment Price \\w+ \\d+, \\d+ (\\d+\\.\\d+)", // priceregexp
-                           "Reinvestment Price (\\w+ \\d+, \\d+)", // dateregexp
-                           "%m %d %y" // dateformat
-                                              );
+                                               "http://globefunddb.theglobeandmail.com/gishome/plsql/gis.price_history?pi_fund_id=%1",
+                                               "",
+                                               QString(),  // symbolregexp
+                                               "Reinvestment Price \\w+ \\d+, \\d+ (\\d+\\.\\d+)", // priceregexp
+                                               "Reinvestment Price (\\w+ \\d+, \\d+)", // dateregexp
+                                               "%m %d %y" // dateformat
+                                               );
 
   result["MSN.CA"] = WebPriceQuoteSource("MSN.CA",
                                          "http://ca.moneycentral.msn.com/investor/quotes/quotes.asp?symbol=%1",
+                                         "",
                                          QString(),  // symbolregexp
                                          "(\\d+\\.\\d+) [+-]\\d+.\\d+", // priceregexp
                                          "Time of last trade (\\d+/\\d+/\\d+)", //dateregexp
@@ -381,52 +586,57 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                         );
   // Finanztreff (replaces VWD.DE) and boerseonline supplied by Micahel Zimmerman
   result["Finanztreff"] = WebPriceQuoteSource("Finanztreff",
-                          "http://finanztreff.de/kurse_einzelkurs_detail.htn?u=100&i=%1",
-                          QString(),  // symbolregexp
-                          "([0-9]+,\\d+).+Gattung:Fonds", // priceregexp
-                          "\\).(\\d+\\D+\\d+\\D+\\d+)", // dateregexp (doesn't work; date in chart
-                          "%d.%m.%y" // dateformat
-                                             );
+                                              "http://finanztreff.de/kurse_einzelkurs_detail.htn?u=100&i=%1",
+                                              "",
+                                              QString(),  // symbolregexp
+                                              "([0-9]+,\\d+).+Gattung:Fonds", // priceregexp
+                                              "\\).(\\d+\\D+\\d+\\D+\\d+)", // dateregexp (doesn't work; date in chart
+                                              "%d.%m.%y" // dateformat
+                                              );
 
   result["boerseonline"] = WebPriceQuoteSource("boerseonline",
-                           "http://www.boerse-online.de/tools/boerse/einzelkurs_kurse.htm?&s=%1",
-                           QString(),  // symbolregexp
-                           "Akt\\. Kurs.([\\d\\.]+,\\d\\d)", // priceregexp
-                           "Datum.(\\d+\\.\\d+\\.\\d+)", // dateregexp (doesn't work; date in chart
-                           "%d.%m.%y" // dateformat
-                                              );
+                                               "http://www.boerse-online.de/tools/boerse/einzelkurs_kurse.htm?&s=%1",
+                                               "",
+                                               QString(),  // symbolregexp
+                                               "Akt\\. Kurs.([\\d\\.]+,\\d\\d)", // priceregexp
+                                               "Datum.(\\d+\\.\\d+\\.\\d+)", // dateregexp (doesn't work; date in chart
+                                               "%d.%m.%y" // dateformat
+                                               );
 
   // The following two price sources were contributed by
   // Marc Zahnlecker <tf2k@users.sourceforge.net>
 
   result["Wallstreet-Online.DE (Default)"] = WebPriceQuoteSource("Wallstreet-Online.DE (Default)",
-      "http://www.wallstreet-online.de/si/?k=%1&spid=ws",
-      "Symbol:(\\w+)",  // symbolregexp
-      "Letzter Kurs: ([0-9.]+,\\d+)", // priceregexp
-      ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
-      "%d %m %y" // dateformat
-                                                                );
+                                                                 "http://www.wallstreet-online.de/si/?k=%1&spid=ws",
+                                                                 "",
+                                                                 "Symbol:(\\w+)",  // symbolregexp
+                                                                 "Letzter Kurs: ([0-9.]+,\\d+)", // priceregexp
+                                                                 ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
+                                                                 "%d %m %y" // dateformat
+                                                                 );
   // This quote source provided by e-mail and should replace the previous one:
   // From: David Houlden <djhoulden@gmail.com>
   // To: kmymoney@kde.org
   // Date: Sat, 6 Apr 2013 13:22:45 +0100
   result["Financial Times UK Funds"] = WebPriceQuoteSource("Financial Times UK Funds",
-                                       "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
-                                       "data-display-symbol=\"(.*):", // symbol regexp
-                                       "class=\"text first\">([\\d,]*\\d+\\.\\d+)</td>", // price regexp
-                                       "As of market close\\ (.*)\\.", // date regexp
-                                       "%m %d %y", // date format
-                                       true // skip HTML stripping
-                                                          );
+                                                           "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
+                                                           "",
+                                                           "data-display-symbol=\"(.*):", // symbol regexp
+                                                           "class=\"text first\">([\\d,]*\\d+\\.\\d+)</td>", // price regexp
+                                                           "As of market close\\ (.*)\\.", // date regexp
+                                                           "%m %d %y", // date format
+                                                           true // skip HTML stripping
+                                                           );
 
   // This quote source provided by Danny Scott
   result["Yahoo Canada"] = WebPriceQuoteSource("Yahoo Canada",
-                           "http://ca.finance.yahoo.com/q?s=%1",
-                           "%1", // symbol regexp
-                           "Last Trade: (\\d+\\.\\d+)", // price regexp
-                           "day, (.\\D+\\d+\\D+\\d+)", // date regexp
-                           "%m %d %y" // date format
-                                              );
+                                               "http://ca.finance.yahoo.com/q?s=%1",
+                                               "",
+                                               "%1", // symbol regexp
+                                               "Last Trade: (\\d+\\.\\d+)", // price regexp
+                                               "day, (.\\D+\\d+\\D+\\d+)", // date regexp
+                                               "%m %d %y" // date format
+                                               );
 
   // (tf2k) The "mpid" is I think the market place id. In this case five
   // stands for Hamburg.
@@ -436,12 +646,13 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   // Xetra, 32 NASDAQ, 36 NYSE
 
   result["Wallstreet-Online.DE (Hamburg)"] = WebPriceQuoteSource("Wallstreet-Online.DE (Hamburg)",
-      "http://fonds.wallstreet-online.de/si/?k=%1&spid=ws&mpid=5",
-      "Symbol:(\\w+)",  // symbolregexp
-      "Fonds \\(EUR\\) ([0-9.]+,\\d+)", // priceregexp
-      ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
-      "%d %m %y" // dateformat
-                                                                );
+                                                                 "http://fonds.wallstreet-online.de/si/?k=%1&spid=ws&mpid=5",
+                                                                 "",
+                                                                 "Symbol:(\\w+)",  // symbolregexp
+                                                                 "Fonds \\(EUR\\) ([0-9.]+,\\d+)", // priceregexp
+                                                                 ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
+                                                                 "%d %m %y" // dateformat
+                                                                 );
 
   // The following price quote was contributed by
   // Piotr Adacha <piotr.adacha@googlemail.com>
@@ -454,22 +665,33 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   // Europe), thus, I think it could be helpful for Polish users of KMyMoney (and
   // I am one of them for almost a year).
 
-  result["Gielda Papierow Wartosciowych (GPW)"] = WebPriceQuoteSource("Gielda Papierow Wartosciowych (GPW)",
-      "http://stooq.com/q/?s=%1",
-      QString(),                   // symbol regexp
-      "Last.*(\\d+\\.\\d+).*Date",    // price regexp
-      "(\\d{4,4}-\\d{2,2}-\\d{2,2})", // date regexp
-      "%y %m %d"                   // date format
-                                                                     );
+  result["Stooq"] = WebPriceQuoteSource("Stooq",
+                                        "http://stooq.com/q/?s=%1",
+                                        "http://stooq.pl/q/d/l/?s=%1&d1=%y%m%d&d2=%y%m%d&i=d&c=1",
+                                        QString(),                   // symbol regexp
+                                        "Last.*(\\d+\\.\\d+).*Date",    // price regexp
+                                        "(\\d{4,4}-\\d{2,2}-\\d{2,2})", // date regexp
+                                        "%y %m %d"                   // date format
+                                        );
+
+  result[QLatin1String("Stooq Currency")] = WebPriceQuoteSource("Stooq Currency",
+                                                                      "http://stooq.com/q/?s=%1%2",
+                                                                      "http://stooq.pl/q/d/l/?s=%1%2&d1=%y%m%d&d2=%y%m%d&i=d&c=1",
+                                                                      QString(),                   // symbol regexp
+                                                                      "Last.*(\\d+\\.\\d+).*Date",    // price regexp
+                                                                      "(\\d{4,4}-\\d{2,2}-\\d{2,2})", // date regexp
+                                                                      "%y %m %d"                   // date format
+                                                                      );
 
   // The following price quote is for getting prices of different funds
   // at OMX Baltic market.
   result["OMX Baltic funds"] = WebPriceQuoteSource("OMX Baltic funds",
-                               "http://www.baltic.omxgroup.com/market/?pg=nontradeddetails&currency=0&instrument=%1",
-                               QString(),  // symbolregexp
-                               "NAV (\\d+,\\d+)",  // priceregexp
-                               "Kpv (\\d+.\\d+.\\d+)",  // dateregexp
-                               "%d.%m.%y"   // dateformat
+                                                   "http://www.baltic.omxgroup.com/market/?pg=nontradeddetails&currency=0&instrument=%1",
+                                                   "",
+                                                   QString(),  // symbolregexp
+                                                   "NAV (\\d+,\\d+)",  // priceregexp
+                                                   "Kpv (\\d+.\\d+.\\d+)",  // dateregexp
+                                                   "%d.%m.%y"   // dateformat
                                                   );
 
   // The following price quote was contributed by
@@ -497,12 +719,13 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   // http://forum.kde.org/update-stock-and-currency-prices-t-32049.html
 
   result["Financial Express"] = WebPriceQuoteSource("Financial Express",
-                                "https://webfund6.financialexpress.net/Clients/Barclays/search_factsheet_summary.aspx?code=%1",
-                                "ISIN Code[^G]*(GB..........).*",  // symbolregexp
-                                "Current Market Information[^0-9]*([0-9,\\.]+).*", // priceregexp
-                                "Price Date[^0-9]*(../../....).*", // dateregexp
-                                "%d/%m/%y"                         // dateformat
-                                                   );
+                                                    "https://webfund6.financialexpress.net/Clients/Barclays/search_factsheet_summary.aspx?code=%1",
+                                                    "",
+                                                    "ISIN Code[^G]*(GB..........).*",  // symbolregexp
+                                                    "Current Market Information[^0-9]*([0-9,\\.]+).*", // priceregexp
+                                                    "Price Date[^0-9]*(../../....).*", // dateregexp
+                                                    "%d/%m/%y"                         // dateformat
+                                                    );
 
 
   // I suggest to include www.cash.ch as one of the pre-populated online
@@ -518,6 +741,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
 
   result["Cash CH"] = WebPriceQuoteSource("Cash CH",
                                           "http://www.cash.ch/boerse/fonds/fondsguide/kursinfo/fullquote/%1",
+                                          "",
                                           "",  // symbolregexp
                                           "<span class=\"fgdhLast\">([1-9][0-9]*\\.[0-9][0-9])</span>", // priceregexp
                                           "<span class=\"fgdhLastdt\">([0-3][0-9]\\.[0-1][0-9]\\.[1-2][0-9][0-9][0-9])</span>", // dateregexp
@@ -566,6 +790,7 @@ const QStringList WebPriceQuote::quoteSourcesNative()
     groups += "Old Source";
     grp = kconfig->group(QString("Online-Quote-Source-%1").arg("Old Source"));
     grp.writeEntry("URL", url);
+    grp.writeEntry("CSVURL", "http://finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1");
     grp.writeEntry("SymbolRegex", symbolRegExp);
     grp.writeEntry("PriceRegex", priceRegExp);
     grp.writeEntry("DateRegex", dateRegExp);
@@ -612,9 +837,10 @@ const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
 // Helper class to load/save an individual source
 //
 
-WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping):
+WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url, const QString &csvUrl, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping):
     m_name(name),
     m_url(url),
+    m_csvUrl(csvUrl),
     m_sym(sym),
     m_price(price),
     m_date(date),
@@ -632,6 +858,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
   m_dateformat = grp.readEntry("DateFormatRegex", "%m %d %y");
   m_price = grp.readEntry("PriceRegex");
   m_url = grp.readEntry("URL");
+  m_csvUrl = grp.readEntry("CSVURL");
   m_skipStripping = grp.readEntry("SkipStripping", false);
 }
 
@@ -640,6 +867,7 @@ void WebPriceQuoteSource::write() const
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
   grp.writeEntry("URL", m_url);
+  grp.writeEntry("CSVURL", m_csvUrl);
   grp.writeEntry("PriceRegex", m_price);
   grp.writeEntry("DateRegex", m_date);
   grp.writeEntry("DateFormatRegex", m_dateformat);
