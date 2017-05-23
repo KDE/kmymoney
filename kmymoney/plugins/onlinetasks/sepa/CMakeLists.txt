@@ -12,7 +12,6 @@ kde4_add_ui_files( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.ui
 )
 
-automoc4( konlinetasks_sepa_OBJECTS sepaOnlineTasks_SRCS)
 add_library( konlinetasks_sepa_OBJECTS OBJECT ${sepaOnlineTasks_SRCS} )
 
 # Add actual plugin here it is not part of the objects

@@ -20,7 +20,6 @@ kde4_add_ui_files( konlinetasks_national_SCRS
 )
 
 # Make this plugin unit testable
-automoc4(konlinetasks_national_OBJECTS konlinetasks_national_SCRS)
 add_library( konlinetasks_national_OBJECTS OBJECT ${konlinetasks_national_SCRS} )
 
 # Add plugin which is not allowed in the unit test
