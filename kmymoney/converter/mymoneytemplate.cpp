@@ -333,12 +333,18 @@ bool MyMoneyTemplate::exportTemplate(void(*callback)(int, int, const QString&))
   m_doc.appendChild(mainElement);
 
   QDomElement title = m_doc.createElement("title");
+  QDomText t = m_doc.createTextNode(m_title);
+  title.appendChild(t);
   mainElement.appendChild(title);
 
   QDomElement shortDesc = m_doc.createElement("shortdesc");
+  t = m_doc.createTextNode(m_shortDesc);
+  shortDesc.appendChild(t);
   mainElement.appendChild(shortDesc);
 
   QDomElement longDesc = m_doc.createElement("longdesc");
+  t = m_doc.createTextNode(m_longDesc);
+  longDesc.appendChild(t);
   mainElement.appendChild(longDesc);
 
   QDomElement accounts = m_doc.createElement("accounts");
@@ -366,6 +372,21 @@ const QString& MyMoneyTemplate::shortDescription() const
 const QString& MyMoneyTemplate::longDescription() const
 {
   return m_longDesc;
+}
+
+void MyMoneyTemplate::setTitle(const QString &s)
+{
+  m_title = s;
+}
+
+void MyMoneyTemplate::setShortDescription(const QString &s)
+{
+  m_shortDesc = s;
+}
+
+void MyMoneyTemplate::setLongDescription(const QString &s)
+{
+  m_longDesc = s;
 }
 
 static bool nameLessThan(MyMoneyAccount &a1, MyMoneyAccount &a2)

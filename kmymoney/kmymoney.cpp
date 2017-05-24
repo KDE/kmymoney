@@ -139,6 +139,7 @@
 #include "dialogs/kgeneratesqldlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/kgpgkeyselectiondlg.h"
+#include "dialogs/ktemplateexportdlg.h"
 #include "dialogs/transactionmatcher.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
@@ -2187,9 +2188,16 @@ void KMyMoneyApp::slotSaveAccountTemplates()
     }
 
     if (okToWriteFile(newName)) {
-      MyMoneyTemplate templ;
-      templ.exportTemplate(&progressCallback);
-      templ.saveTemplate(newName);
+      QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
+      if (dlg->exec() == QDialog::Accepted && dlg) {
+          MyMoneyTemplate templ;
+          templ.setTitle(dlg->title());
+          templ.setShortDescription(dlg->shortDescription());
+          templ.setLongDescription(dlg->longDescription());
+          templ.exportTemplate(&progressCallback);
+          templ.saveTemplate(newName);
+      }
+      delete dlg;
     }
   }
 }
