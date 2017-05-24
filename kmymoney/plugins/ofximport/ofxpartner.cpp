@@ -19,6 +19,7 @@
 #include <config-kmymoney.h>
 
 #include "ofxpartner.h"
+#include "kmymoneysettings.h"
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -384,9 +385,9 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
 
   m_eventLoop = new QEventLoop(qApp->activeWindow());
 
-  QDir homeDir(QDir::home());
-  if (homeDir.exists("ofxlog.txt")) {
-    d->m_fpTrace.setFileName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
+  if (KMyMoneySettings::logOfxTransactions()) {
+    QString logPath = KMyMoneySettings::logPath();
+    d->m_fpTrace.setFileName(QString("%1/ofxlog.txt").arg(logPath));
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 

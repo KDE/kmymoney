@@ -248,6 +248,15 @@
    <label>Start date</label>
    <default>QDateTime::fromString("1900-01-01T00:00:00", Qt::ISODate)</default>
   </entry>
+  <entry name="logPath" type="String">
+   <label>Log file path</label>
+  </entry>
+  <entry name="logImportedStatements" type="Bool">
+   <label>Log imported statements</label>
+  </entry>
+  <entry name="logOfxTransactions" type="Bool">
+   <label>Log OFX transactions</label>
+  </entry>
   <entry name="useSystemColors" type="Bool">
    <label>Use system colors</label>
    <default>true</default>

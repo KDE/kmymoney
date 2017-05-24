@@ -573,6 +573,101 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Support</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string>Logging</string>
+         </property>
+         <widget class="QCheckBox" name="kcfg_logImportedStatements">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>151</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Log imported statements</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="kcfg_logPath">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>30</y>
+            <width>341</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>41</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Log path</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="kcfg_logOfxTransactions">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>130</y>
+            <width>131</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Log OFX transactions</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>50</y>
+            <width>551</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>On choosing a log file path please keep in mind that log files may contain sensitive data (e.g. passwords in clear-text etc).</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="choosePath">
+          <property name="geometry">
+           <rect>
+            <x>406</x>
+            <y>30</y>
+            <width>31</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -580,15 +675,15 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
    <class>KButtonGroup</class>
    <extends>QGroupBox</extends>
    <header>kbuttongroup.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -596,9 +691,9 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
   </customwidget>
   <customwidget>
    <class>KTabWidget</class>

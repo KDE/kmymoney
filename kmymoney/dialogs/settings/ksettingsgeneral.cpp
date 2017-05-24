@@ -20,6 +20,7 @@
 // QT Includes
 
 #include <QButtonGroup>
+#include <QFileDialog>
 #include <QLabel>
 
 // ----------------------------------------------------------------------------
@@ -41,10 +42,19 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
 
   // setup connections, so that changes by the user are forwarded to the (hidden) edit fields
   connect(m_startDateEdit, SIGNAL(dateChanged(QDate)), kcfg_StartDate, SLOT(setDate(QDate)));
+
+  connect(choosePath, SIGNAL(pressed()), this, SLOT(slotChooseLogPath()));
 }
 
 KSettingsGeneral::~KSettingsGeneral()
 {
+}
+
+void KSettingsGeneral::slotChooseLogPath()
+{
+    QString filePath = QFileDialog::getExistingDirectory(this, i18n("Choose file path"), QDir::homePath());
+    kcfg_logPath->setText(filePath);
+    slotUpdateLogTypes();
 }
 
 void KSettingsGeneral::slotLoadStartDate(const QDate&)
@@ -52,4 +62,22 @@ void KSettingsGeneral::slotLoadStartDate(const QDate&)
   // only need this once
   disconnect(kcfg_StartDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotLoadStartDate(QDate)));
   m_startDateEdit->setDate(kcfg_StartDate->date());
+}
+
+void KSettingsGeneral::slotUpdateLogTypes()
+{
+    bool enable = kcfg_logPath->text().isEmpty() ? false : true;
+    kcfg_logImportedStatements->setEnabled(enable);
+    kcfg_logOfxTransactions->setEnabled(enable);
+    if (!enable)
+    {
+        kcfg_logImportedStatements->setChecked(enable);
+        kcfg_logOfxTransactions->setChecked(enable);
+    }
+}
+
+void KSettingsGeneral::showEvent(QShowEvent *event)
+{
+    KSettingsGeneralDecl::showEvent(event);
+    slotUpdateLogTypes();
 }

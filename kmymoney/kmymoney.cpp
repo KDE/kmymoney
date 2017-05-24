@@ -2421,7 +2421,10 @@ bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s)
   bool result = false;
 
   // keep a copy of the statement
-  MyMoneyStatement::writeXMLFile(s, QString("/home/thb/kmm-statement-%1.txt").arg(d->m_statementXMLindex++));
+  if (KMyMoneySettings::logImportedStatements()) {
+    QString logFile = QString("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath()).arg(d->m_statementXMLindex++);
+    MyMoneyStatement::writeXMLFile(s, logFile);
+ }
 
   // we use an object on the heap here, so that we can check the presence
   // of it during slotUpdateActions() by looking at the pointer.
