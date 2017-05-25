@@ -52,7 +52,6 @@
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
 
-const QString MyMoneyFile::OpeningBalancesPrefix = I18N_NOOP("Opening Balances");
 const QString MyMoneyFile::AccountSeperator = QChar(':');
 
 MyMoneyFile MyMoneyFile::file;
@@ -1087,7 +1086,7 @@ const MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySe
     throw MYMONEYEXCEPTION("Opening balance for non currencies not supported");
 
   MyMoneyAccount acc;
-  QRegExp match(QString("^%1").arg((MyMoneyFile::OpeningBalancesPrefix)));
+  QRegExp match(QString("^%1").arg((MyMoneyFile::openingBalancesPrefix())));
 
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::ConstIterator it;
@@ -1115,7 +1114,7 @@ const MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecur
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyAccount acc;
-  QString name(MyMoneyFile::OpeningBalancesPrefix);
+  QString name(MyMoneyFile::openingBalancesPrefix());
   if (security.id() != baseCurrency().id()) {
     name += QString(" (%1)").arg(security.id());
   }
@@ -3153,6 +3152,11 @@ QString MyMoneyFile::storageId()
     }
   }
   return id;
+}
+
+const QString MyMoneyFile::openingBalancesPrefix()
+{
+    return i18n("Opening Balances");
 }
 
 bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const

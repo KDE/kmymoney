@@ -307,7 +307,7 @@ public:
     * This method returns the account information for the opening
     * balances account for the given @p security. If the respective
     * account does not exist, it will be created. The name is constructed
-    * using MyMoneyFile::OpeningBalancesPrefix and appending " (xxx)" in
+    * using MyMoneyFile::openingBalancesPrefix() and appending " (xxx)" in
     * case the @p security is not the baseCurrency(). The account created
     * will be a sub-account of the standard equity account provided by equity().
     *
@@ -1053,11 +1053,11 @@ public:
   const QStringList consistencyCheck();
 
   /**
-    * MyMoneyFile::OpeningBalancesPrefix is a special string used
+    * MyMoneyFile::openingBalancesPrefix() is a special string used
     * to generate the name for opening balances accounts. See openingBalanceAccount()
     * for details.
     */
-  static const QString OpeningBalancesPrefix;
+  static const QString openingBalancesPrefix();
 
   /**
     * MyMoneyFile::AccountSeperator is used as the separator
@@ -1615,7 +1615,7 @@ private:
 
   /**
     * This method creates an opening balances account. The name is constructed
-    * using MyMoneyFile::OpeningBalancesPrefix and appending " (xxx)" in
+    * using MyMoneyFile::openingBalancesPrefix() and appending " (xxx)" in
     * case the @p security is not the baseCurrency(). The account created
     * will be a sub-account of the standard equity account provided by equity().
     *
