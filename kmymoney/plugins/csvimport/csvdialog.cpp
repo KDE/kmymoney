@@ -75,18 +75,16 @@
 
 // ----------------------------------------------------------------------------
 
-CSVDialog::CSVDialog() :
+CSVDialog::CSVDialog(CsvImporterPlugin *plugin)
+  : m_plugin(plugin),
     ui(new Ui::CSVDialog),
-    m_startHeight(0),
     m_vHeaderWidth(0),
     m_possibleDelimiter(0),
     m_lastDelimiterIndex(0),
     m_errorColumn(0),
     m_pluginWidth(0),
     m_pluginHeight(0),
-    m_windowHeight(0),
     m_comboBoxEncode(0),
-    m_inFile(0),
     m_clearAll(0),
     m_firstIsValid(0),
     m_secondIsValid(0),
@@ -143,7 +141,6 @@ CSVDialog::CSVDialog() :
   m_rowHeight = 30;
   m_header = 27;
   m_tableHeight = m_visibleRows * m_rowHeight + m_header - 3;
-  m_borders = 14;
   m_curId = -1;
   m_lastId = -1;
   m_fileEndLine = 0;
@@ -175,6 +172,7 @@ CSVDialog::CSVDialog() :
   }  else {
     m_dpiDiff = 10;
   }
+  init();
 }
 
 void CSVDialog::init()
@@ -236,6 +234,7 @@ void CSVDialog::init()
   m_dateFormats << "yyyy/MM/dd" << "MM/dd/yyyy" << "dd/MM/yyyy";
 
   m_endColumn = 0;
+  m_flagCol = -1;
   clearSelectedFlags();
 
   m_dateFormatIndex = m_wiz->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex();
@@ -687,7 +686,6 @@ void CSVDialog::readFile(const QString& fname)
   m_rowWidthsDone = false;
   m_initWindow = true;
   m_vScrollBarVisible = false;
-  m_widthResized = false;
 
   int columnCount = 0;
   MyMoneyStatement st = MyMoneyStatement();

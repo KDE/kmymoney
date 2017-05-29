@@ -72,9 +72,7 @@ void CsvImporterPlugin::createActions()
 void CsvImporterPlugin::slotImportFile()
 {
   m_action->setEnabled(false);
-  CSVDialog *csvImporter = new CSVDialog;
-  csvImporter->m_plugin = this;
-  csvImporter->init();
+  CSVDialog *csvImporter = new CSVDialog(this);
 
   csvImporter->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
 

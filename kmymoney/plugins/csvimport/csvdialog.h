@@ -60,12 +60,11 @@ private:
   } m_csvSplit;
 
 public:
-  explicit CSVDialog();
+  explicit CSVDialog(CsvImporterPlugin* plugin);
   ~CSVDialog();
 
   CSVWizard*          m_wiz;
   CsvImporterPlugin*  m_plugin;
-  CSVDialog*          m_csvDlg;
   InvestmentDlg*      m_investmentDlg;
   InvestProcessing*   m_investProcessing;
   ConvertDate*        m_convertDate;
@@ -74,7 +73,6 @@ public:
   CsvUtil*            m_csvUtil;
 
   Ui::CSVDialog*      ui;
-  QVBoxLayout*        m_wizardLayout;
   QScrollBar*         m_vScrollBar;
 
   struct qifData {
@@ -92,17 +90,8 @@ public:
   QList<int>     m_columnCountList;
   QList<int>     m_memoColList;
 
-  QStringList    m_shrsinList;
-  QStringList    m_divXList;
-  QStringList    m_brokerageList;
-  QStringList    m_reinvdivList;
-  QStringList    m_buyList;
-  QStringList    m_sellList;
-  QStringList    m_removeList;
   QStringList    m_dateFormats;
   QStringList    m_columnList;
-  QStringList    m_securityList;
-  QStringList    m_typeOfFile;
   QStringList    m_profileList;
   QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
 
@@ -116,7 +105,6 @@ public:
   QString        m_outBuffer;
   QString        m_qifBuffer;
   QString        m_textDelimiterCharacter;
-  QString        inFileName();
   QString        m_fileType;
   QString        m_priorCsvProfile;
   QString        m_priorInvProfile;
@@ -128,7 +116,6 @@ public:
   QMap<QString, bool> m_hashMap;
 
   bool           m_importNow;
-  bool           m_showEmptyCheckBox;
   bool           m_accept;
   bool           m_acceptAllInvalid;
   bool           m_screenUpdated;
@@ -140,14 +127,12 @@ public:
   bool           m_firstPass;
   bool           m_firstRead;
   bool           m_columnsNotSet;
-  bool           m_heightWasIncreased;
   bool           m_separatorPageVisible;
   bool           m_delimiterError;
   bool           m_needFieldDelimiter;
   bool           m_firstField;
   bool           m_errorFoundAlready;
   bool           m_rowWidthsDone;
-  bool           m_widthResized;
   bool           m_amountSelected;
   bool           m_creditSelected;
   bool           m_dateSelected;
@@ -172,27 +157,20 @@ public:
   int            m_visibleRows;
   int            m_rowHeight;
   int            m_tableHeight;
-  int            m_activityType;
-  int            m_initHeight;
-  int            m_startHeight;
   int            m_hScrollBarHeight;
   int            m_vScrollBarWidth;
   int            m_vHeaderWidth;
   int            m_header;
-  int            m_borders;
   int            m_possibleDelimiter;
   int            m_lastDelimiterIndex;
   int            m_errorColumn;
   int            m_pluginWidth;
   int            m_pluginHeight;
-  int            m_windowHeight;
   int            m_maxColumnCount;
   int            m_dpiDiff;
 
   KUrl           m_url;
   KComboBox*     m_comboBoxEncode;
-
-  QFile*         m_inFile;
 
   void             saveSettings();
 
