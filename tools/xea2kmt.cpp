@@ -16,6 +16,7 @@
 
 #include "../kmymoney/mymoney/mymoneyaccount.h"
 
+#include <QDir>
 #include <QFile>
 #include <QStringList>
 #include <QMap>
@@ -49,6 +50,25 @@ bool withID = false;
 bool noLevel1Names = false;
 bool withTax = false;
 bool prefixNameWithCode = false;
+
+typedef QMap<QString,QString> DirNameMapType;
+
+/**
+ * map to hold differences from gnucash to kmymoney template directory
+ * @return directory name map
+ */
+DirNameMapType &getDirNameMap()
+{
+    static DirNameMapType dirNameMap;
+    dirNameMap["cs"] = "cs_CZ";
+    dirNameMap["da"] = "dk";
+    dirNameMap["ja"] = "ja_JP";
+    dirNameMap["ko"] = "ko_KR";
+    dirNameMap["nb"] = "nb_NO";
+    dirNameMap["nl"] = "nl_NL";
+    dirNameMap["ru"] = "ru_RU";
+    return dirNameMap;
+}
 
 int toKMyMoneyAccountType(const QString &type)
 {
@@ -479,12 +499,94 @@ protected:
     QString inFileName;
 };
 
+void scanDir(QDir dir, QStringList &files)
+{
+    dir.setNameFilters(QStringList("*.gnucash-xea"));
+    dir.setFilter(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+
+    if (debug)
+        qDebug() << "Scanning: " << dir.path();
+
+    QStringList fileList = dir.entryList();
+    for (int i=0; i<fileList.count(); i++)
+    {
+        if (debug)
+            qDebug() << "Found file: " << fileList[i];
+        files.append(QString("%1/%2").arg(dir.absolutePath()).arg(fileList[i]));
+    }
+
+    dir.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+    QStringList dirList = dir.entryList();
+    for (int i=0; i<dirList.size(); ++i)
+    {
+        QString newPath = QString("%1/%2").arg(dir.absolutePath()).arg(dirList.at(i));
+        scanDir(QDir(newPath), files);
+    }
+}
+
+bool convertFile(const QString &inFile, const QString &outFile)
+{
+    GnuCashAccountTemplateReader reader;
+    if (!reader.read(inFile))
+        return false;
+    return reader.writeAsXml(outFile);
+}
+
+int convertFileStructure(const QString &indir, const QString &outdir)
+{
+    DirNameMapType &dirNameMap = getDirNameMap();
+    // get gnucash account files
+    QDir d(indir);
+    QStringList files;
+    scanDir(d, files);
+
+    QString inPath = d.absolutePath();
+    QDir outDir(outdir);
+    QString outPath = outDir.absolutePath();
+    QStringList mapKeys = dirNameMap.keys();
+    int result = 0;
+
+    // process templates
+    foreach (const QString &file, files)
+    {
+        if (debug)
+            qDebug() << "processing" << file;
+
+        // create output file dir
+        QFileInfo fi(file);
+        QString outFileName = fi.canonicalFilePath().replace(inPath, outPath).replace("acctchrt_", "").replace(".gnucash-xea", ".kmt");
+        foreach(const QString &key, mapKeys)
+        {
+            if (outFileName.contains("/" + key + "/"))
+                outFileName = outFileName.replace("/" + key + "/", "/" + dirNameMap[key] + "/");
+        }
+        fi.setFile(outFileName);
+
+        QDir d(fi.absolutePath());
+        if (!d.exists())
+        {
+            if  (debug)
+                qDebug() << "creating path " << fi.absolutePath();
+            d.mkpath(fi.absolutePath());
+        }
+        if (debug)
+            qDebug() << "writing to " << outFileName;
+        if (!convertFile(file, outFileName))
+        {
+            qWarning() << "could not create" << outFileName;
+            result = 1;
+        }
+    }
+    return result;
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 2 || (argc == 2 && QLatin1String(argv[1]) == "--help"))
     {
         qWarning() << "xea2kmt: convert gnucash template file to kmymoney template file";
         qWarning() << argv[0] << "<options> <gnucash-template-file> [<kmymoney-template-output-file>]";
+        qWarning() << argv[0] << "<options> --in-dir <gnucash-template-files-root> --out-dir <kmymoney-template-files-root>";
         qWarning() << "options:";
         qWarning() << "          --debug                   - output debug information";
         qWarning() << "          --help                    - this page";
@@ -492,11 +594,15 @@ int main(int argc, char *argv[])
         qWarning() << "          --prefix-name-with-code   - prefix account name with account code if present";
         qWarning() << "          --with-id                 - write account id attribute";
         qWarning() << "          --with-tax-related        - parse and export gnucash 'tax-related' flag";
+        qWarning() << "          --in-dir <dir>            - search for gnucash templates files in <dir>";
+        qWarning() << "          --out-dir <dir>           - generate kmymoney templates below <dir";
         return -1;
     }
 
     QString inFileName;
     QString outFileName;
+    QString inDir;
+    QString outDir;
     for(int i = 1; i < argc; i++)
     {
         QString arg = QLatin1String(argv[i]);
@@ -510,6 +616,10 @@ int main(int argc, char *argv[])
             withTax = true;
         else if (arg == "--prefix-name-with-code")
             prefixNameWithCode = true;
+        else if (arg == "--in-dir")
+            inDir = argv[++i];
+        else if (arg == "--out-dir")
+            outDir = argv[++i];
         else if (!arg.startsWith(QLatin1String("--")))
         {
             if (inFileName.isEmpty())
@@ -522,6 +632,11 @@ int main(int argc, char *argv[])
             qWarning() << "invalid command line parameter'" << arg << "'";
             return -1;
         }
+    }
+
+    if (!inDir.isEmpty() && !outDir.isEmpty())
+    {
+        return convertFileStructure(inDir, outDir);
     }
 
     GnuCashAccountTemplateReader reader;

@@ -4,31 +4,5 @@
 #
 # Author: Ralf Habacker <ralf.habacker@freenet.de>
 # 
-d=$(dirname $0)
-r=$(realpath $d)
-s=~/src/kmymoney-build/tools
-
-if test -z "$1"; then
-    echo "xea2kmt-all <gnucash-templates-dir>"
-    exit 1
-fi
-
-in=$1
-out=$(realpath $r/../kmymoney/templates)
-for j in $(cd $in; find -name '*-xea'); do
-    i=$(echo $j | sed 's,^./,,g')
-    p=$(dirname $i | sed 's,./,,g')
-    f=$(basename $i | sed 's,acctchrt_,,g;s,gnucash-xea,kmt,g')
-    if ! test -d "$out/$p"; then
-	mkdir -p "$out/$p"
-        echo "language $p does not exist; creating"
-    fi
-    infile="$in$i"
-    outfile="$out/$p/$f"
-    if ! test -f "$out/$p/$f"; then
-        echo "using $infile  to create template $outfile"
-    else
-	echo "using $infile to update $outfile"
-    fi
-    $s/xea2kmt --no-level1-names $infile > $outfile
-done
+echo "To refresh all kmymoney templates from gnucash compile xea2kmt from kmymoney sources and run"
+echo "xea2kmt --no-level1-names --in-dir <gnucash account template dir> --out-dir <kmymoney-template-dir-in-source>"
