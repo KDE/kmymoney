@@ -450,7 +450,7 @@ protected:
 
     bool writeAsXml(QIODevice *device)
     {
-            QXmlStreamWriter xml(device);
+        QXmlStreamWriter xml(device);
         xml.setAutoFormatting(true);
         xml.setAutoFormattingIndent(1);
         xml.setCodec("utf-8");
