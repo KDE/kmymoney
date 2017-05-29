@@ -456,7 +456,8 @@ protected:
         xml.setCodec("utf-8");
         xml.writeStartDocument();
 
-        QString fileName = inFileName.replace(QRegExp(".*/accounts"),"accounts");
+        QString fileName = inFileName;
+        fileName.replace(QRegExp(".*/accounts"),"accounts");
         xml.writeComment(QString("\n"
             "     Converted using xea2kmt from GnuCash sources\n"
             "\n"
