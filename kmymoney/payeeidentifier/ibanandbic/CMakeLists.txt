@@ -48,6 +48,8 @@ target_link_libraries( payeeidentifier_ibanbic_storageplugin
   Qt5::Sql
   kmm_mymoney
 )
+# The json files of payeeidentifier_iban_bic are currently required
+add_dependencies(payeeidentifier_ibanbic_storageplugin payeeidentifier_iban_bic)
 
 kcoreaddons_desktop_to_json(payeeidentifier_ibanbic_storageplugin
   "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop"
