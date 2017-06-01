@@ -565,7 +565,7 @@ void QueryTableTest::testInvestment()
 
     QVERIFY(rows.count() == 5);
     QVERIFY(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
-    QVERIFY(MyMoneyMoney(rows[0]["returninvestment"]) == MyMoneyMoney("87/2500"));
+    QVERIFY(MyMoneyMoney(rows[0]["returninvestment"]) == MyMoneyMoney("-39/5000"));
     QVERIFY(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(-210000.00));
     QVERIFY(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(44000.00));
     QVERIFY(MyMoneyMoney(rows[0]["reinvestincome"]) == MyMoneyMoney(9000.00));
