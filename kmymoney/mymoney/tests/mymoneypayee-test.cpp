@@ -84,15 +84,15 @@ void MyMoneyPayeeTest::testEmptyMatchKeyBegin()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, ";test1;test2");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "\ntest1\ntest2");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, ";;test1;test2");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "\n\ntest1\ntest2");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
 
 void MyMoneyPayeeTest::testEmptyMatchKeyEnd()
@@ -101,15 +101,15 @@ void MyMoneyPayeeTest::testEmptyMatchKeyEnd()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;test2;");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\ntest2\n");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;test2;;");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\ntest2\n\n");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
 
 void MyMoneyPayeeTest::testEmptyMatchKeyMiddle()
@@ -118,15 +118,15 @@ void MyMoneyPayeeTest::testEmptyMatchKeyMiddle()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;;test2");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\n\ntest2");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;;;test2");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\n\n\ntest2");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
 
 void MyMoneyPayeeTest::testEmptyMatchKeyMix()
@@ -135,15 +135,15 @@ void MyMoneyPayeeTest::testEmptyMatchKeyMix()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, ";test1;;test2;");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "\ntest1\n\ntest2\n");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, ";;test1;;;test2;;");
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "\n\ntest1\n\n\ntest2\n\n");
   QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
   QVERIFY(ignoreCase == false);
-  QVERIFY(keys == QLatin1String("test1;test2"));
+  QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
 
 void MyMoneyPayeeTest::testMatchKeyDisallowSingleSpace()
