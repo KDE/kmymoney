@@ -1045,7 +1045,9 @@
   <account type="16" name="">
    <account type="16" name="Saldenvorträge Debitoren"/>
    <account type="16" name="Saldenvorträge Kreditoren"/>
-   <account type="16" name="Saldenvorträge Sachkonten"/>
+   <account type="16" name="Saldenvorträge Sachkonten">
+     <flag name="OpeningBalanceAccount"/>
+   </account>
   </account>
   <account type="10" name="">
    <account type="10" name="A. Eigenkapital">

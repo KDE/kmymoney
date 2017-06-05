@@ -62,7 +62,16 @@
           <string>Opening information</string>
          </property>
          <layout class="QGridLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
            <number>6</number>
           </property>
           <property name="spacing">
@@ -253,6 +262,19 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="m_qcheckboxOpeningBalance">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Flag this account to be an opening balance account&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Opening Balance Account</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -292,7 +314,16 @@
             <property name="spacing">
              <number>6</number>
             </property>
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <item>
@@ -570,7 +601,16 @@
                <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout">
-               <property name="margin">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
                 <number>0</number>
                </property>
                <item>
@@ -636,7 +676,16 @@
              <enum>QFrame::Plain</enum>
             </property>
             <layout class="QHBoxLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -698,7 +747,7 @@
                      <item>
                       <widget class="QRadioButton" name="m_netAmount">
                        <property name="text">
-                        <string>Net amount</string>
+                        <string>Net a&amp;mount</string>
                        </property>
                        <attribute name="buttonGroup">
                         <string notr="true">m_amountGroup</string>
@@ -761,7 +810,16 @@
      <property name="spacing">
       <number>6</number>
      </property>
-     <property name="margin">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
@@ -813,14 +871,10 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
+   <class>KTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ktabwidget.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KPushButton</class>
@@ -828,15 +882,19 @@
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>kMyMoneyDateInput</class>

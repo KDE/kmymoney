@@ -1086,16 +1086,23 @@ const MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySe
     throw MYMONEYEXCEPTION("Opening balance for non currencies not supported");
 
   MyMoneyAccount acc;
-  QRegExp match(QString("^%1").arg((MyMoneyFile::openingBalancesPrefix())));
-
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::ConstIterator it;
 
   accountList(accounts, equity().accountList(), true);
 
   for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
-    if (match.indexIn((*it).name()) != -1) {
-      if ((*it).currencyId() == security.id()) {
+    if (it->value("OpeningBalanceAccount") == QLatin1String("Yes")
+        && it->currencyId() == security.id()) {
+      acc = *it;
+      break;
+    }
+  }
+
+  if (acc.id().isEmpty()) {
+    for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+      if (it->name().startsWith(MyMoneyFile::openingBalancesPrefix())
+          && it->currencyId() == security.id()) {
         acc = *it;
         break;
       }
@@ -1114,15 +1121,36 @@ const MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecur
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyAccount acc;
-  QString name(MyMoneyFile::openingBalancesPrefix());
+  QList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount>::ConstIterator it;
+
+  accountList(accounts, equity().accountList(), true);
+
+  // find present opening balance accounts without containing '('
+  QString name;
+  QString parentAccountId;
+  QRegExp exp(QString("\\([A-Z]{3}\\)"));
+
+  for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+    if (it->value("OpeningBalanceAccount") == QLatin1String("Yes")
+        && exp.indexIn(it->name()) == -1) {
+      name = it->name();
+      parentAccountId = it->parentAccountId();
+      break;
+    }
+  }
+
+  if (name.isEmpty())
+    name = MyMoneyFile::openingBalancesPrefix();
   if (security.id() != baseCurrency().id()) {
     name += QString(" (%1)").arg(security.id());
   }
   acc.setName(name);
   acc.setAccountType(MyMoneyAccount::Equity);
   acc.setCurrencyId(security.id());
+  acc.setValue("OpeningBalanceAccount", "Yes");
 
-  MyMoneyAccount parent = equity();
+  MyMoneyAccount parent = !parentAccountId.isEmpty() ? account(parentAccountId) : equity();
   this->addAccount(acc, parent);
   return acc;
 }

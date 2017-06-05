@@ -1448,6 +1448,13 @@ void KMyMoneyApp::slotFileNew()
           file->addInstitution(inst);
         }
 
+        // import the account templates
+        QList<MyMoneyTemplate> templates = wizard->templates();
+        QList<MyMoneyTemplate>::iterator it_t;
+        for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
+          (*it_t).importTemplate(&progressCallback);
+        }
+
         // create a possible checking account
         MyMoneyAccount acc = wizard->account();
         if (acc.name().length()) {
@@ -1459,13 +1466,6 @@ void KMyMoneyApp::slotFileNew()
           if (!wizard->openingBalance().isZero()) {
             file->createOpeningBalanceTransaction(acc, wizard->openingBalance());
           }
-        }
-
-        // import the account templates
-        QList<MyMoneyTemplate> templates = wizard->templates();
-        QList<MyMoneyTemplate>::iterator it_t;
-        for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
-          (*it_t).importTemplate(&progressCallback);
         }
 
         d->m_fileName = KUrl(wizard->url());

@@ -303,6 +303,8 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         QString value = flagElement.attribute("name");
         if (value == "Tax") {
           acc.setValue(value.toLatin1(), "Yes");
+        } else if (value == "OpeningBalanceAccount") {
+          acc.setValue("OpeningBalanceAccount", "Yes");
         } else {
           KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), m_source.prettyUrl(), acc.name()));
           rc = false;
@@ -406,6 +408,14 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   account.setAttribute(QString("type"), acc.accountType());
 
   // FIXME: add tax flag stuff
+  if (acc.pairs().contains("OpeningBalanceAccount")) {
+    QString openingBalanceAccount = acc.value("OpeningBalanceAccount");
+    if (openingBalanceAccount == "Yes") {
+      QDomElement flag = m_doc.createElement("flag");
+      flag.setAttribute(QString("name"), "OpeningBalanceAccount");
+      account.appendChild(flag);
+    }
+  }
 
   // any child accounts?
   if (acc.accountList().count() > 0) {
