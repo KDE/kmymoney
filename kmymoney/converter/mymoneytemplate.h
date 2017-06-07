@@ -96,6 +96,7 @@ private:
   KUrl            m_source;
   void (*m_progressCallback)(int, int, const QString&);
   int             m_accountsRead;
+  QMap<QString,QString> m_vatAccountMap;
 };
 
 #endif
