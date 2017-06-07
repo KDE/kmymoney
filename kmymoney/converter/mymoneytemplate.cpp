@@ -309,6 +309,9 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
           KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), m_source.prettyUrl(), acc.name()));
           rc = false;
         }
+        QString currency = flagElement.attribute("currency");
+        if (!currency.isEmpty())
+          acc.setCurrencyId(currency);
       }
     }
     flags = flags.nextSibling();
@@ -413,6 +416,7 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
     if (openingBalanceAccount == "Yes") {
       QDomElement flag = m_doc.createElement("flag");
       flag.setAttribute(QString("name"), "OpeningBalanceAccount");
+      flag.setAttribute(QString("currency"), acc.currencyId());
       account.appendChild(flag);
     }
   }
