@@ -45,7 +45,7 @@
 namespace reports
 {
 
-QStringList ListTable::TableRow::m_sortCriteria;
+QVector<ListTable::cellTypeE> ListTable::TableRow::m_sortCriteria;
 
 // ****************************************************************************
 //
@@ -56,16 +56,13 @@ QStringList ListTable::TableRow::m_sortCriteria;
 bool ListTable::TableRow::operator< (const TableRow& _compare) const
 {
   bool result = false;
-
-  QStringList::const_iterator it_criterion = m_sortCriteria.constBegin();
-  while (it_criterion != m_sortCriteria.constEnd()) {
-    if (this->operator[](*it_criterion) < _compare[ *it_criterion ]) {
+  foreach (const auto criterion, m_sortCriteria) {
+    if (this->operator[](criterion) < _compare[criterion]) {
       result = true;
       break;
-    } else if (this->operator[](*it_criterion) > _compare[ *it_criterion ])
+    } else if (this->operator[](criterion) > _compare[criterion]) {
       break;
-
-    ++it_criterion;
+    }
   }
   return result;
 }
@@ -106,143 +103,62 @@ void ListTable::render(QString& result, QString& csv) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  result = "";
-  csv = "";
-  result += QString("<h2 class=\"report\">%1</h2>\n").arg(m_config.name());
-  csv += "\"Report: " + m_config.name() + "\"\n";
+  result.clear();
+  csv.clear();
+  result.append(QString::fromLatin1("<h2 class=\"report\">%1</h2>\n").arg(m_config.name()));
+  csv.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
+
   //actual dates of the report
-  result += QString("<div class=\"subtitle\">");
+  result.append(QLatin1String("<div class=\"subtitle\">"));
   if (!m_config.fromDate().isNull()) {
     result += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config.toDate(), QLocale::ShortFormat));
-    result += QString("</div>\n");
-    result += QString("<div class=\"gap\">&nbsp;</div>\n");
+    result.append(QLatin1String("</div>\n"));
+    result.append(QLatin1String("<div class=\"gap\">&nbsp;</div>\n"));
 
     csv += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config.toDate(), QLocale::ShortFormat));
-    csv += QString("\n");
+    csv.append(QLatin1Char('\n'));
   }
 
-
-  result += QString("<div class=\"subtitle\">");
+  result.append(QLatin1String("<div class=\"subtitle\">"));
   if (m_config.isConvertCurrency()) {
     result += i18n("All currencies converted to %1" , file->baseCurrency().name());
-    csv += i18n("All currencies converted to %1\n" , file->baseCurrency().name());
+    csv += i18n("All currencies converted to %1" , file->baseCurrency().name());
   } else {
     result += i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name());
-    csv += i18n("All values shown in %1 unless otherwise noted\n" , file->baseCurrency().name());
+    csv += i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name());
   }
-  result += QString("</div>\n");
-  result += QString("<div class=\"gap\">&nbsp;</div>\n");
+  result.append(QLatin1String("</div>\n"));
+  result.append(QLatin1String("<div class=\"gap\">&nbsp;</div>\n"));
+  csv.append(QLatin1Char('\n'));
 
   // retrieve the configuration parameters from the report definition.
   // the things that we care about for query reports are:
   // how to group the rows, what columns to display, and what field
   // to subtotal on
-  QStringList groups = m_group.split(',');
-  QStringList columns = m_columns.split(',');
-  if (!m_subtotal.isEmpty() && m_subtotal.split(',').count() == 1) // constructPerformanceRow has subtotal columns already in columns
-    columns += m_subtotal;
-  QStringList postcolumns = m_postcolumns.split(',');
+  QList<cellTypeE> columns = m_columns;
+  if (!m_subtotal.isEmpty() && m_subtotal.count() == 1) // constructPerformanceRow has subtotal columns already in columns
+    columns.append(m_subtotal);
+  QList<cellTypeE> postcolumns = m_postcolumns;
   if (!m_postcolumns.isEmpty()) // prevent creation of empty column
-    columns += postcolumns;
+    columns.append(postcolumns);
+
+  result.append(QLatin1String("<table class=\"report\">\n<thead><tr class=\"itemheader\">"));
 
   //
   // Table header
   //
-  QMap<QString, QString> i18nHeaders;
-  i18nHeaders["postdate"] = i18n("Date");
-  i18nHeaders["value"] = i18n("Amount");
-  i18nHeaders["number"] = i18n("Num");
-  i18nHeaders["payee"] = i18n("Payee");
-  i18nHeaders["tag"] = i18n("Tags");
-  i18nHeaders["category"] = i18n("Category");
-  i18nHeaders["account"] = i18n("Account");
-  i18nHeaders["memo"] = i18n("Memo");
-  i18nHeaders["topcategory"] = i18n("Top Category");
-  i18nHeaders["categorytype"] = i18n("Category Type");
-  i18nHeaders["month"] = i18n("Month");
-  i18nHeaders["week"] = i18n("Week");
-  i18nHeaders["reconcileflag"] = i18n("Reconciled");
-  i18nHeaders["action"] = i18n("Action");
-  i18nHeaders["shares"] = i18n("Shares");
-  i18nHeaders["price"] = i18n("Price");
-  i18nHeaders["lastprice"] = i18n("Last Price");
-  i18nHeaders["buyprice"] = i18n("Buy Price");
-  i18nHeaders["netinvvalue"] = i18n("Net Value");
-  i18nHeaders["buys"] = i18n("Buy Value");
-  i18nHeaders["sells"] = i18n("Sell Value");
-  i18nHeaders["buysST"] = i18n("Short-term Buy Value");
-  i18nHeaders["sellsST"] = i18n("Short-term Sell Value");
-  i18nHeaders["buysLT"] = i18n("Long-term Buy Value");
-  i18nHeaders["sellsLT"] = i18n("Long-term Sell Value");
-  i18nHeaders["reinvestincome"] = i18n("Dividends Reinvested");
-  i18nHeaders["cashincome"] = i18n("Dividends Paid Out");
-  i18nHeaders["startingbal"] = i18n("Starting Balance");
-  i18nHeaders["endingbal"] = i18n("Ending Balance");
-  i18nHeaders["marketvalue"] = i18n("Market Value");
-  i18nHeaders["return"] = i18n("Annualized Return");
-  i18nHeaders["returninvestment"] = i18n("Return On Investment");
-  i18nHeaders["fees"] = i18n("Fees");
-  i18nHeaders["interest"] = i18n("Interest");
-  i18nHeaders["payment"] = i18n("Payment");
-  i18nHeaders["balance"] = i18n("Balance");
-  i18nHeaders["type"] = i18n("Type");
-  i18nHeaders["name"] = i18nc("Account name", "Name");
-  i18nHeaders["nextduedate"] = i18n("Next Due Date");
-  i18nHeaders["occurence"] = i18n("Occurrence"); // krazy:exclude=spelling
-  i18nHeaders["paymenttype"] = i18n("Payment Method");
-  i18nHeaders["institution"] = i18n("Institution");
-  i18nHeaders["description"] = i18n("Description");
-  i18nHeaders["openingdate"] = i18n("Opening Date");
-  i18nHeaders["currencyname"] = i18n("Currency");
-  i18nHeaders["balancewarning"] = i18n("Balance Early Warning");
-  i18nHeaders["maxbalancelimit"] = i18n("Balance Max Limit");
-  i18nHeaders["creditwarning"] = i18n("Credit Early Warning");
-  i18nHeaders["maxcreditlimit"] = i18n("Credit Max Limit");
-  i18nHeaders["tax"] = i18n("Tax");
-  i18nHeaders["favorite"] = i18n("Preferred");
-  i18nHeaders["loanamount"] = i18n("Loan Amount");
-  i18nHeaders["interestrate"] = i18n("Interest Rate");
-  i18nHeaders["nextinterestchange"] = i18n("Next Interest Change");
-  i18nHeaders["periodicpayment"] = i18n("Periodic Payment");
-  i18nHeaders["finalpayment"] = i18n("Final Payment");
-  i18nHeaders["currentbalance"] = i18n("Current Balance");
-  i18nHeaders["capitalgain"] = i18n("Capital Gain");
-  i18nHeaders["percentagegain"] = i18n("Percentage Gain");
-  i18nHeaders["capitalgainST"] = i18n("Short-term Gain");
-  i18nHeaders["capitalgainLT"] = i18n("Long-term Gain");
-
-  // the list of columns which represent money, so we can display them correctly
-  QStringList moneyColumns = QString("value,price,lastprice,buyprice,netinvvalue,buys,buysST,buysLT,sells,sellsST,sellsLT,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance,startingbal,endingbal,capitalgain,capitalgainST,capitalgainLT,marketvalue").split(',');
-
-  // the list of columns which represent shares, which is like money except the
-  // transaction currency will not be displayed
-  QStringList sharesColumns = QString("shares").split(',');
-
-  // the list of columns which represent a percentage, so we can display them correctly
-  QStringList percentColumns = QString("return,returninvestment,interestrate,percentagegain").split(',');
-
-  // the list of columns which represent dates, so we can display them correctly
-  QStringList dateColumns = QString("postdate,entrydate,nextduedate,openingdate,nextinterestchange").split(',');
-
-  result += "<table class=\"report\">\n<thead><tr class=\"itemheader\">";
-
-  QStringList::const_iterator it_column = columns.constBegin();
-  while (it_column != columns.constEnd()) {
-    QString i18nName = i18nHeaders[*it_column];
-    if (i18nName.isEmpty())
-      i18nName = *it_column;
-    result += "<th>" + i18nName + "</th>";
-    csv += i18nName + ',';
-    ++it_column;
+  foreach (const auto cellType, columns) {
+    result.append(QString::fromLatin1("<th>%1</th>").arg(tableHeader(cellType)));
+    csv.append(tableHeader(cellType) + QLatin1Char(','));
   }
+  csv.chop(1);  // remove last ',' character
 
-  result += "</tr></thead>\n";
-  csv = csv.left(csv.length() - 1);
-  csv += '\n';
+  result.append(QLatin1String("</tr></thead>\n"));
+  csv.append(QLatin1Char('\n'));
 
   // initialize group names to empty, so any group will have to display its header
   QStringList prevGrpNames;
-  for (int i = 0; i < groups.count(); ++i) {
+  for (int i = 0; i < m_group.count(); ++i) {
     prevGrpNames.append(QString());
   }
 
@@ -256,11 +172,10 @@ void ListTable::render(QString& result, QString& csv) const
   // ***DV***
   MyMoneyMoney startingBalance;
   MyMoneyMoney balanceChange = MyMoneyMoney();
-  for (QList<TableRow>::const_iterator it_row = m_rows.begin();
-       it_row != m_rows.end();
+  for (QList<TableRow>::ConstIterator it_row = m_rows.constBegin();
+       it_row != m_rows.constEnd();
        ++it_row) {
-
-    /** rank can be:
+    /* rank can be:
      * 0 - opening balance
      * 1 - major split of transaction
      * 2 - minor split of transaction
@@ -268,23 +183,24 @@ void ListTable::render(QString& result, QString& csv) const
      * 4 - first totals row
      * 5 - middle totals row
      */
-    const QString rowRank = (*it_row)["rank"];
+    const int rowRank = (*it_row).value(ctRank).toInt();
     // detect whether any of groups changed and display new group header in that case
-    for (int i = 0; i < groups.count(); ++i) {
-      QString curGrpName = (*it_row).value(groups.at(i));
+    for (int i = 0; i < m_group.count(); ++i) {
+      QString curGrpName = (*it_row).value(m_group.at(i));
       if (curGrpName.isEmpty()) // it could be grand total
         continue;
       if (prevGrpNames.at(i) != curGrpName) {
         // group header of lowest group doesn't bring any useful information
         // if hide transaction is enabled, so don't display it
-        int lowestGroup = groups.count() - 1;
+        int lowestGroup = m_group.count() - 1;
         if (!m_config.isHideTransactions() || i != lowestGroup) {
           row_odd = true;
-          result += "<tr class=\"sectionheader\">"
-                    "<td class=\"left" + QString::number(i) + "\" "
-                    "colspan=\"" + QString::number(columns.count()) + "\">" +
-              curGrpName + "</td></tr>\n";
-          csv += "\"" + curGrpName + "\"\n";
+          result.append(QString::fromLatin1("<tr class=\"sectionheader\">"
+                                              "<td class=\"left%1\" "
+                                              "colspan=\"%2\">%3</td></tr>\n").arg(QString::number(i),
+                                                                                    QString::number(columns.count()),
+                                                                                    curGrpName));
+          csv.append(QString::fromLatin1("\"%1\"\n")).arg(curGrpName);
         }
         if (i == lowestGroup)         // lowest group has been switched...
           isLowestGroupTotal = true;  // ...so expect lowest group total
@@ -296,99 +212,103 @@ void ListTable::render(QString& result, QString& csv) const
 
     QString tlink;  // link information to account and transaction
 
-    if (!m_config.isHideTransactions() || rowRank == "4" || rowRank == "5") { // if hide transaction is enabled display only total rows i.e. rank = 4 || rank = 5
-      if (rowRank == "0" || rowRank == "3") {
+    if (!m_config.isHideTransactions() || rowRank == 4 || rowRank == 5) { // if hide transaction is enabled display only total rows i.e. rank = 4 || rank = 5
+      if (rowRank == 0 || rowRank == 3) {
         // skip the opening and closing balance row,
         // if the balance column is not shown
         // rank = 0 for opening balance, rank = 3 for closing balance
-        if (!columns.contains("balance"))
+        if (!columns.contains(ctBalance))
           continue;
-        result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
-      // ***DV***
-      } else if (rowRank == "1") {
+        result.append(QString::fromLatin1("<tr class=\"item%1\">").arg((*it_row).value(ctID)));
+        // ***DV***
+      } else if (rowRank == 1) {
         row_odd = ! row_odd;
-        tlink = QString("id=%1&tid=%2")
-                .arg((* it_row)["accountid"], (* it_row)["id"]);
-        result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
-      } else if (rowRank == "2")
-        result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
-      else if (rowRank == "4" || rowRank == "5") {
+        tlink = QString::fromLatin1("id=%1&tid=%2").arg((*it_row).value(ctAccountID), (*it_row).value(ctID));
+        result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
+      } else if (rowRank == 2) {
+        result.append(QString::fromLatin1("<tr class=\"item%1\">").arg(row_odd ? QLatin1Char('1') : QLatin1Char('0')));
+      } else if (rowRank == 4 || rowRank == 5) {
         QList<TableRow>::const_iterator nextRow = std::next(it_row);
-        if ((m_config.rowType() == MyMoneyReport::eTag)) //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
+        if ((m_config.rowType() == MyMoneyReport::eTag)) { //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
           continue;
-        else if (rowRank == "4") {
+        } else if (rowRank == 4) {
           if (nextRow != m_rows.end()) {
             if (isLowestGroupTotal && m_config.isHideTransactions()) {
-              result += QString("<tr class=\"sectionfootermiddle\">");
+              result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
               isLowestGroupTotal = false;
-            } else if ((*nextRow)["rank"] == "5")
-              result += QString("<tr class=\"sectionfooterfirst\">");
-            else
-              result += QString("<tr class=\"sectionfooter\">");
-          } else
-            result += QString("<tr class=\"sectionfooter\">");
-        } else if (rowRank == "5") {
-          if (nextRow != m_rows.end()) {
-            if ((*nextRow)["rank"] == "5")
-              result += QString("<tr class=\"sectionfootermiddle\">");
-            else
-              result += QString("<tr class=\"sectionfooterlast\">");
+            } else if ((*nextRow).value(ctRank) == QLatin1String("5")) {
+              result.append(QLatin1String("<tr class=\"sectionfooterfirst\">"));
+            } else {
+              result.append(QLatin1String("<tr class=\"sectionfooter\">"));
+            }
+          } else {
+            result.append(QLatin1String("<tr class=\"sectionfooter\">"));
           }
-        } else
-          result += QString("<tr class=\"sectionfooter\">");
-      } else
-        result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
-    } else
+        } else if (rowRank == 5) {
+          if (nextRow != m_rows.end()) {
+            if ((*nextRow).value(ctRank) == QLatin1String("5"))
+              result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
+            else
+              result.append(QLatin1String("<tr class=\"sectionfooterlast\">"));
+          }
+        } else {
+          result.append(QLatin1String("<tr class=\"sectionfooter\">"));
+        }
+      } else {
+        result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
+      }
+    } else {
       continue;
+    }
 
     //
     // Columns
     //
 
-    QStringList::const_iterator it_column = columns.constBegin();
+    QList<cellTypeE>::ConstIterator it_column = columns.constBegin();
     while (it_column != columns.constEnd()) {
-      QString data = (*it_row)[*it_column];
+      QString data = (*it_row).value(*it_column);
 
       // ***DV***
-      if (rowRank == "2") {
-        if (* it_column == "value")
-          data = (* it_row)["split"];
-        else if (*it_column == "postdate"
-                 || *it_column == "number"
-                 || *it_column == "payee"
-                 || *it_column == "tag"
-                 || *it_column == "action"
-                 || *it_column == "shares"
-                 || *it_column == "price"
-                 || *it_column == "nextduedate"
-                 || *it_column == "balance"
-                 || *it_column == "account"
-                 || *it_column == "name")
-          data = "";
+      if (rowRank == 2) {
+        if (*it_column == ctValue)
+          data = (*it_row).value(ctSplit);
+        else if (*it_column == ctPostDate
+                 || *it_column == ctNumber
+                 || *it_column == ctPayee
+                 || *it_column == ctTag
+                 || *it_column == ctAction
+                 || *it_column == ctShares
+                 || *it_column == ctPrice
+                 || *it_column == ctNextDueDate
+                 || *it_column == ctBalance
+                 || *it_column == ctAccount
+                 || *it_column == ctName)
+          data.clear();
       }
 
       // ***DV***
-      else if (rowRank == "0" || rowRank == "3") {
-        if (*it_column == "balance") {
-          data = (* it_row)["balance"];
-          if ((* it_row)["id"] == "A") {          // opening balance?
+      else if (rowRank == 0 || rowRank == 3) {
+        if (*it_column == ctBalance) {
+          data = (*it_row).value(ctBalance);
+          if ((*it_row).value(ctID) == QLatin1String("A")) {          // opening balance?
             startingBalance = MyMoneyMoney(data);
             balanceChange = MyMoneyMoney();
           }
         }
 
         if (need_label) {
-          if ((*it_column == "payee") ||
-              (*it_column == "category") ||
-              (*it_column == "memo")) {
-            if (!(*it_row)["shares"].isEmpty()) {
-              data = ((* it_row)["id"] == "A")
-                     ? i18n("Initial Market Value")
-                     : i18n("Ending Market Value");
+          if ((*it_column == ctPayee) ||
+              (*it_column == ctCategory) ||
+              (*it_column == ctMemo)) {
+            if (!(*it_row).value(ctShares).isEmpty()) {
+              data = ((*it_row).value(ctID) == QLatin1String("A"))
+                  ? i18n("Initial Market Value")
+                  : i18n("Ending Market Value");
             } else {
-              data = ((* it_row)["id"] == "A")
-                     ? i18n("Opening Balance")
-                     : i18n("Closing Balance");
+              data = ((*it_row).value(ctID) == QLatin1String("A"))
+                  ? i18n("Opening Balance")
+                  : i18n("Closing Balance");
             }
             need_label = false;
           }
@@ -396,25 +316,25 @@ void ListTable::render(QString& result, QString& csv) const
       }
       // The 'balance' column is calculated at render-time
       // but not printed on split lines
-      else if (*it_column == "balance" && rowRank == "1") {
+      else if (*it_column == ctBalance && rowRank == 1) {
         // Take the balance off the deepest group iterator
-        balanceChange += MyMoneyMoney((*it_row).value("value", "0"));
+        balanceChange += MyMoneyMoney((*it_row).value(ctValue, QLatin1String("0")));
         data = (balanceChange + startingBalance).toString();
-      } else if ((rowRank == "4" || rowRank == "5")) {
+      } else if ((rowRank == 4 || rowRank == 5)) {
         // display total title but only if first column doesn't contain any data
         if (it_column == columns.constBegin() && data.isEmpty()) {
-          result += "<td class=\"left" + (*it_row)["depth"] + "\">";
-          if (rowRank == "4") {
-            if (!(*it_row)["depth"].isEmpty())
-              result += i18nc("Total balance", "Total") + ' ' + prevGrpNames.at((*it_row)["depth"].toInt());
+          result.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
+          if (rowRank == 4) {
+            if (!(*it_row).value(ctDepth).isEmpty())
+              result += i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt());
             else
               result += i18n("Grand Total");
           }
-          result.append(QLatin1Literal("</td>"));
+          result.append(QLatin1String("</td>"));
           ++it_column;
           continue;
         } else if (!m_subtotal.contains(*it_column)) {  // don't display e.g. account in totals row
-          result.append(QLatin1Literal("<td></td>"));
+          result.append(QLatin1String("<td></td>"));
           ++it_column;
           continue;
         }
@@ -428,11 +348,11 @@ void ListTable::render(QString& result, QString& csv) const
       // vector of a properties class.
       QString tlinkBegin, tlinkEnd;
       if (!tlink.isEmpty()) {
-          tlinkBegin = QString("<a href=ledger?%1>").arg(tlink);
-          tlinkEnd = QLatin1String("</a>");
+        tlinkBegin = QString::fromLatin1("<a href=ledger?%1>").arg(tlink);
+        tlinkEnd = QLatin1String("</a>");
       }
 
-      QString currencyID = (*it_row)["currency"];
+      QString currencyID = (*it_row).value(ctCurrency);
 
       if (currencyID.isEmpty())
         currencyID = file->baseCurrency().id();
@@ -441,70 +361,83 @@ void ListTable::render(QString& result, QString& csv) const
       if (m_config.isConvertCurrency()) // don't show currency id, if there is only single currency
         currencyID.clear();
 
-      if (sharesColumns.contains(*it_column)) {
-        if (data.isEmpty()) {
-          result += QString("<td></td>");
-          csv += "\"\",";
-        } else {
-          int sharesPrecision = MyMoneyMoney::denomToPrec(file->security(file->account((*it_row)["accountid"]).currencyId()).smallestAccountFraction());
-          result += QString("<td>%2%1%3</td>").arg(MyMoneyMoney(data).formatMoney("", sharesPrecision), tlinkBegin, tlinkEnd);
-          csv += "\"" + MyMoneyMoney(data).formatMoney("", sharesPrecision, false) + "\",";
+      switch (cellGroup(*it_column)) {
+        case cgMoney:
+          if (data.isEmpty()) {
+            result.append(QString::fromLatin1("<td%1></td>")
+                          .arg((*it_column == ctValue) ? QLatin1String(" class=\"value\"") : QString()));
+            csv.append(QLatin1String("\"\","));
+          } else if (MyMoneyMoney(data) == MyMoneyMoney::autoCalc) {
+            result.append(QString::fromLatin1("<td%1>%3%2%4</td>")
+                          .arg((*it_column == ctValue) ? QLatin1String(" class=\"value\"") : QString(),
+                               i18n("Calculated"), tlinkBegin, tlinkEnd));
+            csv.append(QString::fromLatin1("\"%1\",").arg(i18n("Calculated")));
+          } else {
+            result.append(QString::fromLatin1("<td%1>%4%2&nbsp;%3%5</td>")
+                          .arg((*it_column == ctValue) ? QLatin1String(" class=\"value\"") : QString(),
+                               currencyID,
+                               MyMoneyMoney(data).formatMoney(fraction),
+                               tlinkBegin, tlinkEnd));
+            csv.append(QString::fromLatin1("\"%1 %2\",").arg(currencyID,
+                                                                MyMoneyMoney(data).formatMoney(fraction, false)));
+          }
+          break;
+        case cgPercent:
+          if (data.isEmpty()) {
+            result.append(QLatin1String("<td></td>"));
+            csv.append(QLatin1String("\"\","));
+          } else {
+            data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
+            result.append(QString::fromLatin1("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd));
+            csv.append(QString::fromLatin1("%1%,").arg(data));
+          }
+          break;
+        case cgPrice:
+        {
+          int pricePrecision = file->security(file->account((*it_row).value(ctAccountID)).currencyId()).pricePrecision();
+          result.append(QString::fromLatin1("<td>%3%2&nbsp;%1%4</td>")
+                        .arg(MyMoneyMoney(data).formatMoney(QString(), pricePrecision),
+                             currencyID, tlinkBegin, tlinkEnd));
+          csv.append(QString::fromLatin1("\"%1 %2\",").arg(currencyID,
+                                                              MyMoneyMoney(data).formatMoney(QString(), pricePrecision, false)));
         }
-      } else if (moneyColumns.contains(*it_column)) {
-        if (data.isEmpty()) {
-          result += QString("<td%1></td>")
-                    .arg((*it_column == "value") ? " class=\"value\"" : "");
-          csv += "\"\",";
-        } else if (MyMoneyMoney(data) == MyMoneyMoney::autoCalc) {
-          result += QString("<td%1>%3%2%4</td>")
-                    .arg((*it_column == "value") ? " class=\"value\"" : "")
-                    .arg(i18n("Calculated"), tlinkBegin, tlinkEnd);
-          csv += "\"" + i18n("Calculated") + "\",";
-        } else if ((*it_column).endsWith(QLatin1String("price"))) {
-          int pricePrecision = file->security(file->account((*it_row)["accountid"]).currencyId()).pricePrecision();
-          result += QString("<td>%3%2&nbsp;%1%4</td>")
-                    .arg(MyMoneyMoney(data).formatMoney(QString(), pricePrecision), currencyID, tlinkBegin, tlinkEnd);
-          csv += "\"" + currencyID + " " + MyMoneyMoney(data).formatMoney(QString(), pricePrecision, false) + "\",";
-        } else {
-          result += QString("<td%1>%4%2&nbsp;%3%5</td>")
-                    .arg((*it_column == "value") ? " class=\"value\"" : "")
-                    .arg(currencyID)
-                    .arg(MyMoneyMoney(data).formatMoney(fraction))
-                    .arg(tlinkBegin, tlinkEnd);
-          csv += "\"" + currencyID + " " + MyMoneyMoney(data).formatMoney(fraction, false) + "\",";
-        }
-      } else if (percentColumns.contains(*it_column)) {
-        if (data.isEmpty()) {
-          result += QString("<td></td>");
-          csv += "\"\",";
-        } else {
-          data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
-          result += QString("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd);
-          csv += data + "%,";
-        }
-      } else if (dateColumns.contains(*it_column)) {
-        // do this before we possibly change data
-        csv += "\"" + data + "\",";
+          break;
+        case cgShares:
+          if (data.isEmpty()) {
+            result.append(QLatin1String("<td></td>"));
+            csv.append(QLatin1String("\"\","));
+          } else {
+            int sharesPrecision = MyMoneyMoney::denomToPrec(file->security(file->account((*it_row).value(ctAccountID)).currencyId()).smallestAccountFraction());
+            result += QString::fromLatin1("<td>%2%1%3</td>").arg(MyMoneyMoney(data).formatMoney(QString(), sharesPrecision),
+                                                                    tlinkBegin, tlinkEnd);
+            csv.append(QString::fromLatin1("\"%1\",").arg(MyMoneyMoney(data).formatMoney(QString(), sharesPrecision, false)));
+          }
+          break;
+        case cgDate:
+          // do this before we possibly change data
+          csv.append(QString::fromLatin1("\"%1\",").arg(data));
 
-        // if we have a locale() then use its date formatter
-        if (!data.isEmpty()) {
-          QDate qd = QDate::fromString(data, Qt::ISODate);
-          data = QLocale().toString(qd, QLocale::ShortFormat);
-        }
-        result += QString("<td class=\"left" + QString::number(prevGrpNames.count()- 1) + "\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
-      } else {
-        result += QString("<td class=\"left" + QString::number(prevGrpNames.count()- 1) + "\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
-        csv += "\"" + data + "\",";
+          // if we have a locale() then use its date formatter
+          if (!data.isEmpty()) {
+            QDate qd = QDate::fromString(data, Qt::ISODate);
+            data = QLocale().toString(qd, QLocale::ShortFormat);
+          }
+          result.append(QString::fromLatin1("<td class=\"left%4\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd, QString::number(prevGrpNames.count() - 1)));
+          break;
+        default:
+          result.append(QString::fromLatin1("<td class=\"left%4\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd, QString::number(prevGrpNames.count() - 1)));
+          csv.append(QString::fromLatin1("\"%1\",").arg(data));
+          break;
       }
       ++it_column;
       tlink.clear();
     }
 
-    result += "</tr>\n";
-    csv = csv.left(csv.length() - 1);    // remove final comma
-    csv += '\n';
+    result.append(QLatin1String("</tr>\n"));
+    csv.chop(1);  // remove final comma
+    csv.append(QLatin1Char('\n'));
   }
-  result += "</table>\n";
+  result.append(QLatin1String("</table>\n"));
 }
 
 QString ListTable::renderBody() const
@@ -619,4 +552,194 @@ void ListTable::includeInvestmentSubAccounts()
   }
 }
 
+ListTable::cellGroupE ListTable::cellGroup(const cellTypeE cellType)
+{
+  switch (cellType) {
+    // the list of columns which represent money, so we can display them correctly
+    case ctValue:
+    case ctNetInvValue:
+    case ctMarketValue:
+    case ctBuys:
+    case ctSells:
+    case ctBuysST:
+    case ctSellsST:
+    case ctBuysLT:
+    case ctSellsLT:
+    case ctCapitalGain:
+    case ctCapitalGainST:
+    case ctCapitalGainLT:
+    case ctCashIncome:
+    case ctReinvestIncome:
+    case ctFees:
+    case ctInterest:
+    case ctStartingBalance:
+    case ctEndingBalance:
+    case ctBalance:
+    case ctCurrentBalance:
+    case ctBalanceWarning:
+    case ctMaxBalanceLimit:
+    case ctCreditWarning:
+    case ctMaxCreditLimit:
+    case ctLoanAmount:
+    case ctPeriodicPayment:
+    case ctFinalPayment:
+    case ctPayment:
+      return cgMoney;
+    case ctPrice:
+    case ctLastPrice:
+    case ctBuyPrice:
+      return cgPrice;
+      /* the list of columns which represent shares, which is like money except the
+    transaction currency will not be displayed*/
+    case ctShares:
+      return cgShares;
+      // the list of columns which represent a percentage, so we can display them correctly
+    case ctReturn:
+    case ctReturnInvestment:
+    case ctInterestRate:
+    case ctPercentageGain:
+      return cgPercent;
+      // the list of columns which represent dates, so we can display them correctly
+    case ctPostDate:
+    case ctEntryDate:
+    case ctNextDueDate:
+    case ctOpeningDate:
+    case ctNextInterestChange:
+      return cgDate;
+    default:
+      break;
+  }
+  return cgMisc;
+}
+
+QString ListTable::tableHeader(const cellTypeE cellType)
+{
+  switch (cellType) {
+    case ctPostDate:
+      return i18n("Date");
+    case ctValue:
+      return i18n("Amount");
+    case ctNumber:
+      return i18n("Num");
+    case ctPayee:
+      return i18n("Payee");
+    case ctTag:
+      return i18n("Tags");
+    case ctCategory:
+      return i18n("Category");
+    case ctAccount:
+      return i18n("Account");
+    case ctMemo:
+      return i18n("Memo");
+    case ctTopCategory:
+      return i18n("Top Category");
+    case ctCategoryType:
+      return i18n("Category Type");
+    case ctMonth:
+      return i18n("Month");
+    case ctWeek:
+      return i18n("Week");
+    case ctReconcileFlag:
+      return i18n("Reconciled");
+    case ctAction:
+      return i18n("Action");
+    case ctShares:
+      return i18n("Shares");
+    case ctPrice:
+      return i18n("Price");
+    case ctLastPrice:
+      return i18n("Last Price");
+    case ctBuyPrice:
+      return i18n("Buy Price");
+    case ctNetInvValue:
+      return i18n("Net Value");
+    case ctBuys:
+      return i18n("Buy Value");
+    case ctSells:
+      return i18n("Sell Value");
+    case ctBuysST:
+      return i18n("Short-term Buy Value");
+    case ctSellsST:
+      return i18n("Short-term Sell Value");
+    case ctBuysLT:
+      return i18n("Long-term Buy Value");
+    case ctSellsLT:
+      return i18n("Long-term Sell Value");
+    case ctReinvestIncome:
+      return i18n("Dividends Reinvested");
+    case ctCashIncome:
+      return i18n("Dividends Paid Out");
+    case ctStartingBalance:
+      return i18n("Starting Balance");
+    case ctEndingBalance:
+      return i18n("Ending Balance");
+    case ctMarketValue:
+      return i18n("Market Value");
+    case ctReturn:
+      return i18n("Annualized Return");
+    case ctReturnInvestment:
+      return i18n("Return On Investment");
+    case ctFees:
+      return i18n("Fees");
+    case ctInterest:
+      return i18n("Interest");
+    case ctPayment:
+      return i18n("Payment");
+    case ctBalance:
+      return i18n("Balance");
+    case ctType:
+      return i18n("Type");
+    case ctName:
+      return i18nc("Account name", "Name");
+    case ctNextDueDate:
+      return i18n("Next Due Date");
+    case ctOccurence:
+      return i18n("Occurrence"); // krazy:exclude=spelling
+    case ctPaymentType:
+      return i18n("Payment Method");
+    case ctInstitution:
+      return i18n("Institution");
+    case ctDescription:
+      return i18n("Description");
+    case ctOpeningDate:
+      return i18n("Opening Date");
+    case ctCurrencyName:
+      return i18n("Currency");
+    case ctBalanceWarning:
+      return i18n("Balance Early Warning");
+    case ctMaxBalanceLimit:
+      return i18n("Balance Max Limit");
+    case ctCreditWarning:
+      return i18n("Credit Early Warning");
+    case ctMaxCreditLimit:
+      return i18n("Credit Max Limit");
+    case ctTax:
+      return i18n("Tax");
+    case ctFavorite:
+      return i18n("Preferred");
+    case ctLoanAmount:
+      return i18n("Loan Amount");
+    case ctInterestRate:
+      return i18n("Interest Rate");
+    case ctNextInterestChange:
+      return i18n("Next Interest Change");
+    case ctPeriodicPayment:
+      return i18n("Periodic Payment");
+    case ctFinalPayment:
+      return i18n("Final Payment");
+    case ctCurrentBalance:
+      return i18n("Current Balance");
+    case ctCapitalGain:
+      return i18n("Capital Gain");
+    case ctPercentageGain:
+      return i18n("Percentage Gain");
+    case ctCapitalGainST:
+      return i18n("Short-term Gain");
+    case ctCapitalGainLT:
+      return i18n("Long-term Gain");
+    default:
+      break;
+  }
+  return QLatin1String("None");
+}
 }

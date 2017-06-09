@@ -111,18 +111,18 @@ void QueryTableTest::testQueryBasics()
     QList<ListTable::TableRow> rows = qtbl_1.rows();
 
     QVERIFY(rows.count() == 19);
-    QVERIFY(rows[0]["categorytype"] == "Expense");
-    QVERIFY(rows[0]["category"] == "Parent");
-    QVERIFY(rows[0]["postdate"] == "2004-02-01");
-    QVERIFY(rows[14]["categorytype"] == "Expense");
-    QVERIFY(rows[14]["category"] == "Solo");
-    QVERIFY(rows[14]["postdate"] == "2005-01-01");
+    QVERIFY(rows[0][ListTable::ctCategoryType] == "Expense");
+    QVERIFY(rows[0][ListTable::ctCategory] == "Parent");
+    QVERIFY(rows[0][ListTable::ctPostDate] == "2004-02-01");
+    QVERIFY(rows[14][ListTable::ctCategoryType] == "Expense");
+    QVERIFY(rows[14][ListTable::ctCategory] == "Solo");
+    QVERIFY(rows[14][ListTable::ctPostDate] == "2005-01-01");
 
-    QVERIFY(MyMoneyMoney(rows[6]["value"]) == -(moParent1 + moParent2) * 3);
-    QVERIFY(MyMoneyMoney(rows[10]["value"]) == -(moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[16]["value"]) == -(moSolo) * 3);
-    QVERIFY(MyMoneyMoney(rows[17]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[18]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[6][ListTable::ctValue]) == -(moParent1 + moParent2) * 3);
+    QVERIFY(MyMoneyMoney(rows[10][ListTable::ctValue]) == -(moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[16][ListTable::ctValue]) == -(moSolo) * 3);
+    QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eTopCategory);
     cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
@@ -136,20 +136,20 @@ void QueryTableTest::testQueryBasics()
     rows = qtbl_2.rows();
 
     QVERIFY(rows.count() == 16);
-    QVERIFY(rows[0]["categorytype"] == "Expense");
-    QVERIFY(rows[0]["topcategory"] == "Parent");
-    QVERIFY(rows[0]["postdate"] == "2004-02-01");
-    QVERIFY(rows[7]["categorytype"] == "Expense");
-    QVERIFY(rows[7]["topcategory"] == "Parent");
-    QVERIFY(rows[7]["postdate"] == "2005-09-01");
-    QVERIFY(rows[12]["categorytype"] == "Expense");
-    QVERIFY(rows[12]["topcategory"] == "Solo");
-    QVERIFY(rows[12]["postdate"] == "2005-01-01");
+    QVERIFY(rows[0][ListTable::ctCategoryType] == "Expense");
+    QVERIFY(rows[0][ListTable::ctTopCategory] == "Parent");
+    QVERIFY(rows[0][ListTable::ctPostDate] == "2004-02-01");
+    QVERIFY(rows[8][ListTable::ctCategoryType] == "Expense");
+    QVERIFY(rows[8][ListTable::ctTopCategory] == "Parent");
+    QVERIFY(rows[8][ListTable::ctPostDate] == "2005-09-01");
+    QVERIFY(rows[12][ListTable::ctCategoryType] == "Expense");
+    QVERIFY(rows[12][ListTable::ctTopCategory] == "Solo");
+    QVERIFY(rows[12][ListTable::ctPostDate] == "2005-01-01");
 
-    QVERIFY(MyMoneyMoney(rows[9]["value"]) == -(moParent1 + moParent2 + moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[13]["value"]) == -(moSolo) * 3);
-    QVERIFY(MyMoneyMoney(rows[14]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[15]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moSolo) * 3);
+    QVERIFY(MyMoneyMoney(rows[14][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eAccount);
     filter.setName("Transactions by Account");
@@ -164,25 +164,25 @@ void QueryTableTest::testQueryBasics()
 
 #if 1
     QVERIFY(rows.count() == 19);
-    QVERIFY(rows[1]["account"] == "Checking Account");
-    QVERIFY(rows[1]["category"] == "Solo");
-    QVERIFY(rows[1]["postdate"] == "2004-01-01");
-    QVERIFY(rows[14]["account"] == "Credit Card");
-    QVERIFY(rows[14]["category"] == "Parent");
-    QVERIFY(rows[14]["postdate"] == "2005-09-01");
+    QVERIFY(rows[1][ListTable::ctAccount] == "Checking Account");
+    QVERIFY(rows[1][ListTable::ctCategory] == "Solo");
+    QVERIFY(rows[1][ListTable::ctPostDate] == "2004-01-01");
+    QVERIFY(rows[15][ListTable::ctAccount] == "Credit Card");
+    QVERIFY(rows[15][ListTable::ctCategory] == "Parent");
+    QVERIFY(rows[15][ListTable::ctPostDate] == "2005-09-01");
 #else
     QVERIFY(rows.count() == 12);
-    QVERIFY(rows[0]["account"] == "Checking Account");
-    QVERIFY(rows[0]["category"] == "Solo");
-    QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[11]["account"] == "Credit Card");
-    QVERIFY(rows[11]["category"] == "Parent");
-    QVERIFY(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows[0][ListTable::ctAccount] == "Checking Account");
+    QVERIFY(rows[0][ListTable::ctCategory] == "Solo");
+    QVERIFY(rows[0][ListTable::ctPostDate] == "2004-01-01");
+    QVERIFY(rows[11][ListTable::ctAccount] == "Credit Card");
+    QVERIFY(rows[11][ListTable::ctCategory] == "Parent");
+    QVERIFY(rows[11][ListTable::ctPostDate] == "2005-09-01");
 #endif
 
-    QVERIFY(MyMoneyMoney(rows[5]["value"]) == -(moSolo) * 3 + moCheckingOpen);
-    QVERIFY(MyMoneyMoney(rows[17]["value"]) == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
-    QVERIFY(MyMoneyMoney(rows[18]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == -(moSolo) * 3 + moCheckingOpen);
+    QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::ePayee);
     filter.setName("Transactions by Payee");
@@ -196,18 +196,18 @@ void QueryTableTest::testQueryBasics()
     rows = qtbl_4.rows();
 
     QVERIFY(rows.count() == 14);
-    QVERIFY(rows[0]["payee"] == "Test Payee");
-    QVERIFY(rows[0]["category"] == "Solo");
-    QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[7]["payee"] == "Test Payee");
-    QVERIFY(rows[7]["category"] == "Parent: Child");
-    QVERIFY(rows[7]["postdate"] == "2004-11-07");
-    QVERIFY(rows[10]["payee"] == "Test Payee");
-    QVERIFY(rows[10]["category"] == "Parent");
-    QVERIFY(rows[10]["postdate"] == "2005-09-01");
+    QVERIFY(rows[0][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[0][ListTable::ctCategory] == "Solo");
+    QVERIFY(rows[0][ListTable::ctPostDate] == "2004-01-01");
+    QVERIFY(rows[7][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[7][ListTable::ctCategory] == "Parent: Child");
+    QVERIFY(rows[7][ListTable::ctPostDate] == "2004-11-07");
+    QVERIFY(rows[11][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[11][ListTable::ctCategory] == "Parent");
+    QVERIFY(rows[11][ListTable::ctPostDate] == "2005-09-01");
 
-    QVERIFY(MyMoneyMoney(rows[12]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[13]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[12][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eMonth);
     filter.setName("Transactions by Month");
@@ -221,20 +221,20 @@ void QueryTableTest::testQueryBasics()
     rows = qtbl_5.rows();
 
     QVERIFY(rows.count() == 23);
-    QVERIFY(rows[0]["payee"] == "Test Payee");
-    QVERIFY(rows[0]["category"] == "Solo");
-    QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[12]["payee"] == "Test Payee");
-    QVERIFY(rows[12]["category"] == "Parent: Child");
-    QVERIFY(rows[12]["postdate"] == "2004-11-07");
-    QVERIFY(rows[20]["payee"] == "Test Payee");
-    QVERIFY(rows[20]["category"] == "Parent");
-    QVERIFY(rows[20]["postdate"] == "2005-09-01");
+    QVERIFY(rows[0][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[0][ListTable::ctCategory] == "Solo");
+    QVERIFY(rows[0][ListTable::ctPostDate] == "2004-01-01");
+    QVERIFY(rows[12][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[12][ListTable::ctCategory] == "Parent: Child");
+    QVERIFY(rows[12][ListTable::ctPostDate] == "2004-11-07");
+    QVERIFY(rows[20][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[20][ListTable::ctCategory] == "Parent");
+    QVERIFY(rows[20][ListTable::ctPostDate] == "2005-09-01");
 
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == -moSolo);
-    QVERIFY(MyMoneyMoney(rows[15]["value"]) == -(moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[9]["value"]) == -moParent1 + moCheckingOpen);
-    QVERIFY(MyMoneyMoney(rows[22]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == -moSolo);
+    QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -moParent1 + moCheckingOpen);
+    QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eWeek);
     filter.setName("Transactions by Week");
@@ -248,17 +248,17 @@ void QueryTableTest::testQueryBasics()
     rows = qtbl_6.rows();
 
     QVERIFY(rows.count() == 23);
-    QVERIFY(rows[0]["payee"] == "Test Payee");
-    QVERIFY(rows[0]["category"] == "Solo");
-    QVERIFY(rows[0]["postdate"] == "2004-01-01");
-    QVERIFY(rows[20]["payee"] == "Test Payee");
-    QVERIFY(rows[20]["category"] == "Parent");
-    QVERIFY(rows[20]["postdate"] == "2005-09-01");
+    QVERIFY(rows[0][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[0][ListTable::ctCategory] == "Solo");
+    QVERIFY(rows[0][ListTable::ctPostDate] == "2004-01-01");
+    QVERIFY(rows[20][ListTable::ctPayee] == "Test Payee");
+    QVERIFY(rows[20][ListTable::ctCategory] == "Parent");
+    QVERIFY(rows[20][ListTable::ctPostDate] == "2005-09-01");
 
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == -moSolo);
-    QVERIFY(MyMoneyMoney(rows[15]["value"]) == -(moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[21]["value"]) == -moParent2);
-    QVERIFY(MyMoneyMoney(rows[22]["value"]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == -moSolo);
+    QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[21][ListTable::ctValue]) == -moParent2);
+    QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
   }
@@ -266,16 +266,16 @@ void QueryTableTest::testQueryBasics()
   // Test querytable::TableRow::operator> and operator==
 
   QueryTable::TableRow low;
-  low["first"] = 'A';
-  low["second"] = 'B';
-  low["third"] = 'C';
+  low[ListTable::ctPrice] = 'A';
+  low[ListTable::ctLastPrice] = 'B';
+  low[ListTable::ctBuyPrice] = 'C';
 
   QueryTable::TableRow high;
-  high["first"] = 'A';
-  high["second"] = 'C';
-  high["third"] = 'B';
+  high[ListTable::ctPrice] = 'A';
+  high[ListTable::ctLastPrice] = 'C';
+  high[ListTable::ctBuyPrice] = 'B';
 
-  QueryTable::TableRow::setSortCriteria("first,second,third");
+  QueryTable::TableRow::setSortCriteria({ListTable::ctPrice, ListTable::ctLastPrice, ListTable::ctBuyPrice});
   QVERIFY(low < high);
   QVERIFY(low <= high);
   QVERIFY(high > low);
@@ -334,15 +334,15 @@ void QueryTableTest::testAccountQuery()
     QList<ListTable::TableRow> rows = qtbl_1.rows();
 
     QVERIFY(rows.count() == 6);
-    QVERIFY(rows[0]["account"] == "Checking Account");
-    QVERIFY(MyMoneyMoney(rows[0]["value"]) == moCheckingOpen);
-    QVERIFY(rows[0]["equitytype"].isEmpty());
-    QVERIFY(rows[2]["account"] == "Credit Card");
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == moCreditOpen);
-    QVERIFY(rows[2]["equitytype"].isEmpty());
+    QVERIFY(rows[0][ListTable::ctAccount] == "Checking Account");
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == moCheckingOpen);
+    QVERIFY(rows[0][ListTable::ctEquityType].isEmpty());
+    QVERIFY(rows[2][ListTable::ctAccount] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == moCreditOpen);
+    QVERIFY(rows[2][ListTable::ctEquityType].isEmpty());
 
-    QVERIFY(MyMoneyMoney(rows[4]["value"]) == moCheckingOpen + moCreditOpen);
-    QVERIFY(MyMoneyMoney(rows[5]["value"]) == moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == moCheckingOpen + moCreditOpen);
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == moCheckingOpen + moCreditOpen);
 
     //
     // Adding in transactions
@@ -371,12 +371,12 @@ void QueryTableTest::testAccountQuery()
     rows = qtbl_2.rows();
 
     QVERIFY(rows.count() == 6);
-    QVERIFY(rows[0]["account"] == "Checking Account");
-    QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
-    QVERIFY(rows[2]["account"] == "Credit Card");
-    QVERIFY(MyMoneyMoney(rows[2]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
+    QVERIFY(rows[0][ListTable::ctAccount] == "Checking Account");
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == (moCheckingOpen - moSolo*3));
+    QVERIFY(rows[2][ListTable::ctAccount] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctValue]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
-    QVERIFY(MyMoneyMoney(rows[5]["value"]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
 
     //
     // Account TYPES
@@ -390,14 +390,14 @@ void QueryTableTest::testAccountQuery()
     rows = qtbl_3.rows();
 
     QVERIFY(rows.count() == 5);
-    QVERIFY(rows[0]["account"] == "Checking Account");
-    QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo * 3));
-    QVERIFY(rows[2]["account"] == "Credit Card");
-    QVERIFY(MyMoneyMoney(rows[2]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
+    QVERIFY(rows[0][ListTable::ctAccount] == "Checking Account");
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == (moCheckingOpen - moSolo * 3));
+    QVERIFY(rows[2][ListTable::ctAccount] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctValue]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == moCheckingOpen - moSolo * 3);
-    QVERIFY(MyMoneyMoney(rows[3]["value"]) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
-    QVERIFY(MyMoneyMoney(rows[4]["value"]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == moCheckingOpen - moSolo * 3);
+    QVERIFY(MyMoneyMoney(rows[3][ListTable::ctValue]) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
   }
@@ -465,78 +465,78 @@ void QueryTableTest::testInvestment()
     QList<ListTable::TableRow> rows = invtran.rows();
 
     QVERIFY(rows.count() == 32);
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(-100000.00));
-    QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(-110000.00));
-    QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(24000.00));
-    QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(20000.00));
-    QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(5000.00));
-    QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(4000.00));
-    QVERIFY(MyMoneyMoney(rows[19]["value"]) == MyMoneyMoney(-50100.00));
-    QVERIFY(MyMoneyMoney(rows[22]["value"]) == MyMoneyMoney(-45100.00));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == MyMoneyMoney(-100000.00));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctValue]) == MyMoneyMoney(-110000.00));
+    QVERIFY(MyMoneyMoney(rows[3][ListTable::ctValue]) == MyMoneyMoney(24000.00));
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == MyMoneyMoney(20000.00));
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == MyMoneyMoney(5000.00));
+    QVERIFY(MyMoneyMoney(rows[6][ListTable::ctValue]) == MyMoneyMoney(4000.00));
+    QVERIFY(MyMoneyMoney(rows[19][ListTable::ctValue]) == MyMoneyMoney(-50100.00));
+    QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == MyMoneyMoney(-45100.00));
     // need to fix these... fundamentally different from the original test
-    //QVERIFY(MyMoneyMoney(invtran.m_rows[8]["value"])==MyMoneyMoney( -1000.00));
-    //QVERIFY(MyMoneyMoney(invtran.m_rows[11]["value"])==MyMoneyMoney( -1200.00));
-    //QVERIFY(MyMoneyMoney(invtran.m_rows[14]["value"])==MyMoneyMoney( -1100.00));
+    //QVERIFY(MyMoneyMoney(invtran.m_rows[8][ListTable::ctValue])==MyMoneyMoney( -1000.00));
+    //QVERIFY(MyMoneyMoney(invtran.m_rows[11][ListTable::ctValue])==MyMoneyMoney( -1200.00));
+    //QVERIFY(MyMoneyMoney(invtran.m_rows[14][ListTable::ctValue])==MyMoneyMoney( -1100.00));
 
-    QVERIFY(MyMoneyMoney(rows[1]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[3]["price"]) == MyMoneyMoney(120.00));
-    QVERIFY(MyMoneyMoney(rows[5]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney());
-    QVERIFY(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney());
-    QVERIFY(MyMoneyMoney(rows[19]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[22]["price"]) == MyMoneyMoney(90.00));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctPrice]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[3][ListTable::ctPrice]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctPrice]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[7][ListTable::ctPrice]) == MyMoneyMoney());
+    QVERIFY(MyMoneyMoney(rows[10][ListTable::ctPrice]) == MyMoneyMoney());
+    QVERIFY(MyMoneyMoney(rows[19][ListTable::ctPrice]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[22][ListTable::ctPrice]) == MyMoneyMoney(90.00));
 
-    QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(1000.00));
-    QVERIFY(MyMoneyMoney(rows[4]["shares"]) == MyMoneyMoney(-200.00));
-    QVERIFY(MyMoneyMoney(rows[6]["shares"]) == MyMoneyMoney(50.00));
-    QVERIFY(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
-    QVERIFY(MyMoneyMoney(rows[11]["shares"]) == MyMoneyMoney(0.00));
-    QVERIFY(MyMoneyMoney(rows[19]["shares"]) == MyMoneyMoney(500.00));
-    QVERIFY(MyMoneyMoney(rows[22]["shares"]) == MyMoneyMoney(500.00));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctShares]) == MyMoneyMoney(1000.00));
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctShares]) == MyMoneyMoney(-200.00));
+    QVERIFY(MyMoneyMoney(rows[6][ListTable::ctShares]) == MyMoneyMoney(50.00));
+    QVERIFY(MyMoneyMoney(rows[8][ListTable::ctShares]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[11][ListTable::ctShares]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[19][ListTable::ctShares]) == MyMoneyMoney(500.00));
+    QVERIFY(MyMoneyMoney(rows[22][ListTable::ctShares]) == MyMoneyMoney(500.00));
 
-    QVERIFY(rows[1]["action"] == "Buy");
-    QVERIFY(rows[3]["action"] == "Sell");
-    QVERIFY(rows[5]["action"] == "Reinvest");
-    QVERIFY(rows[7]["action"] == "Dividend");
-    QVERIFY(rows[13]["action"] == "Yield");
-    QVERIFY(rows[19]["action"] == "Buy");
-    QVERIFY(rows[22]["action"] == "Buy");
+    QVERIFY(rows[1][ListTable::ctAction] == "Buy");
+    QVERIFY(rows[3][ListTable::ctAction] == "Sell");
+    QVERIFY(rows[5][ListTable::ctAction] == "Reinvest");
+    QVERIFY(rows[7][ListTable::ctAction] == "Dividend");
+    QVERIFY(rows[13][ListTable::ctAction] == "Yield");
+    QVERIFY(rows[19][ListTable::ctAction] == "Buy");
+    QVERIFY(rows[22][ListTable::ctAction] == "Buy");
 #else
     QVERIFY(rows.count() == 9);
-    QVERIFY(MyMoneyMoney(rows[0]["value"]) == MyMoneyMoney(100000.00));
-    QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(110000.00));
-    QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(-24000.00));
-    QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-20000.00));
-    QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(5000.00));
-    QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(4000.00));
-    QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(-1000.00));
-    QVERIFY(MyMoneyMoney(rows[7]["value"]) == MyMoneyMoney(-1200.00));
-    QVERIFY(MyMoneyMoney(rows[8]["value"]) == MyMoneyMoney(-1100.00));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == MyMoneyMoney(100000.00));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == MyMoneyMoney(110000.00));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctValue]) == MyMoneyMoney(-24000.00));
+    QVERIFY(MyMoneyMoney(rows[3][ListTable::ctValue]) == MyMoneyMoney(-20000.00));
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == MyMoneyMoney(5000.00));
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == MyMoneyMoney(4000.00));
+    QVERIFY(MyMoneyMoney(rows[6][ListTable::ctValue]) == MyMoneyMoney(-1000.00));
+    QVERIFY(MyMoneyMoney(rows[7][ListTable::ctValue]) == MyMoneyMoney(-1200.00));
+    QVERIFY(MyMoneyMoney(rows[8][ListTable::ctValue]) == MyMoneyMoney(-1100.00));
 
-    QVERIFY(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[2]["price"]) == MyMoneyMoney(120.00));
-    QVERIFY(MyMoneyMoney(rows[4]["price"]) == MyMoneyMoney(100.00));
-    QVERIFY(MyMoneyMoney(rows[6]["price"]) == MyMoneyMoney(0.00));
-    QVERIFY(MyMoneyMoney(rows[8]["price"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctPrice]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctPrice]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctPrice]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[6][ListTable::ctPrice]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[8][ListTable::ctPrice]) == MyMoneyMoney(0.00));
 
-    QVERIFY(MyMoneyMoney(rows[1]["shares"]) == MyMoneyMoney(1000.00));
-    QVERIFY(MyMoneyMoney(rows[3]["shares"]) == MyMoneyMoney(-200.00));
-    QVERIFY(MyMoneyMoney(rows[5]["shares"]) == MyMoneyMoney(50.00));
-    QVERIFY(MyMoneyMoney(rows[7]["shares"]) == MyMoneyMoney(0.00));
-    QVERIFY(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctShares]) == MyMoneyMoney(1000.00));
+    QVERIFY(MyMoneyMoney(rows[3][ListTable::ctShares]) == MyMoneyMoney(-200.00));
+    QVERIFY(MyMoneyMoney(rows[5][ListTable::ctShares]) == MyMoneyMoney(50.00));
+    QVERIFY(MyMoneyMoney(rows[7][ListTable::ctShares]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[8][ListTable::ctShares]) == MyMoneyMoney(0.00));
 
-    QVERIFY(rows[0]["action"] == "Buy");
-    QVERIFY(rows[2]["action"] == "Sell");
-    QVERIFY(rows[4]["action"] == "Reinvest");
-    QVERIFY(rows[6]["action"] == "Dividend");
-    QVERIFY(rows[8]["action"] == "Yield");
+    QVERIFY(rows[0][ListTable::ctAction] == "Buy");
+    QVERIFY(rows[2][ListTable::ctAction] == "Sell");
+    QVERIFY(rows[4][ListTable::ctAction] == "Reinvest");
+    QVERIFY(rows[6][ListTable::ctAction] == "Dividend");
+    QVERIFY(rows[8][ListTable::ctAction] == "Yield");
 #endif
 
 #if 1
     // i think this is the correct amount. different treatment of dividend and yield
-    QVERIFY(MyMoneyMoney(rows[17]["value"]) == MyMoneyMoney(-153700.00));
-    QVERIFY(MyMoneyMoney(rows[29]["value"]) == MyMoneyMoney(24600.00));
-    QVERIFY(MyMoneyMoney(rows[31]["value"]) == MyMoneyMoney(-129100.00));
+    QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == MyMoneyMoney(-153700.00));
+    QVERIFY(MyMoneyMoney(rows[29][ListTable::ctValue]) == MyMoneyMoney(24600.00));
+    QVERIFY(MyMoneyMoney(rows[31][ListTable::ctValue]) == MyMoneyMoney(-129100.00));
 #else
     QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(171700.00));
     QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(171700.00));
@@ -564,24 +564,24 @@ void QueryTableTest::testInvestment()
     rows = invhold.rows();
 
     QVERIFY(rows.count() == 5);
-    QVERIFY(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
-    QVERIFY(MyMoneyMoney(rows[0]["returninvestment"]) == MyMoneyMoney("-39/5000"));
-    QVERIFY(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(-210000.00));
-    QVERIFY(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(44000.00));
-    QVERIFY(MyMoneyMoney(rows[0]["reinvestincome"]) == MyMoneyMoney(9000.00));
-    QVERIFY(MyMoneyMoney(rows[0]["cashincome"]) == MyMoneyMoney(3300.00));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturn]) == MyMoneyMoney("669/10000"));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturnInvestment]) == MyMoneyMoney("-39/5000"));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctBuys]) == MyMoneyMoney(-210000.00));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctSells]) == MyMoneyMoney(44000.00));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReinvestIncome]) == MyMoneyMoney(9000.00));
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctCashIncome]) == MyMoneyMoney(3300.00));
 
-    QVERIFY(MyMoneyMoney(rows[1]["return"]) == MyMoneyMoney("1349/10000"));
-    QVERIFY(MyMoneyMoney(rows[1]["returninvestment"]) == MyMoneyMoney("1/10"));
-    QVERIFY(MyMoneyMoney(rows[1]["startingbal"]) == MyMoneyMoney(100000.00)); // this should stay non-zero to check if investment performance is calculated at non-zero starting balance
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctReturn]) == MyMoneyMoney("1349/10000"));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctReturnInvestment]) == MyMoneyMoney("1/10"));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctStartingBalance]) == MyMoneyMoney(100000.00)); // this should stay non-zero to check if investment performance is calculated at non-zero starting balance
 
-    QVERIFY(MyMoneyMoney(rows[2]["return"]) == MyMoneyMoney("2501/2500"));
-    QVERIFY(MyMoneyMoney(rows[2]["returninvestment"]) == MyMoneyMoney("323/1250"));
-    QVERIFY(MyMoneyMoney(rows[2]["buys"]) == MyMoneyMoney(-95200.00));
-    QVERIFY(MyMoneyMoney(rows[2]["sells"]) == MyMoneyMoney(119800.00));
-    QVERIFY(MyMoneyMoney(rows[2]["endingbal"]) == MyMoneyMoney(0.00)); // this should stay zero to check if investment performance is calculated at zero ending balance
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctReturn]) == MyMoneyMoney("2501/2500"));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctReturnInvestment]) == MyMoneyMoney("323/1250"));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctBuys]) == MyMoneyMoney(-95200.00));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctSells]) == MyMoneyMoney(119800.00));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctEndingBalance]) == MyMoneyMoney(0.00)); // this should stay zero to check if investment performance is calculated at zero ending balance
 
-    QVERIFY(MyMoneyMoney(rows[4]["endingbal"]) == MyMoneyMoney(280000.00));
+    QVERIFY(MyMoneyMoney(rows[4][ListTable::ctEndingBalance]) == MyMoneyMoney(280000.00));
 
 #if 0
     // Dump file & reports
@@ -732,7 +732,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000006>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Credit Card</td><td class=\"value\">USD&nbsp;100.00</td><td>USD&nbsp;304.00</td></tr>") > 0);
 
     // a 100.00 JPY withdrawal should be displayed as such even if the expense account uses another currency
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">JPY&nbsp;-100.00</td><td>JPY&nbsp;-400.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">JPY&nbsp;-100.00</td><td>JPY&nbsp;-300.00</td></tr>") > 0);
 
     // now run the same report again but this time convert all values to the base currency and make sure the values are correct
     filter.setConvertCurrency(true);
@@ -761,10 +761,10 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000003>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-2.00</td></tr>") > 0);
 
     // a 100.00 JPY transfer should be displayed as -2.00 when converted to the base currency using the closing date price (notice the balance is -5.00)
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000005>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-2.00</td><td>&nbsp;-4.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000005>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer to Checking Account</td><td class=\"value\">&nbsp;-2.00</td><td>&nbsp;-5.00</td></tr>") > 0);
 
     // a 100.00 JPY withdrawal should be displayed as -1.00 when converted to the base currency using the intermediate date price
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-5.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-3.00</td></tr>") > 0);
 
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));

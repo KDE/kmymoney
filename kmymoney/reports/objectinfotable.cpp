@@ -68,58 +68,69 @@ ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report): ListTable(_repor
 
 void ObjectInfoTable::init()
 {
+  m_columns.clear();
+  m_group.clear();
+  m_subtotal.clear();
   switch (m_config.rowType()) {
     case MyMoneyReport::eSchedule:
       constructScheduleTable();
-      m_columns = "nextduedate,name";
+      m_columns << ctNextDueDate << ctName;
       break;
     case MyMoneyReport::eAccountInfo:
       constructAccountTable();
-      m_columns = "institution,type,name";
+      m_columns << ctInstitution << ctType << ctName;
       break;
     case MyMoneyReport::eAccountLoanInfo:
       constructAccountLoanTable();
-      m_columns = "institution,type,name";
+      m_columns << ctInstitution << ctType << ctName;
       break;
     default:
       break;
   }
 
   // Sort the data to match the report definition
-  m_subtotal = "value";
+  m_subtotal << ctValue;
 
   switch (m_config.rowType()) {
     case MyMoneyReport::eSchedule:
-      m_group = "type";
-      m_subtotal = "value";
+      m_group << ctType;
+      m_subtotal << ctValue;
       break;
     case MyMoneyReport::eAccountInfo:
     case MyMoneyReport::eAccountLoanInfo:
-      m_group = "topcategory,institution";
-      m_subtotal = "currentbalance";
+      m_group << ctTopCategory << ctInstitution;
+      m_subtotal << ctCurrentBalance;
       break;
     default:
       throw MYMONEYEXCEPTION("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
   }
 
-  QString sort = m_group + ',' + m_columns + ",id,rank";
+  QVector<cellTypeE> sort = QVector<cellTypeE>::fromList(m_group) << QVector<cellTypeE>::fromList(m_columns) << ctID << ctRank;
 
   switch (m_config.rowType()) {
     case MyMoneyReport::eSchedule:
       if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
-        m_columns = "name,payee,paymenttype,occurence,nextduedate,category"; // krazy:exclude=spelling
+        m_columns << ctName << ctPayee << ctPaymentType << ctOccurence
+                  << ctNextDueDate << ctCategory; // krazy:exclude=spelling
       } else {
-        m_columns = "name,payee,paymenttype,occurence,nextduedate"; // krazy:exclude=spelling
+        m_columns << ctName << ctPayee << ctPaymentType << ctOccurence
+                  << ctNextDueDate; // krazy:exclude=spelling
       }
       break;
     case MyMoneyReport::eAccountInfo:
-      m_columns = "type,name,number,description,openingdate,currencyname,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,tax,favorite";
+      m_columns << ctType << ctName << ctNumber << ctDescription
+                << ctOpeningDate << ctCurrencyName << ctBalanceWarning
+                << ctCreditWarning << ctMaxCreditLimit
+                << ctTax << ctFavorite;
       break;
     case MyMoneyReport::eAccountLoanInfo:
-      m_columns = "type,name,number,description,openingdate,currencyname,payee,loanamount,interestrate,nextinterestchange,periodicpayment,finalpayment,favorite";
+      m_columns << ctType << ctName << ctNumber << ctDescription
+                << ctOpeningDate << ctCurrencyName << ctPayee
+                << ctLoanAmount << ctInterestRate << ctNextInterestChange
+                << ctPeriodicPayment << ctFinalPayment << ctFavorite;
       break;
     default:
-      m_columns = "";
+      m_columns.clear();
   }
 
   TableRow::setSortCriteria(sort);
@@ -157,24 +168,24 @@ void ObjectInfoTable::constructScheduleTable()
       }
 
       // help for sort and render functions
-      scheduleRow["rank"] = '0';
+      scheduleRow[ctRank] = QLatin1Char('0');
 
       //schedule data
-      scheduleRow["id"] = schedule.id();
-      scheduleRow["name"] = schedule.name();
-      scheduleRow["nextduedate"] = schedule.nextDueDate().toString(Qt::ISODate);
-      scheduleRow["type"] = KMyMoneyUtils::scheduleTypeToString(schedule.type());
-      scheduleRow["occurence"] = i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()); // krazy:exclude=spelling
-      scheduleRow["paymenttype"] = KMyMoneyUtils::paymentMethodToString(schedule.paymentType());
+      scheduleRow[ctID] = schedule.id();
+      scheduleRow[ctName] = schedule.name();
+      scheduleRow[ctNextDueDate] = schedule.nextDueDate().toString(Qt::ISODate);
+      scheduleRow[ctType] = KMyMoneyUtils::scheduleTypeToString(schedule.type());
+      scheduleRow[ctOccurence] = i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()); // krazy:exclude=spelling
+      scheduleRow[ctPaymentType] = KMyMoneyUtils::paymentMethodToString(schedule.paymentType());
 
       //scheduleRow["category"] = account.name();
 
       //to get the payee we must look into the splits of the transaction
       MyMoneyTransaction transaction = schedule.transaction();
       MyMoneySplit split = transaction.splitByAccount(account.id(), true);
-      scheduleRow["value"] = (split.value() * xr).toString();
+      scheduleRow[ctValue] = (split.value() * xr).toString();
       MyMoneyPayee payee = file->payee(split.payeeId());
-      scheduleRow["payee"] = payee.name();
+      scheduleRow[ctPayee] = payee.name();
       m_rows += scheduleRow;
 
       //the text matches the main split
@@ -188,27 +199,27 @@ void ObjectInfoTable::constructScheduleTable()
           TableRow splitRow;
           ReportAccount splitAcc = (*split_it).accountId();
 
-          splitRow["rank"] = '1';
-          splitRow["id"] = schedule.id();
-          splitRow["name"] = schedule.name();
-          splitRow["type"] = KMyMoneyUtils::scheduleTypeToString(schedule.type());
-          splitRow["nextduedate"] = schedule.nextDueDate().toString(Qt::ISODate);
+          splitRow[ctRank] = QLatin1Char('1');
+          splitRow[ctID] = schedule.id();
+          splitRow[ctName] = schedule.name();
+          splitRow[ctType] = KMyMoneyUtils::scheduleTypeToString(schedule.type());
+          splitRow[ctNextDueDate] = schedule.nextDueDate().toString(Qt::ISODate);
 
           if ((*split_it).value() == MyMoneyMoney::autoCalc) {
-            splitRow["split"] = MyMoneyMoney::autoCalc.toString();
+            splitRow[ctSplit] = MyMoneyMoney::autoCalc.toString();
           } else if (! splitAcc.isIncomeExpense()) {
-            splitRow["split"] = (*split_it).value().toString();
+            splitRow[ctSplit] = (*split_it).value().toString();
           } else {
-            splitRow["split"] = (- (*split_it).value()).toString();
+            splitRow[ctSplit] = (- (*split_it).value()).toString();
           }
 
           //if it is an assett account, mark it as a transfer
           if (! splitAcc.isIncomeExpense()) {
-            splitRow["category"] = ((* split_it).value().isNegative())
+            splitRow[ctCategory] = ((* split_it).value().isNegative())
                                    ? i18n("Transfer from %1" , splitAcc.fullName())
                                    : i18n("Transfer to %1" , splitAcc.fullName());
           } else {
-            splitRow ["category"] = splitAcc.fullName();
+            splitRow [ctCategory] = splitAcc.fullName();
           }
 
           //add the split only if it matches the text or it matches the main split
@@ -240,23 +251,23 @@ void ObjectInfoTable::constructAccountTable()
         && account.accountType() != MyMoneyAccount::Stock
         && !account.isClosed()) {
       MyMoneyMoney value;
-      accountRow["rank"] = '0';
-      accountRow["topcategory"] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
-      accountRow["institution"] = (file->institution(account.institutionId())).name();
-      accountRow["type"] = KMyMoneyUtils::accountTypeToString(account.accountType());
-      accountRow["name"] = account.name();
-      accountRow["number"] = account.number();
-      accountRow["description"] = account.description();
-      accountRow["openingdate"] = account.openingDate().toString(Qt::ISODate);
+      accountRow[ctRank] = QLatin1Char('0');
+      accountRow[ctTopCategory] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
+      accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+      accountRow[ctType] = KMyMoneyUtils::accountTypeToString(account.accountType());
+      accountRow[ctName] = account.name();
+      accountRow[ctNumber] = account.number();
+      accountRow[ctDescription] = account.description();
+      accountRow[ctOpeningDate] = account.openingDate().toString(Qt::ISODate);
       //accountRow["currency"] = (file->currency(account.currencyId())).tradingSymbol();
-      accountRow["currencyname"] = (file->currency(account.currencyId())).name();
-      accountRow["balancewarning"] = account.value("minBalanceEarly");
-      accountRow["maxbalancelimit"] = account.value("minBalanceAbsolute");
-      accountRow["creditwarning"] = account.value("maxCreditEarly");
-      accountRow["maxcreditlimit"] = account.value("maxCreditAbsolute");
-      accountRow["tax"] = account.value("Tax") == QLatin1String("Yes") ? i18nc("Is this a tax account?", "Yes") : QString();
-      accountRow["openingbalance"] = account.value("OpeningBalanceAccount") == QLatin1String("Yes") ? i18nc("Is this an opening balance account?", "Yes") : QString();
-      accountRow["favorite"] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
+      accountRow[ctCurrencyName] = (file->currency(account.currencyId())).name();
+      accountRow[ctBalanceWarning] = account.value("minBalanceEarly");
+      accountRow[ctMaxBalanceLimit] = account.value("minBalanceAbsolute");
+      accountRow[ctCreditWarning] = account.value("maxCreditEarly");
+      accountRow[ctMaxCreditLimit] = account.value("maxCreditAbsolute");
+      accountRow[ctTax] = account.value("Tax") == QLatin1String("Yes") ? i18nc("Is this a tax account?", "Yes") : QString();
+      accountRow[ctOpeningBalance] = account.value("OpeningBalanceAccount") == QLatin1String("Yes") ? i18nc("Is this an opening balance account?", "Yes") : QString();
+      accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       //investment accounts show the balances of all its subaccounts
       if (account.accountType() == MyMoneyAccount::Investment) {
@@ -270,7 +281,7 @@ void ObjectInfoTable::constructAccountTable()
         MyMoneyMoney xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
         value = value * xr;
       }
-      accountRow["currentbalance"] = value.toString();
+      accountRow[ctCurrentBalance] = value.toString();
 
       m_rows += accountRow;
     }
@@ -297,27 +308,27 @@ void ObjectInfoTable::constructAccountLoanTable()
         xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
       }
 
-      accountRow["rank"] = '0';
-      accountRow["topcategory"] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
-      accountRow["institution"] = (file->institution(account.institutionId())).name();
-      accountRow["type"] = KMyMoneyUtils::accountTypeToString(account.accountType());
-      accountRow["name"] = account.name();
-      accountRow["number"] = account.number();
-      accountRow["description"] = account.description();
-      accountRow["openingdate"] = account.openingDate().toString(Qt::ISODate);
+      accountRow[ctRank] = QLatin1Char('0');
+      accountRow[ctTopCategory] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
+      accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+      accountRow[ctType] = KMyMoneyUtils::accountTypeToString(account.accountType());
+      accountRow[ctName] = account.name();
+      accountRow[ctNumber] = account.number();
+      accountRow[ctDescription] = account.description();
+      accountRow[ctOpeningDate] = account.openingDate().toString(Qt::ISODate);
       //accountRow["currency"] = (file->currency(account.currencyId())).tradingSymbol();
-      accountRow["currencyname"] = (file->currency(account.currencyId())).name();
-      accountRow["payee"] = file->payee(loan.payee()).name();
-      accountRow["loanamount"] = (loan.loanAmount() * xr).toString();
-      accountRow["interestrate"] = (loan.interestRate(QDate::currentDate()) / MyMoneyMoney(100, 1) * xr).toString();
-      accountRow["nextinterestchange"] = loan.nextInterestChange().toString(Qt::ISODate);
-      accountRow["periodicpayment"] = (loan.periodicPayment() * xr).toString();
-      accountRow["finalpayment"] = (loan.finalPayment() * xr).toString();
-      accountRow["favorite"] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
+      accountRow[ctCurrencyName] = (file->currency(account.currencyId())).name();
+      accountRow[ctPayee] = file->payee(loan.payee()).name();
+      accountRow[ctLoanAmount] = (loan.loanAmount() * xr).toString();
+      accountRow[ctInterestRate] = (loan.interestRate(QDate::currentDate()) / MyMoneyMoney(100, 1) * xr).toString();
+      accountRow[ctNextInterestChange] = loan.nextInterestChange().toString(Qt::ISODate);
+      accountRow[ctPeriodicPayment] = (loan.periodicPayment() * xr).toString();
+      accountRow[ctFinalPayment] = (loan.finalPayment() * xr).toString();
+      accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       MyMoneyMoney value = file->balance(account.id());
       value = value * xr;
-      accountRow["currentbalance"] = value.toString();
+      accountRow[ctCurrentBalance] = value.toString();
       m_rows += accountRow;
     }
     ++it_account;

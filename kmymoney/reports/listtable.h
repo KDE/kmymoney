@@ -61,6 +61,33 @@ public:
   void init();
 
 public:
+  enum cellTypeE /*{*/ /*Money*/
+                  {ctValue, ctNetInvValue, ctMarketValue,
+                   ctPrice, ctLastPrice, ctBuyPrice,
+                   ctBuys, ctSells, ctBuysST, ctSellsST, ctBuysLT, ctSellsLT,
+                   ctCapitalGain, ctCapitalGainST,ctCapitalGainLT,
+                   ctCashIncome, ctReinvestIncome,
+                   ctFees, ctInterest,
+                   ctStartingBalance, ctEndingBalance, ctBalance, ctCurrentBalance,
+                   ctBalanceWarning, ctMaxBalanceLimit, ctOpeningBalance,
+                   ctCreditWarning, ctMaxCreditLimit,
+                   ctLoanAmount, ctPeriodicPayment, ctFinalPayment, ctPayment,
+                   /*Shares*/
+                   ctShares,
+                   /*Percent*/
+                   ctReturn, ctReturnInvestment, ctInterestRate, ctPercentageGain,
+                   /*Date*/
+                   ctPostDate, ctEntryDate, ctNextDueDate, ctOpeningDate, ctNextInterestChange,
+                   ctMonth, ctWeek, ctReconcileDate,
+                   /*Misc*/
+                   ctCurrency, ctCurrencyName, ctCommodity, ctID,
+                   ctRank, ctSplit, ctMemo,
+                   ctAccount, ctAccountID, ctTopAccount, ctInvestAccount, ctInstitution,
+                   ctCategory, ctTopCategory, ctCategoryType,
+                   ctNumber, ctReconcileFlag,
+                   ctAction, ctTag, ctPayee, ctEquityType, ctType, ctName,
+                   ctDepth, ctRowsCount, ctTax, ctFavorite, ctDescription, ctOccurence, ctPaymentType
+                 };
   /**
     * Contains a single row in the table.
     *
@@ -68,7 +95,7 @@ public:
     * a QMap with the added ability to specify which columns you'd like to
     * use as a sort key when you qHeapSort a list of these TableRows
     */
-  class TableRow: public QMap<QString, QString>
+  class TableRow: public QMap<cellTypeE, QString>
   {
   public:
     bool operator< (const TableRow&) const;
@@ -76,16 +103,16 @@ public:
     bool operator> (const TableRow&) const;
     bool operator== (const TableRow&) const;
 
-    static void setSortCriteria(const QString& _criteria) {
-      m_sortCriteria = _criteria.split(",");
+    static void setSortCriteria(const QVector<cellTypeE>& _criteria) {
+      m_sortCriteria = _criteria;
     }
   private:
-    static QStringList m_sortCriteria;
+    static QVector<cellTypeE> m_sortCriteria;
   };
 
   const QList<TableRow>& rows() {
     return m_rows;
-  };
+  }
 
 protected:
   void render(QString&, QString&) const;
@@ -100,25 +127,25 @@ protected:
 
   QList<TableRow> m_rows;
 
-  QString m_group;
+  QList<cellTypeE> m_group;
   /**
    * Comma-separated list of columns to place BEFORE the subtotal column
    */
-  QString m_columns;
+  QList<cellTypeE> m_columns;
   /**
    * Name of the subtotal column
    */
-  QString m_subtotal;
+  QList<cellTypeE> m_subtotal;
   /**
    * Comma-separated list of columns to place AFTER the subtotal column
    */
-  QString m_postcolumns;
-  QString m_summarize;
-  QString m_propagate;
+  QList<cellTypeE> m_postcolumns;
 
   MyMoneyReport m_config;
-
-
+private:
+  enum cellGroupE { cgMoney, cgShares, cgPercent, cgDate, cgPrice, cgMisc };
+  static cellGroupE cellGroup(const cellTypeE cellType);
+  static QString tableHeader(const cellTypeE cellType);
 };
 
 }
