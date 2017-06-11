@@ -125,7 +125,7 @@ target_link_libraries(kmymoney
   kmm_plugin
   Qt5::Core
   Qt5::Sql
-  KF5::KHtml
+  Qt5::WebEngineWidgets
   KF5::Archive
   KF5::ConfigGui
   KF5::WidgetsAddons

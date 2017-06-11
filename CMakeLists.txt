@@ -42,9 +42,15 @@ else()
   set(OPT_KF5_COMPONENTS ${OPT_KF5_COMPONENTS} Gpgmepp)
 endif()
 
-find_package(Qt5 5.6 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport)
+find_package(Qt5 5.6 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport WebEngineWidgets)
+
+#to be deleted when QWebEngine 5.8 will be better spread across distros
+if(Qt5WebEngineWidgets_VERSION VERSION_LESS 5.8.0)
+  find_package(KF5KHtml 5.2 REQUIRED)
+endif()
+
 find_package(KF5 5.2 REQUIRED
-  COMPONENTS Archive CoreAddons Config ConfigWidgets I18n KHtml Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
+  COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
   OPTIONAL_COMPONENTS ${OPT_KF5_COMPONENTS}
 )
 find_package(LibAlkimia 6.0.0 REQUIRED)
@@ -272,6 +278,7 @@ nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_MODELTEST")
 nice_yesno("DOXYGEN_FOUND")
+nice_yesno("KF5KHtml_FOUND")
 message("
 -------- KMyMoney ${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX} --------
 
@@ -293,6 +300,9 @@ weboob plugin:                           ${nice_WEBOOB_FOUND}
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
 
 SQLCipher plugin:                        ${nice_ENABLE_SQLCIPHER}
+
+KHTML printing:                          ${nice_KF5KHtml_FOUND}
+
 --------------------------------------------
 
 

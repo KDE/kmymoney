@@ -160,12 +160,12 @@
   <label>Order of items on homepage</label>
   <default>8,1,2,3,4,5,6,7,-9,10</default>
   </entry>
-  <entry name="FontSizePercentage" type="Int">
-   <label>Percentage of default font size used for home view HTML page</label>
-   <default>100</default>
+  <entry name="ZoomFactor" type="Double">
+   <label>Zoom factor used for home view HTML page</label>
+   <default>1.00</default>
   </entry>
-  <entry name="RememberFontSize" type="Bool">
-   <label>Remember (manually adjusted) font size in home view on program end.</label>
+  <entry name="RememberZoomFactor" type="Bool">
+   <label>Remember (manually adjusted) zoom factor in home view on program end.</label>
    <default>true</default>
   </entry>
   <entry name="ShowLimitInfo" type="Bool">

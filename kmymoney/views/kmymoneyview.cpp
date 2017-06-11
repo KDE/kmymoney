@@ -41,6 +41,7 @@
 #include <QIcon>
 #include <QTemporaryFile>
 #include <QUrlQuery>
+#include <QWebEngineSettings>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -2146,4 +2147,11 @@ void KMyMoneyViewBase::addWidget(QWidget* w)
 QVBoxLayout* KMyMoneyViewBase::layout() const
 {
   return d->m_viewLayout;
+}
+
+bool MyQWebEnginePage::acceptNavigationRequest(const QUrl &url, NavigationType type, bool)
+{
+  if (type == NavigationTypeLinkClicked)
+    emit urlChanged(url);
+  return false;
 }

@@ -21,6 +21,9 @@
 #ifndef KRECONCILIATIONREPORTDLG_H
 #define KRECONCILIATIONREPORTDLG_H
 
+#include <QtWebEngineWidgets/QWebEngineView>
+#include "config-kmymoney.h"
+
 #include "ui_kreconciliationreportdlgdecl.h"
 
 class KHTMLPart;
@@ -35,10 +38,18 @@ public:
 
 protected slots:
   void print();
+  #ifdef KF5KHtml_FOUND
+  void handleHTML(const QString &sHTML);
+  #endif
 
 private:
-  KHTMLPart* m_summaryHTMLPart;
-  KHTMLPart* m_detailsHTMLPart;
+  QWebEngineView *m_summaryHTMLPart;
+  QWebEngineView *m_detailsHTMLPart;
+  QPrinter       *m_currentPrinter;
+signals:
+  #ifdef KF5KHtml_FOUND
+  void getHTML(QString sHTML);
+  #endif
 };
 
 #endif

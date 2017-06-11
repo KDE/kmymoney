@@ -38,12 +38,12 @@
 #include <QStandardPaths>
 #include <QDesktopServices>
 #include <QUrlQuery>
+#include <QPrintDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <khtmlview.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
 #include <kxmlguiwindow.h>
@@ -51,7 +51,10 @@
 #include <kmessagebox.h>
 #include <kcodecs.h>
 #include <ktoolinvocation.h>
-#include <khtml_part.h>
+#ifdef KF5KHtml_FOUND
+#include <KHTMLPart>
+#include <KHTMLView>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -96,12 +99,12 @@ public:
    */
   typedef QMap<QDate, MyMoneyMoney> dailyBalances;
 
-  KHTMLPart*      m_part;
-  QString         m_html;
-  bool            m_showAllSchedules;
-  bool            m_needReload;
-  MyMoneyForecast m_forecast;
-  MyMoneyMoney    m_total;
+  QWebEngineView   *m_view;
+  QString           m_html;
+  bool              m_showAllSchedules;
+  bool              m_needReload;
+  MyMoneyForecast   m_forecast;
+  MyMoneyMoney      m_total;
   /**
     * Hold the last valid size of the net worth graph
     * for the times when the needed size can't be computed.
@@ -136,33 +139,39 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Home")),
     d(new Private)
 {
-  d->m_part = new KHTMLPart(this);
-  d->m_part->setOnlyLocalReferences(true);
-  addWidget(d->m_part->view());
+  d->m_view = new QWebEngineView(this);
+  d->m_view->setPage(new MyQWebEnginePage(d->m_view));
+  addWidget(d->m_view);
 
-  d->m_part->begin();
-  d->m_part->write(KWelcomePage::welcomePage());
-  d->m_part->end();
-
-  // we are going to handle the zoom view signal to change the font scale
-  connect(d->m_part->view(), SIGNAL(zoomView(int)), this, SLOT(slotZoomView(int)));
-  disconnect(d->m_part->view(), SIGNAL(zoomView(int)), d->m_part, SLOT(slotZoomView(int)));
-
-  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          this, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
+  d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+  connect(d->m_view->page(), &QWebEnginePage::urlChanged,
+          this, &KHomeView::slotOpenUrl);
 }
 
 KHomeView::~KHomeView()
 {
   // if user wants to remember the font size, store it here
-  if (KMyMoneyGlobalSettings::rememberFontSize()) {
-    KMyMoneyGlobalSettings::setFontSizePercentage(d->m_part->fontScaleFactor());
+  if (KMyMoneyGlobalSettings::rememberZoomFactor()) {
+    KMyMoneyGlobalSettings::setZoomFactor(d->m_view->zoomFactor());
     KMyMoneyGlobalSettings::self()->save();
   }
-  //This is to prevent a crash on exit with KDE 4.3.2
-  delete d->m_part;
 
   delete d;
+}
+
+void KHomeView::wheelEvent(QWheelEvent* event)
+{
+  // Zoom text on Ctrl + Scroll
+  if (event->modifiers() & Qt::CTRL) {
+    qreal factor = d->m_view->zoomFactor();
+    if (event->delta() > 0)
+      factor += 0.1;
+    else if (event->delta() < 0)
+      factor -= 0.1;
+    d->m_view->setZoomFactor(factor);
+    event->accept();
+    return;
+  }
 }
 
 void KHomeView::slotLoadView()
@@ -188,29 +197,36 @@ void KHomeView::showEvent(QShowEvent* event)
 
 void KHomeView::slotPrintView()
 {
-  if (d->m_part && d->m_part->view())
-    d->m_part->view()->print();
-}
-
-void KHomeView::slotZoomView(int delta)
-{
-  const int fontScaleStepping = 10;
-  if (delta > 0)
-    d->m_part->setFontScaleFactor(d->m_part->fontScaleFactor() + fontScaleStepping);
-  else
-    d->m_part->setFontScaleFactor(d->m_part->fontScaleFactor() - fontScaleStepping);
+  if (d->m_view) {
+#ifdef KF5KHtml_FOUND
+    KHTMLPart *khtml = new KHTMLPart(this);
+    khtml->begin();
+    khtml->write(d->m_html);
+    khtml->end();
+    khtml->view()->print();
+    delete khtml;
+#else
+    m_currentPrinter = new QPrinter();
+    QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
+    dialog->setWindowTitle(QString());
+    if (dialog->exec() != QDialog::Accepted) {
+      delete m_currentPrinter;
+      m_currentPrinter = nullptr;
+      return;
+    }
+    d->m_view->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+#endif
+  }
 }
 
 void KHomeView::loadView()
 {
-  d->m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
+  d->m_view->setZoomFactor(KMyMoneyGlobalSettings::zoomFactor());
 
   QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
   if (list.count() == 0) {
-    d->m_part->begin();
-    d->m_part->write(KWelcomePage::welcomePage());
-    d->m_part->end();
+    d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
   } else {
     //clear the forecast flag so it will be reloaded
     d->m_forecast.setForecastDone(false);
@@ -285,9 +301,7 @@ void KHomeView::loadView()
     d->m_html += "<div id=\"vieweffect\"></div>";
     d->m_html += footer;
 
-    d->m_part->begin();
-    d->m_part->write(d->m_html);
-    d->m_part->end();
+    d->m_view->setHtml(d->m_html, QUrl("file://"));
   }
 }
 
@@ -1153,17 +1167,19 @@ QString KHomeView::linkend() const
   return QStringLiteral("</a>");
 }
 
-void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
+void KHomeView::slotOpenUrl(const QUrl &url)
 {
   QString protocol = url.scheme();
   QString view = url.fileName();
+  if (view.isEmpty())
+    return;
   QUrlQuery query(url);
   QString id = query.queryItemValue("id");
   QString mode = query.queryItemValue("mode");
 
-  if (protocol == "http") {
+  if (protocol == QLatin1String("http")) {
     QDesktopServices::openUrl(url);
-  } else if (protocol == "mailto") {
+  } else if (protocol == QLatin1String("mailto")) {
     QDesktopServices::openUrl(url);
   } else {
     KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
@@ -1172,7 +1188,7 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
       emit ledgerSelected(id, QString());
 
     } else if (view == VIEW_SCHEDULE) {
-      if (mode == "enter") {
+      if (mode == QLatin1String("enter")) {
         emit scheduleSelected(id);
         QTimer::singleShot(0, mw->actionCollection()->action(kmymoney->s_Actions[Action::ScheduleEnter]), SLOT(trigger()));
       } else if (mode == QLatin1String("edit")) {
@@ -1185,7 +1201,7 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
         d->m_showAllSchedules = true;
         loadView();
 
-      } else if (mode == "reduced") {
+      } else if (mode == QLatin1String("reduced")) {
         d->m_showAllSchedules = false;
         loadView();
       }
@@ -1194,17 +1210,12 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
       emit reportSelected(id);
 
     } else if (view == VIEW_WELCOME) {
-      if (mode == "whatsnew") {
-        d->m_part->begin();
-        d->m_part->write(KWelcomePage::whatsNewPage());
-        d->m_part->end();
-      } else {
-        d->m_part->begin();
-        d->m_part->write(KWelcomePage::welcomePage());
-        d->m_part->end();
-      }
+      if (mode == QLatin1String("whatsnew"))
+        d->m_view->setHtml(KWelcomePage::whatsNewPage(), QUrl("file://"));
+      else
+        d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
 
-    } else if (view == "action") {
+    } else if (view == QLatin1String("action")) {
       QTimer::singleShot(0, mw->actionCollection()->action(id), SLOT(trigger()));
     } else if (view == VIEW_HOME) {
       QList<MyMoneyAccount> list;

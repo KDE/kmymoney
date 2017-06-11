@@ -26,6 +26,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "selectedtransaction.h"
+#include <QPrinter>
 
 class QStringList;
 class KPluginInfo;
@@ -56,6 +57,7 @@ protected slots:
 private:
   struct Private;
   std::unique_ptr<Private> d;
+  QPrinter                *m_currentPrinter;
 };
 
 #endif // PRINTCHECK_H

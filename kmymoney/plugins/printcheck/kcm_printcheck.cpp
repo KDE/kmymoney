@@ -27,9 +27,6 @@
 #include <QFrame>
 
 // KDE includes
-#include <khtml_part.h>
-#include <khtmlview.h>
-#include <kurlrequester.h>
 #include <KPluginFactory>
 
 #include "pluginsettings.h"
@@ -38,10 +35,10 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
   setupUi(this);
-  m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
+  m_checkTemplatePreviewHTMLPart = new QWebEngineView(m_previewFrame);
   QVBoxLayout *layout = new QVBoxLayout;
   m_previewFrame->setLayout(layout);
-  layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
+  layout->addWidget(m_checkTemplatePreviewHTMLPart);
 
   connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(QUrl)),
           this, SLOT(urlSelected(QUrl)));
@@ -52,13 +49,13 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
 void PluginSettingsWidget::urlSelected(const QUrl &url)
 {
   if (!url.isEmpty())
-    m_checkTemplatePreviewHTMLPart->openUrl(url);
+    m_checkTemplatePreviewHTMLPart->load(url);
 }
 
 void PluginSettingsWidget::returnPressed(const QString& url)
 {
   if (!url.isEmpty())
-    m_checkTemplatePreviewHTMLPart->openUrl(QUrl::fromUserInput(url));
+    m_checkTemplatePreviewHTMLPart->load(QUrl::fromUserInput(url));
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_kmm_printcheck.json", registerPlugin<KCMPrintCheck>();)

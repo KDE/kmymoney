@@ -20,15 +20,22 @@
 
 #include "printcheck.h"
 
+#include "config-kmymoney.h"
+
 // QT includes
 #include <QAction>
+#include <QWebEngineView>
+#include <QPrintDialog>
 
 // KDE includes
 #include <KActionCollection>
 #include <KPluginInfo>
-#include <khtmlview.h>
-#include <khtml_part.h>
 #include <QStandardPaths>
+#include <KLocalizedString>
+#ifdef KF5KHtml_FOUND
+#include <KHTMLPart>
+#include <KHTMLView>
+#endif
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -117,7 +124,7 @@ void KMMPrintCheckPlugin::slotPrintCheck()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoneyToWordsConverter converter;
-  KHTMLPart *htmlPart = new KHTMLPart(static_cast<QWidget*>(0));
+  QWebEngineView *htmlPart = new QWebEngineView();
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
   for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (!canBePrinted(*it))
@@ -154,16 +161,34 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$MEMO", (*it).split().memo());
 
     // print the check
-    htmlPart->begin();
-    htmlPart->write(checkHTML);
-    htmlPart->end();
-    htmlPart->view()->print();
+    htmlPart->setHtml(checkHTML, QUrl("file://"));
+#ifdef KF5KHtml_FOUND
+    KHTMLPart *khtml = new KHTMLPart();
+    khtml->begin();
+    khtml->write(checkHTML);
+    khtml->end();
+    khtml->view()->print();
+    delete khtml;
+#else
+    m_currentPrinter = new QPrinter();
+    QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter);
+    dialog->setWindowTitle(QString());
+    if (dialog->exec() != QDialog::Accepted) {
+      delete m_currentPrinter;
+      m_currentPrinter = nullptr;
+      continue;
+    } else {
+      htmlPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+    }
+    delete dialog;
+#endif
 
     // mark the transaction as printed
     markAsPrinted(*it);
   }
 
   PluginSettings::setPrintedChecks(d->m_printedTransactionIdList);
+  delete htmlPart;
 }
 
 void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions)

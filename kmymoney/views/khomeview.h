@@ -25,11 +25,11 @@
 // QT Includes
 
 #include <QWidget>
+#include <QWebEngineView>
+#include <QPrinter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <khtml_part.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -62,6 +62,7 @@ public:
   ~KHomeView();
 
 protected:
+  virtual void wheelEvent(QWheelEvent *event);
   void showPayments();
   void showPaymentEntry(const MyMoneySchedule&, int cnt = 1);
   void showAccounts(paymentTypeE type, const QString& hdr);
@@ -89,15 +90,13 @@ protected:
 
 public slots:
 
-  void slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments &args, const KParts::BrowserArguments &browArgs);
+  void slotOpenUrl(const QUrl &url);
   void slotLoadView();
 
   /**
     * Print the current view
     */
   void slotPrintView();
-
-  void slotZoomView(int);
 
 signals:
   void ledgerSelected(const QString& id, const QString& transaction);
@@ -136,6 +135,8 @@ private:
    * Calculate the forecast balance after a payment has been made
    */
   MyMoneyMoney forecastPaymentBalance(const MyMoneyAccount& acc, const MyMoneyMoney& payment, QDate& paymentDate);
+
+  QPrinter *m_currentPrinter;
 };
 
 #endif

@@ -41,14 +41,19 @@
 #include <QFileDialog>
 #include <QLocale>
 #include <QTextCodec>
+#include <QWebEngineSettings>
+#include <QPrintDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KHTMLView>
 #include <KConfig>
 #include <KMessageBox>
 #include <KRecentDirs>
+#ifdef KF5KHtml_FOUND
+#include <KHTMLPart>
+#include <KHTMLView>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -73,9 +78,9 @@ using namespace Icons;
 /**
   * KReportsView::KReportTab Implementation
   */
-KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const QObject* eventHandler):
+KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler):
     QWidget(parent),
-    m_tableView(new KHTMLPart(this)),
+    m_tableView(new QWebEngineView(this)),
     m_chartView(new KReportChartView(this)),
     m_control(new ReportControl(this)),
     m_layout(new QVBoxLayout(this)),
@@ -87,7 +92,8 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
     m_table(0)
 {
   m_layout->setSpacing(6);
-  m_tableView->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
+  m_tableView->setPage(new MyQWebEnginePage(m_tableView));
+  m_tableView->setZoomFactor(KMyMoneyGlobalSettings::zoomFactor());
 
   //set button icons
   m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::OfficeChartLine]));
@@ -100,9 +106,9 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
-  m_tableView->view()->hide();
+  m_tableView->hide();
   m_layout->addWidget(m_control);
-  m_layout->addWidget(m_tableView->view());
+  m_layout->addWidget(m_tableView);
   m_layout->addWidget(m_chartView);
 
   connect(m_control->ui->buttonChart, SIGNAL(clicked()),
@@ -126,8 +132,8 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   connect(m_control->ui->buttonClose, SIGNAL(clicked()),
           eventHandler, SLOT(slotCloseCurrent()));
 
-  connect(m_tableView->browserExtension(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          eventHandler, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
+  connect(m_tableView->page(), &QWebEnginePage::urlChanged,
+          eventHandler, &KReportsView::slotOpenUrl);
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())
@@ -146,14 +152,30 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
 KReportsView::KReportTab::~KReportTab()
 {
   delete m_table;
-  //This is to prevent a crash on exit with KDE 4.3.2
-  delete m_tableView;
 }
 
 void KReportsView::KReportTab::print()
 {
-  if (m_tableView && m_tableView->view())
-    m_tableView->view()->print();
+  if (m_tableView) {
+#ifdef KF5KHtml_FOUND
+    KHTMLPart *khtml = new KHTMLPart(this);
+    khtml->begin();
+    khtml->write(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()));
+    khtml->end();
+    khtml->view()->print();
+    delete khtml;
+#else
+    m_currentPrinter = new QPrinter();
+    QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
+    dialog->setWindowTitle(QString());
+    if (dialog->exec() != QDialog::Accepted) {
+      delete m_currentPrinter;
+      m_currentPrinter = nullptr;
+      return;
+    }
+    m_tableView->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+#endif
+  }
 }
 
 void KReportsView::KReportTab::copyToClipboard()
@@ -238,12 +260,11 @@ void KReportsView::KReportTab::toggleChart()
 
   if (m_showingChart) {
     if (!m_isTableViewValid) {
-      m_tableView->begin();
-      m_tableView->write(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()));
-      m_tableView->end();
+      m_tableView->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()),
+                                               QUrl("file://")); // workaround for access permission to css file
     }
     m_isTableViewValid = true;
-    m_tableView->view()->show();
+    m_tableView->show();
     m_chartView->hide();
 
     m_control->ui->buttonChart->setText(i18n("Chart"));
@@ -253,7 +274,7 @@ void KReportsView::KReportTab::toggleChart()
     if (!m_isChartViewValid)
       m_table->drawChart(*m_chartView);
     m_isChartViewValid = true;
-    m_tableView->view()->hide();
+    m_tableView->hide();
     m_chartView->show();
 
     m_control->ui->buttonChart->setText(i18n("Report"));
@@ -639,9 +660,11 @@ void KReportsView::loadView()
   m_tocTreeWidget->setUpdatesEnabled(true);
 }
 
-void KReportsView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
+void KReportsView::slotOpenUrl(const QUrl &url)
 {
   QString view = url.fileName();
+  if (view.isEmpty())
+    return;
   QString command = QUrlQuery(url).queryItemValue("command");
   QString id = QUrlQuery(url).queryItemValue("id");
   QString tid = QUrlQuery(url).queryItemValue("tid");
@@ -650,19 +673,19 @@ void KReportsView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&,
 
     if (command.isEmpty()) {
       // slotRefreshView();
-    } else if (command == "print")
+    } else if (command == QLatin1String("print"))
       slotPrintView();
-    else if (command == "copy")
+    else if (command == QLatin1String("copy"))
       slotCopyView();
-    else if (command == "save")
+    else if (command == QLatin1String("save"))
       slotSaveView();
-    else if (command == "configure")
+    else if (command == QLatin1String("configure"))
       slotConfigure();
-    else if (command == "duplicate")
+    else if (command == QLatin1String("duplicate"))
       slotDuplicate();
-    else if (command == "close")
+    else if (command == QLatin1String("close"))
       slotCloseCurrent();
-    else if (command == "delete")
+    else if (command == QLatin1String("delete"))
       slotDelete();
     else
       qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));

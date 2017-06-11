@@ -33,11 +33,12 @@
 #include <QTreeWidgetItem>
 #include <QTabWidget>
 #include <QListWidget>
+#include <QWebEngineView>
+#include <QPrinter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KHTMLPart>
 #include <kfilefiltercombo.h>
 #include <QPointer>
 
@@ -61,6 +62,7 @@
 #include "tocitemreport.h"
 
 class MyMoneyReport;
+class MyQWebEnginePage;
 
 /**
   * Displays a page where reports can be placed.
@@ -85,10 +87,11 @@ public:
   class KReportTab: public QWidget
   {
   private:
-    QPointer<KHTMLPart> m_tableView;
-    reports::KReportChartView* m_chartView;
-    ReportControl* m_control;
-    QVBoxLayout* m_layout;
+    QWebEngineView            *m_tableView;
+    reports::KReportChartView *m_chartView;
+    ReportControl             *m_control;
+    QVBoxLayout               *m_layout;
+    QPrinter                  *m_currentPrinter;
     MyMoneyReport m_report;
     bool m_deleteMe;
     bool m_chartEnabled;
@@ -104,7 +107,7 @@ public:
     QByteArray m_encoding;
 
   public:
-    KReportTab(QTabWidget* parent, const MyMoneyReport& report, const QObject* eventHandler);
+    KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView *eventHandler);
     ~KReportTab();
     const MyMoneyReport& report() const {
       return m_report;
@@ -133,9 +136,6 @@ public:
     }
     void showEvent(QShowEvent * event);
     void loadTab();
-    KParts::BrowserExtension* browserExtenstion() const {
-      return m_tableView->browserExtension();
-    }
   };
 
   /**
@@ -205,7 +205,7 @@ protected:
   void setColumnsAlreadyAdjusted(bool adjusted);
 
 public slots:
-  void slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);
+  void slotOpenUrl(const QUrl &url);
 
   void slotLoadView();
   void slotPrintView();

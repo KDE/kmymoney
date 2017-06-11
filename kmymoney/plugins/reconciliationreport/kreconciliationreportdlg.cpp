@@ -30,26 +30,23 @@
 #include <QPointer>
 
 // KDE includes
-#include <khtmlview.h>
-#include <khtml_part.h>
 #include <KStandardGuiItem>
+#ifdef KF5KHtml_FOUND
+#include <KHTMLPart>
+#include <KHTMLView>
+#endif
 
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)
 {
   setupUi(this);
-  m_summaryHTMLPart = new KHTMLPart(m_summaryTab);
-  m_summaryLayout->addWidget(m_summaryHTMLPart->view());
+  m_summaryHTMLPart = new QWebEngineView(m_summaryTab);
+  m_summaryLayout->addWidget(m_summaryHTMLPart);
 
-  m_detailsHTMLPart = new KHTMLPart(m_detailsTab);
-  m_detailsLayout->addWidget(m_detailsHTMLPart->view());
+  m_detailsHTMLPart = new QWebEngineView(m_detailsTab);
+  m_detailsLayout->addWidget(m_detailsHTMLPart);
 
-  m_summaryHTMLPart->begin();
-  m_summaryHTMLPart->write(summaryReportHTML);
-  m_summaryHTMLPart->end();
-
-  m_detailsHTMLPart->begin();
-  m_detailsHTMLPart->write(detailsReportHTML);
-  m_detailsHTMLPart->end();
+  m_summaryHTMLPart->setHtml(summaryReportHTML, QUrl("file://"));
+  m_detailsHTMLPart->setHtml(detailsReportHTML, QUrl("file://"));
 
   QPushButton* printButton = m_buttonBox->addButton(QString(), QDialogButtonBox::ActionRole);
   KGuiItem::assign(printButton, KStandardGuiItem::print());
@@ -62,29 +59,55 @@ KReportDlg::~KReportDlg()
 {
 }
 
+#ifdef KF5KHtml_FOUND
+void KReportDlg::handleHTML(const QString &sHTML)
+{
+  KHTMLPart *khtml = new KHTMLPart(this);
+  khtml->begin();
+  khtml->write(sHTML);
+  khtml->end();
+  khtml->view()->print();
+  delete khtml;
+}
+#endif
+
 void KReportDlg::print()
 {
-  // create the QPrinter object with default options
-  QPrinter printer;
-
-  // start the print dialog to initialize the QPrinter object
-  QPointer<QPrintDialog> dlg = new QPrintDialog(&printer, this);
-
-  if (dlg->exec()) {
-    // create the painter object
-    QPainter painter(&printer);
-
+#ifdef KF5KHtml_FOUND
     // do the actual painting job
+    connect(this, &KReportDlg::getHTML, this, &KReportDlg::handleHTML);
     switch (m_tabWidget->currentIndex()) {
       case 0:
-        m_summaryHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
+        m_summaryHTMLPart->page()->toHtml([this](const QString &result){emit getHTML(result);});
         break;
       case 1:
-        m_detailsHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
+        m_detailsHTMLPart->page()->toHtml([this](const QString &result){emit getHTML(result);});
         break;
       default:
         qDebug("KReportDlg::print() current page index not handled correctly");
     }
+#else
+  m_currentPrinter = new QPrinter();
+  QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
+  dialog->setWindowTitle(QString());
+  if (dialog->exec() != QDialog::Accepted) {
+    delete m_currentPrinter;
+    m_currentPrinter = nullptr;
+    return;
   }
-  delete dlg;
+
+  // do the actual painting job
+  switch (m_tabWidget->currentIndex()) {
+    case 0:
+      m_summaryHTMLPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      break;
+    case 1:
+      m_detailsHTMLPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      break;
+    default:
+      delete m_currentPrinter;
+      m_currentPrinter = nullptr;
+      qDebug("KReportDlg::print() current page index not handled correctly");
+  }
+  #endif
 }

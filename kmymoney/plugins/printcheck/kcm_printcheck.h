@@ -22,6 +22,7 @@
 
 #include <kcmodule.h>
 #include <QWidget>
+#include <QWebEngineView>
 #include "ui_pluginsettingsdecl.h"
 
 class QStringList;
@@ -39,7 +40,7 @@ public slots:
   void returnPressed(const QString& url);
 
 private:
-  KHTMLPart* m_checkTemplatePreviewHTMLPart;
+  QWebEngineView* m_checkTemplatePreviewHTMLPart;
 };
 
 class KCMPrintCheck : public KCModule

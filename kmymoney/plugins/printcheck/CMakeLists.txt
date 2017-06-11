@@ -11,10 +11,16 @@ kconfig_add_kcfg_files(kmm_printcheck_PART_SRCS pluginsettings.kcfgc)
 add_library(kmm_printcheck MODULE ${kmm_printcheck_PART_SRCS})
 
 target_link_libraries(kmm_printcheck
-  KF5::KHtml
+  KF5::I18n
+  Qt5::WebEngineWidgets
   kmm_mymoney
   kmm_plugin
 )
+
+#to be deleted when QWebEngine 5.8 will be better spread across distros
+if(KF5KHtml_FOUND)
+  target_link_libraries(kmm_printcheck KF5::KHtml)
+endif()
 
 install(TARGETS kmm_printcheck
         DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
@@ -43,7 +49,11 @@ add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
 kcoreaddons_desktop_to_json(kcm_kmm_printcheck kcm_kmm_printcheck.desktop)
 
 target_link_libraries(kcm_kmm_printcheck
-                      KF5::KHtml
+                      KF5::I18n
+                      KF5::ConfigWidgets
+                      Qt5::WebEngineWidgets
+                      KF5::Completion
+                      KF5::KIOWidgets
                       KF5::CoreAddons
                       )
 

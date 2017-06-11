@@ -28,6 +28,7 @@
 #include <QUrl>
 #include <QSaveFile>
 #include <QMenu>
+#include <QtWebEngineWidgets/QWebEnginePage>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -668,5 +669,16 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
+};
+
+class MyQWebEnginePage : public QWebEnginePage
+{
+  Q_OBJECT
+
+public:
+  MyQWebEnginePage(QObject* parent = nullptr) : QWebEnginePage(parent){}
+
+protected:
+  bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool);
 };
 #endif
