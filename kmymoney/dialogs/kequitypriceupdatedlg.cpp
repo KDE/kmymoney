@@ -46,6 +46,7 @@
 #include <KStandardGuiItem>
 #include <KSharedConfig>
 #include <KLocalizedString>
+#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,11 +57,11 @@
 #include "mymoneyprice.h"
 #include "kmymoneyglobalsettings.h"
 
-#define SYMBOL_COL      0
+#define WEBID_COL       0
 #define NAME_COL        1
 #define PRICE_COL       2
 #define DATE_COL        3
-#define ID_COL          4
+#define KMMID_COL       4
 #define SOURCE_COL      5
 
 KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId) :
@@ -68,16 +69,16 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
     m_fUpdateAll(false)
 {
   QStringList headerList;
-  headerList << i18n("Symbol") << i18nc("Equity name", "Name")
+  headerList << i18n("ID") << i18nc("Equity name", "Name")
   << i18n("Price") << i18n("Date");
 
   lvEquityList->header()->setSortIndicator(0, Qt::AscendingOrder);
   lvEquityList->setColumnWidth(NAME_COL, 125);
 
   // This is a "get it up and running" hack.  Will replace this in the future.
-  headerList << i18nc("Internal identifier", "ID")
+  headerList << i18nc("Internal identifier", "Internal ID")
   << i18nc("Online quote source", "Source");
-  lvEquityList->setColumnWidth(ID_COL, 0);
+  lvEquityList->setColumnWidth(KMMID_COL, 0);
 
   lvEquityList->setHeaderLabels(headerList);
 
@@ -197,7 +198,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
   QString symbol = QString("%1 > %2").arg(pair.first, pair.second);
   QString id = QString("%1 %2").arg(pair.first, pair.second);
   // Check that the pair does not already exist
-  if (lvEquityList->findItems(id, Qt::MatchExactly, ID_COL).empty()) {
+  if (lvEquityList->findItems(id, Qt::MatchExactly, KMMID_COL).empty()) {
     const MyMoneyPrice &pr = file->price(pair.first, pair.second);
     if (pr.source() != "KMyMoney") {
       bool keep = true;
@@ -229,7 +230,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
 
       if (keep) {
         QTreeWidgetItem* item = new QTreeWidgetItem();
-        item->setText(SYMBOL_COL, symbol);
+        item->setText(WEBID_COL, symbol);
         item->setText(NAME_COL, i18n("%1 units in %2", pair.first, pair.second));
         if (pr.isValid()) {
           MyMoneySecurity fromCurrency = file->currency(pair.second);
@@ -237,7 +238,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
           item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
         }
-        item->setText(ID_COL, id);
+        item->setText(KMMID_COL, id);
         item->setText(SOURCE_COL, "Yahoo Currency");  // This string value should not be localized
         lvEquityList->invisibleRootItem()->addChild(item);
       }
@@ -247,12 +248,10 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
 
 void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  QString symbol = inv.tradingSymbol();
   QString id = inv.id();
   // Check that the pair does not already exist
-  if (lvEquityList->findItems(id, Qt::MatchExactly, ID_COL).empty()) {
+  if (lvEquityList->findItems(id, Qt::MatchExactly, KMMID_COL).empty()) {
+    MyMoneyFile* file = MyMoneyFile::instance();
     // check that the security is still in use
     QList<MyMoneyAccount>::const_iterator it_a;
     QList<MyMoneyAccount> list;
@@ -265,8 +264,22 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
     }
     // if it is in use, it_a is not equal to list.end()
     if (it_a != list.constEnd()) {
+      QString webID;
+      WebPriceQuoteSource onlineSource(inv.value("kmm-online-source"));
+      if (onlineSource.m_webIDBy == WebPriceQuoteSource::identifyBy::IdentificationNumber)
+        webID = inv.value("kmm-security-id");   // insert ISIN number...
+      else if (onlineSource.m_webIDBy == WebPriceQuoteSource::identifyBy::Name)
+        webID = inv.name();                     // ...or name...
+      else
+        webID = inv.tradingSymbol();            // ...or symbol
+
       QTreeWidgetItem* item = new QTreeWidgetItem();
-      item->setText(SYMBOL_COL, symbol);
+      item->setForeground(WEBID_COL, KColorScheme(QPalette::Normal).foreground(KColorScheme::NormalText));
+      if (webID.isEmpty()) {
+        webID = i18n("[No identifier]");
+        item->setForeground(WEBID_COL, KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText));
+      }
+      item->setText(WEBID_COL, webID);
       item->setText(NAME_COL, inv.name());
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
       const MyMoneyPrice &pr = file->price(id.toUtf8(), inv.tradingCurrency());
@@ -274,7 +287,7 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
         item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), inv.pricePrecision()));
         item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
       }
-      item->setText(ID_COL, id);
+      item->setText(KMMID_COL, id);
       if (inv.value("kmm-online-quote-system") == "Finance::Quote")
         item->setText(SOURCE_COL, QString("Finance::Quote %1").arg(inv.value("kmm-online-source")));
       else
@@ -306,7 +319,7 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
 {
   MyMoneyPrice price;
   QTreeWidgetItem* item = 0;
-  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(id, Qt::MatchExactly, ID_COL);
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(id, Qt::MatchExactly, KMMID_COL);
 
   if (! foundItems.empty())
     item = foundItems.at(0);
@@ -314,7 +327,7 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
   if (item) {
     MyMoneyMoney rate(item->text(PRICE_COL));
     if (!rate.isZero()) {
-      QString id = item->text(ID_COL).toUtf8();
+      QString id = item->text(KMMID_COL).toUtf8();
 
       // if the ID has a space, then this is TWO ID's, so it's a currency quote
       if (id.contains(" ")) {
@@ -352,7 +365,7 @@ void KEquityPriceUpdateDlg::storePrices()
 
       MyMoneyMoney rate(item->text(PRICE_COL));
       if (!rate.isZero()) {
-        QString id = item->text(ID_COL).toUtf8();
+        QString id = item->text(KMMID_COL).toUtf8();
 
         // if the ID has a space, then this is TWO ID's, so it's a currency quote
         if (QString(id).contains(" ")) {
@@ -416,7 +429,7 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked()
   if (item) {
     prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
     prgOnlineProgress->setValue(skipCnt);
-    m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
+    m_webQuote.launch(item->text(WEBID_COL), item->text(KMMID_COL), item->text(SOURCE_COL));
 
   } else {
 
@@ -434,7 +447,7 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked()
     prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
     prgOnlineProgress->setValue(1);
     m_fUpdateAll = true;
-    m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
+    m_webQuote.launch(item->text(WEBID_COL), item->text(KMMID_COL), item->text(SOURCE_COL));
 
   } else {
     logErrorMessage("Security list is empty.");
@@ -453,9 +466,9 @@ void KEquityPriceUpdateDlg::slotDateChanged()
   m_toDate->blockSignals(false);
 }
 
-void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _symbol)
+void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString& _webID)
 {
-  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_id, Qt::MatchExactly, ID_COL);
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_kmmID, Qt::MatchExactly, KMMID_COL);
   QTreeWidgetItem* item = 0;
 
   if (! foundItems.empty())
@@ -463,10 +476,10 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 
   // Give the user some options
   int result;
-  if (_id.contains(" ")) {
-    result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.", _symbol, item->text(SOURCE_COL)), i18n("Price Update Failed"));
+  if (_kmmID.contains(" ")) {
+    result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.", _webID, item->text(SOURCE_COL)), i18n("Price Update Failed"));
   } else {
-    result = KMessageBox::questionYesNoCancel(this, QString("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _symbol, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+    result = KMessageBox::questionYesNoCancel(this, QString("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _webID, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
   }
 
   if (result == KMessageBox::No) {
@@ -475,7 +488,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
     MyMoneyFileTransaction ft;
     try {
       // Get this security (by ID)
-      MyMoneySecurity security = MyMoneyFile::instance()->security(_id.toUtf8());
+      MyMoneySecurity security = MyMoneyFile::instance()->security(_kmmID.toUtf8());
 
       // Set the quote source to blank
       security.setValue("kmm-online-source", QString());
@@ -485,7 +498,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
       MyMoneyFile::instance()->modifySecurity(security);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _symbol, e.what()) + QString("</qt>"), i18n("Price Update Failed"));
+      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _webID, e.what()) + QString("</qt>"), i18n("Price Update Failed"));
     }
   }
 
@@ -505,7 +518,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
       }
     }
     if (next) {
-      m_webQuote.launch(next->text(SYMBOL_COL), next->text(ID_COL), next->text(SOURCE_COL));
+      m_webQuote.launch(next->text(WEBID_COL), next->text(KMMID_COL), next->text(SOURCE_COL));
     } else {
       finishUpdate();
     }
@@ -514,9 +527,9 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
   }
 }
 
-void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _id, const QString& _symbol, MyMoneyStatement& st)
+void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QString& _webID, MyMoneyStatement& st)
 {
-  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_id, Qt::MatchExactly, ID_COL);
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_kmmID, Qt::MatchExactly, KMMID_COL);
   QTreeWidgetItem* item = 0;
 
   if (! foundItems.empty())
@@ -528,9 +541,9 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _id, const QStri
     MyMoneyFile *file = MyMoneyFile::instance();
     MyMoneySecurity fromCurrency, toCurrency;
 
-    if (!_id.contains(QLatin1Char(' '))) {
+    if (!_kmmID.contains(QLatin1Char(' '))) {
       try {
-        toCurrency = MyMoneyFile::instance()->security(_id);
+        toCurrency = MyMoneyFile::instance()->security(_kmmID);
         fromCurrency = MyMoneyFile::instance()->security(toCurrency.tradingCurrency());
       } catch (const MyMoneyException &) {
         fromCurrency = toCurrency = MyMoneySecurity();
@@ -538,7 +551,7 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _id, const QStri
 
     } else {
       QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
-      if (splitrx.indexIn(_id) != -1) {
+      if (splitrx.indexIn(_kmmID) != -1) {
         try {
           fromCurrency = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
           toCurrency = MyMoneyFile::instance()->security(splitrx.cap(1).toUtf8());
@@ -619,7 +632,7 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _id, const QStri
         item->setText(DATE_COL, priceClass.m_date.toString(Qt::ISODate));
         item->setText(SOURCE_COL, priceClass.m_sourceName);
       }
-      logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
+      logStatusMessage(i18n("Price for %1 updated (id %2)", _webID, _kmmID));
       // make sure to make OK button available
     }
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
@@ -637,19 +650,19 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _id, const QStri
       }
     }
   } else {
-    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list. Aborting entire update.", _symbol, _id));
+    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list. Aborting entire update.", _webID, _kmmID));
   }
 
   if (next) {
-    m_webQuote.launch(next->text(SYMBOL_COL), next->text(ID_COL), next->text(SOURCE_COL));
+    m_webQuote.launch(next->text(WEBID_COL), next->text(KMMID_COL), next->text(SOURCE_COL));
   } else {
     finishUpdate();
   }
 }
 
-void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString& _symbol, const QDate& _date, const double& _price)
+void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _kmmID, const QString& _webID, const QDate& _date, const double& _price)
 {
-  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_id, Qt::MatchExactly, ID_COL);
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_kmmID, Qt::MatchExactly, KMMID_COL);
   QTreeWidgetItem* item = 0;
 
   if (! foundItems.empty())
@@ -664,9 +677,9 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
         date = QDate::currentDate();
 
       MyMoneyMoney price = MyMoneyMoney::ONE;
-      QString id = _id.toUtf8();
+      QString id = _kmmID.toUtf8();
       MyMoneySecurity fromCurrency, toCurrency;
-      if (_id.contains(" ") == 0) {
+      if (_kmmID.contains(" ") == 0) {
         MyMoneySecurity security = MyMoneyFile::instance()->security(id);
         QString factor = security.value("kmm-online-factor");
         if (!factor.isEmpty()) {
@@ -681,7 +694,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
 
       } else {
         QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
-        if (splitrx.indexIn(_id) != -1) {
+        if (splitrx.indexIn(_kmmID) != -1) {
           try {
             fromCurrency = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
             toCurrency = MyMoneyFile::instance()->security(splitrx.cap(1).toUtf8());
@@ -694,11 +707,11 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
 
       item->setText(PRICE_COL, price.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
       item->setText(DATE_COL, date.toString(Qt::ISODate));
-      logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
+      logStatusMessage(i18n("Price for %1 updated (id %2)", _webID, _kmmID));
       // make sure to make OK button available
       buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     } else {
-      logErrorMessage(i18n("Received an invalid price for %1, unable to update.", _symbol));
+      logErrorMessage(i18n("Received an invalid price for %1, unable to update.", _webID));
     }
 
     prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
@@ -714,11 +727,11 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       }
     }
   } else {
-    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list. Aborting entire update.", _symbol, _id));
+    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list. Aborting entire update.", _webID, _kmmID));
   }
 
   if (next) {
-    m_webQuote.launch(next->text(SYMBOL_COL), next->text(ID_COL), next->text(SOURCE_COL));
+    m_webQuote.launch(next->text(WEBID_COL), next->text(KMMID_COL), next->text(SOURCE_COL));
   } else {
     finishUpdate();
   }
@@ -739,9 +752,9 @@ void KEquityPriceUpdateDlg::finishUpdate()
 // build option 'final' is used and all CPP files are concatenated.
 // So it could well be, that in another CPP file these definitions
 // are also used.
-#undef SYMBOL_COL
+#undef WEBID_COL
 #undef NAME_COL
 #undef PRICE_COL
 #undef DATE_COL
-#undef ID_COL
+#undef KMMID_COL
 #undef SOURCE_COL

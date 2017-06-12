@@ -50,8 +50,8 @@ class WebPriceQuoteProcess: public QProcess
   Q_OBJECT
 public:
   WebPriceQuoteProcess();
-  inline void setSymbol(const QString& _symbol) {
-    m_symbol = _symbol; m_string.truncate(0);
+  inline void setWebID(const QString& _webID) {
+    m_webID = _webID; m_string.truncate(0);
   }
 
 public slots:
@@ -62,7 +62,7 @@ signals:
   void processExited(const QString&);
 
 private:
-  QString m_symbol;
+  QString m_webID;
   QString m_string;
 };
 
@@ -105,9 +105,10 @@ private:
   * for stock prices or currency exchange rates.
   */
 struct WebPriceQuoteSource {
+  enum identifyBy {Symbol, IdentificationNumber, Name};
   WebPriceQuoteSource() : m_skipStripping(false) {}
   explicit WebPriceQuoteSource(const QString& name);
-  WebPriceQuoteSource(const QString& name, const QString& url, const QString& csvUrl, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
+  WebPriceQuoteSource(const QString& name, const QString& url, const QString& csvUrl, const QString& id, const identifyBy idBy, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
   ~WebPriceQuoteSource() {}
 
   void write() const;
@@ -117,7 +118,8 @@ struct WebPriceQuoteSource {
   QString    m_name;
   QString    m_url;
   QString    m_csvUrl;
-  QString    m_sym;
+  QString    m_webID;
+  identifyBy m_webIDBy;
   QString    m_price;
   QString    m_date;
   QString    m_dateformat;
@@ -143,12 +145,12 @@ public:
 
   void setDate(const QDate& _from, const QDate& _to);
   /**
-    * This launches a web-based quote update for the given @p _symbol.
+    * This launches a web-based quote update for the given @p _webID.
     * When the quote is received back from the web source, it will be
     * emitted on the 'quote' signal.
     *
-    * @param _symbol the trading symbol of the stock to fetch a price for
-    * @param _id an arbitrary identifier, which will be emitted in the quote
+    * @param _webID the identification of the stock to fetch a price for
+    * @param _kmmID an arbitrary identifier, which will be emitted in the quote
     *                signal when a price is sent back.
     * @param _source the source of the quote (must be a valid value returned
     *                by quoteSources().  Send QString() to use the default
@@ -156,7 +158,7 @@ public:
     * @return bool Whether the quote fetch process was launched successfully
     */
 
-  bool launch(const QString& _symbol, const QString& _id, const QString& _source = QString());
+  bool launch(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
 
   /**
     * This returns a list of the names of the quote sources
@@ -185,9 +187,9 @@ protected:
   static const QMap<QString, WebPriceQuoteSource> defaultQuoteSources();
 
 private:
-  bool launchCSV(const QString& _symbol, const QString& _id, const QString& _source = QString());
-  bool launchNative(const QString& _symbol, const QString& _id, const QString& _source = QString());
-  bool launchFinanceQuote(const QString& _symbol, const QString& _id, const QString& _source = QString());
+  bool launchCSV(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
+  bool launchNative(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
+  bool launchFinanceQuote(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
   void enter_loop();
 
   static const QStringList quoteSourcesNative();

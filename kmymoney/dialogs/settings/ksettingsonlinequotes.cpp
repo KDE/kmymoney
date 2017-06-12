@@ -67,6 +67,10 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
                          i18n("Use this to create a new entry for online quotes"));
   KGuiItem::assign(m_newButton, newButtenItem);
 
+  m_editIdentifyBy->addItem(i18n("Symbol"), WebPriceQuoteSource::identifyBy::Symbol);
+  m_editIdentifyBy->addItem(i18n("Identification number"), WebPriceQuoteSource::identifyBy::IdentificationNumber);
+  m_editIdentifyBy->addItem(i18n("Name"), WebPriceQuoteSource::identifyBy::Name);
+
   connect(m_dumpCSVProfile, SIGNAL(clicked()), this, SLOT(slotDumpCSVProfile()));
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateEntry()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewEntry()));
@@ -78,7 +82,8 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
 
   connect(m_editURL, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editCSVURL, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
-  connect(m_editSymbol, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editIdentifier, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editIdentifyBy, SIGNAL(currentIndexChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editDate, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editDateFormat, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editPrice, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
@@ -139,15 +144,18 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
 
   m_editURL->setEnabled(true);
   m_editCSVURL->setEnabled(true);
-  m_editSymbol->setEnabled(true);
+  m_editIdentifier->setEnabled(true);
+  m_editIdentifyBy->setEnabled(true);
   m_editPrice->setEnabled(true);
   m_editDate->setEnabled(true);
   m_editDateFormat->setEnabled(true);
   m_skipStripping->setEnabled(true);
+  m_dumpCSVProfile->setEnabled(true);
   m_deleteButton->setEnabled(true);
   m_editURL->setText(QString());
   m_editCSVURL->setText(QString());
-  m_editSymbol->setText(QString());
+  m_editIdentifier->setText(QString());
+  m_editIdentifyBy->setCurrentIndex(WebPriceQuoteSource::identifyBy::Symbol);
   m_editPrice->setText(QString());
   m_editDate->setText(QString());
   m_editDateFormat->setText(QString());
@@ -156,7 +164,8 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
     m_currentItem = WebPriceQuoteSource(item->text());
     m_editURL->setText(m_currentItem.m_url);
     m_editCSVURL->setText(m_currentItem.m_csvUrl);
-    m_editSymbol->setText(m_currentItem.m_sym);
+    m_editIdentifier->setText(m_currentItem.m_webID);
+    m_editIdentifyBy->setCurrentIndex(m_currentItem.m_webIDBy);
     m_editPrice->setText(m_currentItem.m_price);
     m_editDate->setText(m_currentItem.m_date);
     m_editDateFormat->setText(m_currentItem.m_dateformat);
@@ -164,11 +173,13 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
   } else {
     m_editURL->setEnabled(false);
     m_editCSVURL->setEnabled(false);
-    m_editSymbol->setEnabled(false);
+    m_editIdentifier->setEnabled(false);
+    m_editIdentifyBy->setEnabled(false);
     m_editPrice->setEnabled(false);
     m_editDate->setEnabled(false);
     m_editDateFormat->setEnabled(false);
     m_skipStripping->setEnabled(false);
+    m_dumpCSVProfile->setEnabled(false);
     m_deleteButton->setEnabled(false);
   }
 
@@ -180,7 +191,8 @@ void KSettingsOnlineQuotes::slotEntryChanged()
 {
   bool modified = m_editURL->text() != m_currentItem.m_url
                   || m_editCSVURL->text() != m_currentItem.m_csvUrl
-                  || m_editSymbol->text() != m_currentItem.m_sym
+                  || m_editIdentifier->text() != m_currentItem.m_webID
+                  || m_editIdentifyBy->currentData().toInt() != static_cast<int>(m_currentItem.m_webIDBy)
                   || m_editDate->text() != m_currentItem.m_date
                   || m_editDateFormat->text() != m_currentItem.m_dateformat
                   || m_editPrice->text() != m_currentItem.m_price
@@ -228,7 +240,8 @@ void KSettingsOnlineQuotes::slotUpdateEntry()
 {
   m_currentItem.m_url = m_editURL->text();
   m_currentItem.m_csvUrl = m_editCSVURL->text();
-  m_currentItem.m_sym = m_editSymbol->text();
+  m_currentItem.m_webID = m_editIdentifier->text();
+  m_currentItem.m_webIDBy = static_cast<WebPriceQuoteSource::identifyBy>(m_editIdentifyBy->currentData().toInt());
   m_currentItem.m_date = m_editDate->text();
   m_currentItem.m_dateformat = m_editDateFormat->text();
   m_currentItem.m_price = m_editPrice->text();

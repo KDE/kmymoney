@@ -71,9 +71,9 @@ protected slots:
 
   void logStatusMessage(const QString&);
   void logErrorMessage(const QString&);
-  void slotReceivedCSVQuote(const QString& _id, const QString& _symbol, MyMoneyStatement& st);
-  void slotReceivedQuote(const QString&, const QString&, const QDate&, const double&);
-  void slotQuoteFailed(const QString& _id, const QString& _symbol);
+  void slotReceivedCSVQuote(const QString& _kmmID, const QString& _webID, MyMoneyStatement& st);
+  void slotReceivedQuote(const QString& _kmmID, const QString& _webID, const QDate&, const double&);
+  void slotQuoteFailed(const QString& _kmmID, const QString& _webID);
 
 protected:
   void addPricePair(const MyMoneySecurityPair& pair, bool dontCheckExistance = false);

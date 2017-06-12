@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>512</width>
-    <height>554</height>
+    <height>592</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -39,14 +39,54 @@
       <string>Details</string>
      </property>
      <layout class="QGridLayout">
-      <item row="5" column="1">
-       <widget class="KLineEdit" name="m_editDateFormat">
+      <item row="7" column="0">
+       <widget class="QLabel" name="textLabel4_2">
+        <property name="text">
+         <string>Date Format</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="textLabel2">
+        <property name="text">
+         <string>Identifier</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="KLineEdit" name="m_editCSVURL"/>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="KLineEdit" name="m_editIdentifier">
+        <property name="toolTip">
+         <string>Regular Expression to extract the identifier from the downloaded data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="textLabel3">
+        <property name="text">
+         <string>Price</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" colspan="2">
+       <widget class="KLineEdit" name="m_editDate">
         <property name="toolTip">
          <string>Regular Expression to extract the date from the downloaded data</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="textLabel4">
         <property name="text">
          <string>Date</string>
@@ -56,10 +96,10 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="textLabel3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="textLabel1">
         <property name="text">
-         <string>Price</string>
+         <string>URL</string>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
@@ -73,40 +113,6 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="textLabel2">
-        <property name="text">
-         <string>Symbol</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" colspan="2">
-       <widget class="KLineEdit" name="m_editDate">
-        <property name="toolTip">
-         <string>Regular Expression to extract the date from the downloaded data</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="textLabel4_2">
-        <property name="text">
-         <string>Date Format</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="KLineEdit" name="m_editPrice">
-        <property name="toolTip">
-         <string>Regular Expression to extract the price from the downloaded data</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1" colspan="2">
        <widget class="KLineEdit" name="m_editURL">
         <property name="toolTip">
@@ -117,7 +123,24 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="2">
+      <item row="7" column="1">
+       <widget class="KLineEdit" name="m_editDateFormat">
+        <property name="toolTip">
+         <string>Regular Expression to extract the date from the downloaded data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QComboBox" name="m_editIdentifyBy"/>
+      </item>
+      <item row="4" column="1" colspan="2">
+       <widget class="KLineEdit" name="m_editPrice">
+        <property name="toolTip">
+         <string>Regular Expression to extract the price from the downloaded data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
        <widget class="QCheckBox" name="m_skipStripping">
         <property name="whatsThis">
          <string>&lt;p&gt;For easier processing of the data returned by the online source, KMyMoney usually strips unused parts before it is parsed with the regular expressions. If matching of the fields relies on those items, then use this option to turn stripping off.&lt;/p&gt;
@@ -136,25 +159,12 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="KLineEdit" name="m_editSymbol">
-        <property name="toolTip">
-         <string>Regular Expression to extract the symbol from the downloaded data</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="textLabel1">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>URL</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
+         <string>Identify by</string>
         </property>
        </widget>
-      </item>
-      <item row="1" column="1" colspan="2">
-       <widget class="KLineEdit" name="m_editCSVURL"/>
       </item>
      </layout>
     </widget>
