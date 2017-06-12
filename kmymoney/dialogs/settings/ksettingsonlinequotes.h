@@ -58,6 +58,7 @@ protected slots:
   void slotLoadWidgets();
   void slotEntryChanged();
   void slotNewEntry();
+  void slotDeleteEntry();
   void slotEntryRenamed(QListWidgetItem* item);
   void slotStartRename(QListWidgetItem* item);
 

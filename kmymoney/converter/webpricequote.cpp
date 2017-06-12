@@ -876,6 +876,7 @@ void WebPriceQuoteSource::write() const
     grp.writeEntry("SkipStripping", m_skipStripping);
   else
     grp.deleteEntry("SkipStripping");
+  kconfig->sync();
 }
 
 void WebPriceQuoteSource::rename(const QString& name)
@@ -889,6 +890,7 @@ void WebPriceQuoteSource::remove() const
 {
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   kconfig->deleteGroup(QString("Online-Quote-Source-%1").arg(m_name));
+  kconfig->sync();
 }
 
 //

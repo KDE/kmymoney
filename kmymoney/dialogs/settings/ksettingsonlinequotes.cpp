@@ -36,6 +36,7 @@
 // Project Includes
 
 #include "kmymoney/converter/webpricequote.h"
+#include "mymoneyfile.h"
 
 KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
     : KSettingsOnlineQuotesDecl(parent),
@@ -69,6 +70,7 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   connect(m_dumpCSVProfile, SIGNAL(clicked()), this, SLOT(slotDumpCSVProfile()));
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateEntry()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewEntry()));
+  connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteEntry()));
 
   connect(m_quoteSourceList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLoadWidgets()));
   connect(m_quoteSourceList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotEntryRenamed(QListWidgetItem*)));
@@ -81,9 +83,6 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   connect(m_editDateFormat, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_editPrice, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_skipStripping, SIGNAL(toggled(bool)), this, SLOT(slotEntryChanged()));
-
-  // FIXME deleting a source is not yet implemented
-  m_deleteButton->setEnabled(false);
 }
 
 void KSettingsOnlineQuotes::loadList(const bool updateResetList)
@@ -145,6 +144,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
   m_editDate->setEnabled(true);
   m_editDateFormat->setEnabled(true);
   m_skipStripping->setEnabled(true);
+  m_deleteButton->setEnabled(true);
   m_editURL->setText(QString());
   m_editCSVURL->setText(QString());
   m_editSymbol->setText(QString());
@@ -169,6 +169,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
     m_editDate->setEnabled(false);
     m_editDateFormat->setEnabled(false);
     m_skipStripping->setEnabled(false);
+    m_deleteButton->setEnabled(false);
   }
 
   m_updateButton->setEnabled(false);
@@ -242,6 +243,44 @@ void KSettingsOnlineQuotes::slotNewEntry()
   newSource.write();
   loadList();
   QListWidgetItem* item = m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly).at(0);
+  if (item) {
+    m_quoteSourceList->setCurrentItem(item);
+    slotLoadWidgets();
+  }
+}
+
+void KSettingsOnlineQuotes::slotDeleteEntry()
+{
+  // first check if no security is using this online source
+  QList<MyMoneySecurity> securities = MyMoneyFile::instance()->securityList();
+  foreach(const auto security, securities) {
+    if (security.value(QStringLiteral("kmm-online-source")).compare(m_currentItem.m_name) == 0) {
+      if (KMessageBox::questionYesNo(this,
+                                     i18n("Security <b>%1</b> uses this quote source.<br>"
+                                          "Do you really want to remove it?", security.name()),
+                                     i18n("Delete quote source")) == KMessageBox::Yes)
+        break;  // webpricequote can handle missing online quotes, so proceed without any extra action
+      else
+        return;
+    }
+  }
+
+  // remove online source from webpricequote...
+  m_currentItem.remove();
+
+  // ...and from setting's list
+  int row = m_quoteSourceList->currentRow();
+  QListWidgetItem *item = m_quoteSourceList->takeItem(row);
+  if (item)
+    delete item;
+  item = nullptr;
+
+  int count = m_quoteSourceList->count();
+  if (row < count)                        // select next available entry...
+    item = m_quoteSourceList->item(row);
+  else if (row >= count && count > 0)    // ...or last entry if this was the last entry...
+    item = m_quoteSourceList->item(count - 1);
+
   if (item) {
     m_quoteSourceList->setCurrentItem(item);
     slotLoadWidgets();
