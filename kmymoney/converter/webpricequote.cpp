@@ -520,6 +520,8 @@ const QMap<QString, PricesProfile> WebPriceQuote::defaultCSVQuoteSources()
 {
   QMap<QString, PricesProfile> result;
 
+  // tip: possible delimiter indexes are in csvutil.cpp
+
   result[QLatin1String("Stooq")] = PricesProfile(QLatin1String("Stooq"),
                                                  106, 1, 0, 0, 1, 0, 0,
                                                  QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
@@ -531,9 +533,19 @@ const QMap<QString, PricesProfile> WebPriceQuote::defaultCSVQuoteSources()
                                                           2, ProfileCurrencyPrices);
 
   result[QLatin1String("Yahoo")] = PricesProfile(QLatin1String("Yahoo"),
-                                                      106, 1, 0, 0, 0, 0, 0,
-                                                      QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
-                                                      2, ProfileStockPrices);
+                                                 106, 1, 0, 0, 0, 0, 0,
+                                                 QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
+                                                 2, ProfileStockPrices);
+
+  result[QLatin1String("Nasdaq Baltic - Shares")] = PricesProfile(QLatin1String("Nasdaq Baltic - Shares"),
+                                                                  106, 1, 0, 2, 3, 0, 0,
+                                                                  QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 5}},
+                                                                  2, ProfileStockPrices);
+
+  result[QLatin1String("Nasdaq Baltic - Funds")] = PricesProfile(QLatin1String("Nasdaq Baltic - Funds"),
+                                                                 106, 1, 0, 2, 3, 0, 0,
+                                                                 QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 5}},
+                                                                 2, ProfileStockPrices);
   return result;
 }
 
@@ -586,45 +598,77 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                "%d/%m/%y"               // dateformat
                                                );
 
+  // This quote source provided by Danny Scott
+  result["Yahoo Canada"] = WebPriceQuoteSource("Yahoo Canada",
+                                               "http://ca.finance.yahoo.com/q?s=%1",
+                                               "",
+                                               "%1", // webIDRegExp
+                                               WebPriceQuoteSource::identifyBy::Symbol,
+                                               "Last Trade: (\\d+\\.\\d+)", // price regexp
+                                               "day, (.\\D+\\d+\\D+\\d+)", // date regexp
+                                               "%m %d %y" // date format
+                                               );
+
+  // Update on 2017-06 by Łukasz Wojniłowicz
   result["Globe & Mail"] = WebPriceQuoteSource("Globe & Mail",
                                                "http://globefunddb.theglobeandmail.com/gishome/plsql/gis.price_history?pi_fund_id=%1",
-                                               "",
+                                               QString(),
                                                QString(),  // webIDRegExp
-                                               WebPriceQuoteSource::identifyBy::Symbol,
-                                               "Reinvestment Price \\w+ \\d+, \\d+ (\\d+\\.\\d+)", // priceregexp
-                                               "Reinvestment Price (\\w+ \\d+, \\d+)", // dateregexp
+                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                               "Fund Price:\\D+(\\d+\\.\\d+)", // priceregexp
+                                               "Fund Price:.+as at (\\w+ \\d+, \\d+)\\)", // dateregexp
                                                "%m %d %y" // dateformat
                                                );
 
-  result["MSN.CA"] = WebPriceQuoteSource("MSN.CA",
-                                         "http://ca.moneycentral.msn.com/investor/quotes/quotes.asp?symbol=%1",
-                                         "",
-                                         QString(),  // webIDRegExp
-                                         WebPriceQuoteSource::identifyBy::Symbol,
-                                         "(\\d+\\.\\d+) [+-]\\d+.\\d+", // priceregexp
-                                         "Time of last trade (\\d+/\\d+/\\d+)", //dateregexp
-                                         "%d %m %y" // dateformat
-                                        );
-  // Finanztreff (replaces VWD.DE) and boerseonline supplied by Micahel Zimmerman
+  // Update on 2017-06 by Łukasz Wojniłowicz
+  result["MSN"] = WebPriceQuoteSource("MSN",
+                                      "http://www.msn.com/en-us/money/stockdetails/%1",
+                                      QString(),
+                                      QString(),  // webIDRegExp
+                                      WebPriceQuoteSource::identifyBy::Symbol,
+                                      "(\\d+\\.\\d+) [+-]\\d+.\\d+", // priceregexp
+                                      "(\\d+/\\d+/\\d+)", //dateregexp
+                                      "%y %m %d" // dateformat
+                                      );
+
+  // Finanztreff (replaces VWD.DE) supplied by Michael Zimmerman
   result["Finanztreff"] = WebPriceQuoteSource("Finanztreff",
                                               "http://finanztreff.de/kurse_einzelkurs_detail.htn?u=100&i=%1",
                                               "",
                                               QString(),  // webIDRegExp
-                                              WebPriceQuoteSource::identifyBy::Symbol,
+                                              WebPriceQuoteSource::identifyBy::IdentificationNumber,
                                               "([0-9]+,\\d+).+Gattung:Fonds", // priceregexp
                                               "\\).(\\d+\\D+\\d+\\D+\\d+)", // dateregexp (doesn't work; date in chart
                                               "%d.%m.%y" // dateformat
                                               );
 
-  result["boerseonline"] = WebPriceQuoteSource("boerseonline",
-                                               "http://www.boerse-online.de/tools/boerse/einzelkurs_kurse.htm?&s=%1",
-                                               "",
+  // First revision by Michael Zimmerman
+  // Update on 2017-06 by Łukasz Wojniłowicz
+  result["boerseonlineaktien"] = WebPriceQuoteSource("Börse Online - Aktien",
+                                               "http://www.boerse-online.de/aktie/%1-Aktie",
+                                               QString(),
                                                QString(),  // webIDRegExp
-                                               WebPriceQuoteSource::identifyBy::Symbol,
-                                               "Akt\\. Kurs.([\\d\\.]+,\\d\\d)", // priceregexp
-                                               "Datum.(\\d+\\.\\d+\\.\\d+)", // dateregexp (doesn't work; date in chart
+                                               WebPriceQuoteSource::identifyBy::Name,
+                                               "Aktienkurs\\D+(\\d+,\\d{2})", // priceregexp
+                                               "Datum (\\d{2}\\.\\d{2}\\.\\d{4})", // dateregexp
                                                "%d.%m.%y" // dateformat
                                                );
+
+  // This quote source provided by e-mail and should replace the previous one:
+  // From: David Houlden <djhoulden@gmail.com>
+  // To: kmymoney@kde.org
+  // Date: Sat, 6 Apr 2013 13:22:45 +0100
+  // Updated on 2017-06 by Łukasz Wojniłowicz
+  result["Financial Times - UK Funds"] = WebPriceQuoteSource("Financial Times",
+                                                           "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
+                                                           QString(),
+                                                           QString(), // webIDRegExp
+                                                           WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                           "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
+                                                           "Data delayed at least 15 minutes, as of\\ (.*)\\.", // date regexp
+                                                           "%m %d %y", // date format
+                                                           true // skip HTML stripping
+                                                           );
 
   // The following two price sources were contributed by
   // Marc Zahnlecker <tf2k@users.sourceforge.net>
@@ -638,31 +682,6 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                                  ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
                                                                  "%d %m %y" // dateformat
                                                                  );
-  // This quote source provided by e-mail and should replace the previous one:
-  // From: David Houlden <djhoulden@gmail.com>
-  // To: kmymoney@kde.org
-  // Date: Sat, 6 Apr 2013 13:22:45 +0100
-  result["Financial Times UK Funds"] = WebPriceQuoteSource("Financial Times UK Funds",
-                                                           "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
-                                                           "",
-                                                           "data-display-symbol=\"(.*):", // webIDRegExp
-                                                           WebPriceQuoteSource::identifyBy::IdentificationNumber,
-                                                           "class=\"text first\">([\\d,]*\\d+\\.\\d+)</td>", // price regexp
-                                                           "As of market close\\ (.*)\\.", // date regexp
-                                                           "%m %d %y", // date format
-                                                           true // skip HTML stripping
-                                                           );
-
-  // This quote source provided by Danny Scott
-  result["Yahoo Canada"] = WebPriceQuoteSource("Yahoo Canada",
-                                               "http://ca.finance.yahoo.com/q?s=%1",
-                                               "",
-                                               "%1", // webIDRegExp
-                                               WebPriceQuoteSource::identifyBy::Symbol,
-                                               "Last Trade: (\\d+\\.\\d+)", // price regexp
-                                               "day, (.\\D+\\d+\\D+\\d+)", // date regexp
-                                               "%m %d %y" // date format
-                                               );
 
   // (tf2k) The "mpid" is I think the market place id. In this case five
   // stands for Hamburg.
@@ -680,6 +699,16 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                                  ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
                                                                  "%d %m %y" // dateformat
                                                                  );
+  // First revision on 2017-06 by Łukasz Wojniłowicz
+  result["Puls Biznesu"] = WebPriceQuoteSource("Puls Biznesu",
+                                        "http://notowania.pb.pl/instrument/%1",
+                                        QString(),
+                                        QString(),                   // webIDRegExp
+                                        WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                        "(\\d+,\\d{2})\\D+\\d+,\\d{2}%",    // price regexp
+                                        "(\\d{4}-\\d{2}-\\d{2}) \\d{2}:\\d{2}:\\d{2}", // date regexp
+                                        "%y %m %d"                   // date format
+                                        );
 
   // The following price quote was contributed by
   // Piotr Adacha <piotr.adacha@googlemail.com>
@@ -692,16 +721,18 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   // Europe), thus, I think it could be helpful for Polish users of KMyMoney (and
   // I am one of them for almost a year).
 
+  // Update on 2017-06 by Łukasz Wojniłowicz
   result["Stooq"] = WebPriceQuoteSource("Stooq",
                                         "http://stooq.com/q/?s=%1",
                                         "http://stooq.pl/q/d/l/?s=%1&d1=%y%m%d&d2=%y%m%d&i=d&c=1",
                                         QString(),                   // webIDRegExp
                                         WebPriceQuoteSource::identifyBy::Symbol,
-                                        "Last.*(\\d+\\.\\d+).*Date",    // price regexp
+                                        "Last(\\d+\\.\\d+).*Date",    // price regexp
                                         "(\\d{4,4}-\\d{2,2}-\\d{2,2})", // date regexp
                                         "%y %m %d"                   // date format
                                         );
 
+  // First revision on 2017-06 by Łukasz Wojniłowicz
   result[QLatin1String("Stooq Currency")] = WebPriceQuoteSource("Stooq Currency",
                                                                 "http://stooq.com/q/?s=%1%2",
                                                                 "http://stooq.pl/q/d/l/?s=%1%2&d1=%y%m%d&d2=%y%m%d&i=d&c=1",
@@ -712,75 +743,29 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                                 "%y %m %d"                   // date format
                                                                 );
 
-  // The following price quote is for getting prices of different funds
-  // at OMX Baltic market.
-  result["OMX Baltic funds"] = WebPriceQuoteSource("OMX Baltic funds",
-                                                   "http://www.baltic.omxgroup.com/market/?pg=nontradeddetails&currency=0&instrument=%1",
-                                                   "",
-                                                   QString(),  // webIDRegExp
-                                                   WebPriceQuoteSource::identifyBy::Symbol,
-                                                   "NAV (\\d+,\\d+)",  // priceregexp
-                                                   "Kpv (\\d+.\\d+.\\d+)",  // dateregexp
-                                                   "%d.%m.%y"   // dateformat
-                                                  );
+  // First revision on 2017-06 by Łukasz Wojniłowicz
+  result["Nasdaq Baltic - Shares"] = WebPriceQuoteSource("Nasdaq Baltic - Shares",
+                                                         "http://www.nasdaqbaltic.com/market/?pg=details&instrument=%1&lang=en",
+                                                         "http://www.nasdaqbaltic.com/market/?instrument=%1&pg=details&tab=historical&lang=en&date=&start=%d.%m.%y&end=%d.%m.%y&pg=details&pg2=equity&downloadcsv=1&csv_style=english",
+                                                         QString(),  // webIDRegExp
+                                                         WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                         "lastPrice\\D+(\\d+,\\d+)",  // priceregexp
+                                                         "as of: (\\d{2}.\\d{2}.\\d{4})",  // dateregexp
+                                                         "%d.%m.%y",   // dateformat
+                                                         true
+                                                         );
 
-  // The following price quote was contributed by
-  // Peter Hargreaves <pete.h@pdh-online.info>
-  // The original posting can be found here:
-  // http://sourceforge.net/mailarchive/message.php?msg_name=200806060854.11682.pete.h%40pdh-online.info
-
-  // I have PEP and ISA accounts which I invest in Funds with Barclays
-  // Stockbrokers. They give me Fund data via Financial Express:
-  //
-  // https://webfund6.financialexpress.net/Clients/Barclays/default.aspx
-  //
-  // A typical Fund Factsheet is:
-  //
-  // https://webfund6.financialexpress.net/Clients/Barclays/search_factsheet_summary.aspx?code=0585239
-  //
-  // On the Factsheet to identify the fund you can see ISIN Code GB0005852396.
-  // In the url, this code is shortened by loosing the first four and last
-  // characters.
-  //
-  // Update:
-  //
-  // Nick Elliot has contributed a modified regular expression to cope with values presented
-  // in pounds as well as those presented in pence. The source can be found here:
-  // http://forum.kde.org/update-stock-and-currency-prices-t-32049.html
-
-  result["Financial Express"] = WebPriceQuoteSource("Financial Express",
-                                                    "https://webfund6.financialexpress.net/Clients/Barclays/search_factsheet_summary.aspx?code=%1",
-                                                    "",
-                                                    "ISIN Code[^G]*(GB..........).*",  // webIDRegExp
-                                                    WebPriceQuoteSource::identifyBy::Symbol,
-                                                    "Current Market Information[^0-9]*([0-9,\\.]+).*", // priceregexp
-                                                    "Price Date[^0-9]*(../../....).*", // dateregexp
-                                                    "%d/%m/%y"                         // dateformat
-                                                    );
-
-
-  // I suggest to include www.cash.ch as one of the pre-populated online
-  // quote sources.
-
-  // Rationale
-  // It features Swiss funds that are otherwise hard to find. A typical
-  // example: Swiss private pension accounts (in German termed 'Säule 3a')
-  // may usually only invest in dedicated funds that are otherwise (almost)
-  // not traded; the UBS Vitainvest series
-  // (http://www.ubs.com/1/e/ubs_ch/private/insurance/fisca/securities/part_wealth.html)
-  //  is such a series of funds.
-
-  result["Cash CH"] = WebPriceQuoteSource("Cash CH",
-                                          "http://www.cash.ch/boerse/fonds/fondsguide/kursinfo/fullquote/%1",
-                                          "",
-                                          "",  // webIDRegExp
-                                          WebPriceQuoteSource::identifyBy::Symbol,
-                                          "<span class=\"fgdhLast\">([1-9][0-9]*\\.[0-9][0-9])</span>", // priceregexp
-                                          "<span class=\"fgdhLastdt\">([0-3][0-9]\\.[0-1][0-9]\\.[1-2][0-9][0-9][0-9])</span>", // dateregexp
-                                          "%d.%m.%y",                         // dateformat
-                                          true                                // skip stripping
-                                         );
-
+  // First revision on 2017-06 by Łukasz Wojniłowicz
+  result["Nasdaq Baltic - Funds"] = WebPriceQuoteSource("Nasdaq Baltic - Funds",
+                                                        "http://www.nasdaqbaltic.com/market/?pg=details&instrument=%1&lang=en",
+                                                        "http://www.nasdaqbaltic.com/market/?instrument=%1&pg=details&tab=historical&lang=en&date=&start=%d.%m.%y&end=%d.%m.%y&pg=details&pg2=equity&downloadcsv=1&csv_style=english",
+                                                        QString(),  // webIDRegExp
+                                                        WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                        "marketShareDetailTable(.+\\n){21}\\D+(\\d+)",  // priceregexp
+                                                        "as of: (\\d{2}.\\d{2}.\\d{4})",  // dateregexp
+                                                        "%d.%m.%y",   // dateformat
+                                                        true
+                                                        );
   return result;
 }
 
