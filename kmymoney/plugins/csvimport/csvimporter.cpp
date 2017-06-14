@@ -123,6 +123,7 @@ MyMoneyStatement CSVImporter::unattendedPricesImport(const QString &filename, Pr
 {
   MyMoneyStatement st;
   m_profile = profile;
+  m_convertDate->setDateFormatIndex(m_profile->m_dateFormatIndex);
 
   if (m_file->getInFileName(filename)) {
     m_file->readFile(m_profile);
