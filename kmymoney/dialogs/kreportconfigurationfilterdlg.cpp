@@ -739,7 +739,7 @@ void KReportConfigurationFilterDlg::slotReset()
     }
   } else {
     m_dateRange->m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
-    m_dateRange->slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
+    m_dateRange->setDateRange(MyMoneyTransactionFilter::allDates);
   }
 
   slotRightSize();

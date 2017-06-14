@@ -83,10 +83,12 @@ public:
   ~DateRangeDlg();
   Ui::DateRangeDlgDecl*    m_ui;
 
+  void setDateRange(MyMoneyTransactionFilter::dateOptionE);
+
 public slots:
   void slotReset();
   void slotUpdateSelections(QString &txt);
-  void slotDateRangeChanged(int);
+  void slotDateRangeSelectedByUser();
   void slotDateChanged();
 
 private:
