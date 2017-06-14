@@ -23,7 +23,6 @@
 // QT Headers
 
 #include <QFile>
-#include <QRegExp>
 #include <QTextStream>
 #include <QTextCodec>
 #include <QByteArray>
@@ -32,6 +31,7 @@
 #include <QString>
 #include <QTemporaryFile>
 #include <QUrl>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -187,12 +187,13 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
   if (isCurrency) {
     // this is a two-symbol quote.  split the symbol into two.  valid symbol
     // characters are: 0-9, A-Z and the dot.  anything else is a separator
-    QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
+    QRegularExpression splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch match;
     // if we've truly found 2 symbols delimited this way...
-    if (splitrx.indexIn(d->m_webID) != -1) {
-      url = QUrl(urlStr.arg(splitrx.cap(1), splitrx.cap(2)));
-      d->m_CSVSource.m_currencySymbol = splitrx.cap(2);
-      d->m_CSVSource.m_securitySymbol = splitrx.cap(1);
+    if (d->m_webID.indexOf(splitrx, 0, &match) != -1) {
+      url = QUrl(urlStr.arg(match.captured(1), match.captured(2)));
+      d->m_CSVSource.m_currencySymbol = match.captured(2);
+      d->m_CSVSource.m_securitySymbol = match.captured(1);
     } else {
       qCDebug(WEBPRICEQUOTE) << "WebPriceQuote::launch() did not find 2 symbols";
       emit error(i18n("Cannot find from and to currency."));
@@ -264,10 +265,11 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
   if (d->m_source.m_url.contains("%2")) {
     // this is a two-symbol quote.  split the symbol into two.  valid symbol
     // characters are: 0-9, A-Z and the dot.  anything else is a separator
-    QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
+    QRegularExpression splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch match;
     // if we've truly found 2 symbols delimited this way...
-    if (splitrx.indexIn(d->m_webID) != -1) {
-      url = QUrl(d->m_source.m_url.arg(splitrx.cap(1), splitrx.cap(2)));
+    if (d->m_webID.indexOf(splitrx, 0, &match) != -1) {
+      url = QUrl(d->m_source.m_url.arg(match.captured(1), match.captured(2)));
     } else {
       qCDebug(WEBPRICEQUOTE) << "WebPriceQuote::launch() did not find 2 symbols";
     }
@@ -439,26 +441,27 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       // First, remove extranous non-data elements
 
       // HTML tags
-      quotedata.remove(QRegExp("<[^>]*>"));
+      quotedata.remove(QRegularExpression("<[^>]*>"));
 
       // &...;'s
-      quotedata.replace(QRegExp("&\\w+;"), " ");
+      quotedata.replace(QRegularExpression("&\\w+;"), QLatin1String(" "));
 
       // Extra white space
       quotedata = quotedata.simplified();
       qCDebug(WEBPRICEQUOTE) << "stripped text" << quotedata;
     }
 
-    QRegExp webIDRegExp(d->m_source.m_webID);
-    QRegExp dateRegExp(d->m_source.m_date);
-    QRegExp priceRegExp(d->m_source.m_price);
+    QRegularExpression webIDRegExp(d->m_source.m_webID);
+    QRegularExpression dateRegExp(d->m_source.m_date);
+    QRegularExpression priceRegExp(d->m_source.m_price);
+    QRegularExpressionMatch match;
 
-    if (webIDRegExp.indexIn(quotedata) > -1) {
-      qCDebug(WEBPRICEQUOTE) << "Identifier" << webIDRegExp.cap(1);
-      emit status(i18n("Identifier found: '%1'", webIDRegExp.cap(1)));
+    if (quotedata.indexOf(webIDRegExp, 0, &match) > -1) {
+      qCDebug(WEBPRICEQUOTE) << "Identifier" << match.captured(1);
+      emit status(i18n("Identifier found: '%1'", match.captured(1)));
     }
 
-    if (priceRegExp.indexIn(quotedata) > -1) {
+    if (quotedata.indexOf(priceRegExp, 0, &match) > -1) {
       gotprice = true;
 
       // Deal with european quotes that come back as X.XXX,XX or XX,XXX
@@ -468,16 +471,16 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       //
       // Remove all non-digits from the price string except the last one, and
       // set the last one to a period.
-      QString pricestr = priceRegExp.cap(1);
+      QString pricestr = match.captured(1);
 
-      int pos = pricestr.lastIndexOf(QRegExp("\\D"));
+      int pos = pricestr.lastIndexOf(QRegularExpression("\\D"));
       if (pos > 0) {
-        pricestr[pos] = '.';
-        pos = pricestr.lastIndexOf(QRegExp("\\D"), pos - 1);
+        pricestr[pos] = QLatin1Char('.');
+        pos = pricestr.lastIndexOf(QRegularExpression("\\D"), pos - 1);
       }
       while (pos > 0) {
         pricestr.remove(pos, 1);
-        pos = pricestr.lastIndexOf(QRegExp("\\D"), pos);
+        pos = pricestr.lastIndexOf(QRegularExpression("\\D"), pos);
       }
 
       d->m_price = pricestr.toDouble();
@@ -485,8 +488,8 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       emit status(i18n("Price found: '%1' (%2)", pricestr, d->m_price));
     }
 
-    if (dateRegExp.indexIn(quotedata) > -1) {
-      QString datestr = dateRegExp.cap(1);
+    if (quotedata.indexOf(dateRegExp, 0, &match) > -1) {
+      QString datestr = match.captured(1);
 
       MyMoneyDateFormat dateparse(d->m_source.m_dateformat);
       try {
@@ -795,13 +798,14 @@ const QStringList WebPriceQuote::quoteSourcesNative()
   QStringList groups = kconfig->groupList();
 
   QStringList::Iterator it;
-  QRegExp onlineQuoteSource(QString("^Online-Quote-Source-(.*)$"));
+  QRegularExpression onlineQuoteSource(QString("^Online-Quote-Source-(.*)$"));
+  QRegularExpressionMatch match;
 
   // get rid of all 'non online quote source' entries
   for (it = groups.begin(); it != groups.end(); it = groups.erase(it)) {
-    if (onlineQuoteSource.indexIn(*it) >= 0) {
+    if ((*it).indexOf(onlineQuoteSource, 0, &match) >= 0) {
       // Insert the name part
-      it = groups.insert(it, onlineQuoteSource.cap(1));
+      it = groups.insert(it, match.captured(1));
       ++it;
     }
   }
@@ -1097,27 +1101,29 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   // Break date format string into component parts
   //
 
-  QRegExp formatrex("%([mdy]+)(\\W+)%([mdy]+)(\\W+)%([mdy]+)", Qt::CaseInsensitive);
-  if (formatrex.indexIn(m_format) == -1) {
+  QRegularExpression formatrex("%([mdy]+)(\\W+)%([mdy]+)(\\W+)%([mdy]+)", QRegularExpression::CaseInsensitiveOption);
+  QRegularExpressionMatch match;
+  if (m_format.indexOf(formatrex, 0, &match) == -1) {
     throw MYMONEYEXCEPTION("Invalid format string");
   }
 
   QStringList formatParts;
-  formatParts += formatrex.cap(1);
-  formatParts += formatrex.cap(3);
-  formatParts += formatrex.cap(5);
+  formatParts += match.captured(1);
+  formatParts += match.captured(3);
+  formatParts += match.captured(5);
 
   QStringList formatDelimiters;
-  formatDelimiters += formatrex.cap(2);
-  formatDelimiters += formatrex.cap(4);
+  formatDelimiters += match.captured(2);
+  formatDelimiters += match.captured(4);
+  match = QRegularExpressionMatch();
 
   //
   // Break input string up into component parts,
   // using the delimiters found in the format string
   //
 
-  QRegExp inputrex;
-  inputrex.setCaseSensitivity(Qt::CaseInsensitive);
+  QRegularExpression inputrex;
+  inputrex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
   // strict mode means we must enforce the delimiters as specified in the
   // format.  non-strict allows any delimiters
@@ -1126,21 +1132,22 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   else
     inputrex.setPattern("(\\w+)\\W+(\\w+)\\W+(\\w+)");
 
-  if (inputrex.indexIn(_in) == -1) {
+  if (_in.indexOf(inputrex, 0, &match) == -1) {
     throw MYMONEYEXCEPTION("Invalid input string");
   }
 
   QStringList scannedParts;
-  scannedParts += inputrex.cap(1).toLower();
-  scannedParts += inputrex.cap(2).toLower();
-  scannedParts += inputrex.cap(3).toLower();
+  scannedParts += match.captured(1).toLower();
+  scannedParts += match.captured(2).toLower();
+  scannedParts += match.captured(3).toLower();
+  match = QRegularExpressionMatch();
 
   //
   // Convert the scanned parts into actual date components
   //
   unsigned day = 0, month = 0, year = 0;
   bool ok;
-  QRegExp digitrex("(\\d+)");
+  QRegularExpression digitrex("(\\d+)");
   QStringList::const_iterator it_scanned = scannedParts.constBegin();
   QStringList::const_iterator it_format = formatParts.constBegin();
   while (it_scanned != scannedParts.constEnd()) {
@@ -1149,8 +1156,8 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
       case 'd':
         // remove any extraneous non-digits (e.g. read "3rd" as 3)
         ok = false;
-        if (digitrex.indexIn(*it_scanned) != -1)
-          day = digitrex.cap(1).toUInt(&ok);
+        if ((*it_scanned).indexOf(digitrex, 0, &match) != -1)
+          day = match.captured(1).toUInt(&ok);
         if (!ok || day > 31)
           throw MYMONEYEXCEPTION(QString("Invalid day entry: %1").arg(*it_scanned));
         break;
