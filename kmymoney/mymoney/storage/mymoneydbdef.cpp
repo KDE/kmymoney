@@ -509,7 +509,10 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
                 + QLatin1Char('\'');
     if ((*fit)->name() == "updateInProgress")
       replace = enclose("N");
-    qs.replace(toReplace, replace);
+
+    qs.replace(QRegExp(toReplace + "(?=[,\\s\\)])"), replace);
+    // only replace parameters followed by comma, whitespace, closing parenthesis - otherwise
+    // conflicts may occur if one paramter starts with the name of another one.
   }
   qs += "\n\n";
   retval += qs;
