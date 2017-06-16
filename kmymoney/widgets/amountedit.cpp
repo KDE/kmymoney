@@ -304,7 +304,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
             break;
           }
         }
-        // fall through intentional
+        // intentional fall through
 
       case Qt::Key_Slash:
       case Qt::Key_Asterisk:

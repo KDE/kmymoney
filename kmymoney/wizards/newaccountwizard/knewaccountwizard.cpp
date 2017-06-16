@@ -1097,7 +1097,7 @@ int LoanDetailsPage::term() const
     switch (m_termUnit->currentItem()) {
       case MyMoneySchedule::OCCUR_YEARLY: // years
         factor = 12;
-        // fall through intentional
+        // intentional fall through
 
       case MyMoneySchedule::OCCUR_MONTHLY: // months
         factor *= 30;
@@ -1109,7 +1109,7 @@ int LoanDetailsPage::term() const
 
       default:
         qDebug("Unknown term unit %d in LoanDetailsPage::term(). Using payments.", m_termUnit->currentItem());
-        // fall through intentional
+        // intentional fall through
 
       case MyMoneySchedule::OCCUR_ONCE: // payments
         factor = m_termAmount->value();

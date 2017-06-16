@@ -68,7 +68,7 @@ int DurationWizardPage::term() const
     switch (m_durationUnitEdit->currentItem()) {
       case MyMoneySchedule::OCCUR_YEARLY: // years
         factor = 12;
-        // fall through intentional
+        // intentional fall through
 
       case MyMoneySchedule::OCCUR_MONTHLY: // months
         factor *= 30;
