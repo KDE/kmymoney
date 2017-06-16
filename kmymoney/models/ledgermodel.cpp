@@ -596,6 +596,7 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
 
     case LedgerRole::SplitCountRole:
       rc = d->m_ledgerItems[index.row()]->splitCount();
+      break;
 
     case LedgerRole::CostCenterIdRole:
       rc = d->m_ledgerItems[index.row()]->costCenterId();

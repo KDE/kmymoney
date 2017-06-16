@@ -1062,6 +1062,7 @@ void KGlobalLedgerView::setupDefaultAction()
     case MyMoneyAccount::AssetLoan:
     case MyMoneyAccount::Savings:
       d->m_action = KMyMoneyRegister::ActionDeposit;
+      break;
     default:
       d->m_action = KMyMoneyRegister::ActionWithdrawal;
       break;

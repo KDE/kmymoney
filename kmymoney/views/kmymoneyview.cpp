@@ -556,7 +556,7 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
       // the corresponding parent (investment) account
       acc = MyMoneyFile::instance()->account(acc.parentAccountId());
       accId = acc.id();
-      // tricky fall through here
+      // fall through intentional
 
     case MyMoneyAccount::Checkings:
     case MyMoneyAccount::Savings:

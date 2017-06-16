@@ -957,6 +957,8 @@ void FormatsPage::decimalSymbolChanged(int index)
     case -1:
       if (!m_imp->m_autodetect.value(AutoDecimalSymbol))
         break;
+      /// @fixme add a break statement or leave a 'fall through intentional' comment
+
     case 2:
     {
       ui->comboBox_decimalSymbol->blockSignals(true);

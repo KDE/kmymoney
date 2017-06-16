@@ -1244,14 +1244,14 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
   if (report.queryColumns() & MyMoneyReport::eQCcapitalgain) {
     // Saturday and Sunday aren't valid settlement dates
     if (endingDate.dayOfWeek() == Qt::Saturday)
-      endingDate.addDays(-1);
+      endingDate = endingDate.addDays(-1);
     else if (endingDate.dayOfWeek() == Qt::Sunday)
-      endingDate.addDays(-2);
+      endingDate = endingDate.addDays(-2);
 
     if (termSeparator.dayOfWeek() == Qt::Saturday)
-      termSeparator.addDays(-1);
+      termSeparator = termSeparator.addDays(-1);
     else if (termSeparator.dayOfWeek() == Qt::Sunday)
-      termSeparator.addDays(-2);
+      termSeparator = termSeparator.addDays(-2);
     if (startingDate.daysTo(endingDate) <= settlementPeriod)        // no days to check for
       return;
     termSeparator = termSeparator.addDays(-settlementPeriod);

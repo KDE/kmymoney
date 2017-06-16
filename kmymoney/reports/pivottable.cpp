@@ -904,6 +904,8 @@ void PivotTable::calculateBudgetMapping()
           case MyMoneyBudget::AccountGroup::eYearly:
             // divide the single yearly value by 12 and place it in each column
             value /= MyMoneyMoney(12, 1);
+            // fall through intentional
+
           case MyMoneyBudget::AccountGroup::eNone:
           case MyMoneyBudget::AccountGroup::eMax:
           case MyMoneyBudget::AccountGroup::eMonthly:

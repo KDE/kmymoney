@@ -443,7 +443,7 @@ bool kMyMoneyEdit::eventFilter(QObject * /* o */ , QEvent *e)
             break;
           }
         }
-        // otherwise, tricky fall through here!
+        // fall through intentional
 
       case Qt::Key_Slash:
       case Qt::Key_Asterisk:
