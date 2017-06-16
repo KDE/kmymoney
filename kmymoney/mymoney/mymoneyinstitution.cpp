@@ -31,6 +31,9 @@
 // Project Includes
 
 #include <mymoneyexception.h>
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 MyMoneyInstitution::MyMoneyInstitution()
 {
@@ -63,34 +66,34 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
 
 MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
     MyMoneyObject(node),
-    MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
+    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
 {
-  if ("INSTITUTION" != node.tagName())
+  if (nodeNames[nnInstitution] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not INSTITUTION");
 
-  m_sortcode = node.attribute("sortcode");
-  m_name = node.attribute("name");
-  m_manager = node.attribute("manager");
+  m_sortcode = node.attribute(getAttrName(anSortCode));
+  m_name = node.attribute(getAttrName(anName));
+  m_manager = node.attribute(getAttrName(anManager));
 
-  QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
+  QDomNodeList nodeList = node.elementsByTagName(getElName(enAddress));
   if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in institution %1").arg(m_name);
     throw MYMONEYEXCEPTION(msg);
   }
 
   QDomElement addrNode = nodeList.item(0).toElement();
-  m_street = addrNode.attribute("street");
-  m_town = addrNode.attribute("city");
-  m_postcode = addrNode.attribute("zip");
-  m_telephone = addrNode.attribute("telephone");
+  m_street = addrNode.attribute(getAttrName(anStreet));
+  m_town = addrNode.attribute(getAttrName(anCity));
+  m_postcode = addrNode.attribute(getAttrName(anZip));
+  m_telephone = addrNode.attribute(getAttrName(anTelephone));
 
   m_accountList.clear();
 
-  nodeList = node.elementsByTagName("ACCOUNTIDS");
+  nodeList = node.elementsByTagName(getElName(enAccountIDS));
   if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName("ACCOUNTID");
+    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(enAccountID));
     for (int i = 0; i < nodeList.count(); ++i) {
-      m_accountList << nodeList.item(i).toElement().attribute("id");
+      m_accountList << nodeList.item(i).toElement().attribute(getAttrName(anID));
     }
   }
 }
@@ -142,26 +145,26 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
 
 void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("INSTITUTION");
+  QDomElement el = document.createElement(nodeNames[nnInstitution]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute("name", m_name);
-  el.setAttribute("manager", m_manager);
-  el.setAttribute("sortcode", m_sortcode);
+  el.setAttribute(getAttrName(anName), m_name);
+  el.setAttribute(getAttrName(anManager), m_manager);
+  el.setAttribute(getAttrName(anSortCode), m_sortcode);
 
-  QDomElement address = document.createElement("ADDRESS");
-  address.setAttribute("street", m_street);
-  address.setAttribute("city", m_town);
-  address.setAttribute("zip", m_postcode);
-  address.setAttribute("telephone", m_telephone);
+  QDomElement address = document.createElement(getElName(enAddress));
+  address.setAttribute(getAttrName(anStreet), m_street);
+  address.setAttribute(getAttrName(anCity), m_town);
+  address.setAttribute(getAttrName(anZip), m_postcode);
+  address.setAttribute(getAttrName(anTelephone), m_telephone);
   el.appendChild(address);
 
 
-  QDomElement accounts = document.createElement("ACCOUNTIDS");
+  QDomElement accounts = document.createElement(getElName(enAccountIDS));
   for (QStringList::ConstIterator it = accountList().begin(); it != accountList().end(); ++it) {
-    QDomElement temp = document.createElement("ACCOUNTID");
-    temp.setAttribute("id", (*it));
+    QDomElement temp = document.createElement(getElName(enAccountID));
+    temp.setAttribute(getAttrName(anID), (*it));
     accounts.appendChild(temp);
   }
   el.appendChild(accounts);
@@ -181,7 +184,7 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 QPixmap MyMoneyInstitution::pixmap() const
 {
   QPixmap institution;
-  QString iconName = "view-bank";
+  QString iconName = QLatin1String("view-bank");
   if (!QPixmapCache::find(iconName, institution)) {
     QIcon icon = QIcon::fromTheme(iconName,
                                   QIcon::fromTheme(QStringLiteral("institution"),
@@ -193,3 +196,27 @@ QPixmap MyMoneyInstitution::pixmap() const
   return institution;
 }
 
+const QString MyMoneyInstitution::getElName(const elNameE _el)
+{
+  static const QMap<elNameE, QString> elNames = {
+    {enAccountID, QStringLiteral("ACCOUNTID")},
+    {enAccountIDS, QStringLiteral("ACCOUNTIDS")},
+    {enAddress, QStringLiteral("ADDRESS")}
+  };
+  return elNames[_el];
+}
+
+const QString MyMoneyInstitution::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anID, QStringLiteral("id")},
+    {anName, QStringLiteral("name")},
+    {anManager, QStringLiteral("manager")},
+    {anSortCode, QStringLiteral("sortcode")},
+    {anStreet, QStringLiteral("street")},
+    {anCity, QStringLiteral("city")},
+    {anZip, QStringLiteral("zip")},
+    {anTelephone, QStringLiteral("telephone")}
+  };
+  return attrNames[_attr];
+}

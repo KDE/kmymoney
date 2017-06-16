@@ -58,5 +58,7 @@ private slots:
   void testAddMissingAccountId();
   void testModifyMissingAccountId();
   void testReplaceId();
+  void testElementNames();
+  void testAttributeNames();
 };
 #endif

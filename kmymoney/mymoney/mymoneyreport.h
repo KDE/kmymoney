@@ -32,6 +32,7 @@ class QDomDocument;
 #include <mymoneyaccount.h>
 #include <mymoneytransactionfilter.h>
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class
@@ -54,6 +55,9 @@ class QDomDocument;
 
 class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTransactionFilter
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   // When adding a new row type, be sure to add a corresponding entry in kTypeArray
   enum ERowType { eNoRows = 0, eAssetLiability, eExpenseIncome, eCategory, eTopCategory, eAccount, eTag, ePayee, eMonth, eWeek, eTopAccount, eAccountByTopAccount, eEquityType, eAccountType, eInstitution, eBudget, eBudgetActual, eSchedule, eAccountInfo, eAccountLoanInfo, eAccountReconcile, eCashFlow};
@@ -69,6 +73,34 @@ public:
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
   enum dataOptionE { automatic = 0, userDefined, dataOptionCount };
+
+  enum elNameE { enPayee ,enTag, enAccount, enText,
+                 enType, enState, enNumber,
+                 enAmount, enDates, enCategory,
+                 enAccountGroup
+               };
+  Q_ENUM(elNameE)
+
+  enum attrNameE { anID, anGroup, anType, anName, anComment, anConvertCurrency, anFavorite,
+                   anSkipZero, anDateLock, anDataLock, anMovingAverageDays,
+                   anIncludesActuals, anIncludesForecast, anIncludesPrice,
+                   anIncludesAveragePrice, anIncludesMovingAverage,
+                   anIncludesSchedules, anIncludesTransfers, anIncludesUnused,
+                   anMixedTime, anInvestments, anBudget,
+                   anShowRowTotals, anShowColumnTotals, anDetail,
+                   anColumnsAreDays, anChartType,
+                   anChartCHGridLines, anChartSVGridLines,
+                   anChartDataLabels, anChartByDefault,
+                   anLogYAxis, anChartLineWidth, anColumnType, anRowType,
+                   anDataRangeStart, anDataRangeEnd,
+                   anDataMajorTick, anDataMinorTick,
+                   anYLabelsPrecision, anQueryColumns,
+                   anTax, anLoans, anHideTransactions, anInvestmentSum,
+                   anSettlementPeriod, anShowSTLTCapitalGains, anTermsSeparator,
+                   anPattern, anCaseSensitive, anRegEx, anInvertText, anState,
+                   anFrom, anTo
+                 };
+  Q_ENUM(attrNameE)
 
   static const QStringList kRowTypeText;
   static const QStringList kColumnTypeText;
@@ -828,6 +860,9 @@ private:
     * </p>
     */
   bool m_skipZero;
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 };
 
 /**

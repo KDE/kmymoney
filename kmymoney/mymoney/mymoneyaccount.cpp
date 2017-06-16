@@ -40,6 +40,9 @@
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 MyMoneyAccount::MyMoneyAccount() :
     m_accountType(UnknownAccountType),
@@ -60,20 +63,20 @@ MyMoneyAccount::MyMoneyAccount(const QString& id, const MyMoneyAccount& right) :
 
 MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     MyMoneyObject(node),
-    MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement()),
+    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
     m_accountType(UnknownAccountType),
     m_fraction(-1)
 {
-  if ("ACCOUNT" != node.tagName())
+  if (nodeNames[nnAccount] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not ACCOUNT");
 
-  setName(node.attribute("name"));
+  setName(node.attribute(getAttrName(anName)));
 
   // qDebug("Reading information for account %s", acc.name().data());
 
-  setParentAccountId(QStringEmpty(node.attribute("parentaccount")));
-  setLastModified(stringToDate(QStringEmpty(node.attribute("lastmodified"))));
-  setLastReconciliationDate(stringToDate(QStringEmpty(node.attribute("lastreconciled"))));
+  setParentAccountId(QStringEmpty(node.attribute(getAttrName(anParentAccount))));
+  setLastModified(stringToDate(QStringEmpty(node.attribute(getAttrName(anLastModified)))));
+  setLastReconciliationDate(stringToDate(QStringEmpty(node.attribute(getAttrName(anLastReconciled)))));
 
   if (!m_lastReconciliationDate.isValid()) {
     // for some reason, I was unable to access our own kvp at this point through
@@ -83,18 +86,18 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     //
     // Since we want to get rid of the lastStatementDate record anyway, this seems
     // to be ok for now. (ipwizard - 2008-08-14)
-    QString txt = MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement()).value("lastStatementDate");
+    QString txt = MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()).value("lastStatementDate");
     if (!txt.isEmpty()) {
       setLastReconciliationDate(QDate::fromString(txt, Qt::ISODate));
     }
   }
 
-  setInstitutionId(QStringEmpty(node.attribute("institution")));
-  setNumber(QStringEmpty(node.attribute("number")));
-  setOpeningDate(stringToDate(QStringEmpty(node.attribute("opened"))));
-  setCurrencyId(QStringEmpty(node.attribute("currency")));
+  setInstitutionId(QStringEmpty(node.attribute(getAttrName(anInstitution))));
+  setNumber(QStringEmpty(node.attribute(getAttrName(anNumber))));
+  setOpeningDate(stringToDate(QStringEmpty(node.attribute(getAttrName(anOpened)))));
+  setCurrencyId(QStringEmpty(node.attribute(getAttrName(anCurrency))));
 
-  QString tmp = QStringEmpty(node.attribute("type"));
+  QString tmp = QStringEmpty(node.attribute(getAttrName(anType)));
   bool bOK = false;
   int type = tmp.toInt(&bOK);
   if (bOK) {
@@ -103,28 +106,28 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     qWarning("XMLREADER: Account %s had invalid or no account type information.", qPrintable(name()));
   }
 
-  if (node.hasAttribute("openingbalance")) {
-    if (!MyMoneyMoney(node.attribute("openingbalance")).isZero()) {
+  if (node.hasAttribute(getAttrName(anOpeningBalance))) {
+    if (!MyMoneyMoney(node.attribute(getAttrName(anOpeningBalance))).isZero()) {
       QString msg = i18n("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.", m_name);
       throw MYMONEYEXCEPTION(msg);
     }
   }
-  setDescription(node.attribute("description"));
+  setDescription(node.attribute(getAttrName(anDescription)));
 
-  m_id = QStringEmpty(node.attribute("id"));
+  m_id = QStringEmpty(node.attribute(getAttrName(anID)));
   // qDebug("Account %s has id of %s, type of %d, parent is %s.", acc.name().data(), id.data(), type, acc.parentAccountId().data());
 
   //  Process any Sub-Account information found inside the account entry.
   m_accountList.clear();
-  QDomNodeList nodeList = node.elementsByTagName("SUBACCOUNTS");
+  QDomNodeList nodeList = node.elementsByTagName(getElName(enSubAccounts));
   if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName("SUBACCOUNT");
+    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(enSubAccount));
     for (int i = 0; i < nodeList.count(); ++i) {
-      addAccountId(QString(nodeList.item(i).toElement().attribute("id")));
+      addAccountId(QString(nodeList.item(i).toElement().attribute(getAttrName(anID))));
     }
   }
 
-  nodeList = node.elementsByTagName("ONLINEBANKING");
+  nodeList = node.elementsByTagName(getElName(enOnlineBanking));
   if (nodeList.count() > 0) {
     QDomNamedNodeMap attributes = nodeList.item(0).toElement().attributes();
     for (int i = 0; i < attributes.count(); ++i) {
@@ -138,8 +141,8 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   if (!value("IBAN").isEmpty()) {
     // If "iban" was not set, set it now. If it is set, the user reseted it already, so remove
     // the garbage.
-    if (value("iban").isEmpty())
-      setValue("iban", value("IBAN"));
+    if (value(getAttrName(anIBAN)).isEmpty())
+      setValue(getAttrName(anIBAN), value("IBAN"));
     deletePair("IBAN");
   }
 }
@@ -304,11 +307,11 @@ template<>
 QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
 {
   payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(new payeeIdentifiers::ibanBic);
-  ident->setIban(value(QLatin1String("iban")));
+  ident->setIban(value(getAttrName(anIBAN)));
 
   if (!institutionId().isEmpty()) {
     const MyMoneyInstitution institution = MyMoneyFile::instance()->institution(institutionId());
-    ident->setBic(institution.value("bic"));
+    ident->setBic(institution.value(getAttrName(anBIC)));
   }
 
   ident->setOwnerName(MyMoneyFile::instance()->user().name());
@@ -524,30 +527,30 @@ int MyMoneyAccountLoan::interestCompounding() const
 
 void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("ACCOUNT");
+  QDomElement el = document.createElement(nodeNames[nnAccount]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute("parentaccount", parentAccountId());
-  el.setAttribute("lastreconciled", dateToString(lastReconciliationDate()));
-  el.setAttribute("lastmodified", dateToString(lastModified()));
-  el.setAttribute("institution", institutionId());
-  el.setAttribute("opened", dateToString(openingDate()));
-  el.setAttribute("number", number());
-  // el.setAttribute("openingbalance", openingBalance().toString());
-  el.setAttribute("type", accountType());
-  el.setAttribute("name", name());
-  el.setAttribute("description", description());
+  el.setAttribute(getAttrName(anParentAccount), parentAccountId());
+  el.setAttribute(getAttrName(anLastReconciled), dateToString(lastReconciliationDate()));
+  el.setAttribute(getAttrName(anLastModified), dateToString(lastModified()));
+  el.setAttribute(getAttrName(anInstitution), institutionId());
+  el.setAttribute(getAttrName(anOpened), dateToString(openingDate()));
+  el.setAttribute(getAttrName(anNumber), number());
+  // el.setAttribute(getAttrName(anOpeningBalance), openingBalance().toString());
+  el.setAttribute(getAttrName(anType), accountType());
+  el.setAttribute(getAttrName(anName), name());
+  el.setAttribute(getAttrName(anDescription), description());
   if (!currencyId().isEmpty())
-    el.setAttribute("currency", currencyId());
+    el.setAttribute(getAttrName(anCurrency), currencyId());
 
   //Add in subaccount information, if this account has subaccounts.
   if (accountCount()) {
-    QDomElement subAccounts = document.createElement("SUBACCOUNTS");
+    QDomElement subAccounts = document.createElement(getElName(enSubAccounts));
     QStringList::ConstIterator it;
     for (it = accountList().begin(); it != accountList().end(); ++it) {
-      QDomElement temp = document.createElement("SUBACCOUNT");
-      temp.setAttribute("id", (*it));
+      QDomElement temp = document.createElement(getElName(enSubAccount));
+      temp.setAttribute(getAttrName(anID), (*it));
       subAccounts.appendChild(temp);
     }
 
@@ -556,7 +559,7 @@ void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 
   // Write online banking settings
   if (m_onlineBankingSettings.pairs().count()) {
-    QDomElement onlinesettings = document.createElement("ONLINEBANKING");
+    QDomElement onlinesettings = document.createElement(getElName(enOnlineBanking));
     QMap<QString, QString>::const_iterator it_key = m_onlineBankingSettings.pairs().begin();
     while (it_key != m_onlineBankingSettings.pairs().end()) {
       onlinesettings.setAttribute(it_key.key(), it_key.value());
@@ -870,10 +873,10 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // Iban & Bic
-  if (!value(QLatin1String("iban")).isEmpty()) {
+  if (!value(getAttrName(anIBAN)).isEmpty()) {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(new payeeIdentifiers::ibanBic);
-    iban->setIban(value("iban"));
-    iban->setBic(file->institution(institutionId()).value("bic"));
+    iban->setIban(value(getAttrName(anIBAN)));
+    iban->setBic(file->institution(institutionId()).value(getAttrName(anBIC)));
     iban->setOwnerName(file->user().name());
     list.append(iban);
   }
@@ -890,4 +893,36 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   }
 
   return list;
+}
+
+const QString MyMoneyAccount::getElName(const elNameE _el)
+{
+  static const QMap<elNameE, QString> elNames = {
+    {enSubAccount, QStringLiteral("SUBACCOUNT")},
+    {enSubAccounts, QStringLiteral("SUBACCOUNTS")},
+    {enOnlineBanking, QStringLiteral("ONLINEBANKING")}
+  };
+  return elNames[_el];
+}
+
+const QString MyMoneyAccount::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anID, QStringLiteral("id")},
+    {anName, QStringLiteral("name")},
+    {anType, QStringLiteral("type")},
+    {anParentAccount, QStringLiteral("parentaccount")},
+    {anLastReconciled, QStringLiteral("lastreconciled")},
+    {anLastModified, QStringLiteral("lastmodified")},
+    {anInstitution, QStringLiteral("institution")},
+    {anOpened, QStringLiteral("opened")},
+    {anNumber, QStringLiteral("number")},
+    {anType, QStringLiteral("type")},
+    {anDescription, QStringLiteral("description")},
+    {anCurrency, QStringLiteral("currency")},
+    {anOpeningBalance, QStringLiteral("openingbalance")},
+    {anIBAN, QStringLiteral("iban")},
+    {anBIC, QStringLiteral("bic")},
+  };
+  return attrNames[_attr];
 }

@@ -708,3 +708,25 @@ void MyMoneyTransactionTest::testReplaceId()
     unexpectedException(e);
   }
 }
+
+void MyMoneyTransactionTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyTransaction::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyTransaction::getElName(static_cast<MyMoneyTransaction::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyTransactionTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyTransaction::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyTransaction::getAttrName(static_cast<MyMoneyTransaction::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}

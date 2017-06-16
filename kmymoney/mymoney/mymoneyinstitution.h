@@ -44,7 +44,18 @@ class MyMoneyMoney;
   */
 class KMM_MYMONEY_EXPORT MyMoneyInstitution : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
+    enum elNameE { enAccountID, enAccountIDS, enAddress };
+    Q_ENUM(elNameE)
+
+    enum attrNameE { anID, anName, anManager, anSortCode,
+                     anStreet, anCity, anZip, anTelephone
+                   };
+    Q_ENUM(attrNameE)
+
   /**
     * This is the constructor for a new empty institution description
     */
@@ -234,6 +245,9 @@ private:
     * available at this institution
     */
   QStringList m_accountList;
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 };
 
 /**

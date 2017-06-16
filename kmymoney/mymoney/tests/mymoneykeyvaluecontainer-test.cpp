@@ -211,3 +211,25 @@ void MyMoneyKeyValueContainerTest::testArrayWrite()
   QVERIFY(kvp.pairs().count() == 1);
   QVERIFY(kvp.value("Key") == "Value");
 }
+
+void MyMoneyKeyValueContainerTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyKeyValueContainer::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyKeyValueContainer::getElName(static_cast<MyMoneyKeyValueContainer::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyKeyValueContainerTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyKeyValueContainer::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyKeyValueContainer::getAttrName(static_cast<MyMoneyKeyValueContainer::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}

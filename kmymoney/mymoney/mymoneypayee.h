@@ -43,6 +43,19 @@ class QStringList;
   */
 class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPayeeIdentifierContainer
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
+public:
+    enum elNameE { enAddress };
+    Q_ENUM(elNameE)
+
+    enum attrNameE { anName, anType, anReference, anNotes, anMatchingEnabled, anUsingMatchKey,
+                     anMatchIgnoreCase, anMatchKey, anDefaultAccountID,
+                     anStreet, anCity, anPostCode, anEmail, anState, anTelephone
+                   };
+    Q_ENUM(attrNameE)
+
 private:
   // Simple fields
   QString m_name;
@@ -78,6 +91,9 @@ private:
     * empty by the application.
     */
   QString m_reference;
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 
 public:
   typedef enum {

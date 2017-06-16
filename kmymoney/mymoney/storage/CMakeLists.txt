@@ -15,6 +15,7 @@ set(storage_a_SOURCES
   mymoneydbdef.cpp
   mymoneydbdriver.cpp
   kmymoneystorageplugin.cpp
+  mymoneystoragenames.cpp
   )
 
 # This library is actually not needed. It is built just for

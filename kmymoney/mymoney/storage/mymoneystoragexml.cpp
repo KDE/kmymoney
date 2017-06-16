@@ -38,6 +38,11 @@
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
 #include "mymoneyinstitution.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageTags;
+using namespace MyMoneyStorageNodes;
+using namespace MyMoneyStorageAttributes;
 
 unsigned int MyMoneyStorageXML::fileVersionRead = 0;
 unsigned int MyMoneyStorageXML::fileVersionWrite = 0;
@@ -155,23 +160,23 @@ bool MyMoneyXmlContentHandler::endPrefixMapping(const QString& /* prefix */)
 bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, const QString& /* localName */, const QString& qName, const QXmlAttributes & atts)
 {
   if (m_level == 0) {
-    QString s = qName.toLower();
-    if (s == "transaction"
-        || s == "account"
-        || s == "price"
-        || s == "payee"
-        || s == "tag"
-        || s == "costcenter"
-        || s == "currency"
-        || s == "security"
-        || s == "keyvaluepairs"
-        || s == "institution"
-        || s == "report"
-        || s == "budget"
-        || s == "fileinfo"
-        || s == "user"
-        || s == "scheduled_tx"
-        || s == "onlinejob") {
+    QString s = qName.toUpper();
+    if (s == nodeNames[nnTransaction]
+        || s == nodeNames[nnAccount]
+        || s == nodeNames[nnPrice]
+        || s == nodeNames[nnPayee]
+        || s == nodeNames[nnTag]
+        || s == nodeNames[nnCostCenter]
+        || s == nodeNames[nnCurrency]
+        || s == nodeNames[nnSecurity]
+        || s == nodeNames[nnKeyValuePairs]
+        || s == nodeNames[nnInstitution]
+        || s == nodeNames[nnReport]
+        || s == nodeNames[nnBudget]
+        || s == tagNames[tnFileInfo]
+        || s == tagNames[tnUser]
+        || s == nodeNames[nnScheduleTX]
+        || s == nodeNames[nnOnlineJob]) {
       m_baseNode = m_doc.createElement(qName);
       for (int i = 0; i < atts.count(); ++i) {
         m_baseNode.setAttribute(atts.qName(i), atts.value(i));
@@ -179,51 +184,51 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
       m_currNode = m_baseNode;
       m_level = 1;
 
-    } else if (s == "transactions") {
+    } else if (s == tagNames[tnTransactions]) {
       if (atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading transactions..."));
         m_elementCount = 0;
       }
-    } else if (s == "accounts") {
+    } else if (s == tagNames[tnAccounts]) {
       if (atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading accounts..."));
         m_elementCount = 0;
       }
-    } else if (s == "securities") {
+    } else if (s == tagNames[tnSecurities]) {
       qDebug("reading securities");
       if (atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading securities..."));
         m_elementCount = 0;
       }
-    } else if (s == "currencies") {
+    } else if (s == tagNames[tnCurrencies]) {
       if (atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading currencies..."));
         m_elementCount = 0;
       }
-    } else if (s == "reports") {
+    } else if (s == tagNames[tnReports]) {
       if (atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading reports..."));
         m_elementCount = 0;
       }
-    } else if (s == "prices") {
+    } else if (s == tagNames[tnPrices]) {
       if (atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading prices..."));
         m_elementCount = 0;
       }
-    } else if (s == "pricepair") {
+    } else if (s == nodeNames[nnPricePair]) {
       if (atts.count()) {
-        m_reader->d->m_fromSecurity = atts.value(QLatin1String("from"));
-        m_reader->d->m_toSecurity = atts.value(QLatin1String("to"));
+        m_reader->d->m_fromSecurity = atts.value(attrNames[anFrom]);
+        m_reader->d->m_toSecurity = atts.value(attrNames[anTo]);
       }
-    } else if (s == "costcenters") {
+    } else if (s == tagNames[tnCostCenters]) {
       if(atts.count()) {
-        int count = atts.value(QLatin1String("count")).toInt();
+        int count = atts.value(attrNames[anCount]).toInt();
         m_reader->signalProgress(0, count, i18n("Loading cost center..."));
         m_elementCount = 0;
       }
@@ -245,79 +250,79 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
 bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, const QString& /* localName */, const QString& qName)
 {
   bool rc = true;
-  QString s = qName.toLower();
+  QString s = qName.toUpper();
   if (m_level) {
     m_currNode = m_currNode.parentNode().toElement();
     m_level--;
     if (!m_level) {
       try {
-        if (s == "transaction") {
+        if (s == nodeNames[nnTransaction]) {
           MyMoneyTransaction t0(m_baseNode);
           if (!t0.id().isEmpty()) {
             MyMoneyTransaction t1(m_reader->d->nextTransactionID(), t0);
             m_reader->d->tList[t1.uniqueSortKey()] = t1;
           }
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "account") {
+        } else if (s == nodeNames[nnAccount]) {
           MyMoneyAccount a(m_baseNode);
           if (!a.id().isEmpty())
             m_reader->d->aList[a.id()] = a;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "payee") {
+        } else if (s == nodeNames[nnPayee]) {
           MyMoneyPayee p(m_baseNode);
           if (!p.id().isEmpty())
             m_reader->d->pList[p.id()] = p;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "tag") {
+        } else if (s == nodeNames[nnTag]) {
           MyMoneyTag ta(m_baseNode);
           if (!ta.id().isEmpty())
             m_reader->d->taList[ta.id()] = ta;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "currency") {
+        } else if (s == nodeNames[nnCurrency]) {
           MyMoneySecurity s(m_baseNode);
           if (!s.id().isEmpty())
             m_reader->d->secList[s.id()] = s;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "security") {
+        } else if (s == nodeNames[nnSecurity]) {
           MyMoneySecurity s(m_baseNode);
           if (!s.id().isEmpty())
             m_reader->d->secList[s.id()] = s;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "keyvaluepairs") {
+        } else if (s == nodeNames[nnKeyValuePairs]) {
           MyMoneyKeyValueContainer kvp(m_baseNode);
           m_reader->m_storage->setPairs(kvp.pairs());
-        } else if (s == "institution") {
+        } else if (s == nodeNames[nnInstitution]) {
           MyMoneyInstitution i(m_baseNode);
           if (!i.id().isEmpty())
             m_reader->d->iList[i.id()] = i;
-        } else if (s == "report") {
+        } else if (s == nodeNames[nnReport]) {
           MyMoneyReport r(m_baseNode);
           if (!r.id().isEmpty())
             m_reader->d->rList[r.id()] = r;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "budget") {
+        } else if (s == nodeNames[nnBudget]) {
           MyMoneyBudget b(m_baseNode);
           if (!b.id().isEmpty())
             m_reader->d->bList[b.id()] = b;
-        } else if (s == "fileinfo") {
+        } else if (s == tagNames[tnFileInfo]) {
           rc = m_reader->readFileInformation(m_baseNode);
           m_reader->signalProgress(-1, -1);
-        } else if (s == "user") {
+        } else if (s == tagNames[tnUser]) {
           rc = m_reader->readUserInformation(m_baseNode);
           m_reader->signalProgress(-1, -1);
-        } else if (s == "scheduled_tx") {
+        } else if (s == nodeNames[nnScheduleTX]) {
           MyMoneySchedule s(m_baseNode);
           if (!s.id().isEmpty())
             m_reader->d->sList[s.id()] = s;
-        } else if (s == "price") {
+        } else if (s == nodeNames[nnPrice]) {
           MyMoneyPrice p(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity, m_baseNode);
           m_reader->d->prList[MyMoneySecurityPair(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity)][p.date()] = p;
           m_reader->signalProgress(++m_elementCount, 0);
-        } else if (s == "onlinejob") {
+        } else if (s == nodeNames[nnOnlineJob]) {
           onlineJob job(m_baseNode);
           if (!job.id().isEmpty())
             m_reader->d->onlineJobList[job.id()] = job;
-        } else if (s == "costcenter") {
+        } else if (s == nodeNames[nnCostCenter]) {
           MyMoneyCostCenter c(m_baseNode);
           if(!c.id().isEmpty()) {
             m_reader->d->ccList[c.id()] = c;
@@ -336,60 +341,60 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       m_doc = QDomDocument();
     }
   } else {
-    if (s == "institutions") {
+    if (s == tagNames[tnInstitutions]) {
       // last institution read, now dump them into the engine
       m_reader->m_storage->loadInstitutions(m_reader->d->iList);
       m_reader->d->iList.clear();
-    } else if (s == "accounts") {
+    } else if (s == tagNames[tnAccounts]) {
       // last account read, now dump them into the engine
       m_reader->m_storage->loadAccounts(m_reader->d->aList);
       m_reader->d->aList.clear();
       m_reader->signalProgress(-1, -1);
-    } else if (s == "payees") {
+    } else if (s == tagNames[tnPayees]) {
       // last payee read, now dump them into the engine
       m_reader->m_storage->loadPayees(m_reader->d->pList);
       m_reader->d->pList.clear();
-    } else if (s == "tags") {
+    } else if (s == tagNames[tnTags]) {
       // last tag read, now dump them into the engine
       m_reader->m_storage->loadTags(m_reader->d->taList);
       m_reader->d->taList.clear();
-    } else if (s == "transactions") {
+    } else if (s == tagNames[tnTransactions]) {
       // last transaction read, now dump them into the engine
       m_reader->m_storage->loadTransactions(m_reader->d->tList);
       m_reader->d->tList.clear();
       m_reader->signalProgress(-1, -1);
-    } else if (s == "schedules") {
+    } else if (s == tagNames[tnSchedules]) {
       // last schedule read, now dump them into the engine
       m_reader->m_storage->loadSchedules(m_reader->d->sList);
       m_reader->d->sList.clear();
-    } else if (s == "securities") {
+    } else if (s == tagNames[tnSecurities]) {
       // last security read, now dump them into the engine
       m_reader->m_storage->loadSecurities(m_reader->d->secList);
       m_reader->d->secList.clear();
       m_reader->signalProgress(-1, -1);
-    } else if (s == "currencies") {
+    } else if (s == tagNames[tnCurrencies]) {
       // last currency read, now dump them into the engine
       m_reader->m_storage->loadCurrencies(m_reader->d->secList);
       m_reader->d->secList.clear();
       m_reader->signalProgress(-1, -1);
-    } else if (s == "reports") {
+    } else if (s == tagNames[tnReports]) {
       // last report read, now dump them into the engine
       m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
       m_reader->signalProgress(-1, -1);
-    } else if (s == "budgets") {
+    } else if (s == tagNames[tnBudgets]) {
       // last budget read, now dump them into the engine
       m_reader->m_storage->loadBudgets(m_reader->d->bList);
       m_reader->d->bList.clear();
-    } else if (s == "prices") {
+    } else if (s == tagNames[tnPrices]) {
       // last price read, now dump them into the engine
       m_reader->m_storage->loadPrices(m_reader->d->prList);
       m_reader->d->bList.clear();
       m_reader->signalProgress(-1, -1);
-    } else if (s == "onlinejobs") {
+    } else if (s == tagNames[tnOnlineJobs]) {
       m_reader->m_storage->loadOnlineJobs(m_reader->d->onlineJobList);
       m_reader->d->onlineJobList.clear();
-    } else if (s == "costcenters") {
+    } else if (s == tagNames[tnCostCenters]) {
       m_reader->m_storage->loadCostCenters(m_reader->d->ccList);
       m_reader->d->ccList.clear();
       m_reader->signalProgress(-1, -1);
@@ -496,74 +501,74 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   m_storage = storage;
 
   // qDebug("XMLWRITER: Starting file write");
-  m_doc = new QDomDocument("KMYMONEY-FILE");
+  m_doc = new QDomDocument(tagNames[tnKMMFile]);
   Q_CHECK_PTR(m_doc);
   QDomProcessingInstruction instruct = m_doc->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
   m_doc->appendChild(instruct);
 
-  QDomElement mainElement = m_doc->createElement("KMYMONEY-FILE");
+  QDomElement mainElement = m_doc->createElement(tagNames[tnKMMFile]);
   m_doc->appendChild(mainElement);
 
-  QDomElement fileInfo = m_doc->createElement("FILEINFO");
+  QDomElement fileInfo = m_doc->createElement(tagNames[tnFileInfo]);
   writeFileInformation(fileInfo);
   mainElement.appendChild(fileInfo);
 
-  QDomElement userInfo = m_doc->createElement("USER");
+  QDomElement userInfo = m_doc->createElement(tagNames[tnUser]);
   writeUserInformation(userInfo);
   mainElement.appendChild(userInfo);
 
-  QDomElement institutions = m_doc->createElement("INSTITUTIONS");
+  QDomElement institutions = m_doc->createElement(tagNames[tnInstitutions]);
   writeInstitutions(institutions);
   mainElement.appendChild(institutions);
 
-  QDomElement payees = m_doc->createElement("PAYEES");
+  QDomElement payees = m_doc->createElement(tagNames[tnPayees]);
   writePayees(payees);
   mainElement.appendChild(payees);
 
-  QDomElement costCenters = m_doc->createElement("COSTCENTERS");
+  QDomElement costCenters = m_doc->createElement(tagNames[tnCostCenters]);
   writeCostCenters(costCenters);
   mainElement.appendChild(costCenters);
 
-  QDomElement tags = m_doc->createElement("TAGS");
+  QDomElement tags = m_doc->createElement(tagNames[tnTags]);
   writeTags(tags);
   mainElement.appendChild(tags);
 
-  QDomElement accounts = m_doc->createElement("ACCOUNTS");
+  QDomElement accounts = m_doc->createElement(tagNames[tnAccounts]);
   writeAccounts(accounts);
   mainElement.appendChild(accounts);
 
-  QDomElement transactions = m_doc->createElement("TRANSACTIONS");
+  QDomElement transactions = m_doc->createElement(tagNames[tnTransactions]);
   writeTransactions(transactions);
   mainElement.appendChild(transactions);
 
   QDomElement keyvalpairs = writeKeyValuePairs(m_storage->pairs());
   mainElement.appendChild(keyvalpairs);
 
-  QDomElement schedules = m_doc->createElement("SCHEDULES");
+  QDomElement schedules = m_doc->createElement(tagNames[tnSchedules]);
   writeSchedules(schedules);
   mainElement.appendChild(schedules);
 
-  QDomElement equities = m_doc->createElement("SECURITIES");
+  QDomElement equities = m_doc->createElement(tagNames[tnSecurities]);
   writeSecurities(equities);
   mainElement.appendChild(equities);
 
-  QDomElement currencies = m_doc->createElement("CURRENCIES");
+  QDomElement currencies = m_doc->createElement(tagNames[tnCurrencies]);
   writeCurrencies(currencies);
   mainElement.appendChild(currencies);
 
-  QDomElement prices = m_doc->createElement("PRICES");
+  QDomElement prices = m_doc->createElement(tagNames[tnPrices]);
   writePrices(prices);
   mainElement.appendChild(prices);
 
-  QDomElement reports = m_doc->createElement("REPORTS");
+  QDomElement reports = m_doc->createElement(tagNames[tnReports]);
   writeReports(reports);
   mainElement.appendChild(reports);
 
-  QDomElement budgets = m_doc->createElement("BUDGETS");
+  QDomElement budgets = m_doc->createElement(tagNames[tnBudgets]);
   writeBudgets(budgets);
   mainElement.appendChild(budgets);
 
-  QDomElement onlineJobs = m_doc->createElement("ONLINEJOBS");
+  QDomElement onlineJobs = m_doc->createElement(tagNames[tnOnlineJobs]);
   writeOnlineJobs(onlineJobs);
   mainElement.appendChild(onlineJobs);
   
@@ -588,32 +593,32 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
 {
   signalProgress(0, 3, i18n("Loading file information..."));
   bool rc = true;
-  QDomElement temp = findChildElement("CREATION_DATE", fileInfo);
+  QDomElement temp = findChildElement(getElName(enCreationDate), fileInfo);
   if (temp == QDomElement()) {
     rc = false;
   }
-  QString strDate = QStringEmpty(temp.attribute("date"));
+  QString strDate = QStringEmpty(temp.attribute(attrNames[anDate]));
   m_storage->setCreationDate(stringToDate(strDate));
   signalProgress(1, 0);
 
-  temp = findChildElement("LAST_MODIFIED_DATE", fileInfo);
+  temp = findChildElement(getElName(enLastModifiedDate), fileInfo);
   if (temp == QDomElement()) {
     rc = false;
   }
-  strDate = QStringEmpty(temp.attribute("date"));
+  strDate = QStringEmpty(temp.attribute(attrNames[anDate]));
   m_storage->setLastModificationDate(stringToDate(strDate));
   signalProgress(2, 0);
 
-  temp = findChildElement("VERSION", fileInfo);
+  temp = findChildElement(getElName(enVersion), fileInfo);
   if (temp == QDomElement()) {
     rc = false;
   }
-  QString strVersion = QStringEmpty(temp.attribute("id"));
+  QString strVersion = QStringEmpty(temp.attribute(attrNames[anID]));
   fileVersionRead = strVersion.toUInt(0, 16);
 
-  temp = findChildElement("FIXVERSION", fileInfo);
+  temp = findChildElement(getElName(enFixVersion), fileInfo);
   if (temp != QDomElement()) {
-    QString strFixVersion = QStringEmpty(temp.attribute("id"));
+    QString strFixVersion = QStringEmpty(temp.attribute(attrNames[anID]));
     m_storage->setFileFixVersion(strFixVersion.toUInt());
     // skip KMyMoneyView::fixFile_2()
     if (m_storage->fileFixVersion() == 2) {
@@ -631,36 +636,36 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
 
 void MyMoneyStorageXML::writeFileInformation(QDomElement& fileInfo)
 {
-  QDomElement creationDate = m_doc->createElement("CREATION_DATE");
-  creationDate.setAttribute("date", dateToString(m_storage->creationDate()));
+  QDomElement creationDate = m_doc->createElement(getElName(enCreationDate));
+  creationDate.setAttribute(attrNames[anDate], dateToString(m_storage->creationDate()));
   fileInfo.appendChild(creationDate);
 
-  QDomElement lastModifiedDate = m_doc->createElement("LAST_MODIFIED_DATE");
-  lastModifiedDate.setAttribute("date", dateToString(m_storage->lastModificationDate()));
+  QDomElement lastModifiedDate = m_doc->createElement(getElName(enLastModifiedDate));
+  lastModifiedDate.setAttribute(attrNames[anDate], dateToString(m_storage->lastModificationDate()));
   fileInfo.appendChild(lastModifiedDate);
 
-  QDomElement version = m_doc->createElement("VERSION");
+  QDomElement version = m_doc->createElement(getElName(enVersion));
 
-  version.setAttribute("id", "1");
+  version.setAttribute(attrNames[anID], "1");
   fileInfo.appendChild(version);
 
-  QDomElement fixVersion = m_doc->createElement("FIXVERSION");
-  fixVersion.setAttribute("id", m_storage->fileFixVersion());
+  QDomElement fixVersion = m_doc->createElement(getElName(enFixVersion));
+  fixVersion.setAttribute(attrNames[anID], m_storage->fileFixVersion());
   fileInfo.appendChild(fixVersion);
 }
 
 void MyMoneyStorageXML::writeUserInformation(QDomElement& userInfo)
 {
   MyMoneyPayee user = m_storage->user();
-  userInfo.setAttribute("name", user.name());
-  userInfo.setAttribute("email", user.email());
+  userInfo.setAttribute(attrNames[anName], user.name());
+  userInfo.setAttribute(attrNames[anEmail], user.email());
 
-  QDomElement address = m_doc->createElement("ADDRESS");
-  address.setAttribute("street", user.address());
-  address.setAttribute("city", user.city());
-  address.setAttribute("county", user.state());
-  address.setAttribute("zipcode", user.postcode());
-  address.setAttribute("telephone", user.telephone());
+  QDomElement address = m_doc->createElement(getElName(enAddress));
+  address.setAttribute(attrNames[anStreet], user.address());
+  address.setAttribute(attrNames[anCity], user.city());
+  address.setAttribute(attrNames[anCountry], user.state());
+  address.setAttribute(attrNames[anZipCode], user.postcode());
+  address.setAttribute(attrNames[anTelephone], user.telephone());
 
   userInfo.appendChild(address);
 }
@@ -671,16 +676,16 @@ bool MyMoneyStorageXML::readUserInformation(const QDomElement& userElement)
   signalProgress(0, 1, i18n("Loading user information..."));
 
   MyMoneyPayee user;
-  user.setName(QStringEmpty(userElement.attribute("name")));
-  user.setEmail(QStringEmpty(userElement.attribute("email")));
+  user.setName(QStringEmpty(userElement.attribute(attrNames[anName])));
+  user.setEmail(QStringEmpty(userElement.attribute(attrNames[anEmail])));
 
-  QDomElement addressNode = findChildElement("ADDRESS", userElement);
+  QDomElement addressNode = findChildElement(getElName(enAddress), userElement);
   if (!addressNode.isNull()) {
-    user.setAddress(QStringEmpty(addressNode.attribute("street")));
-    user.setCity(QStringEmpty(addressNode.attribute("city")));
-    user.setState(QStringEmpty(addressNode.attribute("county")));
-    user.setPostcode(QStringEmpty(addressNode.attribute("zipcode")));
-    user.setTelephone(QStringEmpty(addressNode.attribute("telephone")));
+    user.setAddress(QStringEmpty(addressNode.attribute(attrNames[anStreet])));
+    user.setCity(QStringEmpty(addressNode.attribute(attrNames[anCity])));
+    user.setState(QStringEmpty(addressNode.attribute(attrNames[anCountry])));
+    user.setPostcode(QStringEmpty(addressNode.attribute(attrNames[anZipCode])));
+    user.setTelephone(QStringEmpty(addressNode.attribute(attrNames[anTelephone])));
   }
 
   m_storage->setUser(user);
@@ -693,7 +698,7 @@ void MyMoneyStorageXML::writeInstitutions(QDomElement& institutions)
 {
   const QList<MyMoneyInstitution> list = m_storage->institutionList();
   QList<MyMoneyInstitution>::ConstIterator it;
-  institutions.setAttribute("count", list.count());
+  institutions.setAttribute(attrNames[anCount], list.count());
 
   for (it = list.begin(); it != list.end(); ++it)
     writeInstitution(institutions, *it);
@@ -708,7 +713,7 @@ void MyMoneyStorageXML::writePayees(QDomElement& payees)
 {
   const QList<MyMoneyPayee> list = m_storage->payeeList();
   QList<MyMoneyPayee>::ConstIterator it;
-  payees.setAttribute("count", list.count());
+  payees.setAttribute(attrNames[anCount], list.count());
 
   for (it = list.begin(); it != list.end(); ++it)
     writePayee(payees, *it);
@@ -723,7 +728,7 @@ void MyMoneyStorageXML::writeTags(QDomElement& tags)
 {
   const QList<MyMoneyTag> list = m_storage->tagList();
   QList<MyMoneyTag>::ConstIterator it;
-  tags.setAttribute("count", list.count());
+  tags.setAttribute(attrNames[anCount], list.count());
 
   for (it = list.begin(); it != list.end(); ++it)
     writeTag(tags, *it);
@@ -739,7 +744,7 @@ void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
   QList<MyMoneyAccount> list;
   m_storage->accountList(list);
   QList<MyMoneyAccount>::ConstIterator it;
-  accounts.setAttribute("count", list.count() + 5);
+  accounts.setAttribute(attrNames[anCount], list.count() + 5);
 
   writeAccount(accounts, m_storage->asset());
   writeAccount(accounts, m_storage->liability());
@@ -766,7 +771,7 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> list;
   m_storage->transactionList(list, filter);
-  transactions.setAttribute("count", list.count());
+  transactions.setAttribute(attrNames[anCount], list.count());
 
   QList<MyMoneyTransaction>::ConstIterator it;
 
@@ -788,7 +793,7 @@ void MyMoneyStorageXML::writeSchedules(QDomElement& scheduled)
 {
   const QList<MyMoneySchedule> list = m_storage->scheduleList();
   QList<MyMoneySchedule>::ConstIterator it;
-  scheduled.setAttribute("count", list.count());
+  scheduled.setAttribute(attrNames[anCount], list.count());
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     this->writeSchedule(scheduled, *it);
@@ -803,7 +808,7 @@ void MyMoneyStorageXML::writeSchedule(QDomElement& scheduledTx, const MyMoneySch
 void MyMoneyStorageXML::writeSecurities(QDomElement& equities)
 {
   const QList<MyMoneySecurity> securityList = m_storage->securityList();
-  equities.setAttribute("count", securityList.count());
+  equities.setAttribute(attrNames[anCount], securityList.count());
   if (securityList.size()) {
     for (QList<MyMoneySecurity>::ConstIterator it = securityList.constBegin(); it != securityList.constEnd(); ++it) {
       writeSecurity(equities, (*it));
@@ -819,7 +824,7 @@ void MyMoneyStorageXML::writeSecurity(QDomElement& securityElement, const MyMone
 void MyMoneyStorageXML::writeCurrencies(QDomElement& currencies)
 {
   const QList<MyMoneySecurity> currencyList = m_storage->currencyList();
-  currencies.setAttribute("count", currencyList.count());
+  currencies.setAttribute(attrNames[anCount], currencyList.count());
   if (currencyList.size()) {
     for (QList<MyMoneySecurity>::ConstIterator it = currencyList.constBegin(); it != currencyList.constEnd(); ++it) {
       writeSecurity(currencies, (*it));
@@ -831,7 +836,7 @@ void MyMoneyStorageXML::writeReports(QDomElement& parent)
 {
   const QList<MyMoneyReport> list = m_storage->reportList();
   QList<MyMoneyReport>::ConstIterator it;
-  parent.setAttribute("count", list.count());
+  parent.setAttribute(attrNames[anCount], list.count());
 
   signalProgress(0, list.count(), i18n("Saving reports..."));
   unsigned i = 0;
@@ -850,7 +855,7 @@ void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 {
   const QList<MyMoneyBudget> list = m_storage->budgetList();
   QList<MyMoneyBudget>::ConstIterator it;
-  parent.setAttribute("count", list.count());
+  parent.setAttribute(attrNames[anCount], list.count());
 
   signalProgress(0, list.count(), i18n("Saving budgets..."));
   unsigned i = 0;
@@ -868,7 +873,7 @@ void MyMoneyStorageXML::writeBudget(QDomElement& budget, const MyMoneyBudget& b)
 void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)
 {
   const QList<onlineJob> list = m_storage->onlineJobList();
-  parent.setAttribute("count", list.count());
+  parent.setAttribute(attrNames[anCount], list.count());
   signalProgress(0, list.count(), i18n("Saving online banking orders..."));
   unsigned i = 0;
   QList<onlineJob>::ConstIterator end = list.constEnd();
@@ -886,7 +891,7 @@ void MyMoneyStorageXML::writeOnlineJob(QDomElement& onlineJobs, const onlineJob&
 void MyMoneyStorageXML::writeCostCenters(QDomElement& parent)
 {
   const QList<MyMoneyCostCenter> list = m_storage->costCenterList();
-  parent.setAttribute("count", list.count());
+  parent.setAttribute(attrNames[anCount], list.count());
   signalProgress(0, list.count(), i18n("Saving costcenters..."));
   unsigned i = 0;
   Q_FOREACH(MyMoneyCostCenter costCenter, list) {
@@ -919,13 +924,13 @@ QDomElement MyMoneyStorageXML::findChildElement(const QString& name, const QDomE
 QDomElement MyMoneyStorageXML::writeKeyValuePairs(const QMap<QString, QString> pairs)
 {
   if (m_doc) {
-    QDomElement keyValPairs = m_doc->createElement("KEYVALUEPAIRS");
+    QDomElement keyValPairs = m_doc->createElement(nodeNames[nnKeyValuePairs]);
 
     QMap<QString, QString>::const_iterator it;
     for (it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
-      QDomElement pair = m_doc->createElement("PAIR");
-      pair.setAttribute("key", it.key());
-      pair.setAttribute("value", it.value());
+      QDomElement pair = m_doc->createElement(getElName(enPair));
+      pair.setAttribute(attrNames[anKey], it.key());
+      pair.setAttribute(attrNames[anValue], it.value());
       keyValPairs.appendChild(pair);
     }
     return keyValPairs;
@@ -937,12 +942,12 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
 {
   const MyMoneyPriceList list = m_storage->priceList();
   MyMoneyPriceList::ConstIterator it;
-  prices.setAttribute("count", list.count());
+  prices.setAttribute(attrNames[anCount], list.count());
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    QDomElement price = m_doc->createElement("PRICEPAIR");
-    price.setAttribute("from", it.key().first);
-    price.setAttribute("to", it.key().second);
+    QDomElement price = m_doc->createElement(nodeNames[nnPricePair]);
+    price.setAttribute(attrNames[anFrom], it.key().first);
+    price.setAttribute(attrNames[anTo], it.key().second);
     writePricePair(price, *it);
     prices.appendChild(price);
   }
@@ -952,7 +957,7 @@ void MyMoneyStorageXML::writePricePair(QDomElement& price, const MyMoneyPriceEnt
 {
   MyMoneyPriceEntries::ConstIterator it;
   for (it = p.constBegin(); it != p.constEnd(); ++it) {
-    QDomElement entry = m_doc->createElement("PRICE");
+    QDomElement entry = m_doc->createElement(nodeNames[nnPrice]);
     writePrice(entry, *it);
     price.appendChild(entry);
   }
@@ -960,9 +965,9 @@ void MyMoneyStorageXML::writePricePair(QDomElement& price, const MyMoneyPriceEnt
 
 void MyMoneyStorageXML::writePrice(QDomElement& price, const MyMoneyPrice& p)
 {
-  price.setAttribute("date", p.date().toString(Qt::ISODate));
-  price.setAttribute("price", p.rate(QString()).toString());
-  price.setAttribute("source", p.source());
+  price.setAttribute(attrNames[anDate], p.date().toString(Qt::ISODate));
+  price.setAttribute(attrNames[anPrice], p.rate(QString()).toString());
+  price.setAttribute(attrNames[anSource], p.source());
 }
 
 void MyMoneyStorageXML::setProgressCallback(void(*callback)(int, int, const QString&))
@@ -1028,3 +1033,15 @@ QByteArray QIODevice::readAll()
 }
 #endif
 
+const QString MyMoneyStorageXML::getElName(const elNameE _el)
+{
+  static const QHash<elNameE, QString> elNames = {
+    {enAddress, QStringLiteral("ADDRESS")},
+    {enCreationDate, QStringLiteral("CREATION_DATE")},
+    {enLastModifiedDate, QStringLiteral("LAST_MODIFIED_DATE")},
+    {enVersion, QStringLiteral("VERSION")},
+    {enFixVersion, QStringLiteral("FIXVERSION")},
+    {enPair, QStringLiteral("PAIR")}
+  };
+  return elNames[_el];
+}

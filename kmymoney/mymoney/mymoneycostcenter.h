@@ -35,9 +35,18 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneyCostCenter : public MyMoneyObject
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
+public:
+    enum attrNameE { anName };
+    Q_ENUM(attrNameE)
+
 private:
   // Simple fields
   QString m_name;
+
+  static const QString getAttrName(const attrNameE _attr);
 
 public:
   MyMoneyCostCenter();

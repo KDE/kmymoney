@@ -20,17 +20,18 @@
 #include <memory>
 #include <QtCore/QObject>
 
-#include "mymoneysecurity.h"
+class MyMoneySecurity;
 
 class MyMoneySecurityTest : public QObject
 {
   Q_OBJECT
 
 protected:
-  std::unique_ptr<MyMoneySecurity> m;
+  MyMoneySecurity *m;
 
 private slots:
   void init();
+  void cleanup();
   void testEmptyConstructor();
   void testNonemptyConstructor();
   void testCopyConstructor();
@@ -39,6 +40,7 @@ private slots:
   void testInequality();
   // void testMyMoneyFileConstructor();
   // void testAccountIDList ();
+  void testAttributeNames();
 };
 
 #endif

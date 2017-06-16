@@ -18,7 +18,10 @@
 
 #include <QtTest/QtTest>
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyInstitutionTest;
+
 #include "mymoneyexception.h"
+#include "mymoneyinstitution.h"
 
 QTEST_GUILESS_MAIN(MyMoneyInstitutionTest)
 
@@ -338,5 +341,27 @@ void MyMoneyInstitutionTest::testReadXML()
 
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
+  }
+}
+
+void MyMoneyInstitutionTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyInstitution::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyInstitution::getElName(static_cast<MyMoneyInstitution::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyInstitutionTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyInstitution::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyInstitution::getAttrName(static_cast<MyMoneyInstitution::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
   }
 }

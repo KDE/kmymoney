@@ -28,6 +28,9 @@
 
 #include "mymoneyutils.h"
 #include <mymoneyexception.h>
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 MyMoneyTag MyMoneyTag::null;
 
@@ -54,17 +57,17 @@ MyMoneyTag::MyMoneyTag(const QString& name, const QColor& tabColor) :
 MyMoneyTag::MyMoneyTag(const QDomElement& node) :
     MyMoneyObject(node)
 {
-  if ("TAG" != node.tagName()) {
+  if (nodeNames[nnTag] != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not TAG");
   }
-  m_name = node.attribute("name");
-  if (node.hasAttribute("tagcolor")) {
-    m_tag_color.setNamedColor(node.attribute("tagcolor"));
+  m_name = node.attribute(getAttrName(anName));
+  if (node.hasAttribute(getAttrName(anTagColor))) {
+    m_tag_color.setNamedColor(node.attribute(getAttrName(anTagColor)));
   }
-  if (node.hasAttribute("notes")) {
-    m_notes = node.attribute("notes");
+  if (node.hasAttribute(getAttrName(anNotes))) {
+    m_notes = node.attribute(getAttrName(anNotes));
   }
-  m_closed = node.attribute("closed", "0").toUInt();
+  m_closed = node.attribute(getAttrName(anClosed), "0").toUInt();
 }
 
 MyMoneyTag::~MyMoneyTag()
@@ -92,20 +95,32 @@ bool MyMoneyTag::operator < (const MyMoneyTag& right) const
 
 void MyMoneyTag::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("TAG");
+  QDomElement el = document.createElement(nodeNames[nnTag]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute("name", m_name);
-  el.setAttribute("closed", m_closed);
+  el.setAttribute(getAttrName(anName), m_name);
+  el.setAttribute(getAttrName(anClosed), m_closed);
   if (m_tag_color.isValid())
-    el.setAttribute("tagcolor", m_tag_color.name());
+    el.setAttribute(getAttrName(anTagColor), m_tag_color.name());
   if (!m_notes.isEmpty())
-    el.setAttribute("notes", m_notes);
+    el.setAttribute(getAttrName(anNotes), m_notes);
   parent.appendChild(el);
 }
 
 bool MyMoneyTag::hasReferenceTo(const QString& /*id*/) const
 {
   return false;
+}
+
+const QString MyMoneyTag::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anName, QStringLiteral("name")},
+    {anType, QStringLiteral("type")},
+    {anTagColor, QStringLiteral("tagcolor")},
+    {anClosed, QStringLiteral("closed")},
+    {anNotes, QStringLiteral("notes")},
+  };
+  return attrNames[_attr];
 }

@@ -29,6 +29,9 @@
 // Project Includes
 
 #include "mymoneyexception.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 Q_GLOBAL_STATIC(QString, nullString)
 
@@ -39,15 +42,15 @@ MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const QDomElement& node)
 {
   if (!node.isNull()) {
-    if ("KEYVALUEPAIRS" != node.tagName())
+    if (nodeNames[nnKeyValuePairs] != node.tagName())
       throw MYMONEYEXCEPTION("Node was not KEYVALUEPAIRS");
 
     m_kvp.clear();
 
-    QDomNodeList nodeList = node.elementsByTagName("PAIR");
+    QDomNodeList nodeList = node.elementsByTagName(getElName(enPair));
     for (int i = 0; i < nodeList.count(); ++i) {
       const QDomElement& el(nodeList.item(i).toElement());
-      m_kvp[el.attribute("key")] = el.attribute("value");
+      m_kvp[el.attribute(getAttrName(anKey))] = el.attribute(getAttrName(anValue));
     }
   }
 }
@@ -112,16 +115,33 @@ bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& righ
 void MyMoneyKeyValueContainer::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   if (m_kvp.count() != 0) {
-    QDomElement el = document.createElement("KEYVALUEPAIRS");
+    QDomElement el = document.createElement(nodeNames[nnKeyValuePairs]);
 
     QMap<QString, QString>::ConstIterator it;
     for (it = m_kvp.begin(); it != m_kvp.end(); ++it) {
-      QDomElement pair = document.createElement("PAIR");
-      pair.setAttribute("key", it.key());
-      pair.setAttribute("value", it.value());
+      QDomElement pair = document.createElement(getElName(enPair));
+      pair.setAttribute(getAttrName(anKey), it.key());
+      pair.setAttribute(getAttrName(anValue), it.value());
       el.appendChild(pair);
     }
 
     parent.appendChild(el);
   }
+}
+
+const QString MyMoneyKeyValueContainer::getElName(const elNameE _el)
+{
+  static const QMap<elNameE, QString> elNames = {
+    {enPair, QStringLiteral("PAIR")}
+  };
+  return elNames[_el];
+}
+
+const QString MyMoneyKeyValueContainer::getAttrName(const attrNameE _attr)
+{
+  static const QMap<attrNameE, QString> attrNames = {
+    {anKey, QStringLiteral("key")},
+    {anValue, QStringLiteral("value")}
+  };
+  return attrNames[_attr];
 }

@@ -41,6 +41,8 @@ private slots:
   void testArrayWrite();
   void testWriteXML();
   void testReadXML();
+  void testElementNames();
+  void testAttributeNames();
 };
 
 #endif

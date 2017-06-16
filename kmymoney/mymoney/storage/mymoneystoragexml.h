@@ -132,6 +132,13 @@ protected:
 private:
   void (*m_progressCallback)(int, int, const QString&);
 
+
+  enum elNameE { enAddress, enCreationDate, enLastModifiedDate,
+                 enVersion, enFixVersion, enPair
+               };
+
+  static const QString getElName(const elNameE _el);
+
 protected:
   IMyMoneySerialize *m_storage;
   QDomDocument *m_doc;

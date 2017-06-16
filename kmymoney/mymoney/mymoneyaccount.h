@@ -82,9 +82,19 @@ class MyMoneyObjectContainer;
 class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer /*, public MyMoneyPayeeIdentifierContainer */
 {
   friend class MyMoneyObjectContainer;
+  Q_GADGET
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
+    enum elNameE { enSubAccount, enSubAccounts, enOnlineBanking };
+    Q_ENUM(elNameE)
+
+    enum attrNameE { anID, anName, anType, anParentAccount, anLastReconciled,
+                     anLastModified, anInstitution, anOpened, anNumber,
+                     anDescription, anCurrency, anOpeningBalance,
+                     anIBAN, anBIC,
+                   };
+    Q_ENUM(attrNameE)
 
   /**
     * Account types currently supported.
@@ -707,6 +717,9 @@ private:
     * This member keeps the reconciliation history
     */
   QMap<QDate, MyMoneyMoney> m_reconciliationHistory;
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 };
 
 /**

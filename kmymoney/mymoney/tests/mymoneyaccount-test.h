@@ -47,6 +47,8 @@ private slots:
   void specialAccountTypes_data();
   void addReconciliation();
   void reconciliationHistory();
+  void testElementNames();
+  void testAttributeNames();
 };
 
 #endif

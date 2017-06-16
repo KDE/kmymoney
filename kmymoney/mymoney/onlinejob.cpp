@@ -23,6 +23,9 @@
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 
 #include "onlinejobadministration.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 onlineJob::onlineJob()
     : MyMoneyObject(),
@@ -75,22 +78,22 @@ onlineJob::onlineJob(const QDomElement& element)
     m_messageList(QList<onlineJobMessage>()),
     m_locked(false)
 {
-  m_jobSend = QDateTime::fromString(element.attribute("send", ""), Qt::ISODate);
-  m_jobBankAnswerDate = QDateTime::fromString(element.attribute("bankAnswerDate", ""), Qt::ISODate);
-  QString state = element.attribute("bankAnswerState", "");
-  if (state == "abortedByUser")
+  m_jobSend = QDateTime::fromString(element.attribute(getAttrName(anSend)), Qt::ISODate);
+  m_jobBankAnswerDate = QDateTime::fromString(element.attribute(getAttrName(anBankAnswerDate)), Qt::ISODate);
+  QString state = element.attribute(getAttrName(anBankAnswerState));
+  if (state == getAttrName(anAbortedByUser))
     m_jobBankAnswerState = abortedByUser;
-  else if (state == "acceptedByBank")
+  else if (state == getAttrName(anAcceptedByBank))
     m_jobBankAnswerState = acceptedByBank;
-  else if (state == "rejectedByBank")
+  else if (state == getAttrName(anRejectedByBank))
     m_jobBankAnswerState = rejectedByBank;
-  else if (state == "sendingError")
+  else if (state == getAttrName(anSendingError))
     m_jobBankAnswerState = sendingError;
   else
     m_jobBankAnswerState = noBankAnswer;
 
-  QDomElement taskElem = element.firstChildElement("onlineTask");
-  m_task = onlineJobAdministration::instance()->createOnlineTaskByXml(taskElem.attribute("iid", ""), taskElem);
+  QDomElement taskElem = element.firstChildElement(getElName(enOnlineTask));
+  m_task = onlineJobAdministration::instance()->createOnlineTaskByXml(taskElem.attribute(getAttrName(anIID)), taskElem);
 }
 
 void onlineJob::copyPointerFromOtherJob(const onlineJob &other)
@@ -211,25 +214,25 @@ QList<onlineJobMessage> onlineJob::jobMessageList() const
 /** @todo give life */
 void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
 {
-  QDomElement el = document.createElement("onlineJob");
+  QDomElement el = document.createElement(nodeNames[nnOnlineJob]);
   writeBaseXML(document, el);
 
   if (!m_jobSend.isNull())
-    el.setAttribute("send", m_jobSend.toString(Qt::ISODate));
+    el.setAttribute(getAttrName(anSend), m_jobSend.toString(Qt::ISODate));
   if (!m_jobBankAnswerDate.isNull())
-    el.setAttribute("bankAnswerDate", m_jobBankAnswerDate.toString(Qt::ISODate));
+    el.setAttribute(getAttrName(anBankAnswerDate), m_jobBankAnswerDate.toString(Qt::ISODate));
 
   switch (m_jobBankAnswerState) {
-    case abortedByUser: el.setAttribute("bankAnswerState", "abortedByUser"); break;
-    case acceptedByBank: el.setAttribute("bankAnswerState", "acceptedByBank"); break;
-    case rejectedByBank: el.setAttribute("bankAnswerState", "rejectedByBank"); break;
-    case sendingError: el.setAttribute("bankAnswerState", "sendingError"); break;
+    case abortedByUser: el.setAttribute(getAttrName(anBankAnswerState), getAttrName(anAbortedByUser)); break;
+    case acceptedByBank: el.setAttribute(getAttrName(anBankAnswerState), getAttrName(anAcceptedByBank)); break;
+    case rejectedByBank: el.setAttribute(getAttrName(anBankAnswerState), getAttrName(anRejectedByBank)); break;
+    case sendingError: el.setAttribute(getAttrName(anBankAnswerState), getAttrName(anSendingError)); break;
     case noBankAnswer:
     default: void();
   }
 
-  QDomElement taskEl = document.createElement("onlineTask");
-  taskEl.setAttribute("iid", taskIid());
+  QDomElement taskEl = document.createElement(getElName(enOnlineTask));
+  taskEl.setAttribute(getAttrName(anIID), taskIid());
   try {
     task()->writeXML(document, taskEl); // throws execption if there is no task
     el.appendChild(taskEl); // only append child if there is something to append
@@ -253,3 +256,25 @@ bool onlineJob::hasReferenceTo(const QString& id) const
   return false;
 }
 
+const QString onlineJob::getElName(const elNameE _el)
+{
+  static const QMap<elNameE, QString> elNames = {
+    {enOnlineTask, QStringLiteral("ONLINETASK")}
+  };
+  return elNames[_el];
+}
+
+const QString onlineJob::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anSend, QStringLiteral("send")},
+    {anBankAnswerDate, QStringLiteral("bankAnswerDate")},
+    {anBankAnswerState, QStringLiteral("bankAnswerState")},
+    {anIID, QStringLiteral("iid")},
+    {anAbortedByUser, QStringLiteral("abortedByUser")},
+    {anAcceptedByBank, QStringLiteral("acceptedByBank")},
+    {anRejectedByBank, QStringLiteral("rejectedByBank")},
+    {anSendingError, QStringLiteral("sendingError")},
+  };
+  return attrNames[_attr];
+}

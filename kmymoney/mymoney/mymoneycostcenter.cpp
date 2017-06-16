@@ -28,6 +28,9 @@
 
 #include "mymoneyutils.h"
 #include "mymoneyexception.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 MyMoneyCostCenter MyMoneyCostCenter::null;
 
@@ -49,10 +52,10 @@ MyMoneyCostCenter::MyMoneyCostCenter(const QString& name)
 MyMoneyCostCenter::MyMoneyCostCenter(const QDomElement& node) :
     MyMoneyObject(node)
 {
-  if ("COSTCENTER" != node.tagName()) {
+  if (nodeNames[nnCostCenter] != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not COSTCENTER");
   }
-  m_name = node.attribute("name");
+  m_name = node.attribute(getAttrName(anName));
 }
 
 MyMoneyCostCenter::~MyMoneyCostCenter()
@@ -79,11 +82,11 @@ bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
 
 void MyMoneyCostCenter::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("COSTCENTER");
+  QDomElement el = document.createElement(nodeNames[nnCostCenter]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute("name", m_name);
+  el.setAttribute(getAttrName(anName), m_name);
   parent.appendChild(el);
 }
 
@@ -99,4 +102,12 @@ QString MyMoneyCostCenter::shortName() const
     return shortNumberExp.cap(1);
   }
   return m_name;
+}
+
+const QString MyMoneyCostCenter::getAttrName(const attrNameE _attr)
+{
+  static const QMap<attrNameE, QString> attrNames = {
+    {anName, QStringLiteral("name")},
+  };
+  return attrNames[_attr];
 }

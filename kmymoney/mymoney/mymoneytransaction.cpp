@@ -23,6 +23,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 MyMoneyTransaction::MyMoneyTransaction() :
     MyMoneyObject()
@@ -49,24 +52,24 @@ MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransacti
 MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool forceId) :
     MyMoneyObject(node, forceId)
 {
-  if ("TRANSACTION" != node.tagName())
+  if (nodeNames[nnTransaction] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not TRANSACTION");
 
   m_nextSplitID = 1;
 
-  m_postDate = stringToDate(node.attribute("postdate"));
-  m_entryDate = stringToDate(node.attribute("entrydate"));
-  m_bankID = QStringEmpty(node.attribute("bankid"));
-  m_memo = QStringEmpty(node.attribute("memo"));
-  m_commodity = QStringEmpty(node.attribute("commodity"));
+  m_postDate = stringToDate(node.attribute(getAttrName(anPostDate)));
+  m_entryDate = stringToDate(node.attribute(getAttrName(anEntryDate)));
+  m_bankID = QStringEmpty(node.attribute(getAttrName(anBankID)));
+  m_memo = QStringEmpty(node.attribute(getAttrName(anMemo)));
+  m_commodity = QStringEmpty(node.attribute(getAttrName(anCommodity)));
 
   QDomNode child = node.firstChild();
   while (!child.isNull() && child.isElement()) {
     QDomElement c = child.toElement();
-    if (c.tagName() == QLatin1String("SPLITS")) {
+    if (c.tagName() == getElName(enSplits)) {
 
       // Process any split information found inside the transaction entry.
-      QDomNodeList nodeList = c.elementsByTagName("SPLIT");
+      QDomNodeList nodeList = c.elementsByTagName(getElName(enSplit));
       for (int i = 0; i < nodeList.count(); ++i) {
         MyMoneySplit s(nodeList.item(i).toElement());
         if (!m_bankID.isEmpty())
@@ -77,7 +80,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
           qDebug("Dropped split because it did not have an account id");
       }
 
-    } else if (c.tagName() == QLatin1String("KEYVALUEPAIRS")) {
+    } else if (c.tagName() == nodeNames[nnKeyValuePairs]) {
       MyMoneyKeyValueContainer kvp(c);
       setPairs(kvp.pairs());
     }
@@ -373,16 +376,15 @@ bool MyMoneyTransaction::isDuplicate(const MyMoneyTransaction& r) const
 
 void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("TRANSACTION");
+  QDomElement el = document.createElement(nodeNames[nnTransaction]);
 
   writeBaseXML(document, el);
+  el.setAttribute(getAttrName(anPostDate), dateToString(m_postDate));
+  el.setAttribute(getAttrName(anMemo), m_memo);
+  el.setAttribute(getAttrName(anEntryDate), dateToString(m_entryDate));
+  el.setAttribute(getAttrName(anCommodity), m_commodity);
 
-  el.setAttribute("postdate", dateToString(m_postDate));
-  el.setAttribute("memo", m_memo);
-  el.setAttribute("entrydate", dateToString(m_entryDate));
-  el.setAttribute("commodity", m_commodity);
-
-  QDomElement splits = document.createElement("SPLITS");
+  QDomElement splits = document.createElement(getElName(enSplits));
   QList<MyMoneySplit>::ConstIterator it;
   for (it = m_splits.begin(); it != m_splits.end(); ++it) {
     (*it).writeXML(document, splits);
@@ -442,7 +444,7 @@ QString MyMoneyTransaction::uniqueSortKey() const
   year = year.setNum(postdate.year()).rightJustified(YEAR_SIZE, '0');
   month = month.setNum(postdate.month()).rightJustified(MONTH_SIZE, '0');
   day = day.setNum(postdate.day()).rightJustified(DAY_SIZE, '0');
-  key = year + '-' + month + '-' + day + '-' + m_id;
+  key = QString(QLatin1String("%1-%2-%3-%4")).arg(year, month, day, m_id);
   return key;
 }
 
@@ -455,4 +457,27 @@ bool MyMoneyTransaction::replaceId(const QString& newId, const QString& oldId)
     changed |= (*it).replaceId(newId, oldId);
   }
   return changed;
+}
+
+const QString MyMoneyTransaction::getElName(const elNameE _el)
+{
+  static const QHash<elNameE, QString> elNames = {
+    {enSplit, QStringLiteral("SPLIT")},
+    {enSplits, QStringLiteral("SPLITS")}
+  };
+  return elNames[_el];
+}
+
+const QString MyMoneyTransaction::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anName, QStringLiteral("name")},
+    {anType, QStringLiteral("type")},
+    {anPostDate, QStringLiteral("postdate")},
+    {anMemo, QStringLiteral("memo")},
+    {anEntryDate, QStringLiteral("entrydate")},
+    {anCommodity, QStringLiteral("commodity")},
+    {anBankID, QStringLiteral("bankid")},
+  };
+  return attrNames[_attr];
 }

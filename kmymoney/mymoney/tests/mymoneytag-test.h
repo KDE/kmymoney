@@ -21,6 +21,7 @@ class MyMoneyTagTest : public QObject
   Q_OBJECT
 private slots:
   void testXml();
+  void testAttributeNames();
 };
 
 #endif

@@ -1730,3 +1730,25 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   s.setNextDueDate(endDate.addMonths(-1));
   QVERIFY(s.transactionsRemaining() == 2);
 }
+
+void MyMoneyScheduleTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneySchedule::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneySchedule::getElName(static_cast<MyMoneySchedule::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyScheduleTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneySchedule::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneySchedule::getAttrName(static_cast<MyMoneySchedule::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}

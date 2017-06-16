@@ -30,6 +30,7 @@
 #include <QMap>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QObject>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,9 +50,16 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneyKeyValueContainer
 {
+  Q_GADGET
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
+  enum elNameE { enPair };
+  Q_ENUM(elNameE)
+
+  enum attrNameE { anKey, anValue };
+  Q_ENUM(attrNameE)
+
   MyMoneyKeyValueContainer();
   MyMoneyKeyValueContainer(const QDomElement& node);
 
@@ -140,6 +148,9 @@ private:
     * This member variable represents the container of key/value pairs.
     */
   QMap<QString, QString>  m_kvp;
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 };
 
 #endif

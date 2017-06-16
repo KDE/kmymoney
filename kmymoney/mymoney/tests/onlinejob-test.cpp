@@ -19,6 +19,9 @@
 #include "onlinejob-test.h"
 
 #include <QtTest/QTest>
+
+#define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobTest;
+
 #include "onlinejob.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
@@ -75,4 +78,26 @@ void onlineJobTest::testCopyConstructorWithNewId()
   QCOMPARE(jobCopy.id(), QString("O000002"));
   QVERIFY(originalJob.task() != jobCopy.task());
   QVERIFY(jobCopy.bankAnswerDate().isNull());
+}
+
+void onlineJobTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<onlineJob::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = onlineJob::getElName(static_cast<onlineJob::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void onlineJobTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<onlineJob::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = onlineJob::getAttrName(static_cast<onlineJob::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
 }

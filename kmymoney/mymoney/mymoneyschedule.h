@@ -52,6 +52,7 @@ class MyMoneyStorageANON;
 class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
 {
   friend class MyMoneyStorageANON;
+  Q_GADGET
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
@@ -93,6 +94,16 @@ public:
     * be entered on a different date
   **/
   enum weekendOptionE { MoveBefore = 0, MoveAfter = 1, MoveNothing = 2 };
+
+  enum elNameE { enPayment, enPayments };
+  Q_ENUM(elNameE)
+
+  enum attrNameE { anName, anType, anOccurence, anOccurenceMultiplier,
+                   anPaymentType, anFixed,
+                   anAutoEnter, anLastPayment, anWeekendOption,
+                   anDate, anStartDate, anEndDate
+                 };
+  Q_ENUM(attrNameE)
 
   /**
     * Standard constructor
@@ -731,6 +742,9 @@ private:
     * and @c false on Sat..Sun.
     */
   bool isProcessingDate(const QDate& date) const;
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 
 private:
   /// Its occurrence

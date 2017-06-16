@@ -206,3 +206,25 @@ void MyMoneyPayeeTest::testMatchNameExact()
   QCOMPARE(ignoreCase, false);
   QVERIFY(keys.isEmpty());
 }
+
+void MyMoneyPayeeTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyPayee::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyPayee::getElName(static_cast<MyMoneyPayee::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyPayeeTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyPayee::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyPayee::getAttrName(static_cast<MyMoneyPayee::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}

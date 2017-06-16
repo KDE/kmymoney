@@ -50,6 +50,8 @@ private slots:
   void testReplaceId();
   void testAdjustedWhenItWillEnd();
   void testNextPaymentOnLastDayOfMonth();
+  void testElementNames();
+  void testAttributeNames();
 };
 
 #endif

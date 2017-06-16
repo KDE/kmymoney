@@ -18,11 +18,20 @@
 
 #include <QtTest/QtTest>
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySecurityTest;
+
+#include "mymoneysecurity.h"
+
 QTEST_GUILESS_MAIN(MyMoneySecurityTest)
 
 void MyMoneySecurityTest::init()
 {
-  m.reset(new MyMoneySecurity());
+  m = new MyMoneySecurity();
+}
+
+void MyMoneySecurityTest::cleanup()
+{
+  delete m;
 }
 
 void MyMoneySecurityTest::testEmptyConstructor()
@@ -200,3 +209,14 @@ void MyMoneySecurityTest::testAccountIDList () {
 
 }
 */
+
+void MyMoneySecurityTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneySecurity::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneySecurity::getAttrName(static_cast<MyMoneySecurity::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}

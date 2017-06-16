@@ -30,6 +30,9 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
@@ -377,79 +380,79 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   // write report's internals
   if (m_reportType == ePivotTable)
-    e.setAttribute("type", "pivottable 1.15");
+    e.setAttribute(getAttrName(anType), "pivottable 1.15");
   else if (m_reportType == eQueryTable)
-    e.setAttribute("type", "querytable 1.14");
+    e.setAttribute(getAttrName(anType), "querytable 1.14");
   else if (m_reportType == eInfoTable)
-    e.setAttribute("type", "infotable 1.0");
+    e.setAttribute(getAttrName(anType), "infotable 1.0");
 
-  e.setAttribute("group", m_group);
-  e.setAttribute("id", m_id);
+  e.setAttribute(getAttrName(anGroup), m_group);
+  e.setAttribute(getAttrName(anID), m_id);
 
   // write general tab
   if (anonymous) {
-    e.setAttribute("name", m_id);
-    e.setAttribute("comment", QString(m_comment).fill('x'));
+    e.setAttribute(getAttrName(anName), m_id);
+    e.setAttribute(getAttrName(anComment), QString(m_comment).fill('x'));
   } else {
-    e.setAttribute("name", m_name);
-    e.setAttribute("comment", m_comment);
+    e.setAttribute(getAttrName(anName), m_name);
+    e.setAttribute(getAttrName(anComment), m_comment);
   }
-  e.setAttribute("convertcurrency", m_convertCurrency);
-  e.setAttribute("favorite", m_favorite);
-  e.setAttribute("skipZero", m_skipZero);
+  e.setAttribute(getAttrName(anConvertCurrency), m_convertCurrency);
+  e.setAttribute(getAttrName(anFavorite), m_favorite);
+  e.setAttribute(getAttrName(anSkipZero), m_skipZero);
 
-  e.setAttribute("datelock", kDateLockText[m_dateLock]);
+  e.setAttribute(getAttrName(anDateLock), kDateLockText[m_dateLock]);
 
   if (m_reportType == ePivotTable) {
     // write report's internals
-    e.setAttribute("includesactuals", m_includeBudgetActuals);
-    e.setAttribute("includesforecast", m_includeForecast);
-    e.setAttribute("includesprice", m_includePrice);
-    e.setAttribute("includesaverageprice", m_includeAveragePrice);
-    e.setAttribute("mixedtime", m_mixedTime);
-    e.setAttribute("investments", m_investments); // it's setable in rows/columns tab of querytable, but here it is internal setting
+    e.setAttribute(getAttrName(anIncludesActuals), m_includeBudgetActuals);
+    e.setAttribute(getAttrName(anIncludesForecast), m_includeForecast);
+    e.setAttribute(getAttrName(anIncludesPrice), m_includePrice);
+    e.setAttribute(getAttrName(anIncludesAveragePrice), m_includeAveragePrice);
+    e.setAttribute(getAttrName(anMixedTime), m_mixedTime);
+    e.setAttribute(getAttrName(anInvestments), m_investments); // it's setable in rows/columns tab of querytable, but here it is internal setting
 
     // write rows/columns tab
     if (!m_budgetId.isEmpty())
-      e.setAttribute("budget", m_budgetId);
+      e.setAttribute(getAttrName(anBudget), m_budgetId);
 
-    e.setAttribute("rowtype", kRowTypeText[m_rowType]);
-    e.setAttribute("showrowtotals", m_showRowTotals);
-    e.setAttribute("showcolumntotals", m_showColumnTotals);
-    e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
+    e.setAttribute(getAttrName(anRowType), kRowTypeText[m_rowType]);
+    e.setAttribute(getAttrName(anShowRowTotals), m_showRowTotals);
+    e.setAttribute(getAttrName(anShowColumnTotals), m_showColumnTotals);
+    e.setAttribute(getAttrName(anDetail), kDetailLevelText[m_detailLevel]);
 
-    e.setAttribute("includesmovingaverage", m_includeMovingAverage);
+    e.setAttribute(getAttrName(anIncludesMovingAverage), m_includeMovingAverage);
     if (m_includeMovingAverage)
-      e.setAttribute("movingaveragedays", m_movingAverageDays);
+      e.setAttribute(getAttrName(anMovingAverageDays), m_movingAverageDays);
 
-    e.setAttribute("includeschedules", m_includeSchedules);
-    e.setAttribute("includestransfers", m_includeTransfers);
-    e.setAttribute("includeunused", m_includeUnusedAccounts);
-    e.setAttribute("columnsaredays", m_columnsAreDays);
+    e.setAttribute(getAttrName(anIncludesSchedules), m_includeSchedules);
+    e.setAttribute(getAttrName(anIncludesTransfers), m_includeTransfers);
+    e.setAttribute(getAttrName(anIncludesUnused), m_includeUnusedAccounts);
+    e.setAttribute(getAttrName(anColumnsAreDays), m_columnsAreDays);
 
     // write chart tab
     if (m_chartType < 0 || m_chartType >= kChartTypeText.size()) {
       qDebug("m_chartType out of bounds with %d on report of type %d. Default to none.", m_chartType, m_reportType);
-      e.setAttribute("charttype", kChartTypeText[eChartNone]);
+      e.setAttribute(getAttrName(anChartType), kChartTypeText[eChartNone]);
     } else
-      e.setAttribute("charttype", kChartTypeText[m_chartType]);
+      e.setAttribute(getAttrName(anChartType), kChartTypeText[m_chartType]);
 
-    e.setAttribute("chartchgridlines", m_chartCHGridLines);
-    e.setAttribute("chartsvgridlines", m_chartSVGridLines);
-    e.setAttribute("chartdatalabels", m_chartDataLabels);
-    e.setAttribute("chartbydefault", m_chartByDefault);
-    e.setAttribute("logYaxis", m_logYaxis);
-    e.setAttribute("chartlinewidth", m_chartLineWidth);
-    e.setAttribute("columntype", kColumnTypeText[m_columnType]);
-    e.setAttribute("datalock", kDataLockText[m_dataLock]);
-    e.setAttribute("dataRangeStart", m_dataRangeStart);
-    e.setAttribute("dataRangeEnd", m_dataRangeEnd);
-    e.setAttribute("dataMajorTick", m_dataMajorTick);
-    e.setAttribute("dataMinorTick", m_dataMinorTick);
-    e.setAttribute("yLabelsPrecision", m_yLabelsPrecision);
+    e.setAttribute(getAttrName(anChartCHGridLines), m_chartCHGridLines);
+    e.setAttribute(getAttrName(anChartSVGridLines), m_chartSVGridLines);
+    e.setAttribute(getAttrName(anChartDataLabels), m_chartDataLabels);
+    e.setAttribute(getAttrName(anChartByDefault), m_chartByDefault);
+    e.setAttribute(getAttrName(anLogYAxis), m_logYaxis);
+    e.setAttribute(getAttrName(anChartLineWidth), m_chartLineWidth);
+    e.setAttribute(getAttrName(anColumnType), kColumnTypeText[m_columnType]);
+    e.setAttribute(getAttrName(anDataLock), kDataLockText[m_dataLock]);
+    e.setAttribute(getAttrName(anDataRangeStart), m_dataRangeStart);
+    e.setAttribute(getAttrName(anDataRangeEnd), m_dataRangeEnd);
+    e.setAttribute(getAttrName(anDataMajorTick), m_dataMajorTick);
+    e.setAttribute(getAttrName(anDataMinorTick), m_dataMinorTick);
+    e.setAttribute(getAttrName(anYLabelsPrecision), m_yLabelsPrecision);
   } else if (m_reportType == eQueryTable) {
     // write rows/columns tab
-    e.setAttribute("rowtype", kRowTypeText[m_rowType]);
+    e.setAttribute(getAttrName(anRowType), kRowTypeText[m_rowType]);
     QStringList columns;
     unsigned qc = m_queryColumns;
     unsigned it_qc = eQCbegin;
@@ -460,29 +463,29 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
       it_qc *= 2;
       index++;
     }
-    e.setAttribute("querycolumns", columns.join(","));
+    e.setAttribute(getAttrName(anQueryColumns), columns.join(","));
 
-    e.setAttribute("tax", m_tax);
-    e.setAttribute("investments", m_investments);
-    e.setAttribute("loans", m_loans);
-    e.setAttribute("hidetransactions", m_hideTransactions);
-    e.setAttribute("showcolumntotals", m_showColumnTotals);
-    e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
+    e.setAttribute(getAttrName(anTax), m_tax);
+    e.setAttribute(getAttrName(anInvestments), m_investments);
+    e.setAttribute(getAttrName(anLoans), m_loans);
+    e.setAttribute(getAttrName(anHideTransactions), m_hideTransactions);
+    e.setAttribute(getAttrName(anShowColumnTotals), m_showColumnTotals);
+    e.setAttribute(getAttrName(anDetail), kDetailLevelText[m_detailLevel]);
 
     // write performance tab
     if (m_queryColumns & eQCperformance || m_queryColumns & eQCcapitalgain)
-      e.setAttribute("investmentsum", m_investmentSum);
+      e.setAttribute(getAttrName(anInvestmentSum), m_investmentSum);
 
     // write capital gains tab
     if (m_queryColumns & eQCcapitalgain) {
       if (m_investmentSum == MyMoneyReport::eSumSold) {
-        e.setAttribute("settlementperiod", m_settlementPeriod);
-        e.setAttribute("showSTLTCapitalGains", m_showSTLTCapitalGains);
-        e.setAttribute("tseparator", m_tseparator.toString(Qt::ISODate));
+        e.setAttribute(getAttrName(anSettlementPeriod), m_settlementPeriod);
+        e.setAttribute(getAttrName(anShowSTLTCapitalGains), m_showSTLTCapitalGains);
+        e.setAttribute(getAttrName(anTermsSeparator), m_tseparator.toString(Qt::ISODate));
       }
     }
   } else if (m_reportType == eInfoTable)
-    e.setAttribute("showrowtotals", m_showRowTotals);
+    e.setAttribute(getAttrName(anShowRowTotals), m_showRowTotals);
 
   //
   // Text Filter
@@ -490,11 +493,11 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   QRegExp textfilter;
   if (textFilter(textfilter)) {
-    QDomElement f = doc->createElement("TEXT");
-    f.setAttribute("pattern", textfilter.pattern());
-    f.setAttribute("casesensitive", (textfilter.caseSensitivity() == Qt::CaseSensitive) ? 1 : 0);
-    f.setAttribute("regex", (textfilter.patternSyntax() == QRegExp::Wildcard) ? 1 : 0);
-    f.setAttribute("inverttext", m_invertText);
+    QDomElement f = doc->createElement(getElName(enText));
+    f.setAttribute(getAttrName(anPattern), textfilter.pattern());
+    f.setAttribute(getAttrName(anCaseSensitive), (textfilter.caseSensitivity() == Qt::CaseSensitive) ? 1 : 0);
+    f.setAttribute(getAttrName(anRegEx), (textfilter.patternSyntax() == QRegExp::Wildcard) ? 1 : 0);
+    f.setAttribute(getAttrName(anInvertText), m_invertText);
     e.appendChild(f);
   }
 
@@ -506,8 +509,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over payees, and add each one
     QList<int>::const_iterator it_type = typelist.constBegin();
     while (it_type != typelist.constEnd()) {
-      QDomElement p = doc->createElement("TYPE");
-      p.setAttribute("type", kTypeText[*it_type]);
+      QDomElement p = doc->createElement(getElName(enType));
+      p.setAttribute(getAttrName(anType), kTypeText[*it_type]);
       e.appendChild(p);
 
       ++it_type;
@@ -519,8 +522,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over payees, and add each one
     QList<int>::const_iterator it_state = statelist.constBegin();
     while (it_state != statelist.constEnd()) {
-      QDomElement p = doc->createElement("STATE");
-      p.setAttribute("state", kStateText[*it_state]);
+      QDomElement p = doc->createElement(getElName(enState));
+      p.setAttribute(getAttrName(anState), kStateText[*it_state]);
       e.appendChild(p);
 
       ++it_state;
@@ -532,9 +535,9 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   QString nrFrom, nrTo;
   if (numberFilter(nrFrom, nrTo)) {
-    QDomElement f = doc->createElement("NUMBER");
-    f.setAttribute("from", nrFrom);
-    f.setAttribute("to", nrTo);
+    QDomElement f = doc->createElement(getElName(enNumber));
+    f.setAttribute(getAttrName(anFrom), nrFrom);
+    f.setAttribute(getAttrName(anTo), nrTo);
     e.appendChild(f);
   }
 
@@ -544,9 +547,9 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   MyMoneyMoney from, to;
   if (amountFilter(from, to)) {    // bool getAmountFilter(MyMoneyMoney&,MyMoneyMoney&);
-    QDomElement f = doc->createElement("AMOUNT");
-    f.setAttribute("from", from.toString());
-    f.setAttribute("to", to.toString());
+    QDomElement f = doc->createElement(getElName(enAmount));
+    f.setAttribute(getAttrName(anFrom), from.toString());
+    f.setAttribute(getAttrName(anTo), to.toString());
     e.appendChild(f);
   }
 
@@ -557,14 +560,14 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   QStringList payeelist;
   if (payees(payeelist)) {
     if (payeelist.empty()) {
-      QDomElement p = doc->createElement("PAYEE");
+      QDomElement p = doc->createElement(getElName(enPayee));
       e.appendChild(p);
     } else {
       // iterate over payees, and add each one
       QStringList::const_iterator it_payee = payeelist.constBegin();
       while (it_payee != payeelist.constEnd()) {
-        QDomElement p = doc->createElement("PAYEE");
-        p.setAttribute("id", *it_payee);
+        QDomElement p = doc->createElement(getElName(enPayee));
+        p.setAttribute(getAttrName(anID), *it_payee);
         e.appendChild(p);
 
         ++it_payee;
@@ -579,14 +582,14 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   QStringList taglist;
   if (tags(taglist)) {
     if (taglist.empty()) {
-      QDomElement p = doc->createElement("TAG");
+      QDomElement p = doc->createElement(getElName(enTag));
       e.appendChild(p);
     } else {
       // iterate over tags, and add each one
       QStringList::const_iterator it_tag = taglist.constBegin();
       while (it_tag != taglist.constEnd()) {
-        QDomElement p = doc->createElement("TAG");
-        p.setAttribute("id", *it_tag);
+        QDomElement p = doc->createElement(getElName(enTag));
+        p.setAttribute(getAttrName(anID), *it_tag);
         e.appendChild(p);
 
         ++it_tag;
@@ -603,8 +606,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over accounts, and add each one
     QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = accountgrouplist.constBegin();
     while (it_group != accountgrouplist.constEnd()) {
-      QDomElement p = doc->createElement("ACCOUNTGROUP");
-      p.setAttribute("group", kAccountTypeText[*it_group]);
+      QDomElement p = doc->createElement(getElName(enAccountGroup));
+      p.setAttribute(getAttrName(anGroup), kAccountTypeText[*it_group]);
       e.appendChild(p);
 
       ++it_group;
@@ -620,8 +623,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over accounts, and add each one
     QStringList::const_iterator it_account = accountlist.constBegin();
     while (it_account != accountlist.constEnd()) {
-      QDomElement p = doc->createElement("ACCOUNT");
-      p.setAttribute("id", *it_account);
+      QDomElement p = doc->createElement(getElName(enAccount));
+      p.setAttribute(getAttrName(anID), *it_account);
       e.appendChild(p);
 
       ++it_account;
@@ -637,8 +640,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over accounts, and add each one
     QStringList::const_iterator it_account = accountlist.constBegin();
     while (it_account != accountlist.constEnd()) {
-      QDomElement p = doc->createElement("CATEGORY");
-      p.setAttribute("id", *it_account);
+      QDomElement p = doc->createElement(getElName(enCategory));
+      p.setAttribute(getAttrName(anID), *it_account);
       e.appendChild(p);
 
       ++it_account;
@@ -652,11 +655,11 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   if (m_dateLock == MyMoneyTransactionFilter::userDefined) {
     QDate dateFrom, dateTo;
     if (dateFilter(dateFrom, dateTo)) {
-      QDomElement f = doc->createElement("DATES");
+      QDomElement f = doc->createElement(getElName(enDates));
       if (dateFrom.isValid())
-        f.setAttribute("from", dateFrom.toString(Qt::ISODate));
+        f.setAttribute(getAttrName(anFrom), dateFrom.toString(Qt::ISODate));
       if (dateTo.isValid())
-        f.setAttribute("to", dateTo.toString(Qt::ISODate));
+        f.setAttribute(getAttrName(anTo), dateTo.toString(Qt::ISODate));
       e.appendChild(f);
     }
   }
@@ -669,27 +672,27 @@ bool MyMoneyReport::read(const QDomElement& e)
   // should be able to be loaded by this method (as long as it's one of the
   // report types supported in this version, of course)
 
-  if (e.tagName().compare("REPORT") != 0)
+  if (e.tagName().compare(nodeNames[nnReport]) != 0)
     return false;
 
   // read report's internals
-  QString type = e.attribute("type");
-  if (type.startsWith("pivottable"))
+  QString type = e.attribute(getAttrName(anType));
+  if (type.startsWith(QLatin1String("pivottable")))
     m_reportType = ePivotTable;
-  else if (type.startsWith("querytable"))
+  else if (type.startsWith(QLatin1String("querytable")))
     m_reportType = eQueryTable;
-  else if (type.startsWith("infotable"))
+  else if (type.startsWith(QLatin1String("infotable")))
     m_reportType = eInfoTable;
   else
     return false;
 
-  m_group = e.attribute("group");
-  m_id = e.attribute("id");
+  m_group = e.attribute(getAttrName(anGroup));
+  m_id = e.attribute(getAttrName(anID));
 
   clearTransactionFilter();
 
   // read date tab
-  QString datelockstr = e.attribute("datelock", "userdefined");
+  QString datelockstr = e.attribute(getAttrName(anDateLock), "userdefined");
   // Handle the pivot 1.2/query 1.1 case where the values were saved as
   // numbers
   bool ok = false;
@@ -702,94 +705,94 @@ bool MyMoneyReport::read(const QDomElement& e)
   setDateFilter(static_cast<dateOptionE>(i));
 
   // read general tab
-  m_name = e.attribute("name");
-  m_comment = e.attribute("comment", "Extremely old report");
-  m_convertCurrency = e.attribute("convertcurrency", "1").toUInt();
-  m_favorite = e.attribute("favorite", "0").toUInt();
-  m_skipZero = e.attribute("skipZero", "0").toUInt();
+  m_name = e.attribute(getAttrName(anName));
+  m_comment = e.attribute(getAttrName(anComment), "Extremely old report");
+  m_convertCurrency = e.attribute(getAttrName(anConvertCurrency), "1").toUInt();
+  m_favorite = e.attribute(getAttrName(anFavorite), "0").toUInt();
+  m_skipZero = e.attribute(getAttrName(anSkipZero), "0").toUInt();
 
   if (m_reportType == ePivotTable) {
     // read report's internals
-    m_includeBudgetActuals = e.attribute("includesactuals", "0").toUInt();
-    m_includeForecast = e.attribute("includesforecast", "0").toUInt();
-    m_includePrice = e.attribute("includesprice", "0").toUInt();
-    m_includeAveragePrice = e.attribute("includesaverageprice", "0").toUInt();
-    m_mixedTime = e.attribute("mixedtime", "0").toUInt();
-    m_investments = e.attribute("investments", "0").toUInt();
+    m_includeBudgetActuals = e.attribute(getAttrName(anIncludesActuals), "0").toUInt();
+    m_includeForecast = e.attribute(getAttrName(anIncludesForecast), "0").toUInt();
+    m_includePrice = e.attribute(getAttrName(anIncludesPrice), "0").toUInt();
+    m_includeAveragePrice = e.attribute(getAttrName(anIncludesAveragePrice), "0").toUInt();
+    m_mixedTime = e.attribute(getAttrName(anMixedTime), "0").toUInt();
+    m_investments = e.attribute(getAttrName(anInvestments), "0").toUInt();
 
     // read rows/columns tab
-    if (e.hasAttribute("budget"))
-      m_budgetId = e.attribute("budget");
+    if (e.hasAttribute(getAttrName(anBudget)))
+      m_budgetId = e.attribute(getAttrName(anBudget));
 
-    i = kRowTypeText.indexOf(e.attribute("rowtype"));
+    i = kRowTypeText.indexOf(e.attribute(getAttrName(anRowType)));
     if (i != -1)
       setRowType(static_cast<ERowType>(i));
     else
       setRowType(eExpenseIncome);
 
-    if (e.hasAttribute("showrowtotals"))
-      m_showRowTotals = e.attribute("showrowtotals").toUInt();
+    if (e.hasAttribute(getAttrName(anShowRowTotals)))
+      m_showRowTotals = e.attribute(getAttrName(anShowRowTotals)).toUInt();
     else if (rowType() == eExpenseIncome) // for backward compatibility
       m_showRowTotals = true;
-    m_showColumnTotals = e.attribute("showcolumntotals", "1").toUInt();
+    m_showColumnTotals = e.attribute(getAttrName(anShowColumnTotals), "1").toUInt();
 
     //check for reports with older settings which didn't have the detail attribute
-    i = kDetailLevelText.indexOf(e.attribute("detail"));
+    i = kDetailLevelText.indexOf(e.attribute(getAttrName(anDetail)));
     if (i != -1)
       m_detailLevel = static_cast<EDetailLevel>(i);
     else
       m_detailLevel = eDetailAll;
 
-    m_includeMovingAverage = e.attribute("includesmovingaverage", "0").toUInt();
+    m_includeMovingAverage = e.attribute(getAttrName(anIncludesMovingAverage), "0").toUInt();
     if (m_includeMovingAverage)
-      m_movingAverageDays = e.attribute("movingaveragedays", "1").toUInt();
-    m_includeSchedules = e.attribute("includeschedules", "0").toUInt();
-    m_includeTransfers = e.attribute("includestransfers", "0").toUInt();
-    m_includeUnusedAccounts = e.attribute("includeunused", "0").toUInt();
-    m_columnsAreDays = e.attribute("columnsaredays", "0").toUInt();
+      m_movingAverageDays = e.attribute(getAttrName(anMovingAverageDays), "1").toUInt();
+    m_includeSchedules = e.attribute(getAttrName(anIncludesSchedules), "0").toUInt();
+    m_includeTransfers = e.attribute(getAttrName(anIncludesTransfers), "0").toUInt();
+    m_includeUnusedAccounts = e.attribute(getAttrName(anIncludesUnused), "0").toUInt();
+    m_columnsAreDays = e.attribute(getAttrName(anColumnsAreDays), "0").toUInt();
 
     // read chart tab
-    i = kChartTypeText.indexOf(e.attribute("charttype"));
+    i = kChartTypeText.indexOf(e.attribute(getAttrName(anChartType)));
     if (i != -1)
       m_chartType = static_cast<EChartType>(i);
     else
       m_chartType = eChartNone;
 
-    m_chartCHGridLines = e.attribute("chartchgridlines", "1").toUInt();
-    m_chartSVGridLines = e.attribute("chartsvgridlines", "1").toUInt();
-    m_chartDataLabels = e.attribute("chartdatalabels", "1").toUInt();
-    m_chartByDefault = e.attribute("chartbydefault", "0").toUInt();
-    m_logYaxis = e.attribute("logYaxis", "0").toUInt();
-    m_chartLineWidth = e.attribute("chartlinewidth", QString(m_lineWidth)).toUInt();
+    m_chartCHGridLines = e.attribute(getAttrName(anChartCHGridLines), "1").toUInt();
+    m_chartSVGridLines = e.attribute(getAttrName(anChartSVGridLines), "1").toUInt();
+    m_chartDataLabels = e.attribute(getAttrName(anChartDataLabels), "1").toUInt();
+    m_chartByDefault = e.attribute(getAttrName(anChartByDefault), "0").toUInt();
+    m_logYaxis = e.attribute(getAttrName(anLogYAxis), "0").toUInt();
+    m_chartLineWidth = e.attribute(getAttrName(anChartLineWidth), QString(m_lineWidth)).toUInt();
 
     // read range tab
-    i = kColumnTypeText.indexOf(e.attribute("columntype"));
+    i = kColumnTypeText.indexOf(e.attribute(getAttrName(anColumnType)));
     if (i != -1)
       setColumnType(static_cast<EColumnType>(i));
     else
       setColumnType(eMonths);
 
-    i = kDataLockText.indexOf(e.attribute("datalock"));
+    i = kDataLockText.indexOf(e.attribute(getAttrName(anDataLock)));
     if (i != -1)
       setDataFilter(static_cast<dataOptionE>(i));
     else
       setDataFilter(MyMoneyReport::automatic);
 
-    m_dataRangeStart = e.attribute("dataRangeStart", "0");
-    m_dataRangeEnd = e.attribute("dataRangeEnd", "0");
-    m_dataMajorTick = e.attribute("dataMajorTick", "0");
-    m_dataMinorTick = e.attribute("dataMinorTick", "0");
-    m_yLabelsPrecision = e.attribute("yLabelsPrecision", "2").toUInt();
+    m_dataRangeStart = e.attribute(getAttrName(anDataRangeStart), "0");
+    m_dataRangeEnd = e.attribute(getAttrName(anDataRangeEnd), "0");
+    m_dataMajorTick = e.attribute(getAttrName(anDataMajorTick), "0");
+    m_dataMinorTick = e.attribute(getAttrName(anDataMinorTick), "0");
+    m_yLabelsPrecision = e.attribute(getAttrName(anYLabelsPrecision), "2").toUInt();
   } else if (m_reportType == eQueryTable) {
     // read rows/columns tab
-    i = kRowTypeText.indexOf(e.attribute("rowtype"));
+    i = kRowTypeText.indexOf(e.attribute(getAttrName(anRowType)));
     if (i != -1)
       setRowType(static_cast<ERowType>(i));
     else
       setRowType(eAccount);
 
     unsigned qc = 0;
-    QStringList columns = e.attribute("querycolumns", "none").split(',');
+    QStringList columns = e.attribute(getAttrName(anQueryColumns), "none").split(',');
     foreach (const auto column, columns) {
       i = kQueryColumnsText.indexOf(column);
       if (i > 0)
@@ -797,29 +800,29 @@ bool MyMoneyReport::read(const QDomElement& e)
     }
     setQueryColumns(static_cast<EQueryColumns>(qc));
 
-    m_tax = e.attribute("tax", "0").toUInt();
-    m_investments = e.attribute("investments", "0").toUInt();
-    m_loans = e.attribute("loans", "0").toUInt();
-    m_hideTransactions = e.attribute("hidetransactions", "0").toUInt();
-    m_showColumnTotals = e.attribute("showcolumntotals", "1").toUInt();
-    m_detailLevel = kDetailLevelText.indexOf(e.attribute("detail", "none")) == eDetailAll ? eDetailAll : eDetailNone;
+    m_tax = e.attribute(getAttrName(anTax), "0").toUInt();
+    m_investments = e.attribute(getAttrName(anInvestments), "0").toUInt();
+    m_loans = e.attribute(getAttrName(anLoans), "0").toUInt();
+    m_hideTransactions = e.attribute(getAttrName(anHideTransactions), "0").toUInt();
+    m_showColumnTotals = e.attribute(getAttrName(anShowColumnTotals), "1").toUInt();
+    m_detailLevel = kDetailLevelText.indexOf(e.attribute(getAttrName(anDetail), "none")) == eDetailAll ? eDetailAll : eDetailNone;
 
     // read performance or capital gains tab
     if (m_queryColumns & eQCperformance)
-      m_investmentSum = static_cast<EInvestmentSum>(e.attribute("investmentsum", QString().setNum(MyMoneyReport::eSumPeriod)).toInt());
+      m_investmentSum = static_cast<EInvestmentSum>(e.attribute(getAttrName(anInvestmentSum), QString().setNum(MyMoneyReport::eSumPeriod)).toInt());
 
     // read capital gains tab
     if (m_queryColumns & eQCcapitalgain) {
-      m_investmentSum = static_cast<EInvestmentSum>(e.attribute("investmentsum", QString().setNum(MyMoneyReport::eSumSold)).toInt());
+      m_investmentSum = static_cast<EInvestmentSum>(e.attribute(getAttrName(anInvestmentSum), QString().setNum(MyMoneyReport::eSumSold)).toInt());
       if (m_investmentSum == MyMoneyReport::eSumSold) {
-        m_showSTLTCapitalGains = e.attribute("showSTLTCapitalGains", "0").toUInt();
-        m_settlementPeriod = e.attribute("settlementperiod", "3").toUInt();
-        m_tseparator = QDate::fromString(e.attribute("tseparator", QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
+        m_showSTLTCapitalGains = e.attribute(getAttrName(anShowSTLTCapitalGains), "0").toUInt();
+        m_settlementPeriod = e.attribute(getAttrName(anSettlementPeriod), "3").toUInt();
+        m_tseparator = QDate::fromString(e.attribute(getAttrName(anTermsSeparator), QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
       }
     }
   } else if (m_reportType == eInfoTable) {
-    if (e.hasAttribute("showrowtotals"))
-      m_showRowTotals = e.attribute("showrowtotals").toUInt();
+    if (e.hasAttribute(getAttrName(anShowRowTotals)))
+      m_showRowTotals = e.attribute(getAttrName(anShowRowTotals)).toUInt();
     else
       m_showRowTotals = true;
   }
@@ -827,46 +830,46 @@ bool MyMoneyReport::read(const QDomElement& e)
   QDomNode child = e.firstChild();
   while (!child.isNull() && child.isElement()) {
     QDomElement c = child.toElement();
-    if ("TEXT" == c.tagName() && c.hasAttribute("pattern")) {
-      setTextFilter(QRegExp(c.attribute("pattern"),
-                            c.attribute("casesensitive", "1").toUInt()
+    if (getElName(enText) == c.tagName() && c.hasAttribute(getAttrName(anPattern))) {
+      setTextFilter(QRegExp(c.attribute(getAttrName(anPattern)),
+                            c.attribute(getAttrName(anCaseSensitive), "1").toUInt()
                             ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                            c.attribute("regex", "1").toUInt()
+                            c.attribute(getAttrName(anRegEx), "1").toUInt()
                             ? QRegExp::Wildcard : QRegExp::RegExp),
-                    c.attribute("inverttext", "0").toUInt());
+                    c.attribute(getAttrName(anInvertText), "0").toUInt());
     }
-    if ("TYPE" == c.tagName() && c.hasAttribute("type")) {
-      i = kTypeText.indexOf(c.attribute("type"));
+    if (getElName(enType) == c.tagName() && c.hasAttribute(getAttrName(anType))) {
+      i = kTypeText.indexOf(c.attribute(getAttrName(anType)));
       if (i != -1)
         addType(i);
     }
-    if ("STATE" == c.tagName() && c.hasAttribute("state")) {
-      i = kStateText.indexOf(c.attribute("state"));
+    if (getElName(enState) == c.tagName() && c.hasAttribute(getAttrName(anState))) {
+      i = kStateText.indexOf(c.attribute(getAttrName(anState)));
       if (i != -1)
         addState(i);
     }
-    if ("NUMBER" == c.tagName())
-      setNumberFilter(c.attribute("from"), c.attribute("to"));
-    if ("AMOUNT" == c.tagName())
-      setAmountFilter(MyMoneyMoney(c.attribute("from", "0/100")), MyMoneyMoney(c.attribute("to", "0/100")));
-    if ("DATES" == c.tagName()) {
+    if (getElName(enNumber) == c.tagName())
+      setNumberFilter(c.attribute(getAttrName(anFrom)), c.attribute(getAttrName(anTo)));
+    if (getElName(enAmount) == c.tagName())
+      setAmountFilter(MyMoneyMoney(c.attribute(getAttrName(anFrom), "0/100")), MyMoneyMoney(c.attribute(getAttrName(anTo), "0/100")));
+    if (getElName(enDates) == c.tagName()) {
       QDate from, to;
-      if (c.hasAttribute("from"))
-        from = QDate::fromString(c.attribute("from"), Qt::ISODate);
-      if (c.hasAttribute("to"))
-        to = QDate::fromString(c.attribute("to"), Qt::ISODate);
+      if (c.hasAttribute(getAttrName(anFrom)))
+        from = QDate::fromString(c.attribute(getAttrName(anFrom)), Qt::ISODate);
+      if (c.hasAttribute(getAttrName(anTo)))
+        to = QDate::fromString(c.attribute(getAttrName(anTo)), Qt::ISODate);
       MyMoneyTransactionFilter::setDateFilter(from, to);
     }
-    if ("PAYEE" == c.tagName())
-      addPayee(c.attribute("id"));
-    if ("TAG" == c.tagName())
-      addTag(c.attribute("id"));
-    if ("CATEGORY" == c.tagName() && c.hasAttribute("id"))
-      addCategory(c.attribute("id"));
-    if ("ACCOUNT" == c.tagName() && c.hasAttribute("id"))
-      addAccount(c.attribute("id"));
-    if ("ACCOUNTGROUP" == c.tagName() && c.hasAttribute("group")) {
-      i = kAccountTypeText.indexOf(c.attribute("group"));
+    if (getElName(enPayee) == c.tagName())
+      addPayee(c.attribute(getAttrName(anID)));
+    if (getElName(enTag) == c.tagName())
+      addTag(c.attribute(getAttrName(anID)));
+    if (getElName(enCategory) == c.tagName() && c.hasAttribute(getAttrName(anID)))
+      addCategory(c.attribute(getAttrName(anID)));
+    if (getElName(enAccount) == c.tagName() && c.hasAttribute(getAttrName(anID)))
+      addAccount(c.attribute(getAttrName(anID)));
+    if (getElName(enAccountGroup) == c.tagName() && c.hasAttribute(getAttrName(anGroup))) {
+      i = kAccountTypeText.indexOf(c.attribute(getAttrName(anGroup)));
       if (i != -1)
         addAccountGroup(static_cast<MyMoneyAccount::accountTypeE>(i));
     }
@@ -877,7 +880,7 @@ bool MyMoneyReport::read(const QDomElement& e)
 
 void MyMoneyReport::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("REPORT");
+  QDomElement el = document.createElement(nodeNames[nnReport]);
   write(el, &document, false);
   parent.appendChild(el);
 }
@@ -900,4 +903,84 @@ int MyMoneyReport::m_lineWidth = 2;
 void MyMoneyReport::setLineWidth(int width)
 {
   m_lineWidth = width;
+}
+
+const QString MyMoneyReport::getElName(const elNameE _el)
+{
+  static const QHash<elNameE, QString> elNames = {
+    {enPayee, QStringLiteral("PAYEE")},
+    {enTag, QStringLiteral("TAG")},
+    {enAccount, QStringLiteral("ACCOUNT")},
+    {enText, QStringLiteral("TEXT")},
+    {enType, QStringLiteral("TYPE")},
+    {enState, QStringLiteral("STATE")},
+    {enNumber, QStringLiteral("NUMBER")},
+    {enAmount, QStringLiteral("AMOUNT")},
+    {enDates, QStringLiteral("DATES")},
+    {enCategory, QStringLiteral("CATEGORY")},
+    {enAccountGroup, QStringLiteral("ACCOUNTGROUP")}
+  };
+  return elNames[_el];
+}
+
+const QString MyMoneyReport::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anID, QStringLiteral("id")},
+    {anGroup, QStringLiteral("group")},
+    {anType, QStringLiteral("type")},
+    {anName, QStringLiteral("name")},
+    {anComment, QStringLiteral("comment")},
+    {anConvertCurrency, QStringLiteral("convertcurrency")},
+    {anFavorite, QStringLiteral("favorite")},
+    {anSkipZero, QStringLiteral("skipZero")},
+    {anDateLock, QStringLiteral("datelock")},
+    {anDataLock, QStringLiteral("datalock")},
+    {anMovingAverageDays, QStringLiteral("movingaveragedays")},
+    {anIncludesActuals, QStringLiteral("includesactuals")},
+    {anIncludesForecast, QStringLiteral("includesforecast")},
+    {anIncludesPrice, QStringLiteral("includesprice")},
+    {anIncludesAveragePrice, QStringLiteral("includesaverageprice")},
+    {anIncludesMovingAverage, QStringLiteral("includesmovingaverage")},
+    {anIncludesSchedules, QStringLiteral("includeschedules")},
+    {anIncludesTransfers, QStringLiteral("includestransfers")},
+    {anIncludesUnused, QStringLiteral("includeunused")},
+    {anMixedTime, QStringLiteral("mixedtime")},
+    {anInvestments, QStringLiteral("investments")},
+    {anBudget, QStringLiteral("budget")},
+    {anShowRowTotals, QStringLiteral("showrowtotals")},
+    {anShowColumnTotals, QStringLiteral("showcolumntotals")},
+    {anDetail, QStringLiteral("detail")},
+    {anColumnsAreDays, QStringLiteral("columnsaredays")},
+    {anChartType, QStringLiteral("charttype")},
+    {anChartCHGridLines, QStringLiteral("chartchgridlines")},
+    {anChartSVGridLines, QStringLiteral("chartsvgridlines")},
+    {anChartDataLabels, QStringLiteral("chartdatalabels")},
+    {anChartByDefault, QStringLiteral("chartbydefault")},
+    {anLogYAxis, QStringLiteral("logYaxis")},
+    {anChartLineWidth, QStringLiteral("chartlinewidth")},
+    {anColumnType, QStringLiteral("columntype")},
+    {anRowType, QStringLiteral("rowtype")},
+    {anDataRangeStart, QStringLiteral("dataRangeStart")},
+    {anDataRangeEnd, QStringLiteral("dataRangeEnd")},
+    {anDataMajorTick, QStringLiteral("dataMajorTick")},
+    {anDataMinorTick, QStringLiteral("dataMinorTick")},
+    {anYLabelsPrecision, QStringLiteral("yLabelsPrecision")},
+    {anQueryColumns, QStringLiteral("querycolumns")},
+    {anTax, QStringLiteral("tax")},
+    {anLoans, QStringLiteral("loans")},
+    {anHideTransactions, QStringLiteral("hidetransactions")},
+    {anInvestmentSum, QStringLiteral("investmentsum")},
+    {anSettlementPeriod, QStringLiteral("settlementperiod")},
+    {anShowSTLTCapitalGains, QStringLiteral("showSTLTCapitalGains")},
+    {anTermsSeparator, QStringLiteral("tseparator")},
+    {anPattern, QStringLiteral("pattern")},
+    {anCaseSensitive, QStringLiteral("casesensitive")},
+    {anRegEx, QStringLiteral("regex")},
+    {anInvertText, QStringLiteral("inverttext")},
+    {anState, QStringLiteral("state")},
+    {anFrom, QStringLiteral("from")},
+    {anTo, QStringLiteral("to")}
+  };
+  return attrNames[_attr];
 }

@@ -543,3 +543,25 @@ void MyMoneyAccountTest::reconciliationHistory()
   QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
   QVERIFY(a.reconciliationHistory().count() == 2);
 }
+
+void MyMoneyAccountTest::testElementNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyAccount::elNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyAccount::getElName(static_cast<MyMoneyAccount::elNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyAccountTest::testAttributeNames()
+{
+  QMetaEnum e = QMetaEnum::fromType<MyMoneyAccount::attrNameE>();
+  for (int i = 0; i < e.keyCount(); ++i) {
+    bool isEmpty = MyMoneyAccount::getAttrName(static_cast<MyMoneyAccount::attrNameE>(e.value(i))).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name" << e.key(i);
+    QVERIFY(!isEmpty);
+  }
+}

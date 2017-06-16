@@ -36,6 +36,15 @@ class QStringList;
   */
 class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
+public:
+  enum attrNameE { anName, anType, anTagColor,
+                   anClosed, anNotes
+                 };
+  Q_ENUM(attrNameE)
+
 private:
   // Simple fields
   QString m_name;
@@ -44,6 +53,8 @@ private:
   // Set the color showed in the ledger
   QColor m_tag_color;
   QString m_notes;
+
+  static const QString getAttrName(const attrNameE _attr);
 
 public:
   MyMoneyTag();

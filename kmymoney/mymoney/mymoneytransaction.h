@@ -46,9 +46,18 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
+  Q_GADGET
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
+  enum elNameE { enSplit, enSplits };
+  Q_ENUM(elNameE)
+
+  enum attrNameE { anName, anType, anPostDate, anMemo,
+                   anEntryDate, anCommodity, anBankID,
+                 };
+  Q_ENUM(attrNameE)
+
   MyMoneyTransaction();
   MyMoneyTransaction(const QString& id,
                      const MyMoneyTransaction& transaction);
@@ -336,6 +345,9 @@ private:
     * This method returns the next id to be used for a split
     */
   const QString nextSplitID();
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 
 private:
   static const int SPLIT_ID_SIZE = 4;

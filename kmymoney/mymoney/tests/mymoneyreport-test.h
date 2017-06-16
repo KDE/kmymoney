@@ -1,9 +1,8 @@
-
 /***************************************************************************
-                          mymoneyinstitutiontest.h
+                          mymoneyreporttest.h
                           -------------------
-    copyright            : (C) 2002 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2017 by Łukasz Wojniłowicz
+    email                : lukasz.wojnilowicz@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,35 +14,26 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MYMONEYINSTITUTIONTEST_H
-#define MYMONEYINSTITUTIONTEST_H
+#ifndef MYMONEYREPORTTEST_H
+#define MYMONEYREPORTTEST_H
 
 #include <QtCore/QObject>
 
-class MyMoneyInstitution;
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyReportTest;
 
-class MyMoneyInstitutionTest : public QObject
+#include "mymoneyreport.h"
+
+class MyMoneyReportTest : public QObject
 {
   Q_OBJECT
 
 protected:
-  MyMoneyInstitution *m, *n;
+  MyMoneyReport *m;
 
 private slots:
   void init();
   void cleanup();
-  void testEmptyConstructor();
-  void testSetFunctions();
-  void testNonemptyConstructor();
-  void testCopyConstructor();
-  void testMyMoneyFileConstructor();
-  void testEquality();
-  void testInequality();
-  void testAccountIDList();
-  void testWriteXML();
-  void testReadXML();
   void testElementNames();
   void testAttributeNames();
 };
-
 #endif

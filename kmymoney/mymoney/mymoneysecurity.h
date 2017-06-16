@@ -51,6 +51,9 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   MyMoneySecurity();
   MyMoneySecurity(const QString& id, const MyMoneySecurity& equity);
@@ -86,6 +89,12 @@ public:
     SECURITY_CURRENCY,
     SECURITY_NONE
   } eSECURITYTYPE;
+
+  enum attrNameE { anName, anSymbol, anType, anRoundingMethod,
+                   anSAF, anPP, anSCF,
+                   anTradingCurrency, anTradingMarket
+                 };
+  Q_ENUM(attrNameE)
 
   const QString& name() const                 {
     return m_name;
@@ -215,6 +224,8 @@ private:
       DEFAULT_ACCOUNT_FRACTION = 100,
       DEFAULT_PRICE_PRECISION = 4,
   };
+
+  static const QString getAttrName(const attrNameE _attr);
 };
 
 /**

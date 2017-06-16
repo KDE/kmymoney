@@ -33,6 +33,9 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "imymoneyprocessingcalendar.h"
+#include "mymoneystoragenames.h"
+
+using namespace MyMoneyStorageNodes;
 
 static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
 
@@ -78,26 +81,26 @@ MyMoneySchedule::MyMoneySchedule(const QString& name, typeE type,
 MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
     MyMoneyObject(node)
 {
-  if ("SCHEDULED_TX" != node.tagName())
+  if (nodeNames[nnScheduleTX] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
 
-  m_name = node.attribute("name");
-  m_startDate = stringToDate(node.attribute("startDate"));
-  m_endDate = stringToDate(node.attribute("endDate"));
-  m_lastPayment = stringToDate(node.attribute("lastPayment"));
+  m_name = node.attribute(getAttrName(anName));
+  m_startDate = stringToDate(node.attribute(getAttrName(anStartDate)));
+  m_endDate = stringToDate(node.attribute(getAttrName(anEndDate)));
+  m_lastPayment = stringToDate(node.attribute(getAttrName(anLastPayment)));
 
-  m_type = static_cast<MyMoneySchedule::typeE>(node.attribute("type").toInt());
-  m_paymentType = static_cast<MyMoneySchedule::paymentTypeE>(node.attribute("paymentType").toInt());
-  m_occurrence = static_cast<MyMoneySchedule::occurrenceE>(node.attribute("occurence").toInt()); // krazy:exclude=spelling
-  m_occurrenceMultiplier = node.attribute("occurenceMultiplier", "1").toInt(); // krazy:exclude=spelling
+  m_type = static_cast<MyMoneySchedule::typeE>(node.attribute(getAttrName(anType)).toInt());
+  m_paymentType = static_cast<MyMoneySchedule::paymentTypeE>(node.attribute(getAttrName(anPaymentType)).toInt());
+  m_occurrence = static_cast<MyMoneySchedule::occurrenceE>(node.attribute(getAttrName(anOccurence)).toInt()); // krazy:exclude=spelling
+  m_occurrenceMultiplier = node.attribute(getAttrName(anOccurenceMultiplier), "1").toInt(); // krazy:exclude=spelling
   // Convert to compound occurrence
   simpleToCompoundOccurrence(m_occurrenceMultiplier, m_occurrence);
-  m_autoEnter = static_cast<bool>(node.attribute("autoEnter").toInt());
-  m_fixed = static_cast<bool>(node.attribute("fixed").toInt());
-  m_weekendOption = static_cast<MyMoneySchedule::weekendOptionE>(node.attribute("weekendOption").toInt());
+  m_autoEnter = static_cast<bool>(node.attribute(getAttrName(anAutoEnter)).toInt());
+  m_fixed = static_cast<bool>(node.attribute(getAttrName(anFixed)).toInt());
+  m_weekendOption = static_cast<MyMoneySchedule::weekendOptionE>(node.attribute(getAttrName(anWeekendOption)).toInt());
 
   // read in the associated transaction
-  QDomNodeList nodeList = node.elementsByTagName("TRANSACTION");
+  QDomNodeList nodeList = node.elementsByTagName(nodeNames[nnTransaction]);
   if (nodeList.count() == 0)
     throw MYMONEYEXCEPTION("SCHEDULED_TX has no TRANSACTION node");
 
@@ -112,11 +115,11 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   }
 
   // readin the recorded payments
-  nodeList = node.elementsByTagName("PAYMENTS");
+  nodeList = node.elementsByTagName(getElName(enPayments));
   if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName("PAYMENT");
+    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(enPayment));
     for (int i = 0; i < nodeList.count(); ++i) {
-      m_recordedPayments << stringToDate(nodeList.item(i).toElement().attribute("date"));
+      m_recordedPayments << stringToDate(nodeList.item(i).toElement().attribute(getAttrName(anDate)));
     }
   }
 
@@ -763,29 +766,29 @@ void MyMoneySchedule::fixDate(QDate& date) const
 
 void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement("SCHEDULED_TX");
+  QDomElement el = document.createElement(nodeNames[nnScheduleTX]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute("name", m_name);
-  el.setAttribute("type", m_type);
-  el.setAttribute("occurence", m_occurrence); // krazy:exclude=spelling
-  el.setAttribute("occurenceMultiplier", m_occurrenceMultiplier);
-  el.setAttribute("paymentType", m_paymentType);
-  el.setAttribute("startDate", dateToString(m_startDate));
-  el.setAttribute("endDate", dateToString(m_endDate));
-  el.setAttribute("fixed", m_fixed);
-  el.setAttribute("autoEnter", m_autoEnter);
-  el.setAttribute("lastPayment", dateToString(m_lastPayment));
-  el.setAttribute("weekendOption", m_weekendOption);
+  el.setAttribute(getAttrName(anName), m_name);
+  el.setAttribute(getAttrName(anType), m_type);
+  el.setAttribute(getAttrName(anOccurence), m_occurrence); // krazy:exclude=spelling
+  el.setAttribute(getAttrName(anOccurenceMultiplier), m_occurrenceMultiplier);
+  el.setAttribute(getAttrName(anPaymentType), m_paymentType);
+  el.setAttribute(getAttrName(anStartDate), dateToString(m_startDate));
+  el.setAttribute(getAttrName(anEndDate), dateToString(m_endDate));
+  el.setAttribute(getAttrName(anFixed), m_fixed);
+  el.setAttribute(getAttrName(anAutoEnter), m_autoEnter);
+  el.setAttribute(getAttrName(anLastPayment), dateToString(m_lastPayment));
+  el.setAttribute(getAttrName(anWeekendOption), m_weekendOption);
 
   //store the payment history for this scheduled task.
   QList<QDate> payments = recordedPayments();
   QList<QDate>::ConstIterator it;
-  QDomElement paymentsElement = document.createElement("PAYMENTS");
+  QDomElement paymentsElement = document.createElement(getElName(enPayments));
   for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
-    QDomElement paymentEntry = document.createElement("PAYMENT");
-    paymentEntry.setAttribute("date", dateToString(*it));
+    QDomElement paymentEntry = document.createElement(getElName(enPayment));
+    paymentEntry.setAttribute(getAttrName(anDate), dateToString(*it));
     paymentsElement.appendChild(paymentEntry);
   }
   el.appendChild(paymentsElement);
@@ -1374,3 +1377,30 @@ bool MyMoneySchedule::replaceId(const QString& newId, const QString& oldId)
   return m_transaction.replaceId(newId, oldId);
 }
 
+const QString MyMoneySchedule::getElName(const elNameE _el)
+{
+  static const QMap<elNameE, QString> elNames = {
+    {enPayment, QStringLiteral("PAYMENT")},
+    {enPayments, QStringLiteral("PAYMENTS")}
+  };
+  return elNames[_el];
+}
+
+const QString MyMoneySchedule::getAttrName(const attrNameE _attr)
+{
+  static const QHash<attrNameE, QString> attrNames = {
+    {anName, QStringLiteral("name")},
+    {anType, QStringLiteral("type")},
+    {anOccurence, QStringLiteral("occurence")},
+    {anOccurenceMultiplier, QStringLiteral("occurenceMultiplier")},
+    {anPaymentType, QStringLiteral("paymentType")},
+    {anFixed, QStringLiteral("fixed")},
+    {anAutoEnter, QStringLiteral("autoEnter")},
+    {anLastPayment, QStringLiteral("lastPayment")},
+    {anWeekendOption, QStringLiteral("weekendOption")},
+    {anDate, QStringLiteral("date")},
+    {anStartDate, QStringLiteral("startDate")},
+    {anEndDate, QStringLiteral("endDate")}
+  };
+  return attrNames[_attr];
+}

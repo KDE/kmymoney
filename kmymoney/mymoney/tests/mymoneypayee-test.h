@@ -31,6 +31,8 @@ private slots:
   void testMatchKeyAllowSpaceAtStart();
   void testMatchKeyAllowSpaceAtEnd();
   void testMatchNameExact();
+  void testElementNames();
+  void testAttributeNames();
 };
 
 #endif

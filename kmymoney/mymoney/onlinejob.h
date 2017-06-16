@@ -49,7 +49,17 @@ class onlineTask;
  */
 class KMM_MYMONEY_EXPORT onlineJob : public MyMoneyObject
 {
+  Q_GADGET
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
+  enum elNameE { enOnlineTask };
+  Q_ENUM(elNameE)
+
+  enum attrNameE { anSend, anBankAnswerDate, anBankAnswerState, anIID,
+                   anAbortedByUser, anAcceptedByBank, anRejectedByBank, anSendingError
+                 };
+  Q_ENUM(attrNameE)
 
   /**
    * @brief Contructor for null onlineJobs
@@ -342,6 +352,9 @@ private:
 
   /** @brief Copies stored pointers (used by copy constructors) */
   inline void copyPointerFromOtherJob(const onlineJob& other);
+
+  static const QString getElName(const elNameE _el);
+  static const QString getAttrName(const attrNameE _attr);
 };
 
 template<class T>
