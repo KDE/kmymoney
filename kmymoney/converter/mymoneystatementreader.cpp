@@ -934,7 +934,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
               keys.clear();
               keys << QString("^%1$").arg(QRegExp::escape((*it_p).name()));
             }
-            // tricky fall through here
+            // intentional fall through
 
           case MyMoneyPayee::matchKey:
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
