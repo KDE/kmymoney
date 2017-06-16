@@ -246,7 +246,7 @@ bool FixedColumnTreeView::eventFilter(QObject *object, QEvent *event)
       case QEvent::Show:
         d->syncModels();
         show();
-        // intentional fall trough
+        // intentional fall through
       case QEvent::Resize:
         d->syncGeometry();
         break;
