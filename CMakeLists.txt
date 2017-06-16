@@ -218,7 +218,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     "-g3 -fno-inline")
   set(CMAKE_CXX_FLAGS_PROFILE
     "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op -Wextra")
 
   # be pedantic about undefined symbols when linking shared libraries
   if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
