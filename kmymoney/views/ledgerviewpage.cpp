@@ -129,6 +129,8 @@ void LedgerViewPage::finishEdit()
 {
   d->hideFormReasons.remove(QLatin1String("Edit"));
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
+  // the focus should be on the ledger view once editing ends
+  d->ui->ledgerView->setFocus();
 }
 
 void LedgerViewPage::splitterChanged(int pos, int index)
