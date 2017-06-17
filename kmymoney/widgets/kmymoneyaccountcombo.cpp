@@ -27,10 +27,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPainter>
-#include <QStyle>
-#include <QApplication>
-#include <QMouseEvent>
 #include <QList>
 #include <QKeyEvent>
 #include <QTreeView>
@@ -192,6 +188,7 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
       switch(kev->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
+          activated();
           hidePopup();
           break;
       }
@@ -218,22 +215,13 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
                                         1,
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
   if (list.count() > 0) {
+    // make sure the popup is closed from here on
+    hidePopup();
     d->m_lastSelectedAccount = id;
     QModelIndex index = list.front();
-    QString accountName = d->fullAccountName(model(), index);
 
-    // set the current index, for this we must set the parent item as the root item
-    QModelIndex oldRootModelIndex = rootModelIndex();
-    setRootModelIndex(index.parent());
-    setCurrentIndex(index.row());
     if(isEditable()) {
-      d->m_popupView->collapseAll();
-      d->m_popupView->expand(index);
-    }
-    // restore the old root item
-    setRootModelIndex(oldRootModelIndex);
-    if(isEditable()) {
-      lineEdit()->setText(accountName);
+      lineEdit()->setText(d->fullAccountName(model(), index));
     }
     emit accountSelected(id);
   }
@@ -259,18 +247,18 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   setView(d->m_popupView);
 
   d->m_popupView->setHeaderHidden(true);
-  d->m_popupView->setRootIsDecorated(false);
+  d->m_popupView->setRootIsDecorated(true);
   d->m_popupView->setAlternatingRowColors(true);
   d->m_popupView->setAnimated(true);
 
   d->m_popupView->expandAll();
 
-  connect(this, SIGNAL(activated(int)), SLOT(activated()));
   connect(d->m_popupView, SIGNAL(activated(QModelIndex)), this, SLOT(selectItem(QModelIndex)));
-  connect(d->m_popupView, SIGNAL(pressed(QModelIndex)), this, SLOT(selectItem(QModelIndex)));
 
   if(isEditable()) {
     connect(lineEdit(), SIGNAL(textEdited(QString)), this, SLOT(makeCompletion(QString)));
+  } else {
+    connect(this, SIGNAL(activated(int)), SLOT(activated()));
   }
 }
 
