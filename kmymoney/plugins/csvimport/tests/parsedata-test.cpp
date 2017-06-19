@@ -39,9 +39,9 @@ void ParseDataTest::cleanup()
 
 void ParseDataTest::parseSplitString()
 {
-  for (int i = 0; i <= 3; i++)  {     //        All four delimiters should produce same result
-    m_parse->setFieldDelimiterIndex(i);
-    m_parse->setFieldDelimiterCharacter(i);
+  QVector<FieldDelimiter> delimiters {FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab};
+  foreach (const auto delimiter, delimiters) { //        All four delimiters should produce same result
+    m_parse->setFieldDelimiter(delimiter);
 
     QString input = "abc,defgh,";//  When this string is QString::split(), two strings
     //  ....will result if ',' is the field delimiter.

@@ -5,16 +5,33 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimport.json.in ${CMAKE_CURRENT_BIN
 
 ########### next target ###############
 
+set(kmm_csvimport_core_PART_SRCS
+  csvimporter.cpp
+  convdate.cpp
+  csvutil.cpp
+)
+
+add_library(kmm_csvimport_core SHARED ${kmm_csvimport_core_PART_SRCS})
+generate_export_header(kmm_csvimport_core)
+target_link_libraries(kmm_csvimport_core
+  PUBLIC
+    kmm_mymoney
+)
+
+########### install files ###############
+
+install(TARGETS kmm_csvimport_core
+  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+########### next target ###############
+
 set(kmm_csvimport_PART_SRCS
   csvimporterplugin.cpp
-  csvimporter.cpp
   csvwizard.cpp
   bankingwizardpage.cpp
   investmentwizardpage.cpp
   priceswizardpage.cpp
   transactiondlg.cpp
-  convdate.cpp
-  csvutil.cpp
   securitiesdlg.cpp
   securitydlg.cpp
   currenciesdlg.cpp
@@ -42,20 +59,8 @@ add_library(kmm_csvimport MODULE ${kmm_csvimport_PART_SRCS})
 
 target_link_libraries(kmm_csvimport
   PUBLIC
-    kmm_mymoney
+    kmm_csvimport_core
     kmm_plugin
-    kmymoney_common
-    Qt5::Core
-    Qt5::Widgets
-)
-
-add_library(kmm_csvimport_static STATIC ${kmm_csvimport_PART_SRCS})
-
-target_link_libraries(kmm_csvimport_static
-    kmm_plugin
-    kmymoney_common
-    Qt5::Core
-    Qt5::Widgets
 )
 
 ########### install files ###############

@@ -4,6 +4,8 @@
 begin                : Sat Jan 01 2010
 copyright            : (C) 2010 by Allan Anderson
 email                : agander93@gmail.com
+copyright            : (C) 2017 by Łukasz Wojniłowicz
+email                : lukasz.wojnilowicz@gmail.com
 ***************************************************************************/
 
 /**************************************************************************
@@ -18,22 +20,13 @@ email                : agander93@gmail.com
 #ifndef CSVUTIL_H
 #define CSVUTIL_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QDate>
-#include <QtCore/QStringList>
-#include <QObject>
+#include <QVector>
+#include "csvenums.h"
 
-#include "investtransactioneditor.h"
+#include "csvimport/kmm_csvimport_core_export.h"
 
-class MyMoneyAccount;
-class InvestTransactionEditor;
-class TransactionEditor;
-
-class Parse: public QObject
+class KMM_CSVIMPORT_CORE_EXPORT Parse
 {
-  Q_OBJECT
-
 public:
   Parse();
   ~Parse();
@@ -45,16 +38,10 @@ public:
    * more 'thousand separators' which happen to be the same as the field
    * delimiter, and re-assembles the string.
    */
-  QStringList      parseLine(const QString& data);
-  QStringList      parseFile(const QString& buf, int strt, int end);
-  QStringList      m_fieldDelimiterCharList;
+  QStringList      parseLine(const QString &data);
+  QStringList      parseFile(const QString &buf);
 
-  QString          fieldDelimiterCharacter(int index);
-  QString          decimalSymbol(int index);
-  int              decimalSymbolIndex();
-  QString          textDelimiterCharacter(int index);
-  void             thousandsSeparatorChanged(int index);
-  QString          thousandsSeparator();
+  QChar decimalSymbol(const DecimalSymbol _d);
 
   /**
    * Check for presence of the selected decimal symbol
@@ -63,75 +50,32 @@ public:
    */
   QString          possiblyReplaceSymbol(const QString&  str);
 
-  void             setFieldDelimiterIndex(int index);
-  void             setFieldDelimiterCharacter(int index);
+  void             setFieldDelimiter(const FieldDelimiter _d);
 
-  void             setTextDelimiterIndex(int index);
-  void             setTextDelimiterCharacter(int index);
+  void             setTextDelimiter(const TextDelimiter _d);
 
-  void             setDecimalSymbolIndex(int index);
-  void             setDecimalSymbol(int index);
-
-  void             setThousandsSeparatorIndex(int index);
-  void             setThousandsSeparator(int index);
-
-  bool             symbolFound();
-  void             setSymbolFound(bool found);
+  void             setDecimalSymbol(const DecimalSymbol _d);
 
   bool             invalidConversion();
 
   int              lastLine();
 
-public slots:
-
-  void             decimalSymbolSelected(int index);
-
 private :
 
-  QStringList      m_decimalSymbolList;
-  QStringList      m_textDelimiterCharList;
-  QStringList      m_thousandsSeparatorList;
+  QVector<QChar> m_fieldDelimiters;
+  QVector<QChar> m_textDelimiters;
+  QVector<QChar> m_decimalSymbols;
+  QVector<QChar> m_thousandsSeparators;
 
-  QString          m_decimalSymbol;
-  QString          m_fieldDelimiterCharacter;
-  QString          m_textDelimiterCharacter;
-  QString          m_thousandsSeparator;
+  QChar          m_fieldDelimiter;
+  QChar          m_textDelimiter;
+  QChar          m_decimalSymbol;
+  QChar          m_thousandsSeparator;
 
-  int              m_decimalSymbolIndex;
-  int              m_fieldDelimiterIndex;
   int              m_lastLine;
-  int              m_textDelimiterIndex;
-  int              m_thousandsSeparatorIndex;
 
   bool             m_symbolFound;
   bool             m_invalidConversion;
-}
-;
-
-class CsvUtil: public QObject
-{
-  Q_OBJECT
-
-public:
-  CsvUtil();
-  ~CsvUtil();
-
-  InvestTransactionEditor*    m_investTransactionEditor;
-
-  const QString&     feeId(const MyMoneyAccount& invAcc);
-  const QString&     interestId(const MyMoneyAccount& invAcc);
-  QString            expenseId(const QString& name);
-  QString            interestId(const QString& name);
-  QString            feeId(const QString& name);
-  QString            nameToId(const QString& name, MyMoneyAccount& parent);
-  void               scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName);
-  void               previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
-  const QString      checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
-  void               createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
-private:
-  QString          m_feeId;
-  QString          m_interestId;
-  bool             m_scannedCategories;
 };
 
 #endif

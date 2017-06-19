@@ -23,21 +23,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QFile>
-#include <QVBoxLayout>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneystatement.h>
-#include <csvimporter.h>
+#include "csvwizardpage.h"
 
 // ----------------------------------------------------------------------------
 
 class BankingProfile;
+class MyMoneyStatement;
 
 namespace Ui
 {
@@ -52,26 +49,23 @@ public:
   explicit BankingPage(CSVWizard *dlg, CSVImporter *imp);
   ~BankingPage();
 
-  Ui::BankingPage     *ui;
-  QVBoxLayout         *m_pageLayout;
-
   bool validateCreditDebit();
   /**
   * This method fills QIF file with bank/credit card data
   */
-  void                makeQIF(MyMoneyStatement &st, QFile &file);
+  void                makeQIF(const MyMoneyStatement &st, const QString &outFileName);
 
 private:
   void                initializePage();
   bool                isComplete() const;
   int                 nextId() const;
 
-  void                initializeComboBoxes();
   bool                validateMemoComboBox();
-  void                resetComboBox(const columnTypeE comboBox);
-  bool                validateSelectedColumn(const int col, const columnTypeE type);
+  void                resetComboBox(const Column comboBox);
+  bool                validateSelectedColumn(const int col, const Column type);
 
   BankingProfile       *m_profile;
+  Ui::BankingPage      *ui;
 
 private slots:
   void                memoColSelected(int col);

@@ -168,10 +168,10 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
 
   bool isCurrency = false;
   if (urlStr.contains(QLatin1String("%2"))) {
-    d->m_CSVSource.m_profileType = ProfileCurrencyPrices;
+    d->m_CSVSource.m_profileType = Profile::CurrencyPrices;
     isCurrency = true;
   } else
-    d->m_CSVSource.m_profileType = ProfileStockPrices;
+    d->m_CSVSource.m_profileType = Profile::StockPrices;
 
   d->m_CSVSource.m_profileName = sourcename;
   if (!d->m_CSVSource.readSettings(CSVImporter::configFile())) {
@@ -520,32 +520,37 @@ const QMap<QString, PricesProfile> WebPriceQuote::defaultCSVQuoteSources()
 {
   QMap<QString, PricesProfile> result;
 
-  // tip: possible delimiter indexes are in csvutil.cpp
+  // tip: possible delimiter indexes are in csvenums.h
 
   result[QLatin1String("Stooq")] = PricesProfile(QLatin1String("Stooq"),
-                                                 106, 1, 0, 0, 1, 0, 0,
-                                                 QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
-                                                 2, ProfileStockPrices);
+                                                 106, 1, 0, DateFormat::YearMonthDay, FieldDelimiter::Semicolon,
+                                                 TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
+                                                 QMap<Column, int>{{Column::Date, 0}, {Column::Price, 4}},
+                                                 2, Profile::StockPrices);
 
   result[QLatin1String("Stooq Currency")] = PricesProfile(QLatin1String("Stooq Currency"),
-                                                          106, 1, 0, 0, 1, 0, 0,
-                                                          QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
-                                                          2, ProfileCurrencyPrices);
+                                                          106, 1, 0, DateFormat::YearMonthDay, FieldDelimiter::Semicolon,
+                                                          TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
+                                                          QMap<Column, int>{{Column::Date, 0}, {Column::Price, 4}},
+                                                          2, Profile::CurrencyPrices);
 
   result[QLatin1String("Yahoo")] = PricesProfile(QLatin1String("Yahoo"),
-                                                 106, 1, 0, 0, 0, 0, 0,
-                                                 QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 4}},
-                                                 2, ProfileStockPrices);
+                                                 106, 1, 0, DateFormat::YearMonthDay, FieldDelimiter::Comma,
+                                                 TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
+                                                 QMap<Column, int>{{Column::Date, 0}, {Column::Price, 4}},
+                                                 2, Profile::StockPrices);
 
   result[QLatin1String("Nasdaq Baltic - Shares")] = PricesProfile(QLatin1String("Nasdaq Baltic - Shares"),
-                                                                  106, 1, 0, 2, 3, 0, 0,
-                                                                  QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 5}},
-                                                                  2, ProfileStockPrices);
+                                                                  106, 1, 0, DateFormat::DayMonthYear, FieldDelimiter::Tab,
+                                                                  TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
+                                                                  QMap<Column, int>{{Column::Date, 0}, {Column::Price, 5}},
+                                                                  2, Profile::StockPrices);
 
   result[QLatin1String("Nasdaq Baltic - Funds")] = PricesProfile(QLatin1String("Nasdaq Baltic - Funds"),
-                                                                 106, 1, 0, 2, 3, 0, 0,
-                                                                 QMap<columnTypeE, int>{{ColumnDate, 0}, {ColumnPrice, 5}},
-                                                                 2, ProfileStockPrices);
+                                                                 106, 1, 0, DateFormat::DayMonthYear, FieldDelimiter::Tab,
+                                                                 TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
+                                                                 QMap<Column, int>{{Column::Date, 0}, {Column::Price, 5}},
+                                                                 2, Profile::StockPrices);
   return result;
 }
 

@@ -32,7 +32,7 @@ SymbolTest::SymbolTest()
 void SymbolTest::init()
 {
   m_parse = new Parse;
-  m_parse->setDecimalSymbol(0);
+  m_parse->setDecimalSymbol(DecimalSymbol::Dot);
   m_localeDecimal = QLocale().decimalPoint();
   m_localeThousands = QLocale().groupSeparator();
 }
@@ -46,8 +46,7 @@ void SymbolTest::testDecimalSymbolDot()
 {
   //  Detect '.' as decimal and replace from locale
 
-  m_parse->setDecimalSymbol(0);  //  "."
-  m_parse->setThousandsSeparator(0);
+  m_parse->setDecimalSymbol(DecimalSymbol::Dot);  //  "."
 
   QFETCH(QString, input);
   QFETCH(QString, result);
@@ -59,8 +58,7 @@ void SymbolTest::testDecimalSymbolComma()
 {
   //  Detect ',' as decimal and replace from locale
 
-  m_parse->setDecimalSymbol(1);  //   ","
-  m_parse->setThousandsSeparator(1);
+  m_parse->setDecimalSymbol(DecimalSymbol::Comma);  //   ","
 
   QFETCH(QString, input);
   QFETCH(QString, result);
@@ -72,9 +70,8 @@ void SymbolTest::testDecimalSymbolInvalid()
 {
   //  Check for ',' as decimal, and none present
 
-  m_parse->setDecimalSymbol(1);  //   ","
-  m_parse->setThousandsSeparator(1);
-  m_testDecimal = m_parse->decimalSymbol(1);
+  m_parse->setDecimalSymbol(DecimalSymbol::Comma);  //   ","
+  m_testDecimal = m_parse->decimalSymbol(DecimalSymbol::Comma);
 
   QFETCH(QString, input);
   QFETCH(QString, result);

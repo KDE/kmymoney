@@ -221,22 +221,6 @@ private:
   void processQifSpecial(const QString& _line);
 
   /**
-    * This method is used to get the account id of the split for
-    * a transaction from the text found in the QIF $ or L record.
-    * If an account with the name is not found, the user is asked
-    * if it should be created.
-    *
-    * @param name name of account as found in the QIF file
-    * @param value value found in the T record
-    * @param value2 value found in the $ record for split transactions
-    *
-    * @return id of the account for the split. If no name is specified
-    *            or the account was not found and not created the
-    *            return value will be "".
-    */
-  const QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
-
-  /**
     * This method extracts the line beginning with the letter @p id
     * from the lines contained in the QStringList object @p m_qifEntry.
     * An empty QString is returned, if the line is not found.

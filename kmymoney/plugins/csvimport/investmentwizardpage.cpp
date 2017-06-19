@@ -24,6 +24,7 @@
 
 #include <QtCore/QTextStream>
 #include <QtMath>
+#include <QFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,8 +34,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
+#include <mymoneyfile.h>
 #include "csvwizard.h"
+#include "csvimporter.h"
 
 #include "transactiondlg.h"
 #include "securitydlg.h"
@@ -50,31 +52,43 @@ InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporter *imp) :
 {
   ui->setupUi(this);
 
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
-
   connect(ui->m_clear, &QAbstractButton::clicked, this, &InvestmentPage::clearColumns);
   connect(ui->m_clearFee, &QAbstractButton::clicked, this, &InvestmentPage::clearFee);
   connect(ui->m_calculateFee, &QAbstractButton::clicked, this, &InvestmentPage::calculateFee);
 
   // initialize column names
-  m_dlg->m_colTypeName.insert(ColumnType, i18n("Type"));
-  m_dlg->m_colTypeName.insert(ColumnPrice, i18n("Price"));
-  m_dlg->m_colTypeName.insert(ColumnQuantity, i18n("Quantity"));
-  m_dlg->m_colTypeName.insert(ColumnFee, i18n("Fee"));
-  m_dlg->m_colTypeName.insert(ColumnDate, i18n("Date"));
-  m_dlg->m_colTypeName.insert(ColumnAmount, i18n("Amount"));
-  m_dlg->m_colTypeName.insert(ColumnSymbol, i18n("Symbol"));
-  m_dlg->m_colTypeName.insert(ColumnName, i18n("Name"));
-  m_dlg->m_colTypeName.insert(ColumnMemo, i18n("Memo"));
+  m_dlg->m_colTypeName.insert(Column::Type, i18n("Type"));
+  m_dlg->m_colTypeName.insert(Column::Price, i18n("Price"));
+  m_dlg->m_colTypeName.insert(Column::Quantity, i18n("Quantity"));
+  m_dlg->m_colTypeName.insert(Column::Fee, i18n("Fee"));
+  m_dlg->m_colTypeName.insert(Column::Date, i18n("Date"));
+  m_dlg->m_colTypeName.insert(Column::Amount, i18n("Amount"));
+  m_dlg->m_colTypeName.insert(Column::Symbol, i18n("Symbol"));
+  m_dlg->m_colTypeName.insert(Column::Name, i18n("Name"));
+  m_dlg->m_colTypeName.insert(Column::Memo, i18n("Memo"));
 
   m_profile = dynamic_cast<InvestmentProfile *>(m_imp->m_profile);
+
+  connect(ui->m_memoCol, SIGNAL(currentIndexChanged(int)), this, SLOT(memoColSelected(int)));
+  connect(ui->m_typeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(typeColSelected(int)));
+  connect(ui->m_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColSelected(int)));
+  connect(ui->m_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(quantityColSelected(int)));
+  connect(ui->m_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColSelected(int)));
+  connect(ui->m_priceFraction, SIGNAL(currentIndexChanged(int)), this, SLOT(fractionChanged(int)));
+  connect(ui->m_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColSelected(int)));
+  connect(ui->m_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColSelected(int)));
+  connect(ui->m_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColSelected(int)));
+  connect(ui->m_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(nameColSelected(int)));
+  connect(ui->m_feeIsPercentage, &QAbstractButton::clicked, this, &InvestmentPage::feeIsPercentageClicked);
+  connect(ui->m_feeRate, &QLineEdit::editingFinished, this, &InvestmentPage::feeInputsChanged);
+  connect(ui->m_feeRate, &QLineEdit::textChanged, this, &InvestmentPage::feeRateChanged);
+  connect(ui->m_minFee, &QLineEdit::textChanged, this, &InvestmentPage::minFeeChanged);
 }
 
 InvestmentPage::~InvestmentPage()
 {
-  delete ui;
   delete m_securitiesDlg;
+  delete ui;
 }
 
 void InvestmentPage::calculateFee()
@@ -84,87 +98,28 @@ void InvestmentPage::calculateFee()
   m_dlg->markUnwantedRows();
 }
 
-void InvestmentPage::initializeComboBoxes()
-{
-  // disable investment widgets allowing their initialization
-  disconnect(ui->m_memoCol, SIGNAL(currentIndexChanged(int)), this, SLOT(memoColSelected(int)));
-  disconnect(ui->m_typeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(typeColSelected(int)));
-  disconnect(ui->m_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColSelected(int)));
-  disconnect(ui->m_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(quantityColSelected(int)));
-  disconnect(ui->m_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColSelected(int)));
-  disconnect(ui->m_priceFraction, SIGNAL(currentIndexChanged(int)), this, SLOT(fractionChanged(int)));
-  disconnect(ui->m_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColSelected(int)));
-  disconnect(ui->m_feeRate, SIGNAL(editingFinished()), this, SLOT(feeInputsChanged()));
-  disconnect(ui->m_feeRate, SIGNAL(textChanged(QString)), this, SLOT(feeRateChanged(QString)));
-  disconnect(ui->m_minFee, SIGNAL(textChanged(QString)), this, SLOT(minFeeChanged(QString)));
-  disconnect(ui->m_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColSelected(int)));
-  disconnect(ui->m_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColSelected(int)));
-  disconnect(ui->m_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(nameColSelected(int)));
-  disconnect(ui->m_feeIsPercentage, SIGNAL(clicked(bool)), this, SLOT(feeIsPercentageClicked(bool)));
-
-  // clear all existing items before adding new ones
-  ui->m_amountCol->clear(); // clear all existing items before adding new ones
-  ui->m_dateCol->clear();
-  ui->m_memoCol->clear();
-  ui->m_priceCol->clear();
-  ui->m_quantityCol->clear();
-  ui->m_typeCol->clear();
-  ui->m_feeCol->clear();
-  ui->m_symbolCol->clear();
-  ui->m_nameCol->clear();
-  ui->m_feeRate->clear();
-  ui->m_minFee->clear();
-
-  QStringList columnNumbers;
-  for (int i = 0; i < m_imp->m_file->m_columnCount; ++i)
-    columnNumbers.append(QString::number(i + 1));
-
-  // populate comboboxes with col # values
-  ui->m_amountCol->addItems(columnNumbers);
-  ui->m_dateCol->addItems(columnNumbers);
-  ui->m_memoCol->addItems(columnNumbers);
-  ui->m_priceCol->addItems(columnNumbers);
-  ui->m_quantityCol->addItems(columnNumbers);
-  ui->m_typeCol->addItems(columnNumbers);
-  ui->m_feeCol->addItems(columnNumbers);
-  ui->m_symbolCol->addItems(columnNumbers);
-  ui->m_nameCol->addItems(columnNumbers);
-
-  clearColumns(); // all comboboxes are set to 0 so set them to -1
-  connect(ui->m_memoCol, SIGNAL(currentIndexChanged(int)), this, SLOT(memoColSelected(int)));
-  connect(ui->m_typeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(typeColSelected(int)));
-  connect(ui->m_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColSelected(int)));
-  connect(ui->m_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(quantityColSelected(int)));
-  connect(ui->m_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColSelected(int)));
-  connect(ui->m_priceFraction, SIGNAL(currentIndexChanged(int)), this, SLOT(fractionChanged(int)));
-  connect(ui->m_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColSelected(int)));
-  connect(ui->m_feeRate, SIGNAL(editingFinished()), this, SLOT(feeInputsChanged()));
-  connect(ui->m_feeRate, SIGNAL(textChanged(QString)), this, SLOT(feeRateChanged(QString)));
-  connect(ui->m_minFee, SIGNAL(textChanged(QString)), this, SLOT(minFeeChanged(QString)));
-  connect(ui->m_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColSelected(int)));
-  connect(ui->m_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColSelected(int)));
-  connect(ui->m_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(nameColSelected(int)));
-  connect(ui->m_feeIsPercentage, SIGNAL(clicked(bool)), this, SLOT(feeIsPercentageClicked(bool)));
-}
-
 void InvestmentPage::initializePage()
 {
+  QHash<Column, QComboBox *> columns {{Column::Amount, ui->m_amountCol}, {Column::Type, ui->m_typeCol},
+                                           {Column::Quantity, ui->m_quantityCol}, {Column::Memo, ui->m_memoCol},
+                                           {Column::Price, ui->m_priceCol}, {Column::Date, ui->m_dateCol},
+                                           {Column::Fee,  ui->m_feeCol},  {Column::Symbol, ui->m_symbolCol},
+                                           {Column::Name, ui->m_nameCol}};
+
   if (ui->m_dateCol->count() != m_imp->m_file->m_columnCount)
-    initializeComboBoxes();
-  ui->m_dateCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnDate));
-  ui->m_typeCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnType));
-  ui->m_priceCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnPrice));
-  ui->m_quantityCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnQuantity));
-  ui->m_amountCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnAmount));
-  ui->m_nameCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnName));
-  ui->m_symbolCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnSymbol));
+    m_dlg->initializeComboBoxes(columns);
+
   ui->m_feeIsPercentage->setChecked(m_profile->m_feeIsPercentage);
-  ui->m_feeCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnFee));
+  columns.remove(Column::Memo);
+  for (auto it = columns.cbegin(); it != columns.cend(); ++it)
+    it.value()->setCurrentIndex(m_profile->m_colTypeNum.value(it.key()));
+
   ui->m_priceFraction->blockSignals(true);
   foreach (const auto priceFraction, m_imp->m_priceFractions)
     ui->m_priceFraction->addItem(QString::number(priceFraction.toDouble(), 'g', 3));
   ui->m_priceFraction->blockSignals(false);
   ui->m_priceFraction->setCurrentIndex(m_profile->m_priceFraction);
+
   ui->m_feeRate->setText(m_profile->m_feeRate);
   ui->m_minFee->setText(m_profile->m_minFee);
   ui->m_feeRate->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,2}[") + QLocale().decimalPoint() + QStringLiteral("]{1,1}[0-9]{0,2}")), this) );
@@ -217,8 +172,8 @@ void InvestmentPage::cleanupPage()
 
 void InvestmentPage::memoColSelected(int col)
 {
-  if (m_profile->m_colNumType.value(col) == ColumnType ||
-      m_profile->m_colNumType.value(col) == ColumnName) {
+  if (m_profile->m_colNumType.value(col) == Column::Type ||
+      m_profile->m_colNumType.value(col) == Column::Name) {
     int rc = KMessageBox::Yes;
     if (isVisible())
       rc = KMessageBox::questionYesNo(m_dlg, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
@@ -234,66 +189,66 @@ void InvestmentPage::memoColSelected(int col)
     }
     //allow only separate memo field occupy combobox
     ui->m_memoCol->blockSignals(true);
-    if (m_profile->m_colTypeNum.value(ColumnMemo) != -1)
-      ui->m_memoCol->setCurrentIndex(m_profile->m_colTypeNum.value(ColumnMemo));
+    if (m_profile->m_colTypeNum.value(Column::Memo) != -1)
+      ui->m_memoCol->setCurrentIndex(m_profile->m_colTypeNum.value(Column::Memo));
     else
       ui->m_memoCol->setCurrentIndex(-1);
     ui->m_memoCol->blockSignals(false);
     return;
   }
 
-  if (m_profile->m_colTypeNum.value(ColumnMemo) != -1)        // check if this memo has any column 'number' assigned...
+  if (m_profile->m_colTypeNum.value(Column::Memo) != -1)        // check if this memo has any column 'number' assigned...
     m_profile->m_memoColList.removeOne(col);           // ...if true remove it from memo list
 
-  if(validateSelectedColumn(col, ColumnMemo))
+  if(validateSelectedColumn(col, Column::Memo))
     if (col != - 1 && !m_profile->m_memoColList.contains(col))
       m_profile->m_memoColList.append(col);
 }
 
 void InvestmentPage::dateColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnDate);
+  validateSelectedColumn(col, Column::Date);
 }
 
 void InvestmentPage::feeColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnFee);
+  validateSelectedColumn(col, Column::Fee);
   feeInputsChanged();
 }
 
 void InvestmentPage::typeColSelected(int col)
 {
-  if (validateSelectedColumn(col, ColumnType))
+  if (validateSelectedColumn(col, Column::Type))
     if (!validateMemoComboBox())  // user could have it already in memo so...
       memoColSelected(col);    // ...if true set memo field again
 }
 
 void InvestmentPage::quantityColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnQuantity);
+  validateSelectedColumn(col, Column::Quantity);
 }
 
 void InvestmentPage::priceColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnPrice);
+  validateSelectedColumn(col, Column::Price);
 }
 
 void InvestmentPage::amountColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnAmount);
+  validateSelectedColumn(col, Column::Amount);
   clearFeeCol();
   feeInputsChanged();
 }
 
 void InvestmentPage::symbolColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnSymbol);
+  validateSelectedColumn(col, Column::Symbol);
   m_imp->m_mapSymbolName.clear();        // new symbol column so this map is no longer valid
 }
 
 void InvestmentPage::nameColSelected(int col)
 {
-  if (validateSelectedColumn(col, ColumnName))
+  if (validateSelectedColumn(col, Column::Name))
     if (!validateMemoComboBox())  // user could have it already in memo so...
       memoColSelected(col);    // ...if true set memo field again
   m_imp->m_mapSymbolName.clear();        // new name column so this map is no longer valid
@@ -358,7 +313,7 @@ void InvestmentPage::feeInputsChanged()
     ui->m_feeIsPercentage->setChecked(true);
     ui->m_minFee->setEnabled(true);
     ui->m_feeRate->setEnabled(true);
-    if (m_profile->m_colTypeNum.value(ColumnAmount) != -1)
+    if (m_profile->m_colTypeNum.value(Column::Amount) != -1)
       ui->m_calculateFee->setEnabled(true);
   }
 }
@@ -376,7 +331,7 @@ void InvestmentPage::minFeeChanged(const QString &text)
 void InvestmentPage::clearFeeCol()
 {
   if (!m_profile->m_feeRate.isEmpty() &&                                                // if fee rate isn't empty...
-      m_profile->m_colTypeNum.value(ColumnFee) >= m_imp->m_file->m_columnCount - 1 &&
+      m_profile->m_colTypeNum.value(Column::Fee) >= m_imp->m_file->m_columnCount - 1 &&
       !ui->m_feeCol->isEnabled()) {  // ...and fee column is last...
     --m_imp->m_file->m_columnCount;
     m_imp->m_file->m_model->removeColumn(m_imp->m_file->m_columnCount);
@@ -390,38 +345,38 @@ void InvestmentPage::clearFeeCol()
   ui->m_feeIsPercentage->setChecked(false);
 }
 
-void InvestmentPage::resetComboBox(const columnTypeE comboBox)
+void InvestmentPage::resetComboBox(const Column comboBox)
 {
   switch (comboBox) {
-    case ColumnAmount:
+    case Column::Amount:
       ui->m_amountCol->setCurrentIndex(-1);
       break;
-    case ColumnDate:
+    case Column::Date:
       ui->m_dateCol->setCurrentIndex(-1);
       break;
-    case ColumnFee:
+    case Column::Fee:
       ui->m_feeCol->setCurrentIndex(-1);
       break;
-    case ColumnMemo:
+    case Column::Memo:
       ui->m_memoCol->setCurrentIndex(-1);
       break;
-    case ColumnPrice:
+    case Column::Price:
       ui->m_priceCol->setCurrentIndex(-1);
       break;
-    case ColumnQuantity:
+    case Column::Quantity:
       ui->m_quantityCol->setCurrentIndex(-1);
       break;
-    case ColumnType:
+    case Column::Type:
       ui->m_typeCol->setCurrentIndex(-1);
       break;
-    case ColumnSymbol:
+    case Column::Symbol:
       ui->m_symbolCol->setCurrentIndex(-1);
       break;
-    case ColumnName:
+    case Column::Name:
       ui->m_nameCol->setCurrentIndex(-1);
       break;
     default:
-      KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", comboBox), i18n("CSV import"));
+      KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
   }
 }
 
@@ -430,19 +385,19 @@ bool InvestmentPage::validateActionType()
   for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row) {
     MyMoneyStatement::Transaction tr;
     // process quantity field
-    int col = m_profile->m_colTypeNum.value(ColumnQuantity);
+    int col = m_profile->m_colTypeNum.value(Column::Quantity);
     tr.m_shares = m_imp->processQuantityField(m_profile, row, col);
 
     // process price field
-    col = m_profile->m_colTypeNum.value(ColumnPrice);
+    col = m_profile->m_colTypeNum.value(Column::Price);
     tr.m_price = m_imp->processPriceField(m_profile, row, col);
 
     // process amount field
-    col = m_profile->m_colTypeNum.value(ColumnAmount);
+    col = m_profile->m_colTypeNum.value(Column::Amount);
     tr.m_amount = m_imp->processAmountField(m_profile, row, col);
 
     // process type field
-    col = m_profile->m_colTypeNum.value(ColumnType);
+    col = m_profile->m_colTypeNum.value(Column::Type);
     tr.m_eAction = m_imp->processActionTypeField(m_profile, row, col);
 
     switch(m_imp->validateActionType(tr)) {
@@ -462,11 +417,11 @@ bool InvestmentPage::validateActionType()
         QStringList colList;
         QStringList colHeaders;
         for (int col = 0; col < m_imp->m_file->m_columnCount; ++col) {
-          colHeaders.append(m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col, ColumnInvalid), QString(i18nc("Unused column", "Unused"))));
+          colHeaders.append(m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col, Column::Invalid), QString(i18nc("Unused column", "Unused"))));
           colList.append(m_imp->m_file->m_model->item(row, col)->text());
         }
         QList<MyMoneyStatement::Transaction::EAction> validActionTypes = m_imp->createValidActionTypes(tr);
-        TransactionDlg* transactionDlg = new TransactionDlg(colList, colHeaders, m_profile->m_colTypeNum.value(ColumnType), validActionTypes);
+        TransactionDlg* transactionDlg = new TransactionDlg(colList, colHeaders, m_profile->m_colTypeNum.value(Column::Type), validActionTypes);
         if (transactionDlg->exec() == QDialog::Rejected) {
           KMessageBox::information(m_dlg,
                                    i18n("<center>No valid action type found for this transaction.</center>"
@@ -478,7 +433,7 @@ bool InvestmentPage::validateActionType()
         delete transactionDlg;
 
         if (unknownType) { // type was unknown so store it
-          col = m_profile->m_colTypeNum.value(ColumnType);
+          col = m_profile->m_colTypeNum.value(Column::Type);
           m_profile->m_transactionNames[tr.m_eAction].append(m_imp->m_file->m_model->item(row, col)->text()); // store action type
         }
       }
@@ -490,7 +445,7 @@ bool InvestmentPage::validateActionType()
   return true;
 }
 
-bool InvestmentPage::validateSelectedColumn(const int col, const columnTypeE type)
+bool InvestmentPage::validateSelectedColumn(const int col, const Column type)
 {
   if (m_profile->m_colTypeNum.value(type) != -1)        // check if this 'type' has any column 'number' assigned...
     m_profile->m_colNumType.remove(m_profile->m_colTypeNum.value(type)); // ...if true remove 'type' assigned to this column 'number'
@@ -519,9 +474,9 @@ bool InvestmentPage::validateMemoComboBox()
   for (int i = 0; i < ui->m_memoCol->count(); ++i)
   {
     QString txt = ui->m_memoCol->itemText(i);
-    if (txt.contains(QChar(QLatin1Char('*'))))  // check if text containing '*' belongs to valid column types
-      if (m_profile->m_colNumType.value(i) != ColumnName &&
-          m_profile->m_colNumType.value(i) != ColumnType) {
+    if (txt.contains(QLatin1Char('*')))  // check if text containing '*' belongs to valid column types
+      if (m_profile->m_colNumType.value(i) != Column::Name &&
+          m_profile->m_colNumType.value(i) != Column::Type) {
         ui->m_memoCol->setItemText(i, QString::number(i + 1));
         m_profile->m_memoColList.removeOne(i);
         return false;
@@ -604,9 +559,11 @@ bool InvestmentPage::validateSecurity()
   return true;
 }
 
-void InvestmentPage::makeQIF(MyMoneyStatement &st, QFile &file)
+void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName)
 {
-  QTextStream out(&file);
+  QFile oFile(outFileName);
+  oFile.open(QIODevice::WriteOnly);
+  QTextStream out(&oFile);
 
   QString buffer;
   QString strEType;
@@ -697,4 +654,5 @@ void InvestmentPage::makeQIF(MyMoneyStatement &st, QFile &file)
     out << buffer;// output qif file
     buffer.clear();
   }
+  oFile.close();
 }

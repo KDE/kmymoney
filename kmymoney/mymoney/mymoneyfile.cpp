@@ -905,6 +905,85 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
   d->addCacheNotification(institution.id(), false);
 }
 
+void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
+{
+  // make sure we have a currency. If none is assigned, we assume base currency
+  if (newAccount.currencyId().isEmpty())
+    newAccount.setCurrencyId(baseCurrency().id());
+
+  MyMoneyFileTransaction ft;
+  try {
+    int pos;
+    // check for ':' in the name and use it as separator for a hierarchy
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+      QString part = newAccount.name().left(pos);
+      QString remainder = newAccount.name().mid(pos + 1);
+      const MyMoneyAccount& existingAccount = subAccountByName(parentAccount, part);
+      if (existingAccount.id().isEmpty()) {
+        newAccount.setName(part);
+
+        addAccount(newAccount, parentAccount);
+        parentAccount = newAccount;
+      } else {
+        parentAccount = existingAccount;
+      }
+      newAccount.setParentAccountId(QString());  // make sure, there's no parent
+      newAccount.clearId();                       // and no id set for adding
+      newAccount.removeAccountIds();              // and no sub-account ids
+      newAccount.setName(remainder);
+    }
+
+    addAccount(newAccount, parentAccount);
+
+    // in case of a loan account, we add the initial payment
+    if ((newAccount.accountType() == MyMoneyAccount::Loan
+         || newAccount.accountType() == MyMoneyAccount::AssetLoan)
+        && !newAccount.value("kmm-loan-payment-acc").isEmpty()
+        && !newAccount.value("kmm-loan-payment-date").isEmpty()) {
+      MyMoneyAccountLoan acc(newAccount);
+      MyMoneyTransaction t;
+      MyMoneySplit a, b;
+      a.setAccountId(acc.id());
+      b.setAccountId(acc.value("kmm-loan-payment-acc").toLatin1());
+      a.setValue(acc.loanAmount());
+      if (acc.accountType() == MyMoneyAccount::Loan)
+        a.setValue(-a.value());
+
+      a.setShares(a.value());
+      b.setValue(-a.value());
+      b.setShares(b.value());
+      a.setMemo(i18n("Loan payout"));
+      b.setMemo(i18n("Loan payout"));
+      t.setPostDate(QDate::fromString(acc.value("kmm-loan-payment-date"), Qt::ISODate));
+      newAccount.deletePair("kmm-loan-payment-acc");
+      newAccount.deletePair("kmm-loan-payment-date");
+      MyMoneyFile::instance()->modifyAccount(newAccount);
+
+      t.addSplit(a);
+      t.addSplit(b);
+      addTransaction(t);
+      createOpeningBalanceTransaction(newAccount, openingBal);
+
+      // in case of an investment account we check if we should create
+      // a brokerage account
+    } else if (newAccount.accountType() == MyMoneyAccount::Investment
+               && !brokerageAccount.name().isEmpty()) {
+      addAccount(brokerageAccount, parentAccount);
+
+      // set a link from the investment account to the brokerage account
+      modifyAccount(newAccount);
+      createOpeningBalanceTransaction(brokerageAccount, openingBal);
+
+    } else
+      createOpeningBalanceTransaction(newAccount, openingBal);
+
+    ft.commit();
+  } catch (const MyMoneyException &e) {
+    qWarning("Unable to create account: %s", qPrintable(e.what()));
+    throw MYMONEYEXCEPTION(e.what());
+  }
+}
+
 void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
 {
   d->checkTransaction(Q_FUNC_INFO);
@@ -2557,6 +2636,66 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
   }
 
   return categoryToAccount(name);
+}
+
+QString MyMoneyFile::checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2)
+{
+  QString accountId;
+  MyMoneyAccount newAccount;
+  bool found = true;
+
+  if (!name.isEmpty()) {
+    // The category might be constructed with an arbitraty depth (number of
+    // colon delimited fields). We try to find a parent account within this
+    // hierarchy by searching the following sequence:
+    //
+    //    aaaa:bbbb:cccc:ddddd
+    //
+    // 1. search aaaa:bbbb:cccc:dddd, create nothing
+    // 2. search aaaa:bbbb:cccc     , create dddd
+    // 3. search aaaa:bbbb          , create cccc:dddd
+    // 4. search aaaa               , create bbbb:cccc:dddd
+    // 5. don't search              , create aaaa:bbbb:cccc:dddd
+
+    newAccount.setName(name);
+    QString accName;      // part to be created (right side in above list)
+    QString parent(name); // a possible parent part (left side in above list)
+    do {
+      accountId = categoryToAccount(parent);
+      if (accountId.isEmpty()) {
+        found = false;
+        // prepare next step
+        if (!accName.isEmpty())
+          accName.prepend(':');
+        accName.prepend(parent.section(':', -1));
+        newAccount.setName(accName);
+        parent = parent.section(':', 0, -2);
+      } else if (!accName.isEmpty()) {
+        newAccount.setParentAccountId(accountId);
+      }
+    } while (!parent.isEmpty() && accountId.isEmpty());
+
+    // if we did not find the category, we create it
+    if (!found) {
+      MyMoneyAccount parent;
+      if (newAccount.parentAccountId().isEmpty()) {
+        if (!value.isNegative() && value2.isNegative())
+          parent = income();
+        else
+          parent = expense();
+      } else {
+        parent = account(newAccount.parentAccountId());
+      }
+      newAccount.setAccountType((!value.isNegative() && value2.isNegative()) ? MyMoneyAccount::Income : MyMoneyAccount::Expense);
+      MyMoneyAccount brokerage;
+      // clear out the parent id, because createAccount() does not like that
+      newAccount.setParentAccountId(QString());
+      createAccount(newAccount, parent, brokerage, MyMoneyMoney());
+      accountId = newAccount.id();
+    }
+  }
+
+  return accountId;
 }
 
 const QList<MyMoneySchedule> MyMoneyFile::scheduleListEx(int scheduleTypes,

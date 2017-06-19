@@ -31,10 +31,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
+#include <mymoneyfile.h>
 
-#include "csvimporter.h"
 #include "csvwizard.h"
+#include "csvimporter.h"
 
 #include "securitydlg.h"
 #include "currenciesdlg.h"
@@ -48,56 +48,35 @@ PricesPage::PricesPage(CSVWizard *dlg, CSVImporter *imp) :
 {
   ui->setupUi(this);
 
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
-
-  connect(ui->button_clear, SIGNAL(clicked()), this, SLOT(clearColumns()));
+  connect(ui->button_clear, &QAbstractButton::clicked, this, &PricesPage::clearColumns);
 
   m_profile = dynamic_cast<PricesProfile *>(m_imp->m_profile);
 
   // initialize column names
-  m_dlg->m_colTypeName.insert(ColumnPrice, i18n("Price"));
-  m_dlg->m_colTypeName.insert(ColumnDate, i18n("Date"));
-}
-
-PricesPage::~PricesPage()
-{
-  delete ui;
-  delete m_securityDlg;
-  delete m_currenciesDlg;
-}
-
-void PricesPage::initializeComboBoxes()
-{
-  // disable prices widgets allowing their initialization
-  disconnect(ui->m_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColSelected(int)));
-  disconnect(ui->m_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColSelected(int)));
-  disconnect(ui->m_priceFraction, SIGNAL(currentIndexChanged(int)), this, SLOT(fractionChanged(int)));
-
-  // clear all existing items before adding new ones
-  ui->m_dateCol->clear();
-  ui->m_priceCol->clear();
-
-  QStringList columnNumbers;
-  for (int i = 0; i < m_imp->m_file->m_columnCount; ++i)
-    columnNumbers.append(QString::number(i + 1));
-
-  // populate comboboxes with col # values
-  ui->m_dateCol->addItems(columnNumbers);
-  ui->m_priceCol->addItems(columnNumbers);
-
-  clearColumns(); // all comboboxes are set to 0 so set them to -1
+  m_dlg->m_colTypeName.insert(Column::Price, i18n("Price"));
+  m_dlg->m_colTypeName.insert(Column::Date, i18n("Date"));
   connect(ui->m_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColSelected(int)));
   connect(ui->m_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColSelected(int)));
   connect(ui->m_priceFraction, SIGNAL(currentIndexChanged(int)), this, SLOT(fractionChanged(int)));
 }
 
+PricesPage::~PricesPage()
+{
+  delete m_securityDlg;
+  delete m_currenciesDlg;
+  delete ui;
+}
+
 void PricesPage::initializePage()
 {
+  const QHash<Column, QComboBox *> columns {{Column::Price, ui->m_priceCol}, {Column::Date, ui->m_dateCol}};
+
   if (ui->m_dateCol->count() != m_imp->m_file->m_columnCount)
-    initializeComboBoxes();
-  ui->m_dateCol->setCurrentIndex(m_imp->m_profile->m_colTypeNum.value(ColumnDate));
-  ui->m_priceCol->setCurrentIndex(m_imp->m_profile->m_colTypeNum.value(ColumnPrice));
+    m_dlg->initializeComboBoxes(columns);
+
+  for (auto it = columns.cbegin(); it != columns.cend(); ++it)
+    it.value()->setCurrentIndex(m_profile->m_colTypeNum.value(it.key()));
+
   ui->m_priceFraction->blockSignals(true);
   foreach (const auto priceFraction, m_imp->m_priceFractions)
     ui->m_priceFraction->addItem(QString::number(priceFraction.toDouble(), 'g', 3));
@@ -122,9 +101,9 @@ bool PricesPage::isComplete() const
 bool PricesPage::validatePage()
 {
   switch (m_imp->m_profile->type()) {
-    case ProfileCurrencyPrices:
+    case Profile::CurrencyPrices:
       return validateCurrencies();
-    case ProfileStockPrices:
+    case Profile::StockPrices:
       return validateSecurity();
     default:
       return false;
@@ -133,12 +112,12 @@ bool PricesPage::validatePage()
 
 void PricesPage::dateColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnDate);
+  validateSelectedColumn(col, Column::Date);
 }
 
 void PricesPage::priceColSelected(int col)
 {
-  validateSelectedColumn(col, ColumnPrice);
+  validateSelectedColumn(col, Column::Price);
 }
 
 void PricesPage::fractionChanged(int col)
@@ -154,24 +133,24 @@ void PricesPage::clearColumns()
   ui->m_priceFraction->setCurrentIndex(-1);
 }
 
-void PricesPage::resetComboBox(const columnTypeE comboBox)
+void PricesPage::resetComboBox(const Column comboBox)
 {
   switch (comboBox) {
-    case ColumnDate:
+    case Column::Date:
       ui->m_dateCol->setCurrentIndex(-1);
       break;
-    case ColumnPrice:
+    case Column::Price:
       ui->m_priceCol->setCurrentIndex(-1);
       break;
     default:
-      KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", comboBox), i18n("CSV import"));
+      KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
   }
 }
 
-bool PricesPage::validateSelectedColumn(const int col, const columnTypeE type)
+bool PricesPage::validateSelectedColumn(const int col, const Column type)
 {
-  QMap<columnTypeE, int> &colTypeNum = m_imp->m_profile->m_colTypeNum;
-  QMap<int, columnTypeE> &colNumType = m_imp->m_profile->m_colNumType;
+  QMap<Column, int> &colTypeNum = m_imp->m_profile->m_colTypeNum;
+  QMap<int, Column> &colNumType = m_imp->m_profile->m_colNumType;
 
   if (colTypeNum.value(type) != -1)            // check if this 'type' has any column 'number' assigned...
     colNumType.remove(colTypeNum.value(type)); // ...if true remove 'type' assigned to this column 'number'

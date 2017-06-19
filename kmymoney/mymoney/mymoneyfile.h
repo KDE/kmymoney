@@ -409,6 +409,7 @@ public:
     */
   void removeInstitution(const MyMoneyInstitution& institution);
 
+  void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
   /**
     * Adds an account to the file-global account pool. A respective
     * account-ID will be generated within this record. The modified
@@ -1093,6 +1094,22 @@ public:
     *            expense() or income().
     **/
   QString createCategory(const MyMoneyAccount& base, const QString& name);
+
+  /**
+    * This method is used to get the account id of the split for
+    * a transaction from the text found in the QIF $ or L record.
+    * If an account with the name is not found, the user is asked
+    * if it should be created.
+    *
+    * @param name name of account as found in the QIF file
+    * @param value value found in the T record
+    * @param value2 value found in the $ record for split transactions
+    *
+    * @return id of the account for the split. If no name is specified
+    *            or the account was not found and not created the
+    *            return value will be "".
+    */
+  QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
 
   const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
       int scheduleOcurrences,

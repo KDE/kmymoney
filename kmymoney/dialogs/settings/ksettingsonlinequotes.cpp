@@ -207,14 +207,14 @@ void KSettingsOnlineQuotes::slotDumpCSVProfile()
   KSharedConfigPtr config = CSVImporter::configFile();
   PricesProfile profile;
   profile.m_profileName = m_currentItem.m_name;
-  profile.m_profileType = ProfileStockPrices;
+  profile.m_profileType = Profile::StockPrices;
   bool profileExists = false;
   bool writeProfile = true;
 
   if (profile.readSettings(config))
     profileExists = true;
   else {
-    profile.m_profileType = ProfileCurrencyPrices;
+    profile.m_profileType = Profile::CurrencyPrices;
     if (profile.readSettings(config))
       profileExists = true;
   }
@@ -231,10 +231,10 @@ void KSettingsOnlineQuotes::slotDumpCSVProfile()
     profile = quoteSources.value(m_currentItem.m_name);
     if (profile.m_profileName.compare(m_currentItem.m_name, Qt::CaseInsensitive) == 0) {
       profile.writeSettings(config);
-      CSVImporter::profilesAction(profile.type(), ProfilesAdd, profile.m_profileName, profile.m_profileName);
+      CSVImporter::profilesAction(profile.type(), ProfileAction::Add, profile.m_profileName, profile.m_profileName);
     }
   }
-  CSVImporter::profilesAction(profile.type(), ProfilesUpdateLastUsed, profile.m_profileName, profile.m_profileName);
+  CSVImporter::profilesAction(profile.type(), ProfileAction::UpdateLastUsed, profile.m_profileName, profile.m_profileName);
 }
 
 void KSettingsOnlineQuotes::slotUpdateEntry()

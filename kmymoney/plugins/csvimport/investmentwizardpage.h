@@ -23,9 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QFile>
 #include <QPointer>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,8 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneystatement.h>
-#include <csvimporter.h>
+#include "csvwizardpage.h"
 
 // ----------------------------------------------------------------------------
 
@@ -42,6 +39,7 @@ class InvestmentProfile;
 class TransactionDlg;
 class SecurityDlg;
 class SecuritiesDlg;
+class MyMoneyStatement;
 
 namespace Ui
 {
@@ -56,15 +54,10 @@ public:
   explicit InvestmentPage(CSVWizard *dlg, CSVImporter *imp);
   ~InvestmentPage();
 
-  Ui::InvestmentPage  *ui;
-
-  QVBoxLayout         *m_pageLayout;
-
-
   /**
   * This method fills QIF file with investment data
   */
-  void                makeQIF(MyMoneyStatement& st, QFile& file);
+  void                makeQIF(const MyMoneyStatement &st, const QString &outFileName);
 
   /**
   * This method validates the column numbers entered by the user.  It then
@@ -79,7 +72,6 @@ private:
   bool                validatePage();
   void                cleanupPage();
 
-  void                initializeComboBoxes();
   void                clearFeeCol();
 
   /**
@@ -88,12 +80,12 @@ private:
   */
   bool                validateMemoComboBox();
 
-  void                resetComboBox(const columnTypeE comboBox);
+  void                resetComboBox(const Column comboBox);
   /**
   * This method is called column on investment page is selected.
   * It sets m_colTypeNum, m_colNumType and runs column validation.
   */
-  bool                validateSelectedColumn(const int col, const columnTypeE type);
+  bool                validateSelectedColumn(const int col, const Column type);
 
   /**
   * This method ensures that every security has symbol and name.
@@ -104,6 +96,7 @@ private:
   QPointer<SecurityDlg>     m_securityDlg;
   QPointer<SecuritiesDlg>   m_securitiesDlg;
   InvestmentProfile        *m_profile;
+  Ui::InvestmentPage       *ui;
 
 private slots:
   void                clearFee();

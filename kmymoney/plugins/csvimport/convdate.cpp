@@ -19,13 +19,13 @@
 
 #include "convdate.h"
 
-#include <QtCore/QStringList>
 #include <QtCore/QDebug>
-#include <QtCore/QRegExp>
+#include <QRegularExpression>
 
-ConvertDate::ConvertDate()
+ConvertDate::ConvertDate():
+  m_dateFormatIndex(DateFormat::YearMonthDay)
+
 {
-  m_dateFormatIndex = 0;
 }
 
 ConvertDate::~ConvertDate()
@@ -38,14 +38,14 @@ QDate ConvertDate::convertDate(const QString& txt)
   QString aMonth;
   QString aDay;
   QString aFormat;
-  static QString dat;
+  QString dat;
   QDate  aDate;
   QString dateFormatString = stringFormat();
 
-  QRegExp rx("[\\. :-]");  //                           replace date field separators '.' ' ' ':' '-'
+  QRegularExpression rx(QStringLiteral("[\\. :-]"));  //                           replace date field separators '.' ' ' ':' '-'
   QString buffer = txt.trimmed();
-  buffer = buffer.replace(rx, QString('/'));   //     ....with '/'
-  int count = buffer.count('/', Qt::CaseSensitive);
+  buffer = buffer.replace(rx, QString::fromLatin1("/"));   //     ....with '/'
+  int count = buffer.count(QLatin1Char('/'), Qt::CaseSensitive);
   if (count == 0) {      //                              no separators so use QDate()
     QDate result  = QDate::fromString(buffer, dateFormatString);
     if (result.year() < 1950) {
@@ -54,14 +54,14 @@ QDate ConvertDate::convertDate(const QString& txt)
     return result;
   }
 
-  QStringList dateSplit = buffer.split('/');
+  QStringList dateSplit = buffer.split(QLatin1Char('/'));
   if (dateSplit.count() > 3) {      //                  it can be date and time
     qDebug("ConvertDate - assuming date and time format");
     bool dateFound = false;
     for (int i = 0; i < dateSplit.count(); i++) {
       if(dateSplit[i].length() == 4 && dateSplit[i].toInt() > 0) {
         switch (m_dateFormatIndex) {
-          case(0) :   //                                 %y %m %d
+          case DateFormat::YearMonthDay:   //                                 %y %m %d
             if(i+2 < dateSplit.count()) {
               aYear =  dateSplit[i];
               aMonth = dateSplit[i+1];
@@ -69,7 +69,7 @@ QDate ConvertDate::convertDate(const QString& txt)
               dateFound = true;
             }
             break;
-          case(1) :   //                                 %m %d %y
+          case DateFormat::MonthDayYear:   //                                 %m %d %y
             if(i-2 >= 0) {
               aMonth = dateSplit[i-2];
               aDay =   dateSplit[i-1];
@@ -77,7 +77,7 @@ QDate ConvertDate::convertDate(const QString& txt)
               dateFound = true;
             }
             break;
-          case(2) :   //                                 %d %m %y
+          case DateFormat::DayMonthYear:   //                                 %d %m %y
             if(i-2 >= 0) {
               aDay =   dateSplit[i-2];
               aMonth = dateSplit[i-1];
@@ -97,17 +97,17 @@ QDate ConvertDate::convertDate(const QString& txt)
     }
   } else if(dateSplit.count() == 3) {
     switch (m_dateFormatIndex) {
-      case(0) :   //                                 %y %m %d
+      case DateFormat::YearMonthDay:   //                                 %y %m %d
         aYear =  dateSplit[0];
         aMonth = dateSplit[1];
         aDay =   dateSplit[2];
         break;
-      case(1) :   //                                 %m %d %y
+      case DateFormat::MonthDayYear:   //                                 %m %d %y
         aMonth = dateSplit[0];
         aDay =   dateSplit[1];
         aYear =  dateSplit[2];
         break;
-      case(2) :   //                                 %d %m %y
+      case DateFormat::DayMonthYear:   //                                 %d %m %y
         aDay =   dateSplit[0];
         aMonth = dateSplit[1];
         aYear =  dateSplit[2];
@@ -124,17 +124,17 @@ QDate ConvertDate::convertDate(const QString& txt)
     else
       return QDate();
     switch (m_dateFormatIndex) {
-      case(0) :   //                                 %y %m %d
+      case DateFormat::YearMonthDay:   //                                 %y %m %d
         aYear =  date.left(4);
         aMonth = date.mid(4,2);
         aDay =   date.right(2);
         break;
-      case(1) :   //                                 %m %d %y
+      case DateFormat::MonthDayYear:   //                                 %m %d %y
         aMonth = date.left(2);
         aDay =   date.mid(2,2);
         aYear =  date.right(4);
         break;
-      case(2) :   //                                 %d %m %y
+      case DateFormat::DayMonthYear:   //                                 %d %m %y
         aDay =   date.left(2);
         aMonth = date.mid(2,2);
         aYear =  date.right(4);
@@ -148,9 +148,9 @@ QDate ConvertDate::convertDate(const QString& txt)
 //                                                 Check year
   if (aYear.length() == 2) {       //                    2 digits
     if ((aYear.toInt() >= 0) && (aYear.toInt() < 50)) {
-      aYear = "20" + aYear;//                      take year to be 2000-2049
+      aYear.prepend(QLatin1String("20"));//                      take year to be 2000-2049
     } else if ((aYear.toInt() >= 50) && (aYear.toInt() <= 99))
-      aYear = "19" + aYear;//                      take year to be 1950-1999
+      aYear.prepend(QLatin1String("19"));//                      take year to be 1950-1999
   } else if (aYear.length() == 4) {
     if ((aYear.toInt() < 1950) || (aYear.toInt() > 2050)) {      //  not a valid year
       return QDate();
@@ -161,41 +161,41 @@ QDate ConvertDate::convertDate(const QString& txt)
   // only years 1950-2050 valid
   //                                               check day
   if (aDay.length() == 1)
-    aDay = '0' + aDay;//                           add a leading '0'
+    aDay.prepend(QLatin1Char('0'));//                           add a leading '0'
   if ((aDay.toInt() < 0) || (aDay.toInt() > 31)      //              check day value
       || (aDay.length()  < 1) || (aDay.length()  > 2)) {
     return QDate();//                              not a valid day
   }
 //                                                 check month
   if (aMonth.length() == 1) {
-    aMonth = '0' + aMonth;
-    aFormat = "MM";
+    aMonth.prepend(QLatin1Char('0'));
+    aFormat = QLatin1String("MM");
   } else if (aMonth.length() == 2) {      //             assume numeric
     bool datefound = ((aMonth.toUInt() > 0) && (aMonth.toUInt() < 13));
     if (!datefound) {
       return QDate();//                            not a valid day
     }
-    aFormat = "MM";//                              aMonth is numeric
+    aFormat = QLatin1String("MM");//                              aMonth is numeric
 
   } else {//                                           aMonth NOT numeric
     if (aMonth.length() == 3)
-      aFormat = "MMM";
+      aFormat = QLatin1String("MMM");
     else
-      aFormat = "MMMM";
+      aFormat = QLatin1String("MMMM");
   }
 
   QString dateFormat;
   switch (m_dateFormatIndex) {
-    case(0) :   //                                 %y %m %d
-      dateFormat = "yyyy" + aFormat + "dd";
+    case DateFormat::YearMonthDay:   //                                 %y %m %d
+      dateFormat = QString::fromLatin1("yyyy%1dd").arg(aFormat);
       dat = aYear + aMonth + aDay;
       break;
-    case(1) :   //                                 %m %d %y
-      dateFormat = aFormat + "dd" + "yyyy";
+    case DateFormat::MonthDayYear:   //                                 %m %d %y
+      dateFormat = QString::fromLatin1("%1ddyyyy").arg(aFormat);
       dat = aMonth + aDay + aYear;
       break;
-    case(2) :   //                                 %d %m %y
-      dateFormat =  "dd" + aFormat + "yyyy";
+    case DateFormat::DayMonthYear:   //                                 %d %m %y
+      dateFormat =  QString::fromLatin1("dd%1yyyy").arg(aFormat);
       dat = aDay + aMonth + aYear;
       break;
     default:
@@ -205,31 +205,23 @@ QDate ConvertDate::convertDate(const QString& txt)
   return aDate;
 }
 
-void ConvertDate::dateFormatSelected(int dateFormat)
+void ConvertDate::setDateFormatIndex(const DateFormat _d)
 {
-  if (dateFormat == -1) {       //                       need UK, USA or ISO date format
-    return;//                                      no selection made
-  }
-  m_dateFormatIndex = dateFormat;
-}
-
-void ConvertDate::setDateFormatIndex(int index)
-{
-  m_dateFormatIndex = index;
+  m_dateFormatIndex = _d;
 }
 
 QString ConvertDate::stringFormat()
 {
   QString dateFormatString;
   switch (m_dateFormatIndex) {
-    case(0) :   //                                 %y %m %d
-      dateFormatString = "yyyyMMdd";
+    case DateFormat::YearMonthDay:   //                                 %y %m %d
+      dateFormatString = QLatin1String("yyyyMMdd");
       break;
-    case(1) :   //                                 %m %d %y
-      dateFormatString = "MMddyyyy";
+    case DateFormat::MonthDayYear:   //                                 %m %d %y
+      dateFormatString = QLatin1String("MMddyyyy");
       break;
-    case(2) :   //                                 %d %m %y
-      dateFormatString =  "ddMMyyyy";
+    case DateFormat::DayMonthYear:   //                                 %d %m %y
+      dateFormatString =  QLatin1String("ddMMyyyy");
       break;
     default:
       qDebug("ConvertDate - date format unknown");

@@ -1,9 +1,11 @@
 /***************************************************************************
-                        convDate.h
+                        convdate.h
                     -------------------
 begin                : Sat Jan 01 2010
 copyright            : (C) 2010 by Allan Anderson
 email                : agander93@gmail.com
+copyright            : (C) 2017 by Łukasz Wojniłowicz
+email                : lukasz.wojnilowicz@gmail.com
 ***************************************************************************/
 
 /**************************************************************************
@@ -18,13 +20,13 @@ email                : agander93@gmail.com
 #ifndef CONVDATE_H
 #define CONVDATE_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QDate>
+#include <QDate>
+#include "csvenums.h"
 
-class ConvertDate: public QObject
+#include "csvimport/kmm_csvimport_core_export.h"
+
+class KMM_CSVIMPORT_CORE_EXPORT ConvertDate
 {
-  Q_OBJECT
 
 public:
   ConvertDate();
@@ -42,18 +44,10 @@ public:
   */
   QString          stringFormat();
 
-  void             setDateFormatIndex(int index);
+  void             setDateFormatIndex(const DateFormat _d);
 
 private:
-  int              m_dateFormatIndex;
-
-private slots:
-
-  /**
-  * This method is called when the user clicks the Date button and selects
-  * the date format for the input file.
-  */
-  void dateFormatSelected(int dateFormat);
+  DateFormat       m_dateFormatIndex;
 }
 ;
 #endif

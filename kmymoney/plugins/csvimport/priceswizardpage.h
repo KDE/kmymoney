@@ -21,9 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QFile>
 #include <QPointer>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,8 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneystatement.h>
-#include <csvimporter.h>
+#include "csvwizardpage.h"
 
 // ----------------------------------------------------------------------------
 
@@ -53,23 +50,17 @@ public:
   explicit PricesPage(CSVWizard *dlg, CSVImporter *imp);
   ~PricesPage();
 
-  Ui::PricesPage      *ui;
-
-  QVBoxLayout         *m_pageLayout;
-
 private:
   void                initializePage();
   bool                isComplete() const;
   bool                validatePage();
 
-  void                initializeComboBoxes();
-
-  void                resetComboBox(const columnTypeE comboBox);
+  void                resetComboBox(const Column comboBox);
   /**
   * This method is called column on prices page is selected.
   * It sets m_colTypeNum, m_colNumType and runs column validation.
   */
-  bool                validateSelectedColumn(const int col, const columnTypeE type);
+  bool                validateSelectedColumn(const int col, const Column type);
 
   /**
   * This method ensures that there is security for price import.
@@ -82,6 +73,7 @@ private:
   bool                validateCurrencies();
 
   PricesProfile      *m_profile;
+  Ui::PricesPage     *ui;
 
   QPointer<SecurityDlg>    m_securityDlg;
   QPointer<CurrenciesDlg>  m_currenciesDlg;

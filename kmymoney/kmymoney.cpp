@@ -2995,34 +2995,8 @@ const MyMoneyAccount& KMyMoneyApp::findAccount(const MyMoneyAccount& acc, const 
 
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  // make sure we have a currency. If none is assigned, we assume base currency
-  if (newAccount.currencyId().isEmpty())
-    newAccount.setCurrencyId(file->baseCurrency().id());
-
-  MyMoneyFileTransaction ft;
+  MyMoneyFile *file = MyMoneyFile::instance();
   try {
-    int pos;
-    // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
-      QString part = newAccount.name().left(pos);
-      QString remainder = newAccount.name().mid(pos + 1);
-      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
-      if (existingAccount.id().isEmpty()) {
-        newAccount.setName(part);
-
-        file->addAccount(newAccount, parentAccount);
-        parentAccount = newAccount;
-      } else {
-        parentAccount = existingAccount;
-      }
-      newAccount.setParentAccountId(QString());  // make sure, there's no parent
-      newAccount.clearId();                       // and no id set for adding
-      newAccount.removeAccountIds();              // and no sub-account ids
-      newAccount.setName(remainder);
-    }
-
     const MyMoneySecurity& sec = file->security(newAccount.currencyId());
     // Check the opening balance
     if (openingBal.isPositive() && newAccount.accountGroup() == MyMoneyAccount::Liability) {
@@ -3043,51 +3017,8 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
         return;
     }
 
-    file->addAccount(newAccount, parentAccount);
+    file->createAccount(newAccount, parentAccount, brokerageAccount, openingBal);
 
-    // in case of a loan account, we add the initial payment
-    if ((newAccount.accountType() == MyMoneyAccount::Loan
-         || newAccount.accountType() == MyMoneyAccount::AssetLoan)
-        && !newAccount.value("kmm-loan-payment-acc").isEmpty()
-        && !newAccount.value("kmm-loan-payment-date").isEmpty()) {
-      MyMoneyAccountLoan acc(newAccount);
-      MyMoneyTransaction t;
-      MyMoneySplit a, b;
-      a.setAccountId(acc.id());
-      b.setAccountId(acc.value("kmm-loan-payment-acc").toLatin1());
-      a.setValue(acc.loanAmount());
-      if (acc.accountType() == MyMoneyAccount::Loan)
-        a.setValue(-a.value());
-
-      a.setShares(a.value());
-      b.setValue(-a.value());
-      b.setShares(b.value());
-      a.setMemo(i18n("Loan payout"));
-      b.setMemo(i18n("Loan payout"));
-      t.setPostDate(QDate::fromString(acc.value("kmm-loan-payment-date"), Qt::ISODate));
-      newAccount.deletePair("kmm-loan-payment-acc");
-      newAccount.deletePair("kmm-loan-payment-date");
-      MyMoneyFile::instance()->modifyAccount(newAccount);
-
-      t.addSplit(a);
-      t.addSplit(b);
-      file->addTransaction(t);
-      file->createOpeningBalanceTransaction(newAccount, openingBal);
-
-      // in case of an investment account we check if we should create
-      // a brokerage account
-    } else if (newAccount.accountType() == MyMoneyAccount::Investment
-               && !brokerageAccount.name().isEmpty()) {
-      file->addAccount(brokerageAccount, parentAccount);
-
-      // set a link from the investment account to the brokerage account
-      file->modifyAccount(newAccount);
-      file->createOpeningBalanceTransaction(brokerageAccount, openingBal);
-
-    } else
-      file->createOpeningBalanceTransaction(newAccount, openingBal);
-
-    ft.commit();
   } catch (const MyMoneyException &e) {
     KMessageBox::information(this, i18n("Unable to add account: %1", e.what()));
   }
@@ -3159,7 +3090,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
     account = dialog->account();
     parentAccount = dialog->parentAccount();
 
-    createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
+    MyMoneyFile::instance()->createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
   }
   delete dialog;
 }

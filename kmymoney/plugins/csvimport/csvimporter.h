@@ -29,48 +29,25 @@
 // QT Includes
 
 #include <QStandardItemModel>
+#include <QSet>
 
 // Project Includes
 
-#include "convdate.h"
-#include "csvutil.h"
-#include "mymoneystatement.h"
+#include <mymoneyaccount.h>
+#include <mymoneystatement.h>
+#include "csvenums.h"
+#include "csvimport/kmm_csvimport_core_export.h"
 
-#include <QWizardPage>
-
-class CSVWizard;
-class CSVImporter;
-
-class CSVWizardPage : public QWizardPage
-{
-public:
-  CSVWizardPage(CSVWizard *dlg, CSVImporter *imp) : QWizardPage(nullptr), m_dlg(dlg), m_imp(imp) {}
-
-protected:
-  CSVWizard   *m_dlg;
-  CSVImporter *m_imp;
-};
-
-enum profileTypeE { ProfileBank, ProfileInvest,
-                    ProfileCurrencyPrices, ProfileStockPrices
-                  };
-
-enum profilesActionE { ProfilesAdd, ProfilesRemove, ProfilesRename, ProfilesUpdateLastUsed };
+class Parse;
+class CsvUtil;
+class ConvertDate;
 
 enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
                        AutoAccountInvest, AutoAccountBank
                      };
 
-enum columnTypeE { ColumnDate, ColumnMemo,
-                   ColumnNumber, ColumnPayee, ColumnAmount,
-                   ColumnCredit, ColumnDebit, ColumnCategory,
-                   ColumnType, ColumnPrice, ColumnQuantity,
-                   ColumnFee, ColumnSymbol, ColumnName,
-                   ColumnEmpty = 0xFE, ColumnInvalid = 0xFF
-                 };
-
 enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
-                     ConfFieldDelimiter, ConfTextDeimiter, ConfDecimalSymbol,
+                     ConfFieldDelimiter, ConfTextDelimiter, ConfDecimalSymbol,
                      ConfStartLine, ConfTrailerLines,
                      ConfOppositeSigns,
                      ConfFeeIsPercentage, ConfFeeRate, ConfMinFee,
@@ -82,18 +59,18 @@ enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
 
 
-class CSVProfile
+class KMM_CSVIMPORT_CORE_NO_EXPORT CSVProfile
 {
 protected:
   CSVProfile() {}
   CSVProfile(const QString &profileName, int encodingMIBEnum,
              int startLine, int trailerLines,
-             int dateFormatIndex, int fieldDelimiterIndex, int textDelimiterIndex, int decimalSymbolIndex,
-             QMap<columnTypeE, int> &colTypeNum) :
+             DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+             QMap<Column, int> &colTypeNum) :
     m_profileName(profileName), m_encodingMIBEnum(encodingMIBEnum),
     m_startLine(startLine), m_trailerLines(trailerLines),
-    m_dateFormatIndex(dateFormatIndex), m_fieldDelimiterIndex(fieldDelimiterIndex),
-    m_textDelimiterIndex(textDelimiterIndex), m_decimalSymbolIndex(decimalSymbolIndex),
+    m_dateFormat(dateFormat), m_fieldDelimiter(fieldDelimiter),
+    m_textDelimiter(textDelimiter), m_decimalSymbol(decimalSymbol),
     m_colTypeNum(colTypeNum)
   {
   initColNumType();
@@ -107,7 +84,7 @@ protected:
 
 public:
   virtual ~CSVProfile() {}
-  virtual profileTypeE type() const = 0;
+  virtual Profile type() const = 0;
   virtual bool readSettings(const KSharedConfigPtr &config) = 0;
   virtual void writeSettings(const KSharedConfigPtr &config) = 0;
 
@@ -120,19 +97,19 @@ public:
   int                       m_endLine;
   int                       m_trailerLines;
 
-  int                       m_dateFormatIndex;
-  int                       m_fieldDelimiterIndex;
-  int                       m_textDelimiterIndex;
-  int                       m_decimalSymbolIndex;
+  DateFormat                m_dateFormat;
+  FieldDelimiter            m_fieldDelimiter;
+  TextDelimiter             m_textDelimiter;
+  DecimalSymbol             m_decimalSymbol;
 
-  QMap<columnTypeE, int>    m_colTypeNum;
-  QMap<int, columnTypeE>    m_colNumType;
+  QMap<Column, int>         m_colTypeNum;
+  QMap<int, Column>         m_colNumType;
 };
 
-class BankingProfile : public CSVProfile
+class KMM_CSVIMPORT_CORE_EXPORT BankingProfile : public CSVProfile
 {
 public:
-  profileTypeE type() const { return ProfileBank; }
+  Profile type() const { return Profile::Banking; }
   bool readSettings(const KSharedConfigPtr &config);
   void writeSettings(const KSharedConfigPtr &config);
 
@@ -141,10 +118,10 @@ public:
   bool             m_oppositeSigns;
 };
 
-class InvestmentProfile : public CSVProfile
+class KMM_CSVIMPORT_CORE_EXPORT InvestmentProfile : public CSVProfile
 {
 public:
-  profileTypeE type() const { return ProfileInvest; }
+  Profile type() const { return Profile::Investment; }
   bool readSettings(const KSharedConfigPtr &config);
   void writeSettings(const KSharedConfigPtr &config);
 
@@ -162,23 +139,23 @@ public:
   int         m_dontAsk;
 };
 
-class PricesProfile : public CSVProfile
+class KMM_CSVIMPORT_CORE_EXPORT PricesProfile : public CSVProfile
 {
 public:
   explicit PricesProfile() : CSVProfile() {}
-  explicit PricesProfile(const profileTypeE profileType) : CSVProfile(), m_profileType(profileType) {}
+  explicit PricesProfile(const Profile profileType) : CSVProfile(), m_profileType(profileType) {}
   PricesProfile(QString profileName, int encodingMIBEnum,
                      int startLine, int trailerLines,
-                     int dateFormatIndex, int fieldDelimiterIndex, int textDelimiterIndex, int decimalSymbolIndex,
-                     QMap<columnTypeE, int> colTypeNum,
-                     int priceFraction, profileTypeE profileType) :
+                     DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+                     QMap<Column, int> colTypeNum,
+                     int priceFraction, Profile profileType) :
     CSVProfile(profileName, encodingMIBEnum,
                startLine, trailerLines,
-               dateFormatIndex, fieldDelimiterIndex, textDelimiterIndex, decimalSymbolIndex,
+               dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
                colTypeNum),
     m_priceFraction(priceFraction), m_profileType(profileType) {}
 
-  profileTypeE type() const { return m_profileType; }
+  Profile type() const { return m_profileType; }
   bool readSettings(const KSharedConfigPtr &config);
   void writeSettings(const KSharedConfigPtr &config);
 
@@ -189,10 +166,10 @@ public:
   int     m_dontAsk;
   int     m_priceFraction;
 
-  profileTypeE m_profileType;
+  Profile m_profileType;
 };
 
-class CSVFile
+class KMM_CSVIMPORT_CORE_EXPORT CSVFile
 {
 public:
   explicit CSVFile();
@@ -220,7 +197,6 @@ public:
   */
   void readFile(CSVProfile *profile);
 
-  CsvUtil            *m_csvUtil;
   Parse              *m_parse;
   QStandardItemModel *m_model;
 
@@ -230,9 +206,8 @@ public:
   int                 m_rowCount;
 };
 
-class CSVImporter : public QObject
+class KMM_CSVIMPORT_CORE_EXPORT CSVImporter
 {
-  Q_OBJECT
 public:
   explicit CSVImporter();
   ~CSVImporter();
@@ -243,7 +218,7 @@ public:
   MyMoneyStatement unattendedPricesImport(const QString &filename, PricesProfile *profile);
 
   static KSharedConfigPtr configFile();
-  void profileFactory(const profileTypeE type, const QString &name);
+  void profileFactory(const Profile type, const QString &name);
   void readMiscSettings();
 
   /**
@@ -261,7 +236,7 @@ public:
   /**
   * This method will update [ProfileNames] in csvimporterrrc
   */
-  static bool profilesAction(const profileTypeE type, const profilesActionE action, const QString &name, const QString &newname);
+  static bool profilesAction(const Profile type, const ProfileAction action, const QString &name, const QString &newname);
 
   /**
   * This methods will ensure that fields of input rows are correct.
@@ -278,7 +253,7 @@ public:
   * This method will try to detect decimal symbol in input column.
   */
   int detectDecimalSymbols(const QList<int> &columns);
-  int detectDecimalSymbol(const int col, const QString &exclude);
+  DecimalSymbol detectDecimalSymbol(const int col, const QString &exclude);
 
   /**
   * This method will try to detect account from csv header.
@@ -344,20 +319,17 @@ public:
 
   QList<MyMoneyMoney>         m_priceFractions;
   QSet<QString>               m_hashSet;
-  QMap<int, int>              m_decimalSymbolIndexMap;
+  QMap<int, DecimalSymbol>    m_decimalSymbolIndexMap;
   QMap<QString, QString>      m_mapSymbolName;
   QMap<autodetectTypeE, bool> m_autodetect;
 
-  static const QMap<columnTypeE, QString>                            m_colTypeConfName;
-  static const QMap<profileTypeE, QString>                           m_profileConfPrefix;
-  static const QMap<MyMoneyStatement::Transaction::EAction, QString> m_transactionConfName;
-  static const QMap<miscSettingsE, QString>                          m_miscSettingsConfName;
-  static const QString                                               m_confProfileNames;
-  static const QString                                               m_confPriorName;
-  static const QString                                               m_confMiscName;
-
-signals:
-  void           statementReady(MyMoneyStatement&);
+  static const QHash<Column, QString>                            m_colTypeConfName;
+  static const QHash<Profile, QString>                           m_profileConfPrefix;
+  static const QHash<MyMoneyStatement::Transaction::EAction, QString> m_transactionConfName;
+  static const QHash<miscSettingsE, QString>                          m_miscSettingsConfName;
+  static const QString                                                m_confProfileNames;
+  static const QString                                                m_confPriorName;
+  static const QString                                                m_confMiscName;
 };
 
 #endif

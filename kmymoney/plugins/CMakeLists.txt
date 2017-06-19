@@ -60,11 +60,9 @@ target_link_libraries(kmm_plugin
   KF5::XmlGui
   KF5::KCMUtils
   KF5::KIOWidgets
-  KF5::XmlGui
   Qt5::Gui
   Qt5::Widgets
   kmm_mymoney
-  Alkimia::alkimia
 )
 
 set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})

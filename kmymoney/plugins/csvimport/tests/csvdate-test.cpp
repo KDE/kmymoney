@@ -36,7 +36,7 @@ void CsvDateTest::cleanup()
 
 void CsvDateTest::testConvertDate()
 {
-  m_convert->setDateFormatIndex(0);  //           ISO date format
+  m_convert->setDateFormatIndex(DateFormat::YearMonthDay);  //           ISO date format
 
   QVERIFY(m_convert->convertDate("2001-11-30") == QDate(2001, 11, 30));
   QVERIFY(m_convert->convertDate("20011130") == QDate(2001, 11, 30));
@@ -50,14 +50,14 @@ void CsvDateTest::testConvertDate()
   QVERIFY(m_convert->convertDate("11-30-2001") == QDate());
   QVERIFY(m_convert->convertDate("11302001") == QDate());
 
-  m_convert->setDateFormatIndex(1);  //           US date format
+  m_convert->setDateFormatIndex(DateFormat::MonthDayYear);  //           US date format
 
   QVERIFY(m_convert->convertDate("2001-11-30") == QDate());
   QVERIFY(m_convert->convertDate("20011130") == QDate());
   QVERIFY(m_convert->convertDate("11-30-2001") == QDate(2001, 11, 30));
   QVERIFY(m_convert->convertDate("11302001") == QDate(2001, 11, 30));
 
-  m_convert->setDateFormatIndex(2);  //             UK/EU date format;
+  m_convert->setDateFormatIndex(DateFormat::DayMonthYear);  //             UK/EU date format;
 
   QVERIFY(m_convert->convertDate("13/09/81") == QDate(1981, 9, 13));
   QVERIFY(m_convert->convertDate("13/09/01") == QDate(2001, 9, 13));

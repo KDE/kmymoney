@@ -28,9 +28,7 @@
 
 // Project Includes
 
-#include "csvimporter.h"
 #include "kmymoneyplugin.h"
-#include "csvwizard.h"
 
 class CSVImporter;
 class CSVWizard;

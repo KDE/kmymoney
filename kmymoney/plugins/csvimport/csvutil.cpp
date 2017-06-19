@@ -15,34 +15,24 @@
  *                                                                         *
  ***************************************************************************/
 #include "csvutil.h"
-
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QDebug>
-
-#include <KLocalizedString>
-#include <KMessageBox>
-#include <mymoneyfile.h>
-#include "kmymoneyutils.h"
-#include "investtransactioneditor.h"
-#include "transactioneditor.h"
-#include "mymoneyaccount.h"
+//#include <QStringList>
+//#include <QVector>
+#include <QRegularExpression>
+#include <QLocale>
 
 Parse::Parse() :
-    m_decimalSymbolIndex(0),
-    m_fieldDelimiterIndex(0),
     m_lastLine(0),
-    m_textDelimiterIndex(0),
-    m_thousandsSeparatorIndex(0),
-    m_symbolFound(false)
+    m_symbolFound(false),
+    m_invalidConversion(false)
 {
-  m_fieldDelimiterCharList << "," << ";" << ":" << "\t";
-  m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
-  m_textDelimiterCharList << "\"" << "'";
-  m_textDelimiterCharacter = m_textDelimiterCharList[m_textDelimiterIndex];
-  m_decimalSymbolList << "." << ",";
-  m_thousandsSeparatorList << "," << ".";
-  m_invalidConversion = false;
+  m_fieldDelimiters = {QLatin1Char(','), QLatin1Char(';'), QLatin1Char(':'), QLatin1Char('\t')};
+  m_textDelimiters = {QLatin1Char('"'), QLatin1Char('\'')};
+  m_decimalSymbols = {QLatin1Char('.'), QLatin1Char(',')};
+  m_thousandsSeparators = {QLatin1Char(','), QLatin1Char('.')};
+
+  setFieldDelimiter(FieldDelimiter::Comma);
+  setTextDelimiter(TextDelimiter::DoubleQuote);
+  setDecimalSymbol(DecimalSymbol::Dot);
 }
 
 Parse::~Parse()
@@ -51,193 +41,86 @@ Parse::~Parse()
 
 QStringList Parse::parseLine(const QString& data)
 {
-  QStringList listIn;
   QStringList listOut;
-  QString txt;
-  QString txt1;
-  m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
-  listIn = data.split(m_fieldDelimiterCharacter);  // firstly, split on m_fieldDelimiterCharacter
-
-  QStringList::const_iterator constIterator;
-
-  for (constIterator = listIn.constBegin(); constIterator < listIn.constEnd(); ++constIterator) {
-    txt = (*constIterator);
-
+  const QStringList listIn = data.split(m_fieldDelimiter);  // firstly, split on m_fieldDelimiterCharacter
+  QString cell;
+  foreach (const auto it, listIn) {
+    cell.append(it);
     // detect where a "quoted" string has been erroneously split, because of a comma,
     // or in a value, a 'thousand separator' being mistaken for a field delimiter.
     //Also, where a 'field seperator' is within quotes and the quotes don't include the whole of the field.
-
-    while ((txt.startsWith(m_textDelimiterCharacter)) && (!txt.mid(1, -1).contains(m_textDelimiterCharacter)))  {
-      if (++constIterator < listIn.constEnd())  {
-        txt1 = (*constIterator);//                       second part of the split string
-        txt += m_fieldDelimiterCharacter + txt1;//       rejoin the string
-      } else break;
+    if (cell.startsWith(m_textDelimiter)) {
+      if (!cell.endsWith(m_textDelimiter)) {
+        cell.append(m_fieldDelimiter);
+        continue;
+      }
+      cell.remove(m_textDelimiter);
     }
-    listOut += txt.remove(m_textDelimiterCharacter);
+    listOut.append(cell);
+    cell.clear();
   }
   return listOut;
 }
 
-QStringList Parse::parseFile(const QString& buf, int strt, int end)
+QStringList Parse::parseFile(const QString &buf)
 {
-  QStringList outBuffer;
-  outBuffer.clear();
   int lineCount = 0;
-  QString tmpBuffer;
-  tmpBuffer.clear();
   bool inQuotes = false;
-  int charCount = buf.count();
-  QString::const_iterator constIterator;
+  QString line;
+  QStringList lines;
 
-  for (constIterator = buf.constBegin(); constIterator != buf.constEnd();
-       ++constIterator) {
-    QString chr = (*constIterator);
-    charCount -= 1;
-    if (chr == m_textDelimiterCharacter) {
-      tmpBuffer += chr;
-      if (inQuotes == true) {      //               if already in quoted field..
-        inQuotes = false;//                    ..end it
-      } else {//                               if not..
-        inQuotes = true;//                     ..start it
-      }
+  foreach (const auto chr, buf) {
+    if (chr == m_textDelimiter) {
+      line += chr;
+      inQuotes = !inQuotes;
       continue;
-
-      //  find carriage return and line feed chars
-
-    } else if ((chr == "\r") || (chr == "\n")) {
-      if (inQuotes == true) {      //               embedded '\n'  or '\r' in quoted field
-        chr = '~';//                           replace it with ~ for now
-        tmpBuffer += chr;
-        if (charCount > 0)      //                      more chars yet
-          continue;//                          more chars yet
-      }
-      //                                       true EOL (not in quotes)
-      if (tmpBuffer.isEmpty()) {
+    } else if (chr == QLatin1Char('\r') || chr == QLatin1Char('\n')) {
+      if (inQuotes) {
+        line += QLatin1Char('~');
         continue;
       }
-      lineCount ++;
-      if (lineCount < strt) {      //   startLine      not yet reached first wanted line
-        tmpBuffer.clear();
+      if (line.isEmpty())
         continue;
-      }
-      outBuffer << tmpBuffer;
-      tmpBuffer.clear();
-      //                                       look for start of wanted data
-      //  if first pass or if not at last line, proceed
-      if ((!end == 0) && (lineCount >= end)) {      //  m_endLine is set from UI after first pass
-        m_lastLine = lineCount;
-        break;
-      }
-    }
-
-    //  end of 'EOL detected' loop
-
-    else {//                                   must be data char
-      tmpBuffer += chr;
-
-      if (charCount > 0) {    //                      more chars yet
-        continue;
-      } else {//                                      else eoFile = true;
-        //  last char in file is data char
-        //  meaning no return on last line
-        //  so bump line count
-        lineCount ++;
-      }
-    }
-    if (!tmpBuffer.isEmpty()) {
-      outBuffer << tmpBuffer;
+      ++lineCount;
+      lines += line;
+      line.clear();
+    } else {
+      line += chr;
+      continue;
     }
   }
   m_lastLine = lineCount;
-  return outBuffer;
+  return lines;
 }
 
-QString Parse::fieldDelimiterCharacter(int index)
+void Parse::setFieldDelimiter(const FieldDelimiter _d)
 {
-  if (index == -1) {
-    return 0;
-  }
-  return m_fieldDelimiterCharList[index];
-}
-
-void Parse::setFieldDelimiterCharacter(int index)
-{
-  m_fieldDelimiterCharacter = m_fieldDelimiterCharList[index];
-}
-
-void Parse::setFieldDelimiterIndex(int index)
-{
-  m_fieldDelimiterIndex = index;
-}
-
-QString Parse::textDelimiterCharacter(int index)
-{
-  return m_textDelimiterCharList[index];
-}
-
-void Parse::setTextDelimiterCharacter(int index)
-{
-  m_textDelimiterCharacter = m_textDelimiterCharList[index];
-}
-
-void Parse::setTextDelimiterIndex(int index)
-{
-  m_textDelimiterIndex = index;
-}
-
-void Parse::decimalSymbolSelected(int val)
-{
-  if (val < 0) {
+  if (_d == FieldDelimiter::Auto)
     return;
-  }
-
-  m_decimalSymbolIndex = val;
-  m_decimalSymbol = m_decimalSymbolList[val];
-  thousandsSeparatorChanged(val);
+  m_fieldDelimiter = m_fieldDelimiters.at((int)_d);
 }
 
-QString Parse::decimalSymbol(int index)
+void Parse::setTextDelimiter(const TextDelimiter _d)
 {
-  return m_decimalSymbolList[index];
+  m_textDelimiter = m_textDelimiters.at((int)_d);
 }
 
-void Parse::setDecimalSymbol(int index)
+void Parse::setDecimalSymbol(const DecimalSymbol _d)
 {
-  m_decimalSymbol = m_decimalSymbolList[index];
-}
-
-int Parse::decimalSymbolIndex()
-{
-  return m_decimalSymbolIndex;
-}
-
-void Parse::setDecimalSymbolIndex(int index)
-{
-  m_decimalSymbolIndex = index;
-}
-
-void Parse::thousandsSeparatorChanged(int val)
-{
-  m_thousandsSeparatorIndex = val;
-  m_thousandsSeparator = m_thousandsSeparatorList[val];
-  if (m_thousandsSeparator == QLocale().groupSeparator()) {
+  if (_d == DecimalSymbol::Auto)
     return;
-  }
+  m_decimalSymbol = m_decimalSymbols.at((int)_d);
+  if (_d == DecimalSymbol::Comma)
+    m_thousandsSeparator = m_thousandsSeparators.at((int)ThousandSeparator::Dot);
+  else
+    m_thousandsSeparator = m_thousandsSeparators.at((int)ThousandSeparator::Comma);
 }
 
-QString Parse::thousandsSeparator()
+QChar Parse::decimalSymbol(const DecimalSymbol _d)
 {
-  return m_thousandsSeparator;
-}
-
-void Parse::setThousandsSeparator(int index)
-{
-  m_thousandsSeparator = m_thousandsSeparatorList[index];
-}
-
-void Parse::setThousandsSeparatorIndex(int index)
-{
-  m_thousandsSeparatorIndex = index;
+  if (_d == DecimalSymbol::Auto)
+    return QChar();
+  return m_decimalSymbols.at((int)_d);
 }
 
 int Parse::lastLine()
@@ -245,66 +128,51 @@ int Parse::lastLine()
   return m_lastLine;
 }
 
-bool Parse::symbolFound()
-{
-  return m_symbolFound;
-}
-
-void Parse::setSymbolFound(bool found)
-{
-  m_symbolFound = found;
-}
-
 QString Parse::possiblyReplaceSymbol(const QString&  str)
 {
+  // examples given if decimal symbol is '.' and thousand symbol is ','
   m_symbolFound = false;
-  m_invalidConversion = false;
+  m_invalidConversion = true;
 
   QString txt = str.trimmed();
-  if (txt.isEmpty()) {
-    return txt;  //                            exit as no decimal symbol
-  }
-  if (txt.contains('(')) {     //              "(" or "Af" = debit
-    txt = txt.remove(QRegExp("[()]"));
-    txt = '-' + txt;
-  }
-  int decimalIndex = txt.indexOf(m_decimalSymbol, 0);
+  if (txt.isEmpty())  // empty strings not allowed
+    return txt;
+
+  bool parentheses = false;
+  if (txt.contains(QLatin1Char('('))) // (1.23) is in fact -1.23
+    parentheses = true;
+
   int length = txt.length();
-  int thouIndex = txt.lastIndexOf(m_thousandsSeparator, -1);
+  int decimalIndex = txt.indexOf(m_decimalSymbol);
+  int thouIndex = txt.lastIndexOf(m_thousandsSeparator);
 
-  //  Check if this col/cell contains decimal symbol
+  txt.remove(QRegularExpression(QStringLiteral("[^\\d.,-+]")));     // remove all non-digits
+  txt.remove(m_thousandsSeparator);
 
-  if (decimalIndex == -1) {     //             selected decimal not found
-    m_symbolFound = false;
-    if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
-      txt.remove(m_thousandsSeparator);
-      txt.remove(QRegularExpression("[^\\d]"));     // remove all non-digits
-      if (!txt.isEmpty())                           // if no digit left, then it isn't number
-        txt = txt + QLocale().decimalPoint() + "00";
-      else
-        m_invalidConversion = true;
-      return txt;
-    } else
-      m_invalidConversion = true;
+  if (txt.isEmpty())  // empty strings not allowed
+    return txt;
+
+  if (decimalIndex == -1) {                                         // e.g. 1 ; 1,234 ; 1,234,567; 12,
+    if (thouIndex == -1 || thouIndex == length - 4)  {              // e.g. 1 ; 1,234 ; 1,234,567
+      txt.append(QLocale().decimalPoint() + QLatin1String("00"));   // e.g. 1.00 ; 1234.00 ; 1234567.00
+      m_invalidConversion = false;
+    }
     return txt;
   }
+  m_symbolFound = true;             // decimal symbol found
 
-  txt.remove(m_thousandsSeparator);  //    remove unwanted old thousands separator
-  //  Found decimal
+  if (decimalIndex < thouIndex)     // e.g. 1.234,567 ; 1.23,45
+    return txt;
 
-  m_symbolFound = true;  //                            found genuine decimal
-
-  if (thouIndex >= 0) {      //                        there was a separator
-    if (decimalIndex < thouIndex) {      //            invalid conversion
-      m_invalidConversion = true;
-    }
-    if (decimalIndex == length - 1) {   //             ...decimal point with no decimal part (strange?)
-      txt += m_decimalSymbol + "00";
-    }
-  }//  thouIndex = -1                            no thousands separator
-
-  //  m_symbolFound = true                      found genuine decimal
+  m_invalidConversion = false;      // it cannot be true after this point
   txt.replace(m_decimalSymbol, QLocale().decimalPoint());  // so swap it
+
+  if (decimalIndex == length - 1)   // e.g. 1. ; 123.
+    txt.append(QLatin1String("00"));
+
+  if (parentheses)
+    txt.prepend(QLatin1Char('-'));
+
   return txt;
 }
 
@@ -314,277 +182,3 @@ bool Parse::invalidConversion()
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------
-
-CsvUtil::CsvUtil() :
-    m_investTransactionEditor(0),
-    m_scannedCategories(false)
-{
-}
-
-CsvUtil::~CsvUtil()
-{
-}
-
-const QString& CsvUtil::feeId(const MyMoneyAccount& invAcc)
-{
-  scanCategories(m_feeId, invAcc, MyMoneyFile::instance()->expense(), i18n("_Fees"));
-  return m_feeId;
-}
-
-const QString& CsvUtil::interestId(const MyMoneyAccount& invAcc)
-{
-  scanCategories(m_interestId, invAcc, MyMoneyFile::instance()->income(), i18n("_Dividend"));
-  return m_interestId;
-}
-
-QString CsvUtil::nameToId(const QString& name, MyMoneyAccount& parent)
-{
-  //  Adapted from KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
-  //  Needed to find/create category:sub-categories
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  QString id = file->categoryToAccount(name, MyMoneyAccount::UnknownAccountType);
-  // if it does not exist, we have to create it
-  if (id.isEmpty()) {
-    MyMoneyAccount newAccount;
-    MyMoneyAccount parentAccount = parent;
-    newAccount.setName(name) ;
-    int pos;
-    // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
-      QString part = newAccount.name().left(pos);
-      QString remainder = newAccount.name().mid(pos + 1);
-      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
-      if (existingAccount.id().isEmpty()) {
-        newAccount.setName(part);
-        newAccount.setAccountType(parentAccount.accountType());
-        file->addAccount(newAccount, parentAccount);
-        parentAccount = newAccount;
-      } else {
-        parentAccount = existingAccount;
-      }
-      newAccount.setParentAccountId(QString());  // make sure, there's no parent
-      newAccount.clearId();                       // and no id set for adding
-      newAccount.removeAccountIds();              // and no sub-account ids
-      newAccount.setName(remainder);
-    }//end while
-    newAccount.setAccountType(parentAccount.accountType());
-
-    // make sure we have a currency. If none is assigned, we assume base currency
-    if (newAccount.currencyId().isEmpty())
-      newAccount.setCurrencyId(file->baseCurrency().id());
-
-    file->addAccount(newAccount, parentAccount);
-    id = newAccount.id();
-  }
-  return id;
-}
-
-QString CsvUtil::expenseId(const QString& name)
-{
-  MyMoneyAccount parent = MyMoneyFile::instance()->expense();
-  return nameToId(name, parent);
-}
-
-QString CsvUtil::interestId(const QString& name)
-{
-  MyMoneyAccount parent = MyMoneyFile::instance()->income();
-  return nameToId(name, parent);
-}
-
-QString CsvUtil::feeId(const QString& name)
-{
-  MyMoneyAccount parent = MyMoneyFile::instance()->expense();
-  return nameToId(name, parent);
-}
-
-
-void CsvUtil::scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName)
-{
-  if (!m_scannedCategories) {
-    previouslyUsedCategories(invAcc.id(), m_feeId, m_interestId);
-    m_scannedCategories = true;
-  }
-
-  if (id.isEmpty()) {
-    MyMoneyFile* file = MyMoneyFile::instance();
-    MyMoneyAccount acc = file->accountByName(defaultName);
-    // if it does not exist, we have to create it
-    if (acc.id().isEmpty()) {
-      MyMoneyAccount parent = parentAccount;
-      acc.setName(defaultName);
-      acc.setAccountType(parent.accountType());
-      acc.setCurrencyId(parent.currencyId());
-      file->addAccount(acc, parent);
-    }
-    id = acc.id();
-  }
-}
-
-void CsvUtil::previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId)
-{
-  feesId.clear();
-  interestId.clear();
-  MyMoneyFile* file = MyMoneyFile::instance();
-  try {
-    MyMoneyAccount acc = file->account(investmentAccount);
-    MyMoneyTransactionFilter filter(investmentAccount);
-    filter.setReportAllSplits(false);
-    // since we assume an investment account here, we need to collect the stock accounts as well
-    filter.addAccount(acc.accountList());
-    QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
-    file->transactionList(list, filter);
-    QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
-    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-      const MyMoneyTransaction& t = (*it_t).first;
-      const MyMoneySplit&s = (*it_t).second;
-      MyMoneySplit assetAccountSplit;
-      QList<MyMoneySplit> feeSplits;
-      QList<MyMoneySplit> interestSplits;
-      MyMoneySecurity security;
-      MyMoneySecurity currency;
-      MyMoneySplit::investTransactionTypeE transactionType;
-      KMyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-      if (feeSplits.count() == 1) {
-        feesId = feeSplits.first().accountId();
-      }
-      if (interestSplits.count() == 1) {
-        interestId = interestSplits.first().accountId();
-      }
-    }
-  } catch (const MyMoneyException &) {
-  }
-}
-
-const QString CsvUtil::checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2)
-{
-  //  Borrowed from MyMoneyQifReader::checkCategory()
-  QString accountId;
-  MyMoneyFile *file = MyMoneyFile::instance();
-  MyMoneyAccount account;
-  bool found = true;
-
-  if (!name.isEmpty()) {
-    // The category might be constructed with an arbitraty depth (number of
-    // colon delimited fields). We try to find a parent account within this
-    // hierarchy by searching the following sequence:
-    //
-    //    aaaa:bbbb:cccc:ddddd
-    //
-    // 1. search aaaa:bbbb:cccc:dddd, create nothing
-    // 2. search aaaa:bbbb:cccc     , create dddd
-    // 3. search aaaa:bbbb          , create cccc:dddd
-    // 4. search aaaa               , create bbbb:cccc:dddd
-    // 5. don't search              , create aaaa:bbbb:cccc:dddd
-
-    account.setName(name);
-    QString accName;      // part to be created (right side in above list)
-    QString parent(name);    // a possible parent part (left side in above list)
-    do {
-      accountId = file->categoryToAccount(parent);
-      if (accountId.isEmpty()) {
-        found = false;
-        // prepare next step
-        if (!accName.isEmpty())
-          accName.prepend(':');
-        accName.prepend(parent.section(':', -1));
-        account.setName(accName);
-        parent = parent.section(':', 0, -2);
-      } else if (!accName.isEmpty()) {
-        account.setParentAccountId(accountId);
-      }
-    } while (!parent.isEmpty() && accountId.isEmpty());
-
-    // if we did not find the category, we create it
-    if (!found) {
-      MyMoneyAccount parent;
-      if (account.parentAccountId().isEmpty()) {
-        if (!value.isNegative() && value2.isNegative())
-          parent = file->income();
-        else
-          parent = file->expense();
-      } else {
-        parent = file->account(account.parentAccountId());
-      }
-      account.setAccountType((!value.isNegative() && value2.isNegative()) ? MyMoneyAccount::Income : MyMoneyAccount::Expense);
-      MyMoneyAccount brokerage;
-      // clear out the parent id, because createAccount() does not like that
-      account.setParentAccountId(QString());
-      createAccount(account, parent, brokerage, MyMoneyMoney());
-      accountId = account.id();
-    }
-  }
-
-  return accountId;
-}
-
-
-void CsvUtil::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  // make sure we have a currency. If none is assigned, we assume base currency
-  if (newAccount.currencyId().isEmpty())
-    newAccount.setCurrencyId(file->baseCurrency().id());
-
-  MyMoneyFileTransaction ft;
-  try {
-    int pos;
-    // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
-      QString part = newAccount.name().left(pos);
-      QString remainder = newAccount.name().mid(pos + 1);
-      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
-      if (existingAccount.id().isEmpty()) {
-        newAccount.setName(part);
-
-        file->addAccount(newAccount, parentAccount);
-        parentAccount = newAccount;
-      } else {
-        parentAccount = existingAccount;
-      }
-      newAccount.setParentAccountId(QString());  // make sure, there's no parent
-      newAccount.clearId();                       // and no id set for adding
-      newAccount.removeAccountIds();              // and no sub-account ids
-      newAccount.setName(remainder);
-    }
-
-    const MyMoneySecurity& sec = file->security(newAccount.currencyId());
-    // Check the opening balance
-    if (openingBal.isPositive() && newAccount.accountGroup() == MyMoneyAccount::Liability) {
-      QString message = i18n("This account is a liability and if the "
-                             "opening balance represents money owed, then it should be negative.  "
-                             "Negate the amount?\n\n"
-                             "Please click Yes to change the opening balance to %1,\n"
-                             "Please click No to leave the amount as %2,\n"
-                             "Please click Cancel to abort the account creation."
-                             , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
-                             , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
-
-      int ans = KMessageBox::questionYesNoCancel(0, message);
-      if (ans == KMessageBox::Yes) {
-        openingBal = -openingBal;
-
-      } else if (ans == KMessageBox::Cancel)
-        return;
-    }
-
-    file->addAccount(newAccount, parentAccount);
-
-    if (newAccount.accountType() == MyMoneyAccount::Investment
-        && !brokerageAccount.name().isEmpty()) {
-      file->addAccount(brokerageAccount, parentAccount);
-
-      // set a link from the investment account to the brokerage account
-      file->modifyAccount(newAccount);
-      file->createOpeningBalanceTransaction(brokerageAccount, openingBal);
-
-    } else
-      file->createOpeningBalanceTransaction(newAccount, openingBal);
-
-    ft.commit();
-  } catch (const MyMoneyException &e) {
-    KMessageBox::information(0, i18n("Unable to add account: %1", e.what()));
-  }
-}
-

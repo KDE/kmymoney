@@ -23,24 +23,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
-#include <QAction>
-#include <QTextCodec>
-#include <QTextStream>
-#include <QMessageBox>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KActionCollection>
-#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystatementreader.h"
-#include "mymoneystatement.h"
-#include "mymoneyfile.h"
+#include "csvimporter.h"
+#include "csvwizard.h"
 
 CsvImporterPlugin::CsvImporterPlugin() :
     KMyMoneyPlugin::Plugin(nullptr, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -69,7 +61,7 @@ void CsvImporterPlugin::startWizardRun()
   m_importer = new CSVImporter;
   m_wizard = new CSVWizard(this, m_importer);
   m_silent = false;
-  connect(m_importer, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
+  connect(m_wizard, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
   m_action->setEnabled(false);//  don't allow further plugins to start while this is open
 }
 

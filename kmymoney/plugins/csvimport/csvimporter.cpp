@@ -22,57 +22,54 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
-#include <QFileInfo>
 #include <QTextCodec>
 #include <QTextStream>
-#include <QMessageBox>
-#include <QDir>
 #include <QFileDialog>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KActionCollection>
 #include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystatementreader.h"
-#include "mymoneyfile.h"
+#include <mymoneyfile.h>
+#include "csvutil.h"
+#include "convdate.h"
 
-const QMap<profileTypeE, QString> CSVImporter::m_profileConfPrefix = QMap<profileTypeE, QString>{
-  {ProfileBank, QStringLiteral("Bank")},
-  {ProfileInvest, QStringLiteral("Invest")},
-  {ProfileCurrencyPrices, QStringLiteral("CPrices")},
-  {ProfileStockPrices, QStringLiteral("SPrices")}
+const QHash<Profile, QString> CSVImporter::m_profileConfPrefix {
+  {Profile::Banking, QStringLiteral("Bank")},
+  {Profile::Investment, QStringLiteral("Invest")},
+  {Profile::CurrencyPrices, QStringLiteral("CPrices")},
+  {Profile::StockPrices, QStringLiteral("SPrices")}
 };
 
-const QMap<columnTypeE, QString> CSVImporter::m_colTypeConfName = QMap<columnTypeE, QString>{
-  {ColumnDate, QStringLiteral("DateCol")},
-  {ColumnMemo, QStringLiteral("MemoCol")},
-  {ColumnNumber, QStringLiteral("NumberCol")},
-  {ColumnPayee, QStringLiteral("PayeeCol")},
-  {ColumnAmount, QStringLiteral("AmountCol")},
-  {ColumnCredit, QStringLiteral("CreditCol")},
-  {ColumnDebit, QStringLiteral("DebitCol")},
-  {ColumnCategory, QStringLiteral("CategoryCol")},
-  {ColumnType, QStringLiteral("TypeCol")},
-  {ColumnPrice, QStringLiteral("PriceCol")},
-  {ColumnQuantity, QStringLiteral("QuantityCol")},
-  {ColumnFee, QStringLiteral("FeeCol")},
-  {ColumnSymbol, QStringLiteral("SymbolCol")},
-  {ColumnName, QStringLiteral("NameCol")},
+const QHash<Column, QString> CSVImporter::m_colTypeConfName {
+  {Column::Date, QStringLiteral("DateCol")},
+  {Column::Memo, QStringLiteral("MemoCol")},
+  {Column::Number, QStringLiteral("NumberCol")},
+  {Column::Payee, QStringLiteral("PayeeCol")},
+  {Column::Amount, QStringLiteral("AmountCol")},
+  {Column::Credit, QStringLiteral("CreditCol")},
+  {Column::Debit, QStringLiteral("DebitCol")},
+  {Column::Category, QStringLiteral("CategoryCol")},
+  {Column::Type, QStringLiteral("TypeCol")},
+  {Column::Price, QStringLiteral("PriceCol")},
+  {Column::Quantity, QStringLiteral("QuantityCol")},
+  {Column::Fee, QStringLiteral("FeeCol")},
+  {Column::Symbol, QStringLiteral("SymbolCol")},
+  {Column::Name, QStringLiteral("NameCol")},
 };
 
-const QMap<miscSettingsE, QString> CSVImporter::m_miscSettingsConfName = QMap<miscSettingsE, QString>{
+const QHash<miscSettingsE, QString> CSVImporter::m_miscSettingsConfName {
   {ConfDirectory, QStringLiteral("Directory")},
   {ConfEncoding, QStringLiteral("Encoding")},
   {ConfDateFormat, QStringLiteral("DateFormat")},
   {ConfFieldDelimiter, QStringLiteral("FieldDelimiter")},
-  {ConfTextDeimiter, QStringLiteral("TextDelimiter")},
+  {ConfTextDelimiter, QStringLiteral("TextDelimiter")},
   {ConfDecimalSymbol, QStringLiteral("DecimalSymbol")},
   {ConfStartLine, QStringLiteral("StartLine")},
   {ConfTrailerLines, QStringLiteral("TrailerLines")},
@@ -89,7 +86,7 @@ const QMap<miscSettingsE, QString> CSVImporter::m_miscSettingsConfName = QMap<mi
   {ConfWidth, QStringLiteral("Width")}
 };
 
-const QMap<MyMoneyStatement::Transaction::EAction, QString> CSVImporter::m_transactionConfName = QMap<MyMoneyStatement::Transaction::EAction, QString>{
+const QHash<MyMoneyStatement::Transaction::EAction, QString> CSVImporter::m_transactionConfName {
   {MyMoneyStatement::Transaction::eaBuy, QStringLiteral("BuyParam")},
   {MyMoneyStatement::Transaction::eaSell, QStringLiteral("SellParam")},
   {MyMoneyStatement::Transaction::eaReinvestDividend, QStringLiteral("ReinvdivParam")},
@@ -123,7 +120,7 @@ MyMoneyStatement CSVImporter::unattendedPricesImport(const QString &filename, Pr
 {
   MyMoneyStatement st;
   m_profile = profile;
-  m_convertDate->setDateFormatIndex(m_profile->m_dateFormatIndex);
+  m_convertDate->setDateFormatIndex(m_profile->m_dateFormat);
 
   if (m_file->getInFileName(filename)) {
     m_file->readFile(m_profile);
@@ -142,21 +139,23 @@ KSharedConfigPtr CSVImporter::configFile()
                                    .filePath(QStringLiteral("csvimporterrc")));
 }
 
-void CSVImporter::profileFactory(const profileTypeE type, const QString &name)
+void CSVImporter::profileFactory(const Profile type, const QString &name)
 {
-  if (!m_profile)
+  if (!m_profile) {
     delete m_profile;
+    m_profile = nullptr;
+  }
 
   switch (type) {
     default:
-    case ProfileInvest:
+    case Profile::Investment:
       m_profile = new InvestmentProfile;
       break;
-    case ProfileBank:
+    case Profile::Banking:
       m_profile = new BankingProfile;
       break;
-    case ProfileCurrencyPrices:
-    case ProfileStockPrices:
+    case Profile::CurrencyPrices:
+    case Profile::StockPrices:
       m_profile = new PricesProfile(type);
       break;
   }
@@ -178,14 +177,14 @@ void CSVImporter::validateConfigFile()
   const KSharedConfigPtr config = configFile();
   KConfigGroup profileNamesGroup(config, m_confProfileNames);
   if (!profileNamesGroup.exists()) {
-    profileNamesGroup.writeEntry(m_profileConfPrefix.value(ProfileBank), QStringList());
-    profileNamesGroup.writeEntry(m_profileConfPrefix.value(ProfileInvest), QStringList());
-    profileNamesGroup.writeEntry(m_profileConfPrefix.value(ProfileCurrencyPrices), QStringList());
-    profileNamesGroup.writeEntry(m_profileConfPrefix.value(ProfileStockPrices), QStringList());
-    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(ProfileBank), int());
-    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(ProfileInvest), int());
-    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(ProfileCurrencyPrices), int());
-    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(ProfileStockPrices), int());
+    profileNamesGroup.writeEntry(m_profileConfPrefix.value(Profile::Banking), QStringList());
+    profileNamesGroup.writeEntry(m_profileConfPrefix.value(Profile::Investment), QStringList());
+    profileNamesGroup.writeEntry(m_profileConfPrefix.value(Profile::CurrencyPrices), QStringList());
+    profileNamesGroup.writeEntry(m_profileConfPrefix.value(Profile::StockPrices), QStringList());
+    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(Profile::Banking), int());
+    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(Profile::Investment), int());
+    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(Profile::CurrencyPrices), int());
+    profileNamesGroup.writeEntry(m_confPriorName + m_profileConfPrefix.value(Profile::StockPrices), int());
     profileNamesGroup.sync();
   }
 
@@ -224,12 +223,12 @@ bool CSVImporter::updateConfigFile(QList<int> &confVer)
   QFile::copy(configFilePath, configFilePath + QLatin1String(".bak"));
 
   KConfigGroup profileNamesGroup(config, m_confProfileNames);
-  QStringList bankProfiles = profileNamesGroup.readEntry(m_profileConfPrefix.value(ProfileBank), QStringList());
-  QStringList investProfiles = profileNamesGroup.readEntry(m_profileConfPrefix.value(ProfileInvest), QStringList());
-  QStringList invalidBankProfiles = profileNamesGroup.readEntry(QLatin1String("Invalid") + m_profileConfPrefix.value(ProfileBank), QStringList());     // get profiles that was marked invalid during last update
-  QStringList invalidInvestProfiles = profileNamesGroup.readEntry(QLatin1String("Invalid") + m_profileConfPrefix.value(ProfileInvest), QStringList());
-  QString bankPrefix = m_profileConfPrefix.value(ProfileBank) + QLatin1Char('-');
-  QString investPrefix = m_profileConfPrefix.value(ProfileInvest) + QLatin1Char('-');
+  QStringList bankProfiles = profileNamesGroup.readEntry(m_profileConfPrefix.value(Profile::Banking), QStringList());
+  QStringList investProfiles = profileNamesGroup.readEntry(m_profileConfPrefix.value(Profile::Investment), QStringList());
+  QStringList invalidBankProfiles = profileNamesGroup.readEntry(QLatin1String("Invalid") + m_profileConfPrefix.value(Profile::Banking), QStringList());     // get profiles that was marked invalid during last update
+  QStringList invalidInvestProfiles = profileNamesGroup.readEntry(QLatin1String("Invalid") + m_profileConfPrefix.value(Profile::Investment), QStringList());
+  QString bankPrefix = m_profileConfPrefix.value(Profile::Banking) + QLatin1Char('-');
+  QString investPrefix = m_profileConfPrefix.value(Profile::Investment) + QLatin1Char('-');
 
   // for kmm < 5.0.0 change 'BankNames' to 'ProfileNames' and remove 'MainWindow' group
   if (confVersion < 500 && bankProfiles.isEmpty()) {
@@ -247,7 +246,7 @@ bool CSVImporter::updateConfigFile(QList<int> &confVer)
   if (invalidBankProfiles.isEmpty() && invalidInvestProfiles.isEmpty())  // if there is no invalid profiles then this might be first update try
     firstTry = true;
 
-  int invalidProfileResponse = QMessageBox::No;
+  int invalidProfileResponse = QDialogButtonBox::No;
 
   for (auto profileName = bankProfiles.begin(); profileName != bankProfiles.end();) {
     KConfigGroup bankProfile(config, bankPrefix + *profileName);
@@ -264,45 +263,46 @@ bool CSVImporter::updateConfigFile(QList<int> &confVer)
       KConfigGroup newProfile;
       if (oldProfileType == QLatin1String("Invest")) {
         oldBankProfile.deleteEntry("BrokerageParam");
-        oldBankProfile.writeEntry(m_colTypeConfName.value(ColumnType), oldBankProfile.readEntry("PayeeCol"));
+        oldBankProfile.writeEntry(m_colTypeConfName.value(Column::Type), oldBankProfile.readEntry("PayeeCol"));
         oldBankProfile.deleteEntry("PayeeCol");
         oldBankProfile.deleteEntry("Filter");
         oldBankProfile.deleteEntry("SecurityName");
 
         lastUsedDirectory = oldBankProfile.readEntry("InvDirectory");
-        newProfile = KConfigGroup(config, m_profileConfPrefix.value(ProfileInvest) + QLatin1Char('-') + *profileName);
+        newProfile = KConfigGroup(config, m_profileConfPrefix.value(Profile::Investment) + QLatin1Char('-') + *profileName);
         investProfiles.append(*profileName);
         profileName = bankProfiles.erase(profileName);
       } else if (oldProfileType == QLatin1String("Banking")) {
         lastUsedDirectory = oldBankProfile.readEntry("CsvDirectory");
-        newProfile = KConfigGroup(config, m_profileConfPrefix.value(ProfileBank) + QLatin1Char('-') + *profileName);
+        newProfile = KConfigGroup(config, m_profileConfPrefix.value(Profile::Banking) + QLatin1Char('-') + *profileName);
         ++profileName;
       } else {
-        if (invalidProfileResponse != QMessageBox::YesToAll && invalidProfileResponse != QMessageBox::NoToAll) {
+        if (invalidProfileResponse != QDialogButtonBox::YesToAll && invalidProfileResponse != QDialogButtonBox::NoToAll) {
           if (!firstTry &&
               !invalidBankProfiles.contains(*profileName)) { // if it isn't first update run and profile isn't on the list of invalid ones then don't bother
             ++profileName;
             continue;
           }
-        invalidProfileResponse = QMessageBox::warning(0, i18n("CSV import"),
-                                       i18n("<center>During update of <b>%1</b><br>"
-                                            "the profile type for <b>%2</b> could not be recognized.<br>"
-                                            "The profile cannot be used because of that.<br>"
-                                            "Do you want to delete it?</center>",
-                                            configFilePath, *profileName),
-                                       QMessageBox::Yes | QMessageBox::YesToAll |
-                                       QMessageBox::No | QMessageBox::NoToAll, QMessageBox::No );
+          invalidProfileResponse = KMessageBox::createKMessageBox(nullptr,
+                                                                  new QDialogButtonBox(QDialogButtonBox::Yes | QDialogButtonBox::YesToAll |
+                                                                                       QDialogButtonBox::No | QDialogButtonBox::NoToAll),
+                                                                  QMessageBox::Warning,
+                                                                  i18n("<center>During update of <b>%1</b><br>"
+                                                                       "the profile type for <b>%2</b> could not be recognized.<br>"
+                                                                       "The profile cannot be used because of that.<br>"
+                                                                       "Do you want to delete it?</center>",
+                                                                       configFilePath, *profileName),
+                                                                  QStringList(), QString(), nullptr, KMessageBox::Dangerous);
         }
-
         switch (invalidProfileResponse) {
-        case QMessageBox::YesToAll:
-        case QMessageBox::Yes:
+        case QDialogButtonBox::YesToAll:
+        case QDialogButtonBox::Yes:
           oldBankProfile.deleteGroup();
           invalidBankProfiles.removeOne(*profileName);
           profileName = bankProfiles.erase(profileName);
           break;
-        case QMessageBox::NoToAll:
-        case QMessageBox::No:
+        case QDialogButtonBox::NoToAll:
+        case QDialogButtonBox::No:
           if (!invalidBankProfiles.contains(*profileName))  // on user request: don't delete profile but keep eye on it
             invalidBankProfiles.append(*profileName);
           ret = false;
@@ -334,8 +334,8 @@ bool CSVImporter::updateConfigFile(QList<int> &confVer)
     ++profileName;
   }
 
-  profileNamesGroup.writeEntry(m_profileConfPrefix.value(ProfileBank), bankProfiles); // update profile names as some of them might have been changed
-  profileNamesGroup.writeEntry(m_profileConfPrefix.value(ProfileInvest), investProfiles);
+  profileNamesGroup.writeEntry(m_profileConfPrefix.value(Profile::Banking), bankProfiles); // update profile names as some of them might have been changed
+  profileNamesGroup.writeEntry(m_profileConfPrefix.value(Profile::Investment), investProfiles);
 
   if (invalidBankProfiles.isEmpty())  // if no invalid profiles then we don't need this variable anymore
     profileNamesGroup.deleteEntry("InvalidBank");
@@ -353,7 +353,7 @@ bool CSVImporter::updateConfigFile(QList<int> &confVer)
   return ret;
 }
 
-bool CSVImporter::profilesAction(const profileTypeE type, const profilesActionE action, const QString &name, const QString &newname)
+bool CSVImporter::profilesAction(const Profile type, const ProfileAction action, const QString &name, const QString &newname)
 {
   bool ret = false;
   const KSharedConfigPtr config = configFile();
@@ -363,16 +363,16 @@ bool CSVImporter::profilesAction(const profileTypeE type, const profilesActionE 
 
   KConfigGroup profileName(config, profileTypeStr + QLatin1Char('-') + name);
   switch (action) {
-    case ProfilesUpdateLastUsed:
+    case ProfileAction::UpdateLastUsed:
       profileNamesGroup.writeEntry(m_confPriorName + profileTypeStr, profiles.indexOf(name));
       break;
-    case ProfilesAdd:
+    case ProfileAction::Add:
       if (!profiles.contains(newname)) {
         profiles.append(newname);
         ret = true;
       }
       break;
-    case ProfilesRemove:
+    case ProfileAction::Remove:
     {
       profiles.removeOne(name);
       profileName.deleteGroup();
@@ -380,7 +380,7 @@ bool CSVImporter::profilesAction(const profileTypeE type, const profilesActionE 
       ret = true;
       break;
     }
-    case ProfilesRename:
+    case ProfileAction::Rename:
     {
       if (!newname.isEmpty() && name != newname) {
         int idx = profiles.indexOf(name);
@@ -423,7 +423,6 @@ bool CSVImporter::validateDecimalSymbols(const QList<int> &columns)
   bool isOK = true;
   foreach (const auto column, columns) {
     m_file->m_parse->setDecimalSymbol(m_decimalSymbolIndexMap.value(column));
-    m_file->m_parse->setThousandsSeparator(m_decimalSymbolIndexMap.value(column));
 
     for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row) {
       QStandardItem *item = m_file->m_model->item(row, column);
@@ -512,20 +511,18 @@ bool CSVImporter::calculateFee()
   if (!profile)
     return false;
   if ((profile->m_feeRate.isEmpty() ||                  // check whether feeRate...
-       profile->m_colTypeNum.value(ColumnAmount) == -1)) // ...and amount is in place
+       profile->m_colTypeNum.value(Column::Amount) == -1)) // ...and amount is in place
     return false;
 
   QString decimalSymbol;
-  if (profile->m_decimalSymbolIndex == 2 ||
-      profile->m_decimalSymbolIndex == -1) {
-    int detectedSymbol = detectDecimalSymbol(profile->m_colTypeNum.value(ColumnAmount), QString());
-    if (detectedSymbol == -1)
+  if (profile->m_decimalSymbol == DecimalSymbol::Auto) {
+    DecimalSymbol detectedSymbol = detectDecimalSymbol(profile->m_colTypeNum.value(Column::Amount), QString());
+    if (detectedSymbol == DecimalSymbol::Auto)
       return false;
     m_file->m_parse->setDecimalSymbol(detectedSymbol);
-    m_file->m_parse->setThousandsSeparator(detectedSymbol); // separator list is in reverse so it's ok
     decimalSymbol = m_file->m_parse->decimalSymbol(detectedSymbol);
   } else
-    decimalSymbol = m_file->m_parse->decimalSymbol(profile->m_decimalSymbolIndex);
+    decimalSymbol = m_file->m_parse->decimalSymbol(profile->m_decimalSymbol);
 
 
   MyMoneyMoney feePercent(m_file->m_parse->possiblyReplaceSymbol(profile->m_feeRate)); // convert 0.67% ...
@@ -543,7 +540,7 @@ bool CSVImporter::calculateFee()
   for (int row = profile->m_startLine; row <= profile->m_endLine; ++row) {
     QString txt, numbers;
     bool ok = false;
-    numbers = txt = m_file->m_model->item(row, profile->m_colTypeNum.value(ColumnAmount))->text();
+    numbers = txt = m_file->m_model->item(row, profile->m_colTypeNum.value(Column::Amount))->text();
     numbers.remove(QRegularExpression(QStringLiteral("[,. ]"))).toInt(&ok);
     if (!ok) {                                      // check if it's numerical string...
       items.append(new QStandardItem(QString()));
@@ -566,7 +563,7 @@ bool CSVImporter::calculateFee()
 
   for (int row = profile->m_endLine + 1; row < m_file->m_rowCount; ++row) // fill rows below with whitespace for nice effect with markUnwantedRows
     items.append(new QStandardItem(QString()));
-  int col = profile->m_colTypeNum.value(ColumnFee);
+  int col = profile->m_colTypeNum.value(Column::Fee);
   if (col == -1) {                                          // fee column isn't present
     m_file->m_model->appendColumn(items);
     ++m_file->m_columnCount;
@@ -577,13 +574,13 @@ bool CSVImporter::calculateFee()
     m_file->m_model->removeColumn(m_file->m_columnCount - 1);
     m_file->m_model->appendColumn(items);
   }
-  profile->m_colTypeNum[ColumnFee] = m_file->m_columnCount - 1;
+  profile->m_colTypeNum[Column::Fee] = m_file->m_columnCount - 1;
   return true;
 }
 
-int CSVImporter::detectDecimalSymbol(const int col, const QString &exclude)
+DecimalSymbol CSVImporter::detectDecimalSymbol(const int col, const QString &exclude)
 {
-  int detectedSymbol = -1;
+  DecimalSymbol detectedSymbol = DecimalSymbol::Auto;
   QString pattern;
 
   QRegularExpression re("^[\\(+-]?\\d+[\\)]?$"); // matches '0' ; '+12' ; '-345' ; '(6789)'
@@ -646,14 +643,14 @@ int CSVImporter::detectDecimalSymbol(const int col, const QString &exclude)
   }
 
   if (dotIsDecimalSeparator)
-    detectedSymbol = 0;
+    detectedSymbol = DecimalSymbol::Dot;
   else if (commaIsDecimalSeparator)
-    detectedSymbol = 1;
+    detectedSymbol = DecimalSymbol::Comma;
   else {  // whole column was empty, but we don't want to fail so take OS's decimal symbol
     if (QLocale().decimalPoint() == QLatin1Char('.'))
-      detectedSymbol = 0;
+      detectedSymbol = DecimalSymbol::Dot;
     else
-      detectedSymbol = 1;
+      detectedSymbol = DecimalSymbol::Comma;
   }
   return detectedSymbol;
 }
@@ -687,11 +684,11 @@ int CSVImporter::detectDecimalSymbols(const QList<int> &columns)
     }
   }
   QString filteredCurrencies = QStringList(currencySymbols.values()).join("");
-  QString pattern = QString(QLatin1String("%1%2")).arg(QLocale().currencySymbol()).arg(filteredCurrencies);
+  QString pattern = QString::fromLatin1("%1%2").arg(QLocale().currencySymbol()).arg(filteredCurrencies);
 
   foreach (const auto column, columns) {
-    int detectedSymbol = detectDecimalSymbol(column, pattern);
-    if (detectedSymbol == -1) {
+    DecimalSymbol detectedSymbol = detectDecimalSymbol(column, pattern);
+    if (detectedSymbol == DecimalSymbol::Auto) {
       ret = column;
       return ret;
     }
@@ -708,7 +705,7 @@ QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<MyMoneyAccount::acco
   QList<MyMoneyAccount> filteredTypes;
   QList<MyMoneyAccount> filteredAccounts;
   QList<MyMoneyAccount>::iterator account;
-  QRegularExpression filterOutChars = QRegularExpression(QStringLiteral("-., "));
+  QRegularExpression filterOutChars(QStringLiteral("[-., ]"));
 
   foreach (const auto account, accountList) {
     if (accountTypes.contains(account.accountType()) && !(account).isClosed())
@@ -719,6 +716,8 @@ QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<MyMoneyAccount::acco
   foreach (const auto account, filteredTypes) {
     QString txt = account.name();
     txt.remove(filterOutChars);
+    if (txt.isEmpty() || txt.length() < 3)
+      continue;
     if (statementHeader.contains(txt, Qt::CaseInsensitive))
       filteredAccounts.append(account);
   }
@@ -744,6 +743,8 @@ QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<MyMoneyAccount::acco
     foreach (const auto account, filteredTypes) {
       QString txt = account.number();
       txt.remove(filterOutChars);
+      if (txt.isEmpty() || txt.length() < 3)
+        continue;
       if (statementHeader.contains(txt, Qt::CaseInsensitive))
         filteredAccounts.append(account);
     }
@@ -758,14 +759,14 @@ bool CSVImporter::detectAccount(MyMoneyStatement &st)
     for (int col = 0; col < m_file->m_columnCount; ++col)
       statementHeader.append(m_file->m_model->item(row, col)->text());
 
-  statementHeader.remove(QRegularExpression(QStringLiteral("-., ")));
+  statementHeader.remove(QRegularExpression(QStringLiteral("[-., ]")));
 
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount::accountTypeE> accountTypes;
 
   switch(m_profile->type()) {
     default:
-    case ProfileBank:
+    case Profile::Banking:
       accountTypes << MyMoneyAccount::Checkings <<
                       MyMoneyAccount::Savings <<
                       MyMoneyAccount::Liability <<
@@ -778,7 +779,7 @@ bool CSVImporter::detectAccount(MyMoneyStatement &st)
                       MyMoneyAccount::Liability;
       accounts = findAccounts(accountTypes, statementHeader);
       break;
-    case ProfileInvest:
+    case Profile::Investment:
       accountTypes << MyMoneyAccount::Investment; // take investment accounts...
       accounts = findAccounts(accountTypes, statementHeader); //...and search them in statement header
       break;
@@ -817,22 +818,22 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   QString txt;
 
   // process number field
-  if (profile->m_colTypeNum.value(ColumnNumber) != -1)
+  if (profile->m_colTypeNum.value(Column::Number) != -1)
     tr.m_strNumber = txt;
 
   // process date field
-  int col = profile->m_colTypeNum.value(ColumnDate);
+  int col = profile->m_colTypeNum.value(Column::Date);
   tr.m_datePosted = processDateField(row, col);
   if (tr.m_datePosted == QDate())
     return false;
 
   // process payee field
-  col = profile->m_colTypeNum.value(ColumnPayee);
+  col = profile->m_colTypeNum.value(Column::Payee);
   if (col != -1)
     tr.m_strPayee = m_file->m_model->item(row, col)->text();
 
   // process memo field
-  col = profile->m_colTypeNum.value(ColumnMemo);
+  col = profile->m_colTypeNum.value(Column::Memo);
   if (col != -1)
     memo.append(m_file->m_model->item(row, col)->text());
 
@@ -847,16 +848,16 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   tr.m_strMemo = memo;
 
   // process amount field
-  col = profile->m_colTypeNum.value(ColumnAmount);
+  col = profile->m_colTypeNum.value(Column::Amount);
   tr.m_amount = processAmountField(profile, row, col);
   if (col != -1 && profile->m_oppositeSigns) // change signs to opposite if requested by user
     tr.m_amount *= MyMoneyMoney(-1);
 
   // process credit/debit field
-  if (profile->m_colTypeNum.value(ColumnCredit) != -1 &&
-      profile->m_colTypeNum.value(ColumnDebit) != -1) {
-    QString credit = m_file->m_model->item(row, profile->m_colTypeNum.value(ColumnCredit))->text();
-    QString debit = m_file->m_model->item(row, profile->m_colTypeNum.value(ColumnDebit))->text();
+  if (profile->m_colTypeNum.value(Column::Credit) != -1 &&
+      profile->m_colTypeNum.value(Column::Debit) != -1) {
+    QString credit = m_file->m_model->item(row, profile->m_colTypeNum.value(Column::Credit))->text();
+    QString debit = m_file->m_model->item(row, profile->m_colTypeNum.value(Column::Debit))->text();
     tr.m_amount = processCreditDebit(credit, debit);
     if (!credit.isEmpty() && !debit.isEmpty())
       return false;
@@ -867,13 +868,13 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   s1.m_strMemo = tr.m_strMemo;
   MyMoneyStatement::Split s2 = s1;
   s2.m_reconcile = tr.m_reconcile;
-  s2.m_amount = (-s1.m_amount);
+  s2.m_amount = -s1.m_amount;
 
   // process category field
-  col = profile->m_colTypeNum.value(ColumnCategory);
+  col = profile->m_colTypeNum.value(Column::Category);
   if (col != -1) {
     txt = m_file->m_model->item(row, col)->text();
-    QString accountId = m_file->m_csvUtil->checkCategory(txt, s1.m_amount, s2.m_amount);
+    QString accountId = MyMoneyFile::instance()->checkCategory(txt, s1.m_amount, s2.m_amount);
 
     if (!accountId.isEmpty()) {
       s2.m_accountId = accountId;
@@ -886,12 +887,12 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   txt.clear();
   for (int i = 0; i < m_file->m_columnCount; ++i)
     txt.append(m_file->m_model->item(row, i)->text());
-  QString hashBase = QString(QLatin1String("%1-%2"))
+  QString hashBase = QString::fromLatin1("%1-%2")
       .arg(tr.m_datePosted.toString(Qt::ISODate))
       .arg(MyMoneyTransaction::hash(txt));
   QString hash;
   for (uchar idx = 0; idx < 0xFF; ++idx) {  // assuming threre will be no more than 256 transactions with the same hashBase
-    hash = QString(QLatin1String("%1-%2")).arg(hashBase).arg(idx);
+    hash = QString::fromLatin1("%1-%2").arg(hashBase).arg(idx);
     QSet<QString>::const_iterator it = m_hashSet.constFind(hash);
     if (it == m_hashSet.constEnd())
       break;
@@ -910,37 +911,36 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   QString memo;
   QString txt;
   // process date field
-  int col = profile->m_colTypeNum.value(ColumnDate);
+  int col = profile->m_colTypeNum.value(Column::Date);
   tr.m_datePosted = processDateField(row, col);
   if (tr.m_datePosted == QDate())
     return false;
 
   // process quantity field
-  col = profile->m_colTypeNum.value(ColumnQuantity);
+  col = profile->m_colTypeNum.value(Column::Quantity);
   tr.m_shares = processQuantityField(profile, row, col);
 
   // process price field
-  col = profile->m_colTypeNum.value(ColumnPrice);
+  col = profile->m_colTypeNum.value(Column::Price);
   tr.m_price = processPriceField(profile, row, col);
 
   // process amount field
-  col = profile->m_colTypeNum.value(ColumnAmount);
+  col = profile->m_colTypeNum.value(Column::Amount);
   tr.m_amount = processAmountField(profile, row, col);
 
   // process type field
-  col = profile->m_colTypeNum.value(ColumnType);
+  col = profile->m_colTypeNum.value(Column::Type);
   tr.m_eAction = processActionTypeField(profile, row, col);
   if (!m_isActionTypeValidated && col != -1 &&   // if action type wasn't validated in wizard then...
       validateActionType(tr) != ValidActionType) // ...check if price, amount, quantity is appropriate
     return false;
 
   // process fee field
-  col = profile->m_colTypeNum.value(ColumnFee);
+  col = profile->m_colTypeNum.value(Column::Fee);
   if (col != -1) {
-    if (profile->m_decimalSymbolIndex == 2) {
-      int decimalSymbolIndex = m_decimalSymbolIndexMap.value(col);
-      m_file->m_parse->setDecimalSymbol(decimalSymbolIndex);
-      m_file->m_parse->setThousandsSeparator(decimalSymbolIndex);
+    if (profile->m_decimalSymbol == DecimalSymbol::Auto) {
+      DecimalSymbol decimalSymbol = m_decimalSymbolIndexMap.value(col);
+      m_file->m_parse->setDecimalSymbol(decimalSymbol);
     }
 
     txt = m_file->m_model->item(row, col)->text();
@@ -959,10 +959,10 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   }
 
   // process symbol and name field
-  col = profile->m_colTypeNum.value(ColumnSymbol);
+  col = profile->m_colTypeNum.value(Column::Symbol);
   if (col != -1)
     tr.m_strSymbol = m_file->m_model->item(row, col)->text();
-  col = profile->m_colTypeNum.value(ColumnName);
+  col = profile->m_colTypeNum.value(Column::Name);
   if (col != -1 &&
       tr.m_strSymbol.isEmpty()) { // case in which symbol field is empty
     txt = m_file->m_model->item(row, col)->text();
@@ -974,7 +974,7 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   tr.m_strSecurity = m_mapSymbolName.value(tr.m_strSymbol); // take name from prepared names to avoid potential name mismatch
 
   // process memo field
-  col = profile->m_colTypeNum.value(ColumnMemo);
+  col = profile->m_colTypeNum.value(Column::Memo);
   if (col != -1)
     memo.append(m_file->m_model->item(row, col)->text());
 
@@ -995,8 +995,8 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   s1.m_amount = tr.m_amount;
   s1.m_strMemo = tr.m_strMemo;
   MyMoneyStatement::Split s2 = s1;
-  s2.m_amount = MyMoneyMoney(-s1.m_amount);
-  s2.m_accountId = m_file->m_csvUtil->checkCategory(tr.m_strInterestCategory, s1.m_amount, s2.m_amount);
+  s2.m_amount = -s1.m_amount;
+  s2.m_accountId = MyMoneyFile::instance()->checkCategory(tr.m_strInterestCategory, s1.m_amount, s2.m_amount);
 
   // deduct fees from amount
   if (tr.m_eAction == MyMoneyStatement::Transaction::eaCashDividend ||
@@ -1020,23 +1020,23 @@ bool CSVImporter::processPriceRow(MyMoneyStatement &st, const PricesProfile *pro
   MyMoneyStatement::Price pr;
 
   // process date field
-  int col = profile->m_colTypeNum.value(ColumnDate);
+  int col = profile->m_colTypeNum.value(Column::Date);
   pr.m_date = processDateField(row, col);
   if (pr.m_date == QDate())
     return false;
 
   // process price field
-  col = profile->m_colTypeNum.value(ColumnPrice);
+  col = profile->m_colTypeNum.value(Column::Price);
   pr.m_amount = processPriceField(profile, row, col);
 
   switch (profile->type()) {
-    case ProfileCurrencyPrices:
+    case Profile::CurrencyPrices:
       if (profile->m_securitySymbol.isEmpty() || profile->m_currencySymbol.isEmpty())
         return false;
       pr.m_strSecurity = profile->m_securitySymbol;
       pr.m_strCurrency = profile->m_currencySymbol;
       break;
-    case ProfileStockPrices:
+    case Profile::StockPrices:
       if (profile->m_securityName.isEmpty())
         return false;
       pr.m_strSecurity = profile->m_securityName;
@@ -1063,8 +1063,8 @@ QDate CSVImporter::processDateField(const int row, const int col)
 MyMoneyMoney CSVImporter::processCreditDebit(QString &credit, QString &debit)
 {
   MyMoneyMoney amount;
-  if (m_profile->m_decimalSymbolIndex == 2)
-    setupFieldDecimalSymbol(m_profile->m_colTypeNum.value(ColumnCredit));
+  if (m_profile->m_decimalSymbol == DecimalSymbol::Auto)
+    setupFieldDecimalSymbol(m_profile->m_colTypeNum.value(Column::Credit));
 
   if (credit.startsWith(QLatin1Char('('))) { // check if brackets notation is used for negative numbers
     credit.remove(QRegularExpression(QStringLiteral("[()]")));
@@ -1103,7 +1103,7 @@ MyMoneyMoney CSVImporter::processQuantityField(const CSVProfile *profile, const 
 {
   MyMoneyMoney shares;
   if (col != -1) {
-    if (profile->m_decimalSymbolIndex == 2)
+    if (profile->m_decimalSymbol == DecimalSymbol::Auto)
       setupFieldDecimalSymbol(col);
 
     QString txt = m_file->m_model->item(row, col)->text();
@@ -1119,7 +1119,7 @@ MyMoneyMoney CSVImporter::processAmountField(const CSVProfile *profile, const in
 {
   MyMoneyMoney amount;
   if (col != -1) {
-    if (profile->m_decimalSymbolIndex == 2)
+    if (profile->m_decimalSymbol == DecimalSymbol::Auto)
       setupFieldDecimalSymbol(col);
 
     QString txt = m_file->m_model->item(row, col)->text();
@@ -1138,7 +1138,7 @@ MyMoneyMoney CSVImporter::processPriceField(const InvestmentProfile *profile, co
 {
   MyMoneyMoney price;
   if (col != -1) {
-    if (profile->m_decimalSymbolIndex == 2)
+    if (profile->m_decimalSymbol == DecimalSymbol::Auto)
       setupFieldDecimalSymbol(col);
 
     QString txt = m_file->m_model->item(row, col)->text();
@@ -1154,7 +1154,7 @@ MyMoneyMoney CSVImporter::processPriceField(const PricesProfile *profile, const 
 {
   MyMoneyMoney price;
   if (col != -1) {
-    if (profile->m_decimalSymbolIndex == 2)
+    if (profile->m_decimalSymbol == DecimalSymbol::Auto)
       setupFieldDecimalSymbol(col);
 
     QString txt = m_file->m_model->item(row, col)->text();
@@ -1193,8 +1193,8 @@ QList<MyMoneyStatement::Transaction::EAction> CSVImporter::createValidActionType
 bool CSVImporter::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName)
 {
   QList<MyMoneySecurity> securityList = MyMoneyFile::instance()->securityList();
-  int symbolCol = m_profile->m_colTypeNum.value(ColumnSymbol);
-  int nameCol = m_profile->m_colTypeNum.value(ColumnName);
+  int symbolCol = m_profile->m_colTypeNum.value(Column::Symbol);
+  int nameCol = m_profile->m_colTypeNum.value(Column::Name);
 
   // sort by availability of symbol and name
   for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row) {
@@ -1256,33 +1256,31 @@ bool CSVImporter::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& only
 }
 
 void CSVImporter::setupFieldDecimalSymbol(int col) {
-  int decimalSymbolIndex = m_decimalSymbolIndexMap.value(col);
-  m_file->m_parse->setDecimalSymbol(decimalSymbolIndex);
-  m_file->m_parse->setThousandsSeparator(decimalSymbolIndex);
+  m_file->m_parse->setDecimalSymbol(m_decimalSymbolIndexMap.value(col));
 }
 
 QList<int> CSVImporter::getNumericalColumns()
 {
   QList<int> columns;
   switch(m_profile->type()) {
-    case ProfileBank:
-      if (m_profile->m_colTypeNum.value(ColumnAmount) != -1) {
-        columns << m_profile->m_colTypeNum.value(ColumnAmount);
+    case Profile::Banking:
+      if (m_profile->m_colTypeNum.value(Column::Amount) != -1) {
+        columns << m_profile->m_colTypeNum.value(Column::Amount);
       } else {
-        columns << m_profile->m_colTypeNum.value(ColumnDebit);
-        columns << m_profile->m_colTypeNum.value(ColumnCredit);
+        columns << m_profile->m_colTypeNum.value(Column::Debit);
+        columns << m_profile->m_colTypeNum.value(Column::Credit);
       }
       break;
-    case ProfileInvest:
-      columns << m_profile->m_colTypeNum.value(ColumnAmount);
-      columns << m_profile->m_colTypeNum.value(ColumnPrice);
-      columns << m_profile->m_colTypeNum.value(ColumnQuantity);
-      if (m_profile->m_colTypeNum.value(ColumnFee) != -1)
-        columns << m_profile->m_colTypeNum.value(ColumnFee);
+    case Profile::Investment:
+      columns << m_profile->m_colTypeNum.value(Column::Amount);
+      columns << m_profile->m_colTypeNum.value(Column::Price);
+      columns << m_profile->m_colTypeNum.value(Column::Quantity);
+      if (m_profile->m_colTypeNum.value(Column::Fee) != -1)
+        columns << m_profile->m_colTypeNum.value(Column::Fee);
       break;
-    case ProfileCurrencyPrices:
-    case ProfileStockPrices:
-      columns << m_profile->m_colTypeNum.value(ColumnPrice);
+    case Profile::CurrencyPrices:
+    case Profile::StockPrices:
+      columns << m_profile->m_colTypeNum.value(Column::Price);
       break;
     default:
       break;
@@ -1293,7 +1291,7 @@ QList<int> CSVImporter::getNumericalColumns()
 bool CSVImporter::createStatement(MyMoneyStatement &st)
 {
   switch (m_profile->type()) {
-    case ProfileBank:
+    case Profile::Banking:
     {
       if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
         return true;
@@ -1311,7 +1309,7 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
       return true;
       break;
     }
-    case ProfileInvest:
+    case Profile::Investment:
     {
       if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
         return true;
@@ -1320,8 +1318,8 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
         detectAccount(st);
 
       InvestmentProfile *profile = dynamic_cast<InvestmentProfile *>(m_profile);
-      if ((m_profile->m_colTypeNum.value(ColumnFee) == -1 ||
-           m_profile->m_colTypeNum.value(ColumnFee) >= m_file->m_columnCount) &&
+      if ((m_profile->m_colTypeNum.value(Column::Fee) == -1 ||
+           m_profile->m_colTypeNum.value(Column::Fee) >= m_file->m_columnCount) &&
           !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
         calculateFee();
 
@@ -1341,8 +1339,8 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
       break;
     }
     default:
-    case ProfileCurrencyPrices:
-    case ProfileStockPrices:
+    case Profile::CurrencyPrices:
+    case Profile::StockPrices:
     {
       if (!st.m_listPrices.isEmpty()) // don't create statement if there is one
         return true;
@@ -1374,10 +1372,10 @@ void CSVProfile::readSettings(const KConfigGroup &profilesGroup)
   m_trailerLines = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfTrailerLines), 0);
   m_encodingMIBEnum = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfEncoding), 106 /* UTF-8 */);
 
-  m_dateFormatIndex = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfDateFormat), 0);
-  m_textDelimiterIndex = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfTextDeimiter), 0);
-  m_fieldDelimiterIndex = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFieldDelimiter), -1);
-  m_decimalSymbolIndex = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfDecimalSymbol), 2);
+  m_dateFormat = static_cast<DateFormat>(profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfDateFormat), (int)DateFormat::YearMonthDay));
+  m_textDelimiter = static_cast<TextDelimiter>(profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfTextDelimiter), (int)TextDelimiter::DoubleQuote));
+  m_fieldDelimiter = static_cast<FieldDelimiter>(profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFieldDelimiter), (int)FieldDelimiter::Auto));
+  m_decimalSymbol = static_cast<DecimalSymbol>(profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfDecimalSymbol), (int)DecimalSymbol::Auto));
   initColNumType();
 }
 
@@ -1391,10 +1389,10 @@ void CSVProfile::writeSettings(KConfigGroup &profilesGroup)
   }
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDirectory), m_lastUsedDirectory);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfEncoding), m_encodingMIBEnum);
-  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDateFormat), m_dateFormatIndex);
-  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfFieldDelimiter), m_fieldDelimiterIndex);
-  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfTextDeimiter), m_textDelimiterIndex);
-  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDecimalSymbol), m_decimalSymbolIndex);
+  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDateFormat), (int)m_dateFormat);
+  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfFieldDelimiter), (int)m_fieldDelimiter);
+  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfTextDelimiter), (int)m_textDelimiter);
+  profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDecimalSymbol), (int)m_decimalSymbol);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfStartLine), m_startLine);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfTrailerLines), m_trailerLines);
 }
@@ -1406,16 +1404,16 @@ bool BankingProfile::readSettings(const KSharedConfigPtr &config)
   if (!profilesGroup.exists())
     exists = false;
 
-  m_colTypeNum[ColumnPayee] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnPayee), -1);
-  m_colTypeNum[ColumnNumber] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnNumber), -1);
-  m_colTypeNum[ColumnAmount] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnAmount), -1);
-  m_colTypeNum[ColumnDebit] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnDebit), -1);
-  m_colTypeNum[ColumnCredit] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnCredit), -1);
-  m_colTypeNum[ColumnDate] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnDate), -1);
-  m_colTypeNum[ColumnCategory] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnCategory), -1);
-  m_colTypeNum[ColumnMemo] = -1; // initialize, otherwise random data may go here
+  m_colTypeNum[Column::Payee] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Payee), -1);
+  m_colTypeNum[Column::Number] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Number), -1);
+  m_colTypeNum[Column::Amount] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Amount), -1);
+  m_colTypeNum[Column::Debit] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Debit), -1);
+  m_colTypeNum[Column::Credit] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Credit), -1);
+  m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Date), -1);
+  m_colTypeNum[Column::Category] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Category), -1);
+  m_colTypeNum[Column::Memo] = -1; // initialize, otherwise random data may go here
   m_oppositeSigns = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfOppositeSigns), 0);
-  m_memoColList = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnMemo), QList<int>());
+  m_memoColList = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Memo), QList<int>());
 
   CSVProfile::readSettings(profilesGroup);
   return exists;
@@ -1427,21 +1425,21 @@ void BankingProfile::writeSettings(const KSharedConfigPtr &config)
   CSVProfile::writeSettings(profilesGroup);
 
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfOppositeSigns), m_oppositeSigns);
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnPayee),
-                           m_colTypeNum.value(ColumnPayee));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnNumber),
-                           m_colTypeNum.value(ColumnNumber));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnAmount),
-                           m_colTypeNum.value(ColumnAmount));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnDebit),
-                           m_colTypeNum.value(ColumnDebit));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnCredit),
-                           m_colTypeNum.value(ColumnCredit));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnDate),
-                           m_colTypeNum.value(ColumnDate));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnCategory),
-                           m_colTypeNum.value(ColumnCategory));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnMemo),
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Payee),
+                           m_colTypeNum.value(Column::Payee));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Number),
+                           m_colTypeNum.value(Column::Number));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Amount),
+                           m_colTypeNum.value(Column::Amount));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Debit),
+                           m_colTypeNum.value(Column::Debit));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Credit),
+                           m_colTypeNum.value(Column::Credit));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Date),
+                           m_colTypeNum.value(Column::Date));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Category),
+                           m_colTypeNum.value(Column::Category));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Memo),
                            m_memoColList);
   profilesGroup.config()->sync();
 }
@@ -1468,20 +1466,20 @@ bool InvestmentProfile::readSettings(const KSharedConfigPtr &config)
   m_transactionNames[MyMoneyStatement::Transaction::eaShrsout] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaShrsout),
                                                                        QString(i18nc("Type of operation as in financial statement", "remove")).split(',', QString::SkipEmptyParts));
 
-  m_colTypeNum[ColumnDate] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnDate), -1);
-  m_colTypeNum[ColumnType] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnType), -1);  //use for type col.
-  m_colTypeNum[ColumnPrice] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnPrice), -1);
-  m_colTypeNum[ColumnQuantity] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnQuantity), -1);
-  m_colTypeNum[ColumnAmount] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnAmount), -1);
-  m_colTypeNum[ColumnName] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnName), -1);
-  m_colTypeNum[ColumnFee] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnFee), -1);
-  m_colTypeNum[ColumnSymbol] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnSymbol), -1);
-  m_colTypeNum[ColumnMemo] = -1; // initialize, otherwise random data may go here
+  m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Date), -1);
+  m_colTypeNum[Column::Type] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Type), -1);  //use for type col.
+  m_colTypeNum[Column::Price] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Price), -1);
+  m_colTypeNum[Column::Quantity] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Quantity), -1);
+  m_colTypeNum[Column::Amount] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Amount), -1);
+  m_colTypeNum[Column::Name] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Name), -1);
+  m_colTypeNum[Column::Fee] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Fee), -1);
+  m_colTypeNum[Column::Symbol] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Symbol), -1);
+  m_colTypeNum[Column::Memo] = -1; // initialize, otherwise random data may go here
   m_feeIsPercentage = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFeeIsPercentage), 0);
   m_feeRate = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFeeRate), QString());
   m_minFee = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfMinFee), QString());
 
-  m_memoColList = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnMemo), QList<int>());
+  m_memoColList = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Memo), QList<int>());
   m_securityName = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecurityName), QString());
   m_securitySymbol = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecuritySymbol), QString());
   m_dontAsk = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfDontAsk), 0);
@@ -1519,23 +1517,23 @@ void InvestmentProfile::writeSettings(const KSharedConfigPtr &config)
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecuritySymbol), m_securitySymbol);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDontAsk), m_dontAsk);
 
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnDate),
-                           m_colTypeNum.value(ColumnDate));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnType),
-                           m_colTypeNum.value(ColumnType));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnQuantity),
-                           m_colTypeNum.value(ColumnQuantity));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnAmount),
-                           m_colTypeNum.value(ColumnAmount));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnPrice),
-                           m_colTypeNum.value(ColumnPrice));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnSymbol),
-                           m_colTypeNum.value(ColumnSymbol));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnName),
-                           m_colTypeNum.value(ColumnName));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnFee),
-                           m_colTypeNum.value(ColumnFee));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnMemo),
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Date),
+                           m_colTypeNum.value(Column::Date));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Type),
+                           m_colTypeNum.value(Column::Type));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Quantity),
+                           m_colTypeNum.value(Column::Quantity));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Amount),
+                           m_colTypeNum.value(Column::Amount));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Price),
+                           m_colTypeNum.value(Column::Price));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Symbol),
+                           m_colTypeNum.value(Column::Symbol));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Name),
+                           m_colTypeNum.value(Column::Name));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Fee),
+                           m_colTypeNum.value(Column::Fee));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Memo),
                            m_memoColList);
   profilesGroup.config()->sync();
 }
@@ -1547,8 +1545,8 @@ bool PricesProfile::readSettings(const KSharedConfigPtr &config)
   if (!profilesGroup.exists())
     exists = false;
 
-  m_colTypeNum[ColumnDate] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnDate), -1);
-  m_colTypeNum[ColumnPrice] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(ColumnPrice), -1);
+  m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Date), -1);
+  m_colTypeNum[Column::Price] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Price), -1);
   m_priceFraction = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfPriceFraction), 2);
   m_securityName = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecurityName), QString());
   m_securitySymbol = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecuritySymbol), QString());
@@ -1564,10 +1562,10 @@ void PricesProfile::writeSettings(const KSharedConfigPtr &config)
   KConfigGroup profilesGroup(config, CSVImporter::m_profileConfPrefix.value(type()) + QLatin1Char('-') + m_profileName);
   CSVProfile::writeSettings(profilesGroup);
 
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnDate),
-                           m_colTypeNum.value(ColumnDate));
-  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(ColumnPrice),
-                           m_colTypeNum.value(ColumnPrice));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Date),
+                           m_colTypeNum.value(Column::Date));
+  profilesGroup.writeEntry(CSVImporter::m_colTypeConfName.value(Column::Price),
+                           m_colTypeNum.value(Column::Price));
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfPriceFraction), m_priceFraction);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecurityName), m_securityName);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfSecuritySymbol), m_securitySymbol);
@@ -1579,14 +1577,12 @@ void PricesProfile::writeSettings(const KSharedConfigPtr &config)
 CSVFile::CSVFile()
 {
   m_parse = new Parse;
-  m_csvUtil = new CsvUtil;
-  m_model = new QStandardItemModel();
+  m_model = new QStandardItemModel;
 }
 
 CSVFile::~CSVFile()
 {
   delete m_parse;
-  delete m_csvUtil;
   delete m_model;
 }
 
@@ -1596,8 +1592,8 @@ void CSVFile::getStartEndRow(CSVProfile *profile)
   if (profile->m_endLine > profile->m_trailerLines)
     profile->m_endLine -= profile->m_trailerLines;
 
-  if (profile->m_startLine > m_rowCount - 1)   // Don't allow m_startLine > m_endLine
-    profile->m_startLine = m_rowCount - 1;
+  if (profile->m_startLine > profile->m_endLine)   // Don't allow m_startLine > m_endLine
+    profile->m_startLine = profile->m_endLine;
 }
 
 void CSVFile::getColumnCount(CSVProfile *profile, const QStringList &rows)
@@ -1605,37 +1601,37 @@ void CSVFile::getColumnCount(CSVProfile *profile, const QStringList &rows)
   if (rows.isEmpty())
     return;
 
-  QList<int> delimiterIndexes;
-  if (profile->m_fieldDelimiterIndex == -1)
-    delimiterIndexes = QList<int>{0, 1, 2, 3};  // include all delimiters to test or ...
+  QVector<FieldDelimiter> delimiterIndexes;
+  if (profile->m_fieldDelimiter == FieldDelimiter::Auto)
+    delimiterIndexes = QVector<FieldDelimiter>{FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab};  // include all delimiters to test or ...
   else
-    delimiterIndexes = QList<int>{profile->m_fieldDelimiterIndex};   // ... only the one specified
+    delimiterIndexes = QVector<FieldDelimiter>{profile->m_fieldDelimiter};   // ... only the one specified
 
   QList<int> totalDelimiterCount({0, 0, 0, 0}); //  Total in file for each delimiter
   QList<int> thisDelimiterCount({0, 0, 0, 0});  //  Total in this line for each delimiter
   int colCount = 0;                             //  Total delimiters in this line
-  int possibleDelimiter = 0;
+  FieldDelimiter possibleDelimiter = FieldDelimiter::Comma;
   m_columnCount = 0;
 
   foreach (const auto row, rows) {
     foreach(const auto delimiterIndex, delimiterIndexes) {
-      m_parse->setFieldDelimiterIndex(delimiterIndex);
+      m_parse->setFieldDelimiter(delimiterIndex);
       colCount = m_parse->parseLine(row).count(); //  parse each line using each delimiter
 
-      if (colCount > thisDelimiterCount.at(delimiterIndex))
-        thisDelimiterCount[delimiterIndex] = colCount;
+      if (colCount > thisDelimiterCount.at((int)delimiterIndex))
+        thisDelimiterCount[(int)delimiterIndex] = colCount;
 
-      if (thisDelimiterCount[delimiterIndex] > m_columnCount)
-        m_columnCount = thisDelimiterCount.at(delimiterIndex);
+      if (thisDelimiterCount[(int)delimiterIndex] > m_columnCount)
+        m_columnCount = thisDelimiterCount.at((int)delimiterIndex);
 
-      totalDelimiterCount[delimiterIndex] += colCount;
-      if (totalDelimiterCount.at(delimiterIndex) > totalDelimiterCount.at(possibleDelimiter))
+      totalDelimiterCount[(int)delimiterIndex] += colCount;
+      if (totalDelimiterCount.at((int)delimiterIndex) > totalDelimiterCount.at((int)possibleDelimiter))
         possibleDelimiter = delimiterIndex;
     }
   }
-  if (delimiterIndexes.count() != 1)                    // if purpose was to autodetect...
-    profile->m_fieldDelimiterIndex = possibleDelimiter; // ... then change field delimiter
-  m_parse->setFieldDelimiterIndex(profile->m_fieldDelimiterIndex); // restore original field delimiter
+  if (delimiterIndexes.count() != 1)                      // if purpose was to autodetect...
+    profile->m_fieldDelimiter = possibleDelimiter;        // ... then change field delimiter
+  m_parse->setFieldDelimiter(profile->m_fieldDelimiter);  // restore original field delimiter
 }
 
 bool CSVFile::getInFileName(QString inFileName)
@@ -1683,12 +1679,10 @@ bool CSVFile::getInFileName(QString inFileName)
 
 void CSVFile::setupParser(CSVProfile *profile)
 {
-  if (profile->m_decimalSymbolIndex != 2) {
-    m_parse->setDecimalSymbol(profile->m_decimalSymbolIndex);
-    m_parse->setThousandsSeparator(profile->m_decimalSymbolIndex);
-  }
-  m_parse->setFieldDelimiterCharacter(profile->m_fieldDelimiterIndex);
-  m_parse->setTextDelimiterCharacter(profile->m_textDelimiterIndex);
+  if (profile->m_decimalSymbol != DecimalSymbol::Auto)
+    m_parse->setDecimalSymbol(profile->m_decimalSymbol);
+  m_parse->setFieldDelimiter(profile->m_fieldDelimiter);
+  m_parse->setTextDelimiter(profile->m_textDelimiter);
 }
 
 void CSVFile::readFile(CSVProfile *profile)
@@ -1703,8 +1697,8 @@ void CSVFile::readFile(CSVProfile *profile)
 
   QString buf = inStream.readAll();
   inFile.close();
-  m_parse->setTextDelimiterCharacter(profile->m_textDelimiterIndex);
-  QStringList rows = m_parse->parseFile(buf, 1, 0);  // parse the buffer
+  m_parse->setTextDelimiter(profile->m_textDelimiter);
+  QStringList rows = m_parse->parseFile(buf);        // parse the buffer
   m_rowCount = m_parse->lastLine();                  // won't work without above line
   getColumnCount(profile, rows);
   getStartEndRow(profile);

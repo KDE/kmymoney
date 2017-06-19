@@ -24,7 +24,6 @@
 
 #include <QDesktopWidget>
 #include <QCloseEvent>
-#include <QDebug>
 #include <QTextCodec>
 #include <QAbstractButton>
 
@@ -39,6 +38,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "csvimporterplugin.h"
+#include "csvutil.h"
+#include "convdate.h"
+#include "csvimporter.h"
 #include "ui_csvwizard.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
@@ -52,10 +55,10 @@
 #include "ui_securitydlg.h"
 
 CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
-    ui(new Ui::CSVWizard),
-    m_plugin(plugin),
-    m_imp(importer),
-    m_wiz(new QWizard)
+  ui(new Ui::CSVWizard),
+  m_plugin(plugin),
+  m_imp(importer),
+  m_wiz(new QWizard)
 {
   ui->setupUi(this);
   ui->tableView->setModel(m_imp->m_file->m_model);
@@ -121,14 +124,12 @@ CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
 CSVWizard::~CSVWizard()
 {
   delete ui;
-  if (m_wiz)
-    delete m_wiz;
 }
 
 void CSVWizard::showStage()
 {
   QString str = ui->label_intro->text();
-  ui->label_intro->setText(QLatin1String("<b>") + str + QLatin1String("/<b>"));
+  ui->label_intro->setText(QString::fromLatin1("<b>%1</b>").arg(str));
 }
 
 void CSVWizard::readWindowSize(const KSharedConfigPtr& config) {
@@ -159,7 +160,7 @@ void CSVWizard::slotIdChanged(int id)
   m_stageLabels[m_lastId]->setText(txt);
 
   txt = m_stageLabels[m_curId]->text();
-  txt = QLatin1String("<b>") + txt + QLatin1String("</b>");
+  txt = QString::fromLatin1("<b>%1</b>").arg(txt);
   m_stageLabels[m_curId]->setText(txt);
 }
 
@@ -301,7 +302,7 @@ void CSVWizard::slotClose()
 {
   m_imp->m_profile->m_lastUsedDirectory = m_imp->m_file->m_inFileName;
   m_imp->m_profile->writeSettings(CSVImporter::configFile());
-  m_imp->profilesAction(m_imp->m_profile->type(), ProfilesUpdateLastUsed, m_imp->m_profile->m_profileName, m_imp->m_profile->m_profileName);
+  m_imp->profilesAction(m_imp->m_profile->type(), ProfileAction::UpdateLastUsed, m_imp->m_profile->m_profileName, m_imp->m_profile->m_profileName);
   close();
 }
 
@@ -320,20 +321,20 @@ void CSVWizard::fileDialogClicked()
   m_skipSetup = m_pageIntro->ui->m_skipSetup->isChecked();
 
   switch(m_imp->m_profile->type()) {
-    case ProfileInvest:
+    case Profile::Investment:
       if (!m_pageInvestment) {
         m_pageInvestment = new InvestmentPage(this, m_imp);
         m_wiz->setPage(CSVWizard::PageInvestment, m_pageInvestment);
       }
       break;
-    case ProfileBank:
+    case Profile::Banking:
       if (!m_pageBanking) {
         m_pageBanking = new BankingPage(this, m_imp);
         m_wiz->setPage(CSVWizard::PageBanking, m_pageBanking);
       }
       break;
-    case ProfileStockPrices:
-    case ProfileCurrencyPrices:
+    case Profile::StockPrices:
+    case Profile::CurrencyPrices:
       if (!m_pagePrices) {
         m_pagePrices = new PricesPage(this, m_imp);
         m_wiz->setPage(CSVWizard::PagePrices, m_pagePrices);
@@ -353,11 +354,11 @@ void CSVWizard::fileDialogClicked()
 void CSVWizard::importClicked()
 {
   switch (m_imp->m_profile->type()) {
-    case ProfileBank:
+    case Profile::Banking:
       if (!m_pageBanking->validateCreditDebit())
         return;
       break;
-    case ProfileInvest:
+    case Profile::Investment:
       if (!m_pageInvestment->validateActionType())
         return;
       break;
@@ -368,17 +369,17 @@ void CSVWizard::importClicked()
   if (!m_imp->createStatement(m_st))
     return;
   slotClose();
-  emit m_imp->statementReady(m_st);
+  emit statementReady(m_st);
 }
 
 void CSVWizard::saveAsQIFClicked()
 {
   switch (m_imp->m_profile->type()) {
-    case ProfileBank:
+    case Profile::Banking:
       if (!m_pageBanking->validateCreditDebit())
         return;
       break;
-    case ProfileInvest:
+    case Profile::Investment:
       if (!m_pageInvestment->validateActionType())
         return;
       break;
@@ -396,26 +397,42 @@ void CSVWizard::saveAsQIFClicked()
   outFileName = QFileDialog::getSaveFileName(this, i18n("Save QIF"), outFileName, i18n("QIF Files (*.qif)"));
   if (outFileName.isEmpty())
     return;
-  QFile oFile(outFileName);
-  oFile.open(QIODevice::WriteOnly);
   switch (m_imp->m_profile->type()) {
-    case ProfileBank:
-      m_pageBanking->makeQIF(m_st, oFile);
+    case Profile::Banking:
+      m_pageBanking->makeQIF(m_st, outFileName);
       break;
-    case ProfileInvest:
-      m_pageInvestment->makeQIF(m_st, oFile);
+    case Profile::Investment:
+      m_pageInvestment->makeQIF(m_st, outFileName);
       break;
     default:
       break;
   }
-  oFile.close();
+}
+
+void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
+{
+  QStringList columnNumbers;
+  for (int i = 0; i < m_imp->m_file->m_columnCount; ++i)
+    columnNumbers.append(QString::number(i + 1));
+
+  foreach (const auto column, columns) {
+    // disable widgets allowing their initialization
+    column->blockSignals(true);
+    // clear all existing items before adding new ones
+    column->clear();
+    // populate comboboxes with col # values
+    column->addItems(columnNumbers);
+    // all comboboxes are set to 0 so set them to -1
+    column->setCurrentIndex(-1);
+    // enable widgets after their initialization
+    column->blockSignals(false);
+  }
 }
 
 //-------------------------------------------------------------------------------------------------------
 IntroPage::IntroPage(CSVWizard *dlg, CSVImporter *imp) :
   CSVWizardPage(dlg, imp),
-  ui(new Ui::IntroPage),
-  m_pageLayout(0)
+  ui(new Ui::IntroPage)
 {
   ui->setupUi(this);
 }
@@ -445,13 +462,13 @@ void IntroPage::initializePage()
   ui->m_profiles->lineEdit()->setClearButtonEnabled(true);
 
   connect(ui->m_profiles, SIGNAL(currentIndexChanged(int)), this, SLOT(slotComboSourceIndexChanged(int)));
-  connect(ui->m_add, SIGNAL(clicked()), this, SLOT(slotAddProfile()));
-  connect(ui->m_remove, SIGNAL(clicked()), this, SLOT(slotRemoveProfile()));
-  connect(ui->m_rename, SIGNAL(clicked()), this, SLOT(slotRenameProfile()));
-  connect(ui->m_profilesBank, SIGNAL(toggled(bool)), this, SLOT(slotBankRadioToggled(bool)));
-  connect(ui->m_profilesInvest, SIGNAL(toggled(bool)), this, SLOT(slotInvestRadioToggled(bool)));
-  connect(ui->m_profilesCurrencyPrices, SIGNAL(toggled(bool)), this, SLOT(slotCurrencyPricesRadioToggled(bool)));
-  connect(ui->m_profilesStockPrices, SIGNAL(toggled(bool)), this, SLOT(slotStockPricesRadioToggled(bool)));
+  connect(ui->m_add, &QAbstractButton::clicked, this, &IntroPage::slotAddProfile);
+  connect(ui->m_remove, &QAbstractButton::clicked, this, &IntroPage::slotRemoveProfile);
+  connect(ui->m_rename, &QAbstractButton::clicked, this, &IntroPage::slotRenameProfile);
+  connect(ui->m_profilesBank, &QAbstractButton::toggled, this, &IntroPage::slotBankRadioToggled);
+  connect(ui->m_profilesInvest, &QAbstractButton::toggled, this, &IntroPage::slotInvestRadioToggled);
+  connect(ui->m_profilesCurrencyPrices, &QAbstractButton::toggled, this, &IntroPage::slotCurrencyPricesRadioToggled);
+  connect(ui->m_profilesStockPrices, &QAbstractButton::toggled, this, &IntroPage::slotStockPricesRadioToggled);
   if (m_dlg->m_initialHeight == -1 || m_dlg->m_initialWidth == -1) {
     m_dlg->m_initialHeight = m_dlg->geometry().height();
     m_dlg->m_initialWidth = m_dlg->geometry().width();
@@ -475,20 +492,20 @@ bool IntroPage::validatePage()
 
 void IntroPage::slotAddProfile()
 {
-  profileChanged(ProfilesAdd);
+  profileChanged(ProfileAction::Add);
 }
 
 void IntroPage::slotRemoveProfile()
 {
-  profileChanged(ProfilesRemove);
+  profileChanged(ProfileAction::Remove);
 }
 
 void IntroPage::slotRenameProfile()
 {
-  profileChanged(ProfilesRename);
+  profileChanged(ProfileAction::Rename);
 }
 
-void IntroPage::profileChanged(const profilesActionE action)
+void IntroPage::profileChanged(const ProfileAction action)
 {
   QString cbText = ui->m_profiles->currentText();
   if (cbText.isEmpty()) // you cannot neither add nor remove empty name profile or rename to empty name
@@ -497,8 +514,8 @@ void IntroPage::profileChanged(const profilesActionE action)
   int cbIndex = ui->m_profiles->currentIndex();
 
   switch (action) {
-    case ProfilesRename:
-    case ProfilesAdd:
+    case ProfileAction::Rename:
+    case ProfileAction::Add:
     {
       int dupIndex = m_profiles.indexOf(QRegularExpression (cbText));
       if (dupIndex == cbIndex && cbIndex != -1)  // if profile name wasn't changed then return
@@ -512,7 +529,7 @@ void IntroPage::profileChanged(const profilesActionE action)
       }
       break;
     }
-    case ProfilesRemove:
+    case ProfileAction::Remove:
       if (m_profiles.value(cbIndex) != cbText) // user changed name of the profile and tries to remove it
         return;
       break;
@@ -522,21 +539,21 @@ void IntroPage::profileChanged(const profilesActionE action)
 
   if (CSVImporter::profilesAction(m_profileType, action, m_profiles.value(cbIndex), cbText)) {
     switch (action) {
-      case ProfilesAdd:
+      case ProfileAction::Add:
         m_profiles.append(cbText);
         ui->m_profiles->addItem(cbText);
         ui->m_profiles->setCurrentIndex(m_profiles.count() - 1);
         KMessageBox::information(m_dlg,
                                  i18n("<center>Profile <b>%1</b> has been added.</center>", cbText));
         break;
-      case ProfilesRemove:
+      case ProfileAction::Remove:
         m_profiles.removeAt(cbIndex);
         ui->m_profiles->removeItem(cbIndex);
         KMessageBox::information(m_dlg,
                                  i18n("<center>Profile <b>%1</b> has been removed.</center>",
                                       cbText));
         break;
-      case ProfilesRename:
+      case ProfileAction::Rename:
         ui->m_profiles->setItemText(cbIndex, cbText);
         KMessageBox::information(m_dlg,
                                  i18n("<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>",
@@ -565,7 +582,7 @@ void IntroPage::slotComboSourceIndexChanged(int idx)
   }
 }
 
-void IntroPage::profileTypeChanged(const profileTypeE profileType, bool toggled)
+void IntroPage::profileTypeChanged(const Profile profileType, bool toggled)
 {
   if (!toggled)
     return;
@@ -574,22 +591,22 @@ void IntroPage::profileTypeChanged(const profileTypeE profileType, bool toggled)
   m_profileType = profileType;
   QString profileTypeStr;
   switch (m_profileType) {
-    case ProfileBank:
+    case Profile::Banking:
       ui->m_profilesInvest->setChecked(false);
       ui->m_profilesStockPrices->setChecked(false);
       ui->m_profilesCurrencyPrices->setChecked(false);
       break;
-    case ProfileInvest:
+    case Profile::Investment:
       ui->m_profilesBank->setChecked(false);
       ui->m_profilesStockPrices->setChecked(false);
       ui->m_profilesCurrencyPrices->setChecked(false);
       break;
-    case ProfileStockPrices:
+    case Profile::StockPrices:
       ui->m_profilesBank->setChecked(false);
       ui->m_profilesInvest->setChecked(false);
       ui->m_profilesCurrencyPrices->setChecked(false);
       break;
-    case ProfileCurrencyPrices:
+    case Profile::CurrencyPrices:
       ui->m_profilesBank->setChecked(false);
       ui->m_profilesInvest->setChecked(false);
       ui->m_profilesStockPrices->setChecked(false);
@@ -610,22 +627,22 @@ void IntroPage::profileTypeChanged(const profileTypeE profileType, bool toggled)
 
 void IntroPage::slotBankRadioToggled(bool toggled)
 {
-  profileTypeChanged(ProfileBank, toggled);
+  profileTypeChanged(Profile::Banking, toggled);
 }
 
 void IntroPage::slotInvestRadioToggled(bool toggled)
 {
-  profileTypeChanged(ProfileInvest, toggled);
+  profileTypeChanged(Profile::Investment, toggled);
 }
 
 void IntroPage::slotCurrencyPricesRadioToggled(bool toggled)
 {
-  profileTypeChanged(ProfileCurrencyPrices, toggled);
+  profileTypeChanged(Profile::CurrencyPrices, toggled);
 }
 
 void IntroPage::slotStockPricesRadioToggled(bool toggled)
 {
-  profileTypeChanged(ProfileStockPrices, toggled);
+  profileTypeChanged(Profile::StockPrices, toggled);
 }
 
 SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporter *imp) :
@@ -633,9 +650,9 @@ SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporter *imp) :
   ui(new Ui::SeparatorPage)
 {
   ui->setupUi(this);
-
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
+  connect(ui->m_encoding, SIGNAL(currentIndexChanged(int)), this, SLOT(encodingChanged(int)));
+  connect(ui->m_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(fieldDelimiterChanged(int)));
+  connect(ui->m_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(textDelimiterChanged(int)));
 }
 
 SeparatorPage::~SeparatorPage()
@@ -646,15 +663,17 @@ SeparatorPage::~SeparatorPage()
 void SeparatorPage::initializePage()
 {
   // comboboxes are preset to -1 and, in new profile case, can be set here to -1 as well ...
+  // ... so block their signals until setting them ...
+  ui->m_encoding->blockSignals(true);
+  ui->m_fieldDelimiter->blockSignals(true);
+  ui->m_textDelimiter->blockSignals(true);
   initializeEncodingCombobox();
   ui->m_encoding->setCurrentIndex(ui->m_encoding->findData(m_imp->m_profile->m_encodingMIBEnum));
-  ui->m_fieldDelimiter->setCurrentIndex(m_imp->m_profile->m_fieldDelimiterIndex);
-  ui->m_textDelimiter->setCurrentIndex(m_imp->m_profile->m_textDelimiterIndex);
-
-  // ... so connect their signals after setting them ...
-  connect(ui->m_encoding, SIGNAL(currentIndexChanged(int)), this, SLOT(encodingChanged(int)));
-  connect(ui->m_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(fieldDelimiterChanged(int)));
-  connect(ui->m_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(textDelimiterChanged(int)));
+  ui->m_fieldDelimiter->setCurrentIndex((int)m_imp->m_profile->m_fieldDelimiter);
+  ui->m_textDelimiter->setCurrentIndex((int)m_imp->m_profile->m_textDelimiter);
+  ui->m_encoding->blockSignals(false);
+  ui->m_fieldDelimiter->blockSignals(false);
+  ui->m_textDelimiter->blockSignals(false);
 
   // ... and ensure that their signal receivers will always be called
   emit ui->m_encoding->currentIndexChanged(ui->m_encoding->currentIndex());
@@ -669,7 +688,6 @@ void SeparatorPage::initializePage()
 
 void SeparatorPage::initializeEncodingCombobox()
 {
-  ui->m_encoding->blockSignals(true);
   ui->m_encoding->clear();
 
   QList<QTextCodec *>   codecs;
@@ -702,7 +720,6 @@ void SeparatorPage::initializeEncodingCombobox()
 
   foreach (const auto codec, codecs)
     ui->m_encoding->addItem(codec->name(), codec->mibEnum());
-  ui->m_encoding->blockSignals(false);
 }
 
 void SeparatorPage::encodingChanged(const int index)
@@ -722,16 +739,16 @@ void SeparatorPage::fieldDelimiterChanged(const int index)
   if (index == -1 &&                                        // if field delimiter isn't set...
       !m_imp->m_autodetect.value(AutoFieldDelimiter))  // ... and user disabled autodetecting...
     return;                                                 // ... then wait for him to choose
-  else if (index == m_imp->m_profile->m_fieldDelimiterIndex)
+  else if (index == (int)m_imp->m_profile->m_fieldDelimiter)
     return;
 
-  m_imp->m_profile->m_fieldDelimiterIndex = index;
+  m_imp->m_profile->m_fieldDelimiter = static_cast<FieldDelimiter>(int(index));
   m_imp->m_file->readFile(m_imp->m_profile);      // get column count, we get with this fieldDelimiter
   m_imp->m_file->setupParser(m_imp->m_profile);
 
   if (index == -1) {
     ui->m_fieldDelimiter->blockSignals(true);
-    ui->m_fieldDelimiter->setCurrentIndex(m_imp->m_profile->m_fieldDelimiterIndex);
+    ui->m_fieldDelimiter->setCurrentIndex((int)m_imp->m_profile->m_fieldDelimiter);
     ui->m_fieldDelimiter->blockSignals(false);
   }
   m_dlg->updateWindowSize();
@@ -745,12 +762,12 @@ void SeparatorPage::textDelimiterChanged(const int index)
     return;
   }
 
-  m_imp->m_profile->m_textDelimiterIndex = index;
+  m_imp->m_profile->m_textDelimiter = static_cast<TextDelimiter>(index);
   m_imp->m_file->setupParser(m_imp->m_profile);
 
   if (index == -1) {
     ui->m_textDelimiter->blockSignals(true);
-    ui->m_textDelimiter->setCurrentIndex(m_imp->m_profile->m_textDelimiterIndex);
+    ui->m_textDelimiter->setCurrentIndex((int)m_imp->m_profile->m_textDelimiter);
     ui->m_textDelimiter->blockSignals(false);
   }
   emit completeChanged();
@@ -763,16 +780,16 @@ bool SeparatorPage::isComplete() const
       ui->m_fieldDelimiter->currentIndex() != -1 &&
       ui->m_textDelimiter->currentIndex() != -1) {
     switch(m_imp->m_profile->type()) {
-      case ProfileBank:
+      case Profile::Banking:
         if (m_imp->m_file->m_columnCount > 2)
           rc = true;
         break;
-      case ProfileInvest:
+      case Profile::Investment:
         if (m_imp->m_file->m_columnCount > 3)
           rc = true;
         break;
-      case ProfileCurrencyPrices:
-      case ProfileStockPrices:
+      case Profile::CurrencyPrices:
+      case Profile::StockPrices:
         if (m_imp->m_file->m_columnCount > 1)
           rc = true;
         break;
@@ -792,8 +809,6 @@ void SeparatorPage::cleanupPage()
 {
   //  On completion with error force use of 'Back' button.
   //  ...to allow resetting of 'Skip setup'
-  disconnect(ui->m_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(fieldDelimiterChanged(int)));
-  disconnect(ui->m_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(textDelimiterChanged(int)));
   m_dlg->m_pageIntro->initializePage();  //  Need to show button(QWizard::CustomButton1) not 'NextButton'
 }
 
@@ -802,8 +817,8 @@ RowsPage::RowsPage(CSVWizard *dlg, CSVImporter *imp) :
     ui(new Ui::RowsPage)
 {
   ui->setupUi(this);
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
+  connect(ui->m_startLine, SIGNAL(valueChanged(int)), this, SLOT(startRowChanged(int)));;
+  connect(ui->m_endLine, SIGNAL(valueChanged(int)), this, SLOT(endRowChanged(int)));
 }
 
 RowsPage::~RowsPage()
@@ -813,19 +828,17 @@ RowsPage::~RowsPage()
 
 void RowsPage::initializePage()
 {
-//  disconnect(ui->m_startLine, &QSpinBox::valueChanged, this, &RowsPage::startRowChanged);
-//  disconnect(ui->m_endLine, &QSpinBox::valueChanged, this, &RowsPage::endRowChanged);
-
+  ui->m_startLine->blockSignals(true);
+  ui->m_endLine->blockSignals(true);
   ui->m_startLine->setMaximum(m_imp->m_file->m_rowCount);
   ui->m_endLine->setMaximum(m_imp->m_file->m_rowCount);
   ui->m_startLine->setValue(m_imp->m_profile->m_startLine + 1);
   ui->m_endLine->setValue(m_imp->m_profile->m_endLine + 1);
+  ui->m_startLine->blockSignals(false);
+  ui->m_endLine->blockSignals(false);
 
   m_dlg->markUnwantedRows();
   m_dlg->m_vScrollBar->setValue(m_imp->m_profile->m_startLine);
-
-  connect(ui->m_startLine, SIGNAL(valueChanged(int)), this, SLOT(startRowChanged(int)));;
-  connect(ui->m_endLine, SIGNAL(valueChanged(int)), this, SLOT(endRowChanged(int)));
 
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch <<
@@ -837,8 +850,6 @@ void RowsPage::initializePage()
 
 void RowsPage::cleanupPage()
 {
-  disconnect(ui->m_startLine, SIGNAL(valueChanged(int)), this, SLOT(startRowChanged(int)));;
-  disconnect(ui->m_endLine, SIGNAL(valueChanged(int)), this, SLOT(endRowChanged(int)));
   m_dlg->clearBackground();
 }
 
@@ -846,14 +857,14 @@ int RowsPage::nextId() const
 {
   int ret;
   switch (m_imp->m_profile->type()) {
-    case ProfileBank:
+    case Profile::Banking:
       ret = CSVWizard::PageBanking;
       break;
-    case ProfileInvest:
+    case Profile::Investment:
       ret = CSVWizard::PageInvestment;
       break;
-    case ProfileStockPrices:
-    case ProfileCurrencyPrices:
+    case Profile::StockPrices:
+    case Profile::CurrencyPrices:
       ret = CSVWizard::PagePrices;
       break;
     default:
@@ -866,12 +877,13 @@ int RowsPage::nextId() const
 void RowsPage::startRowChanged(int val)
 {
   if (val > m_imp->m_file->m_rowCount) {
-    ui->m_startLine->setValue(m_imp->m_file->m_rowCount);
+    ui->m_startLine->setValue(m_imp->m_file->m_rowCount - 1);
     return;
   }
   --val;
   if (val > m_imp->m_profile->m_endLine) {
-    ui->m_startLine->setValue(m_imp->m_profile->m_endLine);
+    if (m_imp->m_profile->m_endLine <= m_imp->m_file->m_rowCount)
+      ui->m_startLine->setValue(m_imp->m_profile->m_endLine + 1);
     return;
   }
   m_imp->m_profile->m_startLine = val;
@@ -882,12 +894,13 @@ void RowsPage::startRowChanged(int val)
 void RowsPage::endRowChanged(int val)
 {
   if (val > m_imp->m_file->m_rowCount) {
-    ui->m_endLine->setValue(m_imp->m_file->m_rowCount);
+    ui->m_endLine->setValue(m_imp->m_file->m_rowCount - 1);
     return;
   }
   --val;
   if (val < m_imp->m_profile->m_startLine) {
-    ui->m_endLine->setValue(m_imp->m_profile->m_startLine);
+    if (m_imp->m_profile->m_startLine <= m_imp->m_file->m_rowCount)
+      ui->m_endLine->setValue(m_imp->m_profile->m_startLine + 1);
     return;
   }
   m_imp->m_profile->m_trailerLines = m_imp->m_file->m_rowCount - val;
@@ -896,16 +909,13 @@ void RowsPage::endRowChanged(int val)
 }
 
 
-
-
-
 FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporter *imp) :
   CSVWizardPage(dlg, imp),
     ui(new Ui::FormatsPage)
 {
   ui->setupUi(this);
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
+  connect(ui->m_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));
+  connect(ui->m_decimalSymbol, SIGNAL(currentIndexChanged(int)), this, SLOT(decimalSymbolChanged(int)));
 }
 
 FormatsPage::~FormatsPage()
@@ -915,8 +925,6 @@ FormatsPage::~FormatsPage()
 
 void FormatsPage::initializePage()
 {
-  disconnect(ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));
-  disconnect(ui->comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), this, SLOT(decimalSymbolChanged(int)));
   m_isDecimalSymbolOK = false;
   m_isDateFormatOK = false;
   QList<QWizard::WizardButton> layout;
@@ -935,15 +943,20 @@ void FormatsPage::initializePage()
   wizard()->button(QWizard::CustomButton3)->setEnabled(false);
   wizard()->button(QWizard::FinishButton)->setEnabled(false);
 
-  ui->comboBox_thousandsDelimiter->setEnabled(false);
+  ui->m_thousandsDelimiter->setEnabled(false);
 
-  ui->comboBox_dateFormat->setCurrentIndex(m_imp->m_profile->m_dateFormatIndex); // put before connect to not emit update signal
-  connect(ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));
-  emit ui->comboBox_dateFormat->currentIndexChanged(m_imp->m_profile->m_dateFormatIndex); // emit update signal manually regardless of change to combobox
+  ui->m_dateFormat->blockSignals(true);
+  ui->m_dateFormat->setCurrentIndex((int)m_imp->m_profile->m_dateFormat);
+  ui->m_dateFormat->blockSignals(false);
+  emit ui->m_dateFormat->currentIndexChanged((int)m_imp->m_profile->m_dateFormat); // emit update signal manually regardless of change to combobox
 
-  ui->comboBox_decimalSymbol->setCurrentIndex(m_imp->m_profile->m_decimalSymbolIndex);    // put before connect to not emit update signal
-  connect(ui->comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), this, SLOT(decimalSymbolChanged(int)));
-  emit ui->comboBox_decimalSymbol->currentIndexChanged(m_imp->m_profile->m_decimalSymbolIndex); // emit update signal manually regardless of change to combobox
+  ui->m_decimalSymbol->blockSignals(true);
+  if (m_imp->m_profile->m_decimalSymbol == DecimalSymbol::Auto && !m_imp->m_autodetect.value(AutoDecimalSymbol))
+    ui->m_decimalSymbol->setCurrentIndex(-1);
+  else
+    ui->m_decimalSymbol->setCurrentIndex((int)m_imp->m_profile->m_decimalSymbol);
+  ui->m_decimalSymbol->blockSignals(false);
+  emit ui->m_decimalSymbol->currentIndexChanged((int)m_imp->m_profile->m_decimalSymbol); // emit update signal manually regardless of change to combobox
 
   if (m_dlg->m_skipSetup &&
       wizard()->button(QWizard::CustomButton2)->isEnabled())
@@ -952,48 +965,48 @@ void FormatsPage::initializePage()
 
 void FormatsPage::decimalSymbolChanged(int index)
 {
-  QList<int> columns = m_imp->getNumericalColumns();
+  const QList<int> columns = m_imp->getNumericalColumns();
   switch (index) {
     case -1:
       if (!m_imp->m_autodetect.value(AutoDecimalSymbol))
         break;
-      /// @fixme add a break statement or leave a 'intentional fall through' comment
+      // fall through intentional
 
     case 2:
     {
-      ui->comboBox_decimalSymbol->blockSignals(true);
-      m_imp->m_profile->m_decimalSymbolIndex = 2;
+      ui->m_decimalSymbol->blockSignals(true);
+      m_imp->m_profile->m_decimalSymbol = DecimalSymbol::Auto;
       int failColumn = m_imp->detectDecimalSymbols(columns);
       if (failColumn != -2) {
         KMessageBox::sorry(this, i18n("<center>Autodetect could not detect your decimal symbol in column %1.</center>"
                                       "<center>Try manual selection to see problematic cells and correct your data.</center>", failColumn), i18n("CSV import"));
-        ui->comboBox_decimalSymbol->setCurrentIndex(-1);
-        ui->comboBox_thousandsDelimiter->setCurrentIndex(-1);
+        ui->m_decimalSymbol->setCurrentIndex(-1);
+        ui->m_thousandsDelimiter->setCurrentIndex(-1);
       } else if (index == -1) { // if detection went well and decimal symbol was unspecified then we'll be specifying it
-        int firstDecSymbol = m_imp->m_decimalSymbolIndexMap.first();
+        DecimalSymbol firstDecSymbol = m_imp->m_decimalSymbolIndexMap.first();
         bool allSymbolsEqual = true;
         foreach (const auto mapDecSymbol, m_imp->m_decimalSymbolIndexMap) {
           if (firstDecSymbol != mapDecSymbol)
             allSymbolsEqual = false;
         }
         if (allSymbolsEqual) {   // if symbol in all columns is equal then set it...
-          m_imp->m_profile->m_decimalSymbolIndex = firstDecSymbol;
-          ui->comboBox_decimalSymbol->setCurrentIndex(firstDecSymbol);
-          ui->comboBox_thousandsDelimiter->setCurrentIndex(firstDecSymbol);
+          m_imp->m_profile->m_decimalSymbol = firstDecSymbol;
+          ui->m_decimalSymbol->setCurrentIndex((int)firstDecSymbol);
+          ui->m_thousandsDelimiter->setCurrentIndex((int)firstDecSymbol);
         } else {  // else set to auto
-          m_imp->m_profile->m_decimalSymbolIndex = 2;
-          ui->comboBox_decimalSymbol->setCurrentIndex(2);
-          ui->comboBox_thousandsDelimiter->setCurrentIndex(2);
+          m_imp->m_profile->m_decimalSymbol = DecimalSymbol::Auto;
+          ui->m_decimalSymbol->setCurrentIndex((int)DecimalSymbol::Auto);
+          ui->m_thousandsDelimiter->setCurrentIndex((int)DecimalSymbol::Auto);
         }
       }
-      ui->comboBox_decimalSymbol->blockSignals(false);
+      ui->m_decimalSymbol->blockSignals(false);
       break;
     }
     default:
       foreach (const auto column, columns)
-        m_imp->m_decimalSymbolIndexMap.insert(column, index);
-      ui->comboBox_thousandsDelimiter->setCurrentIndex(index);
-      m_imp->m_profile->m_decimalSymbolIndex = index;
+        m_imp->m_decimalSymbolIndexMap.insert(column, static_cast<DecimalSymbol>(index));
+      ui->m_thousandsDelimiter->setCurrentIndex(index);
+      m_imp->m_profile->m_decimalSymbol = static_cast<DecimalSymbol>(index);
   }
 
   m_isDecimalSymbolOK = validateDecimalSymbols(columns);
@@ -1005,7 +1018,6 @@ bool FormatsPage::validateDecimalSymbols(const QList<int> &columns)
   bool isOK = true;
   foreach (const auto col, columns) {
     m_imp->m_file->m_parse->setDecimalSymbol(m_imp->m_decimalSymbolIndexMap.value(col));
-    m_imp->m_file->m_parse->setThousandsSeparator(m_imp->m_decimalSymbolIndexMap.value(col));
     m_dlg->clearColumnsBackground(col);
     for (int row = m_imp->m_profile->m_startLine; row <= m_imp->m_profile->m_endLine; ++row) {
       QStandardItem *item = m_imp->m_file->m_model->item(row, col);
@@ -1032,9 +1044,9 @@ void FormatsPage::dateFormatChanged(const int index)
   if (index == -1)
     return;
 
-  int col = m_imp->m_profile->m_colTypeNum.value(ColumnDate);
-  m_imp->m_profile->m_dateFormatIndex = index;
-  m_imp->m_convertDate->setDateFormatIndex(index);
+  int col = m_imp->m_profile->m_colTypeNum.value(Column::Date);
+  m_imp->m_profile->m_dateFormat = static_cast<DateFormat>(index);
+  m_imp->m_convertDate->setDateFormatIndex(static_cast<DateFormat>(index));
   m_isDateFormatOK = validateDateFormat(col);
   if (!m_isDateFormatOK) {
     KMessageBox::sorry(this, i18n("<center>There are invalid date formats in column '%1'.</center>"
@@ -1047,12 +1059,13 @@ void FormatsPage::dateFormatChanged(const int index)
 bool FormatsPage::validateDateFormat(const int col)
 {
   m_dlg->clearColumnsBackground(col);
+  QDate emptyDate;
 
   bool isOK = true;
   for (int row = m_imp->m_profile->m_startLine; row <= m_imp->m_profile->m_endLine; ++row) {
       QStandardItem* item = m_imp->m_file->m_model->item(row, col);
       QDate dat = m_imp->m_convertDate->convertDate(item->text());
-      if (dat == QDate()) {
+      if (dat == emptyDate) {
         isOK = false;
         m_dlg->ui->tableView->scrollTo(item->index(), QAbstractItemView::EnsureVisible);
         item->setBackground(m_dlg->m_errorBrush);
@@ -1069,19 +1082,16 @@ bool FormatsPage::isComplete() const
 {
   const bool enable = m_isDecimalSymbolOK && m_isDateFormatOK;
   wizard()->button(QWizard::CustomButton2)->setEnabled(enable);
-  if (m_imp->m_profile->type() != ProfileStockPrices &&
-      m_imp->m_profile->type() != ProfileCurrencyPrices)
+  if (m_imp->m_profile->type() != Profile::StockPrices &&
+      m_imp->m_profile->type() != Profile::CurrencyPrices)
     wizard()->button(QWizard::CustomButton3)->setEnabled(enable);
   return enable;
 }
 
 void FormatsPage::cleanupPage()
 {
-  disconnect(ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));
-  disconnect(ui->comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), this, SLOT(decimalSymbolChanged(int)));
-
   QList<int> columns = m_imp->getNumericalColumns();
-  columns.append(m_imp->m_profile->m_colTypeNum.value(ColumnDate));
+  columns.append(m_imp->m_profile->m_colTypeNum.value(Column::Date));
   m_dlg->clearColumnsBackground(columns);
   m_dlg->m_st = MyMoneyStatement();  // any change on investment/banking page invalidates created statement
 
