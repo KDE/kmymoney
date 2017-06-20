@@ -174,7 +174,7 @@ void ListTable::render(QString& result, QString& csv) const
                                               "colspan=\"%2\">%3</td></tr>\n").arg(QString::number(i),
                                                                                     QString::number(columns.count()),
                                                                                     curGrpName));
-          csv.append(QString::fromLatin1("\"%1\"\n")).arg(curGrpName);
+          csv.append(QString::fromLatin1("\"%1\"\n").arg(curGrpName));
         }
         if (i == lowestGroup)         // lowest group has been switched...
           isLowestGroupTotal = true;  // ...so expect lowest group total

@@ -141,7 +141,7 @@ QString reports::ReportTable::renderReport(const QString &type, const QByteArray
     //this renders a common footer
     result.append(QLatin1String("</body>\n</html>\n"));
   } else if (type == QLatin1String("csv")) {
-    result.append(QString::fromLatin1("\"Report: %1\"\n")).arg(m_config.name());
+    result.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
     result.append(QString::fromLatin1("%1\n").arg(i18nc("Report date range", "%1 through %2",
                                                         m_config.fromDate().toString(Qt::SystemLocaleShortDate),
                                                         m_config.toDate().toString(Qt::SystemLocaleShortDate))));
