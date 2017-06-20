@@ -245,7 +245,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
     if (symbolRegExp.indexIn(quotedata) > -1) {
       kDebug(Private::dbgArea()) << "Symbol" << symbolRegExp.cap(1);
-      emit status(i18n("Symbol found: %1", symbolRegExp.cap(1)));
+      emit status(i18n("Symbol found: '%1'", symbolRegExp.cap(1)));
     }
 
     if (priceRegExp.indexIn(quotedata) > -1) {
@@ -272,7 +272,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
       d->m_price = pricestr.toDouble();
       kDebug(Private::dbgArea()) << "Price" << pricestr;
-      emit status(i18n("Price found: %1 (%2)", pricestr, d->m_price));
+      emit status(i18n("Price found: '%1' (%2)", pricestr, d->m_price));
     }
 
     if (dateRegExp.indexIn(quotedata) > -1) {
@@ -283,7 +283,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
         d->m_date = dateparse.convertString(datestr, false /*strict*/);
         gotdate = true;
         kDebug(Private::dbgArea()) << "Date" << datestr;
-        emit status(i18n("Date found: %1", d->m_date.toString()));;
+        emit status(i18n("Date found: '%1'", d->m_date.toString()));;
       } catch (const MyMoneyException &) {
         // emit error(i18n("Unable to parse date %1 using format %2: %3").arg(datestr,dateparse.format(),e.what()));
         d->m_date = QDate::currentDate();
