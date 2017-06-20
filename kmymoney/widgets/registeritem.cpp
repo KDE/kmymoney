@@ -38,7 +38,10 @@ MyMoneyMoney RegisterItem::nullValue;
 RegisterItem::RegisterItem() :
     m_parent(0),
     m_prev(0),
-    m_next(0)
+    m_next(0),
+    m_alternate(false),
+    m_needResize(false),
+    m_visible(false)
 {
   init();
 }
@@ -46,7 +49,10 @@ RegisterItem::RegisterItem() :
 RegisterItem::RegisterItem(Register* parent) :
     m_parent(parent),
     m_prev(0),
-    m_next(0)
+    m_next(0),
+    m_alternate(false),
+    m_needResize(false),
+    m_visible(false)
 {
   init();
   parent->addItem(this);

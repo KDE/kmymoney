@@ -550,7 +550,8 @@ MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state() const
 }
 
 KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, MyMoneyAccount::accountTypeE accountType) :
-    KMyMoneyMVCCombo(false, w)
+    KMyMoneyMVCCombo(false, w),
+    m_dir(KMyMoneyRegister::Unknown)
 {
   addItem(" ", QVariant(KMyMoneyRegister::Unknown));
   if (accountType == MyMoneyAccount::Income || accountType == MyMoneyAccount::Expense) {

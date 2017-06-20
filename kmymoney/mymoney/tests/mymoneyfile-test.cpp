@@ -1897,7 +1897,7 @@ void MyMoneyFileTest::testOpeningBalance()
   try {
     openingAcc = m->openingBalanceAccount(m->baseCurrency());
     QCOMPARE(openingAcc.parentAccountId(), m->equity().id());
-    QCOMPARE(openingAcc.name(), MyMoneyFile::OpeningBalancesPrefix);
+    QCOMPARE(openingAcc.name(), MyMoneyFile::openingBalancesPrefix());
     QCOMPARE(openingAcc.openingDate(), QDate::currentDate());
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
@@ -1912,7 +1912,7 @@ void MyMoneyFileTest::testOpeningBalance()
     unexpectedException(e);
   }
 
-  QString refName = QString("%1 (%2)").arg(MyMoneyFile::OpeningBalancesPrefix).arg("USD");
+  QString refName = QString("%1 (%2)").arg(MyMoneyFile::openingBalancesPrefix()).arg("USD");
   try {
     openingAcc = m->openingBalanceAccount(second);
     QCOMPARE(openingAcc.parentAccountId(), m->equity().id());

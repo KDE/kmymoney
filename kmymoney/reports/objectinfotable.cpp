@@ -255,6 +255,7 @@ void ObjectInfoTable::constructAccountTable()
       accountRow["creditwarning"] = account.value("maxCreditEarly");
       accountRow["maxcreditlimit"] = account.value("maxCreditAbsolute");
       accountRow["tax"] = account.value("Tax") == QLatin1String("Yes") ? i18nc("Is this a tax account?", "Yes") : QString();
+      accountRow["openingbalance"] = account.value("OpeningBalanceAccount") == QLatin1String("Yes") ? i18nc("Is this an opening balance account?", "Yes") : QString();
       accountRow["favorite"] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       //investment accounts show the balances of all its subaccounts

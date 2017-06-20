@@ -46,7 +46,12 @@ public:
   ~KSettingsGeneral();
 
 protected slots:
+  void slotChooseLogPath();
   void slotLoadStartDate(const QDate&);
+  void slotUpdateLogTypes();
+
+protected:
+  void showEvent(QShowEvent* event);
 
 public slots:
   void slotUpdateEquitiesVisibility();

@@ -44,6 +44,7 @@ set(libdialogs_a_SOURCES
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp
   ksplittransactiondlg.cpp
+  ktemplateexportdlg.cpp
   kupdatestockpricedlg.cpp
   mymoneyqifprofileeditor.cpp
   transactioneditor.cpp
@@ -73,6 +74,7 @@ set(dialogs_UI
   ktagreassigndlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
+  ktemplateexportdlg.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
   ../widgets/kaccounttemplateselectordecl.ui ../widgets/transactionsortoptiondecl.ui
   konlinetransferformdecl.ui

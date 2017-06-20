@@ -227,7 +227,7 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
   //qDebug() << "successfully added " << id();
 }
 
-QString makeAccount(const QString& _name, MyMoneyAccount::accountTypeE _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport)
+QString makeAccount(const QString& _name, MyMoneyAccount::accountTypeE _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
 {
   MyMoneyAccount info;
   MyMoneyFileTransaction ft;
@@ -242,6 +242,9 @@ QString makeAccount(const QString& _name, MyMoneyAccount::accountTypeE _type, My
 
   if (_taxReport)
     info.setValue("Tax", "Yes");
+
+  if (_openingBalance)
+    info.setValue("OpeningBalanceAccount", "Yes");
 
   MyMoneyAccount parent = MyMoneyFile::instance()->account(_parent);
   MyMoneyFile::instance()->addAccount(info, parent);

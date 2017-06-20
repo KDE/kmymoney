@@ -39,6 +39,7 @@
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
     KComboBox(parent),
     m_displayItem(FullName),
+    m_selectedItemId(0),
     m_displayOnly(false),
     m_displayType(TypeAll)
 {

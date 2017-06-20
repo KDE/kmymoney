@@ -137,6 +137,7 @@ public:
 protected:
   void displayOnlineBankingStatus();
   void adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr);
+  void handleOpeningBalanceCheckbox(const QString &currencyId);
 
 protected slots:
   void okClicked();
@@ -151,6 +152,7 @@ protected slots:
   void slotAdjustMinBalanceEarlyEdit(const QString&);
   void slotAdjustMaxCreditAbsoluteEdit(const QString&);
   void slotAdjustMaxCreditEarlyEdit(const QString&);
+  void slotCheckCurrency();
 };
 
 #endif

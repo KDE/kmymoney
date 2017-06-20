@@ -213,6 +213,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   }
   m_openingDateEdit->setDate(m_account.openingDate());
 
+  handleOpeningBalanceCheckbox(m_account.currencyId());
+
   if (categoryEditor) {
     // get rid of the tabs that are not used for categories
     int tab = m_tab->indexOf(m_institutionTab);
@@ -257,13 +259,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     // get rid of the tabs that are not used for accounts
     int taxtab = m_tab->indexOf(m_taxTab);
     if (taxtab != -1) {
-      if (m_account.isAssetLiability()) {
         m_vatCategory->setText(i18n("VAT account"));
-        m_vatAssignmentFrame->hide();
         m_qcheckboxTax->setChecked(account.value("Tax") == "Yes");
-      } else {
+        loadVatAccounts();
+    } else {
         m_tab->removeTab(taxtab);
-      }
     }
 
     m_costCenterRequiredCheckBox->hide();
@@ -423,6 +423,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   connect(m_vatAssignment, SIGNAL(toggled(bool)), this, SLOT(slotCheckFinished()));
   connect(m_vatRate, SIGNAL(textChanged(QString)), this, SLOT(slotCheckFinished()));
   connect(m_vatAccount, SIGNAL(stateChanged()), this, SLOT(slotCheckFinished()));
+  connect(m_currency, SIGNAL(activated(int)), this, SLOT(slotCheckCurrency()));
 
   connect(m_minBalanceEarlyEdit, SIGNAL(valueChanged(QString)), this, SLOT(slotAdjustMinBalanceAbsoluteEdit(QString)));
   connect(m_minBalanceAbsoluteEdit, SIGNAL(valueChanged(QString)), this, SLOT(slotAdjustMinBalanceEarlyEdit(QString)));
@@ -597,6 +598,11 @@ void KNewAccountDlg::okClicked()
   }
 
   storeKVP("Tax", m_qcheckboxTax);
+
+  if (m_qcheckboxOpeningBalance->isChecked())
+    m_account.setValue("OpeningBalanceAccount", "Yes");
+  else
+    m_account.deletePair("OpeningBalanceAccount");
 
   m_account.deletePair("VatAccount");
   m_account.deletePair("VatAmount");
@@ -856,6 +862,43 @@ void KNewAccountDlg::adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, cha
   }
 }
 
+void KNewAccountDlg::handleOpeningBalanceCheckbox(const QString &currencyId)
+{
+  if (m_account.accountType() == MyMoneyAccount::Equity) {
+    // check if there is another opening balance account with the same currency
+    bool isOtherOpenBalancingAccount = false;
+    QList<MyMoneyAccount> list;
+    MyMoneyFile::instance()->accountList(list);
+    QList<MyMoneyAccount>::Iterator it;
+    for (it = list.begin(); it != list.end(); ++it) {
+      if (it->id() == m_account.id() || currencyId != it->currencyId()
+          || it->accountType() != MyMoneyAccount::Equity)
+        continue;
+      if (it->value("OpeningBalanceAccount") == "Yes") {
+        isOtherOpenBalancingAccount = true;
+        break;
+      }
+    }
+    if (!isOtherOpenBalancingAccount) {
+      bool isOpenBalancingAccount = m_account.value("OpeningBalanceAccount") == "Yes";
+      m_qcheckboxOpeningBalance->setChecked(isOpenBalancingAccount);
+      if (isOpenBalancingAccount) {
+        // let only allow state change if no transactions are assigned to this account
+        bool hasTransactions = MyMoneyFile::instance()->transactionCount(m_account.id()) != 0;
+        m_qcheckboxOpeningBalance->setEnabled(!hasTransactions);
+        if (hasTransactions)
+          m_qcheckboxOpeningBalance->setToolTip(i18n("Option has been disabled because there are transactions assigned to this account"));
+      }
+    } else {
+      m_qcheckboxOpeningBalance->setChecked(false);
+      m_qcheckboxOpeningBalance->setEnabled(false);
+      m_qcheckboxOpeningBalance->setToolTip(i18n("Option has been disabled because there is another account flagged to be an opening balance account for this currency"));
+    }
+  } else {
+    m_qcheckboxOpeningBalance->setVisible(false);
+  }
+}
+
 void KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit(const QString&)
 {
   adjustEditWidgets(m_minBalanceAbsoluteEdit, m_minBalanceEarlyEdit, '<', -1);
@@ -874,6 +917,11 @@ void KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit(const QString&)
 void KNewAccountDlg::slotAdjustMaxCreditEarlyEdit(const QString&)
 {
   adjustEditWidgets(m_maxCreditEarlyEdit, m_maxCreditAbsoluteEdit, '<', 1);
+}
+
+void KNewAccountDlg::slotCheckCurrency()
+{
+    handleOpeningBalanceCheckbox(m_currency->security().id());
 }
 
 void KNewAccountDlg::addTab(QWidget* w, const QString& name)

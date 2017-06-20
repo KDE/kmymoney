@@ -121,6 +121,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_loans(false),
     m_reportType(kTypeArray[_rt]),
     m_rowType(_rt),
+    m_columnType(eMonths),
     m_columnsAreDays(false),
     m_queryColumns(eQCnone),
     m_dateLock(_dl),
@@ -174,6 +175,25 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
   if (_rt == MyMoneyReport::eAssetLiability) {
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(MyMoneyAccount::Equity);
+    m_showRowTotals = true;
+  }
+  if (_rt == MyMoneyReport::eAccount) {
+    addAccountGroup(MyMoneyAccount::Asset);
+    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(MyMoneyAccount::Equity);
+    addAccountGroup(MyMoneyAccount::Asset);
+    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(MyMoneyAccount::Equity);
+    addAccountGroup(MyMoneyAccount::Checkings);
+    addAccountGroup(MyMoneyAccount::Savings);
+    addAccountGroup(MyMoneyAccount::Cash);
+    addAccountGroup(MyMoneyAccount::CreditCard);
+    addAccountGroup(MyMoneyAccount::Loan);
+    addAccountGroup(MyMoneyAccount::Income);
+    addAccountGroup(MyMoneyAccount::Expense);
+    addAccountGroup(MyMoneyAccount::AssetLoan);
+    addAccountGroup(MyMoneyAccount::Stock);
     m_showRowTotals = true;
   }
   if (_rt == MyMoneyReport::eExpenseIncome) {
@@ -272,6 +292,7 @@ void MyMoneyReport::setRowType(ERowType _rt)
   if (_rt == MyMoneyReport::eAssetLiability) {
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(MyMoneyAccount::Equity);
   }
   if (_rt == MyMoneyReport::eExpenseIncome) {
     addAccountGroup(MyMoneyAccount::Expense);

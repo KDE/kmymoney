@@ -169,6 +169,9 @@ const QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accoun
 
 const QString MyMoneyQifReader::Private::typeToAccountName(const QString& type) const
 {
+  if (type == "reinvint")
+    return i18nc("Category name", "Reinvested interest");
+
   if (type == "reinvdiv")
     return i18nc("Category name", "Reinvested dividend");
 
@@ -1483,7 +1486,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
 
   // Whether to create a cash split for the other side of the value
   QString accountname; //= extractLine('L');
-  if (action == "reinvdiv" || action == "reinvlg" || action == "reinvsh") {
+  if (action == "reinvint" || action == "reinvdiv" || action == "reinvlg" || action == "reinvsh") {
     d->st.m_listPrices += price;
     tr.m_shares = quantity;
     tr.m_eAction = (MyMoneyStatement::Transaction::eaReinvestDividend);

@@ -64,6 +64,10 @@ public:
   const QString& shortDescription() const;
   const QString& longDescription() const;
 
+  void setTitle(const QString &s);
+  void setShortDescription(const QString &s);
+  void setLongDescription(const QString &s);
+
   void hierarchy(QMap<QString, QTreeWidgetItem*>& list);
 
 protected:

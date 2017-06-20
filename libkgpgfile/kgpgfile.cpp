@@ -43,7 +43,6 @@
 #include <gpgme++/keylistresult.h>
 #include <gpgme++/key.h>
 #include <gpgme++/data.h>
-#include <qgpgme/dataprovider.h>
 
 class KGPGFile::Private
 {

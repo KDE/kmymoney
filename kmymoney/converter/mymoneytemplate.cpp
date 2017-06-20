@@ -178,29 +178,21 @@ void MyMoneyTemplate::hierarchy(QMap<QString, QTreeWidgetItem*>& list)
   bool rc = !m_accounts.isNull();
   QDomNode accounts = m_accounts;
   while (rc == true && !accounts.isNull() && accounts.isElement()) {
-    QDomElement childElement = accounts.toElement();
-    if (childElement.tagName() == "account"
-        && childElement.attribute("name").isEmpty()) {
-      switch (childElement.attribute("type").toUInt()) {
+    QDomElement rootNode = accounts.toElement();
+    QString name = rootNode.attribute("name");
+    if (rootNode.tagName() == "account") {
+        rootNode = rootNode.firstChild().toElement();
+        MyMoneyAccount::accountTypeE type = static_cast<MyMoneyAccount::accountTypeE>(accounts.toElement().attribute("type").toUInt());
+        switch (type) {
         case MyMoneyAccount::Asset:
-          list[i18n("Asset")] = 0;
-          rc = hierarchy(list, i18n("Asset"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Liability:
-          list[i18n("Liability")] = 0;
-          rc = hierarchy(list, i18n("Liability"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Income:
-          list[i18n("Income")] = 0;
-          rc = hierarchy(list, i18n("Income"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Expense:
-          list[i18n("Expense")] = 0;
-          rc = hierarchy(list, i18n("Expense"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Equity:
-          list[i18n("Equity")] = 0;
-          rc = hierarchy(list, i18n("Equity"), childElement.firstChild());
+          if (name.isEmpty())
+            name = MyMoneyAccount::accountTypeToString(type);
+          list[name] = 0;
+          rc = hierarchy(list, name, rootNode);
           break;
 
         default:
@@ -224,8 +216,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
 
   while (rc == true && !m_accounts.isNull() && m_accounts.isElement()) {
     QDomElement childElement = m_accounts.toElement();
-    if (childElement.tagName() == "account"
-        && childElement.attribute("name").isEmpty()) {
+    if (childElement.tagName() == "account") {
       ++m_accountsRead;
       MyMoneyAccount parent;
       switch (childElement.attribute("type").toUInt()) {
@@ -251,7 +242,10 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
       }
 
       if (rc == true) {
-        rc = createAccounts(parent, childElement.firstChild());
+        if (childElement.attribute("name").isEmpty())
+            rc = createAccounts(parent, childElement.firstChild());
+        else
+            rc = createAccounts(parent, childElement);
       }
     } else {
       rc = false;
@@ -312,10 +306,15 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         QString value = flagElement.attribute("name");
         if (value == "Tax") {
           acc.setValue(value.toLatin1(), "Yes");
+        } else if (value == "OpeningBalanceAccount") {
+          acc.setValue("OpeningBalanceAccount", "Yes");
         } else {
           KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), m_source.toDisplayString(), acc.name()));
           rc = false;
         }
+        QString currency = flagElement.attribute("currency");
+        if (!currency.isEmpty())
+          acc.setCurrencyId(currency);
       }
     }
     flags = flags.nextSibling();
@@ -342,12 +341,18 @@ bool MyMoneyTemplate::exportTemplate(void(*callback)(int, int, const QString&))
   m_doc.appendChild(mainElement);
 
   QDomElement title = m_doc.createElement("title");
+  QDomText t = m_doc.createTextNode(m_title);
+  title.appendChild(t);
   mainElement.appendChild(title);
 
   QDomElement shortDesc = m_doc.createElement("shortdesc");
+  t = m_doc.createTextNode(m_shortDesc);
+  shortDesc.appendChild(t);
   mainElement.appendChild(shortDesc);
 
   QDomElement longDesc = m_doc.createElement("longdesc");
+  t = m_doc.createTextNode(m_longDesc);
+  longDesc.appendChild(t);
   mainElement.appendChild(longDesc);
 
   QDomElement accounts = m_doc.createElement("accounts");
@@ -377,6 +382,21 @@ const QString& MyMoneyTemplate::longDescription() const
   return m_longDesc;
 }
 
+void MyMoneyTemplate::setTitle(const QString &s)
+{
+  m_title = s;
+}
+
+void MyMoneyTemplate::setShortDescription(const QString &s)
+{
+  m_shortDesc = s;
+}
+
+void MyMoneyTemplate::setLongDescription(const QString &s)
+{
+  m_longDesc = s;
+}
+
 static bool nameLessThan(MyMoneyAccount &a1, MyMoneyAccount &a2)
 {
   return a1.name() < a2.name();
@@ -394,6 +414,15 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   account.setAttribute(QString("type"), acc.accountType());
 
   // FIXME: add tax flag stuff
+  if (acc.pairs().contains("OpeningBalanceAccount")) {
+    QString openingBalanceAccount = acc.value("OpeningBalanceAccount");
+    if (openingBalanceAccount == "Yes") {
+      QDomElement flag = m_doc.createElement("flag");
+      flag.setAttribute(QString("name"), "OpeningBalanceAccount");
+      flag.setAttribute(QString("currency"), acc.currencyId());
+      account.appendChild(flag);
+    }
+  }
 
   // any child accounts?
   if (acc.accountList().count() > 0) {

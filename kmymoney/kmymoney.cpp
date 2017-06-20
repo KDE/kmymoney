@@ -126,6 +126,7 @@
 #include "dialogs/kgeneratesqldlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/kgpgkeyselectiondlg.h"
+#include "dialogs/ktemplateexportdlg.h"
 #include "dialogs/transactionmatcher.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
@@ -2213,9 +2214,16 @@ void KMyMoneyApp::slotSaveAccountTemplates()
     }
 
     if (okToWriteFile(QUrl::fromLocalFile(newName))) {
-      MyMoneyTemplate templ;
-      templ.exportTemplate(&progressCallback);
-      templ.saveTemplate(QUrl::fromLocalFile(newName));
+      QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
+      if (dlg->exec() == QDialog::Accepted && dlg) {
+          MyMoneyTemplate templ;
+          templ.setTitle(dlg->title());
+          templ.setShortDescription(dlg->shortDescription());
+          templ.setLongDescription(dlg->longDescription());
+          templ.exportTemplate(&progressCallback);
+          templ.saveTemplate(QUrl::fromLocalFile(newName));
+      }
+      delete dlg;
     }
   }
 }
@@ -2430,7 +2438,10 @@ bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s, bool silent)
   bool result = false;
 
   // keep a copy of the statement
-  MyMoneyStatement::writeXMLFile(s, QString("/home/thb/kmm-statement-%1.txt").arg(d->m_statementXMLindex++));
+  if (KMyMoneySettings::logImportedStatements()) {
+    QString logFile = QString("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath()).arg(d->m_statementXMLindex++);
+    MyMoneyStatement::writeXMLFile(s, logFile);
+ }
 
   // we use an object on the heap here, so that we can check the presence
   // of it during slotUpdateActions() by looking at the pointer.
@@ -3704,20 +3715,29 @@ void KMyMoneyApp::slotAccountEdit()
         connect(wizard, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
         connect(wizard, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
         if (wizard->exec() == QDialog::Accepted && wizard != 0) {
-          MyMoneySchedule sch = file->schedule(d->m_selectedAccount.value("schedule").toLatin1());
+          MyMoneySchedule sch;
+          try {
+            MyMoneySchedule sch = file->schedule(d->m_selectedAccount.value("schedule").toLatin1());
+          } catch (const MyMoneyException &e) {
+            qDebug() << "schedule" << d->m_selectedAccount.value("schedule").toLatin1() << "not found";
+          }
           if (!(d->m_selectedAccount == wizard->account())
               || !(sch == wizard->schedule())) {
             MyMoneyFileTransaction ft;
             try {
               file->modifyAccount(wizard->account());
-              sch = wizard->schedule();
+              if (!sch.id().isEmpty()) {
+                sch = wizard->schedule();
+              }
               try {
                 file->schedule(sch.id());
                 file->modifySchedule(sch);
                 ft.commit();
               } catch (const MyMoneyException &) {
                 try {
-                  file->addSchedule(sch);
+                  if(sch.transaction().splitCount() >= 2) {
+                    file->addSchedule(sch);
+                  }
                   ft.commit();
                 } catch (const MyMoneyException &e) {
                   qDebug("Cannot add schedule: '%s'", qPrintable(e.what()));

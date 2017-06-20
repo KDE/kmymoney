@@ -31,4 +31,5 @@
 
 <!ATTLIST flag
           name CDATA #REQUIRED
+          value CDATA #IMPLIED
 >
