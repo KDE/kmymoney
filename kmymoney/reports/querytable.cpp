@@ -697,6 +697,8 @@ void QueryTable::constructTransactionTable()
     qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
     qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
 
+    if (!m_containsNonBaseCurrency && (*it_transaction).commodity() != file->baseCurrency().id())
+      m_containsNonBaseCurrency = true;
     if (report.isConvertCurrency())
       qA[ctCurrency] = qS[ctCurrency] = file->baseCurrency().id();
     else
@@ -800,6 +802,8 @@ void QueryTable::constructTransactionTable()
         else if (splitAcc.isInvest())         // if it's stock split...
           xr *= (*it_split).price();          // ...multiply it by stock price stored in split
 
+        if (!m_containsNonBaseCurrency && myBeginCurrency != baseCurrency)
+          m_containsNonBaseCurrency = true;
         if (myBeginCurrency != baseCurrency) {                             // myBeginCurrency can differ from baseCurrency...
           MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency,
                                            (*it_transaction).postDate());  // ...so check conversion rate...
@@ -855,6 +859,8 @@ void QueryTable::constructTransactionTable()
                 splitAcc = assetAccountSplit.accountId(); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
                 myBegin = it_split;                       // set myBegin to asset split, so stock split can be listed in details under splits
                 myBeginCurrency = (file->account((*myBegin).accountId())).currencyId();
+                if (!m_containsNonBaseCurrency && myBeginCurrency != baseCurrency)
+                  m_containsNonBaseCurrency = true;
                 if (m_config.isConvertCurrency()) {
                   if (myBeginCurrency != baseCurrency) {
                     MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency, (*it_transaction).postDate());
@@ -998,6 +1004,8 @@ void QueryTable::constructTransactionTable()
 
             qA [ctMemo] = (*it_split).memo();
 
+            if (!m_containsNonBaseCurrency && splitAcc.currencyId() != file->baseCurrency().id())
+              m_containsNonBaseCurrency = true;
             if (report.isConvertCurrency())
               qS[ctCurrency] = file->baseCurrency().id();
             else
@@ -1179,6 +1187,8 @@ void QueryTable::constructTransactionTable()
 
     //starting balance
     // don't show currency if we're converting or if it's not foreign
+    if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
+      m_containsNonBaseCurrency = true;
     if (m_config.isConvertCurrency())
       qA[ctCurrency] = file->baseCurrency().id();
     else
@@ -1690,6 +1700,8 @@ void QueryTable::constructAccountTable()
           if (!qaccountrow.isEmpty()) {
             // assuming that that report is grouped by topaccount
             qaccountrow[ctTopAccount] = account.topParentName();
+            if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
+              m_containsNonBaseCurrency = true;
             if (m_config.isConvertCurrency())
               qaccountrow[ctCurrency] = file->baseCurrency().id();
             else
@@ -1744,6 +1756,8 @@ void QueryTable::constructAccountTable()
       qaccountrow[ctAccount] = account.name();
       qaccountrow[ctAccountID] = account.id();
       qaccountrow[ctTopAccount] = account.topParentName();
+      if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
+        m_containsNonBaseCurrency = true;
       if (m_config.isConvertCurrency())
         qaccountrow[ctCurrency] = file->baseCurrency().id();
       else
@@ -1810,6 +1824,8 @@ void QueryTable::constructSplitsTable()
     qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
     qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
 
+    if (!m_containsNonBaseCurrency && (*it_transaction).commodity() != file->baseCurrency().id())
+      m_containsNonBaseCurrency = true;
     if (report.isConvertCurrency())
       qA[ctCurrency] = qS[ctCurrency] = file->baseCurrency().id();
     else
@@ -2093,6 +2109,8 @@ void QueryTable::constructSplitsTable()
 
     //starting balance
     // don't show currency if we're converting or if it's not foreign
+    if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
+      m_containsNonBaseCurrency = true;
     if (m_config.isConvertCurrency())
       qA[ctCurrency] = file->baseCurrency().id();
     else

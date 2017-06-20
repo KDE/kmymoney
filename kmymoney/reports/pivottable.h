@@ -70,9 +70,9 @@ public:
   /**
     * Create a Pivot table style report
     *
-    * @param _config_f The configuration parameters for this report
+    * @param _report The configuration parameters for this report
     */
-  PivotTable(const MyMoneyReport& _config_f);
+  PivotTable(const MyMoneyReport& _report);
 
   /**
     * virtual Destructur
@@ -84,7 +84,7 @@ public:
     *
     * @return QString HTML string representing the report body
     */
-  QString renderBody() const;
+  QString renderHTML() const;
   /**
     * Render the report to a comma-separated-values stream.
     *
@@ -144,8 +144,6 @@ private:
    * This list contains the i18n headers for the column types
    */
   QStringList m_columnTypeHeaderList;
-
-  MyMoneyReport m_config_f;
 
   /**
     * This method returns the formatted value of @a amount with

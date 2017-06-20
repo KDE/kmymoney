@@ -84,13 +84,8 @@ private:
    */
   QString m_cssFileDefault;
 
-  /**
-   * Character set encoding for the report.
-   */
-  QByteArray m_encoding;
-
 protected:
-  ReportTable();
+  ReportTable(const MyMoneyReport &_report);
 
   /**
    * Constructs html header.
@@ -100,7 +95,7 @@ protected:
    * the css is referenced as a link to a file
    * @return  html header
    */
-  QString renderHeader(const QString& title, bool includeCSS);
+  QString renderHeader(const QString& title, const QByteArray &encoding, bool includeCSS);
 
   /**
    * Constructs html footer.
@@ -115,7 +110,13 @@ protected:
    * @see ListTable
    * @return QString with the html body of the report
    */
-  virtual QString renderBody() const = 0;
+  virtual QString renderHTML() const = 0;
+
+  MyMoneyReport m_config;
+  /**
+   * Does the report contain any non-base currency
+   */
+  mutable bool m_containsNonBaseCurrency;
 
 public:
   virtual ~ReportTable() {}
@@ -146,8 +147,7 @@ public:
    *
    * @return complete html document
    */
-  QString renderHTML(QWidget* widget, const QByteArray& encoding,
-                     const QString& title, bool includeCSS = false);
+  QString renderReport(const QString &type, const QByteArray& encoding, const QString& title, bool includeCSS = false);
 };
 
 }

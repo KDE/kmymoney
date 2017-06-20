@@ -165,8 +165,7 @@ void KReportsView::KReportTab::print()
 void KReportsView::KReportTab::copyToClipboard()
 {
   QMimeData* pMimeData =  new QMimeData();
-  pMimeData->setHtml(m_table->renderHTML(qobject_cast<QWidget*>(this),
-                                         m_encoding, m_report.name(), true));
+  pMimeData->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name(), true));
   QApplication::clipboard()->setMimeData(pMimeData);
 }
 
@@ -175,12 +174,11 @@ void KReportsView::KReportTab::saveAs(const QString& filename, bool includeCSS)
   QFile file(filename);
 
   if (file.open(QIODevice::WriteOnly)) {
-    if (QFileInfo(filename).suffix().toLower() == "csv") {
-      QTextStream(&file) << m_table->renderCSV();
+    if (QFileInfo(filename).suffix().toLower() == QLatin1String("csv")) {
+      QTextStream(&file) << m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
     } else {
       QString table =
-        m_table->renderHTML(qobject_cast<QWidget*>(this), m_encoding,
-                            m_report.name(), includeCSS);
+        m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name(), includeCSS);
       QTextStream stream(&file);
       stream << table;
     }
@@ -247,8 +245,7 @@ void KReportsView::KReportTab::toggleChart()
   if (m_showingChart) {
     if (!m_isTableViewValid) {
       m_tableView->begin();
-      m_tableView->write(m_table->renderHTML(qobject_cast<QWidget*>(this),
-                                        m_encoding, m_report.name()));
+      m_tableView->write(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()));
       m_tableView->end();
     }
     m_isTableViewValid = true;

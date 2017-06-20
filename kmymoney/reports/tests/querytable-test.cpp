@@ -633,7 +633,7 @@ void QueryTableTest::testBalanceColumn()
 
     writeTabletoHTML(qtbl_3, "Transactions by Account.html");
 
-    QString html = qtbl_3.renderBody();
+    QString html = qtbl_3.renderHTML();
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
@@ -697,7 +697,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
     writeTabletoHTML(qtbl_3, "Transactions by Account (multiple currencies).html");
 
-    QString html = qtbl_3.renderBody();
+    QString html = qtbl_3.renderHTML();
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
@@ -741,7 +741,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
     writeTabletoHTML(qtbl_4, "Transactions by Account (multiple currencies converted to base).html");
 
-    html = qtbl_4.renderBody();
+    html = qtbl_4.renderHTML();
 
     rows = qtbl_4.rows();
 
@@ -793,7 +793,7 @@ void QueryTableTest::testTaxReport()
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
-    QString html = qtbl_3.renderBody();
+    QString html = qtbl_3.renderHTML();
     QVERIFY(rows.count() == 5);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));

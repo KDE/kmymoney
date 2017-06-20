@@ -94,8 +94,7 @@ bool ListTable::TableRow::operator> (const TableRow& _compare) const
  */
 
 ListTable::ListTable(const MyMoneyReport& _report):
-    ReportTable(),
-    m_config(_report)
+    ReportTable(_report)
 {
 }
 
@@ -105,31 +104,6 @@ void ListTable::render(QString& result, QString& csv) const
 
   result.clear();
   csv.clear();
-  result.append(QString::fromLatin1("<h2 class=\"report\">%1</h2>\n").arg(m_config.name()));
-  csv.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
-
-  //actual dates of the report
-  result.append(QLatin1String("<div class=\"subtitle\">"));
-  if (!m_config.fromDate().isNull()) {
-    result += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config.toDate(), QLocale::ShortFormat));
-    result.append(QLatin1String("</div>\n"));
-    result.append(QLatin1String("<div class=\"gap\">&nbsp;</div>\n"));
-
-    csv += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config.toDate(), QLocale::ShortFormat));
-    csv.append(QLatin1Char('\n'));
-  }
-
-  result.append(QLatin1String("<div class=\"subtitle\">"));
-  if (m_config.isConvertCurrency()) {
-    result += i18n("All currencies converted to %1" , file->baseCurrency().name());
-    csv += i18n("All currencies converted to %1" , file->baseCurrency().name());
-  } else {
-    result += i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name());
-    csv += i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name());
-  }
-  result.append(QLatin1String("</div>\n"));
-  result.append(QLatin1String("<div class=\"gap\">&nbsp;</div>\n"));
-  csv.append(QLatin1Char('\n'));
 
   // retrieve the configuration parameters from the report definition.
   // the things that we care about for query reports are:
@@ -440,7 +414,7 @@ void ListTable::render(QString& result, QString& csv) const
   result.append(QLatin1String("</table>\n"));
 }
 
-QString ListTable::renderBody() const
+QString ListTable::renderHTML() const
 {
   QString html, csv;
   render(html, csv);
@@ -460,9 +434,9 @@ void ListTable::dump(const QString& file, const QString& context) const
   g.open(QIODevice::WriteOnly | QIODevice::Text);
 
   if (! context.isEmpty())
-    QTextStream(&g) << context.arg(renderBody());
+    QTextStream(&g) << context.arg(renderHTML());
   else
-    QTextStream(&g) << renderBody();
+    QTextStream(&g) << renderHTML();
   g.close();
 }
 

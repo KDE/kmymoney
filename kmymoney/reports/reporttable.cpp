@@ -30,10 +30,12 @@
 
 #include "kmymoneyglobalsettings.h"
 
-reports::ReportTable::ReportTable():
+reports::ReportTable::ReportTable(const MyMoneyReport& _report):
     m_resourceHtml("html"),
     m_reportStyleSheet("reportstylesheet"),
-    m_cssFileDefault("kmymoney.css")
+    m_cssFileDefault("kmymoney.css"),
+    m_config(_report),
+    m_containsNonBaseCurrency(false)
 
 {
 }
@@ -60,14 +62,14 @@ QString reports::ReportTable::cssFileNameGet()
   return cssfilename;
 }
 
-QString reports::ReportTable::renderHeader(const QString& title, bool includeCSS)
+QString reports::ReportTable::renderHeader(const QString& title, const QByteArray& encoding, bool includeCSS)
 {
   QString header = QString("<!DOCTYPE HTML PUBLIC")
                    + " \"-//W3C//DTD HTML 4.01 //EN\""
                    + " \"http://www.w3.org/TR/html4/strict.dtd\">"
                    + "\n<html>\n<head>"
                    + "\n<meta http-equiv=\"Content-Type\""
-                   + " content=\"text/html; charset=" + m_encoding + "\" />"
+                   + " content=\"text/html; charset=" + encoding + "\" />"
                    + "\n<title>" + title + "</title>";
 
   QString cssfilename = cssFileNameGet();
@@ -104,30 +106,51 @@ QString reports::ReportTable::renderFooter()
   return "</body>\n</html>\n";
 }
 
-QString reports::ReportTable::renderHTML(QWidget* widget,
-    const QByteArray& encoding, const QString& title, bool includeCSS)
+QString reports::ReportTable::renderReport(const QString &type, const QByteArray& encoding, const QString &title, bool includeCSS)
 {
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString result;
 
-  m_encoding = encoding;
+  if (type == QLatin1String("html")) {
+    //this renders the HEAD tag and sets the correct css file
+    result = renderHeader(title, encoding, includeCSS);
 
-  //this render the HEAD tag and sets the correct css file
-  QString html = renderHeader(title, includeCSS);
+    try {
+      // report's name
+      result.append(QString::fromLatin1("<h2 class=\"report\">%1</h2>\n").arg(m_config.name()));
 
-  try {
-    //this method is implemented by each concrete class
-    html += renderBody();
-  } catch (const MyMoneyException &e) {
-    qDebug() << "reports::ReportTable::renderHTML(): ERROR " << e.what();
+      // report's date range
+      result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
+                                        "<div class=\"gap\">&nbsp;</div>\n").arg(i18nc("Report date range", "%1 through %2",
+                                                                                       m_config.fromDate().toString(Qt::SystemLocaleShortDate),
+                                                                                       m_config.toDate().toString(Qt::SystemLocaleShortDate))));
+      // report's currency information
+      if (m_containsNonBaseCurrency)
+        result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
+                                          "<div class=\"gap\">&nbsp;</div>\n").arg(m_config.isConvertCurrency() ?
+                                                                                     i18n("All currencies converted to %1" , file->baseCurrency().name()) :
+                                                                                     i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name())));
 
-    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e.what());
+      //this method is implemented by each concrete class
+      result.append(renderHTML());
+    } catch (const MyMoneyException &e) {
+      result.append(QString::fromLatin1("<h1>%1</h1><p>%2</p>").arg(i18n("Unable to generate report"),
+                                                                    i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e.what())));
+    }
 
-    KMessageBox::error(widget, error, i18n("Critical Error"));
-
-    html += "<h1>" + i18n("Unable to generate report") + "</h1><p>" + error + "</p>";
+    //this renders a common footer
+    result.append(QLatin1String("</body>\n</html>\n"));
+  } else if (type == QLatin1String("csv")) {
+    result.append(QString::fromLatin1("\"Report: %1\"\n")).arg(m_config.name());
+    result.append(QString::fromLatin1("%1\n").arg(i18nc("Report date range", "%1 through %2",
+                                                        m_config.fromDate().toString(Qt::SystemLocaleShortDate),
+                                                        m_config.toDate().toString(Qt::SystemLocaleShortDate))));
+    if (m_containsNonBaseCurrency)
+      result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency() ?
+                                                      i18n("All currencies converted to %1" , file->baseCurrency().name()) :
+                                                      i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name())));
+    result.append(renderCSV());
   }
 
-  //this renders a common footer
-  html += renderFooter();
-
-  return html;
+  return result;
 }

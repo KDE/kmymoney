@@ -54,7 +54,7 @@ class ListTable : public ReportTable
 {
 public:
   ListTable(const MyMoneyReport&);
-  QString renderBody() const;
+  QString renderHTML() const;
   QString renderCSV() const;
   void drawChart(KReportChartView&) const {}
   void dump(const QString& file, const QString& context = QString()) const;
@@ -141,7 +141,6 @@ protected:
    */
   QList<cellTypeE> m_postcolumns;
 
-  MyMoneyReport m_config;
 private:
   enum cellGroupE { cgMoney, cgShares, cgPercent, cgDate, cgPrice, cgMisc };
   static cellGroupE cellGroup(const cellTypeE cellType);
