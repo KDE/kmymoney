@@ -43,6 +43,9 @@
 // Project Includes
 
 #include "kmymoneysettings.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 class KMyMoneyMVCCombo::Private
 {
@@ -390,7 +393,7 @@ KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
     QFrame(parent)
 {
   QToolButton *t = new QToolButton(this);
-  t->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
+  t->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogClose]));
   t->setAutoRaise(true);
   QLabel *l = new QLabel(name, this);
   m_tagId = id;

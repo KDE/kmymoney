@@ -42,6 +42,9 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KBackupDlg::KBackupDlg(QWidget* parent)
     : kbackupdlgdecl(parent)
@@ -49,7 +52,7 @@ KBackupDlg::KBackupDlg(QWidget* parent)
   readConfig();
 
   KGuiItem chooseButtenItem(i18n("C&hoose..."),
-                            QIcon::fromTheme("folder"),
+                            QIcon::fromTheme(g_Icons[Icon::Folder]),
                             i18n("Select mount point"),
                             i18n("Use this to browse to the mount point."));
   KGuiItem::assign(chooseButton, chooseButtenItem);

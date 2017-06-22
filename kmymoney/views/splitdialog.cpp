@@ -40,6 +40,9 @@
 #include "splitdelegate.h"
 #include "newtransactioneditor.h"
 #include "splitadjustdialog.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 class SplitDialog::Private
 {
@@ -112,10 +115,8 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amou
   d->splitDelegate = new SplitDelegate(d->ui->splitView);
   d->ui->splitView->setItemDelegate(d->splitDelegate);
 
-  d->ui->okButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                            QIcon::fromTheme(QStringLiteral("finish"))));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
-                                                QIcon::fromTheme(QStringLiteral("stop"))));
+  d->ui->okButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
 
   // setup some connections
   connect(d->ui->splitView, SIGNAL(aboutToStartEdit()), this, SLOT(disableButtons()));

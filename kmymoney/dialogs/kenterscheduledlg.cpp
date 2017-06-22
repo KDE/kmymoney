@@ -52,8 +52,10 @@
 #include <kmymoneyglobalsettings.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
-
 #include "kmymoney.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 class KEnterScheduleDlg::Private
 {
@@ -74,8 +76,8 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 {
   d->m_schedule = schedule;
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
-  buttonOk->setIcon(QIcon::fromTheme("key-enter"));
-  buttonSkip->setIcon(QIcon::fromTheme("media-seek-forward"));
+  buttonOk->setIcon(QIcon::fromTheme(g_Icons[Icon::KeyEnter]));
+  buttonSkip->setIcon(QIcon::fromTheme(g_Icons[Icon::MediaSeekForward]));
   KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   KGuiItem::assign(buttonHelp, KStandardGuiItem::help());
   buttonIgnore->setHidden(true);

@@ -34,6 +34,9 @@
 
 #include "knewaccountdlg.h"
 #include "mymoneyfile.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
     : InterestCategoryWizardPageDecl(parent)
@@ -47,7 +50,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
 
   // load button icons
   KGuiItem createCategoryButtonItem(i18n("&Create..."),
-                                    QIcon::fromTheme("document-new"),
+                                    QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                                     i18n("Create a new category"),
                                     i18n("Use this to open the new account editor"));
   KGuiItem::assign(m_createCategoryButton, createCategoryButtonItem);

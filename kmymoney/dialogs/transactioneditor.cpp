@@ -59,9 +59,11 @@
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
 #include "kselecttransactionsdlg.h"
+#include <icons.h>
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
+using namespace Icons;
 
 TransactionEditor::TransactionEditor() :
     m_paymentMethod(MyMoneySchedule::STYPE_ANY),
@@ -622,14 +624,12 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
         if ((*it_ts).id().isEmpty()) {
           bool enter = true;
           if (askForSchedule && (*it_ts).postDate() > QDate::currentDate()) {
-            KGuiItem enterItem;
             KGuiItem enterButton(i18n("&Enter"),
-                                 QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                                  QIcon::fromTheme(QStringLiteral("finish"))),
+                                 QIcon::fromTheme(g_Icons[Icon::DialogOK]),
                                  i18n("Accepts the entered data and stores it"),
                                  i18n("Use this to enter the transaction into the ledger."));
             KGuiItem scheduleButton(i18n("&Schedule"),
-                                    QIcon::fromTheme("appointment-new"),
+                                    QIcon::fromTheme(g_Icons[Icon::AppointmentNew]),
                                     i18n("Accepts the entered data and stores it as schedule"),
                                     i18n("Use this to schedule the transaction for later entry into the ledger."));
 

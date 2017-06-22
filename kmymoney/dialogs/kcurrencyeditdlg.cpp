@@ -53,6 +53,9 @@
 #include <kavailablecurrencydlg.h>
 #include <kcurrencyeditordlg.h>
 #include <kmymoneyutils.h>
+#include <icons/icons.h>
+
+using namespace Icons;
 
 // this delegate is needed to disable editing the currency id (column 1)
 // since QTreeWidgetItem has only one set of flags for the whole row
@@ -85,11 +88,9 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) : ui(new Ui::KCurrencyEditDl
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   ui->verticalLayout->insertWidget(0, m_searchWidget);
   ui->m_currencyList->setItemDelegate(new KCurrencyEditDelegate(ui->m_currencyList));
-  ui->m_closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close"),
-                                              QIcon::fromTheme(QStringLiteral("stop"))));
-  ui->m_editCurrencyButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit"),
-                                              QIcon::fromTheme(QStringLiteral("text-editor"))));
-  ui->m_selectBaseCurrencyButton->setIcon(QIcon::fromTheme(QStringLiteral("kmymoney")));
+  ui->m_closeButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogClose]));
+  ui->m_editCurrencyButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
+  ui->m_selectBaseCurrencyButton->setIcon(QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
 
   connect(ui->m_currencyList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadCurrencies()));
@@ -164,7 +165,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     p->setText(2, (*it).tradingSymbol());
 
     if ((*it).id() == baseCurrency) {
-      p->setData(0, Qt::DecorationRole, QIcon::fromTheme(QStringLiteral("kmymoney")));
+      p->setData(0, Qt::DecorationRole, QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
       if (m_currency.id().isEmpty())
         first = p;
     } else {

@@ -52,6 +52,9 @@
 #include <kmymoneyglobalsettings.h>
 #include <kmymoneyutils.h>
 #include <kpricetreeitem.h>
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
     KMyMoneyPriceDlgDecl(parent)
@@ -75,24 +78,24 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   KGuiItem removeButtonItem(i18n("&Delete"),
-                            QIcon::fromTheme("edit-delete"),
+                            QIcon::fromTheme(g_Icons[Icon::EditDelete]),
                             i18n("Delete this entry"),
                             i18n("Remove this price item from the file"));
   KGuiItem::assign(m_deleteButton, removeButtonItem);
 
   KGuiItem newButtonItem(i18nc("New price entry", "&New"),
-                         QIcon::fromTheme("document-new"),
+                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                          i18n("Add a new entry"),
                          i18n("Create a new price entry."));
   KGuiItem::assign(m_newButton, newButtonItem);
 
   KGuiItem editButtonItem(i18n("&Edit"),
-                          QIcon::fromTheme("document-edit"),
+                          QIcon::fromTheme(g_Icons[Icon::DocumentEdit]),
                           i18n("Modify the selected entry"),
                           i18n("Change the details of selected price information."));
   KGuiItem::assign(m_editButton, editButtonItem);
 
-  m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "download"));
+  m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::Download]));
 
   connect(m_editButton, SIGNAL(clicked()), this, SLOT(slotEditPrice()));
   connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDeletePrice()));

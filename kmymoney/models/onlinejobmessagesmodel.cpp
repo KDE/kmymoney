@@ -21,6 +21,9 @@
 #include <QIcon>
 
 #include <klocalizedstring.h>
+#include <icons/icons.h>
+
+using namespace Icons;
 
 onlineJobMessagesModel::onlineJobMessagesModel(QObject* parent)
     : QAbstractTableModel(parent),
@@ -41,9 +44,9 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
         case Qt::DecorationRole: switch (messages[index.row()].type()) {
             case onlineJobMessage::debug:
             case onlineJobMessage::log:
-            case onlineJobMessage::information: return QIcon::fromTheme("dialog-information");
-            case onlineJobMessage::warning: return QIcon::fromTheme("dialog-warning");
-            case onlineJobMessage::error: return QIcon::fromTheme("dialog-error");
+            case onlineJobMessage::information: return QIcon::fromTheme(g_Icons[Icon::DialogInformation]);
+            case onlineJobMessage::warning: return QIcon::fromTheme(g_Icons[Icon::DialogWarning]);
+            case onlineJobMessage::error: return QIcon::fromTheme(g_Icons[Icon::DialogError]);
           }
         case Qt::ToolTipRole: switch (messages[index.row()].type()) {
             case onlineJobMessage::debug: return i18n("Information to find issues.");

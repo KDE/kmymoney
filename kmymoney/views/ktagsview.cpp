@@ -53,6 +53,9 @@
 #include "kmymoney.h"
 #include "models.h"
 #include "mymoneysecurity.h"
+#include <icons.h>
+
+using namespace Icons;
 
 /* -------------------------------------------------------------------------*/
 /*                         KTransactionPtrVector                            */
@@ -107,31 +110,29 @@ KTagsView::KTagsView(QWidget *parent) :
   m_filterBox->addItem(i18nc("@item Show only closed tags", "Closed"));
   m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-  KGuiItem newButtonItem(QString(""),
-                         QIcon::fromTheme(QStringLiteral("list-add-tag")),
+  KGuiItem newButtonItem(QString(),
+                         QIcon::fromTheme(g_Icons[Icon::ListAddTag]),
                          i18n("Creates a new tag"),
                          i18n("Use this to create a new tag."));
   KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
-  KGuiItem renameButtonItem(QString(""),
-                            QIcon::fromTheme(QStringLiteral("edit-rename"),
-                                             QIcon::fromTheme(QStringLiteral("text-editor"))),
+  KGuiItem renameButtonItem(QString(),
+                            QIcon::fromTheme(g_Icons[Icon::EditRename]),
                             i18n("Rename the current selected tag"),
                             i18n("Use this to start renaming the selected tag."));
   KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
-  KGuiItem deleteButtonItem(QString(""),
-                            QIcon::fromTheme(QStringLiteral("list-remove-tag")),
+  KGuiItem deleteButtonItem(QString(),
+                            QIcon::fromTheme(g_Icons[Icon::ListRemoveTag]),
                             i18n("Delete the current selected tag"),
                             i18n("Use this to delete the selected tag."));
   KGuiItem::assign(m_deleteButton, deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update tag", "Update"),
-                            QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                             QIcon::fromTheme(QStringLiteral("finish"))),
+                            QIcon::fromTheme(g_Icons[Icon::DialogOK]),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);

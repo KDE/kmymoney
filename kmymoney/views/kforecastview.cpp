@@ -44,8 +44,10 @@
 #include "pivotgrid.h"
 #include "fixedcolumntreeview.h"
 #include "kreportchartview.h"
+#include <icons.h>
 
 using namespace reports;
+using namespace Icons;
 
 KForecastView::KForecastView(QWidget *parent) :
     QWidget(parent),
@@ -68,8 +70,7 @@ KForecastView::KForecastView(QWidget *parent) :
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
-  m_forecastButton->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-forecast"),
-                                             QIcon::fromTheme(QStringLiteral("forecast"))));
+  m_forecastButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewForecast]));
 
   connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabChanged(int)));
 

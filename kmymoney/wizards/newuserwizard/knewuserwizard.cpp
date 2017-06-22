@@ -53,8 +53,10 @@
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>
 #include <kaccounttemplateselector.h>
-
 #include "kmymoneyglobalsettings.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 namespace NewUserWizard
 {
@@ -226,9 +228,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     QTreeWidgetItem* p = insertCurrency(*it);
     if ((*it).id() == baseCurrency) {
       first = p;
-      QIcon icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
-                                    QIcon::fromTheme(QStringLiteral("account"),
-                                                     QIcon::fromTheme(QStringLiteral("unknown"))));
+      QIcon icon = QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]);
       p->setIcon(0, icon);
     } else {
       p->setIcon(0, QIcon());

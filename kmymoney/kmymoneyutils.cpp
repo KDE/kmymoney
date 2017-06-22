@@ -50,6 +50,9 @@
 #include <mymoneyforecast.h>
 #include <kmymoneyglobalsettings.h>
 #include <investtransactioneditor.h>
+#include <icons.h>
+
+using namespace Icons;
 
 KMyMoneyUtils::KMyMoneyUtils()
 {
@@ -180,7 +183,7 @@ const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&New Schedule..."),
-                        QIcon::fromTheme("document-new"),
+                        QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                         i18n("Create a new schedule."),
                         i18n("Use this to create a new schedule."));
 
@@ -190,7 +193,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&Filter"),
-                        QIcon::fromTheme("view-filter"),
+                        QIcon::fromTheme(g_Icons[Icon::ViewFilter]),
                         i18n("Filter out accounts"),
                         i18n("Use this to filter out accounts"));
 
@@ -563,97 +566,53 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-QPixmap KMyMoneyUtils::overlayIcon(const QString iconName, const QString overlayName, const Qt::Corner corner, int size)
+QPixmap KMyMoneyUtils::overlayIcon(const QString &iconName, const QString &overlayName, const Qt::Corner corner, const int size)
 {
-  int x, y;
-  QPixmap result;
-  QIcon icon;
-  QPixmap ovly;
-  QString overlaidIcon = iconName + '-' + overlayName;
+  QPixmap pxIcon;
+  QString kyIcon = iconName + overlayName;
 
   // If found in the cache, return quickly
-  if (QPixmapCache::find(overlaidIcon, result)) {
-    return result;
-  }
+  if (QPixmapCache::find(kyIcon, pxIcon))
+    return pxIcon;
 
   // try to retrieve the main icon from cache
-  if (!QPixmapCache::find(iconName, result)) {
-    icon = QIcon::fromTheme(iconName);
-    if (icon.isNull()) {
-      QString iconReplacement;
-      if (iconName.compare(QLatin1String("view-bank-account")) == 0)
-        iconReplacement = "account";
-      else if (iconName.compare(QLatin1String("view-investment")) == 0)
-        iconReplacement = "investment";
-      else if (iconName.compare(QLatin1String("view-financial-categories")) == 0)
-        iconReplacement = "categories";
-      else if (iconName.compare(QLatin1String("view-financial-transfer")) == 0)
-        iconReplacement = "ledger";
-      else if (iconName.compare(QLatin1String("view-bank")) == 0)
-        iconReplacement = "bank";
-      else if (iconName.compare(QLatin1String("view-time-schedule-calculus")) == 0)
-        iconReplacement = "budget";
-      else if (iconName.compare(QLatin1String("merge")) == 0)
-        iconReplacement = "reconcile";
-      else
-        iconReplacement = "unknown";
-      icon = QIcon::fromTheme(iconReplacement);
-      if (icon.isNull())
-        icon = QIcon::fromTheme("unknown");
-    }
-
-    if (!icon.availableSizes().isEmpty())
-      result = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
-    QPixmapCache::insert(iconName, result);
+  if (!QPixmapCache::find(iconName, pxIcon)) {
+    pxIcon = QIcon::fromTheme(iconName).pixmap(size);
+    QPixmapCache::insert(iconName, pxIcon);
   }
 
-  QPainter pixmapPainter(&result);
-  icon = QIcon::fromTheme(overlayName);
-  if (icon.isNull()) {
-    QString overlayReplacement;
-    if (overlayName.compare(QLatin1String("document-import")) == 0)
-      overlayReplacement = "format-indent-less";
-    else if (overlayName.compare(QLatin1String("document-edit")) == 0)
-      overlayReplacement = "text-editor";
-    else if (overlayName.compare(QLatin1String("dialog-ok-apply")) == 0)
-      overlayReplacement = "finish";
-    else if (overlayName.compare(QLatin1String("download")) == 0)
-      overlayReplacement = "go-down";
-    else
-      overlayReplacement = "unknown";
-    icon = QIcon::fromTheme(overlayReplacement);
-    if (icon.isNull())
-      icon = QIcon::fromTheme("unknown");
-  }
+  if (overlayName.isEmpty()) // call from MyMoneyAccount::accountPixmap can have no overlay icon, so handle that appropriately
+    return pxIcon;
 
-  if (!icon.availableSizes().isEmpty())
-    ovly = icon.pixmap(size == 0 ? icon.availableSizes().first() : QSize(size, size));
+  QPainter pixmapPainter(&pxIcon);
+  QPixmap pxOverlay = QIcon::fromTheme(overlayName).pixmap(size);
 
+  int x, y;
   switch (corner) {
     case Qt::TopLeftCorner:
       x = 0;
       y = 0;
       break;
     case Qt::TopRightCorner:
-      x = result.width() / 2;
+      x = pxIcon.width() / 2;
       y = 0;
       break;
     case Qt::BottomLeftCorner:
       x = 0;
-      y = result.height() / 2;
+      y = pxIcon.height() / 2;
       break;
     case Qt::BottomRightCorner:
     default:
-      x = result.width() / 2;
-      y = result.height() / 2;
+      x = pxIcon.width() / 2;
+      y = pxIcon.height() / 2;
       break;
   }
-  pixmapPainter.drawPixmap(x, y, result.width() / 2, result.height() / 2, ovly);
+  pixmapPainter.drawPixmap(x, y, pxIcon.width() / 2, pxIcon.height() / 2, pxOverlay);
 
   //save for later use
-  QPixmapCache::insert(overlaidIcon, result);
+  QPixmapCache::insert(kyIcon, pxIcon);
 
-  return result;
+  return pxIcon;
 }
 
 void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType)

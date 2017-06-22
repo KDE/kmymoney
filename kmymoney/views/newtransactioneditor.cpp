@@ -43,6 +43,9 @@
 #include "ui_newtransactioneditor.h"
 #include "splitdialog.h"
 #include "widgethintframe.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 Q_GLOBAL_STATIC(QDate, lastUsedPostDate);
 
@@ -371,8 +374,8 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->payeeEdit->setModelColumn(0);
   d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
-  d->ui->enterButton->setIcon(QIcon::fromTheme("dialog-ok"));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
+  d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
 
   d->ui->statusCombo->setModel(&d->statusModel);
 

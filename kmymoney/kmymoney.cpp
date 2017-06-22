@@ -161,6 +161,8 @@
 #include "plugins/onlinepluginextended.h"
 #include "pluginloader.h"
 
+#include "icons/icons.h"
+
 #include <libkgpgfile/kgpgfile.h>
 
 #include <transactioneditor.h>
@@ -170,6 +172,7 @@
 
 #include "kmymoneyutils.h"
 
+using namespace Icons;
 
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
@@ -401,6 +404,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
+  Icons::setIconThemeNames(KMyMoneySettings::iconsTheme());
   if (KMyMoneySettings::iconsTheme().compare(QLatin1Literal("system")) != 0)
     QIcon::setThemeName(KMyMoneySettings::iconsTheme());
 
@@ -579,13 +583,12 @@ void KMyMoneyApp::initActions()
 
   QAction *saveas_database = actionCollection()->addAction("saveas_database");
   saveas_database->setText(i18n("Save as database..."));
-  saveas_database->setIcon(QIcon::fromTheme("svn-update"));
+  saveas_database->setIcon(QIcon::fromTheme(g_Icons[Icon::SVNUpdate]));
   connect(saveas_database, SIGNAL(triggered()), this, SLOT(slotSaveAsDatabase()));
 
   QAction *file_backup = actionCollection()->addAction("file_backup");
   file_backup->setText(i18n("Backup..."));
-  file_backup->setIcon(QIcon::fromTheme(QStringLiteral("utilities-file-archiver"),
-                                        QIcon::fromTheme(QStringLiteral("package"))));
+  file_backup->setIcon(QIcon::fromTheme(g_Icons[Icon::FileArchiver]));
   connect(file_backup, SIGNAL(triggered()), this, SLOT(slotFileBackup()));
 
   QAction *file_import_qif = actionCollection()->addAction("file_import_qif");
@@ -614,8 +617,7 @@ void KMyMoneyApp::initActions()
 
   QAction *view_personal_data = actionCollection()->addAction("view_personal_data");
   view_personal_data->setText(i18n("Personal Data..."));
-  view_personal_data->setIcon(QIcon::fromTheme(QStringLiteral("user-properties"),
-                                               QIcon::fromTheme(QStringLiteral("system-users"))));
+  view_personal_data->setIcon(QIcon::fromTheme(g_Icons[Icon::UserProperties]));
   connect(view_personal_data, SIGNAL(triggered()), this, SLOT(slotFileViewPersonal()));
 
 #ifdef KMM_DEBUG
@@ -626,7 +628,7 @@ void KMyMoneyApp::initActions()
 
   QAction *view_file_info = actionCollection()->addAction("view_file_info");
   view_file_info->setText(i18n("File-Information..."));
-  view_file_info->setIcon(QIcon::fromTheme("document-properties"));
+  view_file_info->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentProperties]));
   connect(view_file_info, SIGNAL(triggered()), this, SLOT(slotFileInfoDialog()));
 
   // *************
@@ -634,7 +636,7 @@ void KMyMoneyApp::initActions()
   // *************
   QAction *edit_find_transaction = actionCollection()->addAction("edit_find_transaction");
   edit_find_transaction->setText(i18n("Find transaction..."));
-  edit_find_transaction->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "edit-find"));
+  edit_find_transaction->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialTransfer], g_Icons[Icon::EditFind]));
   actionCollection()->setDefaultShortcut(edit_find_transaction, QKeySequence("Ctrl+F"));
   connect(edit_find_transaction, SIGNAL(triggered()), this, SLOT(slotFindTransaction()));
 
@@ -642,26 +644,25 @@ void KMyMoneyApp::initActions()
   // The View menu
   // *************
   KToggleAction *view_show_transaction_detail = actionCollection()->add<KToggleAction>("view_show_transaction_detail");
-  view_show_transaction_detail->setIcon(QIcon::fromTheme(QStringLiteral("zoom-in"),
-                                                         QIcon::fromTheme(QStringLiteral("edit-find"))));
+  view_show_transaction_detail->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewTransactionDetail]));
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
   actionCollection()->setDefaultShortcut(view_show_transaction_detail, QKeySequence("Ctrl+T"));
 
   KToggleAction *view_hide_reconciled_transactions = actionCollection()->add<KToggleAction>("view_hide_reconciled_transactions");
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
   if (QIcon::hasThemeIcon(QStringLiteral("hide-reconciled")))
-    view_hide_reconciled_transactions->setIcon(QIcon::fromTheme(QStringLiteral("hide-reconciled")));
+    view_hide_reconciled_transactions->setIcon(QIcon::fromTheme(g_Icons[Icon::HideReconciled]));
   else
-    view_hide_reconciled_transactions->setIcon(KMyMoneyUtils::overlayIcon("merge", "view-close"));
+    view_hide_reconciled_transactions->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::Merge], g_Icons[Icon::ViewClose]));
   actionCollection()->setDefaultShortcut(view_hide_reconciled_transactions, QKeySequence("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   KToggleAction *view_hide_unused_categories = actionCollection()->add<KToggleAction>("view_hide_unused_categories");
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
   if (QIcon::hasThemeIcon(QStringLiteral("hide-categories")))
-    view_hide_unused_categories->setIcon(QIcon::fromTheme(QStringLiteral("hide-categories")));
+    view_hide_unused_categories->setIcon(QIcon::fromTheme(g_Icons[Icon::HideCategories]));
   else
-    view_hide_unused_categories->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "view-close"));
+    view_hide_unused_categories->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialCategories], g_Icons[Icon::ViewClose]));
   actionCollection()->setDefaultShortcut(view_hide_unused_categories, QKeySequence("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
@@ -675,17 +676,17 @@ void KMyMoneyApp::initActions()
   // *********************
   QAction *institution_new = actionCollection()->addAction("institution_new");
   institution_new->setText(i18n("New institution..."));
-  institution_new->setIcon(KMyMoneyUtils::overlayIcon("view-bank", "list-add", Qt::TopRightCorner));
+  institution_new->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBank], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
   connect(institution_new, SIGNAL(triggered()), this, SLOT(slotInstitutionNew()));
 
   QAction *institution_edit = actionCollection()->addAction("institution_edit");
   institution_edit->setText(i18n("Edit institution..."));
-  institution_edit->setIcon(KMyMoneyUtils::overlayIcon("view-bank", "document-edit"));
+  institution_edit->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBank], g_Icons[Icon::DocumentEdit]));
   connect(institution_edit, SIGNAL(triggered()), this, SLOT(slotInstitutionEdit()));
 
   QAction *institution_delete = actionCollection()->addAction("institution_delete");
   institution_delete->setText(i18n("Delete institution..."));
-  institution_delete->setIcon(KMyMoneyUtils::overlayIcon("view-bank", "edit-delete"));
+  institution_delete->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBank], g_Icons[Icon::EditDelete]));
   connect(institution_delete, SIGNAL(triggered()), this, SLOT(slotInstitutionDelete()));
 
   // *****************
@@ -693,77 +694,72 @@ void KMyMoneyApp::initActions()
   // *****************
   QAction *account_new = actionCollection()->addAction("account_new");
   account_new->setText(i18n("New account..."));
-  account_new->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "list-add", Qt::TopRightCorner));
+  account_new->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
   connect(account_new, SIGNAL(triggered()), this, SLOT(slotAccountNew()));
 
   // note : action "category_new" is included in this menu but defined below
   QAction *account_open = actionCollection()->addAction("account_open");
   account_open->setText(i18n("Open ledger"));
-  account_open->setIcon(QIcon::fromTheme("view-financial-list",
-                                         QIcon::fromTheme(QStringLiteral("ledger"))));
+  account_open->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewFinancialList]));
   connect(account_open, SIGNAL(triggered()), this, SLOT(slotAccountOpen()));
 
   QAction *account_reconcile = actionCollection()->addAction("account_reconcile");
   account_reconcile->setText(i18n("Reconcile..."));
-  account_reconcile->setIcon(QIcon::fromTheme(QStringLiteral("merge"),
-                                              QIcon::fromTheme(QStringLiteral("reconcile"))));
+  account_reconcile->setIcon(QIcon::fromTheme(g_Icons[Icon::Reconcile]));
   actionCollection()->setDefaultShortcut(account_reconcile, QKeySequence("Ctrl+Shift+R"));
   connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
 
   QAction *account_reconcile_finish = actionCollection()->addAction("account_reconcile_finish");
   account_reconcile_finish->setText(i18nc("Finish reconciliation", "Finish"));
-  account_reconcile_finish->setIcon(KMyMoneyUtils::overlayIcon("merge", "dialog-ok"));
+  account_reconcile_finish->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::Merge], g_Icons[Icon::DialogOK]));
   connect(account_reconcile_finish, SIGNAL(triggered()), this, SLOT(slotAccountReconcileFinish()));
 
   QAction *account_reconcile_postpone = actionCollection()->addAction("account_reconcile_postpone");
   account_reconcile_postpone->setText(i18n("Postpone reconciliation"));
-  account_reconcile_postpone->setIcon(QIcon::fromTheme("media-playback-pause"));
+  account_reconcile_postpone->setIcon(QIcon::fromTheme(g_Icons[Icon::MediaPlaybackPause]));
   connect(account_reconcile_postpone, SIGNAL(triggered()), this, SLOT(slotAccountReconcilePostpone()));
 
   QAction *account_edit = actionCollection()->addAction("account_edit");
   account_edit->setText(i18n("Edit account..."));
-  account_edit->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "document-edit"));
+  account_edit->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::DocumentEdit]));
   connect(account_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
 
   QAction *account_delete = actionCollection()->addAction("account_delete");
   account_delete->setText(i18n("Delete account..."));
-  account_delete->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "edit-delete"));
+  account_delete->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::EditDelete]));
   connect(account_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
 
   QAction *account_close = actionCollection()->addAction("account_close");
   account_close->setText(i18n("Close account"));
-  account_close->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "dialog-close"));
+  account_close->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::DialogClose]));
   connect(account_close, SIGNAL(triggered()), this, SLOT(slotAccountClose()));
 
   QAction *account_reopen = actionCollection()->addAction("account_reopen");
   account_reopen->setText(i18n("Reopen account"));
-  account_reopen->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "dialog-ok"));
+  account_reopen->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::DialogOK]));
   connect(account_reopen, SIGNAL(triggered()), this, SLOT(slotAccountReopen()));
 
   QAction *account_transaction_report = actionCollection()->addAction("account_transaction_report");
   account_transaction_report->setText(i18n("Transaction report"));
-  account_transaction_report->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
-                                                       QIcon::fromTheme(QStringLiteral("ledger"))));
+  account_transaction_report->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewFinancialList]));
   connect(account_transaction_report, SIGNAL(triggered()), this, SLOT(slotAccountTransactionReport()));
 
   QAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
-  account_chart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
-                                          QIcon::fromTheme(QStringLiteral("report-line"),
-                                                           QIcon::fromTheme(QStringLiteral("account-types-investments")))));
+  account_chart->setIcon(QIcon::fromTheme(g_Icons[Icon::OfficeChartLine]));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 
   QAction *account_online_map = actionCollection()->addAction("account_online_map");
   account_online_map->setText(i18n("Map to online account..."));
-  account_online_map->setIcon(QIcon::fromTheme("news-subscribe"));
+  account_online_map->setIcon(QIcon::fromTheme(g_Icons[Icon::NewsSubscribe]));
   connect(account_online_map, SIGNAL(triggered()), this, SLOT(slotAccountMapOnline()));
 
   QAction *account_online_unmap = actionCollection()->addAction("account_online_unmap");
   account_online_unmap->setText(i18n("Unmap account..."));
-  account_online_unmap->setIcon(QIcon::fromTheme("news-unsubscribe"));
+  account_online_unmap->setIcon(QIcon::fromTheme(g_Icons[Icon::NewsUnsubscribe]));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(KMyMoneyUtils::overlayIcon("view-bank-account", "download"), i18nc("Update online accounts menu", "Update"), this);
+  KActionMenu* menu = new KActionMenu(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::Download]), i18nc("Update online accounts menu", "Update"), this);
   actionCollection()->addAction("account_online_update_menu", menu);
 
   // activating the menu button is the same as selecting the current account
@@ -771,19 +767,19 @@ void KMyMoneyApp::initActions()
 
   QAction *account_online_update = actionCollection()->addAction("account_online_update");
   account_online_update->setText(i18n("Update account..."));
-  account_online_update->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "download"));
+  account_online_update->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::Download]));
   connect(account_online_update, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnline()));
   menu->addAction(account_online_update);
 
   QAction *account_online_update_all = actionCollection()->addAction("account_online_update_all");
   account_online_update_all->setText(i18n("Update all accounts..."));
-  account_online_update_all->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "download"));
+  account_online_update_all->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::Download]));
   connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
   menu->addAction(account_online_update_all);
 
   QAction *account_online_transfer = actionCollection()->addAction("account_online_new_credit_transfer");
   account_online_transfer->setText(i18n("New credit transfer"));
-  account_online_transfer->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "mail-message-new"));
+  account_online_transfer->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewBankAccount], g_Icons[Icon::MailMessageNew]));
   connect(account_online_transfer, SIGNAL(triggered()), this, SLOT(slotNewOnlineTransfer()));
   connect(onlineJobAdministration::instance(), SIGNAL(canSendCreditTransferChanged(bool)),  account_online_transfer, SLOT(setEnabled(bool)));
 
@@ -792,17 +788,17 @@ void KMyMoneyApp::initActions()
   // *******************
   QAction *category_new = actionCollection()->addAction("category_new");
   category_new->setText(i18n("New category..."));
-  category_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "list-add", Qt::TopRightCorner));
+  category_new->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialCategories], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
   connect(category_new, SIGNAL(triggered()), this, SLOT(slotCategoryNew()));
 
   QAction *category_edit = actionCollection()->addAction("category_edit");
   category_edit->setText(i18n("Edit category..."));
-  category_edit->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "document-edit"));
+  category_edit->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialCategories], g_Icons[Icon::DocumentEdit]));
   connect(category_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
 
   QAction *category_delete = actionCollection()->addAction("category_delete");
   category_delete->setText(i18n("Delete category..."));
-  category_delete->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "edit-delete"));
+  category_delete->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialCategories], g_Icons[Icon::EditDelete]));
   connect(category_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
 
   // **************
@@ -810,12 +806,12 @@ void KMyMoneyApp::initActions()
   // **************
   QAction *tools_qif_editor = actionCollection()->addAction("tools_qif_editor");
   tools_qif_editor->setText(i18n("QIF Profile Editor..."));
-  tools_qif_editor->setIcon(QIcon::fromTheme("document-properties"));
+  tools_qif_editor->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentProperties]));
   connect(tools_qif_editor, SIGNAL(triggered()), this, SLOT(slotQifProfileEditor()));
 
   QAction *tools_currency_editor = actionCollection()->addAction("tools_currency_editor");
   tools_currency_editor->setText(i18n("Currencies..."));
-  tools_currency_editor->setIcon(QIcon::fromTheme("view-currency-list"));
+  tools_currency_editor->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewCurrencyList]));
   connect(tools_currency_editor, SIGNAL(triggered()), this, SLOT(slotCurrencyDialog()));
 
   QAction *tools_price_editor = actionCollection()->addAction("tools_price_editor");
@@ -824,7 +820,7 @@ void KMyMoneyApp::initActions()
 
   QAction *tools_update_prices = actionCollection()->addAction("tools_update_prices");
   tools_update_prices->setText(i18n("Update Stock and Currency Prices..."));
-  tools_update_prices->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "download"));
+  tools_update_prices->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::Download]));
   connect(tools_update_prices, SIGNAL(triggered()), this, SLOT(slotEquityPriceUpdate()));
 
   QAction *tools_consistency_check = actionCollection()->addAction("tools_consistency_check");
@@ -833,7 +829,7 @@ void KMyMoneyApp::initActions()
 
   QAction *tools_performancetest = actionCollection()->addAction("tools_performancetest");
   tools_performancetest->setText(i18n("Performance-Test"));
-  tools_performancetest->setIcon(QIcon::fromTheme("fork"));
+  tools_performancetest->setIcon(QIcon::fromTheme(g_Icons[Icon::Fork]));
   connect(tools_performancetest, SIGNAL(triggered()), this, SLOT(slotPerformanceTest()));
 
   QAction *tools_generate_sql = actionCollection()->addAction("tools_generate_sql");
@@ -842,7 +838,7 @@ void KMyMoneyApp::initActions()
 
   QAction *tools_kcalc = actionCollection()->addAction("tools_kcalc");
   tools_kcalc->setText(i18n("Calculator..."));
-  tools_kcalc->setIcon(QIcon::fromTheme("accessories-calculator"));
+  tools_kcalc->setIcon(QIcon::fromTheme(g_Icons[Icon::AccessoriesCalculator]));
   connect(tools_kcalc, SIGNAL(triggered()), this, SLOT(slotToolsStartKCalc()));
 
   // *****************
@@ -863,8 +859,7 @@ void KMyMoneyApp::initActions()
   // *************
   QAction *help_show_tip = actionCollection()->addAction("help_show_tip");
   help_show_tip->setText(i18n("&Show tip of the day"));
-  help_show_tip->setIcon(QIcon::fromTheme(QStringLiteral("ktip"),
-                                          QIcon::fromTheme(QStringLiteral("info"))));
+  help_show_tip->setIcon(QIcon::fromTheme(g_Icons[Icon::Tip]));
   connect(help_show_tip, SIGNAL(triggered()), this, SLOT(slotShowTipOfTheDay()));
 
   // ***************************
@@ -872,7 +867,7 @@ void KMyMoneyApp::initActions()
   // ***************************
   QAction *transaction_new = actionCollection()->addAction("transaction_new");
   transaction_new->setText(i18nc("New transaction button", "New"));
-  transaction_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "list-add", Qt::TopRightCorner));
+  transaction_new->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialTransfer], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
   actionCollection()->setDefaultShortcut(transaction_new, QKeySequence(Qt::CTRL | Qt::Key_Insert));
   connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
 
@@ -882,45 +877,42 @@ void KMyMoneyApp::initActions()
   // the same shortcut to two actions)
   QAction *transaction_edit = actionCollection()->addAction("transaction_edit");
   transaction_edit->setText(i18nc("Edit transaction button", "Edit"));
-  transaction_edit->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "document-edit"));
+  transaction_edit->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialTransfer], g_Icons[Icon::DocumentEdit]));
   connect(transaction_edit, SIGNAL(triggered()), this, SLOT(slotTransactionsEdit()));
 
   QAction *transaction_enter = actionCollection()->addAction("transaction_enter");
   transaction_enter->setText(i18nc("Enter transaction", "Enter"));
-  transaction_enter->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                              QIcon::fromTheme(QStringLiteral("finish"))));
+  transaction_enter->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
   connect(transaction_enter, SIGNAL(triggered()), this, SLOT(slotTransactionsEnter()));
 
   QAction *transaction_editsplits = actionCollection()->addAction("transaction_editsplits");
   transaction_editsplits->setText(i18nc("Edit split button", "Edit splits"));
-  transaction_editsplits->setIcon(QIcon::fromTheme(QStringLiteral("split"),
-                                                   QIcon::fromTheme(QStringLiteral("transaction-split"))));
+  transaction_editsplits->setIcon(QIcon::fromTheme(g_Icons[Icon::Split]));
   connect(transaction_editsplits, SIGNAL(triggered()), this, SLOT(slotTransactionsEditSplits()));
 
   QAction *transaction_cancel = actionCollection()->addAction("transaction_cancel");
   transaction_cancel->setText(i18nc("Cancel transaction edit", "Cancel"));
-  transaction_cancel->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
-                                               QIcon::fromTheme(QStringLiteral("stop"))));
+  transaction_cancel->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
   connect(transaction_cancel, SIGNAL(triggered()), this, SLOT(slotTransactionsCancel()));
 
   QAction *transaction_delete = actionCollection()->addAction("transaction_delete");
   transaction_delete->setText(i18nc("Delete transaction", "Delete"));
-  transaction_delete->setIcon(QIcon::fromTheme("edit-delete"));
+  transaction_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
   connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionsDelete()));
 
   QAction *transaction_duplicate = actionCollection()->addAction("transaction_duplicate");
   transaction_duplicate->setText(i18nc("Duplicate transaction", "Duplicate"));
-  transaction_duplicate->setIcon(QIcon::fromTheme("edit-copy"));
+  transaction_duplicate->setIcon(QIcon::fromTheme(g_Icons[Icon::EditCopy]));
   connect(transaction_duplicate, SIGNAL(triggered()), this, SLOT(slotTransactionDuplicate()));
 
   QAction *transaction_match = actionCollection()->addAction("transaction_match");
   transaction_match->setText(i18nc("Button text for match transaction", "Match"));
-  transaction_match->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "document-import"));
+  transaction_match->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialTransfer], g_Icons[Icon::DocumentImport]));
   connect(transaction_match, SIGNAL(triggered()), this, SLOT(slotTransactionMatch()));
 
   QAction *transaction_accept = actionCollection()->addAction("transaction_accept");
   transaction_accept->setText(i18nc("Accept 'imported' and 'matched' transaction", "Accept"));
-  transaction_accept->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "dialog-ok-apply"));
+  transaction_accept->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialTransfer], g_Icons[Icon::DialogOKApply]));
   connect(transaction_accept, SIGNAL(triggered()), this, SLOT(slotTransactionsAccept()));
 
   QAction *transaction_mark_toggle = actionCollection()->addAction("transaction_mark_toggle");
@@ -949,17 +941,17 @@ void KMyMoneyApp::initActions()
 
   QAction *transaction_goto_account = actionCollection()->addAction("transaction_goto_account");
   transaction_goto_account->setText(i18n("Go to account"));
-  transaction_goto_account->setIcon(QIcon::fromTheme("go-jump"));
+  transaction_goto_account->setIcon(QIcon::fromTheme(g_Icons[Icon::GoJump]));
   connect(transaction_goto_account, SIGNAL(triggered()), this, SLOT(slotTransactionGotoAccount()));
 
   QAction *transaction_goto_payee = actionCollection()->addAction("transaction_goto_payee");
   transaction_goto_payee->setText(i18n("Go to payee"));
-  transaction_goto_payee->setIcon(QIcon::fromTheme("go-jump"));
+  transaction_goto_payee->setIcon(QIcon::fromTheme(g_Icons[Icon::GoJump]));
   connect(transaction_goto_payee, SIGNAL(triggered()), this, SLOT(slotTransactionGotoPayee()));
 
   QAction *transaction_create_schedule = actionCollection()->addAction("transaction_create_schedule");
   transaction_create_schedule->setText(i18n("Create scheduled transaction..."));
-  transaction_create_schedule->setIcon(QIcon::fromTheme("appointment-new"));
+  transaction_create_schedule->setIcon(QIcon::fromTheme(g_Icons[Icon::AppointmentNew]));
   connect(transaction_create_schedule, SIGNAL(triggered()), this, SLOT(slotTransactionCreateSchedule()));
 
   QAction *transaction_assign_number = actionCollection()->addAction("transaction_assign_number");
@@ -978,22 +970,22 @@ void KMyMoneyApp::initActions()
   //Investment
   QAction *investment_new = actionCollection()->addAction("investment_new");
   investment_new->setText(i18n("New investment..."));
-  investment_new->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "list-add", Qt::TopRightCorner));
+  investment_new->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
   connect(investment_new, SIGNAL(triggered()), this, SLOT(slotInvestmentNew()));
 
   QAction *investment_edit = actionCollection()->addAction("investment_edit");
   investment_edit->setText(i18n("Edit investment..."));
-  investment_edit->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "document-edit"));
+  investment_edit->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::DocumentEdit]));
   connect(investment_edit, SIGNAL(triggered()), this, SLOT(slotInvestmentEdit()));
 
   QAction *investment_delete = actionCollection()->addAction("investment_delete");
   investment_delete->setText(i18n("Delete investment..."));
-  investment_delete->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "edit-delete"));
+  investment_delete->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::EditDelete]));
   connect(investment_delete, SIGNAL(triggered()), this, SLOT(slotInvestmentDelete()));
 
   QAction *investment_online_price_update = actionCollection()->addAction("investment_online_price_update");
   investment_online_price_update->setText(i18n("Online price update..."));
-  investment_online_price_update->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "download"));
+  investment_online_price_update->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::Download]));
   connect(investment_online_price_update, SIGNAL(triggered()), this, SLOT(slotOnlinePriceUpdate()));
 
   QAction *investment_manual_price_update = actionCollection()->addAction("investment_manual_price_update");
@@ -1003,143 +995,142 @@ void KMyMoneyApp::initActions()
   //Schedule
   QAction *schedule_new = actionCollection()->addAction("schedule_new");
   schedule_new->setText(i18n("New scheduled transaction"));
-  schedule_new->setIcon(QIcon::fromTheme("appointment-new"));
+  schedule_new->setIcon(QIcon::fromTheme(g_Icons[Icon::AppointmentNew]));
   connect(schedule_new, SIGNAL(triggered()), this, SLOT(slotScheduleNew()));
 
   QAction *schedule_edit = actionCollection()->addAction("schedule_edit");
   schedule_edit->setText(i18n("Edit scheduled transaction"));
-  schedule_edit->setIcon(QIcon::fromTheme("document-edit"));
+  schedule_edit->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
   connect(schedule_edit, SIGNAL(triggered()), this, SLOT(slotScheduleEdit()));
 
   QAction *schedule_delete = actionCollection()->addAction("schedule_delete");
   schedule_delete->setText(i18n("Delete scheduled transaction"));
-  schedule_delete->setIcon(QIcon::fromTheme("edit-delete"));
+  schedule_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
   connect(schedule_delete, SIGNAL(triggered()), this, SLOT(slotScheduleDelete()));
 
   QAction *schedule_duplicate = actionCollection()->addAction("schedule_duplicate");
   schedule_duplicate->setText(i18n("Duplicate scheduled transaction"));
-  schedule_duplicate->setIcon(QIcon::fromTheme("edit-copy"));
+  schedule_duplicate->setIcon(QIcon::fromTheme(g_Icons[Icon::EditCopy]));
   connect(schedule_duplicate, SIGNAL(triggered()), this, SLOT(slotScheduleDuplicate()));
 
   QAction *schedule_enter = actionCollection()->addAction("schedule_enter");
   schedule_enter->setText(i18n("Enter next transaction..."));
-  schedule_enter->setIcon(QIcon::fromTheme("key-enter"));
+  schedule_enter->setIcon(QIcon::fromTheme(g_Icons[Icon::KeyEnter]));
   connect(schedule_enter, SIGNAL(triggered()), this, SLOT(slotScheduleEnter()));
 
   QAction *schedule_skip = actionCollection()->addAction("schedule_skip");
   schedule_skip->setText(i18n("Skip next transaction..."));
-  schedule_skip->setIcon(QIcon::fromTheme("media-seek-forward"));
+  schedule_skip->setIcon(QIcon::fromTheme(g_Icons[Icon::MediaSeekForward]));
   connect(schedule_skip, SIGNAL(triggered()), this, SLOT(slotScheduleSkip()));
 
   //Payees
   QAction *payee_new = actionCollection()->addAction("payee_new");
   payee_new->setText(i18n("New payee"));
-  payee_new->setIcon(QIcon::fromTheme("list-add-user"));
+  payee_new->setIcon(QIcon::fromTheme(g_Icons[Icon::ListAddUser]));
   connect(payee_new, SIGNAL(triggered()), this, SLOT(slotPayeeNew()));
 
   QAction *payee_rename = actionCollection()->addAction("payee_rename");
   payee_rename->setText(i18n("Rename payee"));
-  payee_rename->setIcon(QIcon::fromTheme("user-properties"));
+  payee_rename->setIcon(QIcon::fromTheme(g_Icons[Icon::PayeeRename]));
   connect(payee_rename, SIGNAL(triggered()), this, SIGNAL(payeeRename()));
 
   QAction *payee_delete = actionCollection()->addAction("payee_delete");
   payee_delete->setText(i18n("Delete payee"));
-  payee_delete->setIcon(QIcon::fromTheme("list-remove-user"));
+  payee_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::ListRemoveUser]));
   connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
 
   QAction *payee_merge = actionCollection()->addAction("payee_merge");
   payee_merge->setText(i18n("Merge payees"));
-  payee_merge->setIcon(QIcon::fromTheme("merge"));
+  payee_merge->setIcon(QIcon::fromTheme(g_Icons[Icon::PayeeMerge]));
   connect(payee_merge, SIGNAL(triggered()), this, SLOT(slotPayeeMerge()));
 
   //Tags
   QAction *tag_new = actionCollection()->addAction("tag_new");
   tag_new->setText(i18n("New tag"));
-  tag_new->setIcon(QIcon::fromTheme("list-add-tag"));
+  tag_new->setIcon(QIcon::fromTheme(g_Icons[Icon::ListAddTag]));
   connect(tag_new, SIGNAL(triggered()), this, SLOT(slotTagNew()));
 
   QAction *tag_rename = actionCollection()->addAction("tag_rename");
   tag_rename->setText(i18n("Rename tag"));
-  tag_rename->setIcon(QIcon::fromTheme("tag-rename"));
+  tag_rename->setIcon(QIcon::fromTheme(g_Icons[Icon::TagRename]));
   connect(tag_rename, SIGNAL(triggered()), this, SIGNAL(tagRename()));
 
   QAction *tag_delete = actionCollection()->addAction("tag_delete");
   tag_delete->setText(i18n("Delete tag"));
-  tag_delete->setIcon(QIcon::fromTheme("list-remove-tag"));
+  tag_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::ListRemoveTag]));
   connect(tag_delete, SIGNAL(triggered()), this, SLOT(slotTagDelete()));
 
   //Budget
   QAction *budget_new = actionCollection()->addAction("budget_new");
   budget_new->setText(i18n("New budget"));
-  budget_new->setIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add", Qt::TopRightCorner));
+  budget_new->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
   connect(budget_new, SIGNAL(triggered()), this, SLOT(slotBudgetNew()));
 
   QAction *budget_rename = actionCollection()->addAction("budget_rename");
   budget_rename->setText(i18n("Rename budget"));
-  budget_rename->setIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "document-edit"));
+  budget_rename->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::DocumentEdit]));
   connect(budget_rename, SIGNAL(triggered()), this, SIGNAL(budgetRename()));
 
   QAction *budget_delete = actionCollection()->addAction("budget_delete");
   budget_delete->setText(i18n("Delete budget"));
-  budget_delete->setIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "edit-delete"));
+  budget_delete->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::EditDelete]));
   connect(budget_delete, SIGNAL(triggered()), this, SLOT(slotBudgetDelete()));
 
   QAction *budget_copy = actionCollection()->addAction("budget_copy");
   budget_copy->setText(i18n("Copy budget"));
-  budget_copy->setIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "edit-copy"));
+  budget_copy->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::EditCopy]));
   connect(budget_copy, SIGNAL(triggered()), this, SLOT(slotBudgetCopy()));
 
   QAction *budget_change_year = actionCollection()->addAction("budget_change_year");
   budget_change_year->setText(i18n("Change budget year"));
-  budget_change_year->setIcon(QIcon::fromTheme("view-calendar"));
+  budget_change_year->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewCalendar]));
   connect(budget_change_year, SIGNAL(triggered()), this, SLOT(slotBudgetChangeYear()));
 
   QAction *budget_forecast = actionCollection()->addAction("budget_forecast");
   budget_forecast->setText(i18n("Budget based on forecast"));
-  budget_forecast->setIcon(QIcon::fromTheme("view-financial-forecast"));
+  budget_forecast->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewForecast]));
   connect(budget_forecast, SIGNAL(triggered()), this, SLOT(slotBudgetForecast()));
 
   // Currency actions
   QAction *currency_new = actionCollection()->addAction("currency_new");
   currency_new->setText(i18n("New currency"));
-  currency_new->setIcon(QIcon::fromTheme("document-new"));
+  currency_new->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
   connect(currency_new, SIGNAL(triggered()), this, SLOT(slotCurrencyNew()));
 
   QAction *currency_rename = actionCollection()->addAction("currency_rename");
   currency_rename->setText(i18n("Rename currency"));
-  currency_rename->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename"),
-                                            QIcon::fromTheme(QStringLiteral("text-editor"))));
+  currency_rename->setIcon(QIcon::fromTheme(g_Icons[Icon::EditRename]));
   connect(currency_rename, SIGNAL(triggered()), this, SIGNAL(currencyRename()));
 
   QAction *currency_delete = actionCollection()->addAction("currency_delete");
   currency_delete->setText(i18n("Delete currency"));
-  currency_delete->setIcon(QIcon::fromTheme("edit-delete"));
+  currency_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
   connect(currency_delete, SIGNAL(triggered()), this, SLOT(slotCurrencyDelete()));
 
   QAction *currency_setbase = actionCollection()->addAction("currency_setbase");
   currency_setbase->setText(i18n("Select as base currency"));
-  currency_setbase->setIcon(QIcon::fromTheme("kmymoney"));
+  currency_setbase->setIcon(QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
   connect(currency_setbase, SIGNAL(triggered()), this, SLOT(slotCurrencySetBase()));
 
   //price actions
   QAction *price_new = actionCollection()->addAction("price_new");
   price_new->setText(i18n("New price..."));
-  price_new->setIcon(QIcon::fromTheme("document-new"));
+  price_new->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
   connect(price_new, SIGNAL(triggered()), this, SIGNAL(priceNew()));
 
   QAction *price_edit = actionCollection()->addAction("price_edit");
   price_edit->setText(i18n("Edit price..."));
-  price_edit->setIcon(QIcon::fromTheme("document-edit"));
+  price_edit->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
   connect(price_edit, SIGNAL(triggered()), this, SIGNAL(priceEdit()));
 
   QAction *price_update = actionCollection()->addAction("price_update");
   price_update->setText(i18n("Online Price Update..."));
-  price_update->setIcon(KMyMoneyUtils::overlayIcon("view-currency-list", "download"));
+  price_update->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewCurrencyList], g_Icons[Icon::Download]));
   connect(price_update, SIGNAL(triggered()), this, SIGNAL(priceOnlineUpdate()));
 
   QAction *price_delete = actionCollection()->addAction("price_delete");
   price_delete->setText(i18n("Delete price..."));
-  price_delete->setIcon(QIcon::fromTheme("edit-delete"));
+  price_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
   connect(price_delete, SIGNAL(triggered()), this, SIGNAL(priceDelete()));
 
   //debug actions
@@ -1161,11 +1152,11 @@ void KMyMoneyApp::initActions()
   // onlineJob actions
   QAction* onlineJob_delete = actionCollection()->addAction("onlinejob_delete");
   onlineJob_delete->setText(i18n("Remove credit transfer"));
-  onlineJob_delete->setIcon(QIcon::fromTheme("edit-delete"));
+  onlineJob_delete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
 
   QAction* onlineJob_edit = actionCollection()->addAction("onlinejob_edit");
   onlineJob_edit->setText(i18n("Edit credit transfer"));
-  onlineJob_edit->setIcon(QIcon::fromTheme("document-edit"));
+  onlineJob_edit->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
 
   QAction* onlineJob_log = actionCollection()->addAction("onlinejob_log");
   onlineJob_log->setText(i18n("Show log"));
@@ -1193,16 +1184,10 @@ void KMyMoneyApp::initActions()
 
   QMenu *menuContainer;
   menuContainer = static_cast<QMenu*>(factory()->container("import", this));
-  if (QIcon::hasThemeIcon(QStringLiteral("document-import")))
-    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
-  else
-    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-less")));
+  menuContainer->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentImport]));
 
   menuContainer = static_cast<QMenu*>(factory()->container("export", this));
-  if (QIcon::hasThemeIcon(QStringLiteral("document-export")))
-    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
-  else
-    menuContainer->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-more")));
+  menuContainer->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentExport]));
 }
 
 void KMyMoneyApp::connectActionsAndViews()

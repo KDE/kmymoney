@@ -49,6 +49,9 @@
 #include <mymoneyfile.h>
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlags flags, const bool createButtons) :
     KMyMoneySelector(parent, flags),
@@ -278,9 +281,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   //get the account icon from cache or insert it if it is not there
   QPixmap accountPixmap;
   if (!QPixmapCache::find("account", accountPixmap)) {
-    QIcon icon = QIcon::fromTheme(QStringLiteral("view-bank-account"),
-                                  QIcon::fromTheme(QStringLiteral("account"),
-                                                   QIcon::fromTheme(QStringLiteral("unknown"))));
+    QIcon icon = QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]);
     if (!icon.availableSizes().isEmpty())
       accountPixmap = icon.pixmap(icon.availableSizes().first());
     QPixmapCache::insert("account", accountPixmap);

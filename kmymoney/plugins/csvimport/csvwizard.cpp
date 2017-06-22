@@ -42,6 +42,7 @@
 #include "csvutil.h"
 #include "convdate.h"
 #include "csvimporter.h"
+#include <icons/icons.h>
 #include "ui_csvwizard.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
@@ -53,6 +54,8 @@
 
 #include "ui_securitiesdlg.h"
 #include "ui_securitydlg.h"
+
+using namespace Icons;
 
 CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
   ui(new Ui::CSVWizard),
@@ -69,15 +72,13 @@ CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
   m_lastId = -1;
   m_wiz->installEventFilter(this); // event filter for escape key presses
 
-  m_wiz->button(QWizard::BackButton)->setIcon(QIcon::fromTheme(QStringLiteral("go-previous")));
-  m_wiz->button(QWizard::CancelButton)->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
-                                                                    QIcon::fromTheme(QStringLiteral("stop"))));
-  m_wiz->button(QWizard::CustomButton2)->setIcon(QIcon::fromTheme(QStringLiteral("kmymoney")));
-  m_wiz->button(QWizard::FinishButton)->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
-                                                                    QIcon::fromTheme(QStringLiteral("finish"))));
-  m_wiz->button(QWizard::CustomButton1)->setIcon(QIcon::fromTheme(QStringLiteral("system-file-manager")));
-  m_wiz->button(QWizard::CustomButton3)->setIcon(QIcon::fromTheme(QStringLiteral("invest-applet")));
-  m_wiz->button(QWizard::NextButton)->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
+  m_wiz->button(QWizard::BackButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
+  m_wiz->button(QWizard::CancelButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
+  m_wiz->button(QWizard::CustomButton2)->setIcon(QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
+  m_wiz->button(QWizard::FinishButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOKApply]));
+  m_wiz->button(QWizard::CustomButton1)->setIcon(QIcon::fromTheme(g_Icons[Icon::FileArchiver]));
+  m_wiz->button(QWizard::CustomButton3)->setIcon(QIcon::fromTheme(g_Icons[Icon::InvestApplet]));
+  m_wiz->button(QWizard::NextButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
 
   m_pageIntro = new IntroPage(this, m_imp);
   m_wiz->setPage(PageIntro, m_pageIntro);

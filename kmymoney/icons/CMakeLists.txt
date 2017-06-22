@@ -26,3 +26,14 @@ ecm_install_icons(
   ICONS ${KMYMONEY_ICONS}
   DESTINATION ${ICON_INSTALL_DIR}
 )
+
+set (icons_SOURCES
+  icons.cpp
+)
+
+add_library(kmm_icons SHARED ${icons_SOURCES})
+generate_export_header(kmm_icons)
+target_link_libraries(kmm_icons PUBLIC Qt5::Core)
+
+install(TARGETS kmm_icons
+  ${INSTALL_TARGETS_DEFAULT_ARGS} )

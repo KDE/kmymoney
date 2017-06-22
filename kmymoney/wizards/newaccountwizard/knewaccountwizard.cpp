@@ -51,8 +51,10 @@
 #include "kequitypriceupdatedlg.h"
 #include "kmymoney.h"
 #include "models.h"
+#include <icons.h>
 
 using namespace NewAccountWizard;
+using namespace Icons;
 
 namespace NewAccountWizard
 {
@@ -1372,7 +1374,7 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
   m_mandatoryGroup->add(m_loanAccount->lineEdit());
 
   KGuiItem createAssetButtenItem(i18n("&Create..."),
-                                 QIcon::fromTheme("document-new"),
+                                 QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                                  i18n("Create a new asset account"),
                                  i18n("If the asset account does not yet exist, press this button to create it."));
   KGuiItem::assign(m_createAssetButton, createAssetButtenItem);

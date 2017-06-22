@@ -20,6 +20,9 @@
 #include "ui_kmymoneyvalidationfeedback.h"
 
 #include <QIcon>
+#include <icons/icons.h>
+
+using namespace Icons;
 
 class KMyMoneyValidationFeedback::Private
 {
@@ -67,15 +70,15 @@ void KMyMoneyValidationFeedback::setFeedback(KMyMoneyValidationFeedback::Message
     QIcon icon;
     switch (type) {
       case Error:
-        icon = QIcon::fromTheme("dialog-error");
+        icon = QIcon::fromTheme(g_Icons[Icon::DialogError]);
         break;
       case Positive:
       case Information:
-        icon = QIcon::fromTheme("dialog-information");
+        icon = QIcon::fromTheme(g_Icons[Icon::DialogInformation]);
         break;
       case Warning:
       default:
-        icon = QIcon::fromTheme("dialog-warning");
+        icon = QIcon::fromTheme(g_Icons[Icon::DialogWarning]);
     }
     ui->icon->setPixmap(icon.pixmap(24));
   }

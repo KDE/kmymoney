@@ -36,6 +36,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <icons/icons.h>
+
+using namespace Icons;
+
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
     KComboBox(parent),
     m_displayItem(FullName),
@@ -130,9 +134,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId,  QIcon::fromTheme(QStringLiteral("view-bank-account"),
-                                           QIcon::fromTheme(QStringLiteral("account"),
-                                                            QIcon::fromTheme(QStringLiteral("unknown")))), display);
+      insertItem(itemId,  QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]), display);
     } else {
       insertItem(itemId, emptyIcon, display);
     }

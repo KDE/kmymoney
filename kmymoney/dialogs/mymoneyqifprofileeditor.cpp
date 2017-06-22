@@ -44,6 +44,9 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include <icons/icons.h>
+
+using namespace Icons;
 
 MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject *o)
     : QValidator(o)
@@ -90,7 +93,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   KGuiItem::assign(m_helpButton, KStandardGuiItem::help());
 
   KGuiItem newButtenItem(i18nc("New profile", "&New"),
-                         QIcon::fromTheme(QStringLiteral("document-new")),
+                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                          i18n("Create a new profile"),
                          i18n("Use this to create a new QIF import/export profile"));
   KGuiItem::assign(m_newButton, newButtenItem);

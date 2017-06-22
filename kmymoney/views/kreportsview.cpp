@@ -59,8 +59,10 @@
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
+#include <icons/icons.h>
 
 using namespace reports;
+using namespace Icons;
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"
@@ -88,21 +90,13 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   m_tableView->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
-  m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
-                                                   QIcon::fromTheme(QStringLiteral("report-line"))));
-  if (QIcon::hasThemeIcon(QStringLiteral("document-close")))
-    m_control->ui->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("document-close")));
-  else
-    m_control->ui->buttonClose->setIcon(QIcon::fromTheme(QStringLiteral("stop")));
-  m_control->ui->buttonConfigure->setIcon(QIcon::fromTheme(QStringLiteral("configure"),
-                                                       QIcon::fromTheme(QStringLiteral("preferences-system"))));
-  m_control->ui->buttonCopy->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
-  m_control->ui->buttonDelete->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
-  if (QIcon::hasThemeIcon(QStringLiteral("document-export")))
-    m_control->ui->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
-  else
-    m_control->ui->buttonExport->setIcon(QIcon::fromTheme(QStringLiteral("format-indent-more")));
-  m_control->ui->buttonNew->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+  m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::OfficeChartLine]));
+  m_control->ui->buttonClose->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentClose]));
+  m_control->ui->buttonConfigure->setIcon(QIcon::fromTheme(g_Icons[Icon::Configure]));
+  m_control->ui->buttonCopy->setIcon(QIcon::fromTheme(g_Icons[Icon::EditCopy]));
+  m_control->ui->buttonDelete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
+  m_control->ui->buttonExport->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentExport]));
+  m_control->ui->buttonNew->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
@@ -140,7 +134,7 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
     m_control->ui->buttonDelete->setEnabled(false);
 
   int tabNr = parent->addTab(this,
-                         QIcon::fromTheme(QStringLiteral("application-vnd.oasis.opendocument.spreadsheet")),
+                         QIcon::fromTheme(g_Icons[Icon::Spreadsheet]),
                          report.name());
   parent->setTabEnabled(tabNr, true);
   parent->setCurrentIndex(tabNr);
@@ -254,8 +248,7 @@ void KReportsView::KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Chart"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the chart version of this report"));
-    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("office-chart-line"),
-                                                     QIcon::fromTheme(QStringLiteral("report-line"))));
+    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::OfficeChartLine]));
   } else {
     if (!m_isChartViewValid)
       m_table->drawChart(*m_chartView);
@@ -265,8 +258,7 @@ void KReportsView::KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Report"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(QStringLiteral("view-financial-list"),
-                                                     QIcon::fromTheme(QStringLiteral("ledger"))));
+    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewFinancialList]));
   }
   m_showingChart = ! m_showingChart;
 }

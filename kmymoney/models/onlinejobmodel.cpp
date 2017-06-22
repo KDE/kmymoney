@@ -28,7 +28,9 @@
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "mymoney/onlinejobtyped.h"
+#include <icons/icons.h>
 
+using namespace Icons;
 
 onlineJobModel::onlineJobModel(QObject *parent) :
     QAbstractTableModel(parent),
@@ -133,19 +135,19 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
     } else if (role == Qt::DecorationRole) {
       if (job.isLocked())
-        return QIcon::fromTheme("task-ongoing");
+        return QIcon::fromTheme(g_Icons[Icon::TaskOngoing]);
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return QIcon::fromTheme("task-complete");
+        case onlineJob::acceptedByBank: return QIcon::fromTheme(g_Icons[Icon::TaskComplete]);
         case onlineJob::sendingError:
         case onlineJob::abortedByUser:
-        case onlineJob::rejectedByBank: return QIcon::fromTheme("task-reject");
+        case onlineJob::rejectedByBank: return QIcon::fromTheme(g_Icons[Icon::TaskReject]);
         case onlineJob::noBankAnswer: break;
       }
       if (job.sendDate().isValid()) {
-        return QIcon::fromTheme("task-accepted");
+        return QIcon::fromTheme(g_Icons[Icon::TaskAccepted]);
       } else if (!job.isValid()) {
-        return QIcon::fromTheme("task-attention");
+        return QIcon::fromTheme(g_Icons[Icon::TaskAttention]);
       }
     } else if (role == Qt::ToolTipRole) {
       if (job.isLocked())

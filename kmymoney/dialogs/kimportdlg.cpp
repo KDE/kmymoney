@@ -46,6 +46,9 @@
 #include <KSharedConfig>
 #include "mymoneyqifprofileeditor.h"
 #include "mymoneyqifprofile.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KImportDlg::KImportDlg(QWidget *parent)
     : KImportDlgDecl(parent)
@@ -58,20 +61,19 @@ KImportDlg::KImportDlg(QWidget *parent)
 
   // load button icons
   KGuiItem okButtenItem(i18n("&Import"),
-                        QIcon::fromTheme(QStringLiteral("document-import"),
-                                         QIcon::fromTheme(QStringLiteral("format-indent-less"))),
+                        QIcon::fromTheme(g_Icons[Icon::DocumentImport]),
                         i18n("Start operation"),
                         i18n("Use this to start the import operation"));
   KGuiItem::assign(m_buttonBox->button(QDialogButtonBox::Ok), okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
-                            QIcon::fromTheme("document-open"),
+                            QIcon::fromTheme(g_Icons[Icon::DocumentOpen]),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
   KGuiItem newButtenItem(i18nc("New profile", "&New..."),
-                         QIcon::fromTheme("document-new"),
+                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                          i18n("Create a new profile"),
                          i18n("Use this to open the profile editor"));
   KGuiItem::assign(m_profileEditorButton, newButtenItem);

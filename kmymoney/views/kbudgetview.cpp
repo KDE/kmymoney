@@ -57,6 +57,9 @@
 #include "knewbudgetdlg.h"
 #include "kmymoney.h"
 #include "models.h"
+#include <icons.h>
+
+using namespace Icons;
 
 /**
   * @author Darren Gould
@@ -312,49 +315,47 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_budgetList->setRootIsDecorated(false);
   m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  KGuiItem newButtonItem(QString(""),
-                         KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add", Qt::TopRightCorner),
+  KGuiItem newButtonItem(QString(),
+                         KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::ListAdd], Qt::TopRightCorner),
                          i18n("Creates a new budget"),
                          i18n("Use this to create a new empty budget."));
   KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
-  KGuiItem renameButtonItem(QString(""),
-                            KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "document-edit"),
+  KGuiItem renameButtonItem(QString(),
+                            KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::DocumentEdit]),
                             i18n("Rename the current selected budget"),
                             i18n("Use this to start renaming the selected budget."));
   KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
-  KGuiItem deleteButtonItem(QString(""),
-                            KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "edit-delete"),
+  KGuiItem deleteButtonItem(QString(),
+                            KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::EditDelete]),
                             i18n("Delete the current selected budget"),
                             i18n("Use this to delete the selected budget."));
   KGuiItem::assign(m_deleteButton, deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
-  KGuiItem updateButtonItem(QString(""),
-                            QIcon::fromTheme("document-save"),
+  KGuiItem updateButtonItem(QString(),
+                            QIcon::fromTheme(g_Icons[Icon::DocumentSave]),
                             i18n("Accepts the entered values and stores the budget"),
                             i18n("Use this to store the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);
   m_updateButton->setToolTip(updateButtonItem.toolTip());
 
-  KGuiItem resetButtonItem(QString(""),
-                           QIcon::fromTheme("edit-undo"),
+  KGuiItem resetButtonItem(QString(),
+                           QIcon::fromTheme(g_Icons[Icon::EditUndo]),
                            i18n("Revert budget to last saved state"),
                            i18n("Use this to discard the modified data."));
   KGuiItem::assign(m_resetButton, resetButtonItem);
   m_resetButton->setToolTip(resetButtonItem.toolTip());
 
-  KGuiItem collapseGuiItem("",
-                           QIcon::fromTheme(QStringLiteral("zoom-out"),
-                                            QIcon::fromTheme(QStringLiteral("list-remove"))),
+  KGuiItem collapseGuiItem(QString(),
+                           QIcon::fromTheme(g_Icons[Icon::ListCollapse]),
                            QString(),
                            QString());
-  KGuiItem expandGuiItem("",
-                         QIcon::fromTheme(QStringLiteral("zoom-in"),
-                                          QIcon::fromTheme(QStringLiteral("list-add"))),
+  KGuiItem expandGuiItem(QString(),
+                         QIcon::fromTheme(g_Icons[Icon::ListExpand]),
                          QString(),
                          QString());
   KGuiItem::assign(m_collapseButton, collapseGuiItem);

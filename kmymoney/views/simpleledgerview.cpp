@@ -37,6 +37,9 @@
 #include "ledgermodel.h"
 #include "kmymoneyaccountcombo.h"
 #include "ui_simpleledgerview.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 class SimpleLedgerView::Private
 {
@@ -64,7 +67,7 @@ SimpleLedgerView::SimpleLedgerView(QWidget* parent)
   , d(new Private(this))
 {
   d->ui->setupUi(this);
-  d->ui->ledgerTab->setTabIcon(0, QIcon::fromTheme("list-add"));
+  d->ui->ledgerTab->setTabIcon(0, QIcon::fromTheme(g_Icons[Icon::ListAdd]));
   d->ui->ledgerTab->setTabText(0, QString());
   d->newTabWidget = d->ui->ledgerTab->widget(0);
 

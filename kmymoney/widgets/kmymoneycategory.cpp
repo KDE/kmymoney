@@ -42,6 +42,9 @@
 
 #include <mymoneyfile.h>
 #include "kmymoneyaccountcompletion.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 class KMyMoneyCategory::Private
 {
@@ -79,9 +82,8 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
     }
 
     // create button
-    KGuiItem splitButtonItem("",
-                             QIcon::fromTheme(QStringLiteral("split"),
-                                              QIcon::fromTheme(QStringLiteral("transaction-split"))), "", "");
+    KGuiItem splitButtonItem(QString(),
+                             QIcon::fromTheme(g_Icons[Icon::Split]), QString(), QString());
     d->splitButton = new QPushButton(d->frame);
     d->splitButton->setObjectName("splitButton");
     KGuiItem::assign(d->splitButton, splitButtonItem);

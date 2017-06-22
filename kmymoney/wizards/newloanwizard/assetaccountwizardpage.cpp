@@ -31,6 +31,9 @@
 // Project Includes
 
 #include "kmymoney.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
     : AssetAccountWizardPageDecl(parent)
@@ -46,7 +49,7 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
 
   // load button icons
   KGuiItem createAssetButtonItem(i18n("&Create..."),
-                                 QIcon::fromTheme("document-new"),
+                                 QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                                  i18n("Create a new asset account"),
                                  i18n("Use this to create a new account to which the initial payment should be made"));
   KGuiItem::assign(m_createNewAssetButton, createAssetButtonItem);

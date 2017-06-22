@@ -48,6 +48,9 @@
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
 #include "models.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KExportDlg::KExportDlg(QWidget *parent)
     : KExportDlgDecl(parent)
@@ -62,19 +65,19 @@ KExportDlg::KExportDlg(QWidget *parent)
   KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem(i18n("&Export"),
-                        QIcon::fromTheme("document-export"),
+                        QIcon::fromTheme(g_Icons[Icon::DocumentExport]),
                         i18n("Start operation"),
                         i18n("Use this to start the export operation"));
   KGuiItem::assign(m_qbuttonOk, okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
-                            QIcon::fromTheme("document-open"),
+                            QIcon::fromTheme(g_Icons[Icon::DocumentOpen]),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
   KGuiItem newButtenItem(i18nc("New profile", "&New..."),
-                         QIcon::fromTheme("document-new"),
+                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                          i18n("Create a new profile"),
                          i18n("Use this to open the profile editor"));
   KGuiItem::assign(m_profileEditorButton, newButtenItem);

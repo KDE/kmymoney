@@ -37,8 +37,10 @@
 // Project Includes
 
 #include <kmymoneyutils.h>
+#include <icons/icons.h>
 
 using namespace KMyMoneyRegister;
+using namespace Icons;
 
 class RegisterSearchLine::RegisterSearchLinePrivate
 {
@@ -78,13 +80,10 @@ void RegisterSearchLine::init(Register *reg)
   parentWidget()->layout()->addWidget(d->combo);
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem(RegisterFilter::Any, QIcon::fromTheme(QStringLiteral("system-run"),
-                                                             QIcon::fromTheme(QStringLiteral("media-playback-start"))), i18n("Any status"));
-  d->combo->insertItem(RegisterFilter::Imported, QIcon::fromTheme(QStringLiteral("document-import"),
-                                                                  QIcon::fromTheme(QStringLiteral("format-indent-less"))), i18n("Imported"));
-  d->combo->insertItem(RegisterFilter::Matched, KMyMoneyUtils::overlayIcon("view-financial-transfer", "document-import"), i18n("Matched"));
-  d->combo->insertItem(RegisterFilter::Erroneous, QIcon::fromTheme(QStringLiteral("task-attention"),
-                                                                   QIcon::fromTheme(QStringLiteral("dialog-warning"))), i18n("Erroneous"));
+  d->combo->insertItem(RegisterFilter::Any, QIcon::fromTheme(g_Icons[Icon::SystemRun]), i18n("Any status"));
+  d->combo->insertItem(RegisterFilter::Imported, QIcon::fromTheme(g_Icons[Icon::DocumentImport]), i18n("Imported"));
+  d->combo->insertItem(RegisterFilter::Matched, KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewFinancialTransfer], g_Icons[Icon::DocumentImport]), i18n("Matched"));
+  d->combo->insertItem(RegisterFilter::Erroneous, QIcon::fromTheme(g_Icons[Icon::TaskAttention]), i18n("Erroneous"));
   d->combo->insertItem(RegisterFilter::NotMarked, i18n("Not marked"));
   d->combo->insertItem(RegisterFilter::NotReconciled, i18n("Not reconciled"));
   d->combo->insertItem(RegisterFilter::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));

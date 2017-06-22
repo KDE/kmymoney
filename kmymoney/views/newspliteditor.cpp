@@ -42,6 +42,9 @@
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
 #include "ledgerview.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 struct NewSplitEditor::Private
 {
@@ -192,10 +195,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->counterAccount = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
-  d->ui->enterButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                               QIcon::fromTheme(QStringLiteral("finish"))));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
-                                                QIcon::fromTheme(QStringLiteral("stop"))));
+  d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
   d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Income);

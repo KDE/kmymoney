@@ -37,6 +37,9 @@
 
 #include "kmymoney/converter/webpricequote.h"
 #include "mymoneyfile.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
     : KSettingsOnlineQuotesDecl(parent),
@@ -49,20 +52,19 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   m_updateButton->setEnabled(false);
 
   KGuiItem updateButtenItem(i18nc("Accepts the entered data and stores it", "&Update"),
-                            QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                             QIcon::fromTheme(QStringLiteral("finish"))),
+                            QIcon::fromTheme(g_Icons[Icon::DialogOK]),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtenItem);
 
   KGuiItem deleteButtenItem(i18n("&Delete"),
-                            QIcon::fromTheme("edit-delete"),
+                            QIcon::fromTheme(g_Icons[Icon::EditDelete]),
                             i18n("Delete the selected source entry"),
                             i18n("Use this to delete the selected online source entry"));
   KGuiItem::assign(m_deleteButton, deleteButtenItem);
 
   KGuiItem newButtenItem(i18nc("Create a new source entry for online quotes", "&New..."),
-                         QIcon::fromTheme("document-new"),
+                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                          i18n("Create a new source entry for online quotes"),
                          i18n("Use this to create a new entry for online quotes"));
   KGuiItem::assign(m_newButton, newButtenItem);

@@ -56,6 +56,7 @@ generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 
 target_link_libraries(kmm_mymoney
                       PUBLIC
+                      kmm_icons
                       Qt5::Gui
                       Qt5::Xml
                       Qt5::Core

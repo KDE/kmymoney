@@ -597,7 +597,7 @@ public:
    * @param size is a hint for the size of the icon
    * @return a pixmap using DesktopIcon for the account type
    */
-  QPixmap accountPixmap(bool reconcileFlag = false, int size = 0) const;
+  QPixmap accountPixmap(const bool reconcileFlag = false, const int size = 64) const;
 
   /**
    * This method is used to convert the internal representation of

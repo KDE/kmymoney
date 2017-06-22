@@ -66,12 +66,15 @@
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
+#include <icons.h>
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"
 #define VIEW_WELCOME        "welcome"
 #define VIEW_HOME           "home"
 #define VIEW_REPORTS        "reports"
+
+using namespace Icons;
 
 bool accountNameLess(const MyMoneyAccount &acc1, const MyMoneyAccount &acc2)
 {
@@ -594,9 +597,8 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-        QString pathEnter = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("key-enter"),
-                                                              QIcon::fromTheme(QStringLiteral("input-keyboard"))).pixmap(QSize(16,16)));
-        QString pathSkip = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("media-skip-forward")).pixmap(QSize(16,16)));
+        QString pathEnter = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::KeyEnter]).pixmap(QSize(16,16)));
+        QString pathSkip = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::MediaSkipForward]).pixmap(QSize(16,16)));
 
         //show payment date
         tmp = QString("<td>") +
@@ -734,8 +736,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += "<tr class=\"item\">";
 
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
-      QString pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("download"),
-                                                            QIcon::fromTheme(QStringLiteral("go-down"))).pixmap(QSize(16,16)));
+      QString pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::Download]).pixmap(QSize(16,16)));
       d->m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
     }
 
@@ -847,12 +848,9 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
   if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
     //show account's online-status
-    pathOK = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
-                                                          QIcon::fromTheme(QStringLiteral("go-down"))).pixmap(QSize(16,16)));
-    pathTODO = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
-                                                          QIcon::fromTheme(QStringLiteral("finish"))).pixmap(QSize(16,16)));
-    pathNotOK = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("dialog-cancel"),
-                                                          QIcon::fromTheme(QStringLiteral("stop"))).pixmap(QSize(16,16)));
+    pathOK = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::DialogOKApply]).pixmap(QSize(16,16)));
+    pathTODO = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::MailReceive]).pixmap(QSize(16,16)));
+    pathNotOK = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::DialogCancel]).pixmap(QSize(16,16)));
 
     if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
       cellStatus = '-';
@@ -1284,7 +1282,7 @@ void KHomeView::showAssetsLiabilities()
     QString statusHeader;
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
-      pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(QStringLiteral("online-banking")).pixmap(QSize(16,16)));
+      pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::ViewOutbox]).pixmap(QSize(16,16)));
       statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
     }
 

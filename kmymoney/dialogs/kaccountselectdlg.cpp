@@ -48,6 +48,9 @@
 #include "kmymoneyaccountselector.h"
 
 #include <../kmymoney.h>
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountType, const QString& purpose, QWidget *parent)
     : KAccountSelectDlgDecl(parent),
@@ -62,20 +65,20 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
   slotReloadWidget();
 
   KGuiItem skipButtonItem(i18n("&Skip"),
-                          QIcon::fromTheme("media-skip-forward"),
+                          QIcon::fromTheme(g_Icons[Icon::MediaSkipForward]),
                           i18n("Skip this transaction"),
                           i18n("Use this to skip importing this transaction and proceed with the next one."));
   KGuiItem::assign(m_qbuttonCancel, skipButtonItem);
 
   KGuiItem createButtenItem(i18n("&Create..."),
-                            QIcon::fromTheme("document-new"),
+                            QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                             i18n("Create a new account/category"),
                             i18n("Use this to add a new account/category to the file"));
   KGuiItem::assign(m_createButton, createButtenItem);
   KGuiItem::assign(m_qbuttonOk, KStandardGuiItem::ok());
 
   KGuiItem abortButtenItem(i18n("&Abort"),
-                           QIcon::fromTheme("dialog-cancel"),
+                           QIcon::fromTheme(g_Icons[Icon::DialogCancel]),
                            i18n("Abort the import operation and dismiss all changes"),
                            i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
   KGuiItem::assign(m_kButtonAbort, abortButtenItem);

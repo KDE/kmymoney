@@ -47,6 +47,9 @@
 #include <knewinvestmentwizard.h>
 #include "kmymoney.h"
 #include "models.h"
+#include <icons.h>
+
+using namespace Icons;
 
 /**
   * This class is only needed to implement proper sorting.
@@ -138,13 +141,13 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   m_securitiesLayout->insertWidget(0, m_searchSecuritiesWidget);
 
   KGuiItem removeButtonItem(i18n("&Delete"),
-                            QIcon::fromTheme("edit-delete"),
+                            QIcon::fromTheme(g_Icons[Icon::EditDelete]),
                             i18n("Delete this entry"),
                             i18n("Remove this security item from the file"));
   KGuiItem::assign(m_deleteSecurityButton, removeButtonItem);
 
   KGuiItem editButtonItem(i18n("&Edit"),
-                          QIcon::fromTheme("document-edit"),
+                          QIcon::fromTheme(g_Icons[Icon::DocumentEdit]),
                           i18n("Modify the selected entry"),
                           i18n("Change the security information of the selected entry."));
   KGuiItem::assign(m_editSecurityButton, editButtonItem);

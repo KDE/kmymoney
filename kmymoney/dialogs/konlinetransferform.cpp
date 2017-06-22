@@ -39,6 +39,8 @@
 #include "mymoney/onlinejobadministration.h"
 
 #include "models/models.h"
+#include <icons/icons.h>
+using namespace Icons;
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   : QDialog(parent),
@@ -47,7 +49,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     m_requiredFields(new kMandatoryFieldGroup(this))
 {
   ui->setupUi(this);
-  ui->unsupportedIcon->setPixmap(QIcon::fromTheme("dialog-information").pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
+  ui->unsupportedIcon->setPixmap(QIcon::fromTheme(g_Icons[Icon::DialogInformation]).pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
   // The ui designer fills the QScrollArea with a QWidget. Remove it so we can simply check for .widget() == nullptr
   // if it contains a valid widget
   delete ui->creditTransferEdit->takeWidget();

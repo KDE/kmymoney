@@ -50,6 +50,9 @@
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
 #include "models.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExportDlg)
 {
@@ -66,13 +69,13 @@ CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExp
   KGuiItem::assign(ui->m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtonItem(i18n("&Export"),
-                        QIcon::fromTheme("document-export"),
+                        QIcon::fromTheme(g_Icons[Icon::DocumentExport]),
                         i18n("Start operation"),
                         i18n("Use this to start the export operation"));
   KGuiItem::assign(ui->m_qbuttonOk, okButtonItem);
 
   KGuiItem browseButtonItem(i18n("&Browse..."),
-                            QIcon::fromTheme("document-open"),
+                            QIcon::fromTheme(g_Icons[Icon::DocumentOpen]),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(ui->m_qbuttonBrowse, browseButtonItem);

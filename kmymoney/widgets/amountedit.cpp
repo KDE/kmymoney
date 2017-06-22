@@ -41,6 +41,9 @@
 
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 AmountValidator::AmountValidator(QObject * parent) :
     QDoubleValidator(parent)
@@ -232,7 +235,7 @@ void AmountEdit::init()
   int btnSize = sizeHint().height() - 5;
 
   d->m_calculatorButton = new QToolButton(this);
-  d->m_calculatorButton->setIcon(QIcon::fromTheme(QStringLiteral("accessories-calculator")));
+  d->m_calculatorButton->setIcon(QIcon::fromTheme(g_Icons[Icon::AccessoriesCalculator]));
   d->m_calculatorButton->setCursor(Qt::ArrowCursor);
   d->m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
   d->m_calculatorButton->setFixedSize(btnSize, btnSize);

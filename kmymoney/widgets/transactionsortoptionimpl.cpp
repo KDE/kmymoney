@@ -31,8 +31,11 @@
 // Project Includes
 
 #include "register.h"
+#include <icons/icons.h>
 
 #include "ui_transactionsortoptiondecl.h"
+
+using namespace Icons;
 
 TransactionSortOption::TransactionSortOption(QWidget *parent)
     : QWidget(parent)
@@ -49,14 +52,10 @@ TransactionSortOption::~TransactionSortOption()
 
 void TransactionSortOption::init()
 {
-  ui->m_addButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-right"),
-                                            QIcon::fromTheme(QStringLiteral("go-next"))));
-  ui->m_removeButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-left"),
-                                               QIcon::fromTheme(QStringLiteral("go-previous"))));
-  ui->m_upButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-up"),
-                                           QIcon::fromTheme(QStringLiteral("go-up"))));
-  ui->m_downButton->setIcon(QIcon::fromTheme(QStringLiteral("arrow-down"),
-                                             QIcon::fromTheme(QStringLiteral("go-down"))));
+  ui->m_addButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
+  ui->m_removeButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
+  ui->m_upButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowUp]));
+  ui->m_downButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowDown]));
 
   // don't allow sorting of the selected entries
   ui->m_selectedList->setSortingEnabled(false);
@@ -172,11 +171,9 @@ void TransactionSortOption::toggleDirection(QListWidgetItem* item)
 void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 {
   if (item->data(Qt::UserRole).toInt() > 0) {
-    item->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-ascending"),
-                                   QIcon::fromTheme(QStringLiteral("go-up"))));
+    item->setIcon(QIcon::fromTheme(g_Icons[Icon::SortAscending]));
   } else {
-    item->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-descending"),
-                                   QIcon::fromTheme(QStringLiteral("go-down"))));
+    item->setIcon(QIcon::fromTheme(g_Icons[Icon::SortDescending]));
   }
 }
 

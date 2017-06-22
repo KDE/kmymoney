@@ -34,6 +34,9 @@
 
 #include "kmymoney/kmymoneyglobalsettings.h"
 #include "kmymoney/kmymoneyutils.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KSettingsHome::KSettingsHome(QWidget* parent) :
     KSettingsHomeDecl(parent),
@@ -42,11 +45,11 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
   m_homePageList->setSortingEnabled(false);
 
   KGuiItem upButtonItem(i18nc("Move item up",  "&Up"),
-                        QIcon::fromTheme(QStringLiteral("go-up")),
+                        QIcon::fromTheme(g_Icons[Icon::ArrowUp]),
                         i18n("Move selected item up"),
                         i18n("Use this to move the selected item up by one position in the list."));
   KGuiItem downButtonItem(i18n("&Down"),
-                          QIcon::fromTheme(QStringLiteral("go-down")),
+                          QIcon::fromTheme(g_Icons[Icon::ArrowDown]),
                           i18n("Move selected item down"),
                           i18n("Use this to move the selected item down by one position in the list."));
 

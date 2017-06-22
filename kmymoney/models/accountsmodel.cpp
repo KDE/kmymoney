@@ -37,6 +37,9 @@
 #include "mymoneyfile.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
+#include <icons.h>
+
+using namespace Icons;
 
 class AccountsModel::Private
 {
@@ -113,11 +116,8 @@ public:
     model->setData(newIndex, KMyMoneyUtils::accountTypeToString(account.accountType()), Qt::DisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
 
-    QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-ok"),
-                                  QIcon::fromTheme(QStringLiteral("finish")));
-    QPixmap checkMark;
-    if (!icon.availableSizes().isEmpty())
-      checkMark = icon.pixmap(icon.availableSizes().first());
+    QIcon icon = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
+    QPixmap checkMark = icon.pixmap(64);
     switch (account.accountType()) {
       case MyMoneyAccount::Income:
       case MyMoneyAccount::Expense:
@@ -450,8 +450,7 @@ void AccountsModel::load()
   setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
   setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
   favoriteAccountsItem->setColumnCount(columnCount());
-  favoriteAccountsItem->setIcon(QIcon::fromTheme(QStringLiteral("view-bank-account"),
-                                                 QIcon::fromTheme(QStringLiteral("account"))));
+  favoriteAccountsItem->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]));
   favoriteAccountsItem->setEditable(false);
   favoriteAccountsItem->setFont(font);
 

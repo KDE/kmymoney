@@ -198,7 +198,7 @@ public:
     */
   virtual bool hasReferenceTo(const QString& id) const;
 
-  QPixmap pixmap() const;
+  QPixmap pixmap(const int size = 64) const;
 
 private:
   // Bank 'fields'

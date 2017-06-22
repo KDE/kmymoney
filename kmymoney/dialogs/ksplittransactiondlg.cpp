@@ -53,6 +53,9 @@
 #include <kmymoneylineedit.h>
 #include <mymoneyfile.h>
 #include "kmymoneysplittable.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
     const MyMoneySplit& s,
@@ -96,12 +99,12 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   user1Button->setText(i18n("Clear &All"));
   user1Button->setToolTip(i18n("Clear all splits"));
   user1Button->setWhatsThis(i18n("Use this to clear all splits of this transaction"));
-  user1Button->setIcon(QIcon::fromTheme("edit-clear"));
+  user1Button->setIcon(QIcon::fromTheme(g_Icons[Icon::EditClear]));
 
   //clearZero button
   user2Button->setText(i18n("Clear &Zero"));
   user2Button->setToolTip(i18n("Removes all splits that have a value of zero"));
-  user2Button->setIcon(QIcon::fromTheme("edit-clear"));
+  user2Button->setIcon(QIcon::fromTheme(g_Icons[Icon::EditClear]));
 
   //merge button
   user3Button->setText(i18n("&Merge"));

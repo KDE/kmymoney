@@ -30,9 +30,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <icons.h>
 #include <mymoneyexception.h>
 #include "mymoneystoragenames.h"
 
+using namespace Icons;
 using namespace MyMoneyStorageNodes;
 
 MyMoneyInstitution::MyMoneyInstitution()
@@ -181,19 +183,15 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
   return rc;
 }
 
-QPixmap MyMoneyInstitution::pixmap() const
+QPixmap MyMoneyInstitution::pixmap(const int size) const
 {
-  QPixmap institution;
-  QString iconName = QLatin1String("view-bank");
-  if (!QPixmapCache::find(iconName, institution)) {
-    QIcon icon = QIcon::fromTheme(iconName,
-                                  QIcon::fromTheme(QStringLiteral("institution"),
-                                                   QIcon::fromTheme(QStringLiteral("unknown"))));
-    if (!icon.availableSizes().isEmpty())
-      institution = icon.pixmap(icon.availableSizes().first());
-    QPixmapCache::insert(iconName, institution);
+  QPixmap pxIcon;
+  QString kyIcon = g_Icons.value(Icon::ViewInstitutions) + QString::number(size);
+  if (!QPixmapCache::find(kyIcon, pxIcon)) {
+    pxIcon = QIcon::fromTheme(g_Icons.value(Icon::ViewInstitutions)).pixmap(size);
+    QPixmapCache::insert(kyIcon, pxIcon);
   }
-  return institution;
+  return pxIcon;
 }
 
 const QString MyMoneyInstitution::getElName(const elNameE _el)

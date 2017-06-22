@@ -45,6 +45,9 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "models.h"
+#include <icons.h>
+
+using namespace Icons;
 
 KCategoriesView::KCategoriesView(QWidget *parent) :
     QWidget(parent),
@@ -54,14 +57,12 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   setupUi(this);
 
   // setup icons for collapse and expand button
-  KGuiItem collapseGuiItem("",
-                           QIcon::fromTheme(QStringLiteral("zoom-out"),
-                                            QIcon::fromTheme(QStringLiteral("list-remove"))),
+  KGuiItem collapseGuiItem(QString(),
+                           QIcon::fromTheme(g_Icons[Icon::ListCollapse]),
                            QString(),
                            QString());
-  KGuiItem expandGuiItem("",
-                         QIcon::fromTheme(QStringLiteral("zoom-in"),
-                                          QIcon::fromTheme(QStringLiteral("list-add"))),
+  KGuiItem expandGuiItem(QString(),
+                         QIcon::fromTheme(g_Icons[Icon::ListExpand]),
                          QString(),
                          QString());
   KGuiItem::assign(m_collapseButton, collapseGuiItem);

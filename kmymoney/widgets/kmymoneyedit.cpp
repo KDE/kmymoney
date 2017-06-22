@@ -46,6 +46,9 @@
 #include "kmymoneylineedit.h"
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
+#include <icons.h>
+
+using namespace Icons;
 
 kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(QObject * parent) :
     QDoubleValidator(parent)
@@ -241,7 +244,7 @@ void kMyMoneyEdit::init()
   calculatorFrameVBoxLayout->addWidget(m_calculator);
   m_calculatorFrame->hide();
 
-  m_calcButton = new QPushButton(QIcon::fromTheme("accessories-calculator"), QString(""), this);
+  m_calcButton = new QPushButton(QIcon::fromTheme(g_Icons[Icon::AccessoriesCalculator]), QString(), this);
   m_calcButton->setFocusProxy(m_edit);
   editLayout->addWidget(m_calcButton);
 

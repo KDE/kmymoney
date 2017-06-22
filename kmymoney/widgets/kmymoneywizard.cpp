@@ -43,6 +43,9 @@
 
 #include "kmymoneytitlelabel.h"
 #include "kguiutils.h"
+#include <icons/icons.h>
+
+using namespace Icons;
 
 KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
     QObject(parent)
@@ -130,9 +133,9 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
   if (style()->styleHint(QStyle::SH_DialogButtonBox_ButtonsHaveIcons, 0, this)) {
     m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
     m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
-    m_finishButton->setIcon(QIcon::fromTheme("dialog-ok-apply"));
-    m_cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
-    m_helpButton->setIcon(QIcon::fromTheme("help-contents"));
+    m_finishButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOKApply]));
+    m_cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
+    m_helpButton->setIcon(QIcon::fromTheme(g_Icons[Icon::HelpContents]));
   }
 
   // create button layout

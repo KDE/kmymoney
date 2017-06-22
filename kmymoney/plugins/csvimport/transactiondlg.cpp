@@ -30,6 +30,13 @@
 #include <KLocalizedString>
 #include <KColorScheme>
 
+// ----------------------------------------------------------------------------
+// Project Includes
+
+#include <icons/icons.h>
+
+using namespace Icons;
+
 TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol,
                          const QList<MyMoneyStatement::Transaction::EAction>& validActionTypes) : ui(new Ui::TransactionDlg)
 {
@@ -49,13 +56,13 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
                  MyMoneyStatement::Transaction::eaShrsout <<
                  MyMoneyStatement::Transaction::eaInterest;
 
-  QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-ok"), QIcon::fromTheme(QStringLiteral("finish")));
+  QIcon icon = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
   if (!icon.availableSizes().isEmpty())
     m_iconYes = icon.pixmap(icon.availableSizes().first());
   else
     m_iconYes = QPixmap();
 
-  icon = QIcon::fromTheme(QStringLiteral("dialog-cancel"), QIcon::fromTheme(QStringLiteral("stop")));
+  icon = QIcon::fromTheme(g_Icons[Icon::DialogCancel]);
   if (!icon.availableSizes().isEmpty())
     m_iconNo = icon.pixmap(icon.availableSizes().first());
   else
