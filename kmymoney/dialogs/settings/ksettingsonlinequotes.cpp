@@ -101,6 +101,7 @@ void KSettingsOnlineQuotes::loadList(const bool updateResetList)
     if (updateResetList)
       m_resetList += WebPriceQuoteSource(*it);
   }
+  m_quoteSourceList->sortItems();
 
   QListWidgetItem* first = m_quoteSourceList->item(0);
   if (first)
