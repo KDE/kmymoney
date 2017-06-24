@@ -911,7 +911,7 @@ void MyMoneyQifReader::processCategoryEntry()
   }
 
   // check if we can find the account already in the file
-  MyMoneyAccount acc = kmymoney->findAccount(account, parentAccount);
+  MyMoneyAccount acc = kmymoney->findAccount(account, MyMoneyAccount());
 
   // if not, we just create it
   if (acc.id().isEmpty()) {

@@ -41,7 +41,6 @@
 class AccountsModel::Private
 {
 public:
-
   /**
     * The pimpl.
     */
@@ -64,17 +63,6 @@ public:
   void loadSubAccounts(QStandardItemModel *model, QStandardItem *accountsItem, QStandardItem *favoriteAccountsItem, const QStringList& list) {
     for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
       const MyMoneyAccount& acc = m_file->account(*it_l);
-
-      MyMoneyAccount::accountTypeE acctype = acc.accountType();
-      if ((acctype == MyMoneyAccount::Expense) || (acctype == MyMoneyAccount::Income)) {
-        if (m_addedCategoriesList.contains(acc.id())) {
-          //  Has been added already
-          return;
-        } else {
-          //  Add it to list
-          m_addedCategoriesList << acc.id();
-        }
-      }
 
       QStandardItem *item = new QStandardItem(acc.name());
       accountsItem->appendRow(item);
@@ -362,12 +350,6 @@ public:
     * Used to set the reconciliation flag.
     */
   MyMoneyAccount m_reconciledAccount;
-  /**
-    * Used to maintain a list of categories added
-    * during recursion through a category tree,
-    * before its completion.
-    */
-  QStringList m_addedCategoriesList;
 };
 
 const QString AccountsModel::favoritesAccountId("Favorites");
@@ -430,7 +412,6 @@ void AccountsModel::init()
 void AccountsModel::load()
 {
   QStandardItem *rootItem = invisibleRootItem();
-  d->m_addedCategoriesList.clear();
 
   QFont font;
   font.setBold(true);
