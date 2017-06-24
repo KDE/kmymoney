@@ -51,6 +51,76 @@ class QResizeEvent;
 class QTreeWidgetItem;
 class KPluginInfo;
 
+enum class Action {
+  FileOpenDatabase, FileSaveAsDatabase, FileBackup,
+  FileImportGNC, FileImportQIF, FileExportQIF,
+  FileImportStatement,
+  FileImportTemplate, FileExportTemplate,
+  #ifdef KMM_DEBUG
+  FileDump,
+  #endif
+  FilePersonalData, FileInformation,
+  EditFindTransaction,
+  ViewTransactionDetail, ViewHideReconciled,
+  ViewHideCategories, ViewShowAll,
+  InstitutionNew, InstitutionEdit,
+  InstitutionDelete,
+  AccountNew, AccountOpen,
+  AccountStartReconciliation, AccountFinishReconciliation,
+  AccountPostponeReconciliation, AccountEdit,
+  AccountDelete, AccountClose, AccountReopen,
+  AccountTransactionReport, AccountBalanceChart,
+  AccountUpdateMenu,
+  AccountOnlineMap, AccountOnlineUnmap,
+  AccountUpdate, AccountUpdateAll,
+  AccountCreditTransfer,
+  CategoryNew, CategoryEdit,
+  CategoryDelete,
+  ToolQIF, ToolCurrencies,
+  ToolPrices, ToolUpdatePrices,
+  ToolConsistency, ToolPerformance,
+  ToolSQL, ToolCalculator,
+  SettingsAllMessages, SettingsLanguage,
+  HelpShow,
+  TransactionNew, TransactionEdit,
+  TransactionEnter, TransactionEditSplits,
+  TransactionCancel, TransactionDelete,
+  TransactionDuplicate, TransactionMatch,
+  TransactionAccept, TransactionToggleReconciled,
+  TransactionToggleCleared, TransactionReconciled,
+  TransactionNotReconciled, TransactionSelectAll,
+  TransactionGoToAccount, TransactionGoToPayee,
+  TransactionCreateSchedule, TransactionAssignNumber,
+  TransactionCombine, TransactionCopySplits,
+  TransactionMoveMenu, TransactionMarkMenu,
+  TransactionContextMarkMenu,
+  InvestmentNew, InvestmentEdit,
+  InvestmentDelete, InvestmentOnlinePrice,
+  InvestmentManualPrice,
+  ScheduleNew, ScheduleEdit,
+  ScheduleDelete, ScheduleDuplicate,
+  ScheduleEnter, ScheduleSkip,
+  PayeeNew, PayeeRename, PayeeDelete,
+  PayeeMerge,
+  TagNew, TagRename, TagDelete,
+  BudgetNew, BudgetRename, BudgetDelete,
+  BudgetCopy, BudgetChangeYear, BudgetForecast,
+  CurrencyNew, CurrencyRename, CurrencyDelete,
+  CurrencySetBase,
+  PriceNew, PriceDelete,
+  PriceUpdate, PriceEdit,
+  #ifdef KMM_DEBUG
+  WizardNewUser, DebugTraces,
+  #endif
+  DebugTimers,
+  OnlineJobDelete, OnlineJobEdit, OnlineJobLog
+};
+
+inline uint qHash(const Action key, uint seed)
+{
+  return ::qHash(static_cast<uint>(key), seed);
+}
+
 /*! \mainpage KMyMoney Main Page for API documentation.
  *
  * \section intro Introduction
@@ -127,10 +197,12 @@ protected slots:
     */
   void slotGenerateSql();
 
+#ifdef KMM_DEBUG
   /**
     * Debugging only: turn on/off traces
     */
   void slotToggleTraces();
+#endif
 
   /**
     * Debugging only: turn on/off timers
@@ -221,7 +293,8 @@ protected slots:
     * selected institution and brings up the input dialog
     * and saves the information entered.
     */
-  void slotInstitutionEdit(const MyMoneyObject& obj = MyMoneyInstitution());
+  void slotInstitutionEdit();
+  void slotInstitutionEdit(const MyMoneyObject &obj);
 
   /**
     * Deletes the current selected institution.
@@ -496,6 +569,12 @@ protected slots:
    * @brief Send a list of onlineJobs
    */
   void slotOnlineJobSend(QList<onlineJob> jobs);
+
+  /**
+    * dummy method needed just for initialization
+    */
+  void slotRemoveJob();
+  void slotEditJob();
 
   /**
    * @brief Show the log currently selected online job
@@ -835,7 +914,8 @@ public slots:
    * @retval false save operation failed
    * @retval true save operation was successful
    */
-  bool slotSaveAsDatabase();
+  bool saveAsDatabase();
+  void slotSaveAsDatabase();
 
   /** asks for saving if the file is modified, then closes the actual file and window */
   void slotFileCloseWindow();
@@ -862,6 +942,11 @@ public slots:
     * fires up the currency table editor
     */
   void slotCurrencyDialog();
+
+  /**
+    * dummy method needed just for initialization
+    */
+  void slotShowTransactionDetail();
 
   /**
     * Toggles the hide reconciled transactions setting
@@ -953,7 +1038,8 @@ public slots:
   /**
     * This slot opens the selected account in the ledger view
     */
-  void slotAccountOpen(const MyMoneyObject& = MyMoneyAccount());
+  void slotAccountOpen();
+  void slotAccountOpen(const MyMoneyObject&);
 
   /**
     * This slot closes the currently selected account if possible
@@ -1087,13 +1173,17 @@ public slots:
 
   void slotResetSelections();
 
-  void slotSelectAccount(const MyMoneyObject& account = MyMoneyAccount());
+  void slotSelectAccount();
+  void slotSelectAccount(const MyMoneyObject& account);
 
-  void slotSelectInstitution(const MyMoneyObject& institution = MyMoneyInstitution());
+  void slotSelectInstitution();
+  void slotSelectInstitution(const MyMoneyObject& institution);
 
-  void slotSelectInvestment(const MyMoneyObject& account = MyMoneyAccount());
+  void slotSelectInvestment();
+  void slotSelectInvestment(const MyMoneyObject& account);
 
-  void slotSelectSchedule(const MyMoneySchedule& schedule = MyMoneySchedule());
+  void slotSelectSchedule();
+  void slotSelectSchedule(const MyMoneySchedule& schedule);
 
   void slotSelectPayees(const QList<MyMoneyPayee>& list);
 
@@ -1103,9 +1193,11 @@ public slots:
 
   void slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions& list);
 
-  void slotSelectCurrency(const MyMoneySecurity& currency = MyMoneySecurity());
+  void slotSelectCurrency();
+  void slotSelectCurrency(const MyMoneySecurity& currency);
 
-  void slotSelectPrice(const MyMoneyPrice& price = MyMoneyPrice());
+  void slotSelectPrice();
+  void slotSelectPrice(const MyMoneyPrice& price);
 
   void slotTransactionMatch();
 
@@ -1335,15 +1427,9 @@ signals:
   void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
 public:
-  /**
-    * This method is implemented for convenience. It returns a dynamic_cast-ed
-    * pointer to an action found in actionCollection().
-    * If the action with the name @p actionName is not found or the object
-    * is not of type KToggleAction, a pointer to a static non-configured
-    * KToggleAction object is returned and a warning is printed to stderr.
-    */
-  KToggleAction* toggleAction(const QString& actionName) const;
 
+  bool isActionToggled(const Action _a);
+  static const QHash<Action, QString> s_Actions;
 
 private:
   /// \internal d-pointer class.

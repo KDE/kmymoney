@@ -45,7 +45,7 @@
 #include <kmessagebox.h>
 #include <ktoolbar.h>
 #include <kpassivepopup.h>
-#include <ktoggleaction.h>
+#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -271,13 +271,13 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   buttonLayout->addWidget(m_buttonbar);
 
-  m_buttonbar->addAction(kmymoney->action("transaction_new"));
-  m_buttonbar->addAction(kmymoney->action("transaction_delete"));
-  m_buttonbar->addAction(kmymoney->action("transaction_edit"));
-  m_buttonbar->addAction(kmymoney->action("transaction_enter"));
-  m_buttonbar->addAction(kmymoney->action("transaction_cancel"));
-  m_buttonbar->addAction(kmymoney->action("transaction_accept"));
-  m_buttonbar->addAction(kmymoney->action("transaction_match"));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionNew]));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionDelete]));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEdit]));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEnter]));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionCancel]));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionAccept]));
+  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionMatch]));
 
   // create the transaction form frame
   m_formFrame = new QFrame(this);
@@ -874,7 +874,7 @@ void KGlobalLedgerView::loadAccounts()
   // TODO: check why the invalidate is needed here
   d->m_filterProxyModel->invalidate();
   d->m_filterProxyModel->sort(AccountsModel::Account);
-  d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->isActionToggled(Action::ViewShowAll));
   d->m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   d->m_accountComboBox->expandAll();
 
@@ -980,11 +980,11 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
     m_newAccountLoaded = true;
 
     if (acc.id().isEmpty()) {
-      m_buttonbar->removeAction(kmymoney->action("account_reconcile_postpone"));
-      m_buttonbar->removeAction(kmymoney->action("account_reconcile_finish"));
+      m_buttonbar->removeAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountPostponeReconciliation]));
+      m_buttonbar->removeAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountFinishReconciliation]));
     } else {
-      m_buttonbar->addAction(kmymoney->action("account_reconcile_postpone"));
-      m_buttonbar->addAction(kmymoney->action("account_reconcile_finish"));
+      m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountPostponeReconciliation]));
+      m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountFinishReconciliation]));
       // when we start reconciliation, we need to reload the view
       // because no data has been changed. When postponing or finishing
       // reconciliation, the data change in the engine takes care of updateing
@@ -1198,9 +1198,9 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       }
 
       m_inEditMode = true;
-      connect(editor, SIGNAL(transactionDataSufficient(bool)), kmymoney->action("transaction_enter"), SLOT(setEnabled(bool)));
-      connect(editor, SIGNAL(returnPressed()), kmymoney->action("transaction_enter"), SLOT(trigger()));
-      connect(editor, SIGNAL(escapePressed()), kmymoney->action("transaction_cancel"), SLOT(trigger()));
+      connect(editor, SIGNAL(transactionDataSufficient(bool)), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEnter]), SLOT(setEnabled(bool)));
+      connect(editor, SIGNAL(returnPressed()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEnter]), SLOT(trigger()));
+      connect(editor, SIGNAL(escapePressed()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionCancel]), SLOT(trigger()));
 
       connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
       connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));

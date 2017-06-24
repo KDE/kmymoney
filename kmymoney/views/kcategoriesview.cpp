@@ -36,7 +36,6 @@
 
 #include <KLocalizedString>
 #include <kguiitem.h>
-#include <KToggleAction>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -143,12 +142,12 @@ void KCategoriesView::slotLoadAccounts()
 void KCategoriesView::loadAccounts()
 {
   m_filterProxyModel->invalidate();
-  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->isActionToggled(Action::ViewShowAll));
 
   // reinitialize the default state of the hidden categories label
   m_haveUnusedCategories = false;
   m_hiddenCategories->hide();
-  m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(kmymoney->toggleAction("view_hide_unused_categories")->isChecked());
+  m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(kmymoney->isActionToggled(Action::ViewHideCategories));
 
   // and in case we need to show things expanded, we'll do so
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {

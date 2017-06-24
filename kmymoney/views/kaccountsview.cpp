@@ -35,7 +35,6 @@
 
 #include <KLocalizedString>
 #include <kguiitem.h>
-#include <KToggleAction>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -136,7 +135,7 @@ void KAccountsView::slotLoadAccounts()
 {
   // TODO: check why the invalidate is needed here
   m_filterProxyModel->invalidate();
-  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->isActionToggled(Action::ViewShowAll));
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   if (KMyMoneyGlobalSettings::showCategoriesInAccountsView()) {
     m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
@@ -149,7 +148,7 @@ void KAccountsView::slotLoadAccounts()
   // reinitialize the default state of the hidden categories label
   m_haveUnusedCategories = false;
   m_hiddenCategories->hide();
-  m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(kmymoney->toggleAction("view_hide_unused_categories")->isChecked());
+  m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(kmymoney->isActionToggled(Action::ViewShowAll));
 
   // and in case we need to show things expanded, we'll do so
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {

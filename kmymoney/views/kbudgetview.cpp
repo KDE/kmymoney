@@ -45,6 +45,7 @@
 #include <kguiitem.h>
 #include <kcombobox.h>
 #include <KSharedConfig>
+#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -393,8 +394,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   // connect the buttons to the actions. Make sure the enabled state
   // of the actions is reflected by the buttons
-  connect(m_renameButton, SIGNAL(clicked()), kmymoney->action("budget_rename"), SLOT(trigger()));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("budget_delete"), SLOT(trigger()));
+  connect(m_renameButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename]), SLOT(trigger()));
+  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete]), SLOT(trigger()));
 
   connect(m_budgetValue, SIGNAL(valuesChanged()), this, SLOT(slotBudgetedAmountChanged()));
 
@@ -418,9 +419,9 @@ KBudgetView::KBudgetView(QWidget *parent) :
   connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
 
   // setup initial state
-  m_newButton->setEnabled(kmymoney->action("budget_new")->isEnabled());
-  m_renameButton->setEnabled(kmymoney->action("budget_rename")->isEnabled());
-  m_deleteButton->setEnabled(kmymoney->action("budget_delete")->isEnabled());
+  m_newButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetNew])->isEnabled());
+  m_renameButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename])->isEnabled());
+  m_deleteButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete])->isEnabled());
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
 
@@ -843,7 +844,7 @@ bool KBudgetView::collectSubBudgets(MyMoneyBudget::AccountGroup &destination, co
 void KBudgetView::slotNewBudget()
 {
   askSave();
-  kmymoney->action("budget_new")->trigger();
+  kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetNew])->trigger();
 }
 
 void KBudgetView::slotResetBudget()

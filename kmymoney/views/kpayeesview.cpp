@@ -51,6 +51,7 @@
 #include <kguiitem.h>
 #include <khelpclient.h>
 #include <KSharedConfig>
+#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -202,8 +203,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_payeesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
 
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("payee_delete"), SLOT(trigger()));
-  connect(m_mergeButton, SIGNAL(clicked()), kmymoney->action("payee_merge"), SLOT(trigger()));
+  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::PayeeDelete]), SLOT(trigger()));
+  connect(m_mergeButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::PayeeMerge]), SLOT(trigger()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotPayeeNew()));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
@@ -947,7 +948,7 @@ void KPayeesView::slotOpenContextMenu(const QPoint& /*p*/)
 
 void KPayeesView::slotPayeeNew()
 {
-  kmymoney->action("payee_new")->trigger();
+  kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::PayeeNew])->trigger();
 }
 
 void KPayeesView::slotHelp()

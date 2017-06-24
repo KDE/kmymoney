@@ -44,6 +44,7 @@
 #include <kguiitem.h>
 #include <khelpclient.h>
 #include <KSharedConfig>
+#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -158,7 +159,7 @@ KTagsView::KTagsView(QWidget *parent) :
   connect(m_tagsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
 
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("tag_delete"), SLOT(trigger()));
+  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TagDelete]), SLOT(trigger()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotTagNew()));
 
   connect(m_colorbutton, SIGNAL(changed(QColor)), this, SLOT(slotTagDataChanged()));
@@ -654,7 +655,7 @@ void KTagsView::slotOpenContextMenu(const QPoint& /*ta*/)
 
 void KTagsView::slotTagNew()
 {
-  kmymoney->action("tag_new")->trigger();
+  kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TagNew])->trigger();
 }
 
 void KTagsView::slotHelp()

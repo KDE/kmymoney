@@ -51,7 +51,6 @@
 #include <kmessagebox.h>
 #include <kcodecs.h>
 #include <ktoolinvocation.h>
-#include <KToggleAction>
 #include <khtml_part.h>
 
 // ----------------------------------------------------------------------------
@@ -653,7 +652,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
   int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
   QList<MyMoneyAccount> accounts;
 
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
+  bool showClosedAccounts = kmymoney->isActionToggled(Action::ViewShowAll);
 
   // get list of all accounts
   file->accountList(accounts);
@@ -1175,14 +1174,14 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
     } else if (view == VIEW_SCHEDULE) {
       if (mode == "enter") {
         emit scheduleSelected(id);
-        QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(trigger()));
-      } else if (mode == "edit") {
+        QTimer::singleShot(0, mw->actionCollection()->action(kmymoney->s_Actions[Action::ScheduleEnter]), SLOT(trigger()));
+      } else if (mode == QLatin1String("edit")) {
         emit scheduleSelected(id);
-        QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(trigger()));
-      } else if (mode == "skip") {
+        QTimer::singleShot(0, mw->actionCollection()->action(kmymoney->s_Actions[Action::ScheduleEdit]), SLOT(trigger()));
+      } else if (mode == QLatin1String("skip")) {
         emit scheduleSelected(id);
-        QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(trigger()));
-      } else if (mode == "full") {
+        QTimer::singleShot(0, mw->actionCollection()->action(kmymoney->s_Actions[Action::ScheduleSkip]), SLOT(trigger()));
+      } else if (mode == QLatin1String("full")) {
         d->m_showAllSchedules = true;
         loadView();
 

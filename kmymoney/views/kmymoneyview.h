@@ -526,7 +526,6 @@ public slots:
     setCurrentPage(m_homeViewFrame);
   }
 
-protected slots:
   /**
     * Called when the user changes the detail
     * setting of the transaction register
@@ -535,6 +534,7 @@ protected slots:
     */
   void slotShowTransactionDetail(bool detailed);
 
+protected slots:
   /**
    * eventually replace this with KMyMoneyApp::slotCurrencySetBase().
    * it contains the same code

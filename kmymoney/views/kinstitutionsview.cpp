@@ -28,7 +28,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KToggleAction>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -124,7 +123,7 @@ void KInstitutionsView::loadAccounts()
 {
   m_filterProxyModel->invalidate();
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->isActionToggled(Action::ViewShowAll));
 }
 
 void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)

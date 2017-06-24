@@ -28,9 +28,9 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KToggleAction>
 #include <KMessageBox>
 #include <KSharedConfig>
+#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -131,7 +131,7 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   connect(m_investmentsList, SIGNAL(itemSelectionChanged()), this, SLOT(slotInvestmentSelectionChanged()));
   connect(m_accountComboBox, SIGNAL(accountSelected(QString)),
           this, SLOT(slotSelectAccount(QString)));
-  connect(m_investmentsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), kmymoney->action("investment_edit"), SLOT(trigger()));
+  connect(m_investmentsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::InvestmentEdit]), SLOT(trigger()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 
   // create the searchline widget
@@ -380,7 +380,7 @@ void KInvestmentView::loadInvestmentTab()
   setEnabled(true);
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
+  bool showClosedAccounts = kmymoney->isActionToggled(Action::ViewShowAll)
                             || !KMyMoneyGlobalSettings::hideClosedAccounts();
   const bool hideZeroBalance = KMyMoneyGlobalSettings::hideZeroBalanceEquities();
 

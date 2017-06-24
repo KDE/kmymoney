@@ -25,6 +25,7 @@
 #include <KMessageBox>
 #include <QAction>
 #include <QModelIndexList>
+#include <KActionCollection>
 
 #include "models/models.h"
 #include "models/onlinejobmodel.h"
@@ -54,7 +55,7 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     connect(ui->m_onlineJobView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(updateButtonState()));
 
     // Set new credit transfer button
-    connect(kmymoney->action("account_online_new_credit_transfer"), SIGNAL(changed()), SLOT(updateNewCreditTransferButton()));
+    connect(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountCreditTransfer]), SIGNAL(changed()), SLOT(updateNewCreditTransferButton()));
     connect(ui->m_buttonNewCreditTransfer, SIGNAL(clicked()), this, SIGNAL(newCreditTransfer()));
     updateNewCreditTransferButton();
 }
@@ -99,7 +100,7 @@ void KOnlineJobOutbox::updateButtonState() const
     tooltip = i18n("You must select a single job for editing.");
   }
 
-  QAction *const onlinejob_edit = kmymoney->action("onlinejob_edit");
+  QAction *const onlinejob_edit = kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::OnlineJobEdit]);
   Q_CHECK_PTR(onlinejob_edit);
   onlinejob_edit->setEnabled(editable);
   onlinejob_edit->setToolTip(tooltip);
@@ -108,7 +109,7 @@ void KOnlineJobOutbox::updateButtonState() const
   ui->m_buttonEdit->setToolTip(tooltip);
 
   // Delete button/action
-  QAction *const onlinejob_delete = kmymoney->action("onlinejob_delete");
+  QAction *const onlinejob_delete = kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::OnlineJobDelete]);
   Q_CHECK_PTR(onlinejob_delete);
   onlinejob_delete->setEnabled(selectedItems > 0);
   ui->m_buttonRemove->setEnabled(onlinejob_delete->isEnabled());
@@ -116,7 +117,7 @@ void KOnlineJobOutbox::updateButtonState() const
 
 void KOnlineJobOutbox::updateNewCreditTransferButton()
 {
-  QAction* action = kmymoney->action("account_online_new_credit_transfer");
+  QAction* action = kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountCreditTransfer]);
   Q_CHECK_PTR(action);
   ui->m_buttonNewCreditTransfer->setEnabled(action->isEnabled());
 }

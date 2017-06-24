@@ -44,6 +44,7 @@
 #include <kconfig.h>
 #include <kmessagebox.h>
 #include <KSharedConfig>
+#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -77,7 +78,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   readConfig();
 
-  connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->action("schedule_new"), SLOT(trigger()));
+  connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::ScheduleNew]), SLOT(trigger()));
 
   // attach popup to 'Filter...' button
   m_kaccPopup = new QMenu(this);
