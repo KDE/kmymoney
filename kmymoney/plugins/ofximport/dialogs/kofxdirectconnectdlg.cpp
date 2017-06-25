@@ -34,7 +34,7 @@
 #include <kjob.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/JobUiDelegate>
 #include <QProgressDialog>
 #include <kmessagebox.h>
 #include <KLocalizedString>
@@ -188,7 +188,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
 
   if (error) {
     qDebug("Show error message");
-    m_job->ui()->showErrorMessage();
+    m_job->uiDelegate()->showErrorMessage();
   } else if (m_job->isErrorPage()) {
     qDebug("Process error page");
     QString details;

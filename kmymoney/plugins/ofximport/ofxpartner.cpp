@@ -44,7 +44,7 @@
 #include <kjob.h>
 #include <kio/job.h>
 #include <kio/copyjob.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/JobUiDelegate>
 #include <KLocalizedString>
 #include <kmessagebox.h>
 
@@ -465,7 +465,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
     if (error) {
       // TODO: port to KF5
       //m_job->ui()->setWindow(0);
-      m_postJob->ui()->showErrorMessage();
+      m_postJob->uiDelegate()->showErrorMessage();
       QFile::remove(m_dst.path());
 
     } else if (m_postJob->isErrorPage()) {
@@ -488,7 +488,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
     if (error) {
       // TODO: port to KF5
       //m_job->ui()->setWindow(0);
-      m_getJob->ui()->showErrorMessage();
+      m_getJob->uiDelegate()->showErrorMessage();
       QFile::remove(m_dst.path());
     }
   }
