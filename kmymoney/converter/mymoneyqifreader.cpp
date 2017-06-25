@@ -427,7 +427,7 @@ bool MyMoneyQifReader::startImport()
   if (m_file->open(QIODevice::ReadOnly)) {
 
 #ifdef DEBUG_IMPORT
-    Q_LONG len;
+    qint64 len;
 
     while (!m_file->atEnd()) {
       len = m_file->read(m_buffer, sizeof(m_buffer));
@@ -437,8 +437,8 @@ bool MyMoneyQifReader::startImport()
         parseReceivedData(QByteArray(m_buffer, len));
       }
     }
-    slotImportFinished();
-
+    QTimer::singleShot(0, this, SLOT(slotImportFinished()));
+    rc = true;
 #else
     // start filter process, use 'cat -' as the default filter
     m_filter.clearProgram();
