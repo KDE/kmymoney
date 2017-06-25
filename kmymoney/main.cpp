@@ -18,8 +18,6 @@
 #include <config-kmymoney.h>
 #include <config-kmymoney-version.h>
 
-#include <memory>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -58,7 +56,7 @@ bool timersOn = false;
 
 KMyMoneyApp* kmymoney;
 
-static int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUrl & file, bool noFile);
+static int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile);
 
 int main(int argc, char *argv[])
 {
@@ -198,7 +196,7 @@ int main(int argc, char *argv[])
   KMyMoneyUtils::checkConstants();
 
   // show startup logo
-  std::unique_ptr<KStartupLogo> splash = std::unique_ptr<KStartupLogo>(new KStartupLogo());
+  std::unique_ptr<QSplashScreen> splash(KMyMoneyGlobalSettings::showSplash() ? createStartupLogo() : nullptr);
   app.processEvents();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
@@ -259,7 +257,7 @@ int main(int argc, char *argv[])
   return rc;
 }
 
-int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUrl & file, bool noFile)
+int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile)
 {
 #ifdef KMM_DBUS
   if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney")) {

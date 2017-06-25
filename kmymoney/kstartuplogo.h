@@ -1,8 +1,9 @@
 /***************************************************************************
                           kstartuplogo.h
                              -------------------
-    copyright            : (C) 2000 by Michael Edwardes
-    email                : mte@users.sourceforge.net
+    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -17,25 +18,17 @@
 #ifndef KSTARTUPLOGO_H
 #define KSTARTUPLOGO_H
 
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QPointer>
+#include <QSplashScreen>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-// Simple class that just shows a picture
-class KStartupLogo : public QObject
-{
-  Q_OBJECT
-public:
-  KStartupLogo();
-  ~KStartupLogo();
 
-private:
-  QPointer<QWidget>  m_splash;
-};
+std::unique_ptr<QSplashScreen> createStartupLogo();
 
 #endif
