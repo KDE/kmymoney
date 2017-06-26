@@ -77,7 +77,7 @@ downloadsrc) ## download source
 
 unpack) ## unpack rpm files
         cd work
-        files=$(cd binaries; find -name *installer* -o -name *portable* -o -name *src* -o -name *debug* | grep "$VERSION" | sed 's,^.,binaries,g')
+        files=$(cd binaries; find -name '*installer*' -o -name '*portable*' -o -name '*src*' -o -name '*debug*' | grep "$VERSION" | sed 's,^.,binaries,g')
         if test -d tmp; then
                 rm -rf tmp
         fi
