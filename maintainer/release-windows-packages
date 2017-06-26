@@ -21,9 +21,9 @@ SRCROOT32=${ROOT32}
 ARCHOUT32=i686-w64-mingw32
 
 PACKAGENAME64=mingw64-$NAME
-#ROOT64=${ROOT}windows\:mingw\:win64\:KDE4
-#SRCROOT64=windows\:mingw\:win64
-#ARCHOUT64=x86_64-w64-mingw32
+ROOT64=${ROOT}windows\:mingw\:win64\:kmymoney
+SRCROOT64=${ROOT64}
+ARCHOUT64=x86_64-w64-mingw32
 
 REPO=openSUSE_Leap_42.2
 SRCREPO=$REPO
