@@ -2963,16 +2963,21 @@ const MyMoneyAccount& KMyMoneyApp::findAccount(const MyMoneyAccount& acc, const 
       int pos;
       // check for ':' in the name and use it as separator for a hierarchy
       QString name = acc.name();
+      bool notFound = false;
       while ((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
         QString part = name.left(pos);
         QString remainder = name.mid(pos + 1);
         const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
+        // if account has not been found, continue with next top level parent
         if (existingAccount.id().isEmpty()) {
-          return existingAccount;
+          notFound = true;
+          break;
         }
         parentAccount = existingAccount;
         name = remainder;
       }
+      if (notFound)
+        continue;
       const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, name);
       if (!existingAccount.id().isEmpty()) {
         if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {

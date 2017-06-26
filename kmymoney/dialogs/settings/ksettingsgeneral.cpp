@@ -55,9 +55,9 @@ KSettingsGeneral::~KSettingsGeneral()
 
 void KSettingsGeneral::slotChooseLogPath()
 {
-    QString filePath = QFileDialog::getExistingDirectory(this, i18n("Choose file path"), QDir::homePath());
-    kcfg_logPath->setText(filePath);
-    slotUpdateLogTypes();
+  QString filePath = QFileDialog::getExistingDirectory(this, i18n("Choose file path"), QDir::homePath());
+  kcfg_logPath->setText(filePath);
+  slotUpdateLogTypes();
 }
 
 void KSettingsGeneral::slotLoadStartDate(const QDate&)
@@ -69,20 +69,20 @@ void KSettingsGeneral::slotLoadStartDate(const QDate&)
 
 void KSettingsGeneral::slotUpdateLogTypes()
 {
-    bool enable = kcfg_logPath->text().isEmpty() ? false : true;
-    kcfg_logImportedStatements->setEnabled(enable);
-    kcfg_logOfxTransactions->setEnabled(enable);
-    if (!enable)
-    {
-        kcfg_logImportedStatements->setChecked(enable);
-        kcfg_logOfxTransactions->setChecked(enable);
-    }
+  bool enable = kcfg_logPath->text().isEmpty() ? false : true;
+  kcfg_logImportedStatements->setEnabled(enable);
+  kcfg_logOfxTransactions->setEnabled(enable);
+  if (!enable)
+  {
+    kcfg_logImportedStatements->setChecked(enable);
+    kcfg_logOfxTransactions->setChecked(enable);
+  }
 }
 
 void KSettingsGeneral::showEvent(QShowEvent *event)
 {
-    KSettingsGeneralDecl::showEvent(event);
-    slotUpdateLogTypes();
+  KSettingsGeneralDecl::showEvent(event);
+  slotUpdateLogTypes();
 }
 
 void KSettingsGeneral::slotUpdateEquitiesVisibility()

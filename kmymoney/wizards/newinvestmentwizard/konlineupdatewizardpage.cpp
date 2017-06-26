@@ -19,7 +19,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,6 +36,13 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
 {
   m_onlineFactor->setValue(MyMoneyMoney::ONE);
   m_onlineFactor->setPrecision(4);
+
+  // make m_onlineSourceCombo sortable
+  QSortFilterProxyModel* proxy = new QSortFilterProxyModel(m_onlineSourceCombo);
+  proxy->setSourceModel(m_onlineSourceCombo->model());
+  proxy->setSortCaseSensitivity(Qt::CaseInsensitive);
+  m_onlineSourceCombo->model()->setParent(proxy);
+  m_onlineSourceCombo->setModel(proxy);
 
   // Connect signals-slots
   connect(m_useFinanceQuote, SIGNAL(toggled(bool)), this, SLOT(slotSourceChanged(bool)));
@@ -107,4 +114,5 @@ void KOnlineUpdateWizardPage::slotSourceChanged(bool useFQ)
   } else {
     m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources());
   }
+  m_onlineSourceCombo->model()->sort(0);
 }

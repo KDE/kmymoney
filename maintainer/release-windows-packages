@@ -21,9 +21,9 @@ SRCROOT32=${ROOT32}
 ARCHOUT32=i686-w64-mingw32
 
 PACKAGENAME64=mingw64-$NAME
-#ROOT64=${ROOT}windows\:mingw\:win64\:KDE4
-#SRCROOT64=windows\:mingw\:win64
-#ARCHOUT64=x86_64-w64-mingw32
+ROOT64=${ROOT}windows\:mingw\:win64\:kmymoney
+SRCROOT64=${ROOT64}
+ARCHOUT64=x86_64-w64-mingw32
 
 REPO=openSUSE_Leap_42.2
 SRCREPO=$REPO
@@ -77,7 +77,7 @@ downloadsrc) ## download source
 
 unpack) ## unpack rpm files
         cd work
-        files=$(cd binaries; find -name *installer* -o -name *portable* -o -name *src* -o -name *debug* | grep "$VERSION" | sed 's,^.,binaries,g')
+        files=$(cd binaries; find -name '*installer*' -o -name '*portable*' -o -name '*src*' -o -name '*debugpackage*' | grep "$VERSION" | sed 's,^.,binaries,g')
         if test -d tmp; then
                 rm -rf tmp
         fi
@@ -95,29 +95,6 @@ movepackage) ## move windows binary packages into upload folder
         find tmp/ -type f -name '*.exe' -exec cp {} out \;
         find tmp/ -type f -name '*.7z' -exec cp {} out \;
         touch $1.finished
-        ;;
-
-packdebug) ## package debug package
-        cd work
-        rm -rf out/*debug*.7z
-        arch=mingw32
-        version=$(find binaries/ -name *$arch*debug* | sed 's,.*debug-,,g;s,\.noarch.*,,g')
-        if test -z "$version"; then
-                echo no version found
-                exit 1;
-        fi
-        dir=tmp/usr/i686-w64-mingw32/sys-root/mingw
-        outfile=$PWD/out/$NAME-$ARCHOUT32-$version-debug.7z
-        (cd $dir; 7z a -r -mx=9 $outfile *.debug *.sym)
-
-        if test -n "$ROOT64"; then
-            arch=mingw64
-            version=$(find binaries/ -name *$arch*debug* | sed 's,.*debug-,,g;s,\.noarch.*,,g')
-            dir=tmp/usr/x86_64-w64-mingw32/sys-root/mingw
-            outfile=$PWD/out/$NAME-$ARCHOUT64-$version-debug.7z
-            (cd $dir; 7z a -r -mx=9 $outfile *.debug *.sym)
-        fi
-        touch $1
         ;;
 
 repacksource) ## repackage source tar ball to 7z
@@ -163,7 +140,6 @@ sf) ## run all required targets for releasing on sourceforge
         $self unpack
         $self movepackage
         $self repacksource
-        $self packdebug
         $self createsha
         echo "All release related files are located in work/out"
         ls work/out
@@ -176,7 +152,6 @@ kde) ## run all required targets for releasing on download.kde.org
         $self unpack
         $self movepackage
         $self repacksource
-        $self packdebug
         $self createsha
         $self upload
         echo "Content for ticket creating:"

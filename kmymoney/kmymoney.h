@@ -600,6 +600,20 @@ public:
 
   QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode, QWidget *widget);
 
+  /**
+   * This methods returns the account from the list of accounts identified by
+   * an account id or account name including an account hierachy.
+   *
+   * The parent account specifies from which account the search should be started.
+   * In case the parent account does not have an id, the method scans all top-level accounts.
+   *
+   * If the account is not found in the list of accounts, MyMoneyAccount() is returned.
+   *
+   * @param acc account to find
+   * @param parent parent account to search from
+   * @retval found MyMoneyAccount account instance
+   * @retval MyMoneyAccount() if not found
+   */
   const MyMoneyAccount& findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
