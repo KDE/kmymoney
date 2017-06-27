@@ -175,8 +175,6 @@ void RegisterSearchLine::updateSearch(const QString& s)
 void RegisterSearchLine::reset()
 {
   clear();
-  d->combo->setCurrentIndex(RegisterFilter::Any);
-  slotStatusChanged(RegisterFilter::Any);
 }
 
 void RegisterSearchLine::itemAdded(RegisterItem* item) const
