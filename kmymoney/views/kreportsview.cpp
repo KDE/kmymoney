@@ -712,7 +712,7 @@ void KReportsView::slotSaveView()
         QString newName = newURL.pathOrUrl();
 
         if (newName.indexOf('.') == -1)
-          newName.append(".html");
+          newName.append(d->fSavProps->filter.remove('*'));
 
         // save checkbox checked state
         d->fSavProps->cbIsChecked = d->fSavProps->includeCssCheckBox->isChecked();
