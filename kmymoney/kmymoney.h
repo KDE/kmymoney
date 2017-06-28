@@ -266,6 +266,11 @@ protected slots:
     */
   void slotSettings();
 
+  /**
+    * Called to show credits window.
+    */
+  void slotShowCredits();
+
   /** No descriptions */
   void slotFileBackup();
 
@@ -645,10 +650,12 @@ public:
     */
   QList<QString> instanceList() const;
 
+#ifdef KMM_DEBUG
   /**
     * Dump a list of the names of all defined KActions to stdout.
     */
   void dumpActions() const;
+#endif
 
   /**
     * Popup the context menu with the respective @p containerName.

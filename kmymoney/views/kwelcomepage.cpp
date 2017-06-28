@@ -28,6 +28,7 @@
 #include <QStringList>
 #include <QUrl>
 #include <QStandardPaths>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -156,7 +157,7 @@ const QString KWelcomePage::whatsNewPage()
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(QUrl::fromLocalFile(backgroundFilename).url());
   const QString logoFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(QUrl::fromLocalFile(logoFilename).url());
-  body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1", KAboutData::applicationData().version()) + "</h3>");
+  body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1", QApplication::applicationVersion()) + "</h3>");
   const QString backArrowFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><img src=\"%1\">").arg(QUrl::fromLocalFile(backArrowFilename).url());
   body += QString("<a href=\"/welcome\">" + i18n("Return to the Welcome page") + "</a></div>");

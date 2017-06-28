@@ -36,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KAboutData>
 #include <KLocalizedString>
 #include <ktip.h>
 #include <KMessageBox>
@@ -48,6 +47,7 @@
 #include "mymoney/mymoneyfile.h"
 #include "kmymoney.h"
 #include "kstartuplogo.h"
+#include "kcreditswindow.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 
@@ -76,118 +76,94 @@ int main(int argc, char *argv[])
   QApplication app(argc, argv);
 
   /**
-   * construct about data
+   * construct and register about data
    */
-  QStringList features;
-#ifdef Gpgmepp_FOUND
-  features << i18n("GPG encryption");
-#endif
-#ifdef KMM_ADDRESSBOOK_FOUND
-  features << i18n("Addressbook integration");
-#endif
-#ifdef KF5Holidays_FOUND
-  features << i18n("Holiday regions integration");
-#endif
-  QString featuresDescription;
-  if (!features.empty())
-      featuresDescription = i18n("Compiled with the following optional features:\n%1", features.join(QLatin1Char('\n')));
-  KAboutData aboutData(QStringLiteral("kmymoney"), i18n("KMyMoney"), QStringLiteral(VERSION),
-                       i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutLicense::GPL,
-                       i18n("(c) 2000-2017 The KMyMoney development team"),
-                       featuresDescription,
-                       QStringLiteral("http://kmymoney.org/"));
-
-  //Temporarily, the product name to report bugs in BKO is different than the application name
-  aboutData.setProductName("kmymoney");
-
-  aboutData.addAuthor(i18n("Michael Edwardes."), i18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
-  aboutData.addAuthor(i18n("Thomas Baumgart"), i18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
-  aboutData.addAuthor(i18n("Alvaro Soliverez"), i18n("Forecast, Reports"), "asoliverez@gmail.com");
-  aboutData.addAuthor(i18n("Cristian Oneț"), i18n("Developer"), "onet.cristian@gmail.com");
-  aboutData.addAuthor(i18n("Christian Dávid"), i18n("Developer"), "christian-david@web.de");
-  aboutData.addAuthor(i18n("Ace Jones"), i18n("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
-  aboutData.addAuthor(i18n("Tony Bloomfield"), i18n("Database backend, maintainer stable branch"), "tonybloom@users.sourceforge.net");
-  aboutData.addAuthor(i18n("Felix Rodriguez"), i18n("Project Admin"), "frodriguez@users.sourceforge.net");
-  aboutData.addAuthor(i18n("John C"), i18n("Developer"), "tacoturtle@users.sourceforge.net");
-  aboutData.addAuthor(i18n("Fernando Vilas"), i18n("Database backend"), "fvilas@iname.com");
-
-  aboutData.addCredit(i18n("Kevin Tambascio"), i18n("Initial investment support"), "ktambascio@users.sourceforge.net");
-  aboutData.addCredit(i18n("Javier Campos Morales"), i18n("Developer & Artist"), "javi_c@users.sourceforge.net");
-  aboutData.addCredit(i18n("Robert Wadley"), i18n("Icons & splash screen"), "rob@robntina.fastmail.us");
-  aboutData.addCredit(i18n("Laurent Montel"), i18n("Patches and port to kde4"), "montel@kde.org");
-  aboutData.addCredit(i18n("Wolfgang Rohdewald"), i18n("Patches"), "woro@users.sourceforge.net");
-  aboutData.addCredit(i18n("Marko Käning"), i18n("Patches, packaging and KF5-CI for OS X"), "mk-lists@email.de");
-  aboutData.addCredit(i18n("Allan Anderson ✝"), i18n("CSV import/export"), "");
-  aboutData.addCredit(i18n("Jack Ostroff"), i18n("Documentation and user support"), "ostroffjh@users.sourceforge.net");
+  KAboutData aboutData(QStringLiteral("kmymoney"), i18n("KMyMoney"), QStringLiteral(VERSION));
   aboutData.setOrganizationDomain("kde.org");
-
-  /**
-   * register about data
-   */
   KAboutData::setApplicationData(aboutData);
 
-  /**
-   * take component name and org. name from KAboutData
+  QStringList fileUrls;
+  bool isNoCatchOption = false;
+  bool isNoFileOption = false;
+
+#ifdef KMM_DEBUG
+  bool isDumpActionsOption = false;
+#endif
+
+  if (argc != 0) {
+    /**
+   * Create command line parser and feed it with known options
    */
-  app.setApplicationName(aboutData.componentName());
-  app.setApplicationDisplayName(aboutData.displayName());
-  app.setOrganizationDomain(aboutData.organizationDomain());
-  app.setApplicationVersion(aboutData.version());
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+
+    // language
+    //    const QCommandLineOption langOption(QStringLiteral("lang"), i18n("language to be used"));
+    //    parser.addOption(langOption);
+
+    // no file
+    const QCommandLineOption noFileOption(QStringLiteral("n"), i18n("do not open last used file"));
+    parser.addOption(noFileOption);
+
+    // timers
+    const QCommandLineOption timersOption(QStringLiteral("timers"), i18n("enable performance timers"));
+    parser.addOption(timersOption);
+
+    // no catch
+    const QCommandLineOption noCatchOption(QStringLiteral("nocatch"), i18n("do not globally catch uncaught exceptions"));
+    parser.addOption(noCatchOption);
+
+#ifdef KMM_DEBUG
+    // The following options are only available when compiled in debug mode
+    // trace
+    const QCommandLineOption traceOption(QStringLiteral("trace"), i18n("turn on program traces"));
+    parser.addOption(traceOption);
+
+    // dump actions
+    const QCommandLineOption dumpActionsOption(QStringLiteral("dump-actions"), i18n("dump the names of all defined QAction objects to stdout and quit"));
+    parser.addOption(dumpActionsOption);
+#endif
+
+    // INSERT YOUR COMMANDLINE OPTIONS HERE
+    // url to open
+    parser.addPositionalArgument(QStringLiteral("url"), i18n("file to open"));
+
+    /**
+   * do the command line parsing
+   */
+    parser.parse(QApplication::arguments());
+
+    bool ishelpSet = parser.isSet(QStringLiteral("help"));
+    if (ishelpSet || parser.isSet(QStringLiteral("author")) || parser.isSet(QStringLiteral("license"))) {
+      aboutData = initializeCreditsData();
+      if (ishelpSet)
+        parser.showHelp();
+    }
+
+    if (parser.isSet(QStringLiteral("version")))
+      parser.showVersion();
+
+    /**
+   * handle standard options
+   */
+    aboutData.processCommandLine(&parser);
+
+#ifdef KMM_DEBUG
+    if (parser.isSet(traceOption))
+      MyMoneyTracer::on();
+    timersOn = parser.isSet(timersOption);
+    isDumpActionsOption = parser.isSet(dumpActionsOption);
+#endif
+
+    isNoCatchOption = parser.isSet(noCatchOption);
+    isNoFileOption = parser.isSet(noFileOption);
+    fileUrls = parser.positionalArguments();
+  }
 
   /**
    * enable high dpi icons
    */
   app.setAttribute(Qt::AA_UseHighDpiPixmaps);
-
-  /**
-   * Create command line parser and feed it with known options
-   */
-  QCommandLineParser parser;
-  aboutData.setupCommandLine(&parser);
-  parser.setApplicationDescription(aboutData.shortDescription());
-  parser.addHelpOption();
-  parser.addVersionOption();
-
-  // language
-  const QCommandLineOption langOption(QStringLiteral("lang"), i18n("language to be used"));
-  parser.addOption(langOption);
-
-  // no file
-  const QCommandLineOption noFileOption(QStringLiteral("n"), i18n("do not open last used file"));
-  parser.addOption(noFileOption);
-
-  // timers
-  const QCommandLineOption timersOption(QStringLiteral("timers"), i18n("enable performance timers"));
-  parser.addOption(timersOption);
-
-  // no catch
-  const QCommandLineOption noCatchOption(QStringLiteral("nocatch"), i18n("do not globally catch uncaught exceptions"));
-  parser.addOption(noCatchOption);
-
-#ifdef KMM_DEBUG
-  // The following options are only available when compiled in debug mode
-  // trace
-  const QCommandLineOption traceOption(QStringLiteral("trace"), i18n("turn on program traces"));
-  parser.addOption(traceOption);
-
-  // dump actions
-  const QCommandLineOption dumpActionsOption(QStringLiteral("dump-actions"), i18n("dump the names of all defined QAction objects to stdout and quit"));
-  parser.addOption(dumpActionsOption);
-#endif
-
-  // INSERT YOUR COMMANDLINE OPTIONS HERE
-  // url to open
-  parser.addPositionalArgument(QStringLiteral("url"), i18n("file to open"));
-
-  /**
-   * do the command line parsing
-   */
-  parser.process(app);
-
-  /**
-   * handle standard options
-   */
-  aboutData.processCommandLine(&parser);
 
   // create the singletons before we start memory checking
   // to avoid false error reports
@@ -208,23 +184,17 @@ int main(int argc, char *argv[])
   //MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
   //MyMoneyMoney::setPositivePrefixCurrencySymbol(KLocale::global()->positivePrefixCurrencySymbol());
 
-  QString language = parser.value(langOption);
-  if (!language.isEmpty()) {
+//  QString language = parser.value(langOption);
+//  if (!language.isEmpty()) {
     //if (!KLocale::global()->setLanguage(QStringList() << language)) {
     //  qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalog is not installed\n\tb) the KMyMoney message catalog is not installed", qPrintable(language));
     //}
-  }
-
-#ifdef KMM_DEBUG
-  if (parser.isSet(traceOption))
-    MyMoneyTracer::on();
-  timersOn = parser.isSet(timersOption);
-#endif
+//  }
 
   kmymoney = new KMyMoneyApp();
 
 #ifdef KMM_DEBUG
-  if (parser.isSet(dumpActionsOption)) {
+  if (isDumpActionsOption) {
     kmymoney->dumpActions();
 
     // Before we delete the application, we make sure that we destroy all
@@ -238,15 +208,14 @@ int main(int argc, char *argv[])
   }
 #endif
 
-  const QStringList urls = parser.positionalArguments();
-  const QUrl url = urls.isEmpty() ? QUrl() : QUrl::fromUserInput(urls.front());
+  const QUrl url = fileUrls.isEmpty() ? QUrl() : QUrl::fromUserInput(fileUrls.front());
   int rc = 0;
-  if (parser.isSet(noCatchOption)) {
+  if (isNoCatchOption) {
     qDebug("Running w/o global try/catch block");
-    rc = runKMyMoney(&app, std::move(splash), url, parser.isSet(noFileOption));
+    rc = runKMyMoney(&app, std::move(splash), url, isNoFileOption);
   } else {
     try {
-      rc = runKMyMoney(&app, std::move(splash), url, parser.isSet(noFileOption));
+      rc = runKMyMoney(&app, std::move(splash), url, isNoFileOption);
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
                                  i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
@@ -328,7 +297,7 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
     url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
   }
 
-  KTipDialog::showTip(kmymoney, "", false);
+  KTipDialog::showTip(kmymoney, QString(), false);
   if (url.isValid() && !noFile) {
     kmymoney->slotFileOpenRecent(url);
   } else if (KMyMoneyGlobalSettings::firstTimeRun()) {

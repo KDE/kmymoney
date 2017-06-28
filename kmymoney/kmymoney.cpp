@@ -84,6 +84,7 @@
 #include <krecentfilesaction.h>
 #include <ktoolinvocation.h>
 #include <KSharedConfig>
+#include <KAboutApplicationDialog>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -170,6 +171,7 @@
 #include <QFileDialog>
 
 #include "kmymoneyutils.h"
+#include "kcreditswindow.h"
 
 using namespace Icons;
 
@@ -1010,6 +1012,11 @@ void KMyMoneyApp::initActions()
   // use the absolute path to your kmymoneyui.rc file for testing purpose in createGUI();
   setupGUI();
 
+  // reconnect about app entry to dialog with full credits information
+  QAction *aboutApp = aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::AboutApp)));
+  aboutApp->disconnect();
+  connect(aboutApp, &QAction::triggered, this, &KMyMoneyApp::slotShowCredits);
+
   QMenu *menuContainer;
   menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("import"), this));
   menuContainer->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentImport]));
@@ -1032,14 +1039,14 @@ void KMyMoneyApp::connectActionsAndViews()
   connect(onlineJob_edit, SIGNAL(triggered()), outbox, SLOT(slotEditJob()));
 }
 
+#ifdef KMM_DEBUG
 void KMyMoneyApp::dumpActions() const
 {
   const QList<QAction*> list = actionCollection()->actions();
-  QList<QAction*>::const_iterator it;
-  for (it = list.begin(); it != list.end(); ++it) {
-    std::cout << qPrintable((*it)->objectName()) << ": " << qPrintable((*it)->text()) << std::endl;
-  }
+  foreach (const auto it, list)
+    std::cout << qPrintable(it->objectName()) << ": " << qPrintable(it->text()) << std::endl;
 }
+#endif
 
 bool KMyMoneyApp::isActionToggled(const Action _a)
 {
@@ -2340,6 +2347,13 @@ void KMyMoneyApp::slotSettings()
   KConfigDialog* dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
   connect(dlg, &KConfigDialog::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
   dlg->show();
+}
+
+void KMyMoneyApp::slotShowCredits()
+{
+  KAboutData aboutData = initializeCreditsData();
+  KAboutApplicationDialog dlg(aboutData, this);
+  dlg.exec();
 }
 
 void KMyMoneyApp::slotUpdateConfiguration()
