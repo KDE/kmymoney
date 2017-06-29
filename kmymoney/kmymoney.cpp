@@ -2319,12 +2319,13 @@ void KMyMoneyApp::slotGncImport()
 
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
     // call the importer
-    d->m_myMoneyView->readFile(dialog->selectedUrl());
-    // imported files don't have a name
-    d->m_fileName = KUrl();
+    if (d->m_myMoneyView->readFile(dialog->selectedUrl())) {
+      // imported files don't have a name
+      d->m_fileName = KUrl();
 
-    updateCaption();
-    emit fileLoaded(d->m_fileName);
+      updateCaption();
+      emit fileLoaded(d->m_fileName);
+    }
   }
   delete dialog;
 
