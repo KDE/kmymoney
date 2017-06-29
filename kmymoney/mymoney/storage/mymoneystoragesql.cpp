@@ -150,6 +150,7 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
     setHostName(url.host());
     setUserName(url.user());
     setPassword(url.pass());
+    setConnectOptions("MYSQL_OPT_RECONNECT=1");
     switch (openMode) {
       case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
       case QIODevice::ReadWrite:   // Save menu entry with database open
