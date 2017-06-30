@@ -35,6 +35,7 @@ class KPayeeIdentifierView : public QWidget
 
 public:
   KPayeeIdentifierView(QWidget* parent);
+  ~KPayeeIdentifierView();
   QList<payeeIdentifier> identifiers() const;
 
 signals:

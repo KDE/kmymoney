@@ -125,11 +125,11 @@ void ReportTabChart::slotChartTypeChanged(int index)
 }
 
 ReportTabRange::ReportTabRange(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      ui(new Ui::ReportTabRange)
 {
-  ui = new Ui::ReportTabRange;
   ui->setupUi(this);
-  m_dateRange = new DateRangeDlg(this->parentWidget());
+  m_dateRange = new DateRangeDlg;
   ui->dateRangeGrid->addWidget(m_dateRange, 0, 0, 1, 2);
   connect(ui->m_yLabelsPrecision, SIGNAL(valueChanged(int)), this, SLOT(slotYLabelsPrecisionChanged(int)));
   emit ui->m_yLabelsPrecision->valueChanged(ui->m_yLabelsPrecision->value());

@@ -723,7 +723,6 @@ bool KMyMoneyView::readFile(const QUrl &url)
   m_fmode |= info.permission(QFile::ReadOther) ? 004 : 0;
   m_fmode |= info.permission(QFile::WriteOther) ? 002 : 0;
 
-  QIODevice *qfile = 0;
   bool rc = true;
 
   // There's a problem with the KFilterDev and KGPGFile classes:
@@ -742,6 +741,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
     file.close();
 
     if (cnt == 2) {
+      QIODevice* qfile = nullptr;
       if (QString(hdr) == QString("\037\213")) {        // gzipped?
         qfile = new KCompressionDevice(filename, COMPRESSION_TYPE);
       } else if (QString(hdr) == QString("--")          // PGP ASCII armored?

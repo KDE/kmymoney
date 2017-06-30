@@ -241,8 +241,8 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
     setColumnCount(1);
   }
 
-  kMyMoneyDateInput dateInput(0);
-  KMyMoneyCategory category(0, true);
+  kMyMoneyDateInput dateInput;
+  KMyMoneyCategory category(nullptr, true);
 
   // extract the maximal sizeHint height
   int height = qMax(dateInput.sizeHint().height(), category.sizeHint().height());

@@ -175,7 +175,7 @@ public:
   }
 
   void markAllExpanded(QAbstractItemModel *model) {
-    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
+    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(QLatin1String("*")), -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
     foreach (const QModelIndex &index, list) {
       markAccountExpanded(index.data(AccountsModel::AccountIdRole).toString());
     }

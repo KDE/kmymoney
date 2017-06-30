@@ -224,7 +224,7 @@ void kMyMoneyEdit::init()
   editLayout->setContentsMargins(0, 0, 0, 0);
 
   allowEmpty = false;
-  m_edit = new kMyMoneyLineEdit(this, true);
+  m_edit = new kMyMoneyLineEdit(nullptr, true);
   m_edit->installEventFilter(this);
   setFocusProxy(m_edit);
   editLayout->addWidget(m_edit);
@@ -234,13 +234,13 @@ void kMyMoneyEdit::init()
   m_edit->setValidator(validator);
   m_edit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-  m_calculatorFrame = new QWidget(this);
+  m_calculatorFrame = new QWidget;
   QVBoxLayout *calculatorFrameVBoxLayout = new QVBoxLayout(m_calculatorFrame);
   calculatorFrameVBoxLayout->setMargin(0);
   m_calculatorFrame->setWindowFlags(Qt::Popup);
   editLayout->addWidget(m_calculatorFrame);
 
-  m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
+  m_calculator = new kMyMoneyCalculator;
   calculatorFrameVBoxLayout->addWidget(m_calculator);
   m_calculatorFrame->hide();
 
@@ -273,7 +273,6 @@ void kMyMoneyEdit::setValidator(const QValidator* v)
 
 kMyMoneyEdit::~kMyMoneyEdit()
 {
-  delete m_calculatorFrame;
 }
 
 KLineEdit* kMyMoneyEdit::lineedit() const

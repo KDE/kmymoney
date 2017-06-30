@@ -141,26 +141,24 @@ void PayeesModel::unload()
 {
   if(rowCount() > 0) {
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
-    for(int i = 0; i < rowCount(); ++i) {
-      delete d->m_payeeItems[i];
-    }
+    qDeleteAll(d->m_payeeItems);
     d->m_payeeItems.clear();
+    QVector<MyMoneyPayee*> swp;
+    d->m_payeeItems.swap(swp); // changed behaviour from Qt 5.7 http://doc.qt.io/qt-5/qvector.html#clear
     endRemoveRows();
   }
 }
 
 void PayeesModel::load()
 {
-  QList<MyMoneyPayee> list = MyMoneyFile::instance()->payeeList();
+  const QList<MyMoneyPayee> list = MyMoneyFile::instance()->payeeList();
 
   if(list.count() > 0) {
     beginInsertRows(QModelIndex(), rowCount(), rowCount() + list.count());
     // create an empty entry for those items that do not reference a cost center
-    d->m_payeeItems.append((new MyMoneyPayee));
-    QList< MyMoneyPayee>::const_iterator it;
-    for(it = list.constBegin(); it != list.constEnd(); ++it) {
-      d->m_payeeItems.append(new MyMoneyPayee(*it));
-    }
+    d->m_payeeItems.append(new MyMoneyPayee());
+    foreach (const auto it, list)
+      d->m_payeeItems.append(new MyMoneyPayee(it));
     endInsertRows();
   }
 }

@@ -53,6 +53,10 @@ public:
   , inModelUpdate(false)
   {}
 
+  ~Private() {
+    delete ui;
+  }
+
   SimpleLedgerView*             parent;
   Ui_SimpleLedgerView*          ui;
   AccountNamesFilterProxyModel* accountsModel;
@@ -99,7 +103,7 @@ SimpleLedgerView::SimpleLedgerView(QWidget* parent)
 
 SimpleLedgerView::~SimpleLedgerView()
 {
-
+  delete d;
 }
 
 void SimpleLedgerView::openNewLedger(QString accountId)

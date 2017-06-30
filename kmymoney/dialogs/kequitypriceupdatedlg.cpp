@@ -98,7 +98,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
   MyMoneySecurityPair currencyIds;
   if (splitrx.indexIn(securityId) != -1) {
-    currencyIds = MyMoneySecurityPair(splitrx.cap(1).toUtf8(), splitrx.cap(2).toUtf8());
+    currencyIds = MyMoneySecurityPair(splitrx.cap(1), splitrx.cap(2));
   }
 
   MyMoneyPriceList prices = file->priceList();
@@ -195,12 +195,12 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QString symbol = QString("%1 > %2").arg(pair.first, pair.second);
-  QString id = QString("%1 %2").arg(pair.first, pair.second);
+  const QString symbol = QString::fromLatin1("%1 > %2").arg(pair.first, pair.second);
+  const QString id = QString::fromLatin1("%1 %2").arg(pair.first, pair.second);
   // Check that the pair does not already exist
   if (lvEquityList->findItems(id, Qt::MatchExactly, KMMID_COL).empty()) {
     const MyMoneyPrice &pr = file->price(pair.first, pair.second);
-    if (pr.source() != "KMyMoney") {
+    if (pr.source() != QLatin1String("KMyMoney")) {
       bool keep = true;
       if ((pair.first == file->baseCurrency().id())
           || (pair.second == file->baseCurrency().id())) {
@@ -248,7 +248,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
 
 void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
 {
-  QString id = inv.id();
+  const QString id = inv.id();
   // Check that the pair does not already exist
   if (lvEquityList->findItems(id, Qt::MatchExactly, KMMID_COL).empty()) {
     MyMoneyFile* file = MyMoneyFile::instance();
@@ -351,43 +351,37 @@ void KEquityPriceUpdateDlg::storePrices()
   // update the new prices into the equities
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  QList<MyMoneySecurity> equities = file->securityList();
-
-  QTreeWidgetItem* item = 0;
-  MyMoneyFileTransaction ft;
   QString name;
 
+  MyMoneyFileTransaction ft;
   try {
     for (int i = 0; i < lvEquityList->invisibleRootItem()->childCount(); ++i) {
-      item = lvEquityList->invisibleRootItem()->child(i);
+      QTreeWidgetItem* item = lvEquityList->invisibleRootItem()->child(i);
       // turn on signals before we modify the last entry in the list
-      MyMoneyFile::instance()->blockSignals(i < lvEquityList->invisibleRootItem()->childCount() - 1);
+      file->blockSignals(i < lvEquityList->invisibleRootItem()->childCount() - 1);
 
       MyMoneyMoney rate(item->text(PRICE_COL));
       if (!rate.isZero()) {
-        QString id = item->text(KMMID_COL).toUtf8();
+        QString id = item->text(KMMID_COL);
+        QString fromid;
+        QString toid;
 
         // if the ID has a space, then this is TWO ID's, so it's a currency quote
-        if (QString(id).contains(" ")) {
-          QStringList ids = id.split(' ', QString::SkipEmptyParts);
-          QString fromid = ids[0].toUtf8();
-          QString toid = ids[1].toUtf8();
-          name = QString("%1 --> %2").arg(fromid).arg(toid);
-          MyMoneyPrice price(fromid, toid, QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
-          file->addPrice(price);
-        } else
-          // otherwise, it's a security quote
-        {
-          MyMoneySecurity security = MyMoneyFile::instance()->security(id);
+        if (id.contains(QLatin1Char(' '))) {
+          QStringList ids = id.split(QLatin1Char(' '), QString::SkipEmptyParts);
+          fromid = ids.at(0);
+          toid = ids.at(1);
+          name = QString::fromLatin1("%1 --> %2").arg(fromid, toid);
+        } else { // otherwise, it's a security quote
+          MyMoneySecurity security = file->security(id);
           name = security.name();
-          MyMoneyPrice price(id, security.tradingCurrency(), QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
-
-          // TODO (Ace) Better handling of the case where there is already a price
-          // for this date.  Currently, it just overrides the old value.  Really it
-          // should check to see if the price is the same and prompt the user.
-          MyMoneyFile::instance()->addPrice(price);
+          fromid = id;
+          toid = security.tradingCurrency();
         }
-
+        // TODO (Ace) Better handling of the case where there is already a price
+        // for this date.  Currently, it just overrides the old value.  Really it
+        // should check to see if the price is the same and prompt the user.
+        file->addPrice(MyMoneyPrice(fromid, toid, QDate::fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL)));
       }
     }
     ft.commit();

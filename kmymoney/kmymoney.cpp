@@ -1058,12 +1058,12 @@ void KMyMoneyApp::initStatusBar()
   ///////////////////////////////////////////////////////////////////
   // STATUSBAR
 
-  d->m_statusLabel = new QLabel(statusBar());
+  d->m_statusLabel = new QLabel;
   statusBar()->addWidget(d->m_statusLabel);
   ready();
 
   // Initialization of progress bar taken from KDevelop ;-)
-  d->m_progressBar = new QProgressBar(statusBar());
+  d->m_progressBar = new QProgressBar;
   statusBar()->addWidget(d->m_progressBar);
   d->m_progressBar->setFixedHeight(d->m_progressBar->sizeHint().height() - 8);
 
@@ -2662,7 +2662,7 @@ void KMyMoneyApp::slotToolsStartKCalc()
 void KMyMoneyApp::slotFindTransaction()
 {
   if (d->m_searchDlg == 0) {
-    d->m_searchDlg = new KFindTransactionDlg();
+    d->m_searchDlg = new KFindTransactionDlg(this);
     connect(d->m_searchDlg, SIGNAL(destroyed()), this, SLOT(slotCloseSearchDialog()));
     connect(d->m_searchDlg, SIGNAL(transactionSelected(QString,QString)),
             d->m_myMoneyView, SLOT(slotLedgerSelected(QString,QString)));

@@ -121,7 +121,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
     m_ui(new Ui::KFindTransactionDlgDecl)
 {
   m_ui->setupUi(this);
-  m_dateRange = new DateRangeDlg(m_ui->m_dateTab);
+  m_dateRange = new DateRangeDlg;
   m_ui->dateRangeLayout->insertWidget(0, m_dateRange);
 
   m_ui->ButtonGroup1->setId(m_ui->m_amountButton, 0);

@@ -60,11 +60,16 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
 }
 
 KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      ui(new Ui::KPayeeIdentifierView)
 {
-  ui = new Ui::KPayeeIdentifierView;
   ui->setupUi(this);
   ui->view->setItemDelegate(new payeeIdentifierDelegate(ui->view));
+}
+
+KPayeeIdentifierView::~KPayeeIdentifierView()
+{
+  delete ui;
 }
 
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
