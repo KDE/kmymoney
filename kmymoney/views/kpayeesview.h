@@ -74,7 +74,7 @@ private:
   MyMoneyPayee  m_payee;
 };
 
-class KPayeesView : public QWidget, public Ui::KPayeesViewDecl
+class KPayeesView : public QWidget, private Ui::KPayeesViewDecl
 {
   Q_OBJECT
 
@@ -201,6 +201,11 @@ private:
   bool m_needReload;
 
   /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
+  /**
     * Search widget for the list
     */
   KListWidgetSearchLine*  m_searchWidget;
@@ -231,6 +236,10 @@ private:
    * @param dirty if true (default), payee will be set to dirty
    */
   void setDirty(bool dirty = true);
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

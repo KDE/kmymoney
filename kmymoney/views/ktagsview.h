@@ -67,7 +67,7 @@ private:
   MyMoneyTag  m_tag;
 };
 
-class KTagsView : public QWidget, public Ui::KTagsViewDecl
+class KTagsView : public QWidget, private Ui::KTagsViewDecl
 {
   Q_OBJECT
 
@@ -178,6 +178,11 @@ private:
   bool m_needReload;
 
   /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
+  /**
     * Search widget for the list
     */
   KListWidgetSearchLine*  m_searchWidget;
@@ -198,6 +203,10 @@ private:
   int m_tagFilterType;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

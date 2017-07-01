@@ -46,7 +46,7 @@ class FixedColumnTreeView;
   *
   * This class implements the forecast 'view'.
   */
-class KForecastView : public QWidget, public Ui::KForecastViewDecl
+class KForecastView : public QWidget, private Ui::KForecastViewDecl
 {
   Q_OBJECT
 
@@ -160,7 +160,16 @@ private:
   void setValue(QTreeWidgetItem *item, int column, const MyMoneyMoney &amount, const QDate &forecastDate);
   void setAmount(QTreeWidgetItem *item, int column, const MyMoneyMoney &amount);
 
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
+
   bool m_needReload[MaxViewTabs];
+
+  /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
 
   QTreeWidgetItem* m_totalItem;
   QTreeWidgetItem* m_assetItem;

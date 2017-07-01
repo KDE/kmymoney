@@ -87,10 +87,26 @@ KPayeesView::KPayeesView(QWidget *parent) :
     QWidget(parent),
     m_contact(new MyMoneyContact(this)),
     m_needReload(false),
+    m_needLoad(true),
     m_inSelection(false),
     m_allowEditing(true),
     m_payeeFilterType(0)
 {
+}
+
+KPayeesView::~KPayeesView()
+{
+  if(!m_needLoad) {
+    // remember the splitter settings for startup
+    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    grp.writeEntry("KPayeesViewSplitterSize", m_splitter->saveState());
+    grp.sync();
+  }
+}
+
+void KPayeesView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   m_filterProxyModel = new AccountNamesFilterProxyModel(this);
@@ -246,14 +262,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_mergeButton->setEnabled(false);
   m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
   clearItemData();
-}
-
-KPayeesView::~KPayeesView()
-{
-  // remember the splitter settings for startup
-  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-  grp.writeEntry("KPayeesViewSplitterSize", m_splitter->saveState());
-  grp.sync();
 }
 
 void KPayeesView::slotChooseDefaultAccount()
@@ -784,6 +792,9 @@ void KPayeesView::slotSendMail()
 
 void KPayeesView::showEvent(QShowEvent* event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {

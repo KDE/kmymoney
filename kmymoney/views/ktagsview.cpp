@@ -82,10 +82,26 @@ KTagListItem::~KTagListItem()
 KTagsView::KTagsView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
+    m_needLoad(true),
     m_inSelection(false),
     m_allowEditing(true),
     m_tagFilterType(0)
 {
+}
+
+KTagsView::~KTagsView()
+{
+  if (!m_needLoad) {
+    // remember the splitter settings for startup
+    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    grp.writeEntry("KTagsViewSplitterSize", m_splitter->saveState());
+    grp.sync();
+  }
+}
+
+void KTagsView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   m_filterProxyModel = new AccountNamesFilterProxyModel(this);
@@ -186,14 +202,6 @@ KTagsView::KTagsView(QWidget *parent) :
   m_renameButton->setEnabled(false);
   m_tag = MyMoneyTag(); // make sure we don't access an undefined tag
   clearItemData();
-}
-
-KTagsView::~KTagsView()
-{
-  // remember the splitter settings for startup
-  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-  grp.writeEntry("KTagsViewSplitterSize", m_splitter->saveState());
-  grp.sync();
 }
 
 void KTagsView::slotStartRename(QListWidgetItem* item)
@@ -490,6 +498,9 @@ void KTagsView::slotUpdateTag()
 
 void KTagsView::showEvent(QShowEvent* event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {

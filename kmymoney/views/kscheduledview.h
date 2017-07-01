@@ -50,7 +50,7 @@
   *
   * @short A class to encapsulate recurring transaction operations.
   */
-class KScheduledView : public QWidget, public Ui::KScheduledViewDecl
+class KScheduledView : public QWidget, private Ui::KScheduledViewDecl
 {
   Q_OBJECT
 
@@ -146,9 +146,18 @@ private:
   bool m_needReload;
 
   /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
+  /**
    * Search widget for the list
    */
   KTreeWidgetSearchLineWidget*  m_searchWidget;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

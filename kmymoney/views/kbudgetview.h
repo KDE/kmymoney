@@ -215,6 +215,11 @@ private:
   bool                                m_needReload;
 
   /**
+    * This member holds the load state of page
+    */
+  bool                                m_needLoad;
+
+  /**
     * Set if we are in the selection of a different budget
     **/
   bool                                m_inSelection;
@@ -228,6 +233,10 @@ private:
     * This signals whether a budget is being edited
     **/
   bool m_budgetInEditing;
+
+  /** Initializes page and sets load status of patge to initialized
+   */
+  void init();
 };
 
 #endif

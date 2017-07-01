@@ -37,34 +37,42 @@
 
 KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::KOnlineJobOutbox)
+    ui(new Ui::KOnlineJobOutbox),
+    m_needLoad(true)
 {
-    ui->setupUi(this);
-
-    // Restore column state
-    KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
-    QByteArray columns;
-    columns = configGroup.readEntry("HeaderState", columns);
-    ui->m_onlineJobView->header()->restoreState(columns);
-
-  ui->m_onlineJobView->setModel(Models::instance()->onlineJobsModel());
-    connect(ui->m_buttonSend, SIGNAL(clicked()), this, SLOT(slotSendJobs()));
-    connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT(slotRemoveJob()));
-    connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT(slotEditJob()));
-    connect(ui->m_onlineJobView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotEditJob(QModelIndex)));
-    connect(ui->m_onlineJobView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(updateButtonState()));
-
-    // Set new credit transfer button
-    connect(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountCreditTransfer]), SIGNAL(changed()), SLOT(updateNewCreditTransferButton()));
-    connect(ui->m_buttonNewCreditTransfer, SIGNAL(clicked()), this, SIGNAL(newCreditTransfer()));
-    updateNewCreditTransferButton();
 }
 
 KOnlineJobOutbox::~KOnlineJobOutbox()
 {
+  if (!m_needLoad) {
     // Save column state
     KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
     configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
+  }
+}
+
+void KOnlineJobOutbox::init()
+{
+  m_needLoad = false;
+  ui->setupUi(this);
+
+  // Restore column state
+  KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
+  QByteArray columns;
+  columns = configGroup.readEntry("HeaderState", columns);
+  ui->m_onlineJobView->header()->restoreState(columns);
+
+  ui->m_onlineJobView->setModel(Models::instance()->onlineJobsModel());
+  connect(ui->m_buttonSend, SIGNAL(clicked()), this, SLOT(slotSendJobs()));
+  connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT(slotRemoveJob()));
+  connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT(slotEditJob()));
+  connect(ui->m_onlineJobView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotEditJob(QModelIndex)));
+  connect(ui->m_onlineJobView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(updateButtonState()));
+
+  // Set new credit transfer button
+  connect(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountCreditTransfer]), SIGNAL(changed()), SLOT(updateNewCreditTransferButton()));
+  connect(ui->m_buttonNewCreditTransfer, SIGNAL(clicked()), this, SIGNAL(newCreditTransfer()));
+  updateNewCreditTransferButton();
 }
 
 void KOnlineJobOutbox::updateButtonState() const
@@ -229,6 +237,9 @@ void KOnlineJobOutbox::contextMenuEvent(QContextMenuEvent*)
  */
 void KOnlineJobOutbox::showEvent(QShowEvent* event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
   // don't forget base class implementation
   QWidget::showEvent(event);

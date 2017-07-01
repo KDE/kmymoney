@@ -51,8 +51,18 @@ using namespace Icons;
 KCategoriesView::KCategoriesView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
+    m_needLoad(true),
     m_haveUnusedCategories(false)
 {
+}
+
+KCategoriesView::~KCategoriesView()
+{
+}
+
+void KCategoriesView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   // setup icons for collapse and expand button
@@ -106,10 +116,6 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   connect(m_accountTree, SIGNAL(expandedAll()), m_filterProxyModel, SLOT(expandAll()));
 }
 
-KCategoriesView::~KCategoriesView()
-{
-}
-
 void KCategoriesView::slotExpandCollapse()
 {
   if (sender()) {
@@ -119,6 +125,9 @@ void KCategoriesView::slotExpandCollapse()
 
 void KCategoriesView::showEvent(QShowEvent * event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {

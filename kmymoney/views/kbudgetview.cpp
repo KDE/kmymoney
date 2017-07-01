@@ -309,8 +309,24 @@ void BudgetAccountsProxyModel::checkBalance()
 KBudgetView::KBudgetView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
+    m_needLoad(true),
     m_inSelection(false)
 {
+}
+
+KBudgetView::~KBudgetView()
+{
+  if(!m_needLoad) {
+    // remember the splitter settings for startup
+    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    grp.writeEntry("KBudgetViewSplitterSize", m_splitter->saveState());
+    grp.sync();
+  }
+}
+
+void KBudgetView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   m_budgetList->setRootIsDecorated(false);
@@ -430,16 +446,12 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_splitter->setChildrenCollapsible(false);
 }
 
-KBudgetView::~KBudgetView()
-{
-  // remember the splitter settings for startup
-  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-  grp.writeEntry("KBudgetViewSplitterSize", m_splitter->saveState());
-  grp.sync();
-}
 
 void KBudgetView::showEvent(QShowEvent * event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {

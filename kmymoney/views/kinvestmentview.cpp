@@ -94,8 +94,31 @@ public:
 KInvestmentView::KInvestmentView(QWidget *parent) :
     QWidget(parent),
     d(new Private),
-    m_currencyMarket("ISO 4217")
+    m_currencyMarket("ISO 4217"),
+    m_needLoad(true)
 {
+}
+
+KInvestmentView::~KInvestmentView()
+{
+  if (!m_needLoad) {
+    // save the header state of the equities list
+    KConfigGroup grp = KSharedConfig::openConfig()->group("KInvestmentView_Equities");
+    QByteArray columns = m_investmentsList->header()->saveState();
+    grp.writeEntry("HeaderState", columns);
+
+    // save the header state of the securities list
+    grp = KSharedConfig::openConfig()->group("KInvestmentView_Securities");
+    columns = m_securitiesList->header()->saveState();
+    grp.writeEntry("HeaderState", columns);
+  }
+
+  delete d;
+}
+
+void KInvestmentView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   // load the header state of the equities list
@@ -155,21 +178,6 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   connect(m_securitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateSecuritiesButtons()));
   connect(m_editSecurityButton, SIGNAL(clicked()), this, SLOT(slotEditSecurity()));
   connect(m_deleteSecurityButton, SIGNAL(clicked()), this, SLOT(slotDeleteSecurity()));
-}
-
-KInvestmentView::~KInvestmentView()
-{
-  // save the header state of the equities list
-  KConfigGroup grp = KSharedConfig::openConfig()->group("KInvestmentView_Equities");
-  QByteArray columns = m_investmentsList->header()->saveState();
-  grp.writeEntry("HeaderState", columns);
-
-  // save the header state of the securities list
-  grp = KSharedConfig::openConfig()->group("KInvestmentView_Securities");
-  columns = m_securitiesList->header()->saveState();
-  grp.writeEntry("HeaderState", columns);
-
-  delete d;
 }
 
 void KInvestmentView::loadView(InvestmentsViewTab tab)
@@ -460,6 +468,9 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
 
 void KInvestmentView::showEvent(QShowEvent* event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   /*if (d->m_needReload) {

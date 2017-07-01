@@ -61,6 +61,15 @@ private slots:
 private:
   std::unique_ptr<Ui::KOnlineJobOutbox> ui;
 
+  /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
+
 private slots:
   void slotRemoveJob();
 

@@ -59,7 +59,7 @@
   * accessible from either the main menu or the context menu.
   */
 
-class KCategoriesView : public QWidget, public Ui::KCategoriesViewDecl
+class KCategoriesView : public QWidget, private Ui::KCategoriesViewDecl
 {
   Q_OBJECT
 
@@ -128,8 +128,18 @@ signals:
 private:
   /// set if a view needs to be reloaded during showEvent()
   bool                         m_needReload;
+
+  /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
   bool                         m_haveUnusedCategories;
   AccountsViewFilterProxyModel *m_filterProxyModel;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

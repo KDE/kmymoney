@@ -350,6 +350,12 @@ private:
   KMyMoneyTransactionForm::TransactionForm* m_form;
 
   bool                            m_needReload;
+
+  /**
+    * This member holds the load state of page
+    */
+  bool                            m_needLoad;
+
   bool                            m_newAccountLoaded;
   bool                            m_inEditMode;
 
@@ -392,6 +398,10 @@ signals:
 
 private:
   bool canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

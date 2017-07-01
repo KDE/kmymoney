@@ -42,8 +42,18 @@ using namespace Icons;
 
 KInstitutionsView::KInstitutionsView(QWidget *parent) :
     QWidget(parent),
-    m_needReload(false)
+    m_needReload(false),
+    m_needLoad(true)
 {
+}
+
+KInstitutionsView::~KInstitutionsView()
+{
+}
+
+void KInstitutionsView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   // setup icons for collapse and expand button
@@ -93,12 +103,11 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
 }
 
-KInstitutionsView::~KInstitutionsView()
-{
-}
-
 void KInstitutionsView::showEvent(QShowEvent * event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {

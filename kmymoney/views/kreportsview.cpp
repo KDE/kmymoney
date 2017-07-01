@@ -212,7 +212,7 @@ void KReportsView::KReportTab::loadTab()
 }
 
 void KReportsView::KReportTab::showEvent(QShowEvent * event)
-{
+{ 
   if (m_needReload) {
     m_needReload = false;
     updateReport();
@@ -324,8 +324,14 @@ void KReportsView::KReportTab::updateDataRange()
 KReportsView::KReportsView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Reports")),
     m_needReload(false),
+    m_needLoad(true),
     m_reportListView(0)
 {
+}
+
+void KReportsView::init()
+{
+  m_needLoad = false;
   // build reports toc
 
   setColumnsAlreadyAdjusted(false);
@@ -380,6 +386,9 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
 
 void KReportsView::showEvent(QShowEvent * event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {
@@ -1024,13 +1033,15 @@ void KReportsView::slotClose(int index)
 
 void KReportsView::slotCloseAll()
 {
-  while (true) {
-    KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
-    if (tab) {
-      m_reportTabWidget->removeTab(1);
-      tab->setReadyToDelete(true);
-    } else
-      break;
+  if(!m_needLoad) {
+    while (true) {
+      KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
+      if (tab) {
+        m_reportTabWidget->removeTab(1);
+        tab->setReadyToDelete(true);
+      } else
+        break;
+    }
   }
 }
 

@@ -45,7 +45,7 @@ enum eSecurityColum { eIdColumn, eTypeColumn, eSecurityNameColumn, eSecuritySymb
 /**
   * @author Kevin Tambascio
   */
-class KInvestmentView : public QWidget, public Ui::KInvestmentViewDecl
+class KInvestmentView : public QWidget, private Ui::KInvestmentViewDecl
 {
   Q_OBJECT
 
@@ -169,6 +169,15 @@ private:
     * Search widget for the securities list
     */
   KTreeWidgetSearchLineWidget*  m_searchSecuritiesWidget;
+
+  /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

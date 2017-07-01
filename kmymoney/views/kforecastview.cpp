@@ -51,6 +51,7 @@ using namespace Icons;
 
 KForecastView::KForecastView(QWidget *parent) :
     QWidget(parent),
+    m_needLoad(true),
     m_totalItem(0),
     m_assetItem(0),
     m_liabilityItem(0),
@@ -59,6 +60,15 @@ KForecastView::KForecastView(QWidget *parent) :
     m_chartLayout(0),
     m_forecastChart(0)
 {
+}
+
+KForecastView::~KForecastView()
+{
+}
+
+void KForecastView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   m_forecastChart = new KReportChartView(m_tabChart);
@@ -97,10 +107,6 @@ KForecastView::KForecastView(QWidget *parent) :
   m_chartLayout->addWidget(m_forecastChart);
 
   loadForecastSettings();
-}
-
-KForecastView::~KForecastView()
-{
 }
 
 void KForecastView::slotTabChanged(int index)
@@ -144,6 +150,10 @@ void KForecastView::loadForecast(ForecastViewTab tab)
 
 void KForecastView::showEvent(QShowEvent* event)
 {
+  if (m_needLoad) {
+    init();
+    loadForecastSettings();
+  }
   emit aboutToShow();
 
   slotTabChanged(m_tab->currentIndex());
@@ -160,11 +170,11 @@ void KForecastView::slotLoadForecast()
   m_needReload[BudgetView] = true;
   m_needReload[ChartView] = true;
 
-  //refresh settings
-  loadForecastSettings();
-
-  if (isVisible())
+  if (isVisible()) {
+    //refresh settings
+    loadForecastSettings();
     slotTabChanged(m_tab->currentIndex());
+  }
 }
 
 void KForecastView::slotManualForecast()

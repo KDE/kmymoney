@@ -86,19 +86,20 @@ class KMyMoneyView : public KPageWidget
 {
   Q_OBJECT
 public:
-  enum viewID {
-    HomeView = 0,
-    AccountsView,
-    InstitutionsView,
-    SchedulesView,
-    CategoriesView,
-    PayeesView,
-    LedgersView,
-    InvestmentsView,
-    ReportsView,
-    BudgetView,
-    ForecastView,
-    OnlineJobOutboxView
+  enum class View {
+    Home = 0,
+    Institutions,
+    Accounts,
+    Schedules,
+    Categories,
+    Tags,
+    Payees,
+    Ledgers,
+    Investments,
+    Reports,
+    Budget,
+    Forecast,
+    OnlineJobOutbox
   };
   // file actions for plugin
   enum fileActions {
@@ -143,19 +144,7 @@ private:
   KForecastView* m_forecastView;
   KOnlineJobOutbox* m_onlineJobOutboxView;
 
-  KPageWidgetItem* m_homeViewFrame;
-  KPageWidgetItem* m_accountsViewFrame;
-  KPageWidgetItem* m_institutionsViewFrame;
-  KPageWidgetItem* m_categoriesViewFrame;
-  KPageWidgetItem* m_payeesViewFrame;
-  KPageWidgetItem* m_tagsViewFrame;
-  KPageWidgetItem* m_budgetViewFrame;
-  KPageWidgetItem* m_scheduleViewFrame;
-  KPageWidgetItem* m_ledgerViewFrame;
-  KPageWidgetItem* m_investmentViewFrame;
-  KPageWidgetItem* m_reportsViewFrame;
-  KPageWidgetItem* m_forecastViewFrame;
-  KPageWidgetItem* m_onlineJobOutboxViewFrame;
+  QHash<View,KPageWidgetItem*> viewFrames;
 
   KMyMoneyTitleLabel* m_header;
   bool m_inConstructor;
@@ -231,7 +220,7 @@ public:
     * The constructor for KMyMoneyView. Just creates all the tabs for the
     * different aspects of the MyMoneyFile.
     */
-  explicit KMyMoneyView(QWidget *parent = 0);
+  explicit KMyMoneyView(QObject *kmymoney, QWidget *parent = nullptr);
 
   /**
     * Destructor
@@ -523,9 +512,7 @@ public slots:
   /**
     * This slot switches the view to present the home page
     */
-  void slotShowHomePage() {
-    setCurrentPage(m_homeViewFrame);
-  }
+  void slotShowHomePage();
 
   /**
     * Called when the user changes the detail
@@ -681,4 +668,6 @@ public:
 protected:
   bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool);
 };
+
+inline uint qHash(const KMyMoneyView::View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 #endif

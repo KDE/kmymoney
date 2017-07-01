@@ -197,9 +197,20 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
     : KMyMoneyViewBase(parent, name, i18n("Ledgers")),
     d(new Private),
     m_needReload(false),
+    m_needLoad(true),
     m_newAccountLoaded(true),
     m_inEditMode(false)
 {
+}
+
+KGlobalLedgerView::~KGlobalLedgerView()
+{
+  delete d;
+}
+
+void KGlobalLedgerView::init()
+{
+  m_needLoad = false;
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
   d->m_action = KMyMoneyRegister::ActionNone;
 
@@ -313,10 +324,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   m_tooltipPosn = QPoint();
 }
 
-KGlobalLedgerView::~KGlobalLedgerView()
-{
-  delete d;
-}
 
 void KGlobalLedgerView::slotAboutToSelectItem(KMyMoneyRegister::RegisterItem* item, bool& okToSelect)
 {
@@ -851,6 +858,9 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
 
 void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
 {
+  if (m_needLoad)
+    init();
+
   m_register->resize(KMyMoneyRegister::DetailColumn);
   m_form->resize(KMyMoneyTransactionForm::ValueColumn1);
   KMyMoneyViewBase::resizeEvent(ev);
@@ -945,6 +955,9 @@ void KGlobalLedgerView::selectTransaction(const QString& id)
 
 void KGlobalLedgerView::slotSelectAllTransactions()
 {
+  if(m_needLoad)
+    init();
+
   m_register->clearSelection();
   KMyMoneyRegister::RegisterItem* p = m_register->firstItem();
   while (p) {
@@ -966,6 +979,9 @@ void KGlobalLedgerView::slotSelectAllTransactions()
 
 void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance)
 {
+  if(m_needLoad)
+    init();
+
   if (d->m_reconciliationAccount != acc.id()) {
     // make sure the account is selected
     if (!acc.id().isEmpty())
@@ -1328,6 +1344,9 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 
 void KGlobalLedgerView::showEvent(QShowEvent* event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload) {

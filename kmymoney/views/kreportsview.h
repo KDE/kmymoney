@@ -165,6 +165,11 @@ public:
 private:
   bool m_needReload;
 
+  /**
+    * This member holds the load state of page
+    */
+  bool m_needLoad;
+
   QListWidget* m_reportListView;
   QTabWidget* m_reportTabWidget;
   QWidget* m_listTab;
@@ -243,6 +248,10 @@ private:
     * Display a dialog to confirm report deletion
     */
   int deleteReportDialog(const QString&);
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif

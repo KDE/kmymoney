@@ -519,7 +519,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   updateCaption(true);
 
-  QFrame* frame = new QFrame(this);
+  QFrame* frame = new QFrame;
   frame->setFrameStyle(QFrame::NoFrame);
   // values for margin (11) and spacing(6) taken from KDialog implementation
   QBoxLayout* layout = new QBoxLayout(QBoxLayout::TopToBottom, frame);
@@ -535,7 +535,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   initDynamicMenus();
 
-  d->m_myMoneyView = new KMyMoneyView(frame);
+  d->m_myMoneyView = new KMyMoneyView(this/*the global variable kmymoney is not yet assigned. So we pass it here*/);
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, SIGNAL(aboutToChangeView()), this, SLOT(slotResetSelections()));
   connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),

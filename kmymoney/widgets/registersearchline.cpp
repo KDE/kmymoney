@@ -215,7 +215,7 @@ RegisterSearchLineWidget::RegisterSearchLineWidget(Register* reg, QWidget* paren
     d(new RegisterSearchLineWidgetPrivate)
 {
   d->reg = reg;
-  QTimer::singleShot(0, this, SLOT(createWidgets()));
+  createWidgets();
 }
 
 RegisterSearchLineWidget::~RegisterSearchLineWidget()

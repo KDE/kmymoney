@@ -41,7 +41,7 @@
   * This class implements the institutions hierarchical 'view'.
   */
 
-class KInstitutionsView : public QWidget, public Ui::KInstitutionsViewDecl
+class KInstitutionsView : public QWidget, private Ui::KInstitutionsViewDecl
 {
   Q_OBJECT
 
@@ -71,6 +71,10 @@ private:
     */
   const QPixmap accountImage(const MyMoneyAccount::accountTypeE type) const;
 
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
+
 signals:
   /**
     * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
@@ -98,6 +102,12 @@ signals:
 private:
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload;
+
+  /**
+    * This member holds the load state of page
+    */
+  bool                                m_needLoad;
+
   AccountsViewFilterProxyModel        *m_filterProxyModel;
 };
 

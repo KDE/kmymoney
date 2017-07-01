@@ -63,8 +63,20 @@ KScheduledView::KScheduledView(QWidget *parent) :
     m_openBills(true),
     m_openDeposits(true),
     m_openTransfers(true),
-    m_openLoans(true)
+    m_openLoans(true),
+    m_needLoad(true)
 {
+}
+
+KScheduledView::~KScheduledView()
+{
+  if(!m_needLoad)
+    writeConfig();
+}
+
+void KScheduledView::init()
+{
+  m_needLoad = false;
   setupUi(this);
 
   // create the searchline widget
@@ -100,11 +112,6 @@ KScheduledView::KScheduledView(QWidget *parent) :
           this, SLOT(slotListViewCollapsed(QTreeWidgetItem*)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadView()));
-}
-
-KScheduledView::~KScheduledView()
-{
-  writeConfig();
 }
 
 static bool accountNameLessThan(const MyMoneyAccount& acc1, const MyMoneyAccount& acc2)
@@ -426,6 +433,9 @@ void KScheduledView::slotReloadView()
 
 void KScheduledView::showEvent(QShowEvent* event)
 {
+  if (m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (m_needReload)
