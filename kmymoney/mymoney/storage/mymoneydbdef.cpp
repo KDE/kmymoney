@@ -490,8 +490,6 @@ const QString MyMoneyDbDef::generateSQL(const KSharedPtr<MyMoneyDbDriver>& drive
   for (fit = fi.begin(); fit != fi.end(); ++fit) {
     QString toReplace = (*fit)->name();
     toReplace.prepend(':');
-    QString endSymbol = fit+1 == fi.end() ? ")" : ",";
-    toReplace.append(endSymbol);
     QString replace = "NULL";
     if ((*fit)->name() == "version")
       replace = QString::number(m_currentVersion);
@@ -508,8 +506,10 @@ const QString MyMoneyDbDef::generateSQL(const KSharedPtr<MyMoneyDbDriver>& drive
                 + QLatin1Char('\'');
     if ((*fit)->name() == "updateInProgress")
       replace = enclose("N");
-    replace.append(endSymbol);
-    qs.replace(toReplace, replace);
+
+    qs.replace(QRegExp(toReplace + "(?=[,\\s\\)])"), replace);
+    // only replace parameters followed by comma, whitespace, closing parenthesis - otherwise
+    // conflicts may occur if one paramter starts with the name of another one.
   }
   qs += "\n\n";
   retval += qs;
