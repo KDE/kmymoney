@@ -1155,18 +1155,10 @@ void SeparatorPage::initializePage()
   }
   //  ...and need to adjust preview table for the file now loaded
   int x, y;
-  if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
-    y = (QApplication::desktop()->height() - m_wizDlg->m_csvDialog->height()) / 2;
-    x = (QApplication::desktop()->width() - m_wizDlg->m_csvDialog->width()) / 2;
-    if (x < 0) {
-      x = 0;
-    }
-  } else {  // Investment
-    y = (QApplication::desktop()->height() - m_wizDlg->m_csvDialog->height()) / 2;
-    x = (QApplication::desktop()->width() - m_wizDlg->m_csvDialog->width()) / 2;
-    if (x < 0) {
-      x = 0;
-    }
+  y = (QApplication::desktop()->height() - m_wizDlg->m_csvDialog->height()) / 2;
+  x = (QApplication::desktop()->width() - m_wizDlg->m_csvDialog->width()) / 2;
+  if (x < 0) {
+    x = 0;
   }
   m_wizDlg->m_csvDialog->resize(m_wizDlg->m_csvDialog->width(), m_wizDlg->m_csvDialog->height() + 2);
   m_wizDlg->m_csvDialog->move(x, y);
