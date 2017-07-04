@@ -1463,7 +1463,8 @@ HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    QVariant data = sourceModel()->index(source_row, 0, source_parent).data(AccountsModel::AccountIdRole);
+    auto accCol = m_mdlColumns->indexOf(AccountsModel::Account);
+    QVariant data = sourceModel()->index(source_row, accCol, source_parent).data(AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
@@ -1484,22 +1485,19 @@ bool HierarchyFilterProxyModel::filterAcceptsColumn(int source_column, const QMo
 HierarchyPage::HierarchyPage(Wizard* wizard) :
     KHierarchyPageDecl(wizard),
     WizardPage<Wizard>(StepParentAccount, this, wizard),
-    m_filterProxyModel(0)
+    m_filterProxyModel(nullptr)
 {
   // the proxy filter model
   m_filterProxyModel = new HierarchyFilterProxyModel(this);
   m_filterProxyModel->setHideClosedAccounts(true);
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
-  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
-  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
+  auto const model = Models::instance()->accountsModel();
+  m_filterProxyModel->init(model, model->getColumns());
   m_filterProxyModel->setDynamicSortFilter(true);
 
-  m_parentAccounts->setAlternatingRowColors(true);
-  m_parentAccounts->setIconSize(QSize(22, 22));
-  m_parentAccounts->setSortingEnabled(true);
-  m_parentAccounts->setModel(m_filterProxyModel);
-  m_parentAccounts->sortByColumn(0, Qt::AscendingOrder);
+  m_parentAccounts->init(m_filterProxyModel, model->getColumns());
+  m_parentAccounts->sortByColumn(AccountsModel::Account, Qt::AscendingOrder);
 
   connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
 }
@@ -1509,7 +1507,7 @@ void HierarchyPage::enterPage()
   // Ensure that the list reflects the Account Type
   MyMoneyAccount topAccount = m_wizard->m_accountTypePage->parentAccount();
   m_filterProxyModel->clear();
-  m_filterProxyModel->addAccountGroup(topAccount.accountGroup());
+  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {topAccount.accountGroup()});
   m_parentAccounts->expandAll();
 }
 

@@ -8,6 +8,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -48,8 +49,10 @@
 
 using namespace Icons;
 
-KCategoriesView::KCategoriesView(QWidget *parent) :
-    QWidget(parent),
+KCategoriesView::KCategoriesView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview) :
+    QWidget(nullptr),
+    m_kmymoney(kmymoney),
+    m_kmymoneyview(kmymoneyview),
     m_needReload(false),
     m_needLoad(true),
     m_haveUnusedCategories(false)
@@ -60,60 +63,69 @@ KCategoriesView::~KCategoriesView()
 {
 }
 
+KRecursiveFilterProxyModel *KCategoriesView::getProxyModel()
+{
+  return m_filterProxyModel;
+}
+
+QList<AccountsModel::Columns> *KCategoriesView::getProxyColumns()
+{
+  return m_accountTree->getColumns(KMyMoneyView::View::Categories);
+}
+
+bool KCategoriesView::isLoaded()
+{
+  return !m_needLoad;
+}
+
 void KCategoriesView::init()
 {
   m_needLoad = false;
   setupUi(this);
 
   // setup icons for collapse and expand button
-  KGuiItem collapseGuiItem(QString(),
-                           QIcon::fromTheme(g_Icons[Icon::ListCollapse]),
-                           QString(),
-                           QString());
-  KGuiItem expandGuiItem(QString(),
-                         QIcon::fromTheme(g_Icons[Icon::ListExpand]),
-                         QString(),
-                         QString());
-  KGuiItem::assign(m_collapseButton, collapseGuiItem);
-  KGuiItem::assign(m_expandButton, expandGuiItem);
+  m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+  m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
 
-  connect(Models::instance()->accountsModel(), SIGNAL(profitChanged(MyMoneyMoney)), this, SLOT(slotProfitChanged(MyMoneyMoney)));
+  auto const model = Models::instance()->accountsModel();
+  connect(model, &AccountsModel::profitChanged, this, &KCategoriesView::slotProfitChanged);
 
   // the proxy filter model
   m_filterProxyModel = new AccountsViewFilterProxyModel(this);
-  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
-  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
-  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+
+//  const QVector<MyMoneyAccount::_accountTypeE> accGroups {MyMoneyAccount::Income, MyMoneyAccount::Expense};
+  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Income, MyMoneyAccount::Expense});
+
+  m_filterProxyModel->init(model, getProxyColumns());
   m_filterProxyModel->setFilterKeyColumn(-1);
 
-  connect(m_filterProxyModel, SIGNAL(unusedIncomeExpenseAccountHidden()), this, SLOT(slotUnusedIncomeExpenseAccountHidden()));
+  m_accountTree->init(m_filterProxyModel, model->getColumns());
 
-  m_accountTree->setModel(m_filterProxyModel);
-  m_accountTree->setConfigGroupName("KCategoriesView");
-  m_accountTree->setAlternatingRowColors(true);
-  m_accountTree->setIconSize(QSize(22, 22));
-  m_accountTree->setSortingEnabled(true);
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), m_kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), m_kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
+  connect(m_accountTree, &KMyMoneyAccountTreeView::openContextMenu, m_kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
+  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), m_kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
+  connect(this, SIGNAL(reparent(MyMoneyAccount,MyMoneyAccount)), m_kmymoney, SLOT(slotReparentAccount(MyMoneyAccount,MyMoneyAccount))); //TODO : nothing emits this signal
 
-  connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
+  connect(m_filterProxyModel, &AccountsFilterProxyModel::unusedIncomeExpenseAccountHidden, this, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
+  connect(m_searchWidget, &QLineEdit::textChanged, m_filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
   // let the model know if the item is expanded or collapsed
-  connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
-  connect(m_accountTree, SIGNAL(expanded(QModelIndex)), m_filterProxyModel, SLOT(expanded(QModelIndex)));
-  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), this, SIGNAL(selectObject(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(openContextMenu(MyMoneyObject)), this, SIGNAL(openContextMenu(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), this, SIGNAL(openObject(MyMoneyObject)));
+  connect(m_accountTree, &QTreeView::collapsed, m_filterProxyModel, &AccountsViewFilterProxyModel::collapsed);
+  connect(m_accountTree, &QTreeView::expanded, m_filterProxyModel, &AccountsViewFilterProxyModel::expanded);
+  connect(m_accountTree, &KMyMoneyAccountTreeView::columnToggled , m_kmymoneyview, &KMyMoneyView::slotAccountTreeViewChanged);
 
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
-  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
-  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KCategoriesView::slotLoadAccounts);
+  connect(m_collapseButton, &QAbstractButton::clicked, this, &KCategoriesView::slotExpandCollapse);
+  connect(m_expandButton, &QAbstractButton::clicked, this, &KCategoriesView::slotExpandCollapse);
 
   // connect the two buttons to all required slots
-  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
-  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
-  connect(m_accountTree, SIGNAL(collapsedAll()), m_filterProxyModel, SLOT(collapseAll()));
-  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
-  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
-  connect(m_accountTree, SIGNAL(expandedAll()), m_filterProxyModel, SLOT(expandAll()));
+  connect(m_collapseButton, &QAbstractButton::clicked, this, &KCategoriesView::slotExpandCollapse);
+  connect(m_collapseButton, &QAbstractButton::clicked, m_accountTree, &KMyMoneyAccountTreeView::collapseAll);
+  connect(m_accountTree, &KMyMoneyAccountTreeView::collapsedAll, m_filterProxyModel, &AccountsViewFilterProxyModel::collapseAll);
+  connect(m_expandButton, &QAbstractButton::clicked, this, &KCategoriesView::slotExpandCollapse);
+  connect(m_expandButton, &QAbstractButton::clicked, m_accountTree, &KMyMoneyAccountTreeView::expandAll);
+  connect(m_accountTree, &KMyMoneyAccountTreeView::expandedAll, m_filterProxyModel, &AccountsViewFilterProxyModel::expandAll);
 }
 
 void KCategoriesView::slotExpandCollapse()
@@ -128,7 +140,7 @@ void KCategoriesView::showEvent(QShowEvent * event)
   if (m_needLoad)
     init();
 
-  emit aboutToShow();
+  m_kmymoney->slotResetSelections();
 
   if (m_needReload) {
     loadAccounts();
@@ -175,25 +187,5 @@ void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
 
 void KCategoriesView::slotProfitChanged(const MyMoneyMoney &profit)
 {
-  QString s(i18n("Profit: "));
-  if (profit.isNegative())
-    s = i18n("Loss: ");
-
-  // FIXME figure out how to deal with the approximate
-  // if(!(file->totalValueValid(assetAccount.id()) & file->totalValueValid(liabilityAccount.id())))
-  //  s += "~ ";
-
-  s.replace(QString(" "), QString("&nbsp;"));
-  if (profit.isNegative()) {
-    s += "<b><font color=\"red\">";
-  }
-  const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
-  QString v(MyMoneyUtils::formatMoney(profit.abs(), sec));
-  s += v.replace(QString(" "), QString("&nbsp;"));
-  if (profit.isNegative()) {
-    s += "</font></b>";
-  }
-
-  m_totalProfitsLabel->setFont(KMyMoneyGlobalSettings::listCellFont());
-  m_totalProfitsLabel->setText(s);
+  m_kmymoneyview->slotNetBalProChanged(profit, m_totalProfitsLabel, KMyMoneyView::View::Categories);
 }

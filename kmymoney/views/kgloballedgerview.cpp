@@ -216,26 +216,25 @@ void KGlobalLedgerView::init()
 
   // the proxy filter model
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
-  d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
-  d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
-  d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
-  d->m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
-  d->m_filterProxyModel->sort(0);
+  d->m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity});
+  d->m_filterProxyModel->init(Models::instance()->accountsModel());
+  d->m_filterProxyModel->sort(AccountsModel::Account);
 
   // create the toolbar frame at the top of the view
-  m_toolbarFrame = new QFrame(this);
+  m_toolbarFrame = new QFrame();
   QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame);
   toolbarLayout->setContentsMargins(0, 0, 0, 0);
   toolbarLayout->setSpacing(6);
 
   // the account selector widget
-  d->m_accountComboBox = new KMyMoneyAccountCombo(d->m_filterProxyModel, m_toolbarFrame);
+  d->m_accountComboBox = new KMyMoneyAccountCombo();
+  d->m_accountComboBox->setModel(d->m_filterProxyModel);
   toolbarLayout->addWidget(d->m_accountComboBox);
 
   layout()->addWidget(m_toolbarFrame);
   toolbarLayout->setStretchFactor(d->m_accountComboBox, 60);
   // create the register frame
-  m_registerFrame = new QFrame(this);
+  m_registerFrame = new QFrame();
   QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame);
   registerFrameLayout->setContentsMargins(0, 0, 0, 0);
   registerFrameLayout->setSpacing(0);
@@ -256,7 +255,7 @@ void KGlobalLedgerView::init()
   toolbarLayout->addWidget(d->m_registerSearchLine);
   toolbarLayout->setStretchFactor(d->m_registerSearchLine, 100);
   // create the summary frame
-  m_summaryFrame = new QFrame(this);
+  m_summaryFrame = new QFrame();
   QHBoxLayout* summaryFrameLayout = new QHBoxLayout(m_summaryFrame);
   summaryFrameLayout->setContentsMargins(0, 0, 0, 0);
   summaryFrameLayout->setSpacing(0);
@@ -869,6 +868,7 @@ void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
 void KGlobalLedgerView::loadAccounts()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
+  auto const model = Models::instance()->accountsModel();
 
   // check if the current account still exists and make it the
   // current account
@@ -890,7 +890,7 @@ void KGlobalLedgerView::loadAccounts()
 
   if (m_account.id().isEmpty()) {
     // find the first favorite account
-    QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
+    QModelIndexList list = model->match(model->index(0, 0),
                            AccountsModel::AccountFavoriteRole,
                            QVariant(true),
                            1,
@@ -904,7 +904,7 @@ void KGlobalLedgerView::loadAccounts()
 
     if (m_account.id().isEmpty()) {
       // there are no favorite accounts find any account
-      QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
+      QModelIndexList list = model->match(model->index(0, 0),
                              Qt::DisplayRole,
                              QVariant(QString("*")),
                              -1,

@@ -1,8 +1,9 @@
 /***************************************************************************
                           kmymoneyview.h
                              -------------------
-    copyright            : (C) 2000-2001 by Michael Edwardes
-    email                : <mte@users.sourceforge.net>
+    copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
+                               2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -45,6 +46,7 @@
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "selectedtransaction.h"
+#include <accountsmodel.h>
 
 #ifdef KF5Activities_FOUND
 namespace KActivities
@@ -53,6 +55,7 @@ class ResourceInstance;
 }
 #endif
 
+class KMyMoneyApp;
 class KHomeView;
 class KAccountsView;
 class KCategoriesView;
@@ -72,6 +75,8 @@ class TransactionEditor;
 class KForecastView;
 class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
+class QLabel;
+
 /**
   * This class represents the view of the MyMoneyFile which contains
   * Banks/Accounts/Transactions, Recurring transactions (or Bills & Deposits)
@@ -99,7 +104,8 @@ public:
     Reports,
     Budget,
     Forecast,
-    OnlineJobOutbox
+    OnlineJobOutbox,
+    None
   };
   // file actions for plugin
   enum fileActions {
@@ -220,7 +226,7 @@ public:
     * The constructor for KMyMoneyView. Just creates all the tabs for the
     * different aspects of the MyMoneyFile.
     */
-  explicit KMyMoneyView(QObject *kmymoney, QWidget *parent = nullptr);
+  explicit KMyMoneyView(KMyMoneyApp *kmymoney);
 
   /**
     * Destructor
@@ -421,6 +427,10 @@ public:
     * This method changes the view type according to the settings.
     */
   void updateViewType();
+
+  void slotAccountTreeViewChanged(const AccountsModel::Columns column, const bool show);
+
+  void slotNetBalProChanged(const MyMoneyMoney &val, QLabel *label, const View view);
 
 protected:
   /**

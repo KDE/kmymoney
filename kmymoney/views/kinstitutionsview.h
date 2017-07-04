@@ -1,8 +1,8 @@
 /***************************************************************************
                              kinstitutionssview.h
                              -------------------
-    copyright            : (C) 2005 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -41,13 +41,19 @@
   * This class implements the institutions hierarchical 'view'.
   */
 
+class KMyMoneyApp;
+
 class KInstitutionsView : public QWidget, private Ui::KInstitutionsViewDecl
 {
   Q_OBJECT
 
 public:
-  KInstitutionsView(QWidget *parent = 0);
+  KInstitutionsView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   virtual ~KInstitutionsView();
+
+  KRecursiveFilterProxyModel    *getProxyModel();
+  QList<AccountsModel::Columns> *getProxyColumns();
+  bool                          isLoaded();
 
 public slots:
   void slotLoadAccounts();
@@ -75,31 +81,10 @@ private:
    */
   void init();
 
-signals:
-  /**
-    * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
-    */
-  void selectObject(const MyMoneyObject&);
-
-  /**
-    * This signal serves as proxy for
-    * KMyMoneyAccountTreeView::openContextMenu(const MyMoneyObject&)
-    */
-  void openContextMenu(const MyMoneyObject& obj);
-
-  /**
-    * This signal will be emitted when the left mouse button is double
-    * clicked (actually the KDE executed setting is used) on an account
-    * or institution.
-    */
-  void openObject(const MyMoneyObject& obj);
-
-  /**
-    * This signal is emitted whenever the view is about to be shown.
-    */
-  void aboutToShow();
-
 private:
+  KMyMoneyApp                         *m_kmymoney;
+  KMyMoneyView                        *m_kmymoneyview;
+
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload;
 

@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -49,9 +50,27 @@ public:
     */
   Private() :
       m_file(MyMoneyFile::instance()) {
+    m_columns.append(Columns::Account);
   }
 
   ~Private() {
+  }
+
+  void loadPreferredAccount(const MyMoneyAccount &acc, QStandardItem *fromNode /*accounts' regular node*/, const int row, QStandardItem *toNode /*accounts' favourite node*/)
+  {
+    if (acc.value(QStringLiteral("PreferredAccount")) != QLatin1String("Yes"))
+      return;
+
+    auto favRow = toNode->rowCount();
+    auto favItem = itemFromAccountId(toNode, acc.id());
+    if (favItem)
+      favRow = favItem->row();
+
+    for (auto i = 0; i < fromNode->columnCount(); ++i) {
+      auto itemToClone = fromNode->child(row, i);
+      if (itemToClone)
+        toNode->setChild(favRow, i, itemToClone->clone());
+    }
   }
 
   /**
@@ -63,98 +82,143 @@ public:
     * @param list The list of the account id's of the sub-accounts which are being loaded.
     *
     */
-  void loadSubAccounts(QStandardItemModel *model, QStandardItem *accountsItem, QStandardItem *favoriteAccountsItem, const QStringList& list) {
-    for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
-      const MyMoneyAccount& acc = m_file->account(*it_l);
+  void loadSubaccounts(QStandardItem *node, QStandardItem *favoriteAccountsItem, const QStringList& subaccounts)
+  {
+    if (subaccounts.isEmpty())
+      return;
+    foreach (const auto subaccStr, subaccounts) {
+      const auto subacc = m_file->account(subaccStr);
 
-      QStandardItem *item = new QStandardItem(acc.name());
-      accountsItem->appendRow(item);
-      item->setColumnCount(model->columnCount());
+      auto item = new QStandardItem(subacc.name());                         // initialize first column of subaccount
+      node->appendRow(item);                                                // add subaccount row to node
       item->setEditable(false);
 
-      item->setData(accountsItem->data(DisplayOrderRole), DisplayOrderRole);
+      item->setData(node->data(DisplayOrderRole), DisplayOrderRole);        // inherit display order role from node
 
-      if (acc.accountList().count() > 0) {
-        loadSubAccounts(model, item, favoriteAccountsItem, acc.accountList());
-      }
+      loadSubaccounts(item, favoriteAccountsItem, subacc.accountList());    // subaccount may have subaccounts as well
+
       // set the account data after the children have been loaded
-      setAccountData(model, item->index(), acc);
-
-      if (acc.value("PreferredAccount") == "Yes") {
-        QStandardItem *item = new QStandardItem(acc.name());
-        favoriteAccountsItem->appendRow(item);
-        item->setColumnCount(model->columnCount());
-        item->setEditable(false);
-        // set the account data after the children have been loaded
-        setAccountData(model, item->index(), acc);
-      }
+      const auto row = item->row();
+      setAccountData(node, row, subacc, m_columns);                          // initialize rest of columns of subaccount
+      loadPreferredAccount(subacc, node, row, favoriteAccountsItem);         // add to favourites node if preferred
     }
   }
 
   /**
     * Note: this functions should only be called after the child account data has been set.
     */
-  void setAccountData(QStandardItemModel *model, const QModelIndex &index, const MyMoneyAccount &account) {
-    // Account
-    model->setData(index, account.name(), Qt::DisplayRole);
-    model->setData(index, QVariant::fromValue(account), AccountRole);
-    model->setData(index, QVariant(account.id()), AccountIdRole);
-    model->setData(index, QVariant(account.value("PreferredAccount") == "Yes"), AccountFavoriteRole);
-    model->setData(index, QVariant(QIcon(account.accountPixmap(account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
-    model->setData(index, MyMoneyFile::instance()->accountToCategory(account.id(), true), FullNameRole);
+  void setAccountData(QStandardItem *node, const int row, const MyMoneyAccount &account, const QList<AccountsModel::Columns> &columns)
+  {
+    QStandardItem *cell;
 
-    QFont font = model->data(index, Qt::FontRole).value<QFont>();
+    auto getCell = [&, row](const auto column) {
+      cell = node->child(row, column);      // try to get QStandardItem
+      if (!cell) {                          // it may be uninitialized
+        cell = new QStandardItem;           // so create one
+        node->setChild(row, column, cell);  // and add it under the node
+      }
+    };
 
+    auto colNum = m_columns.indexOf(Columns::Account);
+    if (colNum == -1)
+      return;
+    getCell(colNum);
+    auto font = cell->data(Qt::FontRole).value<QFont>();
     // display the names of closed accounts with strikeout font
-    if (account.isClosed() != font.strikeOut()) {
+    if (account.isClosed() != font.strikeOut())
       font.setStrikeOut(account.isClosed());
-      model->setData(index, font, Qt::FontRole);
+
+    if (columns.contains(Columns::Account)) {
+      // setting account column
+      cell->setData(account.name(), Qt::DisplayRole);
+//      cell->setData(QVariant::fromValue(account), AccountRole); // is set in setAccountBalanceAndValue
+      cell->setData(QVariant(account.id()), AccountIdRole);
+      cell->setData(QVariant(account.value("PreferredAccount") == QLatin1String("Yes")), AccountFavoriteRole);
+      cell->setData(QVariant(QIcon(account.accountPixmap(account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
+      cell->setData(MyMoneyFile::instance()->accountToCategory(account.id(), true), FullNameRole);
+      cell->setData(font, Qt::FontRole);
     }
 
     // Type
-    QModelIndex newIndex = model->index(index.row(), index.column() + Type, index.parent());
-    model->setData(newIndex, KMyMoneyUtils::accountTypeToString(account.accountType()), Qt::DisplayRole);
-    model->setData(newIndex, font, Qt::FontRole);
+    if (columns.contains(Columns::Type)) {
+      colNum = m_columns.indexOf(Columns::Type);
+      if (colNum != -1) {
+        getCell(colNum);
+        cell->setData(KMyMoneyUtils::accountTypeToString(account.accountType()), Qt::DisplayRole);
+        cell->setData(font, Qt::FontRole);
+      }
+    }
 
-    QIcon checkMark = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
+    // Account's number
+    if (columns.contains(Columns::AccountNumber)) {
+      colNum = m_columns.indexOf(Columns::AccountNumber);
+      if (colNum != -1) {
+        getCell(colNum);
+        cell->setData(account.number(), Qt::DisplayRole);
+        cell->setData(font, Qt::FontRole);
+      }
+    }
+
+    // Account's sort code
+    if (columns.contains(Columns::AccountSortCode)) {
+      colNum = m_columns.indexOf(Columns::AccountSortCode);
+      if (colNum != -1) {
+        getCell(colNum);
+        cell->setData(account.value("iban"), Qt::DisplayRole);
+        cell->setData(font, Qt::FontRole);
+      }
+    }
+
+    const auto checkMark = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
     switch (account.accountType()) {
       case MyMoneyAccount::Income:
       case MyMoneyAccount::Expense:
       case MyMoneyAccount::Asset:
       case MyMoneyAccount::Liability:
         // Tax
-        newIndex = model->index(index.row(), index.column() + Tax, index.parent());
-        if (account.value("Tax").toLower() == "yes") {
-          model->setData(newIndex, checkMark, Qt::DecorationRole);
-        } else {
-          model->setData(newIndex, QPixmap(), Qt::DecorationRole);
+        if (columns.contains(Columns::Tax)) {
+          colNum = m_columns.indexOf(Columns::Tax);
+          if (colNum != -1) {
+            getCell(colNum);
+            if (account.value("Tax").toLower() == "yes")
+              cell->setData(checkMark, Qt::DecorationRole);
+            else
+              cell->setData(QIcon(), Qt::DecorationRole);
+          }
         }
 
         // VAT Account
-        newIndex = model->index(index.row(), index.column() + VAT, index.parent());
-        if (!account.value("VatAccount").isEmpty()) {
-          MyMoneyFile* file = MyMoneyFile::instance();
-          const MyMoneyAccount &vatAccount = file->account(account.value("VatAccount"));
+        if (columns.contains(Columns::VAT)) {
+          colNum = m_columns.indexOf(Columns::VAT);
+          if (colNum != -1) {
+            getCell(colNum);
+            if (!account.value("VatAccount").isEmpty()) {
+              const auto vatAccount = MyMoneyFile::instance()->account(account.value("VatAccount"));
+              cell->setData(vatAccount.name(), Qt::DisplayRole);
+              cell->setData(QVariant(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
-          model->setData(newIndex, vatAccount.name(), Qt::DisplayRole);
-          model->setData(newIndex, QVariant(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
+              // VAT Rate
+            } else if (!account.value("VatRate").isEmpty()) {
+              const auto vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
+              cell->setData(QString::fromLatin1("%1 %").arg(vatRate.formatMoney(QString(), 1)), Qt::DisplayRole);
+              cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
-          // VAT Rate
-        } else if (!account.value("VatRate").isEmpty()) {
-          MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
-          model->setData(newIndex, QString("%1 %").arg(vatRate.formatMoney("", 1)), Qt::DisplayRole);
-          model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
-
-        } else {
-          model->setData(newIndex, QString(), Qt::DisplayRole);
+            } else {
+              cell->setData(QString(), Qt::DisplayRole);
+            }
+          }
         }
 
         // CostCenter
-        newIndex = model->index(index.row(), index.column() + CostCenter, index.parent());
-        if (account.isCostCenterRequired()) {
-          model->setData(newIndex, checkMark, Qt::DecorationRole);
-        } else {
-          model->setData(newIndex, QPixmap(), Qt::DecorationRole);
+        if (columns.contains(Columns::CostCenter)) {
+          colNum = m_columns.indexOf(Columns::CostCenter);
+          if (colNum != -1) {
+            getCell(colNum);
+            if (account.isCostCenterRequired())
+              cell->setData(checkMark, Qt::DecorationRole);
+            else
+              cell->setData(QIcon(), Qt::DecorationRole);
+          }
         }
         break;
       default:
@@ -162,48 +226,118 @@ public:
     }
 
     // balance and value
-    setAccountBalanceAndValue(model, index, account);
+    setAccountBalanceAndValue(node, row, account, columns);
   }
 
-  void setAccountBalanceAndValue(QStandardItemModel *model, const QModelIndex &index, const MyMoneyAccount &account) {
-    // set the account object also since it's balance has changed
-    model->setData(index, QVariant::fromValue(account), AccountRole);
-    // set the balance of the account
-    MyMoneyMoney accountBalance = balance(account);
-    model->setData(index, QVariant::fromValue(accountBalance), AccountBalanceRole);
-    // set the value of the account
-    MyMoneyMoney accountValue = value(account, accountBalance);
-    model->setData(index, QVariant::fromValue(accountValue), AccountValueRole);
-    // set the total value of the account
-    MyMoneyMoney accountTotalValue = childrenTotalValue(index) + accountValue;
-    model->setData(index, QVariant::fromValue(accountTotalValue), AccountTotalValueRole);
+  void setInstitutionTotalValue(QStandardItem *node, const int row)
+  {
+    const auto colInstitution = m_columns.indexOf(Columns::Account);
+    auto itInstitution = node->child(row, colInstitution);
+    const auto valInstitution = childrenTotalValue(itInstitution, true);
+    itInstitution->setData(QVariant::fromValue(valInstitution ), AccountTotalValueRole);
 
-    QFont font = model->data(index, Qt::FontRole).value<QFont>();
-
-    // Total Balance
-    QModelIndex newIndex = model->index(index.row(), index.column() + TotalBalance, index.parent());
-    // only show the balance, if its a different security/currency
-    if (m_file->security(account.currencyId()) != m_file->baseCurrency()) {
-      model->setData(newIndex, MyMoneyUtils::formatMoney(accountBalance, m_file->security(account.currencyId())), Qt::DisplayRole);
-      model->setData(newIndex, MyMoneyUtils::formatMoney(accountBalance, m_file->security(account.currencyId())), AccountBalanceDisplayRole);
+    const auto colTotalValue = m_columns.indexOf(Columns::TotalValue);
+    if (colTotalValue == -1)
+      return;
+    auto cell = node->child(row, colTotalValue);
+    if (!cell) {
+      cell = new QStandardItem;
+      node->setChild(row, colTotalValue, cell);
     }
-    model->setData(newIndex, font, Qt::FontRole);
-    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+    QColor color;
+    if (valInstitution.isNegative())
+      color = KMyMoneyGlobalSettings::listNegativeValueColor();
+    else
+      color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
 
-    // Total Value
-    newIndex = model->index(index.row(), index.column() + TotalValue , index.parent());
-    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), Qt::DisplayRole);
-    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), AccountValueDisplayRole);
-    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), AccountTotalValueDisplayRole);
-    model->setData(newIndex, font, Qt::FontRole);
-    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+    cell->setData(QVariant(color),                                                   Qt::ForegroundRole);
+    cell->setData(QVariant(itInstitution->data(Qt::FontRole).value<QFont>()),        Qt::FontRole);
+    cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter),                       Qt::TextAlignmentRole);
+    cell->setData(MyMoneyUtils::formatMoney(valInstitution, m_file->baseCurrency()), Qt::DisplayRole);
+  }
 
-    //Posted Value
-    newIndex = model->index(index.row(), index.column() + PostedValue , index.parent());
-    model->setData(newIndex, MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()), Qt::DisplayRole);
-    model->setData(newIndex, MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()), AccountValueDisplayRole);
-    model->setData(newIndex, font, Qt::FontRole);
-    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+  void setAccountBalanceAndValue(QStandardItem *node, const int row, const MyMoneyAccount &account, const QList<AccountsModel::Columns> &columns)
+  {
+    QStandardItem *cell;
+
+    auto getCell = [&, row](auto column)
+    {
+      cell = node->child(row, column);
+      if (!cell) {
+        cell = new QStandardItem;
+        node->setChild(row, column, cell);
+      }
+    };
+
+    // setting account column
+    auto colNum = m_columns.indexOf(Columns::Account);
+    if (colNum == -1)
+      return;
+    getCell(colNum);
+
+    MyMoneyMoney accountBalance, accountValue, accountTotalValue;
+    if (columns.contains(Columns::Account)) { // update values only when requested
+      accountBalance    = balance(account);
+      accountValue      = value(account, accountBalance);
+      accountTotalValue = childrenTotalValue(cell) + accountValue;
+      cell->setData(QVariant::fromValue(account),           AccountRole);
+      cell->setData(QVariant::fromValue(accountBalance),    AccountBalanceRole);
+      cell->setData(QVariant::fromValue(accountValue),      AccountValueRole);
+      cell->setData(QVariant::fromValue(accountTotalValue), AccountTotalValueRole);
+    } else {  // otherwise save up on tedious calculations
+      accountBalance    = cell->data(AccountBalanceRole).value<MyMoneyMoney>();
+      accountValue      = cell->data(AccountValueRole).value<MyMoneyMoney>();
+      accountTotalValue = cell->data(AccountTotalValueRole).value<MyMoneyMoney>();
+    }
+
+    const auto font = QVariant(cell->data(Qt::FontRole).value<QFont>());
+    const auto alignment = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+
+    // setting total balance column
+    if (columns.contains(Columns::TotalBalance)) {
+      colNum = m_columns.indexOf(Columns::TotalBalance);
+      if (colNum != -1) {
+        const auto accountBalanceStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountBalance, m_file->security(account.currencyId())));
+        getCell(colNum);
+        // only show the balance, if its a different security/currency
+        if (m_file->security(account.currencyId()) != m_file->baseCurrency()) {
+          cell->setData(accountBalanceStr, Qt::DisplayRole);
+        }
+        cell->setData(font,       Qt::FontRole);
+        cell->setData(alignment,  Qt::TextAlignmentRole);
+      }
+    }
+
+    // setting posted value column
+    if (columns.contains(Columns::PostedValue)) {
+      colNum = m_columns.indexOf(Columns::PostedValue);
+      if (colNum != -1) {
+        const auto accountValueStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()));
+        getCell(colNum);
+        cell->setData(accountValueStr, Qt::DisplayRole);
+        cell->setData(font,       Qt::FontRole);
+        cell->setData(alignment,  Qt::TextAlignmentRole);
+      }
+    }
+
+    // setting total value column
+    if (columns.contains(Columns::TotalValue)) {
+      colNum = m_columns.indexOf(Columns::TotalValue);
+      if (colNum != -1) {
+        const auto accountTotalValueStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()));
+        getCell(colNum);
+        QColor color;
+        if (accountTotalValue.isNegative())
+          color = KMyMoneyGlobalSettings::listNegativeValueColor();
+        else
+          color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
+
+        cell->setData(accountTotalValueStr, Qt::DisplayRole);
+        cell->setData(font,                 Qt::FontRole);
+        cell->setData(QVariant(color),      Qt::ForegroundRole);
+        cell->setData(alignment,            Qt::TextAlignmentRole);
+      }
+    }
   }
 
   /**
@@ -211,7 +345,8 @@ public:
     *
     * @param account The account for which the balance is being computed.
     */
-  MyMoneyMoney balance(const MyMoneyAccount &account) {
+  MyMoneyMoney balance(const MyMoneyAccount &account)
+  {
     MyMoneyMoney balance;
     // a closed account has a zero balance by definition
     if (!account.isClosed()) {
@@ -246,7 +381,8 @@ public:
     *
     * @see balance
     */
-  MyMoneyMoney value(const MyMoneyAccount &account, const MyMoneyMoney &balance) {
+  MyMoneyMoney value(const MyMoneyAccount &account, const MyMoneyMoney &balance)
+  {
     if (account.isClosed())
       return MyMoneyMoney();
 
@@ -295,20 +431,25 @@ public:
     * @param index The index of the account in the model.
     * @see value
     */
-  MyMoneyMoney childrenTotalValue(const QModelIndex &index) {
+  MyMoneyMoney childrenTotalValue(const QStandardItem *node, const bool isInstitutionsModel = false)
+  {
     MyMoneyMoney totalValue;
-    if (!index.isValid())
+    if (!node)
       return totalValue;
 
-    const QAbstractItemModel *model = index.model();
-    for (int i = 0; i < model->rowCount(index); ++i) {
-      QModelIndex childIndex = model->index(i, index.column(), index);
-      if (model->hasChildren(childIndex)) {
-        totalValue += childrenTotalValue(childIndex);
-      }
-      QVariant data = model->data(childIndex, AccountValueRole);
+    for (auto i = 0; i < node->rowCount(); ++i) {
+      const auto childNode = node->child(i, Columns::Account);
+      if (childNode->hasChildren())
+        totalValue += childrenTotalValue(childNode, isInstitutionsModel);
+      const auto data = childNode->data(AccountValueRole);
       if (data.isValid()) {
-        totalValue += data.value<MyMoneyMoney>();
+        auto value = data.value<MyMoneyMoney>();
+        if (isInstitutionsModel) {
+          const auto account = childNode->data(AccountRole).value<MyMoneyAccount>();
+          if (account.accountGroup() == MyMoneyAccount::Liability)
+            value = -value;
+        }
+      totalValue += value;
       }
     }
     return totalValue;
@@ -323,13 +464,12 @@ public:
     * @return The item corresponding to the given account id, NULL if the account was not found.
     */
   QStandardItem *itemFromAccountId(QStandardItem *parent, const QString &accountId) {
-    QStandardItemModel *model = parent->model();
-    QModelIndexList list = model->match(model->index(0, 0, parent->index()), AccountsModel::AccountIdRole, QVariant(accountId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
-    if (list.count() > 0) {
+    auto const model = parent->model();
+    const auto list = model->match(model->index(0, 0, parent->index()), AccountsModel::AccountIdRole, QVariant(accountId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+    if (!list.isEmpty())
       return model->itemFromIndex(list.front());
-    }
     // TODO: if not found at this item search for it in the model and if found reparent it.
-    return 0;
+    return nullptr;
   }
 
   /**
@@ -342,15 +482,15 @@ public:
     *
     * @return The item corresponding to the given account id, NULL if the account was not found.
     */
-  QStandardItem *itemFromAccountId(QStandardItemModel *model, const QString &accountId) {
-    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(accountId), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  QStandardItem *itemFromAccountId(QStandardItemModel *model, const QString &accountId)
+  {
+    const auto list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(accountId), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     foreach (const QModelIndex &index, list) {
       // always return the account which is not the child of the favorite accounts item
-      if (index.parent().data(AccountsModel::AccountIdRole).toString() != AccountsModel::favoritesAccountId) {
+      if (index.parent().data(AccountsModel::AccountIdRole).toString() != AccountsModel::favoritesAccountId)
         return model->itemFromIndex(index);
-      }
     }
-    return 0;
+    return nullptr;
   }
 
   /**
@@ -369,9 +509,16 @@ public:
     * Used to set the reconciliation flag.
     */
   MyMoneyAccount m_reconciledAccount;
+
+  QList<AccountsModel::Columns> m_columns;
+  static const QString m_accountsModelConfGroup;
+  static const QString m_accountsModelColumnSelection;
 };
 
-const QString AccountsModel::favoritesAccountId("Favorites");
+const QString AccountsModel::Private::m_accountsModelConfGroup = QStringLiteral("AccountsModel");
+const QString AccountsModel::Private::m_accountsModelColumnSelection = QStringLiteral("ColumnSelection");
+
+const QString AccountsModel::favoritesAccountId(QStringLiteral("Favorites"));
 
 /**
   * The constructor is private so that only the @ref Models object can create such an object.
@@ -396,36 +543,8 @@ AccountsModel::~AccountsModel()
 void AccountsModel::init()
 {
   QStringList headerLabels;
-  for (int i = 0; i < LastColumnMarker; ++i) {
-    switch (i) {
-      case Account:
-        headerLabels << i18n("Account");
-        break;
-      case Type:
-        headerLabels << i18n("Type");
-        break;
-      case Tax:
-        headerLabels << i18nc("Column heading for category in tax report", "Tax");
-        break;
-      case VAT:
-        headerLabels << i18nc("Column heading for VAT category", "VAT");
-        break;
-      case CostCenter:
-        headerLabels << i18nc("Column heading for Cost Center", "CC");
-        break;
-      case TotalBalance:
-        headerLabels << i18n("Total Balance");
-        break;
-      case PostedValue:
-        headerLabels << i18n("Posted Value");
-        break;
-      case TotalValue:
-        headerLabels << i18n("Total Value");
-        break;
-      default:
-        headerLabels << QString();
-    }
-  }
+  foreach (const auto column, d->m_columns)
+    headerLabels.append(getHeaderName(column));
   setHorizontalHeaderLabels(headerLabels);
 }
 
@@ -436,23 +555,27 @@ void AccountsModel::init()
   */
 void AccountsModel::load()
 {
+  this->blockSignals(true);
   QStandardItem *rootItem = invisibleRootItem();
 
   QFont font;
   font.setBold(true);
 
-  // Favorite accounts
-  QStandardItem *favoriteAccountsItem = new QStandardItem(i18n("Favorites"));
-  rootItem->appendRow(favoriteAccountsItem);
-  setData(favoriteAccountsItem->index(), i18n("Favorites"), FullNameRole);
-  setData(favoriteAccountsItem->index(), i18n("Favorites"), Qt::EditRole);
-  setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
-  setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
-  favoriteAccountsItem->setColumnCount(columnCount());
-  favoriteAccountsItem->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]));
+  // adding favourite accounts node
+  auto favoriteAccountsItem = new QStandardItem();
   favoriteAccountsItem->setEditable(false);
-  favoriteAccountsItem->setFont(font);
+  rootItem->appendRow(favoriteAccountsItem);
+  {
+    QMap<int, QVariant> itemData;
+    itemData[Qt::DisplayRole] = itemData[Qt::EditRole] = itemData[FullNameRole] = i18n("Favorites");
+    itemData[Qt::FontRole] = font;
+    itemData[Qt::DecorationRole] = QIcon::fromTheme(g_Icons.value(Icon::ViewBankAccount));
+    itemData[AccountIdRole] = favoritesAccountId;
+    itemData[DisplayOrderRole] = 0;
+    this->setItemData(favoriteAccountsItem->index(), itemData);
+  }
 
+  // adding account categories (asset, liability, etc.) node
   for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
     MyMoneyAccount account;
     QString accountName;
@@ -463,81 +586,72 @@ void AccountsModel::load()
       account = d->m_file->asset();
       accountName = i18n("Asset accounts");
       displayOrder = 1;
-    }
-
-    if ((mask & KMyMoneyUtils::liability) != 0) {
+    } else if ((mask & KMyMoneyUtils::liability) != 0) {
       // Liability accounts
       account = d->m_file->liability();
       accountName = i18n("Liability accounts");
       displayOrder = 2;
-    }
-
-    if ((mask & KMyMoneyUtils::income) != 0) {
+    } else if ((mask & KMyMoneyUtils::income) != 0) {
       // Income categories
       account = d->m_file->income();
       accountName = i18n("Income categories");
       displayOrder = 3;
-    }
-
-    if ((mask & KMyMoneyUtils::expense) != 0) {
+    } else if ((mask & KMyMoneyUtils::expense) != 0) {
       // Expense categories
       account = d->m_file->expense();
       accountName = i18n("Expense categories");
       displayOrder = 4;
-    }
-
-    if ((mask & KMyMoneyUtils::equity) != 0) {
+    } else if ((mask & KMyMoneyUtils::equity) != 0) {
       // Equity accounts
       account = d->m_file->equity();
       accountName = i18n("Equity accounts");
       displayOrder = 5;
     }
 
-    QStandardItem *accountsItem = new QStandardItem(accountName);
-    rootItem->appendRow(accountsItem);
-    setData(accountsItem->index(), QVariant(displayOrder), DisplayOrderRole);
-    setData(accountsItem->index(), MyMoneyFile::instance()->accountToCategory(account.id(), true), FullNameRole);
-    setData(accountsItem->index(), MyMoneyFile::instance()->accountToCategory(account.id(), true), Qt::EditRole);
-    accountsItem->setColumnCount(columnCount());
-    accountsItem->setFont(font);
+    auto accountsItem = new QStandardItem(accountName);
     accountsItem->setEditable(false);
+    rootItem->appendRow(accountsItem);
 
-    QStringList list = account.accountList();
-
-    for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
-      const MyMoneyAccount& acc = d->m_file->account(*it_l);
-
-      QStandardItem *item = new QStandardItem(acc.name());
-      accountsItem->appendRow(item);
-      item->setColumnCount(columnCount());
-      item->setEditable(false);
-      QStringList subaccountsList = acc.accountList();
-      // filter out stocks with zero balance if requested by user
-      for (QStringList::Iterator it = subaccountsList.begin(); it != subaccountsList.end();) {
-        const MyMoneyAccount& subAcc = d->m_file->account(*it);
-        if (subAcc.isInvest() && KMyMoneyGlobalSettings::hideZeroBalanceEquities() && subAcc.balance().isZero())
-          it = subaccountsList.erase(it);
-        else
-          ++it;
-      }
-      if (!subaccountsList.isEmpty())
-        d->loadSubAccounts(this, item, favoriteAccountsItem, subaccountsList);
-      d->setAccountData(this, item->index(), acc);
-      // set the account data after the children have been loaded
-      if (acc.value("PreferredAccount") == "Yes") {
-        item = new QStandardItem(acc.name());
-        favoriteAccountsItem->appendRow(item);
-        item->setColumnCount(columnCount());
-        item->setEditable(false);
-        d->setAccountData(this, item->index(), acc);
-      }
+    {
+      QMap<int, QVariant> itemData;
+      itemData[Qt::DisplayRole] = accountName;
+      itemData[FullNameRole] = itemData[Qt::EditRole] = QVariant::fromValue(MyMoneyFile::instance()->accountToCategory(account.id(), true));
+      itemData[Qt::FontRole] = font;
+      itemData[DisplayOrderRole] = displayOrder;
+      this->setItemData(accountsItem->index(), itemData);
     }
 
-    d->setAccountData(this, accountsItem->index(), account);
+    // adding accounts (specific bank/investment accounts) belonging to given accounts category
+    const auto accountsStr = account.accountList();
+    foreach (const auto accStr, accountsStr) {
+      const auto acc = d->m_file->account(accStr);
+
+      auto item = new QStandardItem(acc.name());
+      accountsItem->appendRow(item);
+      item->setEditable(false);
+      auto subaccountsStr = acc.accountList();
+      // filter out stocks with zero balance if requested by user
+      for (auto subaccStr = subaccountsStr.begin(); subaccStr != subaccountsStr.end();) {
+        const auto subacc = d->m_file->account(*subaccStr);
+        if (subacc.isInvest() && KMyMoneyGlobalSettings::hideZeroBalanceEquities() && subacc.balance().isZero())
+          subaccStr = subaccountsStr.erase(subaccStr);
+        else
+          ++subaccStr;
+      }
+
+      // adding subaccounts (e.g. stocks under given investment account) belonging to given account
+      d->loadSubaccounts(item, favoriteAccountsItem, subaccountsStr);
+      const auto row = item->row();
+      d->setAccountData(accountsItem, row, acc, d->m_columns);
+      d->loadPreferredAccount(acc, accountsItem, row, favoriteAccountsItem);
+    }
+
+    d->setAccountData(rootItem, accountsItem->row(), account, d->m_columns);
   }
 
   checkNetWorth();
   checkProfit();
+  this->blockSignals(false);
 }
 
 QModelIndex AccountsModel::accountById(const QString& id) const
@@ -552,6 +666,105 @@ QModelIndex AccountsModel::accountById(const QString& id) const
     return accountList.first();
   }
   return QModelIndex();
+}
+
+QList<AccountsModel::Columns> *AccountsModel::getColumns()
+{
+  return &d->m_columns;
+}
+
+void AccountsModel::setColumnVisibility(const Columns column, const bool show)
+{
+  const auto ixCol = d->m_columns.indexOf(column);  // get column index in our column's map
+  if (!show && ixCol != -1) {                       // start removing column row by row from bottom to up
+    d->m_columns.removeOne(column);                 // remove it from our column's map
+    blockSignals(true);                             // block signals to not emit resources consuming dataChanged
+    for (auto i = 0; i < rowCount(); ++i) {
+      // recursive lambda function to remove cell belonging to unwanted column from all rows
+      auto removeCellFromRow = [=](auto &&self, QStandardItem *item) -> bool {
+        for(auto j = 0; j < item->rowCount(); ++j) {
+          auto childItem = item->child(j);
+          if (childItem->hasChildren())
+            self(self, childItem);
+          childItem->removeColumn(ixCol);
+        }
+        return true;
+      };
+
+      auto topItem = item(i);
+      if (topItem->hasChildren())
+        removeCellFromRow(removeCellFromRow, topItem);
+      topItem->removeColumn(ixCol);
+    }
+    blockSignals(false);                           // unblock signals, so model can update itself with new column
+    removeColumn(ixCol);                           // remove column from invisible root item which triggers model's view update
+  } else if (show && ixCol == -1) {                // start inserting columns row by row  from up to bottom (otherwise columns will be inserted automatically)
+    auto model = qobject_cast<InstitutionsModel *>(this);
+    const auto isInstitutionsModel = model ? true : false;  // if it's institution's model, then don't set any data on institution nodes
+
+    auto newColPos = 0;
+    for(; newColPos < d->m_columns.count(); ++newColPos) {
+      if (d->m_columns.at(newColPos) > column)
+        break;
+    }
+    d->m_columns.insert(newColPos, column);       // insert columns according to enum order for cleanliness
+
+    insertColumn(newColPos);
+    setHorizontalHeaderItem(newColPos, new QStandardItem(getHeaderName(column)));
+    blockSignals(true);
+    for (auto i = 0; i < rowCount(); ++i) {
+      // recursive lambda function to remove cell belonging to unwanted column from all rows
+      auto addCellToRow = [&, newColPos](auto &&self, QStandardItem *item) -> bool {
+        for(auto j = 0; j < item->rowCount(); ++j) {
+          auto childItem = item->child(j);
+          childItem->insertColumns(newColPos, 1);
+          if (childItem->hasChildren())
+            self(self, childItem);
+          this->d->setAccountData(item, j, childItem->data(AccountRole).value<MyMoneyAccount>(), QList<Columns> {column});
+        }
+        return true;
+      };
+
+      auto topItem = item(i);
+      topItem->insertColumns(newColPos, 1);
+      if (topItem->hasChildren())
+        addCellToRow(addCellToRow, topItem);
+
+      if (isInstitutionsModel)
+        d->setInstitutionTotalValue(invisibleRootItem(), i);
+      else if (i !=0)  // favourites node doesn't play well here, so exclude it from update
+        d->setAccountData(invisibleRootItem(), i, topItem->data(AccountRole).value<MyMoneyAccount>(), QList<Columns> {column});
+    }
+    blockSignals(false);
+  }
+}
+
+QString AccountsModel::getHeaderName(const Columns column)
+{
+  switch(column) {
+    case Account:
+      return i18n("Account");
+    case Type:
+      return i18n("Type");
+    case Tax:
+      return i18nc("Column heading for category in tax report", "Tax");
+    case VAT:
+      return i18nc("Column heading for VAT category", "VAT");
+    case CostCenter:
+      return i18nc("Column heading for Cost Center", "CC");
+    case TotalBalance:
+      return i18n("Total Balance");
+    case PostedValue:
+      return i18n("Posted Value");
+    case TotalValue:
+      return i18n("Total Value");
+    case AccountNumber:
+      return i18n("Number");
+    case AccountSortCode:
+      return i18nc("IBAN, SWIFT, etc.", "Sort Code");
+    default:
+      return QString();
+  }
 }
 
 /**
@@ -574,12 +787,11 @@ void AccountsModel::checkNetWorth()
 
   MyMoneyMoney netWorth;
   if (!assetList.isEmpty() && !liabilityList.isEmpty()) {
-    QVariant assetValue = data(assetList.front(), AccountsModel::AccountTotalValueRole);
-    QVariant liabilityValue = data(liabilityList.front(), AccountsModel::AccountTotalValueRole);
+    const auto  assetValue = data(assetList.front(), AccountsModel::AccountTotalValueRole);
+    const auto  liabilityValue = data(liabilityList.front(), AccountsModel::AccountTotalValueRole);
 
-    if (assetValue.isValid() && liabilityValue.isValid()) {
+    if (assetValue.isValid() && liabilityValue.isValid())
       netWorth = assetValue.value<MyMoneyMoney>() - liabilityValue.value<MyMoneyMoney>();
-    }
   }
   if (d->m_lastNetWorth != netWorth) {
     d->m_lastNetWorth = netWorth;
@@ -593,26 +805,25 @@ void AccountsModel::checkNetWorth()
 void AccountsModel::checkProfit()
 {
   // compute the profit
-  QModelIndexList incomeList = match(index(0, 0),
-                                     AccountsModel::AccountIdRole,
-                                     MyMoneyFile::instance()->income().id(),
-                                     1,
-                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+  const auto incomeList = match(index(0, 0),
+                                AccountsModel::AccountIdRole,
+                                MyMoneyFile::instance()->income().id(),
+                                1,
+                                Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
 
-  QModelIndexList expenseList = match(index(0, 0),
-                                      AccountsModel::AccountIdRole,
-                                      MyMoneyFile::instance()->expense().id(),
-                                      1,
-                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+  const auto expenseList = match(index(0, 0),
+                                 AccountsModel::AccountIdRole,
+                                 MyMoneyFile::instance()->expense().id(),
+                                 1,
+                                 Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
 
   MyMoneyMoney profit;
   if (!incomeList.isEmpty() && !expenseList.isEmpty()) {
-    QVariant incomeValue = data(incomeList.front(), AccountsModel::AccountTotalValueRole);
-    QVariant expenseValue = data(expenseList.front(), AccountsModel::AccountTotalValueRole);
+    const auto incomeValue = data(incomeList.front(), AccountsModel::AccountTotalValueRole);
+    const auto expenseValue = data(expenseList.front(), AccountsModel::AccountTotalValueRole);
 
-    if (incomeValue.isValid() && expenseValue.isValid()) {
+    if (incomeValue.isValid() && expenseValue.isValid())
       profit = incomeValue.value<MyMoneyMoney>() - expenseValue.value<MyMoneyMoney>();
-    }
   }
   if (d->m_lastProfit != profit) {
     d->m_lastProfit = profit;
@@ -635,17 +846,15 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
   if (d->m_reconciledAccount.id() != account.id()) {
     // first clear the flag of the old reconciliation account
     if (!d->m_reconciledAccount.id().isEmpty()) {
-      QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(d->m_reconciledAccount.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-      foreach (const QModelIndex &index, list) {
+      const auto list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(d->m_reconciledAccount.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+      foreach (const auto index, list)
         setData(index, QVariant(QIcon(account.accountPixmap(false))), Qt::DecorationRole);
-      }
     }
 
     // then set the reconciliation flag of the new reconciliation account
-    QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(account.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-    foreach (const QModelIndex &index, list) {
+    const auto list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(account.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    foreach (const auto index, list)
       setData(index, QVariant(QIcon(account.accountPixmap(true))), Qt::DecorationRole);
-    }
     d->m_reconciledAccount = account;
   }
 }
@@ -663,32 +872,21 @@ void AccountsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, co
   if (!account)
     return;
 
-  QStandardItem *favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
-  QStandardItem *parentAccountItem = d->itemFromAccountId(this, account->parentAccountId());
-  QStandardItem *item = d->itemFromAccountId(parentAccountItem, account->id());
+  auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
+  auto parentAccountItem = d->itemFromAccountId(this, account->parentAccountId());
+  auto item = d->itemFromAccountId(parentAccountItem, account->id());
   if (!item) {
     item = new QStandardItem(account->name());
     parentAccountItem->appendRow(item);
-    item->setColumnCount(columnCount());
     item->setEditable(false);
   }
   // load the sub-accounts if there are any - there could be sub accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  if (account->accountList().count() > 0) {
-    d->loadSubAccounts(this, item, favoriteAccountsItem, account->accountList());
-  }
-  d->setAccountData(this, item->index(), *account);
-  // set the account data
-  if (account->value("PreferredAccount") == "Yes") {
-    QStandardItem *item = d->itemFromAccountId(favoriteAccountsItem, account->id());
-    if (!item) {
-      item = new QStandardItem(account->name());
-      favoriteAccountsItem->appendRow(item);
-      item->setColumnCount(columnCount());
-      item->setEditable(false);
-    }
-    d->setAccountData(this, item->index(), *account);
-  }
+  d->loadSubaccounts(item, favoriteAccountsItem, account->accountList());
+
+  const auto row = item->row();
+  d->setAccountData(parentAccountItem, row, *account, d->m_columns);
+  d->loadPreferredAccount(*account, parentAccountItem, row, favoriteAccountsItem);
 
   checkNetWorth();
   checkProfit();
@@ -706,30 +904,22 @@ void AccountsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
   if (!account)
     return;
-
-  QStandardItem *favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
-  QStandardItem *accountItem = d->itemFromAccountId(this, account->id());
-  MyMoneyAccount oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
+  auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
+  auto accountItem = d->itemFromAccountId(this, account->id());
+  const auto oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
   if (oldAccount.parentAccountId() == account->parentAccountId()) {
     // the hierarchy did not change so update the account data
-    d->setAccountData(this, accountItem->index(), *account);
+    auto parentAccountItem = accountItem->parent();
+    if (!parentAccountItem)
+      parentAccountItem = this->invisibleRootItem();
+    const auto row = accountItem->row();
+    d->setAccountData(parentAccountItem, row, *account, d->m_columns);
     // and the child of the favorite item if the account is a favorite account or it's favorite status has just changed
-    QStandardItem *item = d->itemFromAccountId(favoriteAccountsItem, account->id());
-    if (account->value("PreferredAccount") == "Yes") {
-      if (!item) {
-        // the favorite item for this account does not exist and the account is favorite
-        item = new QStandardItem(account->name());
-        favoriteAccountsItem->appendRow(item);
-        item->setColumnCount(columnCount());
-        item->setEditable(false);
-      }
-      d->setAccountData(this, item->index(), *account);
-    } else {
-      if (item) {
-        // it's not favorite anymore
-        removeRow(item->index().row(), item->index().parent());
-      }
-    }
+    auto favItem = d->itemFromAccountId(favoriteAccountsItem, account->id());
+    if (account->value("PreferredAccount") == QLatin1String("Yes"))
+      d->loadPreferredAccount(*account, parentAccountItem, row, favoriteAccountsItem);
+    else if (favItem)
+      favoriteAccountsItem->removeRow(favItem->row()); // it's not favorite anymore
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(MyMoneyFile::notifyAccount, oldAccount.id());
@@ -749,10 +939,9 @@ void AccountsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, 
   if (objType != MyMoneyFile::notifyAccount)
     return;
 
-  QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
-  foreach (const QModelIndex &index, list) {
+  auto list = match(index(0, 0), AccountsModel::AccountIdRole, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
+  foreach (const auto index, list)
     removeRow(index.row(), index.parent());
-  }
 
   checkNetWorth();
   checkProfit();
@@ -763,12 +952,21 @@ void AccountsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, 
   */
 void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
 {
-  QStandardItem *currentItem = d->itemFromAccountId(this, account.id());
-  const MyMoneyAccount *currentAccount = &account;
-  while (currentItem) {
-    d->setAccountBalanceAndValue(this, currentItem->index(), *currentAccount);
-    currentItem = currentItem->parent();
-    currentAccount = &d->m_file->account(currentAccount->parentAccountId());
+  auto itParent = d->itemFromAccountId(this, account.id()); // get node of account in model
+  auto isTopLevel = false;                                  // it could be top-level but we don't know it yet
+  while (itParent && !isTopLevel) {                         // loop in which we set total values and balances from the bottom to the top
+    auto itCurrent = itParent;
+    auto accCurrent = &d->m_file->account(itCurrent->data(AccountRole).value<MyMoneyAccount>().id());
+    if (accCurrent->id().isEmpty()) {   // this is institution
+      d->setInstitutionTotalValue(invisibleRootItem(), itCurrent->row());
+      break;                            // it's top-level node so nothing above that;
+    }
+    itParent = itCurrent->parent();
+    if (!itParent) {
+      itParent = this->invisibleRootItem();
+      isTopLevel = true;
+    }
+    d->setAccountBalanceAndValue(itParent, itCurrent->row(), *accCurrent, d->m_columns);
   }
   checkNetWorth();
   checkProfit();
@@ -789,11 +987,10 @@ public:
     * @return The item corresponding to the given institution id, NULL if the institution was not found.
     */
   QStandardItem *institutionItemFromId(QStandardItemModel *model, const QString &institutionId) {
-    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(institutionId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
-    if (list.count() > 0) {
+    const auto list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(institutionId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+    if (!list.isEmpty())
       return model->itemFromIndex(list.front());
-    }
-    return 0;
+    return nullptr; // this should rarely fail as we add all institutions early on
   }
 
   /**
@@ -807,51 +1004,34 @@ public:
     if (!account.isAssetLiability() && !account.isInvest())
       return;
 
-    QFont font;
-    font.setBold(true);
-
-    QString institutionId = account.institutionId();
-    if (account.isInvest()) {
-      MyMoneyAccount parentAccount = m_file->account(account.parentAccountId());
-      institutionId = parentAccount.institutionId();
+    // we've got account but don't know under which institution it should be added, so we find it out
+    auto idInstitution = account.institutionId();
+    if (account.isInvest()) {                                                 // if it's stock account then...
+      const auto investmentAccount = m_file->account(account.parentAccountId());  // ...get investment account it's under and...
+      idInstitution = investmentAccount.institutionId();                          // ...get institution from investment account
     }
-    QStandardItem *institutionItem = institutionItemFromId(model, institutionId);
-    QStandardItem *item = itemFromAccountId(institutionItem, account.id());
-    // only investment accounts are added to their parent in the institutions view
-    // this makes hierarchy maintenance a lot easier since the investment accounts
+    auto itInstitution = institutionItemFromId(model, idInstitution);
+    auto itAccount = itemFromAccountId(itInstitution, account.id());  // check if account already exists under institution
+    // only stock accounts are added to their parent in the institutions view
+    // this makes hierarchy maintenance a lot easier since the stock accounts
     // are the only ones that always have the same institution as their parent
-    QStandardItem *parentAccounItem = account.isInvest() ? itemFromAccountId(institutionItem, account.parentAccountId()) : 0;
-    if (!item) {
-      item = new QStandardItem(account.name());
-      if (parentAccounItem) {
-        parentAccounItem->appendRow(item);
-      } else {
-        institutionItem->appendRow(item);
-      }
-      item->setColumnCount(model->columnCount());
-      item->setEditable(false);
+    auto itInvestmentAccount = account.isInvest() ? itemFromAccountId(itInstitution, account.parentAccountId()) : nullptr;
+    if (!itAccount) {
+      itAccount = new QStandardItem(account.name());
+      if (itInvestmentAccount)                       // stock account nodes go under investment account nodes and...
+        itInvestmentAccount->appendRow(itAccount);
+      else if (itInstitution)                       // ...the rest goes under institution's node
+        itInstitution->appendRow(itAccount);
+      else
+        return;
+      itAccount->setEditable(false);
     }
-    setAccountData(model, item->index(), account);
-    if (parentAccounItem)
-      setAccountData(model, parentAccounItem->index(), m_file->account(account.parentAccountId()));
-    MyMoneyMoney accountTotalValue = item->data(AccountTotalValueRole).value<MyMoneyMoney>();
-    if (account.accountGroup() == MyMoneyAccount::Liability) {
-      accountTotalValue = -accountTotalValue; // the account is a liability so change the account value sign
+    if (itInvestmentAccount) {
+      setAccountData(itInvestmentAccount, itAccount->row(), account, m_columns);                                         // set data for stock account node
+      setAccountData(itInstitution, itInvestmentAccount->row(), m_file->account(account.parentAccountId()), m_columns);  // set data for investment account node
+    } else if (itInstitution) {
+      setAccountData(itInstitution, itAccount->row(), account, m_columns);
     }
-    MyMoneyMoney institutionValue = institutionItem->data(AccountTotalValueRole).value<MyMoneyMoney>() + accountTotalValue;
-    institutionItem->setData(QVariant::fromValue(institutionValue), AccountTotalValueRole);
-    QModelIndex instIndex = institutionItem->index();
-    QModelIndex newIndex = model->index(instIndex.row(), instIndex.column() + TotalValue, instIndex.parent());
-    if (institutionValue.isNegative()) {
-      model->setData(newIndex, KMyMoneyGlobalSettings::listNegativeValueColor(), Qt::ForegroundRole);
-    } else {
-      model->setData(newIndex, KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color(), Qt::ForegroundRole);
-    }
-
-    model->setData(newIndex, MyMoneyUtils::formatMoney(institutionValue, m_file->baseCurrency()), Qt::DisplayRole);
-    model->setData(newIndex, MyMoneyUtils::formatMoney(institutionValue, m_file->baseCurrency()), AccountTotalValueDisplayRole);
-    model->setData(newIndex, font, Qt::FontRole);
-    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
   }
 
   /**
@@ -864,19 +1044,15 @@ public:
   void addInstitutionItem(QStandardItemModel *model, const MyMoneyInstitution &institution) {
     QFont font;
     font.setBold(true);
-    QStandardItem *institutionItem = new QStandardItem(institution.name());
-    model->invisibleRootItem()->appendRow(institutionItem);
-    institutionItem->setData(institution.name(), Qt::DisplayRole);
-    institutionItem->setData(QVariant::fromValue(institution), AccountRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountBalanceRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountValueRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountTotalValueRole);
-    institutionItem->setData(institution.id(), AccountIdRole);
-    institutionItem->setData(6, DisplayOrderRole);
-    institutionItem->setColumnCount(model->columnCount());
-    institutionItem->setIcon(institution.pixmap());
-    institutionItem->setFont(font);
-    institutionItem->setEditable(false);
+    auto itInstitution = new QStandardItem(QIcon::fromTheme(g_Icons.value(Icon::ViewInstitutions)), institution.name());
+    itInstitution->setFont(font);
+    itInstitution->setData(QVariant::fromValue(MyMoneyMoney()), AccountTotalValueRole);
+    itInstitution->setData(institution.id(), AccountIdRole);
+    itInstitution->setData(QVariant::fromValue(institution), AccountRole);
+    itInstitution->setData(6, DisplayOrderRole);
+    itInstitution->setEditable(false);
+    model->invisibleRootItem()->appendRow(itInstitution);
+    setInstitutionTotalValue(model->invisibleRootItem(), itInstitution->row());
   }
 };
 
@@ -902,23 +1078,27 @@ void InstitutionsModel::load()
   MyMoneyInstitution none;
   none.setName(i18n("Accounts with no institution assigned"));
   institutionList.append(none);
-  foreach (const auto institution, institutionList)
-    static_cast<InstitutionsPrivate *>(d)->addInstitutionItem(this, institution);
+  auto modelUtils = static_cast<InstitutionsPrivate *>(d);
+  foreach (const auto institution, institutionList)   // add all known institutions as top-level nodes
+    modelUtils->addInstitutionItem(this, institution);
 
   QList<MyMoneyAccount> accountsList;
   QList<MyMoneyAccount> stocksList;
   d->m_file->accountList(accountsList);
-  foreach (const auto account, accountsList) {  // create items for all the accounts...
+  foreach (const auto account, accountsList) {  // add account nodes under institution nodes...
     if (account.isInvest())                     // ...but wait with stocks until investment accounts appear
       stocksList.append(account);
     else
-      static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, account);
+      modelUtils->loadInstitution(this, account);
   }
 
   foreach (const auto stock, stocksList) {
     if (!(KMyMoneyGlobalSettings::hideZeroBalanceEquities() && stock.balance().isZero()))
-      static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, stock);
+      modelUtils->loadInstitution(this, stock);
   }
+
+  for (auto i = 0 ; i < rowCount(); ++i)
+    d->setInstitutionTotalValue(invisibleRootItem(), i);
 }
 
 /**
@@ -927,12 +1107,13 @@ void InstitutionsModel::load()
   */
 void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
 {
+  auto modelUtils = static_cast<InstitutionsPrivate *>(d);
   if (objType == MyMoneyFile::notifyInstitution) {
     // if an institution was added then add the item which will represent it
     const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
     if (!institution)
       return;
-    static_cast<InstitutionsPrivate *>(d)->addInstitutionItem(this, *institution);
+    modelUtils->addInstitutionItem(this, *institution);
   }
 
   if (objType != MyMoneyFile::notifyAccount)
@@ -945,16 +1126,16 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
     return;
 
   // load the account into the institution
-  static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *account);
+  modelUtils->loadInstitution(this, *account);
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
   if (!account->accountList().isEmpty()) {
     QList<MyMoneyAccount> subAccounts;
     d->m_file->accountList(subAccounts, account->accountList());
-    for (QList<MyMoneyAccount>::ConstIterator it_a = subAccounts.constBegin(); it_a != subAccounts.constEnd(); ++it_a) {
-      if ((*it_a).isInvest()) {
-        static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *it_a);
+    foreach (const auto subAccount, subAccounts) {
+      if (subAccount.isInvest()) {
+        modelUtils->loadInstitution(this, subAccount);
       }
     }
   }
@@ -971,7 +1152,7 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
     const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
     if (!institution)
       return;
-    QStandardItem *institutionItem = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, institution->id());
+    auto institutionItem = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, institution->id());
     institutionItem->setData(institution->name(), Qt::DisplayRole);
     institutionItem->setData(QVariant::fromValue(*institution), AccountRole);
     institutionItem->setIcon(institution->pixmap());
@@ -986,11 +1167,11 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
   if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == MyMoneyAccount::Equity)
     return;
 
-  QStandardItem *accountItem = d->itemFromAccountId(this, account->id());
-  MyMoneyAccount oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
+  auto accountItem = d->itemFromAccountId(this, account->id());
+  const auto oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
   if (oldAccount.institutionId() == account->institutionId()) {
     // the hierarchy did not change so update the account data
-    d->setAccountData(this, accountItem->index(), *account);
+    d->setAccountData(accountItem->parent(), accountItem->row(), *account, d->m_columns);
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(MyMoneyFile::notifyAccount, oldAccount.id());
@@ -1006,45 +1187,24 @@ void InstitutionsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objTy
 {
   if (objType == MyMoneyFile::notifyInstitution) {
     // if an institution was removed then remove the item which represents it
-    QStandardItem *institutionItem = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, id);
-    if (institutionItem)
-      removeRow(institutionItem->row(), institutionItem->index().parent());
+    auto itInstitution = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, id);
+    if (itInstitution)
+      removeRow(itInstitution->row(), itInstitution->index().parent());
   }
 
   if (objType != MyMoneyFile::notifyAccount)
     return;
 
   // if an account was removed then remove the item which represents it and recompute the institution's value
-  QStandardItem *accountItem = d->itemFromAccountId(this, id);
-  if (!accountItem)
+  auto itAccount = d->itemFromAccountId(this, id);
+  if (!itAccount)
     return; // this could happen if the account isIncomeExpense
-  MyMoneyAccount oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
-  QStandardItem *institutionItem = d->itemFromAccountId(this, oldAccount.institutionId());
 
-  MyMoneyMoney accountTotalValue = accountItem->data(AccountTotalValueRole).value<MyMoneyMoney>();
-  if (oldAccount.accountGroup() == MyMoneyAccount::Liability) {
-    accountTotalValue = -accountTotalValue; // the account is a liability so change the account value sign
-  }
-
-  MyMoneyMoney institutionValue = institutionItem->data(AccountTotalValueRole).value<MyMoneyMoney>() - accountTotalValue;
-  institutionItem->setData(QVariant::fromValue(institutionValue), AccountTotalValueRole);
-  QModelIndex instIndex = institutionItem->index();
-  QModelIndex newIndex = index(instIndex.row(), instIndex.column() + TotalValue, instIndex.parent());
-  if (institutionValue.isNegative()) {
-    setData(newIndex, KMyMoneyGlobalSettings::listNegativeValueColor(), Qt::ForegroundRole);
-  } else {
-    setData(newIndex, KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color(), Qt::ForegroundRole);
-  }
-
-  QFont font;
-  font.setBold(true);
-
-  setData(newIndex, MyMoneyUtils::formatMoney(institutionValue, d->m_file->baseCurrency()), Qt::DisplayRole);
-  setData(newIndex, MyMoneyUtils::formatMoney(institutionValue, d->m_file->baseCurrency()), AccountTotalValueDisplayRole);
-  setData(newIndex, font, Qt::FontRole);
-  setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+  const auto account = itAccount->data(AccountRole).value<MyMoneyAccount>();
+  auto itInstitution = d->itemFromAccountId(this, account.institutionId());
 
   AccountsModel::slotObjectRemoved(objType, id);
+  d->setInstitutionTotalValue(invisibleRootItem(), itInstitution->row());
 }
 
 /**
@@ -1089,12 +1249,14 @@ AccountsFilterProxyModel::~AccountsFilterProxyModel()
   */
 bool AccountsFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+  if (!left.isValid() || !right.isValid())
+    return false;
   // different sorting based on the column which is being sorted
-  switch (left.column()) {
+  switch (m_mdlColumns->at(left.column())) {
       // for the accounts column sort based on the DisplayOrderRole
     case AccountsModel::Account: {
-        QVariant leftData = sourceModel()->data(left, AccountsModel::DisplayOrderRole);
-        QVariant rightData = sourceModel()->data(right, AccountsModel::DisplayOrderRole);
+        const auto leftData = sourceModel()->data(left, AccountsModel::DisplayOrderRole);
+        const auto rightData = sourceModel()->data(right, AccountsModel::DisplayOrderRole);
 
         if (leftData.toInt() == rightData.toInt()) {
           // sort items of the same display order alphabetically
@@ -1105,12 +1267,22 @@ bool AccountsFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
       // the total balance and value columns are sorted based on the value of the account
     case AccountsModel::TotalBalance:
     case AccountsModel::TotalValue: {
-        QVariant leftData = sourceModel()->data(sourceModel()->index(left.row(), 0, left.parent()), AccountsModel::AccountTotalValueRole);
-        QVariant rightData = sourceModel()->data(sourceModel()->index(right.row(), 0, right.parent()), AccountsModel::AccountTotalValueRole);
+        const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Account, left.parent()), AccountsModel::AccountTotalValueRole);
+        const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Account, right.parent()), AccountsModel::AccountTotalValueRole);
         return leftData.value<MyMoneyMoney>() < rightData.value<MyMoneyMoney>();
       }
+    default:
+      break;
   }
   return QSortFilterProxyModel::lessThan(left, right);
+}
+
+bool AccountsFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
+{
+  Q_UNUSED(source_parent)
+  if (m_visColumns->isEmpty() || m_visColumns->contains(m_mdlColumns->at(source_column)))
+      return true;
+  return false;
 }
 
 /**
@@ -1118,7 +1290,7 @@ bool AccountsFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
   */
 bool AccountsFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
+  const auto index = sourceModel()->index(source_row, AccountsModel::Account, source_parent);
   return acceptSourceItem(index) && filterAcceptsRowOrChildRows(source_row, source_parent);
 }
 
@@ -1128,12 +1300,11 @@ bool AccountsFilterProxyModel::filterAcceptsRow(int source_row, const QModelInde
   */
 bool AccountsFilterProxyModel::filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const
 {
-  if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent)) {
+  if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
     return true;
-  }
 
-  QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
-  for (int i = 0; i < sourceModel()->rowCount(index); ++i) {
+  const auto index = sourceModel()->index(source_row, AccountsModel::Account, source_parent);
+  for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
     if (filterAcceptsRowOrChildRows(i, index))
       return true;
   }
@@ -1145,29 +1316,39 @@ bool AccountsFilterProxyModel::filterAcceptsRowOrChildRows(int source_row, const
   * @param group The account group to be added.
   * @see MyMoneyAccount::accountTypeE
   */
-void AccountsFilterProxyModel::addAccountGroup(MyMoneyAccount::accountTypeE group)
+void AccountsFilterProxyModel::addAccountGroup(const QVector<MyMoneyAccount::_accountTypeE> &groups)
 {
-  if (group == MyMoneyAccount::Asset) {
-    d->m_typeList << MyMoneyAccount::Checkings;
-    d->m_typeList << MyMoneyAccount::Savings;
-    d->m_typeList << MyMoneyAccount::Cash;
-    d->m_typeList << MyMoneyAccount::AssetLoan;
-    d->m_typeList << MyMoneyAccount::CertificateDep;
-    d->m_typeList << MyMoneyAccount::Investment;
-    d->m_typeList << MyMoneyAccount::Stock;
-    d->m_typeList << MyMoneyAccount::MoneyMarket;
-    d->m_typeList << MyMoneyAccount::Asset;
-    d->m_typeList << MyMoneyAccount::Currency;
-  } else if (group == MyMoneyAccount::Liability) {
-    d->m_typeList << MyMoneyAccount::CreditCard;
-    d->m_typeList << MyMoneyAccount::Loan;
-    d->m_typeList << MyMoneyAccount::Liability;
-  } else if (group == MyMoneyAccount::Income) {
-    d->m_typeList << MyMoneyAccount::Income;
-  } else if (group == MyMoneyAccount::Expense) {
-    d->m_typeList << MyMoneyAccount::Expense;
-  } else if (group == MyMoneyAccount::Equity) {
-    d->m_typeList << MyMoneyAccount::Equity;
+  foreach (const auto group, groups) {
+    switch (group) {
+      case MyMoneyAccount::Asset:
+        d->m_typeList << MyMoneyAccount::Checkings;
+        d->m_typeList << MyMoneyAccount::Savings;
+        d->m_typeList << MyMoneyAccount::Cash;
+        d->m_typeList << MyMoneyAccount::AssetLoan;
+        d->m_typeList << MyMoneyAccount::CertificateDep;
+        d->m_typeList << MyMoneyAccount::Investment;
+        d->m_typeList << MyMoneyAccount::Stock;
+        d->m_typeList << MyMoneyAccount::MoneyMarket;
+        d->m_typeList << MyMoneyAccount::Asset;
+        d->m_typeList << MyMoneyAccount::Currency;
+        break;
+      case MyMoneyAccount::Liability:
+        d->m_typeList << MyMoneyAccount::CreditCard;
+        d->m_typeList << MyMoneyAccount::Loan;
+        d->m_typeList << MyMoneyAccount::Liability;
+        break;
+      case MyMoneyAccount::Income:
+        d->m_typeList << MyMoneyAccount::Income;
+        break;
+      case MyMoneyAccount::Expense:
+        d->m_typeList << MyMoneyAccount::Expense;
+        break;
+      case MyMoneyAccount::Equity:
+        d->m_typeList << MyMoneyAccount::Equity;
+        break;
+      default:
+        break;
+    }
   }
   invalidate();
 }
@@ -1210,10 +1391,10 @@ void AccountsFilterProxyModel::clear()
 bool AccountsFilterProxyModel::acceptSourceItem(const QModelIndex &source) const
 {
   if (source.isValid()) {
-    QVariant data = sourceModel()->data(source, AccountsModel::AccountRole);
+    const auto data = sourceModel()->data(source, AccountsModel::AccountRole);
     if (data.isValid()) {
       if (data.canConvert<MyMoneyAccount>()) {
-        MyMoneyAccount account = data.value<MyMoneyAccount>();
+        const auto account = data.value<MyMoneyAccount>();
         if ((hideClosedAccounts() && account.isClosed()))
           return false;
 
@@ -1227,7 +1408,7 @@ bool AccountsFilterProxyModel::acceptSourceItem(const QModelIndex &source) const
 
         // we hide unused income and expense accounts if the specific flag is set
         if ((account.accountType() == MyMoneyAccount::Income || account.accountType() == MyMoneyAccount::Expense) && hideUnusedIncomeExpenseAccounts()) {
-          QVariant totalValue = sourceModel()->data(source, AccountsModel::AccountTotalValueRole);
+          const auto totalValue = sourceModel()->data(source, AccountsModel::AccountTotalValueRole);
           if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
             emit unusedIncomeExpenseAccountHidden();
             return false;
@@ -1236,8 +1417,7 @@ bool AccountsFilterProxyModel::acceptSourceItem(const QModelIndex &source) const
 
         if (d->m_typeList.contains(account.accountType()))
           return true;
-      }
-      if (data.canConvert<MyMoneyInstitution>() && sourceModel()->rowCount(source) == 0) {
+      } else if (data.canConvert<MyMoneyInstitution>() && sourceModel()->rowCount(source) == 0) {
         // if this is an institution that has no children show it only if hide unused institutions (hide closed accounts for now) is not checked
         return !hideClosedAccounts();
       }
@@ -1245,9 +1425,9 @@ bool AccountsFilterProxyModel::acceptSourceItem(const QModelIndex &source) const
     }
 
     // all parents that have at least one visible child must be visible
-    int rowCount = sourceModel()->rowCount(source);
-    for (int i = 0; i < rowCount; ++i) {
-      QModelIndex index = sourceModel()->index(i, 0, source);
+    const auto rowCount = sourceModel()->rowCount(source);
+    for (auto i = 0; i < rowCount; ++i) {
+      const auto index = sourceModel()->index(i, AccountsModel::Account, source);
       if (acceptSourceItem(index))
         return true;
     }
@@ -1322,12 +1502,12 @@ bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts() const
   */
 int AccountsFilterProxyModel::visibleItems(bool includeBaseAccounts) const
 {
-  int rows = 0;
-  for (int i = 0; i < rowCount(QModelIndex()); ++i) {
+  auto rows = 0;
+  for (auto i = 0; i < rowCount(QModelIndex()); ++i) {
     if(includeBaseAccounts) {
       ++rows;
     }
-    QModelIndex childIndex = index(i, 0);
+    const auto childIndex = index(i, 0);
     if (hasChildren(childIndex)) {
       rows += visibleItems(childIndex);
     }
@@ -1342,16 +1522,29 @@ int AccountsFilterProxyModel::visibleItems(bool includeBaseAccounts) const
   */
 int AccountsFilterProxyModel::visibleItems(const QModelIndex& index) const
 {
-  int rows = 0;
-  if (index.isValid() && index.column() == 0) {
-    const QAbstractItemModel *model = index.model();
-    for (int i = 0; i < model->rowCount(index); ++i) {
+  auto rows = 0;
+  if (index.isValid() && index.column() == AccountsModel::Account) { // CAUTION! Assumption is being made that Account column number is always 0
+    const auto *model = index.model();
+    const auto rowCount = model->rowCount(index);
+    for (auto i = 0; i < rowCount; ++i) {
       ++rows;
-      QModelIndex childIndex = model->index(i, index.column(), index);
-      if (model->hasChildren(childIndex)) {
+      const auto childIndex = model->index(i, index.column(), index);
+      if (model->hasChildren(childIndex))
         rows += visibleItems(childIndex);
-      }
     }
   }
   return rows;
+}
+
+void AccountsFilterProxyModel::init(AccountsModel *model, QList<AccountsModel::Columns> *visColumns)
+{
+  m_mdlColumns = model->getColumns();
+  m_visColumns = visColumns;
+  setSourceModel(model);
+}
+
+void AccountsFilterProxyModel::init(AccountsModel *model)
+{
+  setSourceModel(model);
+  m_visColumns = m_mdlColumns = model->getColumns();
 }

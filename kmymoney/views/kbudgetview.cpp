@@ -5,6 +5,7 @@
     copyright            : (C) 2006 by Darren Gould
     email                : darren_gould@gmx.de
                            Alvaro Soliverez <asoliverez@gmail.com>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -115,8 +116,7 @@ const int KBudgetView::m_iBudgetYearsBack = 3;
 BudgetAccountsProxyModel::BudgetAccountsProxyModel(QObject *parent/* = 0*/) :
     AccountsViewFilterProxyModel(parent)
 {
-  addAccountGroup(MyMoneyAccount::Income);
-  addAccountGroup(MyMoneyAccount::Expense);
+  addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Income, MyMoneyAccount::Expense});
 }
 
 /**
@@ -127,41 +127,43 @@ QVariant BudgetAccountsProxyModel::data(const QModelIndex &index, int role) cons
 {
   if (!MyMoneyFile::instance()->storageAttached())
     return QVariant();
-  QModelIndex normalizedIndex = BudgetAccountsProxyModel::index(index.row(), 0, index.parent());
-  if (role == AccountsModel::AccountBalanceRole ||
-      role == AccountsModel::AccountBalanceDisplayRole ||
-      role == AccountsModel::AccountValueRole ||
-      role == AccountsModel::AccountValueDisplayRole) {
-    QVariant accountData = data(normalizedIndex, AccountsModel::AccountRole);
-    if (accountData.canConvert<MyMoneyAccount>()) {
-      MyMoneyAccount account = accountData.value<MyMoneyAccount>();
-      MyMoneyMoney balance = accountBalance(account.id());
-      MyMoneyMoney value = accountValue(account, balance);
-      switch (role) {
-        case AccountsModel::AccountBalanceRole:
-          return QVariant::fromValue(balance);
-        case AccountsModel::AccountBalanceDisplayRole:
-          if (MyMoneyFile::instance()->security(account.currencyId()) != MyMoneyFile::instance()->baseCurrency()) {
-            return MyMoneyUtils::formatMoney(balance, MyMoneyFile::instance()->security(account.currencyId()));
-          } else {
-            return QVariant();
-          }
-        case AccountsModel::AccountValueRole:
-          return QVariant::fromValue(value);
-        case AccountsModel::AccountValueDisplayRole:
-          return MyMoneyUtils::formatMoney(value, MyMoneyFile::instance()->baseCurrency());
-      }
-    }
-  }
-  if (role == AccountsModel::AccountTotalValueRole ||
-      role == AccountsModel::AccountTotalValueDisplayRole) {
-    MyMoneyMoney totalValue = computeTotalValue(mapToSource(normalizedIndex));
-    switch (role) {
-      case AccountsModel::AccountTotalValueRole:
-        return QVariant::fromValue(totalValue);
-      case AccountsModel::AccountTotalValueDisplayRole:
-        return MyMoneyUtils::formatMoney(totalValue, MyMoneyFile::instance()->baseCurrency());
-    }
+  const auto sourceColumn = m_mdlColumns->at(mapToSource(index).column());
+  static QVector<AccountsModel::Columns> columnsToProcess {AccountsModel::TotalBalance, AccountsModel::TotalValue/*, AccountsModel::PostedValue*/, AccountsModel::Account};
+  if (columnsToProcess.contains(sourceColumn)) {
+        const auto ixAccount = mapToSource(BudgetAccountsProxyModel::index(index.row(), AccountsModel::Account, index.parent()));
+        const auto account = ixAccount.data(AccountsModel::AccountRole).value<MyMoneyAccount>();
+        auto const file = MyMoneyFile::instance();
+
+        switch (role) {
+          case Qt::DisplayRole:
+            {
+              switch (sourceColumn) {
+                case AccountsModel::TotalBalance:
+                  if (file->security(account.currencyId()) != file->baseCurrency())
+                    return QVariant(MyMoneyUtils::formatMoney(accountBalance(account.id()), file->security(account.currencyId())));
+                  else
+                    return QVariant();
+                case AccountsModel::TotalValue:
+                  return QVariant(MyMoneyUtils::formatMoney(computeTotalValue(ixAccount), file->baseCurrency()));
+                  // FIXME: Posted value doesn't correspond with total value without below code. Investigate why and wheather it matters.
+                  //              case AccountsModel::PostedValue:
+                  //                return QVariant(MyMoneyUtils::formatMoney(accountValue(account, accountBalance(account.id())), file->baseCurrency()));
+                default:
+                  break;
+              }
+            }
+          case AccountsModel::AccountBalanceRole:
+            if (file->security(account.currencyId()) != file->baseCurrency())
+              return QVariant::fromValue(accountBalance(account.id()));
+            else
+              return QVariant();
+          case AccountsModel::AccountTotalValueRole:
+            return QVariant::fromValue(computeTotalValue(ixAccount));
+          case AccountsModel::AccountValueRole:
+            return QVariant::fromValue(accountValue(account, accountBalance(account.id())));
+          default:
+            break;
+        }
   }
   return AccountsViewFilterProxyModel::data(index, role);
 }
@@ -203,18 +205,18 @@ void BudgetAccountsProxyModel::setBudget(const MyMoneyBudget& budget)
 bool BudgetAccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (hideUnusedIncomeExpenseAccounts()) {
-    QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
-    QVariant accountData = sourceModel()->data(index, AccountsModel::AccountRole);
+    const auto index = sourceModel()->index(source_row, AccountsModel::Account, source_parent);
+    const auto accountData = sourceModel()->data(index, AccountsModel::AccountRole);
     if (accountData.canConvert<MyMoneyAccount>()) {
-      MyMoneyAccount account = accountData.value<MyMoneyAccount>();
+      const auto account = accountData.value<MyMoneyAccount>();
       MyMoneyMoney balance;
       // find out if the account is budgeted
-      MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(account.id());
+      const auto budgetAccount = m_budget.account(account.id());
       if (budgetAccount.id() == account.id()) {
         balance = budgetAccount.balance();
         switch (budgetAccount.budgetLevel()) {
           case MyMoneyBudget::AccountGroup::eMonthly:
-            balance = balance * 12;
+            balance *= MyMoneyMoney(12);
             break;
           default:
             break;
@@ -223,20 +225,13 @@ bool BudgetAccountsProxyModel::filterAcceptsRow(int source_row, const QModelInde
       if (!balance.isZero())
         return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);
     }
-    for (int i = 0; i < sourceModel()->rowCount(index); ++i) {
+    for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
       if (filterAcceptsRow(i, index))
         return AccountsFilterProxyModel::filterAcceptsRow(i, index);
     }
     return false;
   }
   return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);
-}
-
-bool BudgetAccountsProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
-{
-  if (source_column == AccountsModel::Tax || source_column == AccountsModel::VAT)
-    return false;
-  return AccountsFilterProxyModel::filterAcceptsColumn(source_column, source_parent);
 }
 
 MyMoneyMoney BudgetAccountsProxyModel::accountBalance(const QString &accountId) const
@@ -248,7 +243,7 @@ MyMoneyMoney BudgetAccountsProxyModel::accountBalance(const QString &accountId) 
     balance = budgetAccount.balance();
     switch (budgetAccount.budgetLevel()) {
       case MyMoneyBudget::AccountGroup::eMonthly:
-        balance = balance * 12;
+        balance *= MyMoneyMoney(12);
         break;
       default:
         break;
@@ -264,15 +259,11 @@ MyMoneyMoney BudgetAccountsProxyModel::accountValue(const MyMoneyAccount &accoun
 
 MyMoneyMoney BudgetAccountsProxyModel::computeTotalValue(const QModelIndex &source_index) const
 {
-  MyMoneyMoney totalValue;
-  QVariant accountData = sourceModel()->data(source_index, AccountsModel::AccountRole);
-  if (accountData.canConvert<MyMoneyAccount>()) {
-    MyMoneyAccount account = accountData.value<MyMoneyAccount>();
-    totalValue = accountValue(account, accountBalance(account.id()));
-    for (int i = 0; i < sourceModel()->rowCount(source_index); ++i) {
-      totalValue += computeTotalValue(sourceModel()->index(i, 0, source_index));
-    }
-  }
+  auto model = sourceModel();
+  auto account = model->data(source_index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+  auto totalValue = accountValue(account, accountBalance(account.id()));
+  for (auto i = 0; i < model->rowCount(source_index); ++i)
+    totalValue += computeTotalValue(model->index(i, AccountsModel::Account, source_index));
   return totalValue;
 }
 
@@ -306,8 +297,10 @@ void BudgetAccountsProxyModel::checkBalance()
   }
 }
 
-KBudgetView::KBudgetView(QWidget *parent) :
-    QWidget(parent),
+KBudgetView::KBudgetView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview) :
+    QWidget(nullptr),
+    m_kmymoney(kmymoney),
+    m_kmymoneyview(kmymoneyview),
     m_needReload(false),
     m_needLoad(true),
     m_inSelection(false)
@@ -322,6 +315,21 @@ KBudgetView::~KBudgetView()
     grp.writeEntry("KBudgetViewSplitterSize", m_splitter->saveState());
     grp.sync();
   }
+}
+
+KRecursiveFilterProxyModel *KBudgetView::getProxyModel()
+{
+  return m_filterProxyModel;
+}
+
+QList<AccountsModel::Columns> *KBudgetView::getProxyColumns()
+{
+  return m_accountTree->getColumns(KMyMoneyView::View::Budget);
+}
+
+bool KBudgetView::isLoaded()
+{
+  return !m_needLoad;
 }
 
 void KBudgetView::init()
@@ -367,70 +375,65 @@ void KBudgetView::init()
   KGuiItem::assign(m_resetButton, resetButtonItem);
   m_resetButton->setToolTip(resetButtonItem.toolTip());
 
-  KGuiItem collapseGuiItem(QString(),
-                           QIcon::fromTheme(g_Icons[Icon::ListCollapse]),
-                           QString(),
-                           QString());
-  KGuiItem expandGuiItem(QString(),
-                         QIcon::fromTheme(g_Icons[Icon::ListExpand]),
-                         QString(),
-                         QString());
-  KGuiItem::assign(m_collapseButton, collapseGuiItem);
-  KGuiItem::assign(m_expandButton, expandGuiItem);
+  m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+  m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
 
   m_filterProxyModel = new BudgetAccountsProxyModel(this);
-  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+
+  auto const model = Models::instance()->accountsModel();
+  m_filterProxyModel->init(model, getProxyColumns());
   m_filterProxyModel->setFilterKeyColumn(-1);
+  m_accountTree->init(m_filterProxyModel, model->getColumns());
 
-  m_accountTree->setModel(m_filterProxyModel);
-  m_accountTree->setConfigGroupName("KBudgetsView");
-  m_accountTree->setAlternatingRowColors(true);
-  m_accountTree->setIconSize(QSize(22, 22));
-  m_accountTree->setSortingEnabled(true);
+  connect(this, &KBudgetView::openContextMenu, m_kmymoney, &KMyMoneyApp::slotShowBudgetContextMenu);
+  connect(this, &KBudgetView::selectObjects, m_kmymoney, &KMyMoneyApp::slotSelectBudget);
+  connect(m_kmymoney, &KMyMoneyApp::budgetRename, this, &KBudgetView::slotStartRename);
+  connect(this, &KBudgetView::aboutToShow, m_kmymoneyview, &KMyMoneyView::aboutToChangeView);
 
-  connect(m_filterProxyModel, SIGNAL(balanceChanged(MyMoneyMoney)), this, SLOT(slotBudgetBalanceChanged(MyMoneyMoney)));
+  connect(m_filterProxyModel, &BudgetAccountsProxyModel::balanceChanged, this, &KBudgetView::slotBudgetBalanceChanged);
 
   // let the model know if the item is expanded or collapsed
-  connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
-  connect(m_accountTree, SIGNAL(expanded(QModelIndex)), m_filterProxyModel, SLOT(expanded(QModelIndex)));
+  connect(m_accountTree, &QTreeView::collapsed, m_filterProxyModel, &AccountsViewFilterProxyModel::collapsed);
+  connect(m_accountTree, &QTreeView::expanded, m_filterProxyModel, &AccountsViewFilterProxyModel::expanded);
+  connect(m_accountTree, &KMyMoneyAccountTreeView::columnToggled , m_kmymoneyview, &KMyMoneyView::slotAccountTreeViewChanged);
 
   connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), this, SLOT(slotSelectAccount(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInvestment(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
-  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), m_kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), m_kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), m_kmymoney, SLOT(slotSelectInvestment(MyMoneyObject)));
+  connect(m_accountTree, &KMyMoneyAccountTreeView::openContextMenu, m_kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
+  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), m_kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
 
-  connect(m_budgetList, SIGNAL(customContextMenuRequested(QPoint)),
-          this, SLOT(slotOpenContextMenu(QPoint)));
-  connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(slotSelectBudget()));
-  connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+  connect(m_budgetList, &QWidget::customContextMenuRequested,
+          this, &KBudgetView::slotOpenContextMenu);
+  connect(m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, this, &KBudgetView::slotSelectBudget);
+  connect(m_budgetList, &QTreeWidget::itemChanged, this, &KBudgetView::slotItemChanged);
 
-  connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
+  connect(m_cbBudgetSubaccounts, &QAbstractButton::clicked, this, &KBudgetView::cb_includesSubaccounts_clicked);
 
   // connect the buttons to the actions. Make sure the enabled state
   // of the actions is reflected by the buttons
-  connect(m_renameButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename]), SLOT(trigger()));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete]), SLOT(trigger()));
+  connect(m_renameButton, &QAbstractButton::clicked, kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename]), &QAction::trigger);
+  connect(m_deleteButton, &QAbstractButton::clicked, kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete]), &QAction::trigger);
 
-  connect(m_budgetValue, SIGNAL(valuesChanged()), this, SLOT(slotBudgetedAmountChanged()));
+  connect(m_budgetValue, &KBudgetValues::valuesChanged, this, &KBudgetView::slotBudgetedAmountChanged);
 
-  connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewBudget()));
-  connect(m_updateButton, SIGNAL(pressed()), this, SLOT(slotUpdateBudget()));
-  connect(m_resetButton, SIGNAL(pressed()), this, SLOT(slotResetBudget()));
+  connect(m_newButton, &QAbstractButton::clicked, this, &KBudgetView::slotNewBudget);
+  connect(m_updateButton, &QAbstractButton::pressed, this, &KBudgetView::slotUpdateBudget);
+  connect(m_resetButton, &QAbstractButton::pressed, this, &KBudgetView::slotResetBudget);
 
-  connect(m_hideUnusedButton, SIGNAL(toggled(bool)), this, SLOT(slotHideUnused(bool)));
+  connect(m_hideUnusedButton, &QAbstractButton::toggled, this, &KBudgetView::slotHideUnused);
 
-  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
-  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_collapseButton, &QAbstractButton::clicked, this, &KBudgetView::slotExpandCollapse);
+  connect(m_expandButton, &QAbstractButton::clicked, this, &KBudgetView::slotExpandCollapse);
 
   // connect the two buttons to all required slots
-  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
-  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
-  connect(m_accountTree, SIGNAL(collapsedAll()), m_filterProxyModel, SLOT(collapseAll()));
-  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
-  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
-  connect(m_accountTree, SIGNAL(expandedAll()), m_filterProxyModel, SLOT(expandAll()));
+  connect(m_collapseButton, &QAbstractButton::clicked, this, &KBudgetView::slotExpandCollapse);
+  connect(m_collapseButton, &QAbstractButton::clicked, m_accountTree, &KMyMoneyAccountTreeView::collapseAll);
+  connect(m_accountTree, &KMyMoneyAccountTreeView::collapsedAll, m_filterProxyModel, &AccountsViewFilterProxyModel::collapseAll);
+  connect(m_expandButton, &QAbstractButton::clicked, this, &KBudgetView::slotExpandCollapse);
+  connect(m_expandButton, &QAbstractButton::clicked, m_accountTree, &KMyMoneyAccountTreeView::expandAll);
+  connect(m_accountTree, &KMyMoneyAccountTreeView::expandedAll, m_filterProxyModel, &AccountsViewFilterProxyModel::expandAll);
 
   connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
 
@@ -439,7 +442,7 @@ void KBudgetView::init()
   m_renameButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename])->isEnabled());
   m_deleteButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete])->isEnabled());
 
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KBudgetView::slotRefreshView);
 
   KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
@@ -893,19 +896,5 @@ void KBudgetView::slotUpdateBudget()
 
 void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
 {
-  QString s(i18nc("The balance of the selected budget", "Balance: "));
-
-  s.replace(QString(" "), QString("&nbsp;"));
-  if (balance.isNegative()) {
-    s += "<b><font color=\"red\">";
-  }
-  const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
-  QString v(MyMoneyUtils::formatMoney(balance, sec));
-  s += v.replace(QString(" "), QString("&nbsp;"));
-  if (balance.isNegative()) {
-    s += "</font></b>";
-  }
-
-  m_balanceLabel->setFont(KMyMoneyGlobalSettings::listCellFont());
-  m_balanceLabel->setText(s);
+  m_kmymoneyview->slotNetBalProChanged(balance, m_balanceLabel, KMyMoneyView::View::Budget);
 }

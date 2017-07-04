@@ -1019,15 +1019,13 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QLabel *label1 = new QLabel(i18n("Please select a default category for payee '%1'", payeename));
           topcontents->addWidget(label1);
 
-          AccountNamesFilterProxyModel *filterProxyModel = new AccountNamesFilterProxyModel(this);
+          auto filterProxyModel = new AccountNamesFilterProxyModel(this);
           filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-          filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
-          filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
-          filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
-          filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
-          filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
-          filterProxyModel->setSourceModel(Models::instance()->accountsModel());
-          filterProxyModel->sort(0);
+          filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity, MyMoneyAccount::Income, MyMoneyAccount::Expense});
+
+          auto const model = Models::instance()->accountsModel();
+          filterProxyModel->init(model,model->getColumns());
+          filterProxyModel->sort(AccountsModel::Account);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel);
           topcontents->addWidget(accountCombo);

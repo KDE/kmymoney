@@ -1,8 +1,9 @@
 /***************************************************************************
                           kmymoneyview.cpp
                              -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
+    copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
                                2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -108,8 +109,8 @@ using namespace Icons;
 static constexpr KCompressionDevice::CompressionType COMPRESSION_TYPE = KCompressionDevice::GZip;
 static constexpr char recoveryKeyId[] = "0xD2B08440";
 
-KMyMoneyView::KMyMoneyView(QObject *kmymoney, QWidget *parent)
-    : KPageWidget(parent),
+KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
+    : KPageWidget(nullptr),
     m_header(0),
     m_inConstructor(true),
     m_fileOpen(false),
@@ -162,29 +163,14 @@ KMyMoneyView::KMyMoneyView(QObject *kmymoney, QWidget *parent)
   connect(m_homeView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 1
-  m_institutionsView = new KInstitutionsView();
+  m_institutionsView = new KInstitutionsView(kmymoney, this);
   viewFrames[View::Institutions] = m_model->addPage(m_institutionsView, i18n("Institutions"));
   viewFrames[View::Institutions]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewInstitutions]));
 
-  connect(m_institutionsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
-  connect(m_institutionsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
-  connect(m_institutionsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
-  connect(m_institutionsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowInstitutionContextMenu(MyMoneyObject)));
-  connect(m_institutionsView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotInstitutionEdit(MyMoneyObject)));
-  connect(m_institutionsView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
-  connect(m_institutionsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
-
   // Page 2
-  m_accountsView = new KAccountsView();
+  m_accountsView = new KAccountsView(kmymoney, this);
   viewFrames[View::Accounts] = m_model->addPage(m_accountsView, i18n("Accounts"));
   viewFrames[View::Accounts]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewAccounts]));
-
-  connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
-  connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
-  connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInvestment(MyMoneyObject)));
-  connect(m_accountsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
-  connect(m_accountsView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
-  connect(m_accountsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 3
   m_scheduledView = new KScheduledView();
@@ -200,16 +186,9 @@ KMyMoneyView::KMyMoneyView(QObject *kmymoney, QWidget *parent)
   connect(m_scheduledView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 4
-  m_categoriesView = new KCategoriesView();
+  m_categoriesView = new KCategoriesView(kmymoney, this);
   viewFrames[View::Categories] = m_model->addPage(m_categoriesView, i18n("Categories"));
   viewFrames[View::Categories]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewCategories]));
-
-  connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
-  connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
-  connect(m_categoriesView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
-  connect(m_categoriesView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
-  connect(m_categoriesView, SIGNAL(reparent(MyMoneyAccount,MyMoneyAccount)), kmymoney, SLOT(slotReparentAccount(MyMoneyAccount,MyMoneyAccount)));
-  connect(m_categoriesView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
 // Page 5
   m_tagsView = new KTagsView();
@@ -274,14 +253,9 @@ KMyMoneyView::KMyMoneyView(QObject *kmymoney, QWidget *parent)
   connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 10
-  m_budgetView = new KBudgetView();
+  m_budgetView = new KBudgetView(kmymoney, this);
   viewFrames[View::Budget] = m_model->addPage(m_budgetView, i18n("Budgets"));
   viewFrames[View::Budget]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewBudgets]));
-
-  connect(m_budgetView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowBudgetContextMenu()));
-  connect(m_budgetView, SIGNAL(selectObjects(QList<MyMoneyBudget>)), kmymoney, SLOT(slotSelectBudget(QList<MyMoneyBudget>)));
-  connect(kmymoney, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
-  connect(m_budgetView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 11
   m_forecastView = new KForecastView();
@@ -361,6 +335,98 @@ void KMyMoneyView::updateViewType()
       }
     }
   }
+}
+
+void KMyMoneyView::slotAccountTreeViewChanged(const AccountsModel::Columns column, const bool show)
+{
+  struct viewInfo {
+    KRecursiveFilterProxyModel    *proxyModel;
+    QList<AccountsModel::Columns> *proxyColumns;
+  };
+
+  QList<viewInfo> viewInfos;
+  if (m_institutionsView->isLoaded())
+      viewInfos.append({m_institutionsView->getProxyModel(), m_institutionsView->getProxyColumns()});
+  if (m_accountsView->isLoaded())
+      viewInfos.append({m_accountsView->getProxyModel(), m_accountsView->getProxyColumns()});
+  if (m_categoriesView->isLoaded())
+      viewInfos.append({m_categoriesView->getProxyModel(), m_categoriesView->getProxyColumns()});
+  if (m_budgetView->isLoaded())
+      viewInfos.append({m_budgetView->getProxyModel(), m_budgetView->getProxyColumns()});
+
+  if (show) {
+    Models::instance()->accountsModel()->setColumnVisibility(column, show);
+    Models::instance()->institutionsModel()->setColumnVisibility(column, show);
+    if (viewInfos.count() == 1 ||
+        KMessageBox::questionYesNo(this,
+                                   i18n("Do you want to show <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column)),
+                                   QString(),
+                                   KStandardGuiItem::yes(), KStandardGuiItem::no(),
+                                   QStringLiteral("ShowColumnOnEveryView")) == KMessageBox::Yes) {
+      foreach(viewInfo view, viewInfos) {
+        if (!view.proxyColumns->contains(column)) {
+          view.proxyColumns->append(column);
+          view.proxyModel->invalidate();
+        }
+      }
+    }
+  } else {
+    if (viewInfos.count() == 1 ||
+        KMessageBox::questionYesNo(this,
+                                   i18n("Do you want to hide <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column)),
+                                   QString(),
+                                   KStandardGuiItem::yes(), KStandardGuiItem::no(),
+                                   QStringLiteral("HideColumnOnEveryView")) == KMessageBox::Yes) {
+      Models::instance()->accountsModel()->setColumnVisibility(column, show);
+      Models::instance()->institutionsModel()->setColumnVisibility(column, show);
+      foreach(viewInfo view, viewInfos) {
+        if (view.proxyColumns->contains(column)) {
+          view.proxyColumns->removeOne(column);
+          view.proxyModel->invalidate();
+        }
+      }
+    }
+  }
+}
+
+void KMyMoneyView::slotNetBalProChanged(const MyMoneyMoney &val, QLabel *label, const View view)
+{
+  QString s;
+  const auto isNegative = val.isNegative();
+  switch (view) {
+    case View::Institutions:
+    case View::Accounts:
+      s = i18n("Net Worth: ");
+      break;
+    case View::Categories:
+      if (isNegative)
+        s = i18n("Loss: ");
+      else
+        s = i18n("Profit: ");
+      break;
+    case View::Budget:
+      s = (i18nc("The balance of the selected budget", "Balance: "));
+      break;
+    default:
+      return;
+  }
+
+  // FIXME figure out how to deal with the approximate
+  // if(!(file->totalValueValid(assetAccount.id()) & file->totalValueValid(liabilityAccount.id())))
+  //  s += "~ ";
+
+  s.replace(QLatin1Char(' '), QLatin1String("&nbsp;"));
+
+  if (isNegative)
+    s.append(QLatin1String("<b><font color=\"red\">"));
+  const auto sec = MyMoneyFile::instance()->baseCurrency();
+  QString v(MyMoneyUtils::formatMoney(val, sec));
+  s.append((v.replace(QLatin1Char(' '), QLatin1String("&nbsp;"))));
+  if (isNegative)
+    s.append(QLatin1String("</font></b>"));
+
+  label->setFont(KMyMoneyGlobalSettings::listCellFont());
+  label->setText(s);
 }
 
 bool KMyMoneyView::showPageHeader() const

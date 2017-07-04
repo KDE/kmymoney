@@ -137,14 +137,15 @@ void KInvestmentView::init()
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountType(MyMoneyAccount::Investment);
   d->m_filterProxyModel->setHideEquityAccounts(false);
-  d->m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
-  d->m_filterProxyModel->sort(0);
+  auto const model = Models::instance()->accountsModel();
+  d->m_filterProxyModel->init(model, model->getColumns());
+  d->m_filterProxyModel->sort(AccountsModel::Account);
   m_accountComboBox->setModel(d->m_filterProxyModel);
 
   m_investmentsList->setContextMenuPolicy(Qt::CustomContextMenu);
   m_investmentsList->setSortingEnabled(true);
 
-  for (int i = 0; i < MaxViewTabs; ++i)
+  for (auto i = 0; i < MaxViewTabs; ++i)
     d->m_needReload[i] = false;
 
   connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));

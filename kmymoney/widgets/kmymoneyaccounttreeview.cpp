@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -32,41 +33,51 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneyinstitution.h>
+#include <models.h>
 
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     : QTreeView(parent)
 {
   setContextMenuPolicy(Qt::CustomContextMenu);
-  connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customContextMenuRequested(QPoint)));
+  header()->setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(this, &QWidget::customContextMenuRequested, this, &KMyMoneyAccountTreeView::customContextMenuRequested);
+  connect(this->header(), &QWidget::customContextMenuRequested, this, &KMyMoneyAccountTreeView::customHeaderContextMenuRequested);
   setAllColumnsShowFocus(true);
+  setAlternatingRowColors(true);
+  setIconSize(QSize(22, 22));
+  setSortingEnabled(true);
+  m_view = KMyMoneyView::View::None;
 }
 
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
-  if (!m_groupName.isEmpty()) {
-    KConfigGroup grp = KSharedConfig::openConfig()->group(m_groupName);
-    QByteArray columns = header()->saveState();
+  if (m_view != KMyMoneyView::View::None) {
+    auto grp = KSharedConfig::openConfig()->group(getConfGrpName(m_view));
+    const auto columns = header()->saveState();
     grp.writeEntry("HeaderState", columns);
+    QList<int> visColumns;
+    foreach (const auto column, m_visColumns)
+      visColumns.append(static_cast<int>(column));
+    grp.writeEntry("ColumnsSelection", visColumns);
+    grp.sync();
   }
 }
 
-/**
-  * Set the name of the configuration group where the view's persistent data is saved to @param group .
-  */
-void KMyMoneyAccountTreeView::setConfigGroupName(const QString& group)
+void KMyMoneyAccountTreeView::init(QAbstractItemModel *model, QList<AccountsModel::Columns> *columns)
 {
-  if (!group.isEmpty()) {
-    m_groupName = group;
+  setModel(model);
+  m_mdlColumns = columns;
+  if (m_view != KMyMoneyView::View::None) {
     // restore the headers
-    KConfigGroup grp = KSharedConfig::openConfig()->group(m_groupName);
-    QByteArray columns;
-    columns = grp.readEntry("HeaderState", columns);
-    header()->restoreState(columns);
+    const auto grp = KSharedConfig::openConfig()->group(getConfGrpName(m_view));
+    const auto columnNames = grp.readEntry("HeaderState", QByteArray());
+    header()->restoreState(columnNames);
   }
 }
 
@@ -101,12 +112,27 @@ void KMyMoneyAccountTreeView::openIndex(const QModelIndex &index)
   }
 }
 
-void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
+QString KMyMoneyAccountTreeView::getConfGrpName(const KMyMoneyView::View view)
 {
-  Q_UNUSED(pos)
-  QModelIndex index = model()->index(currentIndex().row(), AccountsModel::Account, currentIndex().parent());
+  switch (view) {
+    case KMyMoneyView::View::Institutions:
+      return QStringLiteral("KInstitutionsView");
+    case KMyMoneyView::View::Accounts:
+      return QStringLiteral("KAccountsView");
+    case KMyMoneyView::View::Categories:
+        return QStringLiteral("KCategoriesView");
+    case KMyMoneyView::View::Budget:
+      return QStringLiteral("KBudgetsView");
+    default:
+      return QString();
+  }
+}
+
+void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
+{
+  const auto index = model()->index(currentIndex().row(), AccountsModel::Account, currentIndex().parent());
   if (index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    QVariant data = model()->data(index, AccountsModel::AccountRole);
+    const auto data = model()->data(index, AccountsModel::AccountRole);
     if (data.isValid()) {
       if (data.canConvert<MyMoneyAccount>()) {
         emit selectObject(data.value<MyMoneyAccount>());
@@ -120,13 +146,62 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
   }
 }
 
+void KMyMoneyAccountTreeView::customHeaderContextMenuRequested(const QPoint)
+{
+  const QList<AccountsModel::Columns> defColumns = { AccountsModel::Type, AccountsModel::Tax,
+                                                     AccountsModel::VAT, AccountsModel::CostCenter,
+                                                     AccountsModel::TotalBalance, AccountsModel::PostedValue,
+                                                     AccountsModel::TotalValue, AccountsModel::AccountNumber,
+                                                     AccountsModel::AccountSortCode
+                                                   };
+
+  m_menu = new QMenu(i18n("Displayed columns"));
+  QList<QAction *> actions;
+  foreach (const auto column, defColumns) {
+    auto a = new QAction();
+    a->setObjectName(QString::number(column));
+    a->setText(AccountsModel::getHeaderName(column));
+    a->setCheckable(true);
+    a->setChecked(m_visColumns.contains(column));
+    connect(a, &QAction::toggled, this, &KMyMoneyAccountTreeView::slotColumnToggled);
+    actions.append(a);
+  }
+
+  m_menu->addActions(actions);
+  m_menu->exec(QCursor::pos());
+  connect(m_menu, &QMenu::aboutToHide, this, &QMenu::deleteLater);
+}
+
+void KMyMoneyAccountTreeView::slotColumnToggled(bool)
+{
+  QList<AccountsModel::Columns> selColumns;
+  selColumns.append(AccountsModel::Account);
+  const auto actions = m_menu->actions();
+  foreach (const auto action, actions) {
+    const auto columnID = static_cast<AccountsModel::Columns>(action->objectName().toInt());
+    const auto isChecked = action->isChecked();
+    const auto contains = m_visColumns.contains(columnID);
+    if (isChecked && !contains) {
+      m_visColumns.append(columnID);
+      emit columnToggled(columnID, true);
+      break;
+    } else if (!isChecked && contains) {
+      m_visColumns.removeOne(columnID);
+      emit columnToggled(columnID, false);
+      break;
+    }
+  }
+  auto mdl = qobject_cast<KRecursiveFilterProxyModel *>(model());
+  mdl->invalidate();
+}
+
 void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
   QTreeView::selectionChanged(selected, deselected);
   if (!selected.empty()) {
-    QModelIndexList indexes = selected.front().indexes();
+    auto indexes = selected.front().indexes();
     if (!indexes.empty()) {
-      QVariant data = model()->data(model()->index(indexes.front().row(), AccountsModel::Account, indexes.front().parent()), AccountsModel::AccountRole);
+      const auto data = model()->data(model()->index(indexes.front().row(), AccountsModel::Account, indexes.front().parent()), AccountsModel::AccountRole);
       if (data.isValid()) {
         if (data.canConvert<MyMoneyAccount>()) {
           emit selectObject(data.value<MyMoneyAccount>());
@@ -156,6 +231,26 @@ void KMyMoneyAccountTreeView::expandAll()
   emit expandedAll();
 }
 
+QList<AccountsModel::Columns> *KMyMoneyAccountTreeView::getColumns(const KMyMoneyView::View view)
+{
+  m_view = view;
+  if (m_view != KMyMoneyView::View::None && m_visColumns.isEmpty()) {
+    auto const mdlAccounts = Models::instance()->accountsModel();
+    auto const mdlInstitutions = Models::instance()->institutionsModel();
+    const auto grp = KSharedConfig::openConfig()->group(getConfGrpName(m_view));
+    const auto cfgColumns = grp.readEntry("ColumnsSelection", QList<int>());
+    m_visColumns.append(AccountsModel::Account);
+    foreach (const auto column, cfgColumns) {
+      const auto visColumn = static_cast<AccountsModel::Columns>(column);
+      if (!m_visColumns.contains(visColumn)) {
+        m_visColumns.append(visColumn);
+        mdlAccounts->setColumnVisibility(visColumn, true);
+        mdlInstitutions->setColumnVisibility(visColumn, true);
+      }
+    }
+  }
+  return &m_visColumns;
+}
 
 class AccountsViewFilterProxyModel::Private
 {
@@ -209,40 +304,16 @@ AccountsViewFilterProxyModel::~AccountsViewFilterProxyModel()
   */
 QVariant AccountsViewFilterProxyModel::data(const QModelIndex &index, int role) const
 {
-  if (index.isValid() && role == Qt::DisplayRole) {
-    int sourceColumn = mapToSource(index).column();
-    if (sourceColumn == AccountsModel::TotalValue) {
-      MyMoneyAccount account = mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent()))
-                                      .data(AccountsModel::AccountRole).value<MyMoneyAccount>();
-
-      // show the accounts value incl. the value of sub-accounts
-      // if the account is not expanded or,
-      bool showTotalValue = !d->isAccountExpanded(account.id());
-      // the account is a top-level account or
-      showTotalValue |= !index.parent().isValid();
-      // the account is an investment account and equity accounts are hidden
-      showTotalValue |= (account.accountType() == MyMoneyAccount::Investment && hideEquityAccounts());
-
-      if (showTotalValue) {
-        return data(index, AccountsModel::AccountTotalValueDisplayRole);
-      } else {
-        return data(index, AccountsModel::AccountValueDisplayRole);
-      }
-    }
-    if (sourceColumn == AccountsModel::TotalBalance) {
-      return data(index, AccountsModel::AccountBalanceDisplayRole);
-    }
-  }
   return AccountsFilterProxyModel::data(index, role);
 }
 
-/**
+  /*
   * Reimplemented to filter all but the account displayed in the accounts view.
   */
 bool AccountsViewFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    QVariant data = sourceModel()->index(source_row, 0, source_parent).data(AccountsModel::AccountIdRole);
+    const auto data = sourceModel()->index(source_row, AccountsModel::Account, source_parent).data(AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
@@ -255,10 +326,9 @@ bool AccountsViewFilterProxyModel::filterAcceptsRow(int source_row, const QModel
   */
 void AccountsViewFilterProxyModel::collapsed(const QModelIndex &index)
 {
-  QVariant accountId = mapToSource(index).data(AccountsModel::AccountIdRole);
-  if (accountId.isValid()) {
+  const auto accountId = mapToSource(index).data(AccountsModel::AccountIdRole);
+  if (accountId.isValid())
     d->markAccountCollapsed(accountId.toString());
-  }
 }
 
 /**
@@ -267,10 +337,9 @@ void AccountsViewFilterProxyModel::collapsed(const QModelIndex &index)
   */
 void AccountsViewFilterProxyModel::expanded(const QModelIndex &index)
 {
-  QVariant accountId = mapToSource(index).data(AccountsModel::AccountIdRole);
-  if (accountId.isValid()) {
+  const auto accountId = mapToSource(index).data(AccountsModel::AccountIdRole);
+  if (accountId.isValid())
     d->markAccountExpanded(accountId.toString());
-  }
 }
 
 /**

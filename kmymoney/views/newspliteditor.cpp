@@ -197,19 +197,17 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
   d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Income);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Expense);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Equity);
+
+  d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
   d->accountsModel->setHideEquityAccounts(false);
-  d->accountsModel->setSourceModel(Models::instance()->accountsModel());
-  d->accountsModel->sort(0);
+  auto const model = Models::instance()->accountsModel();
+  d->accountsModel->init(model, model->getColumns());
+  d->accountsModel->sort(AccountsModel::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
   d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
-  d->costCenterModel->sort(0);
+  d->costCenterModel->sort(AccountsModel::Account);
 
   d->ui->costCenterCombo->setEditable(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);

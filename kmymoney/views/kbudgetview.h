@@ -5,6 +5,7 @@
     copyright            : (C) 2006 by Darren Gould
     email                : darren_gould@gmx.de
                            Alvaro Soliverez <asoliverez@gmail.com>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -65,7 +66,6 @@ signals:
 
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
   MyMoneyMoney accountBalance(const QString &accountId) const;
   MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance) const;
   MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
@@ -88,8 +88,12 @@ class KBudgetView : public QWidget, public Ui::KBudgetViewDecl
   Q_OBJECT
 
 public:
-  KBudgetView(QWidget *parent = 0);
+  explicit KBudgetView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   ~KBudgetView();
+
+  KRecursiveFilterProxyModel    *getProxyModel();
+  QList<AccountsModel::Columns> *getProxyColumns();
+  bool                          isLoaded();
 
   /**
    * Override the base class behaviour to include all updates that
@@ -197,6 +201,9 @@ signals:
   void aboutToShow();
 
 private:
+  KMyMoneyApp                        *m_kmymoney;
+  KMyMoneyView                       *m_kmymoneyview;
+
   typedef enum {
     eNone = -1,
     eYearly = 0,

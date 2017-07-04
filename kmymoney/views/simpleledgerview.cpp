@@ -90,12 +90,12 @@ SimpleLedgerView::SimpleLedgerView(QWidget* parent)
   connect(Models::instance(), SIGNAL(modelsLoaded()), this, SLOT(updateModels()));
   connect(d->ui->ledgerTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeLedger(int)));
 
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Equity);
+  d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity});
+
   d->accountsModel->setHideEquityAccounts(false);
-  d->accountsModel->setSourceModel(Models::instance()->accountsModel());
-  d->accountsModel->sort(0);
+  auto const model = Models::instance()->accountsModel();
+  d->accountsModel->init(model, model->getColumns());
+  d->accountsModel->sort(AccountsModel::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   tabSelected(0);

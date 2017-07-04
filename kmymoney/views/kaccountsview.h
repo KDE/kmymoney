@@ -1,8 +1,8 @@
 /***************************************************************************
                              kaccountssview.h
                              -------------------
-    copyright            : (C) 2005 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,22 +34,31 @@
 
 #include "ui_kaccountsviewdecl.h"
 
-
+class KMyMoneyApp;
 /**
   * This class implements the accounts hierarchical and iconic 'view'.
   */
-class KAccountsView : public QWidget, private Ui::KAccountsViewDecl
+class KAccountsView : public QWidget, public Ui::KAccountsViewDecl
 {
   Q_OBJECT
 
 public:
-  KAccountsView(QWidget *parent = 0);
+  explicit KAccountsView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   virtual ~KAccountsView();
+
+  KRecursiveFilterProxyModel    *getProxyModel();
+  QList<AccountsModel::Columns> *getProxyColumns();
+  bool                          isLoaded();
 
 public slots:
   void slotLoadAccounts();
 
 protected:
+  void loadAccounts();
+
+  // for now it contains the implementation from show()
+  virtual void showEvent(QShowEvent * event);
+
   enum accountViewRole {
     reconcileRole = Qt::UserRole + 1
   };
@@ -58,42 +67,26 @@ protected:
 
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
-  void slotOpenContextMenu(MyMoneyAccount account);
-  void slotOpenObject(QListWidgetItem* item);
   void slotExpandCollapse();
   void slotUnusedIncomeExpenseAccountHidden();
 
-signals:
-  /**
-    * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
-    *
-    * @param obj const reference to object
-    */
-  void selectObject(const MyMoneyObject& obj);
-
-  /**
-    * This signal serves as proxy for
-    * KMyMoneyAccountTreeView::openContextMenu(const MyMoneyObject&)
-    *
-    * @param obj const reference to object
-    */
-  void openContextMenu(const MyMoneyObject& obj);
-
-  /**
-    * This signal will be emitted when the left mouse button is double
-    * clicked (actually the KDE executed setting is used) on an object.
-    *
-    * @param obj const reference to object
-    */
-  void openObject(const MyMoneyObject& obj);
-
-  /**
-    * This signal is emitted whenever the view is about to be shown.
-    */
-  void aboutToShow();
-
 private:
+  KMyMoneyApp                         *m_kmymoney;
+  KMyMoneyView                        *m_kmymoneyview;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
+
   bool                                m_haveUnusedCategories;
+
+  /// set if a view needs to be reloaded during show()
+  bool                                m_needReload;
+
+  /**
+    * This member holds the load state of page
+    */
+  bool                                m_needLoad;
 
   AccountsViewFilterProxyModel        *m_filterProxyModel;
 };

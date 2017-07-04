@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -33,7 +34,9 @@
 // Project Includes
 
 #include "accountsmodel.h"
+#include <kmymoneyview.h>
 
+class AccountsViewFilterProxyModel;
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
@@ -44,6 +47,8 @@ class KMyMoneyAccountTreeView : public QTreeView
 public:
   KMyMoneyAccountTreeView(QWidget *parent = 0);
   ~KMyMoneyAccountTreeView();
+
+  void init(QAbstractItemModel *model, QList<AccountsModel::Columns> *columns);
 
 public slots:
   /**
@@ -56,14 +61,16 @@ public slots:
     */
   void expandAll();
 
-  void setConfigGroupName(const QString& group);
+  QList<AccountsModel::Columns> *getColumns(const KMyMoneyView::View view);
 
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event);
   void keyPressEvent(QKeyEvent *event);
 
 protected slots:
-  void customContextMenuRequested(const QPoint &pos);
+  void customContextMenuRequested(const QPoint);
+  void customHeaderContextMenuRequested(const QPoint);
+  void slotColumnToggled(bool);
   void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
 signals:
@@ -99,11 +106,17 @@ signals:
   void collapsedAll();
   void expandedAll();
 
-private:
-  void openIndex(const QModelIndex &index);
+  void columnToggled(const AccountsModel::Columns column, const bool show);
 
 private:
-  QString m_groupName;
+  void openIndex(const QModelIndex &index);
+  static QString getConfGrpName(const KMyMoneyView::View view);
+
+private:
+  QList<AccountsModel::Columns> *m_mdlColumns;
+  QList<AccountsModel::Columns> m_visColumns;
+  KMyMoneyView::View m_view;
+  QMenu *m_menu;
 };
 
 /**
@@ -123,13 +136,11 @@ public:
 public slots:
   void collapseAll();
   void expandAll();
+  void collapsed(const QModelIndex &index);
+  void expanded(const QModelIndex &index);
 
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-
-protected slots:
-  void collapsed(const QModelIndex &index);
-  void expanded(const QModelIndex &index);
 
 private:
   class Private;

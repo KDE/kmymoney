@@ -8,6 +8,7 @@
                            Felix Rodriguez <frodriguez@users.sourceforge.net>
                            John C <thetacoturtle@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -64,8 +65,12 @@ class KCategoriesView : public QWidget, private Ui::KCategoriesViewDecl
   Q_OBJECT
 
 public:
-  KCategoriesView(QWidget *parent = 0);
+  explicit KCategoriesView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   virtual ~KCategoriesView();
+
+  KRecursiveFilterProxyModel    *getProxyModel();
+  QList<AccountsModel::Columns> *getProxyColumns();
+  bool                          isLoaded();
 
 protected:
   void loadAccounts();
@@ -95,23 +100,6 @@ private:
 
 signals:
   /**
-    * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
-    */
-  void selectObject(const MyMoneyObject&);
-
-  /**
-    * This signal serves as proxy for
-    * KMyMoneyAccountTreeView::openContextMenu(const MyMoneyObject&)
-    */
-  void openContextMenu(const MyMoneyObject& obj);
-
-  /**
-    * This signal will be emitted when the left mouse button is double
-    * clicked (actually the KDE executed setting is used) on an account.
-    */
-  void openObject(const MyMoneyObject& obj);
-
-  /**
     * This signal is emitted, when the user selected to reparent the
     * account @p acc to be a subordinate account of @p parent.
     *
@@ -120,12 +108,10 @@ signals:
     */
   void reparent(const MyMoneyAccount& acc, const MyMoneyAccount& parent);
 
-  /**
-    * This signal is emitted whenever the view is about to be shown.
-    */
-  void aboutToShow();
-
 private:
+  KMyMoneyApp                  *m_kmymoney;
+  KMyMoneyView                 *m_kmymoneyview;
+
   /// set if a view needs to be reloaded during showEvent()
   bool                         m_needReload;
 

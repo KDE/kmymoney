@@ -55,7 +55,8 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   delete ui->creditTransferEdit->takeWidget();
 
   OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);
-  accountsModel->setSourceModel(Models::instance()->accountsModel());
+  auto const model = Models::instance()->accountsModel();
+  accountsModel->setSourceModel(model);
   ui->originAccount->setModel(accountsModel);
 
   ui->convertMessage->hide();

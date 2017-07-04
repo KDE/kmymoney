@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -68,9 +69,6 @@ public:
     AccountBalanceRole = Qt::UserRole + 3,            /**< The account balance is stored in this role in column 0 as a MyMoneyMoney object.*/
     AccountValueRole = Qt::UserRole + 4,              /**< The account value (the balance converted to base currency) is stored in this role in column 0 as a MyMoneyMoney object.*/
     AccountTotalValueRole = Qt::UserRole + 5,         /**< The account total value (the value of the account and of child accounts) is stored in this role in column 0 as a MyMoneyMoney object.*/
-    AccountBalanceDisplayRole = Qt::UserRole + 6,     /**< The account balance is stored in this role in column TotalBalance as a formatted string for the user.*/
-    AccountValueDisplayRole = Qt::UserRole + 7,       /**< The account value (the balance converted to base currency) is stored in this role in column TotalValue as a formated string for the user.*/
-    AccountTotalValueDisplayRole = Qt::UserRole + 8,  /**< The account total value is stored in this role in column TotalValue as a formatted string for the user.*/
     DisplayOrderRole = Qt::UserRole + 9,              /**< This role is used by the filtering proxies to order the accounts for displaying.*/
     FullNameRole = Qt::UserRole + 10,                 /**< This role is used to provide the full pathname of the account */
   };
@@ -80,7 +78,7 @@ public:
     */
   enum Columns {
     FirstColumnMarker = 0,
-    Account = 0,
+    Account = 0,  // CAUTION! Assumption is being made that Account column number is always 0 and you shouldn't change this
     Type,
     Tax,
     VAT,
@@ -88,6 +86,8 @@ public:
     TotalBalance,
     PostedValue,
     TotalValue,
+    AccountNumber,
+    AccountSortCode,
     LastColumnMarker
   };
 
@@ -119,6 +119,11 @@ public:
    * account was not found, an invalid QModelIndex is returned.
    */
   QModelIndex accountById(const QString& id) const;
+
+  QList<AccountsModel::Columns> *getColumns();
+
+  void setColumnVisibility(const Columns column, const bool show);
+  static QString getHeaderName(const Columns column);
 
 public slots:
 
@@ -239,7 +244,7 @@ public:
   ~AccountsFilterProxyModel();
 
   void addAccountType(MyMoneyAccount::accountTypeE type);
-  void addAccountGroup(MyMoneyAccount::accountTypeE type);
+  void addAccountGroup(const QVector<MyMoneyAccount::_accountTypeE> &groups);
   void removeAccountType(MyMoneyAccount::accountTypeE type);
 
   void clear();
@@ -255,8 +260,12 @@ public:
 
   int visibleItems(bool includeBaseAccounts = false) const;
 
+  void init(AccountsModel *model, QList<AccountsModel::Columns> *visColumns);
+  void init(AccountsModel *model);
+
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+  virtual bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
   virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
   virtual bool acceptSourceItem(const QModelIndex &source) const;
 
@@ -264,6 +273,8 @@ protected:
 
   int visibleItems(const QModelIndex& index) const;
 
+  QList<AccountsModel::Columns> *m_mdlColumns;
+  QList<AccountsModel::Columns> *m_visColumns;
 signals:
   void unusedIncomeExpenseAccountHidden() const;
 

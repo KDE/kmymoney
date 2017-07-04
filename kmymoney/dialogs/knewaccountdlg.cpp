@@ -110,7 +110,7 @@ QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    QVariant data = sourceModel()->index(source_row, 0, source_parent).data(AccountsModel::AccountIdRole);
+    const auto data = sourceModel()->index(source_row, AccountsModel::Account, source_parent).data(AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
@@ -139,7 +139,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   MyMoneyFile *file = MyMoneyFile::instance();
 
   // initialize the m_parentAccount member
-  MyMoneyAccount::accountTypeE filterAccountGroup = m_account.accountGroup();
+  QVector<MyMoneyAccount::accountTypeE> filterAccountGroup {m_account.accountGroup()};
   switch (m_account.accountGroup()) {
     case MyMoneyAccount::Asset:
       m_parentAccount = file->asset();
@@ -160,10 +160,10 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       qDebug("Seems we have an account that hasn't been mapped to the top five");
       if (m_categoryEditor) {
         m_parentAccount = file->income();
-        filterAccountGroup = MyMoneyAccount::Income;
+        filterAccountGroup[0] = MyMoneyAccount::Income;
       } else {
         m_parentAccount = file->asset();
-        filterAccountGroup = MyMoneyAccount::Asset;
+        filterAccountGroup[0] = MyMoneyAccount::Asset;
       }
   }
 
@@ -176,15 +176,12 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   m_filterProxyModel->addAccountGroup(filterAccountGroup);
   m_filterProxyModel->setCurrentAccountId(m_account.id());
-  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  auto const model = Models::instance()->accountsModel();
+  m_filterProxyModel->init(model, m_parentAccounts->getColumns(KMyMoneyView::View::None));
   m_filterProxyModel->setDynamicSortFilter(true);
 
-  m_parentAccounts->setAlternatingRowColors(true);
-  m_parentAccounts->setIconSize(QSize(22, 22));
-  m_parentAccounts->setSortingEnabled(true);
-  m_parentAccounts->setAllColumnsShowFocus(true);
-  m_parentAccounts->setModel(m_filterProxyModel);
-  m_parentAccounts->sortByColumn(0, Qt::AscendingOrder);
+  m_parentAccounts->init(m_filterProxyModel, model->getColumns());
+  m_parentAccounts->sortByColumn(AccountsModel::Account, Qt::AscendingOrder);
 
   m_subAccountLabel->setText(i18n("Is a sub account"));
 
@@ -800,7 +797,7 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
       m_account.setAccountType(type);
       // update the account group displayed in the accounts hierarchy
       m_filterProxyModel->clear();
-      m_filterProxyModel->addAccountGroup(m_account.accountGroup());
+      m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {m_account.accountGroup()});
     }
   } catch (const MyMoneyException &) {
     qWarning("Unexpected exception in KNewAccountDlg::slotAccountTypeChanged()");

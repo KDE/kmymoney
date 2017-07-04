@@ -341,19 +341,17 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
+  auto const model = Models::instance()->accountsModel();
   // extract account information from model
-  QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
-  d->account = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+  const auto index = model->accountById(accountId);
+  d->account = model->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Income);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Expense);
-  d->accountsModel->addAccountGroup(MyMoneyAccount::Equity);
+
+  d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
   d->accountsModel->setHideEquityAccounts(false);
-  d->accountsModel->setSourceModel(Models::instance()->accountsModel());
-  d->accountsModel->sort(0);
+  d->accountsModel->init(model);
+  d->accountsModel->sort(AccountsModel::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);

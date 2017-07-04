@@ -237,8 +237,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   delete d->m_popupView;
 
   KComboBox::setModel(model);
-
-  model->setFilterKeyColumn(AccountsModel::Account);
+  model->setFilterKeyColumn(AccountsModel::Account); // CAUTION! Assumption is being made that Account column number is always 0
   model->setFilterRole(AccountsModel::FullNameRole);
 
   d->m_popupView = new QTreeView(this);
@@ -276,11 +275,12 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
     AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
 
     if(filterModel) {
+      const auto completionStr = QStringLiteral(".*");
       if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
         // for some reason it helps to avoid internal errors if we
         // clear the filter before setting it to a new value
         filterModel->setFilterFixedString(QString());
-        const QString filterString = QString("%1%2%3").arg(".*").arg(QRegExp::escape(txt)).arg(".*");
+        const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegExp::escape(txt)).arg(completionStr);
         filterModel->setFilterRegExp(QRegExp(filterString, Qt::CaseInsensitive));
       } else {
         QStringList parts = txt.split(MyMoneyFile::AccountSeperator /*, QString::SkipEmptyParts */);
@@ -289,7 +289,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
         for (it = parts.begin(); it != parts.end(); ++it) {
           if (pattern.length() > 1)
             pattern += MyMoneyFile::AccountSeperator;
-          pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
+          pattern += QRegExp::escape(QString(*it).trimmed()) + completionStr;
         }
         // for some reason it helps to avoid internal errors if we
         // clear the filter before setting it to a new value
@@ -300,7 +300,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
         if (filterModel->visibleItems() == 0) {
           // for some reason it helps to avoid internal errors if we
           // clear the filter before setting it to a new value
-          pattern = pattern.prepend(QString(".*") + MyMoneyFile::AccountSeperator);
+          pattern = pattern.prepend(completionStr + MyMoneyFile::AccountSeperator);
           filterModel->setFilterFixedString(QString());
           filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
         }

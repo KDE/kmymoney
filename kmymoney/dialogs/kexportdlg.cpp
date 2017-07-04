@@ -230,11 +230,11 @@ void KExportDlg::checkData(const QString& accountId)
 
 void KExportDlg::loadAccounts()
 {
-  AccountNamesFilterProxyModel *filterProxyModel = new AccountNamesFilterProxyModel(this);
-  filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
-  filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
-  filterProxyModel->setSourceModel(Models::instance()->accountsModel());
-  filterProxyModel->sort(0);
+  auto filterProxyModel = new AccountNamesFilterProxyModel(this);
+  filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
+  auto const model = Models::instance()->accountsModel();
+  filterProxyModel->init(model, model->getColumns());
+  filterProxyModel->sort(AccountsModel::Account);
   m_accountComboBox->setModel(filterProxyModel);
 }
 

@@ -682,11 +682,11 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   };
 
   Icon ixIcon = accToIco.value(accountType(), Icon::ViewLiability);
-  QString kyIcon = g_Icons[ixIcon] + QString(size);
+  QString kyIcon = g_Icons.value(ixIcon) + QString::number(size);
   QPixmap pxIcon;
 
   if (!QPixmapCache::find(kyIcon, pxIcon)) {
-    pxIcon = QIcon::fromTheme(g_Icons[ixIcon]).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
+    pxIcon = QIcon::fromTheme(g_Icons.value(ixIcon)).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
     QPixmapCache::insert(kyIcon, pxIcon);
   }
 
