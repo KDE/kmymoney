@@ -53,7 +53,6 @@ using namespace Icons;
 KImportDlg::KImportDlg(QWidget *parent)
     : KImportDlgDecl(parent)
 {
-  setModal(true);
   // Set all the last used options
   readConfig();
 

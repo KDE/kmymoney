@@ -1008,7 +1008,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
-          QPointer<QDialog> dialog = new QDialog(0);
+          QPointer<QDialog> dialog = new QDialog(kmymoney);
           dialog->setWindowTitle(i18n("Default Category for Payee"));
           dialog->setModal(true);
 
@@ -1029,7 +1029,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           filterProxyModel->setSourceModel(Models::instance()->accountsModel());
           filterProxyModel->sort(0);
 
-          QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel, dialog);
+          QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel);
           topcontents->addWidget(accountCombo);
           mainWidget->setLayout(topcontents);
           QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -1323,8 +1323,6 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   msg += i18n(" - Account Type: %1", KMyMoneyUtils::accountTypeToString(account.accountType())) + "<br/>";
   msg += i18n(" - Account Number: %1", account.number()) + "<br/>";
   msg += "<br/>";
-
-  QString header;
 
   if (!account.name().isEmpty()) {
     if (!accountId.isEmpty())

@@ -2059,7 +2059,7 @@ void KMyMoneyApp::slotQifImport()
   if (d->m_qifReader == 0) {
     // FIXME: the menu entry for qif import should be disabled here
 
-    QPointer<KImportDlg> dlg = new KImportDlg(0);
+    QPointer<KImportDlg> dlg = new KImportDlg(this);
 
     if (dlg->exec() == QDialog::Accepted && dlg != 0) {
       KMSTATUS(i18n("Importing file..."));
@@ -2307,7 +2307,7 @@ void KMyMoneyApp::slotQifExport()
 {
   KMSTATUS(i18n("Exporting file..."));
 
-  QPointer<KExportDlg> dlg = new KExportDlg(0);
+  QPointer<KExportDlg> dlg = new KExportDlg(this);
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     if (okToWriteFile(QUrl::fromLocalFile(dlg->filename()))) {
