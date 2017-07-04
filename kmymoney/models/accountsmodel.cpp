@@ -865,18 +865,19 @@ public:
   void addInstitutionItem(QStandardItemModel *model, const MyMoneyInstitution &institution) {
     QFont font;
     font.setBold(true);
-    QStandardItem *institutionItem = new QStandardItem(institution.name());
+    QStandardItem *institutionItem = new QStandardItem;
     model->invisibleRootItem()->appendRow(institutionItem);
-    institutionItem->setData(institution.name(), Qt::DisplayRole);
-    institutionItem->setData(QVariant::fromValue(institution), AccountRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountBalanceRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountValueRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountTotalValueRole);
-    institutionItem->setData(institution.id(), AccountIdRole);
-    institutionItem->setData(6, DisplayOrderRole);
+
+    QMap<int, QVariant> itemData;
+    itemData[Qt::DisplayRole] = institution.name();
+    itemData[Qt::FontRole] = font;
+    itemData[Qt::DecorationRole] = QIcon::fromTheme(g_Icons.value(Icon::ViewInstitutions));
+    itemData[AccountRole] = QVariant::fromValue(institution);
+    itemData[AccountBalanceRole] = itemData[AccountValueRole] = itemData[AccountTotalValueRole] = QVariant::fromValue(MyMoneyMoney());
+    itemData[AccountIdRole] = institution.id();
+    itemData[DisplayOrderRole] = 6;
+    model->setItemData(institutionItem->index(), itemData);
     institutionItem->setColumnCount(model->columnCount());
-    institutionItem->setIcon(institution.pixmap());
-    institutionItem->setFont(font);
     institutionItem->setEditable(false);
   }
 };
