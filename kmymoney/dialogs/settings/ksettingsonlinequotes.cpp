@@ -231,5 +231,6 @@ void KSettingsOnlineQuotes::slotEntryRenamed(QListWidgetItem* item)
   } else {
     item->setText(m_currentItem.m_name);
   }
+  m_quoteSourceList->sortItems();
   m_newButton->setEnabled(m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly).count() == 0);
 }
