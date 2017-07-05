@@ -7850,11 +7850,10 @@ KMStatus::~KMStatus()
 
 void KMyMoneyApp::Private::unlinkStatementXML()
 {
-  QDir d("/home/thb", "kmm-statement*");
+  QDir d(KMyMoneySettings::logPath(), "kmm-statement*");
   for (uint i = 0; i < d.count(); ++i) {
     qDebug("Remove %s", qPrintable(d[i]));
-//FIXME: FIX on windows
-    d.remove(QString("/home/thb/%1").arg(d[i]));
+    d.remove(KMyMoneySettings::logPath() + QString("/%1").arg(d[i]));
   }
   m_statementXMLindex = 0;
 }
