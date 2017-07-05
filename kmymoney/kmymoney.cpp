@@ -3643,7 +3643,7 @@ void KMyMoneyApp::slotAccountEdit()
         QPointer<KNewAccountDlg> dlg =
           new KNewAccountDlg(d->m_selectedAccount, true, category, 0, caption);
 
-        if (category || d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
+        if (category) {
           dlg->setOpeningBalanceShown(false);
           dlg->setOpeningDateShown(false);
           tid.clear();
