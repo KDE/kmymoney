@@ -2702,8 +2702,12 @@ void KMyMoneyApp::slotProcessExited()
 
         if (d->m_backupResult == 0) {
           progressCallback(50, 0, i18n("Writing %1", backupfile));
-//FIXME: FIX on windows
-          d->m_proc << "cp" << "-f" << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
+#ifdef Q_OS_WIN
+          d->m_proc << "cmd.exe" << "/c" << "copy";
+#else
+          d->m_proc << "cp" << "-f";
+#endif
+          d->m_proc << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
           d->m_backupState = BACKUP_COPYING;
           d->m_proc.start();
         }
@@ -2745,7 +2749,7 @@ void KMyMoneyApp::slotProcessExited()
           ready();
         }
       } else {
-        qDebug("cp exit code is %d", d->m_proc.exitCode());
+        qDebug("copy exit code is %d", d->m_proc.exitCode());
         d->m_backupResult = 1;
         KMessageBox::information(this, i18n("Error copying file to device"), i18n("Backup"));
 
