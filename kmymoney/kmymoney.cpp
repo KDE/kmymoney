@@ -2706,7 +2706,7 @@ void KMyMoneyApp::slotProcessExited()
         if (d->m_backupResult == 0) {
           progressCallback(50, 0, i18n("Writing %1", backupfile));
 #ifdef Q_OS_WIN
-          d->m_proc << "cmd.exe" << "/c" << "copy";
+          d->m_proc << "cmd.exe" << "/c" << "copy" << "/y";
 #else
           d->m_proc << "cp" << "-f";
 #endif
