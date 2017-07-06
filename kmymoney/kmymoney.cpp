@@ -1857,7 +1857,7 @@ void KMyMoneyApp::slotShowAllAccounts()
 #ifdef KMM_DEBUG
 void KMyMoneyApp::slotToggleTraces()
 {
-  MyMoneyTracer::onOff(action(s_Actions[Action::DebugTraces])->isChecked() ? 1 : 0);
+  MyMoneyTracer::onOff(actionCollection()->action(s_Actions[Action::DebugTraces])->isChecked() ? 1 : 0);
 }
 #endif
 
