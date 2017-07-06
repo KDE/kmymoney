@@ -971,7 +971,7 @@ void FormatsPage::decimalSymbolChanged(int index)
     case -1:
       if (!m_imp->m_autodetect.value(AutoDecimalSymbol))
         break;
-      // fall through intentional
+        // fall through intentional
 
     case 2:
     {
