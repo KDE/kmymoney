@@ -62,9 +62,8 @@ if(KF5Gpgmepp_FOUND)
 endif()
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
-if(NOT MSVC)
-  # Temporary solution until all targets have compile features set
-  add_compile_options(-std=c++11)
+if(NOT MSVC) # MSVC has no regular standards version switches
+  add_compile_options(-std=c++14)
 endif()
 
 # use DBus only on Linux
