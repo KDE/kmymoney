@@ -210,6 +210,9 @@ public:
       m_balanceWarning(0),
       m_collectingStatements(false),
       m_pluginLoader(0),
+      m_backupResult(0),
+      m_backupMount(0),
+      m_ignoreBackupExitCode(false),
       m_myMoneyView(0),
       m_progressBar(0),
       m_qifReader(0),
@@ -288,6 +291,11 @@ public:
     * the backup volume.
     */
   bool    m_backupMount;
+
+  /**
+    * Flag for internal run control
+    */
+  bool    m_ignoreBackupExitCode;
 
   KProcess m_proc;
 
@@ -2651,11 +2659,16 @@ void KMyMoneyApp::slotFileBackup()
       d->m_proc.start();
 
     } else {
+      progressCallback(0, 300, "");
+#ifdef Q_OS_WIN
+      d->m_ignoreBackupExitCode = true;
+      QTimer::singleShot(0, this, SLOT(slotProcessExited()));
+#else
       // If we don't have to mount a device, we just issue
       // a dummy command to start the copy operation
-      progressCallback(0, 300, "");
       d->m_proc.setProgram("true");
       d->m_proc.start();
+#endif
     }
 
   }
@@ -2670,7 +2683,9 @@ void KMyMoneyApp::slotProcessExited()
   switch (d->m_backupState) {
     case BACKUP_MOUNTING:
 
-      if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
+      if (d->m_ignoreBackupExitCode ||
+         (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0)) {
+        d->m_ignoreBackupExitCode = false;
         d->m_proc.clearProgram();
         QString today;
         today.sprintf("-%04d-%02d-%02d.kmy",
