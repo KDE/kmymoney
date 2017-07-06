@@ -27,7 +27,7 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "selectedtransaction.h"
 
-#include <QtGui/QPrinter>
+#include <QtPrintSupport/QPrinter>
 
 class QStringList;
 class KPluginInfo;
