@@ -27,6 +27,7 @@
 #include "ui_kreconciliationreportdlgdecl.h"
 
 class KHTMLPart;
+class QPrinter;
 
 class KReportDlg : public QDialog, public Ui::KReconciliationReportDlgDecl
 {

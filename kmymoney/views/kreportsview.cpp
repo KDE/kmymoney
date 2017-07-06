@@ -42,7 +42,7 @@
 #include <QLocale>
 #include <QTextCodec>
 #include <QWebEngineSettings>
-#include <QPrintDialog>
+#include <QtGui/QPrintDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

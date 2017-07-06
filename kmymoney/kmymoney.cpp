@@ -876,7 +876,7 @@ void KMyMoneyApp::initActions()
     };
 
     foreach (const auto info, actionInfos) {
-      QAction *a = new QAction();
+      QAction *a = new QAction(this);
       // KActionCollection::addAction by name sets object name anyways,
       // so, as better alternative, set it here right from the start
       a->setObjectName(s_Actions.value(info.action));

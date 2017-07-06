@@ -25,7 +25,7 @@
 // QT includes
 #include <QAction>
 #include <QWebEngineView>
-#include <QPrintDialog>
+#include <QtGui/QPrintDialog>
 
 // KDE includes
 #include <KActionCollection>
