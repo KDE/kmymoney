@@ -26,7 +26,7 @@
 #include <QLayout>
 #include <QTabWidget>
 #include <QPrinter>
-#include <QPrintDialog>
+#include <QtPrintSupport/QPrintDialog>
 #include <QPointer>
 
 // KDE includes

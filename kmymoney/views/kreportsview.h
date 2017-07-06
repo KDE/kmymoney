@@ -34,7 +34,7 @@
 #include <QTabWidget>
 #include <QListWidget>
 #include <QWebEngineView>
-#include <QtGui/QPrinter>
+#include <QtPrintSupport/QPrinter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

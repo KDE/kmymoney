@@ -26,7 +26,7 @@
 
 #include <QWidget>
 #include <QWebEngineView>
-#include <QtGui/QPrinter>
+#include <QtPrintSupport/QPrinter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

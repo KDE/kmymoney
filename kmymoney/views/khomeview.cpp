@@ -38,7 +38,7 @@
 #include <QStandardPaths>
 #include <QDesktopServices>
 #include <QUrlQuery>
-#include <QtGui/QPrintDialog>
+#include <QtPrintSupport/QPrintDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
