@@ -2707,10 +2707,11 @@ void KMyMoneyApp::slotProcessExited()
           progressCallback(50, 0, i18n("Writing %1", backupfile));
 #ifdef Q_OS_WIN
           d->m_proc << "cmd.exe" << "/c" << "copy" << "/y";
+          d->m_proc << QDir::toNativeSeparators(d->m_fileName.path(KUrl::LeaveTrailingSlash)) << QDir::toNativeSeparators(backupfile);
 #else
           d->m_proc << "cp" << "-f";
-#endif
           d->m_proc << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
+#endif
           d->m_backupState = BACKUP_COPYING;
           d->m_proc.start();
         }
