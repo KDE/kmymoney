@@ -61,9 +61,7 @@
   <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
   <summary xml:lang="zh-CN">个人金融管理器</summary>
   <description>
-    <p>
-      KMyMoney is a personal finance manager by KDE.
-    </p>
+    <p>KMyMoney is a personal finance manager by KDE.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals, pel KDE.</p>
     <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals, pel KDE.</p>
     <p xml:lang="cs">KMyMoney je osobní správce financí od KDE.</p>

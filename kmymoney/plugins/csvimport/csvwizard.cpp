@@ -969,9 +969,10 @@ void FormatsPage::decimalSymbolChanged(int index)
   const QList<int> columns = m_imp->getNumericalColumns();
   switch (index) {
     case -1:
-      if (!m_imp->m_autodetect.value(AutoDecimalSymbol))
+      if (!m_imp->m_autodetect.value(AutoDecimalSymbol)) {
         break;
-        // fall through intentional
+      }
+      // fall through intentional
 
     case 2:
     {
