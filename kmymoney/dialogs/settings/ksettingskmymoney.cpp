@@ -33,6 +33,9 @@
 #include "ksettingsreports.h"
 
 #include "pluginloader.h"
+#include "icons/icons.h"
+
+using namespace Icons;
 
 KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config)
     : KConfigDialog(parent, name, config)
@@ -51,37 +54,18 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   KPluginSelector* pluginsPage = KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget();
   KSettingsReports* reportsPage = new KSettingsReports();
 
-  addPage(generalPage, i18nc("General settings", "General"), "system-run");
-  addPage(homePage, i18n("Home"), "go-home");
-
-  QString iconName;
-  iconName = "view-financial-list";
-  if (!QIcon::hasThemeIcon(iconName))
-    iconName = "ledger";
-  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), iconName);
-
-  iconName = "view-pim-calendar";
-  if (!QIcon::hasThemeIcon(iconName))
-    iconName = "schedule";
-  addPage(schedulesPage, i18n("Scheduled transactions"), iconName);
-
-  addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-
-  iconName = "office-chart-bar";
-  if (!QIcon::hasThemeIcon(iconName))
-    iconName = "report";
-  addPage(reportsPage, i18nc("Report settings", "Reports"), iconName);
-
-  iconName = "view-financial-forecast";
-  if (!QIcon::hasThemeIcon(iconName))
-    iconName = "forecast";
-  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), iconName);
-
-  addPage(encryptionPage, i18n("Encryption"), "kgpg");
-  addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
-  addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
-  addPage(iconsPage, i18n("Icons"), "preferences-desktop-icon");
-  addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
+  addPage(generalPage, i18nc("General settings", "General"), g_Icons[Icon::SystemRun]);
+  addPage(homePage, i18n("Home"), g_Icons[Icon::ViewHome]);
+  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), g_Icons[Icon::ViewFinancialList]);
+  addPage(schedulesPage, i18n("Scheduled transactions"), g_Icons[Icon::ViewSchedules]);
+  addPage(onlineQuotesPage, i18n("Online Quotes"), g_Icons[Icon::PreferencesNetwork]);
+  addPage(reportsPage, i18nc("Report settings", "Reports"), g_Icons[Icon::ViewReports]);
+  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), g_Icons[Icon::ViewForecast]);
+  addPage(encryptionPage, i18n("Encryption"), g_Icons[Icon::Kgpg]);
+  addPage(colorsPage, i18n("Colors"), g_Icons[Icon::PreferencesColor]);
+  addPage(fontsPage, i18n("Fonts"), g_Icons[Icon::PreferencesFont]);
+  addPage(iconsPage, i18n("Icons"), g_Icons[Icon::PreferencesIcon]);
+  addPage(pluginsPage, i18n("Plugins"), g_Icons[Icon::NetworkDisconect]);
 
   setHelp("details.settings", "kmymoney");
 

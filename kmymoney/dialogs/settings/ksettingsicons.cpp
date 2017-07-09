@@ -46,7 +46,7 @@ KSettingsIcons::KSettingsIcons(QWidget* parent) :
 
 void KSettingsIcons::loadList()
 {
-  QStringList themes {QStringLiteral("oxygen"), QStringLiteral("Tango")};
+  QStringList themes {QStringLiteral("oxygen"), QStringLiteral("Tango"), QStringLiteral("breeze"), QStringLiteral("breeze-dark")};
   QStringList searchPaths = QIcon::themeSearchPaths();
   m_IconsTheme->addItem(QStringLiteral("system"));
   m_themesMap.insert(0, QStringLiteral("system"));

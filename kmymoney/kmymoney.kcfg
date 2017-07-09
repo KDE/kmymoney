@@ -311,7 +311,7 @@
   </entry>
   <entry name="IconsTheme" type="String">
    <label>Icon theme</label>
-   <default></default>
+   <default>system</default>
   </entry>
   <entry name="sortNormalView" type="String">
    <label>Sort order of register in normal view</label>

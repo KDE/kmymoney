@@ -82,6 +82,8 @@ enum class Icon { SVNUpdate, Merge, Reconcile, Split, Tip, Fork,
                   TaskAttention, TaskComplete,
                   TaskReject, TaskAccepted, TaskOngoing,
                   HelpContents, Folder, InvestApplet,
+                  PreferencesFont, PreferencesColor, PreferencesIcon,
+                  PreferencesNetwork, NetworkDisconect, Kgpg,
                   Empty
                    };
 
@@ -94,7 +96,9 @@ KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName);
 
 namespace detail {
 const QHash<Icon, QString> getCommonNames();
+const QHash<Icon, QString> getKDENames();
 const QHash<Icon, QString> getOxygenNames();
+const QHash<Icon, QString> getBreezeNames();
 const QHash<Icon, QString> getTangoNames();
 }
 

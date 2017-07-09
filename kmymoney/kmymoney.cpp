@@ -526,9 +526,12 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
-  Icons::setIconThemeNames(KMyMoneySettings::iconsTheme());
-  if (KMyMoneySettings::iconsTheme().compare(QLatin1Literal("system")) != 0)
-    QIcon::setThemeName(KMyMoneySettings::iconsTheme());
+  {
+    QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
+    if (!themeName.isEmpty() && themeName != QLatin1Literal("system"))  // if it isn't default theme then set it
+      QIcon::setThemeName(themeName);
+    Icons::setIconThemeNames(QIcon::themeName());                       // get whatever theme user ends up with and hope our icon names will fit that theme
+  }
 
   initStatusBar();
   initActions();

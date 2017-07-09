@@ -116,8 +116,7 @@ public:
     model->setData(newIndex, KMyMoneyUtils::accountTypeToString(account.accountType()), Qt::DisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
 
-    QIcon icon = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
-    QPixmap checkMark = icon.pixmap(64);
+    QIcon checkMark = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
     switch (account.accountType()) {
       case MyMoneyAccount::Income:
       case MyMoneyAccount::Expense:
