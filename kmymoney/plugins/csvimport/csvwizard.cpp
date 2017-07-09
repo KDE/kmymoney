@@ -972,7 +972,7 @@ void FormatsPage::decimalSymbolChanged(int index)
       if (!m_imp->m_autodetect.value(AutoDecimalSymbol)) {
         break;
       }
-      // fall through intentional
+      // intentional fall through
 
     case 2:
     {
