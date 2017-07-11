@@ -62,6 +62,12 @@
   <summary xml:lang="zh-CN">个人金融管理器</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
+    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals, pel KDE. Té un gran conjunt de funcionalitats encara que és fàcil d'utilitzar pels usuaris no tècnics.</p>
+    <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder door KDE. Het komt met een grote set aan functies terwijl het gemakkelijk is te gebruiken voor de niet-technische gebruiker.</p>
+    <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais do KDE. Vem com um grande conjunto de funcionalidades, embora seja simples de usar com um utilizador não técnico.</p>
+    <p xml:lang="sv">KMyMoney är en hemekonomihanterare av KDE. Den levereras med ett stort antal funktioner, medan den är lätt att använda för den icke-tekniska användaren.</p>
+    <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
+    <p xml:lang="x-test">xxKMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.xx</p>
     <p>
       It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format.
       Direct download using the OFX and HBCI formats is also possible via plugins.
@@ -142,6 +148,12 @@
     </screenshot>
     <screenshot>
       <caption>Manage accounts e.g. by institutions they are held at</caption>
+      <caption xml:lang="ca">Gestiona els comptes p. ex. per les institucions a on estan depositats</caption>
+      <caption xml:lang="nl">Rekeningen beheren bijv. door instituten waarbij ze behoren</caption>
+      <caption xml:lang="pt">Faz a gestão das contas p.ex. das instituições onde estão guardadas</caption>
+      <caption xml:lang="sv">Hantera konton, t.ex. enligt institution som de hör till</caption>
+      <caption xml:lang="uk">Керування рахунками, наприклад, за установами, де їх відкрито.</caption>
+      <caption xml:lang="x-test">xxManage accounts e.g. by institutions they are held atxx</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm3.png</image>
     </screenshot>
   </screenshots>
