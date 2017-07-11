@@ -43,6 +43,8 @@
 #include "kofxdirectconnectdlg.h"
 #include "ui_importoption.h"
 
+//#define DEBUG_LIBOFX
+
 using KWallet::Wallet;
 
 class OfxImporterPlugin::Private
@@ -178,6 +180,21 @@ bool OfxImporterPlugin::import(const QString& filename)
   d->m_securitylist.clear();
 
   QByteArray filename_deep = QFile::encodeName(filename);
+
+  ofx_STATUS_msg = true;
+  ofx_INFO_msg  = true;
+  ofx_WARNING_msg = true;
+  ofx_ERROR_msg = true;
+
+#ifdef DEBUG_LIBOFX
+  ofx_PARSER_msg = true;
+  ofx_DEBUG_msg = true;
+  ofx_DEBUG1_msg = true;
+  ofx_DEBUG2_msg = true;
+  ofx_DEBUG3_msg = true;
+  ofx_DEBUG4_msg = true;
+  ofx_DEBUG5_msg = true;
+#endif
 
   LibofxContextPtr ctx = libofx_get_new_context();
   Q_CHECK_PTR(ctx);

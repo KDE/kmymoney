@@ -64,7 +64,6 @@
 #include <QIcon>
 #include <QInputDialog>
 #include <QProgressDialog>
-#include <QProcess>
 #include <QStatusBar>
 
 // ----------------------------------------------------------------------------
@@ -84,6 +83,7 @@
 #include <krecentfilesaction.h>
 #include <ktoolinvocation.h>
 #include <KSharedConfig>
+#include <KProcess>
 #include <KAboutApplicationDialog>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
@@ -322,6 +322,9 @@ public:
       m_balanceWarning(0),
       m_collectingStatements(false),
       m_pluginLoader(0),
+      m_backupResult(0),
+      m_backupMount(0),
+      m_ignoreBackupExitCode(false),
       m_myMoneyView(0),
       m_progressBar(0),
       m_qifReader(0),
@@ -418,7 +421,12 @@ public:
     */
   bool    m_backupMount;
 
-  QProcess m_proc;
+  /**
+    * Flag for internal run control
+    */
+  bool    m_ignoreBackupExitCode;
+
+  KProcess m_proc;
 
   /// A pointer to the view holding the tabs.
   KMyMoneyView *m_myMoneyView;
@@ -556,7 +564,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   setCentralWidget(frame);
 
-  connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
+  connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotBackupHandleEvents()));
 
   // force to show the home page if the file is closed
   connect(actionCollection()->action(s_Actions[Action::ViewTransactionDetail]), &QAction::toggled, d->m_myMoneyView, &KMyMoneyView::slotShowTransactionDetail);
@@ -729,7 +737,7 @@ void KMyMoneyApp::initActions()
       // *************
       {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase,                 i18n("Open database..."),                           Icon::SVNUpdate},
       {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase,               i18n("Save as database..."),                        Icon::FileArchiver},
-      {Action::FileBackup,                    &KMyMoneyApp::slotFileBackup,                   i18n("Backup..."),                                  Icon::Empty},
+      {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile,                   i18n("Backup..."),                                  Icon::Empty},
       {Action::FileImportGNC,                 &KMyMoneyApp::slotGncImport,                    i18n("GnuCash..."),                                 Icon::Empty},
       {Action::FileImportQIF,                 &KMyMoneyApp::slotQifImport,                    i18n("QIF..."),                                     Icon::Empty},
       {Action::FileExportQIF,                 &KMyMoneyApp::slotQifExport,                    i18n("QIF..."),                                     Icon::Empty},
@@ -2171,12 +2179,13 @@ void KMyMoneyApp::slotGncImport()
 
   if (!fileToRead.isEmpty()) {
     // call the importer
-    d->m_myMoneyView->readFile(fileToRead);
-    // imported files don't have a name
-    d->m_fileName = QUrl();
+    if (d->m_myMoneyView->readFile(fileToRead)) {
+      // imported files don't have a name
+      d->m_fileName = QUrl();
 
-    updateCaption();
-    emit fileLoaded(d->m_fileName);
+      updateCaption();
+      emit fileLoaded(d->m_fileName);
+    }
   }
 }
 
@@ -2423,8 +2432,7 @@ void KMyMoneyApp::slotUpdateConfiguration()
   }
 }
 
-/** No descriptions */
-void KMyMoneyApp::slotFileBackup()
+void KMyMoneyApp::slotBackupFile()
 {
   // Save the file first so isLocalFile() works
   if (d->m_myMoneyView && d->m_myMoneyView->dirty())
@@ -2454,6 +2462,9 @@ void KMyMoneyApp::slotFileBackup()
   // TODO: port KF5
 #if 0
   QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
+#ifdef Q_OS_WIN
+  backupDlg->mountCheckBox->setEnabled(false);
+#endif
   int returncode = backupDlg->exec();
   if (returncode == QDialog::Accepted && backupDlg != 0) {
 
@@ -2463,17 +2474,18 @@ void KMyMoneyApp::slotFileBackup()
     d->m_mountpoint = backupDlg->txtMountPoint->text();
 
     if (d->m_backupMount) {
-      progressCallback(0, 300, i18n("Mounting %1", d->m_mountpoint));
-      d->m_proc.setProgram("mount");
-      d->m_proc << d->m_mountpoint;
-      d->m_proc.start();
-
+      slotBackupMount();
     } else {
+      progressCallback(0, 300, "");
+#ifdef Q_OS_WIN
+      d->m_ignoreBackupExitCode = true;
+      QTimer::singleShot(0, this, SLOT(slotBackupHandleEvents()));
+#else
       // If we don't have to mount a device, we just issue
       // a dummy command to start the copy operation
-      progressCallback(0, 300, "");
       d->m_proc.setProgram("true");
       d->m_proc.start();
+#endif
     }
 
   }
@@ -2482,72 +2494,89 @@ void KMyMoneyApp::slotFileBackup()
 #endif
 }
 
+void KMyMoneyApp::slotBackupMount()
+{
+  progressCallback(0, 300, i18n("Mounting %1", d->m_mountpoint));
+  d->m_proc.setProgram("mount");
+  d->m_proc << d->m_mountpoint;
+  d->m_proc.start();
+}
 
-/** No descriptions */
-void KMyMoneyApp::slotProcessExited()
+bool KMyMoneyApp::slotBackupWriteFile()
+{
+  QString today;
+  today.sprintf("-%04d-%02d-%02d.kmy",
+                QDate::currentDate().year(),
+                QDate::currentDate().month(),
+                QDate::currentDate().day());
+  QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
+  KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
+
+  // check if file already exists and ask what to do
+  QFile f(backupfile);
+  if (f.exists()) {
+    int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
+    if (answer == KMessageBox::Cancel) {
+      return false;
+    }
+  }
+
+  progressCallback(50, 0, i18n("Writing %1", backupfile));
+  d->m_proc.clearProgram();
+#ifdef Q_OS_WIN
+  d->m_proc << "cmd.exe" << "/c" << "copy" << "/y";
+  d->m_proc << QDir::toNativeSeparators(d->m_fileName.path(KUrl::LeaveTrailingSlash)) << QDir::toNativeSeparators(backupfile);
+#else
+  d->m_proc << "cp" << "-f";
+  d->m_proc << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
+#endif
+  d->m_backupState = BACKUP_COPYING;
+  d->m_proc.start();
+  return true;
+}
+
+void KMyMoneyApp::slotBackupUnmount()
+{
+  progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
+  d->m_proc.clearProgram();
+  d->m_proc.setProgram("umount");
+  d->m_proc << d->m_mountpoint;
+  d->m_backupState = BACKUP_UNMOUNTING;
+  d->m_proc.start();
+}
+
+void KMyMoneyApp::slotBackupFinish()
+{
+  d->m_backupState = BACKUP_IDLE;
+  progressCallback(-1, -1, QString());
+  ready();
+}
+
+void KMyMoneyApp::slotBackupHandleEvents()
 {
   // TODO: port KF5
 #if 0
   switch (d->m_backupState) {
     case BACKUP_MOUNTING:
 
-      if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
-        d->m_proc.clearProgram();
-        QString today;
-        today.sprintf("-%04d-%02d-%02d.kmy",
-                      QDate::currentDate().year(),
-                      QDate::currentDate().month(),
-                      QDate::currentDate().day());
-        QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
-        KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
-
-        // check if file already exists and ask what to do
+      if (d->m_ignoreBackupExitCode ||
+         (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0)) {
+        d->m_ignoreBackupExitCode = false;
         d->m_backupResult = 0;
-        QFile f(backupfile);
-        if (f.exists()) {
-          int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
-          if (answer == KMessageBox::Cancel) {
-            d->m_backupResult = 1;
-
-            if (d->m_backupMount) {
-              progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-              d->m_proc.clearProgram();
-              d->m_proc.setProgram("umount");
-              d->m_proc << d->m_mountpoint;
-              d->m_backupState = BACKUP_UNMOUNTING;
-              d->m_proc.start();
-            } else {
-              d->m_backupState = BACKUP_IDLE;
-              progressCallback(-1, -1, QString());
-              ready();
-            }
-          }
+        if (!slotBackupWriteFile()) {
+          d->m_backupResult = 1;
+          if (d->m_backupMount)
+            slotBackupUnmount();
+          else
+            slotBackupFinish();
         }
-
-        if (d->m_backupResult == 0) {
-          progressCallback(50, 0, i18n("Writing %1", backupfile));
-//FIXME: FIX on windows
-          d->m_proc << "cp" << "-f" << d->m_fileName.path() << backupfile;
-          d->m_backupState = BACKUP_COPYING;
-          d->m_proc.start();
-        }
-
       } else {
         KMessageBox::information(this, i18n("Error mounting device"), i18n("Backup"));
         d->m_backupResult = 1;
-        if (d->m_backupMount) {
-          progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-          d->m_proc.clearProgram();
-          d->m_proc.setProgram("umount");
-          d->m_proc << d->m_mountpoint;
-          d->m_backupState = BACKUP_UNMOUNTING;
-          d->m_proc.start();
-
-        } else {
-          d->m_backupState = BACKUP_IDLE;
-          progressCallback(-1, -1, QString());
-          ready();
-        }
+        if (d->m_backupMount)
+          slotBackupUnmount();
+        else
+          slotBackupFinish();
       }
       break;
 
@@ -2555,38 +2584,20 @@ void KMyMoneyApp::slotProcessExited()
       if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
 
         if (d->m_backupMount) {
-          progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-          d->m_proc.clearProgram();
-          d->m_proc.setProgram("umount");
-          d->m_proc << d->m_mountpoint;
-          d->m_backupState = BACKUP_UNMOUNTING;
-          d->m_proc.start();
+          slotBackupUnmount();
         } else {
           progressCallback(300, 0, i18nc("Backup done", "Done"));
           KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
-          d->m_backupState = BACKUP_IDLE;
-          progressCallback(-1, -1, QString());
-          ready();
+          slotBackupFinish();
         }
       } else {
-        qDebug("cp exit code is %d", d->m_proc.exitCode());
+        qDebug("copy exit code is %d", d->m_proc.exitCode());
         d->m_backupResult = 1;
         KMessageBox::information(this, i18n("Error copying file to device"), i18n("Backup"));
-
-        if (d->m_backupMount) {
-          progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-          d->m_proc.clearProgram();
-          d->m_proc.setProgram("umount");
-          d->m_proc << d->m_mountpoint;
-          d->m_backupState = BACKUP_UNMOUNTING;
-          d->m_proc.start();
-
-
-        } else {
-          d->m_backupState = BACKUP_IDLE;
-          progressCallback(-1, -1, QString());
-          ready();
-        }
+        if (d->m_backupMount)
+          slotBackupUnmount();
+        else
+          slotBackupFinish();
       }
       break;
 
@@ -2600,9 +2611,7 @@ void KMyMoneyApp::slotProcessExited()
       } else {
         KMessageBox::information(this, i18n("Error unmounting device"), i18n("Backup"));
       }
-      d->m_backupState = BACKUP_IDLE;
-      progressCallback(-1, -1, QString());
-      ready();
+      slotBackupFinish();
       break;
 
     default:
@@ -3403,7 +3412,7 @@ void KMyMoneyApp::slotAccountEdit()
         QPointer<KNewAccountDlg> dlg =
           new KNewAccountDlg(d->m_selectedAccount, true, category, 0, caption);
 
-        if (category || d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
+        if (category) {
           dlg->setOpeningBalanceShown(false);
           dlg->setOpeningDateShown(false);
           tid.clear();
@@ -7693,11 +7702,10 @@ KMStatus::~KMStatus()
 
 void KMyMoneyApp::Private::unlinkStatementXML()
 {
-  QDir d("/home/thb", "kmm-statement*");
+  QDir d(KMyMoneySettings::logPath(), "kmm-statement*");
   for (uint i = 0; i < d.count(); ++i) {
     qDebug("Remove %s", qPrintable(d[i]));
-//FIXME: FIX on windows
-    d.remove(QString("/home/thb/%1").arg(d[i]));
+    d.remove(KMyMoneySettings::logPath() + QString("/%1").arg(d[i]));
   }
   m_statementXMLindex = 0;
 }

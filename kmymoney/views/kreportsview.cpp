@@ -730,6 +730,7 @@ void KReportsView::slotSaveView()
       KRecentDirs::add(":kmymoney-export", newURL.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
       QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
+      // TODO  BUG:342776 port to KF5
       if (newName.indexOf('.') == -1)
         newName.append(".html");
 

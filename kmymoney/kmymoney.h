@@ -271,8 +271,35 @@ protected slots:
     */
   void slotShowCredits();
 
-  /** No descriptions */
-  void slotFileBackup();
+  /**
+    * Called when the user wishes to backup the current file
+    */
+  void slotBackupFile();
+
+  /**
+    * Perform mount operation before making a backup of the current file
+    */
+  void slotBackupMount();
+
+  /**
+    * Perform the backup write operation
+    */
+  bool slotBackupWriteFile();
+
+  /**
+    * Perform unmount operation after making a backup of the current file
+    */
+  void slotBackupUnmount();
+
+  /**
+    * Finish backup of the current file
+    */
+  void slotBackupFinish();
+
+  /**
+    * Handle events on making a backup of the current file
+    */
+  void slotBackupHandleEvents();
 
   void slotShowTipOfTheDay();
 
@@ -994,9 +1021,6 @@ public slots:
     * @param total the total value (100%)
     */
   void slotStatusProgressBar(int current, int total = 0);
-
-  /** No descriptions */
-  void slotProcessExited();
 
   /**
     * Called to update stock and currency prices from the user menu
