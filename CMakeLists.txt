@@ -63,7 +63,9 @@ endif()
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
 if(NOT MSVC) # MSVC has no regular standards version switches
-  add_compile_options(-std=c++14)
+  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+  set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
 
 # use DBus only on Linux
