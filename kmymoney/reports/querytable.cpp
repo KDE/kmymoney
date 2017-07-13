@@ -997,7 +997,15 @@ void QueryTable::constructTransactionTable()
             } else {
               //this applies when the transaction has only 2 splits, or each split is going to be
               //shown separately, eg. transactions by category
-
+              switch (m_config.rowType()) {
+                case MyMoneyReport::eCategory:
+                case MyMoneyReport::eTopCategory:
+                  if (splitAcc.isIncomeExpense())
+                    qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                  break;
+                default:
+                  break;
+              }
               qA[ctSplit].clear();
               qA[ctRank] = QLatin1Char('1');
             }
