@@ -103,6 +103,7 @@ void DateRangeDlg::setDateRange(const QDate& from, const QDate& to)
 {
     m_ui->m_fromDate->loadDate(from);
     m_ui->m_toDate->loadDate(to);
+    m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
     emit rangeChanged();
 }
 
