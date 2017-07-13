@@ -80,15 +80,6 @@ void DateRangeDlg::slotReset()
   setDateRange(MyMoneyTransactionFilter::allDates);
 }
 
-void DateRangeDlg::slotUpdateSelections(QString &txt)
-{
-  if (m_ui->m_dateRange->currentItem() != 0) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Date");
-  }
-}
-
 void DateRangeDlg::setupDatePage()
 {
   int i;
@@ -105,11 +96,19 @@ void DateRangeDlg::setupDatePage()
 
 void DateRangeDlg::slotDateRangeSelectedByUser()
 {
-  setDateRange(static_cast<MyMoneyTransactionFilter::dateOptionE>(m_ui->m_dateRange->currentData().toInt()));
+  setDateRange(m_ui->m_dateRange->currentItem());
+}
+
+void DateRangeDlg::setDateRange(const QDate& from, const QDate& to)
+{
+    m_ui->m_fromDate->loadDate(from);
+    m_ui->m_toDate->loadDate(to);
+    emit rangeChanged();
 }
 
 void DateRangeDlg::setDateRange(MyMoneyTransactionFilter::dateOptionE idx)
 {
+  m_ui->m_dateRange->setCurrentItem(idx);
   switch (idx) {
     case MyMoneyTransactionFilter::allDates:
       m_ui->m_fromDate->loadDate(QDate());
@@ -126,13 +125,27 @@ void DateRangeDlg::setDateRange(MyMoneyTransactionFilter::dateOptionE idx)
       m_ui->m_toDate->blockSignals(false);
       break;
   }
-//  slotUpdateSelections();
+  emit rangeChanged();
+}
+
+MyMoneyTransactionFilter::dateOptionE DateRangeDlg::dateRange() const
+{
+    return m_ui->m_dateRange->currentItem();
 }
 
 void DateRangeDlg::slotDateChanged()
 {
   m_ui->m_dateRange->blockSignals(true);
-  m_ui->m_dateRange->setCurrentItem(static_cast<MyMoneyTransactionFilter::dateOptionE>(MyMoneyTransactionFilter::userDefined));
+  m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
   m_ui->m_dateRange->blockSignals(false);
-//  slotUpdateSelections();
+}
+
+QDate DateRangeDlg::fromDate() const
+{
+    return m_ui->m_fromDate->date();
+}
+
+QDate DateRangeDlg::toDate() const
+{
+    return m_ui->m_toDate->date();
 }

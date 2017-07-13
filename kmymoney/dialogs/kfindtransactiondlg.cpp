@@ -134,6 +134,8 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   connect(m_ui->m_textEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
   // if return is pressed trigger a search (slotSearch checks if it's possible to perform the search)
   connect(m_ui->m_textEdit, SIGNAL(returnPressed()), this, SLOT(slotSearch()));
+  // in case the date selection changes, we update the selection
+  connect(m_dateRange, SIGNAL(rangeChanged()), this, SLOT(slotUpdateSelections()));
 
   setupAccountsPage();
   setupCategoriesPage();
@@ -262,7 +264,11 @@ void KFindTransactionDlg::slotUpdateSelections()
     txt += i18n("Account");
   }
 
-  m_dateRange->slotUpdateSelections(txt);
+  if (m_dateRange->dateRange() != MyMoneyTransactionFilter::allDates) {
+    if (!txt.isEmpty())
+      txt += ", ";
+    txt += i18n("Date");
+  }
 
   // Amount tab
   if ((m_ui->m_amountButton->isChecked() && m_ui->m_amountEdit->isValid())
@@ -669,8 +675,8 @@ void KFindTransactionDlg::setupFilter()
   }
 
   // Date tab
-  if (m_dateRange->m_ui->m_dateRange->currentItem() != 0) {
-    m_filter.setDateFilter(m_dateRange->m_ui->m_fromDate->date(), m_dateRange->m_ui->m_toDate->date());
+  if (m_dateRange->dateRange() != 0) {
+    m_filter.setDateFilter(m_dateRange->fromDate(), m_dateRange->toDate());
   }
 
   // Amount tab

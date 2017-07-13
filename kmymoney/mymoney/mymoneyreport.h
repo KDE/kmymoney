@@ -254,6 +254,9 @@ public:
   bool isDateUserDefined() const {
     return m_dateLock == MyMoneyTransactionFilter::userDefined;
   }
+  dateOptionE dateRange() const {
+    return m_dateLock;
+  }
   bool isDataUserDefined() const {
     return m_dataLock == MyMoneyReport::userDefined;
   }

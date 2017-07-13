@@ -81,21 +81,44 @@ public:
   */
   DateRangeDlg(QWidget *parent = 0);
   ~DateRangeDlg();
-  Ui::DateRangeDlgDecl*    m_ui;
 
+  /*!
+   * Setup a sliding date range which is relative to the
+   * current date (sliding date range)
+   */
   void setDateRange(MyMoneyTransactionFilter::dateOptionE);
+
+  /*!
+   * Setup a fixed user selected date range (does not slide)
+   */
+  void setDateRange(const QDate& from, const QDate& to);
+
+  /*!
+   * Return the currently selected date range option
+   */
+  MyMoneyTransactionFilter::dateOptionE dateRange() const;
+
+  QDate fromDate() const;
+  QDate toDate() const;
 
 public slots:
   void slotReset();
-  void slotUpdateSelections(QString &txt);
   void slotDateRangeSelectedByUser();
   void slotDateChanged();
+
+Q_SIGNALS:
+  /*!
+   * The rangeChanged() signal is emitted whenever a range
+   * is changed (user interaction or call to setDateRange() )
+   */
+  void rangeChanged();
 
 private:
   void setupDatePage();
 
-  QDate                m_startDates[MyMoneyTransactionFilter::dateOptionCount];
-  QDate                m_endDates[MyMoneyTransactionFilter::dateOptionCount];
+  Ui::DateRangeDlgDecl*  m_ui;
+  QDate                  m_startDates[MyMoneyTransactionFilter::dateOptionCount];
+  QDate                  m_endDates[MyMoneyTransactionFilter::dateOptionCount];
 };
 
 #endif

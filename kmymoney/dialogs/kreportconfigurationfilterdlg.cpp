@@ -127,6 +127,9 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_ui->m_dateTab->deleteLater();
 
     m_dateRange = m_tabRange->m_dateRange;
+    // reconnect signal
+    connect(m_dateRange, SIGNAL(rangeChanged()), this, SLOT(slotUpdateSelections()));
+
     if (!(m_initialState.isIncludingPrice() || m_initialState.isIncludingAveragePrice())) {
       connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
       connect(m_tabRange->ui->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
@@ -289,7 +292,7 @@ void KReportConfigurationFilterDlg::slotSearch()
   }
 
   // setup the date lock
-  MyMoneyTransactionFilter::dateOptionE range = m_dateRange->m_ui->m_dateRange->currentItem();
+  MyMoneyTransactionFilter::dateOptionE range = m_dateRange->dateRange();
   m_currentState.setDateFilter(range);
 
   if (m_tabCapitalGain) {
@@ -729,28 +732,15 @@ void KReportConfigurationFilterDlg::slotReset()
   QDate dateFrom, dateTo;
   if (m_initialState.dateFilter(dateFrom, dateTo)) {
     if (m_initialState.isDateUserDefined()) {
-      m_dateRange->m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
-      m_dateRange->m_ui->m_fromDate->setDate(dateFrom);
-      m_dateRange->m_ui->m_toDate->setDate(dateTo);
+      m_dateRange->setDateRange(dateFrom, dateTo);
     } else {
-      m_dateRange->m_ui->m_fromDate->setDate(dateFrom);
-      m_dateRange->m_ui->m_toDate->setDate(dateTo);
-      m_dateRange->slotDateChanged();
+      m_dateRange->setDateRange(m_initialState.dateRange());
     }
   } else {
-    m_dateRange->m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
     m_dateRange->setDateRange(MyMoneyTransactionFilter::allDates);
   }
 
   slotRightSize();
-}
-
-void KReportConfigurationFilterDlg::slotDateChanged()
-{
-  if (m_dateRange->m_ui->m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
-    m_dateRange->slotDateChanged();
-  }
-  slotUpdateSelections();
 }
 
 void KReportConfigurationFilterDlg::slotShowHelp()

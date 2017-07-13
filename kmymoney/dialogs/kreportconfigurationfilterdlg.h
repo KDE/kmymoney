@@ -80,12 +80,6 @@ protected slots:
   void slotReset();
   void slotSearch();
   void slotShowHelp();
-  /**
-   * This is to enable/disable the check to Include Transfers based on whether Categories are filtered or not.
-   * This is because if Categories are filtered, transfers will not be included anyway
-   */
-  virtual void slotDateChanged();
-
   void slotUpdateCheckTransfers();
   void slotUpdateColumnsCombo();
   void slotLogAxisChanged(int state);
