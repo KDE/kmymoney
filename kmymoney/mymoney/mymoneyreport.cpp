@@ -23,6 +23,7 @@
 
 #include <QString>
 #include <QList>
+#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,6 +32,9 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+
+// define this to debug reports
+// #define DEBUG_REPORTS
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
@@ -190,6 +194,14 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
   }
+#ifdef DEBUG_REPORTS
+  QDebug out = qDebug();
+  out << _name << toString(_rt) << toString(m_reportType);
+  foreach(const MyMoneyAccount::accountTypeE accountType, m_accountGroups)
+    out << MyMoneyAccount::accountTypeToString(accountType);
+  if (m_accounts.size() > 0)
+    out << m_accounts;
+#endif
 }
 
 MyMoneyReport::MyMoneyReport(const QDomElement& node) :
@@ -821,4 +833,44 @@ int MyMoneyReport::m_lineWidth = 2;
 void MyMoneyReport::setLineWidth(int width)
 {
   m_lineWidth = width;
+}
+
+QString MyMoneyReport::toString(ERowType type)
+{
+  switch(type) {
+  case eNoRows             : return "eNoRows";
+  case eAssetLiability     : return "eAssetLiability";
+  case eExpenseIncome      : return "eExpenseIncome";
+  case eCategory           : return "eCategory";
+  case eTopCategory        : return "eTopCategory";
+  case eAccount            : return "eAccount";
+  case eTag                : return "eTag";
+  case ePayee              : return "ePayee";
+  case eMonth              : return "eMonth";
+  case eWeek               : return "eWeek";
+  case eTopAccount         : return "eTopAccount";
+  case eAccountByTopAccount: return "eAccountByTopAccount";
+  case eEquityType         : return "eEquityType";
+  case eAccountType        : return "eAccountType";
+  case eInstitution        : return "eInstitution";
+  case eBudget             : return "eBudget";
+  case eBudgetActual       : return "eBudgetActual";
+  case eSchedule           : return "eSchedule";
+  case eAccountInfo        : return "eAccountInfo";
+  case eAccountLoanInfo    : return "eAccountLoanInfo";
+  case eAccountReconcile   : return "eAccountReconcile";
+  case eCashFlow           : return "eCashFlow";
+  default                  : return "undefined";
+  }
+}
+
+QString MyMoneyReport::toString(MyMoneyReport::EReportType type)
+{
+  switch(type) {
+  case eNoReport:   return "eNoReport";
+  case ePivotTable: return "ePivotTable";
+  case eQueryTable: return "eQueryTable";
+  case eInfoTable:  return "eInfoTable";
+  default:          return "undefined";
+  }
 }
