@@ -369,7 +369,8 @@ void KFindTransactionDlg::setupAccountsPage()
   AccountSet accountSet;
   accountSet.addAccountGroup(MyMoneyAccount::Asset);
   accountSet.addAccountGroup(MyMoneyAccount::Liability);
-  accountSet.addAccountGroup(MyMoneyAccount::Equity);
+  if (KMyMoneyGlobalSettings::expertMode())
+    accountSet.addAccountGroup(MyMoneyAccount::Equity);
   accountSet.addAccountGroup(MyMoneyAccount::Income);
   accountSet.addAccountGroup(MyMoneyAccount::Expense);
   //set the accountset to show closed account if the settings say so
