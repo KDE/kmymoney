@@ -65,7 +65,7 @@
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
-    : KFindTransactionDlg(parent),
+    : KFindTransactionDlg(parent, report.rowType() == MyMoneyReport::eAccount),
     m_tab2(0),
     m_tab3(0),
     m_tabChart(0),

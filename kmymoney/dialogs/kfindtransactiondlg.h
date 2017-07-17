@@ -99,8 +99,10 @@ public:
     // insert new constants above of this line
     dateOptionCount
   };
+   @param initAccountPage set to false to skip initialization of account page
+                          clients required to call initAcc
   */
-  KFindTransactionDlg(QWidget *parent = 0);
+  KFindTransactionDlg(QWidget *parent = 0, bool withEquityAccounts=true);
   ~KFindTransactionDlg();
 
   virtual bool eventFilter(QObject *o, QEvent *e);
@@ -170,7 +172,7 @@ protected:
 
   void setupCategoriesPage();
   void setupDatePage();
-  void setupAccountsPage();
+  void setupAccountsPage(bool withEquityAccounts=false);
   void setupAmountPage();
   void setupPayeesPage();
   void setupTagsPage();

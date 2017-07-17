@@ -114,7 +114,7 @@ void KSortOptionDlg::hideDefaultButton()
 }
 
 
-KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
+KFindTransactionDlg::KFindTransactionDlg(QWidget *parent, bool withEquityAccounts) :
     KDialog(parent),
     m_needReload(false),
     m_ui(new Ui::KFindTransactionDlgDecl)
@@ -135,7 +135,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   // if return is pressed trigger a search (slotSearch checks if it's possible to perform the search)
   connect(m_ui->m_textEdit, SIGNAL(returnPressed()), this, SLOT(slotSearch()));
 
-  setupAccountsPage();
+  setupAccountsPage(withEquityAccounts);
   setupCategoriesPage();
   setupDatePage();
   setupAmountPage();
@@ -363,13 +363,13 @@ bool KFindTransactionDlg::allItemsSelected(const QTreeWidget* view) const
   return true;
 }
 
-void KFindTransactionDlg::setupAccountsPage()
+void KFindTransactionDlg::setupAccountsPage(bool withEquityAccounts)
 {
   m_ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet accountSet;
   accountSet.addAccountGroup(MyMoneyAccount::Asset);
   accountSet.addAccountGroup(MyMoneyAccount::Liability);
-  if (KMyMoneyGlobalSettings::expertMode())
+  if (withEquityAccounts)
     accountSet.addAccountGroup(MyMoneyAccount::Equity);
   accountSet.addAccountGroup(MyMoneyAccount::Income);
   accountSet.addAccountGroup(MyMoneyAccount::Expense);
