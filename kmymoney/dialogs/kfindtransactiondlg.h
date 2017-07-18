@@ -99,8 +99,7 @@ public:
     // insert new constants above of this line
     dateOptionCount
   };
-   @param initAccountPage set to false to skip initialization of account page
-                          clients required to call initAcc
+   @param withEquityAccounts set to false to hide equity accounts in account page
   */
   KFindTransactionDlg(QWidget *parent = 0, bool withEquityAccounts=true);
   ~KFindTransactionDlg();
