@@ -155,19 +155,17 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
   }
   if (_rt == MyMoneyReport::eAccount) {
     addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
-    if (KMyMoneyGlobalSettings::expertMode())
-        addAccountGroup(MyMoneyAccount::Equity);
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
-    addAccountGroup(MyMoneyAccount::Checkings);
-    addAccountGroup(MyMoneyAccount::Savings);
-    addAccountGroup(MyMoneyAccount::Cash);
-    addAccountGroup(MyMoneyAccount::CreditCard);
-    addAccountGroup(MyMoneyAccount::Loan);
-    addAccountGroup(MyMoneyAccount::Income);
-    addAccountGroup(MyMoneyAccount::Expense);
     addAccountGroup(MyMoneyAccount::AssetLoan);
+    addAccountGroup(MyMoneyAccount::Cash);
+    addAccountGroup(MyMoneyAccount::Checkings);
+    addAccountGroup(MyMoneyAccount::CreditCard);
+    if (KMyMoneyGlobalSettings::expertMode())
+      addAccountGroup(MyMoneyAccount::Equity);
+    addAccountGroup(MyMoneyAccount::Expense);
+    addAccountGroup(MyMoneyAccount::Income);
+    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(MyMoneyAccount::Loan);
+    addAccountGroup(MyMoneyAccount::Savings);
     addAccountGroup(MyMoneyAccount::Stock);
     m_showRowTotals = true;
   }
