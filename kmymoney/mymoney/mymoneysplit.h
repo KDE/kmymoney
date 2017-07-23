@@ -283,14 +283,9 @@ public:
 
 private:
   /**
-    * This member contains the ID of the transaction
-    */
-  QString      m_id;
-
-  /**
     * This member contains the ID of the payee
     */
-  QString      m_payee;
+  QString        m_payee;
 
   /**
     * This member contains a list of the IDs of the tags
@@ -300,30 +295,29 @@ private:
   /**
     * This member contains the ID of the account
     */
-  QString       m_account;
+  QString        m_account;
 
   /**
    * This member contains the ID of the cost center
    */
-  QString       m_costCenter;
+  QString        m_costCenter;
 
   /**
     */
-  MyMoneyMoney  m_shares;
+  MyMoneyMoney   m_shares;
 
   /**
     */
-  MyMoneyMoney  m_value;
-
+  MyMoneyMoney   m_value;
 
   /**
     * If the quotient of m_shares divided by m_values is not the correct price
     * because of truncation, the price can be stored in this member. For display
     * purpose and transaction edit this value can be used by the application.
     */
-  MyMoneyMoney  m_price;
+  MyMoneyMoney   m_price;
 
-  QString       m_memo;
+  QString        m_memo;
 
   /**
     * This member contains information about the reconciliation
@@ -341,20 +335,20 @@ private:
     * In case the reconciliation flag is set to Reconciled or Frozen
     * this member contains the date of the reconciliation.
     */
-  QDate         m_reconcileDate;
+  QDate          m_reconcileDate;
 
   /**
     * The m_action member is an arbitrary string, but is intended to
     * be conveniently limited to a menu of selections such as
     * "Buy", "Sell", "Interest", etc.
     */
-  QString      m_action;
+  QString        m_action;
 
   /**
     * The m_number member is used to store a reference number to
     * the split supplied by the user (e.g. check number, etc.).
     */
-  QString       m_number;
+  QString        m_number;
 
   /**
     * This member keeps the bank's unique ID for the split, so we can
@@ -363,14 +357,14 @@ private:
     * This should only be set on the split which refers to the account
     * that was downloaded.
     */
-  QString m_bankID;
+  QString        m_bankID;
 
   /**
     * This member keeps a backward id to the transaction that this
     * split can be found in. It is the purpose of the MyMoneyTransaction
     * object to maintain this member variable.
     */
-  QString      m_transactionId;
+  QString        m_transactionId;
 };
 
 /**

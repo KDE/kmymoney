@@ -3,8 +3,8 @@
                              -------------------
     begin      : Thu Feb 21 2002
     copyright  : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
-                 (C) 2001-2011 by Thomas Baumgart <tbaumgart@kde.org>
                  (C) 2011 by Carlos Eduardo da Silva <kaduardo@gmail.com>
+                 (C) 2001-2017 by Thomas Baumgart <tbaumgart@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,9 +30,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
 
 
 const MyMoneyMoney MyMoneyMoney::ONE = MyMoneyMoney(1, 1);
