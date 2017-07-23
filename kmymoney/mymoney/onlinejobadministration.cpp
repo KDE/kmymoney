@@ -55,10 +55,15 @@ onlineJobAdministration::onlineJobAdministration(QObject *parent) :
 
 onlineJobAdministration::~onlineJobAdministration()
 {
-// Will be done somewhere else
-//  qDeleteAll(m_onlinePlugins);
+  clearCaches();
+}
+
+void onlineJobAdministration::clearCaches()
+{
   qDeleteAll(m_onlineTasks);
+  m_onlineTasks.clear();
   qDeleteAll(m_onlineTaskConverter);
+  m_onlineTaskConverter.clear();
 }
 
 KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin(const QString& accountId) const

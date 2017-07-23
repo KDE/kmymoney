@@ -83,6 +83,9 @@ public:
 
   void sendOnlineJob(QList<onlineJob>& jobs);
 
+  virtual void plug() override;
+  virtual void unplug() override;
+
 private:
   /**
     * creates the action objects available through the application menus

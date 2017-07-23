@@ -151,15 +151,22 @@ public:
 };
 
 
-KBankingPlugin::KBankingPlugin() :
-    KMyMoneyPlugin::OnlinePluginExtended(nullptr, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
-    d(new Private),
-    m_configAction(nullptr),
-    m_importAction(nullptr),
-    // m_kbanking(), set below
-    m_protocolConversionMap(),
-    m_accountSettings(nullptr),
-    m_onlineJobQueue()
+KBankingPlugin::KBankingPlugin()
+  : KMyMoneyPlugin::OnlinePluginExtended(nullptr, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/)
+  , d(new Private)
+  , m_configAction(nullptr)
+  , m_importAction(nullptr)
+  , m_kbanking(nullptr)
+  , m_accountSettings(nullptr)
+{
+}
+
+KBankingPlugin::~KBankingPlugin()
+{
+  delete d;
+}
+
+void KBankingPlugin::plug()
 {
   m_kbanking = new KMyMoneyBanking(this, "KMyMoney");
 
@@ -213,14 +220,13 @@ KBankingPlugin::KBankingPlugin() :
   }
 }
 
-
-KBankingPlugin::~KBankingPlugin()
+void KBankingPlugin::unplug()
 {
+  d->passwordCacheTimer->deleteLater();
   if (m_kbanking) {
     m_kbanking->fini();
     delete m_kbanking;
   }
-  delete d;
 }
 
 

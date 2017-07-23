@@ -88,6 +88,9 @@ public:
     return &m_instance;
   }
 
+  /** @brief clear the internal caches for shutdown */
+  void clearCaches();
+
   /** @brief Use onlineTask::name() to create a corresponding onlineJob */
   onlineJob createOnlineJob(const QString& name, const QString& id = MyMoneyObject::emptyId()) const;
 

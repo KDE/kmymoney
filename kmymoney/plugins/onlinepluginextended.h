@@ -45,6 +45,7 @@ class KMM_PLUGIN_EXPORT OnlinePluginExtended : public Plugin, public OnlinePlugi
 
 public:
   OnlinePluginExtended(QObject* parent, const char* name);
+  virtual ~OnlinePluginExtended() {}
 
   /**
    * @brief List onlineJobs supported by an account
@@ -71,6 +72,8 @@ public:
    */
   virtual void sendOnlineJob(QList<onlineJob>& jobs) = 0;
 
+  virtual void plug() = 0;
+  virtual void unplug() = 0;
 
 signals:
   /**

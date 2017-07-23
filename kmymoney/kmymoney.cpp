@@ -605,6 +605,13 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
 KMyMoneyApp::~KMyMoneyApp()
 {
+  // delete cached objects since the are in the way
+  // when unloading the plugins
+  onlineJobAdministration::instance()->clearCaches();
+
+  // we need to unload all plugins before we destroy anything else
+  unloadPlugins();
+
   delete d->m_searchDlg;
   delete d->m_qifReader;
   delete d->m_transactionEditor;
@@ -887,7 +894,7 @@ void KMyMoneyApp::initActions()
     };
 
     foreach (const auto info, actionInfos) {
-      QAction *a = new QAction(this);
+      QAction *a = new QAction(0);
       // KActionCollection::addAction by name sets object name anyways,
       // so, as better alternative, set it here right from the start
       a->setObjectName(s_Actions.value(info.action));
@@ -1839,8 +1846,9 @@ void KMyMoneyApp::slotFileQuit()
   }
 
   // We will only quit if all windows were processed and not cancelled
-  if (quitApplication)
+  if (quitApplication) {
     QCoreApplication::quit();
+  }
 }
 
 void KMyMoneyApp::slotShowTransactionDetail()
@@ -7121,6 +7129,12 @@ void KMyMoneyApp::loadPlugins()
   connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::pluginDisabled, this, &KMyMoneyApp::slotPluginUnload);
 }
 
+void KMyMoneyApp::unloadPlugins()
+{
+  Q_ASSERT(d->m_pluginLoader);
+  delete d->m_pluginLoader;
+}
+
 inline bool KMyMoneyApp::isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup)
 {
   //! @fixme: there is a function in KMyMoneyPlugin::PluginLoader which has to have the same content
@@ -7209,6 +7223,7 @@ void KMyMoneyApp::slotPluginUnload(const KPluginMetaData& metaData)
 
   plugin->unplug();
   slotUpdateActions();
+
 }
 
 void KMyMoneyApp::slotAutoSave()

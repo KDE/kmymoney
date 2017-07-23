@@ -63,6 +63,21 @@ PluginLoader::PluginLoader(QObject* parent)
   connect(m_pluginSelector, &KPluginSelector::configCommitted, this, &PluginLoader::changed);
 }
 
+PluginLoader::~PluginLoader()
+{
+  Q_ASSERT(s_instance != nullptr);
+
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup group{ config->group("Plugins") };
+
+  for (const QString& fileName: m_displayedPlugins) {
+    KPluginMetaData pluginData{fileName};
+    pluginDisabled(pluginData);
+  }
+
+  s_instance = nullptr;
+}
+
 void PluginLoader::detectPlugins()
 {
     addPluginInfo(KPluginLoader::findPlugins("kmymoney"));
@@ -92,10 +107,6 @@ void PluginLoader::addPluginInfo(const QVector<KPluginMetaData>& metaData)
     m_pluginSelector->addPlugins(QList<KPluginInfo> {info}, loadMethod, categoryByPluginType(plugin));
     //! @fixme The not all plugins are deactivated correctly at the moment. This has to change or the user should not get any option to enable and disable them
   }
-}
-
-PluginLoader::~PluginLoader()
-{
 }
 
 QString PluginLoader::categoryByPluginType(const KPluginMetaData& mataData)

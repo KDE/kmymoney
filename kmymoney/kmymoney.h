@@ -762,6 +762,12 @@ protected:
   void loadPlugins();
 
   /**
+    * unload all available plugins. Make sure you have called loadPlugins()
+    * before you call this one.
+    */
+  void unloadPlugins();
+
+  /**
    * @brief Checks if the given plugin is loaded on start up
    *
    * This filters plugins which are loaded on demand only and deactivated plugins.
