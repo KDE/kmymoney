@@ -235,22 +235,6 @@ public:
   const MyMoneySplit& interestSplit() const;
 
   /**
-    * This method is used to check if two transactions are identical.
-    * Identical transactions have:
-    *
-    * - the same number of splits
-    * - reference the same accounts
-    * - have the same values in the splits
-    * - have a postDate wihtin 3 days
-    *
-    * @param transaction reference to the transaction to be checked
-    *                    against this transaction
-    * @retval true transactions are identical
-    * @retval false transactions are not identical
-    */
-  bool isDuplicate(const MyMoneyTransaction& transaction) const;
-
-  /**
     * returns @a true if this is a stock split transaction
     */
   bool isStockSplit() const;

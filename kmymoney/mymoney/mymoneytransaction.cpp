@@ -335,45 +335,6 @@ void MyMoneyTransaction::setImported(bool state)
     deletePair("Imported");
 }
 
-bool MyMoneyTransaction::isDuplicate(const MyMoneyTransaction& r) const
-{
-  bool rc = true;
-  if (splitCount() != r.splitCount()) {
-    rc = false;
-  } else {
-    if (abs(m_postDate.daysTo(r.postDate())) > 3) {
-      rc = false;
-    } else {
-      unsigned long accHash[2];
-      unsigned long valHash[2];
-      unsigned long numHash[2];
-      for (int i = 0; i < 2; ++i)
-        accHash[i] = valHash[i] = numHash[i] = 0;
-
-      QList<MyMoneySplit>::ConstIterator it;
-      for (it = splits().begin(); it != splits().end(); ++it) {
-        accHash[0] += hash((*it).accountId());
-        valHash[0] += hash((*it).value().formatMoney("", 4));
-        numHash[0] += hash((*it).number());
-      }
-      for (it = r.splits().begin(); it != r.splits().end(); ++it) {
-        accHash[1] += hash((*it).accountId());
-        valHash[1] += hash((*it).value().formatMoney("", 4));
-        numHash[1] += hash((*it).number());
-      }
-
-      if (accHash[0] != accHash[1]
-          || valHash[0] != valHash[1]
-          || numHash[0] != numHash[1]
-         ) {
-        rc = false;
-      }
-    }
-  }
-
-  return rc;
-}
-
 void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   QDomElement el = document.createElement(nodeNames[nnTransaction]);
