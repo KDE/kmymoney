@@ -259,7 +259,7 @@ bool onlineJob::hasReferenceTo(const QString& id) const
 const QString onlineJob::getElName(const elNameE _el)
 {
   static const QMap<elNameE, QString> elNames = {
-    {enOnlineTask, QStringLiteral("ONLINETASK")}
+    {enOnlineTask, QStringLiteral("onlineTask")}
   };
   return elNames[_el];
 }
