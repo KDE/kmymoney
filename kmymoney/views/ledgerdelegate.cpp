@@ -133,13 +133,15 @@ public:
 
   NewTransactionEditor*         m_editor;
   int                           m_editorRow;
+  LedgerView*                   m_view;
 };
 
 
-LedgerDelegate::LedgerDelegate(QObject* parent)
+LedgerDelegate::LedgerDelegate(LedgerView* parent)
   : QStyledItemDelegate(parent)
   , d(new Private)
 {
+  d->m_view = parent;
 }
 
 LedgerDelegate::~LedgerDelegate()
@@ -152,16 +154,13 @@ void LedgerDelegate::setErroneousColor(const QColor& color)
   m_erroneousColor = color;
 }
 
+
 QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   Q_UNUSED(option);
 
   if(index.isValid()) {
-    Q_ASSERT(parent);
-    LedgerView* view = qobject_cast<LedgerView*>(parent->parentWidget());
-    Q_ASSERT(view != 0);
-
-    if(view->selectionModel()->selectedRows().count() > 1) {
+    if(d->m_view->selectionModel()->selectedRows().count() > 1) {
       qDebug() << "Editing multiple transactions at once is not yet supported";
 
       /**
@@ -173,7 +172,7 @@ QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewIte
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
-      d->m_editor = new NewTransactionEditor(parent, view->accountId());
+      d->m_editor = new NewTransactionEditor(parent, d->m_view->accountId());
     }
 
     if(d->m_editor) {
@@ -210,6 +209,11 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
         opt.state |= QStyle::State_HasFocus;
       }
     }
+  }
+  // if selected, always show as active, so that the
+  // background does not change when the editor is shown
+  if (opt.state & QStyle::State_Selected) {
+    opt.state |= QStyle::State_Active;
   }
 
   painter->save();
@@ -403,9 +407,8 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   bool fullDisplay = false;
-  LedgerView* view = qobject_cast<LedgerView*>(parent());
-  if(view) {
-    QModelIndex currentIndex = view->currentIndex();
+  if(d->m_view) {
+    QModelIndex currentIndex = d->m_view->currentIndex();
     if(currentIndex.isValid()) {
       QString currentId = currentIndex.model()->data(currentIndex, LedgerRole::TransactionSplitIdRole).toString();
       QString myId = index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString();
@@ -417,11 +420,11 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   QStyleOptionViewItem opt = option;
   if(index.isValid()) {
     // check if we are showing the edit widget
-    const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
-    if (view) {
-      QModelIndex editIndex = view->model()->index(index.row(), 0);
+    // const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
+    if (d->m_view) {
+      QModelIndex editIndex = d->m_view->model()->index(index.row(), 0);
       if(editIndex.isValid()) {
-        QWidget* editor = view->indexWidget(editIndex);
+        QWidget* editor = d->m_view->indexWidget(editIndex);
         if(editor) {
           size = editor->minimumSizeHint();
           return size;
@@ -432,7 +435,12 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
 
   int rows = 1;
   initStyleOption(&opt, index);
-  size = QSize(100, (opt.fontMetrics.lineSpacing()));
+
+  QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) * 2;
+
+  size = QSize(100, (opt.fontMetrics.lineSpacing() + margin));
+
   if(fullDisplay) {
     QString payee = index.data(LedgerRole::PayeeNameRole).toString();
     QString counterAccount = index.data(LedgerRole::CounterAccountRole).toString();
@@ -443,8 +451,8 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
     if(!rows) {
       rows = 1;
     }
-    // leave a few pixels as margin for each row
-    size.setHeight((size.height() + 5) * rows);
+    // leave a few pixels as margin for each space between rows
+    size.setHeight((size.height() * rows) - margin);
   }
 
   return size;
@@ -455,10 +463,9 @@ void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVie
   Q_UNUSED(index);
   QStyleOptionViewItem opt = option;
   int ofs = 8;
-  const LedgerView* view = qobject_cast<const LedgerView*>(opt.widget);
-  if(view) {
-    if(view->verticalScrollBar()->isVisible()) {
-      ofs += view->verticalScrollBar()->width();
+  if(d->m_view) {
+    if(d->m_view->verticalScrollBar()->isVisible()) {
+      ofs += d->m_view->verticalScrollBar()->width();
     }
   }
 

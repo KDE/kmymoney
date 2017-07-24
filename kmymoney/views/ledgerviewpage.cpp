@@ -61,12 +61,12 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   : QWidget(parent)
   , d(new Private(this))
 {
-  connect(d->ui->ledgerView, SIGNAL(transactionSelected(QString)), this, SIGNAL(transactionSelected(QString)));
-  connect(d->ui->ledgerView, SIGNAL(aboutToStartEdit()), this, SIGNAL(aboutToStartEdit()));
-  connect(d->ui->ledgerView, SIGNAL(aboutToFinishEdit()), this, SIGNAL(aboutToFinishEdit()));
-  connect(d->ui->ledgerView, SIGNAL(aboutToStartEdit()), this, SLOT(startEdit()));
-  connect(d->ui->ledgerView, SIGNAL(aboutToFinishEdit()), this, SLOT(finishEdit()));
-  connect(d->ui->splitter, SIGNAL(splitterMoved(int,int)), this, SLOT(splitterChanged(int,int)));
+  connect(d->ui->ledgerView, &LedgerView::transactionSelected, this, &LedgerViewPage::transactionSelected);
+  connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::aboutToStartEdit);
+  connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
+  connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
+  connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
+  connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -102,8 +102,10 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
       d->ui->formWidget->setLayout(new QHBoxLayout(d->ui->formWidget));
     }
     d->ui->formWidget->layout()->addWidget(d->form);
-    connect(d->ui->ledgerView, SIGNAL(transactionSelected(QString)), d->form, SLOT(showTransaction(QString)));
-    connect(Models::instance()->ledgerModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), d->form, SLOT(modelDataChanged(QModelIndex,QModelIndex)));
+    connect(d->ui->ledgerView, &LedgerView::transactionSelected,
+            d->form, &NewTransactionForm::showTransaction);
+    connect(Models::instance()->ledgerModel(), &LedgerModel::dataChanged,
+            d->form, &NewTransactionForm::modelDataChanged);
   }
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
   d->ui->ledgerView->setAccount(acc);

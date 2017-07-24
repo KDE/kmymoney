@@ -137,8 +137,14 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
   painter->save();
 
   // Background
+  auto bgOpt = opt;
+  // if selected, always show as active, so that the
+  // background does not change when the editor is shown
+  if (opt.state & QStyle::State_Selected) {
+    bgOpt.state |= QStyle::State_Active;
+  }
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &bgOpt, painter, opt.widget);
 
   // Do not paint text if the edit widget is shown
   const LedgerView *view = qobject_cast<const LedgerView *>(opt.widget);

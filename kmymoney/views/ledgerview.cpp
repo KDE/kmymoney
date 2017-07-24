@@ -41,8 +41,8 @@ class LedgerView::Private
 {
 public:
   Private(LedgerView* p)
-  : parent(p)
-  , filterModel(new LedgerSortFilterProxyModel(parent))
+  : delegate(0)
+  , filterModel(new LedgerSortFilterProxyModel(p))
   , adjustableColumn(LedgerModel::DetailColumn)
   , adjustingColumn(false)
   , showValuesInverted(false)
@@ -72,7 +72,7 @@ public:
     balanceCalculationPending = false;
   }
 
-  LedgerView*                 parent;
+  LedgerDelegate*             delegate;
   LedgerSortFilterProxyModel* filterModel;
   MyMoneyAccount              account;
   int                         adjustableColumn;
@@ -87,6 +87,8 @@ LedgerView::LedgerView(QWidget* parent)
   : QTableView(parent)
   , d(new Private(this))
 {
+  verticalHeader()->setDefaultSectionSize(15);
+  verticalHeader()->setMinimumSectionSize(15);
   verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
   verticalHeader()->hide();
 
@@ -141,7 +143,9 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
 
       horizontalHeader()->resizeSection(LedgerModel::ReconciliationColumn, 20);
 
-      setItemDelegate(new LedgerDelegate(this));
+      delete d->delegate;
+      d->delegate = new LedgerDelegate(this);
+      setItemDelegate(d->delegate);
       break;
   }
 
@@ -151,13 +155,13 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
     d->showValuesInverted = true;
   }
 
-  d->filterModel->setFilterRole(LedgerRole::AccountIdRole);
   d->filterModel->setFilterFixedString(acc.id());
   d->filterModel->setAccountType(acc.accountType());
   d->filterModel->setSortRole(LedgerRole::PostDateRole);
   d->filterModel->sort(LedgerModel::DateColumn);
 
   // set the delegate for the markers by finding them in the model
+
   /// @todo logic needs to be implemented
 
   // if balance calculation has not been triggered, then run it immediately
@@ -354,10 +358,9 @@ int LedgerView::sizeHintForRow(int row) const
   // time in large ledgers. In case the editor is open in the row, we
   // use the regular method.
   QModelIndex index = d->filterModel->index(row, 0);
-  LedgerDelegate* delegate = qobject_cast<LedgerDelegate*>(itemDelegate(index));
-  if(delegate && (delegate->editorRow() != row)) {
+  if(d->delegate && (d->delegate->editorRow() != row)) {
     QStyleOptionViewItem opt;
-    int hint = delegate->sizeHint(opt, index).height();
+    int hint = d->delegate->sizeHint(opt, index).height();
     if(showGrid())
       hint += 1;
     return hint;

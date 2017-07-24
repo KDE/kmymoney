@@ -522,6 +522,11 @@ QVariant LedgerModel::headerData(int section, Qt::Orientation orientation, int r
         break;
     }
   }
+  else if(orientation == Qt::Vertical && role == Qt::SizeHintRole) {
+    // as small as possible, so that the delegate has a chance
+    // to override the information
+    return QSize(10, 10);
+  }
   return QAbstractItemModel::headerData(section, orientation, role);
 }
 

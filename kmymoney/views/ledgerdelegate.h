@@ -30,16 +30,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
 class NewTransactionEditor;
-
+class LedgerView;
 
 
 class LedgerDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 public:
-  explicit LedgerDelegate(QObject* parent = 0);
+  explicit LedgerDelegate(LedgerView* parent = 0);
   virtual ~LedgerDelegate();
 
   virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
