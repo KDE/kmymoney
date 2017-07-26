@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2017-07-25</date>
+  <releaseinfo>4.8.1</releaseinfo>
 </chapterinfo>
 
 <title>Introduction</title>
@@ -11,7 +11,7 @@
 <title>What is &kappname;?</title>
 
 <para>
-  Put simply, &kappname; is a personal finance manager for &kde;.  It enables
+  Put simply, &kappname; is a personal finance manager by &kde;.  It enables
   users of open source operating systems and applications to keep careful track
   of their personal finances by providing a broad array of financial features
   and tools.
@@ -59,10 +59,12 @@
 
 <para>
   As a personal finance manager, &kappname; is not intended to scale to the
-  needs of an average business.  A small business might find sufficient
-  functionality to use &kappname;, but features such as accounts-receivable and
-  accounts-payable are not directly supported.  However, it would be possible to
-  create client, supplier, document, or other features through plugins.
+  needs of an average business or organization.  A small business might find
+  sufficient functionality to use &kappname;, but features such as
+  accounts-receivable and accounts-payable are not directly supported.  However,
+  it would be possible to create client, supplier, document, or other features
+  through plugins.  There are also legal requirements on business bookkeeping in
+  many countries, which &kappname; does not meet.
 </para>
 
 <para>

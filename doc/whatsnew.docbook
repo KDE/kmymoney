@@ -1,86 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
 <chapterinfo>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2017-07-25</date>
+  <releaseinfo>4.8.1</releaseinfo>
 </chapterinfo>
 
 <title>What's new in this release</title>
 
 <para>
-  As with every release, the &kappname; development team has been working hard
-  to make this release better and easier to use in every way. We have also made
-  quite a few improvements. We are confident you will like what you see.
+  As with every release, the &kappname; development team has worked hard to make
+  this release better and easier to use in every way, although most of the
+  developer effort has recently gone toward releasing a version of &kappname;
+  which runs under KDE Frameworks.  However, this release does include almost 50
+  different bug fixes and new features.  For the future, and any further
+  releases in the 4.8.x series will likely contain only bug fixes.
 </para>
 
 <para>
-  In addition to numerous bug fixes, this version also includes new features and
-  functionality.  Although all new features have had some testing, this is
-  considered a development release, in preparation for a full release 4.8 early
-  in 2015.
-</para>
-
-<para>
-  Here are some of the new features found in this release:
+  Here are some of the bugs fixed and new features found in this release:
 </para>
 
 <itemizedlist>
   <listitem>
     <para>
-      Transaction tags were added. This was long requested feature and allows an improved categorization of transaction.
+      Multiple improvements to data import, including:
     </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Better performance of the user interface.  Performance in general has been improved by fixing performance issues spotted using a profiler.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Proper input methods support was added. &kappname; can now be safely used with languages that need input methods for easier use.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Added a frozen column to improve visualizing forecast details. This way the account name won't be shifted out of the view when horizontally scrolling the forecast details.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      The application icons were improved.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Many improvements in the importing and online banking modules, including:
-    </para>
-  </listitem>
-
-  <listitem>
     <itemizedlist>
       <listitem>
         <para>
-          The homepage can show accounts online banking status.
+          Improved payee matching
         </para>
       </listitem>
 
       <listitem>
         <para>
-          OFX plugin now allows custom application version.
+          Avoid crash if you provide an invalid name for the import file
         </para>
       </listitem>
 
       <listitem>
         <para>
-          There is a new plugin to export csv files.
+          Resolved numerous issues with importing QIF and CSV files
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Removed some restrictions on the type of account to which data can be
+          imported.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Allowed OFX import to use Client UID, required by some banks.
         </para>
       </listitem>
     </itemizedlist>
+  </listitem>
+  
+  <listitem>
+    <para>
+      Multiple improvements to the &Windows; version, including:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Changes to make the build process easier and more reliable.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Allow saving reports as .csv and not just .html.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Fixed localization problems on 64 bit versions.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Resolved issues with file backup.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+
+  <listitem>
+    <para>
+      The user is now notified if changing a memo in a transaction would make it
+      different from the memo in the other split of the transaction (such as in
+      a transfer.)
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Added a setting to configure location of optional log file for imported
+      data.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Remove restriction on configuring VAT account assignments for certain
+      types of accounts.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Several improvements to the database back end
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Avoiding a crash if the database is not present restoring from hibernation.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Corrected SQL syntax issues causing errors.
+        </para>
+      </listitem>
+    </itemizedlist>
+    
+  </listitem>
+
+  <listitem>
+    <para>
+      Eliminated false positive errors from Consistency Check
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Several improvements to importing and exporting templates.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Elimination of several causes of crashes.
+    </para>
   </listitem>
 </itemizedlist>
 

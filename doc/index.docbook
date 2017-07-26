@@ -129,7 +129,7 @@
 
 <bookinfo>
 <title>The &kappname; Handbook</title>
-<subtitle>for &kappname; version 4.7</subtitle>
+<subtitle>for &kappname; version 4.8.1</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -150,20 +150,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 </authorgroup>
 
 <copyright>
-<year>2000</year>
-<year>2001</year>
-<year>2003</year>
-<year>2004</year>
-<year>2005</year>
-<year>2006</year>
-<year>2007</year>
-<year>2008</year>
-<year>2009</year>
-<year>2010</year>
-<year>2011</year>
-<year>2012</year>
-<year>2013</year>
-<year>2014</year>
+  <year>2000-2017</year>
 <holder>The &kappname; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -178,18 +165,18 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2014-08-30</date>
-<releaseinfo>4.7.01</releaseinfo>
+<date>2017-07-25</date>
+<releaseinfo>4.8.1</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
 <abstract>
 <para>
-  &kappname;, the personal finance manager for &kde;.
+  &kappname;, the personal finance manager by &kde;.
 </para>
 
 <para>
-  This handbook describes &kappname; version 4.7.
+  This handbook describes &kappname; version 4.8.1
 </para>
 </abstract>
 
