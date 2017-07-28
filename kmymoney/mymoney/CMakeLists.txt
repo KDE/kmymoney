@@ -65,7 +65,6 @@ target_link_libraries(kmm_mymoney
                       Alkimia::alkimia
                       kmm_storage
 #                     onlinetask_interfaces
-                      onlinetask_unavailabletask
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
@@ -73,6 +72,8 @@ target_link_libraries(kmm_mymoney
                       kmm_config
                       # TODO: fix this
                       KF5::XmlGui
+                      PRIVATE
+                      onlinetask_unavailabletask
 )
 
 if(KMM_ADDRESSBOOK_FOUND)

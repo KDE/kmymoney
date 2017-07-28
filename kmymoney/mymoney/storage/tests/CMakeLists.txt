@@ -16,4 +16,5 @@ ecm_add_tests(${tests_sources}
     kmm_mymoney
     kmm_testutils
     reports_testcommon
+    onlinetask_unavailabletask
 )
