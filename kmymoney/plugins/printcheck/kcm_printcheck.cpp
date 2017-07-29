@@ -25,6 +25,11 @@
 #include <QLayout>
 #include <QGroupBox>
 #include <QFrame>
+#ifdef ENABLE_WEBENGINE
+#include <QWebEngineView>
+#else
+#include <KDEWebKit/KWebView>
+#endif
 
 // KDE includes
 #include <KPluginFactory>
@@ -35,7 +40,12 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
   setupUi(this);
+  #ifdef ENABLE_WEBENGINE
   m_checkTemplatePreviewHTMLPart = new QWebEngineView(m_previewFrame);
+  #else
+  m_checkTemplatePreviewHTMLPart = new KWebView(m_previewFrame);
+  #endif
+
   QVBoxLayout *layout = new QVBoxLayout;
   m_previewFrame->setLayout(layout);
   layout->addWidget(m_checkTemplatePreviewHTMLPart);

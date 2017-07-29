@@ -25,7 +25,6 @@
 // QT Includes
 
 #include <QWidget>
-#include <QWebEngineView>
 #include <QtPrintSupport/QPrinter>
 
 // ----------------------------------------------------------------------------
@@ -37,6 +36,12 @@
 #include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
 #include "kmymoneyview.h"
+
+#ifdef ENABLE_WEBENGINE
+class QWebEngineView;
+#else
+class KWebView;
+#endif
 
 /**
   * Displays a 'home page' for the user.  Similar to concepts used in

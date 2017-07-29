@@ -33,6 +33,7 @@ set(libviews_a_SOURCES
   splitdialog.cpp
   splitdelegate.cpp
   widgethintframe.cpp
+  kmymoneywebpage.cpp
 )
 
 set(libviews_a_HEADER kmymoneyview.h)
@@ -65,15 +66,16 @@ ki18n_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
 
-target_link_libraries(views PUBLIC KChart KF5::KIOFileWidgets KF5::Notifications KF5::Archive KF5::TextWidgets Qt5::Sql Qt5::WebEngineWidgets Alkimia::alkimia)
+target_link_libraries(views PUBLIC KChart KF5::KIOFileWidgets KF5::Notifications KF5::Archive KF5::TextWidgets Qt5::Sql Alkimia::alkimia)
 
-#to be deleted when QWebEngine 5.8 will be better spread across distros
-if(KF5KHtml_FOUND)
-  target_link_libraries(views PRIVATE KF5::KHtml)
-endif()
+if(ENABLE_WEBENGINE)
+ target_link_libraries(views PUBLIC Qt5::WebEngineWidgets)
+else(ENABLE_WEBENGINE)
+ target_link_libraries(views PUBLIC KF5::WebKit)
+endif(ENABLE_WEBENGINE)
 
 if(KF5Activities_FOUND)
-  target_link_libraries(views PRIVATE KF5::Activities)
+ target_link_libraries(views PRIVATE KF5::Activities)
 endif()
 
 # TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly

@@ -20,14 +20,19 @@
 #ifndef KCM_PRINTCHECK_H
 #define KCM_PRINTCHECK_H
 
+#include "config-kmymoney.h"
+
 #include <kcmodule.h>
 #include <QWidget>
-#include <QWebEngineView>
 #include "ui_pluginsettingsdecl.h"
 
 class QStringList;
 class KPluginInfo;
-class KHTMLPart;
+#ifdef ENABLE_WEBENGINE
+class QWebEngineView;
+#else
+class KWebView;
+#endif
 
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
@@ -40,7 +45,11 @@ public slots:
   void returnPressed(const QString& url);
 
 private:
-  QWebEngineView* m_checkTemplatePreviewHTMLPart;
+  #ifdef ENABLE_WEBENGINE
+  QWebEngineView *m_checkTemplatePreviewHTMLPart;
+  #else
+  KWebView       *m_checkTemplatePreviewHTMLPart;
+  #endif
 };
 
 class KCMPrintCheck : public KCModule

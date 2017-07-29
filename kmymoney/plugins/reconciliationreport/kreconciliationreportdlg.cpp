@@ -31,18 +31,24 @@
 
 // KDE includes
 #include <KStandardGuiItem>
-#ifdef KF5KHtml_FOUND
-#include <KHTMLPart>
-#include <KHTMLView>
+#ifdef ENABLE_WEBENGINE
+#include <QtWebEngineWidgets/QWebEngineView>
+#else
+#include <KDEWebKit/KWebView>
 #endif
 
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)
 {
   setupUi(this);
+  #ifdef ENABLE_WEBENGINE
   m_summaryHTMLPart = new QWebEngineView(m_summaryTab);
-  m_summaryLayout->addWidget(m_summaryHTMLPart);
-
   m_detailsHTMLPart = new QWebEngineView(m_detailsTab);
+  #else
+  m_summaryHTMLPart = new KWebView(m_summaryTab);
+  m_detailsHTMLPart = new KWebView(m_detailsTab);
+  #endif
+
+  m_summaryLayout->addWidget(m_summaryHTMLPart);
   m_detailsLayout->addWidget(m_detailsHTMLPart);
 
   m_summaryHTMLPart->setHtml(summaryReportHTML, QUrl("file://"));
@@ -59,34 +65,8 @@ KReportDlg::~KReportDlg()
 {
 }
 
-#ifdef KF5KHtml_FOUND
-void KReportDlg::handleHTML(const QString &sHTML)
-{
-  KHTMLPart *khtml = new KHTMLPart(this);
-  khtml->begin();
-  khtml->write(sHTML);
-  khtml->end();
-  khtml->view()->print();
-  delete khtml;
-}
-#endif
-
 void KReportDlg::print()
 {
-#ifdef KF5KHtml_FOUND
-    // do the actual painting job
-    connect(this, &KReportDlg::getHTML, this, &KReportDlg::handleHTML);
-    switch (m_tabWidget->currentIndex()) {
-      case 0:
-        m_summaryHTMLPart->page()->toHtml([this](const QString &result){emit getHTML(result);});
-        break;
-      case 1:
-        m_detailsHTMLPart->page()->toHtml([this](const QString &result){emit getHTML(result);});
-        break;
-      default:
-        qDebug("KReportDlg::print() current page index not handled correctly");
-    }
-#else
   m_currentPrinter = new QPrinter();
   QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
   dialog->setWindowTitle(QString());
@@ -99,15 +79,22 @@ void KReportDlg::print()
   // do the actual painting job
   switch (m_tabWidget->currentIndex()) {
     case 0:
+      #ifdef ENABLE_WEBENGINE
       m_summaryHTMLPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      #else
+      m_summaryHTMLPart->print(m_currentPrinter);
+      #endif
       break;
     case 1:
+      #ifdef ENABLE_WEBENGINE
       m_detailsHTMLPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      #else
+      m_detailsHTMLPart->print(m_currentPrinter);
+      #endif
       break;
     default:
       delete m_currentPrinter;
       m_currentPrinter = nullptr;
       qDebug("KReportDlg::print() current page index not handled correctly");
   }
-  #endif
 }

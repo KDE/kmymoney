@@ -41,8 +41,12 @@
 #include <QFileDialog>
 #include <QLocale>
 #include <QTextCodec>
-#include <QWebEngineSettings>
 #include <QtPrintSupport/QPrintDialog>
+#ifdef ENABLE_WEBENGINE
+#include <QtWebEngineWidgets/QWebEngineView>
+#else
+#include <KDEWebKit/KWebView>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -50,10 +54,6 @@
 #include <KConfig>
 #include <KMessageBox>
 #include <KRecentDirs>
-#ifdef KF5KHtml_FOUND
-#include <KHTMLPart>
-#include <KHTMLView>
-#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -65,6 +65,7 @@
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
 #include <icons/icons.h>
+#include <kmymoneywebpage.h>
 
 using namespace reports;
 using namespace Icons;
@@ -80,7 +81,11 @@ using namespace Icons;
   */
 KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler):
     QWidget(parent),
+    #ifdef ENABLE_WEBENGINE
     m_tableView(new QWebEngineView(this)),
+    #else
+    m_tableView(new KWebView(this)),
+    #endif
     m_chartView(new KReportChartView(this)),
     m_control(new ReportControl(this)),
     m_layout(new QVBoxLayout(this)),
@@ -132,8 +137,14 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   connect(m_control->ui->buttonClose, SIGNAL(clicked()),
           eventHandler, SLOT(slotCloseCurrent()));
 
+  #ifdef ENABLE_WEBENGINE
   connect(m_tableView->page(), &QWebEnginePage::urlChanged,
           eventHandler, &KReportsView::slotOpenUrl);
+  #else
+  m_tableView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+  connect(m_tableView->page(), &KWebPage::linkClicked,
+          eventHandler, &KReportsView::slotOpenUrl);
+  #endif
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())
@@ -157,14 +168,6 @@ KReportsView::KReportTab::~KReportTab()
 void KReportsView::KReportTab::print()
 {
   if (m_tableView) {
-#ifdef KF5KHtml_FOUND
-    KHTMLPart *khtml = new KHTMLPart(this);
-    khtml->begin();
-    khtml->write(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()));
-    khtml->end();
-    khtml->view()->print();
-    delete khtml;
-#else
     m_currentPrinter = new QPrinter();
     QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
     dialog->setWindowTitle(QString());
@@ -173,8 +176,11 @@ void KReportsView::KReportTab::print()
       m_currentPrinter = nullptr;
       return;
     }
-    m_tableView->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
-#endif
+    #ifdef ENABLE_WEBENGINE
+      m_tableView->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+    #else
+      m_tableView->print(m_currentPrinter);
+    #endif
   }
 }
 

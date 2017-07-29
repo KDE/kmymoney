@@ -39,6 +39,11 @@
 #include <QDesktopServices>
 #include <QUrlQuery>
 #include <QtPrintSupport/QPrintDialog>
+#ifdef ENABLE_WEBENGINE
+#include <QtWebEngineWidgets/QWebEngineView>
+#else
+#include <KDEWebKit/KWebView>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -51,10 +56,6 @@
 #include <kmessagebox.h>
 #include <kcodecs.h>
 #include <ktoolinvocation.h>
-#ifdef KF5KHtml_FOUND
-#include <KHTMLPart>
-#include <KHTMLView>
-#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -69,6 +70,7 @@
 #include "pivotgrid.h"
 #include "reportaccount.h"
 #include <icons.h>
+#include <kmymoneywebpage.h>
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"
@@ -99,7 +101,12 @@ public:
    */
   typedef QMap<QDate, MyMoneyMoney> dailyBalances;
 
+  #ifdef ENABLE_WEBENGINE
   QWebEngineView   *m_view;
+  #else
+  KWebView         *m_view;
+  #endif
+
   QString           m_html;
   bool              m_showAllSchedules;
   bool              m_needReload;
@@ -139,13 +146,24 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Home")),
     d(new Private)
 {
+  #ifdef ENABLE_WEBENGINE
   d->m_view = new QWebEngineView(this);
+  #else
+  d->m_view = new KWebView(this);
+  #endif
   d->m_view->setPage(new MyQWebEnginePage(d->m_view));
+
   addWidget(d->m_view);
 
   d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+  #ifdef ENABLE_WEBENGINE
   connect(d->m_view->page(), &QWebEnginePage::urlChanged,
-          this, &KHomeView::slotOpenUrl);
+            this, &KHomeView::slotOpenUrl);
+  #else
+  d->m_view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+  connect(d->m_view->page(), &KWebPage::linkClicked,
+            this, &KHomeView::slotOpenUrl);
+  #endif
 }
 
 KHomeView::~KHomeView()
@@ -198,14 +216,6 @@ void KHomeView::showEvent(QShowEvent* event)
 void KHomeView::slotPrintView()
 {
   if (d->m_view) {
-#ifdef KF5KHtml_FOUND
-    KHTMLPart *khtml = new KHTMLPart(this);
-    khtml->begin();
-    khtml->write(d->m_html);
-    khtml->end();
-    khtml->view()->print();
-    delete khtml;
-#else
     m_currentPrinter = new QPrinter();
     QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
     dialog->setWindowTitle(QString());
@@ -214,8 +224,11 @@ void KHomeView::slotPrintView()
       m_currentPrinter = nullptr;
       return;
     }
+    #ifdef ENABLE_WEBENGINE
     d->m_view->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
-#endif
+    #else
+      d->m_view->print(m_currentPrinter);
+    #endif
   }
 }
 

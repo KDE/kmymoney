@@ -20,6 +20,8 @@
 #ifndef KMYMONEYVIEW_H
 #define KMYMONEYVIEW_H
 
+#include "config-kmymoney.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -29,7 +31,6 @@
 #include <QUrl>
 #include <QSaveFile>
 #include <QMenu>
-#include <QtWebEngineWidgets/QWebEnginePage>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,8 +39,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "config-kmymoney.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
 #include "mymoneytransaction.h"
@@ -666,17 +665,6 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
-};
-
-class MyQWebEnginePage : public QWebEnginePage
-{
-  Q_OBJECT
-
-public:
-  MyQWebEnginePage(QObject* parent = nullptr) : QWebEnginePage(parent){}
-
-protected:
-  bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool);
 };
 
 inline uint qHash(const KMyMoneyView::View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

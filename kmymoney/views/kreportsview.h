@@ -23,6 +23,8 @@
 #ifndef KREPORTSVIEW_H
 #define KREPORTSVIEW_H
 
+#include "config-kmymoney.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -33,7 +35,6 @@
 #include <QTreeWidgetItem>
 #include <QTabWidget>
 #include <QListWidget>
-#include <QWebEngineView>
 #include <QtPrintSupport/QPrinter>
 
 // ----------------------------------------------------------------------------
@@ -64,6 +65,12 @@
 class MyMoneyReport;
 class MyQWebEnginePage;
 
+#ifdef ENABLE_WEBENGINE
+class QWebEngineView;
+#else
+class KWebView;
+#endif
+
 /**
   * Displays a page where reports can be placed.
   *
@@ -87,7 +94,11 @@ public:
   class KReportTab: public QWidget
   {
   private:
+    #ifdef ENABLE_WEBENGINE
     QWebEngineView            *m_tableView;
+    #else
+    KWebView                  *m_tableView;
+    #endif
     reports::KReportChartView *m_chartView;
     ReportControl             *m_control;
     QVBoxLayout               *m_layout;

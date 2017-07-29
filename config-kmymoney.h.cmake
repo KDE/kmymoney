@@ -21,4 +21,4 @@
 
 #cmakedefine KF5Activities_FOUND 1
 
-#cmakedefine KF5KHtml_FOUND 0
+#cmakedefine ENABLE_WEBENGINE 0

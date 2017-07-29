@@ -14,16 +14,16 @@ ki18n_wrap_ui(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui
 add_library(kmm_reconciliationreport MODULE ${kmm_reconciliationreport_PART_SRCS})
 
 target_link_libraries(kmm_reconciliationreport
-  Qt5::WebEngineWidgets
   Qt5::PrintSupport
   kmm_mymoney
   kmm_plugin
 )
 
-#to be deleted when QWebEngine 5.8 will be better spread across distros
-if(KF5KHtml_FOUND)
-  target_link_libraries(kmm_reconciliationreport KF5::KHtml)
-endif()
+if(ENABLE_WEBENGINE)
+ target_link_libraries(kmm_reconciliationreport Qt5::WebEngineWidgets)
+else(ENABLE_WEBENGINE)
+ target_link_libraries(kmm_reconciliationreport KF5::WebKit)
+endif(ENABLE_WEBENGINE)
 
 install(TARGETS kmm_reconciliationreport
         DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

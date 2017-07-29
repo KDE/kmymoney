@@ -24,7 +24,11 @@
 
 // QT includes
 #include <QAction>
+#ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
+#else
+#include <KDEWebKit/KWebView>
+#endif
 #include <QtPrintSupport/QPrintDialog>
 
 // KDE includes
@@ -32,10 +36,6 @@
 #include <KPluginInfo>
 #include <QStandardPaths>
 #include <KLocalizedString>
-#ifdef KF5KHtml_FOUND
-#include <KHTMLPart>
-#include <KHTMLView>
-#endif
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -124,7 +124,12 @@ void KMMPrintCheckPlugin::slotPrintCheck()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoneyToWordsConverter converter;
-  QWebEngineView *htmlPart = new QWebEngineView();
+  #ifdef ENABLE_WEBENGINE
+  auto htmlPart = new QWebEngineView();
+  #else
+  auto htmlPart = new KWebView();
+  #endif
+
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
   for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (!canBePrinted(*it))
@@ -162,14 +167,6 @@ void KMMPrintCheckPlugin::slotPrintCheck()
 
     // print the check
     htmlPart->setHtml(checkHTML, QUrl("file://"));
-#ifdef KF5KHtml_FOUND
-    KHTMLPart *khtml = new KHTMLPart();
-    khtml->begin();
-    khtml->write(checkHTML);
-    khtml->end();
-    khtml->view()->print();
-    delete khtml;
-#else
     m_currentPrinter = new QPrinter();
     QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter);
     dialog->setWindowTitle(QString());
@@ -178,10 +175,13 @@ void KMMPrintCheckPlugin::slotPrintCheck()
       m_currentPrinter = nullptr;
       continue;
     } else {
-      htmlPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      #ifdef ENABLE_WEBENGINE
+        htmlPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      #else
+        htmlPart->print(m_currentPrinter);
+      #endif
     }
     delete dialog;
-#endif
 
     // mark the transaction as printed
     markAsPrinted(*it);
