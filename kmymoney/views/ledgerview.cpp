@@ -52,6 +52,22 @@ public:
     filterModel->setSourceModel(Models::instance()->ledgerModel());
   }
 
+  void setDelegate(LedgerDelegate* _delegate)
+  {
+    delete delegate;
+    delegate = _delegate;
+  }
+
+  void setSortRole(LedgerRole::Roles role, int column)
+  {
+    Q_ASSERT(delegate);
+    Q_ASSERT(filterModel);
+
+    delegate->setSortRole(role);
+    filterModel->setSortRole(role);
+    filterModel->sort(column);
+  }
+
   void recalculateBalances()
   {
     QModelIndex start = filterModel->index(0, 0);
@@ -143,8 +159,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
 
       horizontalHeader()->resizeSection(LedgerModel::ReconciliationColumn, 20);
 
-      delete d->delegate;
-      d->delegate = new LedgerDelegate(this);
+      d->setDelegate(new LedgerDelegate(this));
       setItemDelegate(d->delegate);
       break;
   }
@@ -157,8 +172,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
 
   d->filterModel->setFilterFixedString(acc.id());
   d->filterModel->setAccountType(acc.accountType());
-  d->filterModel->setSortRole(LedgerRole::PostDateRole);
-  d->filterModel->sort(LedgerModel::DateColumn);
+  d->setSortRole(LedgerRole::PostDateRole, LedgerModel::DateColumn);
 
   // set the delegate for the markers by finding them in the model
 

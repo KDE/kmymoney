@@ -30,8 +30,33 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgermodel.h"
 class NewTransactionEditor;
 class LedgerView;
+
+class LedgerSeperator
+{
+public:
+  LedgerSeperator(LedgerRole::Roles role) : m_role(role) {}
+  virtual ~LedgerSeperator() {}
+
+  virtual bool rowHasSeperator(const QModelIndex& index) const = 0;
+  virtual QString seperatorText(const QModelIndex& index) const = 0;
+
+  static void setFirstFiscalDate(int firstMonth, int firstDay);
+  static void setShowFiscalDate(bool show) { showFiscalDate = show; }
+  static void setShowFancyDate(bool show) { showFancyDate = show; }
+
+protected:
+  inline QModelIndex nextIndex(const QModelIndex& index) const;
+
+  LedgerRole::Roles         m_role;
+
+  static QDate firstFiscalDate;
+  static bool  showFiscalDate;
+  static bool  showFancyDate;
+};
+
 
 
 class LedgerDelegate : public QStyledItemDelegate
@@ -47,6 +72,7 @@ public:
   virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
   virtual void setEditorData(QWidget* editWidget, const QModelIndex& index) const;
 
+  virtual void setSortRole(LedgerRole::Roles role);
 
   virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
@@ -76,6 +102,7 @@ private:
 
   static QColor m_erroneousColor;
   static QColor m_importedColor;
+  static QColor m_seperatorColor;
 };
 
 #endif // LEDGERDELEGATE_H

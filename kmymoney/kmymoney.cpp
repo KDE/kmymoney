@@ -173,6 +173,8 @@
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
 
+#include "ledgerdelegate.h"
+
 using namespace Icons;
 
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
@@ -2379,6 +2381,7 @@ void KMyMoneyApp::slotShowCredits()
 void KMyMoneyApp::slotUpdateConfiguration()
 {
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  LedgerSeperator::setFirstFiscalDate(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
   d->m_myMoneyView->updateViewType();
 

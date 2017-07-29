@@ -28,6 +28,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -122,18 +124,150 @@ static unsigned char attentionSign[] = {
 
 QColor LedgerDelegate::m_erroneousColor = QColor(Qt::red);
 QColor LedgerDelegate::m_importedColor = QColor(Qt::yellow);
+QColor LedgerDelegate::m_seperatorColor = QColor(0xff, 0xf2, 0x9b);
+
+class LedgerSeperatorDate : public LedgerSeperator
+{
+public:
+  LedgerSeperatorDate(LedgerRole::Roles role);
+  virtual ~LedgerSeperatorDate() {}
+
+  virtual bool rowHasSeperator(const QModelIndex& index) const;
+  virtual QString seperatorText(const QModelIndex& index) const;
+
+private:
+  QString getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const;
+  QMap<QDate, QString>      m_entries;
+};
+
+
+QDate LedgerSeperator::firstFiscalDate;
+bool  LedgerSeperator::showFiscalDate = true;
+bool  LedgerSeperator::showFancyDate = true;
+
+
+void LedgerSeperator::setFirstFiscalDate(int firstMonth, int firstDay)
+{
+  firstFiscalDate = QDate(QDate::currentDate().year(), firstMonth, firstDay);
+  if (QDate::currentDate() < firstFiscalDate)
+    firstFiscalDate = firstFiscalDate.addYears(-1);
+}
+
+QModelIndex LedgerSeperator::nextIndex(const QModelIndex& index) const
+{
+  const int nextRow = index.row() + 1;
+  if (index.isValid() && (nextRow < index.model()->rowCount(QModelIndex()))) {
+    const QAbstractItemModel* model = index.model();
+    return model->index(nextRow, 0, QModelIndex());
+  }
+  return QModelIndex();
+}
+
+
+
+LedgerSeperatorDate::LedgerSeperatorDate(LedgerRole::Roles role)
+  : LedgerSeperator(role)
+{
+  const QDate today = QDate::currentDate();
+  const QDate thisMonth(today.year(), today.month(), 1);
+  const QDate lastMonth = thisMonth.addMonths(-1);
+  const QDate yesterday = today.addDays(-1);
+  // a = QDate::dayOfWeek()         todays weekday (1 = Monday, 7 = Sunday)
+  // b = QLocale().firstDayOfWeek() first day of week (1 = Monday, 7 = Sunday)
+  int weekStartOfs = today.dayOfWeek() - QLocale().firstDayOfWeek();
+  if (weekStartOfs < 0) {
+    weekStartOfs = 7 + weekStartOfs;
+  }
+  const QDate thisWeek = today.addDays(-weekStartOfs);
+  const QDate lastWeek = thisWeek.addDays(-7);
+  const QDate thisYear(today.year(), 1, 1);
+
+  m_entries[thisYear] = i18n("This year");
+  m_entries[lastMonth] = i18n("Last month");
+  m_entries[thisMonth] = i18n("This month");
+  m_entries[lastWeek] = i18n("Last week");
+  m_entries[thisWeek] = i18n("This week");
+  m_entries[yesterday] = i18n("Yesterday");
+  m_entries[today] = i18n("Today");
+  m_entries[today.addDays(1)] = i18n("Future transactions");
+  m_entries[thisWeek.addDays(7)] = i18n("Next week");
+  m_entries[thisMonth.addMonths(1)] = i18n("Next month");
+  if (showFiscalDate && firstFiscalDate.isValid()) {
+    m_entries[firstFiscalDate] = i18n("Current fiscal year");
+    m_entries[firstFiscalDate.addYears(-1)] = i18n("Previous fiscal year");
+    m_entries[firstFiscalDate.addYears(1)] = i18n("Next fiscal year");
+  }
+}
+
+
+QString LedgerSeperatorDate::getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const
+{
+  Q_ASSERT(index.isValid());
+  Q_ASSERT(nextIndex.isValid());
+  Q_ASSERT(index.model() == nextIndex.model());
+
+  const QAbstractItemModel* model = index.model();
+  QString rc;
+  if (model->data(index, m_role).toDate() != model->data(nextIndex, m_role).toDate()) {
+    const QDate key = model->data(index, m_role).toDate();
+    const QDate endKey = model->data(nextIndex, m_role).toDate();
+    QMap<QDate, QString>::const_iterator it = m_entries.upperBound(key);
+    while((it != m_entries.cend()) && (it.key() <= endKey)) {
+      rc = *it;
+      ++it;
+    }
+  }
+  return rc;
+}
+
+bool LedgerSeperatorDate::rowHasSeperator(const QModelIndex& index) const
+{
+  bool rc = false;
+  QModelIndex nextIdx = nextIndex(index);
+  if(nextIdx.isValid() ) {
+    const QString id = nextIdx.model()->data(nextIdx, LedgerRole::TransactionSplitIdRole).toString();
+    // For a new transaction the id is completely empty, for a split view the transaction
+    // part is filled but the split id is empty and the string ends with a dash
+    // and we never draw a separator in front of that row
+    if(!id.isEmpty() && !id.endsWith('-')) {
+      rc = !getEntry(index, nextIdx).isEmpty();
+    }
+  }
+  return rc;
+}
+
+QString LedgerSeperatorDate::seperatorText(const QModelIndex& index) const
+{
+  QModelIndex nextIdx = nextIndex(index);
+  if(nextIdx.isValid()) {
+    return getEntry(index, nextIdx);
+  }
+  return QString();
+}
+
+
+
+
 
 class LedgerDelegate::Private
 {
 public:
   Private()
   : m_editor(0)
+  , m_view(0)
+  , m_seperator(0)
   , m_editorRow(-1)
   {}
 
+  ~Private()
+  {
+    delete m_seperator;
+  }
+
   NewTransactionEditor*         m_editor;
-  int                           m_editorRow;
   LedgerView*                   m_view;
+  LedgerSeperator*              m_seperator;
+  int                           m_editorRow;
 };
 
 
@@ -148,6 +282,21 @@ LedgerDelegate::~LedgerDelegate()
 {
   delete d;
 }
+
+void LedgerDelegate::setSortRole(LedgerRole::Roles role)
+{
+  delete d->m_seperator;
+  d->m_seperator = 0;
+  switch(role) {
+    case LedgerRole::PostDateRole:
+      d->m_seperator = new LedgerSeperatorDate(role);
+      break;
+    default:
+      qDebug() << "LedgerDelegate::setSortRole role" << role << "not implemented";
+      break;
+  }
+}
+
 
 void LedgerDelegate::setErroneousColor(const QColor& color)
 {
@@ -218,18 +367,26 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   painter->save();
 
+  const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
+  const bool rowHasSeperator = d->m_seperator && d->m_seperator->rowHasSeperator(index);
+
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
+  const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
+
+  if (!editWidgetIsVisible && rowHasSeperator) {
+    // don't draw over the seperator space
+    opt.rect.setHeight(opt.rect.height() - lineHeight);
+  }
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
   // Do not paint text if the edit widget is shown
-  const LedgerView *view = qobject_cast<const LedgerView *>(opt.widget);
-  if (view && view->indexWidget(index)) {
+  if (editWidgetIsVisible) {
     painter->restore();
     return;
   }
 
-  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
   const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
   const bool selected = opt.state & QStyle::State_Selected;
 
@@ -269,7 +426,8 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
       cg = QPalette::Inactive;
     }
     if (opt.state & QStyle::State_Selected) {
-      painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
+      // always use the normal palette since the background is also in normal
+      painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
     } else {
       painter->setPen(opt.palette.color(cg, QPalette::Text));
     }
@@ -287,7 +445,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     // collect data for the various colums
     if(index.column() == LedgerModel::DetailColumn) {
       for(int i = 0; i < lines.count(); ++i) {
-        painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 2) * i, 0, 0), opt.displayAlignment, lines[i]);
+        painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
       }
 
     } else {
@@ -310,6 +468,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
   }
 
+  // draw the attention mark
   if((index.column() == LedgerModel::DetailColumn)
   && erroneous) {
     QPixmap attention;
@@ -317,6 +476,22 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->proxy()->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignTop, attention);
   }
 
+  // draw a seperator if any
+  if (rowHasSeperator) {
+    opt.rect.setY(opt.rect.y()+opt.rect.height());
+    opt.rect.setHeight(lineHeight);
+    opt.backgroundBrush = m_seperatorColor;
+
+    // never draw it as selected but always enabled
+    opt.state &= ~QStyle::State_Selected;
+    style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+
+    if(index.column() == LedgerModel::DetailColumn) {
+      QPalette::ColorGroup cg = QPalette::Normal;
+      painter->setPen(opt.palette.color(cg, QPalette::Text));
+      painter->drawText(opt.rect, Qt::AlignCenter, d->m_seperator->seperatorText(index));
+    }
+  }
   painter->restore();
 #if 0
   const QHeaderView* horizontalHeader = view->horizontalHeader();
@@ -438,8 +613,9 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
 
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) * 2;
+  const int lineHeight = (opt.fontMetrics.lineSpacing() + margin);
 
-  size = QSize(100, (opt.fontMetrics.lineSpacing() + margin));
+  size = QSize(100, lineHeight);
 
   if(fullDisplay) {
     QString payee = index.data(LedgerRole::PayeeNameRole).toString();
@@ -455,6 +631,9 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
     size.setHeight((size.height() * rows) - margin);
   }
 
+  if (d->m_seperator && d->m_seperator->rowHasSeperator(index)) {
+    size.setHeight(size.height() + lineHeight);
+  }
   return size;
 }
 
