@@ -129,9 +129,11 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
   setLayout(mainLayout);
   mainLayout->addWidget(m_layoutWidget);
 
-  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  m_buttonBox = new QDialogButtonBox(this);
+  m_buttonBox->setStandardButtons(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
   QPushButton *okButton = m_buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
+  /// @todo remove Ctrl-Enter behavior in future release
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
   connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
   connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
