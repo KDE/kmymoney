@@ -7416,27 +7416,25 @@ const MyMoneyAccount& KMyMoneyApp::account(const QString& key, const QString& va
   QList<MyMoneyAccount> list;
   QList<MyMoneyAccount>::const_iterator it_a;
   MyMoneyFile::instance()->accountList(list);
-  QList<MyMoneyAccount> accList;
+  QString accId;
   for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
     // search in the account's kvp container
     const QString& accountKvpValue = (*it_a).value(key);
     // search in the account's online settings kvp container
     const QString& onlineSettingsKvpValue = (*it_a).onlineBankingSettings().value(key);
     if (accountKvpValue.contains(value) || onlineSettingsKvpValue.contains(value)) {
-      accList << MyMoneyFile::instance()->account((*it_a).id());
+      if(accId.isEmpty()) {
+        accId = (*it_a).id();
+      }
     }
     if (accountKvpValue == value || onlineSettingsKvpValue == value) {
-      return MyMoneyFile::instance()->account((*it_a).id());
+      accId = (*it_a).id();
+      break;
     }
   }
-  // if we did not find an exact match of the value, we take the one that partially
-  // matched, but only if not more than one matched partially.
-  if (accList.count() == 1) {
-    return accList.first();
-  }
 
-  // return reference to empty element
-  return MyMoneyFile::instance()->account(QString());
+  // return the account found or an empty element
+  return MyMoneyFile::instance()->account(accId);
 }
 
 void KMyMoneyApp::setAccountOnlineParameters(const MyMoneyAccount& _acc, const MyMoneyKeyValueContainer& kvps)
