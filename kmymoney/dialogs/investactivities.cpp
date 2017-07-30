@@ -459,7 +459,7 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
 void Reinvest::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "price" << "fee-account" << "interest-account";
+  static const QStringList visibleWidgetIds = QStringList() << "price" << "interest-account";
   setWidgetVisibility(visibleWidgetIds, true);
 
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
@@ -471,7 +471,6 @@ void Reinvest::showWidgets() const
   setLabelText("interest-amount-label", QString());
   intAmount->setValue(MyMoneyMoney());
 
-  setLabelText("fee-label", i18n("Fees"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("shares-label", i18n("Shares"));
   if (dynamic_cast<QLabel*>(haveWidget("price-label")))
@@ -483,7 +482,6 @@ bool Reinvest::isComplete(QString& reason) const
 {
   bool rc = Activity::isComplete(reason);
   rc &= haveCategoryAndAmount("interest-account", QString(), false);
-  rc &= haveFees(true);
   rc &= haveShares();
   rc &= havePrice();
   return rc;
@@ -494,6 +492,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   Q_UNUSED(assetAccountSplit);
   Q_UNUSED(security);
   Q_UNUSED(currency);
+  Q_UNUSED(m_feeSplits)
 
   QString reason;
   if (!isComplete(reason))
@@ -526,9 +525,6 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
       s0.setPrice(price);
     }
   }
-
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
-    return false;
 
   if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
