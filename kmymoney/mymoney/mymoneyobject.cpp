@@ -74,5 +74,5 @@ void MyMoneyObject::writeBaseXML(QDomDocument& document, QDomElement& el) const
 {
   Q_UNUSED(document);
 
-  el.setAttribute("id", m_id);
+  el.setAttribute(QStringLiteral("id"), m_id);
 }

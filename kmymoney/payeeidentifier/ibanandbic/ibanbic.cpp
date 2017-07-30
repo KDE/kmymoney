@@ -36,11 +36,7 @@ ibanBicData* ibanBic::m_ibanBicData = 0;
 const int ibanBic::ibanMaxLength = 30;
 
 ibanBic::ibanBic()
-    : m_bic(QString()),
-    m_iban(QString()),
-    m_ownerName(QString())
 {
-
 }
 
 ibanBic::ibanBic(const ibanBic& other)
@@ -49,7 +45,6 @@ ibanBic::ibanBic(const ibanBic& other)
     m_iban(other.m_iban),
     m_ownerName(other.m_ownerName)
 {
-
 }
 
 bool ibanBic::operator==(const payeeIdentifierData& other) const
