@@ -1,5 +1,3 @@
-include_directories( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
-
 set (libreports_a_SOURCES
   kreportchartview.cpp
   reportaccount.cpp
@@ -44,4 +42,6 @@ if( KDE4_BUILD_TESTS )
 
   target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
+  kde4_add_executable( reportcharttest reportcharttest.cpp )
+  target_link_libraries( reportcharttest reports kmm_kdchart ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} )
 endif( KDE4_BUILD_TESTS )
