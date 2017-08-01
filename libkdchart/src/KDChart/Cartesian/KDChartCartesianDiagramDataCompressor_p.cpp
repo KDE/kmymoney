@@ -597,7 +597,7 @@ bool CartesianDiagramDataCompressor::mapsToModelIndex( const CachePosition& posi
 {
     return m_model && m_data.size() > 0 && m_data[ 0 ].size() > 0 &&
            position.column >= 0 && position.column < m_data.size() &&
-           position.row >=0 && position.row < m_data[ 0 ].size();
+           position.row >=0 && position.row < m_data[ position.column ].size();
 }
 
 void CartesianDiagramDataCompressor::invalidate( const CachePosition& position )
