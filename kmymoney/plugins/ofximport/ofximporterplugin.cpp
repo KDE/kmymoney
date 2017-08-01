@@ -490,8 +490,11 @@ int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* 
     s.m_dateEnd = dt.date();
   }
 
-  if (data.ledger_balance_valid) {
+  if (data.ledger_balance_valid && data.ledger_balance_date_valid) {
     s.m_closingBalance = MyMoneyMoney(data.ledger_balance);
+    QDateTime dt;
+    dt.setTime_t(data.ledger_balance_date);
+    s.m_dateEnd = dt.date();
   }
 
 //   kDebug(2) << Q_FUNC_INFO << " return 0";
