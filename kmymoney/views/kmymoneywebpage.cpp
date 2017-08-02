@@ -26,13 +26,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#ifdef ENABLE_WEBENGINE
 bool MyQWebEnginePage::acceptNavigationRequest(const QUrl &url, NavigationType type, bool)
 {
   if (type == NavigationTypeLinkClicked)
-    #ifdef ENABLE_WEBENGINE
     emit urlChanged(url);
-    #else
-    emit linkClicked(url);
-    #endif
   return false;
 }
+#else
+#include <QNetworkRequest>
+bool MyQWebEnginePage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type)
+{
+  Q_UNUSED(frame);
+  if (type == NavigationTypeLinkClicked) {
+    emit linkClicked(request.url());
+    return false;
+  }
+  return true;
+}
+#endif
