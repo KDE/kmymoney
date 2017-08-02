@@ -1481,6 +1481,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartDataLabels(false);
     list.back().setSkipZero(true);
     list.back().setShowingColumnTotals(false);
+    list.back().setShowingRowTotals(false);
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
@@ -1502,6 +1503,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setConvertCurrency(true);
     list.back().setChartDataLabels(false);
     list.back().setShowingColumnTotals(false);
+    list.back().setShowingRowTotals(false);
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,

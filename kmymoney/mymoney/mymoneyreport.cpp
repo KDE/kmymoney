@@ -373,6 +373,10 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
         else
           result = includesAccount(acc.id());
         break;
+      case MyMoneyAccount::Equity:
+        if (isInvestmentsOnly())
+          result = (isIncludingPrice() || isIncludingAveragePrice()) && acc.isInvest() && includesAccount(acc.id());
+        break;
       default:
         result = includesAccount(acc.id());
     }
