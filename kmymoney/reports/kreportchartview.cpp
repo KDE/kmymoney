@@ -166,6 +166,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   }
   //get the diagram for later use
   AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
+  planeDiagram->setAntiAliasing(true);
 
   //set grid attributes
   GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
