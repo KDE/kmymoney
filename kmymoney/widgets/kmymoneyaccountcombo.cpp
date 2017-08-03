@@ -213,8 +213,9 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
   QModelIndexList list = model()->match(model()->index(0, 0), AccountsModel::AccountIdRole,
                                         QVariant(id),
                                         1,
-                                        Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-  if (list.count() > 0) {
+                                        Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive)); // CAUTION: Without Qt::MatchWrap no results for credit card, so nothing happens in ledger view
+
+  if (!list.isEmpty()) {
     // make sure the popup is closed from here on
     hidePopup();
     d->m_lastSelectedAccount = id;
