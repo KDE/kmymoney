@@ -101,10 +101,10 @@ const QString KWelcomePage::welcomePage()
   body += QString("<a href=\"/action?id=help_contents\">" + i18n("Learn how to use KMyMoney") + "</a></li>");
   const QString konquerorFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/konqueror.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(konquerorFilename).url());
-  body += QString("<a href=\"http://kmymoney2.sf.net\">" + i18n("Visit our website") + "</a></li>");
+  body += QString("<a href=\"https://kmymoney.org\">" + i18n("Visit our website") + "</a></li>");
   const QString aboutFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/about_kde.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(aboutFilename).url());
-  body += QString("<a href=\"http://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from our community") + "</a></li>");
+  body += QString("<a href=\"https://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from our community") + "</a></li>");
   const QString messageFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/messagebox_info.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(messageFilename).url());
   body += QString("<a href=\"/welcome?mode=whatsnew\">" + i18n("See what's new in this version") + "</a></li>");

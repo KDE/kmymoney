@@ -81,6 +81,6 @@
             "KMyMoney/Plugin"
         ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
-        "Website": "http://kmymoney.org/plugins.html"
+        "Website": "https://kmymoney.org/plugins.html"
     }
 }

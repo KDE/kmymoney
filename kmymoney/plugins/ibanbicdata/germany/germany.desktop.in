@@ -6,7 +6,7 @@ ServiceTypes=KMyMoney/IbanBicData
 X-KDE-PluginInfo-Author=Christian David
 X-KDE-PluginInfo-Email=christian-david@web.de
 X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
-X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
+X-KDE-PluginInfo-Website=https://kmymoney.org/plugins.html
 X-KDE-PluginInfo-License=Unknown, data copyright: Deutsche Bundesbank, Frankfurt am Main, Deutschland
 X-KDE-PluginInfo-EnabledByDefault=true
 

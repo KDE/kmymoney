@@ -10,6 +10,6 @@ X-KDE-Library=payeeidentifier_ibanbic_storageplugin
 X-KDE-PluginInfo-Author=Christian David
 X-KDE-PluginInfo-Email=christian-david@web.de
 X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
-X-KDE-PluginInfo-Website=http://kmymoney.org
+X-KDE-PluginInfo-Website=https://kmymoney.org
 X-KDE-PluginInfo-License=GPLv2+
 X-KDE-PluginInfo-EnabledByDefault=true

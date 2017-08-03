@@ -50,7 +50,7 @@ KAboutData initializeCreditsData()
   aboutData.setShortDescription(i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));
   aboutData.setLicense(KAboutLicense::GPL);
   aboutData.setCopyrightStatement(i18n("(c) 2000-2017 The KMyMoney development team"));
-  aboutData.setHomepage(QStringLiteral("http://kmymoney.org/"));
+  aboutData.setHomepage(QStringLiteral("https://kmymoney.org/"));
   if (!features.empty())
     aboutData.setOtherText(i18n("Compiled with the following optional features:\n%1", features.join(QLatin1Char('\n'))));
 
