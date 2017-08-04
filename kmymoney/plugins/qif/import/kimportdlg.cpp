@@ -28,6 +28,7 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QIcon>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -44,8 +45,7 @@
 #include "kmymoneyutils.h"
 #include <mymoneyfile.h>
 #include <KSharedConfig>
-#include "mymoneyqifprofileeditor.h"
-#include "mymoneyqifprofile.h"
+#include "../config/mymoneyqifprofile.h"
 #include <icons/icons.h>
 
 using namespace Icons;
@@ -75,13 +75,11 @@ KImportDlg::KImportDlg(QWidget *parent)
                          QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                          i18n("Create a new profile"),
                          i18n("Use this to open the profile editor"));
-  KGuiItem::assign(m_profileEditorButton, newButtenItem);
 
   // connect the buttons to their functionality
   connect(m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
   connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(slotOkClicked()));
   connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  connect(m_profileEditorButton, SIGNAL(clicked()), this, SLOT(slotNewProfile()));
 
   // connect the change signals to the check slot and perform initial check
   connect(m_qlineeditFile, SIGNAL(textChanged(QString)), this,
@@ -153,27 +151,8 @@ void KImportDlg::slotFileTextChanged(const QString& text)
 #endif
 }
 
-void KImportDlg::slotNewProfile()
-{
-  QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
-  editor->setObjectName("QIF Profile Editor");
-
-  if (editor->exec()) {
-    loadProfiles();
-    m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(editor->selectedProfile(), Qt::MatchExactly));
-  }
-
-  delete editor;
-}
-
 void KImportDlg::loadProfiles(const bool selectLast)
 {
-  // Creating an editor object here makes sure that
-  // we have at least the default profile available
-  MyMoneyQifProfileEditor* edit = new MyMoneyQifProfileEditor(true, 0);
-  edit->slotOk();
-  delete edit;
-
   QString current = m_profileComboBox->currentText();
 
   m_profileComboBox->clear();

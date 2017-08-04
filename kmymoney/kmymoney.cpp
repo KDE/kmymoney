@@ -98,9 +98,6 @@
 
 #include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/kbackupdlg.h"
-#include "dialogs/kexportdlg.h"
-#include "dialogs/kimportdlg.h"
-#include "dialogs/mymoneyqifprofileeditor.h"
 #include "dialogs/kenterscheduledlg.h"
 #include "dialogs/kconfirmmanualenterdlg.h"
 #include "dialogs/kmymoneypricedlg.h"
@@ -149,8 +146,6 @@
 #include "mymoney/onlinetransfer.h"
 #include "mymoney/onlinejobadministration.h"
 
-#include "converter/mymoneyqifwriter.h"
-#include "converter/mymoneyqifreader.h"
 #include "converter/mymoneystatementreader.h"
 #include "converter/mymoneytemplate.h"
 
@@ -190,8 +185,6 @@ const QHash<Action, QString> KMyMoneyApp::s_Actions {
   {Action::FileSaveAsDatabase, QStringLiteral("saveas_database")},
   {Action::FileBackup, QStringLiteral("file_backup")},
   {Action::FileImportGNC, QStringLiteral("file_import_gnc")},
-  {Action::FileImportQIF, QStringLiteral("file_import_qif")},
-  {Action::FileExportQIF, QStringLiteral("file_export_qif")},
   {Action::FileImportStatement, QStringLiteral("file_import_statement")},
   {Action::FileImportTemplate, QStringLiteral("file_import_template")},
   {Action::FileExportTemplate, QStringLiteral("file_export_template")},
@@ -228,7 +221,6 @@ const QHash<Action, QString> KMyMoneyApp::s_Actions {
   {Action::CategoryNew, QStringLiteral("category_new")},
   {Action::CategoryEdit, QStringLiteral("category_edit")},
   {Action::CategoryDelete, QStringLiteral("category_delete")},
-  {Action::ToolQIF, QStringLiteral("tools_qif_editor")},
   {Action::ToolCurrencies, QStringLiteral("tools_currency_editor")},
   {Action::ToolPrices, QStringLiteral("tools_price_editor")},
   {Action::ToolUpdatePrices, QStringLiteral("tools_update_prices")},
@@ -329,7 +321,6 @@ public:
       m_ignoreBackupExitCode(false),
       m_myMoneyView(0),
       m_progressBar(0),
-      m_qifReader(0),
       m_smtReader(0),
       m_searchDlg(0),
       m_autoSaveTimer(0),
@@ -443,7 +434,6 @@ public:
   QTime         m_lastUpdate;
   QLabel*       m_statusLabel;
 
-  MyMoneyQifReader* m_qifReader;
   MyMoneyStatementReader* m_smtReader;
   // allows multiple imports to be launched trough web connect and to be executed sequentially
   QQueue<QString> m_importUrlsQueue;
@@ -615,7 +605,6 @@ KMyMoneyApp::~KMyMoneyApp()
   unloadPlugins();
 
   delete d->m_searchDlg;
-  delete d->m_qifReader;
   delete d->m_transactionEditor;
   delete d->m_endingBalanceDlg;
   delete d->m_moveToAccountSelector;
@@ -748,8 +737,6 @@ void KMyMoneyApp::initActions()
       {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase,               i18n("Save as database..."),                        Icon::FileArchiver},
       {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile,                   i18n("Backup..."),                                  Icon::Empty},
       {Action::FileImportGNC,                 &KMyMoneyApp::slotGncImport,                    i18n("GnuCash..."),                                 Icon::Empty},
-      {Action::FileImportQIF,                 &KMyMoneyApp::slotQifImport,                    i18n("QIF..."),                                     Icon::Empty},
-      {Action::FileExportQIF,                 &KMyMoneyApp::slotQifExport,                    i18n("QIF..."),                                     Icon::Empty},
       {Action::FileImportStatement,           &KMyMoneyApp::slotStatementImport,              i18n("Statement file..."),                          Icon::Empty},
       {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates,         i18n("Account Template..."),                        Icon::Empty},
       {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates,         i18n("Account Template..."),                        Icon::Empty},
@@ -804,7 +791,6 @@ void KMyMoneyApp::initActions()
       // **************
       // The tools menu
       // **************
-      {Action::ToolQIF,                       &KMyMoneyApp::slotQifProfileEditor,             i18n("QIF Profile Editor..."),                      Icon::DocumentProperties},
       {Action::ToolCurrencies,                &KMyMoneyApp::slotCurrencyDialog,               i18n("Currencies..."),                              Icon::ViewCurrencyList},
       {Action::ToolPrices,                    &KMyMoneyApp::slotPriceDialog,                  i18n("Prices..."),                                  Icon::Empty},
       {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate,            i18n("Update Stock and Currency Prices..."),        Icon::Empty},
@@ -2075,98 +2061,6 @@ void KMyMoneyApp::slotSaveAccountTemplates()
   }
 }
 
-void KMyMoneyApp::slotQifImport()
-{
-  if (d->m_qifReader == 0) {
-    // FIXME: the menu entry for qif import should be disabled here
-
-    QPointer<KImportDlg> dlg = new KImportDlg(this);
-
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-      KMSTATUS(i18n("Importing file..."));
-      d->m_qifReader = new MyMoneyQifReader;
-
-      // remove all kmm-statement-#.txt files
-      d->unlinkStatementXML();
-
-      connect(d->m_qifReader, SIGNAL(importFinished()), this, SLOT(slotQifImportFinished()));
-
-      d->m_qifReader->setURL(dlg->file());
-
-      d->m_qifReader->setProfile(dlg->profile());
-      d->m_qifReader->setCategoryMapping(dlg->m_typeComboBox->currentIndex() == 0);
-      d->m_qifReader->setProgressCallback(&progressCallback);
-
-      // disable all standard widgets during the import
-      setEnabled(false);
-
-      d->m_ft = new MyMoneyFileTransaction();
-      d->m_collectingStatements = true;
-      d->m_statementResults.clear();
-      if (!d->m_qifReader->startImport()) {
-        // if the import failed to start make sure that slotQifImportFinished is called otherwise the application will be left disabled
-        QTimer::singleShot(0, this, SLOT(slotQifImportFinished()));
-      }
-    }
-    delete dlg;
-
-    slotUpdateActions();
-  }
-}
-
-void KMyMoneyApp::slotQifImportFinished()
-{
-  if (d->m_qifReader != 0) {
-    d->m_qifReader->finishImport();
-    d->m_ft->commit();
-    d->m_collectingStatements = false;
-
-    KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
-
-#if 0
-    // fixme: re-enable the QIF import menu options
-    if (d->m_qifReader->finishImport()) {
-      if (verifyImportedData(d->m_qifReader->account())) {
-        // keep the new data set, destroy the backup copy
-        delete d->m_engineBackup;
-        d->m_engineBackup = 0;
-      }
-    }
-
-    if (d->m_engineBackup != 0) {
-      // user cancelled, destroy the updated set and keep the backup copy
-      IMyMoneyStorage* data = file->storage();
-
-
-      if (data != 0) {
-        file->detachStorage(data);
-        delete data;
-      }
-      file->attachStorage(d->m_engineBackup);
-      d->m_engineBackup = 0;
-
-    }
-#endif
-
-    // update the views as they might still contain invalid data
-    // from the import session. The same applies for the window caption
-    d->m_myMoneyView->slotRefreshViews();
-    updateCaption();
-
-    delete d->m_qifReader;
-    d->m_qifReader = 0;
-  }
-  delete d->m_ft;
-  d->m_ft = 0;
-
-  slotStatusProgressBar(-1, -1);
-  ready();
-
-  // re-enable all standard widgets
-  setEnabled(true);
-  slotUpdateActions();
-}
-
 void KMyMoneyApp::slotGncImport()
 {
   if (d->m_myMoneyView->fileOpen()) {
@@ -2323,25 +2217,6 @@ bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s, bool silent)
 
   slotUpdateActions();//  Re-enable menu items after import via plugin.
   return result;
-}
-
-void KMyMoneyApp::slotQifExport()
-{
-  KMSTATUS(i18n("Exporting file..."));
-
-  QPointer<KExportDlg> dlg = new KExportDlg(this);
-
-  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-    if (okToWriteFile(QUrl::fromLocalFile(dlg->filename()))) {
-      MyMoneyQifWriter writer;
-      connect(&writer, SIGNAL(signalProgress(int,int)), this, SLOT(slotStatusProgressBar(int,int)));
-
-      writer.write(dlg->filename(), dlg->profile(), dlg->accountId(),
-                   dlg->accountSelected(), dlg->categorySelected(),
-                   dlg->startDate(), dlg->endDate());
-    }
-  }
-  delete dlg;
 }
 
 bool KMyMoneyApp::okToWriteFile(const QUrl &url)
@@ -2657,15 +2532,6 @@ void KMyMoneyApp::slotGenerateSql()
   delete editor;
 }
 
-void KMyMoneyApp::slotQifProfileEditor()
-{
-  QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
-  editor->setObjectName("QIF Profile Editor");
-  editor->exec();
-  delete editor;
-
-}
-
 void KMyMoneyApp::slotToolsStartKCalc()
 {
   QString cmd = KMyMoneyGlobalSettings::externalCalculator();
@@ -2794,64 +2660,6 @@ void KMyMoneyApp::slotInstitutionDelete()
   } catch (const MyMoneyException &e) {
     KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
   }
-}
-
-const MyMoneyAccount& KMyMoneyApp::findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const
-{
-  static MyMoneyAccount nullAccount;
-
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QList<MyMoneyAccount> parents;
-  try {
-    // search by id
-    if (!acc.id().isEmpty()) {
-      return file->account(acc.id());
-    }
-    // collect the parents. in case parent does not have an id, we scan the all top-level accounts
-    if (parent.id().isEmpty()) {
-      parents << file->asset();
-      parents << file->liability();
-      parents << file->income();
-      parents << file->expense();
-      parents << file->equity();
-    } else {
-      parents << parent;
-    }
-    QList<MyMoneyAccount>::const_iterator it_p;
-    for (it_p = parents.constBegin(); it_p != parents.constEnd(); ++it_p) {
-      MyMoneyAccount parentAccount = *it_p;
-      // search by name (allow hierarchy)
-      int pos;
-      // check for ':' in the name and use it as separator for a hierarchy
-      QString name = acc.name();
-      bool notFound = false;
-      while ((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
-        QString part = name.left(pos);
-        QString remainder = name.mid(pos + 1);
-        const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
-        // if account has not been found, continue with next top level parent
-        if (existingAccount.id().isEmpty()) {
-          notFound = true;
-          break;
-        }
-        parentAccount = existingAccount;
-        name = remainder;
-      }
-      if (notFound)
-        continue;
-      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, name);
-      if (!existingAccount.id().isEmpty()) {
-        if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {
-          if (acc.accountType() != existingAccount.accountType())
-            continue;
-        }
-        return existingAccount;
-      }
-    }
-  } catch (const MyMoneyException &e) {
-    KMessageBox::error(0, i18n("Unable to find account: %1", e.what()));
-  }
-  return nullAccount;
 }
 
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
@@ -6182,7 +5990,7 @@ void KMyMoneyApp::slotUpdateActions()
   MyMoneyFile* file = MyMoneyFile::instance();
   const bool fileOpen = d->m_myMoneyView->fileOpen();
   const bool modified = file->dirty();
-  const bool importRunning = (d->m_qifReader != 0) || (d->m_smtReader != 0);
+  const bool importRunning = (d->m_smtReader != 0);
   QWidget* w;
   KActionCollection *aC = actionCollection();
 
@@ -6225,8 +6033,6 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::FilePersonalData, fileOpen)},
       {qMakePair(Action::FileBackup, (fileOpen && !d->m_myMoneyView->isDatabase()))},
       {qMakePair(Action::FileInformation, fileOpen)},
-      {qMakePair(Action::FileExportQIF, fileOpen && !importRunning)},
-      {qMakePair(Action::FileImportQIF, fileOpen && !importRunning)},
       {qMakePair(Action::FileImportGNC, !importRunning)},
       {qMakePair(Action::FileImportTemplate, fileOpen && !importRunning)},
       {qMakePair(Action::FileExportTemplate, fileOpen && !importRunning)},

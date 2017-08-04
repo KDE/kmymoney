@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-qifexporter" version="0">
+  <MenuBar>
+    <Menu name="file">
+      <Menu name="export" append="export_merge">
+        <Action name="file_export_qif" />
+      </Menu>
+    </Menu>
+  </MenuBar>
+</kpartgui>

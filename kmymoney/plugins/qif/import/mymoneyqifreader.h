@@ -41,11 +41,13 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneyqifprofile.h"
 #include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
+#include "../config/mymoneyqifprofile.h"
 
 class MyMoneyFileTransaction;
+class MyMoneyStatement;
+class MyMoneyQifProfile;
 
 /**
   * @author Thomas Baumgart
@@ -121,17 +123,6 @@ public:
     * @retval false the import could not be started.
     */
   bool startImport();
-
-  /**
-    * This method must be called once the signal importFinished() has
-    * been emitted. It will clean up the reader state and determines
-    * the actual return code of the import.
-    *
-    * @retval true Import was successful.
-    * @retval false Import failed because the filter program terminated
-    *               abnormally or the user aborted the import process.
-    */
-  bool finishImport();
 
   void setCategoryMapping(bool map);
 
@@ -244,45 +235,6 @@ private:
     Create = 0,
     Select
   };
-  /**
-    * This method is used to find an account using the account's name
-    * stored in @p account in the current MyMoneyFile object. If it does not
-    * exist, the user has the chance to create it or to skip processing
-    * of this account.
-    *
-    * If an account has been selected, account will be set to contain it's data.
-    * If the skip operation was requested, account will be empty.
-    *
-    * Depending on @p mode the bahaviour of this method is slightly different.
-    * The following table shows the dependencies:
-    *
-    * @code
-    * case                              mode            operation
-    * -----------------------------------------------------------------------------
-    * account with same name exists     Create          returns immediately
-    *                                                   m_account contains data
-    *                                                   of existing account
-    *
-    * account does not exist            Create          immediately calls dialog
-    *                                                   to create account
-    *
-    * account with same name exists     Select          User will be asked if
-    *                                                   he wants to use the existing
-    *                                                   account or create a new one
-    *
-    * account does not exist            Select          User will be asked to
-    *                                                   select a different account
-    *                                                   or create a new one
-    *
-    * @endcode
-    *
-    * @param mode Is either Create or Select depending on the above table
-    * @param account Reference to MyMoneyAccount object
-    * @param openingBalance the opening balance of the account to be created
-    *                       defaults to zero
-    */
-
-  void selectOrCreateAccount(const SelectCreateMode mode, MyMoneyAccount& account, const MyMoneyMoney& openingBalance = MyMoneyMoney());
 
   /**
     * This method looks up the @p searchname account by name and returns its id
@@ -305,6 +257,22 @@ private:
   static const QString findOrCreateExpenseAccount(const QString& searchname);
 
   /**
+   * This methods returns the account from the list of accounts identified by
+   * an account id or account name including an account hierachy.
+   *
+   * The parent account specifies from which account the search should be started.
+   * In case the parent account does not have an id, the method scans all top-level accounts.
+   *
+   * If the account is not found in the list of accounts, MyMoneyAccount() is returned.
+   *
+   * @param acc account to find
+   * @param parent parent account to search from
+   * @retval found MyMoneyAccount account instance
+   * @retval MyMoneyAccount() if not found
+   */
+  const MyMoneyAccount& findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
+
+  /**
    * This method returns the account id for a given account @a name. In
    * case @a name references an investment account and @a useBrokerage is @a true
    * (the default), the id of the corresponding brokerage account will be
@@ -316,10 +284,7 @@ private:
   void createOpeningBalance(MyMoneyAccount::_accountTypeE accType = MyMoneyAccount::Checkings);
 
 signals:
-  /**
-    * This signal will be emitted when the import is finished.
-    */
-  void importFinished();
+  void statementsReady(QList<MyMoneyStatement> &);
 
 private slots:
   void slotSendDataToFilter();

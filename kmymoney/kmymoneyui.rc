@@ -6,7 +6,6 @@
    <Action append="save_merge" name="saveas_database" />
    <Menu append="save_merge" name="import" >
     <text>&amp;Import</text>
-    <Action name="file_import_qif" />
     <Action name="file_import_gnc" />
     <Merge/>
     <MergeLocal name="import_merge"/>
@@ -15,7 +14,6 @@
    </Menu>
    <Menu append="save_merge" name="export" >
     <text>&amp;Export</text>
-    <Action name="file_export_qif" />
     <Merge/>
     <Separator/>
     <Action name="file_export_template" />
@@ -97,7 +95,6 @@
   <Merge/>
   <Menu name="kmmtools" >
    <Text>T&amp;ools</Text>
-   <Action name="tools_qif_editor" />
    <Action name="tools_currency_editor" />
    <Action name="tools_price_editor" />
    <Action name="tools_update_prices" />

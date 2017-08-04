@@ -28,6 +28,7 @@
 #include <QUrl>
 #include <QPushButton>
 #include <QIcon>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -43,7 +44,6 @@
 // Project Headers
 
 #include "mymoneycategory.h"
-#include "mymoneyqifprofileeditor.h"
 #include "mymoneyfile.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
@@ -76,18 +76,10 @@ KExportDlg::KExportDlg(QWidget *parent)
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
-  KGuiItem newButtenItem(i18nc("New profile", "&New..."),
-                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
-                         i18n("Create a new profile"),
-                         i18n("Use this to open the profile editor"));
-  KGuiItem::assign(m_profileEditorButton, newButtenItem);
-
-
   // connect the buttons to their functionality
-  connect(m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
-  connect(m_profileEditorButton, SIGNAL(clicked()), this, SLOT(slotNewProfile()));
-  connect(m_qbuttonOk, SIGNAL(clicked()), this, SLOT(slotOkClicked()));
-  connect(m_qbuttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(m_qbuttonBrowse, &QAbstractButton::clicked, this, &KExportDlg::slotBrowse);
+  connect(m_qbuttonOk, &QAbstractButton::clicked, this, &KExportDlg::slotOkClicked);
+  connect(m_qbuttonCancel, &QAbstractButton::clicked, this, &QDialog::reject);
 
   // connect the change signals to the check slot and perform initial check
   connect(m_qlineeditFile, SIGNAL(textChanged(QString)), this, SLOT(checkData()));
@@ -107,31 +99,15 @@ KExportDlg::~KExportDlg()
 
 void KExportDlg::slotBrowse()
 {
-  QString newName(QFileDialog::getSaveFileName(this, QString(), QString(), QLatin1String("*.QIF")));
-  KMyMoneyUtils::appendCorrectFileExt(newName, QLatin1String("qif"));
+  auto newName(QFileDialog::getSaveFileName(this, QString(), QString(), QLatin1String("*.QIF")));
+  if (!newName.endsWith(QLatin1String(".qif"), Qt::CaseInsensitive))
+    newName.append(QLatin1String(".qif"));
   if (!newName.isEmpty())
     m_qlineeditFile->setText(newName);
 }
 
-void KExportDlg::slotNewProfile()
-{
-  QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
-  editor->setObjectName("QIF Profile Editor");
-  if (editor->exec()) {
-    m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(editor->selectedProfile(), Qt::MatchExactly));
-    loadProfiles();
-  }
-  delete editor;
-}
-
 void KExportDlg::loadProfiles(const bool selectLast)
 {
-  // Creating an editor object here makes sure that
-  // we have at least the default profile available
-  MyMoneyQifProfileEditor* edit = new MyMoneyQifProfileEditor(true, 0);
-  edit->slotOk();
-  delete edit;
-
   QString current = m_profileComboBox->currentText();
 
   m_profileComboBox->clear();
@@ -192,9 +168,10 @@ void KExportDlg::checkData(const QString& accountId)
   bool  okEnabled = false;
 
   if (!m_qlineeditFile->text().isEmpty()) {
-    QString strFile(m_qlineeditFile->text());
-    if (KMyMoneyUtils::appendCorrectFileExt(strFile, QString("qif")))
-      m_qlineeditFile->setText(strFile);
+    auto strFile(m_qlineeditFile->text());
+    if (!strFile.endsWith(QLatin1String(".qif"), Qt::CaseInsensitive))
+      strFile.append(QLatin1String(".qif"));
+    m_qlineeditFile->setText(strFile);
   }
 
   MyMoneyAccount account;
@@ -233,6 +210,7 @@ void KExportDlg::loadAccounts()
   auto filterProxyModel = new AccountNamesFilterProxyModel(this);
   filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
   auto const model = Models::instance()->accountsModel();
+  model->load();
   filterProxyModel->init(model, model->getColumns());
   filterProxyModel->sort(AccountsModel::Account);
   m_accountComboBox->setModel(filterProxyModel);

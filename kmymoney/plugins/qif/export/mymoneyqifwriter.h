@@ -36,9 +36,10 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
+#include "../config/mymoneyqifprofile.h"
+
 class MyMoneyTransaction;
 class MyMoneySplit;
-#include "mymoneyqifprofile.h"
 
 /**
   * @author Thomas Baumgart

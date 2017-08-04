@@ -28,7 +28,6 @@
 #include <QString>
 #include <QStringList>
 
-#include "mymoneyqifprofile.h"
 #include "mymoneyaccount.h"
 #include "mymoneystatement.h"
 #include "transactionmatcher.h"

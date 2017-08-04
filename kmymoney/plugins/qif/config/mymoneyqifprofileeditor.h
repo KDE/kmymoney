@@ -31,7 +31,7 @@ class QTreeWidgetItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_mymoneyqifprofileeditordecl.h"
+#include "ui_mymoneyqifprofileeditor.h"
 #include "mymoneyqifprofile.h"
 
 /**
@@ -50,15 +50,7 @@ public:
 };
 
 
-class MyMoneyQifProfileEditorDecl : public QDialog, public Ui::MyMoneyQifProfileEditorDecl
-{
-public:
-  MyMoneyQifProfileEditorDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class MyMoneyQifProfileEditor : public MyMoneyQifProfileEditorDecl
+class MyMoneyQifProfileEditor : public QWidget, public Ui::MyMoneyQifProfileEditor
 {
   Q_OBJECT
 
@@ -70,9 +62,6 @@ public:
     * This method returns the currently selected profile in the list box.
     */
   const QString selectedProfile() const;
-
-public slots:
-  void slotOk();
 
 protected slots:
   void slotLoadProfileFromConfig(const QString& name);

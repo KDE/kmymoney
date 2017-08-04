@@ -76,19 +76,18 @@ QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) 
 }
 
 MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *parent)
-    : MyMoneyQifProfileEditorDecl(parent),
+    : QWidget(parent),
     m_inEdit(edit),
     m_isDirty(false),
     m_isAccepted(false),
     m_selectedAmountType(0)
 {
+  setupUi(this);
   loadWidgets();
   loadProfileListFromConfig();
 
   // load button icons
   KGuiItem::assign(m_resetButton, KStandardGuiItem::reset());
-  KGuiItem::assign(m_cancelButton, KStandardGuiItem::cancel());
-  KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
   KGuiItem::assign(m_deleteButton, KStandardGuiItem::del());
   KGuiItem::assign(m_helpButton, KStandardGuiItem::help());
 
@@ -98,37 +97,35 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
                          i18n("Use this to create a new QIF import/export profile"));
   KGuiItem::assign(m_newButton, newButtenItem);
 
-  connect(m_profileListBox, SIGNAL(currentTextChanged(QString)), this, SLOT(slotLoadProfileFromConfig(QString)));
-  connect(m_resetButton, SIGNAL(clicked()), this, SLOT(slotReset()));
-  connect(m_okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
-  connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRename()));
-  connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
-  connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNew()));
-  connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
+  connect(m_profileListBox, &QListWidget::currentTextChanged, this, &MyMoneyQifProfileEditor::slotLoadProfileFromConfig);
+  connect(m_resetButton, &QAbstractButton::clicked, this, &MyMoneyQifProfileEditor::slotReset);
+  connect(m_renameButton, &QAbstractButton::clicked, this, &MyMoneyQifProfileEditor::slotRename);
+  connect(m_deleteButton, &QAbstractButton::clicked, this, &MyMoneyQifProfileEditor::slotDelete);
+  connect(m_newButton, &QAbstractButton::clicked, this, &MyMoneyQifProfileEditor::slotNew);
+  connect(m_helpButton, &QAbstractButton::clicked, this, &MyMoneyQifProfileEditor::slotHelp);
 
-  connect(m_editDescription, SIGNAL(textChanged(QString)), &m_profile, SLOT(setProfileDescription(QString)));
-  connect(m_editType, SIGNAL(textChanged(QString)), &m_profile, SLOT(setProfileType(QString)));
-  connect(m_editOpeningBalance, SIGNAL(textChanged(QString)), &m_profile, SLOT(setOpeningBalanceText(QString)));
-  connect(m_editAccountDelimiter, SIGNAL(textChanged(QString)), &m_profile, SLOT(setAccountDelimiter(QString)));
-  connect(m_editVoidMark, SIGNAL(textChanged(QString)), &m_profile, SLOT(setVoidMark(QString)));
+  connect(m_editDescription, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setProfileDescription);
+  connect(m_editType, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setProfileType);
+  connect(m_editOpeningBalance, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setOpeningBalanceText);
+  connect(m_editAccountDelimiter, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setAccountDelimiter);
+  connect(m_editVoidMark, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setVoidMark);
 
   connect(m_editDateFormat, SIGNAL(highlighted(QString)), &m_profile, SLOT(setOutputDateFormat(QString)));
   connect(m_editApostrophe, SIGNAL(highlighted(QString)), &m_profile, SLOT(setApostropheFormat(QString)));
 
-  connect(m_editAmounts, SIGNAL(itemSelectionChanged()), this, SLOT(slotAmountTypeSelected()));
+  connect(m_editAmounts, &QTreeWidget::itemSelectionChanged, this, &MyMoneyQifProfileEditor::slotAmountTypeSelected);
   connect(m_decimalBox, SIGNAL(activated(QString)), this, SLOT(slotDecimalChanged(QString)));
   connect(m_thousandsBox, SIGNAL(activated(QString)), this, SLOT(slotThousandsChanged(QString)));
 
-  connect(m_editInputFilterLocation, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterScriptImport(QString)));
-  connect(m_editInputFilterLocation, SIGNAL(urlSelected(QUrl)), m_editInputFilterLocation, SLOT(setUrl(QUrl)));
+  connect(m_editInputFilterLocation, &KUrlRequester::textChanged, &m_profile, &MyMoneyQifProfile::setFilterScriptImport);
+  connect(m_editInputFilterLocation, &KUrlRequester::urlSelected, m_editInputFilterLocation, &KUrlRequester::setUrl);
 
-  connect(m_editInputFilterFileType, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterFileType(QString)));
+  connect(m_editInputFilterFileType, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setFilterFileType);
 
-  connect(m_editOutputFilterLocation, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterScriptExport(QString)));
-  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(QUrl)), m_editOutputFilterLocation, SLOT(setUrl(QUrl)));
+  connect(m_editOutputFilterLocation, &KUrlRequester::textChanged, &m_profile, &MyMoneyQifProfile::setFilterScriptExport);
+  connect(m_editOutputFilterLocation, &KUrlRequester::urlSelected, m_editOutputFilterLocation, &KUrlRequester::setUrl);
 
-  connect(m_attemptMatch, SIGNAL(toggled(bool)), &m_profile, SLOT(setAttemptMatchDuplicates(bool)));
+  connect(m_attemptMatch, &QAbstractButton::toggled, &m_profile, &MyMoneyQifProfile::setAttemptMatchDuplicates);
 }
 
 MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
@@ -344,20 +341,6 @@ void MyMoneyQifProfileEditor::addProfile(const QString& name)
   m_profile.saveProfile();
 
   m_isDirty = true;
-}
-
-void MyMoneyQifProfileEditor::slotOk()
-{
-  if (m_profile.isDirty())
-    m_isDirty = true;
-
-  m_profile.saveProfile();
-
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  config->sync();
-
-  m_isAccepted = true;
-  accept();
 }
 
 void MyMoneyQifProfileEditor::slotReset()

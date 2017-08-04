@@ -21,13 +21,11 @@ set(libdialogs_a_SOURCES
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp
   kequitypriceupdateconfdlg.cpp
-  kexportdlg.cpp
   kfindtransactiondlg.cpp
   kgeneratesqldlg.cpp
   kgncimportoptionsdlg.cpp
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp
-  kimportdlg.cpp
   kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp
   kmymoneyfileinfodlg.cpp
@@ -46,7 +44,6 @@ set(libdialogs_a_SOURCES
   ksplittransactiondlg.cpp
   ktemplateexportdlg.cpp
   kupdatestockpricedlg.cpp
-  mymoneyqifprofileeditor.cpp
   transactioneditor.cpp
   transactionmatcher.cpp
   konlinetransferform.cpp
@@ -65,9 +62,9 @@ set(dialogs_UI
   kcurrencycalculatordecl.ui kcurrencyeditdlg.ui kavailablecurrencydlg.ui kcurrencyeditordlg.ui
   keditscheduledlgdecl.ui
   kenterscheduledlgdecl.ui
-  kequitypriceupdatedlgdecl.ui kequitypriceupdateconfdlg.ui kexportdlgdecl.ui
+  kequitypriceupdatedlgdecl.ui kequitypriceupdateconfdlg.ui
   kfindtransactiondlgdecl.ui kgeneratesqldlgdecl.ui kgncimportoptionsdlgdecl.ui
-  kgncpricesourcedlgdecl.ui kimportdlgdecl.ui kloadtemplatedlgdecl.ui
+  kgncpricesourcedlgdecl.ui kloadtemplatedlgdecl.ui
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
   knewequityentrydecl.ui editpersonaldatadlgdecl.ui kpayeereassigndlgdecl.ui
@@ -75,7 +72,7 @@ set(dialogs_UI
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   ktemplateexportdlg.ui
-  kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
+  kupdatestockpricedlgdecl.ui
   ../widgets/kaccounttemplateselectordecl.ui ../widgets/transactionsortoptiondecl.ui
   konlinetransferformdecl.ui
 )

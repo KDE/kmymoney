@@ -53,7 +53,7 @@ class KPluginInfo;
 
 enum class Action {
   FileOpenDatabase, FileSaveAsDatabase, FileBackup,
-  FileImportGNC, FileImportQIF, FileExportQIF,
+  FileImportGNC,
   FileImportStatement,
   FileImportTemplate, FileExportTemplate,
   #ifdef KMM_DEBUG
@@ -76,7 +76,7 @@ enum class Action {
   AccountCreditTransfer,
   CategoryNew, CategoryEdit,
   CategoryDelete,
-  ToolQIF, ToolCurrencies,
+  ToolCurrencies,
   ToolPrices, ToolUpdatePrices,
   ToolConsistency, ToolPerformance,
   ToolSQL, ToolCalculator,
@@ -215,20 +215,6 @@ protected slots:
   void slotFileViewPersonal();
 
   /**
-    * Called when the user wishes to import tab delimeted transactions
-    * into the current account.  An account must be open for this to
-    * work.  Calls KMyMoneyView::slotAccountImportAscii.
-    *
-    * @see MyMoneyAccount
-    */
-  void slotQifImport();
-
-  /**
-    * Called when a QIF import is finished.
-    */
-  void slotQifImportFinished();
-
-  /**
     * Opens a file selector dialog for the user to choose an existing OFX
     * file from the file system to be imported.  This slot is expected to
     * be called from the UI.
@@ -251,13 +237,6 @@ protected slots:
 
   void slotLoadAccountTemplates();
   void slotSaveAccountTemplates();
-
-  /**
-    * Called when the user wishes to export some transaction to a
-    * QIF formatted file. An account must be open for this to work.
-    * Uses MyMoneyQifWriter() for the actual output.
-    */
-  void slotQifExport();
 
   /**
     * Open up the application wide settings dialog.
@@ -302,8 +281,6 @@ protected slots:
   void slotBackupHandleEvents();
 
   void slotShowTipOfTheDay();
-
-  void slotQifProfileEditor();
 
   void slotShowPreviousView();
 
@@ -712,22 +689,6 @@ public:
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps);
 
   QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode, QWidget *widget);
-
-  /**
-   * This methods returns the account from the list of accounts identified by
-   * an account id or account name including an account hierachy.
-   *
-   * The parent account specifies from which account the search should be started.
-   * In case the parent account does not have an id, the method scans all top-level accounts.
-   *
-   * If the account is not found in the list of accounts, MyMoneyAccount() is returned.
-   *
-   * @param acc account to find
-   * @param parent parent account to search from
-   * @retval found MyMoneyAccount account instance
-   * @retval MyMoneyAccount() if not found
-   */
-  const MyMoneyAccount& findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 

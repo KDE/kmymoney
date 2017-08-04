@@ -193,6 +193,9 @@ if(ENABLE_LIBICAL)
   endif(NOT LIBICAL_FOUND)
 endif(ENABLE_LIBICAL)
 
+option(ENABLE_QIFIMPORTER "Enable QIF Importer" ON)
+option(ENABLE_QIFEXPORTER "Enable QIF Exporter" ON)
+
 # TODO: this should be removed
 enable_testing()
 

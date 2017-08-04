@@ -91,11 +91,6 @@ protected slots:
   /** Test whether to enable the buttons */
   void slotFileTextChanged(const QString& text);
 
-  /**
-    * Called when the user needs a new profile
-    */
-  void slotNewProfile();
-
   void slotOkClicked();
 
 private:

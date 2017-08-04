@@ -33,6 +33,7 @@
 #include <QBuffer>
 #include <QByteArray>
 #include <QInputDialog>
+#include <QDir>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -49,11 +50,8 @@
 // Project Headers
 
 #include "mymoneyfile.h"
-#include "kaccountselectdlg.h"
-#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 
-#include "mymoneystatementreader.h"
 #include <mymoneystatement.h>
 
 // define this to debug the code. Using external filters
@@ -399,7 +397,7 @@ void MyMoneyQifReader::slotProcessData()
   qDebug("%d lines processed", m_linenumber);
   signalProgress(-1, -1);
 
-  emit importFinished();
+  emit statementsReady(d->statements);
 }
 
 bool MyMoneyQifReader::startImport()
@@ -426,7 +424,7 @@ bool MyMoneyQifReader::startImport()
     m_filename += m_url.fileName();
     qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_filename;
     KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_filename), -1, KIO::Overwrite);
-    KJobWidgets::setWindow(job, kmymoney);
+//    KJobWidgets::setWindow(job, kmymoney);
     job->exec();
     if (job->error()) {
       KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
@@ -481,6 +479,7 @@ bool MyMoneyQifReader::startImport()
       signalProgress(0, m_file->size(), i18n("Reading QIF..."));
       slotSendDataToFilter();
       rc = true;
+//      emit statementsReady(d->statements);
     } else {
       KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program()),
                                  m_filter.errorString(),
@@ -488,66 +487,6 @@ bool MyMoneyQifReader::startImport()
     }
 #endif
   }
-  return rc;
-}
-
-bool MyMoneyQifReader::finishImport()
-{
-  bool  rc = false;
-
-#ifdef DEBUG_IMPORT
-  delete m_file;
-  m_file = 0;
-
-  // remove the Don't ask again entries
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
-  QStringList::ConstIterator it;
-
-  for (it = m_dontAskAgain.begin(); it != m_dontAskAgain.end(); ++it) {
-    grp.deleteEntry(*it);
-  }
-  grp.sync();
-  m_dontAskAgain.clear();
-  m_accountTranslation.clear();
-
-  signalProgress(-1, -1);
-  rc = !m_userAbort;
-
-#else
-  if (QProcess::Running != m_filter.state()) {
-    delete m_file;
-    m_file = 0;
-
-    // remove the Don't ask again entries
-    KSharedConfigPtr config = KSharedConfig::openConfig();
-    KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
-    QStringList::ConstIterator it;
-
-    for (it = m_dontAskAgain.constBegin(); it != m_dontAskAgain.constEnd(); ++it) {
-      grp.deleteEntry(*it);
-    }
-    grp.sync();
-    m_dontAskAgain.clear();
-    m_accountTranslation.clear();
-
-    signalProgress(-1, -1);
-    rc = !m_userAbort && QProcess::NormalExit == m_filter.exitStatus();
-  } else {
-    qWarning("MyMoneyQifReader::finishImport() must not be called while the filter\n\tprocess is still running.");
-  }
-#endif
-
-  // if a temporary file was constructed by NetAccess::download,
-  // then it will be removed with the next call. Otherwise, it
-  // stays untouched on the local filesystem
-  if(!m_url.isLocalFile())
-    KIO::file_delete(QUrl::fromUserInput(m_filename));
-
-  // Now to import the statements
-  QList<MyMoneyStatement>::const_iterator it_st;
-  for (it_st = d->statements.constBegin(); it_st != d->statements.constEnd(); ++it_st)
-    kmymoney->slotStatementImport(*it_st);
   return rc;
 }
 
@@ -898,13 +837,71 @@ void MyMoneyQifReader::processCategoryEntry()
   }
 
   // check if we can find the account already in the file
-  MyMoneyAccount acc = kmymoney->findAccount(account, MyMoneyAccount());
+  auto acc = findAccount(account, MyMoneyAccount());
 
   // if not, we just create it
   if (acc.id().isEmpty()) {
     MyMoneyAccount brokerage;
     file->createAccount(account, parentAccount, brokerage, MyMoneyMoney());
   }
+}
+
+const MyMoneyAccount& MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const
+{
+  static MyMoneyAccount nullAccount;
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QList<MyMoneyAccount> parents;
+  try {
+    // search by id
+    if (!acc.id().isEmpty()) {
+      return file->account(acc.id());
+    }
+    // collect the parents. in case parent does not have an id, we scan the all top-level accounts
+    if (parent.id().isEmpty()) {
+      parents << file->asset();
+      parents << file->liability();
+      parents << file->income();
+      parents << file->expense();
+      parents << file->equity();
+    } else {
+      parents << parent;
+    }
+    QList<MyMoneyAccount>::const_iterator it_p;
+    for (it_p = parents.constBegin(); it_p != parents.constEnd(); ++it_p) {
+      MyMoneyAccount parentAccount = *it_p;
+      // search by name (allow hierarchy)
+      int pos;
+      // check for ':' in the name and use it as separator for a hierarchy
+      QString name = acc.name();
+      bool notFound = false;
+      while ((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+        QString part = name.left(pos);
+        QString remainder = name.mid(pos + 1);
+        const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
+        // if account has not been found, continue with next top level parent
+        if (existingAccount.id().isEmpty()) {
+          notFound = true;
+          break;
+        }
+        parentAccount = existingAccount;
+        name = remainder;
+      }
+      if (notFound)
+        continue;
+      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, name);
+      if (!existingAccount.id().isEmpty()) {
+        if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {
+          if (acc.accountType() != existingAccount.accountType())
+            continue;
+        }
+        return existingAccount;
+      }
+    }
+  } catch (const MyMoneyException &e) {
+    KMessageBox::error(0, i18n("Unable to find account: %1", e.what()));
+  }
+  return nullAccount;
 }
 
 const QString MyMoneyQifReader::transferAccount(const QString& name, bool useBrokerage)
@@ -1937,7 +1934,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
   }
 
   // check if we can find the account already in the file
-  MyMoneyAccount acc = kmymoney->findAccount(account, MyMoneyAccount());
+  auto acc = findAccount(account, MyMoneyAccount());
   if (acc.id().isEmpty()) {
     // in case the account is not found by name and the type is
     // unknown, we have to assume something and create a checking account.
@@ -1995,170 +1992,6 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     d->transactionType = transactionType;
   }
   return acc.id();
-}
-
-void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMoneyAccount& account, const MyMoneyMoney& balance)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  QString accountId;
-  QString msg;
-  QString typeStr;
-  QString leadIn;
-  KMyMoneyUtils::categoryTypeE type;
-
-  QMap<QString, QString>::ConstIterator it;
-
-  type = KMyMoneyUtils::none;
-  switch (account.accountGroup()) {
-    default:
-      type = KMyMoneyUtils::asset;
-      type = (KMyMoneyUtils::categoryTypeE)(type | KMyMoneyUtils::liability);
-      typeStr = i18n("account");
-      leadIn = i18n("al");
-      break;
-
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-      type = KMyMoneyUtils::income;
-      type = (KMyMoneyUtils::categoryTypeE)(type | KMyMoneyUtils::expense);
-      typeStr = i18n("category");
-      leadIn = i18n("ei");
-      msg = i18n("Category selection");
-      break;
-  }
-
-  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "QifImport", kmymoney);
-  if (!msg.isEmpty())
-    accountSelect->setWindowTitle(msg);
-
-  it = m_accountTranslation.constFind(QString(leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower());
-  if (it != m_accountTranslation.constEnd()) {
-    try {
-      account = file->account(*it);
-      delete accountSelect;
-      return;
-
-    } catch (const MyMoneyException &e) {
-      const QString message(i18n("Account \"%1\" disappeared: %2", account.name(), e.what()));
-      KMessageBox::error(0, message);
-    }
-  }
-
-  // This is so the QPointer to the dialog gets properly destroyed if something throws.
-  try {
-    if (!account.name().isEmpty()) {
-      if (type & (KMyMoneyUtils::income | KMyMoneyUtils::expense)) {
-        accountId = file->categoryToAccount(account.name());
-      } else {
-        accountId = file->nameToAccount(account.name());
-      }
-
-      if (mode == Create) {
-        if (!accountId.isEmpty()) {
-          account = file->account(accountId);
-          delete accountSelect;
-          return;
-
-        } else {
-          switch (KMessageBox::questionYesNo(0,
-                                             i18nc("The 'type of object' 'x' does not exist", "The %1 '%2' does not exist. Do you "
-                                                   "want to create it?", typeStr, account.name()))) {
-            case KMessageBox::Yes:
-              break;
-            case KMessageBox::No:
-            default:
-              delete accountSelect;
-              return;
-          }
-        }
-      } else {
-        accountSelect->setHeader(i18nc("To select account", "Select %1", typeStr));
-        if (!accountId.isEmpty()) {
-          msg = i18n("The %1 <b>%2</b> currently exists. Do you want "
-                     "to import transactions to this account?", typeStr, account.name());
-
-        } else {
-          msg = i18n("The %1 <b>%2</b> currently does not exist. You can "
-                     "create a new %3 by pressing the <b>Create</b> button "
-                     "or select another %4 manually from the selection box.", typeStr, account.name(), typeStr, typeStr);
-        }
-      }
-
-      accountSelect->setDescription(msg);
-      accountSelect->setAccount(account, accountId);
-      accountSelect->setMode(mode == Create);
-      accountSelect->showAbortButton(true);
-
-      // display current entry in widget, the offending line (if any) will be shown in red
-      QStringList::Iterator it_e;
-      int i = 0;
-      for (it_e = m_qifEntry.begin(); it_e != m_qifEntry.end(); ++it_e) {
-        if (m_extractedLine == i)
-          accountSelect->m_qifEntry->setTextColor(QColor("red"));
-        accountSelect->m_qifEntry->append(*it_e);
-        accountSelect->m_qifEntry->setTextColor(QColor("black"));
-        ++i;
-      }
-
-      for (;;) {
-        if (accountSelect->exec() == QDialog::Accepted) {
-          if (!accountSelect->selectedAccount().isEmpty()) {
-            accountId = accountSelect->selectedAccount();
-
-            m_accountTranslation[QString(leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower()] = accountId;
-
-            // MMAccount::openingBalance() is where the accountSelect dialog has
-            // stashed the opening balance that the user chose.
-            MyMoneyAccount importedAccountData(account);
-            // MyMoneyMoney balance = importedAccountData.openingBalance();
-            account = file->account(accountId);
-            if (! balance.isZero()) {
-              QString openingtxid = file->openingBalanceTransaction(account);
-              MyMoneyFileTransaction ft;
-              if (! openingtxid.isEmpty()) {
-                MyMoneyTransaction openingtx = file->transaction(openingtxid);
-                MyMoneySplit split = openingtx.splitByAccount(account.id());
-
-                if (split.shares() != balance) {
-                  const MyMoneySecurity&  sec = file->security(account.currencyId());
-                  if (KMessageBox::questionYesNo(
-                        KMyMoneyUtils::mainWindow(),
-                        i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?", account.name(), MyMoneyUtils::formatMoney(split.shares(), account, sec), MyMoneyUtils::formatMoney(balance, account, sec)),
-                        i18n("Overwrite opening balance"),
-                        KStandardGuiItem::yes(),
-                        KStandardGuiItem::no(),
-                        "OverwriteOpeningBalance")
-                      == KMessageBox::Yes) {
-                    file->removeTransaction(openingtx);
-                    file->createOpeningBalanceTransaction(account, balance);
-                  }
-                }
-              } else {
-                // Add an opening balance
-                file->createOpeningBalanceTransaction(account, balance);
-              }
-              ft.commit();
-            }
-            break;
-          }
-
-        } else if (accountSelect->aborted())
-          throw MYMONEYEXCEPTION("USERABORT");
-
-        if (typeStr == i18n("account")) {
-          KMessageBox::error(0, i18n("You must select or create an account."));
-        } else {
-          KMessageBox::error(0, i18n("You must select or create a category."));
-        }
-      }
-    }
-  } catch (...) {
-    // cleanup the dialog pointer.
-    delete accountSelect;
-    throw;
-  }
-  delete accountSelect;
 }
 
 void MyMoneyQifReader::setProgressCallback(void(*callback)(int, int, const QString&))

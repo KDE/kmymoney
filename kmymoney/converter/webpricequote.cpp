@@ -52,7 +52,6 @@
 // Project Headers
 
 #include "mymoneyexception.h"
-#include "mymoneyqifprofile.h"
 #include "mymoneyfile.h"
 
 Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)

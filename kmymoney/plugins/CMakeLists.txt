@@ -3,6 +3,7 @@ add_subdirectory( ibanbicdata )
 add_subdirectory( interfaces )
 add_subdirectory( csvimport )
 add_subdirectory( csvexport )
+add_subdirectory( qif )
 
 if(LIBOFX_FOUND)
   add_subdirectory( ofximport )

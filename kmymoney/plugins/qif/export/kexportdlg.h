@@ -135,11 +135,6 @@ protected slots:
   void slotBrowse();
 
   /**
-    * Called when the user needs a new profile
-    */
-  void slotNewProfile();
-
-  /**
     * This slot checks whether all data is correct to enable
     * the 'Export' button. The enable state of the 'Export' button
     * is updated appropriately.

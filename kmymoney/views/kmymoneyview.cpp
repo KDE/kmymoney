@@ -68,8 +68,6 @@
 #include <libkgpgfile/kgpgfile.h>
 #include "kendingbalancedlg.h"
 #include "kchooseimportexportdlg.h"
-#include "kimportdlg.h"
-#include "kexportdlg.h"
 #include "knewloanwizard.h"
 #include "kcurrencyeditdlg.h"
 #include "kfindtransactiondlg.h"
