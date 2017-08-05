@@ -992,4 +992,43 @@ const QString MyMoneyReport::getAttrName(const attrNameE _attr)
     {anTo, QStringLiteral("to")}
   };
   return attrNames[_attr];
+
+QString MyMoneyReport::toString(ERowType type)
+{
+  switch(type) {
+  case eNoRows             : return "eNoRows";
+  case eAssetLiability     : return "eAssetLiability";
+  case eExpenseIncome      : return "eExpenseIncome";
+  case eCategory           : return "eCategory";
+  case eTopCategory        : return "eTopCategory";
+  case eAccount            : return "eAccount";
+  case eTag                : return "eTag";
+  case ePayee              : return "ePayee";
+  case eMonth              : return "eMonth";
+  case eWeek               : return "eWeek";
+  case eTopAccount         : return "eTopAccount";
+  case eAccountByTopAccount: return "eAccountByTopAccount";
+  case eEquityType         : return "eEquityType";
+  case eAccountType        : return "eAccountType";
+  case eInstitution        : return "eInstitution";
+  case eBudget             : return "eBudget";
+  case eBudgetActual       : return "eBudgetActual";
+  case eSchedule           : return "eSchedule";
+  case eAccountInfo        : return "eAccountInfo";
+  case eAccountLoanInfo    : return "eAccountLoanInfo";
+  case eAccountReconcile   : return "eAccountReconcile";
+  case eCashFlow           : return "eCashFlow";
+  default                  : return "undefined";
+  }
+}
+
+QString MyMoneyReport::toString(MyMoneyReport::EReportType type)
+{
+  switch(type) {
+  case eNoReport:   return "eNoReport";
+  case ePivotTable: return "ePivotTable";
+  case eQueryTable: return "eQueryTable";
+  case eInfoTable:  return "eInfoTable";
+  default:          return "undefined";
+  }
 }
