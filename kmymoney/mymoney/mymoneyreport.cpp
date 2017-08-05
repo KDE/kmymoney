@@ -992,6 +992,7 @@ const QString MyMoneyReport::getAttrName(const attrNameE _attr)
     {anTo, QStringLiteral("to")}
   };
   return attrNames[_attr];
+}
 
 QString MyMoneyReport::toString(ERowType type)
 {
