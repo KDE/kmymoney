@@ -29,7 +29,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-struct WidgetHintFrameCollection::Private {
+class WidgetHintFrameCollection::Private
+{
+public:
   QList<QWidget*>     widgetList;
   QList<WidgetHintFrame*>  frameList;
 };
@@ -97,7 +99,9 @@ void WidgetHintFrameCollection::updateWidgets()
 
 
 
-struct WidgetHintFrame::Private {
+class WidgetHintFrame::Private
+{
+public:
   QWidget*    editWidget;
   bool        status;
   FrameStyle  style;

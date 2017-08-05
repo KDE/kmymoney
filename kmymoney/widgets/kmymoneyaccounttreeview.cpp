@@ -158,7 +158,7 @@ void KMyMoneyAccountTreeView::customHeaderContextMenuRequested(const QPoint)
   m_menu = new QMenu(i18n("Displayed columns"));
   QList<QAction *> actions;
   foreach (const auto column, defColumns) {
-    auto a = new QAction();
+    auto a = new QAction(0);
     a->setObjectName(QString::number(column));
     a->setText(AccountsModel::getHeaderName(column));
     a->setCheckable(true);

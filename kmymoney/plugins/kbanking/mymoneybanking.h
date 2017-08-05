@@ -76,12 +76,12 @@ public:
 
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const;
 
-  void protocols(QStringList& protocolList) const;
+  void protocols(QStringList& protocolList) const override;
 
-  QStringList availableJobs(QString accountId);
-  IonlineTaskSettings::ptr settings(QString accountId, QString taskName);
+  QStringList availableJobs(QString accountId) override;
+  IonlineTaskSettings::ptr settings(QString accountId, QString taskName) override;
 
-  void sendOnlineJob(QList<onlineJob>& jobs);
+  void sendOnlineJob(QList<onlineJob>& jobs) override;
 
   virtual void plug() override;
   virtual void unplug() override;
@@ -129,7 +129,7 @@ private:
    * to represent the necessary parameters for online banking
    * through AqBanking.
    */
-  QWidget* accountConfigTab(const MyMoneyAccount& acc, QString& name);
+  QWidget* accountConfigTab(const MyMoneyAccount& acc, QString& name) override;
 
   /**
    * Stores the configuration data kept in the widgets created
@@ -137,7 +137,7 @@ private:
    * The current settings are accessible through the reference to
    * @a current.
    */
-  MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current);
+  MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current) override;
 
   /**
     * Called by the application to map the KMyMoney account @a acc
@@ -145,7 +145,7 @@ private:
     * Returns the necessary settings for the plugin in @a settings and
     * @a true if the mapping was successful.
     */
-  bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings);
+  bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings) override;
 
   /**
    * This method translates a MyMoneyAccount to the corresponding AB_ACCOUNT object pointer.
@@ -163,7 +163,7 @@ private:
     * KMyMoney account @a acc with data from the online source.
     * Store the jobs in the outbox in case @a moreAccounts is true
     */
-  bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts);
+  bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts) override;
 
   /**
     * Kept for backward compatibility. Use
@@ -171,7 +171,7 @@ private:
     *
     * @deprecated
     */
-  bool updateAccount(const MyMoneyAccount& acc);
+  bool updateAccount(const MyMoneyAccount& acc) DEPRECATED;
 
   /**
     * Trigger the password cache timer

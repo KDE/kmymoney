@@ -168,8 +168,9 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
 
 
 
-struct AmountEdit::Private
+class AmountEdit::Private
 {
+public:
   Private(AmountEdit* q)
   : m_q(q)
   , m_allowEmpty(false)

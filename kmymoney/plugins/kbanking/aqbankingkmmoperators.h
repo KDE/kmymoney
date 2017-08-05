@@ -30,10 +30,10 @@
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 
-class AB_ACCOUNT;
-class AB_TRANSACTION_LIMITS;
-class AB_TRANSACTION;
-class AB_VALUE;
+struct AB_ACCOUNT;
+struct AB_TRANSACTION_LIMITS;
+struct AB_TRANSACTION;
+struct AB_VALUE;
 
 namespace payeeIdentifiers
 {

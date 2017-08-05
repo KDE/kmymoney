@@ -174,10 +174,6 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
   d->filterModel->setAccountType(acc.accountType());
   d->setSortRole(LedgerRole::PostDateRole, LedgerModel::DateColumn);
 
-  // set the delegate for the markers by finding them in the model
-
-  /// @todo logic needs to be implemented
-
   // if balance calculation has not been triggered, then run it immediately
   if(!d->balanceCalculationPending) {
     recalculateBalances();

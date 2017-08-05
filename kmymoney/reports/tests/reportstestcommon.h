@@ -105,12 +105,11 @@ class BudgetEntryHelper
 private:
   QDate m_date;
   QString m_categoryid;
-  bool m_applytosub;
   MyMoneyMoney m_amount;
 
 public:
-  BudgetEntryHelper(): m_applytosub(false) {}
-  BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool _applytosub, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_applytosub(_applytosub), m_amount(_amount) {}
+  BudgetEntryHelper() {}
+  BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool /* _applytosub */, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_amount(_amount) {}
 };
 
 class BudgetHelper: public QList<BudgetEntryHelper>
