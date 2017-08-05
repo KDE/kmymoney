@@ -54,29 +54,29 @@ namespace KMyMoneyRegister
 {
 
 typedef enum {
-  UnknownSort = 0,      //< unknown sort criteria
-  PostDateSort = 1,     //< sort by post date
-  EntryDateSort,        //< sort by entry date
-  PayeeSort,            //< sort by payee name
-  ValueSort,            //< sort by value
-  NoSort,               //< sort by number field
-  EntryOrderSort,       //< sort by entry order
-  TypeSort,             //< sort by CashFlowDirection
-  CategorySort,         //< sort by Category
-  ReconcileStateSort,   //< sort by reconciliation state
-  SecuritySort,         //< sort by security (only useful for investment accounts)
+  UnknownSort = 0,      ///< unknown sort criteria
+  PostDateSort = 1,     ///< sort by post date
+  EntryDateSort,        ///< sort by entry date
+  PayeeSort,            ///< sort by payee name
+  ValueSort,            ///< sort by value
+  NoSort,               ///< sort by number field
+  EntryOrderSort,       ///< sort by entry order
+  TypeSort,             ///< sort by CashFlowDirection
+  CategorySort,         ///< sort by Category
+  ReconcileStateSort,   ///< sort by reconciliation state
+  SecuritySort,         ///< sort by security (only useful for investment accounts)
   // insert new values in front of this line
   MaxSortFields
 } TransactionSortField;
 
 typedef enum {
-  AscendingOrder = 0,   //< sort in ascending order
-  DescendingOrder       //< sort in descending order
+  AscendingOrder = 0,   ///< sort in ascending order
+  DescendingOrder       ///< sort in descending order
 } SortDirection;
 
 typedef enum {
-  PayeeFirst = 0,       //< show the payee on the first row of the transaction in the details column and the account on the second
-  AccountFirst          //< show the account on the first row of the transaction in the details column and the payee on the second
+  PayeeFirst = 0,       ///< show the payee on the first row of the transaction in the details column and the account on the second
+  AccountFirst          ///< show the account on the first row of the transaction in the details column and the payee on the second
 } DetailsColumnType;
 
 class Register;
