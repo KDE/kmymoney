@@ -15,11 +15,11 @@
  ***************************************************************************/
 
 #include <QApplication>
-#include <KDChartWidget>
-#include <KDChartLineDiagram>
-#include <KDChartCartesianAxis>
+#include <KChartWidget>
+#include <KChartLineDiagram>
+#include <KChartCartesianAxis>
 
-using namespace KDChart;
+using namespace KChart;
 
 int main( int argc, char** argv )
 {

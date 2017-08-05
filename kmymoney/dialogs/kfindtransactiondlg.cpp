@@ -115,10 +115,10 @@ void KSortOptionDlg::hideDefaultButton()
 }
 
 
-KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
-    QDialog(parent),
-    m_needReload(false),
-    m_ui(new Ui::KFindTransactionDlgDecl)
+KFindTransactionDlg::KFindTransactionDlg(QWidget *parent, bool withEquityAccounts)
+  : QDialog(parent)
+  , m_needReload(false)
+  , m_ui(new Ui::KFindTransactionDlgDecl)
 {
   m_ui->setupUi(this);
   m_dateRange = new DateRangeDlg;
