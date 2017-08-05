@@ -25,7 +25,6 @@
 
 namespace
 {
-const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 

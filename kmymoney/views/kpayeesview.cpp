@@ -636,7 +636,7 @@ void KPayeesView::slotPayeeDataChanged()
     QStringList keys;
 
     MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
-    rc |= (static_cast<int>(type) != matchTypeCombo->currentData().toUInt());
+    rc |= (static_cast<unsigned int>(type) != matchTypeCombo->currentData().toUInt());
 
     checkMatchIgnoreCase->setEnabled(false);
     matchKeyEditList->setEnabled(false);

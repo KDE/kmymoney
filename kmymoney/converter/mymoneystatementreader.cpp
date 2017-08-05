@@ -1513,7 +1513,7 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
                              scheduleName, splitValue, payeeName);
 
   // check that dates are within user's setting
-  const int gap = abs(matchedSchedule.transaction().postDate().toJulianDay() - importedTransaction.postDate().toJulianDay());
+  const int gap = std::abs(matchedSchedule.transaction().postDate().toJulianDay() - importedTransaction.postDate().toJulianDay());
   if (gap > KMyMoneyGlobalSettings::matchInterval())
     questionMsg = i18np("KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
                         "Schedule name: <b>%2</b><br/>"
