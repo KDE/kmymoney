@@ -15,6 +15,8 @@
  ***************************************************************************/
 
 #include <QApplication>
+#include <QTimer>
+
 #include <KChartWidget>
 #include <KChartLineDiagram>
 #include <KChartCartesianAxis>
@@ -24,6 +26,7 @@ using namespace KChart;
 int main( int argc, char** argv )
 {
   QApplication app( argc, argv );
+
   Widget widget;
   widget.resize( 600, 600 );
 
@@ -43,6 +46,9 @@ int main( int argc, char** argv )
   widget.lineDiagram()->addAxis( xAxis );
   widget.lineDiagram()->addAxis( yAxis );
   widget.show();
+
+  // make sure the test terminates
+  QTimer::singleShot(5000, &widget, SLOT(close()));
 
   return app.exec();
 }
