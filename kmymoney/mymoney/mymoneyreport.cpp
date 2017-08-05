@@ -16,12 +16,14 @@
  ***************************************************************************/
 
 #include "mymoneyreport.h"
+#include <kmymoneyglobalsettings.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QString>
 #include <QList>
+#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,6 +35,9 @@
 #include "mymoneystoragenames.h"
 
 using namespace MyMoneyStorageNodes;
+
+// define this to debug reports
+// #define DEBUG_REPORTS
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
@@ -178,24 +183,21 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
   if (_rt == MyMoneyReport::eAssetLiability) {
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
-    addAccountGroup(MyMoneyAccount::Equity);
     m_showRowTotals = true;
   }
   if (_rt == MyMoneyReport::eAccount) {
     addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
-    addAccountGroup(MyMoneyAccount::Equity);
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
-    addAccountGroup(MyMoneyAccount::Equity);
-    addAccountGroup(MyMoneyAccount::Checkings);
-    addAccountGroup(MyMoneyAccount::Savings);
-    addAccountGroup(MyMoneyAccount::Cash);
-    addAccountGroup(MyMoneyAccount::CreditCard);
-    addAccountGroup(MyMoneyAccount::Loan);
-    addAccountGroup(MyMoneyAccount::Income);
-    addAccountGroup(MyMoneyAccount::Expense);
     addAccountGroup(MyMoneyAccount::AssetLoan);
+    addAccountGroup(MyMoneyAccount::Cash);
+    addAccountGroup(MyMoneyAccount::Checkings);
+    addAccountGroup(MyMoneyAccount::CreditCard);
+    if (KMyMoneyGlobalSettings::expertMode())
+      addAccountGroup(MyMoneyAccount::Equity);
+    addAccountGroup(MyMoneyAccount::Expense);
+    addAccountGroup(MyMoneyAccount::Income);
+    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(MyMoneyAccount::Loan);
+    addAccountGroup(MyMoneyAccount::Savings);
     addAccountGroup(MyMoneyAccount::Stock);
     m_showRowTotals = true;
   }
@@ -220,6 +222,14 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
   }
+#ifdef DEBUG_REPORTS
+  QDebug out = qDebug();
+  out << _name << toString(_rt) << toString(m_reportType);
+  foreach(const MyMoneyAccount::accountTypeE accountType, m_accountGroups)
+    out << MyMoneyAccount::accountTypeToString(accountType);
+  if (m_accounts.size() > 0)
+    out << m_accounts;
+#endif
 }
 
 MyMoneyReport::MyMoneyReport(const QDomElement& node) :
@@ -295,7 +305,6 @@ void MyMoneyReport::setRowType(ERowType _rt)
   if (_rt == MyMoneyReport::eAssetLiability) {
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
-    addAccountGroup(MyMoneyAccount::Equity);
   }
   if (_rt == MyMoneyReport::eExpenseIncome) {
     addAccountGroup(MyMoneyAccount::Expense);

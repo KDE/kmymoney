@@ -137,7 +137,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   // in case the date selection changes, we update the selection
   connect(m_dateRange, SIGNAL(rangeChanged()), this, SLOT(slotUpdateSelections()));
 
-  setupAccountsPage();
+  setupAccountsPage(withEquityAccounts);
   setupCategoriesPage();
   setupAmountPage();
   setupPayeesPage();
@@ -363,13 +363,14 @@ bool KFindTransactionDlg::allItemsSelected(const QTreeWidget* view) const
   return true;
 }
 
-void KFindTransactionDlg::setupAccountsPage()
+void KFindTransactionDlg::setupAccountsPage(bool withEquityAccounts)
 {
   m_ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet accountSet;
   accountSet.addAccountGroup(MyMoneyAccount::Asset);
   accountSet.addAccountGroup(MyMoneyAccount::Liability);
-  accountSet.addAccountGroup(MyMoneyAccount::Equity);
+  if (withEquityAccounts)
+    accountSet.addAccountGroup(MyMoneyAccount::Equity);
   accountSet.addAccountGroup(MyMoneyAccount::Income);
   accountSet.addAccountGroup(MyMoneyAccount::Expense);
   //set the accountset to show closed account if the settings say so

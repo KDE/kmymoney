@@ -1105,6 +1105,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s.setShares(-s1.shares());
         s.setValue(-s1.value());
         s.setAccountId(payeeObj.defaultAccountId());
+        s.setMemo(transactionUnderImport.memo());
+        s.setPayeeId(payeeid);
         d->setupPrice(s, splitAccount, m_account, statementTransactionUnderImport.m_datePosted);
         transactionUnderImport.addSplit(s);
         file->addVATSplit(transactionUnderImport, m_account, splitAccount, statementTransactionUnderImport.m_amount);

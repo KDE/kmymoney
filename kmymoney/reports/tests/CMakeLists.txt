@@ -19,3 +19,6 @@ ecm_add_tests(${tests_sources}
     kmm_mymoney
     reports_testcommon
 )
+
+add_executable(reports-chart-test chart-test.cpp)
+target_link_libraries(reports-chart-test reports Qt5::Core Qt5::Gui)

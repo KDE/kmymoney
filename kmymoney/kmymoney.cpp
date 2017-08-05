@@ -2535,8 +2535,8 @@ bool KMyMoneyApp::slotBackupWriteFile()
   progressCallback(50, 0, i18n("Writing %1", backupfile));
   d->m_proc.clearProgram();
 #ifdef Q_OS_WIN
-  d->m_proc << "cmd.exe" << "/c" << "copy" << "/y";
-  d->m_proc << QDir::toNativeSeparators(d->m_fileName.toLocalFile()) << QDir::toNativeSeparators(backupfile);
+  d->m_proc << "cmd.exe" << "/c" << "copy" << "/b" << "/y";
+  d->m_proc << (QDir::toNativeSeparators(d->m_fileName.toLocalFile()) + "+ nul") << QDir::toNativeSeparators(backupfile);
 #else
   d->m_proc << "cp" << "-f";
   d->m_proc << d->m_fileName.toLocalFile() << backupfile;

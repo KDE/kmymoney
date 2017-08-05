@@ -69,8 +69,10 @@ class KFindTransactionDlg : public QDialog
   Q_OBJECT
 
 public:
-
-  KFindTransactionDlg(QWidget *parent = 0);
+  /**
+   @param withEquityAccounts set to false to hide equity accounts in account page
+  */
+  KFindTransactionDlg(QWidget *parent = 0, bool withEquityAccounts=true);
   ~KFindTransactionDlg();
 
   virtual bool eventFilter(QObject *o, QEvent *e);
@@ -136,7 +138,7 @@ protected:
   };
 
   void setupCategoriesPage();
-  void setupAccountsPage();
+  void setupAccountsPage(bool withEquityAccounts=false);
   void setupAmountPage();
   void setupPayeesPage();
   void setupTagsPage();

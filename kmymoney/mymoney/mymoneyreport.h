@@ -614,6 +614,22 @@ public:
     */
   static void setLineWidth(int width);
 
+  /**
+   * Return row type as string.
+   *
+   * @param type type to get string for
+   * @return row type converted to string
+   */
+  static QString toString(ERowType type);
+
+  /**
+   * Return report type as string.
+   *
+   * @param type report type to get string for
+   * @return report type converted to string
+   */
+  static QString toString(EReportType type);
+
 private:
   /**
     * The user-assigned name of the report
