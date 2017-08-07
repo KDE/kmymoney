@@ -258,7 +258,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   AbstractCoordinatePlane* cPlane = coordinatePlane();
   AbstractDiagram* planeDiagram = cPlane->diagram();
   planeDiagram->setAntiAliasing(true);
-  static_cast<CartesianCoordinatePlane*>(coordinatePlane())->setAutoAdjustVerticalRangeToData(101);
+  CartesianCoordinatePlane* plane = dynamic_cast<CartesianCoordinatePlane*>(coordinatePlane());
+  if (plane) {
+    plane->setAutoAdjustVerticalRangeToData(101);
+  }
 
   //the palette - we set it here because it is a property of the diagram
   switch (KMyMoneySettings::chartsPalette()) {
