@@ -3414,16 +3414,16 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
       if (category.value("VatAmount").toLower() != QString("net")) {
         // split value is the gross value
         gv = amount;
-        nv = gv / (MyMoneyMoney::ONE + vatRate);
+        nv = (gv / (MyMoneyMoney::ONE + vatRate)).convert(fract);
         MyMoneySplit catSplit = transaction.splitByAccount(account.id(), false);
-        catSplit.setShares(-nv.convert(fract));
+        catSplit.setShares(-nv);
         catSplit.setValue(catSplit.shares());
         transaction.modifySplit(catSplit);
 
       } else {
         // split value is the net value
         nv = amount;
-        gv = nv * (MyMoneyMoney::ONE + vatRate);
+        gv = (nv * (MyMoneyMoney::ONE + vatRate)).convert(fract);
         MyMoneySplit accSplit = transaction.splitByAccount(account.id());
         accSplit.setValue(gv.convert(fract));
         accSplit.setShares(accSplit.value());
