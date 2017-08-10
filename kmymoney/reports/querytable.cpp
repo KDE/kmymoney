@@ -338,7 +338,17 @@ void QueryTable::init()
       throw MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
   }
 
-  QString sort = m_group + ',' + m_columns + ",id,rank";
+  QString sort;
+  switch (m_config.rowType()) {
+    case MyMoneyReport::eMonth:
+    case MyMoneyReport::eWeek:
+      sort = m_group + "sort," + m_columns + ",id,rank";
+      break;
+
+    default:
+      sort = m_group + ',' + m_columns + ",id,rank";
+      break;
+  }
 
   switch (m_config.rowType()) {
     case MyMoneyReport::eAccountByTopAccount:
@@ -446,8 +456,10 @@ void QueryTable::constructTransactionTable()
     qA["commodity"] = qS["commodity"] = (* it_transaction).commodity();
 
     pd = (* it_transaction).postDate();
-    qA["month"] = qS["month"] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
-    qA["week"] = qS["week"] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
+    qA["monthsort"] = qS["monthsort"] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
+    qA["weeksort"] = qS["weeksort"] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
+    qA["month"] = qS["month"] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::DefaultLocaleLongDate));
+    qA["week"] = qS["week"] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::DefaultLocaleLongDate));
 
     qA["currency"] = qS["currency"] = "";
 
