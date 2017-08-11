@@ -45,3 +45,6 @@ target_link_libraries( kmm_payeeidentifier_loader
   payeeidentifier_unavailable
   ${QT_QTCORE_LIBRARY}
 )
+
+install( FILES payeeidentifier.h
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney/payeeidentifier COMPONENT Devel)
