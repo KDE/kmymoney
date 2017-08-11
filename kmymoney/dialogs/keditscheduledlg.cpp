@@ -138,6 +138,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
       break;
   }
   m_estimateEdit->setChecked(!d->m_schedule.isFixed());
+  m_lastDayInMonthEdit->setChecked(d->m_schedule.lastDayInMonth());
   m_autoEnterEdit->setChecked(d->m_schedule.autoEnter());
   m_endSeriesEdit->setChecked(d->m_schedule.willEnd());
 
@@ -281,6 +282,7 @@ TransactionEditor* KEditScheduleDlg::startEdit()
     d->m_tabOrderWidgets.append(m_weekendOptionEdit);
     d->m_tabOrderWidgets.append(m_estimateEdit);
     d->m_tabOrderWidgets.append(m_variation);
+    d->m_tabOrderWidgets.append(m_lastDayInMonthEdit);
     d->m_tabOrderWidgets.append(m_autoEnterEdit);
     d->m_tabOrderWidgets.append(m_endSeriesEdit);
     d->m_tabOrderWidgets.append(m_RemainingEdit);
@@ -388,6 +390,10 @@ const MyMoneySchedule& KEditScheduleDlg::schedule() const
       qDebug("No tabbar found in KEditScheduleDlg::schedule(). Defaulting type to BILL");
     }
 
+    if(m_lastDayInMonthEdit->isEnabled())
+      d->m_schedule.setLastDayInMonth(m_lastDayInMonthEdit->isChecked());
+    else
+      d->m_schedule.setLastDayInMonth(false);
     d->m_schedule.setAutoEnter(m_autoEnterEdit->isChecked());
     d->m_schedule.setPaymentType(static_cast<MyMoneySchedule::paymentTypeE>(m_paymentMethodEdit->currentItem()));
     if (m_endSeriesEdit->isEnabled() && m_endSeriesEdit->isChecked()) {
@@ -521,16 +527,34 @@ void KEditScheduleDlg::slotFrequencyChanged(int item)
   switch (item) {
     case MyMoneySchedule::OCCUR_DAILY:
     case MyMoneySchedule::OCCUR_WEEKLY:
+      // Supports Frequency Number
+      m_frequencyNoEdit->setEnabled(true);
+      m_lastDayInMonthEdit->setEnabled(false);
+      break;
+
     case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
     case MyMoneySchedule::OCCUR_MONTHLY:
     case MyMoneySchedule::OCCUR_YEARLY:
       // Supports Frequency Number
       m_frequencyNoEdit->setEnabled(true);
+      m_lastDayInMonthEdit->setEnabled(true);
       break;
+
+    case MyMoneySchedule::OCCUR_EVERYOTHERMONTH:
+    case MyMoneySchedule::OCCUR_EVERYTHREEMONTHS:
+    case MyMoneySchedule::OCCUR_TWICEYEARLY:
+    case MyMoneySchedule::OCCUR_QUARTERLY:
+    case MyMoneySchedule::OCCUR_EVERYFOURMONTHS:
+      m_frequencyNoEdit->setEnabled(false);
+      m_frequencyNoEdit->setValue(1);
+      m_lastDayInMonthEdit->setEnabled(true);
+      break;
+
     default:
       // Multiplier is always 1
       m_frequencyNoEdit->setEnabled(false);
       m_frequencyNoEdit->setValue(1);
+      m_lastDayInMonthEdit->setEnabled(false);
       break;
   }
   if (isEndSeries && (item != MyMoneySchedule::OCCUR_ONCE)) {

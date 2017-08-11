@@ -219,6 +219,16 @@ public:
   }
 
   /**
+    * Get the state if the schedule should be processed at the last day
+    * of a month
+    *
+    * @return state of the flag
+    */
+  bool lastDayInMonth() const {
+    return m_lastDayInMonth;
+  }
+
+  /**
     * Simple get method that returns true if the transaction should be
     * automatically entered into the register.
     *
@@ -364,6 +374,15 @@ public:
     * @return none
     */
   void setEndDate(const QDate& date);
+
+  /**
+    * Simple method to set whether the schedule should be performed at
+    * the last day of a month.
+    *
+    * @param state boolean The state to set
+    * @return none
+    */
+  void setLastDayInMonth(bool state);
 
   /**
     * Simple set method to set whether this transaction should be automatically
@@ -756,6 +775,9 @@ private:
 
   /// The last transaction date if the schedule does end at a fixed date
   QDate m_endDate;
+
+  /// the last day in month flag
+  bool m_lastDayInMonth;
 
   /// Enter the transaction into the register automatically
   bool m_autoEnter;

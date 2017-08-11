@@ -281,6 +281,13 @@
               </layout>
             </item>
             <item>
+              <widget class="QCheckBox" name="m_lastDayInMonthEdit">
+                <property name="text">
+                  <string>Process this schedule always at the last day of a month</string>
+                </property>
+              </widget>
+            </item>
+            <item>
               <widget class="QCheckBox" name="m_autoEnterEdit">
                 <property name="text">
                   <string>Enter this schedule into the register automatically when it is due</string>

@@ -469,6 +469,7 @@ private:
   int upgradeToV8();
   int upgradeToV9();
   int upgradeToV10();
+  int upgradeToV11();
 
   int createTables();
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());

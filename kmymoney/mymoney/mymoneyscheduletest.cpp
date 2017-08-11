@@ -1730,3 +1730,21 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   s.setNextDueDate(endDate.addMonths(-1));
   QVERIFY(s.transactionsRemaining() == 2);
 }
+
+void MyMoneyScheduleTest::testProcessLastDayInMonth()
+{
+  MyMoneySchedule s;
+  // occurence is unrelated
+  s.setOccurrence(MyMoneySchedule::OCCUR_ANY);
+  s.setLastDayInMonth(true);
+  s.setNextDueDate(QDate(2010, 1, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2010,1,31));
+  s.setNextDueDate(QDate(2010, 2, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2010,2,28));
+  s.setNextDueDate(QDate(2016, 2, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2016,2,29));
+  s.setNextDueDate(QDate(2016, 4, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,30));
+  s.setLastDayInMonth(false);
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,1));
+}
