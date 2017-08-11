@@ -207,8 +207,12 @@ int main(int argc, char *argv[])
     exit(0);
   }
 #endif
-
-  const QUrl url = fileUrls.isEmpty() ? QUrl() : QUrl::fromUserInput(fileUrls.front());
+  QString fname = fileUrls.front();
+  QFileInfo fi(fname);
+  if (fi.isFile() && !fname.startsWith(QLatin1String("file://")) && !fname.startsWith(QLatin1String("./"))) {
+    fname.prepend(QLatin1String("./"));
+  }
+  const QUrl url = fileUrls.isEmpty() ? QUrl() : QUrl::fromUserInput(fname, QLatin1String("."), QUrl::AssumeLocalFile);
   int rc = 0;
   if (isNoCatchOption) {
     qDebug("Running w/o global try/catch block");
@@ -291,6 +295,8 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
     if (kmymoney->isImportableFile(file)) {
       importfile = file.path();
       url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
+    } else {
+      url = file;
     }
 
   } else {
