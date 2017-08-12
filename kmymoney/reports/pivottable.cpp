@@ -133,7 +133,6 @@ void PivotTable::init()
   if (m_config.rowType() == MyMoneyReport::eAssetLiability) {
     m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset), PivotOuterGroup(m_numColumns));
     m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
-    m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Equity), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
   } else {
     m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 2));
     m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 1, true /* inverted */));
