@@ -600,6 +600,100 @@ void QueryTableTest::testInvestment()
     QFAIL(qPrintable(e.what()));
   }
 }
+
+// prevents bug #312135
+void QueryTableTest::testSplitShares()
+{
+  try {
+    MyMoneyMoney firstSharesPurchase(16);
+    MyMoneyMoney splitFactor(2);
+    MyMoneyMoney secondSharesPurchase(1);
+    MyMoneyMoney sharesAtTheEnd = firstSharesPurchase / splitFactor + secondSharesPurchase;
+    MyMoneyMoney priceBeforeSplit(74.99, 100);
+    MyMoneyMoney priceAfterSplit = splitFactor * priceBeforeSplit;
+
+    // Equities
+    eqStock1 = makeEquity("Stock1", "STK1");
+
+    // Accounts
+    acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2017, 8, 1), acAsset);
+    acStock1 =     makeAccount("Stock 1",    MyMoneyAccount::Stock,      moZero, QDate(2017, 8, 1), acInvestment, eqStock1);
+
+    // Transactions
+    //                        Date               Action                           Shares                Price             Stock     Asset       Income
+    InvTransactionHelper s1b1(QDate(2017, 8, 1), MyMoneySplit::ActionBuyShares,   firstSharesPurchase,  priceBeforeSplit, acStock1, acChecking, QString());
+    InvTransactionHelper s1s1(QDate(2017, 8, 2), MyMoneySplit::ActionSplitShares, splitFactor,          MyMoneyMoney(),   acStock1, QString(),  QString());
+    InvTransactionHelper s1b2(QDate(2017, 8, 3), MyMoneySplit::ActionBuyShares,   secondSharesPurchase, priceAfterSplit,  acStock1, acChecking, QString());
+
+    //
+    // Investment Performance Report
+    //
+
+    MyMoneyReport invhold_r(
+      MyMoneyReport::eAccountByTopAccount,
+      MyMoneyReport::eQCperformance,
+      MyMoneyTransactionFilter::userDefined,
+      MyMoneyReport::eDetailAll,
+      i18n("Investment Performance by Account"),
+      i18n("Test Report")
+    );
+    invhold_r.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 3));
+    invhold_r.setInvestmentsOnly(true);
+    XMLandback(invhold_r);
+    QueryTable invhold(invhold_r);
+
+    writeTabletoHTML(invhold, "Investment Performance by Account (with stock split).html");
+
+    const auto rows = invhold.rows();
+
+    QVERIFY(rows.count() == 3);
+    QVERIFY(MyMoneyMoney(rows[0][ListTable::ctBuys]) == sharesAtTheEnd * priceAfterSplit * MyMoneyMoney(-1));
+
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
+  }
+}
+
+// prevents bug #118159
+void QueryTableTest::testConversionRate()
+{
+  try {
+    MyMoneyMoney firsConversionRate(1.1800, 10000);
+    MyMoneyMoney secondConversionRate(1.1567, 10000);
+    MyMoneyMoney amountWithdrawn(100);
+
+    const auto acCadChecking = makeAccount(QString("Canadian Checking"), MyMoneyAccount::Checkings, moZero, QDate(2017, 8, 1), acAsset, "CAD");
+
+    makePrice("CAD", QDate(2017, 8, 1), firsConversionRate);
+    makePrice("CAD", QDate(2017, 8, 2), secondConversionRate);
+
+    TransactionHelper t1(QDate(2017, 8, 1), MyMoneySplit::ActionWithdrawal, amountWithdrawn, acCadChecking, acSolo, "CAD");
+
+    MyMoneyReport filter;
+    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 2));
+    filter.setName("Transactions by Account");
+    auto cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance;
+    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    XMLandback(filter);
+    QueryTable qtbl(filter);
+
+    writeTabletoHTML(qtbl, "Transactions by Account (conversion rate).html");
+
+    const auto rows = qtbl.rows();
+
+    QVERIFY(rows.count() == 5);
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == amountWithdrawn * firsConversionRate * MyMoneyMoney(-1));
+    QVERIFY(MyMoneyMoney(rows[1][ListTable::ctPrice]) == firsConversionRate);
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctBalance]) == amountWithdrawn * secondConversionRate * MyMoneyMoney(-1));
+    QVERIFY(MyMoneyMoney(rows[2][ListTable::ctPrice]) == secondConversionRate);
+
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
+  }
+
+}
+
 //this is to prevent me from making mistakes again when modifying balances - asoliverez
 //this case tests only the opening and ending balance of the accounts
 void QueryTableTest::testBalanceColumn()

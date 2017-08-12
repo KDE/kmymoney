@@ -205,6 +205,10 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
       s2.setShares(_fee);
       addSplit(s2);
     }
+  } else if (_action == MyMoneySplit::ActionSplitShares) {
+    s1.setShares(_shares.abs());
+    s1.setValue(MyMoneyMoney());
+    s1.setPrice(MyMoneyMoney());
   }
   addSplit(s1);
 
@@ -216,12 +220,14 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
   //qDebug() << "updating price...";
 
   // update the price, while we're here
-  QString stockid = stockaccount.currencyId();
-  QString basecurrencyid = file->baseCurrency().id();
-  MyMoneyPrice price = file->price(stockid, basecurrencyid, _date, true);
-  if (!price.isValid()) {
-    MyMoneyPrice newprice(stockid, basecurrencyid, _date, _price, "test");
-    file->addPrice(newprice);
+  if (_action != MyMoneySplit::ActionSplitShares) {
+    QString stockid = stockaccount.currencyId();
+    QString basecurrencyid = file->baseCurrency().id();
+    MyMoneyPrice price = file->price(stockid, basecurrencyid, _date, true);
+    if (!price.isValid()) {
+      MyMoneyPrice newprice(stockid, basecurrencyid, _date, _price, "test");
+      file->addPrice(newprice);
+    }
   }
   ft.commit();
   //qDebug() << "successfully added " << id();

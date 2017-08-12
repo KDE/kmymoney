@@ -36,6 +36,8 @@ private slots:
   void testCashFlowAnalysis();
   void testAccountQuery();
   void testInvestment();
+  void testSplitShares();
+  void testConversionRate();
   void testBalanceColumn();
   void testBalanceColumnWithMultipleCurrencies();
   void testTaxReport();
