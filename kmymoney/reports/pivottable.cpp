@@ -117,9 +117,7 @@ void PivotTable::init()
   if (m_config.isRunningSum() &&
       !m_config.isIncludingPrice() &&
       !m_config.isIncludingAveragePrice() &&
-      !m_config.isIncludingMovingAverage() &&
-      !m_config.isIncludingForecast() &&
-      !m_config.isIncludingSchedules())
+      !m_config.isIncludingMovingAverage())
     m_startColumn = 1;
   else
     m_startColumn = 0;
@@ -155,12 +153,7 @@ void PivotTable::init()
   //
   // Get opening balances
   // Only net worth report qualifies
-  if (m_config.isRunningSum() &&
-      !m_config.isIncludingPrice() &&
-      !m_config.isIncludingAveragePrice() &&
-      !m_config.isIncludingMovingAverage() &&
-      !m_config.isIncludingForecast() &&
-      !m_config.isIncludingSchedules())
+  if (m_startColumn == 1)
     calculateOpeningBalances();
 
   //
@@ -512,12 +505,7 @@ void PivotTable::calculateColumnHeadings()
   DEBUG_ENTER(Q_FUNC_INFO);
 
   // one column for the opening balance
-  if (m_config.isRunningSum() &&
-      !m_config.isIncludingPrice() &&
-      !m_config.isIncludingAveragePrice() &&
-      !m_config.isIncludingMovingAverage() &&
-      !m_config.isIncludingForecast() &&
-      !m_config.isIncludingSchedules())
+  if (m_startColumn == 1)
     m_columnHeadings.append("Opening");
 
   int columnpitch = m_config.columnPitch();
