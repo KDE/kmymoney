@@ -207,12 +207,25 @@ int main(int argc, char *argv[])
     exit(0);
   }
 #endif
-  QString fname = fileUrls.front();
-  QFileInfo fi(fname);
-  if (fi.isFile() && !fname.startsWith(QLatin1String("file://")) && !fname.startsWith(QLatin1String("./"))) {
-    fname.prepend(QLatin1String("./"));
+
+  QString fname;
+  // in case a filename is provided we need to check if it is a local
+  // file. In case the name does not start with "file://" or "./" or "/"
+  // we need to prepend "./" to fake a relative filename. Otherwiese, QUrl prepends
+  // "http.//" and uses the full path which will not work.
+  //
+  // The handling might be different on other OSes
+  if (!fileUrls.isEmpty()) {
+    fname = fileUrls.front();
+    QFileInfo fi(fname);
+    if (fi.isFile() && !fname.startsWith(QLatin1String("file://"))
+    && !fname.startsWith(QLatin1String("./"))
+    && !fname.startsWith(QLatin1String("/"))) {
+        fname.prepend(QLatin1String("./"));
+    }
   }
-  const QUrl url = fileUrls.isEmpty() ? QUrl() : QUrl::fromUserInput(fname, QLatin1String("."), QUrl::AssumeLocalFile);
+
+  const QUrl url = QUrl::fromUserInput(fname, QLatin1String("."), QUrl::AssumeLocalFile);
   int rc = 0;
   if (isNoCatchOption) {
     qDebug("Running w/o global try/catch block");
