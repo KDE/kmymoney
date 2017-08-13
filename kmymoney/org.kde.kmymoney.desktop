@@ -108,5 +108,5 @@ MimeType=application/x-kmymoney;application/vnd.intu.qfx;application/x-ofx;
 Type=Application
 X-DocPath=kmymoney/index.html
 Icon=kmymoney
-Categories=Office;Finance;
+Categories=Qt;KDE;Office;Finance;
 StartupWMClass=Kmymoney
