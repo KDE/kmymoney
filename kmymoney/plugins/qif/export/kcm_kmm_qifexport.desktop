@@ -1,15 +1,12 @@
 [Desktop Entry]
 Name=QIF Importer configuration
-Name[x-test]=xxQIF Importer configurationxx
 Icon=document-import
 Type=Service
 ServiceTypes=KCModule
 Exec=kcmshell5 kmm_qifimport
 Categories=Qt;KDE;kmymoney;
 Keywords=qifexport;kmymoney;
-Keywords[x-test]=xxqifimportxx;xxkmymoneyxx;
 X-KDE-Library=kcm_kmm_qifimport
 X-KDE-ParentApp=qifexport
 X-KDE-ParentComponents=qifexport
 Comment=Configuration for QIF Importer plugin
-Comment[x-test]=xxConfiguration for QIF Importer pluginxx
