@@ -283,7 +283,7 @@
             <item>
               <widget class="QCheckBox" name="m_lastDayInMonthEdit">
                 <property name="text">
-                  <string>Process this schedule always at the last day of a month</string>
+                  <string>Always process this schedule the last day of a month</string>
                 </property>
               </widget>
             </item>
