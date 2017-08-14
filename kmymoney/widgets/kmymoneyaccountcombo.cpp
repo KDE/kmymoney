@@ -223,6 +223,13 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
 
     if(isEditable()) {
       lineEdit()->setText(d->fullAccountName(model(), index));
+    } else {
+      // ensure that combobox is properly set when KMyMoneyAccountCombo::setSelected is called programmatically
+      blockSignals(true);
+      setRootModelIndex(index.parent());
+      setCurrentIndex(index.row());
+      setRootModelIndex(QModelIndex());
+      blockSignals(false);
     }
     emit accountSelected(id);
   }
