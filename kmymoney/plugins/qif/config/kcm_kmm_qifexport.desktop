@@ -1,12 +1,27 @@
 [Desktop Entry]
 Name=QIF Importer configuration
+Name[ca]=Configuració de l'importador de QIF
+Name[nl]=Instellingen van QIF-importeren
+Name[pt]=Configuração da Importação de QIF
+Name[uk]=Налаштування засобу імпортування QIF
+Name[x-test]=xxQIF Importer configurationxx
 Icon=document-import
 Type=Service
 ServiceTypes=KCModule
 Exec=kcmshell5 kmm_qifexport
 Categories=Qt;KDE;kmymoney;
 Keywords=qifexport;kmymoney;
+Keywords[ca]=qifexport;kmymoney;
+Keywords[nl]=qifexport;kmymoney;
+Keywords[pt]=exportação qif;kmymoney;
+Keywords[uk]=qifexport;kmymoney;експорт;кома;кмаймані;кіф;
+Keywords[x-test]=xxqifexportxx;xxkmymoneyxx;
 X-KDE-Library=kcm_kmm_qif
 X-KDE-ParentApp=qifexport
 X-KDE-ParentComponents=qifexport
 Comment=Configuration for QIF Importer plugin
+Comment[ca]=Configuració del connector d'importació de QIF
+Comment[nl]=Instellingen voor plug-in voor QIF importeren
+Comment[pt]=Configuração do 'plugin' de Importação de QIF
+Comment[uk]=Налаштування додатка імпортування у форматі QIF
+Comment[x-test]=xxConfiguration for QIF Importer pluginxx
