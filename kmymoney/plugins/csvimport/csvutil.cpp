@@ -146,7 +146,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   int decimalIndex = txt.indexOf(m_decimalSymbol);
   int thouIndex = txt.lastIndexOf(m_thousandsSeparator);
 
-  txt.remove(QRegularExpression(QStringLiteral("[^\\d.,-+]")));     // remove all non-digits
+  txt.remove(QRegularExpression(QStringLiteral("\\D.,-+")));     // remove all non-digits
   txt.remove(m_thousandsSeparator);
 
   if (txt.isEmpty())  // empty strings not allowed

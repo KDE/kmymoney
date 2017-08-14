@@ -116,7 +116,7 @@ CSVImporter::~CSVImporter()
   delete m_file;
 }
 
-MyMoneyStatement CSVImporter::unattendedPricesImport(const QString &filename, PricesProfile *profile)
+MyMoneyStatement CSVImporter::unattendedImport(const QString &filename, CSVProfile *profile)
 {
   MyMoneyStatement st;
   m_profile = profile;
@@ -126,10 +126,15 @@ MyMoneyStatement CSVImporter::unattendedPricesImport(const QString &filename, Pr
     m_file->readFile(m_profile);
     m_file->setupParser(m_profile);
 
+    if (profile->m_decimalSymbol == DecimalSymbol::Auto) {
+      auto columns = getNumericalColumns();
+      if (detectDecimalSymbols(columns) != -2)
+        return st;
+    }
+
     if (!createStatement(st))
       st = MyMoneyStatement();
   }
-
   return st;
 }
 
@@ -563,7 +568,7 @@ bool CSVImporter::calculateFee()
 
   for (int row = profile->m_endLine + 1; row < m_file->m_rowCount; ++row) // fill rows below with whitespace for nice effect with markUnwantedRows
     items.append(new QStandardItem(QString()));
-  int col = profile->m_colTypeNum.value(Column::Fee);
+  int col = profile->m_colTypeNum.value(Column::Fee, -1);
   if (col == -1) {                                          // fee column isn't present
     m_file->m_model->appendColumn(items);
     ++m_file->m_columnCount;
@@ -738,6 +743,34 @@ QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<MyMoneyAccount::acco
     }
   }
 
+  // if filtering returned more results, filter out accounts whose numbers are the shortest
+  if (filteredAccounts.count() > 1) {
+    for (auto i = 0; i < filteredAccounts.count() - 1;) {
+      auto firstAccNumber = filteredAccounts.at(i).number();
+      auto secondAccNumber = filteredAccounts.at(i + 1).number();
+      if (firstAccNumber.length() > secondAccNumber.length())
+        filteredAccounts.removeOne(filteredAccounts.at(++i));
+      else if (firstAccNumber.length() < secondAccNumber.length())
+        filteredAccounts.removeOne(filteredAccounts.at(i));
+      else
+        ++i;
+    }
+  }
+
+  // if filtering returned more results, filter out accounts whose names are the shortest
+  if (filteredAccounts.count() > 1) {
+    for (auto i = 0; i < filteredAccounts.count() - 1;) {
+      auto firstAccName = filteredAccounts.at(i).name();
+      auto secondAccName = filteredAccounts.at(i + 1).name();
+      if (firstAccName.length() > secondAccName.length())
+        filteredAccounts.removeOne(filteredAccounts.at(++i));
+      else if (firstAccName.length() < secondAccName.length())
+        filteredAccounts.removeOne(filteredAccounts.at(i));
+      else
+        ++i;
+    }
+  }
+
   // if filtering by name and number didn't return nothing, then try filtering by number only
   if (filteredAccounts.isEmpty()) {
     foreach (const auto account, filteredTypes) {
@@ -818,22 +851,22 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   QString txt;
 
   // process number field
-  if (profile->m_colTypeNum.value(Column::Number) != -1)
+  if (profile->m_colTypeNum.value(Column::Number, -1) != -1)
     tr.m_strNumber = txt;
 
   // process date field
-  int col = profile->m_colTypeNum.value(Column::Date);
+  int col = profile->m_colTypeNum.value(Column::Date, -1);
   tr.m_datePosted = processDateField(row, col);
   if (tr.m_datePosted == QDate())
     return false;
 
   // process payee field
-  col = profile->m_colTypeNum.value(Column::Payee);
+  col = profile->m_colTypeNum.value(Column::Payee, -1);
   if (col != -1)
     tr.m_strPayee = m_file->m_model->item(row, col)->text();
 
   // process memo field
-  col = profile->m_colTypeNum.value(Column::Memo);
+  col = profile->m_colTypeNum.value(Column::Memo, -1);
   if (col != -1)
     memo.append(m_file->m_model->item(row, col)->text());
 
@@ -848,14 +881,14 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   tr.m_strMemo = memo;
 
   // process amount field
-  col = profile->m_colTypeNum.value(Column::Amount);
+  col = profile->m_colTypeNum.value(Column::Amount, -1);
   tr.m_amount = processAmountField(profile, row, col);
   if (col != -1 && profile->m_oppositeSigns) // change signs to opposite if requested by user
     tr.m_amount *= MyMoneyMoney(-1);
 
   // process credit/debit field
-  if (profile->m_colTypeNum.value(Column::Credit) != -1 &&
-      profile->m_colTypeNum.value(Column::Debit) != -1) {
+  if (profile->m_colTypeNum.value(Column::Credit, -1) != -1 &&
+      profile->m_colTypeNum.value(Column::Debit, -1) != -1) {
     QString credit = m_file->m_model->item(row, profile->m_colTypeNum.value(Column::Credit))->text();
     QString debit = m_file->m_model->item(row, profile->m_colTypeNum.value(Column::Debit))->text();
     tr.m_amount = processCreditDebit(credit, debit);
@@ -871,7 +904,7 @@ bool CSVImporter::processBankRow(MyMoneyStatement &st, const BankingProfile *pro
   s2.m_amount = -s1.m_amount;
 
   // process category field
-  col = profile->m_colTypeNum.value(Column::Category);
+  col = profile->m_colTypeNum.value(Column::Category, -1);
   if (col != -1) {
     txt = m_file->m_model->item(row, col)->text();
     QString accountId = MyMoneyFile::instance()->checkCategory(txt, s1.m_amount, s2.m_amount);
@@ -911,32 +944,32 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   QString memo;
   QString txt;
   // process date field
-  int col = profile->m_colTypeNum.value(Column::Date);
+  int col = profile->m_colTypeNum.value(Column::Date, -1);
   tr.m_datePosted = processDateField(row, col);
   if (tr.m_datePosted == QDate())
     return false;
 
   // process quantity field
-  col = profile->m_colTypeNum.value(Column::Quantity);
+  col = profile->m_colTypeNum.value(Column::Quantity, -1);
   tr.m_shares = processQuantityField(profile, row, col);
 
   // process price field
-  col = profile->m_colTypeNum.value(Column::Price);
+  col = profile->m_colTypeNum.value(Column::Price, -1);
   tr.m_price = processPriceField(profile, row, col);
 
   // process amount field
-  col = profile->m_colTypeNum.value(Column::Amount);
+  col = profile->m_colTypeNum.value(Column::Amount, -1);
   tr.m_amount = processAmountField(profile, row, col);
 
   // process type field
-  col = profile->m_colTypeNum.value(Column::Type);
+  col = profile->m_colTypeNum.value(Column::Type, -1);
   tr.m_eAction = processActionTypeField(profile, row, col);
   if (!m_isActionTypeValidated && col != -1 &&   // if action type wasn't validated in wizard then...
       validateActionType(tr) != ValidActionType) // ...check if price, amount, quantity is appropriate
     return false;
 
   // process fee field
-  col = profile->m_colTypeNum.value(Column::Fee);
+  col = profile->m_colTypeNum.value(Column::Fee, -1);
   if (col != -1) {
     if (profile->m_decimalSymbol == DecimalSymbol::Auto) {
       DecimalSymbol decimalSymbol = m_decimalSymbolIndexMap.value(col);
@@ -959,22 +992,22 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   }
 
   // process symbol and name field
-  col = profile->m_colTypeNum.value(Column::Symbol);
+  col = profile->m_colTypeNum.value(Column::Symbol, -1);
   if (col != -1)
     tr.m_strSymbol = m_file->m_model->item(row, col)->text();
-  col = profile->m_colTypeNum.value(Column::Name);
+  col = profile->m_colTypeNum.value(Column::Name, -1);
   if (col != -1 &&
       tr.m_strSymbol.isEmpty()) { // case in which symbol field is empty
     txt = m_file->m_model->item(row, col)->text();
     tr.m_strSymbol = m_mapSymbolName.key(txt);   // it's all about getting the right symbol
   } else if (!profile->m_securitySymbol.isEmpty())
     tr.m_strSymbol = profile->m_securitySymbol;
-  else
+  else if (tr.m_strSymbol.isEmpty())
     return false;
   tr.m_strSecurity = m_mapSymbolName.value(tr.m_strSymbol); // take name from prepared names to avoid potential name mismatch
 
   // process memo field
-  col = profile->m_colTypeNum.value(Column::Memo);
+  col = profile->m_colTypeNum.value(Column::Memo, -1);
   if (col != -1)
     memo.append(m_file->m_model->item(row, col)->text());
 
@@ -1020,13 +1053,13 @@ bool CSVImporter::processPriceRow(MyMoneyStatement &st, const PricesProfile *pro
   MyMoneyStatement::Price pr;
 
   // process date field
-  int col = profile->m_colTypeNum.value(Column::Date);
+  int col = profile->m_colTypeNum.value(Column::Date, -1);
   pr.m_date = processDateField(row, col);
   if (pr.m_date == QDate())
     return false;
 
   // process price field
-  col = profile->m_colTypeNum.value(Column::Price);
+  col = profile->m_colTypeNum.value(Column::Price, -1);
   pr.m_amount = processPriceField(profile, row, col);
 
   switch (profile->type()) {
@@ -1107,7 +1140,7 @@ MyMoneyMoney CSVImporter::processQuantityField(const CSVProfile *profile, const 
       setupFieldDecimalSymbol(col);
 
     QString txt = m_file->m_model->item(row, col)->text();
-    txt.remove(QRegularExpression(QStringLiteral("+-"))); // remove unwanted sings in quantity
+    txt.remove(QRegularExpression(QStringLiteral("-+"))); // remove unwanted sings in quantity
 
     if (!txt.isEmpty())
       shares = MyMoneyMoney(m_file->m_parse->possiblyReplaceSymbol(txt));
@@ -1193,8 +1226,8 @@ QList<MyMoneyStatement::Transaction::EAction> CSVImporter::createValidActionType
 bool CSVImporter::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName)
 {
   QList<MyMoneySecurity> securityList = MyMoneyFile::instance()->securityList();
-  int symbolCol = m_profile->m_colTypeNum.value(Column::Symbol);
-  int nameCol = m_profile->m_colTypeNum.value(Column::Name);
+  int symbolCol = m_profile->m_colTypeNum.value(Column::Symbol, -1);
+  int nameCol = m_profile->m_colTypeNum.value(Column::Name, -1);
 
   // sort by availability of symbol and name
   for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row) {
@@ -1264,7 +1297,7 @@ QList<int> CSVImporter::getNumericalColumns()
   QList<int> columns;
   switch(m_profile->type()) {
     case Profile::Banking:
-      if (m_profile->m_colTypeNum.value(Column::Amount) != -1) {
+      if (m_profile->m_colTypeNum.value(Column::Amount, -1) != -1) {
         columns << m_profile->m_colTypeNum.value(Column::Amount);
       } else {
         columns << m_profile->m_colTypeNum.value(Column::Debit);
@@ -1275,7 +1308,7 @@ QList<int> CSVImporter::getNumericalColumns()
       columns << m_profile->m_colTypeNum.value(Column::Amount);
       columns << m_profile->m_colTypeNum.value(Column::Price);
       columns << m_profile->m_colTypeNum.value(Column::Quantity);
-      if (m_profile->m_colTypeNum.value(Column::Fee) != -1)
+      if (m_profile->m_colTypeNum.value(Column::Fee, -1) != -1)
         columns << m_profile->m_colTypeNum.value(Column::Fee);
       break;
     case Profile::CurrencyPrices:
@@ -1318,8 +1351,8 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
         detectAccount(st);
 
       InvestmentProfile *profile = dynamic_cast<InvestmentProfile *>(m_profile);
-      if ((m_profile->m_colTypeNum.value(Column::Fee) == -1 ||
-           m_profile->m_colTypeNum.value(Column::Fee) >= m_file->m_columnCount) &&
+      if ((m_profile->m_colTypeNum.value(Column::Fee, -1) == -1 ||
+           m_profile->m_colTypeNum.value(Column::Fee, -1) >= m_file->m_columnCount) &&
           !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
         calculateFee();
 
@@ -1381,12 +1414,13 @@ void CSVProfile::readSettings(const KConfigGroup &profilesGroup)
 
 void CSVProfile::writeSettings(KConfigGroup &profilesGroup)
 {
-  if (m_lastUsedDirectory.startsWith(QDir::homePath())) { // replace /home/user with ~/ for brevity
-    QFileInfo fileInfo = QFileInfo(m_lastUsedDirectory);
-    if (fileInfo.isFile())
-      m_lastUsedDirectory = fileInfo.absolutePath();
+  QFileInfo fileInfo (m_lastUsedDirectory);
+  if (fileInfo.isFile())
+    m_lastUsedDirectory = fileInfo.absolutePath();
+
+  if (m_lastUsedDirectory.startsWith(QDir::homePath())) // replace /home/user with ~/ for brevity
     m_lastUsedDirectory.replace(0, QDir::homePath().length(), QLatin1Char('~'));
-  }
+
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDirectory), m_lastUsedDirectory);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfEncoding), m_encodingMIBEnum);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfDateFormat), (int)m_dateFormat);
@@ -1475,7 +1509,7 @@ bool InvestmentProfile::readSettings(const KSharedConfigPtr &config)
   m_colTypeNum[Column::Fee] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Fee), -1);
   m_colTypeNum[Column::Symbol] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Symbol), -1);
   m_colTypeNum[Column::Memo] = -1; // initialize, otherwise random data may go here
-  m_feeIsPercentage = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFeeIsPercentage), 0);
+  m_feeIsPercentage = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFeeIsPercentage), false);
   m_feeRate = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfFeeRate), QString());
   m_minFee = profilesGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfMinFee), QString());
 

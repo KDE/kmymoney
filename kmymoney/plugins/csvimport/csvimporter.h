@@ -109,6 +109,19 @@ public:
 class KMM_CSVIMPORT_CORE_EXPORT BankingProfile : public CSVProfile
 {
 public:
+  explicit BankingProfile() : CSVProfile() {}
+  BankingProfile(QString profileName, int encodingMIBEnum,
+                 int startLine, int trailerLines,
+                 DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+                 QMap<Column, int> colTypeNum,
+                 bool oppositeSigns) :
+    CSVProfile(profileName, encodingMIBEnum,
+               startLine, trailerLines,
+               dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
+               colTypeNum),
+    m_oppositeSigns(oppositeSigns) {}
+
+
   Profile type() const { return Profile::Banking; }
   bool readSettings(const KSharedConfigPtr &config);
   void writeSettings(const KSharedConfigPtr &config);
@@ -121,6 +134,18 @@ public:
 class KMM_CSVIMPORT_CORE_EXPORT InvestmentProfile : public CSVProfile
 {
 public:
+  explicit InvestmentProfile() : CSVProfile() {}
+  InvestmentProfile(QString profileName, int encodingMIBEnum,
+                    int startLine, int trailerLines,
+                    DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+                    QMap<Column, int> colTypeNum,
+                    int priceFraction, QMap <MyMoneyStatement::Transaction::EAction, QStringList> transactionNames) :
+    CSVProfile(profileName, encodingMIBEnum,
+               startLine, trailerLines,
+               dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
+               colTypeNum),
+    m_transactionNames(transactionNames), m_priceFraction(priceFraction), m_feeIsPercentage(false) {}
+
   Profile type() const { return Profile::Investment; }
   bool readSettings(const KSharedConfigPtr &config);
   void writeSettings(const KSharedConfigPtr &config);
@@ -135,8 +160,9 @@ public:
   QList<int>  m_memoColList;
 
   int         m_priceFraction;
-  int         m_feeIsPercentage;
   int         m_dontAsk;
+
+  bool        m_feeIsPercentage;
 };
 
 class KMM_CSVIMPORT_CORE_EXPORT PricesProfile : public CSVProfile
@@ -215,7 +241,7 @@ public:
   /**
   * This method will silently import csv file. Main purpose of this method are online quotes.
   */
-  MyMoneyStatement unattendedPricesImport(const QString &filename, PricesProfile *profile);
+  MyMoneyStatement unattendedImport(const QString &filename, CSVProfile *profile);
 
   static KSharedConfigPtr configFile();
   void profileFactory(const Profile type, const QString &name);

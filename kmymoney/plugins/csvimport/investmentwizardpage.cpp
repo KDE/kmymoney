@@ -125,16 +125,20 @@ void InvestmentPage::initializePage()
   ui->m_feeRate->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,2}[") + QLocale().decimalPoint() + QStringLiteral("]{1,1}[0-9]{0,2}")), this) );
   ui->m_minFee->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,}[") + QLocale().decimalPoint() + QStringLiteral("]{0,1}[0-9]{0,}")), this) );
 
-  if (!m_profile->m_feeRate.isEmpty() &&
-      m_imp->calculateFee()) {
-    ui->m_feeCol->blockSignals(true);
-    int feeCol = ui->m_feeCol->count();
-    ui->m_feeCol->addItem(QString::number(feeCol + 1));
-    ui->m_feeCol->setEnabled(false);
-    ui->m_feeCol->setCurrentIndex(feeCol);
-    ui->m_feeCol->blockSignals(false);
-    m_dlg->updateWindowSize();
-    m_dlg->markUnwantedRows();
+  if (!m_profile->m_feeRate.isEmpty()) {  // fee rate indicates that fee column needs to be calculated
+    if (m_imp->calculateFee()) {
+      ui->m_feeCol->blockSignals(true);
+      int feeCol = ui->m_feeCol->count();
+      ui->m_feeCol->addItem(QString::number(feeCol + 1));
+      ui->m_feeCol->setEnabled(false);
+      ui->m_feeCol->setCurrentIndex(feeCol);
+      ui->m_feeCol->blockSignals(false);
+      m_dlg->updateWindowSize();
+      m_dlg->markUnwantedRows();
+    }
+  } else if (m_profile->m_colTypeNum.value(Column::Fee, -1) >= ui->m_feeCol->count()) { // no fee rate, calculated fee column index exist, but the column doesn't exist and that's not ok
+    m_profile->m_colTypeNum[Column::Fee] = -1;
+    m_profile->m_colNumType.remove(m_profile->m_colNumType.key(Column::Fee));
   }
 
   for (int i = 0; i < m_profile->m_memoColList.count(); ++i) { //  Set up all memo fields...

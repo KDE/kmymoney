@@ -411,7 +411,7 @@ void WebPriceQuote::slotParseCSVQuote(const QString& filename)
   else {
     MyMoneyStatement st;
     CSVImporter* csvImporter = new CSVImporter;
-    st = csvImporter->unattendedPricesImport(filename, &d->m_CSVSource);
+    st = csvImporter->unattendedImport(filename, &d->m_CSVSource);
     if (!st.m_listPrices.isEmpty())
       emit csvquote(d->m_kmmID, d->m_webID, st);
     else

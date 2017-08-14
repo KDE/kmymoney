@@ -56,7 +56,7 @@ QDate ConvertDate::convertDate(const QString& txt)
 
   QStringList dateSplit = buffer.split(QLatin1Char('/'));
   if (dateSplit.count() > 3) {      //                  it can be date and time
-    qDebug("ConvertDate - assuming date and time format");
+//    qDebug("ConvertDate - assuming date and time format");
     bool dateFound = false;
     for (int i = 0; i < dateSplit.count(); i++) {
       if(dateSplit[i].length() == 4 && dateSplit[i].toInt() > 0) {
