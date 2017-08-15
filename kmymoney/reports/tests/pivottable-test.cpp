@@ -175,6 +175,50 @@ void PivotTableTest::testNetWorthDateFilter()
 
 }
 
+void PivotTableTest::testNetWorthOpening()
+{
+  MyMoneyMoney openingBalance(12000000);
+  auto acBasicAccount = makeAccount(QString("Basic Account"), MyMoneyAccount::Checkings, openingBalance, QDate(2016, 1, 1), acAsset);
+  auto ctBasicIncome = makeAccount(QString("Basic Income"), MyMoneyAccount::Income, MyMoneyMoney(), QDate(2016, 1, 1), acIncome);
+  auto ctBasicExpense = makeAccount(QString("Basic Expense"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2016, 1, 1), acExpense);
+
+  TransactionHelper t1(QDate(2016, 7, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-6200000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t2(QDate(2016, 8, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t3(QDate(2016, 9, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t4(QDate(2016, 10, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t5(QDate(2016, 11, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t6(QDate(2016, 12, 1), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(100000), acBasicAccount, ctBasicExpense);
+  TransactionHelper t7(QDate(2017, 1, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t8(QDate(2017, 2, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t9(QDate(2017, 3, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t10(QDate(2017, 4, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t11(QDate(2017, 5, 1), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(4500000), acBasicAccount, ctBasicExpense);
+  TransactionHelper t12(QDate(2017, 6, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t13(QDate(2017, 7, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+
+  MyMoneyReport filter;
+  filter.setRowType(MyMoneyReport::eAssetLiability);
+  filter.setDateFilter(QDate(2016, 1, 1), QDate(2017, 12, 31));
+  filter.addAccount(acBasicAccount);
+  XMLandback(filter);
+  PivotTable nt_opening1(filter);
+  writeTabletoCSV(nt_opening1, "networth-opening-1.csv");
+
+  QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][acBasicAccount][eActual][0] == MyMoneyMoney()); // opening value on 1st Jan 2016 is 12000000, but before that i.e. 31st Dec 2015 opening value is 0
+  for (auto i = 1; i <= 6; ++i)
+    QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][acBasicAccount][eActual][i] == openingBalance);
+  QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][acBasicAccount][eActual][7] == openingBalance + MyMoneyMoney(6200000));
+  QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][acBasicAccount][eActual][12] == MyMoneyMoney(18700000)); // value after t6 transaction
+
+  filter.setDateFilter(QDate(2017, 1, 1), QDate(2017, 12, 31));
+  XMLandback(filter);
+  PivotTable nt_opening2(filter);
+  writeTabletoCSV(nt_opening2, "networth-opening-2.csv");
+
+  QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][acBasicAccount][eActual][0] == MyMoneyMoney(18700000)); // opening value is equall to the value after t6 transaction
+  QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][acBasicAccount][eActual][12] == MyMoneyMoney(14800000));
+}
+
 void PivotTableTest::testSpendingEmpty()
 {
   // test a spending report with no entries

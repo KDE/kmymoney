@@ -48,6 +48,7 @@ private slots:
   void testNetWorthOfsetting();
   void testNetWorthOpeningPrior();
   void testNetWorthDateFilter();
+  void testNetWorthOpening();
   void testSpendingEmpty();
   void testSingleTransaction();
   void testSubAccount();

@@ -972,7 +972,7 @@ void PivotTable::convertToBaseCurrency()
     while (it_innergroup != (*it_outergroup).end()) {
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
-        int column = m_startColumn;
+        auto column = 0;
         while (column < m_numColumns) {
           if (it_row.value()[eActual].count() <= column)
             throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToBaseCurrency").arg(column).arg(it_row.value()[eActual].count()));
@@ -1021,7 +1021,7 @@ void PivotTable::convertToDeepCurrency()
     while (it_innergroup != (*it_outergroup).end()) {
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
-        int column = m_startColumn;
+        auto column = 0;
         while (column < m_numColumns) {
           if (it_row.value()[eActual].count() <= column)
             throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToDeepCurrency").arg(column).arg(it_row.value()[eActual].count()));
@@ -1105,7 +1105,7 @@ void PivotTable::calculateTotals()
         // Columns
         //
 
-        int column = m_startColumn;
+        auto column = 0;
         while (column < m_numColumns) {
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
             if (it_row.value()[ m_rowTypeList[i] ].count() <= column)
@@ -1127,7 +1127,7 @@ void PivotTable::calculateTotals()
       // Inner Row Group Totals
       //
 
-      int column = m_startColumn;
+      auto column = 0;
       while (column < m_numColumns) {
         for (int i = 0; i < m_rowTypeList.size(); ++i) {
           if ((*it_innergroup).m_total[ m_rowTypeList[i] ].count() <= column)
@@ -1152,7 +1152,7 @@ void PivotTable::calculateTotals()
 
     const bool isIncomeExpense = (m_config.rowType() == MyMoneyReport::eExpenseIncome);
     const bool invert_total = (*it_outergroup).m_inverted;
-    int column = m_startColumn;
+    auto column = 0;
     while (column < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
         if (m_grid.m_total[ m_rowTypeList[i] ].count() <= column)
@@ -1180,7 +1180,7 @@ void PivotTable::calculateTotals()
   // Report Totals
   //
 
-  int totalcolumn = m_startColumn;
+  auto totalcolumn = 0;
   while (totalcolumn < m_numColumns) {
     for (int i = 0; i < m_rowTypeList.size(); ++i) {
       if (m_grid.m_total[ m_rowTypeList[i] ].count() <= totalcolumn)
@@ -1313,7 +1313,7 @@ QString PivotTable::renderCSV() const
 
   QString result = i18n("Account");
 
-  int column = m_startColumn;
+  auto column = 0;
   while (column < m_numColumns) {
     result += QString(",%1").arg(QString(m_columnHeadings[column++]));
     if (m_rowTypeList.size() > 1) {
@@ -1331,7 +1331,7 @@ QString PivotTable::renderCSV() const
 
   // Row Type Header
   if (m_rowTypeList.size() > 1) {
-    int column = m_startColumn;
+    auto column = 0;
     while (column < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString(",%1").arg(m_columnTypeHeaderList[i]);
@@ -1381,7 +1381,7 @@ QString PivotTable::renderCSV() const
         //
 
         QString rowdata;
-        int column = m_startColumn;
+        auto column = 0;
 
         bool isUsed = false;
         for (int i = 0; i < m_rowTypeList.size(); ++i)
@@ -1485,7 +1485,7 @@ QString PivotTable::renderCSV() const
 
       // Finish the row started above, unless told not to
       if (finishrow) {
-        int column = m_startColumn;
+        auto column = 0;
 
         for (int i = 0; i < m_rowTypeList.size(); ++i)
           isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][0].isUsed();
@@ -1519,7 +1519,7 @@ QString PivotTable::renderCSV() const
 
     if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
       result += QString("%1 %2").arg(i18nc("Total balance", "Total")).arg(it_outergroup.key());
-      int column = m_startColumn;
+      auto column = 0;
       while (column < m_numColumns) {
         for (int i = 0; i < m_rowTypeList.size(); ++i)
           result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(QString(), precision, false));
@@ -1543,7 +1543,7 @@ QString PivotTable::renderCSV() const
 
   if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
     result += i18n("Grand Total");
-    int totalcolumn = m_startColumn;
+    auto totalcolumn = 0;
     while (totalcolumn < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i)
         result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn].formatMoney(QString(), precision, false));
@@ -1587,7 +1587,7 @@ QString PivotTable::renderHTML() const
 
   headerspan = QString(" colspan=\"%1\"").arg(span);
 
-  int column = m_startColumn;
+  auto column = 0;
   while (column < m_numColumns)
     result += QString("<th%1>%2</th>").arg(headerspan, QString(m_columnHeadings[column++]).replace(QRegExp(" "), "<br>"));
 
@@ -1602,10 +1602,10 @@ QString PivotTable::renderHTML() const
   if (span > 1) {
     result += "<tr><td></td>";
 
-    int column = m_startColumn;
+    auto column = 0;
     while (column < m_numColumns) {
       QString lb;
-      if (column != m_startColumn)
+      if (column != 0)
         lb = leftborder;
 
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
@@ -1684,14 +1684,14 @@ QString PivotTable::renderHTML() const
             //
 
             QString rowdata;
-            int column = m_startColumn;
+            auto column = 0;
             pricePrecision = 0; // new row => new account => new precision
             currencyPrecision = 0;
             bool isUsed = it_row.value()[eActual][0].isUsed();
             if (it_row.key().accountType() != MyMoneyAccount::Investment) {
               while (column < m_numColumns) {
                 QString lb;
-                if (column > m_startColumn)
+                if (column > 0)
                   lb = leftborder;
 
                 foreach (const auto rowType, m_rowTypeList) {
@@ -1805,11 +1805,11 @@ QString PivotTable::renderHTML() const
 
           // Finish the row started above, unless told not to
           if (finishrow) {
-            int column = m_startColumn;
+            auto column = 0;
             isUsed |= (*it_innergroup).m_total[eActual][0].isUsed();
             while (column < m_numColumns) {
               QString lb;
-              if (column != m_startColumn)
+              if (column != 0)
                 lb = leftborder;
 
               for (int i = 0; i < m_rowTypeList.size(); ++i) {
@@ -1849,10 +1849,10 @@ QString PivotTable::renderHTML() const
 
       if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
         result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18nc("Total balance", "Total")).arg((*it_outergroup).m_displayName);
-        int column = m_startColumn;
+        auto column = 0;
         while (column < m_numColumns) {
           QString lb;
-          if (column != m_startColumn)
+          if (column != 0)
             lb = leftborder;
 
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
@@ -1887,10 +1887,10 @@ QString PivotTable::renderHTML() const
   if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
     result += QString("<tr class=\"spacer\"><td>&nbsp;</td></tr>\n");
     result += QString("<tr class=\"reportfooter\"><td class=\"left\">%1</td>").arg(i18n("Grand Total"));
-    int totalcolumn = m_startColumn;
+    auto totalcolumn = 0;
     while (totalcolumn < m_numColumns) {
       QString lb;
-      if (totalcolumn != m_startColumn)
+      if (totalcolumn != 0)
         lb = leftborder;
 
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
