@@ -1763,7 +1763,7 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
 
     QVERIFY(m->scheduleList().count() == 1);
     QVERIFY(schedule.id() == "SCH000001");
-    MyMoneyFile::instance()->clearCache();
+    //MyMoneyFile::instance()->clearCache(); // test passes without this, so why is it here for?
     QVERIFY(m->schedule("SCH000001").id() == "SCH000001");
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
