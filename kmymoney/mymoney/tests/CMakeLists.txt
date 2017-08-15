@@ -1,13 +1,11 @@
 include(ECMAddTests)
 
-if(BUILD_TESTING)
-  add_library(kmm_testutils STATIC mymoneytestutils.cpp)
-  target_link_libraries(kmm_testutils
-    PUBLIC
-      Qt5::Core
-      kmm_mymoney
-  )
-endif()
+add_library(kmm_testutils STATIC mymoneytestutils.cpp)
+target_link_libraries(kmm_testutils
+  PUBLIC
+    Qt5::Core
+    kmm_mymoney
+)
 
 file(GLOB tests_sources "*-test.cpp")
 ecm_add_tests(${tests_sources}
