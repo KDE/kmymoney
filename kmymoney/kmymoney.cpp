@@ -2860,18 +2860,18 @@ void KMyMoneyApp::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccoun
 
 void KMyMoneyApp::slotInvestmentNew()
 {
-  KNewInvestmentWizard dlg;
-  if (dlg.exec() == QDialog::Accepted) {
-    dlg.createObjects(d->m_selectedAccount.id());
-  }
+  QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(this);
+  if (dlg->exec() == QDialog::Accepted)
+    dlg->createObjects(d->m_selectedAccount.id());
+  delete dlg;
 }
 
 void KMyMoneyApp::slotInvestmentEdit()
 {
-  KNewInvestmentWizard dlg(d->m_selectedInvestment);
-  if (dlg.exec() == QDialog::Accepted) {
-    dlg.createObjects(d->m_selectedAccount.id());
-  }
+  QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(d->m_selectedInvestment);
+  if (dlg->exec() == QDialog::Accepted)
+    dlg->createObjects(d->m_selectedAccount.id());
+  delete dlg;
 }
 
 void KMyMoneyApp::slotInvestmentDelete()
@@ -2880,6 +2880,7 @@ void KMyMoneyApp::slotInvestmentDelete()
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyFileTransaction ft;
     try {
+      d->m_selectedAccount = MyMoneyAccount(); // CAUTION: deleting equity from investments view needs this, if ID of the equity to be deleted is the smallest from all
       file->removeAccount(d->m_selectedInvestment);
       ft.commit();
     } catch (const MyMoneyException &e) {

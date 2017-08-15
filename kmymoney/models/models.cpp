@@ -36,6 +36,8 @@
 #include "ledgermodel.h"
 #include "costcentermodel.h"
 #include "payeesmodel.h"
+#include "equitiesmodel.h"
+#include "securitiesmodel.h"
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -51,6 +53,8 @@ struct Models::Private {
   , m_ledgerModel(0)
   , m_costCenterModel(0)
   , m_payeesModel(0)
+  , m_equitiesModel(0)
+  , m_securitiesModel(0)
   {}
 
   AccountsModel *m_accountsModel;
@@ -59,6 +63,8 @@ struct Models::Private {
   LedgerModel *m_ledgerModel;
   CostCenterModel *m_costCenterModel;
   PayeesModel *m_payeesModel;
+  EquitiesModel *m_equitiesModel;
+  SecuritiesModel *m_securitiesModel;
 };
 
 
@@ -172,6 +178,37 @@ PayeesModel* Models::payeesModel()
   return d->m_payeesModel;
 }
 
+/**
+ * This is the function to get a reference to the core @ref EquitiesModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+EquitiesModel* Models::equitiesModel()
+{
+  if (!d->m_equitiesModel) {
+    d->m_equitiesModel = new EquitiesModel(this);
+    #ifdef KMM_MODELTEST
+    new ModelTest(d->m_equitiesModel, Models::instance());
+    #endif
+  }
+  return d->m_equitiesModel;
+}
+
+/**
+ * This is the function to get a reference to the core @ref SecuritiesModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+SecuritiesModel* Models::securitiesModel()
+{
+  if (!d->m_securitiesModel) {
+    d->m_securitiesModel = new SecuritiesModel(this);
+    #ifdef KMM_MODELTEST
+    new ModelTest(d->m_securitiesModel, Models::instance());
+    #endif
+  }
+  return d->m_securitiesModel;
+}
 
 QModelIndex Models::indexById(QAbstractItemModel* model, int role, const QString& id)
 {
@@ -196,6 +233,8 @@ void Models::fileOpened()
   costCenterModel()->load();
   ledgerModel()->load();
   payeesModel()->load();
+  equitiesModel()->load();
+  securitiesModel()->load();
 
   emit modelsLoaded();
 }
@@ -210,4 +249,6 @@ void Models::fileClosed()
   ledgerModel()->unload();
   costCenterModel()->unload();
   payeesModel()->unload();
+  equitiesModel()->removeRows(0, equitiesModel()->rowCount());
+  securitiesModel()->removeRows(0, securitiesModel()->rowCount());
 }

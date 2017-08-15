@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,129 +30,70 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktreewidgetsearchlinewidget.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneysecurity.h>
-#include <mymoneyaccount.h>
-#include "ui_kinvestmentviewdecl.h"
+#include "ui_kinvestmentview.h"
 
-enum eInvestmentColumn { eInvestmentNameColumn, eInvestmentSymbolColumn, eValueColumn, eQuantityColumn, ePriceColumn };
-
-enum eSecurityColum { eIdColumn, eTypeColumn, eSecurityNameColumn, eSecuritySymbolColumn, eMarketColumn, eCurrencyColumn, eAcctFractionColumn, eCashFractionColumn };
+class KMyMoneyApp;
+class KMyMoneyView;
+class MyMoneySecurity;
 
 /**
   * @author Kevin Tambascio
+  * @author Łukasz Wojniłowicz
   */
-class KInvestmentView : public QWidget, private Ui::KInvestmentViewDecl
+class KInvestmentView : public QWidget, private Ui::KInvestmentView
 {
   Q_OBJECT
 
 public:
-  KInvestmentView(QWidget *parent = 0);
+  explicit KInvestmentView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   ~KInvestmentView();
-
-  /**
-    * Start reconciliation for the account in the current view
-    */
-  void reconcileAccount();
 
 public slots:
   /**
     * This slot is used to reload all data from the MyMoneyFile engine.
-    * All existing data in the view will be discarded.
+    * All existing data in the view will be invalidated.
     * Call this e.g. if a new file has been loaded.
     */
   void slotLoadView();
 
   /**
-    * This slot is used to select the correct ledger view type for
-    * the account specified by @p id. If @p transactionId is not
-    * empty, then the respective transaction will be selected.
-    *
-    * @param accountId Internal id used for the account to show
-    * @param transactionId Internal id used for the transaction to select
-    * @param reconciliation if true, the account will be selected in
-    *                       reconciliation mode. If false, it will
-    *                       be selected in regular ledger mode.
-    *
-    * @retval true selection of account referenced by @p id succeeded
-    * @retval false selection of account failed
+    * This slot is used to preselect investment account from ledger view
     */
-  bool slotSelectAccount(const QString& accountId, const QString& transactionId = QString(), const bool reconciliation = false);
-
-  /**
-    * This method is provided for convenience and acts as the method above.
-    */
-  bool slotSelectAccount(const MyMoneyObject& acc);
+  void slotSelectAccount(const MyMoneyObject &obj);
 
   void showEvent(QShowEvent* event);
 
-protected:
-
-  typedef enum {
-    EquitiesTab = 0,
-    SecuritiesTab,
-    // insert new values above this line
-    MaxViewTabs
-  } InvestmentsViewTab;
-
+private slots:
   /**
-    * This method loads the investments and securities for the respective tab.
-    *
-    * @param tab which tab should be loaded
+    * This slot is used to reload (filters + equities account) specific tab
     */
-  void loadView(InvestmentsViewTab tab);
+  void slotLoadTab(int index);
 
-  /**
-    * This method reloads the account selection combo box of the
-    * view with all asset and liability accounts from the engine.
-    * If the account id of the current account held in @p m_accountId is
-    * empty or if the referenced account does not exist in the engine,
-    * the first account found in the list will be made the current account.
-    */
-  void loadAccounts();
+  void slotEquitySelected(const QModelIndex &current, const QModelIndex &previous);
+  void slotEquityRightClicked(const QPoint& point);
+  void slotEquityDoubleClicked();
+  void slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous);
 
-  /**
-    * clear the view
-    */
-  void clear();
-
-  void loadInvestmentTab();
-
-  void loadInvestmentItem(const MyMoneyAccount& account);
-
-  void loadSecuritiesList();
-
-  void loadSecurityItem(QTreeWidgetItem* item, const MyMoneySecurity& security);
-
-protected slots:
-  void slotTabCurrentChanged(int index);
-  /**
-    * This slot receives the signal from the listview @c lv control that the context menu
-    * was requested for @c item at @c point.
-    */
-  void slotInvestmentContextMenu(const QPoint& point);
-
-  void slotInvestmentSelectionChanged();
-
-  void slotUpdateSecuritiesButtons();
   void slotEditSecurity();
   void slotDeleteSecurity();
 
+  /**
+    * This slot is used to programatically preselect account in investment view
+    */
+  void slotSelectAccount(const QString &id);
+
+  /**
+    * This slot is used to load investment account into tree view
+    */
+  void slotLoadAccount(const QString &id);
 
 signals:
-  /**
-    * This signal is emitted, if an account has been selected
-    * which cannot be handled by this view.
-    */
-  void accountSelected(const QString& accountId, const QString& transactionId);
-
   void accountSelected(const MyMoneyObject&);
 
-  void investmentRightMouseClick();
+  void equityRightClicked();
 
   /**
     * This signal is emitted whenever the view is about to be shown.
@@ -159,25 +101,37 @@ signals:
   void aboutToShow();
 
 private:
-  /// \internal d-pointer class.
   class Private;
-  /// \internal d-pointer instance.
   Private* const d;
 
-  const QString m_currencyMarket;
+  KMyMoneyApp                         *m_kmymoney;
+  KMyMoneyView                        *m_kmymoneyview;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
+
   /**
-    * Search widget for the securities list
+    * This slot is used to programatically preselect default account in investment view
     */
-  KTreeWidgetSearchLineWidget*  m_searchSecuritiesWidget;
+  void selectDefaultInvestmentAccount();
+  enum Tab { Equities = 0, Securities };
+
+  /**
+    * This slots are used to reload tabs
+    */
+  void loadInvestmentTab();
+  void loadSecuritiesTab();
+
+  /**
+    * This slots returns security currently selected in tree view
+    */
+  MyMoneySecurity currentSecurity();
 
   /**
     * This member holds the load state of page
     */
   bool m_needLoad;
-
-  /** Initializes page and sets its load status to initialized
-   */
-  void init();
 };
 
 #endif

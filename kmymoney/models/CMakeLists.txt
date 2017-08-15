@@ -8,6 +8,8 @@ set(libmodels_a_SOURCES
     models.cpp
     payeeidentifiercontainermodel.cpp
     onlinejobmessagesmodel.cpp
+    equitiesmodel.cpp
+    securitiesmodel.cpp
 )
 
 if (USE_MODELTEST)

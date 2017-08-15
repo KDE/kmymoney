@@ -44,7 +44,7 @@ set(libviews_a_UI
   kcategoriesviewdecl.ui
   kforecastviewdecl.ui
   kinstitutionsviewdecl.ui
-  kinvestmentviewdecl.ui
+  kinvestmentview.ui
   kpayeesviewdecl.ui
   kscheduledviewdecl.ui
   ktagsviewdecl.ui

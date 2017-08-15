@@ -41,6 +41,8 @@ class onlineJobModel;
 class LedgerModel;
 class CostCenterModel;
 class PayeesModel;
+class EquitiesModel;
+class SecuritiesModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -78,6 +80,8 @@ public:
   LedgerModel* ledgerModel();
   CostCenterModel* costCenterModel();
   PayeesModel* payeesModel();
+  EquitiesModel* equitiesModel();
+  SecuritiesModel* securitiesModel();
 
   /**
    * returns the index of an item the @a model based on the @a id of role @a role.

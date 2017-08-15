@@ -98,7 +98,9 @@
 #include "konlinejoboutbox.h"
 #include "kmymoney.h"
 #include "kmymoneyutils.h"
-#include "models.h"
+#include <models.h>
+#include <equitiesmodel.h>
+#include <securitiesmodel.h>
 #include <icons.h>
 
 using namespace Icons;
@@ -231,15 +233,9 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_ledgerView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 8
-  m_investmentView = new KInvestmentView();
+  m_investmentView = new KInvestmentView(kmymoney, this);
   viewFrames[View::Investments] = m_model->addPage(m_investmentView, i18n("Investments"));
   viewFrames[View::Investments]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewInvestment]));
-
-  connect(m_investmentView, SIGNAL(accountSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
-  connect(m_investmentView, SIGNAL(accountSelected(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
-  connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney, SLOT(slotShowInvestmentContextMenu()));
-  connect(m_investmentView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 9
   m_reportsView = new KReportsView();
@@ -676,29 +672,47 @@ void KMyMoneyView::closeFile()
     m_reportsView->slotCloseAll();
 
   // disconnect the signals
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-             Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
-             Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
-             Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+             Models::instance()->accountsModel(), &AccountsModel::slotObjectAdded);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+             Models::instance()->accountsModel(), &AccountsModel::slotObjectModified);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+             Models::instance()->accountsModel(), &AccountsModel::slotObjectRemoved);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+             Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+             Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
 
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-             Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
-             Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
-             Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+             Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectAdded);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+             Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectModified);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+             Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectRemoved);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+             Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+             Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
 
-  disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), m_homeView, SLOT(slotLoadView()));
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotObjectAdded);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotObjectModified);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotObjectRemoved);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+             Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectAdded);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+             Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectModified);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+             Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
+
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::slotLoadView);
 
   // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
   Models::instance()->fileClosed();
@@ -1153,34 +1167,52 @@ bool KMyMoneyView::initializeStorage()
   Models::instance()->fileOpened();
 
   // connect the needed signals
-  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-          Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
-  connect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
-          Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
-  connect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
-          Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+          Models::instance()->accountsModel(), &AccountsModel::slotObjectAdded);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+          Models::instance()->accountsModel(), &AccountsModel::slotObjectModified);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+          Models::instance()->accountsModel(), &AccountsModel::slotObjectRemoved);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+          Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+          Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
 
-  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-          Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
-  connect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
-          Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
-  connect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
-          Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+          Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectAdded);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+          Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectModified);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+          Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectRemoved);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+          Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+          Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+          Models::instance()->equitiesModel(), &EquitiesModel::slotObjectAdded);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+          Models::instance()->equitiesModel(), &EquitiesModel::slotObjectModified);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+          Models::instance()->equitiesModel(), &EquitiesModel::slotObjectRemoved);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+             Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+             Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectAdded);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+             Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectModified);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+             Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
 
   // inform everyone about new data
   MyMoneyFile::instance()->preloadCache();
   MyMoneyFile::instance()->forceDataChanged();
 
   // views can wait since they are going to be refresed in slotRefreshViews
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), m_homeView, SLOT(slotLoadView()));
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::slotLoadView);
 
   // if we currently see a different page, then select the right one
   if (page != currentPage()) {

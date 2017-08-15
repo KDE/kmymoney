@@ -173,29 +173,20 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
 
 QString MyMoneySecurity::securityTypeToString(const eSECURITYTYPE securityType)
 {
-  QString returnString;
-
   switch (securityType) {
     case MyMoneySecurity::SECURITY_STOCK:
-      returnString = I18N_NOOP("Stock");
-      break;
+      return i18nc("Security type", "Stock");
     case MyMoneySecurity::SECURITY_MUTUALFUND:
-      returnString = I18N_NOOP("Mutual Fund");
-      break;
+      return i18nc("Security type", "Mutual Fund");
     case MyMoneySecurity::SECURITY_BOND:
-      returnString = I18N_NOOP("Bond");
-      break;
+      return i18nc("Security type", "Bond");
     case MyMoneySecurity::SECURITY_CURRENCY:
-      returnString = I18N_NOOP("Currency");
-      break;
+      return i18nc("Security type", "Currency");
     case MyMoneySecurity::SECURITY_NONE:
-      returnString = I18N_NOOP("None");
-      break;
+      return i18nc("Security type", "None");
     default:
-      returnString = I18N_NOOP("Unknown");
+      return i18nc("Security type", "Unknown");
   }
-
-  return returnString;
 }
 
 QString MyMoneySecurity::roundingMethodToString(const AlkValue::RoundingMethod roundingMethod)

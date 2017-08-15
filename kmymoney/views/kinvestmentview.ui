@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KInvestmentViewDecl</class>
- <widget class="QWidget" name="KInvestmentViewDecl">
+ <class>KInvestmentView</class>
+ <widget class="QWidget" name="KInvestmentView">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>439</width>
-    <height>164</height>
+    <height>274</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,56 +72,37 @@
        <item>
         <layout class="QHBoxLayout">
          <item>
-          <widget class="QTreeWidget" name="m_investmentsList">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>1</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font/>
+          <widget class="QTreeView" name="m_equitiesTree">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
            </property>
            <property name="toolTip">
             <string>Summary of the equities contained in this account, showing your holdings and their most recent price.</string>
            </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::DoubleClicked</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::SingleSelection</enum>
+           <property name="indentation">
+            <number>0</number>
            </property>
            <property name="rootIsDecorated">
             <bool>false</bool>
            </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
            <property name="allColumnsShowFocus">
             <bool>true</bool>
            </property>
-           <column>
-            <property name="text">
-             <string comment="Investment name">Name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string comment="Symbol name">Symbol</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string comment="Investment value">Value</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string comment="Shares quantity">Quantity</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string comment="Investment price">Price</string>
-            </property>
-           </column>
           </widget>
          </item>
         </layout>
@@ -136,60 +117,37 @@
        <item>
         <layout class="QVBoxLayout" name="m_securitiesLayout">
          <item>
-          <widget class="QTreeWidget" name="m_securitiesList">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>1</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
+          <widget class="KFilterProxySearchLine" name="m_searchSecurities"/>
+         </item>
+         <item>
+          <widget class="QTreeView" name="m_securitiesTree">
+           <property name="editTriggers">
+            <set>QAbstractItemView::DoubleClicked</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
            </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::SingleSelection</enum>
+           <property name="indentation">
+            <number>0</number>
            </property>
            <property name="rootIsDecorated">
             <bool>false</bool>
            </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
            <property name="allColumnsShowFocus">
             <bool>true</bool>
            </property>
-           <column>
-            <property name="text">
-             <string>ID</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Type</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string comment="name of the security">Name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Symbol</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Market</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Currency</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Fraction</string>
-            </property>
-           </column>
+           <property name="expandsOnDoubleClick">
+            <bool>false</bool>
+           </property>
           </widget>
          </item>
         </layout>
@@ -198,6 +156,12 @@
         <layout class="QVBoxLayout">
          <item>
           <widget class="QPushButton" name="m_editSecurityButton">
+           <property name="toolTip">
+            <string>Modify the selected entry</string>
+           </property>
+           <property name="whatsThis">
+            <string>Change the security information of the selected entry.</string>
+           </property>
            <property name="text">
             <string>Edit...</string>
            </property>
@@ -205,6 +169,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="m_deleteSecurityButton">
+           <property name="toolTip">
+            <string>Delete this entry</string>
+           </property>
+           <property name="whatsThis">
+            <string>Remove this security item from the file</string>
+           </property>
            <property name="text">
             <string>Delete...</string>
            </property>
@@ -252,6 +222,11 @@
  </widget>
  <layoutdefault spacing="6" margin="0"/>
  <customwidgets>
+  <customwidget>
+   <class>KFilterProxySearchLine</class>
+   <extends>QWidget</extends>
+   <header>kfilterproxysearchline.h</header>
+  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
