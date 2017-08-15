@@ -745,29 +745,33 @@ QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<MyMoneyAccount::acco
 
   // if filtering returned more results, filter out accounts whose numbers are the shortest
   if (filteredAccounts.count() > 1) {
-    for (auto i = 0; i < filteredAccounts.count() - 1;) {
-      auto firstAccNumber = filteredAccounts.at(i).number();
-      auto secondAccNumber = filteredAccounts.at(i + 1).number();
-      if (firstAccNumber.length() > secondAccNumber.length())
-        filteredAccounts.removeOne(filteredAccounts.at(++i));
-      else if (firstAccNumber.length() < secondAccNumber.length())
-        filteredAccounts.removeOne(filteredAccounts.at(i));
-      else
+    for (auto i = 1; i < filteredAccounts.count();) {
+      auto firstAccNumber = filteredAccounts.at(0).number();
+      auto secondAccNumber = filteredAccounts.at(i).number();
+      if (firstAccNumber.length() > secondAccNumber.length()) {
+        filteredAccounts.removeAt(i);
+      } else if (firstAccNumber.length() < secondAccNumber.length()) {
+        filteredAccounts.removeAt(0);
+        --i;
+      } else {
         ++i;
+      }
     }
   }
 
   // if filtering returned more results, filter out accounts whose names are the shortest
   if (filteredAccounts.count() > 1) {
-    for (auto i = 0; i < filteredAccounts.count() - 1;) {
-      auto firstAccName = filteredAccounts.at(i).name();
-      auto secondAccName = filteredAccounts.at(i + 1).name();
-      if (firstAccName.length() > secondAccName.length())
-        filteredAccounts.removeOne(filteredAccounts.at(++i));
-      else if (firstAccName.length() < secondAccName.length())
-        filteredAccounts.removeOne(filteredAccounts.at(i));
-      else
+    for (auto i = 1; i < filteredAccounts.count();) {
+      auto firstAccName = filteredAccounts.at(0).name();
+      auto secondAccName = filteredAccounts.at(i).name();
+      if (firstAccName.length() > secondAccName.length()) {
+        filteredAccounts.removeAt(i);
+      } else if (firstAccName.length() < secondAccName.length()) {
+        filteredAccounts.removeAt(0);
+        --i;
+      } else {
         ++i;
+      }
     }
   }
 
