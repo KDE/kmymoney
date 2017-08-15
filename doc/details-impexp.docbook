@@ -773,9 +773,10 @@
 </para>
 <!--
 <para>
-	The most commonly changed thing between QIF implementations is the date format.  
-	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
-	See the discussion below on apostrophe format for more details.
+  The most commonly changed thing between QIF implementations is the date
+  format.  So if this is the first time you're importing a QIF file, spend a few
+  moments to figure out what format the dates are in, and set the QIF Profile
+  accordingly.  See the discussion below on apostrophe format for more details.
 </para>
 
 <para>

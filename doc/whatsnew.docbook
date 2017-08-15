@@ -11,9 +11,9 @@
   As with every release, the &kappname; development team has worked hard to make
   this release better and easier to use in every way, although most of the
   developer effort has recently gone toward releasing a version of &kappname;
-  which runs under KDE Frameworks.  However, this release does include almost 50
-  different bug fixes and new features.  For the future, and any further
-  releases in the 4.8.x series will likely contain only bug fixes.
+  which runs under KDE Frameworks (aka KF5.)  However, this release does include
+  almost 50 different bug fixes and new features.  For the future, and any
+  further releases in the 4.8.x series will likely contain only bug fixes.
 </para>
 
 <para>
@@ -58,7 +58,7 @@
       </listitem>
     </itemizedlist>
   </listitem>
-  
+
   <listitem>
     <para>
       Multiple improvements to the &Windows; version, including:
@@ -107,7 +107,7 @@
 
   <listitem>
     <para>
-      Remove restriction on configuring VAT account assignments for certain
+      Removee restriction on configuring VAT account assignments for certain
       types of accounts.
     </para>
   </listitem>
@@ -129,7 +129,6 @@
         </para>
       </listitem>
     </itemizedlist>
-    
   </listitem>
 
   <listitem>
