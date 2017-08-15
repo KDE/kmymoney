@@ -96,7 +96,7 @@ void CsvImporterTest::testBasicPriceTable()
   QVERIFY(st.m_eType == MyMoneyStatement::etNone);
   QVERIFY(st.m_listPrices.count() == 3);
   QVERIFY(st.m_listPrices[2].m_date == QDate(2017, 8, 3));
-  QVERIFY(st.m_listPrices[2].m_amount == MyMoneyMoney(5.56));
+  QCOMPARE(st.m_listPrices[2].m_amount.toString(), MyMoneyMoney(5.56).toString());
   QVERIFY(st.m_listPrices[2].m_sourceName == "price source");
   QVERIFY(st.m_listPrices[2].m_strSecurity == pricesProfile->m_securityName);
 }
