@@ -92,4 +92,6 @@ install(FILES ${mymoney_HEADERS}
 
 ############## tests ####################
 
-add_subdirectory(tests)
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()

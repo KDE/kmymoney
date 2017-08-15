@@ -58,7 +58,9 @@ target_link_libraries(sqlcipherdriver PUBLIC
   ${SQLCIPHER_LIBRARIES}
 )
 
-add_subdirectory(tests)
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
 
 #### Install files ####
 

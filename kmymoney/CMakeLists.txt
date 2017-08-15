@@ -47,7 +47,9 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( payeeidentifier )
 add_subdirectory( icons )
-add_subdirectory( tests )
+if(BUILD_TESTING)
+  add_subdirectory( tests )
+endif()
 
 set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
