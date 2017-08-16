@@ -25,24 +25,24 @@
 #include <QtDebug>
 
 
-QDebug operator <<(QDebug out, const QXmlStreamNamespaceDeclaration &a)
+QDebug operator <<(QDebug dbg, const QXmlStreamNamespaceDeclaration &a)
 {
-    out << "QXmlStreamNamespaceDeclaration("
+    dbg << "QXmlStreamNamespaceDeclaration("
         << "prefix:" << a.prefix().toString()
         << "namespaceuri:" << a.namespaceUri().toString()
         << ")";
-    return out;
+    return dbg;
 }
 
-QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
+QDebug operator <<(QDebug dbg, const QXmlStreamAttribute &a)
 {
-    out << "QXmlStreamAttribute("
+    dbg << "QXmlStreamAttribute("
         << "prefix:" << a.prefix().toString()
         << "namespaceuri:" << a.namespaceUri().toString()
         << "name:" << a.name().toString()
         << " value:" << a.value().toString()
         << ")";
-    return out;
+    return dbg;
 }
 
 bool debug = false;
@@ -199,9 +199,9 @@ public:
     }
 };
 
-QDebug operator <<(QDebug out, const TemplateAccount &a)
+QDebug operator <<(QDebug dbg, const TemplateAccount &a)
 {
-    out << "TemplateAccount("
+    dbg << "TemplateAccount("
         << "name:" << a.name
         << "id:" << a.id
         << "type:" << a.type
@@ -209,16 +209,16 @@ QDebug operator <<(QDebug out, const TemplateAccount &a)
         << "parent:" << a.parent
         << "slotList:" << a.slotList
         << ")\n";
-    return out;
+    return dbg;
 }
 
-QDebug operator <<(QDebug out, const TemplateAccount::PointerList &a)
+QDebug operator <<(QDebug dbg, const TemplateAccount::PointerList &a)
 {
-    out << "TemplateAccount::List(";
+    dbg << "TemplateAccount::List(";
     foreach(const TemplateAccount *account, a)
-            out << *account;
-    out << ")";
-    return out;
+            dbg << *account;
+    dbg << ")";
+    return dbg;
 }
 
 class TemplateFile {
@@ -373,17 +373,17 @@ public:
     }
 };
 
-QDebug operator <<(QDebug out, const TemplateFile &a)
+QDebug operator <<(QDebug dbg, const TemplateFile &a)
 {
-    out << "TemplateFile("
+    dbg << "TemplateFile("
         << "title:" << a.title
         << "short description:" << a.shortDescription
         << "long description:" << a.longDescription
         << "accounts:";
     foreach(const TemplateAccount &account, a.accounts)
-        out << account;
-    out << ")";
-    return out;
+        dbg << account;
+    dbg << ")";
+    return dbg;
 }
 
 class GnuCashAccountTemplateReader {
