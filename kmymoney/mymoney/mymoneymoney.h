@@ -483,5 +483,10 @@ inline const MyMoneyMoney MyMoneyMoney::operator*(int factor) const
   */
 Q_DECLARE_METATYPE(MyMoneyMoney)
 
+QDebug operator<<(QDebug dbg, const MyMoneyMoney &a);
+QDebug operator<<(QDebug dbg, QList<MyMoneyMoney> &a);
+QDebug operator<<(QDebug dbg, QMap<QString, MyMoneyMoney> &a);
+QDebug operator<<(QDebug dbg, QMap<QDate, MyMoneyMoney> &a);
+QDebug operator<<(QDebug dbg, QMap<int, MyMoneyMoney> &a);
 #endif
 

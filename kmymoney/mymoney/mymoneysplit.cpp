@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QtDebug>
+
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 
@@ -317,4 +319,30 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
   }
 
   return changed;
+}
+
+QDebug operator<<(QDebug dbg, const MyMoneySplit &a)
+{
+  dbg << "MyMoneySplit("
+      << "accountId" << a.accountId()
+      << "action" << a.action()
+      << "bankID" << a.bankID()
+      << "actualPrice" << a.actualPrice()
+      << "id" << a.id()
+      << "isAutoCalc" << a.isAutoCalc()
+      << "isMatched" << a.isMatched()
+      << "isInterestSplit" << a.isInterestSplit()
+      << "number" << a.number()
+      << "memo" << a.memo()
+      << "pairs" << a.pairs()
+      << "payeeId" << a.payeeId()
+      << "price" << a.price()
+      << "reconcileDate" << a.reconcileDate()
+      << "reconcileFlag" << a.reconcileFlag()
+      << "shares" << a.shares()
+      << "tagIdList" << a.tagIdList()
+      << "transactionId" << a.transactionId()
+      << "value" << a.value()
+      << ")";
+  return dbg;
 }

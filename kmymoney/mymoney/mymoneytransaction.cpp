@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QtDebug>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -455,4 +457,26 @@ bool MyMoneyTransaction::replaceId(const QString& newId, const QString& oldId)
     changed |= (*it).replaceId(newId, oldId);
   }
   return changed;
+}
+
+QDebug operator<<(QDebug dbg, const MyMoneyTransaction &a)
+{
+  dbg << "MyMoneyTransaction("
+      << "amortizationSplit" << a.amortizationSplit()
+      << "bankID" << a.bankID()
+      << "commodity" << a.commodity()
+      << "hasAutoCalcSplit" << a.hasAutoCalcSplit()
+      << "id" << a.id()
+      << "interestSplit" << a.interestSplit()
+      << "isLoanPayment" << a.isLoanPayment()
+      << "isImported" << a.isImported()
+      << "isStockSplit" << a.isStockSplit()
+      << "bankID" << a.bankID()
+      << "entryDate" << a.entryDate()
+      << "memo" << a.memo()
+      << "postDate" << a.postDate()
+      << "splits" << a.splits()
+      << "splitSum" << a.splitSum()
+      << ")";
+  return dbg;
 }
