@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=QIF Importer configuration
 Name[ca]=Configuració de l'importador de QIF
+Name[ca@valencia]=Configuració de l'importador de QIF
 Name[es]=Configuración del importador QIF
 Name[nl]=Instellingen van QIF-importeren
 Name[pt]=Configuração da Importação de QIF
@@ -14,6 +15,7 @@ Exec=kcmshell5 kmm_qifimport
 Categories=Qt;KDE;kmymoney;
 Keywords=qifimport;kmymoney;
 Keywords[ca]=qifimport;kmymoney;
+Keywords[ca@valencia]=qifimport;kmymoney;
 Keywords[es]=qifimport;kmymoney;
 Keywords[nl]=qifimport;kmymoney;
 Keywords[pt]=importação qif;kmymoney;
@@ -25,6 +27,7 @@ X-KDE-ParentApp=qifimport
 X-KDE-ParentComponents=qifimport
 Comment=Configuration for QIF Importer plugin
 Comment[ca]=Configuració del connector d'importació de QIF
+Comment[ca@valencia]=Configuració del connector d'importació de QIF
 Comment[es]=Configuración para el complemento de importación QIF
 Comment[nl]=Instellingen voor plug-in voor QIF importeren
 Comment[pt]=Configuração do 'plugin' de Importação de QIF
