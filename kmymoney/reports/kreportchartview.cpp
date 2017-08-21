@@ -208,6 +208,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxis->setTitleTextAttributes(xAxisTitleTextAttr);
     TextAttributes xAxisTextAttr(xAxis->textAttributes());
     xAxisTextAttr.setPen(m_foregroundBrush.color());
+    xAxisTextAttr.setAutoRotate(true);
     xAxis->setTextAttributes(xAxisTextAttr);
     RulerAttributes xAxisRulerAttr(xAxis->rulerAttributes());
     xAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
