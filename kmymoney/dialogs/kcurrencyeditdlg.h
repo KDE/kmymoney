@@ -71,6 +71,7 @@ protected slots:
   void slotOpenContextMenu(const QPoint& p);
   void slotLoadCurrencies();
   void slotUpdateCurrency(QTreeWidgetItem *item);
+  void slotDeleteCurrency();
 
 private slots:
   void timerDone();
@@ -81,6 +82,8 @@ signals:
   void openContextMenu(const MyMoneySecurity& currency);
   void updateCurrency(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol);
   void selectBaseCurrency(const MyMoneySecurity& currency);
+  void deleteCurrency(const MyMoneySecurity& currency);
+  void newCurrency();
 
 private:
   MyMoneySecurity               m_currency;

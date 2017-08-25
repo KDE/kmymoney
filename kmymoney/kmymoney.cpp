@@ -7010,6 +7010,8 @@ void KMyMoneyApp::slotCurrencyDialog()
   connect(dlg, SIGNAL(updateCurrency(QString,QString,QString)), this, SLOT(slotCurrencyUpdate(QString,QString,QString)));
   connect(this, SIGNAL(currencyCreated(QString)), dlg, SLOT(slotSelectCurrency(QString)));
   connect(dlg, SIGNAL(selectBaseCurrency(MyMoneySecurity)), this, SLOT(slotCurrencySetBase()));
+  connect(dlg, SIGNAL(deleteCurrency(MyMoneySecurity)), this, SLOT(slotCurrencyDelete()));
+  connect(dlg, SIGNAL(newCurrency()), this, SLOT(slotCurrencyNew()));
 
   dlg->exec();
   delete dlg;

@@ -73,8 +73,10 @@ QWidget *KCurrencyEditDelegate::createEditor(QWidget *parent, const QStyleOption
 KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
     KCurrencyEditDlgDecl(parent)
 {
-  setButtons(KDialog::Close | KDialog::User1);
+  setButtons(KDialog::Close | KDialog::User1 | KDialog::User2 | KDialog::User3);
   button(KDialog::User1)->setText(i18n("Select as base currency"));
+  button(KDialog::User2)->setText(i18n("Delete currency"));
+  button(KDialog::User3)->setText(i18n("New currency"));
   setButtonsOrientation(Qt::Horizontal);
   setMainWidget(m_layoutWidget);
 
@@ -93,6 +95,8 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
 
   connect(this, SIGNAL(user1Clicked()), this, SLOT(slotSelectBaseCurrency()));
+  connect(this, SIGNAL(user2Clicked()), this, SLOT(slotDeleteCurrency()));
+  connect(this, SIGNAL(user3Clicked()), this, SIGNAL(newCurrency()));
 
   QTimer::singleShot(10, this, SLOT(timerDone()));
 }
@@ -272,5 +276,12 @@ void KCurrencyEditDlg::slotSelectBaseCurrency()
     // we update the list manually
     if (p == m_currencyList->currentItem())
       slotLoadCurrencies();
+  }
+}
+
+void KCurrencyEditDlg::slotDeleteCurrency()
+{
+  if (!m_currency.id().isEmpty()) {
+    emit deleteCurrency(m_currency);
   }
 }
