@@ -215,15 +215,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxisRulerAttr.setShowRulerLine(true);
     xAxis->setRulerAttributes(xAxisRulerAttr);
 
-    // Set up X axis labels (ie "abscissa" to use the technical term)
-    QStringList abscissaNames;
-    if (accountSeries()) { // if not, we will set these up while putting in the chart values.
-      int column = 1;
-      while (column < numColumns()) {
-        abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
-      }
-      xAxis->setLabels(abscissaNames);
-    }
 
     //set y axis
     KBalanceAxis *yAxis = new KBalanceAxis();
@@ -442,6 +433,16 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         }
       }
       break;
+  }
+
+  // Set up X axis labels (ie "abscissa" to use the technical term)
+  QStringList abscissaNames;
+  if (accountSeries()) { // if not, we will set these up while putting in the chart values.
+    int column = 1;
+    while (column < numColumns()) {
+      abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
+    }
+    m_model.setVerticalHeaderLabels(abscissaNames);
   }
 
   //assign model to the diagram
