@@ -36,7 +36,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include <icons.h>
 
@@ -134,7 +133,7 @@ public:
 //      cell->setData(QVariant::fromValue(account), AccountRole); // is set in setAccountBalanceAndValue
       cell->setData(QVariant(account.id()), AccountIdRole);
       cell->setData(QVariant(account.value("PreferredAccount") == QLatin1String("Yes")), AccountFavoriteRole);
-      cell->setData(QVariant(QIcon(account.accountPixmap(account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
+      cell->setData(QVariant(QIcon(account.accountPixmap(m_reconciledAccount.id().isEmpty() ? false : account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
       cell->setData(MyMoneyFile::instance()->accountToCategory(account.id(), true), FullNameRole);
       cell->setData(font, Qt::FontRole);
     }
@@ -144,7 +143,7 @@ public:
       colNum = m_columns.indexOf(Columns::Type);
       if (colNum != -1) {
         getCell(colNum);
-        cell->setData(KMyMoneyUtils::accountTypeToString(account.accountType()), Qt::DisplayRole);
+        cell->setData(account.accountTypeToString(account.accountType()), Qt::DisplayRole);
         cell->setData(font, Qt::FontRole);
       }
     }
@@ -576,36 +575,50 @@ void AccountsModel::load()
   }
 
   // adding account categories (asset, liability, etc.) node
-  for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
+  QVector <MyMoneyAccount::_accountTypeE> categories {
+    MyMoneyAccount::Asset, MyMoneyAccount::Liability,
+    MyMoneyAccount::Income, MyMoneyAccount::Expense,
+    MyMoneyAccount::Equity
+  };
+
+  foreach (const auto category, categories) {
     MyMoneyAccount account;
     QString accountName;
-    int displayOrder = 0;
+    int displayOrder;
 
-    if ((mask & KMyMoneyUtils::asset) != 0) {
-      // Asset accounts
-      account = d->m_file->asset();
-      accountName = i18n("Asset accounts");
-      displayOrder = 1;
-    } else if ((mask & KMyMoneyUtils::liability) != 0) {
-      // Liability accounts
-      account = d->m_file->liability();
-      accountName = i18n("Liability accounts");
-      displayOrder = 2;
-    } else if ((mask & KMyMoneyUtils::income) != 0) {
-      // Income categories
-      account = d->m_file->income();
-      accountName = i18n("Income categories");
-      displayOrder = 3;
-    } else if ((mask & KMyMoneyUtils::expense) != 0) {
-      // Expense categories
-      account = d->m_file->expense();
-      accountName = i18n("Expense categories");
-      displayOrder = 4;
-    } else if ((mask & KMyMoneyUtils::equity) != 0) {
-      // Equity accounts
-      account = d->m_file->equity();
-      accountName = i18n("Equity accounts");
-      displayOrder = 5;
+    switch (category) {
+      case MyMoneyAccount::Asset:
+        // Asset accounts
+        account = d->m_file->asset();
+        accountName = i18n("Asset accounts");
+        displayOrder = 1;
+        break;
+      case MyMoneyAccount::Liability:
+        // Liability accounts
+        account = d->m_file->liability();
+        accountName = i18n("Liability accounts");
+        displayOrder = 2;
+        break;
+      case MyMoneyAccount::Income:
+        // Income categories
+        account = d->m_file->income();
+        accountName = i18n("Income categories");
+        displayOrder = 3;
+        break;
+      case MyMoneyAccount::Expense:
+        // Expense categories
+        account = d->m_file->expense();
+        accountName = i18n("Expense categories");
+        displayOrder = 4;
+        break;
+      case MyMoneyAccount::Equity:
+        // Equity accounts
+        account = d->m_file->equity();
+        accountName = i18n("Equity accounts");
+        displayOrder = 5;
+        break;
+      default:
+        continue;
     }
 
     auto accountsItem = new QStandardItem(accountName);
