@@ -147,7 +147,7 @@ void CartesianDiagramDataCompressor::slotColumnsAboutToBeInserted( const QModelI
     if ( !prepareDataChange( parent, false, &start, &end ) ) {
         return;
     }
-    const int rowCount = qMin( m_model ? m_model->rowCount( m_rootIndex ) : 0, m_xResolution );
+    const int rowCount = m_model ? m_model->rowCount( m_rootIndex ) : m_xResolution;
     Q_ASSERT( start >= 0 && start <= m_data.size() );
     m_data.insert( start, end - start + 1, QVector< DataPoint >( rowCount ) );
 }
