@@ -93,6 +93,7 @@ public:
   Private() :
       m_showAllSchedules(false),
       m_needReload(false),
+      m_needLoad(true),
       m_netWorthGraphLastValidSize(400, 300) {
   }
 
@@ -110,6 +111,7 @@ public:
   QString           m_html;
   bool              m_showAllSchedules;
   bool              m_needReload;
+  bool              m_needLoad;
   MyMoneyForecast   m_forecast;
   MyMoneyMoney      m_total;
   /**
@@ -146,24 +148,6 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Home")),
     d(new Private)
 {
-  #ifdef ENABLE_WEBENGINE
-  d->m_view = new QWebEngineView(this);
-  #else
-  d->m_view = new KWebView(this);
-  #endif
-  d->m_view->setPage(new MyQWebEnginePage(d->m_view));
-
-  addWidget(d->m_view);
-
-  d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
-  #ifdef ENABLE_WEBENGINE
-  connect(d->m_view->page(), &QWebEnginePage::urlChanged,
-            this, &KHomeView::slotOpenUrl);
-  #else
-  d->m_view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-  connect(d->m_view->page(), &KWebPage::linkClicked,
-            this, &KHomeView::slotOpenUrl);
-  #endif
 }
 
 KHomeView::~KHomeView()
@@ -175,6 +159,29 @@ KHomeView::~KHomeView()
   }
 
   delete d;
+}
+
+void KHomeView::init()
+{
+  d->m_needLoad = false;
+#ifdef ENABLE_WEBENGINE
+  d->m_view = new QWebEngineView(this);
+#else
+  d->m_view = new KWebView(this);
+#endif
+  d->m_view->setPage(new MyQWebEnginePage(d->m_view));
+
+  addWidget(d->m_view);
+
+  d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+#ifdef ENABLE_WEBENGINE
+  connect(d->m_view->page(), &QWebEnginePage::urlChanged,
+          this, &KHomeView::slotOpenUrl);
+#else
+  d->m_view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+  connect(d->m_view->page(), &KWebPage::linkClicked,
+          this, &KHomeView::slotOpenUrl);
+#endif
 }
 
 void KHomeView::wheelEvent(QWheelEvent* event)
@@ -203,6 +210,9 @@ void KHomeView::slotLoadView()
 
 void KHomeView::showEvent(QShowEvent* event)
 {
+  if (d->m_needLoad)
+    init();
+
   emit aboutToShow();
 
   if (d->m_needReload) {

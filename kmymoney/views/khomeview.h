@@ -114,6 +114,10 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
+
   /**
     * Print an account and its balance and limit
     */
