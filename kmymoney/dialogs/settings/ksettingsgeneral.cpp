@@ -44,6 +44,22 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   connect(m_startDateEdit, SIGNAL(dateChanged(QDate)), kcfg_StartDate, SLOT(setDate(QDate)));
 
   connect(choosePath, SIGNAL(pressed()), this, SLOT(slotChooseLogPath()));
+
+#ifdef Q_OS_WIN
+  QString aqBankingSubDir("/aqbanking");
+#else
+  QString aqBankingSubDir("/.aqbanking");
+#endif
+  QUrl url = QUrl::fromLocalFile(QDir::homePath() + aqBankingSubDir + "/backends/aqhbci/data/banks");
+  QFileInfo f(url.toLocalFile());
+  if (f.exists()) {
+    m_aqbankingLogPath->setText("<a href=\"" + url.toString() + "\">Show AqBanking log file path</a>");
+    m_aqbankingLogPath->setTextFormat(Qt::RichText);
+    m_aqbankingLogPath->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    m_aqbankingLogPath->setOpenExternalLinks(true);
+  } else {
+    m_aqbankingLogPath->setVisible(false);
+  }
 }
 
 KSettingsGeneral::~KSettingsGeneral()
