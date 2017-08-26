@@ -385,6 +385,10 @@ int MyMoneyStorageSql::upgradeDb()
         if ((rc = upgradeToV10()) != 0) return (1);
         ++m_dbVersion;
         break;
+      case 10:
+        if ((rc = upgradeToV11()) != 0) return (1);
+        ++m_dbVersion;
+        break;
       default:
         qWarning("Unknown version number in database - %d", m_dbVersion);
     }
@@ -697,6 +701,17 @@ int MyMoneyStorageSql::upgradeToV10()
   if (!alterTable(m_db.m_tables["kmmAccountsPayeeIdentifier"], m_dbVersion))
     return (1);
 
+  return 0;
+}
+
+int MyMoneyStorageSql::upgradeToV11()
+{
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV11");
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  QSqlQuery q(*this);
+  if (!alterTable(m_db.m_tables["kmmSchedules"], m_dbVersion))
+    return 1;
   return 0;
 }
 
@@ -2174,6 +2189,11 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
     q.bindValue(":fixed", "Y");
   } else {
     q.bindValue(":fixed", "N");
+  }
+  if (sch.lastDayInMonth()) {
+    q.bindValue(":lastDayInMonth", "Y");
+  } else {
+    q.bindValue(":lastDayInMonth", "N");
   }
   if (sch.autoEnter()) {
     q.bindValue(":autoEnter", "Y");
@@ -4262,6 +4282,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   int startDateCol = t.fieldNumber("startDate");
   int endDateCol = t.fieldNumber("endDate");
   int fixedCol = t.fieldNumber("fixed");
+  int lastDayInMonthCol = t.fieldNumber("lastDayInMonth");
   int autoEnterCol = t.fieldNumber("autoEnter");
   int lastPaymentCol = t.fieldNumber("lastPayment");
   int weekendOptionCol = t.fieldNumber("weekendOption");
@@ -4280,6 +4301,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
     s.setStartDate(GETDATE(startDateCol));
     s.setEndDate(GETDATE(endDateCol));
     boolChar = GETSTRING(fixedCol); s.setFixed(boolChar == "Y");
+    boolChar = GETSTRING(lastDayInMonthCol); s.setLastDayInMonth(boolChar == "Y");
     boolChar = GETSTRING(autoEnterCol); s.setAutoEnter(boolChar == "Y");
     s.setLastPayment(GETDATE(lastPaymentCol));
     s.setWeekendOption(static_cast<MyMoneySchedule::weekendOptionE>(GETINT(weekendOptionCol)));

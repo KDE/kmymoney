@@ -191,12 +191,12 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     addAccountGroup(MyMoneyAccount::Liability);
   }
 #ifdef DEBUG_REPORTS
-  QDebug out = qDebug();
-  out << _name << toString(_rt) << toString(m_reportType);
+  QDebug dbg = qDebug();
+  dbg << _name << toString(_rt) << toString(m_reportType);
   foreach(const MyMoneyAccount::accountTypeE accountType, m_accountGroups)
-    out << MyMoneyAccount::accountTypeToString(accountType);
+    dbg << MyMoneyAccount::accountTypeToString(accountType);
   if (m_accounts.size() > 0)
-    out << m_accounts;
+    dbg << m_accounts;
 #endif
 }
 

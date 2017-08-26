@@ -1,12 +1,11 @@
 add_custom_command(
-  OUTPUT ${KMyMoney2_BINARY_DIR}/kmymoneysettings.h  ${KMyMoney2_BINARY_DIR}/kmymoneysettings.cpp
-  DEPENDS ${KMyMoney2_SOURCE_DIR}/kmymoney.kcfg ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc
-  COMMAND ${KDE4_KCFGC_EXECUTABLE} -d ${KMyMoney2_BINARY_DIR}/ ${KMyMoney2_SOURCE_DIR}/kmymoney.kcfg ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.h  ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.cpp
+  DEPENDS ${CMAKE_SOURCE_DIR}/kmymoney/kmymoney.kcfg ${CMAKE_SOURCE_DIR}/kmymoney/kmymoneysettings.kcfgc
+  COMMAND ${KDE4_KCFGC_EXECUTABLE} -d ${CMAKE_CURRENT_BINARY_DIR}/ ${CMAKE_SOURCE_DIR}/kmymoney/kmymoney.kcfg ${CMAKE_SOURCE_DIR}/kmymoney/kmymoneysettings.kcfgc
   )
 
-
 set (libsettings_a_SOURCES
-  ${KMyMoney2_BINARY_DIR}/kmymoneysettings.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.cpp
   ksettingscolors.cpp
   ksettingsfonts.cpp
   ksettingsforecast.cpp

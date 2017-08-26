@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2016 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -37,6 +37,10 @@
 
 #include <qglobal.h>
 
+#include <limits>
+
+#define NaN std::numeric_limits< qreal >::quiet_NaN()
+#define signalingNaN std::numeric_limits< qreal >::signaling_NaN()
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -46,29 +50,23 @@
 
 // Smybian's math.h doesn't define a trunc function
 #if defined(Q_OS_SYMBIAN) || defined(QT_SIMULATOR)
-#define trunc(x) (double) ((int) (x + (x >= 0.0 ? -0.5 : 0.5)))
+#define trunc(x) (qreal) ((int) (x + (x >= 0.0 ? -0.5 : 0.5)))
 #endif
 
 // We use our own ISNAN / ISINF in the code to detect
 // that we defined them.
 // reason: Windows / MacOS do not have isnan() / isinf()
-#if defined (Q_OS_WIN) && defined(_MSC_VER)
+#if defined (Q_OS_WIN)
 #include <float.h>
 #define ISNAN(x ) _isnan(x )
 #define ISINF(x ) (!(_finite(x ) + _isnan(x ) ) )
-#elif defined (Q_OS_DARWIN) || defined (Q_OS_CYGWIN)
-#define ISNAN(x) std::isnan(x)
-#define ISINF(x) std::isinf(x)
-#elif defined (__GXX_EXPERIMENTAL_CXX0X) || __cplusplus >= 201103L
-#define ISNAN(x) std::isnan(x)
-#define ISINF(x) std::isinf(x)
 #else
-#define ISNAN(x) isnan(x)
-#define ISINF(x) isinf(x)
+#define ISNAN(x) std::isnan(x)
+#define ISINF(x) std::isinf(x)
 #endif
 
 
-// We wrap every for() by extra { } to work around
+// We wrap every for () by extra { } to work around
 // the scope bug for loop counters in MS Visual C++ v6
 #if defined(Q_CC_MSVC) && !defined(Q_CC_MSVC_NET)
 /* This is done in Qt41 qglobal.h but not Qt42*/

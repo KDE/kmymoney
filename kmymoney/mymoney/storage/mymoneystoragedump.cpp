@@ -321,6 +321,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     s << "  Type = " << MyMoneySchedule::scheduleTypeToString((*it_s).type()) << "\n";
     s << "  Paymenttype = " << MyMoneySchedule::paymentMethodToString((*it_s).paymentType()) << "\n";
     s << "  Fixed = " << (*it_s).isFixed() << "\n";
+    s << "  LastDayInDate = " << (*it_s).lastDayInMonth() << "\n";
     s << "  AutoEnter = " << (*it_s).autoEnter() << "\n";
 
     if ((*it_s).lastPayment().isValid())

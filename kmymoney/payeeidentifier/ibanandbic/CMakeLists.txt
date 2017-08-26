@@ -56,6 +56,9 @@ install(FILES
   DESTINATION ${SERVICES_INSTALL_DIR}
   )
 
+install( FILES ibanbic.h
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney/payeeidentifier/ibanandbic COMPONENT Devel)
+
 if( KDE4_BUILD_TESTS )
   add_subdirectory(tests)
 endif()

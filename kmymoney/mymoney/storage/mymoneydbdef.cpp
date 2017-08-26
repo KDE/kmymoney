@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 10;
+unsigned int MyMoneyDbDef::m_currentVersion = 11;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -304,6 +304,7 @@ void MyMoneyDbDef::Schedules()
   appendField(MyMoneyDbColumn("startDate", "date", false, NOTNULL));
   appendField(MyMoneyDbColumn("endDate", "date"));
   appendField(MyMoneyDbColumn("fixed", "char(1)", false, NOTNULL));
+  appendField(MyMoneyDbColumn("lastDayInMonth", "char(1)", false, NOTNULL, 11));
   appendField(MyMoneyDbColumn("autoEnter", "char(1)", false, NOTNULL));
   appendField(MyMoneyDbColumn("lastPayment", "date"));
   appendField(MyMoneyDbColumn("nextPaymentDue", "date"));
@@ -618,6 +619,10 @@ const QString MyMoneyDbTable::columnList(const int version) const
   while (ft != m_fields.end()) {
     if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version)
       qs += QString("%1, ").arg((*ft)->name());
+    else if ((*ft)->isNotNull())
+      qs += QString("'0', ");
+    else
+      qs += QString("'', ");
     ++ft;
   }
   return (qs.left(qs.length() - 2));

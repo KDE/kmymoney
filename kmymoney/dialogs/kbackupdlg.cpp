@@ -76,10 +76,16 @@ void KBackupDlg::chooseButtonClicked()
 
 void KBackupDlg::readConfig()
 {
+  QString backupDefaultLocation;
+#ifdef Q_OS_WIN
+  backupDefaultLocation = QDir::toNativeSeparators(QDir::homePath() + "/kmymoney/backup");
+#else
+  backupDefaultLocation = "/mnt/floppy";
+#endif
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
   mountCheckBox->setChecked(grp.readEntry("KBackupDlg_mountDevice", false));
-  txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", "/mnt/floppy"));
+  txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", backupDefaultLocation));
 }
 
 void KBackupDlg::writeConfig()

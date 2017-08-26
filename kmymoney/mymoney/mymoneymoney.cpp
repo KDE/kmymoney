@@ -27,6 +27,7 @@
 // QT Includes
 
 #include <QRegExp>
+#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -330,3 +331,14 @@ int MyMoneyMoney::denomToPrec(signed64 fract)
   return rc;
 }
 
+QDebug operator<<(QDebug dbg, const MyMoneyMoney &a)
+{
+  dbg << "MyMoneyMoney("
+      << "isAutoCalc" << a.isAutoCalc()
+      << "isNegative" << a.isNegative()
+      << "isPositive" << a.isPositive()
+      << "isZero" << a.isZero()
+      << "value" << a.toString()
+      << ")";
+  return dbg;
+}

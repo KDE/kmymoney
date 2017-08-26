@@ -17,6 +17,8 @@
 
 #include "mymoneykeyvaluecontainer.h"
 
+#include <QtDebug>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -121,4 +123,14 @@ void MyMoneyKeyValueContainer::writeXML(QDomDocument& document, QDomElement& par
 
     parent.appendChild(el);
   }
+}
+
+QDebug operator<<(QDebug dbg, const MyMoneyKeyValueContainer &a)
+{
+  dbg << "MyMoneyKeyValueContainer(";
+  foreach(const QString &key, a.pairs().keys()) {
+    dbg << key << a[key];
+  }
+  dbg << ")";
+  return dbg;
 }

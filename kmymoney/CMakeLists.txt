@@ -30,7 +30,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/nationalaccount/
                     ${KMyMoney_SOURCE_DIR}/libkgpgfile/
-                    ${KMyMoney_SOURCE_DIR}/libkdchart/include )
+                    ${KMyMoney_SOURCE_DIR}/libkdchart/include/KDChart )
 
 add_subdirectory( mymoney )
 add_subdirectory( models  )

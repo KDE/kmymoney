@@ -127,5 +127,6 @@ protected:
   static const QString  m_emptyId;
 };
 
+QDebug operator<<(QDebug dbg, const MyMoneyObject &a);
 #endif
 

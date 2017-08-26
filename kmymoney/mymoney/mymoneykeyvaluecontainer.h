@@ -142,4 +142,5 @@ private:
   QMap<QString, QString>  m_kvp;
 };
 
+QDebug operator<<(QDebug dbg, const MyMoneyKeyValueContainer &a);
 #endif

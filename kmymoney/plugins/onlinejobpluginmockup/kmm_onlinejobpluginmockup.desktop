@@ -22,6 +22,7 @@ Comment[es]=Si se aplica a una cuenta, simula que puede manejar todas las tareas
 Comment[it]=Se associato a un account, finge di poter gestire tutte le operazioni in linea (solo per sviluppatori).
 Comment[nl]=Indien gekoppeld aan een account, pretendeert het dat het alle online taken kan afhandelen (alleen voor ontwikkelaars)
 Comment[pt]=Se estiver associado a uma conta, evita que a mesma possa tratar de todas as tarefas 'online' (apenas para programadores).
+Comment[pt_BR]=Se estiver associado a uma conta, simula que pode lidar com todas as tarefas online (apenas para desenvolvedores)
 Comment[sk]=Ak je namapované na účet, zabraňuje spracovaniu všetkých online úloh (len pre vývojárov)
 Comment[sv]=Om tilldelad till ett konto, låtsas det att det kan hantera alla nätuppgifter (bara för utvecklare).
 Comment[uk]=Якщо пов’язано із рахунком, запобігає обробці усіх мережевих завдань (лише для розробників).

@@ -166,7 +166,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   }
   //get the diagram for later use
   AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
-
+  planeDiagram->setAntiAliasing(true);
+  CartesianCoordinatePlane* plane = dynamic_cast<CartesianCoordinatePlane*>(coordinatePlane());
+  if (plane) {
+    plane->setAutoAdjustVerticalRangeToData(101);
+  }
   //set grid attributes
   GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
   gridAttr.setGridVisible(config.isChartGridLines());
@@ -204,21 +208,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxis->setTitleTextAttributes(xAxisTitleTextAttr);
     TextAttributes xAxisTextAttr(xAxis->textAttributes());
     xAxisTextAttr.setPen(m_foregroundBrush.color());
+    xAxisTextAttr.setAutoRotate(true);
     xAxis->setTextAttributes(xAxisTextAttr);
     RulerAttributes xAxisRulerAttr(xAxis->rulerAttributes());
     xAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
     xAxisRulerAttr.setShowRulerLine(true);
     xAxis->setRulerAttributes(xAxisRulerAttr);
 
-    // Set up X axis labels (ie "abscissa" to use the technical term)
-    QStringList abscissaNames;
-    if (accountSeries()) { // if not, we will set these up while putting in the chart values.
-      int column = 1;
-      while (column < numColumns()) {
-        abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
-      }
-      xAxis->setLabels(abscissaNames);
-    }
 
     //set y axis
     KBalanceAxis *yAxis = new KBalanceAxis();
@@ -437,6 +433,16 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         }
       }
       break;
+  }
+
+  // Set up X axis labels (ie "abscissa" to use the technical term)
+  QStringList abscissaNames;
+  if (accountSeries()) { // if not, we will set these up while putting in the chart values.
+    int column = 1;
+    while (column < numColumns()) {
+      abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
+    }
+    m_model.setVerticalHeaderLabels(abscissaNames);
   }
 
   //assign model to the diagram

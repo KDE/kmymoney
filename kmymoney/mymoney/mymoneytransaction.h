@@ -391,5 +391,5 @@ private:
   * Make it possible to hold @ref MyMoneyTransaction objects inside @ref QVariant objects.
   */
 Q_DECLARE_METATYPE(MyMoneyTransaction)
-
+QDebug operator<<(QDebug dbg, const MyMoneyTransaction &a);
 #endif

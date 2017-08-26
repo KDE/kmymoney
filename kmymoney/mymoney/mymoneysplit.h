@@ -363,4 +363,5 @@ private:
   */
 Q_DECLARE_METATYPE(MyMoneySplit)
 
+QDebug operator<<(QDebug dbg, const MyMoneySplit &a);
 #endif
