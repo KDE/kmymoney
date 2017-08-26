@@ -187,10 +187,10 @@ void KAccountsView::loadAccounts()
   m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(kmymoney->isActionToggled(Action::ViewShowAll));
 
   // and in case we need to show things expanded, we'll do so
-  if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
-    m_filterProxyModel->expandAll();
-    m_accountTree->expandAll();
-  }
+//  if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
+//    m_filterProxyModel->expandAll();
+//    m_accountTree->expandAll();
+//  }
 }
 
 void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)

@@ -557,9 +557,9 @@ void KBudgetView::loadAccounts()
   m_filterProxyModel->setBudget(m_budget);
 
   // and in case we need to show things expanded, we'll do so
-  if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
-    m_accountTree->expandAll();
-  }
+//  if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
+//    m_accountTree->expandAll();
+//  }
 
 }
 
