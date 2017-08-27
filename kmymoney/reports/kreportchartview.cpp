@@ -283,6 +283,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   int precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
   int rowNum = 0;
   QStringList legendNames;
+  QMap<MyMoneyMoney, int> legendTotal;
 
   switch (config.detailLevel()) {
     case MyMoneyReport::eDetailNone:
@@ -324,6 +325,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
                   //set the legend text
                   legendNames.append(legendText);
+                  legendTotal.insertMulti(it_row.value().value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
                   precision = myRowTypeList.at(i) == ePrice ? securityPrecision : currencyPrecision;
 
@@ -362,6 +364,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
               //set the legend text
               legendNames.append(legendText);
+              legendTotal.insertMulti((*it_innergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
               //set the cell value and tooltip
               rowNum = drawPivotGridRow(rowNum, (*it_innergroup).m_total.value(myRowTypeList.at(i)),
@@ -391,6 +394,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             //set the legend text
             legendNames.append(legendText);
+            legendTotal.insertMulti((*it_outergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
             //set the cell value and tooltip
             rowNum = drawPivotGridRow(rowNum, (*it_outergroup).m_total.value(myRowTypeList.at(i)),
@@ -414,6 +418,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             //set the legend text
             legendNames.append(legendText);
+            legendTotal.insertMulti(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
             //set the cell value and tooltip
             rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
@@ -437,6 +442,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
           //set the legend text
           legendNames.append(legendText);
+          legendTotal.insertMulti(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
           //set the cell value and tooltip
           if (config.isMixedTime()) {
@@ -464,6 +470,26 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   default:
     case MyMoneyReport::eDetailEnd:
     return;
+  }
+
+  auto legendRows = legendTotal.values();                     // list of legend rows sorted ascending by total value
+  for (auto i = 0; i < legendRows.count(); ++i) {
+    const auto ixRow = legendRows.count() - 1 - i;            // take row with the highest total value i.e. form the bottom
+    const auto row = legendRows.at(ixRow);
+    if ( row != i) {                                          // if legend isn't sorted by total value, then rearrange model
+      if ((accountSeries() && !seriesTotals()) ||
+          (seriesTotals() && !accountSeries()))
+        m_model.insertColumn(i, m_model.takeColumn(row));
+      else
+        m_model.insertRow(i, m_model.takeRow(row));
+
+      for (auto j = i; j < ixRow; ++j) {                      // fix invalid indexes after above move operation
+        if (legendRows.at(j) < row)
+          ++legendRows[j];
+      }
+      legendRows[ixRow] = i;
+      legendNames.move(row, i);
+    }
   }
 
   // Set up X axis labels (ie "abscissa" to use the technical term)
@@ -494,8 +520,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     //set the legend basic attributes
     //this is done after adding the legend because the values are overridden when adding the legend to the chart
-    for (int i = static_cast<int>(KMyMoneyGlobalSettings::maximumLegendItems()); i < rowNum; ++i)
-      legend->setDatasetHidden(i, true);
+    const auto maxLegendItems = KMyMoneyGlobalSettings::maximumLegendItems();
+    auto legendItems = legendNames.count();
+
+    auto i = 0;
+    while (legendItems > maxLegendItems) {
+      legend->setDatasetHidden(legendRows.at(i++), true);
+      --legendItems;
+    }
 
     legend->setUseAutomaticMarkerSize(false);
     FrameAttributes legendFrameAttr(legend->frameAttributes());
