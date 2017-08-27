@@ -162,173 +162,189 @@ void PivotTable::init()
   if (m_config.hasBudget())
     calculateBudgetMapping();
 
-  //
-  // Populate all transactions into the row/column pivot grid
-  //
-
-  QList<MyMoneyTransaction> transactions;
-  m_config.setReportAllSplits(false);
-  m_config.setConsiderCategory(true);
-  try {
-    transactions = file->transactionList(m_config);
-  } catch (const MyMoneyException &e) {
-    qDebug("ERR: %s thrown in %s(%ld)", qPrintable(e.what()), qPrintable(e.file()), e.line());
-    throw e;
-  }
-  DEBUG_OUTPUT(QString("Found %1 matching transactions").arg(transactions.count()));
-
-
-  // Include scheduled transactions if required
-  if (m_config.isIncludingSchedules()) {
-    // Create a custom version of the report filter, excluding date
-    // We'll use this to compare the transaction against
-    MyMoneyTransactionFilter schedulefilter(m_config);
-    schedulefilter.setDateFilter(QDate(), QDate());
-
-    // Get the real dates from the config filter
-    QDate configbegin, configend;
-    m_config.validDateRange(configbegin, configend);
-
-    QList<MyMoneySchedule> schedules = file->scheduleList();
-    QList<MyMoneySchedule>::const_iterator it_schedule = schedules.constBegin();
-    while (it_schedule != schedules.constEnd()) {
-      // If the transaction meets the filter
-      MyMoneyTransaction tx = (*it_schedule).transaction();
-      if (!(*it_schedule).isFinished() && schedulefilter.match(tx)) {
-        // Keep the id of the schedule with the transaction so that
-        // we can do the autocalc later on in case of a loan payment
-        tx.setValue("kmm-schedule-id", (*it_schedule).id());
-
-        // Get the dates when a payment will be made within the report window
-        QDate nextpayment = (*it_schedule).adjustedNextPayment(configbegin);
-        if (nextpayment.isValid()) {
-          // Add one transaction for each date
-          QList<QDate> paymentDates = (*it_schedule).paymentDates(nextpayment, configend);
-          QList<QDate>::const_iterator it_date = paymentDates.constBegin();
-          while (it_date != paymentDates.constEnd()) {
-            //if the payment occurs in the past, enter it tomorrow
-            if (QDate::currentDate() >= *it_date) {
-              tx.setPostDate(QDate::currentDate().addDays(1));
-            } else {
-              tx.setPostDate(*it_date);
-            }
-            if (tx.postDate() <= configend
-                && tx.postDate() >= configbegin) {
-              transactions += tx;
-            }
-
-            DEBUG_OUTPUT(QString("Added transaction for schedule %1 on %2").arg((*it_schedule).id()).arg((*it_date).toString()));
-
-            ++it_date;
-          }
-        }
-      }
-
-      ++it_schedule;
-    }
-  }
-
-  // whether asset & liability transactions are actually to be considered
-  // transfers
-  bool al_transfers = (m_config.rowType() == MyMoneyReport::eExpenseIncome) && (m_config.isIncludingTransfers());
-
-  //this is to store balance for loan accounts when not included in the report
-  QMap<QString, MyMoneyMoney> loanBalances;
-
-  QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
-  int colofs = columnValue(m_beginDate) - m_startColumn;
-  while (it_transaction != transactions.constEnd()) {
-    MyMoneyTransaction tx = (*it_transaction);
-    QDate postdate = tx.postDate();
-    if (postdate < m_beginDate) {
-      qDebug("MyMoneyFile::transactionList returned a transaction that is outside the date filter, skipping it");
-      ++it_transaction;
-      continue;
-    }
-    int column = columnValue(postdate) - colofs;
-
-    // check if we need to call the autocalculation routine
-    if (tx.isLoanPayment() && tx.hasAutoCalcSplit() && (tx.value("kmm-schedule-id").length() > 0)) {
-      // make sure to consider any autocalculation for loan payments
-      MyMoneySchedule sched = file->schedule(tx.value("kmm-schedule-id"));
-      const MyMoneySplit& split = tx.amortizationSplit();
-      if (!split.id().isEmpty()) {
-        ReportAccount splitAccount = file->account(split.accountId());
-        MyMoneyAccount::accountTypeE type = splitAccount.accountGroup();
-        QString outergroup = KMyMoneyUtils::accountTypeToString(type);
-
-        //if the account is included in the report, calculate the balance from the cells
-        if (m_config.includes(splitAccount)) {
-          loanBalances[splitAccount.id()] = cellBalance(outergroup, splitAccount, column, false);
-        } else {
-          //if it is not in the report and also not in loanBalances, get the balance from the file
-          if (!loanBalances.contains(splitAccount.id())) {
-            QDate dueDate = sched.nextDueDate();
-
-            //if the payment is overdue, use current date
-            if (dueDate < QDate::currentDate())
-              dueDate = QDate::currentDate();
-
-            //get the balance from the file for the date
-            loanBalances[splitAccount.id()] = file->balance(splitAccount.id(), dueDate.addDays(-1));
-          }
-        }
-
-        KMyMoneyUtils::calculateAutoLoan(sched, tx, loanBalances);
-
-        //if the loan split is not included in the report, update the balance for the next occurrence
-        if (!m_config.includes(splitAccount)) {
-          QList<MyMoneySplit>::ConstIterator it_loanSplits;
-          for (it_loanSplits = tx.splits().constBegin(); it_loanSplits != tx.splits().constEnd(); ++it_loanSplits) {
-            if ((*it_loanSplits).isAmortizationSplit() && (*it_loanSplits).accountId() == splitAccount.id())
-              loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + (*it_loanSplits).shares();
-          }
+  // prices report doesn't need transactions, but it needs account stub
+  // otherwise fillBasePriceUnit won't do nothing
+  if (m_config.isIncludingPrice() ||
+      m_config.isIncludingAveragePrice()) {
+    QList<MyMoneyAccount> accounts;
+    file->accountList(accounts);
+    foreach (const auto acc, accounts) {
+      if (acc.isInvest()) {
+        const ReportAccount repAcc = acc;
+        if (m_config.includes(repAcc)) {
+          const auto outergroup = acc.accountTypeToString(acc.accountType());
+          assignCell(outergroup, repAcc, 0, MyMoneyMoney(), false, false);    // add account stub
         }
       }
     }
+  } else {
+    //
+    // Populate all transactions into the row/column pivot grid
+    //
 
-    QList<MyMoneySplit> splits = tx.splits();
-    QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
-    while (it_split != splits.constEnd()) {
-      ReportAccount splitAccount = (*it_split).accountId();
+    QList<MyMoneyTransaction> transactions;
+    m_config.setReportAllSplits(false);
+    m_config.setConsiderCategory(true);
+    try {
+      transactions = file->transactionList(m_config);
+    } catch (const MyMoneyException &e) {
+      qDebug("ERR: %s thrown in %s(%ld)", qPrintable(e.what()), qPrintable(e.file()), e.line());
+      throw e;
+    }
+    DEBUG_OUTPUT(QString("Found %1 matching transactions").arg(transactions.count()));
 
-      // Each split must be further filtered, because if even one split matches,
-      // the ENTIRE transaction is returned with all splits (even non-matching ones)
-      if (m_config.includes(splitAccount) && m_config.match(&(*it_split))) {
-        // reverse sign to match common notation for cash flow direction, only for expense/income splits
-        MyMoneyMoney reverse(splitAccount.isIncomeExpense() ? -1 : 1, 1);
 
-        MyMoneyMoney value;
-        // the outer group is the account class (major account type)
-        MyMoneyAccount::accountTypeE type = splitAccount.accountGroup();
-        QString outergroup = KMyMoneyUtils::accountTypeToString(type);
+    // Include scheduled transactions if required
+    if (m_config.isIncludingSchedules()) {
+      // Create a custom version of the report filter, excluding date
+      // We'll use this to compare the transaction against
+      MyMoneyTransactionFilter schedulefilter(m_config);
+      schedulefilter.setDateFilter(QDate(), QDate());
 
-        value = (*it_split).shares();
-        bool stockSplit = tx.isStockSplit();
-        if (!stockSplit) {
-          // retrieve the value in the account's underlying currency
-          if (value != MyMoneyMoney::autoCalc) {
-            value = value * reverse;
+      // Get the real dates from the config filter
+      QDate configbegin, configend;
+      m_config.validDateRange(configbegin, configend);
+
+      QList<MyMoneySchedule> schedules = file->scheduleList();
+      QList<MyMoneySchedule>::const_iterator it_schedule = schedules.constBegin();
+      while (it_schedule != schedules.constEnd()) {
+        // If the transaction meets the filter
+        MyMoneyTransaction tx = (*it_schedule).transaction();
+        if (!(*it_schedule).isFinished() && schedulefilter.match(tx)) {
+          // Keep the id of the schedule with the transaction so that
+          // we can do the autocalc later on in case of a loan payment
+          tx.setValue("kmm-schedule-id", (*it_schedule).id());
+
+          // Get the dates when a payment will be made within the report window
+          QDate nextpayment = (*it_schedule).adjustedNextPayment(configbegin);
+          if (nextpayment.isValid()) {
+            // Add one transaction for each date
+            QList<QDate> paymentDates = (*it_schedule).paymentDates(nextpayment, configend);
+            QList<QDate>::const_iterator it_date = paymentDates.constBegin();
+            while (it_date != paymentDates.constEnd()) {
+              //if the payment occurs in the past, enter it tomorrow
+              if (QDate::currentDate() >= *it_date) {
+                tx.setPostDate(QDate::currentDate().addDays(1));
+              } else {
+                tx.setPostDate(*it_date);
+              }
+              if (tx.postDate() <= configend
+                  && tx.postDate() >= configbegin) {
+                transactions += tx;
+              }
+
+              DEBUG_OUTPUT(QString("Added transaction for schedule %1 on %2").arg((*it_schedule).id()).arg((*it_date).toString()));
+
+              ++it_date;
+            }
+          }
+        }
+
+        ++it_schedule;
+      }
+    }
+
+    // whether asset & liability transactions are actually to be considered
+    // transfers
+    bool al_transfers = (m_config.rowType() == MyMoneyReport::eExpenseIncome) && (m_config.isIncludingTransfers());
+
+    //this is to store balance for loan accounts when not included in the report
+    QMap<QString, MyMoneyMoney> loanBalances;
+
+    QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
+    int colofs = columnValue(m_beginDate) - m_startColumn;
+    while (it_transaction != transactions.constEnd()) {
+      MyMoneyTransaction tx = (*it_transaction);
+      QDate postdate = tx.postDate();
+      if (postdate < m_beginDate) {
+        qDebug("MyMoneyFile::transactionList returned a transaction that is outside the date filter, skipping it");
+        ++it_transaction;
+        continue;
+      }
+      int column = columnValue(postdate) - colofs;
+
+      // check if we need to call the autocalculation routine
+      if (tx.isLoanPayment() && tx.hasAutoCalcSplit() && (tx.value("kmm-schedule-id").length() > 0)) {
+        // make sure to consider any autocalculation for loan payments
+        MyMoneySchedule sched = file->schedule(tx.value("kmm-schedule-id"));
+        const MyMoneySplit& split = tx.amortizationSplit();
+        if (!split.id().isEmpty()) {
+          ReportAccount splitAccount = file->account(split.accountId());
+          MyMoneyAccount::accountTypeE type = splitAccount.accountGroup();
+          QString outergroup = KMyMoneyUtils::accountTypeToString(type);
+
+          //if the account is included in the report, calculate the balance from the cells
+          if (m_config.includes(splitAccount)) {
+            loanBalances[splitAccount.id()] = cellBalance(outergroup, splitAccount, column, false);
           } else {
-            qDebug("PivotTable::PivotTable(): This must not happen");
-            value = MyMoneyMoney();  // keep it 0 so far
+            //if it is not in the report and also not in loanBalances, get the balance from the file
+            if (!loanBalances.contains(splitAccount.id())) {
+              QDate dueDate = sched.nextDueDate();
+
+              //if the payment is overdue, use current date
+              if (dueDate < QDate::currentDate())
+                dueDate = QDate::currentDate();
+
+              //get the balance from the file for the date
+              loanBalances[splitAccount.id()] = file->balance(splitAccount.id(), dueDate.addDays(-1));
+            }
           }
 
-          // Except in the case of transfers on an income/expense report
-          if (al_transfers && (type == MyMoneyAccount::Asset || type == MyMoneyAccount::Liability)) {
-            outergroup = i18n("Transfers");
-            value = -value;
+          KMyMoneyUtils::calculateAutoLoan(sched, tx, loanBalances);
+
+          //if the loan split is not included in the report, update the balance for the next occurrence
+          if (!m_config.includes(splitAccount)) {
+            QList<MyMoneySplit>::ConstIterator it_loanSplits;
+            for (it_loanSplits = tx.splits().constBegin(); it_loanSplits != tx.splits().constEnd(); ++it_loanSplits) {
+              if ((*it_loanSplits).isAmortizationSplit() && (*it_loanSplits).accountId() == splitAccount.id())
+                loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + (*it_loanSplits).shares();
+            }
           }
         }
-        // add the value to its correct position in the pivot table
-        assignCell(outergroup, splitAccount, column, value, false, stockSplit);
       }
-      ++it_split;
+
+      QList<MyMoneySplit> splits = tx.splits();
+      QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
+      while (it_split != splits.constEnd()) {
+        ReportAccount splitAccount = (*it_split).accountId();
+
+        // Each split must be further filtered, because if even one split matches,
+        // the ENTIRE transaction is returned with all splits (even non-matching ones)
+        if (m_config.includes(splitAccount) && m_config.match(&(*it_split))) {
+          // reverse sign to match common notation for cash flow direction, only for expense/income splits
+          MyMoneyMoney reverse(splitAccount.isIncomeExpense() ? -1 : 1, 1);
+
+          MyMoneyMoney value;
+          // the outer group is the account class (major account type)
+          MyMoneyAccount::accountTypeE type = splitAccount.accountGroup();
+          QString outergroup = KMyMoneyUtils::accountTypeToString(type);
+
+          value = (*it_split).shares();
+          bool stockSplit = tx.isStockSplit();
+          if (!stockSplit) {
+            // retrieve the value in the account's underlying currency
+            if (value != MyMoneyMoney::autoCalc) {
+              value = value * reverse;
+            } else {
+              qDebug("PivotTable::PivotTable(): This must not happen");
+              value = MyMoneyMoney();  // keep it 0 so far
+            }
+
+            // Except in the case of transfers on an income/expense report
+            if (al_transfers && (type == MyMoneyAccount::Asset || type == MyMoneyAccount::Liability)) {
+              outergroup = i18n("Transfers");
+              value = -value;
+            }
+          }
+          // add the value to its correct position in the pivot table
+          assignCell(outergroup, splitAccount, column, value, false, stockSplit);
+        }
+        ++it_split;
+      }
+
+      ++it_transaction;
     }
-
-    ++it_transaction;
   }
-
   //
   // Get forecast data
   //
