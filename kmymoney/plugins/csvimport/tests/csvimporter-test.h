@@ -37,6 +37,7 @@ class CsvImporterTest : public QObject
   MyMoneyFile         *file;
   MyMoneySeqAccessMgr *storage;
 private slots:
+  void initTestCase();
   void init();
   void cleanup();
 

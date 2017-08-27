@@ -25,6 +25,13 @@ email                : lukasz.wojnilowicz@gmail.com
 
 QTEST_GUILESS_MAIN(CsvImporterTest)
 
+void CsvImporterTest::initTestCase()
+{
+  // setup the MyMoneyMoney locale settings according to the KDE settings
+  MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
+  MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
+}
+
 void CsvImporterTest::init()
 {
   storage = new MyMoneySeqAccessMgr;
