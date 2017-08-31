@@ -11,8 +11,8 @@
   As with every release, the &kappname; development team has worked hard to make
   this one better and easier to use in every way, although most of the developer
   effort has recently gone toward releasing a version of &kappname; which runs
-  under KDE Frameworks (aka KF5.)  However, this release does include almost 50
-  different bug fixes and new features.  For the future, any further releases in
+  under KDE Frameworks (aka KF5.)  However, this release does include almost 70
+  bug fixes and four new features.  For the future, any further releases in
   the 4.8.x series will likely contain only bug fixes.
 </para>
 
@@ -25,7 +25,7 @@
   <listitem>
     <para>
       <ulink url="https://www.kmymoney.org/resolvedbugs.php?4.8.1">The complete
-             list of bugs fixed in this releast</ulink>
+             list of bugs fixed in this release</ulink>
     </para>
   </listitem>
 
