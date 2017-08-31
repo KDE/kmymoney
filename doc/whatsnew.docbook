@@ -9,21 +9,36 @@
 
 <para>
   As with every release, the &kappname; development team has worked hard to make
-  this release better and easier to use in every way, although most of the
-  developer effort has recently gone toward releasing a version of &kappname;
-  which runs under KDE Frameworks (aka KF5.)  However, this release does include
-  almost 50 different bug fixes and new features.  For the future, and any
-  further releases in the 4.8.x series will likely contain only bug fixes.
+  this one better and easier to use in every way, although most of the developer
+  effort has recently gone toward releasing a version of &kappname; which runs
+  under KDE Frameworks (aka KF5.)  However, this release does include almost 50
+  different bug fixes and new features.  For the future, any further releases in
+  the 4.8.x series will likely contain only bug fixes.
 </para>
 
 <para>
-  Here are some of the bugs fixed and new features found in this release:
+  Below are links to the full lists followed by highlights of the bugs fixed and
+  new features found in this release.
 </para>
 
 <itemizedlist>
   <listitem>
     <para>
-      Multiple improvements to data import, including:
+      <ulink url="https://www.kmymoney.org/resolvedbugs.php?4.8.1">The complete
+             list of bugs fixed in this releast</ulink>
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <ulink url="https://www.kmymoney.org/resolvedfeatures.php?4.8.1">The
+             complete list of new features in this release</ulink>
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Improvements to data import, including:
     </para>
     <itemizedlist>
       <listitem>
@@ -61,7 +76,7 @@
 
   <listitem>
     <para>
-      Multiple improvements to the &Windows; version, including:
+      Improvements to the &Windows; version, including:
     </para>
     <itemizedlist>
       <listitem>
@@ -92,6 +107,25 @@
 
   <listitem>
     <para>
+      Improvements to the database back end
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Avoid a crash if the database is not present restoring from hibernation.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Corrected SQL syntax issues causing errors.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+
+  <listitem>
+    <para>
       The user is now notified if changing a memo in a transaction would make it
       different from the memo in the other split of the transaction (such as in
       a transfer.)
@@ -107,28 +141,9 @@
 
   <listitem>
     <para>
-      Removee restriction on configuring VAT account assignments for certain
+      Removed restriction on configuring VAT assignments for certain
       types of accounts.
     </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Several improvements to the database back end
-    </para>
-    <itemizedlist>
-      <listitem>
-        <para>
-          Avoiding a crash if the database is not present restoring from hibernation.
-        </para>
-      </listitem>
-
-      <listitem>
-        <para>
-          Corrected SQL syntax issues causing errors.
-        </para>
-      </listitem>
-    </itemizedlist>
   </listitem>
 
   <listitem>
@@ -145,7 +160,7 @@
 
   <listitem>
     <para>
-      Elimination of several causes of crashes.
+      Eliminated several causes of crashes.
     </para>
   </listitem>
 </itemizedlist>
