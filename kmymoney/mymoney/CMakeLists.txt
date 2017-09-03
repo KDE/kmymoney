@@ -62,12 +62,13 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       ${LIBALKIMIA_LIBRARIES}
                       kmm_storage
 #                     onlinetask_interfaces
-                      onlinetask_unavailabletask
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
                       kmm_config
+                      LINK_PRIVATE
+                      onlinetask_unavailabletask
 )
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
