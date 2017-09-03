@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
 Name=KMyMoney Importer Plugin
-Name[ar]=ملحقة مستورد أموالك
+Name[ar]=ملحقة استيراد ل‍«أموالك»
 Name[bs]=Dodatak za uvoz KMyMoney
 Name[ca]=Connector d'importació del KMyMoney
 Name[ca@valencia]=Connector d'importació del KMyMoney
@@ -35,7 +35,7 @@ Name[zh_CN]=KMyMoney 导入插件
 Name[zh_TW]=KMyMoney 匯入器外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
-Comment[ar]=ملحقة أموالك
+Comment[ar]=ملحقة ل‍«أموالك»
 Comment[bs]=Dodatak za KMyMoney
 Comment[ca]=Un connector del KMyMoney
 Comment[ca@valencia]=Un connector del KMyMoney
