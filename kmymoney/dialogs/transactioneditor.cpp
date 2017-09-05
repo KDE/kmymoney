@@ -281,8 +281,12 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
   }
 
   while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), next)) {
-    if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + schedInfo + i18n("<center>Check number <b>%1</b> has already been used in account <b>%2</b>.</center>"
-                                   "<center>Do you want to replace it with the next available number?</center>", next, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
+    QString dontShowAgain = QLatin1String("DuplicatedNumber");
+    KMessageBox::ButtonCode result;
+    if ((!KMessageBox::shouldBeShownYesNo(dontShowAgain, result) && result == KMessageBox::Yes) ||
+      KMessageBox::questionYesNo(m_regForm, QLatin1String("<qt>") + schedInfo + i18n("<center>Check number <b>%1</b> has already been used in account <b>%2</b>.</center>"
+                                 "<center>Do you want to replace it with the next available number?</center>", next, m_account.name()) + QLatin1String("</qt>"), i18n("Duplicate number"),
+                                 KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain) == KMessageBox::Yes) {
       assignNextNumber();
       next = KMyMoneyUtils::nextCheckNumber(m_account);
     } else {
