@@ -48,7 +48,7 @@ find_package(KF5 5.2 REQUIRED
   COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
   OPTIONAL_COMPONENTS ${OPT_KF5_COMPONENTS}
 )
-find_package(LibAlkimia 6.0.0 REQUIRED)
+find_package(LibAlkimia5 7.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
 if(KF5Gpgmepp_FOUND)
