@@ -42,6 +42,7 @@
 #include <QIcon>
 #include <QTemporaryFile>
 #include <QUrlQuery>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,6 +56,7 @@
 #include <kcompressiondevice.h>
 #include <KSharedConfig>
 #include <KBackup>
+#include <KActionCollection>
 
 #ifdef KF5Activities_FOUND
 #include <KActivities/ResourceInstance>
@@ -108,6 +110,8 @@ using namespace Icons;
 
 static constexpr KCompressionDevice::CompressionType COMPRESSION_TYPE = KCompressionDevice::GZip;
 static constexpr char recoveryKeyId[] = "0xD2B08440";
+
+typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
 
 KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     : KPageWidget(nullptr),
@@ -282,6 +286,46 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 
   m_inConstructor = false;
 
+  // add fast switching of main views through Ctrl + NUM_X
+  struct pageInfo {
+    View             view;
+    KMyMoneyViewFunc callback;
+    QString          text;
+    QKeySequence     shortcut = QKeySequence();
+  };
+
+  const QVector<pageInfo> pageInfos {
+    {View::Home,            &KMyMoneyView::slotShowHomePage,          i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
+    {View::Institutions,    &KMyMoneyView::slotShowInstitutionsPage,  i18n("Show institutions page"),           Qt::CTRL + Qt::Key_2},
+    {View::Accounts,        &KMyMoneyView::slotShowAccountsPage,      i18n("Show accounts page"),               Qt::CTRL + Qt::Key_3},
+    {View::Schedules,       &KMyMoneyView::slotShowSchedulesPage,     i18n("Show scheduled transactions page"), Qt::CTRL + Qt::Key_4},
+    {View::Categories,      &KMyMoneyView::slotShowCategoriesPage,    i18n("Show categories page"),             Qt::CTRL + Qt::Key_5},
+    {View::Tags,            &KMyMoneyView::slotShowTagsPage,          i18n("Show tags page"),                   },
+    {View::Payees,          &KMyMoneyView::slotShowPayeesPage,        i18n("Show payees page"),                 Qt::CTRL + Qt::Key_6},
+    {View::Ledgers,         &KMyMoneyView::slotShowLedgersPage,       i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
+    {View::Investments,     &KMyMoneyView::slotShowInvestmentsPage,   i18n("Show investments page"),            Qt::CTRL + Qt::Key_8},
+    {View::Reports,         &KMyMoneyView::slotShowReportsPage,       i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
+    {View::Budget,          &KMyMoneyView::slotShowBudgetPage,        i18n("Show budget page"),                },
+    {View::Forecast,        &KMyMoneyView::slotShowForecastPage,      i18n("Show forecast page"),              },
+    {View::OnlineJobOutbox, &KMyMoneyView::slotShowOutboxPage,        i18n("Show outbox page")                 }
+  };
+
+  QHash<View, QAction *> lutActions;
+  auto aC = kmymoney->actionCollection();
+  auto pageCount = 0;
+  foreach (const pageInfo info, pageInfos) {
+    auto a = new QAction();
+    // KActionCollection::addAction by name sets object name anyways,
+    // so, as better alternative, set it here right from the start
+    a->setObjectName(QLatin1String("ShowPage") + QString::number(pageCount++));
+    a->setText(info.text);
+    connect(a, &QAction::triggered, this, info.callback);
+    lutActions.insert(info.view, a);  // store QAction's pointer for later processing
+    if (!info.shortcut.isEmpty())
+      aC->setDefaultShortcut(a, info.shortcut);
+  }
+  aC->addActions(lutActions.values());
+
   // Initialize kactivities resource instance
 
 #ifdef KF5Activities_FOUND
@@ -294,6 +338,83 @@ KMyMoneyView::~KMyMoneyView()
 {
   KMyMoneyGlobalSettings::setLastViewSelected(m_lastViewSelected);
   removeStorage();
+}
+
+void KMyMoneyView::slotShowHomePage()
+{
+  showPage(viewFrames[View::Home]);
+}
+
+void KMyMoneyView::slotShowInstitutionsPage()
+{
+  showPage(viewFrames[View::Institutions]);
+  m_institutionsView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowAccountsPage()
+{
+  showPage(viewFrames[View::Accounts]);
+  m_accountsView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowSchedulesPage()
+{
+  showPage(viewFrames[View::Schedules]);
+  m_scheduledView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowCategoriesPage()
+{
+  showPage(viewFrames[View::Categories]);
+  m_categoriesView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowTagsPage()
+{
+  showPage(viewFrames[View::Tags]);
+  m_tagsView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowPayeesPage()
+{
+  showPage(viewFrames[View::Payees]);
+  m_payeesView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowLedgersPage()
+{
+  showPage(viewFrames[View::Ledgers]);
+  m_ledgerView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowInvestmentsPage()
+{
+  showPage(viewFrames[View::Investments]);
+  m_investmentView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowReportsPage()
+{
+  showPage(viewFrames[View::Reports]);
+  m_reportsView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowBudgetPage()
+{
+  showPage(viewFrames[View::Budget]);
+  m_budgetView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowForecastPage()
+{
+  showPage(viewFrames[View::Forecast]);
+  m_forecastView->setDefaultFocus();
+}
+
+void KMyMoneyView::slotShowOutboxPage()
+{
+  showPage(viewFrames[View::OnlineJobOutbox]);
+  m_onlineJobOutboxView->setDefaultFocus();
 }
 
 void KMyMoneyView::showTitleBar(bool show)
@@ -2186,11 +2307,6 @@ void KMyMoneyView::slotPrintView()
     m_reportsView->slotPrintView();
   else if (viewFrames[View::Home] == currentPage())
     m_homeView->slotPrintView();
-}
-
-void KMyMoneyView::slotShowHomePage()
-{
-  setCurrentPage(viewFrames[View::Home]);
 }
 
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)

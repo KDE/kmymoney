@@ -81,6 +81,9 @@ class KPayeesView : public QWidget, private Ui::KPayeesViewDecl
 public:
   KPayeesView(QWidget *parent = 0);
   ~KPayeesView();
+
+  void setDefaultFocus();
+
   void showEvent(QShowEvent* event);
 
   enum filterTypeE { eAllPayees = 0, eReferencedPayees = 1, eUnusedPayees = 2 };

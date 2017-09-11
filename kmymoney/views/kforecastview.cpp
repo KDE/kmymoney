@@ -24,6 +24,7 @@
 #include <QLayout>
 #include <QList>
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -64,6 +65,11 @@ KForecastView::KForecastView(QWidget *parent) :
 
 KForecastView::~KForecastView()
 {
+}
+
+void KForecastView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_forecastButton, SLOT(setFocus()));
 }
 
 void KForecastView::init()

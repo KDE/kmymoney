@@ -104,6 +104,11 @@ KPayeesView::~KPayeesView()
   }
 }
 
+void KPayeesView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_searchWidget, SLOT(setFocus()));
+}
+
 void KPayeesView::init()
 {
   m_needLoad = false;

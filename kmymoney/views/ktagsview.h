@@ -74,6 +74,9 @@ class KTagsView : public QWidget, private Ui::KTagsViewDecl
 public:
   KTagsView(QWidget *parent = 0);
   ~KTagsView();
+
+  void setDefaultFocus();
+
   void showEvent(QShowEvent* event);
 
   enum filterTypeE {

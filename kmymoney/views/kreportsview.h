@@ -206,6 +206,8 @@ public:
     */
   explicit KReportsView(QWidget *parent = 0, const char *name = 0);
 
+  void setDefaultFocus();
+
   /**
     * Overridden so we can reload the view if necessary.
     *

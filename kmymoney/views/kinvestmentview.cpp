@@ -24,6 +24,7 @@
 // QT Includes
 
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -105,6 +106,20 @@ KInvestmentView::~KInvestmentView()
   }
 
   delete d;
+}
+
+void KInvestmentView::setDefaultFocus()
+{
+  auto tab = static_cast<Tab>(m_tab->currentIndex());
+
+  switch (tab) {
+    case Tab::Equities:
+      QTimer::singleShot(0, m_equitiesTree, SLOT(setFocus()));
+      break;
+    case Tab::Securities:
+      QTimer::singleShot(0, m_securitiesTree, SLOT(setFocus()));
+      break;
+  }
 }
 
 void KInvestmentView::init()

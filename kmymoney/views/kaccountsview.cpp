@@ -29,6 +29,7 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QListWidget>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -71,6 +72,11 @@ KRecursiveFilterProxyModel *KAccountsView::getProxyModel()
 QList<AccountsModel::Columns> *KAccountsView::getProxyColumns()
 {
   return m_accountTree->getColumns(KMyMoneyView::View::Accounts);
+}
+
+void KAccountsView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_accountTree, SLOT(setFocus()));
 }
 
 bool KAccountsView::isLoaded()

@@ -51,6 +51,8 @@ public:
   explicit KInvestmentView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   ~KInvestmentView();
 
+  void setDefaultFocus();
+
 public slots:
   /**
     * This slot is used to reload all data from the MyMoneyFile engine.

@@ -39,6 +39,8 @@ public:
   explicit KOnlineJobOutbox(QWidget *parent = 0);
   ~KOnlineJobOutbox();
 
+  void setDefaultFocus();
+
   QStringList selectedOnlineJobs() const;
 
   void showEvent(QShowEvent* event);

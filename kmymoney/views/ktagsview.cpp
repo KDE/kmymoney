@@ -99,6 +99,11 @@ KTagsView::~KTagsView()
   }
 }
 
+void KTagsView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_searchWidget, SLOT(setFocus()));
+}
+
 void KTagsView::init()
 {
   m_needLoad = false;

@@ -327,6 +327,11 @@ QList<AccountsModel::Columns> *KBudgetView::getProxyColumns()
   return m_accountTree->getColumns(KMyMoneyView::View::Budget);
 }
 
+void KBudgetView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_budgetList, SLOT(setFocus()));
+}
+
 bool KBudgetView::isLoaded()
 {
   return !m_needLoad;

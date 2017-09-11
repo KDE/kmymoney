@@ -36,6 +36,7 @@
 #include <QPushButton>
 #include <QMenu>
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -72,6 +73,11 @@ KScheduledView::~KScheduledView()
 {
   if(!m_needLoad)
     writeConfig();
+}
+
+void KScheduledView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_searchWidget->searchLine(), SLOT(setFocus()));
 }
 
 void KScheduledView::init()

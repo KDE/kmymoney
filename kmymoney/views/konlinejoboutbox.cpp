@@ -24,6 +24,7 @@
 #include <KConfigGroup>
 #include <KMessageBox>
 #include <QAction>
+#include <QTimer>
 #include <QModelIndexList>
 #include <KActionCollection>
 
@@ -49,6 +50,11 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
     KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
     configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
   }
+}
+
+void KOnlineJobOutbox::setDefaultFocus()
+{
+  QTimer::singleShot(0, ui->m_onlineJobView, SLOT(setFocus()));
 }
 
 void KOnlineJobOutbox::init()

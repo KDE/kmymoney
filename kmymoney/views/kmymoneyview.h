@@ -519,17 +519,30 @@ public slots:
   void slotPrintView();
 
   /**
-    * This slot switches the view to present the home page
-    */
-  void slotShowHomePage();
-
-  /**
     * Called when the user changes the detail
     * setting of the transaction register
     *
     * @param detailed if true, the register is shown with all details
     */
   void slotShowTransactionDetail(bool detailed);
+
+private slots:
+  /**
+    * This slots switches the view to the specific page
+    */
+  void slotShowHomePage();
+  void slotShowInstitutionsPage();
+  void slotShowAccountsPage();
+  void slotShowSchedulesPage();
+  void slotShowCategoriesPage();
+  void slotShowTagsPage();
+  void slotShowPayeesPage();
+  void slotShowLedgersPage();
+  void slotShowInvestmentsPage();
+  void slotShowReportsPage();
+  void slotShowBudgetPage();
+  void slotShowForecastPage();
+  void slotShowOutboxPage();
 
 protected slots:
   /**

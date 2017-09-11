@@ -128,6 +128,8 @@ public:
   explicit KGlobalLedgerView(QWidget *parent = 0, const char *name = 0);
   ~KGlobalLedgerView();
 
+  void setDefaultFocus();
+
   /**
     * This method returns the id of the currently selected account
     * or QString() if none is selected.

@@ -36,6 +36,7 @@
 #include <QApplication>
 #include <QToolTip>
 #include <QPushButton>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -211,6 +212,11 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
 KGlobalLedgerView::~KGlobalLedgerView()
 {
   delete d;
+}
+
+void KGlobalLedgerView::setDefaultFocus()
+{
+  QTimer::singleShot(0, d->m_registerSearchLine->searchLine(), SLOT(setFocus()));
 }
 
 void KGlobalLedgerView::init()

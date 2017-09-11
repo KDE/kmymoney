@@ -93,6 +93,7 @@ public:
 
   KRecursiveFilterProxyModel    *getProxyModel();
   QList<AccountsModel::Columns> *getProxyColumns();
+  void                          setDefaultFocus();
   bool                          isLoaded();
 
   /**

@@ -56,6 +56,8 @@ public:
   KForecastView(QWidget *parent = 0);
   virtual ~KForecastView();
 
+  void setDefaultFocus();
+
   void showEvent(QShowEvent* event);
 
 public slots:

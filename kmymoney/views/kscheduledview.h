@@ -65,6 +65,7 @@ public:
     */
   ~KScheduledView();
 
+  void setDefaultFocus();
   /**
     * Called by KMyMoneyView.
     */

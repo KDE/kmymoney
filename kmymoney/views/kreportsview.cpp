@@ -335,6 +335,11 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
 {
 }
 
+void KReportsView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_tocTreeWidget, SLOT(setFocus()));
+}
+
 void KReportsView::init()
 {
   m_needLoad = false;

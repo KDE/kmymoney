@@ -31,6 +31,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -71,6 +72,11 @@ KRecursiveFilterProxyModel *KCategoriesView::getProxyModel()
 QList<AccountsModel::Columns> *KCategoriesView::getProxyColumns()
 {
   return m_accountTree->getColumns(KMyMoneyView::View::Categories);
+}
+
+void KCategoriesView::setDefaultFocus()
+{
+  QTimer::singleShot(0, m_accountTree, SLOT(setFocus()));
 }
 
 bool KCategoriesView::isLoaded()
