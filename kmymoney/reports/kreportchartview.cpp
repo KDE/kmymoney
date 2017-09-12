@@ -121,6 +121,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     case MyMoneyReport::eChartStackedBar: {
       CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane(this);
       cartesianPlane->setAutoAdjustVerticalRangeToData(2);
+      cartesianPlane->setRubberBandZoomingEnabled(true);
       replaceCoordinatePlane(cartesianPlane);
 
       // set-up axis type
