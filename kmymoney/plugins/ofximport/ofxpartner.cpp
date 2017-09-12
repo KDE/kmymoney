@@ -55,9 +55,6 @@
 #undef DELETE
 #endif
 
-#define MSN 0
-#define OFXHOME 1
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -94,7 +91,6 @@ void ValidateIndexCache()
 
   QMap<QString, QString> attr;
 
-#if OFXHOME
   fname = QUrl("file://" + directory + kBankFilename);
   QDir dir;
   dir.mkpath(directory);
@@ -102,27 +98,6 @@ void ValidateIndexCache()
   QFileInfo i(fname.path());
   if (needReload(i))
     get("", attr, QUrl(QStringLiteral("http://www.ofxhome.com/api.php?all=yes")), fname);
-#endif
-
-#if MSN
-  attr["content-type"] = "application/x-www-form-urlencoded";
-  attr["accept"] = "*/*";
-
-  fname = directory + kBankFilename;
-  QFileInfo i(fname.path());
-  if (needReload(i))
-    post("T=1&S=*&R=1&O=0&TEST=0", attr, QUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
-
-  fname = directory + kCcFilename;
-  i = QFileInfo(fname.path());
-  if (needReload(i))
-    post("T=2&S=*&R=1&O=0&TEST=0", attr, QUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER) , fname);
-
-  fname = directory + kInvFilename;
-  i = QFileInfo(fname.path());
-  if (needReload(i))
-    post("T=3&S=*&R=1&O=0&TEST=0", attr, QUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
-#endif
 }
 
 static void ParseFile(QMap<QString, QString>& result, const QString& fileName, const QString& bankName)
@@ -130,7 +105,6 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
   QFile f(fileName);
   if (f.open(QIODevice::ReadOnly)) {
     QTextStream stream(&f);
-#if OFXHOME
     stream.setCodec("UTF-8");
     QString msg;
     int errl, errc;
@@ -152,39 +126,6 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
         }
       }
     }
-#endif
-
-#if MSN
-    stream.setCodec("UTF-16");
-    QString msg;
-    int errl, errc;
-    QDomDocument doc;
-    if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
-      QDomNodeList olist = doc.elementsByTagName("prov");
-      for (int i = 0; i < olist.count(); ++i) {
-        QDomNode onode = olist.item(i);
-        if (onode.isElement()) {
-          bool collectGuid = false;
-          QDomElement elo = onode.toElement();
-          QDomNodeList ilist = onode.childNodes();
-          for (int j = 0; j < ilist.count(); ++j) {
-            QDomNode inode = ilist.item(j);
-            QDomElement el = inode.toElement();
-            if (el.tagName() == "name") {
-              if (bankName.isEmpty())
-                result[el.text()].clear();
-              else if (el.text() == bankName) {
-                collectGuid = true;
-              }
-            }
-            if (el.tagName() == "guid" && collectGuid) {
-              result[el.text()].clear();
-            }
-          }
-        }
-      }
-    }
-#endif
     f.close();
   }
 }
@@ -197,10 +138,6 @@ QStringList BankNames()
   ValidateIndexCache();
 
   ParseFile(result, directory + kBankFilename, QString());
-#if MSN
-  ParseFile(result, directory + kCcFilename, QString());
-  ParseFile(result, directory + kInvFilename, QString());
-#endif
 
   // Add Innovision
   result["Innovision"].clear();
@@ -213,10 +150,6 @@ QStringList FipidForBank(const QString& bank)
   QMap<QString, QString> result;
 
   ParseFile(result, directory + kBankFilename, bank);
-#if MSN
-  ParseFile(result, directory + kCcFilename, bank);
-  ParseFile(result, directory + kInvFilename, bank);
-#endif
 
   // the fipid for Innovision is 1.
   if (bank == "Innovision")
@@ -289,13 +222,8 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
 
   QUrl guidFile(QString("file://%1fipid-%2.xml").arg(directory).arg(fipid));
 
-  // Apparently at some point in time, for VER=6 msn returned an online URL
-  // to a static error page (http://moneycentral.msn.com/cust404.htm).
-  // Increasing to VER=9 solved the problem. This may happen again in the
-  // future.
   QFileInfo i(guidFile.path());
 
-#if OFXHOME
   if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
     get("", attr, QUrl(QString("http://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
 
@@ -320,37 +248,6 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
       result.investments = true;
     }
   }
-#endif
-
-#if MSN
-  attr["content-type"] = "application/x-www-form-urlencoded";
-  attr["accept"] = "*/*";
-
-  if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
-    get("", attr, QUrl(QString("http://moneycentral.msn.com/money/2005/mnynet/service/olsvcupd/OnlSvcBrandInfo.aspx?MSNGUID=&GUID=%1&SKU=3&VER=" VER).arg(fipid)), guidFile);
-
-  QFile f(guidFile.path());
-  if (f.open(QIODevice::ReadOnly)) {
-    QTextStream stream(&f);
-    stream.setCodec("UTF-16");
-    QString msg;
-    int errl, errc;
-    QDomDocument doc;
-    if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
-      QString fid = extractNodeText(doc, "ProviderSettings/FID");
-      QString org = extractNodeText(doc, "ProviderSettings/Org");
-      QString url = extractNodeText(doc, "ProviderSettings/ProviderURL");
-      strncpy(result.fid, fid.toLatin1(), OFX_FID_LENGTH - 1);
-      strncpy(result.org, org.toLatin1(), OFX_ORG_LENGTH - 1);
-      strncpy(result.url, url.toLatin1(), OFX_URL_LENGTH - 1);
-      result.accountlist = (extractNodeText(doc, "ProviderSettings/AcctListAvail") == "1");
-      result.statements = (extractNodeText(doc, "BankingCapabilities/Bank") == "1");
-      result.billpay = (extractNodeText(doc, "BillPayCapabilities/Pay") == "1");
-      result.investments = (extractNodeText(doc, "InvestmentCapabilities/BrkStmt") == "1");
-    }
-  }
-#endif
-
   return result;
 }
 
@@ -463,8 +360,6 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
   if(m_postJob) {
     int error = m_postJob->error();
     if (error) {
-      // TODO: port to KF5
-      //m_job->ui()->setWindow(0);
       m_postJob->uiDelegate()->showErrorMessage();
       QFile::remove(m_dst.path());
 
@@ -486,8 +381,6 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
   } else if(m_getJob) {
     int error = m_getJob->error();
     if (error) {
-      // TODO: port to KF5
-      //m_job->ui()->setWindow(0);
       m_getJob->uiDelegate()->showErrorMessage();
       QFile::remove(m_dst.path());
     }
