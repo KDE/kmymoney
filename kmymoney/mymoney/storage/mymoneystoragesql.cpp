@@ -43,7 +43,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
-// TODO: port KF5
+// TODO: port KF5 (needed for payeeidentifier plugin)
 //#include <KServiceTypeTrader>
 
 // ----------------------------------------------------------------------------
@@ -2615,7 +2615,7 @@ bool MyMoneyStorageSql::setupStoragePlugin(QString iid)
     return false;
 
   QString errorMsg;
-  // TODO: port KF5
+  // TODO: port KF5 (needed for payeeidentifier plugin)
 #if 0
   KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
     QLatin1String("KMyMoney/sqlStoragePlugin"),
