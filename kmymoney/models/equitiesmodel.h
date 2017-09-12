@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KF5/KItemModels/KRecursiveFilterProxyModel>
+#include <KItemModels/KRecursiveFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
