@@ -2402,11 +2402,8 @@ void KMyMoneyApp::slotBackupMount()
 
 bool KMyMoneyApp::slotBackupWriteFile()
 {
-  QString today;
-  today.sprintf("-%04d-%02d-%02d.kmy",
-                QDate::currentDate().year(),
-                QDate::currentDate().month(),
-                QDate::currentDate().day());
+  QFileInfo fi(d->m_fileName.fileName());
+  QString today = QDate::currentDate().toString("-yyyy-MM-dd.") + fi.suffix();
   QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
   KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
 
