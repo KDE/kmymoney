@@ -381,8 +381,8 @@ void KReportsView::init()
   connect(m_reportTabWidget, SIGNAL(tabCloseRequested(int)),
           this, SLOT(slotClose(int)));
 
-  connect(m_tocTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
-          this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
+  connect(m_tocTreeWidget, &QTreeWidget::itemActivated,
+          this, &KReportsView::slotItemDoubleClicked);
 
   connect(m_tocTreeWidget, SIGNAL(customContextMenuRequested(QPoint)),
           this, SLOT(slotListContextMenu(QPoint)));
