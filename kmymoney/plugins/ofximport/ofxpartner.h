@@ -22,30 +22,6 @@
 // QT Includes
 
 #include <QObject>
-// TODO: port to KF5
-#if 0
-#include <QHttp>
-#else
-// in QT5 QHttp is no longer public
-// dummy used for compilation
-// port this to http://doc.qt.io/qt-5/qnetworkaccessmanager.html
-struct QHttp
-{
-  enum Error {
-    NoError,
-    UnknownError,
-    HostNotFound,
-    ConnectionRefused,
-    UnexpectedClose,
-    InvalidResponseHeader,
-    WrongContentLength,
-    Aborted,
-    AuthenticationRequiredError,
-    ProxyAuthenticationRequiredError
-  };
-  QHttp(QString) {}
-};
-#endif
 #include <QFile>
 #include <QEventLoop>
 #include <QPointer>
@@ -91,7 +67,12 @@ public:
   OfxHttpRequest(const QString& method, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpRequest();
 
-  QHttp::Error error() const {
+  /**
+   * returns the error code provided by KIO::TransferJob or
+   * KIO::Job depending on post() or get() operation. If it
+   * is not set by the actual operation, it returns -1.
+   */
+  int error() const {
     return m_error;
   }
 
@@ -105,7 +86,7 @@ private:
   Private*          d;
   QUrl              m_dst;
   QFile             m_file;
-  QHttp::Error      m_error;
+  int               m_error;
   KIO::TransferJob* m_postJob;
   KIO::Job*         m_getJob;
   QPointer<QEventLoop> m_eventLoop;

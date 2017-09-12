@@ -257,7 +257,7 @@ bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl 
   QByteArray req;
   OfxHttpRequest job("GET", url, req, attr, filename, false);
 
-  return job.error() == QHttp::NoError;
+  return job.error() == 0;
 }
 
 bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename)
@@ -265,7 +265,7 @@ bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl
   QByteArray req(request.toUtf8());
 
   OfxHttpRequest job("POST", url, req, attr, filename, false);
-  return job.error() == QHttp::NoError;
+  return job.error() == 0;
 }
 
 } // namespace OfxPartner
@@ -276,11 +276,12 @@ public:
   QFile  m_fpTrace;
 };
 
-OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo) :
-    d(new Private),
-    m_dst(dst),
-    m_postJob(0),
-    m_getJob(0)
+OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo)
+    : d(new Private)
+    , m_dst(dst)
+    , m_error(-1)
+    , m_postJob(0)
+    , m_getJob(0)
 {
   m_eventLoop = new QEventLoop(qApp->activeWindow());
 
@@ -358,8 +359,8 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
   }
 
   if(m_postJob) {
-    int error = m_postJob->error();
-    if (error) {
+    m_error = m_postJob->error();
+    if (m_error) {
       m_postJob->uiDelegate()->showErrorMessage();
       QFile::remove(m_dst.path());
 
@@ -379,8 +380,8 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
     }
 
   } else if(m_getJob) {
-    int error = m_getJob->error();
-    if (error) {
+    m_error = m_getJob->error();
+    if (m_error) {
       m_getJob->uiDelegate()->showErrorMessage();
       QFile::remove(m_dst.path());
     }
