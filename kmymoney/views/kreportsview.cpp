@@ -730,15 +730,11 @@ void KReportsView::slotSaveView()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (tab) {
-    QString filterList = i18nc("CSV (Filefilter)", "CSV files") + " (*.csv)"  + ";;" + i18nc("HTML (Filefilter)", "HTML files") + " (*.html)";
+    QString filterList = i18nc("CSV (Filefilter)", "CSV files") + QLatin1String(" (*.csv);;") + i18nc("HTML (Filefilter)", "HTML files") + QLatin1String(" (*.html)");
     QUrl newURL = QFileDialog::getSaveFileUrl(this, i18n("Export as"), QUrl::fromLocalFile(KRecentDirs::dir(":kmymoney-export")), filterList, &m_selectedExportFilter);
     if (!newURL.isEmpty()) {
       KRecentDirs::add(":kmymoney-export", newURL.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
       QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
-
-      // TODO  BUG:342776 port to KF5
-      if (newName.indexOf('.') == -1)
-        newName.append(".html");
 
       try {
         tab->saveAs(newName, true);
