@@ -199,16 +199,15 @@ public:
 
 
 
-
+int AmountEdit::standardPrecision = 2;
 
 AmountEdit::AmountEdit(QWidget *parent, const int prec)
   : QLineEdit(parent)
   , d(new Private(this))
 {
   d->m_prec = prec;
-  // TODO: port KF5
   if (prec < -1 || prec > 20) {
-    d->m_prec = 2;//KLocale::global()->monetaryDecimalPlaces();
+    d->m_prec = standardPrecision;
   }
   init();
 }
@@ -223,6 +222,13 @@ AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget *parent)
 
 AmountEdit::~AmountEdit()
 {
+}
+
+void AmountEdit::setStandardPrecision(int prec)
+{
+  if (prec >= 0 && prec < 20) {
+    standardPrecision = prec;
+  }
 }
 
 void AmountEdit::init()

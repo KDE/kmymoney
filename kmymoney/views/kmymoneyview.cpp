@@ -102,6 +102,7 @@
 #include <equitiesmodel.h>
 #include <securitiesmodel.h>
 #include <icons.h>
+#include "amountedit.h"
 
 using namespace Icons;
 
@@ -1099,6 +1100,9 @@ bool KMyMoneyView::initializeStorage()
     selectBaseCurrency();
   }
 
+  // setup the standard precision
+  AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KPageWidgetItem* page;
   KConfigGroup grp = config->group("General Options");
@@ -1506,6 +1510,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
         KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", baseCurrency.name(), e.what()), i18n("Set base currency"));
       }
     }
+    AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
   }
 }
 
