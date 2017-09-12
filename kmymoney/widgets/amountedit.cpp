@@ -101,7 +101,7 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
     for (int idx = s.indexOf(n) ; idx >= 0 ; idx = s.indexOf(n, idx + 1))
       s.replace(idx, n.length(), "-");
 
-  // TODO: port KF5
+  // TODO: port KF5 (support for paren around negative numbers)
 #if 0
   // Take care of monetary parens around the value if selected via
   // the locale settings.
@@ -141,7 +141,7 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
     return Acceptable;
 
   QValidator::State rc = QDoubleValidator::validate(s, _p);
-  // TODO: port KF5
+  // TODO: port KF5 (support for paren around negative numbers)
 #if 0
   if (rc == Acceptable) {
     // If the numeric value is acceptable, we check if the parens
