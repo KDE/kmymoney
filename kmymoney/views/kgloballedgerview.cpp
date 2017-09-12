@@ -309,8 +309,7 @@ void KGlobalLedgerView::init()
   connect(m_register, SIGNAL(editTransaction()), this, SIGNAL(startEdit()));
   connect(m_register, SIGNAL(emptyItemSelected()), this, SLOT(slotNewTransaction()));
   connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)));
-  // TODO: port to KF5 - the current implementation is no longer working
-  //connect(d->m_mousePressFilter, SIGNAL(mousePressedOnExternalWidget(bool&)), this, SIGNAL(cancelOrEndEdit(bool&)));
+  connect(d->m_mousePressFilter, SIGNAL(mousePressedOnExternalWidget(bool&)), this, SIGNAL(cancelOrEndEdit(bool&)));
 
   connect(m_form, SIGNAL(newTransaction(KMyMoneyRegister::Action)), this, SLOT(slotNewTransaction(KMyMoneyRegister::Action)));
 
