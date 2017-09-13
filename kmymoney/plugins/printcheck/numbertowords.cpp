@@ -69,7 +69,7 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
   return groupText;
 }
 
-QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
+QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed64 denom)
 {
   // Zero rule
   if (money.isZero())
@@ -78,10 +78,8 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   // hold three-digit groups
   QList<int> digitGroups;
 
-  // TODO: prot this to KF5
-  int precision = 2;//KLocale::global()->monetaryDecimalPlaces();
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
-  int fraction = qRound((money.toDouble() - integer) * MyMoneyMoney::precToDenom(precision));
+  int fraction = qRound((money.toDouble() - integer) * denom);
 
   // Extract the three-digit groups
   for (int i = 0; i < 4; i++) {
@@ -120,7 +118,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
 
   if (fraction != 0)
     return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
-                 "%1 and %2/%3", combined, fraction, MyMoneyMoney::precToDenom(precision));
+                 "%1 and %2/%3", combined, fraction, denom);
   else
     return combined;
 }

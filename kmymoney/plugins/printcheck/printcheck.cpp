@@ -136,8 +136,9 @@ void KMMPrintCheckPlugin::slotPrintCheck()
       continue; // skip this check since it was already printed
 
     QString checkHTML = d->m_checkTemplateHTML;
-    MyMoneySecurity currency = file->currency(file->account((*it).split().accountId()).currencyId());
-    MyMoneyInstitution institution = file->institution(file->account((*it).split().accountId()).institutionId());
+    const MyMoneyAccount account = file->account((*it).split().accountId());
+    const MyMoneySecurity currency = file->currency(account.currencyId());
+    const MyMoneyInstitution institution = file->institution(file->account((*it).split().accountId()).institutionId());
 
     // replace the predefined tokens
     // data about the user
@@ -161,7 +162,7 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
     checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
     checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
-    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs(), currency.smallestAccountFraction()));
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 

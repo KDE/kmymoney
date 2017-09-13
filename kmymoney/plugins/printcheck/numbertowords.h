@@ -31,7 +31,7 @@ private:
 
 public:
   MyMoneyMoneyToWordsConverter();
-  QString convert(const MyMoneyMoney & money);
+  QString convert(const MyMoneyMoney & money, signed64 denom = 100);
 
 private:
   QStringList m_smallNumbers;
