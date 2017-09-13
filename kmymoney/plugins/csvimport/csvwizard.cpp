@@ -118,7 +118,7 @@ CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
   m_colorBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::PositiveText);
   m_errorBrush = KColorScheme(QPalette::Normal).background(KColorScheme::NegativeBackground);
   m_errorBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
-
+  m_wiz->setSideWidget(ui->wizardBox);
   show();
 }
 
@@ -484,6 +484,7 @@ void IntroPage::initializePage()
             )
           );
   }
+  m_dlg->ui->tableView->hide();
 }
 
 bool IntroPage::validatePage()
@@ -663,6 +664,7 @@ SeparatorPage::~SeparatorPage()
 
 void SeparatorPage::initializePage()
 {
+  m_dlg->ui->tableView->show();
   // comboboxes are preset to -1 and, in new profile case, can be set here to -1 as well ...
   // ... so block their signals until setting them ...
   ui->m_encoding->blockSignals(true);

@@ -541,6 +541,24 @@ May also be selected to contain a copy of the type or name column.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_dateCol</tabstop>
+  <tabstop>m_typeCol</tabstop>
+  <tabstop>m_memoCol</tabstop>
+  <tabstop>m_priceCol</tabstop>
+  <tabstop>m_quantityCol</tabstop>
+  <tabstop>m_amountCol</tabstop>
+  <tabstop>m_priceFraction</tabstop>
+  <tabstop>m_symbolCol</tabstop>
+  <tabstop>m_nameCol</tabstop>
+  <tabstop>m_feeCol</tabstop>
+  <tabstop>m_feeIsPercentage</tabstop>
+  <tabstop>m_feeRate</tabstop>
+  <tabstop>m_minFee</tabstop>
+  <tabstop>m_calculateFee</tabstop>
+  <tabstop>m_clear</tabstop>
+  <tabstop>m_clearFee</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

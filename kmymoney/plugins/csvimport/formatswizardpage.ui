@@ -266,6 +266,11 @@ check that the selected symbol matches the data.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_decimalSymbol</tabstop>
+  <tabstop>m_thousandsDelimiter</tabstop>
+  <tabstop>m_dateFormat</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

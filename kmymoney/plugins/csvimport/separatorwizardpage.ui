@@ -235,6 +235,11 @@ This will reset any existing field choices.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_encoding</tabstop>
+  <tabstop>m_fieldDelimiter</tabstop>
+  <tabstop>m_textDelimiter</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -270,6 +270,17 @@ Only useful if a profile has already been setup.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_profilesBank</tabstop>
+  <tabstop>m_profilesInvest</tabstop>
+  <tabstop>m_profilesCurrencyPrices</tabstop>
+  <tabstop>m_profilesStockPrices</tabstop>
+  <tabstop>m_profiles</tabstop>
+  <tabstop>m_skipSetup</tabstop>
+  <tabstop>m_add</tabstop>
+  <tabstop>m_remove</tabstop>
+  <tabstop>m_rename</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

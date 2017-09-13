@@ -25,6 +25,9 @@
   <layout class="QVBoxLayout" name="verticalLayout" stretch="100,1">
    <item>
     <widget class="QTableView" name="tableView">
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
      <property name="sizeAdjustPolicy">
       <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
@@ -33,14 +36,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QGroupBox" name="groupBox_stage">
+      <widget class="QGroupBox" name="wizardBox">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="6,10,10,0,10,10,40">
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1,1,1,1,400">
         <item>
          <spacer name="verticalSpacer_2">
           <property name="orientation">

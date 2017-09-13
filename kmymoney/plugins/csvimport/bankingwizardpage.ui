@@ -439,6 +439,20 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_numberCol</tabstop>
+  <tabstop>m_dateCol</tabstop>
+  <tabstop>m_payeeCol</tabstop>
+  <tabstop>m_categoryCol</tabstop>
+  <tabstop>m_memoCol</tabstop>
+  <tabstop>m_radioAmount</tabstop>
+  <tabstop>m_radioDebitCredit</tabstop>
+  <tabstop>m_amountCol</tabstop>
+  <tabstop>m_debitCol</tabstop>
+  <tabstop>m_creditCol</tabstop>
+  <tabstop>m_oppositeSigns</tabstop>
+  <tabstop>m_clear</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
