@@ -563,9 +563,12 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   d->m_backupState = BACKUP_IDLE;
 
-  // TODO: port kf5
-  int weekStart = 1;//KLocale::global()->workingWeekStartDay();
-  int weekEnd = 7;//KLocale::global()->workingWeekEndDay();
+  QLocale locale;
+  int weekStart = locale.firstDayOfWeek();
+  int weekEnd = weekStart-1;
+  if (weekEnd < Qt::Monday) {
+    weekEnd = Qt::Sunday;
+  }
   bool startFirst = (weekStart < weekEnd);
   for (int i = 0; i < 8; i++) {
     if (startFirst)
