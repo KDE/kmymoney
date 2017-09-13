@@ -87,7 +87,7 @@ bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
-  // TODO: port this to KF5
+  // TODO: port this to KF5 (NetAccess)
 #if 0
   if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, 0)) {
     if (KMessageBox::warningYesNo(0, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)

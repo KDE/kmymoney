@@ -6867,7 +6867,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
       // Bring this window to the forefront.  This method was suggested by
       // Lubos Lunak <l.lunak@suse.cz> of the KDE core development team.
-      // TODO: port KF5
+      // TODO: port KF5 (WebConnect)
       //KStartupInfo::setNewStartupId(this, asn_id);
 
       // Make sure we have an open file
