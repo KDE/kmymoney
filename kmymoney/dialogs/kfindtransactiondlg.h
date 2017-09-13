@@ -72,7 +72,7 @@ public:
   /**
    @param withEquityAccounts set to false to hide equity accounts in account page
   */
-  KFindTransactionDlg(QWidget *parent = 0, bool withEquityAccounts=true);
+  KFindTransactionDlg(QWidget *parent = 0, bool withEquityAccounts = false);
   ~KFindTransactionDlg();
 
   virtual bool eventFilter(QObject *o, QEvent *e);
