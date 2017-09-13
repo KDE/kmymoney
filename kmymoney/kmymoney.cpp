@@ -2240,7 +2240,7 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
-  // TODO: port KF5
+  // TODO: port KF5 (NetAccess)
   //if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
   //  if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
   //    reallySaveFile = false;
@@ -2359,8 +2359,7 @@ void KMyMoneyApp::slotBackupFile()
                        i18n("Local files only"));
     return;
   }
-  // TODO: port KF5
-#if 0
+
   QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
 #ifdef Q_OS_WIN
   backupDlg->mountCheckBox->setEnabled(false);
@@ -2391,7 +2390,6 @@ void KMyMoneyApp::slotBackupFile()
   }
 
   delete backupDlg;
-#endif
 }
 
 void KMyMoneyApp::slotBackupMount()
@@ -2454,8 +2452,6 @@ void KMyMoneyApp::slotBackupFinish()
 
 void KMyMoneyApp::slotBackupHandleEvents()
 {
-  // TODO: port KF5
-#if 0
   switch (d->m_backupState) {
     case BACKUP_MOUNTING:
 
@@ -2520,7 +2516,6 @@ void KMyMoneyApp::slotBackupHandleEvents()
       ready();
       break;
   }
-#endif
 }
 
 void KMyMoneyApp::slotShowTipOfTheDay()
