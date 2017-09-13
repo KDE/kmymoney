@@ -920,6 +920,7 @@
    <class>kMyMoneyEdit</class>
    <extends>QWidget</extends>
    <header>kmymoneyedit.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KMyMoneyRegister::Register</class>
@@ -927,6 +928,29 @@
    <header>register.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_tabWidget</tabstop>
+  <tabstop>m_criteriaTab</tabstop>
+  <tabstop>m_textEdit</tabstop>
+  <tabstop>m_textNegate</tabstop>
+  <tabstop>m_caseSensitive</tabstop>
+  <tabstop>m_regExp</tabstop>
+  <tabstop>m_amountButton</tabstop>
+  <tabstop>m_amountRangeButton</tabstop>
+  <tabstop>m_tagsView</tabstop>
+  <tabstop>m_emptyTagsButton</tabstop>
+  <tabstop>m_allTagsButton</tabstop>
+  <tabstop>m_clearTagsButton</tabstop>
+  <tabstop>m_payeesView</tabstop>
+  <tabstop>m_emptyPayeesButton</tabstop>
+  <tabstop>m_allPayeesButton</tabstop>
+  <tabstop>m_clearPayeesButton</tabstop>
+  <tabstop>m_typeBox</tabstop>
+  <tabstop>m_stateBox</tabstop>
+  <tabstop>m_validityBox</tabstop>
+  <tabstop>m_nrButton</tabstop>
+  <tabstop>m_nrRangeButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
  <buttongroups>

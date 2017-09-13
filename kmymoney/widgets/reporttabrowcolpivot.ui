@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>280</height>
+    <height>294</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -238,6 +238,16 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_checkTotalColumn</tabstop>
+  <tabstop>m_checkTotalRow</tabstop>
+  <tabstop>m_comboRows</tabstop>
+  <tabstop>m_comboDetail</tabstop>
+  <tabstop>m_movingAverageDays</tabstop>
+  <tabstop>m_checkScheduled</tabstop>
+  <tabstop>m_checkTransfers</tabstop>
+  <tabstop>m_checkUnused</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

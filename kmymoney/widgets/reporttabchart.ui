@@ -186,6 +186,14 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_checkCHGridLines</tabstop>
+  <tabstop>m_checkSVGridLines</tabstop>
+  <tabstop>m_checkValues</tabstop>
+  <tabstop>m_checkShowChart</tabstop>
+  <tabstop>m_logYaxis</tabstop>
+  <tabstop>m_lineWidth</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

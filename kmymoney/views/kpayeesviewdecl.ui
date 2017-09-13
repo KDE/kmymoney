@@ -144,20 +144,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="KMyMoneyRegister::Register" name="m_register">
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-               <column/>
-              </widget>
+              <widget class="KMyMoneyRegister::Register" name="m_register" native="true"/>
              </item>
              <item>
               <widget class="QLabel" name="m_balanceLabel">
@@ -555,14 +542,14 @@ new transactions with this payee</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KEditListWidget</class>
@@ -576,7 +563,7 @@ new transactions with this payee</string>
   </customwidget>
   <customwidget>
    <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
+   <extends>QWidget</extends>
    <header>register.h</header>
   </customwidget>
   <customwidget>
@@ -592,6 +579,29 @@ new transactions with this payee</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_tabWidget</tabstop>
+  <tabstop>m_payeesList</tabstop>
+  <tabstop>m_newButton</tabstop>
+  <tabstop>m_renameButton</tabstop>
+  <tabstop>m_deleteButton</tabstop>
+  <tabstop>m_mergeButton</tabstop>
+  <tabstop>m_filterBox</tabstop>
+  <tabstop>addressEdit</tabstop>
+  <tabstop>postcodeEdit</tabstop>
+  <tabstop>telephoneEdit</tabstop>
+  <tabstop>emailEdit</tabstop>
+  <tabstop>m_sendMail</tabstop>
+  <tabstop>notesEdit</tabstop>
+  <tabstop>matchTypeCombo</tabstop>
+  <tabstop>checkMatchIgnoreCase</tabstop>
+  <tabstop>checkEnableDefaultCategory</tabstop>
+  <tabstop>comboDefaultCategory</tabstop>
+  <tabstop>buttonSuggestACategory</tabstop>
+  <tabstop>m_helpButton</tabstop>
+  <tabstop>m_syncAddressbook</tabstop>
+  <tabstop>m_updateButton</tabstop>
+ </tabstops>
  <includes>
   <include location="local">../widgets/kmymoneyaccountcombo.h</include>
  </includes>

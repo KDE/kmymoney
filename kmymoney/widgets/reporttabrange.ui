@@ -236,6 +236,15 @@
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_dataLock</tabstop>
+  <tabstop>m_dataRangeStart</tabstop>
+  <tabstop>m_dataRangeEnd</tabstop>
+  <tabstop>m_dataMajorTick</tabstop>
+  <tabstop>m_dataMinorTick</tabstop>
+  <tabstop>m_yLabelsPrecision</tabstop>
+  <tabstop>m_comboColumns</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -422,6 +422,26 @@
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_comboOrganizeBy</tabstop>
+  <tabstop>m_checkNumber</tabstop>
+  <tabstop>m_checkCategory</tabstop>
+  <tabstop>m_checkTag</tabstop>
+  <tabstop>m_checkAccount</tabstop>
+  <tabstop>m_checkShares</tabstop>
+  <tabstop>m_checkAction</tabstop>
+  <tabstop>m_checkPayee</tabstop>
+  <tabstop>m_checkMemo</tabstop>
+  <tabstop>m_checkReconciled</tabstop>
+  <tabstop>m_checkPrice</tabstop>
+  <tabstop>m_checkBalance</tabstop>
+  <tabstop>m_checkTax</tabstop>
+  <tabstop>m_checkInvestments</tabstop>
+  <tabstop>m_checkLoans</tabstop>
+  <tabstop>m_checkHideSplitDetails</tabstop>
+  <tabstop>m_checkHideTransactions</tabstop>
+  <tabstop>m_checkHideTotals</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
