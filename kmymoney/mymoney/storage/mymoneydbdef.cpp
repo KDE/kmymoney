@@ -68,7 +68,7 @@ MyMoneyDbDef::MyMoneyDbDef()
    ?ISKEY - where there is no primary key, these fields can be used to uniquely identify a record
   Default is that a field is not a part of a primary key, nullable, and if numeric, signed */
 
-static const bool PRIMARYKEY = true; //!< @todo KF5: Replace const by constexpr
+static const bool PRIMARYKEY = true;
 static const bool NOTNULL = true;
 static const bool UNSIGNED = false;
 
