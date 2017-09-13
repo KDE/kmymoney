@@ -81,6 +81,7 @@
 #include <kconfigdialog.h>
 #include <kxmlguifactory.h>
 #include <krecentfilesaction.h>
+#include <KRecentDirs>
 #include <ktoolinvocation.h>
 #include <KSharedConfig>
 #include <KProcess>
@@ -1363,25 +1364,28 @@ void KMyMoneyApp::slotFileNew()
   }
 }
 
-QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget)
+QUrl KMyMoneyApp::selectFile(const QString& title, const QString& _path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget)
 {
-  Q_UNUSED(mask)
-  Q_UNUSED(mode)
   QString path(_path);
 
   // if the path is not specified open the file dialog in the last used directory
   // 'kmymoney' is the keyword that identifies the last used directory in KFileDialog
-  if (path.isEmpty())
-    path = "kfiledialog:///kmymoney-import";
+  if (path.isEmpty()) {
+    path = KRecentDirs::dir(":kmymoney-import");
+  }
 
-  // TODO: port KF5
-  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), path);
-  //dialog->setMode(mode);
+  QPointer<QFileDialog> dialog = new QFileDialog(this, title, path, mask);
+  dialog->setFileMode(mode);
 
   QUrl url;
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    // TODO: port KF5
-    //url = dialog->selectedUrl();
+    QList<QUrl> selectedUrls = dialog->selectedUrls();
+    if (!selectedUrls.isEmpty()) {
+      url = selectedUrls.first();
+      if (_path.isEmpty()) {
+        KRecentDirs::add(":kmymoney-import", url.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
+      }
+    }
   }
 
   // in case we have an additional widget, we remove it from the
@@ -1480,16 +1484,23 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 #endif
   if (!duplicate) {
     QUrl newurl = url;
-    if ((newurl.scheme() == "sql")) {
-      if (QUrlQuery(newurl).queryItemValue("driver") == "QMYSQL3") { // fix any old urls
-        // TODO: port KF5
-        //newurl.removeQueryItem("driver");
-        //newurl.addQueryItem("driver", "QMYSQL");
+    if ((newurl.scheme() == QLatin1String("sql"))) {
+      const QString key = QLatin1String("driver");
+      // take care and convert some old url to their new counterpart
+      QUrlQuery query(newurl);
+      if (query.queryItemValue(key) == QLatin1String("QMYSQL3")) { // fix any old urls
+        query.removeQueryItem(key);
+        query.addQueryItem(key, QLatin1String("QMYSQL"));
       }
-      if (QUrlQuery(newurl).queryItemValue("driver") == "QSQLITE3") {
-        // TODO: port KF5
-        //newurl.removeQueryItem("driver");
-        //newurl.addQueryItem("driver", "QSQLITE");
+      if (query.queryItemValue(key) == QLatin1String("QSQLITE3")) {
+        query.removeQueryItem(key);
+        query.addQueryItem(key, QLatin1String("QSQLITE"));
+      }
+      newurl.setQuery(query);
+
+      if (query.queryItemValue(key) == QLatin1String("QSQLITE")) {
+        newurl.setUserInfo(QString());
+        newurl.setHost(QString());
       }
       // check if a password is needed. it may be if the URL came from the last/recent file list
       QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, newurl);
@@ -1499,7 +1510,7 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       }
       // if we need to supply a password, then show the dialog
       // otherwise it isn't needed
-      if ((QUrlQuery(newurl).queryItemValue("secure").toLower() == "yes") && newurl.password().isEmpty()) {
+      if ((query.queryItemValue("secure").toLower() == QLatin1String("yes")) && newurl.password().isEmpty()) {
         if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
           newurl = dialog->selectedURL();
         } else {
@@ -1509,8 +1520,8 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       }
       delete dialog;
     }
-    // TODO: port KF5
-    if ((newurl.scheme() == "sql") || (newurl.isValid() /*&& KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this)*/)) {
+    // TODO: port KF5 (NetAccess)
+    if ((newurl.scheme() == QLatin1String("sql")) || (newurl.isValid() /*&& KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this)*/)) {
       slotFileClose();
       if (!d->m_myMoneyView->fileOpen()) {
         try {
