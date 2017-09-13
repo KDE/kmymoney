@@ -224,7 +224,7 @@ void kMyMoneyEdit::init()
   editLayout->setContentsMargins(0, 0, 0, 0);
 
   allowEmpty = false;
-  m_edit = new kMyMoneyLineEdit(nullptr, true);
+  m_edit = new kMyMoneyLineEdit(this, true);
   m_edit->installEventFilter(this);
   setFocusProxy(m_edit);
   editLayout->addWidget(m_edit);
@@ -238,9 +238,8 @@ void kMyMoneyEdit::init()
   QVBoxLayout *calculatorFrameVBoxLayout = new QVBoxLayout(m_calculatorFrame);
   calculatorFrameVBoxLayout->setMargin(0);
   m_calculatorFrame->setWindowFlags(Qt::Popup);
-  editLayout->addWidget(m_calculatorFrame);
 
-  m_calculator = new kMyMoneyCalculator;
+  m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
   calculatorFrameVBoxLayout->addWidget(m_calculator);
   m_calculatorFrame->hide();
 
