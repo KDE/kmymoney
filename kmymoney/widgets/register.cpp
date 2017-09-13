@@ -141,12 +141,9 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 
   for (it = sortOrder.begin(); it != sortOrder.end(); ++it) {
     TransactionSortField sortField = static_cast<TransactionSortField>(*it);
-    switch (sortField) {
+    switch (qAbs(static_cast<int>(sortField))) {
       case PostDateSort:
         rc = i2->sortPostDate().daysTo(i1->sortPostDate());
-        if (rc == 0) {
-          rc = i1->sortSamePostDate() - i2->sortSamePostDate();
-        }
         break;
 
       case EntryDateSort:
@@ -214,9 +211,18 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
         break;
     }
 
+    // take care of group markers, but only first sort item
+    if ((rc == 0) && (it == sortOrder.begin())) {
+      rc = i1->sortSamePostDate() - i2->sortSamePostDate();
+      if (rc) {
+        return rc < 0;
+      }
+    }
+
     // the items differ for this sort key so we can return a result
-    if (rc != 0)
+    if (rc != 0) {
       return (*it < 0) ? rc >= 0 : rc < 0;
+    }
   }
 
   if (rc == 0) {
@@ -1480,7 +1486,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     QList<RegisterItem*> itemList = selectedItems();
     bool okToSelect = true;
     int cnt = itemList.count();
-    const bool scheduledTransactionSelected = (cnt > 0 && itemList.front() && typeid(*(itemList.front())) == typeid(StdTransactionScheduled));
+    const bool scheduledTransactionSelected = (cnt > 0 && itemList.front() && (typeid(*(itemList.front())) == typeid(StdTransactionScheduled)));
     if (buttonState & Qt::LeftButton) {
       if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
           || (m_selectAnchor == 0)) {
