@@ -69,7 +69,7 @@ set(dialogs_UI
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
   knewequityentrydecl.ui editpersonaldatadlgdecl.ui kpayeereassigndlgdecl.ui
   ktagreassigndlgdecl.ui
-  kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
+  kselectdatabasedlg.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   ktemplateexportdlg.ui
   kupdatestockpricedlgdecl.ui

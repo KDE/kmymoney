@@ -30,19 +30,12 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "ui_kselectdatabasedlgdecl.h"
+
+#include "ui_kselectdatabasedlg.h"
 #include "storage/mymoneystoragesql.h"
 #include "kguiutils.h"
 
 class QDialogButtonBox;
-
-class KSelectDatabaseDlgDecl : public QWidget, public Ui::KSelectDatabaseDlgDecl
-{
-public:
-  KSelectDatabaseDlgDecl() {
-    setupUi(this);
-  }
-};
 
 class KSelectDatabaseDlg : public QDialog
 {
@@ -70,16 +63,13 @@ public:
   int exec();
 
 public slots:
-  void slotDriverSelected(QListWidgetItem *driver);
+  void slotDriverSelected(int idx);
   void slotHelp();
 
 private:
-  KSelectDatabaseDlgDecl* m_widget;
-  QDialogButtonBox* m_buttonBox;
+  Ui::KSelectDatabaseDlg* m_widget;
   int m_mode;
   QUrl m_url;
-  QStringList m_supportedDrivers;
-  //MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
 };

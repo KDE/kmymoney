@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KSelectDatabaseDlgDecl</class>
- <widget class="QWidget" name="KSelectDatabaseDlgDecl">
+ <class>KSelectDatabaseDlg</class>
+ <widget class="QWidget" name="KSelectDatabaseDlg">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>408</width>
+    <width>551</width>
     <height>451</height>
    </rect>
   </property>
@@ -25,8 +25,8 @@
   <property name="windowTitle">
    <string>KMyMoney - Select Database</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0" colspan="2">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
     <widget class="QGroupBox" name="groupBox6">
      <property name="minimumSize">
       <size>
@@ -74,7 +74,7 @@
      <property name="title">
       <string>PLEASE NOTE</string>
      </property>
-     <layout class="QVBoxLayout">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPlainTextEdit" name="plainTextEdit">
         <property name="sizePolicy">
@@ -170,138 +170,158 @@ As always, please make sure you have adequate backups of your data.</string>
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox1">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>71</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>172</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Database Type</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QListWidget" name="listDrivers">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>42</height>
-         </size>
+   <item>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Database Type</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="databaseTypeCombo"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Fi&amp;le</string>
+       </property>
+       <property name="buddy">
+        <cstring>urlSqlite</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="KUrlRequester" name="urlSqlite">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>131</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QWidget" name="databaseFields" native="true">
+       <layout class="QFormLayout" name="formLayout">
+        <property name="margin">
+         <number>0</number>
         </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Database &amp;Name</string>
+          </property>
+          <property name="buddy">
+           <cstring>textDbName</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="KLineEdit" name="textDbName">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Host &amp;Name</string>
+          </property>
+          <property name="buddy">
+           <cstring>textHostName</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="KLineEdit" name="textHostName">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&amp;Username</string>
+          </property>
+          <property name="buddy">
+           <cstring>textUserName</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="KLineEdit" name="textUserName">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>&amp;Password</string>
+          </property>
+          <property name="buddy">
+           <cstring>textPassword</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="KLineEdit" name="textPassword">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Fi&amp;le (SQLite only)</string>
-     </property>
-     <property name="buddy">
-      <cstring>urlSqlite</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="KUrlRequester" name="urlSqlite">
-     <property name="minimumSize">
-      <size>
-       <width>131</width>
-       <height>0</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Database &amp;Name (Others)</string>
-     </property>
-     <property name="buddy">
-      <cstring>textDbName</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="KLineEdit" name="textDbName"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Host &amp;Name</string>
-     </property>
-     <property name="buddy">
-      <cstring>textHostName</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="KLineEdit" name="textHostName"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>&amp;Username</string>
-     </property>
-     <property name="buddy">
-      <cstring>textUserName</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="KLineEdit" name="textUserName"/>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>&amp;Password</string>
-     </property>
-     <property name="buddy">
-      <cstring>textPassword</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="KLineEdit" name="textPassword">
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
+   <item>
     <widget class="QCheckBox" name="checkPreLoad">
      <property name="text">
       <string>Preload &amp;all data</string>
      </property>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>listDrivers</tabstop>
   <tabstop>plainTextEdit</tabstop>
  </tabstops>
  <resources/>
