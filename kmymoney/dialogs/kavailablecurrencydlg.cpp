@@ -52,6 +52,8 @@ KAvailableCurrencyDlg::KAvailableCurrencyDlg(QWidget *parent) : ui(new Ui::KAvai
   //resize the column widths
   for (int i = 0; i < 3; ++i)
     ui->m_currencyList->resizeColumnToContents(i);
+
+  m_searchWidget->setFocus();
 }
 
 KAvailableCurrencyDlg::~KAvailableCurrencyDlg()

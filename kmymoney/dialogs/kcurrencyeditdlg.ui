@@ -115,6 +115,15 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>m_currencyList</tabstop>
+  <tabstop>m_addCurrencyButton</tabstop>
+  <tabstop>m_removeCurrencyButton</tabstop>
+  <tabstop>m_editCurrencyButton</tabstop>
+  <tabstop>m_removeUnusedCurrencyButton</tabstop>
+  <tabstop>m_selectBaseCurrencyButton</tabstop>
+  <tabstop>m_closeButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

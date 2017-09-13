@@ -86,6 +86,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) : ui(new Ui::KCurrencyEditDl
   ui->setupUi(this);
   m_searchWidget = new KTreeWidgetSearchLineWidget(this, ui->m_currencyList);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+  m_searchWidget->setFocus();
   ui->verticalLayout->insertWidget(0, m_searchWidget);
   ui->m_currencyList->setItemDelegate(new KCurrencyEditDelegate(ui->m_currencyList));
   ui->m_closeButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogClose]));
