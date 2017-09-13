@@ -145,14 +145,14 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent, bool withEquityAccount
   setupDetailsPage();
 
   // We don't need to add the default into the list (see ::slotShowHelp() why)
-  // m_helpAnchor[m_ui->m_textTab] = QString("details.search");
-  m_helpAnchor[m_ui->m_accountTab] = QString("details.search.account");
-  m_helpAnchor[m_ui->m_dateTab] = QString("details.search.date");
-  m_helpAnchor[m_ui->m_amountTab] = QString("details.search.amount");
-  m_helpAnchor[m_ui->m_categoryTab] = QString("details.search.category");
-  m_helpAnchor[m_ui->m_payeeTab] = QString("details.search.payee");
-  m_helpAnchor[m_ui->m_tagTab] = QString("details.search.tag"); //FIXME-ALEX update Help
-  m_helpAnchor[m_ui->m_detailsTab] = QString("details.search.details");
+  // m_helpAnchor[m_ui->m_textTab] = QLatin1String("details.search");
+  m_helpAnchor[m_ui->m_accountTab] = QLatin1String("details.search.account");
+  m_helpAnchor[m_ui->m_dateTab] = QLatin1String("details.search.date");
+  m_helpAnchor[m_ui->m_amountTab] = QLatin1String("details.search.amount");
+  m_helpAnchor[m_ui->m_categoryTab] = QLatin1String("details.search.category");
+  m_helpAnchor[m_ui->m_payeeTab] = QLatin1String("details.search.payee");
+  m_helpAnchor[m_ui->m_tagTab] = QLatin1String("details.search.tag"); //FIXME-ALEX update Help
+  m_helpAnchor[m_ui->m_detailsTab] = QLatin1String("details.search.details");
 
   // setup the register
   QList<KMyMoneyRegister::Column> cols;
