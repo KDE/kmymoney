@@ -756,16 +756,13 @@ bool KMyMoneyView::readFile(const QUrl &url)
   // disconnect the current storga manager from the engine
   MyMoneyFile::instance()->detachStorage();
 
-  if (url.scheme() == "sql") { // handle reading of database
+  if (url.scheme() == QLatin1String("sql")) { // handle reading of database
     m_fileType = KmmDb;
     // get rid of the mode parameter which is now redundant
     QUrl newUrl(url);
-    // TODO: port to kf5
-#if 0
-    if (QUrlQuery(url).hasQueryItem("mode")) {
-      newUrl.removeQueryItem("mode");
-    }
-#endif
+    QUrlQuery query(url);
+    query.removeQueryItem("mode");
+    newUrl.setQuery(query);
     return (openDatabase(newUrl)); // on error, any message will have been displayed
   }
 
@@ -774,7 +771,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
   } else {
-    // TODO: port to kf5
+    // TODO: port to kf5 (NetAccess)
 #if 0
     if (!KIO::NetAccess::download(url, filename, 0)) {
       KMessageBox::detailedError(this,
@@ -968,7 +965,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
   // if a temporary file was constructed by NetAccess::download,
   // then it will be removed with the next call. Otherwise, it
   // stays untouched on the local filesystem
-  // TODO: port to kf5
+  // TODO: port to KF5 (NetAccess)
   //KIO::NetAccess::removeTempFile(filename);
   return initializeStorage();
 }
@@ -1017,13 +1014,17 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
           }
           return false;
         } else {
-          // TODO: port to kf5
-#if 0
-          QString options = QUrlQuery(dbURL).queryItemValue("options") + ",override";
-          dbURL.removeQueryItem("mode"); // now redundant
-          dbURL.removeQueryItem("options");
-          dbURL.addQueryItem("options", options);
-#endif
+          QUrlQuery query(dbURL);
+          const QString optionKey = QLatin1String("options");
+          QString options = query.queryItemValue(optionKey);
+          if(!options.isEmpty()) {
+            options += QLatin1Char(',');
+          }
+          options += QLatin1String("override");
+          query.removeQueryItem(QLatin1String("mode"));
+          query.removeQueryItem(optionKey);
+          query.addQueryItem(optionKey, options);
+          dbURL.setQuery(query);
         }
     }
   }
@@ -1070,7 +1071,7 @@ bool KMyMoneyView::initializeStorage()
   try {
     baseId = MyMoneyFile::instance()->baseCurrency().id();
   } catch (const MyMoneyException &e) {
-    qDebug("%s", qPrintable(e.what()));
+    qDebug() << e.what();
   }
 
   if (baseId.isEmpty()) {
@@ -1081,7 +1082,7 @@ bool KMyMoneyView::initializeStorage()
       try {
         baseId = MyMoneyFile::instance()->baseCurrency().id();
       } catch (const MyMoneyException &e) {
-        qDebug("%s", qPrintable(e.what()));
+        qDebug() << e.what();
       }
     }
   } else {
