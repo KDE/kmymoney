@@ -70,15 +70,14 @@
 #include <ui_reporttabcapitalgain.h>
 #include <ui_reporttabperformance.h>
 
-KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
-  MyMoneyReport report, QWidget *parent)
-    : KFindTransactionDlg(parent),
-    m_tabRowColPivot(0),
-    m_tabRowColQuery(0),
-    m_tabChart(0),
-    m_tabRange(0),
-    m_initialState(report),
-    m_currentState(report)
+KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent)
+  : KFindTransactionDlg(parent, (report.rowType() == MyMoneyReport::eAccount))
+  , m_tabRowColPivot(0)
+  , m_tabRowColQuery(0)
+  , m_tabChart(0)
+  , m_tabRange(0)
+  , m_initialState(report)
+  , m_currentState(report)
 {
   //
   // Rework labeling
