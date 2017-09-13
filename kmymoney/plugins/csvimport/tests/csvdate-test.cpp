@@ -64,7 +64,7 @@ void CsvDateTest::testConvertDate()
   QVERIFY(m_convert->convertDate("13-09-81") == QDate(1981, 9, 13));
   QVERIFY(m_convert->convertDate("13-09-01") == QDate(2001, 9, 13));
   QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(12) + "-2000")) == QDate(2000, 12, 25));
-  QVERIFY(m_convert->convertDate(QString("25-" + QDate::shortMonthName(12) + "-2000")) == QDate(2000, 12, 25));
+  QVERIFY(m_convert->convertDate(QString("25-" + QLocale().standaloneMonthName(12, QLocale::ShortFormat) + "-2000")) == QDate(2000, 12, 25));
   QVERIFY(m_convert->convertDate("13.09.81") == QDate(1981, 9, 13));
   QVERIFY(m_convert->convertDate("32/01/2000") == QDate()); // invalid day
   QVERIFY(m_convert->convertDate(QLatin1String("13-rubbishmonth-2000")) == QDate()); // invalid month

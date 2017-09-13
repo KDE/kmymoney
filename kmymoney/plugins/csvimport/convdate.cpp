@@ -178,10 +178,22 @@ QDate ConvertDate::convertDate(const QString& txt)
     aFormat = QLatin1String("MM");//                              aMonth is numeric
 
   } else {//                                           aMonth NOT numeric
-    if (aMonth.length() == 3)
-      aFormat = QLatin1String("MMM");
-    else
-      aFormat = QLatin1String("MMMM");
+    QLocale::FormatType monthFormat = QLocale::ShortFormat;
+    if (aMonth.length() > 3)
+      monthFormat = QLocale::LongFormat;
+    int i;
+    for(i = 1; i <= 12; ++i) {
+      if (aMonth == QLocale().standaloneMonthName(i, monthFormat)) {
+        break;
+      }
+      if (aMonth == QLocale("C").standaloneMonthName(i, monthFormat)) {
+        break;
+      }
+    }
+    if (i == 13)
+      return QDate();
+    aMonth = QString("%1").arg(i, 2, 10, QLatin1Char('0'));
+    aFormat = QLatin1String("MM");
   }
 
   QString dateFormat;
