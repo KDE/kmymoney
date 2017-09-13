@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "kcm_icalendarexport.h"
+#include <config-kmymoney-version.h>
 
 // Qt includes
 #include <QComboBox>
@@ -27,6 +28,7 @@
 // KDE includes
 #include <KPluginFactory>
 #include <KLocalizedString>
+#include <KAboutData>
 
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"
@@ -54,11 +56,19 @@ K_PLUGIN_FACTORY_WITH_JSON(KCMiCalendarExportFactory,
                            "kcm_kmm_icalendarexport.json",
                            registerPlugin<KCMiCalendarExport>();
                            )
-// TODO: port to KF5
-//K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
 
-KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(/*KCMiCalendarExportFactory::componentData(),*/ parent, args)
+KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args)
+  : KCModule(parent, args)
 {
+  KAboutData *about = new KAboutData(QStringLiteral("kmm_printcheck"),
+                                    i18n("KMyMoney print check"),
+                                    QStringLiteral(VERSION), QString(),
+                                    KAboutLicense::GPL,
+                                    i18n("Copyright 2009" ) );
+  about->addAuthor( QString::fromUtf8("Cristian Oneț") );
+
+  setAboutData( about );
+
   PluginSettingsWidget *w = new PluginSettingsWidget(this);
   addConfig(PluginSettings::self(), w);
   QVBoxLayout *layout = new QVBoxLayout;

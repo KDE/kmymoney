@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "kcm_printcheck.h"
+#include <config-kmymoney-version.h>
 
 // Qt includes
 #include <QComboBox>
@@ -33,6 +34,7 @@
 
 // KDE includes
 #include <KPluginFactory>
+#include <KAboutData>
 
 #include "pluginsettings.h"
 
@@ -70,9 +72,18 @@ void PluginSettingsWidget::returnPressed(const QString& url)
 
 K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_kmm_printcheck.json", registerPlugin<KCMPrintCheck>();)
 
-// TODO: port to KF5
-KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModule(0/*KCMPrintCheckFactory::componentData()*/, parent, args)
+KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args)
+  : KCModule(parent, args)
 {
+  KAboutData *about = new KAboutData(QStringLiteral("kmm_printcheck"),
+                                    i18n("KMyMoney print check"),
+                                    QStringLiteral(VERSION), QString(),
+                                    KAboutLicense::GPL,
+                                    i18n("Copyright 2009" ) );
+  about->addAuthor( QString::fromUtf8("Cristian Oneț") );
+
+  setAboutData( about );
+
   PluginSettingsWidget* w = new PluginSettingsWidget(this);
   addConfig(PluginSettings::self(), w);
   QVBoxLayout *layout = new QVBoxLayout;

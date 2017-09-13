@@ -19,9 +19,11 @@
  ***************************************************************************/
 
 #include "kcm_csvimport.h"
+#include <config-kmymoney-version.h>
 
 // KDE includes
 #include <KPluginFactory>
+#include <KAboutData>
 #include "pluginsettings.h"
 
 PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
@@ -32,9 +34,19 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
 
 K_PLUGIN_FACTORY_WITH_JSON(KCMcsvimportFactory, "kcm_kmm_csvimport.json", registerPlugin<KCMcsvimport>();)
 
-// TODO: port to KF5
-KCMcsvimport::KCMcsvimport(QWidget *parent, const QVariantList& args) : KCModule(0/*KCMcsvimportFactory::componentData()*/, parent, args)
+KCMcsvimport::KCMcsvimport(QWidget *parent, const QVariantList& args)
+  : KCModule(parent, args)
 {
+  KAboutData *about = new KAboutData(QStringLiteral("kmm_csvimport"),
+                                    i18n("KMyMoney CSV importer"),
+                                    QStringLiteral(VERSION), QString(),
+                                    KAboutLicense::GPL,
+                                    i18n("Copyright 2010-2017" ) );
+  about->addAuthor( QLatin1String("Allan Anderson") );
+  about->addAuthor( QString::fromUtf8("Łukasz Wojniłowicz") );
+
+  setAboutData( about );
+
   PluginSettingsWidget* w = new PluginSettingsWidget(this);
   addConfig(PluginSettings::self(), w);
   QVBoxLayout *layout = new QVBoxLayout;
