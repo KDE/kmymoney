@@ -62,6 +62,11 @@ public:
   void remove(QWidget *widget);
 
   /**
+   * This method removes all widgets from the list of mandatory fields for the current dialog
+   */
+  void removeAll();
+
+  /**
     * This method designates the button to be enabled when all mandatory fields
     * have been completed
     *

@@ -113,6 +113,7 @@ void kMandatoryFieldGroup::add(QWidget *widget)
       connect(qobject_cast<IonlineJobEdit*>(widget),
               SIGNAL(validityChanged(bool)),
               this, SLOT(changed()));
+
       // Do not set palette for IonlineJobEdits as they contain subwidgets
       m_widgets.append(widget);
       changed();
@@ -129,6 +130,13 @@ void kMandatoryFieldGroup::add(QWidget *widget)
     widget->setPalette(palette);
     m_widgets.append(widget);
     changed();
+  }
+}
+
+void kMandatoryFieldGroup::removeAll()
+{
+  while(!m_widgets.isEmpty()) {
+    remove(m_widgets.at(0));
   }
 }
 
