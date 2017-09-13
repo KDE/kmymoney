@@ -169,13 +169,16 @@ QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) co
 #endif
 }
 
+
+int kMyMoneyEdit::standardPrecision = 2;
+
+
 kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
     : QWidget(parent)
 {
   m_prec = prec;
-  // TODO: port this to kf5
   if (prec < -1 || prec > 20)
-    m_prec = 2;//KLocale::global()->monetaryDecimalPlaces();
+    m_prec = standardPrecision;
   init();
 }
 
@@ -184,6 +187,13 @@ kMyMoneyEdit::kMyMoneyEdit(const MyMoneySecurity& sec, QWidget *parent)
 {
   m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
   init();
+}
+
+void kMyMoneyEdit::setStandardPrecision(int prec)
+{
+  if (prec >= 0 && prec < 20) {
+    standardPrecision = prec;
+  }
 }
 
 // converted image from kde3.5.1/share/apps/kdevdesignerpart/pics/designer_resetproperty.png

@@ -108,6 +108,15 @@ private:
   int                 m_prec;
   bool                allowEmpty;
 
+  /**
+   * This holds the number of precision to be used
+   * when no other information (e.g. from account)
+   * is available.
+   *
+   * @sa setStandardPrecision()
+   */
+  static int standardPrecision;
+
 private:
   /**
     * Internal helper function for value() and ensureFractionalPart().
@@ -210,6 +219,13 @@ public:
   void setPlaceholderText(const QString& hint) const;
 
   bool isReadOnly() const;
+
+  /**
+   * This allows to setup the standard precision (number of decimal places)
+   * to be used when no other information is available. @a prec must be in
+   * the range of 0..19. If never set, the default precision is 2.
+   */
+  static void setStandardPrecision(int prec);
 
 public slots:
   void loadText(const QString& text);
