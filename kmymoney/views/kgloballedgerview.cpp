@@ -139,6 +139,12 @@ void MousePressFilter::setFilterActive(bool state)
 
 bool MousePressFilter::isChildOf(QWidget* child, QWidget *parent)
 {
+  // QDialogs cannot be detected directly, but it can be assumed,
+  // that events on a widget that do not have a parent widget within
+  // our application are dialogs.
+  if (!child->parentWidget())
+    return true;
+
   while (child) {
     if (child == parent)
       return true;
@@ -146,7 +152,6 @@ bool MousePressFilter::isChildOf(QWidget* child, QWidget *parent)
     // it's as if it is a child of our own because these widgets could
     // appear during transaction entry (message boxes, completer widgets)
     if (dynamic_cast<KPassivePopup*>(child) ||
-        dynamic_cast<QDialog*>(child) ||
         ((child->windowFlags() & Qt::Popup) && child != kmymoney))
       return true;
     child = child->parentWidget();
