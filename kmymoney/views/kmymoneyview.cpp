@@ -271,11 +271,9 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
   connect(m_onlineJobOutboxView, SIGNAL(showContextMenu(onlineJob)), kmymoney, SLOT(slotShowOnlineJobContextMenu()));
 
-  SimpleLedgerView* view = new SimpleLedgerView;
+  SimpleLedgerView* view = new SimpleLedgerView(kmymoney, this);
   KPageWidgetItem* frame = m_model->addPage(view, i18n("New ledger"));
   frame->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentProperties]));
-  connect(this, SIGNAL(fileClosed()), view, SLOT(closeLedgers()));
-  connect(this, SIGNAL(fileOpened()), view, SLOT(openFavoriteLedgers()));
 
   //set the model
   setModel(m_model);

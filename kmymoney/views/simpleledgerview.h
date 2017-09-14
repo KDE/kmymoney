@@ -30,11 +30,14 @@
 // Project Includes
 
 
+class KMyMoneyApp;
+class KMyMoneyView;
+
 class SimpleLedgerView : public QWidget
 {
   Q_OBJECT
 public:
-  explicit SimpleLedgerView(QWidget* parent = 0);
+  explicit SimpleLedgerView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
   virtual ~SimpleLedgerView();
 
   virtual void showTransactionForm(bool = true);
@@ -49,6 +52,8 @@ public Q_SLOTS:
    * This slot creates tabs for the favorite ledgers if not already open
    */
   void openFavoriteLedgers();
+
+  void showEvent(QShowEvent* event);
 
 protected:
 
@@ -65,6 +70,13 @@ Q_SIGNALS:
 private:
   class Private;
   Private * const d;
+
+  KMyMoneyApp                         *m_kmymoney;
+  KMyMoneyView                        *m_kmymoneyview;
+
+  /** Initializes page and sets its load status to initialized
+   */
+  void init();
 };
 
 #endif // SIMPLELEDGERVIEW_H

@@ -38,6 +38,7 @@
 #include "kmymoneyaccountcombo.h"
 #include "ui_simpleledgerview.h"
 #include <icons/icons.h>
+#include <kmymoneyview.h>
 
 using namespace Icons;
 
@@ -51,11 +52,10 @@ public:
   , newTabWidget(0)
   , lastIdx(-1)
   , inModelUpdate(false)
+  , m_needLoad(true)
   {}
 
-  ~Private() {
-    delete ui;
-  }
+  ~Private() {}
 
   SimpleLedgerView*             parent;
   Ui_SimpleLedgerView*          ui;
@@ -63,13 +63,28 @@ public:
   QWidget*                      newTabWidget;
   int                           lastIdx;
   bool                          inModelUpdate;
+  bool                          m_needLoad;
 };
 
 
-SimpleLedgerView::SimpleLedgerView(QWidget* parent)
-  : QWidget(parent)
+SimpleLedgerView::SimpleLedgerView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview)
+  : QWidget(nullptr)
   , d(new Private(this))
+  , m_kmymoney(kmymoney)
+  , m_kmymoneyview(kmymoneyview)
 {
+}
+
+SimpleLedgerView::~SimpleLedgerView()
+{
+  if (!d->m_needLoad)
+    delete d->ui;
+  delete d;
+}
+
+void SimpleLedgerView::init()
+{
+  d->m_needLoad = false;
   d->ui->setupUi(this);
   d->ui->ledgerTab->setTabIcon(0, QIcon::fromTheme(g_Icons[Icon::ListAdd]));
   d->ui->ledgerTab->setTabText(0, QString());
@@ -86,9 +101,11 @@ SimpleLedgerView::SimpleLedgerView(QWidget* parent)
   }
 
   connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(openNewLedger(QString)));
-  connect(d->ui->ledgerTab, SIGNAL(currentChanged(int)), this, SLOT(tabSelected(int)));
-  connect(Models::instance(), SIGNAL(modelsLoaded()), this, SLOT(updateModels()));
-  connect(d->ui->ledgerTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeLedger(int)));
+  connect(d->ui->ledgerTab, &QTabWidget::currentChanged, this, &SimpleLedgerView::tabSelected);
+  connect(Models::instance(), &Models::modelsLoaded, this, &SimpleLedgerView::updateModels);
+  connect(d->ui->ledgerTab, &QTabWidget::tabCloseRequested, this, &SimpleLedgerView::closeLedger);
+  connect(m_kmymoneyview, &KMyMoneyView::fileClosed, this, &SimpleLedgerView::closeLedgers);
+  connect(m_kmymoneyview, &KMyMoneyView::fileOpened, this, &SimpleLedgerView::openFavoriteLedgers);
 
   d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity});
 
@@ -99,11 +116,7 @@ SimpleLedgerView::SimpleLedgerView(QWidget* parent)
   d->ui->accountCombo->setModel(d->accountsModel);
 
   tabSelected(0);
-}
-
-SimpleLedgerView::~SimpleLedgerView()
-{
-  delete d;
+  updateModels();
 }
 
 void SimpleLedgerView::openNewLedger(QString accountId)
@@ -218,4 +231,13 @@ void SimpleLedgerView::openFavoriteLedgers()
     openNewLedger(model->data(index, AccountsModel::AccountIdRole).toString());
   }
   d->ui->ledgerTab->setCurrentIndex(0);
+}
+
+void SimpleLedgerView::showEvent(QShowEvent* event)
+{
+  if (d->m_needLoad)
+    init();
+
+  // don't forget base class implementation
+  QWidget::showEvent(event);
 }
