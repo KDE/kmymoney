@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 10;
+unsigned int MyMoneyDbDef::m_currentVersion = 11;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -332,12 +332,12 @@ void MyMoneyDbDef::Securities()
   appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
   appendField(MyMoneyDbTextColumn("symbol"));
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
-  appendField(MyMoneyDbIntColumn("roundingMethod", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("typeString"));
   appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
   appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("tradingMarket"));
   appendField(MyMoneyDbColumn("tradingCurrency", "char(3)"));
+  appendField(MyMoneyDbIntColumn("roundingMethod", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QString("%1").arg(AlkValue::RoundRound)));
   MyMoneyDbTable t("kmmSecurities", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -370,7 +370,8 @@ void MyMoneyDbDef::Currencies()
   appendField(MyMoneyDbColumn("symbolString", "varchar(255)"));
   appendField(MyMoneyDbColumn("smallestCashFraction", "varchar(24)"));
   appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
-  appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED));
+  // the default for price precision was taken from MyMoneySecurity
+  appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("4")));
   MyMoneyDbTable t("kmmCurrencies", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -619,8 +620,9 @@ const QString MyMoneyDbTable::columnList(const int version) const
   QString qs;
   ft = m_fields.begin();
   while (ft != m_fields.end()) {
-    if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version)
+    if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
       qs += QString("%1, ").arg((*ft)->name());
+    }
     ++ft;
   }
   return (qs.left(qs.length() - 2));
@@ -743,12 +745,17 @@ const QString MyMoneyDbColumn::generateDDL(const QExplicitlySharedDataPointer<My
 
   QString qs = name() + ' ' + type();
   if (isNotNull()) qs += " NOT NULL";
+  if (!defaultValue().isEmpty())
+      qs += QString(" DEFAULT \"%1\"").arg(defaultValue());
   return qs;
 }
 
 const QString MyMoneyDbIntColumn::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
-  return driver->intString(*this);
+  QString qs = driver->intString(*this);
+  if (!defaultValue().isEmpty())
+      qs += QString(" DEFAULT %1").arg(defaultValue());
+  return qs;
 }
 
 const QString MyMoneyDbTextColumn::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const

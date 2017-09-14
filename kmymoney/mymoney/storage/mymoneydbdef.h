@@ -54,9 +54,12 @@ public:
                            const bool iprimary = false,
                            const bool inotnull = false,
                            const int initVersion = 0,
-                           const int lastVersion = std::numeric_limits<int>::max()):
+                           const int lastVersion = std::numeric_limits<int>::max(),
+                           QString defaultValue = QString()
+                          ):
       m_name(iname),
       m_type(itype),
+      m_defaultValue(defaultValue),
       m_isPrimary(iprimary),
       m_isNotNull(inotnull),
       m_initVersion(initVersion),
@@ -80,26 +83,30 @@ public:
   virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
 
   const QString& name() const {
-    return (m_name);
+    return m_name;
   }
   const QString& type() const {
-    return (m_type);
+    return m_type;
   }
   bool isPrimaryKey() const {
-    return (m_isPrimary);
+    return m_isPrimary;
   }
   bool isNotNull() const {
-    return (m_isNotNull);
+    return m_isNotNull;
   }
   int initVersion() const {
-    return (m_initVersion);
+    return m_initVersion;
   }
   int lastVersion() const {
-    return (m_lastVersion);
+    return m_lastVersion;
+  }
+  QString defaultValue() const {
+    return m_defaultValue;
   }
 private:
   QString m_name;
   QString m_type;
+  QString m_defaultValue;
   bool m_isPrimary;
   bool m_isNotNull;
   int m_initVersion;
@@ -137,8 +144,10 @@ public:
                               const bool iprimary = false,
                               const bool inotnull = false,
                               const int initVersion = 0,
-                              const int lastVersion = std::numeric_limits<int>::max()):
-      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion, lastVersion),
+                              const int lastVersion = std::numeric_limits<int>::max(),
+                              const QString& defaultValue = QString()
+                             ):
+      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion, lastVersion, defaultValue),
       m_type(type),
       m_isSigned(isigned) {}
   virtual ~MyMoneyDbIntColumn() {}

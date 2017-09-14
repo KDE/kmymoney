@@ -151,8 +151,6 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     m_override = options.contains("override");
 
     // create the database connection
-    /// @FIXME KF5
-    /// old version QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
     QString dbName = url.path();
     setDatabaseName(dbName);
     setHostName(url.host());
@@ -388,6 +386,10 @@ int MyMoneyStorageSql::upgradeDb()
         break;
       case 9:
         if ((rc = upgradeToV10()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 10:
+        if ((rc = upgradeToV11()) != 0) return (1);
         ++m_dbVersion;
         break;
       default:
@@ -695,6 +697,20 @@ int MyMoneyStorageSql::upgradeToV10()
   return 0;
 }
 
+int MyMoneyStorageSql::upgradeToV11()
+{
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  QSqlQuery q(*this);
+  // add column roundingMethodCol to kmmSecurities
+  if (!alterTable(m_db.m_tables["kmmSecurities"], m_dbVersion))
+    return (1);
+  // add column pricePrecision to kmmCurrencies
+  if (!alterTable(m_db.m_tables["kmmCurrencies"], m_dbVersion))
+    return (1);
+
+  return 0;
+}
 
 bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
 {
@@ -725,11 +741,13 @@ bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
     return false;
   }
   createTable(t, toVersion);
-  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(toVersion) +
-                    ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
-  if (!q.exec()) { // krazy:exclude=crashy
-    buildError(q, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
-    return false;
+  if (getRecCount(tempTableName) > 0) {
+    q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
+                        ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
+    if (!q.exec()) { // krazy:exclude=crashy
+        buildError(q, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
+        return false;
+    }
   }
   if (!q.exec(QString("DROP TABLE " + tempTableName + ';'))) {
     buildError(q, Q_FUNC_INFO, QString("Error dropping old table %1").arg(t.name()));
