@@ -293,6 +293,11 @@ public:
   bool    m_backupMount;
 
   /**
+    * This variable keeps the name of the backup file.
+    */
+  QString  m_backupFile;
+
+  /**
     * Flag for internal run control
     */
   bool    m_ignoreBackupExitCode;
@@ -2655,15 +2660,8 @@ void KMyMoneyApp::slotBackupFile()
       slotBackupMount();
     } else {
       progressCallback(0, 300, "");
-#ifdef Q_OS_WIN
       d->m_ignoreBackupExitCode = true;
       QTimer::singleShot(0, this, SLOT(slotBackupHandleEvents()));
-#else
-      // If we don't have to mount a device, we just issue
-      // a dummy command to start the copy operation
-      d->m_proc.setProgram("true");
-      d->m_proc.start();
-#endif
     }
 
   }
@@ -2683,11 +2681,11 @@ bool KMyMoneyApp::slotBackupWriteFile()
 {
   QFileInfo fi(d->m_fileName.fileName());
   QString today = QDate::currentDate().toString("-yyyy-MM-dd.") + fi.suffix();
-  QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
-  KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
+  d->m_backupFile = d->m_mountpoint + '/' + d->m_fileName.fileName();
+  KMyMoneyUtils::appendCorrectFileExt(d->m_backupFile, today);
 
   // check if file already exists and ask what to do
-  QFile f(backupfile);
+  QFile f(d->m_backupFile);
   if (f.exists()) {
     int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
     if (answer == KMessageBox::Cancel) {
@@ -2695,18 +2693,11 @@ bool KMyMoneyApp::slotBackupWriteFile()
     }
   }
 
-  progressCallback(50, 0, i18n("Writing %1", backupfile));
-  d->m_proc.clearProgram();
-#ifdef Q_OS_WIN
-  d->m_proc << "cmd.exe" << "/c" << "copy" << "/b" << "/y";
-  d->m_proc << (QDir::toNativeSeparators(d->m_fileName.toLocalFile()) + "+ nul") << QDir::toNativeSeparators(backupfile);
-#else
-  d->m_proc << "cp" << "-f";
-  d->m_proc << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
-#endif
+  progressCallback(50, 0, i18n("Writing %1", d->m_backupFile));
   d->m_backupState = BACKUP_COPYING;
-  d->m_proc.start();
-  return true;
+  d->m_backupResult = !KIO::NetAccess::upload(d->m_fileName.toLocalFile(), d->m_backupFile, this);
+  slotBackupHandleEvents();
+  return !d->m_backupResult;
 }
 
 void KMyMoneyApp::slotBackupUnmount()
@@ -2753,19 +2744,19 @@ void KMyMoneyApp::slotBackupHandleEvents()
       break;
 
     case BACKUP_COPYING:
-      if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
-
+      if (!d->m_backupResult) {
+        qDebug() << "copy to" << d->m_fileName << "okay";
         if (d->m_backupMount) {
           slotBackupUnmount();
         } else {
           progressCallback(300, 0, i18nc("Backup done", "Done"));
-          KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
+          KMessageBox::information(this, i18n("File successfully backed up") + QString(" - %1").arg(d->m_backupFile), i18n("Backup"));
           slotBackupFinish();
         }
       } else {
-        qDebug("copy exit code is %d", d->m_proc.exitCode());
-        d->m_backupResult = 1;
-        KMessageBox::information(this, i18n("Error copying file to device"), i18n("Backup"));
+        QString errorString = KIO::NetAccess::lastErrorString();
+        qDebug() << "copy failed with" << errorString;
+        KMessageBox::information(this, i18n("Error copying file to device") + QString(" - %1").arg(errorString), i18n("Backup"));
         if (d->m_backupMount)
           slotBackupUnmount();
         else
@@ -2787,7 +2778,7 @@ void KMyMoneyApp::slotBackupHandleEvents()
       break;
 
     default:
-      qWarning("Unknown state for backup operation!");
+      qWarning("Unknown state for backup operation %d!", d->m_backupState);
       progressCallback(-1, -1, QString());
       ready();
       break;
