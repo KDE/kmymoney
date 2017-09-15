@@ -2620,18 +2620,13 @@ void KMyMoneyApp::slotBackupFile()
 {
   // Save the file first so isLocalFile() works
   if (d->m_myMoneyView && d->m_myMoneyView->dirty())
-
   {
     if (KMessageBox::questionYesNo(this, i18n("The file must be saved first "
                                    "before it can be backed up.  Do you want to continue?")) == KMessageBox::No) {
       return;
-
     }
-
     slotFileSave();
   }
-
-
 
   if (d->m_fileName.isEmpty())
     return;
@@ -2639,7 +2634,6 @@ void KMyMoneyApp::slotBackupFile()
   if (!d->m_fileName.isLocalFile()) {
     KMessageBox::sorry(this,
                        i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.", d->m_fileName.url()),
-
                        i18n("Local files only"));
     return;
   }
@@ -2663,7 +2657,6 @@ void KMyMoneyApp::slotBackupFile()
       d->m_ignoreBackupExitCode = true;
       QTimer::singleShot(0, this, SLOT(slotBackupHandleEvents()));
     }
-
   }
 
   delete backupDlg;
