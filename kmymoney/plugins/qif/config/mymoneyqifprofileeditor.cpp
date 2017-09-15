@@ -385,13 +385,35 @@ void MyMoneyQifProfileEditor::slotNew()
 
 const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 {
-  // TODO: port KF5 use the validator
-  //MyMoneyQifProfileNameValidator val(this);
-  return QInputDialog::getText(this, i18n("QIF Profile Editor"),
+  MyMoneyQifProfileNameValidator val(this);
+  QString rc;
+  bool internalOk;
+
+  do {
+    rc = QInputDialog::getText(this, i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),
                                QLineEdit::Normal,
-                               QString(),
-                               &ok);
+                               rc,
+                               &internalOk);
+    // if user pressed OK we check the name
+    if (internalOk) {
+      int pos = 0;
+      if (val.validate(rc, pos) != MyMoneyQifProfileNameValidator::Acceptable) {
+        QString errorMsg;
+        if (rc.isEmpty()) {
+          errorMsg = i18n("The profile name cannot be empty. Please provide a name or cancel.");
+        } else {
+          errorMsg = i18n("The name <b>%1</b> is already taken. Please change the name or cancel.").arg(rc);
+        }
+        KMessageBox::sorry(this, errorMsg, i18n("QIF profile name problem"));
+        continue;
+      }
+    }
+    break;
+  } while (true);
+
+  ok = internalOk;
+  return rc;
 }
 
 void MyMoneyQifProfileEditor::slotDelete()
