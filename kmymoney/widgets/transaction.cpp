@@ -252,7 +252,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
 
   // do we need to switch to the error color?
   if (m_erroneous) {
-    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErroneousTransactionColor());
+    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
   }
 
   // do we need to switch to the negative balance color?
@@ -261,7 +261,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     if (m_account.accountGroup() == MyMoneyAccount::Liability && !m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
-      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErroneousTransactionColor());
+      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
   }
   return true;
 }
@@ -1072,7 +1072,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
               if (txt.isEmpty() && !m_split.value().isZero()) {
                 txt = i18n("*** UNASSIGNED ***");
                 if (painter)
-                  painter->setPen(KMyMoneyGlobalSettings::listErroneousTransactionColor());
+                  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
               }
             }
           }
@@ -1137,7 +1137,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
           if (txt.isEmpty() && !m_split.value().isZero()) {
             txt = i18n("*** UNASSIGNED ***");
             if (painter)
-              painter->setPen(KMyMoneyGlobalSettings::listErroneousTransactionColor());
+              painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
           }
           break;
 

@@ -189,6 +189,36 @@
    <default>false</default>
   </entry>
  </group>
+ <group name="Color Options">
+  <entry name="useCustomColors" type="Bool">
+   <label>Use custom colors</label>
+   <default>false</default>
+  </entry>
+  <entry name="transactionImportedColor" type="Color">
+   <label>Background color for imported transactions</label>
+   <default>255,255,0</default>
+  </entry>
+  <entry name="transactionMatchedColor" type="Color">
+   <label>Background color for matched transactions</label>
+   <default>152,251,152</default>
+  </entry>
+  <entry name="transactionErroneousColor" type="Color">
+   <label>List color for erroneous transactions</label>
+   <default>255,0,0</default>
+  </entry>
+  <entry name="missingConversionRateColor" type="Color">
+   <label>List color for missing conversion rate</label>
+   <default>0,0,255</default>
+  </entry>
+  <entry name="groupMarkerColor" type="Color">
+   <label>Background color for group marker</label>
+   <default>255,242,155</default>
+  </entry>
+  <entry name="fieldRequiredColor" type="Color">
+   <label>Background color for required fields</label>
+   <default>255,255,221</default>
+  </entry>
+ </group>
  <group name="List Options">
   <entry name="HideUnusedCategory" type="Bool">
    <label>Hide unused categories</label>
@@ -254,50 +284,6 @@
   </entry>
   <entry name="logOfxTransactions" type="Bool">
    <label>Log OFX transactions</label>
-  </entry>
-  <entry name="useSystemColors" type="Bool">
-   <label>Use system colors</label>
-   <default>true</default>
-  </entry>
-  <entry name="listColor" type="Color">
-   <label>List color</label>
-   <default>240,240,240</default>
-  </entry>
-  <entry name="listBGColor" type="Color">
-   <label>List background color</label>
-   <default>255,255,255</default>
-  </entry>
-  <entry name="listGridColor" type="Color">
-   <label>List grid color</label>
-   <default>154,154,154</default>
-  </entry>
-  <entry name="importedTransactionColor" type="Color">
-   <label>Background color for imported transactions</label>
-   <default>255,255,0</default>
-  </entry>
-  <entry name="matchedTransactionColor" type="Color">
-   <label>Background color for matched transactions</label>
-   <default>152,251,152</default>
-  </entry>
-  <entry name="listErroneousTransactionColor" type="Color">
-   <label>List color for erroneous transactions</label>
-   <default>255,0,0</default>
-  </entry>
-  <entry name="listMissingConversionRate" type="Color">
-   <label>List color for missing conversion rate</label>
-   <default>0,0,255</default>
-  </entry>
-  <entry name="listNegativeValueColor" type="Color">
-   <label>List color for negative values</label>
-   <default>255,0,0</default>
-  </entry>
-  <entry name="groupMarkerColor" type="Color">
-   <label>Background color for group marker</label>
-   <default>255,242,155</default>
-  </entry>
-  <entry name="requiredFieldColor" type="Color">
-   <label>Background color for required fields</label>
-   <default>255,255,221</default>
   </entry>
   <entry name="useSystemFont" type="Bool">
    <label>Use system font</label>

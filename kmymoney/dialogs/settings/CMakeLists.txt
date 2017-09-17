@@ -15,7 +15,7 @@ set (libsettings_a_SOURCES
   )
 
 set (libsettings_a_UI
-  ksettingscolorsdecl.ui
+  ksettingscolors.ui
   ksettingsfontsdecl.ui
   ksettingsiconsdecl.ui
   ksettingsforecastdecl.ui

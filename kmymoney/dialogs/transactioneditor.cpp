@@ -1857,7 +1857,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     }
 
     if (postDate->date().isValid() && (postDate->date() < accountOpeningDate)) {
-      postDate->markAsBadDate(true, KMyMoneyGlobalSettings::listNegativeValueColor());
+      postDate->markAsBadDate(true, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
       reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
       postDate->setToolTip(reason);
       return false;

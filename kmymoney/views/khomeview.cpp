@@ -254,7 +254,7 @@ void KHomeView::loadView()
     //clear the forecast flag so it will be reloaded
     d->m_forecast.setForecastDone(false);
 
-    const QString filename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/kmymoney.css");
+    const QString filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(QUrl::fromLocalFile(filename).url());
 
     header += KMyMoneyUtils::variableCSS();
@@ -1622,7 +1622,7 @@ QString KHomeView::showColoredAmount(const QString& amount, bool isNegative)
 {
   if (isNegative) {
     //if negative, get the settings for negative numbers
-    return QString("<font color=\"%1\">%2</font>").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name(), amount);
+    return QString("<font color=\"%1\">%2</font>").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name(), amount);
   }
 
   //if positive, return the same string

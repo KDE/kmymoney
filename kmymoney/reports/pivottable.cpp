@@ -1928,9 +1928,6 @@ QString PivotTable::renderHTML() const
 
     result += "</tr>\n";
   }
-
-  result += QString("<tr class=\"spacer\"><td>&nbsp;</td></tr>\n");
-  result += QString("<tr class=\"spacer\"><td>&nbsp;</td></tr>\n");
   result += "</table>\n";
   return result;
 }
@@ -1950,16 +1947,12 @@ void PivotTable::drawChart(KReportChartView& chartView) const
 
 QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const
 {
-  QString result;
+  const auto value = amount.formatMoney(currencySymbol, prec);
   if (amount.isNegative())
-    result += QString("<font color=\"rgb(%1,%2,%3)\">")
-              .arg(KMyMoneyGlobalSettings::listNegativeValueColor().red())
-              .arg(KMyMoneyGlobalSettings::listNegativeValueColor().green())
-              .arg(KMyMoneyGlobalSettings::listNegativeValueColor().blue());
-  result += amount.formatMoney(currencySymbol, prec);
-  if (amount.isNegative())
-    result += QString("</font>");
-  return result;
+    return QString::fromLatin1("<font color=%1>%2</font>")
+        .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name(), value);
+  else
+    return value;
 }
 
 void PivotTable::calculateBudgetDiff()

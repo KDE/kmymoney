@@ -126,7 +126,7 @@ void kMandatoryFieldGroup::add(QWidget *widget)
     }
 
     QPalette palette = widget->palette();
-    palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::requiredFieldColor());
+    palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::FieldRequired));
     widget->setPalette(palette);
     m_widgets.append(widget);
     changed();

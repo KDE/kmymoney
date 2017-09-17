@@ -30,13 +30,31 @@
 
 class MyMoneyForecast;
 
+enum class SchemeColor {
+  ListBackground1,
+  ListBackground2,
+  ListGrid,
+  ListHighlightText,
+  ListHighlight,
+  WindowText,
+  WindowBackground,
+  Positive,
+  Negative,
+  TransactionImported,
+  TransactionMatched,
+  TransactionErroneous,
+  FieldRequired,
+  GroupMarker,
+  MissingConversionRate
+};
+
 class KMyMoneyGlobalSettings : public KMyMoneySettings
 {
 public:
+  static QColor schemeColor(const SchemeColor color);
+
   static QFont listCellFont();
   static QFont listHeaderFont();
-  static QColor listColor();
-  static QColor listBGColor();
   static QStringList itemList();
 
   /**

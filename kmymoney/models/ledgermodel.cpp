@@ -591,7 +591,7 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
 
     case Qt::BackgroundColorRole:
       if(d->m_ledgerItems[index.row()]->isImported()) {
-        return KMyMoneyGlobalSettings::importedTransactionColor();
+        return KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported);
       }
       break;
 

@@ -286,11 +286,11 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
   cellRect.setWidth(m_parent->viewport()->width());
   cellRect.setHeight(m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::listErroneousTransactionColor() : KMyMoneyGlobalSettings::groupMarkerColor());
+  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous) : KMyMoneyGlobalSettings::schemeColor(SchemeColor::GroupMarker));
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::listGridColor());
+  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
@@ -372,15 +372,16 @@ void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionVie
   cellRect.setHeight(m_parent->rowHeight(index.row() + m_startRow));
 
   if (m_alternate)
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::listColor());
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground2));
   else
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::listBGColor());
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground1));
+
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   backgroundBrush.setStyle(Qt::Dense5Pattern);
-  backgroundBrush.setColor(KMyMoneyGlobalSettings::listGridColor());
+  backgroundBrush.setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
   painter->eraseRect(cellRect);
   painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::listGridColor());
+  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
   painter->restore();
 }
 

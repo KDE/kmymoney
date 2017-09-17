@@ -6,7 +6,7 @@ David Wadley     mail<at>davidwadley.com
 
 
 body {
-    background-color: highlight;
+    background-color: Highlight;
     margin-top:100px;
   }
 
@@ -35,7 +35,7 @@ body {
     left:25px;
     font-family:bitstream vera sans, verdana, sans;
     font-size:8px;
-    color: highlighttext;
+    color: HighlightText;
   }
 
 /*("Welcome to KMyMoney","What's New in...")*/
@@ -47,7 +47,7 @@ body {
     position:absolute;
     top:-3px;
     right:25px;
-    color:highlighttext;
+    color:HighlightText;
   }
 
 #subtitle {
@@ -57,7 +57,7 @@ body {
     position:absolute;
     top:30px;
     right:25px;
-    color:highlighttext;
+    color:HighlightText;
   }
 
 
@@ -67,7 +67,7 @@ body {
     position:absolute;
     top:75px;
     left:6%;
-    color:highlighttext;
+    color:HighlightText;
   }
 
 
@@ -80,13 +80,13 @@ body {
 
 
 #summaryLink a, #returnLink a {
-    color:highlighttext;
+    color:HighlightText;
     text-decoration:none;
   }
 
 
 #summaryLink a:hover, #returnLink a:hover {
-    color:highlighttext;
+    color:HighlightText;
     text-decoration:underline;
   }
 
@@ -167,5 +167,3 @@ padding-top: 0px;
     margin-right: 5px;
     top: -2px;
   }
-
-  

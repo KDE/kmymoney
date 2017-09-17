@@ -52,15 +52,15 @@ body#summaryview { /* set body attributes that affect only the summary view (and
     top:-6px;
     left:-6px;
     background-color: Window;
-    border-right: 1px solid gray;
-    border-bottom: 1px solid gray;
-    border-left: 1px solid lightgrey;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
 /*border:1px solid WindowText;*/
     padding: 0px;
   }
 
   .summaryheader { /*section labels over each table in the financial summary*/
-   background: HighLight url(./images/currencyflourish.png) no-repeat bottom right;
+   background: Highlight url(./images/currencyflourish.png) no-repeat bottom right;
     color:WindowText;
     Font-size:1.2em;
     font-weight:bold;
@@ -73,13 +73,13 @@ body#summaryview { /* set body attributes that affect only the summary view (and
 
   .summarytable td { /*style <td> in the tables in the financial summary */
     padding:5px 10px;
-    border-left: medium solid Window; 
-    border-right: medium solid window; 
+    border-left: medium solid Window;
+    border-right: medium solid Window;
     color:WindowText;
   }
 
   .itemtitle { /*<tr> -additional label for table headers. example "Assets" and "Liabilities"*/
-    color:HighLight;
+    color:Highlight;
     Font-weight:bold;
   }
 
@@ -103,11 +103,11 @@ body#summaryview { /* set body attributes that affect only the summary view (and
 
   .warningtitle { /*<tr> -set warning background color -overdue payments -items of this class also belong to the class called "itemtitle"*/
     color:red;/*set programatically, not by css*/
-    background-color: HighLight;
+    background-color: Highlight;
   }
 
   .warning { /*<tr> -set warning background color -items of this class also belong to the class called "item"*/
-    background-color: HighLight;
+    background-color: Highlight;
   }
 
   th.left, td.left {/*rule to align table header and table data cells*/
@@ -365,7 +365,7 @@ table.report tr#topparent td.left {/*parent label for each row group containing 
   }
 
   #subtotal { font-style: italic }
-/*  #topparent td, #solo td { border-top: 1px solid gray } */
+/*  #topparent td, #solo td { border-top: 1px solid black } */
 }
 
 tr.item0 td,tr.item1 td,tr.itemA td,tr.itemZ td {
@@ -373,14 +373,13 @@ tr.item0 td,tr.item1 td,tr.itemA td,tr.itemZ td {
   }
 
 tr.itemA td {
-    border-bottom: 1px dotted gray;
+    border-bottom: 1px dotted black;
   }
 
 tr.itemZ td {
-    border-top: 1px dotted gray;
+    border-top: 1px dotted black;
   }
 
 .item0 .value,.item1 .value {
     padding-right: 2em;
   }
-

@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowiczd@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,23 +27,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingscolorsdecl.h"
+#include "ui_ksettingscolors.h"
 
-class KSettingsColorsDecl : public QWidget, public Ui::KSettingsColorsDecl
-{
-public:
-  KSettingsColorsDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsColors : public KSettingsColorsDecl
+class KSettingsColors : public QWidget, public Ui::KSettingsColors
 {
   Q_OBJECT
 
 public:
-  KSettingsColors(QWidget* parent = 0);
+  explicit KSettingsColors(QWidget* parent = nullptr);
   ~KSettingsColors();
+
+private slots:
+  /**
+    * This presets custom colors with system's color scheme
+    */
+  void slotCustomColorsToggled(bool);
 };
 #endif
 

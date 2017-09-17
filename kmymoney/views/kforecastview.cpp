@@ -380,12 +380,12 @@ void KForecastView::loadSummaryView()
         case -1:
           break;
         case 0:
-          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
           msg += i18n("The balance of %1 is below the minimum balance %2 today.", acc.name(), MyMoneyUtils::formatMoney(minBalance, acc, currency));
           msg += QString("</font>");
           break;
         default:
-          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
           msg += i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
                        "The balance of %2 will drop below the minimum balance %3 in %1 days.",
                        dropMinimum - 1, acc.name(), MyMoneyUtils::formatMoney(minBalance, acc, currency));
@@ -404,7 +404,7 @@ void KForecastView::loadSummaryView()
         break;
       case 0:
         if (acc.accountGroup() == MyMoneyAccount::Asset) {
-          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
           msg += i18n("The balance of %1 is below %2 today.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           msg += QString("</font>");
           break;
@@ -416,7 +416,7 @@ void KForecastView::loadSummaryView()
         break;
       default:
         if (acc.accountGroup() == MyMoneyAccount::Asset) {
-          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
           msg += i18np("The balance of %2 will drop below %3 in %1 day.",
                        "The balance of %2 will drop below %3 in %1 days.",
                        dropZero, acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
@@ -438,7 +438,7 @@ void KForecastView::loadSummaryView()
     msg.clear();
     MyMoneyMoney accCycleVariation = forecast.accountCycleVariation(acc);
     if (accCycleVariation < MyMoneyMoney()) {
-      msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+      msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
       msg += i18n("The account %1 is decreasing %2 per cycle.", acc.name(), MyMoneyUtils::formatMoney(accCycleVariation, acc, currency));
       msg += QString("</font>");
     }
@@ -540,7 +540,7 @@ void KForecastView::loadAdvancedView()
       advancedItem->setText(it_c, amount);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
-        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
       }
       it_c++;
 
@@ -548,7 +548,7 @@ void KForecastView::loadAdvancedView()
       advancedItem->setText(it_c, dateString);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
-        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
       }
       it_c++;
     }
@@ -564,7 +564,7 @@ void KForecastView::loadAdvancedView()
       advancedItem->setText(it_c, amount);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
-        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
       }
       it_c++;
 
@@ -572,7 +572,7 @@ void KForecastView::loadAdvancedView()
       advancedItem->setText(it_c, dateString);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
-        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
       }
       it_c++;
     }
@@ -582,7 +582,7 @@ void KForecastView::loadAdvancedView()
     advancedItem->setText(it_c, amount);
     advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
     if (amountMM.isNegative()) {
-      advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+      advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
     }
     it_c++;
   }
@@ -948,7 +948,7 @@ void KForecastView::setNegative(QTreeWidgetItem *item, bool isNegative)
 {
   if (isNegative) {
     for (int i = 0; i < item->columnCount(); ++i) {
-      item->setForeground(i, KMyMoneyGlobalSettings::listNegativeValueColor());
+      item->setForeground(i, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
     }
   }
 }
@@ -959,7 +959,7 @@ void KForecastView::showAmount(QTreeWidgetItem* item, int column, const MyMoneyM
   item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
   item->setFont(column, item->font(0));
   if (amount.isNegative()) {
-    item->setForeground(column, KMyMoneyGlobalSettings::listNegativeValueColor());
+    item->setForeground(column, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
   }
 }
 

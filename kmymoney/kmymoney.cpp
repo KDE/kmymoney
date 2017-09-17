@@ -490,7 +490,7 @@ public:
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
-  void setCustomColors();
+  static void setThemedCSS();
   void copyConsistencyCheckResults();
   void saveConsistencyCheckResults();
 };
@@ -513,7 +513,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   kmymoney = this;
   d->m_config = KSharedConfig::openConfig();
 
-  d->setCustomColors();
+  d->setThemedCSS();
 
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
@@ -2297,7 +2297,7 @@ void KMyMoneyApp::slotUpdateConfiguration()
     d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
   }
 
-  d->setCustomColors();
+  d->setThemedCSS();
 
   // check if the recovery key is still valid or expires soon
 
@@ -6675,16 +6675,38 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
   }
 }
 
-void KMyMoneyApp::Private::setCustomColors()
+void KMyMoneyApp::Private::setThemedCSS()
 {
-  // setup the kmymoney custom colors if needed
-  if (KMyMoneyGlobalSettings::useSystemColors()) {
-    qApp->setStyleSheet(QString());
-  } else {
-    qApp->setStyleSheet("QTreeView, QTableView#register, QTableView#m_register, QTableView#splittable, QListView { background-color: " +
-                        KMyMoneyGlobalSettings::listBGColor().name() + ';' +
-                        "alternate-background-color: " + KMyMoneyGlobalSettings::listColor().name() + ';' +
-                        "background-clip: content;}");
+  const QString rcDir("/html/");
+  const QString defaultCSSDir = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).last() + rcDir;
+  const QString themedCSSDir  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + rcDir;
+  QDir().mkpath(themedCSSDir);
+
+  const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
+
+  foreach (const auto CSSname, CSSnames) {
+    const QString defaultCSSFilename = defaultCSSDir + CSSname;
+    QFileInfo fileInfo(defaultCSSFilename);
+    if (fileInfo.exists()) {
+      const QString themedCSSFilename = themedCSSDir + CSSname;
+      QFile::remove(themedCSSFilename);
+      if (QFile::copy(defaultCSSFilename, themedCSSFilename)) {
+        QFile cssFile (themedCSSFilename);
+        if (cssFile.open(QIODevice::ReadWrite)) {
+          QTextStream cssStream(&cssFile);
+          auto cssText = cssStream.readAll();
+          cssText.replace(QLatin1String("./"), defaultCSSDir, Qt::CaseSensitive);
+          cssText.replace(QLatin1String("WindowText"),    KMyMoneyGlobalSettings::schemeColor(SchemeColor::WindowText).name(),        Qt::CaseSensitive);
+          cssText.replace(QLatin1String("Window"),        KMyMoneyGlobalSettings::schemeColor(SchemeColor::WindowBackground).name(),  Qt::CaseSensitive);
+          cssText.replace(QLatin1String("HighlightText"), KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListHighlightText).name(), Qt::CaseSensitive);
+          cssText.replace(QLatin1String("Highlight"),     KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListHighlight).name(),     Qt::CaseSensitive);
+          cssText.replace(QLatin1String("black"),         KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid).name(),          Qt::CaseSensitive);
+          cssStream.seek(0);
+          cssStream << cssText;
+          cssFile.close();
+        }
+      }
+    }
   }
 }
 

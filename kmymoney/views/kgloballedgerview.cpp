@@ -853,7 +853,7 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
           showNegative = !showNegative;
         if (showNegative) {
           QPalette palette = m_rightSummaryLabel->palette();
-          palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
+          palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
           m_rightSummaryLabel->setPalette(palette);
         }
       } else {

@@ -347,13 +347,24 @@ void ListTable::render(QString& result, QString& csv) const
                                i18n("Calculated"), tlinkBegin, tlinkEnd));
             csv.append(QString::fromLatin1("\"%1\",").arg(i18n("Calculated")));
           } else {
-            result.append(QString::fromLatin1("<td%1>%4%2&nbsp;%3%5</td>")
+            auto value = MyMoneyMoney(data);
+            auto valueStr = value.formatMoney(fraction);
+            csv.append(QString::fromLatin1("\"%1 %2\",")
+                       .arg(currencyID, valueStr));
+
+            QString colorBegin;
+            QString colorEnd;
+            if ((rowRank == 4 || rowRank == 5) && value.isNegative()) {
+              colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
+              colorEnd = QLatin1String("</font>");
+            }
+
+            result.append(QString::fromLatin1("<td%1>%4%6%2&nbsp;%3%7%5</td>")
                           .arg((*it_column == ctValue) ? QLatin1String(" class=\"value\"") : QString(),
                                currencyID,
-                               MyMoneyMoney(data).formatMoney(fraction),
-                               tlinkBegin, tlinkEnd));
-            csv.append(QString::fromLatin1("\"%1 %2\",").arg(currencyID,
-                                                                MyMoneyMoney(data).formatMoney(fraction, false)));
+                               valueStr,
+                               tlinkBegin, tlinkEnd,
+                               colorBegin, colorEnd));
           }
           break;
         case cgPercent:
@@ -361,9 +372,21 @@ void ListTable::render(QString& result, QString& csv) const
             result.append(QLatin1String("<td></td>"));
             csv.append(QLatin1String("\"\","));
           } else {
-            data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
-            result.append(QString::fromLatin1("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd));
-            csv.append(QString::fromLatin1("%1%,").arg(data));
+            auto value = MyMoneyMoney(data) * MyMoneyMoney(100, 1);
+            auto valueStr = value.formatMoney(fraction);
+            csv.append(QString::fromLatin1("%1%,").arg(valueStr));
+
+            QString colorBegin;
+            QString colorEnd;
+            if ((rowRank == 4 || rowRank == 5) && value.isNegative()) {
+              colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
+              colorEnd = QLatin1String("</font>");
+            }
+
+            if ((rowRank == 4 || rowRank == 5) && value.isNegative())
+              valueStr = QString::fromLatin1("<font color=%1>%2</font>")
+                  .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name(), valueStr);
+            result.append(QString::fromLatin1("<td>%2%4%1%%5%3</td>").arg(valueStr, tlinkBegin, tlinkEnd, colorBegin, colorEnd));
           }
           break;
         case cgPrice:

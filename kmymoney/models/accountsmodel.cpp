@@ -245,7 +245,7 @@ public:
     }
     QColor color;
     if (valInstitution.isNegative())
-      color = KMyMoneyGlobalSettings::listNegativeValueColor();
+      color = KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative);
     else
       color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
 
@@ -327,7 +327,7 @@ public:
         getCell(colNum);
         QColor color;
         if (accountTotalValue.isNegative())
-          color = KMyMoneyGlobalSettings::listNegativeValueColor();
+          color = KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative);
         else
           color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
 

@@ -52,23 +52,60 @@ QFont KMyMoneyGlobalSettings::listHeaderFont()
   }
 }
 
-QColor KMyMoneyGlobalSettings::listColor()
+QColor KMyMoneyGlobalSettings::schemeColor(const SchemeColor color)
 {
-  if (useSystemColors()) {
-    KColorScheme scheme(QPalette::Normal);
-    return scheme.background(KColorScheme::NormalBackground).color();
-  } else {
-    return KMyMoneySettings::listColor();
-  }
-}
+  switch(color) {
+    case SchemeColor::ListBackground1:
+      return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NormalBackground).color();
+    case SchemeColor::ListBackground2:
+      return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
+    case SchemeColor::ListGrid:
+      return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::InactiveText).color();
+    case SchemeColor::ListHighlightText:
+      return KColorScheme (QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
+    case SchemeColor::ListHighlight:
+      return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
+    case SchemeColor::WindowText:
+      return KColorScheme (QPalette::Active, KColorScheme::Window).foreground(KColorScheme::NormalText).color();
+    case SchemeColor::WindowBackground:
+      return KColorScheme (QPalette::Active, KColorScheme::Window).background(KColorScheme::NormalBackground).color();
+    case SchemeColor::Positive:
+      return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::PositiveText).color();
+    case SchemeColor::Negative:
+      return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+    case SchemeColor::TransactionImported:
+      if (useCustomColors())
+        return KMyMoneySettings::transactionImportedColor();
+      else
+        return KColorScheme (QPalette::Active, KColorScheme::Complementary).background(KColorScheme::NeutralBackground).color();
+    case SchemeColor::TransactionMatched:
+      if (useCustomColors())
+        return KMyMoneySettings::transactionMatchedColor();
+      else
+      return KColorScheme (QPalette::Active, KColorScheme::Complementary).background(KColorScheme::PositiveBackground).color();
+    case SchemeColor::TransactionErroneous:
+      if (useCustomColors())
+        return KMyMoneySettings::transactionErroneousColor();
+      else
+      return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+    case SchemeColor::FieldRequired:
+      if (useCustomColors())
+        return KMyMoneySettings::fieldRequiredColor();
+      else
+        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NeutralBackground).color();
+    case SchemeColor::GroupMarker:
+      if (useCustomColors())
+        return KMyMoneySettings::groupMarkerColor();
+      else
+      return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::LinkBackground).color();
+    case SchemeColor::MissingConversionRate:
+      if (useCustomColors())
+        return KMyMoneySettings::missingConversionRateColor();
+      else
+      return KColorScheme (QPalette::Active, KColorScheme::Complementary).foreground(KColorScheme::LinkText).color();
+    default:
+      return QColor();
 
-QColor KMyMoneyGlobalSettings::listBGColor()
-{
-  if (useSystemColors()) {
-    KColorScheme scheme(QPalette::Normal);
-    return scheme.background(KColorScheme::AlternateBackground).color();
-  } else {
-    return KMyMoneySettings::listBGColor();
   }
 }
 

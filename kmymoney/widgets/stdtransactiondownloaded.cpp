@@ -43,8 +43,8 @@ bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleO
   bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::importedTransactionColor());
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::importedTransactionColor());
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
   }
   return rc;
 }
@@ -60,8 +60,8 @@ bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QSty
   bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::importedTransactionColor());
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::importedTransactionColor());
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
   }
   return rc;
 }
