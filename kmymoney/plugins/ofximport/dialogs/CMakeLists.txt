@@ -1,5 +1,9 @@
 include_directories(${LIBOFX_INCLUDE_DIR})
 
+if(${LIBOFX_HAVE_CLIENTUID})
+  add_definitions(-DLIBOFX_HAVE_CLIENTUID)
+endif(${LIBOFX_HAVE_CLIENTUID})
+
 ########### next target ###############
 
 set(kmm_ofximport_dialogs_la_SOURCES

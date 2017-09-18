@@ -2,10 +2,6 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ofximport.json.in ${CMAKE_CURRENT_BINARY_DIR}/ofximport.json @ONLY)
 add_subdirectory( dialogs )
 
-if(${LIBOFX_HAVE_CLIENTUID})
-  add_definitions(-DLIBOFX_HAVE_CLIENTUID)
-endif(${LIBOFX_HAVE_CLIENTUID})
-
 ########### next target ###############
 
 set(kmm_ofximport_PART_SRCS
