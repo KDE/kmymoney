@@ -1,5 +1,10 @@
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ofximport.json.in ${CMAKE_CURRENT_BINARY_DIR}/ofximport.json @ONLY)
+
+if(${LIBOFX_HAVE_CLIENTUID})
+  add_definitions(-DLIBOFX_HAVE_CLIENTUID)
+endif(${LIBOFX_HAVE_CLIENTUID})
+
 add_subdirectory( dialogs )
 
 ########### next target ###############
