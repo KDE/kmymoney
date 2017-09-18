@@ -312,7 +312,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   auto aC = kmymoney->actionCollection();
   auto pageCount = 0;
   foreach (const pageInfo info, pageInfos) {
-    auto a = new QAction();
+    auto a = new QAction(0);
     // KActionCollection::addAction by name sets object name anyways,
     // so, as better alternative, set it here right from the start
     a->setObjectName(QLatin1String("ShowPage") + QString::number(pageCount++));
