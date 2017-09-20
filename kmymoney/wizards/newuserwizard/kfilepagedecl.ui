@@ -17,7 +17,7 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
-      <string>KMyMoney will store your financial data in a file on the disk. A standard filename within your KDE user environment will be the default. This is just provided for convenience and you can choose any other location here.</string>
+      <string>KMyMoney will store your financial data in a file on the disk. A standard filename within your user environment will be the default. This is just provided for convenience and you can choose any other location here.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
