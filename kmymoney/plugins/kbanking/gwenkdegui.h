@@ -28,7 +28,7 @@
 #include "gwen-gui-qt5/qt5_gui.hpp"
 
 /**
- * @brief Gwenhywfar Gui for KDE
+ * @brief Gwenhywfar Gui by KDE
  *
  *
  * @author Christian David

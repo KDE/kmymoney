@@ -1,5 +1,5 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
  * Copyright (C) 2015 Christian Dávid <christian-david@web.de>
  *
