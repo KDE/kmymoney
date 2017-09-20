@@ -60,8 +60,6 @@ static int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, c
 
 int main(int argc, char *argv[])
 {
-  KLocalizedString::setApplicationDomain("kmymoney");
-
   {
     // Copy KDE 4 config files to the KF5 location
     Kdelibs4ConfigMigrator migrator(QStringLiteral("kmymoney"));
@@ -74,6 +72,8 @@ int main(int argc, char *argv[])
    * Create application first
    */
   QApplication app(argc, argv);
+  KLocalizedString::setApplicationDomain("kmymoney");
+
 
   /**
    * construct and register about data
