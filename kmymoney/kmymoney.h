@@ -80,7 +80,7 @@ enum class Action {
   ToolPrices, ToolUpdatePrices,
   ToolConsistency, ToolPerformance,
   ToolSQL, ToolCalculator,
-  SettingsAllMessages, SettingsLanguage,
+  SettingsAllMessages,
   HelpShow,
   TransactionNew, TransactionEdit,
   TransactionEnter, TransactionEditSplits,
@@ -535,8 +535,6 @@ protected slots:
   /**
     */
   void slotScheduleDuplicate();
-
-  void slotKDELanguageSettings();
 
   void slotAccountMapOnline();
   void slotAccountUnmapOnline();

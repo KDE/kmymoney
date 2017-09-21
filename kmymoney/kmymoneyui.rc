@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="42" name="kmymoney" >
+<kpartgui version="43" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <Action append="open_merge" name="open_database" />
@@ -108,7 +108,6 @@
   </Menu>
   <Menu name="settings" >
    <Action append="show_merge" name="settings_enable_messages" />
-   <Action append="show_merge" name="settings_language"/>
   </Menu>
   <Menu name="help" >
    <Action name="show_tip" />

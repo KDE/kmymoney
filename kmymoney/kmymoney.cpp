@@ -230,7 +230,6 @@ const QHash<Action, QString> KMyMoneyApp::s_Actions {
   {Action::ToolSQL, QStringLiteral("tools_generate_sql")},
   {Action::ToolCalculator, QStringLiteral("tools_kcalc")},
   {Action::SettingsAllMessages, QStringLiteral("settings_enable_messages")},
-  {Action::SettingsLanguage, QStringLiteral("settings_language")},
   {Action::HelpShow, QStringLiteral("help_show_tip")},
   {Action::TransactionNew, QStringLiteral("transaction_new")},
   {Action::TransactionEdit, QStringLiteral("transaction_edit")},
@@ -806,7 +805,6 @@ void KMyMoneyApp::initActions()
       // The settings menu
       // *****************
       {Action::SettingsAllMessages,           &KMyMoneyApp::slotEnableMessages,               i18n("Enable all messages"),                        Icon::Empty},
-      {Action::SettingsLanguage,              &KMyMoneyApp::slotKDELanguageSettings,          i18n("KDE language settings..."),                   Icon::Empty},
       // *************
       // The help menu
       // *************
@@ -5039,18 +5037,6 @@ void KMyMoneyApp::slotBudgetForecast()
       KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
-}
-
-void KMyMoneyApp::slotKDELanguageSettings()
-{
-  KMessageBox::information(this, i18n("Please be aware that changes made in the following dialog affect all KDE applications not only KMyMoney."), i18nc("Warning message box", "Warning"), "LanguageSettingsWarning");
-
-  QStringList args;
-  args << "language";
-  QString error;
-  int pid;
-
-  KToolInvocation::kdeinitExec("kcmshell4", args, &error, &pid);
 }
 
 void KMyMoneyApp::slotNewFeature()
