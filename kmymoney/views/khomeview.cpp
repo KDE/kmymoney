@@ -1567,7 +1567,7 @@ void KHomeView::showBudget()
         PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
         while (it_row != (*it_innergroup).end()) {
           //column number is 1 because the report includes only current month
-          if (it_row.value()[eBudgetDiff][1].isNegative()) {
+          if (it_row.value()[eBudgetDiff].value(1).isNegative()) {
             //get report account to get the name later
             ReportAccount rowname = it_row.key();
 
