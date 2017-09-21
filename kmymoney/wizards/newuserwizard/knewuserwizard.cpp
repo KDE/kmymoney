@@ -324,7 +324,7 @@ FilePage::FilePage(Wizard* wizard) :
 
   KUser user;
   QString folder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-  if (folder.isEmpty())
+  if (folder.isEmpty() || !QDir().exists(folder))
     folder = QDir::homePath();
   m_dataFileEdit->setStartDir(QUrl::fromLocalFile(folder));
   m_dataFileEdit->setUrl(QUrl::fromLocalFile(folder + QLatin1Char('/') + user.loginName() + QLatin1String(".kmy")));
