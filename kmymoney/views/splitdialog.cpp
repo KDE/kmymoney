@@ -82,9 +82,22 @@ static const int ValueCol = 1;
 
 void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
 {
-  foreach(auto index, indexList) {
-    ui->splitView->model()->removeRow(index.row());
+  if (indexList.isEmpty()) {
+    return;
   }
+
+  // remove from the end so that the row information stays
+  // consistent and is not changed due to index changes
+  QMap<int, int> sortedList;
+  foreach(auto index, indexList) {
+    sortedList[index.row()] = index.row();
+  }
+
+  QMap<int, int>::const_iterator it = sortedList.constEnd();
+  do {
+    --it;
+    ui->splitView->model()->removeRow(*it);
+  } while(it != sortedList.constBegin());
 }
 
 
