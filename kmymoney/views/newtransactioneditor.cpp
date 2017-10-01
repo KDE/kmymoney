@@ -123,6 +123,7 @@ void NewTransactionEditor::Private::updateWidgetState()
   QModelIndex index;
 
   // update the category combo box
+  ui->accountCombo->setEnabled(true);
   switch(splitModel.rowCount()) {
     case 0:
       ui->accountCombo->setSelected(QString());
