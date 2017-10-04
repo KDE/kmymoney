@@ -118,7 +118,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     m_header(0),
     m_inConstructor(true),
     m_fileOpen(false),
-    m_fmode(0600),
+    m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
     m_lastViewSelected(0)
 #ifdef KF5Activities_FOUND
     , m_activityResourceInstance(0)
@@ -911,11 +911,8 @@ bool KMyMoneyView::readFile(const QUrl &url)
     KMessageBox::error(this, msg, i18n("Filetype Error"));
     return false;
   }
-  m_fmode = 0600;
-  m_fmode |= info.permission(QFile::ReadGroup) ? 040 : 0;
-  m_fmode |= info.permission(QFile::WriteGroup) ? 020 : 0;
-  m_fmode |= info.permission(QFile::ReadOther) ? 004 : 0;
-  m_fmode |= info.permission(QFile::WriteOther) ? 002 : 0;
+  m_fmode = QFileDevice::ReadUser | QFileDevice::WriteUser;
+  m_fmode |= info.permissions();
 
   bool rc = true;
 
@@ -1397,9 +1394,8 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
    * @brief Automatically restore settings when scope is left
    */
   struct restorePreviousSettingsHelper {
-    restorePreviousSettingsHelper(mode_t mode)
-      : m_signalsWereBlocked{MyMoneyFile::instance()->signalsBlocked()},
-      m_oldMask{umask((~mode) & 0777u)}
+    restorePreviousSettingsHelper()
+      : m_signalsWereBlocked{MyMoneyFile::instance()->signalsBlocked()}
     {
       MyMoneyFile::instance()->blockSignals(true);
     }
@@ -1407,11 +1403,9 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     ~restorePreviousSettingsHelper()
     {
       MyMoneyFile::instance()->blockSignals(m_signalsWereBlocked);
-      umask(m_oldMask);
     }
     const bool m_signalsWereBlocked;
-    const mode_t m_oldMask;
-  } restoreHelper{m_fmode};
+  } restoreHelper;
 
   MyMoneyFileTransaction ft;
   MyMoneyFile::instance()->deletePair("kmm-encryption-key");
@@ -1459,6 +1453,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     if (!QFile::remove(localFile) || !QFile::rename(writeFile, localFile))
       throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
   }
+  QFile::setPermissions(localFile, m_fmode);
   pWriter->setProgressCallback(0);
 }
 

@@ -154,7 +154,7 @@ private:
   KMyMoneyTitleLabel* m_header;
   bool m_inConstructor;
   bool m_fileOpen;
-  mode_t m_fmode;
+  QFileDevice::Permissions m_fmode;
   int m_lastViewSelected;
 
   // Keep a note of the file type
