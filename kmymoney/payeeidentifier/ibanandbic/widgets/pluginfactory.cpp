@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014  Christian David <christian-david@web.de>
+ * Copyright (C) 2017  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +21,8 @@
 
 #include "ibanbicitemdelegate.h"
 
-// TODO: port KF5
-/*K_PLUGIN_FACTORY(ibanAndBicPidDelegatesFactory,
+K_PLUGIN_FACTORY(ibanAndBicPidDelegatesFactory,
                  registerPlugin<ibanBicItemDelegate>("ibanBicDelegate");
                 )
-K_EXPORT_PLUGIN(ibanAndBicPidDelegatesFactory("payeeidentifier_iban_bic_delegates"))*/
+
+#include <pluginfactory.moc>

@@ -4,7 +4,7 @@ ServiceTypes=KMyMoney/PayeeIdentifierDelegate
 
 X-KMyMoney-payeeIdentifierIds=org.kmymoney.payeeIdentifier.ibanbic
 
-X-KDE-Library=payeeidentifier_iban_bic_delegate
+X-KDE-Library=payeeidentifier_iban_bic_delegates
 X-KDE-PluginKeyword=ibanBicDelegate
 
 X-KDE-PluginInfo-Name=IBAN and BIC support

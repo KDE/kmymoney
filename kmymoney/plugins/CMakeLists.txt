@@ -77,6 +77,7 @@ install(FILES ${plugins_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
 install(FILES
+  kmymoney-payeeidentifierdelegate.desktop
   kmymoney-importerplugin.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 )

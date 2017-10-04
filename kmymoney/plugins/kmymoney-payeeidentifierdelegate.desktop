@@ -1,0 +1,24 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KMyMoney/PayeeIdentifierDelegate
+Name=Painter of payee identifier
+Name[ca]=Pintor de la identificació del beneficiari
+Name[ca@valencia]=Pintor de la identificació del beneficiari
+Name[da]=Tegner af betalingsmodtageridentifikator
+Name[en_GB]=Painter of payee identifier
+Name[es]=Pintor del identificador del beneficiario
+Name[gl]=Pintor do identificador do beneficiario
+Name[it]=Disegnatore dell'identificatore del beneficiario
+Name[nl]=Schilder van identifier van begunstigde
+Name[pl]=Malarz identyfikatora odbiorcy
+Name[pt]=Pintura do identificador do beneficiário
+Name[pt_BR]=Pintura do identificador do beneficiário
+Name[sk]=Identifikátor maliara príjemcu
+Name[sv]=Uppritning av betalningsmottagarens identifierare
+Name[tr]=Alıcı tanımlayıcı boyacısı
+Name[uk]=Засіб малювання для ідентифікатора отримувача
+Name[x-test]=xxPainter of payee identifierxx
+
+[PropertyDef::X-KMyMoney-payeeIdentifierIds]
+Type=QStringList
+# A list of payeeIdentifier ids which can be viewed/edited by this delegate

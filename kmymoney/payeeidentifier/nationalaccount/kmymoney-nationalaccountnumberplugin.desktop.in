@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-ServiceType=KMyMoney/NationalAccountNumberPlugin
+X-KDE-ServiceType=KMyMoney/NationalAccountNumberPlugin
 Name=A plugin which gives access to account number and bank code related information
 
 [PropertyDef::X-KMyMoney-PluginInfo-CountryCodes]
