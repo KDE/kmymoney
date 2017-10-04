@@ -1,9 +1,9 @@
 /***************************************************************************
-                             kaccountssview.h
+                          kmymoneyviewbase.cpp
                              -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
+    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *
@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KACCOUNTSVIEW_H
-#define KACCOUNTSVIEW_H
+#include "kmymoneyviewbase.h"
+#include "kmymoneyviewbase_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,36 +26,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
-
-/**
-  * This class implements the accounts hierarchical and iconic 'view'.
-  */
-class MyMoneyMoney;
-class KAccountsViewPrivate;
-class KAccountsView : public KMyMoneyAccountsViewBase
+KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent) :
+    QWidget(parent), d_ptr(new KMyMoneyViewBasePrivate)
 {
-  Q_OBJECT
+}
 
-public:
-  explicit KAccountsView(QWidget *parent = nullptr);
-  ~KAccountsView();
+KMyMoneyViewBase::KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent)
+    : QWidget(parent), d_ptr(&dd)
+{
+}
 
-  void setDefaultFocus() override;
-  void refresh() override;
-
-public slots:
-  void slotNetWorthChanged(const MyMoneyMoney &);
-
-protected:
-  KAccountsView(KAccountsViewPrivate &dd, QWidget *parent);
-  void showEvent(QShowEvent * event) override;
-
-protected slots:
-  void slotUnusedIncomeExpenseAccountHidden();
-
-private:
-  Q_DECLARE_PRIVATE(KAccountsView)
-};
-
-#endif
+KMyMoneyViewBase::~KMyMoneyViewBase()
+{
+}

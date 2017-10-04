@@ -57,7 +57,7 @@ public:
     *
     * @return pointer to KMyMoneyViewBase object
     */
-  KMyMoneyViewBase* addPage(const QString& item, const QString& icon);
+//  KMyMoneyViewBase* addPage(const QString& item, const QString& icon);
 
   /**
     * This method allows to add a widget to the view
@@ -66,7 +66,7 @@ public:
     * @param view pointer to view object
     * @param w pointer to widget
     */
-  void addWidget(KMyMoneyViewBase* view, QWidget* w);
+//  void addWidget(KMyMoneyViewBase* view, QWidget* w);
 
 private:
   KMyMoneyView* m_view;

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KBudgetViewDecl</class>
- <widget class="QWidget" name="KBudgetViewDecl">
+ <class>KBudgetView</class>
+ <widget class="QWidget" name="KBudgetView">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>669</width>
-    <height>248</height>
+    <width>840</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -43,6 +43,12 @@
         <layout class="QHBoxLayout">
          <item>
           <widget class="QPushButton" name="m_newButton">
+           <property name="toolTip">
+            <string>Creates a new budget</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to create a new empty budget.</string>
+           </property>
            <property name="text">
             <string comment="New budget">New</string>
            </property>
@@ -50,6 +56,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="m_renameButton">
+           <property name="toolTip">
+            <string>Rename the current selected budget.</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to start renaming the selected budget.</string>
+           </property>
            <property name="text">
             <string>Ren</string>
            </property>
@@ -57,6 +69,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="m_deleteButton">
+           <property name="toolTip">
+            <string>Delete the current selected budget</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to delete the selected budget.</string>
+           </property>
            <property name="text">
             <string>Del</string>
            </property>
@@ -71,6 +89,9 @@
         <widget class="QTreeWidget" name="m_budgetList">
          <property name="alternatingRowColors">
           <bool>true</bool>
+         </property>
+         <property name="rootIsDecorated">
+          <bool>false</bool>
          </property>
          <property name="allColumnsShowFocus">
           <bool>true</bool>
@@ -111,6 +132,12 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="toolTip">
+            <string>Accepts the entered values and stores the budget.</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to store the modified data.</string>
+           </property>
            <property name="text">
             <string>Upd</string>
            </property>
@@ -123,6 +150,12 @@
           <widget class="QPushButton" name="m_resetButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Revert budget to last saved state.</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to discard the modified data.</string>
            </property>
            <property name="text">
             <string>Res</string>
@@ -286,5 +319,38 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_collapseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_accountTree</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_expandButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_accountTree</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>547</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

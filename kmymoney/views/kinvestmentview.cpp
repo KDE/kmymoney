@@ -131,8 +131,10 @@ void KInvestmentView::init()
   d->m_accountsProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_accountsProxyModel->addAccountType(MyMoneyAccount::Investment);
   d->m_accountsProxyModel->setHideEquityAccounts(false);
-  d->m_accountsProxyModel->init(Models::instance()->accountsModel());
-  d->m_accountsProxyModel->sort(AccountsModel::Account);
+  auto const model = Models::instance()->accountsModel();
+  d->m_accountsProxyModel->setSourceModel(model);
+  d->m_accountsProxyModel->setSourceColumns(model->getColumns());
+  d->m_accountsProxyModel->sort((int)eAccountsModel::Column::Account);
   m_accountComboBox->setModel(d->m_accountsProxyModel);
   m_accountComboBox->expandAll();
 

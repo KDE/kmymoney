@@ -135,7 +135,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
   if(!accountId.isEmpty()) {
     try {
       QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
-      category = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+      category = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
       const bool isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
       ui->costCenterLabel->setEnabled(isIncomeExpense);
@@ -192,7 +192,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
   QModelIndex index = Models::instance()->accountsModel()->accountById(counterAccountId);
-  d->counterAccount = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+  d->counterAccount = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
@@ -201,13 +201,14 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
   d->accountsModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();
-  d->accountsModel->init(model, model->getColumns());
-  d->accountsModel->sort(AccountsModel::Account);
+  d->accountsModel->setSourceModel(model);
+  d->accountsModel->setSourceColumns(model->getColumns());
+  d->accountsModel->sort((int)eAccountsModel::Column::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
   d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
-  d->costCenterModel->sort(AccountsModel::Account);
+  d->costCenterModel->sort((int)eAccountsModel::Column::Account);
 
   d->ui->costCenterCombo->setEditable(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);

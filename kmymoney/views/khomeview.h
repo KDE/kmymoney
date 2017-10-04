@@ -33,9 +33,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyviewbase.h"
+
 #include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
-#include "kmymoneyview.h"
 
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;
@@ -63,7 +64,7 @@ public:
     Payment = 2             ///< show payment accounts
   };
 
-  explicit KHomeView(QWidget *parent = 0, const char *name = 0);
+  explicit KHomeView(QWidget *parent = nullptr);
   ~KHomeView();
 
 protected:

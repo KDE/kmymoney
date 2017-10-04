@@ -45,6 +45,9 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "kmymoneyviewbase.h"
+
 #ifdef _CHECK_MEMORY
 #include <mymoneyutils.h>
 #endif
@@ -56,7 +59,6 @@
 #include "querytable.h"
 #include "../widgets/reportcontrolimpl.h"
 #include "kreportchartview.h"
-#include "kmymoneyview.h"
 
 #include "tocitem.h"
 #include "tocitemgroup.h"
@@ -204,7 +206,7 @@ public:
     *
     * @see ~KReportsView
     */
-  explicit KReportsView(QWidget *parent = 0, const char *name = 0);
+  explicit KReportsView(QWidget *parent = nullptr);
 
   void setDefaultFocus();
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KInstitutionsViewDecl</class>
- <widget class="QWidget" name="KInstitutionsViewDecl">
+ <class>KInstitutionsView</class>
+ <widget class="QWidget" name="KInstitutionsView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -110,5 +119,38 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_expandButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_accountTree</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>121</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_collapseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_accountTree</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>121</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

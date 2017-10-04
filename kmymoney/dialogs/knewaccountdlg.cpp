@@ -57,9 +57,10 @@
 #include "kmymoneyfile.h"
 #include "kmymoneyutils.h"
 #include "models.h"
+#include "accountsmodel.h"
 
 HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
-    : AccountsFilterProxyModel(parent)
+    : AccountsProxyModel(parent)
 {
 }
 
@@ -68,10 +69,10 @@ HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
   */
 Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
 {
-  Qt::ItemFlags flags = AccountsFilterProxyModel::flags(index);
+  Qt::ItemFlags flags = AccountsProxyModel::flags(index);
   QModelIndex currentIndex = index;
   while (currentIndex.isValid()) {
-    QVariant accountId = data(currentIndex, AccountsModel::AccountIdRole);
+    QVariant accountId = data(currentIndex, (int)eAccountsModel::Role::ID);
     if (accountId.isValid() && accountId.toString() == m_currentAccountId) {
       flags = flags & ~Qt::ItemIsSelectable & ~Qt::ItemIsEnabled;
     }
@@ -97,7 +98,7 @@ void HierarchyFilterProxyModel::setCurrentAccountId(const QString &currentAccoun
   */
 QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
 {
-  QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  QModelIndexList list = match(index(0, 0), (int)eAccountsModel::Role::ID, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
   if (!list.empty()) {
     return list.front().parent();
   }
@@ -110,11 +111,11 @@ QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    const auto data = sourceModel()->index(source_row, AccountsModel::Account, source_parent).data(AccountsModel::AccountIdRole);
+    const auto data = sourceModel()->index(source_row, (int)eAccountsModel::Column::Account, source_parent).data((int)eAccountsModel::Role::ID);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
-  return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+  return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 
 /**
@@ -177,11 +178,12 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   m_filterProxyModel->addAccountGroup(filterAccountGroup);
   m_filterProxyModel->setCurrentAccountId(m_account.id());
   auto const model = Models::instance()->accountsModel();
-  m_filterProxyModel->init(model, m_parentAccounts->getColumns(KMyMoneyView::View::None));
+  m_filterProxyModel->setSourceModel(model);
+  m_filterProxyModel->setSourceColumns(model->getColumns());
   m_filterProxyModel->setDynamicSortFilter(true);
 
-  m_parentAccounts->init(m_filterProxyModel, model->getColumns());
-  m_parentAccounts->sortByColumn(AccountsModel::Account, Qt::AscendingOrder);
+  m_parentAccounts->setModel(m_filterProxyModel);
+  m_parentAccounts->sortByColumn((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
 
   m_subAccountLabel->setText(i18n("Is a sub account"));
 
@@ -695,7 +697,7 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
 {
   Q_UNUSED(previous)
   if (!current.indexes().empty()) {
-    QVariant account = m_parentAccounts->model()->data(current.indexes().front(), AccountsModel::AccountRole);
+    QVariant account = m_parentAccounts->model()->data(current.indexes().front(), (int)eAccountsModel::Role::Account);
     if (account.isValid()) {
       m_parentAccount = account.value<MyMoneyAccount>();
       m_subAccountLabel->setText(i18n("Is a sub account of %1", m_parentAccount.name()));

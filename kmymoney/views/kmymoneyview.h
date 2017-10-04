@@ -25,12 +25,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QList>
-#include <QVBoxLayout>
-#include <QUrl>
-#include <QSaveFile>
-#include <QMenu>
+#include <QFileDevice>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -39,13 +34,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
-#include "mymoneytransaction.h"
-#include "mymoneyschedule.h"
-#include "mymoneysecurity.h"
 #include "selectedtransaction.h"
-#include <accountsmodel.h>
+#include "mymoneyreport.h"
 
 #ifdef KF5Activities_FOUND
 namespace KActivities
@@ -53,6 +43,10 @@ namespace KActivities
 class ResourceInstance;
 }
 #endif
+
+namespace eAccountsModel {
+  enum class Column;
+}
 
 class KMyMoneyApp;
 class KHomeView;
@@ -74,7 +68,9 @@ class TransactionEditor;
 class KForecastView;
 class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
+class MyMoneyAccount;
 class QLabel;
+class QVBoxLayout;
 
 /**
   * This class represents the view of the MyMoneyFile which contains
@@ -86,26 +82,11 @@ class QLabel;
   *
   * @short Handles the view of the MyMoneyFile.
   */
+enum class View;
 class KMyMoneyView : public KPageWidget
 {
   Q_OBJECT
 public:
-  enum class View {
-    Home = 0,
-    Institutions,
-    Accounts,
-    Schedules,
-    Categories,
-    Tags,
-    Payees,
-    Ledgers,
-    Investments,
-    Reports,
-    Budget,
-    Forecast,
-    OnlineJobOutbox,
-    None
-  };
   // file actions for plugin
   enum fileActions {
     preOpen, postOpen, preSave, postSave, preClose, postClose
@@ -330,8 +311,6 @@ public:
     */
   void enableViewsIfFileOpen();
 
-  KMyMoneyViewBase* addBasePage(const QString& title, const QString& icon = QString());
-
   void addWidget(QWidget* w);
 
   void showPage(KPageWidgetItem* pageItem);
@@ -427,7 +406,7 @@ public:
     */
   void updateViewType();
 
-  void slotAccountTreeViewChanged(const AccountsModel::Columns column, const bool show);
+  void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
 
   void slotNetBalProChanged(const MyMoneyMoney &val, QLabel *label, const View view);
 
@@ -594,6 +573,9 @@ private:
     */
   void accountNew(const bool createCategory);
 
+  void resetViewSelection(const View);
+  void connectView(const View);
+
 signals:
   /**
     * This signal is emitted whenever a view is selected.
@@ -636,49 +618,6 @@ signals:
    * This signal is emitted after a data source has been opened
    */
   void fileOpened();
-
 };
 
-/**
-  * This class is an abstract base class that all specific views
-  * should be based on.
-  */
-class KMyMoneyViewBase : public QWidget
-{
-  Q_OBJECT
-public:
-  KMyMoneyViewBase(QWidget* parent, const QString& name, const QString& title);
-  virtual ~KMyMoneyViewBase();
-
-  void setTitle(const QString& title);
-  QVBoxLayout* layout() const;
-  void addWidget(QWidget* w);
-
-  /**
-    * This method is used to edit the currently selected transactions
-    * The default implementation returns @p false which signals to the caller, that
-    * the view was not capable to edit the transactions.
-    *
-    * @retval false view was not capable to edit transactions
-    * @retval true view was capable to edit the transactions and did so
-    */
-  bool editTransactions(const QList<MyMoneyTransaction>& transactions) const {
-    Q_UNUSED(transactions)  return false;
-  }
-
-signals:
-  /**
-    * This signal is emitted whenever the view is about to be shown.
-    */
-  void aboutToShow();
-
-private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
-
-};
-
-inline uint qHash(const KMyMoneyView::View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 #endif

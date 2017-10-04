@@ -19,13 +19,13 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef KMYMONEYACCOUNTTREEVIEW_H
-#define KMYMONEYACCOUNTTREEVIEW_H
+#ifndef ACCOUNTVIEWPROXYMODEL_H
+#define ACCOUNTVIEWPROXYMODEL_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeView>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,71 +33,36 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "viewenums.h"
-
-namespace eAccountsModel {
-  enum class Column;
-}
-
-class AccountsViewProxyModel;
-class MyMoneyObject;
+#include "accountsproxymodel.h"
+#include "modelenums.h"
 
 /**
-  * This view was created to handle the actions that could be performed with the accounts.
+  * This model is specialized to organize the data for the accounts tree view
+  * based on the data of the @ref AccountsModel.
   */
-class KMyMoneyAccountTreeView : public QTreeView
+class AccountsViewProxyModel : public AccountsProxyModel
 {
   Q_OBJECT
 
 public:
-  KMyMoneyAccountTreeView(QWidget *parent = nullptr);
-  ~KMyMoneyAccountTreeView();
+  AccountsViewProxyModel(QObject *parent = nullptr);
+  ~AccountsViewProxyModel();
 
-  AccountsViewProxyModel *init(View view);
+  void setColumnVisibility(eAccountsModel::Column column, bool visible);
+  QSet<eAccountsModel::Column> getVisibleColumns();
+
+public slots:
+  void slotColumnsMenu(const QPoint);
 
 protected:
-  void mouseDoubleClickEvent(QMouseEvent *event);
-  void keyPressEvent(QKeyEvent *event);
-
-protected slots:
-  void customContextMenuRequested(const QPoint);
-  void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
-
-signals:
-  /**
-    * This signal serves as proxy for KMyMoneyAccountTree::selectObject()
-    *
-    * @param obj const reference to object
-    */
-  void selectObject(const MyMoneyObject& obj);
-
-  /**
-    * This signal serves as proxy for
-    * KMyMoneyAccountTree::openContextMenu(const MyMoneyObject&)
-    *
-    * @param obj const reference to object
-    */
-  void openContextMenu(const MyMoneyObject& obj);
-
-  /**
-    * This signal is emitted whenever the user requests to open an object
-    *
-    * @param obj reference to actual MyMoneyObject (is either
-    *            MyMoneyAccount or MyMoneyInstitution depending on selected item)
-    */
-  void openObject(const MyMoneyObject& obj);
-
-  void columnToggled(const eAccountsModel::Column column, const bool show);
+  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
 
 private:
-  void openIndex(const QModelIndex &index);
-  static QString getConfGrpName(const View view);
-  QSet<eAccountsModel::Column> readVisibleColumns(const View view);
-  QVector<MyMoneyAccount::_accountTypeE> getVisibleGroups(const View view);
+  QSet<eAccountsModel::Column> m_visColumns;
 
-  AccountsViewProxyModel   *m_model;
-  View                     m_view;
+signals:
+  void columnToggled(const eAccountsModel::Column column, const bool show);
 };
 
-#endif // KMYMONEYACCOUNTTREEVIEW_H
+#endif

@@ -305,8 +305,6 @@ enum backupStateE {
   BACKUP_UNMOUNTING
 };
 
-typedef void(KMyMoneyApp::*KMyMoneyAppFunc)();
-
 class KMyMoneyApp::Private
 {
 public:
@@ -545,7 +543,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   d->m_myMoneyView = new KMyMoneyView(this/*the global variable kmymoney is not yet assigned. So we pass it here*/);
   layout->addWidget(d->m_myMoneyView, 10);
-  connect(d->m_myMoneyView, SIGNAL(aboutToChangeView()), this, SLOT(slotResetSelections()));
+  connect(d->m_myMoneyView, &KMyMoneyView::aboutToChangeView, this, &KMyMoneyApp::slotResetSelections);
   connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
           this, SLOT(slotUpdateActions()));
 
@@ -770,13 +768,13 @@ void KMyMoneyApp::initActions()
       // The institutions menu
       // *********************
       {Action::InstitutionNew,                &KMyMoneyApp::slotInstitutionNew,               i18n("New institution..."),                         Icon::Empty},
-      {Action::InstitutionEdit,               &KMyMoneyApp::slotInstitutionEdit,              i18n("Edit institution..."),                        Icon::Empty},
+      {Action::InstitutionEdit,               &KMyMoneyApp::slotInstitutionEditEmpty,         i18n("Edit institution..."),                        Icon::Empty},
       {Action::InstitutionDelete,             &KMyMoneyApp::slotInstitutionDelete,            i18n("Delete institution..."),                      Icon::Empty},
       // *****************
       // The accounts menu
       // *****************
       {Action::AccountNew,                    &KMyMoneyApp::slotAccountNew,                   i18n("New account..."),                             Icon::Empty},
-      {Action::AccountOpen,                   &KMyMoneyApp::slotAccountOpen,                  i18n("Open ledger"),                                Icon::ViewFinancialList},
+      {Action::AccountOpen,                   &KMyMoneyApp::slotAccountOpenEmpty,             i18n("Open ledger"),                                Icon::ViewFinancialList},
       {Action::AccountStartReconciliation,    &KMyMoneyApp::slotAccountReconcileStart,        i18n("Reconcile..."),                               Icon::Reconcile},
       {Action::AccountFinishReconciliation,   &KMyMoneyApp::slotAccountReconcileFinish,       i18nc("Finish reconciliation", "Finish"),           Icon::Empty},
       {Action::AccountPostponeReconciliation, &KMyMoneyApp::slotAccountReconcilePostpone,     i18n("Postpone reconciliation"),                    Icon::MediaPlaybackPause},
@@ -2611,7 +2609,7 @@ void KMyMoneyApp::slotInstitutionNew(MyMoneyInstitution& institution)
   delete dlg;
 }
 
-void KMyMoneyApp::slotInstitutionEdit()
+void KMyMoneyApp::slotInstitutionEditEmpty()
 {
   slotInstitutionEdit(MyMoneyInstitution());
 }
@@ -3745,7 +3743,7 @@ void KMyMoneyApp::slotAccountReconcilePostpone()
   }
 }
 
-void KMyMoneyApp::slotAccountOpen()
+void KMyMoneyApp::slotAccountOpenEmpty()
 {
   slotAccountOpen(MyMoneyAccount());
 }
@@ -6357,6 +6355,7 @@ void KMyMoneyApp::slotUpdateActions()
     aC->action(s_Actions[Action::TagDelete])->setEnabled(true);
   }
 
+  aC->action(s_Actions[Action::BudgetNew])->setEnabled(true);
   if (d->m_selectedBudgets.count() >= 1) {
     aC->action(s_Actions[Action::BudgetDelete])->setEnabled(true);
     if (d->m_selectedBudgets.count() == 1) {
@@ -6389,9 +6388,9 @@ void KMyMoneyApp::slotUpdateActions()
 
 void KMyMoneyApp::slotResetSelections()
 {
-  slotSelectAccount();
-  slotSelectInstitution();
-  slotSelectInvestment();
+  slotSelectAccount(MyMoneyAccount());
+  slotSelectInstitution(MyMoneyInstitution());
+  slotSelectInvestment(MyMoneyAccount());
   slotSelectSchedule();
   slotSelectCurrency();
   slotSelectPrice();
@@ -6518,11 +6517,6 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
     actionCollection()->action(s_Actions[Action::TransactionGoToAccount])->setText(i18n("Go to account"));
 }
 
-void KMyMoneyApp::slotSelectInstitution()
-{
-  slotSelectInstitution(MyMoneyInstitution());
-}
-
 void KMyMoneyApp::slotSelectInstitution(const MyMoneyObject& institution)
 {
   if (typeid(institution) != typeid(MyMoneyInstitution))
@@ -6532,11 +6526,6 @@ void KMyMoneyApp::slotSelectInstitution(const MyMoneyObject& institution)
   // qDebug("slotSelectInstitution('%s')", d->m_selectedInstitution.name().data());
   slotUpdateActions();
   emit institutionSelected(d->m_selectedInstitution);
-}
-
-void KMyMoneyApp::slotSelectAccount()
-{
-  slotSelectAccount(MyMoneyAccount());
 }
 
 void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
@@ -6552,11 +6541,6 @@ void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
   // qDebug("slotSelectAccount('%s')", d->m_selectedAccount.name().data());
   slotUpdateActions();
   emit accountSelected(d->m_selectedAccount);
-}
-
-void KMyMoneyApp::slotSelectInvestment()
-{
-  slotSelectInvestment(MyMoneyAccount());
 }
 
 void KMyMoneyApp::slotSelectInvestment(const MyMoneyObject& obj)
@@ -7561,9 +7545,9 @@ void KMyMoneyApp::Private::unlinkStatementXML()
 
 void KMyMoneyApp::Private::closeFile()
 {
-  q->slotSelectAccount();
-  q->slotSelectInstitution();
-  q->slotSelectInvestment();
+  q->slotSelectAccount(MyMoneyAccount());
+  q->slotSelectInstitution(MyMoneyInstitution());
+  q->slotSelectInvestment(MyMoneyAccount());
   q->slotSelectSchedule();
   q->slotSelectCurrency();
   q->slotSelectBudget(QList<MyMoneyBudget>());

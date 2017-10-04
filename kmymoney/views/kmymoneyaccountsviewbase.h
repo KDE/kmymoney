@@ -1,8 +1,9 @@
 /***************************************************************************
-                             kinstitutionssview.h
+                          kmymoneyaccountsviewbase.h
                              -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
+                               2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KINSTITUTIONSVIEW_H
-#define KINSTITUTIONSVIEW_H
+#ifndef KMYMONEYACCOUNTSVIEWBASE_H
+#define KMYMONEYACCOUNTSVIEWBASE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -23,43 +24,35 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include "kmymoneyviewbase.h"
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
-
-namespace Ui {
-  class KInstitutionsView;
-}
+class KMyMoneyAccountTreeView;
+class AccountsViewProxyModel;
 
 /**
-  * @author Thomas Baumgart
+  * This class is an abstract base class that all specific views
+  * should be based on.
   */
-/**
-  * This class implements the institutions hierarchical 'view'.
-  */
-class MyMoneyMoney;
-class KInstitutionsViewPrivate;
-class KInstitutionsView : public KMyMoneyAccountsViewBase
+class KMyMoneyAccountsViewBasePrivate;
+class KMyMoneyAccountsViewBase : public KMyMoneyViewBase
 {
   Q_OBJECT
 
 public:
-  KInstitutionsView(QWidget *parent = nullptr);
-  ~KInstitutionsView();
+  explicit KMyMoneyAccountsViewBase(QWidget* parent = nullptr);
+  virtual ~KMyMoneyAccountsViewBase();
 
-  void setDefaultFocus() override;
-  void refresh() override;
-
-public slots:
-  void slotNetWorthChanged(const MyMoneyMoney &);
+  AccountsViewProxyModel  *getProxyModel();
+  KMyMoneyAccountTreeView *getTreeView();
 
 protected:
-  KInstitutionsView(KInstitutionsViewPrivate &dd, QWidget *parent);
-  virtual void showEvent(QShowEvent * event);
+  KMyMoneyAccountsViewBase(KMyMoneyAccountsViewBasePrivate &dd, QWidget *parent);
 
 private:
-  Q_DECLARE_PRIVATE(KInstitutionsView)
+  Q_DECLARE_PRIVATE(KMyMoneyAccountsViewBase)
 };
 
 #endif

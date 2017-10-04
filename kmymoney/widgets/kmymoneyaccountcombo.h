@@ -42,6 +42,7 @@
 
 #include "kmymoneyutils.h"
 #include "accountsmodel.h"
+#include "accountsproxymodel.h"
 #include "models/onlinebankingaccountsfilterproxymodel.h"
 
 
@@ -78,12 +79,12 @@ protected:
  * @code typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
  * should work as well
  */
-class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
+class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
 {
   Q_OBJECT
 public:
   AccountNamesFilterProxyModel(QObject* parent = 0)
-      : AccountNamesFilterProxyModelTpl< AccountsFilterProxyModel >(parent) {}
+      : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
 };
 
 /**

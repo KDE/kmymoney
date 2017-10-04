@@ -144,8 +144,8 @@ QString QPixmapToDataUri(const QPixmap& pixmap)
   return QLatin1String("data:image/png;base64,") + QString(byteArray.toBase64());
 }
 
-KHomeView::KHomeView(QWidget *parent, const char *name) :
-    KMyMoneyViewBase(parent, name, i18n("Home")),
+KHomeView::KHomeView(QWidget *parent) :
+    KMyMoneyViewBase(parent),
     d(new Private)
 {
 }
@@ -164,6 +164,12 @@ KHomeView::~KHomeView()
 void KHomeView::init()
 {
   d->m_needLoad = false;
+
+  auto vbox = new QVBoxLayout(this);
+  setLayout(vbox);
+  vbox->setSpacing(6);
+  vbox->setMargin(0);
+
 #ifdef ENABLE_WEBENGINE
   d->m_view = new QWebEngineView(this);
 #else
@@ -171,7 +177,7 @@ void KHomeView::init()
 #endif
   d->m_view->setPage(new MyQWebEnginePage(d->m_view));
 
-  addWidget(d->m_view);
+  vbox->addWidget(d->m_view);
 
   d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
 #ifdef ENABLE_WEBENGINE
@@ -213,7 +219,7 @@ void KHomeView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     init();
 
-  emit aboutToShow();
+  emit aboutToShow(View::Home);
 
   if (d->m_needReload) {
     loadView();

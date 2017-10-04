@@ -1,5 +1,5 @@
 /***************************************************************************
-                             kinstitutionssview.h
+                          kinstitutionsview_p.h
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -14,9 +14,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KINSTITUTIONSVIEW_H
-#define KINSTITUTIONSVIEW_H
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -26,40 +23,51 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "ui_kinstitutionsview.h"
+#include "kmymoneyaccountsviewbase_p.h"
+
+#include "accountsviewproxymodel.h"
+#include "kmymoneyglobalsettings.h"
+#include "icons.h"
+
+using namespace Icons;
 
 namespace Ui {
-  class KInstitutionsView;
+    class KInstitutionsView;
 }
-
-/**
-  * @author Thomas Baumgart
-  */
-/**
-  * This class implements the institutions hierarchical 'view'.
-  */
-class MyMoneyMoney;
-class KInstitutionsViewPrivate;
-class KInstitutionsView : public KMyMoneyAccountsViewBase
+class KInstitutionsViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
-  Q_OBJECT
+    Q_DECLARE_PUBLIC(KInstitutionsView)
 
 public:
-  KInstitutionsView(QWidget *parent = nullptr);
-  ~KInstitutionsView();
 
-  void setDefaultFocus() override;
-  void refresh() override;
+    KInstitutionsViewPrivate(KInstitutionsView *qq) :
+        q_ptr(qq),
+        ui(new Ui::KInstitutionsView)
+    {
+    }
 
-public slots:
-  void slotNetWorthChanged(const MyMoneyMoney &);
+    ~KInstitutionsViewPrivate()
+    {
+    }
 
-protected:
-  KInstitutionsView(KInstitutionsViewPrivate &dd, QWidget *parent);
-  virtual void showEvent(QShowEvent * event);
+    void init()
+    {
+        Q_Q(KInstitutionsView);
+        ui->setupUi(q);
+        m_accountTree = &ui->m_accountTree;
 
-private:
-  Q_DECLARE_PRIVATE(KInstitutionsView)
+        // setup icons for collapse and expand button
+        ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+        ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
+
+        // the proxy filter model
+        m_proxyModel = ui->m_accountTree->init(View::Institutions);
+        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    }
+
+    KInstitutionsView       *q_ptr;
+    Ui::KInstitutionsView   *ui;
 };
 
-#endif
+

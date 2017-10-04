@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KCategoriesViewDecl</class>
- <widget class="QWidget" name="KCategoriesViewDecl">
+ <class>KCategoriesView</class>
+ <widget class="QWidget" name="KCategoriesView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -21,9 +30,9 @@
     <layout class="QHBoxLayout">
      <item>
       <widget class="KLineEdit" name="m_searchWidget">
-        <property name="showClearButton" stdset="0">
+       <property name="showClearButton" stdset="0">
         <bool>true</bool>
-        </property>
+       </property>
       </widget>
      </item>
      <item>
@@ -105,16 +114,49 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyAccountTreeView</class>
-   <extends>QTreeView</extends>
-   <header>kmymoneyaccounttreeview.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmymoneyaccounttreeview.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_collapseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_accountTree</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>327</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_expandButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_accountTree</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

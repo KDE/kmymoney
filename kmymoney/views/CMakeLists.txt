@@ -12,6 +12,8 @@ set(libviews_a_SOURCES
   kinvestmentview.cpp
   kmymoneyfile.cpp
   kmymoneyview.cpp
+  kmymoneyviewbase.cpp
+  kmymoneyaccountsviewbase.cpp
   kpayeesview.cpp
   kreportsview.cpp
   kscheduledview.cpp
@@ -39,11 +41,11 @@ set(libviews_a_SOURCES
 set(libviews_a_HEADER kmymoneyview.h)
 
 set(libviews_a_UI
-  kaccountsviewdecl.ui
-  kbudgetviewdecl.ui
-  kcategoriesviewdecl.ui
+  kaccountsview.ui
+  kbudgetview.ui
+  kcategoriesview.ui
   kforecastviewdecl.ui
-  kinstitutionsviewdecl.ui
+  kinstitutionsview.ui
   kinvestmentview.ui
   kpayeesviewdecl.ui
   kscheduledviewdecl.ui

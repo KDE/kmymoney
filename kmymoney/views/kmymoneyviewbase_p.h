@@ -1,9 +1,9 @@
 /***************************************************************************
-                             kaccountssview.h
+                          kmymoneyviewbase_p.h
                              -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
+    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *
@@ -14,9 +14,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KACCOUNTSVIEW_H
-#define KACCOUNTSVIEW_H
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -26,36 +23,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
-
-/**
-  * This class implements the accounts hierarchical and iconic 'view'.
-  */
-class MyMoneyMoney;
-class KAccountsViewPrivate;
-class KAccountsView : public KMyMoneyAccountsViewBase
+class KMyMoneyViewBasePrivate
 {
-  Q_OBJECT
-
 public:
-  explicit KAccountsView(QWidget *parent = nullptr);
-  ~KAccountsView();
-
-  void setDefaultFocus() override;
-  void refresh() override;
-
-public slots:
-  void slotNetWorthChanged(const MyMoneyMoney &);
-
-protected:
-  KAccountsView(KAccountsViewPrivate &dd, QWidget *parent);
-  void showEvent(QShowEvent * event) override;
-
-protected slots:
-  void slotUnusedIncomeExpenseAccountHidden();
-
-private:
-  Q_DECLARE_PRIVATE(KAccountsView)
+    bool m_needsRefresh;
 };
-
-#endif

@@ -118,8 +118,10 @@ void KPayeesView::init()
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
 
-  m_filterProxyModel->init(Models::instance()->accountsModel());
-  m_filterProxyModel->sort(AccountsModel::Account);
+  auto const model = Models::instance()->accountsModel();
+  m_filterProxyModel->setSourceModel(model);
+  m_filterProxyModel->setSourceColumns(model->getColumns());
+  m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
   comboDefaultCategory->setModel(m_filterProxyModel);
 
   matchTypeCombo->addItem(i18nc("@item No matching", "No matching"), MyMoneyPayee::matchDisabled);

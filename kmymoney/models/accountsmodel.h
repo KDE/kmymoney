@@ -26,18 +26,15 @@
 // QT Includes
 
 #include <QStandardItemModel>
-#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KItemModels/KRecursiveFilterProxyModel>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
+#include "modelenums.h"
 
 /**
   * A model for the accounts.
@@ -51,46 +48,15 @@
   * @see MyMoneyFile
   *
   * @author Cristian Onet 2010
+  * @author Łukasz Wojniłowicz 2017
   *
   */
+class MyMoneyAccount;
 class AccountsModel : public QStandardItemModel
 {
   Q_OBJECT
 
 public:
-
-  /**
-    * User roles used by this model.
-    */
-  enum AccountsItemDataRole {
-    AccountIdRole = Qt::UserRole,                     /**< The account id is stored in this role in column 0 as a string.*/
-    AccountFavoriteRole = Qt::UserRole + 1,           /**< The 'account is favorite' property is stored in this role in column 0 as a bool.*/
-    AccountRole = Qt::UserRole + 2,                   /**< The MyMoneyAccount is stored in this role in column 0.*/
-    AccountBalanceRole = Qt::UserRole + 3,            /**< The account balance is stored in this role in column 0 as a MyMoneyMoney object.*/
-    AccountValueRole = Qt::UserRole + 4,              /**< The account value (the balance converted to base currency) is stored in this role in column 0 as a MyMoneyMoney object.*/
-    AccountTotalValueRole = Qt::UserRole + 5,         /**< The account total value (the value of the account and of child accounts) is stored in this role in column 0 as a MyMoneyMoney object.*/
-    DisplayOrderRole = Qt::UserRole + 9,              /**< This role is used by the filtering proxies to order the accounts for displaying.*/
-    FullNameRole = Qt::UserRole + 10,                 /**< This role is used to provide the full pathname of the account */
-  };
-
-  /**
-    * The columns of this model.
-    */
-  enum Columns {
-    FirstColumnMarker = 0,
-    Account = 0,  // CAUTION! Assumption is being made that Account column number is always 0 and you shouldn't change this
-    Type,
-    Tax,
-    VAT,
-    CostCenter,
-    TotalBalance,
-    PostedValue,
-    TotalValue,
-    AccountNumber,
-    AccountSortCode,
-    LastColumnMarker
-  };
-
   /**
     * The account id used by this model for the 'Favorites' top level item. This can be used to identify that item on the @ref AccountIdRole.
     */
@@ -120,10 +86,10 @@ public:
    */
   QModelIndex accountById(const QString& id) const;
 
-  QList<AccountsModel::Columns> *getColumns();
+  QList<eAccountsModel::Column> *getColumns();
 
-  void setColumnVisibility(const Columns column, const bool show);
-  static QString getHeaderName(const Columns column);
+  void setColumnVisibility(const eAccountsModel::Column column, const bool show);
+  static QString getHeaderName(const eAccountsModel::Column column);
 
 public slots:
 
@@ -177,6 +143,7 @@ protected:
   * in @ref AccountsModel to enable the grouping of the accounts by institutions.
   *
   * @author Cristian Onet 2011
+  * @author Łukasz Wojniłowicz 2017
   *
   */
 class InstitutionsModel : public AccountsModel
@@ -214,73 +181,4 @@ private:
   class InstitutionsPrivate;
 };
 
-/**
-  * A proxy model to provide various sorting and filtering operations for @ref AccountsModel.
-  *
-  * Here is an example of how to use this class in combination with the @ref AccountsModel.
-  * (in the example @a widget is a pointer to a model/view widget):
-  *
-  * @code
-  *   AccountsFilterProxyModel *filterModel = new AccountsFilterProxyModel(widget);
-  *   filterModel->addAccountGroup(MyMoneyAccount::Asset);
-  *   filterModel->addAccountGroup(MyMoneyAccount::Liability);
-  *   filterModel->setSourceModel(Models::instance()->accountsModel());
-  *   filterModel->sort(0);
-  *
-  *   widget->setModel(filterModel);
-  * @endcode
-  *
-  * @see AccountsModel
-  *
-  * @author Cristian Onet 2010
-  *
-  */
-class AccountsFilterProxyModel : public KRecursiveFilterProxyModel
-{
-  Q_OBJECT
-
-public:
-  AccountsFilterProxyModel(QObject *parent = 0);
-  ~AccountsFilterProxyModel();
-
-  void addAccountType(MyMoneyAccount::accountTypeE type);
-  void addAccountGroup(const QVector<MyMoneyAccount::_accountTypeE> &groups);
-  void removeAccountType(MyMoneyAccount::accountTypeE type);
-
-  void clear();
-
-  void setHideClosedAccounts(bool hideClosedAccounts);
-  bool hideClosedAccounts() const;
-
-  void setHideEquityAccounts(bool hideEquityAccounts);
-  bool hideEquityAccounts() const;
-
-  void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
-  bool hideUnusedIncomeExpenseAccounts() const;
-
-  int visibleItems(bool includeBaseAccounts = false) const;
-
-  void init(AccountsModel *model, QList<AccountsModel::Columns> *visColumns);
-  void init(AccountsModel *model);
-
-protected:
-  virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
-  virtual bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-  virtual bool acceptSourceItem(const QModelIndex &source) const;
-
-  bool filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const;
-
-  int visibleItems(const QModelIndex& index) const;
-
-  QList<AccountsModel::Columns> *m_mdlColumns;
-  QList<AccountsModel::Columns> *m_visColumns;
-signals:
-  void unusedIncomeExpenseAccountHidden() const;
-
-private:
-  class Private;
-  Private* const d;
-};
-
-#endif // ACCOUNTSMODEL_H
+#endif

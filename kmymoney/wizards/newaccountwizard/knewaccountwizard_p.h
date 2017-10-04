@@ -38,6 +38,7 @@
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyaccount.h>
 #include <kmymoneyedit.h>
+#include "accountsproxymodel.h"
 
 #include "ui_kinstitutionpagedecl.h"
 #include "ui_kaccounttypepagedecl.h"
@@ -385,7 +386,7 @@ private slots:
   void slotButtonsToggled(void);
 };
 
-class HierarchyFilterProxyModel : public AccountsFilterProxyModel
+class HierarchyFilterProxyModel : public AccountsProxyModel
 {
   Q_OBJECT
 

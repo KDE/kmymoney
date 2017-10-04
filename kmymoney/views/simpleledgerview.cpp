@@ -111,8 +111,9 @@ void SimpleLedgerView::init()
 
   d->accountsModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();
-  d->accountsModel->init(model, model->getColumns());
-  d->accountsModel->sort(AccountsModel::Account);
+  d->accountsModel->setSourceModel(model);
+  d->accountsModel->setSourceColumns(model->getColumns());
+  d->accountsModel->sort((int)eAccountsModel::Column::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   tabSelected(0);
@@ -141,7 +142,7 @@ void SimpleLedgerView::openNewLedger(QString accountId)
   if(index.isValid()) {
 
     // create new ledger view page
-    MyMoneyAccount acc = Models::instance()->accountsModel()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+    MyMoneyAccount acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
     view = new LedgerViewPage(this);
     view->setAccount(acc);
 
@@ -223,12 +224,12 @@ void SimpleLedgerView::openFavoriteLedgers()
 {
   AccountsModel* model = Models::instance()->accountsModel();
   QModelIndex start = model->index(0, 0);
-  QModelIndexList indexes = model->match(start, AccountsModel::AccountFavoriteRole, QVariant(true), -1, Qt::MatchRecursive);
+  QModelIndexList indexes = model->match(start, (int)eAccountsModel::Role::Favorite, QVariant(true), -1, Qt::MatchRecursive);
 
   // indexes now has a list of favorite accounts but two entries for each.
   // that doesn't matter here, since openNewLedger() can handle duplicates
   Q_FOREACH(QModelIndex index, indexes) {
-    openNewLedger(model->data(index, AccountsModel::AccountIdRole).toString());
+    openNewLedger(model->data(index, (int)eAccountsModel::Role::ID).toString());
   }
   d->ui->ledgerTab->setCurrentIndex(0);
 }

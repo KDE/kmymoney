@@ -1024,8 +1024,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity, MyMoneyAccount::Income, MyMoneyAccount::Expense});
 
           auto const model = Models::instance()->accountsModel();
-          filterProxyModel->init(model,model->getColumns());
-          filterProxyModel->sort(AccountsModel::Account);
+          filterProxyModel->setSourceModel(model);
+          filterProxyModel->setSourceColumns(model->getColumns());
+          filterProxyModel->sort((int)eAccountsModel::Column::Account);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel);
           topcontents->addWidget(accountCombo);

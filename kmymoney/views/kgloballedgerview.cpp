@@ -199,8 +199,8 @@ KGlobalLedgerView::Private::Private() :
 
 QDate KGlobalLedgerView::m_lastPostDate;
 
-KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
-    : KMyMoneyViewBase(parent, name, i18n("Ledgers")),
+KGlobalLedgerView::KGlobalLedgerView(QWidget *parent)
+    : KMyMoneyViewBase(parent),
     d(new Private),
     m_needReload(false),
     m_needLoad(true),
@@ -222,14 +222,21 @@ void KGlobalLedgerView::setDefaultFocus()
 void KGlobalLedgerView::init()
 {
   m_needLoad = false;
+  auto vbox = new QVBoxLayout(this);
+  setLayout(vbox);
+  vbox->setSpacing(6);
+  vbox->setMargin(0);
+
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
   d->m_action = KMyMoneyRegister::ActionNone;
 
   // the proxy filter model
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity});
-  d->m_filterProxyModel->init(Models::instance()->accountsModel());
-  d->m_filterProxyModel->sort(AccountsModel::Account);
+  auto const model = Models::instance()->accountsModel();
+  d->m_filterProxyModel->setSourceModel(model);
+  d->m_filterProxyModel->setSourceColumns(model->getColumns());
+  d->m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
 
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame();
@@ -242,15 +249,15 @@ void KGlobalLedgerView::init()
   d->m_accountComboBox->setModel(d->m_filterProxyModel);
   toolbarLayout->addWidget(d->m_accountComboBox);
 
-  layout()->addWidget(m_toolbarFrame);
+  vbox->addWidget(m_toolbarFrame);
   toolbarLayout->setStretchFactor(d->m_accountComboBox, 60);
   // create the register frame
   m_registerFrame = new QFrame();
   QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame);
   registerFrameLayout->setContentsMargins(0, 0, 0, 0);
   registerFrameLayout->setSpacing(0);
-  layout()->addWidget(m_registerFrame);
-  layout()->setStretchFactor(m_registerFrame, 2);
+  vbox->addWidget(m_registerFrame);
+  vbox->setStretchFactor(m_registerFrame, 2);
   m_register = new KMyMoneyRegister::Register(m_registerFrame);
   m_register->setUsedWithEditor(true);
   registerFrameLayout->addWidget(m_register);
@@ -280,14 +287,14 @@ void KGlobalLedgerView::init()
   spacer = new QSpacerItem(20, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
   summaryFrameLayout->addItem(spacer);
   summaryFrameLayout->addWidget(m_rightSummaryLabel);
-  layout()->addWidget(m_summaryFrame);
+  vbox->addWidget(m_summaryFrame);
 
   // create the button frame
   m_buttonFrame = new QFrame(this);
   QVBoxLayout* buttonLayout = new QVBoxLayout(m_buttonFrame);
   buttonLayout->setContentsMargins(0, 0, 0, 0);
   buttonLayout->setSpacing(0);
-  layout()->addWidget(m_buttonFrame);
+  vbox->addWidget(m_buttonFrame);
   m_buttonbar = new KToolBar(m_buttonFrame, 0, true);
   m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   buttonLayout->addWidget(m_buttonbar);
@@ -310,7 +317,7 @@ void KGlobalLedgerView::init()
   frameLayout->addWidget(m_form);
   m_formFrame->setFrameShape(QFrame::Panel);
   m_formFrame->setFrameShadow(QFrame::Raised);
-  layout()->addWidget(m_formFrame);
+  vbox->addWidget(m_formFrame);
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
   connect(m_register, SIGNAL(focusChanged(KMyMoneyRegister::Transaction*)), m_form, SLOT(slotSetTransaction(KMyMoneyRegister::Transaction*)));
@@ -893,7 +900,7 @@ void KGlobalLedgerView::loadAccounts()
 
   // TODO: check why the invalidate is needed here
   d->m_filterProxyModel->invalidate();
-  d->m_filterProxyModel->sort(AccountsModel::Account);
+  d->m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
   d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->isActionToggled(Action::ViewShowAll));
   d->m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   d->m_accountComboBox->expandAll();
@@ -901,12 +908,12 @@ void KGlobalLedgerView::loadAccounts()
   if (m_account.id().isEmpty()) {
     // find the first favorite account
     QModelIndexList list = model->match(model->index(0, 0),
-                           AccountsModel::AccountFavoriteRole,
+                           (int)eAccountsModel::Role::Favorite,
                            QVariant(true),
                            1,
                            Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (list.count() > 0) {
-      QVariant accountId = list.front().data(AccountsModel::AccountIdRole);
+      QVariant accountId = list.front().data((int)eAccountsModel::Role::ID);
       if (accountId.isValid()) {
         m_account = file->account(accountId.toString());
       }
@@ -922,7 +929,7 @@ void KGlobalLedgerView::loadAccounts()
       for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
         if (!it->parent().isValid())
           continue; // skip the top level accounts
-        QVariant accountId = (*it).data(AccountsModel::AccountIdRole);
+        QVariant accountId = (*it).data((int)eAccountsModel::Role::ID);
         if (accountId.isValid()) {
           MyMoneyAccount a = file->account(accountId.toString());
           if (!a.isInvest()) {
@@ -1357,7 +1364,7 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
   if (m_needLoad)
     init();
 
-  emit aboutToShow();
+  emit aboutToShow(View::Ledgers);
 
   if (m_needReload) {
     if (!m_inEditMode) {

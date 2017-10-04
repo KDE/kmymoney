@@ -211,8 +211,9 @@ void KExportDlg::loadAccounts()
   filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
   auto const model = Models::instance()->accountsModel();
   model->load();
-  filterProxyModel->init(model, model->getColumns());
-  filterProxyModel->sort(AccountsModel::Account);
+  filterProxyModel->setSourceColumns(model->getColumns());
+  filterProxyModel->setSourceModel(model);
+  filterProxyModel->sort((int)eAccountsModel::Column::Account);
   m_accountComboBox->setModel(filterProxyModel);
 }
 

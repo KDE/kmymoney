@@ -26,18 +26,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneyutils.h>
-
-#include "ui_kcategoriesviewdecl.h"
+#include "kmymoneyaccountsviewbase.h"
+#include "mymoneyaccount.h"
 
 /**
   * @brief  This class contains the implementation of the categories view.
@@ -60,73 +56,35 @@
   * accessible from either the main menu or the context menu.
   */
 
-class KCategoriesView : public QWidget, private Ui::KCategoriesViewDecl
+namespace Ui {
+  class KCategoriesView;
+}
+class QPixmap;
+class MyMoneyMoney;
+class KCategoriesViewPrivate;
+class KCategoriesView : public KMyMoneyAccountsViewBase
 {
   Q_OBJECT
 
 public:
-  explicit KCategoriesView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
-  virtual ~KCategoriesView();
+  explicit KCategoriesView(QWidget *parent = nullptr);
+  ~KCategoriesView();
 
-  KRecursiveFilterProxyModel    *getProxyModel();
-  QList<AccountsModel::Columns> *getProxyColumns();
-  void                          setDefaultFocus();
-  bool                          isLoaded();
-
-protected:
-  void loadAccounts();
+  void setDefaultFocus() override;
+  void refresh() override;
 
 public slots:
-  void slotLoadAccounts();
+  void slotProfitChanged(const MyMoneyMoney &);
 
-  /**
-    * Override the base class behaviour to include all updates that
-    * happened in the meantime and restore the layout.
-    */
-  void showEvent(QShowEvent * event);
+protected:
+  KCategoriesView(KCategoriesViewPrivate &dd, QWidget *parent);
+  void showEvent(QShowEvent * event) override;
 
 protected slots:
-  void slotProfitChanged(const MyMoneyMoney &);
-  void slotExpandCollapse();
   void slotUnusedIncomeExpenseAccountHidden();
 
 private:
-  /**
-    * This method returns an icon according to the account type
-    * passed in the argument @p type.
-    *
-    * @param type account type as defined in MyMoneyAccount::accountTypeE
-    */
-  const QPixmap accountImage(const MyMoneyAccount::accountTypeE type) const;
-
-signals:
-  /**
-    * This signal is emitted, when the user selected to reparent the
-    * account @p acc to be a subordinate account of @p parent.
-    *
-    * @param acc const reference to account to be reparented
-    * @param parent const reference to new parent account
-    */
-  void reparent(const MyMoneyAccount& acc, const MyMoneyAccount& parent);
-
-private:
-  KMyMoneyApp                  *m_kmymoney;
-  KMyMoneyView                 *m_kmymoneyview;
-
-  /// set if a view needs to be reloaded during showEvent()
-  bool                         m_needReload;
-
-  /**
-    * This member holds the load state of page
-    */
-  bool m_needLoad;
-
-  bool                         m_haveUnusedCategories;
-  AccountsViewFilterProxyModel *m_filterProxyModel;
-
-  /** Initializes page and sets its load status to initialized
-   */
-  void init();
+  Q_DECLARE_PRIVATE(KCategoriesView)
 };
 
 #endif

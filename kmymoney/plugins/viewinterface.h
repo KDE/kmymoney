@@ -62,7 +62,7 @@ public:
     * This method creates a new page in the application.
     * See KPageWidget::addPage() for details.
     */
-  virtual KMyMoneyViewBase* addPage(const QString& item, const QString& icon) = 0;
+//  virtual KMyMoneyViewBase* addPage(const QString& item, const QString& icon) = 0;
 
   /**
     * This method adds a widget to the layout of the view
@@ -71,7 +71,7 @@ public:
     * @param view pointer to view widget
     * @param w widget to be added to @p page
     */
-  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
+//  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
 
 signals:
   /**

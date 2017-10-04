@@ -299,19 +299,6 @@ protected slots:
   void slotCloseSearchDialog();
 
   /**
-    * Preloads the input dialog with the data of the current
-    * selected institution and brings up the input dialog
-    * and saves the information entered.
-    */
-  void slotInstitutionEdit();
-  void slotInstitutionEdit(const MyMoneyObject &obj);
-
-  /**
-    * Deletes the current selected institution.
-    */
-  void slotInstitutionDelete();
-
-  /**
     * Brings up the new category editor and saves the information.
     * The dialog will be preset with the name. The parent defaults to
     * MyMoneyFile::expense()
@@ -1038,8 +1025,21 @@ public slots:
   /**
     * This slot opens the selected account in the ledger view
     */
-  void slotAccountOpen();
+  void slotAccountOpenEmpty();
   void slotAccountOpen(const MyMoneyObject&);
+
+  /**
+    * Preloads the input dialog with the data of the current
+    * selected institution and brings up the input dialog
+    * and saves the information entered.
+    */
+  void slotInstitutionEditEmpty();
+  void slotInstitutionEdit(const MyMoneyObject &obj);
+
+  /**
+    * Deletes the current selected institution.
+    */
+  void slotInstitutionDelete();
 
   /**
     * This slot closes the currently selected account if possible
@@ -1173,13 +1173,10 @@ public slots:
 
   void slotResetSelections();
 
-  void slotSelectAccount();
   void slotSelectAccount(const MyMoneyObject& account);
 
-  void slotSelectInstitution();
   void slotSelectInstitution(const MyMoneyObject& institution);
 
-  void slotSelectInvestment();
   void slotSelectInvestment(const MyMoneyObject& account);
 
   void slotSelectSchedule();
@@ -1447,6 +1444,7 @@ private:
 };
 
 extern KMyMoneyApp *kmymoney;
+typedef void(KMyMoneyApp::*KMyMoneyAppFunc)();
 
 class KMStatus
 {

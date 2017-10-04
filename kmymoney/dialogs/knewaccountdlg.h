@@ -31,6 +31,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneymoney.h>
 #include <kmymoneyedit.h>
+#include "accountsproxymodel.h"
 
 #include "ui_knewaccountdlgdecl.h"
 
@@ -38,7 +39,7 @@ namespace reports
 {
 }
 
-class HierarchyFilterProxyModel : public AccountsFilterProxyModel
+class HierarchyFilterProxyModel : public AccountsProxyModel
 {
   Q_OBJECT
 

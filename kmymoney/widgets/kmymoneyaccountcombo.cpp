@@ -158,7 +158,7 @@ void KMyMoneyAccountCombo::collapseAll()
 
 void KMyMoneyAccountCombo::activated()
 {
-  QVariant data = view()->currentIndex().data(AccountsModel::AccountIdRole);
+  QVariant data = view()->currentIndex().data((int)eAccountsModel::Role::ID);
   if (data.isValid()) {
     setSelected(data.toString());
   }
@@ -210,7 +210,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     lineEdit()->clear();
   }
   // find which item has this id and set is as the current item
-  QModelIndexList list = model()->match(model()->index(0, 0), AccountsModel::AccountIdRole,
+  QModelIndexList list = model()->match(model()->index(0, 0), (int)eAccountsModel::Role::ID,
                                         QVariant(id),
                                         1,
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive)); // CAUTION: Without Qt::MatchWrap no results for credit card, so nothing happens in ledger view
@@ -245,8 +245,8 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   delete d->m_popupView;
 
   KComboBox::setModel(model);
-  model->setFilterKeyColumn(AccountsModel::Account); // CAUTION! Assumption is being made that Account column number is always 0
-  model->setFilterRole(AccountsModel::FullNameRole);
+  model->setFilterKeyColumn((int)eAccountsModel::Column::Account); // CAUTION! Assumption is being made that Account column number is always 0
+  model->setFilterRole((int)eAccountsModel::Role::FullName);
 
   d->m_popupView = new QTreeView(this);
   d->m_popupView->setModel(model);
@@ -272,7 +272,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
 {
   if(index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    setSelected(model()->data(index, AccountsModel::AccountIdRole).toString());
+    setSelected(model()->data(index, (int)eAccountsModel::Role::ID).toString());
   }
 }
 

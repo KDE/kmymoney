@@ -1453,7 +1453,7 @@ const QString& LoanPayoutPage::payoutAccountId() const
 }
 
 HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
-    : AccountsFilterProxyModel(parent)
+    : AccountsProxyModel(parent)
 {
 }
 
@@ -1463,12 +1463,12 @@ HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    auto accCol = m_mdlColumns->indexOf(AccountsModel::Account);
-    QVariant data = sourceModel()->index(source_row, accCol, source_parent).data(AccountsModel::AccountIdRole);
+    auto accCol = m_mdlColumns->indexOf(eAccountsModel::Column::Account);
+    QVariant data = sourceModel()->index(source_row, accCol, source_parent).data((int)eAccountsModel::Role::ID);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
-  return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+  return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 
 /**
@@ -1493,11 +1493,12 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
   auto const model = Models::instance()->accountsModel();
-  m_filterProxyModel->init(model, model->getColumns());
+  m_filterProxyModel->setSourceModel(model);
+  m_filterProxyModel->setSourceColumns(model->getColumns());
   m_filterProxyModel->setDynamicSortFilter(true);
 
-  m_parentAccounts->init(m_filterProxyModel, model->getColumns());
-  m_parentAccounts->sortByColumn(AccountsModel::Account, Qt::AscendingOrder);
+  m_parentAccounts->setModel(m_filterProxyModel);
+  m_parentAccounts->sortByColumn((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
 
   connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
 }
@@ -1518,7 +1519,7 @@ KMyMoneyWizardPage* HierarchyPage::nextPage() const
 
 const MyMoneyAccount& HierarchyPage::parentAccount()
 {
-  QVariant data = m_parentAccounts->model()->data(m_parentAccounts->currentIndex(), AccountsModel::AccountRole);
+  QVariant data = m_parentAccounts->model()->data(m_parentAccounts->currentIndex(), (int)eAccountsModel::Role::Account);
   if (data.isValid()) {
     m_parentAccount = data.value<MyMoneyAccount>();
   } else {

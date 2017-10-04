@@ -20,13 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "kcategoriesview.h"
-#include "kcategoriesview_p.h"
-
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,76 +29,55 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kcategoriesview.h"
+#include "kmymoneyaccountsviewbase_p.h"
+
+#include "accountsviewproxymodel.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
 
 using namespace Icons;
 
-KCategoriesView::KCategoriesView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KCategoriesViewPrivate(this), parent)
-{
+namespace Ui {
+  class KCategoriesView;
 }
 
-KCategoriesView::KCategoriesView(KCategoriesViewPrivate &dd, QWidget *parent)
-    : KMyMoneyAccountsViewBase(dd, parent)
+class KCategoriesViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
-}
+    Q_DECLARE_PUBLIC(KCategoriesView)
 
-KCategoriesView::~KCategoriesView()
-{
-}
+public:
 
-void KCategoriesView::setDefaultFocus()
-{
-  Q_D(KCategoriesView);
-  QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
-}
+    KCategoriesViewPrivate(KCategoriesView *qq) :
+        q_ptr(qq),
+        ui(new Ui::KCategoriesView),
+        m_haveUnusedCategories(false)
+    {
+    }
 
-void KCategoriesView::refresh()
-{
-  Q_D(KCategoriesView);
-  if (!isVisible()) {
-    d->m_needsRefresh = true;
-    return;
-  }
-  d->m_needsRefresh = false;
+    ~KCategoriesViewPrivate()
+    {
+    }
 
-  d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
+    void init()
+    {
+        Q_Q(KCategoriesView);
+      ui->setupUi(q);
+      m_accountTree = &ui->m_accountTree;
 
-  // reinitialize the default state of the hidden categories label
-  d->m_haveUnusedCategories = false;
-  d->ui->m_hiddenCategories->hide();
-  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneyGlobalSettings::hideUnusedCategory());
-}
+      // setup icons for collapse and expand button
+      ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+      ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
 
-void KCategoriesView::showEvent(QShowEvent * event)
-{
-  Q_D(KCategoriesView);
-  if (!d->m_proxyModel)
-    d->init();
+      m_proxyModel = ui->m_accountTree->init(View::Categories);
 
-  emit aboutToShow(View::Categories);
+      q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
+      q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
-  if (d->m_needsRefresh)
-    refresh();
+    }
 
-  // don't forget base class implementation
-  QWidget::showEvent(event);
-}
+    KCategoriesView       *q_ptr;
+    Ui::KCategoriesView   *ui;
+    bool                  m_haveUnusedCategories;
+};
 
-/**
-  * The view is notified that an unused income expense account has been hidden.
-  */
-void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
-{
-  Q_D(KCategoriesView);
-  d->m_haveUnusedCategories = true;
-  d->ui->m_hiddenCategories->setVisible(d->m_haveUnusedCategories);
-}
-
-void KCategoriesView::slotProfitChanged(const MyMoneyMoney &profit)
-{
-  Q_D(KCategoriesView);
-  d->netBalProChanged(profit, d->ui->m_totalProfitsLabel, View::Categories);
-}

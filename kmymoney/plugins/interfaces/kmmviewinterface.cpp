@@ -48,13 +48,13 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyVie
   connect(m_view, SIGNAL(kmmFilePlugin(uint)), this, SIGNAL(kmmFilePlugin(uint)));
 }
 
-KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)
-{
-  return m_view->addBasePage(item, icon);
-}
+//KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)
+//{
+//  return m_view->addBasePage(item, icon);
+//}
 
-void KMyMoneyPlugin::KMMViewInterface::addWidget(KMyMoneyViewBase* view, QWidget* w)
-{
-  if (view && w)
-    view->addWidget(w);
-}
+//void KMyMoneyPlugin::KMMViewInterface::addWidget(KMyMoneyViewBase* view, QWidget* w)
+//{
+//  if (view && w)
+//    view->addWidget(w);
+//}

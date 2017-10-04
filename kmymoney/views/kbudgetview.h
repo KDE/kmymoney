@@ -23,84 +23,38 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QResizeEvent>
-#include <QList>
-#include <QMenu>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kbudgetviewdecl.h"
+#include "kmymoneyaccountsviewbase.h"
+
 #include "mymoneybudget.h"
-#include "mymoneysecurity.h"
-#include "kmymoneyaccounttreeview.h"
-
-/**
-  * This proxy model implements all the functionality needed by the budgets
-  * account tree based on the @ref AccountsModel. One such functionality is
-  * obtaining the account balance and value base on the budget.
-  *
-  * @author Cristin Oneț
-  */
-class BudgetAccountsProxyModel : public AccountsViewFilterProxyModel
-{
-  Q_OBJECT
-
-public:
-  BudgetAccountsProxyModel(QObject *parent = 0);
-
-  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-  Qt::ItemFlags flags(const QModelIndex &index) const;
-
-  void setBudget(const MyMoneyBudget& budget);
-
-signals:
-  /**
-    * Emit this signal when the balance of the budget is changed.
-    */
-  void balanceChanged(const MyMoneyMoney &);
-
-protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-  MyMoneyMoney accountBalance(const QString &accountId) const;
-  MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance) const;
-  MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
-
-private:
-  void checkBalance();
-
-private:
-  MyMoneyBudget m_budget;
-  MyMoneyMoney m_lastBalance;
-};
-
 
 /**
   * @author Darren Gould
   * @author Thomas Baumgart
   */
-class KBudgetView : public QWidget, public Ui::KBudgetViewDecl
+
+namespace Ui {
+  class KBudgetView;
+}
+
+class AccountsViewProxyModel;
+class QTreeWidgetItem;
+class KBudgetViewPrivate;
+class KBudgetView : public KMyMoneyAccountsViewBase
 {
   Q_OBJECT
 
 public:
-  explicit KBudgetView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
+  explicit KBudgetView(QWidget *parent = nullptr);
   ~KBudgetView();
 
-  KRecursiveFilterProxyModel    *getProxyModel();
-  QList<AccountsModel::Columns> *getProxyColumns();
-  void                          setDefaultFocus();
-  bool                          isLoaded();
-
-  /**
-   * Override the base class behaviour to include all updates that
-   * happened in the meantime and restore the layout.
-   */
-  void showEvent(QShowEvent * event);
+  void setDefaultFocus() override;
+  void refresh() override;
 
   /**
     * This method is used to suppress updates for specific times
@@ -120,7 +74,6 @@ public:
   void suspendUpdate(const bool suspend);
 
 public slots:
-  void slotRefreshView();
   void slotSelectBudget();
   void slotHideUnused(bool);
   void slotRefreshHideUnusedButton();
@@ -132,6 +85,8 @@ public slots:
   void cb_includesSubaccounts_clicked();
 
 protected:
+  KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
+  void showEvent(QShowEvent * event) override;
   void loadAccounts();
 
   /**
@@ -167,8 +122,6 @@ protected slots:
     */
   void slotSelectAccount(const MyMoneyObject &);
 
-  void slotExpandCollapse();
-
   void AccountEnter();
 
   void slotUpdateBudget();
@@ -196,14 +149,8 @@ signals:
   void openContextMenu(const MyMoneyObject& obj);
   void selectObjects(const QList<MyMoneyBudget>& budget);
 
-  /**
-    * This signal is emitted whenever the view is about to be shown.
-    */
-  void aboutToShow();
-
 private:
-  KMyMoneyApp                        *m_kmymoney;
-  KMyMoneyView                       *m_kmymoneyview;
+  Q_DECLARE_PRIVATE(KBudgetView)
 
   typedef enum {
     eNone = -1,
@@ -215,17 +162,6 @@ private:
   MyMoneyBudget                       m_budget;
   QMap<QString, unsigned long>        m_transactionCountMap;
   QStringList                         m_yearList;
-
-  BudgetAccountsProxyModel            *m_filterProxyModel;
-  /**
-    * Set if a view needs to be reloaded during showEvent()
-    **/
-  bool                                m_needReload;
-
-  /**
-    * This member holds the load state of page
-    */
-  bool                                m_needLoad;
 
   /**
     * Set if we are in the selection of a different budget
@@ -241,10 +177,6 @@ private:
     * This signals whether a budget is being edited
     **/
   bool m_budgetInEditing;
-
-  /** Initializes page and sets load status of patge to initialized
-   */
-  void init();
 };
 
 #endif

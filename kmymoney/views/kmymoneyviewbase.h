@@ -1,8 +1,8 @@
 /***************************************************************************
-                             kinstitutionssview.h
+                          kmymoneyviewbase.h
                              -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,11 +14,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KINSTITUTIONSVIEW_H
-#define KINSTITUTIONSVIEW_H
+#ifndef KMYMONEYVIEWBASE_H
+#define KMYMONEYVIEWBASE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -26,40 +28,33 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
-
-namespace Ui {
-  class KInstitutionsView;
-}
+#include "viewenums.h"
 
 /**
-  * @author Thomas Baumgart
+  * This class is an abstract base class that all specific views
+  * should be based on.
   */
-/**
-  * This class implements the institutions hierarchical 'view'.
-  */
-class MyMoneyMoney;
-class KInstitutionsViewPrivate;
-class KInstitutionsView : public KMyMoneyAccountsViewBase
+class KMyMoneyViewBasePrivate;
+class KMyMoneyViewBase : public QWidget
 {
   Q_OBJECT
 
 public:
-  KInstitutionsView(QWidget *parent = nullptr);
-  ~KInstitutionsView();
+    explicit KMyMoneyViewBase(QWidget* parent = nullptr);
+    virtual ~KMyMoneyViewBase();
 
-  void setDefaultFocus() override;
-  void refresh() override;
+    virtual void setDefaultFocus() {}
+    virtual void refresh() {}
 
-public slots:
-  void slotNetWorthChanged(const MyMoneyMoney &);
+signals:
+  void aboutToShow(const View view);
 
 protected:
-  KInstitutionsView(KInstitutionsViewPrivate &dd, QWidget *parent);
-  virtual void showEvent(QShowEvent * event);
+  const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;
+  KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent);
 
 private:
-  Q_DECLARE_PRIVATE(KInstitutionsView)
+  Q_DECLARE_PRIVATE(KMyMoneyViewBase)
 };
 
 #endif

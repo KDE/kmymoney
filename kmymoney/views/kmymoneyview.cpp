@@ -105,6 +105,8 @@
 #include <securitiesmodel.h>
 #include <icons.h>
 #include "amountedit.h"
+#include <kmymoneyaccounttreeview.h>
+#include "accountsviewproxymodel.h"
 
 using namespace Icons;
 
@@ -164,17 +166,21 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
           this, SLOT(slotScheduleSelected(QString)));
   connect(m_homeView, SIGNAL(reportSelected(QString)),
           this, SLOT(slotShowReport(QString)));
-  connect(m_homeView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect(m_homeView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 1
-  m_institutionsView = new KInstitutionsView(kmymoney, this);
+  m_institutionsView = new KInstitutionsView;
   viewFrames[View::Institutions] = m_model->addPage(m_institutionsView, i18n("Institutions"));
   viewFrames[View::Institutions]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewInstitutions]));
+  connect(m_institutionsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_institutionsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 2
-  m_accountsView = new KAccountsView(kmymoney, this);
+  m_accountsView = new KAccountsView;
   viewFrames[View::Accounts] = m_model->addPage(m_accountsView, i18n("Accounts"));
   viewFrames[View::Accounts]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewAccounts]));
+  connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 3
   m_scheduledView = new KScheduledView();
@@ -190,9 +196,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_scheduledView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 4
-  m_categoriesView = new KCategoriesView(kmymoney, this);
+  m_categoriesView = new KCategoriesView;
   viewFrames[View::Categories] = m_model->addPage(m_categoriesView, i18n("Categories"));
   viewFrames[View::Categories]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewCategories]));
+  connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
 // Page 5
   m_tagsView = new KTagsView();
@@ -235,7 +243,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney, SLOT(slotToggleReconciliationFlag()));
   connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount,QDate,MyMoneyMoney)), m_ledgerView, SLOT(slotSetReconcileAccount(MyMoneyAccount,QDate,MyMoneyMoney)));
   connect(kmymoney, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
-  connect(m_ledgerView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect(m_ledgerView, &KAccountsView::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 8
   m_investmentView = new KInvestmentView(kmymoney, this);
@@ -248,18 +256,19 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   viewFrames[View::Reports]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewReports]));
   connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
-  connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 10
-  m_budgetView = new KBudgetView(kmymoney, this);
+  m_budgetView = new KBudgetView(kmymoney);
   viewFrames[View::Budget] = m_model->addPage(m_budgetView, i18n("Budgets"));
   viewFrames[View::Budget]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewBudgets]));
+  connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 11
   m_forecastView = new KForecastView();
   viewFrames[View::Forecast] = m_model->addPage(m_forecastView, i18n("Forecast"));
   viewFrames[View::Forecast]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewForecast]));
-  connect(m_forecastView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 12
   m_onlineJobOutboxView = new KOnlineJobOutbox();
@@ -274,6 +283,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   SimpleLedgerView* view = new SimpleLedgerView(kmymoney, this);
   KPageWidgetItem* frame = m_model->addPage(view, i18n("New ledger"));
   frame->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentProperties]));
+
 
   //set the model
   setModel(m_model);
@@ -450,96 +460,39 @@ void KMyMoneyView::updateViewType()
   }
 }
 
-void KMyMoneyView::slotAccountTreeViewChanged(const AccountsModel::Columns column, const bool show)
+void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show)
 {
-  struct viewInfo {
-    KRecursiveFilterProxyModel    *proxyModel;
-    QList<AccountsModel::Columns> *proxyColumns;
-  };
+  QVector<AccountsViewProxyModel *> proxyModels {m_institutionsView->getProxyModel(), m_accountsView->getProxyModel(),
+                                                 m_categoriesView->getProxyModel(), m_budgetView->getProxyModel()}; 
 
-  QList<viewInfo> viewInfos;
-  if (m_institutionsView->isLoaded())
-      viewInfos.append({m_institutionsView->getProxyModel(), m_institutionsView->getProxyColumns()});
-  if (m_accountsView->isLoaded())
-      viewInfos.append({m_accountsView->getProxyModel(), m_accountsView->getProxyColumns()});
-  if (m_categoriesView->isLoaded())
-      viewInfos.append({m_categoriesView->getProxyModel(), m_categoriesView->getProxyColumns()});
-  if (m_budgetView->isLoaded())
-      viewInfos.append({m_budgetView->getProxyModel(), m_budgetView->getProxyColumns()});
+  for (auto i = proxyModels.count() - 1; i >= 0; --i) { // weed out unloaded views
+    if (!proxyModels.at(i))
+      proxyModels.removeAt(i);
+  }
 
-  if (show) {
+  QString question;
+
+  if (show)
+    question = i18n("Do you want to show <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column));
+  else
+    question = i18n("Do you want to hide <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column));
+
+
+  if (proxyModels.count() == 1 || // no need to ask what to do with other views because they aren't loaded
+      KMessageBox::questionYesNo(this,
+                                 question,
+                                 QString(),
+                                 KStandardGuiItem::yes(), KStandardGuiItem::no(),
+                                 QStringLiteral("ShowColumnOnEveryView")) == KMessageBox::Yes) {
     Models::instance()->accountsModel()->setColumnVisibility(column, show);
     Models::instance()->institutionsModel()->setColumnVisibility(column, show);
-    if (viewInfos.count() == 1 ||
-        KMessageBox::questionYesNo(this,
-                                   i18n("Do you want to show <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column)),
-                                   QString(),
-                                   KStandardGuiItem::yes(), KStandardGuiItem::no(),
-                                   QStringLiteral("ShowColumnOnEveryView")) == KMessageBox::Yes) {
-      foreach(viewInfo view, viewInfos) {
-        if (!view.proxyColumns->contains(column)) {
-          view.proxyColumns->append(column);
-          view.proxyModel->invalidate();
-        }
-      }
-    }
-  } else {
-    if (viewInfos.count() == 1 ||
-        KMessageBox::questionYesNo(this,
-                                   i18n("Do you want to hide <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column)),
-                                   QString(),
-                                   KStandardGuiItem::yes(), KStandardGuiItem::no(),
-                                   QStringLiteral("HideColumnOnEveryView")) == KMessageBox::Yes) {
-      Models::instance()->accountsModel()->setColumnVisibility(column, show);
-      Models::instance()->institutionsModel()->setColumnVisibility(column, show);
-      foreach(viewInfo view, viewInfos) {
-        if (view.proxyColumns->contains(column)) {
-          view.proxyColumns->removeOne(column);
-          view.proxyModel->invalidate();
-        }
-      }
+    foreach(AccountsViewProxyModel *proxyModel, proxyModels) {
+      if (!proxyModel)
+        continue;
+      proxyModel->setColumnVisibility(column, show);
+      proxyModel->invalidate();
     }
   }
-}
-
-void KMyMoneyView::slotNetBalProChanged(const MyMoneyMoney &val, QLabel *label, const View view)
-{
-  QString s;
-  const auto isNegative = val.isNegative();
-  switch (view) {
-    case View::Institutions:
-    case View::Accounts:
-      s = i18n("Net Worth: ");
-      break;
-    case View::Categories:
-      if (isNegative)
-        s = i18n("Loss: ");
-      else
-        s = i18n("Profit: ");
-      break;
-    case View::Budget:
-      s = (i18nc("The balance of the selected budget", "Balance: "));
-      break;
-    default:
-      return;
-  }
-
-  // FIXME figure out how to deal with the approximate
-  // if(!(file->totalValueValid(assetAccount.id()) & file->totalValueValid(liabilityAccount.id())))
-  //  s += "~ ";
-
-  s.replace(QLatin1Char(' '), QLatin1String("&nbsp;"));
-
-  if (isNegative)
-    s.append(QLatin1String("<b><font color=\"red\">"));
-  const auto sec = MyMoneyFile::instance()->baseCurrency();
-  QString v(MyMoneyUtils::formatMoney(val, sec));
-  s.append((v.replace(QLatin1Char(' '), QLatin1String("&nbsp;"))));
-  if (isNegative)
-    s.append(QLatin1String("</font></b>"));
-
-  label->setFont(KMyMoneyGlobalSettings::listCellFont());
-  label->setText(s);
 }
 
 bool KMyMoneyView::showPageHeader() const
@@ -1760,13 +1713,13 @@ void KMyMoneyView::slotRefreshViews()
 
   showTitleBar(KMyMoneyGlobalSettings::showTitleBar());
 
-  m_accountsView->slotLoadAccounts();
-  m_institutionsView->slotLoadAccounts();
-  m_categoriesView->slotLoadAccounts();
+  m_accountsView->refresh();
+  m_institutionsView->refresh();
+  m_categoriesView->refresh();
   m_payeesView->slotLoadPayees();
   m_tagsView->slotLoadTags();
   m_ledgerView->slotLoadView();
-  m_budgetView->slotRefreshView();
+  m_budgetView->refresh();
   m_homeView->slotLoadView();
   m_investmentView->slotLoadView();
   m_reportsView->slotLoadView();
@@ -2302,59 +2255,73 @@ void KMyMoneyView::slotPrintView()
     m_homeView->slotPrintView();
 }
 
-KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
+
+void KMyMoneyView::resetViewSelection(const View)
 {
-  KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
-
-  connect(viewBase, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
-
-  KPageWidgetItem* frm = m_model->addPage(viewBase, title);
-  frm->setIcon(QIcon::fromTheme(icon));
-
-  return viewBase;
+  emit aboutToChangeView();
 }
 
-/* ------------------------------------------------------------------------ */
-/*                 KMyMoneyViewBase                                         */
-/* ------------------------------------------------------------------------ */
-
-// ----------------------------------------------------------------------------
-// QT Includes
-
-// ----------------------------------------------------------------------------
-// KDE Includes
-
-// ----------------------------------------------------------------------------
-// Project Includes
-
-class KMyMoneyViewBase::Private
+void KMyMoneyView::connectView(const View view)
 {
-public:
-  QVBoxLayout* m_viewLayout;
-};
+  KMyMoneyAccountTreeView *treeView;
+  switch (view) {
+    case View::Accounts:
+      disconnect(m_accountsView, &KAccountsView::aboutToShow, this, &KMyMoneyView::connectView);
+      treeView = m_accountsView->getTreeView();
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInstitution);
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInvestment);
+      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
+      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const QString& title) :
-    QWidget(parent),
-    d(new Private)
-{
-  setAccessibleName(name);
-  setAccessibleDescription(title);
-  d->m_viewLayout = new QVBoxLayout(this);
-  d->m_viewLayout->setSpacing(6);
-  d->m_viewLayout->setMargin(0);
-}
+      connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, m_accountsView, &KAccountsView::slotNetWorthChanged);
+      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_accountsView, &KAccountsView::refresh);
+      break;
+    case View::Institutions:
+      disconnect(m_institutionsView, &KInstitutionsView::aboutToShow, this, &KMyMoneyView::connectView);
+      treeView = m_institutionsView->getTreeView();
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInstitution);
+      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
+      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotInstitutionEdit);
+      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
+      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowInstitutionContextMenu);
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-KMyMoneyViewBase::~KMyMoneyViewBase()
-{
-  delete d;
-}
+      connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, m_institutionsView, &KInstitutionsView::slotNetWorthChanged);
+      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_institutionsView, &KInstitutionsView::refresh);
+      break;
+    case View::Categories:
+      disconnect(m_categoriesView, &KCategoriesView::aboutToShow, this, &KMyMoneyView::connectView);
+      treeView = m_categoriesView->getTreeView();
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
+      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
+      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
 
-void KMyMoneyViewBase::addWidget(QWidget* w)
-{
-  d->m_viewLayout->addWidget(w);
-}
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-QVBoxLayout* KMyMoneyViewBase::layout() const
-{
-  return d->m_viewLayout;
+      connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, m_categoriesView, &KCategoriesView::slotProfitChanged);
+      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_categoriesView, &KCategoriesView::refresh);
+
+      break;
+    case View::Budget:
+      disconnect(m_budgetView, &KBudgetView::aboutToShow, this, &KMyMoneyView::connectView);
+      treeView = m_budgetView->getTreeView();
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInstitution);
+      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInvestment);
+      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
+      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
+
+      connect(m_budgetView, &KBudgetView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowBudgetContextMenu);
+      connect(m_budgetView, &KBudgetView::selectObjects, kmymoney, &KMyMoneyApp::slotSelectBudget);
+      connect(kmymoney, &KMyMoneyApp::budgetRename, m_budgetView, &KBudgetView::slotStartRename);
+      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_budgetView, &KBudgetView::refresh);
+
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
+      break;
+    default:
+      break;
+  }
 }

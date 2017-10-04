@@ -42,6 +42,7 @@
 #include <QLocale>
 #include <QTextCodec>
 #include <QtPrintSupport/QPrintDialog>
+#include <QMenu>
 #ifdef ENABLE_WEBENGINE
 #include <QtWebEngineWidgets/QWebEngineView>
 #else
@@ -327,8 +328,8 @@ void KReportsView::KReportTab::updateDataRange()
   * KReportsView Implementation
   */
 
-KReportsView::KReportsView(QWidget *parent, const char *name) :
-    KMyMoneyViewBase(parent, name, i18n("Reports")),
+KReportsView::KReportsView(QWidget *parent) :
+    KMyMoneyViewBase(parent),
     m_needReload(false),
     m_needLoad(true),
     m_reportListView(0)
@@ -343,12 +344,18 @@ void KReportsView::setDefaultFocus()
 void KReportsView::init()
 {
   m_needLoad = false;
+  auto vbox = new QVBoxLayout(this);
+  setLayout(vbox);
+  vbox->setSpacing(6);
+  vbox->setMargin(0);
+
+
   // build reports toc
 
   setColumnsAlreadyAdjusted(false);
 
   m_reportTabWidget = new QTabWidget(this);
-  addWidget(m_reportTabWidget);
+  vbox->addWidget(m_reportTabWidget);
   m_reportTabWidget->setTabsClosable(true);
 
   m_listTab = new QWidget(m_reportTabWidget);
@@ -400,7 +407,7 @@ void KReportsView::showEvent(QShowEvent * event)
   if (m_needLoad)
     init();
 
-  emit aboutToShow();
+  emit aboutToShow(View::Reports);
 
   if (m_needReload) {
     loadView();

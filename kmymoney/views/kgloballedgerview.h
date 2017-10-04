@@ -41,9 +41,9 @@ class KToolBar;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyviewbase.h"
 #include <mymoneyutils.h>
 #include <mymoneyaccount.h>
-#include <kmymoneyview.h>
 #include <register.h>
 #include <transactionform.h>
 
@@ -125,10 +125,10 @@ class KGlobalLedgerView : public KMyMoneyViewBase
 {
   Q_OBJECT
 public:
-  explicit KGlobalLedgerView(QWidget *parent = 0, const char *name = 0);
+  explicit KGlobalLedgerView(QWidget *parent = nullptr);
   ~KGlobalLedgerView();
 
-  void setDefaultFocus();
+  void setDefaultFocus() override;
 
   /**
     * This method returns the id of the currently selected account

@@ -345,14 +345,15 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   auto const model = Models::instance()->accountsModel();
   // extract account information from model
   const auto index = model->accountById(accountId);
-  d->account = model->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+  d->account = model->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
 
   d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
   d->accountsModel->setHideEquityAccounts(false);
-  d->accountsModel->init(model);
-  d->accountsModel->sort(AccountsModel::Account);
+  d->accountsModel->setSourceModel(model);
+  d->accountsModel->setSourceColumns(model->getColumns());
+  d->accountsModel->sort((int)eAccountsModel::Column::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);

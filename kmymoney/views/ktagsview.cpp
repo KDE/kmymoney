@@ -111,8 +111,10 @@ void KTagsView::init()
 
   m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense});
-  m_filterProxyModel->init(Models::instance()->accountsModel());
-  m_filterProxyModel->sort(AccountsModel::Account);
+  auto const model = Models::instance()->accountsModel();
+  m_filterProxyModel->setSourceModel(model);
+  m_filterProxyModel->setSourceColumns(model->getColumns());
+  m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
 
   // create the searchline widget
   // and insert it into the existing layout
