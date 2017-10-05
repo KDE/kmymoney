@@ -65,6 +65,7 @@
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals, pel KDE. Té un gran conjunt de funcionalitats encara que és fàcil d'utilitzar pels usuaris no tècnics.</p>
     <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals, pel KDE. Té un gran conjunt de funcionalitats encara que és fàcil d'utilitzar pels usuaris no tècnics.</p>
     <p xml:lang="es">KMyMoney es un gestor de finanzas personales creado por KDE. Contiene un gran número de funciones, aunque es fácil de usar para los usuarios no técnicos.</p>
+    <p xml:lang="fr">KMyMoney est un gestionnaire de finances personnelles par KDE. Il dispose d'un ensemble de fonctionnalités complètes tout en restant simple d'utilisation pour les utilisateurs peu techniques.</p>
     <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais de KDE. Inclúe un gran número de funcionalidades sen renunciar a ser fácil de usar para personas non técnicas.</p>
     <p xml:lang="it">KMyMoney è un gestore delle finanza personali di KDE. È dotato di un ampio insieme funzionalità pur essendo facile da usare per l'utente non tecnico.</p>
     <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder door KDE. Het komt met een grote set aan functies terwijl het gemakkelijk is te gebruiken voor de niet-technische gebruiker.</p>
@@ -157,6 +158,7 @@
       <caption xml:lang="ca">Gestiona els comptes p. ex. per les institucions a on estan depositats</caption>
       <caption xml:lang="ca-valencia">Gestiona els comptes p. ex. per les institucions a on estan depositats</caption>
       <caption xml:lang="es">Gestionar cuentas (por ejemplo, por las instituciones donde están depositadas)</caption>
+      <caption xml:lang="fr">Gestion des comptes, par exemple en fonction des établissements dans lesquels ils sont détenus</caption>
       <caption xml:lang="gl">Xestionar contas, por exemplo polas institucións onde están abertas.</caption>
       <caption xml:lang="it">Gestisci gli account, ad esempio, per gli istituti presso cui sono tenuti</caption>
       <caption xml:lang="nl">Rekeningen beheren bijv. door instituten waarbij ze behoren</caption>
