@@ -19,6 +19,7 @@ Comment=If mapped to an account, it pretends it could handle all onlineTasks (fo
 Comment[ca]=Si està vinculat a un compte, fa veure que pot gestionar totes les tasques en línia (només per a desenvolupadors).
 Comment[ca@valencia]=Si està vinculat a un compte, fa veure que pot gestionar totes les tasques en línia (només per a desenvolupadors).
 Comment[es]=Si se aplica a una cuenta, simula que puede manejar todas las tareas en línea (solo para desarrolladores).
+Comment[fr]=S'il est associé à un compte en ligne, prétend qu'il peut traiter toutes les tâches en ligne (uniquement pour les développeurs).
 Comment[it]=Se associato a un account, finge di poter gestire tutte le operazioni in linea (solo per sviluppatori).
 Comment[nl]=Indien gekoppeld aan een account, pretendeert het dat het alle online taken kan afhandelen (alleen voor ontwikkelaars)
 Comment[pt]=Se estiver associado a uma conta, evita que a mesma possa tratar de todas as tarefas 'online' (apenas para programadores).
