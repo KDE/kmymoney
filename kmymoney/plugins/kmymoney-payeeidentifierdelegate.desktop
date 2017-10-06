@@ -11,11 +11,13 @@ Name[gl]=Pintor do identificador do beneficiario
 Name[it]=Disegnatore dell'identificatore del beneficiario
 Name[nl]=Schilder van identifier van begunstigde
 Name[pl]=Malarz identyfikatora odbiorcy
+Name[pt]=Pintor do identificador do beneficiário
 Name[pt_BR]=Pintura do identificador do beneficiário
 Name[sk]=Identifikátor maliara príjemcu
 Name[sv]=Uppritning av betalningsmottagarens identifierare
 Name[tr]=Alıcı tanımlayıcı boyacısı
 Name[uk]=Засіб малювання для ідентифікатора отримувача
+Name[x-test]=xxPainter of payee identifierxx
 
 [PropertyDef::X-KMyMoney-payeeIdentifierIds]
 Type=QStringList
