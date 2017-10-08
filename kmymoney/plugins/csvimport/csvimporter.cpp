@@ -101,6 +101,7 @@ const QString CSVImporter::m_confPriorName = QStringLiteral("Prior");
 const QString CSVImporter::m_confMiscName = QStringLiteral("Misc");
 
 CSVImporter::CSVImporter()
+  : m_profile(0)
 {
   m_convertDate = new ConvertDate;
   m_file = new CSVFile;
