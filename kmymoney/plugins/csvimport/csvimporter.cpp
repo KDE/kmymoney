@@ -146,7 +146,8 @@ KSharedConfigPtr CSVImporter::configFile()
 
 void CSVImporter::profileFactory(const Profile type, const QString &name)
 {
-  if (!m_profile) {
+  // delete current profile
+  if (m_profile) {
     delete m_profile;
     m_profile = nullptr;
   }
