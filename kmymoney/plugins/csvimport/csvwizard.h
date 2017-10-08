@@ -112,6 +112,8 @@ public:
 
   void              initializeComboBoxes(const QHash<Column, QComboBox *> &columns);
 
+  void              presetFilename(const QString& name);
+
 private:
   QList<QLabel *>  m_stageLabels;
 
@@ -128,6 +130,7 @@ private:
   CsvImporterPlugin*  m_plugin;
   CSVImporter*        m_imp;
   QWizard*            m_wiz;
+  QString             m_fileName;
 
   void readWindowSize(const KSharedConfigPtr& config);
   void saveWindowSize(const KSharedConfigPtr& config);

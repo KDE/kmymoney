@@ -127,6 +127,11 @@ CSVWizard::~CSVWizard()
   delete ui;
 }
 
+void CSVWizard::presetFilename(const QString& name)
+{
+  m_fileName = name;
+}
+
 void CSVWizard::showStage()
 {
   QString str = ui->label_intro->text();
@@ -312,7 +317,13 @@ void CSVWizard::fileDialogClicked()
   m_imp->profileFactory(m_pageIntro->m_profileType, m_pageIntro->ui->m_profiles->currentText());
   bool profileExists = m_imp->m_profile->readSettings(CSVImporter::configFile());
 
-  if (!m_imp->m_file->getInFileName(m_imp->m_profile->m_lastUsedDirectory))
+  if (!m_fileName.isEmpty()) {
+    if (!m_imp->m_file->getInFileName(m_fileName)) {
+      if (!m_imp->m_file->getInFileName(m_imp->m_profile->m_lastUsedDirectory)) {
+        return;
+      }
+    }
+  } else if (!m_imp->m_file->getInFileName(m_imp->m_profile->m_lastUsedDirectory))
     return;
 
   saveWindowSize(CSVImporter::configFile());

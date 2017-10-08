@@ -72,4 +72,43 @@ bool CsvImporterPlugin::slotGetStatement(MyMoneyStatement& s)
   return ret;
 }
 
-#include "csvimporterplugin.moc"
+QString CsvImporterPlugin::formatName() const
+{
+  return QLatin1String("CSV");
+}
+
+QString CsvImporterPlugin::formatFilenameFilter() const
+{
+  return "*.csv";
+}
+
+bool CsvImporterPlugin::isMyFormat(const QString& filename) const
+{
+  // filename is considered a CSV file if it can be opened
+  // and the filename ends in ".csv".
+  bool result = false;
+
+  QFile f(filename);
+  if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    result = f.fileName().endsWith(QLatin1String(".csv"));
+    f.close();
+  }
+
+  return result;
+}
+
+bool CsvImporterPlugin::import(const QString& filename)
+{
+  bool rc = true;
+  m_importer = new CSVImporter;
+  m_wizard = new CSVWizard(this, m_importer);
+  m_wizard->presetFilename(filename);
+  m_silent = false;
+  connect(m_wizard, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
+  return rc;
+}
+
+QString CsvImporterPlugin::lastError() const
+{
+  return QString();
+}
