@@ -50,7 +50,7 @@
 #include "kcreditswindow.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
-
+#include "misc/webconnect.h"
 
 bool timersOn = false;
 
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
   // setup the MyMoneyMoney locale settings according to the KDE settings
   MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
   MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
-  // TODO: port to kf5
+  // TODO: port to kf5 (negative numbers in parens)
   //MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
   //MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
   //MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
@@ -245,47 +245,25 @@ int main(int argc, char *argv[])
 
 int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile)
 {
-#ifdef KMM_DBUS
-  if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney")) {
-    const QList<QString> instances = kmymoney->instanceList();
-    if (instances.count() > 0) {
+  bool instantQuit = false;
 
-      // If the user launches a second copy of the app and includes a file to
-      // open, they are probably attempting a "WebConnect" session.  In this case,
-      // we'll check to make sure it's an importable file that's passed in, and if so, we'll
-      // notify the primary instance of the file and kill ourselves.
+  if (kmymoney->webConnect()->isClient()) {
+    // If the user launches a second copy of the app and includes a file to
+    // open, they are probably attempting a "WebConnect" session.  In this case,
+    // we'll check to make sure it's an importable file that's passed in, and if so, we'll
+    // notify the primary instance of the file and kill ourselves.
 
-      if (file.isValid()) {
-        if (kmymoney->isImportableFile(file)) {
-          // if there are multiple instances, we'll send this to the first one
-          QString primary = instances[0];
+    if (file.isValid()) {
+      if (kmymoney->isImportableFile(file)) {
+        instantQuit = true;
+        kmymoney->webConnect()->loadFile(file);
 
-          // send a message to the primary client to import this file
-          QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
-          // TODO: port ot kf5
-          //remoteApp.call("webConnect", file.path(), KStartupInfo::startupId());
-
-          // Before we delete the application, we make sure that we destroy all
-          // widgets by running the event loop for some time to catch all those
-          // widgets that are requested to be destroyed using the deleteLater() method.
-          QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
-
-          delete kmymoney;
-          return 0;
-        }
       }
-
-      if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
-        delete kmymoney;
-        return 1;
-      }
+    } else if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
+      instantQuit = true;
     }
-  } else {
-    qDebug("D-Bus registration failed. Some functions are not available.");
   }
-#else
-  qDebug("D-Bus disabled. Some functions are not available.");
-#endif
+
   kmymoney->show();
   kmymoney->centralWidget()->setEnabled(false);
 
@@ -294,39 +272,44 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
   // force complete paint of widgets
   qApp->processEvents();
 
-  QString importfile;
-  QUrl url;
-  // make sure, we take the file provided on the command
-  // line before we go and open the last one used
-  if (file.isValid()) {
-    // Check to see if this is an importable file, as opposed to a loadable
-    // file.  If it is importable, what we really want to do is load the
-    // last used file anyway and then immediately import this file.  This
-    // implements a "web connect" session where there is not already an
-    // instance of the program running.
+  if (!instantQuit) {
+    QString importfile;
+    QUrl url;
+    // make sure, we take the file provided on the command
+    // line before we go and open the last one used
+    if (file.isValid()) {
+        // Check to see if this is an importable file, as opposed to a loadable
+        // file.  If it is importable, what we really want to do is load the
+        // last used file anyway and then immediately import this file.  This
+        // implements a "web connect" session where there is not already an
+        // instance of the program running.
 
-    if (kmymoney->isImportableFile(file)) {
-      importfile = file.path();
-      url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
+        if (kmymoney->isImportableFile(file)) {
+          importfile = file.path();
+          url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
+        } else {
+          url = file;
+        }
+
     } else {
-      url = file;
+      url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
     }
 
+    KTipDialog::showTip(kmymoney, QString(), false);
+    if (url.isValid() && !noFile) {
+      kmymoney->slotFileOpenRecent(url);
+    } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
+      kmymoney->slotFileNew();
+    }
+    KMyMoneyGlobalSettings::setFirstTimeRun(false);
+
+    if (!importfile.isEmpty())
+      kmymoney->webConnect(importfile, QByteArray());
+
   } else {
-    url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
+    // the instantQuit flag is set, so we force the app to quit right away
+    QMetaObject::invokeMethod(kmymoney, "slotFileQuit");
   }
-
-  KTipDialog::showTip(kmymoney, QString(), false);
-  if (url.isValid() && !noFile) {
-    kmymoney->slotFileOpenRecent(url);
-  } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
-    kmymoney->slotFileNew();
-  }
-  KMyMoneyGlobalSettings::setFirstTimeRun(false);
-
-  // TODO: port to kf5
-  //if (!importfile.isEmpty())
-  //  kmymoney->webConnect(importfile, KStartupInfo::startupId());
 
   kmymoney->updateCaption();
   kmymoney->centralWidget()->setEnabled(true);

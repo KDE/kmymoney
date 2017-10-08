@@ -73,6 +73,7 @@ target_link_libraries(kmymoney_common
     Alkimia::alkimia
     kmm_widgets
     kmm_mymoney
+    kmm_utils_webconnect
 )
 
 # must build kmymoney/transactionsortoption.h

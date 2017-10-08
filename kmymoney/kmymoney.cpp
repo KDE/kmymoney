@@ -159,6 +159,8 @@
 
 #include "icons/icons.h"
 
+#include "misc/webconnect.h"
+
 #include <libkgpgfile/kgpgfile.h>
 
 #include <transactioneditor.h>
@@ -335,7 +337,8 @@ public:
 #ifdef KF5Holidays_FOUND
       m_holidayRegion(0),
 #endif
-      m_applicationIsReady(true) {
+      m_applicationIsReady(true),
+      m_webConnect(new WebConnect(app)) {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
@@ -488,6 +491,8 @@ public:
   QStringList           m_consistencyCheckResult;
   bool                  m_applicationIsReady;
 
+  WebConnect*           m_webConnect;
+
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
   static void setThemedCSS();
@@ -585,6 +590,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // make sure, we get a note when the engine changes state
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotDataChanged()));
 
+  // connect the WebConnect server
+  connect(d->m_webConnect, SIGNAL(gotUrl(QUrl)), this, SLOT(webConnect(QUrl)));
   // make sure we have a balance warning object
   d->m_balanceWarning = new KBalanceWarning(this);
 
@@ -6812,6 +6819,11 @@ QString KMyMoneyApp::filename() const
   return d->m_fileName.url();
 }
 
+WebConnect* KMyMoneyApp::webConnect() const
+{
+  return d->m_webConnect;
+}
+
 QList<QString> KMyMoneyApp::instanceList() const
 {
   QList<QString> list;
@@ -6824,7 +6836,7 @@ QList<QString> KMyMoneyApp::instanceList() const
 
     // build a list of service names of all running kmymoney applications without this one
     for (it = apps.constBegin(); it != apps.constEnd(); ++it) {
-      // please shange this method of creating a list of 'all the other kmymoney instances that are running on the system'
+      // please change this method of creating a list of 'all the other kmymoney instances that are running on the system'
       // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somwhere
       if ((*it).indexOf("org.kde.kmymoney-") == 0) {
 #ifdef _MSC_VER

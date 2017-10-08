@@ -50,6 +50,7 @@
 class QResizeEvent;
 class QTreeWidgetItem;
 class KPluginInfo;
+class WebConnect;
 
 enum class Action {
   FileOpenDatabase, FileSaveAsDatabase, FileBackup,
@@ -692,8 +693,6 @@ public:
 
   QString filename() const;
 
-  void webConnect(const QString& sourceUrl, const QByteArray& asn_id);
-
   /**
     * Checks if the file with the @a url already exists. If so,
     * the user is asked if he/she wants to override the file.
@@ -701,6 +700,11 @@ public:
     * @p true will be returned in all other cases.
     */
   bool okToWriteFile(const QUrl &url);
+
+  /**
+   * Return pointer to the WebConnect object
+   */
+  WebConnect* webConnect() const;
 
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
@@ -1249,6 +1253,9 @@ public slots:
    * Unloads a plugin
    */
   void slotPluginUnload(const KPluginMetaData& metaData);
+
+  void webConnect(const QString& sourceUrl, const QByteArray &asn_id);
+  void webConnect(const QUrl url) { webConnect(url.path(), QByteArray()); }
 
 private:
   /**
