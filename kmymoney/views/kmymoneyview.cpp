@@ -26,34 +26,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
 #include <QFile>
-#include <QTextCodec>
-#include <QStatusBar>
-#include <QCursor>
 #include <QRegExp>
 #include <QLayout>
-#include <QObject>
 #include <QList>
-#include <QVBoxLayout>
 #include <QByteArray>
 #include <QUrl>
-#include <QPushButton>
 #include <QIcon>
 #include <QTemporaryFile>
 #include <QUrlQuery>
-#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kicontheme.h>
-#include <kmessagebox.h>
-#include <kfilterdev.h>
-#include <kfilterbase.h>
-#include <kfileitem.h>
-#include <ktitlewidget.h>
-#include <kcompressiondevice.h>
+#include <KMessageBox>
+#include <KTitleWidget>
+#include <KCompressionDevice>
 #include <KSharedConfig>
 #include <KBackup>
 #include <KActionCollection>
@@ -65,15 +53,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyglobalsettings.h>
-#include <kmymoneytitlelabel.h>
+#include "kmymoneyglobalsettings.h"
+#include "kmymoneytitlelabel.h"
 #include <libkgpgfile/kgpgfile.h>
-#include "kendingbalancedlg.h"
-#include "kchooseimportexportdlg.h"
-#include "knewloanwizard.h"
 #include "kcurrencyeditdlg.h"
-#include "kfindtransactiondlg.h"
-#include "knewbankdlg.h"
 #include "mymoneyseqaccessmgr.h"
 #include "mymoneydatabasemgr.h"
 #include "imymoneystorageformat.h"
@@ -83,7 +66,6 @@
 #include "mymoneystoragesql.h"
 #include "mymoneygncreader.h"
 #include "mymoneystorageanon.h"
-#include <transactioneditor.h>
 #include "khomeview.h"
 #include "kaccountsview.h"
 #include "kcategoriesview.h"
@@ -99,14 +81,20 @@
 #include "kforecastview.h"
 #include "konlinejoboutbox.h"
 #include "kmymoney.h"
-#include "kmymoneyutils.h"
-#include <models.h>
-#include <equitiesmodel.h>
-#include <securitiesmodel.h>
-#include <icons.h>
+#include "models.h"
+#include "accountsmodel.h"
+#include "equitiesmodel.h"
+#include "securitiesmodel.h"
+#include "icons.h"
 #include "amountedit.h"
-#include <kmymoneyaccounttreeview.h>
+#include "kmymoneyaccounttreeview.h"
 #include "accountsviewproxymodel.h"
+#include "mymoneybudget.h"
+#include "mymoneyprice.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneyaccount.h"
+#include "kmymoneyedit.h"
 
 using namespace Icons;
 

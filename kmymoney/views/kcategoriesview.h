@@ -33,7 +33,6 @@
 // Project Includes
 
 #include "kmymoneyaccountsviewbase.h"
-#include "mymoneyaccount.h"
 
 /**
   * @brief  This class contains the implementation of the categories view.
@@ -56,10 +55,6 @@
   * accessible from either the main menu or the context menu.
   */
 
-namespace Ui {
-  class KCategoriesView;
-}
-class QPixmap;
 class MyMoneyMoney;
 class KCategoriesViewPrivate;
 class KCategoriesView : public KMyMoneyAccountsViewBase

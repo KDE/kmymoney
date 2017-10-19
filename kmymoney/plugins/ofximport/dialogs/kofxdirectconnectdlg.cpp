@@ -22,28 +22,24 @@
 // QT Includes
 
 #include <QLabel>
-#include <QDir>
 #include <QFile>
 #include <QTextStream>
 #include <QTemporaryFile>
 #include <QDebug>
+#include <QProgressDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kjob.h>
-#include <kio/job.h>
-#include <kio/jobclasses.h>
-#include <KIO/JobUiDelegate>
-#include <QProgressDialog>
-#include <kmessagebox.h>
+#include <kio/job_base.h>
+#include <KJobUiDelegate>
+#include <KIO/TransferJob>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyinstitution.h>
-#include <mymoneyfile.h>
 #include "mymoneyofxconnector.h"
 
 class KOfxDirectConnectDlg::Private

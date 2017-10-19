@@ -18,7 +18,6 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
-#include <algorithm>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,17 +25,9 @@
 #include <QVector>
 #include <QWidget>
 #include <QMap>
-#include <QPair>
-#include <QEvent>
 #include <QList>
-#include <QKeyEvent>
-#include <QPixmap>
-#include <QDragMoveEvent>
-#include <QDropEvent>
-#include <QFocusEvent>
-#include <QMouseEvent>
-#include <QScrollBar>
 #include <QStyledItemDelegate>
+#include <QStyleOptionViewItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,11 +35,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <registeritem.h>
-#include <transaction.h>
-#include <transactioneditorcontainer.h>
-#include <selectedtransaction.h>
+#include "mymoneyaccount.h"
+#include "registeritem.h"
+#include "transaction.h"
+#include "transactioneditorcontainer.h"
+#include "selectedtransaction.h"
+
+class MyMoneyTransaction;
 
 namespace KMyMoneyRegister
 {

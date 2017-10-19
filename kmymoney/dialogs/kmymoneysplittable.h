@@ -27,11 +27,7 @@
 // QT Includes
 
 #include <QTableWidget>
-#include <QWidget>
 #include <QPointer>
-#include <QResizeEvent>
-#include <QEvent>
-#include <QMouseEvent>
 #include <QList>
 
 // ----------------------------------------------------------------------------

@@ -30,10 +30,10 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneystatement.h"
-#include "transactionmatcher.h"
 #include "transactionmatchfinder.h"
 
 class MyMoneyFileTransaction;
+class TransactionMatcher;
 class QStringList;
 
 /**

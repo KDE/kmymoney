@@ -22,7 +22,6 @@
 
 #include <QButtonGroup>
 #include <QCheckBox>
-#include <QTextCodec>
 #include <QDialog>
 
 // ----------------------------------------------------------------------------
@@ -32,6 +31,7 @@
 // Project Includes
 #include "ui_kgncimportoptionsdlgdecl.h"
 
+class QTextCodec;
 class KGncImportOptionsDlgDecl : public QWidget, public Ui::KGncImportOptionsDlgDecl
 {
 public:

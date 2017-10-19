@@ -59,6 +59,7 @@ class KBAccountSettings;
   * This class represents the KBanking plugin towards KMymoney.
   * All GUI related issues are handled in this object.
   */
+class MyMoneyStatement;
 class KBankingPlugin : public KMyMoneyPlugin::OnlinePluginExtended
 {
   friend class KMyMoneyBanking;

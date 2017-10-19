@@ -19,7 +19,9 @@
 #ifndef PAYEEIDENTIFIERCONTAINERMODEL_H
 #define PAYEEIDENTIFIERCONTAINERMODEL_H
 
-#include <QtCore/QModelIndex>
+#include <QAbstractListModel>
+#include <QSharedPointer>
+
 #include "mymoney/payeeidentifiermodel.h"
 #include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "payeeidentifier/payeeidentifier.h"
@@ -31,6 +33,8 @@
  *
  * @see payeeIdentifierModel
  */
+class MyMoneyPayeeIdentifierContainer;
+class payeeIdentifier;
 class payeeIdentifierContainerModel : public QAbstractListModel
 {
   Q_OBJECT

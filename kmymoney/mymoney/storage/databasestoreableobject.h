@@ -19,6 +19,7 @@
 #ifndef DATABASESTOREABLEOBJECT_H
 #define DATABASESTOREABLEOBJECT_H
 
+#include <qobject.h>
 #include <QSqlDatabase>
 
 /**
@@ -43,6 +44,6 @@ public:
   virtual ~databaseStoreableObject() {}
 };
 
-Q_DECLARE_INTERFACE(databaseStoreableObject, "org.kmymoney.databaseStoreableObject");
+Q_DECLARE_INTERFACE(databaseStoreableObject, "org.kmymoney.databaseStoreableObject")
 
 #endif // DATABASESTOREABLEOBJECT_H

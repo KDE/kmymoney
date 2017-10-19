@@ -19,27 +19,19 @@
 #include "csvexporterplugin.h"
 #include "csvexportdlg.h"
 #include "csvwriter.h"
-#include <assert.h>
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
-#include <QDebug>
 #include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KFile>
-#include <KMessageBox>
 #include <KActionCollection>
-#include <KSharedConfig>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoney.h"
 
 CsvExporterPlugin::CsvExporterPlugin() :
     KMyMoneyPlugin::Plugin(nullptr, "csvexport"/*must be the same as X-KDE-PluginInfo-Name*/)

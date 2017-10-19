@@ -20,7 +20,6 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QBrush>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -28,16 +27,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <transaction.h>
+#include "mymoneysplit.h"
+#include "transaction.h"
 
-namespace KMyMoneyTransactionForm
-{
-class TransactionForm;
-} // namespace
+class MyMoneyTransaction;
 
 namespace KMyMoneyRegister
 {
 
+class Register;
 class StdTransactionMatched : public StdTransaction
 {
   static const int m_additionalRows = 3;

@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <KMessageBox>
 
 // ----------------------------------------------------------------------------
@@ -34,7 +34,7 @@
 
 #include "knewaccountdlg.h"
 #include "mymoneyfile.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

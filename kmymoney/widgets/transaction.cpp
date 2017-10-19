@@ -40,20 +40,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneytransaction.h>
-#include <mymoneysplit.h>
-#include <mymoneyfile.h>
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
-#include <register.h>
-#include <kmymoneycategory.h>
-#include <kmymoneydateinput.h>
-#include <transactionform.h>
-#include <kmymoneylineedit.h>
-#include <kmymoneyedit.h>
-#include <transactioneditor.h>
-#include <investtransactioneditor.h>
-#include <kmymoneyutils.h>
+#include "mymoneyutils.h"
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
+#include "mymoneyfile.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "register.h"
+#include "kmymoneycategory.h"
+#include "kmymoneydateinput.h"
+#include "transactionform.h"
+#include "kmymoneylineedit.h"
+#include "kmymoneyedit.h"
+#include "transactioneditor.h"
+#include "investtransactioneditor.h"
+#include "kmymoneyutils.h"
 #include "kmymoneymvccombo.h"
 
 #include "kmymoneyglobalsettings.h"

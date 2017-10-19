@@ -21,15 +21,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class QString;
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneywizard.h>
-#include <mymoneyfile.h>
+#include "kmymoneywizard.h"
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
+#include "mymoneyschedule.h"
+#include "mymoneytransaction.h"
 
 class MyMoneyPrice;
+class MyMoneySecurity;
+class MyMoneyInstitution;
 
 /**
   * @author Thomas Baumgart

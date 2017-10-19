@@ -26,17 +26,20 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QRegularExpression>
+#include <QStandardItem>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 #include "csvutil.h"
 #include "convdate.h"
 

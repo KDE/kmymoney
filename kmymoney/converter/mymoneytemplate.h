@@ -24,10 +24,9 @@
 #include <QDomDocument>
 #include <QDomNode>
 #include <QUrl>
-#include <QSaveFile>
 
-class QFile;
 class QTreeWidgetItem;
+class QSaveFile;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,7 +35,6 @@ class QTreeWidgetItem;
 // Project Includes
 
 #include "mymoneyaccount.h"
-#include "mymoneyfile.h"
 
 /**
   * @author Thomas Baumgart

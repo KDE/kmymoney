@@ -34,25 +34,24 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kguiitem.h>
-#include <kmessagebox.h>
-#include <KSharedConfig>
-#include <KConfigGroup>
+#include <KGuiItem>
+#include <KMessageBox>
 #include <KLocalizedString>
+#include <KTreeWidgetSearchLine>
+#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kupdatestockpricedlg.h>
-#include <kcurrencycalculator.h>
-#include <mymoneyprice.h>
-#include <kequitypriceupdatedlg.h>
-#include <kmymoneycurrencyselector.h>
-#include <mymoneyfile.h>
-#include <kmymoneyglobalsettings.h>
-#include <kmymoneyutils.h>
-#include <kpricetreeitem.h>
-#include <icons/icons.h>
+#include "kupdatestockpricedlg.h"
+#include "kcurrencycalculator.h"
+#include "mymoneyprice.h"
+#include "kequitypriceupdatedlg.h"
+#include "kmymoneycurrencyselector.h"
+#include "mymoneyfile.h"
+#include "kmymoneyutils.h"
+#include "kpricetreeitem.h"
+#include "icons/icons.h"
 
 using namespace Icons;
 

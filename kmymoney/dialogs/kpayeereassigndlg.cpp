@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <kguiutils.h>
 #include <KLocalizedString>
 

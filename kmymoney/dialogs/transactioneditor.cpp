@@ -34,32 +34,33 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktextedit.h>
+#include <KTextEdit>
 #include <KLocalizedString>
-#include <kcombobox.h>
-#include <kmessagebox.h>
-#include <kstandardguiitem.h>
-#include <kguiitem.h>
+#include <KComboBox>
+#include <KMessageBox>
+#include <KStandardGuiItem>
+#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneycategory.h>
+#include "mymoneyutils.h"
+#include "kmymoneycategory.h"
 #include "kmymoneymvccombo.h"
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
-#include <kmymoneylineedit.h>
+#include "kmymoneydateinput.h"
+#include "kmymoneyedit.h"
+#include "kmymoneylineedit.h"
 #include <kmymoneyaccountcompletion.h>
-#include <kmymoneyaccountselector.h>
-#include <mymoneyfile.h>
-#include <kmymoneyutils.h>
-#include <transactionform.h>
-#include <kmymoneyglobalsettings.h>
+#include "kmymoneyaccountselector.h"
+#include "mymoneyfile.h"
+#include "kmymoneyutils.h"
+#include "transactionform.h"
+#include "kmymoneyglobalsettings.h"
 
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
 #include "kselecttransactionsdlg.h"
-#include <icons.h>
+#include "icons.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktextedit.h>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -34,7 +33,7 @@
 
 #include "kmymoney/kmymoneyglobalsettings.h"
 #include "kmymoney/kmymoneyutils.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

@@ -21,11 +21,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPalette>
-#include <QWidget>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QTabBar>
+#include <QStyleOptionViewItem>
+#include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,9 +34,11 @@
 // Project Includes
 
 #include "mymoneyaccount.h"
-#include "mymoneyobject.h"
-#include "register.h"
+#include "registeritem.h"
+#include "transactioneditorcontainer.h"
 
+namespace KMyMoneyRegister { class Transaction; }
+namespace KMyMoneyTransactionForm { class TransactionForm; }
 namespace KMyMoneyTransactionForm
 {
 

@@ -21,8 +21,8 @@
 
 #include <QObject>
 #include <QVariantList>
-#include <QtSql/QSqlDatabase>
 
+class QSqlDatabase;
 namespace KMyMoneyPlugin
 {
 

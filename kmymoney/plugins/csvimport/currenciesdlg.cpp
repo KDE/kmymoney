@@ -16,6 +16,10 @@
 ********************************************************************************/
 
 #include "currenciesdlg.h"
+
+#include <QPushButton>
+
+#include "ui_currenciesdlg.h"
 #include "mymoneyfile.h"
 
 CurrenciesDlg::CurrenciesDlg() : ui(new Ui::CurrenciesDlg)

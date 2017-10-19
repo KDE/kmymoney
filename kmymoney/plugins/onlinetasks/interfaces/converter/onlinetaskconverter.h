@@ -19,8 +19,8 @@
 #ifndef ONLINETASKCONVERTER_H
 #define ONLINETASKCONVERTER_H
 
+#include <qobject.h>
 #include <QStringList>
-#include <QtPlugin>
 
 class onlineTask;
 

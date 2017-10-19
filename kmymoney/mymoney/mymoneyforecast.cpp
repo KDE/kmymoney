@@ -21,10 +21,7 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
-#include <QTextStream>
 #include <QList>
-#include <QtAlgorithms>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------

@@ -14,36 +14,35 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "kmymoneywizard.h"
 #include "kmymoneywizard_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
 #include <QLabel>
 #include <QFont>
-#include <QToolTip>
 #include <QHBoxLayout>
 #include <QList>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QIcon>
+#include <QStyle>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kstandardguiitem.h>
+#include <KStandardGuiItem>
 #include <KColorScheme>
-#include <khelpclient.h>
+#include <KHelpClient>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneytitlelabel.h"
 #include "kguiutils.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
+#include "kmymoneywizard.h"
 
 using namespace Icons;
 

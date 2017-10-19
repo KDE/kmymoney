@@ -22,8 +22,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QTextStream>
 #include <QFile>
+#include <QStandardItemModel>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
 #include "csvwizard.h"
 #include "csvimporter.h"
 

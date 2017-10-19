@@ -24,25 +24,22 @@
 // QT Includes
 
 #include <QLabel>
-#include <QPushButton>
 #include <QRadioButton>
 #include <QSpinBox>
-#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kled.h>
-#include <kcombobox.h>
+#include <KLed>
+#include <KComboBox>
 #include <KWallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneykeyvaluecontainer.h>
-#include <mymoneyaccount.h>
-#include <libofx/libofx.h>
+#include "mymoneykeyvaluecontainer.h"
+#include "mymoneyaccount.h"
 #include "mymoneyofxconnector.h"
 
 using KWallet::Wallet;

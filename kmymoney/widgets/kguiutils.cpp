@@ -31,10 +31,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcombobox.h>
-#include <klineedit.h>
-#include <kurlrequester.h>
-#include <kmymoneyedit.h>
+#include <KComboBox>
+#include <KLineEdit>
+#include <KUrlRequester>
+#include "kmymoneyedit.h"
 #include "kmymoneymvccombo.h"
 // ----------------------------------------------------------------------------
 // Project Includes

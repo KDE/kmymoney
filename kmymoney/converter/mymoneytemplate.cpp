@@ -22,7 +22,6 @@
 
 #include <QFile>
 #include <QFileInfo>
-#include <QApplication>
 #include <QTextStream>
 #include <QList>
 #include <QSaveFile>
@@ -39,6 +38,7 @@
 // Project Includes
 
 #include "kmymoneyutils.h"
+#include "mymoneyfile.h"
 
 MyMoneyTemplate::MyMoneyTemplate() :
     m_progressCallback(0),

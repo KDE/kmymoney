@@ -20,7 +20,7 @@
 #ifndef KCM_QIF_H
 #define KCM_QIF_H
 
-#include <kcmodule.h>
+#include <KCModule>
 
 class KCMqif : public KCModule
 {

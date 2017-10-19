@@ -29,26 +29,25 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KSharedConfig>
 #include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <mymoneyutils.h>
-#include <mymoneysecurity.h>
-#include <mymoneyaccount.h>
-#include <kmymoneyglobalsettings.h>
-#include <kmymoneyaccountcombo.h>
-#include <knewinvestmentwizard.h>
-#include <kmymoney.h>
-#include <kmymoneyview.h>
-#include <models.h>
-#include <equitiesmodel.h>
-#include <securitiesmodel.h>
-#include <icons.h>
+#include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+#include "mymoneyaccount.h"
+#include "kmymoneyglobalsettings.h"
+#include "kmymoneyaccountcombo.h"
+#include "knewinvestmentwizard.h"
+#include "kmymoney.h"
+#include "kmymoneyview.h"
+#include "accountsmodel.h"
+#include "models.h"
+#include "equitiesmodel.h"
+#include "securitiesmodel.h"
+#include "icons.h"
 
 using namespace Icons;
 

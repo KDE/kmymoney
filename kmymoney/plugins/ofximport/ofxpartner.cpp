@@ -41,12 +41,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kjob.h>
-#include <kio/job.h>
-#include <kio/copyjob.h>
-#include <KIO/JobUiDelegate>
+#include <KIO/Job>
+#include <KIO/TransferJob>
+#include <KIO/CopyJob>
+#include <KJobUiDelegate>
 #include <KLocalizedString>
-#include <kmessagebox.h>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Some standard defined stuff collides with libofx.h

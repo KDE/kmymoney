@@ -20,7 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QList>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,18 +28,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneyprice.h>
-#include <mymoneyforecast.h>
-#include <mymoneyutils.h>
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "mymoneyforecast.h"
 
 #include "ui_kforecastviewdecl.h"
 
-namespace reports {
-  class KReportChartView;
-};
+namespace reports { class KReportChartView; }
 
 class FixedColumnTreeView;
+class MyMoneyForecast;
+class MyMoneyPrice;
 /**
   * @author Alvaro Soliverez
   *

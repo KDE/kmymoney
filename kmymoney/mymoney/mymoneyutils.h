@@ -24,8 +24,7 @@
 #define MYMONEYUTILS_H
 
 #include <QString>
-#include <QDateTime>
-#include <kmm_mymoney_export.h>
+#include "kmm_mymoney_export.h"
 
 #ifdef __GNUC__
 #  define KMM_PRINTF_FORMAT(x, y) __attribute__((format(__printf__, x, y)))
@@ -36,6 +35,7 @@
 class MyMoneyMoney;
 class MyMoneySecurity;
 class MyMoneyAccount;
+class QDate;
 
 void timestamp(const char* txt);
 void timestamp_reset();

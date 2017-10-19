@@ -19,9 +19,8 @@
 #include "onlinejob.h"
 
 #include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "onlinetasks/interfaces/tasks/credittransfer.h"
 
+#include "tasks/onlinetask.h"
 #include "onlinejobadministration.h"
 #include "mymoneystoragenames.h"
 

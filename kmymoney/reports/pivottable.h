@@ -31,14 +31,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kreportchartview.h"
-#include "mymoneyfile.h"
 #include "mymoneyreport.h"
 #include "reporttable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
 
-using namespace KChart;
+namespace reports { class KReportChartView; }
 
 namespace reports
 {

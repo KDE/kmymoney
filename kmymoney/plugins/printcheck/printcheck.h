@@ -23,15 +23,11 @@
 #include <memory>
 
 #include "kmymoneyplugin.h"
-#include "mymoneyaccount.h"
-#include "mymoneykeyvaluecontainer.h"
 #include "selectedtransaction.h"
 
-#include <QtPrintSupport/QPrinter>
-
-class QStringList;
 class KPluginInfo;
-
+class QPrinter;
+class QObject;
 class KMMPrintCheckPlugin: public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT

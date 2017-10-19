@@ -21,7 +21,7 @@
 #include <QLayout>
 #include <QLabel>
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 KTreeWidgetFilterLineWidget::KTreeWidgetFilterLineWidget(QWidget* parent, QTreeWidget* treeWidget)
     : KTreeWidgetSearchLineWidget(parent, treeWidget)

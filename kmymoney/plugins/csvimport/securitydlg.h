@@ -18,14 +18,14 @@ email                 : lukasz.wojnilowicz@gmail.com
 #ifndef SECURITYDLG_H
 #define SECURITYDLG_H
 
-#include <QPushButton>
-#include "ui_securitydlg.h"
+#include <QDialog>
 
 namespace Ui
 {
 class SecurityDlg;
 }
 
+class QPushButton;
 class SecurityDlg : public QDialog
 {
   Q_OBJECT

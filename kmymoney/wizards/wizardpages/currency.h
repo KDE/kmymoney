@@ -20,13 +20,13 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QTreeWidget>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_currencydecl.h"
-#include <mymoneysecurity.h>
+#include "mymoneysecurity.h"
 
 /**
   * @author Thomas Baumgart

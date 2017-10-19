@@ -27,11 +27,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QSharedData>
 #include <QHash>
 #include <QMap>
 #include <QString>
 #include <QStringList>
-#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +40,7 @@
 // Project Includes
 
 class MyMoneyDbDriver;
-class MyMoneyStorageSql;
+template <class T> class QExplicitlySharedDataPointer;
 
 /**
   * The MyMoneyDbColumn class is a base type for generic db columns.

@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -35,8 +34,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <kmymoneyutils.h>
+#include "mymoneyaccount.h"
+#include "kmymoneyutils.h"
 #include "ui_kaccountselectdlgdecl.h"
 
 /**

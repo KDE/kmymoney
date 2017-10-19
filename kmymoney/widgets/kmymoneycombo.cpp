@@ -23,32 +23,24 @@
 #include <QRect>
 #include <QStyle>
 #include <QPainter>
-#include <QApplication>
 #include <QKeyEvent>
 #include <QList>
 #include <QFocusEvent>
 #include <QMouseEvent>
-#include <QPaintEvent>
-#include <QSortFilterProxyModel>
-#include <QCompleter>
 #include <QMetaMethod>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kconfig.h>
-#include <kconfiggroup.h>
+#include <KConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyselector.h"
-#include <kmymoneycompletion.h>
-#include <kmymoneylineedit.h>
-#include <mymoneysplit.h>
-#include <registeritem.h>
-#include "mymoneyschedule.h"
-#include "kmymoneyutils.h"
+#include "kmymoneycompletion.h"
+#include "kmymoneylineedit.h"
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w) :
     KComboBox(w),

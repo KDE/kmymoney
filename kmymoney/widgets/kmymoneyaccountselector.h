@@ -33,10 +33,8 @@ class QPushButton;
 // Project Includes
 
 #include <kmymoneyselector.h>
-#include <kmymoneyutils.h>
-#include <mymoneyaccount.h>
+#include "mymoneyaccount.h"
 
-class AccountSet;
 class MyMoneyFile;
 
 /**

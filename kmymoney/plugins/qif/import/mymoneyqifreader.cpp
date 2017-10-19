@@ -52,7 +52,7 @@
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
 
-#include <mymoneystatement.h>
+#include "mymoneystatement.h"
 
 // define this to debug the code. Using external filters
 // while debugging did not work too good for me, so I added

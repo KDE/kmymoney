@@ -22,16 +22,13 @@
 // QT Includes
 
 #include <QString>
-#include <QMetaType>
-#include <QHash>
-#include <QSharedPointer>
 class QStringList;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmm_mymoney_export.h>
-#include <mymoneyobject.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyobject.h"
 #include "mymoneypayeeidentifiercontainer.h"
 
 /**

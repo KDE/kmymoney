@@ -31,8 +31,7 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
-#include "ledgermodel.h"
+#include "mymoneymoney.h"
 
 class NewSplitEditor : public QFrame
 {

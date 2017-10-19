@@ -29,6 +29,8 @@
 #include "dialogs/webaccount.h"
 #include "plugin.h"
 #include "weboob.h"
+#include "mymoneystatement.h"
+#include "statementinterface.h"
 
 struct WeboobPlugin::Private
 {

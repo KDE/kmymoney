@@ -20,7 +20,9 @@
 #ifndef REPORTCONTROLIMPL_H
 #define REPORTCONTROLIMPL_H
 
-#include "ui_reportcontrol.h"
+#include <QWidget>
+
+namespace Ui { class ReportControl; }
 
 class ReportControl : public QWidget
 {

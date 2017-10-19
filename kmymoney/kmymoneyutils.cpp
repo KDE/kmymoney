@@ -33,24 +33,24 @@
 #include <QAbstractButton>
 #include <QPixmapCache>
 #include <QIcon>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <kconfig.h>
 #include <KColorScheme>
 #include <KLocalizedString>
 #include <KXmlGuiWindow>
+#include <KMessageBox>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <mymoneyforecast.h>
-#include <kmymoneyglobalsettings.h>
-#include <investtransactioneditor.h>
-#include <icons.h>
+#include "mymoneyfile.h"
+#include "mymoneyforecast.h"
+#include "kmymoneyglobalsettings.h"
+#include "icons.h"
 
 using namespace Icons;
 

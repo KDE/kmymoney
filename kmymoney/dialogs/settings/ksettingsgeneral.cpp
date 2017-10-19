@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneydateinput.h>
+#include "kmymoneydateinput.h"
 #include "models.h"
 #include "accountsmodel.h"
 

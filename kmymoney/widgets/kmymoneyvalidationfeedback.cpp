@@ -20,7 +20,7 @@
 #include "ui_kmymoneyvalidationfeedback.h"
 
 #include <QIcon>
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

@@ -23,6 +23,7 @@
 
 #include <QPainter>
 #include <QCoreApplication>
+#include <QSplashScreen>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

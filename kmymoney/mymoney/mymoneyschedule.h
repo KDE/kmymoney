@@ -21,9 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringList>
-#include <QMap>
-#include <QDateTime>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -36,7 +33,6 @@
 #include "mymoneyobject.h"
 
 class IMyMoneyProcessingCalendar;
-class MyMoneyStorageANON;
 
 /**
   * @author Michael Edwardes

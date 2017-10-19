@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyutils.h"
 #include "mymoneysecurity.h"
 #include "ui_kinvestmenttypewizardpagedecl.h"
 

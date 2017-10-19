@@ -20,6 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyutils.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 

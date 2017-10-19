@@ -23,29 +23,23 @@
 // QT Includes
 
 #include <QFrame>
-#include <QLayout>
-#include <QTimer>
 #include <QHBoxLayout>
-#include <QKeyEvent>
 #include <QList>
 #include <QLabel>
-#include <QResizeEvent>
 #include <QEvent>
 #include <QVBoxLayout>
 #include <QHeaderView>
 #include <QApplication>
 #include <QToolTip>
-#include <QPushButton>
 #include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kcombobox.h>
-#include <kmessagebox.h>
-#include <ktoolbar.h>
-#include <kpassivepopup.h>
+#include <KMessageBox>
+#include <KToolBar>
+#include <KPassivePopup>
 #include <KActionCollection>
 
 // ----------------------------------------------------------------------------
@@ -54,7 +48,6 @@
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "kmymoneyaccountcombo.h"
-#include "kmymoneytitlelabel.h"
 #include "register.h"
 #include "transactioneditor.h"
 #include "selectedtransaction.h"
@@ -63,7 +56,15 @@
 #include "kfindtransactiondlg.h"
 #include "kmymoney.h"
 #include "scheduledtransaction.h"
+#include "accountsmodel.h"
 #include "models.h"
+#include "mymoneyprice.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
+#include "transaction.h"
+#include "transactionform.h"
 
 class KGlobalLedgerView::Private
 {

@@ -22,10 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
 #include <QTreeWidget>
 #include <QHeaderView>
-#include <QTimer>
 #include <QStyle>
 #include <QRegExp>
 #include <QHBoxLayout>

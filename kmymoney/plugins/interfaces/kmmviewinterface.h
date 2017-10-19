@@ -26,7 +26,6 @@
 
 class KMyMoneyApp;
 class KMyMoneyView;
-class KMyMoneyViewBase;
 
 // ----------------------------------------------------------------------------
 // Project Includes

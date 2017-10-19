@@ -26,6 +26,7 @@
 // Project Includes
 
 #include "kmymoneyplugin.h"
+#include "mymoneystatement.h"
 
 class MyMoneyQifReader;
 

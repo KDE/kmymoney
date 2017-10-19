@@ -16,8 +16,6 @@
 #ifndef MYMONEYMONEY_H
 #define MYMONEYMONEY_H
 
-#include <stdlib.h>
-
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
 #endif
@@ -25,7 +23,7 @@
 // #include <cmath>
 
 //FIXME workaround for dealing with lond double
-#include <sstream>
+#include <gmpxx.h>
 
 // So we can save this object
 #include <QChar>

@@ -23,17 +23,18 @@
 // QT Headers
 
 #include <QDesktopWidget>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KLocalizedString>
 #include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <icons/icons.h>
+#include "ui_transactiondlg.h"
+#include "icons/icons.h"
 
 using namespace Icons;
 

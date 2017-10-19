@@ -16,6 +16,11 @@
 ********************************************************************************/
 
 #include "securitydlg.h"
+
+#include <QPushButton>
+
+#include "ui_securitydlg.h"
+
 #include "mymoneyfile.h"
 
 SecurityDlg::SecurityDlg() : ui(new Ui::SecurityDlg)

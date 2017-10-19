@@ -29,9 +29,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneytransaction.h>
-#include "mymoneyschedule.h"
-#include <mymoneysplit.h>
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
 
 namespace KMyMoneyRegister
 {

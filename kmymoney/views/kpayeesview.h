@@ -27,23 +27,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVector>
 #include <QWidget>
-#include <QResizeEvent>
 #include <QList>
-#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <klistwidgetsearchline.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kpayeesviewdecl.h"
 #include "mymoneypayee.h"
-#include "mymoneycontact.h"
 
 /**
   * @author Michael Edwardes, Thomas Baumgart
@@ -52,6 +46,9 @@
 /**
   * This class represents an item in the payees list view.
   */
+struct ContactData;
+class MyMoneyContact;
+class KListWidgetSearchLine;
 class KPayeeListItem : public QListWidgetItem
 {
 public:

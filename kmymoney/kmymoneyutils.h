@@ -26,24 +26,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QColor>
-#include <QFont>
 #include <QPixmap>
 #include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kguiitem.h>
+#include <KGuiItem>
 class KXmlGuiWindow;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneysecurity.h>
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneyschedule.h"
-#include <mymoneytransaction.h>
+#include "mymoneytransaction.h"
 
 /**
   * @author Thomas Baumgart

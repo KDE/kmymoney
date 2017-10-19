@@ -28,7 +28,6 @@
 
 #include <QWidget>
 #include <QRegExp>
-#include <QEvent>
 class QTreeWidgetItem;
 class QTreeWidget;
 

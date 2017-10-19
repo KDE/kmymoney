@@ -23,12 +23,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneypayee.h>
+#include "mymoneypayee.h"
 
 
 UserInfo::UserInfo(QWidget* parent) :

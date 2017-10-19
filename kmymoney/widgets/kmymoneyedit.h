@@ -23,27 +23,22 @@
 // QT Includes
 
 #include <QValidator>
-#include <QEvent>
-#include <QKeyEvent>
-class QWidget;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLineEdit>
-class QPushButton;
-
-
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneylineedit.h>
-#include <mymoneysecurity.h>
+#include "kmymoneylineedit.h"
+#include "mymoneysecurity.h"
+#include "mymoneymoney.h"
 #include "kmm_widgets_export.h"
 
-class MyMoneyMoney;
 class kMyMoneyCalculator;
+class QPushButton;
+class QWidget;
+class KLineEdit;
 
 /**
   * This class is derived from KDoubleValidator and uses

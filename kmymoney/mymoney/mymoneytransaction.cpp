@@ -24,6 +24,7 @@
 // Project Includes
 
 #include "mymoneystoragenames.h"
+#include "mymoneyutils.h"
 
 using namespace MyMoneyStorageNodes;
 

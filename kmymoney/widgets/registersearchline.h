@@ -21,17 +21,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QHBoxLayout>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
+#include <KLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <register.h>
+namespace KMyMoneyRegister { class Register; }
+namespace KMyMoneyRegister { class RegisterItem; }
 
 namespace KMyMoneyRegister
 {

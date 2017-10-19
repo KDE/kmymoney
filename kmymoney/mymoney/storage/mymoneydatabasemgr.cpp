@@ -17,7 +17,6 @@
 #include "mymoneydatabasemgr.h"
 
 #include <algorithm>
-#include <list>
 #include <typeinfo>
 
 // ----------------------------------------------------------------------------
@@ -26,13 +25,15 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "../mymoneytransactionfilter.h"
 #include "../mymoneycategory.h"
+#include "mymoneyfile.h"
+#include "mymoneymap.h"
 
 MyMoneyDatabaseMgr::MyMoneyDatabaseMgr() :
     m_creationDate(QDate::currentDate()),

@@ -27,6 +27,8 @@
 // Project Includes
 
 #include "ui_kcurrencyeditordlg.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 
 KCurrencyEditorDlg::KCurrencyEditorDlg(MyMoneySecurity& currency, QWidget *parent) : ui(new Ui::KCurrencyEditorDlg)
 {

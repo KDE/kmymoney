@@ -24,12 +24,15 @@
 
 // QT includes
 #include <QAction>
+#include <QFile>
+#include <QDialog>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
 #include <KDEWebKit/KWebView>
 #endif
 #include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
 
 // KDE includes
 #include <KActionCollection>
@@ -39,7 +42,15 @@
 
 // KMyMoney includes
 #include "mymoneyfile.h"
-#include "pluginloader.h"
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
+#include "viewinterface.h"
 
 #include "numbertowords.h"
 #include "pluginsettings.h"

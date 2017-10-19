@@ -21,7 +21,6 @@
 // QT Includes
 
 #include <QLabel>
-#include <QLayout>
 #include <QRegExp>
 #include <QCheckBox>
 #include <QTabWidget>
@@ -32,12 +31,12 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
+#include <KMessageBox>
 
 #include <QProgressDialog>
-#include <klistwidgetsearchline.h>
-#include <kcombobox.h>
-#include <kurlrequester.h>
+#include <KListWidgetSearchLine>
+#include <KComboBox>
+#include <KUrlRequester>
 #include <KWallet>
 #include <QStandardPaths>
 

@@ -25,13 +25,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoney.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

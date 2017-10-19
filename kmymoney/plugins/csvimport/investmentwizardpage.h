@@ -36,7 +36,6 @@
 // ----------------------------------------------------------------------------
 
 class InvestmentProfile;
-class TransactionDlg;
 class SecurityDlg;
 class SecuritiesDlg;
 class MyMoneyStatement;

@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QList>
-#include <QFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,7 +36,6 @@
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
-#include "reportdebug.h"
 
 namespace reports
 {

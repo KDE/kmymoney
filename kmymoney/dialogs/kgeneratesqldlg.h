@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
 #include <QDialog>
 
 // ----------------------------------------------------------------------------
@@ -35,12 +34,11 @@
 // Project Includes
 
 #include "ui_kgeneratesqldlgdecl.h"
-#include "storage/mymoneystoragesql.h"
-#include "storage/mymoneyseqaccessmgr.h"
-#include "kguiutils.h"
 
 class QDialogButtonBox;
-
+class MyMoneyDbDriver;
+class MyMoneySeqAccessMgr;
+class kMandatoryFieldGroup;
 class KGenerateSqlDlgDecl : public QWidget, public Ui::KGenerateSqlDlgDecl
 {
 public:

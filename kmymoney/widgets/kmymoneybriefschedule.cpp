@@ -41,7 +41,7 @@
 
 #include "mymoneyschedule.h"
 #include "kmymoneyutils.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

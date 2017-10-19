@@ -26,6 +26,10 @@
 #include <QCloseEvent>
 #include <QTextCodec>
 #include <QAbstractButton>
+#include <QFileDialog>
+#include <QStandardItemModel>
+#include <QScrollBar>
+#include <QLineEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -42,18 +46,15 @@
 #include "csvutil.h"
 #include "convdate.h"
 #include "csvimporter.h"
-#include <icons/icons.h>
+#include "investmentwizardpage.h"
+#include "bankingwizardpage.h"
+#include "priceswizardpage.h"
+#include "icons/icons.h"
 #include "ui_csvwizard.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
 #include "ui_rowswizardpage.h"
-#include "ui_bankingwizardpage.h"
-#include "ui_investmentwizardpage.h"
-#include "ui_priceswizardpage.h"
 #include "ui_formatswizardpage.h"
-
-#include "ui_securitiesdlg.h"
-#include "ui_securitydlg.h"
 
 using namespace Icons;
 

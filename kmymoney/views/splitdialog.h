@@ -30,10 +30,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "newtransactioneditor.h"
+#include "mymoneymoney.h"
 
 class QAbstractItemModel;
 class MyMoneyAccount;
+class NewTransactionEditor;
 
 class SplitDialog : public QDialog
 {

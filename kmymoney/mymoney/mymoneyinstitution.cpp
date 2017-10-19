@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <icons.h>
+#include "icons.h"
 #include <mymoneyexception.h>
 #include "mymoneystoragenames.h"
 

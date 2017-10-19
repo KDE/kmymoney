@@ -18,14 +18,12 @@
 // QT Includes
 
 #include <QString>
-#include <QDomDocument>
 #include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyobject.h"
-#include "mymoneyutils.h"
 #include "mymoneyexception.h"
 
 const QString MyMoneyObject::m_emptyId;

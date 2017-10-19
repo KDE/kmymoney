@@ -17,17 +17,18 @@
 #ifndef MYMONEYCOSTCENTER_H
 #define MYMONEYCOSTCENTER_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QString>
-#include <QColor>
+#include <qobjectdefs.h>
 #include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_mymoney_export.h"
 #include "mymoneyobject.h"
 
 /**

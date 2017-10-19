@@ -19,6 +19,11 @@
 
 #include "securitiesdlg.h"
 
+#include <QTableWidgetItem>
+#include <QPushButton>
+
+#include "ui_securitiesdlg.h"
+
 SecuritiesDlg::SecuritiesDlg() : ui(new Ui::SecuritiesDlg)
 {
   ui->setupUi(this);

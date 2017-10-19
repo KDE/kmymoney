@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 
 class SecuritiesModel : public QStandardItemModel
 {

@@ -23,7 +23,6 @@
 #include <QDesktopWidget>
 #include <QKeyEvent>
 #include <QStyle>
-#include <QPixmap>
 #include <QToolButton>
 #include <QFrame>
 #include <QLocale>
@@ -32,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KSharedConfig>
 
@@ -41,7 +39,7 @@
 
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

@@ -20,9 +20,9 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QSql>
 #include <QMap>
 #include <QString>
-#include <QSqlDatabase>
 #include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
@@ -30,7 +30,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "mymoneydbdef.h"
 
 /**
 @author Tony Bloomfield
@@ -40,6 +39,11 @@
   * The MyMoneyDbDriver class hierarchy provides a way to implement DBMS
   * specific parts of SQL strings.
   */
+class QSqlDatabase;
+class MyMoneyDbColumn;
+class MyMoneyDbDatetimeColumn;
+class MyMoneyDbIntColumn;
+class MyMoneyDbTextColumn;
 class MyMoneyDbDriver : public QSharedData
 {
 public:

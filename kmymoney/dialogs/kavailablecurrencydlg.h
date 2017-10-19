@@ -24,7 +24,6 @@
 // KDE Includes
 
 #include <QDialog>
-#include <ktreewidgetsearchlinewidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -34,8 +33,7 @@ namespace Ui
 class KAvailableCurrencyDlg;
 }
 
-class QTreeWidgetItem;
-
+class KTreeWidgetSearchLineWidget;
 class KAvailableCurrencyDlg : public QDialog
 {
   Q_OBJECT

@@ -22,6 +22,7 @@
 #include <QtTest/QtTest>
 
 #include "mymoneytestutils.h"
+#include "mymoneyfile.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 

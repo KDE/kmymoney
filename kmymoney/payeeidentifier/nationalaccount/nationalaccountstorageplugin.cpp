@@ -18,10 +18,12 @@
 
 #include "nationalaccountstorageplugin.h"
 
-#include <KPluginFactory>
-
 #include <QSqlQuery>
 #include <QSqlError>
+
+#include <KExportPlugin>
+
+#include "kmymoneystorageplugin.h"
 
 /*K_PLUGIN_FACTORY(nationalAccountStoragePluginFactory,
                  registerPlugin<nationalAccountStoragePlugin>();

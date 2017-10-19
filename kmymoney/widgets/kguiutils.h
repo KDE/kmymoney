@@ -23,13 +23,11 @@
 
 #include <QObject>
 #include <QList>
-#include <QPushButton>
 class QWidget;
+class QPushButton;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <kcombobox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

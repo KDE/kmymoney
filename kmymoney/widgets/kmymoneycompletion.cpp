@@ -26,7 +26,6 @@
 // QT Includes
 
 #include <QApplication>
-#include <QFrame>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDesktopWidget>

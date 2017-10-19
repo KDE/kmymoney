@@ -23,23 +23,22 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <KSharedConfig>
-#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStandardItemModel>
 #include <QSet>
 
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneystatement.h>
+#include "mymoneyaccount.h"
+#include "mymoneystatement.h"
 #include "csvenums.h"
 #include "csvimport/kmm_csvimport_core_export.h"
 
+class KConfigGroup;
+class QStandardItemModel;
 class Parse;
-class CsvUtil;
 class ConvertDate;
 
 enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,

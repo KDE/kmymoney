@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -35,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyaccountselector.h>
+#include "kmymoneyaccountselector.h"
 #include "kmymoneycompletion.h"
 
 /**

@@ -22,12 +22,10 @@
 // QT Includes
 
 #include <QWidget>
-#include <QDateTime>
 #include <QStringList>
-#include <QEventLoop>
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QResource>
+#include <QSplashScreen>
 #ifdef KMM_DBUS
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
@@ -36,8 +34,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KTipDialog>
 #include <KLocalizedString>
-#include <ktip.h>
 #include <KMessageBox>
 #include <Kdelibs4ConfigMigrator>
 

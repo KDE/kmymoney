@@ -20,29 +20,25 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRect>
-#include <QPainter>
 #include <QPalette>
-#include <QLayout>
 #include <QTimer>
 #include <QHBoxLayout>
 #include <QFrame>
-#include <QFocusEvent>
 #include <QPushButton>
 #include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kguiitem.h>
+#include <KGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 #include "kmymoneyaccountcompletion.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

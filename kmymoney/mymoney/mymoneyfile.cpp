@@ -23,12 +23,9 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
 #include <QList>
-#include <QtGlobal>
-#include <QVariant>
 #include <QUuid>
-#include <QSharedPointer>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,7 +34,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "storage/mymoneyseqaccessmgr.h"
+#include "imymoneystorage.h"
 #include "mymoneyaccount.h"
 #include "mymoneyreport.h"
 #include "mymoneybalancecache.h"
@@ -45,7 +42,7 @@
 #include "mymoneyprice.h"
 #include "mymoneyobjectcontainer.h"
 #include "mymoneypayee.h"
-//#include "mymoneytag.h"
+#include "mymoneytag.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>

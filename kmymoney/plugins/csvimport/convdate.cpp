@@ -19,7 +19,7 @@
 
 #include "convdate.h"
 
-#include <QtCore/QDebug>
+#include <QLocale>
 #include <QRegularExpression>
 
 ConvertDate::ConvertDate():

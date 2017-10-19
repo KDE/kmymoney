@@ -33,6 +33,9 @@
 
 #include "kimportdlg.h"
 #include "mymoneyqifreader.h"
+#include "statementinterface.h"
+
+class MyMoneyStatement;
 
 QIFImporterPlugin::QIFImporterPlugin() :
     KMyMoneyPlugin::Plugin(nullptr, "qifimport"/*must be the same as X-KDE-PluginInfo-Name*/)

@@ -21,11 +21,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
 #include <QMap>
 #include <QXmlLocator>
 #include <QTextStream>
 #include <QList>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,10 +35,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "imymoneyserialize.h"
+#include "mymoneyexception.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "mymoneymoney.h"
+#include "mymoneyschedule.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
 #include "mymoneyinstitution.h"
 #include "mymoneystoragenames.h"
+#include "mymoneyutils.h"
 
 using namespace MyMoneyStorageTags;
 using namespace MyMoneyStorageNodes;

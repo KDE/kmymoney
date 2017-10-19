@@ -22,8 +22,7 @@
 
 #include <QDebug>
 #include <QHeaderView>
-#include <QPainter>
-#include <QResizeEvent>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,13 +33,12 @@
 // Project Includes
 
 #include "ui_splitdialog.h"
+#include "mymoneyaccount.h"
 #include "ledgermodel.h"
-#include "models.h"
-#include "accountsmodel.h"
 #include "splitdelegate.h"
 #include "newtransactioneditor.h"
 #include "splitadjustdialog.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

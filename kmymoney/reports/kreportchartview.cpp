@@ -20,17 +20,14 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QLabel>
-#include <QFrame>
 #include <QStandardItemModel>
 #include <QFontDatabase>
 #include <QtMath>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kcolorscheme.h>
+#include <KColorScheme>
 #include <KLocalizedString>
-#include <math.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,7 +45,7 @@
 #include <KChartFrameAttributes>
 #include "kmymoneyglobalsettings.h"
 #include <kbalanceaxis.h>
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 
 using namespace reports;
 

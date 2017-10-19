@@ -39,7 +39,6 @@
   *
   * @author Cristin Oneț
   */
-class MymoneyBudget;
 class BudgetViewProxyModel : public AccountsViewProxyModel
 {
   Q_OBJECT

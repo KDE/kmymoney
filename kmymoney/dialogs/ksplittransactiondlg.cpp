@@ -39,9 +39,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kconfig.h>
-#include <kmessagebox.h>
-#include <kstandardguiitem.h>
+#include <KConfig>
+#include <KMessageBox>
+#include <KStandardGuiItem>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -49,11 +49,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyedit.h>
-#include <kmymoneylineedit.h>
-#include <mymoneyfile.h>
+#include "kmymoneyedit.h"
+#include "kmymoneylineedit.h"
+#include "mymoneyfile.h"
 #include "kmymoneysplittable.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

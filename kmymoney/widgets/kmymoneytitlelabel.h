@@ -24,7 +24,6 @@
 #include <QLabel>
 #include <QImage>
 #include <QColor>
-class QPixmap;
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -21,12 +21,9 @@
 // QT Includes
 
 #include <QButtonGroup>
-#include <QGroupBox>
-#include <QTabWidget>
 #include <QLabel>
 #include <QRadioButton>
 #include <QTimer>
-#include <QToolTip>
 #include <QApplication>
 #include <QKeyEvent>
 #include <QEvent>
@@ -37,14 +34,14 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kstandardguiitem.h>
-#include <kmymoneyglobalsettings.h>
+#include <KMessageBox>
+#include <KStandardGuiItem>
+#include "kmymoneyglobalsettings.h"
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyedit.h>
+#include "kmymoneyedit.h"
 
 KBudgetValues::KBudgetValues(QWidget* parent) :
     KBudgetValuesDecl(parent),

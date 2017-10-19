@@ -26,8 +26,6 @@
 
 #include "imymoneyserialize.h"
 #include "imymoneystorage.h"
-#include "mymoneydbdriver.h"
-#include "mymoneymap.h"
 #include "mymoneystoragesql.h"
 
 /**

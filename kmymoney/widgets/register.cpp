@@ -26,21 +26,18 @@
 
 #include <QString>
 #include <QToolTip>
-#include <QImage>
 #include <QPixmap>
-#include <QFocusEvent>
 #include <QMouseEvent>
 #include <QList>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QFrame>
-#include <QDropEvent>
-#include <QDragMoveEvent>
-#include <QPaintEvent>
 #include <QHeaderView>
 #include <QStyleOptionViewItem>
 #include <QApplication>
 #include <QPushButton>
+#include <QPainter>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -49,10 +46,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
-#include "kmymoneycategory.h"
-#include "transactionform.h"
 #include "stdtransactiondownloaded.h"
 #include "stdtransactionmatched.h"
 #include "scheduledtransaction.h"

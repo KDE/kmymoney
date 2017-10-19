@@ -21,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QObject>
 #include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
@@ -29,10 +28,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-class NewTransactionEditor;
-
-
 
 class SplitDelegate : public QStyledItemDelegate
 {

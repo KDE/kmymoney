@@ -20,11 +20,14 @@
 // QT Includes
 
 #include <QUrl>
+#include <QFileInfo>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes

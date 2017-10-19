@@ -34,7 +34,7 @@
 // KDE Headers
 
 #include <kmessagebox.h>
-#include <kconfiggroup.h>
+#include <KConfigGroup>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KSharedConfig>
@@ -48,6 +48,7 @@
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
 #include "models.h"
+#include "accountsmodel.h"
 #include <icons/icons.h>
 
 using namespace Icons;

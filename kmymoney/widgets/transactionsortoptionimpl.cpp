@@ -31,7 +31,7 @@
 // Project Includes
 
 #include "register.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 #include "ui_transactionsortoptiondecl.h"
 

@@ -20,20 +20,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDomElement>
 #include <QString>
 #include <QColor>
+#include <qobjectdefs.h>
 #include <QMetaType>
-class QStringList;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmm_mymoney_export.h>
-#include <mymoneyobject.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyobject.h"
 
 /**
   * This class represents a tag within the MyMoney engine.
   */
+class QDomDocument;
 class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 {
   Q_GADGET

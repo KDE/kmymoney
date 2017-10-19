@@ -32,7 +32,6 @@
 #include "ui_kaccounttemplateselectordecl.h"
 
 class MyMoneyTemplate;
-
 class KAccountTemplateSelectorDecl : public QWidget, public Ui::KAccountTemplateSelectorDecl
 {
 public:

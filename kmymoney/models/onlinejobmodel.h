@@ -24,7 +24,6 @@
 
 #include "mymoney/mymoneyfile.h"
 
-class Models;
 class onlineJobModel : public QAbstractTableModel
 {
   Q_OBJECT

@@ -21,12 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QObject>
 #include <QAbstractTableModel>
 #include <QSortFilterProxyModel>
-#include <QStyledItemDelegate>
-#include <QTableView>
-#include <QFrame>
 #include <QScopedPointer>
 
 // ----------------------------------------------------------------------------
@@ -44,7 +40,6 @@
 /**
   * Forward declarations for the returned models.
   */
-class QMouseEvent;
 
 class LedgerItem
 {

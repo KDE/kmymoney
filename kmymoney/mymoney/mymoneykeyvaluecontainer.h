@@ -18,6 +18,7 @@
 #ifndef MYMONEYKEYVALUECONTAINER_H
 #define MYMONEYKEYVALUECONTAINER_H
 
+#include "kmm_mymoney_export.h"
 
 /**
   * @author Thomas Baumgart
@@ -28,15 +29,13 @@
 
 #include <QString>
 #include <QMap>
-#include <QDomDocument>
 #include <QDomElement>
-#include <QObject>
+#include <qobjectdefs.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
+#include "mymoneyunittestable.h"
 
 /**
   * This class implements a container for key/value pairs. This is used
@@ -48,6 +47,7 @@
   * To give any class the ability to have a key/value pair container,
   * just derive the class from this one. See MyMoneyAccount as an example.
   */
+class QDomDocument;
 class KMM_MYMONEY_EXPORT MyMoneyKeyValueContainer
 {
   Q_GADGET

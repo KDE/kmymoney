@@ -32,7 +32,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "mymoneycostcenter.h"
 
 struct PayeesModel::Private
 {

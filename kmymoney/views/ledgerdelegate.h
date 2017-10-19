@@ -21,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QObject>
 #include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
@@ -31,7 +30,6 @@
 // Project Includes
 
 #include "ledgermodel.h"
-class NewTransactionEditor;
 class LedgerView;
 
 class LedgerSeperator

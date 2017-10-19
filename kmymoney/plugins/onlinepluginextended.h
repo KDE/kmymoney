@@ -20,14 +20,13 @@
 #define ONLINEPLUGINEXTENDED_H
 
 #include "kmymoneyplugin.h"
-#include <QtCore/QObject>
-#include <QtCore/QList>
 
 #include "mymoney/onlinejob.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 
+class onlineJob;
 class onlineTask;
-class IonlineJobEdit;
+class payeeIdentifierData;
 
 namespace KMyMoneyPlugin
 {

@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
+#include <QDate>
 #include <QPair>
 #include <QMap>
 #include <QDomElement>
@@ -38,8 +38,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
-#include <kmm_mymoney_export.h>
+#include "mymoneymoney.h"
+#include "kmm_mymoney_export.h"
 
 /**
   * @author Thomas Baumgart

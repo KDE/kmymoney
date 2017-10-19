@@ -25,12 +25,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneymoney.h"
+#include "mymoneyfile.h"
 
 KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
     : KInvestmentDetailsWizardPageDecl(parent)

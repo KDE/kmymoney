@@ -27,7 +27,7 @@
 // Project Includes
 
 #include "kmymoneyglobalsettings.h"
-#include "register.h"
+#include "transaction.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

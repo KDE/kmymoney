@@ -22,7 +22,6 @@
 #include <QCompleter>
 #include <QSortFilterProxyModel>
 #include <QTreeView>
-#include <QDebug>
 
 #include <KDescendantsProxyModel>
 
@@ -37,6 +36,7 @@
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "styleditemdelegateforwarder.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
+#include "onlinejobtyped.h"
 
 class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
 {

@@ -17,12 +17,12 @@
 #ifndef AMOUNTEDIT_H
 #define AMOUNTEDIT_H
 
+#include "kmm_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QValidator>
-#include <QEvent>
-#include <QKeyEvent>
 #include <QLineEdit>
 #include <QPointer>
 
@@ -32,10 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneysecurity.h>
-#include "kmm_widgets_export.h"
-
-class MyMoneyMoney;
+#include "mymoneysecurity.h"
+#include "mymoneymoney.h"
 
 /**
   * This class is derived from KDoubleValidator and uses
@@ -167,7 +165,7 @@ public:
   QString numericalText() const
   {
     return value().toString();
-  };
+  }
 
   /**
     * Set the number of fractional digits that should be shown

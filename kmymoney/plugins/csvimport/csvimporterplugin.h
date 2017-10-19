@@ -32,6 +32,7 @@
 
 class CSVImporter;
 class CSVWizard;
+class MyMoneyStatement;
 
 class CsvImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin
 {

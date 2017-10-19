@@ -20,8 +20,8 @@
 
 #include <QIcon>
 
-#include <klocalizedstring.h>
-#include <icons/icons.h>
+#include <KLocalizedString>
+#include "icons/icons.h"
 
 using namespace Icons;
 

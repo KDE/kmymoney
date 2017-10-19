@@ -24,17 +24,17 @@
 #include <QBitmap>
 #include <QList>
 #include <QTreeWidget>
-#include <QIcon>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KTreeWidgetSearchLineWidget>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneysecurity.h>
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 #include "ui_kavailablecurrencydlg.h"
 #include "mymoneysecurity.h"
 

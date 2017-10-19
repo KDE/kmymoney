@@ -18,15 +18,15 @@
 
 #include "sepaonlinetransferimpl.h"
 
-#include <QtCore/QString>
 #include <QSqlError>
 #include <QSqlQuery>
 
-#include <KLocalizedString>
-
+#include "mymoneyutils.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/onlinejobadministration.h"
 #include "misc/validators.h"
+#include "payeeidentifiertyped.h"
+#include "tasks/sepaonlinetransfer.h"
 
 static const unsigned short defaultTextKey = 51;
 static const unsigned short defaultSubTextKey = 0;

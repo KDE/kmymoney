@@ -23,7 +23,6 @@
 
 #include <QObject>
 #include <QFile>
-#include <QEventLoop>
 #include <QPointer>
 
 // ----------------------------------------------------------------------------
@@ -31,6 +30,7 @@
 
 #include <QUrl>
 class KJob;
+class QEventLoop;
 namespace KIO
 {
 class Job;

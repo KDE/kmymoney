@@ -20,7 +20,6 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QMap>
 #include <QList>
 #include <QString>
 class QDomElement;
@@ -28,11 +27,11 @@ class QDomDocument;
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <mymoneyobject.h>
-#include <mymoneyaccount.h>
-#include <mymoneytransactionfilter.h>
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
+#include "mymoneyobject.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransactionfilter.h"
+#include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class

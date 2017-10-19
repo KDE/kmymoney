@@ -28,8 +28,6 @@
 // KDE Includes
 
 #include <KLineEdit>
-#include <QFocusEvent>
-#include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -45,6 +43,8 @@
   * @author Michael Edwardes
   * @author Thomas Baumgart
   */
+class QFocusEvent;
+class QKeyEvent;
 class KMM_WIDGETS_EXPORT kMyMoneyLineEdit : public KLineEdit
 {
   Q_OBJECT

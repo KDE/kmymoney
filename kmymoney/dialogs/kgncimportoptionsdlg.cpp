@@ -20,19 +20,14 @@
 // QT Includes
 
 #include <QCheckBox>
-#include <QLayout>
-#include <QApplication>
-#include <QComboBox>
 #include <QList>
 #include <QByteArray>
+#include <QTextCodec>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kurlrequester.h>
-#include <QTextBrowser>
-#include <khelpclient.h>
-#include <KConfigGroup>
+#include <KHelpClient>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>

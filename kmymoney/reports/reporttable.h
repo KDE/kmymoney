@@ -21,18 +21,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyutils.h"
-#include "mymoneyfile.h"
 #include "mymoneyreport.h"
 
 namespace reports

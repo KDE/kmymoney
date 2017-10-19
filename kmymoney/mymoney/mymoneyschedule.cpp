@@ -21,6 +21,7 @@
 // QT Includes
 
 #include <QList>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,6 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyutils.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "imymoneyprocessingcalendar.h"

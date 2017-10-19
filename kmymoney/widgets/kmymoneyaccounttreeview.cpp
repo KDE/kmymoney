@@ -32,7 +32,6 @@
 
 #include <KConfigGroup>
 #include <KSharedConfig>
-#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

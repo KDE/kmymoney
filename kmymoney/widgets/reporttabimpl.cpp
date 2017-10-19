@@ -18,10 +18,9 @@
 */
 
 #include "reporttabimpl.h"
-#include "kmymoneyglobalsettings.h"
 
-#include <klocalizedstring.h>
-#include <daterangedlg.h>
+#include <KLocalizedString>
+#include "daterangedlg.h"
 
 #include "ui_reporttabgeneral.h"
 #include "ui_reporttabrowcolpivot.h"
@@ -30,7 +29,6 @@
 #include "ui_reporttabrange.h"
 #include "ui_reporttabcapitalgain.h"
 #include "ui_reporttabperformance.h"
-#include <ui_daterangedlgdecl.h>
 
 #include "mymoney/mymoneyreport.h"
 

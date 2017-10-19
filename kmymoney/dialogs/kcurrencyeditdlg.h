@@ -32,14 +32,10 @@
 // KDE Includes
 
 #include <QDialog>
-#include <ktreewidgetsearchlinewidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kcurrencyeditdlg.h"
-#include "ui_kavailablecurrencydlg.h"
-#include "ui_kcurrencyeditordlg.h"
 #include "mymoneysecurity.h"
 
 namespace Ui
@@ -50,6 +46,7 @@ class KCurrencyEditDlg;
 class QTreeWidgetItem;
 class KAvailableCurrencyDlg;
 class KCurrencyEditorDlg;
+class KTreeWidgetSearchLineWidget;
 
 /**
   * @author Thomas Baumgart

@@ -26,7 +26,7 @@
 #include <QString>
 #include <QMetaType>
 
-#include <kmm_mymoney_export.h>
+#include "kmm_mymoney_export.h"
 
 /**
   * POD containig contact data, these fields are retrived based on an email address.

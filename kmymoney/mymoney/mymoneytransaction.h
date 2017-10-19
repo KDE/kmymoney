@@ -22,19 +22,18 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
 #include <QList>
 #include <QStringList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
-#include "mymoneymoney.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneymoney.h"
+#include "mymoneyobject.h"
 #include "mymoneysplit.h"
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 
 /**
   * This class represents a transaction within the MyMoneyEngine. A transaction
@@ -44,6 +43,7 @@
   * is tolerated by the engine, but in general not a good idea as it is financially
   * wrong.
   */
+class QDate;
 class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
   Q_GADGET
@@ -75,28 +75,28 @@ public:
   // Simple get operations
   const QDate& entryDate() const {
     return m_entryDate;
-  };
+  }
   const QDate& postDate() const {
     return m_postDate;
-  };
+  }
   const QString& memo() const {
     return m_memo;
-  };
+  }
   const QList<MyMoneySplit>& splits() const {
     return m_splits;
-  };
+  }
   QList<MyMoneySplit>& splits() {
     return m_splits;
-  };
+  }
   unsigned int splitCount() const {
     return m_splits.count();
-  };
+  }
   const QString& commodity() const {
     return m_commodity;
-  };
+  }
   const QString& bankID() const {
     return m_bankID;
-  };
+  }
 
   // Simple set operations
   void setPostDate(const QDate& date);
@@ -104,24 +104,24 @@ public:
   void setMemo(const QString& memo);
   void setCommodity(const QString& commodityId) {
     m_commodity = commodityId;
-  };
+  }
   void setBankID(const QString& bankID) {
     m_bankID = bankID;
-  };
+  }
 
   bool operator == (const MyMoneyTransaction&) const;
   inline bool operator != (const MyMoneyTransaction& r) const {
     return !(*this == r);
-  };
+  }
   bool operator< (const MyMoneyTransaction& r) const {
     return postDate() < r.postDate();
-  };
+  }
   bool operator<= (const MyMoneyTransaction& r) const {
     return postDate() <= r.postDate();
-  };
+  }
   bool operator> (const MyMoneyTransaction& r) const {
     return postDate() > r.postDate();
-  };
+  }
 
   /**
     * This method is used to extract a split for a given accountId

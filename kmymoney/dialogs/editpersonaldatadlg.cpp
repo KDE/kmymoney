@@ -19,15 +19,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
-#include <QLabel>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <KLocalizedString>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------

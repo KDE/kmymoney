@@ -25,6 +25,7 @@
 #include <QDomElement>
 
 class QAbstractItemDelegate;
+class QSqlDatabase;
 
 /**
  *

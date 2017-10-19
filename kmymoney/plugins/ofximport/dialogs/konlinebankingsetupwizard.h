@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
 #include <QList>
 #include <QWizard>
 
@@ -37,7 +36,7 @@
 // Project Includes
 
 #include "ui_konlinebankingsetupwizard.h"
-#include <mymoneykeyvaluecontainer.h>
+#include "mymoneykeyvaluecontainer.h"
 class OfxAppVersion;
 class OfxHeaderVersion;
 

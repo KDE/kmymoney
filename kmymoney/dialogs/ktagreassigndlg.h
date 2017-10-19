@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneytag.h>
 #include "ui_ktagreassigndlgdecl.h"
 
 /**
@@ -36,7 +35,7 @@
  *  to re-assign transactions (for instance, if tags are deleted).
  */
 
-
+class MyMoneyTag;
 class KTagReassignDlgDecl : public QDialog, public Ui::KTagReassignDlgDecl
 {
 public:

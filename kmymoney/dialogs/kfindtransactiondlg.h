@@ -20,10 +20,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDateTime>
+#include <QDialog>
+#include <QDate>
 #include <QMap>
-#include <QResizeEvent>
-#include <QEvent>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -34,7 +33,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 
 class QTreeWidget;

@@ -27,12 +27,11 @@
 #include <QList>
 #include <QTreeWidget>
 #include <QStandardPaths>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktextedit.h>
+#include <KTextEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes

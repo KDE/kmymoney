@@ -36,6 +36,7 @@
 // KDE Includes
 #include <KServiceTypeTrader>
 #include <KPluginMetaData>
+#include <KService>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,6 +48,7 @@
 
 #include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
+#include "tasks/onlinetask.h"
 
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
     QObject(parent)

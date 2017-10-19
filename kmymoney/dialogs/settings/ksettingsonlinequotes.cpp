@@ -20,15 +20,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
 #include <QCheckBox>
 #include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kconfig.h>
-#include <kguiitem.h>
+#include <KConfig>
+#include <KGuiItem>
 #include <KLocalizedString>
 #include <KMessageBox>
 
@@ -37,7 +36,7 @@
 
 #include "kmymoney/converter/webpricequote.h"
 #include "mymoneyfile.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

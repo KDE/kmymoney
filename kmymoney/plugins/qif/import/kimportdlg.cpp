@@ -35,7 +35,7 @@
 
 #include <kcombobox.h>
 #include <kmessagebox.h>
-#include <kconfiggroup.h>
+#include <KConfigGroup>
 #include <KGuiItem>
 #include <KLocalizedString>
 
@@ -43,7 +43,7 @@
 // Project Headers
 
 #include "kmymoneyutils.h"
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 #include <KSharedConfig>
 #include "../config/mymoneyqifprofile.h"
 #include <icons/icons.h>

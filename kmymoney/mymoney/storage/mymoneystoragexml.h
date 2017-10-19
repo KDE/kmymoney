@@ -22,16 +22,23 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDataStream>
 #include <QList>
 class QIODevice;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneyserialize.h"
 #include "imymoneystorageformat.h"
-class MyMoneyXmlContentHandler;
+#include "mymoneyaccount.h"
+#include "mymoneybudget.h"
+#include "mymoneycostcenter.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneysecurity.h"
+#include "mymoneytag.h"
+#include "onlinejob.h"
 
 /**
   *@author Kevin Tambascio (ktambascio@users.sourceforge.net)
@@ -39,7 +46,9 @@ class MyMoneyXmlContentHandler;
 
 #define VERSION_0_60_XML  0x10000010    // Version 0.5 file version info
 #define VERSION_0_61_XML  0x10000011    // use 8 bytes for MyMoneyMoney objects
-
+class IMyMoneySerialize;
+class MyMoneySchedule;
+class MyMoneyTransaction;
 class MyMoneyStorageXML : public IMyMoneyStorageFormat
 {
   friend class MyMoneyXmlContentHandler;

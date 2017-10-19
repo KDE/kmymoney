@@ -22,14 +22,16 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <KMessageBox>
 #include <QAction>
 #include <QTimer>
+#include <QModelIndex>
 #include <QModelIndexList>
+#include <QMessageBox>
 #include <KActionCollection>
 
 #include "models/models.h"
 #include "models/onlinejobmodel.h"
+#include "onlinejobadministration.h"
 
 #include "mymoney/mymoneyfile.h"
 #include "kmymoney.h"

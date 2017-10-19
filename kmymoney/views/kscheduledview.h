@@ -30,15 +30,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktreewidgetsearchline.h>
-#include <ktreewidgetsearchlinewidget.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kscheduledviewdecl.h"
-#include <mymoneyfile.h>
-#include <mymoneyaccount.h>
 
 /**
   * Contains all the scheduled transactions be they bills, deposits or transfers.
@@ -50,6 +45,8 @@
   *
   * @short A class to encapsulate recurring transaction operations.
   */
+class KTreeWidgetSearchLineWidget;
+class MyMoneySchedule;
 class KScheduledView : public QWidget, private Ui::KScheduledViewDecl
 {
   Q_OBJECT

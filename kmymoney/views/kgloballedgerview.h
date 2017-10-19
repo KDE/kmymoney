@@ -26,13 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
 #include <QString>
-#include <QResizeEvent>
-#include <QFrame>
 #include <QList>
-#include <QLabel>
-#include <QEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -42,13 +37,18 @@ class KToolBar;
 // Project Includes
 
 #include "kmymoneyviewbase.h"
-#include <mymoneyutils.h>
-#include <mymoneyaccount.h>
-#include <register.h>
-#include <transactionform.h>
+#include "mymoneyaccount.h"
+#include "registeritem.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "selectedtransaction.h"
 
 class MyMoneyReport;
 class TransactionEditor;
+class QLabel;
+namespace KMyMoneyRegister { class Register; }
+namespace KMyMoneyRegister { class Transaction; }
+namespace KMyMoneyTransactionForm { class TransactionForm; }
 
 /**
   * helper class implementing an event filter to detect mouse button press

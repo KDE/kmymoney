@@ -22,15 +22,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QStandardItemModel>
-#include <QMouseEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KChartWidget>
 #include <KChartChart>
-#include <KChartAbstractDiagram>
-#include <KChartAbstractCoordinatePlane>
 
 // ----------------------------------------------------------------------------
 // Project Includes

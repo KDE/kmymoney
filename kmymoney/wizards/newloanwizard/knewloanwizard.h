@@ -27,7 +27,6 @@
 // QT Includes
 
 #include <QBitArray>
-#include <QWidget>
 #include <QWizard>
 
 // ----------------------------------------------------------------------------
@@ -38,8 +37,9 @@
 
 #include "ui_knewloanwizarddecl.h"
 #include "mymoneyschedule.h"
-#include "kmymoneyaccountselector.h"
-#include "kmymoneydateinput.h"
+#include "mymoneyaccount.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 /**
   * @author Thomas Baumgart

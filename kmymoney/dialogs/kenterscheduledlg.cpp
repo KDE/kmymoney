@@ -23,37 +23,31 @@
 #include <QTimer>
 #include <QWidget>
 #include <QLabel>
-#include <QResizeEvent>
 #include <QPushButton>
 #include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
-#include <kstandardguiitem.h>
-#include <khelpclient.h>
+#include <KMessageBox>
+#include <KHelpClient>
 #include <KLocalizedString>
+#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kcurrencycalculator.h"
-#include <register.h>
-#include <transactionform.h>
-#include <transaction.h>
-#include <transactioneditor.h>
-#include <kmymoneyutils.h>
-#include <mymoneyfinancialcalculator.h>
-#include <kmymoneylineedit.h>
-#include <kmymoneycategory.h>
-#include <kmymoneyaccountselector.h>
-#include <kmymoneydateinput.h>
-#include <kmymoneyglobalsettings.h>
-#include <KGuiItem>
+#include "mymoneyfile.h"
+#include "register.h"
+#include "transactionform.h"
+#include "transaction.h"
+#include "transactioneditor.h"
+#include "kmymoneyutils.h"
+#include "kmymoneylineedit.h"
+#include "kmymoneydateinput.h"
 #include <KStandardGuiItem>
 #include "kmymoney.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

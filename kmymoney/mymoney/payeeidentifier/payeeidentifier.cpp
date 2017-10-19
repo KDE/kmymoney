@@ -18,6 +18,11 @@
 
 #include "payeeidentifier.h"
 
+#include <QDomDocument>
+#include <QDomElement>
+
+#include "payeeidentifierdata.h"
+
 payeeIdentifier::payeeIdentifier()
     : m_id(0),
     m_payeeIdentifier(0)

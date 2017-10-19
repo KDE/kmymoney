@@ -19,17 +19,17 @@
 #ifndef PAYEEIDENTIFIER_H
 #define PAYEEIDENTIFIER_H
 
-#include <QtXml/QDomElement>
+#include <QMetaType>
+#include <qglobal.h>
 
 /** @todo fix include path after upgrade to cmake 3 */
 #include "payeeidentifier/kmm_payeeidentifier_export.h"
-#include "mymoneyexception.h"
 
 // Q_DECLARE_METATYPE requries this include
-#include "payeeidentifierdata.h"
 
-class MyMoneyPayeeIdentifierContainer;
-
+class QDomDocument;
+class QDomElement;
+class payeeIdentifierData;
 class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifier
 {
 public:

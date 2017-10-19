@@ -20,14 +20,7 @@
 // QT Includes
 
 #include <QFile>
-#include <QObject>
 #include <QString>
-#include <QStringList>
-#include <QLinkedList>
-#include <QEventLoop>
-#include <QByteArray>
-
-#include <vector>
 
 class QDateTime;
 // ----------------------------------------------------------------------------

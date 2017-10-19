@@ -22,6 +22,7 @@
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifierdata.h"
 
 #include <QDebug>
 #include <QAbstractItemDelegate>

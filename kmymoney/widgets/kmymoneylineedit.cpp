@@ -21,9 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRect>
-#include <QPainter>
-#include <QPalette>
 #include <QKeyEvent>
 #include <QFocusEvent>
 #include <QTimer>

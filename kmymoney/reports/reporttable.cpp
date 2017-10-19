@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QFile>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,6 +31,8 @@
 // Project Includes
 
 #include "kmymoneyglobalsettings.h"
+#include "kmymoneyutils.h"
+#include "mymoneyfile.h"
 
 reports::ReportTable::ReportTable(const MyMoneyReport& _report):
     m_resourceHtml("html"),

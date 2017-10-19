@@ -22,6 +22,7 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include "mymoneyutils.h"
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
 

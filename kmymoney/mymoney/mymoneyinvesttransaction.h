@@ -23,8 +23,6 @@
 #ifndef MYMONEYINVESTTRANSACTION_H
 #define MYMONEYINVESTTRANSACTION_H
 
-#include "mymoneytransaction.h"
-
 #if 0
 /**
   *@author Kevin Tambascio

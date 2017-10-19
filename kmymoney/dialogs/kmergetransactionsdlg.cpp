@@ -25,11 +25,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <khelpclient.h>
+#include <KHelpClient>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "register.h"
 
 KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
     KSelectTransactionsDlg(account, parent)

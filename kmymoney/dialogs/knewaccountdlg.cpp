@@ -20,41 +20,33 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
 #include <QPushButton>
 #include <QLabel>
-#include <QToolTip>
 #include <QButtonGroup>
 #include <QCheckBox>
-#include <QTimer>
 #include <QTabWidget>
 #include <QRadioButton>
-#include <QLayout>
 #include <QList>
-#include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <kcombobox.h>
-#include <kled.h>
+#include <KMessageBox>
+#include <KComboBox>
+#include <KLed>
 #include <kguiutils.h>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyedit.h>
-#include <kmymoneydateinput.h>
+#include "kmymoneyedit.h"
+#include "kmymoneydateinput.h"
 #include <mymoneyexception.h>
-#include <mymoneyfile.h>
-#include <kmymoneyglobalsettings.h>
-#include <mymoneyreport.h>
+#include "mymoneyfile.h"
+#include "kmymoneyglobalsettings.h"
 #include "kmymoneycurrencyselector.h"
-#include "mymoneykeyvaluecontainer.h"
 #include "knewbankdlg.h"
-#include "kmymoneyfile.h"
 #include "kmymoneyutils.h"
 #include "models.h"
 #include "accountsmodel.h"

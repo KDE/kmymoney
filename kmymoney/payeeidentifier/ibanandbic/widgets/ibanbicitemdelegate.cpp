@@ -22,7 +22,6 @@
 #include <QPainter>
 #include <QAbstractItemView>
 
-#include <QDebug>
 #include <KLocalizedString>
 
 #include "models/payeeidentifiercontainermodel.h"

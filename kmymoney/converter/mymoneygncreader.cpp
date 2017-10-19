@@ -26,18 +26,21 @@ email                : mte@users.sourceforge.net
 // QT Includes
 #include <QFile>
 #include <QMap>
-#include <QObject>
-#include <QDateTime>
-#include <QUrl>
 #include <QIcon>
 #include <QInputDialog>
 #include <QFileDialog>
+#include <QTextCodec>
+#include <QTextStream>
+#include <QDebug>
+#include <QXmlAttributes>
+#include <QXmlInputSource>
+#include <QXmlSimpleReader>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #ifndef _GNCFILEANON
-#include <kconfig.h>
-#include <kmessagebox.h>
+#include <KConfig>
+#include <KMessageBox>
 #endif
 #include <KLocalizedString>
 
@@ -47,6 +50,7 @@ email                : mte@users.sourceforge.net
 // ------------------------------------------------------------Box21----------------
 // Project Includes
 #include "config-kmymoney.h"
+#include "imymoneyserialize.h"
 #ifndef _GNCFILEANON
 #include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"

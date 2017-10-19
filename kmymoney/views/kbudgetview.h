@@ -38,11 +38,6 @@
   * @author Thomas Baumgart
   */
 
-namespace Ui {
-  class KBudgetView;
-}
-
-class AccountsViewProxyModel;
 class QTreeWidgetItem;
 class KBudgetViewPrivate;
 class KBudgetView : public KMyMoneyAccountsViewBase

@@ -19,13 +19,11 @@
 #define PLUGINLOADER_H
 
 #include <QObject>
-#include <QByteArray>
 #include <QSet>
 #include <KPluginMetaData>
-#include <KPluginInfo>
 
 class KPluginSelector;
-class KPluginInfo;
+class KConfigGroup;
 
 namespace KMyMoneyPlugin
 {

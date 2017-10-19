@@ -23,16 +23,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QFile>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KActionCollection>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "csvimporter.h"
 #include "csvwizard.h"
+#include "statementinterface.h"
 
 CsvImporterPlugin::CsvImporterPlugin() :
     KMyMoneyPlugin::Plugin(nullptr, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)

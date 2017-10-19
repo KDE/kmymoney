@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>

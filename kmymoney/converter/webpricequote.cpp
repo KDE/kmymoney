@@ -23,27 +23,24 @@
 // QT Headers
 
 #include <QFile>
-#include <QTextStream>
 #include <QTextCodec>
 #include <QByteArray>
-#include <QLoggingCategory>
-#include <QFileInfo>
 #include <QString>
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QRegularExpression>
+#include <QDebug>
+#include <QLoggingCategory>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
 #include <KLocalizedString>
-#include <kconfig.h>
-#include <kshell.h>
+#include <KConfig>
+#include <KShell>
 #include <KConfigGroup>
-#include <kprocess.h>
-#include <kencodingprober.h>
-#include <KSharedConfig>
-#include <KLocalizedString>
+#include <KEncodingProber>
 #include <KIO/Scheduler>
 #include <KIO/Job>
 #include <KJobWidgets>

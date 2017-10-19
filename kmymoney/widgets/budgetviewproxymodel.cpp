@@ -24,28 +24,15 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-#include <kconfig.h>
-#include <KMessageBox>
-#include <KSharedConfig>
-#include <KActionCollection>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <kmymoneyglobalsettings.h>
-#include <kmymoneytitlelabel.h>
-#include <kmymoneyedit.h>
-#include <kbudgetvalues.h>
-#include "knewbudgetdlg.h"
-#include "kmymoney.h"
+#include "mymoneyutils.h"
+#include "mymoneyfile.h"
 #include "models.h"
 #include "accountsmodel.h"
-#include "icons.h"
 #include "modelenums.h"
 
-using namespace Icons;
 using namespace eAccountsModel;
 
 BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :

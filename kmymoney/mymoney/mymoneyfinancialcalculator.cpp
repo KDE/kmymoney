@@ -22,12 +22,10 @@
 
 #include "mymoneyfinancialcalculator.h"
 
-#include <stdio.h>
+#include <qglobal.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <qmath.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

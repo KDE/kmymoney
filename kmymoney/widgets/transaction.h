@@ -31,12 +31,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <registeritem.h>
-#include <mymoneytransaction.h>
-#include <mymoneysplit.h>
-#include <mymoneysecurity.h>
-#include <selectedtransaction.h>
-#include <mymoneyaccount.h>
+#include "registeritem.h"
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
+#include "mymoneysecurity.h"
+#include "selectedtransaction.h"
+#include "mymoneyaccount.h"
 
 class QTableWidget;
 class TransactionEditor;

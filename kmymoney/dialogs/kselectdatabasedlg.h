@@ -20,7 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
 #include <QUrl>
 
 // ----------------------------------------------------------------------------
@@ -31,12 +30,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kselectdatabasedlg.h"
-#include "storage/mymoneystoragesql.h"
-#include "kguiutils.h"
+namespace Ui { class KSelectDatabaseDlg; }
 
-class QDialogButtonBox;
-
+class kMandatoryFieldGroup;
 class KSelectDatabaseDlg : public QDialog
 {
   Q_OBJECT

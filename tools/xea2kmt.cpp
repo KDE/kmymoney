@@ -22,7 +22,7 @@
 #include <QMap>
 #include <QTextStream>
 #include <QXmlStreamReader>
-#include <QtDebug>
+#include <QDebug>
 
 
 QDebug operator <<(QDebug out, const QXmlStreamNamespaceDeclaration &a)

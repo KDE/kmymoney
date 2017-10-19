@@ -37,9 +37,12 @@
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneyaccount.h"
 #include "mymoney/onlinejobadministration.h"
+#include "onlinejob.h"
+#include "tasks/onlinetask.h"
+#include "accountsmodel.h"
 
 #include "models/models.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 using namespace Icons;
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)

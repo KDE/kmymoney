@@ -22,20 +22,15 @@
 // QT Headers
 
 #include <QString>
-#include <QCheckBox>
 #include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kcombobox.h>
-
 // ----------------------------------------------------------------------------
 // Project Headers
 
 #include "ui_csvexportdlg.h"
-
-class MyMoneyAccount;
 
 /**
   * This class is used to collect the required user input to export
@@ -51,11 +46,6 @@ class MyMoneyAccount;
   *
   * @short A class to select user data required to export a specified account to CSV format.
   **/
-
-namespace Ui
-{
-class CsvExportDlg;
-}
 
 class CsvExportDlg : public QDialog
 {

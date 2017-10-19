@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyutils.h"
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
@@ -41,7 +42,7 @@
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "mymoneystoragenames.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace MyMoneyStorageNodes;
 using namespace Icons;

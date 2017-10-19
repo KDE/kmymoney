@@ -21,11 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QObject>
-#include <QDateTime>
-#include <QString>
-#include <QStringList>
-#include <QMap>
 #include <QProcess>
 
 // ----------------------------------------------------------------------------
@@ -34,11 +29,11 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneymoney.h"
-#include "mymoneystatement.h"
 #include "csvimport/csvimporter.h"
 
 class KJob;
+class QDate;
+class QTextCodec;
 /**
 Helper class to attend the process which is running the script, in the case
 of a local script being used to fetch the quote.

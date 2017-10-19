@@ -20,21 +20,16 @@
 // QT Includes
 
 #include <QLabel>
-#include <QLayout>
-#include <QApplication>
 #include <QButtonGroup>
 #include <QListWidget>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QTextBrowser>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kurlrequester.h>
-#include <khelpclient.h>
-#include <KConfigGroup>
+#include <KHelpClient>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------

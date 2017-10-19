@@ -28,6 +28,7 @@
 // Project Includes
 
 #include "kaccounttemplateselector.h"
+#include "mymoneytemplate.h"
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
     KLoadTemplateDlgDecl(parent)

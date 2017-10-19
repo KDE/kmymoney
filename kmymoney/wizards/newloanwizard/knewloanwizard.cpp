@@ -25,37 +25,26 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QButtonGroup>
-#include <QRadioButton>
-#include <QCheckBox>
-#include <QLabel>
 #include <QList>
-#include <QPushButton>
 #include <qmath.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kguiitem.h>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyutils.h"
-#include "kmymoneylineedit.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
-#include "kmymoneyglobalsettings.h"
 #include "kmymoneyaccountselector.h"
-#include "knewaccountdlg.h"
-#include "ksplittransactiondlg.h"
+#include "kmymoneysettings.h"
 
 #include "mymoneyfinancialcalculator.h"
 #include "mymoneyfile.h"
-
-#include "kmymoney.h"
 
 KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
     KNewLoanWizardDecl(parent), m_pages(Page_Summary + 1, true)

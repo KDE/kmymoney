@@ -15,19 +15,19 @@
  ***************************************************************************/
 
 #include "mymoneytag.h"
+#include <mymoneyexception.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringList>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QHash>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
-#include <mymoneyexception.h>
+#include "mymoneyobject.h"
 #include "mymoneystoragenames.h"
 
 using namespace MyMoneyStorageNodes;

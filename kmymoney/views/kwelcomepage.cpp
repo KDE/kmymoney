@@ -19,7 +19,6 @@
 // Project Includes
 
 #include "kwelcomepage.h"
-#include "kmymoneyutils.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,7 +33,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KAboutData>
 
 KWelcomePage::KWelcomePage()
 {

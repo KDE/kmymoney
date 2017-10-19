@@ -23,11 +23,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSplashScreen>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
+
+class QSplashScreen;
 
 std::unique_ptr<QSplashScreen> createStartupLogo();
 

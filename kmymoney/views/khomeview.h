@@ -24,9 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QtPrintSupport/QPrinter>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -35,7 +32,6 @@
 
 #include "kmymoneyviewbase.h"
 
-#include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
 
 #ifdef ENABLE_WEBENGINE
@@ -52,6 +48,8 @@ class KWebView;
   *
   * @short A view containing the home page for kmymoney.
 **/
+class QPrinter;
+class MyMoneySchedule;
 class KHomeView : public KMyMoneyViewBase
 {
   Q_OBJECT

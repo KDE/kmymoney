@@ -24,15 +24,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-#include <QStringList>
-
 // Project Includes
 
 #include "kmymoneyplugin.h"
 
 class CsvExportDlg;
-class CsvWriter;
 
 class CsvExporterPlugin : public KMyMoneyPlugin::Plugin
 {

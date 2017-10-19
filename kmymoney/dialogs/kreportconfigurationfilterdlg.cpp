@@ -27,41 +27,35 @@
 // QT Includes
 
 #include <QVariant>
-#include <QButtonGroup>
 #include <QCheckBox>
 #include <QLabel>
 #include <QPushButton>
 #include <QRadioButton>
-#include <QLayout>
 #include <QSpinBox>
-#include <QToolTip>
 #include <QTabWidget>
-#include <QApplication>
 #include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
-#include <kcombobox.h>
-#include <kguiitem.h>
-#include <kstandardguiitem.h>
-#include <khelpclient.h>
+#include <KLineEdit>
+#include <KComboBox>
+#include <KGuiItem>
+#include <KStandardGuiItem>
+#include <KHelpClient>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
-#include <kmymoneylineedit.h>
-#include <kmymoneyaccountselector.h>
-#include <mymoneyfile.h>
-#include <mymoneyreport.h>
-#include <daterangedlg.h>
+#include "kmymoneydateinput.h"
+#include "kmymoneyedit.h"
+#include "mymoneyfile.h"
+#include "mymoneyreport.h"
+#include "daterangedlg.h"
+#include "reporttabimpl.h"
 
 #include "ui_kfindtransactiondlgdecl.h"
-#include <ui_daterangedlgdecl.h>
 #include <ui_reporttabgeneral.h>
 #include <ui_reporttabrowcolpivot.h>
 #include <ui_reporttabrowcolquery.h>

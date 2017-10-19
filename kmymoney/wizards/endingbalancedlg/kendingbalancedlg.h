@@ -20,24 +20,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QLabel>
-#include <QPushButton>
-#include <QDialog>
-#include <QDateTime>
 #include <QWizard>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class kMyMoneyEdit;
-#include "kmymoneydateinput.h"
 #include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
 #include "ui_kendingbalancedlgdecl.h"
 
 /**

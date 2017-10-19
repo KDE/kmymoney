@@ -20,11 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDateTime>
-#include <QMap>
-#include <QResizeEvent>
-#include <QEvent>
-#include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,7 +30,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
 #include "mymoneytransactionfilter.h"
 
 namespace Ui

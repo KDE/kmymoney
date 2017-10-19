@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <QWidget>
-#include <QDateTime>
+#include <QDate>
 #include <QDateEdit>
 
 // ----------------------------------------------------------------------------

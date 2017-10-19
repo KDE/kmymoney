@@ -29,7 +29,6 @@
 // Project Includes
 
 #include "mymoneyinstitution.h"
-#include "mymoneykeyvaluecontainer.h"
 
 #include "ui_knewbankdlgdecl.h"
 

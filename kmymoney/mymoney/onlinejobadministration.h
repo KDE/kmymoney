@@ -22,14 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QObject>
-#include <QtCore/QSharedPointer>
-#include <QPair>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KService>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -37,9 +31,13 @@
 #include "onlinejob.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "onlinetasks/interfaces/converter/onlinetaskconverter.h"
 
+class onlineTask;
 class IonlineJobEdit;
+class QSqlDatabase;
+
 namespace KMyMoneyPlugin
 {
 class OnlinePluginExtended;

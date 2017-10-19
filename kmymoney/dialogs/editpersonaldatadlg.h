@@ -21,7 +21,6 @@
 // QT Includes
 
 #include <QDialog>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

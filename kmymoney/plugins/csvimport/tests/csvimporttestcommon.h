@@ -16,7 +16,7 @@ email                : lukasz.wojnilowicz@gmail.com
 #ifndef CSVIMPORTTESTCOMMON_H
 #define CSVIMPORTTESTCOMMON_H
 
-#include <mymoneyaccount.h>
+#include "mymoneyaccount.h"
 
 class QString;
 extern void writeStatementToCSV(const QString& content, const QString& filename);

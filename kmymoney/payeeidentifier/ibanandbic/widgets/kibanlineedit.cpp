@@ -18,8 +18,6 @@
 
 #include "kibanlineedit.h"
 
-#include <QTimer>
-
 #include "ibanvalidator.h"
 
 

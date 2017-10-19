@@ -27,13 +27,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include <QFile>
 #include <QTimer>
 #include <QClipboard>
 #include <QList>
 #include <QVBoxLayout>
-#include <QVariant>
-#include <QCheckBox>
 #include <QMimeData>
 #include <QIcon>
 #include <QUrlQuery>
@@ -52,21 +52,30 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConfig>
 #include <KMessageBox>
 #include <KRecentDirs>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <mymoneyreport.h>
-#include <kmymoneyglobalsettings.h>
+#include "ui_reportcontrol.h"
+
+#include "mymoneyfile.h"
+#include "mymoneyreport.h"
+#include "kmymoneyglobalsettings.h"
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 #include <kmymoneywebpage.h>
+#include "tocitem.h"
+#include "tocitemgroup.h"
+#include "tocitemreport.h"
+#include "kreportchartview.h"
+#include "pivottable.h"
+#include "reporttable.h"
+#include "../widgets/reportcontrolimpl.h"
 
 using namespace reports;
 using namespace Icons;

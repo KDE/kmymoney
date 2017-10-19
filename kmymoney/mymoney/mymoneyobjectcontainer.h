@@ -27,17 +27,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmm_mymoney_export.h>
-#include <mymoneytransaction.h>
-#include <mymoneyaccount.h>
-#include <mymoneyinstitution.h>
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
-#include <mymoneyobject.h>
-#include <mymoneysecurity.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneysecurity.h"
 #include <onlinejob.h>
 #include <mymoneycostcenter.h>
-#include <imymoneystorage.h>
 
 /**
   * @author Thomas Baumgart
@@ -46,6 +43,9 @@
 /**
   * This class represents a generic container for all MyMoneyObject derived objects.
   */
+class IMyMoneyStorage;
+class MyMoneyObject;
+class MyMoneySchedule;
 class KMM_MYMONEY_EXPORT MyMoneyObjectContainer : public QObject
 {
   Q_OBJECT

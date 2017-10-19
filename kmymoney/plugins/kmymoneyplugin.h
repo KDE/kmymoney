@@ -20,6 +20,8 @@
 #ifndef KMYMONEYPLUGIN_H
 #define KMYMONEYPLUGIN_H
 
+#include <kmm_plugin_export.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -29,16 +31,17 @@
 // KDE Includes
 
 #include <KXMLGUIClient>
-class KAction;
 class KToggleAction;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <viewinterface.h>
-#include <statementinterface.h>
-#include <importinterface.h>
-#include <kmm_plugin_export.h>
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
+
+namespace KMyMoneyPlugin { class ImportInterface; }
+namespace KMyMoneyPlugin { class StatementInterface; }
+namespace KMyMoneyPlugin { class ViewInterface; }
 
 /**
  * @defgroup KMyMoneyPlugin

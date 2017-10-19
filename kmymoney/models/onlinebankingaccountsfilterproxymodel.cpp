@@ -18,8 +18,8 @@
 
 #include "onlinebankingaccountsfilterproxymodel.h"
 
-#include "accountsmodel.h"
 #include "mymoney/onlinejobadministration.h"
+#include "modelenums.h"
 
 OnlineBankingAccountsFilterProxyModel::OnlineBankingAccountsFilterProxyModel(QObject* parent)
     : QSortFilterProxyModel(parent)

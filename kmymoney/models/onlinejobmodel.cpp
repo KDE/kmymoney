@@ -18,8 +18,6 @@
 
 #include "onlinejobmodel.h"
 
-#include <QDebug>
-#include <QTimer>
 #include <QIcon>
 
 #include <KLocalizedString>
@@ -28,7 +26,10 @@
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "mymoney/onlinejobtyped.h"
-#include <icons/icons.h>
+#include "payeeidentifier.h"
+#include "payeeidentifiertyped.h"
+#include "ibanbic.h"
+#include "icons/icons.h"
 
 using namespace Icons;
 

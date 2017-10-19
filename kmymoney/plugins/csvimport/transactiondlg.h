@@ -21,11 +21,8 @@ email                 : lukasz.wojnilowicz@gmail.com
 #define TRANSACTIONDLG_H
 
 #include <QDialog>
-#include <QPushButton>
 
-#include "mymoneymoney.h"
 #include "mymoneystatement.h"
-#include "ui_transactiondlg.h"
 
 namespace Ui
 {

@@ -20,7 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QResizeEvent>
 #include <QEvent>
 #include <QList>
 #include <QKeyEvent>
@@ -29,18 +28,16 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandardguiitem.h>
+#include <KStandardGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <mymoneytransaction.h>
-#include <kmymoneyglobalsettings.h>
+#include "mymoneytransaction.h"
+#include "kmymoneyglobalsettings.h"
 #include <KGuiItem>
 #include <KStandardGuiItem>
-#include "kmergetransactionsdlg.h"
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
     KSelectTransactionsDlgDecl(parent),

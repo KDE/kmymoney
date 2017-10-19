@@ -22,8 +22,6 @@
 // QT Includes
 
 #include <QDialog>
-#include <QDateTime>
-#include <QComboBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

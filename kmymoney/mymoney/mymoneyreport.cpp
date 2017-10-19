@@ -16,14 +16,13 @@
  ***************************************************************************/
 
 #include "mymoneyreport.h"
-#include <kmymoneyglobalsettings.h>
+#include "kmymoneyglobalsettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QString>
 #include <QList>
-#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

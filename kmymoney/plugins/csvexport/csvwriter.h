@@ -18,15 +18,12 @@
 #ifndef CSVWRITER_H
 #define CSVWRITER_H
 
-#include "csvexporterplugin.h"
-
 // ----------------------------------------------------------------------------
 // QT Headers
 
 #include <QObject>
-#include <QDateTime>
-#include <QTextStream>
 #include <QStringList>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -34,6 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
+class QTextStream;
 class MyMoneyTransaction;
 class MyMoneySplit;
 class CsvExporterPlugin;

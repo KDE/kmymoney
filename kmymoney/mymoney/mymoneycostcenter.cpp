@@ -20,13 +20,11 @@
 // QT Includes
 
 #include <QDomElement>
-#include <QStringList>
 #include <QCollator>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragenames.h"
 

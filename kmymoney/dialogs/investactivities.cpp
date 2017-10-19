@@ -22,7 +22,6 @@
 
 #include <QLabel>
 #include <QList>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,12 +31,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneycategory.h>
-#include <kmymoneyedit.h>
-#include <kmymoneyaccountselector.h>
-#include <kmymoneycompletion.h>
+#include "kmymoneycategory.h"
+#include "kmymoneyedit.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneycompletion.h"
 #include <kmymoneysettings.h>
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 
 using namespace Invest;
 using namespace KMyMoneyRegister;

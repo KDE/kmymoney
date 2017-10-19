@@ -21,29 +21,34 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDebug>
+#include <QApplication>
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QAbstractItemView>
-#include <QSortFilterProxyModel>
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QLabel>
 #include <QToolButton>
 #include <QMetaMethod>
 #include <QApplication>
+#include <QCompleter>
+#include <QFocusEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <klineedit.h>
-#include <kmessagebox.h>
+#include <KLineEdit>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneysettings.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransactionfilter.h"
 
 using namespace Icons;
 

@@ -29,8 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <register.h>
-#include <investtransactioneditor.h>
+#include "investtransactioneditor.h"
 
 class kMyMoneyEdit;
 

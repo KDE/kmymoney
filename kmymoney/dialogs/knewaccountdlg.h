@@ -20,17 +20,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QResizeEvent>
-
 // ----------------------------------------------------------------------------
 // KDE Headers
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneymoney.h>
-#include <kmymoneyedit.h>
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 #include "accountsproxymodel.h"
 
 #include "ui_knewaccountdlgdecl.h"

@@ -28,7 +28,7 @@
 // QT Includes
 
 #include <QVector>
-#include <QDoubleValidator>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -39,14 +39,14 @@
 #include "kfindtransactiondlg.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
-#include "reporttabimpl.h"
 
+class ReportTabCapitalGain;
+class ReportTabChart;
 class ReportTabGeneral;
+class ReportTabPerformance;
+class ReportTabRange;
 class ReportTabRowColPivot;
 class ReportTabRowColQuery;
-class ReportTabChart;
-class ReportTabRange;
-class MyMoneyBudget;
 
 /**
   * @author Ace Jones

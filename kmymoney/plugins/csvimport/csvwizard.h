@@ -23,9 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWizard>
-#include <QLabel>
-#include <QScrollBar>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,27 +33,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "transactiondlg.h"
-#include "securitydlg.h"
-#include "securitiesdlg.h"
-#include "currenciesdlg.h"
-
 #include "csvwizardpage.h"
-#include "bankingwizardpage.h"
-#include "investmentwizardpage.h"
-#include "priceswizardpage.h"
+#include "mymoneystatement.h"
 
 class CsvImporterPlugin;
 class CSVImporter;
-
-class TransactionDlg;
-class SecurityDlg;
-class SecuritiesDlg;
-class CurrenciesDlg;
-
-class BankingProfile;
-class InvestmentProfile;
-class PricesProfile;
 
 class IntroPage;
 class SeparatorPage;
@@ -65,11 +47,11 @@ class InvestmentPage;
 class PricesPage;
 class FormatsPage;
 
-namespace Ui
-{
-class CSVWizard;
-}
+namespace Ui { class CSVWizard; }
 
+class QScrollBar;
+class QComboBox;
+class QLabel;
 class CSVWizard : public QDialog
 {
   Q_OBJECT

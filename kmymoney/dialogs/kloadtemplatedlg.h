@@ -26,11 +26,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneytemplate.h>
 #include "ui_kloadtemplatedlgdecl.h"
 #include <QList>
 
-
+class MyMoneyTemplate;
 class KLoadTemplateDlgDecl : public QDialog, public Ui::KLoadTemplateDlgDecl
 {
 public:

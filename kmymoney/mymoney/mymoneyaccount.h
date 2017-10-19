@@ -22,29 +22,24 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
 #include <QStringList>
 #include <QPixmap>
-#include <QMetaType>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
 #include "mymoneyobject.h"
-#include "mymoneykeyvaluecontainer.h"
 #include "mymoneysecurity.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
-#include "mymoneyutils.h"
 
-#include "payeeidentifier/payeeidentifier.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
-#include "mymoneypayeeidentifiercontainer.h"
-
-class MyMoneyTransaction;
 class MyMoneySplit;
-class MyMoneyObjectContainer;
+class payeeIdentifier;
+namespace payeeIdentifiers { class ibanBic; }
+template <class T> class payeeIdentifierTyped;
 
 /**
   * A representation of an account.

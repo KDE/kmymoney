@@ -21,6 +21,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySecurityTest;
 
 #include "mymoneysecurity.h"
+#include "mymoneymoney.h"
 
 QTEST_GUILESS_MAIN(MyMoneySecurityTest)
 

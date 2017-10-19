@@ -23,8 +23,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QPixmap>
-#include <QPair>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -32,16 +30,20 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneyinstitution.h>
-#include <mymoneytransaction.h>
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymoney.h"
+#include "mymoneyinstitution.h"
+#include "mymoneytransaction.h"
 #include <kmm_plugin_export.h>
-class KMyMoneyViewBase;
+
 namespace KMyMoneyRegister
 {
 class SelectedTransactions;
 }
 
+class MyMoneySplit;
+class MyMoneyTransaction;
 namespace KMyMoneyPlugin
 {
 

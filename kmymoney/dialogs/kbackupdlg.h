@@ -20,7 +20,7 @@
 #ifndef KBACKUPDLG_H
 #define KBACKUPDLG_H
 
-#include <QWidget>
+#include <QDialog>
 #include "ui_kbackupdlgdecl.h"
 
 /**

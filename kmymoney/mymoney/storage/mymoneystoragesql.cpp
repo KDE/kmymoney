@@ -49,11 +49,20 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "imymoneystorage.h"
 #include "imymoneyserialize.h"
 #include "kmymoneystorageplugin.h"
 #include "onlinejobadministration.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "mymoneycostcenter.h"
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
+#include "payeeidentifier/payeeidentifierdata.h"
 
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)

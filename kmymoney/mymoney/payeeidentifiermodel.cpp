@@ -18,11 +18,9 @@
 
 #include "payeeidentifiermodel.h"
 
-#include <algorithm>
 #include <limits>
 
-#include <klocalizedstring.h>
-#include <QDebug>
+#include <KLocalizedString>
 
 #include "mymoneyfile.h"
 

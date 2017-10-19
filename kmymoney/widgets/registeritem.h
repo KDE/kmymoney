@@ -22,10 +22,7 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
-#include <QPainter>
 #include <QStyleOptionViewItem>
-#include <QModelIndex>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,10 +30,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
-#include <mymoneysplit.h>
-#include <mymoneyobject.h>
+#include "mymoneysplit.h"
+#include "mymoneyobject.h"
 
+class MyMoneyMoney;
 namespace KMyMoneyRegister
 {
 

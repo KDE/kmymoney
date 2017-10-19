@@ -29,29 +29,23 @@
 // Project Includes
 
 #include <imymoneystorage.h>
-#include <mymoneyexception.h>
-#include <mymoneyutils.h>
-#include <mymoneyinstitution.h>
-#include <mymoneyaccount.h>
-#include <mymoneytransaction.h>
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
-#include <mymoneykeyvaluecontainer.h>
-#include <mymoneysecurity.h>
-#include <mymoneyprice.h>
-#include <mymoneyreport.h>
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
 #include <mymoneybudget.h>
 #include <onlinejob.h>
 #include "mymoneyschedule.h"
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio, Christian Dávid
   */
-
-class IMyMoneyStorage;
-class MyMoneyTransactionFilter;
 
 /**
   * This class represents the interface to the MyMoney engine.

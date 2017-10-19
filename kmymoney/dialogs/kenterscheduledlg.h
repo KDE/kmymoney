@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QResizeEvent>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,11 +29,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class MyMoneySchedule;
 class TransactionEditor;
 
 #include "ui_kenterscheduledlgdecl.h"
-#include "mymoneyschedule.h"
-#include <kmymoneyutils.h>
+#include "kmymoneyutils.h"
 
 /**
   * @author Thomas Baumgart

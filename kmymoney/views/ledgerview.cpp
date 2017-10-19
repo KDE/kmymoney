@@ -20,8 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
-#include <QTimer>
 #include <QHeaderView>
 #include <QPainter>
 #include <QResizeEvent>
@@ -35,7 +33,6 @@
 #include "ledgerdelegate.h"
 #include "ledgermodel.h"
 #include "models.h"
-#include "accountsmodel.h"
 
 class LedgerView::Private
 {

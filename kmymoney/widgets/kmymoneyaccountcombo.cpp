@@ -30,15 +30,16 @@
 #include <QList>
 #include <QKeyEvent>
 #include <QTreeView>
-#include <QHeaderView>
 #include <QLineEdit>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "mymoneyfile.h"
+#include "modelenums.h"
 
 class KMyMoneyAccountCombo::Private
 {

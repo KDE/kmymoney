@@ -21,36 +21,45 @@
 
 #include <QList>
 #include <QByteArray>
+#include <QFileDialog>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kxmlguiwindow.h>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <imymoneyprocessingcalendar.h>
-#include <mymoneyaccount.h>
-#include "mymoneyschedule.h"
-#include <mymoneyinstitution.h>
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
-#include <mymoneybudget.h>
-#include <kmymoneyplugin.h>
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 
-#include <register.h>
-#include <kmymoneyutils.h>
-#include <mymoneyprice.h>
+#include "kmymoneyutils.h"
 
 #include "mymoney/onlinejob.h"
-#include "mymoney/onlinejobtyped.h"
-#include "onlinetasks/interfaces/tasks/credittransfer.h"
+#include "onlinejobtyped.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "mymoneymoney.h"
+#include "mymoneyobject.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "selectedtransaction.h"
 
 class QResizeEvent;
-class QTreeWidgetItem;
-class KPluginInfo;
+class KPluginMetaData;
+class MyMoneyBudget;
+class MyMoneyPayee;
+class MyMoneyPrice;
+class MyMoneyStatement;
+class MyMoneyTag;
+class MyMoneyTransaction;
 class WebConnect;
+class creditTransfer;
+
+template <class T> class onlineJobTyped;
 
 enum class Action {
   FileOpenDatabase, FileSaveAsDatabase, FileBackup,

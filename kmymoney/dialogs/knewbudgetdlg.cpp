@@ -20,13 +20,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QCheckBox>
 #include <QPushButton>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------

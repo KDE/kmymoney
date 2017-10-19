@@ -17,11 +17,8 @@
  */
 
 #include "payeeidentifiercontainermodel.h"
-#include "mymoney/mymoneyfile.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifier/payeeidentifier.h"
-
-#include <QDebug>
 
 #include <KLocalizedString>
 

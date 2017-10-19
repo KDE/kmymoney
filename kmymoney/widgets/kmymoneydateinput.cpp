@@ -20,38 +20,30 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPainter>
 #include <QPoint>
-#include <QValidator>
-#include <QStyle>
-#include <QLayout>
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QPixmap>
 #include <QTimer>
 #include <QLabel>
-#include <QResizeEvent>
-#include <QFrame>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDateEdit>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QIcon>
-#include <QShortcut>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kpassivepopup.h>
-#include <kdatepicker.h>
+#include <KPassivePopup>
+#include <KDatePicker>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

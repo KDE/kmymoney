@@ -21,9 +21,9 @@
 
 #include <algorithm>
 
+#include <QPointer>
+#include <QAbstractItemDelegate>
 #include <QStyledItemDelegate>
-#include <QDebug>
-#include <QTimer>
 
 #include "kmymoney.h"
 #include "payeeidentifier/payeeidentifierloader.h"

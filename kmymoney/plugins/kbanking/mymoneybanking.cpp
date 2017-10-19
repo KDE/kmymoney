@@ -85,6 +85,9 @@
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
 #include "aqbankingkmmoperators.h"
+#include "mymoneystatement.h"
+#include "statementinterface.h"
+#include "viewinterface.h"
 
 #ifdef KMM_DEBUG
 // Added an option to open the chipTanDialog from the menu for debugging purposes

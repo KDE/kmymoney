@@ -26,10 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QLayout>
+#include <QFrame>
 #include <QLabel>
-#include <QKeyEvent>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------

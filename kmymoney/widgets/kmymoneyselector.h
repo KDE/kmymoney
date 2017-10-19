@@ -31,7 +31,6 @@
 // Project Includes
 
 #include "kmm_widgets_export.h"
-#include <mymoneyutils.h>
 
 class QHBoxLayout;
 

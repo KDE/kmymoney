@@ -27,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QApplication>
 #include <QRegExp>
 #include <QLayout>
 
@@ -37,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 
 kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
     kMyMoneyCompletion(parent)

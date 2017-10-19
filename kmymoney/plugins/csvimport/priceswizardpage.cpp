@@ -20,9 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QTextStream>
-#include <QtMath>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -31,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 
 #include "csvwizard.h"
 #include "csvimporter.h"
@@ -40,6 +37,9 @@
 #include "currenciesdlg.h"
 
 #include "ui_priceswizardpage.h"
+#include "ui_currenciesdlg.h"
+#include "ui_securitydlg.h"
+
 // ----------------------------------------------------------------------------
 
 PricesPage::PricesPage(CSVWizard *dlg, CSVImporter *imp) :

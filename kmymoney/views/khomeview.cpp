@@ -24,21 +24,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
-#include <QDateTime>
-#include <QApplication>
 #include <QList>
 #include <QPixmap>
-#include <QDomDocument>
-#include <QDomElement>
-#include <QDomText>
-#include <QFile>
 #include <QTimer>
 #include <QBuffer>
 #include <QStandardPaths>
 #include <QDesktopServices>
 #include <QUrlQuery>
+#include <QWheelEvent>
 #include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
 #ifdef ENABLE_WEBENGINE
 #include <QtWebEngineWidgets/QWebEngineView>
 #else
@@ -48,17 +43,16 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KChartAbstractCoordinatePlane>
+#include <KChartChart>
 #include <KLocalizedString>
-#include <kconfig.h>
-#include <kstandardaction.h>
-#include <kxmlguiwindow.h>
-#include <kactioncollection.h>
-#include <kmessagebox.h>
-#include <kcodecs.h>
-#include <ktoolinvocation.h>
+#include <KXmlGuiWindow>
+#include <KActionCollection>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 #include "kwelcomepage.h"
 #include "kmymoneyglobalsettings.h"
@@ -69,8 +63,9 @@
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
-#include <icons.h>
-#include <kmymoneywebpage.h>
+#include "icons.h"
+#include "kmymoneywebpage.h"
+#include "mymoneyschedule.h"
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"

@@ -23,8 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QListWidgetItem>
-#include <QListWidget>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,8 +33,10 @@
 namespace Ui
 {
 class TransactionSortOptionDecl;
-};
+}
 
+class QListWidget;
+class QListWidgetItem;
 class TransactionSortOption : public QWidget
 {
   Q_OBJECT

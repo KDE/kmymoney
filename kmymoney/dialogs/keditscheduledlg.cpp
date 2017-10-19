@@ -23,25 +23,22 @@
 #include <QTimer>
 #include <QCheckBox>
 #include <QLabel>
-#include <QLayout>
 #include <QList>
-#include <QResizeEvent>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
-#include <kstandardguiitem.h>
-#include <klineedit.h>
-#include <khelpclient.h>
-#include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KLineEdit>
+#include <KHelpClient>
+#include <KGuiItem>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 #include "register.h"
 #include "transactionform.h"
 #include "transaction.h"
@@ -50,7 +47,6 @@
 #include "kmymoneydateinput.h"
 #include "kmymoneymvccombo.h"
 #include "kguiutils.h"
-#include "kmymoneyutils.h"
 
 #include "kmymoney.h"
 

@@ -26,11 +26,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMetaType>
 #include <QString>
-#include <QDateTime>
-#include <QHash>
+#include <QDate>
 #include <QList>
-#include <QMap>
+#include <QHash>
 #include <QRegExp>
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,13 +38,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
 #include "kmm_mymoney_export.h"
+#include "mymoneymoney.h"
+#include "mymoneysplit.h"
 
 /**
   * @author Thomas Baumgart
   */
 
+class MyMoneyTransaction;
 class KMM_MYMONEY_EXPORT MyMoneyTransactionFilter
 {
 public:

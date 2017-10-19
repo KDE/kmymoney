@@ -24,7 +24,7 @@ email                : jpwhiting@kde.org
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------

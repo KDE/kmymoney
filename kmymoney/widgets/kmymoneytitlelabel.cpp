@@ -21,10 +21,8 @@
 // QT Includes
 
 #include <QPixmap>
-#include <QVariant>
 #include <QStyle>
 #include <QPainter>
-#include <QResizeEvent>
 #include <QLabel>
 #include <QStandardPaths>
 #include <QFontDatabase>

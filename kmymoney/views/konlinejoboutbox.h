@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <QWidget>
-#include <QModelIndex>
 
 #include "onlinejob.h"
 
@@ -31,6 +30,7 @@ namespace Ui
 class KOnlineJobOutbox;
 }
 
+class QModelIndex;
 class KOnlineJobOutbox : public QWidget
 {
   Q_OBJECT

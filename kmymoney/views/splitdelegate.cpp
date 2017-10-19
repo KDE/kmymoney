@@ -35,7 +35,6 @@
 #include "models.h"
 #include "accountsmodel.h"
 #include "ledgermodel.h"
-#include "kmymoneyaccountcombo.h"       // for definition of AccountNamesFilterProxyModel()
 #include "newspliteditor.h"
 
 

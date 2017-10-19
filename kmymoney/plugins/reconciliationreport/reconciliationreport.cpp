@@ -22,15 +22,22 @@
 
 //! @todo remove
 #include <QDebug>
+#include <QPointer>
+#include <QUrl>
 
 // KDE includes
-#include <KPluginFactory>
-#include <KPluginInfo>
 #include <KColorScheme>
 #include <KLocalizedString>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
+#include "viewinterface.h"
 
 #include "kreconciliationreportdlg.h"
 

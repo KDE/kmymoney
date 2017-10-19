@@ -26,20 +26,21 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
 #include <QMap>
 #include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "imymoneyserialize.h"
 #include "mymoneyreport.h"
 #include "mymoneyinstitution.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,OpeningBalanceAccount,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term,lastImportedTransactionDate,VatAccount,VatRate,kmm-matched-tx,Imported,priceMode").split(',');
 QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment,lastStatementBalance").split(',');

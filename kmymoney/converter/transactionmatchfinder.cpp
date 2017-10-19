@@ -20,6 +20,7 @@
 
 #include <KLocalizedString>
 
+#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 
 TransactionMatchFinder::TransactionMatchFinder(int _matchWindow) :

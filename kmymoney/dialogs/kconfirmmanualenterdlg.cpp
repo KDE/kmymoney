@@ -22,21 +22,20 @@
 
 #include <QButtonGroup>
 #include <QRadioButton>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktextedit.h>
-#include <kmessagebox.h>
+#include <KTextEdit>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <kmymoneyutils.h>
-#include <mymoneytransaction.h>
+#include "mymoneyfile.h"
+#include "kmymoneyutils.h"
+#include "mymoneytransaction.h"
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
 struct KConfirmManualEnterDlg::Private {

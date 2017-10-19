@@ -26,19 +26,19 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDataStream>
-#include <QTextStream>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneyserialize.h"
-#include "mymoneysecurity.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "mymoneysplit.h"
 
 /**
   * @author Thomas Baumgart
   */
 
+class IMyMoneySerialize;
+class IMyMoneyStorage;
+class MyMoneyTransaction;
 class MyMoneyStorageDump
 {
 public:

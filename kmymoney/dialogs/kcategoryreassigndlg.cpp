@@ -24,16 +24,16 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <kguiutils.h>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <kmymoneycategory.h>
-#include <kmymoneyaccountselector.h>
+#include "mymoneyfile.h"
+#include "kmymoneycategory.h"
+#include "kmymoneyaccountselector.h"
 
 KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
     KCategoryReassignDlgDecl(parent)

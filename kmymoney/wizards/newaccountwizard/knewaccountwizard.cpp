@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QCheckBox>
-#include <QToolTip>
 #include <QLabel>
 #include <QList>
 #include <qmath.h>
@@ -32,26 +31,28 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <klineedit.h>
-#include <kmessagebox.h>
+#include <KLineEdit>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneycurrencyselector.h>
-#include <kmymoneyaccountselector.h>
-#include <kmymoneyaccountcombo.h>
-#include <mymoneyfinancialcalculator.h>
-#include <kcurrencycalculator.h>
-#include <mymoneyaccount.h>
-#include <kmymoneyglobalsettings.h>
+#include "kmymoneycurrencyselector.h"
+#include "kmymoneyaccountselector.h"
+#include "mymoneyfinancialcalculator.h"
+#include "kcurrencycalculator.h"
+#include "kmymoneyglobalsettings.h"
 #include <kguiutils.h>
 
+#include "mymoneyutils.h"
 #include "ksplittransactiondlg.h"
 #include "kequitypriceupdatedlg.h"
-#include "kmymoney.h"
+#include "accountsmodel.h"
+#include "accountsproxymodel.h"
 #include "models.h"
-#include <icons.h>
+#include "modelenums.h"
+#include "icons.h"
+#include "mymoneyfile.h"
 
 using namespace NewAccountWizard;
 using namespace Icons;

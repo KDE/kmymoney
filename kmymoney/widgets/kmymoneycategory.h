@@ -24,15 +24,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
-#include <kcombobox.h>
 class QPushButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <kmymoneycombo.h>
+#include "kmymoneycombo.h"
 
 class kMyMoneyAccountSelector;
 

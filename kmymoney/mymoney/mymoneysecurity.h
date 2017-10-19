@@ -23,11 +23,13 @@
 #ifndef MYMONEYSECURITY_H
 #define MYMONEYSECURITY_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDateTime>
-#include <QMap>
+#include <qobjectdefs.h>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,11 +37,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmm_mymoney_export.h>
-#include <mymoneymoney.h>
-#include <mymoneyutils.h>
-#include <mymoneyobject.h>
-#include <mymoneykeyvaluecontainer.h>
+#include <alkimia/alkvalue.h>
+#include "mymoneyobject.h"
+#include "mymoneykeyvaluecontainer.h"
 
 /**
   * Class that holds all the required information about a security that the user

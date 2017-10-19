@@ -23,15 +23,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <vector>
 #include <qglobal.h>
 #include <QFile>
 #include <QDir>
 #include <QString>
 #include <QByteArray>
-#include <QBuffer>
 #include <QList>
 #include <QSaveFile>
 #include <QDateTime>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

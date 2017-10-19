@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <transaction.h>
+#include "transaction.h"
 
 namespace KMyMoneyTransactionForm
 {

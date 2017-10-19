@@ -26,7 +26,6 @@
 // QT Includes
 
 #include <QPixmap>
-#include <QBitmap>
 #include <QIcon>
 
 // ----------------------------------------------------------------------------
@@ -36,7 +35,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <icons/icons.h>
+#include "mymoneyfile.h"
+#include "icons/icons.h"
 
 using namespace Icons;
 

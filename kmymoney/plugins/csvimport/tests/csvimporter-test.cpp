@@ -18,7 +18,7 @@ email                : lukasz.wojnilowicz@gmail.com
 #include <QtTest/QtTest>
 
 #include <csvimporter.h>
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 #include <mymoneyseqaccessmgr.h>
 
 #include "csvimporttestcommon.h"

@@ -20,11 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
 #include <QStringList>
-#include <QTreeWidget>
 #include <QTreeWidgetItem>
-#include <QVariant>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

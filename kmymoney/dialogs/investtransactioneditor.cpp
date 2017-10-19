@@ -23,38 +23,30 @@
 // QT Includes
 
 #include <QLabel>
-#include <QApplication>
-#include <QEventLoop>
-#include <QRadioButton>
 #include <QList>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktextedit.h>
-#include <kcombobox.h>
-#include <kmessagebox.h>
-#include <kstandardguiitem.h>
+#include <KTextEdit>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneycategory.h>
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
-#include <kmymoneylineedit.h>
-#include <kmymoneyaccountcompletion.h>
-#include <kmymoneyaccountselector.h>
+#include "kmymoneycategory.h"
+#include "kmymoneydateinput.h"
+#include "kmymoneyedit.h"
+#include "kmymoneyaccountselector.h"
 #include "kmymoneymvccombo.h"
-#include <mymoneyfile.h>
-#include <transactionform.h>
+#include "mymoneyfile.h"
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneyglobalsettings.h"
 #include "investactivities.h"
 #include "kmymoneyutils.h"
+#include "kmymoneycompletion.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

@@ -22,17 +22,11 @@
 #include <QPushButton>
 #include <QComboBox>
 #include <QLabel>
-#include <QLayout>
-#include <QPixmap>
 #include <QTabWidget>
 #include <QCheckBox>
-#include <QRadioButton>
-#include <QPainter>
 #include <QSplitter>
 #include <QMap>
 #include <QList>
-#include <QResizeEvent>
-#include <QtAlgorithms>
 #include <QTimer>
 #include <QIcon>
 
@@ -40,11 +34,12 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kguiitem.h>
-#include <khelpclient.h>
+#include <KMessageBox>
+#include <KGuiItem>
+#include <KHelpClient>
 #include <KSharedConfig>
 #include <KActionCollection>
+#include <KListWidgetSearchLine>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -53,8 +48,9 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "models.h"
+#include "accountsmodel.h"
 #include "mymoneysecurity.h"
-#include <icons.h>
+#include "icons.h"
 
 using namespace Icons;
 

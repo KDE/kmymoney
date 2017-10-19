@@ -19,6 +19,8 @@
 #ifndef UNAVAILABLETASK_H
 #define UNAVAILABLETASK_H
 
+#include <QDomElement>
+
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 /**

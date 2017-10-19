@@ -26,9 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QPair>
-#include <QDataStream>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -45,6 +43,7 @@
 /**
   * @author Kevin Tambascio & Ace Jones
   */
+class MyMoneyStatement;
 class KEquityPriceUpdateDlgDecl  : public QDialog, public Ui::KEquityPriceUpdateDlgDecl
 {
 public:

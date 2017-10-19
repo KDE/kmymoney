@@ -21,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
 #include <QString>
 #include <QTableWidget>
 

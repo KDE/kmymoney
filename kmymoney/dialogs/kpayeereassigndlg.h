@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneypayee.h>
 #include "ui_kpayeereassigndlgdecl.h"
 
 /**
@@ -37,7 +36,7 @@
  *  to re-assign transactions (for instance, if payees are deleted).
  */
 
-
+class MyMoneyPayee;
 class KPayeeReassignDlgDecl : public QDialog, public Ui::KPayeeReassignDlgDecl
 {
 public:

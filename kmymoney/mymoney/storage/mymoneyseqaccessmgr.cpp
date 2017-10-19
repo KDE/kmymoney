@@ -18,8 +18,6 @@
 
 #include "mymoneyseqaccessmgr.h"
 
-#include <typeinfo>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,13 +26,14 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneytransactionfilter.h"
-#include "mymoneycategory.h"
+#include "mymoneyexception.h"
+#include "mymoneystoragesql.h"
 
 #define TRY try {
 #define CATCH } catch (const MyMoneyException &e) {

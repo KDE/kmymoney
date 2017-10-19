@@ -29,8 +29,8 @@
 // Project Includes
 
 #include "kmymoney.h"
-#include <mymoneyaccount.h>
-#include <mymoneykeyvaluecontainer.h>
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
 
 KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(KMyMoneyApp* app, QObject* parent, const char* name) :
     StatementInterface(parent, name),

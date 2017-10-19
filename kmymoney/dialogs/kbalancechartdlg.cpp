@@ -20,11 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
-#include <QFrame>
-#include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QPushButton>
 #include <QDialogButtonBox>
 #include <QWindow>
 
@@ -41,7 +37,6 @@
 
 #include "mymoneyreport.h"
 #include "pivottable.h"
-#include "kmymoneyglobalsettings.h"
 #include "kreportchartview.h"
 
 using namespace reports;

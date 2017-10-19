@@ -35,6 +35,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kselectdatabasedlg.h"
+#include "kguiutils.h"
+#include "storage/mymoneystoragesql.h"
+
 KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
   : m_widget(new Ui::KSelectDatabaseDlg())
   , m_mode(openMode)

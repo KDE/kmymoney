@@ -19,7 +19,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -36,7 +35,6 @@
 // Project Includes
 
 #include <kgpgfile.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 

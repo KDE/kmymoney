@@ -27,21 +27,18 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QFile>
 #include <QStringList>
-#include <QTimer>
 #include <QLabel>
 #include <QList>
 #include <QVBoxLayout>
 #include <QDialog>
 #include <QDialogButtonBox>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <kconfig.h>
+#include <KMessageBox>
+#include <KConfig>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KGuiItem>
@@ -50,17 +47,17 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include <mymoneyfile.h>
-#include <mymoneystatement.h>
-#include <kmymoneyglobalsettings.h>
-#include <transactioneditor.h>
-#include <investtransactioneditor.h>
-#include <kmymoneyedit.h>
+#include "mymoneyfile.h"
+#include "mymoneystatement.h"
+#include "kmymoneyglobalsettings.h"
+#include "transactioneditor.h"
+#include "kmymoneyedit.h"
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
 #include "kmymoney.h"
 #include "kmymoneyaccountcombo.h"
+#include "accountsmodel.h"
 #include "models.h"
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"

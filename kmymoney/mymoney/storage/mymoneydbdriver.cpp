@@ -21,13 +21,13 @@
 // QT Includes
 #include <QSqlQuery>
 #include <QVariant>
-#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include "mymoneydbdef.h"
 #include "mymoneyexception.h"
 
 //********************* The driver subclass definitions ********************

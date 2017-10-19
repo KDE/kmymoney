@@ -21,10 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QLabel>
-#include <QPixmap>
 #include <QList>
-#include <QDebug>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QStandardPaths>
@@ -33,24 +30,18 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <kmymoneydateinput.h>
+#include <KMessageBox>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KConfigGroup>
-#include <KLocalizedString>
 #include <KSharedConfig>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneycategory.h"
 #include "mymoneyfile.h"
-#include "kmymoneyaccountcombo.h"
-#include "kmymoneyutils.h"
-#include "models.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

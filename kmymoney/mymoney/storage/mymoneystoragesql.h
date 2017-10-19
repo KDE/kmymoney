@@ -23,13 +23,14 @@
 
 #include <limits>
 
+#include <QPair>
+#include <QString>
+#include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QSqlError>
 #include <QList>
 #include <QStack>
 #include <QUrl>
-#include <QtDebug>
 #include <QExplicitlySharedDataPointer>
 
 class QIODevice;
@@ -39,27 +40,31 @@ class QIODevice;
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
-#include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
-#include "mymoneyfile.h"
 #include "mymoneykeyvaluecontainer.h"
-#include "mymoneymap.h"
-#include "mymoneymoney.h"
+#include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneydbdef.h"
 #include "mymoneydbdriver.h"
-#include "databasestoreableobject.h"
-
-class MyMoneyDbDriver;
+#include "onlinejob.h"
+#include "payeeidentifier/payeeidentifier.h"
 
 // This is a convenience functor to make it easier to use STL algorithms
 // It will return false if the MyMoneyTransaction DOES match the filter.
 // This functor may disappear when all filtering can be handled in SQL.
+
+template <class T1, class T2> struct QPair;
+
+class IMyMoneyStorage;
+class MyMoneyCostCenter;
+class MyMoneyMoney;
+class MyMoneySchedule;
+class MyMoneySplit;
+class MyMoneyTransaction;
+class databaseStoreableObject;
 class FilterFail
 {
 public:

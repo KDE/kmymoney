@@ -20,28 +20,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QCheckBox>
-#include <QLabel>
 #include <QList>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcombobox.h>
-#include <kurlrequester.h>
-#include <kmessagebox.h>
-#include <khelpclient.h>
+#include <KMessageBox>
+#include <KHelpClient>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneylineedit.h"
-#include "kmymoneyedit.h"
 #include "mymoneysecurity.h"
 #include "mymoneyfile.h"
-#include "kmymoneycurrencyselector.h"
 #include "webpricequote.h"
 #include "kmymoneyutils.h"
 

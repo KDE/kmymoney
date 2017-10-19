@@ -35,16 +35,20 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
-#include <kurlrequester.h>
-#include <khelpclient.h>
-#include <KConfigGroup>
+#include <KMessageBox>
+#include <KUrlRequester>
+#include <KHelpClient>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "mymoneyfile.h"
+#include "storage/mymoneystoragesql.h"
+#include "storage/mymoneyseqaccessmgr.h"
+#include "kguiutils.h"
 
 KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
 {

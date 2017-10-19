@@ -31,7 +31,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kconfig.h>
+#include <KConfig>
 #include <KMessageBox>
 #include <KSharedConfig>
 #include <KActionCollection>
@@ -39,17 +39,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <kmymoneyglobalsettings.h>
-#include <kmymoneytitlelabel.h>
-#include <kmymoneyedit.h>
-#include <kbudgetvalues.h>
-#include "knewbudgetdlg.h"
+#include "ui_kbudgetview.h"
+
+#include "mymoneyfile.h"
+#include "kmymoneyedit.h"
+#include "kbudgetvalues.h"
 #include "kmymoney.h"
-#include "models.h"
-#include "accountsmodel.h"
-#include "icons.h"
 #include "modelenums.h"
+#include "viewenums.h"
 
 using namespace Icons;
 

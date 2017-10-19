@@ -16,13 +16,12 @@
  ***************************************************************************/
 
 #include "stdtransactionmatched.h"
-#include "transaction.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QList>
-#include <QHeaderView>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,8 +31,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyglobalsettings.h>
-#include <register.h>
+#include "kmymoneyglobalsettings.h"
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
+#include "mymoneytransaction.h"
+#include "transaction.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

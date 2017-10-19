@@ -25,27 +25,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
-#include <QComboBox>
-#include <QLayout>
 #include <QList>
-#include <QStandardItemModel>
-#include <QTabWidget>
 #include <QTimer>
-#include <QToolButton>
 #include <QPushButton>
 #include <QMenu>
 #include <QIcon>
-#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kconfig.h>
-#include <kmessagebox.h>
+#include <KConfig>
+#include <KMessageBox>
 #include <KSharedConfig>
 #include <KActionCollection>
+#include <KTreeWidgetSearchLine>
+#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -55,7 +50,11 @@
 #include "kscheduletreeitem.h"
 #include "ktreewidgetfilterlinewidget.h"
 #include "kmymoney.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
+#include "mymoneyutils.h"
+#include "mymoneyaccount.h"
+#include "mymoneyschedule.h"
+#include "mymoneyfile.h"
 
 using namespace Icons;
 

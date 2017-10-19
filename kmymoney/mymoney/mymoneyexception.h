@@ -23,11 +23,12 @@
 #ifndef MYMONEYEXCEPTION_H
 #define MYMONEYEXCEPTION_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QString>
-#include <kmm_mymoney_export.h>
 /**
   * @file
   * @author Thomas Baumgart
@@ -37,6 +38,7 @@
   * This class describes an exception that is thrown by the engine
   * in case of a failure.
   */
+
 class KMM_MYMONEY_EXPORT MyMoneyException
 {
 public:
@@ -76,7 +78,7 @@ public:
     */
   const QString& what() const {
     return m_msg;
-  };
+  }
 
   /**
     * This method is used to return the filename that was passed
@@ -86,7 +88,7 @@ public:
     */
   const QString& file() const {
     return m_file;
-  };
+  }
 
   /**
     * This method is used to return the linenumber that was passed
@@ -96,7 +98,7 @@ public:
     */
   unsigned long line() const {
     return m_line;
-  };
+  }
 
 private:
   /**

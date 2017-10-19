@@ -20,24 +20,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QApplication>
 #include <QLabel>
-#include <QToolButton>
 #include <QTimer>
 #include <QScrollBar>
+#include <QHBoxLayout>
+#include <QHash>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktoolbar.h>
-#include <kcombobox.h>
+#include <KComboBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyutils.h>
-#include <icons/icons.h>
+#include "kmymoneyutils.h"
+#include "register.h"
+#include "registeritem.h"
+#include "transaction.h"
+#include "icons/icons.h"
 
 using namespace KMyMoneyRegister;
 using namespace Icons;

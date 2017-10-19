@@ -16,8 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kmymoneyplugin.h"
 #include "kmm_plugin_export.h"
+
+namespace KMyMoneyPlugin { class ImportInterface; }
+namespace KMyMoneyPlugin { class StatementInterface; }
+namespace KMyMoneyPlugin { class ViewInterface; }
 
 class KMyMoneyApp;
 

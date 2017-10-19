@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "csvwriter.h"
-#include "csvexportdlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Headers
@@ -29,14 +28,15 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <KConfigGroup>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
 
 #include "mymoneyfile.h"
+#include "csvexportdlg.h"
+#include "csvexporterplugin.h"
 
 CsvWriter::CsvWriter() :
     m_plugin(0),

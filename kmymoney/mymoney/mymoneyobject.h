@@ -21,15 +21,14 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
 class QDomDocument;
 class QDomElement;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 
 /**
   * @author Thomas Baumgart

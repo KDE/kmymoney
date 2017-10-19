@@ -19,7 +19,6 @@
 #include "kmymoneytextedit.h"
 #include "kmymoneytextedit_p.h"
 #include <QKeyEvent>
-#include <QDebug>
 
 /* The Higligther */
 

@@ -36,18 +36,17 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConfigGroup>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyedit.h>
-#include <kmymoneydateinput.h>
-#include <kmymoneycurrencyselector.h>
-#include <mymoneyprice.h>
-#include <mymoneytransaction.h>
-#include <kmymoneyglobalsettings.h>
+#include "mymoneyfile.h"
+#include "kmymoneyedit.h"
+#include "kmymoneydateinput.h"
+#include "mymoneyprice.h"
+#include "mymoneytransaction.h"
+#include "kmymoneyglobalsettings.h"
 
 #include "kmymoneyutils.h"
 

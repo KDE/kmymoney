@@ -25,6 +25,7 @@
 #include <QList>
 #include <QIcon>
 #include <QTimer>
+#include <QScrollBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,16 +37,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneyutils.h"
+#include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney.h"
-#include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
+#include "mymoneybudget.h"
 #include "pivottable.h"
-#include "pivotgrid.h"
 #include "fixedcolumntreeview.h"
 #include "kreportchartview.h"
-#include <icons.h>
+#include "reportaccount.h"
+#include "icons.h"
 
 using namespace reports;
 using namespace Icons;

@@ -62,15 +62,13 @@ class IMyMoneyStorageFormat;
 class MyMoneyTransaction;
 class KInvestmentView;
 class KReportsView;
-class KMyMoneyViewBase;
-class MyMoneyReport;
+class MyMoneySchedule;
 class TransactionEditor;
 class KForecastView;
 class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
 class MyMoneyAccount;
 class QLabel;
-class QVBoxLayout;
 
 /**
   * This class represents the view of the MyMoneyFile which contains

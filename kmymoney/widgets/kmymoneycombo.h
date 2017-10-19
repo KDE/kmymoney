@@ -24,16 +24,11 @@
 #include <QTimer>
 #include <QMutex>
 #include <QPaintEvent>
-#include <QFocusEvent>
-#include <QList>
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <QStandardItemModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcombobox.h>
+#include <KComboBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes

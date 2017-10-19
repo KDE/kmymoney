@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
+#include "mymoneymoney.h"
 
 KScheduleTreeItem::KScheduleTreeItem(QTreeWidget* parent) : QTreeWidgetItem(parent)
 {

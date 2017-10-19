@@ -21,10 +21,6 @@
 // QT Includes
 
 #include <QString>
-#include <QPainter>
-#include <QTimer>
-#include <QApplication>
-#include <QLayout>
 #include <QPalette>
 #include <QFrame>
 #include <QHeaderView>
@@ -34,16 +30,15 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kcombobox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
-#include <kmymoneycategory.h>
+#include "kmymoneydateinput.h"
+#include "kmymoneyedit.h"
+#include "kmymoneycategory.h"
+#include "transaction.h"
 
-#include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 
 using namespace KMyMoneyTransactionForm;

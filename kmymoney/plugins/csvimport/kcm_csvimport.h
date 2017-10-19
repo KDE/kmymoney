@@ -20,11 +20,9 @@
 #ifndef KCM_CSVIMPORT_H
 #define KCM_CSVIMPORT_H
 
-#include <kcmodule.h>
+#include <KCModule>
 #include <QWidget>
 #include "ui_pluginsettingsdecl.h"
-
-class KPluginInfo;
 
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {

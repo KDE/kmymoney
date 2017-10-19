@@ -23,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KAboutData>
 #include <KToggleAction>
 #include <KActionCollection>
 

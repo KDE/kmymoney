@@ -29,19 +29,14 @@
 // QT Includes
 
 #include <QWidget>
-#include <QVBoxLayout>
 #include <QList>
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
-#include <QTabWidget>
-#include <QListWidget>
 #include <QtPrintSupport/QPrinter>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kfilefiltercombo.h>
-#include <QPointer>
+#include <KChartAbstractCoordinatePlane>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,23 +44,20 @@
 #include "kmymoneyviewbase.h"
 
 #ifdef _CHECK_MEMORY
-#include <mymoneyutils.h>
+#include "mymoneyutils.h"
 #endif
 
-#include "mymoneyschedule.h"
-#include <mymoneyaccount.h>
-#include <mymoneyreport.h>
-#include "pivottable.h"
-#include "querytable.h"
-#include "../widgets/reportcontrolimpl.h"
-#include "kreportchartview.h"
+#include "mymoneyreport.h"
 
-#include "tocitem.h"
-#include "tocitemgroup.h"
-#include "tocitemreport.h"
+namespace reports { class KReportChartView; }
+namespace reports { class ReportTable; }
 
-class MyMoneyReport;
+class QTreeWidget;
+class QTreeWidgetItem;
+class QListWidget;
 class MyQWebEnginePage;
+class TocItemGroup;
+class ReportControl;
 
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;

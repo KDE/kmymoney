@@ -35,9 +35,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyutils.h"
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
-#include <icons.h>
+#include "icons.h"
 #include "modelenums.h"
 
 using namespace Icons;

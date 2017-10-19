@@ -22,7 +22,9 @@
 
 #include "mymoney/onlinejob.h"
 
-#include <mymoneyobjectcontainer.h>
+#include "mymoneyobjectcontainer.h"
+#include "imymoneystorage.h"
+#include "mymoneyschedule.h"
 
 struct MyMoneyObjectContainer::Private {
   Private(MyMoneyObjectContainer *p) :

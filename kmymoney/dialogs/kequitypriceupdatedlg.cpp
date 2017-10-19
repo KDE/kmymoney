@@ -27,24 +27,19 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
 #include <QPushButton>
-#include <QRadioButton>
-#include <QFile>
 #include <QTimer>
-#include <QLayout>
 #include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
-#include <ktextedit.h>
-#include <QProgressDialog>
-#include <kconfig.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
+#include <KMessageBox>
+#include <KTextEdit>
+#include <KConfig>
+#include <KConfigGroup>
 #include <KSharedConfig>
+#include <KStandardGuiItem>
 #include <KLocalizedString>
 #include <KColorScheme>
 
@@ -55,7 +50,6 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
-#include "kmymoneyglobalsettings.h"
 
 #define WEBID_COL       0
 #define NAME_COL        1

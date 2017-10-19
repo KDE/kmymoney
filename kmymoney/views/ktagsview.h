@@ -21,22 +21,19 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVector>
 #include <QWidget>
-#include <QResizeEvent>
 #include <QList>
-#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <klistwidgetsearchline.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_ktagsviewdecl.h"
 #include "mymoneytag.h"
+
+class KListWidgetSearchLine;
 
 /**
   * @author Alessandro Russo

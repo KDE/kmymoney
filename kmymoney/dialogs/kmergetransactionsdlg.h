@@ -21,17 +21,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QEvent>
-#include <QResizeEvent>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <register.h>
-#include <mymoneyaccount.h>
+#include "mymoneyaccount.h"
 
 #include "kselecttransactionsdlg.h"
 

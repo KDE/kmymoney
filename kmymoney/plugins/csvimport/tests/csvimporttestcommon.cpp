@@ -18,7 +18,7 @@ email                : lukasz.wojnilowicz@gmail.com
 #include <QFile>
 #include <QTextStream>
 
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 
 void writeStatementToCSV(const QString& content, const QString& filename)
 {

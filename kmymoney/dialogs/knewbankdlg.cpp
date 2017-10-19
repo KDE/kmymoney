@@ -19,22 +19,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
-#include <QPixmap>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
-#include <klineedit.h>
+#include <KMessageBox>
+#include <KLineEdit>
 #include <kguiutils.h>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyinstitution.h>
+#include "mymoneyinstitution.h"
 
 KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
     : KNewBankDlgDecl(parent), m_institution(institution)

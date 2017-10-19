@@ -29,7 +29,6 @@
 
 #include <cstdio>
 #include <cstdarg>
-#include <cstdlib>
 
 #include <QRegExp>
 

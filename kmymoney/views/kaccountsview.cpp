@@ -29,7 +29,6 @@
 // Project Includes
 
 #include "kmymoneyglobalsettings.h"
-#include "icons.h"
 
 using namespace Icons;
 

@@ -21,43 +21,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
-#include <QButtonGroup>
-#include <QRadioButton>
-#include <QCheckBox>
-#include <QTimer>
-#include <QTabWidget>
-#include <QLayout>
-#include <QKeyEvent>
-#include <QList>
-#include <QResizeEvent>
-#include <QEvent>
-#include <QPushButton>
-#include <QDialogButtonBox>
-#include <QVBoxLayout>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <klineedit.h>
-#include <kcombobox.h>
-#include <kstandardguiitem.h>
-#include <khelpclient.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
-#include <KConfigGroup>
-#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
-#include <kmymoneylineedit.h>
-#include <kmymoneyaccountselector.h>
-#include <mymoneyfile.h>
-#include <kmymoneyglobalsettings.h>
-#include <transaction.h>
+#include "kmymoneydateinput.h"
+#include "kmymoneymvccombo.h"
 
 #include "ui_daterangedlgdecl.h"
 

@@ -18,7 +18,7 @@
 #ifndef KEQUITYPRICEUPDATECONFDLG_H
 #define KEQUITYPRICEUPDATECONFDLG_H
 
-#include "ui_kequitypriceupdateconfdlg.h"
+#include <QDialog>
 
 enum updatingPricePolicyE : int {eUpdateAllPrices = 0, eUpdateMissingPrices, eUpdateDownloadedPrices, eUpdateSameSourcePrices, eAsk, eUpdatingPricePolicyEnd};
 

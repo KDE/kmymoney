@@ -20,11 +20,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeView>
 #include <QCompleter>
 #include <QSortFilterProxyModel>
 #include <QStringList>
 #include <QDebug>
+#include <QGlobalStatic>
+#include <QStandardItemModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,8 +35,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
 #include "models.h"
+#include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
 #include "payeesmodel.h"
@@ -43,11 +46,11 @@
 #include "ui_newtransactioneditor.h"
 #include "splitdialog.h"
 #include "widgethintframe.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 
-Q_GLOBAL_STATIC(QDate, lastUsedPostDate);
+Q_GLOBAL_STATIC(QDate, lastUsedPostDate)
 
 class NewTransactionEditor::Private
 {

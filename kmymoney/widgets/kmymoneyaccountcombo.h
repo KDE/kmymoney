@@ -26,25 +26,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <QList>
-#include <QItemSelection>
-#include <QPushButton>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcombobox.h>
+#include <KComboBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyutils.h"
-#include "accountsmodel.h"
 #include "accountsproxymodel.h"
-#include "models/onlinebankingaccountsfilterproxymodel.h"
-
+#include "onlinebankingaccountsfilterproxymodel.h"
 
 /**
   * A proxy model used to filter all the data from the core accounts model leaving
@@ -59,6 +50,7 @@
   * @author Cristian Onet 2010
   * @author Christian David
   */
+
 template <class baseProxyModel>
 class AccountNamesFilterProxyModelTpl : public baseProxyModel
 {
@@ -141,7 +133,6 @@ private:
   class Private;
   QScopedPointer<Private> const d;
 };
-
 
 template <class baseProxyModel>
 AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl(QObject *parent)

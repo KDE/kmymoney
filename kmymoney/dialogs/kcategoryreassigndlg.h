@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
+#include "mymoneyaccount.h"
 #include "ui_kcategoryreassigndlgdecl.h"
 
 /**

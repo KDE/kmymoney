@@ -19,12 +19,10 @@
 #ifndef ONLINETASK_H
 #define ONLINETASK_H
 
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
-#include <QSqlDatabase>
+#include <QString>
 
-#include "mymoneyaccount.h"
 #include "onlinejobmessage.h"
+#include <qobject.h>
 #include "storage/databasestoreableobject.h"
 
 class onlineJob;
@@ -106,6 +104,9 @@ class onlineJob;
  *
  * @see onlineJob
  */
+class QSqlDatabase;
+class QDomDocument;
+class QDomElement;
 class onlineTask : public databaseStoreableObject
 {
 public:

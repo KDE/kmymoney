@@ -45,7 +45,7 @@ class KLineEdit;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneykeyvaluecontainer.h>
+#include "mymoneykeyvaluecontainer.h"
 
 class MyMoneyAccount;
 

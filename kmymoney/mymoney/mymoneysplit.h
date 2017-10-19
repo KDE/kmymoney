@@ -27,18 +27,18 @@
 // QT Includes
 
 #include <QString>
-#include <QDateTime>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyexception.h"
-#include "mymoneyutils.h"
 #include "mymoneymoney.h"
-#include <kmm_mymoney_export.h>
-#include <mymoneyobject.h>
-#include <mymoneykeyvaluecontainer.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyobject.h"
+#include "mymoneykeyvaluecontainer.h"
+
 class MyMoneyTransaction;
+class QDate;
 
 /**
   * @author Thomas Baumgart

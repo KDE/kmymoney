@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,8 +35,11 @@
 // Project Includes
 
 #include "ui_kcurrencycalculatordecl.h"
-#include <mymoneyfile.h>
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 
+class MyMoneyTransaction;
 class QDialogButtonBox;
 
 /**

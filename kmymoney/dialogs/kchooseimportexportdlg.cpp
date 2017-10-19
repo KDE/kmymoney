@@ -23,16 +23,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
 #include <QLabel>
-#include <QComboBox>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kconfig.h>
-#include <kconfiggroup.h>
+#include <KConfig>
+#include <KConfigGroup>
 #include <KSharedConfig>
 #include <KLocalizedString>
 

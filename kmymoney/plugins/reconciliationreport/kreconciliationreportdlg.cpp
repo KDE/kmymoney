@@ -21,13 +21,10 @@
 #include "kreconciliationreportdlg.h"
 
 // Qt includes
-#include <QPainter>
 #include <QPushButton>
-#include <QLayout>
 #include <QTabWidget>
 #include <QPrinter>
 #include <QtPrintSupport/QPrintDialog>
-#include <QPointer>
 
 // KDE includes
 #include <KStandardGuiItem>

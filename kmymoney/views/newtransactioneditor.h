@@ -27,7 +27,7 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
+#include "mymoneymoney.h"
 
 class NewTransactionEditor : public QFrame
 {

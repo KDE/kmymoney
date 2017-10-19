@@ -23,25 +23,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QCompleter>
-/*#include <QToolButton>
-#include <QLabel>*/
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcombobox.h>
+#include <KComboBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
-#include "mymoneyschedule.h"
-#include <mymoneysplit.h>
-#include <mymoneytransactionfilter.h>
-#include <register.h>
 #include "kmm_widgets_export.h"
+
+#include "mymoneyaccount.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneyschedule.h"
+#include "register.h"
+#include "mymoneytransactionfilter.h"
 
 class QSortFilterProxyModel;
 

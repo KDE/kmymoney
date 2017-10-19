@@ -22,12 +22,10 @@
 
 #include "config-kmymoney.h"
 
-#include <kcmodule.h>
+#include <KCModule>
 #include <QWidget>
 #include "ui_pluginsettingsdecl.h"
 
-class QStringList;
-class KPluginInfo;
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;
 #else

@@ -22,13 +22,12 @@
 
 #include <QStringList>
 #include <QDomElement>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
 #include <mymoneyexception.h>
-#include <pluginloader.h>
 #include "mymoneystoragenames.h"
 
 using namespace MyMoneyStorageNodes;

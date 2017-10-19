@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QIcon>
-#include <QBitmap>
 #include <QCheckBox>
 #include <QPushButton>
 #include <QDir>
@@ -33,28 +32,25 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
-#include <ktextedit.h>
-#include <kuser.h>
-#include <kurlrequester.h>
-#include <kmessagebox.h>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KUser>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneysecurity.h>
-#include <mymoneyfile.h>
+#include "mymoneysecurity.h"
+#include "mymoneyfile.h"
 #include <kguiutils.h>
-#include <mymoneypayee.h>
-#include <mymoneymoney.h>
-#include <mymoneyinstitution.h>
-#include <mymoneyaccount.h>
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
+#include "mymoneypayee.h"
+#include "mymoneymoney.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "kmymoneydateinput.h"
+#include "kmymoneyedit.h"
 #include <kaccounttemplateselector.h>
 #include "kmymoneyglobalsettings.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

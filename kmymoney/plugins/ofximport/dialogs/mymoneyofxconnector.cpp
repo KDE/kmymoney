@@ -36,8 +36,8 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kcombobox.h>
-#include <kpassworddialog.h>
+#include <KComboBox>
+#include <KPasswordDialog>
 #include <KWallet>
 #include <KMainWindow>
 #include <KLineEdit>
@@ -45,10 +45,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <mymoneyaccount.h>
-#include <mymoneyinstitution.h>
-#include <mymoneykeyvaluecontainer.h>
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
 
 using KWallet::Wallet;
 

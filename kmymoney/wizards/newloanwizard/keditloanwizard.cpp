@@ -29,13 +29,12 @@
 #include <QRadioButton>
 #include <QLabel>
 #include <QList>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,9 +43,7 @@
 #include "kmymoneylineedit.h"
 #include "kmymoneyedit.h"
 #include "kmymoneyaccountselector.h"
-#include "kmymoneydateinput.h"
 #include "mymoneyfile.h"
-#include "kmymoneyutils.h"
 
 KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent) :
     KNewLoanWizard(parent)

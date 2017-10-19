@@ -25,12 +25,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
-#include <QLabel>
-#include <QTimer>
-#include <QPainter>
-#include <QStyle>
-#include <QRect>
 #include <QList>
 #include <QVBoxLayout>
 #include <QPixmapCache>
@@ -45,11 +39,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyutils.h>
-#include <mymoneyfile.h>
+#include "mymoneyfile.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

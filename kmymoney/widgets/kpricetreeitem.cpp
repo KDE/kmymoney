@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
+#include "mymoneymoney.h"
 
 KPriceTreeItem::KPriceTreeItem(QTreeWidget* parent) : QTreeWidgetItem(parent)
 {

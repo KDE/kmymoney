@@ -25,10 +25,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kled.h>
-#include <klineedit.h>
-#include <kcombobox.h>
-#include <kmessagebox.h>
+#include <KLed>
+#include <KLineEdit>
+#include <KComboBox>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------

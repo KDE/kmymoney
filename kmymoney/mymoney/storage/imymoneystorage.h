@@ -33,17 +33,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyutils.h>
-#include <mymoneyinstitution.h>
-#include <mymoneyaccount.h>
-#include <mymoneytransaction.h>
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
 #include "mymoneyschedule.h"
-#include <mymoneytransactionfilter.h>
-#include <mymoneysecurity.h>
-#include <mymoneyprice.h>
-#include <mymoneyreport.h>
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
 #include <mymoneybudget.h>
 #include <onlinejob.h>
 #include <mymoneycostcenter.h>
@@ -55,6 +53,8 @@
   * is called with an index out of bounds. It silently returns false
   * in that case, otherwise calls the base classes implementation.
   */
+class MyMoneySplit;
+class MyMoneyTransactionFilter;
 class MyMoneyFileBitArray : public QBitArray
 {
 public:

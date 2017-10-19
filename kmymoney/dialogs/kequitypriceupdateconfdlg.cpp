@@ -17,6 +17,8 @@
 
 #include "kequitypriceupdateconfdlg.h"
 
+#include "ui_kequitypriceupdateconfdlg.h"
+
 EquityPriceUpdateConfDlg::EquityPriceUpdateConfDlg(const updatingPricePolicyE policy) : ui(new Ui::EquityPriceUpdateConfDlg)
 {
   ui->setupUi(this);

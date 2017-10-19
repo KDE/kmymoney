@@ -36,7 +36,6 @@
 // Std C++ / STL Includes
 
 #include <typeinfo>
-#include <cstdio>
 #include <iostream>
 #include <memory>
 
@@ -44,16 +43,11 @@
 // QT Includes
 
 #include <QDir>
-#include <QPrinter>
-#include <QLayout>
-#include <QSignalMapper>
 #include <QDateTime>         // only for performance tests
 #include <QTimer>
-#include <QEventLoop>
 #include <QByteArray>
 #include <QBitArray>
 #include <QBoxLayout>
-#include <QResizeEvent>
 #include <QLabel>
 #include <QMenu>
 #include <QProgressBar>
@@ -63,29 +57,27 @@
 #include <QKeySequence>
 #include <QIcon>
 #include <QInputDialog>
-#include <QProgressDialog>
 #include <QStatusBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktoolbar.h>
-#include <kmessagebox.h>
+#include <KToolBar>
+#include <KMessageBox>
 #include <KLocalizedString>
-#include <kconfig.h>
-#include <kstandardaction.h>
-#include <kactioncollection.h>
-#include <kactionmenu.h>
-#include <ktip.h>
-#include <krun.h>
-#include <kconfigdialog.h>
-#include <kxmlguifactory.h>
-#include <krecentfilesaction.h>
+#include <KConfig>
+#include <KStandardAction>
+#include <KActionCollection>
+#include <KTipDialog>
+#include <KRun>
+#include <KConfigDialog>
+#include <KXMLGUIFactory>
+#include <KRecentFilesAction>
 #include <KRecentDirs>
-#include <ktoolinvocation.h>
-#include <KSharedConfig>
 #include <KProcess>
 #include <KAboutApplicationDialog>
+#include <KPluginMetaData>
+#include <KPluginLoader>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -113,12 +105,10 @@
 #include "dialogs/kselectdatabasedlg.h"
 #include "dialogs/kcurrencycalculator.h"
 #include "dialogs/keditscheduledlg.h"
-#include "wizards/newloanwizard/knewloanwizard.h"
 #include "wizards/newloanwizard/keditloanwizard.h"
 #include "dialogs/kpayeereassigndlg.h"
 #include "dialogs/ktagreassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
-#include "dialogs/kmergetransactionsdlg.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
 #include "dialogs/kgeneratesqldlg.h"
@@ -132,7 +122,6 @@
 #include "widgets/onlinejobmessagesview.h"
 
 #include "widgets/kmymoneymvccombo.h"
-#include "widgets/kmymoneycompletion.h"
 
 #include "views/kmymoneyview.h"
 #include "views/konlinejoboutbox.h"
@@ -143,9 +132,7 @@
 #include "mymoney/storage/mymoneystoragedump.h"
 #include "mymoney/mymoneyforecast.h"
 
-#include "mymoney/onlinejob.h"
-#include "mymoney/onlinetransfer.h"
-#include "mymoney/onlinejobadministration.h"
+#include "mymoney/onlinejobmessage.h"
 
 #include "converter/mymoneystatementreader.h"
 #include "converter/mymoneytemplate.h"
@@ -157,13 +144,18 @@
 #include "plugins/onlinepluginextended.h"
 #include "pluginloader.h"
 
+#include "tasks/credittransfer.h"
+
 #include "icons/icons.h"
 
 #include "misc/webconnect.h"
 
+#include "storage/imymoneyserialize.h"
+#include "storage/mymoneystoragesql.h"
+
 #include <libkgpgfile/kgpgfile.h>
 
-#include <transactioneditor.h>
+#include "transactioneditor.h"
 #include "konlinetransferform.h"
 #include <QHBoxLayout>
 #include <QFileDialog>

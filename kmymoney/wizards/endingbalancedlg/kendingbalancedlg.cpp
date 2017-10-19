@@ -20,27 +20,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
 #include <QList>
 #include <QBitArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandardguiitem.h>
-#include <khelpclient.h>
+#include <KStandardGuiItem>
+#include <KHelpClient>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyutils.h"
 #include "kmymoneyedit.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
-#include "kmymoneyglobalsettings.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneyutils.h"
 #include "kcurrencycalculator.h"
+#include "kmymoneysettings.h"
 
 class KEndingBalanceDlg::Private
 {

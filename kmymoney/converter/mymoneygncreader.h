@@ -146,21 +146,20 @@ allow us to test the structure, if not the data content, of the file.
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDataStream>
-#include <QTextStream>
-class QIODevice;
-#include <QObject>
 #include <QList>
 #include <QStack>
-#include <QXmlReader>
-#include <QDateTime>
-#include <QTextCodec>
+#include <QXmlDefaultHandler>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+
 #ifndef _GNCFILEANON
-#include "storage/imymoneyserialize.h" // not used any more, but call interface requires it
 #include "storage/imymoneystorageformat.h"
 #endif // _GNCFILEANON
 
@@ -176,6 +175,14 @@ typedef map_accountIds::const_iterator map_accountIds_citer;
 typedef QMap<QString, QStringList> map_elementVersions;
 
 class MyMoneyGncReader;
+class QIODevice;
+class QDate;
+class QTextCodec;
+class IMyMoneySerialize;
+class IMyMoneyStorage;
+class QXmlAttributes;
+class QXmlInputSource;
+class QXmlSimpleReader;
 
 /** GncObject is the base class for the various objects in the gnucash file
     Beyond the first level XML objects, elements will be of one of three types:

@@ -20,10 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
-#include <QDebug>
 #include <QTabBar>
-#include <QSplitter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,11 +31,12 @@
 
 #include "ledgerviewpage.h"
 #include "models.h"
-#include "ledgermodel.h"
+#include "accountsmodel.h"
 #include "kmymoneyaccountcombo.h"
 #include "ui_simpleledgerview.h"
-#include <icons/icons.h>
-#include <kmymoneyview.h>
+#include "icons/icons.h"
+#include "kmymoneyview.h"
+#include "mymoneyfile.h"
 
 using namespace Icons;
 

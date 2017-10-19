@@ -37,10 +37,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
-#include "mymoneyexception.h"
-#include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
-#include "reportdebug.h"
 
 namespace reports
 {

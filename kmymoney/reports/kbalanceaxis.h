@@ -19,9 +19,11 @@
 #ifndef KBALANCEAXIS_H
 #define KBALANCEAXIS_H
 
+#include <qobjectdefs.h>
+
 #include <KChartCartesianAxis>
 
-using namespace KChart;
+namespace KChart { class AbstractCartesianDiagram; }
 
 class KBalanceAxis : public KChart::CartesianAxis
 {

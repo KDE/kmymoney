@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <transactioneditor.h>
+#include "transactioneditor.h"
 
 class InvestTransactionEditor : public TransactionEditor
 {

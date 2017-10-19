@@ -37,23 +37,25 @@
 #include <QStyledItemDelegate>
 #include <QIcon>
 #include <QPushButton>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConfigGroup>
-#include <KLocalizedString>
+#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneysecurity.h>
-#include <mymoneyfile.h>
-#include <kavailablecurrencydlg.h>
-#include <kcurrencyeditordlg.h>
-#include <kmymoneyutils.h>
-#include <icons/icons.h>
+#include "ui_kcurrencyeditdlg.h"
+#include "ui_kcurrencyeditordlg.h"
+#include "ui_kavailablecurrencydlg.h"
+
+#include "mymoneysecurity.h"
+#include "mymoneyfile.h"
+#include "kavailablecurrencydlg.h"
+#include "kcurrencyeditordlg.h"
+#include "kmymoneyutils.h"
+#include "icons/icons.h"
 
 using namespace Icons;
 

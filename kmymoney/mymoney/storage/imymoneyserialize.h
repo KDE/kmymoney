@@ -32,20 +32,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyutils.h>
-#include <mymoneyinstitution.h>
-#include <mymoneyaccount.h>
-#include <mymoneytransaction.h>
-#include <mymoneypayee.h>
-#include <mymoneytag.h>
+#include "mymoneyaccount.h"
+#include "mymoneypayee.h"
 #include "mymoneyschedule.h"
-#include <mymoneytransactionfilter.h>
-#include <mymoneysecurity.h>
-#include <mymoneyprice.h>
-#include <mymoneyreport.h>
-#include <mymoneybudget.h>
-#include <mymoneycostcenter.h>
-#include "mymoneystoragesql.h"
+#include "mymoneyprice.h"
 
 /**
   * @author Thomas Baumgart
@@ -54,6 +44,16 @@
 /**
   * This class represents the interface to serialize a MyMoneyStorage object
   */
+class MyMoneyBudget;
+class MyMoneyCostCenter;
+class MyMoneyInstitution;
+class MyMoneyReport;
+class MyMoneySecurity;
+class MyMoneyStorageSql;
+class MyMoneyTag;
+class MyMoneyTransaction;
+class MyMoneyTransactionFilter;
+class onlineJob;
 class IMyMoneySerialize
 {
 public:

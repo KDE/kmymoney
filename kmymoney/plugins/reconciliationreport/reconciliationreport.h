@@ -23,10 +23,10 @@
 
 #include "kmymoneyplugin.h"
 #include "mymoneyaccount.h"
-#include "mymoneykeyvaluecontainer.h"
+#include "mymoneymoney.h"
 
-class QStringList;
-class KPluginInfo;
+class MyMoneySplit;
+class MyMoneyTransaction;
 
 class KMMReconciliationReportPlugin: public KMyMoneyPlugin::Plugin
 {

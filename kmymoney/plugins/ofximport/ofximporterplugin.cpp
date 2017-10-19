@@ -38,9 +38,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <libofx/libofx.h>
 #include "konlinebankingstatus.h"
 #include "konlinebankingsetupwizard.h"
 #include "kofxdirectconnectdlg.h"
+#include "mymoneystatement.h"
+#include "statementinterface.h"
+#include "importinterface.h"
 #include "ui_importoption.h"
 
 //#define DEBUG_LIBOFX

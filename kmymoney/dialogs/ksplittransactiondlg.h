@@ -26,17 +26,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMenu>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
-#include <mymoneyaccount.h>
-#include <mymoneytransaction.h>
+#include "mymoneymoney.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
 
 
 #include "ui_ksplittransactiondlgdecl.h"

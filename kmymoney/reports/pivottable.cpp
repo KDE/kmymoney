@@ -21,12 +21,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QDateTime>
 #include <QRegExp>
-#include <QClipboard>
-#include <QApplication>
-#include <QPrinter>
-#include <QPainter>
 #include <QFile>
 #include <QTextStream>
 #include <QList>
@@ -44,7 +39,11 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
-#include <mymoneyprice.h>
+#include "mymoneyprice.h"
+#include "mymoneyfile.h"
+#include "mymoneybudget.h"
+
+namespace KChart { class Widget; }
 
 namespace reports
 {

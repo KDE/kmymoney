@@ -26,21 +26,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeWidgetItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <ktreewidgetsearchline.h>
-#include <ktreewidgetsearchlinewidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kmymoneypricedlgdecl.h"
-#include <mymoneyprice.h>
 
-
+class MyMoneyPrice;
+class KTreeWidgetSearchLineWidget;
+class QTreeWidgetItem;
 class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl
 {
 public:

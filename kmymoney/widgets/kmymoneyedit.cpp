@@ -23,21 +23,19 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QWidget>
-#include <QFrame>
 #include <QPixmap>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QIcon>
-#include <QDebug>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
-#include <kconfig.h>
-#include <kconfiggroup.h>
+#include <KConfig>
+#include <KConfigGroup>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -46,7 +44,7 @@
 #include "kmymoneylineedit.h"
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
-#include <icons.h>
+#include "icons.h"
 
 using namespace Icons;
 

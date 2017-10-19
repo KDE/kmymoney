@@ -22,8 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
-#include <QLabel>
 #include <QCheckBox>
 #include <QUrl>
 #include <QPushButton>
@@ -33,16 +31,15 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <kguiitem.h>
+#include <KConfig>
+#include <KConfigGroup>
 #include <KGuiItem>
-#include <KSharedConfig>
 #include <KLocalizedString>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <icons/icons.h>
+#include "icons/icons.h"
 
 using namespace Icons;
 

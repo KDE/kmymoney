@@ -26,18 +26,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
 #include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcombobox.h>
+#include <KComboBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
+#include "mymoneysecurity.h"
 
 /**
   * @author Thomas Baumgart

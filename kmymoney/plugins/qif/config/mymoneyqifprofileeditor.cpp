@@ -32,7 +32,7 @@
 
 #include <KLocalizedString>
 #include <kconfig.h>
-#include <kconfiggroup.h>
+#include <KConfigGroup>
 #include <klineedit.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>

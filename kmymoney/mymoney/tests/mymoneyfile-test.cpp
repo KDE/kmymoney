@@ -28,6 +28,7 @@
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/payeeidentifierloader.h"
+#include "payeeidentifiertyped.h"
 
 QTEST_GUILESS_MAIN(MyMoneyFileTest)
 

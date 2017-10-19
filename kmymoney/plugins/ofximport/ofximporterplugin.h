@@ -24,23 +24,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-#include <QStringList>
-
 // ----------------------------------------------------------------------------
 // Library Includes
-
-#include <libofx/libofx.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyplugin.h"
-class KOnlineBankingStatus;
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
 
 /**
 @author Ace Jones
 */
+class MyMoneyStatement;
 class OfxImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin, public KMyMoneyPlugin::OnlinePlugin
 {
   Q_OBJECT

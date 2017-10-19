@@ -25,17 +25,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QGlobalStatic>
-#include <QPainter>
 #include <QCursor>
 #include <QApplication>
 #include <QTimer>
-#include <QLayout>
-#include <QEventLoop>
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QFrame>
-#include <QResizeEvent>
 #include <QMouseEvent>
 #include <QEvent>
 #include <QPushButton>
@@ -45,9 +40,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmessagebox.h>
-#include <kcompletionbox.h>
-#include <kstandardshortcut.h>
+#include <KMessageBox>
+#include <KCompletionBox>
 #include <KSharedConfig>
 #include <KLocalizedString>
 
@@ -63,7 +57,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
-#include <icons.h>
+#include "icons.h"
 
 using namespace Icons;
 

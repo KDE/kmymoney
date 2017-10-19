@@ -21,21 +21,15 @@
 // QT Includes
 
 #include <QString>
-#include <QMap>
 #include <QStringList>
 #include <QPixmap>
-#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
-#include <mymoneyobject.h>
-#include <mymoneykeyvaluecontainer.h>
-#include <kmm_mymoney_export.h>
-
-class MyMoneyFile;
-class MyMoneyMoney;
+#include "mymoneyobject.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "kmm_mymoney_export.h"
 
 /**
   * This class represents a Bank contained within a MyMoneyFile object

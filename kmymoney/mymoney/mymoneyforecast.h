@@ -24,25 +24,23 @@
 #include <QMap>
 #include <QSet>
 #include <QList>
-#include <QString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyobject.h>
-#include <mymoneyaccount.h>
-#include <mymoneymoney.h>
-#include "mymoneyschedule.h"
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
-#include "mymoneybudget.h"
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
+#include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 
 /**
   *
   *
   * @author Alvaro Soliverez <asoliverez@gmail.com>
   */
-
+class MyMoneyBudget;
+class MyMoneySchedule;
+class MyMoneyTransaction;
 class KMM_MYMONEY_EXPORT MyMoneyForecast
 {
   KMM_MYMONEY_UNIT_TESTABLE

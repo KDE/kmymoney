@@ -30,7 +30,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyinstitution.h"
 #include "modelenums.h"
 
 using namespace eAccountsModel;

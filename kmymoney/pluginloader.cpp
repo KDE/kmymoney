@@ -21,22 +21,18 @@
 // QT Includes
 
 #include <QStringList>
-#include <QCheckBox>
-#include <QLayout>
-#include <QByteArray>
-#include <QPluginLoader>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KPluginInfo>
+#include <KPluginLoader>
 #include <KPluginSelector>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneyplugin.h"
 
 namespace KMyMoneyPlugin
 {

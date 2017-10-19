@@ -28,15 +28,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneysecurity.h>
-
 namespace Ui
 {
 class KCurrencyEditorDlg;
 }
 
-class QTreeWidgetItem;
-
+class MyMoneySecurity;
 class KCurrencyEditorDlg : public QDialog
 {
   Q_OBJECT

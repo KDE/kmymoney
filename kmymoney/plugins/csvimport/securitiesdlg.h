@@ -20,14 +20,14 @@ email                 : lukasz.wojnilowicz@gmail.com
 #ifndef SECURITIESDLG_H
 #define SECURITIESDLG_H
 
-#include <QPushButton>
-#include "ui_securitiesdlg.h"
+#include  <QDialog>
 
 namespace Ui
 {
 class SecuritiesDlg;
 }
 
+class QTableWidgetItem;
 class SecuritiesDlg : public QDialog
 {
   Q_OBJECT

@@ -22,9 +22,6 @@
 #include <config-kmymoney-version.h>
 
 // Qt includes
-#include <QComboBox>
-#include <QLayout>
-#include <QGroupBox>
 #include <QFrame>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>

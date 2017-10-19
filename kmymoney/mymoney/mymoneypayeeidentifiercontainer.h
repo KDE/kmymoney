@@ -21,12 +21,9 @@
 
 #include "kmm_mymoney_export.h"
 
-#include <QString>
-#include <QStringList>
-#include <QMap>
+#include <QList>
 
 #include "payeeidentifier/payeeidentifier.h"
-#include "payeeidentifier/payeeidentifiertyped.h"
 
 /**
  *
@@ -36,6 +33,7 @@
  * I won't do that - sorry. So all payeeIdentifiers have to be created when a MyMoneyPayeeIdentifierContainer
  * is loaded. Optimal would be if they are only created if needed (which won't be often).
  */
+template <class T> class payeeIdentifierTyped;
 class KMM_MYMONEY_EXPORT MyMoneyPayeeIdentifierContainer
 {
 public:

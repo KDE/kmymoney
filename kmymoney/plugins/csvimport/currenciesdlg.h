@@ -18,8 +18,7 @@ email                 : lukasz.wojnilowicz@gmail.com
 #ifndef CURRENCIESDLG_H
 #define CURRENCIESDLG_H
 
-#include <QPushButton>
-#include "ui_currenciesdlg.h"
+#include <QDialog>
 
 namespace Ui
 {
