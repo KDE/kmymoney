@@ -56,7 +56,7 @@ public slots:
 
 protected:
   KInstitutionsView(KInstitutionsViewPrivate &dd, QWidget *parent);
-  virtual void showEvent(QShowEvent * event);
+  virtual void showEvent(QShowEvent * event) override;
 
 private:
   Q_DECLARE_PRIVATE(KInstitutionsView)

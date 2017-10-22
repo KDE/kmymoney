@@ -46,8 +46,8 @@ class BudgetViewProxyModel : public AccountsViewProxyModel
 public:
   BudgetViewProxyModel(QObject *parent = 0);
 
-  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-  Qt::ItemFlags flags(const QModelIndex &index) const;
+  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+  Qt::ItemFlags flags(const QModelIndex &index) const override;
 
   void setBudget(const MyMoneyBudget& budget);
 

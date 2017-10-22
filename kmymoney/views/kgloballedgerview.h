@@ -189,7 +189,7 @@ public:
   bool selectEmptyTransaction();
 
 public slots:
-  void showEvent(QShowEvent* event);
+  void showEvent(QShowEvent* event) override;
 
   /**
     * This method loads the view with data from the MyMoney engine.
@@ -254,7 +254,7 @@ protected:
 
   void loadView();
 
-  void resizeEvent(QResizeEvent*);
+  void resizeEvent(QResizeEvent*) override;
 
   void selectTransaction(const QString& id);
 
@@ -267,9 +267,9 @@ protected:
     * @param next true if forward-tab, false if backward-tab was
     *             pressed by the user
     */
-  bool focusNextPrevChild(bool next);
+  bool focusNextPrevChild(bool next) override;
 
-  bool eventFilter(QObject* o, QEvent* e);
+  bool eventFilter(QObject* o, QEvent* e) override;
 
   /**
     * Returns @a true if setReconciliationAccount() has been called for
