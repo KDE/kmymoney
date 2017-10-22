@@ -38,7 +38,8 @@ class CsvImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::
 {
   Q_OBJECT
   Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.csvimport" FILE "csvimport.json")
-  
+  Q_INTERFACES(KMyMoneyPlugin::ImporterPlugin)
+
 public:
   explicit CsvImporterPlugin();
   ~CsvImporterPlugin();
