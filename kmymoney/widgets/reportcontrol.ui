@@ -10,9 +10,6 @@
     <height>36</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>ReportControl</string>
-  </property>
   <layout class="QHBoxLayout">
    <property name="spacing">
     <number>1</number>
