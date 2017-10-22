@@ -8,6 +8,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -51,6 +52,7 @@
   * interface. As indication, if data has been changed, the retrun value
   * of the method dirty() can be used.
   */
+
 class MyMoneySeqAccessMgr : public IMyMoneyStorage, public IMyMoneySerialize,
     public MyMoneyKeyValueContainer
 {
@@ -1080,13 +1082,13 @@ public:
     * by another engine object.
     *
     * @param obj const reference to object to be checked
-    * @param skipCheck QBitArray with ReferenceCheckBits set for which
+    * @param skipCheck QBitArray with eStorage::Reference bits set for which
     *                  the check should be skipped
     *
     * @retval false @p object is not referenced
     * @retval true @p institution is referenced
     */
-  bool isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck = MyMoneyFileBitArray()) const;
+  bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const override;
 
   /**
     * This method recalculates the balances of all accounts

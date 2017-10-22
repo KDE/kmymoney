@@ -26,6 +26,7 @@
 #include <QList>
 #include <QUuid>
 #include <QLocale>
+#include <QBitArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,6 +44,7 @@
 #include "mymoneyobjectcontainer.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
+#include "storageenums.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
@@ -3437,10 +3439,15 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
   return rc;
 }
 
-bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipChecks) const
+bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const QBitArray& skipChecks) const
 {
   d->checkStorage();
   return d->m_storage->isReferenced(obj, skipChecks);
+}
+
+bool MyMoneyFile::isReferenced(const MyMoneyObject& obj) const
+{
+  return isReferenced(obj, QBitArray((int)eStorage::Reference::Count));
 }
 
 bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const

@@ -25,6 +25,7 @@
 
 #include <QIcon>
 #include <QTimer>
+#include <QBitArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -48,6 +49,7 @@
 #include "equitiesmodel.h"
 #include "securitiesmodel.h"
 #include "icons.h"
+#include "storageenums.h"
 
 using namespace Icons;
 
@@ -242,9 +244,9 @@ void KInvestmentView::slotSecuritySelected(const QModelIndex &current, const QMo
   Q_UNUSED(previous);
   const auto sec = currentSecurity();
   if (!sec.id().isEmpty()) {
-    MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+    QBitArray skip((int)eStorage::Reference::Count);
     skip.fill(false);
-    skip.setBit(IMyMoneyStorage::RefCheckPrice);
+    skip.setBit((int)eStorage::Reference::Price);
     m_editSecurityButton->setEnabled(true);
     m_deleteSecurityButton->setEnabled(!MyMoneyFile::instance()->isReferenced(sec, skip));
   } else {

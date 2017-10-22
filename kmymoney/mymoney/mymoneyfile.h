@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <imymoneystorage.h>
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
@@ -132,6 +131,9 @@
   * while the engine code is running. The MyMoneyException:: object
   * describes the problem.
   */
+class IMyMoneyStorage;
+class MyMoneyCostCenter;
+class QBitArray;
 class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
@@ -1462,13 +1464,14 @@ public:
     * by another engine object.
     *
     * @param obj const reference to object to be checked
-    * @param skipCheck MyMoneyFileBitArray with ReferenceCheckBits set for which
+    * @param skipCheck QBitArray with eStorage::Reference bits set for which
     *                  the check should be skipped
     *
     * @retval false @p object is not referenced
     * @retval true @p institution is referenced
     */
-  bool isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck = MyMoneyFileBitArray()) const;
+  bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const;
+  bool isReferenced(const MyMoneyObject& obj) const;
 
   /**
     * Returns true if any of the accounts referenced by the splits

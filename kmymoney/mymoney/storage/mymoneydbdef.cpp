@@ -29,6 +29,7 @@
 // Project Includes
 #include "mymoneydbdriver.h"
 #include "mymoneyfile.h"
+#include "imymoneystorage.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
 unsigned int MyMoneyDbDef::m_currentVersion = 11;

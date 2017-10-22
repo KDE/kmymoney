@@ -27,7 +27,6 @@
 // QT Includes
 
 #include <QString>
-#include <QBitArray>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -46,29 +45,8 @@
 #include <onlinejob.h>
 #include <mymoneycostcenter.h>
 
-/**
-  * @author Thomas Baumgart
-  *
-  * A simple replacement for QBitArray that does not bark if testBit()
-  * is called with an index out of bounds. It silently returns false
-  * in that case, otherwise calls the base classes implementation.
-  */
 class MyMoneySplit;
 class MyMoneyTransactionFilter;
-class MyMoneyFileBitArray : public QBitArray
-{
-public:
-  MyMoneyFileBitArray() : QBitArray() {}
-  MyMoneyFileBitArray(int size) : QBitArray(size) {}
-  bool testBit(int index) const;
-  bool operator[](int index) const {
-    return testBit(index);
-  }
-  bool at(int index) const {
-    return testBit(index);
-  }
-};
-
 
 /**
   * @author Thomas Baumgart
@@ -83,22 +61,6 @@ public:
 class IMyMoneyStorage
 {
 public:
-
-  typedef enum {
-    RefCheckAccount = 0,
-    RefCheckInstitution,
-    RefCheckPayee,
-    RefCheckTransaction,
-    RefCheckReport,
-    RefCheckBudget,
-    RefCheckSchedule,
-    RefCheckSecurity,
-    RefCheckCurrency,
-    RefCheckPrice,
-    RefCheckTag,
-    // insert new entries above this line
-    MaxRefCheckBits
-  } ReferenceCheckBits;
 
   // definitions for the ID's of the standard accounts
 #define STD_ACC_LIABILITY "AStd::Liability"
@@ -965,13 +927,13 @@ public:
     * by another engine object.
     *
     * @param obj const reference to object to be checked
-    * @param skipCheck MyMoneyFileBitArray with ReferenceCheckBits set for which
+    * @param skipCheck QBitArray with eStorage::Reference bits set for which
     *                  the check should be skipped
     *
     * @retval false @p object is not referenced
     * @retval true @p institution is referenced
     */
-  virtual bool isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck = MyMoneyFileBitArray()) const = 0;
+  virtual bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const = 0;
 
   /**
     * This method is provided to allow closing of the database before logoff

@@ -37,6 +37,7 @@
 #include <QStyledItemDelegate>
 #include <QIcon>
 #include <QPushButton>
+#include <QBitArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -56,6 +57,7 @@
 #include "kcurrencyeditordlg.h"
 #include "kmymoneyutils.h"
 #include "icons/icons.h"
+#include "storageenums.h"
 
 using namespace Icons;
 
@@ -254,9 +256,9 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
       m_currency = MyMoneySecurity();
     }
 
-    MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+    QBitArray skip((int)eStorage::Reference::Count);
     skip.fill(false);
-    skip.setBit(IMyMoneyStorage::RefCheckPrice);
+    skip.setBit((int)eStorage::Reference::Price);
 
     const bool rc1 = m_currency.id() == baseId;
     const bool rc2 = file->isReferenced(m_currency, skip);
@@ -330,9 +332,9 @@ void KCurrencyEditDlg::removeCurrency(const removalModeE& mode)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyFileTransaction ft;
-  MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+  QBitArray skip((int)eStorage::Reference::Count);
   skip.fill(false);                                 // check reference to all...
-  skip.setBit(IMyMoneyStorage::RefCheckPrice);      // ...except price
+  skip.setBit((int)eStorage::Reference::Price);      // ...except price
 
   QTreeWidgetItemIterator it (ui->m_currencyList);  // iterate over whole tree
   if (mode == RemoveUnused) {

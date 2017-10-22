@@ -185,6 +185,8 @@ public:
     return QMap<Key, T>::constEnd();
   }
 
+  typedef typename QMap<Key, T>::const_iterator const_iterator;
+
   inline bool contains(const Key& k) const {
     return find(k) != end();
   }

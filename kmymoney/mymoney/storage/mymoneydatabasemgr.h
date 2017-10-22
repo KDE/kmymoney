@@ -4,6 +4,7 @@
     begin                : June 5 2007
     copyright            : (C) 2007 by Fernando Vilas
     email                : Fernando Vilas <fvilas@iname.com>
+                           2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -901,13 +902,13 @@ public:
     * by another engine object.
     *
     * @param obj const reference to object to be checked
-    * @param skipCheck MyMoneyFileBitArray with ReferenceCheckBits set for which
+    * @param skipCheck QBitArray with eStorage::Reference bits set for which
     *                  the check should be skipped
     *
     * @retval false @p object is not referenced
     * @retval true @p institution is referenced
     */
-  virtual bool isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck = MyMoneyFileBitArray()) const;
+  virtual bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const override;
 
   /**
     * This method is provided to allow closing of the database before logoff

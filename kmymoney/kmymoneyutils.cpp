@@ -34,6 +34,7 @@
 #include <QPixmapCache>
 #include <QIcon>
 #include <QPainter>
+#include <QBitArray>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -51,6 +52,7 @@
 #include "mymoneyforecast.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
+#include "storageenums.h"
 
 using namespace Icons;
 
@@ -688,9 +690,9 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
     MyMoneyFileTransaction ft;
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+    QBitArray skip((int)eStorage::Reference::Count);
     skip.fill(true);
-    skip.clearBit(IMyMoneyStorage::RefCheckPrice);
+    skip.clearBit((int)eStorage::Reference::Price);
     if (file->isReferenced(security, skip)) {
       if (KMessageBox::questionYesNo(parent, msg2, i18n("Delete prices"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk2) == KMessageBox::Yes) {
         try {

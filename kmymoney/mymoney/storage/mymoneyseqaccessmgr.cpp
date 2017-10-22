@@ -4,6 +4,7 @@
     begin                : Sun May 5 2002
     copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
                                2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
+                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -22,6 +23,7 @@
 // QT Includes
 
 #include <QList>
+#include <QBitArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,10 +36,13 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragesql.h"
+#include "storageenums.h"
 
 #define TRY try {
 #define CATCH } catch (const MyMoneyException &e) {
 #define PASS } catch (const MyMoneyException &e) { throw; }
+
+using namespace eStorage;
 
 MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 {
@@ -1935,87 +1940,78 @@ void MyMoneySeqAccessMgr::rebuildAccountBalances()
   m_accountList = map;
 }
 
-bool MyMoneySeqAccessMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck) const
+bool MyMoneySeqAccessMgr::isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const
 {
+  Q_ASSERT(skipCheck.count() == (int)Reference::Count);
+
   // We delete all references in reports when an object
   // is deleted, so we don't need to check here. See
   // MyMoneySeqAccessMgr::removeReferences(). In case
   // you miss the report checks in the following lines ;)
 
-  bool rc = false;
-  const QString& id = obj.id();
-  QMap<QString, MyMoneyTransaction>::const_iterator it_t;
-  QMap<QString, MyMoneyAccount>::const_iterator it_a;
-  QMap<QString, MyMoneyInstitution>::const_iterator it_i;
-  QMap<QString, MyMoneyPayee>::const_iterator it_p;
-  QMap<QString, MyMoneyTag>::const_iterator it_ta;
-  QMap<QString, MyMoneyBudget>::const_iterator it_b;
-  QMap<QString, MyMoneySchedule>::const_iterator it_sch;
-  QMap<QString, MyMoneySecurity>::const_iterator it_sec;
-  MyMoneyPriceList::const_iterator it_pr;
+  const auto& id = obj.id();
 
   // FIXME optimize the list of objects we have to checks
   //       with a bit of knowledge of the internal structure, we
   //       could optimize the number of objects we check for references
 
   // Scan all engine objects for a reference
-  if (!skipCheck[RefCheckTransaction]) {
-    for (it_t = m_transactionList.begin(); !rc && it_t != m_transactionList.end(); ++it_t) {
-      rc = (*it_t).hasReferenceTo(id);
-    }
-  }
+  if (!skipCheck.testBit((int)Reference::Transaction))
+    foreach (const auto it, m_transactionList)
+      if (it.hasReferenceTo(id))
+        return true;
 
-  if (!skipCheck[RefCheckAccount]) {
-    for (it_a = m_accountList.begin(); !rc && it_a != m_accountList.end(); ++it_a) {
-      rc = (*it_a).hasReferenceTo(id);
-    }
-  }
-  if (!skipCheck[RefCheckInstitution]) {
-    for (it_i = m_institutionList.begin(); !rc && it_i != m_institutionList.end(); ++it_i) {
-      rc = (*it_i).hasReferenceTo(id);
-    }
-  }
-  if (!skipCheck[RefCheckPayee]) {
-    for (it_p = m_payeeList.begin(); !rc && it_p != m_payeeList.end(); ++it_p) {
-      rc = (*it_p).hasReferenceTo(id);
-    }
-  }
-  if (!skipCheck[RefCheckTag]) {
-    for (it_ta = m_tagList.begin(); !rc && it_ta != m_tagList.end(); ++it_ta) {
-      rc = (*it_ta).hasReferenceTo(id);
-    }
-  }
+  if (!skipCheck.testBit((int)Reference::Account))
+    foreach (const auto it, m_accountList)
+      if (it.hasReferenceTo(id))
+        return true;
 
-  if (!skipCheck[RefCheckBudget]) {
-    for (it_b = m_budgetList.begin(); !rc && it_b != m_budgetList.end(); ++it_b) {
-      rc = (*it_b).hasReferenceTo(id);
-    }
-  }
-  if (!skipCheck[RefCheckSchedule]) {
-    for (it_sch = m_scheduleList.begin(); !rc && it_sch != m_scheduleList.end(); ++it_sch) {
-      rc = (*it_sch).hasReferenceTo(id);
-    }
-  }
-  if (!skipCheck[RefCheckSecurity]) {
-    for (it_sec = m_securitiesList.begin(); !rc && it_sec != m_securitiesList.end(); ++it_sec) {
-      rc = (*it_sec).hasReferenceTo(id);
-    }
-  }
-  if (!skipCheck[RefCheckCurrency]) {
-    for (it_sec = m_currencyList.begin(); !rc && it_sec != m_currencyList.end(); ++it_sec) {
-      rc = (*it_sec).hasReferenceTo(id);
-    }
-  }
+  if (!skipCheck.testBit((int)Reference::Institution))
+    foreach (const auto it, m_institutionList)
+      if (it.hasReferenceTo(id))
+        return true;
+
+  if (!skipCheck.testBit((int)Reference::Payee))
+    foreach (const auto it, m_payeeList)
+      if (it.hasReferenceTo(id))
+        return true;
+
+  if (!skipCheck.testBit((int)Reference::Tag))
+    foreach (const auto it, m_tagList)
+      if (it.hasReferenceTo(id))
+        return true;
+
+  if (!skipCheck.testBit((int)Reference::Budget))
+    foreach (const auto it, m_budgetList)
+      if (it.hasReferenceTo(id))
+        return true;
+
+  if (!skipCheck.testBit((int)Reference::Schedule))
+    foreach (const auto it, m_scheduleList)
+      if (it.hasReferenceTo(id))
+        return true;
+
+  if (!skipCheck.testBit((int)Reference::Security))
+    foreach (const auto it, m_securitiesList)
+      if (it.hasReferenceTo(id))
+        return true;
+
+  if (!skipCheck.testBit((int)Reference::Currency))
+    foreach (const auto it, m_currencyList)
+      if (it.hasReferenceTo(id))
+        return true;
+
   // within the pricelist we don't have to scan each entry. Checking the QPair
   // members of the MyMoneySecurityPair is enough as they are identical to the
   // two security ids
-  if (!skipCheck[RefCheckPrice]) {
-    for (it_pr = m_priceList.begin(); !rc && it_pr != m_priceList.end(); ++it_pr) {
-      rc = (it_pr.key().first == id) || (it_pr.key().second == id);
+  if (!skipCheck.testBit((int)Reference::Price)) {
+    for (auto it_pr = m_priceList.begin(); it_pr != m_priceList.end(); ++it_pr) {
+      if ((it_pr.key().first == id) || (it_pr.key().second == id))
+        return true;
     }
   }
 
-  return rc;
+  return false;
 }
 
 void MyMoneySeqAccessMgr::startTransaction()

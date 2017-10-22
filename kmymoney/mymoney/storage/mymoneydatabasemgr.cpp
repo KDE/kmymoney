@@ -4,6 +4,7 @@
     begin                : June 5 2007
     copyright            : (C) 2007 by Fernando Vilas
     email                : Fernando Vilas <fvilas@iname.com>
+                           2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,6 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QBitArray>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -34,6 +37,9 @@
 #include "../mymoneycategory.h"
 #include "mymoneyfile.h"
 #include "mymoneymap.h"
+#include "storageenums.h"
+
+using namespace eStorage;
 
 MyMoneyDatabaseMgr::MyMoneyDatabaseMgr() :
     m_creationDate(QDate::currentDate()),
@@ -1864,29 +1870,26 @@ private:
   QString m_id;
 };
 
-bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck) const
+bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const
 {
-  bool rc = false;
-  const QString& id = obj.id();
+  Q_ASSERT(skipCheck.count() == (int)Reference::Count);
 
-  MyMoneyPriceList::const_iterator it_pr;
-
-  MyMoneyPriceList::const_iterator priceEnd;
+  const auto& id = obj.id();
 
   // FIXME optimize the list of objects we have to checks
   //       with a bit of knowledge of the internal structure, we
   //       could optimize the number of objects we check for references
 
   // Scan all engine objects for a reference
-  if (!skipCheck[RefCheckTransaction]) {
-    bool skipTransactions = false;
+  if (!skipCheck.testBit((int)Reference::Transaction)) {
+    auto skipTransactions = false;
     MyMoneyTransactionFilter f;
     if (typeid(obj) == typeid(MyMoneyAccount)) {
-      f.addAccount(obj.id());
+      f.addAccount(id);
     } else if (typeid(obj) == typeid(MyMoneyCategory)) {
-      f.addCategory(obj.id());
+      f.addCategory(id);
     } else if (typeid(obj) == typeid(MyMoneyPayee)) {
-      f.addPayee(obj.id());
+      f.addPayee(id);
     } // if it's anything else, I guess we just read everything
     //FIXME: correction, transactions can only have a reference to an account or payee,
     //             so, read nothing.
@@ -1898,59 +1901,73 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
       //rc = (transactionList.end() != std::find_if(transactionList.begin(), transactionList.end(),  isReferencedHelper(id)));
       //if (rc != m_sql->isReferencedByTransaction(obj.id()))
       //  qDebug ("Transaction match inconsistency.");
-      rc = m_sql->isReferencedByTransaction(obj.id());
+      if (m_sql->isReferencedByTransaction(id))
+        return true;
     }
   }
 
-  if (!skipCheck[RefCheckAccount] && !rc) {
+  if (!skipCheck.testBit((int)Reference::Account)) {
     QList<MyMoneyAccount> accountList;
     MyMoneyFile::instance()->accountList(accountList);
-    rc = (accountList.end() != std::find_if(accountList.begin(), accountList.end(),  isReferencedHelper(id)));
+    foreach (const auto it, accountList)
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckInstitution] && !rc) {
+  if (!skipCheck.testBit((int)Reference::Institution)) {
     QList<MyMoneyInstitution> institutionList;
     MyMoneyFile::instance()->institutionList(institutionList);
-    rc = (institutionList.end() != std::find_if(institutionList.begin(), institutionList.end(),  isReferencedHelper(id)));
+    foreach (const auto it, institutionList)
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckPayee] && !rc) {
-    QList<MyMoneyPayee> payeeList = MyMoneyFile::instance()->payeeList();
-    rc = (payeeList.end() != std::find_if(payeeList.begin(), payeeList.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Payee)) {
+    foreach (const auto it, MyMoneyFile::instance()->payeeList())
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckTag] && !rc) {
-    QList<MyMoneyTag> tagList = MyMoneyFile::instance()->tagList();
-    rc = (tagList.end() != std::find_if(tagList.begin(), tagList.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Tag)) {
+    foreach (const auto it, MyMoneyFile::instance()->tagList())
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckReport] && !rc) {
-    QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports();
-    rc = (reportList.end() != std::find_if(reportList.begin(), reportList.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Report)) {
+    foreach (const auto it, m_sql->fetchReports())
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckBudget] && !rc) {
-    QMap<QString, MyMoneyBudget> budgets = m_sql->fetchBudgets();
-    rc = (budgets.end() != std::find_if(budgets.begin(), budgets.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Budget)) {
+    foreach (const auto it, m_sql->fetchBudgets())
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckSchedule] && !rc) {
-    QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules();
-    rc = (scheduleList.end() != std::find_if(scheduleList.begin(), scheduleList.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Schedule)) {
+    foreach (const auto it, m_sql->fetchSchedules())
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckSecurity] && !rc) {
-    QList<MyMoneySecurity> securitiesList = MyMoneyFile::instance()->securityList();
-    rc = (securitiesList.end() != std::find_if(securitiesList.begin(), securitiesList.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Security)) {
+    foreach (const auto it, MyMoneyFile::instance()->securityList())
+      if (it.hasReferenceTo(id))
+        return true;
   }
-  if (!skipCheck[RefCheckCurrency] && !rc) {
-    QList<MyMoneySecurity> currencyList = m_sql->fetchCurrencies().values();
-    rc = (currencyList.end() != std::find_if(currencyList.begin(), currencyList.end(),  isReferencedHelper(id)));
+  if (!skipCheck.testBit((int)Reference::Currency)) {
+    const auto currencyList = m_sql->fetchCurrencies().values();
+    // above line cannot go directly here because m_sql->fetchCurrencies() will return temporary object which will get destructed before .values()
+    foreach (const auto it, currencyList)
+      if (it.hasReferenceTo(id))
+        return true;
   }
   // within the pricelist we don't have to scan each entry. Checking the QPair
   // members of the MyMoneySecurityPair is enough as they are identical to the
   // two security ids
-  if (!skipCheck[RefCheckPrice] && !rc) {
-    MyMoneyPriceList priceList = m_sql->fetchPrices();
-    priceEnd = priceList.constEnd();
-    for (it_pr = priceList.constBegin(); !rc && it_pr != priceEnd; ++it_pr) {
-      rc = (it_pr.key().first == id) || (it_pr.key().second == id);
+  if (!skipCheck.testBit((int)Reference::Price)) {
+    const auto priceList = m_sql->fetchPrices();
+    for (auto it_pr = priceList.begin(); it_pr != priceList.end(); ++it_pr) {
+      if ((it_pr.key().first == id) || (it_pr.key().second == id))
+        return true;
     }
   }
-  return rc;
+  return false;
 }
 
 void MyMoneyDatabaseMgr::close()

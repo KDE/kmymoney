@@ -46,7 +46,6 @@
 #include <QDateTime>         // only for performance tests
 #include <QTimer>
 #include <QByteArray>
-#include <QBitArray>
 #include <QBoxLayout>
 #include <QLabel>
 #include <QMenu>
@@ -130,6 +129,7 @@
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
 #include "mymoney/storage/mymoneystoragedump.h"
+#include "mymoney/storage/imymoneystorage.h"
 #include "mymoney/mymoneyforecast.h"
 
 #include "mymoney/onlinejobmessage.h"
@@ -164,6 +164,7 @@
 #include "kcreditswindow.h"
 
 #include "ledgerdelegate.h"
+#include "storageenums.h"
 
 using namespace Icons;
 
@@ -2976,15 +2977,15 @@ void KMyMoneyApp::slotAccountDelete()
     return;
 
   // check if the account is referenced by a transaction or schedule
-  MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+  QBitArray skip((int)eStorage::Reference::Count);
   skip.fill(false);
-  skip.setBit(IMyMoneyStorage::RefCheckAccount);
-  skip.setBit(IMyMoneyStorage::RefCheckInstitution);
-  skip.setBit(IMyMoneyStorage::RefCheckPayee);
-  skip.setBit(IMyMoneyStorage::RefCheckTag);
-  skip.setBit(IMyMoneyStorage::RefCheckSecurity);
-  skip.setBit(IMyMoneyStorage::RefCheckCurrency);
-  skip.setBit(IMyMoneyStorage::RefCheckPrice);
+  skip.setBit((int)eStorage::Reference::Account);
+  skip.setBit((int)eStorage::Reference::Institution);
+  skip.setBit((int)eStorage::Reference::Payee);
+  skip.setBit((int)eStorage::Reference::Tag);
+  skip.setBit((int)eStorage::Reference::Security);
+  skip.setBit((int)eStorage::Reference::Currency);
+  skip.setBit((int)eStorage::Reference::Price);
   bool hasReference = file->isReferenced(d->m_selectedAccount, skip);
 
   // make sure we only allow transactions in a 'category' (income/expense account)
@@ -6226,7 +6227,7 @@ void KMyMoneyApp::slotUpdateActions()
       }
     }
   }
-  MyMoneyFileBitArray skip(IMyMoneyStorage::MaxRefCheckBits);
+  QBitArray skip((int)eStorage::Reference::Count);
   if (!d->m_selectedAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_selectedAccount.id())) {
       switch (d->m_selectedAccount.accountGroup()) {
@@ -6287,10 +6288,10 @@ void KMyMoneyApp::slotUpdateActions()
           // deleting of sub-categories. Also, we allow transactions, schedules and budgets
           // to be present because we can re-assign them during the delete process
           skip.fill(false);
-          skip.setBit(IMyMoneyStorage::RefCheckTransaction);
-          skip.setBit(IMyMoneyStorage::RefCheckAccount);
-          skip.setBit(IMyMoneyStorage::RefCheckSchedule);
-          skip.setBit(IMyMoneyStorage::RefCheckBudget);
+          skip.setBit((int)eStorage::Reference::Transaction);
+          skip.setBit((int)eStorage::Reference::Account);
+          skip.setBit((int)eStorage::Reference::Schedule);
+          skip.setBit((int)eStorage::Reference::Budget);
           aC->action(s_Actions[Action::CategoryDelete])->setEnabled(!file->isReferenced(d->m_selectedAccount, skip));
           aC->action(s_Actions[Action::AccountOpen])->setEnabled(true);
           break;
@@ -6362,7 +6363,7 @@ void KMyMoneyApp::slotUpdateActions()
     aC->action(s_Actions[Action::CurrencyRename])->setEnabled(true);
     // no need to check each transaction. accounts are enough in this case
     skip.fill(false);
-    skip.setBit(IMyMoneyStorage::RefCheckTransaction);
+    skip.setBit((int)eStorage::Reference::Transaction);
     aC->action(s_Actions[Action::CurrencyDelete])->setEnabled(!file->isReferenced(d->m_selectedCurrency, skip));
     if (d->m_selectedCurrency.id() != file->baseCurrency().id())
       aC->action(s_Actions[Action::CurrencySetBase])->setEnabled(true);
