@@ -98,7 +98,7 @@
 
 using namespace Icons;
 
-static constexpr KCompressionDevice::CompressionType COMPRESSION_TYPE = KCompressionDevice::GZip;
+static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 static constexpr char recoveryKeyId[] = "0xD2B08440";
 
 typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
