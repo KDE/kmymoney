@@ -30,6 +30,7 @@
 
 // KMyMoney includes
 #include "mymoneyfile.h"
+#include "mymoneyutils.h"
 
 // plugin includes
 #include "pluginsettings.h"

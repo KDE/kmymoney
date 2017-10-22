@@ -50,6 +50,10 @@
 #include "kmymoneyglobalsettings.h"
 #include "misc/webconnect.h"
 
+#ifdef KMM_DEBUG
+#include "mymoneyutils.h"
+#endif
+
 bool timersOn = false;
 
 KMyMoneyApp* kmymoney;

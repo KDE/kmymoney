@@ -21,6 +21,7 @@
 #endif
 
 // #include <cmath>
+#include <stddef.h>
 
 //FIXME workaround for dealing with lond double
 #include <gmpxx.h>
