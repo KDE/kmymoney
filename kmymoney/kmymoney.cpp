@@ -6660,12 +6660,31 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
 
 void KMyMoneyApp::Private::setThemedCSS()
 {
+  const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
+
   const QString rcDir("/html/");
-  const QString defaultCSSDir = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).last() + rcDir;
+  const QStringList defaultCSSDirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, rcDir, QStandardPaths::LocateDirectory);
+
+  // scan the list of directories to find the ones that really
+  // contains all files we look for
+  QString defaultCSSDir;
+  foreach (const auto dir, defaultCSSDirs) {
+    defaultCSSDir = dir;
+    foreach (const auto CSSname, CSSnames) {
+      QFileInfo fileInfo(defaultCSSDir + CSSname);
+      if (!fileInfo.exists()) {
+        defaultCSSDir.clear();
+        break;
+      }
+    }
+    if (!defaultCSSDir.isEmpty()) {
+      break;
+    }
+  }
+
+  // make sure we have the local directory where the themed version is stored
   const QString themedCSSDir  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + rcDir;
   QDir().mkpath(themedCSSDir);
-
-  const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
 
   foreach (const auto CSSname, CSSnames) {
     const QString defaultCSSFilename = defaultCSSDir + CSSname;
