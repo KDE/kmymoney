@@ -133,7 +133,7 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
 
   if (field("investmentName").toString().isEmpty()) {
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-    MyMoneySecurity::eSECURITYTYPE type = KMyMoneyUtils::stringToSecurity(field("securityType").toString());
+    auto type = static_cast<eMyMoney::Security>(field("securityType").toInt());
 
     foreach (const MyMoneySecurity& it_s, list) {
       if (it_s.securityType() == type
@@ -159,11 +159,8 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-  QList<MyMoneySecurity>::ConstIterator it;
-
-  MyMoneySecurity::eSECURITYTYPE type = KMyMoneyUtils::stringToSecurity(field("securityType").toString());
-  AlkValue::RoundingMethod roudingMethod = static_cast<AlkValue::RoundingMethod>(field("roundingMethod").toInt());
+  auto type = static_cast<eMyMoney::Security>(field("securityType").toInt());
+  auto roundingMethod = static_cast<AlkValue::RoundingMethod>(field("roundingMethod").toInt());
   MyMoneyFileTransaction ft;
   try {
     // update all relevant attributes only, if we create a stock
@@ -176,7 +173,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     newSecurity.setPricePrecision(MyMoneyMoney(field("pricePrecision").toUInt()).formatMoney("", 0, false).toUInt());
     newSecurity.setTradingCurrency(field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
     newSecurity.setSecurityType(type);
-    newSecurity.setRoundingMethod(roudingMethod);
+    newSecurity.setRoundingMethod(roundingMethod);
     newSecurity.deletePair("kmm-online-source");
     newSecurity.deletePair("kmm-online-quote-system");
     newSecurity.deletePair("kmm-online-factor");

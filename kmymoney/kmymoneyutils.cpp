@@ -110,58 +110,6 @@ MyMoneyAccount::accountTypeE KMyMoneyUtils::stringToAccountType(const QString& t
   return rc;
 }
 
-MyMoneySecurity::eSECURITYTYPE KMyMoneyUtils::stringToSecurity(const QString& txt)
-{
-  MyMoneySecurity::eSECURITYTYPE rc = MyMoneySecurity::SECURITY_NONE;
-  QString tmp = txt.toLower();
-
-  if (tmp == i18n("Stock").toLower())
-    rc = MyMoneySecurity::SECURITY_STOCK;
-  else if (tmp == i18n("Mutual Fund").toLower())
-    rc = MyMoneySecurity::SECURITY_MUTUALFUND;
-  else if (tmp == i18n("Bond").toLower())
-    rc = MyMoneySecurity::SECURITY_BOND;
-  else if (tmp == i18n("Currency").toLower())
-    rc = MyMoneySecurity::SECURITY_CURRENCY;
-
-  return rc;
-}
-
-const QString KMyMoneyUtils::securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType)
-{
-  return i18n(MyMoneySecurity::securityTypeToString(securityType).toLatin1());
-}
-
-AlkValue::RoundingMethod KMyMoneyUtils::stringToRoundingMethod(const QString& txt)
-{
-  AlkValue::RoundingMethod rc = AlkValue::RoundNever;
-  QString tmp = txt.toLower();
-
-  if (tmp == i18n("Never").toLower())
-    rc = AlkValue::RoundNever;
-  else if (tmp == i18n("Floor").toLower())
-    rc = AlkValue::RoundFloor;
-  else if (tmp == i18n("Ceil").toLower())
-    rc = AlkValue::RoundCeil;
-  else if (tmp == i18n("Truncate").toLower())
-    rc = AlkValue::RoundTruncate;
-  else if (tmp == i18n("Promote").toLower())
-    rc = AlkValue::RoundPromote;
-  else if (tmp == i18n("HalfDown").toLower())
-    rc = AlkValue::RoundHalfDown;
-  else if (tmp == i18n("HalfUp").toLower())
-    rc = AlkValue::RoundHalfUp;
-  else if (tmp == i18n("Round").toLower())
-    rc = AlkValue::RoundRound;
-
-  return rc;
-}
-
-const QString KMyMoneyUtils::roundingMethodToString(const AlkValue::RoundingMethod roundingMethod)
-{
-  return i18n(MyMoneySecurity::roundingMethodToString(roundingMethod).toLatin1());
-}
-
 const QString KMyMoneyUtils::occurrenceToString(const MyMoneySchedule::occurrenceE occurrence)
 {
   return i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(occurrence).toLatin1());
@@ -681,8 +629,8 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
     dontAsk = "DeleteCurrency";
     dontAsk2 = "DeleteCurrencyRates";
   } else {
-    msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>", KMyMoneyUtils::securityTypeToString(security.securityType()), security.name());
-    msg2 = i18n("<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want to continue?</p>", KMyMoneyUtils::securityTypeToString(security.securityType()), security.name());
+    msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>", MyMoneySecurity::securityTypeToString(security.securityType()), security.name());
+    msg2 = i18n("<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want to continue?</p>", MyMoneySecurity::securityTypeToString(security.securityType()), security.name());
     dontAsk = "DeleteSecurity";
     dontAsk2 = "DeleteSecurityPrices";
   }

@@ -283,7 +283,7 @@ QString makeEquity(const QString& _name, const QString& _symbol)
   equity.setName(_name);
   equity.setTradingSymbol(_symbol);
   equity.setSmallestAccountFraction(1000);
-  equity.setSecurityType(MyMoneySecurity::SECURITY_NONE /*MyMoneyEquity::ETYPE_STOCK*/);
+  equity.setSecurityType(eMyMoney::Security::None/*MyMoneyEquity::ETYPE_STOCK*/);
   MyMoneyFile::instance()->addSecurity(equity);
   ft.commit();
 

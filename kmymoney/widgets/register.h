@@ -246,7 +246,7 @@ public:
   const QString& sortCategory() const {
     return m_txt;
   }
-  const QString& sortSecurity() const {
+  const QString sortSecurity() const {
     return m_txt;
   }
 

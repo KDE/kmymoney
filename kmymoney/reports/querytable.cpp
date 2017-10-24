@@ -1593,7 +1593,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   result[ctBuys] = buysTotal.toString();
   result[ctReturn] = annualReturn.toString();
   result[ctReturnInvestment] = returnInvestment.toString();
-  result[ctEquityType] = KMyMoneyUtils::securityTypeToString(file->security(account.currencyId()).securityType());
+  result[ctEquityType] = MyMoneySecurity::securityTypeToString(file->security(account.currencyId()).securityType());
 }
 
 void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow& result) const
@@ -1671,7 +1671,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
     break;
   }
 
-  result[ctEquityType] = KMyMoneyUtils::securityTypeToString(file->security(account.currencyId()).securityType());
+  result[ctEquityType] = MyMoneySecurity::securityTypeToString(file->security(account.currencyId()).securityType());
 }
 
 void QueryTable::constructAccountTable()

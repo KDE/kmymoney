@@ -64,6 +64,8 @@
 #include "mymoneyutils.h"
 #include "payeeidentifier/payeeidentifierdata.h"
 
+using namespace eMyMoney;
+
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)
     : QSqlQuery(*db)
@@ -4320,7 +4322,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
     eid = GETSTRING(idCol);
     e.setName(GETSTRING(nameCol));
     e.setTradingSymbol(GETSTRING(symbolCol));
-    e.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT(typeCol)));
+    e.setSecurityType(static_cast<Security>(GETINT(typeCol)));
     e.setRoundingMethod(static_cast<AlkValue::RoundingMethod>(GETINT(roundingMethodCol)));
     int saf = GETINT(smallestAccountFractionCol);
     int pp = GETINT(pricePrecisionCol);
@@ -4542,7 +4544,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QS
     QChar symbol[3];
     id = GETSTRING(ISOcodeCol);
     c.setName(GETSTRING(nameCol));
-    c.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT(typeCol)));
+    c.setSecurityType(static_cast<Security>(GETINT(typeCol)));
     symbol[0] = QChar(GETINT(symbol1Col));
     symbol[1] = QChar(GETINT(symbol2Col));
     symbol[2] = QChar(GETINT(symbol3Col));

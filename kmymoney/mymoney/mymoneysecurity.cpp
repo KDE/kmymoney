@@ -37,10 +37,11 @@
 #include "mymoneyexception.h"
 #include "mymoneystoragenames.h"
 
+using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;
 
 MyMoneySecurity::MyMoneySecurity() :
-    m_securityType(SECURITY_NONE),
+    m_securityType(eMyMoney::Security::None),
     m_smallestCashFraction(DEFAULT_CASH_FRACTION),
     m_smallestAccountFraction(DEFAULT_ACCOUNT_FRACTION),
     m_pricePrecision(DEFAULT_PRICE_PRECISION),
@@ -48,11 +49,15 @@ MyMoneySecurity::MyMoneySecurity() :
 {
 }
 
-MyMoneySecurity::MyMoneySecurity(const QString& id, const QString& name, const QString& symbol,
-                                 const int smallestCashFraction, const int smallestAccountFraction, const int pricePrecision) :
+MyMoneySecurity::MyMoneySecurity(const QString& id,
+                                 const QString& name,
+                                 const QString& symbol,
+                                 const int smallestCashFraction,
+                                 const int smallestAccountFraction,
+                                 const int pricePrecision) :
     MyMoneyObject(id),
     m_name(name),
-    m_securityType(SECURITY_CURRENCY),
+    m_securityType(eMyMoney::Security::Currency),
     m_smallestCashFraction(smallestCashFraction),
     m_smallestAccountFraction(smallestAccountFraction),
     m_pricePrecision(pricePrecision),
@@ -80,32 +85,33 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
     MyMoneyObject(node),
     MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
 {
-  if ((nodeNames[nnSecurity] != node.tagName())
-      && (nodeNames[nnEquity] != node.tagName())
-      && (nodeNames[nnCurrency] != node.tagName()))
-    throw MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
+  {
+    const auto tag = node.tagName();
+    if ((nodeNames[nnSecurity] != tag)
+        && (nodeNames[nnEquity] != tag)
+        && (nodeNames[nnCurrency] != tag))
+      throw MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
+  }
 
-  setName(node.attribute(getAttrName(anName)));
-  setTradingSymbol(node.attribute(getAttrName(anSymbol)));
-  setSecurityType(static_cast<eSECURITYTYPE>(node.attribute(getAttrName(anType)).toInt()));
-  setRoundingMethod(static_cast<AlkValue::RoundingMethod>(node.attribute(getAttrName(anRoundingMethod)).toInt()));
-  int saf = node.attribute(getAttrName(anSAF)).toUInt();
-  int pp = node.attribute(getAttrName(anPP)).toUInt();
-  if (saf == 0)
-    saf = 100;
-  if (pp == 0 || pp > 10)
-    pp = 4;
-  setSmallestAccountFraction(saf);
-  setPricePrecision(pp);
+  m_name = node.attribute(getAttrName(Attribute::Name));
+  m_tradingSymbol = node.attribute(getAttrName(Attribute::Symbol));
+  m_securityType = static_cast<eMyMoney::Security>(node.attribute(getAttrName(Attribute::Type)).toInt());
+  m_roundingMethod = static_cast<AlkValue::RoundingMethod>(node.attribute(getAttrName(Attribute::RoundingMethod)).toInt());
+  m_smallestAccountFraction = node.attribute(getAttrName(Attribute::SAF)).toUInt();
+  m_pricePrecision = node.attribute(getAttrName(Attribute::PP)).toUInt();
+
+  if (m_smallestAccountFraction == 0)
+    m_smallestAccountFraction = 100;
+  if (m_pricePrecision == 0 || m_pricePrecision > 10)
+    m_pricePrecision = 4;
 
   if (isCurrency()) {
-    int scf = node.attribute(getAttrName(anSCF)).toUInt();
-    if (scf == 0)
-      scf = 100;
-    setSmallestCashFraction(scf);
+    m_smallestCashFraction = node.attribute(getAttrName(Attribute::SCF)).toUInt();
+    if (m_smallestCashFraction == 0)
+      m_smallestCashFraction = 100;
   } else {
-    setTradingCurrency(node.attribute(getAttrName(anTradingCurrency)));
-    setTradingMarket(node.attribute(getAttrName(anTradingMarket)));
+    m_tradingCurrency = node.attribute(getAttrName(Attribute::TradingCurrency));
+    m_tradingMarket = node.attribute(getAttrName(Attribute::TradingMarket));
   }
 }
 
@@ -136,6 +142,45 @@ bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const
   return m_securityType < right.m_securityType;
 }
 
+const QString MyMoneySecurity::name() const
+{
+  return m_name;
+}
+
+void MyMoneySecurity::setName(const QString& str)
+{
+  m_name = str;
+}
+
+const QString MyMoneySecurity::tradingSymbol() const
+{
+  return m_tradingSymbol;
+}
+
+void MyMoneySecurity::setTradingSymbol(const QString& str)
+{
+  m_tradingSymbol = str;
+}
+
+const QString MyMoneySecurity::tradingMarket() const
+{
+  return m_tradingMarket;
+}
+
+void MyMoneySecurity::setTradingMarket(const QString& str)
+{
+  m_tradingMarket = str;
+}
+
+const QString MyMoneySecurity::tradingCurrency() const
+{
+  return m_tradingCurrency;
+}
+
+void MyMoneySecurity::setTradingCurrency(const QString& str)
+{
+  m_tradingCurrency = str;
+}
 
 bool MyMoneySecurity::hasReferenceTo(const QString& id) const
 {
@@ -152,17 +197,17 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
 
   writeBaseXML(document, el);
 
-  el.setAttribute(getAttrName(anName), m_name);
-  el.setAttribute(getAttrName(anSymbol), m_tradingSymbol);
-  el.setAttribute(getAttrName(anType), static_cast<int>(m_securityType));
-  el.setAttribute(getAttrName(anRoundingMethod), static_cast<int>(m_roundingMethod));
-  el.setAttribute(getAttrName(anSAF), m_smallestAccountFraction);
-  el.setAttribute(getAttrName(anPP), m_pricePrecision);
+  el.setAttribute(getAttrName(Attribute::Name), m_name);
+  el.setAttribute(getAttrName(Attribute::Symbol),m_tradingSymbol);
+  el.setAttribute(getAttrName(Attribute::Type), static_cast<int>(m_securityType));
+  el.setAttribute(getAttrName(Attribute::RoundingMethod), static_cast<int>(m_roundingMethod));
+  el.setAttribute(getAttrName(Attribute::SAF), m_smallestAccountFraction);
+  el.setAttribute(getAttrName(Attribute::PP), m_pricePrecision);
   if (isCurrency())
-    el.setAttribute(getAttrName(anSCF), m_smallestCashFraction);
+    el.setAttribute(getAttrName(Attribute::SCF), m_smallestCashFraction);
   else {
-    el.setAttribute(getAttrName(anTradingCurrency), m_tradingCurrency);
-    el.setAttribute(getAttrName(anTradingMarket), m_tradingMarket);
+    el.setAttribute(getAttrName(Attribute::TradingCurrency), m_tradingCurrency);
+    el.setAttribute(getAttrName(Attribute::TradingMarket), m_tradingMarket);
   }
 
   //Add in Key-Value Pairs for securities.
@@ -171,18 +216,18 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
   parent.appendChild(el);
 }
 
-QString MyMoneySecurity::securityTypeToString(const eSECURITYTYPE securityType)
+QString MyMoneySecurity::securityTypeToString(const eMyMoney::Security securityType)
 {
   switch (securityType) {
-    case MyMoneySecurity::SECURITY_STOCK:
+    case eMyMoney::Security::Stock:
       return i18nc("Security type", "Stock");
-    case MyMoneySecurity::SECURITY_MUTUALFUND:
+    case eMyMoney::Security::MutualFund:
       return i18nc("Security type", "Mutual Fund");
-    case MyMoneySecurity::SECURITY_BOND:
+    case eMyMoney::Security::Bond:
       return i18nc("Security type", "Bond");
-    case MyMoneySecurity::SECURITY_CURRENCY:
+    case eMyMoney::Security::Currency:
       return i18nc("Security type", "Currency");
-    case MyMoneySecurity::SECURITY_NONE:
+    case eMyMoney::Security::None:
       return i18nc("Security type", "None");
     default:
       return i18nc("Security type", "Unknown");
@@ -191,52 +236,40 @@ QString MyMoneySecurity::securityTypeToString(const eSECURITYTYPE securityType)
 
 QString MyMoneySecurity::roundingMethodToString(const AlkValue::RoundingMethod roundingMethod)
 {
-  QString returnString;
-
   switch (roundingMethod) {
     case AlkValue::RoundNever:
-      returnString = I18N_NOOP("Never");
-      break;
+      return I18N_NOOP("Never");
     case AlkValue::RoundFloor:
-      returnString = I18N_NOOP("Floor");
-      break;
+      return I18N_NOOP("Floor");
     case AlkValue::RoundCeil:
-      returnString = I18N_NOOP("Ceil");
-      break;
+      return I18N_NOOP("Ceil");
     case AlkValue::RoundTruncate:
-      returnString = I18N_NOOP("Truncate");
-      break;
+      return I18N_NOOP("Truncate");
     case AlkValue::RoundPromote:
-      returnString = I18N_NOOP("Promote");
-      break;
+      return I18N_NOOP("Promote");
     case AlkValue::RoundHalfDown:
-      returnString = I18N_NOOP("HalfDown");
-      break;
+      return I18N_NOOP("HalfDown");
     case AlkValue::RoundHalfUp:
-      returnString = I18N_NOOP("HalfUp");
-      break;
+      return I18N_NOOP("HalfUp");
     case AlkValue::RoundRound:
-      returnString = I18N_NOOP("Round");
-      break;
+      return I18N_NOOP("Round");
     default:
-      returnString = I18N_NOOP("Unknown");
+      return I18N_NOOP("Unknown");
   }
-
-  return returnString;
 }
 
-const QString MyMoneySecurity::getAttrName(const attrNameE _attr)
+QString MyMoneySecurity::getAttrName(const Attribute attr)
 {
-  static const QHash<attrNameE, QString> attrNames = {
-    {anName, QStringLiteral("name")},
-    {anSymbol, QStringLiteral("symbol")},
-    {anType, QStringLiteral("type")},
-    {anRoundingMethod, QStringLiteral("rounding-method")},
-    {anSAF, QStringLiteral("saf")},
-    {anPP, QStringLiteral("pp")},
-    {anSCF, QStringLiteral("scf")},
-    {anTradingCurrency, QStringLiteral("trading-currency")},
-    {anTradingMarket, QStringLiteral("trading-market")}
+  static const QHash<Attribute, QString> attrNames = {
+    {Attribute::Name,             QStringLiteral("name")},
+    {Attribute::Symbol,           QStringLiteral("symbol")},
+    {Attribute::Type,             QStringLiteral("type")},
+    {Attribute::RoundingMethod,   QStringLiteral("rounding-method")},
+    {Attribute::SAF,              QStringLiteral("saf")},
+    {Attribute::PP,               QStringLiteral("pp")},
+    {Attribute::SCF,              QStringLiteral("scf")},
+    {Attribute::TradingCurrency,  QStringLiteral("trading-currency")},
+    {Attribute::TradingMarket,    QStringLiteral("trading-market")}
   };
-  return attrNames[_attr];
+  return attrNames[attr];
 }

@@ -147,8 +147,8 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
   else
     m_dateEdit->setDate(QDate::currentDate());
 
-  m_fromCurrencyText->setText(QString(KMyMoneyUtils::securityTypeToString(m_fromCurrency.securityType()) + ' ' + (m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol())));
-  m_toCurrencyText->setText(QString(KMyMoneyUtils::securityTypeToString(m_toCurrency.securityType()) + ' ' + (m_toCurrency.isCurrency() ? m_toCurrency.id() : m_toCurrency.tradingSymbol())));
+  m_fromCurrencyText->setText(QString(MyMoneySecurity::securityTypeToString(m_fromCurrency.securityType()) + ' ' + (m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol())));
+  m_toCurrencyText->setText(QString(MyMoneySecurity::securityTypeToString(m_toCurrency.securityType()) + ' ' + (m_toCurrency.isCurrency() ? m_toCurrency.id() : m_toCurrency.tradingSymbol())));
 
   //set bold font
   QFont boldFont = m_fromCurrencyText->font();

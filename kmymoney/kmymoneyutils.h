@@ -157,28 +157,6 @@ public:
   static MyMoneyAccount::accountTypeE stringToAccountType(const QString& type);
 
   /**
-    * This method is used to convert a security type from its
-    * string form to the internal used numeric value.
-    *
-    * @param txt reference to a QString containing the string to convert
-    * @return eSECURITYTYPE containing the internal used numeric value. For possible
-    *         values see MyMoneySecurity::eSECURITYTYPE
-    */
-  static MyMoneySecurity::eSECURITYTYPE stringToSecurity(const QString& txt);
-
-  /**
-    * This method is used to convert the internal representation of
-    * an security type into a human readable format
-    *
-    * @param securityType enumerated representation of the security type.
-    *                     For possible values, see MyMoneySecurity::eSECURITYTYPE
-    * @return QString representing the human readable form translated according to the language cataglogue
-    *
-    * @sa MyMoneySecurity::securityTypeToString()
-    */
-  static const QString securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType);
-
-  /**
     * This method is used to convert a rounding method from its
     * string form to the internal used numeric value.
     *

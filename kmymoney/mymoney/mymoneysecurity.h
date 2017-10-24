@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,6 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+// krazy:excludeall=dpointer
 
 #ifndef MYMONEYSECURITY_H
 #define MYMONEYSECURITY_H
@@ -40,6 +42,7 @@
 #include <alkimia/alkvalue.h>
 #include "mymoneyobject.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneyenums.h"
 
 /**
   * Class that holds all the required information about a security that the user
@@ -48,21 +51,26 @@
   *
   * @author Kevin Tambascio
   * @author Thomas Baumgart
+  * @author Łukasz Wojniłowicz
   */
+
+class QString;
 class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_GADGET
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
   MyMoneySecurity();
-  MyMoneySecurity(const QString& id, const MyMoneySecurity& equity);
-  MyMoneySecurity(const QString& id, const QString& name, const QString& symbol = QString(),
-                  const int smallestCashFraction = DEFAULT_CASH_FRACTION,
-                  const int smallestAccountFraction = DEFAULT_ACCOUNT_FRACTION,
-                  const int pricePrecision = DEFAULT_PRICE_PRECISION);
-  MyMoneySecurity(const QDomElement& node);
-  virtual ~MyMoneySecurity();
+  explicit MyMoneySecurity(const QString& id,
+                           const MyMoneySecurity& equity);
+  explicit MyMoneySecurity(const QString& id,
+                           const QString& name,
+                           const QString& symbol = QString(),
+                           const int smallestCashFraction = DEFAULT_CASH_FRACTION,
+                           const int smallestAccountFraction = DEFAULT_ACCOUNT_FRACTION,
+                           const int pricePrecision = DEFAULT_PRICE_PRECISION);
+  explicit MyMoneySecurity(const QDomElement& node);
+  ~MyMoneySecurity();
 
   bool operator < (const MyMoneySecurity&) const;
 
@@ -77,100 +85,36 @@ public:
     *
     * @param r the right side of the comparison
     */
-  bool operator != (const MyMoneySecurity& r) const {
-    return !(*this == r);
-  }
+  bool operator != (const MyMoneySecurity& r) const;
 
-public:
-  typedef enum {
-    SECURITY_STOCK,
-    SECURITY_MUTUALFUND,
-    SECURITY_BOND,
-    SECURITY_CURRENCY,
-    SECURITY_NONE
-  } eSECURITYTYPE;
+  const QString name() const;
+  void setName(const QString& str);
 
-  enum attrNameE { anName, anSymbol, anType, anRoundingMethod,
-                   anSAF, anPP, anSCF,
-                   anTradingCurrency, anTradingMarket
-                 };
-  Q_ENUM(attrNameE)
+  const QString tradingSymbol() const;
+  void setTradingSymbol(const QString& str);
 
-  const QString& name() const                 {
-    return m_name;
-  }
+  eMyMoney::Security securityType() const;
+  void setSecurityType(const eMyMoney::Security s);
 
-  void           setName(const QString& str)   {
-    m_name = str;
-  }
+  bool isCurrency() const;
 
-  const QString&  tradingSymbol() const               {
-    return m_tradingSymbol;
-  }
+  AlkValue::RoundingMethod roundingMethod() const;
+  void setRoundingMethod(const AlkValue::RoundingMethod rnd);
 
-  void            setTradingSymbol(const QString& str) {
-    m_tradingSymbol = str;
-  }
+  const QString tradingMarket() const;
+  void setTradingMarket(const QString& str);
 
-  eSECURITYTYPE securityType() const                {
-    return m_securityType;
-  }
+  const QString tradingCurrency() const;
+  void setTradingCurrency(const QString& str);
 
-  void          setSecurityType(const eSECURITYTYPE& s)   {
-    m_securityType = s;
-  }
+  int smallestAccountFraction() const;
+  void setSmallestAccountFraction(const int sf);
 
-  bool    isCurrency() const {
-    return m_securityType == SECURITY_CURRENCY;
-  }
+  int smallestCashFraction() const;
+  void setSmallestCashFraction(const int cf);
 
-  AlkValue::RoundingMethod roundingMethod() const  {
-    return m_roundingMethod;
-  }
-
-  void           setRoundingMethod(const AlkValue::RoundingMethod& rnd) {
-    m_roundingMethod = rnd;
-  }
-
-  const QString& tradingMarket() const  {
-    return m_tradingMarket;
-  }
-
-  void           setTradingMarket(const QString& str) {
-    m_tradingMarket = str;
-  }
-
-  const QString& tradingCurrency() const {
-    return m_tradingCurrency;
-  }
-
-  void           setTradingCurrency(const QString& str) {
-    m_tradingCurrency = str;
-  }
-
-  int smallestAccountFraction() const {
-    return m_smallestAccountFraction;
-  }
-
-  void setSmallestAccountFraction(const int sf) {
-    m_smallestAccountFraction = sf;
-  }
-
-  int smallestCashFraction() const {
-    return m_smallestCashFraction;
-  }
-
-  void setSmallestCashFraction(const int sf) {
-    m_smallestCashFraction = sf;
-  }
-
-  int pricePrecision() const {
-    return m_pricePrecision;
-  }
-
-  void setPricePrecision(const int pp) {
-    m_pricePrecision = pp;
-  }
+  int pricePrecision() const;
+  void setPricePrecision(const int pp);
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
@@ -194,7 +138,7 @@ public:
    *
    * @return QString representing the human readable form
    */
-  static QString securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType);
+  static QString securityTypeToString(const eMyMoney::Security securityType);
 
   /**
    * This method is used to convert the internal representation of
@@ -207,31 +151,106 @@ public:
    */
   static QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
 
-protected:
+private:
   QString                   m_name;
   QString                   m_tradingSymbol;
   QString                   m_tradingMarket;
   QString                   m_tradingCurrency;
-  eSECURITYTYPE             m_securityType;
+  eMyMoney::Security        m_securityType;
   int                       m_smallestCashFraction;
   int                       m_smallestAccountFraction;
   int                       m_pricePrecision;
   AlkValue::RoundingMethod  m_roundingMethod;
 
-private:
   enum DefaultValues {
-      DEFAULT_CASH_FRACTION = 100,
-      DEFAULT_ACCOUNT_FRACTION = 100,
-      DEFAULT_PRICE_PRECISION = 4,
+    DEFAULT_CASH_FRACTION = 100,
+    DEFAULT_ACCOUNT_FRACTION = 100,
+    DEFAULT_PRICE_PRECISION = 4,
   };
 
-  static const QString getAttrName(const attrNameE _attr);
+  enum class Attribute { Name = 0,
+                   Symbol,
+                   Type,
+                   RoundingMethod,
+                   SAF,
+                   PP,
+                   SCF,
+                   TradingCurrency,
+                   TradingMarket,
+                   // insert new entries above this line
+                   LastAttribute
+                 };
+
+  static QString getAttrName(const Attribute attr);
+
+  friend uint qHash(const Attribute, uint seed);
 };
 
+
+inline bool MyMoneySecurity::operator != (const MyMoneySecurity& r) const // krazy:exclude=inline
+{
+  return !(*this == r);
+}
+
+inline eMyMoney::Security MyMoneySecurity::securityType() const // krazy:exclude=inline
+{
+  return m_securityType;
+}
+
+inline void MyMoneySecurity::setSecurityType(const eMyMoney::Security s) // krazy:exclude=inline
+{
+  m_securityType = s;
+}
+
+inline bool MyMoneySecurity::isCurrency() const // krazy:exclude=inline
+{
+  return m_securityType == eMyMoney::Security::Currency;
+}
+
+inline AlkValue::RoundingMethod MyMoneySecurity::roundingMethod() const // krazy:exclude=inline
+{
+  return m_roundingMethod;
+}
+
+inline void MyMoneySecurity::setRoundingMethod(const AlkValue::RoundingMethod rnd) // krazy:exclude=inline
+{
+  m_roundingMethod = rnd;
+}
+
+inline int MyMoneySecurity::smallestAccountFraction() const // krazy:exclude=inline
+{
+  return m_smallestAccountFraction;
+}
+
+inline void MyMoneySecurity::setSmallestAccountFraction(const int sf) // krazy:exclude=inline
+{
+  m_smallestAccountFraction = sf;
+}
+
+inline int MyMoneySecurity::smallestCashFraction() const // krazy:exclude=inline
+{
+  return m_smallestCashFraction;
+}
+
+inline void MyMoneySecurity::setSmallestCashFraction(const int cf) // krazy:exclude=inline
+{
+  m_smallestCashFraction = cf;
+}
+
+inline int MyMoneySecurity::pricePrecision() const // krazy:exclude=inline
+{
+  return m_pricePrecision;
+}
+
+inline void MyMoneySecurity::setPricePrecision(const int pp) // krazy:exclude=inline
+{
+  m_pricePrecision = pp;
+}
+
+inline uint qHash(const MyMoneySecurity::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 /**
   * Make it possible to hold @ref MyMoneySecurity objects inside @ref QVariant objects.
   */
 Q_DECLARE_METATYPE(MyMoneySecurity)
-
 
 #endif

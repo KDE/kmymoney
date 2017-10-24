@@ -366,7 +366,7 @@ public:
   InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransaction() {}
 
-  virtual const QString& sortSecurity() const {
+  virtual const QString sortSecurity() const {
     return m_security.name();
   }
   virtual const char* className() {

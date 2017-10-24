@@ -62,6 +62,8 @@
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 
+using namespace eMyMoney;
+
 bool matchNotEmpty(const QString &l, const QString &r)
 {
   return !l.isEmpty() && QString::compare(l, r, Qt::CaseInsensitive) == 0;
@@ -600,7 +602,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     security.setTradingCurrency(file->baseCurrency().id());
     security.setValue("kmm-security-id", sec_in.m_strId);
     security.setValue("kmm-online-source", "Yahoo");
-    security.setSecurityType(MyMoneySecurity::SECURITY_STOCK);
+    security.setSecurityType(Security::Stock);
     MyMoneyFileTransaction ft;
     try {
       file->addSecurity(security);

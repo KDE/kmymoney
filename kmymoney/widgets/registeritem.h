@@ -139,7 +139,7 @@ public:
   virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
     return MyMoneySplit::MaxReconcileState;
   }
-  virtual const QString& sortSecurity() const {
+  virtual const QString sortSecurity() const {
     return nullString;
   }
 

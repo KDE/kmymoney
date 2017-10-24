@@ -75,6 +75,10 @@ email                : mte@users.sourceforge.net
 #define PACKAGE "KMyMoney"
 #endif // _GNCFILEANON
 
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
+
 // init static variables
 double MyMoneyGncReader::m_fileHideFactor = 0.0;
 double GncObject::m_moneyHideFactor;
@@ -1401,7 +1405,7 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
     // don't set the source here since he may not want quotes
     //equ.setValue ("kmm-online-source", gcm->space()); // we don't know, so use it as both
     equ.setTradingCurrency("");  // not available here, will set from pricedb or transaction
-    equ.setSecurityType(MyMoneySecurity::SECURITY_STOCK);  // default to it being a stock
+    equ.setSecurityType(Security::Stock);  // default to it being a stock
     //tell the storage objects we have a new equity object.
     equ.setSmallestAccountFraction(gcm->fraction().toInt());
     m_storage->addSecurity(equ);
@@ -1549,7 +1553,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
         << "found id =" << e.id();
       acc.setCurrencyId(e.id());  // actually, the security id
       if ("MUTUAL" == gac->type()) {
-        e.setSecurityType(MyMoneySecurity::SECURITY_MUTUALFUND);
+        e.setSecurityType(Security::MutualFund);
         if (gncdebug) qDebug() << "Setting" << e.name() << "to mutual";
         m_storage->modifySecurity(e);
       }
