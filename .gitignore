@@ -7,3 +7,13 @@ build*/
 ui_*.h
 moc_*.cpp
 *.moc
+*.a
+*.so*
+*_automoc.cpp
+**/*.cmake
+**/Makefile
+**/CMakeFiles/
+**/*.desktop
+**/*-test
+CMakeCache.txt
+CMakeTmp/
