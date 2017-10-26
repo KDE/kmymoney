@@ -652,6 +652,7 @@ private:
   QList<TransactionSortField>  m_sortOrder;
   QRect                        m_lastRepaintRect;
   DetailsColumnType            m_detailsColumnType;
+  QMap<int, int>               m_minimalColumnWidthCache;
 };
 
 } // namespace
