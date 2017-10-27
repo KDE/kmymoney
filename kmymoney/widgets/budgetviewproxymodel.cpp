@@ -29,6 +29,7 @@
 
 #include "mymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "modelenums.h"

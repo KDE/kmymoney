@@ -52,45 +52,6 @@ class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  /**
-    * This enum is used to describe all the possible schedule frequencies.
-    * The special entry, OCCUR_ANY, is used to combine all the other types.
-    */
-  enum occurrenceE { OCCUR_ANY = 0, OCCUR_ONCE = 1, OCCUR_DAILY = 2, OCCUR_WEEKLY = 4, OCCUR_FORTNIGHTLY = 8,
-                     OCCUR_EVERYOTHERWEEK = 16,
-                     OCCUR_EVERYHALFMONTH = 18,
-                     OCCUR_EVERYTHREEWEEKS = 20,
-                     OCCUR_EVERYTHIRTYDAYS = 30,
-                     OCCUR_MONTHLY = 32, OCCUR_EVERYFOURWEEKS = 64,
-                     OCCUR_EVERYEIGHTWEEKS = 126,
-                     OCCUR_EVERYOTHERMONTH = 128, OCCUR_EVERYTHREEMONTHS = 256,
-                     OCCUR_TWICEYEARLY = 1024, OCCUR_EVERYOTHERYEAR = 2048, OCCUR_QUARTERLY = 4096,
-                     OCCUR_EVERYFOURMONTHS = 8192, OCCUR_YEARLY = 16384
-                   };
-
-  /**
-    * This enum is used to describe the schedule type.
-    */
-  enum typeE {  TYPE_ANY = 0, TYPE_BILL = 1, TYPE_DEPOSIT = 2, TYPE_TRANSFER = 4, TYPE_LOANPAYMENT = 5 };
-
-  /**
-    * This enum is used to describe the schedule's payment type.
-    */
-  enum paymentTypeE { STYPE_ANY = 0, STYPE_DIRECTDEBIT = 1, STYPE_DIRECTDEPOSIT = 2,
-                      STYPE_MANUALDEPOSIT = 4, STYPE_OTHER = 8,
-                      STYPE_WRITECHEQUE = 16,
-                      STYPE_STANDINGORDER = 32,
-                      STYPE_BANKTRANSFER = 64
-                    };
-
-  /**
-    * This enum is used by the auto-commit functionality.
-    *
-    * Depending upon the value of m_weekendOption the schedule can
-    * be entered on a different date
-  **/
-  enum weekendOptionE { MoveBefore = 0, MoveAfter = 1, MoveNothing = 2 };
-
   enum elNameE { enPayment, enPayments };
   Q_ENUM(elNameE)
 
@@ -114,8 +75,8 @@ public:
     *
     * @a startDate is not used anymore and internally set to QDate()
     */
-  MyMoneySchedule(const QString& name, typeE type, occurrenceE occurrence, int occurrenceMultiplier,
-                  paymentTypeE paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
+  MyMoneySchedule(const QString& name, eMyMoney::Schedule::Type type, eMyMoney::Schedule::Occurrence occurrence, int occurrenceMultiplier,
+                  eMyMoney::Schedule::PaymentType paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
 
   explicit MyMoneySchedule(const QDomElement& node);
 
@@ -129,18 +90,18 @@ public:
   /**
     * Simple get method that returns the occurrence frequency.
     *
-    * @return occurrenceE The instance frequency.
+    * @return eMyMoney::Schedule::Occurrence The instance frequency.
     */
-  occurrenceE occurrence() const;
+  eMyMoney::Schedule::Occurrence occurrence() const;
 
   /**
     * Simple get method that returns the occurrence period
     * multiplier and occurrence
     *
-    * @return occurrenceE The instance period
+    * @return eMyMoney::Schedule::Occurrence The instance period
     *
     */
-  occurrenceE occurrencePeriod() const {
+  eMyMoney::Schedule::Occurrence occurrencePeriod() const {
     return m_occurrence;
   }
 
@@ -156,9 +117,9 @@ public:
   /**
     * Simple get method that returns the schedule type.
     *
-    * @return typeE The instance type.
+    * @return eMyMoney::Schedule::Type The instance type.
     */
-  typeE type() const {
+  eMyMoney::Schedule::Type type() const {
     return m_type;
   }
 
@@ -175,9 +136,9 @@ public:
   /**
     * Simple get method that returns the schedule paymentType.
     *
-    * @return paymentTypeE The instance paymentType.
+    * @return eMyMoney::Schedule::PaymentType The instance paymentType.
     */
-  paymentTypeE paymentType() const {
+  eMyMoney::Schedule::PaymentType paymentType() const {
     return m_paymentType;
   }
 
@@ -284,7 +245,7 @@ public:
     *
     * @return QDate containing the adjusted date.
     */
-  QDate adjustedDate(QDate date, weekendOptionE option) const;
+  QDate adjustedDate(QDate date, eMyMoney::Schedule::WeekendOption option) const;
 
   /**
 
@@ -294,7 +255,7 @@ public:
     *
     * This not used by MyMoneySchedule but by the support code.
   **/
-  weekendOptionE weekendOption() const {
+  eMyMoney::Schedule::WeekendOption weekendOption() const {
     return m_weekendOption;
   }
 
@@ -304,7 +265,7 @@ public:
     * @param occ The new occurrence (frequency).
     * @return none
     */
-  void setOccurrence(occurrenceE occ);
+  void setOccurrence(eMyMoney::Schedule::Occurrence occ);
 
   /**
     * Simple method that sets the schedule period
@@ -312,7 +273,7 @@ public:
     * @param occ The new occurrence period (frequency)
     * @return none
     */
-  void setOccurrencePeriod(occurrenceE occ);
+  void setOccurrencePeriod(eMyMoney::Schedule::Occurrence occ);
 
   /**
     * Simple method that sets the frequency multiplier for the schedule.
@@ -328,7 +289,7 @@ public:
     * @param type The new type.
     * @return none
     */
-  void setType(typeE type);
+  void setType(eMyMoney::Schedule::Type type);
 
   /**
     * Simple method that sets the start date for the schedule.
@@ -344,7 +305,7 @@ public:
     * @param type The new payment type.
     * @return none
     */
-  void setPaymentType(paymentTypeE type);
+  void setPaymentType(eMyMoney::Schedule::PaymentType type);
 
   /**
     * Simple method to set whether the schedule is fixed or not.
@@ -419,7 +380,7 @@ public:
     *
     * @note This not used by MyMoneySchedule but by the support code.
     **/
-  void setWeekendOption(const weekendOptionE option);
+  void setWeekendOption(const eMyMoney::Schedule::WeekendOption option);
 
   /**
     * Validates the schedule instance.
@@ -567,7 +528,7 @@ public:
    *
    * @return QString representing the human readable format
    */
-  static QString occurrenceToString(occurrenceE type);
+  static QString occurrenceToString(eMyMoney::Schedule::Occurrence type);
 
   /**
    * This method is used to convert a multiplier and base occurrence type
@@ -580,7 +541,7 @@ public:
    *
    * @return QString representing the human readable format
    */
-  static QString occurrenceToString(int mult, occurrenceE type);
+  static QString occurrenceToString(int mult, eMyMoney::Schedule::Occurrence type);
 
   /**
    * This method is used to convert an occurrence period from
@@ -591,7 +552,7 @@ public:
    *
    * @return QString representing the human readable format
    */
-  static QString occurrencePeriodToString(occurrenceE type);
+  static QString occurrencePeriodToString(eMyMoney::Schedule::Occurrence type);
 
   /**
    * This method is used to convert the payment type from its
@@ -602,7 +563,7 @@ public:
    *
    * @return QString representing the human readable format
    */
-  static QString paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType);
+  static QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
 
   /**
    * This method is used to convert the schedule weekend option from its
@@ -613,7 +574,7 @@ public:
    *
    * @return QString representing the human readable format
    */
-  static QString weekendOptionToString(MyMoneySchedule::weekendOptionE weekendOption);
+  static QString weekendOptionToString(eMyMoney::Schedule::WeekendOption weekendOption);
 
   /**
    * This method is used to convert the schedule type from its
@@ -624,7 +585,7 @@ public:
    *
    * @return QString representing the human readable format
    */
-  static QString scheduleTypeToString(MyMoneySchedule::typeE type);
+  static QString scheduleTypeToString(eMyMoney::Schedule::Type type);
 
   int variation() const;
   void setVariation(int var);
@@ -639,7 +600,7 @@ public:
    *
    * @return int  Number of days between events
    */
-  static int eventsPerYear(MyMoneySchedule::occurrenceE occurrence);
+  static int eventsPerYear(eMyMoney::Schedule::Occurrence occurrence);
 
   /**
    *
@@ -651,7 +612,7 @@ public:
    *
    * @return int  Number of days between events
    */
-  static int daysBetweenEvents(MyMoneySchedule::occurrenceE occurrence);
+  static int daysBetweenEvents(eMyMoney::Schedule::Occurrence occurrence);
 
   /**
     * Helper method to convert simple occurrence to compound occurrence + multiplier
@@ -659,7 +620,7 @@ public:
     * @param multiplier Returned by reference.  Adjusted multiplier
     * @param occurrence Returned by reference.  Occurrence type
     */
-  static void simpleToCompoundOccurrence(int& multiplier, occurrenceE& occurrence);
+  static void simpleToCompoundOccurrence(int& multiplier, eMyMoney::Schedule::Occurrence& occurrence);
 
   /**
     * Helper method to convert compound occurrence + multiplier to simple occurrence
@@ -667,7 +628,7 @@ public:
     * @param multiplier Returned by reference.  Adjusted multiplier
     * @param occurrence Returned by reference.  Occurrence type
     */
-  static void compoundToSimpleOccurrence(int& multiplier, occurrenceE& occurrence);
+  static void compoundToSimpleOccurrence(int& multiplier, eMyMoney::Schedule::Occurrence& occurrence);
 
   /**
     * This method is used to set the static point to relevant
@@ -708,7 +669,7 @@ private:
 
   /**
     * This method adds a number of Half Months to the given Date.
-    * This is used for OCCUR_EVERYHALFMONTH occurrences.
+    * This is used for EveryHalfMonth occurrences.
     * The addition uses the following rules to add a half month:
     * Day 1-13: add 15 days
     * Day 14: add 15 days (except February: the last day of the month)
@@ -744,19 +705,19 @@ private:
 
 private:
   /// Its occurrence
-  occurrenceE m_occurrence;
+  eMyMoney::Schedule::Occurrence m_occurrence;
 
   /// Its occurrence multiplier
   int m_occurrenceMultiplier;
 
   /// Its type
-  typeE m_type;
+  eMyMoney::Schedule::Type m_type;
 
   /// The date the schedule commences
   QDate m_startDate;
 
   /// The payment type
-  paymentTypeE m_paymentType;
+  eMyMoney::Schedule::PaymentType m_paymentType;
 
   /// Can the amount vary
   bool m_fixed;
@@ -780,7 +741,7 @@ private:
   QList<QDate> m_recordedPayments;
 
   /// The weekend option
-  weekendOptionE m_weekendOption;
+  eMyMoney::Schedule::WeekendOption m_weekendOption;
 };
 
 /**

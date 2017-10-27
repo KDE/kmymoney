@@ -441,7 +441,7 @@ private:
   //void startCommitUnit (const QString& callingFunction);
   //void endCommitUnit (const QString& callingFunction);
   //void cancelCommitUnit (const QString& callingFunction);
-  int splitState(const MyMoneyTransactionFilter::stateOptionE& state) const;
+  int splitState(const eMyMoney::TransactionFilter::State& state) const;
 
   inline const QDate getDate(const QString& date) const {
     return (date.isNull() ? QDate() : QDate::fromString(date, Qt::ISODate));

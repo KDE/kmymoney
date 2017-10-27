@@ -41,6 +41,9 @@
 // Project Headers
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 #include "icons/icons.h"
 
 using namespace Icons;
@@ -160,7 +163,7 @@ void CsvExportDlg::checkData(const QString& accountName)
     account = file->accountByName(accountName);
     m_accountId = account.id();
     MyMoneyAccount accnt;
-    if (account.accountType() == MyMoneyAccount::Investment) {
+    if (account.accountType() == eMyMoney::Account::Investment) {
       //  If this is Investment account, we need child account.
       QStringList listAccounts = account.accountList();
       QStringList::Iterator itAccounts;
@@ -223,9 +226,9 @@ QStringList CsvExportDlg::getAccounts()
   while (it_account != accounts.constEnd()) {
     MyMoneyAccount account((*it_account).id(), (*it_account));
     if (!account.isClosed()) {
-      MyMoneyAccount::accountTypeE accntType = account.accountType();
-      MyMoneyAccount::accountTypeE accntGroup = account.accountGroup();
-      if ((accntGroup == MyMoneyAccount::Liability)  || ((accntGroup == MyMoneyAccount::Asset) && (accntType != MyMoneyAccount::Stock))) {  //  ie Asset or Liability types
+      eMyMoney::Account accntType = account.accountType();
+      eMyMoney::Account accntGroup = account.accountGroup();
+      if ((accntGroup == eMyMoney::Account::Liability)  || ((accntGroup == eMyMoney::Account::Asset) && (accntType != eMyMoney::Account::Stock))) {  //  ie Asset or Liability types
         list << account.name();
         m_idList << account.id();
       }

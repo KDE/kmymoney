@@ -32,6 +32,7 @@ email                : jpwhiting@kde.org
 
 #include "knewbankdlg.h"
 #include "mymoneyfile.h"
+#include "mymoneyexception.h"
 
 LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     : LoanAttributesWizardPageDecl(parent)

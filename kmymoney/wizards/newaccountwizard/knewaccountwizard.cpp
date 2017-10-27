@@ -56,6 +56,7 @@
 
 using namespace NewAccountWizard;
 using namespace Icons;
+using namespace eMyMoney;
 
 namespace NewAccountWizard
 {
@@ -156,7 +157,7 @@ const MyMoneyAccount& Wizard::account()
   if (m_account.isLoan()) {
     // in case we lend the money we adjust the account type
     if (!moneyBorrowed())
-      m_account.setAccountType(MyMoneyAccount::AssetLoan);
+      m_account.setAccountType(Account::AssetLoan);
     m_account.setLoanAmount(m_loanDetailsPage->m_loanAmount->value());
     m_account.setInterestRate(m_loanSchedulePage->firstPaymentDueDate(), m_loanDetailsPage->m_interestRate->value());
     m_account.setInterestCalculation(m_loanDetailsPage->m_paymentDue->currentIndex() == 0 ? MyMoneyAccountLoan::paymentReceived : MyMoneyAccountLoan::paymentDue);
@@ -165,7 +166,7 @@ const MyMoneyAccount& Wizard::account()
     m_account.setTerm(m_loanDetailsPage->term());
     m_account.setPeriodicPayment(m_loanDetailsPage->m_paymentAmount->value());
     m_account.setPayee(m_generalLoanInfoPage->m_payee->selectedItem());
-    m_account.setInterestCompounding(m_generalLoanInfoPage->m_compoundFrequency->currentItem());
+    m_account.setInterestCompounding((int)m_generalLoanInfoPage->m_compoundFrequency->currentItem());
 
     if (!m_account.fixedInterestRate()) {
       m_account.setNextInterestChange(m_generalLoanInfoPage->m_interestChangeDateEdit->date());
@@ -206,7 +207,7 @@ const MyMoneyAccount& Wizard::parentAccount()
 {
   return m_accountTypePage->allowsParentAccount()
          ? m_hierarchyPage->parentAccount()
-         : (m_accountTypePage->accountType() == MyMoneyAccount::Loan
+         : (m_accountTypePage->accountType() == Account::Loan
             ? m_generalLoanInfoPage->parentAccount()
             : m_accountTypePage->parentAccount());
 }
@@ -214,10 +215,10 @@ const MyMoneyAccount& Wizard::parentAccount()
 MyMoneyAccount Wizard::brokerageAccount() const
 {
   MyMoneyAccount account;
-  if (m_account.accountType() == MyMoneyAccount::Investment
+  if (m_account.accountType() == Account::Investment
       && m_brokeragepage->m_createBrokerageButton->isChecked()) {
     account.setName(m_account.brokerageName());
-    account.setAccountType(MyMoneyAccount::Checkings);
+    account.setAccountType(Account::Checkings);
     account.setInstitutionId(m_account.institutionId());
     account.setOpeningDate(m_account.openingDate());
     account.setCurrencyId(m_brokeragepage->m_brokerageCurrency->security().id());
@@ -234,12 +235,12 @@ const MyMoneySchedule& Wizard::schedule()
   m_schedule = MyMoneySchedule();
 
   if (!m_account.id().isEmpty()) {
-    if (m_schedulePage->m_reminderCheckBox->isChecked() && (m_account.accountType() == MyMoneyAccount::CreditCard)) {
+    if (m_schedulePage->m_reminderCheckBox->isChecked() && (m_account.accountType() == Account::CreditCard)) {
       m_schedule.setName(m_schedulePage->m_name->text());
-      m_schedule.setType(MyMoneySchedule::TYPE_TRANSFER);
-      m_schedule.setPaymentType(static_cast<MyMoneySchedule::paymentTypeE>(m_schedulePage->m_method->currentItem()));
+      m_schedule.setType(Schedule::Type::Transfer);
+      m_schedule.setPaymentType(static_cast<Schedule::PaymentType>(m_schedulePage->m_method->currentItem()));
       m_schedule.setFixed(false);
-      m_schedule.setOccurrencePeriod(MyMoneySchedule::OCCUR_MONTHLY);
+      m_schedule.setOccurrencePeriod(Schedule::Occurrence::Monthly);
       m_schedule.setOccurrenceMultiplier(1);
       MyMoneyTransaction t;
       MyMoneySplit s;
@@ -262,11 +263,11 @@ const MyMoneySchedule& Wizard::schedule()
 
     } else if (m_account.isLoan()) {
       m_schedule.setName(i18n("Loan payment for %1", m_accountTypePage->m_accountName->text()));
-      m_schedule.setType(MyMoneySchedule::TYPE_LOANPAYMENT);
+      m_schedule.setType(Schedule::Type::LoanPayment);
       if (moneyBorrowed())
-        m_schedule.setPaymentType(MyMoneySchedule::STYPE_DIRECTDEBIT);
+        m_schedule.setPaymentType(Schedule::PaymentType::DirectDebit);
       else
-        m_schedule.setPaymentType(MyMoneySchedule::STYPE_DIRECTDEPOSIT);
+        m_schedule.setPaymentType(Schedule::PaymentType::DirectDeposit);
 
       m_schedule.setFixed(true);
       m_schedule.setOccurrence(m_generalLoanInfoPage->m_paymentFrequency->currentItem());
@@ -337,10 +338,10 @@ const MyMoneySchedule& Wizard::schedule()
 MyMoneyMoney Wizard::openingBalance() const
 {
   // equity accounts don't have an opening balance
-  if (m_accountTypePage->accountType() == MyMoneyAccount::Equity)
+  if (m_accountTypePage->accountType() == Account::Equity)
     return MyMoneyMoney();
 
-  if (m_accountTypePage->accountType() == MyMoneyAccount::Loan) {
+  if (m_accountTypePage->accountType() == Account::Loan) {
     if (m_generalLoanInfoPage->recordAllPayments())
       return MyMoneyMoney();
     if (moneyBorrowed())
@@ -468,19 +469,19 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
     WizardPage<Wizard>(StepAccount, this, wizard),
     m_showPriceWarning(true)
 {
-  m_typeSelection->insertItem(i18n("Checking"), MyMoneyAccount::Checkings);
-  m_typeSelection->insertItem(i18n("Savings"), MyMoneyAccount::Savings);
-  m_typeSelection->insertItem(i18n("Credit Card"), MyMoneyAccount::CreditCard);
-  m_typeSelection->insertItem(i18n("Cash"), MyMoneyAccount::Cash);
-  m_typeSelection->insertItem(i18n("Loan"), MyMoneyAccount::Loan);
-  m_typeSelection->insertItem(i18n("Investment"), MyMoneyAccount::Investment);
-  m_typeSelection->insertItem(i18n("Asset"), MyMoneyAccount::Asset);
-  m_typeSelection->insertItem(i18n("Liability"), MyMoneyAccount::Liability);
+  m_typeSelection->insertItem(i18n("Checking"), (int)Account::Checkings);
+  m_typeSelection->insertItem(i18n("Savings"), (int)Account::Savings);
+  m_typeSelection->insertItem(i18n("Credit Card"), (int)Account::CreditCard);
+  m_typeSelection->insertItem(i18n("Cash"), (int)Account::Cash);
+  m_typeSelection->insertItem(i18n("Loan"), (int)Account::Loan);
+  m_typeSelection->insertItem(i18n("Investment"), (int)Account::Investment);
+  m_typeSelection->insertItem(i18n("Asset"), (int)Account::Asset);
+  m_typeSelection->insertItem(i18n("Liability"), (int)Account::Liability);
   if (KMyMoneyGlobalSettings::expertMode()) {
-    m_typeSelection->insertItem(i18n("Equity"), MyMoneyAccount::Equity);
+    m_typeSelection->insertItem(i18n("Equity"), (int)Account::Equity);
   }
 
-  m_typeSelection->setCurrentItem(MyMoneyAccount::Checkings);
+  m_typeSelection->setCurrentItem((int)Account::Checkings);
 
   m_currencyComboBox->setSecurity(MyMoneyFile::instance()->baseCurrency());
 
@@ -499,33 +500,33 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
 
 void AccountTypePage::slotUpdateType(int i)
 {
-  hideShowPages(static_cast<MyMoneyAccount::accountTypeE>(i));
-  m_openingBalance->setDisabled(static_cast<MyMoneyAccount::accountTypeE>(i) == MyMoneyAccount::Equity);
+  hideShowPages(static_cast<Account>(i));
+  m_openingBalance->setDisabled(static_cast<Account>(i) == Account::Equity);
 }
 
-void AccountTypePage::hideShowPages(MyMoneyAccount::accountTypeE accountType) const
+void AccountTypePage::hideShowPages(Account accountType) const
 {
-  bool hideSchedulePage = (accountType != MyMoneyAccount::CreditCard)
-                          && (accountType != MyMoneyAccount::Loan);
-  bool hideLoanPage     = (accountType != MyMoneyAccount::Loan);
+  bool hideSchedulePage = (accountType != Account::CreditCard)
+                          && (accountType != Account::Loan);
+  bool hideLoanPage     = (accountType != Account::Loan);
   m_wizard->setStepHidden(StepDetails, hideLoanPage);
   m_wizard->setStepHidden(StepPayments, hideLoanPage);
   m_wizard->setStepHidden(StepFees, hideLoanPage);
   m_wizard->setStepHidden(StepSchedule, hideSchedulePage);
-  m_wizard->setStepHidden(StepPayout, (accountType != MyMoneyAccount::Loan));
-  m_wizard->setStepHidden(StepBroker, accountType != MyMoneyAccount::Investment);
-  m_wizard->setStepHidden(StepParentAccount, accountType == MyMoneyAccount::Loan);
+  m_wizard->setStepHidden(StepPayout, (accountType != Account::Loan));
+  m_wizard->setStepHidden(StepBroker, accountType != Account::Investment);
+  m_wizard->setStepHidden(StepParentAccount, accountType == Account::Loan);
   // Force an update of the steps in case the list has changed
   m_wizard->reselectStep();
 }
 
 KMyMoneyWizardPage* AccountTypePage::nextPage() const
 {
-  if (accountType() == MyMoneyAccount::Loan)
+  if (accountType() == Account::Loan)
     return m_wizard->m_generalLoanInfoPage;
-  if (accountType() == MyMoneyAccount::CreditCard)
+  if (accountType() == Account::CreditCard)
     return m_wizard->m_schedulePage;
-  if (accountType() == MyMoneyAccount::Investment)
+  if (accountType() == Account::Investment)
     return m_wizard->m_brokeragepage;
   return m_wizard->m_hierarchyPage;
 }
@@ -600,9 +601,9 @@ bool AccountTypePage::isComplete() const
   return rc;
 }
 
-MyMoneyAccount::accountTypeE AccountTypePage::accountType() const
+Account AccountTypePage::accountType() const
 {
-  return static_cast<MyMoneyAccount::accountTypeE>(m_typeSelection->currentItem());
+  return static_cast<Account>(m_typeSelection->currentItem());
 }
 
 const MyMoneySecurity& AccountTypePage::currency() const
@@ -612,11 +613,11 @@ const MyMoneySecurity& AccountTypePage::currency() const
 
 void AccountTypePage::setAccount(const MyMoneyAccount& acc)
 {
-  if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {
-    if (acc.accountType() == MyMoneyAccount::AssetLoan) {
-      m_typeSelection->setCurrentItem(MyMoneyAccount::Loan);
+  if (acc.accountType() != Account::Unknown) {
+    if (acc.accountType() == Account::AssetLoan) {
+      m_typeSelection->setCurrentItem((int)Account::Loan);
     } else {
-      m_typeSelection->setCurrentItem(acc.accountType());
+      m_typeSelection->setCurrentItem((int)acc.accountType());
     }
   }
   m_openingDate->setDate(acc.openingDate());
@@ -626,12 +627,12 @@ void AccountTypePage::setAccount(const MyMoneyAccount& acc)
 const MyMoneyAccount& AccountTypePage::parentAccount()
 {
   switch (accountType()) {
-    case MyMoneyAccount::CreditCard:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Loan: // Can be either but we return liability here
+    case Account::CreditCard:
+    case Account::Liability:
+    case Account::Loan: // Can be either but we return liability here
       return MyMoneyFile::instance()->liability();
       break;
-    case MyMoneyAccount::Equity:
+    case Account::Equity:
       return MyMoneyFile::instance()->equity();
     default:
       break;
@@ -641,7 +642,7 @@ const MyMoneyAccount& AccountTypePage::parentAccount()
 
 bool AccountTypePage::allowsParentAccount() const
 {
-  return accountType() != MyMoneyAccount::Loan;
+  return accountType() != Account::Loan;
 }
 
 BrokeragePage::BrokeragePage(Wizard* wizard) :
@@ -696,16 +697,16 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 
-  m_method->insertItem(i18n("Write check"), MyMoneySchedule::STYPE_WRITECHEQUE);
+  m_method->insertItem(i18n("Write check"), (int)Schedule::PaymentType::WriteChecque);
 #if 0
-  m_method->insertItem(i18n("Direct debit"), MyMoneySchedule::STYPE_DIRECTDEBIT);
-  m_method->insertItem(i18n("Bank transfer"), MyMoneySchedule::STYPE_BANKTRANSFER);
+  m_method->insertItem(i18n("Direct debit"), Schedule::PaymentType::DirectDebit);
+  m_method->insertItem(i18n("Bank transfer"), Schedule::PaymentType::BankTransfer);
 #endif
-  m_method->insertItem(i18n("Standing order"), MyMoneySchedule::STYPE_STANDINGORDER);
-  m_method->insertItem(i18n("Manual deposit"), MyMoneySchedule::STYPE_MANUALDEPOSIT);
-  m_method->insertItem(i18n("Direct deposit"), MyMoneySchedule::STYPE_DIRECTDEPOSIT);
-  m_method->insertItem(i18nc("Other payment method", "Other"), MyMoneySchedule::STYPE_OTHER);
-  m_method->setCurrentItem(MyMoneySchedule::STYPE_DIRECTDEBIT);
+  m_method->insertItem(i18n("Standing order"), (int)Schedule::PaymentType::StandingOrder);
+  m_method->insertItem(i18n("Manual deposit"), (int)Schedule::PaymentType::ManualDeposit);
+  m_method->insertItem(i18n("Direct deposit"), (int)Schedule::PaymentType::DirectDeposit);
+  m_method->insertItem(i18nc("Other payment method", "Other"), (int)Schedule::PaymentType::Other);
+  m_method->setCurrentItem((int)Schedule::PaymentType::DirectDebit);
 
   slotLoadWidgets();
 }
@@ -751,7 +752,7 @@ bool CreditCardSchedulePage::isComplete() const
 void CreditCardSchedulePage::slotLoadWidgets()
 {
   AccountSet set;
-  set.addAccountGroup(MyMoneyAccount::Asset);
+  set.addAccountGroup(Account::Asset);
   set.load(m_paymentAccount->selector());
 
   m_payee->loadPayees(MyMoneyFile::instance()->payeeList());
@@ -770,12 +771,12 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
   m_mandatoryGroup->add(m_payee);
 
   // remove the unsupported payment and compounding frequencies and setup default
-  m_paymentFrequency->removeItem(MyMoneySchedule::OCCUR_ONCE);
-  m_paymentFrequency->removeItem(MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
-  m_paymentFrequency->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
-  m_compoundFrequency->removeItem(MyMoneySchedule::OCCUR_ONCE);
-  m_compoundFrequency->removeItem(MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
-  m_compoundFrequency->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
+  m_paymentFrequency->removeItem((int)Schedule::Occurrence::Once);
+  m_paymentFrequency->removeItem((int)Schedule::Occurrence::EveryOtherYear);
+  m_paymentFrequency->setCurrentItem((int)Schedule::Occurrence::Monthly);
+  m_compoundFrequency->removeItem((int)Schedule::Occurrence::Once);
+  m_compoundFrequency->removeItem((int)Schedule::Occurrence::EveryOtherYear);
+  m_compoundFrequency->setCurrentItem((int)Schedule::Occurrence::Monthly);
 
   slotLoadWidgets();
 
@@ -896,17 +897,17 @@ void LoanDetailsPage::enterPage()
 
   switch (m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentItem()) {
     default:
-      m_termUnit->insertItem(i18n("Payments"), MyMoneySchedule::OCCUR_ONCE);
-      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
+      m_termUnit->insertItem(i18n("Payments"), (int)Schedule::Occurrence::Once);
+      m_termUnit->setCurrentItem((int)Schedule::Occurrence::Once);
       break;
-    case MyMoneySchedule::OCCUR_MONTHLY:
-      m_termUnit->insertItem(i18n("Months"), MyMoneySchedule::OCCUR_MONTHLY);
-      m_termUnit->insertItem(i18n("Years"), MyMoneySchedule::OCCUR_YEARLY);
-      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
+    case Schedule::Occurrence::Monthly:
+      m_termUnit->insertItem(i18n("Months"), (int)Schedule::Occurrence::Monthly);
+      m_termUnit->insertItem(i18n("Years"), (int)Schedule::Occurrence::Yearly);
+      m_termUnit->setCurrentItem((int)Schedule::Occurrence::Monthly);
       break;
-    case MyMoneySchedule::OCCUR_YEARLY:
-      m_termUnit->insertItem(i18n("Years"), MyMoneySchedule::OCCUR_YEARLY);
-      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
+    case Schedule::Occurrence::Yearly:
+      m_termUnit->insertItem(i18n("Years"), (int)Schedule::Occurrence::Yearly);
+      m_termUnit->setCurrentItem((int)Schedule::Occurrence::Yearly);
       break;
   }
 }
@@ -1098,11 +1099,11 @@ int LoanDetailsPage::term() const
   if (m_termAmount->value() != 0) {
     factor = 1;
     switch (m_termUnit->currentItem()) {
-      case MyMoneySchedule::OCCUR_YEARLY: // years
+      case Schedule::Occurrence::Yearly: // years
         factor = 12;
         // intentional fall through
 
-      case MyMoneySchedule::OCCUR_MONTHLY: // months
+      case Schedule::Occurrence::Monthly: // months
         factor *= 30;
         factor *= m_termAmount->value();
         // factor now is the duration in days. we divide this by the
@@ -1111,10 +1112,10 @@ int LoanDetailsPage::term() const
         break;
 
       default:
-        qDebug("Unknown term unit %d in LoanDetailsPage::term(). Using payments.", m_termUnit->currentItem());
+        qDebug("Unknown term unit %d in LoanDetailsPage::term(). Using payments.", (int)m_termUnit->currentItem());
         // intentional fall through
 
-      case MyMoneySchedule::OCCUR_ONCE: // payments
+      case Schedule::Occurrence::Once: // payments
         factor = m_termAmount->value();
         break;
     }
@@ -1127,26 +1128,26 @@ QString LoanDetailsPage::updateTermWidgets(const double val)
   long vl = qFloor(val);
 
   QString valString;
-  MyMoneySchedule::occurrenceE unit = m_termUnit->currentItem();
+  Schedule::Occurrence unit = m_termUnit->currentItem();
 
-  if ((unit == MyMoneySchedule::OCCUR_MONTHLY)
+  if ((unit == Schedule::Occurrence::Monthly)
       && ((vl % 12) == 0)) {
     vl /= 12;
-    unit = MyMoneySchedule::OCCUR_YEARLY;
+    unit = Schedule::Occurrence::Yearly;
   }
 
   switch (unit) {
-    case MyMoneySchedule::OCCUR_MONTHLY:
+    case Schedule::Occurrence::Monthly:
       valString = i18np("one month", "%1 months", vl);
-      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
+      m_termUnit->setCurrentItem((int)Schedule::Occurrence::Monthly);
       break;
-    case MyMoneySchedule::OCCUR_YEARLY:
+    case Schedule::Occurrence::Yearly:
       valString = i18np("one year", "%1 years", vl);
-      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
+      m_termUnit->setCurrentItem((int)Schedule::Occurrence::Yearly);
       break;
     default:
       valString = i18np("one payment", "%1 payments", vl);
-      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
+      m_termUnit->setCurrentItem((int)Schedule::Occurrence::Once);
       break;
   }
   m_termAmount->setValue(vl);
@@ -1347,13 +1348,13 @@ void LoanSchedulePage::slotLoadWidgets()
 {
   AccountSet set;
   if (m_wizard->moneyBorrowed())
-    set.addAccountGroup(MyMoneyAccount::Expense);
+    set.addAccountGroup(Account::Expense);
   else
-    set.addAccountGroup(MyMoneyAccount::Income);
+    set.addAccountGroup(Account::Income);
   set.load(m_interestCategory->selector());
 
   set.clear();
-  set.addAccountGroup(MyMoneyAccount::Asset);
+  set.addAccountGroup(Account::Asset);
   set.load(m_paymentAccount->selector());
 }
 
@@ -1402,7 +1403,7 @@ void LoanPayoutPage::slotButtonsToggled()
 void LoanPayoutPage::slotCreateAssetAccount()
 {
   MyMoneyAccount acc;
-  acc.setAccountType(MyMoneyAccount::Asset);
+  acc.setAccountType(Account::Asset);
   acc.setOpeningDate(m_wizard->m_accountTypePage->m_openingDate->date());
 
   emit m_wizard->createAccount(acc);
@@ -1415,11 +1416,11 @@ void LoanPayoutPage::slotCreateAssetAccount()
 void LoanPayoutPage::slotLoadWidgets()
 {
   AccountSet set;
-  set.addAccountGroup(MyMoneyAccount::Asset);
+  set.addAccountGroup(Account::Asset);
   set.load(m_assetAccount->selector());
 
   set.clear();
-  set.addAccountType(MyMoneyAccount::Loan);
+  set.addAccountType(Account::Loan);
   set.load(m_loanAccount->selector());
 }
 
@@ -1492,7 +1493,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   m_filterProxyModel = new HierarchyFilterProxyModel(this);
   m_filterProxyModel->setHideClosedAccounts(true);
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
+  m_filterProxyModel->addAccountGroup(QVector<Account> {Account::Asset, Account::Liability});
   auto const model = Models::instance()->accountsModel();
   m_filterProxyModel->setSourceModel(model);
   m_filterProxyModel->setSourceColumns(model->getColumns());
@@ -1509,7 +1510,7 @@ void HierarchyPage::enterPage()
   // Ensure that the list reflects the Account Type
   MyMoneyAccount topAccount = m_wizard->m_accountTypePage->parentAccount();
   m_filterProxyModel->clear();
-  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {topAccount.accountGroup()});
+  m_filterProxyModel->addAccountGroup(QVector<Account> {topAccount.accountGroup()});
   m_parentAccounts->expandAll();
 }
 
@@ -1570,7 +1571,7 @@ void AccountSummaryPage::enterPage()
   if (!acc.isLoan())
     m_dataList->append(i18n("Subaccount of %1", m_wizard->parentAccount().name()));
   QString accTypeText;
-  if (acc.accountType() == MyMoneyAccount::AssetLoan)
+  if (acc.accountType() == Account::AssetLoan)
     accTypeText = i18n("Loan");
   else
     accTypeText = m_wizard->m_accountTypePage->m_typeSelection->currentText();
@@ -1594,7 +1595,7 @@ void AccountSummaryPage::enterPage()
     }
   }
 
-  if (acc.accountType() == MyMoneyAccount::Investment) {
+  if (acc.accountType() == Account::Investment) {
     if (m_wizard->m_brokeragepage->m_createBrokerageButton->isChecked()) {
       m_dataList->setFontWeight(QFont::Bold);
       m_dataList->append(i18n("Brokerage Account"));
@@ -1648,7 +1649,7 @@ void AccountSummaryPage::enterPage()
     m_dataList->append(i18n("Schedule information"));
     m_dataList->setFontWeight(QFont::Normal);
     m_dataList->append(i18nc("Schedule name", "Name: %1", sch.name()));
-    if (acc.accountType() == MyMoneyAccount::CreditCard) {
+    if (acc.accountType() == Account::CreditCard) {
       MyMoneyAccount paymentAccount = MyMoneyFile::instance()->account(m_wizard->m_schedulePage->m_paymentAccount->selectedItem());
       m_dataList->append(i18n("Occurrence: Monthly"));
       m_dataList->append(i18n("Paid from %1", paymentAccount.name()));

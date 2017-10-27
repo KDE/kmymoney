@@ -32,6 +32,10 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneytransaction.h"
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter()
 {
@@ -337,8 +341,8 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       const MyMoneyAccount& acc = file->account(s->accountId());
       if (m_considerCategory) {
         switch (acc.accountGroup()) {
-          case MyMoneyAccount::Income:
-          case MyMoneyAccount::Expense:
+          case eMyMoney::Account::Income:
+          case eMyMoney::Account::Expense:
             isTransfer = false;
             // check if the split references one of the categories in the list
             if (m_filterSet.singleFilter.categoryFilter) {
@@ -420,8 +424,8 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       // Determine if this account is a category or an account
       bool isCategory = false;
       switch (acc.accountGroup()) {
-        case MyMoneyAccount::Income:
-        case MyMoneyAccount::Expense:
+        case eMyMoney::Account::Income:
+        case eMyMoney::Account::Expense:
           isCategory = true;
         default:
           break;
@@ -512,7 +516,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
 
 int MyMoneyTransactionFilter::splitState(const MyMoneySplit& split) const
 {
-  int rc = notReconciled;
+  int rc = (int)eMyMoney::TransactionFilter::State::NotReconciled;
 
   switch (split.reconcileFlag()) {
     default:
@@ -520,15 +524,15 @@ int MyMoneyTransactionFilter::splitState(const MyMoneySplit& split) const
       break;;
 
     case MyMoneySplit::Cleared:
-      rc = cleared;
+      rc = (int)eMyMoney::TransactionFilter::State::Cleared;
       break;
 
     case MyMoneySplit::Reconciled:
-      rc = reconciled;
+      rc = (int)eMyMoney::TransactionFilter::State::Reconciled;
       break;
 
     case MyMoneySplit::Frozen:
-      rc = frozen;
+      rc = (int)eMyMoney::TransactionFilter::State::Frozen;
       break;
   }
   return rc;
@@ -539,8 +543,8 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount a, b;
   a = file->account(split.accountId());
-  if ((a.accountGroup() == MyMoneyAccount::Income
-       || a.accountGroup() == MyMoneyAccount::Expense))
+  if ((a.accountGroup() == eMyMoney::Account::Income
+       || a.accountGroup() == eMyMoney::Account::Expense))
     return allTypes;
 
   if (t.splitCount() == 2) {
@@ -552,10 +556,10 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 
     a = file->account(ida);
     b = file->account(idb);
-    if ((a.accountGroup() != MyMoneyAccount::Expense
-         && a.accountGroup() != MyMoneyAccount::Income)
-        && (b.accountGroup() != MyMoneyAccount::Expense
-            && b.accountGroup() != MyMoneyAccount::Income))
+    if ((a.accountGroup() != eMyMoney::Account::Expense
+         && a.accountGroup() != eMyMoney::Account::Income)
+        && (b.accountGroup() != eMyMoney::Account::Expense
+            && b.accountGroup() != eMyMoney::Account::Income))
       return transfers;
   }
 

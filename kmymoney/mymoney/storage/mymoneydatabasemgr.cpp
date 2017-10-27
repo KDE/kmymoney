@@ -926,7 +926,7 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
 
 void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent)
 {
-  if (account.accountType() == MyMoneyAccount::Stock && parent.accountType() != MyMoneyAccount::Investment)
+  if (account.accountType() == eMyMoney::Account::Stock && parent.accountType() != eMyMoney::Account::Investment)
     throw MYMONEYEXCEPTION("Cannot move a stock acocunt into a non-investment account");
 
   QStringList accountIdList;
@@ -1219,7 +1219,7 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(/*QString(id)*/);
   //QMap<QString, MyMoneyAccount>::const_iterator accpos = accountList.find(id);
   if (date_ != QDate()) qDebug("request balance for %s at %s", qPrintable(id), qPrintable(date_.toString(Qt::ISODate)));
-//  if(!date_.isValid() && MyMoneyFile::instance()->account(id).accountType() != MyMoneyAccount::Stock) {
+//  if(!date_.isValid() && MyMoneyFile::instance()->account(id).accountType() != eMyMoney::Account::Stock) {
 //    if(accountList.find(id) != accountList.end())
 //      return accountList[id].balance();
 //    return MyMoneyMoney(0);
@@ -1301,8 +1301,8 @@ const MyMoneyTransaction MyMoneyDatabaseMgr::transaction(const QString& account,
   MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(account))[account];
   MyMoneyTransactionFilter filter;
 
-  if (acc.accountGroup() == MyMoneyAccount::Income
-      || acc.accountGroup() == MyMoneyAccount::Expense)
+  if (acc.accountGroup() == eMyMoney::Account::Income
+      || acc.accountGroup() == eMyMoney::Account::Expense)
     filter.addCategory(account);
   else
     filter.addAccount(account);
@@ -1524,9 +1524,9 @@ const MyMoneySchedule MyMoneyDatabaseMgr::schedule(const QString& id) const
 }
 
 const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& accountId,
-    const MyMoneySchedule::typeE type,
-    const MyMoneySchedule::occurrenceE occurrence,
-    const MyMoneySchedule::paymentTypeE paymentType,
+    const eMyMoney::Schedule::Type type,
+    const eMyMoney::Schedule::Occurrence occurrence,
+    const eMyMoney::Schedule::PaymentType paymentType,
     const QDate& startDate,
     const QDate& endDate,
     const bool overdue) const
@@ -1544,19 +1544,19 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& acc
   for (pos = scheduleList.constBegin(); pos != scheduleList.constEnd(); ++pos) {
     // qDebug("  '%s'", (*pos).id().data());
 
-    if (type != MyMoneySchedule::TYPE_ANY) {
+    if (type != eMyMoney::Schedule::Type::Any) {
       if (type != (*pos).type()) {
         continue;
       }
     }
 
-    if (occurrence != MyMoneySchedule::OCCUR_ANY) {
+    if (occurrence != eMyMoney::Schedule::Occurrence::Any) {
       if (occurrence != (*pos).occurrence()) {
         continue;
       }
     }
 
-    if (paymentType != MyMoneySchedule::STYPE_ANY) {
+    if (paymentType != eMyMoney::Schedule::PaymentType::Any) {
       if (paymentType != (*pos).paymentType()) {
         continue;
       }
@@ -1627,13 +1627,13 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx(int scheduleType
     return list;
 
   for (pos = scheduleList.constBegin(); pos != scheduleList.constEnd(); ++pos) {
-    if (scheduleTypes && !(scheduleTypes & (*pos).type()))
+    if (scheduleTypes && !(scheduleTypes & (int)(*pos).type()))
       continue;
 
-    if (scheduleOcurrences && !(scheduleOcurrences & (*pos).occurrence()))
+    if (scheduleOcurrences && !(scheduleOcurrences & (int)(*pos).occurrence()))
       continue;
 
-    if (schedulePaymentTypes && !(schedulePaymentTypes & (*pos).paymentType()))
+    if (schedulePaymentTypes && !(schedulePaymentTypes & (int)(*pos).paymentType()))
       continue;
 
     if ((*pos).paymentDates(startDate, startDate).count() == 0)

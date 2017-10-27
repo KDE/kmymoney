@@ -207,8 +207,8 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     if (m_createAccount) {
       // now that the security exists, we can add the account to store it
       m_account.setName(field("investmentName").toString());
-      if (m_account.accountType() == MyMoneyAccount::UnknownAccountType)
-        m_account.setAccountType(MyMoneyAccount::Stock);
+      if (m_account.accountType() == eMyMoney::Account::Unknown)
+        m_account.setAccountType(eMyMoney::Account::Stock);
 
       m_account.setCurrencyId(m_security.id());
       switch (m_investmentDetailsPage->priceMode()) {

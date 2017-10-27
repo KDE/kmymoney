@@ -53,6 +53,7 @@
 
 #include "mymoneysecurity.h"
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
 #include "kavailablecurrencydlg.h"
 #include "kcurrencyeditordlg.h"
 #include "kmymoneyutils.h"

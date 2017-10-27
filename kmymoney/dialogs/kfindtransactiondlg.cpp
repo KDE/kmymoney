@@ -48,6 +48,8 @@
 
 #include "kmymoneyedit.h"
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
 #include "kmymoneyglobalsettings.h"
 #include "register.h"
 #include "transaction.h"
@@ -211,7 +213,7 @@ void KFindTransactionDlg::slotReset()
   selectAllItems(m_ui->m_tagsView, true);
 
   m_ui->m_typeBox->setCurrentIndex(MyMoneyTransactionFilter::allTypes);
-  m_ui->m_stateBox->setCurrentIndex(MyMoneyTransactionFilter::allStates);
+  m_ui->m_stateBox->setCurrentIndex((int)eMyMoney::TransactionFilter::State::All);
   m_ui->m_validityBox->setCurrentIndex(MyMoneyTransactionFilter::anyValidity);
 
   m_ui->m_nrEdit->setEnabled(true);
@@ -358,11 +360,11 @@ void KFindTransactionDlg::setupAccountsPage(bool withEquityAccounts)
 {
   m_ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet accountSet;
-  accountSet.addAccountGroup(MyMoneyAccount::Asset);
-  accountSet.addAccountGroup(MyMoneyAccount::Liability);
+  accountSet.addAccountGroup(eMyMoney::Account::Asset);
+  accountSet.addAccountGroup(eMyMoney::Account::Liability);
 
   if (withEquityAccounts)
-    accountSet.addAccountGroup(MyMoneyAccount::Equity);
+    accountSet.addAccountGroup(eMyMoney::Account::Equity);
 
   //set the accountset to show closed account if the settings say so
   accountSet.setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
@@ -404,8 +406,8 @@ void KFindTransactionDlg::setupCategoriesPage()
 {
   m_ui->m_categoriesView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet categorySet;
-  categorySet.addAccountGroup(MyMoneyAccount::Income);
-  categorySet.addAccountGroup(MyMoneyAccount::Expense);
+  categorySet.addAccountGroup(eMyMoney::Account::Income);
+  categorySet.addAccountGroup(eMyMoney::Account::Expense);
   categorySet.load(m_ui->m_categoriesView);
   connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateSelections()));
 }
@@ -652,7 +654,7 @@ void KFindTransactionDlg::setupFilter()
       QStringList::const_iterator it_a, it_b;
       for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
         MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-        if (acc.accountType() == MyMoneyAccount::Investment) {
+        if (acc.accountType() == eMyMoney::Account::Investment) {
           for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
             if (!list.contains(*it_b)) {
               missing.append(*it_b);

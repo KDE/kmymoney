@@ -38,6 +38,9 @@
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
@@ -46,9 +49,10 @@
 
 using namespace MyMoneyStorageNodes;
 using namespace Icons;
+using namespace eMyMoney;
 
 MyMoneyAccount::MyMoneyAccount() :
-    m_accountType(UnknownAccountType),
+    m_accountType(Account::Unknown),
     m_fraction(-1)
 {
 }
@@ -67,7 +71,7 @@ MyMoneyAccount::MyMoneyAccount(const QString& id, const MyMoneyAccount& right) :
 MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     MyMoneyObject(node),
     MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
-    m_accountType(UnknownAccountType),
+    m_accountType(Account::Unknown),
     m_fraction(-1)
 {
   if (nodeNames[nnAccount] != node.tagName())
@@ -104,7 +108,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   bool bOK = false;
   int type = tmp.toInt(&bOK);
   if (bOK) {
-    setAccountType(static_cast<MyMoneyAccount::accountTypeE>(type));
+    setAccountType(static_cast<Account>(type));
   } else {
     qWarning("XMLREADER: Account %s had invalid or no account type information.", qPrintable(name()));
   }
@@ -195,7 +199,7 @@ void MyMoneyAccount::setParentAccountId(const QString& parent)
   m_parentAccount = parent;
 }
 
-void MyMoneyAccount::setAccountType(const accountTypeE type)
+void MyMoneyAccount::setAccountType(const Account type)
 {
   m_accountType = type;
 }
@@ -237,23 +241,23 @@ bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
           (m_institution == right.m_institution));
 }
 
-MyMoneyAccount::accountTypeE MyMoneyAccount::accountGroup() const
+Account MyMoneyAccount::accountGroup() const
 {
   switch (m_accountType) {
-    case MyMoneyAccount::Checkings:
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-    case MyMoneyAccount::Currency:
-    case MyMoneyAccount::Investment:
-    case MyMoneyAccount::MoneyMarket:
-    case MyMoneyAccount::CertificateDep:
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Stock:
-      return MyMoneyAccount::Asset;
+    case Account::Checkings:
+    case Account::Savings:
+    case Account::Cash:
+    case Account::Currency:
+    case Account::Investment:
+    case Account::MoneyMarket:
+    case Account::CertificateDep:
+    case Account::AssetLoan:
+    case Account::Stock:
+      return Account::Asset;
 
-    case MyMoneyAccount::CreditCard:
-    case MyMoneyAccount::Loan:
-      return MyMoneyAccount::Liability;
+    case Account::CreditCard:
+    case Account::Loan:
+      return Account::Liability;
 
     default:
       return m_accountType;
@@ -267,29 +271,29 @@ void MyMoneyAccount::setCurrencyId(const QString& id)
 
 bool MyMoneyAccount::isAssetLiability() const
 {
-  return accountGroup() == Asset || accountGroup() == Liability;
+  return accountGroup() == Account::Asset || accountGroup() == Account::Liability;
 }
 
 bool MyMoneyAccount::isIncomeExpense() const
 {
-  return accountGroup() == Income || accountGroup() == Expense;
+  return accountGroup() == Account::Income || accountGroup() == Account::Expense;
 }
 
 bool MyMoneyAccount::isLoan() const
 {
-  return accountType() == Loan || accountType() == AssetLoan;
+  return accountType() == Account::Loan || accountType() == Account::AssetLoan;
 }
 
 bool MyMoneyAccount::isInvest() const
 {
-  return accountType() == Stock;
+  return accountType() == Account::Stock;
 }
 
 bool MyMoneyAccount::isLiquidAsset() const
 {
-  return accountType() == Checkings ||
-         accountType() == Savings ||
-         accountType() == Cash;
+  return accountType() == Account::Checkings ||
+         accountType() == Account::Savings ||
+         accountType() == Account::Cash;
 }
 
 bool MyMoneyAccount::isCostCenterRequired() const
@@ -541,7 +545,7 @@ void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
   el.setAttribute(getAttrName(anOpened), dateToString(openingDate()));
   el.setAttribute(getAttrName(anNumber), number());
   // el.setAttribute(getAttrName(anOpeningBalance), openingBalance().toString());
-  el.setAttribute(getAttrName(anType), accountType());
+  el.setAttribute(getAttrName(anType), (int)accountType());
   el.setAttribute(getAttrName(anName), name());
   el.setAttribute(getAttrName(anDescription), description());
   if (!currencyId().isEmpty())
@@ -614,7 +618,7 @@ bool MyMoneyAccount::isClosed() const
 int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const
 {
   int fraction;
-  if (m_accountType == Cash)
+  if (m_accountType == Account::Cash)
     fraction = sec.smallestCashFraction();
   else
     fraction = sec.smallestAccountFraction();
@@ -623,7 +627,7 @@ int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const
 
 int MyMoneyAccount::fraction(const MyMoneySecurity& sec)
 {
-  if (m_accountType == Cash)
+  if (m_accountType == Account::Cash)
     m_fraction = sec.smallestCashFraction();
   else
     m_fraction = sec.smallestAccountFraction();
@@ -637,12 +641,12 @@ int MyMoneyAccount::fraction() const
 
 bool MyMoneyAccount::isCategory() const
 {
-  return m_accountType == Income || m_accountType == Expense;
+  return m_accountType == Account::Income || m_accountType == Account::Expense;
 }
 
 QString MyMoneyAccount::brokerageName() const
 {
-  if (m_accountType == Investment)
+  if (m_accountType == Account::Investment)
     return QString("%1 (%2)").arg(m_name, i18nc("Brokerage (suffix for account names)", "Brokerage"));
   return m_name;
 }
@@ -665,21 +669,21 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const
 {
-  static const QHash<MyMoneyAccount::accountTypeE, Icon> accToIco {
-    {MyMoneyAccount::Asset, Icon::ViewAsset},
-    {MyMoneyAccount::Investment, Icon::ViewStock},
-    {MyMoneyAccount::Stock, Icon::ViewStock},
-    {MyMoneyAccount::MoneyMarket, Icon::ViewStock},
-    {MyMoneyAccount::Checkings, Icon::ViewChecking},
-    {MyMoneyAccount::Savings, Icon::ViewSaving},
-    {MyMoneyAccount::AssetLoan, Icon::ViewLoanAsset},
-    {MyMoneyAccount::Loan, Icon::ViewLoan},
-    {MyMoneyAccount::CreditCard, Icon::ViewCreditCard},
-    {MyMoneyAccount::Asset, Icon::ViewAsset},
-    {MyMoneyAccount::Cash, Icon::ViewCash},
-    {MyMoneyAccount::Income, Icon::ViewIncome},
-    {MyMoneyAccount::Expense, Icon::ViewExpense},
-    {MyMoneyAccount::Equity, Icon::ViewEquity}
+  static const QHash<Account, Icon> accToIco {
+    {Account::Asset, Icon::ViewAsset},
+    {Account::Investment, Icon::ViewStock},
+    {Account::Stock, Icon::ViewStock},
+    {Account::MoneyMarket, Icon::ViewStock},
+    {Account::Checkings, Icon::ViewChecking},
+    {Account::Savings, Icon::ViewSaving},
+    {Account::AssetLoan, Icon::ViewLoanAsset},
+    {Account::Loan, Icon::ViewLoan},
+    {Account::CreditCard, Icon::ViewCreditCard},
+    {Account::Asset, Icon::ViewAsset},
+    {Account::Cash, Icon::ViewCash},
+    {Account::Income, Icon::ViewIncome},
+    {Account::Expense, Icon::ViewExpense},
+    {Account::Equity, Icon::ViewEquity}
   };
 
   Icon ixIcon = accToIco.value(accountType(), Icon::ViewLiability);
@@ -708,57 +712,57 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   return pxIcon;
 }
 
-QString MyMoneyAccount::accountTypeToString(const MyMoneyAccount::accountTypeE accountType)
+QString MyMoneyAccount::accountTypeToString(const Account accountType)
 {
   QString returnString;
 
   switch (accountType) {
-    case MyMoneyAccount::Checkings:
+    case Account::Checkings:
       returnString = i18n("Checking");
       break;
-    case MyMoneyAccount::Savings:
+    case Account::Savings:
       returnString = i18n("Savings");
       break;
-    case MyMoneyAccount::CreditCard:
+    case Account::CreditCard:
       returnString = i18n("Credit Card");
       break;
-    case MyMoneyAccount::Cash:
+    case Account::Cash:
       returnString = i18n("Cash");
       break;
-    case MyMoneyAccount::Loan:
+    case Account::Loan:
       returnString = i18n("Loan");
       break;
-    case MyMoneyAccount::CertificateDep:
+    case Account::CertificateDep:
       returnString = i18n("Certificate of Deposit");
       break;
-    case MyMoneyAccount::Investment:
+    case Account::Investment:
       returnString = i18n("Investment");
       break;
-    case MyMoneyAccount::MoneyMarket:
+    case Account::MoneyMarket:
       returnString = i18n("Money Market");
       break;
-    case MyMoneyAccount::Asset:
+    case Account::Asset:
       returnString = i18n("Asset");
       break;
-    case MyMoneyAccount::Liability:
+    case Account::Liability:
       returnString = i18n("Liability");
       break;
-    case MyMoneyAccount::Currency:
+    case Account::Currency:
       returnString = i18n("Currency");
       break;
-    case MyMoneyAccount::Income:
+    case Account::Income:
       returnString = i18n("Income");
       break;
-    case MyMoneyAccount::Expense:
+    case Account::Expense:
       returnString = i18n("Expense");
       break;
-    case MyMoneyAccount::AssetLoan:
+    case Account::AssetLoan:
       returnString = i18n("Investment Loan");
       break;
-    case MyMoneyAccount::Stock:
+    case Account::Stock:
       returnString = i18n("Stock");
       break;
-    case MyMoneyAccount::Equity:
+    case Account::Equity:
       returnString = i18n("Equity");
       break;
     default:

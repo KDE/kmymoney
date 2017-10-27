@@ -527,7 +527,7 @@ protected slots:
     * This slot collects information for a new scheduled transaction
     * based on transaction @a t and @a occurrence and saves it in the engine.
     */
-  void slotScheduleNew(const MyMoneyTransaction& t, MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_MONTHLY);
+  void slotScheduleNew(const MyMoneyTransaction& t, eMyMoney::Schedule::Occurrence occurrence = eMyMoney::Schedule::Occurrence::Monthly);
 
   /**
     */

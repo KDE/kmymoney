@@ -29,8 +29,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
+#include "mymoneyenums.h"
 
+class MyMoneyObject;
 class SecuritiesModel : public QStandardItemModel
 {
   Q_OBJECT
@@ -44,9 +45,9 @@ public:
   static QString getHeaderName(const Column column);
 
 public slots:
-  void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
 private:
   SecuritiesModel(QObject *parent = nullptr);

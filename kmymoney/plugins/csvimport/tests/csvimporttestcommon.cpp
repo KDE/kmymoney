@@ -19,6 +19,8 @@ email                : lukasz.wojnilowicz@gmail.com
 #include <QTextStream>
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 
 void writeStatementToCSV(const QString& content, const QString& filename)
 {
@@ -44,7 +46,7 @@ QString csvDataset(const int set) {
   return csvContent;
 }
 
-QString makeAccount(const QString& name, const QString& number, MyMoneyAccount::accountTypeE type, const QDate& open, const QString& parent)
+QString makeAccount(const QString& name, const QString& number, eMyMoney::Account type, const QDate& open, const QString& parent)
 {
   MyMoneyAccount acc;
   MyMoneyFileTransaction ft;

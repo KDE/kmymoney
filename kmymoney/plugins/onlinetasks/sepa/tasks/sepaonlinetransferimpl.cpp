@@ -23,6 +23,7 @@
 
 #include "mymoneyutils.h"
 #include "mymoney/mymoneyfile.h"
+#include "mymoneypayee.h"
 #include "mymoney/onlinejobadministration.h"
 #include "misc/validators.h"
 #include "payeeidentifiertyped.h"

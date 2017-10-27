@@ -57,6 +57,7 @@
 #include "kwelcomepage.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
 #include "mymoneyforecast.h"
 #include "kmymoney.h"
 #include "kreportchartview.h"
@@ -66,6 +67,7 @@
 #include "icons.h"
 #include "kmymoneywebpage.h"
 #include "mymoneyschedule.h"
+#include "mymoneyenums.h"
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"
@@ -74,6 +76,7 @@
 #define VIEW_REPORTS        "reports"
 
 using namespace Icons;
+using namespace eMyMoney;
 
 bool accountNameLess(const MyMoneyAccount &acc1, const MyMoneyAccount &acc2)
 {
@@ -347,8 +350,8 @@ void KHomeView::showNetWorthGraph()
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingSchedules(false);
-  reportCfg.addAccountGroup(MyMoneyAccount::Asset);
-  reportCfg.addAccountGroup(MyMoneyAccount::Liability);
+  reportCfg.addAccountGroup(Account::Asset);
+  reportCfg.addAccountGroup(Account::Liability);
   reportCfg.setColumnsAreDays(true);
   reportCfg.setConvertCurrency(true);
   reportCfg.setIncludingForecast(true);
@@ -392,14 +395,14 @@ void KHomeView::showPayments()
   if (!d->m_forecast.isForecastDone())
     doForecast();
 
-  schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                                MyMoneySchedule::OCCUR_ANY,
-                                MyMoneySchedule::STYPE_ANY,
+  schedule = file->scheduleList(QString(), Schedule::Type::Any,
+                                Schedule::Occurrence::Any,
+                                Schedule::PaymentType::Any,
                                 QDate::currentDate(),
-                                QDate::currentDate().addMonths(1));
-  overdues = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                                MyMoneySchedule::OCCUR_ANY,
-                                MyMoneySchedule::STYPE_ANY,
+                                QDate::currentDate().addMonths(1), false);
+  overdues = file->scheduleList(QString(), Schedule::Type::Any,
+                                Schedule::Occurrence::Any,
+                                Schedule::PaymentType::Any,
                                 QDate(), QDate(), true);
 
   if (schedule.empty() && overdues.empty())
@@ -586,7 +589,7 @@ void KHomeView::showPayments()
 
           // for single occurrence we have reported everything so we
           // better get out of here.
-          if ((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE) {
+          if ((*it).occurrence() == Schedule::Occurrence::Once) {
             schedule.erase(it);
             continue;
           }
@@ -698,8 +701,8 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     bool removeAccount = false;
     if (!(*it).isClosed() || showClosedAccounts) {
       switch ((*it).accountType()) {
-        case MyMoneyAccount::Expense:
-        case MyMoneyAccount::Income:
+        case Account::Expense:
+        case Account::Income:
           // never show a category account
           // Note: This might be different in a future version when
           //       the homepage also shows category based information
@@ -708,9 +711,9 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
           // Asset and Liability accounts are only shown if they
           // have the preferred flag set
-        case MyMoneyAccount::Asset:
-        case MyMoneyAccount::Liability:
-        case MyMoneyAccount::Investment:
+        case Account::Asset:
+        case Account::Liability:
+        case Account::Investment:
           // if preferred accounts are requested, then keep in list
           if ((*it).value("PreferredAccount") != "Yes"
               || (type & Preferred) == 0) {
@@ -721,10 +724,10 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           // Check payment accounts. If payment and preferred is selected,
           // then always show them. If only payment is selected, then
           // show only if preferred flag is not set.
-        case MyMoneyAccount::Checkings:
-        case MyMoneyAccount::Savings:
-        case MyMoneyAccount::Cash:
-        case MyMoneyAccount::CreditCard:
+        case Account::Checkings:
+        case Account::Savings:
+        case Account::Cash:
+        case Account::CreditCard:
           switch (type & (Payment | Preferred)) {
             case Payment:
               if ((*it).value("PreferredAccount") == "Yes")
@@ -829,7 +832,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
 
   bool showLimit = KMyMoneyGlobalSettings::showLimitInfo();
 
-  if (acc.accountType() == MyMoneyAccount::Investment) {
+  if (acc.accountType() == Account::Investment) {
     //investment accounts show the balances of all its subaccounts
     value = investmentBalance(acc);
 
@@ -848,8 +851,8 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
       d->m_total += value;
     }
     //if credit card or checkings account, show maximum credit
-    if (acc.accountType() == MyMoneyAccount::CreditCard ||
-        acc.accountType() == MyMoneyAccount::Checkings) {
+    if (acc.accountType() == Account::CreditCard ||
+        acc.accountType() == Account::Checkings) {
       QString maximumCredit = acc.value("maxCreditAbsolute");
       if (maximumCredit.isEmpty()) {
         maximumCredit = acc.value("minBalanceAbsolute");
@@ -909,10 +912,10 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
   QString countStr;
 
   if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions() || KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
-    countNotMarked = file->countTransactionsWithSpecificReconciliationState(acc.id(), MyMoneyTransactionFilter::notReconciled);
+    countNotMarked = file->countTransactionsWithSpecificReconciliationState(acc.id(), TransactionFilter::State::NotReconciled);
 
   if (KMyMoneyGlobalSettings::showCountOfClearedTransactions() || KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
-    countCleared = file->countTransactionsWithSpecificReconciliationState(acc.id(), MyMoneyTransactionFilter::cleared);
+    countCleared = file->countTransactionsWithSpecificReconciliationState(acc.id(), TransactionFilter::State::Cleared);
 
   if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
     countNotReconciled = countNotMarked + countCleared;
@@ -947,7 +950,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
   //show minimum balance column if requested
   if (showMinBal) {
     //if it is an investment, show minimum balance empty
-    if (acc.accountType() == MyMoneyAccount::Investment) {
+    if (acc.accountType() == Account::Investment) {
       tmp += QString("<td class=\"right\">&nbsp;</td>");
     } else {
       //show minimum balance entry
@@ -1142,25 +1145,25 @@ void KHomeView::showForecast()
         case -1:
           break;
         case 0:
-          if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
+          if ((*it_account).accountGroup() == Account::Asset) {
             msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           }
-          if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
+          if ((*it_account).accountGroup() == Account::Liability) {
             msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             break;
           }
           break;
         default:
-          if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
+          if ((*it_account).accountGroup() == Account::Asset) {
             msg = i18np("The balance of %2 will drop below %3 in %1 day.",
                         "The balance of %2 will drop below %3 in %1 days.",
                         dropZero, (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           }
-          if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
+          if ((*it_account).accountGroup() == Account::Liability) {
             msg = i18np("The balance of %2 will raise above %3 in %1 day.",
                         "The balance of %2 will raise above %3 in %1 days.",
                         dropZero, (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
@@ -1276,15 +1279,15 @@ void KHomeView::showAssetsLiabilities()
     if (!(*it).isClosed()) {
       switch ((*it).accountType()) {
           // group all assets into one list but make sure that investment accounts always show up
-        case MyMoneyAccount::Investment:
+        case Account::Investment:
           assets << *it;
           break;
 
-        case MyMoneyAccount::Checkings:
-        case MyMoneyAccount::Savings:
-        case MyMoneyAccount::Cash:
-        case MyMoneyAccount::Asset:
-        case MyMoneyAccount::AssetLoan:
+        case Account::Checkings:
+        case Account::Savings:
+        case Account::Cash:
+        case Account::Asset:
+        case Account::AssetLoan:
           // list account if it's the last in the hierarchy or has transactions in it
           if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
             assets << *it;
@@ -1292,9 +1295,9 @@ void KHomeView::showAssetsLiabilities()
           break;
 
           // group the liabilities into the other
-        case MyMoneyAccount::CreditCard:
-        case MyMoneyAccount::Liability:
-        case MyMoneyAccount::Loan:
+        case Account::CreditCard:
+        case Account::Liability:
+        case Account::Loan:
           // list account if it's the last in the hierarchy or has transactions in it
           if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
             liabilities << *it;
@@ -1392,7 +1395,7 @@ void KHomeView::showAssetsLiabilities()
       if (asset_it != assets.constEnd()) {
         MyMoneyMoney value;
         //investment accounts consolidate the balance of its subaccounts
-        if ((*asset_it).accountType() == MyMoneyAccount::Investment) {
+        if ((*asset_it).accountType() == Account::Investment) {
           value = investmentBalance(*asset_it);
         } else {
           value = MyMoneyFile::instance()->balance((*asset_it).id(), QDate::currentDate());
@@ -1713,7 +1716,7 @@ void KHomeView::showCashFlowSummary()
             }
 
             //store depending on account type
-            if (repSplitAcc.accountType() == MyMoneyAccount::Income) {
+            if (repSplitAcc.accountType() == Account::Income) {
               incomeValue += value;
             } else {
               expenseValue += value;
@@ -1739,11 +1742,11 @@ void KHomeView::showCashFlowSummary()
   MyMoneyMoney scheduledOtherTransfer;
 
   //get overdues and schedules until the end of this month
-  QList<MyMoneySchedule> schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                                    MyMoneySchedule::OCCUR_ANY,
-                                    MyMoneySchedule::STYPE_ANY,
+  QList<MyMoneySchedule> schedule = file->scheduleList(QString(), Schedule::Type::Any,
+                                    Schedule::Occurrence::Any,
+                                    Schedule::PaymentType::Any,
                                     QDate(),
-                                    endOfMonth);
+                                    endOfMonth, false);
 
   //Remove the finished schedules
   QList<MyMoneySchedule>::Iterator finished_it;
@@ -1766,7 +1769,7 @@ void KHomeView::showCashFlowSummary()
       nextDate = (*sched_it).nextPayment(nextDate);
       // for single occurrence nextDate will not change, so we
       // better get out of here.
-      if ((*sched_it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
+      if ((*sched_it).occurrence() == Schedule::Occurrence::Once)
         break;
     }
 
@@ -1778,7 +1781,7 @@ void KHomeView::showCashFlowSummary()
       MyMoneySplit sp = transaction.splitByAccount(acc.id(), true);
 
       // take care of the autoCalc stuff
-      if ((*sched_it).type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
+      if ((*sched_it).type() == Schedule::Type::LoanPayment) {
         QDate nextDate = (*sched_it).nextPayment((*sched_it).lastPayment());
 
         //make sure we have all 'starting balances' so that the autocalc works
@@ -1824,9 +1827,9 @@ void KHomeView::showCashFlowSummary()
             scheduledOtherTransfer += value;
           } else if (repSplitAcc.isIncomeExpense()) {
             //income and expenses are stored as negative values
-            if (repSplitAcc.accountType() == MyMoneyAccount::Income)
+            if (repSplitAcc.accountType() == Account::Income)
               scheduledIncome -= value;
-            if (repSplitAcc.accountType() == MyMoneyAccount::Expense)
+            if (repSplitAcc.accountType() == Account::Expense)
               scheduledExpense -= value;
           }
         }
@@ -1858,9 +1861,9 @@ void KHomeView::showCashFlowSummary()
     if (!(*account_it).isClosed()) {
       switch ((*account_it).accountType()) {
           //group all assets into one list
-        case MyMoneyAccount::Checkings:
-        case MyMoneyAccount::Savings:
-        case MyMoneyAccount::Cash: {
+        case Account::Checkings:
+        case Account::Savings:
+        case Account::Cash: {
             MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
             //calculate balance for foreign currency accounts
             if ((*account_it).currencyId() != file->baseCurrency().id()) {
@@ -1875,7 +1878,7 @@ void KHomeView::showCashFlowSummary()
             break;
           }
           //group the liabilities into the other
-        case MyMoneyAccount::CreditCard: {
+        case Account::CreditCard: {
             MyMoneyMoney value;
             value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
             //calculate balance if foreign currency

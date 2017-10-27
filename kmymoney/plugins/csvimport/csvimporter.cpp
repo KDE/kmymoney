@@ -40,6 +40,8 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+#include "mymoneytransaction.h"
 #include "csvutil.h"
 #include "convdate.h"
 
@@ -674,17 +676,17 @@ int CSVImporter::detectDecimalSymbols(const QList<int> &columns)
   MyMoneyFile *file = MyMoneyFile::instance();
   file->accountList(accounts);
 
-  QList<MyMoneyAccount::accountTypeE> accountTypes;
-  accountTypes << MyMoneyAccount::Checkings <<
-                  MyMoneyAccount::Savings <<
-                  MyMoneyAccount::Liability <<
-                  MyMoneyAccount::Checkings <<
-                  MyMoneyAccount::Savings <<
-                  MyMoneyAccount::Cash <<
-                  MyMoneyAccount::CreditCard <<
-                  MyMoneyAccount::Loan <<
-                  MyMoneyAccount::Asset <<
-                  MyMoneyAccount::Liability;
+  QList<eMyMoney::Account> accountTypes;
+  accountTypes << eMyMoney::Account::Checkings <<
+                  eMyMoney::Account::Savings <<
+                  eMyMoney::Account::Liability <<
+                  eMyMoney::Account::Checkings <<
+                  eMyMoney::Account::Savings <<
+                  eMyMoney::Account::Cash <<
+                  eMyMoney::Account::CreditCard <<
+                  eMyMoney::Account::Loan <<
+                  eMyMoney::Account::Asset <<
+                  eMyMoney::Account::Liability;
 
   QSet<QString> currencySymbols;
   foreach (const auto account, accounts) {
@@ -707,7 +709,7 @@ int CSVImporter::detectDecimalSymbols(const QList<int> &columns)
   return ret;
 }
 
-QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<MyMoneyAccount::accountTypeE> &accountTypes, const QString &statementHeader)
+QList<MyMoneyAccount> CSVImporter::findAccounts(const QList<eMyMoney::Account> &accountTypes, const QString &statementHeader)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accountList;
@@ -804,25 +806,25 @@ bool CSVImporter::detectAccount(MyMoneyStatement &st)
   statementHeader.remove(QRegularExpression(QStringLiteral("[-., ]")));
 
   QList<MyMoneyAccount> accounts;
-  QList<MyMoneyAccount::accountTypeE> accountTypes;
+  QList<eMyMoney::Account> accountTypes;
 
   switch(m_profile->type()) {
     default:
     case Profile::Banking:
-      accountTypes << MyMoneyAccount::Checkings <<
-                      MyMoneyAccount::Savings <<
-                      MyMoneyAccount::Liability <<
-                      MyMoneyAccount::Checkings <<
-                      MyMoneyAccount::Savings <<
-                      MyMoneyAccount::Cash <<
-                      MyMoneyAccount::CreditCard <<
-                      MyMoneyAccount::Loan <<
-                      MyMoneyAccount::Asset <<
-                      MyMoneyAccount::Liability;
+      accountTypes << eMyMoney::Account::Checkings <<
+                      eMyMoney::Account::Savings <<
+                      eMyMoney::Account::Liability <<
+                      eMyMoney::Account::Checkings <<
+                      eMyMoney::Account::Savings <<
+                      eMyMoney::Account::Cash <<
+                      eMyMoney::Account::CreditCard <<
+                      eMyMoney::Account::Loan <<
+                      eMyMoney::Account::Asset <<
+                      eMyMoney::Account::Liability;
       accounts = findAccounts(accountTypes, statementHeader);
       break;
     case Profile::Investment:
-      accountTypes << MyMoneyAccount::Investment; // take investment accounts...
+      accountTypes << eMyMoney::Account::Investment; // take investment accounts...
       accounts = findAccounts(accountTypes, statementHeader); //...and search them in statement header
       break;
   }
@@ -833,16 +835,16 @@ bool CSVImporter::detectAccount(MyMoneyStatement &st)
     st.m_accountId = accounts.first().id();
 
     switch (accounts.first().accountType()) {
-      case MyMoneyAccount::Checkings:
+      case eMyMoney::Account::Checkings:
         st.m_eType = MyMoneyStatement::etCheckings;
         break;
-      case MyMoneyAccount::Savings:
+      case eMyMoney::Account::Savings:
         st.m_eType = MyMoneyStatement::etSavings;
         break;
-      case MyMoneyAccount::Investment:
+      case eMyMoney::Account::Investment:
         st.m_eType = MyMoneyStatement::etInvestment;
         break;
-      case MyMoneyAccount::CreditCard:
+      case eMyMoney::Account::CreditCard:
         st.m_eType = MyMoneyStatement::etCreditCard;
         break;
       default:

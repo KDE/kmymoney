@@ -32,6 +32,7 @@
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "mymoneyforecast.h"
+#include "mymoneyprice.h"
 
 #include "ui_kforecastviewdecl.h"
 

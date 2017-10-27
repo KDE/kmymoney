@@ -95,8 +95,11 @@
 #include "mymoneysplit.h"
 #include "mymoneyaccount.h"
 #include "kmymoneyedit.h"
+#include "mymoneyfile.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
+using namespace eMyMoney;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 static constexpr char recoveryKeyId[] = "0xD2B08440";
@@ -657,37 +660,37 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
   QString accId(_accId);
 
   switch (acc.accountType()) {
-    case MyMoneyAccount::Stock:
+    case Account::Stock:
       // if a stock account is selected, we show the
       // the corresponding parent (investment) account
       acc = MyMoneyFile::instance()->account(acc.parentAccountId());
       accId = acc.id();
       // intentional fall through
 
-    case MyMoneyAccount::Checkings:
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-    case MyMoneyAccount::CreditCard:
-    case MyMoneyAccount::Loan:
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-    case MyMoneyAccount::Investment:
-    case MyMoneyAccount::Equity:
+    case Account::Checkings:
+    case Account::Savings:
+    case Account::Cash:
+    case Account::CreditCard:
+    case Account::Loan:
+    case Account::Asset:
+    case Account::Liability:
+    case Account::AssetLoan:
+    case Account::Income:
+    case Account::Expense:
+    case Account::Investment:
+    case Account::Equity:
       setCurrentPage(viewFrames[View::Ledgers]);
       m_ledgerView->slotSelectAccount(accId, transaction);
       break;
 
-    case MyMoneyAccount::CertificateDep:
-    case MyMoneyAccount::MoneyMarket:
-    case MyMoneyAccount::Currency:
-      qDebug("No ledger view available for account type %d", acc.accountType());
+    case Account::CertificateDep:
+    case Account::MoneyMarket:
+    case Account::Currency:
+      qDebug("No ledger view available for account type %d", (int)acc.accountType());
       break;
 
     default:
-      qDebug("Unknown account type %d in KMyMoneyView::slotLedgerSelected", acc.accountType());
+      qDebug("Unknown account type %d in KMyMoneyView::slotLedgerSelected", (int)acc.accountType());
       break;
   }
 }
@@ -1808,7 +1811,7 @@ void KMyMoneyView::fixFile_1()
         QStringList::const_iterator it_a, it_b;
         for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-          if (acc.accountType() == MyMoneyAccount::Investment) {
+          if (acc.accountType() == Account::Investment) {
             for (it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
               if (!list.contains(*it_b)) {
                 missing.append(*it_b);
@@ -1841,7 +1844,7 @@ if (!m_accountsView->allItemsSelected())
     QStringList::const_iterator it_a, it_b;
     for (it_a = list.begin(); it_a != list.end(); ++it_a) {
       MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-      if (acc.accountType() == MyMoneyAccount::Investment) {
+      if (acc.accountType() == Account::Investment) {
         for (it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
           if (!list.contains(*it_b)) {
             missing.append(*it_b);
@@ -1881,8 +1884,8 @@ void KMyMoneyView::fixFile_0()
   bool equityListEmpty = equity.accountList().count() == 0;
 
   for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
-    if ((*it_a).accountType() == MyMoneyAccount::Loan
-        || (*it_a).accountType() == MyMoneyAccount::AssetLoan) {
+    if ((*it_a).accountType() == Account::Loan
+        || (*it_a).accountType() == Account::AssetLoan) {
       fixLoanAccount_0(*it_a);
     }
     // until early before 0.8 release, the equity account was not saved to
@@ -1890,7 +1893,7 @@ void KMyMoneyView::fixFile_0()
     // find and equity account that has equity() as it's parent, we reparent
     // this account. Need to move it to asset() first, because otherwise
     // MyMoneyFile::reparent would act as NOP.
-    if (equityListEmpty && (*it_a).accountType() == MyMoneyAccount::Equity) {
+    if (equityListEmpty && (*it_a).accountType() == Account::Equity) {
       if ((*it_a).parentAccountId() == equity.id()) {
         MyMoneyAccount acc = *it_a;
         // tricky, force parent account to be empty so that we really
@@ -2099,12 +2102,12 @@ void KMyMoneyView::fixTransactions_0()
       MyMoneyMoney val;
       for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
         MyMoneyAccount acc = file->account((*it_s).accountId());
-        if (acc.accountGroup() == MyMoneyAccount::Asset
-            || acc.accountGroup() == MyMoneyAccount::Liability) {
+        if (acc.accountGroup() == Account::Asset
+            || acc.accountGroup() == Account::Liability) {
           val = (*it_s).value();
           accountCount++;
-          if (acc.accountType() == MyMoneyAccount::Loan
-              || acc.accountType() == MyMoneyAccount::AssetLoan)
+          if (acc.accountType() == Account::Loan
+              || acc.accountType() == Account::AssetLoan)
             isLoan = true;
         } else
           break;
@@ -2126,8 +2129,8 @@ void KMyMoneyView::fixTransactions_0()
     for (it_s = splits.begin(); defaultAction == 0 && it_s != splits.end(); ++it_s) {
       MyMoneyAccount acc = file->account((*it_s).accountId());
       MyMoneyMoney val = (*it_s).value();
-      if (acc.accountGroup() == MyMoneyAccount::Asset
-          || acc.accountGroup() == MyMoneyAccount::Liability) {
+      if (acc.accountGroup() == Account::Asset
+          || acc.accountGroup() == Account::Liability) {
         if (!val.isPositive())
           defaultAction = MyMoneySplit::ActionWithdrawal;
         else
@@ -2143,7 +2146,7 @@ void KMyMoneyView::fixTransactions_0()
     for (it_s = splits.begin(); needModify == false && it_s != splits.end(); ++it_s) {
       MyMoneyAccount acc = file->account((*it_s).accountId());
       MyMoneyMoney val = (*it_s).value();
-      if (acc.accountType() == MyMoneyAccount::CreditCard) {
+      if (acc.accountType() == Account::CreditCard) {
         if (val < 0 && (*it_s).action() != MyMoneySplit::ActionWithdrawal && (*it_s).action() != MyMoneySplit::ActionTransfer)
           needModify = true;
         if (val >= 0 && (*it_s).action() != MyMoneySplit::ActionDeposit && (*it_s).action() != MyMoneySplit::ActionTransfer)

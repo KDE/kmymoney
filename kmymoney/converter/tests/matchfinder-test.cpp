@@ -77,12 +77,12 @@ void MatchFinderTest::setupAccounts()
 
 
   account->setName("Expenses account");
-  account->setAccountType(MyMoneyAccount::Expense);
+  account->setAccountType(eMyMoney::Account::Expense);
   account->setOpeningDate(QDate(2012, 12, 01));
   account->setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());
 
   otherAccount->setName("Some other account");
-  otherAccount->setAccountType(MyMoneyAccount::Expense);
+  otherAccount->setAccountType(eMyMoney::Account::Expense);
   otherAccount->setOpeningDate(QDate(2012, 12, 01));
   otherAccount->setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());
 
@@ -138,7 +138,7 @@ MyMoneySchedule MatchFinderTest::buildNonOverdueSchedule() const
   MyMoneyTransaction transaction = buildDefaultTransaction();
   transaction.setPostDate(tomorrow);
 
-  MyMoneySchedule nonOverdueSchedule("schedule name", MyMoneySchedule::TYPE_TRANSFER, MyMoneySchedule::OCCUR_MONTHLY, 1, MyMoneySchedule::STYPE_BANKTRANSFER, tomorrow, tomorrow.addMonths(2), false, false);
+  MyMoneySchedule nonOverdueSchedule("schedule name", eMyMoney::Schedule::Type::Transfer, eMyMoney::Schedule::Occurrence::Monthly, 1, eMyMoney::Schedule::PaymentType::BankTransfer, tomorrow, tomorrow.addMonths(2), false, false);
   nonOverdueSchedule.setTransaction(transaction);
 
   return nonOverdueSchedule;

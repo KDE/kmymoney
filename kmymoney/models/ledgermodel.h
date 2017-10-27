@@ -35,7 +35,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneysplit.h"
 #include "mymoneyschedule.h"
-#include "mymoneyfile.h"
+#include "mymoneyenums.h"
 
 /**
   * Forward declarations for the returned models.
@@ -492,12 +492,12 @@ public:
 public Q_SLOTS:
 
 protected Q_SLOTS:
-  void removeTransaction(MyMoneyFile::notificationObjectT objType, const QString& id);
-  void addTransaction(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void modifyTransaction(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void removeSchedule(MyMoneyFile::notificationObjectT objType, const QString& id);
-  void addSchedule(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void modifySchedule(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void removeTransaction(eMyMoney::File::Object objType, const QString& id);
+  void addTransaction(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void modifyTransaction(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void removeSchedule(eMyMoney::File::Object objType, const QString& id);
+  void addSchedule(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void modifySchedule(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
 
 protected:
   struct Private;
@@ -512,7 +512,7 @@ public:
   virtual ~LedgerSortFilterProxyModel();
 
   void setShowNewTransaction(bool show);
-  void setAccountType(MyMoneyAccount::accountTypeE type);
+  void setAccountType(eMyMoney::Account type);
 
   /**
    * This method maps the @a index to the base model and calls setData on it
@@ -531,7 +531,7 @@ protected:
 
 private:
   bool                            m_showNewTransaction;
-  MyMoneyAccount::accountTypeE    m_accountType;
+  eMyMoney::Account    m_accountType;
 };
 
 

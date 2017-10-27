@@ -210,7 +210,7 @@ public:
 class TypeGroupMarker : public GroupMarker
 {
 public:
-  TypeGroupMarker(Register* parent, CashFlowDirection dir, MyMoneyAccount::accountTypeE accType);
+  TypeGroupMarker(Register* parent, CashFlowDirection dir, eMyMoney::Account accType);
   CashFlowDirection sortType() const {
     return m_dir;
   }

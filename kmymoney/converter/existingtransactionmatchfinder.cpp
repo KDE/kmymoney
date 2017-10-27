@@ -19,6 +19,7 @@
 #include <QDebug>
 
 #include "mymoneyfile.h"
+#include "mymoneytransactionfilter.h"
 
 ExistingTransactionMatchFinder::ExistingTransactionMatchFinder(int matchWindow)
     : TransactionMatchFinder(matchWindow)

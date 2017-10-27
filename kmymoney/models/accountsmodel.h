@@ -33,8 +33,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
 #include "modelenums.h"
+#include "mymoneyenums.h"
 
 /**
   * A model for the accounts.
@@ -51,6 +51,8 @@
   * @author Łukasz Wojniłowicz 2017
   *
   */
+class MyMoneyObject;
+class MyMoneyMoney;
 class MyMoneyAccount;
 class AccountsModel : public QStandardItemModel
 {
@@ -94,9 +96,9 @@ public:
 public slots:
 
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
-  void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
   void slotBalanceOrValueChanged(const MyMoneyAccount &account);
 
 signals:
@@ -157,9 +159,9 @@ public:
   void load();
 
 public slots:
-  void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
 private:
   InstitutionsModel(QObject *parent = 0);

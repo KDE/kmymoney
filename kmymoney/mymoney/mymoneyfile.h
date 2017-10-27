@@ -2,6 +2,7 @@
                           mymoneyfile.h
                              -------------------
     copyright            : (C) 2002, 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
  ***************************************************************************/
 
@@ -21,26 +22,14 @@
 // QT Includes
 
 #include <QObject>
-#include <QString>
-#include <QMap>
-#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneyreport.h"
-#include <mymoneybudget.h>
-#include <onlinejob.h>
-#include "mymoneyschedule.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio, Christian Dávid
@@ -131,40 +120,36 @@
   * while the engine code is running. The MyMoneyException:: object
   * describes the problem.
   */
+template <class Key, class T> class QMap;
+class QString;
+class QStringList;
+class QBitArray;
 class IMyMoneyStorage;
 class MyMoneyCostCenter;
-class QBitArray;
+class MyMoneyAccount;
+class MyMoneyInstitution;
+class MyMoneySecurity;
+class MyMoneyPrice;
+typedef QPair<QString, QString> MyMoneySecurityPair;
+typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
+typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
+class MyMoneySchedule;
+class MyMoneyTag;
+class MyMoneyPayee;
+class MyMoneyBudget;
+class MyMoneyReport;
+class MyMoneyMoney;
+class MyMoneySplit;
+class MyMoneyObject;
+class MyMoneyTransaction;
+class MyMoneyTransactionFilter;
+class onlineJob;
 class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  /**
-    * notificationObject identifies the type of the object
-    * for which this notification is stored
-    */
-  typedef enum {
-    notifyAccount = 1,
-    notifyInstitution,
-    notifyPayee,
-    notifyTransaction,
-    notifyTag,
-    notifySchedule,
-    notifySecurity,
-    notifyOnlineJob
-  } notificationObjectT;
-
-  /**
-    * notificationMode identifies the type of notifiation
-    * (add, modify, remove)
-    */
-  typedef enum {
-    notifyAdd = 1,
-    notifyModify,
-    notifyRemove
-  } notificationModeT;
-
   friend class MyMoneyNotifier;
 
   /**
@@ -625,7 +610,8 @@ public:
     * @param date return balance for specific date (default = QDate())
     * @return balance of the account as MyMoneyMoney object
     */
-  const MyMoneyMoney balance(const QString& id, const QDate& date = QDate()) const;
+  const MyMoneyMoney balance(const QString& id, const QDate& date) const;
+  const MyMoneyMoney balance(const QString& id) const;
 
   /**
     * This method is used to return the cleared balance of an account
@@ -651,7 +637,8 @@ public:
     * @param date return balance for specific date (default = QDate())
     * @return balance of the account as MyMoneyMoney object
     */
-  const MyMoneyMoney totalBalance(const QString& id, const QDate& date = QDate()) const;
+  const MyMoneyMoney totalBalance(const QString& id, const QDate& date) const;
+  const MyMoneyMoney totalBalance(const QString& id) const;
 
   /**
     * This method returns the number of transactions currently known to file
@@ -664,7 +651,8 @@ public:
     *
     * @return number of transactions in journal/account
     */
-  unsigned int transactionCount(const QString& account = QString()) const;
+  unsigned int transactionCount(const QString& account) const;
+  unsigned int transactionCount() const;
 
   /**
     * This method returns a QMap filled with the number of transactions
@@ -783,12 +771,12 @@ public:
     * MyMoneyAccount::AccountSeperator.
     *
     * @param category const reference to QString containing the category
-    * @param type account type if a specific type is required (defaults to UnknownAccountType)
+    * @param type account type if a specific type is required (defaults to Unknown)
     *
     * @return QString of the corresponding account. If account was not found
     *         the return value will be an empty string.
     */
-  QString categoryToAccount(const QString& category, MyMoneyAccount::accountTypeE type = MyMoneyAccount::UnknownAccountType) const;
+  QString categoryToAccount(const QString& category, eMyMoney::Account type = eMyMoney::Account::Unknown) const;
 
   /**
     * This method is used to convert a string representing an asset or
@@ -1030,15 +1018,15 @@ public:
     *                  account @p accountId. If accountId is the empty string,
     *                  this filter is off. Default is @p QString().
     * @param type      only schedules of type @p type are searched for.
-    *                  See MyMoneySchedule::typeE for details.
-    *                  Default is MyMoneySchedule::TYPE_ANY
+    *                  See eMyMoney::Schedule::Type for details.
+    *                  Default is eMyMoney::Schedule::Type::Any
     * @param occurrence only schedules of occurrence type @p occurrence are searched for.
-    *                  See MyMoneySchedule::occurrenceE for details.
-    *                  Default is MyMoneySchedule::OCCUR_ANY
+    *                  See eMyMoney::Schedule::Occurence for details.
+    *                  Default is eMyMoney::Schedule::Occurrence::Any
     * @param paymentType only schedules of payment method @p paymentType
     *                  are searched for.
-    *                  See MyMoneySchedule::paymentTypeE for details.
-    *                  Default is MyMoneySchedule::STYPE_ANY
+    *                  See eMyMoney::Schedule::PaymentType for details.
+    *                  Default is eMyMoney::Schedule::PaymentType::Any
     * @param startDate only schedules with payment dates after @p startDate
     *                  are searched for. Default is all dates (QDate()).
     * @param endDate   only schedules with payment dates ending prior to @p endDate
@@ -1048,13 +1036,15 @@ public:
     *
     * @return const QList<MyMoneySchedule> list of schedule objects.
     */
-  const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
-      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-      const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
-      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
-      const QDate& startDate = QDate(),
-      const QDate& endDate = QDate(),
-      const bool overdue = false) const;
+  const QList<MyMoneySchedule> scheduleList(const QString& accountId,
+      const eMyMoney::Schedule::Type type,
+      const eMyMoney::Schedule::Occurrence occurrence,
+      const eMyMoney::Schedule::PaymentType paymentType,
+      const QDate& startDate,
+      const QDate& endDate,
+      const bool overdue) const;
+  const QList<MyMoneySchedule> scheduleList(const QString& accountId) const;
+  const QList<MyMoneySchedule> scheduleList() const;
 
   const QStringList consistencyCheck();
 
@@ -1292,7 +1282,9 @@ public:
     * @return price found as MyMoneyPrice object
     * @note This throws an exception when the base currency is not set and toId is empty
     */
-  MyMoneyPrice price(const QString& fromId, const QString& toId = QString(), const QDate& date = QDate::currentDate(), const bool exactDate = false) const;
+  MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate = false) const;
+  MyMoneyPrice price(const QString& fromId, const QString& toId) const;
+  MyMoneyPrice price(const QString& fromId) const;
 
   /**
     * This method returns a list of all prices.
@@ -1546,7 +1538,7 @@ public:
     * @param state @p state reconciliation state
     * @return number of transactions with state @p state
     */
-  int countTransactionsWithSpecificReconciliationState(const QString& accId, enum MyMoneyTransactionFilter::stateOptionE state) const;
+  int countTransactionsWithSpecificReconciliationState(const QString& accId, TransactionFilter::State state) const;
 
   /**
    * @brief Saves a new onlineJob
@@ -1622,7 +1614,7 @@ Q_SIGNALS:
     * had been added. The data for the new object is contained in
     * @a obj.
     */
-  void objectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void objectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
 
   /**
     * This signal is emitted by the engine whenever an object
@@ -1633,14 +1625,14 @@ Q_SIGNALS:
     * method anymore as the object is already deleted in the storage
     * when the signal is emitted.
     */
-  void objectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  void objectRemoved(eMyMoney::File::Object objType, const QString& id);
 
   /**
     * This signal is emitted by the engine whenever an object
     * had been changed. The new state of the object is contained
     * in @a obj.
     */
-  void objectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void objectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
 
   /**
     * This signal is emitted by the engine whenever the balance

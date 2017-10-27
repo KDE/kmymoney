@@ -37,12 +37,17 @@
 
 #include "mymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
 #include "modelenums.h"
 
 using namespace Icons;
 using namespace eAccountsModel;
+using namespace eMyMoney;
 
 class AccountsModel::Private
 {
@@ -173,10 +178,10 @@ public:
 
     const auto checkMark = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
     switch (account.accountType()) {
-      case MyMoneyAccount::Income:
-      case MyMoneyAccount::Expense:
-      case MyMoneyAccount::Asset:
-      case MyMoneyAccount::Liability:
+      case Account::Income:
+      case Account::Expense:
+      case Account::Asset:
+      case Account::Liability:
         // Tax
         if (columns.contains(Column::Tax)) {
           colNum = m_columns.indexOf(Column::Tax);
@@ -361,9 +366,9 @@ public:
 
     // for income and liability accounts, we reverse the sign
     switch (account.accountGroup()) {
-      case MyMoneyAccount::Income:
-      case MyMoneyAccount::Liability:
-      case MyMoneyAccount::Equity:
+      case Account::Income:
+      case Account::Liability:
+      case Account::Equity:
         balance = -balance;
         break;
 
@@ -448,7 +453,7 @@ public:
         auto value = data.value<MyMoneyMoney>();
         if (isInstitutionsModel) {
           const auto account = childNode->data((int)Role::Account).value<MyMoneyAccount>();
-          if (account.accountGroup() == MyMoneyAccount::Liability)
+          if (account.accountGroup() == Account::Liability)
             value = -value;
         }
       totalValue += value;
@@ -578,10 +583,10 @@ void AccountsModel::load()
   }
 
   // adding account categories (asset, liability, etc.) node
-  QVector <MyMoneyAccount::_accountTypeE> categories {
-    MyMoneyAccount::Asset, MyMoneyAccount::Liability,
-    MyMoneyAccount::Income, MyMoneyAccount::Expense,
-    MyMoneyAccount::Equity
+  QVector <Account> categories {
+    Account::Asset, Account::Liability,
+    Account::Income, Account::Expense,
+    Account::Equity
   };
 
   foreach (const auto category, categories) {
@@ -590,31 +595,31 @@ void AccountsModel::load()
     int displayOrder;
 
     switch (category) {
-      case MyMoneyAccount::Asset:
+      case Account::Asset:
         // Asset accounts
         account = d->m_file->asset();
         accountName = i18n("Asset accounts");
         displayOrder = 1;
         break;
-      case MyMoneyAccount::Liability:
+      case Account::Liability:
         // Liability accounts
         account = d->m_file->liability();
         accountName = i18n("Liability accounts");
         displayOrder = 2;
         break;
-      case MyMoneyAccount::Income:
+      case Account::Income:
         // Income categories
         account = d->m_file->income();
         accountName = i18n("Income categories");
         displayOrder = 3;
         break;
-      case MyMoneyAccount::Expense:
+      case Account::Expense:
         // Expense categories
         account = d->m_file->expense();
         accountName = i18n("Expense categories");
         displayOrder = 4;
         break;
-      case MyMoneyAccount::Equity:
+      case Account::Equity:
         // Equity accounts
         account = d->m_file->equity();
         accountName = i18n("Equity accounts");
@@ -879,9 +884,9 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
   * Notify the model that an object has been added. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void AccountsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * const obj)
 {
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != File::Object::Account)
     return;
 
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
@@ -912,9 +917,9 @@ void AccountsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, co
   * Notify the model that an object has been modified. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void AccountsModel::slotObjectModified(File::Object objType, const MyMoneyObject * const obj)
 {
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != File::Object::Account)
     return;
 
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
@@ -938,8 +943,8 @@ void AccountsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
       favoriteAccountsItem->removeRow(favItem->row()); // it's not favorite anymore
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
-    slotObjectRemoved(MyMoneyFile::notifyAccount, oldAccount.id());
-    slotObjectAdded(MyMoneyFile::notifyAccount, obj);
+    slotObjectRemoved(File::Object::Account, oldAccount.id());
+    slotObjectAdded(File::Object::Account, obj);
   }
 
   checkNetWorth();
@@ -950,9 +955,9 @@ void AccountsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
   * Notify the model that an object has been removed. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id)
+void AccountsModel::slotObjectRemoved(File::Object objType, const QString& id)
 {
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != File::Object::Account)
     return;
 
   auto list = match(index(0, 0), (int)Role::ID, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
@@ -1121,10 +1126,10 @@ void InstitutionsModel::load()
   * Notify the model that an object has been added. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void InstitutionsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * const obj)
 {
   auto modelUtils = static_cast<InstitutionsPrivate *>(d);
-  if (objType == MyMoneyFile::notifyInstitution) {
+  if (objType == File::Object::Institution) {
     // if an institution was added then add the item which will represent it
     const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
     if (!institution)
@@ -1132,7 +1137,7 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
     modelUtils->addInstitutionItem(this, *institution);
   }
 
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != File::Object::Account)
     return;
 
   // if an account was added then add the item which will represent it only for real accounts
@@ -1161,9 +1166,9 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
   * Notify the model that an object has been modified. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void InstitutionsModel::slotObjectModified(File::Object objType, const MyMoneyObject * const obj)
 {
-  if (objType == MyMoneyFile::notifyInstitution) {
+  if (objType == File::Object::Institution) {
     // if an institution was modified then modify the item which represents it
     const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
     if (!institution)
@@ -1174,13 +1179,13 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
     institutionItem->setIcon(institution->pixmap());
   }
 
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != File::Object::Account)
     return;
 
   // if an account was modified then modify the item which represents it
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
   // nothing to do for root accounts, categories and equity accounts since they don't have a representation in this model
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == MyMoneyAccount::Equity)
+  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == Account::Equity)
     return;
 
   auto accountItem = d->itemFromAccountId(this, account->id());
@@ -1190,8 +1195,8 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
     d->setAccountData(accountItem->parent(), accountItem->row(), *account, d->m_columns);
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
-    slotObjectRemoved(MyMoneyFile::notifyAccount, oldAccount.id());
-    slotObjectAdded(MyMoneyFile::notifyAccount, obj);
+    slotObjectRemoved(File::Object::Account, oldAccount.id());
+    slotObjectAdded(File::Object::Account, obj);
   }
 }
 
@@ -1199,16 +1204,16 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
   * Notify the model that an object has been removed. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id)
+void InstitutionsModel::slotObjectRemoved(File::Object objType, const QString& id)
 {
-  if (objType == MyMoneyFile::notifyInstitution) {
+  if (objType == File::Object::Institution) {
     // if an institution was removed then remove the item which represents it
     auto itInstitution = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, id);
     if (itInstitution)
       removeRow(itInstitution->row(), itInstitution->index().parent());
   }
 
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != File::Object::Account)
     return;
 
   // if an account was removed then remove the item which represents it and recompute the institution's value

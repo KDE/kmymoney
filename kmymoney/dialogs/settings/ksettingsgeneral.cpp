@@ -32,6 +32,8 @@
 #include "kmymoneydateinput.h"
 #include "models.h"
 #include "accountsmodel.h"
+#include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 
 KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
     KSettingsGeneralDecl(parent)
@@ -99,11 +101,11 @@ void KSettingsGeneral::slotUpdateEquitiesVisibility()
   foreach (const auto account, accountsList) {
     if (account.isInvest() && account.balance().isZero()) {                             // search only for zero balance stocks
       if (initialHideZeroBalanceEquities) {
-        accountsModel->slotObjectRemoved(MyMoneyFile::notifyAccount, account.id());     // remove item from accounts' page
-        institutionsModel->slotObjectRemoved(MyMoneyFile::notifyAccount, account.id()); // remove item from institutions' page
+        accountsModel->slotObjectRemoved(eMyMoney::File::Object::Account, account.id());     // remove item from accounts' page
+        institutionsModel->slotObjectRemoved(eMyMoney::File::Object::Account, account.id()); // remove item from institutions' page
       } else {
-        accountsModel->slotObjectAdded(MyMoneyFile::notifyAccount, dynamic_cast<const MyMoneyObject* const>(&account));     // add item to accounts' page
-        institutionsModel->slotObjectAdded(MyMoneyFile::notifyAccount, dynamic_cast<const MyMoneyObject* const>(&account)); // add item to institutions' page
+        accountsModel->slotObjectAdded(eMyMoney::File::Object::Account, dynamic_cast<const MyMoneyObject* const>(&account));     // add item to accounts' page
+        institutionsModel->slotObjectAdded(eMyMoney::File::Object::Account, dynamic_cast<const MyMoneyObject* const>(&account)); // add item to institutions' page
       }
     }
   }

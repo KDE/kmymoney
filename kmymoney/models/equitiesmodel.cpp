@@ -28,6 +28,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+
 class EquitiesModel::Private
 {
 public:
@@ -84,7 +89,7 @@ public:
       cell->setData(account.currencyId(), Role::SecurityID);
     }
 
-    if (account.accountType() == MyMoneyAccount::Investment)  // investments accounts are not meant to be displayed, so stop here
+    if (account.accountType() == eMyMoney::Account::Investment)  // investments accounts are not meant to be displayed, so stop here
       return;
 
     // Symbol
@@ -206,7 +211,7 @@ void EquitiesModel::load()
   QList<MyMoneyAccount> accList;
   d->m_file->accountList(accList);                        // get all available accounts
   foreach (const auto acc, accList)
-    if (acc.accountType() == MyMoneyAccount::Investment)  // but add only investment accounts (and its children) to the model
+    if (acc.accountType() == eMyMoney::Account::Investment)  // but add only investment accounts (and its children) to the model
         d->loadInvestmentAccount(rootItem, acc);
 
   this->blockSignals(false);
@@ -216,22 +221,22 @@ void EquitiesModel::load()
   * Notify the model that an object has been added. An action is performed only if the object is an account.
   *
   */
-void EquitiesModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
   // check whether change is about accounts
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != eMyMoney::File::Object::Account)
     return;
 
   // check whether change is about either investment or stock account
   const auto acc = dynamic_cast<const MyMoneyAccount * const>(obj);
   if (!acc ||
-      (acc->accountType() != MyMoneyAccount::Investment &&
-       acc->accountType() != MyMoneyAccount::Stock))
+      (acc->accountType() != eMyMoney::Account::Investment &&
+       acc->accountType() != eMyMoney::Account::Stock))
     return;
   auto itAcc = d->itemFromId(this, acc->id(), Role::EquityID);
 
   QStandardItem *itParentAcc;
-  if (acc->accountType() == MyMoneyAccount::Investment) // if it's investment account then its parent is root item
+  if (acc->accountType() == eMyMoney::Account::Investment) // if it's investment account then its parent is root item
     itParentAcc = invisibleRootItem();
   else                                                  // otherwise it's stock account and its parent is investment account
     itParentAcc = d->itemFromId(this, acc->parentAccountId(), Role::InvestmentID);
@@ -250,21 +255,21 @@ void EquitiesModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, co
   * Notify the model that an object has been modified. An action is performed only if the object is an account.
   *
   */
-void EquitiesModel::slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
   const MyMoneyAccount *acc;
   QStandardItem  *itAcc;
   switch (objType) {
-    case MyMoneyFile::notifyAccount:
+    case eMyMoney::File::Object::Account:
       {
         auto tmpAcc = dynamic_cast<const MyMoneyAccount * const>(obj);
-        if (!tmpAcc || tmpAcc->accountType() != MyMoneyAccount::Stock)
+        if (!tmpAcc || tmpAcc->accountType() != eMyMoney::Account::Stock)
           return;
         acc = tmpAcc;
         itAcc = d->itemFromId(this, acc->id(), Role::EquityID);
         break;
       }
-    case MyMoneyFile::notifySecurity:
+    case eMyMoney::File::Object::Security:
       {
         auto sec = dynamic_cast<const MyMoneySecurity * const>(obj);
         itAcc = d->itemFromId(this, sec->id(), Role::SecurityID);
@@ -284,8 +289,8 @@ void EquitiesModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
   if (modelID == acc->parentAccountId()) {                              // and if it matches with those from file then modify only
     d->setAccountData(itParentAcc, itAcc->row(), *acc, d->m_columns);
   } else {                                                              // and if not then reparent
-    slotObjectRemoved(MyMoneyFile::notifyAccount, acc->id());
-    slotObjectAdded(MyMoneyFile::notifyAccount, obj);
+    slotObjectRemoved(eMyMoney::File::Object::Account, acc->id());
+    slotObjectAdded(eMyMoney::File::Object::Account, obj);
   }
 }
 
@@ -293,9 +298,9 @@ void EquitiesModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
   * Notify the model that an object has been removed. An action is performed only if the object is an account.
   *
   */
-void EquitiesModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id)
+void EquitiesModel::slotObjectRemoved(eMyMoney::File::Object objType, const QString& id)
 {
-  if (objType != MyMoneyFile::notifyAccount)
+  if (objType != eMyMoney::File::Object::Account)
     return;
 
   const auto indexList = match(index(0, 0), Role::EquityID, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
@@ -308,7 +313,7 @@ void EquitiesModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, 
   */
 void EquitiesModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
 {
-  if (account.accountType() != MyMoneyAccount::Stock)
+  if (account.accountType() != eMyMoney::Account::Stock)
     return;
 
   const auto itAcc = d->itemFromId(this, account.id(), Role::EquityID);
@@ -415,7 +420,7 @@ bool EquitiesFilterProxyModel::filterAcceptsRow(int source_row, const QModelInde
         acc.isClosed())
       return false;
     if (d->m_hideZeroBalanceAccounts &&
-        acc.accountType() != MyMoneyAccount::Investment && acc.balance().isZero())  // we should never hide investment account because all underlaying stocks will be hidden as well
+        acc.accountType() != eMyMoney::Account::Investment && acc.balance().isZero())  // we should never hide investment account because all underlaying stocks will be hidden as well
       return false;
   }
   return true;

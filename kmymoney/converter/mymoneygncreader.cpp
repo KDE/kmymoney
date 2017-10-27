@@ -55,7 +55,9 @@ email                : mte@users.sourceforge.net
 #include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyschedule.h"
 #include "mymoneyprice.h"
+#include "mymoneyexception.h"
 #include "kgncimportoptionsdlg.h"
 #include "kgncpricesourcedlg.h"
 #include "keditscheduledlg.h"
@@ -1480,41 +1482,41 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     Some don't seem to be used in practice. Not sure what CREDITLINE s/be converted as.
     */
     if ("BANK" == gac->type() || "CHECKING" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Checkings);
+      acc.setAccountType(Account::Checkings);
     } else if ("SAVINGS" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Savings);
+      acc.setAccountType(Account::Savings);
     } else if ("ASSET" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Asset);
+      acc.setAccountType(Account::Asset);
     } else if ("CASH" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Cash);
+      acc.setAccountType(Account::Cash);
     } else if ("CURRENCY" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Cash);
+      acc.setAccountType(Account::Cash);
     } else if ("STOCK" == gac->type() || "MUTUAL" == gac->type()) {
       // gnucash allows a 'broker' account to be denominated as type STOCK, but with
       // a currency balance. We do not need to create a stock account for this
       // actually, the latest version of gnc (1.8.8) doesn't seem to allow you to do
       // this any more, though I do have one in my own account...
       if (gac->commodity()->isCurrency()) {
-        acc.setAccountType(MyMoneyAccount::Investment);
+        acc.setAccountType(Account::Investment);
       } else {
-        acc.setAccountType(MyMoneyAccount::Stock);
+        acc.setAccountType(Account::Stock);
       }
     } else if ("EQUITY" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Equity);
+      acc.setAccountType(Account::Equity);
     } else if ("LIABILITY" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Liability);
+      acc.setAccountType(Account::Liability);
     } else if ("CREDIT" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::CreditCard);
+      acc.setAccountType(Account::CreditCard);
     } else if ("INCOME" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Income);
+      acc.setAccountType(Account::Income);
     } else if ("EXPENSE" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Expense);
+      acc.setAccountType(Account::Expense);
     } else if ("RECEIVABLE" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Asset);
+      acc.setAccountType(Account::Asset);
     } else if ("PAYABLE" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::Liability);
+      acc.setAccountType(Account::Liability);
     } else if ("MONEYMRKT" == gac->type()) {
-      acc.setAccountType(MyMoneyAccount::MoneyMarket);
+      acc.setAccountType(Account::MoneyMarket);
     } else { // we have here an account type we can't currently handle
       QString em =
         i18n("Current importer does not recognize GnuCash account type %1", gac->type());
@@ -1523,19 +1525,19 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     // if no parent account is present, assign to one of our standard accounts
     if ((acc.parentAccountId().isEmpty()) || (acc.parentAccountId() == m_rootId)) {
       switch (acc.accountGroup()) {
-        case MyMoneyAccount::Asset:
+        case Account::Asset:
           acc.setParentAccountId(m_storage->asset().id());
           break;
-        case MyMoneyAccount::Liability:
+        case Account::Liability:
           acc.setParentAccountId(m_storage->liability().id());
           break;
-        case MyMoneyAccount::Income:
+        case Account::Income:
           acc.setParentAccountId(m_storage->income().id());
           break;
-        case MyMoneyAccount::Expense:
+        case Account::Expense:
           acc.setParentAccountId(m_storage->expense().id());
           break;
-        case MyMoneyAccount::Equity:
+        case Account::Equity:
           acc.setParentAccountId(m_storage->equity().id());
           break;
         default:
@@ -1544,7 +1546,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     }
 
     // extra processing for a stock account
-    if (acc.accountType() == MyMoneyAccount::Stock) {
+    if (acc.accountType() == Account::Stock) {
       // save the id for later linking to investment account
       m_stockList.append(gac->id());
       // set the equity type
@@ -1708,8 +1710,8 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   // but keeping each in same order as gnucash
 
   switch (splitAccount.accountGroup()) {
-    case MyMoneyAccount::Asset:
-      if (splitAccount.accountType() == MyMoneyAccount::Stock) {
+    case Account::Asset:
+      if (splitAccount.accountType() == Account::Stock) {
         split.value().isZero() ?
         split.setAction(MyMoneySplit::ActionAddShares) :      // free shares?
         split.setAction(MyMoneySplit::ActionBuyShares);
@@ -1754,7 +1756,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
       }
       m_splitList.append(split);
       break;
-    case MyMoneyAccount::Liability:
+    case Account::Liability:
       split.value().isNegative() ?
       split.setAction(MyMoneySplit::ActionWithdrawal) :
       split.setAction(MyMoneySplit::ActionDeposit);
@@ -1960,10 +1962,10 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
   }  */
   // add the split to one of the lists
   switch (splitAccount.accountGroup()) {
-    case MyMoneyAccount::Asset:
+    case Account::Asset:
       m_splitList.append(split);
       break;
-    case MyMoneyAccount::Liability:
+    case Account::Liability:
       m_liabilitySplitList.append(split);
       break;
     default:
@@ -2009,8 +2011,8 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
       QString gncType; // the gnucash name
       unsigned char interval; // for date calculation
       unsigned int intervalCount;
-      MyMoneySchedule::occurrenceE occ; // equivalent occurrence code
-      MyMoneySchedule::weekendOptionE wo;
+      Schedule::Occurrence occ; // equivalent occurrence code
+      Schedule::WeekendOption wo;
     };
     /* other intervals supported by gnc according to Josh Sled's schema (see above)
      "none" "semi_monthly"
@@ -2018,26 +2020,26 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     /* some of these type names do not appear in gnucash and are difficult to generate for
     pre 2.2 files.They can be generated for 2.2 however, by GncRecurrence::getFrequency() */
     static convIntvl vi [] = {
-      {"once", 'o', 1, MyMoneySchedule::OCCUR_ONCE, MyMoneySchedule::MoveNothing },
-      {"daily" , 'd', 1, MyMoneySchedule::OCCUR_DAILY, MyMoneySchedule::MoveNothing },
-      //{"daily_mf", 'd', 1, MyMoneySchedule::OCCUR_DAILY, MyMoneySchedule::MoveAfter }, doesn't work, need new freq in kmm
-      {"30-days" , 'd', 30, MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS, MyMoneySchedule::MoveNothing },
-      {"weekly", 'w', 1, MyMoneySchedule::OCCUR_WEEKLY, MyMoneySchedule::MoveNothing },
-      {"bi_weekly", 'w', 2, MyMoneySchedule::OCCUR_EVERYOTHERWEEK, MyMoneySchedule::MoveNothing },
-      {"three-weekly", 'w', 3, MyMoneySchedule::OCCUR_EVERYTHREEWEEKS, MyMoneySchedule::MoveNothing },
-      {"four-weekly", 'w', 4, MyMoneySchedule::OCCUR_EVERYFOURWEEKS,
-       MyMoneySchedule::MoveNothing },
-      {"eight-weekly", 'w', 8, MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS, MyMoneySchedule::MoveNothing },
-      {"monthly", 'm', 1, MyMoneySchedule::OCCUR_MONTHLY, MyMoneySchedule::MoveNothing },
-      {"two-monthly", 'm', 2, MyMoneySchedule::OCCUR_EVERYOTHERMONTH,
-       MyMoneySchedule::MoveNothing },
-      {"quarterly", 'm', 3, MyMoneySchedule::OCCUR_QUARTERLY, MyMoneySchedule::MoveNothing },
-      {"tri_annually", 'm', 4, MyMoneySchedule::OCCUR_EVERYFOURMONTHS, MyMoneySchedule::MoveNothing },
-      {"semi_yearly", 'm', 6, MyMoneySchedule::OCCUR_TWICEYEARLY, MyMoneySchedule::MoveNothing },
-      {"yearly", 'y', 1, MyMoneySchedule::OCCUR_YEARLY, MyMoneySchedule::MoveNothing },
-      {"two-yearly", 'y', 2, MyMoneySchedule::OCCUR_EVERYOTHERYEAR,
-       MyMoneySchedule::MoveNothing },
-      {"zzz", 'y', 1, MyMoneySchedule::OCCUR_YEARLY, MyMoneySchedule::MoveNothing}
+      {"once", 'o', 1, Schedule::Occurrence::Once, Schedule::WeekendOption::MoveNothing },
+      {"daily" , 'd', 1, Schedule::Occurrence::Daily, Schedule::WeekendOption::MoveNothing },
+      //{"daily_mf", 'd', 1, Schedule::Occurrence::Daily, Schedule::WeekendOption::MoveAfter }, doesn't work, need new freq in kmm
+      {"30-days" , 'd', 30, Schedule::Occurrence::EveryThirtyDays, Schedule::WeekendOption::MoveNothing },
+      {"weekly", 'w', 1, Schedule::Occurrence::Weekly, Schedule::WeekendOption::MoveNothing },
+      {"bi_weekly", 'w', 2, Schedule::Occurrence::EveryOtherWeek, Schedule::WeekendOption::MoveNothing },
+      {"three-weekly", 'w', 3, Schedule::Occurrence::EveryThreeWeeks, Schedule::WeekendOption::MoveNothing },
+      {"four-weekly", 'w', 4, Schedule::Occurrence::EveryFourWeeks,
+       Schedule::WeekendOption::MoveNothing },
+      {"eight-weekly", 'w', 8, Schedule::Occurrence::EveryEightWeeks, Schedule::WeekendOption::MoveNothing },
+      {"monthly", 'm', 1, Schedule::Occurrence::Monthly, Schedule::WeekendOption::MoveNothing },
+      {"two-monthly", 'm', 2, Schedule::Occurrence::EveryOtherMonth,
+       Schedule::WeekendOption::MoveNothing },
+      {"quarterly", 'm', 3, Schedule::Occurrence::Quarterly, Schedule::WeekendOption::MoveNothing },
+      {"tri_annually", 'm', 4, Schedule::Occurrence::EveryFourMonths, Schedule::WeekendOption::MoveNothing },
+      {"semi_yearly", 'm', 6, Schedule::Occurrence::TwiceYearly, Schedule::WeekendOption::MoveNothing },
+      {"yearly", 'y', 1, Schedule::Occurrence::Yearly, Schedule::WeekendOption::MoveNothing },
+      {"two-yearly", 'y', 2, Schedule::Occurrence::EveryOtherYear,
+       Schedule::WeekendOption::MoveNothing },
+      {"zzz", 'y', 1, Schedule::Occurrence::Yearly, Schedule::WeekendOption::MoveNothing}
       // zzz = stopper, may cause problems. what else can we do?
     };
 
@@ -2054,7 +2056,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
         frequency = gre->getFrequency();
         schedEnabled = gsc->enabled();
       }
-      sc.setOccurrence(MyMoneySchedule::OCCUR_ONCE); // FIXME - how to convert
+      sc.setOccurrence(Schedule::Occurrence::Once); // FIXME - how to convert
     } else {
       // find this interval
       const GncFreqSpec *fs = gsc->getFreqSpec();
@@ -2122,7 +2124,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
       m_suspectSchedule = true;
     }
     // payment type, options
-    sc.setPaymentType((MyMoneySchedule::paymentTypeE)MyMoneySchedule::STYPE_OTHER);
+    sc.setPaymentType((Schedule::PaymentType)Schedule::PaymentType::Other);
     sc.setFixed(!m_suspectSchedule);  // if any probs were found, set it as variable so user will always be prompted
     // we don't currently have a 'disable' option, but just make sure auto-enter is off if not enabled
     //qDebug(QString("%1 and %2").arg(gsc->autoCreate()).arg(schedEnabled));
@@ -2131,11 +2133,11 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     // type
     QString actionType = tx.splits().first().action();
     if (actionType == MyMoneySplit::ActionDeposit) {
-      sc.setType((MyMoneySchedule::typeE)MyMoneySchedule::TYPE_DEPOSIT);
+      sc.setType((Schedule::Type)Schedule::Type::Deposit);
     } else if (actionType == MyMoneySplit::ActionTransfer) {
-      sc.setType((MyMoneySchedule::typeE)MyMoneySchedule::TYPE_TRANSFER);
+      sc.setType((Schedule::Type)Schedule::Type::Transfer);
     } else {
-      sc.setType((MyMoneySchedule::typeE)MyMoneySchedule::TYPE_BILL);
+      sc.setType((Schedule::Type)Schedule::Type::Bill);
     }
     // finally, set the transaction pointer
     sc.setTransaction(tx);
@@ -2395,7 +2397,7 @@ QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
   acc.setLastModified(today);
   acc.setLastReconciliationDate(today);
   acc.setCurrencyId(m_txCommodity);
-  acc.setAccountType(MyMoneyAccount::Asset);
+  acc.setAccountType(Account::Asset);
   acc.setParentAccountId(m_storage->asset().id());
   m_storage->addAccount(acc);
   // assign the gnucash id as the key into the map to find our id
@@ -2432,22 +2434,22 @@ MyMoneyAccount MyMoneyGncReader::checkConsistency(MyMoneyAccount& parent, MyMone
   TRY {
     // gnucash is flexible/weird enough to allow various inconsistencies
     // these are a couple I found in my file, no doubt more will be discovered
-    if ((child.accountType() == MyMoneyAccount::Investment) &&
-    (parent.accountType() != MyMoneyAccount::Asset)) {
+    if ((child.accountType() == Account::Investment) &&
+    (parent.accountType() != Account::Asset)) {
       m_messageList["CC"].append(
         i18n("An Investment account must be a child of an Asset account\n"
       "Account %1 will be stored under the main Asset account", child.name()));
       return m_storage->asset();
     }
-    if ((child.accountType() == MyMoneyAccount::Income) &&
-        (parent.accountType() != MyMoneyAccount::Income)) {
+    if ((child.accountType() == Account::Income) &&
+        (parent.accountType() != Account::Income)) {
       m_messageList["CC"].append(
         i18n("An Income account must be a child of an Income account\n"
              "Account %1 will be stored under the main Income account", child.name()));
       return m_storage->income();
     }
-    if ((child.accountType() == MyMoneyAccount::Expense) &&
-        (parent.accountType() != MyMoneyAccount::Expense)) {
+    if ((child.accountType() == Account::Expense) &&
+        (parent.accountType() != Account::Expense)) {
       m_messageList["CC"].append(
         i18n("An Expense account must be a child of an Expense account\n"
              "Account %1 will be stored under the main Expense account", child.name()));
@@ -2469,13 +2471,13 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
   map_accountIds::const_iterator id = m_mapIds.constFind(parentKey);
   if (id != m_mapIds.constEnd()) {
     parent = m_storage->account(id.value());
-    if (parent.accountType() == MyMoneyAccount::Investment) return ;
+    if (parent.accountType() == Account::Investment) return ;
   }
   // so now, check the investment option requested by the user
   // option 0 creates a separate investment account for each stock account
   if (m_investmentOption == 0) {
     MyMoneyAccount invAcc(stockAcc);
-    invAcc.setAccountType(MyMoneyAccount::Investment);
+    invAcc.setAccountType(Account::Investment);
     invAcc.setCurrencyId(QString(""));  // we don't know what currency it is!!
     invAcc.setParentAccountId(parentKey);  // intersperse it between old parent and child stock acct
     m_storage->addAccount(invAcc);
@@ -2500,7 +2502,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
                                            QLineEdit::Normal, i18n("My Investments"), &ok);
       }
       singleInvAcc.setName(invAccName);
-      singleInvAcc.setAccountType(MyMoneyAccount::Investment);
+      singleInvAcc.setAccountType(Account::Investment);
       singleInvAcc.setCurrencyId(QString(""));
       singleInvAcc.setParentAccountId(m_storage->asset().id());
       m_storage->addAccount(singleInvAcc);
@@ -2526,8 +2528,8 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     m_storage->accountList(list);
     // build a list of candidates for the input box
     for (acc = list.begin(); acc != list.end(); ++acc) {
-      //      if (((*acc).accountGroup() == MyMoneyAccount::Asset) && ((*acc).accountType() != MyMoneyAccount::Stock)) accList.append ((*acc).name());
-      if ((*acc).accountType() == MyMoneyAccount::Investment) accList.append((*acc).name());
+      //      if (((*acc).accountGroup() == Account::Asset) && ((*acc).accountType() != Account::Stock)) accList.append ((*acc).name());
+      if ((*acc).accountType() == Account::Investment) accList.append((*acc).name());
     }
     //if (accList.isEmpty()) qWarning ("No available accounts");
     bool ok = false;
@@ -2545,14 +2547,14 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
         if (acc != list.end()) { // an account was selected
           invAcc = *acc;
         } else {                 // a new account name was entered
-          invAcc.setAccountType(MyMoneyAccount::Investment);
+          invAcc.setAccountType(Account::Investment);
           invAcc.setName(invAccName);
           invAcc.setCurrencyId(QString(""));
           invAcc.setParentAccountId(m_storage->asset().id());
           m_storage->addAccount(invAcc);
           ok = true;
         }
-        if (invAcc.accountType() == MyMoneyAccount::Investment) {
+        if (invAcc.accountType() == Account::Investment) {
           ok = true;
         } else {
           // this code is probably not going to be implemented coz we can't change account types (??)

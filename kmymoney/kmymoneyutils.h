@@ -139,12 +139,12 @@ public:
     * an account type into a human readable format
     *
     * @param accountType numerical representation of the account type.
-    *                    For possible values, see MyMoneyAccount::accountTypeE
+    *                    For possible values, see eMyMoney::Account
     * @return QString representing the human readable form translated according to the language cataglogue
     *
     * @sa MyMoneyAccount::accountTypeToString()
     */
-  static const QString accountTypeToString(const MyMoneyAccount::accountTypeE accountType);
+  static const QString accountTypeToString(const eMyMoney::Account accountType);
 
   /**
     * This method is used to convert an account type from its
@@ -152,9 +152,9 @@ public:
     *
     * @param type reference to a QString containing the string to convert
     * @return accountTypeE containing the internal used numeric value. For possible
-    *         values see MyMoneyAccount::accountTypeE
+    *         values see eMyMoney::Account
     */
-  static MyMoneyAccount::accountTypeE stringToAccountType(const QString& type);
+  static eMyMoney::Account stringToAccountType(const QString& type);
 
   /**
     * This method is used to convert a rounding method from its
@@ -191,7 +191,7 @@ public:
     *
     * @deprecated Use i18n(MyMoneySchedule::occurrenceToString(occurrence)) instead
     */
-  static const QString occurrenceToString(const MyMoneySchedule::occurrenceE occurrence);
+  static const QString occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence);
 
   /**
     * This method is used to convert the payment type from its
@@ -204,7 +204,7 @@ public:
     *
     * @sa MyMoneySchedule::paymentMethodToString()
     */
-  static const QString paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType);
+  static const QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
 
   /**
     * This method is used to convert the schedule weekend option from its
@@ -217,7 +217,7 @@ public:
     *
     * @sa MyMoneySchedule::weekendOptionToString()
     */
-  static const QString weekendOptionToString(MyMoneySchedule::weekendOptionE weekendOption);
+  static const QString weekendOptionToString(eMyMoney::Schedule::WeekendOption weekendOption);
 
   /**
     * This method is used to convert the schedule type from its
@@ -230,7 +230,7 @@ public:
     *
     * @sa MyMoneySchedule::scheduleTypeToString()
     */
-  static const QString scheduleTypeToString(MyMoneySchedule::typeE type);
+  static const QString scheduleTypeToString(eMyMoney::Schedule::Type type);
 
   /**
     * This method is used to convert a numeric index of an item

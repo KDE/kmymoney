@@ -32,6 +32,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneystoragenames.h"
+#include "mymoneytransaction.h"
 
 using namespace MyMoneyStorageNodes;
 
@@ -180,51 +181,51 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
 
   //add the corresponding account groups
   if (_rt == MyMoneyReport::eAssetLiability) {
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(eMyMoney::Account::Asset);
+    addAccountGroup(eMyMoney::Account::Liability);
     m_showRowTotals = true;
   }
   if (_rt == MyMoneyReport::eAccount) {
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::AssetLoan);
-    addAccountGroup(MyMoneyAccount::Cash);
-    addAccountGroup(MyMoneyAccount::Checkings);
-    addAccountGroup(MyMoneyAccount::CreditCard);
+    addAccountGroup(eMyMoney::Account::Asset);
+    addAccountGroup(eMyMoney::Account::AssetLoan);
+    addAccountGroup(eMyMoney::Account::Cash);
+    addAccountGroup(eMyMoney::Account::Checkings);
+    addAccountGroup(eMyMoney::Account::CreditCard);
     if (KMyMoneyGlobalSettings::expertMode())
-      addAccountGroup(MyMoneyAccount::Equity);
-    addAccountGroup(MyMoneyAccount::Expense);
-    addAccountGroup(MyMoneyAccount::Income);
-    addAccountGroup(MyMoneyAccount::Liability);
-    addAccountGroup(MyMoneyAccount::Loan);
-    addAccountGroup(MyMoneyAccount::Savings);
-    addAccountGroup(MyMoneyAccount::Stock);
+      addAccountGroup(eMyMoney::Account::Equity);
+    addAccountGroup(eMyMoney::Account::Expense);
+    addAccountGroup(eMyMoney::Account::Income);
+    addAccountGroup(eMyMoney::Account::Liability);
+    addAccountGroup(eMyMoney::Account::Loan);
+    addAccountGroup(eMyMoney::Account::Savings);
+    addAccountGroup(eMyMoney::Account::Stock);
     m_showRowTotals = true;
   }
   if (_rt == MyMoneyReport::eExpenseIncome) {
-    addAccountGroup(MyMoneyAccount::Expense);
-    addAccountGroup(MyMoneyAccount::Income);
+    addAccountGroup(eMyMoney::Account::Expense);
+    addAccountGroup(eMyMoney::Account::Income);
     m_showRowTotals = true;
   }
   //FIXME take this out once we have sorted out all issues regarding budget of assets and liabilities -- asoliverez@gmail.com
   if (_rt == MyMoneyReport::eBudget || _rt == MyMoneyReport::eBudgetActual) {
-    addAccountGroup(MyMoneyAccount::Expense);
-    addAccountGroup(MyMoneyAccount::Income);
+    addAccountGroup(eMyMoney::Account::Expense);
+    addAccountGroup(eMyMoney::Account::Income);
   }
   if (_rt == MyMoneyReport::eAccountInfo) {
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(eMyMoney::Account::Asset);
+    addAccountGroup(eMyMoney::Account::Liability);
   }
   //cash flow reports show splits for all account groups
   if (_rt == MyMoneyReport::eCashFlow) {
-    addAccountGroup(MyMoneyAccount::Expense);
-    addAccountGroup(MyMoneyAccount::Income);
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(eMyMoney::Account::Expense);
+    addAccountGroup(eMyMoney::Account::Income);
+    addAccountGroup(eMyMoney::Account::Asset);
+    addAccountGroup(eMyMoney::Account::Liability);
   }
 #ifdef DEBUG_REPORTS
   QDebug out = qDebug();
   out << _name << toString(_rt) << toString(m_reportType);
-  foreach(const MyMoneyAccount::accountTypeE accountType, m_accountGroups)
+  foreach(const eMyMoney::Account accountType, m_accountGroups)
     out << MyMoneyAccount::accountTypeToString(accountType);
   if (m_accounts.size() > 0)
     out << m_accounts;
@@ -302,22 +303,22 @@ void MyMoneyReport::setRowType(ERowType _rt)
   m_accountGroups.clear();
 
   if (_rt == MyMoneyReport::eAssetLiability) {
-    addAccountGroup(MyMoneyAccount::Asset);
-    addAccountGroup(MyMoneyAccount::Liability);
+    addAccountGroup(eMyMoney::Account::Asset);
+    addAccountGroup(eMyMoney::Account::Liability);
   }
   if (_rt == MyMoneyReport::eExpenseIncome) {
-    addAccountGroup(MyMoneyAccount::Expense);
-    addAccountGroup(MyMoneyAccount::Income);
+    addAccountGroup(eMyMoney::Account::Expense);
+    addAccountGroup(eMyMoney::Account::Income);
   }
 }
 
-bool MyMoneyReport::accountGroups(QList<MyMoneyAccount::accountTypeE>& list) const
+bool MyMoneyReport::accountGroups(QList<eMyMoney::Account>& list) const
 
 {
   bool result = m_accountGroupFilter;
 
   if (result) {
-    QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = m_accountGroups.begin();
+    QList<eMyMoney::Account>::const_iterator it_group = m_accountGroups.begin();
     while (it_group != m_accountGroups.end()) {
       list += (*it_group);
       ++it_group;
@@ -326,18 +327,18 @@ bool MyMoneyReport::accountGroups(QList<MyMoneyAccount::accountTypeE>& list) con
   return result;
 }
 
-void MyMoneyReport::addAccountGroup(MyMoneyAccount::accountTypeE type)
+void MyMoneyReport::addAccountGroup(eMyMoney::Account type)
 {
-  if (!m_accountGroups.isEmpty() && type != MyMoneyAccount::UnknownAccountType) {
+  if (!m_accountGroups.isEmpty() && type != eMyMoney::Account::Unknown) {
     if (m_accountGroups.contains(type))
       return;
   }
   m_accountGroupFilter = true;
-  if (type != MyMoneyAccount::UnknownAccountType)
+  if (type != eMyMoney::Account::Unknown)
     m_accountGroups.push_back(type);
 }
 
-bool MyMoneyReport::includesAccountGroup(MyMoneyAccount::accountTypeE type) const
+bool MyMoneyReport::includesAccountGroup(eMyMoney::Account type) const
 {
   bool result = (! m_accountGroupFilter)
                 || (isIncludingTransfers() && m_rowType == MyMoneyReport::eExpenseIncome)
@@ -352,15 +353,15 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
 
   if (includesAccountGroup(acc.accountGroup())) {
     switch (acc.accountGroup()) {
-      case MyMoneyAccount::Income:
-      case MyMoneyAccount::Expense:
+      case eMyMoney::Account::Income:
+      case eMyMoney::Account::Expense:
         if (isTax())
           result = (acc.value("Tax") == "Yes") && includesCategory(acc.id());
         else
           result = includesCategory(acc.id());
         break;
-      case MyMoneyAccount::Asset:
-      case MyMoneyAccount::Liability:
+      case eMyMoney::Account::Asset:
+      case eMyMoney::Account::Liability:
         if (isLoansOnly())
           result = acc.isLoan() && includesAccount(acc.id());
         else if (isInvestmentsOnly())
@@ -372,7 +373,7 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
         else
           result = includesAccount(acc.id());
         break;
-      case MyMoneyAccount::Equity:
+      case eMyMoney::Account::Equity:
         if (isInvestmentsOnly())
           result = (isIncludingPrice() || isIncludingAveragePrice()) && acc.isInvest() && includesAccount(acc.id());
         break;
@@ -613,13 +614,13 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   // Account Groups Filter
   //
 
-  QList<MyMoneyAccount::accountTypeE> accountgrouplist;
+  QList<eMyMoney::Account> accountgrouplist;
   if (accountGroups(accountgrouplist)) {
     // iterate over accounts, and add each one
-    QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = accountgrouplist.constBegin();
+    QList<eMyMoney::Account>::const_iterator it_group = accountgrouplist.constBegin();
     while (it_group != accountgrouplist.constEnd()) {
       QDomElement p = doc->createElement(getElName(enAccountGroup));
-      p.setAttribute(getAttrName(anGroup), kAccountTypeText[*it_group]);
+      p.setAttribute(getAttrName(anGroup), kAccountTypeText[(int)*it_group]);
       e.appendChild(p);
 
       ++it_group;
@@ -883,7 +884,7 @@ bool MyMoneyReport::read(const QDomElement& e)
     if (getElName(enAccountGroup) == c.tagName() && c.hasAttribute(getAttrName(anGroup))) {
       i = kAccountTypeText.indexOf(c.attribute(getAttrName(anGroup)));
       if (i != -1)
-        addAccountGroup(static_cast<MyMoneyAccount::accountTypeE>(i));
+        addAccountGroup(static_cast<eMyMoney::Account>(i));
     }
     child = child.nextSibling();
   }

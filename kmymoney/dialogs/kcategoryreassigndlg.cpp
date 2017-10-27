@@ -53,8 +53,8 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
     return QString(); // no payee available? nothing can be selected...
 
   AccountSet set;
-  set.addAccountGroup(MyMoneyAccount::Income);
-  set.addAccountGroup(MyMoneyAccount::Expense);
+  set.addAccountGroup(eMyMoney::Account::Income);
+  set.addAccountGroup(eMyMoney::Account::Expense);
   set.load(m_category->selector());
 
   // remove the category we are about to delete

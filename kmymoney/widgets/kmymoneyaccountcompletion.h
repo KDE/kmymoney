@@ -48,7 +48,7 @@ public:
   kMyMoneyAccountCompletion(QWidget *parent = 0);
   virtual ~kMyMoneyAccountCompletion();
 
-  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const {
+  QStringList accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const {
     return selector()->accountList(list);
   }
 

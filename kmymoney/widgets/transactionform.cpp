@@ -312,30 +312,30 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
       m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Withdrawal"));
       break;
 
-    case MyMoneyAccount::CreditCard:
+    case eMyMoney::Account::CreditCard:
       m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Payment"));
       m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
       m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Charge"));
       break;
 
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Loan:
+    case eMyMoney::Account::Liability:
+    case eMyMoney::Account::Loan:
       m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Decrease"));
       m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
       m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Increase"));
       break;
 
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::AssetLoan:
+    case eMyMoney::Account::Asset:
+    case eMyMoney::Account::AssetLoan:
       m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Increase"));
       m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
       m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Decrease"));
       break;
 
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-    case MyMoneyAccount::Investment:
-    case MyMoneyAccount::Stock:
+    case eMyMoney::Account::Income:
+    case eMyMoney::Account::Expense:
+    case eMyMoney::Account::Investment:
+    case eMyMoney::Account::Stock:
       m_tabBar->hide();
       break;
   }

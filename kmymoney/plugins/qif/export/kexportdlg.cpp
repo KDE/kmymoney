@@ -45,6 +45,7 @@
 
 #include "mymoneycategory.h"
 #include "mymoneyfile.h"
+#include "mymoneytransactionfilter.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
 #include "models.h"
@@ -209,7 +210,7 @@ void KExportDlg::checkData(const QString& accountId)
 void KExportDlg::loadAccounts()
 {
   auto filterProxyModel = new AccountNamesFilterProxyModel(this);
-  filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability});
+  filterProxyModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability});
   auto const model = Models::instance()->accountsModel();
   model->load();
   filterProxyModel->setSourceColumns(model->getColumns());

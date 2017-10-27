@@ -259,7 +259,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
   // do we need to switch to the negative balance color?
   if (index.column() == BalanceColumn) {
     bool showNegative = m_balance.isNegative();
-    if (m_account.accountGroup() == MyMoneyAccount::Liability && !m_balance.isZero())
+    if (m_account.accountGroup() == eMyMoney::Account::Liability && !m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
       option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
@@ -496,21 +496,21 @@ bool Transaction::haveNumberField() const
 {
   bool rc = true;
   switch (m_account.accountType()) {
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-    case MyMoneyAccount::Loan:
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Equity:
+    case eMyMoney::Account::Savings:
+    case eMyMoney::Account::Cash:
+    case eMyMoney::Account::Loan:
+    case eMyMoney::Account::AssetLoan:
+    case eMyMoney::Account::Asset:
+    case eMyMoney::Account::Liability:
+    case eMyMoney::Account::Equity:
       rc = KMyMoneyGlobalSettings::alwaysShowNrField();
       break;
 
-    case MyMoneyAccount::Checkings:
-    case MyMoneyAccount::CreditCard:
+    case eMyMoney::Account::Checkings:
+    case eMyMoney::Account::CreditCard:
       // the next case is used for the editor when the account
       // is unknown (eg. when creating new schedules)
-    case MyMoneyAccount::UnknownAccountType:
+    case eMyMoney::Account::Unknown:
       break;
 
     default:
@@ -824,8 +824,8 @@ void StdTransaction::setupFormHeader(const QString& id)
 {
   m_category = MyMoneyFile::instance()->accountToCategory(id);
   switch (MyMoneyFile::instance()->account(id).accountGroup()) {
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
+    case eMyMoney::Account::Asset:
+    case eMyMoney::Account::Liability:
       m_categoryHeader = m_split.shares().isNegative() ? i18n("Transfer to") : i18n("Transfer from");
       break;
 
@@ -847,8 +847,8 @@ KMyMoneyRegister::Action StdTransaction::actionType() const
     if ((*it_s).accountId() == m_split.accountId())
       continue;
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountGroup() == MyMoneyAccount::Income
-        || acc.accountGroup() == MyMoneyAccount::Expense) {
+    if (acc.accountGroup() == eMyMoney::Account::Income
+        || acc.accountGroup() == eMyMoney::Account::Expense) {
       // otherwise, we have to determine between deposit and withdrawal
       action = m_split.shares().isNegative() ? ActionWithdrawal : ActionDeposit;
       break;
@@ -1067,8 +1067,8 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
             singleLineMemo(txt, m_split);
           }
           if (txt.isEmpty() && m_rowsRegister < 2) {
-            if (m_account.accountType() != MyMoneyAccount::Income
-                && m_account.accountType() != MyMoneyAccount::Expense) {
+            if (m_account.accountType() != eMyMoney::Account::Income
+                && m_account.accountType() != eMyMoney::Account::Expense) {
               txt = m_category;
               if (txt.isEmpty() && !m_split.value().isZero()) {
                 txt = i18n("*** UNASSIGNED ***");
@@ -1352,8 +1352,8 @@ int StdTransaction::numRowsRegister(bool expanded) const
       // For income and expense accounts that only have
       // two splits we only show one line, because the
       // account name is already contained in the account column.
-      if (m_account.accountType() == MyMoneyAccount::Income
-          || m_account.accountType() == MyMoneyAccount::Expense) {
+      if (m_account.accountType() == eMyMoney::Account::Income
+          || m_account.accountType() == eMyMoney::Account::Expense) {
         if (numRows > 2 && m_transaction.splitCount() == 2)
           numRows = 1;
       }

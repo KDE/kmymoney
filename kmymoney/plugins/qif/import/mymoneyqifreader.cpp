@@ -50,6 +50,7 @@
 // Project Headers
 
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "kmymoneyglobalsettings.h"
 
 #include "mymoneystatement.h"
@@ -69,10 +70,10 @@ class MyMoneyQifReader::Private
 {
 public:
   Private() :
-      accountType(MyMoneyAccount::Checkings),
+      accountType(eMyMoney::Account::Checkings),
       mapCategories(true) {}
 
-  const QString accountTypeToQif(MyMoneyAccount::accountTypeE type) const;
+  const QString accountTypeToQif(eMyMoney::Account type) const;
 
   /**
    * finalize the current statement and add it to the statement list
@@ -113,7 +114,7 @@ public:
 
   QString st_AccountName;
   QString st_AccountId;
-  MyMoneyAccount::accountTypeE accountType;
+  eMyMoney::Account accountType;
   bool     firstTransaction;
   bool     mapCategories;
   MyMoneyQifReader::QifEntryTypeE  transactionType;
@@ -139,26 +140,26 @@ void MyMoneyQifReader::Private::finishStatement()
   st.m_eType = type;
 }
 
-const QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accountTypeE type) const
+const QString MyMoneyQifReader::Private::accountTypeToQif(eMyMoney::Account type) const
 {
   QString rc = "Bank";
 
   switch (type) {
     default:
       break;
-    case MyMoneyAccount::Cash:
+    case eMyMoney::Account::Cash:
       rc = "Cash";
       break;
-    case MyMoneyAccount::CreditCard:
+    case eMyMoney::Account::CreditCard:
       rc = "CCard";
       break;
-    case MyMoneyAccount::Asset:
+    case eMyMoney::Account::Asset:
       rc = "Oth A";
       break;
-    case MyMoneyAccount::Liability:
+    case eMyMoney::Account::Liability:
       rc = "Oth L";
       break;
-    case MyMoneyAccount::Investment:
+    case eMyMoney::Account::Investment:
       rc = "Port";
       break;
   }
@@ -498,32 +499,32 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
 
     // exportable accounts
     if (line.toLower() == "ccard" || KMyMoneyGlobalSettings::qifCreditCard().toLower().contains(line.toLower())) {
-      d->accountType = MyMoneyAccount::CreditCard;
+      d->accountType = eMyMoney::Account::CreditCard;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
     } else if (line.toLower() == "bank" || KMyMoneyGlobalSettings::qifBank().toLower().contains(line.toLower())) {
-      d->accountType = MyMoneyAccount::Checkings;
+      d->accountType = eMyMoney::Account::Checkings;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
     } else if (line.toLower() == "cash" || KMyMoneyGlobalSettings::qifCash().toLower().contains(line.toLower())) {
-      d->accountType = MyMoneyAccount::Cash;
+      d->accountType = eMyMoney::Account::Cash;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
     } else if (line.toLower() == "oth a" || KMyMoneyGlobalSettings::qifAsset().toLower().contains(line.toLower())) {
-      d->accountType = MyMoneyAccount::Asset;
+      d->accountType = eMyMoney::Account::Asset;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
     } else if (line.toLower() == "oth l" || line.toLower() == i18nc("QIF tag for liability account", "Oth L").toLower()) {
-      d->accountType = MyMoneyAccount::Liability;
+      d->accountType = eMyMoney::Account::Liability;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
     } else if (line.toLower() == "invst" || line.toLower() == i18nc("QIF tag for investment account", "Invst").toLower()) {
-      d->accountType = MyMoneyAccount::Investment;
+      d->accountType = eMyMoney::Account::Investment;
       d->transactionType = m_entryType = EntryInvestmentTransaction;
 
     } else if (line.toLower() == "invoice" || KMyMoneyGlobalSettings::qifInvoice().toLower().contains(line.toLower())) {
@@ -700,7 +701,7 @@ bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
 }
 
 #if 0
-void MyMoneyQifReader::processMSAccountEntry(const MyMoneyAccount::accountTypeE accountType)
+void MyMoneyQifReader::processMSAccountEntry(const eMyMoney::Account accountType)
 {
   if (extractLine('P').toLower() == m_qifProfile.openingBalanceText().toLower()) {
     m_account = MyMoneyAccount();
@@ -829,10 +830,10 @@ void MyMoneyQifReader::processCategoryEntry()
   // so also have to test that either the 'I' or 'E' was detected
   //and set up accounts accordingly.
   if ((!extractLine('I').isEmpty()) || (m_extractedLine != -1)) {
-    account.setAccountType(MyMoneyAccount::Income);
+    account.setAccountType(eMyMoney::Account::Income);
     parentAccount = file->income();
   } else if ((!extractLine('E').isEmpty()) || (m_extractedLine != -1)) {
-    account.setAccountType(MyMoneyAccount::Expense);
+    account.setAccountType(eMyMoney::Account::Expense);
     parentAccount = file->expense();
   }
 
@@ -891,7 +892,7 @@ const MyMoneyAccount& MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, c
         continue;
       const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, name);
       if (!existingAccount.id().isEmpty()) {
-        if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {
+        if (acc.accountType() != eMyMoney::Account::Unknown) {
           if (acc.accountType() != existingAccount.accountType())
             continue;
         }
@@ -919,7 +920,7 @@ const QString MyMoneyQifReader::transferAccount(const QString& name, bool useBro
   // in case we found a reference to an investment account, we need
   // to switch to the brokerage account instead.
   MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
-  if (useBrokerage && (acc.accountType() == MyMoneyAccount::Investment)) {
+  if (useBrokerage && (acc.accountType() == eMyMoney::Account::Investment)) {
     m_qifEntry.clear();               // and construct a temp entry to create/search the account
     m_qifEntry << QString("N%1").arg(acc.brokerageName());
     m_qifEntry << QString("Tunknown");
@@ -932,7 +933,7 @@ const QString MyMoneyQifReader::transferAccount(const QString& name, bool useBro
   return accountId;
 }
 
-void MyMoneyQifReader::createOpeningBalance(MyMoneyAccount::_accountTypeE accType)
+void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account accType)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -1056,16 +1057,16 @@ void MyMoneyQifReader::processTransactionEntry()
 
   s1.m_accountId = d->st.m_accountId;
   switch (d->accountType) {
-  case MyMoneyAccount::Checkings:
+  case eMyMoney::Account::Checkings:
     d->st.m_eType=MyMoneyStatement::etCheckings;
     break;
-  case MyMoneyAccount::Savings:
+  case eMyMoney::Account::Savings:
     d->st.m_eType=MyMoneyStatement::etSavings;
     break;
-  case MyMoneyAccount::Investment:
+  case eMyMoney::Account::Investment:
     d->st.m_eType=MyMoneyStatement::etInvestment;
     break;
-  case MyMoneyAccount::CreditCard:
+  case eMyMoney::Account::CreditCard:
     d->st.m_eType=MyMoneyStatement::etCreditCard;
     break;
   default:
@@ -1185,7 +1186,7 @@ void MyMoneyQifReader::processTransactionEntry()
         MyMoneyAccount account = file->account(accountId);
         // FIXME: check that the type matches and ask if not
 
-        if (account.accountType() == MyMoneyAccount::Investment) {
+        if (account.accountType() == eMyMoney::Account::Investment) {
           qDebug() << "Line " << m_linenumber << ": Cannot transfer to/from an investment account. Transaction ignored.";
           return;
         }
@@ -1231,7 +1232,7 @@ void MyMoneyQifReader::processTransactionEntry()
           MyMoneyAccount account = file->account(accountId);
           // FIXME: check that the type matches and ask if not
 
-          if (account.accountType() == MyMoneyAccount::Investment) {
+          if (account.accountType() == eMyMoney::Account::Investment) {
             qDebug() << "Line " << m_linenumber << ": Cannot convert a split transfer to/from an investment account. Split removed. Total amount adjusted from " << tr.m_amount.formatMoney("", 2) << " to " << (tr.m_amount + s2.m_amount).formatMoney("", 2) << "\n";
             tr.m_amount += s2.m_amount;
             continue;
@@ -1539,7 +1540,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
   } else if (action == "xin" || action == "xout") {
     QString payee = extractLine('P');
     if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneyGlobalSettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
-      createOpeningBalance(MyMoneyAccount::Investment);
+      createOpeningBalance(eMyMoney::Account::Investment);
       return;
     }
 
@@ -1841,7 +1842,7 @@ const QString MyMoneyQifReader::findOrCreateIncomeAccount(const QString& searchn
   if (result.isEmpty()) {
     MyMoneyAccount acc;
     acc.setName(searchname);
-    acc.setAccountType(MyMoneyAccount::Income);
+    acc.setAccountType(eMyMoney::Account::Income);
     MyMoneyAccount income = file->income();
     MyMoneyFileTransaction ft;
     file->addAccount(acc, income);
@@ -1877,7 +1878,7 @@ const QString MyMoneyQifReader::findOrCreateExpenseAccount(const QString& search
   if (result.isEmpty()) {
     MyMoneyAccount acc;
     acc.setName(searchname);
-    acc.setAccountType(MyMoneyAccount::Expense);
+    acc.setAccountType(eMyMoney::Account::Expense);
     MyMoneyFileTransaction ft;
     MyMoneyAccount expense = file->expense();
     file->addAccount(acc, expense);
@@ -1911,25 +1912,25 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
   QifEntryTypeE transactionType = EntryTransaction;
   QString type = extractLine('T').toLower().remove(QRegExp("\\s+"));
   if (type == m_qifProfile.profileType().toLower().remove(QRegExp("\\s+"))) {
-    account.setAccountType(MyMoneyAccount::Checkings);
+    account.setAccountType(eMyMoney::Account::Checkings);
   } else if (type == "ccard" || type == "creditcard") {
-    account.setAccountType(MyMoneyAccount::CreditCard);
+    account.setAccountType(eMyMoney::Account::CreditCard);
   } else if (type == "cash") {
-    account.setAccountType(MyMoneyAccount::Cash);
+    account.setAccountType(eMyMoney::Account::Cash);
   } else if (type == "otha") {
-    account.setAccountType(MyMoneyAccount::Asset);
+    account.setAccountType(eMyMoney::Account::Asset);
   } else if (type == "othl") {
-    account.setAccountType(MyMoneyAccount::Liability);
+    account.setAccountType(eMyMoney::Account::Liability);
   } else if (type == "invst" || type == "port") {
-    account.setAccountType(MyMoneyAccount::Investment);
+    account.setAccountType(eMyMoney::Account::Investment);
     transactionType = EntryInvestmentTransaction;
   } else if (type == "mutual") { // stock account w/o umbrella investment account
-    account.setAccountType(MyMoneyAccount::Stock);
+    account.setAccountType(eMyMoney::Account::Stock);
     transactionType = EntryInvestmentTransaction;
   } else if (type == "unknown") {
     // don't do anything with the type, leave it unknown
   } else {
-    account.setAccountType(MyMoneyAccount::Checkings);
+    account.setAccountType(eMyMoney::Account::Checkings);
     qDebug() << "Line " << m_linenumber << ": Unknown account type '" << type << "', checkings assumed";
   }
 
@@ -1939,8 +1940,8 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     // in case the account is not found by name and the type is
     // unknown, we have to assume something and create a checking account.
     // this might be wrong, but we have no choice at this point.
-    if (account.accountType() == MyMoneyAccount::UnknownAccountType)
-      account.setAccountType(MyMoneyAccount::Checkings);
+    if (account.accountType() == eMyMoney::Account::Unknown)
+      account.setAccountType(eMyMoney::Account::Checkings);
 
     MyMoneyAccount parentAccount;
     MyMoneyAccount brokerage;
@@ -1948,7 +1949,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     if (account.isInvest()) {
       acc.setName(i18n("%1 (Investment)", account.name()));   // use the same name for the investment account
       acc.setDescription(i18n("Autogenerated by QIF importer from type Mutual account entry"));
-      acc.setAccountType(MyMoneyAccount::Investment);
+      acc.setAccountType(eMyMoney::Account::Investment);
       parentAccount = file->asset();
       file->createAccount(acc, parentAccount, brokerage, MyMoneyMoney());
       parentAccount = acc;
@@ -1956,14 +1957,14 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     } else {
       // setup parent according the type of the account
       switch (account.accountGroup()) {
-        case MyMoneyAccount::Asset:
+        case eMyMoney::Account::Asset:
         default:
           parentAccount = file->asset();
           break;
-        case MyMoneyAccount::Liability:
+        case eMyMoney::Account::Liability:
           parentAccount = file->liability();
           break;
-        case MyMoneyAccount::Equity:
+        case eMyMoney::Account::Equity:
           parentAccount = file->equity();
           break;
       }
@@ -1972,9 +1973,9 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     // investment accounts will receive a brokerage account, as KMyMoney
     // currently does not allow to store funds in the investment account directly
     // but only create it (not here, but later) if it is needed
-    if (account.accountType() == MyMoneyAccount::Investment) {
+    if (account.accountType() == eMyMoney::Account::Investment) {
       brokerage.setName(QString());  //                           brokerage name empty so account not created yet
-      brokerage.setAccountType(MyMoneyAccount::Checkings);
+      brokerage.setAccountType(eMyMoney::Account::Checkings);
       brokerage.setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());
     }
     file->createAccount(account, parentAccount, brokerage, MyMoneyMoney());

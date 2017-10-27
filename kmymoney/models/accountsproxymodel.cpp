@@ -51,7 +51,7 @@ public:
   ~Private() {
   }
 
-  QList<MyMoneyAccount::accountTypeE> m_typeList;
+  QList<eMyMoney::Account> m_typeList;
   bool m_hideClosedAccounts;
   bool m_hideEquityAccounts;
   bool m_hideUnusedIncomeExpenseAccounts;
@@ -133,37 +133,37 @@ bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QMode
 /**
   * Add the given account group to the filter.
   * @param group The account group to be added.
-  * @see MyMoneyAccount::accountTypeE
+  * @see eMyMoney::Account
   */
-void AccountsProxyModel::addAccountGroup(const QVector<MyMoneyAccount::_accountTypeE> &groups)
+void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account> &groups)
 {
   foreach (const auto group, groups) {
     switch (group) {
-      case MyMoneyAccount::Asset:
-        d->m_typeList << MyMoneyAccount::Checkings;
-        d->m_typeList << MyMoneyAccount::Savings;
-        d->m_typeList << MyMoneyAccount::Cash;
-        d->m_typeList << MyMoneyAccount::AssetLoan;
-        d->m_typeList << MyMoneyAccount::CertificateDep;
-        d->m_typeList << MyMoneyAccount::Investment;
-        d->m_typeList << MyMoneyAccount::Stock;
-        d->m_typeList << MyMoneyAccount::MoneyMarket;
-        d->m_typeList << MyMoneyAccount::Asset;
-        d->m_typeList << MyMoneyAccount::Currency;
+      case eMyMoney::Account::Asset:
+        d->m_typeList << eMyMoney::Account::Checkings;
+        d->m_typeList << eMyMoney::Account::Savings;
+        d->m_typeList << eMyMoney::Account::Cash;
+        d->m_typeList << eMyMoney::Account::AssetLoan;
+        d->m_typeList << eMyMoney::Account::CertificateDep;
+        d->m_typeList << eMyMoney::Account::Investment;
+        d->m_typeList << eMyMoney::Account::Stock;
+        d->m_typeList << eMyMoney::Account::MoneyMarket;
+        d->m_typeList << eMyMoney::Account::Asset;
+        d->m_typeList << eMyMoney::Account::Currency;
         break;
-      case MyMoneyAccount::Liability:
-        d->m_typeList << MyMoneyAccount::CreditCard;
-        d->m_typeList << MyMoneyAccount::Loan;
-        d->m_typeList << MyMoneyAccount::Liability;
+      case eMyMoney::Account::Liability:
+        d->m_typeList << eMyMoney::Account::CreditCard;
+        d->m_typeList << eMyMoney::Account::Loan;
+        d->m_typeList << eMyMoney::Account::Liability;
         break;
-      case MyMoneyAccount::Income:
-        d->m_typeList << MyMoneyAccount::Income;
+      case eMyMoney::Account::Income:
+        d->m_typeList << eMyMoney::Account::Income;
         break;
-      case MyMoneyAccount::Expense:
-        d->m_typeList << MyMoneyAccount::Expense;
+      case eMyMoney::Account::Expense:
+        d->m_typeList << eMyMoney::Account::Expense;
         break;
-      case MyMoneyAccount::Equity:
-        d->m_typeList << MyMoneyAccount::Equity;
+      case eMyMoney::Account::Equity:
+        d->m_typeList << eMyMoney::Account::Equity;
         break;
       default:
         break;
@@ -175,9 +175,9 @@ void AccountsProxyModel::addAccountGroup(const QVector<MyMoneyAccount::_accountT
 /**
   * Add the given account type to the filter.
   * @param type The account type to be added.
-  * @see MyMoneyAccount::accountTypeE
+  * @see eMyMoney::Account
   */
-void AccountsProxyModel::addAccountType(MyMoneyAccount::accountTypeE type)
+void AccountsProxyModel::addAccountType(eMyMoney::Account type)
 {
   d->m_typeList << type;
   invalidateFilter();
@@ -186,9 +186,9 @@ void AccountsProxyModel::addAccountType(MyMoneyAccount::accountTypeE type)
 /**
   * Remove the given account type from the filter.
   * @param type The account type to be removed.
-  * @see MyMoneyAccount::accountTypeE
+  * @see eMyMoney::Account
   */
-void AccountsProxyModel::removeAccountType(MyMoneyAccount::accountTypeE type)
+void AccountsProxyModel::removeAccountType(eMyMoney::Account type)
 {
   if (d->m_typeList.removeAll(type) > 0) {
     invalidateFilter();
@@ -222,11 +222,11 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
           return false;
 
         // we hide equity accounts if not in expert mode
-        if (account.accountType() == MyMoneyAccount::Equity && hideEquityAccounts())
+        if (account.accountType() == eMyMoney::Account::Equity && hideEquityAccounts())
           return false;
 
         // we hide unused income and expense accounts if the specific flag is set
-        if ((account.accountType() == MyMoneyAccount::Income || account.accountType() == MyMoneyAccount::Expense) && hideUnusedIncomeExpenseAccounts()) {
+        if ((account.accountType() == eMyMoney::Account::Income || account.accountType() == eMyMoney::Account::Expense) && hideUnusedIncomeExpenseAccounts()) {
           const auto totalValue = sourceModel()->data(source, (int)Role::TotalValue);
           if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
             emit unusedIncomeExpenseAccountHidden();

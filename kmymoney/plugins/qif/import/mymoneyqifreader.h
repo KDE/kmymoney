@@ -150,9 +150,9 @@ private:
     * specify the account to which the transactions should be imported.
     * The entry data is found in m_qifEntry.
     *
-    * @param accountType see MyMoneyAccount() for details. Defaults to MyMoneyAccount::Checkings
+    * @param accountType see MyMoneyAccount() for details. Defaults to eMyMoney::Account::Checkings
     */
-  void processMSAccountEntry(const MyMoneyAccount::accountTypeE accountType = MyMoneyAccount::Checkings);
+  void processMSAccountEntry(const eMyMoney::Account accountType = eMyMoney::Account::Checkings);
 
   /**
    * This method scans the m_qifEntry object as a payee record specified by Quicken
@@ -281,7 +281,7 @@ private:
   const QString transferAccount(const QString& name, bool useBrokerage = true);
 
   // void processQifLine();
-  void createOpeningBalance(MyMoneyAccount::_accountTypeE accType = MyMoneyAccount::Checkings);
+  void createOpeningBalance(eMyMoney::Account accType = eMyMoney::Account::Checkings);
 
 signals:
   void statementsReady(QList<MyMoneyStatement> &);

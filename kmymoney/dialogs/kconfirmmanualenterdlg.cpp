@@ -34,6 +34,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
 #include "kmymoneyutils.h"
 #include "mymoneytransaction.h"
 #include "ui_kconfirmmanualenterdlgdecl.h"
@@ -52,7 +53,7 @@ KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, 
 
   d->ui.m_onceRadio->setChecked(true);
 
-  if (schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
+  if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
     d->ui.m_setRadio->setEnabled(false);
     d->ui.m_discardRadio->setEnabled(false);
   }

@@ -73,7 +73,7 @@ public:
     *             will be returned.
     * @return QStringList of account ids
     */
-  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const;
+  QStringList accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const;
 
   void setSelectionMode(QTreeWidget::SelectionMode mode);
 
@@ -167,9 +167,9 @@ class AccountSet
 public:
   AccountSet();
 
-  void addAccountType(MyMoneyAccount::accountTypeE type);
-  void addAccountGroup(MyMoneyAccount::accountTypeE type);
-  void removeAccountType(MyMoneyAccount::accountTypeE type);
+  void addAccountType(eMyMoney::Account type);
+  void addAccountGroup(eMyMoney::Account type);
+  void removeAccountType(eMyMoney::Account type);
 
   void clear();
 
@@ -194,7 +194,7 @@ protected:
 private:
   int                                      m_count;
   MyMoneyFile*                             m_file;
-  QList<MyMoneyAccount::accountTypeE>      m_typeList;
+  QList<eMyMoney::Account>      m_typeList;
   QTreeWidgetItem*                         m_favorites;
   bool                                     m_hideClosedAccounts;
 };

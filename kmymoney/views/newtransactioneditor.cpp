@@ -35,6 +35,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
 #include "models.h"
@@ -352,7 +354,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
   d->ui->setupUi(this);
 
-  d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
+  d->accountsModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Income, eMyMoney::Account::Expense, eMyMoney::Account::Equity});
   d->accountsModel->setHideEquityAccounts(false);
   d->accountsModel->setSourceModel(model);
   d->accountsModel->setSourceColumns(model->getColumns());

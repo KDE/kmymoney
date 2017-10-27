@@ -139,7 +139,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
 
       m_prevButton->setEnabled(true);
       m_nextButton->setEnabled(true);
-      m_skipButton->setEnabled(sched.occurrencePeriod() != MyMoneySchedule::OCCUR_ONCE);
+      m_skipButton->setEnabled(sched.occurrencePeriod() != eMyMoney::Schedule::Occurrence::Once);
 
       if (m_index == 0)
         m_prevButton->setEnabled(false);

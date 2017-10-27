@@ -30,13 +30,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
 
 DurationWizardPage::DurationWizardPage(QWidget *parent)
     : DurationWizardPageDecl(parent)
 {
-  m_durationUnitEdit->insertItem(i18n("Months"), static_cast<int>(MyMoneySchedule::OCCUR_MONTHLY));
-  m_durationUnitEdit->insertItem(i18n("Years"), static_cast<int>(MyMoneySchedule::OCCUR_YEARLY));
-  m_durationUnitEdit->insertItem(i18n("Payments"), static_cast<int>(MyMoneySchedule::OCCUR_ONCE));
+  m_durationUnitEdit->insertItem(i18n("Months"), static_cast<int>(Schedule::Occurrence::Monthly));
+  m_durationUnitEdit->insertItem(i18n("Years"), static_cast<int>(Schedule::Occurrence::Yearly));
+  m_durationUnitEdit->insertItem(i18n("Payments"), static_cast<int>(Schedule::Occurrence::Once));
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
@@ -66,19 +69,19 @@ int DurationWizardPage::term() const
   if (m_durationValueEdit->value() != 0) {
     factor = 1;
     switch (m_durationUnitEdit->currentItem()) {
-      case MyMoneySchedule::OCCUR_YEARLY: // years
+      case (int)Schedule::Occurrence::Yearly: // years
         factor = 12;
         // intentional fall through
 
-      case MyMoneySchedule::OCCUR_MONTHLY: // months
+      case (int)Schedule::Occurrence::Monthly: // months
         factor *= 30;
         factor *= m_durationValueEdit->value();
         // factor now is the duration in days. we divide this by the
         // payment frequency and get the number of payments
-        factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()));
+        factor /= MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt()));
         break;
 
-      case MyMoneySchedule::OCCUR_ONCE: // payments
+      case (int)Schedule::Occurrence::Once: // payments
         factor = m_durationValueEdit->value();
         break;
     }
@@ -91,27 +94,27 @@ QString DurationWizardPage::updateTermWidgets(const double val)
   long vl = qFloor(val);
 
   QString valString;
-  MyMoneySchedule::occurrenceE unit;
-  unit = MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt());
+  Schedule::Occurrence unit;
+  unit = Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt());
 
-  if ((unit == MyMoneySchedule::OCCUR_MONTHLY)
+  if ((unit == Schedule::Occurrence::Monthly)
       && ((vl % 12) == 0)) {
     vl /= 12;
-    unit = MyMoneySchedule::OCCUR_YEARLY;
+    unit = Schedule::Occurrence::Yearly;
   }
 
   switch (unit) {
-    case MyMoneySchedule::OCCUR_MONTHLY:
+    case Schedule::Occurrence::Monthly:
       valString = i18np("one month", "%1 months", vl);
-      m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_MONTHLY));
+      m_durationUnitEdit->setCurrentItem(static_cast<int>(Schedule::Occurrence::Monthly));
       break;
-    case MyMoneySchedule::OCCUR_YEARLY:
+    case Schedule::Occurrence::Yearly:
       valString = i18np("one year", "%1 years", vl);
-      m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_YEARLY));
+      m_durationUnitEdit->setCurrentItem(static_cast<int>(Schedule::Occurrence::Yearly));
       break;
     default:
       valString = i18np("one payment", "%1 payments", vl);
-      m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_ONCE));
+      m_durationUnitEdit->setCurrentItem(static_cast<int>(Schedule::Occurrence::Once));
       break;
   }
   m_durationValueEdit->setValue(vl);

@@ -121,7 +121,7 @@ public:
     return m_accountName;
   }
 
-  MyMoneyAccount::accountTypeE accountType(void) const;
+  eMyMoney::Account accountType(void) const;
   const MyMoneyAccount& parentAccount(void);
   bool allowsParentAccount(void) const;
   const MyMoneySecurity& currency(void) const;
@@ -129,7 +129,7 @@ public:
   void setAccount(const MyMoneyAccount& acc);
 
 private:
-  void hideShowPages(MyMoneyAccount::accountTypeE i) const;
+  void hideShowPages(eMyMoney::Account i) const;
   void priceWarning(bool);
 
 private slots:

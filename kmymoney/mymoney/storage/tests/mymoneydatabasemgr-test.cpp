@@ -26,6 +26,10 @@
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
+
 QTEST_GUILESS_MAIN(MyMoneyDatabaseMgrTest)
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
@@ -516,7 +520,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
 
   // use different account type
   MyMoneyAccount d;
-  d.setAccountType(MyMoneyAccount::CreditCard);
+  d.setAccountType(Account::CreditCard);
   MyMoneyAccount f("A000001", d);
   try {
     m->modifyAccount(f);
@@ -569,17 +573,17 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
 
   // this one adds some accounts to the database
   MyMoneyAccount ex1;
-  ex1.setAccountType(MyMoneyAccount::Expense);
+  ex1.setAccountType(Account::Expense);
   MyMoneyAccount ex2;
-  ex2.setAccountType(MyMoneyAccount::Expense);
+  ex2.setAccountType(Account::Expense);
   MyMoneyAccount ex3;
-  ex3.setAccountType(MyMoneyAccount::Expense);
+  ex3.setAccountType(Account::Expense);
   MyMoneyAccount ex4;
-  ex4.setAccountType(MyMoneyAccount::Expense);
+  ex4.setAccountType(Account::Expense);
   MyMoneyAccount in;
-  in.setAccountType(MyMoneyAccount::Income);
+  in.setAccountType(Account::Income);
   MyMoneyAccount ch;
-  ch.setAccountType(MyMoneyAccount::Checkings);
+  ch.setAccountType(Account::Checkings);
 
   ex1.setName("Sales Tax");
   ex2.setName("Sales Tax 16%");
@@ -1750,9 +1754,9 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
     s2.setAccountId("A000002");
     t1.addSplit(s2);
     MyMoneySchedule schedule("Sched-Name",
-                             MyMoneySchedule::TYPE_DEPOSIT,
-                             MyMoneySchedule::OCCUR_DAILY, 1,
-                             MyMoneySchedule::STYPE_MANUALDEPOSIT,
+                             Schedule::Type::Deposit,
+                             Schedule::Occurrence::Daily, 1,
+                             Schedule::PaymentType::ManualDeposit,
                              QDate(),
                              QDate(),
                              true,
@@ -1772,9 +1776,9 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
 
   try {
     MyMoneySchedule schedule("Sched-Name",
-                             MyMoneySchedule::TYPE_DEPOSIT,
-                             MyMoneySchedule::OCCUR_DAILY, 1,
-                             MyMoneySchedule::STYPE_MANUALDEPOSIT,
+                             Schedule::Type::Deposit,
+                             Schedule::Occurrence::Daily, 1,
+                             Schedule::PaymentType::ManualDeposit,
                              QDate(),
                              QDate(),
                              true,
@@ -1795,9 +1799,9 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
     s2.setAccountId("Abadaccount2");
     //t1.addSplit(s2);
     MyMoneySchedule schedule("Sched-Name",
-                             MyMoneySchedule::TYPE_DEPOSIT,
-                             MyMoneySchedule::OCCUR_DAILY, 1,
-                             MyMoneySchedule::STYPE_MANUALDEPOSIT,
+                             Schedule::Type::Deposit,
+                             Schedule::Occurrence::Daily, 1,
+                             Schedule::PaymentType::ManualDeposit,
                              QDate(),
                              QDate(),
                              true,
@@ -1916,9 +1920,9 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   s2.setAccountId("A000002");
   t1.addSplit(s2);
   MyMoneySchedule schedule1("Schedule 1",
-                            MyMoneySchedule::TYPE_BILL,
-                            MyMoneySchedule::OCCUR_ONCE, 1,
-                            MyMoneySchedule::STYPE_DIRECTDEBIT,
+                            Schedule::Type::Bill,
+                            Schedule::Occurrence::Once, 1,
+                            Schedule::PaymentType::DirectDebit,
                             QDate(),
                             QDate(),
                             false,
@@ -1934,9 +1938,9 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   s4.setAccountId("A000003");
   t2.addSplit(s4);
   MyMoneySchedule schedule2("Schedule 2",
-                            MyMoneySchedule::TYPE_DEPOSIT,
-                            MyMoneySchedule::OCCUR_DAILY, 1,
-                            MyMoneySchedule::STYPE_DIRECTDEPOSIT,
+                            Schedule::Type::Deposit,
+                            Schedule::Occurrence::Daily, 1,
+                            Schedule::PaymentType::DirectDeposit,
                             QDate(),
                             QDate(),
                             false,
@@ -1952,9 +1956,9 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   s6.setAccountId("A000006");
   t3.addSplit(s6);
   MyMoneySchedule schedule3("Schedule 3",
-                            MyMoneySchedule::TYPE_TRANSFER,
-                            MyMoneySchedule::OCCUR_WEEKLY, 1,
-                            MyMoneySchedule::STYPE_OTHER,
+                            Schedule::Type::Transfer,
+                            Schedule::Occurrence::Weekly, 1,
+                            Schedule::PaymentType::Other,
                             QDate(),
                             QDate(),
                             false,
@@ -1970,9 +1974,9 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   s8.setAccountId("A000006");
   t4.addSplit(s8);
   MyMoneySchedule schedule4("Schedule 4",
-                            MyMoneySchedule::TYPE_BILL,
-                            MyMoneySchedule::OCCUR_WEEKLY, 1,
-                            MyMoneySchedule::STYPE_WRITECHEQUE,
+                            Schedule::Type::Bill,
+                            Schedule::Occurrence::Weekly, 1,
+                            Schedule::PaymentType::WriteChecque,
                             QDate(),
                             notOverdue.addDays(31),
                             false,
@@ -1996,21 +2000,21 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   QVERIFY(list.count() == 4);
 
   // filter by type
-  list = m->scheduleList("", MyMoneySchedule::TYPE_BILL);
+  list = m->scheduleList(QString(), Schedule::Type::Bill);
   QVERIFY(list.count() == 2);
   QVERIFY(list[0].name() == "Schedule 1");
   QVERIFY(list[1].name() == "Schedule 4");
 
   // filter by occurrence
-  list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                         MyMoneySchedule::OCCUR_DAILY);
+  list = m->scheduleList(QString(), Schedule::Type::Any,
+                         Schedule::Occurrence::Daily);
   QVERIFY(list.count() == 1);
   QVERIFY(list[0].name() == "Schedule 2");
 
   // filter by payment type
-  list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                         MyMoneySchedule::OCCUR_ANY,
-                         MyMoneySchedule::STYPE_DIRECTDEPOSIT);
+  list = m->scheduleList(QString(), Schedule::Type::Any,
+                         Schedule::Occurrence::Any,
+                         Schedule::PaymentType::DirectDeposit);
   QVERIFY(list.count() == 1);
   QVERIFY(list[0].name() == "Schedule 2");
 
@@ -2023,40 +2027,44 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   QVERIFY(list.count() == 1);
 
   // filter by start date
-  list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                         MyMoneySchedule::OCCUR_ANY,
-                         MyMoneySchedule::STYPE_ANY,
-                         notOverdue.addDays(31));
+  list = m->scheduleList(QString(), Schedule::Type::Any,
+                         Schedule::Occurrence::Any,
+                         Schedule::PaymentType::Any,
+                         notOverdue.addDays(31),
+                         QDate(),
+                         false);
   QVERIFY(list.count() == 3);
   QVERIFY(list[0].name() == "Schedule 2");
   QVERIFY(list[1].name() == "Schedule 3");
   QVERIFY(list[2].name() == "Schedule 4");
 
   // filter by end date
-  list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                         MyMoneySchedule::OCCUR_ANY,
-                         MyMoneySchedule::STYPE_ANY,
+  list = m->scheduleList(QString(), Schedule::Type::Any,
+                         Schedule::Occurrence::Any,
+                         Schedule::PaymentType::Any,
                          QDate(),
-                         notOverdue.addDays(1));
+                         notOverdue.addDays(1),
+                         false);
   QVERIFY(list.count() == 3);
   QVERIFY(list[0].name() == "Schedule 1");
   QVERIFY(list[1].name() == "Schedule 2");
   QVERIFY(list[2].name() == "Schedule 4");
 
   // filter by start and end date
-  list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                         MyMoneySchedule::OCCUR_ANY,
-                         MyMoneySchedule::STYPE_ANY,
+  list = m->scheduleList(QString(), Schedule::Type::Any,
+                         Schedule::Occurrence::Any,
+                         Schedule::PaymentType::Any,
                          notOverdue.addDays(-1),
-                         notOverdue.addDays(1));
+                         notOverdue.addDays(1),
+                         false);
   QVERIFY(list.count() == 2);
   QVERIFY(list[0].name() == "Schedule 1");
   QVERIFY(list[1].name() == "Schedule 2");
 
   // filter by overdue status
-  list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                         MyMoneySchedule::OCCUR_ANY,
-                         MyMoneySchedule::STYPE_ANY,
+  list = m->scheduleList(QString(), Schedule::Type::Any,
+                         Schedule::Occurrence::Any,
+                         Schedule::PaymentType::Any,
                          QDate(),
                          QDate(),
                          true);

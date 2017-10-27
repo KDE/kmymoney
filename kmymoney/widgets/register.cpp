@@ -51,6 +51,7 @@
 #include "scheduledtransaction.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
+#include "mymoneyenums.h"
 
 static const char * sortOrderText[] = {
   I18N_NOOP2("Unknown sort order", "Unknown"),
@@ -68,6 +69,7 @@ static const char * sortOrderText[] = {
 };
 
 using namespace KMyMoneyRegister;
+using namespace eMyMoney;
 
 static unsigned char fancymarker_bg_image[] = {
   /* 200x49 */
@@ -378,20 +380,20 @@ void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionVie
   painter->restore();
 }
 
-TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, MyMoneyAccount::accountTypeE accType) :
+TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, Account accType) :
     GroupMarker(parent),
     m_dir(dir)
 {
   switch (dir) {
     case Deposit:
       m_txt = i18nc("Deposits onto account", "Deposits");
-      if (accType == MyMoneyAccount::CreditCard) {
+      if (accType == Account::CreditCard) {
         m_txt = i18nc("Payments towards credit card", "Payments");
       }
       break;
     case Payment:
       m_txt = i18nc("Payments made from account", "Payments");
-      if (accType == MyMoneyAccount::CreditCard) {
+      if (accType == Account::CreditCard) {
         m_txt = i18nc("Payments made with credit card", "Charges");
       }
       break;
@@ -587,7 +589,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
 
   // balance
   switch (account.accountType()) {
-    case MyMoneyAccount::Stock:
+    case Account::Stock:
       break;
     default:
       showColumn(BalanceColumn);
@@ -596,19 +598,19 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
 
   // Number column
   switch (account.accountType()) {
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-    case MyMoneyAccount::Loan:
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Equity:
+    case Account::Savings:
+    case Account::Cash:
+    case Account::Loan:
+    case Account::AssetLoan:
+    case Account::Asset:
+    case Account::Liability:
+    case Account::Equity:
       if (KMyMoneyGlobalSettings::alwaysShowNrField())
         showColumn(NumberColumn);
       break;
 
-    case MyMoneyAccount::Checkings:
-    case MyMoneyAccount::CreditCard:
+    case Account::Checkings:
+    case Account::CreditCard:
       showColumn(NumberColumn);
       break;
 
@@ -618,8 +620,8 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
   }
 
   switch (account.accountType()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
+    case Account::Income:
+    case Account::Expense:
       showAccountColumn = true;
       break;
     default:
@@ -636,7 +638,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
       showColumn(DepositColumn);
       break;
 
-    case MyMoneyAccount::Investment:
+    case Account::Investment:
       showColumn(SecurityColumn);
       showColumn(QuantityColumn);
       showColumn(PriceColumn);
@@ -646,22 +648,22 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
 
   // headings
   switch (account.accountType()) {
-    case MyMoneyAccount::CreditCard:
+    case Account::CreditCard:
       horizontalHeaderItem(PaymentColumn)->setText(i18nc("Payment made with credit card", "Charge"));
       horizontalHeaderItem(DepositColumn)->setText(i18nc("Payment towards credit card", "Payment"));
       break;
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::AssetLoan:
+    case Account::Asset:
+    case Account::AssetLoan:
       horizontalHeaderItem(PaymentColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
       horizontalHeaderItem(DepositColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
       break;
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Loan:
+    case Account::Liability:
+    case Account::Loan:
       horizontalHeaderItem(PaymentColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
       horizontalHeaderItem(DepositColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
       break;
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
+    case Account::Income:
+    case Account::Expense:
       horizontalHeaderItem(PaymentColumn)->setText(i18n("Income"));
       horizontalHeaderItem(DepositColumn)->setText(i18n("Expense"));
       break;
@@ -1893,18 +1895,18 @@ Transaction* Register::transactionFactory(Register *parent, const MyMoneyTransac
   }
 
   switch (parent->account().accountType()) {
-    case MyMoneyAccount::Checkings:
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-    case MyMoneyAccount::CreditCard:
-    case MyMoneyAccount::Loan:
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Currency:
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Equity:
+    case Account::Checkings:
+    case Account::Savings:
+    case Account::Cash:
+    case Account::CreditCard:
+    case Account::Loan:
+    case Account::Asset:
+    case Account::Liability:
+    case Account::Currency:
+    case Account::Income:
+    case Account::Expense:
+    case Account::AssetLoan:
+    case Account::Equity:
       if (s.accountId().isEmpty())
         s.setAccountId(parent->account().id());
       if (s.isMatched())
@@ -1915,7 +1917,7 @@ Transaction* Register::transactionFactory(Register *parent, const MyMoneyTransac
         t = new KMyMoneyRegister::StdTransaction(parent, transaction, s, uniqueId);
       break;
 
-    case MyMoneyAccount::Investment:
+    case Account::Investment:
       if (s.isMatched())
         t = new KMyMoneyRegister::InvestTransaction/* Matched */(parent, transaction, s, uniqueId);
       else if (transaction.isImported())
@@ -1924,11 +1926,11 @@ Transaction* Register::transactionFactory(Register *parent, const MyMoneyTransac
         t = new KMyMoneyRegister::InvestTransaction(parent, transaction, s, uniqueId);
       break;
 
-    case MyMoneyAccount::CertificateDep:
-    case MyMoneyAccount::MoneyMarket:
-    case MyMoneyAccount::Stock:
+    case Account::CertificateDep:
+    case Account::MoneyMarket:
+    case Account::Stock:
     default:
-      qDebug("Register::transactionFactory: invalid accountTypeE %d", parent->account().accountType());
+      qDebug("Register::transactionFactory: invalid accountTypeE %d", (int)parent->account().accountType());
       break;
   }
   return t;
@@ -1973,7 +1975,7 @@ void Register::addGroupMarkers()
         if (!m_account.value("lastImportedTransactionDate").isEmpty()
             && !m_account.value("lastStatementBalance").isEmpty()) {
           MyMoneyMoney balance(m_account.value("lastStatementBalance"));
-          if (m_account.accountGroup() == MyMoneyAccount::Liability)
+          if (m_account.accountGroup() == Account::Liability)
             balance = -balance;
           QString txt = i18n("Online Statement Balance: %1", balance.formatMoney(m_account.fraction()));
 

@@ -58,13 +58,13 @@ void QueryTableTest::init()
   acLiability = (MyMoneyFile::instance()->liability().id());
   acExpense = (MyMoneyFile::instance()->expense().id());
   acIncome = (MyMoneyFile::instance()->income().id());
-  acChecking = makeAccount(QString("Checking Account"), MyMoneyAccount::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
-  acCredit = makeAccount(QString("Credit Card"), MyMoneyAccount::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
-  acSolo = makeAccount(QString("Solo"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acParent = makeAccount(QString("Parent"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acChild = makeAccount(QString("Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
-  acForeign = makeAccount(QString("Foreign"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acTax = makeAccount(QString("Tax"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2005, 1, 11), acExpense, "", true);
+  acChecking = makeAccount(QString("Checking Account"), eMyMoney::Account::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
+  acCredit = makeAccount(QString("Credit Card"), eMyMoney::Account::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
+  acSolo = makeAccount(QString("Solo"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acParent = makeAccount(QString("Parent"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChild = makeAccount(QString("Child"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acForeign = makeAccount(QString("Foreign"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acTax = makeAccount(QString("Tax"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2005, 1, 11), acExpense, "", true);
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
   file->addInstitution(i);
@@ -413,14 +413,14 @@ void QueryTableTest::testInvestment()
     eqStock4 = makeEquity("Stock4", "STK4");
 
     // Accounts
-    acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2003, 11, 1), acAsset);
-    acStock1 = makeAccount("Stock 1", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock1);
-    acStock2 = makeAccount("Stock 2", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock2);
-    acStock3 = makeAccount("Stock 3", MyMoneyAccount::Stock, moZero, QDate(2003, 11, 1), acInvestment, eqStock3);
-    acStock4 = makeAccount("Stock 4", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock4);
-    acDividends = makeAccount("Dividends", MyMoneyAccount::Income, moZero, QDate(2004, 1, 1), acIncome);
-    acInterest = makeAccount("Interest", MyMoneyAccount::Income, moZero, QDate(2004, 1, 1), acIncome);
-    acFees = makeAccount("Fees", MyMoneyAccount::Expense, moZero, QDate(2003, 11, 1), acExpense);
+    acInvestment = makeAccount("Investment", eMyMoney::Account::Investment, moZero, QDate(2003, 11, 1), acAsset);
+    acStock1 = makeAccount("Stock 1", eMyMoney::Account::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock1);
+    acStock2 = makeAccount("Stock 2", eMyMoney::Account::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock2);
+    acStock3 = makeAccount("Stock 3", eMyMoney::Account::Stock, moZero, QDate(2003, 11, 1), acInvestment, eqStock3);
+    acStock4 = makeAccount("Stock 4", eMyMoney::Account::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock4);
+    acDividends = makeAccount("Dividends", eMyMoney::Account::Income, moZero, QDate(2004, 1, 1), acIncome);
+    acInterest = makeAccount("Interest", eMyMoney::Account::Income, moZero, QDate(2004, 1, 1), acIncome);
+    acFees = makeAccount("Fees", eMyMoney::Account::Expense, moZero, QDate(2003, 11, 1), acExpense);
 
     // Transactions
     //                         Date             Action                                               Shares                Price   Stock     Asset       Income
@@ -616,8 +616,8 @@ void QueryTableTest::testSplitShares()
     eqStock1 = makeEquity("Stock1", "STK1");
 
     // Accounts
-    acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2017, 8, 1), acAsset);
-    acStock1 =     makeAccount("Stock 1",    MyMoneyAccount::Stock,      moZero, QDate(2017, 8, 1), acInvestment, eqStock1);
+    acInvestment = makeAccount("Investment", eMyMoney::Account::Investment, moZero, QDate(2017, 8, 1), acAsset);
+    acStock1 =     makeAccount("Stock 1",    eMyMoney::Account::Stock,      moZero, QDate(2017, 8, 1), acInvestment, eqStock1);
 
     // Transactions
     //                        Date               Action                           Shares                Price             Stock     Asset       Income
@@ -662,7 +662,7 @@ void QueryTableTest::testConversionRate()
     MyMoneyMoney secondConversionRate(1.1567, 10000);
     MyMoneyMoney amountWithdrawn(100);
 
-    const auto acCadChecking = makeAccount(QString("Canadian Checking"), MyMoneyAccount::Checkings, moZero, QDate(2017, 8, 1), acAsset, "CAD");
+    const auto acCadChecking = makeAccount(QString("Canadian Checking"), eMyMoney::Account::Checkings, moZero, QDate(2017, 8, 1), acAsset, "CAD");
 
     makePrice("CAD", QDate(2017, 8, 1), firsConversionRate);
     makePrice("CAD", QDate(2017, 8, 2), secondConversionRate);
@@ -757,7 +757,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     MyMoneyMoney moTransaction(100, 1);
     MyMoneyMoney moJpyTransaction(100, 1);
 
-    QString acJpyChecking = makeAccount(QString("Japanese Checking"), MyMoneyAccount::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
+    QString acJpyChecking = makeAccount(QString("Japanese Checking"), eMyMoney::Account::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
 
     makePrice("JPY", QDate(2004, 1, 1), MyMoneyMoney(moJpyPrice));
     makePrice("JPY", QDate(2004, 5, 1), MyMoneyMoney(moJpyPrice2));

@@ -200,7 +200,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
   d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
 
-  d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
+  d->accountsModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Income, eMyMoney::Account::Expense, eMyMoney::Account::Equity});
   d->accountsModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();
   d->accountsModel->setSourceModel(model);

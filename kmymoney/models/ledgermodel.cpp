@@ -34,10 +34,15 @@
 // Project Includes
 
 #include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
 #include "mymoneymoney.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
 
 LedgerItem::LedgerItem()
 {
@@ -281,7 +286,7 @@ QString LedgerSplit::memo() const
 LedgerSortFilterProxyModel::LedgerSortFilterProxyModel(QObject* parent)
   : QSortFilterProxyModel(parent)
   , m_showNewTransaction(false)
-  , m_accountType(MyMoneyAccount::Asset)
+  , m_accountType(Account::Asset)
 {
   setFilterRole(LedgerRole::AccountIdRole);
   setFilterKeyColumn(0);
@@ -293,7 +298,7 @@ LedgerSortFilterProxyModel::~LedgerSortFilterProxyModel()
 {
 }
 
-void LedgerSortFilterProxyModel::setAccountType(MyMoneyAccount::accountTypeE type)
+void LedgerSortFilterProxyModel::setAccountType(Account type)
 {
   m_accountType = type;
 }
@@ -304,19 +309,19 @@ QVariant LedgerSortFilterProxyModel::headerData(int section, Qt::Orientation ori
     switch(section) {
       case LedgerModel::PaymentColumn:
         switch(m_accountType) {
-          case MyMoneyAccount::CreditCard:
+          case Account::CreditCard:
             return i18nc("Payment made with credit card", "Charge");
 
-          case MyMoneyAccount::Asset:
-          case MyMoneyAccount::AssetLoan:
+          case Account::Asset:
+          case Account::AssetLoan:
             return i18nc("Decrease of asset/liability value", "Decrease");
 
-          case MyMoneyAccount::Liability:
-          case MyMoneyAccount::Loan:
+          case Account::Liability:
+          case Account::Loan:
             return i18nc("Increase of asset/liability value", "Increase");
 
-          case MyMoneyAccount::Income:
-          case MyMoneyAccount::Expense:
+          case Account::Income:
+          case Account::Expense:
             return i18n("Income");
 
           default:
@@ -326,19 +331,19 @@ QVariant LedgerSortFilterProxyModel::headerData(int section, Qt::Orientation ori
 
       case LedgerModel::DepositColumn:
         switch(m_accountType) {
-          case MyMoneyAccount::CreditCard:
+          case Account::CreditCard:
             return i18nc("Payment towards credit card", "Payment");
 
-          case MyMoneyAccount::Asset:
-          case MyMoneyAccount::AssetLoan:
+          case Account::Asset:
+          case Account::AssetLoan:
             return i18nc("Increase of asset/liability value", "Increase");
 
-          case MyMoneyAccount::Liability:
-          case MyMoneyAccount::Loan:
+          case Account::Liability:
+          case Account::Loan:
             return i18nc("Decrease of asset/liability value", "Decrease");
 
-          case MyMoneyAccount::Income:
-          case MyMoneyAccount::Expense:
+          case Account::Income:
+          case Account::Expense:
             return i18n("Expense");
 
           default:
@@ -435,13 +440,13 @@ LedgerModel::LedgerModel(QObject* parent)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  connect(file, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(addTransaction(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(file, SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(modifyTransaction(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(file, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)), this, SLOT(removeTransaction(MyMoneyFile::notificationObjectT,QString)));
+  connect(file, SIGNAL(objectAdded(File::Object,MyMoneyObject*const)), this, SLOT(addTransaction(File::Object,MyMoneyObject*const)));
+  connect(file, SIGNAL(objectModified(File::Object,MyMoneyObject*const)), this, SLOT(modifyTransaction(File::Object,MyMoneyObject*const)));
+  connect(file, SIGNAL(objectRemoved(File::Object,QString)), this, SLOT(removeTransaction(File::Object,QString)));
 
-  connect(file, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(addSchedule(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(file, SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(modifySchedule(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(file, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)), this, SLOT(removeSchedule(MyMoneyFile::notificationObjectT,QString)));
+  connect(file, SIGNAL(objectAdded(File::Object,MyMoneyObject*const)), this, SLOT(addSchedule(File::Object,MyMoneyObject*const)));
+  connect(file, SIGNAL(objectModified(File::Object,MyMoneyObject*const)), this, SLOT(modifySchedule(File::Object,MyMoneyObject*const)));
+  connect(file, SIGNAL(objectRemoved(File::Object,QString)), this, SLOT(removeSchedule(File::Object,QString)));
 }
 
 LedgerModel::~LedgerModel()
@@ -836,7 +841,7 @@ void LedgerModel::addSchedules(const QList<MyMoneySchedule> & list, int previewP
         }
 
         // if this is a one time schedule, we can bail out here as we're done
-        if (schedule.occurrence() == MyMoneySchedule::OCCUR_ONCE)
+        if (schedule.occurrence() == Schedule::Occurrence::Once)
           break;
 
         // for all others, we check if the next payment date is still 'in range'
@@ -876,9 +881,9 @@ void LedgerModel::load()
   qDebug() << "Loaded" << rowCount() << "elements";
 }
 
-void LedgerModel::addTransaction(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void LedgerModel::addTransaction(File::Object objType, const MyMoneyObject * const obj)
 {
-  if(objType != MyMoneyFile::notifyTransaction) {
+  if(objType != File::Object::Transaction) {
     return;
   }
 
@@ -896,9 +901,9 @@ void LedgerModel::addTransaction(MyMoneyFile::notificationObjectT objType, const
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::modifyTransaction(MyMoneyFile::notificationObjectT objType, const MyMoneyObject* const obj)
+void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* const obj)
 {
-  if(objType != MyMoneyFile::notifyTransaction) {
+  if(objType != File::Object::Transaction) {
     return;
   }
 
@@ -967,9 +972,9 @@ void LedgerModel::modifyTransaction(MyMoneyFile::notificationObjectT objType, co
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::removeTransaction(MyMoneyFile::notificationObjectT objType, const QString& id)
+void LedgerModel::removeTransaction(File::Object objType, const QString& id)
 {
-  if(objType != MyMoneyFile::notifyTransaction) {
+  if(objType != File::Object::Transaction) {
     return;
   }
 
@@ -989,30 +994,30 @@ void LedgerModel::removeTransaction(MyMoneyFile::notificationObjectT objType, co
   }
 }
 
-void LedgerModel::addSchedule(MyMoneyFile::notificationObjectT objType, const MyMoneyObject*const obj)
+void LedgerModel::addSchedule(File::Object objType, const MyMoneyObject*const obj)
 {
   Q_UNUSED(obj);
-  if(objType != MyMoneyFile::notifySchedule) {
+  if(objType != File::Object::Schedule) {
     return;
   }
 
   /// @todo implement LedgerModel::addSchedule
 }
 
-void LedgerModel::modifySchedule(MyMoneyFile::notificationObjectT objType, const MyMoneyObject*const obj)
+void LedgerModel::modifySchedule(File::Object objType, const MyMoneyObject*const obj)
 {
   Q_UNUSED(obj);
-  if(objType != MyMoneyFile::notifySchedule) {
+  if(objType != File::Object::Schedule) {
     return;
   }
 
   /// @todo implement LedgerModel::modifySchedule
 }
 
-void LedgerModel::removeSchedule(MyMoneyFile::notificationObjectT objType, const QString& id)
+void LedgerModel::removeSchedule(File::Object objType, const QString& id)
 {
   Q_UNUSED(id);
-  if(objType != MyMoneyFile::notifySchedule) {
+  if(objType != File::Object::Schedule) {
     return;
   }
 

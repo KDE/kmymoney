@@ -126,6 +126,7 @@
 #include "views/konlinejoboutbox.h"
 #include "models/onlinejobmessagesmodel.h"
 
+#include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
 #include "mymoney/storage/mymoneystoragedump.h"
@@ -165,6 +166,7 @@
 
 #include "ledgerdelegate.h"
 #include "storageenums.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 
@@ -2670,7 +2672,7 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
   try {
     const MyMoneySecurity& sec = file->security(newAccount.currencyId());
     // Check the opening balance
-    if (openingBal.isPositive() && newAccount.accountGroup() == MyMoneyAccount::Liability) {
+    if (openingBal.isPositive() && newAccount.accountGroup() == eMyMoney::Account::Liability) {
       QString message = i18n("This account is a liability and if the "
                              "opening balance represents money owed, then it should be negative.  "
                              "Negate the amount?\n\n"
@@ -2951,8 +2953,8 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
 
         // in case of a loan account, we keep a reference to this
         // schedule in the account
-        if (newAccount.accountType() == MyMoneyAccount::Loan
-            || newAccount.accountType() == MyMoneyAccount::AssetLoan) {
+        if (newAccount.accountType() == eMyMoney::Account::Loan
+            || newAccount.accountType() == eMyMoney::Account::AssetLoan) {
           newAccount.setValue("schedule", newSchedule.id());
           file->modifyAccount(newAccount);
         }
@@ -2990,8 +2992,8 @@ void KMyMoneyApp::slotAccountDelete()
 
   // make sure we only allow transactions in a 'category' (income/expense account)
   switch (d->m_selectedAccount.accountType()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
+    case eMyMoney::Account::Income:
+    case eMyMoney::Account::Expense:
       break;
 
     default:
@@ -3100,8 +3102,8 @@ void KMyMoneyApp::slotAccountDelete()
   // to be deleted anymore
   switch (d->m_selectedAccount.accountGroup()) {
       // special handling for categories to allow deleting of empty subcategories
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense: { // open a compound statement here to be able to declare variables
+    case eMyMoney::Account::Income:
+    case eMyMoney::Account::Expense: { // open a compound statement here to be able to declare variables
         // which would otherwise not work within a case label.
 
         // case A - only a single, unused category without subcats selected
@@ -3209,8 +3211,8 @@ void KMyMoneyApp::slotAccountEdit()
   MyMoneyFile* file = MyMoneyFile::instance();
   if (!d->m_selectedAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_selectedAccount.id())) {
-      if (d->m_selectedAccount.accountType() != MyMoneyAccount::Loan
-          && d->m_selectedAccount.accountType() != MyMoneyAccount::AssetLoan) {
+      if (d->m_selectedAccount.accountType() != eMyMoney::Account::Loan
+          && d->m_selectedAccount.accountType() != eMyMoney::Account::AssetLoan) {
         QString caption;
         bool category = false;
         switch (d->m_selectedAccount.accountGroup()) {
@@ -3218,8 +3220,8 @@ void KMyMoneyApp::slotAccountEdit()
             caption = i18n("Edit account '%1'", d->m_selectedAccount.name());
             break;
 
-          case MyMoneyAccount::Expense:
-          case MyMoneyAccount::Income:
+          case eMyMoney::Account::Expense:
+          case eMyMoney::Account::Income:
             caption = i18n("Edit category '%1'", d->m_selectedAccount.name());
             category = true;
             break;
@@ -3245,7 +3247,7 @@ void KMyMoneyApp::slotAccountEdit()
               s0 = t.splitByAccount(d->m_selectedAccount.id());
               s1 = t.splitByAccount(d->m_selectedAccount.id(), false);
               dlg->setOpeningBalance(s0.shares());
-              if (d->m_selectedAccount.accountGroup() == MyMoneyAccount::Liability) {
+              if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Liability) {
                 dlg->setOpeningBalance(-s0.shares());
               }
             } catch (const MyMoneyException &e) {
@@ -3280,7 +3282,7 @@ void KMyMoneyApp::slotAccountEdit()
               account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
             }
             MyMoneyMoney bal = dlg->openingBalance();
-            if (d->m_selectedAccount.accountGroup() == MyMoneyAccount::Liability) {
+            if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Liability) {
               bal = -bal;
             }
 
@@ -3486,7 +3488,7 @@ void KMyMoneyApp::slotAccountReconcileStart()
     // it make's sense for asset and liability accounts
     try {
       // check if we have overdue schedules for this account
-      QList<MyMoneySchedule> schedules = file->scheduleList(d->m_selectedAccount.id(), MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, QDate(), QDate(), true);
+      QList<MyMoneySchedule> schedules = file->scheduleList(d->m_selectedAccount.id(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
       if (schedules.count() > 0) {
         if (KMessageBox::questionYesNo(this, i18n("KMyMoney has detected some overdue scheduled transactions for this account. Do you want to enter those scheduled transactions now?"), i18n("Scheduled transactions found")) == KMessageBox::Yes) {
 
@@ -3509,7 +3511,7 @@ void KMyMoneyApp::slotAccountReconcileStart()
             }
 
             // reload list (maybe this schedule needs to be added again)
-            schedules = file->scheduleList(d->m_selectedAccount.id(), MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, QDate(), QDate(), true);
+            schedules = file->scheduleList(d->m_selectedAccount.id(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
           } while (processedOne);
         }
       }
@@ -3530,8 +3532,8 @@ void KMyMoneyApp::slotAccountReconcileStart()
 
             QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
             MyMoneyTransactionFilter filter(account.id());
-            filter.addState(MyMoneyTransactionFilter::cleared);
-            filter.addState(MyMoneyTransactionFilter::notReconciled);
+            filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
+            filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
             filter.setDateFilter(QDate(), endDate);
             filter.setConsiderCategory(false);
             filter.setReportAllSplits(true);
@@ -3600,8 +3602,8 @@ void KMyMoneyApp::slotAccountReconcileFinish()
     // retrieve list of all transactions that are not reconciled or cleared
     QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
     MyMoneyTransactionFilter filter(d->m_reconciliationAccount.id());
-    filter.addState(MyMoneyTransactionFilter::cleared);
-    filter.addState(MyMoneyTransactionFilter::notReconciled);
+    filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
+    filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
     filter.setDateFilter(QDate(), d->m_endingBalanceDlg->statementDate());
     filter.setConsiderCategory(false);
     filter.setReportAllSplits(true);
@@ -3660,7 +3662,7 @@ void KMyMoneyApp::slotAccountReconcileFinish()
       // collect the list of cleared splits for this account
       filter.clear();
       filter.addAccount(d->m_reconciliationAccount.id());
-      filter.addState(MyMoneyTransactionFilter::cleared);
+      filter.addState(eMyMoney::TransactionFilter::Cleared);
       filter.setConsiderCategory(false);
       filter.setReportAllSplits(true);
       file->transactionList(transactionList, filter);
@@ -3916,7 +3918,7 @@ void KMyMoneyApp::slotScheduleNew()
   slotScheduleNew(MyMoneyTransaction());
 }
 
-void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule::occurrenceE occurrence)
+void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence)
 {
   MyMoneySchedule schedule;
   schedule.setOccurrence(occurrence);
@@ -3927,7 +3929,7 @@ void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule:
   if (_t != MyMoneyTransaction()) {
     MyMoneyTransaction t(_t);
     schedule.setTransaction(t);
-    if (occurrence != MyMoneySchedule::OCCUR_ONCE)
+    if (occurrence != eMyMoney::Schedule::Occurrence::Once)
       schedule.setNextDueDate(schedule.nextPayment(t.postDate()));
   }
 
@@ -3961,9 +3963,9 @@ void KMyMoneyApp::slotScheduleEdit()
       KEditLoanWizard* loan_wiz = 0;
 
       switch (schedule.type()) {
-        case MyMoneySchedule::TYPE_BILL:
-        case MyMoneySchedule::TYPE_DEPOSIT:
-        case MyMoneySchedule::TYPE_TRANSFER:
+        case eMyMoney::Schedule::Type::Bill:
+        case eMyMoney::Schedule::Type::Deposit:
+        case eMyMoney::Schedule::Type::Transfer:
           sched_dlg = new KEditScheduleDlg(schedule, this);
           d->m_transactionEditor = sched_dlg->startEdit();
           if (d->m_transactionEditor) {
@@ -4001,7 +4003,7 @@ void KMyMoneyApp::slotScheduleEdit()
           delete sched_dlg;
           break;
 
-        case MyMoneySchedule::TYPE_LOANPAYMENT:
+        case eMyMoney::Schedule::Type::LoanPayment:
           loan_wiz = new KEditLoanWizard(schedule.account(2));
           connect(loan_wiz, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
           connect(loan_wiz, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
@@ -4018,7 +4020,7 @@ void KMyMoneyApp::slotScheduleEdit()
           delete loan_wiz;
           break;
 
-        case MyMoneySchedule::TYPE_ANY:
+        case eMyMoney::Schedule::Type::Any:
           break;
       }
 
@@ -4035,7 +4037,7 @@ void KMyMoneyApp::slotScheduleDelete()
     try {
       MyMoneySchedule sched = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
       QString msg = i18n("<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>", d->m_selectedSchedule.name());
-      if (sched.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
+      if (sched.type() == eMyMoney::Schedule::Type::LoanPayment) {
         msg += QString(" ");
         msg += i18n("In case of loan payments it is currently not possible to recreate the scheduled transaction.");
       }
@@ -4097,7 +4099,7 @@ void KMyMoneyApp::skipSchedule(MyMoneySchedule& schedule)
     try {
       schedule = MyMoneyFile::instance()->schedule(schedule.id());
       if (!schedule.isFinished()) {
-        if (schedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
+        if (schedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
           QDate next = schedule.nextDueDate();
           if (!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)) + QString("</qt>"))) == KMessageBox::Yes) {
             MyMoneyFileTransaction ft;
@@ -5185,7 +5187,7 @@ void KMyMoneyApp::slotTransactionsNew()
         if (d->m_transactionEditor) {
           connect(d->m_transactionEditor, SIGNAL(statusProgress(int,int)), this, SLOT(slotStatusProgressBar(int,int)));
           connect(d->m_transactionEditor, SIGNAL(statusMsg(QString)), this, SLOT(slotStatusMsg(QString)));
-          connect(d->m_transactionEditor, SIGNAL(scheduleTransaction(MyMoneyTransaction,MyMoneySchedule::occurrenceE)), this, SLOT(slotScheduleNew(MyMoneyTransaction,MyMoneySchedule::occurrenceE)));
+          connect(d->m_transactionEditor, SIGNAL(scheduleTransaction(MyMoneyTransaction,eMyMoney::Schedule::Occurrence)), this, SLOT(slotScheduleNew(MyMoneyTransaction,eMyMoney::Schedule::Occurrence)));
         }
         slotUpdateActions();
       }
@@ -5632,7 +5634,7 @@ void KMyMoneyApp::slotMoveToAccount(const QString& id)
     try {
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
       for (it_t = d->m_selectedTransactions.constBegin(); it_t != d->m_selectedTransactions.constEnd(); ++it_t) {
-        if (d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
+        if (d->m_selectedAccount.accountType() == eMyMoney::Account::Investment) {
           d->moveInvestmentTransaction(d->m_selectedAccount.id(), id, (*it_t).transaction());
         } else {
           QList<MyMoneySplit>::const_iterator it_s;
@@ -5724,24 +5726,24 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu()
 
   if (!d->m_selectedAccount.id().isEmpty()) {
     AccountSet accountSet;
-    if (d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
-      accountSet.addAccountType(MyMoneyAccount::Investment);
+    if (d->m_selectedAccount.accountType() == eMyMoney::Account::Investment) {
+      accountSet.addAccountType(eMyMoney::Account::Investment);
     } else if (d->m_selectedAccount.isAssetLiability()) {
 
-      accountSet.addAccountType(MyMoneyAccount::Checkings);
-      accountSet.addAccountType(MyMoneyAccount::Savings);
-      accountSet.addAccountType(MyMoneyAccount::Cash);
-      accountSet.addAccountType(MyMoneyAccount::AssetLoan);
-      accountSet.addAccountType(MyMoneyAccount::CertificateDep);
-      accountSet.addAccountType(MyMoneyAccount::MoneyMarket);
-      accountSet.addAccountType(MyMoneyAccount::Asset);
-      accountSet.addAccountType(MyMoneyAccount::Currency);
-      accountSet.addAccountType(MyMoneyAccount::CreditCard);
-      accountSet.addAccountType(MyMoneyAccount::Loan);
-      accountSet.addAccountType(MyMoneyAccount::Liability);
+      accountSet.addAccountType(eMyMoney::Account::Checkings);
+      accountSet.addAccountType(eMyMoney::Account::Savings);
+      accountSet.addAccountType(eMyMoney::Account::Cash);
+      accountSet.addAccountType(eMyMoney::Account::AssetLoan);
+      accountSet.addAccountType(eMyMoney::Account::CertificateDep);
+      accountSet.addAccountType(eMyMoney::Account::MoneyMarket);
+      accountSet.addAccountType(eMyMoney::Account::Asset);
+      accountSet.addAccountType(eMyMoney::Account::Currency);
+      accountSet.addAccountType(eMyMoney::Account::CreditCard);
+      accountSet.addAccountType(eMyMoney::Account::Loan);
+      accountSet.addAccountType(eMyMoney::Account::Liability);
     } else if (d->m_selectedAccount.isIncomeExpense()) {
-      accountSet.addAccountType(MyMoneyAccount::Income);
-      accountSet.addAccountType(MyMoneyAccount::Expense);
+      accountSet.addAccountType(eMyMoney::Account::Income);
+      accountSet.addAccountType(eMyMoney::Account::Expense);
     }
 
     accountSet.load(d->m_moveToAccountSelector);
@@ -6100,7 +6102,7 @@ void KMyMoneyApp::slotUpdateActions()
         if (d->m_selectedTransactions.count() == 1) {
           aC->action(s_Actions[Action::TransactionEditSplits])->setEnabled(true);
         }
-        if (d->m_selectedAccount.isAssetLiability() && d->m_selectedAccount.accountType() != MyMoneyAccount::Investment) {
+        if (d->m_selectedAccount.isAssetLiability() && d->m_selectedAccount.accountType() != eMyMoney::Account::Investment) {
           aC->action(s_Actions[Action::TransactionCreateSchedule])->setEnabled(d->m_selectedTransactions.count() == 1);
         }
       }
@@ -6231,14 +6233,14 @@ void KMyMoneyApp::slotUpdateActions()
   if (!d->m_selectedAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_selectedAccount.id())) {
       switch (d->m_selectedAccount.accountGroup()) {
-        case MyMoneyAccount::Asset:
-        case MyMoneyAccount::Liability:
-        case MyMoneyAccount::Equity:
+        case eMyMoney::Account::Asset:
+        case eMyMoney::Account::Liability:
+        case eMyMoney::Account::Equity:
           aC->action(s_Actions[Action::AccountTransactionReport])->setEnabled(true);
           aC->action(s_Actions[Action::AccountEdit])->setEnabled(true);
           aC->action(s_Actions[Action::AccountDelete])->setEnabled(!file->isReferenced(d->m_selectedAccount));
           aC->action(s_Actions[Action::AccountOpen])->setEnabled(true);
-          if (d->m_selectedAccount.accountGroup() != MyMoneyAccount::Equity) {
+          if (d->m_selectedAccount.accountGroup() != eMyMoney::Account::Equity) {
             if (d->m_reconciliationAccount.id().isEmpty()) {
               aC->action(s_Actions[Action::AccountStartReconciliation])->setEnabled(true);
               aC->action(s_Actions[Action::AccountStartReconciliation])->setToolTip(i18n("Reconcile"));
@@ -6253,7 +6255,7 @@ void KMyMoneyApp::slotUpdateActions()
             }
           }
 
-          if (d->m_selectedAccount.accountType() == MyMoneyAccount::Investment)
+          if (d->m_selectedAccount.accountType() == eMyMoney::Account::Investment)
             aC->action(s_Actions[Action::InvestmentNew])->setEnabled(true);
 
           if (d->m_selectedAccount.isClosed())
@@ -6280,8 +6282,8 @@ void KMyMoneyApp::slotUpdateActions()
           aC->action(s_Actions[Action::AccountBalanceChart])->setEnabled(true);
           break;
 
-        case MyMoneyAccount::Income :
-        case MyMoneyAccount::Expense :
+        case eMyMoney::Account::Income :
+        case eMyMoney::Account::Expense :
           aC->action(s_Actions[Action::CategoryEdit])->setEnabled(true);
           // enable delete action, if category/account itself is not referenced
           // by any object except accounts, because we want to allow
@@ -6331,7 +6333,7 @@ void KMyMoneyApp::slotUpdateActions()
     if (!d->m_selectedSchedule.isFinished()) {
       aC->action(s_Actions[Action::ScheduleEnter])->setEnabled(true);
       // a schedule with a single occurrence cannot be skipped
-      if (d->m_selectedSchedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
+      if (d->m_selectedSchedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
         aC->action(s_Actions[Action::ScheduleSkip])->setEnabled(true);
       }
     }

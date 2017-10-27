@@ -197,17 +197,17 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
   emit selectObject(MyMoneyInstitution());
 }
 
-QVector<MyMoneyAccount::_accountTypeE> KMyMoneyAccountTreeView::getVisibleGroups(const View view)
+QVector<eMyMoney::Account> KMyMoneyAccountTreeView::getVisibleGroups(const View view)
 {
   switch (view) {
     case View::Institutions:
     case View::Accounts:
-      return QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity};
+      return QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Equity};
     case View::Categories:
     case View::Budget:
-      return QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Income, MyMoneyAccount::Expense};
+      return QVector<eMyMoney::Account> {eMyMoney::Account::Income, eMyMoney::Account::Expense};
     default:
-      return QVector<MyMoneyAccount::_accountTypeE> ();
+      return QVector<eMyMoney::Account> ();
   }
 }
 

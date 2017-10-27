@@ -22,8 +22,9 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
-#include "mymoney/mymoneyfile.h"
+#include "mymoneyenums.h"
 
+class MyMoneyObject;
 class onlineJobModel : public QAbstractTableModel
 {
   Q_OBJECT
@@ -58,9 +59,9 @@ signals:
 public slots:
   void reloadAll();
 
-  void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
-  void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
   /** @brief Load data from MyMoneyFile */
   void load();

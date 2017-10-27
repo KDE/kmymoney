@@ -94,7 +94,7 @@ private:
   void openIndex(const QModelIndex &index);
   static QString getConfGrpName(const View view);
   QSet<eAccountsModel::Column> readVisibleColumns(const View view);
-  QVector<MyMoneyAccount::_accountTypeE> getVisibleGroups(const View view);
+  QVector<eMyMoney::Account> getVisibleGroups(const View view);
 
   AccountsViewProxyModel   *m_model;
   View                     m_view;

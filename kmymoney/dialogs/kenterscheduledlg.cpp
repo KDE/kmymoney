@@ -146,7 +146,7 @@ MyMoneyTransaction KEnterScheduleDlg::transaction()
   MyMoneyTransaction t = d->m_schedule.transaction();
 
   try {
-    if (d->m_schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
+    if (d->m_schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
       KMyMoneyUtils::calculateAutoLoan(d->m_schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (const MyMoneyException &e) {
@@ -227,16 +227,16 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     d->m_tabOrderWidgets.clear();
     KMyMoneyRegister::Action action = KMyMoneyRegister::ActionWithdrawal;
     switch (d->m_schedule.type()) {
-      case MyMoneySchedule::TYPE_TRANSFER:
+      case eMyMoney::Schedule::Type::Transfer:
         action = KMyMoneyRegister::ActionTransfer;
         break;
-      case MyMoneySchedule::TYPE_DEPOSIT:
+      case eMyMoney::Schedule::Type::Deposit:
         action = KMyMoneyRegister::ActionDeposit;
         break;
-      case MyMoneySchedule::TYPE_LOANPAYMENT:
+      case eMyMoney::Schedule::Type::LoanPayment:
         switch (d->m_schedule.paymentType()) {
-          case MyMoneySchedule::STYPE_DIRECTDEPOSIT:
-          case MyMoneySchedule::STYPE_MANUALDEPOSIT:
+          case eMyMoney::Schedule::PaymentType::DirectDeposit:
+          case eMyMoney::Schedule::PaymentType::ManualDeposit:
             action = KMyMoneyRegister::ActionDeposit;
             break;
           default:
@@ -251,7 +251,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     MyMoneyTransaction t = d->m_schedule.transaction();
     QString num = t.splits().first().number();
     QWidget* w = editor->haveWidget("number");
-    if (d->m_schedule.paymentType() == MyMoneySchedule::STYPE_WRITECHEQUE) {
+    if (d->m_schedule.paymentType() == eMyMoney::Schedule::PaymentType::WriteChecque) {
       MyMoneyFile* file = MyMoneyFile::instance();
       if (file->checkNoUsed(d->m_schedule.account().id(), num)) {
         //  increment and try again

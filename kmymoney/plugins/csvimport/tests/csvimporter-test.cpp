@@ -268,13 +268,13 @@ void CsvImporterTest::testAutoDecimalSymbol()
 void CsvImporterTest::testInvAccountAutodetection()
 {  
   MyMoneyFileTransaction ft;
-  makeAccount("Eas", "123", MyMoneyAccount::Investment, QDate(2017, 8, 1), file->asset().id());
-  makeAccount("BigInvestments", "", MyMoneyAccount::Investment, QDate(2017, 8, 1), file->asset().id());
-  makeAccount("BigInvestments", "1234567890", MyMoneyAccount::Investment, QDate(2017, 8, 1), file->asset().id());
-  makeAccount("EasyAccount", "", MyMoneyAccount::Investment, QDate(2017, 8, 1), file->asset().id());
-  auto toBeClosedAccID = makeAccount("EasyAccount", "123456789", MyMoneyAccount::Investment, QDate(2017, 8, 1), file->asset().id()); // this account has the most characters matching the statement
-  auto accID = makeAccount("Easy", "123456789", MyMoneyAccount::Investment, QDate(2017, 8, 1), file->asset().id());
-  makeAccount("EasyAccount", "123456789", MyMoneyAccount::Checkings, QDate(2017, 8, 1), file->asset().id());
+  makeAccount("Eas", "123", eMyMoney::Account::Investment, QDate(2017, 8, 1), file->asset().id());
+  makeAccount("BigInvestments", "", eMyMoney::Account::Investment, QDate(2017, 8, 1), file->asset().id());
+  makeAccount("BigInvestments", "1234567890", eMyMoney::Account::Investment, QDate(2017, 8, 1), file->asset().id());
+  makeAccount("EasyAccount", "", eMyMoney::Account::Investment, QDate(2017, 8, 1), file->asset().id());
+  auto toBeClosedAccID = makeAccount("EasyAccount", "123456789", eMyMoney::Account::Investment, QDate(2017, 8, 1), file->asset().id()); // this account has the most characters matching the statement
+  auto accID = makeAccount("Easy", "123456789", eMyMoney::Account::Investment, QDate(2017, 8, 1), file->asset().id());
+  makeAccount("EasyAccount", "123456789", eMyMoney::Account::Checkings, QDate(2017, 8, 1), file->asset().id());
   ft.commit();
 
   auto csvContent = csvDataset(0);

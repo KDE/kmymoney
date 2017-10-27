@@ -63,6 +63,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
 #include "payeeidentifier/payeeidentifierdata.h"
+#include "mymoneyenums.h"
 
 using namespace eMyMoney;
 
@@ -1483,27 +1484,27 @@ void MyMoneyStorageSql::writeAccounts()
     // If the above failed, assume that the database is empty and create
     // the standard accounts by hand before writing them.
     MyMoneyAccount acc_l;
-    acc_l.setAccountType(MyMoneyAccount::Liability);
+    acc_l.setAccountType(eMyMoney::Account::Liability);
     acc_l.setName("Liability");
     MyMoneyAccount liability(STD_ACC_LIABILITY, acc_l);
 
     MyMoneyAccount acc_a;
-    acc_a.setAccountType(MyMoneyAccount::Asset);
+    acc_a.setAccountType(eMyMoney::Account::Asset);
     acc_a.setName("Asset");
     MyMoneyAccount asset(STD_ACC_ASSET, acc_a);
 
     MyMoneyAccount acc_e;
-    acc_e.setAccountType(MyMoneyAccount::Expense);
+    acc_e.setAccountType(eMyMoney::Account::Expense);
     acc_e.setName("Expense");
     MyMoneyAccount expense(STD_ACC_EXPENSE, acc_e);
 
     MyMoneyAccount acc_i;
-    acc_i.setAccountType(MyMoneyAccount::Income);
+    acc_i.setAccountType(eMyMoney::Account::Income);
     acc_i.setName("Income");
     MyMoneyAccount income(STD_ACC_INCOME, acc_i);
 
     MyMoneyAccount acc_q;
-    acc_q.setAccountType(MyMoneyAccount::Equity);
+    acc_q.setAccountType(eMyMoney::Account::Equity);
     acc_q.setName("Equity");
     MyMoneyAccount equity(STD_ACC_EQUITY, acc_q);
 
@@ -1643,9 +1644,9 @@ void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, Q
     else
       openingDateList << a.openingDate().toString(Qt::ISODate);
     accountNumberList << a.number();
-    accountTypeList << a.accountType();
+    accountTypeList << (int)a.accountType();
     accountTypeStringList << MyMoneyAccount::accountTypeToString(a.accountType());
-    if (a.accountType() == MyMoneyAccount::Stock)
+    if (a.accountType() == eMyMoney::Account::Stock)
       isStockAccountList << "Y";
     else
       isStockAccountList << "N";
@@ -2134,12 +2135,12 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
 {
   q.bindValue(":id", sch.id());
   q.bindValue(":name", sch.name());
-  q.bindValue(":type", sch.type());
+  q.bindValue(":type", (int)sch.type());
   q.bindValue(":typeString", MyMoneySchedule::scheduleTypeToString(sch.type()));
-  q.bindValue(":occurence", sch.occurrencePeriod()); // krazy:exclude=spelling
+  q.bindValue(":occurence", (int)sch.occurrencePeriod()); // krazy:exclude=spelling
   q.bindValue(":occurenceMultiplier", sch.occurrenceMultiplier());
   q.bindValue(":occurenceString", sch.occurrenceToString());
-  q.bindValue(":paymentType", sch.paymentType());
+  q.bindValue(":paymentType", (int)sch.paymentType());
   q.bindValue(":paymentTypeString", MyMoneySchedule::paymentMethodToString(sch.paymentType()));
   q.bindValue(":startDate", sch.startDate().toString(Qt::ISODate));
   q.bindValue(":endDate", sch.endDate().toString(Qt::ISODate));
@@ -2155,7 +2156,7 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
   }
   q.bindValue(":lastPayment", sch.lastPayment());
   q.bindValue(":nextPaymentDue", sch.nextDueDate().toString(Qt::ISODate));
-  q.bindValue(":weekendOption", sch.weekendOption());
+  q.bindValue(":weekendOption", (int)sch.weekendOption());
   q.bindValue(":weekendOptionString", MyMoneySchedule::weekendOptionToString(sch.weekendOption()));
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Schedules"))); // krazy:exclude=crashy
 
@@ -3604,7 +3605,7 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStri
     acc.setLastModified(GETDATE(lastModifiedCol));
     acc.setOpeningDate(GETDATE(openingDateCol));
     acc.setNumber(GETSTRING(accountNumberCol));
-    acc.setAccountType(static_cast<MyMoneyAccount::accountTypeE>(GETINT(accountTypeCol)));
+    acc.setAccountType(static_cast<eMyMoney::Account>(GETINT(accountTypeCol)));
     acc.setName(GETSTRING(accountNameCol));
     acc.setDescription(GETSTRING(descriptionCol));
     acc.setCurrencyId(GETSTRING(currencyIdCol));
@@ -3848,24 +3849,24 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
   return txMap;
 }
 
-int MyMoneyStorageSql::splitState(const MyMoneyTransactionFilter::stateOptionE& state) const
+int MyMoneyStorageSql::splitState(const eMyMoney::TransactionFilter::State& state) const
 {
   int rc = MyMoneySplit::NotReconciled;
 
   switch (state) {
     default:
-    case MyMoneyTransactionFilter::notReconciled:
+    case eMyMoney::TransactionFilter::State::NotReconciled:
       break;
 
-    case MyMoneyTransactionFilter::cleared:
+    case eMyMoney::TransactionFilter::State::Cleared:
       rc = MyMoneySplit::Cleared;
       break;
 
-    case MyMoneyTransactionFilter::reconciled:
+    case eMyMoney::TransactionFilter::State::Reconciled:
       rc = MyMoneySplit::Reconciled;
       break;
 
-    case MyMoneyTransactionFilter::frozen:
+    case eMyMoney::TransactionFilter::State::Frozen:
       rc = MyMoneySplit::Frozen;
       break;
   }
@@ -4002,7 +4003,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     QString statesClause = "";
     foreach (int it, splitStates) {
       statesClause.append(QString(" %1 '%2'").arg(itemConnector)
-                          .arg(splitState(MyMoneyTransactionFilter::stateOptionE(it))));
+                          .arg(splitState(eMyMoney::TransactionFilter::State(it))));
       itemConnector = ',';
     }
     if (!statesClause.isEmpty()) {
@@ -4205,21 +4206,21 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
 
     QString sId = GETSTRING(idCol);
     s.setName(GETSTRING(nameCol));
-    s.setType(static_cast<MyMoneySchedule::typeE>(GETINT(typeCol)));
-    s.setOccurrencePeriod(static_cast<MyMoneySchedule::occurrenceE>(GETINT(occurenceCol)));
+    s.setType(static_cast<eMyMoney::Schedule::Type>(GETINT(typeCol)));
+    s.setOccurrencePeriod(static_cast<eMyMoney::Schedule::Occurrence>(GETINT(occurenceCol)));
     s.setOccurrenceMultiplier(GETINT(occurenceMultiplierCol));
-    s.setPaymentType(static_cast<MyMoneySchedule::paymentTypeE>(GETINT(paymentTypeCol)));
+    s.setPaymentType(static_cast<eMyMoney::Schedule::PaymentType>(GETINT(paymentTypeCol)));
     s.setStartDate(GETDATE(startDateCol));
     s.setEndDate(GETDATE(endDateCol));
     boolChar = GETSTRING(fixedCol); s.setFixed(boolChar == "Y");
     boolChar = GETSTRING(autoEnterCol); s.setAutoEnter(boolChar == "Y");
     s.setLastPayment(GETDATE(lastPaymentCol));
-    s.setWeekendOption(static_cast<MyMoneySchedule::weekendOptionE>(GETINT(weekendOptionCol)));
+    s.setWeekendOption(static_cast<eMyMoney::Schedule::WeekendOption>(GETINT(weekendOptionCol)));
     QDate nextPaymentDue = GETDATE(nextPaymentDueCol);
 
     // convert simple occurrence to compound occurrence
     int mult = s.occurrenceMultiplier();
-    MyMoneySchedule::occurrenceE occ = s.occurrencePeriod();
+    eMyMoney::Schedule::Occurrence occ = s.occurrencePeriod();
     MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
     s.setOccurrencePeriod(occ);
     s.setOccurrenceMultiplier(mult);

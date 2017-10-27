@@ -28,6 +28,9 @@
 #include "mymoneystoragexml.h"
 #include "reportstestcommon.h"
 
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
 using namespace test;
 
 QTEST_GUILESS_MAIN(MyMoneyForecastTest)
@@ -66,20 +69,20 @@ void MyMoneyForecastTest::init()
   acLiability = (MyMoneyFile::instance()->liability().id());
   acExpense = (MyMoneyFile::instance()->expense().id());
   acIncome = (MyMoneyFile::instance()->income().id());
-  acChecking = makeAccount(QString("Checking Account"), MyMoneyAccount::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset, "USD");
-  acCredit = makeAccount(QString("Credit Card"), MyMoneyAccount::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability, "USD");
-  acSolo = makeAccount(QString("Solo"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
-  acParent = makeAccount(QString("Parent"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
-  acChild = makeAccount(QString("Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
-  acForeign = makeAccount(QString("Foreign"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
-  acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2004, 1, 1), acAsset, "USD");
+  acChecking = makeAccount(QString("Checking Account"), Account::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset, "USD");
+  acCredit = makeAccount(QString("Credit Card"), Account::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability, "USD");
+  acSolo = makeAccount(QString("Solo"), Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
+  acParent = makeAccount(QString("Parent"), Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
+  acChild = makeAccount(QString("Child"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
+  acForeign = makeAccount(QString("Foreign"), Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
+  acInvestment = makeAccount("Investment", Account::Investment, moZero, QDate(2004, 1, 1), acAsset, "USD");
 
-  acSecondChild = makeAccount(QString("Second Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
-  acGrandChild1 = makeAccount(QString("Grand Child 1"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
-  acGrandChild2 = makeAccount(QString("Grand Child 2"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
+  acSecondChild = makeAccount(QString("Second Child"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
+  acGrandChild1 = makeAccount(QString("Grand Child 1"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
+  acGrandChild2 = makeAccount(QString("Grand Child 2"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
 
   //this account added to have an account to test opening date calculations
-  acCash = makeAccount(QString("Cash"), MyMoneyAccount::Cash, moCreditOpen, QDate::currentDate().addDays(-2), acAsset, "USD");
+  acCash = makeAccount(QString("Cash"), Account::Cash, moCreditOpen, QDate::currentDate().addDays(-2), acAsset, "USD");
 
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
@@ -386,9 +389,9 @@ void MyMoneyForecastTest::testScheduleForecast()
 
   MyMoneyFileTransaction ft;
   MyMoneySchedule sch("A Name",
-                      MyMoneySchedule::TYPE_BILL,
-                      MyMoneySchedule::OCCUR_WEEKLY, 1,
-                      MyMoneySchedule::STYPE_DIRECTDEBIT,
+                      Schedule::Type::Bill,
+                      Schedule::Occurrence::Weekly, 1,
+                      Schedule::PaymentType::DirectDebit,
                       QDate::currentDate().addDays(1),
                       QDate(),
                       true,
@@ -428,9 +431,9 @@ void MyMoneyForecastTest::testScheduleForecast()
 
   MyMoneyFileTransaction ft3;
   MyMoneySchedule sch3("A Name1",
-                       MyMoneySchedule::TYPE_BILL,
-                       MyMoneySchedule::OCCUR_WEEKLY, 1,
-                       MyMoneySchedule::STYPE_DIRECTDEBIT,
+                       Schedule::Type::Bill,
+                       Schedule::Occurrence::Weekly, 1,
+                       Schedule::PaymentType::DirectDebit,
                        QDate::currentDate().addDays(5),
                        QDate(),
                        true,
@@ -475,9 +478,9 @@ void MyMoneyForecastTest::testScheduleForecast()
 
   MyMoneyFileTransaction ft2;
   MyMoneySchedule sch2("A Name2",
-                       MyMoneySchedule::TYPE_BILL,
-                       MyMoneySchedule::OCCUR_WEEKLY, 1,
-                       MyMoneySchedule::STYPE_DIRECTDEBIT,
+                       Schedule::Type::Bill,
+                       Schedule::Occurrence::Weekly, 1,
+                       Schedule::PaymentType::DirectDebit,
                        QDate::currentDate().addDays(2),
                        QDate(),
                        true,
@@ -902,9 +905,9 @@ void MyMoneyForecastTest::testCreateBudget()
 
   MyMoneyFileTransaction ft;
   MyMoneySchedule sch("A Name",
-                      MyMoneySchedule::TYPE_BILL,
-                      MyMoneySchedule::OCCUR_MONTHLY, 1,
-                      MyMoneySchedule::STYPE_DIRECTDEBIT,
+                      Schedule::Type::Bill,
+                      Schedule::Occurrence::Monthly, 1,
+                      Schedule::PaymentType::DirectDebit,
                       QDate::currentDate(),
                       QDate(),
                       true,

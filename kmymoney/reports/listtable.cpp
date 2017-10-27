@@ -36,6 +36,9 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "kmymoneyglobalsettings.h"
 
@@ -484,7 +487,7 @@ void ListTable::includeInvestmentSubAccounts()
     file->accountList(accountList);
     QList<MyMoneyAccount>::const_iterator it_ma;
     for (it_ma = accountList.constBegin(); it_ma != accountList.constEnd(); ++it_ma) {
-      if ((*it_ma).accountType() == MyMoneyAccount::Investment) {
+      if ((*it_ma).accountType() == eMyMoney::Account::Investment) {
         accountIdList.append((*it_ma).id());
       }
     }
@@ -493,7 +496,7 @@ void ListTable::includeInvestmentSubAccounts()
   QStringList::const_iterator it_a;
   for (it_a = accountIdList.constBegin(); it_a != accountIdList.constEnd(); ++it_a) {
     MyMoneyAccount acc = file->account(*it_a);
-    if (acc.accountType() == MyMoneyAccount::Investment) {
+    if (acc.accountType() == eMyMoney::Account::Investment) {
       QStringList::const_iterator it_b;
       for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
         if (!accountIdList.contains(*it_b)) {

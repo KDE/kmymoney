@@ -40,6 +40,13 @@
 // Project Headers
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneysplit.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyexception.h"
 
 MyMoneyQifWriter::MyMoneyQifWriter()
 {
@@ -164,7 +171,7 @@ void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& account
   QString name = acc.name();
 
   s << "N" << leadIn << name << endl;
-  s << (acc.accountGroup() == MyMoneyAccount::Expense ? "E" : "I") << endl;
+  s << (acc.accountGroup() == eMyMoney::Account::Expense ? "E" : "I") << endl;
   s << "^" << endl;
 
   QStringList list = acc.accountList();
@@ -216,8 +223,8 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
   if (list.count() > 1) {
     MyMoneySplit sp = t.splitByAccount(accountId, false);
     MyMoneyAccount acc = file->account(sp.accountId());
-    if (acc.accountGroup() != MyMoneyAccount::Income
-        && acc.accountGroup() != MyMoneyAccount::Expense) {
+    if (acc.accountGroup() != eMyMoney::Account::Income
+        && acc.accountGroup() != eMyMoney::Account::Expense) {
       s << "L" << m_qifProfile.accountDelimiter()[0]
       << MyMoneyFile::instance()->accountToCategory(sp.accountId())
       << m_qifProfile.accountDelimiter()[1] << endl;
@@ -242,8 +249,8 @@ void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split
 
   s << "S";
   MyMoneyAccount acc = file->account(split.accountId());
-  if (acc.accountGroup() != MyMoneyAccount::Income
-      && acc.accountGroup() != MyMoneyAccount::Expense) {
+  if (acc.accountGroup() != eMyMoney::Account::Income
+      && acc.accountGroup() != eMyMoney::Account::Expense) {
     s << m_qifProfile.accountDelimiter()[0]
     << file->accountToCategory(split.accountId())
     << m_qifProfile.accountDelimiter()[1];
@@ -290,11 +297,11 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
   bool noError = true;
   QList<MyMoneySplit> lst = t.splits();
   QList<MyMoneySplit>::Iterator it;
-  MyMoneyAccount::_accountTypeE typ;
+  eMyMoney::Account typ;
   QString chkAccntId;
   MyMoneyMoney qty;
   MyMoneyMoney value;
-  QMap<MyMoneyAccount::_accountTypeE, QString> map;
+  QMap<eMyMoney::Account, QString> map;
 
   for (int i = 0; i < lst.count(); i++) {
     QString actionType = lst[i].action();
@@ -302,7 +309,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
     QString accName = acc.name();
     typ = acc.accountType();
     map.insert(typ, lst[i].accountId());
-    if (typ == MyMoneyAccount::Stock) {
+    if (typ == eMyMoney::Account::Stock) {
       memo = lst[i].memo();
     }
   }
@@ -318,22 +325,22 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
     MyMoneyAccount acc = file->account((*it).accountId());
     typ = acc.accountType();
     //
-    //  MyMoneyAccount::Checkings.
+    //  eMyMoney::Account::Checkings.
     //
-    if ((acc.accountType() == MyMoneyAccount::Checkings) || (acc.accountType() == MyMoneyAccount::Cash)) {
+    if ((acc.accountType() == eMyMoney::Account::Checkings) || (acc.accountType() == eMyMoney::Account::Cash)) {
       chkAccntId = (*it).accountId();
       chkAccnt = file->account(chkAccntId).name();
-    } else if (acc.accountType() == MyMoneyAccount::Income) {
+    } else if (acc.accountType() == eMyMoney::Account::Income) {
       //
-      //  MyMoneyAccount::Income.
+      //  eMyMoney::Account::Income.
       //
-    } else if (acc.accountType() == MyMoneyAccount::Expense) {
+    } else if (acc.accountType() == eMyMoney::Account::Expense) {
       //
-      //  MyMoneyAccount::Expense.
+      //  eMyMoney::Account::Expense.
       //
-    } else if (acc.accountType() == MyMoneyAccount::Stock) {
+    } else if (acc.accountType() == eMyMoney::Account::Stock) {
       //
-      //  MyMoneyAccount::Stock.
+      //  eMyMoney::Account::Stock.
       //
       qty = (*it).shares();
       value = (*it).value();
@@ -352,14 +359,14 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
         action = "IntIncX";
       }
       if ((action == "DivX") || (action == "IntIncX")) {
-        if (map.value(MyMoneyAccount::Checkings).isEmpty()) {
+        if (map.value(eMyMoney::Account::Checkings).isEmpty()) {
           KMessageBox::sorry(0,
                              QString("<qt>%1</qt>").arg(i18n("Transaction number <b>%1</b> is missing an account assignment.\nTransaction dropped.", count)),
                              i18n("Invalid transaction"));
           noError = false;
           return;
         }
-        MyMoneySplit sp = t.splitByAccount(map.value(MyMoneyAccount::Checkings), true);
+        MyMoneySplit sp = t.splitByAccount(map.value(eMyMoney::Account::Checkings), true);
         QString txt = sp.value().formatMoney("", 2);
         if (noError) {
           s += 'T' + txt + '\n';

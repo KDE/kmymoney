@@ -50,6 +50,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 
 Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)
 Q_LOGGING_CATEGORY(WEBPRICEQUOTE, "kmymoney_webpricequote")

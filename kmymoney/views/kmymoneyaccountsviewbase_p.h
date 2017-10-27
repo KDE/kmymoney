@@ -33,6 +33,8 @@
 #include "kmymoneyviewbase_p.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "viewenums.h"
 
 class AccountsViewProxyModel;

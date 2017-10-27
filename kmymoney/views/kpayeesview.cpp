@@ -54,6 +54,8 @@
 
 #include "config-kmymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneytransactionfilter.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "models.h"
@@ -114,7 +116,7 @@ void KPayeesView::init()
 
   m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense, MyMoneyAccount::Equity});
+  m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Income, eMyMoney::Account::Expense, eMyMoney::Account::Equity});
 
   auto const model = Models::instance()->accountsModel();
   m_filterProxyModel->setSourceModel(model);
@@ -282,7 +284,7 @@ void KPayeesView::slotChooseDefaultAccount()
 
       QString txt;
       if (s.action() != MyMoneySplit::ActionAmortization
-          && acc.accountType() != MyMoneyAccount::AssetLoan
+          && acc.accountType() != eMyMoney::Account::AssetLoan
           && !file->isTransfer(t->transaction())
           && t->transaction().splitCount() == 2) {
         MyMoneySplit s0 = t->transaction().splitByAccount(s.accountId(), false);

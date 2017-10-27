@@ -187,8 +187,8 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   // retrieve list of all transactions after the reconciliation date that are not reconciled or cleared
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > afterTransactionList;
   MyMoneyTransactionFilter filter(account.id());
-  filter.addState(MyMoneyTransactionFilter::cleared);
-  filter.addState(MyMoneyTransactionFilter::notReconciled);
+  filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
+  filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
   filter.setDateFilter(date.addDays(1), QDate());
   filter.setConsiderCategory(false);
   filter.setReportAllSplits(true);

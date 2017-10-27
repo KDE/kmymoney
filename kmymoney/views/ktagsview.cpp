@@ -45,6 +45,8 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneytransactionfilter.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "models.h"
@@ -106,7 +108,7 @@ void KTagsView::init()
   setupUi(this);
 
   m_filterProxyModel = new AccountNamesFilterProxyModel(this);
-  m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Income, MyMoneyAccount::Expense});
+  m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Income, eMyMoney::Account::Expense});
   auto const model = Models::instance()->accountsModel();
   m_filterProxyModel->setSourceModel(model);
   m_filterProxyModel->setSourceColumns(model->getColumns());

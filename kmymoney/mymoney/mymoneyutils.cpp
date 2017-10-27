@@ -26,6 +26,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 
 #include <cstdio>
 #include <cstdarg>

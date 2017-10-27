@@ -23,7 +23,6 @@
 
 #include <QString>
 #include <QStringList>
-#include <QPixmap>
 #include <QDate>
 
 // ----------------------------------------------------------------------------
@@ -32,10 +31,12 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
 #include "mymoneyobject.h"
-#include "mymoneysecurity.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+#include "mymoneyenums.h"
 
+class QPixmap;
+class MyMoneySecurity;
 class MyMoneySplit;
 class payeeIdentifier;
 namespace payeeIdentifiers { class ibanBic; }
@@ -49,7 +50,7 @@ template <class T> class payeeIdentifierTyped;
   *
   * Currently, the following account types are known:
   *
-  * @li  UnknownAccountType
+  * @li  Unknown
   * @li  Checkings
   * @li  Savings
   * @li  Cash
@@ -90,33 +91,6 @@ public:
                      anIBAN, anBIC,
                    };
     Q_ENUM(attrNameE)
-
-  /**
-    * Account types currently supported.
-    */
-  typedef enum _accountTypeE {
-    UnknownAccountType = 0, /**< For error handling */
-    Checkings,            /**< Standard checking account */
-    Savings,              /**< Typical savings account */
-    Cash,                 /**< Denotes a shoe-box or pillowcase stuffed
-                               with cash */
-    CreditCard,           /**< Credit card accounts */
-    Loan,                 /**< Loan and mortgage accounts (liability) */
-    CertificateDep,       /**< Certificates of Deposit */
-    Investment,           /**< Investment account */
-    MoneyMarket,          /**< Money Market Account */
-    Asset,                /**< Denotes a generic asset account.*/
-    Liability,            /**< Denotes a generic liability account.*/
-    Currency,             /**< Denotes a currency trading account. */
-    Income,               /**< Denotes an income account */
-    Expense,              /**< Denotes an expense account */
-    AssetLoan,            /**< Denotes a loan (asset of the owner of this object) */
-    Stock,                /**< Denotes an security account as sub-account for an investment */
-    Equity,               /**< Denotes an equity account e.g. opening/closeing balance */
-
-    /* insert new account types above this line */
-    MaxAccountTypes       /**< Denotes the number of different account types */
-  } accountTypeE;
 
   /**
     * This is the constructor for a new empty account
@@ -183,7 +157,7 @@ public:
     *
     * @return accountTypeE of major account type
     */
-  MyMoneyAccount::accountTypeE accountGroup() const;
+  eMyMoney::Account accountGroup() const;
 
   /**
     * This method returns the id of the MyMoneyInstitution object this account
@@ -375,7 +349,7 @@ public:
     *
     * @param type account type
     */
-  void setAccountType(const accountTypeE type);
+  void setAccountType(const eMyMoney::Account type);
 
   /**
     * This method is used to set a new parent account id
@@ -393,7 +367,7 @@ public:
   /**
     * This method returns the type of the account.
     */
-  accountTypeE accountType() const {
+  eMyMoney::Account accountType() const {
     return m_accountType;
   }
 
@@ -599,10 +573,10 @@ public:
    * an account type into a human readable format
    *
    * @param accountType numerical representation of the account type.
-   *                    For possible values, see MyMoneyAccount::accountTypeE
+   *                    For possible values, see eMyMoney::Account
    * @return QString representing the human readable form
    */
-  static QString accountTypeToString(const MyMoneyAccount::accountTypeE accountType);
+  static QString accountTypeToString(const eMyMoney::Account accountType);
 
   /**
     * keeps a history record of a reconciliation for this account on @a date
@@ -628,7 +602,7 @@ private:
   /**
     * This member variable identifies the type of account
     */
-  accountTypeE m_accountType;
+  eMyMoney::Account m_accountType;
 
   /**
     * This member variable keeps the ID of the MyMoneyInstitution object
@@ -798,6 +772,6 @@ QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::paye
  * @ref accountTypeE and @ref amountTypeE inside @ref QVariant objects.
  */
 Q_DECLARE_METATYPE(MyMoneyAccount)
-Q_DECLARE_METATYPE(MyMoneyAccount::accountTypeE)
+Q_DECLARE_METATYPE(eMyMoney::Account)
 
 #endif

@@ -23,6 +23,7 @@
 #include <KLocalizedString>
 
 #include "mymoneyfile.h"
+#include "mymoneyexception.h"
 
 /**
  * @brief create unique value for QModelIndex::internalId() to indicate "not set"

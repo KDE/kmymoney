@@ -32,6 +32,8 @@
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
+#include "mymoneyschedule.h"
 
 SummaryWizardPage::SummaryWizardPage(QWidget *parent)
     : SummaryWizardPageDecl(parent)
@@ -67,7 +69,7 @@ void SummaryWizardPage::initializePage()
     m_summaryInterestDue->setText(i18n("on reception"));
   else
     m_summaryInterestDue->setText(i18n("on due date"));
-  m_summaryPaymentFrequency->setText(MyMoneySchedule::occurrenceToString(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt())));
+  m_summaryPaymentFrequency->setText(MyMoneySchedule::occurrenceToString(eMyMoney::Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt())));
   m_summaryAmount->setText(field("loanAmount6").toString());
   m_summaryInterestRate->setText(field("interestRate6").toString());
   m_summaryTerm->setText(field("duration6").toString());

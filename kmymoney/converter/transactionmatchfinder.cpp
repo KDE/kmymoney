@@ -22,6 +22,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
 
 TransactionMatchFinder::TransactionMatchFinder(int _matchWindow) :
     matchWindow(_matchWindow),

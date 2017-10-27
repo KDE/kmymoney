@@ -665,15 +665,15 @@ public:
     *                  accound @p accountId. If accountId is the empty string,
     *                  this filter is off. Default is @p QString().
     * @param type      only schedules of type @p type are searched for.
-    *                  See MyMoneySchedule::typeE for details.
-    *                  Default is MyMoneySchedule::TYPE_ANY
+    *                  See eMyMoney::Schedule::Type for details.
+    *                  Default is eMyMoney::Schedule::Type::Any
     * @param occurrence only schedules of occurrence type @p occurrence are searched for.
-    *                  See MyMoneySchedule::occurrenceE for details.
-    *                  Default is MyMoneySchedule::OCCUR_ANY
+    *                  See eMyMoney::Schedule::Occurence for details.
+    *                  Default is eMyMoney::Schedule::Occurrence::Any
     * @param paymentType only schedules of payment method @p paymentType
     *                  are searched for.
-    *                  See MyMoneySchedule::paymentTypeE for details.
-    *                  Default is MyMoneySchedule::STYPE_ANY
+    *                  See eMyMoney::Schedule::PaymentType for details.
+    *                  Default is eMyMoney::Schedule::PaymentType::Any
     * @param startDate only schedules with payment dates after @p startDate
     *                  are searched for. Default is all dates (QDate()).
     * @param endDate   only schedules with payment dates ending prior to @p endDate
@@ -684,9 +684,9 @@ public:
     * @return const QList<MyMoneySchedule> list of schedule objects.
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
-      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-      const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
-      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
+      const eMyMoney::Schedule::Type type = eMyMoney::Schedule::Type::Any,
+      const eMyMoney::Schedule::Occurrence occurrence = eMyMoney::Schedule::Occurrence::Any,
+      const eMyMoney::Schedule::PaymentType paymentType = eMyMoney::Schedule::PaymentType::Any,
       const QDate& startDate = QDate(),
       const QDate& endDate = QDate(),
       const bool overdue = false) const;

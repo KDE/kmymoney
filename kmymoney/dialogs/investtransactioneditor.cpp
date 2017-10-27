@@ -41,6 +41,7 @@
 #include "kmymoneyaccountselector.h"
 #include "kmymoneymvccombo.h"
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneyglobalsettings.h"
@@ -525,13 +526,13 @@ void InvestTransactionEditor::slotReloadEditWidgets()
 
   // interest-account
   aSet.clear();
-  aSet.addAccountGroup(MyMoneyAccount::Income);
+  aSet.addAccountGroup(eMyMoney::Account::Income);
   aSet.load(interest->selector());
   setupCategoryWidget(interest, m_interestSplits, id, SLOT(slotEditInterestSplits()));
 
   // fee-account
   aSet.clear();
-  aSet.addAccountGroup(MyMoneyAccount::Expense);
+  aSet.addAccountGroup(eMyMoney::Account::Expense);
   aSet.load(fees->selector());
   setupCategoryWidget(fees, m_feeSplits, id, SLOT(slotEditFeeSplits()));
 
@@ -559,21 +560,21 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = m_transaction.splits().constBegin(); !haveEquityAccount && it_s != m_transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountType() == MyMoneyAccount::Equity)
+    if (acc.accountType() == eMyMoney::Account::Equity)
       haveEquityAccount = true;
   }
 
   // asset-account
   AccountSet aSet;
   aSet.clear();
-  aSet.addAccountType(MyMoneyAccount::Checkings);
-  aSet.addAccountType(MyMoneyAccount::Savings);
-  aSet.addAccountType(MyMoneyAccount::Cash);
-  aSet.addAccountType(MyMoneyAccount::Asset);
-  aSet.addAccountType(MyMoneyAccount::Currency);
-  aSet.addAccountType(MyMoneyAccount::CreditCard);
+  aSet.addAccountType(eMyMoney::Account::Checkings);
+  aSet.addAccountType(eMyMoney::Account::Savings);
+  aSet.addAccountType(eMyMoney::Account::Cash);
+  aSet.addAccountType(eMyMoney::Account::Asset);
+  aSet.addAccountType(eMyMoney::Account::Currency);
+  aSet.addAccountType(eMyMoney::Account::CreditCard);
   if (KMyMoneyGlobalSettings::expertMode() || haveEquityAccount)
-    aSet.addAccountGroup(MyMoneyAccount::Equity);
+    aSet.addAccountGroup(eMyMoney::Account::Equity);
   aSet.load(asset->selector());
 
   // security
@@ -610,14 +611,14 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
 
     // interest-account
     aSet.clear();
-    aSet.addAccountGroup(MyMoneyAccount::Income);
+    aSet.addAccountGroup(eMyMoney::Account::Income);
     aSet.load(interest->selector());
     setupCategoryWidget(interest, m_interestSplits, id, SLOT(slotEditInterestSplits()));
     slotUpdateInterestVisibility(interest->currentText());
 
     // fee-account
     aSet.clear();
-    aSet.addAccountGroup(MyMoneyAccount::Expense);
+    aSet.addAccountGroup(eMyMoney::Account::Expense);
     aSet.load(fees->selector());
     setupCategoryWidget(fees, m_feeSplits, id, SLOT(slotEditFeeSplits()));
     slotUpdateFeeVisibility(fees->currentText());

@@ -44,8 +44,8 @@
   *
   * @code
   *   AccountsFilterProxyModel *filterModel = new AccountsFilterProxyModel(widget);
-  *   filterModel->addAccountGroup(MyMoneyAccount::Asset);
-  *   filterModel->addAccountGroup(MyMoneyAccount::Liability);
+  *   filterModel->addAccountGroup(eMyMoney::Account::Asset);
+  *   filterModel->addAccountGroup(eMyMoney::Account::Liability);
   *   filterModel->setSourceModel(Models::instance()->accountsModel());
   *   filterModel->sort(0);
   *
@@ -70,9 +70,9 @@ public:
   AccountsProxyModel(QObject *parent = nullptr);
   ~AccountsProxyModel();
 
-  void addAccountType(MyMoneyAccount::accountTypeE type);
-  void addAccountGroup(const QVector<MyMoneyAccount::_accountTypeE> &groups);
-  void removeAccountType(MyMoneyAccount::accountTypeE type);
+  void addAccountType(eMyMoney::Account type);
+  void addAccountGroup(const QVector<eMyMoney::Account> &groups);
+  void removeAccountType(eMyMoney::Account type);
 
   void clear();
 

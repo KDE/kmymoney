@@ -126,7 +126,7 @@ MyMoneyAccount Wizard::account() const
       acc.setNumber(m_accountPage->m_accountNumberEdit->text());
     acc.setOpeningDate(m_accountPage->m_openingDateEdit->date());
     acc.setCurrencyId(m_baseCurrency.id());
-    acc.setAccountType(MyMoneyAccount::Checkings);
+    acc.setAccountType(eMyMoney::Account::Checkings);
   }
   return acc;
 }

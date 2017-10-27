@@ -50,10 +50,10 @@ kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
   // Default is to show all accounts
   // FIXME We should leave this also to the caller
   AccountSet set;
-  set.addAccountGroup(MyMoneyAccount::Asset);
-  set.addAccountGroup(MyMoneyAccount::Liability);
-  set.addAccountGroup(MyMoneyAccount::Income);
-  set.addAccountGroup(MyMoneyAccount::Expense);
+  set.addAccountGroup(eMyMoney::Account::Asset);
+  set.addAccountGroup(eMyMoney::Account::Liability);
+  set.addAccountGroup(eMyMoney::Account::Income);
+  set.addAccountGroup(eMyMoney::Account::Expense);
   set.load(selector());
 #endif
 

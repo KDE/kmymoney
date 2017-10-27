@@ -540,7 +540,7 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
       toReplace.prepend(':');
       QString replace = "NULL";
       if ((*act)->name() == "accountType")
-        replace = QString::number(pac->accountType());
+        replace = QString::number((int)pac->accountType());
       if ((*act)->name() == "accountTypeString")
         replace = enclose(pac->name());
       if ((*act)->name() == "isStockAccount")

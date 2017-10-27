@@ -132,31 +132,31 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   MyMoneyFile *file = MyMoneyFile::instance();
 
   // initialize the m_parentAccount member
-  QVector<MyMoneyAccount::accountTypeE> filterAccountGroup {m_account.accountGroup()};
+  QVector<eMyMoney::Account> filterAccountGroup {m_account.accountGroup()};
   switch (m_account.accountGroup()) {
-    case MyMoneyAccount::Asset:
+    case eMyMoney::Account::Asset:
       m_parentAccount = file->asset();
       break;
-    case MyMoneyAccount::Liability:
+    case eMyMoney::Account::Liability:
       m_parentAccount = file->liability();
       break;
-    case MyMoneyAccount::Income:
+    case eMyMoney::Account::Income:
       m_parentAccount = file->income();
       break;
-    case MyMoneyAccount::Expense:
+    case eMyMoney::Account::Expense:
       m_parentAccount = file->expense();
       break;
-    case MyMoneyAccount::Equity:
+    case eMyMoney::Account::Equity:
       m_parentAccount = file->equity();
       break;
     default:
       qDebug("Seems we have an account that hasn't been mapped to the top five");
       if (m_categoryEditor) {
         m_parentAccount = file->income();
-        filterAccountGroup[0] = MyMoneyAccount::Income;
+        filterAccountGroup[0] = eMyMoney::Account::Income;
       } else {
         m_parentAccount = file->asset();
-        filterAccountGroup[0] = MyMoneyAccount::Asset;
+        filterAccountGroup[0] = eMyMoney::Account::Asset;
       }
   }
 
@@ -190,7 +190,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   m_priceMode->insertItem(i18n("Total for all shares"), 2);
 
   int priceMode = 0;
-  if (m_account.accountType() == MyMoneyAccount::Investment) {
+  if (m_account.accountType() == eMyMoney::Account::Investment) {
     m_priceMode->setEnabled(true);
     if (!m_account.value("priceMode").isEmpty())
       priceMode = m_account.value("priceMode").toInt();
@@ -221,18 +221,18 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     m_institutionBox->hide();
     m_qcheckboxNoVat->hide();
 
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Income));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Expense));
 
     // Hardcoded but acceptable - if above we set the default to income do the same here
     switch (account.accountType()) {
-      case MyMoneyAccount::Expense:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
+      case eMyMoney::Account::Expense:
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Expense), false);
         break;
 
-      case MyMoneyAccount::Income:
+      case eMyMoney::Account::Income:
       default:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Income), false);
         break;
     }
     m_currency->setEnabled(true);
@@ -260,17 +260,17 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     m_costCenterRequiredCheckBox->hide();
 
     switch (m_account.accountType()) {
-      case MyMoneyAccount::Savings:
-      case MyMoneyAccount::Cash:
+      case eMyMoney::Account::Savings:
+      case eMyMoney::Account::Cash:
         haveMinBalance = true;
         break;
 
-      case MyMoneyAccount::Checkings:
+      case eMyMoney::Account::Checkings:
         haveMinBalance = true;
         haveMaxCredit = true;
         break;
 
-      case MyMoneyAccount::CreditCard:
+      case eMyMoney::Account::CreditCard:
         haveMaxCredit = true;
         break;
 
@@ -302,9 +302,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
     if (m_isEditing) {
       if (account.isLiquidAsset()) {
-        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
-        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
-        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Checkings));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Savings));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Cash));
       } else {
         typeCombo->addItem(typeString);
         // Once created, accounts of other account types are not
@@ -314,27 +314,27 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       // Once created, a currency cannot be changed if it is referenced.
       m_currency->setDisabled(MyMoneyFile::instance()->isReferenced(m_account));
     } else {
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Checkings));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Savings));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Cash));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::CreditCard));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Loan));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Investment));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Asset));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Liability));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Stock));
       /*
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
-      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::CertificateDep));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::MoneyMarket));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Currency));
       */
       // Do not create account types that are not supported
       // by the current engine.
-      if (account.accountType() == MyMoneyAccount::UnknownAccountType ||
-          account.accountType() == MyMoneyAccount::CertificateDep ||
-          account.accountType() == MyMoneyAccount::MoneyMarket ||
-          account.accountType() == MyMoneyAccount::Currency)
-        typeString = KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings);
+      if (account.accountType() == eMyMoney::Account::Unknown ||
+          account.accountType() == eMyMoney::Account::CertificateDep ||
+          account.accountType() == eMyMoney::Account::MoneyMarket ||
+          account.accountType() == eMyMoney::Account::Currency)
+        typeString = KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Checkings);
     }
 
     typeCombo->setCurrentItem(typeString, false);
@@ -545,14 +545,14 @@ void KNewAccountDlg::okClicked()
   // delete a previous version of the minimumbalance information
   storeKVP("minimumBalance", QString(), QString());
 
-  MyMoneyAccount::accountTypeE acctype;
+  eMyMoney::Account acctype;
   if (!m_categoryEditor) {
     acctype = KMyMoneyUtils::stringToAccountType(typeCombo->currentText());
     // If it's a loan, check if the parent is asset or liability. In
     // case of asset, we change the account type to be AssetLoan
-    if (acctype == MyMoneyAccount::Loan
-        && parent.accountGroup() == MyMoneyAccount::Asset)
-      acctype = MyMoneyAccount::AssetLoan;
+    if (acctype == eMyMoney::Account::Loan
+        && parent.accountGroup() == eMyMoney::Account::Asset)
+      acctype = eMyMoney::Account::AssetLoan;
   } else {
     acctype = parent.accountGroup();
     QString newName;
@@ -708,13 +708,13 @@ void KNewAccountDlg::loadVatAccounts()
   QStringList loadListLiability;
   for (it = list.begin(); it != list.end(); ++it) {
     if (!(*it).value("VatRate").isEmpty()) {
-      if ((*it).accountType() == MyMoneyAccount::Expense)
+      if ((*it).accountType() == eMyMoney::Account::Expense)
         loadListExpense += (*it).id();
-      else if ((*it).accountType() == MyMoneyAccount::Income)
+      else if ((*it).accountType() == eMyMoney::Account::Income)
         loadListIncome += (*it).id();
-      else if ((*it).accountType() == MyMoneyAccount::Asset)
+      else if ((*it).accountType() == eMyMoney::Account::Asset)
         loadListAsset += (*it).id();
-      else if ((*it).accountType() == MyMoneyAccount::Liability)
+      else if ((*it).accountType() == eMyMoney::Account::Liability)
         loadListLiability += (*it).id();
     }
   }
@@ -781,8 +781,8 @@ void KNewAccountDlg::slotNewClicked()
 
 void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
 {
-  MyMoneyAccount::accountTypeE type;
-  MyMoneyAccount::accountTypeE oldType;
+  eMyMoney::Account type;
+  eMyMoney::Account oldType;
 
   type = KMyMoneyUtils::stringToAccountType(typeStr);
   try {
@@ -791,7 +791,7 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
       m_account.setAccountType(type);
       // update the account group displayed in the accounts hierarchy
       m_filterProxyModel->clear();
-      m_filterProxyModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {m_account.accountGroup()});
+      m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account> {m_account.accountGroup()});
     }
   } catch (const MyMoneyException &) {
     qWarning("Unexpected exception in KNewAccountDlg::slotAccountTypeChanged()");
@@ -837,7 +837,7 @@ void KNewAccountDlg::slotVatAssignmentChanged(bool state)
 void KNewAccountDlg::adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr)
 {
   MyMoneyMoney factor(corr, 1);
-  if (m_account.accountGroup() == MyMoneyAccount::Asset)
+  if (m_account.accountGroup() == eMyMoney::Account::Asset)
     factor = -factor;
 
   switch (mode) {
@@ -855,7 +855,7 @@ void KNewAccountDlg::adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, cha
 
 void KNewAccountDlg::handleOpeningBalanceCheckbox(const QString &currencyId)
 {
-  if (m_account.accountType() == MyMoneyAccount::Equity) {
+  if (m_account.accountType() == eMyMoney::Account::Equity) {
     // check if there is another opening balance account with the same currency
     bool isOtherOpenBalancingAccount = false;
     QList<MyMoneyAccount> list;
@@ -863,7 +863,7 @@ void KNewAccountDlg::handleOpeningBalanceCheckbox(const QString &currencyId)
     QList<MyMoneyAccount>::Iterator it;
     for (it = list.begin(); it != list.end(); ++it) {
       if (it->id() == m_account.id() || currencyId != it->currencyId()
-          || it->accountType() != MyMoneyAccount::Equity)
+          || it->accountType() != eMyMoney::Account::Equity)
         continue;
       if (it->value("OpeningBalanceAccount") == "Yes") {
         isOtherOpenBalancingAccount = true;

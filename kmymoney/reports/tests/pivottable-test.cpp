@@ -62,16 +62,16 @@ void PivotTableTest::init()
   acLiability = (MyMoneyFile::instance()->liability().id());
   acExpense = (MyMoneyFile::instance()->expense().id());
   acIncome = (MyMoneyFile::instance()->income().id());
-  acChecking = makeAccount(QString("Checking Account"), MyMoneyAccount::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
-  acCredit = makeAccount(QString("Credit Card"), MyMoneyAccount::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
-  acSolo = makeAccount(QString("Solo"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acParent = makeAccount(QString("Parent"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acChild = makeAccount(QString("Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
-  acForeign = makeAccount(QString("Foreign"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChecking = makeAccount(QString("Checking Account"), eMyMoney::Account::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
+  acCredit = makeAccount(QString("Credit Card"), eMyMoney::Account::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
+  acSolo = makeAccount(QString("Solo"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acParent = makeAccount(QString("Parent"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChild = makeAccount(QString("Child"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acForeign = makeAccount(QString("Foreign"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
 
-  acSecondChild = makeAccount(QString("Second Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
-  acGrandChild1 = makeAccount(QString("Grand Child 1"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
-  acGrandChild2 = makeAccount(QString("Grand Child 2"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
+  acSecondChild = makeAccount(QString("Second Child"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acGrandChild1 = makeAccount(QString("Grand Child 1"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
+  acGrandChild2 = makeAccount(QString("Grand Child 2"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
   file->addInstitution(i);
@@ -178,9 +178,9 @@ void PivotTableTest::testNetWorthDateFilter()
 void PivotTableTest::testNetWorthOpening()
 {
   MyMoneyMoney openingBalance(12000000);
-  auto acBasicAccount = makeAccount(QString("Basic Account"), MyMoneyAccount::Checkings, openingBalance, QDate(2016, 1, 1), acAsset);
-  auto ctBasicIncome = makeAccount(QString("Basic Income"), MyMoneyAccount::Income, MyMoneyMoney(), QDate(2016, 1, 1), acIncome);
-  auto ctBasicExpense = makeAccount(QString("Basic Expense"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2016, 1, 1), acExpense);
+  auto acBasicAccount = makeAccount(QString("Basic Account"), eMyMoney::Account::Checkings, openingBalance, QDate(2016, 1, 1), acAsset);
+  auto ctBasicIncome = makeAccount(QString("Basic Income"), eMyMoney::Account::Income, MyMoneyMoney(), QDate(2016, 1, 1), acIncome);
+  auto ctBasicExpense = makeAccount(QString("Basic Expense"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2016, 1, 1), acExpense);
 
   TransactionHelper t1(QDate(2016, 7, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-6200000), acBasicAccount, ctBasicIncome);
   TransactionHelper t2(QDate(2016, 8, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
@@ -425,10 +425,10 @@ void PivotTableTest::testMultipleCurrencies()
   MyMoneyMoney moCanTransaction(100.0, 10);
   MyMoneyMoney moJpyTransaction(100.0, 10);
 
-  QString acCanChecking = makeAccount(QString("Canadian Checking"), MyMoneyAccount::Checkings, moCanOpening, QDate(2003, 11, 15), acAsset, "CAD");
-  QString acJpyChecking = makeAccount(QString("Japanese Checking"), MyMoneyAccount::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
-  QString acCanCash = makeAccount(QString("Canadian"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "CAD");
-  QString acJpyCash = makeAccount(QString("Japanese"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "JPY");
+  QString acCanChecking = makeAccount(QString("Canadian Checking"), eMyMoney::Account::Checkings, moCanOpening, QDate(2003, 11, 15), acAsset, "CAD");
+  QString acJpyChecking = makeAccount(QString("Japanese Checking"), eMyMoney::Account::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
+  QString acCanCash = makeAccount(QString("Canadian"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "CAD");
+  QString acJpyCash = makeAccount(QString("Japanese"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "JPY");
 
   makePrice("CAD", QDate(2004, 1, 1), MyMoneyMoney(moCanPrice));
   makePrice("JPY", QDate(2004, 1, 1), MyMoneyMoney(moJpyPrice));
@@ -657,20 +657,20 @@ void PivotTableTest::testAdvancedFilter()
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
-    filter.addState(MyMoneyTransactionFilter::cleared);
+    filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
     XMLandback(filter);
     PivotTable spending_f(filter);
 
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo);
 
-    filter.addState(MyMoneyTransactionFilter::reconciled);
+    filter.addState((int)eMyMoney::TransactionFilter::State::Reconciled);
     XMLandback(filter);
     PivotTable spending_f2(filter);
 
     QVERIFY(spending_f2.m_grid.m_total[eActual].m_total == -moSolo - moParent1);
 
     filter.clearTransactionFilter();
-    filter.addState(MyMoneyTransactionFilter::notReconciled);
+    filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
     XMLandback(filter);
     PivotTable spending_f3(filter);
 
@@ -901,10 +901,10 @@ void PivotTableTest::testInvestment()
     eqStock2 = makeEquity("Stock2", "STK2");
 
     // Accounts
-    acInvestment = makeAccount("Investment", MyMoneyAccount::Investment, moZero, QDate(2004, 1, 1), acAsset);
-    acStock1 = makeAccount("Stock 1", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock1);
-    acStock2 = makeAccount("Stock 2", MyMoneyAccount::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock2);
-    acDividends = makeAccount("Dividends", MyMoneyAccount::Income, moZero, QDate(2004, 1, 1), acIncome);
+    acInvestment = makeAccount("Investment", eMyMoney::Account::Investment, moZero, QDate(2004, 1, 1), acAsset);
+    acStock1 = makeAccount("Stock 1", eMyMoney::Account::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock1);
+    acStock2 = makeAccount("Stock 2", eMyMoney::Account::Stock, moZero, QDate(2004, 1, 1), acInvestment, eqStock2);
+    acDividends = makeAccount("Dividends", eMyMoney::Account::Income, moZero, QDate(2004, 1, 1), acIncome);
 
     // Transactions
     //                         Date             Action                                              Shares                 Price   Stock     Asset       Income

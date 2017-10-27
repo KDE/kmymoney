@@ -29,14 +29,16 @@
 
 QTEST_GUILESS_MAIN(MyMoneyScheduleTest)
 
+using namespace eMyMoney;
+
 void MyMoneyScheduleTest::testEmptyConstructor()
 {
   MyMoneySchedule s;
 
   QCOMPARE(s.id().isEmpty(), true);
-  QCOMPARE(s.m_occurrence, MyMoneySchedule::OCCUR_ANY);
-  QCOMPARE(s.m_type, MyMoneySchedule::TYPE_ANY);
-  QCOMPARE(s.m_paymentType, MyMoneySchedule::STYPE_ANY);
+  QCOMPARE(s.m_occurrence, Schedule::Occurrence::Any);
+  QCOMPARE(s.m_type, Schedule::Type::Any);
+  QCOMPARE(s.m_paymentType, Schedule::PaymentType::Any);
   QCOMPARE(s.m_fixed, false);
   QCOMPARE(!s.m_startDate.isValid(), true);
   QCOMPARE(!s.m_endDate.isValid(), true);
@@ -49,18 +51,18 @@ void MyMoneyScheduleTest::testEmptyConstructor()
 void MyMoneyScheduleTest::testConstructor()
 {
   MyMoneySchedule s("A Name",
-                    MyMoneySchedule::TYPE_BILL,
-                    MyMoneySchedule::OCCUR_WEEKLY, 1,
-                    MyMoneySchedule::STYPE_DIRECTDEBIT,
+                    Schedule::Type::Bill,
+                    Schedule::Occurrence::Weekly, 1,
+                    Schedule::PaymentType::DirectDebit,
                     QDate::currentDate(),
                     QDate(),
                     true,
                     true);
 
-  QCOMPARE(s.type(), MyMoneySchedule::TYPE_BILL);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_WEEKLY);
+  QCOMPARE(s.type(), Schedule::Type::Bill);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.paymentType(), MyMoneySchedule::STYPE_DIRECTDEBIT);
+  QCOMPARE(s.paymentType(), Schedule::PaymentType::DirectDebit);
   QCOMPARE(s.startDate(), QDate());
   QCOMPARE(s.willEnd(), false);
   QCOMPARE(s.isFixed(), true);
@@ -77,8 +79,8 @@ void MyMoneyScheduleTest::testSetFunctions()
   s.setId("SCHED001");
   QCOMPARE(s.id(), QLatin1String("SCHED001"));
 
-  s.setType(MyMoneySchedule::TYPE_BILL);
-  QCOMPARE(s.type(), MyMoneySchedule::TYPE_BILL);
+  s.setType(Schedule::Type::Bill);
+  QCOMPARE(s.type(), Schedule::Type::Bill);
 
   s.setEndDate(QDate::currentDate());
   QCOMPARE(s.endDate(), QDate::currentDate());
@@ -90,7 +92,7 @@ void MyMoneyScheduleTest::testCopyConstructor()
   MyMoneySchedule s;
 
   s.setId("SCHED001");
-  s.setType(MyMoneySchedule::TYPE_BILL);
+  s.setType(Schedule::Type::Bill);
 
   MyMoneySchedule s2(s);
 
@@ -103,7 +105,7 @@ void MyMoneyScheduleTest::testAssignmentConstructor()
   MyMoneySchedule s;
 
   s.setId("SCHED001");
-  s.setType(MyMoneySchedule::TYPE_BILL);
+  s.setType(Schedule::Type::Bill);
 
   MyMoneySchedule s2 = s;
 
@@ -263,10 +265,10 @@ void MyMoneyScheduleTest::testNextPaymentOnLastDayOfMonth()
 void MyMoneyScheduleTest::testAddHalfMonths()
 {
   // addHalfMonths is private
-  // Test a Schedule with occurrence OCCUR_EVERYHALFMONTH using nextPayment
+  // Test a Schedule with occurrence EveryHalfMonth using nextPayment
   MyMoneySchedule s;
   s.setStartDate(QDate(2007, 1, 1));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  s.setOccurrence(Schedule::Occurrence::EveryHalfMonth);
   s.setNextDueDate(s.startDate());
   s.setLastPayment(s.startDate());
 
@@ -455,8 +457,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     // Add tests for each possible occurrence.
     // Check how paymentDates is meant to work
     // Build a list of expected dates and compare
-    // MyMoneySchedule::OCCUR_ONCE
-    sch.setOccurrence(MyMoneySchedule::OCCUR_ONCE);
+    // Schedule::Occurrence::Once
+    sch.setOccurrence(Schedule::Occurrence::Once);
     startDate.setDate(2009, 1, 1);
     endDate.setDate(2009, 12, 31);
     sch.setStartDate(startDate);
@@ -464,8 +466,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     list = sch.paymentDates(startDate, endDate);
     QVERIFY(list.count() == 1);
     QVERIFY(list[0] == QDate(2009, 1, 1));
-    // MyMoneySchedule::OCCUR_DAILY
-    sch.setOccurrence(MyMoneySchedule::OCCUR_DAILY);
+    // Schedule::Occurrence::Daily
+    sch.setOccurrence(Schedule::Occurrence::Daily);
     startDate.setDate(2009, 1, 1);
     endDate.setDate(2009, 1, 5);
     sch.setStartDate(startDate);
@@ -479,7 +481,7 @@ void MyMoneyScheduleTest::testPaymentDates()
     // Would fall on Sunday so gets moved to 2nd.
     QVERIFY(list[3] == QDate(2009, 1, 2));
     QVERIFY(list[4] == QDate(2009, 1, 5));
-    // MyMoneySchedule::OCCUR_DAILY with multiplier 2
+    // Schedule::Occurrence::Daily with multiplier 2
     sch.setOccurrenceMultiplier(2);
     list = sch.paymentDates(startDate.addDays(1), endDate);
     QVERIFY(list.count() == 2);
@@ -487,8 +489,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[0] == QDate(2009, 1, 2));
     QVERIFY(list[1] == QDate(2009, 1, 5));
     sch.setOccurrenceMultiplier(1);
-    // MyMoneySchedule::OCCUR_WEEKLY
-    sch.setOccurrence(MyMoneySchedule::OCCUR_WEEKLY);
+    // Schedule::Occurrence::Weekly
+    sch.setOccurrence(Schedule::Occurrence::Weekly);
     startDate.setDate(2009, 1, 6);
     endDate.setDate(2009, 2, 4);
     sch.setStartDate(startDate);
@@ -500,8 +502,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2009, 1, 20));
     QVERIFY(list[3] == QDate(2009, 1, 27));
     QVERIFY(list[4] == QDate(2009, 2, 3));
-    // MyMoneySchedule::OCCUR_EVERYOTHERWEEK
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
+    // Schedule::Occurrence::EveryOtherWeek
+    sch.setOccurrence(Schedule::Occurrence::EveryOtherWeek);
     startDate.setDate(2009, 2, 5);
     endDate.setDate(2009, 4, 3);
     sch.setStartDate(startDate);
@@ -513,8 +515,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2009, 3, 5));
     QVERIFY(list[3] == QDate(2009, 3, 19));
     QVERIFY(list[4] == QDate(2009, 4, 2));
-    // MyMoneySchedule::OCCUR_FORTNIGHTLY
-    sch.setOccurrence(MyMoneySchedule::OCCUR_FORTNIGHTLY);
+    // Schedule::Occurrence::Fortnightly
+    sch.setOccurrence(Schedule::Occurrence::Fortnightly);
     startDate.setDate(2009, 4, 4);
     endDate.setDate(2009, 5, 31);
     sch.setStartDate(startDate);
@@ -531,8 +533,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2009, 5, 15));
     // Would fall on a Saturday so gets moved to 29th.
     QVERIFY(list[3] == QDate(2009, 5, 29));
-    // MyMoneySchedule::OCCUR_EVERYHALFMONTH
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+    // Schedule::Occurrence::EveryHalfMonth
+    sch.setOccurrence(Schedule::Occurrence::EveryHalfMonth);
     startDate.setDate(2009, 6, 1);
     endDate.setDate(2009, 8, 11);
     sch.setStartDate(startDate);
@@ -545,8 +547,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[3] == QDate(2009, 7, 16));
     // Would fall on a Saturday so gets moved to 31st.
     QVERIFY(list[4] == QDate(2009, 7, 31));
-    // MyMoneySchedule::OCCUR_EVERYTHREEWEEKS
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
+    // Schedule::Occurrence::EveryThreeWeeks
+    sch.setOccurrence(Schedule::Occurrence::EveryThreeWeeks);
     startDate.setDate(2009, 8, 12);
     endDate.setDate(2009, 11, 12);
     sch.setStartDate(startDate);
@@ -558,8 +560,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2009, 9, 23));
     QVERIFY(list[3] == QDate(2009, 10, 14));
     QVERIFY(list[4] == QDate(2009, 11, 4));
-    // MyMoneySchedule::OCCUR_EVERYFOURWEEKS
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
+    // Schedule::Occurrence::EveryFourWeeks
+    sch.setOccurrence(Schedule::Occurrence::EveryFourWeeks);
     startDate.setDate(2009, 11, 13);
     endDate.setDate(2010, 3, 13);
     sch.setStartDate(startDate);
@@ -571,8 +573,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2010, 1, 8));
     QVERIFY(list[3] == QDate(2010, 2, 5));
     QVERIFY(list[4] == QDate(2010, 3, 5));
-    // MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
+    // Schedule::Occurrence::EveryThirtyDays
+    sch.setOccurrence(Schedule::Occurrence::EveryThirtyDays);
     startDate.setDate(2010, 3, 19);
     endDate.setDate(2010, 7, 19);
     sch.setStartDate(startDate);
@@ -586,8 +588,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[3] == QDate(2010, 6, 17));
     // Would fall on a Saturday so gets moved to 16th.
     QVERIFY(list[4] == QDate(2010, 7, 16));
-    // MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
+    // Schedule::Occurrence::EveryEightWeeks
+    sch.setOccurrence(Schedule::Occurrence::EveryEightWeeks);
     startDate.setDate(2010, 7, 26);
     endDate.setDate(2011, 3, 26);
     sch.setStartDate(startDate);
@@ -599,8 +601,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2010, 11, 15));
     QVERIFY(list[3] == QDate(2011, 1, 10));
     QVERIFY(list[4] == QDate(2011, 3, 7));
-    // MyMoneySchedule::OCCUR_EVERYOTHERMONTH
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
+    // Schedule::Occurrence::EveryOtherMonth
+    sch.setOccurrence(Schedule::Occurrence::EveryOtherMonth);
     startDate.setDate(2011, 3, 14);
     endDate.setDate(2011, 11, 20);
     sch.setStartDate(startDate);
@@ -613,8 +615,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2011, 7, 14));
     QVERIFY(list[3] == QDate(2011, 9, 14));
     QVERIFY(list[4] == QDate(2011, 11, 14));
-    // MyMoneySchedule::OCCUR_EVERYTHREEMONTHS
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
+    // Schedule::Occurrence::EveryThreeMonths
+    sch.setOccurrence(Schedule::Occurrence::EveryThreeMonths);
     startDate.setDate(2011, 11, 15);
     endDate.setDate(2012, 11, 19);
     sch.setStartDate(startDate);
@@ -626,8 +628,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2012, 5, 15));
     QVERIFY(list[3] == QDate(2012, 8, 15));
     QVERIFY(list[4] == QDate(2012, 11, 15));
-    // MyMoneySchedule::OCCUR_QUARTERLY
-    sch.setOccurrence(MyMoneySchedule::OCCUR_QUARTERLY);
+    // Schedule::Occurrence::Quarterly
+    sch.setOccurrence(Schedule::Occurrence::Quarterly);
     startDate.setDate(2012, 11, 20);
     endDate.setDate(2013, 11, 23);
     sch.setStartDate(startDate);
@@ -639,8 +641,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2013, 5, 20));
     QVERIFY(list[3] == QDate(2013, 8, 20));
     QVERIFY(list[4] == QDate(2013, 11, 20));
-    // MyMoneySchedule::OCCUR_EVERYFOURMONTHS
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
+    // Schedule::Occurrence::EveryFourMonths
+    sch.setOccurrence(Schedule::Occurrence::EveryFourMonths);
     startDate.setDate(2013, 11, 21);
     endDate.setDate(2015, 3, 23);
     sch.setStartDate(startDate);
@@ -653,8 +655,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[3] == QDate(2014, 11, 21));
     // Would fall on a Saturday so gets moved to 20th.
     QVERIFY(list[4] == QDate(2015, 3, 20));
-    // MyMoneySchedule::OCCUR_TWICEYEARLY
-    sch.setOccurrence(MyMoneySchedule::OCCUR_TWICEYEARLY);
+    // Schedule::Occurrence::TwiceYearly
+    sch.setOccurrence(Schedule::Occurrence::TwiceYearly);
     startDate.setDate(2015, 3, 22);
     endDate.setDate(2017, 3, 29);
     sch.setStartDate(startDate);
@@ -667,8 +669,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[1] == QDate(2016, 3, 22));
     QVERIFY(list[2] == QDate(2016, 9, 22));
     QVERIFY(list[3] == QDate(2017, 3, 22));
-    // MyMoneySchedule::OCCUR_YEARLY
-    sch.setOccurrence(MyMoneySchedule::OCCUR_YEARLY);
+    // Schedule::Occurrence::Yearly
+    sch.setOccurrence(Schedule::Occurrence::Yearly);
     startDate.setDate(2017, 3, 23);
     endDate.setDate(2021, 3, 29);
     sch.setStartDate(startDate);
@@ -681,8 +683,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[2] == QDate(2019, 3, 22));
     QVERIFY(list[3] == QDate(2020, 3, 23));
     QVERIFY(list[4] == QDate(2021, 3, 23));
-    // MyMoneySchedule::OCCUR_EVERYOTHERYEAR
-    sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
+    // Schedule::Occurrence::EveryOtherYear
+    sch.setOccurrence(Schedule::Occurrence::EveryOtherYear);
     startDate.setDate(2021, 3, 24);
     endDate.setDate(2029, 3, 30);
     sch.setStartDate(startDate);
@@ -703,9 +705,9 @@ void MyMoneyScheduleTest::testPaymentDates()
 void MyMoneyScheduleTest::testWriteXML()
 {
   MyMoneySchedule sch("A Name",
-                      MyMoneySchedule::TYPE_BILL,
-                      MyMoneySchedule::OCCUR_WEEKLY, 123,
-                      MyMoneySchedule::STYPE_DIRECTDEBIT,
+                      Schedule::Type::Bill,
+                      Schedule::Occurrence::Weekly, 123,
+                      Schedule::PaymentType::DirectDebit,
                       QDate::currentDate(),
                       QDate(),
                       true,
@@ -927,12 +929,12 @@ void MyMoneyScheduleTest::testReadXML()
     QVERIFY(sch.endDate() == QDate());
     QVERIFY(sch.autoEnter() == true);
     QVERIFY(sch.isFixed() == true);
-    QVERIFY(sch.weekendOption() == MyMoneySchedule::MoveNothing);
+    QVERIFY(sch.weekendOption() == Schedule::WeekendOption::MoveNothing);
     QVERIFY(sch.lastPayment() == QDate::currentDate());
-    QVERIFY(sch.paymentType() == MyMoneySchedule::STYPE_DIRECTDEBIT);
-    QVERIFY(sch.type() == MyMoneySchedule::TYPE_BILL);
+    QVERIFY(sch.paymentType() == Schedule::PaymentType::DirectDebit);
+    QVERIFY(sch.type() == Schedule::Type::Bill);
     QVERIFY(sch.name() == "A Name");
-    QVERIFY(sch.occurrence() == MyMoneySchedule::OCCUR_WEEKLY);
+    QVERIFY(sch.occurrence() == Schedule::Occurrence::Weekly);
     QVERIFY(sch.occurrenceMultiplier() == 1);
     QVERIFY(sch.nextDueDate() == sch.lastPayment().addDays(7));
     QVERIFY(sch.recordedPayments().count() == 1);
@@ -953,12 +955,12 @@ void MyMoneyScheduleTest::testReadXML()
     QVERIFY(sch.endDate() == QDate());
     QVERIFY(sch.autoEnter() == true);
     QVERIFY(sch.isFixed() == true);
-    QVERIFY(sch.weekendOption() == MyMoneySchedule::MoveNothing);
+    QVERIFY(sch.weekendOption() == Schedule::WeekendOption::MoveNothing);
     QVERIFY(sch.lastPayment() == QDate::currentDate());
-    QVERIFY(sch.paymentType() == MyMoneySchedule::STYPE_DIRECTDEBIT);
-    QVERIFY(sch.type() == MyMoneySchedule::TYPE_BILL);
+    QVERIFY(sch.paymentType() == Schedule::PaymentType::DirectDebit);
+    QVERIFY(sch.type() == Schedule::Type::Bill);
     QVERIFY(sch.name() == "A Name");
-    QVERIFY(sch.occurrence() == MyMoneySchedule::OCCUR_WEEKLY);
+    QVERIFY(sch.occurrence() == Schedule::Occurrence::Weekly);
     QVERIFY(sch.occurrenceMultiplier() == 1);
     QVERIFY(sch.nextDueDate() == sch.lastPayment().addDays(7));
     QVERIFY(sch.recordedPayments().count() == 1);
@@ -1018,10 +1020,10 @@ void MyMoneyScheduleTest::testAdjustedNextDueDate()
   QDate dueDate(2007, 9, 3); // start on a Monday
   for (int i = 0; i < 7; ++i) {
     s.setNextDueDate(dueDate);
-    s.setWeekendOption(MyMoneySchedule::MoveNothing);
+    s.setWeekendOption(Schedule::WeekendOption::MoveNothing);
     QVERIFY(s.adjustedNextDueDate() == dueDate);
 
-    s.setWeekendOption(MyMoneySchedule::MoveBefore);
+    s.setWeekendOption(Schedule::WeekendOption::MoveBefore);
     switch (i) {
       case 5: // Saturday
       case 6: // Sunday
@@ -1032,7 +1034,7 @@ void MyMoneyScheduleTest::testAdjustedNextDueDate()
         break;
     }
 
-    s.setWeekendOption(MyMoneySchedule::MoveAfter);
+    s.setWeekendOption(Schedule::WeekendOption::MoveAfter);
     switch (i) {
       case 5: // Saturday
       case 6: // Sunday
@@ -1050,7 +1052,7 @@ void MyMoneyScheduleTest::testModifyNextDueDate()
 {
   MyMoneySchedule s;
   s.setStartDate(QDate(2007, 1, 2));
-  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::Monthly);
   s.setNextDueDate(s.startDate().addMonths(1));
   s.setLastPayment(s.startDate());
 
@@ -1078,139 +1080,139 @@ void MyMoneyScheduleTest::testModifyNextDueDate()
 
 void MyMoneyScheduleTest::testDaysBetweenEvents()
 {
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_ONCE), 0);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_DAILY), 1);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_WEEKLY), 7);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYOTHERWEEK), 14);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_FORTNIGHTLY), 14);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYHALFMONTH), 15);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS), 21);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYFOURWEEKS), 28);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS), 30);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_MONTHLY), 30);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS), 56);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYOTHERMONTH), 60);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS), 90);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_QUARTERLY), 90);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYFOURMONTHS), 120);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_TWICEYEARLY), 180);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_YEARLY), 360);
-  QCOMPARE(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYOTHERYEAR), 0);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Once), 0);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Daily), 1);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Weekly), 7);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryOtherWeek), 14);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Fortnightly), 14);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryHalfMonth), 15);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryThreeWeeks), 21);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryFourWeeks), 28);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryThirtyDays), 30);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Monthly), 30);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryEightWeeks), 56);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryOtherMonth), 60);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryThreeMonths), 90);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Quarterly), 90);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryFourMonths), 120);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::TwiceYearly), 180);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::Yearly), 360);
+  QCOMPARE(MyMoneySchedule::daysBetweenEvents(Schedule::Occurrence::EveryOtherYear), 0);
 }
 
 void MyMoneyScheduleTest::testEventsPerYear()
 {
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_ONCE), 0);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_DAILY), 365);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_WEEKLY), 52);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYOTHERWEEK), 26);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_FORTNIGHTLY), 26);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYHALFMONTH), 24);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS), 17);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYFOURWEEKS), 13);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS), 12);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_MONTHLY), 12);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS), 6);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYOTHERMONTH), 6);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS), 4);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_QUARTERLY), 4);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYFOURMONTHS), 3);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_TWICEYEARLY), 2);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_YEARLY), 1);
-  QCOMPARE(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_EVERYOTHERYEAR), 0);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Once), 0);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Daily), 365);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Weekly), 52);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryOtherWeek), 26);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Fortnightly), 26);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryHalfMonth), 24);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryThreeWeeks), 17);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryFourWeeks), 13);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryThirtyDays), 12);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Monthly), 12);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryEightWeeks), 6);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryOtherMonth), 6);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryThreeMonths), 4);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Quarterly), 4);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryFourMonths), 3);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::TwiceYearly), 2);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::Yearly), 1);
+  QCOMPARE(MyMoneySchedule::eventsPerYear(Schedule::Occurrence::EveryOtherYear), 0);
 }
 
 void MyMoneyScheduleTest::testOccurrenceToString()
 {
   // For each occurrenceE test MyMoneySchedule::occurrenceToString(occurrenceE)
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_ONCE), QLatin1String("Once"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_DAILY), QLatin1String("Daily"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_WEEKLY), QLatin1String("Weekly"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK), QLatin1String("Every other week"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_FORTNIGHTLY), QLatin1String("Fortnightly"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH), QLatin1String("Every half month"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS), QLatin1String("Every three weeks"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS), QLatin1String("Every four weeks"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS), QLatin1String("Every thirty days"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_MONTHLY), QLatin1String("Monthly"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS), QLatin1String("Every eight weeks"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH), QLatin1String("Every two months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS), QLatin1String("Every three months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_QUARTERLY), QLatin1String("Quarterly"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS), QLatin1String("Every four months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY), QLatin1String("Twice yearly"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_YEARLY), QLatin1String("Yearly"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERYEAR), QLatin1String("Every other year"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Once), QLatin1String("Once"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Daily), QLatin1String("Daily"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Weekly), QLatin1String("Weekly"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherWeek), QLatin1String("Every other week"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Fortnightly), QLatin1String("Fortnightly"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryHalfMonth), QLatin1String("Every half month"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeWeeks), QLatin1String("Every three weeks"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourWeeks), QLatin1String("Every four weeks"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThirtyDays), QLatin1String("Every thirty days"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Monthly), QLatin1String("Monthly"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryEightWeeks), QLatin1String("Every eight weeks"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherMonth), QLatin1String("Every two months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeMonths), QLatin1String("Every three months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Quarterly), QLatin1String("Quarterly"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourMonths), QLatin1String("Every four months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::TwiceYearly), QLatin1String("Twice yearly"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Yearly), QLatin1String("Yearly"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherYear), QLatin1String("Every other year"));
   // For each occurrenceE set occurrence and compare occurrenceToString() with oTS(occurrence())
   MyMoneySchedule s;
   s.setStartDate(QDate(2007, 1, 1));
   s.setNextDueDate(s.startDate());
   s.setLastPayment(s.startDate());
-  s.setOccurrence(MyMoneySchedule::OCCUR_ONCE); QCOMPARE(s.occurrenceToString(), QLatin1String("Once"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_DAILY); QCOMPARE(s.occurrenceToString(), QLatin1String("Daily"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_WEEKLY); QCOMPARE(s.occurrenceToString(), QLatin1String("Weekly"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERWEEK); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other week"));
+  s.setOccurrence(Schedule::Occurrence::Once); QCOMPARE(s.occurrenceToString(), QLatin1String("Once"));
+  s.setOccurrence(Schedule::Occurrence::Daily); QCOMPARE(s.occurrenceToString(), QLatin1String("Daily"));
+  s.setOccurrence(Schedule::Occurrence::Weekly); QCOMPARE(s.occurrenceToString(), QLatin1String("Weekly"));
+  s.setOccurrence(Schedule::Occurrence::EveryOtherWeek); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other week"));
   // Fortnightly no longer used: Every other week used instead
-  s.setOccurrence(MyMoneySchedule::OCCUR_FORTNIGHTLY); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other week"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYHALFMONTH); QCOMPARE(s.occurrenceToString(), QLatin1String("Every half month"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three weeks"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURWEEKS); QCOMPARE(s.occurrenceToString(), QLatin1String("Every four weeks"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS); QCOMPARE(s.occurrenceToString(), QLatin1String("Every thirty days"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY); QCOMPARE(s.occurrenceToString(), QLatin1String("Monthly"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS); QCOMPARE(s.occurrenceToString(), QLatin1String("Every eight weeks"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERMONTH); QCOMPARE(s.occurrenceToString(), QLatin1String("Every two months"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three months"));
+  s.setOccurrence(Schedule::Occurrence::Fortnightly); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other week"));
+  s.setOccurrence(Schedule::Occurrence::EveryHalfMonth); QCOMPARE(s.occurrenceToString(), QLatin1String("Every half month"));
+  s.setOccurrence(Schedule::Occurrence::EveryThreeWeeks); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three weeks"));
+  s.setOccurrence(Schedule::Occurrence::EveryFourWeeks); QCOMPARE(s.occurrenceToString(), QLatin1String("Every four weeks"));
+  s.setOccurrence(Schedule::Occurrence::EveryThirtyDays); QCOMPARE(s.occurrenceToString(), QLatin1String("Every thirty days"));
+  s.setOccurrence(Schedule::Occurrence::Monthly); QCOMPARE(s.occurrenceToString(), QLatin1String("Monthly"));
+  s.setOccurrence(Schedule::Occurrence::EveryEightWeeks); QCOMPARE(s.occurrenceToString(), QLatin1String("Every eight weeks"));
+  s.setOccurrence(Schedule::Occurrence::EveryOtherMonth); QCOMPARE(s.occurrenceToString(), QLatin1String("Every two months"));
+  s.setOccurrence(Schedule::Occurrence::EveryThreeMonths); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three months"));
   // Quarterly no longer used.  Every three months used instead
-  s.setOccurrence(MyMoneySchedule::OCCUR_QUARTERLY); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three months"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURMONTHS); QCOMPARE(s.occurrenceToString(), QLatin1String("Every four months"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_TWICEYEARLY); QCOMPARE(s.occurrenceToString(), QLatin1String("Twice yearly"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_YEARLY); QCOMPARE(s.occurrenceToString(), QLatin1String("Yearly"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERYEAR); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other year"));
+  s.setOccurrence(Schedule::Occurrence::Quarterly); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three months"));
+  s.setOccurrence(Schedule::Occurrence::EveryFourMonths); QCOMPARE(s.occurrenceToString(), QLatin1String("Every four months"));
+  s.setOccurrence(Schedule::Occurrence::TwiceYearly); QCOMPARE(s.occurrenceToString(), QLatin1String("Twice yearly"));
+  s.setOccurrence(Schedule::Occurrence::Yearly); QCOMPARE(s.occurrenceToString(), QLatin1String("Yearly"));
+  s.setOccurrence(Schedule::Occurrence::EveryOtherYear); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other year"));
   // Test occurrenceToString(mult,occ)
   // Test all pairs equivalent to simple occurrences: should return the same as occurrenceToString(simpleOcc)
   // TODO replace string with (mult,occ) call.
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_ONCE), MyMoneySchedule::occurrenceToString(1, MyMoneySchedule::OCCUR_ONCE));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_DAILY), MyMoneySchedule::occurrenceToString(1, MyMoneySchedule::OCCUR_DAILY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_WEEKLY), MyMoneySchedule::occurrenceToString(1, MyMoneySchedule::OCCUR_WEEKLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK), MyMoneySchedule::occurrenceToString(2, MyMoneySchedule::OCCUR_WEEKLY));
-  // OCCUR_FORTNIGHTLY will no longer be used: only Every Other Week
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH), MyMoneySchedule::occurrenceToString(1, MyMoneySchedule::OCCUR_EVERYHALFMONTH));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS), MyMoneySchedule::occurrenceToString(3, MyMoneySchedule::OCCUR_WEEKLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS), MyMoneySchedule::occurrenceToString(4, MyMoneySchedule::OCCUR_WEEKLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_MONTHLY), MyMoneySchedule::occurrenceToString(1, MyMoneySchedule::OCCUR_MONTHLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS), MyMoneySchedule::occurrenceToString(8, MyMoneySchedule::OCCUR_WEEKLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH), MyMoneySchedule::occurrenceToString(2, MyMoneySchedule::OCCUR_MONTHLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS), MyMoneySchedule::occurrenceToString(3, MyMoneySchedule::OCCUR_MONTHLY));
-  // OCCUR_QUARTERLY will no longer be used: only Every Three Months
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS), MyMoneySchedule::occurrenceToString(4, MyMoneySchedule::OCCUR_MONTHLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY), MyMoneySchedule::occurrenceToString(6, MyMoneySchedule::OCCUR_MONTHLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_YEARLY), MyMoneySchedule::occurrenceToString(1, MyMoneySchedule::OCCUR_YEARLY));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERYEAR), MyMoneySchedule::occurrenceToString(2, MyMoneySchedule::OCCUR_YEARLY));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Once), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Once));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Daily), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Daily));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Weekly), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Weekly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherWeek), MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Weekly));
+  // Fortnightly will no longer be used: only Every Other Week
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryHalfMonth), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::EveryHalfMonth));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeWeeks), MyMoneySchedule::occurrenceToString(3, Schedule::Occurrence::Weekly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourWeeks), MyMoneySchedule::occurrenceToString(4, Schedule::Occurrence::Weekly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Monthly), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Monthly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryEightWeeks), MyMoneySchedule::occurrenceToString(8, Schedule::Occurrence::Weekly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherMonth), MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Monthly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeMonths), MyMoneySchedule::occurrenceToString(3, Schedule::Occurrence::Monthly));
+  // Quarterly will no longer be used: only Every Three Months
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourMonths), MyMoneySchedule::occurrenceToString(4, Schedule::Occurrence::Monthly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::TwiceYearly), MyMoneySchedule::occurrenceToString(6, Schedule::Occurrence::Monthly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Yearly), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Yearly));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherYear), MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Yearly));
   // Test additional calls with other mult,occ
-  QCOMPARE(MyMoneySchedule::occurrenceToString(2, MyMoneySchedule::OCCUR_ONCE), QLatin1String("2 times"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(2, MyMoneySchedule::OCCUR_DAILY), QLatin1String("Every 2 days"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(5, MyMoneySchedule::OCCUR_WEEKLY), QLatin1String("Every 5 weeks"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(2, MyMoneySchedule::OCCUR_EVERYHALFMONTH), QLatin1String("Every 2 half months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(5, MyMoneySchedule::OCCUR_MONTHLY), QLatin1String("Every 5 months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(3, MyMoneySchedule::OCCUR_YEARLY), QLatin1String("Every 3 years"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(37, MyMoneySchedule::OCCUR_ONCE), QLatin1String("37 times"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(43, MyMoneySchedule::OCCUR_DAILY), QLatin1String("Every 43 days"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(61, MyMoneySchedule::OCCUR_WEEKLY), QLatin1String("Every 61 weeks"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(73, MyMoneySchedule::OCCUR_EVERYHALFMONTH), QLatin1String("Every 73 half months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(83, MyMoneySchedule::OCCUR_MONTHLY), QLatin1String("Every 83 months"));
-  QCOMPARE(MyMoneySchedule::occurrenceToString(89, MyMoneySchedule::OCCUR_YEARLY), QLatin1String("Every 89 years"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Once), QLatin1String("2 times"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Daily), QLatin1String("Every 2 days"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(5, Schedule::Occurrence::Weekly), QLatin1String("Every 5 weeks"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::EveryHalfMonth), QLatin1String("Every 2 half months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(5, Schedule::Occurrence::Monthly), QLatin1String("Every 5 months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(3, Schedule::Occurrence::Yearly), QLatin1String("Every 3 years"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(37, Schedule::Occurrence::Once), QLatin1String("37 times"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(43, Schedule::Occurrence::Daily), QLatin1String("Every 43 days"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(61, Schedule::Occurrence::Weekly), QLatin1String("Every 61 weeks"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(73, Schedule::Occurrence::EveryHalfMonth), QLatin1String("Every 73 half months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(83, Schedule::Occurrence::Monthly), QLatin1String("Every 83 months"));
+  QCOMPARE(MyMoneySchedule::occurrenceToString(89, Schedule::Occurrence::Yearly), QLatin1String("Every 89 years"));
   // Test instance-level occurrenceToString method is using occurrencePeriod and multiplier
   // For each base occurrence set occurrencePeriod and multiplier
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_ONCE); s.setOccurrenceMultiplier(1);
-  s.setOccurrence(MyMoneySchedule::OCCUR_ONCE);
+  s.setOccurrencePeriod(Schedule::Occurrence::Once); s.setOccurrenceMultiplier(1);
+  s.setOccurrence(Schedule::Occurrence::Once);
   s.setOccurrenceMultiplier(1); QCOMPARE(s.occurrenceToString(), QLatin1String("Once"));
   s.setOccurrenceMultiplier(2); QCOMPARE(s.occurrenceToString(), QLatin1String("2 times"));
   s.setOccurrenceMultiplier(3); QCOMPARE(s.occurrenceToString(), QLatin1String("3 times"));
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_DAILY);
+  s.setOccurrencePeriod(Schedule::Occurrence::Daily);
   s.setOccurrenceMultiplier(1); QCOMPARE(s.occurrenceToString(), QLatin1String("Daily"));
   s.setOccurrenceMultiplier(30); QCOMPARE(s.occurrenceToString(), QLatin1String("Every thirty days"));
   s.setOccurrenceMultiplier(3); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 3 days"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceToString(), QLatin1String("Weekly"));
   s.setOccurrenceMultiplier(2); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other week"));
   s.setOccurrenceMultiplier(3); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three weeks"));
@@ -1219,10 +1221,10 @@ void MyMoneyScheduleTest::testOccurrenceToString()
   s.setOccurrenceMultiplier(7); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 7 weeks"));
   s.setOccurrenceMultiplier(8); QCOMPARE(s.occurrenceToString(), QLatin1String("Every eight weeks"));
   s.setOccurrenceMultiplier(9); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 9 weeks"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  s.setOccurrence(Schedule::Occurrence::EveryHalfMonth);
   s.setOccurrenceMultiplier(1); QCOMPARE(s.occurrenceToString(), QLatin1String("Every half month"));
   s.setOccurrenceMultiplier(2); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 2 half months"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::Monthly);
   s.setOccurrenceMultiplier(1); QCOMPARE(s.occurrenceToString(), QLatin1String("Monthly"));
   s.setOccurrenceMultiplier(2); QCOMPARE(s.occurrenceToString(), QLatin1String("Every two months"));
   s.setOccurrenceMultiplier(3); QCOMPARE(s.occurrenceToString(), QLatin1String("Every three months"));
@@ -1230,7 +1232,7 @@ void MyMoneyScheduleTest::testOccurrenceToString()
   s.setOccurrenceMultiplier(5); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 5 months"));
   s.setOccurrenceMultiplier(6); QCOMPARE(s.occurrenceToString(), QLatin1String("Twice yearly"));
   s.setOccurrenceMultiplier(7); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 7 months"));
-  s.setOccurrence(MyMoneySchedule::OCCUR_YEARLY);
+  s.setOccurrence(Schedule::Occurrence::Yearly);
   s.setOccurrenceMultiplier(1); QCOMPARE(s.occurrenceToString(), QLatin1String("Yearly"));
   s.setOccurrenceMultiplier(2); QCOMPARE(s.occurrenceToString(), QLatin1String("Every other year"));
   s.setOccurrenceMultiplier(3); QCOMPARE(s.occurrenceToString(), QLatin1String("Every 3 years"));
@@ -1240,25 +1242,25 @@ void MyMoneyScheduleTest::testOccurrencePeriodToString()
 {
   // For each occurrenceE test MyMoneySchedule::occurrencePeriodToString(occurrenceE)
   // Base occurrences are translated
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_ONCE), QLatin1String("Once"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_DAILY), QLatin1String("Day"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_WEEKLY), QLatin1String("Week"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH), QLatin1String("Half-month"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_MONTHLY), QLatin1String("Month"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_YEARLY), QLatin1String("Year"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Once), QLatin1String("Once"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Daily), QLatin1String("Day"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Weekly), QLatin1String("Week"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryHalfMonth), QLatin1String("Half-month"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Monthly), QLatin1String("Month"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Yearly), QLatin1String("Year"));
   // All others are not translated so return Any
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_FORTNIGHTLY), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_QUARTERLY), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_TWICEYEARLY), QLatin1String("Any"));
-  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::OCCUR_EVERYOTHERYEAR), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryOtherWeek), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Fortnightly), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryThreeWeeks), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryFourWeeks), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryThirtyDays), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryEightWeeks), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryOtherMonth), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryThreeMonths), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Quarterly), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryFourMonths), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::TwiceYearly), QLatin1String("Any"));
+  QCOMPARE(MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryOtherYear), QLatin1String("Any"));
 }
 
 void MyMoneyScheduleTest::testOccurrencePeriod()
@@ -1275,191 +1277,191 @@ void MyMoneyScheduleTest::testOccurrencePeriod()
   s.setNextDueDate(s.startDate());
   s.setLastPayment(s.startDate());
   // Set all base occurrences
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_ONCE);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_ONCE);
+  s.setOccurrencePeriod(Schedule::Occurrence::Once);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Once);
   s.setOccurrenceMultiplier(1);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_ONCE);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_ONCE);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Once);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Once);
   s.setOccurrenceMultiplier(2);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_ONCE);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_ONCE);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Once);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Once);
 
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_DAILY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_DAILY);
+  s.setOccurrencePeriod(Schedule::Occurrence::Daily);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Daily);
   s.setOccurrenceMultiplier(1);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_DAILY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_DAILY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Daily);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Daily);
   s.setOccurrenceMultiplier(30);
   QCOMPARE(s.occurrenceMultiplier(), 30);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_DAILY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Daily);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThirtyDays);
   s.setOccurrenceMultiplier(2);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_DAILY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_DAILY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Daily);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Daily);
 
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrencePeriod(Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   s.setOccurrenceMultiplier(1);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_WEEKLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Weekly);
   s.setOccurrenceMultiplier(2);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherWeek);
   s.setOccurrenceMultiplier(3);
   QCOMPARE(s.occurrenceMultiplier(), 3);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThreeWeeks);
   s.setOccurrenceMultiplier(4);
   QCOMPARE(s.occurrenceMultiplier(), 4);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryFourWeeks);
   s.setOccurrenceMultiplier(5);
   QCOMPARE(s.occurrenceMultiplier(), 5);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_WEEKLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Weekly);
   s.setOccurrenceMultiplier(8);
   QCOMPARE(s.occurrenceMultiplier(), 8);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryEightWeeks);
 
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  s.setOccurrencePeriod(Schedule::Occurrence::EveryHalfMonth);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::EveryHalfMonth);
   s.setOccurrenceMultiplier(1);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::EveryHalfMonth);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryHalfMonth);
   s.setOccurrenceMultiplier(2);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::EveryHalfMonth);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryHalfMonth);
 
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrencePeriod(Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   s.setOccurrenceMultiplier(1);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_MONTHLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Monthly);
   s.setOccurrenceMultiplier(2);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherMonth);
   s.setOccurrenceMultiplier(3);
   QCOMPARE(s.occurrenceMultiplier(), 3);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThreeMonths);
   s.setOccurrenceMultiplier(4);
   QCOMPARE(s.occurrenceMultiplier(), 4);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryFourMonths);
   s.setOccurrenceMultiplier(5);
   QCOMPARE(s.occurrenceMultiplier(), 5);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_MONTHLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Monthly);
   s.setOccurrenceMultiplier(6);
   QCOMPARE(s.occurrenceMultiplier(), 6);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_TWICEYEARLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::TwiceYearly);
 
-  s.setOccurrencePeriod(MyMoneySchedule::OCCUR_YEARLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_YEARLY);
+  s.setOccurrencePeriod(Schedule::Occurrence::Yearly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Yearly);
   s.setOccurrenceMultiplier(1);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_YEARLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_YEARLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Yearly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Yearly);
   s.setOccurrenceMultiplier(2);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_YEARLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Yearly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherYear);
   s.setOccurrenceMultiplier(3);
   QCOMPARE(s.occurrenceMultiplier(), 3);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_YEARLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_YEARLY);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Yearly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Yearly);
 
   // Set occurrence: check occurrence, Period and Multiplier
-  s.setOccurrence(MyMoneySchedule::OCCUR_ONCE);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_ONCE);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_ONCE);
+  s.setOccurrence(Schedule::Occurrence::Once);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Once);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Once);
   QCOMPARE(s.occurrenceMultiplier(), 1);
 
-  s.setOccurrence(MyMoneySchedule::OCCUR_DAILY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_DAILY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_DAILY);
+  s.setOccurrence(Schedule::Occurrence::Daily);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Daily);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Daily);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_DAILY);
+  s.setOccurrence(Schedule::Occurrence::EveryThirtyDays);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThirtyDays);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Daily);
   QCOMPARE(s.occurrenceMultiplier(), 30);
 
-  s.setOccurrence(MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_WEEKLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Weekly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::EveryOtherWeek);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherWeek);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 2);
   // Fortnightly no longer used: Every other week used instead
-  s.setOccurrence(MyMoneySchedule::OCCUR_FORTNIGHTLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::Fortnightly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherWeek);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::EveryThreeWeeks);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThreeWeeks);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 3);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::EveryFourWeeks);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryFourWeeks);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 4);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_WEEKLY);
+  s.setOccurrence(Schedule::Occurrence::EveryEightWeeks);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryEightWeeks);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Weekly);
   QCOMPARE(s.occurrenceMultiplier(), 8);
 
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  s.setOccurrence(Schedule::Occurrence::EveryHalfMonth);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryHalfMonth);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::EveryHalfMonth);
   QCOMPARE(s.occurrenceMultiplier(), 1);
 
-  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_MONTHLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Monthly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::EveryOtherMonth);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherMonth);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   QCOMPARE(s.occurrenceMultiplier(), 2);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::EveryThreeMonths);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThreeMonths);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   QCOMPARE(s.occurrenceMultiplier(), 3);
   // Quarterly no longer used.  Every three months used instead
-  s.setOccurrence(MyMoneySchedule::OCCUR_QUARTERLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::Quarterly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryThreeMonths);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   QCOMPARE(s.occurrenceMultiplier(), 3);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::EveryFourMonths);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryFourMonths);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   QCOMPARE(s.occurrenceMultiplier(), 4);
-  s.setOccurrence(MyMoneySchedule::OCCUR_TWICEYEARLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_TWICEYEARLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::TwiceYearly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::TwiceYearly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Monthly);
   QCOMPARE(s.occurrenceMultiplier(), 6);
 
-  s.setOccurrence(MyMoneySchedule::OCCUR_YEARLY);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_YEARLY);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_YEARLY);
+  s.setOccurrence(Schedule::Occurrence::Yearly);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Yearly);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Yearly);
   QCOMPARE(s.occurrenceMultiplier(), 1);
-  s.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
-  QCOMPARE(s.occurrence(), MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
-  QCOMPARE(s.occurrencePeriod(), MyMoneySchedule::OCCUR_YEARLY);
+  s.setOccurrence(Schedule::Occurrence::EveryOtherYear);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::EveryOtherYear);
+  QCOMPARE(s.occurrencePeriod(), Schedule::Occurrence::Yearly);
   QCOMPARE(s.occurrenceMultiplier(), 2);
 }
 
@@ -1467,113 +1469,113 @@ void MyMoneyScheduleTest::testSimpleToFromCompoundOccurrence()
 {
   // Conversion between Simple and Compound occurrences
   // Each simple occurrence to compound occurrence
-  MyMoneySchedule::occurrenceE occ;
+  Schedule::Occurrence occ;
   int mult;
-  occ = MyMoneySchedule::OCCUR_ONCE; mult = 1;
+  occ = Schedule::Occurrence::Once; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_ONCE && mult == 1);
-  occ = MyMoneySchedule::OCCUR_DAILY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Once && mult == 1);
+  occ = Schedule::Occurrence::Daily; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_DAILY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_WEEKLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Daily && mult == 1);
+  occ = Schedule::Occurrence::Weekly; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_EVERYOTHERWEEK; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 1);
+  occ = Schedule::Occurrence::EveryOtherWeek; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 2);
-  occ = MyMoneySchedule::OCCUR_FORTNIGHTLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 2);
+  occ = Schedule::Occurrence::Fortnightly; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 2);
-  occ = MyMoneySchedule::OCCUR_EVERYHALFMONTH; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 2);
+  occ = Schedule::Occurrence::EveryHalfMonth; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYHALFMONTH && mult == 1);
-  occ = MyMoneySchedule::OCCUR_EVERYTHREEWEEKS; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::EveryHalfMonth && mult == 1);
+  occ = Schedule::Occurrence::EveryThreeWeeks; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 3);
-  occ = MyMoneySchedule::OCCUR_EVERYFOURWEEKS; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 3);
+  occ = Schedule::Occurrence::EveryFourWeeks; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 4);
-  occ = MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 4);
+  occ = Schedule::Occurrence::EveryThirtyDays; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_DAILY && mult == 30);
-  occ = MyMoneySchedule::OCCUR_MONTHLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Daily && mult == 30);
+  occ = Schedule::Occurrence::Monthly; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 1);
+  occ = Schedule::Occurrence::EveryEightWeeks; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 8);
-  occ = MyMoneySchedule::OCCUR_EVERYOTHERMONTH; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 8);
+  occ = Schedule::Occurrence::EveryOtherMonth; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 2);
-  occ = MyMoneySchedule::OCCUR_EVERYTHREEMONTHS; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 2);
+  occ = Schedule::Occurrence::EveryThreeMonths; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 3);
-  occ = MyMoneySchedule::OCCUR_QUARTERLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 3);
+  occ = Schedule::Occurrence::Quarterly; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 3);
-  occ = MyMoneySchedule::OCCUR_EVERYFOURMONTHS; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 3);
+  occ = Schedule::Occurrence::EveryFourMonths; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 4);
-  occ = MyMoneySchedule::OCCUR_TWICEYEARLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 4);
+  occ = Schedule::Occurrence::TwiceYearly; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 6);
-  occ = MyMoneySchedule::OCCUR_YEARLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 6);
+  occ = Schedule::Occurrence::Yearly; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_YEARLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_EVERYOTHERYEAR; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Yearly && mult == 1);
+  occ = Schedule::Occurrence::EveryOtherYear; mult = 1;
   MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_YEARLY && mult == 2);
+  QVERIFY(occ == Schedule::Occurrence::Yearly && mult == 2);
   // Compound to Simple Occurrences
-  occ = MyMoneySchedule::OCCUR_ONCE; mult = 1;
+  occ = Schedule::Occurrence::Once; mult = 1;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_ONCE && mult == 1);
-  occ = MyMoneySchedule::OCCUR_DAILY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Once && mult == 1);
+  occ = Schedule::Occurrence::Daily; mult = 1;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_DAILY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_WEEKLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::Daily && mult == 1);
+  occ = Schedule::Occurrence::Weekly; mult = 1;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_WEEKLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_WEEKLY; mult = 2;
+  QVERIFY(occ == Schedule::Occurrence::Weekly && mult == 1);
+  occ = Schedule::Occurrence::Weekly; mult = 2;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYOTHERWEEK && mult == 1);
-  // MyMoneySchedule::OCCUR_FORTNIGHTLY not converted back
-  occ = MyMoneySchedule::OCCUR_EVERYHALFMONTH; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::EveryOtherWeek && mult == 1);
+  // Schedule::Occurrence::Fortnightly not converted back
+  occ = Schedule::Occurrence::EveryHalfMonth; mult = 1;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYHALFMONTH && mult == 1);
-  occ = MyMoneySchedule::OCCUR_WEEKLY; mult = 3;
+  QVERIFY(occ == Schedule::Occurrence::EveryHalfMonth && mult == 1);
+  occ = Schedule::Occurrence::Weekly; mult = 3;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYTHREEWEEKS && mult == 1);
-  occ = MyMoneySchedule::OCCUR_WEEKLY ; mult = 4;
+  QVERIFY(occ == Schedule::Occurrence::EveryThreeWeeks && mult == 1);
+  occ = Schedule::Occurrence::Weekly ; mult = 4;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYFOURWEEKS && mult == 1);
-  occ = MyMoneySchedule::OCCUR_DAILY; mult = 30;
+  QVERIFY(occ == Schedule::Occurrence::EveryFourWeeks && mult == 1);
+  occ = Schedule::Occurrence::Daily; mult = 30;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS && mult == 1);
-  occ = MyMoneySchedule::OCCUR_MONTHLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::EveryThirtyDays && mult == 1);
+  occ = Schedule::Occurrence::Monthly; mult = 1;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_MONTHLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_WEEKLY; mult = 8;
+  QVERIFY(occ == Schedule::Occurrence::Monthly && mult == 1);
+  occ = Schedule::Occurrence::Weekly; mult = 8;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS && mult == 1);
-  occ = MyMoneySchedule::OCCUR_MONTHLY; mult = 2;
+  QVERIFY(occ == Schedule::Occurrence::EveryEightWeeks && mult == 1);
+  occ = Schedule::Occurrence::Monthly; mult = 2;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYOTHERMONTH && mult == 1);
-  occ = MyMoneySchedule::OCCUR_MONTHLY; mult = 3;
+  QVERIFY(occ == Schedule::Occurrence::EveryOtherMonth && mult == 1);
+  occ = Schedule::Occurrence::Monthly; mult = 3;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS && mult == 1);
-  // MyMoneySchedule::OCCUR_QUARTERLY not converted back
-  occ = MyMoneySchedule::OCCUR_MONTHLY; mult = 4;
+  QVERIFY(occ == Schedule::Occurrence::EveryThreeMonths && mult == 1);
+  // Schedule::Occurrence::Quarterly not converted back
+  occ = Schedule::Occurrence::Monthly; mult = 4;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYFOURMONTHS && mult == 1);
-  occ = MyMoneySchedule::OCCUR_MONTHLY; mult = 6;
+  QVERIFY(occ == Schedule::Occurrence::EveryFourMonths && mult == 1);
+  occ = Schedule::Occurrence::Monthly; mult = 6;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_TWICEYEARLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_YEARLY; mult = 1;
+  QVERIFY(occ == Schedule::Occurrence::TwiceYearly && mult == 1);
+  occ = Schedule::Occurrence::Yearly; mult = 1;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_YEARLY && mult == 1);
-  occ = MyMoneySchedule::OCCUR_YEARLY; mult = 2;
+  QVERIFY(occ == Schedule::Occurrence::Yearly && mult == 1);
+  occ = Schedule::Occurrence::Yearly; mult = 2;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
-  QVERIFY(occ == MyMoneySchedule::OCCUR_EVERYOTHERYEAR && mult == 1);
+  QVERIFY(occ == Schedule::Occurrence::EveryOtherYear && mult == 1);
 }
 
 void MyMoneyScheduleTest::testProcessingDates()
@@ -1625,7 +1627,7 @@ void MyMoneyScheduleTest::testPaidEarlyOneTime()
   try {
     sch = MyMoneySchedule(node);
     QVERIFY(sch.isFinished() == true);
-    QVERIFY(sch.occurrencePeriod() == MyMoneySchedule::OCCUR_MONTHLY);
+    QVERIFY(sch.occurrencePeriod() == Schedule::Occurrence::Monthly);
     QVERIFY(sch.paymentDates(QDate::currentDate(), QDate::currentDate().addDays(21)).count() == 0);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
@@ -1640,8 +1642,8 @@ void MyMoneyScheduleTest::testAdjustedNextPayment()
   QDate dueDate(2010, 5, 23);
   QDate adjustedDueDate(2010, 5, 21);
   s.setNextDueDate(dueDate);
-  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
-  s.setWeekendOption(MyMoneySchedule::MoveBefore);
+  s.setOccurrence(Schedule::Occurrence::Monthly);
+  s.setWeekendOption(Schedule::WeekendOption::MoveBefore);
 
   //if adjustedNextPayment works ok with adjusted date prior to the current date, it should return 2010-06-23
   QDate nextDueDate(2010, 6, 23);
@@ -1703,11 +1705,11 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   QDate refDate(2011, 8, 10); // just some ref date before the last payment
 
   s.setStartDate(endDate.addMonths(-1));
-  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
+  s.setOccurrence(Schedule::Occurrence::Monthly);
   s.setEndDate(endDate);
   // the next due date is on this day but the policy is to move the
   // schedule to the next processing day (Monday)
-  s.setWeekendOption(MyMoneySchedule::MoveAfter);
+  s.setWeekendOption(Schedule::WeekendOption::MoveAfter);
   s.setNextDueDate(endDate);
 
   // the payment should be found between the respective date and one month after

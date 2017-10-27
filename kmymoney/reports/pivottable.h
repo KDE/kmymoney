@@ -235,13 +235,13 @@ protected:
     * actual amount. The calculation is based on the type of the
      * @a repAccount. The difference value is calculated as follows:
     *
-    * If @a repAccount is of type MyMoneyAccount::Income
+    * If @a repAccount is of type eMyMoney::Account::Income
     *
     * @code
     *      diff = actual - budgeted
     * @endcode
     *
-    * If @a repAccount is of type MyMoneyAccount::Expense
+    * If @a repAccount is of type eMyMoney::Account::Expense
     *
     * @code
     *      diff = budgeted - actual

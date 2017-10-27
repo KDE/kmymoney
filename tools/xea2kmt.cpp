@@ -24,6 +24,9 @@
 #include <QXmlStreamReader>
 #include <QDebug>
 
+#include "mymoneyenums.h"
+
+using namespace eMyMoney;
 
 QDebug operator <<(QDebug out, const QXmlStreamNamespaceDeclaration &a)
 {
@@ -72,21 +75,21 @@ DirNameMapType &getDirNameMap()
 
 int toKMyMoneyAccountType(const QString &type)
 {
-    if(type == "ROOT") return MyMoneyAccount::UnknownAccountType;
-    else if (type == "BANK") return MyMoneyAccount::Checkings;
-    else if (type == "CASH") return MyMoneyAccount::Cash;
-    else if (type == "CREDIT") return MyMoneyAccount::CreditCard;
-    else if (type == "INVEST") return MyMoneyAccount::Investment;
-    else if (type == "RECEIVABLE") return MyMoneyAccount::Asset;
-    else if (type == "ASSET") return MyMoneyAccount::Asset;
-    else if (type == "PAYABLE") return MyMoneyAccount::Liability;
-    else if (type == "LIABILITY") return MyMoneyAccount::Liability;
-    else if (type == "CURRENCY") return MyMoneyAccount::Currency;
-    else if (type == "INCOME") return MyMoneyAccount::Income;
-    else if (type == "EXPENSE") return MyMoneyAccount::Expense;
-    else if (type == "STOCK") return MyMoneyAccount::Stock;
-    else if (type == "MUTUAL") return MyMoneyAccount::Stock;
-    else if (type == "EQUITY") return MyMoneyAccount::Equity;
+    if(type == "ROOT")              return (int)Account::Unknown;
+    else if (type == "BANK")        return (int)Account::Checkings;
+    else if (type == "CASH")        return (int)Account::Cash;
+    else if (type == "CREDIT")      return (int)Account::CreditCard;
+    else if (type == "INVEST")      return (int)Account::Investment;
+    else if (type == "RECEIVABLE")  return (int)Account::Asset;
+    else if (type == "ASSET")       return (int)Account::Asset;
+    else if (type == "PAYABLE")     return (int)Account::Liability;
+    else if (type == "LIABILITY")   return (int)Account::Liability;
+    else if (type == "CURRENCY")    return (int)Account::Currency;
+    else if (type == "INCOME")      return (int)Account::Income;
+    else if (type == "EXPENSE")     return (int)Account::Expense;
+    else if (type == "STOCK")       return (int)Account::Stock;
+    else if (type == "MUTUAL")      return (int)Account::Stock;
+    else if (type == "EQUITY")      return (int)Account::Equity;
     else return 99; // unknown
 }
 

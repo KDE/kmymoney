@@ -36,6 +36,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "csvwizard.h"
 #include "csvimporter.h"
 

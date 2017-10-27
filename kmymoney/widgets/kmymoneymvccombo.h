@@ -308,7 +308,7 @@ public:
     * Create a combo box that contains the entries "Pay to", "From" and
     * "  " for don't care.
     */
-  explicit KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
+  explicit KMyMoneyCashFlowCombo(QWidget *w = 0, eMyMoney::Account type = eMyMoney::Account::Asset);
 
   void setDirection(KMyMoneyRegister::CashFlowDirection dir);
   KMyMoneyRegister::CashFlowDirection direction() const {
@@ -427,7 +427,7 @@ class KMM_WIDGETS_EXPORT KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
 public:
   KMyMoneyOccurrenceCombo(QWidget* parent = 0);
 
-  MyMoneySchedule::occurrenceE currentItem() const;
+  eMyMoney::Schedule::Occurrence currentItem() const;
 };
 
 /**

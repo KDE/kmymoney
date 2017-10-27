@@ -40,7 +40,7 @@ void MyMoneyAccountTest::testEmptyConstructor()
 
   QVERIFY(a.id().isEmpty());
   QVERIFY(a.name().isEmpty());
-  QVERIFY(a.accountType() == MyMoneyAccount::UnknownAccountType);
+  QVERIFY(a.accountType() == eMyMoney::Account::Unknown);
   QVERIFY(a.openingDate() == QDate());
   QVERIFY(a.lastModified() == QDate());
   QVERIFY(a.lastReconciliationDate() == QDate());
@@ -55,7 +55,7 @@ void MyMoneyAccountTest::testConstructor()
   QString parent = "Parent";
   MyMoneyAccount r;
   MyMoneySplit s;
-  r.setAccountType(MyMoneyAccount::Asset);
+  r.setAccountType(eMyMoney::Account::Asset);
   r.setOpeningDate(QDate::currentDate());
   r.setLastModified(QDate::currentDate());
   r.setDescription("Desc");
@@ -71,7 +71,7 @@ void MyMoneyAccountTest::testConstructor()
 
   QVERIFY(a.id() == id);
   QVERIFY(a.institutionId().isEmpty());
-  QVERIFY(a.accountType() == MyMoneyAccount::Asset);
+  QVERIFY(a.accountType() == eMyMoney::Account::Asset);
   QVERIFY(a.openingDate() == QDate::currentDate());
   QVERIFY(a.lastModified() == QDate::currentDate());
   QVERIFY(a.number() == "465500");
@@ -100,14 +100,14 @@ void MyMoneyAccountTest::testSetFunctions()
   a.setLastModified(today);
   a.setDescription("Desc");
   a.setNumber("123456");
-  a.setAccountType(MyMoneyAccount::MoneyMarket);
+  a.setAccountType(eMyMoney::Account::MoneyMarket);
 
   QVERIFY(a.name() == "Account");
   QVERIFY(a.institutionId() == "Institution1");
   QVERIFY(a.lastModified() == today);
   QVERIFY(a.description() == "Desc");
   QVERIFY(a.number() == "123456");
-  QVERIFY(a.accountType() == MyMoneyAccount::MoneyMarket);
+  QVERIFY(a.accountType() == eMyMoney::Account::MoneyMarket);
 }
 
 void MyMoneyAccountTest::testCopyConstructor()
@@ -116,7 +116,7 @@ void MyMoneyAccountTest::testCopyConstructor()
   QString institutionid = "B000001";
   QString parent = "ParentAccount";
   MyMoneyAccount r;
-  r.setAccountType(MyMoneyAccount::Expense);
+  r.setAccountType(eMyMoney::Account::Expense);
   r.setOpeningDate(QDate::currentDate());
   r.setLastModified(QDate::currentDate());
   r.setName("Account");
@@ -133,7 +133,7 @@ void MyMoneyAccountTest::testCopyConstructor()
 
   QVERIFY(b.name() == "Account");
   QVERIFY(b.institutionId() == institutionid);
-  QVERIFY(b.accountType() == MyMoneyAccount::Expense);
+  QVERIFY(b.accountType() == eMyMoney::Account::Expense);
   QVERIFY(b.lastModified() == QDate::currentDate());
   QVERIFY(b.openingDate() == QDate::currentDate());
   QVERIFY(b.description() == "Desc1");
@@ -146,7 +146,7 @@ void MyMoneyAccountTest::testCopyConstructor()
 void MyMoneyAccountTest::testAssignmentConstructor()
 {
   MyMoneyAccount a;
-  a.setAccountType(MyMoneyAccount::Checkings);
+  a.setAccountType(eMyMoney::Account::Checkings);
   a.setName("Account");
   a.setInstitutionId("Inst1");
   a.setDescription("Bla");
@@ -162,7 +162,7 @@ void MyMoneyAccountTest::testAssignmentConstructor()
 
   QVERIFY(b.name() == "Account");
   QVERIFY(b.institutionId() == "Inst1");
-  QVERIFY(b.accountType() == MyMoneyAccount::Checkings);
+  QVERIFY(b.accountType() == eMyMoney::Account::Checkings);
   QVERIFY(b.lastModified() == QDate());
   QVERIFY(b.openingDate() == a.openingDate());
   QVERIFY(b.description() == "Bla");
@@ -195,7 +195,7 @@ void MyMoneyAccountTest::testAdjustBalance()
 void MyMoneyAccountTest::testSubAccounts()
 {
   MyMoneyAccount a;
-  a.setAccountType(MyMoneyAccount::Checkings);
+  a.setAccountType(eMyMoney::Account::Checkings);
 
   a.addAccountId("Subaccount1");
   QVERIFY(a.accountList().count() == 1);
@@ -217,7 +217,7 @@ void MyMoneyAccountTest::testEquality()
   a.setInstitutionId("I-ID");
   a.setOpeningDate(QDate::currentDate());
   a.setLastReconciliationDate(QDate::currentDate());
-  a.setAccountType(MyMoneyAccount::Asset);
+  a.setAccountType(eMyMoney::Account::Asset);
   a.setParentAccountId("P-ID");
   a.setId("A-ID");
   a.setCurrencyId("C-ID");
@@ -256,7 +256,7 @@ void MyMoneyAccountTest::testEquality()
   QVERIFY(!(b == a));
   b = a;
 
-  a.setAccountType(MyMoneyAccount::Liability);
+  a.setAccountType(eMyMoney::Account::Liability);
   QVERIFY(!(b == a));
   b = a;
 
@@ -289,7 +289,7 @@ void MyMoneyAccountTest::testWriteXML()
   QString parent = "Parent";
 
   MyMoneyAccount r;
-  r.setAccountType(MyMoneyAccount::Asset);
+  r.setAccountType(eMyMoney::Account::Asset);
   r.setOpeningDate(QDate::currentDate());
   r.setLastModified(QDate::currentDate());
   r.setDescription("Desc");
@@ -427,7 +427,7 @@ void MyMoneyAccountTest::testReadXML()
     QVERIFY(a.m_institution == "B000001");
     QVERIFY(a.m_number == "465500");
     QVERIFY(a.m_openingDate == QDate::currentDate());
-    QVERIFY(a.m_accountType == MyMoneyAccount::Asset);
+    QVERIFY(a.m_accountType == eMyMoney::Account::Asset);
     QVERIFY(a.m_description == "Desc");
     QVERIFY(a.accountList().count() == 2);
     QVERIFY(a.accountList()[0] == "A000002");
@@ -474,34 +474,34 @@ void MyMoneyAccountTest::testSetClosed()
 
 void MyMoneyAccountTest::specialAccountTypes_data()
 {
-  QTest::addColumn<MyMoneyAccount::accountTypeE>("accountType");
+  QTest::addColumn<eMyMoney::Account>("accountType");
   QTest::addColumn<bool>("incomeExpense");
   QTest::addColumn<bool>("assetLibility");
   QTest::addColumn<bool>("loan");
 
   // positive and null is debit
-  QTest::newRow("unknown") << MyMoneyAccount::UnknownAccountType << false << false << false;
-  QTest::newRow("checking") << MyMoneyAccount::Checkings << false << true << false;
-  QTest::newRow("savings") << MyMoneyAccount::Savings << false << true << false;
-  QTest::newRow("cash") << MyMoneyAccount::Cash << false << true << false;
-  QTest::newRow("investment") << MyMoneyAccount::Investment << false << true << false;
-  QTest::newRow("asset") << MyMoneyAccount::Asset << false << true << false;
-  QTest::newRow("currency") << MyMoneyAccount::Currency << false << true << false;
-  QTest::newRow("expense") << MyMoneyAccount::Expense << true << false << false;
-  QTest::newRow("moneymarket") << MyMoneyAccount::MoneyMarket << false << true << false;
-  QTest::newRow("certificatedeposit") << MyMoneyAccount::CertificateDep << false << true << false;
-  QTest::newRow("assetloan") << MyMoneyAccount::AssetLoan << false << true << true;
-  QTest::newRow("stock") << MyMoneyAccount::Stock << false << true << false;
-  QTest::newRow("creditcard") << MyMoneyAccount::CreditCard << false << true << false;
-  QTest::newRow("loan") << MyMoneyAccount::Loan << false << true << true;
-  QTest::newRow("liability") << MyMoneyAccount::Liability << false << true << false;
-  QTest::newRow("income") << MyMoneyAccount::Income << true << false << false;
-  QTest::newRow("equity") << MyMoneyAccount::Equity << false << false << false;
+  QTest::newRow("unknown") << eMyMoney::Account::Unknown << false << false << false;
+  QTest::newRow("checking") << eMyMoney::Account::Checkings << false << true << false;
+  QTest::newRow("savings") << eMyMoney::Account::Savings << false << true << false;
+  QTest::newRow("cash") << eMyMoney::Account::Cash << false << true << false;
+  QTest::newRow("investment") << eMyMoney::Account::Investment << false << true << false;
+  QTest::newRow("asset") << eMyMoney::Account::Asset << false << true << false;
+  QTest::newRow("currency") << eMyMoney::Account::Currency << false << true << false;
+  QTest::newRow("expense") << eMyMoney::Account::Expense << true << false << false;
+  QTest::newRow("moneymarket") << eMyMoney::Account::MoneyMarket << false << true << false;
+  QTest::newRow("certificatedeposit") << eMyMoney::Account::CertificateDep << false << true << false;
+  QTest::newRow("assetloan") << eMyMoney::Account::AssetLoan << false << true << true;
+  QTest::newRow("stock") << eMyMoney::Account::Stock << false << true << false;
+  QTest::newRow("creditcard") << eMyMoney::Account::CreditCard << false << true << false;
+  QTest::newRow("loan") << eMyMoney::Account::Loan << false << true << true;
+  QTest::newRow("liability") << eMyMoney::Account::Liability << false << true << false;
+  QTest::newRow("income") << eMyMoney::Account::Income << true << false << false;
+  QTest::newRow("equity") << eMyMoney::Account::Equity << false << false << false;
 }
 
 void MyMoneyAccountTest::specialAccountTypes()
 {
-  QFETCH(MyMoneyAccount::accountTypeE, accountType);
+  QFETCH(eMyMoney::Account, accountType);
   QFETCH(bool, incomeExpense);
   QFETCH(bool, assetLibility);
   QFETCH(bool, loan);

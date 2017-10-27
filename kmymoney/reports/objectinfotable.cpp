@@ -32,6 +32,12 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyprice.h"
+#include "mymoneypayee.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
@@ -141,7 +147,7 @@ void ObjectInfoTable::constructScheduleTable()
 
   QList<MyMoneySchedule> schedules;
 
-  schedules = file->scheduleList("", MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, m_config.fromDate(), m_config.toDate());
+  schedules = file->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, m_config.fromDate(), m_config.toDate(), false);
 
   QList<MyMoneySchedule>::const_iterator it_schedule = schedules.constBegin();
   while (it_schedule != schedules.constEnd()) {
@@ -246,7 +252,7 @@ void ObjectInfoTable::constructAccountTable()
     ReportAccount account = *it_account;
 
     if (m_config.includes(account)
-        && account.accountType() != MyMoneyAccount::Stock
+        && account.accountType() != eMyMoney::Account::Stock
         && !account.isClosed()) {
       MyMoneyMoney value;
       accountRow[ctRank] = QLatin1Char('0');
@@ -268,7 +274,7 @@ void ObjectInfoTable::constructAccountTable()
       accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       //investment accounts show the balances of all its subaccounts
-      if (account.accountType() == MyMoneyAccount::Investment) {
+      if (account.accountType() == eMyMoney::Account::Investment) {
         value = investmentBalance(account);
       } else {
         value = file->balance(account.id());

@@ -22,6 +22,8 @@
 
 #include <KLocalizedString>
 
+#include "mymoneyobject.h"
+#include "mymoneyfile.h"
 #include "mymoneyutils.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
@@ -239,18 +241,18 @@ bool onlineJobModel::removeRows(int row, int count, const QModelIndex & parent)
   return true;
 }
 
-void onlineJobModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void onlineJobModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
-  if (Q_LIKELY(objType != MyMoneyFile::notifyOnlineJob))
+  if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
     return;
   beginInsertRows(QModelIndex(), rowCount(), rowCount());
   m_jobIdList.append(obj->id());
   endInsertRows();
 }
 
-void onlineJobModel::slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void onlineJobModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
-  if (Q_LIKELY(objType != MyMoneyFile::notifyOnlineJob))
+  if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
     return;
 
   int row = m_jobIdList.indexOf(obj->id());
@@ -258,9 +260,9 @@ void onlineJobModel::slotObjectModified(MyMoneyFile::notificationObjectT objType
     emit dataChanged(index(row, 0), index(row, columnCount() - 1));
 }
 
-void onlineJobModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id)
+void onlineJobModel::slotObjectRemoved(eMyMoney::File::Object objType, const QString& id)
 {
-  if (Q_LIKELY(objType != MyMoneyFile::notifyOnlineJob))
+  if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
     return;
 
   int row = m_jobIdList.indexOf(id);

@@ -85,7 +85,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
   d->hideFormReasons.insert(QLatin1String("FormAvailable"));
 
   switch(acc.accountType()) {
-    case MyMoneyAccount::Investment:
+    case eMyMoney::Account::Investment:
       break;
 
     default:

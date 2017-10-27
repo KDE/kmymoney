@@ -143,7 +143,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
 {
   d->account = acc;
   switch(acc.accountType()) {
-    case MyMoneyAccount::Investment:
+    case eMyMoney::Account::Investment:
       break;
 
     default:
@@ -162,8 +162,8 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
   }
 
   d->showValuesInverted = false;
-  if(acc.accountGroup() == MyMoneyAccount::Liability
-  || acc.accountGroup() == MyMoneyAccount::Income) {
+  if(acc.accountGroup() == eMyMoney::Account::Liability
+  || acc.accountGroup() == eMyMoney::Account::Income) {
     d->showValuesInverted = true;
   }
 

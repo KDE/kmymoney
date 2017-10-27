@@ -121,7 +121,7 @@ void KMMPrintCheckPlugin::readCheckTemplate()
 bool KMMPrintCheckPlugin::canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  bool isACheck = file->account(selectedTransaction.split().accountId()).accountType() == MyMoneyAccount::Checkings && selectedTransaction.split().shares().isNegative();
+  bool isACheck = file->account(selectedTransaction.split().accountId()).accountType() == eMyMoney::Account::Checkings && selectedTransaction.split().shares().isNegative();
 
   return isACheck && d->m_printedTransactionIdList.contains(selectedTransaction.transaction().id()) == 0;
 }

@@ -36,6 +36,7 @@
 
 #include "kmymoney/converter/webpricequote.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "icons/icons.h"
 
 using namespace Icons;

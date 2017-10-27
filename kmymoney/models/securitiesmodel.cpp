@@ -28,6 +28,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+
 class SecuritiesModel::Private
 {
 public:
@@ -189,10 +192,10 @@ void SecuritiesModel::load()
   * Notify the model that an object has been added. An action is performed only if the object is a security.
   *
   */
-void SecuritiesModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void SecuritiesModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
   // check whether change is about security
-  if (objType != MyMoneyFile::notifySecurity)
+  if (objType != eMyMoney::File::Object::Security)
     return;
 
   // check that we're about to add security
@@ -222,9 +225,9 @@ void SecuritiesModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, 
   * Notify the model that an object has been modified. An action is performed only if the object is a security.
   *
   */
-void SecuritiesModel::slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
+void SecuritiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
-  if (objType != MyMoneyFile::notifySecurity)
+  if (objType != eMyMoney::File::Object::Security)
     return;
 
   // check that we're about to modify security
@@ -246,9 +249,9 @@ void SecuritiesModel::slotObjectModified(MyMoneyFile::notificationObjectT objTyp
   * Notify the model that an object has been removed. An action is performed only if the object is an account.
   *
   */
-void SecuritiesModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id)
+void SecuritiesModel::slotObjectRemoved(eMyMoney::File::Object objType, const QString& id)
 {
-  if (objType != MyMoneyFile::notifySecurity)
+  if (objType != eMyMoney::File::Object::Security)
     return;
 
   const auto indexList = match(index(0, 0), Qt::UserRole, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));

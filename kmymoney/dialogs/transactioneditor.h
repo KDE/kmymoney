@@ -155,7 +155,7 @@ public:
   QString  m_memoText;
   QString  m_scheduleInfo;
 
-  MyMoneySchedule::paymentTypeE m_paymentMethod;
+  eMyMoney::Schedule::PaymentType m_paymentMethod;
 
 public slots:
   void slotReloadEditWidgets();
@@ -271,7 +271,7 @@ signals:
     * This signal is sent out, if the user decides to schedule the transaction @a t
     * rather then adding it to the ledger right away.
     */
-  void scheduleTransaction(const MyMoneyTransaction& t, MyMoneySchedule::occurrenceE occurrence);
+  void scheduleTransaction(const MyMoneyTransaction& t, eMyMoney::Schedule::Occurrence occurrence);
 
   /**
    * This signal is sent out, if the user double clicks the number field

@@ -151,9 +151,9 @@ public:
     * default arguments.
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& = QString(),
-      const MyMoneySchedule::typeE = MyMoneySchedule::TYPE_ANY,
-      const MyMoneySchedule::occurrenceE = MyMoneySchedule::OCCUR_ANY,
-      const MyMoneySchedule::paymentTypeE = MyMoneySchedule::STYPE_ANY,
+      const eMyMoney::Schedule::Type = eMyMoney::Schedule::Type::Any,
+      const eMyMoney::Schedule::Occurrence = eMyMoney::Schedule::Occurrence::Any,
+      const eMyMoney::Schedule::PaymentType = eMyMoney::Schedule::PaymentType::Any,
       const QDate& = QDate(),
       const QDate& = QDate(),
       const bool = false) const = 0;

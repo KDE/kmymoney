@@ -63,27 +63,27 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 
   // setup standard accounts
   MyMoneyAccount acc_l;
-  acc_l.setAccountType(MyMoneyAccount::Liability);
+  acc_l.setAccountType(eMyMoney::Account::Liability);
   acc_l.setName("Liability");
   MyMoneyAccount liability(STD_ACC_LIABILITY, acc_l);
 
   MyMoneyAccount acc_a;
-  acc_a.setAccountType(MyMoneyAccount::Asset);
+  acc_a.setAccountType(eMyMoney::Account::Asset);
   acc_a.setName("Asset");
   MyMoneyAccount asset(STD_ACC_ASSET, acc_a);
 
   MyMoneyAccount acc_e;
-  acc_e.setAccountType(MyMoneyAccount::Expense);
+  acc_e.setAccountType(eMyMoney::Account::Expense);
   acc_e.setName("Expense");
   MyMoneyAccount expense(STD_ACC_EXPENSE, acc_e);
 
   MyMoneyAccount acc_i;
-  acc_i.setAccountType(MyMoneyAccount::Income);
+  acc_i.setAccountType(eMyMoney::Account::Income);
   acc_i.setName("Income");
   MyMoneyAccount income(STD_ACC_INCOME, acc_i);
 
   MyMoneyAccount acc_q;
-  acc_q.setAccountType(MyMoneyAccount::Equity);
+  acc_q.setAccountType(eMyMoney::Account::Equity);
   acc_q.setName("Equity");
   MyMoneyAccount equity(STD_ACC_EQUITY, acc_q);
 
@@ -766,7 +766,7 @@ void MyMoneySeqAccessMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccoun
     oldParent = m_accountList.find(account.parentAccountId());
   }
 
-  if (account.accountType() == MyMoneyAccount::Stock && parent.accountType() != MyMoneyAccount::Investment)
+  if (account.accountType() == eMyMoney::Account::Stock && parent.accountType() != eMyMoney::Account::Investment)
     throw MYMONEYEXCEPTION("Cannot move a stock acocunt into a non-investment account");
 
   newParent = m_accountList.find(parent.id());
@@ -789,7 +789,7 @@ void MyMoneySeqAccessMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccoun
 
 #if 0
   // make sure the type is the same as the new parent. This does not work for stock and investment
-  if (account.accountType() != MyMoneyAccount::Stock && account.accountType() != MyMoneyAccount::Investment)
+  if (account.accountType() != eMyMoney::Account::Stock && account.accountType() != eMyMoney::Account::Investment)
     (*childAccount).setAccountType((*newParent).accountType());
 #endif
 }
@@ -1029,8 +1029,8 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
   MyMoneyAccount acc = m_accountList[account];
   MyMoneyTransactionFilter filter;
 
-  if (acc.accountGroup() == MyMoneyAccount::Income
-      || acc.accountGroup() == MyMoneyAccount::Expense)
+  if (acc.accountGroup() == eMyMoney::Account::Income
+      || acc.accountGroup() == eMyMoney::Account::Expense)
     filter.addCategory(account);
   else
     filter.addAccount(account);
@@ -1400,9 +1400,9 @@ const MyMoneySchedule MyMoneySeqAccessMgr::schedule(const QString& id) const
 
 const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
   const QString& accountId,
-  const MyMoneySchedule::typeE type,
-  const MyMoneySchedule::occurrenceE occurrence,
-  const MyMoneySchedule::paymentTypeE paymentType,
+  const eMyMoney::Schedule::Type type,
+  const eMyMoney::Schedule::Occurrence occurrence,
+  const eMyMoney::Schedule::PaymentType paymentType,
   const QDate& startDate,
   const QDate& endDate,
   const bool overdue) const
@@ -1415,19 +1415,19 @@ const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
   for (pos = m_scheduleList.begin(); pos != m_scheduleList.end(); ++pos) {
     // qDebug("  '%s'", qPrintable((*pos).id()));
 
-    if (type != MyMoneySchedule::TYPE_ANY) {
+    if (type != eMyMoney::Schedule::Type::Any) {
       if (type != (*pos).type()) {
         continue;
       }
     }
 
-    if (occurrence != MyMoneySchedule::OCCUR_ANY) {
+    if (occurrence != eMyMoney::Schedule::Occurrence::Any) {
       if (occurrence != (*pos).occurrence()) {
         continue;
       }
     }
 
-    if (paymentType != MyMoneySchedule::STYPE_ANY) {
+    if (paymentType != eMyMoney::Schedule::PaymentType::Any) {
       if (paymentType != (*pos).paymentType()) {
         continue;
       }
@@ -1514,13 +1514,13 @@ const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleListEx(int scheduleTyp
     return list;
 
   for (pos = m_scheduleList.begin(); pos != m_scheduleList.end(); ++pos) {
-    if (scheduleTypes && !(scheduleTypes & (*pos).type()))
+    if (scheduleTypes && !(scheduleTypes & (int)(*pos).type()))
       continue;
 
-    if (scheduleOcurrences && !(scheduleOcurrences & (*pos).occurrence()))
+    if (scheduleOcurrences && !(scheduleOcurrences & (int)(*pos).occurrence()))
       continue;
 
-    if (schedulePaymentTypes && !(schedulePaymentTypes & (*pos).paymentType()))
+    if (schedulePaymentTypes && !(schedulePaymentTypes & (int)(*pos).paymentType()))
       continue;
 
     if ((*pos).paymentDates(date, date).count() == 0)

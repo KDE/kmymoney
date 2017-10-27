@@ -36,6 +36,7 @@
 #include "kmymoneyedit.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneyutils.h"
@@ -93,7 +94,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
     setStartId(Page_PreviousPostpone);
 
     MyMoneyMoney factor(1, 1);
-    if (d->m_account.accountGroup() == MyMoneyAccount::Liability)
+    if (d->m_account.accountGroup() == eMyMoney::Account::Liability)
       factor = -factor;
 
     startBalance = MyMoneyMoney(value) * factor;
@@ -168,7 +169,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
   // start balance = end balance - sum(all cleared transactions
   //                                        up to statement date)
   MyMoneyTransactionFilter filter(d->m_account.id());
-  filter.addState(MyMoneyTransactionFilter::notReconciled);
+  filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
   filter.setReportAllSplits(true);
 
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
@@ -185,14 +186,14 @@ void KEndingBalanceDlg::slotUpdateBalances()
     m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", QLocale().toString(oldestTransactionDate)));
   }
 
-  filter.addState(MyMoneyTransactionFilter::cleared);
+  filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
 
   // retrieve the list from the engine to calculate the starting and ending balance
   MyMoneyFile::instance()->transactionList(transactionList, filter);
 
   MyMoneyMoney balance = MyMoneyFile::instance()->balance(d->m_account.id());
   MyMoneyMoney factor(1, 1);
-  if (d->m_account.accountGroup() == MyMoneyAccount::Liability)
+  if (d->m_account.accountGroup() == eMyMoney::Account::Liability)
     factor = -factor;
 
   MyMoneyMoney endBalance, startBalance;
@@ -273,7 +274,7 @@ const MyMoneyMoney KEndingBalanceDlg::previousBalance() const
 
 const MyMoneyMoney KEndingBalanceDlg::adjustedReturnValue(const MyMoneyMoney& v) const
 {
-  return d->m_account.accountGroup() == MyMoneyAccount::Liability ? -v : v;
+  return d->m_account.accountGroup() == eMyMoney::Account::Liability ? -v : v;
 }
 
 void KEndingBalanceDlg::slotReloadEditWidgets()
@@ -291,8 +292,8 @@ void KEndingBalanceDlg::slotReloadEditWidgets()
 
   // a user request to show all categories in both selectors due to a valid use case.
   AccountSet aSet;
-  aSet.addAccountGroup(MyMoneyAccount::Expense);
-  aSet.addAccountGroup(MyMoneyAccount::Income);
+  aSet.addAccountGroup(eMyMoney::Account::Expense);
+  aSet.addAccountGroup(eMyMoney::Account::Income);
   //FIXME: port
   aSet.load(m_interestChargeCheckings->m_interestCategoryEdit->selector());
   aSet.load(m_interestChargeCheckings->m_chargesCategoryEdit->selector());

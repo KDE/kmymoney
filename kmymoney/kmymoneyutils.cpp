@@ -51,6 +51,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
 #include "mymoneyforecast.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
@@ -66,68 +67,68 @@ KMyMoneyUtils::~KMyMoneyUtils()
 {
 }
 
-const QString KMyMoneyUtils::accountTypeToString(const MyMoneyAccount::accountTypeE accountType)
+const QString KMyMoneyUtils::accountTypeToString(const eMyMoney::Account accountType)
 {
   return MyMoneyAccount::accountTypeToString(accountType);
 }
 
-MyMoneyAccount::accountTypeE KMyMoneyUtils::stringToAccountType(const QString& type)
+eMyMoney::Account KMyMoneyUtils::stringToAccountType(const QString& type)
 {
-  MyMoneyAccount::accountTypeE rc = MyMoneyAccount::UnknownAccountType;
+  eMyMoney::Account rc = eMyMoney::Account::Unknown;
   QString tmp = type.toLower();
 
   if (tmp == i18n("Checking").toLower())
-    rc = MyMoneyAccount::Checkings;
+    rc = eMyMoney::Account::Checkings;
   else if (tmp == i18n("Savings").toLower())
-    rc = MyMoneyAccount::Savings;
+    rc = eMyMoney::Account::Savings;
   else if (tmp == i18n("Credit Card").toLower())
-    rc = MyMoneyAccount::CreditCard;
+    rc = eMyMoney::Account::CreditCard;
   else if (tmp == i18n("Cash").toLower())
-    rc = MyMoneyAccount::Cash;
+    rc = eMyMoney::Account::Cash;
   else if (tmp == i18n("Loan").toLower())
-    rc = MyMoneyAccount::Loan;
+    rc = eMyMoney::Account::Loan;
   else if (tmp == i18n("Certificate of Deposit").toLower())
-    rc = MyMoneyAccount::CertificateDep;
+    rc = eMyMoney::Account::CertificateDep;
   else if (tmp == i18n("Investment").toLower())
-    rc = MyMoneyAccount::Investment;
+    rc = eMyMoney::Account::Investment;
   else if (tmp == i18n("Money Market").toLower())
-    rc = MyMoneyAccount::MoneyMarket;
+    rc = eMyMoney::Account::MoneyMarket;
   else if (tmp == i18n("Asset").toLower())
-    rc = MyMoneyAccount::Asset;
+    rc = eMyMoney::Account::Asset;
   else if (tmp == i18n("Liability").toLower())
-    rc = MyMoneyAccount::Liability;
+    rc = eMyMoney::Account::Liability;
   else if (tmp == i18n("Currency").toLower())
-    rc = MyMoneyAccount::Currency;
+    rc = eMyMoney::Account::Currency;
   else if (tmp == i18n("Income").toLower())
-    rc = MyMoneyAccount::Income;
+    rc = eMyMoney::Account::Income;
   else if (tmp == i18n("Expense").toLower())
-    rc = MyMoneyAccount::Expense;
+    rc = eMyMoney::Account::Expense;
   else if (tmp == i18n("Investment Loan").toLower())
-    rc = MyMoneyAccount::AssetLoan;
+    rc = eMyMoney::Account::AssetLoan;
   else if (tmp == i18n("Stock").toLower())
-    rc = MyMoneyAccount::Stock;
+    rc = eMyMoney::Account::Stock;
   else if (tmp == i18n("Equity").toLower())
-    rc = MyMoneyAccount::Equity;
+    rc = eMyMoney::Account::Equity;
 
   return rc;
 }
 
-const QString KMyMoneyUtils::occurrenceToString(const MyMoneySchedule::occurrenceE occurrence)
+const QString KMyMoneyUtils::occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence)
 {
   return i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(occurrence).toLatin1());
 }
 
-const QString KMyMoneyUtils::paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType)
+const QString KMyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
 {
   return i18nc("Scheduled Transaction payment type", MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
 }
 
-const QString KMyMoneyUtils::weekendOptionToString(MyMoneySchedule::weekendOptionE weekendOption)
+const QString KMyMoneyUtils::weekendOptionToString(eMyMoney::Schedule::WeekendOption weekendOption)
 {
   return i18n(MyMoneySchedule::weekendOptionToString(weekendOption).toLatin1());
 }
 
-const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
+const QString KMyMoneyUtils::scheduleTypeToString(eMyMoney::Schedule::Type type)
 {
   return i18nc("Scheduled transaction type", MyMoneySchedule::scheduleTypeToString(type).toLatin1());
 }
@@ -301,7 +302,7 @@ const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
         return *it_s;
       }
       // if we have a reference to an investment account, we remember it here
-      if (acc.accountType() == MyMoneyAccount::Investment)
+      if (acc.accountType() == eMyMoney::Account::Investment)
         investmentAccountSplit = *it_s;
     }
   }
@@ -336,10 +337,10 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
   MyMoneyAccount a, b;
   a = MyMoneyFile::instance()->account(ida);
   b = MyMoneyFile::instance()->account(idb);
-  if ((a.accountGroup() == MyMoneyAccount::Asset
-       || a.accountGroup() == MyMoneyAccount::Liability)
-      && (b.accountGroup() == MyMoneyAccount::Asset
-          || b.accountGroup() == MyMoneyAccount::Liability))
+  if ((a.accountGroup() == eMyMoney::Account::Asset
+       || a.accountGroup() == eMyMoney::Account::Liability)
+      && (b.accountGroup() == eMyMoney::Account::Asset
+          || b.accountGroup() == eMyMoney::Account::Liability))
     return Transfer;
   return Normal;
 }
@@ -496,7 +497,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
   MyMoneyTransaction t = schedule.transaction();
 
   try {
-    if (schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
+    if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
       calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (const MyMoneyException &e) {
@@ -593,10 +594,10 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
     MyMoneyAccount acc = file->account((*it_s).accountId());
     if ((*it_s).id() == split.id()) {
       security = file->security(acc.currencyId());
-    } else if (acc.accountGroup() == MyMoneyAccount::Expense) {
+    } else if (acc.accountGroup() == eMyMoney::Account::Expense) {
       feeSplits.append(*it_s);
       // feeAmount += (*it_s).value();
-    } else if (acc.accountGroup() == MyMoneyAccount::Income) {
+    } else if (acc.accountGroup() == eMyMoney::Account::Income) {
       interestSplits.append(*it_s);
       // interestAmount += (*it_s).value();
     } else {

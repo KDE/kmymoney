@@ -22,6 +22,7 @@
 #include "ui_securitydlg.h"
 
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 
 SecurityDlg::SecurityDlg() : ui(new Ui::SecurityDlg)
 {

@@ -55,6 +55,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneyschedule.h"
 #include "mymoneyfile.h"
+#include "mymoneypayee.h"
 
 using namespace Icons;
 
@@ -222,23 +223,23 @@ void KScheduledView::refresh(bool full, const QString& schedId)
 
       QTreeWidgetItem* parent = 0;
       switch (schedData.type()) {
-        case MyMoneySchedule::TYPE_ANY:
+        case eMyMoney::Schedule::Type::Any:
           // Should we display an error ?
           // We just sort it as bill and fall through here
 
-        case MyMoneySchedule::TYPE_BILL:
+        case eMyMoney::Schedule::Type::Bill:
           parent = itemBills;
           break;
 
-        case MyMoneySchedule::TYPE_DEPOSIT:
+        case eMyMoney::Schedule::Type::Deposit:
           parent = itemDeposits;
           break;
 
-        case MyMoneySchedule::TYPE_TRANSFER:
+        case eMyMoney::Schedule::Type::Transfer:
           parent = itemTransfers;
           break;
 
-        case MyMoneySchedule::TYPE_LOANPAYMENT:
+        case eMyMoney::Schedule::Type::LoanPayment:
           parent = itemLoans;
           break;
 
@@ -323,20 +324,20 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     MyMoneyAccount acc;
 
     switch (schedule.type()) {
-      case MyMoneySchedule::TYPE_DEPOSIT:
+      case eMyMoney::Schedule::Type::Deposit:
         if (s1.value().isNegative())
           split = s2;
         else
           split = s1;
         break;
 
-      case MyMoneySchedule::TYPE_LOANPAYMENT:
+      case eMyMoney::Schedule::Type::LoanPayment:
         for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
           acc = MyMoneyFile::instance()->account((*it_s).accountId());
-          if (acc.accountGroup() == MyMoneyAccount::Asset
-              || acc.accountGroup() == MyMoneyAccount::Liability) {
-            if (acc.accountType() != MyMoneyAccount::Loan
-                && acc.accountType() != MyMoneyAccount::AssetLoan) {
+          if (acc.accountGroup() == eMyMoney::Account::Asset
+              || acc.accountGroup() == eMyMoney::Account::Liability) {
+            if (acc.accountType() != eMyMoney::Account::Loan
+                && acc.accountType() != eMyMoney::Account::AssetLoan) {
               split = *it_s;
               break;
             }

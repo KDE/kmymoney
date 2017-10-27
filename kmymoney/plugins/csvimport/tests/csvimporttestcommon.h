@@ -16,10 +16,11 @@ email                : lukasz.wojnilowicz@gmail.com
 #ifndef CSVIMPORTTESTCOMMON_H
 #define CSVIMPORTTESTCOMMON_H
 
-#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 
 class QString;
+class QDate;
 extern void writeStatementToCSV(const QString& content, const QString& filename);
 extern QString csvDataset(const int set);
-extern QString makeAccount(const QString& name, const QString& number, MyMoneyAccount::accountTypeE type, const QDate& open, const QString& parent);
+extern QString makeAccount(const QString& name, const QString& number, eMyMoney::Account type, const QDate& open, const QString& parent);
 #endif

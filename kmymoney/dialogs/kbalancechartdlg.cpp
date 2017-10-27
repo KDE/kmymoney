@@ -97,7 +97,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingForecast(true);
   reportCfg.setIncludingBudgetActuals(true);
-  if (account.accountType() == MyMoneyAccount::Investment) {
+  if (account.accountType() == eMyMoney::Account::Investment) {
     QStringList::const_iterator it_a;
     for (it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a)
       reportCfg.addAccount(*it_a);
@@ -118,7 +118,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   bool haveMaxCredit = false;
   MyMoneyMoney minBalance, maxCredit;
   MyMoneyMoney factor(1, 1);
-  if (account.accountGroup() == MyMoneyAccount::Asset)
+  if (account.accountGroup() == eMyMoney::Account::Asset)
     factor = -factor;
 
   if (!account.value("maxCreditEarly").isEmpty()) {

@@ -105,7 +105,7 @@ void SimpleLedgerView::init()
   connect(m_kmymoneyview, &KMyMoneyView::fileClosed, this, &SimpleLedgerView::closeLedgers);
   connect(m_kmymoneyview, &KMyMoneyView::fileOpened, this, &SimpleLedgerView::openFavoriteLedgers);
 
-  d->accountsModel->addAccountGroup(QVector<MyMoneyAccount::_accountTypeE> {MyMoneyAccount::Asset, MyMoneyAccount::Liability, MyMoneyAccount::Equity});
+  d->accountsModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Equity});
 
   d->accountsModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();

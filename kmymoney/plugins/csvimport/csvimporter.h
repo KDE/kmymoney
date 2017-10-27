@@ -283,7 +283,7 @@ public:
   /**
   * This method will try to detect account from csv header.
   */
-  QList<MyMoneyAccount> findAccounts(const QList<MyMoneyAccount::accountTypeE> &accountTypes, const QString &statementHeader);
+  QList<MyMoneyAccount> findAccounts(const QList<eMyMoney::Account> &accountTypes, const QString &statementHeader);
   bool detectAccount(MyMoneyStatement &st);
 
   /**

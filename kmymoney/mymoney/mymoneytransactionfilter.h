@@ -63,18 +63,6 @@ public:
 
   // Make sure to keep the following enum valus in sync with the values
   // used by the GUI (for KMyMoney in kfindtransactiondlgdecl.ui)
-  enum stateOptionE {
-    allStates = 0,
-    notReconciled,
-    cleared,
-    reconciled,
-    frozen,
-    // insert new constants above of this line
-    stateOptionCount
-  };
-
-  // Make sure to keep the following enum valus in sync with the values
-  // used by the GUI (for KMyMoney in kfindtransactiondlgdecl.ui)
   enum validityOptionE {
     anyValidity = 0,
     valid,

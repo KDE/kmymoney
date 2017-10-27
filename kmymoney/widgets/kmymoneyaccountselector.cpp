@@ -43,8 +43,10 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
+using namespace eMyMoney;
 
 kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlags flags, const bool createButtons) :
     KMyMoneySelector(parent, flags),
@@ -121,7 +123,7 @@ void kMyMoneyAccountSelector::setSelectionMode(QTreeWidget::SelectionMode mode)
   KMyMoneySelector::setSelectionMode(mode);
 }
 
-QStringList kMyMoneyAccountSelector::accountList(const  QList<MyMoneyAccount::accountTypeE>& filterList) const
+QStringList kMyMoneyAccountSelector::accountList(const  QList<Account>& filterList) const
 {
   QStringList    list;
   QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
@@ -173,42 +175,42 @@ AccountSet::AccountSet() :
 {
 }
 
-void AccountSet::addAccountGroup(MyMoneyAccount::accountTypeE group)
+void AccountSet::addAccountGroup(Account group)
 {
-  if (group == MyMoneyAccount::Asset) {
-    m_typeList << MyMoneyAccount::Checkings;
-    m_typeList << MyMoneyAccount::Savings;
-    m_typeList << MyMoneyAccount::Cash;
-    m_typeList << MyMoneyAccount::AssetLoan;
-    m_typeList << MyMoneyAccount::CertificateDep;
-    m_typeList << MyMoneyAccount::Investment;
-    m_typeList << MyMoneyAccount::Stock;
-    m_typeList << MyMoneyAccount::MoneyMarket;
-    m_typeList << MyMoneyAccount::Asset;
-    m_typeList << MyMoneyAccount::Currency;
+  if (group == Account::Asset) {
+    m_typeList << Account::Checkings;
+    m_typeList << Account::Savings;
+    m_typeList << Account::Cash;
+    m_typeList << Account::AssetLoan;
+    m_typeList << Account::CertificateDep;
+    m_typeList << Account::Investment;
+    m_typeList << Account::Stock;
+    m_typeList << Account::MoneyMarket;
+    m_typeList << Account::Asset;
+    m_typeList << Account::Currency;
 
-  } else if (group == MyMoneyAccount::Liability) {
-    m_typeList << MyMoneyAccount::CreditCard;
-    m_typeList << MyMoneyAccount::Loan;
-    m_typeList << MyMoneyAccount::Liability;
+  } else if (group == Account::Liability) {
+    m_typeList << Account::CreditCard;
+    m_typeList << Account::Loan;
+    m_typeList << Account::Liability;
 
-  } else if (group == MyMoneyAccount::Income) {
-    m_typeList << MyMoneyAccount::Income;
+  } else if (group == Account::Income) {
+    m_typeList << Account::Income;
 
-  } else if (group == MyMoneyAccount::Expense) {
-    m_typeList << MyMoneyAccount::Expense;
+  } else if (group == Account::Expense) {
+    m_typeList << Account::Expense;
 
-  } else if (group == MyMoneyAccount::Equity) {
-    m_typeList << MyMoneyAccount::Equity;
+  } else if (group == Account::Equity) {
+    m_typeList << Account::Equity;
   }
 }
 
-void AccountSet::addAccountType(MyMoneyAccount::accountTypeE type)
+void AccountSet::addAccountType(Account type)
 {
   m_typeList << type;
 }
 
-void AccountSet::removeAccountType(MyMoneyAccount::accountTypeE type)
+void AccountSet::removeAccountType(Account type)
 {
   int index = m_typeList.indexOf(type);
   if (index != -1) {
@@ -235,30 +237,30 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
     if (!list.isEmpty())
       currentId = list.first();
   }
-  if (m_typeList.contains(MyMoneyAccount::Checkings)
-      || m_typeList.contains(MyMoneyAccount::Savings)
-      || m_typeList.contains(MyMoneyAccount::Cash)
-      || m_typeList.contains(MyMoneyAccount::AssetLoan)
-      || m_typeList.contains(MyMoneyAccount::CertificateDep)
-      || m_typeList.contains(MyMoneyAccount::Investment)
-      || m_typeList.contains(MyMoneyAccount::Stock)
-      || m_typeList.contains(MyMoneyAccount::MoneyMarket)
-      || m_typeList.contains(MyMoneyAccount::Asset)
-      || m_typeList.contains(MyMoneyAccount::Currency))
+  if (m_typeList.contains(Account::Checkings)
+      || m_typeList.contains(Account::Savings)
+      || m_typeList.contains(Account::Cash)
+      || m_typeList.contains(Account::AssetLoan)
+      || m_typeList.contains(Account::CertificateDep)
+      || m_typeList.contains(Account::Investment)
+      || m_typeList.contains(Account::Stock)
+      || m_typeList.contains(Account::MoneyMarket)
+      || m_typeList.contains(Account::Asset)
+      || m_typeList.contains(Account::Currency))
     typeMask |= KMyMoneyUtils::asset;
 
-  if (m_typeList.contains(MyMoneyAccount::CreditCard)
-      || m_typeList.contains(MyMoneyAccount::Loan)
-      || m_typeList.contains(MyMoneyAccount::Liability))
+  if (m_typeList.contains(Account::CreditCard)
+      || m_typeList.contains(Account::Loan)
+      || m_typeList.contains(Account::Liability))
     typeMask |= KMyMoneyUtils::liability;
 
-  if (m_typeList.contains(MyMoneyAccount::Income))
+  if (m_typeList.contains(Account::Income))
     typeMask |= KMyMoneyUtils::income;
 
-  if (m_typeList.contains(MyMoneyAccount::Expense))
+  if (m_typeList.contains(Account::Expense))
     typeMask |= KMyMoneyUtils::expense;
 
-  if (m_typeList.contains(MyMoneyAccount::Equity))
+  if (m_typeList.contains(Account::Equity))
     typeMask |= KMyMoneyUtils::equity;
 
   selector->clear();

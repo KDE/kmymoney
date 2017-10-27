@@ -105,15 +105,15 @@ private slots:
   void testVatAssignment();
 
 private slots:
-  void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
-  void objectModified(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
-  void objectRemoved(MyMoneyFile::notificationObjectT type, const QString& id);
+  void objectAdded(eMyMoney::File::Object type, const MyMoneyObject * const obj);
+  void objectModified(eMyMoney::File::Object type, const MyMoneyObject * const obj);
+  void objectRemoved(eMyMoney::File::Object type, const QString& id);
   void balanceChanged(const MyMoneyAccount& account);
   void valueChanged(const MyMoneyAccount& account);
 
 private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
-  void testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
+  void testReparentEquity(QList<eMyMoney::Account>& list, MyMoneyAccount& parent);
   void clearObjectLists();
   void AddOneAccount();
 

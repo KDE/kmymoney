@@ -21,6 +21,7 @@
 
 #include "ui_currenciesdlg.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 
 CurrenciesDlg::CurrenciesDlg() : ui(new Ui::CurrenciesDlg)
 {

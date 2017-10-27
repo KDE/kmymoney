@@ -348,7 +348,7 @@ int KNewLoanWizard::calculateLoan()
   // FIXME: for now, we only support periodic compounding
   calc.setDisc();
 
-  PF = MyMoneySchedule::eventsPerYear(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()));
+  PF = MyMoneySchedule::eventsPerYear(eMyMoney::Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt()));
   if (PF == 0)
     return 0;
   calc.setPF(PF);
@@ -512,23 +512,23 @@ void KNewLoanWizard::loadAccountList()
   AccountSet interestSet, assetSet;
 
   if (field("borrowButton").toBool()) {
-    interestSet.addAccountType(MyMoneyAccount::Expense);
+    interestSet.addAccountType(eMyMoney::Account::Expense);
   } else {
-    interestSet.addAccountType(MyMoneyAccount::Income);
+    interestSet.addAccountType(eMyMoney::Account::Income);
   }
   if (m_interestCategoryPage)
     interestSet.load(m_interestCategoryPage->m_interestAccountEdit);
 
-  assetSet.addAccountType(MyMoneyAccount::Checkings);
-  assetSet.addAccountType(MyMoneyAccount::Savings);
-  assetSet.addAccountType(MyMoneyAccount::Cash);
-  assetSet.addAccountType(MyMoneyAccount::Asset);
-  assetSet.addAccountType(MyMoneyAccount::Currency);
+  assetSet.addAccountType(eMyMoney::Account::Checkings);
+  assetSet.addAccountType(eMyMoney::Account::Savings);
+  assetSet.addAccountType(eMyMoney::Account::Cash);
+  assetSet.addAccountType(eMyMoney::Account::Asset);
+  assetSet.addAccountType(eMyMoney::Account::Currency);
   if (m_assetAccountPage)
     assetSet.load(m_assetAccountPage->m_assetAccountEdit);
 
-  assetSet.addAccountType(MyMoneyAccount::CreditCard);
-  assetSet.addAccountType(MyMoneyAccount::Liability);
+  assetSet.addAccountType(eMyMoney::Account::CreditCard);
+  assetSet.addAccountType(eMyMoney::Account::Liability);
   if (m_schedulePage)
     assetSet.load(m_schedulePage->m_paymentAccountEdit);
 }
@@ -608,9 +608,9 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
 MyMoneySchedule KNewLoanWizard::schedule() const
 {
   MyMoneySchedule sched(field("nameEdit").toString(),
-                        MyMoneySchedule::TYPE_LOANPAYMENT,
-                        MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()), 1,
-                        MyMoneySchedule::STYPE_OTHER,
+                        eMyMoney::Schedule::Type::LoanPayment,
+                        eMyMoney::Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt()), 1,
+                        eMyMoney::Schedule::PaymentType::Other,
                         QDate(),
                         QDate(),
                         false,

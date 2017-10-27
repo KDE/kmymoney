@@ -530,7 +530,7 @@ public:
     *
     * @param type the account group to add to the allowed groups list
     */
-  void addAccountGroup(MyMoneyAccount::accountTypeE type);
+  void addAccountGroup(eMyMoney::Account type);
 
   /**
     * This method returns whether an account group filter has been set,
@@ -539,7 +539,7 @@ public:
     * @param list list to append account groups into
     * @return return true if an account group filter has been set
     */
-  bool accountGroups(QList<MyMoneyAccount::accountTypeE>& list) const;
+  bool accountGroups(QList<eMyMoney::Account>& list) const;
 
   /**
     * This method returns whether the specified account group
@@ -548,7 +548,7 @@ public:
     * @param type group to append account groups into
     * @return return true if an account group filter has been set
     */
-  bool includesAccountGroup(MyMoneyAccount::accountTypeE type) const;
+  bool includesAccountGroup(eMyMoney::Account type) const;
 
   /**
     * This method is used to test whether a specific account
@@ -721,7 +721,7 @@ private:
     * is applied to the individual splits AFTER a transaction has been
     * matched using the underlying filter.
     */
-  QList<MyMoneyAccount::accountTypeE> m_accountGroups;
+  QList<eMyMoney::Account> m_accountGroups;
   /**
     * Whether an account group filter has been set (see m_accountGroups)
     */

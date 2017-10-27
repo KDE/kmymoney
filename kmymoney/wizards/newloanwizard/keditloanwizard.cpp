@@ -44,6 +44,7 @@
 #include "kmymoneyedit.h"
 #include "kmymoneyaccountselector.h"
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 
 KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent) :
     KNewLoanWizard(parent)
@@ -126,7 +127,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   m_interestEditPage->m_newInterestRateEdit->setPrecision(3);
   m_interestEditPage->m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
 
-  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentIndex(m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->findData(QVariant(m_schedule.occurrencePeriod()), Qt::UserRole, Qt::MatchExactly));
+  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentIndex(m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->findData(QVariant((int)m_schedule.occurrencePeriod()), Qt::UserRole, Qt::MatchExactly));
   m_durationPage->updateTermWidgets(m_account.term());
 
   // the base payment (amortization and interest) is determined
@@ -444,7 +445,7 @@ const MyMoneySchedule KEditLoanWizard::schedule() const
 {
   MyMoneySchedule sched = m_schedule;
   sched.setTransaction(transaction());
-  sched.setOccurrence(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()));
+  sched.setOccurrence(eMyMoney::Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt()));
   if (field("nextDueDateEdit").toDate() < m_schedule.startDate())
     sched.setStartDate(field("nextDueDateEdit").toDate());
 

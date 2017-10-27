@@ -96,23 +96,23 @@ void KAccountSelectDlg::slotReloadWidget()
 {
   AccountSet set;
   if (m_accountType & KMyMoneyUtils::asset)
-    set.addAccountGroup(MyMoneyAccount::Asset);
+    set.addAccountGroup(eMyMoney::Account::Asset);
   if (m_accountType & KMyMoneyUtils::liability)
-    set.addAccountGroup(MyMoneyAccount::Liability);
+    set.addAccountGroup(eMyMoney::Account::Liability);
   if (m_accountType & KMyMoneyUtils::income)
-    set.addAccountGroup(MyMoneyAccount::Income);
+    set.addAccountGroup(eMyMoney::Account::Income);
   if (m_accountType & KMyMoneyUtils::expense)
-    set.addAccountGroup(MyMoneyAccount::Expense);
+    set.addAccountGroup(eMyMoney::Account::Expense);
   if (m_accountType & KMyMoneyUtils::equity)
-    set.addAccountGroup(MyMoneyAccount::Equity);
+    set.addAccountGroup(eMyMoney::Account::Equity);
   if (m_accountType & KMyMoneyUtils::checking)
-    set.addAccountType(MyMoneyAccount::Checkings);
+    set.addAccountType(eMyMoney::Account::Checkings);
   if (m_accountType & KMyMoneyUtils::savings)
-    set.addAccountType(MyMoneyAccount::Savings);
+    set.addAccountType(eMyMoney::Account::Savings);
   if (m_accountType & KMyMoneyUtils::investment)
-    set.addAccountType(MyMoneyAccount::Investment);
+    set.addAccountType(eMyMoney::Account::Investment);
   if (m_accountType & KMyMoneyUtils::creditCard)
-    set.addAccountType(MyMoneyAccount::CreditCard);
+    set.addAccountType(eMyMoney::Account::CreditCard);
 
   set.load(m_accountSelector->selector());
 }
@@ -148,7 +148,7 @@ void KAccountSelectDlg::slotCreateAccount()
       accept();
     }
   } else {
-    if (m_account.accountType() == MyMoneyAccount::Expense)
+    if (m_account.accountType() == eMyMoney::Account::Expense)
       kmymoney->createCategory(m_account, MyMoneyFile::instance()->expense());
     else
       kmymoney->createCategory(m_account, MyMoneyFile::instance()->income());
