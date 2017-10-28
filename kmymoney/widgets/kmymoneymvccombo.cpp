@@ -47,7 +47,8 @@
 
 #include "icons/icons.h"
 #include "mymoneyschedule.h"
-#include "mymoneysplit.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
 #include "mymoneytransactionfilter.h"
 
 using namespace Icons;
@@ -507,36 +508,36 @@ void KMyMoneyReconcileCombo::removeDontCare()
   removeItem(3);
 }
 
-void KMyMoneyReconcileCombo::setState(MyMoneySplit::reconcileFlagE state)
+void KMyMoneyReconcileCombo::setState(Split::State state)
 {
   QString id;
 
   switch (state) {
-    case MyMoneySplit::NotReconciled:
+    case Split::State::NotReconciled:
       id = ' ';
       break;
-    case MyMoneySplit::Cleared:
+    case Split::State::Cleared:
       id = 'C';
       break;
-    case MyMoneySplit::Reconciled:
+    case Split::State::Reconciled:
       id = 'R';
       break;
-    case MyMoneySplit::Frozen:
+    case Split::State::Frozen:
       id = 'F';
       break;
-    case MyMoneySplit::Unknown:
+    case Split::State::Unknown:
       id = 'U';
       break;
     default:
-      qDebug() << "Unknown reconcile state '" << state << "' in KMyMoneyReconcileCombo::setState()\n";
+      qDebug() << "Unknown reconcile state '" << (int)state << "' in KMyMoneyReconcileCombo::setState()\n";
       break;
   }
   setSelectedItem(id);
 }
 
-MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state() const
+Split::State KMyMoneyReconcileCombo::state() const
 {
-  MyMoneySplit::reconcileFlagE state = MyMoneySplit::NotReconciled;
+  Split::State state = Split::State::NotReconciled;
 
   QVariant data = itemData(currentIndex());
   QString dataVal;
@@ -547,13 +548,13 @@ MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state() const
 
   if (!dataVal.isEmpty()) {
     if (dataVal == "C")
-      state = MyMoneySplit::Cleared;
+      state = Split::State::Cleared;
     if (dataVal == "R")
-      state = MyMoneySplit::Reconciled;
+      state = Split::State::Reconciled;
     if (dataVal == "F")
-      state = MyMoneySplit::Frozen;
+      state = Split::State::Frozen;
     if (dataVal == "U")
-      state = MyMoneySplit::Unknown;
+      state = Split::State::Unknown;
   }
   return state;
 }
@@ -604,35 +605,35 @@ void KMyMoneyCashFlowCombo::removeDontCare()
 
 KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
     KMyMoneyMVCCombo(false, w),
-    m_activity(MyMoneySplit::UnknownTransactionType)
+    m_activity(Split::InvestmentTransactionType::UnknownTransactionType)
 {
-  addItem(i18n("Buy shares"), QVariant(MyMoneySplit::BuyShares));
-  addItem(i18n("Sell shares"), QVariant(MyMoneySplit::SellShares));
-  addItem(i18n("Dividend"), QVariant(MyMoneySplit::Dividend));
-  addItem(i18n("Reinvest dividend"), QVariant(MyMoneySplit::ReinvestDividend));
-  addItem(i18n("Yield"), QVariant(MyMoneySplit::Yield));
-  addItem(i18n("Add shares"), QVariant(MyMoneySplit::AddShares));
-  addItem(i18n("Remove shares"), QVariant(MyMoneySplit::RemoveShares));
-  addItem(i18n("Split shares"), QVariant(MyMoneySplit::SplitShares));
-  addItem(i18n("Interest Income"), QVariant(MyMoneySplit::InterestIncome));
+  addItem(i18n("Buy shares"), QVariant((int)Split::InvestmentTransactionType::BuyShares));
+  addItem(i18n("Sell shares"), QVariant((int)Split::InvestmentTransactionType::SellShares));
+  addItem(i18n("Dividend"), QVariant((int)Split::InvestmentTransactionType::Dividend));
+  addItem(i18n("Reinvest dividend"), QVariant((int)Split::InvestmentTransactionType::ReinvestDividend));
+  addItem(i18n("Yield"), QVariant((int)Split::InvestmentTransactionType::Yield));
+  addItem(i18n("Add shares"), QVariant((int)Split::InvestmentTransactionType::AddShares));
+  addItem(i18n("Remove shares"), QVariant((int)Split::InvestmentTransactionType::RemoveShares));
+  addItem(i18n("Split shares"), QVariant((int)Split::InvestmentTransactionType::SplitShares));
+  addItem(i18n("Interest Income"), QVariant((int)Split::InvestmentTransactionType::InterestIncome));
 
   connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetActivity(QString)));
 }
 
-void KMyMoneyActivityCombo::setActivity(MyMoneySplit::investTransactionTypeE activity)
+void KMyMoneyActivityCombo::setActivity(Split::InvestmentTransactionType activity)
 {
   m_activity = activity;
   QString num;
-  setSelectedItem(num.setNum(activity));
+  setSelectedItem(num.setNum((int)activity));
 }
 
 void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
 {
   QString num;
-  for (int i = MyMoneySplit::BuyShares; i <= MyMoneySplit::InterestIncome; ++i) {
+  for (auto i = (int)Split::InvestmentTransactionType::BuyShares; i <= (int)Split::InvestmentTransactionType::InterestIncome; ++i) {
     num.setNum(i);
     if (num == id) {
-      m_activity = static_cast<MyMoneySplit::investTransactionTypeE>(i);
+      m_activity = static_cast<Split::InvestmentTransactionType>(i);
       break;
     }
   }
@@ -683,58 +684,58 @@ void KMyMoneyGeneralCombo::slotChangeItem(int idx)
 KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
     KMyMoneyGeneralCombo(parent)
 {
-  insertItem(i18n("All dates"), MyMoneyTransactionFilter::allDates);
-  insertItem(i18n("As of today"), MyMoneyTransactionFilter::asOfToday);
-  insertItem(i18n("Today"), MyMoneyTransactionFilter::today);
-  insertItem(i18n("Current month"), MyMoneyTransactionFilter::currentMonth);
-  insertItem(i18n("Current quarter"), MyMoneyTransactionFilter::currentQuarter);
-  insertItem(i18n("Current year"), MyMoneyTransactionFilter::currentYear);
-  insertItem(i18n("Current fiscal year"), MyMoneyTransactionFilter::currentFiscalYear);
-  insertItem(i18n("Month to date"), MyMoneyTransactionFilter::monthToDate);
-  insertItem(i18n("Year to date"), MyMoneyTransactionFilter::yearToDate);
-  insertItem(i18n("Year to month"), MyMoneyTransactionFilter::yearToMonth);
-  insertItem(i18n("Last month"), MyMoneyTransactionFilter::lastMonth);
-  insertItem(i18n("Last year"), MyMoneyTransactionFilter::lastYear);
-  insertItem(i18n("Last fiscal year"), MyMoneyTransactionFilter::lastFiscalYear);
-  insertItem(i18n("Last 7 days"), MyMoneyTransactionFilter::last7Days);
-  insertItem(i18n("Last 30 days"), MyMoneyTransactionFilter::last30Days);
-  insertItem(i18n("Last 3 months"), MyMoneyTransactionFilter::last3Months);
-  insertItem(i18n("Last quarter"), MyMoneyTransactionFilter::lastQuarter);
-  insertItem(i18n("Last 6 months"), MyMoneyTransactionFilter::last6Months);
-  insertItem(i18n("Last 11 months"), MyMoneyTransactionFilter::last11Months);
-  insertItem(i18n("Last 12 months"), MyMoneyTransactionFilter::last12Months);
-  insertItem(i18n("Next 7 days"), MyMoneyTransactionFilter::next7Days);
-  insertItem(i18n("Next 30 days"), MyMoneyTransactionFilter::next30Days);
-  insertItem(i18n("Next 3 months"), MyMoneyTransactionFilter::next3Months);
-  insertItem(i18n("Next quarter"), MyMoneyTransactionFilter::nextQuarter);
-  insertItem(i18n("Next 6 months"), MyMoneyTransactionFilter::next6Months);
-  insertItem(i18n("Next 12 months"), MyMoneyTransactionFilter::next12Months);
-  insertItem(i18n("Next 18 months"), MyMoneyTransactionFilter::next18Months);
-  insertItem(i18n("Last 3 months to next 3 months"), MyMoneyTransactionFilter::last3ToNext3Months);
-  insertItem(i18n("User defined"), MyMoneyTransactionFilter::userDefined);
+  insertItem(i18n("All dates"), (int)TransactionFilter::Date::All);
+  insertItem(i18n("As of today"), (int)TransactionFilter::Date::AsOfToday);
+  insertItem(i18n("Today"), (int)TransactionFilter::Date::Today);
+  insertItem(i18n("Current month"), (int)TransactionFilter::Date::CurrentMonth);
+  insertItem(i18n("Current quarter"), (int)TransactionFilter::Date::CurrentQuarter);
+  insertItem(i18n("Current year"), (int)TransactionFilter::Date::CurrentYear);
+  insertItem(i18n("Current fiscal year"), (int)TransactionFilter::Date::CurrentFiscalYear);
+  insertItem(i18n("Month to date"), (int)TransactionFilter::Date::MonthToDate);
+  insertItem(i18n("Year to date"), (int)TransactionFilter::Date::YearToDate);
+  insertItem(i18n("Year to month"), (int)TransactionFilter::Date::YearToMonth);
+  insertItem(i18n("Last month"), (int)TransactionFilter::Date::LastMonth);
+  insertItem(i18n("Last year"), (int)TransactionFilter::Date::LastYear);
+  insertItem(i18n("Last fiscal year"), (int)TransactionFilter::Date::LastFiscalYear);
+  insertItem(i18n("Last 7 days"), (int)TransactionFilter::Date::Last7Days);
+  insertItem(i18n("Last 30 days"), (int)TransactionFilter::Date::Last30Days);
+  insertItem(i18n("Last 3 months"), (int)TransactionFilter::Date::Last3Months);
+  insertItem(i18n("Last quarter"), (int)TransactionFilter::Date::LastQuarter);
+  insertItem(i18n("Last 6 months"), (int)TransactionFilter::Date::Last6Months);
+  insertItem(i18n("Last 11 months"), (int)TransactionFilter::Date::Last11Months);
+  insertItem(i18n("Last 12 months"), (int)TransactionFilter::Date::Last12Months);
+  insertItem(i18n("Next 7 days"), (int)TransactionFilter::Date::Next7Days);
+  insertItem(i18n("Next 30 days"), (int)TransactionFilter::Date::Next30Days);
+  insertItem(i18n("Next 3 months"), (int)TransactionFilter::Date::Next3Months);
+  insertItem(i18n("Next quarter"), (int)TransactionFilter::Date::NextQuarter);
+  insertItem(i18n("Next 6 months"), (int)TransactionFilter::Date::Next6Months);
+  insertItem(i18n("Next 12 months"), (int)TransactionFilter::Date::Next12Months);
+  insertItem(i18n("Next 18 months"), (int)TransactionFilter::Date::Next18Months);
+  insertItem(i18n("Last 3 months to next 3 months"), (int)TransactionFilter::Date::Last3ToNext3Months);
+  insertItem(i18n("User defined"), (int)TransactionFilter::Date::UserDefined);
 }
 
-void KMyMoneyPeriodCombo::setCurrentItem(MyMoneyTransactionFilter::dateOptionE id)
+void KMyMoneyPeriodCombo::setCurrentItem(TransactionFilter::Date id)
 {
-  if (id >= MyMoneyTransactionFilter::dateOptionCount)
-    id = MyMoneyTransactionFilter::userDefined;
+  if (id >= TransactionFilter::Date::LastDateItem)
+    id = TransactionFilter::Date::UserDefined;
 
-  KMyMoneyGeneralCombo::setCurrentItem(id);
+  KMyMoneyGeneralCombo::setCurrentItem((int)id);
 }
 
-MyMoneyTransactionFilter::dateOptionE KMyMoneyPeriodCombo::currentItem() const
+TransactionFilter::Date KMyMoneyPeriodCombo::currentItem() const
 {
-  return static_cast<MyMoneyTransactionFilter::dateOptionE>(KMyMoneyGeneralCombo::currentItem());
+  return static_cast<TransactionFilter::Date>(KMyMoneyGeneralCombo::currentItem());
 }
 
-QDate KMyMoneyPeriodCombo::start(MyMoneyTransactionFilter::dateOptionE id)
+QDate KMyMoneyPeriodCombo::start(TransactionFilter::Date id)
 {
   QDate start, end;
   MyMoneyTransactionFilter::translateDateRange(id, start, end);
   return start;
 }
 
-QDate KMyMoneyPeriodCombo::end(MyMoneyTransactionFilter::dateOptionE id)
+QDate KMyMoneyPeriodCombo::end(TransactionFilter::Date id)
 {
   QDate start, end;
   MyMoneyTransactionFilter::translateDateRange(id, start, end);

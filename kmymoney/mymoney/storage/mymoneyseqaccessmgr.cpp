@@ -4,7 +4,7 @@
     begin                : Sun May 5 2002
     copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
                                2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
-                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -33,10 +33,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragesql.h"
 #include "storageenums.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneytag.h"
+#include "mymoneypayee.h"
+#include "mymoneybudget.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 
 #define TRY try {
 #define CATCH } catch (const MyMoneyException &e) {
@@ -852,10 +861,9 @@ void MyMoneySeqAccessMgr::removeAccount(const MyMoneyAccount& account)
   // re-parent all sub-ordinate accounts to the parent of the account
   // to be deleted. First round check that all accounts exist, second
   // round do the re-parenting.
-  QStringList::ConstIterator it;
-  for (it = account.accountList().begin(); it != account.accountList().end(); ++it) {
-    MyMoneySeqAccessMgr::account(*it);
-  }
+
+  foreach (const auto accountID, account.accountList())
+    MyMoneySeqAccessMgr::account(accountID);
 
   // if one of the accounts did not exist, an exception had been
   // thrown and we would not make it until here.
@@ -889,13 +897,12 @@ void MyMoneySeqAccessMgr::removeAccount(const MyMoneyAccount& account)
     // second round over sub-ordinate accounts: do re-parenting
     // but only if the list contains at least one entry
     // FIXME: move this logic to MyMoneyFile
-    if ((*it_a).accountList().count() > 0) {
-      while ((*it_a).accountList().count() > 0) {
-        it = (*it_a).accountList().begin();
-        MyMoneyAccount acc(MyMoneySeqAccessMgr::account(*it));
-        reparentAccount(acc, parent, false);
-      }
+
+    foreach (const auto accountID, (*it_a).accountList()) {
+      MyMoneyAccount acc(MyMoneySeqAccessMgr::account(accountID));
+      reparentAccount(acc, parent, false);
     }
+
     // remove account from parent's list
     parent.removeAccountId(account.id());
     m_accountList.modify(parent.id(), parent);
@@ -952,12 +959,8 @@ void MyMoneySeqAccessMgr::transactionList(QList< QPair<MyMoneyTransaction, MyMon
 
   for (it_t = m_transactionList.begin(); it_t != it_t_end; ++it_t) {
     if (filter.match(*it_t)) {
-      const QList<MyMoneySplit>& splits = filter.matchingSplits();
-      QList<MyMoneySplit>::ConstIterator it_s;
-      QList<MyMoneySplit>::ConstIterator it_s_end = splits.end();
-      for (it_s = splits.constBegin(); it_s != it_s_end; ++it_s) {
-        list.append(qMakePair(*it_t, *it_s));
-      }
+      foreach (const auto split, filter.matchingSplits())
+        list.append(qMakePair(*it_t, split));
     }
   }
 }
@@ -1099,6 +1102,26 @@ const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QD
   }
 
   return result;
+}
+
+MyMoneyAccount MyMoneySeqAccessMgr::liability() const {
+  return account(STD_ACC_LIABILITY);
+}
+
+MyMoneyAccount MyMoneySeqAccessMgr::asset() const {
+  return account(STD_ACC_ASSET);
+}
+
+MyMoneyAccount MyMoneySeqAccessMgr::expense() const {
+  return account(STD_ACC_EXPENSE);
+}
+
+MyMoneyAccount MyMoneySeqAccessMgr::income() const {
+  return account(STD_ACC_INCOME);
+}
+
+MyMoneyAccount MyMoneySeqAccessMgr::equity() const {
+  return account(STD_ACC_EQUITY);
 }
 
 void MyMoneySeqAccessMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)

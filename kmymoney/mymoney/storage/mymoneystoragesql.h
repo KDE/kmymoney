@@ -36,15 +36,10 @@
 class QIODevice;
 
 #include "imymoneystorageformat.h"
-#include "mymoneyinstitution.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"
-#include "mymoneybudget.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneydbdef.h"
@@ -59,11 +54,17 @@ class QIODevice;
 template <class T1, class T2> struct QPair;
 
 class IMyMoneyStorage;
+class MyMoneyInstitution;
+class MyMoneyAccount;
+class MyMoneySecurity;
 class MyMoneyCostCenter;
 class MyMoneyMoney;
 class MyMoneySchedule;
+class MyMoneyPayee;
+class MyMoneyTag;
 class MyMoneySplit;
 class MyMoneyTransaction;
+class MyMoneyBudget;
 class databaseStoreableObject;
 class FilterFail
 {

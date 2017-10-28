@@ -36,22 +36,20 @@ void MyMoneyReportTest::cleanup()
 
 void MyMoneyReportTest::testElementNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyReport::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyReport::getElName(static_cast<MyMoneyReport::elNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyReport::Element::Payee; i <= (int)MyMoneyReport::Element::AccountGroup; ++i) {
+    auto isEmpty = MyMoneyReport::getElName(static_cast<MyMoneyReport::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
 }
 
 void MyMoneyReportTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyReport::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyReport::getAttrName(static_cast<MyMoneyReport::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyReport::Attribute::ID; i < (int)MyMoneyReport::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyReport::getAttrName(static_cast<MyMoneyReport::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

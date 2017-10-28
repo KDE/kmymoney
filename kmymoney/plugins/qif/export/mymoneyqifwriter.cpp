@@ -190,12 +190,12 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
   s << "D" << m_qifProfile.date(t.postDate()) << endl;
 
   switch (split.reconcileFlag()) {
-    case MyMoneySplit::Cleared:
+    case eMyMoney::Split::State::Cleared:
       s << "C*" << endl;
       break;
 
-    case MyMoneySplit::Reconciled:
-    case MyMoneySplit::Frozen:
+    case eMyMoney::Split::State::Reconciled:
+    case eMyMoney::Split::State::Frozen:
       s << "CX" << endl;
       break;
 

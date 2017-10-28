@@ -24,6 +24,14 @@
 #include <QtTest/QtTest>
 
 #include "mymoneytestutils.h"
+#include "mymoneymoney.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneysplit.h"
+#include "mymoneyprice.h"
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/payeeidentifierloader.h"
@@ -2317,7 +2325,7 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
   split.setAccountId(accountId);
   split.setShares(MyMoneyMoney(-1000, 100));
   split.setValue(MyMoneyMoney(-1000, 100));
-  split.setReconcileFlag(MyMoneySplit::Reconciled);
+  split.setReconcileFlag(eMyMoney::Split::State::Reconciled);
 
   MyMoneyTransaction transaction;
   transaction.setPostDate(QDate(2013, 1, 1));
@@ -2496,11 +2504,11 @@ void MyMoneyFileTest::testClearedBalance()
     split1.setAccountId("A000002");
     split1.setShares(MyMoneyMoney(-1000, 100));
     split1.setValue(MyMoneyMoney(-1000, 100));
-    split1.setReconcileFlag(MyMoneySplit::Cleared);
+    split1.setReconcileFlag(eMyMoney::Split::State::Cleared);
     split2.setAccountId("A000004");
     split2.setValue(MyMoneyMoney(1000, 100));
     split2.setShares(MyMoneyMoney(1000, 100));
-    split2.setReconcileFlag(MyMoneySplit::Cleared);
+    split2.setReconcileFlag(eMyMoney::Split::State::Cleared);
     t1.addSplit(split1);
     t1.addSplit(split2);
     m->addTransaction(t1);
@@ -2510,11 +2518,11 @@ void MyMoneyFileTest::testClearedBalance()
     split3.setAccountId("A000002");
     split3.setShares(MyMoneyMoney(-2000, 100));
     split3.setValue(MyMoneyMoney(-2000, 100));
-    split3.setReconcileFlag(MyMoneySplit::Cleared);
+    split3.setReconcileFlag(eMyMoney::Split::State::Cleared);
     split4.setAccountId("A000004");
     split4.setValue(MyMoneyMoney(2000, 100));
     split4.setShares(MyMoneyMoney(2000, 100));
-    split4.setReconcileFlag(MyMoneySplit::Cleared);
+    split4.setReconcileFlag(eMyMoney::Split::State::Cleared);
     t2.addSplit(split3);
     t2.addSplit(split4);
     m->addTransaction(t2);
@@ -2595,7 +2603,7 @@ void MyMoneyFileTest::testAdjustedValues()
   s2.setValue(MyMoneyMoney(QLatin1String("-61/25")));
 
   s3.setAccountId(stock.id());
-  s3.setAction(MyMoneySplit::BuyShares);
+  s3.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
   s3.setShares(MyMoneyMoney(QLatin1String("64901/100000")));
   s3.setPrice(MyMoneyMoney(QLatin1String("157689/1000")));
   s3.setValue(MyMoneyMoney(QLatin1String("102340161/1000000")));

@@ -34,11 +34,14 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneysplit.h"
 #include "mymoneypayee.h"
+#include "mymoneyexception.h"
 #include "csvexportdlg.h"
 #include "csvexporterplugin.h"
 
@@ -215,12 +218,12 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
   str += QString("%1" + m_separator).arg(memo);
 
   switch (split.reconcileFlag()) {
-    case MyMoneySplit::Cleared:
+    case eMyMoney::Split::State::Cleared:
       str += QLatin1String("C") + m_separator;
       break;
 
-    case MyMoneySplit::Reconciled:
-    case MyMoneySplit::Frozen:
+    case eMyMoney::Split::State::Reconciled:
+    case eMyMoney::Split::State::Frozen:
       str += QLatin1String("R") + m_separator;
       break;
 
@@ -320,12 +323,12 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
 
     if (typ == eMyMoney::Account::Stock) {
       switch (lst[i].reconcileFlag()) {
-        case MyMoneySplit::Cleared:
+        case eMyMoney::Split::State::Cleared:
           strStatus =  QLatin1Char('C');
           break;
 
-        case MyMoneySplit::Reconciled:
-        case MyMoneySplit::Frozen:
+        case eMyMoney::Split::State::Reconciled:
+        case eMyMoney::Split::State::Frozen:
           strStatus =  QLatin1Char('R');
           break;
 

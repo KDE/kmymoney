@@ -26,7 +26,8 @@
 // Project Includes
 
 #include "ui_currencydecl.h"
-#include "mymoneysecurity.h"
+
+class MyMoneySecurity;
 
 /**
   * @author Thomas Baumgart

@@ -32,8 +32,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "knewloanwizard.h"
+
+class MyMoneyAccount;
 
 /**
   * @author Thomas Baumgart

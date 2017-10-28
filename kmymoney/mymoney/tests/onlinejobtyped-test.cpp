@@ -20,6 +20,7 @@
 
 #include <QtTest/QTest>
 
+#include "onlinejob.h"
 #include "onlinejobtyped.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 

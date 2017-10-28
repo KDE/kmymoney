@@ -24,6 +24,7 @@
 #include <QScrollBar>
 #include <QPainter>
 #include <QDebug>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -28,6 +28,7 @@
 #include "imymoneyserialize.h"
 #include "imymoneystorage.h"
 #include "mymoneystoragesql.h"
+#include "mymoneypayee.h"
 
 /**
   * The MyMoneyDatabaseMgr class represents the storage engine for databases.
@@ -527,31 +528,31 @@ public:
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  virtual const MyMoneyAccount liability() const override;
+  MyMoneyAccount liability() const override;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  virtual const MyMoneyAccount asset() const override;
+  MyMoneyAccount asset() const override;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  virtual const MyMoneyAccount expense() const override;
+  MyMoneyAccount expense() const override;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  virtual const MyMoneyAccount income() const override;
+  MyMoneyAccount income() const override;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  virtual const MyMoneyAccount equity() const override;
+  MyMoneyAccount equity() const override;
 
   /**
     * This method is used to create a new security object.  The ID will be

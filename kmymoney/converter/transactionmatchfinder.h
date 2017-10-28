@@ -20,6 +20,7 @@
 
 #include <QScopedPointer>
 
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyschedule.h"
 

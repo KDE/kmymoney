@@ -37,8 +37,8 @@
 #include "ui_kcurrencycalculatordecl.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
-#include "mymoneysplit.h"
 
+class MyMoneySplit;
 class MyMoneyTransaction;
 class QDialogButtonBox;
 

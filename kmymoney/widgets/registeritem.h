@@ -23,6 +23,7 @@
 
 #include <QString>
 #include <QStyleOptionViewItem>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,8 +31,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysplit.h"
 #include "mymoneyobject.h"
+#include "mymoneymoney.h"
+#include "mymoneyenums.h"
 
 class MyMoneyMoney;
 namespace KMyMoneyRegister
@@ -111,20 +113,20 @@ public:
   virtual bool isErroneous() const = 0;
 
   // helper functions used for sorting
-  virtual const QDate& sortPostDate() const {
+  virtual QDate sortPostDate() const {
     return nullDate;
   }
   virtual int sortSamePostDate() const = 0;
-  virtual const QDate& sortEntryDate() const {
+  virtual QDate sortEntryDate() const {
     return nullDate;
   }
   virtual const QString& sortPayee() const {
     return nullString;
   }
-  virtual const MyMoneyMoney& sortValue() const {
+  virtual MyMoneyMoney sortValue() const {
     return nullValue;
   }
-  virtual const QString& sortNumber() const {
+  virtual QString sortNumber() const {
     return nullString;
   }
   virtual const QString& sortEntryOrder() const {
@@ -136,8 +138,8 @@ public:
   virtual const QString& sortCategory() const {
     return nullString;
   }
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
-    return MyMoneySplit::MaxReconcileState;
+  virtual eMyMoney::Split::State sortReconcileState() const {
+    return eMyMoney::Split::State::MaxReconcileState;
   }
   virtual const QString sortSecurity() const {
     return nullString;

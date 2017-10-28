@@ -32,6 +32,7 @@
 // Project Includes
 
 #include "register.h"
+#include "mymoneyaccount.h"
 
 KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
     KSelectTransactionsDlg(account, parent)

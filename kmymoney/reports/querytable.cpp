@@ -43,10 +43,12 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyprice.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
@@ -854,7 +856,7 @@ void QueryTable::constructTransactionTable()
           QList<MyMoneySplit> interestSplits;
           MyMoneySecurity currency;
           MyMoneySecurity security;
-          MyMoneySplit::investTransactionTypeE transactionType;
+          eMyMoney::Split::InvestmentTransactionType transactionType;
           KMyMoneyUtils::dissectTransaction((*it_transaction), stockSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
           if (!(assetAccountSplit == MyMoneySplit())) {
             for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
@@ -1031,7 +1033,7 @@ void QueryTable::constructTransactionTable()
             } else {
               qA [ctCategory] = splitAcc.fullName();
               qA [ctTopCategory] = splitAcc.topParentName();
-              qA [ctCategoryType] = KMyMoneyUtils::accountTypeToString(splitAcc.accountGroup());
+              qA [ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
             }
 
             if (use_transfers || (splitAcc.isIncomeExpense() && m_config.includes(splitAcc))) {
@@ -1321,7 +1323,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       QList<MyMoneySplit> interestSplits;
       MyMoneySecurity security;
       MyMoneySecurity currency;
-      MyMoneySplit::investTransactionTypeE transactionType;
+      eMyMoney::Split::InvestmentTransactionType transactionType;
       KMyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       QDate postDate = (*it_t).postDate();
       MyMoneyMoney price;
@@ -1334,7 +1336,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       MyMoneyMoney value = assetAccountSplit.value() * price;
       MyMoneyMoney shares = shareSplit.shares();
 
-      if (transactionType == MyMoneySplit::BuyShares) {
+      if (transactionType == eMyMoney::Split::InvestmentTransactionType::BuyShares) {
         if (reportedDateRange) {
           cfList[Buys].append(CashFlowListItem(postDate, value));
           shList[Buys] += shares;
@@ -1372,14 +1374,14 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
           cfList[BuysOfOwned].append(CashFlowListItem(postDate, (shList.at(BuysOfOwned) / shares) * value));
           shList[BuysOfOwned] = MyMoneyMoney();
         }
-      } else if (transactionType == MyMoneySplit::SellShares && reportedDateRange) {
+      } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::SellShares && reportedDateRange) {
         cfList[Sells].append(CashFlowListItem(postDate, value));
         shList[Sells] += shares;
-      } else if (transactionType == MyMoneySplit::SplitShares) {          // shares variable is denominator of split ratio here
+      } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {          // shares variable is denominator of split ratio here
         for (int i = Buys; i <= InvestmentValue::BuysOfOwned; ++i)
           shList[i] /= shares;
-      } else if (transactionType == MyMoneySplit::AddShares ||            // added shares, when sold give 100% capital gain
-                 transactionType == MyMoneySplit::ReinvestDividend) {
+      } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::AddShares ||            // added shares, when sold give 100% capital gain
+                 transactionType == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend) {
         if (shList.at(BuysOfOwned).isZero()) {                            // add added/reinvested shares
           if (shList.at(BuysOfSells) + shares > shList.at(Sells).abs()) { // add partially added/reinvested shares
             shList[BuysOfSells] = shList.at(Sells).abs();
@@ -1402,16 +1404,16 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
           cfList[BuysOfOwned].append(CashFlowListItem(postDate, (shList.at(BuysOfOwned) / shares) * value));
           shList[BuysOfOwned] = MyMoneyMoney();
         }
-        if (transactionType == MyMoneySplit::ReinvestDividend) {
+        if (transactionType == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend) {
           value = MyMoneyMoney();
           foreach (const auto split, interestSplits)
             value += split.value();
           value *= price;
           cfList[ReinvestIncome].append(CashFlowListItem(postDate, -value));
         }
-      } else if (transactionType == MyMoneySplit::RemoveShares && reportedDateRange) // removed shares give no value in return so no capital gain on them
+      } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::RemoveShares && reportedDateRange) // removed shares give no value in return so no capital gain on them
         shList[Sells] += shares;
-      else if (transactionType == MyMoneySplit::Dividend || transactionType == MyMoneySplit::Yield)
+      else if (transactionType == eMyMoney::Split::InvestmentTransactionType::Dividend || transactionType == eMyMoney::Split::InvestmentTransactionType::Yield)
         cfList[CashIncome].append(CashFlowListItem(postDate, value));
 
     }
@@ -1443,7 +1445,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       QList<MyMoneySplit> interestSplits;
       MyMoneySecurity security;
       MyMoneySecurity currency;
-      MyMoneySplit::investTransactionTypeE transactionType;
+      eMyMoney::Split::InvestmentTransactionType transactionType;
       KMyMoneyUtils::dissectTransaction(transaction, shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       QDate postDate = transaction.postDate();
       MyMoneyMoney price;
@@ -1454,7 +1456,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       MyMoneyMoney value = assetAccountSplit.value() * price;
       MyMoneyMoney shares = shareSplit.shares();
 
-      if (transactionType == MyMoneySplit::SellShares) {
+      if (transactionType == eMyMoney::Split::InvestmentTransactionType::SellShares) {
         if ((shList.at(LongTermSellsOfBuys) + shares).abs() >= shList.at(LongTermBuysOfSells)) { // add partially sold long-term shares
           cfList[LongTermSellsOfBuys].append(CashFlowListItem(postDate, (shList.at(LongTermSellsOfBuys).abs() - shList.at(LongTermBuysOfSells)) / shares * value));
           shList[LongTermSellsOfBuys] = shList.at(LongTermBuysOfSells);
@@ -1463,7 +1465,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
           cfList[LongTermSellsOfBuys].append(CashFlowListItem(postDate, value));
           shList[LongTermSellsOfBuys] += shares;
         }
-      } else if (transactionType == MyMoneySplit::RemoveShares) {
+      } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::RemoveShares) {
         if ((shList.at(LongTermSellsOfBuys) + shares).abs() >= shList.at(LongTermBuysOfSells)) {
           shList[LongTermSellsOfBuys] = shList.at(LongTermBuysOfSells);
           break;
@@ -1756,7 +1758,7 @@ void QueryTable::constructAccountTable()
           else
             qaccountrow[ctInstitution] = file->institution(iid).name();
 
-          qaccountrow[ctType] = KMyMoneyUtils::accountTypeToString(account.accountType());
+          qaccountrow[ctType] = MyMoneyAccount::accountTypeToString(account.accountType());
         }
       }
 
@@ -2032,7 +2034,7 @@ void QueryTable::constructSplitsTable()
         //category data is always the one of the split
         qA [ctCategory] = splitAcc.fullName();
         qA [ctTopCategory] = splitAcc.topParentName();
-        qA [ctCategoryType] = KMyMoneyUtils::accountTypeToString(splitAcc.accountGroup());
+        qA [ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
 
         m_rows += qA;
 

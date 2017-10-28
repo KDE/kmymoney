@@ -28,8 +28,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyreport.h"
 #include "listtable.h"
+
+class MyMoneyReport;
 
 namespace reports
 {

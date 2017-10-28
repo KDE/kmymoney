@@ -24,7 +24,13 @@
 
 #include "mymoneyobjectcontainer.h"
 #include "imymoneystorage.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneyschedule.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneycostcenter.h"
 
 struct MyMoneyObjectContainer::Private {
   Private(MyMoneyObjectContainer *p) :
@@ -33,7 +39,7 @@ struct MyMoneyObjectContainer::Private {
   }
 
   void assignFraction(MyMoneyAccount* acc) {
-    if (acc != 0 && acc->m_fraction == -1) {
+    if (acc != 0 && acc->fraction() == -1) {
       const MyMoneySecurity& sec = pub->security(acc->currencyId());
       acc->fraction(sec);
     }

@@ -3,6 +3,7 @@
                           -------------------
     copyright            : (C) 2001 by Michael Edwardes <mte@users.sourceforge.net>
                                2002-2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -20,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QString>
 #include <QPixmap>
 #include <QPixmapCache>
 #include <QIcon>
@@ -34,18 +36,62 @@
 #include <mymoneyexception.h>
 #include "mymoneystoragenames.h"
 
-using namespace Icons;
 using namespace MyMoneyStorageNodes;
+using namespace Icons;
 
-MyMoneyInstitution::MyMoneyInstitution()
-{
-}
+class MyMoneyInstitutionPrivate {
 
-MyMoneyInstitution::MyMoneyInstitution(const QString& id, const MyMoneyInstitution& right) :
-    MyMoneyObject(id)
+public:
+  /**
+    * This member variable keeps the name of the institution
+    */
+  QString m_name;
+
+  /**
+    * This member variable keeps the city of the institution
+    */
+  QString m_town;
+
+  /**
+    * This member variable keeps the street of the institution
+    */
+  QString m_street;
+
+  /**
+    * This member variable keeps the zip-code of the institution
+    */
+  QString m_postcode;
+
+  /**
+    * This member variable keeps the telephone number of the institution
+    */
+  QString m_telephone;
+
+  /**
+    * This member variable keeps the name of the representative of
+    * the institution
+    */
+  QString m_manager;
+
+  /**
+    * This member variable keeps the sort code of the institution.
+    * FIXME: I have no idea
+    * what it is good for. I keep it because it was in the old engine.
+    */
+  QString m_sortcode;
+
+  /**
+    * This member variable keeps the sorted list of the account ids
+    * available at this institution
+    */
+  QStringList m_accountList;
+};
+
+MyMoneyInstitution::MyMoneyInstitution() :
+  MyMoneyObject(),
+  MyMoneyKeyValueContainer(),
+  d_ptr(new MyMoneyInstitutionPrivate)
 {
-  *this = right;
-  m_id = id;
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QString& name,
@@ -54,92 +100,230 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
                                        const QString& postcode,
                                        const QString& telephone,
                                        const QString& manager,
-                                       const QString& sortcode)
+                                       const QString& sortcode) :
+  MyMoneyKeyValueContainer(),
+  d_ptr(new MyMoneyInstitutionPrivate)
 {
+  Q_D(MyMoneyInstitution);
   clearId();
-  m_name = name;
-  m_town = town;
-  m_street = street;
-  m_postcode = postcode;
-  m_telephone = telephone;
-  m_manager = manager;
-  m_sortcode = sortcode;
+  d->m_name = name;
+  d->m_town = town;
+  d->m_street = street;
+  d->m_postcode = postcode;
+  d->m_telephone = telephone;
+  d->m_manager = manager;
+  d->m_sortcode = sortcode;
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
-    MyMoneyObject(node),
-    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
+  MyMoneyObject(node),
+  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
+  d_ptr(new MyMoneyInstitutionPrivate)
 {
   if (nodeNames[nnInstitution] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not INSTITUTION");
 
-  m_sortcode = node.attribute(getAttrName(anSortCode));
-  m_name = node.attribute(getAttrName(anName));
-  m_manager = node.attribute(getAttrName(anManager));
+  Q_D(MyMoneyInstitution);
+  d->m_sortcode = node.attribute(getAttrName(Attribute::SortCode));
+  d->m_name = node.attribute(getAttrName(Attribute::Name));
+  d->m_manager = node.attribute(getAttrName(Attribute::Manager));
 
-  QDomNodeList nodeList = node.elementsByTagName(getElName(enAddress));
+  QDomNodeList nodeList = node.elementsByTagName(getElName(Element::Address));
   if (nodeList.count() == 0) {
-    QString msg = QString("No ADDRESS in institution %1").arg(m_name);
+    QString msg = QString("No ADDRESS in institution %1").arg(d->m_name);
     throw MYMONEYEXCEPTION(msg);
   }
 
   QDomElement addrNode = nodeList.item(0).toElement();
-  m_street = addrNode.attribute(getAttrName(anStreet));
-  m_town = addrNode.attribute(getAttrName(anCity));
-  m_postcode = addrNode.attribute(getAttrName(anZip));
-  m_telephone = addrNode.attribute(getAttrName(anTelephone));
+  d->m_street = addrNode.attribute(getAttrName(Attribute::Street));
+  d->m_town = addrNode.attribute(getAttrName(Attribute::City));
+  d->m_postcode = addrNode.attribute(getAttrName(Attribute::Zip));
+  d->m_telephone = addrNode.attribute(getAttrName(Attribute::Telephone));
 
-  m_accountList.clear();
+  d->m_accountList.clear();
 
-  nodeList = node.elementsByTagName(getElName(enAccountIDS));
+  nodeList = node.elementsByTagName(getElName(Element::AccountIDS));
   if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(enAccountID));
+    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(Element::AccountID));
     for (int i = 0; i < nodeList.count(); ++i) {
-      m_accountList << nodeList.item(i).toElement().attribute(getAttrName(anID));
+      d->m_accountList << nodeList.item(i).toElement().attribute(getAttrName(Attribute::ID));
     }
   }
 }
 
+MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other) :
+  MyMoneyObject(other.id()),
+  MyMoneyKeyValueContainer(other),
+  d_ptr(new MyMoneyInstitutionPrivate(*other.d_func()))
+{
+}
+
+MyMoneyInstitution::MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other) :
+    MyMoneyObject(id),
+    MyMoneyKeyValueContainer(other),
+    d_ptr(new MyMoneyInstitutionPrivate(*other.d_func()))
+{
+}
+
 MyMoneyInstitution::~MyMoneyInstitution()
 {
+  Q_D(MyMoneyInstitution);
+  delete d;
+}
+
+QString MyMoneyInstitution::manager() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_manager;
+}
+
+void MyMoneyInstitution::setManager(const QString& manager)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_manager = manager;
+}
+
+QString MyMoneyInstitution::name() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_name;
+}
+
+void MyMoneyInstitution::setName(const QString& name)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_name = name;
+}
+
+QString MyMoneyInstitution::postcode() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_postcode;
+}
+
+void MyMoneyInstitution::setPostcode(const QString& code)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_postcode = code;
+}
+
+QString MyMoneyInstitution::street() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_street;
+}
+
+void MyMoneyInstitution::setStreet(const QString& street)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_street = street;
+}
+
+QString MyMoneyInstitution::telephone() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_telephone;
+}
+
+void MyMoneyInstitution::setTelephone(const QString& tel)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_telephone = tel;
+}
+
+QString MyMoneyInstitution::town() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_town;
+}
+
+void MyMoneyInstitution::setTown(const QString& town)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_town = town;
+}
+
+QString MyMoneyInstitution::city() const
+{
+  return town();
+}
+
+void MyMoneyInstitution::setCity(const QString& town)
+{
+  Q_D(MyMoneyInstitution);
+  setTown(town);
+}
+
+QString MyMoneyInstitution::sortcode() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_sortcode;
+}
+
+void MyMoneyInstitution::setSortcode(const QString& code)
+{
+  Q_D(MyMoneyInstitution);
+  d->m_sortcode = code;
 }
 
 void MyMoneyInstitution::addAccountId(const QString& account)
 {
+  Q_D(MyMoneyInstitution);
   // only add this account if it is not yet presently in the list
-  if (m_accountList.contains(account) == 0)
-    m_accountList.append(account);
+  if (d->m_accountList.contains(account) == 0)
+    d->m_accountList.append(account);
 }
 
 QString MyMoneyInstitution::removeAccountId(const QString& account)
 {
-  int pos;
+  Q_D(MyMoneyInstitution);
   QString rc;
 
-  pos = m_accountList.indexOf(account);
+  auto pos = d->m_accountList.indexOf(account);
   if (pos != -1) {
-    m_accountList.removeAt(pos);
+    d->m_accountList.removeAt(pos);
     rc = account;
   }
   return rc;
 }
 
+QStringList MyMoneyInstitution::accountList() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_accountList;
+}
+
+/**
+  * This method returns the number of accounts known to
+  * this institution
+  * @return number of accounts
+  */
+unsigned int MyMoneyInstitution::accountCount() const
+{
+  Q_D(const MyMoneyInstitution);
+  return d->m_accountList.count();
+}
+
 bool MyMoneyInstitution::operator < (const MyMoneyInstitution& right) const
 {
-  return m_name < right.m_name;
+  Q_D(const MyMoneyInstitution);
+  auto d2 = static_cast<const MyMoneyInstitutionPrivate *>(right.d_func());
+  return d->m_name < d2->m_name;
 }
 
 bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
 {
+  Q_D(const MyMoneyInstitution);
+  auto d2 = static_cast<const MyMoneyInstitutionPrivate *>(right.d_func());
   if (MyMoneyObject::operator==(right) &&
-      ((m_name.length() == 0 && right.m_name.length() == 0) || (m_name == right.m_name)) &&
-      ((m_town.length() == 0 && right.m_town.length() == 0) || (m_town == right.m_town)) &&
-      ((m_street.length() == 0 && right.m_street.length() == 0) || (m_street == right.m_street)) &&
-      ((m_postcode.length() == 0 && right.m_postcode.length() == 0) || (m_postcode == right.m_postcode)) &&
-      ((m_telephone.length() == 0 && right.m_telephone.length() == 0) || (m_telephone == right.m_telephone)) &&
-      ((m_sortcode.length() == 0 && right.m_sortcode.length() == 0) || (m_sortcode == right.m_sortcode)) &&
-      ((m_manager.length() == 0 && right.m_manager.length() == 0) || (m_manager == right.m_manager)) &&
-      (m_accountList == right.m_accountList)) {
+      ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
+      ((d->m_town.length() == 0 && d2->m_town.length() == 0) || (d->m_town == d2->m_town)) &&
+      ((d->m_street.length() == 0 && d2->m_street.length() == 0) || (d->m_street == d2->m_street)) &&
+      ((d->m_postcode.length() == 0 && d2->m_postcode.length() == 0) || (d->m_postcode == d2->m_postcode)) &&
+      ((d->m_telephone.length() == 0 && d2->m_telephone.length() == 0) || (d->m_telephone == d2->m_telephone)) &&
+      ((d->m_sortcode.length() == 0 && d2->m_sortcode.length() == 0) || (d->m_sortcode == d2->m_sortcode)) &&
+      ((d->m_manager.length() == 0 && d2->m_manager.length() == 0) || (d->m_manager == d2->m_manager)) &&
+      (d->m_accountList == d2->m_accountList)) {
     return true;
   } else
     return false;
@@ -147,26 +331,26 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
 
 void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement(nodeNames[nnInstitution]);
+  auto el = document.createElement(nodeNames[nnInstitution]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute(getAttrName(anName), m_name);
-  el.setAttribute(getAttrName(anManager), m_manager);
-  el.setAttribute(getAttrName(anSortCode), m_sortcode);
+  Q_D(const MyMoneyInstitution);
+  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
+  el.setAttribute(getAttrName(Attribute::Manager), d->m_manager);
+  el.setAttribute(getAttrName(Attribute::SortCode), d->m_sortcode);
 
-  QDomElement address = document.createElement(getElName(enAddress));
-  address.setAttribute(getAttrName(anStreet), m_street);
-  address.setAttribute(getAttrName(anCity), m_town);
-  address.setAttribute(getAttrName(anZip), m_postcode);
-  address.setAttribute(getAttrName(anTelephone), m_telephone);
+  auto address = document.createElement(getElName(Element::Address));
+  address.setAttribute(getAttrName(Attribute::Street), d->m_street);
+  address.setAttribute(getAttrName(Attribute::City), d->m_town);
+  address.setAttribute(getAttrName(Attribute::Zip), d->m_postcode);
+  address.setAttribute(getAttrName(Attribute::Telephone), d->m_telephone);
   el.appendChild(address);
 
-
-  QDomElement accounts = document.createElement(getElName(enAccountIDS));
-  for (QStringList::ConstIterator it = accountList().begin(); it != accountList().end(); ++it) {
-    QDomElement temp = document.createElement(getElName(enAccountID));
-    temp.setAttribute(getAttrName(anID), (*it));
+  auto accounts = document.createElement(getElName(Element::AccountIDS));
+  foreach (const auto accountID, accountList()) {
+    auto temp = document.createElement(getElName(Element::AccountID));
+    temp.setAttribute(getAttrName(Attribute::ID), accountID);
     accounts.appendChild(temp);
   }
   el.appendChild(accounts);
@@ -179,14 +363,13 @@ void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) c
 
 bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 {
-  bool rc = false;
-  return rc;
+  return false;
 }
 
 QPixmap MyMoneyInstitution::pixmap(const int size) const
 {
   QPixmap pxIcon;
-  QString kyIcon = g_Icons.value(Icon::ViewInstitutions) + QString::number(size);
+  auto kyIcon = g_Icons.value(Icon::ViewInstitutions) + QString::number(size);
   if (!QPixmapCache::find(kyIcon, pxIcon)) {
     pxIcon = QIcon::fromTheme(g_Icons.value(Icon::ViewInstitutions)).pixmap(size);
     QPixmapCache::insert(kyIcon, pxIcon);
@@ -194,27 +377,27 @@ QPixmap MyMoneyInstitution::pixmap(const int size) const
   return pxIcon;
 }
 
-const QString MyMoneyInstitution::getElName(const elNameE _el)
+QString MyMoneyInstitution::getElName(const Element el)
 {
-  static const QMap<elNameE, QString> elNames = {
-    {enAccountID, QStringLiteral("ACCOUNTID")},
-    {enAccountIDS, QStringLiteral("ACCOUNTIDS")},
-    {enAddress, QStringLiteral("ADDRESS")}
+  static const QMap<Element, QString> elNames = {
+    {Element::AccountID,  QStringLiteral("ACCOUNTID")},
+    {Element::AccountIDS, QStringLiteral("ACCOUNTIDS")},
+    {Element::Address,    QStringLiteral("ADDRESS")}
   };
-  return elNames[_el];
+  return elNames[el];
 }
 
-const QString MyMoneyInstitution::getAttrName(const attrNameE _attr)
+QString MyMoneyInstitution::getAttrName(const Attribute attr)
 {
-  static const QHash<attrNameE, QString> attrNames = {
-    {anID, QStringLiteral("id")},
-    {anName, QStringLiteral("name")},
-    {anManager, QStringLiteral("manager")},
-    {anSortCode, QStringLiteral("sortcode")},
-    {anStreet, QStringLiteral("street")},
-    {anCity, QStringLiteral("city")},
-    {anZip, QStringLiteral("zip")},
-    {anTelephone, QStringLiteral("telephone")}
+  static const QHash<Attribute, QString> attrNames = {
+    {Attribute::ID,         QStringLiteral("id")},
+    {Attribute::Name,       QStringLiteral("name")},
+    {Attribute::Manager,    QStringLiteral("manager")},
+    {Attribute::SortCode,   QStringLiteral("sortcode")},
+    {Attribute::Street,     QStringLiteral("street")},
+    {Attribute::City,       QStringLiteral("city")},
+    {Attribute::Zip,        QStringLiteral("zip")},
+    {Attribute::Telephone,  QStringLiteral("telephone")}
   };
-  return attrNames[_attr];
+  return attrNames[attr];
 }

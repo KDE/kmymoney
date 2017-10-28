@@ -32,8 +32,6 @@
 
 #include "kmymoneyviewbase.h"
 
-#include "mymoneyaccount.h"
-
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;
 #else
@@ -49,7 +47,9 @@ class KWebView;
   * @short A view containing the home page for kmymoney.
 **/
 class QPrinter;
+class MyMoneyAccount;
 class MyMoneySchedule;
+class MyMoneyMoney;
 class KHomeView : public KMyMoneyViewBase
 {
   Q_OBJECT

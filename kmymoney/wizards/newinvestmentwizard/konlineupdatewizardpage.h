@@ -30,8 +30,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysecurity.h"
 #include "ui_konlineupdatewizardpagedecl.h"
+
+class MyMoneySecurity;
 
 /**
  * This class implements the Online Update page of the

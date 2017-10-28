@@ -31,6 +31,20 @@
 // Project Includes
 
 #include "mymoneystoragexml.h"
+#include "mymoneymoney.h"
+
+//class QDomElement;
+
+//class MyMoneyAccount;
+//class MyMoneyInstitution;
+//class MyMoneySecurity;
+//class MyMoneyBudget;
+//class MyMoneySchedule;
+//class MyMoneyPayee;
+//class MyMoneyTag;
+//class MyMoneyTransaction;
+class MyMoneyKeyValueContainer;
+//class onlineJob;
 
 /**
   * @author Kevin Tambascio (ktambascio@users.sourceforge.net)

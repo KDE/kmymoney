@@ -34,6 +34,7 @@
 #include "knewloanwizard.h"
 #include "ksplittransactiondlg.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 
 AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)

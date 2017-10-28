@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "ui_kcategoryreassigndlgdecl.h"
 
 /**
@@ -42,6 +41,7 @@ public:
   }
 };
 
+class MyMoneyAccount;
 class KCategoryReassignDlg : public KCategoryReassignDlgDecl
 {
   Q_OBJECT

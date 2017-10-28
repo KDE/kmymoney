@@ -646,16 +646,16 @@ bool Transaction::matches(const RegisterFilter& filter) const
           return false;
         break;
       case RegisterFilter::NotMarked:
-        if (split().reconcileFlag() != MyMoneySplit::NotReconciled)
+        if (split().reconcileFlag() != eMyMoney::Split::State::NotReconciled)
           return false;
         break;
       case RegisterFilter::NotReconciled:
-        if (split().reconcileFlag() != MyMoneySplit::NotReconciled
-            && split().reconcileFlag() != MyMoneySplit::Cleared)
+        if (split().reconcileFlag() != eMyMoney::Split::State::NotReconciled
+            && split().reconcileFlag() != eMyMoney::Split::State::Cleared)
           return false;
         break;
       case RegisterFilter::Cleared:
-        if (split().reconcileFlag() != MyMoneySplit::Cleared)
+        if (split().reconcileFlag() != eMyMoney::Split::State::Cleared)
           return false;
         break;
     }
@@ -1436,34 +1436,34 @@ void InvestTransaction::setupForm(TransactionForm* form)
   form->setSpan(5, 1, 2, 1);
 }
 
-void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTypeE type) const
+void InvestTransaction::activity(QString& txt, eMyMoney::Split::InvestmentTransactionType type) const
 {
   switch (type) {
-    case MyMoneySplit::AddShares:
+    case eMyMoney::Split::InvestmentTransactionType::AddShares:
       txt = i18n("Add shares");
       break;
-    case MyMoneySplit::RemoveShares:
+    case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
       txt = i18n("Remove shares");
       break;
-    case MyMoneySplit::BuyShares:
+    case eMyMoney::Split::InvestmentTransactionType::BuyShares:
       txt = i18n("Buy shares");
       break;
-    case MyMoneySplit::SellShares:
+    case eMyMoney::Split::InvestmentTransactionType::SellShares:
       txt = i18n("Sell shares");
       break;
-    case MyMoneySplit::Dividend:
+    case eMyMoney::Split::InvestmentTransactionType::Dividend:
       txt = i18n("Dividend");
       break;
-    case MyMoneySplit::ReinvestDividend:
+    case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
       txt = i18n("Reinvest Dividend");
       break;
-    case MyMoneySplit::Yield:
+    case eMyMoney::Split::InvestmentTransactionType::Yield:
       txt = i18n("Yield");
       break;
-    case MyMoneySplit::SplitShares:
+    case eMyMoney::Split::InvestmentTransactionType::SplitShares:
       txt = i18n("Split shares");
       break;
-    case MyMoneySplit::InterestIncome:
+    case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
       txt = i18n("Interest Income");
       break;
     default:
@@ -2075,10 +2075,10 @@ bool InvestTransaction::haveShares() const
 {
   bool rc = true;
   switch (m_transactionType) {
-    case MyMoneySplit::Dividend:
-    case MyMoneySplit::Yield:
-    case MyMoneySplit::SplitShares:
-    case MyMoneySplit::InterestIncome:
+    case eMyMoney::Split::InvestmentTransactionType::Dividend:
+    case eMyMoney::Split::InvestmentTransactionType::Yield:
+    case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+    case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
       rc = false;
       break;
 
@@ -2092,9 +2092,9 @@ bool InvestTransaction::haveFees() const
 {
   bool rc = true;
   switch (m_transactionType) {
-    case MyMoneySplit::AddShares:
-    case MyMoneySplit::RemoveShares:
-    case MyMoneySplit::SplitShares:
+    case eMyMoney::Split::InvestmentTransactionType::AddShares:
+    case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
+    case eMyMoney::Split::InvestmentTransactionType::SplitShares:
       rc = false;
       break;
 
@@ -2108,12 +2108,12 @@ bool InvestTransaction::haveInterest() const
 {
   bool rc = false;
   switch (m_transactionType) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::SellShares:
-    case MyMoneySplit::Dividend:
-    case MyMoneySplit::ReinvestDividend:
-    case MyMoneySplit::Yield:
-    case MyMoneySplit::InterestIncome:
+    case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+    case eMyMoney::Split::InvestmentTransactionType::SellShares:
+    case eMyMoney::Split::InvestmentTransactionType::Dividend:
+    case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+    case eMyMoney::Split::InvestmentTransactionType::Yield:
+    case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
       rc = true;
       break;
 
@@ -2127,9 +2127,9 @@ bool InvestTransaction::havePrice() const
 {
   bool rc = false;
   switch (m_transactionType) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::SellShares:
-    case MyMoneySplit::ReinvestDividend:
+    case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+    case eMyMoney::Split::InvestmentTransactionType::SellShares:
+    case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
       rc = true;
       break;
 
@@ -2143,11 +2143,11 @@ bool InvestTransaction::haveAmount() const
 {
   bool rc = false;
   switch (m_transactionType) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::SellShares:
-    case MyMoneySplit::Dividend:
-    case MyMoneySplit::Yield:
-    case MyMoneySplit::InterestIncome:
+    case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+    case eMyMoney::Split::InvestmentTransactionType::SellShares:
+    case eMyMoney::Split::InvestmentTransactionType::Dividend:
+    case eMyMoney::Split::InvestmentTransactionType::Yield:
+    case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
       rc = true;
       break;
 
@@ -2161,10 +2161,10 @@ bool InvestTransaction::haveAssetAccount() const
 {
   bool rc = true;
   switch (m_transactionType) {
-    case MyMoneySplit::AddShares:
-    case MyMoneySplit::RemoveShares:
-    case MyMoneySplit::SplitShares:
-    case MyMoneySplit::ReinvestDividend:
+    case eMyMoney::Split::InvestmentTransactionType::AddShares:
+    case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
+    case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+    case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
       rc = false;
       break;
 
@@ -2176,7 +2176,7 @@ bool InvestTransaction::haveAssetAccount() const
 
 bool InvestTransaction::haveSplitRatio() const
 {
-  return m_transactionType == MyMoneySplit::SplitShares;
+  return m_transactionType == eMyMoney::Split::InvestmentTransactionType::SplitShares;
 }
 
 void InvestTransaction::splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const

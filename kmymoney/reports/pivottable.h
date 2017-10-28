@@ -24,6 +24,7 @@
 
 #include <QMap>
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,10 +32,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyreport.h"
 #include "reporttable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
+
+class MyMoneyReport;
 
 namespace reports { class KReportChartView; }
 

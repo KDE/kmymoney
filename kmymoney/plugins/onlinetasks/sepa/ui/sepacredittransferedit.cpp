@@ -37,6 +37,7 @@
 #include "styleditemdelegateforwarder.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
 #include "onlinejobtyped.h"
+#include "mymoneyaccount.h"
 
 class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
 {

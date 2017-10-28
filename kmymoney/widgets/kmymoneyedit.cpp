@@ -44,6 +44,7 @@
 #include "kmymoneylineedit.h"
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "icons.h"
 
 using namespace Icons;

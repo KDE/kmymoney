@@ -27,10 +27,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
-#include "mymoneysecurity.h"
 #include "mymoneyforecast.h"
 #include "mymoneyprice.h"
 
@@ -39,6 +36,8 @@
 namespace reports { class KReportChartView; }
 
 class FixedColumnTreeView;
+class MyMoneyAccount;
+class MyMoneySecurity;
 class MyMoneyForecast;
 class MyMoneyPrice;
 /**

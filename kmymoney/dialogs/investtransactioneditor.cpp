@@ -87,7 +87,7 @@ public:
 
 
 InvestTransactionEditor::InvestTransactionEditor() :
-    m_transactionType(MyMoneySplit::UnknownTransactionType),
+    m_transactionType(eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType),
     d(new Private(this))
 {
 }
@@ -117,35 +117,35 @@ InvestTransactionEditor::InvestTransactionEditor(TransactionEditorContainer* reg
   activityFactory(m_transactionType);
 }
 
-void InvestTransactionEditor::activityFactory(MyMoneySplit::investTransactionTypeE type)
+void InvestTransactionEditor::activityFactory(eMyMoney::Split::InvestmentTransactionType type)
 {
   if (!d->m_activity || type != d->m_activity->type()) {
     delete d->m_activity;
     switch (type) {
       default:
-      case MyMoneySplit::BuyShares:
+      case eMyMoney::Split::InvestmentTransactionType::BuyShares:
         d->m_activity = new Buy(this);
         break;
-      case MyMoneySplit::SellShares:
+      case eMyMoney::Split::InvestmentTransactionType::SellShares:
         d->m_activity = new Sell(this);
         break;
-      case MyMoneySplit::Dividend:
-      case MyMoneySplit::Yield:
+      case eMyMoney::Split::InvestmentTransactionType::Dividend:
+      case eMyMoney::Split::InvestmentTransactionType::Yield:
         d->m_activity = new Div(this);
         break;
-      case MyMoneySplit::ReinvestDividend:
+      case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
         d->m_activity = new Reinvest(this);
         break;
-      case MyMoneySplit::AddShares:
+      case eMyMoney::Split::InvestmentTransactionType::AddShares:
         d->m_activity = new Add(this);
         break;
-      case MyMoneySplit::RemoveShares:
+      case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
         d->m_activity = new Remove(this);
         break;
-      case MyMoneySplit::SplitShares:
+      case eMyMoney::Split::InvestmentTransactionType::SplitShares:
         d->m_activity = new Split(this);
         break;
-      case MyMoneySplit::InterestIncome:
+      case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
         d->m_activity = new IntInc(this);
         break;
     }
@@ -156,8 +156,8 @@ void InvestTransactionEditor::createEditWidgets()
 {
   KMyMoneyActivityCombo* activity = new KMyMoneyActivityCombo();
   m_editWidgets["activity"] = activity;
-  connect(activity, SIGNAL(activitySelected(MyMoneySplit::investTransactionTypeE)), this, SLOT(slotUpdateActivity(MyMoneySplit::investTransactionTypeE)));
-  connect(activity, SIGNAL(activitySelected(MyMoneySplit::investTransactionTypeE)), this, SLOT(slotUpdateButtonState()));
+  connect(activity, SIGNAL(activitySelected(eMyMoney::Split::InvestmentTransactionType)), this, SLOT(slotUpdateActivity(eMyMoney::Split::InvestmentTransactionType)));
+  connect(activity, SIGNAL(activitySelected(eMyMoney::Split::InvestmentTransactionType)), this, SLOT(slotUpdateButtonState()));
 
   m_editWidgets["postdate"] = new kMyMoneyDateInput;
 
@@ -449,8 +449,8 @@ void InvestTransactionEditor::slotUpdateFeeCategory(const QString& id)
 
 void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
 {
-  static const QSet<MyMoneySplit::investTransactionTypeE> transactionTypesWithoutFee = QSet<MyMoneySplit::investTransactionTypeE>()
-      << MyMoneySplit::AddShares << MyMoneySplit::RemoveShares << MyMoneySplit::SplitShares;
+  static const QSet<eMyMoney::Split::InvestmentTransactionType> transactionTypesWithoutFee = QSet<eMyMoney::Split::InvestmentTransactionType>()
+      << eMyMoney::Split::InvestmentTransactionType::AddShares << eMyMoney::Split::InvestmentTransactionType::RemoveShares << eMyMoney::Split::InvestmentTransactionType::SplitShares;
 
   kMyMoneyEdit* feeAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount"));
   feeAmount->setHidden(txt.isEmpty());
@@ -481,8 +481,8 @@ void InvestTransactionEditor::slotUpdateInterestCategory(const QString& id)
 
 void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
 {
-  static const QSet<MyMoneySplit::investTransactionTypeE> transactionTypesWithInterest = QSet<MyMoneySplit::investTransactionTypeE>()
-      << MyMoneySplit::BuyShares << MyMoneySplit::SellShares << MyMoneySplit::Dividend << MyMoneySplit::InterestIncome << MyMoneySplit::Yield;
+  static const QSet<eMyMoney::Split::InvestmentTransactionType> transactionTypesWithInterest = QSet<eMyMoney::Split::InvestmentTransactionType>()
+      << eMyMoney::Split::InvestmentTransactionType::BuyShares << eMyMoney::Split::InvestmentTransactionType::SellShares << eMyMoney::Split::InvestmentTransactionType::Dividend << eMyMoney::Split::InvestmentTransactionType::InterestIncome << eMyMoney::Split::InvestmentTransactionType::Yield;
 
   QWidget* w = haveWidget("interest-amount");
   w->setHidden(txt.isEmpty());
@@ -650,13 +650,13 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
     slotUpdateTotalAmount();
 
     // status
-    if (m_split.reconcileFlag() == MyMoneySplit::Unknown)
-      m_split.setReconcileFlag(MyMoneySplit::NotReconciled);
+    if (m_split.reconcileFlag() == eMyMoney::Split::State::Unknown)
+      m_split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
     reconcile->setState(m_split.reconcileFlag());
 
   } else {
     postDate->loadDate(QDate());
-    reconcile->setState(MyMoneySplit::Unknown);
+    reconcile->setState(eMyMoney::Split::State::Unknown);
 
     // We don't allow to change the activity
     activity->setActivity(d->m_activity->type());
@@ -764,8 +764,8 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     MyMoneyMoney fee = feesEdit->value();
     MyMoneyMoney factor(-1, 1);
     switch (activityCombo->activity()) {
-      case MyMoneySplit::BuyShares:
-      case MyMoneySplit::ReinvestDividend:
+      case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+      case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
         factor = MyMoneyMoney::ONE;
         break;
       default:
@@ -778,7 +778,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     MyMoneyMoney interest = interestEdit->value();
     MyMoneyMoney factor(1, 1);
     switch (activityCombo->activity()) {
-      case MyMoneySplit::BuyShares:
+      case eMyMoney::Split::InvestmentTransactionType::BuyShares:
         factor = MyMoneyMoney::MINUS_ONE;
         break;
       default:
@@ -809,7 +809,7 @@ void InvestTransactionEditor::slotTransactionContainerGeometriesUpdated()
   slotUpdateActivity(d->m_activity->type());
 }
 
-void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransactionTypeE activity)
+void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTransactionType activity)
 {
   // create new activity object if required
   activityFactory(activity);
@@ -1000,7 +1000,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   QList<MyMoneySplit> feeSplits;
   QList<MyMoneySplit> interestSplits;
   MyMoneySecurity security, currency;
-  MyMoneySplit::investTransactionTypeE transactionType;
+  eMyMoney::Split::InvestmentTransactionType transactionType;
 
   // extract the splits from the original transaction
   KMyMoneyUtils::dissectTransaction(torig, sorig,
@@ -1028,16 +1028,16 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   // if the activity is not set in the combo widget, we keep
   // the one which is used in the original transaction
   KMyMoneyActivityCombo* activityCombo = dynamic_cast<KMyMoneyActivityCombo*>(haveWidget("activity"));
-  if (activityCombo->activity() == MyMoneySplit::UnknownTransactionType) {
+  if (activityCombo->activity() == eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
     activityFactory(transactionType);
   }
 
   // if we mark the split reconciled here, we'll use today's date if no reconciliation date is given
   KMyMoneyReconcileCombo* status = dynamic_cast<KMyMoneyReconcileCombo*>(m_editWidgets["status"]);
-  if (status->state() != MyMoneySplit::Unknown)
+  if (status->state() != eMyMoney::Split::State::Unknown)
     s0.setReconcileFlag(status->state());
 
-  if (s0.reconcileFlag() == MyMoneySplit::Reconciled && !s0.reconcileDate().isValid())
+  if (s0.reconcileFlag() == eMyMoney::Split::State::Reconciled && !s0.reconcileDate().isValid())
     s0.setReconcileDate(QDate::currentDate());
 
   // call the creation logic for the current selected activity

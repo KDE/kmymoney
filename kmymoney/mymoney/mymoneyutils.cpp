@@ -32,6 +32,7 @@
 #include <cstdarg>
 
 #include <QRegExp>
+#include <QDate>
 
 QString MyMoneyUtils::getFileExtension(QString strFileName)
 {

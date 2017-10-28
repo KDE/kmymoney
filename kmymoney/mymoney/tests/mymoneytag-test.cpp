@@ -41,11 +41,10 @@ void MyMoneyTagTest::testXml()
 
 void MyMoneyTagTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyTag::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyTag::getAttrName(static_cast<MyMoneyTag::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyTag::Attribute::Name; i < (int)MyMoneyTag::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyTag::getAttrName(static_cast<MyMoneyTag::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

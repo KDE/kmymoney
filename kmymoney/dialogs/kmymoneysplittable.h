@@ -39,6 +39,7 @@ class QFrame;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyaccount.h"
 

@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyaccount.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
 #include "kmymoneycategory.h"

@@ -33,11 +33,13 @@
 #include <KHelpClient>
 #include <KLocalizedString>
 #include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyschedule.h"
 #include "register.h"
 #include "transactionform.h"
 #include "transaction.h"
@@ -45,9 +47,9 @@
 #include "kmymoneyutils.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneydateinput.h"
-#include <KStandardGuiItem>
 #include "kmymoney.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 

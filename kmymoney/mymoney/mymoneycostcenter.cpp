@@ -32,59 +32,77 @@ using namespace MyMoneyStorageNodes;
 
 MyMoneyCostCenter MyMoneyCostCenter::null;
 
-MyMoneyCostCenter::MyMoneyCostCenter()
+class MyMoneyCostCenterPrivate {
+
+public:
+  QString m_name;
+};
+
+MyMoneyCostCenter::MyMoneyCostCenter() :
+  d_ptr(new MyMoneyCostCenterPrivate)
 {
 }
 
-MyMoneyCostCenter::MyMoneyCostCenter(const QString& id, const MyMoneyCostCenter& tag)
+MyMoneyCostCenter::MyMoneyCostCenter(const QString& name) :
+  d_ptr(new MyMoneyCostCenterPrivate)
 {
-  *this = tag;
-  m_id = id;
-}
-
-MyMoneyCostCenter::MyMoneyCostCenter(const QString& name)
-{
-  m_name = name;
+  Q_D(MyMoneyCostCenter);
+  d->m_name = name;
 }
 
 MyMoneyCostCenter::MyMoneyCostCenter(const QDomElement& node) :
-    MyMoneyObject(node)
+    MyMoneyObject(node),
+    d_ptr(new MyMoneyCostCenterPrivate)
 {
-  if (nodeNames[nnCostCenter] != node.tagName()) {
+  if (nodeNames[nnCostCenter] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not COSTCENTER");
-  }
-  m_name = node.attribute(getAttrName(anName));
+
+  Q_D(MyMoneyCostCenter);
+  d->m_name = node.attribute(getAttrName(Attribute::Name));
+}
+
+MyMoneyCostCenter::MyMoneyCostCenter(const MyMoneyCostCenter& other) :
+  MyMoneyObject(other.id()),
+  d_ptr(new MyMoneyCostCenterPrivate(*other.d_func()))
+{
+}
+
+MyMoneyCostCenter::MyMoneyCostCenter(const QString& id, const MyMoneyCostCenter& other) :
+  MyMoneyObject(id),
+  d_ptr(new MyMoneyCostCenterPrivate(*other.d_func()))
+{
 }
 
 MyMoneyCostCenter::~MyMoneyCostCenter()
 {
-}
-
-MyMoneyCostCenter::MyMoneyCostCenter(const MyMoneyCostCenter& right) :
-    MyMoneyObject(right)
-{
-  *this = right;
+  Q_D(MyMoneyCostCenter);
+  delete d;
 }
 
 bool MyMoneyCostCenter::operator == (const MyMoneyCostCenter& right) const
 {
+  Q_D(const MyMoneyCostCenter);
+  auto d2 = static_cast<const MyMoneyCostCenterPrivate *>(right.d_func());
   return (MyMoneyObject::operator==(right) &&
-          ((m_name.length() == 0 && right.m_name.length() == 0) || (m_name == right.m_name)));
+          ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)));
 }
 
 bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
 {
+  Q_D(const MyMoneyCostCenter);
+  auto d2 = static_cast<const MyMoneyCostCenterPrivate *>(right.d_func());
   QCollator col;
-  return col.compare(m_name, right.m_name);
+  return col.compare(d->m_name, d2->m_name);
 }
 
 void MyMoneyCostCenter::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement(nodeNames[nnCostCenter]);
+  auto el = document.createElement(nodeNames[nnCostCenter]);
 
   writeBaseXML(document, el);
 
-  el.setAttribute(getAttrName(anName), m_name);
+  Q_D(const MyMoneyCostCenter);
+  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
   parent.appendChild(el);
 }
 
@@ -93,19 +111,33 @@ bool MyMoneyCostCenter::hasReferenceTo(const QString& /*id*/) const
   return false;
 }
 
-QString MyMoneyCostCenter::shortName() const
+QString MyMoneyCostCenter::name() const
 {
-  QRegExp shortNumberExp("^(\\d+)\\s.+");
-  if(shortNumberExp.exactMatch(m_name)) {
-    return shortNumberExp.cap(1);
-  }
-  return m_name;
+  Q_D(const MyMoneyCostCenter);
+  return d->m_name;
 }
 
-const QString MyMoneyCostCenter::getAttrName(const attrNameE _attr)
+void MyMoneyCostCenter::setName(const QString& val)
 {
-  static const QMap<attrNameE, QString> attrNames = {
-    {anName, QStringLiteral("name")},
+  Q_D(MyMoneyCostCenter);
+  d->m_name = val;
+}
+
+
+QString MyMoneyCostCenter::shortName() const
+{
+  Q_D(const MyMoneyCostCenter);
+  QRegExp shortNumberExp("^(\\d+)\\s.+");
+  if(shortNumberExp.exactMatch(d->m_name)) {
+    return shortNumberExp.cap(1);
+  }
+  return d->m_name;
+}
+
+QString MyMoneyCostCenter::getAttrName(const Attribute attr)
+{
+  static const QMap<Attribute, QString> attrNames = {
+    {Attribute::Name, QStringLiteral("name")},
   };
-  return attrNames[_attr];
+  return attrNames[attr];
 }

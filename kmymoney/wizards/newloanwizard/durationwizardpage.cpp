@@ -30,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyschedule.h"
 #include "mymoneyenums.h"
 
 using namespace eMyMoney;

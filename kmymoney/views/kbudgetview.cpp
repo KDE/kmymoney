@@ -42,6 +42,7 @@
 #include "ui_kbudgetview.h"
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "kmymoneyedit.h"
 #include "kbudgetvalues.h"
 #include "kmymoney.h"

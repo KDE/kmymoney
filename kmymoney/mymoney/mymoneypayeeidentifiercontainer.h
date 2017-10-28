@@ -60,8 +60,6 @@ public:
 protected:
   void loadXML(QDomElement node);
   void writeXML(QDomDocument document, QDomElement parent) const;
-
-private:
   QList< ::payeeIdentifier > m_payeeIdentifiers;
 };
 

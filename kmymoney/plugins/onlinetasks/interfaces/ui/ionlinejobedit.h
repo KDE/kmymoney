@@ -24,6 +24,10 @@
 
 #include "mymoney/onlinejob.h"
 
+#include "mymoneymoney.h"
+
+class MyMoneyMoney;
+
 /**
  * @brief Interface for widgets editing onlineTasks
  *

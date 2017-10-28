@@ -2,6 +2,7 @@
                           mymoneyinstitution.h
                           -------------------
     copyright            : (C) 2002-2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -20,9 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QStringList>
-#include <QPixmap>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -31,24 +30,25 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "kmm_mymoney_export.h"
 
+class QString;
+class QStringList;
+class QPixmap;
+
 /**
   * This class represents a Bank contained within a MyMoneyFile object
   *
   * @author Thomas Baumgart
+  * @author Łukasz Wojniłowicz
   */
+class MyMoneyInstitutionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyInstitution : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(MyMoneyInstitution)
+  MyMoneyInstitutionPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-    enum elNameE { enAccountID, enAccountIDS, enAddress };
-    Q_ENUM(elNameE)
-
-    enum attrNameE { anID, anName, anManager, anSortCode,
-                     anStreet, anCity, anZip, anTelephone
-                   };
-    Q_ENUM(attrNameE)
 
   /**
     * This is the constructor for a new empty institution description
@@ -60,13 +60,18 @@ public:
     * values required for a new institution. This object should then be
     * passed to @see MyMoneyFile::addInstitution
     */
-  MyMoneyInstitution(const QString& name,
-                     const QString& city,
-                     const QString& street,
-                     const QString& postcode,
-                     const QString& telephone,
-                     const QString& manager,
-                     const QString& sortCode);
+  explicit MyMoneyInstitution(const QString& name,
+                              const QString& city,
+                              const QString& street,
+                              const QString& postcode,
+                              const QString& telephone,
+                              const QString& manager,
+                              const QString& sortCode);
+
+  MyMoneyInstitution(const MyMoneyInstitution & other);
+  MyMoneyInstitution(MyMoneyInstitution && other);
+  MyMoneyInstitution & operator=(MyMoneyInstitution other);
+  friend void swap(MyMoneyInstitution& first, MyMoneyInstitution& second);
 
   /**
     * This is the destructor for any MyMoneyInstitution object
@@ -79,7 +84,7 @@ public:
     * @param id id assigned to the new institution object
     * @param right institution definition
     */
-  MyMoneyInstitution(const QString& id, const MyMoneyInstitution& right);
+  MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other);
 
   /**
     * This is the constructor for an institution that is described by a
@@ -88,57 +93,31 @@ public:
     * @param el const reference to the QDomElement from which to
     *           create the object
     */
-  MyMoneyInstitution(const QDomElement& el);
+  explicit MyMoneyInstitution(const QDomElement& el);
 
-  const QString& manager() const {
-    return m_manager;
-  }
-  const QString& name() const {
-    return m_name;
-  }
-  const QString& postcode() const {
-    return m_postcode;
-  }
-  const QString& street() const {
-    return m_street;
-  }
-  const QString& telephone() const {
-    return m_telephone;
-  }
-  const QString& town() const {
-    return m_town;
-  }
-  const QString& city() const {
-    return town();
-  }
-  const QString& sortcode() const {
-    return m_sortcode;
-  }
+  QString manager() const;
+  void setManager(const QString& manager);
 
-  void setManager(QString manager) {
-    m_manager = manager;
-  }
-  void setName(QString name) {
-    m_name = name;
-  }
-  void setPostcode(QString code) {
-    m_postcode = code;
-  }
-  void setStreet(QString street) {
-    m_street = street;
-  }
-  void setTelephone(QString tel) {
-    m_telephone = tel;
-  }
-  void setTown(QString town) {
-    m_town = town;
-  }
-  void setCity(QString town) {
-    setTown(town);
-  }
-  void setSortcode(QString code) {
-    m_sortcode = code;
-  }
+  QString name() const;
+  void setName(const QString& name);
+
+  QString postcode() const;
+  void setPostcode(const QString& code);
+
+  QString street() const;
+  void setStreet(const QString& street);
+
+  QString telephone() const;
+  void setTelephone(const QString& tel);
+
+  QString town() const;
+  void setTown(const QString& town);
+
+  QString city() const;
+  void setCity(const QString& town);
+
+  QString sortcode() const;
+  void setSortcode(const QString& code);
 
   /**
     * This method adds the id of an account to the account list of
@@ -163,23 +142,19 @@ public:
     * this institution
     * return QStringList of account ids
     */
-  const QStringList& accountList() const {
-    return m_accountList;
-  }
+  QStringList accountList() const;
 
   /**
     * This method returns the number of accounts known to
     * this institution
     * @return number of accounts
     */
-  unsigned int accountCount() const {
-    return m_accountList.count();
-  }
+  unsigned int accountCount() const;
 
   bool operator == (const MyMoneyInstitution&) const;
   bool operator < (const MyMoneyInstitution& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -190,59 +165,55 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   QPixmap pixmap(const int size = 64) const;
 
 private:
-  // Bank 'fields'
-  /**
-    * This member variable keeps the name of the institution
-    */
-  QString m_name;
 
-  /**
-    * This member variable keeps the city of the institution
-    */
-  QString m_town;
+  enum class Element { AccountID,
+                       AccountIDS,
+                       Address };
 
-  /**
-    * This member variable keeps the street of the institution
-    */
-  QString m_street;
+  enum class Attribute { ID = 0,
+                         Name,
+                         Manager,
+                         SortCode,
+                         Street,
+                         City,
+                         Zip,
+                         Telephone,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
 
-  /**
-    * This member variable keeps the zip-code of the institution
-    */
-  QString m_postcode;
-
-  /**
-    * This member variable keeps the telephone number of the institution
-    */
-  QString m_telephone;
-
-  /**
-    * This member variable keeps the name of the representative of
-    * the institution
-    */
-  QString m_manager;
-
-  /**
-    * This member variable keeps the sort code of the institution.
-    * FIXME: I have no idea
-    * what it is good for. I keep it because it was in the old engine.
-    */
-  QString m_sortcode;
-
-  /**
-    * This member variable keeps the sorted list of the account ids
-    * available at this institution
-    */
-  QStringList m_accountList;
-
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
+  friend uint qHash(const Attribute, uint seed);
+  friend uint qHash(const Element, uint seed);
 };
+
+inline uint qHash(const MyMoneyInstitution::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+inline uint qHash(const MyMoneyInstitution::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyInstitution& first, MyMoneyInstitution& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+  swap(first.m_kvp, second.m_kvp);
+}
+
+inline MyMoneyInstitution::MyMoneyInstitution(MyMoneyInstitution && other) : MyMoneyInstitution() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyInstitution & MyMoneyInstitution::operator=(MyMoneyInstitution other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 /**
   * Make it possible to hold @ref MyMoneyInstitution objects inside @ref QVariant objects.

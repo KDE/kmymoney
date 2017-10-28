@@ -82,22 +82,20 @@ void onlineJobTest::testCopyConstructorWithNewId()
 
 void onlineJobTest::testElementNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<onlineJob::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = onlineJob::getElName(static_cast<onlineJob::elNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)onlineJob::Element::OnlineTask; i <= (int)onlineJob::Element::OnlineTask; ++i) {
+    auto isEmpty = onlineJob::getElName(static_cast<onlineJob::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
 }
 
 void onlineJobTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<onlineJob::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = onlineJob::getAttrName(static_cast<onlineJob::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)onlineJob::Attribute::Send; i < (int)onlineJob::Attribute::LastAttribute; ++i) {
+    auto isEmpty = onlineJob::getAttrName(static_cast<onlineJob::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

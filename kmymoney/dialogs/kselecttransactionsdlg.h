@@ -28,11 +28,11 @@
 // Project Includes
 
 #include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
 #include "selectedtransaction.h"
 
 #include "ui_kselecttransactionsdlgdecl.h"
 
+class MyMoneyTransaction;
 
 class KSelectTransactionsDlgDecl : public QDialog, public Ui::KSelectTransactionsDlgDecl
 {

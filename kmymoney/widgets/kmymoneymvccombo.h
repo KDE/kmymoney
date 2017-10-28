@@ -32,15 +32,14 @@
 // Project Includes
 
 #include "kmm_widgets_export.h"
-
-#include "mymoneyaccount.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneyschedule.h"
 #include "register.h"
 #include "mymoneytransactionfilter.h"
 
 class QSortFilterProxyModel;
+class MyMoneyPayee;
+class MyMoneySchedule;
+class MyMoneyTag;
+class MyMoneyTransactionFilter;
 
 /**
   * @author Cristian Onet
@@ -287,8 +286,8 @@ class KMM_WIDGETS_EXPORT KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
 public:
   KMyMoneyReconcileCombo(QWidget *w = 0);
 
-  void setState(MyMoneySplit::reconcileFlagE state);
-  MyMoneySplit::reconcileFlagE state() const;
+  void setState(eMyMoney::Split::State state);
+  eMyMoney::Split::State state() const;
   void removeDontCare();
 
 protected slots:
@@ -340,8 +339,8 @@ public:
     */
   KMyMoneyActivityCombo(QWidget *w = 0);
 
-  void setActivity(MyMoneySplit::investTransactionTypeE activity);
-  MyMoneySplit::investTransactionTypeE activity() const {
+  void setActivity(eMyMoney::Split::InvestmentTransactionType activity);
+  eMyMoney::Split::InvestmentTransactionType activity() const {
     return m_activity;
   }
 
@@ -349,10 +348,10 @@ protected slots:
   void slotSetActivity(const QString& id);
 
 signals:
-  void activitySelected(MyMoneySplit::investTransactionTypeE);
+  void activitySelected(eMyMoney::Split::InvestmentTransactionType);
 
 private:
-  MyMoneySplit::investTransactionTypeE  m_activity;
+  eMyMoney::Split::InvestmentTransactionType  m_activity;
 };
 
 class KMM_WIDGETS_EXPORT KMyMoneyGeneralCombo : public KComboBox
@@ -395,22 +394,22 @@ class KMM_WIDGETS_EXPORT KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
 public:
   KMyMoneyPeriodCombo(QWidget* parent = 0);
 
-  MyMoneyTransactionFilter::dateOptionE currentItem() const;
-  void setCurrentItem(MyMoneyTransactionFilter::dateOptionE id);
+  eMyMoney::TransactionFilter::Date currentItem() const;
+  void setCurrentItem(eMyMoney::TransactionFilter::Date id);
 
   /**
    * This function returns the actual start date for the given
    * period definition given by @p id. For user defined periods
    * the returned value is QDate()
    */
-  static QDate start(MyMoneyTransactionFilter::dateOptionE id);
+  static QDate start(eMyMoney::TransactionFilter::Date id);
 
   /**
    * This function returns the actual end date for the given
    * period definition given by @p id. For user defined periods
    * the returned value is QDate()
    */
-  static QDate end(MyMoneyTransactionFilter::dateOptionE id);
+  static QDate end(eMyMoney::TransactionFilter::Date id);
 
   // static void dates(QDate& start, QDate& end, MyMoneyTransactionFilter::dateOptionE id);
 };

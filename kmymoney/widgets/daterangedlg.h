@@ -31,6 +31,7 @@
 // Project Includes
 
 #include "mymoneytransactionfilter.h"
+#include "mymoneyenums.h"
 
 namespace Ui
 {
@@ -42,38 +43,6 @@ class DateRangeDlg : public QWidget
   Q_OBJECT
 
 public:
-
-  /*
-  // Make sure to keep the following enum valus in sync with the values
-  // used by the GUI in daterangedlgdecl.ui
-  enum dateOptionE {
-    allDates = 0,
-    asOfToday,
-    currentMonth,
-    currentYear,
-    monthToDate,
-    yearToDate,
-    yearToMonth,
-    lastMonth,
-    lastYear,
-    last7Days,
-    last30Days,
-    last3Months,
-    last6Months,
-    last12Months,
-    next7Days,
-    next30Days,
-    next3Months,
-    next6Months,
-    next12Months,
-    userDefined,
-    last3ToNext3Months,
-    last11Months,
-    next18Months,
-    // insert new constants above of this line
-    dateOptionCount
-  };
-  */
   DateRangeDlg(QWidget *parent = 0);
   ~DateRangeDlg();
 
@@ -81,7 +50,7 @@ public:
    * Setup a sliding date range which is relative to the
    * current date (sliding date range)
    */
-  void setDateRange(MyMoneyTransactionFilter::dateOptionE);
+  void setDateRange(eMyMoney::TransactionFilter::Date);
 
   /*!
    * Setup a fixed user selected date range (does not slide)
@@ -91,7 +60,7 @@ public:
   /*!
    * Return the currently selected date range option
    */
-  MyMoneyTransactionFilter::dateOptionE dateRange() const;
+  eMyMoney::TransactionFilter::Date dateRange() const;
 
   QDate fromDate() const;
   QDate toDate() const;
@@ -112,8 +81,8 @@ private:
   void setupDatePage();
 
   Ui::DateRangeDlgDecl*  m_ui;
-  QDate                  m_startDates[MyMoneyTransactionFilter::dateOptionCount];
-  QDate                  m_endDates[MyMoneyTransactionFilter::dateOptionCount];
+  QDate                  m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
+  QDate                  m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
 };
 
 #endif

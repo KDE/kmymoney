@@ -28,7 +28,6 @@
 #include <QString>
 #include <QStringList>
 
-#include "mymoneyaccount.h"
 #include "mymoneystatement.h"
 #include "transactionmatchfinder.h"
 
@@ -74,9 +73,7 @@ public:
   void setAutoCreatePayee(bool create);
   void setAskPayeeCategory(bool ask);
 
-  const MyMoneyAccount& account() const {
-    return m_account;
-  };
+  const MyMoneyAccount& account() const;
 
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
@@ -129,8 +126,6 @@ private:
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
-  MyMoneyAccount          m_account;
-  MyMoneyAccount          m_brokerageAccount;
   QStringList             m_dontAskAgain;
   bool                    m_userAbort;
   bool                    m_autoCreatePayee;

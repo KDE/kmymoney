@@ -39,7 +39,7 @@ namespace Invest
 class Activity
 {
 public:
-  virtual MyMoneySplit::investTransactionTypeE type() const = 0;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const = 0;
   virtual void showWidgets() const = 0;
   virtual bool isComplete(QString& reason) const = 0;
 
@@ -98,8 +98,8 @@ class Buy : public Activity
 public:
   Buy(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Buy() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::BuyShares;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::BuyShares;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -111,8 +111,8 @@ class Sell : public Activity
 public:
   Sell(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Sell() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::SellShares;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::SellShares;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -124,8 +124,8 @@ class Div : public Activity
 public:
   Div(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Div() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::Dividend;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::Dividend;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -137,8 +137,8 @@ class Reinvest : public Activity
 public:
   Reinvest(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Reinvest() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::ReinvestDividend;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::ReinvestDividend;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -150,8 +150,8 @@ class Add : public Activity
 public:
   Add(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Add() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::AddShares;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::AddShares;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -163,8 +163,8 @@ class Remove : public Activity
 public:
   Remove(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Remove() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::RemoveShares;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::RemoveShares;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -176,8 +176,8 @@ class Split : public Activity
 public:
   Split(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Split() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::SplitShares;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::SplitShares;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;
@@ -189,8 +189,8 @@ class IntInc : public Activity
 public:
   IntInc(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~IntInc() {}
-  virtual MyMoneySplit::investTransactionTypeE type() const {
-    return MyMoneySplit::InterestIncome;
+  virtual eMyMoney::Split::InvestmentTransactionType type() const {
+    return eMyMoney::Split::InvestmentTransactionType::InterestIncome;
   }
   virtual void showWidgets() const;
   virtual bool isComplete(QString& reason) const;

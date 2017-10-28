@@ -33,9 +33,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "registeritem.h"
 #include "transactioneditorcontainer.h"
+
+class MyMoneyAccount;
 
 namespace KMyMoneyRegister { class Transaction; }
 namespace KMyMoneyTransactionForm { class TransactionForm; }

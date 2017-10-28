@@ -55,8 +55,13 @@ email                : mte@users.sourceforge.net
 #include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneyschedule.h"
 #include "mymoneyprice.h"
+#include "mymoneypayee.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneyexception.h"
 #include "kgncimportoptionsdlg.h"
 #include "kgncpricesourcedlg.h"
@@ -1572,7 +1577,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
 
     if (gncdebug)
       qDebug() << "Gnucash account" << gac->id() << "has id of" << acc.id()
-      << ", type of" << KMyMoneyUtils::accountTypeToString(acc.accountType())
+      << ", type of" << MyMoneyAccount::accountTypeToString(acc.accountType())
       << "parent is" << acc.parentAccountId();
 
     signalProgress(++m_accountCount, 0);
@@ -1669,13 +1674,13 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   // reconciled state and date
   switch (gsp->recon().at(0).toLatin1()) {
     case 'n':
-      split.setReconcileFlag(MyMoneySplit::NotReconciled);
+      split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
       break;
     case 'c':
-      split.setReconcileFlag(MyMoneySplit::Cleared);
+      split.setReconcileFlag(eMyMoney::Split::State::Cleared);
       break;
     case 'y':
-      split.setReconcileFlag(MyMoneySplit::Reconciled);
+      split.setReconcileFlag(eMyMoney::Split::State::Reconciled);
       break;
   }
   split.setReconcileDate(gsp->reconDate());
@@ -1852,7 +1857,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
 
   // action, value and account will be set from slots
   // reconcile state, always Not since it hasn't even been posted yet (?)
-  split.setReconcileFlag(MyMoneySplit::NotReconciled);
+  split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
   // memo
   split.setMemo(gsp->memo());
   // payee id

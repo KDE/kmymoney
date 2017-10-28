@@ -30,7 +30,8 @@
 // Project Includes
 
 #include "ui_additionalfeeswizardpagedecl.h"
-#include "mymoneyaccount.h"
+
+class MyMoneyAccount;
 
 /**
  * This class implements the Additional Fees page of the

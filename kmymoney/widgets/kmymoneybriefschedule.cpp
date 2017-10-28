@@ -35,11 +35,16 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
+#include "mymoneyaccount.h"
 #include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "kmymoneyutils.h"
 #include "icons/icons.h"
 

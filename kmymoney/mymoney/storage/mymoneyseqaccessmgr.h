@@ -8,7 +8,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                       (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,7 +33,9 @@
 
 #include "imymoneystorage.h"
 #include "imymoneyserialize.h"
+#include "mymoneypayee.h"
 #include "mymoneymap.h"
+#include "mymoneykeyvaluecontainer.h"
 
 /**
   * @author Thomas Baumgart
@@ -594,41 +596,31 @@ public:
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  const MyMoneyAccount liability() const override {
-    return account(STD_ACC_LIABILITY);
-  };
+  MyMoneyAccount liability() const override;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  const MyMoneyAccount asset() const override {
-    return account(STD_ACC_ASSET);
-  };
+  MyMoneyAccount asset() const override;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  const MyMoneyAccount expense() const override {
-    return account(STD_ACC_EXPENSE);
-  };
+  MyMoneyAccount expense() const override;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  const MyMoneyAccount income() const override {
-    return account(STD_ACC_INCOME);
-  };
+  MyMoneyAccount income() const override;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  const MyMoneyAccount equity() const override {
-    return account(STD_ACC_EQUITY);
-  };
+  MyMoneyAccount equity() const override;
 
   virtual void loadAccounts(const QMap<QString, MyMoneyAccount>& acc) override;
   virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map) override;

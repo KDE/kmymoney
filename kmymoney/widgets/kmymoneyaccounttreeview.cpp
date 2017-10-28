@@ -26,6 +26,7 @@
 
 #include <QHeaderView>
 #include <QMouseEvent>
+#include <QPoint>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,6 +37,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "accountsviewproxymodel.h"

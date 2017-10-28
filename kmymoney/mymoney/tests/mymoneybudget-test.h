@@ -36,6 +36,8 @@ private slots:
   void addMonthByMonthToYearly();
   void addMonthByMonthToMonthByMonth();
   void cleanup();
+  void testElementNames();
+  void testAttributeNames();
 };
 
 #endif

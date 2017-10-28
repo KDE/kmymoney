@@ -19,7 +19,9 @@ email                : lukasz.wojnilowicz@gmail.com
 
 #include <csvimporter.h>
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include <mymoneyseqaccessmgr.h>
+
 
 #include "csvimporttestcommon.h"
 

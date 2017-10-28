@@ -4,6 +4,7 @@
     begin                : Thu Oct 24 2002
     copyright            : (C) 2002 by Kevin Tambascio <ktambascio@users.sourceforge.net>
                            (C) 2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -38,13 +39,21 @@
 #include "imymoneyserialize.h"
 #include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneymoney.h"
 #include "mymoneyschedule.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
 #include "mymoneyinstitution.h"
 #include "mymoneystoragenames.h"
 #include "mymoneyutils.h"
+#include "mymoneyprice.h"
+#include "mymoneycostcenter.h"
+#include "mymoneytransaction.h"
+#include "onlinejob.h"
 
 using namespace MyMoneyStorageTags;
 using namespace MyMoneyStorageNodes;

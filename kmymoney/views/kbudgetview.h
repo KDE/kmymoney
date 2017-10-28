@@ -23,6 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -38,7 +40,9 @@
   * @author Thomas Baumgart
   */
 
+class QString;
 class QTreeWidgetItem;
+
 class KBudgetViewPrivate;
 class KBudgetView : public KMyMoneyAccountsViewBase
 {

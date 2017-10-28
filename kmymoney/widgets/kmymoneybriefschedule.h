@@ -28,6 +28,7 @@
 
 #include <QWidget>
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

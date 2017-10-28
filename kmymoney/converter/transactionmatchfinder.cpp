@@ -17,12 +17,15 @@
 #include "transactionmatchfinder.h"
 
 #include <QDebug>
+#include <QDate>
 
 #include <KLocalizedString>
 
+#include "mymoneymoney.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
+#include "mymoneyexception.h"
 
 TransactionMatchFinder::TransactionMatchFinder(int _matchWindow) :
     matchWindow(_matchWindow),

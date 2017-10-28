@@ -20,12 +20,14 @@
 #ifndef ONLINEJOB_H
 #define ONLINEJOB_H
 
+#include <QMetaType>
+
 #include "mymoneyobject.h"
-#include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "onlinejobmessage.h"
 
 class onlineTask;
+class MyMoneyAccount;
 
 /**
  * @brief Class to share jobs which can be procceded by an online banking plugin
@@ -47,21 +49,16 @@ class onlineTask;
  * @see onlineJobTyped
  * @todo LOW make data implicitly shared
  */
+class onlineJobPrivate;
 class KMM_MYMONEY_EXPORT onlineJob : public MyMoneyObject
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(onlineJob)
+  onlineJobPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  enum elNameE { enOnlineTask };
-  Q_ENUM(elNameE)
-
-  enum attrNameE { anSend, anBankAnswerDate, anBankAnswerState, anIID,
-                   anAbortedByUser, anAcceptedByBank, anRejectedByBank, anSendingError
-                 };
-  Q_ENUM(attrNameE)
-
-  /**
+   /**
    * @brief Contructor for null onlineJobs
    *
    * A onlineJob which is null cannot become valid again.
@@ -74,20 +71,24 @@ public:
    *
    * The onlineJob takes ownership of the task. The task is deleted in the destructor.
    */
-  onlineJob(onlineTask* task, const QString& id = MyMoneyObject::m_emptyId);
+  onlineJob(onlineTask* task, const QString& id); // krazy:exclude=explicit
+  onlineJob(onlineTask* task); // krazy:exclude=explicit
 
-  /** @brief Copy constructor */
-  onlineJob(onlineJob const& other);
+  /** @brief Contruct from xml */
+  explicit onlineJob(const QDomElement&);
 
   /**
    * @brief Create new onlineJob as copy of other
    *
    * This constructor does not copy the status information but the task only.
    */
-  onlineJob(const QString &id, const onlineJob& other);
+  onlineJob(const QString &id,
+            const onlineJob& other);
 
-  /** @brief Contruct from xml */
-  onlineJob(const QDomElement&);
+  onlineJob(const onlineJob & other);
+  onlineJob(onlineJob && other);
+  onlineJob & operator=(onlineJob other);
+  friend void swap(onlineJob& first, onlineJob& second);
 
   virtual ~onlineJob();
 
@@ -111,9 +112,7 @@ public:
    * @brief Returns task attached to this onlineJob as const
    * @throws emptyTask if isNull()
    */
-  const onlineTask* constTask() const {
-    return task();
-  }
+  const onlineTask* constTask() const;
 
   /**
    * @brief Returns task of type T attached to this onlineJob
@@ -136,8 +135,8 @@ public:
   QString taskIid() const;
 
   /** @todo implement */
-  virtual bool hasReferenceTo(const QString &id) const;
-  virtual void writeXML(QDomDocument &document, QDomElement &parent) const;
+  bool hasReferenceTo(const QString &id) const override;
+  void writeXML(QDomDocument &document, QDomElement &parent) const override;
 
   /**
    * @brief The state of a job given by the onlinePlugin
@@ -183,9 +182,7 @@ public:
    *
    * @return true if no task is attached to this job
    */
-  virtual bool isNull() const {
-    return (m_task == 0);
-  }
+  virtual bool isNull() const;
 
   /**
    * @brief Checks if an valid onlineTask is attached
@@ -201,9 +198,7 @@ public:
    *
    * @return A valid QDateTime if send to bank, an QDateTime() if not send.
    */
-  virtual QDateTime sendDate() const {
-    return m_jobSend;
-  }
+  virtual QDateTime sendDate() const;
 
   /**
    * @brief Mark this job as send
@@ -212,7 +207,8 @@ public:
    *
    * Set dateTime to QDateTime to mark unsend.
    */
-  virtual void setJobSend(const QDateTime &dateTime = QDateTime::currentDateTime());
+  virtual void setJobSend(const QDateTime &dateTime);
+  virtual void setJobSend();
 
   /**
    * @brief The bank's answer to this job
@@ -221,23 +217,20 @@ public:
    *
    * Set dateTime to QDateTime() and bankAnswer to noState to mark unsend. If bankAnswer == noState dateTime.isNull() must be true!
    */
-  void setBankAnswer(const sendingState sendingState, const QDateTime &dateTime = QDateTime::currentDateTime());
+  void setBankAnswer(const sendingState sendingState, const QDateTime &dateTime);
+  void setBankAnswer(const sendingState sendingState);
 
   /**
    * @brief DateTime of the last status update by the bank
    *
    */
-  QDateTime bankAnswerDate() const {
-    return m_jobBankAnswerDate;
-  }
+  QDateTime bankAnswerDate() const;
 
   /**
    * @brief Returns last status sand by bank
    * @return
    */
-  sendingState bankAnswerState() const {
-    return m_jobBankAnswerState;
-  }
+  sendingState bankAnswerState() const;
 
   /**
    * @brief locks the onlineJob for sending it
@@ -259,9 +252,7 @@ public:
   /**
    * @brief Get lock status
    */
-  virtual bool isLocked() const {
-    return m_locked;
-  }
+  virtual bool isLocked() const;
 
   /**
    * @brief Make this onlineJob a "new" onlineJob
@@ -290,8 +281,6 @@ public:
    */
   virtual QList<onlineJobMessage> jobMessageList() const;
 
-  onlineJob operator =(const onlineJob&);
-
   /**
    * @brief Thrown if a cast of a task fails
    *
@@ -300,8 +289,8 @@ public:
   class badTaskCast : public MyMoneyException
   {
   public:
-    badTaskCast(const QString& file = "", const long unsigned int& line = 0)
-        : MyMoneyException("Casted onlineTask with wrong type", file, line) {}
+    explicit badTaskCast(const QString& file = "", const long unsigned int& line = 0)
+      : MyMoneyException("Casted onlineTask with wrong type", file, line) {}
   };
 
   /**
@@ -310,8 +299,8 @@ public:
   class emptyTask : public MyMoneyException
   {
   public:
-    emptyTask(const QString& file = "", const long unsigned int& line = 0)
-        : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line) {}
+    explicit emptyTask(const QString& file = "", const long unsigned int& line = 0)
+      : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line) {}
   };
 
   /** @brief onlineTask attatched to this job */
@@ -319,43 +308,51 @@ public:
 
 private:
 
-  /**
-   * @brief Date-time the job was sent to the bank
-   *
-   * This does not mean an answer was given by the bank
-   */
-  QDateTime m_jobSend;
-
-  /**
-   * @brief Date-time of confirmation/rejection of the bank
-   *
-   * which state this timestamp belongs to is stored in m_jobBankAnswerState
-   */
-  QDateTime m_jobBankAnswerDate;
-
-  /**
-   * @brief Answer of the bank
-   *
-   * combined with m_jobBankAnswerDate
-   */
-  sendingState m_jobBankAnswerState;
-
-  /**
-   * @brief Validation result status
-   */
-  QList<onlineJobMessage> m_messageList;
-
-  /**
-   * @brief Locking state
-   */
-  bool m_locked;
-
   /** @brief Copies stored pointers (used by copy constructors) */
   inline void copyPointerFromOtherJob(const onlineJob& other);
 
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
+  enum class Element { OnlineTask };
+
+  enum class Attribute { Send = 0,
+                         BankAnswerDate,
+                         BankAnswerState,
+                         IID,
+                         AbortedByUser,
+                         AcceptedByBank,
+                         RejectedByBank,
+                         SendingError,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
+
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
+
+  friend uint qHash(const Element, uint seed);
+  friend uint qHash(const Attribute, uint seed);
 };
+
+inline uint qHash(const onlineJob::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+inline uint qHash(const onlineJob::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(onlineJob& first, onlineJob& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+  swap(first.m_task, second.m_task);
+}
+
+inline onlineJob::onlineJob(onlineJob && other) : onlineJob() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline onlineJob & onlineJob::operator=(onlineJob other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 template<class T>
 T* onlineJob::task()

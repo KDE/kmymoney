@@ -27,11 +27,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-
 #include "kselecttransactionsdlg.h"
 
-
+class MyMoneyAccount;
 class KMergeTransactionsDlg: public KSelectTransactionsDlg
 {
   Q_OBJECT

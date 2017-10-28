@@ -30,6 +30,8 @@
 #include <QList>
 #include <QStringList>
 #include <QTextStream>
+#include <QDataStream>
+#include <QColor>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,9 +42,17 @@
 
 #include "imymoneyserialize.h"
 #include "imymoneystorage.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
+#include "mymoneytag.h"
+#include "mymoneyreport.h"
+#include "mymoneybudget.h"
+#include "mymoneyschedule.h"
+#include "mymoneypayee.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 MyMoneyStorageDump::MyMoneyStorageDump()
 {
@@ -433,7 +443,7 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
     s << "    Action = '" << (*it_s).action() << "'\n";
     s << "    Nr = '" << (*it_s).number() << "'\n";
     s << "    ReconcileFlag = '" << reconcileToString((*it_s).reconcileFlag()) << "'\n";
-    if ((*it_s).reconcileFlag() != MyMoneySplit::NotReconciled) {
+    if ((*it_s).reconcileFlag() != eMyMoney::Split::State::NotReconciled) {
       s << "    ReconcileDate = " << (*it_s).reconcileDate().toString(Qt::ISODate) << "\n";
     }
     s << "    BankID = " << (*it_s).bankID() << "\n";
@@ -445,21 +455,21 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
 
 #define i18n QString
 
-const QString MyMoneyStorageDump::reconcileToString(MyMoneySplit::reconcileFlagE flag) const
+const QString MyMoneyStorageDump::reconcileToString(eMyMoney::Split::State flag) const
 {
   QString rc;
 
   switch (flag) {
-    case MyMoneySplit::NotReconciled:
+    case eMyMoney::Split::State::NotReconciled:
       rc = i18nc("Reconciliation status 'Not Reconciled'", "not reconciled");
       break;
-    case MyMoneySplit::Cleared:
+    case eMyMoney::Split::State::Cleared:
       rc = i18nc("Reconciliation status 'Cleared'", "cleared");
       break;
-    case MyMoneySplit::Reconciled:
+    case eMyMoney::Split::State::Reconciled:
       rc = i18nc("Reconciliation status 'Reconciled'", "reconciled");
       break;
-    case MyMoneySplit::Frozen:
+    case eMyMoney::Split::State::Frozen:
       rc = i18nc("Reconciliation status 'Frozen'", "frozen");
       break;
     default:

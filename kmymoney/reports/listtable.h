@@ -23,6 +23,7 @@
 // QT Includes
 
 #include <QVector>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,8 +31,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyreport.h"
 #include "reporttable.h"
+
+class MyMoneyReport;
 
 namespace reports
 {

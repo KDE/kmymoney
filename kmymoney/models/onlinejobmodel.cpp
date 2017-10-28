@@ -24,6 +24,7 @@
 
 #include "mymoneyobject.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneyutils.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"

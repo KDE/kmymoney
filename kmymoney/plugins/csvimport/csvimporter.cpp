@@ -40,6 +40,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneytransaction.h"
 #include "csvutil.h"

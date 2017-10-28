@@ -25,6 +25,7 @@
 // QT Includes
 
 #include <QMenu>
+#include <QPoint>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -96,6 +96,8 @@
 #include "mymoneyaccount.h"
 #include "kmymoneyedit.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+#include "mymoneyreport.h"
 #include "mymoneyenums.h"
 
 using namespace Icons;
@@ -1812,9 +1814,9 @@ void KMyMoneyView::fixFile_1()
         for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
           if (acc.accountType() == Account::Investment) {
-            for (it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
-              if (!list.contains(*it_b)) {
-                missing.append(*it_b);
+            foreach (const auto accountID, acc.accountList()) {
+              if (!list.contains(accountID)) {
+                missing.append(accountID);
               }
             }
           }
@@ -1845,9 +1847,9 @@ if (!m_accountsView->allItemsSelected())
     for (it_a = list.begin(); it_a != list.end(); ++it_a) {
       MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
       if (acc.accountType() == Account::Investment) {
-        for (it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
-          if (!list.contains(*it_b)) {
-            missing.append(*it_b);
+        foreach (const auto accountID, acc.accountList()) {
+          if (!list.contains(accountID)) {
+            missing.append(accountID);
           }
         }
       }
@@ -1942,11 +1944,11 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
         t.removeSplit(*it_s);
         updated = true;
       }
-      if ((*it_s).reconcileFlag() != MyMoneySplit::NotReconciled) {
+      if ((*it_s).reconcileFlag() != eMyMoney::Split::State::NotReconciled) {
         qDebug() << Q_FUNC_INFO << " " << sched.id() << " " << (*it_s).id() << " should be 'not reconciled'";
         MyMoneySplit split = *it_s;
         split.setReconcileDate(QDate());
-        split.setReconcileFlag(MyMoneySplit::NotReconciled);
+        split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
         t.modifySplit(split);
         updated = true;
       }

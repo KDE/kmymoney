@@ -85,7 +85,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   MyMoneyReport reportCfg = MyMoneyReport(
                               MyMoneyReport::eAssetLiability,
                               MyMoneyReport::eMonths,
-                              MyMoneyTransactionFilter::last3ToNext3Months,
+                              eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
                               MyMoneyReport::eDetailTotal,
                               i18n("%1 Balance History", account.name()),
                               i18n("Generated Report")
@@ -98,9 +98,8 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   reportCfg.setIncludingForecast(true);
   reportCfg.setIncludingBudgetActuals(true);
   if (account.accountType() == eMyMoney::Account::Investment) {
-    QStringList::const_iterator it_a;
-    for (it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a)
-      reportCfg.addAccount(*it_a);
+    foreach (const auto accountID, account.accountList())
+      reportCfg.addAccount(accountID);
   } else
     reportCfg.addAccount(account.id());
   reportCfg.setColumnsAreDays(true);

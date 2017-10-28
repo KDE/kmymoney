@@ -37,7 +37,7 @@
 
 #include "ui_knewloanwizarddecl.h"
 #include "mymoneyschedule.h"
-#include "mymoneyaccount.h"
+#include "mymoneyaccountloan.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 
@@ -54,6 +54,7 @@
   * created loan.
   *
   */
+class MyMoneyAccountLoan;
 class KNewLoanWizardDecl : public QWizard, public Ui::KNewLoanWizardDecl
 {
 public:

@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
                                2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -21,8 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-class QStringList;
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -31,6 +31,9 @@ class QStringList;
 #include "mymoneyobject.h"
 #include "mymoneypayeeidentifiercontainer.h"
 
+class QString;
+class QStringList;
+
 /**
   * This class represents a payee or receiver within the MyMoney engine.
   * Since it is not payee-specific, it is also used as a generic address
@@ -38,59 +41,13 @@ class QStringList;
   *
   * @author Thomas Baumgart
   */
+class MyMoneyPayeePrivate;
 class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPayeeIdentifierContainer
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(MyMoneyPayee)
+  MyMoneyPayeePrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
-
-public:
-    enum elNameE { enAddress };
-    Q_ENUM(elNameE)
-
-    enum attrNameE { anName, anType, anReference, anNotes, anMatchingEnabled, anUsingMatchKey,
-                     anMatchIgnoreCase, anMatchKey, anDefaultAccountID,
-                     anStreet, anCity, anPostCode, anEmail, anState, anTelephone
-                   };
-    Q_ENUM(attrNameE)
-
-private:
-  // Simple fields
-  QString m_name;
-  QString m_address;
-  QString m_city;
-  QString m_state;
-  QString m_postcode;
-  QString m_telephone;
-  QString m_email;
-  QString m_notes;
-
-  // Transaction matching fields
-  bool m_matchingEnabled;      //< Whether this payee should be matched at all
-  bool m_usingMatchKey;        //< If so, whether a m_matchKey list is used (true), or just m_name is used (false)
-  bool m_matchKeyIgnoreCase;   //< Whether to ignore the case of the match key or name
-
-  /**
-   * Semicolon separated list of matching keys used when trying to find a suitable
-   * payee for imported transactions.
-   */
-  QString m_matchKey;
-
-  // Category (account) matching fields
-  QString m_defaultAccountId;
-
-  /**
-    * This member keeps a reference to an external database
-    * (e.g. kaddressbook). It is the responsibility of the
-    * application to format the reference string
-    * (e.g. encoding the name of the external database into the
-    * reference string).
-    * If no external database is available it should be kept
-    * empty by the application.
-    */
-  QString m_reference;
-
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
 
 public:
   typedef enum {
@@ -101,7 +58,7 @@ public:
   } payeeMatchType;
 
   MyMoneyPayee();
-  MyMoneyPayee(const QString& id, const MyMoneyPayee& payee);
+
   explicit MyMoneyPayee(const QString& name,
                         const QString& address = QString(),
                         const QString& city = QString(),
@@ -116,71 +73,44 @@ public:
     * @param el const reference to the QDomElement from which to
     *           create the object
     */
-  MyMoneyPayee(const QDomElement& el);
+  explicit MyMoneyPayee(const QDomElement& node);
+
+  MyMoneyPayee(const QString& id,
+               const MyMoneyPayee& other);
+
+  MyMoneyPayee(const MyMoneyPayee & other);
+  MyMoneyPayee(MyMoneyPayee && other);
+  MyMoneyPayee & operator=(MyMoneyPayee other);
+  friend void swap(MyMoneyPayee& first, MyMoneyPayee& second);
 
   ~MyMoneyPayee();
 
-  // Simple get operations
-  QString name() const            {
-    return m_name;
-  }
-  QString address() const         {
-    return m_address;
-  }
-  QString city() const            {
-    return m_city;
-  }
-  QString state() const           {
-    return m_state;
-  }
-  QString postcode() const        {
-    return m_postcode;
-  }
-  QString telephone() const       {
-    return m_telephone;
-  }
-  QString email() const           {
-    return m_email;
-  }
-  QString notes() const           {
-    return m_notes;
-  }
+  QString name() const;
+  void setName(const QString& val);
 
-  const QString id() const        {
-    return m_id;
-  };
-  const QString reference() const {
-    return m_reference;
-  };
+  QString address() const;
+  void setAddress(const QString& val);
 
-  // Simple set operations
-  void setName(const QString& val)      {
-    m_name = val;
-  }
-  void setAddress(const QString& val)   {
-    m_address = val;
-  }
-  void setCity(const QString& val)      {
-    m_city = val;
-  }
-  void setState(const QString& val)     {
-    m_state = val;
-  }
-  void setPostcode(const QString& val)  {
-    m_postcode = val;
-  }
-  void setTelephone(const QString& val) {
-    m_telephone = val;
-  }
-  void setEmail(const QString& val)     {
-    m_email = val;
-  }
-  void setNotes(const QString& val)     {
-    m_notes = val;
-  }
-  void setReference(const QString& ref) {
-    m_reference = ref;
-  }
+  QString city() const;
+  void setCity(const QString& val);
+
+  QString state() const;
+  void setState(const QString& val);
+
+  QString postcode() const;
+  void setPostcode(const QString& val);
+
+  QString telephone() const;
+  void setTelephone(const QString& val);
+
+  QString email() const;
+  void setEmail(const QString& val);
+
+  QString notes() const;
+  void setNotes(const QString& val);
+
+  QString reference() const;
+  void setReference(const QString& ref);
 
   /**
    * Get all match data in one call
@@ -223,24 +153,19 @@ public:
   void setMatchData(payeeMatchType type, bool ignorecase, const QString& keys);
 
 
-  bool defaultAccountEnabled() const {
-    return !m_defaultAccountId.isEmpty();
-  }
-  const QString& defaultAccountId() const {
-    return m_defaultAccountId;
-  }
-  void setDefaultAccountId(const QString& id = QString()) {
-    m_defaultAccountId = id;
-  }
+  bool defaultAccountEnabled() const;
 
-  // Copy constructors
-  MyMoneyPayee(const MyMoneyPayee&);
+  QString defaultAccountId() const;
+
+  void setDefaultAccountId(const QString& id);
+  void setDefaultAccountId();
 
   // Equality operator
   bool operator == (const MyMoneyPayee &) const;
+//  bool operator == (const MyMoneyPayee& lhs, const QString& rhs) const;
   bool operator <(const MyMoneyPayee& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -251,14 +176,57 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyPayee null;
+
+private:
+  enum class Element { Address };
+
+  enum class Attribute { Name = 0,
+                         Type,
+                         Reference,
+                         Notes,
+                         MatchingEnabled,
+                         UsingMatchKey,
+                         MatchIgnoreCase,
+                         MatchKey,
+                         DefaultAccountID,
+                         Street,
+                         City,
+                         PostCode,
+                         Email,
+                         State,
+                         Telephone,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
+
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
+
+  friend uint qHash(const Attribute, uint seed);
 };
 
-inline bool operator==(const MyMoneyPayee& lhs, const QString& rhs)
+inline uint qHash(const MyMoneyPayee::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyPayee& first, MyMoneyPayee& second) // krazy:exclude=inline
 {
-  return lhs.id() == rhs;
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+  swap(first.m_payeeIdentifiers, second.m_payeeIdentifiers);
+}
+
+inline MyMoneyPayee::MyMoneyPayee(MyMoneyPayee && other) : MyMoneyPayee() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyPayee & MyMoneyPayee::operator=(MyMoneyPayee other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
 }
 
 /**

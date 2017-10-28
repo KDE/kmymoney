@@ -22,19 +22,17 @@
 // QT Includes
 
 #include <QObject>
-#include <QString>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
-#include "mymoneyinstitution.h"
 #include "mymoneytransaction.h"
+#include "mymoneysplit.h"
+
 #include <kmm_plugin_export.h>
 
 namespace KMyMoneyRegister
@@ -42,8 +40,12 @@ namespace KMyMoneyRegister
 class SelectedTransactions;
 }
 
+class MyMoneyInstitution;
+class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
+
+
 namespace KMyMoneyPlugin
 {
 
@@ -113,7 +115,6 @@ signals:
    *        transaction/split pairs processed by the reconciliation.
    */
   void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
-
 
   void viewStateChanged(bool);
   void kmmFilePlugin(unsigned int);

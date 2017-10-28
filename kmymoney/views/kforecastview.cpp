@@ -39,6 +39,7 @@
 
 #include "mymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "kmymoneyglobalsettings.h"
@@ -1035,7 +1036,7 @@ void KForecastView::loadChartView()
   MyMoneyReport reportCfg = MyMoneyReport(
                               MyMoneyReport::eAssetLiability,
                               MyMoneyReport::eMonths,
-                              MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
+                              eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
                               detailLevel[m_comboDetail->currentIndex()],
                               i18n("Net Worth Forecast"),
                               i18n("Generated Report"));

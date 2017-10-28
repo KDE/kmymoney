@@ -29,8 +29,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysecurity.h"
 #include "ui_kinvestmenttypewizardpagedecl.h"
+
+class MyMoneySecurity;
 
 /**
  * This class implements the investment type page of the

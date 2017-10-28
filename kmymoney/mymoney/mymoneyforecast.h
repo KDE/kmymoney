@@ -24,11 +24,11 @@
 #include <QMap>
 #include <QSet>
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
@@ -38,6 +38,7 @@
   *
   * @author Alvaro Soliverez <asoliverez@gmail.com>
   */
+class MyMoneyAccount;
 class MyMoneyBudget;
 class MyMoneySchedule;
 class MyMoneyTransaction;

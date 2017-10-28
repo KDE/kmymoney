@@ -39,6 +39,7 @@
 
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "icons/icons.h"
 
 using namespace Icons;

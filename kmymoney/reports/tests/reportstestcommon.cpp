@@ -27,8 +27,10 @@
 #include "querytable.h"
 using namespace reports;
 
+#include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
+#include "mymoneysplit.h"
 #include "mymoneystoragedump.h"
 #include "mymoneyreport.h"
 #include "mymoneystatement.h"

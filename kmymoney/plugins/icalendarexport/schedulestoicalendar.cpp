@@ -33,10 +33,12 @@
 #include <libical/ical.h>
 
 // KMyMoney includes
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyutils.h"
 #include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneypayee.h"
 #include "mymoneyenums.h"

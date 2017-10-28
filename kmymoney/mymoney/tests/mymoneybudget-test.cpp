@@ -20,6 +20,7 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyBudgetTest;
 
+#include "mymoneymoney.h"
 #include "mymoneybudget.h"
 
 QTEST_GUILESS_MAIN(MyMoneyBudgetTest)
@@ -270,4 +271,24 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthByMonth()
   QVERIFY(a1.getPeriods().count() == 12);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(23400, 1));
   QVERIFY(a1.totalBalance() == MyMoneyMoney(15600, 1));
+}
+
+void MyMoneyBudgetTest::testElementNames()
+{
+  for (auto i = (int)MyMoneyBudget::Element::Budget; i <= (int)MyMoneyBudget::Element::Period; ++i) {
+    auto isEmpty = MyMoneyBudget::getElName(static_cast<MyMoneyBudget::Element>(i)).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name " << i;
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyBudgetTest::testAttributeNames()
+{
+  for (auto i = (int)MyMoneyBudget::Attribute::ID; i < (int)MyMoneyBudget::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyBudget::getAttrName(static_cast<MyMoneyBudget::Attribute>(i)).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name " << i;
+    QVERIFY(!isEmpty);
+  }
 }

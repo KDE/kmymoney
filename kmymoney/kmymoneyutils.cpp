@@ -26,6 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
 #include <QApplication>
 #include <QList>
 #include <QPixmap>
@@ -43,6 +44,7 @@
 
 #include <KColorScheme>
 #include <KLocalizedString>
+#include <KGuiItem>
 #include <KXmlGuiWindow>
 #include <KMessageBox>
 #include <KStandardGuiItem>
@@ -50,9 +52,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneyschedule.h"
 #include "mymoneyprice.h"
 #include "mymoneyforecast.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
 #include "storageenums.h"
@@ -65,52 +73,6 @@ KMyMoneyUtils::KMyMoneyUtils()
 
 KMyMoneyUtils::~KMyMoneyUtils()
 {
-}
-
-const QString KMyMoneyUtils::accountTypeToString(const eMyMoney::Account accountType)
-{
-  return MyMoneyAccount::accountTypeToString(accountType);
-}
-
-eMyMoney::Account KMyMoneyUtils::stringToAccountType(const QString& type)
-{
-  eMyMoney::Account rc = eMyMoney::Account::Unknown;
-  QString tmp = type.toLower();
-
-  if (tmp == i18n("Checking").toLower())
-    rc = eMyMoney::Account::Checkings;
-  else if (tmp == i18n("Savings").toLower())
-    rc = eMyMoney::Account::Savings;
-  else if (tmp == i18n("Credit Card").toLower())
-    rc = eMyMoney::Account::CreditCard;
-  else if (tmp == i18n("Cash").toLower())
-    rc = eMyMoney::Account::Cash;
-  else if (tmp == i18n("Loan").toLower())
-    rc = eMyMoney::Account::Loan;
-  else if (tmp == i18n("Certificate of Deposit").toLower())
-    rc = eMyMoney::Account::CertificateDep;
-  else if (tmp == i18n("Investment").toLower())
-    rc = eMyMoney::Account::Investment;
-  else if (tmp == i18n("Money Market").toLower())
-    rc = eMyMoney::Account::MoneyMarket;
-  else if (tmp == i18n("Asset").toLower())
-    rc = eMyMoney::Account::Asset;
-  else if (tmp == i18n("Liability").toLower())
-    rc = eMyMoney::Account::Liability;
-  else if (tmp == i18n("Currency").toLower())
-    rc = eMyMoney::Account::Currency;
-  else if (tmp == i18n("Income").toLower())
-    rc = eMyMoney::Account::Income;
-  else if (tmp == i18n("Expense").toLower())
-    rc = eMyMoney::Account::Expense;
-  else if (tmp == i18n("Investment Loan").toLower())
-    rc = eMyMoney::Account::AssetLoan;
-  else if (tmp == i18n("Stock").toLower())
-    rc = eMyMoney::Account::Stock;
-  else if (tmp == i18n("Equity").toLower())
-    rc = eMyMoney::Account::Equity;
-
-  return rc;
 }
 
 const QString KMyMoneyUtils::occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence)
@@ -450,21 +412,21 @@ quint64 KMyMoneyUtils::numericPart(const QString & num)
   return num64;
 }
 
-QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag, bool text)
+QString KMyMoneyUtils::reconcileStateToString(eMyMoney::Split::State flag, bool text)
 {
   QString txt;
   if (text) {
     switch (flag) {
-      case MyMoneySplit::NotReconciled:
+      case eMyMoney::Split::State::NotReconciled:
         txt = i18nc("Reconciliation state 'Not reconciled'", "Not reconciled");
         break;
-      case MyMoneySplit::Cleared:
+      case eMyMoney::Split::State::Cleared:
         txt = i18nc("Reconciliation state 'Cleared'", "Cleared");
         break;
-      case MyMoneySplit::Reconciled:
+      case eMyMoney::Split::State::Reconciled:
         txt = i18nc("Reconciliation state 'Reconciled'", "Reconciled");
         break;
-      case MyMoneySplit::Frozen:
+      case eMyMoney::Split::State::Frozen:
         txt = i18nc("Reconciliation state 'Frozen'", "Frozen");
         break;
       default:
@@ -473,15 +435,15 @@ QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag,
     }
   } else {
     switch (flag) {
-      case MyMoneySplit::NotReconciled:
+      case eMyMoney::Split::State::NotReconciled:
         break;
-      case MyMoneySplit::Cleared:
+      case eMyMoney::Split::State::Cleared:
         txt = i18nc("Reconciliation flag C", "C");
         break;
-      case MyMoneySplit::Reconciled:
+      case eMyMoney::Split::State::Reconciled:
         txt = i18nc("Reconciliation flag R", "R");
         break;
-      case MyMoneySplit::Frozen:
+      case eMyMoney::Split::State::Frozen:
         txt = i18nc("Reconciliation flag F", "F");
         break;
       default:
@@ -581,7 +543,7 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString &iconName, const QString &overl
   return pxIcon;
 }
 
-void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType)
+void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType)
 {
   // collect the splits. split references the stock account and should already
   // be set up. assetAccountSplit references the corresponding asset account (maybe
@@ -612,21 +574,21 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
 
   // determine transaction type
   if (split.action() == MyMoneySplit::ActionAddShares) {
-    transactionType = (!split.shares().isNegative()) ? MyMoneySplit::AddShares : MyMoneySplit::RemoveShares;
+    transactionType = (!split.shares().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::AddShares : eMyMoney::Split::InvestmentTransactionType::RemoveShares;
   } else if (split.action() == MyMoneySplit::ActionBuyShares) {
-    transactionType = (!split.value().isNegative()) ? MyMoneySplit::BuyShares : MyMoneySplit::SellShares;
+    transactionType = (!split.value().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::BuyShares : eMyMoney::Split::InvestmentTransactionType::SellShares;
   } else if (split.action() == MyMoneySplit::ActionDividend) {
-    transactionType = MyMoneySplit::Dividend;
+    transactionType = eMyMoney::Split::InvestmentTransactionType::Dividend;
   } else if (split.action() == MyMoneySplit::ActionReinvestDividend) {
-    transactionType = MyMoneySplit::ReinvestDividend;
+    transactionType = eMyMoney::Split::InvestmentTransactionType::ReinvestDividend;
   } else if (split.action() == MyMoneySplit::ActionYield) {
-    transactionType = MyMoneySplit::Yield;
+    transactionType = eMyMoney::Split::InvestmentTransactionType::Yield;
   } else if (split.action() == MyMoneySplit::ActionSplitShares) {
-    transactionType = MyMoneySplit::SplitShares;
+    transactionType = eMyMoney::Split::InvestmentTransactionType::SplitShares;
   } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
-    transactionType = MyMoneySplit::InterestIncome;
+    transactionType = eMyMoney::Split::InvestmentTransactionType::InterestIncome;
   } else
-    transactionType = MyMoneySplit::BuyShares;
+    transactionType = eMyMoney::Split::InvestmentTransactionType::BuyShares;
 
   currency.setTradingSymbol("???");
   try {

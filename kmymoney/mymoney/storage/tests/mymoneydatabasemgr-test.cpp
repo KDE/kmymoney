@@ -21,6 +21,16 @@
 
 #include "mymoneytestutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneytag.h"
+#include "mymoneypayee.h"
+#include "mymoneyschedule.h"
+#include "mymoneyreport.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneybudget.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "misc/platformtools.h"

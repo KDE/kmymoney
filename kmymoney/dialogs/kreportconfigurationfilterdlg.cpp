@@ -285,7 +285,7 @@ void KReportConfigurationFilterDlg::slotSearch()
   }
 
   // setup the date lock
-  MyMoneyTransactionFilter::dateOptionE range = m_dateRange->dateRange();
+  eMyMoney::TransactionFilter::Date range = m_dateRange->dateRange();
   m_currentState.setDateFilter(range);
 
   if (m_tabCapitalGain) {
@@ -730,7 +730,7 @@ void KReportConfigurationFilterDlg::slotReset()
       m_dateRange->setDateRange(m_initialState.dateRange());
     }
   } else {
-    m_dateRange->setDateRange(MyMoneyTransactionFilter::allDates);
+    m_dateRange->setDateRange(eMyMoney::TransactionFilter::Date::All);
   }
 
   slotRightSize();

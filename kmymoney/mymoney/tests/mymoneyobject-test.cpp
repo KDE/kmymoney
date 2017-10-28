@@ -18,6 +18,7 @@
 
 #include <QtTest/QtTest>
 
+#include "mymoneyexception.h"
 #include "mymoneyaccount.h"
 
 class TestMyMoneyObject : public MyMoneyObject

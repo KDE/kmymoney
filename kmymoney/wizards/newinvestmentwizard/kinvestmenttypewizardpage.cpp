@@ -31,6 +31,7 @@
 // Project Includes
 
 #include "kmymoneyutils.h"
+#include "mymoneysecurity.h"
 
 KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent)
     : KInvestmentTypeWizardPageDecl(parent)

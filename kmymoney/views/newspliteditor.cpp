@@ -40,7 +40,7 @@
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
-#include "mymoneysplit.h"
+#include "mymoneyaccount.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
 #include "ledgerview.h"
@@ -67,13 +67,13 @@ struct NewSplitEditor::Private
     costCenterModel->setSortLocaleAware(true);
     costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
 
-    createStatusEntry(MyMoneySplit::NotReconciled);
-    createStatusEntry(MyMoneySplit::Cleared);
-    createStatusEntry(MyMoneySplit::Reconciled);
-    // createStatusEntry(MyMoneySplit::Frozen);
+    createStatusEntry(eMyMoney::Split::State::NotReconciled);
+    createStatusEntry(eMyMoney::Split::State::Cleared);
+    createStatusEntry(eMyMoney::Split::State::Reconciled);
+    // createStatusEntry(eMyMoney::Split::State::Frozen);
   }
 
-  void createStatusEntry(MyMoneySplit::reconcileFlagE status);
+  void createStatusEntry(eMyMoney::Split::State status);
   bool checkForValidSplit(bool doUserInteraction = true);
 
   bool costCenterChanged(int costCenterIndex);
@@ -96,10 +96,10 @@ struct NewSplitEditor::Private
   CreditDebitHelper*            amountHelper;
 };
 
-void NewSplitEditor::Private::createStatusEntry(MyMoneySplit::reconcileFlagE status)
+void NewSplitEditor::Private::createStatusEntry(eMyMoney::Split::State status)
 {
   QStandardItem* p = new QStandardItem(KMyMoneyUtils::reconcileStateToString(status, true));
-  p->setData(status);
+  p->setData((int)status);
   statusModel.appendRow(p);
 }
 

@@ -20,9 +20,10 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyAccountTest;
 
+#include "mymoneymoney.h"
 #include "mymoneyaccount.h"
-#include "mymoneyexception.h"
 #include "mymoneysplit.h"
+#include "mymoneyexception.h"
 
 QTEST_GUILESS_MAIN(MyMoneyAccountTest)
 
@@ -420,15 +421,15 @@ void MyMoneyAccountTest::testReadXML()
   try {
     a = MyMoneyAccount(node);
     QVERIFY(a.id() == "A000001");
-    QVERIFY(a.m_name == "AccountName");
-    QVERIFY(a.m_parentAccount == "Parent");
-    QVERIFY(a.m_lastModified == QDate::currentDate());
-    QVERIFY(a.m_lastReconciliationDate == QDate());
-    QVERIFY(a.m_institution == "B000001");
-    QVERIFY(a.m_number == "465500");
-    QVERIFY(a.m_openingDate == QDate::currentDate());
-    QVERIFY(a.m_accountType == eMyMoney::Account::Asset);
-    QVERIFY(a.m_description == "Desc");
+    QVERIFY(a.name() == "AccountName");
+    QVERIFY(a.parentAccountId() == "Parent");
+    QVERIFY(a.lastModified() == QDate::currentDate());
+    QVERIFY(a.lastReconciliationDate() == QDate());
+    QVERIFY(a.institutionId() == "B000001");
+    QVERIFY(a.number() == "465500");
+    QVERIFY(a.openingDate() == QDate::currentDate());
+    QVERIFY(a.accountType() == eMyMoney::Account::Asset);
+    QVERIFY(a.description() == "Desc");
     QVERIFY(a.accountList().count() == 2);
     QVERIFY(a.accountList()[0] == "A000002");
     QVERIFY(a.accountList()[1] == "A000003");
@@ -545,23 +546,21 @@ void MyMoneyAccountTest::reconciliationHistory()
 }
 
 void MyMoneyAccountTest::testElementNames()
-{
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyAccount::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyAccount::getElName(static_cast<MyMoneyAccount::elNameE>(e.value(i))).isEmpty();
+{  
+  for (auto i = (int)MyMoneyAccount::Element::SubAccount; i <= (int)MyMoneyAccount::Element::OnlineBanking; ++i) {
+    auto isEmpty = MyMoneyAccount::getElName(static_cast<MyMoneyAccount::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
 }
 
 void MyMoneyAccountTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyAccount::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyAccount::getAttrName(static_cast<MyMoneyAccount::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyAccount::Attribute::ID; i < (int)MyMoneyAccount::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyAccount::getAttrName(static_cast<MyMoneyAccount::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

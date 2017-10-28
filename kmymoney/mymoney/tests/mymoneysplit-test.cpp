@@ -20,9 +20,10 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySplitTest;
 
-#include "mymoneyexception.h"
+#include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyexception.h"
 
 QTEST_GUILESS_MAIN(MyMoneySplitTest)
 
@@ -44,7 +45,7 @@ void MyMoneySplitTest::testEmptyConstructor()
   QCOMPARE(m->action().isEmpty(), true);
   QCOMPARE(m->shares().isZero(), true);
   QCOMPARE(m->value().isZero(), true);
-  QCOMPARE(m->reconcileFlag(), MyMoneySplit::NotReconciled);
+  QCOMPARE(m->reconcileFlag(), eMyMoney::Split::State::NotReconciled);
   QCOMPARE(m->reconcileDate(), QDate());
   QCOMPARE(m->transactionId().isEmpty(), true);
   QCOMPARE(m->costCenterId().isEmpty(), true);
@@ -55,7 +56,7 @@ void MyMoneySplitTest::testSetFunctions()
   m->setAccountId("Account");
   m->setMemo("Memo");
   m->setReconcileDate(QDate(1, 2, 3));
-  m->setReconcileFlag(MyMoneySplit::Cleared);
+  m->setReconcileFlag(eMyMoney::Split::State::Cleared);
   m->setShares(MyMoneyMoney(1234, 100));
   m->setValue(MyMoneyMoney(3456, 100));
   m->setId("MyID");
@@ -71,7 +72,7 @@ void MyMoneySplitTest::testSetFunctions()
   QCOMPARE(m->accountId(), QLatin1String("Account"));
   QCOMPARE(m->memo(), QLatin1String("Memo"));
   QCOMPARE(m->reconcileDate(), QDate(1, 2, 3));
-  QCOMPARE(m->reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(m->reconcileFlag(), eMyMoney::Split::State::Cleared);
   QCOMPARE(m->shares(), MyMoneyMoney(1234, 100));
   QCOMPARE(m->value(), MyMoneyMoney(3456, 100));
   QCOMPARE(m->id(), QLatin1String("MyID"));
@@ -93,7 +94,7 @@ void MyMoneySplitTest::testCopyConstructor()
   QCOMPARE(n.accountId(), QLatin1String("Account"));
   QCOMPARE(n.memo(), QLatin1String("Memo"));
   QCOMPARE(n.reconcileDate(), QDate(1, 2, 3));
-  QCOMPARE(n.reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(n.reconcileFlag(), eMyMoney::Split::State::Cleared);
   QCOMPARE(n.shares(), MyMoneyMoney(1234, 100));
   QCOMPARE(n.value(), MyMoneyMoney(3456, 100));
   QCOMPARE(n.id(), QLatin1String("MyID"));
@@ -118,7 +119,7 @@ void MyMoneySplitTest::testAssignmentConstructor()
   QCOMPARE(n.accountId(), QLatin1String("Account"));
   QCOMPARE(n.memo(), QLatin1String("Memo"));
   QCOMPARE(n.reconcileDate(), QDate(1, 2, 3));
-  QCOMPARE(n.reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(n.reconcileFlag(), eMyMoney::Split::State::Cleared);
   QCOMPARE(n.shares(), MyMoneyMoney(1234, 100));
   QCOMPARE(n.value(), MyMoneyMoney(3456, 100));
   QCOMPARE(n.id(), QLatin1String("MyID"));
@@ -185,7 +186,7 @@ void MyMoneySplitTest::testInequality()
   QVERIFY(!(n == *m));
 
   n = *m;
-  n.setReconcileFlag(MyMoneySplit::Frozen);
+  n.setReconcileFlag(eMyMoney::Split::State::Frozen);
   QVERIFY(!(n == *m));
 
   n = *m;
@@ -218,7 +219,7 @@ void MyMoneySplitTest::testUnaryMinus()
   QCOMPARE(n.accountId(), QLatin1String("Account"));
   QCOMPARE(n.memo(), QLatin1String("Memo"));
   QCOMPARE(n.reconcileDate(), QDate(1, 2, 3));
-  QCOMPARE(n.reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(n.reconcileFlag(), eMyMoney::Split::State::Cleared);
   QCOMPARE(n.shares(), MyMoneyMoney(-1234, 100));
   QCOMPARE(n.value(), MyMoneyMoney(-3456, 100));
   QCOMPARE(n.id(), QLatin1String("MyID"));
@@ -264,21 +265,21 @@ void MyMoneySplitTest::testSetValue()
 void MyMoneySplitTest::testSetAction()
 {
   QCOMPARE(m->action().isEmpty(), true);
-  m->setAction(MyMoneySplit::BuyShares);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionBuyShares));
-  m->setAction(MyMoneySplit::SellShares);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::SellShares);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionBuyShares));
-  m->setAction(MyMoneySplit::Dividend);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::Dividend);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionDividend));
-  m->setAction(MyMoneySplit::Yield);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::Yield);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionYield));
-  m->setAction(MyMoneySplit::ReinvestDividend);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::ReinvestDividend);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionReinvestDividend));
-  m->setAction(MyMoneySplit::AddShares);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionAddShares));
-  m->setAction(MyMoneySplit::RemoveShares);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::RemoveShares);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionAddShares));
-  m->setAction(MyMoneySplit::SplitShares);
+  m->setAction(eMyMoney::Split::InvestmentTransactionType::SplitShares);
   QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionSplitShares));
 }
 
@@ -310,7 +311,7 @@ void MyMoneySplitTest::testWriteXML()
   s.setNumber("124");
   s.setBankID("SPID");
   s.setAction(MyMoneySplit::ActionDeposit);
-  s.setReconcileFlag(MyMoneySplit::Reconciled);
+  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
 
   QDomDocument doc("TEST");
   QDomElement el = doc.createElement("SPLIT-CONTAINER");
@@ -398,7 +399,7 @@ void MyMoneySplitTest::testReadXML()
     QCOMPARE(s.value(), MyMoneyMoney(96379, 1000));
     QCOMPARE(s.number(), QLatin1String("124"));
     QCOMPARE(s.bankID(), QLatin1String("SPID"));
-    QCOMPARE(s.reconcileFlag(), MyMoneySplit::Reconciled);
+    QCOMPARE(s.reconcileFlag(), eMyMoney::Split::State::Reconciled);
     QCOMPARE(s.action(), QLatin1String(MyMoneySplit::ActionDeposit));
     QCOMPARE(s.accountId(), QLatin1String("A000076"));
     QCOMPARE(s.costCenterId(), QLatin1String("C000005"));
@@ -487,3 +488,24 @@ void MyMoneySplitTest::testReplaceId()
     QFAIL("Unexpected exception");
   }
 }
+
+void MyMoneySplitTest::testElementNames()
+{
+  for (auto i = (int)MyMoneySplit::Element::Split; i <= (int)MyMoneySplit::Element::KeyValuePairs; ++i) {
+    auto isEmpty = MyMoneySplit::getElName(static_cast<MyMoneySplit::Element>(i)).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name " << i;
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneySplitTest::testAttributeNames()
+{
+  for (auto i = (int)MyMoneySplit::Attribute::ID; i < (int)MyMoneySplit::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneySplit::getAttrName(static_cast<MyMoneySplit::Attribute>(i)).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name " << i;
+    QVERIFY(!isEmpty);
+  }
+}
+

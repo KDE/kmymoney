@@ -51,6 +51,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "kmymoneyglobalsettings.h"
 
 #include "mymoneystatement.h"
@@ -91,7 +92,7 @@ public:
   /**
    * Converts the QIF reconcile state to the KMyMoney reconcile state
    */
-  MyMoneySplit::reconcileFlagE reconcileState(const QString& state) const;
+  eMyMoney::Split::State reconcileState(const QString& state) const;
 
   /**
     */
@@ -228,15 +229,15 @@ bool MyMoneyQifReader::Private::isTransfer(QString& tmp, const QString& leftDeli
   return rc;
 }
 
-MyMoneySplit::reconcileFlagE MyMoneyQifReader::Private::reconcileState(const QString& state) const
+eMyMoney::Split::State MyMoneyQifReader::Private::reconcileState(const QString& state) const
 {
   if (state == "X" || state == "R")       // Reconciled
-    return MyMoneySplit::Reconciled;
+    return eMyMoney::Split::State::Reconciled;
 
   if (state == "*")                     // Cleared
-    return MyMoneySplit::Cleared;
+    return eMyMoney::Split::State::Cleared;
 
-  return MyMoneySplit::NotReconciled;
+  return eMyMoney::Split::State::NotReconciled;
 }
 
 

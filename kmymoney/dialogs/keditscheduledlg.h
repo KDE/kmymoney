@@ -30,9 +30,9 @@
 // Project Includes
 
 #include "ui_keditscheduledlgdecl.h"
-#include "mymoneytransaction.h"
 
 class MyMoneySchedule;
+class MyMoneyTransaction;
 class TransactionEditor;
 
 /**

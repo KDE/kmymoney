@@ -30,7 +30,8 @@
 // Project Includes
 
 #include "mymoneykeyvaluecontainer.h"
-#include "mymoneysplit.h"
+
+#include "mymoneyenums.h"
 
 /**
   * @author Thomas Baumgart
@@ -51,7 +52,7 @@ public:
 private:
   void dumpTransaction(QTextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t);
   void dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent = 0);
-  const QString reconcileToString(MyMoneySplit::reconcileFlagE flag) const;
+  const QString reconcileToString(eMyMoney::Split::State flag) const;
 };
 
 #endif

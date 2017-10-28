@@ -345,23 +345,22 @@ void MyMoneyInstitutionTest::testReadXML()
 }
 
 void MyMoneyInstitutionTest::testElementNames()
-{
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyInstitution::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyInstitution::getElName(static_cast<MyMoneyInstitution::elNameE>(e.value(i))).isEmpty();
+{  
+  for (auto i = (int)MyMoneyInstitution::Element::AccountID; i <= (int)MyMoneyInstitution::Element::Address; ++i) {
+    auto isEmpty = MyMoneyInstitution::getElName(static_cast<MyMoneyInstitution::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
+
 }
 
 void MyMoneyInstitutionTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyInstitution::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyInstitution::getAttrName(static_cast<MyMoneyInstitution::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyInstitution::Attribute::ID; i < (int)MyMoneyInstitution::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyInstitution::getAttrName(static_cast<MyMoneyInstitution::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

@@ -24,6 +24,7 @@
 #include <QPalette>
 #include <QList>
 #include <QColor>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,11 +33,12 @@
 // Project Includes
 
 #include "registeritem.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
-#include "mymoneysecurity.h"
-#include "selectedtransaction.h"
+#include "mymoneymoney.h"
 #include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "selectedtransaction.h"
 
 class QTableWidget;
 class TransactionEditor;
@@ -107,13 +109,13 @@ public:
     return m_erroneous;
   }
 
-  virtual const QDate& sortPostDate() const {
+  QDate sortPostDate() const override {
     return m_transaction.postDate();
   }
   virtual int sortSamePostDate() const {
     return 2;
   }
-  virtual const QDate& sortEntryDate() const {
+  QDate sortEntryDate() const override {
     return m_transaction.entryDate();
   }
   virtual const QString& sortPayee() const {
@@ -122,10 +124,10 @@ public:
   virtual const QList<QString>& sortTagList() const {
     return m_tagList;
   }
-  virtual const MyMoneyMoney& sortValue() const {
+  MyMoneyMoney sortValue() const override {
     return m_split.shares();
   }
-  virtual const QString& sortNumber() const {
+  QString sortNumber() const override {
     return m_split.number();
   }
   virtual const QString& sortEntryOrder() const {
@@ -137,7 +139,7 @@ public:
   virtual const QString& sortCategory() const {
     return m_category;
   }
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
+  virtual eMyMoney::Split::State sortReconcileState() const {
     return m_split.reconcileFlag();
   }
 
@@ -425,7 +427,7 @@ protected:
     * @param txt reference to QString where to store the result
     * @param type activity represented as investTransactionTypeE
     */
-  void activity(QString& txt, MyMoneySplit::investTransactionTypeE type) const;
+  void activity(QString& txt, eMyMoney::Split::InvestmentTransactionType type) const;
 
 private:
   QList<MyMoneySplit>       m_feeSplits;
@@ -433,7 +435,7 @@ private:
   MyMoneySplit              m_assetAccountSplit;
   MyMoneySecurity           m_security;
   MyMoneySecurity           m_currency;
-  MyMoneySplit::investTransactionTypeE    m_transactionType;
+  eMyMoney::Split::InvestmentTransactionType    m_transactionType;
   QString                   m_feeCategory;
   QString                   m_interestCategory;
   MyMoneyMoney              m_feeAmount;

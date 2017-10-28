@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "viewenums.h"
 
 namespace eAccountsModel {

@@ -4,6 +4,7 @@
     begin                : Sun July 4 2004
     copyright            : (C) 2004-2005 by Ace Jones
     email                : acejones@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,6 +24,8 @@
 
 #include <QString>
 #include <QList>
+#include <QDomElement>
+#include <QDomDocument>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,10 +33,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneystoragenames.h"
 #include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyexception.h"
 
+using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;
 
 // define this to debug reports
@@ -57,175 +65,424 @@ const QStringList kDateLockText = QString("alldates,untiltoday,currentmonth,curr
 const QStringList kDataLockText = QString("automatic,userdefined").split(',');
 const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(',');
 
+class MyMoneyReportPrivate {
+
+public:
+  /**
+    * The user-assigned name of the report
+    */
+  QString m_name;
+  /**
+    * The user-assigned comment for the report, in case they want to make
+    * additional notes for themselves about the report.
+    */
+  QString m_comment;
+  /**
+    * Where to group this report amongst the others in the UI view.  This
+    * should be assigned by the UI system.
+    */
+  QString m_group;
+  /**
+    * How much detail to show in the accounts
+    */
+  MyMoneyReport::EDetailLevel m_detailLevel;
+  /**
+    * Whether to sum: all, sold, bought or owned value
+    */
+  MyMoneyReport::EInvestmentSum m_investmentSum;
+  /**
+    * Whether to show transactions or just totals.
+    */
+  bool m_hideTransactions;
+  /**
+    * Whether to convert all currencies to the base currency of the file (true).
+    * If this is false, it's up to the report generator to decide how to handle
+    * the currency.
+    */
+  bool m_convertCurrency;
+  /**
+    * Whether this is one of the users' favorite reports
+    */
+  bool m_favorite;
+  /**
+    * Whether this report should only include categories marked as "Tax"="Yes"
+    */
+  bool m_tax;
+  /**
+    * Whether this report should only include investment accounts
+    */
+  bool m_investments;
+  /**
+    * Whether this report should only include loan accounts
+    * Applies only to querytable reports.  Mutually exclusive with
+    * m_investments.
+    */
+  bool m_loans;
+  /**
+    * What sort of algorithm should be used to run the report
+    */
+  MyMoneyReport::EReportType m_reportType;
+  /**
+    * What sort of values should show up on the ROWS of this report
+    */
+  MyMoneyReport::ERowType m_rowType;
+  /**
+    * What sort of values should show up on the COLUMNS of this report,
+    * in the case of a 'PivotTable' report.  Really this is used more as a
+    * QUANTITY of months or days.  Whether it's months or days is determined
+    * by m_columnsAreDays.
+    */
+  MyMoneyReport::EColumnType m_columnType;
+  /**
+   * Whether the base unit of columns of this report is days.  Only applies to
+   * 'PivotTable' reports.  If false, then columns are months or multiples thereof.
+   */
+  bool m_columnsAreDays;
+  /**
+     * What sort of values should show up on the COLUMNS of this report,
+     * in the case of a 'QueryTable' report
+     */
+  MyMoneyReport::EQueryColumns m_queryColumns;
+
+  /**
+    * The plain-language description of what the date range should be locked
+    * to.  'userDefined' means NO locking, in any other case, the report
+    * will be adjusted to match the date lock.  So if the date lock is
+    * 'currentMonth', the start and end dates of the underlying filter will
+    * be updated to whatever the current month is.  This updating happens
+    * automatically when the report is loaded, and should also be done
+    * manually by calling updateDateFilter() before generating the report
+    */
+  eMyMoney::TransactionFilter::Date m_dateLock;
+  /**
+    * Which account groups should be included in the report.  This filter
+    * is applied to the individual splits AFTER a transaction has been
+    * matched using the underlying filter.
+    */
+  QList<Account> m_accountGroups;
+  /**
+    * Whether an account group filter has been set (see m_accountGroups)
+    */
+  bool m_accountGroupFilter;
+  /**
+    * What format should be used to draw this report as a chart
+    */
+  MyMoneyReport::EChartType m_chartType;
+  /**
+    * Whether the value of individual data points should be drawn on the chart
+    */
+  bool m_chartDataLabels;
+  /**
+    * Whether grid lines should be drawn on the chart
+    */
+  bool m_chartCHGridLines;
+  bool m_chartSVGridLines;
+  /**
+    * Whether this report should be shown as a chart by default (otherwise it
+    * should be shown as a textual report)
+    */
+  bool m_chartByDefault;
+  /**
+   * Width of the chart lines
+   */
+  uint m_chartLineWidth;
+
+  /**
+    * Whether Y axis is logarithmic or linear
+    */
+  bool m_logYaxis;
+
+  /**
+    * Y data range
+    */
+  QString m_dataRangeStart;
+  QString m_dataRangeEnd;
+
+  /**
+    * Y data range division
+    */
+  QString m_dataMajorTick;
+  QString m_dataMinorTick;
+
+  /**
+    * Y labels precision
+    */
+  uint m_yLabelsPrecision;
+
+  /**
+    * Whether data range should be calculated automatically or is user defined
+    */
+  MyMoneyReport::dataOptionE m_dataLock;
+
+  /**
+    * Whether to include scheduled transactions
+    */
+  bool m_includeSchedules;
+  /**
+    * Whether to include transfers.  Only applies to Income/Expense reports
+    */
+  bool m_includeTransfers;
+  /**
+    * The id of the budget associated with this report.
+    */
+  QString m_budgetId;
+  /**
+    * Whether this report should print the actual data to go along with
+    * the budget.  This is only valid if the report has a budget.
+    */
+  bool m_includeBudgetActuals;
+  /**
+    * Whether this report should include all accounts and not only
+    * accounts with transactions.
+    */
+  bool m_includeUnusedAccounts;
+  /**
+   * Whether this report should include columns for row totals
+   */
+  bool m_showRowTotals;
+  /**
+   * Whether this report should include rows for column totals
+   */
+  bool m_showColumnTotals;
+  /**
+   * Whether this report should include forecast balance
+   */
+  bool m_includeForecast;
+  /**
+   * Whether this report should include moving average
+   */
+  bool m_includeMovingAverage;
+  /**
+   * The amount of days that spans each moving average
+   */
+  int m_movingAverageDays;
+  /**
+   * Whether this report should include prices
+   */
+  bool m_includePrice;
+  /**
+   * Whether this report should include moving average prices
+   */
+  bool m_includeAveragePrice;
+  /**
+   * Make the actual and forecast lines display as one
+   */
+  bool m_mixedTime;
+  /**
+   * This stores the column for the current date
+   * This value is calculated dinamically and thus it is not saved in the file
+   */
+  int m_currentDateColumn;
+  /**
+   * Time in days between the settlement date and the transaction date.
+   */
+  uint m_settlementPeriod;
+  /**
+   * Controls showing short-term and long-term capital gains.
+   */
+  bool m_showSTLTCapitalGains;
+  /**
+   * Date separating shot-term from long-term gains.
+   */
+  QDate m_tseparator;
+
+  /**
+    * This option is for investments reports only which
+    * show prices instead of balances as all other reports do.
+    * <p>
+    * Select this option to include prices for the given period (week, month,
+    * quarter, ...) only.
+    * </p>
+    * <p>
+    * If this option is off the last existing price is shown for a period, if
+    * it is on, in a table the value is '0' shown and in a chart a linear
+    * interpolation for the missing values will be performed.
+    * <br>Example:
+    * <br>There are prices for January and March, but there is no price for
+    * February.
+    * <ul>
+    * <li><b>OFF</b>: shows the price for February as the last price of
+    * January
+    * <li><b>ON</b>: in a table the value is '0', in a chart a linear
+    * interpolation for the February-price will be performed
+    * (so it makes a kind of average-value using the January- and the
+    * March-price in the chart)
+    * </ul>
+    * </p>
+    */
+  bool m_skipZero;
+};
+
 MyMoneyReport::MyMoneyReport() :
-    m_name("Unconfigured Pivot Table Report"),
-    m_detailLevel(eDetailNone),
-    m_investmentSum(eSumSold),
-    m_hideTransactions(false),
-    m_convertCurrency(true),
-    m_favorite(false),
-    m_tax(false),
-    m_investments(false),
-    m_loans(false),
-    m_reportType(kTypeArray[eExpenseIncome]),
-    m_rowType(eExpenseIncome),
-    m_columnType(eMonths),
-    m_columnsAreDays(false),
-    m_queryColumns(eQCnone),
-    m_dateLock(MyMoneyTransactionFilter::userDefined),
-    m_accountGroupFilter(false),
-    m_chartType(eChartLine),
-    m_chartDataLabels(true),
-    m_chartCHGridLines(true),
-    m_chartSVGridLines(true),
-    m_chartByDefault(false),
-    m_logYaxis(false),
-    m_dataRangeStart('0'),
-    m_dataRangeEnd('0'),
-    m_dataMajorTick('0'),
-    m_dataMinorTick('0'),
-    m_yLabelsPrecision(2),
-    m_dataLock(MyMoneyReport::automatic),
-    m_includeSchedules(false),
-    m_includeTransfers(false),
-    m_includeBudgetActuals(false),
-    m_includeUnusedAccounts(false),
-    m_showRowTotals(false),
-    m_showColumnTotals(true),
-    m_includeForecast(false),
-    m_includeMovingAverage(false),
-    m_movingAverageDays(0),
-    m_includePrice(false),
-    m_includeAveragePrice(false),
-    m_mixedTime(false),
-    m_currentDateColumn(0),
-    m_settlementPeriod(3),
-    m_showSTLTCapitalGains(false),
-    m_tseparator(QDate::currentDate().addYears(-1)),
-    m_skipZero(false)
+  d_ptr(new MyMoneyReportPrivate)
 {
-  m_chartLineWidth = m_lineWidth;
+  Q_D(MyMoneyReport);
+  d->m_name = "Unconfigured Pivot Table Report";
+  d->m_detailLevel = eDetailNone;
+  d->m_investmentSum = eSumSold;
+  d->m_hideTransactions = false;
+  d->m_convertCurrency = true;
+  d->m_favorite = false;
+  d->m_tax = false;
+  d->m_investments = false;
+  d->m_loans = false;
+  d->m_reportType = kTypeArray[eExpenseIncome];
+  d->m_rowType = eExpenseIncome;
+  d->m_columnType = eMonths;
+  d->m_columnsAreDays = false;
+  d->m_queryColumns = eQCnone;
+  d->m_dateLock = TransactionFilter::Date::UserDefined;
+  d->m_accountGroupFilter = false;
+  d->m_chartType = eChartLine;
+  d->m_chartDataLabels = true;
+  d->m_chartCHGridLines = true;
+  d->m_chartSVGridLines = true;
+  d->m_chartByDefault = false;
+  d->m_logYaxis = false;
+  d->m_dataRangeStart = '0';
+  d->m_dataRangeEnd = '0';
+  d->m_dataMajorTick = '0';
+  d->m_dataMinorTick = '0';
+  d->m_yLabelsPrecision = 2;
+  d->m_dataLock = MyMoneyReport::automatic;
+  d->m_includeSchedules = false;
+  d->m_includeTransfers = false;
+  d->m_includeBudgetActuals = false;
+  d->m_includeUnusedAccounts = false;
+  d->m_showRowTotals = false;
+  d->m_showColumnTotals = true;
+  d->m_includeForecast = false;
+  d->m_includeMovingAverage = false;
+  d->m_movingAverageDays = 0;
+  d->m_includePrice = false;
+  d->m_includeAveragePrice = false;
+  d->m_mixedTime = false;
+  d->m_currentDateColumn = 0;
+  d->m_settlementPeriod = 3;
+  d->m_showSTLTCapitalGains = false;
+  d->m_tseparator = QDate::currentDate().addYears(-1);
+  d->m_skipZero = false;
+  d->m_chartLineWidth = m_lineWidth;
 }
 
-MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
-    MyMoneyObject(id),
-    m_movingAverageDays(0),
-    m_currentDateColumn(0)
+MyMoneyReport::MyMoneyReport(ERowType rt,
+                             unsigned ct,
+                             TransactionFilter::Date dl,
+                             EDetailLevel ss,
+                             const QString& name,
+                             const QString& comment) :
+  d_ptr(new MyMoneyReportPrivate)
 {
-  *this = right;
-  setId(id);
-}
+  Q_D(MyMoneyReport);
+  d->m_name = name;
+  d->m_comment = comment;
+  d->m_detailLevel = ss;
+  d->m_investmentSum = ct & eQCcapitalgain ? eSumSold : eSumPeriod;
+  d->m_hideTransactions = false;
+  d->m_convertCurrency = true;
+  d->m_favorite = false;
+  d->m_tax = false;
+  d->m_investments = false;
+  d->m_loans = false;
+  d->m_reportType = kTypeArray[rt];
+  d->m_rowType = rt;
+  d->m_columnType = eMonths;
+  d->m_columnsAreDays = false;
+  d->m_queryColumns = eQCnone;
+  d->m_dateLock = dl;
+  d->m_accountGroupFilter = false;
+  d->m_chartType = eChartLine;
+  d->m_chartDataLabels = true;
+  d->m_chartCHGridLines = true;
+  d->m_chartSVGridLines = true;
+  d->m_chartByDefault = false;
+  d->m_logYaxis = false;
+  d->m_dataRangeStart = '0';
+  d->m_dataRangeEnd = '0';
+  d->m_dataMajorTick = '0';
+  d->m_dataMinorTick = '0';
+  d->m_yLabelsPrecision = 2;
+  d->m_dataLock = MyMoneyReport::automatic;
+  d->m_includeSchedules = false;
+  d->m_includeTransfers = false;
+  d->m_includeBudgetActuals = false;
+  d->m_includeUnusedAccounts = false;
+  d->m_showRowTotals = false;
+  d->m_showColumnTotals = true;
+  d->m_includeForecast = false;
+  d->m_includeMovingAverage = false;
+  d->m_movingAverageDays = 0;
+  d->m_includePrice = false;
+  d->m_includeAveragePrice = false;
+  d->m_mixedTime = false;
+  d->m_currentDateColumn = 0;
+  d->m_settlementPeriod = 3;
+  d->m_showSTLTCapitalGains = false;
+  d->m_tseparator = QDate::currentDate().addYears(-1);
+  d->m_skipZero = false;
 
-MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment) :
-    m_name(_name),
-    m_comment(_comment),
-    m_detailLevel(_ss),
-    m_investmentSum(_ct & eQCcapitalgain ? eSumSold : eSumPeriod),
-    m_hideTransactions(false),
-    m_convertCurrency(true),
-    m_favorite(false),
-    m_tax(false),
-    m_investments(false),
-    m_loans(false),
-    m_reportType(kTypeArray[_rt]),
-    m_rowType(_rt),
-    m_columnType(eMonths),
-    m_columnsAreDays(false),
-    m_queryColumns(eQCnone),
-    m_dateLock(_dl),
-    m_accountGroupFilter(false),
-    m_chartType(eChartLine),
-    m_chartDataLabels(true),
-    m_chartCHGridLines(true),
-    m_chartSVGridLines(true),
-    m_chartByDefault(false),
-    m_logYaxis(false),
-    m_dataRangeStart('0'),
-    m_dataRangeEnd('0'),
-    m_dataMajorTick('0'),
-    m_dataMinorTick('0'),
-    m_yLabelsPrecision(2),
-    m_dataLock(MyMoneyReport::automatic),
-    m_includeSchedules(false),
-    m_includeTransfers(false),
-    m_includeBudgetActuals(false),
-    m_includeUnusedAccounts(false),
-    m_showRowTotals(false),
-    m_showColumnTotals(true),
-    m_includeForecast(false),
-    m_includeMovingAverage(false),
-    m_movingAverageDays(0),
-    m_includePrice(false),
-    m_includeAveragePrice(false),
-    m_mixedTime(false),
-    m_currentDateColumn(0),
-    m_settlementPeriod(3),
-    m_showSTLTCapitalGains(false),
-    m_tseparator(QDate::currentDate().addYears(-1)),
-    m_skipZero(false)
-{
   //set initial values
-  m_chartLineWidth = m_lineWidth;
+  d->m_chartLineWidth = m_lineWidth;
 
   //set report type
-  if (m_reportType == ePivotTable)
-    m_columnType = static_cast<EColumnType>(_ct);
-  if (m_reportType == eQueryTable)
-    m_queryColumns = static_cast<EQueryColumns>(_ct);
-  setDateFilter(_dl);
+  if (d->m_reportType == ePivotTable)
+    d->m_columnType = static_cast<EColumnType>(ct);
+  if (d->m_reportType == eQueryTable)
+    d->m_queryColumns = static_cast<EQueryColumns>(ct);
+  setDateFilter(dl);
 
   //throw exception if the type is inconsistent
-  if ((_rt > static_cast<ERowType>(sizeof(kTypeArray) / sizeof(kTypeArray[0])))
-      || (m_reportType == eNoReport))
+  if ((rt > static_cast<ERowType>(sizeof(kTypeArray) / sizeof(kTypeArray[0])))
+      || (d->m_reportType == eNoReport))
     throw MYMONEYEXCEPTION("Invalid report type");
 
   //add the corresponding account groups
-  if (_rt == MyMoneyReport::eAssetLiability) {
-    addAccountGroup(eMyMoney::Account::Asset);
-    addAccountGroup(eMyMoney::Account::Liability);
-    m_showRowTotals = true;
+  if (rt == MyMoneyReport::eAssetLiability) {
+    addAccountGroup(Account::Asset);
+    addAccountGroup(Account::Liability);
+    d->m_showRowTotals = true;
   }
-  if (_rt == MyMoneyReport::eAccount) {
-    addAccountGroup(eMyMoney::Account::Asset);
-    addAccountGroup(eMyMoney::Account::AssetLoan);
-    addAccountGroup(eMyMoney::Account::Cash);
-    addAccountGroup(eMyMoney::Account::Checkings);
-    addAccountGroup(eMyMoney::Account::CreditCard);
+  if (rt == MyMoneyReport::eAccount) {
+    addAccountGroup(Account::Asset);
+    addAccountGroup(Account::AssetLoan);
+    addAccountGroup(Account::Cash);
+    addAccountGroup(Account::Checkings);
+    addAccountGroup(Account::CreditCard);
     if (KMyMoneyGlobalSettings::expertMode())
-      addAccountGroup(eMyMoney::Account::Equity);
-    addAccountGroup(eMyMoney::Account::Expense);
-    addAccountGroup(eMyMoney::Account::Income);
-    addAccountGroup(eMyMoney::Account::Liability);
-    addAccountGroup(eMyMoney::Account::Loan);
-    addAccountGroup(eMyMoney::Account::Savings);
-    addAccountGroup(eMyMoney::Account::Stock);
-    m_showRowTotals = true;
+      addAccountGroup(Account::Equity);
+    addAccountGroup(Account::Expense);
+    addAccountGroup(Account::Income);
+    addAccountGroup(Account::Liability);
+    addAccountGroup(Account::Loan);
+    addAccountGroup(Account::Savings);
+    addAccountGroup(Account::Stock);
+    d->m_showRowTotals = true;
   }
-  if (_rt == MyMoneyReport::eExpenseIncome) {
-    addAccountGroup(eMyMoney::Account::Expense);
-    addAccountGroup(eMyMoney::Account::Income);
-    m_showRowTotals = true;
+  if (rt == MyMoneyReport::eExpenseIncome) {
+    addAccountGroup(Account::Expense);
+    addAccountGroup(Account::Income);
+    d->m_showRowTotals = true;
   }
   //FIXME take this out once we have sorted out all issues regarding budget of assets and liabilities -- asoliverez@gmail.com
-  if (_rt == MyMoneyReport::eBudget || _rt == MyMoneyReport::eBudgetActual) {
-    addAccountGroup(eMyMoney::Account::Expense);
-    addAccountGroup(eMyMoney::Account::Income);
+  if (rt == MyMoneyReport::eBudget || rt == MyMoneyReport::eBudgetActual) {
+    addAccountGroup(Account::Expense);
+    addAccountGroup(Account::Income);
   }
-  if (_rt == MyMoneyReport::eAccountInfo) {
-    addAccountGroup(eMyMoney::Account::Asset);
-    addAccountGroup(eMyMoney::Account::Liability);
+  if (rt == MyMoneyReport::eAccountInfo) {
+    addAccountGroup(Account::Asset);
+    addAccountGroup(Account::Liability);
   }
   //cash flow reports show splits for all account groups
-  if (_rt == MyMoneyReport::eCashFlow) {
-    addAccountGroup(eMyMoney::Account::Expense);
-    addAccountGroup(eMyMoney::Account::Income);
-    addAccountGroup(eMyMoney::Account::Asset);
-    addAccountGroup(eMyMoney::Account::Liability);
+  if (rt == MyMoneyReport::eCashFlow) {
+    addAccountGroup(Account::Expense);
+    addAccountGroup(Account::Income);
+    addAccountGroup(Account::Asset);
+    addAccountGroup(Account::Liability);
   }
 #ifdef DEBUG_REPORTS
   QDebug out = qDebug();
   out << _name << toString(_rt) << toString(m_reportType);
-  foreach(const eMyMoney::Account accountType, m_accountGroups)
+  foreach(const Account accountType, m_accountGroups)
     out << MyMoneyAccount::accountTypeToString(accountType);
   if (m_accounts.size() > 0)
     out << m_accounts;
@@ -234,26 +491,707 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
 
 MyMoneyReport::MyMoneyReport(const QDomElement& node) :
     MyMoneyObject(node),
-    m_currentDateColumn(0)
+    d_ptr(new MyMoneyReportPrivate)
 {
+  Q_D(MyMoneyReport);
+  d->m_currentDateColumn = 0;
   // properly initialize the object before reading it
   *this = MyMoneyReport();
   if (!read(node))
     clearId();
 }
 
+MyMoneyReport::MyMoneyReport(const MyMoneyReport& other) :
+  MyMoneyObject(other.id()),
+  MyMoneyTransactionFilter(other),
+  d_ptr(new MyMoneyReportPrivate(*other.d_func()))
+{
+}
+
+MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& other) :
+  MyMoneyObject(id),
+  MyMoneyTransactionFilter(other),
+  d_ptr(new MyMoneyReportPrivate(*other.d_func()))
+{
+  Q_D(MyMoneyReport);
+  d->m_movingAverageDays = 0;
+  d->m_currentDateColumn = 0;
+}
+
+MyMoneyReport::~MyMoneyReport()
+{
+  Q_D(MyMoneyReport);
+  delete d;
+}
+
+MyMoneyReport::EReportType MyMoneyReport::reportType() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_reportType;
+}
+
+QString MyMoneyReport::name() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_name;
+}
+
+void MyMoneyReport::setName(const QString& s)
+{
+  Q_D(MyMoneyReport);
+  d->m_name = s;
+}
+
+bool MyMoneyReport::isShowingRowTotals() const
+{
+  Q_D(const MyMoneyReport);
+  return (d->m_showRowTotals);
+}
+
+void MyMoneyReport::setShowingRowTotals(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_showRowTotals = f;
+}
+
+bool MyMoneyReport::isShowingColumnTotals() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_showColumnTotals;
+}
+
+void MyMoneyReport::setShowingColumnTotals(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_showColumnTotals = f;
+}
+
+MyMoneyReport::ERowType MyMoneyReport::rowType() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_rowType;
+}
+
+void MyMoneyReport::setRowType(ERowType rt)
+{
+  Q_D(MyMoneyReport);
+  d->m_rowType = rt;
+  d->m_reportType = kTypeArray[rt];
+
+  d->m_accountGroupFilter = false;
+  d->m_accountGroups.clear();
+
+  if (rt == MyMoneyReport::eAssetLiability) {
+    addAccountGroup(Account::Asset);
+    addAccountGroup(Account::Liability);
+  }
+  if (rt == MyMoneyReport::eExpenseIncome) {
+    addAccountGroup(Account::Expense);
+    addAccountGroup(Account::Income);
+  }
+}
+
+bool MyMoneyReport::isRunningSum() const
+{
+  Q_D(const MyMoneyReport);
+  return (d->m_rowType == eAssetLiability);
+}
+
+MyMoneyReport::EColumnType MyMoneyReport::columnType() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_columnType;
+}
+
+void MyMoneyReport::setColumnType(EColumnType ct)
+{
+  Q_D(MyMoneyReport);
+  d->m_columnType = ct;
+}
+
+bool MyMoneyReport::isConvertCurrency() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_convertCurrency;
+}
+
+void MyMoneyReport::setConvertCurrency(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_convertCurrency = f;
+}
+
+uint MyMoneyReport::columnPitch() const
+{
+  Q_D(const MyMoneyReport);
+  return static_cast<uint>(d->m_columnType);
+}
+
+QString MyMoneyReport::comment() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_comment;
+}
+
+void MyMoneyReport::setComment(const QString& comment)
+{
+  Q_D(MyMoneyReport);
+  d->m_comment = comment;
+}
+
+MyMoneyReport::EQueryColumns MyMoneyReport::queryColumns() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_queryColumns;
+}
+
+void MyMoneyReport::setQueryColumns(EQueryColumns qc)
+{
+  Q_D(MyMoneyReport);
+  d->m_queryColumns = qc;
+}
+
+QString MyMoneyReport::group() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_group;
+}
+
+void MyMoneyReport::setGroup(const QString& group)
+{
+  Q_D(MyMoneyReport);
+  d->m_group = group;
+}
+
+bool MyMoneyReport::isFavorite() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_favorite;
+}
+
+void MyMoneyReport::setFavorite(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_favorite = f;
+}
+
+bool MyMoneyReport::isTax() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_tax;
+}
+
+void MyMoneyReport::setTax(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_tax = f;
+}
+
+bool MyMoneyReport::isInvestmentsOnly() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_investments;
+}
+
+void MyMoneyReport::setInvestmentsOnly(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_investments = f; if (f) d->m_loans = false;
+}
+
+bool MyMoneyReport::isLoansOnly() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_loans;
+}
+
+void MyMoneyReport::setLoansOnly(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_loans = f; if (f) d->m_investments = false;
+}
+
+MyMoneyReport::EDetailLevel MyMoneyReport::detailLevel() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_detailLevel;
+}
+
+void MyMoneyReport::setDetailLevel(EDetailLevel detail)
+{
+  Q_D(MyMoneyReport);
+  d->m_detailLevel = detail;
+}
+
+MyMoneyReport::EInvestmentSum MyMoneyReport::investmentSum() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_investmentSum;
+}
+
+void MyMoneyReport::setInvestmentSum(EInvestmentSum sum)
+{
+  Q_D(MyMoneyReport);
+  d->m_investmentSum = sum;
+}
+
+bool MyMoneyReport::isHideTransactions() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_hideTransactions;
+}
+
+void MyMoneyReport::setHideTransactions(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_hideTransactions = f;
+}
+
+MyMoneyReport::EChartType MyMoneyReport::chartType() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartType;
+}
+
+void MyMoneyReport::setChartType(EChartType type)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartType = type;
+}
+
+bool MyMoneyReport::isChartDataLabels() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartDataLabels;
+}
+
+void MyMoneyReport::setChartDataLabels(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartDataLabels = f;
+}
+
+bool MyMoneyReport::isChartCHGridLines() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartCHGridLines;
+}
+
+void MyMoneyReport::setChartCHGridLines(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartCHGridLines = f;
+}
+
+bool MyMoneyReport::isChartSVGridLines() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartSVGridLines;
+}
+
+void MyMoneyReport::setChartSVGridLines(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartSVGridLines = f;
+}
+
+bool MyMoneyReport::isChartByDefault() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartByDefault;
+}
+
+void MyMoneyReport::setChartByDefault(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartByDefault = f;
+}
+
+uint MyMoneyReport::chartLineWidth() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartLineWidth;
+}
+
+void MyMoneyReport::setChartLineWidth(uint f)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartLineWidth = f;
+}
+
+bool MyMoneyReport::isLogYAxis() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_logYaxis;
+}
+
+void MyMoneyReport::setLogYAxis(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_logYaxis = f;
+}
+
+QString MyMoneyReport::dataRangeStart() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dataRangeStart;
+}
+
+void MyMoneyReport::setDataRangeStart(const QString& f)
+{
+  Q_D(MyMoneyReport);
+  d->m_dataRangeStart = f;
+}
+
+QString MyMoneyReport::dataRangeEnd() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dataRangeEnd;
+}
+
+void MyMoneyReport::setDataRangeEnd(const QString& f)
+{
+  Q_D(MyMoneyReport);
+  d->m_dataRangeEnd = f;
+}
+
+QString MyMoneyReport::dataMajorTick() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dataMajorTick;
+}
+
+void MyMoneyReport::setDataMajorTick(const QString& f)
+{
+  Q_D(MyMoneyReport);
+  d->m_dataMajorTick = f;
+}
+
+QString MyMoneyReport::dataMinorTick() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dataMinorTick;
+}
+
+void MyMoneyReport::setDataMinorTick(const QString& f)
+{
+  Q_D(MyMoneyReport);
+  d->m_dataMinorTick = f;
+}
+
+uint MyMoneyReport::yLabelsPrecision() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_yLabelsPrecision;
+}
+
+void MyMoneyReport::setYLabelsPrecision(int f)
+{
+  Q_D(MyMoneyReport);
+  d->m_yLabelsPrecision = f;
+}
+
+bool MyMoneyReport::isIncludingSchedules() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeSchedules;
+}
+
+void MyMoneyReport::setIncludingSchedules(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeSchedules = f;
+}
+
+bool MyMoneyReport::isColumnsAreDays() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_columnsAreDays;
+}
+
+void MyMoneyReport::setColumnsAreDays(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_columnsAreDays = f;
+}
+
+bool MyMoneyReport::isIncludingTransfers() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeTransfers;
+}
+
+void MyMoneyReport::setIncludingTransfers(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeTransfers = f;
+}
+
+bool MyMoneyReport::isIncludingUnusedAccounts() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeUnusedAccounts;
+}
+
+void MyMoneyReport::setIncludingUnusedAccounts(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeUnusedAccounts = f;
+}
+
+bool MyMoneyReport::hasBudget() const
+{
+  Q_D(const MyMoneyReport);
+  return !d->m_budgetId.isEmpty();
+}
+
+QString MyMoneyReport::budget() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_budgetId;
+}
+
+/**
+  * Sets the budget used for this report
+  *
+  * @param budget The ID of the budget to use, or an empty string
+  * to indicate a budget is NOT included
+  * @param fa Whether to display actual data alongside the budget.
+  * Setting to false means the report displays ONLY the budget itself.
+  * @warning For now, the budget ID is ignored.  The budget id is
+  * simply checked for any non-empty string, and if so, hasBudget()
+  * will return true.
+  */
+void MyMoneyReport::setBudget(const QString& budget, bool fa)
+{
+  Q_D(MyMoneyReport);
+  d->m_budgetId = budget; d->m_includeBudgetActuals = fa;
+}
+
+bool MyMoneyReport::isIncludingBudgetActuals() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeBudgetActuals;
+}
+
+void MyMoneyReport::setIncludingBudgetActuals(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeBudgetActuals = f;
+}
+
+bool MyMoneyReport::isIncludingForecast() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeForecast;
+}
+
+void MyMoneyReport::setIncludingForecast(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeForecast = f;
+}
+
+bool MyMoneyReport::isIncludingMovingAverage() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeMovingAverage;
+}
+
+void MyMoneyReport::setIncludingMovingAverage(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeMovingAverage = f;
+}
+
+int MyMoneyReport::movingAverageDays() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_movingAverageDays;
+}
+
+void MyMoneyReport::setMovingAverageDays(int days)
+{
+  Q_D(MyMoneyReport);
+  d->m_movingAverageDays = days;
+}
+
+bool MyMoneyReport::isIncludingPrice() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includePrice;
+}
+
+void MyMoneyReport::setIncludingPrice(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includePrice = f;
+}
+
+bool MyMoneyReport::isIncludingAveragePrice() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_includeAveragePrice;
+}
+
+void MyMoneyReport::setIncludingAveragePrice(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_includeAveragePrice = f;
+}
+
+MyMoneyReport::dataOptionE MyMoneyReport::dataFilter() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dataLock;
+}
+
+bool MyMoneyReport::isDataUserDefined() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dataLock == MyMoneyReport::userDefined;
+}
+
+void MyMoneyReport::setDataFilter(dataOptionE u)
+{
+  Q_D(MyMoneyReport);
+  d->m_dataLock = u;
+}
+
+eMyMoney::TransactionFilter::Date MyMoneyReport::dateRange() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dateLock;
+}
+
+bool MyMoneyReport::isDateUserDefined() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_dateLock == TransactionFilter::Date::UserDefined;
+}
+
+/**
+  * Set the underlying date filter and LOCK that filter to the specified
+  * range.  For example, if @p _u is "CurrentMonth", this report should always
+  * be updated to the current month no matter when the report is run.
+  *
+  * This updating is not entirely automatic, you should update it yourself by
+  * calling updateDateFilter.
+  *
+  * @param _u The date range constant (MyMoneyTransactionFilter::dateRangeE)
+  *          which this report should be locked to.
+  */
+
+void MyMoneyReport::setDateFilter(TransactionFilter::Date u)
+{
+  Q_D(MyMoneyReport);
+  d->m_dateLock = u;
+  if (u != TransactionFilter::Date::UserDefined)
+    MyMoneyTransactionFilter::setDateFilter(u);
+}
+
+void MyMoneyReport::setDateFilter(const QDate& db, const QDate& de)
+{
+  MyMoneyTransactionFilter::setDateFilter(db, de);
+}
+
+void MyMoneyReport::updateDateFilter()
+{
+  Q_D(MyMoneyReport);
+  if (d->m_dateLock != TransactionFilter::Date::UserDefined) MyMoneyTransactionFilter::setDateFilter(d->m_dateLock);
+}
+
+
+bool MyMoneyReport::isMixedTime() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_mixedTime;
+}
+
+void MyMoneyReport::setMixedTime(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_mixedTime = f;
+}
+
+int MyMoneyReport::currentDateColumn() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_currentDateColumn;
+}
+
+void MyMoneyReport::setCurrentDateColumn(int f)
+{
+  Q_D(MyMoneyReport);
+  d->m_currentDateColumn = f;
+}
+
+uint MyMoneyReport::settlementPeriod() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_settlementPeriod;
+}
+
+void MyMoneyReport::setSettlementPeriod(uint days)
+{
+  Q_D(MyMoneyReport);
+  d->m_settlementPeriod = days;
+}
+
+bool MyMoneyReport::isShowingSTLTCapitalGains() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_showSTLTCapitalGains;
+}
+
+void MyMoneyReport::setShowSTLTCapitalGains(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_showSTLTCapitalGains = f;
+}
+
+QDate MyMoneyReport::termSeparator() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_tseparator;
+}
+
+void MyMoneyReport::setTermSeparator(const QDate& date)
+{
+  Q_D(MyMoneyReport);
+  d->m_tseparator = date;
+}
+
+bool MyMoneyReport::isSkippingZero() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_skipZero;
+}
+
+void MyMoneyReport::setSkipZero(int f)
+{
+  Q_D(MyMoneyReport);
+  d->m_skipZero = f;
+}
+
 void MyMoneyReport::clearTransactionFilter()
 {
-  m_accountGroupFilter = false;
-  m_accountGroups.clear();
+  Q_D(MyMoneyReport);
+  d->m_accountGroupFilter = false;
+  d->m_accountGroups.clear();
 
   MyMoneyTransactionFilter::clear();
 }
 
-void MyMoneyReport::validDateRange(QDate& _db, QDate& _de)
+void MyMoneyReport::assignFilter(const MyMoneyTransactionFilter& filter)
 {
-  _db = fromDate();
-  _de = toDate();
+  MyMoneyTransactionFilter::operator=(filter);
+}
+
+void MyMoneyReport::validDateRange(QDate& db, QDate& de)
+{
+  db = fromDate();
+  de = toDate();
 
   // if either begin or end date are invalid we have one of the following
   // possible date filters:
@@ -265,7 +1203,7 @@ void MyMoneyReport::validDateRange(QDate& _db, QDate& _de)
   // If there is no transaction in the engine at all, we use the current
   // year as the filter criteria.
 
-  if (!_db.isValid() || !_de.isValid()) {
+  if (!db.isValid() || !de.isValid()) {
     QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(*this);
     QDate tmpBegin, tmpEnd;
 
@@ -285,41 +1223,23 @@ void MyMoneyReport::validDateRange(QDate& _db, QDate& _de)
       tmpBegin = QDate(QDate::currentDate().year(), 1, 1);   // the first date in the file
       tmpEnd = QDate(QDate::currentDate().year(), 12, 31);   // the last date in the file
     }
-    if (!_db.isValid())
-      _db = tmpBegin;
-    if (!_de.isValid())
-      _de = tmpEnd;
+    if (!db.isValid())
+      db = tmpBegin;
+    if (!de.isValid())
+      de = tmpEnd;
   }
-  if (_db > _de)
-    _db = _de;
+  if (db > de)
+    db = de;
 }
 
-void MyMoneyReport::setRowType(ERowType _rt)
+bool MyMoneyReport::accountGroups(QList<Account>& list) const
 {
-  m_rowType = _rt;
-  m_reportType = kTypeArray[_rt];
-
-  m_accountGroupFilter = false;
-  m_accountGroups.clear();
-
-  if (_rt == MyMoneyReport::eAssetLiability) {
-    addAccountGroup(eMyMoney::Account::Asset);
-    addAccountGroup(eMyMoney::Account::Liability);
-  }
-  if (_rt == MyMoneyReport::eExpenseIncome) {
-    addAccountGroup(eMyMoney::Account::Expense);
-    addAccountGroup(eMyMoney::Account::Income);
-  }
-}
-
-bool MyMoneyReport::accountGroups(QList<eMyMoney::Account>& list) const
-
-{
-  bool result = m_accountGroupFilter;
+  Q_D(const MyMoneyReport);
+  bool result = d->m_accountGroupFilter;
 
   if (result) {
-    QList<eMyMoney::Account>::const_iterator it_group = m_accountGroups.begin();
-    while (it_group != m_accountGroups.end()) {
+    QList<Account>::const_iterator it_group = d->m_accountGroups.begin();
+    while (it_group != d->m_accountGroups.end()) {
       list += (*it_group);
       ++it_group;
     }
@@ -327,53 +1247,56 @@ bool MyMoneyReport::accountGroups(QList<eMyMoney::Account>& list) const
   return result;
 }
 
-void MyMoneyReport::addAccountGroup(eMyMoney::Account type)
+void MyMoneyReport::addAccountGroup(Account type)
 {
-  if (!m_accountGroups.isEmpty() && type != eMyMoney::Account::Unknown) {
-    if (m_accountGroups.contains(type))
+  Q_D(MyMoneyReport);
+  if (!d->m_accountGroups.isEmpty() && type != Account::Unknown) {
+    if (d->m_accountGroups.contains(type))
       return;
   }
-  m_accountGroupFilter = true;
-  if (type != eMyMoney::Account::Unknown)
-    m_accountGroups.push_back(type);
+  d->m_accountGroupFilter = true;
+  if (type != Account::Unknown)
+    d->m_accountGroups.push_back(type);
 }
 
-bool MyMoneyReport::includesAccountGroup(eMyMoney::Account type) const
+bool MyMoneyReport::includesAccountGroup(Account type) const
 {
-  bool result = (! m_accountGroupFilter)
-                || (isIncludingTransfers() && m_rowType == MyMoneyReport::eExpenseIncome)
-                || m_accountGroups.contains(type);
+  Q_D(const MyMoneyReport);
+  bool result = (! d->m_accountGroupFilter)
+                || (isIncludingTransfers() && d->m_rowType == MyMoneyReport::eExpenseIncome)
+                || d->m_accountGroups.contains(type);
 
   return result;
 }
 
 bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
 {
-  bool result = false;
+  Q_D(const MyMoneyReport);
+  auto result = false;
 
   if (includesAccountGroup(acc.accountGroup())) {
     switch (acc.accountGroup()) {
-      case eMyMoney::Account::Income:
-      case eMyMoney::Account::Expense:
+      case Account::Income:
+      case Account::Expense:
         if (isTax())
           result = (acc.value("Tax") == "Yes") && includesCategory(acc.id());
         else
           result = includesCategory(acc.id());
         break;
-      case eMyMoney::Account::Asset:
-      case eMyMoney::Account::Liability:
+      case Account::Asset:
+      case Account::Liability:
         if (isLoansOnly())
           result = acc.isLoan() && includesAccount(acc.id());
         else if (isInvestmentsOnly())
           result = acc.isInvest() && includesAccount(acc.id());
-        else if (isIncludingTransfers() && m_rowType == MyMoneyReport::eExpenseIncome)
+        else if (isIncludingTransfers() && d->m_rowType == MyMoneyReport::eExpenseIncome)
           // If transfers are included, ONLY include this account if it is NOT
           // included in the report itself!!
           result = ! includesAccount(acc.id());
         else
           result = includesAccount(acc.id());
         break;
-      case eMyMoney::Account::Equity:
+      case Account::Equity:
         if (isInvestmentsOnly())
           result = (isIncludingPrice() || isIncludingAveragePrice()) && acc.isInvest() && includesAccount(acc.id());
         break;
@@ -386,88 +1309,89 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
 
 void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) const
 {
+  Q_D(const MyMoneyReport);
   // No matter what changes, be sure to have a 'type' attribute.  Only change
   // the major type if it becomes impossible to maintain compatibility with
   // older versions of the program as new features are added to the reports.
   // Feel free to change the minor type every time a change is made here.
 
   // write report's internals
-  if (m_reportType == ePivotTable)
-    e.setAttribute(getAttrName(anType), "pivottable 1.15");
-  else if (m_reportType == eQueryTable)
-    e.setAttribute(getAttrName(anType), "querytable 1.14");
-  else if (m_reportType == eInfoTable)
-    e.setAttribute(getAttrName(anType), "infotable 1.0");
+  if (d->m_reportType == ePivotTable)
+    e.setAttribute(getAttrName(Attribute::Type), "pivottable 1.15");
+  else if (d->m_reportType == eQueryTable)
+    e.setAttribute(getAttrName(Attribute::Type), "querytable 1.14");
+  else if (d->m_reportType == eInfoTable)
+    e.setAttribute(getAttrName(Attribute::Type), "infotable 1.0");
 
-  e.setAttribute(getAttrName(anGroup), m_group);
-  e.setAttribute(getAttrName(anID), m_id);
+  e.setAttribute(getAttrName(Attribute::Group), d->m_group);
+  e.setAttribute(getAttrName(Attribute::ID), m_id);
 
   // write general tab
   if (anonymous) {
-    e.setAttribute(getAttrName(anName), m_id);
-    e.setAttribute(getAttrName(anComment), QString(m_comment).fill('x'));
+    e.setAttribute(getAttrName(Attribute::Name), m_id);
+    e.setAttribute(getAttrName(Attribute::Comment), QString(d->m_comment).fill('x'));
   } else {
-    e.setAttribute(getAttrName(anName), m_name);
-    e.setAttribute(getAttrName(anComment), m_comment);
+    e.setAttribute(getAttrName(Attribute::Name), d->m_name);
+    e.setAttribute(getAttrName(Attribute::Comment), d->m_comment);
   }
-  e.setAttribute(getAttrName(anConvertCurrency), m_convertCurrency);
-  e.setAttribute(getAttrName(anFavorite), m_favorite);
-  e.setAttribute(getAttrName(anSkipZero), m_skipZero);
+  e.setAttribute(getAttrName(Attribute::ConvertCurrency), d->m_convertCurrency);
+  e.setAttribute(getAttrName(Attribute::Favorite), d->m_favorite);
+  e.setAttribute(getAttrName(Attribute::SkipZero), d->m_skipZero);
 
-  e.setAttribute(getAttrName(anDateLock), kDateLockText[m_dateLock]);
+  e.setAttribute(getAttrName(Attribute::DateLock), kDateLockText[(int)d->m_dateLock]);
 
-  if (m_reportType == ePivotTable) {
+  if (d->m_reportType == ePivotTable) {
     // write report's internals
-    e.setAttribute(getAttrName(anIncludesActuals), m_includeBudgetActuals);
-    e.setAttribute(getAttrName(anIncludesForecast), m_includeForecast);
-    e.setAttribute(getAttrName(anIncludesPrice), m_includePrice);
-    e.setAttribute(getAttrName(anIncludesAveragePrice), m_includeAveragePrice);
-    e.setAttribute(getAttrName(anMixedTime), m_mixedTime);
-    e.setAttribute(getAttrName(anInvestments), m_investments); // it's setable in rows/columns tab of querytable, but here it is internal setting
+    e.setAttribute(getAttrName(Attribute::IncludesActuals), d->m_includeBudgetActuals);
+    e.setAttribute(getAttrName(Attribute::IncludesForecast), d->m_includeForecast);
+    e.setAttribute(getAttrName(Attribute::IncludesPrice), d->m_includePrice);
+    e.setAttribute(getAttrName(Attribute::IncludesAveragePrice), d->m_includeAveragePrice);
+    e.setAttribute(getAttrName(Attribute::MixedTime), d->m_mixedTime);
+    e.setAttribute(getAttrName(Attribute::Investments), d->m_investments); // it's setable in rows/columns tab of querytable, but here it is internal setting
 
     // write rows/columns tab
-    if (!m_budgetId.isEmpty())
-      e.setAttribute(getAttrName(anBudget), m_budgetId);
+    if (!d->m_budgetId.isEmpty())
+      e.setAttribute(getAttrName(Attribute::Budget), d->m_budgetId);
 
-    e.setAttribute(getAttrName(anRowType), kRowTypeText[m_rowType]);
-    e.setAttribute(getAttrName(anShowRowTotals), m_showRowTotals);
-    e.setAttribute(getAttrName(anShowColumnTotals), m_showColumnTotals);
-    e.setAttribute(getAttrName(anDetail), kDetailLevelText[m_detailLevel]);
+    e.setAttribute(getAttrName(Attribute::RowType), kRowTypeText[d->m_rowType]);
+    e.setAttribute(getAttrName(Attribute::ShowRowTotals), d->m_showRowTotals);
+    e.setAttribute(getAttrName(Attribute::ShowColumnTotals), d->m_showColumnTotals);
+    e.setAttribute(getAttrName(Attribute::Detail), kDetailLevelText[d->m_detailLevel]);
 
-    e.setAttribute(getAttrName(anIncludesMovingAverage), m_includeMovingAverage);
-    if (m_includeMovingAverage)
-      e.setAttribute(getAttrName(anMovingAverageDays), m_movingAverageDays);
+    e.setAttribute(getAttrName(Attribute::IncludesMovingAverage), d->m_includeMovingAverage);
+    if (d->m_includeMovingAverage)
+      e.setAttribute(getAttrName(Attribute::MovingAverageDays), d->m_movingAverageDays);
 
-    e.setAttribute(getAttrName(anIncludesSchedules), m_includeSchedules);
-    e.setAttribute(getAttrName(anIncludesTransfers), m_includeTransfers);
-    e.setAttribute(getAttrName(anIncludesUnused), m_includeUnusedAccounts);
-    e.setAttribute(getAttrName(anColumnsAreDays), m_columnsAreDays);
+    e.setAttribute(getAttrName(Attribute::IncludesSchedules), d->m_includeSchedules);
+    e.setAttribute(getAttrName(Attribute::IncludesTransfers), d->m_includeTransfers);
+    e.setAttribute(getAttrName(Attribute::IncludesUnused), d->m_includeUnusedAccounts);
+    e.setAttribute(getAttrName(Attribute::ColumnsAreDays), d->m_columnsAreDays);
 
     // write chart tab
-    if (m_chartType < 0 || m_chartType >= kChartTypeText.size()) {
-      qDebug("m_chartType out of bounds with %d on report of type %d. Default to none.", m_chartType, m_reportType);
-      e.setAttribute(getAttrName(anChartType), kChartTypeText[eChartNone]);
+    if (d->m_chartType < 0 || d->m_chartType >= kChartTypeText.size()) {
+      qDebug("m_chartType out of bounds with %d on report of type %d. Default to none.", d->m_chartType, d->m_reportType);
+      e.setAttribute(getAttrName(Attribute::ChartType), kChartTypeText[eChartNone]);
     } else
-      e.setAttribute(getAttrName(anChartType), kChartTypeText[m_chartType]);
+      e.setAttribute(getAttrName(Attribute::ChartType), kChartTypeText[d->m_chartType]);
 
-    e.setAttribute(getAttrName(anChartCHGridLines), m_chartCHGridLines);
-    e.setAttribute(getAttrName(anChartSVGridLines), m_chartSVGridLines);
-    e.setAttribute(getAttrName(anChartDataLabels), m_chartDataLabels);
-    e.setAttribute(getAttrName(anChartByDefault), m_chartByDefault);
-    e.setAttribute(getAttrName(anLogYAxis), m_logYaxis);
-    e.setAttribute(getAttrName(anChartLineWidth), m_chartLineWidth);
-    e.setAttribute(getAttrName(anColumnType), kColumnTypeText[m_columnType]);
-    e.setAttribute(getAttrName(anDataLock), kDataLockText[m_dataLock]);
-    e.setAttribute(getAttrName(anDataRangeStart), m_dataRangeStart);
-    e.setAttribute(getAttrName(anDataRangeEnd), m_dataRangeEnd);
-    e.setAttribute(getAttrName(anDataMajorTick), m_dataMajorTick);
-    e.setAttribute(getAttrName(anDataMinorTick), m_dataMinorTick);
-    e.setAttribute(getAttrName(anYLabelsPrecision), m_yLabelsPrecision);
-  } else if (m_reportType == eQueryTable) {
+    e.setAttribute(getAttrName(Attribute::ChartCHGridLines), d->m_chartCHGridLines);
+    e.setAttribute(getAttrName(Attribute::ChartSVGridLines), d->m_chartSVGridLines);
+    e.setAttribute(getAttrName(Attribute::ChartDataLabels), d->m_chartDataLabels);
+    e.setAttribute(getAttrName(Attribute::ChartByDefault), d->m_chartByDefault);
+    e.setAttribute(getAttrName(Attribute::LogYAxis), d->m_logYaxis);
+    e.setAttribute(getAttrName(Attribute::ChartLineWidth), d->m_chartLineWidth);
+    e.setAttribute(getAttrName(Attribute::ColumnType), kColumnTypeText[d->m_columnType]);
+    e.setAttribute(getAttrName(Attribute::DataLock), kDataLockText[d->m_dataLock]);
+    e.setAttribute(getAttrName(Attribute::DataRangeStart), d->m_dataRangeStart);
+    e.setAttribute(getAttrName(Attribute::DataRangeEnd), d->m_dataRangeEnd);
+    e.setAttribute(getAttrName(Attribute::DataMajorTick), d->m_dataMajorTick);
+    e.setAttribute(getAttrName(Attribute::DataMinorTick), d->m_dataMinorTick);
+    e.setAttribute(getAttrName(Attribute::YLabelsPrecision), d->m_yLabelsPrecision);
+  } else if (d->m_reportType == eQueryTable) {
     // write rows/columns tab
-    e.setAttribute(getAttrName(anRowType), kRowTypeText[m_rowType]);
+    e.setAttribute(getAttrName(Attribute::RowType), kRowTypeText[d->m_rowType]);
     QStringList columns;
-    unsigned qc = m_queryColumns;
+    unsigned qc = d->m_queryColumns;
     unsigned it_qc = eQCbegin;
     unsigned index = 1;
     while (it_qc != eQCend) {
@@ -476,29 +1400,29 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
       it_qc *= 2;
       index++;
     }
-    e.setAttribute(getAttrName(anQueryColumns), columns.join(","));
+    e.setAttribute(getAttrName(Attribute::QueryColumns), columns.join(","));
 
-    e.setAttribute(getAttrName(anTax), m_tax);
-    e.setAttribute(getAttrName(anInvestments), m_investments);
-    e.setAttribute(getAttrName(anLoans), m_loans);
-    e.setAttribute(getAttrName(anHideTransactions), m_hideTransactions);
-    e.setAttribute(getAttrName(anShowColumnTotals), m_showColumnTotals);
-    e.setAttribute(getAttrName(anDetail), kDetailLevelText[m_detailLevel]);
+    e.setAttribute(getAttrName(Attribute::Tax), d->m_tax);
+    e.setAttribute(getAttrName(Attribute::Investments), d->m_investments);
+    e.setAttribute(getAttrName(Attribute::Loans), d->m_loans);
+    e.setAttribute(getAttrName(Attribute::HideTransactions), d->m_hideTransactions);
+    e.setAttribute(getAttrName(Attribute::ShowColumnTotals), d->m_showColumnTotals);
+    e.setAttribute(getAttrName(Attribute::Detail), kDetailLevelText[d->m_detailLevel]);
 
     // write performance tab
-    if (m_queryColumns & eQCperformance || m_queryColumns & eQCcapitalgain)
-      e.setAttribute(getAttrName(anInvestmentSum), m_investmentSum);
+    if (d->m_queryColumns & eQCperformance || d->m_queryColumns & eQCcapitalgain)
+      e.setAttribute(getAttrName(Attribute::InvestmentSum), d->m_investmentSum);
 
     // write capital gains tab
-    if (m_queryColumns & eQCcapitalgain) {
-      if (m_investmentSum == MyMoneyReport::eSumSold) {
-        e.setAttribute(getAttrName(anSettlementPeriod), m_settlementPeriod);
-        e.setAttribute(getAttrName(anShowSTLTCapitalGains), m_showSTLTCapitalGains);
-        e.setAttribute(getAttrName(anTermsSeparator), m_tseparator.toString(Qt::ISODate));
+    if (d->m_queryColumns & eQCcapitalgain) {
+      if (d->m_investmentSum == MyMoneyReport::eSumSold) {
+        e.setAttribute(getAttrName(Attribute::SettlementPeriod), d->m_settlementPeriod);
+        e.setAttribute(getAttrName(Attribute::ShowSTLTCapitalGains), d->m_showSTLTCapitalGains);
+        e.setAttribute(getAttrName(Attribute::TermsSeparator), d->m_tseparator.toString(Qt::ISODate));
       }
     }
-  } else if (m_reportType == eInfoTable)
-    e.setAttribute(getAttrName(anShowRowTotals), m_showRowTotals);
+  } else if (d->m_reportType == eInfoTable)
+    e.setAttribute(getAttrName(Attribute::ShowRowTotals), d->m_showRowTotals);
 
   //
   // Text Filter
@@ -506,11 +1430,11 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   QRegExp textfilter;
   if (textFilter(textfilter)) {
-    QDomElement f = doc->createElement(getElName(enText));
-    f.setAttribute(getAttrName(anPattern), textfilter.pattern());
-    f.setAttribute(getAttrName(anCaseSensitive), (textfilter.caseSensitivity() == Qt::CaseSensitive) ? 1 : 0);
-    f.setAttribute(getAttrName(anRegEx), (textfilter.patternSyntax() == QRegExp::Wildcard) ? 1 : 0);
-    f.setAttribute(getAttrName(anInvertText), m_invertText);
+    QDomElement f = doc->createElement(getElName(Element::Text));
+    f.setAttribute(getAttrName(Attribute::Pattern), textfilter.pattern());
+    f.setAttribute(getAttrName(Attribute::CaseSensitive), (textfilter.caseSensitivity() == Qt::CaseSensitive) ? 1 : 0);
+    f.setAttribute(getAttrName(Attribute::RegEx), (textfilter.patternSyntax() == QRegExp::Wildcard) ? 1 : 0);
+    f.setAttribute(getAttrName(Attribute::InvertText), MyMoneyTransactionFilter::isInvertingText());
     e.appendChild(f);
   }
 
@@ -522,8 +1446,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over payees, and add each one
     QList<int>::const_iterator it_type = typelist.constBegin();
     while (it_type != typelist.constEnd()) {
-      QDomElement p = doc->createElement(getElName(enType));
-      p.setAttribute(getAttrName(anType), kTypeText[*it_type]);
+      QDomElement p = doc->createElement(getElName(Element::Type));
+      p.setAttribute(getAttrName(Attribute::Type), kTypeText[*it_type]);
       e.appendChild(p);
 
       ++it_type;
@@ -535,8 +1459,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over payees, and add each one
     QList<int>::const_iterator it_state = statelist.constBegin();
     while (it_state != statelist.constEnd()) {
-      QDomElement p = doc->createElement(getElName(enState));
-      p.setAttribute(getAttrName(anState), kStateText[*it_state]);
+      QDomElement p = doc->createElement(getElName(Element::State));
+      p.setAttribute(getAttrName(Attribute::State), kStateText[*it_state]);
       e.appendChild(p);
 
       ++it_state;
@@ -548,9 +1472,9 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   QString nrFrom, nrTo;
   if (numberFilter(nrFrom, nrTo)) {
-    QDomElement f = doc->createElement(getElName(enNumber));
-    f.setAttribute(getAttrName(anFrom), nrFrom);
-    f.setAttribute(getAttrName(anTo), nrTo);
+    QDomElement f = doc->createElement(getElName(Element::Number));
+    f.setAttribute(getAttrName(Attribute::From), nrFrom);
+    f.setAttribute(getAttrName(Attribute::To), nrTo);
     e.appendChild(f);
   }
 
@@ -560,9 +1484,9 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   MyMoneyMoney from, to;
   if (amountFilter(from, to)) {    // bool getAmountFilter(MyMoneyMoney&,MyMoneyMoney&);
-    QDomElement f = doc->createElement(getElName(enAmount));
-    f.setAttribute(getAttrName(anFrom), from.toString());
-    f.setAttribute(getAttrName(anTo), to.toString());
+    QDomElement f = doc->createElement(getElName(Element::Amount));
+    f.setAttribute(getAttrName(Attribute::From), from.toString());
+    f.setAttribute(getAttrName(Attribute::To), to.toString());
     e.appendChild(f);
   }
 
@@ -573,14 +1497,14 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   QStringList payeelist;
   if (payees(payeelist)) {
     if (payeelist.empty()) {
-      QDomElement p = doc->createElement(getElName(enPayee));
+      QDomElement p = doc->createElement(getElName(Element::Payee));
       e.appendChild(p);
     } else {
       // iterate over payees, and add each one
       QStringList::const_iterator it_payee = payeelist.constBegin();
       while (it_payee != payeelist.constEnd()) {
-        QDomElement p = doc->createElement(getElName(enPayee));
-        p.setAttribute(getAttrName(anID), *it_payee);
+        QDomElement p = doc->createElement(getElName(Element::Payee));
+        p.setAttribute(getAttrName(Attribute::ID), *it_payee);
         e.appendChild(p);
 
         ++it_payee;
@@ -595,14 +1519,14 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   QStringList taglist;
   if (tags(taglist)) {
     if (taglist.empty()) {
-      QDomElement p = doc->createElement(getElName(enTag));
+      QDomElement p = doc->createElement(getElName(Element::Tag));
       e.appendChild(p);
     } else {
       // iterate over tags, and add each one
       QStringList::const_iterator it_tag = taglist.constBegin();
       while (it_tag != taglist.constEnd()) {
-        QDomElement p = doc->createElement(getElName(enTag));
-        p.setAttribute(getAttrName(anID), *it_tag);
+        QDomElement p = doc->createElement(getElName(Element::Tag));
+        p.setAttribute(getAttrName(Attribute::ID), *it_tag);
         e.appendChild(p);
 
         ++it_tag;
@@ -614,13 +1538,13 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   // Account Groups Filter
   //
 
-  QList<eMyMoney::Account> accountgrouplist;
+  QList<Account> accountgrouplist;
   if (accountGroups(accountgrouplist)) {
     // iterate over accounts, and add each one
-    QList<eMyMoney::Account>::const_iterator it_group = accountgrouplist.constBegin();
+    QList<Account>::const_iterator it_group = accountgrouplist.constBegin();
     while (it_group != accountgrouplist.constEnd()) {
-      QDomElement p = doc->createElement(getElName(enAccountGroup));
-      p.setAttribute(getAttrName(anGroup), kAccountTypeText[(int)*it_group]);
+      QDomElement p = doc->createElement(getElName(Element::AccountGroup));
+      p.setAttribute(getAttrName(Attribute::Group), kAccountTypeText[(int)*it_group]);
       e.appendChild(p);
 
       ++it_group;
@@ -636,8 +1560,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over accounts, and add each one
     QStringList::const_iterator it_account = accountlist.constBegin();
     while (it_account != accountlist.constEnd()) {
-      QDomElement p = doc->createElement(getElName(enAccount));
-      p.setAttribute(getAttrName(anID), *it_account);
+      QDomElement p = doc->createElement(getElName(Element::Account));
+      p.setAttribute(getAttrName(Attribute::ID), *it_account);
       e.appendChild(p);
 
       ++it_account;
@@ -653,8 +1577,8 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     // iterate over accounts, and add each one
     QStringList::const_iterator it_account = accountlist.constBegin();
     while (it_account != accountlist.constEnd()) {
-      QDomElement p = doc->createElement(getElName(enCategory));
-      p.setAttribute(getAttrName(anID), *it_account);
+      QDomElement p = doc->createElement(getElName(Element::Category));
+      p.setAttribute(getAttrName(Attribute::ID), *it_account);
       e.appendChild(p);
 
       ++it_account;
@@ -665,14 +1589,14 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   // Date Filter
   //
 
-  if (m_dateLock == MyMoneyTransactionFilter::userDefined) {
+  if (d->m_dateLock == TransactionFilter::Date::UserDefined) {
     QDate dateFrom, dateTo;
     if (dateFilter(dateFrom, dateTo)) {
-      QDomElement f = doc->createElement(getElName(enDates));
+      QDomElement f = doc->createElement(getElName(Element::Dates));
       if (dateFrom.isValid())
-        f.setAttribute(getAttrName(anFrom), dateFrom.toString(Qt::ISODate));
+        f.setAttribute(getAttrName(Attribute::From), dateFrom.toString(Qt::ISODate));
       if (dateTo.isValid())
-        f.setAttribute(getAttrName(anTo), dateTo.toString(Qt::ISODate));
+        f.setAttribute(getAttrName(Attribute::To), dateTo.toString(Qt::ISODate));
       e.appendChild(f);
     }
   }
@@ -680,6 +1604,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
 bool MyMoneyReport::read(const QDomElement& e)
 {
+  Q_D(MyMoneyReport);
   // The goal of this reading method is 100% backward AND 100% forward
   // compatibility.  Any report ever created with any version of KMyMoney
   // should be able to be loaded by this method (as long as it's one of the
@@ -689,23 +1614,23 @@ bool MyMoneyReport::read(const QDomElement& e)
     return false;
 
   // read report's internals
-  QString type = e.attribute(getAttrName(anType));
+  QString type = e.attribute(getAttrName(Attribute::Type));
   if (type.startsWith(QLatin1String("pivottable")))
-    m_reportType = ePivotTable;
+    d->m_reportType = ePivotTable;
   else if (type.startsWith(QLatin1String("querytable")))
-    m_reportType = eQueryTable;
+    d->m_reportType = eQueryTable;
   else if (type.startsWith(QLatin1String("infotable")))
-    m_reportType = eInfoTable;
+    d->m_reportType = eInfoTable;
   else
     return false;
 
-  m_group = e.attribute(getAttrName(anGroup));
-  m_id = e.attribute(getAttrName(anID));
+  d->m_group = e.attribute(getAttrName(Attribute::Group));
+  m_id = e.attribute(getAttrName(Attribute::ID));
 
   clearTransactionFilter();
 
   // read date tab
-  QString datelockstr = e.attribute(getAttrName(anDateLock), "userdefined");
+  QString datelockstr = e.attribute(getAttrName(Attribute::DateLock), "userdefined");
   // Handle the pivot 1.2/query 1.1 case where the values were saved as
   // numbers
   bool ok = false;
@@ -713,99 +1638,99 @@ bool MyMoneyReport::read(const QDomElement& e)
   if (!ok) {
     i = kDateLockText.indexOf(datelockstr);
     if (i == -1)
-      i = MyMoneyTransactionFilter::userDefined;
+      i = (int)TransactionFilter::Date::UserDefined;
   }
-  setDateFilter(static_cast<dateOptionE>(i));
+  setDateFilter(static_cast<TransactionFilter::Date>(i));
 
   // read general tab
-  m_name = e.attribute(getAttrName(anName));
-  m_comment = e.attribute(getAttrName(anComment), "Extremely old report");
-  m_convertCurrency = e.attribute(getAttrName(anConvertCurrency), "1").toUInt();
-  m_favorite = e.attribute(getAttrName(anFavorite), "0").toUInt();
-  m_skipZero = e.attribute(getAttrName(anSkipZero), "0").toUInt();
+  d->m_name = e.attribute(getAttrName(Attribute::Name));
+  d->m_comment = e.attribute(getAttrName(Attribute::Comment), "Extremely old report");
+  d->m_convertCurrency = e.attribute(getAttrName(Attribute::ConvertCurrency), "1").toUInt();
+  d->m_favorite = e.attribute(getAttrName(Attribute::Favorite), "0").toUInt();
+  d->m_skipZero = e.attribute(getAttrName(Attribute::SkipZero), "0").toUInt();
 
-  if (m_reportType == ePivotTable) {
+  if (d->m_reportType == ePivotTable) {
     // read report's internals
-    m_includeBudgetActuals = e.attribute(getAttrName(anIncludesActuals), "0").toUInt();
-    m_includeForecast = e.attribute(getAttrName(anIncludesForecast), "0").toUInt();
-    m_includePrice = e.attribute(getAttrName(anIncludesPrice), "0").toUInt();
-    m_includeAveragePrice = e.attribute(getAttrName(anIncludesAveragePrice), "0").toUInt();
-    m_mixedTime = e.attribute(getAttrName(anMixedTime), "0").toUInt();
-    m_investments = e.attribute(getAttrName(anInvestments), "0").toUInt();
+    d->m_includeBudgetActuals = e.attribute(getAttrName(Attribute::IncludesActuals), "0").toUInt();
+    d->m_includeForecast = e.attribute(getAttrName(Attribute::IncludesForecast), "0").toUInt();
+    d->m_includePrice = e.attribute(getAttrName(Attribute::IncludesPrice), "0").toUInt();
+    d->m_includeAveragePrice = e.attribute(getAttrName(Attribute::IncludesAveragePrice), "0").toUInt();
+    d->m_mixedTime = e.attribute(getAttrName(Attribute::MixedTime), "0").toUInt();
+    d->m_investments = e.attribute(getAttrName(Attribute::Investments), "0").toUInt();
 
     // read rows/columns tab
-    if (e.hasAttribute(getAttrName(anBudget)))
-      m_budgetId = e.attribute(getAttrName(anBudget));
+    if (e.hasAttribute(getAttrName(Attribute::Budget)))
+      d->m_budgetId = e.attribute(getAttrName(Attribute::Budget));
 
-    i = kRowTypeText.indexOf(e.attribute(getAttrName(anRowType)));
+    i = kRowTypeText.indexOf(e.attribute(getAttrName(Attribute::RowType)));
     if (i != -1)
       setRowType(static_cast<ERowType>(i));
     else
       setRowType(eExpenseIncome);
 
-    if (e.hasAttribute(getAttrName(anShowRowTotals)))
-      m_showRowTotals = e.attribute(getAttrName(anShowRowTotals)).toUInt();
+    if (e.hasAttribute(getAttrName(Attribute::ShowRowTotals)))
+      d->m_showRowTotals = e.attribute(getAttrName(Attribute::ShowRowTotals)).toUInt();
     else if (rowType() == eExpenseIncome) // for backward compatibility
-      m_showRowTotals = true;
-    m_showColumnTotals = e.attribute(getAttrName(anShowColumnTotals), "1").toUInt();
+      d->m_showRowTotals = true;
+    d->m_showColumnTotals = e.attribute(getAttrName(Attribute::ShowColumnTotals), "1").toUInt();
 
     //check for reports with older settings which didn't have the detail attribute
-    i = kDetailLevelText.indexOf(e.attribute(getAttrName(anDetail)));
+    i = kDetailLevelText.indexOf(e.attribute(getAttrName(Attribute::Detail)));
     if (i != -1)
-      m_detailLevel = static_cast<EDetailLevel>(i);
+      d->m_detailLevel = static_cast<EDetailLevel>(i);
     else
-      m_detailLevel = eDetailAll;
+      d->m_detailLevel = eDetailAll;
 
-    m_includeMovingAverage = e.attribute(getAttrName(anIncludesMovingAverage), "0").toUInt();
-    if (m_includeMovingAverage)
-      m_movingAverageDays = e.attribute(getAttrName(anMovingAverageDays), "1").toUInt();
-    m_includeSchedules = e.attribute(getAttrName(anIncludesSchedules), "0").toUInt();
-    m_includeTransfers = e.attribute(getAttrName(anIncludesTransfers), "0").toUInt();
-    m_includeUnusedAccounts = e.attribute(getAttrName(anIncludesUnused), "0").toUInt();
-    m_columnsAreDays = e.attribute(getAttrName(anColumnsAreDays), "0").toUInt();
+    d->m_includeMovingAverage = e.attribute(getAttrName(Attribute::IncludesMovingAverage), "0").toUInt();
+    if (d->m_includeMovingAverage)
+      d->m_movingAverageDays = e.attribute(getAttrName(Attribute::MovingAverageDays), "1").toUInt();
+    d->m_includeSchedules = e.attribute(getAttrName(Attribute::IncludesSchedules), "0").toUInt();
+    d->m_includeTransfers = e.attribute(getAttrName(Attribute::IncludesTransfers), "0").toUInt();
+    d->m_includeUnusedAccounts = e.attribute(getAttrName(Attribute::IncludesUnused), "0").toUInt();
+    d->m_columnsAreDays = e.attribute(getAttrName(Attribute::ColumnsAreDays), "0").toUInt();
 
     // read chart tab
-    i = kChartTypeText.indexOf(e.attribute(getAttrName(anChartType)));
+    i = kChartTypeText.indexOf(e.attribute(getAttrName(Attribute::ChartType)));
     if (i != -1)
-      m_chartType = static_cast<EChartType>(i);
+      d->m_chartType = static_cast<EChartType>(i);
     else
-      m_chartType = eChartNone;
+      d->m_chartType = eChartNone;
 
-    m_chartCHGridLines = e.attribute(getAttrName(anChartCHGridLines), "1").toUInt();
-    m_chartSVGridLines = e.attribute(getAttrName(anChartSVGridLines), "1").toUInt();
-    m_chartDataLabels = e.attribute(getAttrName(anChartDataLabels), "1").toUInt();
-    m_chartByDefault = e.attribute(getAttrName(anChartByDefault), "0").toUInt();
-    m_logYaxis = e.attribute(getAttrName(anLogYAxis), "0").toUInt();
-    m_chartLineWidth = e.attribute(getAttrName(anChartLineWidth), QString(m_lineWidth)).toUInt();
+    d->m_chartCHGridLines = e.attribute(getAttrName(Attribute::ChartCHGridLines), "1").toUInt();
+    d->m_chartSVGridLines = e.attribute(getAttrName(Attribute::ChartSVGridLines), "1").toUInt();
+    d->m_chartDataLabels = e.attribute(getAttrName(Attribute::ChartDataLabels), "1").toUInt();
+    d->m_chartByDefault = e.attribute(getAttrName(Attribute::ChartByDefault), "0").toUInt();
+    d->m_logYaxis = e.attribute(getAttrName(Attribute::LogYAxis), "0").toUInt();
+    d->m_chartLineWidth = e.attribute(getAttrName(Attribute::ChartLineWidth), QString(m_lineWidth)).toUInt();
 
     // read range tab
-    i = kColumnTypeText.indexOf(e.attribute(getAttrName(anColumnType)));
+    i = kColumnTypeText.indexOf(e.attribute(getAttrName(Attribute::ColumnType)));
     if (i != -1)
       setColumnType(static_cast<EColumnType>(i));
     else
       setColumnType(eMonths);
 
-    i = kDataLockText.indexOf(e.attribute(getAttrName(anDataLock)));
+    i = kDataLockText.indexOf(e.attribute(getAttrName(Attribute::DataLock)));
     if (i != -1)
       setDataFilter(static_cast<dataOptionE>(i));
     else
       setDataFilter(MyMoneyReport::automatic);
 
-    m_dataRangeStart = e.attribute(getAttrName(anDataRangeStart), "0");
-    m_dataRangeEnd = e.attribute(getAttrName(anDataRangeEnd), "0");
-    m_dataMajorTick = e.attribute(getAttrName(anDataMajorTick), "0");
-    m_dataMinorTick = e.attribute(getAttrName(anDataMinorTick), "0");
-    m_yLabelsPrecision = e.attribute(getAttrName(anYLabelsPrecision), "2").toUInt();
-  } else if (m_reportType == eQueryTable) {
+    d->m_dataRangeStart = e.attribute(getAttrName(Attribute::DataRangeStart), "0");
+    d->m_dataRangeEnd= e.attribute(getAttrName(Attribute::DataRangeEnd), "0");
+    d->m_dataMajorTick = e.attribute(getAttrName(Attribute::DataMajorTick), "0");
+    d->m_dataMinorTick = e.attribute(getAttrName(Attribute::DataMinorTick), "0");
+    d->m_yLabelsPrecision = e.attribute(getAttrName(Attribute::YLabelsPrecision), "2").toUInt();
+  } else if (d->m_reportType == eQueryTable) {
     // read rows/columns tab
-    i = kRowTypeText.indexOf(e.attribute(getAttrName(anRowType)));
+    i = kRowTypeText.indexOf(e.attribute(getAttrName(Attribute::RowType)));
     if (i != -1)
       setRowType(static_cast<ERowType>(i));
     else
       setRowType(eAccount);
 
     unsigned qc = 0;
-    QStringList columns = e.attribute(getAttrName(anQueryColumns), "none").split(',');
+    QStringList columns = e.attribute(getAttrName(Attribute::QueryColumns), "none").split(',');
     foreach (const auto column, columns) {
       i = kQueryColumnsText.indexOf(column);
       if (i > 0)
@@ -813,78 +1738,78 @@ bool MyMoneyReport::read(const QDomElement& e)
     }
     setQueryColumns(static_cast<EQueryColumns>(qc));
 
-    m_tax = e.attribute(getAttrName(anTax), "0").toUInt();
-    m_investments = e.attribute(getAttrName(anInvestments), "0").toUInt();
-    m_loans = e.attribute(getAttrName(anLoans), "0").toUInt();
-    m_hideTransactions = e.attribute(getAttrName(anHideTransactions), "0").toUInt();
-    m_showColumnTotals = e.attribute(getAttrName(anShowColumnTotals), "1").toUInt();
-    m_detailLevel = kDetailLevelText.indexOf(e.attribute(getAttrName(anDetail), "none")) == eDetailAll ? eDetailAll : eDetailNone;
+    d->m_tax = e.attribute(getAttrName(Attribute::Tax), "0").toUInt();
+    d->m_investments = e.attribute(getAttrName(Attribute::Investments), "0").toUInt();
+    d->m_loans = e.attribute(getAttrName(Attribute::Loans), "0").toUInt();
+    d->m_hideTransactions = e.attribute(getAttrName(Attribute::HideTransactions), "0").toUInt();
+    d->m_showColumnTotals = e.attribute(getAttrName(Attribute::ShowColumnTotals), "1").toUInt();
+    d->m_detailLevel = kDetailLevelText.indexOf(e.attribute(getAttrName(Attribute::Detail), "none")) == eDetailAll ? eDetailAll : eDetailNone;
 
     // read performance or capital gains tab
-    if (m_queryColumns & eQCperformance)
-      m_investmentSum = static_cast<EInvestmentSum>(e.attribute(getAttrName(anInvestmentSum), QString().setNum(MyMoneyReport::eSumPeriod)).toInt());
+    if (d->m_queryColumns & eQCperformance)
+      d->m_investmentSum = static_cast<EInvestmentSum>(e.attribute(getAttrName(Attribute::InvestmentSum), QString().setNum(MyMoneyReport::eSumPeriod)).toInt());
 
     // read capital gains tab
-    if (m_queryColumns & eQCcapitalgain) {
-      m_investmentSum = static_cast<EInvestmentSum>(e.attribute(getAttrName(anInvestmentSum), QString().setNum(MyMoneyReport::eSumSold)).toInt());
-      if (m_investmentSum == MyMoneyReport::eSumSold) {
-        m_showSTLTCapitalGains = e.attribute(getAttrName(anShowSTLTCapitalGains), "0").toUInt();
-        m_settlementPeriod = e.attribute(getAttrName(anSettlementPeriod), "3").toUInt();
-        m_tseparator = QDate::fromString(e.attribute(getAttrName(anTermsSeparator), QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
+    if (d->m_queryColumns & eQCcapitalgain) {
+      d->m_investmentSum = static_cast<EInvestmentSum>(e.attribute(getAttrName(Attribute::InvestmentSum), QString().setNum(MyMoneyReport::eSumSold)).toInt());
+      if (d->m_investmentSum == MyMoneyReport::eSumSold) {
+        d->m_showSTLTCapitalGains = e.attribute(getAttrName(Attribute::ShowSTLTCapitalGains), "0").toUInt();
+        d->m_settlementPeriod = e.attribute(getAttrName(Attribute::SettlementPeriod), "3").toUInt();
+        d->m_tseparator = QDate::fromString(e.attribute(getAttrName(Attribute::TermsSeparator), QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate);
       }
     }
-  } else if (m_reportType == eInfoTable) {
-    if (e.hasAttribute(getAttrName(anShowRowTotals)))
-      m_showRowTotals = e.attribute(getAttrName(anShowRowTotals)).toUInt();
+  } else if (d->m_reportType == eInfoTable) {
+    if (e.hasAttribute(getAttrName(Attribute::ShowRowTotals)))
+      d->m_showRowTotals = e.attribute(getAttrName(Attribute::ShowRowTotals)).toUInt();
     else
-      m_showRowTotals = true;
+      d->m_showRowTotals = true;
   }
 
   QDomNode child = e.firstChild();
   while (!child.isNull() && child.isElement()) {
     QDomElement c = child.toElement();
-    if (getElName(enText) == c.tagName() && c.hasAttribute(getAttrName(anPattern))) {
-      setTextFilter(QRegExp(c.attribute(getAttrName(anPattern)),
-                            c.attribute(getAttrName(anCaseSensitive), "1").toUInt()
+    if (getElName(Element::Text) == c.tagName() && c.hasAttribute(getAttrName(Attribute::Pattern))) {
+      setTextFilter(QRegExp(c.attribute(getAttrName(Attribute::Pattern)),
+                            c.attribute(getAttrName(Attribute::CaseSensitive), "1").toUInt()
                             ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                            c.attribute(getAttrName(anRegEx), "1").toUInt()
+                            c.attribute(getAttrName(Attribute::RegEx), "1").toUInt()
                             ? QRegExp::Wildcard : QRegExp::RegExp),
-                    c.attribute(getAttrName(anInvertText), "0").toUInt());
+                    c.attribute(getAttrName(Attribute::InvertText), "0").toUInt());
     }
-    if (getElName(enType) == c.tagName() && c.hasAttribute(getAttrName(anType))) {
-      i = kTypeText.indexOf(c.attribute(getAttrName(anType)));
+    if (getElName(Element::Type) == c.tagName() && c.hasAttribute(getAttrName(Attribute::Type))) {
+      i = kTypeText.indexOf(c.attribute(getAttrName(Attribute::Type)));
       if (i != -1)
         addType(i);
     }
-    if (getElName(enState) == c.tagName() && c.hasAttribute(getAttrName(anState))) {
-      i = kStateText.indexOf(c.attribute(getAttrName(anState)));
+    if (getElName(Element::State) == c.tagName() && c.hasAttribute(getAttrName(Attribute::State))) {
+      i = kStateText.indexOf(c.attribute(getAttrName(Attribute::State)));
       if (i != -1)
         addState(i);
     }
-    if (getElName(enNumber) == c.tagName())
-      setNumberFilter(c.attribute(getAttrName(anFrom)), c.attribute(getAttrName(anTo)));
-    if (getElName(enAmount) == c.tagName())
-      setAmountFilter(MyMoneyMoney(c.attribute(getAttrName(anFrom), "0/100")), MyMoneyMoney(c.attribute(getAttrName(anTo), "0/100")));
-    if (getElName(enDates) == c.tagName()) {
+    if (getElName(Element::Number) == c.tagName())
+      setNumberFilter(c.attribute(getAttrName(Attribute::From)), c.attribute(getAttrName(Attribute::To)));
+    if (getElName(Element::Amount) == c.tagName())
+      setAmountFilter(MyMoneyMoney(c.attribute(getAttrName(Attribute::From), "0/100")), MyMoneyMoney(c.attribute(getAttrName(Attribute::To), "0/100")));
+    if (getElName(Element::Dates) == c.tagName()) {
       QDate from, to;
-      if (c.hasAttribute(getAttrName(anFrom)))
-        from = QDate::fromString(c.attribute(getAttrName(anFrom)), Qt::ISODate);
-      if (c.hasAttribute(getAttrName(anTo)))
-        to = QDate::fromString(c.attribute(getAttrName(anTo)), Qt::ISODate);
+      if (c.hasAttribute(getAttrName(Attribute::From)))
+        from = QDate::fromString(c.attribute(getAttrName(Attribute::From)), Qt::ISODate);
+      if (c.hasAttribute(getAttrName(Attribute::To)))
+        to = QDate::fromString(c.attribute(getAttrName(Attribute::To)), Qt::ISODate);
       MyMoneyTransactionFilter::setDateFilter(from, to);
     }
-    if (getElName(enPayee) == c.tagName())
-      addPayee(c.attribute(getAttrName(anID)));
-    if (getElName(enTag) == c.tagName())
-      addTag(c.attribute(getAttrName(anID)));
-    if (getElName(enCategory) == c.tagName() && c.hasAttribute(getAttrName(anID)))
-      addCategory(c.attribute(getAttrName(anID)));
-    if (getElName(enAccount) == c.tagName() && c.hasAttribute(getAttrName(anID)))
-      addAccount(c.attribute(getAttrName(anID)));
-    if (getElName(enAccountGroup) == c.tagName() && c.hasAttribute(getAttrName(anGroup))) {
-      i = kAccountTypeText.indexOf(c.attribute(getAttrName(anGroup)));
+    if (getElName(Element::Payee) == c.tagName())
+      addPayee(c.attribute(getAttrName(Attribute::ID)));
+    if (getElName(Element::Tag) == c.tagName())
+      addTag(c.attribute(getAttrName(Attribute::ID)));
+    if (getElName(Element::Category) == c.tagName() && c.hasAttribute(getAttrName(Attribute::ID)))
+      addCategory(c.attribute(getAttrName(Attribute::ID)));
+    if (getElName(Element::Account) == c.tagName() && c.hasAttribute(getAttrName(Attribute::ID)))
+      addAccount(c.attribute(getAttrName(Attribute::ID)));
+    if (getElName(Element::AccountGroup) == c.tagName() && c.hasAttribute(getAttrName(Attribute::Group))) {
+      i = kAccountTypeText.indexOf(c.attribute(getAttrName(Attribute::Group)));
       if (i != -1)
-        addAccountGroup(static_cast<eMyMoney::Account>(i));
+        addAccountGroup(static_cast<Account>(i));
     }
     child = child.nextSibling();
   }
@@ -918,84 +1843,84 @@ void MyMoneyReport::setLineWidth(int width)
   m_lineWidth = width;
 }
 
-const QString MyMoneyReport::getElName(const elNameE _el)
+QString MyMoneyReport::getElName(const Element el)
 {
-  static const QHash<elNameE, QString> elNames = {
-    {enPayee, QStringLiteral("PAYEE")},
-    {enTag, QStringLiteral("TAG")},
-    {enAccount, QStringLiteral("ACCOUNT")},
-    {enText, QStringLiteral("TEXT")},
-    {enType, QStringLiteral("TYPE")},
-    {enState, QStringLiteral("STATE")},
-    {enNumber, QStringLiteral("NUMBER")},
-    {enAmount, QStringLiteral("AMOUNT")},
-    {enDates, QStringLiteral("DATES")},
-    {enCategory, QStringLiteral("CATEGORY")},
-    {enAccountGroup, QStringLiteral("ACCOUNTGROUP")}
+  static const QHash<Element, QString> elNames = {
+    {Element::Payee,        QStringLiteral("PAYEE")},
+    {Element::Tag,          QStringLiteral("TAG")},
+    {Element::Account,      QStringLiteral("ACCOUNT")},
+    {Element::Text,         QStringLiteral("TEXT")},
+    {Element::Type,         QStringLiteral("TYPE")},
+    {Element::State,        QStringLiteral("STATE")},
+    {Element::Number,       QStringLiteral("NUMBER")},
+    {Element::Amount,       QStringLiteral("AMOUNT")},
+    {Element::Dates,        QStringLiteral("DATES")},
+    {Element::Category,     QStringLiteral("CATEGORY")},
+    {Element::AccountGroup, QStringLiteral("ACCOUNTGROUP")}
   };
-  return elNames[_el];
+  return elNames[el];
 }
 
-const QString MyMoneyReport::getAttrName(const attrNameE _attr)
+QString MyMoneyReport::getAttrName(const Attribute attr)
 {
-  static const QHash<attrNameE, QString> attrNames = {
-    {anID, QStringLiteral("id")},
-    {anGroup, QStringLiteral("group")},
-    {anType, QStringLiteral("type")},
-    {anName, QStringLiteral("name")},
-    {anComment, QStringLiteral("comment")},
-    {anConvertCurrency, QStringLiteral("convertcurrency")},
-    {anFavorite, QStringLiteral("favorite")},
-    {anSkipZero, QStringLiteral("skipZero")},
-    {anDateLock, QStringLiteral("datelock")},
-    {anDataLock, QStringLiteral("datalock")},
-    {anMovingAverageDays, QStringLiteral("movingaveragedays")},
-    {anIncludesActuals, QStringLiteral("includesactuals")},
-    {anIncludesForecast, QStringLiteral("includesforecast")},
-    {anIncludesPrice, QStringLiteral("includesprice")},
-    {anIncludesAveragePrice, QStringLiteral("includesaverageprice")},
-    {anIncludesMovingAverage, QStringLiteral("includesmovingaverage")},
-    {anIncludesSchedules, QStringLiteral("includeschedules")},
-    {anIncludesTransfers, QStringLiteral("includestransfers")},
-    {anIncludesUnused, QStringLiteral("includeunused")},
-    {anMixedTime, QStringLiteral("mixedtime")},
-    {anInvestments, QStringLiteral("investments")},
-    {anBudget, QStringLiteral("budget")},
-    {anShowRowTotals, QStringLiteral("showrowtotals")},
-    {anShowColumnTotals, QStringLiteral("showcolumntotals")},
-    {anDetail, QStringLiteral("detail")},
-    {anColumnsAreDays, QStringLiteral("columnsaredays")},
-    {anChartType, QStringLiteral("charttype")},
-    {anChartCHGridLines, QStringLiteral("chartchgridlines")},
-    {anChartSVGridLines, QStringLiteral("chartsvgridlines")},
-    {anChartDataLabels, QStringLiteral("chartdatalabels")},
-    {anChartByDefault, QStringLiteral("chartbydefault")},
-    {anLogYAxis, QStringLiteral("logYaxis")},
-    {anChartLineWidth, QStringLiteral("chartlinewidth")},
-    {anColumnType, QStringLiteral("columntype")},
-    {anRowType, QStringLiteral("rowtype")},
-    {anDataRangeStart, QStringLiteral("dataRangeStart")},
-    {anDataRangeEnd, QStringLiteral("dataRangeEnd")},
-    {anDataMajorTick, QStringLiteral("dataMajorTick")},
-    {anDataMinorTick, QStringLiteral("dataMinorTick")},
-    {anYLabelsPrecision, QStringLiteral("yLabelsPrecision")},
-    {anQueryColumns, QStringLiteral("querycolumns")},
-    {anTax, QStringLiteral("tax")},
-    {anLoans, QStringLiteral("loans")},
-    {anHideTransactions, QStringLiteral("hidetransactions")},
-    {anInvestmentSum, QStringLiteral("investmentsum")},
-    {anSettlementPeriod, QStringLiteral("settlementperiod")},
-    {anShowSTLTCapitalGains, QStringLiteral("showSTLTCapitalGains")},
-    {anTermsSeparator, QStringLiteral("tseparator")},
-    {anPattern, QStringLiteral("pattern")},
-    {anCaseSensitive, QStringLiteral("casesensitive")},
-    {anRegEx, QStringLiteral("regex")},
-    {anInvertText, QStringLiteral("inverttext")},
-    {anState, QStringLiteral("state")},
-    {anFrom, QStringLiteral("from")},
-    {anTo, QStringLiteral("to")}
+  static const QHash<Attribute, QString> attrNames = {
+    {Attribute::ID,                     QStringLiteral("id")},
+    {Attribute::Group,                  QStringLiteral("group")},
+    {Attribute::Type,                   QStringLiteral("type")},
+    {Attribute::Name,                   QStringLiteral("name")},
+    {Attribute::Comment,                QStringLiteral("comment")},
+    {Attribute::ConvertCurrency,        QStringLiteral("convertcurrency")},
+    {Attribute::Favorite,               QStringLiteral("favorite")},
+    {Attribute::SkipZero,               QStringLiteral("skipZero")},
+    {Attribute::DateLock,               QStringLiteral("datelock")},
+    {Attribute::DataLock,               QStringLiteral("datalock")},
+    {Attribute::MovingAverageDays,      QStringLiteral("movingaveragedays")},
+    {Attribute::IncludesActuals,        QStringLiteral("includesactuals")},
+    {Attribute::IncludesForecast,       QStringLiteral("includesforecast")},
+    {Attribute::IncludesPrice,          QStringLiteral("includesprice")},
+    {Attribute::IncludesAveragePrice,   QStringLiteral("includesaverageprice")},
+    {Attribute::IncludesMovingAverage,  QStringLiteral("includesmovingaverage")},
+    {Attribute::IncludesSchedules,      QStringLiteral("includeschedules")},
+    {Attribute::IncludesTransfers,      QStringLiteral("includestransfers")},
+    {Attribute::IncludesUnused,         QStringLiteral("includeunused")},
+    {Attribute::MixedTime,              QStringLiteral("mixedtime")},
+    {Attribute::Investments,            QStringLiteral("investments")},
+    {Attribute::Budget,                 QStringLiteral("budget")},
+    {Attribute::ShowRowTotals,          QStringLiteral("showrowtotals")},
+    {Attribute::ShowColumnTotals,       QStringLiteral("showcolumntotals")},
+    {Attribute::Detail,                 QStringLiteral("detail")},
+    {Attribute::ColumnsAreDays,         QStringLiteral("columnsaredays")},
+    {Attribute::ChartType,              QStringLiteral("charttype")},
+    {Attribute::ChartCHGridLines,       QStringLiteral("chartchgridlines")},
+    {Attribute::ChartSVGridLines,       QStringLiteral("chartsvgridlines")},
+    {Attribute::ChartDataLabels,        QStringLiteral("chartdatalabels")},
+    {Attribute::ChartByDefault,         QStringLiteral("chartbydefault")},
+    {Attribute::LogYAxis,               QStringLiteral("logYaxis")},
+    {Attribute::ChartLineWidth,         QStringLiteral("chartlinewidth")},
+    {Attribute::ColumnType,             QStringLiteral("columntype")},
+    {Attribute::RowType,                QStringLiteral("rowtype")},
+    {Attribute::DataRangeStart,         QStringLiteral("dataRangeStart")},
+    {Attribute::DataRangeEnd,           QStringLiteral("dataRangeEnd")},
+    {Attribute::DataMajorTick,          QStringLiteral("dataMajorTick")},
+    {Attribute::DataMinorTick,          QStringLiteral("dataMinorTick")},
+    {Attribute::YLabelsPrecision,       QStringLiteral("yLabelsPrecision")},
+    {Attribute::QueryColumns,           QStringLiteral("querycolumns")},
+    {Attribute::Tax,                    QStringLiteral("tax")},
+    {Attribute::Loans,                  QStringLiteral("loans")},
+    {Attribute::HideTransactions,       QStringLiteral("hidetransactions")},
+    {Attribute::InvestmentSum,          QStringLiteral("investmentsum")},
+    {Attribute::SettlementPeriod,       QStringLiteral("settlementperiod")},
+    {Attribute::ShowSTLTCapitalGains,   QStringLiteral("showSTLTCapitalGains")},
+    {Attribute::TermsSeparator,         QStringLiteral("tseparator")},
+    {Attribute::Pattern,                QStringLiteral("pattern")},
+    {Attribute::CaseSensitive,          QStringLiteral("casesensitive")},
+    {Attribute::RegEx,                  QStringLiteral("regex")},
+    {Attribute::InvertText,             QStringLiteral("inverttext")},
+    {Attribute::State,                  QStringLiteral("state")},
+    {Attribute::From,                   QStringLiteral("from")},
+    {Attribute::To,                     QStringLiteral("to")}
   };
-  return attrNames[_attr];
+  return attrNames[attr];
 }
 
 QString MyMoneyReport::toString(ERowType type)

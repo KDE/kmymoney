@@ -33,6 +33,8 @@
 #include "ledgerdelegate.h"
 #include "ledgermodel.h"
 #include "models.h"
+#include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 
 class LedgerView::Private
 {

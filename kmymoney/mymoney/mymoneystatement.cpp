@@ -30,6 +30,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QList>
+#include <QDomProcessingInstruction>
+#include <QDomElement>
+#include <QDomDocument>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -64,7 +67,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     p.setAttribute("number", (*it_t).m_strNumber);
     p.setAttribute("amount", (*it_t).m_amount.toString());
     p.setAttribute("bankid", (*it_t).m_strBankID);
-    p.setAttribute("reconcile", (*it_t).m_reconcile);
+    p.setAttribute("reconcile", (int)(*it_t).m_reconcile);
     p.setAttribute("action", kActionText[(*it_t).m_eAction]);
 
     if (m_eType == etInvestment) {
@@ -79,10 +82,10 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
       QDomElement split = _doc->createElement("SPLIT");
       split.setAttribute("accountid", (*it_s).m_accountId);
       split.setAttribute("amount", (*it_s).m_amount.toString());
-      split.setAttribute("reconcile", (*it_s).m_reconcile);
+      split.setAttribute("reconcile", (int)(*it_s).m_reconcile);
       split.setAttribute("category", (*it_s).m_strCategoryName);
       split.setAttribute("memo", (*it_s).m_strMemo);
-      split.setAttribute("reconcile", (*it_s).m_reconcile);
+      split.setAttribute("reconcile", (int)(*it_s).m_reconcile);
       p.appendChild(split);
     }
 
@@ -153,7 +156,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
         t.m_strNumber = c.attribute("number");
         t.m_strPayee = c.attribute("payee");
         t.m_strBankID = c.attribute("bankid");
-        t.m_reconcile = static_cast<MyMoneySplit::reconcileFlagE>(c.attribute("reconcile").toInt());
+        t.m_reconcile = static_cast<eMyMoney::Split::State>(c.attribute("reconcile").toInt());
         int i = kActionText.indexOf(c.attribute("action", kActionText[1]));
         if (i != -1)
           t.m_eAction = static_cast<Transaction::EAction>(i);
@@ -172,7 +175,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
             MyMoneyStatement::Split s;
             s.m_accountId = c.attribute("accountid");
             s.m_amount = MyMoneyMoney(c.attribute("amount"));
-            s.m_reconcile = static_cast<MyMoneySplit::reconcileFlagE>(c.attribute("reconcile").toInt());
+            s.m_reconcile = static_cast<eMyMoney::Split::State>(c.attribute("reconcile").toInt());
             s.m_strCategoryName = c.attribute("category");
             s.m_strMemo = c.attribute("memo");
             t.m_listSplits += s;

@@ -32,6 +32,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 

@@ -37,6 +37,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "kmymoneyaccountcompletion.h"
 #include "icons/icons.h"
 

@@ -21,7 +21,6 @@
 // QT Includes
 
 #include <QWizard>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,9 +28,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
 #include "ui_kendingbalancedlgdecl.h"
+
+class QDate;
+
+class MyMoneyAccount;
+class MyMoneyTransaction;
 
 /**
   * This dialog is wizard based and used to enter additional

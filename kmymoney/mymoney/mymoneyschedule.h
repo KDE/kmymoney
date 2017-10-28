@@ -21,18 +21,24 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
-#include "mymoneyaccount.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
 #include "mymoneyobject.h"
+#include "mymoneyenums.h"
+
+class QString;
+class QDate;
 
 class IMyMoneyProcessingCalendar;
+class MyMoneyAccount;
+class MyMoneyTransaction;
+
+template <typename T> class QList;
 
 /**
   * @author Michael Edwardes
@@ -45,27 +51,20 @@ class IMyMoneyProcessingCalendar;
   * @short A class to represent a schedule.
   * @see MyMoneyScheduled
   */
+class MyMoneySchedulePrivate;
 class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
 {
+  Q_DECLARE_PRIVATE(MyMoneySchedule)
+  MyMoneySchedulePrivate* d_ptr;
+
   friend class MyMoneyStorageANON;
-  Q_GADGET
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  enum elNameE { enPayment, enPayments };
-  Q_ENUM(elNameE)
-
-  enum attrNameE { anName, anType, anOccurence, anOccurenceMultiplier,
-                   anPaymentType, anFixed,
-                   anAutoEnter, anLastPayment, anWeekendOption,
-                   anDate, anStartDate, anEndDate
-                 };
-  Q_ENUM(attrNameE)
-
   /**
     * Standard constructor
     */
-  explicit MyMoneySchedule();
+  MyMoneySchedule();
 
   /**
     * Constructor for initialising the object.
@@ -75,17 +74,30 @@ public:
     *
     * @a startDate is not used anymore and internally set to QDate()
     */
-  MyMoneySchedule(const QString& name, eMyMoney::Schedule::Type type, eMyMoney::Schedule::Occurrence occurrence, int occurrenceMultiplier,
-                  eMyMoney::Schedule::PaymentType paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
+  explicit MyMoneySchedule(const QString& name,
+                           eMyMoney::Schedule::Type type,
+                           eMyMoney::Schedule::Occurrence occurrence,
+                           int occurrenceMultiplier,
+                           eMyMoney::Schedule::PaymentType paymentType,
+                           const QDate& startDate,
+                           const QDate& endDate,
+                           bool fixed,
+                           bool autoEnter);
 
   explicit MyMoneySchedule(const QDomElement& node);
 
-  MyMoneySchedule(const QString& id, const MyMoneySchedule& right);
+  MyMoneySchedule(const QString& id,
+                  const MyMoneySchedule& other);
+
+  MyMoneySchedule(const MyMoneySchedule & other);
+  MyMoneySchedule(MyMoneySchedule && other);
+  MyMoneySchedule & operator=(MyMoneySchedule other);
+  friend void swap(MyMoneySchedule& first, MyMoneySchedule& second);
 
   /**
     * Standard destructor
     */
-  ~MyMoneySchedule() {}
+  ~MyMoneySchedule();
 
   /**
     * Simple get method that returns the occurrence frequency.
@@ -101,27 +113,21 @@ public:
     * @return eMyMoney::Schedule::Occurrence The instance period
     *
     */
-  eMyMoney::Schedule::Occurrence occurrencePeriod() const {
-    return m_occurrence;
-  }
+  eMyMoney::Schedule::Occurrence occurrencePeriod() const;
 
   /**
     * Simple get method that returns the occurrence period multiplier.
     *
     * @return int The frequency multiplier
     */
-  int occurrenceMultiplier() const {
-    return m_occurrenceMultiplier;
-  }
+  int occurrenceMultiplier() const;
 
   /**
     * Simple get method that returns the schedule type.
     *
     * @return eMyMoney::Schedule::Type The instance type.
     */
-  eMyMoney::Schedule::Type type() const {
-    return m_type;
-  }
+  eMyMoney::Schedule::Type type() const;
 
   /**
     * Simple get method that returns the schedule startDate. If
@@ -131,25 +137,21 @@ public:
     *
     * @return reference to QDate containing the start date.
     */
-  const QDate& startDate() const;
+  QDate startDate() const;
 
   /**
     * Simple get method that returns the schedule paymentType.
     *
     * @return eMyMoney::Schedule::PaymentType The instance paymentType.
     */
-  eMyMoney::Schedule::PaymentType paymentType() const {
-    return m_paymentType;
-  }
+  eMyMoney::Schedule::PaymentType paymentType() const;
 
   /**
     * Simple get method that returns true if the schedule is fixed.
     *
     * @return bool To indicate whether the instance is fixed.
     */
-  bool isFixed() const {
-    return m_fixed;
-  }
+  bool isFixed() const;
 
   /**
     * Simple get method that returns true if the schedule will end
@@ -157,9 +159,7 @@ public:
     *
     * @return bool Indicates whether the instance will end.
     */
-  bool willEnd() const {
-    return m_endDate.isValid();
-  }
+  bool willEnd() const;
 
   /**
     * Simple get method that returns the number of transactions remaining.
@@ -182,9 +182,7 @@ public:
     *
     * @return QDate The end date for the instance.
     */
-  const QDate& endDate() const {
-    return m_endDate;
-  }
+  QDate endDate() const;
 
   /**
     * Simple get method that returns true if the transaction should be
@@ -192,18 +190,14 @@ public:
     *
     * @return bool Indicates whether the instance will be automatically entered.
     */
-  bool autoEnter() const {
-    return m_autoEnter;
-  }
+  bool autoEnter() const;
 
   /**
     * Simple get method that returns the transaction data for the schedule.
     *
     * @return MyMoneyTransaction The transaction data for the instance.
     */
-  const MyMoneyTransaction& transaction() const {
-    return m_transaction;
-  }
+  MyMoneyTransaction transaction() const;
 
   /**
     * Simple method that returns the schedules last payment. If the
@@ -211,9 +205,7 @@ public:
     *
     * @return QDate The last payment for the schedule.
     */
-  const QDate& lastPayment() const {
-    return m_lastPayment;
-  }
+  QDate lastPayment() const;
 
   /**
     * Simple method that returns the next due date for the schedule.
@@ -224,7 +216,7 @@ public:
     *       a possible end of the schedule. Make sure to consider
     *       the return value of isFinished() when using the value returned.
     */
-  const QDate& nextDueDate() const;
+  QDate nextDueDate() const;
 
   /**
     * This method returns the next due date adjusted
@@ -255,9 +247,7 @@ public:
     *
     * This not used by MyMoneySchedule but by the support code.
   **/
-  eMyMoney::Schedule::WeekendOption weekendOption() const {
-    return m_weekendOption;
-  }
+  eMyMoney::Schedule::WeekendOption weekendOption() const;
 
   /**
     * Simple method that sets the frequency for the schedule.
@@ -411,7 +401,8 @@ public:
     *               are no more payments then an empty/invalid QDate() will
     *               be returned.
     */
-  QDate adjustedNextPayment(const QDate& refDate = QDate::currentDate()) const;
+  QDate adjustedNextPayment(const QDate& refDate) const;
+  QDate adjustedNextPayment() const;
 
   /**
     * Calculates the date of the next payment.
@@ -424,7 +415,8 @@ public:
     *         if there are no more payments then an empty/invalid QDate()
     *         will be returned.
     */
-  QDate nextPayment(const QDate& refDate = QDate::currentDate()) const;
+  QDate nextPayment(const QDate& refDate) const;
+  QDate nextPayment() const;
 
   /**
     * Calculates the date of the next payment and adjusts if asked.
@@ -439,7 +431,8 @@ public:
     *         if there is no more payments then an empty/invalid QDate()
     *         will be returned.
     */
-  QDate nextPaymentDate(const bool& adjust, const QDate& refDate = QDate::currentDate()) const;
+  QDate nextPaymentDate(const bool& adjust, const QDate& refDate) const;
+  QDate nextPaymentDate(const bool& adjust) const;
 
   /**
     * Calculates the dates of the payment over a certain period of time.
@@ -457,9 +450,7 @@ public:
     *
     * @return The name
     */
-  const QString& name() const {
-    return m_name;
-  }
+  QString name() const;
 
   /**
     * Changes the instance name
@@ -470,25 +461,19 @@ public:
   void setName(const QString& nm);
 
   bool operator ==(const MyMoneySchedule& right) const;
-  bool operator !=(const MyMoneySchedule& right) const {
-    return ! operator==(right);
-  }
+  bool operator !=(const MyMoneySchedule& right) const;
 
   bool operator <(const MyMoneySchedule& right) const;
 
   MyMoneyAccount account(int cnt = 1) const;
-  MyMoneyAccount transferAccount() const {
-    return account(2);
-  };
+  MyMoneyAccount transferAccount() const;
   QDate dateAfter(int transactions) const;
 
   bool isOverdue() const;
   bool isFinished() const;
   bool hasRecordedPayment(const QDate&) const;
   void recordPayment(const QDate&);
-  QList<QDate> recordedPayments() const {
-    return m_recordedPayments;
-  }
+  QList<QDate> recordedPayments() const;
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
@@ -700,49 +685,52 @@ private:
     */
   bool isProcessingDate(const QDate& date) const;
 
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
-
 private:
-  /// Its occurrence
-  eMyMoney::Schedule::Occurrence m_occurrence;
+  enum class Element { Payment,
+                       Payments
+                     };
 
-  /// Its occurrence multiplier
-  int m_occurrenceMultiplier;
+  enum class Attribute { Name = 0,
+                         Type,
+                         Occurrence,
+                         OccurrenceMultiplier,
+                         PaymentType,
+                         Fixed,
+                         AutoEnter,
+                         LastPayment,
+                         WeekendOption,
+                         Date,
+                         StartDate,
+                         EndDate,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
 
-  /// Its type
-  eMyMoney::Schedule::Type m_type;
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
 
-  /// The date the schedule commences
-  QDate m_startDate;
-
-  /// The payment type
-  eMyMoney::Schedule::PaymentType m_paymentType;
-
-  /// Can the amount vary
-  bool m_fixed;
-
-  /// The, possibly estimated, amount plus all other relevant details
-  MyMoneyTransaction m_transaction;
-
-  /// The last transaction date if the schedule does end at a fixed date
-  QDate m_endDate;
-
-  /// Enter the transaction into the register automatically
-  bool m_autoEnter;
-
-  /// Internal date used for calculations
-  QDate m_lastPayment;
-
-  /// The name
-  QString m_name;
-
-  /// The recorded payments
-  QList<QDate> m_recordedPayments;
-
-  /// The weekend option
-  eMyMoney::Schedule::WeekendOption m_weekendOption;
+  friend uint qHash(const Attribute, uint seed);
 };
+
+inline uint qHash(const MyMoneySchedule::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneySchedule& first, MyMoneySchedule& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+}
+
+inline MyMoneySchedule::MyMoneySchedule(MyMoneySchedule && other) : MyMoneySchedule() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneySchedule & MyMoneySchedule::operator=(MyMoneySchedule other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 /**
   * Make it possible to hold @ref MyMoneySchedule objects inside @ref QVariant objects.

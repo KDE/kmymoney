@@ -35,9 +35,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "kmymoneyglobalsettings.h"

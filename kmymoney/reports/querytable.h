@@ -29,6 +29,7 @@
 // QT Includes
 
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,8 +37,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyreport.h"
 #include "listtable.h"
+#include "mymoneymoney.h"
+
+class MyMoneyReport;
 
 namespace reports
 {

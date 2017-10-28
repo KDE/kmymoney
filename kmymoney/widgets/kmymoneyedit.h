@@ -31,7 +31,6 @@
 // Project Includes
 
 #include "kmymoneylineedit.h"
-#include "mymoneysecurity.h"
 #include "mymoneymoney.h"
 #include "kmm_widgets_export.h"
 
@@ -39,6 +38,7 @@ class kMyMoneyCalculator;
 class QPushButton;
 class QWidget;
 class KLineEdit;
+class MyMoneySecurity;
 
 /**
   * This class is derived from KDoubleValidator and uses

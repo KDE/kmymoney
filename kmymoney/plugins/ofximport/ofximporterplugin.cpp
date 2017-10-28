@@ -42,6 +42,7 @@
 #include "konlinebankingstatus.h"
 #include "konlinebankingsetupwizard.h"
 #include "kofxdirectconnectdlg.h"
+#include "mymoneyaccount.h"
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 #include "importinterface.h"

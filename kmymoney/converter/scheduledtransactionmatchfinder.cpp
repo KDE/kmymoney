@@ -17,8 +17,10 @@
 #include "scheduledtransactionmatchfinder.h"
 
 #include <QDebug>
+#include <QDate>
 
 #include "mymoneyfile.h"
+#include "mymoneyschedule.h"
 #include "kmymoneyutils.h"
 
 ScheduledTransactionMatchFinder::ScheduledTransactionMatchFinder(const MyMoneyAccount& account, int matchWindow)

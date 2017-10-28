@@ -20,7 +20,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-// krazy:excludeall=dpointer
 
 #ifndef MYMONEYSECURITY_H
 #define MYMONEYSECURITY_H
@@ -30,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qobjectdefs.h>
 #include <QMetaType>
 
 // ----------------------------------------------------------------------------
@@ -44,6 +42,8 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyenums.h"
 
+class QString;
+
 /**
   * Class that holds all the required information about a security that the user
   * has entered information about. A security can be a stock, a mutual fund, a bond
@@ -54,22 +54,33 @@
   * @author Łukasz Wojniłowicz
   */
 
-class QString;
+class MyMoneySecurityPrivate;
 class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
+  Q_DECLARE_PRIVATE(MyMoneySecurity)
+  MyMoneySecurityPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
   MyMoneySecurity();
-  explicit MyMoneySecurity(const QString& id,
-                           const MyMoneySecurity& equity);
   explicit MyMoneySecurity(const QString& id,
                            const QString& name,
                            const QString& symbol = QString(),
                            const int smallestCashFraction = DEFAULT_CASH_FRACTION,
                            const int smallestAccountFraction = DEFAULT_ACCOUNT_FRACTION,
                            const int pricePrecision = DEFAULT_PRICE_PRECISION);
+
   explicit MyMoneySecurity(const QDomElement& node);
+
+  MyMoneySecurity(const QString& id,
+                  const MyMoneySecurity& other);
+
+  MyMoneySecurity(const MyMoneySecurity & other);
+  MyMoneySecurity(MyMoneySecurity && other);
+  MyMoneySecurity & operator=(MyMoneySecurity other);
+  friend void swap(MyMoneySecurity& first, MyMoneySecurity& second);
+
   ~MyMoneySecurity();
 
   bool operator < (const MyMoneySecurity&) const;
@@ -87,10 +98,10 @@ public:
     */
   bool operator != (const MyMoneySecurity& r) const;
 
-  const QString name() const;
+  QString name() const;
   void setName(const QString& str);
 
-  const QString tradingSymbol() const;
+  QString tradingSymbol() const;
   void setTradingSymbol(const QString& str);
 
   eMyMoney::Security securityType() const;
@@ -101,10 +112,10 @@ public:
   AlkValue::RoundingMethod roundingMethod() const;
   void setRoundingMethod(const AlkValue::RoundingMethod rnd);
 
-  const QString tradingMarket() const;
+  QString tradingMarket() const;
   void setTradingMarket(const QString& str);
 
-  const QString tradingCurrency() const;
+  QString tradingCurrency() const;
   void setTradingCurrency(const QString& str);
 
   int smallestAccountFraction() const;
@@ -116,7 +127,7 @@ public:
   int pricePrecision() const;
   void setPricePrecision(const int pp);
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
    * This method checks if a reference to the given object exists. It returns,
@@ -127,7 +138,7 @@ public:
    * @retval true This object references object with id @p id.
    * @retval false This object does not reference the object with id @p id.
    */
-  bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   /**
    * This method is used to convert the internal representation of
@@ -152,16 +163,6 @@ public:
   static QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
 
 private:
-  QString                   m_name;
-  QString                   m_tradingSymbol;
-  QString                   m_tradingMarket;
-  QString                   m_tradingCurrency;
-  eMyMoney::Security        m_securityType;
-  int                       m_smallestCashFraction;
-  int                       m_smallestAccountFraction;
-  int                       m_pricePrecision;
-  AlkValue::RoundingMethod  m_roundingMethod;
-
   enum DefaultValues {
     DEFAULT_CASH_FRACTION = 100,
     DEFAULT_ACCOUNT_FRACTION = 100,
@@ -169,85 +170,45 @@ private:
   };
 
   enum class Attribute { Name = 0,
-                   Symbol,
-                   Type,
-                   RoundingMethod,
-                   SAF,
-                   PP,
-                   SCF,
-                   TradingCurrency,
-                   TradingMarket,
-                   // insert new entries above this line
-                   LastAttribute
-                 };
+                         Symbol,
+                         Type,
+                         RoundingMethod,
+                         SAF,
+                         PP,
+                         SCF,
+                         TradingCurrency,
+                         TradingMarket,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
 
   static QString getAttrName(const Attribute attr);
 
   friend uint qHash(const Attribute, uint seed);
 };
 
-
-inline bool MyMoneySecurity::operator != (const MyMoneySecurity& r) const // krazy:exclude=inline
-{
-  return !(*this == r);
-}
-
-inline eMyMoney::Security MyMoneySecurity::securityType() const // krazy:exclude=inline
-{
-  return m_securityType;
-}
-
-inline void MyMoneySecurity::setSecurityType(const eMyMoney::Security s) // krazy:exclude=inline
-{
-  m_securityType = s;
-}
-
-inline bool MyMoneySecurity::isCurrency() const // krazy:exclude=inline
-{
-  return m_securityType == eMyMoney::Security::Currency;
-}
-
-inline AlkValue::RoundingMethod MyMoneySecurity::roundingMethod() const // krazy:exclude=inline
-{
-  return m_roundingMethod;
-}
-
-inline void MyMoneySecurity::setRoundingMethod(const AlkValue::RoundingMethod rnd) // krazy:exclude=inline
-{
-  m_roundingMethod = rnd;
-}
-
-inline int MyMoneySecurity::smallestAccountFraction() const // krazy:exclude=inline
-{
-  return m_smallestAccountFraction;
-}
-
-inline void MyMoneySecurity::setSmallestAccountFraction(const int sf) // krazy:exclude=inline
-{
-  m_smallestAccountFraction = sf;
-}
-
-inline int MyMoneySecurity::smallestCashFraction() const // krazy:exclude=inline
-{
-  return m_smallestCashFraction;
-}
-
-inline void MyMoneySecurity::setSmallestCashFraction(const int cf) // krazy:exclude=inline
-{
-  m_smallestCashFraction = cf;
-}
-
-inline int MyMoneySecurity::pricePrecision() const // krazy:exclude=inline
-{
-  return m_pricePrecision;
-}
-
-inline void MyMoneySecurity::setPricePrecision(const int pp) // krazy:exclude=inline
-{
-  m_pricePrecision = pp;
-}
-
 inline uint qHash(const MyMoneySecurity::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneySecurity& first, MyMoneySecurity& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+  swap(first.m_kvp, second.m_kvp);
+}
+
+inline MyMoneySecurity::MyMoneySecurity(MyMoneySecurity && other) : MyMoneySecurity() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneySecurity & MyMoneySecurity::operator=(MyMoneySecurity other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
+
+
 /**
   * Make it possible to hold @ref MyMoneySecurity objects inside @ref QVariant objects.
   */

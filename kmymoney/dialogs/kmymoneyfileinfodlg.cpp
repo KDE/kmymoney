@@ -31,7 +31,14 @@
 
 #include <imymoneystorage.h>
 #include "mymoneyfile.h"
-#include "kmymoneyutils.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneyprice.h"
+#include "mymoneypayee.h"
+#include "mymoneyschedule.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyenums.h"
 
 KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
     : KMyMoneyFileInfoDlgDecl(parent)
@@ -63,7 +70,7 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
   QMap<eMyMoney::Account, int>::const_iterator it_m;
   for (it_m = accountMap.constBegin(); it_m != accountMap.constEnd(); ++it_m) {
     QTreeWidgetItem *item = new QTreeWidgetItem();
-    item->setText(0, KMyMoneyUtils::accountTypeToString(it_m.key()));
+    item->setText(0, MyMoneyAccount::accountTypeToString(it_m.key()));
     item->setText(1, QString("%1").arg(*it_m));
     item->setText(2, QString("%1").arg(accountMapClosed[it_m.key()]));
     m_accountView->invisibleRootItem()->addChild(item);

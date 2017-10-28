@@ -30,7 +30,10 @@
 
 #include "accountsviewproxymodel.h"
 
+#include "mymoneymoney.h"
 #include "mymoneybudget.h"
+
+class MyMoneyAccount;
 
 /**
   * This proxy model implements all the functionality needed by the budgets

@@ -29,10 +29,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include <kmm_plugin_export.h>
 
+class MyMoneyAccount;
 class MyMoneyStatement;
+class MyMoneyKeyValueContainer;
+
 namespace KMyMoneyPlugin
 {
 

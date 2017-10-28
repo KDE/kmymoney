@@ -45,6 +45,8 @@
 
 #include "mymoneyfinancialcalculator.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccountloan.h"
+#include "mymoneypayee.h"
 
 KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
     KNewLoanWizardDecl(parent), m_pages(Page_Summary + 1, true)

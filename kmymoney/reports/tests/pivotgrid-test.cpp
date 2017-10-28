@@ -22,6 +22,8 @@
 #include "reportstestcommon.h"
 
 #include "pivotgrid.h"
+#include "mymoneyinstitution.h"
+#include "mymoneysecurity.h"
 
 using namespace reports;
 using namespace test;

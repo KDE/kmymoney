@@ -21,6 +21,9 @@
 #include <QtTest/QtTest>
 
 #include "mymoneytestutils.h"
+#include "mymoneymoney.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 QTEST_GUILESS_MAIN(MyMoneyTransactionTest)
 
@@ -420,7 +423,7 @@ void MyMoneyTransactionTest::testWriteXML()
   s.setValue(MyMoneyMoney(96379, 100));
   s.setAction(MyMoneySplit::ActionWithdrawal);
   s.setAccountId("A000076");
-  s.setReconcileFlag(MyMoneySplit::Reconciled);
+  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   s.setBankID("SPID");
   t.addSplit(s);
 
@@ -533,11 +536,11 @@ void MyMoneyTransactionTest::testReadXML()
   t.setValue("key", "VALUE");
   try {
     t = MyMoneyTransaction(node);
-    QVERIFY(t.m_postDate == QDate(2001, 12, 28));
-    QVERIFY(t.m_entryDate == QDate(2003, 9, 29));
+    QVERIFY(t.postDate() == QDate(2001, 12, 28));
+    QVERIFY(t.entryDate() == QDate(2003, 9, 29));
     QVERIFY(t.id() == "T000000000000000001");
-    QVERIFY(t.m_memo == "Wohnung:Miete");
-    QVERIFY(t.m_commodity == "EUR");
+    QVERIFY(t.memo() == "Wohnung:Miete");
+    QVERIFY(t.commodity() == "EUR");
     QVERIFY(t.pairs().count() == 1);
     QVERIFY(t.value("key") == "value");
     QVERIFY(t.splits().count() == 1);
@@ -620,7 +623,7 @@ void MyMoneyTransactionTest::testHasReferenceTo()
   s.setValue(MyMoneyMoney(96379, 100));
   s.setAction(MyMoneySplit::ActionWithdrawal);
   s.setAccountId("A000076");
-  s.setReconcileFlag(MyMoneySplit::Reconciled);
+  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t.addSplit(s);
 
   QVERIFY(t.hasReferenceTo("EUR") == true);
@@ -711,22 +714,20 @@ void MyMoneyTransactionTest::testReplaceId()
 
 void MyMoneyTransactionTest::testElementNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyTransaction::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyTransaction::getElName(static_cast<MyMoneyTransaction::elNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyTransaction::Element::Split; i <= (int)MyMoneyTransaction::Element::Splits; ++i) {
+    auto isEmpty = MyMoneyTransaction::getElName(static_cast<MyMoneyTransaction::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
 }
 
 void MyMoneyTransactionTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyTransaction::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyTransaction::getAttrName(static_cast<MyMoneyTransaction::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneyTransaction::Attribute::Name; i < (int)MyMoneyTransaction::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyTransaction::getAttrName(static_cast<MyMoneyTransaction::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

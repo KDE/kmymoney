@@ -143,11 +143,12 @@ public:
     */
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
-private:
+protected:
   /**
     * This member variable represents the container of key/value pairs.
     */
   QMap<QString, QString>  m_kvp;
+private:
 
   static const QString getElName(const elNameE _el);
   static const QString getAttrName(const attrNameE _attr);

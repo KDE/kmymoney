@@ -61,7 +61,9 @@
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
+#include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
+#include "mymoneysplit.h"
 #include "mymoneyutils.h"
 #include "transaction.h"
 #include "transactionform.h"
@@ -508,7 +510,7 @@ void KGlobalLedgerView::loadView()
       // if we're in reconciliation and the state is cleared, we
       // force the item to show in dimmed intensity to get a visual focus
       // on those items, that we need to work on
-      if (isReconciliationAccount() && (*it).second.reconcileFlag() == MyMoneySplit::Cleared) {
+      if (isReconciliationAccount() && (*it).second.reconcileFlag() == eMyMoney::Split::State::Cleared) {
         t->setReducedIntensity(true);
       }
     }
@@ -605,12 +607,9 @@ void KGlobalLedgerView::loadView()
     // we need at least the balance for the account we currently show
     actBalance[m_account.id()] = MyMoneyMoney();
 
-    if (m_account.accountType() == eMyMoney::Account::Investment) {
-      QList<QString>::const_iterator it_a;
-      for (it_a = m_account.accountList().begin(); it_a != m_account.accountList().end(); ++it_a) {
-        actBalance[*it_a] = MyMoneyMoney();
-      }
-    }
+    if (m_account.accountType() == eMyMoney::Account::Investment)
+      foreach (const auto accountID, m_account.accountList())
+        actBalance[accountID] = MyMoneyMoney();
 
     // determine balances (actual, cleared). We do this by getting the actual
     // balance of all entered transactions from the engine and walk the list
@@ -686,7 +685,7 @@ void KGlobalLedgerView::loadView()
         }
 
         if (!t->isScheduled()) {
-          if (isReconciliationAccount() && t->transaction().postDate() <= reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
+          if (isReconciliationAccount() && t->transaction().postDate() <= reconciliationDate && split.reconcileFlag() == eMyMoney::Split::State::Cleared) {
             if (split.shares().isNegative()) {
               payments[split.accountId()]++;
               paymentAmount[split.accountId()] += split.shares();
@@ -733,10 +732,10 @@ void KGlobalLedgerView::loadView()
     // add a last empty entry for new transactions
     // leave some information about the current account
     MyMoneySplit split;
-    split.setReconcileFlag(MyMoneySplit::NotReconciled);
+    split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
     // make sure to use the value specified in the option during reconciliation
     if (isReconciliationAccount())
-      split.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(KMyMoneyGlobalSettings::defaultReconciliationState()));
+      split.setReconcileFlag(static_cast<eMyMoney::Split::State>(KMyMoneyGlobalSettings::defaultReconciliationState()));
     KMyMoneyRegister::Register::transactionFactory(m_register, MyMoneyTransaction(), split, 0);
 
     m_register->updateRegister(true);

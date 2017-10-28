@@ -24,6 +24,7 @@
 #include "reportstestcommon.h"
 using namespace test;
 
+#include "mymoneyinstitution.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"

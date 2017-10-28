@@ -23,12 +23,13 @@
 #include <QTextCodec>
 
 // DOH, mmreport.h uses this without including it!!
+#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"
 #include "mymoneystatement.h"
+#include "mymoneysplit.h"
 #include "mymoneystoragedump.h"
 #include "mymoneystoragexml.h"
 
@@ -601,21 +602,21 @@ void PivotTableTest::testAdvancedFilter()
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
-    filter.addType(MyMoneyTransactionFilter::payments);
+    filter.addType((int)eMyMoney::TransactionFilter::Type::Payments);
     XMLandback(filter);
     PivotTable spending_f(filter);
 
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo);
 
     filter.clearTransactionFilter();
-    filter.addType(MyMoneyTransactionFilter::deposits);
+    filter.addType((int)eMyMoney::TransactionFilter::Type::Deposits);
     XMLandback(filter);
     PivotTable spending_f2(filter);
 
     QVERIFY(spending_f2.m_grid.m_total[eActual].m_total == moParent1);
 
     filter.clearTransactionFilter();
-    filter.addType(MyMoneyTransactionFilter::transfers);
+    filter.addType((int)eMyMoney::TransactionFilter::Type::Transfers);
     XMLandback(filter);
     PivotTable spending_f3(filter);
 
@@ -640,16 +641,16 @@ void PivotTableTest::testAdvancedFilter()
     TransactionHelper t4(QDate(2004, 4, 1), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
 
     QList<MyMoneySplit> splits = t1.splits();
-    splits[0].setReconcileFlag(MyMoneySplit::Cleared);
-    splits[1].setReconcileFlag(MyMoneySplit::Cleared);
+    splits[0].setReconcileFlag(eMyMoney::Split::State::Cleared);
+    splits[1].setReconcileFlag(eMyMoney::Split::State::Cleared);
     t1.modifySplit(splits[0]);
     t1.modifySplit(splits[1]);
     t1.update();
 
     splits.clear();
     splits = t2.splits();
-    splits[0].setReconcileFlag(MyMoneySplit::Reconciled);
-    splits[1].setReconcileFlag(MyMoneySplit::Reconciled);
+    splits[0].setReconcileFlag(eMyMoney::Split::State::Reconciled);
+    splits[1].setReconcileFlag(eMyMoney::Split::State::Reconciled);
     t2.modifySplit(splits[0]);
     t2.modifySplit(splits[1]);
     t2.update();
@@ -979,7 +980,7 @@ void PivotTableTest::testBudget()
 
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
-                         MyMoneyTransactionFilter::yearToDate,
+                         eMyMoney::TransactionFilter::Date::YearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
     PivotTable table(report);
@@ -991,7 +992,7 @@ void PivotTableTest::testBudget()
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acParent, false, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
-                         MyMoneyTransactionFilter::yearToDate,
+                         eMyMoney::TransactionFilter::Date::YearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
     PivotTable table(report);
@@ -1007,7 +1008,7 @@ void PivotTableTest::testBudget()
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acParent, true, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
-                         MyMoneyTransactionFilter::yearToDate,
+                         eMyMoney::TransactionFilter::Date::YearToDate,
                          MyMoneyReport::eDetailTop ,
                          "Yearly Budgeted vs. Actual", "Default Report");
     PivotTable table(report);
@@ -1024,7 +1025,7 @@ void PivotTableTest::testBudget()
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acSecondChild, true, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
-                         MyMoneyTransactionFilter::yearToDate,
+                         eMyMoney::TransactionFilter::Date::YearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
     PivotTable table(report);
@@ -1041,7 +1042,7 @@ void PivotTableTest::testBudget()
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acSolo, false, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
-                         MyMoneyTransactionFilter::yearToDate,
+                         eMyMoney::TransactionFilter::Date::YearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
     PivotTable table(report);

@@ -29,6 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyaccountloan.h"
 
 VariableInterestDateWizardPage::VariableInterestDateWizardPage(QWidget *parent)
     : VariableInterestDateWizardPageDecl(parent)

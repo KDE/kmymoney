@@ -39,11 +39,11 @@ class KToolBar;
 #include "kmymoneyviewbase.h"
 #include "mymoneyaccount.h"
 #include "registeritem.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
 #include "selectedtransaction.h"
 
 class MyMoneyReport;
+class MyMoneySplit;
+class MyMoneyTransaction;
 class TransactionEditor;
 class QLabel;
 namespace KMyMoneyRegister { class Register; }

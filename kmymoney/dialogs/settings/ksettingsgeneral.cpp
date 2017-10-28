@@ -32,6 +32,7 @@
 #include "kmymoneydateinput.h"
 #include "models.h"
 #include "accountsmodel.h"
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 

@@ -36,7 +36,7 @@
 #include "accountsmodel.h"
 #include "ledgermodel.h"
 #include "newspliteditor.h"
-
+#include "mymoneyaccount.h"
 
 QColor SplitDelegate::m_erroneousColor = QColor(Qt::red);
 QColor SplitDelegate::m_importedColor = QColor(Qt::yellow);

@@ -413,21 +413,21 @@ CategoryGroupMarker::CategoryGroupMarker(Register* parent, const QString& catego
 {
 }
 
-ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::reconcileFlagE state) :
+ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, eMyMoney::Split::State state) :
     GroupMarker(parent),
     m_state(state)
 {
   switch (state) {
-    case MyMoneySplit::NotReconciled:
+    case eMyMoney::Split::State::NotReconciled:
       m_txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
       break;
-    case MyMoneySplit::Cleared:
+    case eMyMoney::Split::State::Cleared:
       m_txt = i18nc("Reconcile state 'Cleared'", "Cleared");
       break;
-    case MyMoneySplit::Reconciled:
+    case eMyMoney::Split::State::Reconciled:
       m_txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
       break;
-    case MyMoneySplit::Frozen:
+    case eMyMoney::Split::State::Frozen:
       m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
       break;
     default:
@@ -2015,10 +2015,10 @@ void Register::addGroupMarkers()
 
     case KMyMoneyRegister::ReconcileStateSort:
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
-        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::NotReconciled);
-        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Cleared);
-        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Reconciled);
-        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Frozen);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::NotReconciled);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::Cleared);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::Reconciled);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::Frozen);
       }
       break;
 

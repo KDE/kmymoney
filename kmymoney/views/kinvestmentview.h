@@ -37,6 +37,7 @@
 
 class KMyMoneyApp;
 class KMyMoneyView;
+class MyMoneyObject;
 class MyMoneySecurity;
 
 /**

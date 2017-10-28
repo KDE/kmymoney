@@ -29,6 +29,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneysecurity.h"
+
 Currency::Currency(QWidget* parent) :
     CurrencyDecl(parent)
 {

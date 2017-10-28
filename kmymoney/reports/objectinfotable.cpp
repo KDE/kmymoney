@@ -32,13 +32,16 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneyaccountloan.h"
+#include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneypayee.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
+#include "mymoneyschedule.h"
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
@@ -256,9 +259,9 @@ void ObjectInfoTable::constructAccountTable()
         && !account.isClosed()) {
       MyMoneyMoney value;
       accountRow[ctRank] = QLatin1Char('0');
-      accountRow[ctTopCategory] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
+      accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
       accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
-      accountRow[ctType] = KMyMoneyUtils::accountTypeToString(account.accountType());
+      accountRow[ctType] = MyMoneyAccount::accountTypeToString(account.accountType());
       accountRow[ctName] = account.name();
       accountRow[ctNumber] = account.number();
       accountRow[ctDescription] = account.description();
@@ -313,9 +316,9 @@ void ObjectInfoTable::constructAccountLoanTable()
       }
 
       accountRow[ctRank] = QLatin1Char('0');
-      accountRow[ctTopCategory] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
+      accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
       accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
-      accountRow[ctType] = KMyMoneyUtils::accountTypeToString(account.accountType());
+      accountRow[ctType] = MyMoneyAccount::accountTypeToString(account.accountType());
       accountRow[ctName] = account.name();
       accountRow[ctNumber] = account.number();
       accountRow[ctDescription] = account.description();

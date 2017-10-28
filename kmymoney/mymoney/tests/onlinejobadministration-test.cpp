@@ -22,6 +22,7 @@
 
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoney/storage/mymoneyseqaccessmgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 

@@ -41,7 +41,12 @@
 #include "mymoneyforecast.h"
 #include "mymoneyprice.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneybudget.h"
+#include "mymoneyreport.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 namespace KChart { class Widget; }
 
@@ -130,11 +135,11 @@ void PivotTable::init()
   // Initialize outer groups of the grid
   //
   if (m_config.rowType() == MyMoneyReport::eAssetLiability) {
-    m_grid.insert(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Asset), PivotOuterGroup(m_numColumns));
-    m_grid.insert(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Asset), PivotOuterGroup(m_numColumns));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
   } else {
-    m_grid.insert(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Income), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 2));
-    m_grid.insert(KMyMoneyUtils::accountTypeToString(eMyMoney::Account::Expense), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 1, true /* inverted */));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Income), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 2));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Expense), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 1, true /* inverted */));
     //
     // Create rows for income/expense reports with all accounts included
     //
@@ -270,7 +275,7 @@ void PivotTable::init()
         if (!split.id().isEmpty()) {
           ReportAccount splitAccount = file->account(split.accountId());
           eMyMoney::Account type = splitAccount.accountGroup();
-          QString outergroup = KMyMoneyUtils::accountTypeToString(type);
+          QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
           //if the account is included in the report, calculate the balance from the cells
           if (m_config.includes(splitAccount)) {
@@ -316,7 +321,7 @@ void PivotTable::init()
           MyMoneyMoney value;
           // the outer group is the account class (major account type)
           eMyMoney::Account type = splitAccount.accountGroup();
-          QString outergroup = KMyMoneyUtils::accountTypeToString(type);
+          QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
           value = (*it_split).shares();
           bool stockSplit = tx.isStockSplit();
@@ -609,7 +614,7 @@ void PivotTable::createAccountRows()
       DEBUG_OUTPUT(QString("Includes account %1").arg(account.name()));
 
       // the row group is the account class (major account type)
-      QString outergroup = KMyMoneyUtils::accountTypeToString(account.accountGroup());
+      QString outergroup = MyMoneyAccount::accountTypeToString(account.accountGroup());
       // place into the 'opening' column...
       assignCell(outergroup, account, 0, MyMoneyMoney());
     }
@@ -663,7 +668,7 @@ void PivotTable::calculateOpeningBalances()
 
       DEBUG_OUTPUT(QString("Includes account %1").arg(account.name()));
       // the row group is the account class (major account type)
-      QString outergroup = KMyMoneyUtils::accountTypeToString(account.accountGroup());
+      QString outergroup = MyMoneyAccount::accountTypeToString(account.accountGroup());
 
       // extract the balance of the account for the given begin date, which is
       // the opening balance plus the sum of all transactions prior to the begin
@@ -885,7 +890,7 @@ void PivotTable::calculateBudgetMapping()
       //include the budget account only if it is included in the report
       if (m_config.includes(splitAccount)) {
         eMyMoney::Account type = splitAccount.accountGroup();
-        QString outergroup = KMyMoneyUtils::accountTypeToString(type);
+        QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
         // reverse sign to match common notation for cash flow direction, only for expense/income splits
         MyMoneyMoney reverse((splitAccount.accountType() == eMyMoney::Account::Expense) ? -1 : 1, 1);

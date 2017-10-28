@@ -32,8 +32,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysecurity.h"
 #include "mymoneymoney.h"
+
+class MyMoneySecurity;
 
 /**
   * This class is derived from KDoubleValidator and uses

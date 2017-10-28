@@ -20,6 +20,8 @@
 #include <QTest>
 
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+#include "mymoneymoney.h"
 
 QTEST_GUILESS_MAIN(MatchFinderTest)
 

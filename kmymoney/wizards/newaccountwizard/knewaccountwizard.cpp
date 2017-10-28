@@ -53,6 +53,10 @@
 #include "modelenums.h"
 #include "icons.h"
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccountloan.h"
+#include "mymoneypayee.h"
+#include "mymoneytransaction.h"
 
 using namespace NewAccountWizard;
 using namespace Icons;

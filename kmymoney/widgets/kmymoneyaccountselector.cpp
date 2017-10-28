@@ -40,6 +40,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include "icons/icons.h"

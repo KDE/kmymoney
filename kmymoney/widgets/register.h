@@ -28,6 +28,7 @@
 #include <QList>
 #include <QStyledItemDelegate>
 #include <QStyleOptionViewItem>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -169,10 +170,10 @@ class FancyDateGroupMarker : public GroupMarker
 public:
   FancyDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
 
-  virtual const QDate& sortPostDate() const {
+  QDate sortPostDate() const override {
     return m_date;
   }
-  virtual const QDate& sortEntryDate() const {
+  QDate sortEntryDate() const override {
     return m_date;
   }
   virtual const char* className() {
@@ -258,12 +259,12 @@ public:
 class ReconcileGroupMarker : public GroupMarker
 {
 public:
-  ReconcileGroupMarker(Register* parent, MyMoneySplit::reconcileFlagE state);
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
+  ReconcileGroupMarker(Register* parent, eMyMoney::Split::State state);
+  virtual eMyMoney::Split::State sortReconcileState() const {
     return m_state;
   }
 private:
-  MyMoneySplit::reconcileFlagE  m_state;
+  eMyMoney::Split::State  m_state;
 };
 
 

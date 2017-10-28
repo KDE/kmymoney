@@ -22,6 +22,7 @@
 // QT Headers
 
 #include <QProcess>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

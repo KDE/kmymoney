@@ -39,6 +39,8 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyschedule.h"
+#include "mymoneytransaction.h"
 #include "register.h"
 #include "transactionform.h"
 #include "transaction.h"
@@ -47,8 +49,8 @@
 #include "kmymoneydateinput.h"
 #include "kmymoneymvccombo.h"
 #include "kguiutils.h"
-
 #include "kmymoney.h"
+#include "mymoneyenums.h"
 
 using namespace eMyMoney;
 

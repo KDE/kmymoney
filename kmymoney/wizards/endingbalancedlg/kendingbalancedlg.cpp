@@ -20,6 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QList>
 #include <QBitArray>
 
@@ -37,6 +38,9 @@
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneypayee.h"
+#include "mymoneytransaction.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneyutils.h"
@@ -211,12 +215,12 @@ void KEndingBalanceDlg::slotUpdateBalances()
       startBalance -= split.shares() * factor;
     } else {
       switch (split.reconcileFlag()) {
-        case MyMoneySplit::NotReconciled:
+        case eMyMoney::Split::State::NotReconciled:
           tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
           endBalance -= split.shares() * factor;
           startBalance -= split.shares() * factor;
           break;
-        case MyMoneySplit::Cleared:
+        case eMyMoney::Split::State::Cleared:
           tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
           startBalance -= split.shares() * factor;
           break;
@@ -331,7 +335,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
     t.setCommodity(d->m_account.currencyId());
 
     s1.setPayeeId(field("payeeEdit").toString());
-    s1.setReconcileFlag(MyMoneySplit::Cleared);
+    s1.setReconcileFlag(eMyMoney::Split::State::Cleared);
     s1.setAccountId(d->m_account.id());
     s1.setValue(-val);
     s1.setShares(-val);

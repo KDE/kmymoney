@@ -44,9 +44,9 @@ int SelectedTransaction::warnLevel() const
       const MyMoneyAccount& acc = MyMoneyFile::instance()->account((*it_s).accountId());
       if (acc.isClosed())
         warnLevel = 3;
-      else if ((*it_s).reconcileFlag() == MyMoneySplit::Frozen)
+      else if ((*it_s).reconcileFlag() == eMyMoney::Split::State::Frozen)
         warnLevel = 2;
-      else if ((*it_s).reconcileFlag() == MyMoneySplit::Reconciled && warnLevel < 1)
+      else if ((*it_s).reconcileFlag() == eMyMoney::Split::State::Reconciled && warnLevel < 1)
         warnLevel = 1;
     } catch (const MyMoneyException &) {
       //qDebug("Exception in SelectedTransaction::warnLevel(): %s", qPrintable(e.what()));

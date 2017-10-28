@@ -28,13 +28,6 @@
 // Project Includes
 
 #include "kmm_mymoney_export.h"
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneysecurity.h"
-#include <onlinejob.h>
-#include <mymoneycostcenter.h>
 
 /**
   * @author Thomas Baumgart
@@ -45,7 +38,14 @@
   */
 class IMyMoneyStorage;
 class MyMoneyObject;
+class MyMoneyInstitution;
+class MyMoneyAccount;
+class MyMoneySecurity;
+class MyMoneyPayee;
+class MyMoneyTag;
 class MyMoneySchedule;
+class MyMoneyCostCenter;
+class onlineJob;
 class KMM_MYMONEY_EXPORT MyMoneyObjectContainer : public QObject
 {
   Q_OBJECT

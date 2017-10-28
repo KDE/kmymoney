@@ -26,6 +26,7 @@
 // QT Includes
 
 #include <QSet>
+#include <QPoint>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,6 +36,8 @@
 
 #include "accountsproxymodel.h"
 #include "modelenums.h"
+
+class QPoint;
 
 /**
   * This model is specialized to organize the data for the accounts tree view

@@ -2,6 +2,7 @@
                           mymoneytag.h
                              -------------------
     copyright            : (C) 2012 by Alessandro Russo <axela74@yahoo.it>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -20,11 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDomElement>
-#include <QString>
-#include <QColor>
-#include <qobjectdefs.h>
 #include <QMetaType>
+#include <QHash>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -32,37 +30,28 @@
 #include "kmm_mymoney_export.h"
 #include "mymoneyobject.h"
 
+class QString;
+class QColor;
+class QDomDocument;
+
 /**
   * This class represents a tag within the MyMoney engine.
   */
-class QDomDocument;
+class MyMoneyTagPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 {
-  Q_GADGET
-  KMM_MYMONEY_UNIT_TESTABLE
+  Q_DECLARE_PRIVATE(MyMoneyTag)
+  MyMoneyTagPrivate* d_ptr;
 
-public:
-  enum attrNameE { anName, anType, anTagColor,
-                   anClosed, anNotes
-                 };
-  Q_ENUM(attrNameE)
-
-private:
-  // Simple fields
-  QString m_name;
-  // Closed tags will not be shown in the selector inside a transaction, only in the Tag tab
-  bool m_closed;
-  // Set the color showed in the ledger
-  QColor m_tag_color;
-  QString m_notes;
-
-  static const QString getAttrName(const attrNameE _attr);
+  KMM_MYMONEY_UNIT_TESTABLE 
 
 public:
   MyMoneyTag();
-  MyMoneyTag(const QString& id, const MyMoneyTag& tag);
+
+  explicit MyMoneyTag(const QString& name);
+
   explicit MyMoneyTag(const QString& name,
-                      const QColor& tagColor = QColor()
+                      const QColor& tagColor
                      );
   /**
     * This is the constructor for a tag that is described by a
@@ -71,46 +60,35 @@ public:
     * @param el const reference to the QDomElement from which to
     *           create the object
     */
-  MyMoneyTag(const QDomElement& el);
+  explicit MyMoneyTag(const QDomElement& node);
+
+  MyMoneyTag(const QString& id,
+             const MyMoneyTag& tag);
+
+  MyMoneyTag(const MyMoneyTag & other);
+  MyMoneyTag(MyMoneyTag && other);
+  MyMoneyTag & operator=(MyMoneyTag other);
+  friend void swap(MyMoneyTag& first, MyMoneyTag& second);
 
   ~MyMoneyTag();
 
-  // Simple get operations
-  const QString& name() const            {
-    return m_name;
-  }
-  bool isClosed() const {
-    return m_closed;
-  }
-  const QColor& tagColor() const         {
-    return m_tag_color;
-  }
-  const QString& notes() const           {
-    return m_notes;
-  }
+  QString name() const;
+  void setName(const QString& val);
 
-  // Simple set operations
-  void setName(const QString& val)      {
-    m_name = val;
-  }
-  void setTagColor(const QColor& val)      {
-    m_tag_color = val;
-  }
-  void setClosed(bool val) {
-    m_closed = val;
-  }
-  void setNotes(const QString& val)     {
-    m_notes = val;
-  };
+  bool isClosed() const;
+  void setClosed(bool val);
 
-  // Copy constructors
-  MyMoneyTag(const MyMoneyTag&);
+  QColor tagColor() const;
+  void setTagColor(const QColor& val);
+
+  QString notes() const;
+  void setNotes(const QString& val);
 
   // Equality operator
   bool operator == (const MyMoneyTag &) const;
   bool operator <(const MyMoneyTag& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -121,15 +99,49 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyTag null;
+
+private:
+  enum class Attribute { Name = 0 ,
+                         Type,
+                         TagColor,
+                         Closed,
+                         Notes,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
+
+  static QString getAttrName(const Attribute attr);
+
+  friend uint qHash(const Attribute, uint seed);
 };
 
-inline bool operator==(const MyMoneyTag& lhs, const QString& rhs)
+inline uint qHash(const MyMoneyTag::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyTag& first, MyMoneyTag& second) // krazy:exclude=inline
 {
-  return lhs.id() == rhs;
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
 }
+
+inline MyMoneyTag::MyMoneyTag(MyMoneyTag && other) : MyMoneyTag() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyTag & MyMoneyTag::operator=(MyMoneyTag other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
+
+//inline bool operator==(const MyMoneyTag& lhs, const QString& rhs)
+//{
+//  return lhs.id() == rhs;
+//}
 
 /**
   * Make it possible to hold @ref MyMoneyTag objects inside @ref QVariant objects.

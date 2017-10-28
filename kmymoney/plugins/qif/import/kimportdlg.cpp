@@ -44,6 +44,7 @@
 
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include <KSharedConfig>
 #include "../config/mymoneyqifprofile.h"
 #include <icons/icons.h>

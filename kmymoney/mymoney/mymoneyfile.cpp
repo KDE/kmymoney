@@ -37,7 +37,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "imymoneystorage.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
+#include "mymoneyaccountloan.h"
 #include "mymoneysecurity.h"
 #include "mymoneyreport.h"
 #include "mymoneybalancecache.h"
@@ -46,6 +48,9 @@
 #include "mymoneyobjectcontainer.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "storageenums.h"
 
 // include the following line to get a 'cout' for debug purposes
@@ -1025,8 +1030,8 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // check if the selected name is currently not among the child accounts
   // if we find one, then return it as the new account
   QStringList::const_iterator it_a;
-  for (it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
-    MyMoneyAccount a = MyMoneyFile::account(*it_a);
+  foreach (const auto accountID, acc.accountList()) {
+    MyMoneyAccount a = MyMoneyFile::account(accountID);
     if (account.name() == a.name()) {
       account = a;
       return;
@@ -1960,7 +1965,6 @@ const QStringList MyMoneyFile::consistencyCheck()
   QList<MyMoneyTransaction>::Iterator it_t;
   QList<MyMoneyReport>::Iterator it_r;
   QStringList accountRebuild;
-  QStringList::ConstIterator it_c;
 
   QMap<QString, bool> interestAccounts;
 
@@ -2107,10 +2111,10 @@ const QStringList MyMoneyFile::consistencyCheck()
     }
 
     // now check that all the children exist and have the correct type
-    for (it_c = (*it_a).accountList().begin(); it_c != (*it_a).accountList().end(); ++it_c) {
+    foreach (const auto accountID, (*it_a).accountList()) {
       // check that the child exists
       try {
-        child = account(*it_c);
+        child = account(accountID);
         if (child.parentAccountId() != (*it_a).id()) {
           throw MYMONEYEXCEPTION("Child account has a different parent");
         }
@@ -2120,7 +2124,7 @@ const QStringList MyMoneyFile::consistencyCheck()
           problemAccount = (*it_a).name();
           rc << i18n("* Problem with account '%1'", problemAccount);
         }
-        rc << i18n("  * Child account with id %1 does not exist anymore.", *it_c);
+        rc << i18n("  * Child account with id %1 does not exist anymore.", accountID);
         rc << i18n("    The child account list will be reconstructed.");
         if (accountRebuild.contains((*it_a).id()) == 0)
           accountRebuild << (*it_a).id();
@@ -2188,10 +2192,7 @@ const QStringList MyMoneyFile::consistencyCheck()
     if (accountRebuild.contains((*it_a).id())) {
       rc << QString("  %1").arg((*it_a).name());
       // clear the account list
-      for (it_c = (*it_a).accountList().begin(); it_c != (*it_a).accountList().end();) {
-        (*it_a).removeAccountId(*it_c);
-        it_c = (*it_a).accountList().begin();
-      }
+      (*it_a).removeAccountIds();
     }
   }
 

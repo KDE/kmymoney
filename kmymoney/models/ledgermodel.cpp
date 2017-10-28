@@ -36,6 +36,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneypayee.h"
 #include "mymoneymoney.h"
 #include "kmymoneyutils.h"
@@ -149,7 +150,7 @@ QString LedgerTransaction::transactionSplitId() const
   return rc;
 }
 
-MyMoneySplit::reconcileFlagE LedgerTransaction::reconciliationState() const
+eMyMoney::Split::State LedgerTransaction::reconciliationState() const
 {
   return m_split.reconcileFlag();
 }
@@ -158,16 +159,16 @@ QString LedgerTransaction::reconciliationStateShort() const
 {
   QString rc;
   switch(m_split.reconcileFlag()) {
-    case MyMoneySplit::NotReconciled:
+    case eMyMoney::Split::State::NotReconciled:
     default:
       break;
-    case MyMoneySplit::Cleared:
+    case eMyMoney::Split::State::Cleared:
       rc = i18nc("Reconciliation flag C", "C");
       break;
-    case MyMoneySplit::Reconciled:
+    case eMyMoney::Split::State::Reconciled:
       rc = i18nc("Reconciliation flag R", "R");
       break;
-    case MyMoneySplit::Frozen:
+    case eMyMoney::Split::State::Frozen:
       rc = i18nc("Reconciliation flag F", "F");
       break;
   }
@@ -178,17 +179,17 @@ QString LedgerTransaction::reconciliationStateLong() const
 {
   QString rc;
   switch(m_split.reconcileFlag()) {
-    case MyMoneySplit::NotReconciled:
+    case eMyMoney::Split::State::NotReconciled:
     default:
       rc = i18nc("Reconciliation flag empty", "Not reconciled");
       break;
-    case MyMoneySplit::Cleared:
+    case eMyMoney::Split::State::Cleared:
       rc = i18nc("Reconciliation flag C", "Cleared");
       break;
-    case MyMoneySplit::Reconciled:
+    case eMyMoney::Split::State::Reconciled:
       rc = i18nc("Reconciliation flag R", "Reconciled");
       break;
-    case MyMoneySplit::Frozen:
+    case eMyMoney::Split::State::Frozen:
       rc = i18nc("Reconciliation flag F", "Frozen");
       break;
   }
@@ -638,7 +639,7 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
       break;
 
     case LedgerRole::ReconciliationRole:
-      rc = d->m_ledgerItems[index.row()]->reconciliationState();
+      rc = (int)d->m_ledgerItems[index.row()]->reconciliationState();
       break;
 
     case LedgerRole::ReconciliationRoleShort:

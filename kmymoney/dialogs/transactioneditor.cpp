@@ -55,9 +55,13 @@
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneyschedule.h"
 #include "kmymoneyutils.h"
 #include "transactionform.h"
 #include "kmymoneyglobalsettings.h"
+#include "transactioneditorcontainer.h"
 
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
@@ -1182,7 +1186,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 
   } else {  //  isMultiSelection()
     dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"])->loadDate(QDate());
-    dynamic_cast<KMyMoneyReconcileCombo*>(m_editWidgets["status"])->setState(MyMoneySplit::Unknown);
+    dynamic_cast<KMyMoneyReconcileCombo*>(m_editWidgets["status"])->setState(eMyMoney::Split::State::Unknown);
     if (haveWidget("deposit")) {
       dynamic_cast<kMyMoneyEdit*>(m_editWidgets["deposit"])->loadText("");
       dynamic_cast<kMyMoneyEdit*>(m_editWidgets["deposit"])->setAllowEmpty();
@@ -1446,7 +1450,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       QList<MyMoneySplit>::ConstIterator it;
       for (it = t.splits().constBegin(); it != t.splits().constEnd(); ++it) {
         MyMoneySplit s(*it);
-        s.setReconcileFlag(MyMoneySplit::NotReconciled);
+        s.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
         s.setReconcileDate(QDate());
         s.clearId();
         s.setBankID(QString());
@@ -1893,7 +1897,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
       if (tabbar) {
         tabbar->setEnabled(true);
       }
-      if (reconcile && reconcile->state() != MyMoneySplit::Unknown)
+      if (reconcile && reconcile->state() != eMyMoney::Split::State::Unknown)
         break;
 
       if (cashflow && cashflow->direction() != KMyMoneyRegister::Unknown)
@@ -2162,10 +2166,10 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
 
   // if we mark the split reconciled here, we'll use today's date if no reconciliation date is given
   KMyMoneyReconcileCombo* status = dynamic_cast<KMyMoneyReconcileCombo*>(m_editWidgets["status"]);
-  if (status->state() != MyMoneySplit::Unknown)
+  if (status->state() != eMyMoney::Split::State::Unknown)
     s0.setReconcileFlag(status->state());
 
-  if (s0.reconcileFlag() == MyMoneySplit::Reconciled && !s0.reconcileDate().isValid())
+  if (s0.reconcileFlag() == eMyMoney::Split::State::Reconciled && !s0.reconcileDate().isValid())
     s0.setReconcileDate(QDate::currentDate());
 
   checkPayeeInSplit(s0, payeeId);

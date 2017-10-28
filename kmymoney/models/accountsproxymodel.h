@@ -33,8 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
+#include "mymoneyenums.h"
 
 /**
   * A proxy model to provide various sorting and filtering operations for @ref AccountsModel.

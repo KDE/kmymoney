@@ -22,9 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <qobjectdefs.h>
 #include <QMetaType>
+#include <QHash>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -34,24 +33,16 @@
 /**
   * This class represents a tag within the MyMoney engine.
   */
+class MyMoneyCostCenterPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyCostCenter : public MyMoneyObject
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(MyMoneyCostCenter)
+  MyMoneyCostCenterPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-    enum attrNameE { anName };
-    Q_ENUM(attrNameE)
-
-private:
-  // Simple fields
-  QString m_name;
-
-  static const QString getAttrName(const attrNameE _attr);
-
-public:
   MyMoneyCostCenter();
-  MyMoneyCostCenter(const QString& id, const MyMoneyCostCenter& tag);
   explicit MyMoneyCostCenter(const QString& name);
 
   /**
@@ -61,19 +52,19 @@ public:
     * @param el const reference to the QDomElement from which to
     *           create the object
     */
-  MyMoneyCostCenter(const QDomElement& el);
+  explicit MyMoneyCostCenter(const QDomElement& el);
+
+  MyMoneyCostCenter(const QString& id,
+                    const MyMoneyCostCenter& other);
+  MyMoneyCostCenter(const MyMoneyCostCenter & other);
+  MyMoneyCostCenter(MyMoneyCostCenter && other);
+  MyMoneyCostCenter & operator=(MyMoneyCostCenter other);
+  friend void swap(MyMoneyCostCenter& first, MyMoneyCostCenter& second);
 
   ~MyMoneyCostCenter();
 
-  // Simple get operations
-  const QString& name() const            {
-    return m_name;
-  }
-
-  // Simple set operations
-  void setName(const QString& val)      {
-    m_name = val;
-  }
+  QString name() const;
+  void setName(const QString& val);
 
   /**
    * This member returns a possible number leading the name. If there
@@ -82,14 +73,12 @@ public:
    */
   QString shortName() const;
 
-  // Copy constructors
-  MyMoneyCostCenter(const MyMoneyCostCenter&);
 
   // Equality operator
   bool operator == (const MyMoneyCostCenter &) const;
   bool operator <(const MyMoneyCostCenter& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -100,15 +89,42 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyCostCenter null;
+
+private:
+  enum class Attribute { Name };
+
+  static QString getAttrName(const Attribute attr);
+
+  friend uint qHash(const Attribute, uint seed);
 };
 
-inline bool operator==(const MyMoneyCostCenter& lhs, const QString& rhs)
+inline uint qHash(const MyMoneyCostCenter::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyCostCenter& first, MyMoneyCostCenter& second) // krazy:exclude=inline
 {
-  return lhs.id() == rhs;
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
 }
+
+inline MyMoneyCostCenter::MyMoneyCostCenter(MyMoneyCostCenter && other) : MyMoneyCostCenter() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyCostCenter & MyMoneyCostCenter::operator=(MyMoneyCostCenter other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
+
+//inline bool operator==(const MyMoneyCostCenter& lhs, const QString& rhs)
+//{
+//  return lhs.id() == rhs;
+//}
 
 /**
   * Make it possible to hold @ref MyMoneyCostCenter objects inside @ref QVariant objects.

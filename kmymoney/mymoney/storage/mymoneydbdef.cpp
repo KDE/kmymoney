@@ -29,7 +29,10 @@
 // Project Includes
 #include "mymoneydbdriver.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "imymoneystorage.h"
+
+#include <alkimia/alkvalue.h>
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
 unsigned int MyMoneyDbDef::m_currentVersion = 11;

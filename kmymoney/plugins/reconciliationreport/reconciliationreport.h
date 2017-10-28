@@ -22,9 +22,9 @@
 #define RECONCILIATIONREPORT_H
 
 #include "kmymoneyplugin.h"
-#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 
+class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
 

@@ -31,10 +31,13 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneyaccountloan.h"
 #include "mymoneysecurity.h"
 #include "mymoneybudget.h"
 #include "mymoneyschedule.h"
 #include "mymoneyprice.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyfinancialcalculator.h"

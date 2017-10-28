@@ -35,10 +35,11 @@
 // Project Includes
 
 #include "webpricequote.h"
-#include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "kequitypriceupdateconfdlg.h"
 #include "ui_kequitypriceupdatedlgdecl.h"
+
+class MyMoneySecurity;
 
 /**
   * @author Kevin Tambascio & Ace Jones

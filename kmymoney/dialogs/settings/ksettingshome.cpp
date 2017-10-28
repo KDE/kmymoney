@@ -27,6 +27,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes

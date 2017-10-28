@@ -212,9 +212,9 @@ void KFindTransactionDlg::slotReset()
   m_ui->m_emptyTagsButton->setChecked(false);
   selectAllItems(m_ui->m_tagsView, true);
 
-  m_ui->m_typeBox->setCurrentIndex(MyMoneyTransactionFilter::allTypes);
+  m_ui->m_typeBox->setCurrentIndex((int)eMyMoney::TransactionFilter::Type::All);
   m_ui->m_stateBox->setCurrentIndex((int)eMyMoney::TransactionFilter::State::All);
-  m_ui->m_validityBox->setCurrentIndex(MyMoneyTransactionFilter::anyValidity);
+  m_ui->m_validityBox->setCurrentIndex((int)eMyMoney::TransactionFilter::Validity::Any);
 
   m_ui->m_nrEdit->setEnabled(true);
   m_ui->m_nrFromEdit->setEnabled(false);
@@ -257,7 +257,7 @@ void KFindTransactionDlg::slotUpdateSelections()
     txt += i18n("Account");
   }
 
-  if (m_dateRange->dateRange() != MyMoneyTransactionFilter::allDates) {
+  if (m_dateRange->dateRange() != eMyMoney::TransactionFilter::Date::All) {
     if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Date");
@@ -669,7 +669,7 @@ void KFindTransactionDlg::setupFilter()
   }
 
   // Date tab
-  if (m_dateRange->dateRange() != 0) {
+  if ((int)m_dateRange->dateRange() != 0) {
     m_filter.setDateFilter(m_dateRange->fromDate(), m_dateRange->toDate());
   }
 

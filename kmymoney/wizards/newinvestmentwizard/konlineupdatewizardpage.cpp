@@ -29,6 +29,7 @@
 // Project Includes
 
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "webpricequote.h"
 
 KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)

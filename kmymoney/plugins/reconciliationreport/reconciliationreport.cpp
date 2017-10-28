@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QPointer>
 #include <QUrl>
+#include <QDate>
 
 // KDE includes
 #include <KColorScheme>
@@ -31,6 +32,7 @@
 
 // KMyMoney includes
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
@@ -96,7 +98,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
   for (it = transactionList.begin(); it != transactionList.end(); ++it) {
     // if this split is a stock split, we can't just add the amount of shares
-    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
+    if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
       if ((*it).second.shares().isNegative()) {
         outstandingPayments++;
         outstandingPaymentAmount += (*it).second.shares();
@@ -199,7 +201,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   int afterPayments = 0;
   for (it = afterTransactionList.constBegin(); it != afterTransactionList.constEnd(); ++it) {
     // if this split is a stock split, we can't just add the amount of shares
-    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
+    if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
       if ((*it).second.shares().isNegative()) {
         afterPayments++;
         afterPaymentAmount += (*it).second.shares();
@@ -248,7 +250,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   int index = 0;
   for (it = transactionList.begin(); it != transactionList.end(); ++it) {
-    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled && (*it).second.shares().isNegative()) {
+    if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled && (*it).second.shares().isNegative()) {
       QList<MyMoneySplit>::const_iterator it_s;
       QString category;
       for (it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
@@ -284,7 +286,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   index = 0;
   for (it = transactionList.begin(); it != transactionList.end(); ++it) {
-    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled && !(*it).second.shares().isNegative()) {
+    if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled && !(*it).second.shares().isNegative()) {
       QList<MyMoneySplit>::const_iterator it_s;
       QString category;
       for (it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {

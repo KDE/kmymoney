@@ -46,6 +46,8 @@ private slots:
   void testReadXML();
   void testReplaceId();
   void testUnaryMinus();
+  void testElementNames();
+  void testAttributeNames();
 };
 
 #endif

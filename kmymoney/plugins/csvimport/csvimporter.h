@@ -31,11 +31,12 @@
 
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "mymoneystatement.h"
 #include "csvenums.h"
 #include "csvimport/kmm_csvimport_core_export.h"
+#include "mymoneyenums.h"
 
+class MyMoneyAccount;
 class KConfigGroup;
 class QStandardItemModel;
 class Parse;

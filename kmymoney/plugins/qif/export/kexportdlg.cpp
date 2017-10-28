@@ -45,6 +45,8 @@
 
 #include "mymoneycategory.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"

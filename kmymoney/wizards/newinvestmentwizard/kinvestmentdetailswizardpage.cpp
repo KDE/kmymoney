@@ -32,6 +32,7 @@
 
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 
 KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
     : KInvestmentDetailsWizardPageDecl(parent)

@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHash>
+#include <QHashFunctions>
 
 #ifndef MYMONEYENUMS_H
 #define MYMONEYENUMS_H
@@ -193,6 +193,48 @@ namespace eMyMoney {
       // insert new constants above of this line
       LastDateItem
     };
+  }
+
+  namespace Split {
+    /**
+      * This enum defines the possible reconciliation states a split
+      * can be in. Possible values are as follows:
+      *
+      * @li NotReconciled
+      * @li Cleared
+      * @li Reconciled
+      * @li Frozen
+      *
+      * Whenever a new split is created, it has the status NotReconciled. It
+      * can be set to cleared when the transaction has been performed. Once the
+      * account is reconciled, cleared splits will be set to Reconciled. The
+      * state Frozen will be used, when the concept of books is introduced into
+      * the engine and a split must not be changed anymore.
+      */
+    enum class State {
+      Unknown = -1,
+      NotReconciled = 0,
+      Cleared,
+      Reconciled,
+      Frozen,
+      // insert new values above
+      MaxReconcileState
+    };
+
+    enum class InvestmentTransactionType {
+      UnknownTransactionType = -1,
+      BuyShares = 0,
+      SellShares,
+      Dividend,
+      ReinvestDividend,
+      Yield,
+      AddShares,
+      RemoveShares,
+      SplitShares,
+      InterestIncome///
+    };
+
+    inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace File {

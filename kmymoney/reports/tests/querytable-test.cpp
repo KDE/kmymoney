@@ -24,11 +24,13 @@
 
 #include "reportstestcommon.h"
 #include "querytable.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneystoragedump.h"
 #include "mymoneyreport.h"
+#include "mymoneysplit.h"
 #include "mymoneystatement.h"
 #include "mymoneystoragexml.h"
 
@@ -449,7 +451,7 @@ void QueryTableTest::testInvestment()
     MyMoneyReport invtran_r(
       MyMoneyReport::eTopAccount,
       MyMoneyReport::eQCaction | MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
-      MyMoneyTransactionFilter::userDefined,
+      eMyMoney::TransactionFilter::Date::UserDefined,
       MyMoneyReport::eDetailAll,
       i18n("Investment Transactions"),
       i18n("Test Report")
@@ -549,7 +551,7 @@ void QueryTableTest::testInvestment()
     MyMoneyReport invhold_r(
       MyMoneyReport::eAccountByTopAccount,
       MyMoneyReport::eQCperformance,
-      MyMoneyTransactionFilter::userDefined,
+      eMyMoney::TransactionFilter::Date::UserDefined,
       MyMoneyReport::eDetailAll,
       i18n("Investment Performance by Account"),
       i18n("Test Report")
@@ -632,7 +634,7 @@ void QueryTableTest::testSplitShares()
     MyMoneyReport invhold_r(
       MyMoneyReport::eAccountByTopAccount,
       MyMoneyReport::eQCperformance,
-      MyMoneyTransactionFilter::userDefined,
+      eMyMoney::TransactionFilter::Date::UserDefined,
       MyMoneyReport::eDetailAll,
       i18n("Investment Performance by Account"),
       i18n("Test Report")

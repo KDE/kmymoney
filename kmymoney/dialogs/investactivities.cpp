@@ -268,7 +268,7 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   kMyMoneyEdit* sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   kMyMoneyEdit* priceEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
 
-  s0.setAction(MyMoneySplit::BuyShares);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
 
   MyMoneyMoney shares = s0.shares();
   MyMoneyMoney price;
@@ -353,7 +353,7 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   kMyMoneyEdit* sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   kMyMoneyEdit* priceEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
 
-  s0.setAction(MyMoneySplit::BuyShares);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
 
   MyMoneyMoney shares = s0.shares();
   MyMoneyMoney price;
@@ -431,7 +431,7 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   if (!isComplete(reason))
     return false;
 
-  s0.setAction(MyMoneySplit::Dividend);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::Dividend);
 
   // for dividends, we only use the stock split as a marker
   MyMoneyMoney shares;
@@ -500,7 +500,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   kMyMoneyEdit* sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   kMyMoneyEdit* priceEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
 
-  s0.setAction(MyMoneySplit::ReinvestDividend);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::ReinvestDividend);
 
   MyMoneyMoney shares = s0.shares();
   MyMoneyMoney price;
@@ -576,7 +576,7 @@ bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
   kMyMoneyEdit* sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
 
-  s0.setAction(MyMoneySplit::AddShares);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
   s0.setShares(sharesEdit->value().abs());
   s0.setValue(MyMoneyMoney());
   s0.setPrice(MyMoneyMoney());
@@ -619,7 +619,7 @@ bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
 
   kMyMoneyEdit* sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
 
-  s0.setAction(MyMoneySplit::AddShares);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
   s0.setShares(-(sharesEdit->value().abs()));
   s0.setValue(MyMoneyMoney());
   s0.setPrice(MyMoneyMoney());
@@ -666,7 +666,7 @@ bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySp
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
   cat->parentWidget()->hide();
 
-  s0.setAction(MyMoneySplit::SplitShares);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::SplitShares);
   s0.setShares(sharesEdit->value().abs());
   s0.setValue(MyMoneyMoney());
   s0.setPrice(MyMoneyMoney());
@@ -711,7 +711,7 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
   if (!isComplete(reason))
     return false;
 
-  s0.setAction(MyMoneySplit::InterestIncome);
+  s0.setAction(eMyMoney::Split::InvestmentTransactionType::InterestIncome);
 
   // for dividends, we only use the stock split as a marker
   MyMoneyMoney shares;

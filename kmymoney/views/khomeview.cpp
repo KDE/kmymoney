@@ -57,6 +57,7 @@
 #include "kwelcomepage.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneyprice.h"
 #include "mymoneyforecast.h"
 #include "kmymoney.h"
@@ -339,7 +340,7 @@ void KHomeView::showNetWorthGraph()
   MyMoneyReport reportCfg = MyMoneyReport(
                               MyMoneyReport::eAssetLiability,
                               MyMoneyReport::eMonths,
-                              MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
+                              TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
                               MyMoneyReport::eDetailTotal,
                               i18n("Net Worth Forecast"),
                               i18n("Generated Report"));
@@ -963,12 +964,10 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
 MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyMoney value;
-  value = file->balance(acc.id(), QDate::currentDate());
-  QList<QString>::const_iterator it_a;
-  for (it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
-    MyMoneyAccount stock = file->account(*it_a);
+  auto file = MyMoneyFile::instance();
+  auto value = file->balance(acc.id(), QDate::currentDate());
+  foreach (const auto accountID, acc.accountList()) {
+    auto stock = file->account(accountID);
     if (!stock.isClosed()) {
       try {
         MyMoneyMoney val;
@@ -1494,7 +1493,7 @@ void KHomeView::showBudget()
     MyMoneyReport reportCfg = MyMoneyReport(
                                 MyMoneyReport::eBudgetActual,
                                 MyMoneyReport::eMonths,
-                                MyMoneyTransactionFilter::currentMonth,
+                                TransactionFilter::Date::CurrentMonth,
                                 MyMoneyReport::eDetailAll,
                                 i18n("Monthly Budgeted vs. Actual"),
                                 i18n("Generated Report"));
@@ -1578,7 +1577,7 @@ void KHomeView::showBudget()
             //write the outergroup if it is the first row of outergroup being shown
             if (i == 0) {
               d->m_html += "<tr style=\"font-weight:bold;\">";
-              d->m_html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(KMyMoneyUtils::accountTypeToString(rowname.accountType()));
+              d->m_html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(MyMoneyAccount::accountTypeToString(rowname.accountType()));
               d->m_html += "</tr>";
             }
             d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");

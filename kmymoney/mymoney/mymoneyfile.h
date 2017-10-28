@@ -29,8 +29,6 @@
 #include "mymoneyunittestable.h"
 #include "mymoneyenums.h"
 
-using namespace eMyMoney;
-
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio, Christian Dávid
   */
@@ -1538,7 +1536,7 @@ public:
     * @param state @p state reconciliation state
     * @return number of transactions with state @p state
     */
-  int countTransactionsWithSpecificReconciliationState(const QString& accId, TransactionFilter::State state) const;
+  int countTransactionsWithSpecificReconciliationState(const QString& accId, eMyMoney::TransactionFilter::State state) const;
 
   /**
    * @brief Saves a new onlineJob

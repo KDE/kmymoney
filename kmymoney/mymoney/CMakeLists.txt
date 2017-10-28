@@ -16,7 +16,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneytag.cpp
   mymoneycategory.cpp
   mymoneycostcenter.cpp
-  mymoneyaccount.cpp
+  mymoneyaccount.cpp mymoneyaccountloan.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp

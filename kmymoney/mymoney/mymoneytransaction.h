@@ -21,19 +21,24 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QList>
-#include <QStringList>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneykeyvaluecontainer.h"
-#include "mymoneymoney.h"
 #include "mymoneyobject.h"
-#include "mymoneysplit.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+
+class QString;
+class QDate;
+
+class MyMoneyMoney;
+class MyMoneySplit;
+class QStringList;
+
+template <typename T> class QList;
 
 /**
   * This class represents a transaction within the MyMoneyEngine. A transaction
@@ -43,85 +48,60 @@
   * is tolerated by the engine, but in general not a good idea as it is financially
   * wrong.
   */
-class QDate;
+class MyMoneyTransactionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(MyMoneyTransaction)
+  MyMoneyTransactionPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  enum elNameE { enSplit, enSplits };
-  Q_ENUM(elNameE)
-
-  enum attrNameE { anName, anType, anPostDate, anMemo,
-                   anEntryDate, anCommodity, anBankID,
-                 };
-  Q_ENUM(attrNameE)
 
   MyMoneyTransaction();
-  MyMoneyTransaction(const QString& id,
-                     const MyMoneyTransaction& transaction);
   /**
     * @param node reference to QDomNode
     * @param forceId see MyMoneyObject(const QDomElement&, const bool)
     */
   explicit MyMoneyTransaction(const QDomElement& node, const bool forceId = true);
+
+  MyMoneyTransaction(const QString& id,
+                     const MyMoneyTransaction& other);
+
+  MyMoneyTransaction(const MyMoneyTransaction & other);
+  MyMoneyTransaction(MyMoneyTransaction && other);
+  MyMoneyTransaction & operator=(MyMoneyTransaction other);
+  friend void swap(MyMoneyTransaction& first, MyMoneyTransaction& second);
+
   ~MyMoneyTransaction();
 
-public:
   friend QDataStream &operator<<(QDataStream &, MyMoneyTransaction &);
   friend QDataStream &operator>>(QDataStream &, MyMoneyTransaction &);
 
-  // Simple get operations
-  const QDate& entryDate() const {
-    return m_entryDate;
-  }
-  const QDate& postDate() const {
-    return m_postDate;
-  }
-  const QString& memo() const {
-    return m_memo;
-  }
-  const QList<MyMoneySplit>& splits() const {
-    return m_splits;
-  }
-  QList<MyMoneySplit>& splits() {
-    return m_splits;
-  }
-  unsigned int splitCount() const {
-    return m_splits.count();
-  }
-  const QString& commodity() const {
-    return m_commodity;
-  }
-  const QString& bankID() const {
-    return m_bankID;
-  }
-
-  // Simple set operations
-  void setPostDate(const QDate& date);
+  QDate entryDate() const;
   void setEntryDate(const QDate& date);
-  void setMemo(const QString& memo);
-  void setCommodity(const QString& commodityId) {
-    m_commodity = commodityId;
-  }
-  void setBankID(const QString& bankID) {
-    m_bankID = bankID;
-  }
 
-  bool operator == (const MyMoneyTransaction&) const;
-  inline bool operator != (const MyMoneyTransaction& r) const {
-    return !(*this == r);
-  }
-  bool operator< (const MyMoneyTransaction& r) const {
-    return postDate() < r.postDate();
-  }
-  bool operator<= (const MyMoneyTransaction& r) const {
-    return postDate() <= r.postDate();
-  }
-  bool operator> (const MyMoneyTransaction& r) const {
-    return postDate() > r.postDate();
-  }
+  QDate postDate() const;
+  void setPostDate(const QDate& date);
+
+  QString memo() const;
+  void setMemo(const QString& memo);
+
+  const QList<MyMoneySplit>& splits() const;
+  QList<MyMoneySplit>& splits();
+  uint splitCount() const;
+
+  QString commodity() const;
+  void setCommodity(const QString& commodityId);
+
+  QString bankID() const;
+  void setBankID(const QString& bankID);
+
+  bool operator ==  (const MyMoneyTransaction& right) const;
+  bool operator !=  (const MyMoneyTransaction& r) const;
+  bool operator <   (const MyMoneyTransaction& r) const;
+  bool operator <=  (const MyMoneyTransaction& r) const;
+  bool operator >   (const MyMoneyTransaction& r) const;
 
   /**
     * This method is used to extract a split for a given accountId
@@ -135,7 +115,7 @@ public:
     *
     * @return reference to split within the transaction is returned
     */
-  const MyMoneySplit& splitByAccount(const QString& accountId, const bool match = true) const;
+  MyMoneySplit splitByAccount(const QString& accountId, const bool match = true) const;
 
   /**
     * This method is essentially the same as the previous method, except that
@@ -147,7 +127,7 @@ public:
     *
     * @return reference to split within the transaction is returned
     */
-  const MyMoneySplit& splitByAccount(const QStringList& accountIds, const bool match = true) const;
+  MyMoneySplit splitByAccount(const QStringList& accountIds, const bool match = true) const;
 
   /**
     * This method is used to extract a split from a transaction.
@@ -156,7 +136,7 @@ public:
     *
     * @return reference to split within the transaction is returned
     */
-  const MyMoneySplit& splitById(const QString& splitId) const;
+  MyMoneySplit splitById(const QString& splitId) const;
 
   /**
     * This method is used to extract a split for a given payeeId
@@ -166,7 +146,7 @@ public:
     *
     * @return reference to split within the transaction is returned
     */
-  const MyMoneySplit& splitByPayee(const QString& payeeId) const;
+  MyMoneySplit splitByPayee(const QString& payeeId) const;
 
   /**
     * This method is used to check if the given account is used
@@ -184,12 +164,12 @@ public:
     * @param split reference to the split that should be added
     *
     */
-  void addSplit(MyMoneySplit& split);
+  void addSplit(MyMoneySplit &split);
 
   /**
     * This method is used to modify a split in a transaction
     */
-  void modifySplit(MyMoneySplit& split);
+  void modifySplit(const MyMoneySplit& split);
 
   /**
     * This method is used to remove a split from a transaction
@@ -206,7 +186,7 @@ public:
     *
     * @return MyMoneyMoney value of sum of all splits
     */
-  const MyMoneyMoney splitSum() const;
+  MyMoneyMoney splitSum() const;
 
   /**
     * This method returns information if the transaction
@@ -226,13 +206,13 @@ public:
     * This method returns a const reference to the amortization split.
     * In case none is found, a reference to an empty split will be returned.
     */
-  const MyMoneySplit& amortizationSplit() const;
+  MyMoneySplit amortizationSplit() const;
 
   /**
    * This method returns a const reference to the interest split.
    * In case none is found, a reference to an empty split will be returned.
    */
-  const MyMoneySplit& interestSplit() const;
+  MyMoneySplit interestSplit() const;
 
   /**
     * returns @a true if this is a stock split transaction
@@ -258,9 +238,9 @@ public:
     *
     * @return QString with ID of the first split of transactions
     */
-  static const QString firstSplitID();
+  static QString firstSplitID();
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -271,7 +251,7 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   /**
     * Checks whether any split contains an autocalc split.
@@ -323,65 +303,60 @@ public:
    */
   bool replaceId(const QString& newId, const QString& oldId);
 
-
 private:
-  /**
-    * This method returns the next id to be used for a split
-    */
-  const QString nextSplitID();
 
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
-
-private:
   static const int SPLIT_ID_SIZE = 4;
-
-  /**
-    * This member contains the date when the transaction was entered
-    * into the engine
-    */
-  QDate m_entryDate;
-
-  /**
-    * This member contains the date the transaction was posted
-    */
-  QDate m_postDate;
-
-  /**
-    * This member keeps the memo text associated with this transaction
-    */
-  QString m_memo;
-
-  /**
-    * This member contains the splits for this transaction
-    */
-  QList<MyMoneySplit> m_splits;
-
-  /**
-    * This member keeps the unique numbers of splits within this
-    * transaction. Upon creation of a MyMoneyTransaction object this
-    * value will be set to 1.
-    */
-  unsigned int m_nextSplitID;
-
-  /**
-    * This member keeps the base commodity (e.g. currency) for this transaction
-    */
-  QString  m_commodity;
-
-  /**
-    * This member keeps the bank's unique ID for the transaction, so we can
-    * avoid duplicates.  This is only used for electronic statement downloads.
-    *
-    * Note this is now deprecated!  Bank ID's should be set on splits, not transactions.
-    */
-  QString m_bankID;
-
   /** constants for unique sort key */
   static const int YEAR_SIZE = 4;
   static const int MONTH_SIZE = 2;
   static const int DAY_SIZE = 2;
+
+  enum class Element { Split = 0,
+                       Splits };
+
+  enum class Attribute { Name = 0,
+                         Type,
+                         PostDate,
+                         Memo,
+                         EntryDate,
+                         Commodity,
+                         BankID,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
+
+  /**
+    * This method returns the next id to be used for a split
+    */
+  QString nextSplitID();
+
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
+  friend uint qHash(const Attribute, uint seed);
+  friend uint qHash(const Element, uint seed);
 };
+
+inline uint qHash(const MyMoneyTransaction::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+inline uint qHash(const MyMoneyTransaction::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyTransaction& first, MyMoneyTransaction& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+  swap(first.m_kvp, second.m_kvp);
+}
+
+inline MyMoneyTransaction::MyMoneyTransaction(MyMoneyTransaction && other) : MyMoneyTransaction() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyTransaction & MyMoneyTransaction::operator=(MyMoneyTransaction other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 /**
   * Make it possible to hold @ref MyMoneyTransaction objects inside @ref QVariant objects.

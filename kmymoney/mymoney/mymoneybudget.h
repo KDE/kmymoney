@@ -4,6 +4,7 @@
     begin                : Sun Jan 22 2006
     copyright            : (C) 2006 by Darren Gould
     email                : darren_gould@gmx.de
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,21 +22,24 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
-#include <QList>
-#include <QString>
-#include <QDate>
-
-class QDomElement;
-class QDomDocument;
+#include <QMetaType>
+#include <QHashFunctions>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyobject.h"
-#include "mymoneymoney.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+
+class QString;
+class QDate;
+class QDomElement;
+class QDomDocument;
+class MyMoneyMoney;
+
+template <typename T> class QList;
+template <class Key, class T> class QMap;
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class
@@ -48,26 +52,37 @@ class QDomDocument;
   *
   * @author Darren Gould <darren_gould@gmx.de>
   */
+class MyMoneyBudgetPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 {
+  Q_DECLARE_PRIVATE(MyMoneyBudget)
+  MyMoneyBudgetPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
   MyMoneyBudget();
-  ~MyMoneyBudget();
-  MyMoneyBudget(const QString& _name);
+  explicit MyMoneyBudget(const QString& name);
   /**
     * This constructor creates an object based on the data found in the
     * QDomElement referenced by @p node. If problems arise, the @p id of
     * the object is cleared (see MyMoneyObject::clearId()).
     */
-  MyMoneyBudget(const QDomElement& node);
+  explicit MyMoneyBudget(const QDomElement& node);
 
   /**
     * This constructor creates an object based on the data found in the
     * MyMoneyBudget budget object.
     */
-  MyMoneyBudget(const QString& id, const MyMoneyBudget& budget);
+  MyMoneyBudget(const QString& id,
+                const MyMoneyBudget& other);
+
+  MyMoneyBudget(const MyMoneyBudget& other);
+  MyMoneyBudget(MyMoneyBudget && other);
+  MyMoneyBudget & operator=(MyMoneyBudget other);
+  friend void swap(MyMoneyBudget& first, MyMoneyBudget& second);
+
+  ~MyMoneyBudget();
 
   /**
     * Helper class for MyMoneyBudget
@@ -76,32 +91,28 @@ public:
     *
     * @author Darren Gould
     */
+  class PeriodGroupPrivate;
   class KMM_MYMONEY_EXPORT PeriodGroup
   {
+    Q_DECLARE_PRIVATE(PeriodGroup)
+    PeriodGroupPrivate* d_ptr;
+
   public:
-    // get functions
-    const QDate&    startDate() const {
-      return m_start;
-    }
-    const MyMoneyMoney& amount() const {
-      return m_amount;
-    }
+    PeriodGroup();
+    PeriodGroup(const PeriodGroup & other);
+    PeriodGroup(PeriodGroup && other);
+    PeriodGroup & operator=(PeriodGroup other);
+    friend void swap(PeriodGroup& first, PeriodGroup& second);
 
-    // set functions
-    void setStartDate(const QDate& _start)    {
-      m_start  = _start;
-    }
-    void setAmount(const MyMoneyMoney& _amount) {
-      m_amount = _amount;
-    }
+    ~PeriodGroup();
 
-    bool operator == (const PeriodGroup &r) const {
-      return (m_start == r.m_start && m_amount == r.m_amount);
-    }
+    QDate startDate() const;
+    void setStartDate(const QDate& start);
 
-  private:
-    QDate         m_start;
-    MyMoneyMoney  m_amount;
+    MyMoneyMoney amount() const;
+    void setAmount(const MyMoneyMoney& amount);
+
+    bool operator == (const PeriodGroup &right) const;
   };
 
   /**
@@ -111,8 +122,12 @@ public:
     *
     * @author Darren Gould
     */
+  class AccountGroupPrivate;
   class KMM_MYMONEY_EXPORT AccountGroup
   {
+    Q_DECLARE_PRIVATE(AccountGroup)
+    AccountGroupPrivate* d_ptr;
+
   public:
     typedef enum {
       eNone = 0,
@@ -125,69 +140,37 @@ public:
     static const QStringList kBudgetLevelText;
 
   public:
-    AccountGroup() : m_budgetlevel(eNone), m_budgetsubaccounts(false) {}
+    AccountGroup();
+    AccountGroup(const AccountGroup & other);
+    AccountGroup(AccountGroup && other);
+    AccountGroup & operator=(AccountGroup other);
+    friend void swap(AccountGroup& first, AccountGroup& second);
 
-    // get functions
-    const QString& id() const {
-      return m_id;
-    }
-    bool budgetSubaccounts() const {
-      return m_budgetsubaccounts;
-    }
-    eBudgetLevel budgetLevel() const {
-      return m_budgetlevel;
-    }
-    PeriodGroup period(const QDate &_date) const {
-      return m_periods[_date];
-    }
-    const QMap<QDate, PeriodGroup>& getPeriods() const {
-      return m_periods;
-    }
-    void clearPeriods() {
-      m_periods.clear();
-    }
-    MyMoneyMoney balance() const {
-      MyMoneyMoney balance;
+    ~AccountGroup();
 
-      QMap<QDate, PeriodGroup>::const_iterator it;
-      for (it = m_periods.begin(); it != m_periods.end(); ++it) {
-        balance += (*it).amount();
-      }
-      return balance;
-    };
+    QString id() const;
+    void setId(const QString& id);
 
-    MyMoneyMoney totalBalance() const {
-      MyMoneyMoney bal = balance();
-      switch (m_budgetlevel) {
-        default:
-          break;
-        case eMonthly:
-          bal = bal * 12;
-          break;
-      }
-      return bal;
-    }
+    bool budgetSubaccounts() const;
+    void setBudgetSubaccounts(bool budgetsubaccounts);
 
-    // set functions
-    void setId(QString _id) {
-      m_id = _id;
-    }
-    void setBudgetLevel(eBudgetLevel _level) {
-      m_budgetlevel = _level;
-    }
-    void setBudgetSubaccounts(bool _b) {
-      m_budgetsubaccounts = _b;
-    }
-    void addPeriod(const QDate& _date, PeriodGroup &period) {
-      m_periods[_date] = period;
-    }
+    eBudgetLevel budgetLevel() const;
+    void setBudgetLevel(eBudgetLevel level);
+
+    PeriodGroup period(const QDate& date) const;
+    void addPeriod(const QDate& date, PeriodGroup& period);
+    const QMap<QDate, PeriodGroup> getPeriods() const;
+    void clearPeriods();
+
+    MyMoneyMoney balance() const;
+    MyMoneyMoney totalBalance() const;
 
     // This member adds the value of another account group
     // m_budgetlevel is adjusted to the larger one of both
     // m_budgetsubaccounts remains unaffected
-    AccountGroup operator += (const AccountGroup& r);
+    AccountGroup operator += (const AccountGroup& right);
 
-    bool operator == (const AccountGroup &r) const;
+    bool operator == (const AccountGroup &right) const;
 
     bool isZero() const;
 
@@ -195,13 +178,6 @@ public:
     void convertToMonthly();
     void convertToYearly();
     void convertToMonthByMonth();
-
-  private:
-    QString m_id;
-
-    eBudgetLevel             m_budgetlevel;
-    bool                     m_budgetsubaccounts;
-    QMap<QDate, PeriodGroup> m_periods;
   };
 
   /**
@@ -209,30 +185,17 @@ public:
    */
   bool operator == (const MyMoneyBudget &) const;
 
-  // Simple get operations
-  const QString& name() const {
-    return m_name;
-  }
-  const QDate& budgetStart() const {
-    return m_start;
-  }
-  QString id() const {
-    return m_id;
-  }
-  const AccountGroup & account(const QString &_id) const;
-  bool contains(const QString &_id) const {
-    return m_accounts.contains(_id);
-  }
-  QList<AccountGroup> getaccounts() const {
-    return m_accounts.values();
-  }
+  QString name() const;
+  void setName(const QString& name);
 
-  // Simple set operations
-  void setName(const QString& _name) {
-    m_name = _name;
-  }
-  void setBudgetStart(const QDate& _start);
-  void setAccount(const AccountGroup &_account, const QString &_id);
+  QDate budgetStart() const;
+  void setBudgetStart(const QDate& start);
+
+  const AccountGroup & account(const QString &id) const;
+  void setAccount(const AccountGroup& account, const QString &id);
+
+  bool contains(const QString &id) const;
+  QList<AccountGroup> getaccounts() const;
 
   /**
     * This method writes this Budget to the DOM element @p e,
@@ -264,7 +227,7 @@ public:
     * @param document reference to QDomDocument
     * @param parent reference to QDomElement parent node
     */
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -276,7 +239,7 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   /**
     * This member removes all references to object identified by @p id. Used
@@ -285,23 +248,82 @@ public:
   void removeReference(const QString& id);
 
 private:
-  /**
-    * The user-assigned name of the Budget
-    */
-  QString m_name;
+  enum class Element { Budget = 0,
+                       Account,
+                       Period
+                     };
 
-  /**
-    * The user-assigned year of the Budget
-    */
-  QDate m_start;
+  enum class Attribute { ID = 0,
+                         Name,
+                         Start,
+                         Version,
+                         BudgetLevel,
+                         BudgetSubAccounts,
+                         Amount,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
 
-  /**
-    * Map the budgeted accounts
-    *
-    * Each account Id is stored against the AccountGroup information
-    */
-  QMap<QString, AccountGroup> m_accounts;
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
+  friend uint qHash(const Attribute, uint seed);
+  friend uint qHash(const Element, uint seed);
 };
+
+inline uint qHash(const MyMoneyBudget::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+inline uint qHash(const MyMoneyBudget::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyBudget::PeriodGroup& first, MyMoneyBudget::PeriodGroup& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+inline MyMoneyBudget::PeriodGroup::PeriodGroup(MyMoneyBudget::PeriodGroup && other) : PeriodGroup() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyBudget::PeriodGroup & MyMoneyBudget::PeriodGroup::operator=(MyMoneyBudget::PeriodGroup other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
+
+inline void swap(MyMoneyBudget::AccountGroup& first, MyMoneyBudget::AccountGroup& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+inline MyMoneyBudget::AccountGroup::AccountGroup(MyMoneyBudget::AccountGroup && other) : AccountGroup() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyBudget::AccountGroup & MyMoneyBudget::AccountGroup::operator=(MyMoneyBudget::AccountGroup other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
+
+inline void swap(MyMoneyBudget& first, MyMoneyBudget& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+}
+
+inline MyMoneyBudget::MyMoneyBudget(MyMoneyBudget && other) : MyMoneyBudget() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyBudget & MyMoneyBudget::operator=(MyMoneyBudget other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 /**
   * Make it possible to hold @ref MyMoneyBudget objects inside @ref QVariant objects.

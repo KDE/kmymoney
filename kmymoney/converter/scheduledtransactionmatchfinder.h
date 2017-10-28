@@ -19,6 +19,7 @@
 #define SCHEDULEDTRANSACTIONMATCHFINDER_H
 
 #include "transactionmatchfinder.h"
+#include "mymoneyaccount.h"
 
 /** Implements searching for a matching transaction in the scheduled transactions
  */

@@ -36,6 +36,14 @@
 #include "../mymoneytransactionfilter.h"
 #include "../mymoneycategory.h"
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneytag.h"
+#include "mymoneybudget.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneypayee.h"
 #include "mymoneymap.h"
 #include "storageenums.h"
 
@@ -1077,9 +1085,8 @@ void MyMoneyDatabaseMgr::transactionList(QList<QPair<MyMoneyTransaction, MyMoney
 
   for (it_t = transactionList.begin(); it_t != txEnd; ++it_t) {
     if (filter.match(*it_t)) {
-      foreach (const MyMoneySplit& it_s, filter.matchingSplits()) {
-        list.append(qMakePair(*it_t, it_s));
-      }
+      foreach (const auto split, filter.matchingSplits())
+        list.append(qMakePair(*it_t, split));
     }
   }
 }
@@ -1335,27 +1342,27 @@ void MyMoneyDatabaseMgr::accountList(QList<MyMoneyAccount>& list) const
   }
 }
 
-const MyMoneyAccount MyMoneyDatabaseMgr::liability() const
+MyMoneyAccount MyMoneyDatabaseMgr::liability() const
 {
   return MyMoneyFile::instance()->account(STD_ACC_LIABILITY);
 }
 
-const MyMoneyAccount MyMoneyDatabaseMgr::asset() const
+MyMoneyAccount MyMoneyDatabaseMgr::asset() const
 {
   return MyMoneyFile::instance()->account(STD_ACC_ASSET);
 }
 
-const MyMoneyAccount MyMoneyDatabaseMgr::expense() const
+MyMoneyAccount MyMoneyDatabaseMgr::expense() const
 {
   return MyMoneyFile::instance()->account(STD_ACC_EXPENSE);
 }
 
-const MyMoneyAccount MyMoneyDatabaseMgr::income() const
+MyMoneyAccount MyMoneyDatabaseMgr::income() const
 {
   return MyMoneyFile::instance()->account(STD_ACC_INCOME);
 }
 
-const MyMoneyAccount MyMoneyDatabaseMgr::equity() const
+MyMoneyAccount MyMoneyDatabaseMgr::equity() const
 {
   return MyMoneyFile::instance()->account(STD_ACC_EQUITY);
 }

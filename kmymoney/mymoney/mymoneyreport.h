@@ -4,6 +4,8 @@
     begin                : Sun July 4 2004
     copyright            : (C) 2004-2005 by Ace Jones
     email                : acejones@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,18 +22,21 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QList>
-#include <QString>
-class QDomElement;
-class QDomDocument;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "mymoneyobject.h"
-#include "mymoneyaccount.h"
 #include "mymoneytransactionfilter.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+#include "mymoneyenums.h"
+
+class QString;
+class QDomElement;
+class QDomDocument;
+class MyMoneyAccount;
+
+template <typename T> class QList;
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class
@@ -52,10 +57,16 @@ class QDomDocument;
   * @author Ace Jones <acejones@users.sourceforge.net>
   */
 
+class MyMoneyReportPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTransactionFilter
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(MyMoneyReport)
+  MyMoneyReportPrivate* d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
+
+//protected:
+//    MyMoneyReport(MyMoneyReportPrivate &dd);
 
 public:
   // When adding a new row type, be sure to add a corresponding entry in kTypeArray
@@ -73,34 +84,6 @@ public:
 
   enum dataOptionE { automatic = 0, userDefined, dataOptionCount };
 
-  enum elNameE { enPayee ,enTag, enAccount, enText,
-                 enType, enState, enNumber,
-                 enAmount, enDates, enCategory,
-                 enAccountGroup
-               };
-  Q_ENUM(elNameE)
-
-  enum attrNameE { anID, anGroup, anType, anName, anComment, anConvertCurrency, anFavorite,
-                   anSkipZero, anDateLock, anDataLock, anMovingAverageDays,
-                   anIncludesActuals, anIncludesForecast, anIncludesPrice,
-                   anIncludesAveragePrice, anIncludesMovingAverage,
-                   anIncludesSchedules, anIncludesTransfers, anIncludesUnused,
-                   anMixedTime, anInvestments, anBudget,
-                   anShowRowTotals, anShowColumnTotals, anDetail,
-                   anColumnsAreDays, anChartType,
-                   anChartCHGridLines, anChartSVGridLines,
-                   anChartDataLabels, anChartByDefault,
-                   anLogYAxis, anChartLineWidth, anColumnType, anRowType,
-                   anDataRangeStart, anDataRangeEnd,
-                   anDataMajorTick, anDataMinorTick,
-                   anYLabelsPrecision, anQueryColumns,
-                   anTax, anLoans, anHideTransactions, anInvestmentSum,
-                   anSettlementPeriod, anShowSTLTCapitalGains, anTermsSeparator,
-                   anPattern, anCaseSensitive, anRegEx, anInvertText, anState,
-                   anFrom, anTo
-                 };
-  Q_ENUM(attrNameE)
-
   static const QStringList kRowTypeText;
   static const QStringList kColumnTypeText;
   static const QStringList kQueryColumnsText;
@@ -110,341 +93,169 @@ public:
 
 public:
   MyMoneyReport();
-  MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment);
-  MyMoneyReport(const QString& id, const MyMoneyReport& right);
-
+  explicit MyMoneyReport(ERowType rt,
+                         unsigned ct,
+                         eMyMoney::TransactionFilter::Date dl,
+                         EDetailLevel ss,
+                         const QString& name,
+                         const QString& comment);
   /**
     * This constructor creates an object based on the data found in the
     * QDomElement referenced by @p node. If problems arise, the @p id of
     * the object is cleared (see MyMoneyObject::clearId()).
     */
-  MyMoneyReport(const QDomElement& node);
+  explicit MyMoneyReport(const QDomElement& node);
 
-  // Simple get operations
-  const QString& name() const {
-    return m_name;
-  }
-  bool isShowingRowTotals() const {
-    return (m_showRowTotals);
-  }
-  bool isShowingColumnTotals() const {
-    return m_showColumnTotals;
-  }
-  EReportType reportType() const {
-    return m_reportType;
-  }
-  ERowType rowType() const {
-    return m_rowType;
-  }
-  EColumnType columnType() const {
-    return m_columnType;
-  }
-  bool isRunningSum() const {
-    return (m_rowType == eAssetLiability);
-  }
-  bool isConvertCurrency() const {
-    return m_convertCurrency;
-  }
-  unsigned columnPitch() const {
-    return static_cast<unsigned>(m_columnType);
-  }
-  const QString& comment() const {
-    return m_comment;
-  }
-  EQueryColumns queryColumns() const {
-    return m_queryColumns;
-  }
-  const QString& group() const {
-    return m_group;
-  }
-  bool isFavorite() const {
-    return m_favorite;
-  }
-  bool isTax() const {
-    return m_tax;
-  }
-  bool isInvestmentsOnly() const {
-    return m_investments;
-  }
-  bool isLoansOnly() const {
-    return m_loans;
-  }
-  EDetailLevel detailLevel() const {
-    return m_detailLevel;
-  }
-  EInvestmentSum investmentSum() const {
-    return m_investmentSum;
-  }
-  bool isHideTransactions() const {
-    return m_hideTransactions;
-  }
-  EChartType chartType() const {
-    return m_chartType;
-  }
-  bool isChartDataLabels() const {
-    return m_chartDataLabels;
-  }
-  bool isChartCHGridLines() const {
-    return m_chartCHGridLines;
-  }
-  bool isChartSVGridLines() const {
-    return m_chartSVGridLines;
-  }
-  bool isChartByDefault() const {
-    return m_chartByDefault;
-  }
-  uint chartLineWidth() const {
-    return m_chartLineWidth;
-  }
-  bool isLogYAxis() const {
-    return m_logYaxis;
-  }
-  const QString& dataRangeStart() const {
-    return m_dataRangeStart;
-  }
-  const QString& dataRangeEnd() const {
-    return m_dataRangeEnd;
-  }
-  const QString& dataMajorTick() const {
-    return m_dataMajorTick;
-  }
-  const QString& dataMinorTick() const {
-    return m_dataMinorTick;
-  }
-  uint yLabelsPrecision() const {
-    return m_yLabelsPrecision;
-  }
-  bool isIncludingSchedules() const {
-    return m_includeSchedules;
-  }
-  bool isColumnsAreDays() const {
-    return m_columnsAreDays;
-  }
-  bool isIncludingTransfers() const {
-    return m_includeTransfers;
-  }
-  bool isIncludingUnusedAccounts() const {
-    return m_includeUnusedAccounts;
-  }
-  bool hasBudget() const {
-    return !m_budgetId.isEmpty();
-  }
-  const QString& budget() const {
-    return m_budgetId;
-  }
-  bool isIncludingBudgetActuals() const {
-    return m_includeBudgetActuals;
-  }
-  bool isIncludingForecast() const {
-    return m_includeForecast;
-  }
-  bool isIncludingMovingAverage() const {
-    return m_includeMovingAverage;
-  }
-  int movingAverageDays() const {
-    return m_movingAverageDays;
-  }
-  bool isIncludingPrice() const {
-    return m_includePrice;
-  }
-  bool isIncludingAveragePrice() const {
-    return m_includeAveragePrice;
-  }
-  bool isDateUserDefined() const {
-    return m_dateLock == MyMoneyTransactionFilter::userDefined;
-  }
-  dateOptionE dateRange() const {
-    return m_dateLock;
-  }
-  bool isDataUserDefined() const {
-    return m_dataLock == MyMoneyReport::userDefined;
-  }
-  bool isMixedTime() const {
-    return m_mixedTime;
-  }
-  int currentDateColumn() const {
-    return m_currentDateColumn;
-  }
-  uint settlementPeriod() const {
-    return m_settlementPeriod;
-  }
-  bool isShowingSTLTCapitalGains() const {
-    return m_showSTLTCapitalGains;
-  }
-  const QDate& termSeparator() const {
-    return m_tseparator;
-  }
-  /**
-   * @see #m_skipZero
-   */
-  bool isSkippingZero() const {
-    return m_skipZero;
-  }
+  MyMoneyReport(const QString& id,
+                const MyMoneyReport& other);
 
-  // Simple set operations
-  void setName(const QString& _s) {
-    m_name = _s;
-  }
-  void setConvertCurrency(bool _f) {
-    m_convertCurrency = _f;
-  }
-  void setRowType(ERowType _rt);
-  void setColumnType(EColumnType _ct) {
-    m_columnType = _ct;
-  }
-  void setComment(const QString& _comment) {
-    m_comment = _comment;
-  }
-  void setGroup(const QString& _group) {
-    m_group = _group;
-  }
-  void setFavorite(bool _f) {
-    m_favorite = _f;
-  }
-  void setQueryColumns(EQueryColumns _qc) {
-    m_queryColumns = _qc;
-  }
-  void setTax(bool _f) {
-    m_tax = _f;
-  }
-  void setInvestmentsOnly(bool _f) {
-    m_investments = _f; if (_f) m_loans = false;
-  }
-  void setLoansOnly(bool _f) {
-    m_loans = _f; if (_f) m_investments = false;
-  }
-  void setDetailLevel(EDetailLevel _detail) {
-    m_detailLevel = _detail;
-  }
-  void setInvestmentSum(EInvestmentSum _sum) {
-    m_investmentSum = _sum;
-  }
-  void setHideTransactions(bool _f) {
-    m_hideTransactions = _f;
-  }
-  void setChartType(EChartType _type) {
-    m_chartType = _type;
-  }
-  void setChartDataLabels(bool _f) {
-    m_chartDataLabels = _f;
-  }
-  void setChartCHGridLines(bool _f) {
-    m_chartCHGridLines = _f;
-  }
-  void setChartSVGridLines(bool _f) {
-    m_chartSVGridLines = _f;
-  }
-  void setChartByDefault(bool _f) {
-    m_chartByDefault = _f;
-  }
-  void setChartLineWidth(uint _f) {
-    m_chartLineWidth = _f;
-  }
-  void setLogYAxis(bool _f) {
-    m_logYaxis = _f;
-  }
-  void setDataRangeStart(const QString& _f) {
-   m_dataRangeStart = _f;
-  }
-  void setDataRangeEnd(const QString& _f) {
-   m_dataRangeEnd = _f;
-  }
-  void setDataMajorTick(const QString& _f) {
-   m_dataMajorTick = _f;
-  }
-  void setDataMinorTick(const QString& _f) {
-   m_dataMinorTick = _f;
-  }
-  void setYLabelsPrecision(int _f) {
-   m_yLabelsPrecision = _f;
-  }
-  void setIncludingSchedules(bool _f) {
-    m_includeSchedules = _f;
-  }
-  void setColumnsAreDays(bool _f) {
-    m_columnsAreDays = _f;
-  }
-  void setIncludingTransfers(bool _f) {
-    m_includeTransfers = _f;
-  }
-  void setIncludingUnusedAccounts(bool _f) {
-    m_includeUnusedAccounts = _f;
-  }
-  void setShowingRowTotals(bool _f) {
-    m_showRowTotals = _f;
-  }
-  void setShowingColumnTotals(bool _f) {
-    m_showColumnTotals = _f;
-  }
-  void setIncludingBudgetActuals(bool _f) {
-    m_includeBudgetActuals = _f;
-  }
-  void setIncludingForecast(bool _f) {
-    m_includeForecast = _f;
-  }
-  void setIncludingMovingAverage(bool _f) {
-    m_includeMovingAverage = _f;
-  }
-  void setMovingAverageDays(int _days) {
-    m_movingAverageDays = _days;
-  }
-  void setIncludingPrice(bool _f) {
-    m_includePrice = _f;
-  }
-  void setIncludingAveragePrice(bool _f) {
-    m_includeAveragePrice = _f;
-  }
-  void setMixedTime(bool _f) {
-    m_mixedTime = _f;
-  }
-  void setCurrentDateColumn(int _f) {
-    m_currentDateColumn = _f;
-  }
-  void setSettlementPeriod(uint _days) {
-    m_settlementPeriod = _days;
-  }
-  void setShowSTLTCapitalGains(bool _f) {
-    m_showSTLTCapitalGains = _f;
-  }
-  void setTermSeparator(const QDate& _date) {
-    m_tseparator = _date;
-  }
-  /**
-   * @see #m_skipZero
-   */
-  void setSkipZero(int _f) {
-    m_skipZero = _f;
-  }
+  MyMoneyReport(const MyMoneyReport & other);
+  MyMoneyReport(MyMoneyReport && other);
+  MyMoneyReport & operator=(MyMoneyReport other);
+  friend void swap(MyMoneyReport& first, MyMoneyReport& second);
+
+  ~MyMoneyReport();
+
+  EReportType reportType() const;
+
+  QString name() const;
+  void setName(const QString& s);
+
+  bool isShowingRowTotals() const;
+  void setShowingRowTotals(bool f);
+
+  bool isShowingColumnTotals() const;
+  void setShowingColumnTotals(bool f);
+
+  ERowType rowType() const;
+  void setRowType(ERowType rt);
+  bool isRunningSum() const;
+
+  EColumnType columnType() const;
+  void setColumnType(EColumnType ct);
+
+  bool isConvertCurrency() const;
+  void setConvertCurrency(bool f);
+  uint columnPitch() const;
+
+  QString comment() const;
+  void setComment(const QString& comment);
+
+  EQueryColumns queryColumns() const;
+  void setQueryColumns(EQueryColumns qc);
+
+  QString group() const;
+  void setGroup(const QString& group);
+
+  bool isFavorite() const;
+  void setFavorite(bool f);
+
+  bool isTax() const;
+  void setTax(bool f);
+
+  bool isInvestmentsOnly() const;
+  void setInvestmentsOnly(bool f);
+
+  bool isLoansOnly() const;
+  void setLoansOnly(bool f);
+
+  EDetailLevel detailLevel() const;
+  void setDetailLevel(EDetailLevel detail);
+
+  EInvestmentSum investmentSum() const;
+  void setInvestmentSum(EInvestmentSum sum);
+
+  bool isHideTransactions() const;
+  void setHideTransactions(bool f);
+
+  EChartType chartType() const;
+  void setChartType(EChartType type);
+
+  bool isChartDataLabels() const;
+  void setChartDataLabels(bool f);
+
+  bool isChartCHGridLines() const;
+  void setChartCHGridLines(bool f);
+
+  bool isChartSVGridLines() const;
+  void setChartSVGridLines(bool f);
+
+  bool isChartByDefault() const;
+  void setChartByDefault(bool f);
+
+  uint chartLineWidth() const;
+  void setChartLineWidth(uint f);
+
+  bool isLogYAxis() const;
+  void setLogYAxis(bool f);
+
+  QString dataRangeStart() const;
+  void setDataRangeStart(const QString& f);
+
+  QString dataRangeEnd() const;
+  void setDataRangeEnd(const QString& f);
+
+  QString dataMajorTick() const;
+  void setDataMajorTick(const QString& f);
+
+  QString dataMinorTick() const;
+  void setDataMinorTick(const QString& f);
+
+  uint yLabelsPrecision() const;
+  void setYLabelsPrecision(int f);
+
+  bool isIncludingSchedules() const;
+  void setIncludingSchedules(bool f);
+
+  bool isColumnsAreDays() const;
+  void setColumnsAreDays(bool f);
+
+  bool isIncludingTransfers() const;
+  void setIncludingTransfers(bool f);
+
+  bool isIncludingUnusedAccounts() const;
+  void setIncludingUnusedAccounts(bool f);
+
+  bool hasBudget() const;
+  QString budget() const;
 
   /**
     * Sets the budget used for this report
     *
-    * @param _budget The ID of the budget to use, or an empty string
+    * @param budget The ID of the budget to use, or an empty string
     * to indicate a budget is NOT included
-    * @param _fa Whether to display actual data alongside the budget.
+    * @param fa Whether to display actual data alongside the budget.
     * Setting to false means the report displays ONLY the budget itself.
     * @warning For now, the budget ID is ignored.  The budget id is
     * simply checked for any non-empty string, and if so, hasBudget()
     * will return true.
     */
-  void setBudget(const QString& _budget, bool _fa = true) {
-    m_budgetId = _budget; m_includeBudgetActuals = _fa;
-  }
+  void setBudget(const QString& budget, bool fa = true);
 
-  /**
-    * This method allows you to clear the underlying transaction filter
-    */
-  void clearTransactionFilter();
+  bool isIncludingBudgetActuals() const;
+  void setIncludingBudgetActuals(bool f);
 
-  /**
-    * This method allows you to set the underlying transaction filter
-    *
-    * @param _filter The filter which should replace the existing transaction
-    * filter.
-    */
-  void assignFilter(const MyMoneyTransactionFilter& _filter) {
-    MyMoneyTransactionFilter::operator=(_filter);
-  }
+  bool isIncludingForecast() const;
+  void setIncludingForecast(bool f);
+
+  bool isIncludingMovingAverage() const;
+  void setIncludingMovingAverage(bool f);
+
+  int movingAverageDays() const;
+  void setMovingAverageDays(int days);
+
+  bool isIncludingPrice() const;
+  void setIncludingPrice(bool f);
+
+  bool isIncludingAveragePrice() const;
+  void setIncludingAveragePrice(bool f);
+
+  dataOptionE dataFilter() const;
+  bool isDataUserDefined() const;
+  void setDataFilter(dataOptionE u);
+
+  eMyMoney::TransactionFilter::Date dateRange() const;
+  bool isDateUserDefined() const;
 
   /**
     * Set the underlying date filter and LOCK that filter to the specified
@@ -458,15 +269,7 @@ public:
     *          which this report should be locked to.
     */
 
-  void setDateFilter(dateOptionE _u) {
-    m_dateLock = _u;
-    if (_u != MyMoneyTransactionFilter::userDefined)
-      MyMoneyTransactionFilter::setDateFilter(_u);
-  }
-
-  void setDataFilter(dataOptionE _u) {
-    m_dataLock = _u;
-  }
+  void setDateFilter(eMyMoney::TransactionFilter::Date u);
 
   /**
     * Set the underlying date filter using the start and end dates provided.
@@ -478,9 +281,7 @@ public:
     * @param _de The inclusive end date of the date range
     */
 
-  void setDateFilter(const QDate& _db, const QDate& _de) {
-    MyMoneyTransactionFilter::setDateFilter(_db, _de);
-  }
+  void setDateFilter(const QDate& db, const QDate& de);
 
   /**
     * Set the underlying date filter using the 'date lock' property.
@@ -493,13 +294,38 @@ public:
     * September, this function will update the date range to be September,
     * as is proper.
     */
-  void updateDateFilter() {
-    if (m_dateLock != MyMoneyTransactionFilter::userDefined) MyMoneyTransactionFilter::setDateFilter(m_dateLock);
-  }
+  void updateDateFilter();
 
-  MyMoneyReport::dataOptionE dataFilter() {
-    return m_dataLock;
-  }
+  bool isMixedTime() const;
+  void setMixedTime(bool f);
+
+  int currentDateColumn() const;
+  void setCurrentDateColumn(int f);
+
+  uint settlementPeriod() const;
+  void setSettlementPeriod(uint days);
+
+  bool isShowingSTLTCapitalGains() const;
+  void setShowSTLTCapitalGains(bool f);
+
+  QDate termSeparator() const;
+  void setTermSeparator(const QDate& date);
+
+  bool isSkippingZero() const;
+  void setSkipZero(int f);
+
+  /**
+    * This method allows you to clear the underlying transaction filter
+    */
+  void clearTransactionFilter();
+
+  /**
+    * This method allows you to set the underlying transaction filter
+    *
+    * @param _filter The filter which should replace the existing transaction
+    * filter.
+    */
+  void assignFilter(const MyMoneyTransactionFilter& filter);
 
   /**
     * Retrieves a VALID beginning & ending date for this report.
@@ -516,7 +342,7 @@ public:
     * @param _db The inclusive begin date of the date range
     * @param _de The inclusive end date of the date range
     */
-  void validDateRange(QDate& _db, QDate& _de);
+  void validDateRange(QDate &db, QDate &de);
 
   /**
     * This method turns on the account group filter and adds the
@@ -594,7 +420,7 @@ public:
     * @param document reference to QDomDocument
     * @param parent reference to QDomElement parent node
     */
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -605,13 +431,19 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const override;
 
   /**
     * This method allows to modify the default lineWidth for graphs.
     * The default is 2.
     */
   static void setLineWidth(int width);
+
+  /**
+    * This member keeps the current setting for line graphs lineWidth.
+    * @sa setLineWidth()
+    */
+  static int m_lineWidth;
 
   /**
    * Return row type as string.
@@ -630,258 +462,68 @@ public:
   static QString toString(EReportType type);
 
 private:
-  /**
-    * The user-assigned name of the report
-    */
-  QString m_name;
-  /**
-    * The user-assigned comment for the report, in case they want to make
-    * additional notes for themselves about the report.
-    */
-  QString m_comment;
-  /**
-    * Where to group this report amongst the others in the UI view.  This
-    * should be assigned by the UI system.
-    */
-  QString m_group;
-  /**
-    * How much detail to show in the accounts
-    */
-  enum EDetailLevel m_detailLevel;
-  /**
-    * Whether to sum: all, sold, bought or owned value
-    */
-  enum EInvestmentSum m_investmentSum;
-  /**
-    * Whether to show transactions or just totals.
-    */
-  bool m_hideTransactions;
-  /**
-    * Whether to convert all currencies to the base currency of the file (true).
-    * If this is false, it's up to the report generator to decide how to handle
-    * the currency.
-    */
-  bool m_convertCurrency;
-  /**
-    * Whether this is one of the users' favorite reports
-    */
-  bool m_favorite;
-  /**
-    * Whether this report should only include categories marked as "Tax"="Yes"
-    */
-  bool m_tax;
-  /**
-    * Whether this report should only include investment accounts
-    */
-  bool m_investments;
-  /**
-    * Whether this report should only include loan accounts
-    * Applies only to querytable reports.  Mutually exclusive with
-    * m_investments.
-    */
-  bool m_loans;
-  /**
-    * What sort of algorithm should be used to run the report
-    */
-  enum EReportType m_reportType;
-  /**
-    * What sort of values should show up on the ROWS of this report
-    */
-  enum ERowType m_rowType;
-  /**
-    * What sort of values should show up on the COLUMNS of this report,
-    * in the case of a 'PivotTable' report.  Really this is used more as a
-    * QUANTITY of months or days.  Whether it's months or days is determined
-    * by m_columnsAreDays.
-    */
-  enum EColumnType m_columnType;
-  /**
-   * Whether the base unit of columns of this report is days.  Only applies to
-   * 'PivotTable' reports.  If false, then columns are months or multiples thereof.
-   */
-  bool m_columnsAreDays;
-  /**
-     * What sort of values should show up on the COLUMNS of this report,
-     * in the case of a 'QueryTable' report
-     */
-  enum EQueryColumns m_queryColumns;
+  enum class Element { Payee,
+                       Tag,
+                       Account,
+                       Text,
+                       Type,
+                       State,
+                       Number,
+                       Amount,
+                       Dates,
+                       Category,
+                       AccountGroup
+                     };
 
-  /**
-    * The plain-language description of what the date range should be locked
-    * to.  'userDefined' means NO locking, in any other case, the report
-    * will be adjusted to match the date lock.  So if the date lock is
-    * 'currentMonth', the start and end dates of the underlying filter will
-    * be updated to whatever the current month is.  This updating happens
-    * automatically when the report is loaded, and should also be done
-    * manually by calling updateDateFilter() before generating the report
-    */
-  dateOptionE m_dateLock;
-  /**
-    * Which account groups should be included in the report.  This filter
-    * is applied to the individual splits AFTER a transaction has been
-    * matched using the underlying filter.
-    */
-  QList<eMyMoney::Account> m_accountGroups;
-  /**
-    * Whether an account group filter has been set (see m_accountGroups)
-    */
-  bool m_accountGroupFilter;
-  /**
-    * What format should be used to draw this report as a chart
-    */
-  enum EChartType m_chartType;
-  /**
-    * Whether the value of individual data points should be drawn on the chart
-    */
-  bool m_chartDataLabels;
-  /**
-    * Whether grid lines should be drawn on the chart
-    */
-  bool m_chartCHGridLines;
-  bool m_chartSVGridLines;
-  /**
-    * Whether this report should be shown as a chart by default (otherwise it
-    * should be shown as a textual report)
-    */
-  bool m_chartByDefault;
-  /**
-   * Width of the chart lines
-   */
-  uint m_chartLineWidth;
+  enum class Attribute { ID, Group, Type, Name, Comment, ConvertCurrency, Favorite,
+                         SkipZero, DateLock, DataLock, MovingAverageDays,
+                         IncludesActuals, IncludesForecast, IncludesPrice,
+                         IncludesAveragePrice, IncludesMovingAverage,
+                         IncludesSchedules, IncludesTransfers, IncludesUnused,
+                         MixedTime, Investments, Budget,
+                         ShowRowTotals, ShowColumnTotals, Detail,
+                         ColumnsAreDays, ChartType,
+                         ChartCHGridLines, ChartSVGridLines,
+                         ChartDataLabels, ChartByDefault,
+                         LogYAxis, ChartLineWidth, ColumnType, RowType,
+                         DataRangeStart, DataRangeEnd,
+                         DataMajorTick, DataMinorTick,
+                         YLabelsPrecision, QueryColumns,
+                         Tax, Loans, HideTransactions, InvestmentSum,
+                         SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
+                         Pattern, CaseSensitive, RegEx, InvertText, State,
+                         From, To,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
 
-  /**
-    * Whether Y axis is logarithmic or linear
-    */
-  bool m_logYaxis;
-
-  /**
-    * Y data range
-    */
-  QString m_dataRangeStart;
-  QString m_dataRangeEnd;
-
-  /**
-    * Y data range division
-    */
-  QString m_dataMajorTick;
-  QString m_dataMinorTick;
-
-  /**
-    * Y labels precision
-    */
-  uint m_yLabelsPrecision;
-
-  /**
-    * Whether data range should be calculated automatically or is user defined
-    */
-  dataOptionE m_dataLock;
-
-  /**
-    * Whether to include scheduled transactions
-    */
-  bool m_includeSchedules;
-  /**
-    * Whether to include transfers.  Only applies to Income/Expense reports
-    */
-  bool m_includeTransfers;
-  /**
-    * The id of the budget associated with this report.
-    */
-  QString m_budgetId;
-  /**
-    * Whether this report should print the actual data to go along with
-    * the budget.  This is only valid if the report has a budget.
-    */
-  bool m_includeBudgetActuals;
-  /**
-    * Whether this report should include all accounts and not only
-    * accounts with transactions.
-    */
-  bool m_includeUnusedAccounts;
-  /**
-   * Whether this report should include columns for row totals
-   */
-  bool m_showRowTotals;
-  /**
-   * Whether this report should include rows for column totals
-   */
-  bool m_showColumnTotals;
-  /**
-   * Whether this report should include forecast balance
-   */
-  bool m_includeForecast;
-  /**
-   * Whether this report should include moving average
-   */
-  bool m_includeMovingAverage;
-  /**
-   * The amount of days that spans each moving average
-   */
-  int m_movingAverageDays;
-  /**
-   * Whether this report should include prices
-   */
-  bool m_includePrice;
-  /**
-   * Whether this report should include moving average prices
-   */
-  bool m_includeAveragePrice;
-  /**
-   * Make the actual and forecast lines display as one
-   */
-  bool m_mixedTime;
-  /**
-   * This stores the column for the current date
-   * This value is calculated dinamically and thus it is not saved in the file
-   */
-  int m_currentDateColumn;
-  /**
-   * Time in days between the settlement date and the transaction date.
-   */
-  uint m_settlementPeriod;
-  /**
-   * Controls showing short-term and long-term capital gains.
-   */
-  bool m_showSTLTCapitalGains;
-  /**
-   * Date separating shot-term from long-term gains.
-   */
-  QDate m_tseparator;
-  /**
-    * This member keeps the current setting for line graphs lineWidth.
-    * @sa setLineWidth()
-    */
-  static int m_lineWidth;
-
-  /**
-    * This option is for investments reports only which
-    * show prices instead of balances as all other reports do.
-    * <p>
-    * Select this option to include prices for the given period (week, month,
-    * quarter, ...) only.
-    * </p>
-    * <p>
-    * If this option is off the last existing price is shown for a period, if
-    * it is on, in a table the value is '0' shown and in a chart a linear
-    * interpolation for the missing values will be performed.
-    * <br>Example:
-    * <br>There are prices for January and March, but there is no price for
-    * February.
-    * <ul>
-    * <li><b>OFF</b>: shows the price for February as the last price of
-    * January
-    * <li><b>ON</b>: in a table the value is '0', in a chart a linear
-    * interpolation for the February-price will be performed
-    * (so it makes a kind of average-value using the January- and the
-    * March-price in the chart)
-    * </ul>
-    * </p>
-    */
-  bool m_skipZero;
-
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
+  static QString getElName(const Element el);
+  static QString getAttrName(const Attribute attr);
+  friend uint qHash(const Attribute, uint seed);
+  friend uint qHash(const Element, uint seed);
 };
+
+inline uint qHash(const MyMoneyReport::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+inline uint qHash(const MyMoneyReport::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
+
+inline void swap(MyMoneyReport& first, MyMoneyReport& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.m_id, second.m_id);
+  swap(first.d_ptr_tf, second.d_ptr_tf);
+}
+
+inline MyMoneyReport::MyMoneyReport(MyMoneyReport && other) : MyMoneyReport() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyReport & MyMoneyReport::operator=(MyMoneyReport other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 /**
   * Make it possible to hold @ref MyMoneyReport objects inside @ref QVariant objects.

@@ -33,8 +33,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneypayee.h"
+#include "mymoneysplit.h"
+#include "mymoneyschedule.h"
+#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "mymoneytransaction.h"
 #include "ui_kconfirmmanualenterdlgdecl.h"
@@ -161,7 +167,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       messageDetail += i18n("<p>Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
     }
 
-    MyMoneySplit::reconcileFlagE fo, fn;
+    eMyMoney::Split::State fo, fn;
     fo = to.splits().front().reconcileFlag();
     fn = tn.splits().front().reconcileFlag();
     if (fo != fn) {

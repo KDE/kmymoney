@@ -36,9 +36,9 @@ class KToggleAction;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 
+class MyMoneyAccount;
 namespace KMyMoneyPlugin { class ImportInterface; }
 namespace KMyMoneyPlugin { class StatementInterface; }
 namespace KMyMoneyPlugin { class ViewInterface; }

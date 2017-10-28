@@ -26,29 +26,35 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
 #include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KGuiItem>
-class KXmlGuiWindow;
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyschedule.h"
-#include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 /**
   * @author Thomas Baumgart
   */
 
 static QString m_lastNumberUsed;
+
+class QPixmap;
 class QWizard;
+class QWidget;
+
+class KGuiItem;
+class KXmlGuiWindow;
+
+class MyMoneyMoney;
+class MyMoneyAccount;
+class MyMoneySecurity;
+class MyMoneySchedule;
+class MyMoneySplit;
+class MyMoneyTransaction;
 class KMyMoneyUtils
 {
 public:
@@ -133,50 +139,6 @@ public:
 
   KMyMoneyUtils();
   ~KMyMoneyUtils();
-
-  /**
-    * This method is used to convert the internal representation of
-    * an account type into a human readable format
-    *
-    * @param accountType numerical representation of the account type.
-    *                    For possible values, see eMyMoney::Account
-    * @return QString representing the human readable form translated according to the language cataglogue
-    *
-    * @sa MyMoneyAccount::accountTypeToString()
-    */
-  static const QString accountTypeToString(const eMyMoney::Account accountType);
-
-  /**
-    * This method is used to convert an account type from its
-    * string form to the internal used numeric value.
-    *
-    * @param type reference to a QString containing the string to convert
-    * @return accountTypeE containing the internal used numeric value. For possible
-    *         values see eMyMoney::Account
-    */
-  static eMyMoney::Account stringToAccountType(const QString& type);
-
-  /**
-    * This method is used to convert a rounding method from its
-    * string form to the internal used numeric value.
-    *
-    * @param txt reference to a QString containing the string to convert
-    * @return RoundingMethod containing the internal used numeric value. For possible
-    *         values see AlkValue::RoundingMethod
-    */
-  static AlkValue::RoundingMethod stringToRoundingMethod(const QString& txt);
-
-  /**
-    * This method is used to convert the internal representation of
-    * an rounding method into a human readable format
-    *
-    * @param roundingMethod enumerated representation of the rounding method.
-    *                     For possible values, see AlkValue::RoundingMethod
-    * @return QString representing the human readable form translated according to the language cataglogue
-    *
-    * @sa MyMoneySecurity::roundingMethodToString()
-    */
-  static const QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
 
   /**
     * This method is used to convert the occurrence type from its
@@ -386,7 +348,7 @@ public:
     * Returns the text representing the reconcile flag. If @a text is @p true
     * then the full text will be returned otherwise a short form (usually one character).
     */
-  static QString reconcileStateToString(MyMoneySplit::reconcileFlagE flag, bool text = false);
+  static QString reconcileStateToString(eMyMoney::Split::State flag, bool text = false);
 
   /**
    * Returns the transaction for @a schedule. In case of a loan payment the
@@ -418,12 +380,12 @@ public:
     */
   static QPixmap overlayIcon(const QString &iconName, const QString &overlayName, const Qt::Corner corner = Qt::BottomRightCorner, const int size = 64);
 
-  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
+  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
 
   /**
     * This method deletes security and associated price list but asks beforehand.
     */
-  static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = NULL);
+  static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = nullptr);
 };
 
 #endif

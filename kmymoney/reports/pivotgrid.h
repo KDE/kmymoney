@@ -32,6 +32,7 @@
 // Project Includes
 
 #include "reportaccount.h"
+#include "mymoneymoney.h"
 
 namespace reports
 {

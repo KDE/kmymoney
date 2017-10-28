@@ -33,28 +33,28 @@
 // Project Includes
 
 #include <imymoneyprocessingcalendar.h>
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
 
 #include "kmymoneyutils.h"
 
+#include "mymoneyaccount.h"
 #include "mymoney/onlinejob.h"
 #include "onlinejobtyped.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
-#include "mymoneyobject.h"
-#include "mymoneyschedule.h"
-#include "mymoneysecurity.h"
-#include "mymoneysplit.h"
 #include "selectedtransaction.h"
 
 class QResizeEvent;
 class KPluginMetaData;
+class MyMoneyObject;
+class MyMoneyInstitution;
+class MyMoneyAccount;
+class MyMoneySecurity;
 class MyMoneyBudget;
 class MyMoneyPayee;
 class MyMoneyPrice;
 class MyMoneyStatement;
 class MyMoneyTag;
+class MyMoneySplit;
 class MyMoneyTransaction;
 class WebConnect;
 class creditTransfer;
@@ -827,7 +827,7 @@ protected:
     * - Cleared --> Reconciled
     * - Reconciled --> NotReconciled
     */
-  void markTransaction(MyMoneySplit::reconcileFlagE flag);
+  void markTransaction(eMyMoney::Split::State flag);
 
   /**
     * This method allows to skip the next scheduled transaction of
@@ -1228,7 +1228,8 @@ public slots:
     *                esp. the @p id member.
     * @param parent reference to parent account (defaults to none)
     */
-  void slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent = MyMoneyAccount());
+  void slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
+  void slotCategoryNew(MyMoneyAccount& account);
 
   /**
     * This method updates all KAction items to the current state.

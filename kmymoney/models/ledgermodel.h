@@ -31,8 +31,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneytransaction.h"
-#include "mymoneyaccount.h"
 #include "mymoneysplit.h"
 #include "mymoneyschedule.h"
 #include "mymoneyenums.h"
@@ -137,7 +137,7 @@ public:
   /**
    * Returns the internal reconciliation status for the selected transaction and split.
    */
-  virtual MyMoneySplit::reconcileFlagE reconciliationState() const = 0;
+  virtual eMyMoney::Split::State reconciliationState() const = 0;
 
   /**
    * Returns the short reconciliation status text for the selected transaction and split.
@@ -275,7 +275,7 @@ public:
   virtual QString transactionId() const { return m_transaction.id(); }
 
   /// @copydoc LedgerItem::reconciliationState()
-  virtual MyMoneySplit::reconcileFlagE reconciliationState() const;
+  virtual eMyMoney::Split::State reconciliationState() const;
 
   /// @copydoc LedgerItem::reconciliationStateShort()
   virtual QString reconciliationStateShort() const;

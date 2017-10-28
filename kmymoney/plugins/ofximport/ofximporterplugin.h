@@ -31,12 +31,12 @@
 // Project Includes
 
 #include "kmymoneyplugin.h"
-#include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 
 /**
 @author Ace Jones
 */
+class MyMoneyAccount;
 class MyMoneyStatement;
 class OfxImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin, public KMyMoneyPlugin::OnlinePlugin
 {

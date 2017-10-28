@@ -33,9 +33,10 @@ class QPushButton;
 // Project Includes
 
 #include <kmymoneyselector.h>
-#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 
 class MyMoneyFile;
+class MyMoneyAccount;
 
 /**
   * This class implements an account/category selector. It is based

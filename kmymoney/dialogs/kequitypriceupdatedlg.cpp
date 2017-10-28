@@ -48,6 +48,7 @@
 
 #include "kmymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 

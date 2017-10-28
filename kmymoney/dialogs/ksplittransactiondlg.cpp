@@ -52,6 +52,7 @@
 #include "kmymoneyedit.h"
 #include "kmymoneylineedit.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "kmymoneysplittable.h"
 #include "icons/icons.h"
 

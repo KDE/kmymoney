@@ -120,7 +120,7 @@ protected slots:
   int slotEditFeeSplits();
   void slotReloadEditWidgets();
 
-  void slotUpdateActivity(MyMoneySplit::investTransactionTypeE);
+  void slotUpdateActivity(eMyMoney::Split::InvestmentTransactionType);
   void slotUpdateSecurity(const QString& stockId);
   void slotUpdateInterestCategory(const QString& id);
   void slotUpdateInterestVisibility(const QString&);
@@ -146,7 +146,7 @@ protected:
     */
   void loadEditWidgets(KMyMoneyRegister::Action action = KMyMoneyRegister::ActionNone);
 
-  void activityFactory(MyMoneySplit::investTransactionTypeE type);
+  void activityFactory(eMyMoney::Split::InvestmentTransactionType type);
 
   MyMoneyMoney subtotal(const QList<MyMoneySplit>& splits) const;
 
@@ -179,7 +179,7 @@ private:
   QList<MyMoneySplit>                       m_feeSplits;
   MyMoneySecurity                           m_security;
   MyMoneySecurity                           m_currency;
-  MyMoneySplit::investTransactionTypeE      m_transactionType;
+  eMyMoney::Split::InvestmentTransactionType      m_transactionType;
   /// \internal d-pointer class.
   class Private;
   /// \internal d-pointer instance.

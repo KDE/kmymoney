@@ -34,8 +34,8 @@
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "transaction.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

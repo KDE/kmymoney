@@ -77,13 +77,13 @@ public:
     payeesModel->setSortLocaleAware(true);
     payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
 
-    createStatusEntry(MyMoneySplit::NotReconciled);
-    createStatusEntry(MyMoneySplit::Cleared);
-    createStatusEntry(MyMoneySplit::Reconciled);
-    // createStatusEntry(MyMoneySplit::Frozen);
+    createStatusEntry(eMyMoney::Split::State::NotReconciled);
+    createStatusEntry(eMyMoney::Split::State::Cleared);
+    createStatusEntry(eMyMoney::Split::State::Reconciled);
+    // createStatusEntry(eMyMoney::Split::State::Frozen);
   }
 
-  void createStatusEntry(MyMoneySplit::reconcileFlagE status);
+  void createStatusEntry(eMyMoney::Split::State status);
   void updateWidgetState();
   bool checkForValidTransaction(bool doUserInteraction = true);
   bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
@@ -110,10 +110,10 @@ public:
   CreditDebitHelper*            amountHelper;
 };
 
-void NewTransactionEditor::Private::createStatusEntry(MyMoneySplit::reconcileFlagE status)
+void NewTransactionEditor::Private::createStatusEntry(eMyMoney::Split::State status)
 {
   QStandardItem* p = new QStandardItem(KMyMoneyUtils::reconcileStateToString(status, true));
-  p->setData(status);
+  p->setData((int)status);
   statusModel.appendRow(p);
 }
 
@@ -644,12 +644,12 @@ void NewTransactionEditor::saveTransaction()
       sp.setValue(d->amountHelper->value());
     }
 
-    if(sp.reconcileFlag() != MyMoneySplit::Reconciled
+    if(sp.reconcileFlag() != eMyMoney::Split::State::Reconciled
     && !sp.reconcileDate().isValid()
-    && d->ui->statusCombo->currentIndex() == MyMoneySplit::Reconciled) {
+    && d->ui->statusCombo->currentIndex() == (int)eMyMoney::Split::State::Reconciled) {
       sp.setReconcileDate(QDate::currentDate());
     }
-    sp.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(d->ui->statusCombo->currentIndex()));
+    sp.setReconcileFlag(static_cast<eMyMoney::Split::State>(d->ui->statusCombo->currentIndex()));
     // sp.setPayeeId(d->ui->payeeEdit->cu)
     if(sp.id().isEmpty()) {
       t.addSplit(sp);

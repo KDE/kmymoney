@@ -114,7 +114,16 @@
 #include "views/konlinejoboutbox.h"
 #include "models/onlinejobmessagesmodel.h"
 
+#include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneyfile.h"
+#include "mymoney/mymoneyinstitution.h"
+#include "mymoney/mymoneyaccount.h"
+#include "mymoney/mymoneyaccountloan.h"
+#include "mymoney/mymoneysecurity.h"
+#include "mymoney/mymoneypayee.h"
+#include "mymoney/mymoneytag.h"
+#include "mymoney/mymoneybudget.h"
+#include "mymoney/mymoneysplit.h"
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
 #include "mymoney/storage/mymoneystoragedump.h"
@@ -2713,6 +2722,11 @@ void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount&
   }
 }
 
+void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account)
+{
+  slotCategoryNew(account, MyMoneyAccount());
+}
+
 void KMyMoneyApp::slotCategoryNew()
 {
   MyMoneyAccount parent;
@@ -3133,15 +3147,14 @@ void KMyMoneyApp::slotAccountDelete()
           // case D - User wants to delete all subcategories, now check all subcats of
           //          d->m_selectedAccount and remember all that cannot be deleted and
           //          must be "reparented"
-          for (QStringList::const_iterator it = d->m_selectedAccount.accountList().begin();
-               it != d->m_selectedAccount.accountList().end(); ++it) {
+          foreach (const auto accountID, d->m_selectedAccount.accountList()) {
             // reparent account if a transaction is assigned
-            if (file->transactionCount(*it) != 0)
-              accountsToReparent.push_back(*it);
-            else if (!file->account(*it).accountList().isEmpty()) {
+            if (file->transactionCount(accountID) != 0)
+              accountsToReparent.push_back(accountID);
+            else if (!file->account(accountID).accountList().isEmpty()) {
               // or if we have at least one sub-account that is used for transactions
-              if (!file->hasOnlyUnusedAccounts(file->account(*it).accountList())) {
-                accountsToReparent.push_back(*it);
+              if (!file->hasOnlyUnusedAccounts(file->account(accountID).accountList())) {
+                accountsToReparent.push_back(accountID);
                 //qDebug() << "subaccount not empty";
               }
             }
@@ -3547,7 +3560,7 @@ void KMyMoneyApp::slotAccountReconcileStart()
                   d->m_selectedTransactions.append(KMyMoneyRegister::SelectedTransaction(transactionSplit.first, transactionSplit.second));
                 }
                 // mark all transactions in d->m_selectedTransactions as 'Cleared'
-                markTransaction(MyMoneySplit::Cleared);
+                markTransaction(eMyMoney::Split::State::Cleared);
                 d->m_selectedTransactions = oldSelection;
               }
             }
@@ -3606,7 +3619,7 @@ void KMyMoneyApp::slotAccountReconcileFinish()
     // walk the list of transactions to figure out the balance(s)
     QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
     for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
-      if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
+      if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
         clearedBalance -= (*it).second.shares();
       }
     }
@@ -3664,13 +3677,13 @@ void KMyMoneyApp::slotAccountReconcileFinish()
       for (it = transactionList.begin(); it != transactionList.end(); ++it) {
         MyMoneySplit sp = (*it).second;
         // skip the ones that are not marked cleared
-        if (sp.reconcileFlag() != MyMoneySplit::Cleared)
+        if (sp.reconcileFlag() != eMyMoney::Split::State::Cleared)
           continue;
 
         // always retrieve a fresh copy of the transaction because we
         // might have changed it already with another split
         MyMoneyTransaction t = file->transaction((*it).first.id());
-        sp.setReconcileFlag(MyMoneySplit::Reconciled);
+        sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
         sp.setReconcileDate(d->m_endingBalanceDlg->statementDate());
         t.modifySplit(sp);
 
@@ -3891,7 +3904,7 @@ void KMyMoneyApp::slotAccountTransactionReport()
     MyMoneyReport report(
       MyMoneyReport::eAccount,
       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
-      MyMoneyTransactionFilter::yearToDate,
+      eMyMoney::TransactionFilter::Date::YearToDate,
       MyMoneyReport::eDetailAll,
       i18n("%1 YTD Account Transactions", d->m_selectedAccount.name()),
       i18n("Generated Report")
@@ -5079,7 +5092,7 @@ void KMyMoneyApp::slotTransactionDuplicate()
         QList<MyMoneySplit>::iterator it_s;
         // wipe out any reconciliation information
         for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-          (*it_s).setReconcileFlag(MyMoneySplit::NotReconciled);
+          (*it_s).setReconcileFlag(eMyMoney::Split::State::NotReconciled);
           (*it_s).setReconcileDate(QDate());
           (*it_s).setBankID(QString());
         }
@@ -5342,25 +5355,25 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
 
 void KMyMoneyApp::slotToggleReconciliationFlag()
 {
-  markTransaction(MyMoneySplit::Unknown);
+  markTransaction(eMyMoney::Split::State::Unknown);
 }
 
 void KMyMoneyApp::slotMarkTransactionCleared()
 {
-  markTransaction(MyMoneySplit::Cleared);
+  markTransaction(eMyMoney::Split::State::Cleared);
 }
 
 void KMyMoneyApp::slotMarkTransactionReconciled()
 {
-  markTransaction(MyMoneySplit::Reconciled);
+  markTransaction(eMyMoney::Split::State::Reconciled);
 }
 
 void KMyMoneyApp::slotMarkTransactionNotReconciled()
 {
-  markTransaction(MyMoneySplit::NotReconciled);
+  markTransaction(eMyMoney::Split::State::NotReconciled);
 }
 
-void KMyMoneyApp::markTransaction(MyMoneySplit::reconcileFlagE flag)
+void KMyMoneyApp::markTransaction(eMyMoney::Split::State flag)
 {
   KMyMoneyRegister::SelectedTransactions list = d->m_selectedTransactions;
   KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
@@ -5378,18 +5391,18 @@ void KMyMoneyApp::markTransaction(MyMoneySplit::reconcileFlagE flag)
       MyMoneyTransaction t = MyMoneyFile::instance()->transaction((*it_t).transaction().id());
       MyMoneySplit sp = t.splitById((*it_t).split().id());
       if (sp.reconcileFlag() != flag) {
-        if (flag == MyMoneySplit::Unknown) {
+        if (flag == eMyMoney::Split::State::Unknown) {
           if (d->m_reconciliationAccount.id().isEmpty()) {
             // in normal mode we cycle through all states
             switch (sp.reconcileFlag()) {
-              case MyMoneySplit::NotReconciled:
-                sp.setReconcileFlag(MyMoneySplit::Cleared);
+              case eMyMoney::Split::State::NotReconciled:
+                sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
                 break;
-              case MyMoneySplit::Cleared:
-                sp.setReconcileFlag(MyMoneySplit::Reconciled);
+              case eMyMoney::Split::State::Cleared:
+                sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
                 break;
-              case MyMoneySplit::Reconciled:
-                sp.setReconcileFlag(MyMoneySplit::NotReconciled);
+              case eMyMoney::Split::State::Reconciled:
+                sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
                 break;
               default:
                 break;
@@ -5397,11 +5410,11 @@ void KMyMoneyApp::markTransaction(MyMoneySplit::reconcileFlagE flag)
           } else {
             // in reconciliation mode we skip the reconciled state
             switch (sp.reconcileFlag()) {
-              case MyMoneySplit::NotReconciled:
-                sp.setReconcileFlag(MyMoneySplit::Cleared);
+              case eMyMoney::Split::State::NotReconciled:
+                sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
                 break;
-              case MyMoneySplit::Cleared:
-                sp.setReconcileFlag(MyMoneySplit::NotReconciled);
+              case eMyMoney::Split::State::Cleared:
+                sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
                 break;
               default:
                 break;
@@ -5442,9 +5455,9 @@ void KMyMoneyApp::slotTransactionsAccept()
           QList<MyMoneySplit>::const_iterator it_s;
           for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
             if ((*it_s).accountId() == d->m_selectedAccount.id()) {
-              if ((*it_s).reconcileFlag() == MyMoneySplit::NotReconciled) {
+              if ((*it_s).reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
                 MyMoneySplit s = (*it_s);
-                s.setReconcileFlag(MyMoneySplit::Cleared);
+                s.setReconcileFlag(eMyMoney::Split::State::Cleared);
                 t.modifySplit(s);
               }
             }
@@ -5510,7 +5523,7 @@ void KMyMoneyApp::slotTransactionCreateSchedule()
     MyMoneySplit s = d->m_selectedTransactions[0].split();
     QString splitId = s.id();
     s.clearId();
-    s.setReconcileFlag(MyMoneySplit::NotReconciled);
+    s.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
     s.setReconcileDate(QDate());
     t.removeSplits();
     t.addSplit(s);
@@ -5520,7 +5533,7 @@ void KMyMoneyApp::slotTransactionCreateSchedule()
       if ((*it_s).id() != splitId) {
         MyMoneySplit s0 = (*it_s);
         s0.clearId();
-        s0.setReconcileFlag(MyMoneySplit::NotReconciled);
+        s0.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
         s0.setReconcileDate(QDate());
         t.addSplit(s0);
       }
@@ -5587,7 +5600,7 @@ void KMyMoneyApp::slotTransactionCopySplits()
               MyMoneySplit sp(split);
               // clear the ID and reconciliation state
               sp.clearId();
-              sp.setReconcileFlag(MyMoneySplit::NotReconciled);
+              sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
               sp.setReconcileDate(QDate());
 
               // in case it is a simple transaction consisting of two splits,

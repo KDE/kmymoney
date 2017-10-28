@@ -18,8 +18,9 @@
 #ifndef TRANSACTIONMATCHER_H
 #define TRANSACTIONMATCHER_H
 
-#include "mymoneytransaction.h"
 #include "mymoneyaccount.h"
+
+class MyMoneyTransaction;
 
 class TransactionMatcher
 {

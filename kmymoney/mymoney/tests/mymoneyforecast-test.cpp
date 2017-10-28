@@ -28,6 +28,10 @@
 #include "mymoneystoragexml.h"
 #include "reportstestcommon.h"
 
+#include "mymoneyinstitution.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneyschedule.h"
 #include "mymoneyenums.h"
 
 using namespace eMyMoney;
@@ -412,7 +416,7 @@ void MyMoneyForecastTest::testScheduleForecast()
   s.setValue(moT2);
   s.setAccountId(a_parent.id());
   s.setBankID("SPID1");
-  s.setReconcileFlag(MyMoneySplit::Reconciled);
+  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t.addSplit(s);
 
   s.setPayeeId("P000001");
@@ -420,7 +424,7 @@ void MyMoneyForecastTest::testScheduleForecast()
   s.setValue(-moT2);
   s.setAccountId(a_cash.id());
   s.setBankID("SPID2");
-  s.setReconcileFlag(MyMoneySplit::Cleared);
+  s.setReconcileFlag(eMyMoney::Split::State::Cleared);
   s.clearId();
   t.addSplit(s);
 
@@ -458,7 +462,7 @@ void MyMoneyForecastTest::testScheduleForecast()
   s3.setValue(moT2);
   s3.setAccountId(a_parent.id());
   s3.setBankID("SPID1");
-  s3.setReconcileFlag(MyMoneySplit::Reconciled);
+  s3.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t3.addSplit(s3);
 
   s3.setPayeeId("P000001");
@@ -466,7 +470,7 @@ void MyMoneyForecastTest::testScheduleForecast()
   s3.setValue(-moT2);
   s3.setAccountId(a_cash.id());
   s3.setBankID("SPID2");
-  s3.setReconcileFlag(MyMoneySplit::Cleared);
+  s3.setReconcileFlag(eMyMoney::Split::State::Cleared);
   s3.clearId();
   t3.addSplit(s3);
 
@@ -505,7 +509,7 @@ void MyMoneyForecastTest::testScheduleForecast()
   s2.setValue(moT1);
   s2.setAccountId(a_parent.id());
   s2.setBankID("SPID1");
-  s2.setReconcileFlag(MyMoneySplit::Reconciled);
+  s2.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t2.addSplit(s2);
 
   s2.setPayeeId("P000001");
@@ -513,7 +517,7 @@ void MyMoneyForecastTest::testScheduleForecast()
   s2.setValue(-moT1);
   s2.setAccountId(a_cash.id());
   s2.setBankID("SPID2");
-  s2.setReconcileFlag(MyMoneySplit::Cleared);
+  s2.setReconcileFlag(eMyMoney::Split::State::Cleared);
   s2.clearId();
   t2.addSplit(s2);
 
@@ -928,7 +932,7 @@ void MyMoneyForecastTest::testCreateBudget()
   s.setValue(moT2);
   s.setAccountId(a_parent.id());
   s.setBankID("SPID1");
-  s.setReconcileFlag(MyMoneySplit::Reconciled);
+  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t10.addSplit(s);
 
   s.setPayeeId("P000001");
@@ -936,7 +940,7 @@ void MyMoneyForecastTest::testCreateBudget()
   s.setValue(-moT2);
   s.setAccountId(a_cash.id());
   s.setBankID("SPID2");
-  s.setReconcileFlag(MyMoneySplit::Cleared);
+  s.setReconcileFlag(eMyMoney::Split::State::Cleared);
   s.clearId();
   t10.addSplit(s);
 

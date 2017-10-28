@@ -26,6 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QString>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -40,12 +42,32 @@
 using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;
 
-MyMoneySecurity::MyMoneySecurity() :
+class MyMoneySecurityPrivate {
+
+public:
+
+  MyMoneySecurityPrivate() :
     m_securityType(eMyMoney::Security::None),
-    m_smallestCashFraction(DEFAULT_CASH_FRACTION),
-    m_smallestAccountFraction(DEFAULT_ACCOUNT_FRACTION),
-    m_pricePrecision(DEFAULT_PRICE_PRECISION),
+    m_smallestCashFraction(MyMoneySecurity::DEFAULT_CASH_FRACTION),
+    m_smallestAccountFraction(MyMoneySecurity::DEFAULT_ACCOUNT_FRACTION),
+    m_pricePrecision(MyMoneySecurity::DEFAULT_PRICE_PRECISION),
     m_roundingMethod(AlkValue::RoundRound)
+  {
+  }
+
+  QString                   m_name;
+  QString                   m_tradingSymbol;
+  QString                   m_tradingMarket;
+  QString                   m_tradingCurrency;
+  eMyMoney::Security        m_securityType;
+  int                       m_smallestCashFraction;
+  int                       m_smallestAccountFraction;
+  int                       m_pricePrecision;
+  AlkValue::RoundingMethod  m_roundingMethod;
+};
+
+MyMoneySecurity::MyMoneySecurity() :
+  d_ptr(new MyMoneySecurityPrivate)
 {
 }
 
@@ -55,35 +77,31 @@ MyMoneySecurity::MyMoneySecurity(const QString& id,
                                  const int smallestCashFraction,
                                  const int smallestAccountFraction,
                                  const int pricePrecision) :
-    MyMoneyObject(id),
-    m_name(name),
-    m_securityType(eMyMoney::Security::Currency),
-    m_smallestCashFraction(smallestCashFraction),
-    m_smallestAccountFraction(smallestAccountFraction),
-    m_pricePrecision(pricePrecision),
-    m_roundingMethod(AlkValue::RoundRound)
+  MyMoneyObject(id),
+  MyMoneyKeyValueContainer(),
+  d_ptr(new MyMoneySecurityPrivate)
 {
+  Q_D(MyMoneySecurity);
+  d->m_name = name;
+  d->m_smallestCashFraction = smallestCashFraction;
+  d->m_pricePrecision = pricePrecision;
+  d->m_securityType = eMyMoney::Security::Currency;
+
   if (symbol.isEmpty())
-    m_tradingSymbol = id;
+    d->m_tradingSymbol = id;
   else
-    m_tradingSymbol = symbol;
+    d->m_tradingSymbol = symbol;
 
   if (smallestAccountFraction)
-    m_smallestAccountFraction = smallestAccountFraction;
+    d->m_smallestAccountFraction = smallestAccountFraction;
   else
-    m_smallestAccountFraction = smallestCashFraction;
-}
-
-MyMoneySecurity::MyMoneySecurity(const QString& id, const MyMoneySecurity& equity) :
-    MyMoneyObject(id)
-{
-  *this = equity;
-  m_id = id;
+    d->m_smallestAccountFraction = smallestCashFraction;
 }
 
 MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
-    MyMoneyObject(node),
-    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
+  MyMoneyObject(node),
+  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
+  d_ptr(new MyMoneySecurityPrivate)
 {
   {
     const auto tag = node.tagName();
@@ -93,98 +111,200 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
       throw MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
   }
 
-  m_name = node.attribute(getAttrName(Attribute::Name));
-  m_tradingSymbol = node.attribute(getAttrName(Attribute::Symbol));
-  m_securityType = static_cast<eMyMoney::Security>(node.attribute(getAttrName(Attribute::Type)).toInt());
-  m_roundingMethod = static_cast<AlkValue::RoundingMethod>(node.attribute(getAttrName(Attribute::RoundingMethod)).toInt());
-  m_smallestAccountFraction = node.attribute(getAttrName(Attribute::SAF)).toUInt();
-  m_pricePrecision = node.attribute(getAttrName(Attribute::PP)).toUInt();
+  Q_D(MyMoneySecurity);
+  d->m_name = node.attribute(getAttrName(Attribute::Name));
+  d->m_tradingSymbol = node.attribute(getAttrName(Attribute::Symbol));
+  d->m_securityType = static_cast<eMyMoney::Security>(node.attribute(getAttrName(Attribute::Type)).toInt());
+  d->m_roundingMethod = static_cast<AlkValue::RoundingMethod>(node.attribute(getAttrName(Attribute::RoundingMethod)).toInt());
+  d->m_smallestAccountFraction = node.attribute(getAttrName(Attribute::SAF)).toUInt();
+  d->m_pricePrecision = node.attribute(getAttrName(Attribute::PP)).toUInt();
 
-  if (m_smallestAccountFraction == 0)
-    m_smallestAccountFraction = 100;
-  if (m_pricePrecision == 0 || m_pricePrecision > 10)
-    m_pricePrecision = 4;
+  if (d->m_smallestAccountFraction == 0)
+    d->m_smallestAccountFraction = 100;
+  if (d->m_pricePrecision == 0 || d->m_pricePrecision > 10)
+    d->m_pricePrecision = 4;
 
   if (isCurrency()) {
-    m_smallestCashFraction = node.attribute(getAttrName(Attribute::SCF)).toUInt();
-    if (m_smallestCashFraction == 0)
-      m_smallestCashFraction = 100;
+    d->m_smallestCashFraction = node.attribute(getAttrName(Attribute::SCF)).toUInt();
+    if (d->m_smallestCashFraction == 0)
+      d->m_smallestCashFraction = 100;
   } else {
-    m_tradingCurrency = node.attribute(getAttrName(Attribute::TradingCurrency));
-    m_tradingMarket = node.attribute(getAttrName(Attribute::TradingMarket));
+    d->m_tradingCurrency = node.attribute(getAttrName(Attribute::TradingCurrency));
+    d->m_tradingMarket = node.attribute(getAttrName(Attribute::TradingMarket));
   }
+}
+
+MyMoneySecurity::MyMoneySecurity(const MyMoneySecurity& other) :
+  MyMoneyObject(other.id()),
+  MyMoneyKeyValueContainer(other),
+  d_ptr(new MyMoneySecurityPrivate(*other.d_func()))
+{
+}
+
+MyMoneySecurity::MyMoneySecurity(const QString& id, const MyMoneySecurity& other) :
+  MyMoneyObject(id),
+  MyMoneyKeyValueContainer(other),
+  d_ptr(new MyMoneySecurityPrivate(*other.d_func()))
+{
 }
 
 MyMoneySecurity::~MyMoneySecurity()
 {
+  Q_D(MyMoneySecurity);
+  delete d;
 }
 
-bool MyMoneySecurity::operator == (const MyMoneySecurity& r) const
+bool MyMoneySecurity::operator == (const MyMoneySecurity& right) const
 {
-  return (m_id == r.m_id)
-         && (m_name == r.m_name)
-         && (m_tradingSymbol == r.m_tradingSymbol)
-         && (m_tradingMarket == r.m_tradingMarket)
-         && (m_roundingMethod == r.m_roundingMethod)
-         && (m_tradingSymbol == r.m_tradingSymbol)
-         && (m_tradingCurrency == r.m_tradingCurrency)
-         && (m_securityType == r.m_securityType)
-         && (m_smallestAccountFraction == r.m_smallestAccountFraction)
-         && (m_smallestCashFraction == r.m_smallestCashFraction)
-         && (m_pricePrecision == r.m_pricePrecision)
-         && this->MyMoneyKeyValueContainer::operator == (r);
+  Q_D(const MyMoneySecurity);
+  auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
+  return (m_id == right.m_id)
+         && (d->m_name == d2->m_name)
+         && (d->m_tradingSymbol == d2->m_tradingSymbol)
+         && (d->m_tradingMarket == d2->m_tradingMarket)
+         && (d->m_roundingMethod == d2->m_roundingMethod)
+         && (d->m_tradingSymbol == d2->m_tradingSymbol)
+         && (d->m_tradingCurrency == d2->m_tradingCurrency)
+         && (d->m_securityType == d2->m_securityType)
+         && (d->m_smallestAccountFraction == d2->m_smallestAccountFraction)
+         && (d->m_smallestCashFraction == d2->m_smallestCashFraction)
+         && (d->m_pricePrecision == d2->m_pricePrecision)
+         && this->MyMoneyKeyValueContainer::operator == (right);
 }
 
 bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const
 {
-  if (m_securityType == right.m_securityType)
-    return m_name < right.m_name;
-  return m_securityType < right.m_securityType;
+  Q_D(const MyMoneySecurity);
+  auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
+  if (d->m_securityType == d2->m_securityType)
+    return d->m_name < d2->m_name;
+  return d->m_securityType < d2->m_securityType;
 }
 
-const QString MyMoneySecurity::name() const
+QString MyMoneySecurity::name() const
 {
-  return m_name;
+  Q_D(const MyMoneySecurity);
+  return d->m_name;
 }
 
 void MyMoneySecurity::setName(const QString& str)
 {
-  m_name = str;
+  Q_D(MyMoneySecurity);
+  d->m_name = str;
 }
 
-const QString MyMoneySecurity::tradingSymbol() const
+QString MyMoneySecurity::tradingSymbol() const
 {
-  return m_tradingSymbol;
+  Q_D(const MyMoneySecurity);
+  return d->m_tradingSymbol;
 }
 
 void MyMoneySecurity::setTradingSymbol(const QString& str)
 {
-  m_tradingSymbol = str;
+  Q_D(MyMoneySecurity);
+  d->m_tradingSymbol = str;
 }
 
-const QString MyMoneySecurity::tradingMarket() const
+QString MyMoneySecurity::tradingMarket() const
 {
-  return m_tradingMarket;
+  Q_D(const MyMoneySecurity);
+  return d->m_tradingMarket;
 }
 
 void MyMoneySecurity::setTradingMarket(const QString& str)
 {
-  m_tradingMarket = str;
+  Q_D(MyMoneySecurity);
+  d->m_tradingMarket = str;
 }
 
-const QString MyMoneySecurity::tradingCurrency() const
+QString MyMoneySecurity::tradingCurrency() const
 {
-  return m_tradingCurrency;
+  Q_D(const MyMoneySecurity);
+  return d->m_tradingCurrency;
 }
 
 void MyMoneySecurity::setTradingCurrency(const QString& str)
 {
-  m_tradingCurrency = str;
+  Q_D(MyMoneySecurity);
+  d->m_tradingCurrency = str;
+}
+
+bool MyMoneySecurity::operator != (const MyMoneySecurity& r) const
+{
+  Q_D(const MyMoneySecurity);
+  return !(*this == r);
+}
+
+eMyMoney::Security MyMoneySecurity::securityType() const
+{
+  Q_D(const MyMoneySecurity);
+  return d->m_securityType;
+}
+
+void MyMoneySecurity::setSecurityType(const eMyMoney::Security s)
+{
+  Q_D(MyMoneySecurity);
+  d->m_securityType = s;
+}
+
+bool MyMoneySecurity::isCurrency() const
+{
+  Q_D(const MyMoneySecurity);
+  return d->m_securityType == eMyMoney::Security::Currency;
+}
+
+AlkValue::RoundingMethod MyMoneySecurity::roundingMethod() const
+{
+  Q_D(const MyMoneySecurity);
+  return d->m_roundingMethod;
+}
+
+void MyMoneySecurity::setRoundingMethod(const AlkValue::RoundingMethod rnd)
+{
+  Q_D(MyMoneySecurity);
+  d->m_roundingMethod = rnd;
+}
+
+int MyMoneySecurity::smallestAccountFraction() const
+{
+  Q_D(const MyMoneySecurity);
+  return d->m_smallestAccountFraction;
+}
+
+void MyMoneySecurity::setSmallestAccountFraction(const int sf)
+{
+  Q_D(MyMoneySecurity);
+  d->m_smallestAccountFraction = sf;
+}
+
+int MyMoneySecurity::smallestCashFraction() const
+{
+  Q_D(const MyMoneySecurity);
+  return d->m_smallestCashFraction;
+}
+
+void MyMoneySecurity::setSmallestCashFraction(const int cf)
+{
+  Q_D(MyMoneySecurity);
+  d->m_smallestCashFraction = cf;
+}
+
+int MyMoneySecurity::pricePrecision() const
+{
+  Q_D(const MyMoneySecurity);
+  return d->m_pricePrecision;
+}
+
+void MyMoneySecurity::setPricePrecision(const int pp)
+{
+  Q_D(MyMoneySecurity);
+  d->m_pricePrecision = pp;
 }
 
 bool MyMoneySecurity::hasReferenceTo(const QString& id) const
 {
-  return (id == m_tradingCurrency);
+  Q_D(const MyMoneySecurity);
+  return (id == d->m_tradingCurrency);
 }
 
 void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) const
@@ -197,17 +317,18 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
 
   writeBaseXML(document, el);
 
-  el.setAttribute(getAttrName(Attribute::Name), m_name);
-  el.setAttribute(getAttrName(Attribute::Symbol),m_tradingSymbol);
-  el.setAttribute(getAttrName(Attribute::Type), static_cast<int>(m_securityType));
-  el.setAttribute(getAttrName(Attribute::RoundingMethod), static_cast<int>(m_roundingMethod));
-  el.setAttribute(getAttrName(Attribute::SAF), m_smallestAccountFraction);
-  el.setAttribute(getAttrName(Attribute::PP), m_pricePrecision);
+  Q_D(const MyMoneySecurity);
+  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
+  el.setAttribute(getAttrName(Attribute::Symbol),d->m_tradingSymbol);
+  el.setAttribute(getAttrName(Attribute::Type), static_cast<int>(d->m_securityType));
+  el.setAttribute(getAttrName(Attribute::RoundingMethod), static_cast<int>(d->m_roundingMethod));
+  el.setAttribute(getAttrName(Attribute::SAF), d->m_smallestAccountFraction);
+  el.setAttribute(getAttrName(Attribute::PP), d->m_pricePrecision);
   if (isCurrency())
-    el.setAttribute(getAttrName(Attribute::SCF), m_smallestCashFraction);
+    el.setAttribute(getAttrName(Attribute::SCF), d->m_smallestCashFraction);
   else {
-    el.setAttribute(getAttrName(Attribute::TradingCurrency), m_tradingCurrency);
-    el.setAttribute(getAttrName(Attribute::TradingMarket), m_tradingMarket);
+    el.setAttribute(getAttrName(Attribute::TradingCurrency), d->m_tradingCurrency);
+    el.setAttribute(getAttrName(Attribute::TradingMarket), d->m_tradingMarket);
   }
 
   //Add in Key-Value Pairs for securities.

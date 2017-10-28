@@ -27,15 +27,21 @@
 // QT Includes
 
 #include <QString>
-#include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneypayee.h"
-#include "mymoneyschedule.h"
-#include "mymoneyprice.h"
+#include "mymoneyenums.h"
+
+class QUrl;
+
+template <typename T> class QList;
+
+class MyMoneyPrice;
+typedef QPair<QString, QString> MyMoneySecurityPair;
+typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
+typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
 /**
   * @author Thomas Baumgart
@@ -44,13 +50,17 @@
 /**
   * This class represents the interface to serialize a MyMoneyStorage object
   */
+class MyMoneyAccount;
 class MyMoneyBudget;
 class MyMoneyCostCenter;
 class MyMoneyInstitution;
 class MyMoneyReport;
 class MyMoneySecurity;
+class MyMoneyPayee;
+class MyMoneySchedule;
 class MyMoneyStorageSql;
 class MyMoneyTag;
+class MyMoneyPrice;
 class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
@@ -178,31 +188,31 @@ public:
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  virtual const MyMoneyAccount liability() const = 0;
+  virtual MyMoneyAccount liability() const = 0;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  virtual const MyMoneyAccount asset() const = 0;
+  virtual MyMoneyAccount asset() const = 0;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  virtual const MyMoneyAccount expense() const = 0;
+  virtual MyMoneyAccount expense() const = 0;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  virtual const MyMoneyAccount income() const = 0;
+  virtual MyMoneyAccount income() const = 0;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  virtual const MyMoneyAccount equity() const = 0;
+  virtual MyMoneyAccount equity() const = 0;
 
   /**
     * This method is used to create a new account

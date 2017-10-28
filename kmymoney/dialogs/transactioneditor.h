@@ -22,22 +22,24 @@
 // QT Includes
 
 #include <QObject>
-#include <QWidget>
-#include <QList>
-#include <QEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyschedule.h"
-#include "transactioneditorcontainer.h"
 #include "register.h"
 
+class QString;
+class QWidget;
+class QEvent;
+
+class TransactionEditorContainer;
 class KMyMoneyCategory;
+class MyMoneySchedule;
+
+template <typename T> class QList;
 
 class TransactionEditor : public QObject
 {

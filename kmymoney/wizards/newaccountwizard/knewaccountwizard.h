@@ -25,14 +25,14 @@
 // Project Includes
 
 #include "kmymoneywizard.h"
-#include "mymoneyaccount.h"
+#include "mymoneyaccountloan.h"
 #include "mymoneymoney.h"
 #include "mymoneyschedule.h"
-#include "mymoneytransaction.h"
 
 class MyMoneyPrice;
 class MyMoneySecurity;
 class MyMoneyInstitution;
+class MyMoneyTransaction;
 
 /**
   * @author Thomas Baumgart

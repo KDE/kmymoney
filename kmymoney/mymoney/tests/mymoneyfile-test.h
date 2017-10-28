@@ -23,6 +23,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFileTest;
 
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "storage/mymoneyseqaccessmgr.h"
 
 class MyMoneyFileTest : public QObject

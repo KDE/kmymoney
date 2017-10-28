@@ -18,6 +18,7 @@
  */
 
 #include "kmymoneyutils-test.h"
+#include "mymoneyaccount.h"
 
 #include <QtTest/QtTest>
 

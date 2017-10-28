@@ -140,7 +140,7 @@ protected:
 protected slots:
   void okClicked();
   void slotSelectionChanged(const QItemSelection &current, const QItemSelection &previous);
-  void slotAccountTypeChanged(const QString& type);
+  void slotAccountTypeChanged(int index);
   void slotVatChanged(bool);
   void slotVatAssignmentChanged(bool);
   void slotNewClicked();

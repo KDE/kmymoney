@@ -34,8 +34,6 @@ class QSaveFile;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-
 /**
   * @author Thomas Baumgart
   */
@@ -46,6 +44,7 @@ class QSaveFile;
   * the current engine. Also, it can save the current account structure
   * of the engine to an XML formatted template file.
   */
+class MyMoneyAccount;
 class MyMoneyTemplate
 {
 public:

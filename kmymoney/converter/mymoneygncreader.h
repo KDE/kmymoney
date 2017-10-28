@@ -154,11 +154,6 @@ allow us to test the structure, if not the data content, of the file.
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-
 #ifndef _GNCFILEANON
 #include "storage/imymoneystorageformat.h"
 #endif // _GNCFILEANON
@@ -167,6 +162,11 @@ allow us to test the structure, if not the data content, of the file.
 #define VERSION_0_60_XML  0x10000010    // Version 0.5 file version info
 #define VERSION_0_61_XML  0x10000011    // use 8 bytes for MyMoneyMoney objects
 #define GNUCASH_ID_KEY "GNUCASH_ID"
+
+class MyMoneyAccount;
+class MyMoneySecurity;
+class MyMoneyTransaction;
+class MyMoneySplit;
 
 typedef QMap<QString, QString> map_accountIds;
 typedef map_accountIds::iterator map_accountIds_iter;

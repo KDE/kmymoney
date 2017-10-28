@@ -22,9 +22,13 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include "mymoneymoney.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneyutils.h"
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
+#include "mymoneyexception.h"
 
 TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
     m_account(acc)
@@ -97,8 +101,8 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   //
 
   // mark the split as cleared if it does not have a reconciliation information yet
-  if (sm.reconcileFlag() == MyMoneySplit::NotReconciled) {
-    sm.setReconcileFlag(MyMoneySplit::Cleared);
+  if (sm.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
+    sm.setReconcileFlag(eMyMoney::Split::State::Cleared);
   }
 
   // if we don't have a payee assigned to the manually entered transaction

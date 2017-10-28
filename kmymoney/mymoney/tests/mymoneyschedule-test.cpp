@@ -25,6 +25,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyschedule.h"
 #include "mymoneyfile.h"
+#include "mymoneytransaction.h"
 #include "storage/mymoneyseqaccessmgr.h"
 
 QTEST_GUILESS_MAIN(MyMoneyScheduleTest)
@@ -36,15 +37,15 @@ void MyMoneyScheduleTest::testEmptyConstructor()
   MyMoneySchedule s;
 
   QCOMPARE(s.id().isEmpty(), true);
-  QCOMPARE(s.m_occurrence, Schedule::Occurrence::Any);
-  QCOMPARE(s.m_type, Schedule::Type::Any);
-  QCOMPARE(s.m_paymentType, Schedule::PaymentType::Any);
-  QCOMPARE(s.m_fixed, false);
-  QCOMPARE(!s.m_startDate.isValid(), true);
-  QCOMPARE(!s.m_endDate.isValid(), true);
-  QCOMPARE(!s.m_lastPayment.isValid(), true);
-  QCOMPARE(s.m_autoEnter, false);
-  QCOMPARE(s.m_name.isEmpty(), true);
+  QCOMPARE(s.occurrence(), Schedule::Occurrence::Any);
+  QCOMPARE(s.type(), Schedule::Type::Any);
+  QCOMPARE(s.paymentType(), Schedule::PaymentType::Any);
+  QCOMPARE(s.isFinished(), false);
+  QCOMPARE(!s.startDate().isValid(), true);
+  QCOMPARE(!s.endDate().isValid(), true);
+  QCOMPARE(!s.lastPayment().isValid(), true);
+  QCOMPARE(s.autoEnter(), false);
+  QCOMPARE(s.name().isEmpty(), true);
   QCOMPARE(s.willEnd(), false);
 }
 
@@ -68,8 +69,8 @@ void MyMoneyScheduleTest::testConstructor()
   QCOMPARE(s.isFixed(), true);
   QCOMPARE(s.autoEnter(), true);
   QCOMPARE(s.name(), QLatin1String("A Name"));
-  QCOMPARE(!s.m_endDate.isValid(), true);
-  QCOMPARE(!s.m_lastPayment.isValid(), true);
+  QCOMPARE(!s.endDate().isValid(), true);
+  QCOMPARE(!s.lastPayment().isValid(), true);
 }
 
 void MyMoneyScheduleTest::testSetFunctions()
@@ -731,7 +732,7 @@ void MyMoneyScheduleTest::testWriteXML()
   s.setValue(MyMoneyMoney(96379, 100));
   s.setAccountId("A000076");
   s.setBankID("SPID1");
-  s.setReconcileFlag(MyMoneySplit::Reconciled);
+  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t.addSplit(s);
 
   s.setPayeeId("P000001");
@@ -739,7 +740,7 @@ void MyMoneyScheduleTest::testWriteXML()
   s.setValue(MyMoneyMoney(-96379, 100));
   s.setAccountId("A000276");
   s.setBankID("SPID2");
-  s.setReconcileFlag(MyMoneySplit::Cleared);
+  s.setReconcileFlag(eMyMoney::Split::State::Cleared);
   s.clearId();
   t.addSplit(s);
 
@@ -1735,22 +1736,20 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
 
 void MyMoneyScheduleTest::testElementNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneySchedule::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneySchedule::getElName(static_cast<MyMoneySchedule::elNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneySchedule::Element::Payment; i <= (int)MyMoneySchedule::Element::Payments; ++i) {
+    auto isEmpty = MyMoneySchedule::getElName(static_cast<MyMoneySchedule::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
 }
 
 void MyMoneyScheduleTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneySchedule::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneySchedule::getAttrName(static_cast<MyMoneySchedule::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)MyMoneySchedule::Attribute::Name; i < (int)MyMoneySchedule::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneySchedule::getAttrName(static_cast<MyMoneySchedule::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

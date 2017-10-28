@@ -17,7 +17,9 @@
 #include "existingtransactionmatchfinder.h"
 
 #include <QDebug>
+#include <QDate>
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneytransactionfilter.h"
 
