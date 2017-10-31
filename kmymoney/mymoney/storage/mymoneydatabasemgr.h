@@ -51,27 +51,27 @@ public:
   ~MyMoneyDatabaseMgr();
 
   // general get functions
-  virtual const MyMoneyPayee& user() const;
-  virtual const QDate creationDate() const;
-  virtual const QDate lastModificationDate() const;
-  virtual unsigned int currentFixVersion() const;
-  virtual unsigned int fileFixVersion() const;
+  virtual const MyMoneyPayee& user() const override;
+  virtual const QDate creationDate() const override;
+  virtual const QDate lastModificationDate() const override;
+  virtual unsigned int currentFixVersion() const override;
+  virtual unsigned int fileFixVersion() const override;
 
   // general set functions
-  virtual void setUser(const MyMoneyPayee& user);
-  virtual void setFileFixVersion(const unsigned int v);
+  virtual void setUser(const MyMoneyPayee& user) override;
+  virtual void setFileFixVersion(const unsigned int v) override;
 
   // methods provided by MyMoneyKeyValueContainer
-  virtual void setValue(const QString& key, const QString& value);
-  virtual const QString value(const QString& key) const;
-  virtual void deletePair(const QString& key);
+  virtual void setValue(const QString& key, const QString& value) override;
+  virtual const QString value(const QString& key) const override;
+  virtual void deletePair(const QString& key) override;
 
   /**
     * This method is used to duplicate an IMyMoneyStorage object and return
     * a pointer to the newly created copy. The caller of this method is the
     * new owner of the object and must destroy it.
     */
-  virtual MyMoneyDatabaseMgr const * duplicate();
+  virtual MyMoneyDatabaseMgr const * duplicate() override;
 
   /**
     * This method is used to create a new account
@@ -80,7 +80,7 @@ public:
     *
     * @param account MyMoneyAccount filled with data
     */
-  virtual void addAccount(MyMoneyAccount& account);
+  virtual void addAccount(MyMoneyAccount& account) override;
 
   /**
     * This method is used to add one account as sub-ordinate to another
@@ -92,7 +92,7 @@ public:
     * @param parent parent account the account should be added to
     * @param account the account to be added
     */
-  virtual void addAccount(MyMoneyAccount& parent, MyMoneyAccount& account);
+  virtual void addAccount(MyMoneyAccount& parent, MyMoneyAccount& account) override;
 
   /**
     * This method is used to create a new payee
@@ -101,7 +101,7 @@ public:
     *
     * @param payee MyMoneyPayee reference to payee information
     */
-  virtual void addPayee(MyMoneyPayee& payee);
+  virtual void addPayee(MyMoneyPayee& payee) override;
 
   /**
     * This method is used to retrieve information about a payee
@@ -111,7 +111,7 @@ public:
     *
     * @return MyMoneyPayee object of payee
     */
-  virtual const MyMoneyPayee payee(const QString& id) const;
+  virtual const MyMoneyPayee payee(const QString& id) const override;
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -122,7 +122,7 @@ public:
     *
     * @return MyMoneyPayee object of payee
     */
-  virtual const MyMoneyPayee payeeByName(const QString& payee) const;
+  virtual const MyMoneyPayee payeeByName(const QString& payee) const override;
 
   /**
     * This method is used to modify an existing payee
@@ -131,7 +131,7 @@ public:
     *
     * @param payee MyMoneyPayee reference to payee information
     */
-  virtual void modifyPayee(const MyMoneyPayee& payee);
+  virtual void modifyPayee(const MyMoneyPayee& payee) override;
 
   /**
     * This method is used to remove an existing payee
@@ -140,7 +140,7 @@ public:
     *
     * @param payee MyMoneyPayee reference to payee information
     */
-  virtual void removePayee(const MyMoneyPayee& payee);
+  virtual void removePayee(const MyMoneyPayee& payee) override;
 
   /**
     * This method returns a list of the payees
@@ -148,7 +148,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  virtual const QList<MyMoneyPayee> payeeList() const;
+  virtual const QList<MyMoneyPayee> payeeList() const override;
 
   /**
     * This method is used to create a new tag
@@ -157,7 +157,7 @@ public:
     *
     * @param tag MyMoneyTag reference to tag information
     */
-  virtual void addTag(MyMoneyTag& tag);
+  virtual void addTag(MyMoneyTag& tag) override;
 
   /**
     * This method is used to retrieve information about a tag
@@ -167,7 +167,7 @@ public:
     *
     * @return MyMoneyTag object of tag
     */
-  virtual const MyMoneyTag tag(const QString& id) const;
+  virtual const MyMoneyTag tag(const QString& id) const override;
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -178,7 +178,7 @@ public:
     *
     * @return MyMoneyTag object of tag
     */
-  virtual const MyMoneyTag tagByName(const QString& tag) const;
+  virtual const MyMoneyTag tagByName(const QString& tag) const override;
 
   /**
     * This method is used to modify an existing tag
@@ -187,7 +187,7 @@ public:
     *
     * @param tag MyMoneyTag reference to tag information
     */
-  virtual void modifyTag(const MyMoneyTag& tag);
+  virtual void modifyTag(const MyMoneyTag& tag) override;
 
   /**
     * This method is used to remove an existing tag
@@ -196,7 +196,7 @@ public:
     *
     * @param tag MyMoneyTag reference to tag information
     */
-  virtual void removeTag(const MyMoneyTag& tag);
+  virtual void removeTag(const MyMoneyTag& tag) override;
 
   /**
     * This method returns a list of the tags
@@ -204,14 +204,14 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  virtual const QList<MyMoneyTag> tagList() const;
+  virtual const QList<MyMoneyTag> tagList() const override;
 
   /** @todo implement all onlineJob related functions @{ */
-  void modifyOnlineJob(const onlineJob& job);
-  void addOnlineJob(onlineJob& job);
-  const onlineJob getOnlineJob(const QString &jobId) const;
-  const QList<onlineJob> onlineJobList() const;
-  void removeOnlineJob(const onlineJob&);
+  void modifyOnlineJob(const onlineJob& job) override;
+  void addOnlineJob(onlineJob& job) override;
+  const onlineJob getOnlineJob(const QString &jobId) const override;
+  const QList<onlineJob> onlineJobList() const override;
+  void removeOnlineJob(const onlineJob&) override;
   /** @} */
 
   /**
@@ -223,7 +223,7 @@ public:
     * @return reference to MyMoneyAccount object. An exception is thrown
     *         if the id is unknown
     */
-  virtual const MyMoneyAccount account(const QString& id) const;
+  virtual const MyMoneyAccount account(const QString& id) const override;
 
   /**
     * This method is used to check whether a given
@@ -234,7 +234,7 @@ public:
     * @param id account id
     * @return true if account-id is one of the standards, false otherwise
     */
-  virtual bool isStandardAccount(const QString& id) const;
+  virtual bool isStandardAccount(const QString& id) const override;
 
   /**
     * This method is used to set the name for the specified standard account
@@ -245,7 +245,7 @@ public:
     * @param name QString reference to the name to be set
     *
     */
-  virtual void setAccountName(const QString& id, const QString& name);
+  virtual void setAccountName(const QString& id, const QString& name) override;
 
   /**
     * Adds an institution to the storage. A
@@ -257,7 +257,7 @@ public:
     * @param institution The complete institution information in a
     *        MyMoneyInstitution object
     */
-  virtual void addInstitution(MyMoneyInstitution& institution);
+  virtual void addInstitution(MyMoneyInstitution& institution) override;
 
   /**
     * Adds a transaction to the file-global transaction pool. A respective
@@ -271,7 +271,7 @@ public:
     *        referenced in the splits are not updated. This is used for
     *        bulk loading a lot of transactions but not during normal operation
     */
-  virtual void addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate = false);
+  virtual void addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate = false) override;
 
   /**
     * This method is used to determince, if the account with the
@@ -282,7 +282,7 @@ public:
     * @param id id of the account to be checked for
     * @return true if account is referenced, false otherwise
     */
-  virtual bool hasActiveSplits(const QString& id) const;
+  virtual bool hasActiveSplits(const QString& id) const override;
 
   /**
     * This method is used to return the actual balance of an account
@@ -295,7 +295,7 @@ public:
     * @param date return balance for specific date
     * @return balance of the account as MyMoneyMoney object
     */
-  virtual const MyMoneyMoney balance(const QString& id, const QDate& date) const;
+  virtual const MyMoneyMoney balance(const QString& id, const QDate& date) const override;
 
   /**
     * This method is used to return the actual balance of an account
@@ -308,7 +308,7 @@ public:
     * @param date return balance for specific date
     * @return balance of the account as MyMoneyMoney object
     */
-  virtual const MyMoneyMoney totalBalance(const QString& id, const QDate& date) const;
+  virtual const MyMoneyMoney totalBalance(const QString& id, const QDate& date) const override;
 
   /**
     * Returns the institution of a given ID
@@ -317,7 +317,7 @@ public:
     * @return MyMoneyInstitution object filled with data. If the institution
     *         could not be found, an exception will be thrown
     */
-  virtual const MyMoneyInstitution institution(const QString& id) const;
+  virtual const MyMoneyInstitution institution(const QString& id) const override;
 
   /**
     * This method returns an indicator if the storage object has been
@@ -325,7 +325,7 @@ public:
     *
     * @return true if changed, false if not (for a database, always false).
     */
-  virtual bool dirty() const;
+  virtual bool dirty() const override;
 
   /**
     * This method can be used by an external object to force the
@@ -336,7 +336,7 @@ public:
     * Since the database is synchronized with the application, this method
     * is a no-op.
     */
-  virtual void setDirty();
+  virtual void setDirty() override;
 
   /**
     * This method returns the number of accounts currently known to this storage
@@ -344,7 +344,7 @@ public:
     *
     * @return number of accounts currently known inside a MyMoneyFile object
     */
-  virtual unsigned int accountCount() const;
+  virtual unsigned int accountCount() const override;
 
   /**
     * This method returns a list of the institutions
@@ -353,7 +353,7 @@ public:
     * @return QList<MyMoneyInstitution> containing the
     *         institution information
     */
-  virtual const QList<MyMoneyInstitution> institutionList() const;
+  virtual const QList<MyMoneyInstitution> institutionList() const override;
 
   /**
     * Modifies an already existing account in the file global account pool.
@@ -363,7 +363,7 @@ public:
     * @param account reference to the new account information
     * @param skipCheck allows to skip the builtin consistency checks
     */
-  virtual void modifyAccount(const MyMoneyAccount& account, const bool skipCheck = false);
+  virtual void modifyAccount(const MyMoneyAccount& account, const bool skipCheck = false) override;
 
   /**
     * Modifies an already existing institution in the file global
@@ -373,7 +373,7 @@ public:
     *
     * @param institution The complete new institution information
     */
-  virtual void modifyInstitution(const MyMoneyInstitution& institution);
+  virtual void modifyInstitution(const MyMoneyInstitution& institution) override;
 
   /**
     * This method is used to update a specific transaction in the
@@ -383,7 +383,7 @@ public:
     *
     * @param transaction reference to transaction to be changed
     */
-  virtual void modifyTransaction(const MyMoneyTransaction& transaction);
+  virtual void modifyTransaction(const MyMoneyTransaction& transaction) override;
 
   /**
     * This method re-parents an existing account
@@ -393,7 +393,7 @@ public:
     * @param account MyMoneyAccount reference to account to be re-parented
     * @param parent  MyMoneyAccount reference to new parent account
     */
-  virtual void reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent);
+  virtual void reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent) override;
 
   /**
     * This method is used to remove a transaction from the transaction
@@ -403,7 +403,7 @@ public:
     *
     * @param transaction const reference to transaction to be deleted
     */
-  virtual void removeTransaction(const MyMoneyTransaction& transaction);
+  virtual void removeTransaction(const MyMoneyTransaction& transaction) override;
 
   /**
     * This method returns the number of transactions currently known to file
@@ -416,7 +416,7 @@ public:
     *
     * @return number of transactions in journal/account
     */
-  virtual unsigned int transactionCount(const QString& account = QString()) const;
+  virtual unsigned int transactionCount(const QString& account = QString()) const override;
 
   /**
     * This method returns a QMap filled with the number of transactions
@@ -427,7 +427,7 @@ public:
     *
     * @return QMap with numbers of transactions per account
     */
-  virtual const QMap<QString, unsigned long> transactionCountMap() const;
+  virtual const QMap<QString, unsigned long> transactionCountMap() const override;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -442,7 +442,7 @@ public:
     *
     * @return set of transactions in form of a QList<MyMoneyTransaction>
     */
-  virtual const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
+  virtual const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const override;
 
   /**
     * This method is the same as above, but instead of a return value, a
@@ -452,7 +452,7 @@ public:
     *             be cleared before filling with results.
     * @param filter MyMoneyTransactionFilter object with the match criteria
     */
-  virtual void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
+  virtual void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const override;
 
   /**
     * This method is the same as above, but the list contains pairs of
@@ -462,7 +462,7 @@ public:
     *             be cleared before filling with results.
     * @param filter MyMoneyTransactionFilter object with the match criteria
     */
-  virtual void transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+  virtual void transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const override;
 
   /**
     * Deletes an existing account from the file global account pool
@@ -473,7 +473,7 @@ public:
     *
     * @param account reference to the account to be deleted.
     */
-  virtual void removeAccount(const MyMoneyAccount& account);
+  virtual void removeAccount(const MyMoneyAccount& account) override;
 
   /**
     * Deletes an existing institution from the file global institution pool
@@ -484,7 +484,7 @@ public:
     *
     * @param institution institution to be deleted.
     */
-  virtual void removeInstitution(const MyMoneyInstitution& institution);
+  virtual void removeInstitution(const MyMoneyInstitution& institution) override;
 
   /**
     * This method is used to extract a transaction from the file global
@@ -494,7 +494,7 @@ public:
     * @param id id of transaction as QString.
     * @return the requested transaction
     */
-  virtual const MyMoneyTransaction transaction(const QString& id) const;
+  virtual const MyMoneyTransaction transaction(const QString& id) const override;
 
   /**
     * This method is used to extract a transaction from the file global
@@ -504,7 +504,7 @@ public:
     * @param idx number of transaction in this account
     * @return MyMoneyTransaction object
     */
-  virtual const MyMoneyTransaction transaction(const QString& account, const int idx) const;
+  virtual const MyMoneyTransaction transaction(const QString& account, const int idx) const override;
 
   /**
     * This method returns the number of institutions currently known to file
@@ -512,7 +512,7 @@ public:
     *
     * @return number of institutions known to file
     */
-  virtual unsigned int institutionCount() const;
+  virtual unsigned int institutionCount() const override;
 
   /**
     * This method returns a list of accounts inside the storage object.
@@ -521,37 +521,37 @@ public:
     *
     * @note The standard accounts will not be returned
     */
-  virtual void accountList(QList<MyMoneyAccount>& list) const;
+  virtual void accountList(QList<MyMoneyAccount>& list) const override;
 
   /**
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  virtual const MyMoneyAccount liability() const;
+  virtual const MyMoneyAccount liability() const override;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  virtual const MyMoneyAccount asset() const;
+  virtual const MyMoneyAccount asset() const override;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  virtual const MyMoneyAccount expense() const;
+  virtual const MyMoneyAccount expense() const override;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  virtual const MyMoneyAccount income() const;
+  virtual const MyMoneyAccount income() const override;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  virtual const MyMoneyAccount equity() const;
+  virtual const MyMoneyAccount equity() const override;
 
   /**
     * This method is used to create a new security object.  The ID will be
@@ -562,7 +562,7 @@ public:
     *
     * @param security MyMoneySecurity filled with data
     */
-  virtual void addSecurity(MyMoneySecurity& security);
+  virtual void addSecurity(MyMoneySecurity& security) override;
 
   /**
     * This method is used to modify an existing MyMoneySecurity
@@ -572,7 +572,7 @@ public:
     *
     * @param security reference to the MyMoneySecurity object to be updated
     */
-  virtual void modifySecurity(const MyMoneySecurity& security);
+  virtual void modifySecurity(const MyMoneySecurity& security) override;
 
   /**
     * This method is used to remove an existing MyMoneySecurity object
@@ -582,7 +582,7 @@ public:
     *
     * @param security reference to the MyMoneySecurity object to be removed
     */
-  virtual void removeSecurity(const MyMoneySecurity& security);
+  virtual void removeSecurity(const MyMoneySecurity& security) override;
 
   /**
     * This method is used to retrieve a single MyMoneySecurity object.
@@ -593,7 +593,7 @@ public:
     * @param id QString containing the id of the MyMoneySecurity object
     * @return MyMoneySecurity object
     */
-  virtual const MyMoneySecurity security(const QString& id) const;
+  virtual const MyMoneySecurity security(const QString& id) const override;
 
   /**
     * This method returns a list of the security objects
@@ -601,18 +601,18 @@ public:
     *
     * @return QList<MyMoneySecurity> containing objects
     */
-  virtual const QList<MyMoneySecurity> securityList() const;
+  virtual const QList<MyMoneySecurity> securityList() const override;
 
-  virtual void addPrice(const MyMoneyPrice& price);
-  virtual void removePrice(const MyMoneyPrice& price);
-  virtual MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const;
+  virtual void addPrice(const MyMoneyPrice& price) override;
+  virtual void removePrice(const MyMoneyPrice& price) override;
+  virtual MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const override;
 
   /**
     * This method returns a list of all prices.
     *
     * @return MyMoneyPriceList of all MyMoneyPrice objects.
     */
-  virtual const MyMoneyPriceList priceList() const;
+  virtual const MyMoneyPriceList priceList() const override;
 
   /**
     * This method is used to add a scheduled transaction to the engine.
@@ -624,7 +624,7 @@ public:
     *
     * @param sched reference to the MyMoneySchedule object
     */
-  virtual void addSchedule(MyMoneySchedule& sched);
+  virtual void addSchedule(MyMoneySchedule& sched) override;
 
   /**
     * This method is used to modify an existing MyMoneySchedule
@@ -634,7 +634,7 @@ public:
     *
     * @param sched const reference to the MyMoneySchedule object to be updated
     */
-  virtual void modifySchedule(const MyMoneySchedule& sched);
+  virtual void modifySchedule(const MyMoneySchedule& sched) override;
 
   /**
     * This method is used to remove an existing MyMoneySchedule object
@@ -644,7 +644,7 @@ public:
     *
     * @param sched const reference to the MyMoneySchedule object to be updated
     */
-  virtual void removeSchedule(const MyMoneySchedule& sched);
+  virtual void removeSchedule(const MyMoneySchedule& sched) override;
 
   /**
     * This method is used to retrieve a single MyMoneySchedule object.
@@ -655,7 +655,7 @@ public:
     * @param id QString containing the id of the MyMoneySchedule object
     * @return MyMoneySchedule object
     */
-  virtual const MyMoneySchedule schedule(const QString& id) const;
+  virtual const MyMoneySchedule schedule(const QString& id) const override;
 
   /**
     * This method is used to extract a list of scheduled transactions
@@ -689,13 +689,13 @@ public:
       const eMyMoney::Schedule::PaymentType paymentType = eMyMoney::Schedule::PaymentType::Any,
       const QDate& startDate = QDate(),
       const QDate& endDate = QDate(),
-      const bool overdue = false) const;
+      const bool overdue = false) const override;
 
   virtual const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
       int scheduleOcurrences,
       int schedulePaymentTypes,
       QDate startDate,
-      const QStringList& accounts = QStringList()) const;
+      const QStringList& accounts = QStringList()) const override;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -706,7 +706,7 @@ public:
     *
     * @param currency reference to the MyMoneySecurity object
     */
-  virtual void addCurrency(const MyMoneySecurity& currency);
+  virtual void addCurrency(const MyMoneySecurity& currency) override;
 
   /**
     * This method is used to modify an existing MyMoneySecurity
@@ -716,7 +716,7 @@ public:
     *
     * @param currency reference to the MyMoneyCurrency object
     */
-  virtual void modifyCurrency(const MyMoneySecurity& currency);
+  virtual void modifyCurrency(const MyMoneySecurity& currency) override;
 
   /**
     * This method is used to remove an existing MyMoneySecurity object
@@ -726,7 +726,7 @@ public:
     *
     * @param currency reference to the MyMoneySecurity object
     */
-  virtual void removeCurrency(const MyMoneySecurity& currency);
+  virtual void removeCurrency(const MyMoneySecurity& currency) override;
 
   /**
     * This method is used to retrieve a single MyMoneySecurity object.
@@ -737,7 +737,7 @@ public:
     * @param id QString containing the id of the MyMoneySecurity object
     * @return MyMoneyCurrency object
     */
-  virtual const MyMoneySecurity currency(const QString& id) const;
+  virtual const MyMoneySecurity currency(const QString& id) const override;
 
   /**
     * This method is used to retrieve the list of all currencies
@@ -747,7 +747,7 @@ public:
     *
     * @return QList of all MyMoneySecurity objects representing a currency.
     */
-  virtual const QList<MyMoneySecurity> currencyList() const;
+  virtual const QList<MyMoneySecurity> currencyList() const override;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -757,7 +757,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList() const;
+  virtual const QList<MyMoneyReport> reportList() const override;
 
   /**
     * This method is used to add a new report to the engine.
@@ -769,7 +769,7 @@ public:
     *
     * @param report reference to the MyMoneyReport object
     */
-  virtual void addReport(MyMoneyReport& report);
+  virtual void addReport(MyMoneyReport& report) override;
 
   /**
     * This method is used to modify an existing MyMoneyReport
@@ -779,7 +779,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  virtual void modifyReport(const MyMoneyReport& report);
+  virtual void modifyReport(const MyMoneyReport& report) override;
 
   /**
     * This method returns the number of reports currently known to file
@@ -787,7 +787,7 @@ public:
     *
     * @return number of reports known to file
     */
-  virtual unsigned countReports() const;
+  virtual unsigned countReports() const override;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -798,7 +798,7 @@ public:
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
     */
-  virtual const MyMoneyReport report(const QString& id) const;
+  virtual const MyMoneyReport report(const QString& id) const override;
 
   /**
     * This method is used to remove an existing MyMoneyReport object
@@ -808,7 +808,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  virtual void removeReport(const MyMoneyReport& report);
+  virtual void removeReport(const MyMoneyReport& report) override;
 
   /**
     * This method is used to retrieve the list of all budgets
@@ -818,7 +818,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList() const;
+  virtual const QList<MyMoneyBudget> budgetList() const override;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -830,7 +830,7 @@ public:
     *
     * @param budget reference to the MyMoneyBudget object
     */
-  virtual void addBudget(MyMoneyBudget& budget);
+  virtual void addBudget(MyMoneyBudget& budget) override;
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -841,7 +841,7 @@ public:
     *
     * @return MyMoneyBudget object of budget
     */
-  virtual const MyMoneyBudget budgetByName(const QString& budget) const;
+  virtual const MyMoneyBudget budgetByName(const QString& budget) const override;
 
   /**
     * This method is used to modify an existing MyMoneyBudget
@@ -851,7 +851,7 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  virtual void modifyBudget(const MyMoneyBudget& budget);
+  virtual void modifyBudget(const MyMoneyBudget& budget) override;
 
   /**
     * This method returns the number of budgets currently known to file
@@ -859,7 +859,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  virtual unsigned countBudgets() const;
+  virtual unsigned countBudgets() const override;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -870,7 +870,7 @@ public:
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
     */
-  virtual MyMoneyBudget budget(const QString& id) const;
+  virtual MyMoneyBudget budget(const QString& id) const override;
 
   /**
     * This method is used to remove an existing MyMoneyBudget object
@@ -880,17 +880,17 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  virtual void removeBudget(const MyMoneyBudget& budget);
+  virtual void removeBudget(const MyMoneyBudget& budget) override;
 
   /**
    * This method returns a list of all cost center objects
    */
-  virtual const QList<MyMoneyCostCenter> costCenterList() const;
+  virtual const QList<MyMoneyCostCenter> costCenterList() const override;
 
   /**
    * @brief Return cost center object by id
    */
-  const MyMoneyCostCenter costCenter(const QString& id) const;
+  const MyMoneyCostCenter costCenter(const QString& id) const override;
 
   /**
     * Clear all internal caches (used internally for performance measurements)
@@ -913,29 +913,29 @@ public:
   /**
     * This method is provided to allow closing of the database before logoff
     */
-  virtual void close();
+  virtual void close() override;
 
   /**
     * These methods have to be provided to allow transaction safe data handling.
     */
-  virtual void startTransaction();
-  virtual bool commitTransaction();
-  virtual void rollbackTransaction();
+  virtual void startTransaction() override;
+  virtual bool commitTransaction() override;
+  virtual void rollbackTransaction() override;
 
   // general set functions
-  virtual void setCreationDate(const QDate& val);
+  virtual void setCreationDate(const QDate& val) override;
 
   /**
    * This method is used to get a SQL reader for subsequent database access
    */
   virtual QExplicitlySharedDataPointer <MyMoneyStorageSql> connectToDatabase
-  (const QUrl &url);
+  (const QUrl &url) override;
   /**
     * This method is used when a database file is open, and the data is to
     * be saved in a different file or format. It will ensure that all data
     * from the database is available in memory to enable it to be written.
     */
-  virtual void fillStorage();
+  virtual void fillStorage() override;
 
   /**
     * This method is used to set the last modification date of
@@ -945,55 +945,55 @@ public:
     *
     * @param val QDate of last modification
     */
-  virtual void setLastModificationDate(const QDate& val);
+  virtual void setLastModificationDate(const QDate& val) override;
 
   /**
    * This method returns whether a given transaction is already in memory, to avoid
    * reloading it from the database
    */
-  virtual bool isDuplicateTransaction(const QString&) const;
+  virtual bool isDuplicateTransaction(const QString&) const override;
 
-  virtual void loadAccounts(const QMap<QString, MyMoneyAccount>& map);
-  virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map);
-  virtual void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map);
-  virtual void loadPayees(const QMap<QString, MyMoneyPayee>& map);
-  virtual void loadTags(const QMap<QString, MyMoneyTag>& map);
-  virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map);
-  virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
-  virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
-  virtual void loadReports(const QMap<QString, MyMoneyReport>& reports);
-  virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets);
-  virtual void loadPrices(const MyMoneyPriceList& list);
-  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
-  virtual void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters);
+  virtual void loadAccounts(const QMap<QString, MyMoneyAccount>& map) override;
+  virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map) override;
+  virtual void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map) override;
+  virtual void loadPayees(const QMap<QString, MyMoneyPayee>& map) override;
+  virtual void loadTags(const QMap<QString, MyMoneyTag>& map) override;
+  virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map) override;
+  virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map) override;
+  virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map) override;
+  virtual void loadReports(const QMap<QString, MyMoneyReport>& reports) override;
+  virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets) override;
+  virtual void loadPrices(const MyMoneyPriceList& list) override;
+  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) override;
+  virtual void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters) override;
 
   //virtual void loadPayeeIdentifier(const QMap<QString, payeeIdentifier>& idents);
 
-  virtual unsigned long accountId() const;
-  virtual unsigned long transactionId() const;
-  virtual unsigned long payeeId() const;
-  virtual unsigned long tagId() const;
-  virtual unsigned long institutionId() const;
-  virtual unsigned long scheduleId() const;
-  virtual unsigned long securityId() const;
-  virtual unsigned long reportId() const;
-  virtual unsigned long budgetId() const;
-  virtual unsigned long onlineJobId() const;
+  virtual unsigned long accountId() const override;
+  virtual unsigned long transactionId() const override;
+  virtual unsigned long payeeId() const override;
+  virtual unsigned long tagId() const override;
+  virtual unsigned long institutionId() const override;
+  virtual unsigned long scheduleId() const override;
+  virtual unsigned long securityId() const override;
+  virtual unsigned long reportId() const override;
+  virtual unsigned long budgetId() const override;
+  virtual unsigned long onlineJobId() const override;
   virtual unsigned long payeeIdentifierId() const;
-  virtual unsigned long costCenterId() const;
+  virtual unsigned long costCenterId() const override;
 
-  virtual void loadAccountId(const unsigned long id);
-  virtual void loadTransactionId(const unsigned long id);
-  virtual void loadPayeeId(const unsigned long id);
-  virtual void loadTagId(const unsigned long id);
-  virtual void loadInstitutionId(const unsigned long id);
-  virtual void loadScheduleId(const unsigned long id);
-  virtual void loadSecurityId(const unsigned long id);
-  virtual void loadReportId(const unsigned long id);
-  virtual void loadBudgetId(const unsigned long id);
-  virtual void loadOnlineJobId(const unsigned long id);
+  virtual void loadAccountId(const unsigned long id) override;
+  virtual void loadTransactionId(const unsigned long id) override;
+  virtual void loadPayeeId(const unsigned long id) override;
+  virtual void loadTagId(const unsigned long id) override;
+  virtual void loadInstitutionId(const unsigned long id) override;
+  virtual void loadScheduleId(const unsigned long id) override;
+  virtual void loadSecurityId(const unsigned long id) override;
+  virtual void loadReportId(const unsigned long id) override;
+  virtual void loadBudgetId(const unsigned long id) override;
+  virtual void loadOnlineJobId(const unsigned long id) override;
   virtual void loadPayeeIdentifierId(const unsigned long id);
-  virtual void loadCostCenterId(const unsigned long id);
+  virtual void loadCostCenterId(const unsigned long id) override;
 
   /**
     * This method is used to retrieve the whole set of key/value pairs
@@ -1003,7 +1003,7 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  virtual const QMap<QString, QString> pairs() const;
+  virtual const QMap<QString, QString> pairs() const override;
 
   /**
     * This method is used to initially store a set of key/value pairs
@@ -1016,13 +1016,13 @@ public:
     *
     * @note All existing key/value pairs in the container will be deleted.
     */
-  virtual void setPairs(const QMap<QString, QString>& list);
+  virtual void setPairs(const QMap<QString, QString>& list) override;
 
   /**
     * This method recalculates the balances of all accounts
     * based on the transactions stored in the engine.
     */
-  virtual void rebuildAccountBalances();
+  virtual void rebuildAccountBalances() override;
 
 private:
   /**
