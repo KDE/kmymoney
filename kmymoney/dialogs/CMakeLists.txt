@@ -94,6 +94,7 @@ target_link_libraries(dialogs
     kmm_mymoney
     onlinetask_interfaces
     kmm_widgets
+    kmm_utils_platformtools
 )
 
 target_link_libraries(dialogs LINK_PUBLIC

@@ -21,10 +21,6 @@
 #include "ofxpartner.h"
 #include "kmymoneysettings.h"
 
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-
 // ----------------------------------------------------------------------------
 // QT Includes
 

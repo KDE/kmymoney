@@ -74,6 +74,7 @@ target_link_libraries(kmymoney_common
     kmm_widgets
     kmm_mymoney
     kmm_utils_webconnect
+    kmm_utils_platformtools
 )
 
 # must build kmymoney/transactionsortoption.h

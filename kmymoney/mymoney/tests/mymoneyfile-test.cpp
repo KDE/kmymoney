@@ -18,7 +18,6 @@
 #include <iostream>
 
 #include <memory>
-#include <unistd.h>
 #include <QFile>
 #include <QDataStream>
 #include <QList>

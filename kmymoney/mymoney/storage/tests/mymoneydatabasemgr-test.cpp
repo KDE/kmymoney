@@ -15,8 +15,6 @@
  ***************************************************************************/
 
 #include "mymoneydatabasemgr-test.h"
-#include <pwd.h>
-#include <unistd.h>
 #include <iostream>
 
 #include <QtTest/QtTest>
@@ -25,6 +23,7 @@
 #include "mymoneyfile.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
+#include "misc/platformtools.h"
 
 #include "mymoneyenums.h"
 
@@ -108,11 +107,7 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
 
 void MyMoneyDatabaseMgrTest::setupUrl(const QString& fname)
 {
-  struct passwd * pwd = getpwuid(geteuid());
-  QString m_userName;
-  if (pwd != 0) {
-    m_userName = QString(pwd->pw_name);
-  }
+  QString m_userName = platformTools::osUsername();
 
   QString m_mode =
     //"QPSQL&mode=single";

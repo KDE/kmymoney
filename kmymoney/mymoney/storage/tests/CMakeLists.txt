@@ -17,4 +17,5 @@ ecm_add_tests(${tests_sources}
     kmm_testutils
     reports_testcommon
     onlinetask_unavailabletask
+    kmm_utils_platformtools
 )

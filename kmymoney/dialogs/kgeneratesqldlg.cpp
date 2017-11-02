@@ -19,9 +19,7 @@
 // ----------------------------------------------------------------------------
 // System includes
 
-#include <unistd.h>
 #include <sys/types.h>
-#include <pwd.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -49,6 +47,7 @@
 #include "storage/mymoneystoragesql.h"
 #include "storage/mymoneyseqaccessmgr.h"
 #include "kguiutils.h"
+#include "misc/platformtools.h"
 
 KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
 {
@@ -267,9 +266,7 @@ void KGenerateSqlDlg::slotdriverSelected()
     m_widget->textDbName->setText("KMyMoney");
     m_widget->textHostName->setText("localhost");
     m_widget->textUserName->setText("");
-    struct passwd * pwd = getpwuid(geteuid());
-    if (pwd != nullptr)
-      m_widget->textUserName->setText(QString(pwd->pw_name));
+    m_widget->textUserName->setText(platformTools::osUsername());
     m_widget->textPassword->setText("");
   }
 

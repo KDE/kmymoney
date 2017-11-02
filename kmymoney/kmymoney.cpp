@@ -20,18 +20,6 @@
 
 #include "kmymoney.h"
 
-// for _getpid
-#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
-#include <process.h>
-#else
-#if HAVE_SYS_TYPES_H
-#include <sys/types.h>
-#endif
-#if HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#endif
-
 // ----------------------------------------------------------------------------
 // Std C++ / STL Includes
 
@@ -167,6 +155,8 @@
 #include "ledgerdelegate.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
+
+#include "misc/platformtools.h"
 
 using namespace Icons;
 
@@ -6837,11 +6827,7 @@ QList<QString> KMyMoneyApp::instanceList() const
       // please change this method of creating a list of 'all the other kmymoney instances that are running on the system'
       // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somwhere
       if ((*it).indexOf("org.kde.kmymoney-") == 0) {
-#ifdef _MSC_VER
-        uint thisProcPid = _getpid();
-#else
-        uint thisProcPid = getpid();
-#endif
+        uint thisProcPid = platformTools::processId();
         if ((*it).indexOf(QString("org.kde.kmymoney-%1").arg(thisProcPid)) != 0)
           list += (*it);
       }

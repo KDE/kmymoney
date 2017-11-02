@@ -17,9 +17,7 @@
 
 #include "kselectdatabasedlg.h"
 
-#include <unistd.h>
 #include <sys/types.h>
-#include <pwd.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,6 +36,7 @@
 #include "ui_kselectdatabasedlg.h"
 #include "kguiutils.h"
 #include "storage/mymoneystoragesql.h"
+#include "misc/platformtools.h"
 
 KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
   : m_widget(new Ui::KSelectDatabaseDlg())
@@ -118,9 +117,7 @@ int KSelectDatabaseDlg::exec()
     m_widget->textDbName->setText(QLatin1String("KMyMoney"));
     m_widget->textHostName->setText(QLatin1String("localhost"));
     m_widget->textUserName->setText(QString());
-    struct passwd * pwd = getpwuid(geteuid());
-    if (pwd != 0)
-      m_widget->textUserName->setText(QString(pwd->pw_name));
+    m_widget->textUserName->setText(platformTools::osUsername());
     m_widget->textPassword->setText(QString());
     connect(m_widget->databaseTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDriverSelected(int)));
     m_widget->checkPreLoad->setChecked(false);
