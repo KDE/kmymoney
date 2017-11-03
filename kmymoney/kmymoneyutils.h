@@ -27,6 +27,7 @@
 // QT Includes
 
 #include <QStandardPaths>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

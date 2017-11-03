@@ -24,6 +24,7 @@
 #include <QDomDocument>
 #include <QDomNode>
 #include <QUrl>
+#include <QMap>
 
 class QTreeWidgetItem;
 class QSaveFile;

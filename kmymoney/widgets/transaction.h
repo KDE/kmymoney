@@ -77,25 +77,25 @@ public:
   Transaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~Transaction() {}
 
-  virtual const char* className() {
+  virtual const char* className() override {
     return "Transaction";
   }
 
-  bool isSelectable() const {
+  bool isSelectable() const override {
     return true;
   }
-  bool isSelected() const {
+  bool isSelected() const override {
     return m_selected;
   }
-  void setSelected(bool selected);
+  void setSelected(bool selected) override;
 
-  bool canHaveFocus() const {
+  bool canHaveFocus() const override {
     return true;
   }
-  bool hasFocus() const {
+  bool hasFocus() const override {
     return m_focus;
   }
-  bool hasEditorOpen() const {
+  bool hasEditorOpen() const override {
     return m_inEdit;
   }
 
@@ -103,22 +103,22 @@ public:
     return false;
   }
 
-  void setFocus(bool focus, bool updateLens = true);
+  void setFocus(bool focus, bool updateLens = true) override;
 
-  bool isErroneous() const {
+  bool isErroneous() const override {
     return m_erroneous;
   }
 
   QDate sortPostDate() const override {
     return m_transaction.postDate();
   }
-  virtual int sortSamePostDate() const {
+  virtual int sortSamePostDate() const override {
     return 2;
   }
   QDate sortEntryDate() const override {
     return m_transaction.entryDate();
   }
-  virtual const QString& sortPayee() const {
+  virtual const QString& sortPayee() const override {
     return m_payee;
   }
   virtual const QList<QString>& sortTagList() const {
@@ -130,20 +130,20 @@ public:
   QString sortNumber() const override {
     return m_split.number();
   }
-  virtual const QString& sortEntryOrder() const {
+  virtual const QString& sortEntryOrder() const override {
     return m_uniqueId;
   }
-  virtual CashFlowDirection sortType() const {
+  virtual CashFlowDirection sortType() const override {
     return m_split.shares().isNegative() ? Payment : Deposit;
   }
-  virtual const QString& sortCategory() const {
+  virtual const QString& sortCategory() const override {
     return m_category;
   }
-  virtual eMyMoney::Split::State sortReconcileState() const {
+  virtual eMyMoney::Split::State sortReconcileState() const override {
     return m_split.reconcileFlag();
   }
 
-  virtual const QString& id() const {
+  virtual const QString& id() const override {
     return m_uniqueId;
   }
   const MyMoneyTransaction& transaction() const {
@@ -160,12 +160,12 @@ public:
     return m_balance;
   }
 
-  virtual int rowHeightHint() const;
+  virtual int rowHeightHint() const override ;
 
   virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
-  virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItem& option, const QModelIndex& index);
+  virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItem& option, const QModelIndex& index) override;
 
-  virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
+  virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) override;
   virtual bool formCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {
     return false;
   }
@@ -199,7 +199,7 @@ public:
 
   bool haveNumberField() const;
 
-  bool matches(const RegisterFilter&) const;
+  bool matches(const RegisterFilter&) const override;
 
   /**
     * Checks if the mouse hovered over an area that has a tooltip associated with it.
@@ -212,7 +212,7 @@ public:
     *
     * If no tooltip is available, @a false will be returned.
     */
-  virtual bool maybeTip(const QPoint& relpos, int row, int col, QRect& r, QString& msg);
+  virtual bool maybeTip(const QPoint& relpos, int row, int col, QRect& r, QString& msg) override;
 
   /**
     * This method returns the number of register rows required for a certain
@@ -236,7 +236,7 @@ public:
     */
   virtual TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) = 0;
 
-  virtual void setVisible(bool visible);
+  virtual void setVisible(bool visible) override;
 
   virtual void setShowBalance(bool showBalance);
 

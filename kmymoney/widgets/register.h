@@ -176,7 +176,7 @@ public:
   QDate sortEntryDate() const override {
     return m_date;
   }
-  virtual const char* className() {
+  virtual const char* className() override {
     return "FancyDateGroupMarker";
   }
 private:

@@ -81,6 +81,7 @@
 #include "onlinejobadministration.h"
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
+#include "mymoneyinstitution.h"
 
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"

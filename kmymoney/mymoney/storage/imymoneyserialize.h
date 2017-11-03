@@ -28,7 +28,7 @@
 
 #include <QString>
 #include <QDate>
-
+#include <QMap>
 // ----------------------------------------------------------------------------
 // Project Includes
 
