@@ -37,16 +37,15 @@ namespace KMyMoneyRegister
 
 int SelectedTransaction::warnLevel() const
 {
-  int warnLevel = 0;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = transaction().splits().begin(); warnLevel < 2 && it_s != transaction().splits().end(); ++it_s) {
+  auto warnLevel = 0;
+  foreach (const auto split, transaction().splits()) {
     try {
-      const MyMoneyAccount& acc = MyMoneyFile::instance()->account((*it_s).accountId());
+      auto acc = MyMoneyFile::instance()->account(split.accountId());
       if (acc.isClosed())
         warnLevel = 3;
-      else if ((*it_s).reconcileFlag() == eMyMoney::Split::State::Frozen)
+      else if (split.reconcileFlag() == eMyMoney::Split::State::Frozen)
         warnLevel = 2;
-      else if ((*it_s).reconcileFlag() == eMyMoney::Split::State::Reconciled && warnLevel < 1)
+      else if (split.reconcileFlag() == eMyMoney::Split::State::Reconciled && warnLevel < 1)
         warnLevel = 1;
     } catch (const MyMoneyException &) {
       //qDebug("Exception in SelectedTransaction::warnLevel(): %s", qPrintable(e.what()));

@@ -228,14 +228,13 @@ TransactionEditor* KEditScheduleDlg::startEdit()
         // into the transaction and determine the type. in case we don't have a transaction with splits
         // we stick with the default action already set up
         if (d->m_schedule.transaction().splits().count() > 0) {
-          QList<MyMoneySplit>::const_iterator it_s;
-          bool isDeposit = false;
-          bool isTransfer = false;
-          for (it_s = d->m_schedule.transaction().splits().begin(); it_s != d->m_schedule.transaction().splits().end(); ++it_s) {
-            if ((*it_s).accountId() == d->m_schedule.account().id()) {
-              isDeposit = !((*it_s).shares().isNegative());
+          auto isDeposit = false;
+          auto isTransfer = false;
+          foreach (const auto split, d->m_schedule.transaction().splits()) {
+            if (split.accountId() == d->m_schedule.account().id()) {
+              isDeposit = !(split.shares().isNegative());
             } else {
-              MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+              auto acc = MyMoneyFile::instance()->account(split.accountId());
               if (acc.isAssetLiability() && d->m_schedule.transaction().splits().count() == 2) {
                 isTransfer = true;
               }
