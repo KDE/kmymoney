@@ -34,7 +34,9 @@
 
 #include "knewaccountdlg.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "icons/icons.h"
+#include "mymoneyexception.h"
 
 using namespace Icons;
 
@@ -79,7 +81,7 @@ void InterestCategoryWizardPage::slotCreateCategory()
   }
   acc.setParentAccountId(base.id());
 
-  QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(acc, true, true);
+  QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(acc, true, true, nullptr, QString());
   if (dlg->exec() == QDialog::Accepted) {
     acc = dlg->account();
 

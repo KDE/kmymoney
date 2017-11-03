@@ -30,6 +30,7 @@
 // Project Includes
 
 #include "knewloanwizard.h"
+#include "mymoneyaccountloan.h"
 
 EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
     : EffectiveDateWizardPageDecl(parent)

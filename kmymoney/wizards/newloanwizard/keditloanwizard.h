@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,17 +35,15 @@
 
 #include "knewloanwizard.h"
 
-class MyMoneyAccount;
-
 /**
   * @author Thomas Baumgart
   */
-
+class KEditLoanWizardPrivate;
 class KEditLoanWizard : public KNewLoanWizard
 {
   Q_OBJECT
 public:
-  explicit KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent = 0);
+  explicit KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent = nullptr);
   ~KEditLoanWizard();
 
   /**
@@ -75,10 +74,8 @@ protected:
   void updateEditSummary();
 
 private:
-  //MyMoneyAccountLoan  m_account;
-  MyMoneySchedule     m_schedule;
-  int                 m_lastSelection;
-  bool                m_fullyRepayLoan;
+  Q_DISABLE_COPY(KEditLoanWizard)
+  Q_DECLARE_PRIVATE(KEditLoanWizard)
 };
 
 #endif

@@ -32,6 +32,7 @@
 // Project Includes
 
 #include "knewloanwizard.h"
+#include "knewloanwizard_p.h"
 #include "ksplittransactiondlg.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -59,24 +60,24 @@ void AdditionalFeesWizardPage::slotAdditionalFees()
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());
 
   QMap<QString, MyMoneyMoney> priceInfo;
-  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(qobject_cast<KNewLoanWizard*>(wizard())->m_transaction, qobject_cast<KNewLoanWizard*>(wizard())->m_split, account, false, !field("borrowButton").toBool(), MyMoneyMoney(), priceInfo);
+  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_transaction, qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_split, account, false, !field("borrowButton").toBool(), MyMoneyMoney(), priceInfo);
   connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 
   if (dlg->exec() == QDialog::Accepted) {
-    qobject_cast<KNewLoanWizard*>(wizard())->m_transaction = dlg->transaction();
+    qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_transaction = dlg->transaction();
     // sum up the additional fees
     MyMoneyMoney fees;
-    foreach (const MyMoneySplit& it, qobject_cast<KNewLoanWizard*>(wizard())->m_transaction.splits()) {
+    foreach (const MyMoneySplit& it, qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_transaction.splits()) {
       if (it.accountId() != account.id()) {
         fees += it.value();
       }
     }
-    setField("additionalCost", fees.formatMoney(qobject_cast<KNewLoanWizard*>(wizard())->m_account.fraction(MyMoneyFile::instance()->security(qobject_cast<KNewLoanWizard*>(wizard())->m_account.currencyId()))));
+    setField("additionalCost", fees.formatMoney(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account.fraction(MyMoneyFile::instance()->security(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account.currencyId()))));
   }
 
   delete dlg;
 
-  updatePeriodicPayment(qobject_cast<KNewLoanWizard*>(wizard())->m_account);
+  updatePeriodicPayment(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account);
 }
 
 void AdditionalFeesWizardPage::updatePeriodicPayment(const MyMoneyAccount& account)

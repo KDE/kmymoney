@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QBitArray>
 #include <QWizard>
 
 // ----------------------------------------------------------------------------
@@ -35,11 +34,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_knewloanwizarddecl.h"
-#include "mymoneyschedule.h"
-#include "mymoneyaccountloan.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
+class QString;
+
+class MyMoneyAccount;
+class MyMoneySchedule;
+class MyMoneyAccountLoan;
+class MyMoneyTransaction;
 
 /**
   * @author Thomas Baumgart
@@ -54,16 +54,8 @@
   * created loan.
   *
   */
-class MyMoneyAccountLoan;
-class KNewLoanWizardDecl : public QWizard, public Ui::KNewLoanWizardDecl
-{
-public:
-  KNewLoanWizardDecl(QWidget *parent) : QWizard(parent) {
-    setupUi(this);
-  }
-};
-
-class KNewLoanWizard : public KNewLoanWizardDecl
+class KNewLoanWizardPrivate;
+class KNewLoanWizard : public QWizard
 {
   Q_OBJECT
 
@@ -83,7 +75,7 @@ public:
          Page_AssetAccount, Page_Summary
        };
 
-  KNewLoanWizard(QWidget *parent = 0);
+  explicit KNewLoanWizard(QWidget *parent = nullptr);
   ~KNewLoanWizard();
 
   /**
@@ -130,30 +122,10 @@ public:
    */
   int nextId() const;
 
-protected:
-  /**
-    * This method returns the transaction that is stored within
-    * the schedule. See schedule().
-    *
-    * @return MyMoneyTransaction object to be used within the schedule
-    */
-  MyMoneyTransaction transaction() const;
-
 protected slots:
 
   // void slotNewPayee(const QString&);
   void slotReloadEditWidgets();
-
-protected:
-  void loadAccountList();
-  void resetCalculator();
-  void updateLoanAmount();
-  void updateInterestRate();
-  void updateDuration();
-  void updatePayment();
-  void updateFinalPayment();
-  void updateLoanInfo();
-  int calculateLoan();
 
 signals:
   /**
@@ -182,10 +154,12 @@ signals:
   void createPayee(const QString& txt, QString& id);
 
 protected:
-  MyMoneyAccountLoan  m_account;
-  MyMoneyTransaction  m_transaction;
-  MyMoneySplit        m_split;
-  QBitArray           m_pages;
+  const QScopedPointer<KNewLoanWizardPrivate> d_ptr;
+  KNewLoanWizard(KNewLoanWizardPrivate &dd, QWidget *parent);
+   
+private:
+  Q_DISABLE_COPY(KNewLoanWizard)
+  Q_DECLARE_PRIVATE(KNewLoanWizard)
 };
 
 #endif

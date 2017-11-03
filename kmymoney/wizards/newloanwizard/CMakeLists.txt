@@ -21,7 +21,7 @@ set (libnewloanwizard_a_SOURCES
   )
 
 set (libnewloanwizard_a_UI
-  knewloanwizarddecl.ui
+  knewloanwizard.ui
   additionalfeeswizardpagedecl.ui       loanamountwizardpagedecl.ui
   loanattributeswizardpagedecl.ui
   assetaccountwizardpagedecl.ui         namewizardpagedecl.ui
@@ -37,7 +37,7 @@ set (libnewloanwizard_a_UI
   interesteditwizardpagedecl.ui         schedulewizardpagedecl.ui
   interesttypewizardpagedecl.ui         summaryeditwizardpagedecl.ui
   interestwizardpagedecl.ui             summarywizardpagedecl.ui
-  knewloanwizarddecl.ui                 variableinterestdatewizardpagedecl.ui
+  knewloanwizard.ui                 variableinterestdatewizardpagedecl.ui
   lendborrowwizardpagedecl.ui
   )
 
