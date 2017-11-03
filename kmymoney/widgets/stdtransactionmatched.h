@@ -44,25 +44,25 @@ public:
   StdTransactionMatched(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransactionMatched() {}
 
-  virtual const char* className() {
+  virtual const char* className() override {
     return "StdTransactionMatched";
   }
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
 
-  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
+  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
 
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister(bool)
     */
-  int numRowsRegister(bool expanded) const {
+  int numRowsRegister(bool expanded) const override {
     return StdTransaction::numRowsRegister(expanded) + m_additionalRows;
   }
 
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister() const {
+  int numRowsRegister() const override {
     return StdTransaction::numRowsRegister();
   }
 };

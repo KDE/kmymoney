@@ -226,7 +226,12 @@ public:
     */
   virtual int numRowsRegister(bool expanded) const = 0;
 
-  virtual int numRowsRegister() const = 0;
+  /**
+    * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
+    */
+  int numRowsRegister() const override {
+    return RegisterItem::numRowsRegister();
+  }
 
   void leaveEditMode();
   void startEditMode();
@@ -368,46 +373,46 @@ public:
   InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransaction() {}
 
-  virtual const QString sortSecurity() const {
+  virtual const QString sortSecurity() const override {
     return m_security.name();
   }
-  virtual const char* className() {
+  virtual const char* className() override {
     return "InvestTransaction";
   }
 
-  bool formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
-  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
+  bool formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
+  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
 
-  int registerColWidth(int col, const QFontMetrics& cellFontMetrics);
-  void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
+  int registerColWidth(int col, const QFontMetrics& cellFontMetrics) override;
+  void setupForm(KMyMoneyTransactionForm::TransactionForm* form) override;
 
   /**
     * provide NOP here as the investment transaction form does not supply a tab
     */
-  void loadTab(KMyMoneyTransactionForm::TransactionForm* /* form */) {}
+  void loadTab(KMyMoneyTransactionForm::TransactionForm* /* form */) override {}
 
-  int numColsForm() const {
+  int numColsForm() const override {
     return 4;
   }
 
-  void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets);
-  void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
-  void tabOrderInForm(QWidgetList& tabOrderWidgets) const;
-  void tabOrderInRegister(QWidgetList& tabOrderWidgets) const;
-  KMyMoneyRegister::Action actionType() const {
+  void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets) override;
+  void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets) override;
+  void tabOrderInForm(QWidgetList& tabOrderWidgets) const override;
+  void tabOrderInRegister(QWidgetList& tabOrderWidgets) const override;
+  KMyMoneyRegister::Action actionType() const override {
     return KMyMoneyRegister::ActionNone;
   }
 
-  int numRowsRegister(bool expanded) const;
+  int numRowsRegister(bool expanded) const override;
 
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister() const {
+  int numRowsRegister() const override {
     return RegisterItem::numRowsRegister();
   }
 
-  TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
+  TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) override;
 
   void splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const;
 

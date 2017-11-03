@@ -231,7 +231,6 @@ void MyMoneySecurity::setTradingCurrency(const QString& str)
 
 bool MyMoneySecurity::operator != (const MyMoneySecurity& r) const
 {
-  Q_D(const MyMoneySecurity);
   return !(*this == r);
 }
 

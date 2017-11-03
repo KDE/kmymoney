@@ -441,7 +441,6 @@ void MyMoneyPayee::setDefaultAccountId(const QString& id)
 
 void MyMoneyPayee::setDefaultAccountId()
 {
-  Q_D(MyMoneyPayee);
   setDefaultAccountId(QString());
 }
 

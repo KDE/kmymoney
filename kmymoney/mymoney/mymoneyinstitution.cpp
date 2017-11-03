@@ -250,7 +250,6 @@ QString MyMoneyInstitution::city() const
 
 void MyMoneyInstitution::setCity(const QString& town)
 {
-  Q_D(MyMoneyInstitution);
   setTown(town);
 }
 

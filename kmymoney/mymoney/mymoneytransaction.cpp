@@ -390,7 +390,8 @@ QString MyMoneyTransaction::nextSplitID()
 
 QString MyMoneyTransaction::firstSplitID()
 {
-  QString id = 'S' + id.setNum(1).rightJustified(SPLIT_ID_SIZE, '0');
+  QString id;
+  id = 'S' + id.setNum(1).rightJustified(SPLIT_ID_SIZE, '0');
   return id;
 }
 
