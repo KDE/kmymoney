@@ -2,6 +2,7 @@
                           knewaccountdlg.h
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
  ***************************************************************************/
 
@@ -20,73 +21,25 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "mymoneymoney.h"
-#include "accountsproxymodel.h"
+class QString;
+class QItemSelection;
 
-#include "ui_knewaccountdlgdecl.h"
+class HierarchyFilterProxyModel;
+class MyMoneyMoney;
+class MyMoneyAccount;
 
-namespace reports
-{
-}
-
-class HierarchyFilterProxyModel : public AccountsProxyModel
-{
+class KNewAccountDlgPrivate;
+class KNewAccountDlg : public QDialog
+{  
   Q_OBJECT
-
-public:
-  HierarchyFilterProxyModel(QObject *parent = 0);
-
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-
-  void setCurrentAccountId(const QString &selectedAccountId);
-  QModelIndex getSelectedParentAccountIndex() const;
-
-protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
-
-private:
-  QString m_currentAccountId;
-};
-
-/**
-  * This dialog lets you create/edit an account.
-  */
-
-class KNewAccountDlgDecl : public QDialog, public Ui::kNewAccountDlgDecl
-{
-public:
-  KNewAccountDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class KNewAccountDlg : public KNewAccountDlgDecl
-{
-  Q_OBJECT
-
-private:
-  MyMoneyAccount m_account;
-  MyMoneyAccount m_parentAccount;
-  HierarchyFilterProxyModel *m_filterProxyModel;
-
-  bool m_categoryEditor;
-  bool m_isEditing;
-
-  void loadVatAccounts();
-  void storeKVP(const QString& key, kMyMoneyEdit* widget);
-  void storeKVP(const QString& key, KLineEdit* widget);
-  void storeKVP(const QString& key, const QString& text, const QString& value);
-  void storeKVP(const QString& key, QCheckBox* widget);
-  void loadKVP(const QString& key, kMyMoneyEdit* widget);
-  void loadKVP(const QString& key, KLineEdit* widget);
 
 public:
   /**
@@ -104,23 +57,20 @@ public:
     * @param parent Pointer to parent object (passed to QDialog). Default is 0.
     * @param title Caption of the object (passed to QDialog). Default is empty string.
     */
-  KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent = 0, const QString& title = QString());
+  KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const QString& title);
 
   /**
     * This method returns the edited account object.
     */
-  const MyMoneyAccount& account();
+  MyMoneyAccount account();
 
   /**
     * This method returns the parent account of the edited account object.
     */
-  const MyMoneyAccount& parentAccount();
+  MyMoneyAccount parentAccount() const;
 
+  MyMoneyMoney openingBalance() const;
   void setOpeningBalance(const MyMoneyMoney& balance);
-
-  const MyMoneyMoney openingBalance() const {
-    return m_openingBalanceEdit->value();
-  };
 
   void setOpeningBalanceShown(bool shown);
   void setOpeningDateShown(bool shown);
@@ -131,11 +81,6 @@ public:
    * zero, this is a NOP. @a name is used as the text to be placed on the tab.
    */
   void addTab(QWidget* w, const QString& name);
-
-protected:
-  void displayOnlineBankingStatus();
-  void adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr);
-  void handleOpeningBalanceCheckbox(const QString &currencyId);
 
 protected slots:
   void okClicked();
@@ -150,7 +95,12 @@ protected slots:
   void slotAdjustMinBalanceEarlyEdit(const QString&);
   void slotAdjustMaxCreditAbsoluteEdit(const QString&);
   void slotAdjustMaxCreditEarlyEdit(const QString&);
-  void slotCheckCurrency();
+  void slotCheckCurrency(int index);
+
+private:
+  Q_DISABLE_COPY(KNewAccountDlg)
+  Q_DECLARE_PRIVATE(KNewAccountDlg)
+  KNewAccountDlgPrivate* d_ptr;
 };
 
 #endif

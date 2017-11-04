@@ -32,6 +32,7 @@ set(libdialogs_a_SOURCES
   kmymoneypricedlg.cpp
   kmymoneysplittable.cpp
   knewaccountdlg.cpp
+  hierarchyfilterproxymodel.cpp
   knewbankdlg.cpp
   knewbudgetdlg.cpp
   knewequityentrydlg.cpp
@@ -66,7 +67,7 @@ set(dialogs_UI
   kfindtransactiondlgdecl.ui kgeneratesqldlgdecl.ui kgncimportoptionsdlgdecl.ui
   kgncpricesourcedlgdecl.ui kloadtemplatedlgdecl.ui
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
-  knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
+  knewaccountdlg.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
   knewequityentrydecl.ui editpersonaldatadlgdecl.ui kpayeereassigndlgdecl.ui
   ktagreassigndlgdecl.ui
   kselectdatabasedlg.ui kselecttransactionsdlgdecl.ui
