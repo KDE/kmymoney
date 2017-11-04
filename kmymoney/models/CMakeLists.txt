@@ -1,5 +1,11 @@
 set(libmodels_a_SOURCES
     ledgermodel.cpp
+    ledgeritem.cpp
+    ledgerproxymodel.cpp
+    ledgerschedule.cpp
+    ledgersplit.cpp
+    ledgertransaction.cpp
+    splitmodel.cpp
     costcentermodel.cpp
     payeesmodel.cpp
     accountsmodel.cpp

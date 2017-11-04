@@ -43,8 +43,10 @@
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
+#include "splitmodel.h"
 #include "payeesmodel.h"
 #include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "ui_newtransactioneditor.h"
 #include "splitdialog.h"
 #include "widgethintframe.h"
@@ -135,7 +137,7 @@ void NewTransactionEditor::Private::updateWidgetState()
       break;
     case 1:
       index = splitModel.index(0, 0);
-      ui->accountCombo->setSelected(splitModel.data(index, LedgerRole::AccountIdRole).toString());
+      ui->accountCombo->setSelected(splitModel.data(index, (int)eLedgerModel::Role::AccountId).toString());
       break;
     default:
       index = splitModel.index(0, 0);
@@ -154,7 +156,7 @@ void NewTransactionEditor::Private::updateWidgetState()
     // extract the cost center
     index = splitModel.index(0, 0);
     QModelIndexList ccList = costCenterModel->match(costCenterModel->index(0, 0), CostCenterModel::CostCenterIdRole,
-                                                    splitModel.data(index, LedgerRole::CostCenterIdRole),
+                                                    splitModel.data(index, (int)eLedgerModel::Role::CostCenterId),
                                       1,
                                       Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (ccList.count() > 0) {
@@ -213,7 +215,7 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
   accountIds << account.id();
   for(int row = 0; row < splitModel.rowCount(); ++row) {
     QModelIndex index = splitModel.index(row, 0);
-    accountIds << splitModel.data(index, LedgerRole::AccountIdRole).toString();;
+    accountIds << splitModel.data(index, (int)eLedgerModel::Role::AccountId).toString();;
   }
 
   Q_FOREACH(QString accountId, accountIds) {
@@ -241,7 +243,7 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
       QModelIndex index = costCenterModel->index(costCenterIndex, 0);
       QString costCenterId = costCenterModel->data(index, CostCenterModel::CostCenterIdRole).toString();
       index = splitModel.index(0, 0);
-      splitModel.setData(index, costCenterId, LedgerRole::CostCenterIdRole);
+      splitModel.setData(index, costCenterId, (int)eLedgerModel::Role::CostCenterId);
     }
   }
 
@@ -269,16 +271,16 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
       }
 
       const QModelIndex index = splitModel.index(0, 0);
-      splitModel.setData(index, accountId, LedgerRole::AccountIdRole);
+      splitModel.setData(index, accountId, (int)eLedgerModel::Role::AccountId);
       if(newSplit) {
         costCenterChanged(ui->costCenterCombo->currentIndex());
 
         if(amountHelper->haveValue()) {
-          splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitValueRole);
+          splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), (int)eLedgerModel::Role::SplitValue);
 
           /// @todo make sure to convert initial value to shares according to price information
 
-          splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitSharesRole);
+          splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), (int)eLedgerModel::Role::SplitShares);
         }
       }
 
@@ -298,14 +300,14 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
     const LedgerModel* model = Models::instance()->ledgerModel();
-    QModelIndexList list = model->match(model->index(0, 0), LedgerRole::NumberRole,
+    QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
                                         QVariant(newNumber),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     foreach(QModelIndex index, list) {
-      if(model->data(index, LedgerRole::AccountIdRole) == account.id()
-        && model->data(index, LedgerRole::TransactionSplitIdRole) != transactionSplitId) {
+      if(model->data(index, (int)eLedgerModel::Role::AccountId) == account.id()
+        && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
         WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.").arg(newNumber));
         rc = false;
         break;
@@ -324,11 +326,11 @@ bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
       MyMoneyMoney shares;
       if(splitModel.rowCount() == 1) {
         const QModelIndex index = splitModel.index(0, 0);
-        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitValueRole);
+        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), (int)eLedgerModel::Role::SplitValue);
 
         /// @todo make sure to support multiple currencies
 
-        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), LedgerRole::SplitSharesRole);
+        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), (int)eLedgerModel::Role::SplitShares);
       } else {
         /// @todo ask what to do: if the rest of the splits is the same amount we could simply reverse the sign
         /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
@@ -483,34 +485,34 @@ void NewTransactionEditor::loadTransaction(const QString& id)
 
   } else {
     // find which item has this id and set is as the current item
-    QModelIndexList list = model->match(model->index(0, 0), LedgerRole::TransactionIdRole,
+    QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::TransactionId,
                                         QVariant(transactionId),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     Q_FOREACH(QModelIndex index, list) {
       // the selected split?
-      const QString transactionSplitId = model->data(index, LedgerRole::TransactionSplitIdRole).toString();
+      const QString transactionSplitId = model->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString();
       if(transactionSplitId == id) {
         d->transactionSplitId = id;
-        d->transaction = model->data(index, LedgerRole::TransactionRole).value<MyMoneyTransaction>();
-        d->split = model->data(index, LedgerRole::SplitRole).value<MyMoneySplit>();
-        d->ui->dateEdit->setDate(model->data(index, LedgerRole::PostDateRole).toDate());
-        d->ui->payeeEdit->lineEdit()->setText(model->data(index, LedgerRole::PayeeNameRole).toString());
+        d->transaction = model->data(index, (int)eLedgerModel::Role::Transaction).value<MyMoneyTransaction>();
+        d->split = model->data(index, (int)eLedgerModel::Role::Split).value<MyMoneySplit>();
+        d->ui->dateEdit->setDate(model->data(index, (int)eLedgerModel::Role::PostDate).toDate());
+        d->ui->payeeEdit->lineEdit()->setText(model->data(index, (int)eLedgerModel::Role::PayeeName).toString());
         d->ui->memoEdit->clear();
-        d->ui->memoEdit->insertPlainText(model->data(index, LedgerRole::MemoRole).toString());
+        d->ui->memoEdit->insertPlainText(model->data(index, (int)eLedgerModel::Role::Memo).toString());
         d->ui->memoEdit->moveCursor(QTextCursor::Start);
         d->ui->memoEdit->ensureCursorVisible();
 
         // The calculator for the amount field can simply be added as an icon to the line edit widget.
         // See http://stackoverflow.com/questions/11381865/how-to-make-an-extra-icon-in-qlineedit-like-this howto do it
-        d->ui->amountEditCredit->setText(model->data(model->index(index.row(), LedgerModel::PaymentColumn)).toString());
-        d->ui->amountEditDebit->setText(model->data(model->index(index.row(), LedgerModel::DepositColumn)).toString());
+        d->ui->amountEditCredit->setText(model->data(model->index(index.row(), (int)eLedgerModel::Column::Payment)).toString());
+        d->ui->amountEditDebit->setText(model->data(model->index(index.row(), (int)eLedgerModel::Column::Deposit)).toString());
 
-        d->ui->numberEdit->setText(model->data(index, LedgerRole::NumberRole).toString());
-        d->ui->statusCombo->setCurrentIndex(model->data(index, LedgerRole::NumberRole).toInt());
+        d->ui->numberEdit->setText(model->data(index, (int)eLedgerModel::Role::Number).toString());
+        d->ui->statusCombo->setCurrentIndex(model->data(index, (int)eLedgerModel::Role::Number).toInt());
 
-        QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, model->data(index, LedgerRole::ReconciliationRole).toInt());
+        QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, model->data(index, (int)eLedgerModel::Role::Reconciliation).toInt());
         if(stList.count()) {
           QModelIndex stIndex = stList.front();
           d->ui->statusCombo->setCurrentIndex(stIndex.row());
@@ -615,7 +617,7 @@ void NewTransactionEditor::saveTransaction()
     int row;
     for(row = 0; row < d->splitModel.rowCount(); ++row) {
       QModelIndex index = d->splitModel.index(row, 0);
-      if(d->splitModel.data(index, LedgerRole::SplitIdRole).toString() == (*it).id()) {
+      if(d->splitModel.data(index, (int)eLedgerModel::Role::SplitId).toString() == (*it).id()) {
         break;
       }
     }
@@ -663,17 +665,17 @@ void NewTransactionEditor::saveTransaction()
     for(int row = 0; row < model->rowCount(); ++row) {
       QModelIndex index = model->index(row, 0);
       MyMoneySplit s;
-      const QString splitId = model->data(index, LedgerRole::SplitIdRole).toString();
+      const QString splitId = model->data(index, (int)eLedgerModel::Role::SplitId).toString();
       if(!SplitModel::isNewSplitId(splitId)) {
         s = t.splitById(splitId);
       }
-      s.setNumber(model->data(index, LedgerRole::NumberRole).toString());
-      s.setMemo(model->data(index, LedgerRole::MemoRole).toString());
-      s.setAccountId(model->data(index, LedgerRole::AccountIdRole).toString());
-      s.setShares(model->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>());
-      s.setValue(model->data(index, LedgerRole::SplitValueRole).value<MyMoneyMoney>());
-      s.setCostCenterId(model->data(index, LedgerRole::CostCenterIdRole).toString());
-      s.setPayeeId(model->data(index, LedgerRole::PayeeIdRole).toString());
+      s.setNumber(model->data(index, (int)eLedgerModel::Role::Number).toString());
+      s.setMemo(model->data(index, (int)eLedgerModel::Role::Memo).toString());
+      s.setAccountId(model->data(index, (int)eLedgerModel::Role::AccountId).toString());
+      s.setShares(model->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>());
+      s.setValue(model->data(index, (int)eLedgerModel::Role::SplitValue).value<MyMoneyMoney>());
+      s.setCostCenterId(model->data(index, (int)eLedgerModel::Role::CostCenterId).toString());
+      s.setPayeeId(model->data(index, (int)eLedgerModel::Role::PayeeId).toString());
 
       // reconcile flag and date
       if(s.id().isEmpty()) {

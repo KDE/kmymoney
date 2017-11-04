@@ -14,7 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHash>
+#include <QHashFunctions>
+#include <qnamespace.h>
 
 #ifndef MODELENUMS_H
 #define MODELENUMS_H
@@ -50,4 +51,65 @@ namespace eAccountsModel {
 
     inline uint qHash(const Role key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
+
+namespace eLedgerModel {
+  enum class Column {
+    Number = 0,
+    Date,
+    Security,
+    CostCenter,
+    Detail,
+    Reconciliation,
+    Payment,
+    Deposit,
+    Quantity,
+    Price,
+    Amount,
+    Value,
+    Balance,
+
+    // insert new columns above this line
+    LastColumn
+  };
+
+  enum class Role {
+    // Roles returning values
+    PostDate = Qt::UserRole,
+    PayeeName,
+    Account,
+    CounterAccount,
+    SplitCount,
+    Reconciliation,
+    ReconciliationShort,
+    ReconciliationLong,
+    SplitShares,
+    ShareAmount,
+    ShareAmountSuffix,
+    SplitValue,
+    Memo,
+    SingleLineMemo,
+    Number,
+    Erroneous,
+    Import,
+    Split,
+    Transaction,
+
+    // Roles returning ids
+    TransactionId,
+    SplitId,
+    TransactionSplitId,
+    PayeeId,
+    AccountId,
+    CounterAccountId,
+    CostCenterId,
+    ScheduleId,
+    TransactionCommodity,
+
+    // A pseudo role to emit the dataChanged() signal when
+    // used with setData()
+    EmitDataChanged
+
+  };
+}
+
 #endif

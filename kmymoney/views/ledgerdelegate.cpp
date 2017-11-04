@@ -127,7 +127,7 @@ QColor LedgerDelegate::m_seperatorColor = QColor(0xff, 0xf2, 0x9b);
 class LedgerSeperatorDate : public LedgerSeperator
 {
 public:
-  LedgerSeperatorDate(LedgerRole::Roles role);
+  LedgerSeperatorDate(eLedgerModel::Role role);
   virtual ~LedgerSeperatorDate() {}
 
   virtual bool rowHasSeperator(const QModelIndex& index) const;
@@ -163,7 +163,7 @@ QModelIndex LedgerSeperator::nextIndex(const QModelIndex& index) const
 
 
 
-LedgerSeperatorDate::LedgerSeperatorDate(LedgerRole::Roles role)
+LedgerSeperatorDate::LedgerSeperatorDate(eLedgerModel::Role role)
   : LedgerSeperator(role)
 {
   const QDate today = QDate::currentDate();
@@ -206,9 +206,9 @@ QString LedgerSeperatorDate::getEntry(const QModelIndex& index, const QModelInde
 
   const QAbstractItemModel* model = index.model();
   QString rc;
-  if (model->data(index, m_role).toDate() != model->data(nextIndex, m_role).toDate()) {
-    const QDate key = model->data(index, m_role).toDate();
-    const QDate endKey = model->data(nextIndex, m_role).toDate();
+  if (model->data(index, (int)m_role).toDate() != model->data(nextIndex, (int)m_role).toDate()) {
+    const QDate key = model->data(index, (int)m_role).toDate();
+    const QDate endKey = model->data(nextIndex, (int)m_role).toDate();
     QMap<QDate, QString>::const_iterator it = m_entries.upperBound(key);
     while((it != m_entries.cend()) && (it.key() <= endKey)) {
       rc = *it;
@@ -223,7 +223,7 @@ bool LedgerSeperatorDate::rowHasSeperator(const QModelIndex& index) const
   bool rc = false;
   QModelIndex nextIdx = nextIndex(index);
   if(nextIdx.isValid() ) {
-    const QString id = nextIdx.model()->data(nextIdx, LedgerRole::TransactionSplitIdRole).toString();
+    const QString id = nextIdx.model()->data(nextIdx, (int)eLedgerModel::Role::TransactionSplitId).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
     // and we never draw a separator in front of that row
@@ -281,16 +281,16 @@ LedgerDelegate::~LedgerDelegate()
   delete d;
 }
 
-void LedgerDelegate::setSortRole(LedgerRole::Roles role)
+void LedgerDelegate::setSortRole(eLedgerModel::Role role)
 {
   delete d->m_seperator;
   d->m_seperator = 0;
   switch(role) {
-    case LedgerRole::PostDateRole:
+    case eLedgerModel::Role::PostDate:
       d->m_seperator = new LedgerSeperatorDate(role);
       break;
     default:
-      qDebug() << "LedgerDelegate::setSortRole role" << role << "not implemented";
+      qDebug() << "LedgerDelegate::setSortRole role" << (int)role << "not implemented";
       break;
   }
 }
@@ -349,7 +349,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   // show the focus only on the detail column
   opt.state &= ~QStyle::State_HasFocus;
-  if(index.column() == LedgerModel::DetailColumn) {
+  if(index.column() == (int)eLedgerModel::Column::Detail) {
     QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
     if(view) {
       if(view->currentIndex().row() == index.row()) {
@@ -389,31 +389,31 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   const bool selected = opt.state & QStyle::State_Selected;
 
   QStringList lines;
-  if(index.column() == LedgerModel::DetailColumn) {
-    lines << index.model()->data(index, LedgerRole::PayeeNameRole).toString();
+  if(index.column() == (int)eLedgerModel::Column::Detail) {
+    lines << index.model()->data(index, (int)eLedgerModel::Role::PayeeName).toString();
     if(selected) {
-      lines << index.model()->data(index, LedgerRole::CounterAccountRole).toString();
-      lines << index.model()->data(index, LedgerRole::SingleLineMemoRole).toString();
+      lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
+      lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
 
     } else {
       if(lines.at(0).isEmpty()) {
         lines.clear();
-        lines << index.model()->data(index, LedgerRole::SingleLineMemoRole).toString();
+        lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
       }
       if(lines.at(0).isEmpty()) {
-        lines << index.model()->data(index, LedgerRole::CounterAccountRole).toString();
+        lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
       }
     }
     lines.removeAll(QString());
   }
 
-  const bool erroneous = index.model()->data(index, LedgerRole::ErroneousRole).toBool();
+  const bool erroneous = index.model()->data(index, (int)eLedgerModel::Role::Erroneous).toBool();
 
   // draw the text items
   if(!opt.text.isEmpty() || !lines.isEmpty()) {
 
     // check if it is a scheduled transaction and display it as inactive
-    if(!index.model()->data(index, LedgerRole::ScheduleIdRole).toString().isEmpty()) {
+    if(!index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
       opt.state &= ~QStyle::State_Enabled;
     }
 
@@ -441,7 +441,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     }
 
     // collect data for the various colums
-    if(index.column() == LedgerModel::DetailColumn) {
+    if(index.column() == (int)eLedgerModel::Column::Detail) {
       for(int i = 0; i < lines.count(); ++i) {
         painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
       }
@@ -467,7 +467,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   }
 
   // draw the attention mark
-  if((index.column() == LedgerModel::DetailColumn)
+  if((index.column() == (int)eLedgerModel::Column::Detail)
   && erroneous) {
     QPixmap attention;
     attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
@@ -484,7 +484,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     opt.state &= ~QStyle::State_Selected;
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
-    if(index.column() == LedgerModel::DetailColumn) {
+    if(index.column() == (int)eLedgerModel::Column::Detail) {
       QPalette::ColorGroup cg = QPalette::Normal;
       painter->setPen(opt.palette.color(cg, QPalette::Text));
       painter->drawText(opt.rect, Qt::AlignCenter, d->m_seperator->seperatorText(index));
@@ -583,8 +583,8 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   if(d->m_view) {
     QModelIndex currentIndex = d->m_view->currentIndex();
     if(currentIndex.isValid()) {
-      QString currentId = currentIndex.model()->data(currentIndex, LedgerRole::TransactionSplitIdRole).toString();
-      QString myId = index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString();
+      QString currentId = currentIndex.model()->data(currentIndex, (int)eLedgerModel::Role::TransactionSplitId).toString();
+      QString myId = index.model()->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString();
       fullDisplay = (currentId == myId);
     }
   }
@@ -616,9 +616,9 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   size = QSize(100, lineHeight);
 
   if(fullDisplay) {
-    QString payee = index.data(LedgerRole::PayeeNameRole).toString();
-    QString counterAccount = index.data(LedgerRole::CounterAccountRole).toString();
-    QString memo = index.data(LedgerRole::SingleLineMemoRole).toString();
+    auto payee = index.data((int)eLedgerModel::Role::PayeeName).toString();
+    auto counterAccount = index.data((int)eLedgerModel::Role::CounterAccount).toString();
+    auto memo = index.data((int)eLedgerModel::Role::SingleLineMemo).toString();
 
     rows = (payee.length() > 0 ? 1 : 0) + (counterAccount.length() > 0 ? 1 : 0) + (memo.length() > 0 ? 1 : 0);
     // make sure we show at least one row
@@ -678,7 +678,7 @@ void LedgerDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index
 {
   NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
   if(editor) {
-    editor->loadTransaction(index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString());
+    editor->loadTransaction(index.model()->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString());
   }
 }
 

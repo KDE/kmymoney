@@ -30,30 +30,29 @@
 
 #include "models.h"
 #include "ledgermodel.h"
+#include "ledgerproxymodel.h"
+#include "modelenums.h"
 #include "ui_newtransactionform.h"
+
+using namespace eLedgerModel;
 
 class NewTransactionForm::Private
 {
 public:
   Private(NewTransactionForm* p)
   : parent(p)
-  , filterModel(new LedgerSortFilterProxyModel(parent))
+  , filterModel(new LedgerProxyModel(parent))
   , ui(new Ui_NewTransactionForm)
   {
     filterModel->setDynamicSortFilter(true);
-    filterModel->setFilterRole(LedgerRole::TransactionSplitIdRole);
+    filterModel->setFilterRole((int)eLedgerModel::Role::TransactionSplitId);
     filterModel->setSourceModel(Models::instance()->ledgerModel());
   }
   NewTransactionForm*         parent;
-  LedgerSortFilterProxyModel* filterModel;
+  LedgerProxyModel* filterModel;
   Ui_NewTransactionForm*      ui;
   QString                     transactionSplitId;
 };
-
-
-
-
-
 
 
 NewTransactionForm::NewTransactionForm(QWidget* parent)
@@ -75,19 +74,19 @@ void NewTransactionForm::showTransaction(const QString& transactionSplitId)
 
   QModelIndex index = d->filterModel->index(0, 0);
   if(index.isValid()) {
-    d->ui->dateEdit->setText(QLocale().toString(d->filterModel->data(index, LedgerRole::PostDateRole).toDate(),
+    d->ui->dateEdit->setText(QLocale().toString(d->filterModel->data(index, (int)Role::PostDate).toDate(),
                                                            QLocale::ShortFormat));
-    d->ui->payeeEdit->setText(d->filterModel->data(index, LedgerRole::PayeeNameRole).toString());
+    d->ui->payeeEdit->setText(d->filterModel->data(index, (int)Role::PayeeName).toString());
     d->ui->memoEdit->clear();
-    d->ui->memoEdit->insertPlainText(d->filterModel->data(index, LedgerRole::MemoRole).toString());
+    d->ui->memoEdit->insertPlainText(d->filterModel->data(index, (int)Role::Memo).toString());
     d->ui->memoEdit->moveCursor(QTextCursor::Start);
     d->ui->memoEdit->ensureCursorVisible();
-    d->ui->accountEdit->setText(d->filterModel->data(index, LedgerRole::CounterAccountRole).toString());
-    d->ui->statusEdit->setText(d->filterModel->data(index, LedgerRole::ReconciliationRoleLong).toString());
-    QString amount = QString("%1 %2").arg(d->filterModel->data(index, LedgerRole::ShareAmountRole).toString())
-    .arg(d->filterModel->data(index, LedgerRole::ShareAmountSuffixRole).toString());
+    d->ui->accountEdit->setText(d->filterModel->data(index, (int)Role::CounterAccount).toString());
+    d->ui->statusEdit->setText(d->filterModel->data(index, (int)Role::ReconciliationLong).toString());
+    QString amount = QString("%1 %2").arg(d->filterModel->data(index, (int)Role::ShareAmount).toString())
+    .arg(d->filterModel->data(index, (int)Role::ShareAmountSuffix).toString());
     d->ui->amountEdit->setText(amount);
-    d->ui->numberEdit->setText(d->filterModel->data(index, LedgerRole::NumberRole).toString());
+    d->ui->numberEdit->setText(d->filterModel->data(index, (int)Role::Number).toString());
   }
 }
 
@@ -98,7 +97,7 @@ void NewTransactionForm::modelDataChanged(const QModelIndex& topLeft, const QMod
   const int lastRow = bottomRight.row();
   for(int row = startRow; row <= lastRow; ++row) {
     QModelIndex index = model->index(row, 0);
-    if(model->data(index, LedgerRole::TransactionSplitIdRole).toString() == d->transactionSplitId) {
+    if(model->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString() == d->transactionSplitId) {
       showTransaction(d->transactionSplitId);
       break;
     }

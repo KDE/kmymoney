@@ -30,12 +30,14 @@
 // Project Includes
 
 #include "ledgermodel.h"
+#include "modelenums.h"
+
 class LedgerView;
 
 class LedgerSeperator
 {
 public:
-  LedgerSeperator(LedgerRole::Roles role) : m_role(role) {}
+  LedgerSeperator(eLedgerModel::Role role) : m_role(role) {}
   virtual ~LedgerSeperator() {}
 
   virtual bool rowHasSeperator(const QModelIndex& index) const = 0;
@@ -48,7 +50,7 @@ public:
 protected:
   inline QModelIndex nextIndex(const QModelIndex& index) const;
 
-  LedgerRole::Roles         m_role;
+  eLedgerModel::Role         m_role;
 
   static QDate firstFiscalDate;
   static bool  showFiscalDate;
@@ -70,7 +72,7 @@ public:
   virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
   virtual void setEditorData(QWidget* editWidget, const QModelIndex& index) const;
 
-  virtual void setSortRole(LedgerRole::Roles role);
+  virtual void setSortRole(eLedgerModel::Role role);
 
   virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 

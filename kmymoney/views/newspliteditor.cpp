@@ -40,6 +40,7 @@
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
+#include "splitmodel.h"
 #include "mymoneyaccount.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
@@ -159,14 +160,14 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
     const LedgerModel* model = Models::instance()->ledgerModel();
-    QModelIndexList list = model->match(model->index(0, 0), LedgerRole::NumberRole,
+    QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
                                         QVariant(newNumber),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     foreach(QModelIndex index, list) {
-      if(model->data(index, LedgerRole::AccountIdRole) == ui->accountCombo->getSelected()
-        && model->data(index, LedgerRole::TransactionSplitIdRole) != transactionSplitId) {
+      if(model->data(index, (int)eLedgerModel::Role::AccountId) == ui->accountCombo->getSelected()
+        && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
         WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.").arg(newNumber));
         rc = false;
         break;

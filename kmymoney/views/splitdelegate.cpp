@@ -35,8 +35,11 @@
 #include "models.h"
 #include "accountsmodel.h"
 #include "ledgermodel.h"
+#include "splitmodel.h"
 #include "newspliteditor.h"
 #include "mymoneyaccount.h"
+
+using namespace eLedgerModel;
 
 QColor SplitDelegate::m_erroneousColor = QColor(Qt::red);
 QColor SplitDelegate::m_importedColor = QColor(Qt::yellow);
@@ -124,7 +127,7 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
 
   // show the focus only on the detail column
   opt.state &= ~QStyle::State_HasFocus;
-  if(index.column() == SplitModel::DetailColumn) {
+  if(index.column() == (int)Column::Detail) {
     QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
     if(view) {
       if(view->currentIndex().row() == index.row()) {
@@ -156,9 +159,9 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
   const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
 
   QStringList lines;
-  if(index.column() == SplitModel::DetailColumn) {
-    lines << index.model()->data(index, LedgerRole::AccountRole).toString();
-    lines << index.model()->data(index, LedgerRole::SingleLineMemoRole).toString();
+  if(index.column() == (int)Column::Detail) {
+    lines << index.model()->data(index, (int)Role::Account).toString();
+    lines << index.model()->data(index, (int)Role::SingleLineMemo).toString();
     lines.removeAll(QString());
   }
 
@@ -182,7 +185,7 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
     }
 
     // collect data for the various colums
-    if(index.column() == SplitModel::DetailColumn) {
+    if(index.column() == (int)Column::Detail) {
       for(int i = 0; i < lines.count(); ++i) {
         painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
       }
@@ -310,8 +313,8 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   if(view) {
     QModelIndex currentIndex = view->currentIndex();
     if(currentIndex.isValid()) {
-      QString currentId = currentIndex.model()->data(currentIndex, LedgerRole::TransactionSplitIdRole).toString();
-      QString myId = index.model()->data(index, LedgerRole::TransactionSplitIdRole).toString();
+      QString currentId = currentIndex.model()->data(currentIndex, (int)Role::TransactionSplitId).toString();
+      QString myId = index.model()->data(index, (int)Role::TransactionSplitId).toString();
       fullDisplay = (currentId == myId);
     }
   }
@@ -336,9 +339,9 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   int rows = 1;
   if(fullDisplay) {
     initStyleOption(&opt, index);
-    QString payee = index.data(LedgerRole::PayeeNameRole).toString();
-    QString account = index.data(LedgerRole::AccountRole).toString();
-    QString memo = index.data(LedgerRole::SingleLineMemoRole).toString();
+    auto payee = index.data((int)Role::PayeeName).toString();
+    auto account = index.data((int)Role::Account).toString();
+    auto memo = index.data((int)Role::SingleLineMemo).toString();
 
     rows = (payee.length() > 0 ? 1 : 0) + (account.length() > 0 ? 1 : 0) + (memo.length() > 0 ? 1 : 0);
     // make sure we show at least one row
@@ -388,11 +391,11 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
 
   if(model && editor) {
     editor->setShowValuesInverted(d->m_showValuesInverted);
-    editor->setMemo(model->data(index, LedgerRole::MemoRole).toString());
-    editor->setAccountId(model->data(index, LedgerRole::AccountIdRole).toString());
-    editor->setAmount(model->data(index, LedgerRole::SplitSharesRole).value<MyMoneyMoney>());
-    editor->setCostCenterId(model->data(index, LedgerRole::CostCenterIdRole).toString());
-    editor->setNumber(model->data(index, LedgerRole::NumberRole).toString());
+    editor->setMemo(model->data(index, (int)Role::Memo).toString());
+    editor->setAccountId(model->data(index, (int)Role::AccountId).toString());
+    editor->setAmount(model->data(index, (int)Role::SplitShares).value<MyMoneyMoney>());
+    editor->setCostCenterId(model->data(index, (int)Role::CostCenterId).toString());
+    editor->setNumber(model->data(index, (int)Role::Number).toString());
   }
 }
 
@@ -400,14 +403,14 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
 {
   NewSplitEditor* splitEditor = qobject_cast< NewSplitEditor* >(editor);
   if(splitEditor) {
-    model->setData(index, splitEditor->number(), LedgerRole::NumberRole);
-    model->setData(index, splitEditor->memo(), LedgerRole::MemoRole);
-    model->setData(index, splitEditor->accountId(), LedgerRole::AccountIdRole);
-    model->setData(index, splitEditor->costCenterId(), LedgerRole::CostCenterIdRole);
-    model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), LedgerRole::SplitSharesRole);
-    model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), LedgerRole::SplitValueRole);
+    model->setData(index, splitEditor->number(), (int)Role::Number);
+    model->setData(index, splitEditor->memo(), (int)Role::Memo);
+    model->setData(index, splitEditor->accountId(), (int)Role::AccountId);
+    model->setData(index, splitEditor->costCenterId(), (int)Role::CostCenterId);
+    model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), (int)Role::SplitShares);
+    model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), (int)Role::SplitValue);
 
-    const QString transactionCommodity = model->data(index, LedgerRole::TransactionCommodityRole).toString();
+    const QString transactionCommodity = model->data(index, (int)Role::TransactionCommodity).toString();
     QModelIndex accIndex = Models::instance()->accountsModel()->accountById(splitEditor->accountId());
     if(accIndex.isValid()) {
       MyMoneyAccount acc = Models::instance()->accountsModel()->data(accIndex, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
@@ -423,7 +426,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
     }
 
     // the following forces to send a dataChanged signal
-    model->setData(index, QVariant(), LedgerRole::EmitDataChangedRole);
+    model->setData(index, QVariant(), (int)Role::EmitDataChanged);
 
     // in case this was a new split, we nned to create a new empty one
     SplitModel* splitModel = qobject_cast<SplitModel*>(model);
