@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KTagsViewDecl</class>
- <widget class="QWidget" name="KTagsViewDecl">
+ <class>KTagsView</class>
+ <widget class="QWidget" name="KTagsView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -39,6 +48,12 @@
           <layout class="QHBoxLayout">
            <item>
             <widget class="QPushButton" name="m_newButton">
+             <property name="toolTip">
+              <string>Creates a new tag</string>
+             </property>
+             <property name="whatsThis">
+              <string>Use this to create a new tag.</string>
+             </property>
              <property name="text">
               <string comment="New payee">New</string>
              </property>
@@ -46,6 +61,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="m_renameButton">
+             <property name="toolTip">
+              <string>Rename the current selected tag</string>
+             </property>
+             <property name="whatsThis">
+              <string>Use this to start renaming the selected tag.</string>
+             </property>
              <property name="text">
               <string>Ren</string>
              </property>
@@ -53,6 +74,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="m_deleteButton">
+             <property name="toolTip">
+              <string>Delete the current selected tag</string>
+             </property>
+             <property name="whatsThis">
+              <string>Use this to delete the selected tag.</string>
+             </property>
              <property name="text">
               <string>Del</string>
              </property>
@@ -112,7 +139,16 @@
              <property name="spacing">
               <number>6</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>11</number>
+             </property>
+             <property name="topMargin">
+              <number>11</number>
+             </property>
+             <property name="rightMargin">
+              <number>11</number>
+             </property>
+             <property name="bottomMargin">
               <number>11</number>
              </property>
              <item>
@@ -120,7 +156,16 @@
                <property name="spacing">
                 <number>6</number>
                </property>
-               <property name="margin">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
                 <number>0</number>
                </property>
                <item>
@@ -170,7 +215,16 @@
              <string>Tag configuration</string>
             </property>
             <layout class="QGridLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>11</number>
+             </property>
+             <property name="topMargin">
+              <number>11</number>
+             </property>
+             <property name="rightMargin">
+              <number>11</number>
+             </property>
+             <property name="bottomMargin">
               <number>11</number>
              </property>
              <property name="spacing">
@@ -300,6 +354,12 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="toolTip">
+          <string>Accepts the entered data and stores it</string>
+         </property>
+         <property name="whatsThis">
+          <string>Use this to accept the modified data.</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -319,25 +379,14 @@
    <header>kcolorbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QListWidget</class>
-   <extends>QListWidget</extends>
-   <header>klistwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyRegister::Register</class>

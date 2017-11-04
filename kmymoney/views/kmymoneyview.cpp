@@ -195,18 +195,12 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
-// Page 5
-  m_tagsView = new KTagsView();
+  // Page 5
+  m_tagsView = new KTagsView;
   viewFrames[View::Tags] = m_model->addPage(m_tagsView, i18n("Tags"));
   viewFrames[View::Tags]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewTags]));
-
-  connect(kmymoney, SIGNAL(tagCreated(QString)), m_tagsView, SLOT(slotSelectTagAndTransaction(QString)));
-  connect(kmymoney, SIGNAL(tagRename()), m_tagsView, SLOT(slotRenameButtonCliked()));
-  connect(m_tagsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowTagContextMenu()));
-  connect(m_tagsView, SIGNAL(selectObjects(QList<MyMoneyTag>)), kmymoney, SLOT(slotSelectTags(QList<MyMoneyTag>)));
-  connect(m_tagsView, SIGNAL(transactionSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
-  connect(m_tagsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 6
   m_payeesView = new KPayeesView();
@@ -1710,7 +1704,7 @@ void KMyMoneyView::slotRefreshViews()
   m_institutionsView->refresh();
   m_categoriesView->refresh();
   m_payeesView->slotLoadPayees();
-  m_tagsView->slotLoadTags();
+  m_tagsView->refresh();
   m_ledgerView->slotLoadView();
   m_budgetView->refresh();
   m_homeView->slotLoadView();
@@ -2297,6 +2291,17 @@ void KMyMoneyView::connectView(const View view)
       connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, m_categoriesView, &KCategoriesView::slotProfitChanged);
       connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_categoriesView, &KCategoriesView::refresh);
 
+      break;
+    case View::Tags:
+      disconnect(m_tagsView, &KTagsView::aboutToShow, this, &KMyMoneyView::connectView);
+      connect(kmymoney,   &KMyMoneyApp::tagCreated,         m_tagsView, static_cast<void (KTagsView::*)(const QString&)>(&KTagsView::slotSelectTagAndTransaction));
+      connect(kmymoney,   &KMyMoneyApp::slotTagRename,      m_tagsView, &KTagsView::slotRenameButtonCliked);
+      connect(m_tagsView, &KTagsView::tagNewClicked,        kmymoney,   static_cast<void (KMyMoneyApp::*)()>(&KMyMoneyApp::slotTagNew));
+      connect(m_tagsView, &KTagsView::tagDeleteClicked,     kmymoney,   static_cast<void (KMyMoneyApp::*)()>(&KMyMoneyApp::slotTagDelete));
+      connect(m_tagsView, &KTagsView::openContextMenu,      kmymoney,   &KMyMoneyApp::slotShowTagContextMenu);
+      connect(m_tagsView, &KTagsView::selectObjects,        kmymoney,   &KMyMoneyApp::slotSelectTags);
+      connect(m_tagsView, &KTagsView::transactionSelected,  this,       &KMyMoneyView::slotLedgerSelected);
+      connect(m_tagsView, &KMyMoneyViewBase::aboutToShow,   this,       &KMyMoneyView::aboutToChangeView);
       break;
     case View::Budget:
       disconnect(m_budgetView, &KBudgetView::aboutToShow, this, &KMyMoneyView::connectView);

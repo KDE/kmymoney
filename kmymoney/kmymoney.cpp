@@ -851,7 +851,7 @@ void KMyMoneyApp::initActions()
       {Action::PayeeMerge,                    &KMyMoneyApp::slotPayeeMerge,                   i18n("Merge payees"),                               Icon::PayeeMerge},
       //Tags
       {Action::TagNew,                        &KMyMoneyApp::slotTagNew,                       i18n("New tag"),                                    Icon::ListAddTag},
-      {Action::TagRename,                     &KMyMoneyApp::tagRename,                        i18n("Rename tag"),                                 Icon::TagRename},
+      {Action::TagRename,                     &KMyMoneyApp::slotTagRename,                        i18n("Rename tag"),                                 Icon::TagRename},
       {Action::TagDelete,                     &KMyMoneyApp::slotTagDelete,                    i18n("Delete tag"),                                 Icon::ListRemoveTag},
       //Budget
       {Action::BudgetNew,                     &KMyMoneyApp::slotBudgetNew,                    i18n("New budget"),                                 Icon::Empty},

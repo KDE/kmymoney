@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHash>
+#include <QHashFunctions>
 
 #ifndef VIEWENUMS_H
 #define VIEWENUMS_H
@@ -23,5 +23,14 @@ enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
                   Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, None };
 
 inline uint qHash(const View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+namespace eView {
+  enum class Tag { All = 0,
+                   Referenced, // used tags
+                   Unused,     // unused tags
+                   Opened,     // not closed tags
+                   Closed      // closed tags
+                 };
+}
 
 #endif

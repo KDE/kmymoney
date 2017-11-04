@@ -378,15 +378,6 @@ protected slots:
 
   /**
     */
-  void slotTagNew(const QString& newnameBase, QString& id);
-  void slotTagNew();
-
-  /**
-    */
-  void slotTagDelete();
-
-  /**
-    */
   void slotBudgetNew();
 
   /**
@@ -1176,6 +1167,15 @@ public slots:
   void slotScheduleSkip();
 
   /**
+    */
+  void slotTagNew(const QString& newnameBase, QString& id);
+  void slotTagNew();
+
+  /**
+    */
+  void slotTagDelete();
+
+  /**
     * This slot fires up the KCalc application
     */
   void slotToolsStartKCalc();
@@ -1408,7 +1408,7 @@ signals:
   void payeeRename();
   void payeeCreated(const QString& id);
 
-  void tagRename();
+  void slotTagRename();
   void tagCreated(const QString& id);
 
   void currencyRename();

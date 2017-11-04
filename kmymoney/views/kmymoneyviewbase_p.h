@@ -23,8 +23,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#ifndef KMYMONEYVIEWBASEPRIVATE_H
+#define KMYMONEYVIEWBASEPRIVATE_H
+
 class KMyMoneyViewBasePrivate
 {
 public:
     bool m_needsRefresh;
 };
+
+#endif
