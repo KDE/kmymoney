@@ -4,6 +4,7 @@
    begin                : Sun Jun 27 2010
    copyright            : (C) 2010 by Fernando Vilas
    email                : kmymoney-devel@kde.org
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -29,27 +30,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kinvestmentdetailswizardpagedecl.h"
-
 class MyMoneySecurity;
+
+namespace Ui { class KInvestmentDetailsWizardPage; }
 
 /**
  * This class implements the investment details page  of the
  * @ref KNewInvestmentWizard.
  */
-class KInvestmentDetailsWizardPageDecl : public QWizardPage, public Ui::KInvestmentDetailsWizardPageDecl
-{
-public:
-  KInvestmentDetailsWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
-
-class KInvestmentDetailsWizardPage : public KInvestmentDetailsWizardPageDecl
+class KInvestmentDetailsWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit KInvestmentDetailsWizardPage(QWidget *parent = 0);
+  explicit KInvestmentDetailsWizardPage(QWidget *parent = nullptr);
+  ~KInvestmentDetailsWizardPage();
+
   void init2(const MyMoneySecurity& security);
 
   /**
@@ -76,6 +71,8 @@ public:
 signals:
   void checkForExistingSymbol(const QString& symbol);
 
+private:
+  Ui::KInvestmentDetailsWizardPage  *ui;
 };
 
 #endif

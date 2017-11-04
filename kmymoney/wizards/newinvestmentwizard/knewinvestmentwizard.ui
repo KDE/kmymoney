@@ -3,8 +3,8 @@
   <author></author>
   <comment></comment>
   <exportmacro></exportmacro>
-  <class>KNewInvestmentWizardDecl</class>
-  <widget class="QWizard" name="KNewInvestmentWizardDecl">
+  <class>KNewInvestmentWizard</class>
+  <widget class="QWizard" name="KNewInvestmentWizard">
     <property name="geometry">
       <rect>
         <x>0</x>

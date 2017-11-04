@@ -4,6 +4,7 @@
    begin                : Sun Jun 27 2010
    copyright            : (C) 2010 by Fernando Vilas
    email                : kmymoney-devel@kde.org
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -20,8 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringListModel>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -30,29 +29,37 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyutils.h"
+#include "ui_kinvestmenttypewizardpage.h"
+
 #include "mymoneysecurity.h"
 
-KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent)
-    : KInvestmentTypeWizardPageDecl(parent)
+KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent) :
+  QWizardPage(parent),
+  ui(new Ui::KInvestmentTypeWizardPage)
 {
-  m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Stock);
-  m_securityType->addItem(i18nc("Security type", "Mutual Fund"), (int)eMyMoney::Security::MutualFund);
-  m_securityType->addItem(i18nc("Security type", "Bond"), (int)eMyMoney::Security::Bond);
-  registerField("securityType", m_securityType, "currentData", SIGNAL(currentIndexChanged(int)));
+  ui->setupUi(this);
+  ui->m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Stock);
+  ui->m_securityType->addItem(i18nc("Security type", "Mutual Fund"), (int)eMyMoney::Security::MutualFund);
+  ui->m_securityType->addItem(i18nc("Security type", "Bond"), (int)eMyMoney::Security::Bond);
+  registerField("securityType", ui->m_securityType, "currentData", SIGNAL(currentIndexChanged(int)));
+}
+
+KInvestmentTypeWizardPage::~KInvestmentTypeWizardPage()
+{
+  delete ui;
 }
 
 void KInvestmentTypeWizardPage::init2(const MyMoneySecurity& security)
 {
   //get the current text of the security and set the combo index accordingly
   auto text = MyMoneySecurity::securityTypeToString(security.securityType());
-  for (int i = 0; i < m_securityType->count(); ++i) {
-    if (m_securityType->itemText(i) == text)
-      m_securityType->setCurrentIndex(i);
+  for (auto i = 0; i < ui->m_securityType->count(); ++i) {
+    if (ui->m_securityType->itemText(i) == text)
+      ui->m_securityType->setCurrentIndex(i);
   }
 }
 
 void KInvestmentTypeWizardPage::setIntroLabelText(const QString& text)
 {
-  m_introLabel->setText(text);
+  ui->m_introLabel->setText(text);
 }

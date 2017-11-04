@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KInvestmentTypeWizardPageDecl</class>
+ <class>KInvestmentTypeWizardPage</class>
  <widget class="QWizardPage" name="WizardPage">
   <attribute name="title">
     <string>Investment Type</string>

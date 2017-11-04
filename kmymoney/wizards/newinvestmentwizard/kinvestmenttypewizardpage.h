@@ -4,6 +4,7 @@
    begin                : Sun Jun 27 2010
    copyright            : (C) 2010 by Fernando Vilas
    email                : kmymoney-devel@kde.org
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -29,29 +30,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kinvestmenttypewizardpagedecl.h"
-
 class MyMoneySecurity;
+
+namespace Ui { class KInvestmentTypeWizardPage; }
 
 /**
  * This class implements the investment type page of the
  * @ref KNewInvestmentWizard.
  */
-class KInvestmentTypeWizardPageDecl : public QWizardPage, public Ui::KInvestmentTypeWizardPageDecl
-{
-public:
-  KInvestmentTypeWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
-
-class KInvestmentTypeWizardPage : public KInvestmentTypeWizardPageDecl
+class KInvestmentTypeWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit KInvestmentTypeWizardPage(QWidget *parent = 0);
+  explicit KInvestmentTypeWizardPage(QWidget *parent = nullptr);
+  ~KInvestmentTypeWizardPage();
+
   void init2(const MyMoneySecurity& security);
   void setIntroLabelText(const QString& text);
+
+private:
+  Ui::KInvestmentTypeWizardPage  *ui;
 };
 
 #endif

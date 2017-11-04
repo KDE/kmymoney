@@ -4,6 +4,7 @@
    begin                : Sun Jun 27 2010
    copyright            : (C) 2010 by Fernando Vilas
    email                : kmymoney-devel@kde.org
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -21,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QWizardPage>
 
 // ----------------------------------------------------------------------------
@@ -30,27 +30,20 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_konlineupdatewizardpagedecl.h"
-
 class MyMoneySecurity;
+
+namespace Ui { class KOnlineUpdateWizardPage; }
 
 /**
  * This class implements the Online Update page of the
  * @ref KNewInvestmentWizard.
  */
-class KOnlineUpdateWizardPageDecl : public QWizardPage, public Ui::KOnlineUpdateWizardPageDecl
-{
-public:
-  KOnlineUpdateWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
-
-class KOnlineUpdateWizardPage : public KOnlineUpdateWizardPageDecl
+class KOnlineUpdateWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit KOnlineUpdateWizardPage(QWidget *parent = 0);
+  explicit KOnlineUpdateWizardPage(QWidget *parent = nullptr);
+  ~KOnlineUpdateWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
@@ -66,6 +59,9 @@ public:
 public slots:
   void slotCheckPage(const QString&);
   void slotSourceChanged(bool);
+
+private:
+  Ui::KOnlineUpdateWizardPage  *ui;
 };
 
 #endif

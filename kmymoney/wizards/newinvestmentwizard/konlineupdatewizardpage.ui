@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KOnlineUpdateWizardPageDecl</class>
- <widget class="QWizardPage" name="KOnlineUpdateWizardPageDecl">
+ <class>KOnlineUpdateWizardPage</class>
+ <widget class="QWizardPage" name="KOnlineUpdateWizardPage">
   <attribute name="title">
     <string>Online Update</string>
   </attribute>

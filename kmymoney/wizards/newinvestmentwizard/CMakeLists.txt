@@ -8,10 +8,10 @@ set (libnewinvestmentwizard_a_SOURCES
   )
 
 set (libnewinvestmentwizard_a_UI
-  knewinvestmentwizarddecl.ui
-  kinvestmentdetailswizardpagedecl.ui
-  kinvestmenttypewizardpagedecl.ui
-  konlineupdatewizardpagedecl.ui
+  knewinvestmentwizard.ui
+  kinvestmentdetailswizardpage.ui
+  kinvestmenttypewizardpage.ui
+  konlineupdatewizardpage.ui
   )
 
 ki18n_wrap_ui(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
