@@ -35,7 +35,7 @@
 #include <alkimia/alkvalue.h>
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 11;
+unsigned int MyMoneyDbDef::m_currentVersion = 12;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -307,6 +307,7 @@ void MyMoneyDbDef::Schedules()
   appendField(MyMoneyDbColumn("startDate", "date", false, NOTNULL));
   appendField(MyMoneyDbColumn("endDate", "date"));
   appendField(MyMoneyDbColumn("fixed", "char(1)", false, NOTNULL));
+  appendField(MyMoneyDbColumn("lastDayInMonth", "char(1)", false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("N")));
   appendField(MyMoneyDbColumn("autoEnter", "char(1)", false, NOTNULL));
   appendField(MyMoneyDbColumn("lastPayment", "date"));
   appendField(MyMoneyDbColumn("nextPaymentDue", "date"));

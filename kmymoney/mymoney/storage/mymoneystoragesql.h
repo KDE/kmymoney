@@ -475,6 +475,7 @@ private:
   int upgradeToV9();
   int upgradeToV10();
   int upgradeToV11();
+  int upgradeToV12();
 
   int createTables();
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
@@ -485,6 +486,9 @@ private:
   const QStringList tables(QSql::TableType tt) {
     return (m_driver->tables(tt, static_cast<const QSqlDatabase&>(*this)));
   };
+
+  //! Returns 1 in case the @a column exists in @a table, 0 if not. In case of error, -1 is returned.
+  int haveColumnInTable(const QString& table, const QString& column);
 
   /**
    * @brief Ensure the storagePlugin with iid was setup

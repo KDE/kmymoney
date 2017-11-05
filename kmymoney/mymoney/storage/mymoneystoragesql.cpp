@@ -411,6 +411,10 @@ int MyMoneyStorageSql::upgradeDb()
         if ((rc = upgradeToV11()) != 0) return (1);
         ++m_dbVersion;
         break;
+      case 11:
+        if ((rc = upgradeToV12()) != 0) return (1);
+        ++m_dbVersion;
+        break;
       default:
         qWarning("Unknown version number in database - %d", m_dbVersion);
     }
@@ -716,18 +720,64 @@ int MyMoneyStorageSql::upgradeToV10()
   return 0;
 }
 
+int MyMoneyStorageSql::haveColumnInTable(const QString& table, const QString& column)
+{
+  QSqlQuery q(*this);
+  QString cmd = QString("SELECT * FROM %1 LIMIT 1").arg(table);
+  if(!q.exec(cmd)) {
+    buildError(q, Q_FUNC_INFO, QString("Error detecting if %1 exists in %2").arg(column).arg(table));
+    return -1;
+  }
+  QSqlRecord rec = q.record();
+  return (rec.indexOf(column) != -1) ? 1 : 0;
+}
+
 int MyMoneyStorageSql::upgradeToV11()
 {
   MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
 
   QSqlQuery q(*this);
+
   // add column roundingMethodCol to kmmSecurities
   if (!alterTable(m_db.m_tables["kmmSecurities"], m_dbVersion))
-    return (1);
+    return 1;
   // add column pricePrecision to kmmCurrencies
   if (!alterTable(m_db.m_tables["kmmCurrencies"], m_dbVersion))
-    return (1);
+    return 1;
 
+  return 0;
+}
+
+int MyMoneyStorageSql::upgradeToV12()
+{
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  switch(haveColumnInTable(QLatin1String("kmmSchedules"), QLatin1String("lastDayInMonth"))) {
+    case -1:
+      return 1;
+    case 1:         // column exists, nothing to do
+      break;
+    case 0:         // need update of kmmSchedules
+      // add column lastDayInMonth. Simply redo the update for 10 .. 11
+      if (!alterTable(m_db.m_tables["kmmSchedules"], m_dbVersion-1))
+        return 1;
+      break;
+  }
+
+  switch(haveColumnInTable(QLatin1String("kmmSecurities"), QLatin1String("roundingMethod"))) {
+    case -1:
+      return 1;
+    case 1:         // column exists, nothing to do
+      break;
+    case 0:         // need update of kmmSecurities and kmmCurrencies
+      // add column roundingMethodCol to kmmSecurities. Simply redo the update for 10 .. 11
+      if (!alterTable(m_db.m_tables["kmmSecurities"], m_dbVersion-1))
+        return 1;
+      // add column pricePrecision to kmmCurrencies. Simply redo the update for 10 .. 11
+      if (!alterTable(m_db.m_tables["kmmCurrencies"], m_dbVersion-1))
+        return 1;
+      break;
+  }
   return 0;
 }
 
@@ -2155,6 +2205,11 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
     q.bindValue(":fixed", "Y");
   } else {
     q.bindValue(":fixed", "N");
+  }
+  if (sch.lastDayInMonth()) {
+    q.bindValue(":lastDayInMonth", "Y");
+  } else {
+    q.bindValue(":lastDayInMonth", "N");
   }
   if (sch.autoEnter()) {
     q.bindValue(":autoEnter", "Y");
@@ -4202,6 +4257,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   int startDateCol = t.fieldNumber("startDate");
   int endDateCol = t.fieldNumber("endDate");
   int fixedCol = t.fieldNumber("fixed");
+  int lastDayInMonthCol = t.fieldNumber("lastDayInMonth");
   int autoEnterCol = t.fieldNumber("autoEnter");
   int lastPaymentCol = t.fieldNumber("lastPayment");
   int weekendOptionCol = t.fieldNumber("weekendOption");
@@ -4220,6 +4276,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
     s.setStartDate(GETDATE(startDateCol));
     s.setEndDate(GETDATE(endDateCol));
     boolChar = GETSTRING(fixedCol); s.setFixed(boolChar == "Y");
+    boolChar = GETSTRING(lastDayInMonthCol); s.setLastDayInMonth(boolChar == "Y");
     boolChar = GETSTRING(autoEnterCol); s.setAutoEnter(boolChar == "Y");
     s.setLastPayment(GETDATE(lastPaymentCol));
     s.setWeekendOption(static_cast<Schedule::WeekendOption>(GETINT(weekendOptionCol)));

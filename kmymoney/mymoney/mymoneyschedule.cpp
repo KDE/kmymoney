@@ -73,6 +73,9 @@ public:
   /// The last transaction date if the schedule does end at a fixed date
   QDate m_endDate;
 
+  /// the last day in month flag
+  bool m_lastDayInMonth;
+
   /// Enter the transaction into the register automatically
   bool m_autoEnter;
 
@@ -128,6 +131,7 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
   d->m_type = type;
   d->m_paymentType = paymentType;
   d->m_fixed = fixed;
+  d->m_lastDayInMonth = false;
   d->m_autoEnter = autoEnter;
   d->m_startDate = QDate();
   d->m_endDate = endDate;
@@ -154,6 +158,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   d->m_occurrenceMultiplier = node.attribute(getAttrName(Attribute::OccurrenceMultiplier), "1").toInt(); // krazy:exclude=spelling
   // Convert to compound occurrence
   simpleToCompoundOccurrence(d->m_occurrenceMultiplier, d->m_occurrence);
+  d->m_lastDayInMonth = static_cast<bool>(node.attribute("lastDayInMonth").toInt());
   d->m_autoEnter = static_cast<bool>(node.attribute(getAttrName(Attribute::AutoEnter)).toInt());
   d->m_fixed = static_cast<bool>(node.attribute(getAttrName(Attribute::Fixed)).toInt());
   d->m_weekendOption = static_cast<Schedule::WeekendOption>(node.attribute(getAttrName(Attribute::WeekendOption)).toInt());
@@ -337,6 +342,12 @@ void MyMoneySchedule::setEndDate(const QDate& date)
   d->m_endDate = date;
 }
 
+void MyMoneySchedule::setLastDayInMonth(bool state)
+{
+  Q_D(MyMoneySchedule);
+  d->m_lastDayInMonth = state;
+}
+
 void MyMoneySchedule::setAutoEnter(bool autoenter)
 {
   Q_D(MyMoneySchedule);
@@ -391,6 +402,11 @@ QDate MyMoneySchedule::adjustedNextDueDate() const
 {
   if (isFinished())
     return QDate();
+
+  if (lastDayInMonth()) {
+    QDate date = nextDueDate();
+    return adjustedDate(QDate(date.year(), date.month(), date.daysInMonth()), weekendOption());
+  }
 
   return adjustedDate(nextDueDate(), weekendOption());
 }
@@ -762,6 +778,7 @@ bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
       d->m_fixed == d2->m_fixed &&
       d->m_transaction == d2->m_transaction &&
       d->m_endDate == d2->m_endDate &&
+      d->m_lastDayInMonth == d2->m_lastDayInMonth &&
       d->m_autoEnter == d2->m_autoEnter &&
       d->m_lastPayment == d2->m_lastPayment &&
       ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)))
@@ -803,6 +820,12 @@ bool MyMoneySchedule::autoEnter() const
 {
   Q_D(const MyMoneySchedule);
   return d->m_autoEnter;
+}
+
+bool MyMoneySchedule::lastDayInMonth() const
+{
+  Q_D(const MyMoneySchedule);
+  return d->m_lastDayInMonth;
 }
 
 MyMoneyTransaction MyMoneySchedule::transaction() const
@@ -992,6 +1015,7 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   el.setAttribute(getAttrName(Attribute::StartDate), dateToString(d->m_startDate));
   el.setAttribute(getAttrName(Attribute::EndDate), dateToString(d->m_endDate));
   el.setAttribute(getAttrName(Attribute::Fixed), d->m_fixed);
+  el.setAttribute(getAttrName(Attribute::LastDayInMonth), d->m_lastDayInMonth);
   el.setAttribute(getAttrName(Attribute::AutoEnter), d->m_autoEnter);
   el.setAttribute(getAttrName(Attribute::LastPayment), dateToString(d->m_lastPayment));
   el.setAttribute(getAttrName(Attribute::WeekendOption), (int)d->m_weekendOption);
@@ -1616,7 +1640,8 @@ QString MyMoneySchedule::getAttrName(const Attribute attr)
     {Attribute::WeekendOption,        QStringLiteral("weekendOption")},
     {Attribute::Date,                 QStringLiteral("date")},
     {Attribute::StartDate,            QStringLiteral("startDate")},
-    {Attribute::EndDate,              QStringLiteral("endDate")}
+    {Attribute::EndDate,              QStringLiteral("endDate")},
+    {Attribute::LastDayInMonth,       QStringLiteral("lastDayInMonth")}
   };
   return attrNames[attr];
 }

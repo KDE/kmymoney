@@ -49,6 +49,7 @@ private slots:
   void testAdjustedNextPayment();
   void testReplaceId();
   void testAdjustedWhenItWillEnd();
+  void testProcessLastDayInMonth();
   void testNextPaymentOnLastDayOfMonth();
   void testElementNames();
   void testAttributeNames();

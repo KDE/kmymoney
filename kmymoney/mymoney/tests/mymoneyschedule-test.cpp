@@ -1753,3 +1753,21 @@ void MyMoneyScheduleTest::testAttributeNames()
     QVERIFY(!isEmpty);
   }
 }
+
+void MyMoneyScheduleTest::testProcessLastDayInMonth()
+{
+  MyMoneySchedule s;
+  // occurence is unrelated
+  s.setOccurrence(Schedule::Occurrence::Any);
+  s.setLastDayInMonth(true);
+  s.setNextDueDate(QDate(2010, 1, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2010,1,31));
+  s.setNextDueDate(QDate(2010, 2, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2010,2,28));
+  s.setNextDueDate(QDate(2016, 2, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2016,2,29));
+  s.setNextDueDate(QDate(2016, 4, 1));
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,30));
+  s.setLastDayInMonth(false);
+  QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,1));
+}
