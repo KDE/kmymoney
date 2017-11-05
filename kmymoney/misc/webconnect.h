@@ -20,6 +20,8 @@
 #define WEBCONNECT_H
 
 #include <QObject>
+#include <QLoggingCategory>
+Q_DECLARE_LOGGING_CATEGORY(WebConnectLog)
 
 class WebConnect : public QObject
 {

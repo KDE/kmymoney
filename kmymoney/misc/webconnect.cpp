@@ -24,6 +24,8 @@
 #include <QDataStream>
 #include <QUrl>
 
+Q_LOGGING_CATEGORY(WebConnectLog, "WebConnect")
+
 class WebConnect::Private
 {
 public:
@@ -54,14 +56,20 @@ public:
         if (!connectToServer()) {
             // no other instance seems to be running, so we start the server
             if (!server->listen(socketName)) {
-              qWarning() << "WebConnect: starting server failed. Try to remove stale socket.";
+              qCInfo(WebConnectLog) << "Starting server failed. Try to remove stale socket.";
               server->removeServer(socketName);
               if(!server->listen(socketName)) {
-                qWarning() << "WebConnect: starting server failed again. WebConnect not available.";
+                qCWarning(WebConnectLog) << "Starting server failed again. WebConnect not available.";
                 serverFail = true;
               }
             }
+            if (!serverFail) {
+                qCInfo(WebConnectLog) << "Running in server mode";
+            } else {
+                qCWarning(WebConnectLog) << "Unable to start server mode";
+            }
         } else {
+            qCInfo(WebConnectLog) << "Running in client mode";
             clientSocket->disconnectFromServer();
         }
     }
@@ -69,9 +77,12 @@ public:
     bool connectToServer()
     {
         // try to find a server
+        qCDebug(WebConnectLog) << "Try to connect to WebConnect server";
         clientSocket->setServerName(socketName);
         clientSocket->connectToServer();
-        return clientSocket->waitForConnected(200);
+        bool rc = clientSocket->waitForConnected(200);
+        qCDebug(WebConnectLog) << "Connect to server" << (rc ? "is ok" : "failed");
+        return rc;
     }
 };
 
@@ -106,22 +117,26 @@ void WebConnect::clientConnected()
 
 void WebConnect::clientDisconnected()
 {
+    qCDebug(WebConnectLog) << "Client disconnected";
     d->serverSocket->deleteLater();
     d->serverSocket = 0;
     if (d->server->hasPendingConnections()) {
+        qCDebug(WebConnectLog) << "Processing next pending connection";
         clientConnected();
     } else {
+        qCDebug(WebConnectLog) << "Wait for next client";
         connect(d->server, &QLocalServer::newConnection, this, &WebConnect::clientConnected);
     }
 }
 
 void WebConnect::serverConnected()
 {
-    d->blockSize = 0;
+    qCDebug(WebConnectLog) << "Server connected";
 }
 
 void WebConnect::serverDisconnected()
 {
+    qCDebug(WebConnectLog) << "Server disconnected";
 }
 
 void WebConnect::dataAvailable()
@@ -142,13 +157,14 @@ void WebConnect::dataAvailable()
     }
     QUrl url;
     in >> url;
-    qDebug() << "Webconnect:" << url;
+    qCInfo(WebConnectLog) << "Processing" << url;
     emit gotUrl(url);
 }
 
 void WebConnect::loadFile(const QUrl& url)
 {
     if (d->connectToServer()) {
+        qCInfo(WebConnectLog) << "Pass to server" << url;
         // transfer filename
         QByteArray block;
         QDataStream stream(&block, QIODevice::WriteOnly);
@@ -161,7 +177,7 @@ void WebConnect::loadFile(const QUrl& url)
         d->clientSocket->flush();
         d->clientSocket->disconnectFromServer();
     } else {
-        qWarning() << "Webconnect loadfile connection failed on client side";
+        qCWarning(WebConnectLog) << "Webconnect loadfile connection failed on client side";
     }
 }
 
