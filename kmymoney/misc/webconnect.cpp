@@ -107,8 +107,12 @@ WebConnect::~WebConnect()
 
 void WebConnect::clientConnected()
 {
+    qCDebug(WebConnectLog) << "Client connected";
     disconnect(d->server, &QLocalServer::newConnection, this, &WebConnect::clientConnected);
     if (!d->serverSocket) {
+        qCDebug(WebConnectLog) << "Get next pending connection";
+        // Reset to beginning of stream
+        d->blockSize = 0;
         d->serverSocket = d->server->nextPendingConnection();
         connect(d->serverSocket, &QLocalSocket::disconnected, this, &WebConnect::clientDisconnected);
         connect(d->serverSocket, &QLocalSocket::readyRead, this, &WebConnect::dataAvailable);
