@@ -53,7 +53,7 @@ public:
   void setDefaultFocus() override;
   void refresh() override;
 
-  void showEvent(QShowEvent* event);
+  void showEvent(QShowEvent* event) override;
 
 public slots:
   void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId, const QString& transactionId);
