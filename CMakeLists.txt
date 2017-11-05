@@ -210,7 +210,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
   "Choose the type of build.
-Possible values are: 'Release' 'RelWithDebInfo' 'Debug' 'Debugfull' 'Profile'
+Possible values are: 'Release' 'RelWithDebInfo' 'Debug' 'DebugKMM' 'Debugfull' 'Profile'
 The default value is: 'RelWithDebInfo'" FORCE)
 
 # tells gcc to enable exception handling
@@ -225,18 +225,21 @@ endif()
 # IDEA: Set on a per target base
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-if(CMAKE_COMPILER_IS_GNUCXX)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # be more pedantic about common symbols
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wlogical-op")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wextra")
 
-  # Debug, Debugfull, Profile
-  set(CMAKE_CXX_FLAGS_DEBUG
+  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
+  endif()
+
+  # DebugKMM, Debugfull, Profile
+  set(CMAKE_CXX_FLAGS_DEBUGKMM
     "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
   set(CMAKE_CXX_FLAGS_DEBUGFULL
     "-g3 -fno-inline")
   set(CMAKE_CXX_FLAGS_PROFILE
     "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op -Wextra")
 
   # be pedantic about undefined symbols when linking shared libraries
   if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
@@ -244,28 +247,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   endif()
 endif()
 
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  # be more pedantic about common symbols
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common")
-
-  # Debug, Debugfull, Profile
-  set(CMAKE_CXX_FLAGS_DEBUG
-    "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
-  set(CMAKE_CXX_FLAGS_DEBUGFULL
-    "-g -O0 -fno-inline")
-  set(CMAKE_CXX_FLAGS_PROFILE
-    "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
-
-  # be pedantic about undefined symbols when linking shared libraries
-	if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
-  endif()
-endif()
-
 # preprocessor definitions in case this is a debug build
 set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
 
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
