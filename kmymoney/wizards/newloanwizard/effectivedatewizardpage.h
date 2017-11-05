@@ -29,25 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_effectivedatewizardpagedecl.h"
+namespace Ui { class EffectiveDateWizardPage; }
 
 /**
  * This class implements the Effective Date page of the
  * @ref KNewLoanWizard.
  */
-class EffectiveDateWizardPageDecl : public QWizardPage, public Ui::EffectiveDateWizardPageDecl
-{
-public:
-  EffectiveDateWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class EffectiveDateWizardPage : public EffectiveDateWizardPageDecl
+class EffectiveDateWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit EffectiveDateWizardPage(QWidget *parent = 0);
+  explicit EffectiveDateWizardPage(QWidget *parent = nullptr);
+  ~EffectiveDateWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
@@ -59,6 +53,8 @@ public:
    * the inputs from previous pages.
    */
   void initializePage();
+
+  Ui::EffectiveDateWizardPage *ui;
 };
 
 #endif

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SummaryWizardPageDecl</class>
- <widget class="QWizardPage" name="SummaryWizardPageDecl">
+ <class>SummaryWizardPage</class>
+ <widget class="QWizardPage" name="SummaryWizardPage">
   <attribute name="title">
     <string>Summary</string>
   </attribute>

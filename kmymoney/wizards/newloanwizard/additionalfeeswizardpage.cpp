@@ -31,6 +31,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_additionalfeeswizardpage.h"
+
 #include "knewloanwizard.h"
 #include "knewloanwizard_p.h"
 #include "ksplittransactiondlg.h"
@@ -39,19 +41,26 @@
 #include "mymoneymoney.h"
 
 AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
-    : AdditionalFeesWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::AdditionalFeesWizardPage)
 {
+  ui->setupUi(this);
 
-  registerField("additionalCost", m_additionalCost, "text");
-  registerField("periodicPayment", m_periodicPayment, "text");
-  registerField("basePayment", m_basePayment, "text");
+  registerField("additionalCost", ui->m_additionalCost, "text");
+  registerField("periodicPayment", ui->m_periodicPayment, "text");
+  registerField("basePayment", ui->m_basePayment, "text");
   // load button icons
   KGuiItem additionalFeeButtonItem(i18n("&Additional fees..."),
                                    0, //QIcon::fromTheme("document-new"),
                                    i18n("Enter additional fees"),
                                    i18n("Use this to add any additional fees other than principal and interest contained in your periodical payments."));
-  KGuiItem::assign(m_additionalFeeButton, additionalFeeButtonItem);
-  connect(m_additionalFeeButton, SIGNAL(clicked()), this, SLOT(slotAdditionalFees()));
+  KGuiItem::assign(ui->m_additionalFeeButton, additionalFeeButtonItem);
+  connect(ui->m_additionalFeeButton, SIGNAL(clicked()), this, SLOT(slotAdditionalFees()));
+}
+
+AdditionalFeesWizardPage::~AdditionalFeesWizardPage()
+{
+  delete ui;
 }
 
 void AdditionalFeesWizardPage::slotAdditionalFees()
@@ -82,8 +91,8 @@ void AdditionalFeesWizardPage::slotAdditionalFees()
 
 void AdditionalFeesWizardPage::updatePeriodicPayment(const MyMoneyAccount& account)
 {
-  MyMoneyMoney base(m_basePayment->text());
-  MyMoneyMoney add(m_additionalCost->text());
+  MyMoneyMoney base(ui->m_basePayment->text());
+  MyMoneyMoney add(ui->m_additionalCost->text());
 
-  m_periodicPayment->setText((base + add).formatMoney(account.fraction(MyMoneyFile::instance()->security(account.currencyId()))));
+  ui->m_periodicPayment->setText((base + add).formatMoney(account.fraction(MyMoneyFile::instance()->security(account.currencyId()))));
 }

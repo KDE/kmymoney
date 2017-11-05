@@ -29,26 +29,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_lendborrowwizardpagedecl.h"
+namespace Ui { class LendBorrowWizardPage; }
 
 /**
  * This class implements the Online Update page of the
  * @ref KNewInvestmentWizard.
  */
-class LendBorrowWizardPageDecl : public QWizardPage, public Ui::LendBorrowWizardPageDecl
-{
-public:
-  LendBorrowWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class LendBorrowWizardPage : public LendBorrowWizardPageDecl
+class LendBorrowWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit LendBorrowWizardPage(QWidget *parent = 0);
+  explicit LendBorrowWizardPage(QWidget *parent = nullptr);
+  ~LendBorrowWizardPage();
 
+private:
+  Ui::LendBorrowWizardPage *ui;
 };
 
 #endif

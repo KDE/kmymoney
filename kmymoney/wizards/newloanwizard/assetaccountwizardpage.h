@@ -29,30 +29,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_assetaccountwizardpagedecl.h"
+namespace Ui { class AssetAccountWizardPage; }
 
 /**
  * This class implements the Online Update page of the
  * @ref KNewInvestmentWizard.
  */
-class AssetAccountWizardPageDecl : public QWizardPage, public Ui::AssetAccountWizardPageDecl
-{
-public:
-  AssetAccountWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class AssetAccountWizardPage : public AssetAccountWizardPageDecl
+class AssetAccountWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit AssetAccountWizardPage(QWidget *parent = 0);
+  explicit AssetAccountWizardPage(QWidget *parent = nullptr);
+  ~AssetAccountWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
    */
   bool isComplete() const;
+
+  Ui::AssetAccountWizardPage *ui;
 };
 
 #endif

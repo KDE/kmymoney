@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PreviousPaymentsWizardPageDecl</class>
- <widget class="QWizardPage" name="PreviousPaymentsWizardPageDecl">
+ <class>LendBorrowWizardPage</class>
+ <widget class="QWizardPage" name="LendBorrowWizardPage">
   <attribute name="title">
-    <string>Payments?</string>
+    <string>Lending or borrowing money</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,10 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="TextLabel6_2">
+      <widget class="QLabel" name="TextLabel3_2">
         <property name="text">
           <string>
-Were there any payments for this loan whether they are entered into KMyMoney or not?</string>
+Do you borrow or lend money?</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +27,11 @@ Were there any payments for this loan whether they are entered into KMyMoney or 
       </widget>
     </item>
     <item>
-      <spacer name="Spacer28">
+      <spacer name="Spacer15">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>32</height>
+            <height>61</height>
           </size>
         </property>
         <property name="sizeType">
@@ -51,7 +51,7 @@ Were there any payments for this loan whether they are entered into KMyMoney or 
           <number>6</number>
         </property>
         <item>
-          <widget class="QFrame" name="frame_4">
+          <widget class="QFrame" name="frame_2">
             <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
             </property>
@@ -63,22 +63,22 @@ Were there any payments for this loan whether they are entered into KMyMoney or 
                 <number>6</number>
               </property>
               <item>
-                <widget class="QRadioButton" name="m_noPreviousPaymentButton">
+                <widget class="QRadioButton" name="m_borrowButton">
                   <property name="text">
-                    <string>No, no payments were made yet.</string>
+                    <string>I am borrowing money</string>
                   </property>
                   <attribute name="buttonGroup">
-                    <string>ButtonGroup3</string>
+                    <string>ButtonGroup1</string>
                   </attribute>
                 </widget>
               </item>
               <item>
-                <widget class="QRadioButton" name="m_previousPaymentButton">
+                <widget class="QRadioButton" name="m_lendButton">
                   <property name="text">
-                    <string>Yes, payments were made.</string>
+                    <string>I am lending money</string>
                   </property>
                   <attribute name="buttonGroup">
-                    <string>ButtonGroup3</string>
+                    <string>ButtonGroup1</string>
                   </attribute>
                 </widget>
               </item>
@@ -86,10 +86,10 @@ Were there any payments for this loan whether they are entered into KMyMoney or 
           </widget>
         </item>
         <item>
-          <spacer name="Spacer14_2_2">
+          <spacer name="Spacer14">
             <property name="sizeHint">
               <size>
-                <width>202</width>
+                <width>299</width>
                 <height>0</height>
               </size>
             </property>
@@ -104,40 +104,11 @@ Were there any payments for this loan whether they are entered into KMyMoney or 
       </layout>
     </item>
     <item>
-      <spacer name="Spacer29">
+      <spacer name="Spacer16">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>32</height>
-          </size>
-        </property>
-        <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="orientation">
-          <enum>Qt::Vertical</enum>
-        </property>
-      </spacer>
-    </item>
-    <item>
-      <widget class="QLabel" name="TextLabel3_3">
-        <property name="text">
-          <string>Note: Payments made to obtain the loan (e.g. Dissagio) are not considered as payments in this context.</string>
-        </property>
-        <property name="alignment">
-          <set>Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap">
-          <bool>true</bool>
-        </property>
-      </widget>
-    </item>
-    <item>
-      <spacer name="Spacer41">
-        <property name="sizeHint">
-          <size>
-            <width>0</width>
-            <height>32</height>
+            <height>60</height>
           </size>
         </property>
         <property name="sizeType">
@@ -157,6 +128,6 @@ Were there any payments for this loan whether they are entered into KMyMoney or 
  <tabstops>
  </tabstops>
  <buttongroups>
-  <buttongroup name="ButtonGroup3"/>
+  <buttongroup name="ButtonGroup1"/>
  </buttongroups>
 </ui>

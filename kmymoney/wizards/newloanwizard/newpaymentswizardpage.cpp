@@ -28,8 +28,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_newpaymentswizardpage.h"
 
 NewPaymentsWizardPage::NewPaymentsWizardPage(QWidget *parent)
-    : NewPaymentsWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::NewPaymentsWizardPage)
 {
+  ui->setupUi(this);
+}
+
+NewPaymentsWizardPage::~NewPaymentsWizardPage()
+{
+  delete ui;
 }

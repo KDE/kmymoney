@@ -174,7 +174,7 @@ bool KNewLoanWizard::validateCurrentPage()
     } else {
       if (d->ui->m_assetAccountPage)
         d->m_pages.clearBit(Page_AssetAccount);
-      d->ui->m_assetAccountPage->m_assetAccountEdit->slotDeselectAllAccounts();
+      d->ui->m_assetAccountPage->ui->m_assetAccountEdit->slotDeselectAllAccounts();
     }
   }
 
@@ -213,7 +213,7 @@ void KNewLoanWizard::slotReloadEditWidgets()
   auto payeeId = field("payeeEdit").toString();
 
   //FIXME: port
-  d->ui->m_namePage->m_payeeEdit->loadPayees(MyMoneyFile::instance()->payeeList());
+  d->ui->m_namePage->ui->m_payeeEdit->loadPayees(MyMoneyFile::instance()->payeeList());
 
   if (!payeeId.isEmpty()) {
     setField("payeeEdit", payeeId);

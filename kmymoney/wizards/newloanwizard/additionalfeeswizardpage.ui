@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AdditionalFeesWizardPageDecl</class>
- <widget class="QWizardPage" name="AdditionalFeesWizardPageDecl">
+ <class>AdditionalFeesWizardPage</class>
+ <widget class="QWizardPage" name="AdditionalFeesWizardPage">
   <attribute name="title">
     <string>Additional Fees</string>
   </attribute>

@@ -29,25 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_loanattributeswizardpagedecl.h"
+namespace Ui { class LoanAttributesWizardPage; }
 
 /**
  * This class implements the Loan Attributes page of the
  * @ref KNewLoanWizard.
  */
-class LoanAttributesWizardPageDecl : public QWizardPage, public Ui::LoanAttributesWizardPageDecl
-{
-public:
-  LoanAttributesWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class LoanAttributesWizardPage : public LoanAttributesWizardPageDecl
+class LoanAttributesWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit LoanAttributesWizardPage(QWidget *parent = 0);
+  explicit LoanAttributesWizardPage(QWidget *parent = nullptr);
+  ~LoanAttributesWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
@@ -65,9 +59,10 @@ public:
    */
   void setInstitution(const QString &institutionName);
 
+  Ui::LoanAttributesWizardPage *ui;
+
 protected slots:
   void slotNewClicked();
-
 };
 
 #endif

@@ -28,14 +28,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_paymenteditwizardpage.h"
+
 PaymentEditWizardPage::PaymentEditWizardPage(QWidget *parent)
-    : PaymentEditWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::PaymentEditWizardPage)
 {
+  ui->setupUi(this);
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("newPaymentEdit", m_newPaymentEdit, "value", SIGNAL(textChanged()));
-  registerField("newPaymentEditValid", m_newPaymentEdit, "valid", SIGNAL(textChanged()));
+  registerField("newPaymentEdit", ui->m_newPaymentEdit, "value", SIGNAL(textChanged()));
+  registerField("newPaymentEditValid", ui->m_newPaymentEdit, "valid", SIGNAL(textChanged()));
 
-  connect(m_newPaymentEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(ui->m_newPaymentEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+}
 
+PaymentEditWizardPage::~PaymentEditWizardPage()
+{
+  delete ui;
 }

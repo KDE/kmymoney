@@ -28,14 +28,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_interesteditwizardpage.h"
 
 InterestEditWizardPage::InterestEditWizardPage(QWidget *parent)
-    : InterestEditWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::InterestEditWizardPage)
 {
+  ui->setupUi(this);
+
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("newInterestRateEdit", m_newInterestRateEdit, "value", SIGNAL(textChanged(QString)));
-  connect(m_newInterestRateEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  registerField("newInterestRateEdit", ui->m_newInterestRateEdit, "value", SIGNAL(textChanged(QString)));
+  connect(ui->m_newInterestRateEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+}
+
+InterestEditWizardPage::~InterestEditWizardPage()
+{
+  delete ui;
 }
 
 /**
@@ -45,5 +54,5 @@ bool InterestEditWizardPage::isComplete() const
 {
   //FIXME: this only exists in the EditLoanWizard subclass
   return field("newPaymentEditValid").toBool()
-         || m_newInterestRateEdit->isValid();
+         || ui->m_newInterestRateEdit->isValid();
 }

@@ -29,25 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_namewizardpagedecl.h"
+namespace Ui { class NameWizardPage; }
 
 /**
  * This class implements the Name page of the
  * @ref KNewLoanWizard.
  */
-class NameWizardPageDecl : public QWizardPage, public Ui::NameWizardPageDecl
-{
-public:
-  NameWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class NameWizardPage : public NameWizardPageDecl
+class NameWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit NameWizardPage(QWidget *parent = 0);
+  explicit NameWizardPage(QWidget *parent = nullptr);
+  ~NameWizardPage();
 
   /**
    * Some things on this page depend on previous pages for correct
@@ -60,6 +54,7 @@ public:
    */
   bool isComplete() const;
 
+  Ui::NameWizardPage *ui;
 };
 
 #endif

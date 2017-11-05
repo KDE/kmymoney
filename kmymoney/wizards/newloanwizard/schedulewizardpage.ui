@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InterestCategoryWizardPageDecl</class>
- <widget class="QWizardPage" name="InterestCategoryWizardPageDecl">
+ <class>ScheduleWizardPage</class>
+ <widget class="QWizardPage" name="ScheduleWizardPage">
   <attribute name="title">
-    <string>Interest category</string>
+    <string>Schedule</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,10 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="TextLabel20_2">
+      <widget class="QLabel" name="TextLabel22_2">
         <property name="text">
-          <string>
-Please select the category you want to assign the interest payments to or create a new category.</string>
+          <string>KMyMoney will create a schedule for this payment and reminds you whenever a payment must be made.&lt;p&gt;
+If you selected to record all payments this date has already been supplied. If you selected to record only this years payments, then the &lt;b&gt;First payment due date&lt;/b&gt; is the date of the first payment made in this year.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +27,11 @@ Please select the category you want to assign the interest payments to or create
       </widget>
     </item>
     <item>
-      <spacer name="Spacer90">
+      <spacer name="Spacer67_3">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>38</height>
+            <height>23</height>
           </size>
         </property>
         <property name="sizeType">
@@ -43,47 +43,50 @@ Please select the category you want to assign the interest payments to or create
       </spacer>
     </item>
     <item>
-      <widget class="kMyMoneyAccountSelector" name="m_interestAccountEdit"/>
-    </item>
-    <item>
-      <layout class="QHBoxLayout">
+      <layout class="QGridLayout">
         <property name="margin">
           <number>0</number>
         </property>
         <property name="spacing">
           <number>6</number>
         </property>
-        <item>
-          <spacer name="Spacer54_2">
-            <property name="sizeHint">
-              <size>
-                <width>264</width>
-                <height>0</height>
-              </size>
-            </property>
-            <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-            </property>
-          </spacer>
+        <item row="1" column="1">
+          <widget class="kMyMoneyAccountSelector" name="m_paymentAccountEdit"/>
         </item>
-        <item>
-          <widget class="QPushButton" name="m_createCategoryButton">
+        <item row="0" column="1">
+          <widget class="kMyMoneyDateInput" name="m_nextDueDateEdit"/>
+        </item>
+        <item row="0" column="0">
+          <widget class="QLabel" name="m_dueLabel">
             <property name="text">
-              <string/>
+              <string>First payment due on:</string>
+            </property>
+            <property name="wordWrap">
+              <bool>false</bool>
+            </property>
+          </widget>
+        </item>
+        <item row="1" column="0">
+          <widget class="QLabel" name="TextLabel2_5">
+            <property name="text">
+              <string>Make payment from/to:</string>
+            </property>
+            <property name="alignment">
+              <set>Qt::AlignTop</set>
+            </property>
+            <property name="wordWrap">
+              <bool>false</bool>
             </property>
           </widget>
         </item>
       </layout>
     </item>
     <item>
-      <spacer name="Spacer91">
+      <spacer name="Spacer68_2">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>22</height>
+            <height>24</height>
           </size>
         </property>
         <property name="sizeType">

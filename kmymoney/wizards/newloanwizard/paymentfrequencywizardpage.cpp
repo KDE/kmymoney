@@ -27,11 +27,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_paymentfrequencywizardpage.h"
+
 #include "mymoneyschedule.h"
 
 PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget *parent)
-    : PaymentFrequencyWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::PaymentFrequencyWizardPage)
 {
-  registerField("paymentFrequencyUnitEdit", m_paymentFrequencyUnitEdit, "data", SIGNAL(currentDataChanged(QVariant)));
-  m_paymentFrequencyUnitEdit->setCurrentIndex(m_paymentFrequencyUnitEdit->findData(QVariant((int)eMyMoney::Schedule::Occurrence::Monthly), Qt::UserRole, Qt::MatchExactly));
+  ui->setupUi(this);
+
+  registerField("paymentFrequencyUnitEdit", ui->m_paymentFrequencyUnitEdit, "data", SIGNAL(currentDataChanged(QVariant)));
+  ui->m_paymentFrequencyUnitEdit->setCurrentIndex(ui->m_paymentFrequencyUnitEdit->findData(QVariant((int)eMyMoney::Schedule::Occurrence::Monthly), Qt::UserRole, Qt::MatchExactly));
+}
+
+PaymentFrequencyWizardPage::~PaymentFrequencyWizardPage()
+{
+  delete ui;
 }

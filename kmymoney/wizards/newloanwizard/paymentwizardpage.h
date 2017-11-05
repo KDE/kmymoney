@@ -29,28 +29,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_paymentwizardpagedecl.h"
+namespace Ui { class PaymentWizardPage; }
 
 /**
  * This class implements the Online Update page of the
  * @ref KNewInvestmentWizard.
  */
-class PaymentWizardPageDecl : public QWizardPage, public Ui::PaymentWizardPageDecl
-{
-public:
-  PaymentWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class PaymentWizardPage : public PaymentWizardPageDecl
+class PaymentWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit PaymentWizardPage(QWidget *parent = 0);
+  explicit PaymentWizardPage(QWidget *parent = nullptr);
+  ~PaymentWizardPage();
 
   void resetCalculator();
 
+  Ui::PaymentWizardPage *ui;
 };
 
 #endif

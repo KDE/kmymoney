@@ -29,26 +29,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_newcalculateloanwizardpagedecl.h"
+namespace Ui { class NewCalculateLoanWizardPage; }
 
 /**
  * This class implements the New Calculate Loan page of the
  * @ref KNewLoanWizard.
  */
-class NewCalculateLoanWizardPageDecl : public QWizardPage, public Ui::NewCalculateLoanWizardPageDecl
-{
-public:
-  NewCalculateLoanWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class NewCalculateLoanWizardPage : public NewCalculateLoanWizardPageDecl
+class NewCalculateLoanWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit NewCalculateLoanWizardPage(QWidget *parent = 0);
+  explicit NewCalculateLoanWizardPage(QWidget *parent = nullptr);
+  ~NewCalculateLoanWizardPage();
 
+private:
+  Ui::NewCalculateLoanWizardPage *ui;
 };
 
 #endif

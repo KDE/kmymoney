@@ -29,26 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_firstpaymentwizardpagedecl.h"
+namespace Ui { class FirstPaymentWizardPage; }
 
 /**
  * This class implements the Online Update page of the
  * @ref KNewInvestmentWizard.
  */
-class FirstPaymentWizardPageDecl : public QWizardPage, public Ui::FirstPaymentWizardPageDecl
-{
-public:
-  FirstPaymentWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class FirstPaymentWizardPage : public FirstPaymentWizardPageDecl
+class FirstPaymentWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit FirstPaymentWizardPage(QWidget *parent = 0);
-
+  explicit FirstPaymentWizardPage(QWidget *parent = nullptr);
+  ~FirstPaymentWizardPage();
   /**
    * Overload the isComplete function to control the Next button
    */
@@ -59,6 +52,8 @@ public:
    * the inputs from previous pages.
    */
   void initializePage();
+
+  Ui::FirstPaymentWizardPage *ui;
 };
 
 #endif

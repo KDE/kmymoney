@@ -28,18 +28,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_lendborrowwizardpage.h"
 
 LendBorrowWizardPage::LendBorrowWizardPage(QWidget *parent)
-    : LendBorrowWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::LendBorrowWizardPage)
 {
+  ui->setupUi(this);
 
-  ButtonGroup1->setId(m_borrowButton, 0);
-  ButtonGroup1->setId(m_lendButton, 1);
+  ui->ButtonGroup1->setId(ui->m_borrowButton, 0);
+  ui->ButtonGroup1->setId(ui->m_lendButton, 1);
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("borrowButton", m_borrowButton);
-  registerField("lendButton", m_lendButton);
+  registerField("borrowButton", ui->m_borrowButton);
+  registerField("lendButton", ui->m_lendButton);
 
-  m_borrowButton->click();
+  ui->m_borrowButton->click();
+}
+
+LendBorrowWizardPage::~LendBorrowWizardPage()
+{
+  delete ui;
 }

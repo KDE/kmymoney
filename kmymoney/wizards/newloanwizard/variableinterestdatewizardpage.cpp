@@ -20,7 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,25 +28,32 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_variableinterestdatewizardpage.h"
+
 #include "mymoneyaccountloan.h"
 
 VariableInterestDateWizardPage::VariableInterestDateWizardPage(QWidget *parent)
-    : VariableInterestDateWizardPageDecl(parent)
+    : QWizardPage(parent),
+      ui(new Ui::VariableInterestDateWizardPage)
 {
-
-  m_interestFrequencyUnitEdit->insertItem(i18nc("Occurrence period 'days'", "Days"), static_cast<int>(MyMoneyAccountLoan::changeDaily));
-  m_interestFrequencyUnitEdit->insertItem(i18n("Weeks"), static_cast<int>(MyMoneyAccountLoan::changeWeekly));
-  m_interestFrequencyUnitEdit->insertItem(i18n("Months"), static_cast<int>(MyMoneyAccountLoan::changeMonthly));
-  m_interestFrequencyUnitEdit->insertItem(i18n("Years"), static_cast<int>(MyMoneyAccountLoan::changeYearly));
+  ui->setupUi(this);
+  ui->m_interestFrequencyUnitEdit->insertItem(i18nc("Occurrence period 'days'", "Days"), static_cast<int>(MyMoneyAccountLoan::changeDaily));
+  ui->m_interestFrequencyUnitEdit->insertItem(i18n("Weeks"), static_cast<int>(MyMoneyAccountLoan::changeWeekly));
+  ui->m_interestFrequencyUnitEdit->insertItem(i18n("Months"), static_cast<int>(MyMoneyAccountLoan::changeMonthly));
+  ui->m_interestFrequencyUnitEdit->insertItem(i18n("Years"), static_cast<int>(MyMoneyAccountLoan::changeYearly));
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   //registerField("onlineFactor", m_onlineFactor, "value");
-  registerField("interestChangeDateEdit", m_interestChangeDateEdit, "date");
-  registerField("interestFrequencyAmountEdit", m_interestFrequencyAmountEdit, "value");
-  registerField("interestFrequencyUnitEdit", m_interestFrequencyUnitEdit, "currentItem");
+  registerField("interestChangeDateEdit", ui->m_interestChangeDateEdit, "date");
+  registerField("interestFrequencyAmountEdit", ui->m_interestFrequencyAmountEdit, "value");
+  registerField("interestFrequencyUnitEdit", ui->m_interestFrequencyUnitEdit, "currentItem");
 
-  m_interestFrequencyAmountEdit->setValue(1);
-  m_interestFrequencyUnitEdit->setCurrentItem(static_cast<int>(MyMoneyAccountLoan::changeYearly));
+  ui->m_interestFrequencyAmountEdit->setValue(1);
+  ui->m_interestFrequencyUnitEdit->setCurrentItem(static_cast<int>(MyMoneyAccountLoan::changeYearly));
+}
 
+VariableInterestDateWizardPage::~VariableInterestDateWizardPage()
+{
+  delete ui;
 }

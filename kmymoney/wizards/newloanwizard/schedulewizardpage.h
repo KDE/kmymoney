@@ -29,25 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_schedulewizardpagedecl.h"
+namespace Ui { class ScheduleWizardPage; }
 
 /**
  * This class implements the Schedule page of the
  * @ref KNewLoanWizard.
  */
-class ScheduleWizardPageDecl : public QWizardPage, public Ui::ScheduleWizardPageDecl
-{
-public:
-  ScheduleWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class ScheduleWizardPage : public ScheduleWizardPageDecl
+class ScheduleWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit ScheduleWizardPage(QWidget *parent = 0);
+  explicit ScheduleWizardPage(QWidget *parent = nullptr);
+  ~ScheduleWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
@@ -59,6 +53,8 @@ public:
    * the inputs from previous pages.
    */
   void initializePage();
+
+  Ui::ScheduleWizardPage *ui;
 };
 
 #endif

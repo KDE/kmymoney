@@ -28,8 +28,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_newintrowizardpage.h"
 
 NewIntroWizardPage::NewIntroWizardPage(QWidget *parent)
-    : NewIntroWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::NewIntroWizardPage)
 {
+  ui->setupUi(this);
+}
+
+NewIntroWizardPage::~NewIntroWizardPage()
+{
+  delete ui;
 }

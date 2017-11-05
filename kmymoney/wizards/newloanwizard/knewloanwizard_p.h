@@ -35,6 +35,16 @@
 // Project Includes
 
 #include "ui_knewloanwizard.h"
+#include "ui_namewizardpage.h"
+#include "ui_firstpaymentwizardpage.h"
+#include "ui_loanamountwizardpage.h"
+#include "ui_interestwizardpage.h"
+#include "ui_paymenteditwizardpage.h"
+#include "ui_finalpaymentwizardpage.h"
+#include "ui_interestcategorywizardpage.h"
+#include "ui_assetaccountwizardpage.h"
+#include "ui_schedulewizardpage.h"
+#include "ui_paymentwizardpage.h"
 
 #include "kmymoneyutils.h"
 #include "kmymoneysettings.h"
@@ -79,7 +89,7 @@ public:
     q->setOption(QWizard::IndependentPages, true);
 
     // connect(m_payeeEdit, SIGNAL(newPayee(QString)), this, SLOT(slotNewPayee(QString)));
-    q->connect(ui->m_namePage->m_payeeEdit, &KMyMoneyMVCCombo::createItem, q, &KNewLoanWizard::createPayee);
+    q->connect(ui->m_namePage->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, q, &KNewLoanWizard::createPayee);
 
     q->connect(ui->m_additionalFeesPage, &AdditionalFeesWizardPage::newCategory, q, &KNewLoanWizard::newCategory);
 
@@ -94,7 +104,7 @@ public:
     // should be recorded and none have been made so far.
 
     //FIXME: port
-    ui->m_firstPaymentPage->m_firstDueDateEdit->loadDate(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 30));
+    ui->m_firstPaymentPage->ui->m_firstDueDateEdit->loadDate(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 30));
 
     // FIXME: we currently only support interest calculation on reception
     m_pages.clearBit(KNewLoanWizard::Page_InterestCalculation);
@@ -298,15 +308,15 @@ public:
       if (!q->field("loanAmountEditValid").toBool()) {
         // calculate the amount of the loan out of the other information
         val = calc.presentValue();
-        ui->m_loanAmountPage->m_loanAmountEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(fraction));
-        result = i18n("KMyMoney has calculated the amount of the loan as %1.", ui->m_loanAmountPage->m_loanAmountEdit->lineedit()->text());
+        ui->m_loanAmountPage->ui->m_loanAmountEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(fraction));
+        result = i18n("KMyMoney has calculated the amount of the loan as %1.", ui->m_loanAmountPage->ui->m_loanAmountEdit->lineedit()->text());
 
       } else if (!q->field("interestRateEditValid").toBool()) {
         // calculate the interest rate out of the other information
         val = calc.interestRate();
 
-        ui->m_interestPage->m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
-        result = i18n("KMyMoney has calculated the interest rate to %1%.", ui->m_interestPage->m_interestRateEdit->lineedit()->text());
+        ui->m_interestPage->ui->m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
+        result = i18n("KMyMoney has calculated the interest rate to %1%.", ui->m_interestPage->ui->m_interestRateEdit->lineedit()->text());
 
       } else if (!q->field("paymentEditValid").toBool()) {
         // calculate the periodical amount of the payment out of the other information
@@ -318,7 +328,7 @@ public:
           val = -val;
         calc.setPmt(val);
 
-        result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", ui->m_paymentPage->m_paymentEdit->lineedit()->text());
+        result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", ui->m_paymentPage->ui->m_paymentEdit->lineedit()->text());
 
         val = calc.futureValue();
         if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) >= qAbs(calc.payment()))
@@ -327,16 +337,16 @@ public:
           ui->m_durationPage->updateTermWidgets(calc.npp());
           val = calc.futureValue();
           MyMoneyMoney refVal(static_cast<double>(val));
-          ui->m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
           result += QString(" ");
-          result += i18n("The number of payments has been decremented and the final payment has been modified to %1.", ui->m_finalPaymentPage->m_finalPaymentEdit->lineedit()->text());
+          result += i18n("The number of payments has been decremented and the final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->lineedit()->text());
         } else if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) < qAbs(calc.payment()))
                    || (q->field("lendButton").toBool() && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
-          ui->m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney().formatMoney(fraction));
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(MyMoneyMoney().formatMoney(fraction));
         } else {
           MyMoneyMoney refVal(static_cast<double>(val));
-          ui->m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
-          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->m_finalPaymentEdit->lineedit()->text());
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
+          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->lineedit()->text());
         }
 
       } else if (q->field("durationValueEdit").toInt() == 0) {
@@ -353,8 +363,8 @@ public:
           calc.setNpp(qFloor(val));
           val = calc.futureValue();
           MyMoneyMoney refVal(static_cast<double>(val));
-          ui->m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
-          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->m_finalPaymentEdit->lineedit()->text());
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
+          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->lineedit()->text());
         }
 
       } else {
@@ -394,7 +404,7 @@ public:
           result = i18n("KMyMoney has successfully verified your loan information.");
         }
         //FIXME: port
-        ui->m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
+        ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
       }
 
     } catch (const MyMoneyException &) {
@@ -502,7 +512,7 @@ public:
       interestSet.addAccountType(eMyMoney::Account::Income);
     }
     if (ui->m_interestCategoryPage)
-      interestSet.load(ui->m_interestCategoryPage->m_interestAccountEdit);
+      interestSet.load(ui->m_interestCategoryPage->ui->m_interestAccountEdit);
 
     assetSet.addAccountType(eMyMoney::Account::Checkings);
     assetSet.addAccountType(eMyMoney::Account::Savings);
@@ -510,12 +520,12 @@ public:
     assetSet.addAccountType(eMyMoney::Account::Asset);
     assetSet.addAccountType(eMyMoney::Account::Currency);
     if (ui->m_assetAccountPage)
-      assetSet.load(ui->m_assetAccountPage->m_assetAccountEdit);
+      assetSet.load(ui->m_assetAccountPage->ui->m_assetAccountEdit);
 
     assetSet.addAccountType(eMyMoney::Account::CreditCard);
     assetSet.addAccountType(eMyMoney::Account::Liability);
     if (ui->m_schedulePage)
-      assetSet.load(ui->m_schedulePage->m_paymentAccountEdit);
+      assetSet.load(ui->m_schedulePage->ui->m_paymentAccountEdit);
   }
 
   KNewLoanWizard       *q_ptr;

@@ -29,14 +29,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_namewizardpage.h"
 
 NameWizardPage::NameWizardPage(QWidget *parent)
-    : NameWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::NameWizardPage)
 {
+  ui->setupUi(this);
+
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("payeeEdit", m_payeeEdit, "selectedItem", SIGNAL(itemSelected(QString)));
-  connect(m_nameEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  registerField("payeeEdit", ui->m_payeeEdit, "selectedItem", SIGNAL(itemSelected(QString)));
+  connect(ui->m_nameEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+}
+
+NameWizardPage::~NameWizardPage()
+{
+  delete ui;
 }
 
 /**
@@ -44,17 +53,17 @@ NameWizardPage::NameWizardPage(QWidget *parent)
  */
 bool NameWizardPage::isComplete() const
 {
-  return !m_nameEdit->text().isEmpty();
+  return !ui->m_nameEdit->text().isEmpty();
 }
 
 void NameWizardPage::initializePage()
 {
   if (field("borrowButton").toBool()) {
-    m_generalReceiverText->setText(i18n("To whom do you make payments?"));
-    m_receiverLabel->setText(i18n("Payments to"));
+    ui->m_generalReceiverText->setText(i18n("To whom do you make payments?"));
+    ui->m_receiverLabel->setText(i18n("Payments to"));
   } else if (field("lendButton").toBool()) {
-    m_generalReceiverText->setText(i18n("From whom do you expect payments?"));
-    m_receiverLabel->setText(i18n("Payments from"));
+    ui->m_generalReceiverText->setText(i18n("From whom do you expect payments?"));
+    ui->m_receiverLabel->setText(i18n("Payments from"));
   }
-  m_nameEdit->setFocus();
+  ui->m_nameEdit->setFocus();
 }

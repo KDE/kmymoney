@@ -25,6 +25,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include "ui_assetaccountwizardpage.h"
+
 #include <KLocalizedString>
 #include <KGuiItem>
 
@@ -37,28 +39,35 @@
 using namespace Icons;
 
 AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
-    : AssetAccountWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::AssetAccountWizardPage)
 {
+  ui->setupUi(this);
+
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("dontCreatePayoutCheckBox", m_dontCreatePayoutCheckBox);
-  registerField("paymentDate", m_paymentDate, "date");
-  registerField("assetAccountEdit", m_assetAccountEdit, "selectedItems");
+  registerField("dontCreatePayoutCheckBox", ui->m_dontCreatePayoutCheckBox);
+  registerField("paymentDate", ui->m_paymentDate, "date");
+  registerField("assetAccountEdit", ui->m_assetAccountEdit, "selectedItems");
 
-  connect(m_assetAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
-  connect(m_dontCreatePayoutCheckBox,  SIGNAL(clicked()), this, SIGNAL(completeChanged()));
+  connect(ui->m_assetAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
+  connect(ui->m_dontCreatePayoutCheckBox,  SIGNAL(clicked()), this, SIGNAL(completeChanged()));
 
   // load button icons
   KGuiItem createAssetButtonItem(i18n("&Create..."),
                                  QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                                  i18n("Create a new asset account"),
                                  i18n("Use this to create a new account to which the initial payment should be made"));
-  KGuiItem::assign(m_createNewAssetButton, createAssetButtonItem);
-  connect(m_createNewAssetButton, SIGNAL(clicked()), kmymoney, SLOT(slotAccountNew()));
+  KGuiItem::assign(ui->m_createNewAssetButton, createAssetButtonItem);
+  connect(ui->m_createNewAssetButton, SIGNAL(clicked()), kmymoney, SLOT(slotAccountNew()));
 
-  m_assetAccountEdit->removeButtons();
-  m_dontCreatePayoutCheckBox->setChecked(false);
+  ui->m_assetAccountEdit->removeButtons();
+  ui->m_dontCreatePayoutCheckBox->setChecked(false);
+}
 
+AssetAccountWizardPage::~AssetAccountWizardPage()
+{
+  delete ui;
 }
 
 /**
@@ -66,17 +75,17 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
  */
 bool AssetAccountWizardPage::isComplete() const
 {
-  if (m_dontCreatePayoutCheckBox->isChecked()) {
-    m_assetAccountEdit->setEnabled(false);
-    m_paymentDate->setEnabled(false);
-    m_createNewAssetButton->setEnabled(false);
+  if (ui->m_dontCreatePayoutCheckBox->isChecked()) {
+    ui->m_assetAccountEdit->setEnabled(false);
+    ui->m_paymentDate->setEnabled(false);
+    ui->m_createNewAssetButton->setEnabled(false);
     return true;
   } else {
-    m_assetAccountEdit->setEnabled(true);
-    m_paymentDate->setEnabled(true);
-    m_createNewAssetButton->setEnabled(true);
-    if (!m_assetAccountEdit->selectedItems().isEmpty()
-        && m_paymentDate->date().isValid())
+    ui->m_assetAccountEdit->setEnabled(true);
+    ui->m_paymentDate->setEnabled(true);
+    ui->m_createNewAssetButton->setEnabled(true);
+    if (!ui->m_assetAccountEdit->selectedItems().isEmpty()
+        && ui->m_paymentDate->date().isValid())
       return true;
   }
   return false;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PaymentWizardPageDecl</class>
- <widget class="QWizardPage" name="PaymentWizardPageDecl">
+ <class>PaymentWizardPage</class>
+ <widget class="QWizardPage" name="PaymentWizardPage">
   <attribute name="title">
     <string>Payment</string>
   </attribute>

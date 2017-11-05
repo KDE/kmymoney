@@ -28,27 +28,35 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_finalpaymentwizardpage.h"
 
 FinalPaymentWizardPage::FinalPaymentWizardPage(QWidget *parent)
-    : FinalPaymentWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::FinalPaymentWizardPage)
 {
+  ui->setupUi(this);
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("finalPaymentEdit", m_finalPaymentEdit, "value", SIGNAL(textChanged()));
-  registerField("finalPaymentEditValid", m_finalPaymentEdit, "valid", SIGNAL(textChanged()));
+  registerField("finalPaymentEdit", ui->m_finalPaymentEdit, "value", SIGNAL(textChanged()));
+  registerField("finalPaymentEditValid", ui->m_finalPaymentEdit, "valid", SIGNAL(textChanged()));
 
-  registerField("loanAmount5", m_loanAmount5, "text");
-  registerField("interestRate5", m_interestRate5, "text");
-  registerField("duration5", m_duration5, "text");
-  registerField("payment5", m_payment5, "text");
-  registerField("balloon5", m_balloon5, "text");
+  registerField("loanAmount5", ui->m_loanAmount5, "text");
+  registerField("interestRate5", ui->m_interestRate5, "text");
+  registerField("duration5", ui->m_duration5, "text");
+  registerField("payment5", ui->m_payment5, "text");
+  registerField("balloon5", ui->m_balloon5, "text");
+}
+
+FinalPaymentWizardPage::~FinalPaymentWizardPage()
+{
+  delete ui;
 }
 
 void FinalPaymentWizardPage::resetCalculator()
 {
-  m_loanAmount5->setText(QString());
-  m_interestRate5->setText(QString());
-  m_duration5->setText(QString());
-  m_payment5->setText(QString());
-  m_balloon5->setText(QString());
+  ui->m_loanAmount5->setText(QString());
+  ui->m_interestRate5->setText(QString());
+  ui->m_duration5->setText(QString());
+  ui->m_payment5->setText(QString());
+  ui->m_balloon5->setText(QString());
 }

@@ -29,25 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_loanamountwizardpagedecl.h"
+namespace Ui { class LoanAmountWizardPage; }
 
 /**
  * This class implements the Loan Amount page of the
  * @ref KNewLoanWizard.
  */
-class LoanAmountWizardPageDecl : public QWizardPage, public Ui::LoanAmountWizardPageDecl
-{
-public:
-  LoanAmountWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class LoanAmountWizardPage : public LoanAmountWizardPageDecl
+class LoanAmountWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit LoanAmountWizardPage(QWidget *parent = 0);
+  explicit LoanAmountWizardPage(QWidget *parent = nullptr);
+  ~LoanAmountWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
@@ -59,6 +53,8 @@ public:
    * the inputs from previous pages.
    */
   void initializePage();
+
+  Ui::LoanAmountWizardPage *ui;
 
 public slots:
   void resetCalculator();

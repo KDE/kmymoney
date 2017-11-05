@@ -29,26 +29,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_interestcalculationwizardpagedecl.h"
+namespace Ui { class InterestCalculationWizardPage; }
 
 /**
  * This class implements the Interest Calculation page of the
  * @ref KNewLoanWizard.
  */
-class InterestCalculationWizardPageDecl : public QWizardPage, public Ui::InterestCalculationWizardPageDecl
-{
-public:
-  InterestCalculationWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class InterestCalculationWizardPage : public InterestCalculationWizardPageDecl
+class InterestCalculationWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit InterestCalculationWizardPage(QWidget *parent = 0);
+  explicit InterestCalculationWizardPage(QWidget *parent = nullptr);
+  ~InterestCalculationWizardPage();
 
+private:
+  Ui::InterestCalculationWizardPage *ui;
 };
 
 #endif

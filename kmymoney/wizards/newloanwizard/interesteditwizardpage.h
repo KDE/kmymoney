@@ -29,31 +29,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_interesteditwizardpagedecl.h"
+namespace Ui { class InterestEditWizardPage; }
 
 /**
  * This class implements the Interest Edit page of the
  * @ref KNewLoanWizard.
  */
-class InterestEditWizardPageDecl : public QWizardPage, public Ui::InterestEditWizardPageDecl
-{
-public:
-  InterestEditWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class InterestEditWizardPage : public InterestEditWizardPageDecl
+class InterestEditWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit InterestEditWizardPage(QWidget *parent = 0);
+  explicit InterestEditWizardPage(QWidget *parent = nullptr);
+  ~InterestEditWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
    */
   bool isComplete() const;
 
+  Ui::InterestEditWizardPage *ui;
 };
 
 #endif

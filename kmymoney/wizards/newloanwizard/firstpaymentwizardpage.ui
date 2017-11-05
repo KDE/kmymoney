@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EffectiveDateWizardPageDecl</class>
- <widget class="QWizardPage" name="EffectiveDateWizardPageDecl">
+ <class>FirstPaymentWizardPage</class>
+ <widget class="QWizardPage" name="FirstPaymentWizardPage">
   <attribute name="title">
-    <string>Effective date</string>
+    <string>Date of first payment</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,7 +13,7 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="m_effectiveDateLabel">
+      <widget class="QLabel" name="m_firstPaymentLabel">
         <property name="text">
           <string>1</string>
         </property>
@@ -26,24 +26,11 @@
       </widget>
     </item>
     <item>
-      <widget class="QLabel" name="m_effectiveDateNoteLabel">
-        <property name="text">
-          <string>1</string>
-        </property>
-        <property name="alignment">
-          <set>Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap">
-          <bool>true</bool>
-        </property>
-      </widget>
-    </item>
-    <item>
-      <spacer name="Spacer68_3">
+      <spacer name="Spacer42">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>30</height>
+            <height>78</height>
           </size>
         </property>
         <property name="sizeType">
@@ -63,9 +50,9 @@
           <number>6</number>
         </property>
         <item>
-          <widget class="QLabel" name="TextLabel1_7">
+          <widget class="QLabel" name="TextLabel1_3">
             <property name="text">
-              <string>When should the changes become active?</string>
+              <string>First payment due on</string>
             </property>
             <property name="wordWrap">
               <bool>false</bool>
@@ -73,16 +60,16 @@
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyDateInput" name="m_effectiveChangeDateEdit"/>
+          <widget class="kMyMoneyDateInput" name="m_firstDueDateEdit"/>
         </item>
       </layout>
     </item>
     <item>
-      <spacer name="Spacer69_2">
+      <spacer name="Spacer43">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>87</height>
+            <height>28</height>
           </size>
         </property>
         <property name="sizeType">
@@ -92,6 +79,19 @@
           <enum>Qt::Vertical</enum>
         </property>
       </spacer>
+    </item>
+    <item>
+      <widget class="QLabel" name="m_firstPaymentNote">
+        <property name="text">
+          <string/>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignBottom</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
     </item>
   </layout>
  </widget>

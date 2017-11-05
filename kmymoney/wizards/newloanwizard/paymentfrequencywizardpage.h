@@ -29,25 +29,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_paymentfrequencywizardpagedecl.h"
+namespace Ui { class PaymentFrequencyWizardPage; }
 
 /**
  * This class implements the Payment Frequency page of the
  * @ref KNewInvestmentWizard.
  */
-class PaymentFrequencyWizardPageDecl : public QWizardPage, public Ui::PaymentFrequencyWizardPageDecl
-{
-public:
-  PaymentFrequencyWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class PaymentFrequencyWizardPage : public PaymentFrequencyWizardPageDecl
+class PaymentFrequencyWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit PaymentFrequencyWizardPage(QWidget *parent = 0);
+  explicit PaymentFrequencyWizardPage(QWidget *parent = nullptr);
+  ~PaymentFrequencyWizardPage();
+
+  Ui::PaymentFrequencyWizardPage *ui;
 };
 
 #endif

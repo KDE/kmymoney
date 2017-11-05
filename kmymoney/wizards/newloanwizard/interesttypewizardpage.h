@@ -29,26 +29,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_interesttypewizardpagedecl.h"
+namespace Ui { class InterestTypeWizardPage; }
 
 /**
  * This class implements the Interest Type page of the
  * @ref KNewLoanWizard.
  */
-class InterestTypeWizardPageDecl : public QWizardPage, public Ui::InterestTypeWizardPageDecl
-{
-public:
-  InterestTypeWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class InterestTypeWizardPage : public InterestTypeWizardPageDecl
+class InterestTypeWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit InterestTypeWizardPage(QWidget *parent = 0);
+  explicit InterestTypeWizardPage(QWidget *parent = nullptr);
+  ~InterestTypeWizardPage();
 
+  Ui::InterestTypeWizardPage *ui;
 };
 
 #endif

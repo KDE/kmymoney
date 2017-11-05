@@ -28,17 +28,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_interesttypewizardpage.h"
 
 InterestTypeWizardPage::InterestTypeWizardPage(QWidget *parent)
-    : InterestTypeWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::InterestTypeWizardPage)
 {
-  ButtonGroup2->setId(m_fixedInterestButton, 0);
-  ButtonGroup2->setId(m_variableInterestButton, 1);
+  ui->setupUi(this);
+
+  ui->ButtonGroup2->setId(ui->m_fixedInterestButton, 0);
+  ui->ButtonGroup2->setId(ui->m_variableInterestButton, 1);
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("fixedInterestButton", m_fixedInterestButton);
-  registerField("variableInterestButton", m_variableInterestButton);
+  registerField("fixedInterestButton", ui->m_fixedInterestButton);
+  registerField("variableInterestButton", ui->m_variableInterestButton);
 
-  m_fixedInterestButton->click();
+  ui->m_fixedInterestButton->click();
+}
+
+InterestTypeWizardPage::~InterestTypeWizardPage()
+{
+  delete ui;
 }

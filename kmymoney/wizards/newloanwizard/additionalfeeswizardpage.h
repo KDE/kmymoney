@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_additionalfeeswizardpagedecl.h"
+namespace Ui { class AdditionalFeesWizardPage; }
 
 class MyMoneyAccount;
 
@@ -37,19 +37,13 @@ class MyMoneyAccount;
  * This class implements the Additional Fees page of the
  * @ref KNewLoanWizard.
  */
-class AdditionalFeesWizardPageDecl : public QWizardPage, public Ui::AdditionalFeesWizardPageDecl
-{
-public:
-  AdditionalFeesWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class AdditionalFeesWizardPage : public AdditionalFeesWizardPageDecl
+class AdditionalFeesWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit AdditionalFeesWizardPage(QWidget *parent = 0);
+  explicit AdditionalFeesWizardPage(QWidget *parent = nullptr);
+  ~AdditionalFeesWizardPage();
 
   void updatePeriodicPayment(const MyMoneyAccount& account);
 
@@ -71,6 +65,9 @@ signals:
 
 protected slots:
   virtual void slotAdditionalFees();
+
+private:
+  Ui::AdditionalFeesWizardPage *ui;
 };
 
 #endif

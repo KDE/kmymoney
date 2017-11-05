@@ -32,6 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_interestcategorywizardpage.h"
+
 #include "knewaccountdlg.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -41,22 +43,29 @@
 using namespace Icons;
 
 InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
-    : InterestCategoryWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::InterestCategoryWizardPage)
 {
+  ui->setupUi(this);
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("interestAccountEdit", m_interestAccountEdit, "selectedItems");
+  registerField("interestAccountEdit", ui->m_interestAccountEdit, "selectedItems");
 
-  connect(m_interestAccountEdit, SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
-  m_interestAccountEdit->removeButtons();
+  connect(ui->m_interestAccountEdit, SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
+  ui->m_interestAccountEdit->removeButtons();
 
   // load button icons
   KGuiItem createCategoryButtonItem(i18n("&Create..."),
                                     QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
                                     i18n("Create a new category"),
                                     i18n("Use this to open the new account editor"));
-  KGuiItem::assign(m_createCategoryButton, createCategoryButtonItem);
-  connect(m_createCategoryButton, SIGNAL(clicked()), this, SLOT(slotCreateCategory()));
+  KGuiItem::assign(ui->m_createCategoryButton, createCategoryButtonItem);
+  connect(ui->m_createCategoryButton, SIGNAL(clicked()), this, SLOT(slotCreateCategory()));
+}
+
+InterestCategoryWizardPage::~InterestCategoryWizardPage()
+{
+  delete ui;
 }
 
 /**
@@ -64,7 +73,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
  */
 bool InterestCategoryWizardPage::isComplete() const
 {
-  return m_interestAccountEdit->selectedItems().count() > 0;
+  return ui->m_interestAccountEdit->selectedItems().count() > 0;
 }
 
 void InterestCategoryWizardPage::slotCreateCategory()
@@ -94,7 +103,7 @@ void InterestCategoryWizardPage::slotCreateCategory()
 
       ft.commit();
 
-      m_interestAccountEdit->setSelected(id);
+      ui->m_interestAccountEdit->setSelected(id);
 
     } catch (const MyMoneyException &e) {
       KMessageBox::information(this, i18n("Unable to add account: %1", e.what()));

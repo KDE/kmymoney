@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FirstPaymentWizardPageDecl</class>
- <widget class="QWizardPage" name="FirstPaymentWizardPageDecl">
+ <class>InterestCategoryWizardPage</class>
+ <widget class="QWizardPage" name="InterestCategoryWizardPage">
   <attribute name="title">
-    <string>Date of first payment</string>
+    <string>Interest category</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,9 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="m_firstPaymentLabel">
+      <widget class="QLabel" name="TextLabel20_2">
         <property name="text">
-          <string>1</string>
+          <string>
+Please select the category you want to assign the interest payments to or create a new category.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -26,11 +27,11 @@
       </widget>
     </item>
     <item>
-      <spacer name="Spacer42">
+      <spacer name="Spacer90">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>78</height>
+            <height>38</height>
           </size>
         </property>
         <property name="sizeType">
@@ -40,6 +41,9 @@
           <enum>Qt::Vertical</enum>
         </property>
       </spacer>
+    </item>
+    <item>
+      <widget class="kMyMoneyAccountSelector" name="m_interestAccountEdit"/>
     </item>
     <item>
       <layout class="QHBoxLayout">
@@ -50,26 +54,36 @@
           <number>6</number>
         </property>
         <item>
-          <widget class="QLabel" name="TextLabel1_3">
-            <property name="text">
-              <string>First payment due on</string>
+          <spacer name="Spacer54_2">
+            <property name="sizeHint">
+              <size>
+                <width>264</width>
+                <height>0</height>
+              </size>
             </property>
-            <property name="wordWrap">
-              <bool>false</bool>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
             </property>
-          </widget>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
         </item>
         <item>
-          <widget class="kMyMoneyDateInput" name="m_firstDueDateEdit"/>
+          <widget class="QPushButton" name="m_createCategoryButton">
+            <property name="text">
+              <string/>
+            </property>
+          </widget>
         </item>
       </layout>
     </item>
     <item>
-      <spacer name="Spacer43">
+      <spacer name="Spacer91">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>28</height>
+            <height>22</height>
           </size>
         </property>
         <property name="sizeType">
@@ -79,19 +93,6 @@
           <enum>Qt::Vertical</enum>
         </property>
       </spacer>
-    </item>
-    <item>
-      <widget class="QLabel" name="m_firstPaymentNote">
-        <property name="text">
-          <string/>
-        </property>
-        <property name="alignment">
-          <set>Qt::AlignBottom</set>
-        </property>
-        <property name="wordWrap">
-          <bool>true</bool>
-        </property>
-      </widget>
     </item>
   </layout>
  </widget>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NewPaymentsWizardPageDecl</class>
- <widget class="QWizardPage" name="NewPaymentsWizardPageDecl">
+ <class>PaymentEditWizardPage</class>
+ <widget class="QWizardPage" name="PaymentEditWizardPage">
   <attribute name="title">
-    <string>Payments</string>
+    <string>Payment</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,10 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="TextLabel19_2">
+      <widget class="QLabel" name="TextLabel8_2_2">
         <property name="text">
           <string>
-In the following steps, KMyMoney supports you in setting up categories and schedules for your loan payments.</string>
+Please enter the amount you pay for principal and interest or leave the field empty to calculate it.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +27,11 @@ In the following steps, KMyMoney supports you in setting up categories and sched
       </widget>
     </item>
     <item>
-      <spacer name="Spacer10_2_2">
+      <spacer name="Spacer70_2">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>14</height>
+            <height>21</height>
           </size>
         </property>
         <property name="sizeType">
@@ -51,10 +51,10 @@ In the following steps, KMyMoney supports you in setting up categories and sched
           <number>6</number>
         </property>
         <item>
-          <spacer name="Spacer8_2_2">
+          <spacer name="Spacer76">
             <property name="sizeHint">
               <size>
-                <width>136</width>
+                <width>100</width>
                 <height>0</height>
               </size>
             </property>
@@ -67,80 +67,53 @@ In the following steps, KMyMoney supports you in setting up categories and sched
           </spacer>
         </item>
         <item>
-          <layout class="QVBoxLayout">
+          <layout class="QGridLayout">
             <property name="margin">
               <number>0</number>
             </property>
             <property name="spacing">
               <number>6</number>
             </property>
-            <item>
-              <widget class="QLabel" name="TextLabel19_3">
-                <property name="enabled">
-                  <bool>false</bool>
-                </property>
+            <item row="0" column="1">
+              <widget class="kMyMoneyEdit" name="m_newPaymentEdit"/>
+            </item>
+            <item row="1" column="0">
+              <widget class="QLabel" name="TextLabel2_4">
                 <property name="text">
-                  <string>1. General Information</string>
-                </property>
-                <property name="alignment">
-                  <set>Qt::AlignTop</set>
+                  <string>Current amount</string>
                 </property>
                 <property name="wordWrap">
                   <bool>false</bool>
                 </property>
               </widget>
             </item>
-            <item>
-              <widget class="QLabel" name="TextLabel19_4">
-                <property name="enabled">
-                  <bool>false</bool>
-                </property>
+            <item row="1" column="1">
+              <widget class="QLabel" name="m_paymentLabel">
                 <property name="text">
-                  <string>
-2. Calculate Loan</string>
+                  <string>1</string>
                 </property>
                 <property name="wordWrap">
                   <bool>false</bool>
                 </property>
               </widget>
             </item>
-            <item>
-              <widget class="QLabel" name="TextLabel19_5">
-                <property name="enabled">
-                  <bool>true</bool>
-                </property>
+            <item row="0" column="0">
+              <widget class="QLabel" name="TextLabel1_5">
                 <property name="text">
-                  <string>
-3. Payments</string>
+                  <string>Principal and interest</string>
                 </property>
                 <property name="wordWrap">
                   <bool>false</bool>
                 </property>
               </widget>
-            </item>
-            <item>
-              <spacer name="Spacer7_2_2">
-                <property name="sizeHint">
-                  <size>
-                    <width>0</width>
-                    <height>18</height>
-                  </size>
-                </property>
-                <property name="sizeType">
-                  <enum>QSizePolicy::Expanding</enum>
-                </property>
-                <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                </property>
-              </spacer>
             </item>
           </layout>
         </item>
         <item>
-          <spacer name="Spacer9_2_2">
+          <spacer name="Spacer75">
             <property name="sizeHint">
               <size>
-                <width>135</width>
+                <width>100</width>
                 <height>0</height>
               </size>
             </property>
@@ -155,11 +128,11 @@ In the following steps, KMyMoney supports you in setting up categories and sched
       </layout>
     </item>
     <item>
-      <spacer name="Spacer51_2">
+      <spacer name="Spacer71">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>18</height>
+            <height>19</height>
           </size>
         </property>
         <property name="sizeType">
@@ -169,6 +142,21 @@ In the following steps, KMyMoney supports you in setting up categories and sched
           <enum>Qt::Vertical</enum>
         </property>
       </spacer>
+    </item>
+    <item>
+      <widget class="QLabel" name="TextLabel4_5">
+        <property name="text">
+          <string>KMyMoney either calculates the new interest rate or the amount for principal and interest. If you know the amount for principal and interest then enter it here.
+
+If KMyMoney should calculate this value for you, then leave the field blank.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
     </item>
   </layout>
  </widget>

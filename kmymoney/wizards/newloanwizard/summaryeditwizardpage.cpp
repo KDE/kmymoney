@@ -28,20 +28,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_summaryeditwizardpage.h"
 
 SummaryEditWizardPage::SummaryEditWizardPage(QWidget *parent)
-    : SummaryEditWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::SummaryEditWizardPage)
 {
+  ui->setupUi(this);
+
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("affectedPayments", m_affectedPayments, "text");
+  registerField("affectedPayments", ui->m_affectedPayments, "text");
+}
+
+SummaryEditWizardPage::~SummaryEditWizardPage()
+{
+  delete ui;
 }
 
 void SummaryEditWizardPage::initializePage()
 {
-  m_payment7->setText(field("payment6").toString());
-  m_additionalFees7->setText(field("additionalCost").toString());
-  m_totalPayment7->setText(field("periodicPayment").toString());
-  m_interestRate7->setText(field("interestRate6").toString());
-  m_startDateChanges->setText(QLocale().toString(field("effectiveChangeDateEdit").toDate()));
+  ui->m_payment7->setText(field("payment6").toString());
+  ui->m_additionalFees7->setText(field("additionalCost").toString());
+  ui->m_totalPayment7->setText(field("periodicPayment").toString());
+  ui->m_interestRate7->setText(field("interestRate6").toString());
+  ui->m_startDateChanges->setText(QLocale().toString(field("effectiveChangeDateEdit").toDate()));
 }

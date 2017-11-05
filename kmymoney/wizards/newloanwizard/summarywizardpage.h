@@ -29,31 +29,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_summarywizardpagedecl.h"
+namespace Ui { class SummaryWizardPage; }
 
 /**
  * This class implements the Summary page of the
  * @ref KNewLoanWizard.
  */
-class SummaryWizardPageDecl : public QWizardPage, public Ui::SummaryWizardPageDecl
-{
-public:
-  SummaryWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class SummaryWizardPage : public SummaryWizardPageDecl
+class SummaryWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit SummaryWizardPage(QWidget *parent = 0);
+  explicit SummaryWizardPage(QWidget *parent = nullptr);
+  ~SummaryWizardPage();
 
   /**
    * Overload the initializePage function to set widgets based on
    * the inputs from previous pages.
    */
   void initializePage();
+
+private:
+  Ui::SummaryWizardPage *ui;
 };
 
 #endif

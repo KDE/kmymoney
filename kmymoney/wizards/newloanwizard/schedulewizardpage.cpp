@@ -28,19 +28,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_schedulewizardpage.h"
 
 ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
-    : ScheduleWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::ScheduleWizardPage)
 {
+  ui->setupUi(this);
+
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("nextDueDateEdit", m_nextDueDateEdit, "date", SIGNAL(dateChanged(QDate)));
-  registerField("paymentAccountEdit", m_paymentAccountEdit, "selectedItems");
+  registerField("nextDueDateEdit", ui->m_nextDueDateEdit, "date", SIGNAL(dateChanged(QDate)));
+  registerField("paymentAccountEdit", ui->m_paymentAccountEdit, "selectedItems");
 
-  connect(m_nextDueDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
-  connect(m_paymentAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
+  connect(ui->m_nextDueDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
+  connect(ui->m_paymentAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
 
-  m_paymentAccountEdit->removeButtons();
+  ui->m_paymentAccountEdit->removeButtons();
+}
+
+ScheduleWizardPage::~ScheduleWizardPage()
+{
+  delete ui;
 }
 
 /**
@@ -48,17 +57,17 @@ ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
  */
 bool ScheduleWizardPage::isComplete() const
 {
-  return m_nextDueDateEdit->date().isValid()
-         && m_nextDueDateEdit->date() >= field("firstDueDateEdit").toDate()
-         && m_paymentAccountEdit->selectedItems().count() > 0;
+  return ui->m_nextDueDateEdit->date().isValid()
+         && ui->m_nextDueDateEdit->date() >= field("firstDueDateEdit").toDate()
+         && ui->m_paymentAccountEdit->selectedItems().count() > 0;
 }
 
 void ScheduleWizardPage::initializePage()
 {
-  m_nextDueDateEdit->setEnabled(true);
+  ui->m_nextDueDateEdit->setEnabled(true);
   if (field("allPaymentsButton").toBool() || field("noPreviousPaymentButton").toBool()) {
     setField("nextDueDateEdit", field("firstDueDateEdit").toDate());
-    m_nextDueDateEdit->setEnabled(false);
+    ui->m_nextDueDateEdit->setEnabled(false);
   } else {
     QDate nextPayment(QDate::currentDate().year(), 1, field("firstDueDateEdit").toDate().day());
     setField("nextDueDateEdit", nextPayment);

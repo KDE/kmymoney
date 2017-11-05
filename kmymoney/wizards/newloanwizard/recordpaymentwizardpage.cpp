@@ -28,23 +28,32 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_recordpaymentwizardpage.h"
 
 RecordPaymentWizardPage::RecordPaymentWizardPage(QWidget *parent)
-    : RecordPaymentWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::RecordPaymentWizardPage)
 {
-  ButtonGroup4->setId(m_allPaymentsButton, 0);
-  ButtonGroup4->setId(m_thisYearPaymentButton, 1);
+  ui->setupUi(this);
+
+  ui->ButtonGroup4->setId(ui->m_allPaymentsButton, 0);
+  ui->ButtonGroup4->setId(ui->m_thisYearPaymentButton, 1);
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("allPaymentsButton", m_allPaymentsButton);
-  registerField("thisYearPaymentButton", m_thisYearPaymentButton);
+  registerField("allPaymentsButton", ui->m_allPaymentsButton);
+  registerField("thisYearPaymentButton", ui->m_thisYearPaymentButton);
 
-  m_allPaymentsButton->click();
+  ui->m_allPaymentsButton->click();
+}
+
+RecordPaymentWizardPage::~RecordPaymentWizardPage()
+{
+  delete ui;
 }
 
 void RecordPaymentWizardPage::initializePage()
 {
   if (field("noPreviousPaymentButton").toBool())
-    m_allPaymentsButton->click();
+    ui->m_allPaymentsButton->click();
 }

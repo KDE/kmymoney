@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FinalPaymentWizardPageDecl</class>
- <widget class="QWizardPage" name="FinalPaymentWizardPageDecl">
+ <class>DurationWizardPage</class>
+ <widget class="QWizardPage" name="DurationWizardPage">
   <attribute name="title">
-    <string>Final amortization payment</string>
+    <string>Duration</string>
   </attribute>
   <layout class="QVBoxLayout">
-    <property name="margin">
-      <number>11</number>
-    </property>
-    <property name="spacing">
-      <number>6</number>
-    </property>
     <item>
-      <widget class="QLabel" name="TextLabel17_2">
+      <widget class="QLabel" name="TextLabel15_2">
         <property name="text">
           <string>
-Please enter the amount of a final amortization payment or leave the field empty to calculate it.</string>
+Please enter the term of this loan or leave the field empty to calculate it. The term is the time that is required to fully repay the loan. This time might be different from the time your loan contract is signed for.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +21,11 @@ Please enter the amount of a final amortization payment or leave the field empty
       </widget>
     </item>
     <item>
-      <spacer name="Spacer74_2">
+      <spacer name="Spacer67_2">
         <property name="sizeHint">
           <size>
-            <width>0</width>
-            <height>16</height>
+            <width>16</width>
+            <height>54</height>
           </size>
         </property>
         <property name="sizeType">
@@ -44,16 +38,16 @@ Please enter the amount of a final amortization payment or leave the field empty
     </item>
     <item>
       <layout class="QHBoxLayout">
-        <property name="margin">
-          <number>0</number>
-        </property>
-        <property name="spacing">
-          <number>6</number>
-        </property>
         <item>
-          <widget class="QLabel" name="TextLabel1_4_2_2">
+          <widget class="QLabel" name="TextLabel2_3">
+            <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>1</horstretch>
+                <verstretch>0</verstretch>
+              </sizepolicy>
+            </property>
             <property name="text">
-              <string>Final amortization payment</string>
+              <string>Term</string>
             </property>
             <property name="wordWrap">
               <bool>false</bool>
@@ -61,12 +55,22 @@ Please enter the amount of a final amortization payment or leave the field empty
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyEdit" name="m_finalPaymentEdit"/>
+          <widget class="QSpinBox" name="m_durationValueEdit">
+                <property name="minimum">
+                  <number>0</number>
+                </property>
+                <property name="maximum">
+                  <number>1000</number>
+                </property>
+            </widget>
+        </item>
+        <item>
+          <widget class="KMyMoneyGeneralCombo" name="m_durationUnitEdit"/>
         </item>
       </layout>
     </item>
     <item>
-      <widget class="QFrame" name="Frame3_2_2_2_2">
+      <widget class="QFrame" name="Frame3_2_2">
         <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
         </property>
@@ -81,7 +85,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             <number>6</number>
           </property>
           <item row="0" column="0">
-            <widget class="QLabel" name="TextLabel6_3_2_2_2">
+            <widget class="QLabel" name="TextLabel6_3_2">
               <property name="text">
                 <string>Loan amount:</string>
               </property>
@@ -94,7 +98,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="1" column="0">
-            <widget class="QLabel" name="TextLabel8_3_2_2_2">
+            <widget class="QLabel" name="TextLabel8_3_2">
               <property name="text">
                 <string>Interest rate:</string>
               </property>
@@ -107,7 +111,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="2" column="0">
-            <widget class="QLabel" name="TextLabel9_2_2_2_2">
+            <widget class="QLabel" name="TextLabel9_2_2">
               <property name="text">
                 <string>Term:</string>
               </property>
@@ -120,7 +124,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="3" column="0">
-            <widget class="QLabel" name="TextLabel10_2_2_2_2">
+            <widget class="QLabel" name="TextLabel10_2_2">
               <property name="text">
                 <string>Principal + Interest:</string>
               </property>
@@ -133,7 +137,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="4" column="0">
-            <widget class="QLabel" name="TextLabel11_3_2_2_2">
+            <widget class="QLabel" name="TextLabel11_3_2">
               <property name="text">
                 <string>Final amortization payment</string>
               </property>
@@ -146,7 +150,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="0" column="1">
-            <widget class="QLabel" name="m_loanAmount5">
+            <widget class="QLabel" name="m_loanAmount3">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -164,7 +168,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="1" column="1">
-            <widget class="QLabel" name="m_interestRate5">
+            <widget class="QLabel" name="m_interestRate3">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -182,7 +186,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="2" column="1">
-            <widget class="QLabel" name="m_duration5">
+            <widget class="QLabel" name="m_duration3">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -200,7 +204,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="3" column="1">
-            <widget class="QLabel" name="m_payment5">
+            <widget class="QLabel" name="m_payment3">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -218,7 +222,7 @@ Please enter the amount of a final amortization payment or leave the field empty
             </widget>
           </item>
           <item row="4" column="1">
-            <widget class="QLabel" name="m_balloon5">
+            <widget class="QLabel" name="m_balloon3">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -243,6 +247,12 @@ Please enter the amount of a final amortization payment or leave the field empty
  <resources/>
  <connections/>
  <customwidgets>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneymvccombo.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
  </tabstops>

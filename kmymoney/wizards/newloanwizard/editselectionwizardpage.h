@@ -29,26 +29,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_editselectionwizardpagedecl.h"
+namespace Ui { class EditSelectionWizardPage; }
 
 /**
  * This class implements the Edit Selection page of the
  * @ref KNewLoanWizard.
  */
-class EditSelectionWizardPageDecl : public QWizardPage, public Ui::EditSelectionWizardPageDecl
-{
-public:
-  EditSelectionWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class EditSelectionWizardPage : public EditSelectionWizardPageDecl
+class EditSelectionWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit EditSelectionWizardPage(QWidget *parent = 0);
+  explicit EditSelectionWizardPage(QWidget *parent = nullptr);
+  ~EditSelectionWizardPage();
 
+  Ui::EditSelectionWizardPage *ui;
 };
 
 #endif

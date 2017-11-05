@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VariableInterestDateWizardPageDecl</class>
- <widget class="QWizardPage" name="VariableInterestDateWizardPageDecl">
+ <class>VariableInterestDateWizardPage</class>
+ <widget class="QWizardPage" name="VariableInterestDateWizardPage">
   <attribute name="title">
     <string>Date of next interest change</string>
   </attribute>

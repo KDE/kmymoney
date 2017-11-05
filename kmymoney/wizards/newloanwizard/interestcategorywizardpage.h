@@ -29,30 +29,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_interestcategorywizardpagedecl.h"
+namespace Ui { class InterestCategoryWizardPage; }
 
 /**
  * This class implements the Interest Category page of the
  * @ref KNewLoanWizard.
  */
-class InterestCategoryWizardPageDecl : public QWizardPage, public Ui::InterestCategoryWizardPageDecl
-{
-public:
-  InterestCategoryWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class InterestCategoryWizardPage : public InterestCategoryWizardPageDecl
+class InterestCategoryWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit InterestCategoryWizardPage(QWidget *parent = 0);
+  explicit InterestCategoryWizardPage(QWidget *parent = nullptr);
+  ~InterestCategoryWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
    */
   bool isComplete() const;
+
+  Ui::InterestCategoryWizardPage *ui;
 
 protected slots:
   void slotCreateCategory();

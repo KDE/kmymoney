@@ -28,7 +28,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_newcalculateloanwizardpage.h"
+
 NewCalculateLoanWizardPage::NewCalculateLoanWizardPage(QWidget *parent)
-    : NewCalculateLoanWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::NewCalculateLoanWizardPage)
 {
+  ui->setupUi(this);
+}
+
+NewCalculateLoanWizardPage::~NewCalculateLoanWizardPage()
+{
+  delete ui;
 }

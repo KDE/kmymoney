@@ -28,8 +28,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_newgeneralinfowizardpage.h"
 
 NewGeneralInfoWizardPage::NewGeneralInfoWizardPage(QWidget *parent)
-    : NewGeneralInfoWizardPageDecl(parent)
+  : QWizardPage(parent),
+    ui(new Ui::NewGeneralInfoWizardPage)
 {
+  ui->setupUi(this);
+}
+
+NewGeneralInfoWizardPage::~NewGeneralInfoWizardPage()
+{
+  delete ui;
 }

@@ -28,21 +28,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_editselectionwizardpage.h"
 
 EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
-    : EditSelectionWizardPageDecl(parent)
+    : QWizardPage(parent),
+      ui(new Ui::EditSelectionWizardPage)
 {
-  m_selectionButtonGroup->setId(m_editInterestRateButton, 0);
-  m_selectionButtonGroup->setId(m_editOtherCostButton, 1);
-  m_selectionButtonGroup->setId(m_editOtherInfoButton, 2);
-  m_selectionButtonGroup->setId(m_editAttributesButton, 3);
+  ui->setupUi(this);
+  ui->m_selectionButtonGroup->setId(ui->m_editInterestRateButton, 0);
+  ui->m_selectionButtonGroup->setId(ui->m_editOtherCostButton, 1);
+  ui->m_selectionButtonGroup->setId(ui->m_editOtherInfoButton, 2);
+  ui->m_selectionButtonGroup->setId(ui->m_editAttributesButton, 3);
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("editInterestRateButton", m_editInterestRateButton);
-  registerField("editOtherCostButton", m_editOtherCostButton);
-  registerField("editOtherInfoButton", m_editOtherInfoButton);
-  registerField("editAttributesButton", m_editAttributesButton);
+  registerField("editInterestRateButton", ui->m_editInterestRateButton);
+  registerField("editOtherCostButton", ui->m_editOtherCostButton);
+  registerField("editOtherInfoButton", ui->m_editOtherInfoButton);
+  registerField("editAttributesButton", ui->m_editAttributesButton);
 
-  m_editInterestRateButton->click();
+  ui->m_editInterestRateButton->click();
+}
+
+EditSelectionWizardPage::~EditSelectionWizardPage()
+{
+  delete ui;
 }

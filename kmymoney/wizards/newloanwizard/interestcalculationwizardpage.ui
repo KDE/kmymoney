@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InterestTypeWizardPageDecl</class>
- <widget class="QWizardPage" name="InterestTypeWizardPageDecl">
+ <class>InterestCalculationWizardPage</class>
+ <widget class="QWizardPage" name="InterestCalculationWizardPage">
   <attribute name="title">
-    <string>Type of interest</string>
+    <string>Interest calculation</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,10 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="TextLabel5_2">
+      <widget class="QLabel" name="TextLabel12_2">
         <property name="text">
           <string>
-Is the interest of this loan fixed over a period of time or is it adapted from time to time? If the interest rate changes during the amortization phase of the loan you should choose the option 'variable interest rate'.</string>
+When does the actual interest rate get calculated?</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +27,11 @@ Is the interest of this loan fixed over a period of time or is it adapted from t
       </widget>
     </item>
     <item>
-      <spacer name="Spacer23">
+      <spacer name="Spacer61">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>53</height>
+            <height>69</height>
           </size>
         </property>
         <property name="sizeType">
@@ -51,7 +51,7 @@ Is the interest of this loan fixed over a period of time or is it adapted from t
           <number>6</number>
         </property>
         <item>
-          <widget class="QFrame" name="frame_3">
+          <widget class="QFrame" name="frame_6">
             <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
             </property>
@@ -63,22 +63,22 @@ Is the interest of this loan fixed over a period of time or is it adapted from t
                 <number>6</number>
               </property>
               <item>
-                <widget class="QRadioButton" name="m_fixedInterestButton">
+                <widget class="QRadioButton" name="m_interestOnReceptionButton">
                   <property name="text">
-                    <string>Fixed interest rate</string>
+                    <string>When the payment is received.</string>
                   </property>
                   <attribute name="buttonGroup">
-                    <string>ButtonGroup2</string>
+                    <string>ButtonGroup5</string>
                   </attribute>
                 </widget>
               </item>
               <item>
-                <widget class="QRadioButton" name="m_variableInterestButton">
+                <widget class="QRadioButton" name="m_interestOnPaymentButton">
                   <property name="text">
-                    <string>Variable interest rate</string>
+                    <string>When the payment is due.</string>
                   </property>
                   <attribute name="buttonGroup">
-                    <string>ButtonGroup2</string>
+                    <string>ButtonGroup5</string>
                   </attribute>
                 </widget>
               </item>
@@ -86,10 +86,10 @@ Is the interest of this loan fixed over a period of time or is it adapted from t
           </widget>
         </item>
         <item>
-          <spacer name="Spacer14_2">
+          <spacer name="Spacer14_2_2_2_2">
             <property name="sizeHint">
               <size>
-                <width>286</width>
+                <width>296</width>
                 <height>0</height>
               </size>
             </property>
@@ -104,11 +104,11 @@ Is the interest of this loan fixed over a period of time or is it adapted from t
       </layout>
     </item>
     <item>
-      <spacer name="Spacer24">
+      <spacer name="Spacer62">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>53</height>
+            <height>69</height>
           </size>
         </property>
         <property name="sizeType">
@@ -128,6 +128,6 @@ Is the interest of this loan fixed over a period of time or is it adapted from t
  <tabstops>
  </tabstops>
  <buttongroups>
-  <buttongroup name="ButtonGroup2"/>
+  <buttongroup name="ButtonGroup5"/>
  </buttongroups>
 </ui>

@@ -29,28 +29,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_editintrowizardpagedecl.h"
+namespace Ui { class EditIntroWizardPage; }
 
 /**
  * This class implements the Edit Intro page of the
  * @ref KNewLoanWizard.
  */
-class EditIntroWizardPageDecl : public QWizardPage, public Ui::EditIntroWizardPageDecl
-{
-public:
-  EditIntroWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class EditIntroWizardPage : public EditIntroWizardPageDecl
+class EditIntroWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit EditIntroWizardPage(QWidget *parent = 0);
+  explicit EditIntroWizardPage(QWidget *parent = nullptr);
+  ~EditIntroWizardPage();
 
-
-public slots:
+private:
+  Ui::EditIntroWizardPage *ui;
 };
 
 #endif

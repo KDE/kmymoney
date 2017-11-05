@@ -29,26 +29,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_variableinterestdatewizardpagedecl.h"
+namespace Ui { class VariableInterestDateWizardPage; }
 
 /**
  * This class implements the Variable Interest Date page of the
  * @ref KNewLoanWizard.
  */
-class VariableInterestDateWizardPageDecl : public QWizardPage, public Ui::VariableInterestDateWizardPageDecl
-{
-public:
-  VariableInterestDateWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class VariableInterestDateWizardPage : public VariableInterestDateWizardPageDecl
+class VariableInterestDateWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit VariableInterestDateWizardPage(QWidget *parent = 0);
+  explicit VariableInterestDateWizardPage(QWidget *parent = nullptr);
+  ~VariableInterestDateWizardPage();
 
+private:
+  Ui::VariableInterestDateWizardPage *ui;
 };
 
 #endif

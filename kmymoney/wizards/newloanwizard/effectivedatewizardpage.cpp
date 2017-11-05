@@ -29,21 +29,30 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_effectivedatewizardpage.h"
+
 #include "knewloanwizard.h"
 #include "mymoneyaccountloan.h"
 
 EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
-    : EffectiveDateWizardPageDecl(parent)
+    : QWizardPage(parent),
+      ui(new Ui::EffectiveDateWizardPage)
 {
+  ui->setupUi(this);
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("effectiveChangeDateEdit", m_effectiveChangeDateEdit, "date", SIGNAL(dateChanged(QDate)));
-  connect(m_effectiveChangeDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
+  registerField("effectiveChangeDateEdit", ui->m_effectiveChangeDateEdit, "date", SIGNAL(dateChanged(QDate)));
+  connect(ui->m_effectiveChangeDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
+}
+
+EffectiveDateWizardPage::~EffectiveDateWizardPage()
+{
+  delete ui;
 }
 
 void EffectiveDateWizardPage::initializePage()
 {
-  m_effectiveDateLabel->setText(QString("\n") + i18n(
+  ui->m_effectiveDateLabel->setText(QString("\n") + i18n(
                                   "Please enter the date from which on the following changes will be effective. "
                                   "The date entered must be later than the opening date of this account (%1), but must "
                                   "not be in the future. The default will be today.", QLocale().toString(qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate())));
@@ -54,7 +63,7 @@ void EffectiveDateWizardPage::initializePage()
  */
 bool EffectiveDateWizardPage::isComplete() const
 {
-  return !(m_effectiveChangeDateEdit->date() < qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate()
-           || m_effectiveChangeDateEdit->date() > QDate::currentDate());
+  return !(ui->m_effectiveChangeDateEdit->date() < qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate()
+           || ui->m_effectiveChangeDateEdit->date() > QDate::currentDate());
   return true;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EditIntroWizardPageDecl</class>
- <widget class="QWizardPage" name="EditIntroWizardPageDecl">
+ <class>NewIntroWizardPage</class>
+ <widget class="QWizardPage" name="NewIntroWizardPage">
   <attribute name="title">
     <string/>
   </attribute>
@@ -15,7 +15,7 @@
           <number>6</number>
         </property>
         <item>
-          <spacer name="Spacer2_2">
+          <spacer name="Spacer2">
             <property name="sizeHint">
               <size>
                 <width>98</width>
@@ -31,7 +31,7 @@
           </spacer>
         </item>
         <item>
-          <widget class="QLabel" name="TextLabel1_1_2">
+          <widget class="QLabel" name="TextLabel1_1">
             <property name="font">
               <font>
                 <family>Helvetica</family>
@@ -40,7 +40,7 @@
               </font>
             </property>
             <property name="text">
-              <string>Edit Loan Account Wizard</string>
+              <string>New Loan Account Wizard</string>
             </property>
             <property name="alignment">
               <set>Qt::AlignTop|Qt::AlignHCenter</set>
@@ -51,7 +51,7 @@
           </widget>
         </item>
         <item>
-          <spacer name="Spacer3_2">
+          <spacer name="Spacer3">
             <property name="sizeHint">
               <size>
                 <width>119</width>
@@ -69,10 +69,10 @@
       </layout>
     </item>
     <item>
-      <widget class="QLabel" name="TextLabel1_2_2">
+      <widget class="QLabel" name="TextLabel1_2">
         <property name="text">
           <string>
-Welcome to the Edit Loan Account Wizard. Please use this wizard to modify information about your loan account.
+Welcome to the New Loan Account Wizard which will guide you through the creation of a new loan e.g. for your home, your car or any other loan that you pay or gain interest for.
 
 Please make sure that you have the relevant information handy. You usually get the information out of your contract and the last statement.</string>
         </property>
@@ -85,7 +85,7 @@ Please make sure that you have the relevant information handy. You usually get t
       </widget>
     </item>
     <item>
-      <spacer name="spacer79">
+      <spacer name="Spacer4">
         <property name="sizeHint">
           <size>
             <width>20</width>

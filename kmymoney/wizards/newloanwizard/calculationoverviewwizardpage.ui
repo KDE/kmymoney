@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InterestWizardPageDecl</class>
- <widget class="QWizardPage" name="InterestWizardPageDecl">
+ <class>CalculationOverviewWizardPage</class>
+ <widget class="QWizardPage" name="CalculationOverviewWizardPage">
   <attribute name="title">
-    <string>Interest</string>
+    <string>Calculation Overview</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,10 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="TextLabel14_2">
+      <widget class="QLabel" name="TextLabel18_2">
         <property name="text">
           <string>
-Please enter the interest rate or leave the field empty to calculate it.</string>
+KMyMoney has calculated the loan as shown in the overview below. You can accept these values by selecting &quot;Next&quot; or change them by choosing &quot;Back&quot; to return to the input field for the information you want to change.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +27,11 @@ Please enter the interest rate or leave the field empty to calculate it.</string
       </widget>
     </item>
     <item>
-      <spacer name="Spacer67">
+      <spacer name="Spacer79">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>16</height>
+            <height>22</height>
           </size>
         </property>
         <property name="sizeType">
@@ -43,30 +43,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
       </spacer>
     </item>
     <item>
-      <layout class="QHBoxLayout">
-        <property name="margin">
-          <number>0</number>
-        </property>
-        <property name="spacing">
-          <number>6</number>
-        </property>
-        <item>
-          <widget class="QLabel" name="TextLabel1_4">
-            <property name="text">
-              <string>Interest rate</string>
-            </property>
-            <property name="wordWrap">
-              <bool>false</bool>
-            </property>
-          </widget>
-        </item>
-        <item>
-          <widget class="kMyMoneyEdit" name="m_interestRateEdit"/>
-        </item>
-      </layout>
-    </item>
-    <item>
-      <widget class="QFrame" name="Frame3_2">
+      <widget class="QFrame" name="Frame3_2_2_2_2_2">
         <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
         </property>
@@ -81,7 +58,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             <number>6</number>
           </property>
           <item row="0" column="0">
-            <widget class="QLabel" name="TextLabel6_3">
+            <widget class="QLabel" name="TextLabel6_3_2_2_2_2">
               <property name="text">
                 <string>Loan amount:</string>
               </property>
@@ -94,7 +71,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="1" column="0">
-            <widget class="QLabel" name="TextLabel8_3">
+            <widget class="QLabel" name="TextLabel8_3_2_2_2_2">
               <property name="text">
                 <string>Interest rate:</string>
               </property>
@@ -107,7 +84,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="2" column="0">
-            <widget class="QLabel" name="TextLabel9_2">
+            <widget class="QLabel" name="TextLabel9_2_2_2_2_2">
               <property name="text">
                 <string>Term:</string>
               </property>
@@ -120,7 +97,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="3" column="0">
-            <widget class="QLabel" name="TextLabel10_2">
+            <widget class="QLabel" name="TextLabel10_2_2_2_2_2">
               <property name="text">
                 <string>Principal + Interest:</string>
               </property>
@@ -133,7 +110,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="4" column="0">
-            <widget class="QLabel" name="TextLabel11_3">
+            <widget class="QLabel" name="TextLabel11_3_2_2_2_2">
               <property name="text">
                 <string>Final amortization payment</string>
               </property>
@@ -146,7 +123,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="0" column="1">
-            <widget class="QLabel" name="m_loanAmount2">
+            <widget class="QLabel" name="m_loanAmount6">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -164,7 +141,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="1" column="1">
-            <widget class="QLabel" name="m_interestRate2">
+            <widget class="QLabel" name="m_interestRate6">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -182,7 +159,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="2" column="1">
-            <widget class="QLabel" name="m_duration2">
+            <widget class="QLabel" name="m_duration6">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -200,7 +177,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="3" column="1">
-            <widget class="QLabel" name="m_payment2">
+            <widget class="QLabel" name="m_payment6">
               <property name="font">
                 <font>
                   <bold>true</bold>
@@ -218,7 +195,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
             </widget>
           </item>
           <item row="4" column="1">
-            <widget class="QLabel" name="m_balloon2">
+            <widget class="QLabel" name="m_balloon6">
               <property name="font">
                 <font>
                   <bold>true</bold>

@@ -29,25 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_recordpaymentwizardpagedecl.h"
+namespace Ui { class RecordPaymentWizardPage; }
 
 /**
  * This class implements the Record Payment page of the
  * @ref KNewLoanWizard.
  */
-class RecordPaymentWizardPageDecl : public QWizardPage, public Ui::RecordPaymentWizardPageDecl
-{
-public:
-  RecordPaymentWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class RecordPaymentWizardPage : public RecordPaymentWizardPageDecl
+class RecordPaymentWizardPage : public QWizardPage
 {
   Q_OBJECT
 public:
-  explicit RecordPaymentWizardPage(QWidget *parent = 0);
+  explicit RecordPaymentWizardPage(QWidget *parent = nullptr);
+  ~RecordPaymentWizardPage();
 
   /**
    * Overload the initializePage function to set widgets based on
@@ -55,6 +49,8 @@ public:
    */
   void initializePage();
 
+private:
+  Ui::RecordPaymentWizardPage *ui;
 };
 
 #endif

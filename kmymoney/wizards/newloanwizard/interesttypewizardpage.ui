@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PaymentFrequencyWizardPageDecl</class>
- <widget class="QWizardPage" name="PaymentFrequencyWizardPageDecl">
+ <class>InterestTypeWizardPage</class>
+ <widget class="QWizardPage" name="InterestTypeWizardPage">
   <attribute name="title">
-    <string>Payment frequency</string>
+    <string>Type of interest</string>
   </attribute>
   <layout class="QVBoxLayout">
     <property name="margin">
@@ -13,10 +13,10 @@
       <number>6</number>
     </property>
     <item>
-      <widget class="QLabel" name="TextLabel11_2">
+      <widget class="QLabel" name="TextLabel5_2">
         <property name="text">
           <string>
-How often will there be payments made to this loan?</string>
+Is the interest of this loan fixed over a period of time or is it adapted from time to time? If the interest rate changes during the amortization phase of the loan you should choose the option 'variable interest rate'.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>
@@ -27,11 +27,11 @@ How often will there be payments made to this loan?</string>
       </widget>
     </item>
     <item>
-      <spacer name="Spacer54">
+      <spacer name="Spacer23">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>49</height>
+            <height>53</height>
           </size>
         </property>
         <property name="sizeType">
@@ -51,29 +51,45 @@ How often will there be payments made to this loan?</string>
           <number>6</number>
         </property>
         <item>
-          <spacer name="Spacer57">
-            <property name="sizeHint">
-              <size>
-                <width>39</width>
-                <height>0</height>
-              </size>
+          <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
             </property>
-            <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-            </property>
-          </spacer>
+            <layout class="QVBoxLayout">
+              <property name="margin">
+                <number>11</number>
+              </property>
+              <property name="spacing">
+                <number>6</number>
+              </property>
+              <item>
+                <widget class="QRadioButton" name="m_fixedInterestButton">
+                  <property name="text">
+                    <string>Fixed interest rate</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup2</string>
+                  </attribute>
+                </widget>
+              </item>
+              <item>
+                <widget class="QRadioButton" name="m_variableInterestButton">
+                  <property name="text">
+                    <string>Variable interest rate</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup2</string>
+                  </attribute>
+                </widget>
+              </item>
+            </layout>
+          </widget>
         </item>
         <item>
-          <widget class="KMyMoneyFrequencyCombo" name="m_paymentFrequencyUnitEdit"/>
-        </item>
-        <item>
-          <spacer name="Spacer56">
+          <spacer name="Spacer14_2">
             <property name="sizeHint">
               <size>
-                <width>56</width>
+                <width>286</width>
                 <height>0</height>
               </size>
             </property>
@@ -88,11 +104,11 @@ How often will there be payments made to this loan?</string>
       </layout>
     </item>
     <item>
-      <spacer name="Spacer55">
+      <spacer name="Spacer24">
         <property name="sizeHint">
           <size>
             <width>0</width>
-            <height>49</height>
+            <height>53</height>
           </size>
         </property>
         <property name="sizeType">
@@ -108,18 +124,10 @@ How often will there be payments made to this loan?</string>
  <resources/>
  <connections/>
  <customwidgets>
- <customwidget>
-  <class>KMyMoneyFrequencyCombo</class>
-  <extends>KComboBox</extends>
-  <header>kmymoneymvccombo.h</header>
- </customwidget>
- <customwidget>
-  <class>KComboBox</class>
-  <extends>QComboBox</extends>
-  <header>kcombobox.h</header>
- </customwidget>
-
  </customwidgets>
  <tabstops>
  </tabstops>
+ <buttongroups>
+  <buttongroup name="ButtonGroup2"/>
+ </buttongroups>
 </ui>
