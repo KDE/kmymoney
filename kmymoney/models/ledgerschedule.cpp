@@ -57,7 +57,7 @@ LedgerSchedule::LedgerSchedule(const LedgerSchedule& other) :
 
 LedgerSchedule::~LedgerSchedule()
 {
-  delete d_ptr;
+  // deletion of d_ptr is taken care of by base class
 }
 
 QString LedgerSchedule::transactionSplitId() const
