@@ -34,7 +34,6 @@
 
 #include "ui_splitdialog.h"
 #include "mymoneyaccount.h"
-#include "ledgermodel.h"
 #include "splitdelegate.h"
 #include "newtransactioneditor.h"
 #include "splitadjustdialog.h"

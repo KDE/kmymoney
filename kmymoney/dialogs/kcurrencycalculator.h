@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,28 +35,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kcurrencycalculatordecl.h"
-#include "mymoneymoney.h"
-#include "mymoneysecurity.h"
+class QDate;
 
+class MyMoneyMoney;
 class MyMoneySplit;
 class MyMoneyTransaction;
-class QDialogButtonBox;
+class MyMoneySecurity;
+
+namespace Ui { class KCurrencyCalculator; }
+
+typedef qint64 signed64;
 
 /**
   * @author Thomas Baumgart
   */
-class KCurrencyCalculatorDecl : public QDialog, public Ui::KCurrencyCalculatorDecl
-{
-public:
-  KCurrencyCalculatorDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
-class KCurrencyCalculator : public KCurrencyCalculatorDecl
+class KCurrencyCalculatorPrivate;
+class KCurrencyCalculator : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KCurrencyCalculator)
 
 public:
   /**
@@ -69,7 +68,13 @@ public:
     *
     * @note @p value must not be 0!
     */
-  KCurrencyCalculator(const MyMoneySecurity& from, const MyMoneySecurity& to, const MyMoneyMoney& value, const MyMoneyMoney& shares, const QDate& date, const signed64 resultFraction = 100, QWidget *parent = 0);
+  explicit KCurrencyCalculator(const MyMoneySecurity& from,
+                               const MyMoneySecurity& to,
+                               const MyMoneyMoney& value,
+                               const MyMoneyMoney& shares,
+                               const QDate& date,
+                               const signed64 resultFraction = 100,
+                               QWidget *parent = nullptr);
   ~KCurrencyCalculator();
 
   /**
@@ -87,25 +92,23 @@ public:
 
   void setupPriceEditor();
 
-  static bool setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTransaction& t, const MyMoneySplit& s, const QMap<QString, MyMoneyMoney>& priceInfo, QWidget* parentWidget);
-
-protected:
-  void updateExample(const MyMoneyMoney& price);
+  static bool setupSplitPrice(MyMoneyMoney& shares,
+                              const MyMoneyTransaction& t,
+                              const MyMoneySplit& s,
+                              const QMap<QString,
+                              MyMoneyMoney>& priceInfo,
+                              QWidget* parentWidget);
 
 protected slots:
   void slotSetToAmount();
   void slotSetExchangeRate();
   void slotUpdateResult(const QString& txt);
   void slotUpdateRate(const QString& txt);
-  virtual void accept();
+  void accept() override;
 
 private:
-  MyMoneySecurity     m_fromCurrency;
-  MyMoneySecurity     m_toCurrency;
-  MyMoneyMoney        m_result;
-  MyMoneyMoney        m_value;
-  signed64            m_resultFraction;
-  QDialogButtonBox   *m_buttonBox;
+  KCurrencyCalculatorPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KCurrencyCalculator)
 };
 
 #endif

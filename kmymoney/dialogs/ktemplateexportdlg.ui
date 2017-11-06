@@ -7,13 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>397</width>
-    <height>282</height>
+    <height>284</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Template Export Attributes</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="6" column="0">
+    <widget class="KTextEdit" name="m_longDescription"/>
+   </item>
    <item row="4" column="0">
     <widget class="QLineEdit" name="m_shortDescription"/>
    </item>
@@ -51,15 +54,18 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
-    <widget class="QTextEdit" name="m_longDescription"/>
-   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>m_title</tabstop>
   <tabstop>m_shortDescription</tabstop>
-  <tabstop>m_longDescription</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>

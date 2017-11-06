@@ -26,7 +26,6 @@
 #include <QTextStream>
 #include <QTemporaryFile>
 #include <QDebug>
-#include <QProgressDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

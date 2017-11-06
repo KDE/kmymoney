@@ -4,6 +4,7 @@
     begin                : Mon Apr  9 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,12 +33,15 @@
 class MyMoneySchedule;
 class MyMoneyTransaction;
 
+namespace Ui { class KConfirmManualEnterDlg; }
+
 class KConfirmManualEnterDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KConfirmManualEnterDlg)
 
 public:
-  explicit KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = 0);
+  explicit KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = nullptr);
   ~KConfirmManualEnterDlg();
 
   typedef enum {
@@ -58,10 +62,7 @@ public:
   Action action() const;
 
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  Ui::KConfirmManualEnterDlg *ui;
 };
 
 #endif // KCONFIRMMANUALENTERDLG_H

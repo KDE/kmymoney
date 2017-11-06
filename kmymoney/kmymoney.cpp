@@ -45,6 +45,8 @@
 #include <QIcon>
 #include <QInputDialog>
 #include <QStatusBar>
+#include <QPushButton>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -164,6 +166,7 @@
 #include "ledgerdelegate.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
+#include "dialogenums.h"
 
 #include "misc/platformtools.h"
 
@@ -1970,13 +1973,13 @@ void KMyMoneyApp::slotFileViewPersonal()
       user.email(), this, i18n("Edit Personal Data"));
 
   if (editPersonalDataDlg->exec() == QDialog::Accepted && editPersonalDataDlg != 0) {
-    user.setName(editPersonalDataDlg->userNameText);
-    user.setAddress(editPersonalDataDlg->userStreetText);
-    user.setCity(editPersonalDataDlg->userTownText);
-    user.setState(editPersonalDataDlg->userCountyText);
-    user.setPostcode(editPersonalDataDlg->userPostcodeText);
-    user.setTelephone(editPersonalDataDlg->userTelephoneText);
-    user.setEmail(editPersonalDataDlg->userEmailText);
+    user.setName(editPersonalDataDlg->userName());
+    user.setAddress(editPersonalDataDlg->userStreet());
+    user.setCity(editPersonalDataDlg->userTown());
+    user.setState(editPersonalDataDlg->userCountry());
+    user.setPostcode(editPersonalDataDlg->userPostcode());
+    user.setTelephone(editPersonalDataDlg->userTelephone());
+    user.setEmail(editPersonalDataDlg->userEmail());
     MyMoneyFileTransaction ft;
     try {
       file->setUser(user);
@@ -2364,10 +2367,11 @@ void KMyMoneyApp::slotBackupFile()
   int returncode = backupDlg->exec();
   if (returncode == QDialog::Accepted && backupDlg != 0) {
 
-    d->m_backupMount = backupDlg->mountCheckBox->isChecked();
+
+    d->m_backupMount = backupDlg->mountCheckBox();
     d->m_proc.clearProgram();
     d->m_backupState = BACKUP_MOUNTING;
-    d->m_mountpoint = backupDlg->txtMountPoint->text();
+    d->m_mountpoint = backupDlg->mountPoint();
 
     if (d->m_backupMount) {
       slotBackupMount();
@@ -3497,17 +3501,17 @@ void KMyMoneyApp::slotAccountReconcileStart()
 
           QMap<QString, bool> skipMap;
           bool processedOne;
-          KMyMoneyUtils::EnterScheduleResultCodeE rc = KMyMoneyUtils::Enter;
+          eDialogs::ScheduleResultCode rc = eDialogs::ScheduleResultCode::Enter;
           do {
             processedOne = false;
             QList<MyMoneySchedule>::const_iterator it_sch;
-            for (it_sch = schedules.constBegin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
+            for (it_sch = schedules.constBegin(); (rc != eDialogs::ScheduleResultCode::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
               MyMoneySchedule sch(*(it_sch));
 
               // and enter it if it is not on the skip list
               if (skipMap.find((*it_sch).id()) == skipMap.end()) {
                 rc = enterSchedule(sch, false, true);
-                if (rc == KMyMoneyUtils::Ignore) {
+                if (rc == eDialogs::ScheduleResultCode::Ignore) {
                   skipMap[(*it_sch).id()] = true;
                 }
               }
@@ -4131,9 +4135,9 @@ void KMyMoneyApp::slotScheduleEnter()
   }
 }
 
-KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
+eDialogs::ScheduleResultCode KMyMoneyApp::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
 {
-  KMyMoneyUtils::EnterScheduleResultCodeE rc = KMyMoneyUtils::Cancel;
+  eDialogs::ScheduleResultCode rc = eDialogs::ScheduleResultCode::Cancel;
   if (!schedule.id().isEmpty()) {
     try {
       schedule = MyMoneyFile::instance()->schedule(schedule.id());
@@ -4163,10 +4167,10 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
         KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
         if (!autoEnter || !schedule.isFixed()) {
           for (; dlg != 0;) {
-            rc = KMyMoneyUtils::Cancel;
+            rc = eDialogs::ScheduleResultCode::Cancel;
             if (dlg->exec() == QDialog::Accepted && dlg != 0) {
               rc = dlg->resultCode();
-              if (rc == KMyMoneyUtils::Enter) {
+              if (rc == eDialogs::ScheduleResultCode::Enter) {
                 d->m_transactionEditor->createTransaction(taccepted, torig, torig.splits().isEmpty() ? MyMoneySplit() : torig.splits().front(), true);
                 // make sure to suppress comparison of some data: postDate
                 torig.setPostDate(taccepted.postDate());
@@ -4184,7 +4188,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
                   // we go back to the editor
                   continue;
                 }
-              } else if (rc == KMyMoneyUtils::Skip) {
+              } else if (rc == eDialogs::ScheduleResultCode::Skip) {
                 slotTransactionsCancel();
                 skipSchedule(schedule);
               } else {
@@ -4246,7 +4250,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
                 schedule.setNextDueDate(nextDueDate);
               }
               MyMoneyFile::instance()->modifySchedule(schedule);
-              rc = KMyMoneyUtils::Enter;
+              rc = eDialogs::ScheduleResultCode::Enter;
 
               // delete the editor before we emit the dataChanged() signal from the
               // engine. Calling this twice in a row does not hurt.
@@ -4267,7 +4271,12 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
   return rc;
 }
 
-bool KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
+void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
+{
+  createPayeeNew(newnameBase, id);
+}
+
+bool KMyMoneyApp::createPayeeNew(const QString& newnameBase, QString& id)
 {
   bool doit = true;
 
@@ -4470,7 +4479,7 @@ bool KMyMoneyApp::payeeReassign(int type)
         if (type == KPayeeReassignDlg::TypeMerge) {
           // it's ok to use payee_id for both arguments since the first is const,
           // so it's garantee not to change its content
-          if (!slotPayeeNew(payee_id, payee_id))
+          if (!createPayeeNew(payee_id, payee_id))
             return false; // the user aborted the dialog, so let's abort as well
           newPayee = file->payee(payee_id);
         } else {
@@ -6729,25 +6738,25 @@ void KMyMoneyApp::slotCheckSchedules()
     QList<MyMoneySchedule> scheduleList =  file->scheduleList();
     QList<MyMoneySchedule>::Iterator it;
 
-    KMyMoneyUtils::EnterScheduleResultCodeE rc = KMyMoneyUtils::Enter;
-    for (it = scheduleList.begin(); (it != scheduleList.end()) && (rc != KMyMoneyUtils::Cancel); ++it) {
+    eDialogs::ScheduleResultCode rc = eDialogs::ScheduleResultCode::Enter;
+    for (it = scheduleList.begin(); (it != scheduleList.end()) && (rc != eDialogs::ScheduleResultCode::Cancel); ++it) {
       // Get the copy in the file because it might be modified by commitTransaction
       MyMoneySchedule schedule = file->schedule((*it).id());
 
       if (schedule.autoEnter()) {
         try {
           while (!schedule.isFinished() && (schedule.adjustedNextDueDate() <= checkDate)
-                 && rc != KMyMoneyUtils::Ignore
-                 && rc != KMyMoneyUtils::Cancel) {
+                 && rc != eDialogs::ScheduleResultCode::Ignore
+                 && rc != eDialogs::ScheduleResultCode::Cancel) {
             rc = enterSchedule(schedule, true, true);
             schedule = file->schedule((*it).id()); // get a copy of the modified schedule
           }
         } catch (const MyMoneyException &) {
         }
       }
-      if (rc == KMyMoneyUtils::Ignore) {
+      if (rc == eDialogs::ScheduleResultCode::Ignore) {
         // if the current schedule was ignored then we must make sure that the user can still enter the next scheduled transaction
-        rc = KMyMoneyUtils::Enter;
+        rc = eDialogs::ScheduleResultCode::Enter;
       }
     }
     updateCaption();

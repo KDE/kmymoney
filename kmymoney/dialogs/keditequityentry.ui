@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author>Kevin Tambascio </author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KEditEquityEntry</class>
+  <widget class="QDialog" name="KEditEquityEntry">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>380</width>
+        <height>482</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>Edit Equity</string>
+    </property>
+    <property name="sizeGripEnabled">
+      <bool>true</bool>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <layout class="QGridLayout">
+          <item row="0" column="1">
+            <widget class="KLineEdit" name="edtEquityName"/>
+          </item>
+          <item row="2" column="1">
+            <widget class="KComboBox" name="cmbInvestmentType">
+              <item>
+                <property name="text">
+                  <string>Stock</string>
+                </property>
+              </item>
+              <item>
+                <property name="text">
+                  <string>Mutual Fund</string>
+                </property>
+              </item>
+              <item>
+                <property name="text">
+                  <string>Bond</string>
+                </property>
+              </item>
+            </widget>
+          </item>
+          <item row="3" column="0">
+            <widget class="QLabel" name="textLabel2">
+              <property name="text">
+                <string>Smallest fraction:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="1">
+            <layout class="QHBoxLayout">
+              <item>
+                <widget class="QLabel" name="textLabel1">
+                  <property name="sizePolicy">
+                    <sizepolicy>
+                      <hsizetype>1</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                  <property name="text">
+                    <string>1 /</string>
+                  </property>
+                  <property name="alignment">
+                    <set>Qt::AlignVCenter|Qt::AlignRight</set>
+                  </property>
+                  <property name="wordWrap">
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+              <item>
+                <widget class="kMyMoneyEdit" name="edtFraction"/>
+              </item>
+            </layout>
+          </item>
+          <item row="2" column="0">
+            <widget class="QLabel" name="lblType">
+              <property name="text">
+                <string>Investment Type:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="0">
+            <widget class="QLabel" name="lblEquityName">
+              <property name="text">
+                <string>Equity Name:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="1">
+            <widget class="KLineEdit" name="edtMarketSymbol"/>
+          </item>
+          <item row="1" column="0">
+            <widget class="QLabel" name="lblSymbol">
+              <property name="text">
+                <string>Market Symbol:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+      <item>
+        <widget class="QGroupBox" name="groupBox1">
+          <property name="title">
+            <string>Price History</string>
+          </property>
+          <layout class="QHBoxLayout">
+            <item>
+              <widget class="KMyMoneyPriceView" name="kpvPriceHistory"/>
+            </item>
+            <item>
+              <layout class="QVBoxLayout">
+                <item>
+                  <spacer name="spacer3">
+                    <property name="sizeHint">
+                      <size>
+                        <width>21</width>
+                        <height>21</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                    </property>
+                  </spacer>
+                </item>
+                <item>
+                  <widget class="QPushButton" name="btnAddEntry">
+                    <property name="text">
+                      <string>Add</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="QPushButton" name="btnEditEntry">
+                    <property name="text">
+                      <string>Edit</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="QPushButton" name="btnRemoveEntry">
+                    <property name="text">
+                      <string>Remove</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <spacer name="spacer2">
+                    <property name="sizeHint">
+                      <size>
+                        <width>21</width>
+                        <height>21</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                    </property>
+                  </spacer>
+                </item>
+              </layout>
+            </item>
+          </layout>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="spacer4">
+              <property name="sizeHint">
+                <size>
+                  <width>238</width>
+                  <height>21</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="QPushButton" name="btnOK">
+              <property name="text">
+                <string>OK</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="btnCancel">
+              <property name="text">
+                <string>Cancel</string>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <customwidgets>
+    <customwidget>
+      <class>kMyMoneyEdit</class>
+      <extends>QWidget</extends>
+      <header location="local">../widgets/kmymoneyedit.h</header>
+      <sizehint>
+        <width>90</width>
+        <height>25</height>
+      </sizehint>
+      <container>0</container>
+      <sizepolicy>
+        <hordata>1</hordata>
+        <verdata>1</verdata>
+      </sizepolicy>
+      <pixmap>image0</pixmap>
+    </customwidget>
+    <customwidget>
+      <class>KMyMoneyPriceView</class>
+      <extends>QWidget</extends>
+      <header location="local">../widgets/kmymoneypriceview.h</header>
+      <sizehint>
+        <width>-1</width>
+        <height>-1</height>
+      </sizehint>
+      <container>0</container>
+      <sizepolicy>
+        <hordata>5</hordata>
+        <verdata>5</verdata>
+      </sizepolicy>
+      <pixmap>image1</pixmap>
+    </customwidget>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
+  </customwidgets>
+  <images>
+    <image name="image0">
+      <data format="PNG" length="256">89504e470d0a1a0a0000000d4948445200000016000000160806000000c4b46c3b000000c749444154789cad55db1184200c4c180bb005eab1cd6b8112b40d4bf1bee2486ef3006fbf1c93ece605f07eece4e1a4ed42ff2b35f6e2961132e46309941952ed8f628a761a21f56217cb20b04a45fe276d97f8ffb422431ad96e62a4ee057a83131bcc38431a6d057f8eb5cb36438afcb5cded719614011e9088308374c61aa9adb0e0651b5552b4b29efaacb099312ad5da5b2d50a93124463b2adf516fbb8cbd1354a9b1b667c8a787674144f9f982bcb93635ba8cb3fd1b2616f251013403fee763fabce8bff0aa6c989d7e67440000000049454e44ae426082</data>
+    </image>
+    <image name="image1">
+      <data format="PNG" length="826">89504e470d0a1a0a0000000d4948445200000016000000160806000000c4b46c3b0000030149444154789cb59531681b5718c77f0e377c070e3c810a3a70e0041eac51852e0a19e45134830a1d9a4c69a04bc8928e990a693a640e1d0c8642b08742321894c1507991b484c890902bb8701a047760c3bd21701fe4201dde49b6a41a32b8df72dcbbeffdbefffbbfefbd5b1b0c07cce266ebe667ae2006c3c1dada0cdc3be87d6e6c35b0d692a409d9c7ec8b20d65ae29398d19b1114e7e3de4ce98b3f5e10dc0053cf0951b4506496e1b964bf7ce6c585d9054c62d01d617ca48be0596553cf496d8f2c8b01c5f795fc93904e85ec4c01a152857a5d9175d0b2805c872080f18595ccc1499a10a225d4e2fbc2877786fe81253ab6c04c8d106e09db5d43ab0d146e5c64d1a23938fb98a185cea1c33eecfd9eba49eb427dcb201e245365f2b7b2fb5b4a3a31dcb927178afe07d86901df870fefa4842aed6f6b74ba42e52b4014d580e1eb9cbd9d94de7e4aad16d2f9be02d805f0b5e532f927a1ffcacea1777f122a8105b164a7c25faf323a5d9f1f1fd600e1e5bec59e2d4b5c7ef5209d0ad17b8b31864e57c0b3e0815ac3ee33253ab664a770ff5185d1a1cb8d2267d3e58aa1dc7d2508cbe597d0e74fdd269aaaf0f52d414c4ea3e9762c996869e42560d7a72e41c4799a2586e74f95e8d8151481fa86efbe7b3398ac58b1a2b8527589f15451ad303ac2293542ad6648a796278f13a27185e4c4754310facb98c53a79e19a3fdc1426ff28c3d7399d1f7cb25343eb96106cf83c790ce9c4f2eb831855c55485663327992eb6dc8a6259874ed700b0b793323cccb9ffa842b30d6133e3e75fea989ac15a8b16ca76b746b0b92278d919774c5b6d48a78697fb29bbcf52468742a32120909c24e899ce67beed5be2db01e22d1e9485bb620e47f9ee9e606a21bd3f5d3744c7e7c54d55e87443867d8b554515ac5db4620e8e4f62263170fd1cdee90aad7640141992891b0f367c9adfe4049bb07d3b7022bd8c687c0978f46684ee084150b65ac1fcca94591b7a90a496e4c095164fb016a2b192a497795cc0f84817aebe25f7bf70ccc54a575c555c03f78ffa5fc0570d1f0c076bff0232285a0901e2257b0000000049454e44ae426082</data>
+    </image>
+  </images>
+</ui>

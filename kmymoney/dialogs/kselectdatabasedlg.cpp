@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
                            (C) 2017 by Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -119,7 +120,7 @@ int KSelectDatabaseDlg::exec()
     m_widget->textUserName->setText(QString());
     m_widget->textUserName->setText(platformTools::osUsername());
     m_widget->textPassword->setText(QString());
-    connect(m_widget->databaseTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDriverSelected(int)));
+    connect(m_widget->databaseTypeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSelectDatabaseDlg::slotDriverSelected);
     m_widget->checkPreLoad->setChecked(false);
     // ensure a driver gets selected; pre-select the first one
     if (m_widget->databaseTypeCombo->count() != 0) {

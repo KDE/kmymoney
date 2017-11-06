@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KAVAILABLECURRENCYEDITDLG_H
-#define KAVAILABLECURRENCYEDITDLG_H
+#ifndef KAVAILABLECURRENCYDLG_H
+#define KAVAILABLECURRENCYDLG_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,7 +38,7 @@ class KAvailableCurrencyDlg : public QDialog
 {
   Q_OBJECT
 public:
-  KAvailableCurrencyDlg(QWidget *parent = 0);
+  KAvailableCurrencyDlg(QWidget *parent = nullptr);
   ~KAvailableCurrencyDlg();
 
   Ui::KAvailableCurrencyDlg*   ui;

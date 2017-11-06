@@ -32,7 +32,6 @@
 class QString;
 class QItemSelection;
 
-class HierarchyFilterProxyModel;
 class MyMoneyMoney;
 class MyMoneyAccount;
 

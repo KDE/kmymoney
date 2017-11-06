@@ -4,6 +4,7 @@
     begin                : Fri Dec 15 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,33 +22,37 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "transactioneditor.h"
 
+class MyMoneyMoney;
+class MyMoneySecurity;
+
+namespace eDialogs { enum class PriceMode; }
+
+namespace KMyMoneyRegister { class InvestTransaction; }
+
+namespace eMyMoney { namespace Split {
+    enum class InvestmentTransactionType; } }
+
+class InvestTransactionEditorPrivate;
 class InvestTransactionEditor : public TransactionEditor
 {
-  friend class InvestTransactionEditorPrivate;
-
   Q_OBJECT
+  Q_DISABLE_COPY(InvestTransactionEditor)
 
 public:
-  typedef enum {
-    Price = 0,
-    PricePerShare,
-    PricePerTransaction
-  } priceModeE;
-
   InvestTransactionEditor();
-  InvestTransactionEditor(TransactionEditorContainer* regForm, KMyMoneyRegister::InvestTransaction* item, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
-  virtual ~InvestTransactionEditor();
+  explicit InvestTransactionEditor(TransactionEditorContainer* regForm,
+                                   KMyMoneyRegister::InvestTransaction* item,
+                                   const KMyMoneyRegister::SelectedTransactions& list,
+                                   const QDate& lastPostDate);
+  ~InvestTransactionEditor() override;
 
   /**
     * This method returns information about the completeness of the data
@@ -64,13 +69,11 @@ public:
     *
     * @sa transactionDataSufficient()
     */
-  virtual bool isComplete(QString& reason) const;
+  bool isComplete(QString& reason) const override;
 
-  virtual QWidget* firstWidget() const;
+  QWidget* firstWidget() const override;
 
-  virtual bool fixTransactionCommodity(const MyMoneyAccount& /* account */) {
-    return true;
-  }
+  bool fixTransactionCommodity(const MyMoneyAccount& /* account */) override;
 
   void totalAmount(MyMoneyMoney& amount) const;
 
@@ -95,21 +98,17 @@ public:
     *
     * @note Usually not used directly. If unsure, use enterTransactions() instead.
     */
-  bool createTransaction(MyMoneyTransaction& t, const MyMoneyTransaction& torig, const MyMoneySplit& sorig, bool skipPriceDialog = false);
+  bool createTransaction(MyMoneyTransaction& t,
+                         const MyMoneyTransaction& torig,
+                         const MyMoneySplit& sorig,
+                         bool skipPriceDialog = false) override;
 
-  priceModeE priceMode() const;
+  eDialogs::PriceMode priceMode() const;
 
-  const MyMoneySecurity& security() const {
-    return m_security;
-  }
+  MyMoneySecurity security() const;
 
-  const QList<MyMoneySplit>& feeSplits() const {
-    return m_feeSplits;
-  }
-
-  const QList<MyMoneySplit>& interestSplits() const {
-    return m_interestSplits;
-  }
+  QList<MyMoneySplit> feeSplits() const;
+  QList<MyMoneySplit> interestSplits() const;
 
 protected slots:
   void slotCreateSecurity(const QString& name, QString& id);
@@ -135,7 +134,7 @@ protected:
     * This method creates all necessary widgets for this transaction editor.
     * All signals will be connected to the relevant slots.
     */
-  void createEditWidgets();
+  void createEditWidgets() override;
 
   /**
     * This method (re-)loads the widgets with the transaction information
@@ -144,46 +143,13 @@ protected:
     * @param action preset the edit wigdets for @a action if no transaction
     *               is present
     */
-  void loadEditWidgets(KMyMoneyRegister::Action action = KMyMoneyRegister::ActionNone);
+  void loadEditWidgets(KMyMoneyRegister::Action action) override;
+  void loadEditWidgets() override;
 
-  void activityFactory(eMyMoney::Split::InvestmentTransactionType type);
-
-  MyMoneyMoney subtotal(const QList<MyMoneySplit>& splits) const;
-
-  /**
-   * This method creates a transaction to be used for the split fee/interest editor.
-   * It has a reference to a phony account and the splits contained in @a splits .
-   */
-  bool createPseudoTransaction(MyMoneyTransaction& t, const QList<MyMoneySplit>& splits);
-
-  /**
-   * Convenience method used by slotEditInterestSplits() and slotEditFeeSplits().
-   *
-   * @param categoryWidgetName name of the category widget
-   * @param amountWidgetName name of the amount widget
-   * @param splits the splits that make up the transaction to be edited
-   * @param isIncome @c false for fees, @c true for interest
-   * @param slotEditSplits name of the slot to be connected to the focusIn signal of the
-   *                       category widget named @p categoryWidgetName in case of multiple splits
-   *                       in @p splits .
-   */
-  int editSplits(const QString& categoryWidgetName, const QString& amountWidgetName, QList<MyMoneySplit>& splits, bool isIncome, const char* slotEditSplits);
-
-  void updatePriceMode(const MyMoneySplit& split = MyMoneySplit());
-
-  void setupFinalWidgets();
+  void setupFinalWidgets() override;
 
 private:
-  MyMoneySplit                              m_assetAccountSplit;
-  QList<MyMoneySplit>                       m_interestSplits;
-  QList<MyMoneySplit>                       m_feeSplits;
-  MyMoneySecurity                           m_security;
-  MyMoneySecurity                           m_currency;
-  eMyMoney::Split::InvestmentTransactionType      m_transactionType;
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  Q_DECLARE_PRIVATE(InvestTransactionEditor)
 };
 
 #endif // INVESTTRANSACTIONEDITOR_H

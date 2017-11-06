@@ -6,6 +6,7 @@
     email                : mte@users.sourceforge.net
                              Javier Campos Morales <javi_c@ctv.es>
                              Felix Rodriguez <frodriguez@mail.wesleyan.edu>
+                             (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,34 +22,32 @@
 #define KBACKUPDLG_H
 
 #include <QDialog>
-#include "ui_kbackupdlgdecl.h"
+
+namespace Ui { class KBackupDlg; }
 
 /**
   *@author Michael Edwardes
   */
 
-
-class kbackupdlgdecl : public QDialog, public Ui::kbackupdlgdecl
-{
-public:
-  kbackupdlgdecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class KBackupDlg : public kbackupdlgdecl
+class KBackupDlg : public QDialog
 {
   Q_OBJECT
-private:
-  void readConfig();
-  void writeConfig();
+  Q_DISABLE_COPY(KBackupDlg)
+
+public:
+  explicit KBackupDlg(QWidget* parent = nullptr);
+  ~KBackupDlg();
+
+  QString mountPoint() const;
+  bool mountCheckBox() const;
 
 protected slots:
   void chooseButtonClicked();
 
-public:
-  KBackupDlg(QWidget* parent);
-  ~KBackupDlg();
+private:
+  Ui::KBackupDlg *ui;
+  void readConfig();
+  void writeConfig();
 };
 
 #endif // KBACKUPDLG_H

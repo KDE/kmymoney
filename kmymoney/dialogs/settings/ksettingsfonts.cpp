@@ -3,6 +3,7 @@
                              --------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,11 +26,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_ksettingsfonts.h"
+
 KSettingsFonts::KSettingsFonts(QWidget* parent) :
-    KSettingsFontsDecl(parent)
+    QWidget(parent),
+    ui(new Ui::KSettingsFonts)
 {
+  ui->setupUi(this);
 }
 
 KSettingsFonts::~KSettingsFonts()
 {
+  delete ui;
 }

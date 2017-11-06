@@ -39,13 +39,13 @@ class MyMoneyMoney;
 namespace KMyMoneyRegister
 {
 
-typedef enum {
+ enum CashFlowDirection : int {
   Deposit = 0,          //< transaction is deposit
   Payment,              //< transaction is payment
   Unknown               //< transaction cashflow is unknown
-} CashFlowDirection;
+};
 
-typedef enum {
+  enum Action : int {
   ActionNone = -1,
   ActionCheck = 0,
   /* these should be values which qt 3.3 never uses for QTab:
@@ -57,7 +57,7 @@ typedef enum {
   ActionAtm,
   // insert new values above this line
   MaxAction
-} Action;
+};
 
 /**
   * Used to filter items from the register.

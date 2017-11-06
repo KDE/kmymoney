@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2003 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,65 +22,51 @@
 // QT Includes
 
 #include <QDialog>
-#include <QDate>
-#include <QMap>
-#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <QDialog>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
-
-class QTreeWidget;
 class QTreeWidgetItem;
-class DateRangeDlg;
+
+namespace Ui { class KSortOptionDlg; }
 
 /**
   * @author Thomas Baumgart
   */
 class KSortOptionDlg : public QDialog
 {
+  Q_OBJECT
+  Q_DISABLE_COPY(KSortOptionDlg)
+
 public:
-  KSortOptionDlg(QWidget *parent);
+  explicit KSortOptionDlg(QWidget *parent = nullptr);
   ~KSortOptionDlg();
-  void init();
+
   void setSortOption(const QString& option, const QString& def);
   QString sortOption() const;
   void hideDefaultButton();
 
 private:
-  struct Private;
-  Private* const d;
+  Ui::KSortOptionDlg *ui;
 };
 
-namespace Ui
-{
-class KFindTransactionDlgDecl;
-}
-
+class KFindTransactionDlgPrivate;
 class KFindTransactionDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KFindTransactionDlg)
 
 public:
   /**
    @param withEquityAccounts set to false to hide equity accounts in account page
   */
-  KFindTransactionDlg(QWidget *parent = 0, bool withEquityAccounts = false);
-  ~KFindTransactionDlg();
+  explicit KFindTransactionDlg(QWidget *parent = nullptr, bool withEquityAccounts = false);
+  virtual ~KFindTransactionDlg();
 
-  virtual bool eventFilter(QObject *o, QEvent *e);
-
-protected:
-  void resizeEvent(QResizeEvent*);
-  void showEvent(QShowEvent* event);
+  bool eventFilter(QObject *o, QEvent *e) override;
 
 protected slots:
   virtual void slotReset();
@@ -90,7 +77,6 @@ protected slots:
     * anchor for the information is taken from m_helpAnchor.
     */
   virtual void slotShowHelp();
-
 
   void slotUpdateSelections();
 
@@ -130,79 +116,14 @@ signals:
   void selectionNotEmpty(bool);
 
 protected:
-  enum opTypeE {
-    addAccountToFilter = 0,
-    addCategoryToFilter,
-    addPayeeToFilter,
-    addTagToFilter
-  };
+  KFindTransactionDlgPrivate * const d_ptr;
+  KFindTransactionDlg(KFindTransactionDlgPrivate &dd, QWidget *parent, bool withEquityAccounts);
 
-  void setupCategoriesPage();
-  void setupAccountsPage(bool withEquityAccounts=false);
-  void setupAmountPage();
-  void setupPayeesPage();
-  void setupTagsPage();
-  void setupDetailsPage();
+  void resizeEvent(QResizeEvent*) override;
+  void showEvent(QShowEvent* event) override;
 
-  void setupFilter();
-
-  void selectAllItems(QTreeWidget* view, const bool state);
-  void selectAllSubItems(QTreeWidgetItem* item, const bool state);
-  void selectItems(QTreeWidget* view, const QStringList& list, const bool state);
-  void selectSubItems(QTreeWidgetItem* item, const QStringList& list, const bool state);
-
-  /**
-    * This method loads the m_payeesView with the payees name
-    * found in the engine.
-    */
-  void loadPayees();
-
-  /**
-    * This method loads the m_tagsView with the tags name
-    * found in the engine.
-    */
-  void loadTags();
-
-  /**
-    * This method loads the register with the matching transactions
-    */
-  void loadView();
-
-  /**
-    * This method returns information about the selection state
-    * of the items in the m_accountsView.
-    *
-    * @param view pointer to the listview to scan
-    *
-    * @retval true if all items in the view are marked
-    * @retval false if at least one item is not marked
-    *
-    * @note If the view contains no items the method returns @p true.
-    */
-  bool allItemsSelected(const QTreeWidget* view) const;
-  bool allItemsSelected(const QTreeWidgetItem *item) const;
-
-  void scanCheckListItems(const QTreeWidget* view, const opTypeE op);
-  void scanCheckListItems(const QTreeWidgetItem* item, const opTypeE op);
-  void addItemToFilter(const opTypeE op, const QString& id);
-
-protected:
-  QDate                m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
-  QDate                m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
-
-  /**
-    * This member holds a list of all transactions matching the filter criteria
-    */
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
-
-  MyMoneyTransactionFilter        m_filter;
-
-  QMap<QWidget*, QString>         m_helpAnchor;
-
-  bool                            m_needReload;
-
-  Ui::KFindTransactionDlgDecl*    m_ui;
-  DateRangeDlg *m_dateRange;
+private:
+  Q_DECLARE_PRIVATE(KFindTransactionDlg)
 };
 
 #endif

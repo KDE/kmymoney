@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,8 +28,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDateTime>
-#include <QPushButton>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,45 +36,36 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kupdatestockpricedlgdecl.h"
+namespace Ui { class KUpdateStockPriceDlg; }
 
-#include "mymoneyprice.h"
-#include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
+class QDate;
+
+class MyMoneyMoney;
 
 /**
   * @author Kevin Tambascio
   */
-class kUpdateStockPriceDecl : public QDialog, public Ui::kUpdateStockPriceDecl
-{
-public:
-  kUpdateStockPriceDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
-class KUpdateStockPriceDlg : public kUpdateStockPriceDecl
+class KUpdateStockPriceDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KUpdateStockPriceDlg)
 
 public:
-  KUpdateStockPriceDlg(QWidget* parent = 0);
+  explicit KUpdateStockPriceDlg(QWidget* parent = nullptr);
   ~KUpdateStockPriceDlg();
 
-  const QDate date() const {
-    return m_date->date();
-  };
-  const MyMoneyMoney price() const;
+  QDate date() const;
+  MyMoneyMoney price() const;
+
+  Ui::KUpdateStockPriceDlg *ui;
 
 public slots:
-  int exec();
+  int exec() override;
 
 protected slots:
   void slotCheckData();
-
-private:
-  void init();
-
+  void slotCheckData(int idx);
 };
 
 #endif

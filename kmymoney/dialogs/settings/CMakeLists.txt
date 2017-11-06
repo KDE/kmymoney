@@ -16,16 +16,16 @@ set (libsettings_a_SOURCES
 
 set (libsettings_a_UI
   ksettingscolors.ui
-  ksettingsfontsdecl.ui
-  ksettingsiconsdecl.ui
-  ksettingsforecastdecl.ui
-  ksettingsgeneraldecl.ui
-  ksettingsgpgdecl.ui
-  ksettingshomedecl.ui
-  ksettingsonlinequotesdecl.ui
-  ksettingsregisterdecl.ui
-  ksettingsschedulesdecl.ui
-  ksettingsreportsdecl.ui
+  ksettingsfonts.ui
+  ksettingsicons.ui
+  ksettingsforecast.ui
+  ksettingsgeneral.ui
+  ksettingsgpg.ui
+  ksettingshome.ui
+  ksettingsonlinequotes.ui
+  ksettingsregister.ui
+  ksettingsschedules.ui
+  ksettingsreports.ui
   )
 
 ki18n_wrap_ui(libsettings_a_SOURCES ${libsettings_a_UI} )

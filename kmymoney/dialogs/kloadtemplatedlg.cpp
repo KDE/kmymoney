@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2008 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,18 +28,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kaccounttemplateselector.h"
+#include "ui_kloadtemplatedlg.h"
+
 #include "mymoneytemplate.h"
+#include "kaccounttemplateselector.h"
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-    KLoadTemplateDlgDecl(parent)
+  QDialog(parent),
+  ui(new Ui::KLoadTemplateDlg)
 {
-  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+  ui->setupUi(this);
+  connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KLoadTemplateDlg::slotHelp);
+}
+
+KLoadTemplateDlg::~KLoadTemplateDlg()
+{
+  delete ui;
 }
 
 QList<MyMoneyTemplate> KLoadTemplateDlg::templates() const
 {
-  return m_templateSelector->selectedTemplates();
+  return ui->m_templateSelector->selectedTemplates();
 }
 
 void KLoadTemplateDlg::slotHelp()

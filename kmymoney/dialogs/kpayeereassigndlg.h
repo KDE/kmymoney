@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Andreas Nicolai <ghorwin@users.sourceforge.net>
                            (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -21,7 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QCheckBox>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,25 +30,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kpayeereassigndlgdecl.h"
-
 /**
  *  Implementation of the dialog that lets the user select a payee in order
  *  to re-assign transactions (for instance, if payees are deleted).
  */
 
 class MyMoneyPayee;
-class KPayeeReassignDlgDecl : public QDialog, public Ui::KPayeeReassignDlgDecl
-{
-public:
-  KPayeeReassignDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
-class KPayeeReassignDlg : public KPayeeReassignDlgDecl
+class KPayeeReassignDlgPrivate;
+class KPayeeReassignDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KPayeeReassignDlg)
+
 public:
   /** Change behavior based on type of operation */
   enum OperationType {
@@ -57,7 +52,7 @@ public:
   };
 
   /** Default constructor */
-  KPayeeReassignDlg(OperationType type, QWidget* parent = 0);
+  KPayeeReassignDlg(OperationType type, QWidget* parent = nullptr);
 
   /** Destructor */
   ~KPayeeReassignDlg();
@@ -77,16 +72,14 @@ public:
    * Returns true, if the names of the payees to be deleted should be copied
    * to the selected payee's match list.
    */
-  bool addToMatchList() const {
-    return m_copyToMatchList->isChecked();
-  }
+  bool addToMatchList() const;
 
 protected:
-  void accept();
+  void accept() override;
 
-private:
-  OperationType m_type;
-
+private:  
+  KPayeeReassignDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KPayeeReassignDlg)
 };
 
 #endif // KPAYEEREASSIGNDLG_H

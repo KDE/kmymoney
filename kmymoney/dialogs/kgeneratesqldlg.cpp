@@ -2,6 +2,7 @@
                           kgeneratesqldlg.cpp
                              -------------------
     copyright            : (C) 2009 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -17,9 +18,12 @@
 #include "kgeneratesqldlg.h"
 
 // ----------------------------------------------------------------------------
-// System includes
+// Std Includes
 
-#include <sys/types.h>
+#include <memory>
+
+// ----------------------------------------------------------------------------
+// System includes
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,91 +42,133 @@
 #include <KHelpClient>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kgeneratesqldlg.h"
+
 #include "mymoneyfile.h"
-#include "storage/mymoneystoragesql.h"
 #include "storage/mymoneyseqaccessmgr.h"
 #include "kguiutils.h"
 #include "misc/platformtools.h"
+#include "mymoneydbdriver.h"
+#include "mymoneydbdef.h"
 
-KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
+class KGenerateSqlDlgPrivate
 {
-  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-  m_createTablesButton = m_buttonBox->addButton(i18n("Create Tables"), QDialogButtonBox::ButtonRole::AcceptRole);
-  m_saveSqlButton = m_buttonBox->addButton(i18n("Save SQL"), QDialogButtonBox::ButtonRole::ActionRole);
-  Q_ASSERT(m_createTablesButton);
-  Q_ASSERT(m_saveSqlButton);
+  Q_DISABLE_COPY(KGenerateSqlDlgPrivate)
+  Q_DECLARE_PUBLIC(KGenerateSqlDlg)
 
-  QPushButton *okButton = m_buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-  connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+public:
+  KGenerateSqlDlgPrivate(KGenerateSqlDlg *qq) :
+    q_ptr(qq),
+    ui(new Ui::KGenerateSqlDlg)
+  {
+  }
 
-  m_widget = new KGenerateSqlDlgDecl();
-  QVBoxLayout *mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-  mainLayout->addWidget(m_widget);
+  ~KGenerateSqlDlgPrivate()
+  {
+    delete ui;
+  }
 
-  QWidget *mainWidget = new QWidget(this);
-  setLayout(mainLayout);
-  mainLayout->addWidget(mainWidget);
-  mainLayout->addWidget(m_buttonBox);
-  initializeForm();
+  void init()
+  {
+    Q_Q(KGenerateSqlDlg);
+    ui->setupUi(q);
+    m_createTablesButton = ui->buttonBox->addButton(i18n("Create Tables"), QDialogButtonBox::ButtonRole::AcceptRole);
+    m_saveSqlButton = ui->buttonBox->addButton(i18n("Save SQL"), QDialogButtonBox::ButtonRole::ActionRole);
+    Q_ASSERT(m_createTablesButton);
+    Q_ASSERT(m_saveSqlButton);
+
+    q->connect(ui->buttonBox, &QDialogButtonBox::accepted, q, &QDialog::accept);
+    q->connect(ui->buttonBox, &QDialogButtonBox::rejected, q, &QDialog::reject);
+    initializeForm();
+  }
+
+  void initializeForm()
+  {
+    Q_Q(KGenerateSqlDlg);
+    m_requiredFields = nullptr;
+    // at this point, we don't know which fields are required, so disable everything but the list
+    m_saveSqlButton->setEnabled(false);
+    m_createTablesButton->setEnabled(false);
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+
+    ui->urlSqlite->clear();
+    ui->textDbName->clear();
+    ui->textHostName->clear();
+    ui->textPassword->clear();
+    ui->textUserName->clear();
+    ui->textSQL->clear();
+    ui->urlSqlite->setEnabled(false);
+    ui->textDbName->setEnabled(false);
+    ui->textHostName->setEnabled(false);
+    ui->textPassword->setEnabled(false);
+    ui->textUserName->setEnabled(false);
+    ui->textSQL->setEnabled(false);
+
+    q->connect(ui->buttonBox->button(QDialogButtonBox::Help), &QPushButton::clicked, q, &KGenerateSqlDlg::slotHelp);
+  }
+
+  QString selectedDriver()
+  {
+    auto drivers = ui->listDrivers->selectedItems();
+    if (drivers.count() != 1) {
+      return QString();
+    }
+
+    return drivers[0]->text().section(' ', 0, 0);
+  }
+
+  KGenerateSqlDlg      *q_ptr;
+  Ui::KGenerateSqlDlg  *ui;
+  QPushButton          *m_createTablesButton;
+  QPushButton          *m_saveSqlButton;
+
+  QList<QString> m_supportedDrivers;
+  //MyMoneyDbDrivers m_map;
+  std::unique_ptr<kMandatoryFieldGroup> m_requiredFields;
+  bool m_sqliteSelected;
+  QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
+  QString m_dbName;
+  MyMoneySeqAccessMgr* m_storage;
+  bool m_mustDetachStorage;
+};
+
+
+KGenerateSqlDlg::KGenerateSqlDlg(QWidget *parent) :
+  QDialog(parent),
+  d_ptr(new KGenerateSqlDlgPrivate(this))
+{
+  Q_D(KGenerateSqlDlg);
+  d->init();
 }
 
 KGenerateSqlDlg::~KGenerateSqlDlg()
 {
-  // Stub required to delete m_requiredFields
-}
-
-void KGenerateSqlDlg::initializeForm()
-{
-  m_requiredFields = nullptr;
-  // at this point, we don't know which fields are required, so disable everything but the list
-  m_saveSqlButton->setEnabled(false);
-  m_createTablesButton->setEnabled(false);
-  QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
-  Q_ASSERT(okButton);
-  okButton->setEnabled(false);
-
-  m_widget->urlSqlite->clear();
-  m_widget->textDbName->clear();
-  m_widget->textHostName->clear();
-  m_widget->textPassword->clear();
-  m_widget->textUserName->clear();
-  m_widget->textSQL->clear();
-  m_widget->urlSqlite->setEnabled(false);
-  m_widget->textDbName->setEnabled(false);
-  m_widget->textHostName->setEnabled(false);
-  m_widget->textPassword->setEnabled(false);
-  m_widget->textUserName->setEnabled(false);
-  m_widget->textSQL->setEnabled(false);
-
-  connect(m_buttonBox->button(QDialogButtonBox::Help), &QPushButton::clicked, this, &KGenerateSqlDlg::slotHelp);
+  Q_D(KGenerateSqlDlg);
+  delete d;
 }
 
 int  KGenerateSqlDlg::exec()
 {
+  Q_D(KGenerateSqlDlg);
   // list drivers supported by KMM
-  QMap<QString, QString> map = MyMoneyDbDriver::driverMap();
+  auto map = MyMoneyDbDriver::driverMap();
   // list drivers installed on system
-  QStringList list = QSqlDatabase::drivers();
+  auto list = QSqlDatabase::drivers();
   // join the two
   QStringList::Iterator it = list.begin();
   while (it != list.end()) {
     QString dname = *it;
     if (map.keys().contains(dname)) { // only keep if driver is supported
       dname = dname + " - " + map[dname];
-      m_supportedDrivers.append(dname);
+      d->m_supportedDrivers.append(dname);
     }
     ++it;
   }
-  if (m_supportedDrivers.count() == 0) {
+  if (d->m_supportedDrivers.count() == 0) {
     // why does KMessageBox not have a standard dialog with Help button?
     if ((KMessageBox::questionYesNo(this,
                                     i18n("In order to use a database, you need to install some additional software. Click Help for more information"),
@@ -133,29 +179,30 @@ int  KGenerateSqlDlg::exec()
     }
     return (1);
   }
-  m_widget->listDrivers->clear();
-  m_widget->listDrivers->addItems(m_supportedDrivers);
-  connect(m_widget->listDrivers, SIGNAL(itemSelectionChanged()),
-          this, SLOT(slotdriverSelected()));
+  d->ui->listDrivers->clear();
+  d->ui->listDrivers->addItems(d->m_supportedDrivers);
+  connect(d->ui->listDrivers, &QListWidget::itemSelectionChanged,
+          this, &KGenerateSqlDlg::slotdriverSelected);
   return (QDialog::exec());
 }
 
 void KGenerateSqlDlg::slotcreateTables()
 {
-  if (m_sqliteSelected) {
-    m_dbName = m_widget->urlSqlite->text();
+  Q_D(KGenerateSqlDlg);
+  if (d->m_sqliteSelected) {
+    d->m_dbName = d->ui->urlSqlite->text();
   } else {
-    m_dbName = m_widget->textDbName->text();
+    d->m_dbName = d->ui->textDbName->text();
   }
   // check that the database has been pre-created
   { // all queries etc. must be in a block - see 'remove database' API doc
-    Q_ASSERT(!selectedDriver().isEmpty());
+    Q_ASSERT(!d->selectedDriver().isEmpty());
 
-    QSqlDatabase dbase = QSqlDatabase::addDatabase(selectedDriver(), "creation");
-    dbase.setHostName(m_widget->textHostName->text());
-    dbase.setDatabaseName(m_dbName);
-    dbase.setUserName(m_widget->textUserName->text());
-    dbase.setPassword(m_widget->textPassword->text());
+    QSqlDatabase dbase = QSqlDatabase::addDatabase(d->selectedDriver(), "creation");
+    dbase.setHostName(d->ui->textHostName->text());
+    dbase.setDatabaseName(d->m_dbName);
+    dbase.setUserName(d->ui->textUserName->text());
+    dbase.setPassword(d->ui->textPassword->text());
     if (!dbase.open()) {
       KMessageBox::error(this,
                          i18n("Unable to open database.\n"
@@ -165,7 +212,7 @@ void KGenerateSqlDlg::slotcreateTables()
     }
     QSqlQuery q(dbase);
     QString message(i18n("Tables successfully created"));
-    QStringList commands = m_widget->textSQL->toPlainText().split('\n');
+    QStringList commands = d->ui->textSQL->toPlainText().split('\n');
     QStringList::ConstIterator cit;
     for (cit = commands.constBegin(); cit != commands.constEnd(); ++cit) {
       if (!(*cit).isEmpty()) {
@@ -185,51 +232,43 @@ void KGenerateSqlDlg::slotcreateTables()
   }
   QSqlDatabase::removeDatabase("creation");
 
-  QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  auto okButton = d->ui->buttonBox->button(QDialogButtonBox::Ok);
   Q_ASSERT(okButton);
   okButton->setEnabled(true);
 }
 
 void KGenerateSqlDlg::slotsaveSQL()
 {
-  QString fileName = QFileDialog::getSaveFileName(
-                       this,
-                       i18n("Select output file"),
-                       QString(),
-                       QString());
+  Q_D(KGenerateSqlDlg);
+  auto fileName = QFileDialog::getSaveFileName(
+        this,
+        i18n("Select output file"),
+        QString(),
+        QString());
   if (fileName.isEmpty()) return;
   QFile out(fileName);
   if (!out.open(QIODevice::WriteOnly)) return;
   QTextStream s(&out);
   MyMoneyDbDef db;
-  s << m_widget->textSQL->toPlainText();
+  s << d->ui->textSQL->toPlainText();
   out.close();
 
-  QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  auto okButton = d->ui->buttonBox->button(QDialogButtonBox::Ok);
   Q_ASSERT(okButton);
   okButton->setEnabled(true);
 }
 
-QString KGenerateSqlDlg::selectedDriver()
-{
-  QList<QListWidgetItem *> drivers = m_widget->listDrivers->selectedItems();
-  if (drivers.count() != 1) {
-    return QString();
-  }
-
-  return drivers[0]->text().section(' ', 0, 0);
-}
-
 void KGenerateSqlDlg::slotdriverSelected()
 {
-  const QString driverName = selectedDriver();
+  Q_D(KGenerateSqlDlg);
+  const auto driverName = d->selectedDriver();
   if (driverName.isEmpty()) {
-    initializeForm();
+    d->initializeForm();
     return;
   }
 
-  m_dbDriver = MyMoneyDbDriver::create(driverName);
-  if (!m_dbDriver->isTested()) {
+  d->m_dbDriver = MyMoneyDbDriver::create(driverName);
+  if (!d->m_dbDriver->isTested()) {
     int rc = KMessageBox::warningContinueCancel(0,
              i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
                   "Please make sure you have adequate backups of your data.\n"
@@ -237,62 +276,62 @@ void KGenerateSqlDlg::slotdriverSelected()
                   "kmymoney-devel@kde.org", driverName),
              "");
     if (rc == KMessageBox::Cancel) {
-      m_widget->listDrivers->clearSelection();
-      initializeForm();
+      d->ui->listDrivers->clearSelection();
+      d->initializeForm();
       return;
     }
   }
 
-  m_requiredFields.reset(new kMandatoryFieldGroup(this));
+  d->m_requiredFields.reset(new kMandatoryFieldGroup(this));
   // currently, only sqlite need an external file
-  if (m_dbDriver->requiresExternalFile()) {
-    m_sqliteSelected = true;
-    m_widget->urlSqlite->setMode(KFile::Mode::File);
-    m_widget->urlSqlite->setEnabled(true);
-    m_requiredFields->add(m_widget->urlSqlite);
+  if (d->m_dbDriver->requiresExternalFile()) {
+    d->m_sqliteSelected = true;
+    d->ui->urlSqlite->setMode(KFile::Mode::File);
+    d->ui->urlSqlite->setEnabled(true);
+    d->m_requiredFields->add(d->ui->urlSqlite);
 
-    m_widget->textDbName->setEnabled(false);
-    m_widget->textHostName->setEnabled(false);
-    m_widget->textUserName->setEnabled(false);
+    d->ui->textDbName->setEnabled(false);
+    d->ui->textHostName->setEnabled(false);
+    d->ui->textUserName->setEnabled(false);
   } else {                         // not sqlite3
-    m_sqliteSelected = false;
-    m_widget->urlSqlite->setEnabled(false);
-    m_widget->textDbName->setEnabled(true);
-    m_widget->textHostName->setEnabled(true);
-    m_widget->textUserName->setEnabled(true);
-    m_requiredFields->add(m_widget->textDbName);
-    m_requiredFields->add(m_widget->textHostName);
-    m_requiredFields->add(m_widget->textUserName);
-    m_widget->textDbName->setText("KMyMoney");
-    m_widget->textHostName->setText("localhost");
-    m_widget->textUserName->setText("");
-    m_widget->textUserName->setText(platformTools::osUsername());
-    m_widget->textPassword->setText("");
+    d->m_sqliteSelected = false;
+    d->ui->urlSqlite->setEnabled(false);
+    d->ui->textDbName->setEnabled(true);
+    d->ui->textHostName->setEnabled(true);
+    d->ui->textUserName->setEnabled(true);
+    d->m_requiredFields->add(d->ui->textDbName);
+    d->m_requiredFields->add(d->ui->textHostName);
+    d->m_requiredFields->add(d->ui->textUserName);
+    d->ui->textDbName->setText("KMyMoney");
+    d->ui->textHostName->setText("localhost");
+    d->ui->textUserName->setText("");
+    d->ui->textUserName->setText(platformTools::osUsername());
+    d->ui->textPassword->setText("");
   }
 
-  m_widget->textPassword->setEnabled(m_dbDriver->isPasswordSupported());
-  m_requiredFields->setOkButton(m_createTablesButton);
-  m_widget->textSQL->setEnabled(true);
+  d->ui->textPassword->setEnabled(d->m_dbDriver->isPasswordSupported());
+  d->m_requiredFields->setOkButton(d->m_createTablesButton);
+  d->ui->textSQL->setEnabled(true);
   // check if we have a storage; if not, create a skeleton one
   // we need a storage for MyMoneyDbDef to generate standard accounts
-  m_storage = new MyMoneySeqAccessMgr;
-  m_mustDetachStorage = true;
+  d->m_storage = new MyMoneySeqAccessMgr;
+  d->m_mustDetachStorage = true;
   try {
-    MyMoneyFile::instance()->attachStorage(m_storage);
+    MyMoneyFile::instance()->attachStorage(d->m_storage);
   } catch (const MyMoneyException &) {
-    m_mustDetachStorage = false; // there is already a storage attached
+    d->m_mustDetachStorage = false; // there is already a storage attached
   }
   MyMoneyDbDef db;
-  m_widget->textSQL->setText
-  (db.generateSQL(m_dbDriver));
-  if (m_mustDetachStorage) {
+  d->ui->textSQL->setText
+  (db.generateSQL(d->m_dbDriver));
+  if (d->m_mustDetachStorage) {
     MyMoneyFile::instance()->detachStorage();
   }
-  delete m_storage;
+  delete d->m_storage;
 
-  m_saveSqlButton->setEnabled(true);
-  connect(m_saveSqlButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotsaveSQL);
-  connect(m_createTablesButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotcreateTables);
+  d->m_saveSqlButton->setEnabled(true);
+  connect(d->m_saveSqlButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotsaveSQL);
+  connect(d->m_createTablesButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotcreateTables);
 }
 
 void KGenerateSqlDlg::slotHelp()

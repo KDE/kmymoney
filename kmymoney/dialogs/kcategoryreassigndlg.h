@@ -2,6 +2,7 @@
                           kcategoryreassigndlg.cpp
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -20,36 +21,29 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kcategoryreassigndlgdecl.h"
+class MyMoneyAccount;
+namespace Ui { class KCategoryReassignDlg; }
 
 /**
  *  Implementation of the dialog that lets the user select a payee in order
  *  to re-assign transactions (for instance, if payees are deleted).
  */
 
-class KCategoryReassignDlgDecl : public QDialog, public Ui::KCategoryReassignDlgDecl
-{
-public:
-  KCategoryReassignDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class MyMoneyAccount;
-class KCategoryReassignDlg : public KCategoryReassignDlgDecl
+class KCategoryReassignDlg : public QDialog
 {
   Q_OBJECT
-public:
-  /** Default constructor */
-  KCategoryReassignDlg(QWidget* parent = 0);
+  Q_DISABLE_COPY(KCategoryReassignDlg)
 
-  /** Destructor */
+public:
+  explicit KCategoryReassignDlg(QWidget* parent = nullptr);
   ~KCategoryReassignDlg();
 
   /**
@@ -67,6 +61,8 @@ public:
 protected:
   void accept();
 
+private:
+  Ui::KCategoryReassignDlg *ui;
 };
 
 #endif // KCATEGORYREASSIGNDLG_H

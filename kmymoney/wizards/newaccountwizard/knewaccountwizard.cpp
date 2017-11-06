@@ -56,6 +56,7 @@
 #include "mymoneyinstitution.h"
 #include "mymoneyaccountloan.h"
 #include "mymoneypayee.h"
+#include "mymoneyprice.h"
 #include "mymoneytransaction.h"
 
 using namespace NewAccountWizard;
@@ -409,7 +410,7 @@ void InstitutionPage::slotLoadWidgets()
   qSort(d->m_list);
 
   QList<MyMoneyInstitution>::const_iterator it_l;
-  m_institutionComboBox->addItem("");
+  m_institutionComboBox->addItem(QString());
   for (it_l = d->m_list.constBegin(); it_l != d->m_list.constEnd(); ++it_l) {
     m_institutionComboBox->addItem((*it_l).name());
   }
@@ -981,14 +982,14 @@ void LoanDetailsPage::slotCalculate()
     if (m_loanAmount->lineedit()->text().isEmpty()) {
       // calculate the amount of the loan out of the other information
       val = calc.presentValue();
-      m_loanAmount->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", m_wizard->precision()));
+      m_loanAmount->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(QString(), m_wizard->precision()));
       result = i18n("KMyMoney has calculated the amount of the loan as %1.", m_loanAmount->lineedit()->text());
 
     } else if (m_interestRate->lineedit()->text().isEmpty()) {
       // calculate the interest rate out of the other information
       val = calc.interestRate();
 
-      m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
+      m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(QString(), 3));
       result = i18n("KMyMoney has calculated the interest rate to %1%.", m_interestRate->lineedit()->text());
 
     } else if (m_paymentAmount->lineedit()->text().isEmpty()) {
@@ -1010,15 +1011,15 @@ void LoanDetailsPage::slotCalculate()
         // updateTermWidgets(calc.npp());
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
-        m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
+        m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), m_wizard->precision()));
         result += QString(" ");
         result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.", m_balloonAmount->lineedit()->text());
       } else if ((moneyBorrowed && val < 0 && qAbs(val) < qAbs(calc.payment()))
                  || (moneyLend && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
-        m_balloonAmount->loadText(MyMoneyMoney().formatMoney("", m_wizard->precision()));
+        m_balloonAmount->loadText(MyMoneyMoney().formatMoney(QString(), m_wizard->precision()));
       } else {
         MyMoneyMoney refVal(static_cast<double>(val));
-        m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
+        m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), m_wizard->precision()));
         result += i18n("The balloon payment has been modified to %1.", m_balloonAmount->lineedit()->text());
       }
 
@@ -1036,7 +1037,7 @@ void LoanDetailsPage::slotCalculate()
         calc.setNpp(qFloor(val));
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
-        m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
+        m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), m_wizard->precision()));
         result += i18n("The balloon payment has been modified to %1.", m_balloonAmount->lineedit()->text());
       }
 
@@ -1067,7 +1068,7 @@ void LoanDetailsPage::slotCalculate()
       }
 
       MyMoneyMoney refVal(static_cast<double>(val));
-      result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", refVal.abs().formatMoney("", m_wizard->precision()));
+      result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", refVal.abs().formatMoney(QString(), m_wizard->precision()));
 
       if (!m_balloonAmount->lineedit()->text().isEmpty()) {
         if ((m_balloonAmount->value().abs() - refVal.abs()).abs().toDouble() > 1) {
@@ -1075,7 +1076,7 @@ void LoanDetailsPage::slotCalculate()
         }
         result = i18n("KMyMoney has successfully verified your loan information.");
       }
-      m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
+      m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), m_wizard->precision()));
     }
 
   } catch (const MyMoneyException &) {
@@ -1584,7 +1585,7 @@ void AccountSummaryPage::enterPage()
   m_dataList->append(i18n("Currency: %1", m_wizard->currency().name()));
   m_dataList->append(i18n("Opening date: %1", QLocale().toString(acc.openingDate())));
   if (m_wizard->currency().id() != MyMoneyFile::instance()->baseCurrency().id()) {
-    m_dataList->append(i18n("Conversion rate: %1", m_wizard->conversionRate().rate(QString()).formatMoney("", m_wizard->currency().pricePrecision())));
+    m_dataList->append(i18n("Conversion rate: %1", m_wizard->conversionRate().rate(QString()).formatMoney(QString(), m_wizard->currency().pricePrecision())));
   }
   if (!acc.isLoan() || !m_wizard->openingBalance().isZero())
     m_dataList->append(i18n("Opening balance: %1", MyMoneyUtils::formatMoney(m_wizard->openingBalance(), acc, sec)));
@@ -1624,7 +1625,7 @@ void AccountSummaryPage::enterPage()
     } else {
       m_dataList->append(i18n("Amount lent: %1", m_wizard->m_loanDetailsPage->m_loanAmount->value().formatMoney(m_wizard->currency().tradingSymbol(), m_wizard->precision())));
     }
-    m_dataList->append(i18n("Interest rate: %1 %", m_wizard->m_loanDetailsPage->m_interestRate->value().formatMoney("", -1)));
+    m_dataList->append(i18n("Interest rate: %1 %", m_wizard->m_loanDetailsPage->m_interestRate->value().formatMoney(QString(), -1)));
     m_dataList->append(i18n("Interest rate is %1", m_wizard->m_generalLoanInfoPage->m_interestType->currentText()));
     m_dataList->append(i18n("Principal and interest: %1", MyMoneyUtils::formatMoney(m_wizard->m_loanDetailsPage->m_paymentAmount->value(), acc, sec)));
     m_dataList->append(i18n("Additional Fees: %1", MyMoneyUtils::formatMoney(m_wizard->m_loanPaymentPage->additionalFees(), acc, sec)));

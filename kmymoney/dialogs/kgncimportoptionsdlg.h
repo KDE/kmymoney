@@ -2,6 +2,7 @@
                           kgncimportoptions.h
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -20,8 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QButtonGroup>
-#include <QCheckBox>
 #include <QDialog>
 
 // ----------------------------------------------------------------------------
@@ -29,56 +28,35 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "ui_kgncimportoptionsdlgdecl.h"
 
 class QTextCodec;
-class KGncImportOptionsDlgDecl : public QWidget, public Ui::KGncImportOptionsDlgDecl
-{
-public:
-  KGncImportOptionsDlgDecl() {
-    setupUi(this);
-  }
-};
 
+class KGncImportOptionsDlgPrivate;
 class KGncImportOptionsDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KGncImportOptionsDlg)
+
 public:
-  KGncImportOptionsDlg(QWidget *parent = 0);
+  explicit KGncImportOptionsDlg(QWidget *parent = nullptr);
   ~KGncImportOptionsDlg();
 
-  int investmentOption() const {
-    return (m_widget->buttonInvestGroup->checkedId());
-  };
-  bool quoteOption() const {
-    return (m_widget->checkFinanceQuote->isChecked());
-  };
-  bool scheduleOption() const {
-    return (m_widget->checkSchedules->isChecked());
-  };
+  int investmentOption() const;
+  bool quoteOption() const;
+  bool scheduleOption() const;
   QTextCodec* decodeOption();
-  bool txNotesOption() const {
-    return (m_widget->checkTxNotes->isChecked());
-  };
-  bool generalDebugOption() const {
-    return (m_widget->checkDebugGeneral->isChecked());
-  };
-  bool xmlDebugOption() const {
-    return (m_widget->checkDebugXML->isChecked());
-  };
-  bool anonymizeOption() const {
-    return (m_widget->checkAnonymize->isChecked());
-  };
+  bool txNotesOption() const;
+  bool generalDebugOption() const;
+  bool xmlDebugOption() const;
+  bool anonymizeOption() const;
 
 public slots:
   void slotDecodeOptionChanged(bool);
   void slotHelp();
 
 private:
-  void buildCodecList();
-
-  QTextCodec* m_localeCodec;
-  KGncImportOptionsDlgDecl* m_widget;
+  KGncImportOptionsDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KGncImportOptionsDlg)
 };
 
 #endif

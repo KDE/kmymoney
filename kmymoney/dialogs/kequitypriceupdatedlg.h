@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,30 +35,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "webpricequote.h"
-#include "mymoneyprice.h"
-#include "kequitypriceupdateconfdlg.h"
-#include "ui_kequitypriceupdatedlgdecl.h"
-
 class MyMoneySecurity;
+class MyMoneyStatement;
+class MyMoneyPrice;
+
+typedef QPair<QString, QString> MyMoneySecurityPair;
+typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
+typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
 /**
   * @author Kevin Tambascio & Ace Jones
   */
-class MyMoneyStatement;
-class KEquityPriceUpdateDlgDecl  : public QDialog, public Ui::KEquityPriceUpdateDlgDecl
-{
-public:
-  KEquityPriceUpdateDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
-class KEquityPriceUpdateDlg : public KEquityPriceUpdateDlgDecl
+class KEquityPriceUpdateDlgPrivate;
+class KEquityPriceUpdateDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KEquityPriceUpdateDlg)
+
 public:
-  explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
+  explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId);
+  explicit KEquityPriceUpdateDlg(QWidget *parent);
   ~KEquityPriceUpdateDlg();
   void storePrices();
   MyMoneyPrice price(const QString& id) const;
@@ -76,14 +74,13 @@ protected slots:
   void slotQuoteFailed(const QString& _kmmID, const QString& _webID);
 
 protected:
-  void addPricePair(const MyMoneySecurityPair& pair, bool dontCheckExistance = false);
   void addInvestment(const MyMoneySecurity& inv);
   void finishUpdate();
 
 private:
-  bool m_fUpdateAll;
-  updatingPricePolicyE m_updatingPricePolicy;
-  WebPriceQuote m_webQuote;
+  KEquityPriceUpdateDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KEquityPriceUpdateDlg)
+
 };
 
 #endif // KEQUITYPRICEUPDATEDLG_H

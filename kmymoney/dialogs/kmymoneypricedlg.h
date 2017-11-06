@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,6 +27,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,24 +35,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kmymoneypricedlgdecl.h"
-
 class MyMoneyPrice;
-class KTreeWidgetSearchLineWidget;
 class QTreeWidgetItem;
-class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl
-{
-public:
-  KMyMoneyPriceDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
-class KMyMoneyPriceDlg : public KMyMoneyPriceDlgDecl
+class KMyMoneyPriceDlgPrivate;
+class KMyMoneyPriceDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyPriceDlg)
+
 public:
-  KMyMoneyPriceDlg(QWidget* parent);
+  explicit KMyMoneyPriceDlg(QWidget* parent);
   ~KMyMoneyPriceDlg();
 
 private:
@@ -70,12 +65,8 @@ signals:
   void selectObject(const MyMoneyPrice& price);
 
 private:
-  QTreeWidgetItem*              m_currentItem;
-  /**
-    * Search widget for the list
-    */
-  KTreeWidgetSearchLineWidget*  m_searchWidget;
-  QMap<QString, QString>        m_stockNameMap;
+  KMyMoneyPriceDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyPriceDlg)
 };
 
 #endif // KMYMONEYPRICEDLG_H

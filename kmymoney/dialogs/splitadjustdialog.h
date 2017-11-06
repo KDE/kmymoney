@@ -4,6 +4,7 @@
     begin                : Sat Jul 23 2016
     copyright            : (C) 2016 by Thomas Baumgart
     email                : Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************

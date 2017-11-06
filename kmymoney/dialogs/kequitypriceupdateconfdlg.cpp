@@ -19,110 +19,137 @@
 
 #include "ui_kequitypriceupdateconfdlg.h"
 
-EquityPriceUpdateConfDlg::EquityPriceUpdateConfDlg(const updatingPricePolicyE policy) : ui(new Ui::EquityPriceUpdateConfDlg)
+#include "dialogenums.h"
+
+class EquityPriceUpdateConfDlgPrivate
 {
-  ui->setupUi(this);
+  Q_DISABLE_COPY(EquityPriceUpdateConfDlgPrivate)
+
+public:
+  EquityPriceUpdateConfDlgPrivate() :
+    ui(new Ui::EquityPriceUpdateConfDlg)
+  {
+  }
+
+  ~EquityPriceUpdateConfDlgPrivate()
+  {
+    delete ui;
+  }
+
+  void updatingPricePolicyChanged(const eDialogs::UpdatePrice policy, bool toggled)
+  {
+    if (!toggled)
+      return;
+
+    switch(policy) {
+      case eDialogs::UpdatePrice::All:
+        ui->m_updateMissing->setChecked(false);
+        ui->m_updateDownloaded->setChecked(false);
+        ui->m_updateSource->setChecked(false);
+        ui->m_ask->setChecked(false);
+        break;
+      case eDialogs::UpdatePrice::Missing:
+        ui->m_updateAll->setChecked(false);
+        ui->m_updateDownloaded->setChecked(false);
+        ui->m_updateSource->setChecked(false);
+        ui->m_ask->setChecked(false);
+        break;
+      case eDialogs::UpdatePrice::Downloaded:
+        ui->m_updateAll->setChecked(false);
+        ui->m_updateMissing->setChecked(false);
+        ui->m_updateSource->setChecked(false);
+        ui->m_ask->setChecked(false);
+        break;
+      case eDialogs::UpdatePrice::SameSource:
+        ui->m_updateAll->setChecked(false);
+        ui->m_updateMissing->setChecked(false);
+        ui->m_updateDownloaded->setChecked(false);
+        ui->m_ask->setChecked(false);
+        break;
+      case eDialogs::UpdatePrice::Ask:
+        ui->m_updateAll->setChecked(false);
+        ui->m_updateDownloaded->setChecked(false);
+        ui->m_updateSource->setChecked(false);
+        ui->m_updateMissing->setChecked(false);
+        break;
+    }
+    m_updatingPricePolicy = policy;
+  }
+
+  Ui::EquityPriceUpdateConfDlg  *ui;
+  eDialogs::UpdatePrice          m_updatingPricePolicy;
+};
+
+EquityPriceUpdateConfDlg::EquityPriceUpdateConfDlg(eDialogs::UpdatePrice policy) :
+  QDialog(nullptr),
+  d_ptr(new EquityPriceUpdateConfDlgPrivate)
+{
+  Q_D(EquityPriceUpdateConfDlg);
+  d->ui->setupUi(this);
   switch(policy) {
-    case eUpdateAllPrices:
-      ui->m_updateAll->setChecked(true);
+    case eDialogs::UpdatePrice::All:
+      d->ui->m_updateAll->setChecked(true);
       break;
-    case eUpdateMissingPrices:
-      ui->m_updateMissing->setChecked(true);
+    case eDialogs::UpdatePrice::Missing:
+      d->ui->m_updateMissing->setChecked(true);
       break;
-    case eUpdateDownloadedPrices:
-      ui->m_updateDownloaded->setChecked(true);
+    case eDialogs::UpdatePrice::Downloaded:
+      d->ui->m_updateDownloaded->setChecked(true);
       break;
-    case eUpdateSameSourcePrices:
-      ui->m_updateSource->setChecked(true);
+    case eDialogs::UpdatePrice::SameSource:
+      d->ui->m_updateSource->setChecked(true);
       break;
-    case eAsk:
-      ui->m_ask->setChecked(true);
-      break;
-    default:
+    case eDialogs::UpdatePrice::Ask:
+      d->ui->m_ask->setChecked(true);
       break;
   }
 
-  m_updatingPricePolicy = policy;
-  connect(ui->m_updateAll, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateAllToggled);
-  connect(ui->m_updateMissing, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateMissingToggled);
-  connect(ui->m_updateDownloaded, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateDownloadedToggled);
-  connect(ui->m_updateSource, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateSameSourceToggled);
-  connect(ui->m_ask, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::askToggled);
+  d->m_updatingPricePolicy = policy;
+  connect(d->ui->m_updateAll, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateAllToggled);
+  connect(d->ui->m_updateMissing, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateMissingToggled);
+  connect(d->ui->m_updateDownloaded, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateDownloadedToggled);
+  connect(d->ui->m_updateSource, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::updateSameSourceToggled);
+  connect(d->ui->m_ask, &QAbstractButton::toggled, this, &EquityPriceUpdateConfDlg::askToggled);
 }
 
 EquityPriceUpdateConfDlg::~EquityPriceUpdateConfDlg()
 {
-  delete ui;
+  Q_D(EquityPriceUpdateConfDlg);
+  delete d;
 }
 
 void EquityPriceUpdateConfDlg::updateAllToggled(bool toggled)
 {
-  updatingPricePolicyChanged(eUpdateAllPrices, toggled);
+  Q_D(EquityPriceUpdateConfDlg);
+  d->updatingPricePolicyChanged(eDialogs::UpdatePrice::All, toggled);
 }
 
 void EquityPriceUpdateConfDlg::updateMissingToggled(bool toggled)
 {
-  updatingPricePolicyChanged(eUpdateMissingPrices, toggled);
+  Q_D(EquityPriceUpdateConfDlg);
+  d->updatingPricePolicyChanged(eDialogs::UpdatePrice::Missing, toggled);
 }
 
 void EquityPriceUpdateConfDlg::updateDownloadedToggled(bool toggled)
 {
-  updatingPricePolicyChanged(eUpdateDownloadedPrices, toggled);
+  Q_D(EquityPriceUpdateConfDlg);
+  d->updatingPricePolicyChanged(eDialogs::UpdatePrice::Downloaded, toggled);
 }
 
 void EquityPriceUpdateConfDlg::updateSameSourceToggled(bool toggled)
 {
-  updatingPricePolicyChanged(eUpdateSameSourcePrices, toggled);
+  Q_D(EquityPriceUpdateConfDlg);
+  d->updatingPricePolicyChanged(eDialogs::UpdatePrice::SameSource, toggled);
 }
 
 void EquityPriceUpdateConfDlg::askToggled(bool toggled)
 {
-  updatingPricePolicyChanged(eAsk, toggled);
+  Q_D(EquityPriceUpdateConfDlg);
+  d->updatingPricePolicyChanged(eDialogs::UpdatePrice::Ask, toggled);
 }
 
-updatingPricePolicyE EquityPriceUpdateConfDlg::policy()
+eDialogs::UpdatePrice EquityPriceUpdateConfDlg::policy() const
 {
-  return m_updatingPricePolicy;
-}
-
-void EquityPriceUpdateConfDlg::updatingPricePolicyChanged(const updatingPricePolicyE policy, bool toggled)
-{
-  if (!toggled)
-    return;
-
-  switch(policy) {
-    case eUpdateAllPrices:
-      ui->m_updateMissing->setChecked(false);
-      ui->m_updateDownloaded->setChecked(false);
-      ui->m_updateSource->setChecked(false);
-      ui->m_ask->setChecked(false);
-      break;
-    case eUpdateMissingPrices:
-      ui->m_updateAll->setChecked(false);
-      ui->m_updateDownloaded->setChecked(false);
-      ui->m_updateSource->setChecked(false);
-      ui->m_ask->setChecked(false);
-      break;
-    case eUpdateDownloadedPrices:
-      ui->m_updateAll->setChecked(false);
-      ui->m_updateMissing->setChecked(false);
-      ui->m_updateSource->setChecked(false);
-      ui->m_ask->setChecked(false);
-      break;
-    case eUpdateSameSourcePrices:
-      ui->m_updateAll->setChecked(false);
-      ui->m_updateMissing->setChecked(false);
-      ui->m_updateDownloaded->setChecked(false);
-      ui->m_ask->setChecked(false);
-      break;
-    case eAsk:
-      ui->m_updateAll->setChecked(false);
-      ui->m_updateDownloaded->setChecked(false);
-      ui->m_updateSource->setChecked(false);
-      ui->m_updateMissing->setChecked(false);
-      break;
-    default:
-      break;
-  }
-  m_updatingPricePolicy = policy;
+  Q_D(const EquityPriceUpdateConfDlg);
+  return d->m_updatingPricePolicy;
 }

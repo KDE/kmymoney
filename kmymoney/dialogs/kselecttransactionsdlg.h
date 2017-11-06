@@ -4,6 +4,7 @@
     begin                : Wed May 16 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,41 +22,39 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "selectedtransaction.h"
-
-#include "ui_kselecttransactionsdlgdecl.h"
-
 class MyMoneyTransaction;
+class MyMoneyAccount;
 
-class KSelectTransactionsDlgDecl : public QDialog, public Ui::KSelectTransactionsDlgDecl
-{
-public:
-  KSelectTransactionsDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-class KSelectTransactionsDlg: public KSelectTransactionsDlgDecl
+namespace KMyMoneyRegister { class SelectedTransactions; class Register;}
+
+class KSelectTransactionsDlgPrivate;
+class KSelectTransactionsDlg: public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSelectTransactionsDlg)
+
 public:
-  explicit KSelectTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
+  explicit KSelectTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
+  ~KSelectTransactionsDlg();
 
   /**
    * Adds the transaction @a t to the dialog
    */
   void addTransaction(const MyMoneyTransaction& t);
-  int exec();
+  int exec() override;
 
   MyMoneyTransaction transaction() const;
+  KMyMoneyRegister::Register *getRegister();
 
-  bool eventFilter(QObject* o, QEvent* e);
+  bool eventFilter(QObject* o, QEvent* e) override;
 
 public slots:
   virtual void slotHelp();
@@ -64,14 +63,12 @@ protected slots:
   void slotEnableOk(const KMyMoneyRegister::SelectedTransactions& list);
 
 protected:
-  void resizeEvent(QResizeEvent* ev);
-  void showEvent(QShowEvent* event);
+  void resizeEvent(QResizeEvent* ev) override;
+  void showEvent(QShowEvent* event) override;
+  KSelectTransactionsDlgPrivate * const d_ptr;
 
 private:
-  /**
-    * The account in which the transactions are displayed
-    */
-  MyMoneyAccount m_account;
+  Q_DECLARE_PRIVATE(KSelectTransactionsDlg)
 };
 
 #endif // KMERGETRANSACTIONSDLG_H

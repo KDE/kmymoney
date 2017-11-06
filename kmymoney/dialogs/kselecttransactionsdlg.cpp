@@ -4,6 +4,7 @@
     begin                : Wed May 16 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,6 +17,7 @@
  ***************************************************************************/
 
 #include "kselecttransactionsdlg.h"
+#include "kselecttransactionsdlg_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,68 +36,78 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kselecttransactionsdlg.h"
+
+#include "mymoneyaccount.h"
+#include "selectedtransaction.h"
 #include "mymoneytransaction.h"
 #include "kmymoneyglobalsettings.h"
-#include <KGuiItem>
-#include <KStandardGuiItem>
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
-    KSelectTransactionsDlgDecl(parent),
-    m_account(_account)
+  QDialog(parent),
+  d_ptr(new KSelectTransactionsDlgPrivate)
 {
+  Q_D(KSelectTransactionsDlg);
+  d->m_account = _account;
+  d->ui->setupUi(this);
   // setup descriptive texts
   setWindowTitle(i18n("Select Transaction"));
-  m_description->setText(i18n("Select a transaction and press the OK button or use Cancel to select none."));
+  d->ui->m_description->setText(i18n("Select a transaction and press the OK button or use Cancel to select none."));
 
   // clear current register contents
-  m_register->clear();
+  d->ui->m_register->clear();
 
   // no selection possible
-  m_register->setSelectionMode(QTableWidget::SingleSelection);
+  d->ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
 
   // setup header font
-  QFont font = KMyMoneyGlobalSettings::listHeaderFont();
+  auto font = KMyMoneyGlobalSettings::listHeaderFont();
   QFontMetrics fm(font);
-  int height = fm.lineSpacing() + 6;
-  m_register->horizontalHeader()->setMinimumHeight(height);
-  m_register->horizontalHeader()->setMaximumHeight(height);
-  m_register->horizontalHeader()->setFont(font);
+  auto height = fm.lineSpacing() + 6;
+  d->ui->m_register->horizontalHeader()->setMinimumHeight(height);
+  d->ui->m_register->horizontalHeader()->setMaximumHeight(height);
+  d->ui->m_register->horizontalHeader()->setFont(font);
 
   // setup cell font
   font = KMyMoneyGlobalSettings::listCellFont();
-  m_register->setFont(font);
+  d->ui->m_register->setFont(font);
 
   // ... setup the register columns ...
-  m_register->setupRegister(m_account);
+  d->ui->m_register->setupRegister(d->m_account);
 
   // setup buttons
-  KGuiItem::assign(m_helpButton, KStandardGuiItem::help());
-  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
-  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
 
   // default is to need at least one transaction selected
-  buttonOk->setDisabled(true);
+  d->ui->buttonBox->button(QDialogButtonBox::Ok)->setDisabled(true);
 
   // catch some events from the register
-  m_register->installEventFilter(this);
+  d->ui->m_register->installEventFilter(this);
 
-  connect(m_register, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotEnableOk(KMyMoneyRegister::SelectedTransactions)));
-  connect(m_register, SIGNAL(editTransaction()), this, SLOT(accept()));
+  connect(d->ui->m_register, &KMyMoneyRegister::Register::transactionsSelected, this, &KSelectTransactionsDlg::slotEnableOk);
+  connect(d->ui->m_register, &KMyMoneyRegister::Register::editTransaction, this, &QDialog::accept);
 
-  connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
+  connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KSelectTransactionsDlg::slotHelp);
+}
+
+KSelectTransactionsDlg::~KSelectTransactionsDlg()
+{
+  Q_D(KSelectTransactionsDlg);
+  delete d;
 }
 
 void KSelectTransactionsDlg::slotEnableOk(const KMyMoneyRegister::SelectedTransactions& list)
 {
-  buttonOk->setEnabled(list.count() != 0);
+  Q_D(KSelectTransactionsDlg);
+  d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(list.count() != 0);
 }
 
 void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
 {
+  Q_D(KSelectTransactionsDlg);
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if ((*it_s).accountId() == m_account.id()) {
-      KMyMoneyRegister::Transaction* tr = KMyMoneyRegister::Register::transactionFactory(m_register, t, (*it_s), 0);
+    if ((*it_s).accountId() == d->m_account.id()) {
+      KMyMoneyRegister::Transaction* tr = KMyMoneyRegister::Register::transactionFactory(d->ui->m_register, t, (*it_s), 0);
       // force full detail display
       tr->setNumRowsRegister(tr->numRowsRegister(true));
       break;
@@ -105,12 +117,13 @@ void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
 
 int KSelectTransactionsDlg::exec()
 {
-  m_register->updateRegister(true);
-  m_register->update();
+  Q_D(KSelectTransactionsDlg);
+  d->ui->m_register->updateRegister(true);
+  d->ui->m_register->update();
 
-  m_register->setFocus();
+  d->ui->m_register->setFocus();
 
-  return KSelectTransactionsDlgDecl::exec();
+  return QDialog::exec();
 }
 
 void KSelectTransactionsDlg::slotHelp()
@@ -120,25 +133,28 @@ void KSelectTransactionsDlg::slotHelp()
 
 void KSelectTransactionsDlg::showEvent(QShowEvent* event)
 {
-  KSelectTransactionsDlgDecl::showEvent(event);
-  m_register->resize(KMyMoneyRegister::DetailColumn, true);
+  Q_D(KSelectTransactionsDlg);
+  QDialog::showEvent(event);
+  d->ui->m_register->resize(KMyMoneyRegister::DetailColumn, true);
 }
 
 void KSelectTransactionsDlg::resizeEvent(QResizeEvent* ev)
 {
+  Q_D(KSelectTransactionsDlg);
   // don't forget the resizer
-  KSelectTransactionsDlgDecl::resizeEvent(ev);
+  QDialog::resizeEvent(ev);
 
   // resize the register
-  m_register->resize(KMyMoneyRegister::DetailColumn, true);
+  d->ui->m_register->resize(KMyMoneyRegister::DetailColumn, true);
 }
 
 MyMoneyTransaction KSelectTransactionsDlg::transaction() const
 {
+  Q_D(const KSelectTransactionsDlg);
   MyMoneyTransaction t;
 
   QList<KMyMoneyRegister::RegisterItem*> list;
-  list = m_register->selectedItems();
+  list = d->ui->m_register->selectedItems();
   if (list.count()) {
     KMyMoneyRegister::Transaction* _t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (_t)
@@ -147,12 +163,19 @@ MyMoneyTransaction KSelectTransactionsDlg::transaction() const
   return t;
 }
 
+KMyMoneyRegister::Register* KSelectTransactionsDlg::getRegister()
+{
+  Q_D(KSelectTransactionsDlg);
+  return d->ui->m_register;
+}
+
 bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
 {
-  bool rc = false;
+  Q_D(KSelectTransactionsDlg);
+  auto rc = false;
   QKeyEvent* k;
 
-  if (o == m_register) {
+  if (o == d->ui->m_register) {
     switch (e->type()) {
       case QEvent::KeyPress:
         k = dynamic_cast<QKeyEvent*>(e);
@@ -161,7 +184,7 @@ bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
           switch (k->key()) {
             case Qt::Key_Return:
             case Qt::Key_Enter:
-              if (buttonOk->isEnabled()) {
+              if (d->ui->buttonBox->button(QDialogButtonBox::Ok)->isEnabled()) {
                 accept();
                 rc = true;
               }

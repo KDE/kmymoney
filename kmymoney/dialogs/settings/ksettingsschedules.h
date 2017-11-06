@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,30 +21,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsschedulesdecl.h"
-
-class KSettingsSchedulesDecl : public QWidget, public Ui::KSettingsSchedulesDecl
-{
-public:
-  KSettingsSchedulesDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-
-class KSettingsSchedules : public KSettingsSchedulesDecl
+class KSettingsSchedulesPrivate;
+class KSettingsSchedules : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsSchedules)
 
 public:
-  KSettingsSchedules(QWidget* parent = 0);
+  explicit KSettingsSchedules(QWidget* parent = nullptr);
   ~KSettingsSchedules();
 
 public slots:
@@ -57,7 +50,8 @@ protected:
   void loadList();
 
 private:
-  QMap<QString, QString> m_regionMap;
+  KSettingsSchedulesPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsSchedules)
 };
 
 #endif

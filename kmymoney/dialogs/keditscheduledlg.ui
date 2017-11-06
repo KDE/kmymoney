@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KEditScheduleDlg</class>
+ <widget class="QDialog" name="KEditScheduleDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>798</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Edit Scheduled transaction</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <layout class="QHBoxLayout">
+       <item>
+        <widget class="QLabel" name="textLabel1">
+         <property name="text">
+          <string>Schedule name:</string>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="KLineEdit" name="m_nameEdit">
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout">
+       <item>
+        <widget class="QLabel" name="textLabel3">
+         <property name="text">
+          <string>Frequency:</string>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="m_frequencyNoEdit">
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>Number of selected periods between entries</string>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>999</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="KMyMoneyOccurrencePeriodCombo" name="m_frequencyEdit" native="true"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="m_paymentInformation">
+     <property name="title">
+      <string>Payment information</string>
+     </property>
+     <layout class="QVBoxLayout" name="m_paymentInformationLayout">
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QLabel" name="textLabel1_3">
+          <property name="text">
+           <string>Payment method</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KMyMoneyGeneralCombo" name="m_paymentMethodEdit" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>61</width>
+            <height>21</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line1">
+        <property name="frameShape">
+         <enum>QFrame::HLine</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KMyMoneyRegister::Register" name="m_register" native="true">
+        <property name="rowCount" stdset="0">
+         <number>0</number>
+        </property>
+        <property name="columnCount" stdset="0">
+         <number>12</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KMyMoneyTransactionForm::TransactionForm" name="m_form" native="true">
+        <property name="rowCount" stdset="0">
+         <number>5</number>
+        </property>
+        <property name="columnCount" stdset="0">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox2">
+     <property name="title">
+      <string>Options</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <item>
+       <layout class="QGridLayout">
+        <item row="1" column="1">
+         <widget class="KComboBox" name="m_weekendOptionEdit">
+          <item>
+           <property name="text">
+            <string>Do nothing</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Change the date to the previous processing day</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Change the date to the next processing day</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="textLabel1_2">
+          <property name="text">
+           <string>If this schedule occurs on a non-processing day:</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QCheckBox" name="m_estimateEdit">
+          <property name="text">
+           <string>The amount is an estimate because it varies for each payment</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="m_variation">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="maximum">
+           <number>32767</number>
+          </property>
+          <property name="value">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>21</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_lastDayInMonthEdit">
+        <property name="text">
+         <string>Process this schedule always at the last day of a month</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_autoEnterEdit">
+        <property name="text">
+         <string>Enter this schedule into the register automatically when it is due</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_endSeriesEdit">
+        <property name="text">
+         <string>This schedule will end at some time</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="m_endOptionsFrame">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <spacer name="Spacer3_2_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="m_endLabel1">
+           <property name="text">
+            <string>Number of transactions remaining:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="m_RemainingEdit">
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>9999</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="m_endLabel2">
+           <property name="text">
+            <string>Date of final transaction:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="kMyMoneyDateInput" name="m_FinalPaymentEdit" native="true">
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer12">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyRegister::Register</class>
+   <extends>QWidget</extends>
+   <header>register.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneymvccombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyOccurrencePeriodCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneymvccombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyTransactionForm::TransactionForm</class>
+   <extends>QWidget</extends>
+   <header>transactionform.h</header>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyDateInput</class>
+   <extends>QWidget</extends>
+   <header>kmymoneydateinput.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_endSeriesEdit</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_endOptionsFrame</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_estimateEdit</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_variation</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>KEditScheduleDlg</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>616</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>KEditScheduleDlg</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>616</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -2,6 +2,7 @@
                           kgncpricesourcedlg.h
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
  ***************************************************************************/
 
@@ -28,12 +29,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class KGncPriceSourceDlgPrivate;
 class KGncPriceSourceDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KGncPriceSourceDlg)
+
 public:
-  KGncPriceSourceDlg(QWidget *parent = 0);
-  KGncPriceSourceDlg(const QString &stockName, const QString &gncSource , QWidget * parent = 0);
+  explicit KGncPriceSourceDlg(const QString &stockName, const QString &gncSource , QWidget * parent = nullptr);
   ~KGncPriceSourceDlg();
 
   QString selectedSource() const;
@@ -44,10 +47,8 @@ public slots:
   void slotHelp();
 
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  KGncPriceSourceDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KGncPriceSourceDlg)
 };
 
 #endif

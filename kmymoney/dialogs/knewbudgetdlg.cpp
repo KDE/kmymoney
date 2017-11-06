@@ -4,6 +4,7 @@
     begin                : Wed Jan 18 2006
     copyright            : (C) 2000-2004 by Darren Gould
     email                : darren_gould@gmx.de
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,13 +33,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_knewbudgetdlgdecl.h"
+#include "ui_knewbudgetdlg.h"
 
-struct KNewBudgetDlg::Private {
+class KNewBudgetDlgPrivate
+{
+  Q_DISABLE_COPY(KNewBudgetDlgPrivate)
+
+public:
+  KNewBudgetDlgPrivate() :
+    ui(new Ui::KNewBudgetDlg)
+  {
+  }
+
+  ~KNewBudgetDlgPrivate()
+  {
+    delete ui;
+  }
+
+  Ui::KNewBudgetDlg *ui;
   QString m_year;
   QString m_name;
-
-  Ui::KNewBudgetDlgDecl ui;
 };
 
 // the combobox should look m_icNextYears into the future
@@ -46,26 +60,29 @@ static const int icFutureYears = 5;
 static const int icPastYears = 2;
 
 KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
-    QDialog(parent), d(new Private)
+  QDialog(parent),
+  d_ptr(new KNewBudgetDlgPrivate)
 {
-  d->ui.setupUi(this);
+  Q_D(KNewBudgetDlg);
+  d->ui->setupUi(this);
   QStringList slYear;
-  QDate dToday = QDate::currentDate();
-  int iYear = dToday.year();
+  auto dToday = QDate::currentDate();
+  auto iYear = dToday.year();
 
-  for (int i = 0; i <= icFutureYears; i++)
-    d->ui.m_cbYear->addItem(QString::number(iYear++));
+  for (auto i = 0; i <= icFutureYears; i++)
+    d->ui->m_cbYear->addItem(QString::number(iYear++));
 
   iYear = dToday.year();
-  for (int i = 0; i <= icPastYears; i++)
-    d->ui.m_cbYear->addItem(QString::number(--iYear));
+  for (auto i = 0; i <= icPastYears; i++)
+    d->ui->m_cbYear->addItem(QString::number(--iYear));
 
-  connect(d->ui.buttonBox, SIGNAL(accepted()), this, SLOT(m_pbOk_clicked()));
-  connect(d->ui.buttonBox, SIGNAL(rejected()), this, SLOT(m_pbCancel_clicked()));
+  connect(d->ui->buttonBox, &QDialogButtonBox::accepted, this, &KNewBudgetDlg::m_pbOk_clicked);
+  connect(d->ui->buttonBox, &QDialogButtonBox::rejected, this, &KNewBudgetDlg::m_pbCancel_clicked);
 }
 
 KNewBudgetDlg::~KNewBudgetDlg()
 {
+  Q_D(KNewBudgetDlg);
   delete d;
 }
 
@@ -76,27 +93,30 @@ void KNewBudgetDlg::m_pbCancel_clicked()
 
 void KNewBudgetDlg::m_pbOk_clicked()
 {
+  Q_D(KNewBudgetDlg);
   // force focus change to update all data
-  d->ui.buttonBox->button(QDialogButtonBox::Ok)->setFocus();
+  d->ui->buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
-  if (d->ui.m_leBudgetName->displayText().isEmpty()) {
+  if (d->ui->m_leBudgetName->displayText().isEmpty()) {
     KMessageBox::information(this, i18n("Please specify a budget name"));
-    d->ui.m_leBudgetName->setFocus();
+    d->ui->m_leBudgetName->setFocus();
     return;
   }
 
-  d->m_year = d->ui.m_cbYear->currentText();
-  d->m_name = d->ui.m_leBudgetName->displayText();
+  d->m_year = d->ui->m_cbYear->currentText();
+  d->m_name = d->ui->m_leBudgetName->displayText();
 
   accept();
 }
 
-QString& KNewBudgetDlg::getYear()
+QString KNewBudgetDlg::getYear() const
 {
+  Q_D(const KNewBudgetDlg);
   return d->m_year;
 }
 
-QString& KNewBudgetDlg::getName()
+QString KNewBudgetDlg::getName() const
 {
+  Q_D(const KNewBudgetDlg);
   return d->m_name;
 }

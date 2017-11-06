@@ -2,6 +2,7 @@
                           kgncimportoptions.cpp
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -29,91 +30,158 @@
 
 #include <KHelpClient>
 #include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-// dialog constructor
-KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *)
+#include "ui_kgncimportoptionsdlg.h"
+
+class KGncImportOptionsDlgPrivate
 {
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help);
-  QWidget *mainWidget = new QWidget(this);
-  QVBoxLayout *mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-  mainLayout->addWidget(mainWidget);
-  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  m_widget = new KGncImportOptionsDlgDecl();
-  mainLayout->addWidget(m_widget);
+  Q_DISABLE_COPY(KGncImportOptionsDlgPrivate)
+  Q_DECLARE_PUBLIC(KGncImportOptionsDlg)
 
-  m_widget->buttonInvestGroup->setId(m_widget->radioInvest1, 0); // one invest acct per stock
-  m_widget->buttonInvestGroup->setId(m_widget->radioInvest2, 1); // one invest acct for all stocks
-  m_widget->buttonInvestGroup->setId(m_widget->radioInvest3, 2); // prompt for each stock
+public:
+  KGncImportOptionsDlgPrivate(KGncImportOptionsDlg *qq) :
+    q_ptr(qq),
+    ui(new Ui::KGncImportOptionsDlg),
+    m_localeCodec(nullptr)
+  {
+  }
 
-  m_widget->buttonGroup5->setExclusive(false);
-  m_widget->checkFinanceQuote->setChecked(true);
+  ~KGncImportOptionsDlgPrivate()
+  {
+    delete ui;
+  }
 
-  m_widget->buttonGroup2->setExclusive(false);
-  m_widget->checkSchedules->setChecked(false);
+  void init()
+  {
+    Q_Q(KGncImportOptionsDlg);
+    ui->setupUi(q);
 
-  buildCodecList();  // build list of codecs and insert into combo box
+    ui->buttonInvestGroup->setId(ui->radioInvest1, 0); // one invest acct per stock
+    ui->buttonInvestGroup->setId(ui->radioInvest2, 1); // one invest acct for all stocks
+    ui->buttonInvestGroup->setId(ui->radioInvest3, 2); // prompt for each stock
 
-  m_widget->buttonGroup4->setExclusive(false);
-  m_widget->checkDecode->setChecked(false);
-  m_widget->comboDecode->setEnabled(false);
+    ui->buttonGroup5->setExclusive(false);
+    ui->checkFinanceQuote->setChecked(true);
 
-  m_widget->buttonGroup18->setExclusive(false);
-  m_widget->checkTxNotes->setChecked(false);
+    ui->buttonGroup2->setExclusive(false);
+    ui->checkSchedules->setChecked(false);
 
-  m_widget->buttonGroup3->setExclusive(false);
-  m_widget->checkDebugGeneral->setChecked(false);
-  m_widget->checkDebugXML->setChecked(false);
-  m_widget->checkAnonymize->setChecked(false);
+    buildCodecList();  // build list of codecs and insert into combo box
 
-  connect(m_widget->checkDecode, SIGNAL(toggled(bool)), this, SLOT(slotDecodeOptionChanged(bool)));
-  connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
+    ui->buttonGroup4->setExclusive(false);
+    ui->checkDecode->setChecked(false);
+    ui->comboDecode->setEnabled(false);
 
-  mainLayout->addWidget(buttonBox);
+    ui->buttonGroup18->setExclusive(false);
+    ui->checkTxNotes->setChecked(false);
+
+    ui->buttonGroup3->setExclusive(false);
+    ui->checkDebugGeneral->setChecked(false);
+    ui->checkDebugXML->setChecked(false);
+    ui->checkAnonymize->setChecked(false);
+
+    q->connect(ui->checkDecode, &QAbstractButton::toggled, q, &KGncImportOptionsDlg::slotDecodeOptionChanged);
+    q->connect(ui->buttonBox, &QDialogButtonBox::helpRequested, q, &KGncImportOptionsDlg::slotHelp);
+  }
+
+  void buildCodecList()
+  {
+    m_localeCodec = QTextCodec::codecForLocale();
+    auto codecList = QTextCodec::availableCodecs();
+    QList<QByteArray>::ConstIterator itc;
+    for (itc = codecList.constBegin(); itc != codecList.constEnd(); ++itc) {
+      if (*itc == m_localeCodec)
+        ui->comboDecode->insertItem(0, QString(*itc));
+      else
+        ui->comboDecode->insertItem(9999, QString(*itc));
+    }
+  }
+
+  KGncImportOptionsDlg      *q_ptr;
+  Ui::KGncImportOptionsDlg  *ui;
+  QTextCodec                *m_localeCodec;
+};
+
+KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent) :
+  QDialog(parent),
+  d_ptr(new KGncImportOptionsDlgPrivate(this))
+{
+  Q_D(KGncImportOptionsDlg);
+  d->init();
 }
 
-KGncImportOptionsDlg::~KGncImportOptionsDlg() {}
+KGncImportOptionsDlg::~KGncImportOptionsDlg()
+{
+  Q_D(KGncImportOptionsDlg);
+  delete d;
+}
 
 // enable the combo box for selection if required
 void KGncImportOptionsDlg::slotDecodeOptionChanged(bool isOn)
 {
+  Q_D(KGncImportOptionsDlg);
   if (isOn) {
-    m_widget->comboDecode->setEnabled(true);
-    m_widget->comboDecode->setCurrentItem(0);
+    d->ui->comboDecode->setEnabled(true);
+    d->ui->comboDecode->setCurrentItem(0);
   } else {
-    m_widget->comboDecode->setEnabled(false);
+    d->ui->comboDecode->setEnabled(false);
   }
 }
-void KGncImportOptionsDlg::buildCodecList()
+
+int KGncImportOptionsDlg::investmentOption() const
 {
-  m_localeCodec = QTextCodec::codecForLocale();
-  QList<QByteArray> codecList = QTextCodec::availableCodecs();
-  QList<QByteArray>::ConstIterator itc;
-  for (itc = codecList.constBegin(); itc != codecList.constEnd(); ++itc) {
-    if (*itc == m_localeCodec)
-      m_widget->comboDecode->insertItem(0, QString(*itc));
-    else
-      m_widget->comboDecode->insertItem(9999, QString(*itc));
-  }
-}
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->buttonInvestGroup->checkedId());
+};
+
+bool KGncImportOptionsDlg::quoteOption() const
+{
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->checkFinanceQuote->isChecked());
+};
+
+bool KGncImportOptionsDlg::scheduleOption() const
+{
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->checkSchedules->isChecked());
+};
 
 // return selected codec or 0
 QTextCodec* KGncImportOptionsDlg::decodeOption()
 {
-  if (!m_widget->checkDecode->isChecked()) {
-    return (0);
+  Q_D(const KGncImportOptionsDlg);
+  if (!d->ui->checkDecode->isChecked()) {
+    return nullptr;
   } else {
-    return (QTextCodec::codecForName(m_widget->comboDecode->currentText().toUtf8()));
+    return (QTextCodec::codecForName(d->ui->comboDecode->currentText().toUtf8()));
   }
+}
+
+bool KGncImportOptionsDlg::txNotesOption() const
+{
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->checkTxNotes->isChecked());
+}
+
+bool KGncImportOptionsDlg::generalDebugOption() const
+{
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->checkDebugGeneral->isChecked());
+}
+
+bool KGncImportOptionsDlg::xmlDebugOption() const
+{
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->checkDebugXML->isChecked());
+}
+
+bool KGncImportOptionsDlg::anonymizeOption() const
+{
+  Q_D(const KGncImportOptionsDlg);
+  return (d->ui->checkAnonymize->isChecked());
 }
 
 void KGncImportOptionsDlg::slotHelp()

@@ -2,6 +2,7 @@
                           kselectdatabase.h
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -37,7 +38,7 @@ class KSelectDatabaseDlg : public QDialog
 {
   Q_OBJECT
 public:
-  explicit KSelectDatabaseDlg(int openMode, QUrl openURL = QUrl(), QWidget *parent = 0);
+  explicit KSelectDatabaseDlg(int openMode, QUrl openURL = QUrl(), QWidget *parent = nullptr);
   ~KSelectDatabaseDlg();
 
   /**
@@ -56,7 +57,7 @@ public:
    * Execute the database selection dialog
    * @return - as QDialog::exec()
    */
-  int exec();
+  int exec() override;
 
 public slots:
   void slotDriverSelected(int idx);

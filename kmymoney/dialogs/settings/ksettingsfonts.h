@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,29 +21,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsfontsdecl.h"
+namespace Ui { class KSettingsFonts; }
 
-class KSettingsFontsDecl : public QWidget, public Ui::KSettingsFontsDecl
-{
-public:
-  KSettingsFontsDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsFonts : public KSettingsFontsDecl
+class KSettingsFonts : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsFonts)
 
 public:
-  KSettingsFonts(QWidget* parent = 0);
+  explicit KSettingsFonts(QWidget* parent = nullptr);
   ~KSettingsFonts();
+
+private:
+  Ui::KSettingsFonts *ui;
 };
 #endif
 

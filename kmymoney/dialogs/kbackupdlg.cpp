@@ -6,6 +6,7 @@
     email                : mte@users.sourceforge.net
                              Javier Campos Morales <javi_c@ctv.es>
                              Felix Rodriguez <frodriguez@mail.wesleyan.edu>
+                             (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,42 +34,51 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KGuiItem>
 #include <KLocalizedString>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "ui_kbackupdlg.h"
+
 #include "icons/icons.h"
 
 using namespace Icons;
 
-KBackupDlg::KBackupDlg(QWidget* parent)
-    : kbackupdlgdecl(parent)
+KBackupDlg::KBackupDlg(QWidget* parent) :
+  QDialog(parent),
+  ui(new Ui::KBackupDlg)
 {
+  ui->setupUi(this);
   readConfig();
 
-  KGuiItem chooseButtenItem(i18n("C&hoose..."),
-                            QIcon::fromTheme(g_Icons[Icon::Folder]),
-                            i18n("Select mount point"),
-                            i18n("Use this to browse to the mount point."));
-  KGuiItem::assign(chooseButton, chooseButtenItem);
+  ui->chooseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::Folder]));
 
-  connect(chooseButton, SIGNAL(clicked()), this, SLOT(chooseButtonClicked()));
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(ui->chooseButton, &QAbstractButton::clicked, this, &KBackupDlg::chooseButtonClicked);
 }
 
 KBackupDlg::~KBackupDlg()
 {
   writeConfig();
+  delete ui;
+}
+
+QString KBackupDlg::mountPoint() const
+{
+  return ui->txtMountPoint->text();
+}
+
+bool KBackupDlg::mountCheckBox() const
+{
+  return ui->mountCheckBox;
 }
 
 void KBackupDlg::chooseButtonClicked()
 {
-  QUrl newDir = QFileDialog::getExistingDirectoryUrl(this, QString(), QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)));
+  auto newDir = QFileDialog::getExistingDirectoryUrl(this, QString(), QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)));
   if (!newDir.path().isEmpty())
-    txtMountPoint->setText(newDir.path());
+    ui->txtMountPoint->setText(newDir.path());
 }
 
 void KBackupDlg::readConfig()
@@ -81,15 +91,15 @@ void KBackupDlg::readConfig()
 #endif
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
-  mountCheckBox->setChecked(grp.readEntry("KBackupDlg_mountDevice", false));
-  txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", backupDefaultLocation));
+  ui->mountCheckBox->setChecked(grp.readEntry("KBackupDlg_mountDevice", false));
+  ui->txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", backupDefaultLocation));
 }
 
 void KBackupDlg::writeConfig()
 {
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
-  grp.writeEntry("KBackupDlg_mountDevice", mountCheckBox->isChecked());
-  grp.writeEntry("KBackupDlg_BackupMountPoint", txtMountPoint->text());
+  grp.writeEntry("KBackupDlg_mountDevice", ui->mountCheckBox->isChecked());
+  grp.writeEntry("KBackupDlg_BackupMountPoint", ui->txtMountPoint->text());
   config->sync();
 }

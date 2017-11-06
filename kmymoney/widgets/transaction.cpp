@@ -56,6 +56,9 @@
 #include "investtransactioneditor.h"
 #include "kmymoneyutils.h"
 #include "kmymoneymvccombo.h"
+#ifndef KMM_DESIGNER
+#include "stdtransactioneditor.h"
+#endif
 
 #include "kmymoneyglobalsettings.h"
 

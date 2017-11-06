@@ -3,6 +3,7 @@
                              --------------------
     copyright            : (C) 2010 by Bernd Gonsior
     email                : bernd.gonsior@googlemail.com
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,15 +33,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_ksettingsreports.h"
+
 #include "kmymoneyglobalsettings.h"
 
-class KSettingsReports::Private
+class KSettingsReportsPrivate
 {
+  Q_DISABLE_COPY(KSettingsReportsPrivate)
+
 public:
+  KSettingsReportsPrivate() :
+    ui(new Ui::KSettingsReports),
+    m_fileKLineEdit(nullptr)
+  {
+  }
 
-  Private() : m_fileKLineEdit(0) {}
+  ~KSettingsReportsPrivate()
+  {
+    delete ui;
+  }
 
-  ~Private() {}
 
   /**
    * Collector for both signals
@@ -101,6 +113,7 @@ public:
     KMessageBox::sorry(0, out);
   }
 
+  Ui::KSettingsReports *ui;
   /**
    * Old value of css file to avoid warnings
    * when a signal is emitted
@@ -116,27 +129,30 @@ public:
 };
 
 KSettingsReports::KSettingsReports(QWidget* parent) :
-    KSettingsReportsDecl(parent),
-    d(new Private)
+  QWidget(parent),
+  d_ptr(new KSettingsReportsPrivate)
 {
+  Q_D(KSettingsReports);
+  d->ui->setupUi(this);
 
   // keep initial (default) css file in mind
   d->m_cssFileOld = KMyMoneyGlobalSettings::cssFileDefault();
 
   // set default css file in ksettingsreports dialog
-  kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneyGlobalSettings::cssFileDefault()));
+  d->ui->kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneyGlobalSettings::cssFileDefault()));
 
-  d->m_fileKLineEdit = kcfg_CssFileDefault->lineEdit();
+  d->m_fileKLineEdit = d->ui->kcfg_CssFileDefault->lineEdit();
 
-  connect(kcfg_CssFileDefault, SIGNAL(urlSelected(QUrl)),
-          this, SLOT(slotCssUrlSelected(QUrl)));
+  connect(d->ui->kcfg_CssFileDefault, &KUrlRequester::urlSelected,
+          this, &KSettingsReports::slotCssUrlSelected);
 
-  connect(d->m_fileKLineEdit, SIGNAL(editingFinished()),
-          this, SLOT(slotEditingFinished()));
+  connect(d->m_fileKLineEdit, &QLineEdit::editingFinished,
+          this, &KSettingsReports::slotEditingFinished);
 }
 
 KSettingsReports::~KSettingsReports()
 {
+  Q_D(KSettingsReports);
   delete d;
 }
 
@@ -152,7 +168,8 @@ KSettingsReports::~KSettingsReports()
  */
 void KSettingsReports::slotCssUrlSelected(const QUrl &cssUrl)
 {
-  QString css = cssUrl.toLocalFile();
+  Q_D(KSettingsReports);
+  auto css = cssUrl.toLocalFile();
   d->checkCssFile(css);
 }
 
@@ -167,6 +184,7 @@ void KSettingsReports::slotCssUrlSelected(const QUrl &cssUrl)
  */
 void KSettingsReports::slotEditingFinished()
 {
-  QString txt = d->m_fileKLineEdit->text();
+  Q_D(KSettingsReports);
+  auto txt = d->m_fileKLineEdit->text();
   d->checkCssFile(txt);
 }

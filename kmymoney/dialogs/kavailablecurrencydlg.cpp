@@ -45,12 +45,12 @@ KAvailableCurrencyDlg::KAvailableCurrencyDlg(QWidget *parent) : ui(new Ui::KAvai
   m_searchWidget = new KTreeWidgetSearchLineWidget(this, ui->m_currencyList);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   ui->verticalLayout->insertWidget(0, m_searchWidget);
-  connect(ui->m_currencyList, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+  connect(ui->m_currencyList, &QTreeWidget::itemSelectionChanged, this, &KAvailableCurrencyDlg::slotItemSelectionChanged);
 
   slotLoadCurrencies();
 
   //resize the column widths
-  for (int i = 0; i < 3; ++i)
+  for (auto i = 0; i < 3; ++i)
     ui->m_currencyList->resizeColumnToContents(i);
 
   m_searchWidget->setFocus();

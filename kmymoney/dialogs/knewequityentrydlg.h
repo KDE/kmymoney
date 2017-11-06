@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,12 +21,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWEQUITYENTRY_H
-#define KNEWEQUITYENTRY_H
+#ifndef KNEWEQUITYENTRYDLG_H
+#define KNEWEQUITYENTRYDLG_H
 
 #include <QDialog>
-
-#include "ui_knewequityentrydecl.h"
 
 /**
   *
@@ -35,43 +34,31 @@
   *
   */
 
-class kNewEquityEntryDecl : public QDialog, public Ui::kNewEquityEntryDecl
-{
-public:
-  kNewEquityEntryDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class KNewEquityEntryDlg : public kNewEquityEntryDecl
+class KNewEquityEntryDlgPrivate;
+class KNewEquityEntryDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KNewEquityEntryDlg)
+
 public:
-  KNewEquityEntryDlg(QWidget *parent = 0);
+  explicit KNewEquityEntryDlg(QWidget *parent = nullptr);
   virtual ~KNewEquityEntryDlg();
 
   void setSymbolName(const QString& str);
-  QString symbolName() const  {
-    return m_strSymbolName;
-  }
+  QString symbolName() const;
 
   void setName(const QString& str);
-  QString name() const  {
-    return m_strName;
-  }
+  QString name() const;
 
-  int fraction() const {
-    return m_fraction;
-  }
+  int fraction() const;
 
 protected slots:
   void onOKClicked();
   void slotDataChanged();
 
 private:
-  QString m_strSymbolName;
-  QString m_strName;
-  int     m_fraction;
+  KNewEquityEntryDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KNewEquityEntryDlg)
 };
 
 #endif

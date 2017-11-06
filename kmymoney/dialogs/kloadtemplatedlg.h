@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2008 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,36 +21,37 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kloadtemplatedlgdecl.h"
-#include <QList>
+template <typename T> class QList;
+
+namespace Ui { class KLoadTemplateDlg; }
 
 class MyMoneyTemplate;
-class KLoadTemplateDlgDecl : public QDialog, public Ui::KLoadTemplateDlgDecl
-{
-public:
-  KLoadTemplateDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
 /// This dialog lets the user load more account templates
-class KLoadTemplateDlg : public KLoadTemplateDlgDecl
+class KLoadTemplateDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KLoadTemplateDlg)
 
 public:
-  KLoadTemplateDlg(QWidget *parent = 0);
+  explicit KLoadTemplateDlg(QWidget *parent = nullptr);
+  ~KLoadTemplateDlg();
 
   QList<MyMoneyTemplate> templates() const;
 
 private slots:
   void slotHelp();
+
+private:
+  Ui::KLoadTemplateDlg *ui;
 };
 
 #endif

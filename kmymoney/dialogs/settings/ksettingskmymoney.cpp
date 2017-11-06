@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2016 Christian Dávid <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +19,10 @@
 
 #include "ksettingskmymoney.h"
 
+#include <QPushButton>
+
 #include <KPluginSelector>
+#include <KLocalizedString>
 
 #include "ksettingsgeneral.h"
 #include "ksettingsregister.h"
@@ -41,18 +45,18 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
     : KConfigDialog(parent, name, config)
 {
   // create the pages ...
-  KSettingsGeneral* generalPage = new KSettingsGeneral();
-  KSettingsRegister* registerPage = new KSettingsRegister();
-  KSettingsHome* homePage = new KSettingsHome();
-  KSettingsSchedules* schedulesPage = new KSettingsSchedules();
-  KSettingsGpg* encryptionPage = new KSettingsGpg();
-  KSettingsColors* colorsPage = new KSettingsColors();
-  KSettingsFonts* fontsPage = new KSettingsFonts();
-  KSettingsIcons* iconsPage = new KSettingsIcons();
-  KSettingsOnlineQuotes* onlineQuotesPage = new KSettingsOnlineQuotes();
-  KSettingsForecast* forecastPage = new KSettingsForecast();
-  KPluginSelector* pluginsPage = KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget();
-  KSettingsReports* reportsPage = new KSettingsReports();
+  const auto generalPage = new KSettingsGeneral();
+  const auto registerPage = new KSettingsRegister();
+  const auto homePage = new KSettingsHome();
+  const auto schedulesPage = new KSettingsSchedules();
+  const auto encryptionPage = new KSettingsGpg();
+  const auto colorsPage = new KSettingsColors();
+  const auto fontsPage = new KSettingsFonts();
+  const auto iconsPage = new KSettingsIcons();
+  const auto onlineQuotesPage = new KSettingsOnlineQuotes();
+  const auto forecastPage = new KSettingsForecast();
+  const auto pluginsPage = KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget();
+  const auto reportsPage = new KSettingsReports();
 
   addPage(generalPage, i18nc("General settings", "General"), g_Icons[Icon::SystemRun]);
   addPage(homePage, i18n("Home"), g_Icons[Icon::ViewHome]);
@@ -69,11 +73,11 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
 
   setHelp("details.settings", "kmymoney");
 
-  QAbstractButton* defaultButton = button(QDialogButtonBox::RestoreDefaults);
+  auto defaultButton = button(QDialogButtonBox::RestoreDefaults);
   connect(this, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
   connect(this, &KConfigDialog::rejected, iconsPage, &KSettingsIcons::slotResetTheme);
   connect(this, &KConfigDialog::settingsChanged, generalPage, &KSettingsGeneral::slotUpdateEquitiesVisibility);
 
   connect(this, &KConfigDialog::accepted, pluginsPage, &KPluginSelector::save);
-  connect(defaultButton, &QAbstractButton::clicked, pluginsPage, &KPluginSelector::defaults);
+  connect(defaultButton, &QPushButton::clicked, pluginsPage, &KPluginSelector::defaults);
 }

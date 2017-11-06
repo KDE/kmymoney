@@ -7,6 +7,7 @@
                              Javier Campos Morales <javi_c@users.sourceforge.net>
                              Felix Rodriguez <frodriguez@users.sourceforge.net>
                              John C <thetacoturtle@users.sourceforge.net>
+                             (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -35,27 +36,24 @@
 /**
   *@author Michael Edwardes
   */
+
+class KChooseImportExportDlgPrivate;
 class KChooseImportExportDlg : public QDialog
 {
   Q_OBJECT
-private:
-  void readConfig();
-  void writeConfig();
-  QString m_lastType;
+  Q_DISABLE_COPY(KChooseImportExportDlg)
+
+public:
+  explicit KChooseImportExportDlg(int type, QWidget *parent = nullptr);
+  ~KChooseImportExportDlg();
+  QString importExportType() const;
 
 protected slots:
   void slotTypeActivated(const QString& text);
 
-public:
-  explicit KChooseImportExportDlg(int type, QWidget *parent = 0);
-  ~KChooseImportExportDlg();
-  QString importExportType();
-
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  KChooseImportExportDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KChooseImportExportDlg)
 };
 
 #endif

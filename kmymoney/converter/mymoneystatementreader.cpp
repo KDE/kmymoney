@@ -55,6 +55,7 @@
 #include "mymoneystatement.h"
 #include "kmymoneyglobalsettings.h"
 #include "transactioneditor.h"
+#include "stdtransactioneditor.h"
 #include "kmymoneyedit.h"
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
@@ -65,6 +66,7 @@
 #include "models.h"
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
+#include "dialogenums.h"
 
 using namespace eMyMoney;
 
@@ -1343,17 +1345,17 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
                 "create a new account by pressing the <b>Create</b> button.");
   }
 
-  KMyMoneyUtils::categoryTypeE type;
+  eDialogs::Category type;
   if (account.accountType() == Account::Checkings) {
-    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::checking);
+    type = eDialogs::Category::checking;
   } else if (account.accountType() == Account::Savings) {
-    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::savings);
+    type = eDialogs::Category::savings;
   } else if (account.accountType() == Account::Investment) {
-    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::investment);
+    type = eDialogs::Category::investment;
   } else if (account.accountType() == Account::CreditCard) {
-    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::creditCard);
+    type = eDialogs::Category::creditCard;
   } else {
-    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::asset | KMyMoneyUtils::liability);
+    type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);
   }
 
   QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney);
@@ -1362,7 +1364,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   accountSelect->setAccount(account, accountId);
   accountSelect->setMode(false);
   accountSelect->showAbortButton(true);
-  accountSelect->m_qifEntry->hide();
+  accountSelect->hideQifEntry();
   QString accname;
   bool done = false;
   while (!done) {
@@ -1456,7 +1458,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
           // for now this only works with regular transactions and not
           // for investment transactions. As of this, we don't have
           // scheduled investment transactions anyway.
-          StdTransactionEditor* se = dynamic_cast<StdTransactionEditor*>(editor.data());
+          auto se = dynamic_cast<StdTransactionEditor*>(editor.data());
           if (se) {
             // the following call will update the amount field in the
             // editor and also adjust a possible VAT assignment. Make

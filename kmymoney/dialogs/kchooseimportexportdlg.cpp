@@ -7,6 +7,7 @@
                              Javier Campos Morales <javi_c@users.sourceforge.net>
                              Felix Rodriguez <frodriguez@users.sourceforge.net>
                              John C <thetacoturtle@users.sourceforge.net>
+                             (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -36,80 +37,97 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kchooseimportexportdlgdecl.h"
+#include "ui_kchooseimportexportdlg.h"
 
-struct KChooseImportExportDlg::Private {
-  Ui::KChooseImportExportDlgDecl ui;
+class KChooseImportExportDlgPrivate
+{
+  Q_DISABLE_COPY(KChooseImportExportDlgPrivate)
+
+public:
+  KChooseImportExportDlgPrivate() :
+    ui(new Ui::KChooseImportExportDlg)
+  {
+  }
+
+  ~KChooseImportExportDlgPrivate()
+  {
+    delete ui;
+  }
+
+  void readConfig()
+  {
+    auto config = KSharedConfig::openConfig();
+    auto grp = config->group("Last Use Settings");
+    m_lastType = grp.readEntry("KChooseImportExportDlg_LastType");
+  }
+
+  void writeConfig() const
+  {
+    auto config = KSharedConfig::openConfig();
+    auto grp = config->group("Last Use Settings");
+    grp.writeEntry("KChooseImportExportDlg_LastType", ui->typeCombo->currentText());
+    config->sync();
+  }
+
+  Ui::KChooseImportExportDlg *ui;
+  QString m_lastType;
 };
 
-KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent)
-    : QDialog(parent), d(new Private)
-{
-  d->ui.setupUi(this);
 
-  QString filename;
+KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent) :
+  QDialog(parent),
+  d_ptr(new KChooseImportExportDlgPrivate)
+{
+  Q_D(KChooseImportExportDlg);
+  d->ui->setupUi(this);
   setModal(true);
 
   if (type == 0) { // import
-    d->ui.topLabel->setText(i18n("Please choose the type of import you wish to perform.  A simple explanation\n"
+    d->ui->topLabel->setText(i18n("Please choose the type of import you wish to perform.  A simple explanation\n"
                                  "of the import type is available at the bottom of the screen and is updated when\n"
                                  "you select an item from the choice box."
                                  "\n\nOnce you have chosen an import type please press the OK button."));
-    d->ui.promptLabel->setText(i18n("Choose import type:"));
+    d->ui->promptLabel->setText(i18n("Choose import type:"));
     setWindowTitle(i18n("Choose Import Type Dialog"));
   } else { // export
-    d->ui.topLabel->setText(i18n("Please choose the type of export you wish to perform.  A simple explanation\n"
+    d->ui->topLabel->setText(i18n("Please choose the type of export you wish to perform.  A simple explanation\n"
                                  "of the export type is available at the bottom of the screen and is updated when\n"
                                  "you select an item from the choice box."
                                  "\n\nOnce you have chosen an export type please press the OK button."));
-    d->ui.promptLabel->setText(i18n("Choose export type:"));
+    d->ui->promptLabel->setText(i18n("Choose export type:"));
     setWindowTitle(i18n("Choose Export Type Dialog"));
   }
 
-  readConfig();
-  slotTypeActivated(m_lastType);
-  d->ui.typeCombo->setCurrentItem(((m_lastType == "QIF") ? i18n("QIF") : i18n("CSV")), false);
+  d->readConfig();
+  slotTypeActivated(d->m_lastType);
+  d->ui->typeCombo->setCurrentItem(((d->m_lastType == "QIF") ? i18n("QIF") : i18n("CSV")), false);
 
-  connect(d->ui.typeCombo, SIGNAL(activated(QString)), this, SLOT(slotTypeActivated(QString)));
-  connect(d->ui.buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(d->ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(d->ui->typeCombo, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::activated), this, &KChooseImportExportDlg::slotTypeActivated);
 }
 
 KChooseImportExportDlg::~KChooseImportExportDlg()
 {
-  writeConfig();
+  Q_D(KChooseImportExportDlg);
+  d->writeConfig();
   delete d;
 }
 
 void KChooseImportExportDlg::slotTypeActivated(const QString& text)
 {
+  Q_D(KChooseImportExportDlg);
   if (text == "QIF") {
-    d->ui.descriptionLabel->setText(i18n("QIF files are created by the popular accounting program Quicken.\n"
+    d->ui->descriptionLabel->setText(i18n("QIF files are created by the popular accounting program Quicken.\n"
                                          "Another dialog will appear, if you choose this type, asking for further\n"
                                          "information relevant to the Quicken format."));
   } else {
-    d->ui.descriptionLabel->setText(i18n("The CSV type uses a comma delimited text file that can be used by\n"
+    d->ui->descriptionLabel->setText(i18n("The CSV type uses a comma delimited text file that can be used by\n"
                                          "most popular spreadsheet programs available for Linux and other operating\n"
                                          "systems."));
   }
 }
 
-QString KChooseImportExportDlg::importExportType()
+QString KChooseImportExportDlg::importExportType() const
 {
-  return d->ui.typeCombo->currentText();
-}
-
-void KChooseImportExportDlg::readConfig()
-{
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup grp = config->group("Last Use Settings");
-  m_lastType = grp.readEntry("KChooseImportExportDlg_LastType");
-}
-
-void KChooseImportExportDlg::writeConfig()
-{
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup grp = config->group("Last Use Settings");
-  grp.writeEntry("KChooseImportExportDlg_LastType", d->ui.typeCombo->currentText());
-  config->sync();
+  Q_D(const KChooseImportExportDlg);
+  return d->ui->typeCombo->currentText();
 }

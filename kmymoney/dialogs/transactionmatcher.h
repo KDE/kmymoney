@@ -4,6 +4,7 @@
     begin                : Tue Jul 08 2008
     copyright            : (C) 2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,14 +19,20 @@
 #ifndef TRANSACTIONMATCHER_H
 #define TRANSACTIONMATCHER_H
 
-#include "mymoneyaccount.h"
+#include <qglobal.h>
 
+class MyMoneySplit;
 class MyMoneyTransaction;
+class MyMoneyAccount;
 
+class TransactionMatcherPrivate;
 class TransactionMatcher
 {
 public:
-  TransactionMatcher(const MyMoneyAccount& acc);
+  Q_DISABLE_COPY(TransactionMatcher)
+
+  explicit TransactionMatcher(const MyMoneyAccount& acc);
+  ~TransactionMatcher();
 
   /**
    * This method matches the manual entered transaction @p tm with the imported
@@ -94,8 +101,8 @@ public:
   void accept(const MyMoneyTransaction& t, const MyMoneySplit& s);
 
 private:
-  MyMoneyAccount            m_account;
+  TransactionMatcherPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(TransactionMatcher)
 };
-
 
 #endif

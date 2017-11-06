@@ -20,28 +20,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsiconsdecl.h"
-
-class KSettingsIconsDecl : public QWidget, public Ui::KSettingsIconsDecl
-{
-public:
-  KSettingsIconsDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsIcons : public KSettingsIconsDecl
+class KSettingsIconsPrivate;
+class KSettingsIcons : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsIcons)
 
 public:
-  KSettingsIcons(QWidget* parent = 0);
+  explicit KSettingsIcons(QWidget* parent = nullptr);
   ~KSettingsIcons();
 
 public slots:
@@ -54,7 +48,8 @@ protected slots:
 protected:
   void loadList();
 private:
-  QMap<int, QString> m_themesMap;
+  KSettingsIconsPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsIcons)
 };
 #endif
 

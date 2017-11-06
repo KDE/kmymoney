@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes
     email                : mte@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,26 +29,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyinstitution.h"
-
-#include "ui_knewbankdlgdecl.h"
-
-
-class KNewBankDlgDecl : public QDialog, public Ui::KNewBankDlgDecl
-{
-public:
-  explicit KNewBankDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
+class MyMoneyInstitution;
 
 /// This dialog lets the user create or edit an institution
-class KNewBankDlg : public KNewBankDlgDecl
+class KNewBankDlgPrivate;
+class KNewBankDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KNewBankDlg)
 
 public:
-  explicit KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = 0);
+  explicit KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = nullptr);
   ~KNewBankDlg();
   const MyMoneyInstitution& institution();
 
@@ -56,8 +48,8 @@ protected slots:
   void institutionNameChanged(const QString &);
 
 private:
-  MyMoneyInstitution m_institution;
-
+  KNewBankDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KNewBankDlg)
 };
 
 #endif

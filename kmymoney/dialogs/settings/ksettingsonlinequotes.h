@@ -4,6 +4,7 @@
     begin                : Thu Dec 30 2004
     copyright            : (C) 2004 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,7 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,24 +30,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsonlinequotesdecl.h"
-#include "kmymoney/converter/webpricequote.h"
+class QListWidgetItem;
 
-
-class KSettingsOnlineQuotesDecl : public QWidget, public Ui::KSettingsOnlineQuotesDecl
-{
-public:
-  KSettingsOnlineQuotesDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsOnlineQuotes : public KSettingsOnlineQuotesDecl
+class KSettingsOnlineQuotesPrivate;
+class KSettingsOnlineQuotes : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsOnlineQuotes)
+
 public:
-  KSettingsOnlineQuotes(QWidget* parent = 0);
-  virtual ~KSettingsOnlineQuotes() {}
+  explicit KSettingsOnlineQuotes(QWidget* parent = nullptr);
+  ~KSettingsOnlineQuotes();
 
   void writeConfig() {}
   void readConfig() {}
@@ -57,6 +51,9 @@ protected slots:
   void slotUpdateEntry();
   void slotLoadWidgets();
   void slotEntryChanged();
+  void slotEntryChanged(int idx);
+  void slotEntryChanged(const QString& str);
+  void slotEntryChanged(bool b);
   void slotNewEntry();
   void slotDeleteEntry();
   void slotEntryRenamed(QListWidgetItem* item);
@@ -66,9 +63,8 @@ protected:
   void loadList(const bool updateResetList = false);
 
 private:
-  QList<WebPriceQuoteSource>  m_resetList;
-  WebPriceQuoteSource         m_currentItem;
-  bool                        m_quoteInEditing;
+  KSettingsOnlineQuotesPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsOnlineQuotes)
 };
 
 #endif

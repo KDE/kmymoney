@@ -4,6 +4,7 @@
     begin                : Mon Sep  3 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,8 +30,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_keditscheduledlgdecl.h"
-
 class MyMoneySchedule;
 class MyMoneyTransaction;
 class TransactionEditor;
@@ -38,25 +37,15 @@ class TransactionEditor;
 /**
   * @author Thomas Baumgart
   */
-class KEditScheduleDlgDecl : public QDialog, public Ui::KEditScheduleDlgDecl
-{
-public:
-  explicit KEditScheduleDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-class KEditScheduleDlg : public KEditScheduleDlgDecl
+
+class KEditScheduleDlgPrivate;
+class KEditScheduleDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KEditScheduleDlg)
+  
 public:
-  /**
-    * Standard QWidget constructor.
-    **/
-  explicit KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent = 0);
-
-  /**
-    * Standard destructor.
-    **/
+  explicit KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent = nullptr);
   ~KEditScheduleDlg();
 
   TransactionEditor* startEdit();
@@ -66,10 +55,9 @@ public:
     *
     * @return MyMoneySchedule The schedule details.
     **/
-  const MyMoneySchedule& schedule() const;
+  const MyMoneySchedule& schedule();
 
 protected:
-  MyMoneyTransaction transaction() const;
   /**
     * This method adjusts @a _date according to the rules specified by
     * the schedule's weekend option.
@@ -77,10 +65,10 @@ protected:
   QDate adjustDate(const QDate& _date) const;
 
   /// Overridden for internal reasons. No API changes.
-  bool focusNextPrevChild(bool next);
+  bool focusNextPrevChild(bool next) override;
 
   /// Overridden for internal reasons. No API changes.
-  void resizeEvent(QResizeEvent* ev);
+  void resizeEvent(QResizeEvent* ev) override;
 
 private slots:
   void slotSetupSize();
@@ -94,19 +82,11 @@ private slots:
   void slotFilterPaymentType(int index);
 
   /// Overridden for internal reasons. No API changes.
-  void accept();
+  void accept() override;
 
 private:
-  /**
-    * Helper method to recalculate and update Transactions Remaining
-    * when other values are changed
-    */
-  void updateTransactionsRemaining();
-
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  KEditScheduleDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KEditScheduleDlg)  
 };
 
 #endif

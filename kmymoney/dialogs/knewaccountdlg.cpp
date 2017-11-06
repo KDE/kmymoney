@@ -34,7 +34,6 @@
 
 #include <KMessageBox>
 #include <KComboBox>
-#include <KLed>
 #include <kguiutils.h>
 #include <KLocalizedString>
 
@@ -47,16 +46,14 @@
 #include "kmymoneydateinput.h"
 #include <mymoneyexception.h>
 #include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneycurrencyselector.h"
 #include "knewbankdlg.h"
-#include "kmymoneyutils.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "hierarchyfilterproxymodel.h"
-
-namespace Ui { class KNewAccountDlg; }
 
 using namespace eMyMoney;
 
@@ -605,7 +602,7 @@ void KNewAccountDlg::setOpeningDateShown(bool shown)
 void KNewAccountDlg::okClicked()
 {
   Q_D(KNewAccountDlg);
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
 
   QString accountNameText = d->ui->accountNameEdit->text();
   if (accountNameText.isEmpty()) {

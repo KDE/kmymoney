@@ -4,6 +4,7 @@
     begin                : Sun Oct  9 2005
     copyright            : (C) 2005 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,31 +22,31 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kmymoneyfileinfodlgdecl.h"
+namespace Ui { class KMyMoneyFileInfoDlg; }
 
 /**
   * @author Thomas Baumgart
   */
 
-class KMyMoneyFileInfoDlgDecl : public QDialog, public Ui::KMyMoneyFileInfoDlgDecl
-{
-public:
-  KMyMoneyFileInfoDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-class KMyMoneyFileInfoDlg : public KMyMoneyFileInfoDlgDecl
+class KMyMoneyFileInfoDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyFileInfoDlg)
+
 public:
-  KMyMoneyFileInfoDlg(QWidget *parent = 0);
-  virtual ~KMyMoneyFileInfoDlg();
+  explicit KMyMoneyFileInfoDlg(QWidget *parent = nullptr);
+  ~KMyMoneyFileInfoDlg();
+
+private:
+  Ui::KMyMoneyFileInfoDlg *ui;
 };
 
 #endif

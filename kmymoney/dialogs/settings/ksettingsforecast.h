@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2007 by Alvaro Soliverez
     email                : asoliverez@gmail.com
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,31 +21,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsforecastdecl.h"
+namespace Ui { class KSettingsForecast; }
 
-class KSettingsForecastDecl : public QWidget, public Ui::KSettingsForecastDecl
-{
-public:
-  KSettingsForecastDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-
-class KSettingsForecast : public KSettingsForecastDecl
+class KSettingsForecast : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsForecast)
 
 public:
-  KSettingsForecast(QWidget* parent = 0);
+  explicit KSettingsForecast(QWidget* parent = nullptr);
   ~KSettingsForecast();
+
+private:
+  Ui::KSettingsForecast       *ui;
 };
 #endif
 

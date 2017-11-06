@@ -2,6 +2,7 @@
                           ktagreassigndlg.cpp
                              -------------------
     copyright            : (C) 2012 by Alessandro Russo <axela74@yahoo.it>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -20,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QCheckBox>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -28,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ktagreassigndlgdecl.h"
+namespace Ui { class KTagReassignDlg; }
 
 /**
  *  Implementation of the dialog that lets the user select a tag in order
@@ -36,22 +37,14 @@
  */
 
 class MyMoneyTag;
-class KTagReassignDlgDecl : public QDialog, public Ui::KTagReassignDlgDecl
-{
-public:
-  KTagReassignDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
 
-class KTagReassignDlg : public KTagReassignDlgDecl
+class KTagReassignDlg : public QDialog
 {
   Q_OBJECT
-public:
-  /** Default constructor */
-  KTagReassignDlg(QWidget* parent = 0);
+  Q_DISABLE_COPY(KTagReassignDlg)
 
-  /** Destructor */
+public:
+  explicit KTagReassignDlg(QWidget* parent = nullptr);
   ~KTagReassignDlg();
 
   /**
@@ -66,8 +59,10 @@ public:
   QString show(const QList<MyMoneyTag>& tagslist);
 
 protected:
-  void accept();
+  void accept() override;
 
+private:
+  Ui::KTagReassignDlg *ui;
 };
 
 #endif // KTAGREASSIGNDLG_H

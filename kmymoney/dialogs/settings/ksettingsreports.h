@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2010 by Bernd Gonsior
     email                : bernd.gonsior@googlemail.com
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,22 +29,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsreportsdecl.h"
-
-class KSettingsReportsDecl : public QWidget, public Ui::KSettingsReportsDecl
-{
-public:
-  KSettingsReportsDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsReports : public KSettingsReportsDecl
+class KSettingsReportsPrivate;
+class KSettingsReports : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsReports)
 
 public:
-  KSettingsReports(QWidget* parent = 0);
+  explicit KSettingsReports(QWidget* parent = nullptr);
   ~KSettingsReports();
 
 protected slots:
@@ -51,10 +44,7 @@ protected slots:
   void slotEditingFinished();
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
-
+  KSettingsReportsPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsReports)
 };
 #endif

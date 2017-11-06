@@ -45,6 +45,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
+#include "dialogenums.h"
 
 using namespace Icons;
 using namespace eMyMoney;
@@ -248,21 +249,21 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
       || m_typeList.contains(Account::MoneyMarket)
       || m_typeList.contains(Account::Asset)
       || m_typeList.contains(Account::Currency))
-    typeMask |= KMyMoneyUtils::asset;
+    typeMask |= eDialogs::Category::asset;
 
   if (m_typeList.contains(Account::CreditCard)
       || m_typeList.contains(Account::Loan)
       || m_typeList.contains(Account::Liability))
-    typeMask |= KMyMoneyUtils::liability;
+    typeMask |= eDialogs::Category::liability;
 
   if (m_typeList.contains(Account::Income))
-    typeMask |= KMyMoneyUtils::income;
+    typeMask |= eDialogs::Category::income;
 
   if (m_typeList.contains(Account::Expense))
-    typeMask |= KMyMoneyUtils::expense;
+    typeMask |= eDialogs::Category::expense;
 
   if (m_typeList.contains(Account::Equity))
-    typeMask |= KMyMoneyUtils::equity;
+    typeMask |= eDialogs::Category::equity;
 
   selector->clear();
   QTreeWidget* lv = selector->listView();
@@ -284,9 +285,9 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   }
   m_favorites->setIcon(0, QIcon(accountPixmap));
 
-  for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
+  for (auto mask = 0x01; mask != eDialogs::Category::last; mask <<= 1) {
     QTreeWidgetItem* item = 0;
-    if ((typeMask & mask & KMyMoneyUtils::asset) != 0) {
+    if ((typeMask & mask & eDialogs::Category::asset) != 0) {
       ++m_count;
       key = QString("B%1").arg(i18n("Asset"));
       item = selector->newItem(i18n("Asset accounts"), key);
@@ -294,7 +295,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
       list = m_file->asset().accountList();
     }
 
-    if ((typeMask & mask & KMyMoneyUtils::liability) != 0) {
+    if ((typeMask & mask & eDialogs::Category::liability) != 0) {
       ++m_count;
       key = QString("C%1").arg(i18n("Liability"));
       item = selector->newItem(i18n("Liability accounts"), key);
@@ -302,7 +303,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
       list = m_file->liability().accountList();
     }
 
-    if ((typeMask & mask & KMyMoneyUtils::income) != 0) {
+    if ((typeMask & mask & eDialogs::Category::income) != 0) {
       ++m_count;
       key = QString("D%1").arg(i18n("Income"));
       item = selector->newItem(i18n("Income categories"), key);
@@ -313,7 +314,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
       }
     }
 
-    if ((typeMask & mask & KMyMoneyUtils::expense) != 0) {
+    if ((typeMask & mask & eDialogs::Category::expense) != 0) {
       ++m_count;
       key = QString("E%1").arg(i18n("Expense"));
       item = selector->newItem(i18n("Expense categories"), key);
@@ -324,7 +325,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
       }
     }
 
-    if ((typeMask & mask & KMyMoneyUtils::equity) != 0) {
+    if ((typeMask & mask & eDialogs::Category::equity) != 0) {
       ++m_count;
       key = QString("F%1").arg(i18n("Equity"));
       item = selector->newItem(i18n("Equity accounts"), key);

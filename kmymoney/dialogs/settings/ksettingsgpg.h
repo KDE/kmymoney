@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,45 +21,38 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class QShowEvent;
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsgpgdecl.h"
+class QShowEvent;
 
-class KSettingsGpgDecl : public QWidget, public Ui::KSettingsGpgDecl
-{
-public:
-  KSettingsGpgDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsGpg : public KSettingsGpgDecl
+class KSettingsGpgPrivate;
+class KSettingsGpg : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsGpg)
 
 public:
-  KSettingsGpg(QWidget* parent = 0);
+  explicit KSettingsGpg(QWidget* parent = nullptr);
   ~KSettingsGpg();
 
 public slots:
-  void showEvent(QShowEvent * event);
+  void showEvent(QShowEvent * event) override;
 
 protected slots:
   void slotStatusChanged(bool state);
   void slotIdChanged();
+  void slotIdChanged(int idx);
   void slotKeyListChanged();
 
 private:
-  int        m_checkCount;
-  bool       m_needCheckList;
-  bool       m_listOk;
+  KSettingsGpgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsGpg)
 };
 #endif
 

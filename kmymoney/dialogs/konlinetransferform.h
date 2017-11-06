@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,10 +35,7 @@
 class IonlineJobEdit;
 class kMandatoryFieldGroup;
 
-namespace Ui
-{
-class kOnlineTransferFormDecl;
-}
+namespace Ui { class kOnlineTransferForm; }
 
 /**
  * @brief The kOnlineTransferForm class
@@ -51,7 +49,7 @@ class kOnlineTransferForm : public QDialog
   Q_OBJECT
 
 public:
-  kOnlineTransferForm(QWidget *parent = 0);
+  kOnlineTransferForm(QWidget *parent = nullptr);
   virtual ~kOnlineTransferForm();
 
 signals:
@@ -118,7 +116,7 @@ private:
    */
   onlineJob activeOnlineJob() const;
 
-  Ui::kOnlineTransferFormDecl* ui;
+  Ui::kOnlineTransferForm* ui;
   QList<IonlineJobEdit*> m_onlineJobEditWidgets;
   kMandatoryFieldGroup* m_requiredFields;
   QAction* m_duplicateJob;

@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2008 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,23 +26,22 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KEditListWidget>
-
-class KLed;
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
 /**
   * @author Thomas Baumgart
   */
+class KGpgKeySelectionDlgPrivate;
 class KGpgKeySelectionDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KGpgKeySelectionDlg)
+
 public:
 
-  explicit KGpgKeySelectionDlg(QWidget* parent = 0);
-  virtual ~KGpgKeySelectionDlg() {}
+  explicit KGpgKeySelectionDlg(QWidget* parent = nullptr);
+  ~KGpgKeySelectionDlg();
 
   /**
    * preset the key list with the given key ids in @a list
@@ -51,20 +51,15 @@ public:
   /**
    * Returns the list of keys currently listed in the KEditListWidget
    */
-  const QStringList keys() const {
-    return m_listWidget->items();
-  }
+  QStringList keys() const;
 
 protected slots:
   void slotIdChanged();
   void slotKeyListChanged();
 
 private:
-  KEditListWidget*   m_listWidget;
-  KLed*           m_keyLed;
-  bool            m_needCheckList;
-  bool            m_listOk;
-  int             m_checkCount;
+  KGpgKeySelectionDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KGpgKeySelectionDlg)
 };
 
 #endif

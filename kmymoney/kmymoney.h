@@ -126,6 +126,8 @@ enum class Action {
   OnlineJobDelete, OnlineJobEdit, OnlineJobLog
 };
 
+namespace eDialogs { enum class ScheduleResultCode; }
+
 inline uint qHash(const Action key, uint seed)
 {
   return ::qHash(static_cast<uint>(key), seed);
@@ -327,27 +329,6 @@ protected slots:
   void slotPrintView();
 
   /**
-    * Create a new investment
-    */
-  void slotInvestmentNew();
-
-  /**
-    * Create a new investment in a given @p parent investment account
-    */
-  void slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
-
-  /**
-    * This slot opens the investment editor to edit the currently
-    * selected investment if possible
-    */
-  void slotInvestmentEdit();
-
-  /**
-    * Deletes the current selected investment.
-    */
-  void slotInvestmentDelete();
-
-  /**
     * Performs online update for currently selected investment
     */
   void slotOnlinePriceUpdate();
@@ -361,11 +342,6 @@ protected slots:
     * Call this slot, if any configuration parameter has changed
     */
   void slotUpdateConfiguration();
-
-  /**
-    */
-  bool slotPayeeNew(const QString& newnameBase, QString& id);
-  void slotPayeeNew();
 
   /**
     */
@@ -840,7 +816,7 @@ protected:
     * The transaction will be created and entered into the ledger
     * and the schedule updated.
     */
-  KMyMoneyUtils::EnterScheduleResultCodeE enterSchedule(MyMoneySchedule& s, bool autoEnter = false, bool extendedKeys = false);
+  eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& s, bool autoEnter = false, bool extendedKeys = false);
 
   /**
     * Creates a new institution entry in the MyMoneyFile engine
@@ -1139,6 +1115,51 @@ public slots:
   void slotShowOnlineJobContextMenu();
 
   /**
+    * Brings up the new category editor and saves the information.
+    */
+  void slotCategoryNew();
+
+  /**
+    * Brings up the new category editor and saves the information.
+    * The dialog will be preset with the name and parent account.
+    *
+    * @param account reference of category to be created. The @p name member
+    *                should be filled by the caller. The object will be filled
+    *                with additional information during the creation process
+    *                esp. the @p id member.
+    * @param parent reference to parent account (defaults to none)
+    */
+  void slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
+  void slotCategoryNew(MyMoneyAccount& account);
+
+  /**
+    * Create a new investment
+    */
+  void slotInvestmentNew();
+
+  /**
+    * Create a new investment in a given @p parent investment account
+    */
+  void slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+  /**
+    * This slot opens the investment editor to edit the currently
+    * selected investment if possible
+    */
+  void slotInvestmentEdit();
+
+  /**
+    * Deletes the current selected investment.
+    */
+  void slotInvestmentDelete();
+
+  /**
+    */
+  void slotPayeeNew(const QString& newnameBase, QString& id);
+  bool createPayeeNew(const QString& newnameBase, QString& id);
+  void slotPayeeNew();
+
+  /**
     * This slot collects information for a new scheduled transaction
     * and saves it in the engine. @sa slotScheduleNew(const MyMoneyTransaction&)
     */
@@ -1212,24 +1233,6 @@ public slots:
     */
   void slotAccountNew();
   void slotAccountNew(MyMoneyAccount&);
-
-  /**
-    * Brings up the new category editor and saves the information.
-    */
-  void slotCategoryNew();
-
-  /**
-    * Brings up the new category editor and saves the information.
-    * The dialog will be preset with the name and parent account.
-    *
-    * @param account reference of category to be created. The @p name member
-    *                should be filled by the caller. The object will be filled
-    *                with additional information during the creation process
-    *                esp. the @p id member.
-    * @param parent reference to parent account (defaults to none)
-    */
-  void slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
-  void slotCategoryNew(MyMoneyAccount& account);
 
   /**
     * This method updates all KAction items to the current state.

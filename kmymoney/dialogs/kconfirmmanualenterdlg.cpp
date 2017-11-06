@@ -4,6 +4,7 @@
     begin                : Mon Apr  9 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,6 +34,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kconfirmmanualenterdlg.h"
+
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -43,37 +46,33 @@
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "mymoneytransaction.h"
-#include "ui_kconfirmmanualenterdlgdecl.h"
-
-struct KConfirmManualEnterDlg::Private {
-  Ui::KConfirmManualEnterDlgDecl ui;
-};
 
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
-    QDialog(parent), d(new Private)
+    QDialog(parent),
+    ui(new Ui::KConfirmManualEnterDlg)
 {
-  d->ui.setupUi(this);
-  d->ui.buttonGroup1->setId(d->ui.m_discardRadio, 0);
-  d->ui.buttonGroup1->setId(d->ui.m_onceRadio, 1);
-  d->ui.buttonGroup1->setId(d->ui.m_setRadio, 2);
+  ui->setupUi(this);
+  ui->buttonGroup1->setId(ui->m_discardRadio, 0);
+  ui->buttonGroup1->setId(ui->m_onceRadio, 1);
+  ui->buttonGroup1->setId(ui->m_setRadio, 2);
 
-  d->ui.m_onceRadio->setChecked(true);
+  ui->m_onceRadio->setChecked(true);
 
   if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
-    d->ui.m_setRadio->setEnabled(false);
-    d->ui.m_discardRadio->setEnabled(false);
+    ui->m_setRadio->setEnabled(false);
+    ui->m_discardRadio->setEnabled(false);
   }
 }
 
 KConfirmManualEnterDlg::~KConfirmManualEnterDlg()
 {
-  delete d;
+  delete ui;
 }
 
 void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, const MyMoneyTransaction& tn)
 {
   QString messageDetail("<qt>");
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   int noItemsChanged = 0;
 
   try {
@@ -179,15 +178,15 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
   }
 
   messageDetail += "</qt>";
-  d->ui.m_details->setText(messageDetail);
+  ui->m_details->setText(messageDetail);
   return;
 }
 
 KConfirmManualEnterDlg::Action KConfirmManualEnterDlg::action() const
 {
-  if (d->ui.m_discardRadio->isChecked())
+  if (ui->m_discardRadio->isChecked())
     return UseOriginal;
-  if (d->ui.m_setRadio->isChecked())
+  if (ui->m_setRadio->isChecked())
     return ModifyAlways;
   return ModifyOnce;
 }

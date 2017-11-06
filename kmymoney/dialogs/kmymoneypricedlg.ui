@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KMyMoneyPriceDlg</class>
+ <widget class="QDialog" name="KMyMoneyPriceDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>806</width>
+    <height>440</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Price Editor</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QVBoxLayout">
+     <item>
+      <layout class="QHBoxLayout">
+       <item>
+        <layout class="QVBoxLayout" name="m_listLayout">
+         <item>
+          <widget class="QTreeWidget" name="m_priceList">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>1</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>Remove this price item from the file</string>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::ExtendedSelection</enum>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <column>
+            <property name="text">
+             <string>Commodity</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Stock Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Currency</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Date</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Price</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string comment="Price source">Source</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="m_showAllPrices">
+           <property name="text">
+            <string>Show all stored prices</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout">
+         <item>
+          <widget class="QPushButton" name="m_newButton">
+           <property name="toolTip">
+            <string>Add a new entry</string>
+           </property>
+           <property name="whatsThis">
+            <string>Create a new price entry.</string>
+           </property>
+           <property name="text">
+            <string comment="@action add new price">New</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_editButton">
+           <property name="toolTip">
+            <string>Modify the selected entry</string>
+           </property>
+           <property name="whatsThis">
+            <string>Change the details of selected price information.</string>
+           </property>
+           <property name="text">
+            <string>Modify</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_onlineQuoteButton">
+           <property name="text">
+            <string>Online Quotes</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_deleteButton">
+           <property name="toolTip">
+            <string>Delete this entry</string>
+           </property>
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacer7">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>21</width>
+             <height>150</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Close|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line2">
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>m_newButton</tabstop>
+  <tabstop>m_editButton</tabstop>
+  <tabstop>m_deleteButton</tabstop>
+  <tabstop>m_onlineQuoteButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>KMyMoneyPriceDlg</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>186</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>402</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>KMyMoneyPriceDlg</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>186</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>402</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

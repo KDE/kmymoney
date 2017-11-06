@@ -10,6 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.j@hotpop.com>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,9 +28,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVector>
-#include <QPointer>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -37,42 +35,23 @@
 // Project Includes
 
 #include "kfindtransactiondlg.h"
-#include "mymoneyreport.h"
-#include "mymoneybudget.h"
 
-class ReportTabCapitalGain;
-class ReportTabChart;
-class ReportTabGeneral;
-class ReportTabPerformance;
-class ReportTabRange;
-class ReportTabRowColPivot;
-class ReportTabRowColQuery;
+class MyMoneyReport;
 
 /**
   * @author Ace Jones
   */
+class KReportConfigurationFilterDlgPrivate;
 class KReportConfigurationFilterDlg : public KFindTransactionDlg
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KReportConfigurationFilterDlg)
+
 public:
-  explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0);
+  explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = nullptr);
   ~KReportConfigurationFilterDlg();
 
-  const MyMoneyReport& getConfig() const {
-    return m_currentState;
-  }
-
-protected:
-  QPointer<ReportTabGeneral>     m_tabGeneral;
-  QPointer<ReportTabRowColPivot> m_tabRowColPivot;
-  QPointer<ReportTabRowColQuery> m_tabRowColQuery;
-  QPointer<ReportTabChart>       m_tabChart;
-  QPointer<ReportTabRange>       m_tabRange;
-  QPointer<ReportTabCapitalGain> m_tabCapitalGain;
-  QPointer<ReportTabPerformance> m_tabPerformance;
-
-  MyMoneyReport m_initialState;
-  MyMoneyReport m_currentState;
+  MyMoneyReport getConfig() const;
 
 protected slots:
   void slotRowTypeChanged(int);
@@ -82,9 +61,10 @@ protected slots:
   void slotShowHelp();
   void slotUpdateCheckTransfers();
   void slotUpdateColumnsCombo();
+  void slotUpdateColumnsCombo(int idx);
   void slotLogAxisChanged(int state);
 
 private:
-  QVector<MyMoneyBudget> m_budgets;
+    Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
 };
 #endif

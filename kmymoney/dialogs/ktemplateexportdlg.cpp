@@ -2,6 +2,7 @@
                      ktemplateexportlg.cpp
                      ---------------------
     copyright        : (C) 2016 by Ralf Habacker <ralf.habacker@freenet.de>
+                       (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 

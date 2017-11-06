@@ -2,6 +2,7 @@
                      ktemplateexportlg.cpp
                      ---------------------
     copyright        : (C) 2016 by Ralf Habacker <ralf.habacker@freenet.de>
+                       (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -28,7 +29,7 @@ class KTemplateExportDlg : public QDialog
     Q_OBJECT
 
 public:
-    explicit KTemplateExportDlg(QWidget *parent = 0);
+    explicit KTemplateExportDlg(QWidget *parent = nullptr);
     ~KTemplateExportDlg();
 
     QString title() const;

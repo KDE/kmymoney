@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,28 +35,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
-#include "kmymoneyutils.h"
-#include "ui_kaccountselectdlgdecl.h"
-
 /**
   * @author Thomas Baumgart
   */
 
+class MyMoneyAccount;
 
-class KAccountSelectDlgDecl : public QDialog, public Ui::KAccountSelectDlgDecl
-{
-public:
-  KAccountSelectDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
+namespace eDialogs { enum Category : int; }
 
-class KAccountSelectDlg : public KAccountSelectDlgDecl
+class KAccountSelectDlgPrivate;
+class KAccountSelectDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KAccountSelectDlg)
+
 public:
-  explicit KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent = 0);
+  explicit KAccountSelectDlg(const eDialogs::Category type, const QString& purpose, QWidget *parent = nullptr);
   ~KAccountSelectDlg();
 
   /**
@@ -92,7 +87,7 @@ public:
     *
     * @return QString containing the id of the selected account
     */
-  const QString& selectedAccount() const;
+  QString selectedAccount() const;
 
   /**
     * This method is used to set the mode of the dialog. Two modes
@@ -120,15 +115,15 @@ public:
     * @retval false Dialog was left using the 'Skip' button
     * @retval true Dialog was left using the 'Abort' button
     */
-  bool aborted() const {
-    return m_aborted;
-  };
+  bool aborted() const;
+
+  void hideQifEntry();
 
 public slots:
   /**
     * Reimplemented from QDialog
     */
-  int exec();
+  int exec() override;
 
 protected slots:
   /**
@@ -154,11 +149,8 @@ protected slots:
   void slotReloadWidget();
 
 private:
-  QString         m_purpose;
-  MyMoneyAccount  m_account;
-  int             m_mode;       // 0 - select or create, 1 - create only
-  KMyMoneyUtils::categoryTypeE   m_accountType;
-  bool            m_aborted;
+  KAccountSelectDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KAccountSelectDlg)
 };
 
 #endif

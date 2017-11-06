@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KSettingsGeneral</class>
+ <widget class="QWidget" name="KSettingsGeneral">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>499</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>General Settings</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget2">
+     <property name="currentIndex">
+      <number>3</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string comment="@title global settings">Global</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Startup options</string>
+         </property>
+         <layout class="QVBoxLayout" name="startupVerticalLayout">
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowSplash">
+            <property name="text">
+             <string>Show splash screen</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Autosave options</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QCheckBox" name="kcfg_AutoSaveFile">
+              <property name="text">
+               <string>Autosave periodically</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="m_periodFrame" native="true">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QSpinBox" name="kcfg_AutoSavePeriod">
+                 <property name="maximum">
+                  <number>60</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="textLabel3">
+                 <property name="text">
+                  <string>minutes</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="spacer3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>308</width>
+                <height>22</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_AutoSaveOnClose">
+            <property name="text">
+             <string>Autosave when file is modified upon close</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QSpinBox" name="kcfg_AutoBackupCopies">
+              <property name="toolTip">
+               <string>Setup number of backups to keep (local file only)</string>
+              </property>
+              <property name="whatsThis">
+               <string>Whenever the current data is saved into a local file, KMyMoney keeps the selected number of previous states of the file.
+
+Set it to 0 to turn the feature off.</string>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="singleStep">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Number of backups to keep (0=off)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Fiscal Year</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="textLabel1_2_2">
+            <property name="text">
+             <string>Your fiscal year starts on</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="kcfg_FiscalYearBeginDay">
+            <property name="maximum">
+             <number>366</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KComboBox" name="kcfg_FiscalYearBegin">
+            <item>
+             <property name="text">
+              <string>January</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>February</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>March</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>April</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>May</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>June</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>July</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string comment="@item the month August">August</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>September</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>October</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>November</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>December</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacer11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>282</width>
+              <height>17</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="title">
+          <string>External programs</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Calculator</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KLineEdit" name="kcfg_ExternalCalculator"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer3_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab2">
+      <attribute name="title">
+       <string>Views</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QGroupBox" name="kcfg_StartLastViewSelected">
+         <property name="title">
+          <string>Startup page options</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QRadioButton" name="radioButton1">
+            <property name="text">
+             <string>Start with ho&amp;mepage</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton2">
+            <property name="text">
+             <string>Start with last selected view</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="kcfg_viewType">
+         <property name="title">
+          <string>Type of the KMyMoney view</string>
+         </property>
+         <layout class="QGridLayout">
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton3">
+            <property name="text">
+             <string>List</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="radioButton4">
+            <property name="text">
+             <string>Tree</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="radioButton5">
+            <property name="text">
+             <string>Tabbed</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="kcfg_showTitleBar">
+         <property name="text">
+          <string>Show title bar on each page</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="kcfg_syncLedgerInvestment">
+         <property name="text">
+          <string>Synchronize account selection of ledger and investment view</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>319</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="TabPage">
+      <attribute name="title">
+       <string>Filter</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="title">
+          <string>Accounts / Categories</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="kcfg_HideUnusedCategory">
+            <property name="whatsThis">
+             <string>This option hides all categories in the categories view that are not used in at least a single transaction. They are still shown in the category selection lists.</string>
+            </property>
+            <property name="text">
+             <string>Do not show unused categories</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_HideClosedAccounts">
+            <property name="whatsThis">
+             <string>This option hides all accounts that have been closed by the user in views and selection lists.
+
+You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden accounts in the views.</string>
+            </property>
+            <property name="text">
+             <string>Do not show closed accounts</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_ExpertMode">
+            <property name="text">
+             <string>Show equity accounts</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowCategoriesInAccountsView">
+            <property name="whatsThis">
+             <string>This option will display the categories in the accounts view also.</string>
+            </property>
+            <property name="text">
+             <string>Show categories in the accounts list view</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_HideZeroBalanceEquities">
+            <property name="text">
+             <string>Do not show zero balance equities</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>Schedules</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="kcfg_HideFinishedSchedules">
+            <property name="whatsThis">
+             <string>This option hides all finished schedules in the schedules view.</string>
+            </property>
+            <property name="text">
+             <string>Do not show finished schedules</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Transactions</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="textLabel1_3">
+              <property name="text">
+               <string>Do not show transactions prior to</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="kMyMoneyDateInput" name="m_startDateEdit"/>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="kcfg_StartDate"/>
+            </item>
+            <item>
+             <spacer name="spacer10">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>63</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_HideReconciledTransactions">
+            <property name="whatsThis">
+             <string>This option hides all reconciled transactions in the ledger view.</string>
+            </property>
+            <property name="text">
+             <string>Do not show reconciled transactions</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>30</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Support</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string>Logging</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Log path</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="kcfg_logPath">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="choosePath">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>32</width>
+                <height>32</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>On choosing a log file path please keep in mind that log files may contain sensitive data (e.g. passwords in clear-text etc).</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_logImportedStatements">
+            <property name="text">
+             <string>Log imported statements</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_logOfxTransactions">
+            <property name="text">
+             <string>Log OFX transactions</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>255</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyDateInput</class>
+   <extends>QFrame</extends>
+   <header>kmymoneydateinput.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>kcfg_AutoSaveFile</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_periodFrame</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>103</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>188</x>
+     <y>263</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

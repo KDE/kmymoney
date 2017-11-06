@@ -2,6 +2,7 @@
                           ktagreassigndlg.cpp
                              -------------------
     copyright            : (C) 2011 by Alessandro Russo <axela74@yahoo.it>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -32,18 +33,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_ktagreassigndlg.h"
 #include <kmymoneymvccombo.h>
 
 KTagReassignDlg::KTagReassignDlg(QWidget* parent) :
-    KTagReassignDlgDecl(parent)
+    QDialog(parent),
+    ui(new Ui::KTagReassignDlg)
 {
-  kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
-  mandatory->add(tagCombo);
-  mandatory->setOkButton(buttonBox->button(QDialogButtonBox::Ok));
+  ui->setupUi(this);
+  auto mandatory = new kMandatoryFieldGroup(this);
+  mandatory->add(ui->tagCombo);
+  mandatory->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok));
 }
 
 KTagReassignDlg::~KTagReassignDlg()
 {
+  delete ui;
 }
 
 QString KTagReassignDlg::show(const QList<MyMoneyTag>& tagslist)
@@ -51,25 +56,24 @@ QString KTagReassignDlg::show(const QList<MyMoneyTag>& tagslist)
   if (tagslist.isEmpty())
     return QString(); // no tag available? nothing can be selected...
 
-  tagCombo->loadTags(tagslist);
+  ui->tagCombo->loadTags(tagslist);
 
   // execute dialog and if aborted, return empty string
   if (this->exec() == QDialog::Rejected)
     return QString();
 
   // otherwise return index of selected tag
-  return tagCombo->selectedItem();
+  return ui->tagCombo->selectedItem();
 }
-
 
 void KTagReassignDlg::accept()
 {
-  // force update of tagCombo
-  buttonBox->button(QDialogButtonBox::Ok)->setFocus();
+  // force update of ui->tagCombo
+  ui->buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
-  if (tagCombo->selectedItem().isEmpty()) {
+  if (ui->tagCombo->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new tags to be created. Please pick a tag from the list."), i18n("Tag creation"));
   } else {
-    KTagReassignDlgDecl::accept();
+    QDialog::accept();
   }
 }

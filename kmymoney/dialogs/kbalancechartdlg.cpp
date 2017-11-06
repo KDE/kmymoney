@@ -4,6 +4,7 @@
     begin                : Mon Nov 26 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -65,8 +66,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
 
   // add the buttons
   QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   mainLayout->addWidget(buttonBox);
 }
 

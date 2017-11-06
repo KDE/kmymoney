@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KSettingsHome</class>
+ <widget class="QWidget" name="KSettingsHome">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>659</width>
+    <height>520</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Homepage Settings</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <layout class="QGridLayout">
+     <item row="0" column="2">
+      <layout class="QVBoxLayout">
+       <item>
+        <spacer name="spacer5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="m_upButton">
+         <property name="toolTip">
+          <string>Move selected item up</string>
+         </property>
+         <property name="whatsThis">
+          <string>Use this to move the selected item up by one position in the list.</string>
+         </property>
+         <property name="text">
+          <string comment="@action move item up">Up</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="m_downButton">
+         <property name="toolTip">
+          <string>Move selected item down</string>
+         </property>
+         <property name="whatsThis">
+          <string>Use this to move the selected item down by one position in the list.</string>
+         </property>
+         <property name="text">
+          <string comment="@action move item down">Down</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer15">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>21</width>
+           <height>70</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="3">
+      <spacer name="spacer16">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>80</width>
+         <height>21</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="2" colspan="2">
+      <widget class="QLabel" name="textLabel4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Selected entries are shown on the home page of the application.&lt;p&gt;
+Use the buttons and checkboxes to customize the layout of the home page.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" rowspan="2">
+      <widget class="KLineEdit" name="kcfg_ItemList">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" rowspan="2">
+      <widget class="QListWidget" name="m_homePageList"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupbox">
+     <property name="title">
+      <string>Homepage/Summary page scaling</string>
+     </property>
+     <layout class="QGridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="percentageLabel">
+        <property name="text">
+         <string>Zoom factor:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_RememberZoomFactor">
+        <property name="text">
+         <string>Remember zoom factor when leaving the program if manually changed with mouse-wheel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="kcfg_ZoomFactor">
+        <property name="minimum">
+         <double>0.250000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>5.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.050000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="spacer4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupbox2">
+     <property name="title">
+      <string>Account information display</string>
+     </property>
+     <layout class="QGridLayout">
+      <item row="0" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowLimitInfo">
+        <property name="text">
+         <string>Show Account Limit Information</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowBalanceStatusOfOnlineAccounts">
+        <property name="text">
+         <string>Show balance-status of mapped online accounts</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowCountOfUnmarkedTransactions">
+        <property name="text">
+         <string>Show number of not marked transactions per account [!M]</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowCountOfClearedTransactions">
+        <property name="text">
+         <string>Show number of cleared transactions per account [C]</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowCountOfNotReconciledTransactions">
+        <property name="text">
+         <string>Show number of not reconciled (not marked + cleared) transactions per account [!R]</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

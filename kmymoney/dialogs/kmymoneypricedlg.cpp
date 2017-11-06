@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,13 +29,11 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QIcon>
-#include <QDialogButtonBox>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KGuiItem>
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KTreeWidgetSearchLine>
@@ -42,6 +41,9 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "ui_kmymoneypricedlg.h"
+#include "ui_kupdatestockpricedlg.h"
 
 #include "kupdatestockpricedlg.h"
 #include "kcurrencycalculator.h"
@@ -58,56 +60,67 @@
 
 using namespace Icons;
 
-KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
-    KMyMoneyPriceDlgDecl(parent)
+class KMyMoneyPriceDlgPrivate
 {
-  QVBoxLayout *mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-  mainLayout->addWidget(m_layoutWidget);
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  mainLayout->addWidget(buttonBox);
+  Q_DISABLE_COPY(KMyMoneyPriceDlgPrivate)
+  Q_DECLARE_PUBLIC(KMyMoneyPriceDlg)
+
+public:
+  KMyMoneyPriceDlgPrivate(KMyMoneyPriceDlg *qq) :
+    q_ptr(qq),
+    ui(new Ui::KMyMoneyPriceDlg),
+    m_searchWidget(nullptr)
+  {
+  }
+
+  ~KMyMoneyPriceDlgPrivate()
+  {
+    delete ui;
+  }
+
+  KMyMoneyPriceDlg      *q_ptr;
+  Ui::KMyMoneyPriceDlg  *ui;
+  QTreeWidgetItem*       m_currentItem;
+  /**
+    * Search widget for the list
+    */
+  KTreeWidgetSearchLineWidget*  m_searchWidget;
+  QMap<QString, QString>        m_stockNameMap;
+};
+
+KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
+  QDialog(parent),
+  d_ptr(new KMyMoneyPriceDlgPrivate(this))
+{
+  Q_D(KMyMoneyPriceDlg);
+  d->ui->setupUi(this);
 
   // create the searchline widget
   // and insert it into the existing layout
-  m_searchWidget = new KTreeWidgetSearchLineWidget(this, m_priceList);
-  m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-  m_listLayout->insertWidget(0, m_searchWidget);
+  d->m_searchWidget = new KTreeWidgetSearchLineWidget(this, d->ui->m_priceList);
+  d->m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
 
-  m_priceList->header()->setSortIndicator(0, Qt::AscendingOrder);
-  m_priceList->header()->setStretchLastSection(true);
-  m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
+  d->ui->m_listLayout->insertWidget(0, d->m_searchWidget);
 
-  KGuiItem removeButtonItem(i18n("&Delete"),
-                            QIcon::fromTheme(g_Icons[Icon::EditDelete]),
-                            i18n("Delete this entry"),
-                            i18n("Remove this price item from the file"));
-  KGuiItem::assign(m_deleteButton, removeButtonItem);
+  d->ui->m_priceList->header()->setSortIndicator(0, Qt::AscendingOrder);
+  d->ui->m_priceList->header()->setStretchLastSection(true);
+  d->ui->m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  KGuiItem newButtonItem(i18nc("New price entry", "&New"),
-                         QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
-                         i18n("Add a new entry"),
-                         i18n("Create a new price entry."));
-  KGuiItem::assign(m_newButton, newButtonItem);
+  d->ui->m_deleteButton->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
+  d->ui->m_newButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
+  d->ui->m_editButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
 
-  KGuiItem editButtonItem(i18n("&Edit"),
-                          QIcon::fromTheme(g_Icons[Icon::DocumentEdit]),
-                          i18n("Modify the selected entry"),
-                          i18n("Change the details of selected price information."));
-  KGuiItem::assign(m_editButton, editButtonItem);
+  d->ui->m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::Download]));
 
-  m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::Download]));
+  connect(d->ui->m_editButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotEditPrice);
+  connect(d->ui->m_deleteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotDeletePrice);
+  connect(d->ui->m_newButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotNewPrice);
+  connect(d->ui->m_priceList, &QTreeWidget::itemSelectionChanged, this, &KMyMoneyPriceDlg::slotSelectPrice);
+  connect(d->ui->m_onlineQuoteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotOnlinePriceUpdate);
+  connect(d->ui->m_priceList, &QWidget::customContextMenuRequested, this, &KMyMoneyPriceDlg::slotOpenContextMenu);
 
-  connect(m_editButton, SIGNAL(clicked()), this, SLOT(slotEditPrice()));
-  connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDeletePrice()));
-  connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewPrice()));
-  connect(m_priceList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectPrice()));
-  connect(m_onlineQuoteButton, SIGNAL(clicked()), this, SLOT(slotOnlinePriceUpdate()));
-  connect(m_priceList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
-
-  connect(m_showAllPrices, SIGNAL(toggled(bool)), this, SLOT(slotLoadWidgets()));
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
+  connect(d->ui->m_showAllPrices, &QAbstractButton::toggled, this, &KMyMoneyPriceDlg::slotLoadWidgets);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KMyMoneyPriceDlg::slotLoadWidgets);
 
   slotLoadWidgets();
   slotSelectPrice();
@@ -115,16 +128,19 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
 
 KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
 {
+  Q_D(KMyMoneyPriceDlg);
+  delete d;
 }
 
 void KMyMoneyPriceDlg::slotLoadWidgets()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  Q_D(KMyMoneyPriceDlg);
+  auto file = MyMoneyFile::instance();
 
   //clear the list and disable the sorting while it loads the widgets, for performance
-  m_priceList->setSortingEnabled(false);
-  m_priceList->clear();
-  m_stockNameMap.clear();
+  d->ui->m_priceList->setSortingEnabled(false);
+  d->ui->m_priceList->clear();
+  d->m_stockNameMap.clear();
 
   //load the currencies for investments, which we'll need later
   QList<MyMoneyAccount> accList;
@@ -132,10 +148,10 @@ void KMyMoneyPriceDlg::slotLoadWidgets()
   QList<MyMoneyAccount>::const_iterator acc_it;
   for (acc_it = accList.constBegin(); acc_it != accList.constEnd(); ++acc_it) {
     if ((*acc_it).isInvest()) {
-      if (m_stockNameMap.contains((*acc_it).currencyId())) {
-        m_stockNameMap[(*acc_it).currencyId()] = QString(m_stockNameMap.value((*acc_it).currencyId()) + ", " + (*acc_it).name());
+      if (d->m_stockNameMap.contains((*acc_it).currencyId())) {
+        d->m_stockNameMap[(*acc_it).currencyId()] = QString(d->m_stockNameMap.value((*acc_it).currencyId()) + ", " + (*acc_it).name());
       } else {
-        m_stockNameMap[(*acc_it).currencyId()] = (*acc_it).name();
+        d->m_stockNameMap[(*acc_it).currencyId()] = (*acc_it).name();
       }
     }
   }
@@ -145,7 +161,7 @@ void KMyMoneyPriceDlg::slotLoadWidgets()
   MyMoneyPriceList::ConstIterator it_allPrices;
   for (it_allPrices = list.constBegin(); it_allPrices != list.constEnd(); ++it_allPrices) {
     MyMoneyPriceEntries::ConstIterator it_priceItem;
-    if (m_showAllPrices->isChecked()) {
+    if (d->ui->m_showAllPrices->isChecked()) {
       for (it_priceItem = (*it_allPrices).constBegin(); it_priceItem != (*it_allPrices).constEnd(); ++it_priceItem) {
         loadPriceItem(*it_priceItem);
       }
@@ -161,20 +177,21 @@ void KMyMoneyPriceDlg::slotLoadWidgets()
     }
   }
   //reenable sorting and sort by the commodity column
-  m_priceList->setSortingEnabled(true);
-  m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity);
+  d->ui->m_priceList->setSortingEnabled(true);
+  d->ui->m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity);
 
   //update the search widget so the list gets refreshed correctly if it was being filtered
-  if (!m_searchWidget->searchLine()->text().isEmpty())
-    m_searchWidget->searchLine()->updateSearch(m_searchWidget->searchLine()->text());
+  if (!d->m_searchWidget->searchLine()->text().isEmpty())
+    d->m_searchWidget->searchLine()->updateSearch(d->m_searchWidget->searchLine()->text());
 }
 
 QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
 {
+  Q_D(KMyMoneyPriceDlg);
   MyMoneySecurity from, to;
-  MyMoneyPrice price = MyMoneyPrice(basePrice);
+  auto price = MyMoneyPrice(basePrice);
 
-  KPriceTreeItem* priceTreeItem = new KPriceTreeItem(m_priceList);
+  auto priceTreeItem = new KPriceTreeItem(d->ui->m_priceList);
 
   if (!price.isValid())
     price = MyMoneyFile::instance()->price(price.from(), price.to(), price.date());
@@ -191,8 +208,8 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
 
     priceTreeItem->setData(KPriceTreeItem::ePriceCommodity, Qt::UserRole, QVariant::fromValue(price));
     priceTreeItem->setText(KPriceTreeItem::ePriceCommodity, (from.isCurrency()) ? from.id() : from.tradingSymbol());
-    priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
-    priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
+    priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : d->m_stockNameMap.value(from.id()));
+    priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : d->m_stockNameMap.value(from.id()));
     priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
     priceTreeItem->setText(KPriceTreeItem::ePriceDate, QLocale().toString(price.date(), QLocale::ShortFormat));
     priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
@@ -206,57 +223,59 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
 
 void KMyMoneyPriceDlg::slotSelectPrice()
 {
+  Q_D(KMyMoneyPriceDlg);
   QTreeWidgetItem* item = 0;
-  if (m_priceList->selectedItems().count() > 0) {
-    item = m_priceList->selectedItems().at(0);
+  if (d->ui->m_priceList->selectedItems().count() > 0) {
+    item = d->ui->m_priceList->selectedItems().at(0);
   }
-  m_currentItem = item;
-  m_editButton->setEnabled(item != 0);
+  d->m_currentItem = item;
+  d->ui->m_editButton->setEnabled(item != 0);
   bool deleteEnabled = (item != 0);
 
   //if one of the selected entries is a default, then deleting is disabled
-  QList<QTreeWidgetItem*> itemsList = m_priceList->selectedItems();
+  QList<QTreeWidgetItem*> itemsList = d->ui->m_priceList->selectedItems();
   QList<QTreeWidgetItem*>::const_iterator item_it;
   for (item_it = itemsList.constBegin(); item_it != itemsList.constEnd(); ++item_it) {
     MyMoneyPrice price = (*item_it)->data(0, Qt::UserRole).value<MyMoneyPrice>();
     if (price.source() == "KMyMoney")
       deleteEnabled = false;
   }
-  m_deleteButton->setEnabled(deleteEnabled);
+  d->ui->m_deleteButton->setEnabled(deleteEnabled);
 
   // Modification of automatically added entries is not allowed
   // Multiple entries cannot be edited at once
   if (item) {
     MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
     if (price.source() == "KMyMoney" || itemsList.count() > 1)
-      m_editButton->setEnabled(false);
+      d->ui->m_editButton->setEnabled(false);
     emit selectObject(price);
   }
 }
 
 void KMyMoneyPriceDlg::slotNewPrice()
 {
+  Q_D(KMyMoneyPriceDlg);
   QPointer<KUpdateStockPriceDlg> dlg = new KUpdateStockPriceDlg(this);
   try {
-    QTreeWidgetItem* item = m_priceList->currentItem();
+    auto item = d->ui->m_priceList->currentItem();
     if (item) {
       MyMoneySecurity security;
       security = MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from());
-      dlg->m_security->setSecurity(security);
+      dlg->ui->m_security->setSecurity(security);
       security = MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to());
-      dlg->m_currency->setSecurity(security);
+      dlg->ui->m_currency->setSecurity(security);
     }
 
     if (dlg->exec()) {
-      MyMoneyPrice price(dlg->m_security->security().id(), dlg->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE);
+      MyMoneyPrice price(dlg->ui->m_security->security().id(), dlg->ui->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE);
       QTreeWidgetItem* p = loadPriceItem(price);
-      m_priceList->setCurrentItem(p, true);
+      d->ui->m_priceList->setCurrentItem(p, true);
       // If the user cancels the following operation, we delete the new item
       // and re-select any previously selected one
       if (slotEditPrice() == Rejected) {
         delete p;
         if (item)
-          m_priceList->setCurrentItem(item, true);
+          d->ui->m_priceList->setCurrentItem(item, true);
       }
     }
   } catch (...) {
@@ -268,8 +287,9 @@ void KMyMoneyPriceDlg::slotNewPrice()
 
 int KMyMoneyPriceDlg::slotEditPrice()
 {
+  Q_D(KMyMoneyPriceDlg);
   int rc = Rejected;
-  QTreeWidgetItem* item = m_priceList->currentItem();
+  auto item = d->ui->m_priceList->currentItem();
   if (item) {
     MyMoneySecurity from(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from()));
     MyMoneySecurity to(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to()));
@@ -294,7 +314,8 @@ int KMyMoneyPriceDlg::slotEditPrice()
 
 void KMyMoneyPriceDlg::slotDeletePrice()
 {
-  QList<QTreeWidgetItem*> listItems = m_priceList->selectedItems();
+  Q_D(KMyMoneyPriceDlg);
+  QList<QTreeWidgetItem*> listItems = d->ui->m_priceList->selectedItems();
   if (listItems.count() > 0) {
     if (KMessageBox::questionYesNo(this, i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count()), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
       MyMoneyFileTransaction ft;
@@ -321,9 +342,10 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate()
 
 void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)
 {
-  QTreeWidgetItem* item = m_priceList->itemAt(p);
+  Q_D(KMyMoneyPriceDlg);
+  auto item = d->ui->m_priceList->itemAt(p);
   if (item) {
-    m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
+    d->ui->m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
     emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
   }
 }

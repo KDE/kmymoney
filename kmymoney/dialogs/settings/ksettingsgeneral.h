@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,29 +21,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsgeneraldecl.h"
-
-class KSettingsGeneralDecl : public QWidget, public Ui::KSettingsGeneralDecl
-{
-public:
-  KSettingsGeneralDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KSettingsGeneral : public KSettingsGeneralDecl
+class KSettingsGeneralPrivate;
+class KSettingsGeneral : public QWidget
 {
   Q_OBJECT
-private:
-  bool initialHideZeroBalanceEquities;
+  Q_DISABLE_COPY(KSettingsGeneral)
+
 public:
-  KSettingsGeneral(QWidget* parent = 0);
+  explicit KSettingsGeneral(QWidget* parent = nullptr);
   ~KSettingsGeneral();
 
 protected slots:
@@ -51,10 +45,14 @@ protected slots:
   void slotUpdateLogTypes();
 
 protected:
-  void showEvent(QShowEvent* event);
+  void showEvent(QShowEvent* event) override;
 
 public slots:
   void slotUpdateEquitiesVisibility();
+
+private:
+  KSettingsGeneralPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsGeneral)
 };
 #endif
 

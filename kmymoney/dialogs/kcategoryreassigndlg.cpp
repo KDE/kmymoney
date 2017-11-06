@@ -2,6 +2,7 @@
                           kcategoryreassigndlg.cpp
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -31,21 +32,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kcategoryreassigndlg.h"
+
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 
 KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
-    KCategoryReassignDlgDecl(parent)
+  QDialog(parent),
+  ui(new Ui::KCategoryReassignDlg)
 {
-  kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
-  mandatory->add(m_category);
-  mandatory->setOkButton(buttonBox->button(QDialogButtonBox::Ok));
+  ui->setupUi(this);
+  auto mandatory = new kMandatoryFieldGroup(this);
+  mandatory->add(ui->m_category);
+  mandatory->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok));
 }
 
 KCategoryReassignDlg::~KCategoryReassignDlg()
 {
+  delete ui;
 }
 
 QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
@@ -56,23 +62,23 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
   AccountSet set;
   set.addAccountGroup(eMyMoney::Account::Income);
   set.addAccountGroup(eMyMoney::Account::Expense);
-  set.load(m_category->selector());
+  set.load(ui->m_category->selector());
 
   // remove the category we are about to delete
-  m_category->selector()->removeItem(category.id());
+  ui->m_category->selector()->removeItem(category.id());
 
   // make sure the available categories have the same currency
   QStringList list;
   QStringList::const_iterator it_a;
-  m_category->selector()->itemList(list);
+  ui->m_category->selector()->itemList(list);
   for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
     if (acc.currencyId() != category.currencyId())
-      m_category->selector()->removeItem(*it_a);
+      ui->m_category->selector()->removeItem(*it_a);
   }
 
   // reload the list
-  m_category->selector()->itemList(list);
+  ui->m_category->selector()->itemList(list);
 
   // if there is no category for reassignment left, we bail out
   if (list.isEmpty()) {
@@ -85,18 +91,17 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
     return QString();
 
   // otherwise return index of selected payee
-  return m_category->selectedItem();
+  return ui->m_category->selectedItem();
 }
 
 
 void KCategoryReassignDlg::accept()
 {
   // force update of payeeCombo
-  buttonBox->button(QDialogButtonBox::Ok)->setFocus();
+  ui->buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
-  if (m_category->selectedItem().isEmpty()) {
+  if (ui->m_category->selectedItem().isEmpty())
     KMessageBox::information(this, i18n("This dialog does not allow new categories to be created. Please pick a category from the list."), i18n("Category creation"));
-  } else {
-    KCategoryReassignDlgDecl::accept();
-  }
+  else
+    QDialog::accept();
 }

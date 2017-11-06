@@ -36,43 +36,37 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysecurity.h"
-
-namespace Ui
-{
-class KCurrencyEditDlg;
-}
-
 class QTreeWidgetItem;
 class KAvailableCurrencyDlg;
 class KCurrencyEditorDlg;
 class KTreeWidgetSearchLineWidget;
 
+class MyMoneySecurity;
 /**
   * @author Thomas Baumgart
   */
+class KCurrencyEditDlgPrivate;
 class KCurrencyEditDlg : public QDialog
 {
   Q_OBJECT
-public:
-  KCurrencyEditDlg(QWidget *parent = 0);
-  ~KCurrencyEditDlg();
+  Q_DISABLE_COPY(KCurrencyEditDlg)
 
-  Ui::KCurrencyEditDlg*   ui;
+public:
+  explicit KCurrencyEditDlg(QWidget *parent = nullptr);
+  ~KCurrencyEditDlg();
 
 public slots:
   void slotSelectCurrency(const QString& id);
 
-protected:
-
-
 protected slots:
-  void slotSelectCurrency(QTreeWidgetItem *);
+  void slotSelectCurrency(QTreeWidgetItem *citem, QTreeWidgetItem *pitem);
+  void slotSelectCurrency(QTreeWidgetItem *item);
   void slotItemSelectionChanged();
   void slotStartRename();
   void slotOpenContextMenu(const QPoint& p);
   void slotLoadCurrencies();
-  void slotUpdateCurrency(QTreeWidgetItem *item);
+  void slotUpdateCurrency(QTreeWidgetItem* citem, int column);
+  void slotUpdateCurrency(QTreeWidgetItem *citem, QTreeWidgetItem *pitem);
 
 private slots:
   void timerDone();
@@ -89,15 +83,8 @@ signals:
   void selectBaseCurrency(const MyMoneySecurity& currency);
 
 private:
-  typedef enum:int { RemoveSelected, RemoveUnused} removalModeE;
-  KAvailableCurrencyDlg*          m_availableCurrencyDlg;
-  KCurrencyEditorDlg*             m_currencyEditorDlg;
-  MyMoneySecurity                 m_currency;
-  /**
-    * Search widget for the list
-    */
-  KTreeWidgetSearchLineWidget*    m_searchWidget;
-  void                            removeCurrency(const removalModeE& mode);
+  KCurrencyEditDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KCurrencyEditDlg)
 };
 
 #endif

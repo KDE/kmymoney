@@ -5,6 +5,7 @@
     copyright            : (C) 2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
                          : Christian David <christian-david@web.de>
+                         (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,26 +19,47 @@
 
 #include "transactionmatcher.h"
 
-#include <QList>
-#include <KLocalizedString>
-#include <KMessageBox>
+#include <QDate>
 
+#include <KLocalizedString>
+
+#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
 #include "mymoneyfile.h"
-#include "kmymoneyglobalsettings.h"
 #include "mymoneyexception.h"
 
-TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
-    m_account(acc)
+class TransactionMatcherPrivate
 {
+  Q_DISABLE_COPY(TransactionMatcherPrivate)
+
+public:
+  TransactionMatcherPrivate()
+  {
+  }
+
+  MyMoneyAccount m_account;
+};
+
+TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
+  d_ptr(new TransactionMatcherPrivate)
+{
+  Q_D(TransactionMatcher);
+  d->m_account = acc;
+}
+
+TransactionMatcher::~TransactionMatcher()
+{
+  Q_D(TransactionMatcher);
+  delete d;
 }
 
 void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTransaction ti, MyMoneySplit si, bool allowImportedTransactions)
 {
-  const MyMoneySecurity& sec = MyMoneyFile::instance()->security(m_account.currencyId());
+  Q_D(TransactionMatcher);
+  const MyMoneySecurity& sec = MyMoneyFile::instance()->security(d->m_account.currencyId());
 
   // Now match the transactions.
   //
@@ -78,7 +100,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
   // verify that the amounts are the same, otherwise we should not be matching!
   if (sm.shares() != si.shares()) {
-    throw MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), m_account, sec), MyMoneyUtils::formatMoney(si.shares(), m_account, sec)));
+    throw MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", d->m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), d->m_account, sec), MyMoneyUtils::formatMoney(si.shares(), d->m_account, sec)));
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction

@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +18,12 @@
  */
 
 #include "konlinetransferform.h"
-#include "ui_konlinetransferformdecl.h"
+#include "ui_konlinetransferform.h"
 
 #include <memory>
 
-#include <QtCore/QList>
-#include <QtCore/QtDebug>
-#include <QtCore/QSharedPointer>
+#include <QList>
+#include <QDebug>
 #include <QPluginLoader>
 
 #include <KStandardAction>
@@ -31,11 +31,9 @@
 #include <KPluginFactory>
 
 #include "kguiutils.h"
-#include "kmymoneylineedit.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 
-#include "mymoney/mymoneyfile.h"
-#include "mymoney/mymoneyaccount.h"
+#include "mymoneyfile.h"
 #include "mymoney/onlinejobadministration.h"
 #include "onlinejob.h"
 #include "tasks/onlinetask.h"
@@ -47,7 +45,7 @@ using namespace Icons;
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::kOnlineTransferFormDecl),
+    ui(new Ui::kOnlineTransferForm),
     m_onlineJobEditWidgets(QList<IonlineJobEdit*>()),
     m_requiredFields(new kMandatoryFieldGroup(this))
 {
@@ -70,21 +68,21 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
 
   // Message Widget for read only jobs
   m_duplicateJob = KStandardAction::copy(this);
-  connect(m_duplicateJob, SIGNAL(triggered(bool)), SLOT(duplicateCurrentJob()));
+  connect(m_duplicateJob, &QAction::triggered, this, &kOnlineTransferForm::duplicateCurrentJob);
 
   ui->headMessage->hide();
   ui->headMessage->setWordWrap(true);
   ui->headMessage->setCloseButtonVisible(false);
   ui->headMessage->addAction(m_duplicateJob);
 
-  connect(ui->transferTypeSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(convertCurrentJob(int)));
+  connect(ui->transferTypeSelection, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &kOnlineTransferForm::convertCurrentJob);
 
-  connect(ui->buttonAbort, SIGNAL(clicked(bool)), this, SLOT(reject()));
-  connect(ui->buttonSend, SIGNAL(clicked(bool)), this, SLOT(sendJob()));
-  connect(ui->buttonEnque, SIGNAL(clicked(bool)), this, SLOT(accept()));
-  connect(m_requiredFields, SIGNAL(stateChanged(bool)), ui->buttonEnque, SLOT(setEnabled(bool)));
+  connect(ui->buttonAbort, &QAbstractButton::clicked, this, &kOnlineTransferForm::reject);
+  connect(ui->buttonSend, &QAbstractButton::clicked, this, &kOnlineTransferForm::sendJob);
+  connect(ui->buttonEnque, &QAbstractButton::clicked, this, &kOnlineTransferForm::accept);
+  connect(m_requiredFields, static_cast<void (kMandatoryFieldGroup::*)(bool)>(&kMandatoryFieldGroup::stateChanged), ui->buttonEnque, &QPushButton::setEnabled);
 
-  connect(ui->originAccount, SIGNAL(accountSelected(QString)), this, SLOT(accountChanged()));
+  connect(ui->originAccount, &KMyMoneyAccountCombo::accountSelected, this, &kOnlineTransferForm::accountChanged);
 
   accountChanged();
   setJobReadOnly(false);
@@ -310,7 +308,7 @@ void kOnlineTransferForm::showEditWidget(IonlineJobEdit* widget)
   QWidget* oldWidget = ui->creditTransferEdit->takeWidget();
   if (oldWidget != 0) { // This is true at the first call of showEditWidget() and if there are no widgets.
     oldWidget->setEnabled(false);
-    disconnect(oldWidget, SIGNAL(readOnlyChanged(bool)), this, SLOT(setJobReadOnly(bool)));
+    disconnect(qobject_cast<IonlineJobEdit*>(oldWidget), &IonlineJobEdit::readOnlyChanged, this, &kOnlineTransferForm::setJobReadOnly);
   }
 
   widget->setEnabled(true);
@@ -318,7 +316,7 @@ void kOnlineTransferForm::showEditWidget(IonlineJobEdit* widget)
   setJobReadOnly(widget->isReadOnly());
   widget->show();
 
-  connect(widget, SIGNAL(readOnlyChanged(bool)), SLOT(setJobReadOnly(bool)));
+  connect(widget, &IonlineJobEdit::readOnlyChanged, this, &kOnlineTransferForm::setJobReadOnly);
   checkNotSupportedWidget();
   m_requiredFields->changed();
 }

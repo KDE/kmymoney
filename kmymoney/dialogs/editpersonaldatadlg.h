@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes
     email                : mte@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWFILEDLG_H
-#define KNEWFILEDLG_H
+#ifndef EDITPERSONALDATADLG_H
+#define EDITPERSONALDATADLG_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -32,28 +33,32 @@ struct ContactData;
 
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
+class EditPersonalDataDlgPrivate;
 class EditPersonalDataDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(EditPersonalDataDlg)
+
 public:
-  explicit EditPersonalDataDlg(QWidget *parent = 0, const QString& title = QString());
-  explicit EditPersonalDataDlg(QString userName, QString userStreet,
-                       QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
-                       QString userEmail, QWidget *parent = 0, const QString& title = QString());
+  explicit EditPersonalDataDlg(QWidget *parent, const QString& title);
+  explicit EditPersonalDataDlg(QString userName,
+                               QString userStreet,
+                               QString userTown,
+                               QString userCounty,
+                               QString userPostcode,
+                               QString userTelephone,
+                               QString userEmail,
+                               QWidget *parent,
+                               const QString& title);
   ~EditPersonalDataDlg();
 
-public:
-  QString userNameText;
-  QString userStreetText;
-  QString userTownText;
-  QString userCountyText;
-  QString userPostcodeText;
-  QString userTelephoneText;
-  QString userEmailText;
-
-protected:
-  /// helper method for constructors
-  void init(const QString& title);
+  QString userName() const;
+  QString userStreet() const;
+  QString userTown() const;
+  QString userCountry() const;
+  QString userPostcode() const;
+  QString userTelephone() const;
+  QString userEmail() const;
 
 protected slots:
   void okClicked();
@@ -62,10 +67,8 @@ protected slots:
   void slotContactFetched(const ContactData &identity);
 
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  EditPersonalDataDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(EditPersonalDataDlg)
 };
 
 #endif

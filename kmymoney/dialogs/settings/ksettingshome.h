@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,29 +21,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingshomedecl.h"
-
-class KSettingsHomeDecl : public QWidget, public Ui::KSettingsHomeDecl
-{
-public:
-  KSettingsHomeDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-
-class KSettingsHome : public KSettingsHomeDecl
+class KSettingsHomePrivate;
+class KSettingsHome : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsHome)
 
 public:
-  KSettingsHome(QWidget* parent = 0);
+  explicit KSettingsHome(QWidget* parent = nullptr);
   ~KSettingsHome();
 
 protected slots:
@@ -53,7 +47,8 @@ protected slots:
   void slotMoveDown();
 
 private:
-  bool m_noNeedToUpdateList;
+  KSettingsHomePrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSettingsHome)
 };
 #endif
 

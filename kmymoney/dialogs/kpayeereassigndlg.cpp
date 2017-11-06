@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Andreas Nicolai <ghorwin@users.sourceforge.net>
                            (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -34,6 +35,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kpayeereassigndlg.h"
+
 #include <kmymoneymvccombo.h>
 
 /** This lookup table needs to be in sync with KPayeeReassignDlg::OperationType enum */
@@ -42,48 +45,80 @@ static const char * labelText[KPayeeReassignDlg::TypeCount] = {
   I18N_NOOP("The transactions associated with the selected payees need to be re-assigned to a different payee before the selected payees can be deleted. Please select a payee from the list below."),
 };
 
-KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWidget* parent) :
-    KPayeeReassignDlgDecl(parent),
-    m_type(type)
+class KPayeeReassignDlgPrivate
 {
-  kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
-  mandatory->add(payeeCombo);
-  mandatory->setOkButton(buttonBox->button(QDialogButtonBox::Ok));
-  textLabel1->setText(i18n(labelText[m_type]));
+  Q_DISABLE_COPY(KPayeeReassignDlgPrivate)
+
+public:
+  KPayeeReassignDlgPrivate() :
+    ui(new Ui::KPayeeReassignDlg)
+  {
+  }
+
+  ~KPayeeReassignDlgPrivate()
+  {
+    delete ui;
+  }
+
+  Ui::KPayeeReassignDlg *ui;
+  KPayeeReassignDlg::OperationType m_type;
+};
+
+KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWidget* parent) :
+  QDialog(parent),
+  d_ptr(new KPayeeReassignDlgPrivate)
+{
+  Q_D(KPayeeReassignDlg);
+  d->ui->setupUi(this);
+  d->m_type = type;
+  auto mandatory = new kMandatoryFieldGroup(this);
+  mandatory->add(d->ui->payeeCombo);
+  mandatory->setOkButton(d->ui->buttonBox->button(QDialogButtonBox::Ok));
+  d->ui->textLabel1->setText(i18n(labelText[d->m_type]));
 }
 
 KPayeeReassignDlg::~KPayeeReassignDlg()
 {
+  Q_D(KPayeeReassignDlg);
+  delete d;
 }
 
 QString KPayeeReassignDlg::show(const QList<MyMoneyPayee>& payeeslist)
 {
+  Q_D(KPayeeReassignDlg);
   if (payeeslist.isEmpty())
     return QString(); // no payee available? nothing can be selected...
 
-  payeeCombo->loadPayees(payeeslist);
+  d->ui->payeeCombo->loadPayees(payeeslist);
 
   // execute dialog and if aborted, return empty string
   if (this->exec() == QDialog::Rejected)
     return QString();
 
   // allow to return the text (new payee) if type is Merge
-  if (m_type == TypeMerge && payeeCombo->selectedItem().isEmpty())
-    return payeeCombo->lineEdit()->text();
+  if (d->m_type == TypeMerge && d->ui->payeeCombo->selectedItem().isEmpty())
+    return d->ui->payeeCombo->lineEdit()->text();
 
   // otherwise return index of selected payee
-  return payeeCombo->selectedItem();
+  return d->ui->payeeCombo->selectedItem();
 }
 
 
+bool KPayeeReassignDlg::addToMatchList() const
+{
+  Q_D(const KPayeeReassignDlg);
+  return d->ui->m_copyToMatchList->isChecked();
+}
+
 void KPayeeReassignDlg::accept()
 {
-  // force update of payeeCombo
-  buttonBox->button(QDialogButtonBox::Ok)->setFocus();
+  Q_D(KPayeeReassignDlg);
+  // force update of d->ui->payeeCombo
+  d->ui->buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
-  if (m_type == TypeDelete && payeeCombo->selectedItem().isEmpty()) {
+  if (d->m_type == TypeDelete && d->ui->payeeCombo->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new payees to be created. Please pick a payee from the list."), i18n("Payee creation"));
   } else {
-    KPayeeReassignDlgDecl::accept();
+    QDialog::accept();
   }
 }

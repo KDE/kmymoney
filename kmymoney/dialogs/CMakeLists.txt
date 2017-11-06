@@ -46,36 +46,37 @@ set(libdialogs_a_SOURCES
   ktemplateexportdlg.cpp
   kupdatestockpricedlg.cpp
   transactioneditor.cpp
+  stdtransactioneditor.cpp
   transactionmatcher.cpp
   konlinetransferform.cpp
 )
 
 set(dialogs_HEADERS
   splitadjustdialog.h
-  investtransactioneditor.h kcurrencycalculator.h transactioneditor.h
+  investtransactioneditor.h kcurrencycalculator.h transactioneditor.h stdtransactioneditor.h
   )
 
 set(dialogs_UI
   splitadjustdialog.ui
-  kaccountselectdlgdecl.ui kbackupdlgdecl.ui
-  kcategoryreassigndlgdecl.ui kchooseimportexportdlgdecl.ui
-  kconfirmmanualenterdlgdecl.ui
-  kcurrencycalculatordecl.ui kcurrencyeditdlg.ui kavailablecurrencydlg.ui kcurrencyeditordlg.ui
-  keditscheduledlgdecl.ui
-  kenterscheduledlgdecl.ui
-  kequitypriceupdatedlgdecl.ui kequitypriceupdateconfdlg.ui
-  kfindtransactiondlgdecl.ui kgeneratesqldlgdecl.ui kgncimportoptionsdlgdecl.ui
-  kgncpricesourcedlgdecl.ui kloadtemplatedlgdecl.ui
-  kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
-  knewaccountdlg.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
-  knewequityentrydecl.ui editpersonaldatadlgdecl.ui kpayeereassigndlgdecl.ui
-  ktagreassigndlgdecl.ui
-  kselectdatabasedlg.ui kselecttransactionsdlgdecl.ui
-  ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
+  kaccountselectdlg.ui kbackupdlg.ui
+  kcategoryreassigndlg.ui kchooseimportexportdlg.ui
+  kconfirmmanualenterdlg.ui
+  kcurrencycalculator.ui kcurrencyeditdlg.ui kavailablecurrencydlg.ui kcurrencyeditordlg.ui
+  keditscheduledlg.ui
+  kenterscheduledlg.ui
+  kequitypriceupdatedlg.ui kequitypriceupdateconfdlg.ui
+  kfindtransactiondlg.ui kgeneratesqldlg.ui kgncimportoptionsdlg.ui
+  kgncpricesourcedlg.ui kloadtemplatedlg.ui
+  kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
+  knewaccountdlg.ui knewbankdlg.ui knewbudgetdlg.ui
+  knewequityentrydlg.ui editpersonaldatadlg.ui kpayeereassigndlg.ui
+  ktagreassigndlg.ui
+  kselectdatabasedlg.ui kselecttransactionsdlg.ui
+  ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
   ktemplateexportdlg.ui
-  kupdatestockpricedlgdecl.ui
+  kupdatestockpricedlg.ui
   ../widgets/kaccounttemplateselectordecl.ui ../widgets/transactionsortoptiondecl.ui
-  konlinetransferformdecl.ui
+  konlinetransferform.ui
 )
 
 ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )

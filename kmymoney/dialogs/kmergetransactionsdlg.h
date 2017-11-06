@@ -4,6 +4,7 @@
     begin                : Sun Aug 20 2006
     copyright            : (C) 2006 by Ace Jones
     email                : <acejones@users.sf.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,14 +35,12 @@ class KMergeTransactionsDlg: public KSelectTransactionsDlg
 {
   Q_OBJECT
 public:
-  explicit KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
+  explicit KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
 
-  bool eventFilter(QObject* , QEvent*) {
-    return false;
-  }
+  bool eventFilter(QObject* , QEvent*) override;
 
 public slots:
-  void slotHelp();
+  void slotHelp() override;
 };
 
 #endif // KMERGETRANSACTIONSDLG_H

@@ -4,6 +4,7 @@
     begin                : Sat Apr  7 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,26 +31,25 @@
 // Project Includes
 
 class MyMoneySchedule;
+class MyMoneyTransaction;
 class TransactionEditor;
 
-#include "ui_kenterscheduledlgdecl.h"
-#include "kmymoneyutils.h"
+namespace Ui { class KEnterScheduleDlg; }
+
+namespace eDialogs { enum class ScheduleResultCode; }
 
 /**
   * @author Thomas Baumgart
   */
-class KEnterScheduleDlgDecl : public QDialog, public Ui::KEnterScheduleDlgDecl
-{
-public:
-  KEnterScheduleDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-class KEnterScheduleDlg : public KEnterScheduleDlgDecl
+
+class KEnterScheduleDlgPrivate;
+class KEnterScheduleDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KEnterScheduleDlg)
+  
 public:
-  KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& schedule);
+  explicit KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& schedule);
   ~KEnterScheduleDlg();
 
   TransactionEditor* startEdit();
@@ -67,11 +67,11 @@ public:
    * value only makes sense, once the dialog has been executed.
    * Before execution it returns @a Cancel.
    */
-  KMyMoneyUtils::EnterScheduleResultCodeE resultCode() const;
+  eDialogs::ScheduleResultCode resultCode() const;
 
 protected:
   /// Overridden for internal reasons. No API changes.
-  bool focusNextPrevChild(bool next);
+  bool focusNextPrevChild(bool next) override;
 
   /**
     * This method returns the adjusts @a _date according to
@@ -79,10 +79,10 @@ protected:
     */
   QDate date(const QDate& _date) const;
 
-  void resizeEvent(QResizeEvent* ev);
+  void resizeEvent(QResizeEvent* ev) override;
 
 public slots:
-  int exec();
+  int exec() override;
 
 private slots:
   void slotSetupSize();
@@ -91,10 +91,8 @@ private slots:
   void slotSkip();
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  KEnterScheduleDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KEnterScheduleDlg)
 };
 
 #endif

@@ -21,17 +21,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingscolors.h"
+namespace Ui { class KSettingsColors; }
 
-class KSettingsColors : public QWidget, public Ui::KSettingsColors
+class KSettingsColors : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsColors)
 
 public:
   explicit KSettingsColors(QWidget* parent = nullptr);
@@ -42,6 +45,9 @@ private slots:
     * This presets custom colors with system's color scheme
     */
   void slotCustomColorsToggled(bool);
+
+private:
+  Ui::KSettingsColors       *ui;
 };
 #endif
 

@@ -4,6 +4,7 @@
     begin                : Sun Aug 20 2006
     copyright            : (C) 2006 by Ace Jones
     email                : <acejones@users.sf.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,6 +17,7 @@
  ***************************************************************************/
 
 #include "kmergetransactionsdlg.h"
+#include "kselecttransactionsdlg_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -31,22 +33,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kselecttransactionsdlg.h"
+
 #include "register.h"
-#include "mymoneyaccount.h"
 
 KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
     KSelectTransactionsDlg(account, parent)
 {
-
   // setup descriptive texts
   setWindowTitle(i18n("Merge Transactions"));
-  m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
+  d_ptr->ui->m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
 
   // no selection possible
-  m_register->setSelectionMode(QTableWidget::NoSelection);
+  d_ptr->ui->m_register->setSelectionMode(QTableWidget::NoSelection);
 
   // override default and enable ok button right away
-  buttonOk->setEnabled(true);
+  d_ptr->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+}
+
+bool KMergeTransactionsDlg::eventFilter(QObject* , QEvent*)
+{
+  return false;
 }
 
 void KMergeTransactionsDlg::slotHelp()

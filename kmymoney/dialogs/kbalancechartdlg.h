@@ -4,6 +4,7 @@
     begin                : Mon Nov 26 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -42,7 +43,7 @@ class KBalanceChartDlg : public QDialog
 {
   Q_OBJECT
 public:
-  explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = 0);
+  explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
   ~KBalanceChartDlg();
 
 protected:

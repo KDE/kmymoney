@@ -20,34 +20,30 @@
 
 #include <QDialog>
 
-enum updatingPricePolicyE : int {eUpdateAllPrices = 0, eUpdateMissingPrices, eUpdateDownloadedPrices, eUpdateSameSourcePrices, eAsk, eUpdatingPricePolicyEnd};
+namespace eDialogs { enum class UpdatePrice; }
 
-namespace Ui
-{
-class EquityPriceUpdateConfDlg;
-}
-
+class EquityPriceUpdateConfDlgPrivate;
 class EquityPriceUpdateConfDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(EquityPriceUpdateConfDlg)
 
 public:
-  explicit EquityPriceUpdateConfDlg(const updatingPricePolicyE policy);
+  explicit EquityPriceUpdateConfDlg(eDialogs::UpdatePrice policy);
   ~EquityPriceUpdateConfDlg();
 
-  Ui::EquityPriceUpdateConfDlg*   ui;
+  eDialogs::UpdatePrice policy() const;
 
-  updatingPricePolicyE policy();
-private:
-  void updatingPricePolicyChanged(const updatingPricePolicyE policy, bool toggled);
-
-  updatingPricePolicyE m_updatingPricePolicy;
 private slots:
   void updateAllToggled(bool toggled);
   void updateMissingToggled(bool toggled);
   void updateDownloadedToggled(bool toggled);
   void updateSameSourceToggled(bool toggled);
   void askToggled(bool toggled);
+
+private:
+  EquityPriceUpdateConfDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(EquityPriceUpdateConfDlg)
 };
 
 #endif // KEQUITYPRICEUPDATECONFDLG_H

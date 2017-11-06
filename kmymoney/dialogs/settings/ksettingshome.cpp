@@ -3,6 +3,7 @@
                              --------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,10 +28,11 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "ui_ksettingshome.h"
 
 #include "kmymoney/kmymoneyglobalsettings.h"
 #include "kmymoney/kmymoneyutils.h"
@@ -38,52 +40,69 @@
 
 using namespace Icons;
 
-KSettingsHome::KSettingsHome(QWidget* parent) :
-    KSettingsHomeDecl(parent),
-    m_noNeedToUpdateList(false)
+class KSettingsHomePrivate
 {
-  m_homePageList->setSortingEnabled(false);
+  Q_DISABLE_COPY(KSettingsHomePrivate)
 
-  KGuiItem upButtonItem(i18nc("Move item up",  "&Up"),
-                        QIcon::fromTheme(g_Icons[Icon::ArrowUp]),
-                        i18n("Move selected item up"),
-                        i18n("Use this to move the selected item up by one position in the list."));
-  KGuiItem downButtonItem(i18n("&Down"),
-                          QIcon::fromTheme(g_Icons[Icon::ArrowDown]),
-                          i18n("Move selected item down"),
-                          i18n("Use this to move the selected item down by one position in the list."));
+public:
+  KSettingsHomePrivate() :
+    ui(new Ui::KSettingsHome),
+    m_noNeedToUpdateList(false)
+  {
+  }
 
-  KGuiItem::assign(m_upButton, upButtonItem);
-  m_upButton->setEnabled(false);
-  KGuiItem::assign(m_downButton, downButtonItem);
-  m_downButton->setEnabled(false);
+  ~KSettingsHomePrivate()
+  {
+    delete ui;
+  }
+
+  Ui::KSettingsHome *ui;
+  bool m_noNeedToUpdateList;
+};
+
+KSettingsHome::KSettingsHome(QWidget* parent) :
+  QWidget(parent),
+  d_ptr(new KSettingsHomePrivate)
+{
+  Q_D(KSettingsHome);
+  d->ui->setupUi(this);
+  d->ui->m_homePageList->setSortingEnabled(false);
+
+  d->ui->m_upButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowUp]));
+  d->ui->m_downButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowDown]));
+
+  d->ui->m_upButton->setEnabled(false);
+  d->ui->m_downButton->setEnabled(false);
 
   // connect this, so that the list gets loaded once the edit field is filled
-  connect(kcfg_ItemList, SIGNAL(textChanged(QString)), this, SLOT(slotLoadItems()));
+  connect(d->ui->kcfg_ItemList, &QLineEdit::textChanged, this, &KSettingsHome::slotLoadItems);
 
-  connect(m_homePageList, SIGNAL(itemSelectionChanged()),
-          this, SLOT(slotSelectHomePageItem()));
-  connect(m_homePageList, SIGNAL(clicked(QModelIndex)), this, SLOT(slotUpdateItemList()));
+  connect(d->ui->m_homePageList, &QListWidget::itemSelectionChanged,
+          this, &KSettingsHome::slotSelectHomePageItem);
+  connect(d->ui->m_homePageList, &QAbstractItemView::clicked, this, &KSettingsHome::slotUpdateItemList);
 
-  connect(m_upButton, SIGNAL(clicked()), this, SLOT(slotMoveUp()));
-  connect(m_downButton, SIGNAL(clicked()), this, SLOT(slotMoveDown()));
+  connect(d->ui->m_upButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveUp);
+  connect(d->ui->m_downButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveDown);
 
   // Don't show it to the user, we only need it to load and save the settings
-  kcfg_ItemList->hide();
+  d->ui->kcfg_ItemList->hide();
 }
 
 KSettingsHome::~KSettingsHome()
 {
+  Q_D(KSettingsHome);
+  delete d;
 }
 
 void KSettingsHome::slotLoadItems()
 {
-  if (m_noNeedToUpdateList)
+  Q_D(KSettingsHome);
+  if (d->m_noNeedToUpdateList)
     return;
 
   QStringList list = KMyMoneyGlobalSettings::itemList();
   QStringList::ConstIterator it;
-  m_homePageList->clear();
+  d->ui->m_homePageList->clear();
   QListWidgetItem *sel = 0;
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
@@ -93,7 +112,7 @@ void KSettingsHome::slotLoadItems()
       continue;
     bool enabled = idx > 0;
     if (!enabled) idx = -idx;
-    QListWidgetItem* item = new QListWidgetItem(m_homePageList);
+    QListWidgetItem* item = new QListWidgetItem(d->ui->m_homePageList);
     item->setText(KMyMoneyUtils::homePageItemToString(idx));
     item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 
@@ -109,23 +128,24 @@ void KSettingsHome::slotLoadItems()
   }
 
   if (sel) {
-    m_homePageList->setCurrentItem(sel);
+    d->ui->m_homePageList->setCurrentItem(sel);
     slotSelectHomePageItem();
   }
 }
 
 void KSettingsHome::slotUpdateItemList()
 {
+  Q_D(KSettingsHome);
   QString list;
   QListWidgetItem *it;
 
-  for (it = m_homePageList->item(0); it;) {
+  for (it = d->ui->m_homePageList->item(0); it;) {
     int item = KMyMoneyUtils::stringToHomePageItem(it->text());
     if (it->checkState() == Qt::Unchecked)
       item = -item;
     list += QString::number(item);
-    if (m_homePageList->count() > (m_homePageList->row(it) + 1)) {
-      it = m_homePageList->item(m_homePageList->row(it) + 1);
+    if (d->ui->m_homePageList->count() > (d->ui->m_homePageList->row(it) + 1)) {
+      it = d->ui->m_homePageList->item(d->ui->m_homePageList->row(it) + 1);
       if (it) {
         list += ',';
       }
@@ -135,27 +155,29 @@ void KSettingsHome::slotUpdateItemList()
   }
 
   // don't update the list
-  m_noNeedToUpdateList = true;
-  kcfg_ItemList->setText(list);
-  m_noNeedToUpdateList = false;
+  d->m_noNeedToUpdateList = true;
+  d->ui->kcfg_ItemList->setText(list);
+  d->m_noNeedToUpdateList = false;
 }
 
 void KSettingsHome::slotSelectHomePageItem()
 {
-  QListWidgetItem* item = m_homePageList->currentItem();
-  m_upButton->setEnabled(m_homePageList->item(0) != item);
-  m_downButton->setEnabled(m_homePageList->count() > (m_homePageList->row(item) + 1));
+  Q_D(KSettingsHome);
+  auto item = d->ui->m_homePageList->currentItem();
+  d->ui->m_upButton->setEnabled(d->ui->m_homePageList->item(0) != item);
+  d->ui->m_downButton->setEnabled(d->ui->m_homePageList->count() > (d->ui->m_homePageList->row(item) + 1));
 }
 
 void KSettingsHome::slotMoveUp()
 {
-  QListWidgetItem *item = m_homePageList->currentItem();
-  QListWidgetItem *prev = m_homePageList->item(m_homePageList->row(item) - 1);
-  int prevRow = m_homePageList->row(prev);
+  Q_D(KSettingsHome);
+  auto item = d->ui->m_homePageList->currentItem();
+  auto prev = d->ui->m_homePageList->item(d->ui->m_homePageList->row(item) - 1);
+  int prevRow = d->ui->m_homePageList->row(prev);
   if (prev) {
-    m_homePageList->takeItem(m_homePageList->row(item));
-    m_homePageList->insertItem(prevRow, item);
-    m_homePageList->setCurrentRow(m_homePageList->row(item));
+    d->ui->m_homePageList->takeItem(d->ui->m_homePageList->row(item));
+    d->ui->m_homePageList->insertItem(prevRow, item);
+    d->ui->m_homePageList->setCurrentRow(d->ui->m_homePageList->row(item));
     slotSelectHomePageItem();
     slotUpdateItemList();
   }
@@ -163,13 +185,14 @@ void KSettingsHome::slotMoveUp()
 
 void KSettingsHome::slotMoveDown()
 {
-  QListWidgetItem *item = m_homePageList->currentItem();
-  QListWidgetItem *next = m_homePageList->item(m_homePageList->row(item) + 1);
-  int nextRow = m_homePageList->row(next);
+  Q_D(KSettingsHome);
+  auto item = d->ui->m_homePageList->currentItem();
+  auto next = d->ui->m_homePageList->item(d->ui->m_homePageList->row(item) + 1);
+  int nextRow = d->ui->m_homePageList->row(next);
   if (next) {
-    m_homePageList->takeItem(m_homePageList->row(item));
-    m_homePageList->insertItem(nextRow, item);
-    m_homePageList->setCurrentRow(m_homePageList->row(item));
+    d->ui->m_homePageList->takeItem(d->ui->m_homePageList->row(item));
+    d->ui->m_homePageList->insertItem(nextRow, item);
+    d->ui->m_homePageList->setCurrentRow(d->ui->m_homePageList->row(item));
     slotSelectHomePageItem();
     slotUpdateItemList();
   }

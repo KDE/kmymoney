@@ -2,6 +2,7 @@
                           kgeneratesql.h
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -18,11 +19,6 @@
 #define KGENERATESQLDLG_H
 
 // ----------------------------------------------------------------------------
-// Std Includes
-
-#include <memory>
-
-// ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QDialog>
@@ -33,52 +29,30 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kgeneratesqldlgdecl.h"
-
-class QDialogButtonBox;
-class MyMoneyDbDriver;
-class MyMoneySeqAccessMgr;
-class kMandatoryFieldGroup;
-class KGenerateSqlDlgDecl : public QWidget, public Ui::KGenerateSqlDlgDecl
-{
-public:
-  KGenerateSqlDlgDecl() {
-    setupUi(this);
-  }
-};
-
+class KGenerateSqlDlgPrivate;
 class KGenerateSqlDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KGenerateSqlDlg)
+
 public:
-  explicit KGenerateSqlDlg(QWidget *parent = 0);
+  explicit KGenerateSqlDlg(QWidget *parent = nullptr);
   ~KGenerateSqlDlg();
   /**
    * execute the generation
    */
-  int exec();
+  int exec() override;
+
 public slots:
   void slotHelp();
   void slotdriverSelected();
   void slotcreateTables();
   void slotsaveSQL();
+
 private:
-  void initializeForm();
-  QString selectedDriver();
+  KGenerateSqlDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KGenerateSqlDlg)
 
-  KGenerateSqlDlgDecl* m_widget;
-  QDialogButtonBox* m_buttonBox;
-  QPushButton* m_createTablesButton;
-  QPushButton* m_saveSqlButton;
-
-  QList<QString> m_supportedDrivers;
-  //MyMoneyDbDrivers m_map;
-  std::unique_ptr<kMandatoryFieldGroup> m_requiredFields;
-  bool m_sqliteSelected;
-  QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
-  QString m_dbName;
-  MyMoneySeqAccessMgr* m_storage;
-  bool m_mustDetachStorage;
 };
 
 #endif

@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,60 +27,54 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
+class MyMoneyMoney;
+class MyMoneySplit;
+class MyMoneyTransaction;
+class MyMoneyAccount;
 
+namespace Ui { class KSplitCorrectionDlg; }
 
-#include "ui_ksplittransactiondlgdecl.h"
-#include "ui_ksplitcorrectiondlg.h"
-
-class QDialogButtonBox;
-
-class KSplitCorrectionDlgDecl : public QDialog, public Ui::KSplitCorrectionDlgDecl
+class KSplitCorrectionDlg : public QDialog
 {
+  Q_OBJECT
+  Q_DISABLE_COPY(KSplitCorrectionDlg)
+
 public:
-  KSplitCorrectionDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
+  explicit KSplitCorrectionDlg(QWidget *parent = nullptr);
+  ~KSplitCorrectionDlg();
+
+  Ui::KSplitCorrectionDlg *ui;
 };
 
 /**
   * @author Thomas Baumgart
   */
 
-class KSplitTransactionDlgDecl : public QDialog, public Ui::KSplitTransactionDlgDecl
-{
-public:
-  KSplitTransactionDlgDecl(QWidget *parent) : QDialog(parent), m_buttonBox(0) {
-    setupUi(this);
-  }
-
-protected:
-  QDialogButtonBox *m_buttonBox;
-};
-
-class KSplitTransactionDlg : public KSplitTransactionDlgDecl
+class KSplitTransactionDlgPrivate;
+class KSplitTransactionDlg : public QDialog
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSplitTransactionDlg)
 
 public:
-  KSplitTransactionDlg(const MyMoneyTransaction& t,
-                       const MyMoneySplit& s,
-                       const MyMoneyAccount& acc,
-                       const bool amountValid,
-                       const bool deposit,
-                       const MyMoneyMoney& calculatedValue,
-                       const QMap<QString, MyMoneyMoney>& priceInfo,
-                       QWidget* parent = 0);
+  explicit KSplitTransactionDlg(const MyMoneyTransaction& t,
+                                const MyMoneySplit& s,
+                                const MyMoneyAccount& acc,
+                                const bool amountValid,
+                                const bool deposit,
+                                const MyMoneyMoney& calculatedValue,
+                                const QMap<QString, MyMoneyMoney>& priceInfo,
+                                QWidget* parent = nullptr);
 
-  virtual ~KSplitTransactionDlg();
+  ~KSplitTransactionDlg();
 
   /**
     * Using this method, an external object can retrieve the result
@@ -89,9 +84,7 @@ public:
     *         the construction of this object and modified using the
     *         dialog.
     */
-  const MyMoneyTransaction& transaction() const {
-    return m_transaction;
-  };
+  MyMoneyTransaction transaction() const;
 
   /**
     * This method calculates the difference between the split that references
@@ -110,18 +103,12 @@ public:
     */
   MyMoneyMoney splitsValue();
 
-private:
-  /**
-    * This method updates the display of the sums below the register
-    */
-  void updateSums();
-
 public slots:
-  int exec();
+  int exec() override;
 
 protected slots:
-  void accept();
-  void reject();
+  void accept() override;
+  void reject() override;
   void slotClearAllSplits();
   void slotClearUnusedSplits();
   void slotSetTransaction(const MyMoneyTransaction& t);
@@ -153,43 +140,8 @@ signals:
   void objectCreation(bool state);
 
 private:
-  /**
-    * This member keeps a copy of the current selected transaction
-    */
-  MyMoneyTransaction     m_transaction;
-
-  /**
-    * This member keeps a copy of the currently selected account
-    */
-  MyMoneyAccount         m_account;
-
-  /**
-    * This member keeps a copy of the currently selected split
-    */
-  MyMoneySplit           m_split;
-
-  /**
-    * This member keeps the precision for the values
-    */
-  int                    m_precision;
-
-  /**
-    * flag that shows that the amount specified in the constructor
-    * should be used as fix value (true) or if it can be changed (false)
-    */
-  bool                   m_amountValid;
-
-  /**
-    * This member keeps track if the current transaction is of type
-    * deposit (true) or withdrawal (false).
-    */
-  bool                   m_isDeposit;
-
-  /**
-    * This member keeps the amount that will be assigned to all the
-    * splits that are marked 'will be calculated'.
-    */
-  MyMoneyMoney           m_calculatedValue;
+  KSplitTransactionDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KSplitTransactionDlg)
 };
 
 #endif

@@ -4,6 +4,7 @@
     begin                : Sun Oct 9 2005
     copyright            : (C) 2005 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,33 +30,37 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kmymoneyfileinfodlg.h"
+
 #include <imymoneystorage.h>
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "mymoneyprice.h"
 #include "mymoneypayee.h"
+#include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyenums.h"
 
-KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
-    : KMyMoneyFileInfoDlgDecl(parent)
+KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::KMyMoneyFileInfoDlg)
 {
+  ui->setupUi(this);
   // Now fill the fields with data
-  IMyMoneyStorage* storage = MyMoneyFile::instance()->storage();
+  auto storage = MyMoneyFile::instance()->storage();
 
-  m_creationDate->setText(storage->creationDate().toString(Qt::ISODate));
-  m_lastModificationDate->setText(storage->lastModificationDate().toString(Qt::ISODate));
-  m_baseCurrency->setText(storage->value("kmm-baseCurrency"));
+  ui->m_creationDate->setText(storage->creationDate().toString(Qt::ISODate));
+  ui->m_lastModificationDate->setText(storage->lastModificationDate().toString(Qt::ISODate));
+  ui->m_baseCurrency->setText(storage->value("kmm-baseCurrency"));
 
-  m_payeeCount->setText(QString("%1").arg(storage->payeeList().count()));
-  m_institutionCount->setText(QString("%1").arg(storage->institutionList().count()));
+  ui->m_payeeCount->setText(QString::fromLatin1("%1").arg(storage->payeeList().count()));
+  ui->m_institutionCount->setText(QString::fromLatin1("%1").arg(storage->institutionList().count()));
 
   QList<MyMoneyAccount> a_list;
   storage->accountList(a_list);
-  m_accountCount->setText(QString("%1").arg(a_list.count()));
+  ui->m_accountCount->setText(QString::fromLatin1("%1").arg(a_list.count()));
 
   QMap<eMyMoney::Account, int> accountMap;
   QMap<eMyMoney::Account, int> accountMapClosed;
@@ -71,25 +76,26 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
   for (it_m = accountMap.constBegin(); it_m != accountMap.constEnd(); ++it_m) {
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setText(0, MyMoneyAccount::accountTypeToString(it_m.key()));
-    item->setText(1, QString("%1").arg(*it_m));
-    item->setText(2, QString("%1").arg(accountMapClosed[it_m.key()]));
-    m_accountView->invisibleRootItem()->addChild(item);
+    item->setText(1, QString::fromLatin1("%1").arg(*it_m));
+    item->setText(2, QString::fromLatin1("%1").arg(accountMapClosed[it_m.key()]));
+    ui->m_accountView->invisibleRootItem()->addChild(item);
   }
 
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
-  m_transactionCount->setText(QString("%1").arg(storage->transactionList(filter).count()));
+  ui->m_transactionCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
   filter.setReportAllSplits(true);
-  m_splitCount->setText(QString("%1").arg(storage->transactionList(filter).count()));
-  m_scheduleCount->setText(QString("%1").arg(storage->scheduleList().count()));
+  ui->m_splitCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
+  ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(storage->scheduleList().count()));
   MyMoneyPriceList list = storage->priceList();
   MyMoneyPriceList::const_iterator it_p;
   int pCount = 0;
   for (it_p = list.constBegin(); it_p != list.constEnd(); ++it_p)
     pCount += (*it_p).count();
-  m_priceCount->setText(QString("%1").arg(pCount));
+  ui->m_priceCount->setText(QString::fromLatin1("%1").arg(pCount));
 }
 
 KMyMoneyFileInfoDlg::~KMyMoneyFileInfoDlg()
 {
+  delete ui;
 }

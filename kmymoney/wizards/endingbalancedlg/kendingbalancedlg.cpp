@@ -23,6 +23,7 @@
 #include <QDate>
 #include <QList>
 #include <QBitArray>
+#include <QAbstractButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -111,7 +112,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   }
 
   // We don't need to add the default into the list (see ::help() why)
-  // m_helpAnchor[m_startPageCheckings] = QString("");
+  // m_helpAnchor[m_startPageCheckings] = QString(QString());
   d->m_helpAnchor[m_interestChargeCheckings] = QString("details.reconcile.wizard.interest");
   d->m_helpAnchor[m_statementInfoPageCheckings] = QString("details.reconcile.wizard.statement");
 
@@ -204,24 +205,24 @@ void KEndingBalanceDlg::slotUpdateBalances()
   balance = balance * factor;
   endBalance = startBalance = balance;
 
-  tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney("", 2)));
+  tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney(QString(), 2)));
 
   for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
     balance -= split.shares() * factor;
     if ((*it).first.postDate() > field("statementDate").toDate()) {
-      tracer.printf("Reducing balances by %s because postdate of %s/%s(%s) is past statement date", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
+      tracer.printf("Reducing balances by %s because postdate of %s/%s(%s) is past statement date", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
       endBalance -= split.shares() * factor;
       startBalance -= split.shares() * factor;
     } else {
       switch (split.reconcileFlag()) {
         case eMyMoney::Split::State::NotReconciled:
-          tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
+          tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
           endBalance -= split.shares() * factor;
           startBalance -= split.shares() * factor;
           break;
         case eMyMoney::Split::State::Cleared:
-          tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
+          tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
           startBalance -= split.shares() * factor;
           break;
         default:
@@ -232,8 +233,8 @@ void KEndingBalanceDlg::slotUpdateBalances()
   //FIXME: port
   m_statementInfoPageCheckings->m_previousBalance->setValue(startBalance);
   m_statementInfoPageCheckings->m_endingBalance->setValue(endBalance);
-  tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney("", 2)));
-  tracer.printf("start balance = %s", qPrintable(startBalance.formatMoney("", 2)));
+  tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney(QString(), 2)));
+  tracer.printf("start balance = %s", qPrintable(startBalance.formatMoney(QString(), 2)));
 
   setField("interestDateEdit", field("statementDate").toDate());
   setField("chargesDateEdit", field("statementDate").toDate());

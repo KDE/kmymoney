@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,35 +21,33 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsregisterdecl.h"
+namespace Ui { class KSettingsRegister; }
 
-class KSettingsRegisterDecl : public QWidget, public Ui::KSettingsRegisterDecl
-{
-public:
-  KSettingsRegisterDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-
-class KSettingsRegister : public KSettingsRegisterDecl
+class KSettingsRegister : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KSettingsRegister)
 
 public:
-  KSettingsRegister(QWidget* parent = 0);
+  explicit KSettingsRegister(QWidget* parent = nullptr);
   ~KSettingsRegister();
 
 protected slots:
   void slotLoadNormal(const QString& text);
   void slotLoadReconcile(const QString& text);
   void slotLoadSearch(const QString& text);
+
+private:
+  Ui::KSettingsRegister *ui;
+
 };
 #endif
 
