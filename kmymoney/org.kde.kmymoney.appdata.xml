@@ -75,6 +75,7 @@
     <p xml:lang="tr">KMyMoney, KDE tarafından bir kişisel bir finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolayken, geniş bir özellik seti ile birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
     <p xml:lang="x-test">xxKMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.xx</p>
+    <p xml:lang="zh-CN">KMyMoney 是 KDE 提供的个人金融管理器。它提供许多功能，同时对非技术用户仍然易于使用。</p>
     <p>
       It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format.
       Direct download using the OFX and HBCI formats is also possible via plugins.
@@ -126,6 +127,7 @@
       <caption xml:lang="tr">KMyMoney iyi bir başlangıç yapması için bir hoş geldiniz sayfası vardır</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
+      <caption xml:lang="zh-CN">KMyMoney 提供一个欢迎页面以帮助新用户开始使用软件</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm1.png</image>
     </screenshot>
     <screenshot>
