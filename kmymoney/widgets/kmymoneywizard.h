@@ -92,12 +92,12 @@ class kMandatoryFieldGroup;
   * Let's assume we call the first page of the wizard 'General' and go
   * from there.
   * We also assume, that the wizard has more than one page.
-  * The ui designer generated class should have the name KNewUserGeneralDecl
+  * The ui designer generated class should have the name KNewUserGeneral
   * as all other dialogs. The class definition of KNewUserGeneral will
   * look like this:
   *
   * @code
-  * class KNewUserGeneral : public KNewUserGeneralDecl, public KNewUserPage
+  * class KNewUserGeneral : public KNewUserGeneral, public KNewUserPage
   * {
   *   Q_OBJECT
   * public:
@@ -115,7 +115,7 @@ class kMandatoryFieldGroup;
   *
   * @code
   * KNewUserGeneral::KNewUserGeneral(KNewUserWizard* parent, const char* name) :
-  *   KNewUserGeneralDecl(parent),
+  *   KNewUserGeneral(parent),
   *   KNewUserPage(1, this, parent, name)
   * {
   *   kMandatoryFieldGroup* mandatoryGroup = new kMandatoryFieldGroup(this);
@@ -342,7 +342,7 @@ protected:
   * {
   *   Q_OBJECT
   * public:
-  *   KNewUserWizard(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags flags = 0);
+  *   KNewUserWizard(QWidget* parent = nullptr, const char* name = 0, bool modal = false, Qt::WindowFlags flags = 0);
   *
   * private:
   *   KNewUserGeneral*  m_generalPage;
@@ -458,7 +458,7 @@ protected:
   /**
     * Constructor (kept protected, so that one cannot create such an object directly)
     */
-  KMyMoneyWizard(QWidget *parent = 0, bool modal = false, Qt::WindowFlags f = 0);
+  explicit KMyMoneyWizard(QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
 
   /**
     * This method sets up the first page after creation of the object

@@ -27,7 +27,7 @@ class KMM_WIDGETS_EXPORT KTreeWidgetFilterLineWidget : public KTreeWidgetSearchL
   Q_OBJECT
 
 public:
-  explicit KTreeWidgetFilterLineWidget(QWidget *parent = 0, QTreeWidget *treeWidget = 0);
+  explicit KTreeWidgetFilterLineWidget(QWidget* parent = nullptr, QTreeWidget *treeWidget = 0);
 
 protected Q_SLOTS:
   /**

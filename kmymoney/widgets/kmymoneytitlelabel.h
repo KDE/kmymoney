@@ -43,7 +43,7 @@ class KMyMoneyTitleLabel : public QLabel
   Q_PROPERTY(QString text READ text WRITE setText DESIGNABLE true)
 
 public:
-  KMyMoneyTitleLabel(QWidget *parent = 0);
+  explicit KMyMoneyTitleLabel(QWidget* parent = nullptr);
   ~KMyMoneyTitleLabel();
 
   void setBgColor(const QColor& _color) {

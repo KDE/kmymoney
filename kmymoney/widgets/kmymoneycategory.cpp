@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "kmymoneycategory.h"
+#include "kmymoneycombo_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,6 +27,7 @@
 #include <QFrame>
 #include <QPushButton>
 #include <QIcon>
+#include <QEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,14 +45,20 @@
 
 using namespace Icons;
 
-class KMyMoneyCategory::Private
+class KMyMoneyCategoryPrivate : public KMyMoneyComboPrivate
 {
 public:
-  Private() :
+  KMyMoneyCategoryPrivate() :
       splitButton(0),
       frame(0),
       recursive(false),
-      isSplit(false) {}
+      isSplit(false)
+  {
+  }
+
+  ~KMyMoneyCategoryPrivate()
+  {
+  }
 
   QPushButton*      splitButton;
   QFrame*           frame;
@@ -58,12 +66,12 @@ public:
   bool              isSplit;
 };
 
-KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
-    KMyMoneyCombo(true, parent),
-    d(new Private)
+KMyMoneyCategory::KMyMoneyCategory(bool splitButton, QWidget* parent) :
+  KMyMoneyCombo(*new KMyMoneyCategoryPrivate, true, parent)
 {
+  Q_D(KMyMoneyCategory);
   if (splitButton) {
-    d->frame = new QFrame(0);
+    d->frame = new QFrame(nullptr);
     // don't change the following name unless you want to break TransactionEditor::setup()
     d->frame->setObjectName("KMyMoneyCategoryFrame");
     d->frame->setFocusProxy(this);
@@ -91,27 +99,28 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
     installEventFilter(this);
   }
 
-  m_completion = new kMyMoneyAccountCompletion(this);
-  connect(m_completion, SIGNAL(itemSelected(QString)), this, SLOT(slotItemSelected(QString)));
-  connect(this, SIGNAL(editTextChanged(QString)), m_completion, SLOT(slotMakeCompletion(QString)));
+  d->m_completion = new kMyMoneyAccountCompletion(this);
+  connect(d->m_completion, SIGNAL(itemSelected(QString)), this, SLOT(slotItemSelected(QString)));
+  connect(this, SIGNAL(editTextChanged(QString)), d->m_completion, SLOT(slotMakeCompletion(QString)));
 }
 
 KMyMoneyCategory::~KMyMoneyCategory()
 {
+  Q_D(KMyMoneyCategory);
   // make sure to wipe out the frame, button and layout
   if (d->frame && !d->frame->parentWidget())
     d->frame->deleteLater();
-
-  delete d;
 }
 
 QPushButton* KMyMoneyCategory::splitButton() const
 {
+  Q_D(const KMyMoneyCategory);
   return d->splitButton;
 }
 
 void KMyMoneyCategory::setPalette(const QPalette& palette)
 {
+  Q_D(KMyMoneyCategory);
   if (d->frame)
     d->frame->setPalette(palette);
   KMyMoneyCombo::setPalette(palette);
@@ -119,6 +128,7 @@ void KMyMoneyCategory::setPalette(const QPalette& palette)
 
 void KMyMoneyCategory::reparent(QWidget *parent, Qt::WindowFlags w, const QPoint&, bool showIt)
 {
+  Q_D(KMyMoneyCategory);
   if (d->frame) {
     d->frame->setParent(parent, w);
     if (showIt)
@@ -150,12 +160,13 @@ void KMyMoneyCategory::setCurrentTextById(const QString& id)
 
 void KMyMoneyCategory::slotItemSelected(const QString& id)
 {
+  Q_D(KMyMoneyCategory);
   setCurrentTextById(id);
 
-  m_completion->hide();
+  d->m_completion->hide();
 
-  if (m_id != id) {
-    m_id = id;
+  if (d->m_id != id) {
+    d->m_id = id;
     emit itemSelected(id);
   }
 }
@@ -181,6 +192,7 @@ void KMyMoneyCategory::focusInEvent(QFocusEvent *ev)
 
 void KMyMoneyCategory::setSplitTransaction()
 {
+  Q_D(KMyMoneyCategory);
   d->isSplit = true;
   setEditText(i18nc("Split transaction (category replacement)", "Split transaction"));
   setSuppressObjectCreation(true);
@@ -188,11 +200,23 @@ void KMyMoneyCategory::setSplitTransaction()
 
 bool KMyMoneyCategory::isSplitTransaction() const
 {
+  Q_D(const KMyMoneyCategory);
   return d->isSplit;
+}
+
+void KMyMoneyCategory::setCurrentText(const QString& txt)
+{
+  KMyMoneyCombo::setCurrentText(txt);
+}
+
+void KMyMoneyCategory::setCurrentText()
+{
+  KMyMoneyCombo::setCurrentText(QString());
 }
 
 bool KMyMoneyCategory::eventFilter(QObject *o, QEvent *ev)
 {
+  Q_D(KMyMoneyCategory);
   // forward enable/disable state to split button
   if (o == this && ev->type() == QEvent::EnabledChange) {
     if (d->splitButton) {
@@ -203,12 +227,22 @@ bool KMyMoneyCategory::eventFilter(QObject *o, QEvent *ev)
 }
 
 KMyMoneySecurity::KMyMoneySecurity(QWidget* parent) :
-    KMyMoneyCategory(parent, false)
+  KMyMoneyCategory(false, parent)
 {
 }
 
 KMyMoneySecurity::~KMyMoneySecurity()
 {
+}
+
+void KMyMoneySecurity::setCurrentText(const QString& txt)
+{
+  KMyMoneyCategory::setCurrentText(txt);
+}
+
+void KMyMoneySecurity::setCurrentText()
+{
+  KMyMoneyCategory::setCurrentText(QString());
 }
 
 void KMyMoneySecurity::setCurrentTextById(const QString& id)

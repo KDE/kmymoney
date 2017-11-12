@@ -24,13 +24,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class QPushButton;
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneycombo.h"
 
+class QPushButton;
 class kMyMoneyAccountSelector;
 
 /**
@@ -50,9 +49,12 @@ class kMyMoneyAccountSelector;
   *
   * @author Thomas Baumgart
   */
+class KMyMoneyCategoryPrivate;
 class KMyMoneyCategory : public KMyMoneyCombo
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyCategory)
+
 public:
   /**
     * Standard constructor for the account selection object.
@@ -85,9 +87,8 @@ public:
     * table->setCellWidget(category->parentWidget());
     * @endcode
     */
-  explicit KMyMoneyCategory(QWidget* parent = 0, bool splitButton = false);
-
-  virtual ~KMyMoneyCategory();
+  explicit KMyMoneyCategory(bool splitButton = false, QWidget* parent = nullptr);
+  ~KMyMoneyCategory() override;
 
   /**
     * This member returns a pointer to the completion object.
@@ -125,11 +126,10 @@ public:
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) {
-    KMyMoneyCombo::setCurrentText(txt);
-  }
+  void setCurrentText(const QString& txt);
+  void setCurrentText();
 
-  bool eventFilter(QObject *o, QEvent *ev);
+  bool eventFilter(QObject *o, QEvent *ev) override;
 
 protected:
   /**
@@ -137,20 +137,20 @@ protected:
     *
     * @sa focusIn()
     */
-  virtual void focusInEvent(QFocusEvent* ev);
+  void focusInEvent(QFocusEvent* ev) override;
 
   /**
     * Reimplemented to support protected category text ("split transactions")
     */
-  virtual void focusOutEvent(QFocusEvent* ev);
+  void focusOutEvent(QFocusEvent* ev) override;
 
   /**
     * set the widgets text area based on the item with the given @a id.
     */
-  virtual void setCurrentTextById(const QString& id);
+  void setCurrentTextById(const QString& id)  override;
 
 public slots:
-  virtual void slotItemSelected(const QString& id);
+  void slotItemSelected(const QString& id) override;
 
 signals:
   /**
@@ -163,32 +163,30 @@ signals:
   void focusIn();
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  Q_DECLARE_PRIVATE(KMyMoneyCategory)
 };
 
 
 class KMyMoneySecurity : public KMyMoneyCategory
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneySecurity)
+
 public:
-  KMyMoneySecurity(QWidget* parent = 0);
-  virtual ~KMyMoneySecurity();
+  explicit KMyMoneySecurity(QWidget* parent = nullptr);
+  ~KMyMoneySecurity() override;
 
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) {
-    KMyMoneyCategory::setCurrentText(txt);
-  }
+  void setCurrentText(const QString& txt);
+  void setCurrentText();
 
 protected:
   /**
     * set the widgets text area based on the item with the given @a id.
     */
-  virtual void setCurrentTextById(const QString& id);
+  void setCurrentTextById(const QString& id) override;
 };
 
 #endif

@@ -26,3 +26,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+TransactionEditorContainer::TransactionEditorContainer(QWidget* parent) : QTableWidget(parent)
+{
+}
+
+void TransactionEditorContainer::updateGeometries()
+{
+  QTableWidget::updateGeometries();
+  emit geometriesUpdated();
+}

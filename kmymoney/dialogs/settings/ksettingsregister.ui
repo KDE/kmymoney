@@ -490,7 +490,7 @@ Selecting 0% will list all transactions.</string>
     <customwidget>
       <class>TransactionSortOption</class>
       <extends>QWidget</extends>
-      <header location="locale">transactionsortoptionimpl.h</header>
+      <header location="locale">transactionsortoption.h</header>
     </customwidget>
     <customwidget>
       <class>KComboBox</class>

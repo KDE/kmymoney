@@ -111,7 +111,7 @@ How often will there be payments made to this loan?</string>
  <customwidget>
   <class>KMyMoneyFrequencyCombo</class>
   <extends>KComboBox</extends>
-  <header>kmymoneymvccombo.h</header>
+  <header>kmymoneyfrequencycombo.h</header>
  </customwidget>
  <customwidget>
   <class>KComboBox</class>

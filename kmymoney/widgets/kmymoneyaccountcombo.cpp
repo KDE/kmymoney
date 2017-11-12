@@ -20,8 +20,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
-
 #include "kmymoneyaccountcombo.h"
 
 // ----------------------------------------------------------------------------
@@ -90,7 +88,7 @@ void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
   if(m_popupView) {
     bool isBlocked = m_popupView->blockSignals(true);
     m_popupView->setCurrentIndex(QModelIndex());
-    for (int i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
+    for (auto i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
       QModelIndex childIndex = m_q->model()->index(i, 0);
       if (m_q->model()->hasChildren(childIndex)) {
         // search the first leaf

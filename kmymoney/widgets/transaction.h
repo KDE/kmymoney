@@ -21,10 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPalette>
-#include <QList>
-#include <QColor>
-#include <QDate>
+#include <QWidgetList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,175 +30,118 @@
 // Project Includes
 
 #include "registeritem.h"
-#include "mymoneymoney.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "selectedtransaction.h"
 
+class QWidget;
+class QPalette;
+class QFontMetrics;
 class QTableWidget;
 class TransactionEditor;
 class TransactionEditorContainer;
 
-namespace KMyMoneyTransactionForm
-{
-class TransactionForm;
-} // namespace
+class MyMoneySplit;
+class MyMoneyTransaction;
+
+template <class Key, class Value> class QMap;
+
+namespace KMyMoneyTransactionForm { class TransactionForm; }
 
 namespace KMyMoneyRegister
 {
+  class SelectedTransactions;
+  // keep the following list in sync with code in the constructor
+  // of KMyMoneyRegister::Register in register.cpp
+  typedef enum {
+    NumberColumn = 0,
+    DateColumn,
+    AccountColumn,
+    SecurityColumn,
+    DetailColumn,
+    ReconcileFlagColumn,
+    PaymentColumn,
+    DepositColumn,
+    QuantityColumn,
+    PriceColumn,
+    ValueColumn,
+    BalanceColumn,
+    // insert new values above this line
+    MaxColumns
+  } Column;
 
-// keep the following list in sync with code in the constructor
-// of KMyMoneyRegister::Register in register.cpp
-typedef enum {
-  NumberColumn = 0,
-  DateColumn,
-  AccountColumn,
-  SecurityColumn,
-  DetailColumn,
-  ReconcileFlagColumn,
-  PaymentColumn,
-  DepositColumn,
-  QuantityColumn,
-  PriceColumn,
-  ValueColumn,
-  BalanceColumn,
-  // insert new values above this line
-  MaxColumns
-} Column;
+  class TransactionPrivate;
+  class Transaction : public RegisterItem
+  {
+  public:
+    explicit Transaction(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+    Transaction(const Transaction & other);
+    Transaction(Transaction && other);
+    friend void swap(Transaction& first, Transaction& second);
+    virtual ~Transaction();
 
-class Transaction : public RegisterItem
-{
-public:
-  Transaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~Transaction() {}
+    virtual const char* className() override;
+    bool isSelectable() const override;
+    bool isSelected() const override;
+    void setSelected(bool selected) override;
+    bool canHaveFocus() const override;
+    bool hasFocus() const override;
+    bool hasEditorOpen() const override;
+    virtual bool isScheduled() const;
+    void setFocus(bool focus, bool updateLens = true) override;
+    bool isErroneous() const override;
+    QDate sortPostDate() const override;
+    virtual int sortSamePostDate() const override;
+    QDate sortEntryDate() const override;
+    virtual const QString& sortPayee() const override;
+    virtual const QList<QString>& sortTagList() const;
+    MyMoneyMoney sortValue() const override;
+    QString sortNumber() const override;
+    virtual const QString& sortEntryOrder() const override;
+    virtual CashFlowDirection sortType() const override;
+    virtual const QString& sortCategory() const override;
+    virtual eMyMoney::Split::State sortReconcileState() const override;
+    virtual const QString& id() const override;
+    const MyMoneyTransaction& transaction() const;
+    const MyMoneySplit& split() const;
+    void setBalance(const MyMoneyMoney& balance);
+    const MyMoneyMoney& balance() const;
 
-  virtual const char* className() override {
-    return "Transaction";
-  }
+    virtual int rowHeightHint() const override ;
 
-  bool isSelectable() const override {
-    return true;
-  }
-  bool isSelected() const override {
-    return m_selected;
-  }
-  void setSelected(bool selected) override;
+    virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+    virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItem& option, const QModelIndex& index) override;
 
-  bool canHaveFocus() const override {
-    return true;
-  }
-  bool hasFocus() const override {
-    return m_focus;
-  }
-  bool hasEditorOpen() const override {
-    return m_inEdit;
-  }
+    virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) override;
+    virtual bool formCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */);
+    virtual void registerCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */);
+    virtual int registerColWidth(int /* col */, const QFontMetrics& /* cellFontMetrics */);
 
-  virtual bool isScheduled() const {
-    return false;
-  }
-
-  void setFocus(bool focus, bool updateLens = true) override;
-
-  bool isErroneous() const override {
-    return m_erroneous;
-  }
-
-  QDate sortPostDate() const override {
-    return m_transaction.postDate();
-  }
-  virtual int sortSamePostDate() const override {
-    return 2;
-  }
-  QDate sortEntryDate() const override {
-    return m_transaction.entryDate();
-  }
-  virtual const QString& sortPayee() const override {
-    return m_payee;
-  }
-  virtual const QList<QString>& sortTagList() const {
-    return m_tagList;
-  }
-  MyMoneyMoney sortValue() const override {
-    return m_split.shares();
-  }
-  QString sortNumber() const override {
-    return m_split.number();
-  }
-  virtual const QString& sortEntryOrder() const override {
-    return m_uniqueId;
-  }
-  virtual CashFlowDirection sortType() const override {
-    return m_split.shares().isNegative() ? Payment : Deposit;
-  }
-  virtual const QString& sortCategory() const override {
-    return m_category;
-  }
-  virtual eMyMoney::Split::State sortReconcileState() const override {
-    return m_split.reconcileFlag();
-  }
-
-  virtual const QString& id() const override {
-    return m_uniqueId;
-  }
-  const MyMoneyTransaction& transaction() const {
-    return m_transaction;
-  }
-  const MyMoneySplit& split() const {
-    return m_split;
-  }
-
-  void setBalance(const MyMoneyMoney& balance) {
-    m_balance = balance;
-  }
-  const MyMoneyMoney& balance() const {
-    return m_balance;
-  }
-
-  virtual int rowHeightHint() const override ;
-
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
-  virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItem& option, const QModelIndex& index) override;
-
-  virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) override;
-  virtual bool formCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {
-    return false;
-  }
-  virtual void registerCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {}
-  virtual int registerColWidth(int /* col */, const QFontMetrics& /* cellFontMetrics */) {
-    return 0;
-  }
-
-  /**
+    /**
     * Helper method for the above method.
     */
-  void registerCellText(QString& txt, int row, int col);
+    void registerCellText(QString& txt, int row, int col);
 
-  virtual int formRowHeight(int row);
-  virtual int formRowHeight() const;
+    virtual int formRowHeight(int row);
+    virtual int formRowHeight() const;
 
-  virtual void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
-  virtual void setupFormPalette(QMap<QString, QWidget*>& editWidgets);
-  virtual void setupRegisterPalette(QMap<QString, QWidget*>& editWidgets);
-  virtual void loadTab(KMyMoneyTransactionForm::TransactionForm* form) = 0;
+    virtual void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
+    virtual void setupFormPalette(QMap<QString, QWidget*>& editWidgets);
+    virtual void setupRegisterPalette(QMap<QString, QWidget*>& editWidgets);
+    virtual void loadTab(KMyMoneyTransactionForm::TransactionForm* form) = 0;
 
-  virtual void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets) = 0;
-  virtual void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets) = 0;
-  virtual void tabOrderInForm(QWidgetList& tabOrderWidgets) const = 0;
-  virtual void tabOrderInRegister(QWidgetList& tabOrderWidgets) const = 0;
+    virtual void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets) = 0;
+    virtual void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets) = 0;
+    virtual void tabOrderInForm(QWidgetList& tabOrderWidgets) const = 0;
+    virtual void tabOrderInRegister(QWidgetList& tabOrderWidgets) const = 0;
 
-  virtual KMyMoneyRegister::Action actionType() const = 0;
+    virtual KMyMoneyRegister::Action actionType() const = 0;
 
-  QWidget* focusWidget(QWidget*) const;
-  void arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w) const;
+    QWidget* focusWidget(QWidget*) const;
+    void arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w) const;
 
-  bool haveNumberField() const;
+    bool haveNumberField() const;
 
-  bool matches(const RegisterFilter&) const override;
+    bool matches(const RegisterFilter&) const override;
 
-  /**
+    /**
     * Checks if the mouse hovered over an area that has a tooltip associated with it.
     * The mouse position is given in relative coordinates to the @a startRow and the
     * @a row and @a col of the item are also passed as relative values.
@@ -212,9 +152,9 @@ public:
     *
     * If no tooltip is available, @a false will be returned.
     */
-  virtual bool maybeTip(const QPoint& relpos, int row, int col, QRect& r, QString& msg) override;
+    virtual bool maybeTip(const QPoint& relpos, int row, int col, QRect& r, QString& msg) override;
 
-  /**
+    /**
     * This method returns the number of register rows required for a certain
     * item in expanded (@p expanded equals @a true) or collapsed (@p expanded
     * is @a false) mode.
@@ -224,49 +164,41 @@ public:
     *                 edit mode) or the minimum number of rows required.
     * @return number of rows required for mode selected by @p expanded
     */
-  virtual int numRowsRegister(bool expanded) const = 0;
+    virtual int numRowsRegister(bool expanded) const = 0;
 
-  /**
+    /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister() const override {
-    return RegisterItem::numRowsRegister();
-  }
+    int numRowsRegister() const override;
 
-  void leaveEditMode();
-  void startEditMode();
+    void leaveEditMode();
+    void startEditMode();
 
-  /**
+    /**
     * This method creates an editor for the transaction
     */
-  virtual TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) = 0;
+    virtual TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) = 0;
 
-  virtual void setVisible(bool visible) override;
+    virtual void setVisible(bool visible) override;
 
-  virtual void setShowBalance(bool showBalance);
+    virtual void setShowBalance(bool showBalance);
 
-  /**
+    /**
     * Return information if @a row should be shown (@a true )
     * or hidden (@a false ) in the form. Default is true.
     */
-  virtual bool showRowInForm(int row) const {
-    Q_UNUSED(row) return true;
-  }
+    virtual bool showRowInForm(int row) const;
 
-  /**
+    /**
     * Control visibility of @a row in the transaction form.
     * Only row 0 has an effect, others return @a true.
     */
-  virtual void setShowRowInForm(int row, bool show) {
-    Q_UNUSED(row); Q_UNUSED(show)
-  }
+    virtual void setShowRowInForm(int row, bool show);
 
-  virtual void setReducedIntensity(bool reduced) {
-    m_reducedIntensity = reduced;
-  }
+    virtual void setReducedIntensity(bool reduced);
 
-protected:
-  /**
+  protected:
+    /**
     * This method converts m_split.reconcileFlag() into a readable string
     *
     * @param text Return textual representation e.g. "Cleared" (@a true) or just
@@ -274,180 +206,37 @@ protected:
     * @return Textual representation or flag as selected via @p text of the
     *         reconciliation state of the split
     */
-  QString reconcileState(bool text = true) const;
+    QString reconcileState(bool text = true) const;
 
-  /**
+    /**
     * Helper method to reduce a multi line memo text into a single line.
     *
     * @param txt QString that will receive the single line memo text
     * @param split const reference to the split to take the memo from
     */
-  void singleLineMemo(QString& txt, const MyMoneySplit& split) const;
+    void singleLineMemo(QString& txt, const MyMoneySplit& split) const;
 
-  virtual void setupPalette(const QPalette& palette, QMap<QString, QWidget*>& editWidgets);
+    virtual void setupPalette(const QPalette& palette, QMap<QString, QWidget*>& editWidgets);
 
-protected:
-  MyMoneyTransaction      m_transaction;
-  MyMoneySplit            m_split;
-  MyMoneyAccount          m_account;
-  MyMoneyMoney            m_balance;
-  QTableWidget*           m_form;
-  QString                 m_category;
-  QString                 m_payee;
-  QString                 m_payeeHeader;
-  QList<QString>          m_tagList;
-  QList<QColor>           m_tagColorList;
-  QString                 m_categoryHeader;
-  QString                 m_splitCurrencyId;
-  QString                 m_uniqueId;
-  int                     m_formRowHeight;
-  bool                    m_selected;
-  bool                    m_focus;
-  bool                    m_erroneous;
-  bool                    m_inEdit;
-  bool                    m_inRegisterEdit;
-  bool                    m_showBalance;
-  bool                    m_reducedIntensity;
-};
+    TransactionPrivate *d_ptr;
+    Transaction(TransactionPrivate &dd, Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+    Transaction(TransactionPrivate &dd); //for copy-constructor of derived class
 
-class StdTransaction : public Transaction
-{
-public:
-  StdTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~StdTransaction() {}
+  private:
+    Transaction();
+    Q_DECLARE_PRIVATE(Transaction)
+  };
 
-  virtual const char* className() {
-    return "StdTransaction";
+  inline void swap(Transaction& first, Transaction& second) // krazy:exclude=inline
+  {
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
   }
 
-  bool formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
-  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
-
-  int registerColWidth(int col, const QFontMetrics& cellFontMetrics);
-  void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
-  void loadTab(KMyMoneyTransactionForm::TransactionForm* form);
-
-  int numColsForm() const {
-    return 4;
+  inline Transaction::Transaction(Transaction && other) : Transaction() // krazy:exclude=inline
+  {
+    swap(*this, other);
   }
-
-  void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets);
-  void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
-  void tabOrderInForm(QWidgetList& tabOrderWidgets) const;
-  void tabOrderInRegister(QWidgetList& tabOrderWidgets) const;
-  KMyMoneyRegister::Action actionType() const;
-
-  int numRowsRegister(bool expanded) const;
-
-  /**
-    * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
-    */
-  int numRowsRegister() const {
-    return RegisterItem::numRowsRegister();
-  }
-
-  TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
-
-  /**
-    * Return information if @a row should be shown (@a true )
-    * or hidden (@a false ) in the form. Default is true.
-    */
-  virtual bool showRowInForm(int row) const;
-
-  /**
-    * Control visibility of @a row in the transaction form.
-    * Only row 0 has an effect, others return @a true.
-    */
-  virtual void setShowRowInForm(int row, bool show);
-
-protected:
-  void setupFormHeader(const QString& id);
-
-private:
-  bool m_showAccountRow;
-};
-
-class InvestTransaction : public Transaction
-{
-public:
-  InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~InvestTransaction() {}
-
-  virtual const QString sortSecurity() const override {
-    return m_security.name();
-  }
-  virtual const char* className() override {
-    return "InvestTransaction";
-  }
-
-  bool formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
-  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
-
-  int registerColWidth(int col, const QFontMetrics& cellFontMetrics) override;
-  void setupForm(KMyMoneyTransactionForm::TransactionForm* form) override;
-
-  /**
-    * provide NOP here as the investment transaction form does not supply a tab
-    */
-  void loadTab(KMyMoneyTransactionForm::TransactionForm* /* form */) override {}
-
-  int numColsForm() const override {
-    return 4;
-  }
-
-  void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets) override;
-  void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets) override;
-  void tabOrderInForm(QWidgetList& tabOrderWidgets) const override;
-  void tabOrderInRegister(QWidgetList& tabOrderWidgets) const override;
-  KMyMoneyRegister::Action actionType() const override {
-    return KMyMoneyRegister::ActionNone;
-  }
-
-  int numRowsRegister(bool expanded) const override;
-
-  /**
-    * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
-    */
-  int numRowsRegister() const override {
-    return RegisterItem::numRowsRegister();
-  }
-
-  TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate) override;
-
-  void splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const;
-
-protected:
-  bool haveShares() const;
-  bool haveFees() const;
-  bool haveInterest() const;
-  bool havePrice() const;
-  bool haveAmount() const;
-  bool haveAssetAccount() const;
-  bool haveSplitRatio() const;
-
-  /**
-    * Returns textual representation of the activity identified
-    * by @p type.
-    *
-    * @param txt reference to QString where to store the result
-    * @param type activity represented as investTransactionTypeE
-    */
-  void activity(QString& txt, eMyMoney::Split::InvestmentTransactionType type) const;
-
-private:
-  QList<MyMoneySplit>       m_feeSplits;
-  QList<MyMoneySplit>       m_interestSplits;
-  MyMoneySplit              m_assetAccountSplit;
-  MyMoneySecurity           m_security;
-  MyMoneySecurity           m_currency;
-  eMyMoney::Split::InvestmentTransactionType    m_transactionType;
-  QString                   m_feeCategory;
-  QString                   m_interestCategory;
-  MyMoneyMoney              m_feeAmount;
-  MyMoneyMoney              m_interestAmount;
-  MyMoneyMoney              m_totalAmount;
-};
-
 } // namespace
 
 #endif

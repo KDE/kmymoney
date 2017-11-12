@@ -56,7 +56,7 @@ class KMM_WIDGETS_EXPORT kMyMoneyCalculator : public QFrame
 {
   Q_OBJECT
 public:
-  kMyMoneyCalculator(QWidget* parent = 0);
+  kMyMoneyCalculator(QWidget* parent = nullptr);
   ~kMyMoneyCalculator();
 
   /**

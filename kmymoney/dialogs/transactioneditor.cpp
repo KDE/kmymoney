@@ -28,6 +28,7 @@
 #include <QList>
 #include <QEvent>
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,6 +42,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneytagcombo.h"
+#include "ktagcontainer.h"
 #include "mymoneyutils.h"
 #include "kmymoneycategory.h"
 #include "kmymoneymvccombo.h"
@@ -738,7 +741,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
         // remain on the save side of things to check for it
         if (t.splitCount() > 0)
           s = t.splits().front();
-        KMyMoneyRegister::SelectedTransaction st(t, s);
+        KMyMoneyRegister::SelectedTransaction st(t, s, QString());
         d->m_transactions.append(st);
       }
 

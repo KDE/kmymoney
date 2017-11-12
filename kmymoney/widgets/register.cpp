@@ -4,6 +4,7 @@
     begin                : Fri Mar 10 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -46,66 +47,25 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneyaccount.h"
 #include "stdtransactiondownloaded.h"
 #include "stdtransactionmatched.h"
 #include "scheduledtransaction.h"
 #include "kmymoneyglobalsettings.h"
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "groupmarker.h"
+#include "groupmarker_p.h"
+#include "fancydategroupmarker.h"
+#include "fancydategroupmarker_p.h"
 #include "mymoneyenums.h"
-
-static const char * sortOrderText[] = {
-  I18N_NOOP2("Unknown sort order", "Unknown"),
-  I18N_NOOP("Post date"),
-  I18N_NOOP("Date entered"),
-  I18N_NOOP("Payee"),
-  I18N_NOOP("Amount"),
-  I18N_NOOP("Number"),
-  I18N_NOOP("Entry order"),
-  I18N_NOOP("Type"),
-  I18N_NOOP("Category"),
-  I18N_NOOP("Reconcile state"),
-  I18N_NOOP("Security")
-  // add new values above this comment line
-};
+#include "widgetenums.h"
 
 using namespace KMyMoneyRegister;
 using namespace eMyMoney;
-
-static unsigned char fancymarker_bg_image[] = {
-  /* 200x49 */
-  0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
-  0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52,
-  0x00, 0x00, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x31,
-  0x08, 0x06, 0x00, 0x00, 0x00, 0x9F, 0xC5, 0xE6,
-  0x4F, 0x00, 0x00, 0x00, 0x06, 0x62, 0x4B, 0x47,
-  0x44, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0xA0,
-  0xBD, 0xA7, 0x93, 0x00, 0x00, 0x00, 0x09, 0x70,
-  0x48, 0x59, 0x73, 0x00, 0x00, 0x0B, 0x13, 0x00,
-  0x00, 0x0B, 0x13, 0x01, 0x00, 0x9A, 0x9C, 0x18,
-  0x00, 0x00, 0x00, 0x86, 0x49, 0x44, 0x41, 0x54,
-  0x78, 0xDA, 0xED, 0xDD, 0x31, 0x0A, 0x84, 0x40,
-  0x10, 0x44, 0xD1, 0x1A, 0x19, 0x10, 0xCF, 0xE6,
-  0xFD, 0x4F, 0xB2, 0x88, 0x08, 0x22, 0x9B, 0x18,
-  0x4E, 0x1B, 0x2C, 0x1B, 0x18, 0xBC, 0x07, 0x7D,
-  0x81, 0x82, 0x1F, 0x77, 0x4B, 0xB2, 0x06, 0x18,
-  0xEA, 0x49, 0x3E, 0x66, 0x00, 0x81, 0x80, 0x40,
-  0xE0, 0xDF, 0x81, 0x6C, 0x66, 0x80, 0x3A, 0x90,
-  0xDD, 0x0C, 0x50, 0x07, 0x72, 0x98, 0x01, 0xEA,
-  0x40, 0x4E, 0x33, 0x40, 0x1D, 0xC8, 0x65, 0x06,
-  0x18, 0x6B, 0xF7, 0x01, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x16, 0x3E,
-  0x4C, 0xC1, 0x83, 0x9E, 0x64, 0x32, 0x03, 0x08,
-  0x04, 0x7E, 0x0A, 0xA4, 0x9B, 0x01, 0xEA, 0x40,
-  0x66, 0x33, 0x40, 0x1D, 0xC8, 0x62, 0x06, 0x18,
-  0xFB, 0x02, 0x05, 0x87, 0x08, 0x55, 0xFE, 0xDE,
-  0xA2, 0x9D, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45,
-  0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
-};
-
-QPixmap* GroupMarker::m_bg = 0;
-int GroupMarker::m_bgRefCnt = 0;
 
 void ItemPtrVector::sort()
 {
@@ -128,28 +88,28 @@ void ItemPtrVector::sort()
 
 bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 {
-  const QList<TransactionSortField>& sortOrder = i1->parent()->sortOrder();
-  QList<TransactionSortField>::const_iterator it;
+  const QList<eWidgets::SortField>& sortOrder = i1->getParent()->sortOrder();
+  QList<eWidgets::SortField>::const_iterator it;
   int rc = 0;
   bool ok1, ok2;
   qulonglong n1, n2;
 
   for (it = sortOrder.begin(); it != sortOrder.end(); ++it) {
-    TransactionSortField sortField = static_cast<TransactionSortField>(*it);
+    eWidgets::SortField sortField = static_cast<eWidgets::SortField>(*it);
     switch (qAbs(static_cast<int>(sortField))) {
-      case PostDateSort:
+      case (int)eWidgets::SortField::PostDate:
         rc = i2->sortPostDate().daysTo(i1->sortPostDate());
         break;
 
-      case EntryDateSort:
+      case (int)eWidgets::SortField::EntryDate:
         rc = i2->sortEntryDate().daysTo(i1->sortEntryDate());
         break;
 
-      case PayeeSort:
+      case (int)eWidgets::SortField::Payee:
         rc = QString::localeAwareCompare(i1->sortPayee(), i2->sortPayee());
         break;
 
-      case ValueSort:
+      case (int)eWidgets::SortField::Value:
         if (i1->sortValue() == i2->sortValue())
           rc = 0;
         else if (i1->sortValue() < i2->sortValue())
@@ -158,7 +118,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
           rc = 1;
         break;
 
-      case NoSort:
+      case (int)eWidgets::SortField::NoSort:
         // convert both values to numbers
         n1 = i1->sortNumber().toULongLong(&ok1);
         n2 = i2->sortNumber().toULongLong(&ok2);
@@ -181,28 +141,28 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
           rc = QString::localeAwareCompare(i1->sortNumber(), i2->sortNumber());
         break;
 
-      case EntryOrderSort:
+      case (int)eWidgets::SortField::EntryOrder:
         rc = qstrcmp(i1->sortEntryOrder().toLatin1(), i2->sortEntryOrder().toLatin1());
         break;
 
-      case TypeSort:
+      case (int)eWidgets::SortField::Type:
         rc = i1->sortType() - i2->sortType();
         break;
 
-      case CategorySort:
+      case (int)eWidgets::SortField::Category:
         rc = QString::localeAwareCompare(i1->sortCategory(), i2->sortCategory());
         break;
 
-      case ReconcileStateSort:
+      case (int)eWidgets::SortField::ReconcileState:
         rc = static_cast<int>(i1->sortReconcileState()) - static_cast<int>(i2->sortReconcileState());
         break;
 
-      case SecuritySort:
+      case (int)eWidgets::SortField::Security:
         rc = QString::localeAwareCompare(i1->sortSecurity(), i2->sortSecurity());
         break;
 
       default:
-        qDebug("Invalid sort key %d", *it);
+        qDebug("Invalid sort key %d", (int)*it);
         break;
     }
 
@@ -216,7 +176,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 
     // the items differ for this sort key so we can return a result
     if (rc != 0) {
-      return (*it < 0) ? rc >= 0 : rc < 0;
+      return ((int)*it < 0) ? rc >= 0 : rc < 0;
     }
   }
 
@@ -227,118 +187,35 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
   return rc < 0;
 }
 
-GroupMarker::GroupMarker(Register *parent, const QString& txt) :
-    RegisterItem(parent),
-    m_txt(txt),
-    m_showDate(false),
-    m_erroneous(false)
-{
-  int h;
-  if (m_parent) {
-    h = m_parent->rowHeightHint();
-  } else {
-    QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
-    h = fm.lineSpacing() + 6;
-  }
-
-  if (m_bg && (m_bg->height() != h)) {
-    delete m_bg;
-    m_bg = 0;
-  }
-
-  // convert the backgroud once
-  if (m_bg == 0) {
-    m_bg = new QPixmap;
-    m_bg->loadFromData(fancymarker_bg_image, sizeof(fancymarker_bg_image));
-    *m_bg = m_bg->scaled(m_bg->width(), h, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  }
-
-  ++m_bgRefCnt;
-}
-
-GroupMarker::~GroupMarker()
-{
-  --m_bgRefCnt;
-  if (!m_bgRefCnt) {
-    delete m_bg;
-    m_bg = 0;
-  }
-}
-
-void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
-{
-  QRect r(option.rect);
-  painter->save();
-
-  // the group marker always uses all cols
-  r.setX(m_parent->horizontalHeader()->sectionPosition(0));
-  r.setWidth(m_parent->viewport()->width());
-  painter->translate(r.x(), r.y());
-
-  QRect cellRect;
-  cellRect.setX(0);
-  cellRect.setY(0);
-  cellRect.setWidth(m_parent->viewport()->width());
-  cellRect.setHeight(m_parent->rowHeight(index.row()));
-
-  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous) : KMyMoneyGlobalSettings::schemeColor(SchemeColor::GroupMarker));
-
-  QBrush backgroundBrush(option.palette.color(QPalette::Base));
-  painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
-  painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
-
-  // now write the text
-  painter->setPen(option.palette.color(isErroneous() ? QPalette::HighlightedText : QPalette::Text));
-  QFont font = painter->font();
-  font.setBold(true);
-  painter->setFont(font);
-
-  painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, m_txt);
-
-  cellRect.setHeight(m_bg->height());
-
-  // now it's time to draw the background
-  painter->drawPixmap(cellRect, *m_bg);
-
-  // in case we need to show the date, we just paint it in col 1
-  if (m_showDate) {
-    font.setBold(false);
-    cellRect.setX(m_parent->horizontalHeader()->sectionPosition(DateColumn));
-    cellRect.setWidth(m_parent->horizontalHeader()->sectionSize(DateColumn));
-    painter->setFont(font);
-    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, QLocale().toString(sortPostDate(), QLocale::ShortFormat));
-  }
-
-  painter->restore();
-}
-
-void GroupMarker::paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index)
-{
-  Q_UNUSED(painter);
-  Q_UNUSED(option);
-  Q_UNUSED(index);
-}
-
-int GroupMarker::rowHeightHint() const
-{
-  if (!m_visible)
-    return 0;
-
-  return m_bg->height();
+namespace KMyMoneyRegister {
+  class StatementGroupMarkerPrivate : public FancyDateGroupMarkerPrivate
+  {
+  public:
+    CashFlowDirection m_dir;
+  };
 }
 
 StatementGroupMarker::StatementGroupMarker(Register* parent, CashFlowDirection dir, const QDate& date, const QString& txt) :
-    FancyDateGroupMarker(parent, date, txt),
-    m_dir(dir)
+    FancyDateGroupMarker(*new StatementGroupMarkerPrivate, parent, date, txt)
 {
-  m_showDate = true;
+  Q_D(StatementGroupMarker);
+  d->m_dir = dir;
+  d->m_showDate = true;
 }
 
-FancyDateGroupMarker::FancyDateGroupMarker(Register* parent, const QDate& date, const QString& txt) :
-    GroupMarker(parent, txt),
-    m_date(date)
+StatementGroupMarker::~StatementGroupMarker()
 {
+}
+
+CashFlowDirection StatementGroupMarker::sortType() const
+{
+  Q_D(const StatementGroupMarker);
+  return d->m_dir;
+}
+
+int StatementGroupMarker::sortSamePostDate() const
+{
+  return 3;
 }
 
 FiscalYearGroupMarker::FiscalYearGroupMarker(Register* parent, const QDate& date, const QString& txt) :
@@ -346,27 +223,52 @@ FiscalYearGroupMarker::FiscalYearGroupMarker(Register* parent, const QDate& date
 {
 }
 
+FiscalYearGroupMarker::~FiscalYearGroupMarker()
+{
+}
+
+const char* FiscalYearGroupMarker::className()
+{
+  return "FiscalYearGroupMarker";
+}
+
+int FiscalYearGroupMarker::sortSamePostDate() const
+{
+  return 1;
+}
+
 SimpleDateGroupMarker::SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt) :
     FancyDateGroupMarker(parent, date, txt)
 {
 }
 
+SimpleDateGroupMarker::~SimpleDateGroupMarker()
+{
+}
+
 int SimpleDateGroupMarker::rowHeightHint() const
 {
-  if (!m_visible)
+  Q_D(const FancyDateGroupMarker);
+  if (!d->m_visible)
     return 0;
 
   return RegisterItem::rowHeightHint() / 2;
 }
 
+const char* SimpleDateGroupMarker::className()
+{
+  return "SimpleDateGroupMarker";
+}
+
 void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
+  Q_D(FancyDateGroupMarker);
   QRect cellRect = option.rect;
   painter->save();
-  cellRect.setWidth(m_parent->viewport()->width());
-  cellRect.setHeight(m_parent->rowHeight(index.row() + m_startRow));
+  cellRect.setWidth(d->m_parent->viewport()->width());
+  cellRect.setHeight(d->m_parent->rowHeight(index.row() + d->m_startRow));
 
-  if (m_alternate)
+  if (d->m_alternate)
     option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground2));
   else
     option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground1));
@@ -380,21 +282,31 @@ void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionVie
   painter->restore();
 }
 
-TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, Account accType) :
-    GroupMarker(parent),
-    m_dir(dir)
+namespace KMyMoneyRegister
 {
+  class TypeGroupMarkerPrivate : public GroupMarkerPrivate
+  {
+  public:
+    CashFlowDirection m_dir;
+  };
+}
+
+TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, Account accType) :
+    GroupMarker(*new TypeGroupMarkerPrivate, parent, QString())
+{
+  Q_D(TypeGroupMarker);
+  d->m_dir = dir;
   switch (dir) {
     case Deposit:
-      m_txt = i18nc("Deposits onto account", "Deposits");
+      d->m_txt = i18nc("Deposits onto account", "Deposits");
       if (accType == Account::CreditCard) {
-        m_txt = i18nc("Payments towards credit card", "Payments");
+        d->m_txt = i18nc("Payments towards credit card", "Payments");
       }
       break;
     case Payment:
-      m_txt = i18nc("Payments made from account", "Payments");
+      d->m_txt = i18nc("Payments made from account", "Payments");
       if (accType == Account::CreditCard) {
-        m_txt = i18nc("Payments made with credit card", "Charges");
+        d->m_txt = i18nc("Payments made with credit card", "Charges");
       }
       break;
     default:
@@ -403,9 +315,29 @@ TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, Accoun
   }
 }
 
+TypeGroupMarker::~TypeGroupMarker()
+{
+}
+
+CashFlowDirection TypeGroupMarker::sortType() const
+{
+  Q_D(const TypeGroupMarker);
+  return d->m_dir;
+}
+
 PayeeGroupMarker::PayeeGroupMarker(Register* parent, const QString& name) :
     GroupMarker(parent, name)
 {
+}
+
+PayeeGroupMarker::~PayeeGroupMarker()
+{
+}
+
+const QString& PayeeGroupMarker::sortPayee() const
+{
+  Q_D(const GroupMarker);
+  return d->m_txt;
 }
 
 CategoryGroupMarker::CategoryGroupMarker(Register* parent, const QString& category) :
@@ -413,27 +345,67 @@ CategoryGroupMarker::CategoryGroupMarker(Register* parent, const QString& catego
 {
 }
 
-ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, eMyMoney::Split::State state) :
-    GroupMarker(parent),
-    m_state(state)
+CategoryGroupMarker::~CategoryGroupMarker()
 {
+}
+
+const QString& CategoryGroupMarker::sortCategory() const
+{
+  Q_D(const GroupMarker);
+  return d->m_txt;
+}
+const QString CategoryGroupMarker::sortSecurity() const
+{
+  Q_D(const GroupMarker);
+  return d->m_txt;
+}
+
+const char* CategoryGroupMarker::className()
+{
+  return "CategoryGroupMarker";
+}
+
+namespace KMyMoneyRegister
+{
+  class ReconcileGroupMarkerPrivate : public GroupMarkerPrivate
+  {
+  public:
+    eMyMoney::Split::State m_state;
+  };
+}
+
+ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, eMyMoney::Split::State state) :
+    GroupMarker(*new ReconcileGroupMarkerPrivate, parent, QString())
+{
+  Q_D(ReconcileGroupMarker);
+  d->m_state = state;
   switch (state) {
     case eMyMoney::Split::State::NotReconciled:
-      m_txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
+      d->m_txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
       break;
     case eMyMoney::Split::State::Cleared:
-      m_txt = i18nc("Reconcile state 'Cleared'", "Cleared");
+      d->m_txt = i18nc("Reconcile state 'Cleared'", "Cleared");
       break;
     case eMyMoney::Split::State::Reconciled:
-      m_txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
+      d->m_txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
       break;
     case eMyMoney::Split::State::Frozen:
-      m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
+      d->m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
       break;
     default:
-      m_txt = i18nc("Unknown reconcile state", "Unknown");
+      d->m_txt = i18nc("Unknown reconcile state", "Unknown");
       break;
   }
+}
+
+ReconcileGroupMarker::~ReconcileGroupMarker()
+{
+}
+
+eMyMoney::Split::State ReconcileGroupMarker::sortReconcileState() const
+{
+  Q_D(const ReconcileGroupMarker);
+  return d->m_state;
 }
 
 RegisterItemDelegate::RegisterItemDelegate(Register *parent) : QStyledItemDelegate(parent), m_register(parent)
@@ -454,26 +426,74 @@ void RegisterItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
   }
 }
 
+namespace KMyMoneyRegister
+{
+  class RegisterPrivate
+  {
+  public:
+    RegisterPrivate() :
+      m_selectAnchor(0),
+      m_focusItem(0),
+      m_firstItem(0),
+      m_lastItem(0),
+      m_firstErroneous(0),
+      m_lastErroneous(0),
+      m_rowHeightHint(0),
+      m_ledgerLensForced(false),
+      m_selectionMode(QTableWidget::MultiSelection),
+      m_needResize(true),
+      m_listsDirty(false),
+      m_ignoreNextButtonRelease(false),
+      m_needInitialColumnResize(false),
+      m_usedWithEditor(false),
+      m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
+      m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
+      m_detailsColumnType(PayeeFirst)
+    {
+    }
+
+    ~RegisterPrivate()
+    {
+    }
+
+    ItemPtrVector                m_items;
+    QVector<RegisterItem*>       m_itemIndex;
+    RegisterItem*                m_selectAnchor;
+    RegisterItem*                m_focusItem;
+    RegisterItem*                m_ensureVisibleItem;
+    RegisterItem*                m_firstItem;
+    RegisterItem*                m_lastItem;
+    RegisterItem*                m_firstErroneous;
+    RegisterItem*                m_lastErroneous;
+
+    int                          m_markErroneousTransactions;
+    int                          m_rowHeightHint;
+
+    MyMoneyAccount               m_account;
+
+    bool                         m_ledgerLensForced;
+    QAbstractItemView::SelectionMode m_selectionMode;
+
+    bool                         m_needResize;
+    bool                         m_listsDirty;
+    bool                         m_ignoreNextButtonRelease;
+    bool                         m_needInitialColumnResize;
+    bool                         m_usedWithEditor;
+    Qt::MouseButtons             m_mouseButton;
+    Qt::KeyboardModifiers        m_modifiers;
+    Column                       m_lastCol;
+    QList<eWidgets::SortField>  m_sortOrder;
+    QRect                        m_lastRepaintRect;
+    DetailsColumnType            m_detailsColumnType;
+
+  };
+}
+
 Register::Register(QWidget *parent) :
     TransactionEditorContainer(parent),
-    m_selectAnchor(0),
-    m_focusItem(0),
-    m_firstItem(0),
-    m_lastItem(0),
-    m_firstErroneous(0),
-    m_lastErroneous(0),
-    m_rowHeightHint(0),
-    m_ledgerLensForced(false),
-    m_selectionMode(QTableWidget::MultiSelection),
-    m_needResize(true),
-    m_listsDirty(false),
-    m_ignoreNextButtonRelease(false),
-    m_needInitialColumnResize(false),
-    m_usedWithEditor(false),
-    m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
-    m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
-    m_detailsColumnType(PayeeFirst)
+    d_ptr(new RegisterPrivate)
 {
+  Q_D(Register);
   // used for custom coloring with the help of the application's stylesheet
   setObjectName(QLatin1String("register"));
   setItemDelegate(new RegisterItemDelegate(this));
@@ -526,7 +546,9 @@ Register::Register(QWidget *parent) :
 
 Register::~Register()
 {
+  Q_D(Register);
   clear();
+  delete d;
 }
 
 bool Register::eventFilter(QObject* o, QEvent* e)
@@ -543,22 +565,23 @@ bool Register::eventFilter(QObject* o, QEvent* e)
 
 void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>& cols)
 {
-  m_account = account;
+  Q_D(Register);
+  d->m_account = account;
   setUpdatesEnabled(false);
 
-  for (int i = 0; i < MaxColumns; ++i)
+  for (auto i = 0; i < MaxColumns; ++i)
     hideColumn(i);
 
-  m_needInitialColumnResize = true;
+  d->m_needInitialColumnResize = true;
 
-  m_lastCol = static_cast<Column>(0);
+  d->m_lastCol = static_cast<Column>(0);
   QList<Column>::const_iterator it_c;
   for (it_c = cols.begin(); it_c != cols.end(); ++it_c) {
     if ((*it_c) > MaxColumns)
       continue;
     showColumn(*it_c);
-    if (*it_c > m_lastCol)
-      m_lastCol = *it_c;
+    if (*it_c > d->m_lastCol)
+      d->m_lastCol = *it_c;
   }
 
   setUpdatesEnabled(true);
@@ -566,10 +589,11 @@ void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>&
 
 void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColumn)
 {
-  m_account = account;
+  Q_D(Register);
+  d->m_account = account;
   setUpdatesEnabled(false);
 
-  for (int i = 0; i < MaxColumns; ++i)
+  for (auto i = 0; i < MaxColumns; ++i)
     hideColumn(i);
 
   horizontalHeaderItem(PaymentColumn)->setText(i18nc("Payment made from account", "Payment"));
@@ -580,7 +604,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
     return;
   }
 
-  m_needInitialColumnResize = true;
+  d->m_needInitialColumnResize = true;
 
   // turn on standard columns
   showColumn(DateColumn);
@@ -672,7 +696,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
       break;
   }
 
-  m_lastCol = BalanceColumn;
+  d->m_lastCol = BalanceColumn;
 
   setUpdatesEnabled(true);
 }
@@ -684,34 +708,42 @@ bool Register::focusNextPrevChild(bool next)
 
 void Register::setSortOrder(const QString& order)
 {
+  Q_D(Register);
   const QStringList orderList = order.split(',', QString::SkipEmptyParts);
   QStringList::const_iterator it;
-  m_sortOrder.clear();
+  d->m_sortOrder.clear();
   for (it = orderList.constBegin(); it != orderList.constEnd(); ++it) {
-    m_sortOrder << static_cast<TransactionSortField>((*it).toInt());
+    d->m_sortOrder << static_cast<eWidgets::SortField>((*it).toInt());
   }
+}
+
+const QList<eWidgets::SortField>& Register::sortOrder() const
+{
+  Q_D(const Register);
+  return d->m_sortOrder;
 }
 
 void Register::sortItems()
 {
-  if (m_items.count() == 0)
+  Q_D(Register);
+  if (d->m_items.count() == 0)
     return;
 
   // sort the array of pointers to the transactions
-  m_items.sort();
+  d->m_items.sort();
 
   // update the next/prev item chains
   RegisterItem* prev = 0;
   RegisterItem* item;
-  m_firstItem = m_lastItem = 0;
-  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
-    item = m_items[i];
+  d->m_firstItem = d->m_lastItem = 0;
+  for (QVector<RegisterItem*>::size_type i = 0; i < d->m_items.size(); ++i) {
+    item = d->m_items[i];
     if (!item)
       continue;
 
-    if (!m_firstItem)
-      m_firstItem = item;
-    m_lastItem = item;
+    if (!d->m_firstItem)
+      d->m_firstItem = item;
+    d->m_lastItem = item;
     if (prev)
       prev->setNextItem(item);
     item->setPrevItem(prev);
@@ -720,7 +752,7 @@ void Register::sortItems()
   }
 
   // update the balance visibility settings
-  item = m_lastItem;
+  item = d->m_lastItem;
   bool showBalance = true;
   while (item) {
     Transaction* t = dynamic_cast<Transaction*>(item);
@@ -734,48 +766,57 @@ void Register::sortItems()
   }
 
   // force update of the item index (row to item array)
-  m_listsDirty = true;
+  d->m_listsDirty = true;
 }
 
-TransactionSortField Register::primarySortKey() const
+Column Register::lastCol() const
 {
-  if (!m_sortOrder.isEmpty())
-    return static_cast<KMyMoneyRegister::TransactionSortField>(m_sortOrder.first());
-  return UnknownSort;
+  Q_D(const Register);
+  return d->m_lastCol;
+}
+
+eWidgets::SortField Register::primarySortKey() const
+{
+  Q_D(const Register);
+  if (!d->m_sortOrder.isEmpty())
+    return static_cast<eWidgets::SortField>(d->m_sortOrder.first());
+  return eWidgets::SortField::Unknown;
 }
 
 
 void Register::clear()
 {
-  m_firstErroneous = m_lastErroneous = 0;
-  m_ensureVisibleItem = 0;
+  Q_D(Register);
+  d->m_firstErroneous = d->m_lastErroneous = 0;
+  d->m_ensureVisibleItem = 0;
 
-  m_items.clear();
+  d->m_items.clear();
 
   RegisterItem* p;
   while ((p = firstItem()) != 0) {
     delete p;
   }
 
-  m_firstItem = m_lastItem = 0;
+  d->m_firstItem = d->m_lastItem = 0;
 
-  m_listsDirty = true;
-  m_selectAnchor = 0;
-  m_focusItem = 0;
+  d->m_listsDirty = true;
+  d->m_selectAnchor = 0;
+  d->m_focusItem = 0;
 
 #ifndef KMM_DESIGNER
   // recalculate row height hint
   QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
-  m_rowHeightHint = fm.lineSpacing() + 6;
+  d->m_rowHeightHint = fm.lineSpacing() + 6;
 #endif
 
-  m_needInitialColumnResize = true;
-  m_needResize = true;
+  d->m_needInitialColumnResize = true;
+  d->m_needResize = true;
   updateRegister(true);
 }
 
 void Register::insertItemAfter(RegisterItem*p, RegisterItem* prev)
 {
+  Q_D(Register);
   RegisterItem* next = 0;
   if (!prev)
     prev = lastItem();
@@ -790,37 +831,39 @@ void Register::insertItemAfter(RegisterItem*p, RegisterItem* prev)
   p->setPrevItem(prev);
   p->setNextItem(next);
 
-  if (!m_firstItem)
-    m_firstItem = p;
-  if (!m_lastItem)
-    m_lastItem = p;
+  if (!d->m_firstItem)
+    d->m_firstItem = p;
+  if (!d->m_lastItem)
+    d->m_lastItem = p;
 
-  if (prev == m_lastItem)
-    m_lastItem = p;
+  if (prev == d->m_lastItem)
+    d->m_lastItem = p;
 
-  m_listsDirty = true;
-  m_needResize = true;
+  d->m_listsDirty = true;
+  d->m_needResize = true;
 }
 
 void Register::addItem(RegisterItem* p)
 {
+  Q_D(Register);
   RegisterItem* q = lastItem();
   if (q)
     q->setNextItem(p);
   p->setPrevItem(q);
   p->setNextItem(0);
 
-  m_items.append(p);
+  d->m_items.append(p);
 
-  if (!m_firstItem)
-    m_firstItem = p;
-  m_lastItem = p;
-  m_listsDirty = true;
-  m_needResize = true;
+  if (!d->m_firstItem)
+    d->m_firstItem = p;
+  d->m_lastItem = p;
+  d->m_listsDirty = true;
+  d->m_needResize = true;
 }
 
 void Register::removeItem(RegisterItem* p)
 {
+  Q_D(Register);
   // remove item from list
   if (p->prevItem())
     p->prevItem()->setNextItem(p->nextItem());
@@ -828,27 +871,28 @@ void Register::removeItem(RegisterItem* p)
     p->nextItem()->setPrevItem(p->prevItem());
 
   // update first and last pointer if required
-  if (p == m_firstItem)
-    m_firstItem = p->nextItem();
-  if (p == m_lastItem)
-    m_lastItem = p->prevItem();
+  if (p == d->m_firstItem)
+    d->m_firstItem = p->nextItem();
+  if (p == d->m_lastItem)
+    d->m_lastItem = p->prevItem();
 
   // make sure we don't do it twice
   p->setNextItem(0);
   p->setPrevItem(0);
 
   // remove it from the m_items array
-  int i = m_items.indexOf(p);
+  int i = d->m_items.indexOf(p);
   if (-1 != i) {
-    m_items[i] = 0;
+    d->m_items[i] = 0;
   }
-  m_listsDirty = true;
-  m_needResize = true;
+  d->m_listsDirty = true;
+  d->m_needResize = true;
 }
 
 RegisterItem* Register::firstItem() const
 {
-  return m_firstItem;
+  Q_D(const Register);
+  return d->m_firstItem;
 }
 
 RegisterItem* Register::nextItem(RegisterItem* item) const
@@ -858,42 +902,45 @@ RegisterItem* Register::nextItem(RegisterItem* item) const
 
 RegisterItem* Register::lastItem() const
 {
-  return m_lastItem;
+  Q_D(const Register);
+  return d->m_lastItem;
 }
 
 void Register::setupItemIndex(int rowCount)
 {
+  Q_D(Register);
   // setup index array
-  m_itemIndex.clear();
-  m_itemIndex.reserve(rowCount);
+  d->m_itemIndex.clear();
+  d->m_itemIndex.reserve(rowCount);
 
   // fill index array
   rowCount = 0;
   RegisterItem* prev = 0;
-  m_firstItem = m_lastItem = 0;
-  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
-    RegisterItem* item = m_items[i];
+  d->m_firstItem = d->m_lastItem = 0;
+  for (QVector<RegisterItem*>::size_type i = 0; i < d->m_items.size(); ++i) {
+    RegisterItem* item = d->m_items[i];
     if (!item)
       continue;
-    if (!m_firstItem)
-      m_firstItem = item;
-    m_lastItem = item;
+    if (!d->m_firstItem)
+      d->m_firstItem = item;
+    d->m_lastItem = item;
     if (prev)
       prev->setNextItem(item);
     item->setPrevItem(prev);
     item->setNextItem(0);
     prev = item;
     for (int j = item->numRowsRegister(); j; --j) {
-      m_itemIndex.push_back(item);
+      d->m_itemIndex.push_back(item);
     }
   }
 }
 
 void Register::updateAlternate() const
 {
+  Q_D(const Register);
   bool alternate = false;
-  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
-    RegisterItem* item = m_items[i];
+  for (QVector<RegisterItem*>::size_type i = 0; i < d->m_items.size(); ++i) {
+    RegisterItem* item = d->m_items[i];
     if (!item)
       continue;
     if (item->isVisible()) {
@@ -928,15 +975,16 @@ void Register::suppressAdjacentMarkers()
 
 void Register::updateRegister(bool forceUpdateRowHeight)
 {
-  if (m_listsDirty || forceUpdateRowHeight) {
+  Q_D(Register);
+  if (d->m_listsDirty || forceUpdateRowHeight) {
     // don't get in here recursively
-    m_listsDirty = false;
+    d->m_listsDirty = false;
 
     int rowCount = 0;
     // determine the number of rows we need to display all items
     // while going through the list, check for erroneous transactions
-    for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
-      RegisterItem* item = m_items[i];
+    for (QVector<RegisterItem*>::size_type i = 0; i < d->m_items.size(); ++i) {
+      RegisterItem* item = d->m_items[i];
       if (!item)
         continue;
       item->setStartRow(rowCount);
@@ -944,9 +992,9 @@ void Register::updateRegister(bool forceUpdateRowHeight)
       rowCount += item->numRowsRegister();
 
       if (item->isErroneous()) {
-        if (!m_firstErroneous)
-          m_firstErroneous = item;
-        m_lastErroneous = item;
+        if (!d->m_firstErroneous)
+          d->m_firstErroneous = item;
+        d->m_lastErroneous = item;
       }
     }
 
@@ -963,7 +1011,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     // if we need to update the headers, we do it now for all rows
     // again we make sure to suppress screen updates
     if (needUpdateHeaders) {
-      for (int i = 0; i < rowCount; ++i) {
+      for (auto i = 0; i < rowCount; ++i) {
         RegisterItem* item = itemAtRow(i);
         if (item->isVisible()) {
           showRow(i);
@@ -976,9 +1024,9 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     }
 
     // force resizeing of the columns if necessary
-    if (m_needInitialColumnResize) {
+    if (d->m_needInitialColumnResize) {
       QTimer::singleShot(0, this, SLOT(resize()));
-      m_needInitialColumnResize = false;
+      d->m_needInitialColumnResize = false;
     } else {
       update();
 
@@ -992,17 +1040,19 @@ void Register::updateRegister(bool forceUpdateRowHeight)
 
 int Register::rowHeightHint() const
 {
-  if (!m_rowHeightHint) {
+  Q_D(const Register);
+  if (!d->m_rowHeightHint) {
     qDebug("Register::rowHeightHint(): m_rowHeightHint is zero!!");
   }
-  return m_rowHeightHint;
+  return d->m_rowHeightHint;
 }
 
 void Register::focusInEvent(QFocusEvent* ev)
 {
+  Q_D(const Register);
   QTableWidget::focusInEvent(ev);
-  if (m_focusItem) {
-    m_focusItem->setFocus(true, false);
+  if (d->m_focusItem) {
+    d->m_focusItem->setFocus(true, false);
   }
 }
 
@@ -1043,8 +1093,9 @@ bool Register::event(QEvent* event)
 
 void Register::focusOutEvent(QFocusEvent* ev)
 {
-  if (m_focusItem) {
-    m_focusItem->setFocus(false, false);
+  Q_D(Register);
+  if (d->m_focusItem) {
+    d->m_focusItem->setFocus(false, false);
   }
   QTableWidget::focusOutEvent(ev);
 }
@@ -1062,10 +1113,11 @@ void Register::resize()
 
 void Register::resize(int col, bool force)
 {
-  if (!m_needResize && !force)
+  Q_D(Register);
+  if (!d->m_needResize && !force)
     return;
 
-  m_needResize = false;
+  d->m_needResize = false;
 
   // resize the register
   int w = viewport()->width();
@@ -1133,7 +1185,7 @@ void Register::resize(int col, bool force)
     // Resize the date and money fields to either
     // a) the size required by the input widget if no transaction form is shown and the register is used with an editor
     // b) the adjusted value for the input widget if the transaction form is visible or an editor is not used
-    if (m_usedWithEditor && !KMyMoneyGlobalSettings::transactionForm()) {
+    if (d->m_usedWithEditor && !KMyMoneyGlobalSettings::transactionForm()) {
       QPushButton *pushButton = new QPushButton;
       const int pushButtonSpacing = pushButton->sizeHint().width() + 5;
       setColumnWidth(DateColumn, columnWidth(DateColumn) + pushButtonSpacing + 4/* space for the spinbox arrows */);
@@ -1178,7 +1230,7 @@ void Register::resize(int col, bool force)
   }
 #endif
 
-  for (int i = 0; i < columnCount(); ++i) {
+  for (auto i = 0; i < columnCount(); ++i) {
     if (i == col)
       continue;
 
@@ -1187,8 +1239,15 @@ void Register::resize(int col, bool force)
   setColumnWidth(col, w);
 }
 
+void Register::forceUpdateLists()
+{
+  Q_D(Register);
+  d->m_listsDirty = true;
+}
+
 int Register::minimumColumnWidth(int col)
 {
+  Q_D(Register);
   QHeaderView *topHeader = horizontalHeader();
   int w = topHeader->fontMetrics().width(horizontalHeaderItem(col) ? horizontalHeaderItem(col)->text() : QString()) + 10;
   w = qMax(w, 20);
@@ -1207,8 +1266,8 @@ int Register::minimumColumnWidth(int col)
   }
 
   // scan through the transactions
-  for (int i = 0; i < m_items.size(); ++i) {
-    RegisterItem* const item = m_items[i];
+  for (auto i = 0; i < d->m_items.size(); ++i) {
+    RegisterItem* const item = d->m_items[i];
     if (!item)
       continue;
     Transaction* t = dynamic_cast<Transaction*>(item);
@@ -1256,6 +1315,7 @@ void Register::clearSelection()
 
 void Register::doSelectItems(int from, int to, bool selected)
 {
+  Q_D(Register);
   int start, end;
   // make sure start is smaller than end
   if (from <= to) {
@@ -1268,14 +1328,14 @@ void Register::doSelectItems(int from, int to, bool selected)
   // make sure we stay in bounds
   if (start < 0)
     start = 0;
-  if ((end <= -1) || (end > (m_items.size() - 1)))
-    end = m_items.size() - 1;
+  if ((end <= -1) || (end > (d->m_items.size() - 1)))
+    end = d->m_items.size() - 1;
 
   RegisterItem* firstItem;
   RegisterItem* lastItem;
   firstItem = lastItem = 0;
   for (int i = start; i <= end; ++i) {
-    RegisterItem* const item = m_items[i];
+    RegisterItem* const item = d->m_items[i];
     if (item) {
       if (selected != item->isSelected()) {
         if (!firstItem)
@@ -1289,16 +1349,18 @@ void Register::doSelectItems(int from, int to, bool selected)
 
 RegisterItem* Register::itemAtRow(int row) const
 {
-  if (row >= 0 && row < m_itemIndex.size()) {
-    return m_itemIndex[row];
+  Q_D(const Register);
+  if (row >= 0 && row < d->m_itemIndex.size()) {
+    return d->m_itemIndex[row];
   }
   return 0;
 }
 
 int Register::rowToIndex(int row) const
 {
-  for (int i = 0; i < m_items.size(); ++i) {
-    RegisterItem* const item = m_items[i];
+  Q_D(const Register);
+  for (auto i = 0; i < d->m_items.size(); ++i) {
+    RegisterItem* const item = d->m_items[i];
     if (!item)
       continue;
     if (row >= item->startRow() && row < (item->startRow() + item->numRowsRegister()))
@@ -1309,8 +1371,9 @@ int Register::rowToIndex(int row) const
 
 void Register::selectedTransactions(SelectedTransactions& list) const
 {
-  if (m_focusItem && m_focusItem->isSelected() && m_focusItem->isVisible()) {
-    Transaction* t = dynamic_cast<Transaction*>(m_focusItem);
+  Q_D(const Register);
+  if (d->m_focusItem && d->m_focusItem->isSelected() && d->m_focusItem->isVisible()) {
+    Transaction* t = dynamic_cast<Transaction*>(d->m_focusItem);
     if (t) {
       QString id;
       if (t->isScheduled())
@@ -1320,10 +1383,10 @@ void Register::selectedTransactions(SelectedTransactions& list) const
     }
   }
 
-  for (int i = 0; i < m_items.size(); ++i) {
-    RegisterItem* const item = m_items[i];
+  for (auto i = 0; i < d->m_items.size(); ++i) {
+    RegisterItem* const item = d->m_items[i];
     // make sure, we don't include the focus item twice
-    if (item == m_focusItem)
+    if (item == d->m_focusItem)
       continue;
     if (item && item->isSelected() && item->isVisible()) {
       Transaction* t = dynamic_cast<Transaction*>(item);
@@ -1340,9 +1403,10 @@ void Register::selectedTransactions(SelectedTransactions& list) const
 
 QList<RegisterItem*> Register::selectedItems() const
 {
+  Q_D(const Register);
   QList<RegisterItem*> list;
 
-  RegisterItem* item = m_firstItem;
+  RegisterItem* item = d->m_firstItem;
   while (item) {
     if (item && item->isSelected() && item->isVisible()) {
       list << item;
@@ -1354,8 +1418,9 @@ QList<RegisterItem*> Register::selectedItems() const
 
 int Register::selectedItemsCount() const
 {
+  Q_D(const Register);
   int cnt = 0;
-  RegisterItem* item = m_firstItem;
+  RegisterItem* item = d->m_firstItem;
   while (item) {
     if (item->isSelected() && item->isVisible())
       ++cnt;
@@ -1366,6 +1431,7 @@ int Register::selectedItemsCount() const
 
 void Register::mouseReleaseEvent(QMouseEvent *e)
 {
+  Q_D(Register);
   if (e->button() == Qt::RightButton) {
     // see the comment in Register::contextMenuEvent
     // on Linux we never get here but on Windows this
@@ -1374,22 +1440,23 @@ void Register::mouseReleaseEvent(QMouseEvent *e)
     // this just ignore the event and act like on Linux
     return;
   }
-  if (m_ignoreNextButtonRelease) {
-    m_ignoreNextButtonRelease = false;
+  if (d->m_ignoreNextButtonRelease) {
+    d->m_ignoreNextButtonRelease = false;
     return;
   }
-  m_mouseButton = e->button();
-  m_modifiers = QApplication::keyboardModifiers();
+  d->m_mouseButton = e->button();
+  d->m_modifiers = QApplication::keyboardModifiers();
   QTableWidget::mouseReleaseEvent(e);
 }
 
 void Register::contextMenuEvent(QContextMenuEvent *e)
 {
+  Q_D(Register);
   if (e->reason() == QContextMenuEvent::Mouse) {
     // since mouse release event is not called, we need
     // to reset the mouse button and the modifiers here
-    m_mouseButton = Qt::NoButton;
-    m_modifiers = Qt::NoModifier;
+    d->m_mouseButton = Qt::NoButton;
+    d->m_modifiers = Qt::NoModifier;
 
     // if a selected item is clicked don't change the selection
     RegisterItem* item = itemAtRow(rowAt(e->y()));
@@ -1399,15 +1466,26 @@ void Register::contextMenuEvent(QContextMenuEvent *e)
   openContextMenu();
 }
 
+void Register::unselectItems(int from, int to)
+{
+  doSelectItems(from, to, false);
+}
+
+void Register::selectItems(int from, int to)
+{
+  doSelectItems(from, to, true);
+}
+
 void Register::selectItem(int row, int col)
 {
-  if (row >= 0 && row < m_itemIndex.size()) {
-    RegisterItem* item = m_itemIndex[row];
+  Q_D(Register);
+  if (row >= 0 && row < d->m_itemIndex.size()) {
+    RegisterItem* item = d->m_itemIndex[row];
 
     // don't support selecting when the item has an editor
     // or the item itself is not selectable
     if (item->hasEditorOpen() || !item->isSelectable()) {
-      m_mouseButton = Qt::NoButton;
+      d->m_mouseButton = Qt::NoButton;
       return;
     }
     QString id = item->id();
@@ -1429,25 +1507,27 @@ void Register::selectItem(int row, int col)
 
 void Register::setAnchorItem(RegisterItem* anchorItem)
 {
-  m_selectAnchor = anchorItem;
+  Q_D(Register);
+  d->m_selectAnchor = anchorItem;
 }
 
 bool Register::setFocusItem(RegisterItem* focusItem)
 {
+  Q_D(Register);
   if (focusItem && focusItem->canHaveFocus()) {
-    if (m_focusItem) {
-      m_focusItem->setFocus(false);
+    if (d->m_focusItem) {
+      d->m_focusItem->setFocus(false);
     }
     Transaction* item = dynamic_cast<Transaction*>(focusItem);
-    if (m_focusItem != focusItem && item) {
+    if (d->m_focusItem != focusItem && item) {
       emit focusChanged(item);
     }
 
-    m_focusItem = focusItem;
-    m_focusItem->setFocus(true);
-    if (m_listsDirty)
+    d->m_focusItem = focusItem;
+    d->m_focusItem->setFocus(true);
+    if (d->m_listsDirty)
       updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
-    ensureItemVisible(m_focusItem);
+    ensureItemVisible(d->m_focusItem);
     return true;
   } else
     return false;
@@ -1455,7 +1535,8 @@ bool Register::setFocusItem(RegisterItem* focusItem)
 
 bool Register::setFocusToTop()
 {
-  RegisterItem* rgItem = m_firstItem;
+  Q_D(Register);
+  RegisterItem* rgItem = d->m_firstItem;
   while (rgItem) {
     if (setFocusItem(rgItem))
       return true;
@@ -1466,15 +1547,16 @@ bool Register::setFocusToTop()
 
 void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
 {
+  Q_D(Register);
   if (!item)
     return;
 
-  Qt::MouseButtons buttonState = m_mouseButton;
-  Qt::KeyboardModifiers modifiers = m_modifiers;
-  m_mouseButton = Qt::NoButton;
-  m_modifiers = Qt::NoModifier;
+  Qt::MouseButtons buttonState = d->m_mouseButton;
+  Qt::KeyboardModifiers modifiers = d->m_modifiers;
+  d->m_mouseButton = Qt::NoButton;
+  d->m_modifiers = Qt::NoModifier;
 
-  if (m_selectionMode == NoSelection)
+  if (d->m_selectionMode == NoSelection)
     return;
 
   if (item->isSelectable()) {
@@ -1485,7 +1567,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     const bool scheduledTransactionSelected = (cnt > 0 && itemList.front() && (typeid(*(itemList.front())) == typeid(StdTransactionScheduled)));
     if (buttonState & Qt::LeftButton) {
       if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
-          || (m_selectAnchor == 0)) {
+          || (d->m_selectAnchor == 0)) {
         if ((cnt != 1) || ((cnt == 1) && !item->isSelected())) {
           emit aboutToSelectItem(item, okToSelect);
           if (okToSelect) {
@@ -1497,10 +1579,10 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
           }
         }
         if (okToSelect)
-          m_selectAnchor = item;
+          d->m_selectAnchor = item;
       }
 
-      if (m_selectionMode == MultiSelection) {
+      if (d->m_selectionMode == MultiSelection) {
         switch (modifiers & (Qt::ShiftModifier | Qt::ControlModifier)) {
           case Qt::ControlModifier:
             if (scheduledTransactionSelected || typeid(*item) == typeid(StdTransactionScheduled))
@@ -1523,7 +1605,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
               // pointer 'item' might have changed. reconstruct it.
               item = itemById(id);
               unselectItems();
-              selectItems(rowToIndex(m_selectAnchor->startRow()), rowToIndex(item->startRow()));
+              selectItems(rowToIndex(d->m_selectAnchor->startRow()), rowToIndex(item->startRow()));
               setFocusItem(item);
             }
             break;
@@ -1539,7 +1621,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
           unselectItems();
         item->setSelected(true);
         setFocusItem(item);
-        m_selectAnchor = item;
+        d->m_selectAnchor = item;
       }
     }
     if (okToSelect) {
@@ -1551,28 +1633,30 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
 
 void Register::ensureItemVisible(RegisterItem* item)
 {
+  Q_D(Register);
   if (!item)
     return;
 
-  m_ensureVisibleItem = item;
+  d->m_ensureVisibleItem = item;
   QTimer::singleShot(0, this, SLOT(slotEnsureItemVisible()));
 }
 
 void Register::slotDoubleClicked(int row, int)
 {
-  if (row >= 0 && row < m_itemIndex.size()) {
-    RegisterItem* p = m_itemIndex[row];
+  Q_D(Register);
+  if (row >= 0 && row < d->m_itemIndex.size()) {
+    RegisterItem* p = d->m_itemIndex[row];
     if (p->isSelectable()) {
-      m_ignoreNextButtonRelease = true;
+      d->m_ignoreNextButtonRelease = true;
       // double click to start editing only works if the focus
       // item is among the selected ones
       if (!focusItem()) {
         setFocusItem(p);
-        if (m_selectionMode != NoSelection)
+        if (d->m_selectionMode != NoSelection)
           p->setSelected(true);
       }
 
-      if (m_focusItem->isSelected()) {
+      if (d->m_focusItem->isSelected()) {
         // don't emit the signal right away but wait until
         // we come back to the Qt main loop
         QTimer::singleShot(0, this, SIGNAL(editTransaction()));
@@ -1583,9 +1667,10 @@ void Register::slotDoubleClicked(int row, int)
 
 void Register::slotEnsureItemVisible()
 {
+  Q_D(Register);
   // if clear() has been called since the timer was
   // started, we just ignore the call
-  if (!m_ensureVisibleItem)
+  if (!d->m_ensureVisibleItem)
     return;
 
   // make sure to catch latest changes
@@ -1593,25 +1678,8 @@ void Register::slotEnsureItemVisible()
   updateRegister();
   setUpdatesEnabled(true);
   // since the item will be made visible at the top of the viewport make the bottom index visible first to make the whole item visible
-  scrollTo(model()->index(m_ensureVisibleItem->startRow() + m_ensureVisibleItem->numRowsRegister() - 1, DetailColumn));
-  scrollTo(model()->index(m_ensureVisibleItem->startRow(), DetailColumn));
-}
-
-TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
-{
-  for (int idx = 1; idx < static_cast<int>(MaxSortFields); ++idx) {
-    if (text == i18n(sortOrderText[idx])) {
-      return static_cast<TransactionSortField>(idx);
-    }
-  }
-  return UnknownSort;
-}
-
-const QString KMyMoneyRegister::sortOrderToText(TransactionSortField idx)
-{
-  if (idx < PostDateSort || idx >= MaxSortFields)
-    idx = UnknownSort;
-  return i18n(sortOrderText[idx]);
+  scrollTo(model()->index(d->m_ensureVisibleItem->startRow() + d->m_ensureVisibleItem->numRowsRegister() - 1, DetailColumn));
+  scrollTo(model()->index(d->m_ensureVisibleItem->startRow(), DetailColumn));
 }
 
 QString Register::text(int /*row*/, int /*col*/) const
@@ -1630,6 +1698,18 @@ void Register::setCellContentFromEditor(int /*row*/, int /*col*/)
 
 void Register::endEdit(int /*row*/, int /*col*/, bool /*accept*/, bool /*replace*/)
 {
+}
+
+RegisterItem* Register::focusItem() const
+{
+  Q_D(const Register);
+  return d->m_focusItem;
+}
+
+RegisterItem* Register::anchorItem() const
+{
+  Q_D(const Register);
+  return d->m_selectAnchor;
 }
 
 void Register::arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t)
@@ -1672,11 +1752,12 @@ void Register::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
 
 RegisterItem* Register::itemById(const QString& id) const
 {
+  Q_D(const Register);
   if (id.isEmpty())
-    return m_lastItem;
+    return d->m_lastItem;
 
-  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
-    RegisterItem* item = m_items[i];
+  for (QVector<RegisterItem*>::size_type i = 0; i < d->m_items.size(); ++i) {
+    RegisterItem* item = d->m_items[i];
     if (!item)
       continue;
     if (item->id() == id)
@@ -1687,12 +1768,13 @@ RegisterItem* Register::itemById(const QString& id) const
 
 void Register::handleItemChange(RegisterItem* old, bool shift, bool control)
 {
-  if (m_selectionMode == MultiSelection) {
+  Q_D(Register);
+  if (d->m_selectionMode == MultiSelection) {
     if (shift) {
-      selectRange(m_selectAnchor ? m_selectAnchor : old,
-                  m_focusItem, false, true, (m_selectAnchor && !control) ? true : false);
+      selectRange(d->m_selectAnchor ? d->m_selectAnchor : old,
+                  d->m_focusItem, false, true, (d->m_selectAnchor && !control) ? true : false);
     } else if (!control) {
-      selectItem(m_focusItem, false);
+      selectItem(d->m_focusItem, false);
     }
   }
 }
@@ -1759,17 +1841,18 @@ void Register::selectRange(RegisterItem* from, RegisterItem* to, bool invert, bo
 
 void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
 {
-  RegisterItem* oldFocusItem = m_focusItem;
+  Q_D(Register);
+  RegisterItem* oldFocusItem = d->m_focusItem;
 
   // make sure we have a focus item
-  if (!m_focusItem)
-    setFocusItem(m_firstItem);
-  if (!m_focusItem && m_firstItem)
-    setFocusItem(m_firstItem->nextItem());
-  if (!m_focusItem)
+  if (!d->m_focusItem)
+    setFocusItem(d->m_firstItem);
+  if (!d->m_focusItem && d->m_firstItem)
+    setFocusItem(d->m_firstItem->nextItem());
+  if (!d->m_focusItem)
     return;
 
-  RegisterItem* item = m_focusItem;
+  RegisterItem* item = d->m_focusItem;
   int height = 0;
 
   switch (key) {
@@ -1813,13 +1896,13 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
       break;
 
     case Qt::Key_Home:
-      item = m_firstItem;
+      item = d->m_firstItem;
       while ((!item->isSelectable() || !item->isVisible()) && item->nextItem())
         item = item->nextItem();
       break;
 
     case Qt::Key_End:
-      item = m_lastItem;
+      item = d->m_lastItem;
       while ((!item->isSelectable() || !item->isVisible()) && item->prevItem())
         item = item->prevItem();
       break;
@@ -1833,8 +1916,8 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
     }
   }
 
-  if (!(modifiers & Qt::ShiftModifier) || !m_selectAnchor)
-    m_selectAnchor = item;
+  if (!(modifiers & Qt::ShiftModifier) || !d->m_selectAnchor)
+    d->m_selectAnchor = item;
 
   setFocusItem(item);
 
@@ -1845,21 +1928,22 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
     emit transactionsSelected(list);
   }
 
-  if (m_focusItem && !m_focusItem->isSelected() && m_selectionMode == SingleSelection)
+  if (d->m_focusItem && !d->m_focusItem->isSelected() && d->m_selectionMode == SingleSelection)
     selectItem(item);
 
 }
 
 void Register::keyPressEvent(QKeyEvent* ev)
 {
+  Q_D(Register);
   switch (ev->key()) {
     case Qt::Key_Space:
-      if (m_selectionMode != NoSelection) {
+      if (d->m_selectionMode != NoSelection) {
         // get the state out of the event ...
-        m_modifiers = ev->modifiers();
+        d->m_modifiers = ev->modifiers();
         // ... and pretend that we have pressed the left mouse button ;)
-        m_mouseButton = Qt::LeftButton;
-        selectItem(m_focusItem);
+        d->m_mouseButton = Qt::LeftButton;
+        selectItem(d->m_focusItem);
       }
       break;
 
@@ -1936,8 +2020,15 @@ Transaction* Register::transactionFactory(Register *parent, const MyMoneyTransac
   return t;
 }
 
+const MyMoneyAccount& Register::account() const
+{
+  Q_D(const Register);
+  return d->m_account;
+}
+
 void Register::addGroupMarkers()
 {
+  Q_D(Register);
   QMap<QString, int> list;
   QMap<QString, int>::const_iterator it;
   KMyMoneyRegister::RegisterItem* p = firstItem();
@@ -1950,8 +2041,8 @@ void Register::addGroupMarkers()
   int weekStartOfs;
 
   switch (primarySortKey()) {
-    case KMyMoneyRegister::PostDateSort:
-    case KMyMoneyRegister::EntryDateSort:
+    case eWidgets::SortField::PostDate:
+    case eWidgets::SortField::EntryDate:
       today = QDate::currentDate();
       thisMonth.setDate(today.year(), today.month(), 1);
       lastMonth = thisMonth.addMonths(-1);
@@ -1969,19 +2060,19 @@ void Register::addGroupMarkers()
         new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneyGlobalSettings::startDate().date(), i18n("Prior transactions possibly filtered"));
 
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
-        if (m_account.lastReconciliationDate().isValid())
-          new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, m_account.lastReconciliationDate(), i18n("Last reconciliation"));
+        if (d->m_account.lastReconciliationDate().isValid())
+          new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, d->m_account.lastReconciliationDate(), i18n("Last reconciliation"));
 
-        if (!m_account.value("lastImportedTransactionDate").isEmpty()
-            && !m_account.value("lastStatementBalance").isEmpty()) {
-          MyMoneyMoney balance(m_account.value("lastStatementBalance"));
-          if (m_account.accountGroup() == Account::Liability)
+        if (!d->m_account.value("lastImportedTransactionDate").isEmpty()
+            && !d->m_account.value("lastStatementBalance").isEmpty()) {
+          MyMoneyMoney balance(d->m_account.value("lastStatementBalance"));
+          if (d->m_account.accountGroup() == Account::Liability)
             balance = -balance;
-          QString txt = i18n("Online Statement Balance: %1", balance.formatMoney(m_account.fraction()));
+          auto txt = i18n("Online Statement Balance: %1", balance.formatMoney(d->m_account.fraction()));
 
-          KMyMoneyRegister::StatementGroupMarker *p = new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
+          KMyMoneyRegister::StatementGroupMarker *p = new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(d->m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
 
-          p->setErroneous(!MyMoneyFile::instance()->hasMatchingOnlineBalance(m_account));
+          p->setErroneous(!MyMoneyFile::instance()->hasMatchingOnlineBalance(d->m_account));
         }
 
         new KMyMoneyRegister::FancyDateGroupMarker(this, thisYear, i18n("This year"));
@@ -2006,14 +2097,14 @@ void Register::addGroupMarkers()
       }
       break;
 
-    case KMyMoneyRegister::TypeSort:
+    case eWidgets::SortField::Type:
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
-        new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Deposit, m_account.accountType());
-        new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Payment, m_account.accountType());
+        new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Deposit, d->m_account.accountType());
+        new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Payment, d->m_account.accountType());
       }
       break;
 
-    case KMyMoneyRegister::ReconcileStateSort:
+    case eWidgets::SortField::ReconcileState:
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
         new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::NotReconciled);
         new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::Cleared);
@@ -2022,7 +2113,7 @@ void Register::addGroupMarkers()
       }
       break;
 
-    case KMyMoneyRegister::PayeeSort:
+    case eWidgets::SortField::Payee:
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
         while (p) {
           t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
@@ -2041,7 +2132,7 @@ void Register::addGroupMarkers()
       }
       break;
 
-    case KMyMoneyRegister::CategorySort:
+    case eWidgets::SortField::Category:
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
         while (p) {
           t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
@@ -2060,7 +2151,7 @@ void Register::addGroupMarkers()
       }
       break;
 
-    case KMyMoneyRegister::SecuritySort:
+    case eWidgets::SortField::Security:
       if (KMyMoneyGlobalSettings::showFancyMarker()) {
         while (p) {
           t = dynamic_cast<KMyMoneyRegister::InvestTransaction*>(p);
@@ -2118,12 +2209,38 @@ void Register::removeUnwantedGroupMarkers()
   }
 }
 
+void Register::setLedgerLensForced(bool forced)
+{
+  Q_D(Register);
+  d->m_ledgerLensForced = forced;
+}
+
+bool Register::ledgerLens() const
+{
+  Q_D(const Register);
+  return d->m_ledgerLensForced;
+}
+
+void Register::setSelectionMode(SelectionMode mode)
+{
+  Q_D(Register);
+  d->m_selectionMode = mode;
+}
+
+void Register::setUsedWithEditor(bool value)
+{
+  Q_D(Register);
+  d->m_usedWithEditor = value;
+}
+
 DetailsColumnType Register::getDetailsColumnType() const
 {
-  return m_detailsColumnType;
+  Q_D(const Register);
+  return d->m_detailsColumnType;
 }
 
 void Register::setDetailsColumnType(DetailsColumnType detailsColumnType)
 {
-  m_detailsColumnType = detailsColumnType;
+  Q_D(Register);
+  d->m_detailsColumnType = detailsColumnType;
 }

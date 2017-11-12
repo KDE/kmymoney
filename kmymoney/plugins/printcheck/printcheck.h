@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "kmymoneyplugin.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
 
 class KPluginInfo;
 class QPrinter;

@@ -42,6 +42,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyschedule.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "register.h"
 #include "transactionform.h"

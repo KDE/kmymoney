@@ -45,7 +45,7 @@ class kMyMoneyAccountCompletion : public kMyMoneyCompletion
   Q_OBJECT
 public:
 
-  kMyMoneyAccountCompletion(QWidget *parent = 0);
+  kMyMoneyAccountCompletion(QWidget* parent = nullptr);
   virtual ~kMyMoneyAccountCompletion();
 
   QStringList accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const {

@@ -170,7 +170,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
   m_stepLayout->setContentsMargins(11, 11, 11, 11);
   m_stepLayout->setSpacing(6);
   m_stepLayout->setObjectName("stepLayout");
-  m_stepLayout->addWidget(new QLabel("", m_stepFrame));
+  m_stepLayout->addWidget(new QLabel(QString(), m_stepFrame));
   m_stepLayout->addItem(new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
   m_stepLabel = new QLabel(m_stepFrame);
   m_stepLabel->setAlignment(Qt::AlignHCenter);
@@ -375,7 +375,7 @@ void KMyMoneyWizard::completeStateChanged()
 
   button = lastPage ? m_finishButton : m_nextButton;
 
-  bool rc = currentPage->isComplete();
+  auto rc = currentPage->isComplete();
   button->setEnabled(rc);
 
   m_backButton->setEnabled(m_history.count() > 1);

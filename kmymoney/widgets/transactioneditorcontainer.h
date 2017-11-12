@@ -48,7 +48,7 @@ class TransactionEditorContainer : public QTableWidget
   Q_OBJECT
 
 public:
-  TransactionEditorContainer(QWidget* parent) : QTableWidget(parent) {}
+  TransactionEditorContainer(QWidget* parent);
 
   virtual void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t) = 0;
   virtual void removeEditWidgets(QMap<QString, QWidget*>& editWidgets) = 0;
@@ -61,10 +61,7 @@ signals:
   void geometriesUpdated();
 
 protected slots:
-  void updateGeometries() {
-    QTableWidget::updateGeometries();
-    emit geometriesUpdated();
-  }
+  void updateGeometries();
 };
 
 #endif

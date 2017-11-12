@@ -39,10 +39,10 @@
 class MyMoneyAccount;
 
 namespace KMyMoneyRegister { class Transaction; }
-namespace KMyMoneyTransactionForm { class TransactionForm; }
 namespace KMyMoneyTransactionForm
 {
 
+class TransactionForm;
 /**
   * @author Thomas Baumgart
   */
@@ -56,7 +56,7 @@ public:
     SignalAlways           // always signal selection of a tab
   } SignalEmissionE;
 
-  explicit TabBar(QWidget* parent = 0);
+  explicit TabBar(QWidget* parent = nullptr);
   virtual ~TabBar() {}
 
   SignalEmissionE setSignalEmission(SignalEmissionE type);
@@ -143,7 +143,7 @@ class TransactionForm : public TransactionEditorContainer
 {
   Q_OBJECT
 public:
-  explicit TransactionForm(QWidget *parent = 0);
+  explicit TransactionForm(QWidget* parent = nullptr);
   virtual ~TransactionForm() {}
 
   /**
@@ -165,7 +165,7 @@ public:
     */
   void setCurrentCell(int, int) {}
 
-  TabBar* tabBar(QWidget* parent = 0);
+  TabBar* tabBar(QWidget* parent = nullptr);
 
   void setupForm(const MyMoneyAccount& acc);
 

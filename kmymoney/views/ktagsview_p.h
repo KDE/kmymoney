@@ -39,6 +39,7 @@
 #include "ui_ktagsview.h"
 
 #include "kmymoneyviewbase_p.h"
+#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneytag.h"
 #include "mymoneytransactionfilter.h"

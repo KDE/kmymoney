@@ -39,7 +39,8 @@
 #include "ui_kselecttransactionsdlg.h"
 
 #include "mymoneyaccount.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "kmymoneyglobalsettings.h"
 

@@ -41,7 +41,7 @@
   <customwidget>
    <class>TransactionSortOption</class>
    <extends>QWidget</extends>
-   <header>transactionsortoptionimpl.h</header>
+   <header>transactionsortoption.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

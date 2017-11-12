@@ -30,7 +30,7 @@
 
 #include "kmymoney.h"
 #include "kmymoneyview.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
 
 KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name) :
     ViewInterface(parent, name),

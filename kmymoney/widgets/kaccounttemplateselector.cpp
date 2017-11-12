@@ -35,39 +35,29 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "ui_kaccounttemplateselector.h"
+
 #include <mymoneytemplate.h>
 
-class KAccountTemplateSelector::Private
+class KAccountTemplateSelectorPrivate
 {
+  Q_DISABLE_COPY(KAccountTemplateSelectorPrivate)
+
 public:
-  Private(KAccountTemplateSelector* p) :
-      id(0)
+  KAccountTemplateSelectorPrivate() :
+    ui(new Ui::KAccountTemplateSelector),
+    id(0)
   {
-    m_parent = p;
   }
-#ifndef KMM_DESIGNER
-  QList<MyMoneyTemplate> selectedTemplates() const;
-  QTreeWidgetItem* hierarchyItem(const QString& parent, const QString& name);
-  void loadHierarchy();
-#endif
 
-public:
-  KAccountTemplateSelector*        m_parent;
-  QMap<QString, QTreeWidgetItem*>  m_templateHierarchy;
-#ifndef KMM_DESIGNER
-  QMap<int, MyMoneyTemplate>       m_templates;
-  // a map of country name or country name (language name) -> localeId (lang_country) so be careful how you use it
-  QMap<QString, QString>           countries;
-  QString                          currentLocaleId;
-  QMap<QString, QString>::iterator it_m;
-  QStringList                      dirlist;
-  int                              id;
-#endif
-};
-
+  ~KAccountTemplateSelectorPrivate()
+  {
+    delete ui;
+  }
 
 #ifndef KMM_DESIGNER
-QTreeWidgetItem* KAccountTemplateSelector::Private::hierarchyItem(const QString& parent, const QString& name)
+QTreeWidgetItem* hierarchyItem(const QString& parent, const QString& name)
 {
   if (!m_templateHierarchy.contains(parent)
       || m_templateHierarchy[parent] == 0) {
@@ -80,13 +70,13 @@ QTreeWidgetItem* KAccountTemplateSelector::Private::hierarchyItem(const QString&
   return item;
 }
 
-void KAccountTemplateSelector::Private::loadHierarchy()
+void loadHierarchy()
 {
   m_templateHierarchy.clear();
-  QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
+  QTreeWidgetItemIterator it(ui->m_groupList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   while ((it_v = *it) != 0) {
-    m_templates[it_v->data(0, IdRole).toInt()].hierarchy(m_templateHierarchy);
+    m_templates[it_v->data(0, Qt::UserRole).toInt()].hierarchy(m_templateHierarchy);
     ++it;
   }
 
@@ -98,7 +88,7 @@ void KAccountTemplateSelector::Private::loadHierarchy()
   // add the hierarchy from the MyMoneyFile object
   QList<MyMoneyAccount> aList;
   QList<MyMoneyAccount>::const_iterator it_a;
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   file->accountList(aList);
   if (aList.count() > 0) {
     m_templateHierarchy[file->accountToCategory(file->asset().id(), true)] = 0;
@@ -113,12 +103,12 @@ void KAccountTemplateSelector::Private::loadHierarchy()
   }
 #endif
 
-  m_parent->m_accountList->clear();
+  ui->m_accountList->clear();
 
   QRegExp exp("(.*):(.*)");
   for (QMap<QString, QTreeWidgetItem*>::iterator it_m = m_templateHierarchy.begin(); it_m != m_templateHierarchy.end(); ++it_m) {
     if (exp.indexIn(it_m.key()) == -1) {
-      (*it_m) = new QTreeWidgetItem(m_parent->m_accountList);
+      (*it_m) = new QTreeWidgetItem(ui->m_accountList);
       (*it_m)->setText(0, it_m.key());
     } else {
       (*it_m) = hierarchyItem(exp.cap(1), exp.cap(2));
@@ -126,19 +116,19 @@ void KAccountTemplateSelector::Private::loadHierarchy()
     (*it_m)->setExpanded(true);
   }
 
-  m_parent->m_description->clear();
-  if (m_parent->m_groupList->currentItem()) {
-    m_parent->m_description->setText(m_templates[m_parent->m_groupList->currentItem()->data(0, IdRole).toInt()].longDescription());
+  ui->m_description->clear();
+  if (ui->m_groupList->currentItem()) {
+    ui->m_description->setText(m_templates[ui->m_groupList->currentItem()->data(0, Qt::UserRole).toInt()].longDescription());
   }
 }
 
-QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates() const
+QList<MyMoneyTemplate> selectedTemplates() const
 {
   QList<MyMoneyTemplate> list;
-  QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
+  QTreeWidgetItemIterator it(ui->m_groupList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   while ((it_v = *it) != 0) {
-    list << m_templates[it_v->data(0, IdRole).toInt()];
+    list << m_templates[it_v->data(0, Qt::UserRole).toInt()];
     ++it;
   }
   return list;
@@ -146,13 +136,30 @@ QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates() co
 #endif
 
 
+
+public:
+  Ui::KAccountTemplateSelector    *ui;
+  QMap<QString, QTreeWidgetItem*>  m_templateHierarchy;
+#ifndef KMM_DESIGNER
+  QMap<int, MyMoneyTemplate>       m_templates;
+  // a map of country name or country name (language name) -> localeId (lang_country) so be careful how you use it
+  QMap<QString, QString>           countries;
+  QString                          currentLocaleId;
+  QMap<QString, QString>::iterator it_m;
+  QStringList                      dirlist;
+  int                              id;
+#endif
+};
+
 KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent) :
-    KAccountTemplateSelectorDecl(parent),
-    d(new Private(this))
+  QWidget(parent),
+  d_ptr(new KAccountTemplateSelectorPrivate)
 {
-  m_accountList->header()->hide();
-  m_groupList->setSelectionMode(QAbstractItemView::ExtendedSelection);
-  connect(m_groupList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLoadHierarchy()));
+  Q_D(KAccountTemplateSelector);
+  d->ui->setupUi(this);
+  d->ui->m_accountList->header()->hide();
+  d->ui->m_groupList->setSelectionMode(QAbstractItemView::ExtendedSelection);
+  connect(d->ui->m_groupList, &QTreeWidget::itemSelectionChanged, this, &KAccountTemplateSelector::slotLoadHierarchy);
 
   // kick off loading of account template data
   QTimer::singleShot(0, this, SLOT(slotLoadTemplateList()));
@@ -160,12 +167,14 @@ KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent) :
 
 KAccountTemplateSelector::~KAccountTemplateSelector()
 {
+  Q_D(KAccountTemplateSelector);
   delete d;
 }
 
 void KAccountTemplateSelector::slotLoadTemplateList()
 {
 #ifndef KMM_DESIGNER
+  Q_D(KAccountTemplateSelector);
   QStringList dirs;
   // get list of template subdirs and scan them for the list of subdirs
   d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
@@ -211,7 +220,7 @@ void KAccountTemplateSelector::slotLoadTemplateList()
 
   // now that we know, what we can get at max, we scan everything
   // and parse the templates into memory
-  m_groupList->clear();
+  d->ui->m_groupList->clear();
   d->m_templates.clear();
   d->it_m = d->countries.begin();
   d->id = 1;
@@ -226,7 +235,8 @@ void KAccountTemplateSelector::slotLoadTemplateList()
 void KAccountTemplateSelector::slotLoadCountry()
 {
 #ifndef KMM_DESIGNER
-  QTreeWidgetItem *parent = new QTreeWidgetItem(m_groupList);
+  Q_D(KAccountTemplateSelector);
+  QTreeWidgetItem *parent = new QTreeWidgetItem(d->ui->m_groupList);
   parent->setText(0, d->it_m.key());
   parent->setFlags(parent->flags() & ~Qt::ItemIsSelectable);
   for (QStringList::iterator it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
@@ -239,16 +249,16 @@ void KAccountTemplateSelector::slotLoadCountry()
         QTreeWidgetItem *item = new QTreeWidgetItem(parent);
         item->setText(0, templ.title());
         item->setText(1, templ.shortDescription());
-        item->setData(0, IdRole, QString("%1").arg(d->id));
+        item->setData(0, Qt::UserRole, QString("%1").arg(d->id));
         ++d->id;
       }
     }
   }
   // make visible the templates of the current locale
   if (d->it_m.value() == d->currentLocaleId) {
-    m_groupList->setCurrentItem(parent);
-    m_groupList->expandItem(parent);
-    m_groupList->scrollToItem(parent, QTreeView::PositionAtTop);
+    d->ui->m_groupList->setCurrentItem(parent);
+    d->ui->m_groupList->expandItem(parent);
+    d->ui->m_groupList->scrollToItem(parent, QTreeView::PositionAtTop);
   }
   ++d->it_m;
   if (d->it_m != d->countries.end())
@@ -263,6 +273,7 @@ void KAccountTemplateSelector::slotLoadCountry()
 void KAccountTemplateSelector::slotLoadHierarchy()
 {
 #ifndef KMM_DESIGNER
+  Q_D(KAccountTemplateSelector);
   d->loadHierarchy();
 #endif
 }
@@ -270,6 +281,7 @@ void KAccountTemplateSelector::slotLoadHierarchy()
 QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates() const
 {
 #ifndef KMM_DESIGNER
+  Q_D(const KAccountTemplateSelector);
   return d->selectedTemplates();
 #else
   return QList<MyMoneyTemplate>();

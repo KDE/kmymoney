@@ -37,12 +37,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyreconcilecombo.h"
+#include "kmymoneyactivitycombo.h"
+#include "kmymoneytagcombo.h"
+#include "ktagcontainer.h"
+#include "investtransaction.h"
+#include "transactioneditorcontainer.h"
 #include "kmymoneycategory.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneymvccombo.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
@@ -356,13 +363,13 @@ void InvestTransactionEditor::createEditWidgets()
   connect(security, &KMyMoneyCombo::createItem, this, &InvestTransactionEditor::slotCreateSecurity);
   connect(security, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
 
-  auto asset = new KMyMoneyCategory(0, false);
+  auto asset = new KMyMoneyCategory(false, nullptr);
   asset->setPlaceholderText(i18n("Asset account"));
   d->m_editWidgets["asset-account"] = asset;
   connect(asset, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
   connect(asset, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
 
-  auto fees = new KMyMoneyCategory(0, true);
+  auto fees = new KMyMoneyCategory(true, nullptr);
   fees->setPlaceholderText(i18n("Fees"));
   d->m_editWidgets["fee-account"] = fees;
   connect(fees, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateFeeCategory);
@@ -372,7 +379,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(fees, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
   connect(fees->splitButton(), &QAbstractButton::clicked, this, &InvestTransactionEditor::slotEditFeeSplits);
 
-  auto interest = new KMyMoneyCategory(0, true);
+  auto interest = new KMyMoneyCategory(true, nullptr);
   interest->setPlaceholderText(i18n("Interest"));
   d->m_editWidgets["interest-account"] = interest;
   connect(interest, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateInterestCategory);

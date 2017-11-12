@@ -126,7 +126,7 @@ How do you want to call this loan? Examples for names are 'car loan', 'school lo
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneypayeecombo.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

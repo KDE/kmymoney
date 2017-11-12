@@ -134,7 +134,7 @@ void TabBar::copyTabs(const TabBar* otabbar)
   // now create new ones. copy text, icon and identifier
   m_idMap = otabbar->m_idMap;
 
-  for (int i = 0; i < otabbar->count(); ++i) {
+  for (auto i = 0; i < otabbar->count(); ++i) {
     QTabBar::insertTab(i, otabbar->tabText(i));
     if (i == otabbar->QTabBar::currentIndex()) {
       QTabBar::setCurrentIndex(i);
@@ -146,7 +146,7 @@ int TabBar::indexAtPos(const QPoint& p) const
 {
   if (tabRect(QTabBar::currentIndex()).contains(p))
     return QTabBar::currentIndex();
-  for (int i = 0; i < count(); ++i)
+  for (auto i = 0; i < count(); ++i)
     if (isTabEnabled(i) && tabRect(i).contains(p))
       return i;
   return -1;
@@ -238,7 +238,7 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   }
 
   kMyMoneyDateInput dateInput;
-  KMyMoneyCategory category(nullptr, true);
+  KMyMoneyCategory category(true, nullptr);
 
   // extract the maximal sizeHint height
   int height = qMax(dateInput.sizeHint().height(), category.sizeHint().height());
@@ -258,7 +258,7 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
 
   setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
 
-  for (int i = 0; i < rowCount(); ++i) {
+  for (auto i = 0; i < rowCount(); ++i) {
     setItemDelegateForRow(i, m_itemDelegate);
   }
 
@@ -361,7 +361,7 @@ void TransactionForm::resize(int col)
   if (nc >= ValueColumn2 && columnWidth(ValueColumn2))
     adjustColumn(ValueColumn2);
 
-  for (int i = 0; i < nc; ++i) {
+  for (auto i = 0; i < nc; ++i) {
     if (i == col)
       continue;
 

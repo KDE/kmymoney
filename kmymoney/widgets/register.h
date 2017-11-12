@@ -4,6 +4,7 @@
     begin                : Fri Mar 10 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,6 +19,7 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
+#include "kmm_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -36,32 +38,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "registeritem.h"
 #include "transaction.h"
 #include "transactioneditorcontainer.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
+#include "groupmarker.h"
+#include "fancydategroupmarker.h"
 
+class MyMoneyAccount;
 class MyMoneyTransaction;
+
+namespace eWidgets { enum class SortField; }
+namespace eMyMoney { enum class Account; }
 
 namespace KMyMoneyRegister
 {
-
-typedef enum {
-  UnknownSort = 0,      ///< unknown sort criteria
-  PostDateSort = 1,     ///< sort by post date
-  EntryDateSort,        ///< sort by entry date
-  PayeeSort,            ///< sort by payee name
-  ValueSort,            ///< sort by value
-  NoSort,               ///< sort by number field
-  EntryOrderSort,       ///< sort by entry order
-  TypeSort,             ///< sort by CashFlowDirection
-  CategorySort,         ///< sort by Category
-  ReconcileStateSort,   ///< sort by reconciliation state
-  SecuritySort,         ///< sort by security (only useful for investment accounts)
-  // insert new values in front of this line
-  MaxSortFields
-} TransactionSortField;
 
 typedef enum {
   AscendingOrder = 0,   ///< sort in ascending order
@@ -76,10 +67,6 @@ typedef enum {
 class Register;
 class RegisterItem;
 class ItemPtrVector;
-
-const QString sortOrderToText(TransactionSortField idx);
-TransactionSortField textToSortOrder(const QString& text);
-
 
 class QWidgetContainer : public QMap<QString, QWidget*>
 {
@@ -109,162 +96,100 @@ public:
 
 };
 
-class GroupMarker : public RegisterItem
-{
-public:
-  explicit GroupMarker(Register* parent, const QString& txt = QString());
-  ~GroupMarker();
-  void setText(const QString& txt) {
-    m_txt = txt;
-  }
-  const QString& text() const {
-    return m_txt;
-  }
-  bool isSelectable() const {
-    return false;
-  }
-  bool canHaveFocus() const {
-    return false;
-  }
-  int numRows() const {
-    return 1;
-  }
-
-  virtual const char* className() {
-    return "GroupMarker";
-  }
-
-  bool isErroneous() const {
-    return m_erroneous;
-  }
-
-  void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
-  void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
-
-  int rowHeightHint() const;
-
-  bool matches(const RegisterFilter&) const {
-    return true;
-  }
-  virtual int sortSamePostDate() const {
-    return 0;
-  }
-
-  void setErroneous(bool condition = true) {
-    m_erroneous = condition;
-  }
-
-protected:
-  QString                  m_txt;
-  bool                     m_showDate;
-
-  static QPixmap*          m_bg;
-  static int               m_bgRefCnt;
-
-  bool                     m_erroneous;
-};
-
-
-class FancyDateGroupMarker : public GroupMarker
-{
-public:
-  FancyDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
-
-  QDate sortPostDate() const override {
-    return m_date;
-  }
-  QDate sortEntryDate() const override {
-    return m_date;
-  }
-  virtual const char* className() override {
-    return "FancyDateGroupMarker";
-  }
-private:
-  QDate                    m_date;
-};
-
+class StatementGroupMarkerPrivate;
 class StatementGroupMarker : public FancyDateGroupMarker
 {
+  Q_DISABLE_COPY(StatementGroupMarker)
+
 public:
-  StatementGroupMarker(Register* parent, CashFlowDirection dir, const QDate& date, const QString& txt);
-  CashFlowDirection sortType() const {
-    return m_dir;
-  }
-  virtual int sortSamePostDate() const {
-    return 3;
-  }
+  explicit StatementGroupMarker(Register* getParent, CashFlowDirection dir, const QDate& date, const QString& txt);
+  ~StatementGroupMarker() override;
+
+  CashFlowDirection sortType() const override;
+  int sortSamePostDate() const override;
+
 private:
-  CashFlowDirection        m_dir;
+  Q_DECLARE_PRIVATE(StatementGroupMarker)
 };
+
 
 class SimpleDateGroupMarker : public FancyDateGroupMarker
 {
+  Q_DISABLE_COPY(SimpleDateGroupMarker)
+
 public:
-  SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
-  void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+  explicit SimpleDateGroupMarker(Register* getParent, const QDate& date, const QString& txt);
+  ~SimpleDateGroupMarker() override;
+
+  void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
   int rowHeightHint() const;
-  virtual const char* className() {
-    return "SimpleDateGroupMarker";
-  }
+  const char* className() override;
 };
 
+class TypeGroupMarkerPrivate;
 class TypeGroupMarker : public GroupMarker
 {
+  Q_DISABLE_COPY(TypeGroupMarker)
+
 public:
-  TypeGroupMarker(Register* parent, CashFlowDirection dir, eMyMoney::Account accType);
-  CashFlowDirection sortType() const {
-    return m_dir;
-  }
+  explicit TypeGroupMarker(Register* getParent, CashFlowDirection dir, eMyMoney::Account accType);
+  ~TypeGroupMarker() override;
+
+  CashFlowDirection sortType() const override;
+
 private:
-  CashFlowDirection        m_dir;
+  Q_DECLARE_PRIVATE(TypeGroupMarker)
 };
 
 class FiscalYearGroupMarker : public FancyDateGroupMarker
 {
+  Q_DISABLE_COPY(FiscalYearGroupMarker)
+
 public:
-  FiscalYearGroupMarker(Register* parent, const QDate& date, const QString& txt);
-  virtual const char* className() {
-    return "FiscalYearGroupMarker";
-  }
-  virtual int sortSamePostDate() const {
-    return 1;
-  }
+  explicit FiscalYearGroupMarker(Register* getParent, const QDate& date, const QString& txt);
+  ~FiscalYearGroupMarker() override;
+
+  const char* className() override;
+  int sortSamePostDate() const override;
 };
 
 class PayeeGroupMarker : public GroupMarker
 {
+  Q_DISABLE_COPY(PayeeGroupMarker)
+
 public:
-  PayeeGroupMarker(Register* parent, const QString& name);
-  const QString& sortPayee() const {
-    return m_txt;
-  }
+  explicit PayeeGroupMarker(Register* getParent, const QString& name);
+  ~PayeeGroupMarker() override;
+
+  const QString& sortPayee() const override;
 };
 
 class CategoryGroupMarker : public GroupMarker
 {
-public:
-  CategoryGroupMarker(Register* parent, const QString& category);
-  const QString& sortCategory() const {
-    return m_txt;
-  }
-  const QString sortSecurity() const {
-    return m_txt;
-  }
+  Q_DISABLE_COPY(CategoryGroupMarker)
 
-  virtual const char* className() {
-    return "CategoryGroupMarker";
-  }
+public:
+  explicit CategoryGroupMarker(Register* getParent, const QString& category);
+  ~CategoryGroupMarker() override;
+
+  const QString& sortCategory() const override;
+  const QString sortSecurity() const override;
+  const char* className() override;
 };
 
+class ReconcileGroupMarkerPrivate;
 class ReconcileGroupMarker : public GroupMarker
 {
+  Q_DISABLE_COPY(ReconcileGroupMarker)
+
 public:
-  ReconcileGroupMarker(Register* parent, eMyMoney::Split::State state);
-  virtual eMyMoney::Split::State sortReconcileState() const {
-    return m_state;
-  }
+  explicit ReconcileGroupMarker(Register* getParent, eMyMoney::Split::State state);
+  ~ReconcileGroupMarker() override;
+
+  eMyMoney::Split::State sortReconcileState() const override;
+
 private:
-  eMyMoney::Split::State  m_state;
+  Q_DECLARE_PRIVATE(ReconcileGroupMarker)
 };
 
 
@@ -297,16 +222,18 @@ private:
   Register *m_register;
 };
 
+class RegisterPrivate;
 class Register : public TransactionEditorContainer
 {
   Q_OBJECT
+  Q_DISABLE_COPY(Register)
 
   friend class Transaction;
   friend class StdTransaction;
   friend class InvestTransaction;
 
 public:
-  Register(QWidget *parent = 0);
+  explicit Register(QWidget* parent = nullptr);
   virtual ~Register();
 
   /**
@@ -346,12 +273,8 @@ public:
   void setCellContentFromEditor(int row, int col);
   void endEdit(int row, int col, bool accept, bool replace);
 
-  RegisterItem* focusItem() const {
-    return m_focusItem;
-  }
-  RegisterItem* anchorItem() const {
-    return m_selectAnchor;
-  }
+  RegisterItem* focusItem() const;
+  RegisterItem* anchorItem() const;
 
   /**
     * set focus to specific item.
@@ -415,10 +338,8 @@ public:
   void setupRegister(const MyMoneyAccount& account, const QList<Column>& cols);
 
   void setSortOrder(const QString& order);
-  const QList<TransactionSortField>& sortOrder() const {
-    return m_sortOrder;
-  }
-  TransactionSortField primarySortKey() const;
+  const QList<eWidgets::SortField>& sortOrder() const;
+  eWidgets::SortField primarySortKey() const;
   void sortItems();
 
   /**
@@ -427,9 +348,7 @@ public:
     *
     * @return last actively used column (base 0)
     */
-  Column lastCol() const {
-    return m_lastCol;
-  }
+  Column lastCol() const;
 
   RegisterItem* firstItem() const;
   RegisterItem* firstVisibleItem() const;
@@ -441,14 +360,12 @@ public:
 
   void resize(int col, bool force = false);
 
-  void forceUpdateLists() {
-    m_listsDirty = true;
-  }
+  void forceUpdateLists();
 
   void ensureItemVisible(RegisterItem* item);
 
-  void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, Transaction* t);
-  void removeEditWidgets(QMap<QString, QWidget*>& editWidgets);
+  void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, Transaction* t) override;
+  void removeEditWidgets(QMap<QString, QWidget*>& editWidgets) override;
   void tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::Transaction* t) const;
 
   int rowHeightHint() const;
@@ -468,9 +385,7 @@ public:
     */
   static Transaction* transactionFactory(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
 
-  const MyMoneyAccount& account() const {
-    return m_account;
-  }
+  const MyMoneyAccount& account() const;
 
   /**
     * This method creates group marker items and adds them to the register
@@ -484,17 +399,14 @@ public:
     */
   void removeUnwantedGroupMarkers();
 
-  void setLedgerLensForced(bool forced = true) {
-    m_ledgerLensForced = forced;
-  }
+  void setLedgerLensForced(bool forced = true);
+  bool ledgerLens() const;
 
   /**
     * Sets the selection mode to @a mode. Supported modes are QTable::Single and
     * QTable::Multi. QTable::Multi is the default when the object is created.
     */
-  void setSelectionMode(SelectionMode mode) {
-    m_selectionMode = mode;
-  }
+  void setSelectionMode(SelectionMode mode);
 
   /**
     * This method sets a hint that the register instance will be used
@@ -502,32 +414,26 @@ public:
     * sizes are being auto adjusted. If a transaction editor is used then
     * it's possible that it will need some extra space.
     */
-  void setUsedWithEditor(bool value) {
-    m_usedWithEditor = value;
-  }
+  void setUsedWithEditor(bool value);
 
   DetailsColumnType getDetailsColumnType() const;
   void setDetailsColumnType(DetailsColumnType detailsColumnType);
 
 protected:
 
-  void mouseReleaseEvent(QMouseEvent *e);
-  void contextMenuEvent(QContextMenuEvent *e);
+  void mouseReleaseEvent(QMouseEvent *e) override;
+  void contextMenuEvent(QContextMenuEvent *e) override;
 
-  void unselectItems(int from = -1, int to = -1) {
-    doSelectItems(from, to, false);
-  }
-  void selectItems(int from, int to) {
-    doSelectItems(from, to, true);
-  }
+  void unselectItems(int from = -1, int to = -1);
+  void selectItems(int from, int to);
   void doSelectItems(int from, int to, bool selected);
   int selectedItemsCount() const;
 
-  bool event(QEvent*);
-  void focusOutEvent(QFocusEvent*);
-  void focusInEvent(QFocusEvent*);
-  void keyPressEvent(QKeyEvent*);
-  virtual void resizeEvent(QResizeEvent* ev);
+  bool event(QEvent*) override;
+  void focusOutEvent(QFocusEvent*) override;
+  void focusInEvent(QFocusEvent*) override;
+  void keyPressEvent(QKeyEvent*) override;
+  void resizeEvent(QResizeEvent* ev) override;
 
   int rowToIndex(int row) const;
   void setupItemIndex(int rowCount);
@@ -556,9 +462,9 @@ protected:
   /**
     * Override logic and use standard QFrame behaviour
     */
-  bool focusNextPrevChild(bool next);
+  bool focusNextPrevChild(bool next) override;
 
-  bool eventFilter(QObject* o, QEvent* e);
+  bool eventFilter(QObject* o, QEvent* e) override;
 
   void handleItemChange(RegisterItem* old, bool shift, bool control);
 
@@ -622,37 +528,9 @@ signals:
     */
   void itemAdded(RegisterItem* item);
 
-protected:
-  ItemPtrVector                m_items;
-  QVector<RegisterItem*>       m_itemIndex;
-  RegisterItem*                m_selectAnchor;
-  RegisterItem*                m_focusItem;
-  RegisterItem*                m_ensureVisibleItem;
-  RegisterItem*                m_firstItem;
-  RegisterItem*                m_lastItem;
-  RegisterItem*                m_firstErroneous;
-  RegisterItem*                m_lastErroneous;
-
-  int                          m_markErroneousTransactions;
-  int                          m_rowHeightHint;
-
-  MyMoneyAccount               m_account;
-
-  bool                         m_ledgerLensForced;
-  SelectionMode                m_selectionMode;
-
 private:
-  bool                         m_needResize;
-  bool                         m_listsDirty;
-  bool                         m_ignoreNextButtonRelease;
-  bool                         m_needInitialColumnResize;
-  bool                         m_usedWithEditor;
-  Qt::MouseButtons             m_mouseButton;
-  Qt::KeyboardModifiers        m_modifiers;
-  Column                       m_lastCol;
-  QList<TransactionSortField>  m_sortOrder;
-  QRect                        m_lastRepaintRect;
-  DetailsColumnType            m_detailsColumnType;
+  RegisterPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(Register)
 };
 
 } // namespace
