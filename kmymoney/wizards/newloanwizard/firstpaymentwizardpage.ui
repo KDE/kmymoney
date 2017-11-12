@@ -60,7 +60,7 @@
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyDateInput" name="m_firstDueDateEdit"/>
+          <widget class="KMyMoneyDateInput" name="m_firstDueDateEdit"/>
         </item>
       </layout>
     </item>

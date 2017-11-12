@@ -282,7 +282,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
         <item>
          <layout class="QGridLayout">
           <item row="0" column="1">
-           <widget class="kMyMoneyDateInput" name="m_kmymoneydateStart" native="true"/>
+           <widget class="KMyMoneyDateInput" name="m_kmymoneydateStart" native="true"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="lblEndDate">
@@ -329,7 +329,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="kMyMoneyDateInput" name="m_kmymoneydateEnd" native="true">
+           <widget class="KMyMoneyDateInput" name="m_kmymoneydateEnd" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -444,7 +444,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QWidget</extends>
    <header>../widgets/kmymoneydateinput.h</header>
   </customwidget>

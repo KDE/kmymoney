@@ -45,7 +45,7 @@
   */
 class QFocusEvent;
 class QKeyEvent;
-class KMM_WIDGETS_EXPORT kMyMoneyLineEdit : public KLineEdit
+class KMM_WIDGETS_EXPORT KMyMoneyLineEdit : public KLineEdit
 {
   Q_OBJECT
 public:
@@ -56,8 +56,8 @@ public:
     * @param alignment Controls the alignment of the text. Default is Qt::AlignLeft | Qt::AlignVCenter.
     *                  See Qt::AlignmentFlags for other possible values.
     */
-  explicit kMyMoneyLineEdit(QWidget *w = 0, bool forceMonetaryDecimalSymbol = false, Qt::Alignment alignment = (Qt::AlignLeft | Qt::AlignVCenter));
-  ~kMyMoneyLineEdit();
+  explicit KMyMoneyLineEdit(QWidget *w = 0, bool forceMonetaryDecimalSymbol = false, Qt::Alignment alignment = (Qt::AlignLeft | Qt::AlignVCenter));
+  ~KMyMoneyLineEdit();
 
   /**
     * This method is used to set the value of the widget back to
@@ -83,8 +83,8 @@ signals:
   void lineChanged(const QString& str);
 
 protected:
-  void focusOutEvent(QFocusEvent *ev);
-  void focusInEvent(QFocusEvent *ev);
+  void focusOutEvent(QFocusEvent *ev) override;
+  void focusInEvent(QFocusEvent *ev) override;
 
   /**
     * Overridden so that the period key on the numeric keypad always sends
@@ -97,7 +97,7 @@ protected:
     *
     * @param ev pointer to current QKeyEvent
     */
-  void keyPressEvent(QKeyEvent* ev);
+  void keyPressEvent(QKeyEvent* ev) override;
 
   /**
     * Overridden so that the period key on the numeric keypad always sends
@@ -110,7 +110,7 @@ protected:
     *
     * @param ev pointer to current QKeyEvent
     */
-  void keyReleaseEvent(QKeyEvent* ev);
+  void keyReleaseEvent(QKeyEvent* ev) override;
 
 private:
   /// \internal d-pointer class.

@@ -4,6 +4,7 @@
     begin                : Wed Nov 28 2007
     copyright            : (C) 2007 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,8 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDate>
-class QLabel;
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,36 +30,28 @@ class QLabel;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kbudgetvaluesdecl.h"
-#include <mymoneybudget.h>
-class kMyMoneyEdit;
+#include "mymoneybudget.h"
 
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
  */
 
-class KBudgetValuesDecl : public QWidget, public Ui::KBudgetValuesDecl
-{
-public:
-  KBudgetValuesDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KBudgetValues : public KBudgetValuesDecl
+class KBudgetValuesPrivate;
+class KBudgetValues : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KBudgetValues)
+
 public:
-  KBudgetValues(QWidget* parent = 0);
+  explicit KBudgetValues(QWidget* parent = nullptr);
   ~KBudgetValues();
 
   void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);
   void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
   void clear();
 
-private:
-  void enableMonths(bool enabled);
-  void fillMonthLabels();
+signals:
+  void valuesChanged();
 
 protected slots:
   void slotChangePeriod(int id);
@@ -78,16 +70,11 @@ protected slots:
   void slotUpdateClearButton();
 
 protected:
-  bool eventFilter(QObject* o, QEvent* e);
+  bool eventFilter(QObject* o, QEvent* e) override;
 
 private:
-  kMyMoneyEdit*   m_field[12];
-  QLabel*         m_label[12];
-  QWidget*        m_currentTab;
-  QDate           m_budgetDate;
-
-signals:
-  void valuesChanged();
+  KBudgetValuesPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KBudgetValues)
 };
 
 #endif

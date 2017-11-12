@@ -44,7 +44,7 @@ namespace KMyMoney {
   {
     Q_OBJECT
   public:
-    explicit OldDateEdit(const QDate& date, QWidget *parent = 0) : QDateEdit(date, parent) {}
+    explicit OldDateEdit(const QDate& date, QWidget* parent = nullptr) : QDateEdit(date, parent) {}
 
   protected:
     /** if the date was cleared (a state which is not supported by QDateEdit)
@@ -70,14 +70,14 @@ namespace KMyMoney {
   * which is based on an edit field with spin boxes and adds a QPushButton
   * to open a KDatePicker.
   */
-class KMM_WIDGETS_EXPORT kMyMoneyDateInput : public QWidget
+class KMM_WIDGETS_EXPORT KMyMoneyDateInput : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(QDate date READ date WRITE setDate STORED false)
 
 public:
-  explicit kMyMoneyDateInput(QWidget *parent = 0, Qt::AlignmentFlag flags = Qt::AlignLeft);
-  ~kMyMoneyDateInput();
+  explicit KMyMoneyDateInput(QWidget* parent = nullptr, Qt::AlignmentFlag flags = Qt::AlignLeft);
+  ~KMyMoneyDateInput();
 
   /**
     * Returns the selected date in the widget. If the widget is not
@@ -126,11 +126,11 @@ protected:
     *   The actual key for this to happen might be overridden through
     *   an i18n package. The 'T'-key is always possible.
     */
-  void keyPressEvent(QKeyEvent* k);
-  void showEvent(QShowEvent* event);
+  void keyPressEvent(QKeyEvent* k) override;
+  void showEvent(QShowEvent* event) override;
 
   /** To intercept events sent to focusWidget() */
-  bool eventFilter(QObject *o, QEvent *e);
+  bool eventFilter(QObject *o, QEvent *e) override;
 
 
 protected slots:

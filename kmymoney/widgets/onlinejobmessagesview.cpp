@@ -25,7 +25,7 @@ onlineJobMessagesView::onlineJobMessagesView(QWidget* parent)
     ui(new Ui::onlineJobMessageView)
 {
   ui->setupUi(this);
-  connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(close()));
+  connect(ui->closeButton, &QAbstractButton::pressed, this, &QWidget::close);
 }
 
 void onlineJobMessagesView::setModel(QAbstractItemModel* model)

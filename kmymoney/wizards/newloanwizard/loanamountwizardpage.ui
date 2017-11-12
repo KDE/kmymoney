@@ -60,7 +60,7 @@
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyEdit" name="m_loanAmountEdit"/>
+          <widget class="KMyMoneyEdit" name="m_loanAmountEdit"/>
         </item>
       </layout>
     </item>

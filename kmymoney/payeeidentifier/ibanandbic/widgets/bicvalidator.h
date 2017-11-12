@@ -23,6 +23,8 @@
 #include "payeeidentifier_iban_bic_widgets_export.h"
 #include "kmymoneyvalidationfeedback.h"
 
+namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
+
 class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT bicValidator : public QValidator
 {
   Q_OBJECT
@@ -31,7 +33,7 @@ public:
   explicit bicValidator(QObject* parent = 0);
   virtual QValidator::State validate(QString& , int&) const;
 
-  static QPair<KMyMoneyValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
+  static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };
 
 #endif // BICVALIDATOR_H

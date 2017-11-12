@@ -32,7 +32,7 @@
 
 class MyMoneyMoney;
 
-namespace KMyMoneyRegister { enum CashFlowDirection : int; }
+namespace eWidgets { namespace eRegister { enum class CashFlowDirection; } }
 
 class StdTransactionEditorPrivate;
 class StdTransactionEditor : public TransactionEditor
@@ -83,7 +83,7 @@ protected slots:
   void slotUpdateCategory(const QString&);
   void slotUpdatePayee(const QString&);
   //void slotUpdateTag(const QString&);
-  void slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirection);
+  void slotUpdateCashFlow(eWidgets::eRegister::CashFlowDirection);
   void slotCreateCategory(const QString&, QString&);
   void slotUpdateAction(int action);
   void slotUpdateAccount(const QString& id) override;
@@ -102,7 +102,7 @@ protected:
     * @param action preset the edit wigdets for @a action if no transaction
     *               is present
     */
-  void loadEditWidgets(KMyMoneyRegister::Action action) override;
+  void loadEditWidgets(eWidgets::eRegister::Action action) override;
   void loadEditWidgets() override;
 
   void setupCategoryWidget(QString&);

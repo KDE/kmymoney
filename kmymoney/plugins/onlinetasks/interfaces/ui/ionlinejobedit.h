@@ -101,6 +101,6 @@ signals:
 
 };
 
-Q_DECLARE_INTERFACE(IonlineJobEdit, "org.kmymoney.plugin.ionlinejobedit");
+Q_DECLARE_INTERFACE(IonlineJobEdit, "org.kmymoney.plugin.ionlinejobedit")
 
 #endif // IONLINEJOBEDIT_H

@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2015  Christian David <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +28,7 @@ class KMM_WIDGETS_EXPORT KTreeWidgetFilterLineWidget : public KTreeWidgetSearchL
   Q_OBJECT
 
 public:
-  explicit KTreeWidgetFilterLineWidget(QWidget *parent = 0, QTreeWidget *treeWidget = 0);
+  explicit KTreeWidgetFilterLineWidget(QWidget* parent = nullptr, QTreeWidget *treeWidget = 0);
 
 protected Q_SLOTS:
   /**

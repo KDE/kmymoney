@@ -40,6 +40,10 @@
 // Project Includes
 
 #include "ui_kenterscheduledlg.h"
+
+#include "tabbar.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneyfile.h"
 #include "mymoneyschedule.h"
 #include "register.h"
@@ -53,6 +57,7 @@
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
+#include "widgetenums.h"
 
 using namespace Icons;
 
@@ -97,7 +102,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   d->ui->buttonSkip->setHidden(true);
 
   // make sure, we have a tabbar with the form
-  KMyMoneyTransactionForm::TabBar* tabbar = d->ui->m_form->tabBar(d->ui->m_form->parentWidget());
+  KMyMoneyTransactionForm::TabBar* tabbar = d->ui->m_form->getTabBar(d->ui->m_form->parentWidget());
 
   // we never need to see the register
   d->ui->m_register->hide();
@@ -194,8 +199,8 @@ void KEnterScheduleDlg::resizeEvent(QResizeEvent* ev)
 {
   Q_UNUSED(ev)
   Q_D(KEnterScheduleDlg);
-  d->ui->m_register->resize(KMyMoneyRegister::DetailColumn);
-  d->ui->m_form->resize(KMyMoneyTransactionForm::ValueColumn1);
+  d->ui->m_register->resize((int)eWidgets::eTransaction::Column::Detail);
+  d->ui->m_form->resize((int)eWidgets::eTransactionForm::Column::Value1);
   QDialog::resizeEvent(ev);
 }
 
@@ -253,19 +258,19 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     // create the widgets, place them in the parent and load them with data
     // setup tab order
     d->m_tabOrderWidgets.clear();
-    KMyMoneyRegister::Action action = KMyMoneyRegister::ActionWithdrawal;
+    eWidgets::eRegister::Action action = eWidgets::eRegister::Action::Withdrawal;
     switch (d->m_schedule.type()) {
       case eMyMoney::Schedule::Type::Transfer:
-        action = KMyMoneyRegister::ActionTransfer;
+        action = eWidgets::eRegister::Action::Transfer;
         break;
       case eMyMoney::Schedule::Type::Deposit:
-        action = KMyMoneyRegister::ActionDeposit;
+        action = eWidgets::eRegister::Action::Deposit;
         break;
       case eMyMoney::Schedule::Type::LoanPayment:
         switch (d->m_schedule.paymentType()) {
           case eMyMoney::Schedule::PaymentType::DirectDeposit:
           case eMyMoney::Schedule::PaymentType::ManualDeposit:
-            action = KMyMoneyRegister::ActionDeposit;
+            action = eWidgets::eRegister::Action::Deposit;
             break;
           default:
             break;
@@ -289,13 +294,13 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
       KMyMoneyUtils::updateLastNumberUsed(d->m_schedule.account(), num);
       d->m_schedule.account().setValue("lastNumberUsed", num);
       if (w) {
-        dynamic_cast<kMyMoneyLineEdit*>(w)->loadText(num);
+        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(num);
       }
     } else {
       // if it's not a check, then we need to clear
       // a possibly assigned check number
       if (w)
-        dynamic_cast<kMyMoneyLineEdit*>(w)->loadText(QString());
+        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(QString());
     }
 
     Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
@@ -331,7 +336,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     focusWidget->setFocus();
 
     // Make sure, we use the adjusted date
-    kMyMoneyDateInput* dateEdit = dynamic_cast<kMyMoneyDateInput*>(editor->haveWidget("postdate"));
+    KMyMoneyDateInput* dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate"));
     if (dateEdit) {
       dateEdit->setDate(d->m_schedule.adjustedNextDueDate());
     }

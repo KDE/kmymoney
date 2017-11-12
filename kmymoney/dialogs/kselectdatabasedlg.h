@@ -33,7 +33,7 @@
 
 namespace Ui { class KSelectDatabaseDlg; }
 
-class kMandatoryFieldGroup;
+class KMandatoryFieldGroup;
 class KSelectDatabaseDlg : public QDialog
 {
   Q_OBJECT
@@ -67,7 +67,7 @@ private:
   Ui::KSelectDatabaseDlg* m_widget;
   int m_mode;
   QUrl m_url;
-  kMandatoryFieldGroup* m_requiredFields;
+  KMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
 };
 

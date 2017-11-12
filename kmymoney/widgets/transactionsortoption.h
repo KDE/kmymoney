@@ -1,5 +1,6 @@
 /*  This file is part of the KDE project
     Copyright (C) 2009 Laurent Montel <montel@kde.org>
+    (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -30,20 +31,22 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-namespace Ui
-{
-class TransactionSortOptionDecl;
-}
+
+namespace Ui { class TransactionSortOption; }
+namespace eWidgets { enum class SortField; }
 
 class QListWidget;
 class QListWidgetItem;
 class TransactionSortOption : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(TransactionSortOption)
+
 public:
-  TransactionSortOption(QWidget *parent);
+  explicit TransactionSortOption(QWidget *parent);
   ~TransactionSortOption();
   QString settings() const;
+
 public slots:
   void setSettings(const QString& settings);
   void toggleDirection(QListWidgetItem * item);
@@ -51,6 +54,7 @@ public slots:
 protected:
   QListWidgetItem * addEntry(QListWidget * p, QListWidgetItem * after, int idx);
   void setDirectionIcon(QListWidgetItem* item);
+
 protected slots:
   void slotAvailableSelected();
   void slotSelectedSelected();
@@ -59,13 +63,14 @@ protected slots:
   void slotUpItem();
   void slotDownItem();
   void slotFocusChanged(QWidget *o, QWidget *n);
-private:
-  void init();
+
 signals:
   void settingsChanged(const QString&);
 
 private:
-  Ui::TransactionSortOptionDecl *ui;
+  static eWidgets::SortField textToSortOrder(const QString& text);
+  static QString sortOrderToText(eWidgets::SortField idx);
+  Ui::TransactionSortOption *ui;
 };
 
 #endif /* TRANSACTIONSORTOPTIONIMPL_H */

@@ -27,6 +27,7 @@
 
 #include "../bicmodel.h"
 #include "bicvalidator.h"
+#include "kmymoneyvalidationfeedback.h"
 
 class bicItemDelegate : public QStyledItemDelegate
 {

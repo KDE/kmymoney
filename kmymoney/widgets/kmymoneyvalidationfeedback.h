@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,26 +24,17 @@
 
 #include "kmm_widgets_export.h"
 
-namespace Ui
-{
-class KMyMoneyValidationFeedback;
-}
+namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
 
+class KMyMoneyValidationFeedbackPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyValidationFeedback : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyValidationFeedback)
 
 public:
-  KMyMoneyValidationFeedback(QWidget *parent = 0);
+  explicit KMyMoneyValidationFeedback(QWidget* parent = nullptr);
   ~KMyMoneyValidationFeedback();
-
-  enum MessageType {
-    None,
-    Positive,
-    Information,
-    Warning,
-    Error
-  };
 
 public slots:
   /**
@@ -56,7 +48,7 @@ public slots:
    * Removes the feedback only if type and message fit. This is useful
    * if several objects are connected to setFeedback().
    */
-  void removeFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
+  void removeFeedback(eWidgets::ValidationFeedback::MessageType type, QString message);
 
   /**
    * @brief Show a feedback
@@ -64,14 +56,11 @@ public slots:
    * If type == None and !message.isEmpty() holds, the feedback is only hidden if
    * the currently shown message equals message.
    */
-  void setFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
+  void setFeedback(eWidgets::ValidationFeedback::MessageType type, QString message);
 
 private:
-  Ui::KMyMoneyValidationFeedback* ui;
-
-  class Private;
-  Private* d_ptr;
-  Q_DECLARE_PRIVATE();
+  KMyMoneyValidationFeedbackPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyValidationFeedback)
 };
 
 #endif // KMYMONEYVALIDATIONFEEDBACK_H

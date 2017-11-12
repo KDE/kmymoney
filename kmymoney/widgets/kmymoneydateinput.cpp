@@ -4,6 +4,7 @@
     copyright            : (C) 2000 by Michael Edwardes
     email                : mte@users.sourceforge.net
                            ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -74,11 +75,11 @@ void KMyMoney::OldDateEdit::focusInEvent(QFocusEvent * event)
 
 bool KMyMoney::OldDateEdit::event(QEvent* e)
 {
-  // make sure that we keep the current date setting of a kMyMoneyDateInput object
+  // make sure that we keep the current date setting of a KMyMoneyDateInput object
   // across the QDateEdit::event(FocusOutEvent)
   bool rc;
 
-  kMyMoneyDateInput* p = dynamic_cast<kMyMoneyDateInput*>(parentWidget());
+  KMyMoneyDateInput* p = dynamic_cast<KMyMoneyDateInput*>(parentWidget());
   if (e->type() == QEvent::FocusOut && p) {
     QDate d = p->date();
     rc = QDateEdit::event(e);
@@ -97,7 +98,7 @@ bool KMyMoney::OldDateEdit::focusNextPrevChild(bool next)
   return true;
 }
 
-struct kMyMoneyDateInput::Private {
+struct KMyMoneyDateInput::Private {
   QDateEdit *m_dateEdit;
   KDatePicker *m_datePicker;
   QDate m_date;
@@ -108,7 +109,7 @@ struct kMyMoneyDateInput::Private {
   KPassivePopup *m_datePopup;
 };
 
-kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
+KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
     : QWidget(parent), d(new Private)
 {
   d->m_qtalignment = flags;
@@ -150,14 +151,14 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_dateButton = new QPushButton(QIcon::fromTheme(g_Icons[Icon::ViewCalendarDay]), QString(), this);
   dateInputLayout->addWidget(d->m_dateButton);
 
-  connect(d->m_dateButton, SIGNAL(clicked()), SLOT(toggleDatePicker()));
-  connect(d->m_dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChosenRef(QDate)));
-  connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), this, SLOT(slotDateChosen(QDate)));
-  connect(d->m_datePicker, SIGNAL(dateEntered(QDate)), this, SLOT(slotDateChosen(QDate)));
-  connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), d->m_dateFrame, SLOT(hide()));
+  connect(d->m_dateButton, &QAbstractButton::clicked, this, &KMyMoneyDateInput::toggleDatePicker);
+  connect(d->m_dateEdit, &QDateTimeEdit::dateChanged, this, &KMyMoneyDateInput::slotDateChosenRef);
+  connect(d->m_datePicker, &KDatePicker::dateSelected, this, &KMyMoneyDateInput::slotDateChosen);
+  connect(d->m_datePicker, &KDatePicker::dateEntered, this, &KMyMoneyDateInput::slotDateChosen);
+  connect(d->m_datePicker, &KDatePicker::dateSelected, d->m_dateFrame, &QWidget::hide);
 }
 
-void kMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
+void KMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
 {
   // the next line knows a bit about the internals of QAbstractSpinBox
   QLineEdit* le = d->m_dateEdit->findChild<QLineEdit *>(); //krazy:exclude=qclasses
@@ -172,7 +173,7 @@ void kMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
   }
 }
 
-void kMyMoneyDateInput::showEvent(QShowEvent* event)
+void KMyMoneyDateInput::showEvent(QShowEvent* event)
 {
   // don't forget the standard behaviour  ;-)
   QWidget::showEvent(event);
@@ -184,7 +185,7 @@ void kMyMoneyDateInput::showEvent(QShowEvent* event)
   QTimer::singleShot(50, this, SLOT(fixSize()));
 }
 
-void kMyMoneyDateInput::fixSize()
+void KMyMoneyDateInput::fixSize()
 {
   // According to a hint in the documentation of KDatePicker::sizeHint()
   // 28 pixels should be added in each direction to obtain a better
@@ -193,14 +194,14 @@ void kMyMoneyDateInput::fixSize()
   d->m_dateFrame->setFixedSize(d->m_datePicker->sizeHint() + QSize(22, 14));
 }
 
-kMyMoneyDateInput::~kMyMoneyDateInput()
+KMyMoneyDateInput::~KMyMoneyDateInput()
 {
   delete d->m_dateFrame;
   delete d->m_datePopup;
   delete d;
 }
 
-void kMyMoneyDateInput::toggleDatePicker()
+void KMyMoneyDateInput::toggleDatePicker()
 {
   int w = d->m_dateFrame->width();
   int h = d->m_dateFrame->height();
@@ -240,7 +241,7 @@ void kMyMoneyDateInput::toggleDatePicker()
   * increments/decrements the date upon +/- or Up/Down key input
   * sets the date to current date when the 'T' key is pressed
   */
-void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
+void KMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 {
   QKeySequence today(i18nc("Enter todays date into date input widget", "T"));
 
@@ -271,7 +272,7 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
   * Some KeyPress events are intercepted and passed to keyPressEvent.
   * Otherwise they would be consumed by QDateEdit.
   */
-bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
+bool KMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
 {
   if (e->type() == QEvent::FocusIn) {
 #ifndef Q_OS_MAC
@@ -293,7 +294,7 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
   return false; // Don't filter the event
 }
 
-void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
+void KMyMoneyDateInput::slotDateChosenRef(const QDate& date)
 {
   if (date.isValid()) {
     emit dateChanged(date);
@@ -309,7 +310,7 @@ void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
   }
 }
 
-void kMyMoneyDateInput::slotDateChosen(QDate date)
+void KMyMoneyDateInput::slotDateChosen(QDate date)
 {
   if (date.isValid()) {
     // the next line implies a call to slotDateChosenRef() above
@@ -319,7 +320,7 @@ void kMyMoneyDateInput::slotDateChosen(QDate date)
   }
 }
 
-QDate kMyMoneyDateInput::date() const
+QDate KMyMoneyDateInput::date() const
 {
   QDate rc = d->m_dateEdit->date();
   if (rc == INVALID_DATE)
@@ -327,12 +328,12 @@ QDate kMyMoneyDateInput::date() const
   return rc;
 }
 
-void kMyMoneyDateInput::setDate(QDate date)
+void KMyMoneyDateInput::setDate(QDate date)
 {
   slotDateChosen(date);
 }
 
-void kMyMoneyDateInput::loadDate(const QDate& date)
+void KMyMoneyDateInput::loadDate(const QDate& date)
 {
   d->m_date = d->m_prevDate = date;
 
@@ -341,17 +342,17 @@ void kMyMoneyDateInput::loadDate(const QDate& date)
   blockSignals(false);
 }
 
-void kMyMoneyDateInput::resetDate()
+void KMyMoneyDateInput::resetDate()
 {
   setDate(d->m_prevDate);
 }
 
-void kMyMoneyDateInput::setMaximumDate(const QDate& max)
+void KMyMoneyDateInput::setMaximumDate(const QDate& max)
 {
   d->m_dateEdit->setMaximumDate(max);
 }
 
-QWidget* kMyMoneyDateInput::focusWidget() const
+QWidget* KMyMoneyDateInput::focusWidget() const
 {
   QWidget* w = d->m_dateEdit;
   while (w->focusProxy())
@@ -359,7 +360,7 @@ QWidget* kMyMoneyDateInput::focusWidget() const
   return w;
 }
 /*
-void kMyMoneyDateInput::setRange(const QDate & min, const QDate & max)
+void KMyMoneyDateInput::setRange(const QDate & min, const QDate & max)
 {
   d->m_dateEdit->setDateRange(min, max);
 }

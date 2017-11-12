@@ -26,6 +26,7 @@
 #include <QList>
 #include <qmath.h>
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -57,6 +58,7 @@
 #include "mymoneyaccountloan.h"
 #include "mymoneypayee.h"
 #include "mymoneyprice.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 
 using namespace NewAccountWizard;
@@ -1450,7 +1452,7 @@ bool LoanPayoutPage::isComplete() const
   return KMyMoneyWizardPage::isComplete() | m_noPayoutTransaction->isChecked();
 }
 
-const QString& LoanPayoutPage::payoutAccountId() const
+QString LoanPayoutPage::payoutAccountId() const
 {
   if (m_refinanceLoan->isChecked()) {
     return m_loanAccount->selectedItem();

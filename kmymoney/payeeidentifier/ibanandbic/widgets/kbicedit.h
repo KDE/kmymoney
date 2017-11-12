@@ -23,7 +23,6 @@
 #include <KLineEdit>
 
 #include "payeeidentifier_iban_bic_widgets_export.h"
-#include "kmymoneyvalidationfeedback.h"
 
 class QAbstractItemDelegate;
 
@@ -32,7 +31,7 @@ class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KBicEdit : public KLineEdit
   Q_OBJECT
 
 public:
-  KBicEdit(QWidget* parent = 0);
+  explicit KBicEdit(QWidget* parent = 0);
   virtual ~KBicEdit();
 
 private:

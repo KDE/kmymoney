@@ -322,7 +322,7 @@
           </widget>
          </item>
          <item>
-          <widget class="kMyMoneyDateInput" name="m_FinalPaymentEdit" native="true">
+          <widget class="KMyMoneyDateInput" name="m_FinalPaymentEdit" native="true">
            <property name="focusPolicy">
             <enum>Qt::StrongFocus</enum>
            </property>
@@ -379,13 +379,13 @@
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneygeneralcombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>KMyMoneyOccurrencePeriodCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneyoccurrenceperiodcombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -394,7 +394,7 @@
    <header>transactionform.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
   </customwidget>

@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2015 Christian Dávid <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,15 +27,16 @@
 class QAbstractItemModel;
 namespace Ui
 {
-class onlineJobMessageView;
+  class onlineJobMessageView;
 }
 
 class KMM_WIDGETS_EXPORT onlineJobMessagesView : public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
+  Q_DISABLE_COPY(onlineJobMessagesView)
 
 public:
-  onlineJobMessagesView(QWidget* parent = 0);
+  explicit onlineJobMessagesView(QWidget* parent = nullptr);
   ~onlineJobMessagesView();
   void setModel(QAbstractItemModel* model);
 

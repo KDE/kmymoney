@@ -138,7 +138,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
               </spacer>
             </item>
             <item row="3" column="2">
-              <widget class="kMyMoneyDateInput" name="m_payoutDate"/>
+              <widget class="KMyMoneyDateInput" name="m_payoutDate"/>
             </item>
           </layout>
         </widget>

@@ -9,6 +9,7 @@
                           John C <thetacoturtle@users.sourceforge.net>
                           Thomas Baumgart <ipwizard@users.sourceforge.net>
                           Kevin Tambascio <ktambascio@users.sourceforge.net>
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -19,8 +20,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
-#include <config-kmymoney.h>
 
 #include "kmymoneyaccountcombo.h"
 
@@ -90,7 +89,7 @@ void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
   if(m_popupView) {
     bool isBlocked = m_popupView->blockSignals(true);
     m_popupView->setCurrentIndex(QModelIndex());
-    for (int i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
+    for (auto i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
       QModelIndex childIndex = m_q->model()->index(i, 0);
       if (m_q->model()->hasChildren(childIndex)) {
         // search the first leaf
@@ -135,7 +134,7 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
   // don't do the standard behavior
   if(lineEdit()) {
     lineEdit()->setObjectName("AccountComboLineEdit");
-    connect(lineEdit(), SIGNAL(textEdited(QString)), this, SLOT(makeCompletion(QString)));
+    connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
   }
 }
 
@@ -261,12 +260,12 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
   d->m_popupView->expandAll();
 
-  connect(d->m_popupView, SIGNAL(activated(QModelIndex)), this, SLOT(selectItem(QModelIndex)));
+  connect(d->m_popupView, &QAbstractItemView::activated, this, &KMyMoneyAccountCombo::selectItem);
 
   if(isEditable()) {
-    connect(lineEdit(), SIGNAL(textEdited(QString)), this, SLOT(makeCompletion(QString)));
+    connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
   } else {
-    connect(this, SIGNAL(activated(int)), SLOT(activated()));
+    connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyAccountCombo::KComboBox::activated), this, &KMyMoneyAccountCombo::activated);
   }
 }
 

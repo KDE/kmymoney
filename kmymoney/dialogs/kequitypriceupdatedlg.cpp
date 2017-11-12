@@ -155,8 +155,8 @@ public:
     q->connect(ui->btnUpdateSelected, &QAbstractButton::clicked, q, &KEquityPriceUpdateDlg::slotUpdateSelectedClicked);
     q->connect(ui->btnUpdateAll, &QAbstractButton::clicked, q, &KEquityPriceUpdateDlg::slotUpdateAllClicked);
 
-    q->connect(ui->m_fromDate, &kMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
-    q->connect(ui->m_toDate, &kMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
+    q->connect(ui->m_fromDate, &KMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
+    q->connect(ui->m_toDate, &KMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
 
     q->connect(&m_webQuote, &WebPriceQuote::csvquote,
             q, &KEquityPriceUpdateDlg::slotReceivedCSVQuote);

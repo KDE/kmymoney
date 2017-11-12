@@ -1159,7 +1159,7 @@ bool KMyMoneyView::initializeStorage()
 
   // setup the standard precision
   AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-  kMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+  KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KPageWidgetItem* page;
@@ -1567,7 +1567,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
       }
     }
     AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-    kMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+    KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
   }
 }
 

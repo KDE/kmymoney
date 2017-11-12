@@ -44,7 +44,7 @@ KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
   ui(new Ui::KCategoryReassignDlg)
 {
   ui->setupUi(this);
-  auto mandatory = new kMandatoryFieldGroup(this);
+  auto mandatory = new KMandatoryFieldGroup(this);
   mandatory->add(ui->m_category);
   mandatory->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok));
 }

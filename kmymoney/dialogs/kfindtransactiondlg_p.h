@@ -47,6 +47,7 @@
 // Project Includes
 
 #include "kmymoneyedit.h"
+#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
@@ -54,8 +55,13 @@
 #include "register.h"
 #include "transaction.h"
 #include "daterangedlg.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 
 #include "ui_kfindtransactiondlg.h"
+
+#include "widgetenums.h"
 
 class KFindTransactionDlgPrivate
 {
@@ -120,13 +126,13 @@ public:
     m_helpAnchor[ui->m_detailsTab] = QLatin1String("details.search.details");
 
     // setup the register
-    QList<KMyMoneyRegister::Column> cols {
-          KMyMoneyRegister::DateColumn,
-          KMyMoneyRegister::AccountColumn,
-          KMyMoneyRegister::DetailColumn,
-          KMyMoneyRegister::ReconcileFlagColumn,
-          KMyMoneyRegister::PaymentColumn,
-          KMyMoneyRegister::DepositColumn};
+    QList<eWidgets::eTransaction::Column> cols {
+          eWidgets::eTransaction::Column::Date,
+          eWidgets::eTransaction::Column::Account,
+          eWidgets::eTransaction::Column::Detail,
+          eWidgets::eTransaction::Column::ReconcileFlag,
+          eWidgets::eTransaction::Column::Payment,
+          eWidgets::eTransaction::Column::Deposit};
     ui->m_register->setupRegister(MyMoneyAccount(), cols);
     ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
 
@@ -138,8 +144,8 @@ public:
     // setup the connections
     q->connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotSearch);
     q->connect(ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotReset);
-    q->connect(ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, ui->m_accountsView, &kMyMoneyAccountSelector::slotSelectAllAccounts);
-    q->connect(ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, ui->m_categoriesView, &kMyMoneyAccountSelector::slotSelectAllAccounts);
+    q->connect(ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, ui->m_accountsView, &KMyMoneyAccountSelector::slotSelectAllAccounts);
+    q->connect(ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, ui->m_categoriesView, &KMyMoneyAccountSelector::slotSelectAllAccounts);
     q->connect(ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, q, &QObject::deleteLater);
     q->connect(ui->buttonBox->button(QDialogButtonBox::Help), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotShowHelp);
 
@@ -569,9 +575,9 @@ public:
     q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KFindTransactionDlg::slotAmountSelected);
     q->connect(ui->m_amountRangeButton, &QAbstractButton::clicked, q, &KFindTransactionDlg::slotAmountRangeSelected);
 
-    q->connect(ui->m_amountEdit,      &kMyMoneyEdit::textChanged, q, &KFindTransactionDlg::slotUpdateSelections);
-    q->connect(ui->m_amountFromEdit,  &kMyMoneyEdit::textChanged, q, &KFindTransactionDlg::slotUpdateSelections);
-    q->connect(ui->m_amountToEdit,    &kMyMoneyEdit::textChanged, q, &KFindTransactionDlg::slotUpdateSelections);
+    q->connect(ui->m_amountEdit,      &KMyMoneyEdit::textChanged, q, &KFindTransactionDlg::slotUpdateSelections);
+    q->connect(ui->m_amountFromEdit,  &KMyMoneyEdit::textChanged, q, &KFindTransactionDlg::slotUpdateSelections);
+    q->connect(ui->m_amountToEdit,    &KMyMoneyEdit::textChanged, q, &KFindTransactionDlg::slotUpdateSelections);
 
     ui->m_amountButton->setChecked(true);
     q->slotAmountSelected();
@@ -585,7 +591,7 @@ public:
     categorySet.addAccountGroup(eMyMoney::Account::Income);
     categorySet.addAccountGroup(eMyMoney::Account::Expense);
     categorySet.load(ui->m_categoriesView);
-    q->connect(ui->m_categoriesView, &kMyMoneyAccountSelector::stateChanged, q, &KFindTransactionDlg::slotUpdateSelections);
+    q->connect(ui->m_categoriesView, &KMyMoneyAccountSelector::stateChanged, q, &KFindTransactionDlg::slotUpdateSelections);
   }
 
   void setupAccountsPage(bool withEquityAccounts)
@@ -602,7 +608,7 @@ public:
     //set the accountset to show closed account if the settings say so
     accountSet.setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
     accountSet.load(ui->m_accountsView);
-    q->connect(ui->m_accountsView, &kMyMoneyAccountSelector::stateChanged, q, &KFindTransactionDlg::slotUpdateSelections);
+    q->connect(ui->m_accountsView, &KMyMoneyAccountSelector::stateChanged, q, &KFindTransactionDlg::slotUpdateSelections);
   }
 
   KFindTransactionDlg      *q_ptr;

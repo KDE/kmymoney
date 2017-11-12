@@ -1,5 +1,6 @@
 /*  This file is part of the KDE project
     Copyright (C) 2009 Laurent Montel <montel@kde.org>
+    (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -72,7 +73,7 @@ ReportTabRowColQuery::ReportTabRowColQuery(QWidget *parent)
   ui->buttonGroup1->setId(ui->m_checkCategory, 7);
   ui->buttonGroup1->setId(ui->m_checkAction, 8);
   ui->buttonGroup1->setId(ui->m_checkBalance, 9);
-  connect(ui->m_checkHideTransactions, SIGNAL(toggled(bool)), this, SLOT(slotHideTransactionsChanged(bool)));
+  connect(ui->m_checkHideTransactions, &QAbstractButton::toggled, this, &ReportTabRowColQuery::slotHideTransactionsChanged);
 }
 
 void ReportTabRowColQuery::slotHideTransactionsChanged(bool checked)
@@ -98,7 +99,7 @@ ReportTabChart::ReportTabChart(QWidget *parent)
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
-  connect(ui->m_comboType, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChartTypeChanged(int)));
+  connect(ui->m_comboType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabChart::slotChartTypeChanged);
   emit ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
 }
 
@@ -129,13 +130,13 @@ ReportTabRange::ReportTabRange(QWidget *parent)
   ui->setupUi(this);
   m_dateRange = new DateRangeDlg;
   ui->dateRangeGrid->addWidget(m_dateRange, 0, 0, 1, 2);
-  connect(ui->m_yLabelsPrecision, SIGNAL(valueChanged(int)), this, SLOT(slotYLabelsPrecisionChanged(int)));
+  connect(ui->m_yLabelsPrecision, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ReportTabRange::slotYLabelsPrecisionChanged);
   emit ui->m_yLabelsPrecision->valueChanged(ui->m_yLabelsPrecision->value());
-  connect(ui->m_dataRangeStart, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedStart()));
-  connect(ui->m_dataRangeEnd, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedEnd()));
-  connect(ui->m_dataMajorTick, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedMajor()));
-  connect(ui->m_dataMinorTick, SIGNAL(editingFinished()), this, SLOT(slotEditingFinishedMinor()));
-  connect(ui->m_dataLock, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDataLockChanged(int)));
+  connect(ui->m_dataRangeStart, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedStart);
+  connect(ui->m_dataRangeEnd, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedEnd);
+  connect(ui->m_dataMajorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMajor);
+  connect(ui->m_dataMinorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMinor);
+  connect(ui->m_dataLock, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabRange::slotDataLockChanged);
   emit ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
 }
 
@@ -261,7 +262,7 @@ ReportTabCapitalGain::ReportTabCapitalGain(QWidget *parent)
 {
   ui = new Ui::ReportTabCapitalGain;
   ui->setupUi(this);
-  connect(ui->m_investmentSum, SIGNAL(currentIndexChanged(int)), this, SLOT(slotInvestmentSumChanged(int)));
+  connect(ui->m_investmentSum, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabCapitalGain::slotInvestmentSumChanged);
 }
 
 ReportTabCapitalGain::~ReportTabCapitalGain()
@@ -294,4 +295,36 @@ ReportTabPerformance::ReportTabPerformance(QWidget *parent)
 ReportTabPerformance::~ReportTabPerformance()
 {
   delete ui;
+}
+
+MyDoubleValidator::MyDoubleValidator(int decimals, QObject * parent) :
+  QDoubleValidator(0, 0, decimals, parent)
+{
+}
+
+QValidator::State MyDoubleValidator::validate(QString &s, int &i) const
+{
+  Q_UNUSED(i);
+  if (s.isEmpty() || s == "-") {
+    return QValidator::Intermediate;
+  }
+
+  QChar decimalPoint = locale().decimalPoint();
+
+  if(s.indexOf(decimalPoint) != -1) {
+    int charsAfterPoint = s.length() - s.indexOf(decimalPoint) - 1;
+
+    if (charsAfterPoint > decimals()) {
+      return QValidator::Invalid;
+    }
+  }
+
+  bool ok;
+  locale().toDouble(s, &ok);
+
+  if (ok) {
+    return QValidator::Acceptable;
+  } else {
+    return QValidator::Invalid;
+  }
 }

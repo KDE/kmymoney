@@ -127,14 +127,14 @@ public:
     * The widget will be created and destroyed dynamically in createInputWidgets()
     * and destroyInputWidgets().
     */
-  QPointer<kMyMoneyLineEdit> m_editMemo;
+  QPointer<KMyMoneyLineEdit> m_editMemo;
 
   /**
     * This member contains a pointer to the input widget for the amount.
     * The widget will be created and destroyed dynamically in createInputWidgets()
     * and destroyInputWidgets().
     */
-  QPointer<kMyMoneyEdit>     m_editAmount;
+  QPointer<KMyMoneyEdit>     m_editAmount;
 
   /**
     * This member keeps the tab order for the above widgets
@@ -310,7 +310,7 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         } else if (k->text()[ 0 ].isPrint()) {
           KMyMoneyCategory* cat = createEditWidgets(false);
           if (cat) {
-            kMyMoneyLineEdit *le = qobject_cast<kMyMoneyLineEdit*>(cat->lineEdit());
+            KMyMoneyLineEdit *le = qobject_cast<KMyMoneyLineEdit*>(cat->lineEdit());
             if (le) {
               // make sure, the widget receives the key again
               // and does not select the text this time
@@ -615,7 +615,7 @@ void KMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
       amountTxt.clear();
 
     unsigned width = fontMetrics().width(amountTxt);
-    kMyMoneyEdit* valfield = new kMyMoneyEdit();
+    KMyMoneyEdit* valfield = new KMyMoneyEdit();
     valfield->setMinimumWidth(width);
     width = valfield->minimumSizeHint().width();
     delete valfield;
@@ -915,7 +915,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   d->m_tabOrderWidgets.clear();
 
   // create the widgets
-  d->m_editAmount = new kMyMoneyEdit(0);
+  d->m_editAmount = new KMyMoneyEdit(0);
   d->m_editAmount->setFont(cellFont);
   d->m_editAmount->setResetButtonVisible(false);
   d->m_editAmount->setPrecision(d->m_precision);
@@ -926,7 +926,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   connect(d->m_editCategory, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createCategory(QString,QString&)));
   connect(d->m_editCategory, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
-  d->m_editMemo = new kMyMoneyLineEdit(0, false, Qt::AlignLeft | Qt::AlignVCenter);
+  d->m_editMemo = new KMyMoneyLineEdit(0, false, Qt::AlignLeft | Qt::AlignVCenter);
   d->m_editMemo->setPlaceholderText(i18n("Memo"));
   d->m_editMemo->setFont(cellFont);
 

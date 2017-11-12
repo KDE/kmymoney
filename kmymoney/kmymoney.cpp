@@ -357,7 +357,7 @@ public:
   KMyMoneyApp * const q;
 
   MyMoneyFileTransaction*       m_ft;
-  kMyMoneyAccountSelector*      m_moveToAccountSelector;
+  KMyMoneyAccountSelector*      m_moveToAccountSelector;
   int                           m_statementXMLindex;
   KBalanceWarning*              m_balanceWarning;
 
@@ -681,7 +681,7 @@ void KMyMoneyApp::createTransactionMoveMenu()
     QMenu *menu = dynamic_cast<QMenu*>(w);
     if (menu) {
       QWidgetAction *accountSelectorAction = new QWidgetAction(menu);
-      d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, false);
+      d->m_moveToAccountSelector = new KMyMoneyAccountSelector(menu, 0, false);
       d->m_moveToAccountSelector->setObjectName("transaction_move_menu_selector");
       accountSelectorAction->setDefaultWidget(d->m_moveToAccountSelector);
       menu->addAction(accountSelectorAction);
@@ -3561,7 +3561,7 @@ void KMyMoneyApp::slotAccountReconcileStart()
                 QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
                 while (itTransactionSplitResult.hasNext()) {
                   const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
-                  d->m_selectedTransactions.append(KMyMoneyRegister::SelectedTransaction(transactionSplit.first, transactionSplit.second));
+                  d->m_selectedTransactions.append(KMyMoneyRegister::SelectedTransaction(transactionSplit.first, transactionSplit.second, QString()));
                 }
                 // mark all transactions in d->m_selectedTransactions as 'Cleared'
                 markTransaction(eMyMoney::Split::State::Cleared);

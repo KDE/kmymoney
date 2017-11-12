@@ -76,7 +76,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="kMyMoneyEdit" name="value">
+      <widget class="KMyMoneyEdit" name="value">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -175,7 +175,7 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QFrame</extends>
    <header>kmymoneyedit.h</header>
    <container>1</container>

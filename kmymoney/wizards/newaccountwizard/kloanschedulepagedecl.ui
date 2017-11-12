@@ -95,7 +95,7 @@ If you selected to record all payments this date has already been supplied. If y
                     </spacer>
                   </item>
                   <item>
-                    <widget class="kMyMoneyDateInput" name="m_firstPaymentDueDate"/>
+                    <widget class="KMyMoneyDateInput" name="m_firstPaymentDueDate"/>
                   </item>
                 </layout>
               </item>

@@ -69,7 +69,7 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   connect(d->ui->kcfg_StartDate, &QDateTimeEdit::dateChanged, this, &KSettingsGeneral::slotLoadStartDate);
 
   // setup connections, so that changes by the user are forwarded to the (hidden) edit fields
-  connect(d->ui->m_startDateEdit, &kMyMoneyDateInput::dateChanged, d->ui->kcfg_StartDate, &QDateTimeEdit::setDate);
+  connect(d->ui->m_startDateEdit, &KMyMoneyDateInput::dateChanged, d->ui->kcfg_StartDate, &QDateTimeEdit::setDate);
 
   connect(d->ui->choosePath, &QAbstractButton::pressed, this, &KSettingsGeneral::slotChooseLogPath);
   d->initialHideZeroBalanceEquities = d->ui->kcfg_HideZeroBalanceEquities->isChecked();

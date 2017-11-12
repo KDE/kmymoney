@@ -4,6 +4,7 @@
     begin                : Sun May 11 2008
     copyright            : (C) 2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,41 +28,33 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "transaction.h"
-
-namespace KMyMoneyTransactionForm
-{
-class TransactionForm;
-} // namespace
+#include "stdtransaction.h"
+#include "investtransaction.h"
 
 namespace KMyMoneyRegister
 {
 
-class StdTransactionDownloaded : public StdTransaction
-{
-public:
-  StdTransactionDownloaded(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~StdTransactionDownloaded() {}
+  class StdTransactionDownloaded : public StdTransaction
+  {
+  public:
+    explicit StdTransactionDownloaded(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+    ~StdTransactionDownloaded() override;
 
-  virtual const char* className() {
-    return "StdTransactionDownloaded";
-  }
+    const char* className() override;
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
-};
+    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
+  };
 
-class InvestTransactionDownloaded : public InvestTransaction
-{
-public:
-  InvestTransactionDownloaded(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~InvestTransactionDownloaded() {}
+  class InvestTransactionDownloaded : public InvestTransaction
+  {
+  public:
+    explicit InvestTransactionDownloaded(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+    ~InvestTransactionDownloaded() override;
 
-  virtual const char* className() {
-    return "InvestTransactionDownloaded";
-  }
+    const char* className() override;
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
-};
+    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
+  };
 
 
 } // namespace

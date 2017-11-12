@@ -92,7 +92,7 @@
                   </widget>
                 </item>
                 <item>
-                  <widget class="kMyMoneyEdit" name="m_onlineFactor"/>
+                  <widget class="KMyMoneyEdit" name="m_onlineFactor"/>
                 </item>
               </layout>
             </item>

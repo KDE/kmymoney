@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,8 +27,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -41,49 +40,35 @@
 /**
   * @author Thomas Baumgart
   */
-
+class KMyMoneySecuritySelectorPrivate;
 class KMyMoneySecuritySelector : public KComboBox
 {
-  Q_OBJECT
+  Q_OBJECT  
+  Q_DISABLE_COPY(KMyMoneySecuritySelector)
   Q_PROPERTY(MyMoneySecurity security READ security WRITE setSecurity DESIGNABLE false STORED false)
+
 public:
-  enum displayItemE {
-    Symbol = 0,
-    FullName
-  };
-
-  enum displayTypeE {
-    TypeCurrencies = 0x01,
-    TypeSecurities = 0x02,
-    TypeAll        = 0x03
-  };
-
-  explicit KMyMoneySecuritySelector(QWidget *parent = 0);
+  explicit KMyMoneySecuritySelector(QWidget* parent = nullptr);
   virtual ~KMyMoneySecuritySelector();
 
   const MyMoneySecurity& security() const;
   void setSecurity(const MyMoneySecurity& currency);
-  void selectDisplayItem(KMyMoneySecuritySelector::displayItemE item);
-
-  void setDisplayType(displayTypeE type);
 
   void update(const QString& id);
 
-private:
-  MyMoneySecurity m_currency;
-  displayItemE    m_displayItem;
-  int             m_selectedItemId;
-  bool            m_displayOnly;
-  displayTypeE    m_displayType;
-  QList<MyMoneySecurity> m_list;
+protected:
+  KMyMoneySecuritySelectorPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneySecuritySelector)
 };
 
 class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyCurrencySelector)
+
 public:
-  KMyMoneyCurrencySelector(QWidget *parent = 0);
-  virtual ~KMyMoneyCurrencySelector() {}
+  explicit KMyMoneyCurrencySelector(QWidget* parent = nullptr);
+  ~KMyMoneyCurrencySelector() override;
 };
 
 #endif

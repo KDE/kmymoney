@@ -72,7 +72,7 @@ struct FixedColumnTreeView::Private {
 
   void syncExpanded(const QModelIndex& parentIndex = QModelIndex()) {
     const int rows = parent->model()->rowCount(parentIndex);
-    for (int i = 0; i < rows; ++i) {
+    for (auto i = 0; i < rows; ++i) {
       const QModelIndex &index = parent->model()->index(i, 0, parentIndex);
       if (parent->isExpanded(index)) {
         pub->expand(index);
@@ -137,34 +137,34 @@ FixedColumnTreeView::FixedColumnTreeView(QTreeView *parent)
   header()->sectionResizeMode(QHeaderView::Fixed);
 
   // connect the scroll bars to keep the two views in sync
-  connect(verticalScrollBar(), SIGNAL(valueChanged(int)), d->parent->verticalScrollBar(), SLOT(setValue(int)));
-  connect(d->parent->verticalScrollBar(), SIGNAL(valueChanged(int)), verticalScrollBar(), SLOT(setValue(int)));
+  connect(verticalScrollBar(), &QAbstractSlider::valueChanged, d->parent->verticalScrollBar(), &QAbstractSlider::setValue);
+  connect(d->parent->verticalScrollBar(), &QAbstractSlider::valueChanged, verticalScrollBar(), &QAbstractSlider::setValue);
 
   // keep the expanded/collapsed states synchronized between the two views
-  connect(d->parent, SIGNAL(expanded(QModelIndex)), this, SLOT(onExpanded(QModelIndex)));
-  connect(this, SIGNAL(expanded(QModelIndex)), this, SLOT(onExpanded(QModelIndex)));
-  connect(d->parent, SIGNAL(collapsed(QModelIndex)), this, SLOT(onCollapsed(QModelIndex)));
-  connect(this, SIGNAL(collapsed(QModelIndex)), this, SLOT(onCollapsed(QModelIndex)));
+  connect(d->parent, &QTreeView::expanded, this, &FixedColumnTreeView::onExpanded);
+  connect(this, &QTreeView::expanded, this, &FixedColumnTreeView::onExpanded);
+  connect(d->parent, &QTreeView::collapsed, this, &FixedColumnTreeView::onCollapsed);
+  connect(this, &QTreeView::collapsed, this, &FixedColumnTreeView::onCollapsed);
 
   // keep the sort indicators synchronized between the two views
-  connect(d->parent->header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)), this, SLOT(updateSortIndicator(int,Qt::SortOrder)));
-  connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)), this, SLOT(updateSortIndicator(int,Qt::SortOrder)));
+  connect(d->parent->header(), &QHeaderView::sortIndicatorChanged, this, &FixedColumnTreeView::updateSortIndicator);
+  connect(header(), &QHeaderView::sortIndicatorChanged, this, &FixedColumnTreeView::updateSortIndicator);
 
   // forward all signals
-  connect(this, SIGNAL(activated(QModelIndex)), d->parent, SIGNAL(activated(QModelIndex)));
-  connect(this, SIGNAL(clicked(QModelIndex)), d->parent, SIGNAL(clicked(QModelIndex)));
-  connect(this, SIGNAL(doubleClicked(QModelIndex)), d->parent, SIGNAL(doubleClicked(QModelIndex)));
-  connect(this, SIGNAL(entered(QModelIndex)), d->parent, SIGNAL(entered(QModelIndex)));
-  connect(this, SIGNAL(pressed(QModelIndex)), d->parent, SIGNAL(pressed(QModelIndex)));
-  connect(this, SIGNAL(viewportEntered()), d->parent, SIGNAL(viewportEntered()));
+  connect(this, &QAbstractItemView::activated, d->parent, &QAbstractItemView::activated);
+  connect(this, &QAbstractItemView::clicked, d->parent, &QAbstractItemView::clicked);
+  connect(this, &QAbstractItemView::doubleClicked, d->parent, &QAbstractItemView::doubleClicked);
+  connect(this, &QAbstractItemView::entered, d->parent, &QAbstractItemView::entered);
+  connect(this, &QAbstractItemView::pressed, d->parent, &QAbstractItemView::pressed);
+  connect(this, &QAbstractItemView::viewportEntered, d->parent, &QAbstractItemView::viewportEntered);
 
   // handle the resize of the first column in the source view
-  connect(d->parent->header(), SIGNAL(sectionResized(int,int,int)), this, SLOT(updateSectionWidth(int,int,int)));
+  connect(d->parent->header(), &QHeaderView::sectionResized, this, &FixedColumnTreeView::updateSectionWidth);
 
   // forward right click to the source list
   setContextMenuPolicy(d->parent->contextMenuPolicy());
   if (contextMenuPolicy() == Qt::CustomContextMenu) {
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), d->parent, SIGNAL(customContextMenuRequested(QPoint)));
+    connect(this, &QWidget::customContextMenuRequested, d->parent, &QWidget::customContextMenuRequested);
   }
 
   // enable hover indicator synchronization between the two views

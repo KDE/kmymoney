@@ -25,7 +25,7 @@
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 
-class kMandatoryFieldGroup;
+class KMandatoryFieldGroup;
 
 namespace Ui
 {
@@ -116,7 +116,7 @@ private slots:
 private:
   Ui::sepaCreditTransferEdit *ui;
   onlineJobTyped<sepaOnlineTransfer> m_onlineJob;
-  kMandatoryFieldGroup* m_requiredFields;
+  KMandatoryFieldGroup* m_requiredFields;
   bool m_readOnly;
   bool m_showAllErrors;
 

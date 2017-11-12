@@ -4,6 +4,7 @@
     begin                : Sun Jul 18 2010
     copyright            : (C) 2010 by Alvaro Soliverez
     email                : asoliverez@kde.org
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
  ***************************************************************************/
 
@@ -35,7 +36,7 @@
 class KPriceTreeItem : public QTreeWidgetItem
 {
 public:
-  KPriceTreeItem(QTreeWidget* parent);
+  explicit KPriceTreeItem(QTreeWidget* parent);
 
   bool operator<(const QTreeWidgetItem &otherItem) const;
 

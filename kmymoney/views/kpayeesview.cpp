@@ -62,7 +62,11 @@
 #include "accountsmodel.h"
 #include "mymoneysecurity.h"
 #include "mymoneycontact.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "icons/icons.h"
+#include "transaction.h"
+#include "widgetenums.h"
 
 using namespace Icons;
 
@@ -202,16 +206,16 @@ void KPayeesView::init()
   labelDefaultCategory->setEnabled(false);
   comboDefaultCategory->setEnabled(false);
 
-  QList<KMyMoneyRegister::Column> cols;
-  cols << KMyMoneyRegister::DateColumn;
-  cols << KMyMoneyRegister::AccountColumn;
-  cols << KMyMoneyRegister::DetailColumn;
-  cols << KMyMoneyRegister::ReconcileFlagColumn;
-  cols << KMyMoneyRegister::PaymentColumn;
-  cols << KMyMoneyRegister::DepositColumn;
+  QList<eWidgets::eTransaction::Column> cols {
+  eWidgets::eTransaction::Column::Date,
+  eWidgets::eTransaction::Column::Account,
+  eWidgets::eTransaction::Column::Detail,
+  eWidgets::eTransaction::Column::ReconcileFlag,
+  eWidgets::eTransaction::Column::Payment,
+  eWidgets::eTransaction::Column::Deposit};
   m_register->setupRegister(MyMoneyAccount(), cols);
   m_register->setSelectionMode(QTableWidget::SingleSelection);
-  m_register->setDetailsColumnType(KMyMoneyRegister::AccountFirst);
+  m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
   m_balanceLabel->hide();
 
   connect(m_contact, SIGNAL(contactFetched(ContactData)), this, SLOT(slotContactFetched(ContactData)));

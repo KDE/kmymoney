@@ -33,6 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneywizardpage.h"
 #include <kmymoneywizard.h>
 #include <kmymoneydateinput.h>
 #include <kmymoneycurrencyselector.h>
@@ -378,7 +379,7 @@ public:
     return m_noPayoutTransaction;
   }
 
-  const QString& payoutAccountId(void) const;
+  QString payoutAccountId(void) const;
 
 private slots:
   void slotLoadWidgets(void);

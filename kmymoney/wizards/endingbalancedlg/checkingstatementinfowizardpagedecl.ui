@@ -83,7 +83,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="kMyMoneyDateInput" name="m_statementDate"/>
+         <widget class="KMyMoneyDateInput" name="m_statementDate"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="TextLabel2">
@@ -96,7 +96,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-          <widget class="kMyMoneyEdit" name="m_previousBalance">
+          <widget class="KMyMoneyEdit" name="m_previousBalance">
             <property name="enabled">
               <bool>false</bool>
             </property>
@@ -113,7 +113,7 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="kMyMoneyEdit" name="m_endingBalance"/>
+         <widget class="KMyMoneyEdit" name="m_endingBalance"/>
         </item>
        </layout>
       </item>

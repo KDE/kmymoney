@@ -41,8 +41,9 @@ class MyMoneyAccount;
 
 template <typename T> class QList;
 
+namespace eWidgets { namespace eRegister { enum class Action; } }
+
 namespace KMyMoneyRegister {
-  enum Action : int;
   class SelectedTransactions;
   class Transaction;
 }
@@ -84,7 +85,7 @@ public:
     * @param account account that is currently shown in the calling ledger view
     * @param action default action (defaults to ActionNone).
     */
-  void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, KMyMoneyRegister::Action action);
+  void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, eWidgets::eRegister::Action action);
   void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account);
   void setup(QWidgetList& tabOrderWidgets);
 
@@ -193,7 +194,7 @@ public slots:
 protected:
   virtual void createEditWidgets() = 0;
   virtual void setupFinalWidgets() = 0;
-  virtual void loadEditWidgets(KMyMoneyRegister::Action action) = 0;
+  virtual void loadEditWidgets(eWidgets::eRegister::Action action) = 0;
   virtual void loadEditWidgets() = 0;
   void setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool allowObjectCreation = true);
   void resizeForm();

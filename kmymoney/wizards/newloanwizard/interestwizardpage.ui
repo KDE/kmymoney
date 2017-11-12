@@ -61,7 +61,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyEdit" name="m_interestRateEdit"/>
+          <widget class="KMyMoneyEdit" name="m_interestRateEdit"/>
         </item>
       </layout>
     </item>

@@ -43,7 +43,7 @@ Please select the category you want to assign the interest payments to or create
       </spacer>
     </item>
     <item>
-      <widget class="kMyMoneyAccountSelector" name="m_interestAccountEdit"/>
+      <widget class="KMyMoneyAccountSelector" name="m_interestAccountEdit"/>
     </item>
     <item>
       <layout class="QHBoxLayout">

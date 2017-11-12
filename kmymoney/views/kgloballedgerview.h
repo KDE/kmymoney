@@ -39,16 +39,19 @@ class KToolBar;
 #include "kmymoneyviewbase.h"
 #include "mymoneyaccount.h"
 #include "registeritem.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
 
 class MyMoneyReport;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class TransactionEditor;
 class QLabel;
+class QFrame;
+
 namespace KMyMoneyRegister { class Register; }
 namespace KMyMoneyRegister { class Transaction; }
 namespace KMyMoneyTransactionForm { class TransactionForm; }
+namespace eWidgets { namespace eRegister { enum class Action; } }
 
 /**
   * helper class implementing an event filter to detect mouse button press
@@ -226,7 +229,10 @@ public slots:
    * @param endingBalance The calculated ending balance for the statement
    *                Default ist 0.
    */
-  void slotSetReconcileAccount(const MyMoneyAccount& account = MyMoneyAccount(), const QDate& reconciliationDate = QDate(), const MyMoneyMoney& endingBalance = MyMoneyMoney());
+  void slotSetReconcileAccount(const MyMoneyAccount& account, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
+  void slotSetReconcileAccount(const MyMoneyAccount& account, const QDate& reconciliationDate);
+  void slotSetReconcileAccount(const MyMoneyAccount& account);
+  void slotSetReconcileAccount();
 
   /**
     * Select all transactions in the ledger that are not hidden.
@@ -298,7 +304,7 @@ protected:
 protected slots:
   void slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions& list);
   void slotNewTransaction();
-  void slotNewTransaction(KMyMoneyRegister::Action);
+  void slotNewTransaction(eWidgets::eRegister::Action);
 
   void slotSortOptions();
   void slotToggleTransactionMark(KMyMoneyRegister::Transaction* t);

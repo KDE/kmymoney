@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KBudgetValuesDecl</class>
- <widget class="QWidget" name="KBudgetValuesDecl">
+ <class>KBudgetValues</class>
+ <widget class="QWidget" name="KBudgetValues">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -120,7 +120,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="kMyMoneyEdit" name="m_amountMonthly" native="true">
+        <widget class="KMyMoneyEdit" name="m_amountMonthly" native="true">
          <property name="resetButtonVisibility" stdset="0">
           <bool>false</bool>
          </property>
@@ -134,7 +134,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="kMyMoneyEdit" name="m_amountYearly" native="true">
+        <widget class="KMyMoneyEdit" name="m_amountYearly" native="true">
          <property name="resetButtonVisibility" stdset="0">
           <bool>false</bool>
          </property>
@@ -148,7 +148,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="kMyMoneyEdit" name="m_amount1" native="true">
+        <widget class="KMyMoneyEdit" name="m_amount1" native="true">
          <property name="resetButtonVisibility" stdset="0">
           <bool>false</bool>
          </property>
@@ -169,7 +169,7 @@
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="kMyMoneyEdit" name="m_amount2" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount2" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -186,7 +186,7 @@
     </widget>
    </item>
    <item row="2" column="3">
-    <widget class="kMyMoneyEdit" name="m_amount3" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount3" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -203,7 +203,7 @@
     </widget>
    </item>
    <item row="3" column="3">
-    <widget class="kMyMoneyEdit" name="m_amount4" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount4" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -220,7 +220,7 @@
     </widget>
    </item>
    <item row="4" column="3">
-    <widget class="kMyMoneyEdit" name="m_amount5" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount5" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -237,7 +237,7 @@
     </widget>
    </item>
    <item row="5" column="3">
-    <widget class="kMyMoneyEdit" name="m_amount6" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount6" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -254,7 +254,7 @@
     </widget>
    </item>
    <item row="0" column="5">
-    <widget class="kMyMoneyEdit" name="m_amount7" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount7" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -271,7 +271,7 @@
     </widget>
    </item>
    <item row="1" column="5">
-    <widget class="kMyMoneyEdit" name="m_amount8" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount8" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -288,7 +288,7 @@
     </widget>
    </item>
    <item row="2" column="5">
-    <widget class="kMyMoneyEdit" name="m_amount9" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount9" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -305,7 +305,7 @@
     </widget>
    </item>
    <item row="3" column="5">
-    <widget class="kMyMoneyEdit" name="m_amount10" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount10" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -322,7 +322,7 @@
     </widget>
    </item>
    <item row="4" column="5">
-    <widget class="kMyMoneyEdit" name="m_amount11" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount11" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -339,7 +339,7 @@
     </widget>
    </item>
    <item row="5" column="5">
-    <widget class="kMyMoneyEdit" name="m_amount12" native="true">
+    <widget class="KMyMoneyEdit" name="m_amount12" native="true">
      <property name="resetButtonVisibility" stdset="0">
       <bool>false</bool>
      </property>
@@ -350,7 +350,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QWidget</extends>
    <header>kmymoneyedit.h</header>
   </customwidget>

@@ -43,8 +43,10 @@
 #include "mymoneytransaction.h"
 #include "register.h"
 #include "registeritem.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
 #include "transactioneditor.h"
+#include "qwidgetcontainer.h"
+#include "widgetenums.h"
 
 class MyMoneyMoney;
 class TransactionEditorContainer;
@@ -70,7 +72,7 @@ public:
     m_paymentMethod = eMyMoney::Schedule::PaymentType::Any;
     m_regForm = 0;
     m_item = 0;
-    m_initialAction = KMyMoneyRegister::ActionNone;
+    m_initialAction = eWidgets::eRegister::Action::None;
     m_openEditSplits = false;
     m_memoChanged = false;
   }
@@ -88,7 +90,7 @@ public:
       QString number = txn.splits().first().number();
       if (KMyMoneyUtils::numericPart(number) > 0) {
         // numeric is valid
-        auto numberEdit = dynamic_cast<kMyMoneyLineEdit*>(q->haveWidget("number"));
+        auto numberEdit = dynamic_cast<KMyMoneyLineEdit*>(q->haveWidget("number"));
         if (numberEdit) {
           numberEdit->loadText(number);
           MyMoneySplit split = txn.splits().first();
@@ -116,7 +118,7 @@ public:
   MyMoneySplit                            m_split;
   QDate                                   m_lastPostDate;
   QMap<QString, MyMoneyMoney>             m_priceInfo;
-  KMyMoneyRegister::Action                m_initialAction;
+  eWidgets::eRegister::Action              m_initialAction;
   bool                                    m_openEditSplits;
   bool                                    m_memoChanged;
 };

@@ -43,7 +43,7 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
   : m_widget(new Ui::KSelectDatabaseDlg())
   , m_mode(openMode)
   , m_url(openURL)
-  , m_requiredFields(new kMandatoryFieldGroup(this))
+  , m_requiredFields(new KMandatoryFieldGroup(this))
   , m_sqliteSelected(false)
 {
   m_widget->setupUi(this);

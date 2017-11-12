@@ -238,7 +238,7 @@
              </widget>
             </item>
             <item>
-             <widget class="kMyMoneyEdit" name="m_accountTotal">
+             <widget class="KMyMoneyEdit" name="m_accountTotal">
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -307,7 +307,7 @@
    <header>kmymoneyaccounttreeview.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QFrame</extends>
    <header>kmymoneyedit.h</header>
    <container>1</container>

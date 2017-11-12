@@ -48,9 +48,10 @@
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "kmymoneyaccountcombo.h"
+#include "tabbar.h"
 #include "register.h"
 #include "transactioneditor.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
 #include "kmymoneyglobalsettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
@@ -67,6 +68,8 @@
 #include "mymoneyutils.h"
 #include "transaction.h"
 #include "transactionform.h"
+#include "fancydategroupmarkers.h"
+#include "widgetenums.h"
 
 class KGlobalLedgerView::Private
 {
@@ -112,7 +115,7 @@ public:
   int                  m_precision;
   bool                 m_recursion;
   bool                 m_showDetails;
-  KMyMoneyRegister::Action m_action;
+  eWidgets::eRegister::Action m_action;
 
   // models
   AccountNamesFilterProxyModel *m_filterProxyModel;
@@ -231,7 +234,7 @@ void KGlobalLedgerView::init()
   vbox->setMargin(0);
 
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
-  d->m_action = KMyMoneyRegister::ActionNone;
+  d->m_action = eWidgets::eRegister::Action::None;
 
   // the proxy filter model
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
@@ -316,7 +319,7 @@ void KGlobalLedgerView::init()
   frameLayout->setContentsMargins(5, 5, 5, 5);
   frameLayout->setSpacing(0);
   m_form = new KMyMoneyTransactionForm::TransactionForm(m_formFrame);
-  frameLayout->addWidget(m_form->tabBar(m_formFrame));
+  frameLayout->addWidget(m_form->getTabBar(m_formFrame));
   frameLayout->addWidget(m_form);
   m_formFrame->setFrameShape(QFrame::Panel);
   m_formFrame->setFrameShadow(QFrame::Raised);
@@ -332,7 +335,7 @@ void KGlobalLedgerView::init()
   connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)));
   connect(d->m_mousePressFilter, SIGNAL(mousePressedOnExternalWidget(bool&)), this, SIGNAL(cancelOrEndEdit(bool&)));
 
-  connect(m_form, SIGNAL(newTransaction(KMyMoneyRegister::Action)), this, SLOT(slotNewTransaction(KMyMoneyRegister::Action)));
+  connect(m_form, SIGNAL(newTransaction(eWidgets::eRegister::Action)), this, SLOT(slotNewTransaction(eWidgets::eRegister::Action)));
 
   // setup mouse press filter
   d->m_mousePressFilter->addWidget(m_formFrame);
@@ -517,7 +520,7 @@ void KGlobalLedgerView::loadView()
 
     // create dummy entries for the scheduled transactions if sorted by postdate
     int period = KMyMoneyGlobalSettings::schedulePreview();
-    if (m_register->primarySortKey() == KMyMoneyRegister::PostDateSort) {
+    if (m_register->primarySortKey() == eWidgets::SortField::PostDate) {
       // show scheduled transactions which have a scheduled postdate
       // within the next 'period' days. In reconciliation mode, the
       // period starts on the statement date.
@@ -590,13 +593,13 @@ void KGlobalLedgerView::loadView()
 
     if (isReconciliationAccount()) {
       switch (m_register->primarySortKey()) {
-        case KMyMoneyRegister::PostDateSort:
-          statement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Details"));
+        case eWidgets::SortField::PostDate:
+          statement = new KMyMoneyRegister::StatementGroupMarker(m_register, eWidgets::eRegister::CashFlowDirection::Deposit, reconciliationDate, i18n("Statement Details"));
           m_register->sortItems();
           break;
-        case KMyMoneyRegister::TypeSort:
-          dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
-          pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Payment, reconciliationDate, i18n("Statement Payment Details"));
+        case eWidgets::SortField::Type:
+          dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, eWidgets::eRegister::CashFlowDirection::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
+          pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, eWidgets::eRegister::CashFlowDirection::Payment, reconciliationDate, i18n("Statement Payment Details"));
           m_register->sortItems();
           break;
         default:
@@ -877,8 +880,8 @@ void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
   if (m_needLoad)
     init();
 
-  m_register->resize(KMyMoneyRegister::DetailColumn);
-  m_form->resize(KMyMoneyTransactionForm::ValueColumn1);
+  m_register->resize((int)eWidgets::eTransaction::Column::Detail);
+  m_form->resize((int)eWidgets::eTransactionForm::Column::Value1);
   KMyMoneyViewBase::resizeEvent(ev);
 }
 
@@ -1027,6 +1030,21 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
   }
 }
 
+void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate)
+{
+  slotSetReconcileAccount(acc, reconciliationDate, MyMoneyMoney());
+}
+
+void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc)
+{
+  slotSetReconcileAccount(acc, QDate(), MyMoneyMoney());
+}
+
+void KGlobalLedgerView::slotSetReconcileAccount()
+{
+  slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+}
+
 bool KGlobalLedgerView::isReconciliationAccount() const
 {
   return m_account.id() == d->m_reconciliationAccount;
@@ -1076,7 +1094,7 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
   return rc;
 }
 
-void KGlobalLedgerView::slotNewTransaction(KMyMoneyRegister::Action id)
+void KGlobalLedgerView::slotNewTransaction(eWidgets::eRegister::Action id)
 {
   if (!m_inEditMode) {
     d->m_action = id;
@@ -1086,7 +1104,7 @@ void KGlobalLedgerView::slotNewTransaction(KMyMoneyRegister::Action id)
 
 void KGlobalLedgerView::slotNewTransaction()
 {
-  slotNewTransaction(KMyMoneyRegister::ActionNone);
+  slotNewTransaction(eWidgets::eRegister::Action::None);
 }
 
 void KGlobalLedgerView::setupDefaultAction()
@@ -1095,10 +1113,10 @@ void KGlobalLedgerView::setupDefaultAction()
     case eMyMoney::Account::Asset:
     case eMyMoney::Account::AssetLoan:
     case eMyMoney::Account::Savings:
-      d->m_action = KMyMoneyRegister::ActionDeposit;
+      d->m_action = eWidgets::eRegister::Action::Deposit;
       break;
     default:
-      d->m_action = KMyMoneyRegister::ActionWithdrawal;
+      d->m_action = eWidgets::eRegister::Action::Withdrawal;
       break;
   }
 }
@@ -1113,7 +1131,7 @@ bool KGlobalLedgerView::selectEmptyTransaction()
     // this transaction is not empty, we take it as template for the
     // transaction to be created
     KMyMoneyRegister::SelectedTransactions list(m_register);
-    if ((d->m_action == KMyMoneyRegister::ActionNone) && (!list.isEmpty()) && (!list[0].transaction().id().isEmpty())) {
+    if ((d->m_action == eWidgets::eRegister::Action::None) && (!list.isEmpty()) && (!list[0].transaction().id().isEmpty())) {
       // the new transaction to be created will have the same type
       // as the one that currently has the focus
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(m_register->focusItem());
@@ -1124,7 +1142,7 @@ bool KGlobalLedgerView::selectEmptyTransaction()
 
     // if we still don't have an idea which type of transaction
     // to create, we use the default.
-    if (d->m_action == KMyMoneyRegister::ActionNone) {
+    if (d->m_action == eWidgets::eRegister::Action::None) {
       setupDefaultAction();
     }
 
@@ -1272,7 +1290,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       QTimer::singleShot(10, focusWidget, SLOT(setFocus()));
 
       // preset to 'I have no idea which type to create' for the next round.
-      d->m_action = KMyMoneyRegister::ActionNone;
+      d->m_action = eWidgets::eRegister::Action::None;
     }
   }
   return editor;

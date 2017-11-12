@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2006 by Thomas Baumagrt
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -13,8 +14,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
-#include "kmymoneywizard_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -39,79 +38,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneywizardpage.h"
 #include "kmymoneytitlelabel.h"
-#include "kguiutils.h"
 #include "icons/icons.h"
 #include "kmymoneywizard.h"
 
 using namespace Icons;
-
-KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
-    QObject(parent)
-{
-}
-
-void KMyMoneyWizardPagePrivate::emitCompleteStateChanged()
-{
-  emit completeStateChanged();
-}
-
-
-KMyMoneyWizardPage::KMyMoneyWizardPage(unsigned int step, QWidget* widget) :
-    m_step(step),
-    m_widget(widget),
-    d(new KMyMoneyWizardPagePrivate(widget))
-{
-  m_mandatoryGroup = new kMandatoryFieldGroup(widget);
-  QObject::connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
-  widget->hide();
-}
-
-QObject* KMyMoneyWizardPage::object() const
-{
-  return d;
-}
-
-void KMyMoneyWizardPage::completeStateChanged() const
-{
-  d->emitCompleteStateChanged();
-}
-
-void KMyMoneyWizardPage::resetPage()
-{
-}
-
-void KMyMoneyWizardPage::enterPage()
-{
-}
-
-void KMyMoneyWizardPage::leavePage()
-{
-}
-
-KMyMoneyWizardPage* KMyMoneyWizardPage::nextPage() const
-{
-  return 0;
-}
-
-bool KMyMoneyWizardPage::isLastPage() const
-{
-  return nextPage() == 0;
-}
-
-bool KMyMoneyWizardPage::isComplete() const
-{
-  if (!isLastPage())
-    wizard()->m_nextButton->setToolTip(i18n("Continue with next page"));
-  else
-    wizard()->m_finishButton->setToolTip(i18n("Finish wizard"));
-  return m_mandatoryGroup->isEnabled();
-}
-
-QString KMyMoneyWizardPage::helpContext() const
-{
-  return QString();
-}
 
 KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
     QDialog(parent, f),
@@ -170,7 +102,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
   m_stepLayout->setContentsMargins(11, 11, 11, 11);
   m_stepLayout->setSpacing(6);
   m_stepLayout->setObjectName("stepLayout");
-  m_stepLayout->addWidget(new QLabel("", m_stepFrame));
+  m_stepLayout->addWidget(new QLabel(QString(), m_stepFrame));
   m_stepLayout->addItem(new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
   m_stepLabel = new QLabel(m_stepFrame);
   m_stepLabel->setAlignment(Qt::AlignHCenter);
@@ -211,11 +143,15 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
 
   m_finishButton->hide();
 
-  connect(m_backButton, SIGNAL(clicked()), this, SLOT(backButtonClicked()));
-  connect(m_nextButton, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
-  connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(m_finishButton, SIGNAL(clicked()), this, SLOT(accept()));
-  connect(m_helpButton, SIGNAL(clicked()), this, SLOT(helpButtonClicked()));
+  connect(m_backButton, &QAbstractButton::clicked, this, &KMyMoneyWizard::backButtonClicked);
+  connect(m_nextButton, &QAbstractButton::clicked, this, &KMyMoneyWizard::nextButtonClicked);
+  connect(m_cancelButton, &QAbstractButton::clicked, this, &QDialog::reject);
+  connect(m_finishButton, &QAbstractButton::clicked, this, &KMyMoneyWizard::accept);
+  connect(m_helpButton, &QAbstractButton::clicked, this, &KMyMoneyWizard::helpButtonClicked);
+}
+
+KMyMoneyWizard::~KMyMoneyWizard()
+{
 }
 
 void KMyMoneyWizard::setTitle(const QString& txt)
@@ -242,6 +178,11 @@ void KMyMoneyWizard::addStep(const QString& text)
   if (m_stepFrame->minimumWidth() < w) {
     m_stepFrame->setMinimumWidth(w);
   }
+}
+
+QList<KMyMoneyWizardPage*> KMyMoneyWizard::historyPages() const
+{
+  return m_history;
 }
 
 void KMyMoneyWizard::setStepHidden(int step, bool hidden)
@@ -276,6 +217,11 @@ void KMyMoneyWizard::selectStep(int step)
 void KMyMoneyWizard::reselectStep()
 {
   selectStep(m_step);
+}
+
+void KMyMoneyWizard::setHelpContext(const QString& ctx)
+{
+  m_helpContext = ctx;
 }
 
 void KMyMoneyWizard::updateStepCount()
@@ -375,7 +321,7 @@ void KMyMoneyWizard::completeStateChanged()
 
   button = lastPage ? m_finishButton : m_nextButton;
 
-  bool rc = currentPage->isComplete();
+  auto rc = currentPage->isComplete();
   button->setEnabled(rc);
 
   m_backButton->setEnabled(m_history.count() > 1);

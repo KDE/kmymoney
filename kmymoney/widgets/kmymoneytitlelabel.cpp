@@ -4,6 +4,7 @@
     begin                : Sun Feb 05 2005
     copyright            : (C) 2005 by Ace Jones
     email                : acejones@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,6 +27,7 @@
 #include <QLabel>
 #include <QStandardPaths>
 #include <QFontDatabase>
+#include <QImage>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,40 +37,95 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent) :
-    QLabel(parent)
+class KMyMoneyTitleLabelPrivate
 {
-  m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
+  Q_DISABLE_COPY(KMyMoneyTitleLabelPrivate)
+
+public:
+  KMyMoneyTitleLabelPrivate()
+  {
+  }
+
+  QImage m_leftImage;
+  QImage m_rightImage;
+  QColor m_bgColor;
+  QString m_text;
+
+  QString m_leftImageFile;
+  QString m_rightImageFile;
+};
+
+KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent) :
+    QLabel(parent),
+    d_ptr(new KMyMoneyTitleLabelPrivate)
+{
+  Q_D(KMyMoneyTitleLabel);
+  d->m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
 
   setFont(QFontDatabase::systemFont(QFontDatabase::TitleFont));
 }
 
 KMyMoneyTitleLabel::~KMyMoneyTitleLabel()
 {
+  Q_D(KMyMoneyTitleLabel);
+  delete d;
+}
+
+void KMyMoneyTitleLabel::setBgColor(const QColor& _color)
+{
+  Q_D(KMyMoneyTitleLabel);
+  d->m_bgColor = _color;
 }
 
 void KMyMoneyTitleLabel::setLeftImageFile(const QString& _file)
 {
-  m_leftImageFile = _file;
-  QString lfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, m_leftImageFile);
-  m_leftImage.load(lfullpath);
+  Q_D(KMyMoneyTitleLabel);
+  d->m_leftImageFile = _file;
+  QString lfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, d->m_leftImageFile);
+  d->m_leftImage.load(lfullpath);
 }
 
 void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
 {
-  m_rightImageFile = _file;
-  QString rfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, m_rightImageFile);
-  m_rightImage.load(rfullpath);
-  if (m_rightImage.height() < 30)
+  Q_D(KMyMoneyTitleLabel);
+  d->m_rightImageFile = _file;
+  QString rfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, d->m_rightImageFile);
+  d->m_rightImage.load(rfullpath);
+  if (d->m_rightImage.height() < 30)
     setMinimumHeight(30);
   else {
-    setMinimumHeight(m_rightImage.height());
-    setMaximumHeight(m_rightImage.height());
+    setMinimumHeight(d->m_rightImage.height());
+    setMaximumHeight(d->m_rightImage.height());
   }
+}
+
+QString KMyMoneyTitleLabel::leftImageFile() const
+{
+  Q_D(const KMyMoneyTitleLabel);
+  return d->m_leftImageFile;
+}
+
+QString KMyMoneyTitleLabel::rightImageFile() const
+{
+  Q_D(const KMyMoneyTitleLabel);
+  return d->m_rightImageFile;
+}
+
+QColor KMyMoneyTitleLabel::bgColor() const
+{
+  Q_D(const KMyMoneyTitleLabel);
+  return d->m_bgColor;
+}
+
+QString KMyMoneyTitleLabel::text() const
+{
+  Q_D(const KMyMoneyTitleLabel);
+  return d->m_text;
 }
 
 void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
 {
+  Q_D(KMyMoneyTitleLabel);
   QLabel::paintEvent(e);
 
   QPainter painter(this);
@@ -76,13 +133,13 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
 
   // prepare the pixmap
   QImage output(cr.width(), cr.height(), QImage::Format_RGB32);
-  output.fill(m_bgColor.rgb());
+  output.fill(d->m_bgColor.rgb());
 
   QPixmap result = QPixmap::fromImage(output);
-  QPixmap overlay = QPixmap::fromImage(m_rightImage);
+  QPixmap overlay = QPixmap::fromImage(d->m_rightImage);
   QPainter pixmapPainter(&result);
-  pixmapPainter.drawPixmap(cr.width() - m_rightImage.width(), 0, overlay, 0, 0, overlay.width(), overlay.height());
-  overlay = QPixmap::fromImage(m_leftImage);
+  pixmapPainter.drawPixmap(cr.width() - d->m_rightImage.width(), 0, overlay, 0, 0, overlay.width(), overlay.height());
+  overlay = QPixmap::fromImage(d->m_leftImage);
   pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
 
   // first draw pixmap
@@ -93,12 +150,13 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
   font.setPointSizeF(qMax(result.height() / static_cast<qreal>(2.5), font.pointSizeF()));
   painter.setFont(font);
   painter.setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color());
-  style()->drawItemText(&painter, contentsRect(), alignment(), palette(), isEnabled(), QString("   ") + m_text);
+  style()->drawItemText(&painter, contentsRect(), alignment(), palette(), isEnabled(), QString("   ") + d->m_text);
 }
 
 void KMyMoneyTitleLabel::setText(const QString& txt)
 {
-  m_text = txt;
-  m_text.replace('\n', QLatin1String(" "));
+  Q_D(KMyMoneyTitleLabel);
+  d->m_text = txt;
+  d->m_text.replace('\n', QLatin1String(" "));
   update();
 }

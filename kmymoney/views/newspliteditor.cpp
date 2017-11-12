@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "creditdebithelper.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
 #include "models.h"

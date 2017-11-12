@@ -180,7 +180,7 @@
      <item>
       <layout class="QGridLayout">
        <item row="1" column="1">
-        <widget class="kMyMoneyEdit" name="m_conversionRate" native="true"/>
+        <widget class="KMyMoneyEdit" name="m_conversionRate" native="true"/>
        </item>
        <item row="0" column="0" rowspan="3">
         <widget class="QGroupBox" name="buttonGroupBox1">
@@ -282,7 +282,7 @@
            </widget>
           </item>
           <item>
-           <widget class="kMyMoneyDateInput" name="m_dateEdit" native="true"/>
+           <widget class="KMyMoneyDateInput" name="m_dateEdit" native="true"/>
           </item>
          </layout>
         </widget>
@@ -299,7 +299,7 @@ xx</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="kMyMoneyEdit" name="m_toAmount" native="true"/>
+        <widget class="KMyMoneyEdit" name="m_toAmount" native="true"/>
        </item>
       </layout>
      </item>
@@ -343,13 +343,13 @@ xx</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QWidget</extends>
    <header>kmymoneyedit.h</header>
   </customwidget>

@@ -2,6 +2,7 @@
                                 amountedit.cpp
                              -------------------
     copyright            : (C) 2016 by Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -167,105 +168,163 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
 
 
 
-class AmountEdit::Private
+class AmountEditPrivate
 {
+  Q_DISABLE_COPY(AmountEditPrivate)
+  Q_DECLARE_PUBLIC(AmountEdit)
+
 public:
-  Private(AmountEdit* q)
-  : m_q(q)
-  , m_allowEmpty(false)
+  AmountEditPrivate(AmountEdit* qq) :
+    q_ptr(qq),
+    m_allowEmpty(false)
   {
-    m_calculatorFrame = new QFrame(m_q);
+    Q_Q(AmountEdit);
+    m_calculatorFrame = new QFrame(q);
     m_calculatorFrame->setWindowFlags(Qt::Popup);
 
     m_calculatorFrame->setFrameStyle(QFrame::Panel | QFrame::Raised);
     m_calculatorFrame->setLineWidth(3);
 
-    m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
+    m_calculator = new KMyMoneyCalculator(m_calculatorFrame);
     m_calculatorFrame->hide();
   }
 
-  AmountEdit*           m_q;
+  void init()
+  {
+    Q_Q(AmountEdit);
+    // Yes, just a simple double validator !
+    auto validator = new AmountValidator(q);
+    q->setValidator(validator);
+    q->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+    int height = q->sizeHint().height();
+    int btnSize = q->sizeHint().height() - 5;
+
+    m_calculatorButton = new QToolButton(q);
+    m_calculatorButton->setIcon(QIcon::fromTheme(g_Icons[Icon::AccessoriesCalculator]));
+    m_calculatorButton->setCursor(Qt::ArrowCursor);
+    m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
+    m_calculatorButton->setFixedSize(btnSize, btnSize);
+    m_calculatorButton->show();
+
+    int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+    q->setStyleSheet(QString("QLineEdit { padding-right: %1px }")
+                                                .arg(btnSize - frameWidth));
+    q->setMinimumHeight(height);
+
+    q->connect(m_calculatorButton, &QAbstractButton::clicked, q, &AmountEdit::slotCalculatorOpen);
+
+    KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
+    KConfigGroup grp = kconfig->group("General Options");
+    if (grp.readEntry("DontShowCalculatorButton", false) == true)
+      q->setCalculatorButtonVisible(false);
+
+    q->connect(q, &QLineEdit::textChanged, q, &AmountEdit::theTextChanged);
+    q->connect(m_calculator, &KMyMoneyCalculator::signalResultAvailable, q, &AmountEdit::slotCalculatorResult);
+    q->connect(m_calculator, &KMyMoneyCalculator::signalQuit, q, &AmountEdit::slotCalculatorClose);
+  }
+
+  /**
+    * Internal helper function for value() and ensureFractionalPart().
+    */
+  void ensureFractionalPart(QString& s) const
+  {
+    s = MyMoneyMoney(s).formatMoney(QString(), m_prec, false);
+  }
+
+  /**
+    * This method opens the calculator and replays the key
+    * event pointed to by @p ev. If @p ev is 0, then no key
+    * event is replayed.
+    *
+    * @param ev pointer to QKeyEvent that started the calculator.
+    */
+  void calculatorOpen(QKeyEvent* k)
+  {
+    Q_Q(AmountEdit);
+    m_calculator->setInitialValues(q->text(), k);
+
+    auto h = m_calculatorFrame->height();
+    auto w = m_calculatorFrame->width();
+
+    // usually, the calculator widget is shown underneath the MoneyEdit widget
+    // if it does not fit on the screen, we show it above this widget
+    auto p = q->mapToGlobal(QPoint(0, 0));
+    if (p.y() + q->height() + h > QApplication::desktop()->height())
+      p.setY(p.y() - h);
+    else
+      p.setY(p.y() + q->height());
+
+    // usually, it is shown left aligned. If it does not fit, we align it
+    // to the right edge of the widget
+    if (p.x() + w > QApplication::desktop()->width())
+      p.setX(p.x() + q->width() - w);
+
+    QRect r = m_calculator->geometry();
+    r.moveTopLeft(p);
+    m_calculatorFrame->setGeometry(r);
+    m_calculatorFrame->show();
+    m_calculator->setFocus();
+  }
+
+  AmountEdit*           q_ptr;
   QFrame*               m_calculatorFrame;
-  kMyMoneyCalculator*   m_calculator;
+  KMyMoneyCalculator*   m_calculator;
   QToolButton*          m_calculatorButton;
   int                   m_prec;
   bool                  m_allowEmpty;
   QString               m_previousText; // keep track of what has been typed
   QString               m_text;         // keep track of what was the original value
+  /**
+   * This holds the number of precision to be used
+   * when no other information (e.g. from account)
+   * is available.
+   *
+   * @sa setStandardPrecision()
+   */
+  static int standardPrecision;
 };
 
+int AmountEditPrivate::standardPrecision = 2;
 
-
-
-
-int AmountEdit::standardPrecision = 2;
-
-AmountEdit::AmountEdit(QWidget *parent, const int prec)
-  : QLineEdit(parent)
-  , d(new Private(this))
+AmountEdit::AmountEdit(QWidget *parent, const int prec) :
+  QLineEdit(parent),
+  d_ptr(new AmountEditPrivate(this))
 {
+  Q_D(AmountEdit);
   d->m_prec = prec;
   if (prec < -1 || prec > 20) {
-    d->m_prec = standardPrecision;
+    d->m_prec = AmountEditPrivate::standardPrecision;
   }
-  init();
+  d->init();
 }
 
-AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget *parent)
-  : QLineEdit(parent)
-  , d(new Private(this))
+AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget *parent) :
+  QLineEdit(parent),
+  d_ptr(new AmountEditPrivate(this))
 {
+  Q_D(AmountEdit);
   d->m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
-  init();
+  d->init();
 }
 
 AmountEdit::~AmountEdit()
 {
+  Q_D(AmountEdit);
+  delete d;
 }
 
 void AmountEdit::setStandardPrecision(int prec)
 {
   if (prec >= 0 && prec < 20) {
-    standardPrecision = prec;
+    AmountEditPrivate::standardPrecision = prec;
   }
 }
 
-void AmountEdit::init()
-{
-  // Yes, just a simple double validator !
-  AmountValidator *validator = new AmountValidator(this);
-  setValidator(validator);
-  setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-  int height = sizeHint().height();
-  int btnSize = sizeHint().height() - 5;
-
-  d->m_calculatorButton = new QToolButton(this);
-  d->m_calculatorButton->setIcon(QIcon::fromTheme(g_Icons[Icon::AccessoriesCalculator]));
-  d->m_calculatorButton->setCursor(Qt::ArrowCursor);
-  d->m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
-  d->m_calculatorButton->setFixedSize(btnSize, btnSize);
-  d->m_calculatorButton->show();
-
-  int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-  setStyleSheet(QString("QLineEdit { padding-right: %1px }")
-                                              .arg(btnSize - frameWidth));
-  setMinimumHeight(height);
-
-  connect(d->m_calculatorButton, SIGNAL(clicked()), this, SLOT(slotCalculatorOpen()));
-
-  KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
-  KConfigGroup grp = kconfig->group("General Options");
-  if (grp.readEntry("DontShowCalculatorButton", false) == true)
-    setCalculatorButtonVisible(false);
-
-  connect(this, SIGNAL(textChanged(QString)), this, SLOT(theTextChanged(QString)));
-  connect(d->m_calculator, SIGNAL(signalResultAvailable()), this, SLOT(slotCalculatorResult()));
-  connect(d->m_calculator, SIGNAL(signalQuit()), this, SLOT(slotCalculatorClose()));
-}
 
 void AmountEdit::resizeEvent(QResizeEvent* event)
 {
+  Q_D(AmountEdit);
   Q_UNUSED(event);
   const int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   d->m_calculatorButton->move(width() - d->m_calculatorButton->width() - frameWidth - 2, 2);
@@ -273,6 +332,7 @@ void AmountEdit::resizeEvent(QResizeEvent* event)
 
 void AmountEdit::focusOutEvent(QFocusEvent* event)
 {
+  Q_D(AmountEdit);
   QLineEdit::focusOutEvent(event);
 
   // make sure we have a zero value in case the current text
@@ -294,6 +354,7 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
 
 void AmountEdit::keyPressEvent(QKeyEvent* event)
 {
+  Q_D(AmountEdit);
   switch(event->key()) {
     case Qt::Key_Plus:
     case Qt::Key_Minus:
@@ -322,7 +383,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
           // remove the selected text
           cut();
         }
-        calculatorOpen(event);
+        d->calculatorOpen(event);
         break;
 
     default:
@@ -334,6 +395,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
 
 void AmountEdit::setPrecision(const int prec)
 {
+  Q_D(AmountEdit);
   if (prec >= -1 && prec <= 20) {
     if (prec != d->m_prec) {
       d->m_prec = prec;
@@ -345,17 +407,23 @@ void AmountEdit::setPrecision(const int prec)
 
 int AmountEdit::precision() const
 {
+  Q_D(const AmountEdit);
   return d->m_prec;
 }
-
 
 bool AmountEdit::isValid() const
 {
   return !(text().isEmpty());
 }
 
+QString AmountEdit::numericalText() const
+{
+  return value().toString();
+}
+
 MyMoneyMoney AmountEdit::value() const
 {
+  Q_D(const AmountEdit);
   MyMoneyMoney money(text());
   if (d->m_prec != -1)
     money = money.convert(MyMoneyMoney::precToDenom(d->m_prec));
@@ -364,15 +432,17 @@ MyMoneyMoney AmountEdit::value() const
 
 void AmountEdit::setValue(const MyMoneyMoney& value)
 {
+  Q_D(AmountEdit);
   // load the value into the widget but don't use thousandsSeparators
-  setText(value.formatMoney("", d->m_prec, false));
+  setText(value.formatMoney(QString(), d->m_prec, false));
 }
 
 void AmountEdit::setText(const QString& txt)
 {
+  Q_D(AmountEdit);
   d->m_text = txt;
   if (isEnabled() && !txt.isEmpty())
-    ensureFractionalPart(d->m_text);
+    d->ensureFractionalPart(d->m_text);
   QLineEdit::setText(d->m_text);
 #if 0
   m_resetButton->setEnabled(false);
@@ -381,6 +451,7 @@ void AmountEdit::setText(const QString& txt)
 
 void AmountEdit::resetText()
 {
+  Q_D(AmountEdit);
 #if 0
   setText(d->m_text);
   m_resetButton->setEnabled(false);
@@ -389,6 +460,7 @@ void AmountEdit::resetText()
 
 void AmountEdit::theTextChanged(const QString & theText)
 {
+  Q_D(AmountEdit);
   QLocale locale;
   QString dec = locale.groupSeparator();
   QString l_text = theText;
@@ -396,7 +468,7 @@ void AmountEdit::theTextChanged(const QString & theText)
   nsign = locale.negativeSign();
   psign = locale.positiveSign();
 
-  int i = 0;
+  auto i = 0;
   if (isEnabled()) {
     QValidator::State state =  validator()->validate(l_text, i);
     if (state == QValidator::Intermediate) {
@@ -414,57 +486,16 @@ void AmountEdit::theTextChanged(const QString & theText)
   }
 }
 
-void AmountEdit::ensureFractionalPart()
-{
-  QString s(text());
-  ensureFractionalPart(s);
-  // by setting the text only when it's different then the one that it is already there
-  // we preserve the edit widget's state (like the selection for example) during a
-  // call to ensureFractionalPart() that does not change anything
-  if (s != text())
-    QLineEdit::setText(s);
-}
-
-void AmountEdit::ensureFractionalPart(QString& s) const
-{
-  s = MyMoneyMoney(s).formatMoney("", d->m_prec, false);
-}
-
 
 void AmountEdit::slotCalculatorOpen()
 {
-  calculatorOpen(0);
-}
-
-void AmountEdit::calculatorOpen(QKeyEvent* k)
-{
-  d->m_calculator->setInitialValues(text(), k);
-
-  int h = d->m_calculatorFrame->height();
-  int w = d->m_calculatorFrame->width();
-
-  // usually, the calculator widget is shown underneath the MoneyEdit widget
-  // if it does not fit on the screen, we show it above this widget
-  QPoint p = mapToGlobal(QPoint(0, 0));
-  if (p.y() + height() + h > QApplication::desktop()->height())
-    p.setY(p.y() - h);
-  else
-    p.setY(p.y() + height());
-
-  // usually, it is shown left aligned. If it does not fit, we align it
-  // to the right edge of the widget
-  if (p.x() + w > QApplication::desktop()->width())
-    p.setX(p.x() + width() - w);
-
-  QRect r = d->m_calculator->geometry();
-  r.moveTopLeft(p);
-  d->m_calculatorFrame->setGeometry(r);
-  d->m_calculatorFrame->show();
-  d->m_calculator->setFocus();
+  Q_D(AmountEdit);
+  d->calculatorOpen(0);
 }
 
 void AmountEdit::slotCalculatorClose()
 {
+  Q_D(AmountEdit);
   if (d->m_calculator != 0) {
     d->m_calculatorFrame->hide();
   }
@@ -472,6 +503,7 @@ void AmountEdit::slotCalculatorClose()
 
 void AmountEdit::slotCalculatorResult()
 {
+  Q_D(AmountEdit);
   slotCalculatorClose();
   if (d->m_calculator != 0) {
     setText(d->m_calculator->result());
@@ -488,104 +520,36 @@ void AmountEdit::slotCalculatorResult()
 
 void AmountEdit::setCalculatorButtonVisible(const bool show)
 {
+  Q_D(AmountEdit);
   d->m_calculatorButton->setVisible(show);
 }
 
 void AmountEdit::setAllowEmpty(bool allowed)
 {
+  Q_D(AmountEdit);
   d->m_allowEmpty = allowed;
 }
 
 bool AmountEdit::isEmptyAllowed() const
 {
+  Q_D(const AmountEdit);
   return d->m_allowEmpty;
 }
 
 bool AmountEdit::isCalculatorButtonVisible() const
 {
+  Q_D(const AmountEdit);
   return d->m_calculatorButton->isVisible();
 }
 
-
-
-
-
-
-CreditDebitHelper::CreditDebitHelper(QObject* parent, AmountEdit* credit, AmountEdit* debit)
-  : QObject(parent)
-  , m_credit(credit)
-  , m_debit(debit)
+void AmountEdit::ensureFractionalPart()
 {
-  connect(m_credit, SIGNAL(valueChanged(QString)), this, SLOT(creditChanged()));
-  connect(m_debit, SIGNAL(valueChanged(QString)), this, SLOT(debitChanged()));
-}
-
-CreditDebitHelper::~CreditDebitHelper()
-{
-}
-
-void CreditDebitHelper::creditChanged()
-{
-  widgetChanged(m_credit, m_debit);
-}
-
-void CreditDebitHelper::debitChanged()
-{
-  widgetChanged(m_debit, m_credit);
-}
-
-void CreditDebitHelper::widgetChanged(AmountEdit* src, AmountEdit* dst)
-{
-  // make sure the objects exist
-  if(!src || !dst) {
-    return;
-  }
-
-  // in case both are filled with text, the src wins
-  if(!src->text().isEmpty() && !dst->text().isEmpty()) {
-    dst->clear();
-  }
-
-  // in case the source is negative, we negate the value
-  // and load it into destination.
-  if(src->value().isNegative()) {
-    dst->setValue(-(src->value()));
-    src->clear();
-  }
-  emit valueChanged();
-}
-
-bool CreditDebitHelper::haveValue() const
-{
-  return (!m_credit->text().isEmpty()) || (!m_debit->text().isEmpty());
-}
-
-MyMoneyMoney CreditDebitHelper::value() const
-{
-  MyMoneyMoney value;
-  if(m_credit && m_debit) {
-    if(!m_credit->text().isEmpty()) {
-      value = -m_credit->value();
-    } else {
-      value = m_debit->value();
-    }
-  } else {
-    qWarning() << "CreditDebitHelper::value() called with no objects attached. Zero returned.";
-  }
-  return value;
-}
-
-void CreditDebitHelper::setValue(const MyMoneyMoney& value)
-{
-  if(m_credit && m_debit) {
-    if(value.isNegative()) {
-      m_credit->setValue(-value);
-      m_debit->clear();
-    } else {
-      m_debit->setValue(value);
-      m_credit->clear();
-    }
-  } else {
-    qWarning() << "CreditDebitHelper::setValue() called with no objects attached. Skipped.";
-  }
+  Q_D(AmountEdit);
+  QString s(text());
+  d->ensureFractionalPart(s);
+  // by setting the text only when it's different then the one that it is already there
+  // we preserve the edit widget's state (like the selection for example) during a
+  // call to ensureFractionalPart() that does not change anything
+  if (s != text())
+    QLineEdit::setText(s);
 }

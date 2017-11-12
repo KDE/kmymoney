@@ -4,6 +4,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_printcheck.json.in ${CMAKE_CURREN
 set(kmm_printcheck_PART_SRCS
     numbertowords.cpp
     printcheck.cpp
+    ../../widgets/selectedtransaction.cpp
     )
 
 kconfig_add_kcfg_files(kmm_printcheck_PART_SRCS pluginsettings.kcfgc)

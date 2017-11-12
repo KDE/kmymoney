@@ -4,6 +4,7 @@
     begin                : Sat May 31 2008
     copyright            : (C) 2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "transaction.h"
+#include "stdtransaction.h"
 
 class MyMoneySplit;
 class MyMoneyTransaction;
@@ -35,37 +36,31 @@ class MyMoneyTransaction;
 namespace KMyMoneyRegister
 {
 
-class Register;
-class StdTransactionMatched : public StdTransaction
-{
-  static const int m_additionalRows = 3;
+  class Register;
+  class StdTransactionMatched : public StdTransaction
+  {
+    static const int m_additionalRows = 3;
 
-public:
-  StdTransactionMatched(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~StdTransactionMatched() {}
+  public:
+    explicit StdTransactionMatched(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+    ~StdTransactionMatched() override;
 
-  virtual const char* className() override {
-    return "StdTransactionMatched";
-  }
+    const char* className() override;
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
+    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
 
-  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
+    void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
 
-  /**
+    /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister(bool)
     */
-  int numRowsRegister(bool expanded) const override {
-    return StdTransaction::numRowsRegister(expanded) + m_additionalRows;
-  }
+    int numRowsRegister(bool expanded) const override;
 
-  /**
+    /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister() const override {
-    return StdTransaction::numRowsRegister();
-  }
-};
+    int numRowsRegister() const override;
+  };
 
 } // namespace
 

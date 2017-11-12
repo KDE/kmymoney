@@ -1,5 +1,6 @@
 /*  This file is part of the KDE project
     Copyright (C) 2009 Alvaro Soliverez <asoliverez@gmail.com>
+    (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -27,8 +28,12 @@ namespace Ui { class ReportControl; }
 class ReportControl : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(ReportControl)
+
 public:
-  ReportControl(QWidget *parent);
+  explicit ReportControl(QWidget *parent);
+  ~ReportControl();
+
   Ui::ReportControl* ui;
 };
 #endif /* REPORTCONTROLIMPL_H */

@@ -4,6 +4,7 @@
     begin                : Fri Jun 2008
     copyright            : (C) 2000-2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,20 +21,91 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "register.h"
-#include "mymoneysplit.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneyexception.h"
+
+using namespace KMyMoneyRegister;
 
 namespace KMyMoneyRegister
 {
+  class SelectedTransactionPrivate
+  {
+  public:
+    MyMoneyTransaction      m_transaction;
+    MyMoneySplit            m_split;
+    QString                 m_scheduleId;
+  };
+}
+
+SelectedTransaction::SelectedTransaction() :
+  d_ptr(new SelectedTransactionPrivate)
+{
+}
+
+SelectedTransaction::SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId = QString()) :
+  d_ptr(new SelectedTransactionPrivate)
+{
+  Q_D(SelectedTransaction);
+  d->m_transaction = t;
+  d->m_split = s;
+  d->m_scheduleId = scheduleId;
+}
+
+SelectedTransaction::SelectedTransaction(const SelectedTransaction& other) :
+  d_ptr(new SelectedTransactionPrivate(*other.d_func()))
+{
+}
+
+SelectedTransaction::~SelectedTransaction()
+{
+  Q_D(SelectedTransaction);
+  delete d;
+}
+
+MyMoneyTransaction& SelectedTransaction::transaction()
+{
+  Q_D(SelectedTransaction);
+  return d->m_transaction;
+}
+
+MyMoneyTransaction SelectedTransaction::transaction() const
+{
+  Q_D(const SelectedTransaction);
+  return d->m_transaction;
+}
+
+MyMoneySplit& SelectedTransaction::split()
+{
+  Q_D(SelectedTransaction);
+  return d->m_split;
+}
+
+MyMoneySplit SelectedTransaction::split() const
+{
+  Q_D(const SelectedTransaction);
+  return d->m_split;
+}
+
+bool SelectedTransaction::isScheduled() const
+{
+  Q_D(const SelectedTransaction);
+  return !d->m_scheduleId.isEmpty();
+}
+
+QString SelectedTransaction::scheduleId() const
+{
+  Q_D(const SelectedTransaction);
+  return d->m_scheduleId;
+}
 
 int SelectedTransaction::warnLevel() const
 {
@@ -55,31 +127,3 @@ int SelectedTransaction::warnLevel() const
   return warnLevel;
 }
 
-SelectedTransactions::SelectedTransactions(const Register* r)
-{
-  r->selectedTransactions(*this);
-}
-
-int SelectedTransactions::warnLevel() const
-{
-  int warnLevel = 0;
-  SelectedTransactions::const_iterator it_t;
-  for (it_t = begin(); warnLevel < 3 && it_t != end(); ++it_t) {
-    int thisLevel = (*it_t).warnLevel();
-    if (thisLevel > warnLevel)
-      warnLevel = thisLevel;
-  }
-  return warnLevel;
-}
-
-bool SelectedTransactions::canModify() const
-{
-  return warnLevel() < 2;
-}
-
-bool SelectedTransactions::canDuplicate() const
-{
-  return warnLevel() < 3;
-}
-
-} // namespace

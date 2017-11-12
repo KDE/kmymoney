@@ -128,7 +128,7 @@ public:
 
   QList<QString> m_supportedDrivers;
   //MyMoneyDbDrivers m_map;
-  std::unique_ptr<kMandatoryFieldGroup> m_requiredFields;
+  std::unique_ptr<KMandatoryFieldGroup> m_requiredFields;
   bool m_sqliteSelected;
   QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
   QString m_dbName;
@@ -282,7 +282,7 @@ void KGenerateSqlDlg::slotdriverSelected()
     }
   }
 
-  d->m_requiredFields.reset(new kMandatoryFieldGroup(this));
+  d->m_requiredFields.reset(new KMandatoryFieldGroup(this));
   // currently, only sqlite need an external file
   if (d->m_dbDriver->requiresExternalFile()) {
     d->m_sqliteSelected = true;

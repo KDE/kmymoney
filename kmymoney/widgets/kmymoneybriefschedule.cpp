@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,6 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QLabel>
 #include <QToolButton>
 #include <QList>
@@ -35,10 +37,11 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "ui_kmymoneybriefschedule.h"
 
 #include "mymoneymoney.h"
 #include "mymoneyaccount.h"
@@ -50,136 +53,159 @@
 
 using namespace Icons;
 
-KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
-    : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/),
-      m_index(0)
+class KMyMoneyBriefSchedulePrivate
 {
-  m_nextButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
-  m_prevButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
+  Q_DISABLE_COPY(KMyMoneyBriefSchedulePrivate)
 
-  connect(m_prevButton, SIGNAL(clicked()), this, SLOT(slotPrevClicked()));
-  connect(m_nextButton, SIGNAL(clicked()), this, SLOT(slotNextClicked()));
-  connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
-  connect(m_skipButton, SIGNAL(clicked()), this, SLOT(slotSkipClicked()));
-  connect(m_buttonEnter, SIGNAL(clicked()), this, SLOT(slotEnterClicked()));
+public:
+  KMyMoneyBriefSchedulePrivate() :
+    ui(new Ui::KMyMoneyBriefSchedule),
+    m_index(0)
+  {
+  }
 
-  KGuiItem skipGuiItem(i18n("&Skip"),
-                       QIcon::fromTheme(g_Icons[Icon::MediaSeekForward]),
-                       i18n("Skip this transaction"),
-                       i18n("Use this button to skip this transaction"));
-  KGuiItem::assign(m_skipButton, skipGuiItem);
+  ~KMyMoneyBriefSchedulePrivate()
+  {
+    delete ui;
+  }
 
-  KGuiItem enterGuiItem(i18n("&Enter"),
-                        QIcon::fromTheme(g_Icons[Icon::KeyEnter]),
-                        i18n("Record this transaction into the register"),
-                        i18n("Use this button to record this transaction"));
-  KGuiItem::assign(m_buttonEnter, enterGuiItem);
+  void loadSchedule()
+  {
+    try {
+      if (m_index < m_scheduleList.count()) {
+        MyMoneySchedule sched = m_scheduleList[m_index];
+
+        ui->m_indexLabel->setText(i18n("%1 of %2", m_index + 1, m_scheduleList.count()));
+        ui->m_name->setText(sched.name());
+        ui->m_type->setText(KMyMoneyUtils::scheduleTypeToString(sched.type()));
+        ui->m_account->setText(sched.account().name());
+        QString text;
+        MyMoneyMoney amount = sched.transaction().splitByAccount(sched.account().id()).value();
+        amount = amount.abs();
+
+        if (sched.willEnd()) {
+          int transactions = sched.paymentDates(m_date, sched.endDate()).count() - 1;
+          text = i18np("Payment on %2 for %3 with %1 transaction remaining occurring %4.",
+                       "Payment on %2 for %3 with %1 transactions remaining occurring %4.",
+                       transactions,
+                       QLocale().toString(m_date, QLocale::ShortFormat),
+                       amount.formatMoney(sched.account().fraction()),
+                       i18n(sched.occurrenceToString().toLatin1()));
+        } else {
+          text = i18n("Payment on %1 for %2 occurring %3.",
+                      QLocale().toString(m_date, QLocale::ShortFormat),
+                      amount.formatMoney(sched.account().fraction()),
+                      i18n(sched.occurrenceToString().toLatin1()));
+        }
+
+        if (m_date < QDate::currentDate()) {
+          if (sched.isOverdue()) {
+            QDate startD = (sched.lastPayment().isValid()) ?
+                           sched.lastPayment() :
+                           sched.startDate();
+
+            if (m_date.isValid())
+              startD = m_date;
+
+            int days = startD.daysTo(QDate::currentDate());
+            int transactions = sched.paymentDates(startD, QDate::currentDate()).count();
+
+            text += "<br><font color=red>";
+            text += i18np("%1 day overdue", "%1 days overdue", days);
+            text += QString(" ");
+            text += i18np("(%1 occurrence.)", "(%1 occurrences.)", transactions);
+            text += "</color>";
+          }
+        }
+
+        ui->m_details->setText(text);
+
+        ui->m_prevButton->setEnabled(true);
+        ui->m_nextButton->setEnabled(true);
+        ui->m_skipButton->setEnabled(sched.occurrencePeriod() != eMyMoney::Schedule::Occurrence::Once);
+
+        if (m_index == 0)
+          ui->m_prevButton->setEnabled(false);
+        if (m_index == (m_scheduleList.count() - 1))
+          ui->m_nextButton->setEnabled(false);
+      }
+    } catch (const MyMoneyException &) {
+    }
+  }
+
+
+  Ui::KMyMoneyBriefSchedule *ui;
+  QList<MyMoneySchedule> m_scheduleList;
+  int m_index;
+  QDate m_date;
+
+};
+
+KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent) :
+  QWidget(parent),
+  d_ptr(new KMyMoneyBriefSchedulePrivate)
+{
+  Q_D(KMyMoneyBriefSchedule);
+  d->ui->setupUi(this);
+  d->ui->m_nextButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
+  d->ui->m_prevButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
+  d->ui->m_skipButton->setIcon(QIcon::fromTheme(g_Icons[Icon::MediaSeekForward]));
+  d->ui->m_buttonEnter->setIcon(QIcon::fromTheme(g_Icons[Icon::KeyEnter]));
+
+  connect(d->ui->m_prevButton, &QAbstractButton::clicked, this, &KMyMoneyBriefSchedule::slotPrevClicked);
+  connect(d->ui->m_nextButton, &QAbstractButton::clicked, this, &KMyMoneyBriefSchedule::slotNextClicked);
+  connect(d->ui->m_closeButton, &QAbstractButton::clicked, this, &QWidget::hide);
+  connect(d->ui->m_skipButton, &QAbstractButton::clicked, this, &KMyMoneyBriefSchedule::slotSkipClicked);
+  connect(d->ui->m_buttonEnter, &QAbstractButton::clicked, this, &KMyMoneyBriefSchedule::slotEnterClicked);
 }
 
 KMyMoneyBriefSchedule::~KMyMoneyBriefSchedule()
 {
+  Q_D(KMyMoneyBriefSchedule);
+  delete d;
 }
 
 void KMyMoneyBriefSchedule::setSchedules(QList<MyMoneySchedule> list, const QDate& date)
 {
-  m_scheduleList = list;
-  m_date = date;
+  Q_D(KMyMoneyBriefSchedule);
+  d->m_scheduleList = list;
+  d->m_date = date;
 
-  m_index = 0;
+  d->m_index = 0;
   if (list.count() >= 1) {
-    loadSchedule();
-  }
-}
-
-void KMyMoneyBriefSchedule::loadSchedule()
-{
-  try {
-    if (m_index < m_scheduleList.count()) {
-      MyMoneySchedule sched = m_scheduleList[m_index];
-
-      m_indexLabel->setText(i18n("%1 of %2", m_index + 1, m_scheduleList.count()));
-      m_name->setText(sched.name());
-      m_type->setText(KMyMoneyUtils::scheduleTypeToString(sched.type()));
-      m_account->setText(sched.account().name());
-      QString text;
-      MyMoneyMoney amount = sched.transaction().splitByAccount(sched.account().id()).value();
-      amount = amount.abs();
-
-      if (sched.willEnd()) {
-        int transactions = sched.paymentDates(m_date, sched.endDate()).count() - 1;
-        text = i18np("Payment on %2 for %3 with %1 transaction remaining occurring %4.",
-                     "Payment on %2 for %3 with %1 transactions remaining occurring %4.",
-                     transactions,
-                     QLocale().toString(m_date, QLocale::ShortFormat),
-                     amount.formatMoney(sched.account().fraction()),
-                     i18n(sched.occurrenceToString().toLatin1()));
-      } else {
-        text = i18n("Payment on %1 for %2 occurring %3.",
-                    QLocale().toString(m_date, QLocale::ShortFormat),
-                    amount.formatMoney(sched.account().fraction()),
-                    i18n(sched.occurrenceToString().toLatin1()));
-      }
-
-      if (m_date < QDate::currentDate()) {
-        if (sched.isOverdue()) {
-          QDate startD = (sched.lastPayment().isValid()) ?
-                         sched.lastPayment() :
-                         sched.startDate();
-
-          if (m_date.isValid())
-            startD = m_date;
-
-          int days = startD.daysTo(QDate::currentDate());
-          int transactions = sched.paymentDates(startD, QDate::currentDate()).count();
-
-          text += "<br><font color=red>";
-          text += i18np("%1 day overdue", "%1 days overdue", days);
-          text += QString(" ");
-          text += i18np("(%1 occurrence.)", "(%1 occurrences.)", transactions);
-          text += "</color>";
-        }
-      }
-
-      m_details->setText(text);
-
-      m_prevButton->setEnabled(true);
-      m_nextButton->setEnabled(true);
-      m_skipButton->setEnabled(sched.occurrencePeriod() != eMyMoney::Schedule::Occurrence::Once);
-
-      if (m_index == 0)
-        m_prevButton->setEnabled(false);
-      if (m_index == (m_scheduleList.count() - 1))
-        m_nextButton->setEnabled(false);
-    }
-  } catch (const MyMoneyException &) {
+    d->loadSchedule();
   }
 }
 
 void KMyMoneyBriefSchedule::slotPrevClicked()
 {
-  if (m_index >= 1) {
-    --m_index;
-    loadSchedule();
+  Q_D(KMyMoneyBriefSchedule);
+  if (d->m_index >= 1) {
+    --d->m_index;
+    d->loadSchedule();
   }
 }
 
 void KMyMoneyBriefSchedule::slotNextClicked()
 {
-  if (m_index < (m_scheduleList.count() - 1)) {
-    m_index++;
-    loadSchedule();
+  Q_D(KMyMoneyBriefSchedule);
+  if (d->m_index < (d->m_scheduleList.count() - 1)) {
+    d->m_index++;
+    d->loadSchedule();
   }
 }
 
 void KMyMoneyBriefSchedule::slotEnterClicked()
 {
+  Q_D(KMyMoneyBriefSchedule);
   hide();
-  emit enterClicked(m_scheduleList[m_index], m_date);
+  emit enterClicked(d->m_scheduleList[d->m_index], d->m_date);
 }
 
 void KMyMoneyBriefSchedule::slotSkipClicked()
 {
+  Q_D(KMyMoneyBriefSchedule);
   hide();
-  emit skipClicked(m_scheduleList[m_index], m_date);
+  emit skipClicked(d->m_scheduleList[d->m_index], d->m_date);
 }
 

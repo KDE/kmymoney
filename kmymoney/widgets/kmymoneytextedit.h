@@ -1,6 +1,7 @@
 /*
   This file is part of KMyMoney, A Personal Finance Manager by KDE
   Copyright (C) 2013 Christian Dávid <christian-david@web.de>
+  (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -16,14 +17,11 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KMYMONEYTEXTEDIT_H
-#define KMYMONEYTEXTEDIT_H
+#ifndef KMYMONEYTEXTEDITHIGHLIGHTER_H
+#define KMYMONEYTEXTEDITHIGHLIGHTER_H
 
 #include <KTextEdit>
 #include "kmm_widgets_export.h"
-
-class KMyMoneyTextEditHighlighter;
-
 
 /**
  * @brief KTextEdit with restricted character set and length
@@ -31,9 +29,11 @@ class KMyMoneyTextEditHighlighter;
  * Used to set constraints on input. It allows to set readOnly property by
  * slots as well (not possible with KTextEdit).
  */
+class KMyMoneyTextEditPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyTextEdit)
 
   /**
    * @brief Maximal number of characters allowed
@@ -55,10 +55,11 @@ class KMM_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
    */
   Q_PROPERTY(QString allowedChars READ allowedChars WRITE setAllowedChars)
 
-  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly);
+  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
 
 public:
-  KMyMoneyTextEdit(QWidget* parent = 0);
+  explicit KMyMoneyTextEdit(QWidget* parent = nullptr);
+  ~KMyMoneyTextEdit();
 
   int maxLength() const;
   int maxLineLength() const;
@@ -73,20 +74,15 @@ public Q_SLOTS:
   void setAllowedChars(const QString& allowedChars);
 
   /** @brief Slot to set this text edit read only */
-  void setReadOnly(bool);
+  void setReadOnly(bool) override;
 
 protected:
-  virtual void keyReleaseEvent(QKeyEvent* e);
-  virtual void keyPressEvent(QKeyEvent* e);
+  virtual void keyReleaseEvent(QKeyEvent* e) override;
+  virtual void keyPressEvent(QKeyEvent* e) override;
 
 private:
-  bool isEventAllowed(QKeyEvent* e) const;
-  int m_maxLength;
-  int m_maxLineLength;
-  int m_maxLines;
-  QString m_allowedChars;
-  KMyMoneyTextEditHighlighter* m_highligther;
-
+  KMyMoneyTextEditPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyTextEdit)
 };
 
-#endif // KMYMONEYTEXTEDIT_H
+#endif // KMYMONEYTEXTEDITHIGHLIGHTER_H

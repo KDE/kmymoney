@@ -35,6 +35,9 @@
 #include "mymoneyprice.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "transaction.h"
 
 using namespace Icons;
 

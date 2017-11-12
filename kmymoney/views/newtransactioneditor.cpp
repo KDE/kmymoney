@@ -35,6 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "creditdebithelper.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "kmymoneyutils.h"

@@ -33,7 +33,7 @@
 #include "mymoney/onlinejobadministration.h"
 
 class IonlineJobEdit;
-class kMandatoryFieldGroup;
+class KMandatoryFieldGroup;
 
 namespace Ui { class kOnlineTransferForm; }
 
@@ -118,7 +118,7 @@ private:
 
   Ui::kOnlineTransferForm* ui;
   QList<IonlineJobEdit*> m_onlineJobEditWidgets;
-  kMandatoryFieldGroup* m_requiredFields;
+  KMandatoryFieldGroup* m_requiredFields;
   QAction* m_duplicateJob;
 
   /**

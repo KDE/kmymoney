@@ -28,6 +28,7 @@
 #include <QList>
 #include <QEvent>
 #include <QIcon>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,6 +42,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneytagcombo.h"
+#include "ktagcontainer.h"
+#include "tabbar.h"
 #include "mymoneyutils.h"
 #include "kmymoneycategory.h"
 #include "kmymoneymvccombo.h"
@@ -51,6 +55,7 @@
 #include "mymoneysecurity.h"
 #include "kmymoneyutils.h"
 #include "kmymoneycompletion.h"
+#include "transaction.h"
 #include "transactionform.h"
 #include "kmymoneyglobalsettings.h"
 #include "transactioneditorcontainer.h"
@@ -85,7 +90,7 @@ TransactionEditor::TransactionEditor(TransactionEditorPrivate &dd,
   d->m_transaction = item->transaction();
   d->m_split = item->split();
   d->m_lastPostDate = lastPostDate;
-  d->m_initialAction = ActionNone;
+  d->m_initialAction = eWidgets::eRegister::Action::None;
   d->m_openEditSplits = false;
   d->m_memoChanged = false;
   d->m_item->startEditMode();
@@ -145,12 +150,12 @@ void TransactionEditor::setupPrecision()
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget * w;
     if ((w = haveWidget(*it_w)) != 0) {
-      dynamic_cast<kMyMoneyEdit*>(w)->setPrecision(prec);
+      dynamic_cast<KMyMoneyEdit*>(w)->setPrecision(prec);
     }
   }
 }
 
-void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, KMyMoneyRegister::Action action)
+void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, eWidgets::eRegister::Action action)
 {
   Q_D(TransactionEditor);
   d->m_account = account;
@@ -161,9 +166,9 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   QWidget* w = haveWidget("tabbar");
   if (w) {
     tabOrderWidgets.append(w);
-    TabBar* tabbar = dynamic_cast<TabBar*>(w);
-    if ((tabbar) && (action == KMyMoneyRegister::ActionNone)) {
-      action = static_cast<KMyMoneyRegister::Action>(tabbar->currentIndex());
+    auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(w);
+    if ((tabbar) && (action == eWidgets::eRegister::Action::None)) {
+      action = static_cast<eWidgets::eRegister::Action>(tabbar->currentIndex());
     }
   }
   loadEditWidgets(action);
@@ -203,12 +208,12 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
 
 void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account)
 {
-  setup(tabOrderWidgets, account, KMyMoneyRegister::ActionNone);
+  setup(tabOrderWidgets, account, eWidgets::eRegister::Action::None);
 }
 
 void TransactionEditor::setup(QWidgetList& tabOrderWidgets)
 {
-  setup(tabOrderWidgets, MyMoneyAccount(), KMyMoneyRegister::ActionNone);
+  setup(tabOrderWidgets, MyMoneyAccount(), eWidgets::eRegister::Action::None);
 }
 
 MyMoneyAccount TransactionEditor::account() const
@@ -272,7 +277,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
         case Qt::Key_Return:
         case Qt::Key_Enter:
           // we check, if the object is one of the m_finalEditWidgets and if it's
-          // a kMyMoneyEdit object that the value is not 0. If any of that is the
+          // a KMyMoneyEdit object that the value is not 0. If any of that is the
           // case, it's the final object. In other cases, we convert the enter
           // key into a TAB key to move between the fields. Of course, we only need
           // to do this as long as the appropriate option is set. In all other cases,
@@ -280,8 +285,8 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
             for (it_w = d->m_finalEditWidgets.constBegin(); !isFinal && it_w != d->m_finalEditWidgets.constEnd(); ++it_w) {
               if (*it_w == o) {
-                if (dynamic_cast<const kMyMoneyEdit*>(*it_w)) {
-                  isFinal = !(dynamic_cast<const kMyMoneyEdit*>(*it_w)->value().isZero());
+                if (dynamic_cast<const KMyMoneyEdit*>(*it_w)) {
+                  isFinal = !(dynamic_cast<const KMyMoneyEdit*>(*it_w)->value().isZero());
                 } else
                   isFinal = true;
               }
@@ -321,7 +326,7 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
 {
   Q_D(TransactionEditor);
   auto next = txt;
-  kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
+  KMyMoneyLineEdit* number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
   QString schedInfo;
   if (!d->m_scheduleInfo.isEmpty()) {
     schedInfo = i18n("<center>Processing schedule for %1.</center>", d->m_scheduleInfo);
@@ -519,7 +524,7 @@ void TransactionEditor::assignNextNumber()
 {
   Q_D(TransactionEditor);
   if (canAssignNumber()) {
-    kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
+    KMyMoneyLineEdit* number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
     QString num = KMyMoneyUtils::nextCheckNumber(d->m_account);
     bool showMessage = true;
     int rc = KMessageBox::No;
@@ -549,7 +554,7 @@ void TransactionEditor::assignNextNumber()
 
 bool TransactionEditor::canAssignNumber() const
 {
-  auto number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
+  auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
   return (number != 0);
 }
 
@@ -738,7 +743,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
         // remain on the save side of things to check for it
         if (t.splitCount() > 0)
           s = t.splits().front();
-        KMyMoneyRegister::SelectedTransaction st(t, s);
+        KMyMoneyRegister::SelectedTransaction st(t, s, QString());
         d->m_transactions.append(st);
       }
 
@@ -820,6 +825,6 @@ void TransactionEditor::resizeForm()
   // force resizeing of the columns in the form
   auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_regForm);
   if (form) {
-    QMetaObject::invokeMethod(form, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, ValueColumn1));
+    QMetaObject::invokeMethod(form, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, (int)eWidgets::eTransactionForm::Column::Value1));
   }
 }

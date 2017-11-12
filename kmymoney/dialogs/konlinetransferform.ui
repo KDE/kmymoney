@@ -28,7 +28,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="kMyMoneyEdit" name="orderAccountBalance">
+       <widget class="KMyMoneyEdit" name="orderAccountBalance">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -269,7 +269,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QFrame</extends>
    <header>kmymoneyedit.h</header>
    <container>1</container>

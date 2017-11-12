@@ -143,7 +143,7 @@ protected:
     * @param action preset the edit wigdets for @a action if no transaction
     *               is present
     */
-  void loadEditWidgets(KMyMoneyRegister::Action action) override;
+  void loadEditWidgets(eWidgets::eRegister::Action action) override;
   void loadEditWidgets() override;
 
   void setupFinalWidgets() override;

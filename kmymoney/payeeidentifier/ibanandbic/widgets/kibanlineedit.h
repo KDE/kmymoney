@@ -23,8 +23,6 @@
 
 #include <KLineEdit>
 
-#include "kmymoneyvalidationfeedback.h"
-
 class ibanValidator;
 
 class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
@@ -32,7 +30,7 @@ class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
   Q_OBJECT
 
 public:
-  KIbanLineEdit(QWidget* parent);
+  explicit KIbanLineEdit(QWidget* parent);
   const ibanValidator* validator() const;
 };
 

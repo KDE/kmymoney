@@ -76,7 +76,7 @@ KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent) :
 
   connect(d->ui->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::clicked, this, &KNewEquityEntryDlg::onOKClicked);
 
-  connect(d->ui->edtFraction, &kMyMoneyEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
+  connect(d->ui->edtFraction, &KMyMoneyEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
   connect(d->ui->edtMarketSymbol, &QLineEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
   connect(d->ui->edtEquityName, &QLineEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
 

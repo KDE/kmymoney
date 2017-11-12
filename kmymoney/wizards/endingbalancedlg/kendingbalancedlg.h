@@ -30,6 +30,8 @@
 
 #include "ui_kendingbalancedlgdecl.h"
 
+#include "mymoneyaccount.h"
+
 class QDate;
 
 class MyMoneyAccount;

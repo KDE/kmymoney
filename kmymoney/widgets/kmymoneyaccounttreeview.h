@@ -33,36 +33,34 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-#include "viewenums.h"
-
-namespace eAccountsModel {
-  enum class Column;
-}
-
-class AccountsViewProxyModel;
 class MyMoneyObject;
+class AccountsViewProxyModel;
+
+namespace eAccountsModel { enum class Column; }
+enum class View;
 
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
+class KMyMoneyAccountTreeViewPrivate;
 class KMyMoneyAccountTreeView : public QTreeView
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyAccountTreeView)
 
 public:
-  KMyMoneyAccountTreeView(QWidget *parent = nullptr);
+  explicit KMyMoneyAccountTreeView(QWidget* parent = nullptr);
   ~KMyMoneyAccountTreeView();
 
   AccountsViewProxyModel *init(View view);
 
 protected:
-  void mouseDoubleClickEvent(QMouseEvent *event);
-  void keyPressEvent(QKeyEvent *event);
+  void mouseDoubleClickEvent(QMouseEvent *event) override;
+  void keyPressEvent(QKeyEvent *event) override;
 
 protected slots:
   void customContextMenuRequested(const QPoint);
-  void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+  void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
 signals:
   /**
@@ -91,13 +89,8 @@ signals:
   void columnToggled(const eAccountsModel::Column column, const bool show);
 
 private:
-  void openIndex(const QModelIndex &index);
-  static QString getConfGrpName(const View view);
-  QSet<eAccountsModel::Column> readVisibleColumns(const View view);
-  QVector<eMyMoney::Account> getVisibleGroups(const View view);
-
-  AccountsViewProxyModel   *m_model;
-  View                     m_view;
+  KMyMoneyAccountTreeViewPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
 };
 
 #endif // KMYMONEYACCOUNTTREEVIEW_H

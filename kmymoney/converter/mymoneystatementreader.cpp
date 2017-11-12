@@ -1465,7 +1465,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
             // sure to use only the absolute value of the amount, because
             // the editor keeps the sign in a different position (deposit,
             // withdrawal tab)
-            kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(se->haveWidget("amount"));
+            KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(se->haveWidget("amount"));
             if (amount) {
               amount->setValue(importedSplit.shares().abs());
               se->slotUpdateAmount(importedSplit.shares().abs().toString());

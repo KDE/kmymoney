@@ -21,6 +21,7 @@
 #include <KLocalizedString>
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "widgetenums.h"
 
 bicValidator::bicValidator(QObject* parent)
     : QValidator(parent)
@@ -51,15 +52,15 @@ QValidator::State bicValidator::validate(QString &string, int&) const
   return Intermediate;
 }
 
-QPair< KMyMoneyValidationFeedback::MessageType, QString > bicValidator::validateWithMessage(const QString& string)
+QPair< eWidgets::ValidationFeedback::MessageType, QString > bicValidator::validateWithMessage(const QString& string)
 {
   // Do not show an error message if no BIC is given.
   if (string.length() != 8 && string.length() != 11)
-    return QPair< KMyMoneyValidationFeedback::MessageType, QString >(KMyMoneyValidationFeedback::Error, i18n("A valid BIC is 8 or 11 characters long."));
+    return QPair< eWidgets::ValidationFeedback::MessageType, QString >(eWidgets::ValidationFeedback::MessageType::Error, i18n("A valid BIC is 8 or 11 characters long."));
 
   if (payeeIdentifiers::ibanBic::isBicAllocated(string) == payeeIdentifiers::ibanBic::bicNotAllocated)
-    return QPair< KMyMoneyValidationFeedback::MessageType, QString >(KMyMoneyValidationFeedback::Error, i18n("The given BIC is not assigned to any credit institute."));
+    return QPair< eWidgets::ValidationFeedback::MessageType, QString >(eWidgets::ValidationFeedback::MessageType::Error, i18n("The given BIC is not assigned to any credit institute."));
 
-  return QPair< KMyMoneyValidationFeedback::MessageType, QString >(KMyMoneyValidationFeedback::None, QString());
+  return QPair< eWidgets::ValidationFeedback::MessageType, QString >(eWidgets::ValidationFeedback::MessageType::None, QString());
 
 }

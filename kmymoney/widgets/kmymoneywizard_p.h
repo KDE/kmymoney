@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2006 by Thomas Baumagrt
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************

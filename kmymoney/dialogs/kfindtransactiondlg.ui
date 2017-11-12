@@ -136,7 +136,7 @@
             <number>11</number>
            </property>
            <item>
-            <widget class="kMyMoneyAccountSelector" name="m_accountsView" native="true"/>
+            <widget class="KMyMoneyAccountSelector" name="m_accountsView" native="true"/>
            </item>
           </layout>
          </widget>
@@ -237,7 +237,7 @@
              <item>
               <layout class="QGridLayout">
                <item row="2" column="1">
-                <widget class="kMyMoneyEdit" name="m_amountToEdit" native="true">
+                <widget class="KMyMoneyEdit" name="m_amountToEdit" native="true">
                  <property name="minimumSize">
                   <size>
                    <width>100</width>
@@ -267,7 +267,7 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="kMyMoneyEdit" name="m_amountEdit" native="true">
+                <widget class="KMyMoneyEdit" name="m_amountEdit" native="true">
                  <property name="minimumSize">
                   <size>
                    <width>100</width>
@@ -287,7 +287,7 @@
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="kMyMoneyEdit" name="m_amountFromEdit" native="true">
+                <widget class="KMyMoneyEdit" name="m_amountFromEdit" native="true">
                  <property name="minimumSize">
                   <size>
                    <width>100</width>
@@ -340,7 +340,7 @@
           </attribute>
           <layout class="QVBoxLayout">
            <item>
-            <widget class="kMyMoneyAccountSelector" name="m_categoriesView" native="true"/>
+            <widget class="KMyMoneyAccountSelector" name="m_categoriesView" native="true"/>
            </item>
           </layout>
          </widget>
@@ -748,10 +748,10 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="kMyMoneyLineEdit" name="m_nrToEdit" native="true"/>
+                <widget class="KMyMoneyLineEdit" name="m_nrToEdit" native="true"/>
                </item>
                <item row="0" column="1">
-                <widget class="kMyMoneyLineEdit" name="m_nrEdit" native="true"/>
+                <widget class="KMyMoneyLineEdit" name="m_nrEdit" native="true"/>
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="TextLabel13">
@@ -764,7 +764,7 @@
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="kMyMoneyLineEdit" name="m_nrFromEdit" native="true"/>
+                <widget class="KMyMoneyLineEdit" name="m_nrFromEdit" native="true"/>
                </item>
               </layout>
              </item>
@@ -907,17 +907,17 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyLineEdit</class>
+   <class>KMyMoneyLineEdit</class>
    <extends>QWidget</extends>
    <header>../widgets/kmymoneylineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyAccountSelector</class>
+   <class>KMyMoneyAccountSelector</class>
    <extends>QWidget</extends>
    <header location="global">../widgets/kmymoneyaccountselector.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QWidget</extends>
    <header>kmymoneyedit.h</header>
    <container>1</container>

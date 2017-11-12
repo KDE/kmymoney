@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class kMyMoneyLineEdit::Private
+class KMyMoneyLineEdit::Private
 {
 public:
   /**
@@ -51,7 +51,7 @@ public:
   bool  skipSelectAll;
 };
 
-kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
+KMyMoneyLineEdit::KMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
     KLineEdit(w),
     d(new Private)
 {
@@ -60,28 +60,28 @@ kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, 
   skipSelectAll(false);
 }
 
-kMyMoneyLineEdit::~kMyMoneyLineEdit()
+KMyMoneyLineEdit::~KMyMoneyLineEdit()
 {
   delete d;
 }
 
-void kMyMoneyLineEdit::skipSelectAll(bool skipIt)
+void KMyMoneyLineEdit::skipSelectAll(bool skipIt)
 {
   d->skipSelectAll = skipIt;
 }
 
-void kMyMoneyLineEdit::resetText()
+void KMyMoneyLineEdit::resetText()
 {
   setText(d->m_text);
 }
 
-void kMyMoneyLineEdit::loadText(const QString& text)
+void KMyMoneyLineEdit::loadText(const QString& text)
 {
   d->m_text = text;
   setText(text);
 }
 
-void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
+void KMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
 {
   // if the current text is not in the list of
   // possible completions, we have a new payee
@@ -96,7 +96,7 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
     repaint();
 }
 
-void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
+void KMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
 {
   KLineEdit::focusInEvent(ev);
   // select the text so it can be edited by the user - only if the widget
@@ -113,7 +113,7 @@ void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
   }
 }
 
-void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
+void KMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
   if (d->m_forceMonetaryDecimalSymbol) {
     if (k->modifiers() & Qt::KeypadModifier) {
@@ -138,7 +138,7 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
   KLineEdit::keyReleaseEvent(k);
 }
 
-void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
+void KMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 {
   if (d->m_forceMonetaryDecimalSymbol) {
     if (k->modifiers() & Qt::KeypadModifier) {

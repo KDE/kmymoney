@@ -359,14 +359,14 @@ public:
     q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotVatAssignmentChanged);
     q->connect(ui->m_vatCategory,   &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
     q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
-    q->connect(ui->m_vatRate,       &kMyMoneyEdit::textChanged,      q, &KNewAccountDlg::slotCheckFinished);
+    q->connect(ui->m_vatRate,       &KMyMoneyEdit::textChanged,      q, &KNewAccountDlg::slotCheckFinished);
     q->connect(ui->m_vatAccount,    &KMyMoneySelector::stateChanged, q, &KNewAccountDlg::slotCheckFinished);
     q->connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KNewAccountDlg::slotCheckCurrency);
 
-    q->connect(ui->m_minBalanceEarlyEdit,     &kMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
-    q->connect(ui->m_minBalanceAbsoluteEdit,  &kMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);
-    q->connect(ui->m_maxCreditEarlyEdit,      &kMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
-    q->connect(ui->m_maxCreditAbsoluteEdit,   &kMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
+    q->connect(ui->m_minBalanceEarlyEdit,     &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
+    q->connect(ui->m_minBalanceAbsoluteEdit,  &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);
+    q->connect(ui->m_maxCreditEarlyEdit,      &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
+    q->connect(ui->m_maxCreditAbsoluteEdit,   &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
 
     q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
 
@@ -408,12 +408,12 @@ public:
     q->slotVatAssignmentChanged(ui->m_vatAssignment->isChecked());
     q->slotCheckFinished();
 
-    auto requiredFields = new kMandatoryFieldGroup(q);
+    auto requiredFields = new KMandatoryFieldGroup(q);
     requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
     requiredFields->add(ui->accountNameEdit);
   }
 
-  void loadKVP(const QString& key, kMyMoneyEdit* widget)
+  void loadKVP(const QString& key, KMyMoneyEdit* widget)
   {
     if (!widget)
       return;
@@ -452,7 +452,7 @@ public:
     }
   }
 
-  void storeKVP(const QString& key, kMyMoneyEdit* widget)
+  void storeKVP(const QString& key, KMyMoneyEdit* widget)
   {
     storeKVP(key, widget->lineedit()->text(), widget->text());
   }
@@ -494,7 +494,7 @@ public:
       vatSet.load(ui->m_vatAccount, i18n("Expense"), loadListExpense, false);
   }
 
-  void adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr)
+  void adjustEditWidgets(KMyMoneyEdit* dst, KMyMoneyEdit* src, char mode, int corr)
   {
     MyMoneyMoney factor(corr, 1);
     if (m_account.accountGroup() == Account::Asset)

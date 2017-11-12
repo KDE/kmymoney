@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,9 +21,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
-
 #include "kmymoneyaccountcompletion.h"
+#include "kmymoneycompletion_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -37,14 +37,16 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "kmymoneyaccountselector.h"
 
-kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
-    kMyMoneyCompletion(parent)
+KMyMoneyAccountCompletion::KMyMoneyAccountCompletion(QWidget *parent) :
+    KMyMoneyCompletion(parent)
 {
-  delete m_selector;
-  m_selector = new kMyMoneyAccountSelector(this, 0, false);
-  m_selector->listView()->setFocusProxy(parent);
-  layout()->addWidget(m_selector);
+  Q_D(KMyMoneyCompletion);
+  delete d->m_selector;
+  d->m_selector = new KMyMoneyAccountSelector(this, 0, false);
+  d->m_selector->listView()->setFocusProxy(parent);
+  layout()->addWidget(d->m_selector);
 
 #ifndef KMM_DESIGNER
   // Default is to show all accounts
@@ -57,21 +59,39 @@ kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
   set.load(selector());
 #endif
 
-  connectSignals(m_selector, m_selector->listView());
+  connectSignals(d->m_selector, d->m_selector->listView());
 }
 
-kMyMoneyAccountCompletion::~kMyMoneyAccountCompletion()
+KMyMoneyAccountCompletion::~KMyMoneyAccountCompletion()
 {
 }
 
-void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
+QStringList KMyMoneyAccountCompletion::accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const
 {
+  return selector()->accountList(list);
+}
+
+QStringList KMyMoneyAccountCompletion::accountList() const
+{
+  return accountList(QList<eMyMoney::Account>());
+}
+
+KMyMoneyAccountSelector* KMyMoneyAccountCompletion::selector() const
+{
+  Q_D(const KMyMoneyCompletion);
+//  return nullptr;
+      return dynamic_cast<KMyMoneyAccountSelector*>(d->m_selector);
+  }
+
+void KMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
+{
+  Q_D(KMyMoneyCompletion);
   // if(txt.isEmpty() || txt.length() == 0)
   //  return;
 
-  int cnt = 0;
+  auto cnt = 0;
   if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
-    m_lastCompletion = QRegExp(QRegExp::escape(txt), Qt::CaseInsensitive);
+    d->m_lastCompletion = QRegExp(QRegExp::escape(txt), Qt::CaseInsensitive);
     cnt = selector()->slotMakeCompletion(txt);
   } else {
     QStringList parts = txt.split(MyMoneyFile::AccountSeperator, QString::SkipEmptyParts);
@@ -83,18 +103,18 @@ void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
       pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
     }
     pattern += '$';
-    m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
-    cnt = selector()->slotMakeCompletion(m_lastCompletion);
+    d->m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
+    cnt = selector()->slotMakeCompletion(d->m_lastCompletion);
     // if we don't have a match, we try it again, but this time
     // we add a wildcard for the top level
     if (cnt == 0) {
       pattern = pattern.insert(1, QString(".*") + MyMoneyFile::AccountSeperator);
-      m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
-      cnt = selector()->slotMakeCompletion(m_lastCompletion);
+      d->m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
+      cnt = selector()->slotMakeCompletion(d->m_lastCompletion);
     }
   }
 
-  if (m_parent && m_parent->isVisible() && !isVisible() && cnt)
+  if (d->m_parent && d->m_parent->isVisible() && !isVisible() && cnt)
     show(false);
   else {
     if (cnt != 0) {

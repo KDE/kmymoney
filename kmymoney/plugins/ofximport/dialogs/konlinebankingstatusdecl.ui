@@ -353,7 +353,7 @@
               </widget>
              </item>
              <item row="2" column="1" colspan="3">
-              <widget class="kMyMoneyDateInput" name="m_specificDate">
+              <widget class="KMyMoneyDateInput" name="m_specificDate">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -465,7 +465,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QFrame</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>

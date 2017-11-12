@@ -61,7 +61,7 @@ public:
 
   /**
    * load or set the name of the m_investmentName item widget. The difference
-   * can be seen in the @ref kMyMoneyLineEdit type.
+   * can be seen in the @ref KMyMoneyLineEdit type.
    */
   void loadName(const QString& name);
   void setName(const QString& name);

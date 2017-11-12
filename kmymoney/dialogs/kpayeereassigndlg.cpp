@@ -71,7 +71,7 @@ KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWid
   Q_D(KPayeeReassignDlg);
   d->ui->setupUi(this);
   d->m_type = type;
-  auto mandatory = new kMandatoryFieldGroup(this);
+  auto mandatory = new KMandatoryFieldGroup(this);
   mandatory->add(d->ui->payeeCombo);
   mandatory->setOkButton(d->ui->buttonBox->button(QDialogButtonBox::Ok));
   d->ui->textLabel1->setText(i18n(labelText[d->m_type]));

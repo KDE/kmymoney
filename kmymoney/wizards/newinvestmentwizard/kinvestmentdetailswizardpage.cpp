@@ -43,7 +43,7 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent) :
   ui->setupUi(this);
   ui->m_fraction->setPrecision(0);
   ui->m_fraction->setValue(MyMoneyMoney(100, 1));
-  kMyMoneyMoneyValidator* fractionValidator = new kMyMoneyMoneyValidator(1, 100000, 0, this);
+  KMyMoneyMoneyValidator* fractionValidator = new KMyMoneyMoneyValidator(1, 100000, 0, this);
   ui->m_fraction->setValidator(fractionValidator);
 
   // load the price mode combo
@@ -79,7 +79,7 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent) :
   registerField("roundingMethod", ui->m_roundingMethod, "currentData", SIGNAL(currentIndexChanged(int)));
 
   registerField("fraction", ui->m_fraction, "value", SIGNAL(textChanged()));
-  connect(ui->m_fraction, &kMyMoneyEdit::textChanged,
+  connect(ui->m_fraction, &KMyMoneyEdit::textChanged,
           this, &QWizardPage::completeChanged);
 
   registerField("pricePrecision", ui->m_pricePrecision, "value", SIGNAL(valueChanged()));

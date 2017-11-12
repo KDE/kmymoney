@@ -46,7 +46,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
     <item>
       <layout class="QVBoxLayout">
         <item>
-          <widget class="kMyMoneyAccountSelector" name="m_assetAccountEdit"/>
+          <widget class="KMyMoneyAccountSelector" name="m_assetAccountEdit"/>
         </item>
         <item>
           <layout class="QHBoxLayout">
@@ -96,7 +96,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyDateInput" name="m_paymentDate"/>
+          <widget class="KMyMoneyDateInput" name="m_paymentDate"/>
         </item>
       </layout>
     </item>

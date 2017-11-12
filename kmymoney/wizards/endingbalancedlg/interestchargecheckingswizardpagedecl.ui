@@ -114,14 +114,14 @@
            <item>
             <layout class="QHBoxLayout">
              <item>
-              <widget class="kMyMoneyEdit" name="m_interestEdit">
+              <widget class="KMyMoneyEdit" name="m_interestEdit">
                <property name="resetButtonVisibility" stdset="0">
                 <bool>false</bool>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="kMyMoneyDateInput" name="m_interestDateEdit"/>
+              <widget class="KMyMoneyDateInput" name="m_interestDateEdit"/>
              </item>
             </layout>
            </item>
@@ -150,14 +150,14 @@
            <item>
             <layout class="QHBoxLayout">
              <item>
-              <widget class="kMyMoneyEdit" name="m_chargesEdit">
+              <widget class="KMyMoneyEdit" name="m_chargesEdit">
                <property name="resetButtonVisibility" stdset="0">
                 <bool>false</bool>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="kMyMoneyDateInput" name="m_chargesDateEdit"/>
+              <widget class="KMyMoneyDateInput" name="m_chargesDateEdit"/>
              </item>
             </layout>
            </item>
@@ -208,7 +208,7 @@
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneypayeecombo.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

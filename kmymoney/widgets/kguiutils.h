@@ -4,6 +4,7 @@
    begin                : Fri Jan 27 2006
    copyright            : (C) 2006 Tony Bloomfield
    email                : Tony Bloomfield <tonybloom@users.sourceforge.net>
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -22,9 +23,6 @@
 // QT Includes
 
 #include <QObject>
-#include <QList>
-class QWidget;
-class QPushButton;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,16 +32,21 @@ class QPushButton;
 
 #include "kmm_widgets_export.h"
 
+class QWidget;
+class QPushButton;
+
 /**
   * @author Tony Bloomfield
   */
-class KMM_WIDGETS_EXPORT kMandatoryFieldGroup : public QObject
+class KMandatoryFieldGroupPrivate;
+class KMM_WIDGETS_EXPORT KMandatoryFieldGroup : public QObject
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMandatoryFieldGroup)
 
 public:
-  kMandatoryFieldGroup(QObject *parent) :
-      QObject(parent), m_okButton(0), m_enabled(true) {}
+  explicit KMandatoryFieldGroup(QObject *parent);
+  ~KMandatoryFieldGroup();
 
   /**
     * This method adds a widget to the list of mandatory fields for the current dialog
@@ -76,9 +79,7 @@ public:
     * This method returns if all requirements for the mandatory group
     * have been fulfilled (@p true) or not (@p false).
     */
-  bool isEnabled() const {
-    return m_enabled;
-  }
+  bool isEnabled() const;
 
 public slots:
   void clear();
@@ -93,9 +94,8 @@ signals:
   void stateChanged(bool state);
 
 private:
-  QList<QWidget *>      m_widgets;
-  QPushButton*          m_okButton;
-  bool                  m_enabled;
+  KMandatoryFieldGroupPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMandatoryFieldGroup)
 };
 
 #endif // KGUIUTILS_H

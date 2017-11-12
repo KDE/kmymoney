@@ -73,7 +73,7 @@
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyDateInput" name="m_effectiveChangeDateEdit"/>
+          <widget class="KMyMoneyDateInput" name="m_effectiveChangeDateEdit"/>
         </item>
       </layout>
     </item>

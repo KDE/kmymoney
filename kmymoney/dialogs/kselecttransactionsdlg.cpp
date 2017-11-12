@@ -39,9 +39,12 @@
 #include "ui_kselecttransactionsdlg.h"
 
 #include "mymoneyaccount.h"
-#include "selectedtransaction.h"
+#include "selectedtransactions.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "transaction.h"
 #include "kmymoneyglobalsettings.h"
+#include "widgetenums.h"
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
   QDialog(parent),
@@ -135,7 +138,7 @@ void KSelectTransactionsDlg::showEvent(QShowEvent* event)
 {
   Q_D(KSelectTransactionsDlg);
   QDialog::showEvent(event);
-  d->ui->m_register->resize(KMyMoneyRegister::DetailColumn, true);
+  d->ui->m_register->resize((int)eWidgets::eTransaction::Column::Detail, true);
 }
 
 void KSelectTransactionsDlg::resizeEvent(QResizeEvent* ev)
@@ -145,7 +148,7 @@ void KSelectTransactionsDlg::resizeEvent(QResizeEvent* ev)
   QDialog::resizeEvent(ev);
 
   // resize the register
-  d->ui->m_register->resize(KMyMoneyRegister::DetailColumn, true);
+  d->ui->m_register->resize((int)eWidgets::eTransaction::Column::Detail, true);
 }
 
 MyMoneyTransaction KSelectTransactionsDlg::transaction() const

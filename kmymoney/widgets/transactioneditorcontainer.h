@@ -4,6 +4,7 @@
     begin                : Wed Jun 07 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,34 +22,24 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QTableWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace KMyMoneyRegister
-{
-class Transaction;
-}
-
-typedef enum {
-  ProtectNone = 0,
-  ProtectTransfer,
-  ProtectNonTransfer,
-  ProtectAll
-} ProtectedAction;
+namespace KMyMoneyRegister { class Transaction; }
 
 class TransactionEditorContainer : public QTableWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(TransactionEditorContainer)
 
 public:
-  TransactionEditorContainer(QWidget* parent) : QTableWidget(parent) {}
+  explicit TransactionEditorContainer(QWidget* parent);
+  virtual ~TransactionEditorContainer();
 
   virtual void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t) = 0;
   virtual void removeEditWidgets(QMap<QString, QWidget*>& editWidgets) = 0;
@@ -61,10 +52,7 @@ signals:
   void geometriesUpdated();
 
 protected slots:
-  void updateGeometries() {
-    QTableWidget::updateGeometries();
-    emit geometriesUpdated();
-  }
+  void updateGeometries();
 };
 
 #endif

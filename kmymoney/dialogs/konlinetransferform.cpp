@@ -47,7 +47,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   : QDialog(parent),
     ui(new Ui::kOnlineTransferForm),
     m_onlineJobEditWidgets(QList<IonlineJobEdit*>()),
-    m_requiredFields(new kMandatoryFieldGroup(this))
+    m_requiredFields(new KMandatoryFieldGroup(this))
 {
   ui->setupUi(this);
   ui->unsupportedIcon->setPixmap(QIcon::fromTheme(g_Icons[Icon::DialogInformation]).pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
@@ -80,7 +80,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->buttonAbort, &QAbstractButton::clicked, this, &kOnlineTransferForm::reject);
   connect(ui->buttonSend, &QAbstractButton::clicked, this, &kOnlineTransferForm::sendJob);
   connect(ui->buttonEnque, &QAbstractButton::clicked, this, &kOnlineTransferForm::accept);
-  connect(m_requiredFields, static_cast<void (kMandatoryFieldGroup::*)(bool)>(&kMandatoryFieldGroup::stateChanged), ui->buttonEnque, &QPushButton::setEnabled);
+  connect(m_requiredFields, static_cast<void (KMandatoryFieldGroup::*)(bool)>(&KMandatoryFieldGroup::stateChanged), ui->buttonEnque, &QPushButton::setEnabled);
 
   connect(ui->originAccount, &KMyMoneyAccountCombo::accountSelected, this, &kOnlineTransferForm::accountChanged);
 

@@ -151,7 +151,7 @@ bool Activity::haveCategoryAndAmount(const QString& category, const QString& amo
             rc = false;
         }
       } else {
-        MyMoneyMoney value = dynamic_cast<kMyMoneyEdit*>(haveWidget(amount))->value();
+        MyMoneyMoney value = dynamic_cast<KMyMoneyEdit*>(haveWidget(amount))->value();
         rc = !value.isZero();
       }
     }
@@ -173,7 +173,7 @@ bool Activity::haveInterest(bool optional) const
 
 bool Activity::haveShares() const
 {
-  kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   if (isMultiSelection() && amount->value().isZero())
     return true;
 
@@ -182,7 +182,7 @@ bool Activity::haveShares() const
 
 bool Activity::havePrice() const
 {
-  kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
+  KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
   if (isMultiSelection() && amount->value().isZero())
     return true;
 
@@ -195,7 +195,7 @@ bool Activity::isMultiSelection() const
   return d->m_parent->isMultiSelection();
 }
 
-bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, kMyMoneyEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const
+bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, KMyMoneyEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const
 {
   Q_D(const Activity);
   auto rc = true;
@@ -362,8 +362,8 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   if (!isComplete(reason))
     return false;
 
-  auto sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  auto priceEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
+  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+  auto priceEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
 
   s0.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
 
@@ -390,7 +390,7 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
     }
   }
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);
@@ -428,7 +428,7 @@ void Sell::showWidgets() const
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
 
-  auto shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 
   setLabelText("interest-amount-label", i18n("Interest"));
@@ -463,8 +463,8 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   if (!isComplete(reason))
     return false;
 
-  auto sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  auto priceEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
+  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+  auto priceEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
 
   s0.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
 
@@ -492,10 +492,10 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
     }
   }
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);
@@ -567,10 +567,10 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   s0.setValue(shares);
   s0.setPrice(MyMoneyMoney::ONE);
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);
@@ -604,11 +604,11 @@ void Reinvest::showWidgets() const
   static const QStringList visibleWidgetIds = QStringList() << "price" << "interest-account";
   setWidgetVisibility(visibleWidgetIds, true);
 
-  auto shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 
-  kMyMoneyEdit* intAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount"));
+  KMyMoneyEdit* intAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
   intAmount->hide();
   setLabelText("interest-amount-label", QString());
   intAmount->setValue(MyMoneyMoney());
@@ -641,8 +641,8 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   if (!isComplete(reason))
     return false;
 
-  auto sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  auto priceEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
+  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+  auto priceEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
 
   s0.setAction(eMyMoney::Split::InvestmentTransactionType::ReinvestDividend);
 
@@ -669,7 +669,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
     }
   }
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   if (interestSplits.count() != 1) {
@@ -706,7 +706,7 @@ eMyMoney::Split::InvestmentTransactionType Add::type() const
 void Add::showWidgets() const
 {
   Q_D(const Activity);
-  auto shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 
@@ -733,7 +733,7 @@ bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   if (!isComplete(reason))
     return false;
 
-  auto sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
 
   s0.setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
   s0.setShares(sharesEdit->value().abs());
@@ -765,7 +765,7 @@ eMyMoney::Split::InvestmentTransactionType Remove::type() const
 void Remove::showWidgets() const
 {
   Q_D(const Activity);
-  auto shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
   setLabelText("shares-label", i18n("Shares"));
@@ -791,7 +791,7 @@ bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
   if (!isComplete(reason))
     return false;
 
-  auto sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
 
   s0.setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
   s0.setShares(-(sharesEdit->value().abs()));
@@ -824,7 +824,7 @@ void Invest::Split::showWidgets() const
 {
   // TODO do we need a special split ratio widget?
   // TODO maybe yes, currently the precision is the one of the fraction and might differ from it
-  auto shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
   shareEdit->setPrecision(-1);
   setLabelText("shares-label", i18n("Ratio 1/"));
@@ -846,7 +846,7 @@ bool Invest::Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, M
   Q_UNUSED(security);
   Q_UNUSED(currency);
 
-  auto sharesEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
+  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
 
   KMyMoneyCategory* cat;
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
@@ -922,9 +922,9 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
   s0.setValue(shares);
   s0.setPrice(MyMoneyMoney::ONE);
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);

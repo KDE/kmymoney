@@ -9,6 +9,7 @@
                           John C <thetacoturtle@users.sourceforge.net>
                           Thomas Baumgart <ipwizard@users.sourceforge.net>
                           Kevin Tambascio <ktambascio@users.sourceforge.net>
+                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -95,9 +96,11 @@ typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> O
 class KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyAccountCombo)
+
 public:
-  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget *parent = 0);
-  explicit KMyMoneyAccountCombo(QWidget *parent = 0);
+  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget* parent = nullptr);
+  explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
   ~KMyMoneyAccountCombo();
 
   void setSelected(const QString& id);
@@ -110,20 +113,20 @@ public:
    */
   void setEditable(bool isEditable);
 
-  virtual bool eventFilter(QObject* o, QEvent* e);
+  bool eventFilter(QObject* o, QEvent* e) override;
 
 public slots:
   void expandAll();
   void collapseAll();
-  virtual void showPopup();
-  virtual void hidePopup();
+  void showPopup() override;
+  void hidePopup() override;
 
 protected:
-  virtual void wheelEvent(QWheelEvent *ev);
+  void wheelEvent(QWheelEvent *ev) override;
 
 protected slots:
   void activated();
-  void makeCompletion(const QString& txt);
+  void makeCompletion(const QString& txt) override;
   void selectItem(const QModelIndex& index);
 
 signals:

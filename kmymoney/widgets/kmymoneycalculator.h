@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,8 +28,6 @@
 // QT Includes
 
 #include <QFrame>
-#include <QLabel>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -52,12 +51,15 @@
   * without having the user to re-type the data. See setInitialValues()
   * for details.
   */
-class KMM_WIDGETS_EXPORT kMyMoneyCalculator : public QFrame
+class KMyMoneyCalculatorPrivate;
+class KMM_WIDGETS_EXPORT KMyMoneyCalculator : public QFrame
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyCalculator)
+
 public:
-  kMyMoneyCalculator(QWidget* parent = 0);
-  ~kMyMoneyCalculator();
+  explicit KMyMoneyCalculator(QWidget* parent = nullptr);
+  ~KMyMoneyCalculator();
 
   /**
     * This methods is used to extract the result of the last
@@ -67,7 +69,7 @@ public:
     * @return QString representing the result of the
     *         last operation
     */
-  const QString result() const;
+  QString result() const;
 
   /**
     * This method is used to set the character to be used
@@ -77,14 +79,12 @@ public:
     *
     * @param ch QChar representing the character to be used
     */
-  void setComma(const QChar ch) {
-    m_comma = ch;
-  };
+  void setComma(const QChar ch);
 
   /**
     * This method is used to preset the first operand and start
     * execution of an operation. This method is currently used
-    * by kMyMoneyEdit. If @p ev is 0, then no operation will be
+    * by KMyMoneyEdit. If @p ev is 0, then no operation will be
     * started.
     *
     * @param value reference to QString representing the operands value
@@ -104,7 +104,7 @@ signals:
   void signalQuit();
 
 protected:
-  void keyPressEvent(QKeyEvent* ev);
+  void keyPressEvent(QKeyEvent* ev) override;
 
   /**
     * This method is used to transform a double into a QString
@@ -167,87 +167,8 @@ protected slots:
   void changeDisplay(const QString& str);
 
 private:
-  /**
-    * This member variable stores the current (second) operand
-    */
-  QString operand;
-
-  /**
-    * This member variable stores the last result
-    */
-  QString m_result;
-
-  /**
-    * This member variable stores the representation of the
-    * character to be used to separate the integer and fractional
-    * part of numbers. The internal representation is always a period.
-    */
-  QChar m_comma;
-
-  /**
-    * The numeric representation of a stacked first operand
-    */
-  double op0;
-
-  /**
-    * The numeric representation of the first operand
-    */
-  double op1;
-
-  /**
-    * This member stores the operation to be performed between
-    * the first and the second operand.
-    */
-  int op;
-
-  /**
-   * This member stores a pending addition operation
-   */
-  int stackedOp;
-
-  /**
-    * This member stores a pointer to the display area
-    */
-  QLabel *display;
-
-  /**
-    * This member array stores the pointers to the various
-    * buttons of the calculator. It is setup during the
-    * constructor of this object
-    */
-  QPushButton *buttons[20];
-
-  /**
-    * This enumeration type stores the values used for the
-    * various keys internally
-    */
-  enum {
-    /* 0-9 are used by digits */
-    COMMA = 10,
-    /*
-     * make sure, that PLUS through EQUAL remain in
-     * the order they are. Otherwise, check the calculation
-     * signal mapper
-     */
-    PLUS,
-    MINUS,
-    SLASH,
-    STAR,
-    EQUAL,
-    PLUSMINUS,
-    PERCENT,
-    CLEAR,
-    CLEARALL,
-    /* insert new buttons before this line */
-    MAX_BUTTONS
-  };
-
-  /**
-    * This flag signals, if the operand should be replaced upon
-    * a digit key pressure. Defaults to false and will be set, if
-    * setInitialValues() is called without an operation.
-    */
-  bool m_clearOperandOnDigit;
+  KMyMoneyCalculatorPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyCalculator)
 };
 
 #endif

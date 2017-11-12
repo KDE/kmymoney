@@ -149,7 +149,7 @@ The option to &lt;b&gt;start from the beginning of the current year&lt;/b&gt; is
                 </widget>
               </item>
               <item row="4" column="1">
-                <widget class="kMyMoneyEdit" name="m_openingBalance">
+                <widget class="KMyMoneyEdit" name="m_openingBalance">
                   <property name="whatsThis" stdset="0">
                     <string>You have selected to record only payments from the beginning of this year. Since prior transactions will not be recorded, you need to supply the balance of the loan on January 1st of this year.</string>
                   </property>
@@ -200,7 +200,7 @@ The option to &lt;b&gt;start from the beginning of the current year&lt;/b&gt; is
                 </widget>
               </item>
               <item row="7" column="1">
-                <widget class="kMyMoneyDateInput" name="m_firstPaymentDate">
+                <widget class="KMyMoneyDateInput" name="m_firstPaymentDate">
                   <property name="focusPolicy">
                     <enum>Qt::StrongFocus</enum>
                   </property>
@@ -301,7 +301,7 @@ Enter the due date of the first payment in the current year</string>
                 </widget>
               </item>
               <item row="10" column="1">
-                <widget class="kMyMoneyDateInput" name="m_interestChangeDateEdit">
+                <widget class="KMyMoneyDateInput" name="m_interestChangeDateEdit">
                   <property name="focusPolicy">
                     <enum>Qt::StrongFocus</enum>
                   </property>
@@ -360,13 +360,13 @@ Enter the due date of the first payment in the current year</string>
   <customwidget>                                                                                 
    <class>KMyMoneyPayeeCombo</class>                                                             
    <extends>QWidget</extends>                                                                    
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneypayeecombo.h</header>
    <container>1</container>                                                                      
   </customwidget>        
   <customwidget>
    <class>KMyMoneyFrequencyCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneyfrequencycombo.h</header>
    <container>1</container>
   </customwidget>
 

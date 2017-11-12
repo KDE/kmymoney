@@ -4,6 +4,7 @@
     begin                : Tue Aug 19 2008
     copyright            : (C) 2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,46 +28,30 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "transaction.h"
-
-namespace KMyMoneyTransactionForm
-{
-class TransactionForm;
-} // namespace
+#include "stdtransaction.h"
 
 namespace KMyMoneyRegister
 {
 
-class StdTransactionScheduled : public StdTransaction
-{
-public:
-  StdTransactionScheduled(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-  virtual ~StdTransactionScheduled() {}
+  class StdTransactionScheduled : public StdTransaction
+  {
+  public:
+    explicit StdTransactionScheduled(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+    ~StdTransactionScheduled() override;
 
-  virtual const char* className() {
-    return "StdTransactionScheduled";
-  }
+    const char* className();
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
 
-  bool isSelectable() const {
-    return true;
-  }
-  bool canHaveFocus() const {
-    return true;
-  }
-  virtual bool isScheduled() const {
-    return true;
-  }
+    bool isSelectable() const override;
+    bool canHaveFocus() const override;
+    bool isScheduled() const override;
+    int sortSamePostDate() const override;
 
-  virtual int sortSamePostDate() const {
-    return 4;
-  }
+    //   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
 
-//   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
-
-//   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
-};
+    //   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
+  };
 
 } // namespace
 

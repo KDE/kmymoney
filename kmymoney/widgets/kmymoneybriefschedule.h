@@ -27,8 +27,6 @@
 // QT Includes
 
 #include <QWidget>
-#include <QList>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,26 +34,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kschedulebriefwidget.h"
-#include "mymoneyschedule.h"
+class QDate;
+class MyMoneySchedule;
+
+template <typename T> class QList;
 
 /**
   *@author Michael Edwardes
   */
 
-class kScheduleBriefWidget : public QWidget, public Ui::kScheduleBriefWidget
-{
-public:
-  kScheduleBriefWidget(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KMyMoneyBriefSchedule : public kScheduleBriefWidget
+class KMyMoneyBriefSchedulePrivate;
+class KMyMoneyBriefSchedule : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyBriefSchedule)
+
 public:
-  KMyMoneyBriefSchedule(QWidget *parent = 0);
+  explicit KMyMoneyBriefSchedule(QWidget* parent = nullptr);
   ~KMyMoneyBriefSchedule();
   void setSchedules(QList<MyMoneySchedule> list, const QDate& date);
 
@@ -70,11 +65,8 @@ protected slots:
   void slotSkipClicked();
 
 private:
-  QList<MyMoneySchedule> m_scheduleList;
-  int m_index;
-  QDate m_date;
-
-  void loadSchedule();
+  KMyMoneyBriefSchedulePrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyBriefSchedule)
 };
 
 #endif

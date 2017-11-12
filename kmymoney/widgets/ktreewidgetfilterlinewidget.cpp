@@ -18,7 +18,6 @@
 
 #include "ktreewidgetfilterlinewidget.h"
 
-#include <QLayout>
 #include <QLabel>
 
 #include <KLocalizedString>

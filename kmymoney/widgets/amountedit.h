@@ -2,6 +2,7 @@
                                amountedit.h
                              -------------------
     copyright            : (C) 2016 by Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
  ***************************************************************************/
 
@@ -22,9 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QValidator>
+#include <QDoubleValidator>
 #include <QLineEdit>
-#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -78,69 +78,17 @@ public:
   *
   * @author Thomas Baumgart
   */
+class AmountEditPrivate;
 class KMM_WIDGETS_EXPORT AmountEdit : public QLineEdit
 {
   Q_OBJECT
+  Q_DISABLE_COPY(AmountEdit)
+
   Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
   Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty)
   Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
   Q_PROPERTY(MyMoneyMoney value READ value WRITE setValue DESIGNABLE false STORED false USER true)
   Q_PROPERTY(bool valid READ isValid DESIGNABLE false STORED false)
-
-private:
-  class Private;
-  QScopedPointer<Private> d;
-
-  /**
-   * This holds the number of precision to be used
-   * when no other information (e.g. from account)
-   * is available.
-   *
-   * @sa setStandardPrecision()
-   */
-  static int standardPrecision;
-
-private:
-  /**
-    * Internal helper function for value() and ensureFractionalPart().
-    */
-  void ensureFractionalPart(QString& txt) const;
-
-protected:
-  /**
-    * This method ensures that the text version contains a
-    * fractional part.
-    */
-  void ensureFractionalPart();
-
-  /**
-    * This method opens the calculator and replays the key
-    * event pointed to by @p ev. If @p ev is 0, then no key
-    * event is replayed.
-    *
-    * @param ev pointer to QKeyEvent that started the calculator.
-    */
-  void calculatorOpen(QKeyEvent* ev);
-
-  /**
-    * Helper method for constructors.
-    */
-  void init();
-
-  /**
-   * Overridden to support calculator button.
-   */
-  virtual void resizeEvent(QResizeEvent* event);
-
-  /**
-   * Overridden to support ensureFractionalPart().
-   */
-  virtual void focusOutEvent(QFocusEvent* event);
-
-  /**
-   * Overridden to support calculator button.
-   */
-  virtual void keyPressEvent(QKeyEvent* event);
 
 protected Q_SLOTS:
   void theTextChanged(const QString & text);
@@ -149,8 +97,8 @@ protected Q_SLOTS:
   void slotCalculatorClose();
 
 public:
-  explicit AmountEdit(QWidget *parent = 0, const int prec = -2);
-  explicit AmountEdit(const MyMoneySecurity& eq, QWidget *parent = 0);
+  explicit AmountEdit(QWidget* parent = nullptr, const int prec = -2);
+  explicit AmountEdit(const MyMoneySecurity& eq, QWidget* parent = nullptr);
   virtual ~AmountEdit();
 
   MyMoneyMoney value() const;
@@ -163,10 +111,7 @@ public:
     * This method returns the value of the edit field in "numerator/denominator" format.
     * If you want to get the text of the edit field, use lineedit()->text() instead.
     */
-  QString numericalText() const
-  {
-    return value().toString();
-  }
+  QString numericalText() const;
 
   /**
     * Set the number of fractional digits that should be shown
@@ -233,49 +178,32 @@ Q_SIGNALS:
    * in your application.
    */
   void validatedTextChanged(const QString& text);
-};
 
-
-class KMM_WIDGETS_EXPORT CreditDebitHelper : public QObject
-{
-  Q_OBJECT
-public:
-  explicit CreditDebitHelper(QObject* parent, AmountEdit* credit, AmountEdit* debit);
-  virtual ~CreditDebitHelper();
+protected:
+  /**
+    * This method ensures that the text version contains a
+    * fractional part.
+    */
+  void ensureFractionalPart();
 
   /**
-   * Retruns the value of the widget that is filled.
-   * A credit is retruned as negative, a debit as positive value.
+   * Overridden to support calculator button.
    */
-  MyMoneyMoney value() const;
+  virtual void resizeEvent(QResizeEvent* event) override;
 
   /**
-   * Loads the widgets with the @a value passed. If
-   * @a value is negative it is loaded into the credit
-   * widget, otherwise into the debit widget.
+   * Overridden to support ensureFractionalPart().
    */
-  void setValue(const MyMoneyMoney& value);
+  virtual void focusOutEvent(QFocusEvent* event) override;
 
   /**
-   * This method returns true if at least one
-   * of the two widgets is filled with text.
-   * It returns false if both widgets are empty.
+   * Overridden to support calculator button.
    */
-  bool haveValue() const;
-
-Q_SIGNALS:
-  void valueChanged();
-
-private Q_SLOTS:
-  void creditChanged();
-  void debitChanged();
+  virtual void keyPressEvent(QKeyEvent* event) override;
 
 private:
-  void widgetChanged(AmountEdit* src, AmountEdit* dst);
-
-private:
-  QPointer<AmountEdit>  m_credit;
-  QPointer<AmountEdit>  m_debit;
+  AmountEditPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(AmountEdit)
 };
 
 #endif

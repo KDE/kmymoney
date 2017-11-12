@@ -51,6 +51,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
 #include "viewinterface.h"
+#include "selectedtransactions.h"
 
 #include "numbertowords.h"
 #include "pluginsettings.h"

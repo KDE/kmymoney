@@ -61,7 +61,7 @@ Please enter the amount of a final amortization payment or leave the field empty
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyEdit" name="m_finalPaymentEdit"/>
+          <widget class="KMyMoneyEdit" name="m_finalPaymentEdit"/>
         </item>
       </layout>
     </item>

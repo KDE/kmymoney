@@ -4,6 +4,7 @@
     begin                : Tue Jun 13 2006
     copyright            : (C) 2000-2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,7 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
+#include <qglobal.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,40 +30,34 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
+class QString;
+class MyMoneySplit;
+class MyMoneyTransaction;
 
 namespace KMyMoneyRegister
 {
+  class SelectedTransactionPrivate;
+  class SelectedTransaction
+  {
+  public:
+    SelectedTransaction();
+    SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId);
+    SelectedTransaction(const SelectedTransaction & other);
+    SelectedTransaction(SelectedTransaction && other);
+    SelectedTransaction & operator=(SelectedTransaction other);
+    friend void swap(SelectedTransaction& first, SelectedTransaction& second);
+    ~SelectedTransaction();
 
-class SelectedTransaction
-{
-public:
-  SelectedTransaction() {}
-  SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId = QString()) :
-      m_transaction(t), m_split(s), m_scheduleId(scheduleId) {}
+    MyMoneyTransaction& transaction();
+    MyMoneyTransaction transaction() const;
 
-  MyMoneyTransaction& transaction() {
-    return m_transaction;
-  }
-  const MyMoneyTransaction& transaction() const {
-    return m_transaction;
-  }
-  MyMoneySplit& split() {
-    return m_split;
-  }
-  const MyMoneySplit& split() const {
-    return m_split;
-  }
+    MyMoneySplit& split();
+    MyMoneySplit split() const;
 
-  bool isScheduled() const {
-    return !m_scheduleId.isEmpty();
-  }
-  const QString& scheduleId() const {
-    return m_scheduleId;
-  }
+    bool isScheduled() const;
+    QString scheduleId() const;
 
-  /**
+    /**
    * checks the transaction for specific reasons which would
    * speak against editing/modifying it.
    * @retval 0 no sweat, user can modify
@@ -70,31 +65,29 @@ public:
    * @retval 2 some transactions cannot be changed anymore - parts of them are frozen
    * @retval 3 some transactions cannot be changed anymore - they touch closed accounts
    */
-  int warnLevel() const;
+    int warnLevel() const;
 
-private:
-  MyMoneyTransaction      m_transaction;
-  MyMoneySplit            m_split;
-  QString                 m_scheduleId;
-};
+  private:
+    SelectedTransactionPrivate* d_ptr;
+    Q_DECLARE_PRIVATE(SelectedTransaction)
+  };
 
-class Register;
+  inline void swap(SelectedTransaction& first, SelectedTransaction& second) // krazy:exclude=inline
+  {
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
+  }
 
-class SelectedTransactions: public QList<SelectedTransaction>
-{
-public:
-  SelectedTransactions() {}
-  SelectedTransactions(const Register* r);
+  inline SelectedTransaction::SelectedTransaction(SelectedTransaction && other) : SelectedTransaction() // krazy:exclude=inline
+  {
+    swap(*this, other);
+  }
 
-  /**
-   * @return the highest warnLevel of all transactions in the list
-   */
-  int warnLevel() const;
-
-  bool canModify() const;
-  bool canDuplicate() const;
-};
-
+  inline SelectedTransaction & SelectedTransaction::operator=(SelectedTransaction other) // krazy:exclude=inline
+  {
+    swap(*this, other);
+    return *this;
+  }
 } // namespace
 
 #endif

@@ -26,38 +26,38 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountselector.h"
 #include "kmymoneycompletion.h"
+
+namespace eMyMoney { enum class Account; }
+
+class KMyMoneyAccountSelector;
 
 /**
   * @author Thomas Baumgart
   */
-class kMyMoneyAccountCompletion : public kMyMoneyCompletion
+class KMyMoneyAccountCompletion : public KMyMoneyCompletion
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyAccountCompletion)
+
 public:
 
-  kMyMoneyAccountCompletion(QWidget *parent = 0);
-  virtual ~kMyMoneyAccountCompletion();
+  explicit KMyMoneyAccountCompletion(QWidget* parent = nullptr);
+  ~KMyMoneyAccountCompletion() override;
 
-  QStringList accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const {
-    return selector()->accountList(list);
-  }
+  QStringList accountList(const QList<eMyMoney::Account>& list) const;
+  QStringList accountList() const;
 
   /**
-    * reimplemented from kMyMoneyCompletion
+    * reimplemented from KMyMoneyCompletion
     */
-  kMyMoneyAccountSelector* selector() const {
-    return dynamic_cast<kMyMoneyAccountSelector*>(m_selector);
-  }
+  KMyMoneyAccountSelector* selector() const;
 
 public slots:
   void slotMakeCompletion(const QString& txt);

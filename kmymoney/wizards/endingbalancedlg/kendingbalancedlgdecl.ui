@@ -30,7 +30,7 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QFrame</extends>
    <header>kmymoneydateinput.h</header>
   </customwidget>
@@ -40,18 +40,18 @@
    <header>kmymoneycategory.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyEdit</class>
+   <class>KMyMoneyEdit</class>
    <extends>QFrame</extends>
    <header>kmymoneyedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneypayeecombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyAccountSelector</class>
+   <class>KMyMoneyAccountSelector</class>
    <extends>QWidget</extends>
    <header>kmymoneyaccountselector.h</header>
   </customwidget>

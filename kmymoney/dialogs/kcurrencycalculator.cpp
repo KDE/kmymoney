@@ -32,6 +32,7 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -133,8 +134,8 @@ public:
     q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetToAmount);
     q->connect(ui->m_rateButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetExchangeRate);
 
-    q->connect(ui->m_toAmount, &kMyMoneyEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateResult);
-    q->connect(ui->m_conversionRate, &kMyMoneyEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateRate);
+    q->connect(ui->m_toAmount, &KMyMoneyEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateResult);
+    q->connect(ui->m_conversionRate, &KMyMoneyEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateRate);
 
     // use this as the default
     ui->m_amountButton->animateClick();

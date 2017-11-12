@@ -35,6 +35,7 @@ email                : mte@users.sourceforge.net
 #include <QXmlAttributes>
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -1908,7 +1909,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
         crdr = 'D';
         numericTest = gncDebitFormula;
       }
-      kMyMoneyMoneyValidator v(0);
+      KMyMoneyMoneyValidator v(0);
       int pos; // useless, but required for validator
       if (v.validate(numericTest, pos) == QValidator::Acceptable) {
         switch (crdr) {

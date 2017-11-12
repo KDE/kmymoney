@@ -41,7 +41,7 @@ KTagReassignDlg::KTagReassignDlg(QWidget* parent) :
     ui(new Ui::KTagReassignDlg)
 {
   ui->setupUi(this);
-  auto mandatory = new kMandatoryFieldGroup(this);
+  auto mandatory = new KMandatoryFieldGroup(this);
   mandatory->add(ui->tagCombo);
   mandatory->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok));
 }

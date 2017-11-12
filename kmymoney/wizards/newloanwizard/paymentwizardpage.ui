@@ -61,7 +61,7 @@ Please enter the amount you pay for principal and interest or leave the field em
           </widget>
         </item>
         <item>
-          <widget class="kMyMoneyEdit" name="m_paymentEdit"/>
+          <widget class="KMyMoneyEdit" name="m_paymentEdit"/>
         </item>
       </layout>
     </item>

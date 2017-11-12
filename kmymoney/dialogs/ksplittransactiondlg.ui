@@ -321,7 +321,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneySplitTable</class>
+   <class>KMyMoneySplitTable</class>
    <extends>QWidget</extends>
    <header>../dialogs/kmymoneysplittable.h</header>
   </customwidget>

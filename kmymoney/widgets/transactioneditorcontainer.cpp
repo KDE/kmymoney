@@ -4,6 +4,7 @@
     begin                : Wed Jun 07 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,3 +27,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+TransactionEditorContainer::TransactionEditorContainer(QWidget* parent) : QTableWidget(parent)
+{
+}
+
+TransactionEditorContainer::~TransactionEditorContainer()
+{
+}
+
+void TransactionEditorContainer::updateGeometries()
+{
+  QTableWidget::updateGeometries();
+  emit geometriesUpdated();
+}

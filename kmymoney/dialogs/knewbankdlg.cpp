@@ -79,7 +79,7 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
   connect(d->ui->nameEdit, &QLineEdit::textChanged, this, &KNewBankDlg::institutionNameChanged);
   institutionNameChanged(d->ui->nameEdit->text());
 
-  auto requiredFields = new kMandatoryFieldGroup(this);
+  auto requiredFields = new KMandatoryFieldGroup(this);
   requiredFields->setOkButton(d->ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
   requiredFields->add(d->ui->nameEdit);
 }

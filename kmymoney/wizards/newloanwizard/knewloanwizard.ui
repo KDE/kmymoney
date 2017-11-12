@@ -107,7 +107,7 @@
    </customwidget>
  
     <customwidget>
-      <class>kMyMoneyLineEdit</class>
+      <class>KMyMoneyLineEdit</class>
       <extends>QWidget</extends>
       <header location="local">../widgets/kmymoneylineedit.h</header>
       <sizehint>
@@ -122,7 +122,7 @@
       <pixmap>image0</pixmap>
     </customwidget>
     <customwidget>
-      <class>kMyMoneyAccountSelector</class>
+      <class>KMyMoneyAccountSelector</class>
       <extends>QWidget</extends>
       <header location="global">../widgets/kmymoneyaccountselector.h</header>
       <sizehint>
@@ -144,7 +144,7 @@
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneymvccombo.h</header>
+   <header>kmymoneygeneralcombo.h</header>
    <container>1</container>
   </customwidget>
 

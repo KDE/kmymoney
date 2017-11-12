@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,6 +33,7 @@
 #include <QFrame>
 #include <QKeyEvent>
 #include <QLocale>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -39,224 +41,324 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
-    : QFrame(parent)
+class KMyMoneyCalculatorPrivate
 {
-  m_comma = QLocale().decimalPoint();
-  m_clearOperandOnDigit = false;
+  Q_DISABLE_COPY(KMyMoneyCalculatorPrivate)
+
+public:
+  KMyMoneyCalculatorPrivate()
+  {
+  }
+
+  /**
+    * This member variable stores the current (second) operand
+    */
+  QString operand;
+
+  /**
+    * This member variable stores the last result
+    */
+  QString m_result;
+
+  /**
+    * This member variable stores the representation of the
+    * character to be used to separate the integer and fractional
+    * part of numbers. The internal representation is always a period.
+    */
+  QChar m_comma;
+
+  /**
+    * The numeric representation of a stacked first operand
+    */
+  double op0;
+
+  /**
+    * The numeric representation of the first operand
+    */
+  double op1;
+
+  /**
+    * This member stores the operation to be performed between
+    * the first and the second operand.
+    */
+  int op;
+
+  /**
+   * This member stores a pending addition operation
+   */
+  int stackedOp;
+
+  /**
+    * This member stores a pointer to the display area
+    */
+  QLabel *display;
+
+  /**
+    * This member array stores the pointers to the various
+    * buttons of the calculator. It is setup during the
+    * constructor of this object
+    */
+  QPushButton *buttons[20];
+
+  /**
+    * This enumeration type stores the values used for the
+    * various keys internally
+    */
+  enum {
+    /* 0-9 are used by digits */
+    COMMA = 10,
+    /*
+     * make sure, that PLUS through EQUAL remain in
+     * the order they are. Otherwise, check the calculation
+     * signal mapper
+     */
+    PLUS,
+    MINUS,
+    SLASH,
+    STAR,
+    EQUAL,
+    PLUSMINUS,
+    PERCENT,
+    CLEAR,
+    CLEARALL,
+    /* insert new buttons before this line */
+    MAX_BUTTONS
+  };
+
+  /**
+    * This flag signals, if the operand should be replaced upon
+    * a digit key pressure. Defaults to false and will be set, if
+    * setInitialValues() is called without an operation.
+    */
+  bool m_clearOperandOnDigit;
+};
+
+KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
+  QFrame(parent),
+  d_ptr(new KMyMoneyCalculatorPrivate)
+{
+  Q_D(KMyMoneyCalculator);
+  d->m_comma = QLocale().decimalPoint();
+  d->m_clearOperandOnDigit = false;
 
   QGridLayout* grid = new QGridLayout(this);
 
-  display = new QLabel(this);
+  d->display = new QLabel(this);
   QPalette palette;
-  palette.setColor(display->backgroundRole(), QColor("#BDFFB4"));
-  display->setPalette(palette);
+  palette.setColor(d->display->backgroundRole(), QColor("#BDFFB4"));
+  d->display->setPalette(palette);
 
-  display->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-  display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-  grid->addWidget(display, 0, 0, 1, 5);
+  d->display->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+  d->display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  grid->addWidget(d->display, 0, 0, 1, 5);
 
-  buttons[0] = new QPushButton("0", this);
-  buttons[1] = new QPushButton("1", this);
-  buttons[2] = new QPushButton("2", this);
-  buttons[3] = new QPushButton("3", this);
-  buttons[4] = new QPushButton("4", this);
-  buttons[5] = new QPushButton("5", this);
-  buttons[6] = new QPushButton("6", this);
-  buttons[7] = new QPushButton("7", this);
-  buttons[8] = new QPushButton("8", this);
-  buttons[9] = new QPushButton("9", this);
-  buttons[PLUS] = new QPushButton("+", this);
-  buttons[MINUS] = new QPushButton("-", this);
-  buttons[STAR] = new QPushButton("X", this);
-  buttons[COMMA] = new QPushButton(m_comma, this);
-  buttons[EQUAL] = new QPushButton("=", this);
-  buttons[SLASH] = new QPushButton("/", this);
-  buttons[CLEAR] = new QPushButton("C", this);
-  buttons[CLEARALL] = new QPushButton("AC", this);
-  buttons[PLUSMINUS] = new QPushButton("+-", this);
-  buttons[PERCENT] = new QPushButton("%", this);
+  d->buttons[0] = new QPushButton("0", this);
+  d->buttons[1] = new QPushButton("1", this);
+  d->buttons[2] = new QPushButton("2", this);
+  d->buttons[3] = new QPushButton("3", this);
+  d->buttons[4] = new QPushButton("4", this);
+  d->buttons[5] = new QPushButton("5", this);
+  d->buttons[6] = new QPushButton("6", this);
+  d->buttons[7] = new QPushButton("7", this);
+  d->buttons[8] = new QPushButton("8", this);
+  d->buttons[9] = new QPushButton("9", this);
+  d->buttons[KMyMoneyCalculatorPrivate::PLUS] = new QPushButton("+", this);
+  d->buttons[KMyMoneyCalculatorPrivate::MINUS] = new QPushButton("-", this);
+  d->buttons[KMyMoneyCalculatorPrivate::STAR] = new QPushButton("X", this);
+  d->buttons[KMyMoneyCalculatorPrivate::COMMA] = new QPushButton(d->m_comma, this);
+  d->buttons[KMyMoneyCalculatorPrivate::EQUAL] = new QPushButton("=", this);
+  d->buttons[KMyMoneyCalculatorPrivate::SLASH] = new QPushButton("/", this);
+  d->buttons[KMyMoneyCalculatorPrivate::CLEAR] = new QPushButton("C", this);
+  d->buttons[KMyMoneyCalculatorPrivate::CLEARALL] = new QPushButton("AC", this);
+  d->buttons[KMyMoneyCalculatorPrivate::PLUSMINUS] = new QPushButton("+-", this);
+  d->buttons[KMyMoneyCalculatorPrivate::PERCENT] = new QPushButton("%", this);
 
-  grid->addWidget(buttons[7], 1, 0);
-  grid->addWidget(buttons[8], 1, 1);
-  grid->addWidget(buttons[9], 1, 2);
-  grid->addWidget(buttons[4], 2, 0);
-  grid->addWidget(buttons[5], 2, 1);
-  grid->addWidget(buttons[6], 2, 2);
-  grid->addWidget(buttons[1], 3, 0);
-  grid->addWidget(buttons[2], 3, 1);
-  grid->addWidget(buttons[3], 3, 2);
-  grid->addWidget(buttons[0], 4, 1);
+  grid->addWidget(d->buttons[7], 1, 0);
+  grid->addWidget(d->buttons[8], 1, 1);
+  grid->addWidget(d->buttons[9], 1, 2);
+  grid->addWidget(d->buttons[4], 2, 0);
+  grid->addWidget(d->buttons[5], 2, 1);
+  grid->addWidget(d->buttons[6], 2, 2);
+  grid->addWidget(d->buttons[1], 3, 0);
+  grid->addWidget(d->buttons[2], 3, 1);
+  grid->addWidget(d->buttons[3], 3, 2);
+  grid->addWidget(d->buttons[0], 4, 1);
 
-  grid->addWidget(buttons[COMMA], 4, 0);
-  grid->addWidget(buttons[PLUS], 3, 3);
-  grid->addWidget(buttons[MINUS], 4, 3);
-  grid->addWidget(buttons[STAR], 3, 4);
-  grid->addWidget(buttons[SLASH], 4, 4);
-  grid->addWidget(buttons[EQUAL], 4, 2);
-  grid->addWidget(buttons[PLUSMINUS], 2, 3);
-  grid->addWidget(buttons[PERCENT], 2, 4);
-  grid->addWidget(buttons[CLEAR], 1, 3);
-  grid->addWidget(buttons[CLEARALL], 1, 4);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::COMMA], 4, 0);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::PLUS], 3, 3);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::MINUS], 4, 3);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::STAR], 3, 4);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::SLASH], 4, 4);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::EQUAL], 4, 2);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::PLUSMINUS], 2, 3);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::PERCENT], 2, 4);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::CLEAR], 1, 3);
+  grid->addWidget(d->buttons[KMyMoneyCalculatorPrivate::CLEARALL], 1, 4);
 
-  buttons[EQUAL]->setFocus();
+  d->buttons[KMyMoneyCalculatorPrivate::EQUAL]->setFocus();
 
-  op1 = 0.0;
-  stackedOp = op = op0 = 0;
-  operand.clear();
+  d->op1 = 0.0;
+  d->stackedOp = d->op = d->op0 = 0;
+  d->operand.clear();
   changeDisplay("0");
 
   // connect the digit signals through a signal mapper
   QSignalMapper* mapper = new QSignalMapper(this);
-  for (int i = 0; i < 10; ++i) {
-    mapper->setMapping(buttons[i], i);
-    connect(buttons[i], SIGNAL(clicked()), mapper, SLOT(map()));
+  for (auto i = 0; i < 10; ++i) {
+    mapper->setMapping(d->buttons[i], i);
+    connect(d->buttons[i], &QAbstractButton::clicked, mapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
   }
-  connect(mapper, SIGNAL(mapped(int)), this, SLOT(digitClicked(int)));
+  connect(mapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &KMyMoneyCalculator::digitClicked);
 
   // connect the calculation operations through another mapper
   mapper = new QSignalMapper(this);
-  for (int i = PLUS; i <= EQUAL; ++i) {
-    mapper->setMapping(buttons[i], i);
-    connect(buttons[i], SIGNAL(clicked()), mapper, SLOT(map()));
+  for (int i = KMyMoneyCalculatorPrivate::PLUS; i <= KMyMoneyCalculatorPrivate::EQUAL; ++i) {
+    mapper->setMapping(d->buttons[i], i);
+    connect(d->buttons[i], &QAbstractButton::clicked, mapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
   }
-  connect(mapper, SIGNAL(mapped(int)), this, SLOT(calculationClicked(int)));
+  connect(mapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &KMyMoneyCalculator::calculationClicked);
 
   // connect all remaining signals
-  connect(buttons[COMMA], SIGNAL(clicked()), SLOT(commaClicked()));
-  connect(buttons[PLUSMINUS], SIGNAL(clicked()), SLOT(plusminusClicked()));
-  connect(buttons[PERCENT], SIGNAL(clicked()), SLOT(percentClicked()));
-  connect(buttons[CLEAR], SIGNAL(clicked()), SLOT(clearClicked()));
-  connect(buttons[CLEARALL], SIGNAL(clicked()), SLOT(clearAllClicked()));
+  connect(d->buttons[KMyMoneyCalculatorPrivate::COMMA], &QAbstractButton::clicked, this, &KMyMoneyCalculator::commaClicked);
+  connect(d->buttons[KMyMoneyCalculatorPrivate::PLUSMINUS], &QAbstractButton::clicked, this, &KMyMoneyCalculator::plusminusClicked);
+  connect(d->buttons[KMyMoneyCalculatorPrivate::PERCENT], &QAbstractButton::clicked, this, &KMyMoneyCalculator::percentClicked);
+  connect(d->buttons[KMyMoneyCalculatorPrivate::CLEAR], &QAbstractButton::clicked, this, &KMyMoneyCalculator::clearClicked);
+  connect(d->buttons[KMyMoneyCalculatorPrivate::CLEARALL], &QAbstractButton::clicked, this, &KMyMoneyCalculator::clearAllClicked);
 
-  for (int i = 0; i < MAX_BUTTONS; ++i) {
-    buttons[i]->setMinimumSize(40, 30);
-    buttons[i]->setMaximumSize(40, 30);
+  for (auto i = 0; i < KMyMoneyCalculatorPrivate::MAX_BUTTONS; ++i) {
+    d->buttons[i]->setMinimumSize(40, 30);
+    d->buttons[i]->setMaximumSize(40, 30);
   }
   // keep the size determined by the size of the contained buttons no matter what
   setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
-kMyMoneyCalculator::~kMyMoneyCalculator()
+KMyMoneyCalculator::~KMyMoneyCalculator()
 {
+  Q_D(KMyMoneyCalculator);
+  delete d;
 }
 
-void kMyMoneyCalculator::digitClicked(int button)
+void KMyMoneyCalculator::digitClicked(int button)
 {
-  if (m_clearOperandOnDigit) {
-    operand.clear();
-    m_clearOperandOnDigit = false;
+  Q_D(KMyMoneyCalculator);
+  if (d->m_clearOperandOnDigit) {
+    d->operand.clear();
+    d->m_clearOperandOnDigit = false;
   }
 
-  operand += QChar(button + 0x30);
-  if (operand.length() > 16)
-    operand = operand.left(16);
-  changeDisplay(operand);
+  d->operand += QChar(button + 0x30);
+  if (d->operand.length() > 16)
+    d->operand = d->operand.left(16);
+  changeDisplay(d->operand);
 }
 
-void kMyMoneyCalculator::commaClicked()
+void KMyMoneyCalculator::commaClicked()
 {
-  if (operand.length() == 0)
-    operand = '0';
-  if (operand.contains('.', Qt::CaseInsensitive) == 0)
-    operand.append('.');
+  Q_D(KMyMoneyCalculator);
+  if (d->operand.length() == 0)
+    d->operand = '0';
+  if (d->operand.contains('.', Qt::CaseInsensitive) == 0)
+    d->operand.append('.');
 
-  if (operand.length() > 16)
-    operand = operand.left(16);
-  changeDisplay(operand);
+  if (d->operand.length() > 16)
+    d->operand = d->operand.left(16);
+  changeDisplay(d->operand);
 }
 
-void kMyMoneyCalculator::plusminusClicked()
+void KMyMoneyCalculator::plusminusClicked()
 {
-  if (operand.length() == 0 && m_result.length() > 0)
-    operand = m_result;
+  Q_D(KMyMoneyCalculator);
+  if (d->operand.length() == 0 && d->m_result.length() > 0)
+    d->operand = d->m_result;
 
-  if (operand.length() > 0) {
-    if (operand.indexOf('-') != -1)
-      operand.remove('-');
+  if (d->operand.length() > 0) {
+    if (d->operand.indexOf('-') != -1)
+      d->operand.remove('-');
     else
-      operand.prepend('-');
-    changeDisplay(operand);
+      d->operand.prepend('-');
+    changeDisplay(d->operand);
   }
 }
 
-void kMyMoneyCalculator::calculationClicked(int button)
+void KMyMoneyCalculator::calculationClicked(int button)
 {
-  if (operand.length() == 0 && op != 0 && button == EQUAL) {
-    op = 0;
-    m_result = normalizeString(op1);
-    changeDisplay(m_result);
+  Q_D(KMyMoneyCalculator);
+  if (d->operand.length() == 0 && d->op != 0 && button == KMyMoneyCalculatorPrivate::EQUAL) {
+    d->op = 0;
+    d->m_result = normalizeString(d->op1);
+    changeDisplay(d->m_result);
 
-  } else if (operand.length() > 0 && op != 0) {
+  } else if (d->operand.length() > 0 && d->op != 0) {
     // perform operation
-    double op2 = operand.toDouble();
+    double op2 = d->operand.toDouble();
     bool error = false;
 
     // if the pending operation is addition and we now do multiplication
     // we just stack op1 and remember the operation in
-    if ((op == PLUS || op == MINUS) && (button == STAR || button == SLASH)) {
-      op0 = op1;
-      stackedOp = op;
-      op = 0;
+    if ((d->op == KMyMoneyCalculatorPrivate::PLUS || d->op == KMyMoneyCalculatorPrivate::MINUS) && (button == KMyMoneyCalculatorPrivate::STAR || button == KMyMoneyCalculatorPrivate::SLASH)) {
+      d->op0 = d->op1;
+      d->stackedOp = d->op;
+      d->op = 0;
     }
 
-    switch (op) {
-      case PLUS:
-        op2 = op1 + op2;
+    switch (d->op) {
+      case KMyMoneyCalculatorPrivate::PLUS:
+        op2 = d->op1 + op2;
         break;
-      case MINUS:
-        op2 = op1 - op2;
+      case KMyMoneyCalculatorPrivate::MINUS:
+        op2 = d->op1 - op2;
         break;
-      case STAR:
-        op2 = op1 * op2;
+      case KMyMoneyCalculatorPrivate::STAR:
+        op2 = d->op1 * op2;
         break;
-      case SLASH:
+      case KMyMoneyCalculatorPrivate::SLASH:
         if (op2 == 0.0)
           error = true;
         else
-          op2 = op1 / op2;
+          op2 = d->op1 / op2;
         break;
     }
 
     // if we have a pending addition operation, and the next operation is
     // not multiplication, we calculate the stacked operation
-    if (stackedOp && button != STAR && button != SLASH) {
-      switch (stackedOp) {
-        case PLUS:
-          op2 = op0 + op2;
+    if (d->stackedOp && button != KMyMoneyCalculatorPrivate::STAR && button != KMyMoneyCalculatorPrivate::SLASH) {
+      switch (d->stackedOp) {
+        case KMyMoneyCalculatorPrivate::PLUS:
+          op2 = d->op0 + op2;
           break;
-        case MINUS:
-          op2 = op0 - op2;
+        case KMyMoneyCalculatorPrivate::MINUS:
+          op2 = d->op0 - op2;
           break;
       }
-      stackedOp = 0;
+      d->stackedOp = 0;
     }
 
     if (error) {
-      op = 0;
+      d->op = 0;
       changeDisplay("Error");
-      operand.clear();
+      d->operand.clear();
     } else {
-      op1 = op2;
-      m_result = normalizeString(op1);
-      changeDisplay(m_result);
+      d->op1 = op2;
+      d->m_result = normalizeString(d->op1);
+      changeDisplay(d->m_result);
     }
-  } else if (operand.length() > 0 && op == 0) {
-    op1 = operand.toDouble();
-    m_result = normalizeString(op1);
-    changeDisplay(m_result);
+  } else if (d->operand.length() > 0 && d->op == 0) {
+    d->op1 = d->operand.toDouble();
+    d->m_result = normalizeString(d->op1);
+    changeDisplay(d->m_result);
   }
 
-  if (button != EQUAL) {
-    op = button;
+  if (button != KMyMoneyCalculatorPrivate::EQUAL) {
+    d->op = button;
   } else {
-    op = 0;
+    d->op = 0;
     emit signalResultAvailable();
   }
-  operand.clear();
+  d->operand.clear();
 }
 
-QString kMyMoneyCalculator::normalizeString(const double& val)
+QString KMyMoneyCalculator::normalizeString(const double& val)
 {
   QString str;
   str.setNum(val, 'f');
@@ -275,48 +377,52 @@ QString kMyMoneyCalculator::normalizeString(const double& val)
   return str;
 }
 
-void kMyMoneyCalculator::clearClicked()
+void KMyMoneyCalculator::clearClicked()
 {
-  if (operand.length() > 0) {
-    operand = operand.left(operand.length() - 1);
+  Q_D(KMyMoneyCalculator);
+  if (d->operand.length() > 0) {
+    d->operand = d->operand.left(d->operand.length() - 1);
   }
-  if (operand.length() == 0)
+  if (d->operand.length() == 0)
     changeDisplay("0");
   else
-    changeDisplay(operand);
+    changeDisplay(d->operand);
 }
 
-void kMyMoneyCalculator::clearAllClicked()
+void KMyMoneyCalculator::clearAllClicked()
 {
-  operand.clear();
-  op = 0;
+  Q_D(KMyMoneyCalculator);
+  d->operand.clear();
+  d->op = 0;
   changeDisplay("0");
 }
 
-void kMyMoneyCalculator::percentClicked()
+void KMyMoneyCalculator::percentClicked()
 {
-  if (op != 0) {
-    double op2 = operand.toDouble();
-    switch (op) {
-      case PLUS:
-      case MINUS:
-        op2 = (op1 * op2) / 100;
+  Q_D(KMyMoneyCalculator);
+  if (d->op != 0) {
+    double op2 = d->operand.toDouble();
+    switch (d->op) {
+      case KMyMoneyCalculatorPrivate::PLUS:
+      case KMyMoneyCalculatorPrivate::MINUS:
+        op2 = (d->op1 * op2) / 100;
         break;
 
-      case STAR:
-      case SLASH:
+      case KMyMoneyCalculatorPrivate::STAR:
+      case KMyMoneyCalculatorPrivate::SLASH:
         op2 /= 100;
         break;
     }
-    operand = normalizeString(op2);
-    changeDisplay(operand);
+    d->operand = normalizeString(op2);
+    changeDisplay(d->operand);
   }
 }
 
-const QString kMyMoneyCalculator::result() const
+QString KMyMoneyCalculator::result() const
 {
-  QString txt = m_result;
-  txt.replace(QRegExp("\\."), m_comma);
+  Q_D(const KMyMoneyCalculator);
+  auto txt = d->m_result;
+  txt.replace(QRegExp("\\."), d->m_comma);
   if (txt[0] == '-') {
     txt = txt.mid(1); // get rid of the minus sign
     QString mask;
@@ -345,15 +451,23 @@ const QString kMyMoneyCalculator::result() const
   return txt;
 }
 
-void kMyMoneyCalculator::changeDisplay(const QString& str)
+void KMyMoneyCalculator::setComma(const QChar ch)
 {
-  QString txt = str;
-  txt.replace(QRegExp("\\."), m_comma);
-  display->setText("<b>" + txt + "</b>");
+  Q_D(KMyMoneyCalculator);
+  d->m_comma = ch;
 }
 
-void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
+void KMyMoneyCalculator::changeDisplay(const QString& str)
 {
+  Q_D(KMyMoneyCalculator);
+  auto txt = str;
+  txt.replace(QRegExp("\\."), d->m_comma);
+  d->display->setText("<b>" + txt + "</b>");
+}
+
+void KMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
+{
+  Q_D(KMyMoneyCalculator);
   int button = -1;
 
   switch (ev->key()) {
@@ -367,87 +481,88 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
     case Qt::Key_7:
     case Qt::Key_8:
     case Qt::Key_9:
-      if (m_clearOperandOnDigit) {
-        operand.clear();
-        m_clearOperandOnDigit = false;
+      if (d->m_clearOperandOnDigit) {
+        d->operand.clear();
+        d->m_clearOperandOnDigit = false;
       }
       button = ev->key() - Qt::Key_0;
       break;
     case Qt::Key_Plus:
-      button = PLUS;
+      button = KMyMoneyCalculatorPrivate::PLUS;
       break;
     case Qt::Key_Minus:
-      button = MINUS;
+      button = KMyMoneyCalculatorPrivate::MINUS;
       break;
     case Qt::Key_Comma:
     case Qt::Key_Period:
-      if (m_clearOperandOnDigit) {
-        operand.clear();
-        m_clearOperandOnDigit = false;
+      if (d->m_clearOperandOnDigit) {
+        d->operand.clear();
+        d->m_clearOperandOnDigit = false;
       }
-      button = COMMA;
+      button = KMyMoneyCalculatorPrivate::COMMA;
       break;
     case Qt::Key_Slash:
-      button = SLASH;
+      button = KMyMoneyCalculatorPrivate::SLASH;
       break;
     case Qt::Key_Backspace:
-      button = CLEAR;
+      button = KMyMoneyCalculatorPrivate::CLEAR;
       if(ev->modifiers() & Qt::ShiftModifier) {
-        button = CLEARALL;
+        button = KMyMoneyCalculatorPrivate::CLEARALL;
       }
       break;
     case Qt::Key_Asterisk:
-      button = STAR;
+      button = KMyMoneyCalculatorPrivate::STAR;
       break;
     case Qt::Key_Return:
     case Qt::Key_Enter:
     case Qt::Key_Equal:
-      button = EQUAL;
+      button = KMyMoneyCalculatorPrivate::EQUAL;
       break;
     case Qt::Key_Escape:
       emit signalQuit();
       break;
     case Qt::Key_Percent:
-      button = PERCENT;
+      button = KMyMoneyCalculatorPrivate::PERCENT;
       break;
     default:
       ev->ignore();
       break;
   }
   if (button != -1)
-    buttons[button]->animateClick();
+    d->buttons[button]->animateClick();
 
-  m_clearOperandOnDigit = false;
+  d->m_clearOperandOnDigit = false;
 }
 
-void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
+void KMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
 {
+  Q_D(KMyMoneyCalculator);
   bool negative = false;
   // setup operand
-  operand = value;
+  d->operand = value;
   // TODO: port this to kf5
-  //operand.replace(QRegExp(QString('\\') + ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/), QChar());
-  operand.replace(QRegExp(QString('\\') + m_comma), ".");
-  if (operand.contains('(')) {
+  //operand.replace(QRegExp(QString('\\') + QString()/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/), QChar());
+  d->operand.replace(QRegExp(QString('\\') + d->m_comma), ".");
+  if (d->operand.contains('(')) {
     negative = true;
-    operand.remove('(');
-    operand.remove(')');
+    d->operand.remove('(');
+    d->operand.remove(')');
   }
-  if (operand.contains('-')) {
+  if (d->operand.contains('-')) {
     negative = true;
-    operand.remove('-');
+    d->operand.remove('-');
   }
-  if (operand.isEmpty())
-    operand = '0';
+  if (d->operand.isEmpty())
+    d->operand = '0';
   else if (negative)
-    operand = QString("-%1").arg(operand);
+    d->operand = QString("-%1").arg(d->operand);
 
-  changeDisplay(operand);
+  changeDisplay(d->operand);
 
   // and operation
-  op = 0;
+  d->op = 0;
   if (ev)
     keyPressEvent(ev);
   else
-    m_clearOperandOnDigit = true;
+    d->m_clearOperandOnDigit = true;
 }

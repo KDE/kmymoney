@@ -4,6 +4,7 @@
     begin                : Sun May 14 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,6 +26,8 @@
 #include <QFrame>
 #include <QHeaderView>
 #include <QPushButton>
+#include <QMouseEvent>
+#include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,6 +37,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "transactionformitemdelegate.h"
+#include "tabbar.h"
 #include "mymoneyaccount.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
@@ -42,147 +47,36 @@
 
 #include "kmymoneyglobalsettings.h"
 
+#include "widgetenums.h"
+
+using namespace eWidgets;
 using namespace KMyMoneyTransactionForm;
 
-TabBar::TabBar(QWidget* parent) :
-    QTabBar(parent),
-    m_signalType(SignalNormal)
+namespace KMyMoneyTransactionForm
 {
-  connect(this, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
-}
+  class TransactionFormPrivate
+  {
+    Q_DISABLE_COPY(TransactionFormPrivate)
 
-TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
-{
-  TabBar::SignalEmissionE _type = m_signalType;
-  m_signalType = type;
-  return _type;
-}
-
-int TabBar::currentIndex() const
-{
-  QMap<int, int>::const_iterator it;
-  int id = QTabBar::currentIndex();
-  for (it = m_idMap.constBegin(); it != m_idMap.constEnd(); ++it) {
-    if (*it == id) {
-      return it.key();
+  public:
+    TransactionFormPrivate() :
+      m_transaction(nullptr),
+      m_tabBar(nullptr)
+    {
     }
-  }
-  return -1;
-}
 
-void TabBar::setCurrentIndex(int id)
-{
-  if (m_signalType != SignalNormal)
-    blockSignals(true);
-
-  if (m_idMap.contains(id)) {
-    QTabBar::setCurrentIndex(m_idMap[id]);
-  }
-
-  if (m_signalType != SignalNormal)
-    blockSignals(false);
-
-  if (m_signalType == SignalAlways)
-    emit currentChanged(m_idMap[id]);
-}
-
-void TabBar::setTabEnabled(int id, bool enable)
-{
-  if (m_idMap.contains(id)) {
-    QTabBar::setTabEnabled(m_idMap[id], enable);
-  }
-}
-
-void TabBar::insertTab(int id, const QString& title)
-{
-  int newId = QTabBar::insertTab(id, title);
-  m_idMap[id] = newId;
-}
-
-void TabBar::slotTabCurrentChanged(int id)
-{
-  QMap<int, int>::const_iterator it;
-  for (it = m_idMap.constBegin(); it != m_idMap.constEnd(); ++it) {
-    if (*it == id) {
-      emit tabCurrentChanged(it.key());
-      break;
-    }
-  }
-  if (it == m_idMap.constEnd())
-    emit tabCurrentChanged(id);
-}
-
-void TabBar::showEvent(QShowEvent* event)
-{
-  // make sure we don't emit a signal when simply showing the widget
-  if (m_signalType != SignalNormal)
-    blockSignals(true);
-
-  QTabBar::showEvent(event);
-
-  if (m_signalType != SignalNormal)
-    blockSignals(false);
-}
-
-void TabBar::copyTabs(const TabBar* otabbar)
-{
-  // remove all existing tabs
-  while (count()) {
-    removeTab(0);
-  }
-
-  // now create new ones. copy text, icon and identifier
-  m_idMap = otabbar->m_idMap;
-
-  for (int i = 0; i < otabbar->count(); ++i) {
-    QTabBar::insertTab(i, otabbar->tabText(i));
-    if (i == otabbar->QTabBar::currentIndex()) {
-      QTabBar::setCurrentIndex(i);
-    }
-  }
-}
-
-int TabBar::indexAtPos(const QPoint& p) const
-{
-  if (tabRect(QTabBar::currentIndex()).contains(p))
-    return QTabBar::currentIndex();
-  for (int i = 0; i < count(); ++i)
-    if (isTabEnabled(i) && tabRect(i).contains(p))
-      return i;
-  return -1;
-}
-
-void TabBar::mousePressEvent(QMouseEvent *e)
-{
-  QTabBar::mousePressEvent(e);
-
-  // in case we receive a mouse press event on the current
-  // selected tab emit a signal no matter what as the base
-  // class does not do that
-  if (indexAtPos(e->pos()) == QTabBar::currentIndex()) {
-    slotTabCurrentChanged(QTabBar::currentIndex());
-  }
-}
-
-TransactionFormItemDelegate::TransactionFormItemDelegate(TransactionForm *parent) : QStyledItemDelegate(parent), m_transactionForm(parent)
-{
-}
-
-TransactionFormItemDelegate::~TransactionFormItemDelegate()
-{
-}
-
-void TransactionFormItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-{
-  m_transactionForm->paintCell(painter, option, index);
+    KMyMoneyRegister::Transaction   *m_transaction;
+    KMyMoneyTransactionForm::TabBar *m_tabBar;
+    TransactionFormItemDelegate     *m_itemDelegate;
+  };
 }
 
 TransactionForm::TransactionForm(QWidget *parent) :
     TransactionEditorContainer(parent),
-    m_transaction(0),
-    m_tabBar(0)
+    d_ptr(new TransactionFormPrivate)
 {
-  m_itemDelegate = new TransactionFormItemDelegate(this);
+  Q_D(TransactionForm);
+  d->m_itemDelegate = new TransactionFormItemDelegate(this);
   setFrameShape(QTableWidget::NoFrame);
   setShowGrid(false);
   setSelectionMode(QTableWidget::NoSelection);
@@ -206,6 +100,12 @@ TransactionForm::TransactionForm(QWidget *parent) :
   slotSetTransaction(0);
 }
 
+TransactionForm::~TransactionForm()
+{
+  Q_D(TransactionForm);
+  delete d;
+}
+
 bool TransactionForm::focusNextPrevChild(bool next)
 {
   return QFrame::focusNextPrevChild(next);
@@ -218,27 +118,55 @@ void TransactionForm::clear()
 
 void TransactionForm::enableTabBar(bool b)
 {
-  m_tabBar->setEnabled(b);
+  Q_D(TransactionForm);
+  d->m_tabBar->setEnabled(b);
 }
+
+void TransactionForm::contentsMousePressEvent(QMouseEvent* ev)
+{
+  ev->ignore();
+}
+
+void TransactionForm::contentsMouseMoveEvent(QMouseEvent* ev)
+{
+  ev->ignore();
+}
+
+void TransactionForm::contentsMouseReleaseEvent(QMouseEvent* ev)
+{
+  ev->ignore();
+}
+
+void TransactionForm::contentsMouseDoubleClickEvent(QMouseEvent* ev)
+{
+  ev->ignore();
+}
+
+void TransactionForm::keyPressEvent(QKeyEvent* ev)
+{
+  ev->ignore();
+}
+
 
 void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transaction)
 {
-  m_transaction = transaction;
+  Q_D(TransactionForm);
+  d->m_transaction = transaction;
 
   setUpdatesEnabled(false);
 
-  if (m_transaction) {
+  if (d->m_transaction) {
     // the next call sets up a back pointer to the form and also sets up the col and row span
     // as well as the tab of the form
-    m_transaction->setupForm(this);
+    d->m_transaction->setupForm(this);
 
   } else {
     setRowCount(5);
     setColumnCount(1);
   }
 
-  kMyMoneyDateInput dateInput;
-  KMyMoneyCategory category(nullptr, true);
+  KMyMoneyDateInput dateInput;
+  KMyMoneyCategory category(true, nullptr);
 
   // extract the maximal sizeHint height
   int height = qMax(dateInput.sizeHint().height(), category.sizeHint().height());
@@ -258,89 +186,96 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
 
   setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
 
-  for (int i = 0; i < rowCount(); ++i) {
-    setItemDelegateForRow(i, m_itemDelegate);
+  for (auto i = 0; i < rowCount(); ++i) {
+    setItemDelegateForRow(i, d->m_itemDelegate);
   }
 
   // force resizeing of the columns
-  QMetaObject::invokeMethod(this, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, ValueColumn1));
+  QMetaObject::invokeMethod(this, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, (int)eTransactionForm::Column::Value1));
 }
 
 void TransactionForm::paintCell(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index)
 {
-  if (m_transaction) {
-    m_transaction->paintFormCell(painter, option, index);
+  Q_D(TransactionForm);
+  if (d->m_transaction) {
+    d->m_transaction->paintFormCell(painter, option, index);
   }
 }
 
-TabBar* TransactionForm::tabBar(QWidget* parent)
+void TransactionForm::setCurrentCell(int, int)
 {
-  if (!m_tabBar && parent) {
+}
+
+KMyMoneyTransactionForm::TabBar* TransactionForm::getTabBar(QWidget* parent)
+{
+  Q_D(TransactionForm);
+  if (!d->m_tabBar && parent) {
     // determine the height of the objects in the table
     // create the tab bar
-    m_tabBar = new TabBar(parent);
-    m_tabBar->setSignalEmission(TabBar::SignalAlways);
+    d->m_tabBar = new TabBar(parent);
+    d->m_tabBar->setSignalEmission(eTabBar::SignalEmission::Always);
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    sizePolicy.setHeightForWidth(m_tabBar->sizePolicy().hasHeightForWidth());
-    m_tabBar->setSizePolicy(sizePolicy);
-    connect(m_tabBar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotActionSelected(int)));
+    sizePolicy.setHeightForWidth(d->m_tabBar->sizePolicy().hasHeightForWidth());
+    d->m_tabBar->setSizePolicy(sizePolicy);
+    connect(d->m_tabBar, &TabBar::tabCurrentChanged, this, &TransactionForm::slotActionSelected);
   }
-  return m_tabBar;
+  return d->m_tabBar;
 }
 
 void TransactionForm::slotActionSelected(int id)
 {
-  emit newTransaction(static_cast<KMyMoneyRegister::Action>(id));
+  emit newTransaction(static_cast<eRegister::Action>(id));
 }
 
 void TransactionForm::setupForm(const MyMoneyAccount& acc)
 {
-  bool blocked = m_tabBar->blockSignals(true);
+  Q_D(TransactionForm);
+  bool blocked = d->m_tabBar->blockSignals(true);
 
   // remove all tabs from the tabbar
-  while (m_tabBar->count())
-    m_tabBar->removeTab(0);
+  while (d->m_tabBar->count())
+    d->m_tabBar->removeTab(0);
 
-  m_tabBar->show();
+  d->m_tabBar->show();
 
   // important: one needs to add the new tabs first and then
   // change the identifier. Otherwise, addTab() will assign
   // a different value
   switch (acc.accountType()) {
     default:
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Deposit"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Withdrawal"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Deposit"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Withdrawal"));
       break;
 
     case eMyMoney::Account::CreditCard:
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Payment"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Charge"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Payment"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Charge"));
       break;
 
     case eMyMoney::Account::Liability:
     case eMyMoney::Account::Loan:
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Decrease"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Increase"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Decrease"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Increase"));
       break;
 
     case eMyMoney::Account::Asset:
     case eMyMoney::Account::AssetLoan:
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Increase"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Decrease"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Increase"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
+      d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Decrease"));
       break;
 
     case eMyMoney::Account::Income:
     case eMyMoney::Account::Expense:
     case eMyMoney::Account::Investment:
     case eMyMoney::Account::Stock:
-      m_tabBar->hide();
+      d->m_tabBar->hide();
       break;
   }
-  m_tabBar->blockSignals(blocked);
+  d->m_tabBar->blockSignals(blocked);
 }
 
 void TransactionForm::resize(int col)
@@ -352,16 +287,16 @@ void TransactionForm::resize(int col)
   int nc = columnCount();
 
   // check which space we need
-  if (nc >= LabelColumn1 && columnWidth(LabelColumn1))
-    adjustColumn(LabelColumn1);
-  if (nc >= ValueColumn1 && columnWidth(ValueColumn1))
-    adjustColumn(ValueColumn1);
-  if (nc >= LabelColumn2 && columnWidth(LabelColumn2))
-    adjustColumn(LabelColumn2);
-  if (nc >= ValueColumn2 && columnWidth(ValueColumn2))
-    adjustColumn(ValueColumn2);
+  if (nc >= (int)eTransactionForm::Column::Label1 && columnWidth((int)eTransactionForm::Column::Label1))
+    adjustColumn(eTransactionForm::Column::Label1);
+  if (nc >= (int)eTransactionForm::Column::Value1 && columnWidth((int)eTransactionForm::Column::Value1))
+    adjustColumn(eTransactionForm::Column::Value1);
+  if (nc >= (int)eTransactionForm::Column::Label2 && columnWidth((int)eTransactionForm::Column::Label2))
+    adjustColumn(eTransactionForm::Column::Label2);
+  if (nc >= (int)eTransactionForm::Column::Value2 && columnWidth((int)eTransactionForm::Column::Value2))
+    adjustColumn(eTransactionForm::Column::Value2);
 
-  for (int i = 0; i < nc; ++i) {
+  for (auto i = 0; i < nc; ++i) {
     if (i == col)
       continue;
 
@@ -373,19 +308,24 @@ void TransactionForm::resize(int col)
   setUpdatesEnabled(true);
 }
 
-void TransactionForm::adjustColumn(Column col)
+void TransactionForm::paintFocus(QPainter* /*p*/, const QRect& /*cr*/)
 {
+}
+
+void TransactionForm::adjustColumn(eTransactionForm::Column col)
+{
+  Q_D(TransactionForm);
   int w = 0;
 
   // preset the width of the right value column with the width of
   // the possible edit widgets so that they fit if they pop up
-  if (col == ValueColumn2) {
-    kMyMoneyDateInput dateInput;
-    kMyMoneyEdit valInput;
+  if (col == eTransactionForm::Column::Value2) {
+    KMyMoneyDateInput dateInput;
+    KMyMoneyEdit valInput;
     w = qMax(dateInput.sizeHint().width(), valInput.sizeHint().width());
   }
 
-  if (m_transaction) {
+  if (d->m_transaction) {
     QString txt;
     QFontMetrics fontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
@@ -393,8 +333,8 @@ void TransactionForm::adjustColumn(Column col)
     for (int i = rowCount() - 1; i >= 0; --i) {
       Qt::Alignment align;
       int spacing = 10;
-      m_transaction->formCellText(txt, align, i, static_cast<int>(col), 0);
-      QWidget* cw = cellWidget(i, col);
+      d->m_transaction->formCellText(txt, align, i, static_cast<int>(col), 0);
+      QWidget* cw = cellWidget(i, (int)col);
       if (cw) {
         w = qMax(w, cw->sizeHint().width() + spacing);
         // if the cell widget contains a push button increase the spacing used
@@ -407,14 +347,14 @@ void TransactionForm::adjustColumn(Column col)
     }
   }
 
-  if (col < columnCount())
-    setColumnWidth(col, w);
+  if ((int)col < columnCount())
+    setColumnWidth((int)col, w);
 }
 
 void TransactionForm::arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t)
 {
   t->arrangeWidgetsInForm(editWidgets);
-  resize(ValueColumn1);
+  resize((int)eTransactionForm::Column::Value1);
 }
 
 void TransactionForm::tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::Transaction* t) const
@@ -441,7 +381,7 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
       }
     }
   }
-  resize(ValueColumn1);
+  resize((int)eTransactionForm::Column::Value1);
 
   // delete all remaining edit widgets   (e.g. tabbar)
   for (it = editWidgets.begin(); it != editWidgets.end();) {

@@ -61,7 +61,7 @@
       </widget>
      </item>
      <item>
-      <widget class="kMyMoneyDateInput" name="m_fromDate" native="true"/>
+      <widget class="KMyMoneyDateInput" name="m_fromDate" native="true"/>
      </item>
      <item>
       <widget class="QLabel" name="label">
@@ -71,7 +71,7 @@
       </widget>
      </item>
      <item>
-      <widget class="kMyMoneyDateInput" name="m_toDate" native="true"/>
+      <widget class="KMyMoneyDateInput" name="m_toDate" native="true"/>
      </item>
     </layout>
    </item>
@@ -153,7 +153,7 @@
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>

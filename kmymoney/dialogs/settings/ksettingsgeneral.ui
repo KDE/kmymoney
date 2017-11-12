@@ -494,7 +494,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
              </widget>
             </item>
             <item>
-             <widget class="kMyMoneyDateInput" name="m_startDateEdit"/>
+             <widget class="KMyMoneyDateInput" name="m_startDateEdit"/>
             </item>
             <item>
              <widget class="QDateEdit" name="kcfg_StartDate"/>
@@ -681,7 +681,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QFrame</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>

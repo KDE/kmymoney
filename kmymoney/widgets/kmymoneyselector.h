@@ -4,6 +4,7 @@
     begin                : Thu Jun 29 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,8 +33,6 @@
 
 #include "kmm_widgets_export.h"
 
-class QHBoxLayout;
-
 /**
   * This class implements a general selector for id based objects. It is based
   * on a tree view. Using this widget, one can select one or multiple
@@ -49,18 +48,16 @@ class QHBoxLayout;
   *   out of the set of displayed items. Selection is performed
   *   by marking the item in the view.
   */
+class KMyMoneySelectorPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneySelector : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneySelector)
+
   Q_PROPERTY(QStringList selectedItems READ selectedItems DESIGNABLE false STORED false)
 public:
-  explicit KMyMoneySelector(QWidget *parent = 0, Qt::WindowFlags flags = 0);
+  explicit KMyMoneySelector(QWidget* parent = nullptr, Qt::WindowFlags flags = 0);
   virtual ~KMyMoneySelector();
-
-  enum KMyMoneySelectorItemRoles {
-    IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
-    KeyRole = Qt::UserRole + 1, /**< The key is stored in this role in column 0 as a string.*/
-  };
 
   /**
     * This method sets the mode of operation of this widget.
@@ -82,9 +79,7 @@ public:
     *
     * @sa setSelectionMode()
     */
-  QTreeWidget::SelectionMode selectionMode() const {
-    return m_selMode;
-  }
+  QTreeWidget::SelectionMode selectionMode() const;
 
   /**
     * This method returns the list of selected item ids. If
@@ -145,9 +140,7 @@ public:
   /**
     * Return a pointer to the QTreeWidget object
     */
-  QTreeWidget* listView() const {
-    return m_treeWidget;
-  };
+  QTreeWidget* listView() const;
 
   /**
     * This method selects/deselects all items that
@@ -193,13 +186,17 @@ public:
     *
     * @return pointer to newly created object
     */
-  QTreeWidgetItem* newItem(const QString& name, const QString& key = QString(), const QString& id = QString());
+  QTreeWidgetItem* newItem(const QString& name, const QString& key, const QString& id);
+  QTreeWidgetItem* newItem(const QString& name, const QString& key);
+  QTreeWidgetItem* newItem(const QString& name);
 
   /**
     * Same as above, but create the item following the item pointed to by @c after.
     * If @c after is 0, then behave as previous method
     */
-  QTreeWidgetItem* newItem(const QString& name, QTreeWidgetItem* after, const QString& key = QString(), const QString& id = QString());
+  QTreeWidgetItem* newItem(const QString& name, QTreeWidgetItem* after, const QString& key, const QString& id);
+  QTreeWidgetItem* newItem(const QString& name, QTreeWidgetItem* after, const QString& key);
+  QTreeWidgetItem* newItem(const QString& name, QTreeWidgetItem* after);
 
   /**
     * This method creates a new selectable object depending on the
@@ -277,17 +274,13 @@ public slots:
     * This slot selects all items that are currently in
     * the item list of the widget.
     */
-  void slotSelectAllItems() {
-    selectAllItems(true);
-  };
+  void slotSelectAllItems();
 
   /**
     * This slot deselects all items that are currently in
     * the item list of the widget.
     */
-  void slotDeselectAllItems() {
-    selectAllItems(false);
-  };
+  void slotDeselectAllItems();
 
 signals:
   void stateChanged();
@@ -361,11 +354,11 @@ protected slots:
   void slotItemPressed(QTreeWidgetItem* item, int col);
 
 protected:
-  QTreeWidget*               m_treeWidget;
-  QStringList                m_itemList;
-  QString                    m_baseName;
-  QTreeWidget::SelectionMode m_selMode;
-  QHBoxLayout*               m_layout;
+  KMyMoneySelectorPrivate * const d_ptr;
+  KMyMoneySelector(KMyMoneySelectorPrivate &dd, QWidget* parent = nullptr, Qt::WindowFlags flags = 0);
+
+private:
+  Q_DECLARE_PRIVATE(KMyMoneySelector)
 };
 
 #endif

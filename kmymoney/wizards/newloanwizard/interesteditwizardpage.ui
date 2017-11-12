@@ -75,7 +75,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
               <number>6</number>
             </property>
             <item row="0" column="1">
-              <widget class="kMyMoneyEdit" name="m_newInterestRateEdit"/>
+              <widget class="KMyMoneyEdit" name="m_newInterestRateEdit"/>
             </item>
             <item row="1" column="1">
               <widget class="QLabel" name="m_interestRateLabel">

@@ -39,11 +39,13 @@
 #include "ui_ktagsview.h"
 
 #include "kmymoneyviewbase_p.h"
+#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneytag.h"
 #include "mymoneytransactionfilter.h"
 #include "icons.h"
 #include "viewenums.h"
+#include "widgetenums.h"
 
 using namespace Icons;
 namespace Ui { class KTagsView; }
@@ -93,15 +95,15 @@ public:
       ui->m_updateButton->setEnabled(false);
 
       ui->m_register->setupRegister(MyMoneyAccount(),
-                                    QList<KMyMoneyRegister::Column> { KMyMoneyRegister::DateColumn,
-                                                                      KMyMoneyRegister::AccountColumn,
-                                                                      KMyMoneyRegister::DetailColumn,
-                                                                      KMyMoneyRegister::ReconcileFlagColumn,
-                                                                      KMyMoneyRegister::PaymentColumn,
-                                                                      KMyMoneyRegister::DepositColumn
+                                    QList<eWidgets::eTransaction::Column> { eWidgets::eTransaction::Column::Date,
+                                                                           eWidgets::eTransaction::Column::Account,
+                                                                           eWidgets::eTransaction::Column::Detail,
+                                                                           eWidgets::eTransaction::Column::ReconcileFlag,
+                                                                           eWidgets::eTransaction::Column::Payment,
+                                                                           eWidgets::eTransaction::Column::Deposit
                                     });
       ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
-      ui->m_register->setDetailsColumnType(KMyMoneyRegister::AccountFirst);
+      ui->m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
       ui->m_balanceLabel->hide();
 
       q->connect(ui->m_tagsList, &QListWidget::currentItemChanged, q, static_cast<void (KTagsView::*)(QListWidgetItem *, QListWidgetItem *)>(&KTagsView::slotSelectTag));

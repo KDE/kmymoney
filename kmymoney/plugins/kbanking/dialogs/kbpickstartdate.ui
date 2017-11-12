@@ -103,7 +103,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="kMyMoneyDateInput" name="pickDateEdit" native="true"/>
+       <widget class="KMyMoneyDateInput" name="pickDateEdit" native="true"/>
       </item>
      </layout>
     </widget>
@@ -120,7 +120,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
+   <class>KMyMoneyDateInput</class>
    <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>

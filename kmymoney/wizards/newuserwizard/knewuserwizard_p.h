@@ -27,6 +27,7 @@
 // Project Includes
 
 #include <kmymoneywizard.h>
+#include "kmymoneywizardpage.h"
 
 #include "ui_kintropagedecl.h"
 #include "ui_kaccountpagedecl.h"

@@ -38,6 +38,7 @@
 #include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
 #include "onlinejobtyped.h"
 #include "mymoneyaccount.h"
+#include "widgetenums.h"
 
 class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
 {
@@ -195,7 +196,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     IonlineJobEdit(parent, args),
     ui(new Ui::sepaCreditTransferEdit),
     m_onlineJob(onlineJobTyped<sepaOnlineTransfer>()),
-    m_requiredFields(new kMandatoryFieldGroup(this)),
+    m_requiredFields(new KMandatoryFieldGroup(this)),
     m_readOnly(false),
     m_showAllErrors(false)
 {
@@ -398,7 +399,7 @@ void sepaCreditTransferEdit::updateSettings()
 void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
 {
   // Check IBAN
-  QPair<KMyMoneyValidationFeedback::MessageType, QString> answer = ibanValidator::validateWithMessage(iban);
+  QPair<eWidgets::ValidationFeedback::MessageType, QString> answer = ibanValidator::validateWithMessage(iban);
   if (m_showAllErrors || iban.length() > 5 || (!ui->beneficiaryIban->hasFocus() && !iban.isEmpty()))
     ui->feedbackIban->setFeedback(answer.first, answer.second);
   else
@@ -436,12 +437,12 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
     }
 
     if (settings->isBicMandatory(iban , ui->beneficiaryIban->text())) {
-      ui->feedbackBic->setFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficiary's country the BIC is mandatory."));
+      ui->feedbackBic->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18n("For this beneficiary's country the BIC is mandatory."));
       return;
     }
   }
 
-  QPair<KMyMoneyValidationFeedback::MessageType, QString> answer = bicValidator::validateWithMessage(bic);
+  QPair<eWidgets::ValidationFeedback::MessageType, QString> answer = bicValidator::validateWithMessage(bic);
   if (m_showAllErrors || bic.length() >= 8 || (!ui->beneficiaryBankCode->hasFocus() && !bic.isEmpty()))
     ui->feedbackBic->setFeedback(answer.first, answer.second);
   else
@@ -452,7 +453,7 @@ void sepaCreditTransferEdit::beneficiaryNameChanged(const QString& name)
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
   if (name.length() < settings->recipientNameMinLength() && (m_showAllErrors || (!ui->beneficiaryName->hasFocus() && !name.isEmpty()))) {
-    ui->feedbackName->setFeedback(KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
+    ui->feedbackName->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
                                   settings->recipientNameMinLength()
                                                                           ));
   } else {
@@ -463,7 +464,7 @@ void sepaCreditTransferEdit::beneficiaryNameChanged(const QString& name)
 void sepaCreditTransferEdit::valueChanged()
 {
   if ((!ui->value->isValid() && (m_showAllErrors || (!ui->value->hasFocus() && ui->value->value().toDouble() != 0))) || (!ui->value->value().isPositive() && ui->value->value().toDouble() != 0)) {
-    ui->feedbackAmount->setFeedback(KMyMoneyValidationFeedback::Error, i18n("A positive amount to transfer is needed."));
+    ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18n("A positive amount to transfer is needed."));
     return;
   }
 
@@ -474,9 +475,9 @@ void sepaCreditTransferEdit::valueChanged()
   const MyMoneyMoney expectedBalance = account.balance() - ui->value->value();
 
   if (expectedBalance < MyMoneyMoney(account.value("maxCreditAbsolute"))) {
-    ui->feedbackAmount->setFeedback(KMyMoneyValidationFeedback::Warning, i18n("After this credit transfer the account's balance will be below your credit limit."));
+    ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Warning, i18n("After this credit transfer the account's balance will be below your credit limit."));
   } else if (expectedBalance < MyMoneyMoney(account.value("minBalanceAbsolute"))) {
-    ui->feedbackAmount->setFeedback(KMyMoneyValidationFeedback::Information, i18n("After this credit transfer the account's balance will be below the minimal balance."));
+    ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Information, i18n("After this credit transfer the account's balance will be below the minimal balance."));
   } else {
     ui->feedbackAmount->removeFeedback();
   }
@@ -486,7 +487,7 @@ void sepaCreditTransferEdit::endToEndReferenceChanged(const QString& reference)
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
   if (settings->checkEndToEndReferenceLength(reference) == validators::tooLong) {
-    ui->feedbackReference->setFeedback(KMyMoneyValidationFeedback::Error, i18np("The end-to-end reference cannot contain more than one character.",
+    ui->feedbackReference->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18np("The end-to-end reference cannot contain more than one character.",
                                        "The end-to-end reference cannot contain more than %1 characters.",
                                        settings->endToEndReferenceLength()
                                                                                ));
@@ -520,7 +521,7 @@ void sepaCreditTransferEdit::purposeChanged()
   message.chop(1);
 
   if (!message.isEmpty()) {
-    ui->feedbackPurpose->setFeedback(KMyMoneyValidationFeedback::Error, message);
+    ui->feedbackPurpose->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, message);
   } else {
     ui->feedbackPurpose->removeFeedback();
   }

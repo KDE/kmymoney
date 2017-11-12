@@ -25,6 +25,8 @@
 
 #include "kmymoneyvalidationfeedback.h"
 
+namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
+
 class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanValidator : public QValidator
 {
   Q_OBJECT
@@ -35,7 +37,7 @@ public:
   State validate(const QString&) const;
   virtual void fixup(QString&) const;
 
-  static QPair<KMyMoneyValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
+  static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };
 
 #endif // IBANVALIDATOR_H

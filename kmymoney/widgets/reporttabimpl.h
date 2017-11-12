@@ -1,5 +1,6 @@
 /*  This file is part of the KDE project
     Copyright (C) 2009 Laurent Montel <montel@kde.org>
+    (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -38,26 +39,35 @@ class ReportTabPerformance;
 
 class ReportTabGeneral : public QWidget
 {
+  Q_DISABLE_COPY(ReportTabGeneral)
+
 public:
-  ReportTabGeneral(QWidget *parent);
-  virtual ~ReportTabGeneral();
+  explicit ReportTabGeneral(QWidget *parent);
+  ~ReportTabGeneral();
+
   Ui::ReportTabGeneral* ui;
 };
 
 class ReportTabRowColPivot : public QWidget
 {
+  Q_DISABLE_COPY(ReportTabRowColPivot)
+
 public:
-  ReportTabRowColPivot(QWidget *parent);
-  virtual ~ReportTabRowColPivot();
+  explicit ReportTabRowColPivot(QWidget *parent);
+  ~ReportTabRowColPivot();
+
   Ui::ReportTabRowColPivot* ui;
 };
 
 class ReportTabRowColQuery : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(ReportTabRowColQuery)
+
 public:
-  ReportTabRowColQuery(QWidget *parent);
-  virtual ~ReportTabRowColQuery();
+  explicit ReportTabRowColQuery(QWidget *parent);
+  ~ReportTabRowColQuery();
+
   Ui::ReportTabRowColQuery* ui;
 private slots:
   void slotHideTransactionsChanged(bool checked);
@@ -66,10 +76,14 @@ private slots:
 class ReportTabChart : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(ReportTabChart)
+
 public:
-  ReportTabChart(QWidget *parent);
-  virtual ~ReportTabChart();
+  explicit ReportTabChart(QWidget *parent);
+  ~ReportTabChart();
+
   Ui::ReportTabChart* ui;
+
 private slots:
   void slotChartTypeChanged(int index);
 };
@@ -77,9 +91,12 @@ private slots:
 class ReportTabRange : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(ReportTabRange)
+
 public:
-  ReportTabRange(QWidget *parent);
-  virtual ~ReportTabRange();
+  explicit ReportTabRange(QWidget *parent);
+  ~ReportTabRange();
+
   Ui::ReportTabRange* ui;
   DateRangeDlg *m_dateRange;
   void setRangeLogarythmic(bool set);
@@ -98,10 +115,14 @@ private slots:
 class ReportTabCapitalGain : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(ReportTabCapitalGain)
+
 public:
-  ReportTabCapitalGain(QWidget *parent);
-  virtual ~ReportTabCapitalGain();
+  explicit ReportTabCapitalGain(QWidget *parent);
+  ~ReportTabCapitalGain();
+
   Ui::ReportTabCapitalGain* ui;
+
 private slots:
   void slotInvestmentSumChanged(int index);
 };
@@ -109,45 +130,18 @@ private slots:
 class ReportTabPerformance : public QWidget
 {
 public:
-  ReportTabPerformance(QWidget *parent);
-  virtual ~ReportTabPerformance();
+  explicit ReportTabPerformance(QWidget *parent);
+  ~ReportTabPerformance();
+
   Ui::ReportTabPerformance* ui;
 };
 
 class MyDoubleValidator : public QDoubleValidator
 {
 public:
-  MyDoubleValidator(int decimals, QObject * parent = 0) :
-    QDoubleValidator(0, 0, decimals, parent)
-  {
-  }
+  explicit MyDoubleValidator(int decimals, QObject * parent = 0);
 
-  QValidator::State validate(QString &s, int &i) const
-  {
-    Q_UNUSED(i);
-    if (s.isEmpty() || s == "-") {
-      return QValidator::Intermediate;
-    }
-
-    QChar decimalPoint = locale().decimalPoint();
-
-    if(s.indexOf(decimalPoint) != -1) {
-      int charsAfterPoint = s.length() - s.indexOf(decimalPoint) - 1;
-
-      if (charsAfterPoint > decimals()) {
-        return QValidator::Invalid;
-      }
-    }
-
-    bool ok;
-    locale().toDouble(s, &ok);
-
-    if (ok) {
-      return QValidator::Acceptable;
-    } else {
-      return QValidator::Invalid;
-    }
-  }
+  QValidator::State validate(QString &s, int &i) const;
 };
 #endif /* REPORTTABIMPL_H */
 

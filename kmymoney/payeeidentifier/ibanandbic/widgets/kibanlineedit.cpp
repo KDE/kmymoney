@@ -19,7 +19,7 @@
 #include "kibanlineedit.h"
 
 #include "ibanvalidator.h"
-
+#include "kmymoneyvalidationfeedback.h"
 
 KIbanLineEdit::KIbanLineEdit(QWidget* parent)
     : KLineEdit(parent)
