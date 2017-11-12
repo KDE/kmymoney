@@ -119,7 +119,9 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
   QString sourcename = _sourcename;
   if (sourcename.isEmpty())
     return false;
-  if (sourcename == QLatin1String("Yahoo Currency"))
+
+  // for historical exchange rates we switch to Stooq
+  if (sourcename == QLatin1String("KMyMoney Currency"))
     sourcename = QLatin1String("Stooq Currency");
 
   if (quoteSources().contains(sourcename))
