@@ -555,61 +555,19 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
 {
   QMap<QString, WebPriceQuoteSource> result;
 
-  result["Yahoo"] = WebPriceQuoteSource("Yahoo",
-                                        "http://finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1",
-                                        "http://ichart.finance.yahoo.com/table.csv?s=%1&a=%m&b=%d&c=%y&d=%m&e=%d&f=%y&g=d&ignore=.csv",
-                                        "\"([^,\"]*)\",.*",  // webIDRegExp
-                                        WebPriceQuoteSource::identifyBy::Symbol,
-                                        "[^,]*,([^,]*),.*", // priceregexp
-                                        "[^,]*,[^,]*,\"([^\"]*)\"", // dateregexp
-                                        "%m %d %y" // dateformat
+  // Use fx-rate.net as the standard currency exchange rate source until
+  // we have the capability to use more than one source. Use a neutral
+  // name for the source.
+  result["KMyMoney Currency"] = WebPriceQuoteSource("KMyMoney Currency",
+                                          "https://fx-rate.net/%1/%2",
+                                          QString(),
+                                          "https://fx-rate.net/([^/]+/[^/]+)",
+                                          WebPriceQuoteSource::identifyBy::Symbol,
+                                          "1\\s[^=]+\\s=</span><br\\s/>\\s([^\\s]+)",
+                                          "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
+                                          "%d/%m/%y",
+                                          true // skip HTML stripping
                                        );
-
-  result["Yahoo Currency"] = WebPriceQuoteSource("Yahoo Currency",
-                                                 "http://finance.yahoo.com/d/quotes.csv?s=%1%2=X&f=sl1d1",
-                                                 "",
-                                                 "\"([^,\"]*)\",.*",  // webIDRegExp
-                                                 WebPriceQuoteSource::identifyBy::Symbol,
-                                                 "[^,]*,([^,]*),.*", // priceregexp
-                                                 "[^,]*,[^,]*,\"([^\"]*)\"", // dateregexp
-                                                 "%m %d %y" // dateformat
-                                                 );
-
-  // 2009-08-20 Yahoo UK has no quotes and has comma separators
-  // sl1d1 format for Yahoo UK doesn't seem to give a date ever
-  // sl1d3 gives US locale time (9:99pm) and date (mm/dd/yyyy)
-  result["Yahoo UK"] = WebPriceQuoteSource("Yahoo UK",
-                                           "http://uk.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
-                                           "",
-                                           "^([^,]*),.*",  // webIDRegExp
-                                           WebPriceQuoteSource::identifyBy::Symbol,
-                                           "^[^,]*,([^,]*),.*", // priceregexp
-                                           "^[^,]*,[^,]*, [^ ]* (../../....).*", // dateregexp
-                                           "%m/%d/%y" // dateformat
-                                           );
-
-  // sl1d1 format for Yahoo France doesn't seem to give a date ever
-  // sl1d3 gives us time (99h99) and date
-  result["Yahoo France"] = WebPriceQuoteSource("Yahoo France",
-                                               "http://fr.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
-                                               "",
-                                               "([^;]*).*",             // webIDRegExp
-                                               WebPriceQuoteSource::identifyBy::Symbol,
-                                               "[^;]*.([^;]*),*",       // priceregexp
-                                               "[^;]*.[^;]*...h...([^;]*)", // dateregexp
-                                               "%d/%m/%y"               // dateformat
-                                               );
-
-  // This quote source provided by Danny Scott
-  result["Yahoo Canada"] = WebPriceQuoteSource("Yahoo Canada",
-                                               "http://ca.finance.yahoo.com/q?s=%1",
-                                               "",
-                                               "%1", // webIDRegExp
-                                               WebPriceQuoteSource::identifyBy::Symbol,
-                                               "Last Trade: (\\d+\\.\\d+)", // price regexp
-                                               "day, (.\\D+\\d+\\D+\\d+)", // date regexp
-                                               "%m %d %y" // date format
-                                               );
 
   // Update on 2017-06 by Łukasz Wojniłowicz
   result["Globe & Mail"] = WebPriceQuoteSource("Globe & Mail",
