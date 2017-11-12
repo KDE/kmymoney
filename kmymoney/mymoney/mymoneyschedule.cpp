@@ -49,6 +49,17 @@ static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
 class MyMoneySchedulePrivate {
 
 public:
+  MyMoneySchedulePrivate()
+  : m_occurrence(Schedule::Occurrence::Any)
+  , m_occurrenceMultiplier(1)
+  , m_type(Schedule::Type::Any)
+  , m_paymentType(Schedule::PaymentType::Any)
+  , m_fixed(false)
+  , m_lastDayInMonth(false)
+  , m_autoEnter(false)
+  , m_weekendOption(Schedule::WeekendOption::MoveNothing)
+  {}
+
   /// Its occurrence
   eMyMoney::Schedule::Occurrence m_occurrence;
 
@@ -96,18 +107,6 @@ MyMoneySchedule::MyMoneySchedule() :
     MyMoneyObject(),
     d_ptr(new MyMoneySchedulePrivate)
 {
-  Q_D(MyMoneySchedule);
-  // Set up the default values
-  d->m_occurrence = Schedule::Occurrence::Any;
-  d->m_occurrenceMultiplier = 1;
-  d->m_type = Schedule::Type::Any;
-  d->m_paymentType = Schedule::PaymentType::Any;
-  d->m_fixed = false;
-  d->m_autoEnter = false;
-  d->m_startDate = QDate();
-  d->m_endDate = QDate();
-  d->m_lastPayment = QDate();
-  d->m_weekendOption = Schedule::WeekendOption::MoveNothing;
 }
 
 MyMoneySchedule::MyMoneySchedule(const QString& name,
@@ -123,7 +122,7 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
     d_ptr(new MyMoneySchedulePrivate)
 {
   Q_D(MyMoneySchedule);
-  // Set up the default values
+  // Set up the values possibly differeing from defaults
   d->m_name = name;
   d->m_occurrence = occurrence;
   d->m_occurrenceMultiplier = occurrenceMultiplier;
@@ -131,12 +130,8 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
   d->m_type = type;
   d->m_paymentType = paymentType;
   d->m_fixed = fixed;
-  d->m_lastDayInMonth = false;
   d->m_autoEnter = autoEnter;
-  d->m_startDate = QDate();
   d->m_endDate = endDate;
-  d->m_lastPayment = QDate();
-  d->m_weekendOption = Schedule::WeekendOption::MoveNothing;
 }
 
 MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
