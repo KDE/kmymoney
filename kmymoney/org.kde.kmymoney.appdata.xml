@@ -22,6 +22,7 @@
   <name xml:lang="pl">KMyMoney</name>
   <name xml:lang="pt">KMyMoney</name>
   <name xml:lang="pt-BR">KMyMoney</name>
+  <name xml:lang="ru">KMyMoney</name>
   <name xml:lang="sk">KMyMoney</name>
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="tr">KMyMoney</name>
@@ -46,6 +47,7 @@
   <summary xml:lang="pl">Zarządzanie finansami osobistymi</summary>
   <summary xml:lang="pt">Gestor de Finanças Pessoais</summary>
   <summary xml:lang="pt-BR">Gerenciador de Finanças Pessoais</summary>
+  <summary xml:lang="ru">Учёт финансов</summary>
   <summary xml:lang="sk">Osobný manažér financií</summary>
   <summary xml:lang="sv">Hemekonomihanterare</summary>
   <summary xml:lang="tr">Kişisel Finans Yönetici</summary>
