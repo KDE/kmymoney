@@ -224,7 +224,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
         }
         item->setText(ID_COL, id);
-        item->setText(SOURCE_COL, "Yahoo Currency");  // This string value should not be localized
+        item->setText(SOURCE_COL, "KMyMoney Currency");  // This string value should not be localized
         lvEquityList->invisibleRootItem()->addChild(item);
       }
     }
