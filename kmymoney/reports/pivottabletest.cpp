@@ -478,7 +478,7 @@ void PivotTableTest::testMultipleCurrencies()
   // test Fluctuating currency price, stable account balance
   QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][acJpyChecking][eActual][5] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice2));
   QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][acJpyChecking][eActual][6] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice3));
-  QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][acJpyChecking][eActual][7] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice4));
+  QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][acJpyChecking][eActual][7] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice3));
 
   // test multiple currencies totalled up
   QVERIFY(networth_f.m_grid["Asset"].m_total[eActual][4] == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction)*moCanPrice) + ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice));

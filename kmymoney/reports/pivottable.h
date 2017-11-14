@@ -285,10 +285,12 @@ protected:
   void calculateTotals();
 
   /**
-    * Convert each value in the grid to the base currency
-    *
-    */
-  void convertToBaseCurrency();
+   * Convert one value in the grid to the base currency
+   * @param value value to convert
+   * @param account The account associated with the value
+   * @param date the date on which the transaction is converted
+   */
+  void convertToBaseCurrency(MyMoneyMoney &value, const ReportAccount &account, const QDate &date);
 
   /**
     * Convert each value in the grid to the account/category's deep currency
