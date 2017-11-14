@@ -693,6 +693,20 @@ bool Transaction::matches(const RegisterFilter& filter) const
     if (acc.name().contains(filter.text, Qt::CaseInsensitive))
       return true;
 
+    // search for account hierachy
+    if (filter.text.contains(':')) {
+      QStringList names;
+      MyMoneyAccount current = acc;
+      QString accountId;
+      do {
+        names.prepend(current.name());
+        accountId = current.parentAccountId();
+        current = file->account(accountId);
+      } while (!MyMoneyFile::instance()->isStandardAccount(accountId));
+      if (names.size() > 1 && names.join(":").contains(filter.text, Qt::CaseInsensitive))
+        return true;
+    }
+
     QString s(filter.text);
     s.replace(MyMoneyMoney::thousandSeparator(), QChar());
     if (!s.isEmpty()) {
