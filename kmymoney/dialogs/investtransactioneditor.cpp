@@ -902,6 +902,8 @@ void InvestTransactionEditor::slotTransactionContainerGeometriesUpdated()
   // previously hidden are being shown (see QAbstractItemView::updateEditorGeometries) so we
   // need to update the activity with the current activity in order to show only the widgets
   // which are needed by the current activity
+  if (d->m_editWidgets.isEmpty())
+    return;
   slotUpdateActivity(d->m_activity->type());
 }
 
