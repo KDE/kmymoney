@@ -35,7 +35,6 @@ email                : mte@users.sourceforge.net
 #include <QXmlAttributes>
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
-#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

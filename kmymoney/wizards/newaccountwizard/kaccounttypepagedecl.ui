@@ -298,7 +298,7 @@ Use the liability account type to manage any type of liability except amortizati
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoneygeneralcombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

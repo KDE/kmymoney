@@ -47,7 +47,6 @@
 // Project Includes
 
 #include "kmymoneyedit.h"
-#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
@@ -55,9 +54,6 @@
 #include "register.h"
 #include "transaction.h"
 #include "daterangedlg.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
 
 #include "ui_kfindtransactiondlg.h"
 

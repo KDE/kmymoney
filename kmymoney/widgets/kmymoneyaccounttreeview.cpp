@@ -44,91 +44,9 @@
 #include "accountsviewproxymodel.h"
 #include "budgetviewproxymodel.h"
 #include "modelenums.h"
-#include "mymoneyenums.h"
-#include "viewenums.h"
 
-class KMyMoneyAccountTreeViewPrivate
-{
-  Q_DISABLE_COPY(KMyMoneyAccountTreeViewPrivate)
-  Q_DECLARE_PUBLIC(KMyMoneyAccountTreeView)
-
-public:
-  KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq) :
-    q_ptr(qq),
-    m_view(View::None)
-  {
-  }
-
-  ~KMyMoneyAccountTreeViewPrivate()
-  {
-  }
-
-  QVector<eMyMoney::Account> getVisibleGroups(const View view)
-  {
-    switch (view) {
-      case View::Institutions:
-      case View::Accounts:
-        return QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Equity};
-      case View::Categories:
-      case View::Budget:
-        return QVector<eMyMoney::Account> {eMyMoney::Account::Income, eMyMoney::Account::Expense};
-      default:
-        return QVector<eMyMoney::Account> ();
-    }
-  }
-
-  QSet<eAccountsModel::Column> readVisibleColumns(const View view)
-  {
-    QSet<eAccountsModel::Column> columns;
-
-    const auto grp = KSharedConfig::openConfig()->group(getConfGrpName(view));
-    const auto cfgColumns = grp.readEntry("ColumnsSelection", QList<int>());
-    columns.insert(eAccountsModel::Column::Account);
-    foreach (const auto column, cfgColumns)
-      columns.insert(static_cast<eAccountsModel::Column>(column));
-    return columns;
-  }
-
-  void openIndex(const QModelIndex &index)
-  {
-    Q_Q(KMyMoneyAccountTreeView);
-    if (index.isValid()) {
-      QVariant data = q->model()->data(index, (int)eAccountsModel::Role::Account);
-      if (data.isValid()) {
-        if (data.canConvert<MyMoneyAccount>()) {
-          emit q->openObject(data.value<MyMoneyAccount>());
-        }
-        if (data.canConvert<MyMoneyInstitution>()) {
-          emit q->openObject(data.value<MyMoneyInstitution>());
-        }
-      }
-    }
-  }
-
-  static QString getConfGrpName(const View view)
-  {
-    switch (view) {
-      case View::Institutions:
-        return QStringLiteral("KInstitutionsView");
-      case View::Accounts:
-        return QStringLiteral("KAccountsView");
-      case View::Categories:
-        return QStringLiteral("KCategoriesView");
-      case View::Budget:
-        return QStringLiteral("KBudgetsView");
-      default:
-        return QString();
-    }
-  }
-
-  KMyMoneyAccountTreeView *q_ptr;
-  AccountsViewProxyModel  *m_model;
-  View                     m_view;
-};
-
-KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent) :
-  QTreeView(parent),
-  d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
+KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
+    : QTreeView(parent), m_view(View::None)
 {
   setContextMenuPolicy(Qt::CustomContextMenu);            // allow context menu to be opened on tree items
   header()->setContextMenuPolicy(Qt::CustomContextMenu);  // allow context menu to be opened on tree header for columns selection
@@ -141,30 +59,27 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent) :
 
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
-  Q_D(KMyMoneyAccountTreeView);
-  if (d->m_view != View::None) {
-    auto grp = KSharedConfig::openConfig()->group(d->getConfGrpName(d->m_view));
+  if (m_view != View::None) {
+    auto grp = KSharedConfig::openConfig()->group(getConfGrpName(m_view));
     const auto columns = header()->saveState();
     grp.writeEntry("HeaderState", columns);
     QList<int> visColumns;
-    foreach (const auto column, d->m_model->getVisibleColumns())
+    foreach (const auto column, m_model->getVisibleColumns())
       visColumns.append(static_cast<int>(column));
     grp.writeEntry("ColumnsSelection", visColumns);
     grp.sync();
   }
-  delete d;
 }
 
 AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 {
-  Q_D(KMyMoneyAccountTreeView);
-  d->m_view = view;
+  m_view = view;
   if (view != View::Budget)
-    d->m_model = new AccountsViewProxyModel(this);
+    m_model = new AccountsViewProxyModel(this);
   else
-    d->m_model = new BudgetViewProxyModel(this);
+    m_model = new BudgetViewProxyModel(this);
 
-  d->m_model->addAccountGroup(d->getVisibleGroups(view));
+  m_model->addAccountGroup(getVisibleGroups(view));
 
   const auto accountsModel = Models::instance()->accountsModel();
   const auto institutionsModel = Models::instance()->institutionsModel();
@@ -175,42 +90,71 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
   else
     sourceModel = institutionsModel;
 
-  foreach (const auto column, d->readVisibleColumns(view)) {
-    d->m_model->setColumnVisibility(column, true);
-    accountsModel->setColumnVisibility(column, true);
-    institutionsModel->setColumnVisibility(column, true);
+  foreach (const auto column, readVisibleColumns(view)) {
+   m_model->setColumnVisibility(column, true);
+   accountsModel->setColumnVisibility(column, true);
+   institutionsModel->setColumnVisibility(column, true);
   }
 
-  d->m_model->setSourceModel(sourceModel);
-  d->m_model->setSourceColumns(sourceModel->getColumns());
-  setModel(d->m_model);
+  m_model->setSourceModel(sourceModel);
+  m_model->setSourceColumns(sourceModel->getColumns());
+  setModel(m_model);
 
-  connect(this->header(), &QWidget::customContextMenuRequested, d->m_model, &AccountsViewProxyModel::slotColumnsMenu);
-  connect(d->m_model, &AccountsViewProxyModel::columnToggled, this, &KMyMoneyAccountTreeView::columnToggled);
+  connect(this->header(), &QWidget::customContextMenuRequested, m_model, &AccountsViewProxyModel::slotColumnsMenu);
+  connect(m_model, &AccountsViewProxyModel::columnToggled, this, &KMyMoneyAccountTreeView::columnToggled);
 
   // restore the headers
-  const auto grp = KSharedConfig::openConfig()->group(d->getConfGrpName(view));
+  const auto grp = KSharedConfig::openConfig()->group(getConfGrpName(view));
   const auto columnNames = grp.readEntry("HeaderState", QByteArray());
   header()->restoreState(columnNames);
 
-  return d->m_model;
+  return m_model;
 }
 
 void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-  Q_D(KMyMoneyAccountTreeView);
-  d->openIndex(currentIndex());
+  openIndex(currentIndex());
   event->accept();
 }
 
 void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
 {
-  Q_D(KMyMoneyAccountTreeView);
   if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
-    d->openIndex(currentIndex());
+    openIndex(currentIndex());
     event->accept();
   } else {
     QTreeView::keyPressEvent(event);
+  }
+}
+
+void KMyMoneyAccountTreeView::openIndex(const QModelIndex &index)
+{
+  if (index.isValid()) {
+    QVariant data = model()->data(index, (int)eAccountsModel::Role::Account);
+    if (data.isValid()) {
+      if (data.canConvert<MyMoneyAccount>()) {
+        emit openObject(data.value<MyMoneyAccount>());
+      }
+      if (data.canConvert<MyMoneyInstitution>()) {
+        emit openObject(data.value<MyMoneyInstitution>());
+      }
+    }
+  }
+}
+
+QString KMyMoneyAccountTreeView::getConfGrpName(const View view)
+{
+  switch (view) {
+    case View::Institutions:
+      return QStringLiteral("KInstitutionsView");
+    case View::Accounts:
+      return QStringLiteral("KAccountsView");
+    case View::Categories:
+      return QStringLiteral("KCategoriesView");
+    case View::Budget:
+      return QStringLiteral("KBudgetsView");
+    default:
+      return QString();
   }
 }
 
@@ -254,4 +198,30 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
   // since no object was selected reset the object selection
   emit selectObject(MyMoneyAccount());
   emit selectObject(MyMoneyInstitution());
+}
+
+QVector<eMyMoney::Account> KMyMoneyAccountTreeView::getVisibleGroups(const View view)
+{
+  switch (view) {
+    case View::Institutions:
+    case View::Accounts:
+      return QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Equity};
+    case View::Categories:
+    case View::Budget:
+      return QVector<eMyMoney::Account> {eMyMoney::Account::Income, eMyMoney::Account::Expense};
+    default:
+      return QVector<eMyMoney::Account> ();
+  }
+}
+
+QSet<eAccountsModel::Column> KMyMoneyAccountTreeView::readVisibleColumns(const View view)
+{
+  QSet<eAccountsModel::Column> columns;
+
+  const auto grp = KSharedConfig::openConfig()->group(getConfGrpName(view));
+  const auto cfgColumns = grp.readEntry("ColumnsSelection", QList<int>());
+  columns.insert(eAccountsModel::Column::Account);
+  foreach (const auto column, cfgColumns)
+    columns.insert(static_cast<eAccountsModel::Column>(column));
+  return columns;
 }

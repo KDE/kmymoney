@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "stdtransactionmatched.h"
-#include "stdtransaction_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -42,24 +41,15 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionMatched::StdTransactionMatched(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  StdTransaction(parent, transaction, split, uniqueId)
+    StdTransaction(parent, transaction, split, uniqueId)
 {
   // setup initial size
   setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
 }
 
-StdTransactionMatched::~StdTransactionMatched()
-{
-}
-
-const char* StdTransactionMatched::className()
-{
-  return "StdTransactionMatched";
-}
-
 bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
-  auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
 
   // if not selected paint in matched background color
   if (!isSelected()) {
@@ -72,17 +62,16 @@ bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOpti
 
 void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter)
 {
-  Q_D(StdTransaction);
   // run through the standard
   StdTransaction::registerCellText(txt, align, row, col, painter);
 
   // we only cover the additional rows
-  if (row >= RegisterItem::numRowsRegister() - m_additionalRows) {
+  if (row >= m_rowsRegister - m_additionalRows) {
     // make row relative to the last three rows
-    row += m_additionalRows - RegisterItem::numRowsRegister();
+    row += m_additionalRows - m_rowsRegister;
 
     // remove anything that had been added by the standard method
-    txt = QString();
+    txt = "";
 
     // and we draw this information in italics
     if (painter) {
@@ -91,10 +80,10 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
       painter->setFont(font);
     }
 
-    MyMoneyTransaction matchedTransaction = d->m_split.matchedTransaction();
+    MyMoneyTransaction matchedTransaction = m_split.matchedTransaction();
     MyMoneySplit matchedSplit;
     try {
-      matchedSplit = matchedTransaction.splitById(d->m_split.value("kmm-match-split"));
+      matchedSplit = matchedTransaction.splitById(m_split.value("kmm-match-split"));
     } catch (const MyMoneyException &) {
     }
 
@@ -102,7 +91,7 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
     const QList<MyMoneySplit>& list = matchedTransaction.splits();
     MyMoneyMoney importedValue;
     for (it_s = list.begin(); it_s != list.end(); ++it_s) {
-      if ((*it_s).accountId() == d->m_account.id()) {
+      if ((*it_s).accountId() == m_account.id()) {
         importedValue += (*it_s).shares();
       }
     }
@@ -134,14 +123,14 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
           case PaymentColumn:
             align |= Qt::AlignRight;
             if (importedValue.isNegative()) {
-              txt = (-importedValue).formatMoney(d->m_account.fraction());
+              txt = (-importedValue).formatMoney(m_account.fraction());
             }
             break;
 
           case DepositColumn:
             align |= Qt::AlignRight;
             if (!importedValue.isNegative()) {
-              txt = importedValue.formatMoney(d->m_account.fraction());
+              txt = importedValue.formatMoney(m_account.fraction());
             }
             break;
         }
@@ -156,11 +145,11 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
 
           case DetailColumn:
             align |= Qt::AlignLeft;
-            postDate = d->m_transaction.postDate();
-            if (!d->m_split.value("kmm-orig-postdate").isEmpty()) {
-              postDate = QDate::fromString(d->m_split.value("kmm-orig-postdate"), Qt::ISODate);
+            postDate = m_transaction.postDate();
+            if (!m_split.value("kmm-orig-postdate").isEmpty()) {
+              postDate = QDate::fromString(m_split.value("kmm-orig-postdate"), Qt::ISODate);
             }
-            memo = d->m_split.memo();
+            memo = m_split.memo();
             if (!matchedSplit.memo().isEmpty() && memo != matchedSplit.memo()) {
               int pos = memo.lastIndexOf(matchedSplit.memo());
               if (pos != -1) {
@@ -175,15 +164,15 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
 
           case PaymentColumn:
             align |= Qt::AlignRight;
-            if (d->m_split.value().isNegative()) {
-              txt = (-d->m_split.value(d->m_transaction.commodity(), d->m_splitCurrencyId)).formatMoney(d->m_account.fraction());
+            if (m_split.value().isNegative()) {
+              txt = (-m_split.value(m_transaction.commodity(), m_splitCurrencyId)).formatMoney(m_account.fraction());
             }
             break;
 
           case DepositColumn:
             align |= Qt::AlignRight;
-            if (!d->m_split.value().isNegative()) {
-              txt = d->m_split.value(d->m_transaction.commodity(), d->m_splitCurrencyId).formatMoney(d->m_account.fraction());
+            if (!m_split.value().isNegative()) {
+              txt = m_split.value(m_transaction.commodity(), m_splitCurrencyId).formatMoney(m_account.fraction());
             }
             break;
 
@@ -191,14 +180,4 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
         break;
     }
   }
-}
-
-int StdTransactionMatched::numRowsRegister(bool expanded) const
-{
-  return StdTransaction::numRowsRegister(expanded) + m_additionalRows;
-}
-
-int StdTransactionMatched::numRowsRegister() const
-{
-  return StdTransaction::numRowsRegister();
 }

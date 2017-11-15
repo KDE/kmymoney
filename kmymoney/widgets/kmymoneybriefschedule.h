@@ -55,7 +55,7 @@ class KMyMoneyBriefSchedule : public kScheduleBriefWidget
 {
   Q_OBJECT
 public:
-  KMyMoneyBriefSchedule(QWidget* parent = nullptr);
+  KMyMoneyBriefSchedule(QWidget *parent = 0);
   ~KMyMoneyBriefSchedule();
   void setSchedules(QList<MyMoneySchedule> list, const QDate& date);
 

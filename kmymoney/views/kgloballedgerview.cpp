@@ -50,7 +50,7 @@
 #include "kmymoneyaccountcombo.h"
 #include "register.h"
 #include "transactioneditor.h"
-#include "selectedtransactions.h"
+#include "selectedtransaction.h"
 #include "kmymoneyglobalsettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
@@ -67,7 +67,6 @@
 #include "mymoneyutils.h"
 #include "transaction.h"
 #include "transactionform.h"
-#include "widgetenums.h"
 
 class KGlobalLedgerView::Private
 {
@@ -518,7 +517,7 @@ void KGlobalLedgerView::loadView()
 
     // create dummy entries for the scheduled transactions if sorted by postdate
     int period = KMyMoneyGlobalSettings::schedulePreview();
-    if (m_register->primarySortKey() == eWidgets::SortField::PostDate) {
+    if (m_register->primarySortKey() == KMyMoneyRegister::PostDateSort) {
       // show scheduled transactions which have a scheduled postdate
       // within the next 'period' days. In reconciliation mode, the
       // period starts on the statement date.
@@ -591,11 +590,11 @@ void KGlobalLedgerView::loadView()
 
     if (isReconciliationAccount()) {
       switch (m_register->primarySortKey()) {
-        case eWidgets::SortField::PostDate:
+        case KMyMoneyRegister::PostDateSort:
           statement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Details"));
           m_register->sortItems();
           break;
-        case eWidgets::SortField::Type:
+        case KMyMoneyRegister::TypeSort:
           dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
           pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Payment, reconciliationDate, i18n("Statement Payment Details"));
           m_register->sortItems();
@@ -1026,21 +1025,6 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
       slotLoadView();
     }
   }
-}
-
-void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate)
-{
-  slotSetReconcileAccount(acc, reconciliationDate, MyMoneyMoney());
-}
-
-void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc)
-{
-  slotSetReconcileAccount(acc, QDate(), MyMoneyMoney());
-}
-
-void KGlobalLedgerView::slotSetReconcileAccount()
-{
-  slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 
 bool KGlobalLedgerView::isReconciliationAccount() const

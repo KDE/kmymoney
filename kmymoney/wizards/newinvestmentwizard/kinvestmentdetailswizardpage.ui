@@ -275,7 +275,7 @@ number</string>
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneygeneralcombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

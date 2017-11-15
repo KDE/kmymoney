@@ -39,15 +39,13 @@ class KToolBar;
 #include "kmymoneyviewbase.h"
 #include "mymoneyaccount.h"
 #include "registeritem.h"
-#include "selectedtransactions.h"
+#include "selectedtransaction.h"
 
 class MyMoneyReport;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class TransactionEditor;
 class QLabel;
-class QFrame;
-
 namespace KMyMoneyRegister { class Register; }
 namespace KMyMoneyRegister { class Transaction; }
 namespace KMyMoneyTransactionForm { class TransactionForm; }
@@ -228,10 +226,7 @@ public slots:
    * @param endingBalance The calculated ending balance for the statement
    *                Default ist 0.
    */
-  void slotSetReconcileAccount(const MyMoneyAccount& account, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
-  void slotSetReconcileAccount(const MyMoneyAccount& account, const QDate& reconciliationDate);
-  void slotSetReconcileAccount(const MyMoneyAccount& account);
-  void slotSetReconcileAccount();
+  void slotSetReconcileAccount(const MyMoneyAccount& account = MyMoneyAccount(), const QDate& reconciliationDate = QDate(), const MyMoneyMoney& endingBalance = MyMoneyMoney());
 
   /**
     * Select all transactions in the ledger that are not hidden.

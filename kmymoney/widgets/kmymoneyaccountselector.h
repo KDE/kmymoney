@@ -22,19 +22,21 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+class QPushButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyselector.h"
+#include <kmymoneyselector.h>
+#include "mymoneyenums.h"
 
+class MyMoneyFile;
 class MyMoneyAccount;
-
-template <typename T> class QList;
-
-namespace eMyMoney { enum class Account; }
 
 /**
   * This class implements an account/category selector. It is based
@@ -52,17 +54,14 @@ namespace eMyMoney { enum class Account; }
   *   out of the set of displayed accounts. Selection is performed
   *   by marking the account in the view.
   */
-class kMyMoneyAccountSelectorPrivate;
 class kMyMoneyAccountSelector : public KMyMoneySelector
 {
   Q_OBJECT
-  Q_DISABLE_COPY(kMyMoneyAccountSelector)
-
 public:
   friend class AccountSet;
 
-  explicit kMyMoneyAccountSelector(QWidget* parent = nullptr, Qt::WindowFlags flags = 0, const bool createButtons = true);
-  ~kMyMoneyAccountSelector() override;
+  explicit kMyMoneyAccountSelector(QWidget *parent = 0, Qt::WindowFlags flags = 0, const bool createButtons = true);
+  virtual ~kMyMoneyAccountSelector();
 
   /**
     * This method returns a list of account ids of those accounts
@@ -75,8 +74,7 @@ public:
     *             will be returned.
     * @return QStringList of account ids
     */
-  QStringList accountList(const QList<eMyMoney::Account>& list) const;
-  QStringList accountList() const;
+  QStringList accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const;
 
   void setSelectionMode(QTreeWidget::SelectionMode mode);
 
@@ -111,13 +109,17 @@ public slots:
     * This slot selects all items that are currently in
     * the account list of the widget.
     */
-  void slotSelectAllAccounts();
+  void slotSelectAllAccounts() {
+    selectAllItems(true);
+  };
 
   /**
     * This slot deselects all items that are currently in
     * the account list of the widget.
     */
-  void slotDeselectAllAccounts();
+  void slotDeselectAllAccounts() {
+    selectAllItems(false);
+  };
 
 protected:
   /**
@@ -140,27 +142,31 @@ protected slots:
   /**
     * This slot selects all income categories
     */
-  void slotSelectIncomeCategories();
+  void slotSelectIncomeCategories() {
+    selectCategories(true, false);
+  };
 
   /**
     * This slot selects all expense categories
     */
-  void slotSelectExpenseCategories();
+  void slotSelectExpenseCategories() {
+    selectCategories(false, true);
+  };
 
-private:
-  Q_DECLARE_PRIVATE(kMyMoneyAccountSelector)
+protected:
+  QPushButton*              m_allAccountsButton;
+  QPushButton*              m_noAccountButton;
+  QPushButton*              m_incomeCategoriesButton;
+  QPushButton*              m_expenseCategoriesButton;
+  QList<int>                m_typeList;
+  QStringList               m_accountList;
 };
 
-class AccountSetPrivate;
+
 class AccountSet
 {
-  Q_DISABLE_COPY(AccountSet)
-
 public:
   AccountSet();
-  AccountSet(AccountSet && other);
-  friend void swap(AccountSet& first, AccountSet& second);
-  ~AccountSet();
 
   void addAccountType(eMyMoney::Account type);
   void addAccountGroup(eMyMoney::Account type);
@@ -171,18 +177,26 @@ public:
   int load(kMyMoneyAccountSelector* selector);
   int load(kMyMoneyAccountSelector* selector, const QString& baseName, const QList<QString>& accountIdList, const bool clear = false);
 
-  int count() const;
+  int count() const {
+    return m_count;
+  }
 
-  void setHideClosedAccounts(bool _bool);
-  bool isHidingClosedAccounts() const;
+  void setHideClosedAccounts(bool _bool) {
+    m_hideClosedAccounts = _bool;
+  }
+  bool isHidingClosedAccounts() const {
+    return m_hideClosedAccounts;
+  }
 
 protected:
   int loadSubAccounts(kMyMoneyAccountSelector* selector, QTreeWidgetItem* parent, const QString& key, const QStringList& list);
   bool includeAccount(const MyMoneyAccount& acc);
 
 private:
-  AccountSetPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(AccountSet)
+  int                                      m_count;
+  MyMoneyFile*                             m_file;
+  QList<eMyMoney::Account>      m_typeList;
+  QTreeWidgetItem*                         m_favorites;
+  bool                                     m_hideClosedAccounts;
 };
-
 #endif

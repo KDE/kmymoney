@@ -96,8 +96,8 @@ class KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget* parent = nullptr);
-  explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
+  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget *parent = 0);
+  explicit KMyMoneyAccountCombo(QWidget *parent = 0);
   ~KMyMoneyAccountCombo();
 
   void setSelected(const QString& id);
@@ -110,7 +110,7 @@ public:
    */
   void setEditable(bool isEditable);
 
-  virtual bool eventFilter(QObject* o, QEvent* e) override;
+  virtual bool eventFilter(QObject* o, QEvent* e);
 
 public slots:
   void expandAll();

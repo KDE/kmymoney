@@ -56,8 +56,6 @@
 #include "mymoneyschedule.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
 
 using namespace Icons;
 

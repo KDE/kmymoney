@@ -33,7 +33,7 @@ class KMM_WIDGETS_EXPORT KMyMoneyValidationFeedback : public QWidget
   Q_OBJECT
 
 public:
-  explicit KMyMoneyValidationFeedback(QWidget* parent = nullptr);
+  KMyMoneyValidationFeedback(QWidget *parent = 0);
   ~KMyMoneyValidationFeedback();
 
   enum MessageType {

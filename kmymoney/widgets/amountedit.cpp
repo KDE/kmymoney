@@ -348,14 +348,10 @@ int AmountEdit::precision() const
   return d->m_prec;
 }
 
+
 bool AmountEdit::isValid() const
 {
   return !(text().isEmpty());
-}
-
-QString AmountEdit::numericalText() const
-{
-  return value().toString();
 }
 
 MyMoneyMoney AmountEdit::value() const
@@ -369,7 +365,7 @@ MyMoneyMoney AmountEdit::value() const
 void AmountEdit::setValue(const MyMoneyMoney& value)
 {
   // load the value into the widget but don't use thousandsSeparators
-  setText(value.formatMoney(QString(), d->m_prec, false));
+  setText(value.formatMoney("", d->m_prec, false));
 }
 
 void AmountEdit::setText(const QString& txt)
@@ -400,7 +396,7 @@ void AmountEdit::theTextChanged(const QString & theText)
   nsign = locale.negativeSign();
   psign = locale.positiveSign();
 
-  auto i = 0;
+  int i = 0;
   if (isEnabled()) {
     QValidator::State state =  validator()->validate(l_text, i);
     if (state == QValidator::Intermediate) {
@@ -431,7 +427,7 @@ void AmountEdit::ensureFractionalPart()
 
 void AmountEdit::ensureFractionalPart(QString& s) const
 {
-  s = MyMoneyMoney(s).formatMoney(QString(), d->m_prec, false);
+  s = MyMoneyMoney(s).formatMoney("", d->m_prec, false);
 }
 
 

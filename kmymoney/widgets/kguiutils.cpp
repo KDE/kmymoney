@@ -35,14 +35,13 @@
 #include <KLineEdit>
 #include <KUrlRequester>
 #include "kmymoneyedit.h"
-
+#include "kmymoneymvccombo.h"
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyglobalsettings.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "kmymoneytextedit.h"
-#include "kmymoneypayeecombo.h"
 
 /**************************************************************************
  *                                                                        *

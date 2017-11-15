@@ -108,7 +108,7 @@
   <customwidget>
    <class>KMyMoneyTagCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneytagcombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

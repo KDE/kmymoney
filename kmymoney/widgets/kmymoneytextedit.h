@@ -58,7 +58,7 @@ class KMM_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
   Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly);
 
 public:
-  KMyMoneyTextEdit(QWidget* parent = nullptr);
+  KMyMoneyTextEdit(QWidget* parent = 0);
 
   int maxLength() const;
   int maxLineLength() const;

@@ -40,9 +40,6 @@
 // Project Includes
 
 #include "ui_kenterscheduledlg.h"
-
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
 #include "mymoneyfile.h"
 #include "mymoneyschedule.h"
 #include "register.h"

@@ -36,128 +36,82 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KStandardGuiItem>
+#include "kmymoneyglobalsettings.h"
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kbudgetvalues.h"
-
-#include "mymoneybudget.h"
 #include "kmymoneyedit.h"
-#include "kmymoneyglobalsettings.h"
-
-class KBudgetValuesPrivate
-{
-  Q_DISABLE_COPY(KBudgetValuesPrivate)
-
-public:
-  KBudgetValuesPrivate() :
-    ui(new Ui::KBudgetValues)
-  {
-  }
-
-  ~KBudgetValuesPrivate()
-  {
-    delete ui;
-  }
-
-  void enableMonths(bool enabled)
-  {
-    for (int i = 1; i < 12; ++i) {
-      m_label[i]->setEnabled(enabled);
-      m_field[i]->setEnabled(enabled);
-    }
-  }
-
-  void fillMonthLabels()
-  {
-    QDate date(m_budgetDate);
-    for (auto i = 0; i < 12; ++i) {
-      m_label[i]->setText(QLocale().standaloneMonthName(date.month(), QLocale::ShortFormat));
-      date = date.addMonths(1);
-    }
-  }
-
-  Ui::KBudgetValues *ui;
-  kMyMoneyEdit*   m_field[12];
-  QLabel*         m_label[12];
-  QWidget*        m_currentTab;
-  QDate           m_budgetDate;
-};
 
 KBudgetValues::KBudgetValues(QWidget* parent) :
-  QWidget(parent),
-  d_ptr(new KBudgetValuesPrivate)
+    KBudgetValuesDecl(parent),
+    m_currentTab(m_monthlyButton)
 {
-  Q_D(KBudgetValues);
-  d->ui->setupUi(this);
-  d->m_currentTab = d->ui->m_monthlyButton;
-  d->m_budgetDate = QDate(2007, KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  m_budgetDate = QDate(2007, KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
-  d->m_field[0] = d->ui->m_amount1;
-  d->m_field[1] = d->ui->m_amount2;
-  d->m_field[2] = d->ui->m_amount3;
-  d->m_field[3] = d->ui->m_amount4;
-  d->m_field[4] = d->ui->m_amount5;
-  d->m_field[5] = d->ui->m_amount6;
-  d->m_field[6] = d->ui->m_amount7;
-  d->m_field[7] = d->ui->m_amount8;
-  d->m_field[8] = d->ui->m_amount9;
-  d->m_field[9] = d->ui->m_amount10;
-  d->m_field[10] = d->ui->m_amount11;
-  d->m_field[11] = d->ui->m_amount12;
+  m_field[0] = m_amount1;
+  m_field[1] = m_amount2;
+  m_field[2] = m_amount3;
+  m_field[3] = m_amount4;
+  m_field[4] = m_amount5;
+  m_field[5] = m_amount6;
+  m_field[6] = m_amount7;
+  m_field[7] = m_amount8;
+  m_field[8] = m_amount9;
+  m_field[9] = m_amount10;
+  m_field[10] = m_amount11;
+  m_field[11] = m_amount12;
 
-  d->m_label[0] = d->ui->m_label1;
-  d->m_label[1] = d->ui->m_label2;
-  d->m_label[2] = d->ui->m_label3;
-  d->m_label[3] = d->ui->m_label4;
-  d->m_label[4] = d->ui->m_label5;
-  d->m_label[5] = d->ui->m_label6;
-  d->m_label[6] = d->ui->m_label7;
-  d->m_label[7] = d->ui->m_label8;
-  d->m_label[8] = d->ui->m_label9;
-  d->m_label[9] = d->ui->m_label10;
-  d->m_label[10] = d->ui->m_label11;
-  d->m_label[11] = d->ui->m_label12;
+  m_label[0] = m_label1;
+  m_label[1] = m_label2;
+  m_label[2] = m_label3;
+  m_label[3] = m_label4;
+  m_label[4] = m_label5;
+  m_label[5] = m_label6;
+  m_label[6] = m_label7;
+  m_label[7] = m_label8;
+  m_label[8] = m_label9;
+  m_label[9] = m_label10;
+  m_label[10] = m_label11;
+  m_label[11] = m_label12;
 
   // fill with standard labels
-  d->ui->m_monthlyButton->setChecked(true);
-  d->ui->m_periodGroup->setId(d->ui->m_monthlyButton, 0);
-  d->ui->m_periodGroup->setId(d->ui->m_yearlyButton, 1);
-  d->ui->m_periodGroup->setId(d->ui->m_individualButton, 2);
-  slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_monthlyButton));
+  m_monthlyButton->setChecked(true);
+  m_periodGroup->setId(m_monthlyButton, 0);
+  m_periodGroup->setId(m_yearlyButton, 1);
+  m_periodGroup->setId(m_individualButton, 2);
+  slotChangePeriod(m_periodGroup->id(m_monthlyButton));
 
   // connect(m_budgetLevel, SIGNAL(currentChanged(QWidget*)), this, SIGNAL(valuesChanged()));
-  connect(d->ui->m_amountMonthly, SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
-  connect(d->ui->m_amountYearly, SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
-  d->ui->m_amountMonthly->installEventFilter(this);
-  d->ui->m_amountYearly->installEventFilter(this);
+  connect(m_amountMonthly, SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
+  connect(m_amountYearly, SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
+  m_amountMonthly->installEventFilter(this);
+  m_amountYearly->installEventFilter(this);
 
-  for (auto i = 0; i < 12; ++i) {
-    connect(d->m_field[i], SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
-    d->m_field[i]->installEventFilter(this);
+  for (int i = 0; i < 12; ++i) {
+    connect(m_field[i], SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
+    m_field[i]->installEventFilter(this);
   }
 
-  connect(d->ui->m_clearButton, SIGNAL(clicked()), this, SLOT(slotClearAllValues()));
-  connect(d->ui->m_periodGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotChangePeriod(int)));
+  connect(m_clearButton, SIGNAL(clicked()), this, SLOT(slotClearAllValues()));
+  connect(m_periodGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotChangePeriod(int)));
   connect(this, SIGNAL(valuesChanged()), this, SLOT(slotUpdateClearButton()));
 
   KGuiItem clearItem(KStandardGuiItem::clear());
 
-  KGuiItem::assign(d->ui->m_clearButton, clearItem);
-  d->ui->m_clearButton->setText(QString());
-  d->ui->m_clearButton->setToolTip(clearItem.toolTip());
+  KGuiItem::assign(m_clearButton, clearItem);
+  m_clearButton->setText("");
+  m_clearButton->setToolTip(clearItem.toolTip());
 }
+
 
 KBudgetValues::~KBudgetValues()
 {
-  Q_D(KBudgetValues);
-  delete d;
 }
 
 bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
 {
-  auto rc = false;
+  bool rc = false;
 
   if (o->isWidgetType()
       && (e->type() == QEvent::KeyPress)) {
@@ -185,33 +139,30 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
 
 void KBudgetValues::clear()
 {
-  Q_D(KBudgetValues);
   blockSignals(true);
-  for (auto i = 0; i < 12; ++i)
-    d->m_field[i]->setValue(MyMoneyMoney());
-  d->ui->m_amountMonthly->setValue(MyMoneyMoney());
-  d->ui->m_amountYearly->setValue(MyMoneyMoney());
+  for (int i = 0; i < 12; ++i)
+    m_field[i]->setValue(MyMoneyMoney());
+  m_amountMonthly->setValue(MyMoneyMoney());
+  m_amountYearly->setValue(MyMoneyMoney());
   blockSignals(false);
 }
 
 void KBudgetValues::slotClearAllValues()
 {
-  Q_D(KBudgetValues);
-  int tab = d->ui->m_periodGroup->checkedId();
-  if (tab == d->ui->m_periodGroup->id(d->ui->m_monthlyButton)) {
-    d->ui->m_amountMonthly->setValue(MyMoneyMoney());
-  } else if (tab == d->ui->m_periodGroup->id(d->ui->m_yearlyButton)) {
-    d->ui->m_amountYearly->setValue(MyMoneyMoney());
-  } else if (tab == d->ui->m_periodGroup->id(d->ui->m_individualButton)) {
-    for (auto i = 0; i < 12; ++i)
-      d->m_field[i]->setValue(MyMoneyMoney());
+  int tab = m_periodGroup->checkedId();
+  if (tab == m_periodGroup->id(m_monthlyButton)) {
+    m_amountMonthly->setValue(MyMoneyMoney());
+  } else if (tab == m_periodGroup->id(m_yearlyButton)) {
+    m_amountYearly->setValue(MyMoneyMoney());
+  } else if (tab == m_periodGroup->id(m_individualButton)) {
+    for (int i = 0; i < 12; ++i)
+      m_field[i]->setValue(MyMoneyMoney());
   }
   emit valuesChanged();
 }
 
 void KBudgetValues::slotChangePeriod(int id)
 {
-  Q_D(KBudgetValues);
   // Prevent a recursive entry of this method due to widget changes
   // performed during execution of this method
   static bool inside = false;
@@ -219,72 +170,72 @@ void KBudgetValues::slotChangePeriod(int id)
     return;
   inside = true;
 
-  QWidget *tab = d->ui->m_periodGroup->button(id);
-  d->fillMonthLabels();
+  QWidget *tab = m_periodGroup->button(id);
+  fillMonthLabels();
 
   MyMoneyMoney newValue;
-  if (tab == d->ui->m_monthlyButton) {
-    d->ui->m_firstItemStack->setCurrentIndex(d->ui->m_firstItemStack->indexOf(d->ui->m_monthlyPage));
-    d->enableMonths(false);
-    d->m_label[0]->setText(" ");
-    if (d->ui->m_amountMonthly->value().isZero()) {
-      if (d->m_currentTab == d->ui->m_yearlyButton) {
-        newValue = (d->ui->m_amountYearly->value() / MyMoneyMoney(12, 1)).convert();
+  if (tab == m_monthlyButton) {
+    m_firstItemStack->setCurrentIndex(m_firstItemStack->indexOf(m_monthlyPage));
+    enableMonths(false);
+    m_label[0]->setText(" ");
+    if (m_amountMonthly->value().isZero()) {
+      if (m_currentTab == m_yearlyButton) {
+        newValue = (m_amountYearly->value() / MyMoneyMoney(12, 1)).convert();
 
-      } else if (d->m_currentTab == d->ui->m_individualButton) {
-        for (auto i = 0; i < 12; ++i)
-          newValue += d->m_field[i]->value();
+      } else if (m_currentTab == m_individualButton) {
+        for (int i = 0; i < 12; ++i)
+          newValue += m_field[i]->value();
         newValue = (newValue / MyMoneyMoney(12, 1)).convert();
       }
       if (!newValue.isZero()) {
-        if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in a monthly budget of <b>%1</b>. Should this value be used to fill the monthly budget?", newValue.formatMoney(QString(), 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
-          d->ui->m_amountMonthly->setValue(newValue);
+        if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in a monthly budget of <b>%1</b>. Should this value be used to fill the monthly budget?", newValue.formatMoney("", 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
+          m_amountMonthly->setValue(newValue);
         }
       }
     }
 
-  } else if (tab == d->ui->m_yearlyButton) {
-    d->ui->m_firstItemStack->setCurrentIndex(d->ui->m_firstItemStack->indexOf(d->ui->m_yearlyPage));
-    d->enableMonths(false);
-    d->m_label[0]->setText(" ");
-    if (d->ui->m_amountYearly->value().isZero()) {
-      if (d->m_currentTab == d->ui->m_monthlyButton) {
-        newValue = (d->ui->m_amountMonthly->value() * MyMoneyMoney(12, 1)).convert();
+  } else if (tab == m_yearlyButton) {
+    m_firstItemStack->setCurrentIndex(m_firstItemStack->indexOf(m_yearlyPage));
+    enableMonths(false);
+    m_label[0]->setText(" ");
+    if (m_amountYearly->value().isZero()) {
+      if (m_currentTab == m_monthlyButton) {
+        newValue = (m_amountMonthly->value() * MyMoneyMoney(12, 1)).convert();
 
-      } else if (d->m_currentTab == d->ui->m_individualButton) {
-        for (auto i = 0; i < 12; ++i)
-          newValue += d->m_field[i]->value();
+      } else if (m_currentTab == m_individualButton) {
+        for (int i = 0; i < 12; ++i)
+          newValue += m_field[i]->value();
       }
       if (!newValue.isZero()) {
-        if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in a yearly budget of <b>%1</b>. Should this value be used to fill the monthly budget?", newValue.formatMoney(QString(), 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
-          d->ui->m_amountYearly->setValue(newValue);
+        if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in a yearly budget of <b>%1</b>. Should this value be used to fill the monthly budget?", newValue.formatMoney("", 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
+          m_amountYearly->setValue(newValue);
         }
       }
     }
 
-  } else if (tab == d->ui->m_individualButton) {
-    d->ui->m_firstItemStack->setCurrentIndex(d->ui->m_firstItemStack->indexOf(d->ui->m_individualPage));
-    d->enableMonths(true);
-    for (auto i = 0; i < 12; ++i)
-      newValue += d->m_field[i]->value();
+  } else if (tab == m_individualButton) {
+    m_firstItemStack->setCurrentIndex(m_firstItemStack->indexOf(m_individualPage));
+    enableMonths(true);
+    for (int i = 0; i < 12; ++i)
+      newValue += m_field[i]->value();
     if (newValue.isZero()) {
-      if (d->m_currentTab == d->ui->m_monthlyButton) {
-        newValue = d->ui->m_amountMonthly->value();
-      } else if (d->m_currentTab == d->ui->m_yearlyButton) {
-        newValue = (d->ui->m_amountYearly->value() / MyMoneyMoney(12, 1)).convert();
+      if (m_currentTab == m_monthlyButton) {
+        newValue = m_amountMonthly->value();
+      } else if (m_currentTab == m_yearlyButton) {
+        newValue = (m_amountYearly->value() / MyMoneyMoney(12, 1)).convert();
       }
 
       if (!newValue.isZero()) {
-        if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in an individual monthly budget of <b>%1</b>. Should this value be used to fill the monthly budgets?", newValue.formatMoney(QString(), 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
-          for (auto i = 0; i < 12; ++i)
-            d->m_field[i]->setValue(newValue);
+        if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in an individual monthly budget of <b>%1</b>. Should this value be used to fill the monthly budgets?", newValue.formatMoney("", 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
+          for (int i = 0; i < 12; ++i)
+            m_field[i]->setValue(newValue);
         }
       }
     }
   }
 
   slotNeedUpdate();
-  d->m_currentTab = tab;
+  m_currentTab = tab;
   inside = false;
 }
 
@@ -294,11 +245,27 @@ void KBudgetValues::slotNeedUpdate()
     QTimer::singleShot(0, this, SIGNAL(valuesChanged()));
 }
 
+void KBudgetValues::enableMonths(bool enabled)
+{
+  for (int i = 1; i < 12; ++i) {
+    m_label[i]->setEnabled(enabled);
+    m_field[i]->setEnabled(enabled);
+  }
+}
+
+void KBudgetValues::fillMonthLabels()
+{
+  QDate date(m_budgetDate);
+  for (int i = 0; i < 12; ++i) {
+    m_label[i]->setText(QLocale().standaloneMonthName(date.month(), QLocale::ShortFormat));
+    date = date.addMonths(1);
+  }
+}
+
 void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount)
 {
-  Q_D(KBudgetValues);
   MyMoneyBudget::PeriodGroup period;
-  d->m_budgetDate = budget.budgetStart();
+  m_budgetDate = budget.budgetStart();
   QDate date;
 
   // make sure all values are zero so that slotChangePeriod()
@@ -309,21 +276,21 @@ void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBu
   switch (budgetAccount.budgetLevel()) {
     case MyMoneyBudget::AccountGroup::eMonthly:
     default:
-      d->ui->m_monthlyButton->setChecked(true);
-      slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_monthlyButton));
-      d->ui->m_amountMonthly->setValue(budgetAccount.period(d->m_budgetDate).amount());
+      m_monthlyButton->setChecked(true);
+      slotChangePeriod(m_periodGroup->id(m_monthlyButton));
+      m_amountMonthly->setValue(budgetAccount.period(m_budgetDate).amount());
       break;
     case MyMoneyBudget::AccountGroup::eYearly:
-      d->ui->m_yearlyButton->setChecked(true);
-      slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_yearlyButton));
-      d->ui->m_amountYearly->setValue(budgetAccount.period(d->m_budgetDate).amount());
+      m_yearlyButton->setChecked(true);
+      slotChangePeriod(m_periodGroup->id(m_yearlyButton));
+      m_amountYearly->setValue(budgetAccount.period(m_budgetDate).amount());
       break;
     case MyMoneyBudget::AccountGroup::eMonthByMonth:
-      d->ui->m_individualButton->setChecked(true);
-      slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_individualButton));
-      date.setDate(d->m_budgetDate.year(), d->m_budgetDate.month(), d->m_budgetDate.day());
-      for (auto i = 0; i < 12; ++i) {
-        d->m_field[i]->setValue(budgetAccount.period(date).amount());
+      m_individualButton->setChecked(true);
+      slotChangePeriod(m_periodGroup->id(m_individualButton));
+      date.setDate(m_budgetDate.year(), m_budgetDate.month(), m_budgetDate.day());
+      for (int i = 0; i < 12; ++i) {
+        m_field[i]->setValue(budgetAccount.period(date).amount());
         date = date.addMonths(1);
       }
       break;
@@ -334,28 +301,27 @@ void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBu
 
 void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount)
 {
-  Q_D(KBudgetValues);
   MyMoneyBudget::PeriodGroup period;
-  d->m_budgetDate = budget.budgetStart();
-  period.setStartDate(d->m_budgetDate);
+  m_budgetDate = budget.budgetStart();
+  period.setStartDate(m_budgetDate);
   QDate date;
 
   budgetAccount.clearPeriods();
-  int tab = d->ui->m_periodGroup->checkedId();
-  if (tab == d->ui->m_periodGroup->id(d->ui->m_monthlyButton)) {
+  int tab = m_periodGroup->checkedId();
+  if (tab == m_periodGroup->id(m_monthlyButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
-    period.setAmount(d->ui->m_amountMonthly->value());
-    budgetAccount.addPeriod(d->m_budgetDate, period);
-  } else if (tab == d->ui->m_periodGroup->id(d->ui->m_yearlyButton)) {
+    period.setAmount(m_amountMonthly->value());
+    budgetAccount.addPeriod(m_budgetDate, period);
+  } else if (tab == m_periodGroup->id(m_yearlyButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
-    period.setAmount(d->ui->m_amountYearly->value());
-    budgetAccount.addPeriod(d->m_budgetDate, period);
-  } else if (tab == d->ui->m_periodGroup->id(d->ui->m_individualButton)) {
+    period.setAmount(m_amountYearly->value());
+    budgetAccount.addPeriod(m_budgetDate, period);
+  } else if (tab == m_periodGroup->id(m_individualButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-    date.setDate(d->m_budgetDate.year(), d->m_budgetDate.month(), d->m_budgetDate.day());
-    for (auto i = 0; i < 12; ++i) {
+    date.setDate(m_budgetDate.year(), m_budgetDate.month(), m_budgetDate.day());
+    for (int i = 0; i < 12; ++i) {
       period.setStartDate(date);
-      period.setAmount(d->m_field[i]->value());
+      period.setAmount(m_field[i]->value());
       budgetAccount.addPeriod(date, period);
       date = date.addMonths(1);
     }
@@ -364,17 +330,16 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
 
 void KBudgetValues::slotUpdateClearButton()
 {
-  Q_D(KBudgetValues);
-  auto rc = false;
-  int tab = d->ui->m_periodGroup->checkedId();
-  if (tab == d->ui->m_periodGroup->id(d->ui->m_monthlyButton)) {
-    rc = !d->ui->m_amountMonthly->value().isZero();
-  } else if (tab == d->ui->m_periodGroup->id(d->ui->m_yearlyButton)) {
-    rc = !d->ui->m_amountYearly->value().isZero();
-  } else if (tab == d->ui->m_periodGroup->id(d->ui->m_individualButton)) {
-    for (auto i = 0; (i < 12) && (rc == false); ++i) {
-      rc |= !d->m_field[i]->value().isZero();
+  bool rc = false;
+  int tab = m_periodGroup->checkedId();
+  if (tab == m_periodGroup->id(m_monthlyButton)) {
+    rc = !m_amountMonthly->value().isZero();
+  } else if (tab == m_periodGroup->id(m_yearlyButton)) {
+    rc = !m_amountYearly->value().isZero();
+  } else if (tab == m_periodGroup->id(m_individualButton)) {
+    for (int i = 0; (i < 12) && (rc == false); ++i) {
+      rc |= !m_field[i]->value().isZero();
     }
   }
-  d->ui->m_clearButton->setEnabled(rc);
+  m_clearButton->setEnabled(rc);
 }

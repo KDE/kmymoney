@@ -62,8 +62,6 @@
 #include "accountsmodel.h"
 #include "mymoneysecurity.h"
 #include "mymoneycontact.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
 #include "icons/icons.h"
 
 using namespace Icons;

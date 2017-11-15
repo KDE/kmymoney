@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KAccountTemplateSelector</class>
- <widget class="QWidget" name="KAccountTemplateSelector">
+ <class>KAccountTemplateSelectorDecl</class>
+ <widget class="QWidget" name="KAccountTemplateSelectorDecl">
   <property name="geometry">
    <rect>
     <x>0</x>

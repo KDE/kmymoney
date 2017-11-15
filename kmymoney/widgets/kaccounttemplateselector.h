@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,20 +29,31 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kaccounttemplateselectordecl.h"
+
 class MyMoneyTemplate;
+class KAccountTemplateSelectorDecl : public QWidget, public Ui::KAccountTemplateSelectorDecl
+{
+public:
+  KAccountTemplateSelectorDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
+  }
+};
 
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
  */
 
-class KAccountTemplateSelectorPrivate;
-class KAccountTemplateSelector : public QWidget
+class KAccountTemplateSelector : public KAccountTemplateSelectorDecl
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KAccountTemplateSelector)
 
 public:
-  explicit KAccountTemplateSelector(QWidget* parent = nullptr);
+  enum KAccountTemplateSelectorItemRoles {
+    IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
+  };
+
+  KAccountTemplateSelector(QWidget* parent = 0);
   ~KAccountTemplateSelector();
 
   QList<MyMoneyTemplate> selectedTemplates() const;
@@ -53,8 +64,10 @@ private slots:
   void slotLoadTemplateList();
 
 private:
-  KAccountTemplateSelectorPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KAccountTemplateSelector)
+  /// \internal d-pointer class.
+  class Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif

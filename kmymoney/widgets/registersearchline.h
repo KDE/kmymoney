@@ -53,7 +53,7 @@ public:
     * If @a reg is null then the widget will be disabled until a register
     * is set with setRegister().
     */
-  explicit RegisterSearchLine(QWidget* parent = nullptr, Register* reg = 0);
+  explicit RegisterSearchLine(QWidget* parent = 0, Register* reg = 0);
 
   /**
     * Destroys the object
@@ -103,7 +103,7 @@ public:
     * Creates a RegisterSearchLineWidget for @a reg with @a parent as the
     * parent and with @a name.
     */
-  explicit RegisterSearchLineWidget(Register* reg = 0, QWidget* parent = nullptr);
+  explicit RegisterSearchLineWidget(Register* reg = 0, QWidget* parent = 0);
 
   /**
     * Destroys the object

@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qglobal.h>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,34 +29,40 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class QString;
-class MyMoneySplit;
-class MyMoneyTransaction;
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
 
 namespace KMyMoneyRegister
 {
-  class SelectedTransactionPrivate;
-  class SelectedTransaction
-  {
-  public:
-    SelectedTransaction();
-    SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId);
-    SelectedTransaction(const SelectedTransaction & other);
-    SelectedTransaction(SelectedTransaction && other);
-    SelectedTransaction & operator=(SelectedTransaction other);
-    friend void swap(SelectedTransaction& first, SelectedTransaction& second);
-    ~SelectedTransaction();
 
-    MyMoneyTransaction& transaction();
-    const MyMoneyTransaction& transaction() const;
+class SelectedTransaction
+{
+public:
+  SelectedTransaction() {}
+  SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId = QString()) :
+      m_transaction(t), m_split(s), m_scheduleId(scheduleId) {}
 
-    MyMoneySplit& split();
-    const MyMoneySplit& split() const;
+  MyMoneyTransaction& transaction() {
+    return m_transaction;
+  }
+  const MyMoneyTransaction& transaction() const {
+    return m_transaction;
+  }
+  MyMoneySplit& split() {
+    return m_split;
+  }
+  const MyMoneySplit& split() const {
+    return m_split;
+  }
 
-    bool isScheduled() const;
-    const QString& scheduleId() const;
+  bool isScheduled() const {
+    return !m_scheduleId.isEmpty();
+  }
+  const QString& scheduleId() const {
+    return m_scheduleId;
+  }
 
-    /**
+  /**
    * checks the transaction for specific reasons which would
    * speak against editing/modifying it.
    * @retval 0 no sweat, user can modify
@@ -64,29 +70,31 @@ namespace KMyMoneyRegister
    * @retval 2 some transactions cannot be changed anymore - parts of them are frozen
    * @retval 3 some transactions cannot be changed anymore - they touch closed accounts
    */
-    int warnLevel() const;
+  int warnLevel() const;
 
-  private:
-    SelectedTransactionPrivate* d_ptr;
-    Q_DECLARE_PRIVATE(SelectedTransaction)
-  };
+private:
+  MyMoneyTransaction      m_transaction;
+  MyMoneySplit            m_split;
+  QString                 m_scheduleId;
+};
 
-  inline void swap(SelectedTransaction& first, SelectedTransaction& second) // krazy:exclude=inline
-  {
-    using std::swap;
-    swap(first.d_ptr, second.d_ptr);
-  }
+class Register;
 
-  inline SelectedTransaction::SelectedTransaction(SelectedTransaction && other) : SelectedTransaction() // krazy:exclude=inline
-  {
-    swap(*this, other);
-  }
+class SelectedTransactions: public QList<SelectedTransaction>
+{
+public:
+  SelectedTransactions() {}
+  SelectedTransactions(const Register* r);
 
-  inline SelectedTransaction & SelectedTransaction::operator=(SelectedTransaction other) // krazy:exclude=inline
-  {
-    swap(*this, other);
-    return *this;
-  }
+  /**
+   * @return the highest warnLevel of all transactions in the list
+   */
+  int warnLevel() const;
+
+  bool canModify() const;
+  bool canDuplicate() const;
+};
+
 } // namespace
 
 #endif

@@ -111,7 +111,7 @@ Select the date when the interest rate for this loan will be modified and the fr
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneygeneralcombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

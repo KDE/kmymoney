@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "stdtransaction.h"
+#include "transaction.h"
 
 class MyMoneySplit;
 class MyMoneyTransaction;
@@ -35,31 +35,37 @@ class MyMoneyTransaction;
 namespace KMyMoneyRegister
 {
 
-  class Register;
-  class StdTransactionMatched : public StdTransaction
-  {
-    static const int m_additionalRows = 3;
+class Register;
+class StdTransactionMatched : public StdTransaction
+{
+  static const int m_additionalRows = 3;
 
-  public:
-    explicit StdTransactionMatched(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-    ~StdTransactionMatched() override;
+public:
+  StdTransactionMatched(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+  virtual ~StdTransactionMatched() {}
 
-    const char* className() override;
+  virtual const char* className() override {
+    return "StdTransactionMatched";
+  }
 
-    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
 
-    void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
+  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0) override;
 
-    /**
+  /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister(bool)
     */
-    int numRowsRegister(bool expanded) const override;
+  int numRowsRegister(bool expanded) const override {
+    return StdTransaction::numRowsRegister(expanded) + m_additionalRows;
+  }
 
-    /**
+  /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-    int numRowsRegister() const override;
-  };
+  int numRowsRegister() const override {
+    return StdTransaction::numRowsRegister();
+  }
+};
 
 } // namespace
 

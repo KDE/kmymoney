@@ -27,33 +27,41 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "stdtransaction.h"
-#include "investtransaction.h"
+#include "transaction.h"
+
+namespace KMyMoneyTransactionForm
+{
+class TransactionForm;
+} // namespace
 
 namespace KMyMoneyRegister
 {
 
-  class StdTransactionDownloaded : public StdTransaction
-  {
-  public:
-    explicit StdTransactionDownloaded(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-    ~StdTransactionDownloaded() override;
+class StdTransactionDownloaded : public StdTransaction
+{
+public:
+  StdTransactionDownloaded(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+  virtual ~StdTransactionDownloaded() {}
 
-    const char* className() override;
+  virtual const char* className() {
+    return "StdTransactionDownloaded";
+  }
 
-    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
-  };
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+};
 
-  class InvestTransactionDownloaded : public InvestTransaction
-  {
-  public:
-    explicit InvestTransactionDownloaded(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-    ~InvestTransactionDownloaded() override;
+class InvestTransactionDownloaded : public InvestTransaction
+{
+public:
+  InvestTransactionDownloaded(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+  virtual ~InvestTransactionDownloaded() {}
 
-    const char* className() override;
+  virtual const char* className() {
+    return "InvestTransactionDownloaded";
+  }
 
-    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
-  };
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+};
 
 
 } // namespace

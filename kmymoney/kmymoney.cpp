@@ -3561,7 +3561,7 @@ void KMyMoneyApp::slotAccountReconcileStart()
                 QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
                 while (itTransactionSplitResult.hasNext()) {
                   const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
-                  d->m_selectedTransactions.append(KMyMoneyRegister::SelectedTransaction(transactionSplit.first, transactionSplit.second, QString()));
+                  d->m_selectedTransactions.append(KMyMoneyRegister::SelectedTransaction(transactionSplit.first, transactionSplit.second));
                 }
                 // mark all transactions in d->m_selectedTransactions as 'Cleared'
                 markTransaction(eMyMoney::Split::State::Cleared);

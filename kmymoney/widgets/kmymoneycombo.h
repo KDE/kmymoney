@@ -21,6 +21,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QTimer>
+#include <QMutex>
+#include <QPaintEvent>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -31,21 +35,18 @@
 
 class kMyMoneyCompletion;
 class KMyMoneySelector;
+class kMyMoneyLineEdit;
 
 /**
   * @author Thomas Baumgart
   */
-class KMyMoneyComboPrivate;
 class KMyMoneyCombo : public KComboBox
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyCombo)
   Q_PROPERTY(QString selectedItem READ selectedItem WRITE setSelectedItem STORED false)
-
 public:
-  explicit KMyMoneyCombo(QWidget *parent = nullptr);
-  explicit KMyMoneyCombo(bool rw = false, QWidget *parent = nullptr);
-  virtual ~KMyMoneyCombo();
+  KMyMoneyCombo(QWidget *w = 0);
+  explicit KMyMoneyCombo(bool rw, QWidget *w = 0);
 
   /**
     * This method is used to turn on/off the hint display and to setup the appropriate text.
@@ -92,7 +93,9 @@ public:
     * @return reference to QString containing the id. If no item
     *         is selected the QString will be empty.
     */
-  const QString& selectedItem() const;
+  const QString& selectedItem() const {
+    return m_id;
+  }
 
   /**
     * This method selects the item with the respective @a id.
@@ -107,18 +110,21 @@ public:
     */
   bool isInArrowArea(const QPoint& pos) const;
 
-  void setSuppressObjectCreation(bool suppress);
+  void setSuppressObjectCreation(bool suppress) {
+    m_canCreateObjects = !suppress;
+  }
 
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt);
-  void setCurrentText();
+  void setCurrentText(const QString& txt = QString()) {
+    KComboBox::setItemText(KComboBox::currentIndex(), txt);
+  }
 
   /**
    * Overridden to support our own completion box
    */
-  QSize sizeHint() const override;
+  QSize sizeHint() const;
 
 protected slots:
   virtual void slotItemSelected(const QString& id);
@@ -127,22 +133,22 @@ protected:
   /**
     * reimplemented to support our own popup widget
     */
-  void mousePressEvent(QMouseEvent *e) override;
+  void mousePressEvent(QMouseEvent *e);
 
   /**
     * reimplemented to support our own popup widget
     */
-  void keyPressEvent(QKeyEvent *e) override;
+  void keyPressEvent(QKeyEvent *e);
 
   /**
     * reimplemented to support our own popup widget
     */
-  void paintEvent(QPaintEvent *) override;
+  void paintEvent(QPaintEvent *);
 
   /**
     * reimplemented to support detection of new items
     */
-  void focusOutEvent(QFocusEvent*) override;
+  void focusOutEvent(QFocusEvent*);
 
   /**
     * set the widgets text area based on the item with the given @a id.
@@ -152,16 +158,28 @@ protected:
   /**
     * Overridden for internal reasons, no API change
     */
-  void connectNotify(const QMetaMethod & signal) override;
+  void connectNotify(const QMetaMethod & signal);
 
   /**
     * Overridden for internal reasons, no API change
     */
-  void disconnectNotify(const QMetaMethod & signal) override;
+  void disconnectNotify(const QMetaMethod & signal);
 
 protected:
-  KMyMoneyComboPrivate * const d_ptr;
-  KMyMoneyCombo(KMyMoneyComboPrivate &dd, bool rw = false, QWidget *parent = 0);
+  /**
+    * This member keeps a pointer to the object's completion object
+    */
+  kMyMoneyCompletion*    m_completion;
+
+  /**
+    * Use our own line edit to provide hint functionality
+    */
+  kMyMoneyLineEdit*      m_edit;
+
+  /**
+    * The currently selected item
+    */
+  QString                m_id;
 
 signals:
   void itemSelected(const QString& id);
@@ -169,7 +187,21 @@ signals:
   void createItem(const QString&, QString&);
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyCombo)
+  QTimer                 m_timer;
+  QMutex                 m_focusMutex;
+  /**
+    * Flag to control object creation. Use setSuppressObjectCreation()
+    * to modify it's setting. Defaults to @a false.
+    */
+  bool                   m_canCreateObjects;
+
+  /**
+    * Flag to check whether a focusOutEvent processing is underway or not
+    */
+  bool                   m_inFocusOutEvent;
 };
+
+
+
 
 #endif

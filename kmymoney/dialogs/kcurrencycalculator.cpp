@@ -32,7 +32,6 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QDialogButtonBox>
-#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

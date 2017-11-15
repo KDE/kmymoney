@@ -8,11 +8,11 @@ set(kmymoney_STAT_HEADERS
   kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
   kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
   kmymoneylineedit.h kmymoneyselector.h
-  kmymoneytitlelabel.h kmymoneywizard.h register.h registeritem.h groupmarker.h fancydategroupmarker.h
-  scheduledtransaction.h selectedtransaction.h selectedtransactions.h stdtransactiondownloaded.h
+  kmymoneytitlelabel.h kmymoneywizard.h register.h registeritem.h
+  scheduledtransaction.h selectedtransaction.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
-  transactionform.h transaction.h investtransaction.h stdtransaction.h 
-  transactionsortoption.h reporttabimpl.h reportcontrolimpl.h
+  transactionform.h transaction.h transactionsortoptionimpl.h
+  reporttabimpl.h reportcontrolimpl.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   kmymoneydateedit.h
@@ -28,18 +28,6 @@ set(kmm_widgets_sources
   kmymoneylineedit.cpp
   kmymoneytextedit.cpp
   kmymoneymvccombo.cpp
-  kmymoneygeneralcombo.cpp
-  kmymoneyactivitycombo.cpp
-  kmymoneycashflowcombo.cpp
-  kmymoneyfrequencycombo.cpp
-  kmymoneyoccurrencecombo.cpp
-  kmymoneyoccurrenceperiodcombo.cpp
-  kmymoneypayeecombo.cpp
-  kmymoneyperiodcombo.cpp
-  kmymoneyreconcilecombo.cpp
-  kmymoneytagcombo.cpp
-  ktagcontainer.cpp
-  ktaglabel.cpp
   kmymoneyselector.cpp
   kmymoneycalculator.cpp
   ktreewidgetfilterlinewidget.cpp
@@ -100,11 +88,10 @@ set(_uncritial_common_sources
   registeritem.cpp
   scheduledtransaction.cpp
   selectedtransaction.cpp
-  selectedtransactions.cpp
   stdtransactiondownloaded.cpp
   stdtransactionmatched.cpp
   transactionform.cpp
-  transactionsortoption.cpp
+  transactionsortoptionimpl.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag
@@ -113,18 +100,14 @@ set (_critial_common_sources
   kmymoneycurrencyselector.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneycategory.cpp
-  groupmarker.cpp
-  fancydategroupmarker.cpp
   register.cpp
   transaction.cpp
-  stdtransaction.cpp
-  investtransaction.cpp
   transactioneditorcontainer.cpp
   )
 
 
 set (kmymoney_base_UI
-  kbudgetvalues.ui transactionsortoption.ui kaccounttemplateselector.ui
+  kbudgetvaluesdecl.ui transactionsortoptiondecl.ui kaccounttemplateselectordecl.ui
   )
 
 ki18n_wrap_ui(kmymoney_base_ui_srcs ${kmymoney_base_UI})
@@ -192,7 +175,7 @@ set(libwidgets_a_UI
   reporttabrowcolquery.ui reporttabrowcolpivot.ui
   reporttabrange.ui reporttabchart.ui
   reporttabcapitalgain.ui reporttabperformance.ui
-  daterangedlg.ui
+  daterangedlgdecl.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic

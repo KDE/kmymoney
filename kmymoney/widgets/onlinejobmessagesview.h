@@ -34,7 +34,7 @@ class KMM_WIDGETS_EXPORT onlineJobMessagesView : public QWidget
     Q_OBJECT
 
 public:
-  onlineJobMessagesView(QWidget* parent = nullptr);
+  onlineJobMessagesView(QWidget* parent = 0);
   ~onlineJobMessagesView();
   void setModel(QAbstractItemModel* model);
 

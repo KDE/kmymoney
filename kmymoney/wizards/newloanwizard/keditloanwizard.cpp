@@ -61,7 +61,6 @@
 #include "mymoneyaccountloan.h"
 #include "mymoneypayee.h"
 #include "mymoneyschedule.h"
-#include "mymoneytransactionfilter.h"
 
 class KEditLoanWizardPrivate : public KNewLoanWizardPrivate
 {

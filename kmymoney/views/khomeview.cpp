@@ -65,8 +65,6 @@
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
 #include "icons.h"
 #include "kmymoneywebpage.h"
 #include "mymoneyschedule.h"

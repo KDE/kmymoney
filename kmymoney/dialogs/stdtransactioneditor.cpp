@@ -38,11 +38,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyreconcilecombo.h"
-#include "kmymoneycashflowcombo.h"
-#include "kmymoneypayeecombo.h"
-#include "kmymoneytagcombo.h"
-#include "ktagcontainer.h"
 #include "kmymoneycategory.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneydateinput.h"
@@ -55,7 +50,6 @@
 #include "kmymoneyutils.h"
 #include "kmymoneycompletion.h"
 #include "transactionform.h"
-#include "mymoneytransactionfilter.h"
 #include "kmymoneyglobalsettings.h"
 #include "transactioneditorcontainer.h"
 
@@ -130,7 +124,7 @@ void StdTransactionEditor::createEditWidgets()
   connect(payee, &KMyMoneyMVCCombo::itemSelected, this, &StdTransactionEditor::slotUpdatePayee);
   connect(payee, &QComboBox::editTextChanged, this, &StdTransactionEditor::slotUpdateButtonState);
 
-  auto category = new KMyMoneyCategory(true, nullptr);
+  auto category = new KMyMoneyCategory(0, true);
   category->setPlaceholderText(i18n("Category/Account"));
   category->setObjectName(QLatin1String("Category/Account"));
   d->m_editWidgets["category"] = category;
@@ -216,7 +210,7 @@ void StdTransactionEditor::createEditWidgets()
   connect(value, &kMyMoneyEdit::valueChanged, this, &StdTransactionEditor::slotUpdateDeposit);
   connect(value, &kMyMoneyEdit::textChanged, this, &StdTransactionEditor::slotUpdateButtonState);
 
-  auto cashflow = new KMyMoneyCashFlowCombo(d->m_account.accountGroup(), nullptr);
+  auto cashflow = new KMyMoneyCashFlowCombo(0, d->m_account.accountGroup());
   d->m_editWidgets["cashflow"] = cashflow;
   cashflow->setObjectName(QLatin1String("Cashflow"));
   connect(cashflow, &KMyMoneyCashFlowCombo::directionSelected, this, &StdTransactionEditor::slotUpdateCashFlow);

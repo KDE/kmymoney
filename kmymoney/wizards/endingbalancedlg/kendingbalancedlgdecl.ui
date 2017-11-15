@@ -47,7 +47,7 @@
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoneypayeecombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

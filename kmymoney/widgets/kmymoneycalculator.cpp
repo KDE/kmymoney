@@ -108,7 +108,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
 
   // connect the digit signals through a signal mapper
   QSignalMapper* mapper = new QSignalMapper(this);
-  for (auto i = 0; i < 10; ++i) {
+  for (int i = 0; i < 10; ++i) {
     mapper->setMapping(buttons[i], i);
     connect(buttons[i], SIGNAL(clicked()), mapper, SLOT(map()));
   }
@@ -129,7 +129,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
   connect(buttons[CLEAR], SIGNAL(clicked()), SLOT(clearClicked()));
   connect(buttons[CLEARALL], SIGNAL(clicked()), SLOT(clearAllClicked()));
 
-  for (auto i = 0; i < MAX_BUTTONS; ++i) {
+  for (int i = 0; i < MAX_BUTTONS; ++i) {
     buttons[i]->setMinimumSize(40, 30);
     buttons[i]->setMaximumSize(40, 30);
   }
@@ -315,7 +315,7 @@ void kMyMoneyCalculator::percentClicked()
 
 const QString kMyMoneyCalculator::result() const
 {
-  auto txt = m_result;
+  QString txt = m_result;
   txt.replace(QRegExp("\\."), m_comma);
   if (txt[0] == '-') {
     txt = txt.mid(1); // get rid of the minus sign
@@ -347,7 +347,7 @@ const QString kMyMoneyCalculator::result() const
 
 void kMyMoneyCalculator::changeDisplay(const QString& str)
 {
-  auto txt = str;
+  QString txt = str;
   txt.replace(QRegExp("\\."), m_comma);
   display->setText("<b>" + txt + "</b>");
 }
@@ -426,7 +426,7 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   // setup operand
   operand = value;
   // TODO: port this to kf5
-  //operand.replace(QRegExp(QString('\\') + QString()/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/), QChar());
+  //operand.replace(QRegExp(QString('\\') + ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/), QChar());
   operand.replace(QRegExp(QString('\\') + m_comma), ".");
   if (operand.contains('(')) {
     negative = true;

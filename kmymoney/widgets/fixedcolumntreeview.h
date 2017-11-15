@@ -39,7 +39,7 @@ class FixedColumnTreeView : public QTreeView
   Q_OBJECT
 
 public:
-  explicit FixedColumnTreeView(QTreeView *parent);
+  FixedColumnTreeView(QTreeView *parent);
   ~FixedColumnTreeView();
 
 public slots:
@@ -50,8 +50,8 @@ public slots:
   void sourceModelUpdated();
 
 protected:
-  bool viewportEvent(QEvent *event) override;
-  bool eventFilter(QObject *object, QEvent *event) override;
+  bool viewportEvent(QEvent *event);
+  bool eventFilter(QObject *object, QEvent *event);
 
 protected slots:
   void onExpanded(const QModelIndex& index);

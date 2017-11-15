@@ -31,80 +31,57 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "mymoneysecurity.h"
 #include "icons/icons.h"
 
 using namespace Icons;
 
-class KMyMoneySecuritySelectorPrivate
-{
-  Q_DISABLE_COPY(KMyMoneySecuritySelectorPrivate)
-
-public:
-  KMyMoneySecuritySelectorPrivate():
-    m_displayItem(KMyMoneySecuritySelector::FullName),
+KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
+    KComboBox(parent),
+    m_displayItem(FullName),
     m_selectedItemId(0),
     m_displayOnly(false),
-    m_displayType(KMyMoneySecuritySelector::TypeAll)
-  {
-  }
-
-  MyMoneySecurity m_currency;
-  KMyMoneySecuritySelector::displayItemE    m_displayItem;
-  int             m_selectedItemId;
-  bool            m_displayOnly;
-  KMyMoneySecuritySelector::displayTypeE    m_displayType;
-  QList<MyMoneySecurity> m_list;
-};
-
-KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
-  KComboBox(parent),
-  d_ptr(new KMyMoneySecuritySelectorPrivate)
+    m_displayType(TypeAll)
 {
   // update(QString());
 }
 
 KMyMoneySecuritySelector::~KMyMoneySecuritySelector()
 {
-  Q_D(KMyMoneySecuritySelector);
-  delete d;
 }
 
 void KMyMoneySecuritySelector::selectDisplayItem(KMyMoneySecuritySelector::displayItemE item)
 {
-  Q_D(KMyMoneySecuritySelector);
-  d->m_displayItem = item;
+  m_displayItem = item;
   update(QString());
 }
 
 void KMyMoneySecuritySelector::setDisplayType(displayTypeE type)
 {
-  Q_D(KMyMoneySecuritySelector);
-  d->m_displayType = type;
+  m_displayType = type;
 }
 
 void KMyMoneySecuritySelector::update(const QString& id)
 {
-  Q_D(KMyMoneySecuritySelector);
   MyMoneySecurity curr = MyMoneyFile::instance()->baseCurrency();
   QString baseCurrency = curr.id();
 
   if (!id.isEmpty())
-    curr = d->m_currency;
+    curr = m_currency;
 
   this->clear();
-  d->m_list.clear();
-  if (d->m_displayType & TypeCurrencies)
-    d->m_list += MyMoneyFile::instance()->currencyList();
-  if (d->m_displayType & TypeSecurities)
-    d->m_list += MyMoneyFile::instance()->securityList();
+  m_list.clear();
+  if (m_displayType & TypeCurrencies)
+    m_list += MyMoneyFile::instance()->currencyList();
+  if (m_displayType & TypeSecurities)
+    m_list += MyMoneyFile::instance()->securityList();
 
   // sort
-  qSort(d->m_list);
+  qSort(m_list);
 
   QList<MyMoneySecurity>::ConstIterator it;
 
@@ -137,9 +114,9 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
   int itemId = 0;
   int m_selectedItemId = 0;
-  for (it = d->m_list.constBegin(); it != d->m_list.constEnd(); ++it) {
+  for (it = m_list.constBegin(); it != m_list.constEnd(); ++it) {
     QString display;
-    switch (d->m_displayItem) {
+    switch (m_displayItem) {
       default:
       case FullName:
         if ((*it).isCurrency()) {
@@ -164,7 +141,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
     if (curr.id() == (*it).id()) {
       m_selectedItemId = itemId;
-      d->m_currency = (*it);
+      m_currency = (*it);
     }
 
     itemId++;
@@ -174,27 +151,21 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
 const MyMoneySecurity& KMyMoneySecuritySelector::security() const
 {
-  Q_D(const KMyMoneySecuritySelector);
   int index = currentIndex();
-  if ((0 <= index) && (index < d->m_list.size()))
-    return d->m_list[index];
+  if ((0 <= index) && (index < m_list.size()))
+    return m_list[index];
   else
-    return d->m_currency;
+    return m_currency;
 }
 
 void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
 {
-  Q_D(KMyMoneySecuritySelector);
-  d->m_currency = currency;
+  m_currency = currency;
   update(QString("x"));
 }
 
 KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent) :
-  KMyMoneySecuritySelector(parent)
+    KMyMoneySecuritySelector(parent)
 {
   setDisplayType(TypeCurrencies);
-}
-
-KMyMoneyCurrencySelector::~KMyMoneyCurrencySelector()
-{
 }

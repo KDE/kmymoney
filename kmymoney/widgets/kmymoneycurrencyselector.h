@@ -26,6 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -36,18 +38,14 @@
 
 #include "mymoneysecurity.h"
 
-class MyMoneySecurity;
-
 /**
   * @author Thomas Baumgart
   */
-class KMyMoneySecuritySelectorPrivate;
+
 class KMyMoneySecuritySelector : public KComboBox
 {
-  Q_OBJECT  
-  Q_DISABLE_COPY(KMyMoneySecuritySelector)
+  Q_OBJECT
   Q_PROPERTY(MyMoneySecurity security READ security WRITE setSecurity DESIGNABLE false STORED false)
-
 public:
   enum displayItemE {
     Symbol = 0,
@@ -60,7 +58,7 @@ public:
     TypeAll        = 0x03
   };
 
-  explicit KMyMoneySecuritySelector(QWidget* parent = nullptr);
+  explicit KMyMoneySecuritySelector(QWidget *parent = 0);
   virtual ~KMyMoneySecuritySelector();
 
   const MyMoneySecurity& security() const;
@@ -71,21 +69,21 @@ public:
 
   void update(const QString& id);
 
-protected:
-  KMyMoneySecuritySelectorPrivate * const d_ptr;
-
 private:
-  Q_DECLARE_PRIVATE(KMyMoneySecuritySelector)
+  MyMoneySecurity m_currency;
+  displayItemE    m_displayItem;
+  int             m_selectedItemId;
+  bool            m_displayOnly;
+  displayTypeE    m_displayType;
+  QList<MyMoneySecurity> m_list;
 };
 
 class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyCurrencySelector)
-
 public:
-  explicit KMyMoneyCurrencySelector(QWidget* parent = nullptr);
-  ~KMyMoneyCurrencySelector() override;
+  KMyMoneyCurrencySelector(QWidget *parent = 0);
+  virtual ~KMyMoneyCurrencySelector() {}
 };
 
 #endif

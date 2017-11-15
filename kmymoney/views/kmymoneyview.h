@@ -34,7 +34,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "selectedtransactions.h"
+#include "selectedtransaction.h"
 
 #ifdef KF5Activities_FOUND
 namespace KActivities
@@ -69,7 +69,6 @@ class KForecastView;
 class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
 class MyMoneyAccount;
-class MyMoneyMoney;
 class QLabel;
 
 /**

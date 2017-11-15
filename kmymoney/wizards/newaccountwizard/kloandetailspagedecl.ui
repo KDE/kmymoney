@@ -271,7 +271,7 @@
   <customwidget>                                                                                                                           
    <class>KMyMoneyFrequencyCombo</class>                                                                                                   
    <extends>QWidget</extends>                                                                                                              
-   <header>kmymoneyfrequencycombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>                                                                                                                
   </customwidget>   
  </customwidgets>

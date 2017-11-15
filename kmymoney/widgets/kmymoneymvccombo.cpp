@@ -5,7 +5,6 @@
     copyright            : (C) 2010 by Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Cristian Onet <cristian.onet@gmail.com>
                            Alvaro Soliverez <asoliverez@gmail.com>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,17 +17,23 @@
  ***************************************************************************/
 
 #include "kmymoneymvccombo.h"
-#include "kmymoneymvccombo_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDebug>
+#include <QApplication>
 #include <QStandardItemModel>
+#include <QStandardItem>
 #include <QAbstractItemView>
+#include <QHBoxLayout>
+#include <QFrame>
+#include <QLabel>
+#include <QToolButton>
+#include <QMetaMethod>
+#include <QApplication>
 #include <QCompleter>
 #include <QFocusEvent>
-#include <QApplication>
-#include <QMetaMethod>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,10 +45,42 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "icons/icons.h"
+#include "mymoneyschedule.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneytransactionfilter.h"
+
+using namespace Icons;
+using namespace eMyMoney;
+
+class KMyMoneyMVCCombo::Private
+{
+public:
+  Private() :
+      m_canCreateObjects(false),
+      m_inFocusOutEvent(false),
+      m_completer(0) {}
+
+  /**
+    * Flag to control object creation. Use
+    * KMyMoneyMVCCombo::setSuppressObjectCreation()
+    * to modify it's setting. Defaults to @a false.
+    */
+  bool                  m_canCreateObjects;
+
+  /**
+    * Flag to check whether a focusOutEvent processing is underway or not
+    */
+  bool                  m_inFocusOutEvent;
+
+  QCompleter            *m_completer;
+};
+
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
     KComboBox(parent),
-    d_ptr(new KMyMoneyMVCComboPrivate)
+    d(new Private)
 {
   view()->setAlternatingRowColors(true);
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
@@ -51,34 +88,8 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
     KComboBox(editable, parent),
-    d_ptr(new KMyMoneyMVCComboPrivate)
+    d(new Private)
 {
-  Q_D(KMyMoneyMVCCombo);
-  d->m_completer = new QCompleter(this);
-  d->m_completer->setCaseSensitivity(Qt::CaseInsensitive);
-  d->m_completer->setModel(model());
-  setCompleter(d->m_completer);
-
-  // setSubstringSearch(!KMyMoneySettings::stringMatchFromStart());
-
-  view()->setAlternatingRowColors(true);
-  setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
-  connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
-}
-
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, QWidget* parent) :
-  KComboBox(parent),
-  d_ptr(&dd)
-{
-  view()->setAlternatingRowColors(true);
-  connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
-}
-
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, bool editable, QWidget* parent) :
-  KComboBox(editable, parent),
-  d_ptr(&dd)
-{
-  Q_D(KMyMoneyMVCCombo);
   d->m_completer = new QCompleter(this);
   d->m_completer->setCaseSensitivity(Qt::CaseInsensitive);
   d->m_completer->setModel(model());
@@ -93,13 +104,11 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, bool editable, Q
 
 KMyMoneyMVCCombo::~KMyMoneyMVCCombo()
 {
-  Q_D(KMyMoneyMVCCombo);
   delete d;
 }
 
 void KMyMoneyMVCCombo::setEditable(bool editable)
 {
-  Q_D(KMyMoneyMVCCombo);
   KComboBox::setEditable(editable);
 
   if(editable) {
@@ -114,7 +123,6 @@ void KMyMoneyMVCCombo::setEditable(bool editable)
 
 void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
 {
-  Q_D(KMyMoneyMVCCombo);
   d->m_completer->setCompletionMode(QCompleter::PopupCompletion);
   d->m_completer->setModel(model());
   d->m_completer->setFilterMode(enabled ? Qt::MatchContains : Qt::MatchStartsWith);
@@ -140,35 +148,31 @@ void KMyMoneyMVCCombo::setPlaceholderText(const QString& hint) const
 
 const QString& KMyMoneyMVCCombo::selectedItem() const
 {
-  Q_D(const KMyMoneyMVCCombo);
   QVariant data = itemData(currentIndex());
   if (data.isValid())
-    d->m_id = data.toString();
+    m_id = data.toString();
   else
-    d->m_id.clear();
-  return d->m_id;
+    m_id.clear();
+  return m_id;
 }
 
 void KMyMoneyMVCCombo::setSelectedItem(const QString& id)
 {
-  Q_D(KMyMoneyMVCCombo);
-  d->m_id = id;
-  setCurrentIndex(findData(QVariant(d->m_id)));
+  m_id = id;
+  setCurrentIndex(findData(QVariant(m_id)));
 }
 
 void KMyMoneyMVCCombo::activated(int index)
 {
-  Q_D(KMyMoneyMVCCombo);
   QVariant data = itemData(index);
   if (data.isValid()) {
-    d->m_id = data.toString();
-    emit itemSelected(d->m_id);
+    m_id = data.toString();
+    emit itemSelected(m_id);
   }
 }
 
 void KMyMoneyMVCCombo::connectNotify(const QMetaMethod & signal)
 {
-  Q_D(KMyMoneyMVCCombo);
   if (signal != QMetaMethod::fromSignal(&KMyMoneyMVCCombo::createItem)) {
     d->m_canCreateObjects = true;
   }
@@ -176,26 +180,13 @@ void KMyMoneyMVCCombo::connectNotify(const QMetaMethod & signal)
 
 void KMyMoneyMVCCombo::disconnectNotify(const QMetaMethod & signal)
 {
-  Q_D(KMyMoneyMVCCombo);
   if (signal != QMetaMethod::fromSignal(&KMyMoneyMVCCombo::createItem)) {
     d->m_canCreateObjects = false;
   }
 }
 
-void KMyMoneyMVCCombo::setCurrentText(const QString& txt)
-{
-  KComboBox::setItemText(KComboBox::currentIndex(), txt);
-}
-
-void KMyMoneyMVCCombo::setCurrentText()
-{
-  KComboBox::setItemText(KComboBox::currentIndex(), QString());
-}
-
-
 void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 {
-  Q_D(KMyMoneyMVCCombo);
   // when showing m_completion we'll receive a focus out event even if the focus
   // will still remain at this widget since this widget is the completion's focus proxy
   // so ignore the focus out event caused by showin a widget of type Qt::Popup
@@ -255,10 +246,10 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 
   // force update of hint and id if there is no text in the widget
   if (isEditable() && currentText().isEmpty()) {
-    QString id = d->m_id;
-    d->m_id.clear();
+    QString id = m_id;
+    m_id.clear();
     if (!id.isEmpty())
-      emit itemSelected(d->m_id);
+      emit itemSelected(m_id);
     update();
   }
 
@@ -269,7 +260,6 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 
 void KMyMoneyMVCCombo::checkCurrentText()
 {
-  Q_D(KMyMoneyMVCCombo);
   if (!contains(currentText())) {
     QString id;
     // annouce that we go into a possible dialog to create an object
@@ -282,7 +272,7 @@ void KMyMoneyMVCCombo::checkCurrentText()
     emit objectCreation(false);
 
     // update the field to a possibly created object
-    d->m_id = id;
+    m_id = id;
     setCurrentTextById(id);
   }
 }
@@ -307,5 +297,524 @@ void KMyMoneyMVCCombo::protectItem(int id, bool protect)
   standardItem->setSelectable(!protect);
 }
 
+KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
+    KMyMoneyMVCCombo(true, parent)
+{
+}
+
+void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
+{
+  clear();
+
+  //add a blank item, since the field is optional
+  addItem(QString(), QVariant(QString()));
+
+  //add all payees
+  QList<MyMoneyPayee>::const_iterator it;
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    addItem((*it).name(), QVariant((*it).id()));
+  }
+
+  //sort the model, which will sort the list in the combo
+  model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
+
+  //set the text to empty and the index to the first item on the list
+  setCurrentIndex(0);
+  clearEditText();
+}
+
+KMyMoneyTagCombo::KMyMoneyTagCombo(QWidget* parent) :
+    KMyMoneyMVCCombo(true, parent)
+{
+}
+
+void KMyMoneyTagCombo::loadTags(const QList<MyMoneyTag>& list)
+{
+  clear();
+
+  //add a blank item, since the field is optional
+  addItem(QString(), QVariant(QString()));
+
+  //add all not closed tags
+  QList<MyMoneyTag>::const_iterator it;
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    if (!(*it).isClosed())
+      addItem((*it).name(), QVariant((*it).id()));
+    else {
+      m_closedIdList.append((*it).id());
+      m_closedTagNameList.append((*it).name());
+    }
+  }
+
+  //sort the model, which will sort the list in the combo
+  model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
+
+  //set the text to empty and the index to the first item on the list
+  setCurrentIndex(0);
+  clearEditText();
+}
+
+void KMyMoneyTagCombo::setUsedTagList(QList<QString>& usedIdList, QList<QString>& usedTagNameList)
+{
+  m_usedIdList = usedIdList;
+  m_usedTagNameList = usedTagNameList;
+  for (int i = 0; i < m_usedIdList.size(); ++i) {
+    int index = findData(QVariant(m_usedIdList.at(i)), Qt::UserRole, Qt::MatchExactly);
+    if (index != -1) removeItem(index);
+  }
+}
+
+void KMyMoneyTagCombo::checkCurrentText()
+{
+  if (!contains(currentText())) {
+    if (m_closedTagNameList.contains(currentText())) {
+      // Tell the user what's happened
+      QString msg = QString("<qt>") + i18n("Closed tags cannot be used.") + QString("</qt>");
+      KMessageBox::information(this, msg, i18n("Closed tag"), "Closed tag");
+      setCurrentText();
+      return;
+    } else if (m_usedTagNameList.contains(currentText())) {
+      // Tell the user what's happened
+      QString msg = QString("<qt>") + i18n("The tag is already present.") + QString("</qt>");
+      KMessageBox::information(this, msg, i18n("Duplicate tag"), "Duplicate tag");
+      setCurrentText();
+      return;
+    }
+    QString id;
+    // annouce that we go into a possible dialog to create an object
+    // This can be used by upstream widgets to disable filters etc.
+    emit objectCreation(true);
+
+    emit createItem(currentText(), id);
+
+    // Announce that we return from object creation
+    emit objectCreation(false);
+
+    // update the field to a possibly created object
+    //m_id = id;
+    setCurrentTextById(id);
+  }
+}
+
+KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
+    QFrame(parent)
+{
+  QToolButton *t = new QToolButton(this);
+  t->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogClose]));
+  t->setAutoRaise(true);
+  QLabel *l = new QLabel(name, this);
+  m_tagId = id;
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setSpacing(0);
+  this->setLayout(layout);
+  layout->addWidget(t);
+  layout->addWidget(l);
+  connect(t, SIGNAL(clicked(bool)), this, SIGNAL(clicked(bool)));
+  //this->setFrameStyle(QFrame::Panel | QFrame::Plain);
+}
+
+KTagContainer::KTagContainer(QWidget* parent) :
+    QWidget(parent)
+{
+  m_tagCombo = new KMyMoneyTagCombo;
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->setContentsMargins(0, 0, 5, 0);
+  layout->setSpacing(0);
+  layout->addWidget(m_tagCombo, 100);
+  this->setLayout(layout);
+  this->setFocusProxy(m_tagCombo);
+  connect(m_tagCombo, SIGNAL(lostFocus()), this, SLOT(slotAddTagWidget()));
+}
+
+void KTagContainer::loadTags(const QList<MyMoneyTag>& list)
+{
+  m_list = list;
+  m_tagCombo->loadTags(list);
+}
+
+const QList<QString> KTagContainer::selectedTags()
+{
+  return m_tagIdList;
+}
+
+void KTagContainer::addTagWidget(const QString& id)
+{
+  if (id.isNull() || m_tagIdList.contains(id))
+    return;
+  const QString tagName = m_tagCombo->itemText(m_tagCombo->findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+  KTagLabel *t = new KTagLabel(id, tagName, this);
+  connect(t, SIGNAL(clicked(bool)), this, SLOT(slotRemoveTagWidget()));
+  m_tagLabelList.append(t);
+  m_tagNameList.append(tagName);
+  m_tagIdList.append(id);
+  this->layout()->addWidget(t);
+  m_tagCombo->loadTags(m_list);
+  m_tagCombo->setUsedTagList(m_tagIdList, m_tagNameList);
+  m_tagCombo->setCurrentIndex(0);
+  m_tagCombo->setFocus();
+}
+
+void KTagContainer::RemoveAllTagWidgets()
+{
+  m_tagIdList.clear();
+  m_tagNameList.clear();
+  while (!m_tagLabelList.isEmpty())
+    delete m_tagLabelList.takeLast();
+  m_tagCombo->loadTags(m_list);
+  m_tagCombo->setUsedTagList(m_tagIdList, m_tagNameList);
+  m_tagCombo->setCurrentIndex(0);
+}
+
+void KTagContainer::slotAddTagWidget()
+{
+  addTagWidget(m_tagCombo->selectedItem());
+}
+
+void KTagContainer::slotRemoveTagWidget()
+{
+  this->tagCombo()->setFocus();
+  KTagLabel *t = (KTagLabel *)sender();
+  int index = m_tagLabelList.indexOf(t);
+  m_tagLabelList.removeAt(index);
+  m_tagIdList.removeAt(index);
+  m_tagNameList.removeAt(index);
+  delete t;
+  m_tagCombo->loadTags(m_list);
+  m_tagCombo->setUsedTagList(m_tagIdList, m_tagNameList);
+  m_tagCombo->setCurrentIndex(0);
+}
+
+KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
+    KMyMoneyMVCCombo(false, w)
+{
+  // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
+  addItem(i18n("Reconciled"), QVariant("R"));
+  addItem(i18nc("Reconciliation state 'Cleared'", "Cleared"), QVariant("C"));
+  addItem(i18n("Not reconciled"), QVariant(" "));
+  addItem(" ", QVariant("U"));
+
+  connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetState(QString)));
+}
+
+void KMyMoneyReconcileCombo::slotSetState(const QString& state)
+{
+  setSelectedItem(state);
+}
+
+void KMyMoneyReconcileCombo::removeDontCare()
+{
+  //Remove unknown state
+  removeItem(3);
+}
+
+void KMyMoneyReconcileCombo::setState(Split::State state)
+{
+  QString id;
+
+  switch (state) {
+    case Split::State::NotReconciled:
+      id = ' ';
+      break;
+    case Split::State::Cleared:
+      id = 'C';
+      break;
+    case Split::State::Reconciled:
+      id = 'R';
+      break;
+    case Split::State::Frozen:
+      id = 'F';
+      break;
+    case Split::State::Unknown:
+      id = 'U';
+      break;
+    default:
+      qDebug() << "Unknown reconcile state '" << (int)state << "' in KMyMoneyReconcileCombo::setState()\n";
+      break;
+  }
+  setSelectedItem(id);
+}
+
+Split::State KMyMoneyReconcileCombo::state() const
+{
+  Split::State state = Split::State::NotReconciled;
+
+  QVariant data = itemData(currentIndex());
+  QString dataVal;
+  if (data.isValid())
+    dataVal = data.toString();
+  else
+    return state;
+
+  if (!dataVal.isEmpty()) {
+    if (dataVal == "C")
+      state = Split::State::Cleared;
+    if (dataVal == "R")
+      state = Split::State::Reconciled;
+    if (dataVal == "F")
+      state = Split::State::Frozen;
+    if (dataVal == "U")
+      state = Split::State::Unknown;
+  }
+  return state;
+}
+
+KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, Account accountType) :
+    KMyMoneyMVCCombo(false, w),
+    m_dir(KMyMoneyRegister::Unknown)
+{
+  addItem(" ", QVariant(KMyMoneyRegister::Unknown));
+  if (accountType == Account::Income || accountType == Account::Expense) {
+    // this is used for income/expense accounts to just show the reverse sense
+    addItem(i18nc("Activity for income categories", "Received"), QVariant(KMyMoneyRegister::Payment));
+    addItem(i18nc("Activity for expense categories", "Paid"), QVariant(KMyMoneyRegister::Deposit));
+  } else {
+    addItem(i18n("Pay to"), QVariant(KMyMoneyRegister::Payment));
+    addItem(i18n("From"), QVariant(KMyMoneyRegister::Deposit));
+  }
+
+  connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetDirection(QString)));
+}
+
+void KMyMoneyCashFlowCombo::setDirection(KMyMoneyRegister::CashFlowDirection dir)
+{
+  m_dir = dir;
+  QString num;
+  setSelectedItem(num.setNum(dir));
+}
+
+void KMyMoneyCashFlowCombo::slotSetDirection(const QString& id)
+{
+  QString num;
+  for (int i = KMyMoneyRegister::Deposit; i <= KMyMoneyRegister::Unknown; ++i) {
+    num.setNum(i);
+    if (num == id) {
+      m_dir = static_cast<KMyMoneyRegister::CashFlowDirection>(i);
+      break;
+    }
+  }
+  emit directionSelected(m_dir);
+  update();
+}
+
+void KMyMoneyCashFlowCombo::removeDontCare()
+{
+  removeItem(findData(QVariant(KMyMoneyRegister::Unknown), Qt::UserRole, Qt::MatchExactly));
+}
+
+
+KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
+    KMyMoneyMVCCombo(false, w),
+    m_activity(Split::InvestmentTransactionType::UnknownTransactionType)
+{
+  addItem(i18n("Buy shares"), QVariant((int)Split::InvestmentTransactionType::BuyShares));
+  addItem(i18n("Sell shares"), QVariant((int)Split::InvestmentTransactionType::SellShares));
+  addItem(i18n("Dividend"), QVariant((int)Split::InvestmentTransactionType::Dividend));
+  addItem(i18n("Reinvest dividend"), QVariant((int)Split::InvestmentTransactionType::ReinvestDividend));
+  addItem(i18n("Yield"), QVariant((int)Split::InvestmentTransactionType::Yield));
+  addItem(i18n("Add shares"), QVariant((int)Split::InvestmentTransactionType::AddShares));
+  addItem(i18n("Remove shares"), QVariant((int)Split::InvestmentTransactionType::RemoveShares));
+  addItem(i18n("Split shares"), QVariant((int)Split::InvestmentTransactionType::SplitShares));
+  addItem(i18n("Interest Income"), QVariant((int)Split::InvestmentTransactionType::InterestIncome));
+
+  connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetActivity(QString)));
+}
+
+void KMyMoneyActivityCombo::setActivity(Split::InvestmentTransactionType activity)
+{
+  m_activity = activity;
+  QString num;
+  setSelectedItem(num.setNum((int)activity));
+}
+
+void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
+{
+  QString num;
+  for (auto i = (int)Split::InvestmentTransactionType::BuyShares; i <= (int)Split::InvestmentTransactionType::InterestIncome; ++i) {
+    num.setNum(i);
+    if (num == id) {
+      m_activity = static_cast<Split::InvestmentTransactionType>(i);
+      break;
+    }
+  }
+  emit activitySelected(m_activity);
+  update();
+}
+
+KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w) :
+    KComboBox(w)
+{
+  connect(this, SIGNAL(highlighted(int)), this, SLOT(slotChangeItem(int)));
+}
+
+KMyMoneyGeneralCombo::~KMyMoneyGeneralCombo()
+{
+}
+
+void KMyMoneyGeneralCombo::setCurrentItem(int id)
+{
+  setCurrentIndex(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+}
+
+int KMyMoneyGeneralCombo::currentItem() const
+{
+  return itemData(currentIndex()).toInt();
+}
+
+void KMyMoneyGeneralCombo::clear()
+{
+  KComboBox::clear();
+}
+
+void KMyMoneyGeneralCombo::insertItem(const QString& txt, int id, int idx)
+{
+  KComboBox::insertItem(idx, txt, QVariant(id));
+}
+
+void KMyMoneyGeneralCombo::removeItem(int id)
+{
+  KComboBox::removeItem(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+}
+
+void KMyMoneyGeneralCombo::slotChangeItem(int idx)
+{
+  emit itemSelected(itemData(idx).toInt());
+}
+
+KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
+    KMyMoneyGeneralCombo(parent)
+{
+  insertItem(i18n("All dates"), (int)TransactionFilter::Date::All);
+  insertItem(i18n("As of today"), (int)TransactionFilter::Date::AsOfToday);
+  insertItem(i18n("Today"), (int)TransactionFilter::Date::Today);
+  insertItem(i18n("Current month"), (int)TransactionFilter::Date::CurrentMonth);
+  insertItem(i18n("Current quarter"), (int)TransactionFilter::Date::CurrentQuarter);
+  insertItem(i18n("Current year"), (int)TransactionFilter::Date::CurrentYear);
+  insertItem(i18n("Current fiscal year"), (int)TransactionFilter::Date::CurrentFiscalYear);
+  insertItem(i18n("Month to date"), (int)TransactionFilter::Date::MonthToDate);
+  insertItem(i18n("Year to date"), (int)TransactionFilter::Date::YearToDate);
+  insertItem(i18n("Year to month"), (int)TransactionFilter::Date::YearToMonth);
+  insertItem(i18n("Last month"), (int)TransactionFilter::Date::LastMonth);
+  insertItem(i18n("Last year"), (int)TransactionFilter::Date::LastYear);
+  insertItem(i18n("Last fiscal year"), (int)TransactionFilter::Date::LastFiscalYear);
+  insertItem(i18n("Last 7 days"), (int)TransactionFilter::Date::Last7Days);
+  insertItem(i18n("Last 30 days"), (int)TransactionFilter::Date::Last30Days);
+  insertItem(i18n("Last 3 months"), (int)TransactionFilter::Date::Last3Months);
+  insertItem(i18n("Last quarter"), (int)TransactionFilter::Date::LastQuarter);
+  insertItem(i18n("Last 6 months"), (int)TransactionFilter::Date::Last6Months);
+  insertItem(i18n("Last 11 months"), (int)TransactionFilter::Date::Last11Months);
+  insertItem(i18n("Last 12 months"), (int)TransactionFilter::Date::Last12Months);
+  insertItem(i18n("Next 7 days"), (int)TransactionFilter::Date::Next7Days);
+  insertItem(i18n("Next 30 days"), (int)TransactionFilter::Date::Next30Days);
+  insertItem(i18n("Next 3 months"), (int)TransactionFilter::Date::Next3Months);
+  insertItem(i18n("Next quarter"), (int)TransactionFilter::Date::NextQuarter);
+  insertItem(i18n("Next 6 months"), (int)TransactionFilter::Date::Next6Months);
+  insertItem(i18n("Next 12 months"), (int)TransactionFilter::Date::Next12Months);
+  insertItem(i18n("Next 18 months"), (int)TransactionFilter::Date::Next18Months);
+  insertItem(i18n("Last 3 months to next 3 months"), (int)TransactionFilter::Date::Last3ToNext3Months);
+  insertItem(i18n("User defined"), (int)TransactionFilter::Date::UserDefined);
+}
+
+void KMyMoneyPeriodCombo::setCurrentItem(TransactionFilter::Date id)
+{
+  if (id >= TransactionFilter::Date::LastDateItem)
+    id = TransactionFilter::Date::UserDefined;
+
+  KMyMoneyGeneralCombo::setCurrentItem((int)id);
+}
+
+TransactionFilter::Date KMyMoneyPeriodCombo::currentItem() const
+{
+  return static_cast<TransactionFilter::Date>(KMyMoneyGeneralCombo::currentItem());
+}
+
+QDate KMyMoneyPeriodCombo::start(TransactionFilter::Date id)
+{
+  QDate start, end;
+  MyMoneyTransactionFilter::translateDateRange(id, start, end);
+  return start;
+}
+
+QDate KMyMoneyPeriodCombo::end(TransactionFilter::Date id)
+{
+  QDate start, end;
+  MyMoneyTransactionFilter::translateDateRange(id, start, end);
+  return end;
+}
+
+#if 0
+void KMyMoneyPeriodCombo::dates(QDate& start, QDate& end, MyMoneyTransactionFilter::dateOptionE id)
+{
+}
+#endif
+
+KMyMoneyOccurrenceCombo::KMyMoneyOccurrenceCombo(QWidget* parent) :
+    KMyMoneyGeneralCombo(parent)
+{
+}
+
+Schedule::Occurrence KMyMoneyOccurrenceCombo::currentItem() const
+{
+  return static_cast<Schedule::Occurrence>(KMyMoneyGeneralCombo::currentItem());
+}
+
+KMyMoneyOccurrencePeriodCombo::KMyMoneyOccurrencePeriodCombo(QWidget* parent) :
+    KMyMoneyOccurrenceCombo(parent)
+{
+  addItem(i18nc("Schedule occurrence period", MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Once).toLatin1()), (int)Schedule::Occurrence::Once);
+  addItem(i18nc("Schedule occurrence period", MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Daily).toLatin1()), (int)Schedule::Occurrence::Daily);
+  addItem(i18nc("Schedule occurrence period", MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Weekly).toLatin1()), (int)Schedule::Occurrence::Weekly);
+  addItem(i18nc("Schedule occurrence period", MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::EveryHalfMonth).toLatin1()), (int)Schedule::Occurrence::EveryHalfMonth);
+  addItem(i18nc("Schedule occurrence period", MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Monthly).toLatin1()), (int)Schedule::Occurrence::Monthly);
+  addItem(i18nc("Schedule occurrence period", MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence::Yearly).toLatin1()), (int)Schedule::Occurrence::Yearly);
+}
+
+KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent) :
+    KMyMoneyOccurrenceCombo(parent)
+{
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Once).toLatin1()), (int)Schedule::Occurrence::Once);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Daily).toLatin1()), (int)Schedule::Occurrence::Daily);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Weekly).toLatin1()), (int)Schedule::Occurrence::Weekly);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherWeek).toLatin1()), (int)Schedule::Occurrence::EveryOtherWeek);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryHalfMonth).toLatin1()), (int)Schedule::Occurrence::EveryHalfMonth);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeWeeks).toLatin1()), (int)Schedule::Occurrence::EveryThreeWeeks);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThirtyDays).toLatin1()), (int)Schedule::Occurrence::EveryThirtyDays);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourWeeks).toLatin1()), (int)Schedule::Occurrence::EveryFourWeeks);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Monthly).toLatin1()), (int)Schedule::Occurrence::Monthly);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryEightWeeks).toLatin1()), (int)Schedule::Occurrence::EveryEightWeeks);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherMonth).toLatin1()), (int)Schedule::Occurrence::EveryOtherMonth);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeMonths).toLatin1()), (int)Schedule::Occurrence::EveryThreeMonths);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourMonths).toLatin1()), (int)Schedule::Occurrence::EveryFourMonths);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::TwiceYearly).toLatin1()), (int)Schedule::Occurrence::TwiceYearly);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Yearly).toLatin1()), (int)Schedule::Occurrence::Yearly);
+  addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherYear).toLatin1()), (int)Schedule::Occurrence::EveryOtherYear);
+
+  connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(slotCurrentDataChanged()));
+}
+
+int KMyMoneyFrequencyCombo::daysBetweenEvents() const
+{
+  return MyMoneySchedule::daysBetweenEvents(currentItem());
+}
+
+int KMyMoneyFrequencyCombo::eventsPerYear() const
+{
+  return MyMoneySchedule::eventsPerYear(currentItem());
+}
+
+QVariant KMyMoneyFrequencyCombo::currentData() const
+{
+  return itemData(currentIndex(), Qt::UserRole);
+}
+
+void KMyMoneyFrequencyCombo::setCurrentData(QVariant data)
+{
+  setItemData(currentIndex(), data, Qt::UserRole);
+}
+
+void KMyMoneyFrequencyCombo::slotCurrentDataChanged()
+{
+  emit currentDataChanged(currentData());
+}
 
 #include "moc_kmymoneymvccombo.cpp"

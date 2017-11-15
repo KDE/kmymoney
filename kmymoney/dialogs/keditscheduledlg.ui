@@ -379,13 +379,13 @@
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneygeneralcombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>KMyMoneyOccurrencePeriodCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneyoccurrenceperiodcombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

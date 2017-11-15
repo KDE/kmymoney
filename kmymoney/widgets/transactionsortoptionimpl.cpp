@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "transactionsortoption.h"
+#include "transactionsortoptionimpl.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -30,34 +30,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "register.h"
 #include "icons/icons.h"
-#include "widgetenums.h"
 
-#include "ui_transactionsortoption.h"
+#include "ui_transactionsortoptiondecl.h"
 
 using namespace Icons;
 
-static const char * sortOrderText[] = {
-  I18N_NOOP2("Unknown sort order", "Unknown"),
-  I18N_NOOP("Post date"),
-  I18N_NOOP("Date entered"),
-  I18N_NOOP("Payee"),
-  I18N_NOOP("Amount"),
-  I18N_NOOP("Number"),
-  I18N_NOOP("Entry order"),
-  I18N_NOOP("Type"),
-  I18N_NOOP("Category"),
-  I18N_NOOP("Reconcile state"),
-  I18N_NOOP("Security")
-  // add new values above this comment line
-};
-
-TransactionSortOption::TransactionSortOption(QWidget *parent) :
-  QWidget(parent),
-  ui(new Ui::TransactionSortOption)
+TransactionSortOption::TransactionSortOption(QWidget *parent)
+    : QWidget(parent)
 {
+  ui = new Ui::TransactionSortOptionDecl;
   ui->setupUi(this);
+  init();
+}
 
+TransactionSortOption::~TransactionSortOption()
+{
+  delete ui;
+}
+
+void TransactionSortOption::init()
+{
   ui->m_addButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
   ui->m_removeButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
   ui->m_upButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowUp]));
@@ -71,11 +65,6 @@ TransactionSortOption::TransactionSortOption(QWidget *parent) :
   // update UI when focus changes
   connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)),
           this, SLOT(slotFocusChanged(QWidget*,QWidget*)));
-}
-
-TransactionSortOption::~TransactionSortOption()
-{
-  delete ui;
 }
 
 /**
@@ -109,7 +98,7 @@ void TransactionSortOption::setSettings(const QString& settings)
     int val = (*it_s).toInt();
     selectedMap[abs(val)] = true;
     // skip EntryDateSort but keep sign
-    if (abs(val) == static_cast<int>(eWidgets::SortField::EntryDate)) {
+    if (abs(val) == static_cast<int>(KMyMoneyRegister::EntryDateSort)) {
       dateSign = (val < 0) ? -1 : 1;
       continue;
     }
@@ -117,24 +106,24 @@ void TransactionSortOption::setSettings(const QString& settings)
   }
 
   // make sure to create EntryOrderSort if missing but required
-  if (selectedMap.find(static_cast<int>(eWidgets::SortField::EntryDate)) != selectedMap.end()
-      && selectedMap.find(static_cast<int>(eWidgets::SortField::EntryOrder)) == selectedMap.end()) {
-    int val = dateSign * static_cast<int>(eWidgets::SortField::EntryOrder);
-    selectedMap[static_cast<int>(eWidgets::SortField::EntryOrder)] = true;
+  if (selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryDateSort)) != selectedMap.end()
+      && selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryOrderSort)) == selectedMap.end()) {
+    int val = dateSign * static_cast<int>(KMyMoneyRegister::EntryOrderSort);
+    selectedMap[static_cast<int>(KMyMoneyRegister::EntryOrderSort)] = true;
     last = addEntry(ui->m_selectedList, last, val);
   }
 
   // fill available list
   QMap<int, bool>::const_iterator it_m;
-  for (int i = static_cast<int>(eWidgets::SortField::PostDate);
-       i < static_cast<int>(eWidgets::SortField::MaxFields); ++i) {
+  for (int i = static_cast<int>(KMyMoneyRegister::PostDateSort);
+       i < static_cast<int>(KMyMoneyRegister::MaxSortFields); ++i) {
     // Never add EntryDateSort
-    if (i == static_cast<int>(eWidgets::SortField::EntryDate))
+    if (i == static_cast<int>(KMyMoneyRegister::EntryDateSort))
       continue;
     // Only add those, that are not present in the list of selected items
     if (selectedMap.find(i) == selectedMap.end()) {
       int val = i;
-      if (i == static_cast<int>(eWidgets::SortField::Value))
+      if (i == static_cast<int>(KMyMoneyRegister::ValueSort))
         val = -val;
       addEntry(ui->m_availableList, 0, val);
     }
@@ -154,13 +143,13 @@ void TransactionSortOption::setSettings(const QString& settings)
 
 QListWidgetItem* TransactionSortOption::addEntry(QListWidget* p, QListWidgetItem* after, int idx)
 {
-  auto txt = sortOrderToText(static_cast<eWidgets::SortField>(abs(idx)));
+  QString txt = KMyMoneyRegister::sortOrderToText(static_cast<KMyMoneyRegister::TransactionSortField>(abs(idx)));
   if (txt.isEmpty())
     txt = "Unknown";    // i18n should be handled in sortOptionToText()
 
   int row = p->row(after) + 1;
   p->insertItem(row, txt);
-  auto item = p->item(row);
+  QListWidgetItem* item = p->item(row);
   int direction = (idx >= 0) ? 1 : -1;
   item->setData(Qt::UserRole, QVariant(direction));
   setDirectionIcon(item);
@@ -191,15 +180,15 @@ void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 QString TransactionSortOption::settings() const
 {
   QString rc;
-  auto item = dynamic_cast<QListWidgetItem*>(ui->m_selectedList->item(0));
+  QListWidgetItem* item = dynamic_cast<QListWidgetItem*>(ui->m_selectedList->item(0));
   while (item) {
-    auto option = textToSortOrder(item->text());
+    int option = KMyMoneyRegister::textToSortOrder(item->text());
     // if we look at the EntryOrderSort option, we have to make
     // sure, that the EntryDateSort is prepended
-    if (option == eWidgets::SortField::EntryOrder) {
-      rc  += QString::number(static_cast<int>(eWidgets::SortField::EntryDate) * item->data(Qt::UserRole).toInt()) + ',';
+    if (option == KMyMoneyRegister::EntryOrderSort) {
+      rc  += QString::number(static_cast<int>(KMyMoneyRegister::EntryDateSort) * item->data(Qt::UserRole).toInt()) + ',';
     }
-    rc += QString::number((int)textToSortOrder(item->text()) * item->data(Qt::UserRole).toInt());
+    rc += QString::number(KMyMoneyRegister::textToSortOrder(item->text()) * item->data(Qt::UserRole).toInt());
     item = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
     if (item != 0)
       rc += ',';
@@ -219,7 +208,7 @@ void TransactionSortOption::slotFocusChanged(QWidget *o, QWidget *n)
 
 void TransactionSortOption::slotAvailableSelected()
 {
-  auto item = ui->m_availableList->currentItem();
+  QListWidgetItem* item = ui->m_availableList->currentItem();
   ui->m_addButton->setEnabled(item != 0);
   ui->m_removeButton->setDisabled(true);
   ui->m_upButton->setDisabled(true);
@@ -228,7 +217,7 @@ void TransactionSortOption::slotAvailableSelected()
 
 void TransactionSortOption::slotSelectedSelected()
 {
-  auto item = ui->m_selectedList->currentItem();
+  QListWidgetItem* item = ui->m_selectedList->currentItem();
   ui->m_addButton->setDisabled(true);
   ui->m_removeButton->setEnabled(item != 0);
   if (item) {
@@ -244,7 +233,7 @@ void TransactionSortOption::slotAddItem()
 {
   QListWidgetItem* item;
   if ((item = ui->m_availableList->currentItem()) != 0) {
-    auto next = ui->m_availableList->item(ui->m_availableList->row(item) + 1);
+    QListWidgetItem* next = ui->m_availableList->item(ui->m_availableList->row(item) + 1);
     if (!next)
       next = ui->m_availableList->item(ui->m_availableList->row(item) + 1);
     ui->m_availableList->takeItem(ui->m_availableList->row(item));
@@ -261,7 +250,7 @@ void TransactionSortOption::slotRemoveItem()
 {
   QListWidgetItem* item;
   if ((item = ui->m_selectedList->currentItem()) != 0) {
-    auto next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
+    QListWidgetItem* next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
     if (!next)
       next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
     ui->m_selectedList->takeItem(ui->m_selectedList->row(item));
@@ -276,8 +265,8 @@ void TransactionSortOption::slotRemoveItem()
 
 void TransactionSortOption::slotUpItem()
 {
-  auto item = ui->m_selectedList->currentItem();
-  auto prev = ui->m_selectedList->item(ui->m_selectedList->row(item) - 1);
+  QListWidgetItem *item = ui->m_selectedList->currentItem();
+  QListWidgetItem *prev = ui->m_selectedList->item(ui->m_selectedList->row(item) - 1);
   int prevRow = ui->m_selectedList->row(prev);
   if (prev) {
     ui->m_selectedList->takeItem(ui->m_selectedList->row(item));
@@ -291,8 +280,8 @@ void TransactionSortOption::slotUpItem()
 
 void TransactionSortOption::slotDownItem()
 {
-  auto item = ui->m_selectedList->currentItem();
-  auto next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
+  QListWidgetItem *item = ui->m_selectedList->currentItem();
+  QListWidgetItem *next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
   int nextRow = ui->m_selectedList->row(next);
   if (next) {
     ui->m_selectedList->takeItem(ui->m_selectedList->row(item));
@@ -302,21 +291,4 @@ void TransactionSortOption::slotDownItem()
     ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
     emit settingsChanged(settings());
   }
-}
-
-eWidgets::SortField TransactionSortOption::textToSortOrder(const QString& text)
-{
-  for (auto idx = 1; idx < static_cast<int>(eWidgets::SortField::MaxFields); ++idx) {
-    if (text == i18n(sortOrderText[idx])) {
-      return static_cast<eWidgets::SortField>(idx);
-    }
-  }
-  return eWidgets::SortField::Unknown;
-}
-
-QString TransactionSortOption::sortOrderToText(eWidgets::SortField idx)
-{
-  if ((int)idx < (int)eWidgets::SortField::PostDate || (int)idx >= (int)eWidgets::SortField::MaxFields)
-    idx = eWidgets::SortField::Unknown;
-  return i18n(sortOrderText[(int)idx]);
 }

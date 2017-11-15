@@ -49,7 +49,7 @@ class kMyMoneyCompletion : public QWidget
   Q_OBJECT
 public:
 
-  explicit  kMyMoneyCompletion(QWidget* parent = nullptr);
+  kMyMoneyCompletion(QWidget *parent = 0);
   virtual ~kMyMoneyCompletion();
 
   /**
@@ -79,12 +79,12 @@ protected:
     * Reimplemented from kMyMoneyAccountSelector to get events from the viewport (to hide
     * this widget on mouse-click, Escape-presses, etc.
     */
-  bool eventFilter(QObject *, QEvent *) override;
+  virtual bool eventFilter(QObject *, QEvent *);
 
   /**
     * Re-implemented for internal reasons.  API is unaffected.
     */
-  void showEvent(QShowEvent*) override;
+  virtual void showEvent(QShowEvent*);
 
   /**
     * This method resizes the widget to show a maximum of @p count

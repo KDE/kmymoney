@@ -20,24 +20,30 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace eMyMoney { namespace TransactionFilter { enum class Date; } }
+#include "mymoneytransactionfilter.h"
+#include "mymoneyenums.h"
 
-class DateRangeDlgPrivate;
+namespace Ui
+{
+class DateRangeDlgDecl;
+}
+
 class DateRangeDlg : public QWidget
 {
   Q_OBJECT
-  Q_DISABLE_COPY(DateRangeDlg)
 
 public:
-  explicit DateRangeDlg(QWidget* parent = nullptr);
+  DateRangeDlg(QWidget *parent = 0);
   ~DateRangeDlg();
 
   /*!
@@ -72,8 +78,11 @@ Q_SIGNALS:
   void rangeChanged();
 
 private:
-  DateRangeDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(DateRangeDlg)
+  void setupDatePage();
+
+  Ui::DateRangeDlgDecl*  m_ui;
+  QDate                  m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
+  QDate                  m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
 };
 
 #endif

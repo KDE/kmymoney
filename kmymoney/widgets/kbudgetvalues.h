@@ -21,7 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
+#include <QDate>
+class QLabel;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,28 +30,36 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneybudget.h"
+#include "ui_kbudgetvaluesdecl.h"
+#include <mymoneybudget.h>
+class kMyMoneyEdit;
 
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
  */
 
-class KBudgetValuesPrivate;
-class KBudgetValues : public QWidget
+class KBudgetValuesDecl : public QWidget, public Ui::KBudgetValuesDecl
+{
+public:
+  KBudgetValuesDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
+  }
+};
+
+class KBudgetValues : public KBudgetValuesDecl
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KBudgetValues)
-
 public:
-  explicit KBudgetValues(QWidget* parent = nullptr);
+  KBudgetValues(QWidget* parent = 0);
   ~KBudgetValues();
 
   void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);
   void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
   void clear();
 
-signals:
-  void valuesChanged();
+private:
+  void enableMonths(bool enabled);
+  void fillMonthLabels();
 
 protected slots:
   void slotChangePeriod(int id);
@@ -69,11 +78,16 @@ protected slots:
   void slotUpdateClearButton();
 
 protected:
-  bool eventFilter(QObject* o, QEvent* e) override;
+  bool eventFilter(QObject* o, QEvent* e);
 
 private:
-  KBudgetValuesPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KBudgetValues)
+  kMyMoneyEdit*   m_field[12];
+  QLabel*         m_label[12];
+  QWidget*        m_currentTab;
+  QDate           m_budgetDate;
+
+signals:
+  void valuesChanged();
 };
 
 #endif

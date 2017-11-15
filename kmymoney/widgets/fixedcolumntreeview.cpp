@@ -72,7 +72,7 @@ struct FixedColumnTreeView::Private {
 
   void syncExpanded(const QModelIndex& parentIndex = QModelIndex()) {
     const int rows = parent->model()->rowCount(parentIndex);
-    for (auto i = 0; i < rows; ++i) {
+    for (int i = 0; i < rows; ++i) {
       const QModelIndex &index = parent->model()->index(i, 0, parentIndex);
       if (parent->isExpanded(index)) {
         pub->expand(index);

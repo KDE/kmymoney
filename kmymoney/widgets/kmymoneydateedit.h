@@ -28,7 +28,7 @@ class KMyMoneyDateEdit : public QDateEdit
   Q_OBJECT
 
 public:
-  explicit KMyMoneyDateEdit(QWidget* parent = nullptr);
+  explicit KMyMoneyDateEdit(QWidget* parent = 0);
 
 };
 #endif // KMYMONEYDATEEDIT_H

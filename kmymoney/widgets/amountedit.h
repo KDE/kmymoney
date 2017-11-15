@@ -22,7 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDoubleValidator>
+#include <QValidator>
 #include <QLineEdit>
 #include <QPointer>
 
@@ -149,8 +149,8 @@ protected Q_SLOTS:
   void slotCalculatorClose();
 
 public:
-  explicit AmountEdit(QWidget* parent = nullptr, const int prec = -2);
-  explicit AmountEdit(const MyMoneySecurity& eq, QWidget* parent = nullptr);
+  explicit AmountEdit(QWidget *parent = 0, const int prec = -2);
+  explicit AmountEdit(const MyMoneySecurity& eq, QWidget *parent = 0);
   virtual ~AmountEdit();
 
   MyMoneyMoney value() const;
@@ -163,7 +163,10 @@ public:
     * This method returns the value of the edit field in "numerator/denominator" format.
     * If you want to get the text of the edit field, use lineedit()->text() instead.
     */
-  QString numericalText() const;
+  QString numericalText() const
+  {
+    return value().toString();
+  }
 
   /**
     * Set the number of fractional digits that should be shown

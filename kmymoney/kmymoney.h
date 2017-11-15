@@ -41,9 +41,7 @@
 #include "onlinejobtyped.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
-#include "selectedtransactions.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
+#include "selectedtransaction.h"
 
 class QResizeEvent;
 class KPluginMetaData;

@@ -30,22 +30,20 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-namespace Ui { class TransactionSortOption; }
-namespace eWidgets { enum class SortField; }
+namespace Ui
+{
+class TransactionSortOptionDecl;
+}
 
 class QListWidget;
 class QListWidgetItem;
 class TransactionSortOption : public QWidget
 {
   Q_OBJECT
-  Q_DISABLE_COPY(TransactionSortOption)
-
 public:
-  explicit TransactionSortOption(QWidget *parent);
+  TransactionSortOption(QWidget *parent);
   ~TransactionSortOption();
   QString settings() const;
-
 public slots:
   void setSettings(const QString& settings);
   void toggleDirection(QListWidgetItem * item);
@@ -53,7 +51,6 @@ public slots:
 protected:
   QListWidgetItem * addEntry(QListWidget * p, QListWidgetItem * after, int idx);
   void setDirectionIcon(QListWidgetItem* item);
-
 protected slots:
   void slotAvailableSelected();
   void slotSelectedSelected();
@@ -62,14 +59,13 @@ protected slots:
   void slotUpItem();
   void slotDownItem();
   void slotFocusChanged(QWidget *o, QWidget *n);
-
+private:
+  void init();
 signals:
   void settingsChanged(const QString&);
 
 private:
-  static eWidgets::SortField textToSortOrder(const QString& text);
-  static QString sortOrderToText(eWidgets::SortField idx);
-  Ui::TransactionSortOption *ui;
+  Ui::TransactionSortOptionDecl *ui;
 };
 
 #endif /* TRANSACTIONSORTOPTIONIMPL_H */

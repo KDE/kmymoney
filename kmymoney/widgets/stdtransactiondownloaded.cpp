@@ -20,8 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStyleOptionViewItem>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -34,23 +32,14 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionDownloaded::StdTransactionDownloaded(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  StdTransaction(parent, transaction, split, uniqueId)
+    StdTransaction(parent, transaction, split, uniqueId)
 {
-}
-
-StdTransactionDownloaded::~StdTransactionDownloaded()
-{
-}
-
-const char* StdTransactionDownloaded::className()
-{
-  return "StdTransactionDownloaded";
 }
 
 bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 
 {
-  auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
     option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
@@ -60,22 +49,14 @@ bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleO
 }
 
 InvestTransactionDownloaded::InvestTransactionDownloaded(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  InvestTransaction(parent, transaction, split, uniqueId)
+    InvestTransaction(parent, transaction, split, uniqueId)
 {
-}
-
-InvestTransactionDownloaded::~InvestTransactionDownloaded()
-{
-}
-
-const char* InvestTransactionDownloaded::className()
-{
-  return "InvestTransactionDownloaded";
 }
 
 bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
+
 {
-  auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
     option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));

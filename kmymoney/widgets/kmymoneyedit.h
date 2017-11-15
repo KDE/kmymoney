@@ -17,11 +17,12 @@
 #ifndef KMYMONEYEDIT_H
 #define KMYMONEYEDIT_H
 
+
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDoubleValidator>
-#include <QWidget>
+#include <QValidator>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneylineedit.h"
 #include "mymoneymoney.h"
 #include "kmm_widgets_export.h"
 
@@ -48,7 +50,6 @@ class MyMoneySecurity;
 class KMM_WIDGETS_EXPORT kMyMoneyMoneyValidator : public QDoubleValidator
 {
   Q_OBJECT
-  Q_DISABLE_COPY(kMyMoneyMoneyValidator)
 
 public:
   /**
@@ -56,21 +57,21 @@ public:
     * (whatever QDoubleValidator uses for that) and parent @p
     * parent
     */
-  explicit kMyMoneyMoneyValidator(QObject * parent);
+  kMyMoneyMoneyValidator(QObject * parent);
   /**
     * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
     * top] and a precision of @p digits after the decimal
     * point.
     */
-  explicit kMyMoneyMoneyValidator(double bottom, double top, int decimals,
-                                  QObject * parent);
+  kMyMoneyMoneyValidator(double bottom, double top, int decimals,
+                         QObject * parent);
   /**
     * Destructs the validator.
     */
-  ~kMyMoneyMoneyValidator();
+  virtual ~kMyMoneyMoneyValidator() {}
 
   /** Overloaded for internal reasons. The API is not affected. */
-  QValidator::State validate(QString & input, int & pos) const override;
+  virtual QValidator::State validate(QString & input, int & pos) const;
 };
 
 /**
@@ -81,11 +82,9 @@ public:
   *
   * @author Michael Edwardes, Thomas Baumgart
   */
-class kMyMoneyEditPrivate;
 class KMM_WIDGETS_EXPORT kMyMoneyEdit : public QWidget
 {
   Q_OBJECT
-  Q_DISABLE_COPY(kMyMoneyEdit)
   Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
   Q_PROPERTY(bool resetButtonVisibility READ isResetButtonVisible WRITE setResetButtonVisible)
   Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty)
@@ -93,9 +92,61 @@ class KMM_WIDGETS_EXPORT kMyMoneyEdit : public QWidget
   Q_PROPERTY(MyMoneyMoney value READ value WRITE setValue DESIGNABLE false STORED false USER true)
   Q_PROPERTY(bool valid READ isValid DESIGNABLE false STORED false)
 
+private:
+  QString previousText; // keep track of what has been typed
+  QString m_text;       // keep track of what was the original value
+  kMyMoneyCalculator* m_calculator;
+  QWidget*            m_calculatorFrame;
+  kMyMoneyLineEdit*   m_edit;
+  QPushButton*        m_calcButton;
+  QPushButton*        m_resetButton;
+  int                 m_prec;
+  bool                allowEmpty;
+
+  /**
+   * This holds the number of precision to be used
+   * when no other information (e.g. from account)
+   * is available.
+   *
+   * @sa setStandardPrecision()
+   */
+  static int standardPrecision;
+
+private:
+  /**
+    * Internal helper function for value() and ensureFractionalPart().
+    */
+  void ensureFractionalPart(QString& txt) const;
+
+protected:
+  /**
+    * This method ensures that the text version contains a
+    * fractional part.
+    */
+  void ensureFractionalPart();
+
+  /**
+    * This method opens the calculator and replays the key
+    * event pointed to by @p ev. If @p ev is 0, then no key
+    * event is replayed.
+    *
+    * @param ev pointer to QKeyEvent that started the calculator.
+    */
+  void calculatorOpen(QKeyEvent* ev);
+
+  /**
+    * Helper method for constructors.
+    */
+  void init();
+
+protected slots:
+  void theTextChanged(const QString & text);
+  void slotCalculatorResult();
+  void slotCalculatorOpen();
+
 public:
-  explicit kMyMoneyEdit(QWidget* parent = nullptr, const int prec = -2);
-  explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget* parent = nullptr);
+  explicit kMyMoneyEdit(QWidget *parent = 0, const int prec = -2);
+  explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent = 0);
   ~kMyMoneyEdit();
 
   MyMoneyMoney value() const;
@@ -104,14 +155,19 @@ public:
 
   bool isValid() const;
 
-  virtual bool eventFilter(QObject *watched, QEvent *event) override;
+  virtual bool eventFilter(QObject * , QEvent *);
 
   /**
     * This method returns the value of the edit field in "numerator/denominator" format.
     * If you want to get the text of the edit field, use lineedit()->text() instead.
     */
-  QString text() const;
-  void setMinimumWidth(int w);
+  QString text() const {
+    return value().toString();
+  };
+
+  void setMinimumWidth(int w) {
+    m_edit->setMinimumWidth(w);
+  };
 
   /**
     * Set the number of fractional digits that should be shown
@@ -127,7 +183,9 @@ public:
     * return the number of fractional digits
     * @sa setPrecision
     */
-  int precision() const;
+  int precision() {
+    return m_prec;
+  };
 
   QWidget* focusWidget() const;
 
@@ -169,7 +227,9 @@ public slots:
   void resetText();
   void clearText();
 
-  void setText(const QString& txt);
+  void setText(const QString& txt) {
+    setValue(MyMoneyMoney(txt));
+  };
 
   /**
     * This method allows to show/hide the calculator button of the widget.
@@ -192,15 +252,6 @@ signals: // Signals
   void valueChanged(const QString& text);
 
   void textChanged(const QString& text);
-
-protected slots:
-  void theTextChanged(const QString & text);
-  void slotCalculatorResult();
-  void slotCalculatorOpen();
-
-private:
-  kMyMoneyEditPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(kMyMoneyEdit)
 };
 
 #endif

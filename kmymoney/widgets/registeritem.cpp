@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "registeritem.h"
-#include "registeritem_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -29,271 +28,86 @@
 
 #include "register.h"
 #include "kmymoneyglobalsettings.h"
-#include "mymoneyobject.h"
-#include "mymoneymoney.h"
-#include "mymoneyenums.h"
 
 using namespace KMyMoneyRegister;
 
-QDate RegisterItemPrivate::nullDate;
-QString RegisterItemPrivate::nullString;
-MyMoneyMoney RegisterItemPrivate::nullValue;
+QDate RegisterItem::nullDate;
+QString RegisterItem::nullString;
+MyMoneyMoney RegisterItem::nullValue;
 
 RegisterItem::RegisterItem() :
-  d_ptr(new RegisterItemPrivate)
+    m_parent(0),
+    m_prev(0),
+    m_next(0),
+    m_alternate(false),
+    m_needResize(false),
+    m_visible(false)
 {
-  Q_D(RegisterItem);
-  d->m_parent = nullptr;
+  init();
 }
 
 RegisterItem::RegisterItem(Register* parent) :
-  d_ptr(new RegisterItemPrivate)
+    m_parent(parent),
+    m_prev(0),
+    m_next(0),
+    m_alternate(false),
+    m_needResize(false),
+    m_visible(false)
 {
-  Q_D(RegisterItem);
-  d->m_parent = parent;
+  init();
   parent->addItem(this);
 }
 
-RegisterItem::RegisterItem(RegisterItemPrivate &dd, Register* parent) :
-  d_ptr(&dd)
+void RegisterItem::init()
 {
-  Q_D(RegisterItem);
-  d->m_parent = parent;
-  parent->addItem(this);
-}
-
-RegisterItem::RegisterItem(RegisterItemPrivate &dd) :
-  d_ptr(&dd)
-{
-}
-
-RegisterItem::RegisterItem(const RegisterItem& other) :
-  d_ptr(new RegisterItemPrivate(*other.d_func()))
-{
+  m_startRow = 0;
+  m_rowsRegister = 1;
+  m_rowsForm = 1;
+  m_visible = true;
 }
 
 RegisterItem::~RegisterItem()
 {
-  Q_D(RegisterItem);
-  d->m_parent->removeItem(this);
-  delete d;
-}
-
-bool RegisterItem::isSelected() const
-{
-  return false;
-}
-
-void RegisterItem::setSelected(bool /* selected*/)
-{
-}
-
-bool RegisterItem::hasFocus() const {
-  return false;
-}
-
-bool RegisterItem::hasEditorOpen() const
-{
-  return false;
-}
-
-void RegisterItem::setFocus(bool /*focus*/, bool updateLens)
-{
-  Q_UNUSED(updateLens);
-}
-
-QDate RegisterItem::sortPostDate() const
-{
-  Q_D(const RegisterItem);
-  return d->nullDate;
-}
-
-QDate RegisterItem::sortEntryDate() const
-{
-  Q_D(const RegisterItem);
-  return d->nullDate;
-}
-
-const QString& RegisterItem::sortPayee() const
-{
-  Q_D(const RegisterItem);
-  return d->nullString;
-}
-
-MyMoneyMoney RegisterItem::sortValue() const
-{
-  Q_D(const RegisterItem);
-  return d->nullValue;
-}
-
-QString RegisterItem::sortNumber() const
-{
-  Q_D(const RegisterItem);
-  return d->nullString;
-}
-
-const QString& RegisterItem::sortEntryOrder() const
-{
-  Q_D(const RegisterItem);
-  return d->nullString;
-}
-
-CashFlowDirection RegisterItem::sortType() const
-{
-  return Deposit;
-}
-
-const QString& RegisterItem::sortCategory() const
-{
-  Q_D(const RegisterItem);
-  return d->nullString;
-}
-
-eMyMoney::Split::State RegisterItem::sortReconcileState() const
-{
-  return eMyMoney::Split::State::MaxReconcileState;
-}
-
-const QString RegisterItem::sortSecurity() const
-{
-  Q_D(const RegisterItem);
-  return d->nullString;
-}
-
-void RegisterItem::setStartRow(int row)
-{
-  Q_D(RegisterItem);
-  d->m_startRow = row;
-}
-
-int RegisterItem::startRow() const
-{
-  Q_D(const RegisterItem);
-  return d->m_startRow;
-}
-
-const QString& RegisterItem::id() const
-{
-  return MyMoneyObject::emptyId();
+  m_parent->removeItem(this);
 }
 
 void RegisterItem::setParent(Register* parent)
 {
-  Q_D(RegisterItem);
-  d->m_parent = parent;
-}
-
-Register* RegisterItem::getParent() const
-{
-  Q_D(const RegisterItem);
-  return d->m_parent;
-}
-
-void RegisterItem::setNeedResize()
-{
-  Q_D(RegisterItem);
-  d->m_needResize = true;
-}
-
-bool RegisterItem::isVisible() const
-{
-  Q_D(const RegisterItem);
-  return d->m_visible;
+  m_parent = parent;
 }
 
 void RegisterItem::setNumRowsRegister(int rows)
 {
-  Q_D(RegisterItem);
-  if (rows != d->m_rowsRegister) {
-    d->m_rowsRegister = rows;
-    if (d->m_parent)
-      d->m_parent->forceUpdateLists();
+  if (rows != m_rowsRegister) {
+    m_rowsRegister = rows;
+    if (m_parent)
+      m_parent->forceUpdateLists();
   }
-}
-
-void RegisterItem::setNumRowsForm(int rows)
-{
-  Q_D(RegisterItem);
-  d->m_rowsForm = rows;
-}
-
-int RegisterItem::numRowsRegister() const
-{
-  Q_D(const RegisterItem);
-  return d->m_rowsRegister;
-}
-
-int RegisterItem::numRowsForm() const
-{
-  Q_D(const RegisterItem);
-  return d->m_rowsForm;
-}
-
-int RegisterItem::numColsForm() const
-{
-  return 1;
-}
-
-void RegisterItem::setAlternate(bool alternate)
-{
-  Q_D(RegisterItem);
-  d->m_alternate = alternate;
 }
 
 bool RegisterItem::markVisible(bool visible)
 {
-  Q_D(RegisterItem);
-  if (d->m_visible == visible)
+  if (m_visible == visible)
     return false;
-  d->m_visible = visible;
+  m_visible = visible;
   return true;
-}
-
-void  RegisterItem::setNextItem(RegisterItem* p)
-{
-  Q_D(RegisterItem);
-  d->m_next = p;
-}
-
-void  RegisterItem::setPrevItem(RegisterItem* p)
-{
-  Q_D(RegisterItem);
-  d->m_prev = p;
-}
-
-RegisterItem*  RegisterItem::nextItem() const
-{
-  Q_D(const RegisterItem);
-  return d->m_next;
-}
-
-RegisterItem*  RegisterItem::prevItem() const
-{
-  Q_D(const RegisterItem);
-  return d->m_prev;
-}
-
-bool RegisterItem::maybeTip(const QPoint& /* relpos */, int /* row */, int /* col */, QRect& /* r */, QString& /* msg */)
-{
-  return false;
 }
 
 void RegisterItem::setVisible(bool visible)
 {
-  Q_D(RegisterItem);
-  if (markVisible(visible) && d->m_parent) {
-    int numRows = d->m_parent->rowCount();
+  if (markVisible(visible) && m_parent) {
+    int numRows = m_parent->rowCount();
     if (visible) {
       for (int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
         if (numRows > i) {
-          d->m_parent->showRow(i);
-          d->m_parent->setRowHeight(i, rowHeightHint());
+          m_parent->showRow(i);
+          m_parent->setRowHeight(i, rowHeightHint());
         }
       }
     } else {
       for (int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
         if (numRows > i) {
-          d->m_parent->hideRow(i);
+          m_parent->hideRow(i);
         }
       }
     }
@@ -302,12 +116,11 @@ void RegisterItem::setVisible(bool visible)
 
 int RegisterItem::rowHeightHint() const
 {
-  Q_D(const RegisterItem);
-  if (!d->m_visible)
+  if (!m_visible)
     return 0;
 
-  if (d->m_parent) {
-    return d->m_parent->rowHeightHint();
+  if (m_parent) {
+    return m_parent->rowHeightHint();
   }
 
   QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());

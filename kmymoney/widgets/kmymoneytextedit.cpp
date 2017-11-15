@@ -24,7 +24,7 @@
 
 KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit * parent)
     : Highlighter(parent),
-    m_allowedChars(QString(QString())),
+    m_allowedChars(QString("")),
     m_maxLines(-1),
     m_maxLineLength(-1),
     m_maxLength(-1)
@@ -73,7 +73,7 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 
   // Check used characters
   const int length = text.length();
-  for (auto i = 0; i < length; ++i) {
+  for (int i = 0; i < length; ++i) {
     if (!m_allowedChars.contains(text.at(i))) {
       setFormat(i, 1, invalidFormat);
     }
@@ -108,7 +108,7 @@ KMyMoneyTextEdit::KMyMoneyTextEdit(QWidget* parent)
     m_maxLength(-1),
     m_maxLineLength(-1),
     m_maxLines(-1),
-    m_allowedChars(QString(QString())),
+    m_allowedChars(QString("")),
     m_highligther(0)
 {
   setWordWrapMode(QTextOption::ManualWrap);
@@ -162,7 +162,7 @@ bool KMyMoneyTextEdit::isValid() const
   }
 
   const int length = text.length();
-  for (auto i = 0; i < length; ++i) {
+  for (int i = 0; i < length; ++i) {
     if (!m_allowedChars.contains(text.at(i)))
       return false;
   }

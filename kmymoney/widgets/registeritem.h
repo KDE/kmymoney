@@ -21,8 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qglobal.h>
 #include <QString>
+#include <QStyleOptionViewItem>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,17 +31,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class QDate;
-class QPainter;
-class QPoint;
-class QRect;
-class QStyleOptionViewItem;
-class QModelIndex;
+#include "mymoneyobject.h"
+#include "mymoneymoney.h"
+#include "mymoneyenums.h"
 
 class MyMoneyMoney;
-
-namespace eMyMoney { namespace Split { enum class State; } }
-
 namespace KMyMoneyRegister
 {
 
@@ -88,44 +83,67 @@ class Register;
 /**
   * @author Thomas Baumgart
   */
-class RegisterItemPrivate;
 class RegisterItem
 {
 public:
   RegisterItem();
-  explicit RegisterItem(Register* getParent);
-  RegisterItem(const RegisterItem & other);
-  RegisterItem(RegisterItem && other);
-  friend void swap(RegisterItem& first, RegisterItem& second);
-
+  RegisterItem(Register* parent);
   virtual ~RegisterItem();
 
   virtual const char* className() = 0;
 
   virtual bool isSelectable() const = 0;
-  virtual bool isSelected() const;
-  virtual void setSelected(bool /* selected*/);
+  virtual bool isSelected() const {
+    return false;
+  }
+  virtual void setSelected(bool /* selected*/) {}
 
   virtual bool canHaveFocus() const = 0;
-  virtual bool hasFocus() const;
-  virtual bool hasEditorOpen() const;
+  virtual bool hasFocus() const {
+    return false;
+  }
+  virtual bool hasEditorOpen() const {
+    return false;
+  }
 
-  virtual void setFocus(bool /*focus*/, bool updateLens = true);
+  virtual void setFocus(bool /*focus*/, bool updateLens = true) {
+    Q_UNUSED(updateLens);
+  }
 
   virtual bool isErroneous() const = 0;
 
   // helper functions used for sorting
-  virtual QDate sortPostDate() const;
+  virtual QDate sortPostDate() const {
+    return nullDate;
+  }
   virtual int sortSamePostDate() const = 0;
-  virtual QDate sortEntryDate() const;
-  virtual const QString& sortPayee() const;
-  virtual MyMoneyMoney sortValue() const;
-  virtual QString sortNumber() const;
-  virtual const QString& sortEntryOrder() const;
-  virtual CashFlowDirection sortType() const;
-  virtual const QString& sortCategory() const;
-  virtual eMyMoney::Split::State sortReconcileState() const;
-  virtual const QString sortSecurity() const;
+  virtual QDate sortEntryDate() const {
+    return nullDate;
+  }
+  virtual const QString& sortPayee() const {
+    return nullString;
+  }
+  virtual MyMoneyMoney sortValue() const {
+    return nullValue;
+  }
+  virtual QString sortNumber() const {
+    return nullString;
+  }
+  virtual const QString& sortEntryOrder() const {
+    return nullString;
+  }
+  virtual CashFlowDirection sortType() const {
+    return Deposit;
+  }
+  virtual const QString& sortCategory() const {
+    return nullString;
+  }
+  virtual eMyMoney::Split::State sortReconcileState() const {
+    return eMyMoney::Split::State::MaxReconcileState;
+  }
+  virtual const QString sortSecurity() const {
+    return nullString;
+  }
 
   /**
     * This method sets the row offset of the item in the register
@@ -136,8 +154,12 @@ public:
     * @note The row offset is based on QTable rows, not register
     * items.
     */
-  virtual void setStartRow(int row);
-  int startRow() const;
+  virtual void setStartRow(int row) {
+    m_startRow = row;
+  }
+  int startRow() const {
+    return m_startRow;
+  }
   virtual int rowHeightHint() const;
 
   /**
@@ -151,20 +173,28 @@ public:
     * This method modifies the number of rows required to display this item
     * in a Form.
     */
-  virtual void setNumRowsForm(int rows);
+  virtual void setNumRowsForm(int rows) {
+    m_rowsForm = rows;
+  }
 
   /**
     * This method returns the number of rows required to display this item
     * in a Register
     */
-  virtual int numRowsRegister() const;
+  virtual int numRowsRegister() const {
+    return m_rowsRegister;
+  }
 
   /**
     * This method returns the number of rows required to display this item
     * in a Form
     */
-  virtual int numRowsForm() const;
-  virtual int numColsForm() const;
+  virtual int numRowsForm() const {
+    return m_rowsForm;
+  }
+  virtual int numColsForm() const {
+    return 1;
+  }
 
   /**
     * This method sets up the register item to be shown in normal (@p alternate = @p false)
@@ -172,30 +202,40 @@ public:
     *
     * @param alternate selects normal or alternate background
     */
-  virtual void setAlternate(bool alternate);
+  virtual void setAlternate(bool alternate) {
+    m_alternate = alternate;
+  }
 
   virtual void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) = 0;
   virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) = 0;
 
-  virtual const QString& id() const;
+  virtual const QString& id() const {
+    return MyMoneyObject::emptyId();
+  }
 
   /**
     * Sets the parent of this item to be the register @p parent
     *
     * @param parent pointer to register
     */
-  void setParent(Register* getParent);
+  void setParent(Register* parent);
 
   /**
     * This member returns a pointer to the parent object
     *
     * @retval pointer to Register
     */
-  Register* getParent() const;
+  Register* parent() const {
+    return m_parent;
+  }
 
-  void setNeedResize();
+  void setNeedResize() {
+    m_needResize = true;
+  }
 
-  bool isVisible() const;
+  bool isVisible() const {
+    return m_visible;
+  }
 
   /**
     * Marks the item visible depending on @a visible and
@@ -210,10 +250,18 @@ public:
     */
   virtual bool markVisible(bool visible);
 
-  void setNextItem(RegisterItem* p);
-  void setPrevItem(RegisterItem* p);
-  RegisterItem* nextItem() const;
-  RegisterItem* prevItem() const;
+  void setNextItem(RegisterItem* p) {
+    m_next = p;
+  }
+  void setPrevItem(RegisterItem* p) {
+    m_prev = p;
+  }
+  RegisterItem* nextItem() const {
+    return m_next;
+  }
+  RegisterItem* prevItem() const {
+    return m_prev;
+  }
 
   virtual bool matches(const RegisterFilter&) const = 0;
 
@@ -228,27 +276,30 @@ public:
     *
     * If no tooltip is available, @a false will be returned.
     */
-  virtual bool maybeTip(const QPoint& /* relpos */, int /* row */, int /* col */, QRect& /* r */, QString& /* msg */);
+  virtual bool maybeTip(const QPoint& /* relpos */, int /* row */, int /* col */, QRect& /* r */, QString& /* msg */) {
+    return false;
+  }
 
 protected:
-  RegisterItemPrivate *d_ptr;
-  RegisterItem(RegisterItemPrivate &dd, Register *parent);
-  RegisterItem(RegisterItemPrivate &dd);  //for copy-constructor of derived class
+  /// This method serves as helper for all constructors
+  void init();
+
+protected:
+  Register*                m_parent;
+  RegisterItem*            m_prev;
+  RegisterItem*            m_next;
+  int                      m_startRow;
+  int                      m_rowsRegister;
+  int                      m_rowsForm;
+  bool                     m_alternate;
+  bool                     m_needResize;
+  bool                     m_visible;
 
 private:
-  Q_DECLARE_PRIVATE(RegisterItem)
+  static QDate             nullDate;
+  static QString           nullString;
+  static MyMoneyMoney      nullValue;
 };
-
-inline void swap(RegisterItem& first, RegisterItem& second) // krazy:exclude=inline
-{
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
-}
-
-inline RegisterItem::RegisterItem(RegisterItem && other) : RegisterItem() // krazy:exclude=inline
-{
-  swap(*this, other);
-}
 
 } // namespace
 

@@ -27,30 +27,46 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "stdtransaction.h"
+#include "transaction.h"
+
+namespace KMyMoneyTransactionForm
+{
+class TransactionForm;
+} // namespace
 
 namespace KMyMoneyRegister
 {
 
-  class StdTransactionScheduled : public StdTransaction
-  {
-  public:
-    StdTransactionScheduled(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
-    ~StdTransactionScheduled() override;
+class StdTransactionScheduled : public StdTransaction
+{
+public:
+  StdTransactionScheduled(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
+  virtual ~StdTransactionScheduled() {}
 
-    const char* className();
+  virtual const char* className() {
+    return "StdTransactionScheduled";
+  }
 
-    bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
 
-    bool isSelectable() const override;
-    bool canHaveFocus() const override;
-    bool isScheduled() const override;
-    int sortSamePostDate() const override;
+  bool isSelectable() const {
+    return true;
+  }
+  bool canHaveFocus() const {
+    return true;
+  }
+  virtual bool isScheduled() const {
+    return true;
+  }
 
-    //   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
+  virtual int sortSamePostDate() const {
+    return 4;
+  }
 
-    //   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
-  };
+//   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
+
+//   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
+};
 
 } // namespace
 
