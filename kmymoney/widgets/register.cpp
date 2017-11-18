@@ -1062,6 +1062,9 @@ void Register::resize()
 
 void Register::resize(int col, bool force)
 {
+  if (m_needResize)
+    m_minimalColumnWidthCache.clear();
+
   if (!m_needResize && !force)
     return;
 
@@ -1245,7 +1248,15 @@ int Register::minimumColumnWidth(int col)
 
 void Register::adjustColumn(int col)
 {
-  setColumnWidth(col, minimumColumnWidth(col));
+  QMap<int, int>::const_iterator it = m_minimalColumnWidthCache.find(col);
+  int width = 0;
+  if (it == m_minimalColumnWidthCache.end()) {
+    width = minimumColumnWidth(col);
+    m_minimalColumnWidthCache[col] = width;
+  } else {
+    width = it.value();
+  }
+  setColumnWidth(col, width);
 }
 
 void Register::clearSelection()
