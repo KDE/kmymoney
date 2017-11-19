@@ -29,26 +29,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_previouspostponewizardpagedecl.h"
+namespace Ui { class PreviousPostponeWizardPage; }
 
 /**
  * This class implements the PreviousPostpone page of the
  * @ref KEndingBalanceDlg wizard.
  */
-class PreviousPostponeWizardPageDecl : public QWizardPage, public Ui::PreviousPostponeWizardPageDecl
-{
-public:
-  PreviousPostponeWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class PreviousPostponeWizardPage : public PreviousPostponeWizardPageDecl
+class PreviousPostponeWizardPage : public QWizardPage
 {
   Q_OBJECT
-public:
-  explicit PreviousPostponeWizardPage(QWidget *parent = 0);
+  Q_DISABLE_COPY(PreviousPostponeWizardPage)
 
+public:
+  explicit PreviousPostponeWizardPage(QWidget *parent = nullptr);
+  ~PreviousPostponeWizardPage();
+
+  Ui::PreviousPostponeWizardPage *ui;
 };
 
 #endif

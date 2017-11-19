@@ -28,12 +28,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kendingbalancedlgdecl.h"
-
-#include "mymoneyaccount.h"
-
 class QDate;
 
+class MyMoneyMoney;
 class MyMoneyAccount;
 class MyMoneyTransaction;
 
@@ -45,32 +42,27 @@ class MyMoneyTransaction;
   *
   * @author Thomas Baumgart
   */
-class KEndingBalanceDlgDecl : public QWizard, public Ui::KEndingBalanceDlgDecl
-{
-public:
-  KEndingBalanceDlgDecl(QWidget *parent) : QWizard(parent) {
-    setupUi(this);
-  }
-};
-class KEndingBalanceDlg : public KEndingBalanceDlgDecl
+
+class KEndingBalanceDlgPrivate;
+class KEndingBalanceDlg : public QWizard
 {
   Q_OBJECT
+  Q_DISABLE_COPY(KEndingBalanceDlg)
+
 public:
   enum { Page_CheckingStart, Page_PreviousPostpone,
          Page_CheckingStatementInfo, Page_InterestChargeCheckings
        };
 
-  explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent = 0);
+  explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent = nullptr);
   ~KEndingBalanceDlg();
 
-  const MyMoneyMoney endingBalance() const;
-  const MyMoneyMoney previousBalance() const;
-  const QDate statementDate() const {
-    return field("statementDate").toDate();
-  };
+  MyMoneyMoney endingBalance() const;
+  MyMoneyMoney previousBalance() const;
+  QDate statementDate() const;
 
-  const MyMoneyTransaction interestTransaction();
-  const MyMoneyTransaction chargeTransaction();
+  MyMoneyTransaction interestTransaction();
+  MyMoneyTransaction chargeTransaction();
 
   /**
    * This method returns the id of the next page in the wizard.
@@ -82,7 +74,7 @@ public:
 
 protected:
   bool createTransaction(MyMoneyTransaction& t, const int sign, const MyMoneyMoney& amount, const QString& category, const QDate& date);
-  const MyMoneyMoney adjustedReturnValue(const MyMoneyMoney& v) const;
+  MyMoneyMoney adjustedReturnValue(const MyMoneyMoney& v) const;
   void createCategory(const QString& txt, QString& id, const MyMoneyAccount& parent);
 
 protected slots:
@@ -105,10 +97,8 @@ signals:
   void createCategory(MyMoneyAccount& acc, const MyMoneyAccount& parent);
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+  KEndingBalanceDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KEndingBalanceDlg)
 };
 
 #endif

@@ -47,6 +47,7 @@
 #include <QStatusBar>
 #include <QPushButton>
 #include <QListWidget>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -108,6 +109,8 @@
 #include "wizards/newuserwizard/knewuserwizard.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
 #include "dialogs/kbalancewarning.h"
+#include "widgets/kmymoneyaccountselector.h"
+#include "widgets/kmymoneypayeecombo.h"
 #include "widgets/onlinejobmessagesview.h"
 
 #include "widgets/kmymoneymvccombo.h"

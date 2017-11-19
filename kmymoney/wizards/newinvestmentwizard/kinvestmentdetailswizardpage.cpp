@@ -147,5 +147,5 @@ void KInvestmentDetailsWizardPage::setPriceModeEnabled(bool enabled)
 void KInvestmentDetailsWizardPage::setupInvestmentSymbol()
 {
   ui->m_investmentSymbol->setFocus();
-  connect(ui->m_investmentSymbol, SIGNAL(lineChanged(QString)), this, SIGNAL(checkForExistingSymbol(QString)));
+  connect(ui->m_investmentSymbol, &KMyMoneyLineEdit::lineChanged, this, &KInvestmentDetailsWizardPage::checkForExistingSymbol);
 }

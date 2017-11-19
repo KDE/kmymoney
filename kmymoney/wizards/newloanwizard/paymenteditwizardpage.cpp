@@ -40,7 +40,7 @@ PaymentEditWizardPage::PaymentEditWizardPage(QWidget *parent)
   registerField("newPaymentEdit", ui->m_newPaymentEdit, "value", SIGNAL(textChanged()));
   registerField("newPaymentEditValid", ui->m_newPaymentEdit, "valid", SIGNAL(textChanged()));
 
-  connect(ui->m_newPaymentEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(ui->m_newPaymentEdit, &KMyMoneyEdit::textChanged, this, &QWizardPage::completeChanged);
 }
 
 PaymentEditWizardPage::~PaymentEditWizardPage()

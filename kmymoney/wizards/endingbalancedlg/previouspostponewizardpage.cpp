@@ -20,20 +20,25 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_previouspostponewizardpage.h"
 
-PreviousPostponeWizardPage::PreviousPostponeWizardPage(QWidget *parent)
-    : PreviousPostponeWizardPageDecl(parent)
+PreviousPostponeWizardPage::PreviousPostponeWizardPage(QWidget *parent) :
+  QWizardPage(parent),
+  ui(new Ui::PreviousPostponeWizardPage)
 {
-
+  ui->setupUi(this);
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
 
+}
+
+PreviousPostponeWizardPage::~PreviousPostponeWizardPage()
+{
+  delete ui;
 }

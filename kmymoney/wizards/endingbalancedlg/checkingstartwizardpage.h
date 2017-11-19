@@ -29,26 +29,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_checkingstartwizardpagedecl.h"
+namespace Ui { class CheckingStartWizardPage; }
 
 /**
  * This class implements the CheckingStart page of the
  * @ref KEndingBalanceDlg wizard.
  */
-class CheckingStartWizardPageDecl : public QWizardPage, public Ui::CheckingStartWizardPageDecl
-{
-public:
-  CheckingStartWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class CheckingStartWizardPage : public CheckingStartWizardPageDecl
+class CheckingStartWizardPage : public QWizardPage
 {
   Q_OBJECT
-public:
-  explicit CheckingStartWizardPage(QWidget *parent = 0);
+  Q_DISABLE_COPY(CheckingStartWizardPage)
 
+public:
+  explicit CheckingStartWizardPage(QWidget *parent = nullptr);
+  ~CheckingStartWizardPage();
+
+private:
+  Ui::CheckingStartWizardPage *ui;
 };
 
 #endif

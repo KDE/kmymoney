@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KAccountTypePage</class>
+ <widget class="QWidget" name="KAccountTypePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>555</width>
+    <height>404</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="qLabel4">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string>Enter the name of the account under which it is known within KMyMoney. Select the type for the new account. Use the &lt;b&gt;What's this?&lt;/b&gt; feature to see more details about the various account types. Enter the date the account was opened and its currency.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="textLabel1">
+       <property name="text">
+        <string>Account name</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="KLineEdit" name="m_accountName">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="whatsThis">
+        <string>Enter a name under which this account is known within KMyMoney.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="textLabel2_2">
+       <property name="text">
+        <string>Account type</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="KMyMoneyGeneralCombo" name="m_typeSelection">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;p&gt;&lt;b&gt;Checking&lt;/b&gt;
+Use the checking account type to manage activities on your checking account e.g. payments, checks and cash card purchases.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Savings&lt;/b&gt;
+Use the savings account type to manage activities on your savings account.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Credit Card&lt;/b&gt;
+Use the credit card account type to manage activities on your credit card.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Cash&lt;/b&gt;
+
+Use the cash account type to manage activities in your wallet.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Loan&lt;/b&gt;
+Use the loan account type to manage amortization loans (e.g. mortgages, car loan, money you lend, private loans etc.).&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Investment&lt;/b&gt;
+Use the investment account to manage your stock, mutual fund and other investments.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Asset&lt;/b&gt;
+Use the asset account type to manage assets (e.g. your house, car or art collection).&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Liability&lt;/b&gt;
+Use the liability account type to manage any type of liability except amortization loans. Use it for taxes you owe or money you borrowed from friends. For amortization loans like mortgages you should create a loan account.&lt;/p&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="textLabel3">
+       <property name="text">
+        <string>Currency</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KMyMoneySecuritySelector" name="m_currencyComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="whatsThis">
+        <string>Select the currency in which this account is denominated.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2" colspan="2">
+      <spacer name="spacer6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>231</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="textLabel2">
+       <property name="text">
+        <string>Opening date</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="KMyMoneyDateInput" name="m_openingDate">
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;p&gt;The opening date would be the date of the last statement. In case you want to keep track of transactions prior to this date, enter the ending balance and statement date of a prior statement and add all following transactions into KMyMoney. KMyMoney will not allow you to enter or modify transactions prior to this date.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Note&lt;/i&gt;: If you do not know the exact amount of the opening balance, enter an estimate. You can change this value later before you reconcile this account for the first time.&lt;/p&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="textLabel1_2">
+       <property name="text">
+        <string>Opening balance</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="KMyMoneyEdit" name="m_openingBalance">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;p&gt;The opening balance is the balance of the account when you start using it with KMyMoney. For new accounts this is usually 0 but for existing accounts this may well differ. Please consult the account statements to figure out this value. The opening balance is to be provided in the currency of the account as selected with the currency button.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Note&lt;/i&gt;: If you do not know the exact amount of the opening balance, enter an estimate. You can change this value later before you reconcile this account for the first time.&lt;/p&gt;</string>
+       </property>
+       <property name="resetButtonVisibility" stdset="0">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="m_conversionLabel">
+       <property name="text">
+        <string>Conversion rate</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="KMyMoneyEdit" name="m_conversionRate">
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
+       <property name="whatsThis">
+        <string>For foreign currencies an initial conversion rate needs to be provided. This should be the price of the foreign currency in the base currency on the opening date of the account.</string>
+       </property>
+       <property name="resetButtonVisibility" stdset="0">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QPushButton" name="m_onlineQuote">
+       <property name="text">
+        <string>Online quote</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <spacer name="spacer3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>61</width>
+         <height>21</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLabel" name="m_conversionExample">
+       <property name="text">
+        <string>xxx</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0" colspan="2">
+      <widget class="QCheckBox" name="m_preferredAccount">
+       <property name="toolTip">
+        <string>Mark this checkbox if the account should be maintained as preferred account</string>
+       </property>
+       <property name="whatsThis">
+        <string>Selecting the &lt;b&gt;Preferred Account&lt;/b&gt; checkbox will allow preferred access in some dialogs and views of KMyMoney.</string>
+       </property>
+       <property name="text">
+        <string>Preferred account</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="spacer18">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KMyMoneyDateInput</class>
+   <extends>QFrame</extends>
+   <header>kmymoneydateinput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneySecuritySelector</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneycurrencyselector.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyEdit</class>
+   <extends>QFrame</extends>
+   <header>kmymoneyedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneygeneralcombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

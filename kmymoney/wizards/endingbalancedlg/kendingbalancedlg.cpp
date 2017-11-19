@@ -34,6 +34,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kendingbalancedlg.h"
+#include "ui_checkingstatementinfowizardpage.h"
+#include "ui_interestchargecheckingswizardpage.h"
+
+#include "mymoneymoney.h"
 #include "mymoneyutils.h"
 #include "kmymoneyedit.h"
 #include "mymoneysplit.h"
@@ -50,13 +55,24 @@
 #include "kcurrencycalculator.h"
 #include "kmymoneysettings.h"
 
-class KEndingBalanceDlg::Private
+class KEndingBalanceDlgPrivate
 {
+  Q_DISABLE_COPY(KEndingBalanceDlgPrivate)
+
 public:
 
-  explicit Private(int numPages)
-      : m_pages(numPages, true) {}
+  KEndingBalanceDlgPrivate(int numPages) :
+    ui(new Ui::KEndingBalanceDlg),
+    m_pages(numPages, true)
+  {
+  }
 
+  ~KEndingBalanceDlgPrivate()
+  {
+    delete ui;
+  }
+
+  Ui::KEndingBalanceDlg    *ui;
   MyMoneyTransaction        m_tInterest;
   MyMoneyTransaction        m_tCharges;
   MyMoneyAccount            m_account;
@@ -65,9 +81,10 @@ public:
 };
 
 KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent) :
-    KEndingBalanceDlgDecl(parent),
-    d(new Private(Page_InterestChargeCheckings + 1))
+    QWizard(parent),
+    d_ptr(new KEndingBalanceDlgPrivate(Page_InterestChargeCheckings + 1))
 {
+  Q_D(KEndingBalanceDlg);
   setModal(true);
   QString value;
   MyMoneyMoney endBalance, startBalance;
@@ -76,7 +93,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
 
   MyMoneySecurity currency = MyMoneyFile::instance()->security(account.currencyId());
   //FIXME: port
-  m_statementInfoPageCheckings->m_enterInformationLabel->setText(QString("<qt>") + i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.", currency.name()) + QString("</qt>"));
+  d->ui->m_statementInfoPageCheckings->ui->m_enterInformationLabel->setText(QString("<qt>") + i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.", currency.name()) + QString("</qt>"));
 
   // If the previous reconciliation was postponed,
   // we show a different first page
@@ -96,7 +113,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   } else {
     d->m_pages.clearBit(Page_CheckingStart);
     d->m_pages.clearBit(Page_InterestChargeCheckings);
-    //removePage(m_interestChargeCheckings);
+    //removePage(d->ui->m_interestChargeCheckings);
     // make sure, we show the correct start page
     setStartId(Page_PreviousPostpone);
 
@@ -109,33 +126,33 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
     endBalance = MyMoneyMoney(value) * factor;
 
     //FIXME: port
-    m_statementInfoPageCheckings->m_previousBalance->setValue(startBalance);
-    m_statementInfoPageCheckings->m_endingBalance->setValue(endBalance);
+    d->ui->m_statementInfoPageCheckings->ui->m_previousBalance->setValue(startBalance);
+    d->ui->m_statementInfoPageCheckings->ui->m_endingBalance->setValue(endBalance);
   }
 
   // We don't need to add the default into the list (see ::help() why)
   // m_helpAnchor[m_startPageCheckings] = QString(QString());
-  d->m_helpAnchor[m_interestChargeCheckings] = QString("details.reconcile.wizard.interest");
-  d->m_helpAnchor[m_statementInfoPageCheckings] = QString("details.reconcile.wizard.statement");
+  d->m_helpAnchor[d->ui->m_interestChargeCheckings] = QString("details.reconcile.wizard.interest");
+  d->m_helpAnchor[d->ui->m_statementInfoPageCheckings] = QString("details.reconcile.wizard.statement");
 
   value = account.value("statementDate");
   if (!value.isEmpty())
     setField("statementDate", QDate::fromString(value, Qt::ISODate));
 
   //FIXME: port
-  m_statementInfoPageCheckings->m_lastStatementDate->setText(QString());
+  d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(QString());
   if (account.lastReconciliationDate().isValid()) {
-    m_statementInfoPageCheckings->m_lastStatementDate->setText(i18n("Last reconciled statement: %1", QLocale().toString(account.lastReconciliationDate())));
+    d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(i18n("Last reconciled statement: %1", QLocale().toString(account.lastReconciliationDate())));
   }
 
   // connect the signals with the slots
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadEditWidgets()));
-  connect(m_statementInfoPageCheckings->m_statementDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateBalances()));
-  connect(m_interestChargeCheckings->m_interestCategoryEdit, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateInterestCategory(QString,QString&)));
-  connect(m_interestChargeCheckings->m_chargesCategoryEdit, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateChargesCategory(QString,QString&)));
-  connect(m_interestChargeCheckings->m_payeeEdit, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KEndingBalanceDlg::slotReloadEditWidgets);
+  connect(d->ui->m_statementInfoPageCheckings->ui->m_statementDate, &KMyMoneyDateInput::dateChanged, this, &KEndingBalanceDlg::slotUpdateBalances);
+  connect(d->ui->m_interestChargeCheckings->ui->m_interestCategoryEdit, &KMyMoneyCombo::createItem, this, &KEndingBalanceDlg::slotCreateInterestCategory);
+  connect(d->ui->m_interestChargeCheckings->ui->m_chargesCategoryEdit, &KMyMoneyCombo::createItem, this, &KEndingBalanceDlg::slotCreateChargesCategory);
+  connect(d->ui->m_interestChargeCheckings->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, this, &KEndingBalanceDlg::createPayee);
 
-  KMyMoneyMVCCombo::setSubstringSearchForChildren(m_interestChargeCheckings, !KMyMoneySettings::stringMatchFromStart());
+  KMyMoneyMVCCombo::setSubstringSearchForChildren(d->ui->m_interestChargeCheckings, !KMyMoneySettings::stringMatchFromStart());
 
   slotReloadEditWidgets();
 
@@ -160,11 +177,13 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
 
 KEndingBalanceDlg::~KEndingBalanceDlg()
 {
+  Q_D(KEndingBalanceDlg);
   delete d;
 }
 
 void KEndingBalanceDlg::slotUpdateBalances()
 {
+  Q_D(KEndingBalanceDlg);
   MYMONEYTRACER(tracer);
 
   // determine the beginning balance and ending balance based on the following
@@ -190,7 +209,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
   it = transactionList.constBegin();
   if (it != transactionList.constEnd()) {
     oldestTransactionDate = (*it).first.postDate();
-    m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", QLocale().toString(oldestTransactionDate)));
+    d->ui->m_statementInfoPageCheckings->ui->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", QLocale().toString(oldestTransactionDate)));
   }
 
   filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
@@ -233,8 +252,8 @@ void KEndingBalanceDlg::slotUpdateBalances()
     }
   }
   //FIXME: port
-  m_statementInfoPageCheckings->m_previousBalance->setValue(startBalance);
-  m_statementInfoPageCheckings->m_endingBalance->setValue(endBalance);
+  d->ui->m_statementInfoPageCheckings->ui->m_previousBalance->setValue(startBalance);
+  d->ui->m_statementInfoPageCheckings->ui->m_endingBalance->setValue(endBalance);
   tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney(QString(), 2)));
   tracer.printf("start balance = %s", qPrintable(startBalance.formatMoney(QString(), 2)));
 
@@ -244,9 +263,10 @@ void KEndingBalanceDlg::slotUpdateBalances()
 
 void KEndingBalanceDlg::accept()
 {
+  Q_D(KEndingBalanceDlg);
   if ((!field("interestEditValid").toBool() || createTransaction(d->m_tInterest, -1, field("interestEdit").value<MyMoneyMoney>(), field("interestCategoryEdit").toString(), field("interestDateEdit").toDate()))
       && (!field("chargesEditValid").toBool() || createTransaction(d->m_tCharges, 1, field("chargesEdit").value<MyMoneyMoney>(), field("chargesCategoryEdit").toString(), field("chargesDateEdit").toDate())))
-    KEndingBalanceDlgDecl::accept();
+    QWizard::accept();
 }
 
 void KEndingBalanceDlg::slotCreateInterestCategory(const QString& txt, QString& id)
@@ -269,23 +289,32 @@ void KEndingBalanceDlg::createCategory(const QString& txt, QString& id, const My
   id = acc.id();
 }
 
-const MyMoneyMoney KEndingBalanceDlg::endingBalance() const
+MyMoneyMoney KEndingBalanceDlg::endingBalance() const
 {
-  return adjustedReturnValue(m_statementInfoPageCheckings->m_endingBalance->value());
+  Q_D(const KEndingBalanceDlg);
+  return adjustedReturnValue(d->ui->m_statementInfoPageCheckings->ui->m_endingBalance->value());
 }
 
-const MyMoneyMoney KEndingBalanceDlg::previousBalance() const
+MyMoneyMoney KEndingBalanceDlg::previousBalance() const
 {
-  return adjustedReturnValue(m_statementInfoPageCheckings->m_previousBalance->value());
+  Q_D(const KEndingBalanceDlg);
+  return adjustedReturnValue(d->ui->m_statementInfoPageCheckings->ui->m_previousBalance->value());
 }
 
-const MyMoneyMoney KEndingBalanceDlg::adjustedReturnValue(const MyMoneyMoney& v) const
+QDate KEndingBalanceDlg::statementDate() const
 {
+  return field("statementDate").toDate();
+}
+
+MyMoneyMoney KEndingBalanceDlg::adjustedReturnValue(const MyMoneyMoney& v) const
+{
+  Q_D(const KEndingBalanceDlg);
   return d->m_account.accountGroup() == eMyMoney::Account::Liability ? -v : v;
 }
 
 void KEndingBalanceDlg::slotReloadEditWidgets()
 {
+  Q_D(KEndingBalanceDlg);
   QString payeeId, interestId, chargesId;
 
   // keep current selected items
@@ -295,15 +324,15 @@ void KEndingBalanceDlg::slotReloadEditWidgets()
 
   // load the payee and category widgets with data from the engine
   //FIXME: port
-  m_interestChargeCheckings->m_payeeEdit->loadPayees(MyMoneyFile::instance()->payeeList());
+  d->ui->m_interestChargeCheckings->ui->m_payeeEdit->loadPayees(MyMoneyFile::instance()->payeeList());
 
   // a user request to show all categories in both selectors due to a valid use case.
   AccountSet aSet;
   aSet.addAccountGroup(eMyMoney::Account::Expense);
   aSet.addAccountGroup(eMyMoney::Account::Income);
   //FIXME: port
-  aSet.load(m_interestChargeCheckings->m_interestCategoryEdit->selector());
-  aSet.load(m_interestChargeCheckings->m_chargesCategoryEdit->selector());
+  aSet.load(d->ui->m_interestChargeCheckings->ui->m_interestCategoryEdit->selector());
+  aSet.load(d->ui->m_interestChargeCheckings->ui->m_chargesCategoryEdit->selector());
 
   // reselect currently selected items
   if (!payeeId.isEmpty())
@@ -314,18 +343,21 @@ void KEndingBalanceDlg::slotReloadEditWidgets()
     setField("chargesCategoryEdit", chargesId);
 }
 
-const MyMoneyTransaction KEndingBalanceDlg::interestTransaction()
+MyMoneyTransaction KEndingBalanceDlg::interestTransaction()
 {
+  Q_D(KEndingBalanceDlg);
   return d->m_tInterest;
 }
 
-const MyMoneyTransaction KEndingBalanceDlg::chargeTransaction()
+MyMoneyTransaction KEndingBalanceDlg::chargeTransaction()
 {
+  Q_D(KEndingBalanceDlg);
   return d->m_tCharges;
 }
 
 bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign, const MyMoneyMoney& amount, const QString& category, const QDate& date)
 {
+  Q_D(KEndingBalanceDlg);
   t = MyMoneyTransaction();
 
   if (category.isEmpty() || !date.isValid())
@@ -371,6 +403,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
 
 void KEndingBalanceDlg::help()
 {
+  Q_D(KEndingBalanceDlg);
   QString anchor = d->m_helpAnchor[currentPage()];
   if (anchor.isEmpty())
     anchor = QString("details.reconcile.whatis");
@@ -380,6 +413,7 @@ void KEndingBalanceDlg::help()
 
 int KEndingBalanceDlg::nextId() const
 {
+  Q_D(const KEndingBalanceDlg);
   // Starting from the current page, look for the first enabled page
   // and return that value
   // If the end of the list is encountered first, then return -1.

@@ -26,7 +26,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_accounts.h"
+
 Accounts::Accounts(QWidget* parent) :
-    AccountsDecl(parent)
+  QWidget(parent),
+  ui(new Ui::Accounts)
 {
+  ui->setupUi(this);
+}
+
+Accounts::~Accounts()
+{
+  delete ui;
 }

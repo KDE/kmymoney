@@ -29,31 +29,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_interestchargecheckingswizardpagedecl.h"
+namespace Ui { class InterestChargeCheckingsWizardPage; }
 
 /**
  * This class implements the InterestChargeCheckings page of the
  * @ref KEndingBalanceDlg wizard.
  */
-class InterestChargeCheckingsWizardPageDecl : public QWizardPage, public Ui::InterestChargeCheckingsWizardPageDecl
-{
-public:
-  InterestChargeCheckingsWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class InterestChargeCheckingsWizardPage : public InterestChargeCheckingsWizardPageDecl
+class InterestChargeCheckingsWizardPage : public QWizardPage
 {
   Q_OBJECT
+  Q_DISABLE_COPY(InterestChargeCheckingsWizardPage)
+
 public:
-  explicit InterestChargeCheckingsWizardPage(QWidget *parent = 0);
+  explicit InterestChargeCheckingsWizardPage(QWidget *parent = nullptr);
+  ~InterestChargeCheckingsWizardPage();
 
   /**
    * Overload the isComplete function to control the Next button
    */
   bool isComplete() const;
 
+  Ui::InterestChargeCheckingsWizardPage *ui;
 };
 
 #endif

@@ -29,26 +29,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_checkingstatementinfowizardpagedecl.h"
+namespace Ui { class CheckingStatementInfoWizardPage; }
 
 /**
  * This class implements the CheckingStatementInfo page of the
  * @ref KEndingBalanceDlg wizard.
  */
-class CheckingStatementInfoWizardPageDecl : public QWizardPage, public Ui::CheckingStatementInfoWizardPageDecl
-{
-public:
-  CheckingStatementInfoWizardPageDecl(QWidget *parent) : QWizardPage(parent) {
-    setupUi(this);
-  }
-};
 
-class CheckingStatementInfoWizardPage : public CheckingStatementInfoWizardPageDecl
+class CheckingStatementInfoWizardPage : public QWizardPage
 {
   Q_OBJECT
-public:
-  explicit CheckingStatementInfoWizardPage(QWidget *parent = 0);
+  Q_DISABLE_COPY(CheckingStatementInfoWizardPage)
 
+public:
+  explicit CheckingStatementInfoWizardPage(QWidget *parent = nullptr);
+  ~CheckingStatementInfoWizardPage();
+
+  Ui::CheckingStatementInfoWizardPage *ui;
 };
 
 #endif

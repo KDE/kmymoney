@@ -50,8 +50,8 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
   registerField("paymentDate", ui->m_paymentDate, "date");
   registerField("assetAccountEdit", ui->m_assetAccountEdit, "selectedItems");
 
-  connect(ui->m_assetAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
-  connect(ui->m_dontCreatePayoutCheckBox,  SIGNAL(clicked()), this, SIGNAL(completeChanged()));
+  connect(ui->m_assetAccountEdit,  &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
+  connect(ui->m_dontCreatePayoutCheckBox,  &QAbstractButton::clicked, this, &QWizardPage::completeChanged);
 
   // load button icons
   KGuiItem createAssetButtonItem(i18n("&Create..."),
@@ -59,7 +59,7 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
                                  i18n("Create a new asset account"),
                                  i18n("Use this to create a new account to which the initial payment should be made"));
   KGuiItem::assign(ui->m_createNewAssetButton, createAssetButtonItem);
-  connect(ui->m_createNewAssetButton, SIGNAL(clicked()), kmymoney, SLOT(slotAccountNew()));
+  connect(ui->m_createNewAssetButton, &QAbstractButton::clicked, kmymoney, static_cast<void (KMyMoneyApp::*)()>(&KMyMoneyApp::slotAccountNew));
 
   ui->m_assetAccountEdit->removeButtons();
   ui->m_dontCreatePayoutCheckBox->setChecked(false);

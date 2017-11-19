@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KAccountPage</class>
+  <widget class="QWidget" name="KAccountPage">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>600</width>
+        <height>481</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="QLabel" name="qLabel2">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+            <string>A typical KMyMoney user maintains a checking account with some institution and uses it to receive money or pay bills. If this is not the case, please deselect the checkbox below and continue on the next page.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="QCheckBox" name="m_haveCheckingAccountButton">
+          <property name="text">
+            <string>I have a checking account that I want to manage with KMyMoney</string>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="QFrame" name="m_accountDataFrame">
+          <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+          </property>
+          <layout class="QGridLayout">
+            <property name="margin">
+              <number>0</number>
+            </property>
+            <item row="5" column="1">
+              <widget class="KLineEdit" name="m_institutionNameEdit">
+                <property name="whatsThis" stdset="0">
+                  <string>The name of the institution that issued the account.</string>
+                </property>
+              </widget>
+            </item>
+            <item row="6" column="1">
+              <widget class="KLineEdit" name="m_institutionNumberEdit">
+                <property name="whatsThis" stdset="0">
+                  <string>Each institution has a routing number. Enter it here. If uncertain, leave the field blank. You can modify it later.</string>
+                </property>
+              </widget>
+            </item>
+            <item row="5" column="0">
+              <widget class="QLabel" name="textLabel3">
+                <property name="text">
+                  <string>Name of the institution</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
+            <item row="6" column="0">
+              <widget class="QLabel" name="textLabel4">
+                <property name="text">
+                  <string>Routing number</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
+            <item row="2" column="1">
+              <widget class="KLineEdit" name="m_accountNumberEdit">
+                <property name="whatsThis" stdset="0">
+                  <string>In general the institution that issued the account also issued a number for it. Enter it here. If uncertain, you can modify this entry later.</string>
+                </property>
+              </widget>
+            </item>
+            <item row="1" column="1">
+              <widget class="KLineEdit" name="m_accountNameEdit">
+                <property name="whatsThis" stdset="0">
+                  <string>Enter a descriptive name that will be used by KMyMoney to identify your checking account.</string>
+                </property>
+              </widget>
+            </item>
+            <item row="3" column="0">
+              <widget class="QLabel" name="textLabel1_2">
+                <property name="text">
+                  <string>Opening date</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
+            <item row="3" column="1">
+              <layout class="QHBoxLayout">
+                <item>
+                  <widget class="KMyMoneyDateInput" name="m_openingDateEdit">
+                    <property name="whatsThis" stdset="0">
+                      <string>Enter the date from when on you plan to keep track of the transactions in that account. This is usually the date of the last statement. If uncertain, leave as is.</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <spacer name="spacer5">
+                    <property name="sizeHint">
+                      <size>
+                        <width>81</width>
+                        <height>20</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                    </property>
+                  </spacer>
+                </item>
+              </layout>
+            </item>
+            <item row="2" column="0">
+              <widget class="QLabel" name="textLabel2">
+                <property name="text">
+                  <string>Number of the account</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
+            <item row="1" column="0">
+              <widget class="QLabel" name="textLabel1">
+                <property name="text">
+                  <string>Name of the account</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
+            <item row="4" column="0">
+              <widget class="QLabel" name="textLabel2_2">
+                <property name="text">
+                  <string>Opening balance</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>false</bool>
+                </property>
+              </widget>
+            </item>
+            <item row="4" column="1">
+              <layout class="QHBoxLayout">
+                <item>
+                  <widget class="QLabel" name="m_accountCurrencyLabel">
+                    <property name="text">
+                      <string>xxx</string>
+                    </property>
+                    <property name="wordWrap">
+                      <bool>false</bool>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="KMyMoneyEdit" name="m_openingBalanceEdit">
+                    <property name="resetButtonVisibility" stdset="0">
+                      <bool>false</bool>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                      <string>Enter the opening balance of the account. This is usually the ending balance of the last statement. If uncertain, leave as is.</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <spacer name="spacer6">
+                    <property name="sizeHint">
+                      <size>
+                        <width>200</width>
+                        <height>20</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                    </property>
+                  </spacer>
+                </item>
+              </layout>
+            </item>
+            <item row="0" column="0" rowspan="1" colspan="2">
+              <widget class="QLabel" name="qLabel1">
+                <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="text">
+                  <string>The fields below allow you to enter some information about your checking account. Once this wizard finishes, the account will be created for you within KMyMoney.</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>true</bool>
+                </property>
+              </widget>
+            </item>
+          </layout>
+        </widget>
+      </item>
+      <item>
+        <spacer name="spacer1">
+          <property name="sizeHint">
+            <size>
+              <width>20</width>
+              <height>16</height>
+            </size>
+          </property>
+          <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="orientation">
+            <enum>Qt::Vertical</enum>
+          </property>
+        </spacer>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+    <tabstops>
+    <tabstop>m_accountNameEdit</tabstop>
+    <tabstop>m_accountNumberEdit</tabstop>
+    <tabstop>m_openingDateEdit</tabstop>
+    <tabstop>m_openingBalanceEdit</tabstop>
+    <tabstop>m_institutionNameEdit</tabstop>
+    <tabstop>m_institutionNumberEdit</tabstop>
+    <tabstop>m_haveCheckingAccountButton</tabstop>
+  </tabstops>
+  <connections>
+    <connection>
+      <sender>m_haveCheckingAccountButton</sender>
+      <signal>toggled(bool)</signal>
+      <receiver>m_accountDataFrame</receiver>
+      <slot>setEnabled(bool)</slot>
+    </connection>
+  </connections>
+</ui>

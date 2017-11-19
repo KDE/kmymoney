@@ -40,7 +40,7 @@ NameWizardPage::NameWizardPage(QWidget *parent)
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("payeeEdit", ui->m_payeeEdit, "selectedItem", SIGNAL(itemSelected(QString)));
-  connect(ui->m_nameEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(ui->m_nameEdit, &QLineEdit::textChanged, this, &QWizardPage::completeChanged);
 }
 
 NameWizardPage::~NameWizardPage()

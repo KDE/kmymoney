@@ -34,10 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneyaccountselector.h"
-
 #include "mymoneypayee.h"
 
 KNewLoanWizard::KNewLoanWizard(QWidget *parent) :

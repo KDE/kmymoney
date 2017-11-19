@@ -9,11 +9,11 @@ set (libendingbalancedlg_a_SOURCES
   )
 
 set (libendingbalancedlg_a_UI
-  kendingbalancedlgdecl.ui
-  checkingstartwizardpagedecl.ui
-  checkingstatementinfowizardpagedecl.ui
-  interestchargecheckingswizardpagedecl.ui
-  previouspostponewizardpagedecl.ui
+  kendingbalancedlg.ui
+  checkingstartwizardpage.ui
+  checkingstatementinfowizardpage.ui
+  interestchargecheckingswizardpage.ui
+  previouspostponewizardpage.ui
   )
 
 ki18n_wrap_ui(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )

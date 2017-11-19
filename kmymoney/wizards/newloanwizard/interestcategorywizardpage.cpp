@@ -51,7 +51,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
   // appropriate signals to update the "Next" button correctly
   registerField("interestAccountEdit", ui->m_interestAccountEdit, "selectedItems");
 
-  connect(ui->m_interestAccountEdit, SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
+  connect(ui->m_interestAccountEdit, &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
   ui->m_interestAccountEdit->removeButtons();
 
   // load button icons
@@ -60,7 +60,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
                                     i18n("Create a new category"),
                                     i18n("Use this to open the new account editor"));
   KGuiItem::assign(ui->m_createCategoryButton, createCategoryButtonItem);
-  connect(ui->m_createCategoryButton, SIGNAL(clicked()), this, SLOT(slotCreateCategory()));
+  connect(ui->m_createCategoryButton, &QAbstractButton::clicked, this, &InterestCategoryWizardPage::slotCreateCategory);
 }
 
 InterestCategoryWizardPage::~InterestCategoryWizardPage()

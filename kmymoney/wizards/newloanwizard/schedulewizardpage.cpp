@@ -41,8 +41,8 @@ ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
   registerField("nextDueDateEdit", ui->m_nextDueDateEdit, "date", SIGNAL(dateChanged(QDate)));
   registerField("paymentAccountEdit", ui->m_paymentAccountEdit, "selectedItems");
 
-  connect(ui->m_nextDueDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
-  connect(ui->m_paymentAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
+  connect(ui->m_nextDueDateEdit, &KMyMoneyDateInput::dateChanged, this, &QWizardPage::completeChanged);
+  connect(ui->m_paymentAccountEdit,  &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
 
   ui->m_paymentAccountEdit->removeButtons();
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Currency</class>
+ <widget class="QWidget" name="Currency">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>383</width>
+    <height>494</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <widget class="QLabel" name="qLabel1">
+     <property name="text">
+      <string comment="@label">KMyMoney supports multiple currencies, nevertheless one of them will be used as your base currency. The base currency is used as default for new accounts and reports. Please select the base currency from the following list.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="m_currencyList">
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string comment="@title header of the currency name column">Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string comment="@title">ISO Code</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string comment="@title">Symbol</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

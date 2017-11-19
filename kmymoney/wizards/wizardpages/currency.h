@@ -20,34 +20,35 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_currencydecl.h"
-
+class QTreeWidgetItem;
 class MyMoneySecurity;
+
+namespace Ui { class Currency; }
 
 /**
   * @author Thomas Baumgart
   */
 
-class CurrencyDecl : public QWidget, public Ui::CurrencyDecl
-{
-public:
-  CurrencyDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-class Currency : public CurrencyDecl
+class Currency : public QWidget
 {
   Q_OBJECT
+  Q_DISABLE_COPY(Currency)
+
 public:
-  Currency(QWidget* parent = 0);
+  explicit Currency(QWidget *parent = nullptr);
+  virtual ~Currency();
+
   QTreeWidgetItem* insertCurrency(const MyMoneySecurity& sec);
   void selectCurrency(const MyMoneySecurity& sec);
   QString selectedCurrency() const;
+
+  Ui::Currency *ui;
 };
 
 #endif

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KAccountSummaryPage</class>
+  <widget class="QWidget" name="KAccountSummaryPage">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>600</width>
+        <height>480</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="QLabel" name="qLabel1">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+            <string>This page summarizes the data you have entered. Press &lt;b&gt;Finish&lt;/b&gt; to create the account, schedules, etc. or use &lt;b&gt;Back&lt;/b&gt; to modify your entries.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="KTextEdit" name="m_dataList">
+          <property name="sizePolicy">
+            <sizepolicy>
+              <hsizetype>7</hsizetype>
+              <vsizetype>3</vsizetype>
+              <horstretch>0</horstretch>
+              <verstretch>2</verstretch>
+            </sizepolicy>
+          </property>
+          <property name="readOnly">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+    <customwidgets>
+    <customwidget>
+      <class>KTextEdit</class>
+      <extends>QTextEdit</extends>
+      <header location="global">ktextedit.h</header>
+    </customwidget>
+  </customwidgets>
+</ui>

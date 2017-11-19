@@ -42,7 +42,7 @@ EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("effectiveChangeDateEdit", ui->m_effectiveChangeDateEdit, "date", SIGNAL(dateChanged(QDate)));
-  connect(ui->m_effectiveChangeDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
+  connect(ui->m_effectiveChangeDateEdit, &KMyMoneyDateInput::dateChanged, this, &QWizardPage::completeChanged);
 }
 
 EffectiveDateWizardPage::~EffectiveDateWizardPage()

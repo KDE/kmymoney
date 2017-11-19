@@ -41,8 +41,6 @@
 #include "webpricequote.h"
 #include "kmymoneyutils.h"
 
-namespace Ui { class KNewInvestmentWizard; }
-
 class KNewInvestmentWizardPrivate
 {
   Q_DISABLE_COPY(KNewInvestmentWizardPrivate)

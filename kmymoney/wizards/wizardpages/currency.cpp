@@ -29,13 +29,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_currency.h"
 #include "mymoneysecurity.h"
 
 Currency::Currency(QWidget* parent) :
-    CurrencyDecl(parent)
+  QWidget(parent),
+  ui(new Ui::Currency)
 {
-  m_currencyList->setAllColumnsShowFocus(true);
-  m_currencyList->setColumnWidth(0, size().width()*6 / 10);
+  ui->setupUi(this);
+  ui->m_currencyList->setAllColumnsShowFocus(true);
+  ui->m_currencyList->setColumnWidth(0, size().width()*6 / 10);
+}
+
+Currency::~Currency()
+{
+  delete ui;
 }
 
 QTreeWidgetItem* Currency::insertCurrency(const MyMoneySecurity& sec)
@@ -45,26 +53,25 @@ QTreeWidgetItem* Currency::insertCurrency(const MyMoneySecurity& sec)
   item.append(QString(sec.id()));
   item.append(sec.tradingSymbol());
 
-  return new QTreeWidgetItem(m_currencyList, item);
+  return new QTreeWidgetItem(ui->m_currencyList, item);
 }
 
 void Currency::selectCurrency(const MyMoneySecurity& sec)
 {
-  QList<QTreeWidgetItem*> selectedItems = m_currencyList->findItems(sec.id(), Qt::MatchExactly, 1);
+  QList<QTreeWidgetItem*> selectedItems = ui->m_currencyList->findItems(sec.id(), Qt::MatchExactly, 1);
   QList<QTreeWidgetItem*>::iterator itemIt = selectedItems.begin();
   while (itemIt != selectedItems.end()) {
     (*itemIt)->setSelected(true);
-    m_currencyList->scrollToItem(*itemIt);
+    ui->m_currencyList->scrollToItem(*itemIt);
   }
 }
-
 
 QString Currency::selectedCurrency() const
 {
   QString id;
 
-  if (m_currencyList->selectedItems().size() > 0) {
-    id = m_currencyList->selectedItems().at(0)->text(1);
+  if (ui->m_currencyList->selectedItems().size() > 0) {
+    id = ui->m_currencyList->selectedItems().at(0)->text(1);
   }
   return id;
 }

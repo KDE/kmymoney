@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>UserInfo</class>
+  <widget class="QWidget" name="UserInfo">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>603</width>
+        <height>374</height>
+      </rect>
+    </property>
+    <layout class="QGridLayout">
+      <item row="0" column="0" rowspan="1" colspan="4">
+        <widget class="QLabel" name="qLabel1">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+            <string>&lt;p&gt;Use the fields below to enter some information about yourself.&lt;/p&gt;
+
+&lt;p&gt;All information is optional and only used to personalize your KMyMoney file.&lt;/p&gt;</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="1" rowspan="1" colspan="3">
+        <widget class="KLineEdit" name="m_userNameEdit"/>
+      </item>
+      <item row="3" column="0">
+        <widget class="QLabel" name="TextLabel3">
+          <property name="minimumSize">
+            <size>
+              <width>100</width>
+              <height>0</height>
+            </size>
+          </property>
+          <property name="text">
+            <string>Town:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="0">
+        <widget class="QLabel" name="TextLabel4">
+          <property name="minimumSize">
+            <size>
+              <width>100</width>
+              <height>0</height>
+            </size>
+          </property>
+          <property name="text">
+            <string>County/State:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="2" column="0">
+        <widget class="QLabel" name="TextLabel2">
+          <property name="minimumSize">
+            <size>
+              <width>100</width>
+              <height>0</height>
+            </size>
+          </property>
+          <property name="text">
+            <string>Street:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="2" column="1" rowspan="1" colspan="3">
+        <widget class="KLineEdit" name="m_streetEdit"/>
+      </item>
+      <item row="6" column="1" rowspan="1" colspan="3">
+        <widget class="KLineEdit" name="m_emailEdit"/>
+      </item>
+      <item row="3" column="1" rowspan="1" colspan="3">
+        <widget class="KLineEdit" name="m_townEdit"/>
+      </item>
+      <item row="5" column="1" rowspan="1" colspan="3">
+        <widget class="KLineEdit" name="m_telephoneEdit"/>
+      </item>
+      <item row="6" column="0">
+        <widget class="QLabel" name="TextLabel7">
+          <property name="minimumSize">
+            <size>
+              <width>100</width>
+              <height>0</height>
+            </size>
+          </property>
+          <property name="text">
+            <string comment="@label email address">Email:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="5" column="0">
+        <widget class="QLabel" name="TextLabel6">
+          <property name="minimumSize">
+            <size>
+              <width>100</width>
+              <height>0</height>
+            </size>
+          </property>
+          <property name="text">
+            <string>Telephone:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="0">
+        <widget class="QLabel" name="TextLabel1">
+          <property name="text">
+            <string>Your name:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="7" column="0" rowspan="1" colspan="4">
+        <layout class="QHBoxLayout">
+          <item>
+            <widget class="QPushButton" name="m_loadAddressButton">
+              <property name="text">
+                <string>Load from Addressbook</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="spacer11">
+              <property name="sizeHint">
+                <size>
+                  <width>305</width>
+                  <height>21</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+      </item>
+      <item row="8" column="2">
+        <spacer name="spacer5">
+          <property name="sizeHint">
+            <size>
+              <width>20</width>
+              <height>16</height>
+            </size>
+          </property>
+          <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="orientation">
+            <enum>Qt::Vertical</enum>
+          </property>
+        </spacer>
+      </item>
+      <item row="4" column="1">
+        <widget class="KLineEdit" name="m_countyEdit"/>
+      </item>
+      <item row="4" column="2">
+        <widget class="QLabel" name="TextLabel5">
+          <property name="minimumSize">
+            <size>
+              <width>100</width>
+              <height>0</height>
+            </size>
+          </property>
+          <property name="text">
+            <string>Postal Code:</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="3">
+        <widget class="KLineEdit" name="m_postcodeEdit"/>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+    <tabstops>
+    <tabstop>m_userNameEdit</tabstop>
+    <tabstop>m_streetEdit</tabstop>
+    <tabstop>m_townEdit</tabstop>
+    <tabstop>m_countyEdit</tabstop>
+    <tabstop>m_postcodeEdit</tabstop>
+    <tabstop>m_telephoneEdit</tabstop>
+    <tabstop>m_emailEdit</tabstop>
+    <tabstop>m_loadAddressButton</tabstop>
+  </tabstops>
+</ui>

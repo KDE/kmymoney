@@ -21,30 +21,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QWidget>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_accountsdecl.h"
+namespace Ui { class Accounts; }
 
 /**
   * @author Thomas Baumgart
   */
 
-class AccountsDecl : public QWidget, public Ui::AccountsDecl
-{
-public:
-  AccountsDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class Accounts : public AccountsDecl
+class Accounts : public QWidget
 {
   Q_OBJECT
-public:
-  Accounts(QWidget* parent = 0);
+  Q_DISABLE_COPY(Accounts)
 
-private:
+public:
+  explicit Accounts(QWidget *parent = nullptr);
+  virtual ~Accounts();
+
+  Ui::Accounts *ui;
 };
 
 

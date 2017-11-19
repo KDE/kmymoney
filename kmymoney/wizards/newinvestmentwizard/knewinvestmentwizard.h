@@ -47,17 +47,17 @@ public:
   /**
     * Use this constructor for the creation of a new investment
     */
-  explicit KNewInvestmentWizard(QWidget *parent = 0);
+  explicit KNewInvestmentWizard(QWidget *parent = nullptr);
 
   /**
     * Use this constructor for the modification of an existing investment
     */
-  explicit KNewInvestmentWizard(const MyMoneyAccount& acc, QWidget *parent = 0);
+  explicit KNewInvestmentWizard(const MyMoneyAccount& acc, QWidget *parent = nullptr);
 
   /**
     * Use this constructor for the modification of an existing security
     */
-  explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = 0);
+  explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = nullptr);
 
   ~KNewInvestmentWizard();
 

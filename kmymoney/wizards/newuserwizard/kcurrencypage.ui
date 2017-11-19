@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KCurrencyPage</class>
+  <widget class="QWidget" name="KCurrencyPage">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>626</width>
+        <height>186</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="QLabel" name="qLabel3">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+            <string>KMyMoney supports multiple currencies. Your reports will be based on a default currency which you can select here. The default for new accounts is also the currency you select here.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="spacer11">
+              <property name="sizeHint">
+                <size>
+                  <width>61</width>
+                  <height>21</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="KMyMoneySecuritySelector" name="m_baseCurrencyEdit"/>
+          </item>
+          <item>
+            <spacer name="spacer10">
+              <property name="sizeHint">
+                <size>
+                  <width>51</width>
+                  <height>21</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <customwidgets>
+  <customwidget>
+   <class>KMyMoneySecuritySelector</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycurrencyselector.h</header>
+   <container>1</container>
+  </customwidget>
+  </customwidgets>
+  <layoutdefault spacing="6" margin="11"/>
+  </ui>

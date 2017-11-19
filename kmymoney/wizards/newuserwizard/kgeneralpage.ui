@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KGeneralPage</class>
+  <widget class="QWidget" name="KGeneralPage">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>600</width>
+        <height>415</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="QLabel" name="qLabel2">
+          <property name="text">
+            <string>Please enter some information about yourself.&lt;br&gt;&lt;br&gt;
+
+This information will be seen and used only by you. The information is used to personalize KMyMoney, to encrypt your file, etc.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <widget class="QFrame" name="frame8">
+              <property name="minimumSize">
+                <size>
+                  <width>25</width>
+                  <height>0</height>
+                </size>
+              </property>
+              <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <layout class="QVBoxLayout">
+              <item>
+                <layout class="QGridLayout">
+                  <item row="3" column="0">
+                    <widget class="QLabel" name="TextLabel4">
+                      <property name="minimumSize">
+                        <size>
+                          <width>100</width>
+                          <height>0</height>
+                        </size>
+                      </property>
+                      <property name="text">
+                        <string>County/State:</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="0" column="1">
+                    <widget class="KLineEdit" name="m_userNameEdit"/>
+                  </item>
+                  <item row="3" column="1">
+                    <widget class="KLineEdit" name="m_countyEdit"/>
+                  </item>
+                  <item row="2" column="1">
+                    <widget class="KLineEdit" name="m_townEdit"/>
+                  </item>
+                  <item row="1" column="0">
+                    <widget class="QLabel" name="TextLabel2">
+                      <property name="minimumSize">
+                        <size>
+                          <width>100</width>
+                          <height>0</height>
+                        </size>
+                      </property>
+                      <property name="text">
+                        <string>Street:</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="1" column="1">
+                    <widget class="KLineEdit" name="m_streetEdit"/>
+                  </item>
+                  <item row="6" column="0">
+                    <widget class="QLabel" name="TextLabel7">
+                      <property name="minimumSize">
+                        <size>
+                          <width>100</width>
+                          <height>0</height>
+                        </size>
+                      </property>
+                      <property name="text">
+                        <string comment="@label email address">Email:</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="0" column="0">
+                    <widget class="QLabel" name="TextLabel1">
+                      <property name="text">
+                        <string>Your name:</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="5" column="0">
+                    <widget class="QLabel" name="TextLabel6">
+                      <property name="minimumSize">
+                        <size>
+                          <width>100</width>
+                          <height>0</height>
+                        </size>
+                      </property>
+                      <property name="text">
+                        <string>Telephone:</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="2" column="0">
+                    <widget class="QLabel" name="TextLabel3">
+                      <property name="minimumSize">
+                        <size>
+                          <width>100</width>
+                          <height>0</height>
+                        </size>
+                      </property>
+                      <property name="text">
+                        <string>Town:</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="6" column="1">
+                    <widget class="KLineEdit" name="m_emailEdit"/>
+                  </item>
+                  <item row="4" column="0">
+                    <widget class="QLabel" name="TextLabel5">
+                      <property name="minimumSize">
+                        <size>
+                          <width>100</width>
+                          <height>0</height>
+                        </size>
+                      </property>
+                      <property name="text">
+                        <string>Zip code</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item row="5" column="1">
+                    <widget class="KLineEdit" name="m_telephoneEdit"/>
+                  </item>
+                  <item row="4" column="1">
+                    <widget class="KLineEdit" name="m_zipcodeEdit"/>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout">
+                  <item>
+                    <widget class="QPushButton" name="m_loadAddressButton">
+                      <property name="text">
+                        <string>Load from Addressbook</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <spacer name="spacer9">
+                      <property name="sizeHint">
+                        <size>
+                          <width>61</width>
+                          <height>20</height>
+                        </size>
+                      </property>
+                      <property name="sizeType">
+                        <enum>QSizePolicy::Expanding</enum>
+                      </property>
+                      <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                      </property>
+                    </spacer>
+                  </item>
+                </layout>
+              </item>
+            </layout>
+          </item>
+          <item>
+            <widget class="QFrame" name="frame8_2">
+              <property name="minimumSize">
+                <size>
+                  <width>25</width>
+                  <height>0</height>
+                </size>
+              </property>
+              <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <customwidgets>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+  </customwidgets>
+  </ui>

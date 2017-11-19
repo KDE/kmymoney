@@ -23,13 +23,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_paymentfrequencywizardpage.h"
 
-#include "mymoneyschedule.h"
+#include "mymoneyenums.h"
 
 PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget *parent)
   : QWizardPage(parent),

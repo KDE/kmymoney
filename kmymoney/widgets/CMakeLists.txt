@@ -8,7 +8,7 @@ set(kmymoney_STAT_HEADERS
   kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
   kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
   kmymoneylineedit.h kmymoneyselector.h
-  kmymoneytitlelabel.h kmymoneywizard.h register.h registeritem.h groupmarker.h fancydategroupmarker.h
+  kmymoneytitlelabel.h register.h registeritem.h groupmarker.h fancydategroupmarker.h
   scheduledtransaction.h selectedtransaction.h selectedtransactions.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h investtransaction.h stdtransaction.h 
@@ -97,8 +97,6 @@ set(_uncritial_common_sources
   kmymoneycompletion.cpp
   kmymoneytitlelabel.cpp
   kmymoneydateedit.cpp
-  kmymoneywizard.cpp
-  kmymoneywizardpage.cpp
   kpricetreeitem.cpp
   registeritem.cpp
   registerfilter.cpp
