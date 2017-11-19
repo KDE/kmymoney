@@ -65,7 +65,7 @@ namespace KMyMoneyRegister
     ~SimpleDateGroupMarker() override;
 
     void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
-    int rowHeightHint() const;
+    int rowHeightHint() const override;
     const char* className() override;
   };
 

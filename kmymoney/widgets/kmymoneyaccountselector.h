@@ -90,7 +90,7 @@ public:
     * @retval true item matches
     * @retval false item does not match
     */
-  virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const;
+  virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const override;
 
   /**
     * This method returns, if any of the items in the selector contains
@@ -100,7 +100,7 @@ public:
     * @retval true exact match found
     * @retval false no match found
     */
-  virtual bool contains(const QString& txt) const;
+  virtual bool contains(const QString& txt) const override;
 
   /**
     * This method removes all the buttons of the widget

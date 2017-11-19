@@ -62,7 +62,7 @@ protected:
   /**
     * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
     */
-  virtual void checkCurrentText();
+  virtual void checkCurrentText() override;
 
 private:
   Q_DECLARE_PRIVATE(KMyMoneyTagCombo)

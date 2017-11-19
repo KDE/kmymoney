@@ -39,7 +39,7 @@ namespace KMyMoneyRegister
     explicit StdTransactionScheduled(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~StdTransactionScheduled() override;
 
-    const char* className();
+    const char* className() override;
 
     bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
 

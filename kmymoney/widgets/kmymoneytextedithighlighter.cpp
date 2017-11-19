@@ -55,35 +55,30 @@ KMyMoneyTextEditHighlighter::~KMyMoneyTextEditHighlighter()
 
 void KMyMoneyTextEditHighlighter::setAllowedChars(const QString& chars)
 {
-  Q_D(KMyMoneyTextEditHighlighter);
   m_allowedChars = chars;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::setMaxLength(const int& length)
 {
-  Q_D(KMyMoneyTextEditHighlighter);
   m_maxLength = length;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::setMaxLines(const int& lines)
 {
-  Q_D(KMyMoneyTextEditHighlighter);
   m_maxLines = lines;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::setMaxLineLength(const int& length)
 {
-  Q_D(KMyMoneyTextEditHighlighter);
   m_maxLineLength = length;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 {
-  Q_D(KMyMoneyTextEditHighlighter);
   // Spell checker first
   Highlighter::highlightBlock(text);
 

@@ -63,7 +63,6 @@ TabBar::TabBar(QWidget* parent) :
   QTabBar(parent),
   d_ptr(new TabBarPrivate)
 {
-  Q_D(TabBar);
   connect(this, &QTabBar::currentChanged, this, &TabBar::slotTabCurrentChanged);
 }
 

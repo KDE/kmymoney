@@ -451,8 +451,8 @@ void AmountEdit::setText(const QString& txt)
 
 void AmountEdit::resetText()
 {
-  Q_D(AmountEdit);
 #if 0
+  Q_D(AmountEdit);
   setText(d->m_text);
   m_resetButton->setEnabled(false);
 #endif

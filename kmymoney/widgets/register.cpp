@@ -130,7 +130,6 @@ namespace KMyMoneyRegister
     TransactionEditorContainer(parent),
     d_ptr(new RegisterPrivate)
   {
-    Q_D(Register);
     // used for custom coloring with the help of the application's stylesheet
     setObjectName(QLatin1String("register"));
     setItemDelegate(new RegisterItemDelegate(this));

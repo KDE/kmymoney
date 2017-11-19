@@ -191,7 +191,7 @@ namespace KMyMoneyRegister
 
     void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, Transaction* t) override;
     void removeEditWidgets(QMap<QString, QWidget*>& editWidgets) override;
-    void tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::Transaction* t) const;
+    void tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::Transaction* t) const override;
 
     int rowHeightHint() const;
 
