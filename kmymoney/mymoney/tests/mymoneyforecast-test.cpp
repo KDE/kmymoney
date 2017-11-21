@@ -30,6 +30,7 @@
 
 #include "mymoneyinstitution.h"
 #include "mymoneysecurity.h"
+#include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneyschedule.h"
 #include "mymoneyenums.h"

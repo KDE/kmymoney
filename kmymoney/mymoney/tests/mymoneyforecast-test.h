@@ -22,6 +22,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyForecastTest;
 
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneyseqaccessmgr.h"
 
 #include "mymoneyforecast.h"
