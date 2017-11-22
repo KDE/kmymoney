@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,6 +26,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <qglobal.h>
 
 #include <cmath>
 
@@ -46,8 +49,13 @@
   * For a detailed description of the algorithms see
   * gnucash-1.8.5/src/doc/finutil.html.
   */
+class MyMoneyFinancialCalculatorPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyFinancialCalculator
 {
+  Q_DISABLE_COPY(MyMoneyFinancialCalculator)
+  Q_DECLARE_PRIVATE(MyMoneyFinancialCalculator)
+  MyMoneyFinancialCalculatorPrivate * d_ptr;
+
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
@@ -158,9 +166,7 @@ public:
     */
   void setNpp(const double npp);
 
-  double npp() const {
-    return m_npp;
-  };
+  double npp() const;
 
   /**
     * This method sets the payment frequency. The parameter @p PF
@@ -228,9 +234,7 @@ public:
     */
   void setIr(const double ir);
 
-  double ir() const {
-    return m_ir;
-  };
+  double ir() const;
 
   /**
     * This method sets the present value to the value passed
@@ -240,9 +244,7 @@ public:
     */
   void setPv(const double pv);
 
-  double pv() const {
-    return m_pv;
-  };
+  double pv() const;
 
   /**
     * This method sets the payment amount to the value passed
@@ -252,9 +254,7 @@ public:
     */
   void setPmt(const double pmt);
 
-  double pmt() const {
-    return m_pmt;
-  };
+  double pmt() const;
 
   /**
     * This method sets the future value to the value passed
@@ -264,38 +264,9 @@ public:
     */
   void setFv(const double fv);
 
-  double fv() const {
-    return m_fv;
-  };
+  double fv() const;
 
 private:
-  double eff_int() const;
-  double nom_int(const double eint) const;
-  double rnd(const double x) const;
-
-  double _Ax(const double eint) const;
-  double _Bx(const double eint) const;
-  double _Cx(const double eint) const;
-  double _fi(const double eint) const;
-  double _fip(const double eint) const;
-
-private:
-  double          m_ir;   // nominal interest rate
-  double          m_pv;   // present value
-  double          m_pmt;  // periodic payment
-  double          m_fv;   // future value
-  double          m_npp;  // number of payment periods
-
-  unsigned short  m_CF;   // compounding frequency
-  unsigned short  m_PF;   // payment frequency
-
-  unsigned short  m_prec; // precision for roundoff for pv, pmt and fv
-  // i is not rounded, n is integer
-
-  bool            m_bep;  // beginning/end of period payment flag
-  bool            m_disc; // discrete/continuous compounding flag
-
-  unsigned short m_mask; // available value mask
 #define PV_SET        0x0001
 #define IR_SET        0x0002
 #define PMT_SET       0x0004
