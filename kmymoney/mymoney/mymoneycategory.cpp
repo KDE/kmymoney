@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes
     email                : mte@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,38 +17,92 @@
 
 #include "mymoneycategory.h"
 
+#include <QString>
+#include <QStringList>
 #include <QDataStream>
 
-MyMoneyCategory::MyMoneyCategory()
+class MyMoneyCategoryPrivate
 {
-  m_income = true;
+public:
+  bool m_income; // if false, m_income == expense
+  QString m_name;
+  QStringList m_minorCategories;
+};
+
+MyMoneyCategory::MyMoneyCategory() :
+  d_ptr(new MyMoneyCategoryPrivate)
+{
+  Q_D(MyMoneyCategory);
+  d->m_income = true;
 }
 
-MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name)
+MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name) :
+  d_ptr(new MyMoneyCategoryPrivate)
 {
-  m_income = income;
-  m_name = name;
+  Q_D(MyMoneyCategory);
+  d->m_income = income;
+  d->m_name = name;
 }
 
-MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name, QStringList minors)
+MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name, QStringList minors) :
+  d_ptr(new MyMoneyCategoryPrivate)
 {
-  m_income = income;
-  m_name = name;
-  m_minorCategories = minors;
+  Q_D(MyMoneyCategory);
+  d->m_income = income;
+  d->m_name = name;
+  d->m_minorCategories = minors;
+}
+
+MyMoneyCategory::MyMoneyCategory(const MyMoneyCategory& other) :
+  d_ptr(new MyMoneyCategoryPrivate(*other.d_func()))
+{
 }
 
 MyMoneyCategory::~MyMoneyCategory()
 {
+  Q_D(MyMoneyCategory);
+  delete d;
+}
+
+QString MyMoneyCategory::name() const
+{
+  Q_D(const MyMoneyCategory);
+  return d->m_name;
+}
+
+QStringList& MyMoneyCategory::minorCategories()
+{
+  Q_D(MyMoneyCategory);
+  return d->m_minorCategories;
+}
+
+bool MyMoneyCategory::isIncome() const
+{
+  Q_D(const MyMoneyCategory);
+  return d->m_income;
+}
+
+void MyMoneyCategory::setIncome(const bool val)
+{
+  Q_D(MyMoneyCategory);
+  d->m_income = val;
+}
+
+void MyMoneyCategory::setName(const QString& val)
+{
+  Q_D(MyMoneyCategory);
+  d->m_name = val;
 }
 
 // Functions use the find method to search the list
 bool MyMoneyCategory::addMinorCategory(const QString& val)
 {
+  Q_D(MyMoneyCategory);
   if (val.isEmpty() || val.isNull())
     return false;
 
-  if (m_minorCategories.indexOf(val) == -1) {
-    m_minorCategories.append(val);
+  if (d->m_minorCategories.indexOf(val) == -1) {
+    d->m_minorCategories.append(val);
     return true;
   }
 
@@ -56,11 +111,12 @@ bool MyMoneyCategory::addMinorCategory(const QString& val)
 
 bool MyMoneyCategory::removeMinorCategory(const QString& val)
 {
+  Q_D(MyMoneyCategory);
   if (val.isEmpty() || val.isNull())
     return false;
 
-  if (m_minorCategories.indexOf(val) != -1) {
-    m_minorCategories.removeOne(val);
+  if (d->m_minorCategories.indexOf(val) != -1) {
+    d->m_minorCategories.removeOne(val);
     return true;
   }
 
@@ -69,13 +125,14 @@ bool MyMoneyCategory::removeMinorCategory(const QString& val)
 
 bool MyMoneyCategory::renameMinorCategory(const QString& oldVal, const QString& newVal)
 {
+  Q_D(MyMoneyCategory);
   if (oldVal.isEmpty() || oldVal.isNull() || newVal.isEmpty() || newVal.isNull())
     return false;
 
-  if ((m_minorCategories.indexOf(oldVal) != -1) &&
-      (m_minorCategories.indexOf(newVal) == -1)) {
+  if ((d->m_minorCategories.indexOf(oldVal) != -1) &&
+      (d->m_minorCategories.indexOf(newVal) == -1)) {
 
-    m_minorCategories.removeOne(oldVal);
+    d->m_minorCategories.removeOne(oldVal);
     return addMinorCategory(newVal);
   }
 
@@ -93,49 +150,35 @@ bool MyMoneyCategory::addMinorCategory(QStringList values)
 
 bool MyMoneyCategory::setMinorCategories(QStringList values)
 {
-  m_minorCategories.clear();
+  Q_D(MyMoneyCategory);
+  d->m_minorCategories.clear();
   return addMinorCategory(values);
 }
 
 bool MyMoneyCategory::removeAllMinors()
 {
-  m_minorCategories.clear();
+  Q_D(MyMoneyCategory);
+  d->m_minorCategories.clear();
   return true;
 }
 
 QString MyMoneyCategory::firstMinor()
 {
-  return m_minorCategories.first();
-}
-
-MyMoneyCategory::MyMoneyCategory(const MyMoneyCategory& right)
-{
-  m_income = right.m_income;
-  m_name = right.m_name;
-  m_minorCategories.clear();
-  m_minorCategories = right.m_minorCategories;
-}
-
-MyMoneyCategory& MyMoneyCategory::operator = (const MyMoneyCategory & right)
-{
-  m_income = right.m_income;
-  m_name = right.m_name;
-  m_minorCategories.clear();
-  m_minorCategories = right.m_minorCategories;
-  return *this;
+  Q_D(MyMoneyCategory);
+  return d->m_minorCategories.first();
 }
 
 QDataStream &operator<<(QDataStream &s, MyMoneyCategory &category)
 {
-  if (category.m_income)
+  if (category.d_func()->m_income)
     s << (qint32)1;
   else
     s << (qint32)0;
 
-  s << category.m_name;
+  s << category.d_func()->m_name;
 
-  s << (quint32)category.m_minorCategories.count();
-  for (QStringList::Iterator it = category.m_minorCategories.begin(); it != category.m_minorCategories.end(); ++it) {
+  s << (quint32)category.d_func()->m_minorCategories.count();
+  for (QStringList::Iterator it = category.d_func()->m_minorCategories.begin(); it != category.d_func()->m_minorCategories.end(); ++it) {
     s << (*it);
   }
 
@@ -147,20 +190,20 @@ QDataStream &operator>>(QDataStream &s, MyMoneyCategory &category)
   qint32 inc;
   s >> inc;
   if (inc == 0)
-    category.m_income = false;
+    category.d_func()->m_income = false;
   else
-    category.m_income = true;
+    category.d_func()->m_income = true;
 
-  s >> category.m_name;
+  s >> category.d_func()->m_name;
 
   quint32 minorCount;
   QString buffer;
 
   s >> minorCount;
-  category.m_minorCategories.clear();
+  category.d_func()->m_minorCategories.clear();
   for (unsigned int i = 0; i < minorCount; i++) {
     s >> buffer;
-    category.m_minorCategories.append(buffer);
+    category.d_func()->m_minorCategories.append(buffer);
   }
 
   return s;
@@ -168,5 +211,6 @@ QDataStream &operator>>(QDataStream &s, MyMoneyCategory &category)
 
 void MyMoneyCategory::clear()
 {
-  m_minorCategories.clear();
+  Q_D(MyMoneyCategory);
+  d->m_minorCategories.clear();
 }
