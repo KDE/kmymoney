@@ -264,5 +264,23 @@ namespace eMyMoney {
     };
 
   }
+
+  /**
+   * @brief Type of message
+   *
+   * An usually it is not easy to categorise log messages. This description is only a hint.
+   */
+  namespace OnlineJob {
+    enum class MessageType {
+      Debug, /**< Just for debug purposes. In normal scenarios the user should not see this. No need to store this message. Plugins should
+        not create them at all if debug mode is not enabled. */
+      Log, /**< A piece of information the user should not see during normal operation. It is not shown in any UI by default. It is stored persistantly. */
+      Information, /**< Information that should be kept but without the need to burden the user. The user can
+        see this during normal operation. */
+      Warning, /**< A piece of information the user should see but not be enforced to do so (= no modal dialog). E.g. a task is expected to have
+        direct effect but insted you have to wait a day (and that is commen behavior). */
+      Error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
+    };
+  }
 }
 #endif

@@ -51,6 +51,7 @@
 #include "mymoneybudget.h"
 #include "mymoneyschedule.h"
 #include "mymoneypayee.h"
+#include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 

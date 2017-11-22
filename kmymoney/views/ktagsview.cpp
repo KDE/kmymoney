@@ -32,6 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneysecurity.h"

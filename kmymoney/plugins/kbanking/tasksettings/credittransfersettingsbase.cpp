@@ -18,6 +18,7 @@
 
 #include "credittransfersettingsbase.h"
 
+#include <QDate>
 #include <QDebug>
 
 validators::lengthStatus creditTransferSettingsBase::checkNameLength(const QString& name) const

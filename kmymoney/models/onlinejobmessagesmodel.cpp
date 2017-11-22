@@ -19,8 +19,11 @@
 #include "onlinejobmessagesmodel.h"
 
 #include <QIcon>
+#include <QDateTime>
 
 #include <KLocalizedString>
+
+#include "mymoneyenums.h"
 #include "icons/icons.h"
 
 using namespace Icons;
@@ -42,18 +45,18 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
     case 0: switch (role) { // Status/Date column
         case Qt::DisplayRole: return messages[index.row()].timestamp();
         case Qt::DecorationRole: switch (messages[index.row()].type()) {
-            case onlineJobMessage::debug:
-            case onlineJobMessage::log:
-            case onlineJobMessage::information: return QIcon::fromTheme(g_Icons[Icon::DialogInformation]);
-            case onlineJobMessage::warning: return QIcon::fromTheme(g_Icons[Icon::DialogWarning]);
-            case onlineJobMessage::error: return QIcon::fromTheme(g_Icons[Icon::DialogError]);
+            case eMyMoney::OnlineJob::MessageType::Debug:
+            case eMyMoney::OnlineJob::MessageType::Log:
+            case eMyMoney::OnlineJob::MessageType::Information: return QIcon::fromTheme(g_Icons[Icon::DialogInformation]);
+            case eMyMoney::OnlineJob::MessageType::Warning: return QIcon::fromTheme(g_Icons[Icon::DialogWarning]);
+            case eMyMoney::OnlineJob::MessageType::Error: return QIcon::fromTheme(g_Icons[Icon::DialogError]);
           }
         case Qt::ToolTipRole: switch (messages[index.row()].type()) {
-            case onlineJobMessage::debug: return i18n("Information to find issues.");
-            case onlineJobMessage::log: return i18n("Information stored for provability.");
-            case onlineJobMessage::information: return i18n("Informative message without certain significance.");
-            case onlineJobMessage::warning: return i18n("Warning message.");
-            case onlineJobMessage::error: return i18n("Error");
+            case eMyMoney::OnlineJob::MessageType::Debug: return i18n("Information to find issues.");
+            case eMyMoney::OnlineJob::MessageType::Log: return i18n("Information stored for provability.");
+            case eMyMoney::OnlineJob::MessageType::Information: return i18n("Informative message without certain significance.");
+            case eMyMoney::OnlineJob::MessageType::Warning: return i18n("Warning message.");
+            case eMyMoney::OnlineJob::MessageType::Error: return i18n("Error");
           }
         default: return QVariant();
       }

@@ -33,6 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"

@@ -28,6 +28,7 @@
 
 #include <QString>
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes

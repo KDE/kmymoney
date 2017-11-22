@@ -1,7 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2013-2015 Christian Dávid <christian-david@web.de>
- *
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -19,103 +19,87 @@
 #ifndef ONLINEJOBMESSAGE_H
 #define ONLINEJOBMESSAGE_H
 
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
+#include <qglobal.h>
+
+class QDateTime;
+
+namespace eMyMoney { namespace OnlineJob { enum class MessageType; } }
 
 /**
  * @brief Represets a log message for onlineJobs
  */
+class onlineJobMessagePrivate;
 class onlineJobMessage
 {
+  Q_DECLARE_PRIVATE(onlineJobMessage)
+  onlineJobMessagePrivate * d_ptr;
+
 public:
-  /**
-   * @brief Type of message
-   *
-   * An usually it is not easy to categorise log messages. This description is only a hint.
-   */
-  enum messageType {
-    debug, /**< Just for debug purposes. In normal scenarios the user should not see this. No need to store this message. Plugins should
-      not create them at all if debug mode is not enabled. */
-    log, /**< A piece of information the user should not see during normal operation. It is not shown in any UI by default. It is stored persistantly. */
-    information, /**< Information that should be kept but without the need to burden the user. The user can
-      see this during normal operation. */
-    warning, /**< A piece of information the user should see but not be enforced to do so (= no modal dialog). E.g. a task is expected to have
-      direct effect but insted you have to wait a day (and that is commen behavior). */
-    error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
-  };
+  explicit onlineJobMessage(eMyMoney::OnlineJob::MessageType type,
+                            QString sender,
+                            QString message,
+                            QDateTime timestamp);
 
-  onlineJobMessage(messageType type, QString sender, QString message, QDateTime timestamp = QDateTime::currentDateTime())
-      : m_type(type),
-      m_sender(sender),
-      m_message(message),
-      m_timestamp(timestamp) {}
+  explicit onlineJobMessage(eMyMoney::OnlineJob::MessageType type,
+                            QString sender,
+                            QString message);
 
-  ~onlineJobMessage() {}
+  onlineJobMessage(const onlineJobMessage & other);
+  onlineJobMessage(onlineJobMessage && other);
+  onlineJobMessage & operator=(onlineJobMessage other);
+  friend void swap(onlineJobMessage& first, onlineJobMessage& second);
+  ~onlineJobMessage();
 
-  bool isDebug() const {
-    return (m_type == debug);
-  }
-  bool isLog() const {
-    return (m_type == log);
-  }
-  bool isInformation() const {
-    return (m_type == information);
-  }
-  bool isWarning() const {
-    return (m_type == warning);
-  }
-  bool isError() const {
-    return (m_type == error);
-  }
-
-  bool isPersistant() const {
-    return (m_type != debug);
-  }
+  bool isDebug() const;
+  bool isLog() const;
+  bool isInformation() const;
+  bool isWarning() const;
+  bool isError() const;
+  bool isPersistant() const;
 
   /** @see messageType */
-  messageType type() const {
-    return m_type;
-  }
+  eMyMoney::OnlineJob::MessageType type() const;
 
   /**
    * @brief Who "wrote" this message?
    *
    * Could be "OnlinePlugin" or "Bank"
    */
-  QString sender() const {
-    return m_sender;
-  }
+  QString sender() const;
 
   /**
    * @brief What happend?
    */
-  QString message() const {
-    return m_message;
-  }
+  QString message() const;
 
   /** @brief DateTime of message */
-  QDateTime timestamp() const {
-    return m_timestamp;
-  }
+  QDateTime timestamp() const;
 
   /**
    * @brief Set an error code of the plugin
    */
-  void setSenderErrorCode(const QString& errorCode) {
-    m_senderErrorCode = errorCode;
-  }
-  QString senderErrorCode() {
-    return m_senderErrorCode;
-  }
+  void setSenderErrorCode(const QString& errorCode);
+  QString senderErrorCode();
 
 private:
-  messageType m_type;
-  QString m_sender;
-  QString m_message;
-  QDateTime m_timestamp;
-  QString m_senderErrorCode;
-
   onlineJobMessage();
 };
+
+inline void swap(onlineJobMessage& first, onlineJobMessage& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+inline onlineJobMessage::onlineJobMessage(onlineJobMessage && other) : onlineJobMessage() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline onlineJobMessage & onlineJobMessage::operator=(onlineJobMessage other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 #endif // ONLINEJOBMESSAGE_H

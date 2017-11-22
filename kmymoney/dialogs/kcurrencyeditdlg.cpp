@@ -51,6 +51,7 @@
 #include "ui_kcurrencyeditordlg.h"
 #include "ui_kavailablecurrencydlg.h"
 
+#include "mymoneyexception.h"
 #include "mymoneysecurity.h"
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"

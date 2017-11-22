@@ -23,6 +23,7 @@
 
 #include <limits>
 
+#include <QDateTime>
 #include <QPair>
 #include <QString>
 #include <QDebug>

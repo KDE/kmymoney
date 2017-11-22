@@ -28,6 +28,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"

@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,6 +39,7 @@
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "mymoneypayee.h"
+#include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"

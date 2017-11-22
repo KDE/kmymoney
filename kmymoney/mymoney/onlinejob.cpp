@@ -18,6 +18,8 @@
 
 #include "onlinejob.h"
 
+#include "QDateTime"
+
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 
@@ -283,12 +285,23 @@ void onlineJob::addJobMessage(const onlineJobMessage& message)
   d->m_messageList.append(message);
 }
 
-void onlineJob::addJobMessage(const onlineJobMessage::messageType& type, const QString& sender, const QString& message, const QString& errorCode, const QDateTime& timestamp)
+void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message, const QString& errorCode, const QDateTime& timestamp)
 {
   Q_D(onlineJob);
   onlineJobMessage logMessage(type, sender, message, timestamp);
   logMessage.setSenderErrorCode(errorCode);
   d->m_messageList.append(logMessage);
+}
+
+void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message, const QString& errorCode)
+{
+  addJobMessage(type, sender, message, errorCode, QDateTime::currentDateTime());
+}
+
+void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message)
+{
+  addJobMessage(type, sender, message, QString(), QDateTime::currentDateTime());
+
 }
 
 QList<onlineJobMessage> onlineJob::jobMessageList() const

@@ -42,6 +42,7 @@
 #include "mymoneytag.h"
 #include "mymoneybudget.h"
 #include "mymoneyschedule.h"
+#include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneypayee.h"
 #include "mymoneymap.h"

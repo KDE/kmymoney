@@ -36,6 +36,7 @@
 // Project Includes
 
 #include "mymoneyutils.h"
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"

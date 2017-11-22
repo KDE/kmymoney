@@ -43,6 +43,7 @@
 #include "mymoneypayee.h"
 #include "mymoneybudget.h"
 #include "mymoneyschedule.h"
+#include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"

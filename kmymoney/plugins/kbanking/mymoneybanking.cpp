@@ -638,7 +638,7 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
         enqueTransaction(typedJob);
         job = typedJob;
       } else {
-        job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request"));
+        job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Error, "KBanking", "Cannot handle this request"));
         unhandledJobs.append(job);
       }
       m_onlineJobQueue.insert(m_kbanking->mappingId(job), job);
@@ -734,7 +734,7 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 
   AB_ACCOUNT *abAccount = aqbAccount(accId);
   if (!abAccount) {
-    job.addJobMessage(onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
+    job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Warning, "KBanking", i18n("<qt>"
                                                                                     "The given application account <b>%1</b> "
                                                                                     "has not been mapped to an online "
                                                                                     "account."
@@ -748,7 +748,7 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
   int rv = AB_Job_CheckAvailability(abJob);
   if (rv) {
     qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
-    job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "AqBanking",
+    job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Error, "AqBanking",
                                        QString("Sepa credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
                                        )
                      );
@@ -920,7 +920,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
       else if (abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
         job.setBankAnswer(onlineJob::sendingError);
 
-      job.addJobMessage(onlineJobMessage(onlineJobMessage::debug, "KBanking", "Job was processed"));
+      job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Debug, "KBanking", "Job was processed"));
       m_parent->m_onlineJobQueue.insert(jobIdent, job);
       abJob = AB_Job_List2Iterator_Next(jobIter);
     }

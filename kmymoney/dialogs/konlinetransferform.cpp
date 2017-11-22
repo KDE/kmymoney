@@ -25,6 +25,7 @@
 #include <QList>
 #include <QDebug>
 #include <QPluginLoader>
+#include <QDateTime>
 
 #include <KStandardAction>
 #include <KLocalizedString>

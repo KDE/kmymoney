@@ -20,6 +20,7 @@
 #include <QtTest/QtTest>
 
 #include "mymoneytestutils.h"
+#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"

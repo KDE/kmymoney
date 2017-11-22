@@ -19,6 +19,8 @@
 #define REPORTSTESTCOMMON_H
 
 #include <QList>
+#include <QDate>
+
 class QDomDocument;
 
 #include "mymoneyaccount.h"

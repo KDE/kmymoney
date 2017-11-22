@@ -19,6 +19,7 @@
 #include "onlinejobmodel.h"
 
 #include <QIcon>
+#include <QDateTime>
 
 #include <KLocalizedString>
 

@@ -21,6 +21,7 @@
 #define ONLINEJOB_H
 
 #include <QMetaType>
+#include <QHashFunctions>
 
 #include "mymoneyobject.h"
 #include "mymoneyexception.h"
@@ -268,12 +269,15 @@ public:
    * To be used by online plugin only.
    * @param message
    */
-  virtual void addJobMessage(const onlineJobMessage &message);
+  void addJobMessage(const onlineJobMessage &message);
 
   /**
    * @brief Convenient method to set add a log message
    */
-  virtual void addJobMessage(const onlineJobMessage::messageType& type, const QString& sender, const QString& message, const QString& errorCode = QString(), const QDateTime& timestamp = QDateTime::currentDateTime());
+  void addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message, const QString& errorCode, const QDateTime& timestamp);
+  void addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message, const QString& errorCode);
+  void addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message);
+
 
   /**
    * @brief jobMessageList

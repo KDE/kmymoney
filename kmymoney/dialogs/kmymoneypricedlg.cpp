@@ -267,7 +267,7 @@ void KMyMoneyPriceDlg::slotNewPrice()
     }
 
     if (dlg->exec()) {
-      MyMoneyPrice price(dlg->ui->m_security->security().id(), dlg->ui->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE);
+      MyMoneyPrice price(dlg->ui->m_security->security().id(), dlg->ui->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE, QString());
       QTreeWidgetItem* p = loadPriceItem(price);
       d->ui->m_priceList->setCurrentItem(p, true);
       // If the user cancels the following operation, we delete the new item
