@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,11 +27,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QDate>
-#include <QPair>
-#include <QMap>
-#include <QDomElement>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,8 +35,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
 #include "kmm_mymoney_export.h"
+
+class QString;
+class QDate;
+class QDomElement;
+
+class MyMoneyMoney;
+
+template <class T1, class T2> class QMap;
+template <class T1, class T2> struct QPair;
 
 /**
   * @author Thomas Baumgart
@@ -63,12 +68,26 @@
   * Using the @p rate() member function, one can retrieve the conversion rate based
   * upon the @p toSecurity or the @p fromSecurity.
   */
+class MyMoneyPricePrivate;
 class KMM_MYMONEY_EXPORT MyMoneyPrice
 {
+  Q_DECLARE_PRIVATE(MyMoneyPrice)
+  MyMoneyPricePrivate * d_ptr;
+
 public:
   MyMoneyPrice();
-  MyMoneyPrice(const QString& from, const QString& to, const QDomElement& node);
-  MyMoneyPrice(const QString& from, const QString& to, const QDate& date, const MyMoneyMoney& rate, const QString& source = QString());
+  explicit MyMoneyPrice(const QString& from,
+                        const QString& to,
+                        const QDomElement& node);
+  explicit MyMoneyPrice(const QString& from,
+                        const QString& to,
+                        const QDate& date,
+                        const MyMoneyMoney& rate,
+                        const QString& source);
+  MyMoneyPrice(const MyMoneyPrice & other);
+  MyMoneyPrice(MyMoneyPrice && other);
+  MyMoneyPrice & operator=(MyMoneyPrice other);
+  friend void swap(MyMoneyPrice& first, MyMoneyPrice& second);
   virtual ~MyMoneyPrice();
 
   /**
@@ -103,20 +122,12 @@ public:
     * @p 3/1 even though the price information kept with the object was @p 1/3, but based on the other
     * conversion direction (from ADF to GBP).
     */
-  const MyMoneyMoney& rate(const QString& id) const;
+  MyMoneyMoney rate(const QString& id) const;
 
-  const QDate& date() const {
-    return m_date;
-  };
-  const QString& source() const {
-    return m_source;
-  };
-  const QString& from() const {
-    return m_fromSecurity;
-  };
-  const QString& to() const {
-    return m_toSecurity;
-  };
+  QDate date() const;
+  QString source() const;
+  QString from() const;
+  QString to() const;
 
   /**
     * Check whether the object is valid or not. A MyMoneyPrice object
@@ -132,9 +143,7 @@ public:
   bool operator == (const MyMoneyPrice &) const;
 
   // Inequality operator
-  bool operator != (const MyMoneyPrice &right) const {
-    return !(operator == (right));
-  };
+  bool operator != (const MyMoneyPrice &right) const;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -146,16 +155,24 @@ public:
     * @retval false This object does not reference the object with id @p id.
     */
   bool hasReferenceTo(const QString& id) const;
-
-private:
-  QString       m_fromSecurity;
-  QString       m_toSecurity;
-  QDate         m_date;
-  MyMoneyMoney  m_rate;
-  MyMoneyMoney  m_invRate;
-  QString       m_source;
 };
 
+inline void swap(MyMoneyPrice& first, MyMoneyPrice& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+inline MyMoneyPrice::MyMoneyPrice(MyMoneyPrice && other) : MyMoneyPrice() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyPrice & MyMoneyPrice::operator=(MyMoneyPrice other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 typedef QPair<QString, QString> MyMoneySecurityPair;
 typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;

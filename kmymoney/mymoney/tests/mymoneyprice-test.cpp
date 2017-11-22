@@ -19,6 +19,7 @@
 #include <QtTest/QtTest>
 
 #include "mymoneyexception.h"
+#include "mymoneymoney.h"
 
 QTEST_GUILESS_MAIN(MyMoneyPriceTest)
 
