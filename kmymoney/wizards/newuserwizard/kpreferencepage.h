@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDPREFERENCEPAGE_H
-#define KNEWUSERWIZARDPREFERENCEPAGE_H
+#ifndef KPREFERENCEPAGE_H
+#define KPREFERENCEPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

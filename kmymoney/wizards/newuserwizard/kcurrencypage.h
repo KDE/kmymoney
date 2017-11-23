@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDCURRENCYPAGE_H
-#define KNEWUSERWIZARDCURRENCYPAGE_H
+#ifndef KCURRENCYPAGE_H
+#define KCURRENCYPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

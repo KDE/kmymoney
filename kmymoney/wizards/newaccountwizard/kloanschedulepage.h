@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDLOANSCHEDULEPAGE_H
-#define KNEWACCOUNTWIZARDLOANSCHEDULEPAGE_H
+#ifndef KLOANSCHEDULEPAGE_H
+#define KLOANSCHEDULEPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

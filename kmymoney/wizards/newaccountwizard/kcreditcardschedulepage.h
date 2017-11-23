@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDCREDITCARDSCHEDULE_H
-#define KNEWACCOUNTWIZARDCREDITCARDSCHEDULE_H
+#ifndef KCREDITCARDSCHEDULE_H
+#define KCREDITCARDSCHEDULE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

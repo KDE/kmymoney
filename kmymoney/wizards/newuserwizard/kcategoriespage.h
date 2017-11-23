@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDCATEGORIESPAGE_H
-#define KNEWUSERWIZARDCATEGORIESPAGE_H
+#ifndef KCATEGORIESPAGE_H
+#define KCATEGORIESPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

@@ -16,6 +16,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef KMYMONEYACCOUNTSVIEWBASE_P_H
+#define KMYMONEYACCOUNTSVIEWBASE_P_H
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -95,3 +98,5 @@ public:
   AccountsViewProxyModel  *m_proxyModel;
   KMyMoneyAccountTreeView **m_accountTree;
 };
+
+#endif

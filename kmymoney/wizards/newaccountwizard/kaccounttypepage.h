@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDACCOUNTTYPEPAGE_H
-#define KNEWACCOUNTWIZARDACCOUNTTYPEPAGE_H
+#ifndef KACCOUNTTYPEPAGE_H
+#define KACCOUNTTYPEPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

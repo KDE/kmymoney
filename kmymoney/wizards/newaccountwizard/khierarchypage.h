@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDHIERACHRYPAGE_H
-#define KNEWACCOUNTWIZARDHIERACHRYPAGE_H
+#ifndef KHIERACHRYPAGE_H
+#define KHIERACHRYPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

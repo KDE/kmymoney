@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KMYMONEYPLUGIN_STORAGEPLUGIN_H
-#define KMYMONEYPLUGIN_STORAGEPLUGIN_H
+#ifndef KMYMONEYSTORAGEPLUGIN_H
+#define KMYMONEYSTORAGEPLUGIN_H
 
 #include <QObject>
 #include <QVariantList>

@@ -17,6 +17,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef KBUDGETVIEW_P_H
+#define KBUDGETVIEW_P_H
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -117,3 +120,5 @@ public:
     Ui::KBudgetView      *ui;
     BudgetViewProxyModel *m_budgetProxyModel;
 };
+
+#endif

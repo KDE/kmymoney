@@ -20,6 +20,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef KCATEGORIESVIEW_P_H
+#define KCATEGORIESVIEW_P_H
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -81,3 +84,4 @@ public:
     bool                  m_haveUnusedCategories;
 };
 
+#endif

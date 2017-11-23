@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDACCOUNTPAGE_P_H
-#define KNEWUSERWIZARDACCOUNTPAGE_P_H
+#ifndef KACCOUNTPAGE_P_H
+#define KACCOUNTPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

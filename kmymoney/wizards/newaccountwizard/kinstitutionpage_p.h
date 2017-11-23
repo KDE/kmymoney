@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDINSTITUTION_P_H
-#define KNEWACCOUNTWIZARDINSTITUTION_P_H
+#ifndef KINSTITUTION_P_H
+#define KINSTITUTION_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDFILEPAGE_P_H
-#define KNEWUSERWIZARDFILEPAGE_P_H
+#ifndef KFILEPAGE_P_H
+#define KFILEPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

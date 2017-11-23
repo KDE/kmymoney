@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDGENERALLOANINFOPAGE_H
-#define KNEWACCOUNTWIZARDGENERALLOANINFOPAGE_H
+#ifndef KGENERALLOANINFOPAGE_H
+#define KGENERALLOANINFOPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

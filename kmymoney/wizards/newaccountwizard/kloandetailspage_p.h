@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDLOANDETAILSPAGE_P_H
-#define KNEWACCOUNTWIZARDLOANDETAILSPAGE_P_H
+#ifndef KLOANDETAILSPAGE_P_H
+#define KLOANDETAILSPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

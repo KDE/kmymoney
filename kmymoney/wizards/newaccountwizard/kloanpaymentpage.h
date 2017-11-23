@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDLOANPAYMENTPAGE_H
-#define KNEWACCOUNTWIZARDLOANPAYMENTPAGE_H
+#ifndef KLOANPAYMENTPAGE_H
+#define KLOANPAYMENTPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

@@ -19,8 +19,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef ACCOUNTVIEWPROXYMODEL_H
-#define ACCOUNTVIEWPROXYMODEL_H
+#ifndef ACCOUNTSVIEWPROXYMODEL_H
+#define ACCOUNTSVIEWPROXYMODEL_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

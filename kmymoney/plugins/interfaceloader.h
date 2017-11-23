@@ -16,6 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef INTERFACELOADER_H
+#define INTERFACELOADER_H
+
 #include "kmm_plugin_export.h"
 
 namespace KMyMoneyPlugin { class ImportInterface; }
@@ -59,3 +62,5 @@ class InterfaceLoader {
 KMM_PLUGIN_EXPORT InterfaceLoader& pluginInterfaces();
 
 }
+
+#endif

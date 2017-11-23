@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDGENERALPAGE_H
-#define KNEWUSERWIZARDGENERALPAGE_H
+#ifndef KGENERALPAGE_H
+#define KGENERALPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

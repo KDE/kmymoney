@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDPAYOUT_P_H
-#define KNEWACCOUNTWIZARDPAYOUT_P_H
+#ifndef KPAYOUT_P_H
+#define KPAYOUT_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

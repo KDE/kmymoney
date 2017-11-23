@@ -14,6 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef KINSTITUTIONSVIEW_P_H
+#define KINSTITUTIONSVIEW_P_H
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -70,4 +73,4 @@ public:
     Ui::KInstitutionsView   *ui;
 };
 
-
+#endif

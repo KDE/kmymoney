@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWUSERWIZARDINTROPAGE_H
-#define KNEWUSERWIZARDINTROPAGE_H
+#ifndef KINTROPAGE_H
+#define KINTROPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTWIZARDBROKERAGEPAGE_P_H
-#define KNEWACCOUNTWIZARDBROKERAGEPAGE_P_H
+#ifndef KBROKERAGEPAGE_P_H
+#define KBROKERAGEPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

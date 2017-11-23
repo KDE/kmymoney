@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PAYEEIDENTIFIERMODEL_H
-#define PAYEEIDENTIFIERMODEL_H
+#ifndef PAYEEIDENTIFIERCONTAINERMODEL_H
+#define PAYEEIDENTIFIERCONTAINERMODEL_H
 
 #include <QtCore/QModelIndex>
 #include "mymoney/mymoneypayeeidentifiercontainer.h"

@@ -14,6 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef KACCOUNTSVIEW_P_H
+#define KACCOUNTSVIEW_P_H
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -72,3 +75,5 @@ public:
     Ui::KAccountsView   *ui;
     bool                m_haveUnusedCategories;
 };
+
+#endif
