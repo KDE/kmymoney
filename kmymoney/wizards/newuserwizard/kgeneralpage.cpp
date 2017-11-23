@@ -91,7 +91,6 @@ namespace NewUserWizard
 
   void GeneralPage::slotContactFetched(const ContactData &identity)
   {
-    Q_D(GeneralPage);
     ui->m_loadAddressButton->setEnabled(true);
     if (identity.email.isEmpty())
       return;

@@ -63,7 +63,6 @@ namespace NewUserWizard
     Currency(wizard),
     WizardPage<Wizard>(*new CurrencyPagePrivate(wizard), stepCount++, this, wizard)
   {
-    Q_D(CurrencyPage);
     QTreeWidgetItem *first = 0;
 
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->availableCurrencyList();
@@ -104,7 +103,6 @@ namespace NewUserWizard
 
   void CurrencyPage::enterPage()
   {
-    Q_D(CurrencyPage);
     ui->m_currencyList->setFocus();
   }
 

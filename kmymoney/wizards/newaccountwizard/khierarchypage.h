@@ -48,12 +48,12 @@ namespace NewAccountWizard
     explicit HierarchyPage(Wizard* parent);
     ~HierarchyPage() override;
 
-    void enterPage();
-    KMyMoneyWizardPage* nextPage() const;
+    void enterPage() override;
+    KMyMoneyWizardPage* nextPage() const override;
     QWidget* initialFocusWidget() const override;
     const MyMoneyAccount& parentAccount();
 
-    bool isComplete() const;
+    bool isComplete() const override;
 
   protected slots:
     void parentAccountChanged();

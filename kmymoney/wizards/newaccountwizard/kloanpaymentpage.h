@@ -48,9 +48,9 @@ namespace NewAccountWizard
     explicit LoanPaymentPage(Wizard* parent);
     ~LoanPaymentPage() override;
 
-    KMyMoneyWizardPage* nextPage() const;
+    KMyMoneyWizardPage* nextPage() const override;
 
-    void enterPage();
+    void enterPage() override;
 
     /**
    * This method returns the sum of the additional fees

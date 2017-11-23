@@ -69,7 +69,6 @@ namespace NewUserWizard
 
   QList<MyMoneyTemplate> CategoriesPage::selectedTemplates() const
   {
-    Q_D(const CategoriesPage);
     return ui->m_templateSelector->selectedTemplates();
   }
 

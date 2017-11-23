@@ -50,8 +50,8 @@ namespace NewAccountWizard
     explicit AccountTypePage(Wizard* parent);
     ~AccountTypePage() override;
 
-    virtual bool isComplete() const;
-    KMyMoneyWizardPage* nextPage() const;
+    virtual bool isComplete() const override;
+    KMyMoneyWizardPage* nextPage() const override;
 
     QWidget* initialFocusWidget() const override;
 

@@ -54,7 +54,7 @@ public:
   {
   }
 
-  virtual KMyMoneyWizard* wizard() const
+  virtual KMyMoneyWizard* wizard() const override
   {
     return d_func()->m_wizardBase;
   }

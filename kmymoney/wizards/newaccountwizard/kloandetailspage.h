@@ -45,9 +45,9 @@ namespace NewAccountWizard
     explicit LoanDetailsPage(Wizard* parent);
     ~LoanDetailsPage() override;
 
-    void enterPage();
-    KMyMoneyWizardPage* nextPage() const;
-    virtual bool isComplete() const;
+    void enterPage() override;
+    KMyMoneyWizardPage* nextPage() const override;
+    virtual bool isComplete() const override;
 
     QWidget* initialFocusWidget() const override;
 

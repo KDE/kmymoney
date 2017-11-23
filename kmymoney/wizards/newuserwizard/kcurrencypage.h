@@ -47,7 +47,7 @@ namespace NewUserWizard
     explicit CurrencyPage(Wizard* parent);
     ~CurrencyPage() override;
 
-    void enterPage();
+    void enterPage() override;
     KMyMoneyWizardPage* nextPage() const override;
 
   private:

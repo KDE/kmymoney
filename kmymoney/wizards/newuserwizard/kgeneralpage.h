@@ -28,7 +28,7 @@
 #include "userinfo.h"
 
 class KMyMoneyWizardPage;
-class ContactData;
+struct ContactData;
 
 namespace NewUserWizard
 {

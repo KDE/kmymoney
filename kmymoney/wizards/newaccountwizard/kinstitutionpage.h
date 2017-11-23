@@ -46,7 +46,7 @@ namespace NewAccountWizard
   public:
     explicit InstitutionPage(Wizard* parent);
     ~InstitutionPage() override;
-    KMyMoneyWizardPage* nextPage() const;
+    KMyMoneyWizardPage* nextPage() const override;
 
     QWidget* initialFocusWidget() const override;
 

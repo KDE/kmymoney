@@ -1460,13 +1460,11 @@ void MyMoneyForecast::setHistoryEndDate(const QDate &historyEndDate)
 
 void MyMoneyForecast::setHistoryStartDate(int daysToStartDate)
 {
-  Q_D(MyMoneyForecast);
   setHistoryStartDate(QDate::currentDate().addDays(-daysToStartDate));
 }
 
 void MyMoneyForecast::setHistoryEndDate(int daysToEndDate)
 {
-  Q_D(MyMoneyForecast);
   setHistoryEndDate(QDate::currentDate().addDays(-daysToEndDate));
 }
 

@@ -211,7 +211,6 @@ public:
     */
   void selectStep(int step)
   {
-    Q_Q(KMyMoneyWizard);
     if ((step < 1) || (step > m_steps.count()))
       return;
 
@@ -251,7 +250,6 @@ public:
     */
   void setStepHidden(int step, bool hidden = true)
   {
-    Q_Q(KMyMoneyWizard);
     if ((step < 1) || (step > m_steps.count()))
       return;
 

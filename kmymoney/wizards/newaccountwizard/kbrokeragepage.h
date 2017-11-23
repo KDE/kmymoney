@@ -45,8 +45,8 @@ namespace NewAccountWizard
     explicit BrokeragePage(Wizard* parent);
     ~BrokeragePage() override;
 
-    KMyMoneyWizardPage* nextPage() const;
-    void enterPage();
+    KMyMoneyWizardPage* nextPage() const override;
+    void enterPage() override;
 
     QWidget* initialFocusWidget() const override;
 

@@ -45,7 +45,7 @@ namespace NewAccountWizard
     explicit AccountSummaryPage(Wizard* parent);
     ~AccountSummaryPage() override;
 
-    void enterPage();
+    void enterPage() override;
     QWidget* initialFocusWidget() const override;
 
   private:

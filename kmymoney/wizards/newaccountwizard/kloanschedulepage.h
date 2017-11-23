@@ -47,9 +47,9 @@ namespace NewAccountWizard
     explicit LoanSchedulePage(Wizard* parent);
     ~LoanSchedulePage() override;
 
-    void enterPage();
+    void enterPage() override;
 
-    KMyMoneyWizardPage* nextPage() const;
+    KMyMoneyWizardPage* nextPage() const override;
 
     /**
    * This method returns the due date of the first payment to be recorded.
