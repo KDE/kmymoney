@@ -17,7 +17,7 @@
 #ifndef MYMONEYOBJECTTEST_H
 #define MYMONEYOBJECTTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "mymoneyobject.h"
 

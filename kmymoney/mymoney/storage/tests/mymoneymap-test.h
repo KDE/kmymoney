@@ -17,7 +17,7 @@
 #ifndef MYMONEYMAPTEST_H
 #define MYMONEYMAPTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "mymoneytestutils.h"
 

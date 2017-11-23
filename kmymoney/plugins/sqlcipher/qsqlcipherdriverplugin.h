@@ -27,8 +27,8 @@
 #ifndef QSQLCIPHERDRIVERPLUGIN_H
 #define QSQLCIPHERDRIVERPLUGIN_H
 
-#include <QtCore/QtPlugin>
-#include <QtSql/QSqlDriverPlugin>
+#include <QtPlugin>
+#include <QSqlDriverPlugin>
 
 #ifdef QT_PLUGIN
 #define Q_EXPORT_SQLDRIVER_SQLCIPHER

@@ -21,6 +21,8 @@
 #ifndef KHOMEVIEW_H
 #define KHOMEVIEW_H
 
+#include <config-kmymoney.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 

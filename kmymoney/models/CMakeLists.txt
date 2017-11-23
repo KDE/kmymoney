@@ -27,10 +27,23 @@ endif(USE_MODELTEST)
 
 add_library(models STATIC ${libmodels_a_SOURCES})
 
+if (USE_MODELTEST)
+
+target_link_libraries(models LINK_PUBLIC
+    kmm_mymoney
+    kmymoney_common
+    KF5::ItemModels
+    Qt5::Test
+)
+
+else(USE_MODELTEST)
+
 target_link_libraries(models LINK_PUBLIC
     kmm_mymoney
     kmymoney_common
     KF5::ItemModels
 )
+
+endif(USE_MODELTEST)
 
 add_dependencies(models kmm_config)

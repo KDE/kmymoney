@@ -26,7 +26,7 @@
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
-#include <KDEWebKit/KWebView>
+#include <KWebView>
 #endif
 
 // KDE includes

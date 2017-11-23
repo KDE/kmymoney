@@ -18,7 +18,7 @@ email                : lukasz.wojnilowicz@gmail.com
 ***************************************************************************/
 #include "csvdate-test.h"
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "../convdate.h"
 

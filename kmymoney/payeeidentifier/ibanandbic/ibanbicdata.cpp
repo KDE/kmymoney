@@ -19,10 +19,10 @@
 #include "ibanbicdata.h"
 
 #include <KServiceTypeTrader>
-#include <QtSql/QSqlQuery>
+#include <QSqlQuery>
 #include <QSqlError>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QDebug>
+#include <QStandardPaths>
+#include <QDebug>
 
 #include "ibanbic.h"
 

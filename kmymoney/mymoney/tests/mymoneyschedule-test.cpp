@@ -17,7 +17,7 @@
 #include "mymoneyschedule-test.h"
 
 #include <QList>
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyScheduleTest;
 

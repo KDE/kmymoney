@@ -18,7 +18,7 @@
 #ifndef PIVOTTABLETEST_H
 #define PIVOTTABLETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace reports
 {

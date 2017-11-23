@@ -19,7 +19,7 @@
 #ifndef BICMODEL_H
 #define BICMODEL_H
 
-#include <QtSql/QSqlQueryModel>
+#include <QSqlQueryModel>
 
 #include "iban_bic_identifier_export.h"
 

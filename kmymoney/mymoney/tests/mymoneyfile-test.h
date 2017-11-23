@@ -17,7 +17,7 @@
 #ifndef MYMONEYFILETEST_H
 #define MYMONEYFILETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QtCore/QList>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFileTest;

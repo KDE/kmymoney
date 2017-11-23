@@ -19,7 +19,7 @@
 #ifndef IONLINETASKSETTINGS_H
 #define IONLINETASKSETTINGS_H
 
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 /**
  * @brief Account/plugin dependent settings for an onlineTask

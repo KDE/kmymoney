@@ -16,7 +16,7 @@
 #include <QDomDocument>
 #include <QDomElement>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyTagTest;
 

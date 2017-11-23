@@ -17,7 +17,7 @@
 #ifndef MATCHFINDERTEST_H
 #define MATCHFINDERTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QScopedPointer>
 
 #include "mymoneyaccount.h"

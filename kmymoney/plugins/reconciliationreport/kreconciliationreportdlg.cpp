@@ -24,14 +24,14 @@
 #include <QPushButton>
 #include <QTabWidget>
 #include <QPrinter>
-#include <QtPrintSupport/QPrintDialog>
+#include <QPrintDialog>
 
 // KDE includes
 #include <KStandardGuiItem>
 #ifdef ENABLE_WEBENGINE
-#include <QtWebEngineWidgets/QWebEngineView>
+#include <QWebEngineView>
 #else
-#include <KDEWebKit/KWebView>
+#include <KWebView>
 #endif
 
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)

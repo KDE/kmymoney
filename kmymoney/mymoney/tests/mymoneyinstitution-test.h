@@ -18,7 +18,7 @@
 #ifndef MYMONEYINSTITUTIONTEST_H
 #define MYMONEYINSTITUTIONTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyInstitution;
 

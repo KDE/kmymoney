@@ -16,9 +16,9 @@
 
 #include "mymoneytransaction-test.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"

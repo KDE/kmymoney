@@ -32,12 +32,12 @@
 #include <QDesktopServices>
 #include <QUrlQuery>
 #include <QWheelEvent>
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrinter>
+#include <QPrintDialog>
+#include <QPrinter>
 #ifdef ENABLE_WEBENGINE
-#include <QtWebEngineWidgets/QWebEngineView>
+#include <QWebEngineView>
 #else
-#include <KDEWebKit/KWebView>
+#include <KWebView>
 #endif
 
 // ----------------------------------------------------------------------------

@@ -17,7 +17,7 @@
 #ifndef MYMONEYEXCEPTIONTEST_H
 #define MYMONEYEXCEPTIONTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "mymoneyutils.h"
 #include "mymoneyexception.h"

@@ -16,8 +16,8 @@
  ***************************************************************************/
 #include "parsedata-test.h"
 
-#include <QtTest/QtTest>
-#include <QtCore/QString>
+#include <QtTest>
+#include <QString>
 
 #include "../csvutil.h"
 

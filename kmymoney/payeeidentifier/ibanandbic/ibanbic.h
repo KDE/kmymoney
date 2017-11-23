@@ -19,8 +19,8 @@
 #ifndef PAYEEIDENTIFIER_IBANBIC_H
 #define PAYEEIDENTIFIER_IBANBIC_H
 
-#include <QtCore/QString>
-#include <QtCore/QChar>
+#include <QString>
+#include <QChar>
 
 #include "payeeidentifier/payeeidentifierdata.h"
 #include "mymoneyunittestable.h"

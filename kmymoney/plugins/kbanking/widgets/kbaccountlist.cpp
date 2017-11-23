@@ -19,7 +19,7 @@
 
 #include "kbaccountlist.h"
 #include <assert.h>
-#include <QtCore/qstring.h>
+#include <QString>
 #include <KLocalizedString>
 
 

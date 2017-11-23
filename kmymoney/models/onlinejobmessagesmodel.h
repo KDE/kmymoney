@@ -19,7 +19,7 @@
 #ifndef ONLINEJOBMESSAGESMODEL_H
 #define ONLINEJOBMESSAGESMODEL_H
 
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 #include "mymoney/onlinejob.h"
 

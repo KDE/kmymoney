@@ -18,7 +18,7 @@
 #ifndef MYMONEYBALANCECACHETEST_H
 #define MYMONEYBALANCECACHETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "mymoneybalancecache.h"
 

@@ -20,7 +20,7 @@
 #define ONLINEJOBTEST_H
 
 #include <QObject>
-#include <QtCore/QString>
+#include <QString>
 
 class onlineJobTest : public QObject
 {

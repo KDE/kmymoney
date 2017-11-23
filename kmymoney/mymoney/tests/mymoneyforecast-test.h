@@ -17,7 +17,7 @@
 #ifndef MYMONEYFORECASTTEST_H
 #define MYMONEYFORECASTTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyForecastTest;
 

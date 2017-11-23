@@ -19,7 +19,7 @@
 #ifndef BICVALIDATOR_H
 #define BICVALIDATOR_H
 
-#include <QtGui/QValidator>
+#include <QValidator>
 #include "payeeidentifier_iban_bic_widgets_export.h"
 #include "kmymoneyvalidationfeedback.h"
 

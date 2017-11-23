@@ -17,7 +17,7 @@
 #ifndef MYMONEYDATABASEMGRTEST_H
 #define MYMONEYDATABASEMGRTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QTemporaryFile>
 #include <QElapsedTimer>
 

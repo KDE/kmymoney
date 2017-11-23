@@ -18,7 +18,7 @@
 #ifndef PIVOTGRIDTEST_H
 #define PIVOTGRIDTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace reports
 {

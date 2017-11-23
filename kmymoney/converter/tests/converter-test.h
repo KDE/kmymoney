@@ -18,7 +18,7 @@
 #ifndef CONVERTERTEST_H
 #define CONVERTERTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"

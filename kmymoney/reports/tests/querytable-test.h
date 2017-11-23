@@ -18,7 +18,7 @@
 #ifndef QUERYTABLETEST_H
 #define QUERYTABLETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 

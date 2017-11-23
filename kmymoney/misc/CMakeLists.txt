@@ -42,11 +42,13 @@ add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 target_link_libraries( kmm_utils_validators
   PUBLIC
   Qt5::Core
+  Qt5::Gui
 )
 
 target_link_libraries( kmm_utils_webconnect
   PUBLIC
   Qt5::Core
+  Qt5::Network
 )
 
 target_link_libraries( kmm_utils_platformtools

@@ -17,7 +17,7 @@
 #ifndef MYMONEYKEYVALUECONTAINERTEST_H
 #define MYMONEYKEYVALUECONTAINERTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyKeyValueContainer;
 

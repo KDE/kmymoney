@@ -19,7 +19,7 @@
 #ifndef KBICEDIT_H
 #define KBICEDIT_H
 
-#include <QtGui/QValidator>
+#include <QValidator>
 #include <KLineEdit>
 
 #include "payeeidentifier_iban_bic_widgets_export.h"

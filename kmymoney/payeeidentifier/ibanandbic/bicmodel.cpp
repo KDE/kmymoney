@@ -19,12 +19,12 @@
 #include "bicmodel.h"
 
 #include <KServiceTypeTrader>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QDebug>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QString>
+#include <QStringList>
+#include <QStandardPaths>
+#include <QDebug>
 
 /**
  * @warning At the moment the completion may fail if bicModel was created in more than one thread

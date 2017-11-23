@@ -20,7 +20,7 @@
 #define ONLINEJOBADMINISTRATIONTEST_H
 
 #include <QObject>
-#include <QtCore/QString>
+#include <QString>
 
 class MyMoneyFile;
 class IMyMoneyStorage;

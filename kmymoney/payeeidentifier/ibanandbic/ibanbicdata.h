@@ -23,9 +23,9 @@
 #  define KMM_MYMONEY_UNIT_TESTABLE
 #endif
 
-#include <QtCore/QObject>
-#include <QtCore/QVariant>
-#include <QtSql/QSqlDatabase>
+#include <QObject>
+#include <QVariant>
+#include <QSqlDatabase>
 
 /**
  * @brief This class implements everything that needs lookup

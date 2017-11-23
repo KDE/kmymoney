@@ -21,11 +21,11 @@
 
 #include "payeeidentifier/kmm_payeeidentifier_export.h"
 
-#include <QtCore/QtPlugin>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QHash>
-#include <QtCore/QMetaType>
-#include <QtXml/QDomElement>
+#include <QtPlugin>
+#include <QSharedPointer>
+#include <QHash>
+#include <QMetaType>
+#include <QDomElement>
 
 #include "storage/databasestoreableobject.h"
 

@@ -18,7 +18,7 @@
 
 #include <iostream>
 #include <QList>
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "mymoneybudget.h"
 

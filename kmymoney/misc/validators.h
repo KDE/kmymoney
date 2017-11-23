@@ -19,7 +19,7 @@
 #ifndef VALIDATORS_H
 #define VALIDATORS_H
 
-#include <QtCore/QString>
+#include <QString>
 
 namespace validators
 {

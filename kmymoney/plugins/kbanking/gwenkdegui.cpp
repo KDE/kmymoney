@@ -22,9 +22,9 @@
 
 #include "gwenkdegui.h"
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QRegExp>
+#include <QString>
+#include <QStringList>
+#include <QRegExp>
 
 #include <QDebug>
 #include <QPointer>

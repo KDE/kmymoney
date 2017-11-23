@@ -16,7 +16,7 @@
 
 #include "mymoneyprice-test.h"
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"

@@ -21,7 +21,7 @@
 
 #include "payeeidentifier_iban_bic_widgets_export.h"
 
-#include <QtGui/QValidator>
+#include <QValidator>
 
 #include "kmymoneyvalidationfeedback.h"
 

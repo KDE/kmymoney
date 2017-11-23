@@ -19,7 +19,7 @@
 #include <limits>
 #include <cstdint>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
 

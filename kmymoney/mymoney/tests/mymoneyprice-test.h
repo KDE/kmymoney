@@ -17,7 +17,7 @@
 #ifndef MYMONEYPRICETEST_H
 #define MYMONEYPRICETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "mymoneyprice.h"
 

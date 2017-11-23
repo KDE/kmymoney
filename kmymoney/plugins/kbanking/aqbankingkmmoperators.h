@@ -25,7 +25,7 @@
 #ifndef AQBANKINGKMMOPERATORS_H
 #define AQBANKINGKMMOPERATORS_H
 
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"

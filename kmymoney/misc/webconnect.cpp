@@ -18,8 +18,8 @@
 
 #include "webconnect.h"
 
-#include <QtNetwork/QLocalSocket>
-#include <QtNetwork/QLocalServer>
+#include <QLocalSocket>
+#include <QLocalServer>
 #include <QStandardPaths>
 #include <QDataStream>
 #include <QUrl>

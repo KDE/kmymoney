@@ -17,7 +17,7 @@
 #ifndef MYMONEYSPLITTEST_H
 #define MYMONEYSPLITTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneySplit;
 

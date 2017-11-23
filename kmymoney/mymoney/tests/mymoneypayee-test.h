@@ -14,7 +14,7 @@
 #ifndef MYMONEYPAYEETEST_H
 #define MYMONEYPAYEETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyPayeeTest : public QObject
 {

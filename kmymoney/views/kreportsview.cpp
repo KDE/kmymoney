@@ -41,12 +41,12 @@
 #include <QFileDialog>
 #include <QLocale>
 #include <QTextCodec>
-#include <QtPrintSupport/QPrintDialog>
+#include <QPrintDialog>
 #include <QMenu>
 #ifdef ENABLE_WEBENGINE
-#include <QtWebEngineWidgets/QWebEngineView>
+#include <QWebEngineView>
 #else
-#include <KDEWebKit/KWebView>
+#include <KWebView>
 #endif
 
 // ----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 #define MYMONEYSECURITYTEST_H
 
 #include <memory>
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneySecurity;
 

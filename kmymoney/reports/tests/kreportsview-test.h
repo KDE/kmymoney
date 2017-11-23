@@ -18,7 +18,7 @@
 #ifndef KREPORTSVIEWTEST_H
 #define KREPORTSVIEWTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 

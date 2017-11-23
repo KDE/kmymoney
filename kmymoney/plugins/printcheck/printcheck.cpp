@@ -29,10 +29,10 @@
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
-#include <KDEWebKit/KWebView>
+#include <KWebView>
 #endif
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrinter>
+#include <QPrintDialog>
+#include <QPrinter>
 
 // KDE includes
 #include <KActionCollection>

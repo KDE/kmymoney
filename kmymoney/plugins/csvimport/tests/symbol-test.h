@@ -19,7 +19,7 @@
 
 #include "../csvutil.h"
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class Parse;
 

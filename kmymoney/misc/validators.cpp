@@ -18,7 +18,7 @@
 
 #include "validators.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 bool validators::checkLineLength(const QString& text, const int& length)
 {

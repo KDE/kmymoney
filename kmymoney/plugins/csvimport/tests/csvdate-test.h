@@ -17,7 +17,7 @@ email                : agander93@gmail.com
 #ifndef CSVDATETEST_H
 #define CSVDATETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class ConvertDate;
 

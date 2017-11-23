@@ -43,7 +43,7 @@
 #ifndef MODELTEST_H
 #define MODELTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QStack>
 

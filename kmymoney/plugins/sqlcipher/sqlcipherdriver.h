@@ -26,7 +26,7 @@
 #ifndef SQLCIPHERDRIVER_H
 #define SQLCIPHERDRIVER_H
 
-#include <QtSql/QSQLiteDriver>
+#include <QtSql/QSQLiteDriver> // krazy:exclude=includes
 
 class SQLCipherDriver : public QSQLiteDriver
 {

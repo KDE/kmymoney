@@ -19,7 +19,7 @@
 #ifndef PAYEEIDENTIFIERCONTAINERMODEL_H
 #define PAYEEIDENTIFIERCONTAINERMODEL_H
 
-#include <QtCore/QModelIndex>
+#include <QModelIndex>
 #include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "payeeidentifier/payeeidentifier.h"
 

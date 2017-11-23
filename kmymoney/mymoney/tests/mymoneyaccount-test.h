@@ -17,7 +17,7 @@
 #ifndef MYMONEYACCOUNTTEST_H
 #define MYMONEYACCOUNTTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyAccount;
 

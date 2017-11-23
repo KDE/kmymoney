@@ -18,8 +18,8 @@
 
 #include "gwenhywfarqtoperators.h"
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QString>
+#include <QStringList>
 
 GWEN_STRINGLIST* GWEN_StringList_fromQStringList(const QStringList& input)
 {

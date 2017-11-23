@@ -17,8 +17,8 @@
 #include "symbol-test.h"
 #include "../csvutil.h"
 
-#include <QtTest/QtTest>
-#include <QtCore/QString>
+#include <QtTest>
+#include <QString>
 #include <QtCore/QLocale>
 
 QTEST_GUILESS_MAIN(SymbolTest);

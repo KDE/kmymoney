@@ -14,7 +14,7 @@
 #ifndef MYMONEYTAGTEST_H
 #define MYMONEYTAGTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyTagTest : public QObject
 {

@@ -17,7 +17,7 @@
 #ifndef MYMONEYFINANCIALCALCULATORTEST_H
 #define MYMONEYFINANCIALCALCULATORTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyFinancialCalculator;
 

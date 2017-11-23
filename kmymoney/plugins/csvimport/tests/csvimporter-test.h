@@ -16,7 +16,7 @@ email                : lukasz.wojnilowicz@gmail.com
 #ifndef CSVIMPORTERTEST_H
 #define CSVIMPORTERTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class CSVImporter;
 class BankingProfile;

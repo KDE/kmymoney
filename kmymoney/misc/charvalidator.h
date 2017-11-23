@@ -19,7 +19,7 @@
 #ifndef CHARVALIDATOR_H
 #define CHARVALIDATOR_H
 
-#include <QtGui/QValidator>
+#include <QValidator>
 
 class charValidator : public QValidator
 {

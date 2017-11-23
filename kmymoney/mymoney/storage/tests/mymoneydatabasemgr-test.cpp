@@ -17,7 +17,7 @@
 #include "mymoneydatabasemgr-test.h"
 #include <iostream>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"

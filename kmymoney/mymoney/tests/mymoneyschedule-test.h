@@ -17,7 +17,7 @@
 #ifndef MYMONEYSCHEDULETEST_H
 #define MYMONEYSCHEDULETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MyMoneyScheduleTest : public QObject
 {

@@ -17,7 +17,7 @@
 #include "mymoneyseqaccessmgr-test.h"
 #include <iostream>
 #include <QList>
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
