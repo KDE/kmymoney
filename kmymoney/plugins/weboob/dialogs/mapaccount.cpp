@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "mapaccount.h"
+
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
 #include <QProgressDialog>
@@ -24,7 +26,6 @@
 #include <kmessagebox.h>
 #include <klocalizedstring.h>
 
-#include "mapaccount.h"
 #include "../weboob.h"
 
 struct WbMapAccountDialog::Private

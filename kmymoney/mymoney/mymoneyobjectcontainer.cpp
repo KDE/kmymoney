@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyobjectcontainer.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,7 +24,6 @@
 
 #include "mymoney/onlinejob.h"
 
-#include "mymoneyobjectcontainer.h"
 #include "imymoneystorage.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"

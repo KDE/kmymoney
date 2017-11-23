@@ -39,10 +39,9 @@
 **
 ****************************************************************************/
 
+#include "modeltest.h"
 
 #include <QtGui/QtGui>
-
-#include "modeltest.h"
 
 #include <QtTest/QtTest>
 

@@ -15,13 +15,13 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "reportstestcommon.h"
+
 #include "kreportsview-test.h"
 
 #include <QList>
 #include <QFile>
 #include <QTextStream>
-
-#include "reportstestcommon.h"
 
 #include "pivottable.h"
 #include "querytable.h"

@@ -39,7 +39,6 @@
 
 #include "ui_kaccountsummarypage.h"
 
-#include "kaccountsummarypage.h"
 #include "kaccounttypepage.h"
 #include "kbrokeragepage.h"
 #include "kcreditcardschedulepage.h"
@@ -50,7 +49,6 @@
 #include "kloanpayoutpage.h"
 #include "kloanschedulepage.h"
 
-#include "kaccountsummarypage_p.h"
 #include "kaccounttypepage_p.h"
 #include "kbrokeragepage_p.h"
 #include "kcreditcardschedulepage_p.h"

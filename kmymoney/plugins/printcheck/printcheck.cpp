@@ -20,7 +20,7 @@
 
 #include "printcheck.h"
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 // QT includes
 #include <QAction>

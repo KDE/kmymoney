@@ -53,7 +53,6 @@
 #include "kaccountsummarypage.h"
 #include "kaccounttypepage.h"
 #include "kaccounttypepage_p.h"
-#include "kloanpayoutpage_p.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"

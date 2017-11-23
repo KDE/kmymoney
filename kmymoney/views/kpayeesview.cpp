@@ -52,7 +52,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
 #include "mymoneytransactionfilter.h"

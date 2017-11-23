@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyobject.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -23,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyobject.h"
 #include "mymoneyexception.h"
 
 const QString MyMoneyObject::m_emptyId;

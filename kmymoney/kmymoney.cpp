@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 #include "kmymoney.h"
 

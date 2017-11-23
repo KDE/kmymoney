@@ -20,7 +20,7 @@
 #ifndef KCM_PRINTCHECK_H
 #define KCM_PRINTCHECK_H
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 #include <KCModule>
 #include <QWidget>

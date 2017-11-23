@@ -42,7 +42,6 @@
 #include "knewaccountwizard_p.h"
 #include "kaccountsummarypage.h"
 #include "kaccounttypepage.h"
-#include "khierarchypage_p.h"
 #include "modelenums.h"
 #include "models.h"
 #include "mymoneyaccount.h"

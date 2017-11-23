@@ -19,7 +19,7 @@
  *
  */
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 #include "mymoneycontact.h"
 

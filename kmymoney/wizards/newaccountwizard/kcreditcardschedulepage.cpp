@@ -47,7 +47,6 @@
 #include "knewaccountwizard_p.h"
 #include "kaccounttypepage.h"
 #include "kaccounttypepage_p.h"
-#include "kcreditcardschedulepage_p.h"
 #include "khierarchypage.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"

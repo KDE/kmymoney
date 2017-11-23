@@ -40,7 +40,6 @@
 #include "knewaccountwizard_p.h"
 #include "kaccounttypepage.h"
 #include "kaccounttypepage_p.h"
-#include "kbrokeragepage_p.h"
 #include "khierarchypage.h"
 #include "kinstitutionpage.h"
 #include "kinstitutionpage_p.h"

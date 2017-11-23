@@ -20,7 +20,7 @@
 #ifndef KMYMONEYVIEW_H
 #define KMYMONEYVIEW_H
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes

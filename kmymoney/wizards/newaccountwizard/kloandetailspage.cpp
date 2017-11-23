@@ -47,7 +47,6 @@
 #include "knewaccountwizard_p.h"
 #include "kgeneralloaninfopage.h"
 #include "kgeneralloaninfopage_p.h"
-#include "kloandetailspage_p.h"
 #include "kloanpaymentpage.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"

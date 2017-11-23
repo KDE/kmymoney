@@ -39,7 +39,6 @@
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
 #include "kaccounttypepage.h"
-#include "kinstitutionpage_p.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "wizardpage.h"

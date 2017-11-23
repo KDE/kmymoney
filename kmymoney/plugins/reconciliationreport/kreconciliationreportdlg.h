@@ -21,7 +21,7 @@
 #ifndef KRECONCILIATIONREPORTDLG_H
 #define KRECONCILIATIONREPORTDLG_H
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 #include "ui_kreconciliationreportdlgdecl.h"
 

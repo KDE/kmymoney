@@ -18,6 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "plugin.h"
+#include "weboob.h"
+
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
 #include <QProgressDialog>
@@ -27,8 +30,7 @@
 
 #include "dialogs/mapaccount.h"
 #include "dialogs/webaccount.h"
-#include "plugin.h"
-#include "weboob.h"
+
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 

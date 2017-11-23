@@ -17,11 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "weboob.h"
+
 #include <QDebug>
 #include <QMutex>
 #include <QStandardPaths>
-
-#include "weboob.h"
 
 Weboob::Weboob(QObject* parent)
     : QObject(parent)

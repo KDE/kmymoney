@@ -42,7 +42,6 @@
 #include "knewaccountwizard_p.h"
 #include "kloandetailspage.h"
 #include "kloandetailspage_p.h"
-#include "kloanpaymentpage_p.h"
 #include "kloanschedulepage.h"
 #include "ksplittransactiondlg.h"
 #include "mymoneyaccount.h"

@@ -23,7 +23,7 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 
