@@ -175,7 +175,7 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
 
   if (field("investmentName").toString().isEmpty()) {
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-    auto type = static_cast<eMyMoney::Security>(field("securityType").toInt());
+    auto type = static_cast<eMyMoney::Security::Type>(field("securityType").toInt());
 
     foreach (const MyMoneySecurity& it_s, list) {
       if (it_s.securityType() == type
@@ -202,7 +202,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
   Q_D(KNewInvestmentWizard);
   auto file = MyMoneyFile::instance();
 
-  auto type = static_cast<eMyMoney::Security>(field("securityType").toInt());
+  auto type = static_cast<eMyMoney::Security::Type>(field("securityType").toInt());
   auto roundingMethod = static_cast<AlkValue::RoundingMethod>(field("roundingMethod").toInt());
   MyMoneyFileTransaction ft;
   try {
@@ -250,8 +250,8 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     if (d->m_createAccount) {
       // now that the security exists, we can add the account to store it
       d->m_account.setName(field("investmentName").toString());
-      if (d->m_account.accountType() == eMyMoney::Account::Unknown)
-        d->m_account.setAccountType(eMyMoney::Account::Stock);
+      if (d->m_account.accountType() == eMyMoney::Account::Type::Unknown)
+        d->m_account.setAccountType(eMyMoney::Account::Type::Stock);
 
       d->m_account.setCurrencyId(d->m_security.id());
       switch (d->ui->m_investmentDetailsPage->priceMode()) {

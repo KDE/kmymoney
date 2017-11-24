@@ -353,8 +353,8 @@ void KHomeView::showNetWorthGraph()
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingSchedules(false);
-  reportCfg.addAccountGroup(Account::Asset);
-  reportCfg.addAccountGroup(Account::Liability);
+  reportCfg.addAccountGroup(Account::Type::Asset);
+  reportCfg.addAccountGroup(Account::Type::Liability);
   reportCfg.setColumnsAreDays(true);
   reportCfg.setConvertCurrency(true);
   reportCfg.setIncludingForecast(true);
@@ -704,8 +704,8 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     bool removeAccount = false;
     if (!(*it).isClosed() || showClosedAccounts) {
       switch ((*it).accountType()) {
-        case Account::Expense:
-        case Account::Income:
+        case Account::Type::Expense:
+        case Account::Type::Income:
           // never show a category account
           // Note: This might be different in a future version when
           //       the homepage also shows category based information
@@ -714,9 +714,9 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
           // Asset and Liability accounts are only shown if they
           // have the preferred flag set
-        case Account::Asset:
-        case Account::Liability:
-        case Account::Investment:
+        case Account::Type::Asset:
+        case Account::Type::Liability:
+        case Account::Type::Investment:
           // if preferred accounts are requested, then keep in list
           if ((*it).value("PreferredAccount") != "Yes"
               || (type & Preferred) == 0) {
@@ -727,10 +727,10 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           // Check payment accounts. If payment and preferred is selected,
           // then always show them. If only payment is selected, then
           // show only if preferred flag is not set.
-        case Account::Checkings:
-        case Account::Savings:
-        case Account::Cash:
-        case Account::CreditCard:
+        case Account::Type::Checkings:
+        case Account::Type::Savings:
+        case Account::Type::Cash:
+        case Account::Type::CreditCard:
           switch (type & (Payment | Preferred)) {
             case Payment:
               if ((*it).value("PreferredAccount") == "Yes")
@@ -835,7 +835,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
 
   bool showLimit = KMyMoneyGlobalSettings::showLimitInfo();
 
-  if (acc.accountType() == Account::Investment) {
+  if (acc.accountType() == Account::Type::Investment) {
     //investment accounts show the balances of all its subaccounts
     value = investmentBalance(acc);
 
@@ -854,8 +854,8 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
       d->m_total += value;
     }
     //if credit card or checkings account, show maximum credit
-    if (acc.accountType() == Account::CreditCard ||
-        acc.accountType() == Account::Checkings) {
+    if (acc.accountType() == Account::Type::CreditCard ||
+        acc.accountType() == Account::Type::Checkings) {
       QString maximumCredit = acc.value("maxCreditAbsolute");
       if (maximumCredit.isEmpty()) {
         maximumCredit = acc.value("minBalanceAbsolute");
@@ -953,7 +953,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
   //show minimum balance column if requested
   if (showMinBal) {
     //if it is an investment, show minimum balance empty
-    if (acc.accountType() == Account::Investment) {
+    if (acc.accountType() == Account::Type::Investment) {
       tmp += QString("<td class=\"right\">&nbsp;</td>");
     } else {
       //show minimum balance entry
@@ -1146,25 +1146,25 @@ void KHomeView::showForecast()
         case -1:
           break;
         case 0:
-          if ((*it_account).accountGroup() == Account::Asset) {
+          if ((*it_account).accountGroup() == Account::Type::Asset) {
             msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           }
-          if ((*it_account).accountGroup() == Account::Liability) {
+          if ((*it_account).accountGroup() == Account::Type::Liability) {
             msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             break;
           }
           break;
         default:
-          if ((*it_account).accountGroup() == Account::Asset) {
+          if ((*it_account).accountGroup() == Account::Type::Asset) {
             msg = i18np("The balance of %2 will drop below %3 in %1 day.",
                         "The balance of %2 will drop below %3 in %1 days.",
                         dropZero, (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           }
-          if ((*it_account).accountGroup() == Account::Liability) {
+          if ((*it_account).accountGroup() == Account::Type::Liability) {
             msg = i18np("The balance of %2 will raise above %3 in %1 day.",
                         "The balance of %2 will raise above %3 in %1 days.",
                         dropZero, (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
@@ -1280,15 +1280,15 @@ void KHomeView::showAssetsLiabilities()
     if (!(*it).isClosed()) {
       switch ((*it).accountType()) {
           // group all assets into one list but make sure that investment accounts always show up
-        case Account::Investment:
+        case Account::Type::Investment:
           assets << *it;
           break;
 
-        case Account::Checkings:
-        case Account::Savings:
-        case Account::Cash:
-        case Account::Asset:
-        case Account::AssetLoan:
+        case Account::Type::Checkings:
+        case Account::Type::Savings:
+        case Account::Type::Cash:
+        case Account::Type::Asset:
+        case Account::Type::AssetLoan:
           // list account if it's the last in the hierarchy or has transactions in it
           if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
             assets << *it;
@@ -1296,9 +1296,9 @@ void KHomeView::showAssetsLiabilities()
           break;
 
           // group the liabilities into the other
-        case Account::CreditCard:
-        case Account::Liability:
-        case Account::Loan:
+        case Account::Type::CreditCard:
+        case Account::Type::Liability:
+        case Account::Type::Loan:
           // list account if it's the last in the hierarchy or has transactions in it
           if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
             liabilities << *it;
@@ -1396,7 +1396,7 @@ void KHomeView::showAssetsLiabilities()
       if (asset_it != assets.constEnd()) {
         MyMoneyMoney value;
         //investment accounts consolidate the balance of its subaccounts
-        if ((*asset_it).accountType() == Account::Investment) {
+        if ((*asset_it).accountType() == Account::Type::Investment) {
           value = investmentBalance(*asset_it);
         } else {
           value = MyMoneyFile::instance()->balance((*asset_it).id(), QDate::currentDate());
@@ -1717,7 +1717,7 @@ void KHomeView::showCashFlowSummary()
             }
 
             //store depending on account type
-            if (repSplitAcc.accountType() == Account::Income) {
+            if (repSplitAcc.accountType() == Account::Type::Income) {
               incomeValue += value;
             } else {
               expenseValue += value;
@@ -1828,9 +1828,9 @@ void KHomeView::showCashFlowSummary()
             scheduledOtherTransfer += value;
           } else if (repSplitAcc.isIncomeExpense()) {
             //income and expenses are stored as negative values
-            if (repSplitAcc.accountType() == Account::Income)
+            if (repSplitAcc.accountType() == Account::Type::Income)
               scheduledIncome -= value;
-            if (repSplitAcc.accountType() == Account::Expense)
+            if (repSplitAcc.accountType() == Account::Type::Expense)
               scheduledExpense -= value;
           }
         }
@@ -1862,9 +1862,9 @@ void KHomeView::showCashFlowSummary()
     if (!(*account_it).isClosed()) {
       switch ((*account_it).accountType()) {
           //group all assets into one list
-        case Account::Checkings:
-        case Account::Savings:
-        case Account::Cash: {
+        case Account::Type::Checkings:
+        case Account::Type::Savings:
+        case Account::Type::Cash: {
             MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
             //calculate balance for foreign currency accounts
             if ((*account_it).currencyId() != file->baseCurrency().id()) {
@@ -1879,7 +1879,7 @@ void KHomeView::showCashFlowSummary()
             break;
           }
           //group the liabilities into the other
-        case Account::CreditCard: {
+        case Account::Type::CreditCard: {
             MyMoneyMoney value;
             value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
             //calculate balance if foreign currency

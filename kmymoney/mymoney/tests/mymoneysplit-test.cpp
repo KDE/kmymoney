@@ -22,6 +22,7 @@
 
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
+#include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
@@ -492,8 +493,8 @@ void MyMoneySplitTest::testReplaceId()
 
 void MyMoneySplitTest::testElementNames()
 {
-  for (auto i = (int)MyMoneySplit::Element::Split; i <= (int)MyMoneySplit::Element::KeyValuePairs; ++i) {
-    auto isEmpty = MyMoneySplit::getElName(static_cast<MyMoneySplit::Element>(i)).isEmpty();
+  for (auto i = (int)Split::Element::Split; i <= (int)Split::Element::KeyValuePairs; ++i) {
+    auto isEmpty = MyMoneySplitPrivate::getElName(static_cast<Split::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -502,8 +503,8 @@ void MyMoneySplitTest::testElementNames()
 
 void MyMoneySplitTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneySplit::Attribute::ID; i < (int)MyMoneySplit::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneySplit::getAttrName(static_cast<MyMoneySplit::Attribute>(i)).isEmpty();
+  for (auto i = (int)Split::Attribute::ID; i < (int)Split::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneySplitPrivate::getAttrName(static_cast<Split::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

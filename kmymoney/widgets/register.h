@@ -37,7 +37,7 @@ class MyMoneyTransaction;
 namespace eWidgets { enum class SortField;
                      namespace eTransaction { enum class Column; }
                      namespace eRegister { enum class DetailColumn;} }
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 template <typename T> class QList;
 

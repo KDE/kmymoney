@@ -131,7 +131,7 @@ void KInvestmentView::init()
 
   // Equities tab
   d->m_accountsProxyModel = new AccountNamesFilterProxyModel(this);
-  d->m_accountsProxyModel->addAccountType(eMyMoney::Account::Investment);
+  d->m_accountsProxyModel->addAccountType(eMyMoney::Account::Type::Investment);
   d->m_accountsProxyModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();
   d->m_accountsProxyModel->setSourceModel(model);
@@ -289,7 +289,7 @@ void KInvestmentView::slotSelectAccount(const MyMoneyObject &obj)
      return;
   const auto acc = dynamic_cast<const MyMoneyAccount &>(obj);
 
-  if (acc.accountType() == eMyMoney::Account::Investment)
+  if (acc.accountType() == eMyMoney::Account::Type::Investment)
     slotSelectAccount(acc.id());
 }
 
@@ -317,7 +317,7 @@ void KInvestmentView::loadInvestmentTab()
   if (!d->m_idInvAcc.isEmpty()) {                                          // check if account to be selected exist
     try {                                                                  // it could not exist anymore (e.g. another file has been opened)
       const auto acc = MyMoneyFile::instance()->account(d->m_idInvAcc);    // then this should throw an exception
-      if (acc.accountType() == eMyMoney::Account::Investment)                 // it could be that id exists but account in new file isn't investment account anymore
+      if (acc.accountType() == eMyMoney::Account::Type::Investment)                 // it could be that id exists but account in new file isn't investment account anymore
         slotSelectAccount(d->m_idInvAcc);                                  // otherwise select preset account
       else
         d->m_idInvAcc.clear();

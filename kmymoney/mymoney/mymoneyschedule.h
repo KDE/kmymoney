@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MYMONEYSCHEDULED_H
-#define MYMONEYSCHEDULED_H
+#ifndef MYMONEYSCHEDULE_H
+#define MYMONEYSCHEDULE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -706,36 +706,7 @@ private:
     * and @c false on Sat..Sun.
     */
   bool isProcessingDate(const QDate& date) const;
-
-private:
-  enum class Element { Payment,
-                       Payments
-                     };
-
-  enum class Attribute { Name = 0,
-                         Type,
-                         Occurrence,
-                         OccurrenceMultiplier,
-                         PaymentType,
-                         Fixed,
-                         AutoEnter,
-                         LastPayment,
-                         WeekendOption,
-                         Date,
-                         StartDate,
-                         EndDate,
-                         LastDayInMonth,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const MyMoneySchedule::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneySchedule& first, MyMoneySchedule& second) // krazy:exclude=inline
 {

@@ -22,12 +22,10 @@
  ***************************************************************************/
 
 #include "mymoneysplit.h"
+#include "mymoneysplit_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QString>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,9 +34,7 @@
 // Project Includes
 
 #include "mymoneyutils.h"
-#include "mymoneymoney.h"
 #include "mymoneytransaction.h"
-#include "mymoneyenums.h"
 
 const char MyMoneySplit::ActionCheck[] = "Check";
 const char MyMoneySplit::ActionDeposit[] = "Deposit";
@@ -57,94 +53,6 @@ const char MyMoneySplit::ActionAddShares[] = "Add";
 const char MyMoneySplit::ActionSplitShares[] = "Split";
 const char MyMoneySplit::ActionInterestIncome[] = "IntIncome";
 
-class MyMoneySplitPrivate {
-
-public:
-  /**
-    * This member contains the ID of the payee
-    */
-  QString        m_payee;
-
-  /**
-    * This member contains a list of the IDs of the tags
-    */
-  QList<QString> m_tagList;
-
-  /**
-    * This member contains the ID of the account
-    */
-  QString        m_account;
-
-  /**
-   * This member contains the ID of the cost center
-   */
-  QString        m_costCenter;
-
-  /**
-    */
-  MyMoneyMoney   m_shares;
-
-  /**
-    */
-  MyMoneyMoney   m_value;
-
-  /**
-    * If the quotient of m_shares divided by m_values is not the correct price
-    * because of truncation, the price can be stored in this member. For display
-    * purpose and transaction edit this value can be used by the application.
-    */
-  MyMoneyMoney   m_price;
-
-  QString        m_memo;
-
-  /**
-    * This member contains information about the reconciliation
-    * state of the split. Possible values are
-    *
-    * @li NotReconciled
-    * @li Cleared
-    * @li Reconciled
-    * @li Frozen
-    *
-    */
-  eMyMoney::Split::State m_reconcileFlag;
-
-  /**
-    * In case the reconciliation flag is set to Reconciled or Frozen
-    * this member contains the date of the reconciliation.
-    */
-  QDate          m_reconcileDate;
-
-  /**
-    * The m_action member is an arbitrary string, but is intended to
-    * be conveniently limited to a menu of selections such as
-    * "Buy", "Sell", "Interest", etc.
-    */
-  QString        m_action;
-
-  /**
-    * The m_number member is used to store a reference number to
-    * the split supplied by the user (e.g. check number, etc.).
-    */
-  QString        m_number;
-
-  /**
-    * This member keeps the bank's unique ID for the split, so we can
-    * avoid duplicates.  This is only used for electronic statement downloads.
-    *
-    * This should only be set on the split which refers to the account
-    * that was downloaded.
-    */
-  QString        m_bankID;
-
-  /**
-    * This member keeps a backward id to the transaction that this
-    * split can be found in. It is the purpose of the MyMoneyTransaction
-    * object to maintain this member variable.
-    */
-  QString        m_transactionId;
-};
-
 MyMoneySplit::MyMoneySplit() :
 d_ptr(new MyMoneySplitPrivate)
 {
@@ -154,32 +62,32 @@ d_ptr(new MyMoneySplitPrivate)
 
 MyMoneySplit::MyMoneySplit(const QDomElement& node) :
     MyMoneyObject(node, false),
-    MyMoneyKeyValueContainer(node.elementsByTagName(getElName(Element::KeyValuePairs)).item(0).toElement()),
+    MyMoneyKeyValueContainer(node.elementsByTagName(MyMoneySplitPrivate::getElName(Split::Element::KeyValuePairs)).item(0).toElement()),
     d_ptr(new MyMoneySplitPrivate)
 {
-  if (getElName(Element::Split) != node.tagName())
+  Q_D(MyMoneySplit);
+  if (d->getElName(Split::Element::Split) != node.tagName())
     throw MYMONEYEXCEPTION("Node was not SPLIT");
 
   clearId();
 
-  Q_D(MyMoneySplit);
-  d->m_payee = QStringEmpty(node.attribute(getAttrName(Attribute::Payee)));
+  d->m_payee = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Payee)));
 
-  QDomNodeList nodeList = node.elementsByTagName(getElName(Element::Tag));
+  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Split::Element::Tag));
   for (int i = 0; i < nodeList.count(); i++)
-    d->m_tagList << QStringEmpty(nodeList.item(i).toElement().attribute(getAttrName(Attribute::ID)));
+    d->m_tagList << QStringEmpty(nodeList.item(i).toElement().attribute(d->getAttrName(Split::Attribute::ID)));
 
-  d->m_reconcileDate = stringToDate(QStringEmpty(node.attribute(getAttrName(Attribute::ReconcileDate))));
-  d->m_action = QStringEmpty(node.attribute(getAttrName(Attribute::Action)));
-  d->m_reconcileFlag = static_cast<eMyMoney::Split::State>(node.attribute(getAttrName(Attribute::ReconcileFlag)).toInt());
-  d->m_memo = QStringEmpty(node.attribute(getAttrName(Attribute::Memo)));
-  d->m_value = MyMoneyMoney(QStringEmpty(node.attribute(getAttrName(Attribute::Value))));
-  d->m_shares = MyMoneyMoney(QStringEmpty(node.attribute(getAttrName(Attribute::Shares))));
-  d->m_price = MyMoneyMoney(QStringEmpty(node.attribute(getAttrName(Attribute::Price))));
-  d->m_account = QStringEmpty(node.attribute(getAttrName(Attribute::Account)));
-  d->m_costCenter = QStringEmpty(node.attribute(getAttrName(Attribute::CostCenter)));
-  d->m_number = QStringEmpty(node.attribute(getAttrName(Attribute::Number)));
-  d->m_bankID = QStringEmpty(node.attribute(getAttrName(Attribute::BankID)));
+  d->m_reconcileDate = stringToDate(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::ReconcileDate))));
+  d->m_action = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Action)));
+  d->m_reconcileFlag = static_cast<eMyMoney::Split::State>(node.attribute(d->getAttrName(Split::Attribute::ReconcileFlag)).toInt());
+  d->m_memo = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Memo)));
+  d->m_value = MyMoneyMoney(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Value))));
+  d->m_shares = MyMoneyMoney(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Shares))));
+  d->m_price = MyMoneyMoney(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Price))));
+  d->m_account = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Account)));
+  d->m_costCenter = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::CostCenter)));
+  d->m_number = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Number)));
+  d->m_bankID = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::BankID)));
 }
 
 MyMoneySplit::MyMoneySplit(const MyMoneySplit& other) :
@@ -485,32 +393,32 @@ MyMoneyMoney MyMoneySplit::price() const
 
 void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement(getElName(Element::Split));
+  Q_D(const MyMoneySplit);
+  QDomElement el = document.createElement(d->getElName(Split::Element::Split));
 
   writeBaseXML(document, el);
 
-  Q_D(const MyMoneySplit);
-  el.setAttribute(getAttrName(Attribute::Payee), d->m_payee);
-  //el.setAttribute(getAttrName(Attribute::Tag), m_tag);
-  el.setAttribute(getAttrName(Attribute::ReconcileDate), dateToString(d->m_reconcileDate));
-  el.setAttribute(getAttrName(Attribute::Action), d->m_action);
-  el.setAttribute(getAttrName(Attribute::ReconcileFlag), (int)d->m_reconcileFlag);
-  el.setAttribute(getAttrName(Attribute::Value), d->m_value.toString());
-  el.setAttribute(getAttrName(Attribute::Shares), d->m_shares.toString());
+  el.setAttribute(d->getAttrName(Split::Attribute::Payee), d->m_payee);
+  //el.setAttribute(getAttrName(Split::Attribute::Tag), m_tag);
+  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileDate), dateToString(d->m_reconcileDate));
+  el.setAttribute(d->getAttrName(Split::Attribute::Action), d->m_action);
+  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileFlag), (int)d->m_reconcileFlag);
+  el.setAttribute(d->getAttrName(Split::Attribute::Value), d->m_value.toString());
+  el.setAttribute(d->getAttrName(Split::Attribute::Shares), d->m_shares.toString());
   if (!d->m_price.isZero())
-    el.setAttribute(getAttrName(Attribute::Price), d->m_price.toString());
-  el.setAttribute(getAttrName(Attribute::Memo), d->m_memo);
+    el.setAttribute(d->getAttrName(Split::Attribute::Price), d->m_price.toString());
+  el.setAttribute(d->getAttrName(Split::Attribute::Memo), d->m_memo);
   // No need to write the split id as it will be re-assigned when the file is read
-  // el.setAttribute(getAttrName(Attribute::ID), split.id());
-  el.setAttribute(getAttrName(Attribute::Account), d->m_account);
-  el.setAttribute(getAttrName(Attribute::Number), d->m_number);
-  el.setAttribute(getAttrName(Attribute::BankID), d->m_bankID);
+  // el.setAttribute(getAttrName(Split::Attribute::ID), split.id());
+  el.setAttribute(d->getAttrName(Split::Attribute::Account), d->m_account);
+  el.setAttribute(d->getAttrName(Split::Attribute::Number), d->m_number);
+  el.setAttribute(d->getAttrName(Split::Attribute::BankID), d->m_bankID);
   if(!d->m_costCenter.isEmpty())
-    el.setAttribute(getAttrName(Attribute::CostCenter), d->m_costCenter);
+    el.setAttribute(d->getAttrName(Split::Attribute::CostCenter), d->m_costCenter);
 
   for (int i = 0; i < d->m_tagList.count(); i++) {
-    QDomElement sel = document.createElement(getElName(Element::Tag));
-    sel.setAttribute(getAttrName(Attribute::ID), d->m_tagList[i]);
+    QDomElement sel = document.createElement(d->getElName(Split::Element::Tag));
+    sel.setAttribute(d->getAttrName(Split::Attribute::ID), d->m_tagList[i]);
     el.appendChild(sel);
   }
 
@@ -534,33 +442,37 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
 
 bool MyMoneySplit::isMatched() const
 {
-  return !(value(getAttrName(Attribute::KMMatchedTx)).isEmpty());
+  Q_D(const MyMoneySplit);
+  return !(value(d->getAttrName(Split::Attribute::KMMatchedTx)).isEmpty());
 }
 
 void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
 {
+  Q_D(MyMoneySplit);
   //  now we allow matching of two manual transactions
   if (!isMatched()) {
     MyMoneyTransaction t(_t);
     t.clearId();
-    QDomDocument doc(getElName(Element::Match));
-    QDomElement el = doc.createElement(getElName(Element::Container));
+    QDomDocument doc(d->getElName(Split::Element::Match));
+    QDomElement el = doc.createElement(d->getElName(Split::Element::Container));
     doc.appendChild(el);
     t.writeXML(doc, el);
     QString xml = doc.toString();
     xml.replace('<', "&lt;");
-    setValue(getAttrName(Attribute::KMMatchedTx), xml);
+    setValue(d->getAttrName(Split::Attribute::KMMatchedTx), xml);
   }
 }
 
 void MyMoneySplit::removeMatch()
 {
-  deletePair(getAttrName(Attribute::KMMatchedTx));
+  Q_D(MyMoneySplit);
+  deletePair(d->getAttrName(Split::Attribute::KMMatchedTx));
 }
 
 MyMoneyTransaction MyMoneySplit::matchedTransaction() const
 {
-  auto xml = value(getAttrName(Attribute::KMMatchedTx));
+  Q_D(const MyMoneySplit);
+  auto xml = value(d->getAttrName(Split::Attribute::KMMatchedTx));
   if (!xml.isEmpty()) {
     xml.replace("&lt;", "<");
     QDomDocument doc;
@@ -599,38 +511,4 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
   }
 
   return changed;
-}
-
-QString MyMoneySplit::getElName(const Element el)
-{
-  static const QHash<Element, QString> elNames = {
-    {Element::Split,          QStringLiteral("SPLIT")},
-    {Element::Tag,            QStringLiteral("TAG")},
-    {Element::Match,          QStringLiteral("MATCH")},
-    {Element::Container,      QStringLiteral("CONTAINER")},
-    {Element::KeyValuePairs,  QStringLiteral("KEYVALUEPAIRS")}
-  };
-  return elNames[el];
-}
-
-QString MyMoneySplit::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::ID,             QStringLiteral("id")},
-    {Attribute::BankID,         QStringLiteral("bankid")},
-    {Attribute::Account,        QStringLiteral("account")},
-    {Attribute::Payee,          QStringLiteral("payee")},
-    {Attribute::Tag,            QStringLiteral("tag")},
-    {Attribute::Number,         QStringLiteral("number")},
-    {Attribute::Action,         QStringLiteral("action")},
-    {Attribute::Value,          QStringLiteral("value")},
-    {Attribute::Shares,         QStringLiteral("shares")},
-    {Attribute::Price,          QStringLiteral("price")},
-    {Attribute::Memo,           QStringLiteral("memo")},
-    {Attribute::CostCenter,     QStringLiteral("costcenter")},
-    {Attribute::ReconcileDate,  QStringLiteral("reconciledate")},
-    {Attribute::ReconcileFlag,  QStringLiteral("reconcileflag")},
-    {Attribute::KMMatchedTx,    QStringLiteral("kmm-matched-tx")}
-  };
-  return attrNames[attr];
 }

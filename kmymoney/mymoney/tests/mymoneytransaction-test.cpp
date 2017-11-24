@@ -24,6 +24,7 @@
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneytransaction_p.h"
 #include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MyMoneyTransactionTest)
@@ -715,8 +716,8 @@ void MyMoneyTransactionTest::testReplaceId()
 
 void MyMoneyTransactionTest::testElementNames()
 {
-  for (auto i = (int)MyMoneyTransaction::Element::Split; i <= (int)MyMoneyTransaction::Element::Splits; ++i) {
-    auto isEmpty = MyMoneyTransaction::getElName(static_cast<MyMoneyTransaction::Element>(i)).isEmpty();
+  for (auto i = (int)Transaction::Element::Split; i <= (int)Transaction::Element::Splits; ++i) {
+    auto isEmpty = MyMoneyTransactionPrivate::getElName(static_cast<Transaction::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -725,8 +726,8 @@ void MyMoneyTransactionTest::testElementNames()
 
 void MyMoneyTransactionTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneyTransaction::Attribute::Name; i < (int)MyMoneyTransaction::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyTransaction::getAttrName(static_cast<MyMoneyTransaction::Attribute>(i)).isEmpty();
+  for (auto i = (int)Transaction::Attribute::Name; i < (int)Transaction::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyTransactionPrivate::getAttrName(static_cast<Transaction::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

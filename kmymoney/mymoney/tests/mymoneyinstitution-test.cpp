@@ -22,6 +22,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneyinstitution.h"
+#include "mymoneyinstitution_p.h"
 
 QTEST_GUILESS_MAIN(MyMoneyInstitutionTest)
 
@@ -346,8 +347,8 @@ void MyMoneyInstitutionTest::testReadXML()
 
 void MyMoneyInstitutionTest::testElementNames()
 {  
-  for (auto i = (int)MyMoneyInstitution::Element::AccountID; i <= (int)MyMoneyInstitution::Element::Address; ++i) {
-    auto isEmpty = MyMoneyInstitution::getElName(static_cast<MyMoneyInstitution::Element>(i)).isEmpty();
+  for (auto i = (int)Institution::Element::AccountID; i <= (int)Institution::Element::Address; ++i) {
+    auto isEmpty = MyMoneyInstitutionPrivate::getElName(static_cast<Institution::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -357,8 +358,8 @@ void MyMoneyInstitutionTest::testElementNames()
 
 void MyMoneyInstitutionTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneyInstitution::Attribute::ID; i < (int)MyMoneyInstitution::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyInstitution::getAttrName(static_cast<MyMoneyInstitution::Attribute>(i)).isEmpty();
+  for (auto i = (int)Institution::Attribute::ID; i < (int)Institution::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyInstitutionPrivate::getAttrName(static_cast<Institution::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

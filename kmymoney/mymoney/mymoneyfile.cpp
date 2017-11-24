@@ -661,13 +661,13 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
     throw MYMONEYEXCEPTION("Unable to reparent the standard account groups");
 
   if (acc.accountGroup() == parent.accountGroup()
-      || (acc.accountType() == Account::Income && parent.accountType() == Account::Expense)
-      || (acc.accountType() == Account::Expense && parent.accountType() == Account::Income)) {
+      || (acc.accountType() == Account::Type::Income && parent.accountType() == Account::Type::Expense)
+      || (acc.accountType() == Account::Type::Expense && parent.accountType() == Account::Type::Income)) {
 
-    if (acc.isInvest() && parent.accountType() != Account::Investment)
+    if (acc.isInvest() && parent.accountType() != Account::Type::Investment)
       throw MYMONEYEXCEPTION("Unable to reparent Stock to non-investment account");
 
-    if (parent.accountType() == Account::Investment && !acc.isInvest())
+    if (parent.accountType() == Account::Type::Investment && !acc.isInvest())
       throw MYMONEYEXCEPTION("Unable to reparent non-stock to investment account");
 
     // clear all changed objects from cache
@@ -945,8 +945,8 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
     addAccount(newAccount, parentAccount);
 
     // in case of a loan account, we add the initial payment
-    if ((newAccount.accountType() == Account::Loan
-         || newAccount.accountType() == Account::AssetLoan)
+    if ((newAccount.accountType() == Account::Type::Loan
+         || newAccount.accountType() == Account::Type::AssetLoan)
         && !newAccount.value("kmm-loan-payment-acc").isEmpty()
         && !newAccount.value("kmm-loan-payment-date").isEmpty()) {
       MyMoneyAccountLoan acc(newAccount);
@@ -955,7 +955,7 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
       a.setAccountId(acc.id());
       b.setAccountId(acc.value("kmm-loan-payment-acc").toLatin1());
       a.setValue(acc.loanAmount());
-      if (acc.accountType() == Account::Loan)
+      if (acc.accountType() == Account::Type::Loan)
         a.setValue(-a.value());
 
       a.setShares(a.value());
@@ -975,7 +975,7 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
 
       // in case of an investment account we check if we should create
       // a brokerage account
-    } else if (newAccount.accountType() == Account::Investment
+    } else if (newAccount.accountType() == Account::Type::Investment
                && !brokerageAccount.name().isEmpty()) {
       addAccount(brokerageAccount, parentAccount);
 
@@ -1016,7 +1016,7 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   if (!account.parentAccountId().isEmpty())
     throw MYMONEYEXCEPTION("New account must have no parent-id");
 
-  if (account.accountType() == Account::Unknown)
+  if (account.accountType() == Account::Type::Unknown)
     throw MYMONEYEXCEPTION("Account has invalid type");
 
   // make sure, that the parent account exists
@@ -1052,10 +1052,10 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   if (parent.isInvest())
     throw MYMONEYEXCEPTION("Stock account cannot be parent account");
 
-  if (account.isInvest() && parent.accountType() != Account::Investment)
+  if (account.isInvest() && parent.accountType() != Account::Type::Investment)
     throw MYMONEYEXCEPTION("Stock account must have investment account as parent ");
 
-  if (!account.isInvest() && parent.accountType() == Account::Investment)
+  if (!account.isInvest() && parent.accountType() == Account::Type::Investment)
     throw MYMONEYEXCEPTION("Investment account can only have stock accounts as children");
 
   // clear all changed objects from cache
@@ -1273,7 +1273,7 @@ const MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecur
     name += QString(" (%1)").arg(security.id());
   }
   acc.setName(name);
-  acc.setAccountType(Account::Equity);
+  acc.setAccountType(Account::Type::Equity);
   acc.setCurrencyId(security.id());
   acc.setValue("OpeningBalanceAccount", "Yes");
 
@@ -1676,7 +1676,7 @@ const MyMoneyMoney MyMoneyFile::clearedBalance(const QString &id, const QDate& d
 
   MyMoneyAccount account = this->account(id);
   MyMoneyMoney factor(1, 1);
-  if (account.accountGroup() == Account::Liability || account.accountGroup() == Account::Equity)
+  if (account.accountGroup() == Account::Type::Liability || account.accountGroup() == Account::Type::Equity)
     factor = -factor;
 
   MyMoneyTransactionFilter filter;
@@ -1773,19 +1773,19 @@ QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeSta
   return rc;
 }
 
-QString MyMoneyFile::categoryToAccount(const QString& category, Account type) const
+QString MyMoneyFile::categoryToAccount(const QString& category, Account::Type type) const
 {
   QString id;
 
   // search the category in the expense accounts and if it is not found, try
   // to locate it in the income accounts
-  if (type == Account::Unknown
-      || type == Account::Expense) {
+  if (type == Account::Type::Unknown
+      || type == Account::Type::Expense) {
     id = locateSubAccount(MyMoneyFile::instance()->expense(), category);
   }
 
-  if ((id.isEmpty() && type == Account::Unknown)
-      || type == Account::Income) {
+  if ((id.isEmpty() && type == Account::Type::Unknown)
+      || type == Account::Type::Income) {
     id = locateSubAccount(MyMoneyFile::instance()->income(), category);
   }
 
@@ -1794,7 +1794,7 @@ QString MyMoneyFile::categoryToAccount(const QString& category, Account type) co
 
 QString MyMoneyFile::categoryToAccount(const QString& category) const
 {
-  return categoryToAccount(category, Account::Unknown);
+  return categoryToAccount(category, Account::Type::Unknown);
 }
 
 QString MyMoneyFile::nameToAccount(const QString& name) const
@@ -2006,19 +2006,19 @@ const QStringList MyMoneyFile::consistencyCheck()
     }
 
     switch ((*it_a).accountGroup()) {
-      case Account::Asset:
+      case Account::Type::Asset:
         toplevel = asset();
         break;
-      case Account::Liability:
+      case Account::Type::Liability:
         toplevel = liability();
         break;
-      case Account::Expense:
+      case Account::Type::Expense:
         toplevel = expense();
         break;
-      case Account::Income:
+      case Account::Type::Income:
         toplevel = income();
         break;
-      case Account::Equity:
+      case Account::Type::Equity:
         toplevel = equity();
         break;
       default:
@@ -2260,13 +2260,13 @@ const QStringList MyMoneyFile::consistencyCheck()
         interestAccounts[(*it_s).accountId()] = true;
     }
   }
-  QSet<Account> supportedAccountTypes;
-  supportedAccountTypes << Account::Checkings
-  << Account::Savings
-  << Account::Cash
-  << Account::CreditCard
-  << Account::Asset
-  << Account::Liability;
+  QSet<Account::Type> supportedAccountTypes;
+  supportedAccountTypes << Account::Type::Checkings
+  << Account::Type::Savings
+  << Account::Type::Cash
+  << Account::Type::CreditCard
+  << Account::Type::Asset
+  << Account::Type::Liability;
   QSet<QString> reportedUnsupportedAccounts;
 
   for (it_t = tList.begin(); it_t != tList.end(); ++it_t) {
@@ -2721,7 +2721,7 @@ QString MyMoneyFile::checkCategory(const QString& name, const MyMoneyMoney& valu
       } else {
         parent = account(newAccount.parentAccountId());
       }
-      newAccount.setAccountType((!value.isNegative() && value2.isNegative()) ? Account::Income : Account::Expense);
+      newAccount.setAccountType((!value.isNegative() && value2.isNegative()) ? Account::Type::Income : Account::Type::Expense);
       MyMoneyAccount brokerage;
       // clear out the parent id, because createAccount() does not like that
       newAccount.setParentAccountId(QString());

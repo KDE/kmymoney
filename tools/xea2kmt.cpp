@@ -75,21 +75,21 @@ DirNameMapType &getDirNameMap()
 
 int toKMyMoneyAccountType(const QString &type)
 {
-    if(type == "ROOT")              return (int)Account::Unknown;
-    else if (type == "BANK")        return (int)Account::Checkings;
-    else if (type == "CASH")        return (int)Account::Cash;
-    else if (type == "CREDIT")      return (int)Account::CreditCard;
-    else if (type == "INVEST")      return (int)Account::Investment;
-    else if (type == "RECEIVABLE")  return (int)Account::Asset;
-    else if (type == "ASSET")       return (int)Account::Asset;
-    else if (type == "PAYABLE")     return (int)Account::Liability;
-    else if (type == "LIABILITY")   return (int)Account::Liability;
-    else if (type == "CURRENCY")    return (int)Account::Currency;
-    else if (type == "INCOME")      return (int)Account::Income;
-    else if (type == "EXPENSE")     return (int)Account::Expense;
-    else if (type == "STOCK")       return (int)Account::Stock;
-    else if (type == "MUTUAL")      return (int)Account::Stock;
-    else if (type == "EQUITY")      return (int)Account::Equity;
+    if(type == "ROOT")              return (int)Account::Type::Unknown;
+    else if (type == "BANK")        return (int)Account::Type::Checkings;
+    else if (type == "CASH")        return (int)Account::Type::Cash;
+    else if (type == "CREDIT")      return (int)Account::Type::CreditCard;
+    else if (type == "INVEST")      return (int)Account::Type::Investment;
+    else if (type == "RECEIVABLE")  return (int)Account::Type::Asset;
+    else if (type == "ASSET")       return (int)Account::Type::Asset;
+    else if (type == "PAYABLE")     return (int)Account::Type::Liability;
+    else if (type == "LIABILITY")   return (int)Account::Type::Liability;
+    else if (type == "CURRENCY")    return (int)Account::Type::Currency;
+    else if (type == "INCOME")      return (int)Account::Type::Income;
+    else if (type == "EXPENSE")     return (int)Account::Type::Expense;
+    else if (type == "STOCK")       return (int)Account::Type::Stock;
+    else if (type == "MUTUAL")      return (int)Account::Type::Stock;
+    else if (type == "EQUITY")      return (int)Account::Type::Equity;
     else return 99; // unknown
 }
 

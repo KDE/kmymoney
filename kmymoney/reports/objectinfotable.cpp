@@ -258,7 +258,7 @@ void ObjectInfoTable::constructAccountTable()
     ReportAccount account = *it_account;
 
     if (m_config.includes(account)
-        && account.accountType() != eMyMoney::Account::Stock
+        && account.accountType() != eMyMoney::Account::Type::Stock
         && !account.isClosed()) {
       MyMoneyMoney value;
       accountRow[ctRank] = QLatin1Char('0');
@@ -280,7 +280,7 @@ void ObjectInfoTable::constructAccountTable()
       accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       //investment accounts show the balances of all its subaccounts
-      if (account.accountType() == eMyMoney::Account::Investment) {
+      if (account.accountType() == eMyMoney::Account::Type::Investment) {
         value = investmentBalance(account);
       } else {
         value = file->balance(account.id());

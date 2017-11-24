@@ -145,7 +145,7 @@ QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAc
   //  Needed to find/create category:sub-categories
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QString id = file->categoryToAccount(name, Account::Unknown);
+  QString id = file->categoryToAccount(name, Account::Type::Unknown);
   // if it does not exist, we have to create it
   if (id.isEmpty()) {
     MyMoneyAccount newAccount;
@@ -221,11 +221,11 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneyAccount acc = file->account(s.accountId());
       // stock split shouldn't be fee or interest bacause it won't play nice with dissectTransaction
       // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
-      if (acc.accountGroup() == Account::Expense || acc.accountGroup() == Account::Income) {
+      if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
         foreach (auto sNew , t.splits()) {
           acc = file->account(sNew.accountId());
-          if (acc.accountGroup() != Account::Expense && // shouldn't be fee
-              acc.accountGroup() != Account::Income &&  // shouldn't be interest
+          if (acc.accountGroup() != Account::Type::Expense && // shouldn't be fee
+              acc.accountGroup() != Account::Type::Income &&  // shouldn't be interest
               (sNew.value() != sNew.shares() ||                 // shouldn't be checking account...
               (sNew.value() == sNew.shares() && sNew.price() != MyMoneyMoney::ONE))) { // ...but sometimes it may look like checking account
             s = sNew;
@@ -388,22 +388,22 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
     switch (s.m_eType) {
       case MyMoneyStatement::etCheckings:
-        d->m_account.setAccountType(Account::Checkings);
+        d->m_account.setAccountType(Account::Type::Checkings);
         break;
       case MyMoneyStatement::etSavings:
-        d->m_account.setAccountType(Account::Savings);
+        d->m_account.setAccountType(Account::Type::Savings);
         break;
       case MyMoneyStatement::etInvestment:
         //testing support for investment statements!
         //m_userAbort = true;
         //KMessageBox::error(kmymoney, i18n("This is an investment statement.  These are not supported currently."), i18n("Critical Error"));
-        d->m_account.setAccountType(Account::Investment);
+        d->m_account.setAccountType(Account::Type::Investment);
         break;
       case MyMoneyStatement::etCreditCard:
-        d->m_account.setAccountType(Account::CreditCard);
+        d->m_account.setAccountType(Account::Type::CreditCard);
         break;
       default:
-        d->m_account.setAccountType(Account::Unknown);
+        d->m_account.setAccountType(Account::Type::Unknown);
         break;
     }
 
@@ -612,7 +612,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     security.setTradingCurrency(file->baseCurrency().id());
     security.setValue("kmm-security-id", sec_in.m_strId);
     security.setValue("kmm-online-source", "Stooq");
-    security.setSecurityType(Security::Stock);
+    security.setSecurityType(Security::Type::Stock);
     MyMoneyFileTransaction ft;
     try {
       file->addSecurity(security);
@@ -667,7 +667,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   MyMoneyAccount thisaccount = d->m_account;
   QString brokerageactid;
 
-  if (thisaccount.accountType() == Account::Investment) {
+  if (thisaccount.accountType() == Account::Type::Investment) {
     // determine the brokerage account
     brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
     if (brokerageactid.isEmpty()) {
@@ -736,7 +736,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           if (!security.id().isEmpty()) {
             thisaccount = MyMoneyAccount();
             thisaccount.setName(security.name());
-            thisaccount.setAccountType(Account::Stock);
+            thisaccount.setAccountType(Account::Type::Stock);
             thisaccount.setCurrencyId(security.id());
             currencyid = thisaccount.currencyId();
 
@@ -1030,7 +1030,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
           auto filterProxyModel = new AccountNamesFilterProxyModel(this);
           filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-          filterProxyModel->addAccountGroup(QVector<Account> {Account::Asset, Account::Liability, Account::Equity, Account::Income, Account::Expense});
+          filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
           auto const model = Models::instance()->accountsModel();
           filterProxyModel->setSourceModel(model);
@@ -1090,7 +1090,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       }
     }
 
-    if (thisaccount.accountType() != Account::Stock) {
+    if (thisaccount.accountType() != Account::Type::Stock) {
       //
       // Fill in other side of the transaction (category/etc) based on payee
       //
@@ -1285,7 +1285,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 QString MyMoneyStatementReader::SelectBrokerageAccount()
 {
   if (d->m_brokerageAccount.id().isEmpty()) {
-    d->m_brokerageAccount.setAccountType(Account::Checkings);
+    d->m_brokerageAccount.setAccountType(Account::Type::Checkings);
     if (!m_userAbort)
       m_userAbort = ! selectOrCreateAccount(Select, d->m_brokerageAccount);
   }
@@ -1348,13 +1348,13 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   }
 
   eDialogs::Category type;
-  if (account.accountType() == Account::Checkings) {
+  if (account.accountType() == Account::Type::Checkings) {
     type = eDialogs::Category::checking;
-  } else if (account.accountType() == Account::Savings) {
+  } else if (account.accountType() == Account::Type::Savings) {
     type = eDialogs::Category::savings;
-  } else if (account.accountType() == Account::Investment) {
+  } else if (account.accountType() == Account::Type::Investment) {
     type = eDialogs::Category::investment;
-  } else if (account.accountType() == Account::CreditCard) {
+  } else if (account.accountType() == Account::Type::CreditCard) {
     type = eDialogs::Category::creditCard;
   } else {
     type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);

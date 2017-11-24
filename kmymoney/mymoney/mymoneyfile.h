@@ -142,7 +142,7 @@ class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
 
-namespace eMyMoney { enum class Account;
+namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
                      namespace Schedule { enum class Type;
                                           enum class Occurrence;
@@ -782,7 +782,7 @@ public:
     * @return QString of the corresponding account. If account was not found
     *         the return value will be an empty string.
     */
-  QString categoryToAccount(const QString& category, eMyMoney::Account type) const;
+  QString categoryToAccount(const QString& category, eMyMoney::Account::Type type) const;
   QString categoryToAccount(const QString& category) const;
 
   /**

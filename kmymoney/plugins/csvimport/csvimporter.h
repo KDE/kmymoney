@@ -41,7 +41,7 @@ class QStandardItemModel;
 class Parse;
 class ConvertDate;
 
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
                        AutoAccountInvest, AutoAccountBank
@@ -285,7 +285,7 @@ public:
   /**
   * This method will try to detect account from csv header.
   */
-  QList<MyMoneyAccount> findAccounts(const QList<eMyMoney::Account> &accountTypes, const QString &statementHeader);
+  QList<MyMoneyAccount> findAccounts(const QList<eMyMoney::Account::Type> &accountTypes, const QString &statementHeader);
   bool detectAccount(MyMoneyStatement &st);
 
   /**

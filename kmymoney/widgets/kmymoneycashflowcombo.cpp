@@ -50,11 +50,11 @@ public:
   eRegister::CashFlowDirection   m_dir;
 };
 
-KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(Account accountType, QWidget* parent) :
+KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(Account::Type accountType, QWidget* parent) :
     KMyMoneyMVCCombo(*new KMyMoneyCashFlowComboPrivate, false, parent)
 {
   addItem(" ", QVariant((int)eRegister::CashFlowDirection::Unknown));
-  if (accountType == Account::Income || accountType == Account::Expense) {
+  if (accountType == Account::Type::Income || accountType == Account::Type::Expense) {
     // this is used for income/expense accounts to just show the reverse sense
     addItem(i18nc("Activity for income categories", "Received"), QVariant((int)eRegister::CashFlowDirection::Payment));
     addItem(i18nc("Activity for expense categories", "Paid"), QVariant((int)eRegister::CashFlowDirection::Deposit));

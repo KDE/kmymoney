@@ -91,7 +91,7 @@ public:
       cell->setData(account.currencyId(), Role::SecurityID);
     }
 
-    if (account.accountType() == eMyMoney::Account::Investment)  // investments accounts are not meant to be displayed, so stop here
+    if (account.accountType() == eMyMoney::Account::Type::Investment)  // investments accounts are not meant to be displayed, so stop here
       return;
 
     // Symbol
@@ -213,7 +213,7 @@ void EquitiesModel::load()
   QList<MyMoneyAccount> accList;
   d->m_file->accountList(accList);                        // get all available accounts
   foreach (const auto acc, accList)
-    if (acc.accountType() == eMyMoney::Account::Investment)  // but add only investment accounts (and its children) to the model
+    if (acc.accountType() == eMyMoney::Account::Type::Investment)  // but add only investment accounts (and its children) to the model
         d->loadInvestmentAccount(rootItem, acc);
 
   this->blockSignals(false);
@@ -232,13 +232,13 @@ void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMone
   // check whether change is about either investment or stock account
   const auto acc = dynamic_cast<const MyMoneyAccount * const>(obj);
   if (!acc ||
-      (acc->accountType() != eMyMoney::Account::Investment &&
-       acc->accountType() != eMyMoney::Account::Stock))
+      (acc->accountType() != eMyMoney::Account::Type::Investment &&
+       acc->accountType() != eMyMoney::Account::Type::Stock))
     return;
   auto itAcc = d->itemFromId(this, acc->id(), Role::EquityID);
 
   QStandardItem *itParentAcc;
-  if (acc->accountType() == eMyMoney::Account::Investment) // if it's investment account then its parent is root item
+  if (acc->accountType() == eMyMoney::Account::Type::Investment) // if it's investment account then its parent is root item
     itParentAcc = invisibleRootItem();
   else                                                  // otherwise it's stock account and its parent is investment account
     itParentAcc = d->itemFromId(this, acc->parentAccountId(), Role::InvestmentID);
@@ -265,7 +265,7 @@ void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyM
     case eMyMoney::File::Object::Account:
       {
         auto tmpAcc = dynamic_cast<const MyMoneyAccount * const>(obj);
-        if (!tmpAcc || tmpAcc->accountType() != eMyMoney::Account::Stock)
+        if (!tmpAcc || tmpAcc->accountType() != eMyMoney::Account::Type::Stock)
           return;
         acc = tmpAcc;
         itAcc = d->itemFromId(this, acc->id(), Role::EquityID);
@@ -315,7 +315,7 @@ void EquitiesModel::slotObjectRemoved(eMyMoney::File::Object objType, const QStr
   */
 void EquitiesModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
 {
-  if (account.accountType() != eMyMoney::Account::Stock)
+  if (account.accountType() != eMyMoney::Account::Type::Stock)
     return;
 
   const auto itAcc = d->itemFromId(this, account.id(), Role::EquityID);
@@ -422,7 +422,7 @@ bool EquitiesFilterProxyModel::filterAcceptsRow(int source_row, const QModelInde
         acc.isClosed())
       return false;
     if (d->m_hideZeroBalanceAccounts &&
-        acc.accountType() != eMyMoney::Account::Investment && acc.balance().isZero())  // we should never hide investment account because all underlaying stocks will be hidden as well
+        acc.accountType() != eMyMoney::Account::Type::Investment && acc.balance().isZero())  // we should never hide investment account because all underlaying stocks will be hidden as well
       return false;
   }
   return true;

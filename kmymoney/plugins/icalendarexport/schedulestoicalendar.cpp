@@ -208,9 +208,9 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
       const MyMoneyAccount& splitAccount = file->account((*it_s).accountId());
       category = splitAccount.name();
 
-      isTransfer = splitAccount.accountGroup() == Account::Asset ||
-                   splitAccount.accountGroup() == Account::Liability;
-      isIncome = splitAccount.accountGroup() == Account::Income;
+      isTransfer = splitAccount.accountGroup() == Account::Type::Asset ||
+                   splitAccount.accountGroup() == Account::Type::Liability;
+      isIncome = splitAccount.accountGroup() == Account::Type::Income;
     } else {
       payeeName = file->payee((*it_s).payeeId()).name();
       // make the amount positive since the message makes it clear if this is an income or expense

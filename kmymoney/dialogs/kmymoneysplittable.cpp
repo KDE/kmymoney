@@ -786,7 +786,7 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
 
         // determine the fraction required for this category
         int fract = toCurrency.smallestAccountFraction();
-        if (cat.accountType() == eMyMoney::Account::Cash)
+        if (cat.accountType() == eMyMoney::Account::Type::Cash)
           fract = toCurrency.smallestCashFraction();
 
         // display only positive values to the user
@@ -1014,18 +1014,18 @@ void KMyMoneySplitTable::slotLoadEditWidgets()
   auto categoryId = d->m_editCategory->selectedItem();
 
   AccountSet aSet;
-  aSet.addAccountGroup(eMyMoney::Account::Asset);
-  aSet.addAccountGroup(eMyMoney::Account::Liability);
-  aSet.addAccountGroup(eMyMoney::Account::Income);
-  aSet.addAccountGroup(eMyMoney::Account::Expense);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Income);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
   if (KMyMoneyGlobalSettings::expertMode())
-    aSet.addAccountGroup(eMyMoney::Account::Equity);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
   // remove the accounts with invalid types at this point
-  aSet.removeAccountType(eMyMoney::Account::CertificateDep);
-  aSet.removeAccountType(eMyMoney::Account::Investment);
-  aSet.removeAccountType(eMyMoney::Account::Stock);
-  aSet.removeAccountType(eMyMoney::Account::MoneyMarket);
+  aSet.removeAccountType(eMyMoney::Account::Type::CertificateDep);
+  aSet.removeAccountType(eMyMoney::Account::Type::Investment);
+  aSet.removeAccountType(eMyMoney::Account::Type::Stock);
+  aSet.removeAccountType(eMyMoney::Account::Type::MoneyMarket);
 
   aSet.load(d->m_editCategory->selector());
 

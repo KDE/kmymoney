@@ -168,33 +168,7 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   QPixmap pixmap(const int size = 64) const;
-
-private:
-
-  enum class Element { AccountID,
-                       AccountIDS,
-                       Address };
-
-  enum class Attribute { ID = 0,
-                         Name,
-                         Manager,
-                         SortCode,
-                         Street,
-                         City,
-                         Zip,
-                         Telephone,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-  friend uint qHash(const Attribute, uint seed);
-  friend uint qHash(const Element, uint seed);
 };
-
-inline uint qHash(const MyMoneyInstitution::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const MyMoneyInstitution::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyInstitution& first, MyMoneyInstitution& second) // krazy:exclude=inline
 {

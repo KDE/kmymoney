@@ -23,41 +23,44 @@ namespace eMyMoney {
   /**
     * Account types currently supported.
     */
-  enum class Account {
-    Unknown = 0,          /**< For error handling */
-    Checkings,            /**< Standard checking account */
-    Savings,              /**< Typical savings account */
-    Cash,                 /**< Denotes a shoe-box or pillowcase stuffed
-                               with cash */
-    CreditCard,           /**< Credit card accounts */
-    Loan,                 /**< Loan and mortgage accounts (liability) */
-    CertificateDep,       /**< Certificates of Deposit */
-    Investment,           /**< Investment account */
-    MoneyMarket,          /**< Money Market Account */
-    Asset,                /**< Denotes a generic asset account.*/
-    Liability,            /**< Denotes a generic liability account.*/
-    Currency,             /**< Denotes a currency trading account. */
-    Income,               /**< Denotes an income account */
-    Expense,              /**< Denotes an expense account */
-    AssetLoan,            /**< Denotes a loan (asset of the owner of this object) */
-    Stock,                /**< Denotes an security account as sub-account for an investment */
-    Equity,               /**< Denotes an equity account e.g. opening/closeing balance */
+  namespace Account {
+    enum class Type {
+      Unknown = 0,          /**< For error handling */
+      Checkings,            /**< Standard checking account */
+      Savings,              /**< Typical savings account */
+      Cash,                 /**< Denotes a shoe-box or pillowcase stuffed
+                                 with cash */
+      CreditCard,           /**< Credit card accounts */
+      Loan,                 /**< Loan and mortgage accounts (liability) */
+      CertificateDep,       /**< Certificates of Deposit */
+      Investment,           /**< Investment account */
+      MoneyMarket,          /**< Money Market Account */
+      Asset,                /**< Denotes a generic asset account.*/
+      Liability,            /**< Denotes a generic liability account.*/
+      Currency,             /**< Denotes a currency trading account. */
+      Income,               /**< Denotes an income account */
+      Expense,              /**< Denotes an expense account */
+      AssetLoan,            /**< Denotes a loan (asset of the owner of this object) */
+      Stock,                /**< Denotes an security account as sub-account for an investment */
+      Equity,               /**< Denotes an equity account e.g. opening/closeing balance */
 
-    /* insert new account types above this line */
-    MaxAccountTypes       /**< Denotes the number of different account types */
-  };
+      /* insert new account types above this line */
+      MaxAccountTypes       /**< Denotes the number of different account types */
+    };
+    inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
 
-  inline uint qHash(const Account key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  namespace Security {
+    enum class Type {
+      Stock,
+      MutualFund,
+      Bond,
+      Currency,
+      None
+    };
 
-  enum class Security {
-    Stock,
-    MutualFund,
-    Bond,
-    Currency,
-    None
-  };
-
-  inline uint qHash(const Security key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+    inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
 
   namespace Schedule {
     /**

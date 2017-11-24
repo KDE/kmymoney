@@ -156,7 +156,7 @@ namespace NewAccountWizard
     if (d->m_account.isLoan()) {
       // in case we lend the money we adjust the account type
       if (!moneyBorrowed())
-        d->m_account.setAccountType(Account::AssetLoan);
+        d->m_account.setAccountType(Account::Type::AssetLoan);
       d->m_account.setLoanAmount(d->m_loanDetailsPage->d_func()->ui->m_loanAmount->value());
       d->m_account.setInterestRate(d->m_loanSchedulePage->firstPaymentDueDate(), d->m_loanDetailsPage->d_func()->ui->m_interestRate->value());
       d->m_account.setInterestCalculation(d->m_loanDetailsPage->d_func()->ui->m_paymentDue->currentIndex() == 0 ? MyMoneyAccountLoan::paymentReceived : MyMoneyAccountLoan::paymentDue);
@@ -208,7 +208,7 @@ namespace NewAccountWizard
     Q_D(Wizard);
     return d->m_accountTypePage->allowsParentAccount()
         ? d->m_hierarchyPage->parentAccount()
-        : (d->m_accountTypePage->accountType() == Account::Loan
+        : (d->m_accountTypePage->accountType() == Account::Type::Loan
            ? d->m_generalLoanInfoPage->parentAccount()
            : d->m_accountTypePage->parentAccount());
   }
@@ -217,10 +217,10 @@ namespace NewAccountWizard
   {
     Q_D(const Wizard);
     MyMoneyAccount account;
-    if (d->m_account.accountType() == Account::Investment
+    if (d->m_account.accountType() == Account::Type::Investment
         && d->m_brokeragepage->d_func()->ui->m_createBrokerageButton->isChecked()) {
       account.setName(d->m_account.brokerageName());
-      account.setAccountType(Account::Checkings);
+      account.setAccountType(Account::Type::Checkings);
       account.setInstitutionId(d->m_account.institutionId());
       account.setOpeningDate(d->m_account.openingDate());
       account.setCurrencyId(d->m_brokeragepage->d_func()->ui->m_brokerageCurrency->security().id());
@@ -238,7 +238,7 @@ namespace NewAccountWizard
     d->m_schedule = MyMoneySchedule();
 
     if (!d->m_account.id().isEmpty()) {
-      if (d->m_schedulePage->d_func()->ui->m_reminderCheckBox->isChecked() && (d->m_account.accountType() == Account::CreditCard)) {
+      if (d->m_schedulePage->d_func()->ui->m_reminderCheckBox->isChecked() && (d->m_account.accountType() == Account::Type::CreditCard)) {
         d->m_schedule.setName(d->m_schedulePage->d_func()->ui->m_name->text());
         d->m_schedule.setType(Schedule::Type::Transfer);
         d->m_schedule.setPaymentType(static_cast<Schedule::PaymentType>(d->m_schedulePage->d_func()->ui->m_method->currentItem()));
@@ -342,10 +342,10 @@ namespace NewAccountWizard
   {
     Q_D(const Wizard);
     // equity accounts don't have an opening balance
-    if (d->m_accountTypePage->accountType() == Account::Equity)
+    if (d->m_accountTypePage->accountType() == Account::Type::Equity)
       return MyMoneyMoney();
 
-    if (d->m_accountTypePage->accountType() == Account::Loan) {
+    if (d->m_accountTypePage->accountType() == Account::Type::Loan) {
       if (d->m_generalLoanInfoPage->recordAllPayments())
         return MyMoneyMoney();
       if (moneyBorrowed())

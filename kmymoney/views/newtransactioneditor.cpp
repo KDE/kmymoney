@@ -359,7 +359,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
   d->ui->setupUi(this);
 
-  d->accountsModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Income, eMyMoney::Account::Expense, eMyMoney::Account::Equity});
+  d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
   d->accountsModel->setHideEquityAccounts(false);
   d->accountsModel->setSourceModel(model);
   d->accountsModel->setSourceColumns(model->getColumns());

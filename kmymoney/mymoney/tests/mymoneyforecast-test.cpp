@@ -74,20 +74,20 @@ void MyMoneyForecastTest::init()
   acLiability = (MyMoneyFile::instance()->liability().id());
   acExpense = (MyMoneyFile::instance()->expense().id());
   acIncome = (MyMoneyFile::instance()->income().id());
-  acChecking = makeAccount(QString("Checking Account"), Account::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset, "USD");
-  acCredit = makeAccount(QString("Credit Card"), Account::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability, "USD");
-  acSolo = makeAccount(QString("Solo"), Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
-  acParent = makeAccount(QString("Parent"), Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
-  acChild = makeAccount(QString("Child"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
-  acForeign = makeAccount(QString("Foreign"), Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
-  acInvestment = makeAccount("Investment", Account::Investment, moZero, QDate(2004, 1, 1), acAsset, "USD");
+  acChecking = makeAccount(QString("Checking Account"), Account::Type::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset, "USD");
+  acCredit = makeAccount(QString("Credit Card"), Account::Type::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability, "USD");
+  acSolo = makeAccount(QString("Solo"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
+  acParent = makeAccount(QString("Parent"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
+  acChild = makeAccount(QString("Child"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
+  acForeign = makeAccount(QString("Foreign"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense, "USD");
+  acInvestment = makeAccount("Investment", Account::Type::Investment, moZero, QDate(2004, 1, 1), acAsset, "USD");
 
-  acSecondChild = makeAccount(QString("Second Child"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
-  acGrandChild1 = makeAccount(QString("Grand Child 1"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
-  acGrandChild2 = makeAccount(QString("Grand Child 2"), Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
+  acSecondChild = makeAccount(QString("Second Child"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent, "USD");
+  acGrandChild1 = makeAccount(QString("Grand Child 1"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
+  acGrandChild2 = makeAccount(QString("Grand Child 2"), Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild, "USD");
 
   //this account added to have an account to test opening date calculations
-  acCash = makeAccount(QString("Cash"), Account::Cash, moCreditOpen, QDate::currentDate().addDays(-2), acAsset, "USD");
+  acCash = makeAccount(QString("Cash"), Account::Type::Cash, moCreditOpen, QDate::currentDate().addDays(-2), acAsset, "USD");
 
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");

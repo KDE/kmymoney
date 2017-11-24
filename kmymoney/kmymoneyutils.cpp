@@ -265,7 +265,7 @@ const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
         return *it_s;
       }
       // if we have a reference to an investment account, we remember it here
-      if (acc.accountType() == eMyMoney::Account::Investment)
+      if (acc.accountType() == eMyMoney::Account::Type::Investment)
         investmentAccountSplit = *it_s;
     }
   }
@@ -300,10 +300,10 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
   MyMoneyAccount a, b;
   a = MyMoneyFile::instance()->account(ida);
   b = MyMoneyFile::instance()->account(idb);
-  if ((a.accountGroup() == eMyMoney::Account::Asset
-       || a.accountGroup() == eMyMoney::Account::Liability)
-      && (b.accountGroup() == eMyMoney::Account::Asset
-          || b.accountGroup() == eMyMoney::Account::Liability))
+  if ((a.accountGroup() == eMyMoney::Account::Type::Asset
+       || a.accountGroup() == eMyMoney::Account::Type::Liability)
+      && (b.accountGroup() == eMyMoney::Account::Type::Asset
+          || b.accountGroup() == eMyMoney::Account::Type::Liability))
     return Transfer;
   return Normal;
 }
@@ -557,10 +557,10 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
     MyMoneyAccount acc = file->account((*it_s).accountId());
     if ((*it_s).id() == split.id()) {
       security = file->security(acc.currencyId());
-    } else if (acc.accountGroup() == eMyMoney::Account::Expense) {
+    } else if (acc.accountGroup() == eMyMoney::Account::Type::Expense) {
       feeSplits.append(*it_s);
       // feeAmount += (*it_s).value();
-    } else if (acc.accountGroup() == eMyMoney::Account::Income) {
+    } else if (acc.accountGroup() == eMyMoney::Account::Type::Income) {
       interestSplits.append(*it_s);
       // interestAmount += (*it_s).value();
     } else {

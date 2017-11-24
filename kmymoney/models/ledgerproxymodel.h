@@ -40,7 +40,7 @@ public:
   virtual ~LedgerProxyModel();
 
   void setShowNewTransaction(bool show);
-  void setAccountType(eMyMoney::Account type);
+  void setAccountType(eMyMoney::Account::Type type);
 
   /**
    * This method maps the @a index to the base model and calls setData on it
@@ -59,7 +59,7 @@ protected:
 
 private:
   bool                 m_showNewTransaction;
-  eMyMoney::Account    m_accountType;
+  eMyMoney::Account::Type    m_accountType;
 };
 
 #endif // LEDGERPROXYMODEL_H

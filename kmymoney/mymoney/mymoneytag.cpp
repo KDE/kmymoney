@@ -16,44 +16,23 @@
  ***************************************************************************/
 
 #include "mymoneytag.h"
-#include <mymoneyexception.h>
+#include "mymoneytag_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QDomDocument>
 #include <QDomElement>
-#include <QHash>
-#include <QColor>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyobject.h"
+#include "mymoneyexception.h"
 #include "mymoneystoragenames.h"
 
 using namespace MyMoneyStorageNodes;
 
 MyMoneyTag MyMoneyTag::null;
-
-class MyMoneyTagPrivate {
-
-public:
-
-  MyMoneyTagPrivate() :
-    m_closed(false)
-  {
-  }
-
-  // Simple fields
-  QString m_name;
-  // Closed tags will not be shown in the selector inside a transaction, only in the Tag tab
-  bool m_closed;
-  // Set the color showed in the ledger
-  QColor m_tag_color;
-  QString m_notes;
-};
 
 MyMoneyTag::MyMoneyTag() :
   d_ptr(new MyMoneyTagPrivate)
@@ -84,14 +63,14 @@ MyMoneyTag::MyMoneyTag(const QDomElement& node) :
     throw MYMONEYEXCEPTION("Node was not TAG");
   }
   Q_D(MyMoneyTag);
-  d->m_name = node.attribute(getAttrName(Attribute::Name));
-  if (node.hasAttribute(getAttrName(Attribute::TagColor))) {
-    d->m_tag_color.setNamedColor(node.attribute(getAttrName(Attribute::TagColor)));
+  d->m_name = node.attribute(d->getAttrName(Tag::Attribute::Name));
+  if (node.hasAttribute(d->getAttrName(Tag::Attribute::TagColor))) {
+    d->m_tag_color.setNamedColor(node.attribute(d->getAttrName(Tag::Attribute::TagColor)));
   }
-  if (node.hasAttribute(getAttrName(Attribute::Notes))) {
-    d->m_notes = node.attribute(getAttrName(Attribute::Notes));
+  if (node.hasAttribute(d->getAttrName(Tag::Attribute::Notes))) {
+    d->m_notes = node.attribute(d->getAttrName(Tag::Attribute::Notes));
   }
-  d->m_closed = node.attribute(getAttrName(Attribute::Closed), "0").toUInt();
+  d->m_closed = node.attribute(d->getAttrName(Tag::Attribute::Closed), "0").toUInt();
 }
 
 MyMoneyTag::MyMoneyTag(const MyMoneyTag& other) :
@@ -186,28 +165,16 @@ void MyMoneyTag::writeXML(QDomDocument& document, QDomElement& parent) const
   writeBaseXML(document, el);
 
   Q_D(const MyMoneyTag);
-  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
-  el.setAttribute(getAttrName(Attribute::Closed), d->m_closed);
+  el.setAttribute(d->getAttrName(Tag::Attribute::Name), d->m_name);
+  el.setAttribute(d->getAttrName(Tag::Attribute::Closed), d->m_closed);
   if (d->m_tag_color.isValid())
-    el.setAttribute(getAttrName(Attribute::TagColor), d->m_tag_color.name());
+    el.setAttribute(d->getAttrName(Tag::Attribute::TagColor), d->m_tag_color.name());
   if (!d->m_notes.isEmpty())
-    el.setAttribute(getAttrName(Attribute::Notes), d->m_notes);
+    el.setAttribute(d->getAttrName(Tag::Attribute::Notes), d->m_notes);
   parent.appendChild(el);
 }
 
 bool MyMoneyTag::hasReferenceTo(const QString& /*id*/) const
 {
   return false;
-}
-
-QString MyMoneyTag::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::Name,     QStringLiteral("name")},
-    {Attribute::Type,     QStringLiteral("type")},
-    {Attribute::TagColor, QStringLiteral("tagcolor")},
-    {Attribute::Closed,   QStringLiteral("closed")},
-    {Attribute::Notes,    QStringLiteral("notes")},
-  };
-  return attrNames[attr];
 }

@@ -38,7 +38,7 @@ using namespace eMyMoney;
 LedgerProxyModel::LedgerProxyModel(QObject* parent)
   : QSortFilterProxyModel(parent)
   , m_showNewTransaction(false)
-  , m_accountType(Account::Asset)
+  , m_accountType(Account::Type::Asset)
 {
   setFilterRole((int)Role::AccountId);
   setFilterKeyColumn(0);
@@ -50,7 +50,7 @@ LedgerProxyModel::~LedgerProxyModel()
 {
 }
 
-void LedgerProxyModel::setAccountType(Account type)
+void LedgerProxyModel::setAccountType(Account::Type type)
 {
   m_accountType = type;
 }
@@ -61,19 +61,19 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
     switch(section) {
       case (int)Column::Payment:
         switch(m_accountType) {
-          case Account::CreditCard:
+          case Account::Type::CreditCard:
             return i18nc("Payment made with credit card", "Charge");
 
-          case Account::Asset:
-          case Account::AssetLoan:
+          case Account::Type::Asset:
+          case Account::Type::AssetLoan:
             return i18nc("Decrease of asset/liability value", "Decrease");
 
-          case Account::Liability:
-          case Account::Loan:
+          case Account::Type::Liability:
+          case Account::Type::Loan:
             return i18nc("Increase of asset/liability value", "Increase");
 
-          case Account::Income:
-          case Account::Expense:
+          case Account::Type::Income:
+          case Account::Type::Expense:
             return i18n("Income");
 
           default:
@@ -83,19 +83,19 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
 
       case (int)Column::Deposit:
         switch(m_accountType) {
-          case Account::CreditCard:
+          case Account::Type::CreditCard:
             return i18nc("Payment towards credit card", "Payment");
 
-          case Account::Asset:
-          case Account::AssetLoan:
+          case Account::Type::Asset:
+          case Account::Type::AssetLoan:
             return i18nc("Increase of asset/liability value", "Increase");
 
-          case Account::Liability:
-          case Account::Loan:
+          case Account::Type::Liability:
+          case Account::Type::Loan:
             return i18nc("Decrease of asset/liability value", "Decrease");
 
-          case Account::Income:
-          case Account::Expense:
+          case Account::Type::Income:
+          case Account::Type::Expense:
             return i18n("Expense");
 
           default:

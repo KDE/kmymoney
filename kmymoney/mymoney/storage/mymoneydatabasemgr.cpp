@@ -935,7 +935,7 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
 
 void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent)
 {
-  if (account.accountType() == eMyMoney::Account::Stock && parent.accountType() != eMyMoney::Account::Investment)
+  if (account.accountType() == eMyMoney::Account::Type::Stock && parent.accountType() != eMyMoney::Account::Type::Investment)
     throw MYMONEYEXCEPTION("Cannot move a stock acocunt into a non-investment account");
 
   QStringList accountIdList;
@@ -1227,7 +1227,7 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(/*QString(id)*/);
   //QMap<QString, MyMoneyAccount>::const_iterator accpos = accountList.find(id);
   if (date_ != QDate()) qDebug("request balance for %s at %s", qPrintable(id), qPrintable(date_.toString(Qt::ISODate)));
-//  if(!date_.isValid() && MyMoneyFile::instance()->account(id).accountType() != eMyMoney::Account::Stock) {
+//  if(!date_.isValid() && MyMoneyFile::instance()->account(id).accountType() != eMyMoney::Account::Type::Stock) {
 //    if(accountList.find(id) != accountList.end())
 //      return accountList[id].balance();
 //    return MyMoneyMoney(0);
@@ -1309,8 +1309,8 @@ const MyMoneyTransaction MyMoneyDatabaseMgr::transaction(const QString& account,
   MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(account))[account];
   MyMoneyTransactionFilter filter;
 
-  if (acc.accountGroup() == eMyMoney::Account::Income
-      || acc.accountGroup() == eMyMoney::Account::Expense)
+  if (acc.accountGroup() == eMyMoney::Account::Type::Income
+      || acc.accountGroup() == eMyMoney::Account::Type::Expense)
     filter.addCategory(account);
   else
     filter.addAccount(account);

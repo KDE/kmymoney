@@ -233,43 +233,8 @@ public:
   static const char ActionAddShares[];  // negative amount is removeShares
   static const char ActionSplitShares[];
   static const char ActionInterestIncome[];
-
-private:
-  enum class Element { Split = 0,
-                       Tag,
-                       Match,
-                       Container,
-                       KeyValuePairs
-                     };
-
-  enum class Attribute { ID = 0,
-                         BankID,
-                         Account,
-                         Payee,
-                         Tag,
-                         Number,
-                         Action,
-                         Value,
-                         Shares,
-                         Price,
-                         Memo,
-                         CostCenter,
-                         ReconcileDate,
-                         ReconcileFlag,
-                         KMMatchedTx,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-  friend uint qHash(const Attribute, uint seed);
-  friend uint qHash(const Element, uint seed);
 };
 
-inline uint qHash(const MyMoneySplit::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const MyMoneySplit::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneySplit& first, MyMoneySplit& second) // krazy:exclude=inline
 {

@@ -1413,7 +1413,7 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
     // don't set the source here since he may not want quotes
     //equ.setValue ("kmm-online-source", gcm->space()); // we don't know, so use it as both
     equ.setTradingCurrency("");  // not available here, will set from pricedb or transaction
-    equ.setSecurityType(Security::Stock);  // default to it being a stock
+    equ.setSecurityType(Security::Type::Stock);  // default to it being a stock
     //tell the storage objects we have a new equity object.
     equ.setSmallestAccountFraction(gcm->fraction().toInt());
     m_storage->addSecurity(equ);
@@ -1488,41 +1488,41 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     Some don't seem to be used in practice. Not sure what CREDITLINE s/be converted as.
     */
     if ("BANK" == gac->type() || "CHECKING" == gac->type()) {
-      acc.setAccountType(Account::Checkings);
+      acc.setAccountType(Account::Type::Checkings);
     } else if ("SAVINGS" == gac->type()) {
-      acc.setAccountType(Account::Savings);
+      acc.setAccountType(Account::Type::Savings);
     } else if ("ASSET" == gac->type()) {
-      acc.setAccountType(Account::Asset);
+      acc.setAccountType(Account::Type::Asset);
     } else if ("CASH" == gac->type()) {
-      acc.setAccountType(Account::Cash);
+      acc.setAccountType(Account::Type::Cash);
     } else if ("CURRENCY" == gac->type()) {
-      acc.setAccountType(Account::Cash);
+      acc.setAccountType(Account::Type::Cash);
     } else if ("STOCK" == gac->type() || "MUTUAL" == gac->type()) {
       // gnucash allows a 'broker' account to be denominated as type STOCK, but with
       // a currency balance. We do not need to create a stock account for this
       // actually, the latest version of gnc (1.8.8) doesn't seem to allow you to do
       // this any more, though I do have one in my own account...
       if (gac->commodity()->isCurrency()) {
-        acc.setAccountType(Account::Investment);
+        acc.setAccountType(Account::Type::Investment);
       } else {
-        acc.setAccountType(Account::Stock);
+        acc.setAccountType(Account::Type::Stock);
       }
     } else if ("EQUITY" == gac->type()) {
-      acc.setAccountType(Account::Equity);
+      acc.setAccountType(Account::Type::Equity);
     } else if ("LIABILITY" == gac->type()) {
-      acc.setAccountType(Account::Liability);
+      acc.setAccountType(Account::Type::Liability);
     } else if ("CREDIT" == gac->type()) {
-      acc.setAccountType(Account::CreditCard);
+      acc.setAccountType(Account::Type::CreditCard);
     } else if ("INCOME" == gac->type()) {
-      acc.setAccountType(Account::Income);
+      acc.setAccountType(Account::Type::Income);
     } else if ("EXPENSE" == gac->type()) {
-      acc.setAccountType(Account::Expense);
+      acc.setAccountType(Account::Type::Expense);
     } else if ("RECEIVABLE" == gac->type()) {
-      acc.setAccountType(Account::Asset);
+      acc.setAccountType(Account::Type::Asset);
     } else if ("PAYABLE" == gac->type()) {
-      acc.setAccountType(Account::Liability);
+      acc.setAccountType(Account::Type::Liability);
     } else if ("MONEYMRKT" == gac->type()) {
-      acc.setAccountType(Account::MoneyMarket);
+      acc.setAccountType(Account::Type::MoneyMarket);
     } else { // we have here an account type we can't currently handle
       QString em =
         i18n("Current importer does not recognize GnuCash account type %1", gac->type());
@@ -1531,19 +1531,19 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     // if no parent account is present, assign to one of our standard accounts
     if ((acc.parentAccountId().isEmpty()) || (acc.parentAccountId() == m_rootId)) {
       switch (acc.accountGroup()) {
-        case Account::Asset:
+        case Account::Type::Asset:
           acc.setParentAccountId(m_storage->asset().id());
           break;
-        case Account::Liability:
+        case Account::Type::Liability:
           acc.setParentAccountId(m_storage->liability().id());
           break;
-        case Account::Income:
+        case Account::Type::Income:
           acc.setParentAccountId(m_storage->income().id());
           break;
-        case Account::Expense:
+        case Account::Type::Expense:
           acc.setParentAccountId(m_storage->expense().id());
           break;
-        case Account::Equity:
+        case Account::Type::Equity:
           acc.setParentAccountId(m_storage->equity().id());
           break;
         default:
@@ -1552,7 +1552,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     }
 
     // extra processing for a stock account
-    if (acc.accountType() == Account::Stock) {
+    if (acc.accountType() == Account::Type::Stock) {
       // save the id for later linking to investment account
       m_stockList.append(gac->id());
       // set the equity type
@@ -1561,7 +1561,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
         << "found id =" << e.id();
       acc.setCurrencyId(e.id());  // actually, the security id
       if ("MUTUAL" == gac->type()) {
-        e.setSecurityType(Security::MutualFund);
+        e.setSecurityType(Security::Type::MutualFund);
         if (gncdebug) qDebug() << "Setting" << e.name() << "to mutual";
         m_storage->modifySecurity(e);
       }
@@ -1716,8 +1716,8 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   // but keeping each in same order as gnucash
 
   switch (splitAccount.accountGroup()) {
-    case Account::Asset:
-      if (splitAccount.accountType() == Account::Stock) {
+    case Account::Type::Asset:
+      if (splitAccount.accountType() == Account::Type::Stock) {
         split.value().isZero() ?
         split.setAction(MyMoneySplit::ActionAddShares) :      // free shares?
         split.setAction(MyMoneySplit::ActionBuyShares);
@@ -1762,7 +1762,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
       }
       m_splitList.append(split);
       break;
-    case Account::Liability:
+    case Account::Type::Liability:
       split.value().isNegative() ?
       split.setAction(MyMoneySplit::ActionWithdrawal) :
       split.setAction(MyMoneySplit::ActionDeposit);
@@ -1968,10 +1968,10 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
   }  */
   // add the split to one of the lists
   switch (splitAccount.accountGroup()) {
-    case Account::Asset:
+    case Account::Type::Asset:
       m_splitList.append(split);
       break;
-    case Account::Liability:
+    case Account::Type::Liability:
       m_liabilitySplitList.append(split);
       break;
     default:
@@ -2403,7 +2403,7 @@ QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
   acc.setLastModified(today);
   acc.setLastReconciliationDate(today);
   acc.setCurrencyId(m_txCommodity);
-  acc.setAccountType(Account::Asset);
+  acc.setAccountType(Account::Type::Asset);
   acc.setParentAccountId(m_storage->asset().id());
   m_storage->addAccount(acc);
   // assign the gnucash id as the key into the map to find our id
@@ -2440,22 +2440,22 @@ MyMoneyAccount MyMoneyGncReader::checkConsistency(MyMoneyAccount& parent, MyMone
   TRY {
     // gnucash is flexible/weird enough to allow various inconsistencies
     // these are a couple I found in my file, no doubt more will be discovered
-    if ((child.accountType() == Account::Investment) &&
-    (parent.accountType() != Account::Asset)) {
+    if ((child.accountType() == Account::Type::Investment) &&
+    (parent.accountType() != Account::Type::Asset)) {
       m_messageList["CC"].append(
         i18n("An Investment account must be a child of an Asset account\n"
       "Account %1 will be stored under the main Asset account", child.name()));
       return m_storage->asset();
     }
-    if ((child.accountType() == Account::Income) &&
-        (parent.accountType() != Account::Income)) {
+    if ((child.accountType() == Account::Type::Income) &&
+        (parent.accountType() != Account::Type::Income)) {
       m_messageList["CC"].append(
         i18n("An Income account must be a child of an Income account\n"
              "Account %1 will be stored under the main Income account", child.name()));
       return m_storage->income();
     }
-    if ((child.accountType() == Account::Expense) &&
-        (parent.accountType() != Account::Expense)) {
+    if ((child.accountType() == Account::Type::Expense) &&
+        (parent.accountType() != Account::Type::Expense)) {
       m_messageList["CC"].append(
         i18n("An Expense account must be a child of an Expense account\n"
              "Account %1 will be stored under the main Expense account", child.name()));
@@ -2477,13 +2477,13 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
   map_accountIds::const_iterator id = m_mapIds.constFind(parentKey);
   if (id != m_mapIds.constEnd()) {
     parent = m_storage->account(id.value());
-    if (parent.accountType() == Account::Investment) return ;
+    if (parent.accountType() == Account::Type::Investment) return ;
   }
   // so now, check the investment option requested by the user
   // option 0 creates a separate investment account for each stock account
   if (m_investmentOption == 0) {
     MyMoneyAccount invAcc(stockAcc);
-    invAcc.setAccountType(Account::Investment);
+    invAcc.setAccountType(Account::Type::Investment);
     invAcc.setCurrencyId(QString(""));  // we don't know what currency it is!!
     invAcc.setParentAccountId(parentKey);  // intersperse it between old parent and child stock acct
     m_storage->addAccount(invAcc);
@@ -2508,7 +2508,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
                                            QLineEdit::Normal, i18n("My Investments"), &ok);
       }
       singleInvAcc.setName(invAccName);
-      singleInvAcc.setAccountType(Account::Investment);
+      singleInvAcc.setAccountType(Account::Type::Investment);
       singleInvAcc.setCurrencyId(QString(""));
       singleInvAcc.setParentAccountId(m_storage->asset().id());
       m_storage->addAccount(singleInvAcc);
@@ -2534,8 +2534,8 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     m_storage->accountList(list);
     // build a list of candidates for the input box
     for (acc = list.begin(); acc != list.end(); ++acc) {
-      //      if (((*acc).accountGroup() == Account::Asset) && ((*acc).accountType() != Account::Stock)) accList.append ((*acc).name());
-      if ((*acc).accountType() == Account::Investment) accList.append((*acc).name());
+      //      if (((*acc).accountGroup() == Account::Type::Asset) && ((*acc).accountType() != Account::Type::Stock)) accList.append ((*acc).name());
+      if ((*acc).accountType() == Account::Type::Investment) accList.append((*acc).name());
     }
     //if (accList.isEmpty()) qWarning ("No available accounts");
     bool ok = false;
@@ -2553,14 +2553,14 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
         if (acc != list.end()) { // an account was selected
           invAcc = *acc;
         } else {                 // a new account name was entered
-          invAcc.setAccountType(Account::Investment);
+          invAcc.setAccountType(Account::Type::Investment);
           invAcc.setName(invAccName);
           invAcc.setCurrencyId(QString(""));
           invAcc.setParentAccountId(m_storage->asset().id());
           m_storage->addAccount(invAcc);
           ok = true;
         }
-        if (invAcc.accountType() == Account::Investment) {
+        if (invAcc.accountType() == Account::Type::Investment) {
           ok = true;
         } else {
           // this code is probably not going to be implemented coz we can't change account types (??)

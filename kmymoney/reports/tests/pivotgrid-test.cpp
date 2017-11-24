@@ -52,16 +52,16 @@ void PivotGridTest::init()
   acLiability = (MyMoneyFile::instance()->liability().id());
   acExpense = (MyMoneyFile::instance()->expense().id());
   acIncome = (MyMoneyFile::instance()->income().id());
-  acChecking = makeAccount(QString("Checking Account"), eMyMoney::Account::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
-  acCredit = makeAccount(QString("Credit Card"), eMyMoney::Account::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
-  acSolo = makeAccount(QString("Solo"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acParent = makeAccount(QString("Parent"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-  acChild = makeAccount(QString("Child"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
-  acForeign = makeAccount(QString("Foreign"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChecking = makeAccount(QString("Checking Account"), eMyMoney::Account::Type::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
+  acCredit = makeAccount(QString("Credit Card"), eMyMoney::Account::Type::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
+  acSolo = makeAccount(QString("Solo"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acParent = makeAccount(QString("Parent"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChild = makeAccount(QString("Child"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acForeign = makeAccount(QString("Foreign"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
 
-  acSecondChild = makeAccount(QString("Second Child"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
-  acGrandChild1 = makeAccount(QString("Grand Child 1"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
-  acGrandChild2 = makeAccount(QString("Grand Child 2"), eMyMoney::Account::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
+  acSecondChild = makeAccount(QString("Second Child"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acGrandChild1 = makeAccount(QString("Grand Child 1"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
+  acGrandChild2 = makeAccount(QString("Grand Child 2"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
   file->addInstitution(i);

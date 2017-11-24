@@ -134,7 +134,7 @@ namespace NewUserWizard
         acc.setNumber(d->m_accountPage->d_func()->ui->m_accountNumberEdit->text());
       acc.setOpeningDate(d->m_accountPage->d_func()->ui->m_openingDateEdit->date());
       acc.setCurrencyId(d->m_baseCurrency.id());
-      acc.setAccountType(eMyMoney::Account::Checkings);
+      acc.setAccountType(eMyMoney::Account::Type::Checkings);
     }
     return acc;
   }

@@ -147,7 +147,7 @@ namespace NewAccountWizard
   {
     Q_D(CreditCardSchedulePage);
     AccountSet set;
-    set.addAccountGroup(Account::Asset);
+    set.addAccountGroup(Account::Type::Asset);
     set.load(d->ui->m_paymentAccount->selector());
 
     d->ui->m_payee->loadPayees(MyMoneyFile::instance()->payeeList());

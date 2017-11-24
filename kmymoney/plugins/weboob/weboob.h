@@ -89,7 +89,7 @@ public:
 
   QList<Backend> getBackends();
 
-  QList<Account> getAccounts(QString backend);
+  QList<Account::Type> getAccounts(QString backend);
 
   Account getAccount(QString backend, QString account, QString max);
 

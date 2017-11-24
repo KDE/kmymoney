@@ -1541,27 +1541,27 @@ void MyMoneyStorageSql::writeAccounts()
     // If the above failed, assume that the database is empty and create
     // the standard accounts by hand before writing them.
     MyMoneyAccount acc_l;
-    acc_l.setAccountType(Account::Liability);
+    acc_l.setAccountType(Account::Type::Liability);
     acc_l.setName("Liability");
     MyMoneyAccount liability(STD_ACC_LIABILITY, acc_l);
 
     MyMoneyAccount acc_a;
-    acc_a.setAccountType(Account::Asset);
+    acc_a.setAccountType(Account::Type::Asset);
     acc_a.setName("Asset");
     MyMoneyAccount asset(STD_ACC_ASSET, acc_a);
 
     MyMoneyAccount acc_e;
-    acc_e.setAccountType(Account::Expense);
+    acc_e.setAccountType(Account::Type::Expense);
     acc_e.setName("Expense");
     MyMoneyAccount expense(STD_ACC_EXPENSE, acc_e);
 
     MyMoneyAccount acc_i;
-    acc_i.setAccountType(Account::Income);
+    acc_i.setAccountType(Account::Type::Income);
     acc_i.setName("Income");
     MyMoneyAccount income(STD_ACC_INCOME, acc_i);
 
     MyMoneyAccount acc_q;
-    acc_q.setAccountType(Account::Equity);
+    acc_q.setAccountType(Account::Type::Equity);
     acc_q.setName("Equity");
     MyMoneyAccount equity(STD_ACC_EQUITY, acc_q);
 
@@ -1703,7 +1703,7 @@ void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, Q
     accountNumberList << a.number();
     accountTypeList << (int)a.accountType();
     accountTypeStringList << MyMoneyAccount::accountTypeToString(a.accountType());
-    if (a.accountType() == Account::Stock)
+    if (a.accountType() == Account::Type::Stock)
       isStockAccountList << "Y";
     else
       isStockAccountList << "N";
@@ -3667,7 +3667,7 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStri
     acc.setLastModified(GETDATE(lastModifiedCol));
     acc.setOpeningDate(GETDATE(openingDateCol));
     acc.setNumber(GETSTRING(accountNumberCol));
-    acc.setAccountType(static_cast<Account>(GETINT(accountTypeCol)));
+    acc.setAccountType(static_cast<Account::Type>(GETINT(accountTypeCol)));
     acc.setName(GETSTRING(accountNameCol));
     acc.setDescription(GETSTRING(descriptionCol));
     acc.setCurrencyId(GETSTRING(currencyIdCol));
@@ -4387,7 +4387,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
     eid = GETSTRING(idCol);
     e.setName(GETSTRING(nameCol));
     e.setTradingSymbol(GETSTRING(symbolCol));
-    e.setSecurityType(static_cast<Security>(GETINT(typeCol)));
+    e.setSecurityType(static_cast<Security::Type>(GETINT(typeCol)));
     e.setRoundingMethod(static_cast<AlkValue::RoundingMethod>(GETINT(roundingMethodCol)));
     int saf = GETINT(smallestAccountFractionCol);
     int pp = GETINT(pricePrecisionCol);
@@ -4609,7 +4609,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QS
     QChar symbol[3];
     id = GETSTRING(ISOcodeCol);
     c.setName(GETSTRING(nameCol));
-    c.setSecurityType(static_cast<Security>(GETINT(typeCol)));
+    c.setSecurityType(static_cast<Security::Type>(GETINT(typeCol)));
     symbol[0] = QChar(GETINT(symbol1Col));
     symbol[1] = QChar(GETINT(symbol2Col));
     symbol[2] = QChar(GETINT(symbol3Col));

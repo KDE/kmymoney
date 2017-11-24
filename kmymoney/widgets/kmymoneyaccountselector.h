@@ -35,7 +35,7 @@ class MyMoneyAccount;
 
 template <typename T> class QList;
 
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 /**
   * This class implements an account/category selector. It is based
@@ -76,7 +76,7 @@ public:
     *             will be returned.
     * @return QStringList of account ids
     */
-  QStringList accountList(const QList<eMyMoney::Account>& list) const;
+  QStringList accountList(const QList<eMyMoney::Account::Type>& list) const;
   QStringList accountList() const;
 
   void setSelectionMode(QTreeWidget::SelectionMode mode);
@@ -163,9 +163,9 @@ public:
   friend void swap(AccountSet& first, AccountSet& second);
   ~AccountSet();
 
-  void addAccountType(eMyMoney::Account type);
-  void addAccountGroup(eMyMoney::Account type);
-  void removeAccountType(eMyMoney::Account type);
+  void addAccountType(eMyMoney::Account::Type type);
+  void addAccountGroup(eMyMoney::Account::Type type);
+  void removeAccountType(eMyMoney::Account::Type type);
 
   void clear();
 

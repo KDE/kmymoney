@@ -106,8 +106,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     int accountCount = 0;
     for (it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
       MyMoneyAccount acc = storage->account((*it_s).accountId());
-      if (acc.accountGroup() != eMyMoney::Account::Expense
-          && acc.accountGroup() != eMyMoney::Account::Income)
+      if (acc.accountGroup() != eMyMoney::Account::Type::Expense
+          && acc.accountGroup() != eMyMoney::Account::Type::Income)
         accountCount++;
     }
     if (accountCount > 1)

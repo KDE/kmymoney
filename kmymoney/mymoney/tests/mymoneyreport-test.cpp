@@ -20,7 +20,7 @@
 
 #include <QtTest>
 
-#include <QMetaEnum>
+#include "mymoneyreport_p.h"
 
 QTEST_GUILESS_MAIN(MyMoneyReportTest)
 
@@ -36,8 +36,8 @@ void MyMoneyReportTest::cleanup()
 
 void MyMoneyReportTest::testElementNames()
 {
-  for (auto i = (int)MyMoneyReport::Element::Payee; i <= (int)MyMoneyReport::Element::AccountGroup; ++i) {
-    auto isEmpty = MyMoneyReport::getElName(static_cast<MyMoneyReport::Element>(i)).isEmpty();
+  for (auto i = (int)Report::Element::Payee; i <= (int)Report::Element::AccountGroup; ++i) {
+    auto isEmpty = MyMoneyReportPrivate::getElName(static_cast<Report::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -46,8 +46,8 @@ void MyMoneyReportTest::testElementNames()
 
 void MyMoneyReportTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneyReport::Attribute::ID; i < (int)MyMoneyReport::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyReport::getAttrName(static_cast<MyMoneyReport::Attribute>(i)).isEmpty();
+  for (auto i = (int)Report::Attribute::ID; i < (int)Report::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyReportPrivate::getAttrName(static_cast<Report::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

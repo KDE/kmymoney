@@ -73,27 +73,27 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 
   // setup standard accounts
   MyMoneyAccount acc_l;
-  acc_l.setAccountType(eMyMoney::Account::Liability);
+  acc_l.setAccountType(eMyMoney::Account::Type::Liability);
   acc_l.setName("Liability");
   MyMoneyAccount liability(STD_ACC_LIABILITY, acc_l);
 
   MyMoneyAccount acc_a;
-  acc_a.setAccountType(eMyMoney::Account::Asset);
+  acc_a.setAccountType(eMyMoney::Account::Type::Asset);
   acc_a.setName("Asset");
   MyMoneyAccount asset(STD_ACC_ASSET, acc_a);
 
   MyMoneyAccount acc_e;
-  acc_e.setAccountType(eMyMoney::Account::Expense);
+  acc_e.setAccountType(eMyMoney::Account::Type::Expense);
   acc_e.setName("Expense");
   MyMoneyAccount expense(STD_ACC_EXPENSE, acc_e);
 
   MyMoneyAccount acc_i;
-  acc_i.setAccountType(eMyMoney::Account::Income);
+  acc_i.setAccountType(eMyMoney::Account::Type::Income);
   acc_i.setName("Income");
   MyMoneyAccount income(STD_ACC_INCOME, acc_i);
 
   MyMoneyAccount acc_q;
-  acc_q.setAccountType(eMyMoney::Account::Equity);
+  acc_q.setAccountType(eMyMoney::Account::Type::Equity);
   acc_q.setName("Equity");
   MyMoneyAccount equity(STD_ACC_EQUITY, acc_q);
 
@@ -776,7 +776,7 @@ void MyMoneySeqAccessMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccoun
     oldParent = m_accountList.find(account.parentAccountId());
   }
 
-  if (account.accountType() == eMyMoney::Account::Stock && parent.accountType() != eMyMoney::Account::Investment)
+  if (account.accountType() == eMyMoney::Account::Type::Stock && parent.accountType() != eMyMoney::Account::Type::Investment)
     throw MYMONEYEXCEPTION("Cannot move a stock acocunt into a non-investment account");
 
   newParent = m_accountList.find(parent.id());
@@ -799,7 +799,7 @@ void MyMoneySeqAccessMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccoun
 
 #if 0
   // make sure the type is the same as the new parent. This does not work for stock and investment
-  if (account.accountType() != eMyMoney::Account::Stock && account.accountType() != eMyMoney::Account::Investment)
+  if (account.accountType() != eMyMoney::Account::Type::Stock && account.accountType() != eMyMoney::Account::Type::Investment)
     (*childAccount).setAccountType((*newParent).accountType());
 #endif
 }
@@ -1033,8 +1033,8 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
   MyMoneyAccount acc = m_accountList[account];
   MyMoneyTransactionFilter filter;
 
-  if (acc.accountGroup() == eMyMoney::Account::Income
-      || acc.accountGroup() == eMyMoney::Account::Expense)
+  if (acc.accountGroup() == eMyMoney::Account::Type::Income
+      || acc.accountGroup() == eMyMoney::Account::Type::Expense)
     filter.addCategory(account);
   else
     filter.addAccount(account);

@@ -508,23 +508,23 @@ public:
     AccountSet interestSet, assetSet;
 
     if (q->field("borrowButton").toBool()) {
-      interestSet.addAccountType(eMyMoney::Account::Expense);
+      interestSet.addAccountType(eMyMoney::Account::Type::Expense);
     } else {
-      interestSet.addAccountType(eMyMoney::Account::Income);
+      interestSet.addAccountType(eMyMoney::Account::Type::Income);
     }
     if (ui->m_interestCategoryPage)
       interestSet.load(ui->m_interestCategoryPage->ui->m_interestAccountEdit);
 
-    assetSet.addAccountType(eMyMoney::Account::Checkings);
-    assetSet.addAccountType(eMyMoney::Account::Savings);
-    assetSet.addAccountType(eMyMoney::Account::Cash);
-    assetSet.addAccountType(eMyMoney::Account::Asset);
-    assetSet.addAccountType(eMyMoney::Account::Currency);
+    assetSet.addAccountType(eMyMoney::Account::Type::Checkings);
+    assetSet.addAccountType(eMyMoney::Account::Type::Savings);
+    assetSet.addAccountType(eMyMoney::Account::Type::Cash);
+    assetSet.addAccountType(eMyMoney::Account::Type::Asset);
+    assetSet.addAccountType(eMyMoney::Account::Type::Currency);
     if (ui->m_assetAccountPage)
       assetSet.load(ui->m_assetAccountPage->ui->m_assetAccountEdit);
 
-    assetSet.addAccountType(eMyMoney::Account::CreditCard);
-    assetSet.addAccountType(eMyMoney::Account::Liability);
+    assetSet.addAccountType(eMyMoney::Account::Type::CreditCard);
+    assetSet.addAccountType(eMyMoney::Account::Type::Liability);
     if (ui->m_schedulePage)
       assetSet.load(ui->m_schedulePage->ui->m_paymentAccountEdit);
   }

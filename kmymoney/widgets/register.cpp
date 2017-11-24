@@ -249,7 +249,7 @@ namespace KMyMoneyRegister
 
     // balance
     switch (account.accountType()) {
-      case Account::Stock:
+      case Account::Type::Stock:
         break;
       default:
         showColumn((int)eTransaction::Column::Balance);
@@ -258,19 +258,19 @@ namespace KMyMoneyRegister
 
     // Number column
     switch (account.accountType()) {
-      case Account::Savings:
-      case Account::Cash:
-      case Account::Loan:
-      case Account::AssetLoan:
-      case Account::Asset:
-      case Account::Liability:
-      case Account::Equity:
+      case Account::Type::Savings:
+      case Account::Type::Cash:
+      case Account::Type::Loan:
+      case Account::Type::AssetLoan:
+      case Account::Type::Asset:
+      case Account::Type::Liability:
+      case Account::Type::Equity:
         if (KMyMoneyGlobalSettings::alwaysShowNrField())
           showColumn((int)eTransaction::Column::Number);
         break;
 
-      case Account::Checkings:
-      case Account::CreditCard:
+      case Account::Type::Checkings:
+      case Account::Type::CreditCard:
         showColumn((int)eTransaction::Column::Number);
         break;
 
@@ -280,8 +280,8 @@ namespace KMyMoneyRegister
     }
 
     switch (account.accountType()) {
-      case Account::Income:
-      case Account::Expense:
+      case Account::Type::Income:
+      case Account::Type::Expense:
         showAccountColumn = true;
         break;
       default:
@@ -298,7 +298,7 @@ namespace KMyMoneyRegister
         showColumn((int)eTransaction::Column::Deposit);
         break;
 
-      case Account::Investment:
+      case Account::Type::Investment:
         showColumn((int)eTransaction::Column::Security);
         showColumn((int)eTransaction::Column::Quantity);
         showColumn((int)eTransaction::Column::Price);
@@ -308,22 +308,22 @@ namespace KMyMoneyRegister
 
     // headings
     switch (account.accountType()) {
-      case Account::CreditCard:
+      case Account::Type::CreditCard:
         horizontalHeaderItem((int)eTransaction::Column::Payment)->setText(i18nc("Payment made with credit card", "Charge"));
         horizontalHeaderItem((int)eTransaction::Column::Deposit)->setText(i18nc("Payment towards credit card", "Payment"));
         break;
-      case Account::Asset:
-      case Account::AssetLoan:
+      case Account::Type::Asset:
+      case Account::Type::AssetLoan:
         horizontalHeaderItem((int)eTransaction::Column::Payment)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
         horizontalHeaderItem((int)eTransaction::Column::Deposit)->setText(i18nc("Increase of asset/liability value", "Increase"));
         break;
-      case Account::Liability:
-      case Account::Loan:
+      case Account::Type::Liability:
+      case Account::Type::Loan:
         horizontalHeaderItem((int)eTransaction::Column::Payment)->setText(i18nc("Increase of asset/liability value", "Increase"));
         horizontalHeaderItem((int)eTransaction::Column::Deposit)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
         break;
-      case Account::Income:
-      case Account::Expense:
+      case Account::Type::Income:
+      case Account::Type::Expense:
         horizontalHeaderItem((int)eTransaction::Column::Payment)->setText(i18n("Income"));
         horizontalHeaderItem((int)eTransaction::Column::Deposit)->setText(i18n("Expense"));
         break;
@@ -1615,18 +1615,18 @@ namespace KMyMoneyRegister
     }
 
     switch (parent->account().accountType()) {
-      case Account::Checkings:
-      case Account::Savings:
-      case Account::Cash:
-      case Account::CreditCard:
-      case Account::Loan:
-      case Account::Asset:
-      case Account::Liability:
-      case Account::Currency:
-      case Account::Income:
-      case Account::Expense:
-      case Account::AssetLoan:
-      case Account::Equity:
+      case Account::Type::Checkings:
+      case Account::Type::Savings:
+      case Account::Type::Cash:
+      case Account::Type::CreditCard:
+      case Account::Type::Loan:
+      case Account::Type::Asset:
+      case Account::Type::Liability:
+      case Account::Type::Currency:
+      case Account::Type::Income:
+      case Account::Type::Expense:
+      case Account::Type::AssetLoan:
+      case Account::Type::Equity:
         if (s.accountId().isEmpty())
           s.setAccountId(parent->account().id());
         if (s.isMatched())
@@ -1637,7 +1637,7 @@ namespace KMyMoneyRegister
           t = new KMyMoneyRegister::StdTransaction(parent, transaction, s, uniqueId);
         break;
 
-      case Account::Investment:
+      case Account::Type::Investment:
         if (s.isMatched())
           t = new KMyMoneyRegister::InvestTransaction/* Matched */(parent, transaction, s, uniqueId);
         else if (transaction.isImported())
@@ -1646,9 +1646,9 @@ namespace KMyMoneyRegister
           t = new KMyMoneyRegister::InvestTransaction(parent, transaction, s, uniqueId);
         break;
 
-      case Account::CertificateDep:
-      case Account::MoneyMarket:
-      case Account::Stock:
+      case Account::Type::CertificateDep:
+      case Account::Type::MoneyMarket:
+      case Account::Type::Stock:
       default:
         qDebug("Register::transactionFactory: invalid accountTypeE %d", (int)parent->account().accountType());
         break;
@@ -1702,7 +1702,7 @@ namespace KMyMoneyRegister
           if (!d->m_account.value("lastImportedTransactionDate").isEmpty()
               && !d->m_account.value("lastStatementBalance").isEmpty()) {
             MyMoneyMoney balance(d->m_account.value("lastStatementBalance"));
-            if (d->m_account.accountGroup() == Account::Liability)
+            if (d->m_account.accountGroup() == Account::Type::Liability)
               balance = -balance;
             auto txt = i18n("Online Statement Balance: %1", balance.formatMoney(d->m_account.fraction()));
 

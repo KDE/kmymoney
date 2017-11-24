@@ -274,13 +274,13 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype() const
     result = OfxAccountData::OFX_INVESTMENT;
   else {
     switch (m_account.accountType()) {
-      case eMyMoney::Account::Investment:
+      case eMyMoney::Account::Type::Investment:
         result = OfxAccountData::OFX_INVESTMENT;
         break;
-      case eMyMoney::Account::CreditCard:
+      case eMyMoney::Account::Type::CreditCard:
         result = OfxAccountData::OFX_CREDITCARD;
         break;
-      case eMyMoney::Account::Savings:
+      case eMyMoney::Account::Type::Savings:
         result = OfxAccountData::OFX_SAVINGS;
         break;
       default:
@@ -712,7 +712,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
     while (it_split != splits.end()) {
       QByteArray accid = (*it_split).accountId();
       MyMoneyAccount acc = file->account(accid);
-      if (acc.accountType() == eMyMoney::Account::Income || acc.accountType() == eMyMoney::Account::Expense) {
+      if (acc.accountType() == eMyMoney::Account::Type::Income || acc.accountType() == eMyMoney::Account::Type::Expense) {
         found = true;
         break;
       }

@@ -17,12 +17,12 @@
  ***************************************************************************/
 
 #include "mymoneybudget.h"
+#include "mymoneybudget_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QMap>
-#include <QDate>
 #include <QDomElement>
 #include <QDomDocument>
 
@@ -32,10 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-
-class MyMoneyBudget::PeriodGroupPrivate {
-
+class MyMoneyBudget::PeriodGroupPrivate
+{
 public:
   QDate         m_start;
   MyMoneyMoney  m_amount;
@@ -358,27 +356,6 @@ bool MyMoneyBudget::AccountGroup::operator == (const AccountGroup& right) const
           && d->m_periods.values() == d2->m_periods.values());
 }
 
-class MyMoneyBudgetPrivate {
-
-public:
-  /**
-    * The user-assigned name of the Budget
-    */
-  QString m_name;
-
-  /**
-    * The user-assigned year of the Budget
-    */
-  QDate m_start;
-
-  /**
-    * Map the budgeted accounts
-    *
-    * Each account Id is stored against the AccountGroup information
-    */
-  QMap<QString, MyMoneyBudget::AccountGroup> m_accounts;
-};
-
 MyMoneyBudget::MyMoneyBudget() :
   d_ptr(new MyMoneyBudgetPrivate)
 {
@@ -436,28 +413,28 @@ void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
   writeBaseXML(*doc, e);
 
   Q_D(const MyMoneyBudget);
-  e.setAttribute(getAttrName(Attribute::Name),  d->m_name);
-  e.setAttribute(getAttrName(Attribute::Start), d->m_start.toString(Qt::ISODate));
-  e.setAttribute(getAttrName(Attribute::Version), BUDGET_VERSION);
+  e.setAttribute(d->getAttrName(Budget::Attribute::Name),  d->m_name);
+  e.setAttribute(d->getAttrName(Budget::Attribute::Start), d->m_start.toString(Qt::ISODate));
+  e.setAttribute(d->getAttrName(Budget::Attribute::Version), BUDGET_VERSION);
 
   QMap<QString, AccountGroup>::const_iterator it;
   for (it = d->m_accounts.begin(); it != d->m_accounts.end(); ++it) {
     // only add the account if there is a budget entered
     // or it covers some sub accounts
     if (!(*it).balance().isZero() || (*it).budgetSubaccounts()) {
-      QDomElement domAccount = doc->createElement(getElName(Element::Account));
-      domAccount.setAttribute(getAttrName(Attribute::ID), it.key());
-      domAccount.setAttribute(getAttrName(Attribute::BudgetLevel), AccountGroup::kBudgetLevelText[it.value().budgetLevel()]);
-      domAccount.setAttribute(getAttrName(Attribute::BudgetSubAccounts), it.value().budgetSubaccounts());
+      QDomElement domAccount = doc->createElement(d->getElName(Budget::Element::Account));
+      domAccount.setAttribute(d->getAttrName(Budget::Attribute::ID), it.key());
+      domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetLevel), AccountGroup::kBudgetLevelText[it.value().budgetLevel()]);
+      domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts), it.value().budgetSubaccounts());
 
       const QMap<QDate, PeriodGroup> periods = it.value().getPeriods();
       QMap<QDate, PeriodGroup>::const_iterator it_per;
       for (it_per = periods.begin(); it_per != periods.end(); ++it_per) {
         if (!(*it_per).amount().isZero()) {
-          QDomElement domPeriod = doc->createElement(getElName(Element::Period));
+          QDomElement domPeriod = doc->createElement(d->getElName(Budget::Element::Period));
 
-          domPeriod.setAttribute(getAttrName(Attribute::Amount), (*it_per).amount().toString());
-          domPeriod.setAttribute(getAttrName(Attribute::Start), (*it_per).startDate().toString(Qt::ISODate));
+          domPeriod.setAttribute(d->getAttrName(Budget::Attribute::Amount), (*it_per).amount().toString());
+          domPeriod.setAttribute(d->getAttrName(Budget::Attribute::Start), (*it_per).startDate().toString(Qt::ISODate));
           domAccount.appendChild(domPeriod);
         }
       }
@@ -477,11 +454,11 @@ bool MyMoneyBudget::read(const QDomElement& e)
   Q_D(MyMoneyBudget);
   auto result = false;
 
-  if (getElName(Element::Budget) == e.tagName()) {
+  if (d->getElName(Budget::Element::Budget) == e.tagName()) {
     result = true;
-    d->m_name  = e.attribute(getAttrName(Attribute::Name));
-    d->m_start = QDate::fromString(e.attribute(getAttrName(Attribute::Start)), Qt::ISODate);
-    m_id    = e.attribute(getAttrName(Attribute::ID));
+    d->m_name  = e.attribute(d->getAttrName(Budget::Attribute::Name));
+    d->m_start = QDate::fromString(e.attribute(d->getAttrName(Budget::Attribute::Start)), Qt::ISODate);
+    m_id    = e.attribute(d->getAttrName(Budget::Attribute::ID));
 
     QDomNode child = e.firstChild();
     while (!child.isNull() && child.isElement()) {
@@ -489,18 +466,18 @@ bool MyMoneyBudget::read(const QDomElement& e)
 
       AccountGroup account;
 
-      if (getElName(Element::Account) == c.tagName()) {
-        if (c.hasAttribute(getAttrName(Attribute::ID)))
-          account.setId(c.attribute(getAttrName(Attribute::ID)));
+      if (d->getElName(Budget::Element::Account) == c.tagName()) {
+        if (c.hasAttribute(d->getAttrName(Budget::Attribute::ID)))
+          account.setId(c.attribute(d->getAttrName(Budget::Attribute::ID)));
 
-        if (c.hasAttribute(getAttrName(Attribute::BudgetLevel))) {
-          int i = AccountGroup::kBudgetLevelText.indexOf(c.attribute(getAttrName(Attribute::BudgetLevel)));
+        if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetLevel))) {
+          int i = AccountGroup::kBudgetLevelText.indexOf(c.attribute(d->getAttrName(Budget::Attribute::BudgetLevel)));
           if (i != -1)
             account.setBudgetLevel(static_cast<AccountGroup::eBudgetLevel>(i));
         }
 
-        if (c.hasAttribute(getAttrName(Attribute::BudgetSubAccounts)))
-          account.setBudgetSubaccounts(c.attribute(getAttrName(Attribute::BudgetSubAccounts)).toUInt());
+        if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts)))
+          account.setBudgetSubaccounts(c.attribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts)).toUInt());
       }
 
       QDomNode period = c.firstChild();
@@ -508,9 +485,9 @@ bool MyMoneyBudget::read(const QDomElement& e)
         QDomElement per = period.toElement();
         PeriodGroup pGroup;
 
-        if (getElName(Element::Period) == per.tagName() && per.hasAttribute(getAttrName(Attribute::Amount)) && per.hasAttribute(getAttrName(Attribute::Start))) {
-          pGroup.setAmount(MyMoneyMoney(per.attribute(getAttrName(Attribute::Amount))));
-          pGroup.setStartDate(QDate::fromString(per.attribute(getAttrName(Attribute::Start)), Qt::ISODate));
+        if (d->getElName(Budget::Element::Period) == per.tagName() && per.hasAttribute(d->getAttrName(Budget::Attribute::Amount)) && per.hasAttribute(d->getAttrName(Budget::Attribute::Start))) {
+          pGroup.setAmount(MyMoneyMoney(per.attribute(d->getAttrName(Budget::Attribute::Amount))));
+          pGroup.setStartDate(QDate::fromString(per.attribute(d->getAttrName(Budget::Attribute::Start)), Qt::ISODate));
           account.addPeriod(pGroup.startDate(), pGroup);
         }
 
@@ -528,7 +505,8 @@ bool MyMoneyBudget::read(const QDomElement& e)
 
 void MyMoneyBudget::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement(getElName(Element::Budget));
+  Q_D(const MyMoneyBudget);
+  QDomElement el = document.createElement(d->getElName(Budget::Element::Budget));
   write(el, &document);
   parent.appendChild(el);
 }
@@ -623,28 +601,4 @@ void MyMoneyBudget::setBudgetStart(const QDate& start)
       }
     }
   }
-}
-
-QString MyMoneyBudget::getElName(const Element el)
-{
-  static const QMap<Element, QString> elNames = {
-    {Element::Budget,   "BUDGET"},
-    {Element::Account,  "ACCOUNT"},
-    {Element::Period,   "PERIOD"}
-  };
-  return elNames[el];
-}
-
-QString MyMoneyBudget::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::ID,                 QStringLiteral("id")},
-    {Attribute::Name,               QStringLiteral("name")},
-    {Attribute::Start,              QStringLiteral("start")},
-    {Attribute::Version,            QStringLiteral("version")},
-    {Attribute::BudgetLevel,        QStringLiteral("budgetlevel")},
-    {Attribute::BudgetSubAccounts,  QStringLiteral("budgetsubaccounts")},
-    {Attribute::Amount,             QStringLiteral("amount")}
-  };
-  return attrNames[attr];
 }

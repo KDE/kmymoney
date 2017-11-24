@@ -214,7 +214,7 @@ void KExportDlg::checkData(const QString& accountId)
 void KExportDlg::loadAccounts()
 {
   auto filterProxyModel = new AccountNamesFilterProxyModel(this);
-  filterProxyModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability});
+  filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
   auto const model = Models::instance()->accountsModel();
   model->load();
   filterProxyModel->setSourceColumns(model->getColumns());

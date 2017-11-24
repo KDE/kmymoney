@@ -21,6 +21,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySecurityTest;
 
 #include "mymoneysecurity.h"
+#include "mymoneysecurity_p.h"
 #include "mymoneymoney.h"
 #include "mymoneyenums.h"
 
@@ -41,7 +42,7 @@ void MyMoneySecurityTest::testEmptyConstructor()
   QVERIFY(m->id().isEmpty());
   QVERIFY(m->name().isEmpty());
   QVERIFY(m->tradingSymbol().isEmpty());
-  QVERIFY(m->securityType() == eMyMoney::Security::None);
+  QVERIFY(m->securityType() == eMyMoney::Security::Type::None);
   QVERIFY(m->tradingMarket().isEmpty());
   QVERIFY(m->tradingCurrency().isEmpty());
   QVERIFY(m->smallestCashFraction() == 100);
@@ -65,14 +66,14 @@ void MyMoneySecurityTest::testNonemptyConstructor()
 
   m->setName("name");
   m->setTradingSymbol("symbol");
-  m->setSecurityType(eMyMoney::Security::Currency);
+  m->setSecurityType(eMyMoney::Security::Type::Currency);
   // m->addPriceHistory(date, val);
 
   MyMoneySecurity n("id", *m);
 
   QVERIFY(n.id() == QString("id"));
   QVERIFY(n.tradingSymbol() == QString("symbol"));
-  QVERIFY(n.securityType() == eMyMoney::Security::Currency);
+  QVERIFY(n.securityType() == eMyMoney::Security::Type::Currency);
   // QVERIFY(n.priceHistory().count() == 1);
 }
 
@@ -83,7 +84,7 @@ void MyMoneySecurityTest::testSetFunctions()
   m->setTradingSymbol("Symbol");
   m->setTradingMarket("Market");
   m->setTradingCurrency("Currency");
-  m->setSecurityType(eMyMoney::Security::Stock);
+  m->setSecurityType(eMyMoney::Security::Type::Stock);
   m->setSmallestAccountFraction(50);
   m->setSmallestCashFraction(2);
 
@@ -91,7 +92,7 @@ void MyMoneySecurityTest::testSetFunctions()
   QVERIFY(m->tradingSymbol() == "Symbol");
   QVERIFY(m->tradingMarket() == "Market");
   QVERIFY(m->tradingCurrency() == "Currency");
-  QVERIFY(m->securityType() == eMyMoney::Security::Stock);
+  QVERIFY(m->securityType() == eMyMoney::Security::Type::Stock);
   QVERIFY(m->smallestAccountFraction() == 50);
   QVERIFY(m->smallestCashFraction() == 2);
 }
@@ -127,7 +128,7 @@ void MyMoneySecurityTest::testEquality()
   n.setTradingCurrency("NewCurrency");
   QVERIFY(!(n == *m));
   n = *m;
-  n.setSecurityType(eMyMoney::Security::Currency);
+  n.setSecurityType(eMyMoney::Security::Type::Currency);
   QVERIFY(!(n == *m));
   n = *m;
   n.setPricePrecision(8);
@@ -161,7 +162,7 @@ void MyMoneySecurityTest::testInequality()
   n.setTradingCurrency("NewCurrency");
   QVERIFY(n != *m);
   n = *m;
-  n.setSecurityType(eMyMoney::Security::Currency);
+  n.setSecurityType(eMyMoney::Security::Type::Currency);
   QVERIFY(n != *m);
   n = *m;
   n.setSmallestAccountFraction(40);
@@ -214,8 +215,8 @@ void MyMoneySecurityTest::testAccountIDList () {
 
 void MyMoneySecurityTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneySecurity::Attribute::Name; i < (int)MyMoneySecurity::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneySecurity::getAttrName(static_cast<MyMoneySecurity::Attribute>(i)).isEmpty();
+  for (auto i = (int)Security::Attribute::Name; i < (int)Security::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneySecurityPrivate::getAttrName(static_cast<Security::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

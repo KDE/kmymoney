@@ -17,8 +17,7 @@
 */
 
 #include "onlinejob.h"
-
-#include "QDateTime"
+#include "onlinejob_p.h"
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -28,41 +27,6 @@
 #include "mymoneystoragenames.h"
 
 using namespace MyMoneyStorageNodes;
-
-class onlineJobPrivate {
-
-public:
-  /**
-   * @brief Date-time the job was sent to the bank
-   *
-   * This does not mean an answer was given by the bank
-   */
-  QDateTime m_jobSend;
-
-  /**
-   * @brief Date-time of confirmation/rejection of the bank
-   *
-   * which state this timestamp belongs to is stored in m_jobBankAnswerState
-   */
-  QDateTime m_jobBankAnswerDate;
-
-  /**
-   * @brief Answer of the bank
-   *
-   * combined with m_jobBankAnswerDate
-   */
-  onlineJob::sendingState m_jobBankAnswerState;
-
-  /**
-   * @brief Validation result status
-   */
-  QList<onlineJobMessage> m_messageList;
-
-  /**
-   * @brief Locking state
-   */
-  bool m_locked;
-};
 
 onlineJob::onlineJob() :
   MyMoneyObject(),
@@ -132,22 +96,22 @@ onlineJob::onlineJob(const QDomElement& element) :
   Q_D(onlineJob);
   d->m_messageList = QList<onlineJobMessage>();
   d->m_locked = false;
-  d->m_jobSend = QDateTime::fromString(element.attribute(getAttrName(Attribute::Send)), Qt::ISODate);
-  d->m_jobBankAnswerDate = QDateTime::fromString(element.attribute(getAttrName(Attribute::BankAnswerDate)), Qt::ISODate);
-  QString state = element.attribute(getAttrName(Attribute::BankAnswerState));
-  if (state == getAttrName(Attribute::AbortedByUser))
+  d->m_jobSend = QDateTime::fromString(element.attribute(d->getAttrName(OnlineJob::Attribute::Send)), Qt::ISODate);
+  d->m_jobBankAnswerDate = QDateTime::fromString(element.attribute(d->getAttrName(OnlineJob::Attribute::BankAnswerDate)), Qt::ISODate);
+  QString state = element.attribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState));
+  if (state == d->getAttrName(OnlineJob::Attribute::AbortedByUser))
     d->m_jobBankAnswerState = abortedByUser;
-  else if (state == getAttrName(Attribute::AcceptedByBank))
+  else if (state == d->getAttrName(OnlineJob::Attribute::AcceptedByBank))
     d->m_jobBankAnswerState = acceptedByBank;
-  else if (state == getAttrName(Attribute::RejectedByBank))
+  else if (state == d->getAttrName(OnlineJob::Attribute::RejectedByBank))
     d->m_jobBankAnswerState = rejectedByBank;
-  else if (state == getAttrName(Attribute::SendingError))
+  else if (state == d->getAttrName(OnlineJob::Attribute::SendingError))
     d->m_jobBankAnswerState = sendingError;
   else
     d->m_jobBankAnswerState = noBankAnswer;
 
-  QDomElement taskElem = element.firstChildElement(getElName(Element::OnlineTask));
-  m_task = onlineJobAdministration::instance()->createOnlineTaskByXml(taskElem.attribute(getAttrName(Attribute::IID)), taskElem);
+  QDomElement taskElem = element.firstChildElement(d->getElName(OnlineJob::Element::OnlineTask));
+  m_task = onlineJobAdministration::instance()->createOnlineTaskByXml(taskElem.attribute(d->getAttrName(OnlineJob::Attribute::IID)), taskElem);
 }
 
 void onlineJob::copyPointerFromOtherJob(const onlineJob &other)
@@ -319,21 +283,21 @@ void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
 
   Q_D(const onlineJob);
   if (!d->m_jobSend.isNull())
-    el.setAttribute(getAttrName(Attribute::Send), d->m_jobSend.toString(Qt::ISODate));
+    el.setAttribute(d->getAttrName(OnlineJob::Attribute::Send), d->m_jobSend.toString(Qt::ISODate));
   if (!d->m_jobBankAnswerDate.isNull())
-    el.setAttribute(getAttrName(Attribute::BankAnswerDate), d->m_jobBankAnswerDate.toString(Qt::ISODate));
+    el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerDate), d->m_jobBankAnswerDate.toString(Qt::ISODate));
 
   switch (d->m_jobBankAnswerState) {
-    case abortedByUser: el.setAttribute(getAttrName(Attribute::BankAnswerState), getAttrName(Attribute::AbortedByUser)); break;
-    case acceptedByBank: el.setAttribute(getAttrName(Attribute::BankAnswerState), getAttrName(Attribute::AcceptedByBank)); break;
-    case rejectedByBank: el.setAttribute(getAttrName(Attribute::BankAnswerState), getAttrName(Attribute::RejectedByBank)); break;
-    case sendingError: el.setAttribute(getAttrName(Attribute::BankAnswerState), getAttrName(Attribute::SendingError)); break;
+    case abortedByUser: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::AbortedByUser)); break;
+    case acceptedByBank: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::AcceptedByBank)); break;
+    case rejectedByBank: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::RejectedByBank)); break;
+    case sendingError: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::SendingError)); break;
     case noBankAnswer:
     default: void();
   }
 
-  QDomElement taskEl = document.createElement(getElName(Element::OnlineTask));
-  taskEl.setAttribute(getAttrName(Attribute::IID), taskIid());
+  QDomElement taskEl = document.createElement(d->getElName(OnlineJob::Element::OnlineTask));
+  taskEl.setAttribute(d->getAttrName(OnlineJob::Attribute::IID), taskIid());
   try {
     task()->writeXML(document, taskEl); // throws execption if there is no task
     el.appendChild(taskEl); // only append child if there is something to append
@@ -361,27 +325,4 @@ bool onlineJob::hasReferenceTo(const QString& id) const
   if (m_task != 0)
     return m_task->hasReferenceTo(id);
   return false;
-}
-
-QString onlineJob::getElName(const Element el)
-{
-  static const QMap<Element, QString> elNames = {
-    {Element::OnlineTask, QStringLiteral("onlineTask")}
-  };
-  return elNames[el];
-}
-
-QString onlineJob::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::Send,             QStringLiteral("send")},
-    {Attribute::BankAnswerDate,   QStringLiteral("bankAnswerDate")},
-    {Attribute::BankAnswerState,  QStringLiteral("bankAnswerState")},
-    {Attribute::IID,              QStringLiteral("iid")},
-    {Attribute::AbortedByUser,    QStringLiteral("abortedByUser")},
-    {Attribute::AcceptedByBank,   QStringLiteral("acceptedByBank")},
-    {Attribute::RejectedByBank,   QStringLiteral("rejectedByBank")},
-    {Attribute::SendingError,     QStringLiteral("sendingError")},
-  };
-  return attrNames[attr];
 }

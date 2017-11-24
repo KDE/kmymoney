@@ -37,7 +37,7 @@ void onlineJobAdministrationTest::initTestCase()
   try {
     MyMoneyAccount account = MyMoneyAccount();
     account.setName("Test Account");
-    account.setAccountType(eMyMoney::Account::Savings);
+    account.setAccountType(eMyMoney::Account::Type::Savings);
     MyMoneyAccount asset = file->asset();
     MyMoneyFileTransaction transaction;
     file->addAccount(account , asset);

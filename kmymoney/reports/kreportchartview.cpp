@@ -298,7 +298,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
             while (it_row != (*it_innergroup).end()) {
               //Do not include investments accounts in the chart because they are merely container of stock and other accounts
-              if (it_row.key().accountType() != eMyMoney::Account::Investment) {
+              if (it_row.key().accountType() != eMyMoney::Account::Type::Investment) {
 
                 // get displayed precision
                 int currencyPrecision = precision;

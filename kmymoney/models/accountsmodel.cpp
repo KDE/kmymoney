@@ -180,10 +180,10 @@ public:
 
     const auto checkMark = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
     switch (account.accountType()) {
-      case Account::Income:
-      case Account::Expense:
-      case Account::Asset:
-      case Account::Liability:
+      case Account::Type::Income:
+      case Account::Type::Expense:
+      case Account::Type::Asset:
+      case Account::Type::Liability:
         // Tax
         if (columns.contains(Column::Tax)) {
           colNum = m_columns.indexOf(Column::Tax);
@@ -368,9 +368,9 @@ public:
 
     // for income and liability accounts, we reverse the sign
     switch (account.accountGroup()) {
-      case Account::Income:
-      case Account::Liability:
-      case Account::Equity:
+      case Account::Type::Income:
+      case Account::Type::Liability:
+      case Account::Type::Equity:
         balance = -balance;
         break;
 
@@ -455,7 +455,7 @@ public:
         auto value = data.value<MyMoneyMoney>();
         if (isInstitutionsModel) {
           const auto account = childNode->data((int)Role::Account).value<MyMoneyAccount>();
-          if (account.accountGroup() == Account::Liability)
+          if (account.accountGroup() == Account::Type::Liability)
             value = -value;
         }
       totalValue += value;
@@ -585,10 +585,10 @@ void AccountsModel::load()
   }
 
   // adding account categories (asset, liability, etc.) node
-  QVector <Account> categories {
-    Account::Asset, Account::Liability,
-    Account::Income, Account::Expense,
-    Account::Equity
+  QVector <Account::Type> categories {
+    Account::Type::Asset, Account::Type::Liability,
+    Account::Type::Income, Account::Type::Expense,
+    Account::Type::Equity
   };
 
   foreach (const auto category, categories) {
@@ -597,31 +597,31 @@ void AccountsModel::load()
     int displayOrder;
 
     switch (category) {
-      case Account::Asset:
+      case Account::Type::Asset:
         // Asset accounts
         account = d->m_file->asset();
         accountName = i18n("Asset accounts");
         displayOrder = 1;
         break;
-      case Account::Liability:
+      case Account::Type::Liability:
         // Liability accounts
         account = d->m_file->liability();
         accountName = i18n("Liability accounts");
         displayOrder = 2;
         break;
-      case Account::Income:
+      case Account::Type::Income:
         // Income categories
         account = d->m_file->income();
         accountName = i18n("Income categories");
         displayOrder = 3;
         break;
-      case Account::Expense:
+      case Account::Type::Expense:
         // Expense categories
         account = d->m_file->expense();
         accountName = i18n("Expense categories");
         displayOrder = 4;
         break;
-      case Account::Equity:
+      case Account::Type::Equity:
         // Equity accounts
         account = d->m_file->equity();
         accountName = i18n("Equity accounts");
@@ -1187,7 +1187,7 @@ void InstitutionsModel::slotObjectModified(File::Object objType, const MyMoneyOb
   // if an account was modified then modify the item which represents it
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
   // nothing to do for root accounts, categories and equity accounts since they don't have a representation in this model
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == Account::Equity)
+  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == Account::Type::Equity)
     return;
 
   auto accountItem = d->itemFromAccountId(this, account->id());

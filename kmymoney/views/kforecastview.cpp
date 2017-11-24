@@ -408,19 +408,19 @@ void KForecastView::loadSummaryView()
       case -1:
         break;
       case 0:
-        if (acc.accountGroup() == eMyMoney::Account::Asset) {
+        if (acc.accountGroup() == eMyMoney::Account::Type::Asset) {
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
           msg += i18n("The balance of %1 is below %2 today.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           msg += QString("</font>");
           break;
         }
-        if (acc.accountGroup() == eMyMoney::Account::Liability) {
+        if (acc.accountGroup() == eMyMoney::Account::Type::Liability) {
           msg = i18n("The balance of %1 is above %2 today.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           break;
         }
         break;
       default:
-        if (acc.accountGroup() == eMyMoney::Account::Asset) {
+        if (acc.accountGroup() == eMyMoney::Account::Type::Asset) {
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
           msg += i18np("The balance of %2 will drop below %3 in %1 day.",
                        "The balance of %2 will drop below %3 in %1 days.",
@@ -428,7 +428,7 @@ void KForecastView::loadSummaryView()
           msg += QString("</font>");
           break;
         }
-        if (acc.accountGroup() == eMyMoney::Account::Liability) {
+        if (acc.accountGroup() == eMyMoney::Account::Type::Liability) {
           msg = i18np("The balance of %2 will raise above %3 in %1 day.",
                       "The balance of %2 will raise above %3 in %1 days.",
                       dropZero, acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
@@ -934,7 +934,7 @@ void KForecastView::updateBudget(QTreeWidgetItem *item)
   for (; forecastDate <= forecast.forecastEndDate(); forecastDate = forecastDate.addMonths(1), ++it_c) {
     MyMoneyMoney amountMM;
     amountMM = forecast.forecastBalance(account, forecastDate);
-    if (account.accountType() == eMyMoney::Account::Expense)
+    if (account.accountType() == eMyMoney::Account::Type::Expense)
       amountMM = -amountMM;
 
     tAmountMM += amountMM;

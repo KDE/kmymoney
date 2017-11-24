@@ -63,17 +63,17 @@ public:
   {
   }
 
-  QVector<eMyMoney::Account> getVisibleGroups(const View view)
+  QVector<eMyMoney::Account::Type> getVisibleGroups(const View view)
   {
     switch (view) {
       case View::Institutions:
       case View::Accounts:
-        return QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Equity};
+        return QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity};
       case View::Categories:
       case View::Budget:
-        return QVector<eMyMoney::Account> {eMyMoney::Account::Income, eMyMoney::Account::Expense};
+        return QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense};
       default:
-        return QVector<eMyMoney::Account> ();
+        return QVector<eMyMoney::Account::Type> ();
     }
   }
 

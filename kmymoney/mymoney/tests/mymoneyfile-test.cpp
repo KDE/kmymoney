@@ -460,8 +460,8 @@ void MyMoneyFileTest::testAddAccounts()
 {
   testAddTwoInstitutions();
   MyMoneyAccount  a, b, c;
-  a.setAccountType(eMyMoney::Account::Checkings);
-  b.setAccountType(eMyMoney::Account::Checkings);
+  a.setAccountType(eMyMoney::Account::Type::Checkings);
+  b.setAccountType(eMyMoney::Account::Type::Checkings);
 
   MyMoneyInstitution institution;
 
@@ -528,7 +528,7 @@ void MyMoneyFileTest::testAddAccounts()
 
   // check if we can get the same info to a different object
   c = m->account("A000001");
-  QCOMPARE(c.accountType(), eMyMoney::Account::Checkings);
+  QCOMPARE(c.accountType(), eMyMoney::Account::Type::Checkings);
   QCOMPARE(c.id(), QLatin1String("A000001"));
   QCOMPARE(c.name(), QLatin1String("Account1"));
   QCOMPARE(c.institutionId(), QLatin1String("I000001"));
@@ -580,7 +580,7 @@ void MyMoneyFileTest::testAddAccounts()
   MyMoneyAccount p;
 
   p = m->account("A000002");
-  QCOMPARE(p.accountType(), eMyMoney::Account::Checkings);
+  QCOMPARE(p.accountType(), eMyMoney::Account::Type::Checkings);
   QCOMPARE(p.id(), QLatin1String("A000002"));
   QCOMPARE(p.name(), QLatin1String("Account2"));
   QCOMPARE(p.institutionId(), QLatin1String("I000002"));
@@ -590,9 +590,9 @@ void MyMoneyFileTest::testAddAccounts()
 void MyMoneyFileTest::testAddCategories()
 {
   MyMoneyAccount  a, b, c;
-  a.setAccountType(eMyMoney::Account::Income);
+  a.setAccountType(eMyMoney::Account::Type::Income);
   a.setOpeningDate(QDate::currentDate());
-  b.setAccountType(eMyMoney::Account::Expense);
+  b.setAccountType(eMyMoney::Account::Type::Expense);
 
   storage->m_dirty = false;
 
@@ -666,7 +666,7 @@ void MyMoneyFileTest::testModifyAccount()
   MyMoneyAccount p = m->account("A000001");
   MyMoneyInstitution institution;
 
-  QCOMPARE(p.accountType(), eMyMoney::Account::Checkings);
+  QCOMPARE(p.accountType(), eMyMoney::Account::Type::Checkings);
   QCOMPARE(p.name(), QLatin1String("Account1"));
 
   p.setName("New account name");
@@ -678,7 +678,7 @@ void MyMoneyFileTest::testModifyAccount()
 
     QCOMPARE(m->dirty(), true);
     QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
-    QCOMPARE(p.accountType(), eMyMoney::Account::Checkings);
+    QCOMPARE(p.accountType(), eMyMoney::Account::Type::Checkings);
     QCOMPARE(p.name(), QLatin1String("New account name"));
 
     QCOMPARE(m_objectsRemoved.count(), 0);
@@ -703,7 +703,7 @@ void MyMoneyFileTest::testModifyAccount()
 
     QCOMPARE(m->dirty(), true);
     QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
-    QCOMPARE(p.accountType(), eMyMoney::Account::Checkings);
+    QCOMPARE(p.accountType(), eMyMoney::Account::Type::Checkings);
     QCOMPARE(p.name(), QLatin1String("New account name"));
     QCOMPARE(p.institutionId(), QLatin1String("I000002"));
 
@@ -730,7 +730,7 @@ void MyMoneyFileTest::testModifyAccount()
   storage->m_dirty = false;
 
   // try to change to an account type that is allowed
-  p.setAccountType(eMyMoney::Account::Savings);
+  p.setAccountType(eMyMoney::Account::Type::Savings);
   ft.restart();
   try {
     m->modifyAccount(p);
@@ -738,7 +738,7 @@ void MyMoneyFileTest::testModifyAccount()
 
     QCOMPARE(m->dirty(), true);
     QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
-    QCOMPARE(p.accountType(), eMyMoney::Account::Savings);
+    QCOMPARE(p.accountType(), eMyMoney::Account::Type::Savings);
     QCOMPARE(p.name(), QLatin1String("New account name"));
 
   } catch (const MyMoneyException &) {
@@ -747,7 +747,7 @@ void MyMoneyFileTest::testModifyAccount()
   storage->m_dirty = false;
 
   // try to change to an account type that is not allowed
-  p.setAccountType(eMyMoney::Account::CreditCard);
+  p.setAccountType(eMyMoney::Account::Type::CreditCard);
   ft.restart();
   try {
     m->modifyAccount(p);
@@ -943,8 +943,8 @@ void MyMoneyFileTest::testAccountListRetrieval()
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 2);
 
-  QCOMPARE(list[0].accountType(), eMyMoney::Account::Checkings);
-  QCOMPARE(list[1].accountType(), eMyMoney::Account::Checkings);
+  QCOMPARE(list[0].accountType(), eMyMoney::Account::Type::Checkings);
+  QCOMPARE(list[1].accountType(), eMyMoney::Account::Type::Checkings);
 }
 
 void MyMoneyFileTest::testAddTransaction()
@@ -953,10 +953,10 @@ void MyMoneyFileTest::testAddTransaction()
   MyMoneyTransaction t, p;
 
   MyMoneyAccount exp1;
-  exp1.setAccountType(eMyMoney::Account::Expense);
+  exp1.setAccountType(eMyMoney::Account::Type::Expense);
   exp1.setName("Expense1");
   MyMoneyAccount exp2;
-  exp2.setAccountType(eMyMoney::Account::Expense);
+  exp2.setAccountType(eMyMoney::Account::Type::Expense);
   exp2.setName("Expense2");
 
   MyMoneyFileTransaction ft;
@@ -1675,7 +1675,7 @@ void MyMoneyFileTest::testHasAccount()
   testAddAccounts();
 
   MyMoneyAccount a, b;
-  a.setAccountType(eMyMoney::Account::Checkings);
+  a.setAccountType(eMyMoney::Account::Type::Checkings);
   a.setName("Account3");
   b = m->account("A000001");
   MyMoneyFileTransaction ft;
@@ -1696,7 +1696,7 @@ void MyMoneyFileTest::testAddEquityAccount()
 {
   MyMoneyAccount i;
   i.setName("Investment");
-  i.setAccountType(eMyMoney::Account::Investment);
+  i.setAccountType(eMyMoney::Account::Type::Investment);
 
   MyMoneyFileTransaction ft;
   try {
@@ -1712,23 +1712,23 @@ void MyMoneyFileTest::testAddEquityAccount()
   // make sure, that only equity accounts can be children to it
   MyMoneyAccount a;
   a.setName("Testaccount");
-  QList<eMyMoney::Account> list;
-  list << eMyMoney::Account::Checkings;
-  list << eMyMoney::Account::Savings;
-  list << eMyMoney::Account::Cash;
-  list << eMyMoney::Account::CreditCard;
-  list << eMyMoney::Account::Loan;
-  list << eMyMoney::Account::CertificateDep;
-  list << eMyMoney::Account::Investment;
-  list << eMyMoney::Account::MoneyMarket;
-  list << eMyMoney::Account::Asset;
-  list << eMyMoney::Account::Liability;
-  list << eMyMoney::Account::Currency;
-  list << eMyMoney::Account::Income;
-  list << eMyMoney::Account::Expense;
-  list << eMyMoney::Account::AssetLoan;
+  QList<eMyMoney::Account::Type> list;
+  list << eMyMoney::Account::Type::Checkings;
+  list << eMyMoney::Account::Type::Savings;
+  list << eMyMoney::Account::Type::Cash;
+  list << eMyMoney::Account::Type::CreditCard;
+  list << eMyMoney::Account::Type::Loan;
+  list << eMyMoney::Account::Type::CertificateDep;
+  list << eMyMoney::Account::Type::Investment;
+  list << eMyMoney::Account::Type::MoneyMarket;
+  list << eMyMoney::Account::Type::Asset;
+  list << eMyMoney::Account::Type::Liability;
+  list << eMyMoney::Account::Type::Currency;
+  list << eMyMoney::Account::Type::Income;
+  list << eMyMoney::Account::Type::Expense;
+  list << eMyMoney::Account::Type::AssetLoan;
 
-  QList<eMyMoney::Account>::Iterator it;
+  QList<eMyMoney::Account::Type>::Iterator it;
   for (it = list.begin(); it != list.end(); ++it) {
     a.setAccountType(*it);
     ft.restart();
@@ -1744,7 +1744,7 @@ void MyMoneyFileTest::testAddEquityAccount()
   ft.restart();
   try {
     a.setName("Teststock");
-    a.setAccountType(eMyMoney::Account::Stock);
+    a.setAccountType(eMyMoney::Account::Type::Stock);
     m->addAccount(a, i);
     ft.commit();
   } catch (const MyMoneyException &e) {
@@ -1759,32 +1759,32 @@ void MyMoneyFileTest::testReparentEquity()
   MyMoneyAccount parent;
 
   // check the bad cases
-  QList<eMyMoney::Account> list;
-  list << eMyMoney::Account::Checkings;
-  list << eMyMoney::Account::Savings;
-  list << eMyMoney::Account::Cash;
-  list << eMyMoney::Account::CertificateDep;
-  list << eMyMoney::Account::MoneyMarket;
-  list << eMyMoney::Account::Asset;
-  list << eMyMoney::Account::AssetLoan;
-  list << eMyMoney::Account::Currency;
+  QList<eMyMoney::Account::Type> list;
+  list << eMyMoney::Account::Type::Checkings;
+  list << eMyMoney::Account::Type::Savings;
+  list << eMyMoney::Account::Type::Cash;
+  list << eMyMoney::Account::Type::CertificateDep;
+  list << eMyMoney::Account::Type::MoneyMarket;
+  list << eMyMoney::Account::Type::Asset;
+  list << eMyMoney::Account::Type::AssetLoan;
+  list << eMyMoney::Account::Type::Currency;
   parent = m->asset();
   testReparentEquity(list, parent);
 
   list.clear();
-  list << eMyMoney::Account::CreditCard;
-  list << eMyMoney::Account::Loan;
-  list << eMyMoney::Account::Liability;
+  list << eMyMoney::Account::Type::CreditCard;
+  list << eMyMoney::Account::Type::Loan;
+  list << eMyMoney::Account::Type::Liability;
   parent = m->liability();
   testReparentEquity(list, parent);
 
   list.clear();
-  list << eMyMoney::Account::Income;
+  list << eMyMoney::Account::Type::Income;
   parent = m->income();
   testReparentEquity(list, parent);
 
   list.clear();
-  list << eMyMoney::Account::Expense;
+  list << eMyMoney::Account::Type::Expense;
   parent = m->expense();
   testReparentEquity(list, parent);
 
@@ -1800,12 +1800,12 @@ void MyMoneyFileTest::testReparentEquity()
   }
 }
 
-void MyMoneyFileTest::testReparentEquity(QList<eMyMoney::Account>& list, MyMoneyAccount& parent)
+void MyMoneyFileTest::testReparentEquity(QList<eMyMoney::Account::Type>& list, MyMoneyAccount& parent)
 {
   MyMoneyAccount a;
   MyMoneyAccount stock = m->account("A000002");
 
-  QList<eMyMoney::Account>::Iterator it;
+  QList<eMyMoney::Account::Type>::Iterator it;
   MyMoneyFileTransaction ft;
   for (it = list.begin(); it != list.end(); ++it) {
     a.setName(QString("Testaccount %1").arg((int)*it));
@@ -2067,7 +2067,7 @@ void MyMoneyFileTest::testAddAccountMissingCurrency()
   testAddTwoInstitutions();
   MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
   MyMoneyAccount  a;
-  a.setAccountType(eMyMoney::Account::Checkings);
+  a.setAccountType(eMyMoney::Account::Type::Checkings);
 
   MyMoneyInstitution institution;
 
@@ -2248,7 +2248,7 @@ void MyMoneyFileTest::AddOneAccount()
 {
   QString accountId = "A000001";
   MyMoneyAccount  a;
-  a.setAccountType(eMyMoney::Account::Checkings);
+  a.setAccountType(eMyMoney::Account::Type::Checkings);
 
   storage->m_dirty = false;
 
@@ -2552,7 +2552,7 @@ void MyMoneyFileTest::testAdjustedValues()
   AddOneAccount();
 
   MyMoneyAccount exp1;
-  exp1.setAccountType(eMyMoney::Account::Expense);
+  exp1.setAccountType(eMyMoney::Account::Type::Expense);
   exp1.setName("Expense1");
   exp1.setCurrencyId("EUR");
 
@@ -2585,7 +2585,7 @@ void MyMoneyFileTest::testAdjustedValues()
   try {
     stock.setName("Teststock");
     stock.setCurrencyId(stockSecurity.id());
-    stock.setAccountType(eMyMoney::Account::Stock);
+    stock.setAccountType(eMyMoney::Account::Type::Stock);
     m->addAccount(stock, i);
     ft.commit();
   } catch (const MyMoneyException &e) {
@@ -2683,7 +2683,7 @@ void MyMoneyFileTest::testVatAssignment()
 
   vat.setName("VAT");
   vat.setCurrencyId("EUR");
-  vat.setAccountType(eMyMoney::Account::Expense);
+  vat.setAccountType(eMyMoney::Account::Type::Expense);
   // make it a VAT account
   vat.setValue(QLatin1String("VatRate"), QLatin1String("20/100"));
 

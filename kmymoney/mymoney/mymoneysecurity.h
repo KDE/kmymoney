@@ -43,7 +43,7 @@
 
 class QString;
 
-namespace eMyMoney { enum class Security; }
+namespace eMyMoney { namespace Security { enum class Type; } }
 
 /**
   * Class that holds all the required information about a security that the user
@@ -68,9 +68,9 @@ public:
   explicit MyMoneySecurity(const QString& id,
                            const QString& name,
                            const QString& symbol = QString(),
-                           const int smallestCashFraction = DEFAULT_CASH_FRACTION,
-                           const int smallestAccountFraction = DEFAULT_ACCOUNT_FRACTION,
-                           const int pricePrecision = DEFAULT_PRICE_PRECISION);
+                           const int smallestCashFraction = 100,
+                           const int smallestAccountFraction = 100,
+                           const int pricePrecision = 4);
 
   explicit MyMoneySecurity(const QDomElement& node);
 
@@ -105,8 +105,8 @@ public:
   QString tradingSymbol() const;
   void setTradingSymbol(const QString& str);
 
-  eMyMoney::Security securityType() const;
-  void setSecurityType(const eMyMoney::Security s);
+  eMyMoney::Security::Type securityType() const;
+  void setSecurityType(const eMyMoney::Security::Type s);
 
   bool isCurrency() const;
 
@@ -150,7 +150,7 @@ public:
    *
    * @return QString representing the human readable form
    */
-  static QString securityTypeToString(const eMyMoney::Security securityType);
+  static QString securityTypeToString(const eMyMoney::Security::Type securityType);
 
   /**
    * This method is used to convert the internal representation of
@@ -162,33 +162,7 @@ public:
    * @return QString representing the human readable form
    */
   static QString roundingMethodToString(const AlkValue::RoundingMethod roundingMethod);
-
-private:
-  enum DefaultValues {
-    DEFAULT_CASH_FRACTION = 100,
-    DEFAULT_ACCOUNT_FRACTION = 100,
-    DEFAULT_PRICE_PRECISION = 4,
-  };
-
-  enum class Attribute { Name = 0,
-                         Symbol,
-                         Type,
-                         RoundingMethod,
-                         SAF,
-                         PP,
-                         SCF,
-                         TradingCurrency,
-                         TradingMarket,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const MyMoneySecurity::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneySecurity& first, MyMoneySecurity& second) // krazy:exclude=inline
 {

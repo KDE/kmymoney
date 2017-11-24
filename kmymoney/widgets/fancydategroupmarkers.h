@@ -33,7 +33,7 @@
 namespace eWidgets { enum class SortField;
                      namespace Transaction { enum class Column; }
                      namespace Register { enum class DetailColumn;} }
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 namespace KMyMoneyRegister
 {

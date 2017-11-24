@@ -246,32 +246,7 @@ public:
     * to remove objects which are about to be removed from the engine.
     */
   void removeReference(const QString& id);
-
-private:
-  enum class Element { Budget = 0,
-                       Account,
-                       Period
-                     };
-
-  enum class Attribute { ID = 0,
-                         Name,
-                         Start,
-                         Version,
-                         BudgetLevel,
-                         BudgetSubAccounts,
-                         Amount,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-  friend uint qHash(const Attribute, uint seed);
-  friend uint qHash(const Element, uint seed);
 };
-
-inline uint qHash(const MyMoneyBudget::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const MyMoneyBudget::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyBudget::PeriodGroup& first, MyMoneyBudget::PeriodGroup& second) // krazy:exclude=inline
 {

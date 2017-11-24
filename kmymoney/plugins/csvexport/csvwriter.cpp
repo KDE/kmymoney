@@ -166,7 +166,7 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
   QString name = acc.name();
 
   s << leadIn << name << m_separator;
-  s << (acc.accountGroup() == eMyMoney::Account::Expense ? QLatin1Char('E') : QLatin1Char('I'));
+  s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? QLatin1Char('E') : QLatin1Char('I'));
   s << endl;
 
   QStringList list = acc.accountList();
@@ -310,11 +310,11 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
   QString chkAccnt;
   QList<MyMoneySplit> lst = t.splits();
   QList<MyMoneySplit>::Iterator itSplit;
-  eMyMoney::Account typ;
+  eMyMoney::Account::Type typ;
   QString chkAccntId;
   MyMoneyMoney qty;
   MyMoneyMoney value;
-  QMap<eMyMoney::Account, QString> map;
+  QMap<eMyMoney::Account::Type, QString> map;
 
   for (int i = 0; i < lst.count(); i++) {
     MyMoneyAccount acc = file->account(lst[i].accountId());
@@ -322,7 +322,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
     typ = acc.accountType();
     map.insert(typ, lst[i].accountId());
 
-    if (typ == eMyMoney::Account::Stock) {
+    if (typ == eMyMoney::Account::Type::Stock) {
       switch (lst[i].reconcileFlag()) {
         case eMyMoney::Split::State::Cleared:
           strStatus =  QLatin1Char('C');
@@ -348,30 +348,30 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
   for (itSplit = lst.begin(); itSplit != lst.end(); ++itSplit) {
     MyMoneyAccount acc = file->account((*itSplit).accountId());
     //
-    //  eMyMoney::Account::Checkings.
+    //  eMyMoney::Account::Type::Checkings.
     //
-    if ((acc.accountType() == eMyMoney::Account::Checkings) || (acc.accountType() == eMyMoney::Account::Cash) || (acc.accountType() == eMyMoney::Account::Savings)) {
+    if ((acc.accountType() == eMyMoney::Account::Type::Checkings) || (acc.accountType() == eMyMoney::Account::Type::Cash) || (acc.accountType() == eMyMoney::Account::Type::Savings)) {
       chkAccntId = (*itSplit).accountId();
       chkAccnt = file->account(chkAccntId).name();
       strCheckingAccountName = file->accountToCategory(chkAccntId) + m_separator;
       strAmount = (*itSplit).value().formatMoney("", 2).remove(localeThousands) + m_separator;
-    } else if (acc.accountType() == eMyMoney::Account::Income) {
+    } else if (acc.accountType() == eMyMoney::Account::Type::Income) {
       //
-      //  eMyMoney::Account::Income.
+      //  eMyMoney::Account::Type::Income.
       //
       qty = (*itSplit).shares();
       value = (*itSplit).value();
       strInterest = value.formatMoney("", 2, false) + m_separator;
-    } else if (acc.accountType() == eMyMoney::Account::Expense) {
+    } else if (acc.accountType() == eMyMoney::Account::Type::Expense) {
       //
-      //  eMyMoney::Account::Expense.
+      //  eMyMoney::Account::Type::Expense.
       //
       qty = (*itSplit).shares();
       value = (*itSplit).value();
       strFees = value.formatMoney("", 2, false) + m_separator;
-    }  else if (acc.accountType() == eMyMoney::Account::Stock) {
+    }  else if (acc.accountType() == eMyMoney::Account::Type::Stock) {
       //
-      //  eMyMoney::Account::Stock.
+      //  eMyMoney::Account::Type::Stock.
       //
       strMemo = QString("%1" + m_separator).arg((*itSplit).memo());
       strMemo.replace(QLatin1Char('\n'), QLatin1Char('~')).remove('\'');
@@ -384,7 +384,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         strAction = QLatin1String("IntIncX");
       }
       if ((strAction == QLatin1String("DivX")) || (strAction == QLatin1String("IntIncX"))) {
-        if ((map.value(eMyMoney::Account::Checkings).isEmpty()) && (map.value(eMyMoney::Account::Cash).isEmpty())) {
+        if ((map.value(eMyMoney::Account::Type::Checkings).isEmpty()) && (map.value(eMyMoney::Account::Type::Cash).isEmpty())) {
           KMessageBox::sorry(0, i18n("Transaction number '%1' is missing an account assignment.\n"
                                      "Date '%2', Amount '%3'.\nTransaction dropped.\n", count, t.postDate().toString(Qt::ISODate), strAmount),
                              i18n("Invalid transaction"));

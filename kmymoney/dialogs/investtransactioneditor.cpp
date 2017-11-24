@@ -620,13 +620,13 @@ void InvestTransactionEditor::slotReloadEditWidgets()
 
   // interest-account
   aSet.clear();
-  aSet.addAccountGroup(Account::Income);
+  aSet.addAccountGroup(Account::Type::Income);
   aSet.load(interest->selector());
   setupCategoryWidget(interest, d->m_interestSplits, id, SLOT(slotEditInterestSplits()));
 
   // fee-account
   aSet.clear();
-  aSet.addAccountGroup(Account::Expense);
+  aSet.addAccountGroup(Account::Type::Expense);
   aSet.load(fees->selector());
   setupCategoryWidget(fees, d->m_feeSplits, id, SLOT(slotEditFeeSplits()));
 
@@ -660,21 +660,21 @@ void InvestTransactionEditor::loadEditWidgets()
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = d->m_transaction.splits().constBegin(); !haveEquityAccount && it_s != d->m_transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountType() == Account::Equity)
+    if (acc.accountType() == Account::Type::Equity)
       haveEquityAccount = true;
   }
 
   // asset-account
   AccountSet aSet;
   aSet.clear();
-  aSet.addAccountType(Account::Checkings);
-  aSet.addAccountType(Account::Savings);
-  aSet.addAccountType(Account::Cash);
-  aSet.addAccountType(Account::Asset);
-  aSet.addAccountType(Account::Currency);
-  aSet.addAccountType(Account::CreditCard);
+  aSet.addAccountType(Account::Type::Checkings);
+  aSet.addAccountType(Account::Type::Savings);
+  aSet.addAccountType(Account::Type::Cash);
+  aSet.addAccountType(Account::Type::Asset);
+  aSet.addAccountType(Account::Type::Currency);
+  aSet.addAccountType(Account::Type::CreditCard);
   if (KMyMoneyGlobalSettings::expertMode() || haveEquityAccount)
-    aSet.addAccountGroup(Account::Equity);
+    aSet.addAccountGroup(Account::Type::Equity);
   aSet.load(asset->selector());
 
   // security
@@ -711,14 +711,14 @@ void InvestTransactionEditor::loadEditWidgets()
 
     // interest-account
     aSet.clear();
-    aSet.addAccountGroup(Account::Income);
+    aSet.addAccountGroup(Account::Type::Income);
     aSet.load(interest->selector());
     setupCategoryWidget(interest, d->m_interestSplits, id, SLOT(slotEditInterestSplits()));
     slotUpdateInterestVisibility(interest->currentText());
 
     // fee-account
     aSet.clear();
-    aSet.addAccountGroup(Account::Expense);
+    aSet.addAccountGroup(Account::Type::Expense);
     aSet.load(fees->selector());
     setupCategoryWidget(fees, d->m_feeSplits, id, SLOT(slotEditFeeSplits()));
     slotUpdateFeeVisibility(fees->currentText());

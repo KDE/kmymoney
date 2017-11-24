@@ -32,7 +32,7 @@
 
 #include "kmymoneymvccombo.h"
 
-namespace eMyMoney { enum class Account;}
+namespace eMyMoney { namespace Account { enum class Type; } }
 namespace eWidgets { namespace eRegister { enum class CashFlowDirection; } }
 
 /**
@@ -51,7 +51,7 @@ public:
     * Create a combo box that contains the entries "Pay to", "From" and
     * "  " for don't care.
     */
-  explicit KMyMoneyCashFlowCombo(eMyMoney::Account type, QWidget *parent = nullptr);
+  explicit KMyMoneyCashFlowCombo(eMyMoney::Account::Type type, QWidget *parent = nullptr);
   ~KMyMoneyCashFlowCombo() override;
 
   void setDirection(eWidgets::eRegister::CashFlowDirection dir);

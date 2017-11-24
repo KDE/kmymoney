@@ -240,7 +240,7 @@ void KGlobalLedgerView::init()
 
   // the proxy filter model
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
-  d->m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Asset, eMyMoney::Account::Liability, eMyMoney::Account::Equity});
+  d->m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
   auto const model = Models::instance()->accountsModel();
   d->m_filterProxyModel->setSourceModel(model);
   d->m_filterProxyModel->setSourceColumns(model->getColumns());
@@ -471,7 +471,7 @@ void KGlobalLedgerView::loadView()
     MyMoneyTransactionFilter filter(m_account.id());
     // if it's an investment account, we also take care of
     // the sub-accounts (stock accounts)
-    if (m_account.accountType() == eMyMoney::Account::Investment)
+    if (m_account.accountType() == eMyMoney::Account::Type::Investment)
       filter.addAccount(m_account.accountList());
 
     if (isReconciliationAccount()) {
@@ -612,7 +612,7 @@ void KGlobalLedgerView::loadView()
     // we need at least the balance for the account we currently show
     actBalance[m_account.id()] = MyMoneyMoney();
 
-    if (m_account.accountType() == eMyMoney::Account::Investment)
+    if (m_account.accountType() == eMyMoney::Account::Type::Investment)
       foreach (const auto accountID, m_account.accountList())
         actBalance[accountID] = MyMoneyMoney();
 
@@ -622,8 +622,8 @@ void KGlobalLedgerView::loadView()
     // selected before and setup the focus item.
 
     MyMoneyMoney factor(1, 1);
-    if (m_account.accountGroup() == eMyMoney::Account::Liability
-        || m_account.accountGroup() == eMyMoney::Account::Equity)
+    if (m_account.accountGroup() == eMyMoney::Account::Type::Liability
+        || m_account.accountGroup() == eMyMoney::Account::Type::Equity)
       factor = -factor;
 
     QMap<QString, int> deposits;
@@ -785,7 +785,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
   m_rightSummaryLabel->show();
 
   if (isReconciliationAccount()) {
-    if (m_account.accountType() != eMyMoney::Account::Investment) {
+    if (m_account.accountType() != eMyMoney::Account::Type::Investment) {
       m_leftSummaryLabel->setText(i18n("Statement: %1", d->m_endingBalance.formatMoney("", d->m_precision)));
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       d->m_totalBalance = clearedBalance[m_account.id()] - d->m_endingBalance;
@@ -802,7 +802,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
 
     QPalette palette = m_rightSummaryLabel->palette();
     palette.setColor(m_rightSummaryLabel->foregroundRole(), m_leftSummaryLabel->palette().color(foregroundRole()));
-    if (m_account.accountType() != eMyMoney::Account::Investment) {
+    if (m_account.accountType() != eMyMoney::Account::Type::Investment) {
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       d->m_totalBalance = actBalance[m_account.id()];
     } else {
@@ -858,10 +858,10 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
       m_rightSummaryLabel->setText(i18n("Difference: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
 
     } else {
-      if (m_account.accountType() != eMyMoney::Account::Investment) {
+      if (m_account.accountType() != eMyMoney::Account::Type::Investment) {
         m_rightSummaryLabel->setText(i18n("Balance: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
         bool showNegative = d->m_totalBalance.isNegative();
-        if (m_account.accountGroup() == eMyMoney::Account::Liability && !d->m_totalBalance.isZero())
+        if (m_account.accountGroup() == eMyMoney::Account::Type::Liability && !d->m_totalBalance.isZero())
           showNegative = !showNegative;
         if (showNegative) {
           QPalette palette = m_rightSummaryLabel->palette();
@@ -1012,7 +1012,7 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
     d->m_reconciliationAccount = acc.id();
     d->m_reconciliationDate = reconciliationDate;
     d->m_endingBalance = endingBalance;
-    if (acc.accountGroup() == eMyMoney::Account::Liability)
+    if (acc.accountGroup() == eMyMoney::Account::Type::Liability)
       d->m_endingBalance = -endingBalance;
 
     m_newAccountLoaded = true;
@@ -1112,9 +1112,9 @@ void KGlobalLedgerView::slotNewTransaction()
 void KGlobalLedgerView::setupDefaultAction()
 {
   switch (m_account.accountType()) {
-    case eMyMoney::Account::Asset:
-    case eMyMoney::Account::AssetLoan:
-    case eMyMoney::Account::Savings:
+    case eMyMoney::Account::Type::Asset:
+    case eMyMoney::Account::Type::AssetLoan:
+    case eMyMoney::Account::Type::Savings:
       d->m_action = eWidgets::eRegister::Action::Deposit;
       break;
     default:
@@ -1496,8 +1496,8 @@ bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
     tooltip = i18n("Cannot create transactions when no account is selected.");
     rc = false;
   }
-  if (m_account.accountGroup() == eMyMoney::Account::Income
-      || m_account.accountGroup() == eMyMoney::Account::Expense) {
+  if (m_account.accountGroup() == eMyMoney::Account::Type::Income
+      || m_account.accountGroup() == eMyMoney::Account::Type::Expense) {
     tooltip = i18n("Cannot create transactions in the context of a category.");
     showTooltip(tooltip);
     rc = false;
@@ -1578,8 +1578,8 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   int investmentTransactions = 0;
   int normalTransactions = 0;
 
-  if (m_account.accountGroup() == eMyMoney::Account::Income
-      || m_account.accountGroup() == eMyMoney::Account::Expense) {
+  if (m_account.accountGroup() == eMyMoney::Account::Type::Income
+      || m_account.accountGroup() == eMyMoney::Account::Type::Expense) {
     tooltip = i18n("Cannot edit transactions in the context of a category.");
     showTooltip(tooltip);
     rc = false;
@@ -1651,7 +1651,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
 
   // now check that we have the correct account type for investment transactions
   if (rc == true && investmentTransactions != 0) {
-    if (m_account.accountType() != eMyMoney::Account::Investment) {
+    if (m_account.accountType() != eMyMoney::Account::Type::Investment) {
       tooltip = i18n("Cannot edit investment transactions in the context of this account.");
       rc = false;
     }

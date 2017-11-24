@@ -164,7 +164,7 @@ void CsvExportDlg::checkData(const QString& accountName)
     account = file->accountByName(accountName);
     m_accountId = account.id();
     MyMoneyAccount accnt;
-    if (account.accountType() == eMyMoney::Account::Investment) {
+    if (account.accountType() == eMyMoney::Account::Type::Investment) {
       //  If this is Investment account, we need child account.
       QStringList listAccounts = account.accountList();
       QStringList::Iterator itAccounts;
@@ -227,9 +227,9 @@ QStringList CsvExportDlg::getAccounts()
   while (it_account != accounts.constEnd()) {
     MyMoneyAccount account((*it_account).id(), (*it_account));
     if (!account.isClosed()) {
-      eMyMoney::Account accntType = account.accountType();
-      eMyMoney::Account accntGroup = account.accountGroup();
-      if ((accntGroup == eMyMoney::Account::Liability)  || ((accntGroup == eMyMoney::Account::Asset) && (accntType != eMyMoney::Account::Stock))) {  //  ie Asset or Liability types
+      eMyMoney::Account::Type accntType = account.accountType();
+      eMyMoney::Account::Type accntGroup = account.accountGroup();
+      if ((accntGroup == eMyMoney::Account::Type::Liability)  || ((accntGroup == eMyMoney::Account::Type::Asset) && (accntType != eMyMoney::Account::Type::Stock))) {  //  ie Asset or Liability types
         list << account.name();
         m_idList << account.id();
       }

@@ -165,18 +165,18 @@ void StdTransactionEditor::createEditWidgets()
 
   bool showNumberField = true;
   switch (d->m_account.accountType()) {
-    case eMyMoney::Account::Savings:
-    case eMyMoney::Account::Cash:
-    case eMyMoney::Account::Loan:
-    case eMyMoney::Account::AssetLoan:
-    case eMyMoney::Account::Asset:
-    case eMyMoney::Account::Liability:
-    case eMyMoney::Account::Equity:
+    case eMyMoney::Account::Type::Savings:
+    case eMyMoney::Account::Type::Cash:
+    case eMyMoney::Account::Type::Loan:
+    case eMyMoney::Account::Type::AssetLoan:
+    case eMyMoney::Account::Type::Asset:
+    case eMyMoney::Account::Type::Liability:
+    case eMyMoney::Account::Type::Equity:
       showNumberField = KMyMoneyGlobalSettings::alwaysShowNrField();
       break;
 
-    case eMyMoney::Account::Income:
-    case eMyMoney::Account::Expense:
+    case eMyMoney::Account::Type::Income:
+    case eMyMoney::Account::Type::Expense:
       showNumberField = false;
       break;
 
@@ -309,14 +309,14 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   // load the account widget
   KMyMoneyCategory* account = dynamic_cast<KMyMoneyCategory*>(haveWidget("account"));
   if (account) {
-    aSet.addAccountGroup(eMyMoney::Account::Asset);
-    aSet.addAccountGroup(eMyMoney::Account::Liability);
-    aSet.removeAccountType(eMyMoney::Account::AssetLoan);
-    aSet.removeAccountType(eMyMoney::Account::CertificateDep);
-    aSet.removeAccountType(eMyMoney::Account::Investment);
-    aSet.removeAccountType(eMyMoney::Account::Stock);
-    aSet.removeAccountType(eMyMoney::Account::MoneyMarket);
-    aSet.removeAccountType(eMyMoney::Account::Loan);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
+    aSet.removeAccountType(eMyMoney::Account::Type::AssetLoan);
+    aSet.removeAccountType(eMyMoney::Account::Type::CertificateDep);
+    aSet.removeAccountType(eMyMoney::Account::Type::Investment);
+    aSet.removeAccountType(eMyMoney::Account::Type::Stock);
+    aSet.removeAccountType(eMyMoney::Account::Type::MoneyMarket);
+    aSet.removeAccountType(eMyMoney::Account::Type::Loan);
     aSet.load(account->selector());
     account->completion()->setSelected(d->m_account.id());
     account->slotItemSelected(d->m_account.id());
@@ -340,22 +340,22 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = d->m_transaction.splits().constBegin(); !haveEquityAccount && it_s != d->m_transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountType() == eMyMoney::Account::Equity)
+    if (acc.accountType() == eMyMoney::Account::Type::Equity)
       haveEquityAccount = true;
   }
 
   aSet.clear();
-  aSet.addAccountGroup(eMyMoney::Account::Asset);
-  aSet.addAccountGroup(eMyMoney::Account::Liability);
-  aSet.addAccountGroup(eMyMoney::Account::Income);
-  aSet.addAccountGroup(eMyMoney::Account::Expense);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Income);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
   if (KMyMoneyGlobalSettings::expertMode() || haveEquityAccount)
-    aSet.addAccountGroup(eMyMoney::Account::Equity);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
-  aSet.removeAccountType(eMyMoney::Account::CertificateDep);
-  aSet.removeAccountType(eMyMoney::Account::Investment);
-  aSet.removeAccountType(eMyMoney::Account::Stock);
-  aSet.removeAccountType(eMyMoney::Account::MoneyMarket);
+  aSet.removeAccountType(eMyMoney::Account::Type::CertificateDep);
+  aSet.removeAccountType(eMyMoney::Account::Type::Investment);
+  aSet.removeAccountType(eMyMoney::Account::Type::Stock);
+  aSet.removeAccountType(eMyMoney::Account::Type::MoneyMarket);
   aSet.load(category->selector());
 
   // if an account is specified then remove it from the widget so that the user
@@ -381,7 +381,7 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
       dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(d->m_split.number());
       if (d->m_transaction.id().isEmpty()                              // new transaction
           && dynamic_cast<KMyMoneyLineEdit*>(w)->text().isEmpty()   // no number filled in
-          && d->m_account.accountType() == eMyMoney::Account::Checkings   // checkings account
+          && d->m_account.accountType() == eMyMoney::Account::Type::Checkings   // checkings account
           && KMyMoneyGlobalSettings::autoIncCheckNumber()           // and auto inc number turned on?
           && action != eRegister::Action::Deposit              // only transfers or withdrawals
           && d->m_paymentMethod == eMyMoney::Schedule::PaymentType::WriteChecque) {// only for WriteChecque
@@ -536,12 +536,12 @@ void StdTransactionEditor::slotReloadEditWidgets()
   QString categoryId = category->selectedItem();
 
   AccountSet aSet;
-  aSet.addAccountGroup(eMyMoney::Account::Asset);
-  aSet.addAccountGroup(eMyMoney::Account::Liability);
-  aSet.addAccountGroup(eMyMoney::Account::Income);
-  aSet.addAccountGroup(eMyMoney::Account::Expense);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Income);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
   if (KMyMoneyGlobalSettings::expertMode())
-    aSet.addAccountGroup(eMyMoney::Account::Equity);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
   aSet.load(category->selector());
 
   // if an account is specified then remove it from the widget so that the user
@@ -916,7 +916,7 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
     if (!id.isEmpty()) {
       MyMoneyAccount acc = MyMoneyFile::instance()->account(id);
       if (acc.isAssetLiability()
-          || acc.accountGroup() == eMyMoney::Account::Equity) {
+          || acc.accountGroup() == eMyMoney::Account::Type::Equity) {
         if (tabbar) {
           tabbar->setCurrentIndex((int)eRegister::Action::Transfer);
           tabbar->setTabEnabled((int)eRegister::Action::Deposit, false);

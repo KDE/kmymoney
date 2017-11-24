@@ -249,30 +249,30 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
       d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Withdrawal"));
       break;
 
-    case eMyMoney::Account::CreditCard:
+    case eMyMoney::Account::Type::CreditCard:
       d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Payment"));
       d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
       d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Charge"));
       break;
 
-    case eMyMoney::Account::Liability:
-    case eMyMoney::Account::Loan:
+    case eMyMoney::Account::Type::Liability:
+    case eMyMoney::Account::Type::Loan:
       d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Decrease"));
       d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
       d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Increase"));
       break;
 
-    case eMyMoney::Account::Asset:
-    case eMyMoney::Account::AssetLoan:
+    case eMyMoney::Account::Type::Asset:
+    case eMyMoney::Account::Type::AssetLoan:
       d->m_tabBar->insertTab((int)eRegister::Action::Deposit, i18n("&Increase"));
       d->m_tabBar->insertTab((int)eRegister::Action::Transfer, i18n("&Transfer"));
       d->m_tabBar->insertTab((int)eRegister::Action::Withdrawal, i18n("&Decrease"));
       break;
 
-    case eMyMoney::Account::Income:
-    case eMyMoney::Account::Expense:
-    case eMyMoney::Account::Investment:
-    case eMyMoney::Account::Stock:
+    case eMyMoney::Account::Type::Income:
+    case eMyMoney::Account::Type::Expense:
+    case eMyMoney::Account::Type::Investment:
+    case eMyMoney::Account::Type::Stock:
       d->m_tabBar->hide();
       break;
   }

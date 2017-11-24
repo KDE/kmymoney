@@ -62,8 +62,8 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
   storage->accountList(a_list);
   ui->m_accountCount->setText(QString::fromLatin1("%1").arg(a_list.count()));
 
-  QMap<eMyMoney::Account, int> accountMap;
-  QMap<eMyMoney::Account, int> accountMapClosed;
+  QMap<eMyMoney::Account::Type, int> accountMap;
+  QMap<eMyMoney::Account::Type, int> accountMapClosed;
   QList<MyMoneyAccount>::const_iterator it_a;
   for (it_a = a_list.constBegin(); it_a != a_list.constEnd(); ++it_a) {
     accountMap[(*it_a).accountType()] = accountMap[(*it_a).accountType()] + 1;
@@ -72,7 +72,7 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
       accountMapClosed[(*it_a).accountType()] = accountMapClosed[(*it_a).accountType()] + 1;
   }
 
-  QMap<eMyMoney::Account, int>::const_iterator it_m;
+  QMap<eMyMoney::Account::Type, int>::const_iterator it_m;
   for (it_m = accountMap.constBegin(); it_m != accountMap.constEnd(); ++it_m) {
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setText(0, MyMoneyAccount::accountTypeToString(it_m.key()));

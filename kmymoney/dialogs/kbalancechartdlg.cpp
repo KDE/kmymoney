@@ -99,7 +99,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingForecast(true);
   reportCfg.setIncludingBudgetActuals(true);
-  if (account.accountType() == eMyMoney::Account::Investment) {
+  if (account.accountType() == eMyMoney::Account::Type::Investment) {
     foreach (const auto accountID, account.accountList())
       reportCfg.addAccount(accountID);
   } else
@@ -119,7 +119,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   bool haveMaxCredit = false;
   MyMoneyMoney minBalance, maxCredit;
   MyMoneyMoney factor(1, 1);
-  if (account.accountGroup() == eMyMoney::Account::Asset)
+  if (account.accountGroup() == eMyMoney::Account::Type::Asset)
     factor = -factor;
 
   if (!account.value("maxCreditEarly").isEmpty()) {

@@ -79,12 +79,12 @@ void MatchFinderTest::setupAccounts()
 
 
   account->setName("Expenses account");
-  account->setAccountType(eMyMoney::Account::Expense);
+  account->setAccountType(eMyMoney::Account::Type::Expense);
   account->setOpeningDate(QDate(2012, 12, 01));
   account->setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());
 
   otherAccount->setName("Some other account");
-  otherAccount->setAccountType(eMyMoney::Account::Expense);
+  otherAccount->setAccountType(eMyMoney::Account::Type::Expense);
   otherAccount->setOpeningDate(QDate(2012, 12, 01));
   otherAccount->setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());
 

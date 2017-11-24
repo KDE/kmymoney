@@ -66,10 +66,10 @@ void KAccountsView::refresh()
   d->m_proxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   if (KMyMoneyGlobalSettings::showCategoriesInAccountsView()) {
-    d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account> {eMyMoney::Account::Income, eMyMoney::Account::Expense});
+    d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
   } else {
-    d->m_proxyModel->removeAccountType(eMyMoney::Account::Income);
-    d->m_proxyModel->removeAccountType(eMyMoney::Account::Expense);
+    d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Income);
+    d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Expense);
   }
 
   // reinitialize the default state of the hidden categories label

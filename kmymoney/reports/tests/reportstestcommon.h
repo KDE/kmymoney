@@ -119,7 +119,7 @@ class BudgetHelper: public QList<BudgetEntryHelper>
   MyMoneyMoney budgetAmount(const QDate& _date, const QString& _categoryid, bool& _applytosub);
 };
 
-extern QString makeAccount(const QString& _name, eMyMoney::Account _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency = "", bool _taxReport = false, bool _openingBalance = false);
+extern QString makeAccount(const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency = "", bool _taxReport = false, bool _openingBalance = false);
 extern void makePrice(const QString& _currencyid, const QDate& _date, const MyMoneyMoney& _price);
 QString makeEquity(const QString& _name, const QString& _symbol);
 extern void makeEquityPrice(const QString& _id, const QDate& _date, const MyMoneyMoney& _price);

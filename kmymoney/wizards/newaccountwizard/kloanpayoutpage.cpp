@@ -107,7 +107,7 @@ namespace NewAccountWizard
   {
     Q_D(LoanPayoutPage);
     MyMoneyAccount acc;
-    acc.setAccountType(Account::Asset);
+    acc.setAccountType(Account::Type::Asset);
     acc.setOpeningDate(d->m_wizard->d_func()->m_accountTypePage->d_func()->ui->m_openingDate->date());
 
     emit d->m_wizard->createAccount(acc);
@@ -121,11 +121,11 @@ namespace NewAccountWizard
   {
     Q_D(LoanPayoutPage);
     AccountSet set;
-    set.addAccountGroup(Account::Asset);
+    set.addAccountGroup(Account::Type::Asset);
     set.load(d->ui->m_assetAccount->selector());
 
     set.clear();
-    set.addAccountType(Account::Loan);
+    set.addAccountType(Account::Type::Loan);
     set.load(d->ui->m_loanAccount->selector());
   }
 

@@ -33,7 +33,7 @@
 namespace eWidgets { enum class SortField;
                      namespace Transaction { enum class Column; }
                      namespace Register { enum class DetailColumn;} }
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 namespace KMyMoneyRegister
 {
@@ -45,7 +45,7 @@ namespace KMyMoneyRegister
     Q_DISABLE_COPY(TypeGroupMarker)
 
   public:
-    explicit TypeGroupMarker(Register* getParent, eWidgets::eRegister::CashFlowDirection dir, eMyMoney::Account accType);
+    explicit TypeGroupMarker(Register* getParent, eWidgets::eRegister::CashFlowDirection dir, eMyMoney::Account::Type accType);
     ~TypeGroupMarker() override;
 
     eWidgets::eRegister::CashFlowDirection sortType() const override;

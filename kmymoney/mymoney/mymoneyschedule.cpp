@@ -16,13 +16,13 @@
  ***************************************************************************/
 
 #include "mymoneyschedule.h"
+#include "mymoneyschedule_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QList>
 #include <QMap>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,73 +36,14 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 #include "imymoneyprocessingcalendar.h"
 #include "mymoneystoragenames.h"
-#include "mymoneyenums.h"
 
 using namespace MyMoneyStorageNodes;
 using namespace eMyMoney;
 
 static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
-
-class MyMoneySchedulePrivate {
-
-public:
-  MyMoneySchedulePrivate()
-  : m_occurrence(Schedule::Occurrence::Any)
-  , m_occurrenceMultiplier(1)
-  , m_type(Schedule::Type::Any)
-  , m_paymentType(Schedule::PaymentType::Any)
-  , m_fixed(false)
-  , m_lastDayInMonth(false)
-  , m_autoEnter(false)
-  , m_weekendOption(Schedule::WeekendOption::MoveNothing)
-  {}
-
-  /// Its occurrence
-  eMyMoney::Schedule::Occurrence m_occurrence;
-
-  /// Its occurrence multiplier
-  int m_occurrenceMultiplier;
-
-  /// Its type
-  eMyMoney::Schedule::Type m_type;
-
-  /// The date the schedule commences
-  QDate m_startDate;
-
-  /// The payment type
-  eMyMoney::Schedule::PaymentType m_paymentType;
-
-  /// Can the amount vary
-  bool m_fixed;
-
-  /// The, possibly estimated, amount plus all other relevant details
-  MyMoneyTransaction m_transaction;
-
-  /// The last transaction date if the schedule does end at a fixed date
-  QDate m_endDate;
-
-  /// the last day in month flag
-  bool m_lastDayInMonth;
-
-  /// Enter the transaction into the register automatically
-  bool m_autoEnter;
-
-  /// Internal date used for calculations
-  QDate m_lastPayment;
-
-  /// The name
-  QString m_name;
-
-  /// The recorded payments
-  QList<QDate> m_recordedPayments;
-
-  /// The weekend option
-  eMyMoney::Schedule::WeekendOption m_weekendOption;
-};
 
 MyMoneySchedule::MyMoneySchedule() :
     MyMoneyObject(),
@@ -143,21 +84,21 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
     throw MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
 
   Q_D(MyMoneySchedule);
-  d->m_name = node.attribute(getAttrName(Attribute::Name));
-  d->m_startDate = stringToDate(node.attribute(getAttrName(Attribute::StartDate)));
-  d->m_endDate = stringToDate(node.attribute(getAttrName(Attribute::EndDate)));
-  d->m_lastPayment = stringToDate(node.attribute(getAttrName(Attribute::LastPayment)));
+  d->m_name = node.attribute(d->getAttrName(Schedule::Attribute::Name));
+  d->m_startDate = stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::StartDate)));
+  d->m_endDate = stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::EndDate)));
+  d->m_lastPayment = stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::LastPayment)));
 
-  d->m_type = static_cast<Schedule::Type>(node.attribute(getAttrName(Attribute::Type)).toInt());
-  d->m_paymentType = static_cast<Schedule::PaymentType>(node.attribute(getAttrName(Attribute::PaymentType)).toInt());
-  d->m_occurrence = static_cast<Schedule::Occurrence>(node.attribute(getAttrName(Attribute::Occurrence)).toInt()); // krazy:exclude=spelling
-  d->m_occurrenceMultiplier = node.attribute(getAttrName(Attribute::OccurrenceMultiplier), "1").toInt(); // krazy:exclude=spelling
+  d->m_type = static_cast<Schedule::Type>(node.attribute(d->getAttrName(Schedule::Attribute::Type)).toInt());
+  d->m_paymentType = static_cast<Schedule::PaymentType>(node.attribute(d->getAttrName(Schedule::Attribute::PaymentType)).toInt());
+  d->m_occurrence = static_cast<Schedule::Occurrence>(node.attribute(d->getAttrName(Schedule::Attribute::Occurrence)).toInt()); // krazy:exclude=spelling
+  d->m_occurrenceMultiplier = node.attribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), "1").toInt(); // krazy:exclude=spelling
   // Convert to compound occurrence
   simpleToCompoundOccurrence(d->m_occurrenceMultiplier, d->m_occurrence);
   d->m_lastDayInMonth = static_cast<bool>(node.attribute("lastDayInMonth").toInt());
-  d->m_autoEnter = static_cast<bool>(node.attribute(getAttrName(Attribute::AutoEnter)).toInt());
-  d->m_fixed = static_cast<bool>(node.attribute(getAttrName(Attribute::Fixed)).toInt());
-  d->m_weekendOption = static_cast<Schedule::WeekendOption>(node.attribute(getAttrName(Attribute::WeekendOption)).toInt());
+  d->m_autoEnter = static_cast<bool>(node.attribute(d->getAttrName(Schedule::Attribute::AutoEnter)).toInt());
+  d->m_fixed = static_cast<bool>(node.attribute(d->getAttrName(Schedule::Attribute::Fixed)).toInt());
+  d->m_weekendOption = static_cast<Schedule::WeekendOption>(node.attribute(d->getAttrName(Schedule::Attribute::WeekendOption)).toInt());
 
   // read in the associated transaction
   QDomNodeList nodeList = node.elementsByTagName(nodeNames[nnTransaction]);
@@ -175,11 +116,11 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   }
 
   // readin the recorded payments
-  nodeList = node.elementsByTagName(getElName(Element::Payments));
+  nodeList = node.elementsByTagName(d->getElName(Schedule::Element::Payments));
   if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(Element::Payment));
+    nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Schedule::Element::Payment));
     for (int i = 0; i < nodeList.count(); ++i) {
-      d->m_recordedPayments << stringToDate(nodeList.item(i).toElement().attribute(getAttrName(Attribute::Date)));
+      d->m_recordedPayments << stringToDate(nodeList.item(i).toElement().attribute(d->getAttrName(Schedule::Attribute::Date)));
     }
   }
 
@@ -1003,26 +944,26 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   writeBaseXML(document, el);
 
   Q_D(const MyMoneySchedule);
-  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
-  el.setAttribute(getAttrName(Attribute::Type), (int)d->m_type);
-  el.setAttribute(getAttrName(Attribute::Occurrence), (int)d->m_occurrence); // krazy:exclude=spelling
-  el.setAttribute(getAttrName(Attribute::OccurrenceMultiplier), d->m_occurrenceMultiplier);
-  el.setAttribute(getAttrName(Attribute::PaymentType), (int)d->m_paymentType);
-  el.setAttribute(getAttrName(Attribute::StartDate), dateToString(d->m_startDate));
-  el.setAttribute(getAttrName(Attribute::EndDate), dateToString(d->m_endDate));
-  el.setAttribute(getAttrName(Attribute::Fixed), d->m_fixed);
-  el.setAttribute(getAttrName(Attribute::LastDayInMonth), d->m_lastDayInMonth);
-  el.setAttribute(getAttrName(Attribute::AutoEnter), d->m_autoEnter);
-  el.setAttribute(getAttrName(Attribute::LastPayment), dateToString(d->m_lastPayment));
-  el.setAttribute(getAttrName(Attribute::WeekendOption), (int)d->m_weekendOption);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::Name), d->m_name);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::Type), (int)d->m_type);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence); // krazy:exclude=spelling
+  el.setAttribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), d->m_occurrenceMultiplier);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::PaymentType), (int)d->m_paymentType);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::StartDate), dateToString(d->m_startDate));
+  el.setAttribute(d->getAttrName(Schedule::Attribute::EndDate), dateToString(d->m_endDate));
+  el.setAttribute(d->getAttrName(Schedule::Attribute::Fixed), d->m_fixed);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::LastDayInMonth), d->m_lastDayInMonth);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::AutoEnter), d->m_autoEnter);
+  el.setAttribute(d->getAttrName(Schedule::Attribute::LastPayment), dateToString(d->m_lastPayment));
+  el.setAttribute(d->getAttrName(Schedule::Attribute::WeekendOption), (int)d->m_weekendOption);
 
   //store the payment history for this scheduled task.
   QList<QDate> payments = recordedPayments();
   QList<QDate>::ConstIterator it;
-  QDomElement paymentsElement = document.createElement(getElName(Element::Payments));
+  QDomElement paymentsElement = document.createElement(d->getElName(Schedule::Element::Payments));
   for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
-    QDomElement paymentEntry = document.createElement(getElName(Element::Payment));
-    paymentEntry.setAttribute(getAttrName(Attribute::Date), dateToString(*it));
+    QDomElement paymentEntry = document.createElement(d->getElName(Schedule::Element::Payment));
+    paymentEntry.setAttribute(d->getAttrName(Schedule::Attribute::Date), dateToString(*it));
     paymentsElement.appendChild(paymentEntry);
   }
   el.appendChild(paymentsElement);
@@ -1611,33 +1552,4 @@ bool MyMoneySchedule::replaceId(const QString& newId, const QString& oldId)
 {
   Q_D(MyMoneySchedule);
   return d->m_transaction.replaceId(newId, oldId);
-}
-
-QString MyMoneySchedule::getElName(const Element el)
-{
-  static const QMap<Element, QString> elNames = {
-    {Element::Payment,  QStringLiteral("PAYMENT")},
-    {Element::Payments, QStringLiteral("PAYMENTS")}
-  };
-  return elNames[el];
-}
-
-QString MyMoneySchedule::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::Name,                 QStringLiteral("name")},
-    {Attribute::Type,                 QStringLiteral("type")},
-    {Attribute::Occurrence,           QStringLiteral("occurence")},
-    {Attribute::OccurrenceMultiplier, QStringLiteral("occurenceMultiplier")},
-    {Attribute::PaymentType,          QStringLiteral("paymentType")},
-    {Attribute::Fixed,                QStringLiteral("fixed")},
-    {Attribute::AutoEnter,            QStringLiteral("autoEnter")},
-    {Attribute::LastPayment,          QStringLiteral("lastPayment")},
-    {Attribute::WeekendOption,        QStringLiteral("weekendOption")},
-    {Attribute::Date,                 QStringLiteral("date")},
-    {Attribute::StartDate,            QStringLiteral("startDate")},
-    {Attribute::EndDate,              QStringLiteral("endDate")},
-    {Attribute::LastDayInMonth,       QStringLiteral("lastDayInMonth")}
-  };
-  return attrNames[attr];
 }

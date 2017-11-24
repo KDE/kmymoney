@@ -1696,7 +1696,7 @@ void QueryTable::constructAccountTable()
     // Note, "Investment" accounts are never included in account rows because
     // they don't contain anything by themselves.  In reports, they are only
     // useful as a "topaccount" aggregator of stock accounts
-    if ((*it_account).isAssetLiability() && m_config.includes((*it_account)) && (*it_account).accountType() != eMyMoney::Account::Investment) {
+    if ((*it_account).isAssetLiability() && m_config.includes((*it_account)) && (*it_account).accountType() != eMyMoney::Account::Type::Investment) {
       // don't add the account if it is closed. In fact, the business logic
       // should prevent that an account can be closed with a balance not equal
       // to zero, but we never know.

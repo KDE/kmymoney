@@ -442,7 +442,7 @@ public:
         QStringList::const_iterator it_a, it_b;
         for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-          if (acc.accountType() == eMyMoney::Account::Investment) {
+          if (acc.accountType() == eMyMoney::Account::Type::Investment) {
             for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
               if (!list.contains(*it_b)) {
                 missing.append(*it_b);
@@ -589,8 +589,8 @@ public:
     Q_Q(KFindTransactionDlg);
     ui->m_categoriesView->setSelectionMode(QTreeWidget::MultiSelection);
     AccountSet categorySet;
-    categorySet.addAccountGroup(eMyMoney::Account::Income);
-    categorySet.addAccountGroup(eMyMoney::Account::Expense);
+    categorySet.addAccountGroup(eMyMoney::Account::Type::Income);
+    categorySet.addAccountGroup(eMyMoney::Account::Type::Expense);
     categorySet.load(ui->m_categoriesView);
     q->connect(ui->m_categoriesView, &KMyMoneyAccountSelector::stateChanged, q, &KFindTransactionDlg::slotUpdateSelections);
   }
@@ -600,11 +600,11 @@ public:
     Q_Q(KFindTransactionDlg);
     ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
     AccountSet accountSet;
-    accountSet.addAccountGroup(eMyMoney::Account::Asset);
-    accountSet.addAccountGroup(eMyMoney::Account::Liability);
+    accountSet.addAccountGroup(eMyMoney::Account::Type::Asset);
+    accountSet.addAccountGroup(eMyMoney::Account::Type::Liability);
 
     if (withEquityAccounts)
-      accountSet.addAccountGroup(eMyMoney::Account::Equity);
+      accountSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
     //set the accountset to show closed account if the settings say so
     accountSet.setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());

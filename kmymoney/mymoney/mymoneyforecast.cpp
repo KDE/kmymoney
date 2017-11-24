@@ -289,7 +289,7 @@ public:
             dailyBalances balance;
             balance = m_accountList[acc.id()];
             //if it is income, the balance is stored as negative number
-            if (acc.accountType() == eMyMoney::Account::Income) {
+            if (acc.accountType() == eMyMoney::Account::Type::Income) {
               balance[(*it_t).postDate()] += ((*it_s).shares() * MyMoneyMoney::MINUS_ONE);
             } else {
               balance[(*it_t).postDate()] += (*it_s).shares();
@@ -370,7 +370,7 @@ public:
 
         if (!acc.id().isEmpty()) {
           try {
-            if (acc.accountType() != eMyMoney::Account::Investment) {
+            if (acc.accountType() != eMyMoney::Account::Type::Investment) {
               MyMoneyTransaction t = (*it).transaction();
 
               // only process the entry, if it is still active
@@ -414,7 +414,7 @@ public:
                     if (QDate::currentDate() >= nextDate)
                       forecastDate = QDate::currentDate().addDays(1);
 
-                    if (acc.accountType() == eMyMoney::Account::Income) {
+                    if (acc.accountType() == eMyMoney::Account::Type::Income) {
                       balance[forecastDate] += ((*it_s).shares() * MyMoneyMoney::MINUS_ONE);
                     } else {
                       balance[forecastDate] += (*it_s).shares();
@@ -512,7 +512,7 @@ public:
     if (forecastMethod() == eForecastMethod::Historic && q->historyMethod() == 2) {
       //FIXME workaround for stock opening dates
       QDate openingDate;
-      if (acc.accountType() == eMyMoney::Account::Stock) {
+      if (acc.accountType() == eMyMoney::Account::Type::Stock) {
         auto parentAccount = file->account(acc.parentAccountId());
         openingDate = parentAccount.openingDate();
       } else {
@@ -655,7 +655,7 @@ public:
       if (q->skipOpeningDate()) {
 
         QDate openingDate;
-        if (acc.accountType() == eMyMoney::Account::Stock) {
+        if (acc.accountType() == eMyMoney::Account::Type::Stock) {
           auto parentAccount = file->account(acc.parentAccountId());
           openingDate = parentAccount.openingDate();
         } else {
@@ -758,7 +758,7 @@ public:
 
           //workaround for stock accounts which have faulty opening dates
           QDate openingDate;
-          if (acc.accountType() == eMyMoney::Account::Stock) {
+          if (acc.accountType() == eMyMoney::Account::Type::Stock) {
             auto parentAccount = file->account(acc.parentAccountId());
             openingDate = parentAccount.openingDate();
           } else {
@@ -771,7 +771,7 @@ public:
             dailyBalances balance;
             //FIXME deal with leap years
             balance = m_accountListPast[acc.id()];
-            if (acc.accountType() == eMyMoney::Account::Income) {//if it is income, the balance is stored as negative number
+            if (acc.accountType() == eMyMoney::Account::Type::Income) {//if it is income, the balance is stored as negative number
               balance[(*it_t).postDate()] += ((*it_s).shares() * MyMoneyMoney::MINUS_ONE);
             } else {
               balance[(*it_t).postDate()] += (*it_s).shares();
@@ -1128,8 +1128,8 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, i
   }
   //get all transactions for the period
   filter.setDateFilter(startDate, QDate::currentDate());
-  if (acc.accountGroup() == eMyMoney::Account::Income
-      || acc.accountGroup() == eMyMoney::Account::Expense) {
+  if (acc.accountGroup() == eMyMoney::Account::Type::Income
+      || acc.accountGroup() == eMyMoney::Account::Type::Expense) {
     filter.addCategory(acc.id());
   } else {
     filter.addAccount(acc.id());
@@ -1228,14 +1228,14 @@ int MyMoneyForecast::daysToZeroBalance(const MyMoneyAccount& acc)
 
   balance = d->m_accountList[acc.id()];
 
-  if (acc.accountGroup() == eMyMoney::Account::Asset) {
+  if (acc.accountGroup() == eMyMoney::Account::Type::Asset) {
     for (QDate it_day = QDate::currentDate() ; it_day <= forecastEndDate();) {
       if (balance[it_day] < MyMoneyMoney()) {
         return QDate::currentDate().daysTo(it_day);
       }
       it_day = it_day.addDays(1);
     }
-  } else if (acc.accountGroup() == eMyMoney::Account::Liability) {
+  } else if (acc.accountGroup() == eMyMoney::Account::Type::Liability) {
     for (QDate it_day = QDate::currentDate() ; it_day <= forecastEndDate();) {
       if (balance[it_day] > MyMoneyMoney()) {
         return QDate::currentDate().daysTo(it_day);
@@ -1678,7 +1678,7 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
       interest = interest.abs();    // make sure it's positive for now
       amortization = acc.periodicPayment() - interest;
 
-      if (acc.accountType() == eMyMoney::Account::AssetLoan) {
+      if (acc.accountType() == eMyMoney::Account::Type::AssetLoan) {
         interest = -interest;
         amortization = -amortization;
       }
@@ -1711,7 +1711,7 @@ QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList()
     auto acc = *accList_t;
     if (acc.isClosed()            //check the account is not closed
         || (!acc.isAssetLiability())) {
-      //|| (acc.accountType() == eMyMoney::Account::Investment) ) {//check that it is not an Investment account and only include Stock accounts
+      //|| (acc.accountType() == eMyMoney::Account::Type::Investment) ) {//check that it is not an Investment account and only include Stock accounts
       //remove the account if it is not of the correct type
       accList_t = accList.erase(accList_t);
     } else {

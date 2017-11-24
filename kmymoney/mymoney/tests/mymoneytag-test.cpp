@@ -21,6 +21,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyTagTest;
 
 #include "mymoneytag.h"
+#include "mymoneytag_p.h"
 
 using namespace std;
 
@@ -41,8 +42,8 @@ void MyMoneyTagTest::testXml()
 
 void MyMoneyTagTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneyTag::Attribute::Name; i < (int)MyMoneyTag::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyTag::getAttrName(static_cast<MyMoneyTag::Attribute>(i)).isEmpty();
+  for (auto i = (int)Tag::Attribute::Name; i < (int)Tag::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyTagPrivate::getAttrName(static_cast<Tag::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

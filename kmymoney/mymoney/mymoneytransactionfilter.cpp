@@ -414,8 +414,8 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       const MyMoneyAccount& acc = file->account(s->accountId());
       if (d->m_considerCategory) {
         switch (acc.accountGroup()) {
-          case eMyMoney::Account::Income:
-          case eMyMoney::Account::Expense:
+          case eMyMoney::Account::Type::Income:
+          case eMyMoney::Account::Type::Expense:
             isTransfer = false;
             // check if the split references one of the categories in the list
             if (d->m_filterSet.singleFilter.categoryFilter) {
@@ -497,8 +497,8 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       // Determine if this account is a category or an account
       bool isCategory = false;
       switch (acc.accountGroup()) {
-        case eMyMoney::Account::Income:
-        case eMyMoney::Account::Expense:
+        case eMyMoney::Account::Type::Income:
+        case eMyMoney::Account::Type::Expense:
           isCategory = true;
         default:
           break;
@@ -616,8 +616,8 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
   auto file = MyMoneyFile::instance();
   MyMoneyAccount a, b;
   a = file->account(split.accountId());
-  if ((a.accountGroup() == eMyMoney::Account::Income
-       || a.accountGroup() == eMyMoney::Account::Expense))
+  if ((a.accountGroup() == eMyMoney::Account::Type::Income
+       || a.accountGroup() == eMyMoney::Account::Type::Expense))
     return (int)eMyMoney::TransactionFilter::Type::All;
 
   if (t.splitCount() == 2) {
@@ -629,10 +629,10 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 
     a = file->account(ida);
     b = file->account(idb);
-    if ((a.accountGroup() != eMyMoney::Account::Expense
-         && a.accountGroup() != eMyMoney::Account::Income)
-        && (b.accountGroup() != eMyMoney::Account::Expense
-            && b.accountGroup() != eMyMoney::Account::Income))
+    if ((a.accountGroup() != eMyMoney::Account::Type::Expense
+         && a.accountGroup() != eMyMoney::Account::Type::Income)
+        && (b.accountGroup() != eMyMoney::Account::Type::Expense
+            && b.accountGroup() != eMyMoney::Account::Type::Income))
       return (int)eMyMoney::TransactionFilter::Type::Transfers;
   }
 

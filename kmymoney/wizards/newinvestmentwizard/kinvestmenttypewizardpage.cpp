@@ -39,9 +39,9 @@ KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent) :
   ui(new Ui::KInvestmentTypeWizardPage)
 {
   ui->setupUi(this);
-  ui->m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Stock);
-  ui->m_securityType->addItem(i18nc("Security type", "Mutual Fund"), (int)eMyMoney::Security::MutualFund);
-  ui->m_securityType->addItem(i18nc("Security type", "Bond"), (int)eMyMoney::Security::Bond);
+  ui->m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Type::Stock);
+  ui->m_securityType->addItem(i18nc("Security type", "Mutual Fund"), (int)eMyMoney::Security::Type::MutualFund);
+  ui->m_securityType->addItem(i18nc("Security type", "Bond"), (int)eMyMoney::Security::Type::Bond);
   registerField("securityType", ui->m_securityType, "currentData", SIGNAL(currentIndexChanged(int)));
 }
 

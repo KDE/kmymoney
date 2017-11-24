@@ -16,14 +16,12 @@
  ***************************************************************************/
 
 #include "mymoneytransaction.h"
+#include "mymoneytransaction_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QList>
 #include <QStringList>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -31,55 +29,8 @@
 #include "mymoneystoragenames.h"
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
-#include "mymoneysplit.h"
 
 using namespace MyMoneyStorageNodes;
-
-class MyMoneyTransactionPrivate {
-
-public:
-  /**
-    * This member contains the date when the transaction was entered
-    * into the engine
-    */
-  QDate m_entryDate;
-
-  /**
-    * This member contains the date the transaction was posted
-    */
-  QDate m_postDate;
-
-  /**
-    * This member keeps the memo text associated with this transaction
-    */
-  QString m_memo;
-
-  /**
-    * This member contains the splits for this transaction
-    */
-  QList<MyMoneySplit> m_splits;
-
-  /**
-    * This member keeps the unique numbers of splits within this
-    * transaction. Upon creation of a MyMoneyTransaction object this
-    * value will be set to 1.
-    */
-  uint m_nextSplitID;
-
-  /**
-    * This member keeps the base commodity (e.g. currency) for this transaction
-    */
-  QString  m_commodity;
-
-  /**
-    * This member keeps the bank's unique ID for the transaction, so we can
-    * avoid duplicates.  This is only used for electronic statement downloads.
-    *
-    * Note this is now deprecated!  Bank ID's should be set on splits, not transactions.
-    */
-  QString m_bankID;
-
-};
 
 MyMoneyTransaction::MyMoneyTransaction() :
     MyMoneyObject(),
@@ -101,19 +52,19 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
 
   d->m_nextSplitID = 1;
 
-  d->m_postDate = stringToDate(node.attribute(getAttrName(Attribute::PostDate)));
-  d->m_entryDate = stringToDate(node.attribute(getAttrName(Attribute::EntryDate)));
-  d->m_bankID = QStringEmpty(node.attribute(getAttrName(Attribute::BankID)));
-  d->m_memo = QStringEmpty(node.attribute(getAttrName(Attribute::Memo)));
-  d->m_commodity = QStringEmpty(node.attribute(getAttrName(Attribute::Commodity)));
+  d->m_postDate = stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::PostDate)));
+  d->m_entryDate = stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::EntryDate)));
+  d->m_bankID = QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::BankID)));
+  d->m_memo = QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Memo)));
+  d->m_commodity = QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Commodity)));
 
   QDomNode child = node.firstChild();
   while (!child.isNull() && child.isElement()) {
     QDomElement c = child.toElement();
-    if (c.tagName() == getElName(Element::Splits)) {
+    if (c.tagName() == d->getElName(Transaction::Element::Splits)) {
 
       // Process any split information found inside the transaction entry.
-      QDomNodeList nodeList = c.elementsByTagName(getElName(Element::Split));
+      QDomNodeList nodeList = c.elementsByTagName(d->getElName(Transaction::Element::Split));
       for (int i = 0; i < nodeList.count(); ++i) {
         MyMoneySplit s(nodeList.item(i).toElement());
         if (!d->m_bankID.isEmpty())
@@ -289,10 +240,10 @@ void MyMoneyTransaction::addSplit(MyMoneySplit &split)
   if (split.accountId().isEmpty())
     throw MYMONEYEXCEPTION("Cannot add split that does not contain an account reference");
 
-  MyMoneySplit newSplit(nextSplitID(), split);
+  Q_D(MyMoneyTransaction);
+  MyMoneySplit newSplit(d->nextSplitID(), split);
   split = newSplit;
   split.setTransactionId(id());
-  Q_D(MyMoneyTransaction);
   d->m_splits.append(split);
 }
 
@@ -380,18 +331,10 @@ MyMoneySplit MyMoneyTransaction::splitById(const QString& splitId) const
   throw MYMONEYEXCEPTION(QString("Split not found for id '%1'").arg(QString(splitId)));
 }
 
-QString MyMoneyTransaction::nextSplitID()
-{
-  Q_D(MyMoneyTransaction);
-  QString id;
-  id = 'S' + id.setNum(d->m_nextSplitID++).rightJustified(SPLIT_ID_SIZE, '0');
-  return id;
-}
-
 QString MyMoneyTransaction::firstSplitID()
 {
   QString id;
-  id = 'S' + id.setNum(1).rightJustified(SPLIT_ID_SIZE, '0');
+  id = 'S' + id.setNum(1).rightJustified(MyMoneyTransactionPrivate::SPLIT_ID_SIZE, '0');
   return id;
 }
 
@@ -490,12 +433,12 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
   auto el = document.createElement(nodeNames[nnTransaction]);
 
   writeBaseXML(document, el);
-  el.setAttribute(getAttrName(Attribute::PostDate), dateToString(d->m_postDate));
-  el.setAttribute(getAttrName(Attribute::Memo), d->m_memo);
-  el.setAttribute(getAttrName(Attribute::EntryDate), dateToString(d->m_entryDate));
-  el.setAttribute(getAttrName(Attribute::Commodity), d->m_commodity);
+  el.setAttribute(d->getAttrName(Transaction::Attribute::PostDate), dateToString(d->m_postDate));
+  el.setAttribute(d->getAttrName(Transaction::Attribute::Memo), d->m_memo);
+  el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), dateToString(d->m_entryDate));
+  el.setAttribute(d->getAttrName(Transaction::Attribute::Commodity), d->m_commodity);
 
-  QDomElement splits = document.createElement(getElName(Element::Splits));
+  QDomElement splits = document.createElement(d->getElName(Transaction::Element::Splits));
   QList<MyMoneySplit>::ConstIterator it;
   for (it = d->m_splits.begin(); it != d->m_splits.end(); ++it) {
     (*it).writeXML(document, splits);
@@ -553,9 +496,9 @@ QString MyMoneyTransaction::uniqueSortKey() const
 {
   QString year, month, day, key;
   const QDate& postdate = postDate();
-  year = year.setNum(postdate.year()).rightJustified(YEAR_SIZE, '0');
-  month = month.setNum(postdate.month()).rightJustified(MONTH_SIZE, '0');
-  day = day.setNum(postdate.day()).rightJustified(DAY_SIZE, '0');
+  year = year.setNum(postdate.year()).rightJustified(MyMoneyTransactionPrivate::YEAR_SIZE, '0');
+  month = month.setNum(postdate.month()).rightJustified(MyMoneyTransactionPrivate::MONTH_SIZE, '0');
+  day = day.setNum(postdate.day()).rightJustified(MyMoneyTransactionPrivate::DAY_SIZE, '0');
   key = QString(QLatin1String("%1-%2-%3-%4")).arg(year, month, day, m_id);
   return key;
 }
@@ -570,27 +513,4 @@ bool MyMoneyTransaction::replaceId(const QString& newId, const QString& oldId)
     changed |= (*it).replaceId(newId, oldId);
   }
   return changed;
-}
-
-QString MyMoneyTransaction::getElName(const Element el)
-{
-  static const QHash<Element, QString> elNames = {
-    {Element::Split,  QStringLiteral("SPLIT")},
-    {Element::Splits, QStringLiteral("SPLITS")}
-  };
-  return elNames[el];
-}
-
-QString MyMoneyTransaction::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::Name,       QStringLiteral("name")},
-    {Attribute::Type,       QStringLiteral("type")},
-    {Attribute::PostDate,   QStringLiteral("postdate")},
-    {Attribute::Memo,       QStringLiteral("memo")},
-    {Attribute::EntryDate,  QStringLiteral("entrydate")},
-    {Attribute::Commodity,  QStringLiteral("commodity")},
-    {Attribute::BankID,     QStringLiteral("bankid")},
-  };
-  return attrNames[attr];
 }

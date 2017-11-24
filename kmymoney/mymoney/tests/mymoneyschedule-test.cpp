@@ -24,6 +24,7 @@
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
 #include "mymoneyschedule.h"
+#include "mymoneyschedule_p.h"
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "storage/mymoneyseqaccessmgr.h"
@@ -1737,8 +1738,8 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
 
 void MyMoneyScheduleTest::testElementNames()
 {
-  for (auto i = (int)MyMoneySchedule::Element::Payment; i <= (int)MyMoneySchedule::Element::Payments; ++i) {
-    auto isEmpty = MyMoneySchedule::getElName(static_cast<MyMoneySchedule::Element>(i)).isEmpty();
+  for (auto i = (int)Schedule::Element::Payment; i <= (int)Schedule::Element::Payments; ++i) {
+    auto isEmpty = MyMoneySchedulePrivate::getElName(static_cast<Schedule::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -1747,8 +1748,8 @@ void MyMoneyScheduleTest::testElementNames()
 
 void MyMoneyScheduleTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneySchedule::Attribute::Name; i < (int)MyMoneySchedule::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneySchedule::getAttrName(static_cast<MyMoneySchedule::Attribute>(i)).isEmpty();
+  for (auto i = (int)Schedule::Attribute::Name; i < (int)Schedule::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneySchedulePrivate::getAttrName(static_cast<Schedule::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

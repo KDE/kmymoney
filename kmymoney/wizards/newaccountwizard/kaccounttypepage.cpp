@@ -73,19 +73,19 @@ namespace NewAccountWizard
     Q_D(AccountTypePage);
     d->ui->setupUi(this);
     d->m_showPriceWarning = true;
-    d->ui->m_typeSelection->insertItem(i18n("Checking"), (int)Account::Checkings);
-    d->ui->m_typeSelection->insertItem(i18n("Savings"), (int)Account::Savings);
-    d->ui->m_typeSelection->insertItem(i18n("Credit Card"), (int)Account::CreditCard);
-    d->ui->m_typeSelection->insertItem(i18n("Cash"), (int)Account::Cash);
-    d->ui->m_typeSelection->insertItem(i18n("Loan"), (int)Account::Loan);
-    d->ui->m_typeSelection->insertItem(i18n("Investment"), (int)Account::Investment);
-    d->ui->m_typeSelection->insertItem(i18n("Asset"), (int)Account::Asset);
-    d->ui->m_typeSelection->insertItem(i18n("Liability"), (int)Account::Liability);
+    d->ui->m_typeSelection->insertItem(i18n("Checking"), (int)Account::Type::Checkings);
+    d->ui->m_typeSelection->insertItem(i18n("Savings"), (int)Account::Type::Savings);
+    d->ui->m_typeSelection->insertItem(i18n("Credit Card"), (int)Account::Type::CreditCard);
+    d->ui->m_typeSelection->insertItem(i18n("Cash"), (int)Account::Type::Cash);
+    d->ui->m_typeSelection->insertItem(i18n("Loan"), (int)Account::Type::Loan);
+    d->ui->m_typeSelection->insertItem(i18n("Investment"), (int)Account::Type::Investment);
+    d->ui->m_typeSelection->insertItem(i18n("Asset"), (int)Account::Type::Asset);
+    d->ui->m_typeSelection->insertItem(i18n("Liability"), (int)Account::Type::Liability);
     if (KMyMoneyGlobalSettings::expertMode()) {
-        d->ui->m_typeSelection->insertItem(i18n("Equity"), (int)Account::Equity);
+        d->ui->m_typeSelection->insertItem(i18n("Equity"), (int)Account::Type::Equity);
       }
 
-    d->ui->m_typeSelection->setCurrentItem((int)Account::Checkings);
+    d->ui->m_typeSelection->setCurrentItem((int)Account::Type::Checkings);
 
     d->ui->m_currencyComboBox->setSecurity(MyMoneyFile::instance()->baseCurrency());
 
@@ -109,23 +109,23 @@ namespace NewAccountWizard
   void AccountTypePage::slotUpdateType(int i)
   {
     Q_D(AccountTypePage);
-    hideShowPages(static_cast<Account>(i));
-    d->ui->m_openingBalance->setDisabled(static_cast<Account>(i) == Account::Equity);
+    hideShowPages(static_cast<Account::Type>(i));
+    d->ui->m_openingBalance->setDisabled(static_cast<Account::Type>(i) == Account::Type::Equity);
   }
 
-  void AccountTypePage::hideShowPages(Account accountType) const
+  void AccountTypePage::hideShowPages(Account::Type accountType) const
   {
     Q_D(const AccountTypePage);
-    bool hideSchedulePage = (accountType != Account::CreditCard)
-        && (accountType != Account::Loan);
-    bool hideLoanPage     = (accountType != Account::Loan);
+    bool hideSchedulePage = (accountType != Account::Type::CreditCard)
+        && (accountType != Account::Type::Loan);
+    bool hideLoanPage     = (accountType != Account::Type::Loan);
     d->m_wizard->d_func()->setStepHidden(StepDetails, hideLoanPage);
     d->m_wizard->d_func()->setStepHidden(StepPayments, hideLoanPage);
     d->m_wizard->d_func()->setStepHidden(StepFees, hideLoanPage);
     d->m_wizard->d_func()->setStepHidden(StepSchedule, hideSchedulePage);
-    d->m_wizard->d_func()->setStepHidden(StepPayout, (accountType != Account::Loan));
-    d->m_wizard->d_func()->setStepHidden(StepBroker, accountType != Account::Investment);
-    d->m_wizard->d_func()->setStepHidden(StepParentAccount, accountType == Account::Loan);
+    d->m_wizard->d_func()->setStepHidden(StepPayout, (accountType != Account::Type::Loan));
+    d->m_wizard->d_func()->setStepHidden(StepBroker, accountType != Account::Type::Investment);
+    d->m_wizard->d_func()->setStepHidden(StepParentAccount, accountType == Account::Type::Loan);
     // Force an update of the steps in case the list has changed
     d->m_wizard->reselectStep();
   }
@@ -133,11 +133,11 @@ namespace NewAccountWizard
   KMyMoneyWizardPage* AccountTypePage::nextPage() const
   {
     Q_D(const AccountTypePage);
-    if (accountType() == Account::Loan)
+    if (accountType() == Account::Type::Loan)
       return d->m_wizard->d_func()->m_generalLoanInfoPage;
-    if (accountType() == Account::CreditCard)
+    if (accountType() == Account::Type::CreditCard)
       return d->m_wizard->d_func()->m_schedulePage;
-    if (accountType() == Account::Investment)
+    if (accountType() == Account::Type::Investment)
       return d->m_wizard->d_func()->m_brokeragepage;
     return d->m_wizard->d_func()->m_hierarchyPage;
   }
@@ -223,10 +223,10 @@ namespace NewAccountWizard
     return rc;
   }
 
-  Account AccountTypePage::accountType() const
+  Account::Type AccountTypePage::accountType() const
   {
     Q_D(const AccountTypePage);
-    return static_cast<Account>(d->ui->m_typeSelection->currentItem());
+    return static_cast<Account::Type>(d->ui->m_typeSelection->currentItem());
   }
 
   const MyMoneySecurity& AccountTypePage::currency() const
@@ -238,9 +238,9 @@ namespace NewAccountWizard
   void AccountTypePage::setAccount(const MyMoneyAccount& acc)
   {
     Q_D(const AccountTypePage);
-    if (acc.accountType() != Account::Unknown) {
-        if (acc.accountType() == Account::AssetLoan) {
-            d->ui->m_typeSelection->setCurrentItem((int)Account::Loan);
+    if (acc.accountType() != Account::Type::Unknown) {
+        if (acc.accountType() == Account::Type::AssetLoan) {
+            d->ui->m_typeSelection->setCurrentItem((int)Account::Type::Loan);
           } else {
             d->ui->m_typeSelection->setCurrentItem((int)acc.accountType());
           }
@@ -252,12 +252,12 @@ namespace NewAccountWizard
   const MyMoneyAccount& AccountTypePage::parentAccount()
   {
     switch (accountType()) {
-      case Account::CreditCard:
-      case Account::Liability:
-      case Account::Loan: // Can be either but we return liability here
+      case Account::Type::CreditCard:
+      case Account::Type::Liability:
+      case Account::Type::Loan: // Can be either but we return liability here
         return MyMoneyFile::instance()->liability();
         break;
-      case Account::Equity:
+      case Account::Type::Equity:
         return MyMoneyFile::instance()->equity();
       default:
         break;
@@ -267,6 +267,6 @@ namespace NewAccountWizard
 
   bool AccountTypePage::allowsParentAccount() const
   {
-    return accountType() != Account::Loan;
+    return accountType() != Account::Type::Loan;
   }
 }

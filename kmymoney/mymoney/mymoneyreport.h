@@ -39,7 +39,7 @@ class MyMoneyAccount;
 
 template <typename T> class QList;
 
-namespace eMyMoney { enum class Account;
+namespace eMyMoney { namespace Account { enum class Type; }
                      namespace TransactionFilter { enum class Date; } }
 
 /**
@@ -360,7 +360,7 @@ public:
     *
     * @param type the account group to add to the allowed groups list
     */
-  void addAccountGroup(eMyMoney::Account type);
+  void addAccountGroup(eMyMoney::Account::Type type);
 
   /**
     * This method returns whether an account group filter has been set,
@@ -369,7 +369,7 @@ public:
     * @param list list to append account groups into
     * @return return true if an account group filter has been set
     */
-  bool accountGroups(QList<eMyMoney::Account>& list) const;
+  bool accountGroups(QList<eMyMoney::Account::Type>& list) const;
 
   /**
     * This method returns whether the specified account group
@@ -378,7 +378,7 @@ public:
     * @param type group to append account groups into
     * @return return true if an account group filter has been set
     */
-  bool includesAccountGroup(eMyMoney::Account type) const;
+  bool includesAccountGroup(eMyMoney::Account::Type type) const;
 
   /**
     * This method is used to test whether a specific account
@@ -464,51 +464,7 @@ public:
    * @return report type converted to string
    */
   static QString toString(EReportType type);
-
-private:
-  enum class Element { Payee,
-                       Tag,
-                       Account,
-                       Text,
-                       Type,
-                       State,
-                       Number,
-                       Amount,
-                       Dates,
-                       Category,
-                       AccountGroup
-                     };
-
-  enum class Attribute { ID, Group, Type, Name, Comment, ConvertCurrency, Favorite,
-                         SkipZero, DateLock, DataLock, MovingAverageDays,
-                         IncludesActuals, IncludesForecast, IncludesPrice,
-                         IncludesAveragePrice, IncludesMovingAverage,
-                         IncludesSchedules, IncludesTransfers, IncludesUnused,
-                         MixedTime, Investments, Budget,
-                         ShowRowTotals, ShowColumnTotals, Detail,
-                         ColumnsAreDays, ChartType,
-                         ChartCHGridLines, ChartSVGridLines,
-                         ChartDataLabels, ChartByDefault,
-                         LogYAxis, ChartLineWidth, ColumnType, RowType,
-                         DataRangeStart, DataRangeEnd,
-                         DataMajorTick, DataMinorTick,
-                         YLabelsPrecision, QueryColumns,
-                         Tax, Loans, HideTransactions, InvestmentSum,
-                         SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
-                         Pattern, CaseSensitive, RegEx, InvertText, State,
-                         From, To,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-  friend uint qHash(const Attribute, uint seed);
-  friend uint qHash(const Element, uint seed);
 };
-
-inline uint qHash(const MyMoneyReport::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const MyMoneyReport::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyReport& first, MyMoneyReport& second) // krazy:exclude=inline
 {

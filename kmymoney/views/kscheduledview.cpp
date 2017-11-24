@@ -336,10 +336,10 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       case eMyMoney::Schedule::Type::LoanPayment:
         for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
           acc = MyMoneyFile::instance()->account((*it_s).accountId());
-          if (acc.accountGroup() == eMyMoney::Account::Asset
-              || acc.accountGroup() == eMyMoney::Account::Liability) {
-            if (acc.accountType() != eMyMoney::Account::Loan
-                && acc.accountType() != eMyMoney::Account::AssetLoan) {
+          if (acc.accountGroup() == eMyMoney::Account::Type::Asset
+              || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
+            if (acc.accountType() != eMyMoney::Account::Type::Loan
+                && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
               split = *it_s;
               break;
             }

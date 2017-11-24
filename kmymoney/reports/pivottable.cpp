@@ -136,11 +136,11 @@ void PivotTable::init()
   // Initialize outer groups of the grid
   //
   if (m_config.rowType() == MyMoneyReport::eAssetLiability) {
-    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Asset), PivotOuterGroup(m_numColumns));
-    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Asset), PivotOuterGroup(m_numColumns));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
   } else {
-    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Income), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 2));
-    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Expense), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 1, true /* inverted */));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Income), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 2));
+    m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Expense), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 1, true /* inverted */));
     //
     // Create rows for income/expense reports with all accounts included
     //
@@ -275,7 +275,7 @@ void PivotTable::init()
         const MyMoneySplit& split = tx.amortizationSplit();
         if (!split.id().isEmpty()) {
           ReportAccount splitAccount = file->account(split.accountId());
-          eMyMoney::Account type = splitAccount.accountGroup();
+          eMyMoney::Account::Type type = splitAccount.accountGroup();
           QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
           //if the account is included in the report, calculate the balance from the cells
@@ -321,7 +321,7 @@ void PivotTable::init()
 
           MyMoneyMoney value;
           // the outer group is the account class (major account type)
-          eMyMoney::Account type = splitAccount.accountGroup();
+          eMyMoney::Account::Type type = splitAccount.accountGroup();
           QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
           value = (*it_split).shares();
@@ -336,7 +336,7 @@ void PivotTable::init()
             }
 
             // Except in the case of transfers on an income/expense report
-            if (al_transfers && (type == eMyMoney::Account::Asset || type == eMyMoney::Account::Liability)) {
+            if (al_transfers && (type == eMyMoney::Account::Type::Asset || type == eMyMoney::Account::Type::Liability)) {
               outergroup = i18n("Transfers");
               value = -value;
             }
@@ -890,11 +890,11 @@ void PivotTable::calculateBudgetMapping()
 
       //include the budget account only if it is included in the report
       if (m_config.includes(splitAccount)) {
-        eMyMoney::Account type = splitAccount.accountGroup();
+        eMyMoney::Account::Type type = splitAccount.accountGroup();
         QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
         // reverse sign to match common notation for cash flow direction, only for expense/income splits
-        MyMoneyMoney reverse((splitAccount.accountType() == eMyMoney::Account::Expense) ? -1 : 1, 1);
+        MyMoneyMoney reverse((splitAccount.accountType() == eMyMoney::Account::Type::Expense) ? -1 : 1, 1);
 
         const QMap<QDate, MyMoneyBudget::PeriodGroup>& periods = (*it_bacc).getPeriods();
 
@@ -1408,7 +1408,7 @@ QString PivotTable::renderCSV() const
         for (int i = 0; i < m_rowTypeList.size(); ++i)
           isUsed |= it_row.value()[ m_rowTypeList[i] ][0].isUsed();
 
-        if (it_row.key().accountType() != eMyMoney::Account::Investment) {
+        if (it_row.key().accountType() != eMyMoney::Account::Type::Investment) {
           while (column < m_numColumns) {
 
             //show columns
@@ -1709,7 +1709,7 @@ QString PivotTable::renderHTML() const
             pricePrecision = 0; // new row => new account => new precision
             currencyPrecision = 0;
             bool isUsed = it_row.value()[eActual][0].isUsed();
-            if (it_row.key().accountType() != eMyMoney::Account::Investment) {
+            if (it_row.key().accountType() != eMyMoney::Account::Type::Investment) {
               while (column < m_numColumns) {
                 QString lb;
                 if (column > 0)
@@ -1970,15 +1970,15 @@ void PivotTable::calculateBudgetDiff()
       while (it_row != (*it_innergroup).end()) {
         int column = m_startColumn;
         switch (it_row.key().accountGroup()) {
-          case eMyMoney::Account::Income:
-          case eMyMoney::Account::Asset:
+          case eMyMoney::Account::Type::Income:
+          case eMyMoney::Account::Type::Asset:
             while (column < m_numColumns) {
               it_row.value()[eBudgetDiff][column] = it_row.value()[eActual][column] - it_row.value()[eBudget][column];
               ++column;
             }
             break;
-          case eMyMoney::Account::Expense:
-          case eMyMoney::Account::Liability:
+          case eMyMoney::Account::Type::Expense:
+          case eMyMoney::Account::Type::Liability:
             while (column < m_numColumns) {
               it_row.value()[eBudgetDiff][column] = it_row.value()[eBudget][column] - it_row.value()[eActual][column];
               ++column;
@@ -2303,7 +2303,7 @@ void PivotTable::includeInvestmentSubAccounts()
       QStringList::const_iterator it_a, it_b;
       for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
         MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-        if (acc.accountType() == eMyMoney::Account::Investment) {
+        if (acc.accountType() == eMyMoney::Account::Type::Investment) {
           for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
             if (!accountList.contains(*it_b)) {
               m_config.addAccount(*it_b);

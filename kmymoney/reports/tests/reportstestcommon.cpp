@@ -235,7 +235,7 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
   //qDebug() << "successfully added " << id();
 }
 
-QString makeAccount(const QString& _name, eMyMoney::Account _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
+QString makeAccount(const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
 {
   MyMoneyAccount info;
   MyMoneyFileTransaction ft;
@@ -285,7 +285,7 @@ QString makeEquity(const QString& _name, const QString& _symbol)
   equity.setName(_name);
   equity.setTradingSymbol(_symbol);
   equity.setSmallestAccountFraction(1000);
-  equity.setSecurityType(eMyMoney::Security::None/*MyMoneyEquity::ETYPE_STOCK*/);
+  equity.setSecurityType(eMyMoney::Security::Type::None/*MyMoneyEquity::ETYPE_STOCK*/);
   MyMoneyFile::instance()->addSecurity(equity);
   ft.commit();
 

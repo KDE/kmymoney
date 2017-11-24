@@ -119,7 +119,7 @@ namespace NewAccountWizard
     if (!acc.isLoan())
       d->ui->m_dataList->append(i18n("Subaccount of %1", d->m_wizard->parentAccount().name()));
     QString accTypeText;
-    if (acc.accountType() == Account::AssetLoan)
+    if (acc.accountType() == Account::Type::AssetLoan)
       accTypeText = i18n("Loan");
     else
       accTypeText = d->m_wizard->d_func()->m_accountTypePage->d_func()->ui->m_typeSelection->currentText();
@@ -143,7 +143,7 @@ namespace NewAccountWizard
           }
       }
 
-    if (acc.accountType() == Account::Investment) {
+    if (acc.accountType() == Account::Type::Investment) {
         if (d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_createBrokerageButton->isChecked()) {
             d->ui->m_dataList->setFontWeight(QFont::Bold);
             d->ui->m_dataList->append(i18n("Brokerage Account"));
@@ -197,7 +197,7 @@ namespace NewAccountWizard
         d->ui->m_dataList->append(i18n("Schedule information"));
         d->ui->m_dataList->setFontWeight(QFont::Normal);
         d->ui->m_dataList->append(i18nc("Schedule name", "Name: %1", sch.name()));
-        if (acc.accountType() == Account::CreditCard) {
+        if (acc.accountType() == Account::Type::CreditCard) {
             MyMoneyAccount paymentAccount = MyMoneyFile::instance()->account(d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_paymentAccount->selectedItem());
             d->ui->m_dataList->append(i18n("Occurrence: Monthly"));
             d->ui->m_dataList->append(i18n("Paid from %1", paymentAccount.name()));

@@ -2678,7 +2678,7 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
   try {
     const MyMoneySecurity& sec = file->security(newAccount.currencyId());
     // Check the opening balance
-    if (openingBal.isPositive() && newAccount.accountGroup() == eMyMoney::Account::Liability) {
+    if (openingBal.isPositive() && newAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
       QString message = i18n("This account is a liability and if the "
                              "opening balance represents money owed, then it should be negative.  "
                              "Negate the amount?\n\n"
@@ -2964,8 +2964,8 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
 
         // in case of a loan account, we keep a reference to this
         // schedule in the account
-        if (newAccount.accountType() == eMyMoney::Account::Loan
-            || newAccount.accountType() == eMyMoney::Account::AssetLoan) {
+        if (newAccount.accountType() == eMyMoney::Account::Type::Loan
+            || newAccount.accountType() == eMyMoney::Account::Type::AssetLoan) {
           newAccount.setValue("schedule", newSchedule.id());
           file->modifyAccount(newAccount);
         }
@@ -3003,8 +3003,8 @@ void KMyMoneyApp::slotAccountDelete()
 
   // make sure we only allow transactions in a 'category' (income/expense account)
   switch (d->m_selectedAccount.accountType()) {
-    case eMyMoney::Account::Income:
-    case eMyMoney::Account::Expense:
+    case eMyMoney::Account::Type::Income:
+    case eMyMoney::Account::Type::Expense:
       break;
 
     default:
@@ -3113,8 +3113,8 @@ void KMyMoneyApp::slotAccountDelete()
   // to be deleted anymore
   switch (d->m_selectedAccount.accountGroup()) {
       // special handling for categories to allow deleting of empty subcategories
-    case eMyMoney::Account::Income:
-    case eMyMoney::Account::Expense: { // open a compound statement here to be able to declare variables
+    case eMyMoney::Account::Type::Income:
+    case eMyMoney::Account::Type::Expense: { // open a compound statement here to be able to declare variables
         // which would otherwise not work within a case label.
 
         // case A - only a single, unused category without subcats selected
@@ -3221,8 +3221,8 @@ void KMyMoneyApp::slotAccountEdit()
   MyMoneyFile* file = MyMoneyFile::instance();
   if (!d->m_selectedAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_selectedAccount.id())) {
-      if (d->m_selectedAccount.accountType() != eMyMoney::Account::Loan
-          && d->m_selectedAccount.accountType() != eMyMoney::Account::AssetLoan) {
+      if (d->m_selectedAccount.accountType() != eMyMoney::Account::Type::Loan
+          && d->m_selectedAccount.accountType() != eMyMoney::Account::Type::AssetLoan) {
         QString caption;
         bool category = false;
         switch (d->m_selectedAccount.accountGroup()) {
@@ -3230,8 +3230,8 @@ void KMyMoneyApp::slotAccountEdit()
             caption = i18n("Edit account '%1'", d->m_selectedAccount.name());
             break;
 
-          case eMyMoney::Account::Expense:
-          case eMyMoney::Account::Income:
+          case eMyMoney::Account::Type::Expense:
+          case eMyMoney::Account::Type::Income:
             caption = i18n("Edit category '%1'", d->m_selectedAccount.name());
             category = true;
             break;
@@ -3257,7 +3257,7 @@ void KMyMoneyApp::slotAccountEdit()
               s0 = t.splitByAccount(d->m_selectedAccount.id());
               s1 = t.splitByAccount(d->m_selectedAccount.id(), false);
               dlg->setOpeningBalance(s0.shares());
-              if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Liability) {
+              if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
                 dlg->setOpeningBalance(-s0.shares());
               }
             } catch (const MyMoneyException &e) {
@@ -3292,7 +3292,7 @@ void KMyMoneyApp::slotAccountEdit()
               account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
             }
             MyMoneyMoney bal = dlg->openingBalance();
-            if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Liability) {
+            if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
               bal = -bal;
             }
 
@@ -5649,7 +5649,7 @@ void KMyMoneyApp::slotMoveToAccount(const QString& id)
     try {
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
       for (it_t = d->m_selectedTransactions.constBegin(); it_t != d->m_selectedTransactions.constEnd(); ++it_t) {
-        if (d->m_selectedAccount.accountType() == eMyMoney::Account::Investment) {
+        if (d->m_selectedAccount.accountType() == eMyMoney::Account::Type::Investment) {
           d->moveInvestmentTransaction(d->m_selectedAccount.id(), id, (*it_t).transaction());
         } else {
           QList<MyMoneySplit>::const_iterator it_s;
@@ -5741,24 +5741,24 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu()
 
   if (!d->m_selectedAccount.id().isEmpty()) {
     AccountSet accountSet;
-    if (d->m_selectedAccount.accountType() == eMyMoney::Account::Investment) {
-      accountSet.addAccountType(eMyMoney::Account::Investment);
+    if (d->m_selectedAccount.accountType() == eMyMoney::Account::Type::Investment) {
+      accountSet.addAccountType(eMyMoney::Account::Type::Investment);
     } else if (d->m_selectedAccount.isAssetLiability()) {
 
-      accountSet.addAccountType(eMyMoney::Account::Checkings);
-      accountSet.addAccountType(eMyMoney::Account::Savings);
-      accountSet.addAccountType(eMyMoney::Account::Cash);
-      accountSet.addAccountType(eMyMoney::Account::AssetLoan);
-      accountSet.addAccountType(eMyMoney::Account::CertificateDep);
-      accountSet.addAccountType(eMyMoney::Account::MoneyMarket);
-      accountSet.addAccountType(eMyMoney::Account::Asset);
-      accountSet.addAccountType(eMyMoney::Account::Currency);
-      accountSet.addAccountType(eMyMoney::Account::CreditCard);
-      accountSet.addAccountType(eMyMoney::Account::Loan);
-      accountSet.addAccountType(eMyMoney::Account::Liability);
+      accountSet.addAccountType(eMyMoney::Account::Type::Checkings);
+      accountSet.addAccountType(eMyMoney::Account::Type::Savings);
+      accountSet.addAccountType(eMyMoney::Account::Type::Cash);
+      accountSet.addAccountType(eMyMoney::Account::Type::AssetLoan);
+      accountSet.addAccountType(eMyMoney::Account::Type::CertificateDep);
+      accountSet.addAccountType(eMyMoney::Account::Type::MoneyMarket);
+      accountSet.addAccountType(eMyMoney::Account::Type::Asset);
+      accountSet.addAccountType(eMyMoney::Account::Type::Currency);
+      accountSet.addAccountType(eMyMoney::Account::Type::CreditCard);
+      accountSet.addAccountType(eMyMoney::Account::Type::Loan);
+      accountSet.addAccountType(eMyMoney::Account::Type::Liability);
     } else if (d->m_selectedAccount.isIncomeExpense()) {
-      accountSet.addAccountType(eMyMoney::Account::Income);
-      accountSet.addAccountType(eMyMoney::Account::Expense);
+      accountSet.addAccountType(eMyMoney::Account::Type::Income);
+      accountSet.addAccountType(eMyMoney::Account::Type::Expense);
     }
 
     accountSet.load(d->m_moveToAccountSelector);
@@ -6117,7 +6117,7 @@ void KMyMoneyApp::slotUpdateActions()
         if (d->m_selectedTransactions.count() == 1) {
           aC->action(s_Actions[Action::TransactionEditSplits])->setEnabled(true);
         }
-        if (d->m_selectedAccount.isAssetLiability() && d->m_selectedAccount.accountType() != eMyMoney::Account::Investment) {
+        if (d->m_selectedAccount.isAssetLiability() && d->m_selectedAccount.accountType() != eMyMoney::Account::Type::Investment) {
           aC->action(s_Actions[Action::TransactionCreateSchedule])->setEnabled(d->m_selectedTransactions.count() == 1);
         }
       }
@@ -6248,14 +6248,14 @@ void KMyMoneyApp::slotUpdateActions()
   if (!d->m_selectedAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_selectedAccount.id())) {
       switch (d->m_selectedAccount.accountGroup()) {
-        case eMyMoney::Account::Asset:
-        case eMyMoney::Account::Liability:
-        case eMyMoney::Account::Equity:
+        case eMyMoney::Account::Type::Asset:
+        case eMyMoney::Account::Type::Liability:
+        case eMyMoney::Account::Type::Equity:
           aC->action(s_Actions[Action::AccountTransactionReport])->setEnabled(true);
           aC->action(s_Actions[Action::AccountEdit])->setEnabled(true);
           aC->action(s_Actions[Action::AccountDelete])->setEnabled(!file->isReferenced(d->m_selectedAccount));
           aC->action(s_Actions[Action::AccountOpen])->setEnabled(true);
-          if (d->m_selectedAccount.accountGroup() != eMyMoney::Account::Equity) {
+          if (d->m_selectedAccount.accountGroup() != eMyMoney::Account::Type::Equity) {
             if (d->m_reconciliationAccount.id().isEmpty()) {
               aC->action(s_Actions[Action::AccountStartReconciliation])->setEnabled(true);
               aC->action(s_Actions[Action::AccountStartReconciliation])->setToolTip(i18n("Reconcile"));
@@ -6270,7 +6270,7 @@ void KMyMoneyApp::slotUpdateActions()
             }
           }
 
-          if (d->m_selectedAccount.accountType() == eMyMoney::Account::Investment)
+          if (d->m_selectedAccount.accountType() == eMyMoney::Account::Type::Investment)
             aC->action(s_Actions[Action::InvestmentNew])->setEnabled(true);
 
           if (d->m_selectedAccount.isClosed())
@@ -6297,8 +6297,8 @@ void KMyMoneyApp::slotUpdateActions()
           aC->action(s_Actions[Action::AccountBalanceChart])->setEnabled(true);
           break;
 
-        case eMyMoney::Account::Income :
-        case eMyMoney::Account::Expense :
+        case eMyMoney::Account::Type::Income :
+        case eMyMoney::Account::Type::Expense :
           aC->action(s_Actions[Action::CategoryEdit])->setEnabled(true);
           // enable delete action, if category/account itself is not referenced
           // by any object except accounts, because we want to allow

@@ -23,6 +23,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobTest;
 
 #include "onlinejob.h"
+#include "onlinejob_p.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
@@ -82,8 +83,8 @@ void onlineJobTest::testCopyConstructorWithNewId()
 
 void onlineJobTest::testElementNames()
 {
-  for (auto i = (int)onlineJob::Element::OnlineTask; i <= (int)onlineJob::Element::OnlineTask; ++i) {
-    auto isEmpty = onlineJob::getElName(static_cast<onlineJob::Element>(i)).isEmpty();
+  for (auto i = (int)OnlineJob::Element::OnlineTask; i <= (int)OnlineJob::Element::OnlineTask; ++i) {
+    auto isEmpty = onlineJobPrivate::getElName(static_cast<OnlineJob::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -92,8 +93,8 @@ void onlineJobTest::testElementNames()
 
 void onlineJobTest::testAttributeNames()
 {
-  for (auto i = (int)onlineJob::Attribute::Send; i < (int)onlineJob::Attribute::LastAttribute; ++i) {
-    auto isEmpty = onlineJob::getAttrName(static_cast<onlineJob::Attribute>(i)).isEmpty();
+  for (auto i = (int)OnlineJob::Attribute::Send; i < (int)OnlineJob::Attribute::LastAttribute; ++i) {
+    auto isEmpty = onlineJobPrivate::getAttrName(static_cast<OnlineJob::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

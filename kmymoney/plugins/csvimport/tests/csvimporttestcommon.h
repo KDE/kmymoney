@@ -22,5 +22,5 @@ class QString;
 class QDate;
 extern void writeStatementToCSV(const QString& content, const QString& filename);
 extern QString csvDataset(const int set);
-extern QString makeAccount(const QString& name, const QString& number, eMyMoney::Account type, const QDate& open, const QString& parent);
+extern QString makeAccount(const QString& name, const QString& number, eMyMoney::Account::Type type, const QDate& open, const QString& parent);
 #endif

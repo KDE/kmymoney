@@ -41,8 +41,8 @@
   *
   * @code
   *   AccountsFilterProxyModel *filterModel = new AccountsFilterProxyModel(widget);
-  *   filterModel->addAccountGroup(eMyMoney::Account::Asset);
-  *   filterModel->addAccountGroup(eMyMoney::Account::Liability);
+  *   filterModel->addAccountGroup(eMyMoney::Account::Type::Asset);
+  *   filterModel->addAccountGroup(eMyMoney::Account::Type::Liability);
   *   filterModel->setSourceModel(Models::instance()->accountsModel());
   *   filterModel->sort(0);
   *
@@ -55,7 +55,7 @@
   *
   */
 
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account {enum class Type;} }
 namespace eAccountsModel { enum class Column; }
 
 class AccountsProxyModel : public KRecursiveFilterProxyModel
@@ -66,9 +66,9 @@ public:
   AccountsProxyModel(QObject *parent = nullptr);
   ~AccountsProxyModel();
 
-  void addAccountType(eMyMoney::Account type);
-  void addAccountGroup(const QVector<eMyMoney::Account> &groups);
-  void removeAccountType(eMyMoney::Account type);
+  void addAccountType(eMyMoney::Account::Type type);
+  void addAccountGroup(const QVector<eMyMoney::Account::Type> &groups);
+  void removeAccountType(eMyMoney::Account::Type type);
 
   void clear();
 

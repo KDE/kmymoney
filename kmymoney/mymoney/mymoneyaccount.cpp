@@ -17,12 +17,11 @@
  ***************************************************************************/
 
 #include "mymoneyaccount.h"
+#include "mymoneyaccount_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QDate>
 #include <QRegExp>
 #include <QPixmap>
 #include <QPixmapCache>
@@ -41,7 +40,6 @@
 #include "mymoneyutils.h"
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
-#include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyinstitution.h"
@@ -51,111 +49,9 @@
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "mymoneystoragenames.h"
 #include "icons/icons.h"
-#include "mymoneyenums.h"
 
-using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;
 using namespace Icons;
-
-class MyMoneyAccountPrivate {
-
-public:
-
-  MyMoneyAccountPrivate() :
-    m_accountType(Account::Unknown),
-    m_fraction(-1)
-  {
-  }
-
-  /**
-    * This member variable identifies the type of account
-    */
-  eMyMoney::Account m_accountType;
-
-  /**
-    * This member variable keeps the ID of the MyMoneyInstitution object
-    * that this object belongs to.
-    */
-  QString m_institution;
-
-  /**
-    * This member variable keeps the name of the account
-    * It is solely for documentation purposes and it's contents is not
-    * used otherwise by the mymoney-engine.
-    */
-  QString m_name;
-
-  /**
-    * This member variable keeps the account number at the institution
-    * It is solely for documentation purposes and it's contents is not
-    * used otherwise by the mymoney-engine.
-    */
-  QString m_number;
-
-  /**
-    * This member variable is a description of the account.
-    * It is solely for documentation purposes and it's contents is not
-    * used otherwise by the mymoney-engine.
-    */
-  QString m_description;
-
-  /**
-    * This member variable keeps the date when the account
-    * was last modified.
-    */
-  QDate m_lastModified;
-
-  /**
-    * This member variable keeps the date when the
-    * account was created as an object in a MyMoneyFile
-    */
-  QDate m_openingDate;
-
-  /**
-    * This member variable keeps the date of the last
-    * reconciliation of this account
-    */
-  QDate m_lastReconciliationDate;
-
-  /**
-    * This member holds the ID's of all sub-ordinate accounts
-    */
-  QStringList m_accountList;
-
-  /**
-    * This member contains the ID of the parent account
-    */
-  QString m_parentAccount;
-
-  /**
-    * This member contains the ID of the currency associated with this account
-    */
-  QString m_currencyId;
-
-  /**
-    * This member holds the balance of all transactions stored in the journal
-    * for this account.
-    */
-  MyMoneyMoney    m_balance;
-
-  /**
-    * This member variable keeps the set of kvp's needed to establish
-    * online banking sessions to this account.
-    */
-  MyMoneyKeyValueContainer m_onlineBankingSettings;
-
-  /**
-    * This member keeps the fraction for the account. It is filled by MyMoneyFile
-    * when set to -1. See also @sa fraction(const MyMoneySecurity&).
-    */
-  int             m_fraction;
-
-  /**
-    * This member keeps the reconciliation history
-    */
-  QMap<QDate, MyMoneyMoney> m_reconciliationHistory;
-
-};
 
 MyMoneyAccount::MyMoneyAccount() :
   MyMoneyObject(),
@@ -172,15 +68,15 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   if (nodeNames[nnAccount] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not ACCOUNT");
 
-  setName(node.attribute(getAttrName(Attribute::Name)));
+  Q_D(MyMoneyAccount);
+  setName(node.attribute(d->getAttrName(Account::Attribute::Name)));
 
   // qDebug("Reading information for account %s", acc.name().data());
 
-  setParentAccountId(QStringEmpty(node.attribute(getAttrName(Attribute::ParentAccount))));
-  setLastModified(stringToDate(QStringEmpty(node.attribute(getAttrName(Attribute::LastModified)))));
-  setLastReconciliationDate(stringToDate(QStringEmpty(node.attribute(getAttrName(Attribute::LastReconciled)))));
+  setParentAccountId(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ParentAccount))));
+  setLastModified(stringToDate(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastModified)))));
+  setLastReconciliationDate(stringToDate(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastReconciled)))));
 
-  Q_D(MyMoneyAccount);
   if (!d->m_lastReconciliationDate.isValid()) {
     // for some reason, I was unable to access our own kvp at this point through
     // the value() method. It always returned empty strings. The workaround for
@@ -195,42 +91,42 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     }
   }
 
-  setInstitutionId(QStringEmpty(node.attribute(getAttrName(Attribute::Institution))));
-  setNumber(QStringEmpty(node.attribute(getAttrName(Attribute::Number))));
-  setOpeningDate(stringToDate(QStringEmpty(node.attribute(getAttrName(Attribute::Opened)))));
-  setCurrencyId(QStringEmpty(node.attribute(getAttrName(Attribute::Currency))));
+  setInstitutionId(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Institution))));
+  setNumber(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Number))));
+  setOpeningDate(stringToDate(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Opened)))));
+  setCurrencyId(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Currency))));
 
-  QString tmp = QStringEmpty(node.attribute(getAttrName(Attribute::Type)));
+  QString tmp = QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Type)));
   bool bOK = false;
   int type = tmp.toInt(&bOK);
   if (bOK) {
-    setAccountType(static_cast<Account>(type));
+    setAccountType(static_cast<Account::Type>(type));
   } else {
     qWarning("XMLREADER: Account %s had invalid or no account type information.", qPrintable(name()));
   }
 
-  if (node.hasAttribute(getAttrName(Attribute::OpeningBalance))) {
-    if (!MyMoneyMoney(node.attribute(getAttrName(Attribute::OpeningBalance))).isZero()) {
+  if (node.hasAttribute(d->getAttrName(Account::Attribute::OpeningBalance))) {
+    if (!MyMoneyMoney(node.attribute(d->getAttrName(Account::Attribute::OpeningBalance))).isZero()) {
       QString msg = i18n("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.", d->m_name);
       throw MYMONEYEXCEPTION(msg);
     }
   }
-  setDescription(node.attribute(getAttrName(Attribute::Description)));
+  setDescription(node.attribute(d->getAttrName(Account::Attribute::Description)));
 
-  m_id = QStringEmpty(node.attribute(getAttrName(Attribute::ID)));
+  m_id = QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));
   // qDebug("Account %s has id of %s, type of %d, parent is %s.", acc.name().data(), id.data(), type, acc.parentAccountId().data());
 
   //  Process any Sub-Account information found inside the account entry.
   d->m_accountList.clear();
-  QDomNodeList nodeList = node.elementsByTagName(getElName(Element::SubAccounts));
+  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Account::Element::SubAccounts));
   if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(getElName(Element::SubAccount));
+    nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Account::Element::SubAccount));
     for (int i = 0; i < nodeList.count(); ++i) {
-      addAccountId(QString(nodeList.item(i).toElement().attribute(getAttrName(Attribute::ID))));
+      addAccountId(QString(nodeList.item(i).toElement().attribute(d->getAttrName(Account::Attribute::ID))));
     }
   }
 
-  nodeList = node.elementsByTagName(getElName(Element::OnlineBanking));
+  nodeList = node.elementsByTagName(d->getElName(Account::Element::OnlineBanking));
   if (nodeList.count() > 0) {
     QDomNamedNodeMap attributes = nodeList.item(0).toElement().attributes();
     for (int i = 0; i < attributes.count(); ++i) {
@@ -244,8 +140,8 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   if (!value("IBAN").isEmpty()) {
     // If "iban" was not set, set it now. If it is set, the user reseted it already, so remove
     // the garbage.
-    if (value(getAttrName(Attribute::IBAN)).isEmpty())
-      setValue(getAttrName(Attribute::IBAN), value("IBAN"));
+    if (value(d->getAttrName(Account::Attribute::IBAN)).isEmpty())
+      setValue(d->getAttrName(Account::Attribute::IBAN), value("IBAN"));
     deletePair("IBAN");
   }
 }
@@ -275,13 +171,13 @@ void MyMoneyAccount::touch()
   setLastModified(QDate::currentDate());
 }
 
-eMyMoney::Account MyMoneyAccount::accountType() const
+eMyMoney::Account::Type MyMoneyAccount::accountType() const
 {
   Q_D(const MyMoneyAccount);
   return d->m_accountType;
 }
 
-void MyMoneyAccount::setAccountType(const Account type)
+void MyMoneyAccount::setAccountType(const Account::Type type)
 {
   Q_D(MyMoneyAccount);
   d->m_accountType = type;
@@ -440,24 +336,24 @@ bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
           (d->m_institution == d2->m_institution));
 }
 
-Account MyMoneyAccount::accountGroup() const
+Account::Type MyMoneyAccount::accountGroup() const
 {
   Q_D(const MyMoneyAccount);
   switch (d->m_accountType) {
-    case Account::Checkings:
-    case Account::Savings:
-    case Account::Cash:
-    case Account::Currency:
-    case Account::Investment:
-    case Account::MoneyMarket:
-    case Account::CertificateDep:
-    case Account::AssetLoan:
-    case Account::Stock:
-      return Account::Asset;
+    case Account::Type::Checkings:
+    case Account::Type::Savings:
+    case Account::Type::Cash:
+    case Account::Type::Currency:
+    case Account::Type::Investment:
+    case Account::Type::MoneyMarket:
+    case Account::Type::CertificateDep:
+    case Account::Type::AssetLoan:
+    case Account::Type::Stock:
+      return Account::Type::Asset;
 
-    case Account::CreditCard:
-    case Account::Loan:
-      return Account::Liability;
+    case Account::Type::CreditCard:
+    case Account::Type::Loan:
+      return Account::Type::Liability;
 
     default:
       return d->m_accountType;
@@ -478,29 +374,29 @@ void MyMoneyAccount::setCurrencyId(const QString& id)
 
 bool MyMoneyAccount::isAssetLiability() const
 {
-  return accountGroup() == Account::Asset || accountGroup() == Account::Liability;
+  return accountGroup() == Account::Type::Asset || accountGroup() == Account::Type::Liability;
 }
 
 bool MyMoneyAccount::isIncomeExpense() const
 {
-  return accountGroup() == Account::Income || accountGroup() == Account::Expense;
+  return accountGroup() == Account::Type::Income || accountGroup() == Account::Type::Expense;
 }
 
 bool MyMoneyAccount::isLoan() const
 {
-  return accountType() == Account::Loan || accountType() == Account::AssetLoan;
+  return accountType() == Account::Type::Loan || accountType() == Account::Type::AssetLoan;
 }
 
 bool MyMoneyAccount::isInvest() const
 {
-  return accountType() == Account::Stock;
+  return accountType() == Account::Type::Stock;
 }
 
 bool MyMoneyAccount::isLiquidAsset() const
 {
-  return accountType() == Account::Checkings ||
-         accountType() == Account::Savings ||
-         accountType() == Account::Cash;
+  return accountType() == Account::Type::Checkings ||
+         accountType() == Account::Type::Savings ||
+         accountType() == Account::Type::Cash;
 }
 
 bool MyMoneyAccount::isCostCenterRequired() const
@@ -520,12 +416,13 @@ void MyMoneyAccount::setCostCenterRequired(bool required)
 template<>
 QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
 {
+  Q_D(const MyMoneyAccount);
   payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(new payeeIdentifiers::ibanBic);
-  ident->setIban(value(getAttrName(Attribute::IBAN)));
+  ident->setIban(value(d->getAttrName(Account::Attribute::IBAN)));
 
   if (!institutionId().isEmpty()) {
     const MyMoneyInstitution institution = MyMoneyFile::instance()->institution(institutionId());
-    ident->setBic(institution.value(getAttrName(Attribute::BIC)));
+    ident->setBic(institution.value(d->getAttrName(Account::Attribute::BIC)));
   }
 
   ident->setOwnerName(MyMoneyFile::instance()->user().name());
@@ -541,35 +438,35 @@ void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 
   writeBaseXML(document, el);
 
-  el.setAttribute(getAttrName(Attribute::ParentAccount), parentAccountId());
-  el.setAttribute(getAttrName(Attribute::LastReconciled), dateToString(lastReconciliationDate()));
-  el.setAttribute(getAttrName(Attribute::LastModified), dateToString(lastModified()));
-  el.setAttribute(getAttrName(Attribute::Institution), institutionId());
-  el.setAttribute(getAttrName(Attribute::Opened), dateToString(openingDate()));
-  el.setAttribute(getAttrName(Attribute::Number), number());
+  Q_D(const MyMoneyAccount);
+  el.setAttribute(d->getAttrName(Account::Attribute::ParentAccount), parentAccountId());
+  el.setAttribute(d->getAttrName(Account::Attribute::LastReconciled), dateToString(lastReconciliationDate()));
+  el.setAttribute(d->getAttrName(Account::Attribute::LastModified), dateToString(lastModified()));
+  el.setAttribute(d->getAttrName(Account::Attribute::Institution), institutionId());
+  el.setAttribute(d->getAttrName(Account::Attribute::Opened), dateToString(openingDate()));
+  el.setAttribute(d->getAttrName(Account::Attribute::Number), number());
   // el.setAttribute(getAttrName(anOpeningBalance), openingBalance().toString());
-  el.setAttribute(getAttrName(Attribute::Type), (int)accountType());
-  el.setAttribute(getAttrName(Attribute::Name), name());
-  el.setAttribute(getAttrName(Attribute::Description), description());
+  el.setAttribute(d->getAttrName(Account::Attribute::Type), (int)accountType());
+  el.setAttribute(d->getAttrName(Account::Attribute::Name), name());
+  el.setAttribute(d->getAttrName(Account::Attribute::Description), description());
   if (!currencyId().isEmpty())
-    el.setAttribute(getAttrName(Attribute::Currency), currencyId());
+    el.setAttribute(d->getAttrName(Account::Attribute::Currency), currencyId());
 
   //Add in subaccount information, if this account has subaccounts.
   if (accountCount()) {
-    QDomElement subAccounts = document.createElement(getElName(Element::SubAccounts));
+    QDomElement subAccounts = document.createElement(d->getElName(Account::Element::SubAccounts));
     foreach (const auto accountID, accountList()) {
-      QDomElement temp = document.createElement(getElName(Element::SubAccount));
-      temp.setAttribute(getAttrName(Attribute::ID), accountID);
+      QDomElement temp = document.createElement(d->getElName(Account::Element::SubAccount));
+      temp.setAttribute(d->getAttrName(Account::Attribute::ID), accountID);
       subAccounts.appendChild(temp);
     }
 
     el.appendChild(subAccounts);
   }
 
-  Q_D(const MyMoneyAccount);
   // Write online banking settings
   if (d->m_onlineBankingSettings.pairs().count()) {
-    QDomElement onlinesettings = document.createElement(getElName(Element::OnlineBanking));
+    QDomElement onlinesettings = document.createElement(d->getElName(Account::Element::OnlineBanking));
     QMap<QString, QString>::const_iterator it_key = d->m_onlineBankingSettings.pairs().begin();
     while (it_key != d->m_onlineBankingSettings.pairs().end()) {
       onlinesettings.setAttribute(it_key.key(), it_key.value());
@@ -625,7 +522,7 @@ int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const
 {
   Q_D(const MyMoneyAccount);
   int fraction;
-  if (d->m_accountType == Account::Cash)
+  if (d->m_accountType == Account::Type::Cash)
     fraction = sec.smallestCashFraction();
   else
     fraction = sec.smallestAccountFraction();
@@ -635,7 +532,7 @@ int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const
 int MyMoneyAccount::fraction(const MyMoneySecurity& sec)
 {
   Q_D(MyMoneyAccount);
-  if (d->m_accountType == Account::Cash)
+  if (d->m_accountType == Account::Type::Cash)
     d->m_fraction = sec.smallestCashFraction();
   else
     d->m_fraction = sec.smallestAccountFraction();
@@ -651,13 +548,13 @@ int MyMoneyAccount::fraction() const
 bool MyMoneyAccount::isCategory() const
 {
   Q_D(const MyMoneyAccount);
-  return d->m_accountType == Account::Income || d->m_accountType == Account::Expense;
+  return d->m_accountType == Account::Type::Income || d->m_accountType == Account::Type::Expense;
 }
 
 QString MyMoneyAccount::brokerageName() const
 {
   Q_D(const MyMoneyAccount);
-  if (d->m_accountType == Account::Investment)
+  if (d->m_accountType == Account::Type::Investment)
     return QString("%1 (%2)").arg(d->m_name, i18nc("Brokerage (suffix for account names)", "Brokerage"));
   return d->m_name;
 }
@@ -693,21 +590,21 @@ void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
 
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const
 {
-  static const QHash<Account, Icon> accToIco {
-    {Account::Asset, Icon::ViewAsset},
-    {Account::Investment, Icon::ViewStock},
-    {Account::Stock, Icon::ViewStock},
-    {Account::MoneyMarket, Icon::ViewStock},
-    {Account::Checkings, Icon::ViewChecking},
-    {Account::Savings, Icon::ViewSaving},
-    {Account::AssetLoan, Icon::ViewLoanAsset},
-    {Account::Loan, Icon::ViewLoan},
-    {Account::CreditCard, Icon::ViewCreditCard},
-    {Account::Asset, Icon::ViewAsset},
-    {Account::Cash, Icon::ViewCash},
-    {Account::Income, Icon::ViewIncome},
-    {Account::Expense, Icon::ViewExpense},
-    {Account::Equity, Icon::ViewEquity}
+  static const QHash<Account::Type, Icon> accToIco {
+    {Account::Type::Asset, Icon::ViewAsset},
+    {Account::Type::Investment, Icon::ViewStock},
+    {Account::Type::Stock, Icon::ViewStock},
+    {Account::Type::MoneyMarket, Icon::ViewStock},
+    {Account::Type::Checkings, Icon::ViewChecking},
+    {Account::Type::Savings, Icon::ViewSaving},
+    {Account::Type::AssetLoan, Icon::ViewLoanAsset},
+    {Account::Type::Loan, Icon::ViewLoan},
+    {Account::Type::CreditCard, Icon::ViewCreditCard},
+    {Account::Type::Asset, Icon::ViewAsset},
+    {Account::Type::Cash, Icon::ViewCash},
+    {Account::Type::Income, Icon::ViewIncome},
+    {Account::Type::Expense, Icon::ViewExpense},
+    {Account::Type::Equity, Icon::ViewEquity}
   };
 
   Icon ixIcon = accToIco.value(accountType(), Icon::ViewLiability);
@@ -736,40 +633,40 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   return pxIcon;
 }
 
-QString MyMoneyAccount::accountTypeToString(const Account accountType)
+QString MyMoneyAccount::accountTypeToString(const Account::Type accountType)
 {
   switch (accountType) {
-    case Account::Checkings:
+    case Account::Type::Checkings:
       return i18nc("Account type", "Checking");
-    case Account::Savings:
+    case Account::Type::Savings:
       return i18nc("Account type", "Savings");
-    case Account::CreditCard:
+    case Account::Type::CreditCard:
       return i18nc("Account type", "Credit Card");
-    case Account::Cash:
+    case Account::Type::Cash:
       return i18nc("Account type", "Cash");
-    case Account::Loan:
+    case Account::Type::Loan:
       return i18nc("Account type", "Loan");
-    case Account::CertificateDep:
+    case Account::Type::CertificateDep:
       return i18nc("Account type", "Certificate of Deposit");
-    case Account::Investment:
+    case Account::Type::Investment:
       return i18nc("Account type", "Investment");
-    case Account::MoneyMarket:
+    case Account::Type::MoneyMarket:
       return i18nc("Account type", "Money Market");
-    case Account::Asset:
+    case Account::Type::Asset:
       return i18nc("Account type", "Asset");
-    case Account::Liability:
+    case Account::Type::Liability:
       return i18nc("Account type", "Liability");
-    case Account::Currency:
+    case Account::Type::Currency:
       return i18nc("Account type", "Currency");
-    case Account::Income:
+    case Account::Type::Income:
       return i18nc("Account type", "Income");
-    case Account::Expense:
+    case Account::Type::Expense:
       return i18nc("Account type", "Expense");
-    case Account::AssetLoan:
+    case Account::Type::AssetLoan:
       return i18nc("Account type", "Investment Loan");
-    case Account::Stock:
+    case Account::Type::Stock:
       return i18nc("Account type", "Stock");
-    case Account::Equity:
+    case Account::Type::Equity:
       return i18nc("Account type", "Equity");
     default:
       return i18nc("Account type", "Unknown");
@@ -820,15 +717,16 @@ const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
  */
 QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
 {
+  Q_D(const MyMoneyAccount);
   QList< payeeIdentifier > list;
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // Iban & Bic
-  if (!value(getAttrName(Attribute::IBAN)).isEmpty()) {
+  if (!value(d->getAttrName(Account::Attribute::IBAN)).isEmpty()) {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(new payeeIdentifiers::ibanBic);
-    iban->setIban(value(getAttrName(Attribute::IBAN)));
-    iban->setBic(file->institution(institutionId()).value(getAttrName(Attribute::BIC)));
+    iban->setIban(value(d->getAttrName(Account::Attribute::IBAN)));
+    iban->setBic(file->institution(institutionId()).value(d->getAttrName(Account::Attribute::BIC)));
     iban->setOwnerName(file->user().name());
     list.append(iban);
   }
@@ -845,36 +743,4 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   }
 
   return list;
-}
-
-QString MyMoneyAccount::getElName(const Element el)
-{
-  static const QMap<Element, QString> elNames = {
-    {Element::SubAccount,     QStringLiteral("SUBACCOUNT")},
-    {Element::SubAccounts,    QStringLiteral("SUBACCOUNTS")},
-    {Element::OnlineBanking,  QStringLiteral("ONLINEBANKING")}
-  };
-  return elNames[el];
-}
-
-QString MyMoneyAccount::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::ID,             QStringLiteral("id")},
-    {Attribute::Name,           QStringLiteral("name")},
-    {Attribute::Type,           QStringLiteral("type")},
-    {Attribute::ParentAccount,  QStringLiteral("parentaccount")},
-    {Attribute::LastReconciled, QStringLiteral("lastreconciled")},
-    {Attribute::LastModified,   QStringLiteral("lastmodified")},
-    {Attribute::Institution,    QStringLiteral("institution")},
-    {Attribute::Opened,         QStringLiteral("opened")},
-    {Attribute::Number,         QStringLiteral("number")},
-    {Attribute::Type,           QStringLiteral("type")},
-    {Attribute::Description,    QStringLiteral("description")},
-    {Attribute::Currency,       QStringLiteral("currency")},
-    {Attribute::OpeningBalance, QStringLiteral("openingbalance")},
-    {Attribute::IBAN,           QStringLiteral("iban")},
-    {Attribute::BIC,            QStringLiteral("bic")},
-  };
-  return attrNames[attr];
 }

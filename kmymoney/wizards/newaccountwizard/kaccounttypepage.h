@@ -34,7 +34,7 @@
 class MyMoneyAccount;
 class MyMoneySecurity;
 
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 namespace NewAccountWizard
 {
@@ -55,7 +55,7 @@ namespace NewAccountWizard
 
     QWidget* initialFocusWidget() const override;
 
-    eMyMoney::Account accountType() const;
+    eMyMoney::Account::Type accountType() const;
     const MyMoneyAccount& parentAccount();
     bool allowsParentAccount() const;
     const MyMoneySecurity& currency() const;
@@ -63,7 +63,7 @@ namespace NewAccountWizard
     void setAccount(const MyMoneyAccount& acc);
 
   private:
-    void hideShowPages(eMyMoney::Account i) const;
+    void hideShowPages(eMyMoney::Account::Type i) const;
     void priceWarning(bool);
 
   private slots:

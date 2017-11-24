@@ -129,8 +129,8 @@ void StdTransaction::setupFormHeader(const QString& id)
   Q_D(StdTransaction);
   d->m_category = MyMoneyFile::instance()->accountToCategory(id);
   switch (MyMoneyFile::instance()->account(id).accountGroup()) {
-    case eMyMoney::Account::Asset:
-    case eMyMoney::Account::Liability:
+    case eMyMoney::Account::Type::Asset:
+    case eMyMoney::Account::Type::Liability:
       d->m_categoryHeader = d->m_split.shares().isNegative() ? i18n("Transfer to") : i18n("Transfer from");
       break;
 
@@ -153,8 +153,8 @@ eRegister::Action StdTransaction::actionType() const
     if ((*it_s).accountId() == d->m_split.accountId())
       continue;
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountGroup() == eMyMoney::Account::Income
-        || acc.accountGroup() == eMyMoney::Account::Expense) {
+    if (acc.accountGroup() == eMyMoney::Account::Type::Income
+        || acc.accountGroup() == eMyMoney::Account::Type::Expense) {
       // otherwise, we have to determine between deposit and withdrawal
       action = d->m_split.shares().isNegative() ? eRegister::Action::Withdrawal : eRegister::Action::Deposit;
       break;
@@ -383,8 +383,8 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
             singleLineMemo(txt, d->m_split);
           }
           if (txt.isEmpty() && d->m_rowsRegister < 2) {
-            if (d->m_account.accountType() != eMyMoney::Account::Income
-                && d->m_account.accountType() != eMyMoney::Account::Expense) {
+            if (d->m_account.accountType() != eMyMoney::Account::Type::Income
+                && d->m_account.accountType() != eMyMoney::Account::Type::Expense) {
               txt = d->m_category;
               if (txt.isEmpty() && !d->m_split.value().isZero()) {
                 txt = i18n("*** UNASSIGNED ***");
@@ -673,8 +673,8 @@ int StdTransaction::numRowsRegister(bool expanded) const
       // For income and expense accounts that only have
       // two splits we only show one line, because the
       // account name is already contained in the account column.
-      if (d->m_account.accountType() == eMyMoney::Account::Income
-          || d->m_account.accountType() == eMyMoney::Account::Expense) {
+      if (d->m_account.accountType() == eMyMoney::Account::Type::Income
+          || d->m_account.accountType() == eMyMoney::Account::Type::Expense) {
         if (numRows > 2 && d->m_transaction.splitCount() == 2)
           numRows = 1;
       }

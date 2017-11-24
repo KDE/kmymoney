@@ -56,7 +56,7 @@ namespace KMyMoneyRegister
   };
 }
 
-TypeGroupMarker::TypeGroupMarker(Register* parent, eRegister::CashFlowDirection dir, Account accType) :
+TypeGroupMarker::TypeGroupMarker(Register* parent, eRegister::CashFlowDirection dir, Account::Type accType) :
     GroupMarker(*new TypeGroupMarkerPrivate, parent, QString())
 {
   Q_D(TypeGroupMarker);
@@ -64,13 +64,13 @@ TypeGroupMarker::TypeGroupMarker(Register* parent, eRegister::CashFlowDirection 
   switch (dir) {
     case eRegister::CashFlowDirection::Deposit:
       d->m_txt = i18nc("Deposits onto account", "Deposits");
-      if (accType == Account::CreditCard) {
+      if (accType == Account::Type::CreditCard) {
         d->m_txt = i18nc("Payments towards credit card", "Payments");
       }
       break;
     case eRegister::CashFlowDirection::Payment:
       d->m_txt = i18nc("Payments made from account", "Payments");
-      if (accType == Account::CreditCard) {
+      if (accType == Account::Type::CreditCard) {
         d->m_txt = i18nc("Payments made with credit card", "Charges");
       }
       break;

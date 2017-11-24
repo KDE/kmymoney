@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "mymoneypayee.h"
+#include "mymoneypayee_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -35,54 +36,6 @@
 using namespace MyMoneyStorageNodes;
 
 MyMoneyPayee MyMoneyPayee::null;
-
-class MyMoneyPayeePrivate {
-
-public:
-
-  MyMoneyPayeePrivate() :
-    m_matchingEnabled(false),
-    m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true)
-  {
-  }
-
-  // Simple fields
-  QString m_name;
-  QString m_address;
-  QString m_city;
-  QString m_state;
-  QString m_postcode;
-  QString m_telephone;
-  QString m_email;
-  QString m_notes;
-
-  // Transaction matching fields
-  bool m_matchingEnabled;      //< Whether this payee should be matched at all
-  bool m_usingMatchKey;        //< If so, whether a m_matchKey list is used (true), or just m_name is used (false)
-  bool m_matchKeyIgnoreCase;   //< Whether to ignore the case of the match key or name
-
-  /**
-   * Semicolon separated list of matching keys used when trying to find a suitable
-   * payee for imported transactions.
-   */
-  QString m_matchKey;
-
-  // Category (account) matching fields
-  QString m_defaultAccountId;
-
-  /**
-    * This member keeps a reference to an external database
-    * (e.g. kaddressbook). It is the responsibility of the
-    * application to format the reference string
-    * (e.g. encoding the name of the external database into the
-    * reference string).
-    * If no external database is available it should be kept
-    * empty by the application.
-    */
-  QString m_reference;
-
-};
 
 MyMoneyPayee::MyMoneyPayee() :
   d_ptr(new MyMoneyPayeePrivate)
@@ -120,38 +73,38 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   }
 
   Q_D(MyMoneyPayee);
-  d->m_name = node.attribute(getAttrName(Attribute::Name));
-  d->m_reference = node.attribute(getAttrName(Attribute::Reference));
-  d->m_email = node.attribute(getAttrName(Attribute::Email));
+  d->m_name = node.attribute(d->getAttrName(Payee::Attribute::Name));
+  d->m_reference = node.attribute(d->getAttrName(Payee::Attribute::Reference));
+  d->m_email = node.attribute(d->getAttrName(Payee::Attribute::Email));
 
-  d->m_matchingEnabled = node.attribute(getAttrName(Attribute::MatchingEnabled), "0").toUInt();
+  d->m_matchingEnabled = node.attribute(d->getAttrName(Payee::Attribute::MatchingEnabled), "0").toUInt();
   if (d->m_matchingEnabled) {
-    setMatchData((node.attribute(getAttrName(Attribute::UsingMatchKey), "0").toUInt() != 0) ? matchKey : matchName,
-                 node.attribute(getAttrName(Attribute::MatchIgnoreCase), "0").toUInt(),
-                 node.attribute(getAttrName(Attribute::MatchKey)));
+    setMatchData((node.attribute(d->getAttrName(Payee::Attribute::UsingMatchKey), "0").toUInt() != 0) ? matchKey : matchName,
+                 node.attribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), "0").toUInt(),
+                 node.attribute(d->getAttrName(Payee::Attribute::MatchKey)));
   }
 
-  if (node.hasAttribute(getAttrName(Attribute::Notes))) {
-    d->m_notes = node.attribute(getAttrName(Attribute::Notes));
+  if (node.hasAttribute(d->getAttrName(Payee::Attribute::Notes))) {
+    d->m_notes = node.attribute(d->getAttrName(Payee::Attribute::Notes));
   }
 
-  if (node.hasAttribute(getAttrName(Attribute::DefaultAccountID))) {
-    d->m_defaultAccountId = node.attribute(getAttrName(Attribute::DefaultAccountID));
+  if (node.hasAttribute(d->getAttrName(Payee::Attribute::DefaultAccountID))) {
+    d->m_defaultAccountId = node.attribute(d->getAttrName(Payee::Attribute::DefaultAccountID));
   }
 
   // Load Address
-  QDomNodeList nodeList = node.elementsByTagName(getElName(Element::Address));
+  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Payee::Element::Address));
   if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in payee %1").arg(d->m_name);
     throw MYMONEYEXCEPTION(msg);
   }
 
   QDomElement addrNode = nodeList.item(0).toElement();
-  d->m_address = addrNode.attribute(getAttrName(Attribute::Street));
-  d->m_city = addrNode.attribute(getAttrName(Attribute::City));
-  d->m_postcode = addrNode.attribute(getAttrName(Attribute::PostCode));
-  d->m_state = addrNode.attribute(getAttrName(Attribute::State));
-  d->m_telephone = addrNode.attribute(getAttrName(Attribute::Telephone));
+  d->m_address = addrNode.attribute(d->getAttrName(Payee::Attribute::Street));
+  d->m_city = addrNode.attribute(d->getAttrName(Payee::Attribute::City));
+  d->m_postcode = addrNode.attribute(d->getAttrName(Payee::Attribute::PostCode));
+  d->m_state = addrNode.attribute(d->getAttrName(Payee::Attribute::State));
+  d->m_telephone = addrNode.attribute(d->getAttrName(Payee::Attribute::Telephone));
 
   MyMoneyPayeeIdentifierContainer::loadXML(node);
 }
@@ -216,30 +169,30 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
   writeBaseXML(document, el);
 
   Q_D(const MyMoneyPayee);
-  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
-  el.setAttribute(getAttrName(Attribute::Reference), d->m_reference);
-  el.setAttribute(getAttrName(Attribute::Email), d->m_email);
+  el.setAttribute(d->getAttrName(Payee::Attribute::Name), d->m_name);
+  el.setAttribute(d->getAttrName(Payee::Attribute::Reference), d->m_reference);
+  el.setAttribute(d->getAttrName(Payee::Attribute::Email), d->m_email);
   if (!d->m_notes.isEmpty())
-    el.setAttribute(getAttrName(Attribute::Notes), d->m_notes);
+    el.setAttribute(d->getAttrName(Payee::Attribute::Notes), d->m_notes);
 
-  el.setAttribute(getAttrName(Attribute::MatchingEnabled), d->m_matchingEnabled);
+  el.setAttribute(d->getAttrName(Payee::Attribute::MatchingEnabled), d->m_matchingEnabled);
   if (d->m_matchingEnabled) {
-    el.setAttribute(getAttrName(Attribute::UsingMatchKey), d->m_usingMatchKey);
-    el.setAttribute(getAttrName(Attribute::MatchIgnoreCase), d->m_matchKeyIgnoreCase);
-    el.setAttribute(getAttrName(Attribute::MatchKey), d->m_matchKey);
+    el.setAttribute(d->getAttrName(Payee::Attribute::UsingMatchKey), d->m_usingMatchKey);
+    el.setAttribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), d->m_matchKeyIgnoreCase);
+    el.setAttribute(d->getAttrName(Payee::Attribute::MatchKey), d->m_matchKey);
   }
 
   if (!d->m_defaultAccountId.isEmpty()) {
-    el.setAttribute(getAttrName(Attribute::DefaultAccountID), d->m_defaultAccountId);
+    el.setAttribute(d->getAttrName(Payee::Attribute::DefaultAccountID), d->m_defaultAccountId);
   }
 
   // Save address
-  QDomElement address = document.createElement(getElName(Element::Address));
-  address.setAttribute(getAttrName(Attribute::Street), d->m_address);
-  address.setAttribute(getAttrName(Attribute::City), d->m_city);
-  address.setAttribute(getAttrName(Attribute::PostCode), d->m_postcode);
-  address.setAttribute(getAttrName(Attribute::State), d->m_state);
-  address.setAttribute(getAttrName(Attribute::Telephone), d->m_telephone);
+  QDomElement address = document.createElement(d->getElName(Payee::Element::Address));
+  address.setAttribute(d->getAttrName(Payee::Attribute::Street), d->m_address);
+  address.setAttribute(d->getAttrName(Payee::Attribute::City), d->m_city);
+  address.setAttribute(d->getAttrName(Payee::Attribute::PostCode), d->m_postcode);
+  address.setAttribute(d->getAttrName(Payee::Attribute::State), d->m_state);
+  address.setAttribute(d->getAttrName(Payee::Attribute::Telephone), d->m_telephone);
 
   el.appendChild(address);
 
@@ -442,37 +395,6 @@ void MyMoneyPayee::setDefaultAccountId(const QString& id)
 void MyMoneyPayee::setDefaultAccountId()
 {
   setDefaultAccountId(QString());
-}
-
-
-QString MyMoneyPayee::getElName(const Element el)
-{
-  static const QMap<Element, QString> elNames = {
-    {Element::Address, QStringLiteral("ADDRESS")}
-  };
-  return elNames[el];
-}
-
-QString MyMoneyPayee::getAttrName(const Attribute attr)
-{
-  static const QHash<Attribute, QString> attrNames = {
-    {Attribute::Name,             QStringLiteral("name")},
-    {Attribute::Type,             QStringLiteral("type")},
-    {Attribute::Reference,        QStringLiteral("reference")},
-    {Attribute::Notes,            QStringLiteral("notes")},
-    {Attribute::MatchingEnabled,  QStringLiteral("matchingenabled")},
-    {Attribute::UsingMatchKey,    QStringLiteral("usingmatchkey")},
-    {Attribute::MatchIgnoreCase,  QStringLiteral("matchignorecase")},
-    {Attribute::MatchKey,         QStringLiteral("matchkey")},
-    {Attribute::DefaultAccountID, QStringLiteral("defaultaccountid")},
-    {Attribute::Street,           QStringLiteral("street")},
-    {Attribute::City,             QStringLiteral("city")},
-    {Attribute::PostCode,         QStringLiteral("postcode")},
-    {Attribute::Email,            QStringLiteral("email")},
-    {Attribute::State,            QStringLiteral("state")},
-    {Attribute::Telephone,        QStringLiteral("telephone")},
-  };
-  return attrNames[attr];
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

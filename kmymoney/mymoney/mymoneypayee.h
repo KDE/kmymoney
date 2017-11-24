@@ -179,36 +179,7 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyPayee null;
-
-private:
-  enum class Element { Address };
-
-  enum class Attribute { Name = 0,
-                         Type,
-                         Reference,
-                         Notes,
-                         MatchingEnabled,
-                         UsingMatchKey,
-                         MatchIgnoreCase,
-                         MatchKey,
-                         DefaultAccountID,
-                         Street,
-                         City,
-                         PostCode,
-                         Email,
-                         State,
-                         Telephone,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const MyMoneyPayee::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyPayee& first, MyMoneyPayee& second) // krazy:exclude=inline
 {

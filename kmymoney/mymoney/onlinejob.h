@@ -314,30 +314,7 @@ private:
 
   /** @brief Copies stored pointers (used by copy constructors) */
   inline void copyPointerFromOtherJob(const onlineJob& other);
-
-  enum class Element { OnlineTask };
-
-  enum class Attribute { Send = 0,
-                         BankAnswerDate,
-                         BankAnswerState,
-                         IID,
-                         AbortedByUser,
-                         AcceptedByBank,
-                         RejectedByBank,
-                         SendingError,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Element, uint seed);
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const onlineJob::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const onlineJob::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(onlineJob& first, onlineJob& second) // krazy:exclude=inline
 {

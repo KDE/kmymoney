@@ -53,10 +53,10 @@ KMyMoneyAccountCompletion::KMyMoneyAccountCompletion(QWidget *parent) :
   // Default is to show all accounts
   // FIXME We should leave this also to the caller
   AccountSet set;
-  set.addAccountGroup(eMyMoney::Account::Asset);
-  set.addAccountGroup(eMyMoney::Account::Liability);
-  set.addAccountGroup(eMyMoney::Account::Income);
-  set.addAccountGroup(eMyMoney::Account::Expense);
+  set.addAccountGroup(eMyMoney::Account::Type::Asset);
+  set.addAccountGroup(eMyMoney::Account::Type::Liability);
+  set.addAccountGroup(eMyMoney::Account::Type::Income);
+  set.addAccountGroup(eMyMoney::Account::Type::Expense);
   set.load(selector());
 #endif
 
@@ -67,14 +67,14 @@ KMyMoneyAccountCompletion::~KMyMoneyAccountCompletion()
 {
 }
 
-QStringList KMyMoneyAccountCompletion::accountList(const QList<eMyMoney::Account>& list = QList<eMyMoney::Account>()) const
+QStringList KMyMoneyAccountCompletion::accountList(const QList<eMyMoney::Account::Type>& list = QList<eMyMoney::Account::Type>()) const
 {
   return selector()->accountList(list);
 }
 
 QStringList KMyMoneyAccountCompletion::accountList() const
 {
-  return accountList(QList<eMyMoney::Account>());
+  return accountList(QList<eMyMoney::Account::Type>());
 }
 
 KMyMoneyAccountSelector* KMyMoneyAccountCompletion::selector() const

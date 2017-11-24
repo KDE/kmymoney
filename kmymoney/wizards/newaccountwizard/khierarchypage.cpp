@@ -63,7 +63,7 @@ namespace NewAccountWizard
     d->m_filterProxyModel = new HierarchyFilterProxyModel(this);
     d->m_filterProxyModel->setHideClosedAccounts(true);
     d->m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-    d->m_filterProxyModel->addAccountGroup(QVector<Account> {Account::Asset, Account::Liability});
+    d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability});
     auto const model = Models::instance()->accountsModel();
     d->m_filterProxyModel->setSourceModel(model);
     d->m_filterProxyModel->setSourceColumns(model->getColumns());
@@ -85,7 +85,7 @@ namespace NewAccountWizard
     // Ensure that the list reflects the Account Type
     MyMoneyAccount topAccount = d->m_wizard->d_func()->m_accountTypePage->parentAccount();
     d->m_filterProxyModel->clear();
-    d->m_filterProxyModel->addAccountGroup(QVector<Account> {topAccount.accountGroup()});
+    d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {topAccount.accountGroup()});
     d->ui->m_parentAccounts->expandAll();
   }
 

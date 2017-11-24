@@ -46,7 +46,7 @@ QString csvDataset(const int set) {
   return csvContent;
 }
 
-QString makeAccount(const QString& name, const QString& number, eMyMoney::Account type, const QDate& open, const QString& parent)
+QString makeAccount(const QString& name, const QString& number, eMyMoney::Account::Type type, const QDate& open, const QString& parent)
 {
   MyMoneyAccount acc;
   MyMoneyFileTransaction ft;

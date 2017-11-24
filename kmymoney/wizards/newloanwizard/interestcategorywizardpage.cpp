@@ -84,10 +84,10 @@ void InterestCategoryWizardPage::slotCreateCategory()
 
   if (field("borrowButton").toBool()) {
     base = file->expense();
-    acc.setAccountType(eMyMoney::Account::Expense);
+    acc.setAccountType(eMyMoney::Account::Type::Expense);
   } else {
     base = file->income();
-    acc.setAccountType(eMyMoney::Account::Income);
+    acc.setAccountType(eMyMoney::Account::Type::Income);
   }
   acc.setParentAccountId(base.id());
 

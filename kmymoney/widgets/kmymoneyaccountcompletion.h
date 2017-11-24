@@ -34,7 +34,7 @@
 
 #include "kmymoneycompletion.h"
 
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 
 class KMyMoneyAccountSelector;
 
@@ -51,7 +51,7 @@ public:
   explicit KMyMoneyAccountCompletion(QWidget* parent = nullptr);
   ~KMyMoneyAccountCompletion() override;
 
-  QStringList accountList(const QList<eMyMoney::Account>& list) const;
+  QStringList accountList(const QList<eMyMoney::Account::Type>& list) const;
   QStringList accountList() const;
 
   /**

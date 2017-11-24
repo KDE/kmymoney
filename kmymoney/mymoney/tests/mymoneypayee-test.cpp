@@ -21,6 +21,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyPayeeTest;
 
 #include "mymoneypayee.h"
+#include "mymoneypayee_p.h"
 
 using namespace std;
 
@@ -209,8 +210,8 @@ void MyMoneyPayeeTest::testMatchNameExact()
 
 void MyMoneyPayeeTest::testElementNames()
 {
-  for (auto i = (int)MyMoneyPayee::Element::Address; i <= (int)MyMoneyPayee::Element::Address; ++i) {
-    auto isEmpty = MyMoneyPayee::getElName(static_cast<MyMoneyPayee::Element>(i)).isEmpty();
+  for (auto i = (int)Payee::Element::Address; i <= (int)Payee::Element::Address; ++i) {
+    auto isEmpty = MyMoneyPayeePrivate::getElName(static_cast<Payee::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -219,8 +220,8 @@ void MyMoneyPayeeTest::testElementNames()
 
 void MyMoneyPayeeTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneyPayee::Attribute::Name; i < (int)MyMoneyPayee::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyPayee::getAttrName(static_cast<MyMoneyPayee::Attribute>(i)).isEmpty();
+  for (auto i = (int)Payee::Attribute::Name; i < (int)Payee::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyPayeePrivate::getAttrName(static_cast<Payee::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

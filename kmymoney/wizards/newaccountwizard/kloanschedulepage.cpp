@@ -115,13 +115,13 @@ namespace NewAccountWizard
     Q_D(LoanSchedulePage);
     AccountSet set;
     if (d->m_wizard->moneyBorrowed())
-      set.addAccountGroup(Account::Expense);
+      set.addAccountGroup(Account::Type::Expense);
     else
-      set.addAccountGroup(Account::Income);
+      set.addAccountGroup(Account::Type::Income);
     set.load(d->ui->m_interestCategory->selector());
 
     set.clear();
-    set.addAccountGroup(Account::Asset);
+    set.addAccountGroup(Account::Type::Asset);
     set.load(d->ui->m_paymentAccount->selector());
   }
 

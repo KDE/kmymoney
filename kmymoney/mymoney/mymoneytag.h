@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QMetaType>
-#include <QHash>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,16 +42,16 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
   Q_DECLARE_PRIVATE(MyMoneyTag)
   MyMoneyTagPrivate* d_ptr;
 
-  KMM_MYMONEY_UNIT_TESTABLE 
+  KMM_MYMONEY_UNIT_TESTABLE
 
-public:
-  MyMoneyTag();
+  public:
+    MyMoneyTag();
 
   explicit MyMoneyTag(const QString& name);
 
   explicit MyMoneyTag(const QString& name,
                       const QColor& tagColor
-                     );
+                      );
   /**
     * This is the constructor for a tag that is described by a
     * QDomElement (e.g. from a file).
@@ -102,23 +101,7 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyTag null;
-
-private:
-  enum class Attribute { Name = 0 ,
-                         Type,
-                         TagColor,
-                         Closed,
-                         Notes,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const MyMoneyTag::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyTag& first, MyMoneyTag& second) // krazy:exclude=inline
 {

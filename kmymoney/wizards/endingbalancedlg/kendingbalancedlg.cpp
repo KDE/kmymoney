@@ -119,7 +119,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
     setStartId(Page_PreviousPostpone);
 
     MyMoneyMoney factor(1, 1);
-    if (d->m_account.accountGroup() == eMyMoney::Account::Liability)
+    if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability)
       factor = -factor;
 
     startBalance = MyMoneyMoney(value) * factor;
@@ -220,7 +220,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
 
   MyMoneyMoney balance = MyMoneyFile::instance()->balance(d->m_account.id());
   MyMoneyMoney factor(1, 1);
-  if (d->m_account.accountGroup() == eMyMoney::Account::Liability)
+  if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability)
     factor = -factor;
 
   MyMoneyMoney endBalance, startBalance;
@@ -310,7 +310,7 @@ QDate KEndingBalanceDlg::statementDate() const
 MyMoneyMoney KEndingBalanceDlg::adjustedReturnValue(const MyMoneyMoney& v) const
 {
   Q_D(const KEndingBalanceDlg);
-  return d->m_account.accountGroup() == eMyMoney::Account::Liability ? -v : v;
+  return d->m_account.accountGroup() == eMyMoney::Account::Type::Liability ? -v : v;
 }
 
 void KEndingBalanceDlg::slotReloadEditWidgets()
@@ -329,8 +329,8 @@ void KEndingBalanceDlg::slotReloadEditWidgets()
 
   // a user request to show all categories in both selectors due to a valid use case.
   AccountSet aSet;
-  aSet.addAccountGroup(eMyMoney::Account::Expense);
-  aSet.addAccountGroup(eMyMoney::Account::Income);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
+  aSet.addAccountGroup(eMyMoney::Account::Type::Income);
   //FIXME: port
   aSet.load(d->ui->m_interestChargeCheckings->ui->m_interestCategoryEdit->selector());
   aSet.load(d->ui->m_interestChargeCheckings->ui->m_chargesCategoryEdit->selector());

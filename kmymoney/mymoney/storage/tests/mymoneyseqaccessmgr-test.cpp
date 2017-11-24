@@ -396,7 +396,7 @@ void MyMoneySeqAccessMgrTest::testModifyAccount()
 
   // use different account type
   MyMoneyAccount d;
-  d.setAccountType(Account::CreditCard);
+  d.setAccountType(Account::Type::CreditCard);
   MyMoneyAccount f("A000001", d);
   try {
     m->modifyAccount(f);
@@ -445,17 +445,17 @@ void MyMoneySeqAccessMgrTest::testReparentAccount()
 {
   // this one adds some accounts to the database
   MyMoneyAccount ex1;
-  ex1.setAccountType(Account::Expense);
+  ex1.setAccountType(Account::Type::Expense);
   MyMoneyAccount ex2;
-  ex2.setAccountType(Account::Expense);
+  ex2.setAccountType(Account::Type::Expense);
   MyMoneyAccount ex3;
-  ex3.setAccountType(Account::Expense);
+  ex3.setAccountType(Account::Type::Expense);
   MyMoneyAccount ex4;
-  ex4.setAccountType(Account::Expense);
+  ex4.setAccountType(Account::Type::Expense);
   MyMoneyAccount in;
-  in.setAccountType(Account::Income);
+  in.setAccountType(Account::Type::Income);
   MyMoneyAccount ch;
-  ch.setAccountType(Account::Checkings);
+  ch.setAccountType(Account::Type::Checkings);
 
   ex1.setName("Sales Tax");
   ex2.setName("Sales Tax 16%");

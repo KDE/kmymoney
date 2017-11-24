@@ -27,7 +27,7 @@
 // without using this macro directly, I'll be freed of KDE dependency.  This
 // is a minor problem because we use these terms when rendering to HTML,
 // and a more major problem because we need it to translate account types
-// (e.g. eMyMoney::Account::Checkings) into their text representation.  We also
+// (e.g. eMyMoney::Account::Type::Checkings) into their text representation.  We also
 // use that text representation in the core data structure of the report. (Ace)
 
 // ----------------------------------------------------------------------------
@@ -325,7 +325,7 @@ QString ReportAccount::topParentName() const
 
 bool ReportAccount::isLiquidLiability() const
 {
-  return accountType() == eMyMoney::Account::CreditCard;
+  return accountType() == eMyMoney::Account::Type::CreditCard;
 
 }
 

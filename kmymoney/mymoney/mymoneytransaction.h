@@ -302,42 +302,7 @@ public:
    * @return false if nothing has been modified
    */
   bool replaceId(const QString& newId, const QString& oldId);
-
-private:
-
-  static const int SPLIT_ID_SIZE = 4;
-  /** constants for unique sort key */
-  static const int YEAR_SIZE = 4;
-  static const int MONTH_SIZE = 2;
-  static const int DAY_SIZE = 2;
-
-  enum class Element { Split = 0,
-                       Splits };
-
-  enum class Attribute { Name = 0,
-                         Type,
-                         PostDate,
-                         Memo,
-                         EntryDate,
-                         Commodity,
-                         BankID,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  /**
-    * This method returns the next id to be used for a split
-    */
-  QString nextSplitID();
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-  friend uint qHash(const Attribute, uint seed);
-  friend uint qHash(const Element, uint seed);
 };
-
-inline uint qHash(const MyMoneyTransaction::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const MyMoneyTransaction::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyTransaction& first, MyMoneyTransaction& second) // krazy:exclude=inline
 {

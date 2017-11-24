@@ -41,7 +41,7 @@ class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
 namespace payeeIdentifiers { class ibanBic; }
-namespace eMyMoney { enum class Account; }
+namespace eMyMoney { namespace Account { enum class Type; } }
 template <class T> class payeeIdentifierTyped;
 
 /**
@@ -159,7 +159,7 @@ public:
     *
     * @return accountTypeE of major account type
     */
-  eMyMoney::Account accountGroup() const;
+  eMyMoney::Account::Type accountGroup() const;
 
   /**
     * This method returns the id of the MyMoneyInstitution object this account
@@ -334,14 +334,14 @@ public:
   /**
     * This method returns the type of the account.
     */
-  eMyMoney::Account accountType() const;
+  eMyMoney::Account::Type accountType() const;
 
   /**
     * This method is used to change the account type
     *
     * @param type account type
     */
-  void setAccountType(const eMyMoney::Account type);
+  void setAccountType(const eMyMoney::Account::Type type);
 
   /**
     * This method retrieves the id of the currency used with this account.
@@ -545,10 +545,10 @@ public:
    * an account type into a human readable format
    *
    * @param accountType numerical representation of the account type.
-   *                    For possible values, see eMyMoney::Account
+   *                    For possible values, see eMyMoney::Account::Type
    * @return QString representing the human readable form
    */
-  static QString accountTypeToString(const eMyMoney::Account accountType);
+  static QString accountTypeToString(const eMyMoney::Account::Type accountType);
 
   /**
     * keeps a history record of a reconciliation for this account on @a date
@@ -569,40 +569,7 @@ public:
 
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);
-
-private:
-
-  enum class Element { SubAccount,
-                       SubAccounts,
-                       OnlineBanking
-                     };
-
-  enum class Attribute { ID = 0 ,
-                         Name,
-                         Type,
-                         ParentAccount,
-                         LastReconciled,
-                         LastModified,
-                         Institution,
-                         Opened,
-                         Number,
-                         Description,
-                         Currency,
-                         OpeningBalance,
-                         IBAN,
-                         BIC,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  static QString getElName(const Element el);
-  static QString getAttrName(const Attribute attr);
-  friend uint qHash(const Attribute, uint seed);
-  friend uint qHash(const Element, uint seed);
 };
-
-inline uint qHash(const MyMoneyAccount::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
-inline uint qHash(const MyMoneyAccount::Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyAccount& first, MyMoneyAccount& second) // krazy:exclude=inline
 {
@@ -638,6 +605,6 @@ QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::paye
  * @ref accountTypeE and @ref amountTypeE inside @ref QVariant objects.
  */
 Q_DECLARE_METATYPE(MyMoneyAccount)
-Q_DECLARE_METATYPE(eMyMoney::Account)
+Q_DECLARE_METATYPE(eMyMoney::Account::Type)
 
 #endif

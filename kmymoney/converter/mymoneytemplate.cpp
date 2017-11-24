@@ -185,13 +185,13 @@ void MyMoneyTemplate::hierarchy(QMap<QString, QTreeWidgetItem*>& list)
     QString name = rootNode.attribute("name");
     if (rootNode.tagName() == "account") {
         rootNode = rootNode.firstChild().toElement();
-        eMyMoney::Account type = static_cast<eMyMoney::Account>(accounts.toElement().attribute("type").toUInt());
+        eMyMoney::Account::Type type = static_cast<eMyMoney::Account::Type>(accounts.toElement().attribute("type").toUInt());
         switch (type) {
-        case eMyMoney::Account::Asset:
-        case eMyMoney::Account::Liability:
-        case eMyMoney::Account::Income:
-        case eMyMoney::Account::Expense:
-        case eMyMoney::Account::Equity:
+        case eMyMoney::Account::Type::Asset:
+        case eMyMoney::Account::Type::Liability:
+        case eMyMoney::Account::Type::Income:
+        case eMyMoney::Account::Type::Expense:
+        case eMyMoney::Account::Type::Equity:
           if (name.isEmpty())
             name = MyMoneyAccount::accountTypeToString(type);
           list[name] = 0;
@@ -223,19 +223,19 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
       ++m_accountsRead;
       MyMoneyAccount parent;
       switch (childElement.attribute("type").toUInt()) {
-        case (uint)eMyMoney::Account::Asset:
+        case (uint)eMyMoney::Account::Type::Asset:
           parent = file->asset();
           break;
-        case (uint)eMyMoney::Account::Liability:
+        case (uint)eMyMoney::Account::Type::Liability:
           parent = file->liability();
           break;
-        case (uint)eMyMoney::Account::Income:
+        case (uint)eMyMoney::Account::Type::Income:
           parent = file->income();
           break;
-        case (uint)eMyMoney::Account::Expense:
+        case (uint)eMyMoney::Account::Type::Expense:
           parent = file->expense();
           break;
-        case (uint)eMyMoney::Account::Equity:
+        case (uint)eMyMoney::Account::Type::Equity:
           parent = file->equity();
           break;
 
@@ -283,7 +283,7 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
         if (it == subAccountList.constEnd()) {
           // not found, we need to create it
           acc.setName(accountElement.attribute("name"));
-          acc.setAccountType(static_cast<eMyMoney::Account>(accountElement.attribute("type").toUInt()));
+          acc.setAccountType(static_cast<eMyMoney::Account::Type>(accountElement.attribute("type").toUInt()));
           setFlags(acc, account.firstChild());
           try {
             MyMoneyFile::instance()->addAccount(acc, parent);

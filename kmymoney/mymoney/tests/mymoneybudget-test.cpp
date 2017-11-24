@@ -22,6 +22,7 @@
 
 #include "mymoneymoney.h"
 #include "mymoneybudget.h"
+#include "mymoneybudget_p.h"
 
 QTEST_GUILESS_MAIN(MyMoneyBudgetTest)
 
@@ -275,8 +276,8 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthByMonth()
 
 void MyMoneyBudgetTest::testElementNames()
 {
-  for (auto i = (int)MyMoneyBudget::Element::Budget; i <= (int)MyMoneyBudget::Element::Period; ++i) {
-    auto isEmpty = MyMoneyBudget::getElName(static_cast<MyMoneyBudget::Element>(i)).isEmpty();
+  for (auto i = (int)Budget::Element::Budget; i <= (int)Budget::Element::Period; ++i) {
+    auto isEmpty = MyMoneyBudgetPrivate::getElName(static_cast<Budget::Element>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -285,8 +286,8 @@ void MyMoneyBudgetTest::testElementNames()
 
 void MyMoneyBudgetTest::testAttributeNames()
 {
-  for (auto i = (int)MyMoneyBudget::Attribute::ID; i < (int)MyMoneyBudget::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyBudget::getAttrName(static_cast<MyMoneyBudget::Attribute>(i)).isEmpty();
+  for (auto i = (int)Budget::Attribute::ID; i < (int)Budget::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyBudgetPrivate::getAttrName(static_cast<Budget::Attribute>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

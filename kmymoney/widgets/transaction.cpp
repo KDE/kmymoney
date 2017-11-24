@@ -379,7 +379,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
   // do we need to switch to the negative balance color?
   if (index.column() == (int)eTransaction::Column::Balance) {
     bool showNegative = d->m_balance.isNegative();
-    if (d->m_account.accountGroup() == eMyMoney::Account::Liability && !d->m_balance.isZero())
+    if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability && !d->m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
       option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
@@ -638,21 +638,21 @@ bool Transaction::haveNumberField() const
   Q_D(const Transaction);
   auto rc = true;
   switch (d->m_account.accountType()) {
-    case eMyMoney::Account::Savings:
-    case eMyMoney::Account::Cash:
-    case eMyMoney::Account::Loan:
-    case eMyMoney::Account::AssetLoan:
-    case eMyMoney::Account::Asset:
-    case eMyMoney::Account::Liability:
-    case eMyMoney::Account::Equity:
+    case eMyMoney::Account::Type::Savings:
+    case eMyMoney::Account::Type::Cash:
+    case eMyMoney::Account::Type::Loan:
+    case eMyMoney::Account::Type::AssetLoan:
+    case eMyMoney::Account::Type::Asset:
+    case eMyMoney::Account::Type::Liability:
+    case eMyMoney::Account::Type::Equity:
       rc = KMyMoneyGlobalSettings::alwaysShowNrField();
       break;
 
-    case eMyMoney::Account::Checkings:
-    case eMyMoney::Account::CreditCard:
+    case eMyMoney::Account::Type::Checkings:
+    case eMyMoney::Account::Type::CreditCard:
       // the next case is used for the editor when the account
       // is unknown (eg. when creating new schedules)
-    case eMyMoney::Account::Unknown:
+    case eMyMoney::Account::Type::Unknown:
       break;
 
     default:

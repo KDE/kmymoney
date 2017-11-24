@@ -129,23 +129,23 @@ void KAccountSelectDlg::slotReloadWidget()
   Q_D(KAccountSelectDlg);
   AccountSet set;
   if (d->m_accountType & eDialogs::Category::asset)
-    set.addAccountGroup(eMyMoney::Account::Asset);
+    set.addAccountGroup(eMyMoney::Account::Type::Asset);
   if (d->m_accountType & eDialogs::Category::liability)
-    set.addAccountGroup(eMyMoney::Account::Liability);
+    set.addAccountGroup(eMyMoney::Account::Type::Liability);
   if (d->m_accountType & eDialogs::Category::income)
-    set.addAccountGroup(eMyMoney::Account::Income);
+    set.addAccountGroup(eMyMoney::Account::Type::Income);
   if (d->m_accountType & eDialogs::Category::expense)
-    set.addAccountGroup(eMyMoney::Account::Expense);
+    set.addAccountGroup(eMyMoney::Account::Type::Expense);
   if (d->m_accountType & eDialogs::Category::equity)
-    set.addAccountGroup(eMyMoney::Account::Equity);
+    set.addAccountGroup(eMyMoney::Account::Type::Equity);
   if (d->m_accountType & eDialogs::Category::checking)
-    set.addAccountType(eMyMoney::Account::Checkings);
+    set.addAccountType(eMyMoney::Account::Type::Checkings);
   if (d->m_accountType & eDialogs::Category::savings)
-    set.addAccountType(eMyMoney::Account::Savings);
+    set.addAccountType(eMyMoney::Account::Type::Savings);
   if (d->m_accountType & eDialogs::Category::investment)
-    set.addAccountType(eMyMoney::Account::Investment);
+    set.addAccountType(eMyMoney::Account::Type::Investment);
   if (d->m_accountType & eDialogs::Category::creditCard)
-    set.addAccountType(eMyMoney::Account::CreditCard);
+    set.addAccountType(eMyMoney::Account::Type::CreditCard);
 
   set.load(d->ui->m_accountSelector->selector());
 }
@@ -185,7 +185,7 @@ void KAccountSelectDlg::slotCreateAccount()
       accept();
     }
   } else {
-    if (d->m_account.accountType() == eMyMoney::Account::Expense)
+    if (d->m_account.accountType() == eMyMoney::Account::Type::Expense)
       kmymoney->createCategory(d->m_account, MyMoneyFile::instance()->expense());
     else
       kmymoney->createCategory(d->m_account, MyMoneyFile::instance()->income());
