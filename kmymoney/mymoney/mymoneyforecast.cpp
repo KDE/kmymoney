@@ -62,7 +62,7 @@ class MyMoneyForecastPrivate
   Q_DECLARE_PUBLIC(MyMoneyForecast)
 
 public:
-  MyMoneyForecastPrivate(MyMoneyForecast *qq) :
+  explicit MyMoneyForecastPrivate(MyMoneyForecast *qq) :
     q_ptr(qq),
     m_accountsCycle(30),
     m_forecastCycles(3),
@@ -1000,6 +1000,25 @@ MyMoneyForecast::MyMoneyForecast() :
 MyMoneyForecast::MyMoneyForecast(const MyMoneyForecast& other) :
   d_ptr(new MyMoneyForecastPrivate(*other.d_func()))
 {
+  this->d_ptr->q_ptr = this;
+}
+
+void swap(MyMoneyForecast& first, MyMoneyForecast& second)
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+  swap(first.d_ptr->q_ptr, second.d_ptr->q_ptr);
+}
+
+MyMoneyForecast::MyMoneyForecast(MyMoneyForecast && other) : MyMoneyForecast()
+{
+  swap(*this, other);
+}
+
+MyMoneyForecast & MyMoneyForecast::operator=(MyMoneyForecast other)
+{
+  swap(*this, other);
+  return *this;
 }
 
 MyMoneyForecast::~MyMoneyForecast()

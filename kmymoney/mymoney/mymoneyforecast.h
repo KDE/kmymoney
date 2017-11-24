@@ -208,23 +208,6 @@ public:
   static QList<MyMoneyAccount> forecastAccountList();
 };
 
-inline void swap(MyMoneyForecast& first, MyMoneyForecast& second) // krazy:exclude=inline
-{
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
-}
-
-inline MyMoneyForecast::MyMoneyForecast(MyMoneyForecast && other) : MyMoneyForecast() // krazy:exclude=inline
-{
-  swap(*this, other);
-}
-
-inline MyMoneyForecast & MyMoneyForecast::operator=(MyMoneyForecast other) // krazy:exclude=inline
-{
-  swap(*this, other);
-  return *this;
-}
-
 /**
   * Make it possible to hold @ref MyMoneyForecast objects inside @ref QVariant objects.
   */
