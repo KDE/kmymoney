@@ -40,9 +40,10 @@
 #include <alkimia/alkvalue.h>
 #include "mymoneyobject.h"
 #include "mymoneykeyvaluecontainer.h"
-#include "mymoneyenums.h"
 
 class QString;
+
+namespace eMyMoney { enum class Security; }
 
 /**
   * Class that holds all the required information about a security that the user

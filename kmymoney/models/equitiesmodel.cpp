@@ -33,6 +33,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
+#include "mymoneyenums.h"
 
 class EquitiesModel::Private
 {

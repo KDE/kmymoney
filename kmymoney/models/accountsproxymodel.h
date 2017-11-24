@@ -33,8 +33,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-
 /**
   * A proxy model to provide various sorting and filtering operations for @ref AccountsModel.
   *
@@ -57,9 +55,8 @@
   *
   */
 
-namespace eAccountsModel {
-  enum class Column;
-}
+namespace eMyMoney { enum class Account; }
+namespace eAccountsModel { enum class Column; }
 
 class AccountsProxyModel : public KRecursiveFilterProxyModel
 {

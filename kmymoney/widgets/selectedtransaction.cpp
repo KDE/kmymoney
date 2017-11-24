@@ -32,6 +32,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 using namespace KMyMoneyRegister;
 

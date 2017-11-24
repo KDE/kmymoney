@@ -47,6 +47,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneyenums.h"
 
 using KWallet::Wallet;
 

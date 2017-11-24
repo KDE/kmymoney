@@ -31,6 +31,7 @@
 #include "models.h"
 #include "ledgermodel.h"
 #include "ui_ledgerviewpage.h"
+#include "mymoneyenums.h"
 
 class LedgerViewPage::Private
 {

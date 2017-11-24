@@ -47,6 +47,7 @@
 #include <kbalanceaxis.h>
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
+#include "mymoneyenums.h"
 
 using namespace reports;
 

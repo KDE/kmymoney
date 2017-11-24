@@ -24,6 +24,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MyMoneySplitTest)
 

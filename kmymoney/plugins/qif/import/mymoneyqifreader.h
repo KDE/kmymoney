@@ -43,6 +43,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 #include "../config/mymoneyqifprofile.h"
 
 class MyMoneyFileTransaction;

@@ -54,6 +54,8 @@
 #include "models.h"
 #include "accountsmodel.h"
 #include "hierarchyfilterproxymodel.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 using namespace eMyMoney;
 

@@ -38,6 +38,7 @@
 #include "mymoneyaccount.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
+#include "mymoneyenums.h"
 
 KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
   QDialog(parent),

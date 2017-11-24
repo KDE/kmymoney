@@ -47,6 +47,8 @@
 #include "widgethintframe.h"
 #include "ledgerview.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 using namespace Icons;
 

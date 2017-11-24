@@ -54,6 +54,7 @@
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 MyMoneyStorageDump::MyMoneyStorageDump()
 {

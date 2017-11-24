@@ -38,6 +38,7 @@
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "reportdebug.h"
+#include "mymoneyenums.h"
 
 namespace reports
 {

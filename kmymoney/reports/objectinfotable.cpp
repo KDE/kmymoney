@@ -47,6 +47,7 @@
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
+#include "mymoneyenums.h"
 
 namespace reports
 {

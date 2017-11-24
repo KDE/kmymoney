@@ -64,6 +64,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
 #include "storageenums.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 

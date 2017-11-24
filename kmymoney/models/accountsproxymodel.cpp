@@ -31,6 +31,7 @@
 // Project Includes
 
 #include "modelenums.h"
+#include "mymoneyenums.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"

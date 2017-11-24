@@ -64,6 +64,7 @@
 #include "mymoneyprice.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 using namespace NewAccountWizard;
 using namespace Icons;

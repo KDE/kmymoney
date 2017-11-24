@@ -55,6 +55,7 @@
 
 #include "numbertowords.h"
 #include "pluginsettings.h"
+#include "mymoneyenums.h"
 
 struct KMMPrintCheckPlugin::Private {
   QAction* m_action;

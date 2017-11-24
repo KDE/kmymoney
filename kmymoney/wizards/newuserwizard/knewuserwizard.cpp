@@ -53,6 +53,7 @@
 #include "kmymoneyedit.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneytemplate.h"
+#include "mymoneyenums.h"
 
 namespace NewUserWizard
 {

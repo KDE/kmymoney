@@ -51,6 +51,7 @@
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "mymoneystoragenames.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
 
 using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;

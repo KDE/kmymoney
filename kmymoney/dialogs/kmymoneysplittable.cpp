@@ -66,6 +66,7 @@
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
 #include "icons.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 

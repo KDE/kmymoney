@@ -50,6 +50,7 @@
 #include "mymoneytransaction.h"
 #include "kmymoneyutils.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 

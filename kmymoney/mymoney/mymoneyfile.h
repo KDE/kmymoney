@@ -27,7 +27,6 @@
 // Project Includes
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
-#include "mymoneyenums.h"
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio, Christian Dávid
@@ -142,6 +141,15 @@ class MyMoneyObject;
 class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
+
+namespace eMyMoney { enum class Account;
+                     namespace File { enum class Object; }
+                     namespace Schedule { enum class Type;
+                                          enum class Occurrence;
+                                          enum class PaymentType; }
+                     namespace TransactionFilter { enum class State; }
+                   }
+
 class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
@@ -774,7 +782,8 @@ public:
     * @return QString of the corresponding account. If account was not found
     *         the return value will be an empty string.
     */
-  QString categoryToAccount(const QString& category, eMyMoney::Account type = eMyMoney::Account::Unknown) const;
+  QString categoryToAccount(const QString& category, eMyMoney::Account type) const;
+  QString categoryToAccount(const QString& category) const;
 
   /**
     * This method is used to convert a string representing an asset or

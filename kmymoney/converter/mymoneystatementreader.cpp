@@ -67,6 +67,8 @@
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 #include "dialogenums.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 using namespace eMyMoney;
 

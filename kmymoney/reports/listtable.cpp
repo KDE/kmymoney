@@ -43,6 +43,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "kmymoneyglobalsettings.h"
+#include "mymoneyenums.h"
 
 namespace reports
 {

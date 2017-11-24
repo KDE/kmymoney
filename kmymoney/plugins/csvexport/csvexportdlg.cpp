@@ -45,6 +45,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 

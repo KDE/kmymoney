@@ -38,6 +38,7 @@
 #include "splitmodel.h"
 #include "newspliteditor.h"
 #include "mymoneyaccount.h"
+#include "modelenums.h"
 
 using namespace eLedgerModel;
 

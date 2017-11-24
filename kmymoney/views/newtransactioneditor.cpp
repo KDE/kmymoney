@@ -52,6 +52,8 @@
 #include "splitdialog.h"
 #include "widgethintframe.h"
 #include "icons/icons.h"
+#include "modelenums.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 

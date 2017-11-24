@@ -45,6 +45,7 @@
 #include "mymoneytransaction.h"
 #include "csvutil.h"
 #include "convdate.h"
+#include "mymoneyenums.h"
 
 const QHash<Profile, QString> CSVImporter::m_profileConfPrefix {
   {Profile::Banking, QStringLiteral("Bank")},

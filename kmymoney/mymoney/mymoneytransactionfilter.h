@@ -37,8 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-
 class QString;
 class QDate;
 
@@ -46,6 +44,9 @@ template <typename T> class QList;
 
 class MyMoneyMoney;
 class MyMoneySplit;
+
+namespace eMyMoney { namespace TransactionFilter { enum class Date;
+                                                   enum class Validity; } }
 
 /**
   * @author Thomas Baumgart

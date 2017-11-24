@@ -47,6 +47,7 @@
 #include "mymoneymoney.h"
 #include "mymoneypayee.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 MyMoneyQifWriter::MyMoneyQifWriter()
 {

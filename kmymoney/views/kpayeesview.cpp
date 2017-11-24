@@ -67,6 +67,8 @@
 #include "icons/icons.h"
 #include "transaction.h"
 #include "widgetenums.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 using namespace Icons;
 

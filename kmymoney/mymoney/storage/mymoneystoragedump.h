@@ -31,8 +31,6 @@
 
 #include "mymoneykeyvaluecontainer.h"
 
-#include "mymoneyenums.h"
-
 /**
   * @author Thomas Baumgart
   */
@@ -40,6 +38,9 @@
 class IMyMoneySerialize;
 class IMyMoneyStorage;
 class MyMoneyTransaction;
+
+namespace eMyMoney { namespace Split { enum class State; } }
+
 class MyMoneyStorageDump
 {
 public:

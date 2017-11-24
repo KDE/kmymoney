@@ -40,6 +40,7 @@
 #include "mymoneysplit.h"
 #include "imymoneyprocessingcalendar.h"
 #include "mymoneystoragenames.h"
+#include "mymoneyenums.h"
 
 using namespace MyMoneyStorageNodes;
 using namespace eMyMoney;

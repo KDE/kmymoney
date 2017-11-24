@@ -31,7 +31,6 @@
 #include "mymoneyobject.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
-#include "mymoneyenums.h"
 
 class QString;
 class QDate;
@@ -42,6 +41,7 @@ class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
 namespace payeeIdentifiers { class ibanBic; }
+namespace eMyMoney { enum class Account; }
 template <class T> class payeeIdentifierTyped;
 
 /**

@@ -32,6 +32,7 @@
 #include "ui_kinvestmenttypewizardpage.h"
 
 #include "mymoneysecurity.h"
+#include "mymoneyenums.h"
 
 KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent) :
   QWizardPage(parent),

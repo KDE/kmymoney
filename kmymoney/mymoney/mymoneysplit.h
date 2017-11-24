@@ -39,13 +39,15 @@
 
 #include "mymoneyobject.h"
 #include "mymoneykeyvaluecontainer.h"
-#include "mymoneyenums.h"
 
 class QString;
 class QDate;
 
 class MyMoneyMoney;
 class MyMoneyTransaction;
+
+namespace eMyMoney { namespace Split { enum class State;
+                                       enum class InvestmentTransactionType; } }
 
 /**
   * @author Thomas Baumgart

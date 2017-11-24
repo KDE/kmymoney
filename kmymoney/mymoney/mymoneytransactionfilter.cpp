@@ -41,6 +41,7 @@
 #include "mymoneytag.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
+#include "mymoneyenums.h"
 
 class MyMoneyTransactionFilterPrivate {
 

@@ -45,6 +45,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "icons.h"
 #include "modelenums.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 using namespace eAccountsModel;

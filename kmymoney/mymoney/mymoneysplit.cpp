@@ -38,6 +38,7 @@
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 const char MyMoneySplit::ActionCheck[] = "Check";
 const char MyMoneySplit::ActionDeposit[] = "Deposit";

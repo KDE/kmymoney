@@ -67,6 +67,9 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneyBudget;
 class databaseStoreableObject;
+
+namespace eMyMoney { namespace TransactionFilter { enum class State; } }
+
 class FilterFail
 {
 public:

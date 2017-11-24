@@ -23,13 +23,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QHashFunctions>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "mymoneyobject.h"
 #include "mymoneytransactionfilter.h"
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
-#include "mymoneyenums.h"
 
 class QString;
 class QDomElement;
@@ -37,6 +38,9 @@ class QDomDocument;
 class MyMoneyAccount;
 
 template <typename T> class QList;
+
+namespace eMyMoney { enum class Account;
+                     namespace TransactionFilter { enum class Date; } }
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class

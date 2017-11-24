@@ -38,6 +38,8 @@
 #include "kmymoneyview.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 using namespace Icons;
 

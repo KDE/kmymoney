@@ -33,9 +33,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "modelenums.h"
-#include "mymoneyenums.h"
-
 /**
   * A model for the accounts.
   * This model loads all the accounts from the @ref MyMoneyFile.
@@ -54,6 +51,10 @@
 class MyMoneyObject;
 class MyMoneyMoney;
 class MyMoneyAccount;
+
+namespace eMyMoney { namespace File { enum class Object; } }
+namespace eAccountsModel { enum class Column; }
+
 class AccountsModel : public QStandardItemModel
 {
   Q_OBJECT

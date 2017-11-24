@@ -30,6 +30,7 @@
 #include "mymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 class TransactionMatcherPrivate
 {

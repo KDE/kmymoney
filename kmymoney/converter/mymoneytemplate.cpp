@@ -41,6 +41,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 MyMoneyTemplate::MyMoneyTemplate() :
     m_progressCallback(0),

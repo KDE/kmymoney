@@ -40,6 +40,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneyutils.h"
 #include "viewinterface.h"
+#include "mymoneyenums.h"
 
 #include "kreconciliationreportdlg.h"
 

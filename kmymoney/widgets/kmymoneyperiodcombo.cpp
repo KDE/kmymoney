@@ -33,6 +33,7 @@
 // Project Includes
 
 #include "mymoneytransactionfilter.h"
+#include "mymoneyenums.h"
 
 using namespace eMyMoney;
 

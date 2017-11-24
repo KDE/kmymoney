@@ -62,6 +62,7 @@
 #include "ui_kfindtransactiondlg.h"
 
 #include "widgetenums.h"
+#include "mymoneyenums.h"
 
 class KFindTransactionDlgPrivate
 {

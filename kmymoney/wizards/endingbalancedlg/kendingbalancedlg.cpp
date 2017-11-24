@@ -54,6 +54,7 @@
 #include "kmymoneyutils.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneysettings.h"
+#include "mymoneyenums.h"
 
 class KEndingBalanceDlgPrivate
 {

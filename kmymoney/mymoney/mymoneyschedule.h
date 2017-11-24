@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QMetaType>
+#include <QHashFunctions>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,7 +30,6 @@
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
 #include "mymoneyobject.h"
-#include "mymoneyenums.h"
 
 class QString;
 class QDate;
@@ -37,6 +37,11 @@ class QDate;
 class IMyMoneyProcessingCalendar;
 class MyMoneyAccount;
 class MyMoneyTransaction;
+
+namespace eMyMoney { namespace Schedule { enum class Type;
+                                          enum class Occurrence;
+                                          enum class PaymentType;
+                                          enum class WeekendOption; } }
 
 template <typename T> class QList;
 

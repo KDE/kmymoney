@@ -48,6 +48,7 @@
 #include "kmymoneyglobalsettings.h"
 
 #include "widgetenums.h"
+#include "mymoneyenums.h"
 
 using namespace eWidgets;
 using namespace KMyMoneyTransactionForm;

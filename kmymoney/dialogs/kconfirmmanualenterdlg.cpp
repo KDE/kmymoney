@@ -46,6 +46,7 @@
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
     QDialog(parent),

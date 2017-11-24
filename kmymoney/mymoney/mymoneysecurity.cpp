@@ -38,6 +38,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneystoragenames.h"
+#include "mymoneyenums.h"
 
 using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;

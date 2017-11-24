@@ -76,6 +76,7 @@
 #include "pivottable.h"
 #include "reporttable.h"
 #include "../widgets/reportcontrolimpl.h"
+#include "mymoneyenums.h"
 
 using namespace reports;
 using namespace eMyMoney;

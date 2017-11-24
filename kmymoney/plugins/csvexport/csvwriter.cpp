@@ -44,6 +44,7 @@
 #include "mymoneyexception.h"
 #include "csvexportdlg.h"
 #include "csvexporterplugin.h"
+#include "mymoneyenums.h"
 
 CsvWriter::CsvWriter() :
     m_plugin(0),

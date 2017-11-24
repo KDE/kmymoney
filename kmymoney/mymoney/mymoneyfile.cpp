@@ -52,6 +52,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "storageenums.h"
+#include "mymoneyenums.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
@@ -1789,6 +1790,11 @@ QString MyMoneyFile::categoryToAccount(const QString& category, Account type) co
   }
 
   return id;
+}
+
+QString MyMoneyFile::categoryToAccount(const QString& category) const
+{
+  return categoryToAccount(category, Account::Unknown);
 }
 
 QString MyMoneyFile::nameToAccount(const QString& name) const

@@ -50,6 +50,7 @@
 #include "securitiesmodel.h"
 #include "icons.h"
 #include "storageenums.h"
+#include "modelenums.h"
 
 using namespace Icons;
 

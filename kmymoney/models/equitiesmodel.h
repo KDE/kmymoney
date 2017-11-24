@@ -29,10 +29,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-
 class MyMoneyObject;
 class MyMoneyAccount;
+
+namespace eMyMoney { namespace File { enum class Object; } }
+
 class EquitiesModel : public QStandardItemModel
 {
   Q_OBJECT

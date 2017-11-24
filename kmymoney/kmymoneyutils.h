@@ -35,8 +35,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-
 /**
   * @author Thomas Baumgart
   */
@@ -56,6 +54,15 @@ class MyMoneySecurity;
 class MyMoneySchedule;
 class MyMoneySplit;
 class MyMoneyTransaction;
+
+namespace eMyMoney { namespace Schedule { enum class Occurrence;
+                                          enum class PaymentType;
+                                          enum class WeekendOption;
+                                          enum class Type; }
+                     namespace Split { enum class State;
+                                       enum class InvestmentTransactionType; }
+                   }
+
 class KMyMoneyUtils
 {
 public:

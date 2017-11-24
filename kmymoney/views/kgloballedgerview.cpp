@@ -70,6 +70,8 @@
 #include "transactionform.h"
 #include "fancydategroupmarkers.h"
 #include "widgetenums.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 class KGlobalLedgerView::Private
 {

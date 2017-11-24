@@ -34,13 +34,14 @@
 #include "mymoneystatement.h"
 #include "csvenums.h"
 #include "csvimport/kmm_csvimport_core_export.h"
-#include "mymoneyenums.h"
 
 class MyMoneyAccount;
 class KConfigGroup;
 class QStandardItemModel;
 class Parse;
 class ConvertDate;
+
+namespace eMyMoney { enum class Account; }
 
 enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
                        AutoAccountInvest, AutoAccountBank

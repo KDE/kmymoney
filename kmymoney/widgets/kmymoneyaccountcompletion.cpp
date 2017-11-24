@@ -38,6 +38,7 @@
 
 #include "mymoneyfile.h"
 #include "kmymoneyaccountselector.h"
+#include "mymoneyenums.h"
 
 KMyMoneyAccountCompletion::KMyMoneyAccountCompletion(QWidget *parent) :
     KMyMoneyCompletion(parent)

@@ -22,9 +22,10 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
-#include "mymoneyenums.h"
-
 class MyMoneyObject;
+
+namespace eMyMoney { namespace File { enum class Object; } }
+
 class onlineJobModel : public QAbstractTableModel
 {
   Q_OBJECT

@@ -50,6 +50,7 @@
 #include "kreportchartview.h"
 #include "reportaccount.h"
 #include "icons.h"
+#include "mymoneyenums.h"
 
 using namespace reports;
 using namespace Icons;

@@ -40,6 +40,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;

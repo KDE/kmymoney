@@ -55,6 +55,7 @@
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 namespace Ui { class KNewLoanWizard; }
 

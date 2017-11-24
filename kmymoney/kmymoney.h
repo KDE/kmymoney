@@ -44,6 +44,7 @@
 #include "selectedtransactions.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
 
 class QResizeEvent;
 class KPluginMetaData;

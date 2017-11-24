@@ -39,6 +39,7 @@
 #include "mymoneyreport.h"
 #include "pivottable.h"
 #include "kreportchartview.h"
+#include "mymoneyenums.h"
 
 using namespace reports;
 

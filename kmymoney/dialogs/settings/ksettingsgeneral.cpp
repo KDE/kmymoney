@@ -36,6 +36,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 
 class KSettingsGeneralPrivate
 {
