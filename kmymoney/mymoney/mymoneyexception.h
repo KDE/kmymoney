@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -39,6 +40,7 @@
   * in case of a failure.
   */
 
+class MyMoneyExceptionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyException
 {
 public:
@@ -66,7 +68,14 @@ public:
     * MYMONEYEXCEPTION(text) instead. It automatically assigns the file
     * and line parameter to the correct values.
     */
-  MyMoneyException(const QString& msg, const QString& file, const unsigned long line);
+  explicit MyMoneyException(const QString& msg,
+                            const QString& file,
+                            const unsigned long line);
+
+  MyMoneyException(const MyMoneyException & other);
+  MyMoneyException(MyMoneyException && other);
+  MyMoneyException & operator=(MyMoneyException other);
+  friend void swap(MyMoneyException& first, MyMoneyException& second);
 
   ~MyMoneyException();
 
@@ -76,9 +85,7 @@ public:
     *
     * @return reference to QString containing the message
     */
-  const QString& what() const {
-    return m_msg;
-  }
+  QString what() const;
 
   /**
     * This method is used to return the filename that was passed
@@ -86,9 +93,7 @@ public:
     *
     * @return reference to QString containing the filename
     */
-  const QString& file() const {
-    return m_file;
-  }
+  QString file() const;
 
   /**
     * This method is used to return the linenumber that was passed
@@ -96,25 +101,29 @@ public:
     *
     * @return long integer containing the line number
     */
-  unsigned long line() const {
-    return m_line;
-  }
+  unsigned long line() const;
 
 private:
-  /**
-    * This member variable holds the message
-    */
-  QString m_msg;
-
-  /**
-    * This member variable holds the filename
-    */
-  QString m_file;
-
-  /**
-    * This member variable holds the line number
-    */
-  unsigned long m_line;
+  MyMoneyExceptionPrivate * d_ptr;
+  Q_DECLARE_PRIVATE(MyMoneyException)
+  MyMoneyException();
 };
+
+inline void swap(MyMoneyException& first, MyMoneyException& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+inline MyMoneyException::MyMoneyException(MyMoneyException && other) : MyMoneyException() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyException & MyMoneyException::operator=(MyMoneyException other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 #endif
