@@ -74,23 +74,23 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
 
   clearId();
 
-  d->m_payee = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Payee)));
+  d->m_payee = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Payee)));
 
   QDomNodeList nodeList = node.elementsByTagName(d->getElName(Split::Element::Tag));
   for (int i = 0; i < nodeList.count(); i++)
-    d->m_tagList << QStringEmpty(nodeList.item(i).toElement().attribute(d->getAttrName(Split::Attribute::ID)));
+    d->m_tagList << MyMoneyUtils::QStringEmpty(nodeList.item(i).toElement().attribute(d->getAttrName(Split::Attribute::ID)));
 
-  d->m_reconcileDate = stringToDate(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::ReconcileDate))));
-  d->m_action = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Action)));
+  d->m_reconcileDate = MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::ReconcileDate))));
+  d->m_action = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Action)));
   d->m_reconcileFlag = static_cast<eMyMoney::Split::State>(node.attribute(d->getAttrName(Split::Attribute::ReconcileFlag)).toInt());
-  d->m_memo = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Memo)));
-  d->m_value = MyMoneyMoney(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Value))));
-  d->m_shares = MyMoneyMoney(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Shares))));
-  d->m_price = MyMoneyMoney(QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Price))));
-  d->m_account = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Account)));
-  d->m_costCenter = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::CostCenter)));
-  d->m_number = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Number)));
-  d->m_bankID = QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::BankID)));
+  d->m_memo = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Memo)));
+  d->m_value = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Value))));
+  d->m_shares = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Shares))));
+  d->m_price = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Price))));
+  d->m_account = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Account)));
+  d->m_costCenter = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::CostCenter)));
+  d->m_number = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Number)));
+  d->m_bankID = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::BankID)));
 }
 
 MyMoneySplit::MyMoneySplit(const MyMoneySplit& other) :
@@ -403,7 +403,7 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
 
   el.setAttribute(d->getAttrName(Split::Attribute::Payee), d->m_payee);
   //el.setAttribute(getAttrName(Split::Attribute::Tag), m_tag);
-  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileDate), dateToString(d->m_reconcileDate));
+  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileDate), MyMoneyUtils::dateToString(d->m_reconcileDate));
   el.setAttribute(d->getAttrName(Split::Attribute::Action), d->m_action);
   el.setAttribute(d->getAttrName(Split::Attribute::ReconcileFlag), (int)d->m_reconcileFlag);
   el.setAttribute(d->getAttrName(Split::Attribute::Value), d->m_value.toString());

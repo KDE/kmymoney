@@ -73,9 +73,9 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
 
   // qDebug("Reading information for account %s", acc.name().data());
 
-  setParentAccountId(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ParentAccount))));
-  setLastModified(stringToDate(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastModified)))));
-  setLastReconciliationDate(stringToDate(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastReconciled)))));
+  setParentAccountId(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ParentAccount))));
+  setLastModified(MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastModified)))));
+  setLastReconciliationDate(MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastReconciled)))));
 
   if (!d->m_lastReconciliationDate.isValid()) {
     // for some reason, I was unable to access our own kvp at this point through
@@ -91,12 +91,12 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     }
   }
 
-  setInstitutionId(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Institution))));
-  setNumber(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Number))));
-  setOpeningDate(stringToDate(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Opened)))));
-  setCurrencyId(QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Currency))));
+  setInstitutionId(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Institution))));
+  setNumber(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Number))));
+  setOpeningDate(MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Opened)))));
+  setCurrencyId(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Currency))));
 
-  QString tmp = QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Type)));
+  QString tmp = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Type)));
   bool bOK = false;
   int type = tmp.toInt(&bOK);
   if (bOK) {
@@ -113,7 +113,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   }
   setDescription(node.attribute(d->getAttrName(Account::Attribute::Description)));
 
-  m_id = QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));
+  m_id = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));
   // qDebug("Account %s has id of %s, type of %d, parent is %s.", acc.name().data(), id.data(), type, acc.parentAccountId().data());
 
   //  Process any Sub-Account information found inside the account entry.
@@ -440,10 +440,10 @@ void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 
   Q_D(const MyMoneyAccount);
   el.setAttribute(d->getAttrName(Account::Attribute::ParentAccount), parentAccountId());
-  el.setAttribute(d->getAttrName(Account::Attribute::LastReconciled), dateToString(lastReconciliationDate()));
-  el.setAttribute(d->getAttrName(Account::Attribute::LastModified), dateToString(lastModified()));
+  el.setAttribute(d->getAttrName(Account::Attribute::LastReconciled), MyMoneyUtils::dateToString(lastReconciliationDate()));
+  el.setAttribute(d->getAttrName(Account::Attribute::LastModified), MyMoneyUtils::dateToString(lastModified()));
   el.setAttribute(d->getAttrName(Account::Attribute::Institution), institutionId());
-  el.setAttribute(d->getAttrName(Account::Attribute::Opened), dateToString(openingDate()));
+  el.setAttribute(d->getAttrName(Account::Attribute::Opened), MyMoneyUtils::dateToString(openingDate()));
   el.setAttribute(d->getAttrName(Account::Attribute::Number), number());
   // el.setAttribute(getAttrName(anOpeningBalance), openingBalance().toString());
   el.setAttribute(d->getAttrName(Account::Attribute::Type), (int)accountType());

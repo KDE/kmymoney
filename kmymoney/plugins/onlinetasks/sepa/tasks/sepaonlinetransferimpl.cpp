@@ -244,7 +244,7 @@ sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& ele
 {
   sepaOnlineTransferImpl* task = new sepaOnlineTransferImpl();
   task->setOriginAccount(element.attribute("originAccount", QString()));
-  task->setValue(MyMoneyMoney(QStringEmpty(element.attribute("value", QString()))));
+  task->setValue(MyMoneyMoney(MyMoneyUtils::QStringEmpty(element.attribute("value", QString()))));
   task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
   task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort();
   task->setPurpose(element.attribute("purpose", QString()));

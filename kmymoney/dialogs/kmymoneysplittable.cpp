@@ -65,6 +65,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
+#include "mymoneytracer.h"
 #include "icons.h"
 #include "mymoneyenums.h"
 

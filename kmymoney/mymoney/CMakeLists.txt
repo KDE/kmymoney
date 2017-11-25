@@ -12,7 +12,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyschedule.cpp
-  mymoneypayee.cpp
+  mymoneypayee.cpp mymoneytracer.cpp
   mymoneytag.cpp
   mymoneycategory.cpp
   mymoneycostcenter.cpp

@@ -614,28 +614,28 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
   if (temp == QDomElement()) {
     rc = false;
   }
-  QString strDate = QStringEmpty(temp.attribute(attrNames[anDate]));
-  m_storage->setCreationDate(stringToDate(strDate));
+  QString strDate = MyMoneyUtils::QStringEmpty(temp.attribute(attrNames[anDate]));
+  m_storage->setCreationDate(MyMoneyUtils::stringToDate(strDate));
   signalProgress(1, 0);
 
   temp = findChildElement(getElName(enLastModifiedDate), fileInfo);
   if (temp == QDomElement()) {
     rc = false;
   }
-  strDate = QStringEmpty(temp.attribute(attrNames[anDate]));
-  m_storage->setLastModificationDate(stringToDate(strDate));
+  strDate = MyMoneyUtils::QStringEmpty(temp.attribute(attrNames[anDate]));
+  m_storage->setLastModificationDate(MyMoneyUtils::stringToDate(strDate));
   signalProgress(2, 0);
 
   temp = findChildElement(getElName(enVersion), fileInfo);
   if (temp == QDomElement()) {
     rc = false;
   }
-  QString strVersion = QStringEmpty(temp.attribute(attrNames[anID]));
+  QString strVersion = MyMoneyUtils::QStringEmpty(temp.attribute(attrNames[anID]));
   fileVersionRead = strVersion.toUInt(0, 16);
 
   temp = findChildElement(getElName(enFixVersion), fileInfo);
   if (temp != QDomElement()) {
-    QString strFixVersion = QStringEmpty(temp.attribute(attrNames[anID]));
+    QString strFixVersion = MyMoneyUtils::QStringEmpty(temp.attribute(attrNames[anID]));
     m_storage->setFileFixVersion(strFixVersion.toUInt());
     // skip KMyMoneyView::fixFile_2()
     if (m_storage->fileFixVersion() == 2) {
@@ -654,11 +654,11 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
 void MyMoneyStorageXML::writeFileInformation(QDomElement& fileInfo)
 {
   QDomElement creationDate = m_doc->createElement(getElName(enCreationDate));
-  creationDate.setAttribute(attrNames[anDate], dateToString(m_storage->creationDate()));
+  creationDate.setAttribute(attrNames[anDate], MyMoneyUtils::dateToString(m_storage->creationDate()));
   fileInfo.appendChild(creationDate);
 
   QDomElement lastModifiedDate = m_doc->createElement(getElName(enLastModifiedDate));
-  lastModifiedDate.setAttribute(attrNames[anDate], dateToString(m_storage->lastModificationDate()));
+  lastModifiedDate.setAttribute(attrNames[anDate], MyMoneyUtils::dateToString(m_storage->lastModificationDate()));
   fileInfo.appendChild(lastModifiedDate);
 
   QDomElement version = m_doc->createElement(getElName(enVersion));
@@ -693,16 +693,16 @@ bool MyMoneyStorageXML::readUserInformation(const QDomElement& userElement)
   signalProgress(0, 1, i18n("Loading user information..."));
 
   MyMoneyPayee user;
-  user.setName(QStringEmpty(userElement.attribute(attrNames[anName])));
-  user.setEmail(QStringEmpty(userElement.attribute(attrNames[anEmail])));
+  user.setName(MyMoneyUtils::QStringEmpty(userElement.attribute(attrNames[anName])));
+  user.setEmail(MyMoneyUtils::QStringEmpty(userElement.attribute(attrNames[anEmail])));
 
   QDomElement addressNode = findChildElement(getElName(enAddress), userElement);
   if (!addressNode.isNull()) {
-    user.setAddress(QStringEmpty(addressNode.attribute(attrNames[anStreet])));
-    user.setCity(QStringEmpty(addressNode.attribute(attrNames[anCity])));
-    user.setState(QStringEmpty(addressNode.attribute(attrNames[anCountry])));
-    user.setPostcode(QStringEmpty(addressNode.attribute(attrNames[anZipCode])));
-    user.setTelephone(QStringEmpty(addressNode.attribute(attrNames[anTelephone])));
+    user.setAddress(MyMoneyUtils::QStringEmpty(addressNode.attribute(attrNames[anStreet])));
+    user.setCity(MyMoneyUtils::QStringEmpty(addressNode.attribute(attrNames[anCity])));
+    user.setState(MyMoneyUtils::QStringEmpty(addressNode.attribute(attrNames[anCountry])));
+    user.setPostcode(MyMoneyUtils::QStringEmpty(addressNode.attribute(attrNames[anZipCode])));
+    user.setTelephone(MyMoneyUtils::QStringEmpty(addressNode.attribute(attrNames[anTelephone])));
   }
 
   m_storage->setUser(user);

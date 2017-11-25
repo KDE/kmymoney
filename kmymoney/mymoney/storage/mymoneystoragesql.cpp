@@ -3284,7 +3284,7 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(con
     inst.addAccountId(it);
 
     iList[iid] = MyMoneyInstitution(iid, inst);
-    unsigned long id = extractId(iid);
+    unsigned long id = MyMoneyUtils::extractId(iid);
     if (id > lastId)
       lastId = id;
 
@@ -4167,9 +4167,9 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
   s.setReconcileDate(GETDATE(reconcileDateCol));
   s.setAction(GETSTRING(actionCol));
   s.setReconcileFlag(static_cast<Split::State>(GETINT(reconcileFlagCol)));
-  s.setValue(MyMoneyMoney(QStringEmpty(GETSTRING(valueCol))));
-  s.setShares(MyMoneyMoney(QStringEmpty(GETSTRING(sharesCol))));
-  s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING(priceCol))));
+  s.setValue(MyMoneyMoney(MyMoneyUtils::QStringEmpty(GETSTRING(valueCol))));
+  s.setShares(MyMoneyMoney(MyMoneyUtils::QStringEmpty(GETSTRING(sharesCol))));
+  s.setPrice(MyMoneyMoney(MyMoneyUtils::QStringEmpty(GETSTRING(priceCol))));
   s.setMemo(GETSTRING(memoCol));
   s.setAccountId(GETSTRING(accountIdCol));
   s.setCostCenterId(GETSTRING(costCenterIdCol));
@@ -4341,7 +4341,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
     //FIXME: enable when schedules have KVPs.
     //  s.setPairs(readKeyValuePairs("SCHEDULE", s.id()).pairs());
 
-    //unsigned long id = extractId(s.id().data());
+    //unsigned long id = MyMoneyUtils::extractId(s.id().data());
     //if(id > lastId)
     //  lastId = id;
 
@@ -4412,7 +4412,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
     MyMoneySecurity security(eid, e);
     sList[security.id()] = security;
 
-    unsigned long id = extractId(security.id());
+    unsigned long id = MyMoneyUtils::extractId(security.id());
     if (id > lastId)
       lastId = id;
 

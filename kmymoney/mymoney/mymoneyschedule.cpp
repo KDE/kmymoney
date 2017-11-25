@@ -87,9 +87,9 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
 
   Q_D(MyMoneySchedule);
   d->m_name = node.attribute(d->getAttrName(Schedule::Attribute::Name));
-  d->m_startDate = stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::StartDate)));
-  d->m_endDate = stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::EndDate)));
-  d->m_lastPayment = stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::LastPayment)));
+  d->m_startDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::StartDate)));
+  d->m_endDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::EndDate)));
+  d->m_lastPayment = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::LastPayment)));
 
   d->m_type = static_cast<Schedule::Type>(node.attribute(d->getAttrName(Schedule::Attribute::Type)).toInt());
   d->m_paymentType = static_cast<Schedule::PaymentType>(node.attribute(d->getAttrName(Schedule::Attribute::PaymentType)).toInt());
@@ -122,7 +122,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   if (nodeList.count() > 0) {
     nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Schedule::Element::Payment));
     for (int i = 0; i < nodeList.count(); ++i) {
-      d->m_recordedPayments << stringToDate(nodeList.item(i).toElement().attribute(d->getAttrName(Schedule::Attribute::Date)));
+      d->m_recordedPayments << MyMoneyUtils::stringToDate(nodeList.item(i).toElement().attribute(d->getAttrName(Schedule::Attribute::Date)));
     }
   }
 
@@ -951,12 +951,12 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence); // krazy:exclude=spelling
   el.setAttribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), d->m_occurrenceMultiplier);
   el.setAttribute(d->getAttrName(Schedule::Attribute::PaymentType), (int)d->m_paymentType);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::StartDate), dateToString(d->m_startDate));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::EndDate), dateToString(d->m_endDate));
+  el.setAttribute(d->getAttrName(Schedule::Attribute::StartDate), MyMoneyUtils::dateToString(d->m_startDate));
+  el.setAttribute(d->getAttrName(Schedule::Attribute::EndDate), MyMoneyUtils::dateToString(d->m_endDate));
   el.setAttribute(d->getAttrName(Schedule::Attribute::Fixed), d->m_fixed);
   el.setAttribute(d->getAttrName(Schedule::Attribute::LastDayInMonth), d->m_lastDayInMonth);
   el.setAttribute(d->getAttrName(Schedule::Attribute::AutoEnter), d->m_autoEnter);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::LastPayment), dateToString(d->m_lastPayment));
+  el.setAttribute(d->getAttrName(Schedule::Attribute::LastPayment), MyMoneyUtils::dateToString(d->m_lastPayment));
   el.setAttribute(d->getAttrName(Schedule::Attribute::WeekendOption), (int)d->m_weekendOption);
 
   //store the payment history for this scheduled task.
@@ -965,7 +965,7 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   QDomElement paymentsElement = document.createElement(d->getElName(Schedule::Element::Payments));
   for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
     QDomElement paymentEntry = document.createElement(d->getElName(Schedule::Element::Payment));
-    paymentEntry.setAttribute(d->getAttrName(Schedule::Attribute::Date), dateToString(*it));
+    paymentEntry.setAttribute(d->getAttrName(Schedule::Attribute::Date), MyMoneyUtils::dateToString(*it));
     paymentsElement.appendChild(paymentEntry);
   }
   el.appendChild(paymentsElement);

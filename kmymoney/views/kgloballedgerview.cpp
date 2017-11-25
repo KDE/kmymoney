@@ -66,6 +66,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneysplit.h"
 #include "mymoneyutils.h"
+#include "mymoneytracer.h"
 #include "transaction.h"
 #include "transactionform.h"
 #include "fancydategroupmarkers.h"

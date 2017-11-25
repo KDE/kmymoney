@@ -55,11 +55,11 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
 
   d->m_nextSplitID = 1;
 
-  d->m_postDate = stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::PostDate)));
-  d->m_entryDate = stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::EntryDate)));
-  d->m_bankID = QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::BankID)));
-  d->m_memo = QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Memo)));
-  d->m_commodity = QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Commodity)));
+  d->m_postDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::PostDate)));
+  d->m_entryDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::EntryDate)));
+  d->m_bankID = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::BankID)));
+  d->m_memo = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Memo)));
+  d->m_commodity = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Commodity)));
 
   QDomNode child = node.firstChild();
   while (!child.isNull() && child.isElement()) {
@@ -436,9 +436,9 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
   auto el = document.createElement(nodeNames[nnTransaction]);
 
   writeBaseXML(document, el);
-  el.setAttribute(d->getAttrName(Transaction::Attribute::PostDate), dateToString(d->m_postDate));
+  el.setAttribute(d->getAttrName(Transaction::Attribute::PostDate), MyMoneyUtils::dateToString(d->m_postDate));
   el.setAttribute(d->getAttrName(Transaction::Attribute::Memo), d->m_memo);
-  el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), dateToString(d->m_entryDate));
+  el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), MyMoneyUtils::dateToString(d->m_entryDate));
   el.setAttribute(d->getAttrName(Transaction::Attribute::Commodity), d->m_commodity);
 
   QDomElement splits = document.createElement(d->getElName(Transaction::Element::Splits));

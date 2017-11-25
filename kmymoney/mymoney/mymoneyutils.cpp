@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -67,81 +68,7 @@ QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val,
                          showThousandSeparator);
 }
 
-
-int MyMoneyTracer::m_indentLevel = 0;
-int MyMoneyTracer::m_onoff = 0;
-
-MyMoneyTracer::MyMoneyTracer(const char* name)
-{
-  if (m_onoff) {
-    QRegExp exp("(.*)::(.*)");
-    if (exp.indexIn(name) != -1) {
-      m_className = exp.cap(1);
-      m_memberName = exp.cap(2);
-    } else {
-      m_className = QString(name);
-      m_memberName.clear();
-    }
-    QString indent;
-    indent.fill(' ', m_indentLevel);
-    std::cerr << qPrintable(indent) << "ENTER: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
-  }
-  m_indentLevel += 2;
-}
-
-MyMoneyTracer::MyMoneyTracer(const QString& className, const QString& memberName) :
-    m_className(className),
-    m_memberName(memberName)
-{
-  if (m_onoff) {
-    QString indent;
-    indent.fill(' ', m_indentLevel);
-    std::cerr << qPrintable(indent) << "ENTER: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
-  }
-  m_indentLevel += 2;
-}
-
-MyMoneyTracer::~MyMoneyTracer()
-{
-  m_indentLevel -= 2;
-  if (m_onoff) {
-    QString indent;
-    indent.fill(' ', m_indentLevel);
-    std::cerr << qPrintable(indent) << "LEAVE: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
-  }
-}
-
-void MyMoneyTracer::printf(const char *format, ...) const
-{
-  if (m_onoff) {
-    va_list args;
-    va_start(args, format);
-    QString indent;
-    indent.fill(' ', m_indentLevel);
-    std::cerr << qPrintable(indent);
-
-    vfprintf(stderr, format, args);
-    putc('\n', stderr);
-    va_end(args);
-  }
-}
-
-void MyMoneyTracer::onOff(int onOff)
-{
-  m_onoff = onOff;
-}
-
-void MyMoneyTracer::on()
-{
-  m_onoff = 1;
-}
-
-void MyMoneyTracer::off()
-{
-  m_onoff = 0;
-}
-
-QString dateToString(const QDate& date)
+QString MyMoneyUtils::dateToString(const QDate& date)
 {
   if (!date.isNull() && date.isValid())
     return date.toString(Qt::ISODate);
@@ -149,7 +76,7 @@ QString dateToString(const QDate& date)
   return QString();
 }
 
-QDate stringToDate(const QString& str)
+QDate MyMoneyUtils::stringToDate(const QString& str)
 {
   if (str.length()) {
     QDate date = QDate::fromString(str, Qt::ISODate);
@@ -159,7 +86,7 @@ QDate stringToDate(const QString& str)
   return QDate();
 }
 
-QString QStringEmpty(const QString& val)
+QString MyMoneyUtils::QStringEmpty(const QString& val)
 {
   if (!val.isEmpty())
     return QString(val);
@@ -167,7 +94,7 @@ QString QStringEmpty(const QString& val)
   return QString();
 }
 
-unsigned long extractId(const QString& txt)
+unsigned long MyMoneyUtils::extractId(const QString& txt)
 {
   int pos;
   unsigned long rc = 0;
