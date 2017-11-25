@@ -119,6 +119,7 @@ void SimpleLedgerView::init()
 
   tabSelected(0);
   updateModels();
+  openFavoriteLedgers();
 }
 
 void SimpleLedgerView::openNewLedger(QString accountId)
