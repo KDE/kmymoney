@@ -15,6 +15,7 @@ endif()
 
 # Automoc all sources
 set(CMAKE_AUTOMOC TRUE)
+list(APPEND CMAKE_AUTOMOC_MACRO_NAMES "K_PLUGIN_FACTORY" "K_PLUGIN_FACTORY_WITH_JSON")
 
 if (POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
