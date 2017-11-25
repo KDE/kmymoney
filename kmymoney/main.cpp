@@ -267,10 +267,7 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
     }
   }
 
-  kmymoney->show();
   kmymoney->centralWidget()->setEnabled(false);
-
-  splash.reset();
 
   // force complete paint of widgets
   qApp->processEvents();
@@ -316,6 +313,8 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
 
   kmymoney->updateCaption();
   kmymoney->centralWidget()->setEnabled(true);
+  kmymoney->show();
+  splash.reset();
 
   const int rc = a->exec();
   return rc;
