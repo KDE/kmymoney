@@ -3691,39 +3691,61 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
   }
 }
 
+class MyMoneyFileTransactionPrivate
+{
+  Q_DISABLE_COPY(MyMoneyFileTransactionPrivate)
 
-MyMoneyFileTransaction::MyMoneyFileTransaction() :
+public:
+  MyMoneyFileTransactionPrivate() :
     m_isNested(MyMoneyFile::instance()->hasTransaction()),
     m_needRollback(!m_isNested)
+  {
+  }
+
+public:
+  bool m_isNested;
+  bool m_needRollback;
+
+};
+
+
+MyMoneyFileTransaction::MyMoneyFileTransaction() :
+  d_ptr(new MyMoneyFileTransactionPrivate)
 {
-  if (!m_isNested)
+  Q_D(MyMoneyFileTransaction);
+  if (!d->m_isNested)
     MyMoneyFile::instance()->startTransaction();
 }
 
 MyMoneyFileTransaction::~MyMoneyFileTransaction()
 {
   rollback();
+  Q_D(MyMoneyFileTransaction);
+  delete d;
 }
 
 void MyMoneyFileTransaction::restart()
 {
   rollback();
 
-  m_needRollback = !m_isNested;
-  if (!m_isNested)
+  Q_D(MyMoneyFileTransaction);
+  d->m_needRollback = !d->m_isNested;
+  if (!d->m_isNested)
     MyMoneyFile::instance()->startTransaction();
 }
 
 void MyMoneyFileTransaction::commit()
 {
-  if (!m_isNested)
+  Q_D(MyMoneyFileTransaction);
+  if (!d->m_isNested)
     MyMoneyFile::instance()->commitTransaction();
-  m_needRollback = false;
+  d->m_needRollback = false;
 }
 
 void MyMoneyFileTransaction::rollback()
 {
-  if (m_needRollback)
+  Q_D(MyMoneyFileTransaction);
+  if (d->m_needRollback)
     MyMoneyFile::instance()->rollbackTransaction();
-  m_needRollback = false;
+  d->m_needRollback = false;
 }

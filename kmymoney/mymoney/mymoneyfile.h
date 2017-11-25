@@ -1691,8 +1691,11 @@ private:
   Private* const d;
 };
 
+class MyMoneyFileTransactionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyFileTransaction
 {
+  Q_DISABLE_COPY(MyMoneyFileTransaction)
+
 public:
   MyMoneyFileTransaction();
   ~MyMoneyFileTransaction();
@@ -1710,8 +1713,8 @@ public:
   void restart();
 
 private:
-  bool m_isNested;
-  bool m_needRollback;
+  MyMoneyFileTransactionPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(MyMoneyFileTransaction)
 };
 
 #endif
