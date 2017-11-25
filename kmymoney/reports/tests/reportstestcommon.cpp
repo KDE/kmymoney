@@ -22,6 +22,8 @@
 #include <QList>
 #include <QFile>
 #include <QTextStream>
+#include <QDomDocument>
+#include <QDomElement>
 
 #include "pivottable.h"
 #include "querytable.h"

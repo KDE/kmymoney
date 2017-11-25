@@ -309,7 +309,7 @@ inline void swap(MyMoneyTransaction& first, MyMoneyTransaction& second) // krazy
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
   swap(first.m_id, second.m_id);
-  swap(first.m_kvp, second.m_kvp);
+  swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 
 inline MyMoneyTransaction::MyMoneyTransaction(MyMoneyTransaction && other) : MyMoneyTransaction() // krazy:exclude=inline

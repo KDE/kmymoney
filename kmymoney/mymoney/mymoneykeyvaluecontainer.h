@@ -4,6 +4,7 @@
     begin                : Sun Nov 10 2002
     copyright            : (C) 2000-2005 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,15 +28,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QMap>
-#include <QDomElement>
-#include <qobjectdefs.h>
+#include <qglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyunittestable.h"
+
+class QString;
+class QDomDocument;
+class QDomElement;
+
+template <class Key, class Value> class QMap;
 
 /**
   * This class implements a container for key/value pairs. This is used
@@ -47,22 +51,24 @@
   * To give any class the ability to have a key/value pair container,
   * just derive the class from this one. See MyMoneyAccount as an example.
   */
-class QDomDocument;
+
+class MyMoneyKeyValueContainerPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyKeyValueContainer
 {
-  Q_GADGET
+  Q_DECLARE_PRIVATE(MyMoneyKeyValueContainer)
   KMM_MYMONEY_UNIT_TESTABLE
 
+protected:
+  MyMoneyKeyValueContainerPrivate * d_ptr;
+
 public:
-  enum elNameE { enPair };
-  Q_ENUM(elNameE)
-
-  enum attrNameE { anKey, anValue };
-  Q_ENUM(attrNameE)
-
   MyMoneyKeyValueContainer();
-  MyMoneyKeyValueContainer(const QDomElement& node);
+  explicit MyMoneyKeyValueContainer(const QDomElement& node);
 
+  MyMoneyKeyValueContainer(const MyMoneyKeyValueContainer & other);
+  MyMoneyKeyValueContainer(MyMoneyKeyValueContainer && other);
+  MyMoneyKeyValueContainer & operator=(MyMoneyKeyValueContainer other);
+  friend void swap(MyMoneyKeyValueContainer& first, MyMoneyKeyValueContainer& second);
   ~MyMoneyKeyValueContainer();
 
   /**
@@ -105,9 +111,7 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  const QMap<QString, QString>& pairs() const {
-    return m_kvp;
-  };
+  const QMap<QString, QString>& pairs() const;
 
   /**
     * This method is used to initially store a set of key/value pairs
@@ -126,13 +130,9 @@ public:
     */
   bool operator == (const MyMoneyKeyValueContainer &) const;
 
-  const QString& operator[](const QString& k) const {
-    return value(k);
-  }
+  const QString& operator[](const QString& k) const;
 
-  QString& operator[](const QString& k) {
-    return m_kvp[k];
-  }
+  QString& operator[](const QString& k);
 
   /**
     * This method creates a QDomElement for the @p document
@@ -142,16 +142,23 @@ public:
     * @param parent reference to QDomElement parent node
     */
   void writeXML(QDomDocument& document, QDomElement& parent) const;
-
-protected:
-  /**
-    * This member variable represents the container of key/value pairs.
-    */
-  QMap<QString, QString>  m_kvp;
-private:
-
-  static const QString getElName(const elNameE _el);
-  static const QString getAttrName(const attrNameE _attr);
 };
+
+inline void swap(MyMoneyKeyValueContainer& first, MyMoneyKeyValueContainer& second) // krazy:exclude=inline
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+inline MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(MyMoneyKeyValueContainer && other) : MyMoneyKeyValueContainer() // krazy:exclude=inline
+{
+  swap(*this, other);
+}
+
+inline MyMoneyKeyValueContainer & MyMoneyKeyValueContainer::operator=(MyMoneyKeyValueContainer other) // krazy:exclude=inline
+{
+  swap(*this, other);
+  return *this;
+}
 
 #endif

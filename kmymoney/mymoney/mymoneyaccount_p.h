@@ -24,6 +24,7 @@
 
 #include <QString>
 #include <QDate>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

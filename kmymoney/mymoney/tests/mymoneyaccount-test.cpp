@@ -17,6 +17,8 @@
 #include "mymoneyaccount-test.h"
 
 #include <QtTest>
+#include <QDomDocument>
+#include <QDomElement>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyAccountTest;
 
@@ -67,7 +69,7 @@ void MyMoneyAccountTest::testConstructor()
   r.setValue(QString("key"), "value");
   s.setShares(MyMoneyMoney::ONE);
   r.adjustBalance(s);
-  QVERIFY(r.m_kvp.count() == 1);
+  QVERIFY(r.pairs().count() == 1);
   QVERIFY(r.value("key") == "value");
 
   MyMoneyAccount a(id, r);
@@ -305,7 +307,7 @@ void MyMoneyAccountTest::testWriteXML()
   r.addReconciliation(QDate(2011, 1, 1), MyMoneyMoney(123, 100));
   r.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100));
 
-  QCOMPARE(r.m_kvp.count(), 2);
+  QCOMPARE(r.pairs().count(), 2);
   QCOMPARE(r.value("key"), QLatin1String("value"));
   QCOMPARE(r.value("reconciliationHistory"), QLatin1String("2011-01-01:123/100;2011-02-01:114/25"));
 

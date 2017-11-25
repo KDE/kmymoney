@@ -25,6 +25,8 @@
 #include <QPixmap>
 #include <QPixmapCache>
 #include <QIcon>
+#include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

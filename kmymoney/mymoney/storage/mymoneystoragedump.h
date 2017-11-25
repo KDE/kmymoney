@@ -38,6 +38,7 @@
 class IMyMoneySerialize;
 class IMyMoneyStorage;
 class MyMoneyTransaction;
+class QTextStream;
 
 namespace eMyMoney { namespace Split { enum class State; } }
 

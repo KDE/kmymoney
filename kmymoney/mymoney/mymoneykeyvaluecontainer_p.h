@@ -1,8 +1,8 @@
 /***************************************************************************
-                          kbalancewarning.cpp
+                          mymoneykeyvaluecontainer.cpp
                              -------------------
-    begin                : Mon Feb  9 2009
-    copyright            : (C) 2009 by Thomas Baumgart
+    begin                : Sun Nov 10 2002
+    copyright            : (C) 2002-2005 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
@@ -16,52 +16,61 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "kbalancewarning.h"
+#ifndef MYMONEYKEYVALUECONTAINER_P_H
+#define MYMONEYKEYVALUECONTAINER_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
+namespace KVC
+{
+  enum class Element { Pair };
 
-class KBalanceWarning::Private
+  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+  enum class Attribute { Key,
+                         Value,
+                         // insert new entries above this line
+                         LastAttribute
+                       };
+
+  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+}
+
+using namespace KVC;
+
+class MyMoneyKeyValueContainerPrivate
 {
 public:
-  QString dontShowAgain() const {
-    return "BalanceWarning";
+
+  static QString getElName(const Element el)
+  {
+    static const QMap<Element, QString> elNames {
+      {Element::Pair, QStringLiteral("PAIR")}
+    };
+    return elNames[el];
   }
-  QMap<QString, bool> m_deselectedAccounts;
+
+  static QString getAttrName(const Attribute attr)
+  {
+    static const QMap<Attribute, QString> attrNames {
+      {Attribute::Key, QStringLiteral("key")},
+      {Attribute::Value, QStringLiteral("value")}
+    };
+    return attrNames[attr];
+  }
+
+  /**
+    * This member variable represents the container of key/value pairs.
+    */
+  QMap<QString, QString>  m_kvp;
 };
-
-KBalanceWarning::KBalanceWarning(QObject* parent) :
-    QObject(parent),
-    d(new Private)
-{
-  KMessageBox::enableMessage(d->dontShowAgain());
-}
-
-KBalanceWarning::~KBalanceWarning()
-{
-  delete d;
-}
-
-void KBalanceWarning::slotShowMessage(QWidget* parent, const MyMoneyAccount& account, const QString& msg)
-{
-  if (d->m_deselectedAccounts.find(account.id()) == d->m_deselectedAccounts.end()) {
-    KMessageBox::information(parent, msg, QString(), d->dontShowAgain());
-    if (!KMessageBox::shouldBeShownContinue(d->dontShowAgain())) {
-      d->m_deselectedAccounts[account.id()] = true;
-      KMessageBox::enableMessage(d->dontShowAgain());
-    }
-  }
-}
+#endif

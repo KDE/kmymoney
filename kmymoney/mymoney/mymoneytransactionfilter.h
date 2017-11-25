@@ -56,10 +56,10 @@ class MyMoneyTransaction;
 class MyMoneyTransactionFilterPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyTransactionFilter
 {
-  Q_DECLARE_PRIVATE_D(d_ptr_tf, MyMoneyTransactionFilter)
+  Q_DECLARE_PRIVATE(MyMoneyTransactionFilter)
 
 protected:
-  MyMoneyTransactionFilterPrivate* d_ptr_tf;  // name shouldn't colide with the one in mymoneyreport.h
+  MyMoneyTransactionFilterPrivate* d_ptr;  // name shouldn't colide with the one in mymoneyreport.h
 
 public:
   typedef union {
@@ -536,7 +536,7 @@ private:
 inline void swap(MyMoneyTransactionFilter& first, MyMoneyTransactionFilter& second) // krazy:exclude=inline
 {
   using std::swap;
-  swap(first.d_ptr_tf, second.d_ptr_tf);
+  swap(first.d_ptr, second.d_ptr);
 }
 
 inline MyMoneyTransactionFilter::MyMoneyTransactionFilter(MyMoneyTransactionFilter && other) : MyMoneyTransactionFilter() // krazy:exclude=inline

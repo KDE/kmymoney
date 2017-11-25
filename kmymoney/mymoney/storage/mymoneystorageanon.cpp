@@ -28,6 +28,8 @@
 
 #include <QMap>
 #include <QList>
+#include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

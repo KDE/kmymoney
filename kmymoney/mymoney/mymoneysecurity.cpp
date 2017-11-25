@@ -28,6 +28,8 @@
 // QT Includes
 
 #include <QString>
+#include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

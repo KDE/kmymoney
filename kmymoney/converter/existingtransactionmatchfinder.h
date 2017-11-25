@@ -18,6 +18,7 @@
 #define EXISTINGTRANSACTIONMATCHFINDER_H
 
 #include <QPair>
+#include <QList>
 
 #include "transactionmatchfinder.h"
 

@@ -17,11 +17,14 @@
 #include "mymoneykeyvaluecontainer-test.h"
 
 #include <QtTest>
+#include <QDomDocument>
+#include <QDomElement>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyKeyValueContainerTest;
 
 #include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneykeyvaluecontainer_p.h"
 
 QTEST_GUILESS_MAIN(MyMoneyKeyValueContainerTest)
 
@@ -37,16 +40,16 @@ void MyMoneyKeyValueContainerTest::cleanup()
 
 void MyMoneyKeyValueContainerTest::testEmptyConstructor()
 {
-  QVERIFY(m->m_kvp.count() == 0);
+  QVERIFY(m->d_func()->m_kvp.count() == 0);
 }
 
 void MyMoneyKeyValueContainerTest::testRetrieveValue()
 {
   // load a value into the container
-  m->m_kvp["Key"] = "Value";
+  m->d_func()->m_kvp["Key"] = "Value";
   // make sure it's there
-  QVERIFY(m->m_kvp.count() == 1);
-  QVERIFY(m->m_kvp["Key"] == "Value");
+  QVERIFY(m->d_func()->m_kvp.count() == 1);
+  QVERIFY(m->d_func()->m_kvp["Key"] == "Value");
   // now check that the access function works
   QVERIFY(m->value("Key") == "Value");
   QVERIFY(m->value("key").isEmpty());
@@ -55,17 +58,17 @@ void MyMoneyKeyValueContainerTest::testRetrieveValue()
 void MyMoneyKeyValueContainerTest::testSetValue()
 {
   m->setValue("Key", "Value");
-  QVERIFY(m->m_kvp.count() == 1);
-  QVERIFY(m->m_kvp["Key"] == "Value");
+  QVERIFY(m->d_func()->m_kvp.count() == 1);
+  QVERIFY(m->d_func()->m_kvp["Key"] == "Value");
 }
 
 void MyMoneyKeyValueContainerTest::testDeletePair()
 {
   m->setValue("Key", "Value");
   m->setValue("key", "value");
-  QVERIFY(m->m_kvp.count() == 2);
+  QVERIFY(m->d_func()->m_kvp.count() == 2);
   m->deletePair("Key");
-  QVERIFY(m->m_kvp.count() == 1);
+  QVERIFY(m->d_func()->m_kvp.count() == 1);
   QVERIFY(m->value("Key").isEmpty());
   QVERIFY(m->value("key") == "value");
 }
@@ -74,20 +77,20 @@ void MyMoneyKeyValueContainerTest::testClear()
 {
   m->setValue("Key", "Value");
   m->setValue("key", "value");
-  QVERIFY(m->m_kvp.count() == 2);
+  QVERIFY(m->d_func()->m_kvp.count() == 2);
   m->clear();
-  QVERIFY(m->m_kvp.count() == 0);
+  QVERIFY(m->d_func()->m_kvp.count() == 0);
 }
 
 void MyMoneyKeyValueContainerTest::testRetrieveList()
 {
   QMap<QString, QString> copy;
 
-  copy = m->pairs();
+  copy = m->d_func()->m_kvp;
   QVERIFY(copy.count() == 0);
   m->setValue("Key", "Value");
   m->setValue("key", "value");
-  copy = m->pairs();
+  copy = m->d_func()->m_kvp;
   QVERIFY(copy.count() == 2);
   QVERIFY(copy["Key"] == "Value");
   QVERIFY(copy["key"] == "value");
@@ -98,9 +101,9 @@ void MyMoneyKeyValueContainerTest::testLoadList()
   m->setValue("Key", "Value");
   m->setValue("key", "value");
 
-  QVERIFY(m->m_kvp.count() == 2);
-  QVERIFY(m->m_kvp["Key"] == "Value");
-  QVERIFY(m->m_kvp["key"] == "value");
+  QVERIFY(m->d_func()->m_kvp.count() == 2);
+  QVERIFY(m->d_func()->m_kvp["Key"] == "Value");
+  QVERIFY(m->d_func()->m_kvp["key"] == "value");
 }
 
 void MyMoneyKeyValueContainerTest::testWriteXML()
@@ -185,7 +188,7 @@ void MyMoneyKeyValueContainerTest::testReadXML()
   node = doc.documentElement().firstChild().toElement();
   try {
     MyMoneyKeyValueContainer k(node);
-    QVERIFY(k.m_kvp.count() == 2);
+    QVERIFY(k.d_func()->m_kvp.count() == 2);
     QVERIFY(k.value("key") == "Value");
     QVERIFY(k.value("Key") == "value");
   } catch (const MyMoneyException &) {
@@ -214,22 +217,20 @@ void MyMoneyKeyValueContainerTest::testArrayWrite()
 
 void MyMoneyKeyValueContainerTest::testElementNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyKeyValueContainer::elNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyKeyValueContainer::getElName(static_cast<MyMoneyKeyValueContainer::elNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)KVC::Element::Pair; i <= (int)KVC::Element::Pair; ++i) {
+    auto isEmpty = MyMoneyKeyValueContainerPrivate::getElName(static_cast<KVC::Element>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty element's name" << e.key(i);
+      qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
   }
 }
 
 void MyMoneyKeyValueContainerTest::testAttributeNames()
 {
-  QMetaEnum e = QMetaEnum::fromType<MyMoneyKeyValueContainer::attrNameE>();
-  for (int i = 0; i < e.keyCount(); ++i) {
-    bool isEmpty = MyMoneyKeyValueContainer::getAttrName(static_cast<MyMoneyKeyValueContainer::attrNameE>(e.value(i))).isEmpty();
+  for (auto i = (int)KVC::Attribute::Key; i < (int)KVC::Attribute::LastAttribute; ++i) {
+    auto isEmpty = MyMoneyKeyValueContainerPrivate::getAttrName(static_cast<KVC::Attribute>(i)).isEmpty();
     if (isEmpty)
-      qWarning() << "Empty attribute's name" << e.key(i);
+      qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
 }

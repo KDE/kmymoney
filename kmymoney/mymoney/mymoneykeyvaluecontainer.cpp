@@ -4,6 +4,7 @@
     begin                : Sun Nov 10 2002
     copyright            : (C) 2002-2005 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,11 +17,13 @@
  ***************************************************************************/
 
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneykeyvaluecontainer_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,73 +38,95 @@ using namespace MyMoneyStorageNodes;
 
 Q_GLOBAL_STATIC(QString, nullString)
 
-MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
+MyMoneyKeyValueContainer::MyMoneyKeyValueContainer() :
+  d_ptr(new MyMoneyKeyValueContainerPrivate)
 {
 }
 
-MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const QDomElement& node)
+MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const QDomElement& node) :
+  d_ptr(new MyMoneyKeyValueContainerPrivate)
 {
+  Q_D(MyMoneyKeyValueContainer);
   if (!node.isNull()) {
     if (nodeNames[nnKeyValuePairs] != node.tagName())
       throw MYMONEYEXCEPTION("Node was not KEYVALUEPAIRS");
 
-    m_kvp.clear();
+    d->m_kvp.clear();
 
-    QDomNodeList nodeList = node.elementsByTagName(getElName(enPair));
+    QDomNodeList nodeList = node.elementsByTagName(d->getElName(Element::Pair));
     for (int i = 0; i < nodeList.count(); ++i) {
       const QDomElement& el(nodeList.item(i).toElement());
-      m_kvp[el.attribute(getAttrName(anKey))] = el.attribute(getAttrName(anValue));
+      d->m_kvp[el.attribute(d->getAttrName(Attribute::Key))] = el.attribute(d->getAttrName(Attribute::Value));
     }
   }
 }
 
+MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const MyMoneyKeyValueContainer& other) :
+  d_ptr(new MyMoneyKeyValueContainerPrivate(*other.d_func()))
+{
+}
+
 MyMoneyKeyValueContainer::~MyMoneyKeyValueContainer()
 {
+  Q_D(MyMoneyKeyValueContainer);
+  delete d;
 }
 
 const QString& MyMoneyKeyValueContainer::value(const QString& key) const
 {
+  Q_D(const MyMoneyKeyValueContainer);
   QMap<QString, QString>::ConstIterator it;
 
-  it = m_kvp.find(key);
-  if (it != m_kvp.end())
+  it = d->m_kvp.find(key);
+  if (it != d->m_kvp.end())
     return (*it);
   return *nullString;
 }
 
 void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value)
 {
-  m_kvp[key] = value;
+  Q_D(MyMoneyKeyValueContainer);
+  d->m_kvp[key] = value;
 }
 
+const QMap<QString, QString>& MyMoneyKeyValueContainer::pairs() const
+{
+  Q_D(const MyMoneyKeyValueContainer);
+  return d->m_kvp;
+}
 
 void MyMoneyKeyValueContainer::setPairs(const QMap<QString, QString>& list)
 {
-  m_kvp = list;
+  Q_D(MyMoneyKeyValueContainer);
+  d->m_kvp = list;
 }
 
 void MyMoneyKeyValueContainer::deletePair(const QString& key)
 {
+  Q_D(MyMoneyKeyValueContainer);
   QMap<QString, QString>::Iterator it;
 
-  it = m_kvp.find(key);
-  if (it != m_kvp.end())
-    m_kvp.erase(it);
+  it = d->m_kvp.find(key);
+  if (it != d->m_kvp.end())
+    d->m_kvp.erase(it);
 }
 
 void MyMoneyKeyValueContainer::clear()
 {
-  m_kvp.clear();
+  Q_D(MyMoneyKeyValueContainer);
+  d->m_kvp.clear();
 }
 
 bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& right) const
 {
+  Q_D(const MyMoneyKeyValueContainer);
   QMap<QString, QString>::ConstIterator it_a, it_b;
 
-  it_a = m_kvp.begin();
-  it_b = right.m_kvp.begin();
+  auto d2 = static_cast<const MyMoneyKeyValueContainerPrivate *>(right.d_func());
+  it_a = d->m_kvp.begin();
+  it_b = d2->m_kvp.begin();
 
-  while (it_a != m_kvp.end() && it_b != right.m_kvp.end()) {
+  while (it_a != d->m_kvp.end() && it_b != d2->m_kvp.end()) {
     if (it_a.key() != it_b.key()
         || (((*it_a).length() != 0 || (*it_b).length() != 0) && *it_a != *it_b))
       return false;
@@ -109,39 +134,35 @@ bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& righ
     ++it_b;
   }
 
-  return (it_a == m_kvp.end() && it_b == right.m_kvp.end());
+  return (it_a == d->m_kvp.end() && it_b == d2->m_kvp.end());
+}
+
+
+const QString& MyMoneyKeyValueContainer::operator[](const QString& k) const
+{
+  return value(k);
+}
+
+QString& MyMoneyKeyValueContainer::operator[](const QString& k)
+{
+  Q_D(MyMoneyKeyValueContainer);
+  return d->m_kvp[k];
 }
 
 void MyMoneyKeyValueContainer::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  if (m_kvp.count() != 0) {
+  Q_D(const MyMoneyKeyValueContainer);
+  if (d->m_kvp.count() != 0) {
     QDomElement el = document.createElement(nodeNames[nnKeyValuePairs]);
 
     QMap<QString, QString>::ConstIterator it;
-    for (it = m_kvp.begin(); it != m_kvp.end(); ++it) {
-      QDomElement pair = document.createElement(getElName(enPair));
-      pair.setAttribute(getAttrName(anKey), it.key());
-      pair.setAttribute(getAttrName(anValue), it.value());
+    for (it = d->m_kvp.begin(); it != d->m_kvp.end(); ++it) {
+      QDomElement pair = document.createElement(d->getElName(Element::Pair));
+      pair.setAttribute(d->getAttrName(Attribute::Key), it.key());
+      pair.setAttribute(d->getAttrName(Attribute::Value), it.value());
       el.appendChild(pair);
     }
 
     parent.appendChild(el);
   }
-}
-
-const QString MyMoneyKeyValueContainer::getElName(const elNameE _el)
-{
-  static const QMap<elNameE, QString> elNames = {
-    {enPair, QStringLiteral("PAIR")}
-  };
-  return elNames[_el];
-}
-
-const QString MyMoneyKeyValueContainer::getAttrName(const attrNameE _attr)
-{
-  static const QMap<attrNameE, QString> attrNames = {
-    {anKey, QStringLiteral("key")},
-    {anValue, QStringLiteral("value")}
-  };
-  return attrNames[_attr];
 }

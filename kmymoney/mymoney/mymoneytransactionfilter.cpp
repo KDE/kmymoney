@@ -67,7 +67,7 @@ public:
 };
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter() :
-  d_ptr_tf(new MyMoneyTransactionFilterPrivate)
+  d_ptr(new MyMoneyTransactionFilterPrivate)
 {
   Q_D(MyMoneyTransactionFilter);
   d->m_filterSet.allFilter = 0;
@@ -77,7 +77,7 @@ MyMoneyTransactionFilter::MyMoneyTransactionFilter() :
 }
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter(const QString& id) :
-  d_ptr_tf(new MyMoneyTransactionFilterPrivate)
+  d_ptr(new MyMoneyTransactionFilterPrivate)
 {
   Q_D(MyMoneyTransactionFilter);
   d->m_filterSet.allFilter = 0;
@@ -90,7 +90,7 @@ MyMoneyTransactionFilter::MyMoneyTransactionFilter(const QString& id) :
 }
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter(const MyMoneyTransactionFilter& other) :
-  d_ptr_tf(new MyMoneyTransactionFilterPrivate(*other.d_func()))
+  d_ptr(new MyMoneyTransactionFilterPrivate(*other.d_func()))
 {
 }
 

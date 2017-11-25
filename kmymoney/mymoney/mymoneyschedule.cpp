@@ -22,6 +22,8 @@
 // QT Includes
 
 #include <QList>
+#include <QDomDocument>
+#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------

@@ -17,6 +17,8 @@
 #include "mymoneyobject-test.h"
 
 #include <QtTest>
+#include <QDomDocument>
+#include <QDomElement>
 
 #include "mymoneyexception.h"
 #include "mymoneyaccount.h"

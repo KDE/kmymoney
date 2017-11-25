@@ -14,9 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #ifndef SCHEDULEDTRANSACTIONMATCHFINDER_H
 #define SCHEDULEDTRANSACTIONMATCHFINDER_H
+
+#include <QList>
 
 #include "transactionmatchfinder.h"
 #include "mymoneyaccount.h"

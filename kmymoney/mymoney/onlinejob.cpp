@@ -19,6 +19,9 @@
 #include "onlinejob.h"
 #include "onlinejob_p.h"
 
+#include <QDomDocument>
+#include <QDomElement>
+
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 

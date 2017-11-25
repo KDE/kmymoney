@@ -26,6 +26,8 @@
 #include <QXmlLocator>
 #include <QTextStream>
 #include <QList>
+#include <QDomDocument>
+#include <QDomElement>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------

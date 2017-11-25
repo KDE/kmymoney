@@ -27,6 +27,7 @@
 
 #include <QString>
 #include <QHash>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

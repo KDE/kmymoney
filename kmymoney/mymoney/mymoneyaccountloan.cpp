@@ -23,6 +23,7 @@
 
 #include <QRegExp>
 #include <QDate>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

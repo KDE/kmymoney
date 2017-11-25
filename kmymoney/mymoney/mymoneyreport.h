@@ -471,7 +471,7 @@ inline void swap(MyMoneyReport& first, MyMoneyReport& second) // krazy:exclude=i
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
   swap(first.m_id, second.m_id);
-  swap(first.d_ptr_tf, second.d_ptr_tf);
+  swap(first.MyMoneyTransactionFilter::d_ptr, second.MyMoneyTransactionFilter::d_ptr);
 }
 
 inline MyMoneyReport::MyMoneyReport(MyMoneyReport && other) : MyMoneyReport() // krazy:exclude=inline
