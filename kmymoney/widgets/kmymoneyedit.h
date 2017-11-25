@@ -21,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDoubleValidator>
 #include <QWidget>
 
 // ----------------------------------------------------------------------------
@@ -36,41 +35,7 @@
 class QWidget;
 class KLineEdit;
 class MyMoneySecurity;
-
-/**
-  * This class is derived from KDoubleValidator and uses
-  * the monetary symbols instead of the numeric symbols.
-  * Also, it always accepts localized input.
-  *
-  * @author Thomas Baumgart
-  */
-class KMM_WIDGETS_EXPORT KMyMoneyMoneyValidator : public QDoubleValidator
-{
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyMoneyValidator)
-
-public:
-  /**
-    * Constuct a locale-aware KDoubleValidator with default range
-    * (whatever QDoubleValidator uses for that) and parent @p
-    * parent
-    */
-  explicit KMyMoneyMoneyValidator(QObject * parent);
-  /**
-    * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
-    * top] and a precision of @p digits after the decimal
-    * point.
-    */
-  explicit KMyMoneyMoneyValidator(double bottom, double top, int decimals,
-                                  QObject * parent);
-  /**
-    * Destructs the validator.
-    */
-  ~KMyMoneyMoneyValidator();
-
-  /** Overloaded for internal reasons. The API is not affected. */
-  QValidator::State validate(QString & input, int & pos) const override;
-};
+class QValidator;
 
 /**
   * This class represents a widget to enter monetary values.

@@ -68,6 +68,7 @@ email                : mte@users.sourceforge.net
 #include "kgncpricesourcedlg.h"
 #include "keditscheduledlg.h"
 #include "kmymoneyedit.h"
+#include "kmymoneymoneyvalidator.h"
 #define TRY try
 #define CATCH catch (const MyMoneyException &)
 #define PASS catch (const MyMoneyException &) { throw; }

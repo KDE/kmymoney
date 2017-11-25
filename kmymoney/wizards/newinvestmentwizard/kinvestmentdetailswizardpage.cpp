@@ -35,6 +35,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
+#include "kmymoneymoneyvalidator.h"
 
 KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent) :
     QWizardPage(parent),

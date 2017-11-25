@@ -10,6 +10,7 @@ set (libconverter_a_SOURCES
   transactionmatchfinder.cpp
   existingtransactionmatchfinder.cpp
   scheduledtransactionmatchfinder.cpp
+  ../widgets/kmymoneymoneyvalidator.cpp
 )
 
 add_library(converter STATIC ${libconverter_a_SOURCES})

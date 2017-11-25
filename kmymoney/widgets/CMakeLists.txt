@@ -16,7 +16,7 @@ set(kmymoney_STAT_HEADERS
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   kmymoneydateedit.h
-  amountedit.h creditdebithelper.h
+  amountedit.h amountvalidator.h creditdebithelper.h
   )
 
 ########### Shared widget library ###########
@@ -47,7 +47,9 @@ set(kmm_widgets_sources
   kguiutils.cpp
   onlinejobmessagesview.cpp
   kmymoneydateedit.cpp
+  kmymoneymoneyvalidator.cpp
   amountedit.cpp
+  amountvalidator.cpp
   creditdebithelper.cpp
   )
 
