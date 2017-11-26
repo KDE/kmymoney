@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KNEWACCOUNTACCOUNTSUMMARYPAGE_H
-#define KNEWACCOUNTACCOUNTSUMMARYPAGE_H
+#ifndef KACCOUNTSUMMARYPAGE_H
+#define KACCOUNTSUMMARYPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

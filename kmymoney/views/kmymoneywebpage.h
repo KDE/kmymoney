@@ -26,9 +26,9 @@
 // KDE Includes
 
 #ifdef ENABLE_WEBENGINE
-#include <QtWebEngineWidgets/QWebEnginePage>
+#include <QWebEnginePage>
 #else
-#include <KDEWebKit/KWebPage>
+#include <KWebPage>
 #endif
 
 // ----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 
 #include "onlinejobtyped-test.h"
 
-#include <QtTest/QTest>
+#include <QTest>
 
 #include "onlinejob.h"
 #include "onlinejobtyped.h"

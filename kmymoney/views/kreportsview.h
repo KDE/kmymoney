@@ -30,7 +30,7 @@
 
 #include <QWidget>
 #include <QList>
-#include <QtPrintSupport/QPrinter>
+#include <QPrinter>
 #include <QPointer>
 
 // ----------------------------------------------------------------------------

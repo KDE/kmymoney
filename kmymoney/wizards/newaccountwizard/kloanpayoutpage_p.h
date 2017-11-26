@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KPAYOUT_P_H
-#define KPAYOUT_P_H
+#ifndef KLOANPAYOUTPAGE_P_H
+#define KLOANPAYOUTPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

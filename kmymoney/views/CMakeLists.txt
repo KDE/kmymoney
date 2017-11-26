@@ -38,8 +38,6 @@ set(libviews_a_SOURCES
   kmymoneywebpage.cpp
 )
 
-set(libviews_a_HEADER kmymoneyview.h)
-
 set(libviews_a_UI
   kaccountsview.ui
   kbudgetview.ui
@@ -90,8 +88,3 @@ target_link_libraries( views PUBLIC
 
 # we rely on some of the dialogs to be generated
 add_dependencies(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)
-
-########### install files ###############
-
-install(FILES ${libviews_a_HEADER}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)

@@ -18,7 +18,7 @@
 
 #include "onlinejob-test.h"
 
-#include <QtTest/QTest>
+#include <QTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobTest;
 

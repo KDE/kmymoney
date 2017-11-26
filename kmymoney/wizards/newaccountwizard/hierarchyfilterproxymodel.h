@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef HIERACHRYFILTERPROXYMODEL_H
-#define HIERACHRYFILTERPROXYMODEL_H
+#ifndef HIERARCHRYFILTERPROXYMODEL_H
+#define HIERARCHRYFILTERPROXYMODEL_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

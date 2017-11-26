@@ -16,10 +16,6 @@
 #ifndef MYMONEYMONEY_H
 #define MYMONEYMONEY_H
 
-#ifdef HAVE_CONFIG_H
-#include <config-kmymoney.h>
-#endif
-
 // #include <cmath>
 #include <stddef.h>
 

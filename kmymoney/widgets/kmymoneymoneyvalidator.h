@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KMYMONEYVALIDATOR_H
-#define KMYMONEYVALIDATOR_H
+#ifndef KMYMONEYMONEYVALIDATOR_H
+#define KMYMONEYMONEYVALIDATOR_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

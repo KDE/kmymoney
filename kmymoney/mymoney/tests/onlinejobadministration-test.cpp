@@ -18,7 +18,7 @@
 
 #include "onlinejobadministration-test.h"
 
-#include <QtTest/QTest>
+#include <QTest>
 
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"

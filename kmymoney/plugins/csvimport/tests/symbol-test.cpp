@@ -19,7 +19,7 @@
 
 #include <QtTest>
 #include <QString>
-#include <QtCore/QLocale>
+#include <QLocale>
 
 QTEST_GUILESS_MAIN(SymbolTest);
 

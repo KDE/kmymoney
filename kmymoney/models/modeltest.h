@@ -44,8 +44,8 @@
 #define MODELTEST_H
 
 #include <QObject>
-#include <QtCore/QAbstractItemModel>
-#include <QtCore/QStack>
+#include <QAbstractItemModel>
+#include <QStack>
 
 class ModelTest : public QObject
 {
