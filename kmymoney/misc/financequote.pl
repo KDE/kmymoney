@@ -16,11 +16,8 @@
 ### GNU General Public License for more details.                     
 ###                                                                  
 ### You should have received a copy of the GNU General Public License
-### along with this program# if not, contact:
-###
-### Free Software Foundation           Voice:  +1-617-542-5942
-### 59 Temple Place - Suite 330        Fax:    +1-617-542-2652
-### Boston, MA  02111-1307,  USA       gnu@gnu.org
+### along with this program.
+### If not, see <http://www.gnu.org/licenses/>.
 ######################################################################
 
 #use diagnostics; # while testing
@@ -104,7 +101,7 @@ if ($errcode != 0) {
     my ($usdate, $month, $day, $year, $yyyymmdd);
     $usdate = $qhash{$symbol, "date"};
     ($month,$day,$year) = ($usdate =~ /([0-9]+)\/([0-9]+)\/([0-9]+)/);
-    # i'm sure I can do the folowing with a regex but I'm just too idle...
+    # i'm sure I can do the following with a regex but I'm just too idle...
     $month = "0$month" if ($month < 9);
     $day = "0$day" if ($day < 9);
     $yyyymmdd = "$year-$month-$day";
