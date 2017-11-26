@@ -22,3 +22,5 @@
 #cmakedefine KF5Activities_FOUND 1
 
 #cmakedefine ENABLE_WEBENGINE 0
+
+#cmakedefine IS_GNU 0
