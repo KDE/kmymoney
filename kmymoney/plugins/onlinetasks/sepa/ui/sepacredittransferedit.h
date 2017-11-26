@@ -69,17 +69,17 @@ public:
 
   virtual void showEvent(QShowEvent*);
 
-signals:
+Q_SIGNALS:
   void onlineJobChanged();
   void readOnlyChanged(bool);
 
-public slots:
+public Q_SLOTS:
   void setOnlineJob(const onlineJobTyped<sepaOnlineTransfer> &job);
   bool setOnlineJob(const onlineJob& job);
   void setOriginAccount(const QString& accountId);
   void setReadOnly(const bool&);
 
-private slots:
+private Q_SLOTS:
   void updateSettings();
   void updateEveryStatus();
 

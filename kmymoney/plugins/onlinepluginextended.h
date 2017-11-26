@@ -74,7 +74,7 @@ public:
   virtual void plug() = 0;
   virtual void unplug() = 0;
 
-signals:
+Q_SIGNALS:
   /**
    * @brief Emit to make onlineJob available
    *

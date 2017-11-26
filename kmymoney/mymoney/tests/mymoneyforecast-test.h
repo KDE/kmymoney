@@ -33,7 +33,7 @@ class MyMoneyForecastTest : public QObject
 public:
   MyMoneyForecastTest();
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testEmptyConstructor();

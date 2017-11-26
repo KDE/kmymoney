@@ -41,10 +41,10 @@ public:
   explicit KSettingsGpg(QWidget* parent = nullptr);
   ~KSettingsGpg();
 
-public slots:
+public Q_SLOTS:
   void showEvent(QShowEvent * event) override;
 
-protected slots:
+protected Q_SLOTS:
   void slotStatusChanged(bool state);
   void slotIdChanged();
   void slotIdChanged(int idx);

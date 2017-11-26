@@ -40,7 +40,7 @@ private:
   QString          m_testDecimal;
   QString          m_localeThousands;
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void cleanupTestCase();

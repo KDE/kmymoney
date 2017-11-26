@@ -70,7 +70,7 @@ protected:
   /// Overridden for internal reasons. No API changes.
   void resizeEvent(QResizeEvent* ev) override;
 
-private slots:
+private Q_SLOTS:
   void slotSetupSize();
   void slotRemainingChanged(int);
   void slotEndDateChanged(const QDate& date);

@@ -50,7 +50,7 @@ public:
   QString tan();
   int flickerFieldWidth();
 
-public slots:
+public Q_SLOTS:
   void accept();
   void reject();
 
@@ -61,7 +61,7 @@ public slots:
   void setFlickerFieldWidth(const int& width);
   void setFlickerFieldClockSetting(const int& width);
 
-private slots:
+private Q_SLOTS:
   void tanInputChanged(const QString&);
   void flickerFieldWidthChanged(const int& width);
   void flickerFieldClockSettingChanged(const int& takt);

@@ -88,7 +88,7 @@ public:
    */
   static QModelIndex indexById(QAbstractItemModel* model, int role, const QString& id);
 
-public slots:
+public Q_SLOTS:
   /**
     * This slot is used to notify the models that the data has been loaded and ready to use.
     * @ref MyMoneyFile.

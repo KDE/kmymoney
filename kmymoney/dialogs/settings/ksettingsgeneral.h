@@ -39,7 +39,7 @@ public:
   explicit KSettingsGeneral(QWidget* parent = nullptr);
   ~KSettingsGeneral();
 
-protected slots:
+protected Q_SLOTS:
   void slotChooseLogPath();
   void slotLoadStartDate(const QDate&);
   void slotUpdateLogTypes();
@@ -47,7 +47,7 @@ protected slots:
 protected:
   void showEvent(QShowEvent* event) override;
 
-public slots:
+public Q_SLOTS:
   void slotUpdateEquitiesVisibility();
 
 private:

@@ -54,7 +54,7 @@ namespace NewAccountWizard
 
     QString payoutAccountId() const;
 
-  private slots:
+  private Q_SLOTS:
     void slotLoadWidgets();
     void slotCreateAssetAccount();
     void slotButtonsToggled();

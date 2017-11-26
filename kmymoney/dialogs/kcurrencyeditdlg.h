@@ -55,10 +55,10 @@ public:
   explicit KCurrencyEditDlg(QWidget *parent = nullptr);
   ~KCurrencyEditDlg();
 
-public slots:
+public Q_SLOTS:
   void slotSelectCurrency(const QString& id);
 
-protected slots:
+protected Q_SLOTS:
   void slotSelectCurrency(QTreeWidgetItem *citem, QTreeWidgetItem *pitem);
   void slotSelectCurrency(QTreeWidgetItem *item);
   void slotItemSelectionChanged();
@@ -68,7 +68,7 @@ protected slots:
   void slotUpdateCurrency(QTreeWidgetItem* citem, int column);
   void slotUpdateCurrency(QTreeWidgetItem *citem, QTreeWidgetItem *pitem);
 
-private slots:
+private Q_SLOTS:
   void timerDone();
   void slotSelectBaseCurrency();
   void slotAddCurrency();
@@ -76,7 +76,7 @@ private slots:
   void slotRemoveUnusedCurrency();
   void slotEditCurrency();
 
-signals:
+Q_SIGNALS:
   void selectObject(const MyMoneySecurity& currency);
   void openContextMenu(const MyMoneySecurity& currency);
   void updateCurrency(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol);

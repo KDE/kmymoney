@@ -68,7 +68,7 @@ public:
    */
   virtual bool isReadOnly() const = 0;
 
-public slots:
+public Q_SLOTS:
   /**
    * @brief Set an onlineJob to edit
    *
@@ -81,7 +81,7 @@ public slots:
   virtual void setOriginAccount(const QString&) = 0;
   virtual void showAllErrorMessages(const bool) {}
 
-signals:
+Q_SIGNALS:
   /**
    * @brief Emitted if a job which transfers money changed it's value
    */

@@ -53,7 +53,7 @@ public:
    */
   QStringList keys() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotIdChanged();
   void slotKeyListChanged();
 

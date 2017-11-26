@@ -41,7 +41,7 @@ public:
   QString mountPoint() const;
   bool mountCheckBox() const;
 
-protected slots:
+protected Q_SLOTS:
   void chooseButtonClicked();
 
 private:

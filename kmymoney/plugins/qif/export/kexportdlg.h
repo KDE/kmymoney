@@ -123,7 +123,7 @@ public:
     return m_qcheckboxCategories->isChecked();
   };
 
-protected slots:
+protected Q_SLOTS:
   /**
     * Called when the user clicked on the OK button
     */

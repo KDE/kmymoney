@@ -116,7 +116,7 @@ public:
   bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings);
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts);
 
-protected slots:
+protected Q_SLOTS:
   void slotImportFile();
   void slotImportFile(const QString& url);
 

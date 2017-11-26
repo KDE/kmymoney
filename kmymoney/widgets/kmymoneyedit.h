@@ -128,7 +128,7 @@ public:
    */
   static void setStandardPrecision(int prec);
 
-public slots:
+public Q_SLOTS:
   void loadText(const QString& text);
   void resetText();
   void clearText();
@@ -148,7 +148,7 @@ public slots:
 
   void setReadOnly(bool readOnly);
 
-signals: // Signals
+Q_SIGNALS: // Signals
   /**
     * This signal is sent, when the focus leaves this widget and
     * the amount has been changed by user during this session.
@@ -157,7 +157,7 @@ signals: // Signals
 
   void textChanged(const QString& text);
 
-protected slots:
+protected Q_SLOTS:
   void theTextChanged(const QString & text);
   void slotCalculatorResult();
   void slotCalculatorOpen();

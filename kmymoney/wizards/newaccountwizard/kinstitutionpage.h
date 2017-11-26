@@ -59,7 +59,7 @@ namespace NewAccountWizard
 
     void selectExistingInstitution(const QString& id);
 
-  private slots:
+  private Q_SLOTS:
     void slotLoadWidgets();
     void slotNewInstitution();
     void slotSelectInstitution(int index);

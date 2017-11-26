@@ -68,14 +68,14 @@ public:
   void setDefaultFocus() override;
   void refresh() override;
 
-public slots:
+public Q_SLOTS:
   void slotProfitChanged(const MyMoneyMoney &);
 
 protected:
   KCategoriesView(KCategoriesViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;
 
-protected slots:
+protected Q_SLOTS:
   void slotUnusedIncomeExpenseAccountHidden();
 
 private:

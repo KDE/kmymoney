@@ -150,10 +150,10 @@ protected:
     */
   void setCurrentTextById(const QString& id)  override;
 
-public slots:
+public Q_SLOTS:
   void slotItemSelected(const QString& id) override;
 
-signals:
+Q_SIGNALS:
   /**
     * Signal to inform other objects that this object has reached focus.
     * Used for e.g. to open the split dialog when the focus reaches this

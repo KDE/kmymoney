@@ -72,7 +72,7 @@ public:
     */
   void suspendUpdate(const bool suspend);
 
-public slots:
+public Q_SLOTS:
   void slotSelectBudget();
   void slotHideUnused(bool);
   void slotRefreshHideUnusedButton();
@@ -100,7 +100,7 @@ protected:
   bool collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const;
   void clearSubBudgets(const QModelIndex &index);
 
-protected slots:
+protected Q_SLOTS:
 
   /**
     * This slot is called when the data of a budget is changed inside
@@ -131,7 +131,7 @@ protected slots:
 
   void slotBudgetBalanceChanged(const MyMoneyMoney &);
 
-private slots:
+private Q_SLOTS:
   /**
     * This slot receives the signal from the listview control that an
     * item was right-clicked,
@@ -141,7 +141,7 @@ private slots:
     */
   void slotOpenContextMenu(const QPoint& p);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal serves as proxy for KMyMoneyBudgetList::selectObject()
     */

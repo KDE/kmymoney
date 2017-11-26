@@ -84,7 +84,7 @@ public:
     return m_profileComboBox->currentText();
   };
 
-protected slots:
+protected Q_SLOTS:
   /** Called to let the user browse for a QIF file to import from. */
   void slotBrowse();
 

@@ -59,10 +59,10 @@ public:
 
   void removeDontCare();
 
-protected slots:
+protected Q_SLOTS:
   void slotSetDirection(const QString& id);
 
-signals:
+Q_SIGNALS:
   void directionSelected(eWidgets::eRegister::CashFlowDirection);
 
 private:

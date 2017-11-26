@@ -45,7 +45,7 @@ public:
 
   void showEvent(QShowEvent* event);
 
-signals:
+Q_SIGNALS:
   void sendJobs(QList<onlineJob>);
   void editJob(QString);
   void newCreditTransfer();
@@ -56,7 +56,7 @@ signals:
 protected:
   void contextMenuEvent(QContextMenuEvent*);
 
-private slots:
+private Q_SLOTS:
   void updateNewCreditTransferButton();
   void updateButtonState() const;
 
@@ -72,7 +72,7 @@ private:
    */
   void init();
 
-private slots:
+private Q_SLOTS:
   void slotRemoveJob();
 
   /** @brief If any job is selected, send it. Send all valid jobs otherwise. */

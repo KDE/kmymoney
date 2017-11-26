@@ -29,7 +29,7 @@ class MyMoneyBalanceCacheTest : public QObject
 protected:
   MyMoneyBalanceCache* m;
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testCacheItem();

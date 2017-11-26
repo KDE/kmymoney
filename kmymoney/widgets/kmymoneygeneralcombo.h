@@ -51,17 +51,17 @@ public:
 
   void removeItem(int id);
 
-public slots:
+public Q_SLOTS:
   void clear();
 
-signals:
+Q_SIGNALS:
   void itemSelected(int id);
 
 protected:
   // prevent the caller to use the standard KComboBox insertItem function with a default idx
   void insertItem(const QString&);
 
-protected slots:
+protected Q_SLOTS:
   void slotChangeItem(int idx);
 
 };

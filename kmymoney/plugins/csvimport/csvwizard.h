@@ -121,7 +121,7 @@ private:
   void closeEvent(QCloseEvent *event);
   bool eventFilter(QObject *object, QEvent *event);
 
-private slots:
+private Q_SLOTS:
   /**
   * This method is called when 'Exit' is clicked.  The plugin settings will
   * be saved and the plugin will be terminated.
@@ -131,7 +131,7 @@ private slots:
   void fileDialogClicked();
   void saveAsQIFClicked();
 
-signals:
+Q_SIGNALS:
   void statementReady(MyMoneyStatement&);
 };
 
@@ -153,7 +153,7 @@ public:
   Profile     m_profileType;
   Ui::IntroPage   *ui;
 
-signals:
+Q_SIGNALS:
   void             signalBankClicked(bool);
   void             activated(int);
   void             returnPressed();
@@ -167,7 +167,7 @@ private:
   void             profileChanged(const ProfileAction action);
   void             profileTypeChanged(const Profile profileType, bool toggled);
 
-private slots:
+private Q_SLOTS:
   void             slotAddProfile();
   void             slotRemoveProfile();
   void             slotRenameProfile();
@@ -191,12 +191,12 @@ public:
   explicit SeparatorPage(CSVWizard *dlg, CSVImporter *imp);
   ~SeparatorPage();
 
-private slots:
+private Q_SLOTS:
   void                encodingChanged(const int index);
   void                fieldDelimiterChanged(const int index);
   void                textDelimiterChanged(const int index);
 
-signals:
+Q_SIGNALS:
   void                completeChanged();
 
 private:
@@ -221,7 +221,7 @@ public:
   explicit RowsPage(CSVWizard *dlg, CSVImporter *imp);
   ~RowsPage();
 
-private slots:
+private Q_SLOTS:
   /**
   * This method is called when the user edits the startLine setting.
   */
@@ -272,10 +272,10 @@ private:
   bool              isComplete() const;
   void              cleanupPage();
 
-signals:
+Q_SIGNALS:
   void              completeChanged();
 
-private slots:
+private Q_SLOTS:
   void              decimalSymbolChanged(int);
   void              dateFormatChanged(const int index);
 };

@@ -29,7 +29,7 @@ class internationalAccountIdentifierTest : public QObject
 
   bool dataInstalled(const QString& countryCode);
 
-private slots:
+private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 

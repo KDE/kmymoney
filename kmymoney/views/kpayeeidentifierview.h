@@ -38,13 +38,13 @@ public:
   ~KPayeeIdentifierView();
   QList<payeeIdentifier> identifiers() const;
 
-signals:
+Q_SIGNALS:
   void dataChanged();
 
-public slots:
+public Q_SLOTS:
   void setSource(MyMoneyPayeeIdentifierContainer data);
 
-private slots:
+private Q_SLOTS:
   void removeSelected();
 
 private:

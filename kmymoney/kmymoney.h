@@ -162,7 +162,7 @@ class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
 {
   Q_OBJECT
 
-private slots:
+private Q_SLOTS:
   /**
     * Keep track of objects that are destroyed by external events
     */
@@ -178,7 +178,7 @@ private slots:
     */
   void slotShowContextMenuForConsistencyCheck(const QPoint &);
 
-protected slots:
+protected Q_SLOTS:
   void slotFileSaveAsFilterChanged(const QString& filter);
 
   /**
@@ -844,7 +844,7 @@ protected:
     */
   void preloadHolidays();
 
-public slots:
+public Q_SLOTS:
   void slotFileInfoDialog();
 
   /** */
@@ -1325,7 +1325,7 @@ private:
     */
   bool payeeReassign(int type);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted when a new file is loaded. In the case file
     * is closed, this signal is also emitted with an empty url.

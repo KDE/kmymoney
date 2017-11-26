@@ -115,7 +115,7 @@ public:
 
   bool eventFilter(QObject* o, QEvent* e) override;
 
-public slots:
+public Q_SLOTS:
   void expandAll();
   void collapseAll();
   void showPopup() override;
@@ -124,12 +124,12 @@ public slots:
 protected:
   void wheelEvent(QWheelEvent *ev) override;
 
-protected slots:
+protected Q_SLOTS:
   void activated();
   void makeCompletion(const QString& txt) override;
   void selectItem(const QModelIndex& index);
 
-signals:
+Q_SIGNALS:
   void accountSelected(const QString&);
 
 private:

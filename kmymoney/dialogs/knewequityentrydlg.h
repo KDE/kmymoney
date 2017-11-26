@@ -52,7 +52,7 @@ public:
 
   int fraction() const;
 
-protected slots:
+protected Q_SLOTS:
   void onOKClicked();
   void slotDataChanged();
 

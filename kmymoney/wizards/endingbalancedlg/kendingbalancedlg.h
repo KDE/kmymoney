@@ -77,7 +77,7 @@ protected:
   MyMoneyMoney adjustedReturnValue(const MyMoneyMoney& v) const;
   void createCategory(const QString& txt, QString& id, const MyMoneyAccount& parent);
 
-protected slots:
+protected Q_SLOTS:
   void slotReloadEditWidgets();
   void help();
   void slotCreateInterestCategory(const QString& txt, QString& id);
@@ -85,7 +85,7 @@ protected slots:
   void accept();
   void slotUpdateBalances();
 
-signals:
+Q_SIGNALS:
   /**
     * proxy signal for KMyMoneyPayeeCombo::createItem(const QString&, QString&)
     */

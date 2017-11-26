@@ -46,7 +46,7 @@ class KTagLabel : public QFrame
 public:
   explicit KTagLabel(const QString& id, const QString& name, QWidget* parent = nullptr);
 
-signals:
+Q_SIGNALS:
   void clicked(bool);
 
 private:

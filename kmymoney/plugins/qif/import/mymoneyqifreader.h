@@ -284,10 +284,10 @@ private:
   // void processQifLine();
   void createOpeningBalance(eMyMoney::Account::Type accType = eMyMoney::Account::Type::Checkings);
 
-signals:
+Q_SIGNALS:
   void statementsReady(QList<MyMoneyStatement> &);
 
-private slots:
+private Q_SLOTS:
   void slotSendDataToFilter();
   void slotReceivedDataFromFilter();
   void slotReceivedErrorFromFilter();

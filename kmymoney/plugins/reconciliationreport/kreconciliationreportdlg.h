@@ -40,7 +40,7 @@ public:
   KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML);
   ~KReportDlg();
 
-protected slots:
+protected Q_SLOTS:
   void print();
 
 private:

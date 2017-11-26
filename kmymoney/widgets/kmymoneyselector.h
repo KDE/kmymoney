@@ -269,7 +269,7 @@ public:
     */
   void setSelectable(QTreeWidgetItem *item, bool selectable);
 
-public slots:
+public Q_SLOTS:
   /**
     * This slot selects all items that are currently in
     * the item list of the widget.
@@ -282,7 +282,7 @@ public slots:
     */
   void slotDeselectAllItems();
 
-signals:
+Q_SIGNALS:
   void stateChanged();
 
   void itemSelected(const QString& id);
@@ -320,7 +320,7 @@ protected:
     */
   void selectSubItems(QTreeWidgetItem* item, const QStringList& itemList, const bool state);
 
-public slots:
+public Q_SLOTS:
   /**
     * Hide all listview items that do not match the regular expression @a exp.
     * This method returns the number of visible items
@@ -339,7 +339,7 @@ public slots:
   int slotMakeCompletion(const QString& txt);
 
 
-protected slots:
+protected Q_SLOTS:
   /**
     * This slot is connected to the QTreeWidget executed signal
     */

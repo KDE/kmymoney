@@ -76,7 +76,7 @@ public:
     return m_error;
   }
 
-protected slots:
+protected Q_SLOTS:
   void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
   void slotOfxConnected(KIO::Job*);

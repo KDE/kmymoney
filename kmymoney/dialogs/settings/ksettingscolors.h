@@ -40,7 +40,7 @@ public:
   explicit KSettingsColors(QWidget* parent = nullptr);
   ~KSettingsColors();
 
-private slots:
+private Q_SLOTS:
   /**
     * This presets custom colors with system's color scheme
     */

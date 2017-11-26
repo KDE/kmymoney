@@ -73,7 +73,7 @@ public:
     return m_aborted;
   }
 
-public slots:
+public Q_SLOTS:
   void abort() {
     m_aborted = true;
   }

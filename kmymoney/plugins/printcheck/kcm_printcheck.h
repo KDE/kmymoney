@@ -39,7 +39,7 @@ class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 public:
   explicit PluginSettingsWidget(QWidget* parent = 0);
 
-public slots:
+public Q_SLOTS:
   void urlSelected(const QUrl &url);
   void returnPressed(const QString& url);
 

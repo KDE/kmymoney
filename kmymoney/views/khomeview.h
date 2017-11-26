@@ -94,7 +94,7 @@ protected:
     */
   void showEvent(QShowEvent* event);
 
-public slots:
+public Q_SLOTS:
 
   void slotOpenUrl(const QUrl &url);
   void slotLoadView();
@@ -104,7 +104,7 @@ public slots:
     */
   void slotPrintView();
 
-signals:
+Q_SIGNALS:
   void ledgerSelected(const QString& id, const QString& transaction);
   void scheduleSelected(const QString& id);
   void reportSelected(const QString& id);

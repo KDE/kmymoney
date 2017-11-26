@@ -56,7 +56,7 @@ public:
 
   Ui::LoanAmountWizardPage *ui;
 
-public slots:
+public Q_SLOTS:
   void resetCalculator();
 };
 

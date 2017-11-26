@@ -50,10 +50,10 @@ public:
   void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
   void clear();
 
-signals:
+Q_SIGNALS:
   void valuesChanged();
 
-protected slots:
+protected Q_SLOTS:
   void slotChangePeriod(int id);
 
   /**

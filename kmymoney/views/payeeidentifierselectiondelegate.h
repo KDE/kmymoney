@@ -40,10 +40,10 @@ class payeeIdentifierTypeSelectionWidget : public QComboBox
 public:
   explicit payeeIdentifierTypeSelectionWidget(QWidget* parent = 0);
 
-signals:
+Q_SIGNALS:
   void commitData(QWidget* editor);
 
-private slots:
+private Q_SLOTS:
   void itemSelected(int index);
 };
 

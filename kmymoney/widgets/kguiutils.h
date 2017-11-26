@@ -81,7 +81,7 @@ public:
     */
   bool isEnabled() const;
 
-public slots:
+public Q_SLOTS:
   void clear();
 
   /**
@@ -89,7 +89,7 @@ public slots:
     */
   void changed();
 
-signals:
+Q_SIGNALS:
   void stateChanged();
   void stateChanged(bool state);
 

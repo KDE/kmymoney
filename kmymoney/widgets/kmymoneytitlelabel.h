@@ -57,7 +57,7 @@ public:
   QColor bgColor() const;
   QString text() const;
 
-public slots:
+public Q_SLOTS:
   virtual void setText(const QString& txt);
 
 protected:

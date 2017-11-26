@@ -81,10 +81,10 @@ protected:
 
   void resizeEvent(QResizeEvent* ev) override;
 
-public slots:
+public Q_SLOTS:
   int exec() override;
 
-private slots:
+private Q_SLOTS:
   void slotSetupSize();
   void slotShowHelp();
   void slotIgnore();

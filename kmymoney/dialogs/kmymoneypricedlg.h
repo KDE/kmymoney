@@ -51,7 +51,7 @@ public:
 private:
   QTreeWidgetItem* loadPriceItem(const MyMoneyPrice& basePrice);
 
-protected slots:
+protected Q_SLOTS:
   void slotSelectPrice();
   void slotNewPrice();
   void slotDeletePrice();
@@ -60,7 +60,7 @@ protected slots:
   void slotOnlinePriceUpdate();
   void slotOpenContextMenu(const QPoint& p);
 
-signals:
+Q_SIGNALS:
   void openContextMenu(const MyMoneyPrice& price);
   void selectObject(const MyMoneyPrice& price);
 

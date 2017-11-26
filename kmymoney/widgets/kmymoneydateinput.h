@@ -115,7 +115,7 @@ public:
   void setRange(const QDate & min, const QDate & max);
   void markAsBadDate(bool bad = false, const QColor& = QColor());
 
-signals:
+Q_SIGNALS:
   void dateChanged(const QDate& date);
 
 protected:
@@ -133,11 +133,11 @@ protected:
   bool eventFilter(QObject *o, QEvent *e) override;
 
 
-protected slots:
+protected Q_SLOTS:
   void slotDateChosen(QDate date);
   void toggleDatePicker();
 
-private slots:
+private Q_SLOTS:
   void slotDateChosenRef(const QDate& date);
   void fixSize();
 

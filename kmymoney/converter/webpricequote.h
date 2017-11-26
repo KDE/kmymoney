@@ -50,11 +50,11 @@ public:
     m_webID = _webID; m_string.truncate(0);
   }
 
-public slots:
+public Q_SLOTS:
   void slotReceivedDataFromFilter();
   void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
 
-signals:
+Q_SIGNALS:
   void processExited(const QString&);
 
 private:
@@ -83,7 +83,7 @@ public:
   const QString crypticName(const QString& niceName) const;
   const QString niceName(const QString& crypticName) const;
 
-public slots:
+public Q_SLOTS:
   void slotReceivedDataFromFilter();
   void slotProcessExited();
 
@@ -166,14 +166,14 @@ public:
   static const QStringList quoteSources(const _quoteSystemE _system = Native);
   static const QMap<QString, PricesProfile> defaultCSVQuoteSources();
 
-signals:
+Q_SIGNALS:
   void csvquote(const QString&, const QString&, MyMoneyStatement&);
   void quote(const QString&, const QString&, const QDate&, const double&);
   void failed(const QString&, const QString&);
   void status(const QString&);
   void error(const QString&);
 
-protected slots:
+protected Q_SLOTS:
   void slotParseCSVQuote(const QString& filename);
   void slotParseQuote(const QString&);
   void downloadCSV(KJob* job);
@@ -229,7 +229,7 @@ class QuoteReceiver : public QObject
 public:
   explicit QuoteReceiver(WebPriceQuote* q, QObject *parent = 0);
   ~QuoteReceiver();
-public slots:
+public Q_SLOTS:
   void slotGetQuote(const QString&, const QString&, const QDate&, const double&);
   void slotStatus(const QString&);
   void slotError(const QString&);

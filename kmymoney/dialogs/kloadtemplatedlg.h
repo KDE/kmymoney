@@ -47,7 +47,7 @@ public:
 
   QList<MyMoneyTemplate> templates() const;
 
-private slots:
+private Q_SLOTS:
   void slotHelp();
 
 private:

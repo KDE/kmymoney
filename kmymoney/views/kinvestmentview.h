@@ -54,7 +54,7 @@ public:
 
   void setDefaultFocus();
 
-public slots:
+public Q_SLOTS:
   /**
     * This slot is used to reload all data from the MyMoneyFile engine.
     * All existing data in the view will be invalidated.
@@ -69,7 +69,7 @@ public slots:
 
   void showEvent(QShowEvent* event);
 
-private slots:
+private Q_SLOTS:
   /**
     * This slot is used to reload (filters + equities account) specific tab
     */
@@ -93,7 +93,7 @@ private slots:
     */
   void slotLoadAccount(const QString &id);
 
-signals:
+Q_SIGNALS:
   void accountSelected(const MyMoneyObject&);
 
   void equityRightClicked();

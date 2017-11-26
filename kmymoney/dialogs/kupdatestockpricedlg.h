@@ -60,10 +60,10 @@ public:
 
   Ui::KUpdateStockPriceDlg *ui;
 
-public slots:
+public Q_SLOTS:
   int exec() override;
 
-protected slots:
+protected Q_SLOTS:
   void slotCheckData();
   void slotCheckData(int idx);
 };

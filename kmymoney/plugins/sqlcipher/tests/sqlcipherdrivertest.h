@@ -37,7 +37,7 @@ class sqlcipherdrivertest : public QObject
 private:
   int data();
 
-private slots:
+private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 

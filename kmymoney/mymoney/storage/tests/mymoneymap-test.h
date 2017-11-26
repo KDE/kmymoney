@@ -29,7 +29,7 @@ class MyMoneyMapTest : public QObject
 
 protected:
   MyMoneyMap<QString, QString> *m;
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testArrayOperator();

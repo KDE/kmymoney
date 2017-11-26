@@ -59,7 +59,7 @@ public:
    */
   int exec() override;
 
-public slots:
+public Q_SLOTS:
   void slotDriverSelected(int idx);
   void slotHelp();
 

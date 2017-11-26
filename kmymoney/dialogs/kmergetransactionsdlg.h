@@ -39,7 +39,7 @@ public:
 
   bool eventFilter(QObject* , QEvent*) override;
 
-public slots:
+public Q_SLOTS:
   void slotHelp() override;
 };
 

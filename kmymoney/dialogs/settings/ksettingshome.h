@@ -39,7 +39,7 @@ public:
   explicit KSettingsHome(QWidget* parent = nullptr);
   ~KSettingsHome();
 
-protected slots:
+protected Q_SLOTS:
   void slotLoadItems();
   void slotUpdateItemList();
   void slotSelectHomePageItem();

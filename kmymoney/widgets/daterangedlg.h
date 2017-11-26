@@ -60,7 +60,7 @@ public:
   QDate fromDate() const;
   QDate toDate() const;
 
-public slots:
+public Q_SLOTS:
   void slotReset();
   void slotDateRangeSelectedByUser();
   void slotDateChanged();

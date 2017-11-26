@@ -43,7 +43,7 @@ private:
   bool canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const;
   void markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction);
 
-protected slots:
+protected Q_SLOTS:
   void slotPrintCheck();
   void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
   // the plugin loader plugs in a plugin

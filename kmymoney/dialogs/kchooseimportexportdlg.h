@@ -48,7 +48,7 @@ public:
   ~KChooseImportExportDlg();
   QString importExportType() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotTypeActivated(const QString& text);
 
 private:

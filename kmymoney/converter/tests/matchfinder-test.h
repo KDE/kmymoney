@@ -63,7 +63,7 @@ private:
   void expectMatchWithExistingTransaction(TransactionMatchFinder::MatchResult expectedResult);
   void expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchResult expectedResult);
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
 

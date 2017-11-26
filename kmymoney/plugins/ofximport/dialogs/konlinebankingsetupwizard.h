@@ -78,7 +78,7 @@ public:
     return m_fInit;
   }
 
-protected slots:
+protected Q_SLOTS:
   void checkNextButton();
   void newPage(int id);
   void walletOpened(bool ok);

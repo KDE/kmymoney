@@ -92,7 +92,7 @@ public:
     */
   void setInitialValues(const QString& value, QKeyEvent* ev);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted, when a new result is available
     */
@@ -115,7 +115,7 @@ protected:
     */
   QString normalizeString(const double& val);
 
-protected slots:
+protected Q_SLOTS:
   /**
     * This method appends the digit represented by the parameter
     * to the current operand

@@ -65,7 +65,7 @@ namespace NewAccountWizard
    */
     QString updateTermWidgets(const double term);
 
-  private slots:
+  private Q_SLOTS:
     void slotValuesChanged();
     void slotCalculate();
 

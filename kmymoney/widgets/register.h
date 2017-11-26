@@ -300,14 +300,14 @@ namespace KMyMoneyRegister
     */
     int minimumColumnWidth(int col);
 
-  protected slots:
+  protected Q_SLOTS:
     void resize();
 
     void selectItem(int row, int col);
     void slotEnsureItemVisible();
     void slotDoubleClicked(int row, int);
 
-  signals:
+  Q_SIGNALS:
     void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
     /**
     * This signal is emitted when the focus and selection changes to @p item.

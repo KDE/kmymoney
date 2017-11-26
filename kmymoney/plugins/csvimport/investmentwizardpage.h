@@ -97,7 +97,7 @@ private:
   InvestmentProfile        *m_profile;
   Ui::InvestmentPage       *ui;
 
-private slots:
+private Q_SLOTS:
   void                clearFee();
   void                memoColSelected(int col);
   void                dateColSelected(int col);

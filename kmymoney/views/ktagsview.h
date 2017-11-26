@@ -55,7 +55,7 @@ public:
 
   void showEvent(QShowEvent* event) override;
 
-public slots:
+public Q_SLOTS:
   void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId, const QString& transactionId);
   void slotSelectTagAndTransaction(const QString& tagId);
   void slotStartRename(QListWidgetItem*);
@@ -68,7 +68,7 @@ protected:
   void ensureTagVisible(const QString& id);
   void clearItemData();
 
-protected slots:
+protected Q_SLOTS:
   /**
     * This method loads the m_transactionList, clears
     * the m_TransactionPtrVector and rebuilds and sorts
@@ -110,7 +110,7 @@ protected slots:
 
   void slotChangeFilter(int index);
 
-private slots:
+private Q_SLOTS:
   /**
     * This slot receives the signal from the listview control that an item was right-clicked,
     * If @p points to a real tag item, emits openContextMenu().
@@ -119,7 +119,7 @@ private slots:
     */
   void slotOpenContextMenu(const QPoint& p);
 
-signals:
+Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);
   void selectObjects(const QList<MyMoneyTag>& tags);

@@ -59,7 +59,7 @@ namespace NewAccountWizard
    */
     bool recordAllPayments() const;
 
-  private slots:
+  private Q_SLOTS:
     void slotLoadWidgets();
 
   private:

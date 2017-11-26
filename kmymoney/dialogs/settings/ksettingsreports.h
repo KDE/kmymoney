@@ -39,7 +39,7 @@ public:
   explicit KSettingsReports(QWidget* parent = nullptr);
   ~KSettingsReports();
 
-protected slots:
+protected Q_SLOTS:
   void slotCssUrlSelected(const QUrl&);
   void slotEditingFinished();
 

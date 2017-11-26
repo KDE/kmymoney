@@ -42,7 +42,7 @@ public:
   explicit FixedColumnTreeView(QTreeView *parent);
   ~FixedColumnTreeView();
 
-public slots:
+public Q_SLOTS:
   /**
     * Call this if the model of the source view is changed
     * after the fixed column view was attached.
@@ -53,7 +53,7 @@ protected:
   bool viewportEvent(QEvent *event) override;
   bool eventFilter(QObject *object, QEvent *event) override;
 
-protected slots:
+protected Q_SLOTS:
   void onExpanded(const QModelIndex& index);
   void onCollapsed(const QModelIndex& index);
   void updateSectionWidth(int logicalIndex, int, int newSize);

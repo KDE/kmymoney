@@ -69,7 +69,7 @@ public:
   ~ReportTabRowColQuery();
 
   Ui::ReportTabRowColQuery* ui;
-private slots:
+private Q_SLOTS:
   void slotHideTransactionsChanged(bool checked);
 };
 
@@ -84,7 +84,7 @@ public:
 
   Ui::ReportTabChart* ui;
 
-private slots:
+private Q_SLOTS:
   void slotChartTypeChanged(int index);
 };
 
@@ -102,7 +102,7 @@ public:
   void setRangeLogarythmic(bool set);
 private:
   enum EDimension { eRangeStart = 0, eRangeEnd, eMajorTick, eMinorTick};
-private slots:
+private Q_SLOTS:
   void slotEditingFinished(EDimension dim);
   void slotEditingFinishedStart();
   void slotEditingFinishedEnd();
@@ -123,7 +123,7 @@ public:
 
   Ui::ReportTabCapitalGain* ui;
 
-private slots:
+private Q_SLOTS:
   void slotInvestmentSumChanged(int index);
 };
 

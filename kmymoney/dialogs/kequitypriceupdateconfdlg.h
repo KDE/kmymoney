@@ -34,7 +34,7 @@ public:
 
   eDialogs::UpdatePrice policy() const;
 
-private slots:
+private Q_SLOTS:
   void updateAllToggled(bool toggled);
   void updateMissingToggled(bool toggled);
   void updateDownloadedToggled(bool toggled);

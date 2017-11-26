@@ -85,7 +85,7 @@ public:
 
   enum filterTypeE { eAllPayees = 0, eReferencedPayees = 1, eUnusedPayees = 2 };
 
-public slots:
+public Q_SLOTS:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
   void slotLoadPayees();
   void slotStartRename(QListWidgetItem*);
@@ -97,7 +97,7 @@ protected:
   void ensurePayeeVisible(const QString& id);
   void clearItemData();
 
-protected slots:
+protected Q_SLOTS:
   /**
     * This method loads the m_transactionList, clears
     * the m_TransactionPtrVector and rebuilds and sorts
@@ -144,7 +144,7 @@ protected slots:
 
   void slotChangeFilter(int index);
 
-private slots:
+private Q_SLOTS:
   /**
     * This slot receives the signal from the listview control that an item was right-clicked,
     * If @p points to a real payee item, emits openContextMenu().
@@ -166,7 +166,7 @@ private slots:
     */
   void slotSendMail();
 
-signals:
+Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);
   void selectObjects(const QList<MyMoneyPayee>& payees);

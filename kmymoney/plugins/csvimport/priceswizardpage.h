@@ -78,7 +78,7 @@ private:
   QPointer<SecurityDlg>    m_securityDlg;
   QPointer<CurrenciesDlg>  m_currenciesDlg;
 
-private slots:
+private Q_SLOTS:
   void                dateColSelected(int col);
   void                priceColSelected(int col);
   void                fractionChanged(int col);

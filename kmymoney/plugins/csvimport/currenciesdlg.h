@@ -47,7 +47,7 @@ public:
 private:
   QPushButton*     m_buttonOK;
 
-private slots:
+private Q_SLOTS:
   void             slotIndexChanged(int index);
 };
 

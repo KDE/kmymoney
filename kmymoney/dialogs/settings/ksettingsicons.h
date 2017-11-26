@@ -38,10 +38,10 @@ public:
   explicit KSettingsIcons(QWidget* parent = nullptr);
   ~KSettingsIcons();
 
-public slots:
+public Q_SLOTS:
   void slotResetTheme();
 
-protected slots:
+protected Q_SLOTS:
   void slotLoadTheme(const QString &theme);
   void slotSetTheme(const int &theme);
 

@@ -99,7 +99,7 @@ public:
                               MyMoneyMoney>& priceInfo,
                               QWidget* parentWidget);
 
-protected slots:
+protected Q_SLOTS:
   void slotSetToAmount();
   void slotSetExchangeRate();
   void slotUpdateResult(const QString& txt);

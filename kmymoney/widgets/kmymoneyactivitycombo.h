@@ -55,10 +55,10 @@ public:
   void setActivity(eMyMoney::Split::InvestmentTransactionType activity);
   eMyMoney::Split::InvestmentTransactionType activity() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotSetActivity(const QString& id);
 
-signals:
+Q_SIGNALS:
   void activitySelected(eMyMoney::Split::InvestmentTransactionType);
 
 private:

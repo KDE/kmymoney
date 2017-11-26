@@ -46,7 +46,7 @@ public:
   void readConfig() {}
   void resetConfig();
 
-protected slots:
+protected Q_SLOTS:
   void slotDumpCSVProfile();
   void slotUpdateEntry();
   void slotLoadWidgets();

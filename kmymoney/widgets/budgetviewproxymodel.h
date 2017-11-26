@@ -54,7 +54,7 @@ public:
 
   void setBudget(const MyMoneyBudget& budget);
 
-signals:
+Q_SIGNALS:
   /**
     * Emit this signal when the balance of the budget is changed.
     */

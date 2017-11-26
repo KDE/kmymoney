@@ -60,7 +60,7 @@ public:
   QString userTelephone() const;
   QString userEmail() const;
 
-protected slots:
+protected Q_SLOTS:
   void okClicked();
   void loadFromAddressBook();
   /** Gets the result of searching for the contact details of the current user */

@@ -103,7 +103,7 @@ public:
     */
   void setEditable(bool editable);
 
-protected slots:
+protected Q_SLOTS:
   void activated(int index);
 
 protected:
@@ -138,7 +138,7 @@ protected:
   void setCurrentText(const QString& txt);
   void setCurrentText();
 
-signals:
+Q_SIGNALS:
   void itemSelected(const QString& id);
   void objectCreation(bool);
   void createItem(const QString&, QString&);

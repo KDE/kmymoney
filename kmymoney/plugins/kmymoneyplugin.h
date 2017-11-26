@@ -109,7 +109,7 @@ public:
   explicit Plugin(QObject* parent = nullptr, const char* name = "");
   virtual ~Plugin();
 
-public slots:
+public Q_SLOTS:
   /**
    * @brief Called during plug in process
    */

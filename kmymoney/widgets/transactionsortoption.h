@@ -47,7 +47,7 @@ public:
   ~TransactionSortOption();
   QString settings() const;
 
-public slots:
+public Q_SLOTS:
   void setSettings(const QString& settings);
   void toggleDirection(QListWidgetItem * item);
 
@@ -55,7 +55,7 @@ protected:
   QListWidgetItem * addEntry(QListWidget * p, QListWidgetItem * after, int idx);
   void setDirectionIcon(QListWidgetItem* item);
 
-protected slots:
+protected Q_SLOTS:
   void slotAvailableSelected();
   void slotSelectedSelected();
   void slotAddItem();
@@ -64,7 +64,7 @@ protected slots:
   void slotDownItem();
   void slotFocusChanged(QWidget *o, QWidget *n);
 
-signals:
+Q_SIGNALS:
   void settingsChanged(const QString&);
 
 private:

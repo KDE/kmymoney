@@ -24,7 +24,7 @@ class MyMoneyBudgetTest : public QObject
   Q_OBJECT
 
 protected:
-private slots:
+private Q_SLOTS:
   void init();
   void addMonthlyToMonthly();
   void addMonthlyToYearly();

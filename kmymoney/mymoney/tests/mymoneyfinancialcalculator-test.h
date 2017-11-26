@@ -27,7 +27,7 @@ class MyMoneyFinancialCalculatorTest : public QObject
 protected:
   MyMoneyFinancialCalculator *m;
 
-private slots:
+private Q_SLOTS:
 
   void init();
   void cleanup();

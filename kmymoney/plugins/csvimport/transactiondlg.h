@@ -70,7 +70,7 @@ private:
   * This will add appropriate icons to cbActionTypes entries
   */
   void             iconifyActionTypesComboBox(const QList<MyMoneyStatement::Transaction::EAction>& validActionTypes);
-private slots:
+private Q_SLOTS:
   void             slotActionSelected(int index);
 };
 

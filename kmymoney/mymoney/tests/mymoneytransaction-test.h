@@ -30,7 +30,7 @@ class MyMoneyTransactionTest : public QObject
 protected:
   MyMoneyTransaction *m;
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testEmptyConstructor();

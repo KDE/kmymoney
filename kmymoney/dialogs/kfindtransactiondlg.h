@@ -68,7 +68,7 @@ public:
 
   bool eventFilter(QObject *o, QEvent *e) override;
 
-protected slots:
+protected Q_SLOTS:
   virtual void slotReset();
   virtual void slotSearch();
 
@@ -104,7 +104,7 @@ protected slots:
 
   void slotSortOptions();
 
-signals:
+Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
 
   /**

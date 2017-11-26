@@ -63,7 +63,7 @@ public:
     */
   const QString selectedProfile() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotLoadProfileFromConfig(const QString& name);
   void slotReset();
   void slotRename();

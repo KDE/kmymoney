@@ -48,10 +48,10 @@ public:
   // virtual int action(QMap<QString, QWidget*>& editWidgets) const = 0;
   // virtual void setProtectedAction(QMap<QString, QWidget*>& editWidgets, ProtectedAction action) = 0;
 
-signals:
+Q_SIGNALS:
   void geometriesUpdated();
 
-protected slots:
+protected Q_SLOTS:
   void updateGeometries();
 };
 

@@ -126,7 +126,7 @@ protected:
 
   void endEdit(bool keyboardDriven, bool setFocusToNextRow = true);
 
-public slots:
+public Q_SLOTS:
   /** No descriptions */
   virtual void setRowCount(int r);
 
@@ -139,7 +139,7 @@ public slots:
   void slotCancelEdit();
   void slotDuplicateSplit();
 
-protected slots:
+protected Q_SLOTS:
   /// move the focus to the selected @p row.
   void slotSetFocus(const QModelIndex& index);
   void slotSetFocus(const QModelIndex& index, int button);
@@ -154,7 +154,7 @@ protected slots:
 
   void slotLoadEditWidgets();
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted whenever the widget goes into edit mode.
     */

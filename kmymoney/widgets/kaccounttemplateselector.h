@@ -48,7 +48,7 @@ public:
 
   QList<MyMoneyTemplate> selectedTemplates() const;
 
-private slots:
+private Q_SLOTS:
   void slotLoadHierarchy();
   void slotLoadCountry();
   void slotLoadTemplateList();

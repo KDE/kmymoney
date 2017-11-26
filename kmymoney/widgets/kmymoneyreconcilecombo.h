@@ -53,7 +53,7 @@ public:
   eMyMoney::Split::State state() const;
   void removeDontCare();
 
-protected slots:
+protected Q_SLOTS:
   void slotSetState(const QString&);
 };
 

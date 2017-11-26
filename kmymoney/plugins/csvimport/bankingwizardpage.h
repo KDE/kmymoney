@@ -67,7 +67,7 @@ private:
   BankingProfile       *m_profile;
   Ui::BankingPage      *ui;
 
-private slots:
+private Q_SLOTS:
   void                memoColSelected(int col);
   void                categoryColSelected(int col);
   void                numberColSelected(int col);

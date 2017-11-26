@@ -56,10 +56,10 @@ public:
 
   bool eventFilter(QObject* o, QEvent* e) override;
 
-public slots:
+public Q_SLOTS:
   virtual void slotHelp();
 
-protected slots:
+protected Q_SLOTS:
   void slotEnableOk(const KMyMoneyRegister::SelectedTransactions& list);
 
 protected:

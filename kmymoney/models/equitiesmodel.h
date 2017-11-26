@@ -47,7 +47,7 @@ public:
   auto getColumns();
   static QString getHeaderName(const Column column);
 
-public slots:
+public Q_SLOTS:
   void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
   void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
@@ -79,10 +79,10 @@ public:
   void setHideClosedAccounts(const bool hideClosedAccounts);
   void setHideZeroBalanceAccounts(const bool hideZeroBalanceAccounts);
 
-signals:
+Q_SIGNALS:
   void columnToggled(const EquitiesModel::Column column, const bool show);
 
-public slots:
+public Q_SLOTS:
   void slotColumnsMenu(const QPoint);
 
 protected:

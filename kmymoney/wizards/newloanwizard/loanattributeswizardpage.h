@@ -61,7 +61,7 @@ public:
 
   Ui::LoanAttributesWizardPage *ui;
 
-protected slots:
+protected Q_SLOTS:
   void slotNewClicked();
 };
 

@@ -46,7 +46,7 @@ public:
     virtual void setDefaultFocus() {}
     virtual void refresh() {}
 
-signals:
+Q_SIGNALS:
   void aboutToShow(const View view);
 
 protected:

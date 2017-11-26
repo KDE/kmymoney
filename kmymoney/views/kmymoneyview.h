@@ -415,7 +415,7 @@ protected:
   virtual bool showPageHeader() const;
 
 
-public slots:
+public Q_SLOTS:
   /**
     * This slot writes information about the page passed as argument @a current
     * in the kmymoney.rc file so that it can be selected automatically when
@@ -503,7 +503,7 @@ public slots:
     */
   void slotShowTransactionDetail(bool detailed);
 
-private slots:
+private Q_SLOTS:
   /**
     * This slots switches the view to the specific page
     */
@@ -521,7 +521,7 @@ private slots:
   void slotShowForecastPage();
   void slotShowOutboxPage();
 
-protected slots:
+protected Q_SLOTS:
   /**
    * eventually replace this with KMyMoneyApp::slotCurrencySetBase().
    * it contains the same code
@@ -574,7 +574,7 @@ private:
   void resetViewSelection(const View);
   void connectView(const View);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted whenever a view is selected.
     * The parameter @p view is identified as one of KMyMoneyView::viewID.

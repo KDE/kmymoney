@@ -69,16 +69,16 @@ public:
     */
   void setRegister(Register* reg);
 
-public slots:
+public Q_SLOTS:
   virtual void updateSearch(const QString& s = QString());
   virtual void reset();
 
-protected slots:
+protected Q_SLOTS:
   void queueSearch(const QString& search);
   void activateSearch();
   void slotStatusChanged(int);
 
-private slots:
+private Q_SLOTS:
   void itemAdded(RegisterItem* item) const;
   void registerDestroyed();
 
@@ -122,7 +122,7 @@ public:
     */
   virtual RegisterSearchLine* createSearchLine(Register* reg);
 
-protected slots:
+protected Q_SLOTS:
   /**
     * Creates the widgets inside of the widget.  This is called from the
     * constructor via a single shot timer so that it it guaranteed to run

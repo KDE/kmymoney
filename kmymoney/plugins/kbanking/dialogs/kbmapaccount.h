@@ -36,7 +36,7 @@ public:
 
   void accept();
 
-protected slots:
+protected Q_SLOTS:
   void slotSelectionChanged();
   void slotHelpClicked();
 

@@ -94,7 +94,7 @@ public:
   void setColumnVisibility(const eAccountsModel::Column column, const bool show);
   static QString getHeaderName(const eAccountsModel::Column column);
 
-public slots:
+public Q_SLOTS:
 
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
   void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
@@ -102,7 +102,7 @@ public slots:
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
   void slotBalanceOrValueChanged(const MyMoneyAccount &account);
 
-signals:
+Q_SIGNALS:
   /**
     * Emit this signal when the net worth based on the value of the loaded accounts is changed.
     */
@@ -159,7 +159,7 @@ public:
     */
   void load();
 
-public slots:
+public Q_SLOTS:
   void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
   void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);

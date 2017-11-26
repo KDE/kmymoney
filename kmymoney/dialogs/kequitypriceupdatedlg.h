@@ -60,7 +60,7 @@ public:
   void storePrices();
   MyMoneyPrice price(const QString& id) const;
 
-protected slots:
+protected Q_SLOTS:
   void slotConfigureClicked();
   void slotUpdateSelectedClicked();
   void slotUpdateAllClicked();

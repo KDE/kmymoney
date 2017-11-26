@@ -54,11 +54,11 @@ public:
   ~KMyMoneyBriefSchedule();
   void setSchedules(QList<MyMoneySchedule> list, const QDate& date);
 
-signals:
+Q_SIGNALS:
   void enterClicked(const MyMoneySchedule&, const QDate&);
   void skipClicked(const MyMoneySchedule&, const QDate&);
 
-protected slots:
+protected Q_SLOTS:
   void slotPrevClicked();
   void slotNextClicked();
   void slotEnterClicked();

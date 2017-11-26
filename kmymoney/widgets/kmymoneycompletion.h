@@ -70,7 +70,7 @@ public:
 
   KMyMoneySelector* selector() const;
 
-public slots:
+public Q_SLOTS:
   void slotMakeCompletion(const QString& txt);
 
   void slotItemSelected(QTreeWidgetItem *item, int col);
@@ -105,7 +105,7 @@ protected:
 
   void show(bool presetSelected);
 
-signals:
+Q_SIGNALS:
   void itemSelected(const QString& id);
 
 protected:

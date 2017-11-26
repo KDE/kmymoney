@@ -68,7 +68,7 @@ public:
 
   void setupInvestmentSymbol();
 
-signals:
+Q_SIGNALS:
   void checkForExistingSymbol(const QString& symbol);
 
 private:

@@ -29,7 +29,7 @@ class MyMoneyInstitutionTest : public QObject
 protected:
   MyMoneyInstitution *m, *n;
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testEmptyConstructor();

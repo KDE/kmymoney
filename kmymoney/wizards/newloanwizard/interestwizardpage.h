@@ -50,7 +50,7 @@ public:
 
   Ui::InterestWizardPage *ui;
 
-public slots:
+public Q_SLOTS:
   void resetCalculator();
 };
 

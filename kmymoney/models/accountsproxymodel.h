@@ -96,7 +96,7 @@ protected:
 
   int visibleItems(const QModelIndex& index) const;
 
-signals:
+Q_SIGNALS:
   void unusedIncomeExpenseAccountHidden() const;
 
 private:

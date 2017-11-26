@@ -67,7 +67,7 @@ public:
 Q_SIGNALS:
   void currentDataChanged(QVariant data);
 
-protected slots:
+protected Q_SLOTS:
   void slotCurrentDataChanged();
 
 private:

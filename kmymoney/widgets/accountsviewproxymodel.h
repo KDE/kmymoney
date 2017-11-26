@@ -54,7 +54,7 @@ public:
   void setColumnVisibility(eAccountsModel::Column column, bool visible);
   QSet<eAccountsModel::Column> getVisibleColumns();
 
-public slots:
+public Q_SLOTS:
   void slotColumnsMenu(const QPoint);
 
 protected:
@@ -64,7 +64,7 @@ protected:
 private:
   QSet<eAccountsModel::Column> m_visColumns;
 
-signals:
+Q_SIGNALS:
   void columnToggled(const eAccountsModel::Column column, const bool show);
 };
 

@@ -55,9 +55,9 @@ public:
   /** @brief Remove onlineJobs identified by row and count */
   bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
 
-signals:
+Q_SIGNALS:
 
-public slots:
+public Q_SLOTS:
   void reloadAll();
 
   void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);

@@ -43,7 +43,7 @@ public:
 
   Ui::KCurrencyEditorDlg*   ui;
 
-protected slots:
+protected Q_SLOTS:
   void loadCurrency(MyMoneySecurity& currency);
 
 };

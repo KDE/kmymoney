@@ -72,10 +72,10 @@ public:
     */
   void skipSelectAll(bool skipIt);
 
-public slots:
+public Q_SLOTS:
   void loadText(const QString& text);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted when the focus leaves the object and the text
     * has been changed. The new text is passed as @a str.

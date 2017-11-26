@@ -107,7 +107,7 @@ public:
     */
   void removeButtons();
 
-public slots:
+public Q_SLOTS:
   /**
     * This slot selects all items that are currently in
     * the account list of the widget.
@@ -137,7 +137,7 @@ protected:
     */
   void selectCategories(const bool income, const bool expense);
 
-protected slots:
+protected Q_SLOTS:
   /**
     * This slot selects all income categories
     */

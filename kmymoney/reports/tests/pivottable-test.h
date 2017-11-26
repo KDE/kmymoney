@@ -41,7 +41,7 @@ private:
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testNetWorthSingle();

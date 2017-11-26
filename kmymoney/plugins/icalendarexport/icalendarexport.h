@@ -39,7 +39,7 @@ public:
   KMMiCalendarExportPlugin();
   ~KMMiCalendarExportPlugin();
 
-protected slots:
+protected Q_SLOTS:
   // this is the export function called when the user selects the interface menu
   void slotFirstExport();
 

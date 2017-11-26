@@ -50,7 +50,7 @@ private:
   int              m_validRowCount;
   int              m_RowCount;
 
-private slots:
+private Q_SLOTS:
   void             slotItemChanged(QTableWidgetItem* item);
 };
 

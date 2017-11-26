@@ -50,7 +50,7 @@ public:
 
   Ui::InterestCategoryWizardPage *ui;
 
-protected slots:
+protected Q_SLOTS:
   void slotCreateCategory();
 };
 

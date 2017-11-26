@@ -48,7 +48,7 @@ public:
 
   QDate date();
 
-public slots:
+public Q_SLOTS:
   void slotHelpClicked();
 
 private:

@@ -52,7 +52,7 @@ public:
 
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false);
 
-protected slots:
+protected Q_SLOTS:
 
   void gotAccount();
 

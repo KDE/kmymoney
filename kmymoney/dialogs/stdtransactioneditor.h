@@ -72,11 +72,11 @@ public:
                          const MyMoneySplit& sorig,
                          bool skipPriceDialog = false) override;
 
-public slots:
+public Q_SLOTS:
   int slotEditSplits() override;
   void slotUpdateAmount(const QString&);
 
-protected slots:
+protected Q_SLOTS:
   void slotReloadEditWidgets();
   void slotUpdatePayment(const QString&);
   void slotUpdateDeposit(const QString&);

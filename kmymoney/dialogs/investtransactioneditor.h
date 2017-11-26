@@ -110,7 +110,7 @@ public:
   QList<MyMoneySplit> feeSplits() const;
   QList<MyMoneySplit> interestSplits() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotCreateSecurity(const QString& name, QString& id);
   void slotCreateFeeCategory(const QString& name, QString& id);
   void slotCreateInterestCategory(const QString& name, QString& id);

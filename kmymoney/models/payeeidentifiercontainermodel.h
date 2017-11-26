@@ -77,7 +77,7 @@ public:
   /** @brief Get stored data */
   QList< ::payeeIdentifier > identifiers() const;
 
-public slots:
+public Q_SLOTS:
   /**
    * @brief Removes all data from the model
    *

@@ -182,13 +182,13 @@ private:
   bool enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job);
 
 
-protected slots:
+protected Q_SLOTS:
   void slotSettings();
   void slotImport();
   void slotClearPasswordCache();
   void executeQueue();
 
-signals:
+Q_SIGNALS:
   void queueChanged();
 
 private:

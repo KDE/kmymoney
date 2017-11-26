@@ -43,7 +43,7 @@ public:
   ~KNewBankDlg();
   const MyMoneyInstitution& institution();
 
-protected slots:
+protected Q_SLOTS:
   void okClicked();
   void institutionNameChanged(const QString &);
 

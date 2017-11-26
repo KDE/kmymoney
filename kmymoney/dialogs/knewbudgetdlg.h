@@ -43,7 +43,7 @@ public:
   QString getYear() const;
   QString getName() const;
 
-public slots:
+public Q_SLOTS:
   void m_pbCancel_clicked();
   void m_pbOk_clicked();
 

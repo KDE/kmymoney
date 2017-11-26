@@ -201,7 +201,7 @@ public:
   template<class baseTask>
   bool isInherited(const QString& taskIid) const;
 
-signals:
+Q_SIGNALS:
   /**
    * @brief Emitted if canSendAnyTask() changed
    *
@@ -216,7 +216,7 @@ signals:
    */
   void canSendCreditTransferChanged(bool);
 
-public slots:
+public Q_SLOTS:
   void addPlugin(const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended*);
 
   /**

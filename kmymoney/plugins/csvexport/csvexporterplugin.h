@@ -48,7 +48,7 @@ public:
 private:
   CsvExportDlg*     m_dlg;
 
-protected slots:
+protected Q_SLOTS:
   void slotCsvExport();
 
 protected:

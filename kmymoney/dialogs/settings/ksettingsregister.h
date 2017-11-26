@@ -40,7 +40,7 @@ public:
   explicit KSettingsRegister(QWidget* parent = nullptr);
   ~KSettingsRegister();
 
-protected slots:
+protected Q_SLOTS:
   void slotLoadNormal(const QString& text);
   void slotLoadReconcile(const QString& text);
   void slotLoadSearch(const QString& text);

@@ -115,7 +115,7 @@ private:
   void extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate);
   void writeInvestmentEntry(const MyMoneyTransaction& t, const int count);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted while the operation progresses.
     * When the operation starts, the signal is emitted with

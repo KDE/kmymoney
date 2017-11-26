@@ -66,14 +66,14 @@ public:
     */
   bool init();
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted when the statement is downloaded
     * and stored in file @a fname.
     */
   void statementReady(const QString& fname);
 
-protected slots:
+protected Q_SLOTS:
   void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
   virtual void reject();

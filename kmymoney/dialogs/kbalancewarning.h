@@ -40,7 +40,7 @@ public:
   explicit KBalanceWarning(QObject* parent);
   virtual ~KBalanceWarning();
 
-public slots:
+public Q_SLOTS:
   void slotShowMessage(QWidget* parent, const MyMoneyAccount& account, const QString& msg);
 
 private:

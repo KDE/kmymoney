@@ -70,7 +70,7 @@ public:
     */
   void addWidget(QWidget* w);
 
-public slots:
+public Q_SLOTS:
   /**
     * This slot allows to activate/deactivate the filter. By default the
     * filter is active.
@@ -112,7 +112,7 @@ protected:
     */
   bool eventFilter(QObject* o, QEvent* e);
 
-signals:
+Q_SIGNALS:
   void mousePressedOnExternalWidget(bool&);
 
 private:
@@ -191,7 +191,7 @@ public:
     */
   bool selectEmptyTransaction();
 
-public slots:
+public Q_SLOTS:
   void showEvent(QShowEvent* event) override;
 
   /**
@@ -301,7 +301,7 @@ protected:
     */
   void setupDefaultAction();
 
-protected slots:
+protected Q_SLOTS:
   void slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions& list);
   void slotNewTransaction();
   void slotNewTransaction(eWidgets::eRegister::Action);
@@ -370,7 +370,7 @@ private:
   QWidgetList                     m_tabOrderWidgets;
   QPoint                          m_tooltipPosn;
 
-signals:
+Q_SIGNALS:
   void accountSelected(const MyMoneyObject&);
   void transactionsSelected(const KMyMoneyRegister::SelectedTransactions&);
   void newTransaction();

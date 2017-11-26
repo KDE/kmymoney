@@ -59,7 +59,7 @@ public:
 
   void showEvent(QShowEvent* event);
 
-public slots:
+public Q_SLOTS:
   void slotLoadForecast();
   void slotManualForecast();
 
@@ -119,7 +119,7 @@ protected:
    */
   void loadForecastSettings();
 
-protected slots:
+protected Q_SLOTS:
   void slotTabChanged(int index);
 
   /**
@@ -129,11 +129,11 @@ protected slots:
    */
   QList<MyMoneyPrice> getAccountPrices(const MyMoneyAccount& acc);
 
-private slots:
+private Q_SLOTS:
   void itemExpanded(QTreeWidgetItem *item);
   void itemCollapsed(QTreeWidgetItem *item);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted whenever the view is about to be shown.
     */

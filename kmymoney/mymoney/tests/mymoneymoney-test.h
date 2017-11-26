@@ -27,7 +27,7 @@ class MyMoneyMoneyTest : public QObject
 
 protected:
   MyMoneyMoney *m_0, *m_1, *m_2, *m_3, *m_4, *m_5, *m_6;
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testEmptyConstructor();

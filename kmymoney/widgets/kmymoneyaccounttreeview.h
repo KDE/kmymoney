@@ -58,11 +58,11 @@ protected:
   void mouseDoubleClickEvent(QMouseEvent *event) override;
   void keyPressEvent(QKeyEvent *event) override;
 
-protected slots:
+protected Q_SLOTS:
   void customContextMenuRequested(const QPoint);
   void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
-signals:
+Q_SIGNALS:
   /**
     * This signal serves as proxy for KMyMoneyAccountTree::selectObject()
     *

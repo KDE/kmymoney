@@ -50,7 +50,7 @@ namespace NewUserWizard
 
     KMyMoneyWizardPage* nextPage() const override;
 
-  protected slots:
+  protected Q_SLOTS:
     void slotLoadFromAddressBook();
     void slotContactFetched(const ContactData &identity);
 

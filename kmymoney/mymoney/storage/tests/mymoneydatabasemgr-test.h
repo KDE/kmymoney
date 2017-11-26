@@ -51,7 +51,7 @@ private:
   void testEquality(const MyMoneyDatabaseMgr* t);
   void copyDatabaseFile(QFile& src, QFile& dest);
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testEmptyConstructor();

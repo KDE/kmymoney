@@ -46,7 +46,7 @@ public:
   QString updateTermWidgets(const double val);
   int term() const;
 
-public slots:
+public Q_SLOTS:
   void resetCalculator();
 
 private:

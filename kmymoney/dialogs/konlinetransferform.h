@@ -52,14 +52,14 @@ public:
   explicit kOnlineTransferForm(QWidget *parent = nullptr);
   virtual ~kOnlineTransferForm();
 
-signals:
+Q_SIGNALS:
   /** @brief The user wants this job to be saved */
   void acceptedForSave(onlineJob);
 
   /** @brief User wants to send the onlineJob directly */
   void acceptedForSend(onlineJob);
 
-public slots:
+public Q_SLOTS:
   virtual void accept();
   virtual void reject();
 
@@ -75,7 +75,7 @@ public slots:
 
   void duplicateCurrentJob();
 
-private slots:
+private Q_SLOTS:
   /** @brief Slot for account selection box */
   void accountChanged();
 

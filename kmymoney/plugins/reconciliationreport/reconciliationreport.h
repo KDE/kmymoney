@@ -36,11 +36,11 @@ class KMMReconciliationReportPlugin: public KMyMoneyPlugin::Plugin
 public:
   KMMReconciliationReportPlugin();
 
-public slots:
+public Q_SLOTS:
   void plug() override;
   void unplug() override;
 
-protected slots:
+protected Q_SLOTS:
   // reconciliation of an account has finished
   void slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 };

@@ -110,17 +110,17 @@ namespace KMyMoneyTransactionForm
     */
     bool focusNextPrevChild(bool next) override;
 
-  public slots:
+  public Q_SLOTS:
     void slotSetTransaction(KMyMoneyRegister::Transaction* item);
     void resize(int col);
 
-  protected slots:
+  protected Q_SLOTS:
     /**
     * Helper method to convert @a int into @a KMyMoneyRegister::Action
     */
     void slotActionSelected(int);
 
-  signals:
+  Q_SIGNALS:
     /**
     * This signal is emitted when a user selects a tab. @a id
     * contains the tab's id (e.g. KMyMoneyRegister::ActionDeposit)

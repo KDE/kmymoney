@@ -77,7 +77,7 @@ public:
 
   MyMoneyAccount account() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotCheckForExistingSymbol(const QString&);
   void slotHelp();
 

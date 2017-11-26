@@ -66,7 +66,7 @@ namespace NewAccountWizard
     void hideShowPages(eMyMoney::Account::Type i) const;
     void priceWarning(bool);
 
-  private slots:
+  private Q_SLOTS:
     void slotUpdateType(int i);
     void slotUpdateCurrency();
     void slotUpdateConversionRate(const QString&);

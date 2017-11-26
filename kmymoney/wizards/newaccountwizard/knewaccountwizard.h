@@ -143,7 +143,7 @@ namespace NewAccountWizard
    */
     MyMoneyPrice conversionRate() const;
 
-  signals:
+  Q_SIGNALS:
     void createInstitution(MyMoneyInstitution& institution);
     void createAccount(MyMoneyAccount& account);
     void createCategory(MyMoneyAccount&, const MyMoneyAccount&);

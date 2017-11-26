@@ -42,7 +42,7 @@ public:
   QString selectedSource() const;
   bool alwaysUse() const;
 
-public slots:
+public Q_SLOTS:
   void buttonPressed(int);
   void slotHelp();
 

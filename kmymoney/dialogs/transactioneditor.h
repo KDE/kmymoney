@@ -175,7 +175,7 @@ public:
   void setScheduleInfo(const QString& si);
   void setPaymentMethod(eMyMoney::Schedule::PaymentType pm);
 
-public slots:
+public Q_SLOTS:
   void slotReloadEditWidgets();
 
   /**
@@ -206,13 +206,13 @@ protected:
    */
   void setupPrecision();
 
-protected slots:
+protected Q_SLOTS:
   void slotUpdateButtonState();
   void slotUpdateMemoState();
   void slotUpdateAccount();
   void slotNumberChanged(const QString&);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is sent out by the destructor to inform other entities
     * that editing has been finished. The parameter @a t contains the list

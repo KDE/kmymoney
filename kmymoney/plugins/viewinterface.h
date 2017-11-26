@@ -77,7 +77,7 @@ public:
     */
 //  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
 
-signals:
+Q_SIGNALS:
   /**
    * This signal is emitted when a new account has been selected by
    * the GUI. If no account is selected or the selection is removed,

@@ -55,7 +55,7 @@ namespace NewAccountWizard
 
     bool isComplete() const override;
 
-  protected slots:
+  protected Q_SLOTS:
     void parentAccountChanged();
 
   private:

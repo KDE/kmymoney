@@ -39,10 +39,10 @@ public:
   explicit KSettingsSchedules(QWidget* parent = nullptr);
   ~KSettingsSchedules();
 
-public slots:
+public Q_SLOTS:
   void slotResetRegion();
 
-protected slots:
+protected Q_SLOTS:
   void slotLoadRegion(const QString &region);
   void slotSetRegion(const QString &region);
 

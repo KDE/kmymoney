@@ -44,7 +44,7 @@ public:
 private:
   MyMoneyQifReader *m_qifReader;
 
-private slots:
+private Q_SLOTS:
 
   /**
     * Called when the user wishes to import tab delimeted transactions

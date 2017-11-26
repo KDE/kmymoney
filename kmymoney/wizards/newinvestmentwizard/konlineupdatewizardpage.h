@@ -56,7 +56,7 @@ public:
    */
   bool isOnlineFactorEnabled() const;
 
-public slots:
+public Q_SLOTS:
   void slotCheckPage(const QString&);
   void slotSourceChanged(bool);
 

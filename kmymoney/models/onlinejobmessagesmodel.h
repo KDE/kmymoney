@@ -35,7 +35,7 @@ public:
   virtual QModelIndex parent(const QModelIndex& child) const;
   virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
-public slots:
+public Q_SLOTS:
   void setOnlineJob(const onlineJob& job);
 
 protected:

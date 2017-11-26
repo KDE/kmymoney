@@ -51,7 +51,7 @@ namespace NewAccountWizard
 
     QWidget* initialFocusWidget() const override;
 
-  private slots:
+  private Q_SLOTS:
     void slotLoadWidgets();
 
   private:

@@ -68,11 +68,11 @@ public:
     */
   void showEvent(QShowEvent* event);
 
-public slots:
+public Q_SLOTS:
   void slotSelectSchedule(const QString& schedule);
   void slotReloadView();
 
-signals:
+Q_SIGNALS:
   void scheduleSelected(const MyMoneySchedule& schedule);
   void openContextMenu();
   void skipSchedule();
@@ -84,7 +84,7 @@ signals:
     */
   void aboutToShow();
 
-protected slots:
+protected Q_SLOTS:
   /**
     * Shows the context menu when the user right clicks or presses
     * a 'windows' key when an item is selected.

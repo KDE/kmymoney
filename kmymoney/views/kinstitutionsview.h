@@ -51,7 +51,7 @@ public:
   void setDefaultFocus() override;
   void refresh() override;
 
-public slots:
+public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &);
 
 protected:

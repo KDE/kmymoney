@@ -95,10 +95,10 @@ public:
 
 private:
   bool              m_silent;
-public slots:
+public Q_SLOTS:
   bool slotGetStatement(MyMoneyStatement& s);
 
-protected slots:
+protected Q_SLOTS:
   void startWizardRun();
 
 protected:

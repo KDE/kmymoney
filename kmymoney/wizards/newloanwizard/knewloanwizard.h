@@ -122,12 +122,12 @@ public:
    */
   int nextId() const;
 
-protected slots:
+protected Q_SLOTS:
 
   // void slotNewPayee(const QString&);
   void slotReloadEditWidgets();
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted, when a new category name has been
     * entered by the user and this name is not known as account

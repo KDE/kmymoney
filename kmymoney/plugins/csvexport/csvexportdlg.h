@@ -106,7 +106,7 @@ public:
     return m_separator;
   };
 
-protected slots:
+protected Q_SLOTS:
   /**
     * Called when the user clicked on the Export button
     */
@@ -143,7 +143,7 @@ protected slots:
     */
   QStringList getAccounts();
 
-public slots:
+public Q_SLOTS:
 
   void slotStatusProgressBar(int current, int total);
 

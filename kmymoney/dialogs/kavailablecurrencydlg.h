@@ -43,7 +43,7 @@ public:
 
   Ui::KAvailableCurrencyDlg*   ui;
 
-protected slots:
+protected Q_SLOTS:
   void slotLoadCurrencies();
   void slotItemSelectionChanged();
 

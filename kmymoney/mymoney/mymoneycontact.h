@@ -61,19 +61,19 @@ public:
   QString ownerEmail() const;
   QString ownerFullName() const;
 
-public slots:
+public Q_SLOTS:
   /**
     * Use this slot to start retrieving contact data for an email.
     */
   void fetchContact(const QString &email);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted when the contact data was retrieved.
     */
   void contactFetched(const ContactData &identity);
 
-private slots:
+private Q_SLOTS:
   void searchContactResult(KJob *job);
 };
 

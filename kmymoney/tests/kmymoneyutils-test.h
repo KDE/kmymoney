@@ -32,7 +32,7 @@ class KMyMoneyUtilsTest : public QObject
   Q_OBJECT
 protected:
 
-private slots:
+private Q_SLOTS:
   void initTestCase();
   void init();
   void cleanup();

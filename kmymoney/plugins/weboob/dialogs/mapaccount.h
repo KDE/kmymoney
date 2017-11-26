@@ -36,7 +36,7 @@ public:
   explicit WbMapAccountDialog(QWidget *parent = 0);
   virtual ~WbMapAccountDialog();
 
-protected slots:
+protected Q_SLOTS:
   void checkNextButton(void);
   void newPage(int id);
   void gotAccounts();

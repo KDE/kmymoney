@@ -36,7 +36,7 @@ public:
   explicit KMyMoneyValidationFeedback(QWidget* parent = nullptr);
   ~KMyMoneyValidationFeedback();
 
-public slots:
+public Q_SLOTS:
   /**
    * @brief Removes the shown feedback
    */

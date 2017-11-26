@@ -34,7 +34,7 @@ class onlineJobAdministrationTest : public QObject
   IMyMoneyStorage* storage;
   MyMoneyFile* file;
   QString accountId;
-private slots:
+private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
   void init();

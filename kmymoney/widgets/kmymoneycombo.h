@@ -121,7 +121,7 @@ public:
    */
   QSize sizeHint() const override;
 
-protected slots:
+protected Q_SLOTS:
   virtual void slotItemSelected(const QString& id);
 
 protected:
@@ -164,7 +164,7 @@ protected:
   KMyMoneyComboPrivate * const d_ptr;
   KMyMoneyCombo(KMyMoneyComboPrivate &dd, bool rw = false, QWidget *parent = 0);
 
-signals:
+Q_SIGNALS:
   void itemSelected(const QString& id);
   void objectCreation(bool);
   void createItem(const QString&, QString&);

@@ -34,7 +34,7 @@ protected:
   MyMoneySeqAccessMgr* storage;
   MyMoneyAccount  m_inv;
 
-private slots:
+private Q_SLOTS:
   void initTestCase();
   void init();
   void cleanup();
@@ -105,7 +105,7 @@ private slots:
   void testAdjustedValues();
   void testVatAssignment();
 
-private slots:
+private Q_SLOTS:
   void objectAdded(eMyMoney::File::Object type, const MyMoneyObject * const obj);
   void objectModified(eMyMoney::File::Object type, const MyMoneyObject * const obj);
   void objectRemoved(eMyMoney::File::Object type, const QString& id);

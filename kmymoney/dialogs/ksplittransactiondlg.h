@@ -103,10 +103,10 @@ public:
     */
   MyMoneyMoney splitsValue();
 
-public slots:
+public Q_SLOTS:
   int exec() override;
 
-protected slots:
+protected Q_SLOTS:
   void accept() override;
   void reject() override;
   void slotClearAllSplits();
@@ -120,7 +120,7 @@ protected slots:
   /// used internally to setup the initial size of all widgets
   void initSize();
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is sent out, when a new category needs to be created
     * Depending on the setting of either a payment or deposit, the parent

@@ -47,7 +47,7 @@ public:
 
   void updatePeriodicPayment(const MyMoneyAccount& account);
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted, when a new category name has been
     * entered by the user and this name is not known as account
@@ -63,7 +63,7 @@ signals:
     */
   void newCategory(MyMoneyAccount& acc);
 
-protected slots:
+protected Q_SLOTS:
   virtual void slotAdditionalFees();
 
 private:

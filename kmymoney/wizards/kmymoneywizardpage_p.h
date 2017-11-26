@@ -64,7 +64,7 @@ public:
     QWidget              *m_widget;
     KMandatoryFieldGroup *m_mandatoryGroup;
 
-signals:
+Q_SIGNALS:
     void completeStateChanged();
 };
 

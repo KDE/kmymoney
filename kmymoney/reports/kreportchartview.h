@@ -43,7 +43,7 @@ namespace reports
 class KReportChartView: public Chart
 {
   Q_OBJECT
-public slots:
+public Q_SLOTS:
   void slotNeedUpdate();
 public:
   explicit KReportChartView(QWidget* parent);

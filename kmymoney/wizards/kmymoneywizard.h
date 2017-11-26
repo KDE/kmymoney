@@ -176,7 +176,7 @@ public:
 
   virtual ~KMyMoneyWizard();
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is sent out, when a new payee needs to be created
     * @sa KMyMoneyCombo::createItem()
@@ -203,11 +203,11 @@ protected:
     */
   explicit KMyMoneyWizard(QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
 
-protected slots:
+protected Q_SLOTS:
   void accept() override;
   void completeStateChanged();
 
-private slots:
+private Q_SLOTS:
   void backButtonClicked();
   void nextButtonClicked();
   void helpButtonClicked();

@@ -81,7 +81,7 @@ public:
    */
   void addTab(QWidget* w, const QString& name);
 
-protected slots:
+protected Q_SLOTS:
   void okClicked();
   void slotSelectionChanged(const QItemSelection &current, const QItemSelection &previous);
   void slotAccountTypeChanged(int index);

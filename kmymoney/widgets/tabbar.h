@@ -60,7 +60,7 @@ namespace KMyMoneyTransactionForm
 
     int currentIndex() const;
 
-  public slots:
+  public Q_SLOTS:
 
     /**
     * overridden for internal reasons, API not changed
@@ -75,10 +75,10 @@ namespace KMyMoneyTransactionForm
   protected:
     void mousePressEvent(QMouseEvent* event) override;
 
-  protected slots:
+  protected Q_SLOTS:
     void slotTabCurrentChanged(int id);
 
-  signals:
+  Q_SIGNALS:
     void tabCurrentChanged(int id);
 
   private:

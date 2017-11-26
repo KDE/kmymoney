@@ -30,7 +30,7 @@ class MyMoneyReportTest : public QObject
 protected:
   MyMoneyReport *m;
 
-private slots:
+private Q_SLOTS:
   void init();
   void cleanup();
   void testElementNames();

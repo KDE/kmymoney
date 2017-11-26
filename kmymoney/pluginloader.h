@@ -50,20 +50,20 @@ public:
   KPluginSelector* pluginSelectorWidget();
   static inline bool isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup);
 
-public slots:
+public Q_SLOTS:
   /** @brief Adds the given plugins to the plugin selection ui */
   void addPluginInfo(const QVector<KPluginMetaData>& metaData);
 
   /** @brief Find all available plugins */
   void detectPlugins();
 
-signals:
+Q_SIGNALS:
   /** Load the shared module and emits plug() */
   void pluginEnabled(const KPluginMetaData& metaData);
   void pluginDisabled(const KPluginMetaData& metaData);
   void configChanged(Plugin*);  // configuration of the plugin has changed not the enabled/disabled state
 
-private slots:
+private Q_SLOTS:
   void changed();
 
 private:

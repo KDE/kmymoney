@@ -59,7 +59,7 @@ public:
     */
   KMyMoneyAccountSelector* selector() const;
 
-public slots:
+public Q_SLOTS:
   void slotMakeCompletion(const QString& txt);
 };
 

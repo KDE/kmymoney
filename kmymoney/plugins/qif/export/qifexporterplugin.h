@@ -42,7 +42,7 @@ public:
 
   MyMoneyQifReader *m_qifReader;
 
-public slots:
+public Q_SLOTS:
   /**
     * Called when the user wishes to export some transaction to a
     * QIF formatted file. An account must be open for this to work.

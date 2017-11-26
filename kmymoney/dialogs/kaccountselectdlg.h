@@ -119,13 +119,13 @@ public:
 
   void hideQifEntry();
 
-public slots:
+public Q_SLOTS:
   /**
     * Reimplemented from QDialog
     */
   int exec() override;
 
-protected slots:
+protected Q_SLOTS:
   /**
     * This slot is used to fire up the new account wizard and preset it
     * with the values found in m_account. If an account was created using

@@ -50,7 +50,7 @@ public:
   bool xmlDebugOption() const;
   bool anonymizeOption() const;
 
-public slots:
+public Q_SLOTS:
   void slotDecodeOptionChanged(bool);
   void slotHelp();
 

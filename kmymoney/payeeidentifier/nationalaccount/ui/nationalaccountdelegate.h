@@ -37,7 +37,7 @@ public:
   virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
   virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
-signals:
+Q_SIGNALS:
   void sizeHintChanged(const QModelIndex&) const;
 
 private:

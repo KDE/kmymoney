@@ -64,7 +64,7 @@ public:
    */
   virtual QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const = 0;
 
-signals:
+Q_SIGNALS:
 };
 
 } // namespace

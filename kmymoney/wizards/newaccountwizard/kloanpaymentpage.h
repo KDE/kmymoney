@@ -69,7 +69,7 @@ namespace NewAccountWizard
    */
     void additionalFeesSplits(QList<MyMoneySplit>& list);
 
-  protected slots:
+  protected Q_SLOTS:
     void slotAdditionalFees();
 
   protected:

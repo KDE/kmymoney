@@ -122,7 +122,7 @@ public:
     return m_isDirty;
   };
 
-public slots:
+public Q_SLOTS:
   void setProfileDescription(const QString& desc);
   void setProfileType(const QString& type);
   void setOutputDateFormat(const QString& dateFormat);

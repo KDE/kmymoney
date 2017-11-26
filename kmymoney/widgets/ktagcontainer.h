@@ -60,7 +60,7 @@ public:
   void addTagWidget(const QString& id);
   void RemoveAllTagWidgets();
 
-protected slots:
+protected Q_SLOTS:
   void slotRemoveTagWidget();
   void slotAddTagWidget();
 

@@ -53,7 +53,7 @@ public:
 
   MyMoneyReport getConfig() const;
 
-protected slots:
+protected Q_SLOTS:
   void slotRowTypeChanged(int);
   void slotColumnTypeChanged(int);
   void slotReset();

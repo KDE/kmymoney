@@ -216,7 +216,7 @@ protected:
   bool columnsAlreadyAdjusted();
   void setColumnsAlreadyAdjusted(bool adjusted);
 
-public slots:
+public Q_SLOTS:
   void slotOpenUrl(const QUrl &url);
 
   void slotLoadView();
@@ -239,7 +239,7 @@ public slots:
   void slotNewFromList();
   void slotDeleteFromList();
 
-signals:
+Q_SIGNALS:
   /**
     * This signal is emitted whenever a report is selected
     */
