@@ -34,6 +34,7 @@
 #include <QWheelEvent>
 #include <QPrintDialog>
 #include <QPrinter>
+#include <QPointer>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -234,7 +235,7 @@ void KHomeView::slotPrintView()
 {
   if (d->m_view) {
     m_currentPrinter = new QPrinter();
-    QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
+    QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter, this);
     dialog->setWindowTitle(QString());
     if (dialog->exec() != QDialog::Accepted) {
       delete m_currentPrinter;

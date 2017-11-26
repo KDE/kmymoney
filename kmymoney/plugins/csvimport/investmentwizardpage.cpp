@@ -429,7 +429,7 @@ bool InvestmentPage::validateActionType()
           colList.append(m_imp->m_file->m_model->item(row, col)->text());
         }
         QList<MyMoneyStatement::Transaction::EAction> validActionTypes = m_imp->createValidActionTypes(tr);
-        TransactionDlg* transactionDlg = new TransactionDlg(colList, colHeaders, m_profile->m_colTypeNum.value(Column::Type), validActionTypes);
+        QPointer<TransactionDlg> transactionDlg = new TransactionDlg(colList, colHeaders, m_profile->m_colTypeNum.value(Column::Type), validActionTypes);
         if (transactionDlg->exec() == QDialog::Rejected) {
           KMessageBox::information(m_dlg,
                                    i18n("<center>No valid action type found for this transaction.</center>"

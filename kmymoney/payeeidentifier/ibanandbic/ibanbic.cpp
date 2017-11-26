@@ -112,7 +112,7 @@ bool ibanBic::writeQuery(QSqlQuery& query, const QString& id) const
   const QString bic = fullStoredBic();
   query.bindValue(":bic", (bic.isEmpty()) ? QVariant(QVariant::String) : bic);
   query.bindValue(":name", ownerName());
-  if (!query.exec()) {
+  if (!query.exec()) { // krazy:exclude=crashy
     qWarning("Error while saving ibanbic data for '%s': %s", qPrintable(id), qPrintable(query.lastError().text()));
     return false;
   }

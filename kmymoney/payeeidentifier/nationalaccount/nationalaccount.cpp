@@ -124,7 +124,7 @@ bool nationalAccount::writeQuery(QSqlQuery& query, const QString& id) const
   query.bindValue(":accountNumber", accountNumber());
   query.bindValue(":bankCode", (bankCode().isEmpty()) ? QVariant(QVariant::String) : bankCode());
   query.bindValue(":name", ownerName());
-  if (!query.exec()) {
+  if (!query.exec()) { // krazy:exclude=crashy
     qWarning("Error while saving national account number for '%s': %s", qPrintable(id), qPrintable(query.lastError().text()));
     return false;
   }

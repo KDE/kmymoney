@@ -181,7 +181,7 @@ void KReportsView::KReportTab::print()
 {
   if (m_tableView) {
     m_currentPrinter = new QPrinter();
-    QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
+    QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter, this);
     dialog->setWindowTitle(QString());
     if (dialog->exec() != QDialog::Accepted) {
       delete m_currentPrinter;

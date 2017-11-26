@@ -1421,7 +1421,7 @@ void MyMoneyStorageSql::writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isU
     q.bindValue(":matchIgnoreCase", "N");
 
   q.bindValue(":matchKeys", matchKeys);
-  if (!q.exec())
+  if (!q.exec()) // krazy:exclude=crashy
     throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Payee"))); // krazy:exclude=crashy
 
   if (!isUserInfo)
@@ -1893,7 +1893,7 @@ void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTrans
   q.bindValue(":currencyId", tx.commodity());
   q.bindValue(":bankId", tx.bankID());
 
-  if (!q.exec())
+  if (!q.exec()) // krazy:exclude=crashy
     throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Transaction"))); // krazy:exclude=crashy
 
   m_txPostDate = tx.postDate(); // FIXME: TEMP till Tom puts date in split object
@@ -2694,7 +2694,7 @@ void MyMoneyStorageSql::writeBudget(const MyMoneyBudget& bud, QSqlQuery& q)
   q.bindValue(":name", bud.name());
   q.bindValue(":start", bud.budgetStart());
   q.bindValue(":XML", d.toString());
-  if (!q.exec())
+  if (!q.exec()) // krazy:exclude=crashy
     throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Budgets"))); // krazy:exclude=crashy
 }
 
@@ -2946,7 +2946,7 @@ void MyMoneyStorageSql::writePayeeIdentifier(const payeeIdentifier& pid, QSqlQue
 {
   query.bindValue(":id", pid.idString());
   query.bindValue(":type", pid.iid());
-  if (!query.exec()) {
+  if (!query.exec()) { // krazy:exclude=crashy
     qWarning() << buildError(query, Q_FUNC_INFO, QString("modifying payeeIdentifier"));
     throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("modifying payeeIdentifier"))); // krazy:exclude=crashy
   }

@@ -25,6 +25,7 @@
 #include <QTabWidget>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QPointer>
 
 // KDE includes
 #include <KStandardGuiItem>
@@ -65,7 +66,7 @@ KReportDlg::~KReportDlg()
 void KReportDlg::print()
 {
   m_currentPrinter = new QPrinter();
-  QPrintDialog *dialog = new QPrintDialog(m_currentPrinter, this);
+  QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter, this);
   dialog->setWindowTitle(QString());
   if (dialog->exec() != QDialog::Accepted) {
     delete m_currentPrinter;
