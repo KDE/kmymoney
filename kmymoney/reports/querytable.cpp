@@ -1360,10 +1360,10 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
               shList[LongTermBuysOfSells] += shares;
             }
           }
-        } else if (shList.at(BuysOfOwned) >= shares) {              // substract not-sold shares
+        } else if (shList.at(BuysOfOwned) >= shares) {              // subtract not-sold shares
           shList[BuysOfOwned] -= shares;
           cfList[BuysOfOwned].append(CashFlowListItem(postDate, value));
-        } else {                                                    // substract partially not-sold shares
+        } else {                                                    // subtract partially not-sold shares
           MyMoneyMoney tempVal = ((shares - shList.at(BuysOfOwned)) / shares) * value;
           MyMoneyMoney tempVal2 = (shares - shList.at(BuysOfOwned));
           cfList[BuysOfSells].append(CashFlowListItem(postDate, tempVal));
@@ -1393,10 +1393,10 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
             if (postDate < termSeparator)
               shList[LongTermBuysOfSells] += shares;
           }
-        } else if (shList.at(BuysOfOwned) >= shares) {                    // substract not-added/not-reinvested shares
+        } else if (shList.at(BuysOfOwned) >= shares) {                    // subtract not-added/not-reinvested shares
           shList[BuysOfOwned] -= shares;
           cfList[BuysOfOwned].append(CashFlowListItem(postDate, value));
-        } else {                                                          // substract partially not-added/not-reinvested shares
+        } else {                                                          // subtract partially not-added/not-reinvested shares
           MyMoneyMoney tempVal = (shares - shList.at(BuysOfOwned));
           shList[BuysOfSells] += tempVal;
           if (postDate < termSeparator)

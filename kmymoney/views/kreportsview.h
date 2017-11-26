@@ -120,7 +120,7 @@ public:
     void print();
     void toggleChart();
     /**
-     * Updates informations about ploted chart in report's data
+     * Updates information about ploted chart in report's data
      */
     void updateDataRange();
     void copyToClipboard();

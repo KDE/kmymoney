@@ -185,7 +185,7 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
       painter->drawRect(textArea.adjusted(0, 0, -1, -1));
     }
 
-    // collect data for the various colums
+    // collect data for the various columns
     if(index.column() == (int)Column::Detail) {
       for(int i = 0; i < lines.count(); ++i) {
         painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);

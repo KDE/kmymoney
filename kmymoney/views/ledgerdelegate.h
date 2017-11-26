@@ -41,7 +41,7 @@ public:
   virtual ~LedgerSeperator() {}
 
   virtual bool rowHasSeperator(const QModelIndex& index) const = 0;
-  virtual QString seperatorText(const QModelIndex& index) const = 0;
+  virtual QString separatorText(const QModelIndex& index) const = 0;
 
   static void setFirstFiscalDate(int firstMonth, int firstDay);
   static void setShowFiscalDate(bool show) { showFiscalDate = show; }
@@ -102,7 +102,7 @@ private:
 
   static QColor m_erroneousColor;
   static QColor m_importedColor;
-  static QColor m_seperatorColor;
+  static QColor m_separatorColor;
 };
 
 #endif // LEDGERDELEGATE_H

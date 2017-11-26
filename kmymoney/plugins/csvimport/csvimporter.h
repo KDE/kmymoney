@@ -249,7 +249,7 @@ public:
   void readMiscSettings();
 
   /**
-  * This method ensures that configuration file contains all neccesary fields
+  * This method ensures that configuration file contains all necessary fields
   * and that it is up to date.
   */
   void validateConfigFile();
@@ -321,7 +321,7 @@ public:
   * This method gets securities from investment statement and
   * tries to get pairs of symbol and name either
   * from KMM or from statement data.
-  * In case it's not successfull onlySymbols and onlyNames won't be empty.
+  * In case it's not successful onlySymbols and onlyNames won't be empty.
   */
   bool sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName);
 

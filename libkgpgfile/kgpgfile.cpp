@@ -207,7 +207,7 @@ void KGPGFile::close()
     if (d->m_lastError.encodedError()) {
       setErrorString(QLatin1String("Failure while writing temporary file for file: '") + QLatin1String(d->m_lastError.asString()) + QLatin1String("'"));
     } else if (!d->m_fileWrite->commit()) {
-      setErrorString("Failure while commiting file changes.");
+      setErrorString("Failure while committing file changes.");
     }
   }
 

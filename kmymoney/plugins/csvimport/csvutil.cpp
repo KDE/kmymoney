@@ -48,7 +48,7 @@ QStringList Parse::parseLine(const QString& data)
     cell.append(it);
     // detect where a "quoted" string has been erroneously split, because of a comma,
     // or in a value, a 'thousand separator' being mistaken for a field delimiter.
-    //Also, where a 'field seperator' is within quotes and the quotes don't include the whole of the field.
+    //Also, where a 'field separator' is within quotes and the quotes don't include the whole of the field.
     if (cell.startsWith(m_textDelimiter)) {
       if (!cell.endsWith(m_textDelimiter)) {
         cell.append(m_fieldDelimiter);

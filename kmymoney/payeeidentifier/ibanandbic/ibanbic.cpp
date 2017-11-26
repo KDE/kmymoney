@@ -148,9 +148,9 @@ bool ibanBic::sqlRemove(QSqlDatabase databaseConnection, const QString& objectId
   return true;
 }
 
-QString ibanBic::paperformatIban(const QString& seperator) const
+QString ibanBic::paperformatIban(const QString& separator) const
 {
-  return ibanToPaperformat(m_iban, seperator);
+  return ibanToPaperformat(m_iban, separator);
 }
 
 void ibanBic::setIban(const QString& iban)

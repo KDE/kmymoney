@@ -297,11 +297,11 @@ void MyMoneyDbDef::Schedules()
   appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::TINY, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("typeString"));
-  appendField(MyMoneyDbIntColumn("occurence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, // krazy:exclude=spelling
+  appendField(MyMoneyDbIntColumn("occurrence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, // krazy:exclude=spelling
                                  NOTNULL));
-  appendField(MyMoneyDbIntColumn("occurenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED,
+  appendField(MyMoneyDbIntColumn("occurrenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED,
                                  false, NOTNULL, 3));
-  appendField(MyMoneyDbTextColumn("occurenceString"));
+  appendField(MyMoneyDbTextColumn("occurrenceString"));
   appendField(MyMoneyDbIntColumn("paymentType", MyMoneyDbIntColumn::TINY, UNSIGNED));
   appendField(MyMoneyDbTextColumn("paymentTypeString", MyMoneyDbTextColumn::LONG));
   appendField(MyMoneyDbColumn("startDate", "date", false, NOTNULL));
@@ -517,7 +517,7 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
 
     qs.replace(QRegExp(toReplace + "(?=[,\\s\\)])"), replace);
     // only replace parameters followed by comma, whitespace, closing parenthesis - otherwise
-    // conflicts may occur if one paramter starts with the name of another one.
+    // conflicts may occur if one parameter starts with the name of another one.
   }
   qs += "\n\n";
   retval += qs;

@@ -730,7 +730,7 @@ void KPayeesView::slotSyncAddressBook()
       m_payeeRows.append(m_payeesList->row(item));        // ...so initialize one
     }
     m_payeesList->clearSelection();                       // otherwise slotSelectPayee will be run after every payee update
-//    m_syncAddressbook->setEnabled(false);                 // disallow concurent syncs
+//    m_syncAddressbook->setEnabled(false);                 // disallow concurrent syncs
   }
 
   if (m_payeeRows.count() <= m_payeeRow) {

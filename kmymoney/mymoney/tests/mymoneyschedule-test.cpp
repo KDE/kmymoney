@@ -137,7 +137,7 @@ void MyMoneyScheduleTest::testOverdue()
   QString ref = QString(
                   "<!DOCTYPE TEST>\n"
                   "<SCHEDULE-CONTAINER>\n"
-                  " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"8\" endDate=\"\" type=\"5\" id=\"SCH0002\" name=\"A Name\" fixed=\"0\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                  " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"8\" endDate=\"\" type=\"5\" id=\"SCH0002\" name=\"A Name\" fixed=\"0\" occurrenceMultiplier=\"1\" occurrence=\"32\" >\n" // krazy:exclude=spelling
                   "  <PAYMENTS>\n"
                   "   <PAYMENT date=\"%3\" />\n"
                   "  </PAYMENTS>\n"
@@ -190,7 +190,7 @@ void MyMoneyScheduleTest::testNextPayment()
   QString future_sched = QString(
                            "<!DOCTYPE TEST>\n"
                            "<SCHEDULE-CONTAINER>\n"
-                           "<SCHEDULED_TX startDate=\"2007-02-17\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH000058\" name=\"Car Tax\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"16384\" >\n" // krazy:exclude=spelling
+                           "<SCHEDULED_TX startDate=\"2007-02-17\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH000058\" name=\"Car Tax\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"16384\" >\n" // krazy:exclude=spelling
                            "  <PAYMENTS/>\n"
                            "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
                            "  <SPLITS>\n"
@@ -225,7 +225,7 @@ void MyMoneyScheduleTest::testNextPaymentOnLastDayOfMonth()
   QString future_sched = QString(
                            "<!DOCTYPE TEST>\n"
                            "<SCHEDULE-CONTAINER>\n"
-                           "<SCHEDULED_TX startDate=\"2014-10-31\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH000058\" name=\"Car Tax\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                           "<SCHEDULED_TX startDate=\"2014-10-31\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH000058\" name=\"Car Tax\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"32\" >\n" // krazy:exclude=spelling
                            "  <PAYMENTS/>\n"
                            "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
                            "  <SPLITS>\n"
@@ -427,7 +427,7 @@ void MyMoneyScheduleTest::testPaymentDates()
                      "<!DOCTYPE TEST>\n"
                      "<SCHEDULE-CONTAINER>\n"
 
-                     "<SCHEDULED_TX startDate=\"2003-12-31\" autoEnter=\"1\" weekendOption=\"0\" lastPayment=\"2006-01-31\" paymentType=\"2\" endDate=\"\" type=\"2\" id=\"SCH000032\" name=\"DSL\" fixed=\"0\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                     "<SCHEDULED_TX startDate=\"2003-12-31\" autoEnter=\"1\" weekendOption=\"0\" lastPayment=\"2006-01-31\" paymentType=\"2\" endDate=\"\" type=\"2\" id=\"SCH000032\" name=\"DSL\" fixed=\"0\" occurrenceMultiplier=\"1\" occurrence=\"32\" >\n" // krazy:exclude=spelling
                      " <PAYMENTS/>\n"
                      " <TRANSACTION postdate=\"2006-02-28\" memo=\"\" id=\"\" commodity=\"EUR\" entrydate=\"\" >\n"
                      "  <SPLITS>\n"
@@ -767,11 +767,11 @@ void MyMoneyScheduleTest::testWriteXML()
   QCOMPARE(schedule.attribute("id"), QLatin1String("SCH0001"));
   QCOMPARE(schedule.attribute("paymentType"), QLatin1String("1"));
   QCOMPARE(schedule.attribute("autoEnter"), QLatin1String("1"));
-  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123"));
+  QCOMPARE(schedule.attribute("occurrenceMultiplier"), QLatin1String("123"));
   QCOMPARE(schedule.attribute("startDate"), QDate::currentDate().toString(Qt::ISODate));
   QCOMPARE(schedule.attribute("lastPayment"), QDate::currentDate().toString(Qt::ISODate));
-  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123"));
-  QCOMPARE(schedule.attribute("occurence"), QLatin1String("4"));
+  QCOMPARE(schedule.attribute("occurrenceMultiplier"), QLatin1String("123"));
+  QCOMPARE(schedule.attribute("occurrence"), QLatin1String("4"));
   QCOMPARE(schedule.attribute("type"), QLatin1String("1"));
   QCOMPARE(schedule.attribute("name"), QLatin1String("A Name"));
   QCOMPARE(schedule.attribute("fixed"), QLatin1String("1"));
@@ -846,7 +846,7 @@ void MyMoneyScheduleTest::testReadXML()
   QString ref_ok1 = QString(
                       "<!DOCTYPE TEST>\n"
                       "<SCHEDULE-CONTAINER>\n"
-                      " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"4\" >\n" // krazy:exclude=spelling
+                      " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"4\" >\n" // krazy:exclude=spelling
                       "  <PAYMENTS>\n"
                       "   <PAYMENT date=\"%3\" />\n"
                       "  </PAYMENTS>\n"
@@ -870,7 +870,7 @@ void MyMoneyScheduleTest::testReadXML()
   QString ref_ok2 = QString(
                       "<!DOCTYPE TEST>\n"
                       "<SCHEDULE-CONTAINER>\n"
-                      " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"4\" >\n" // krazy:exclude=spelling
+                      " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"4\" >\n" // krazy:exclude=spelling
                       "  <PAYMENTS>\n"
                       "   <PAYMENT date=\"%3\" />\n"
                       "  </PAYMENTS>\n"
@@ -892,7 +892,7 @@ void MyMoneyScheduleTest::testReadXML()
   QString ref_false = QString(
                         "<!DOCTYPE TEST>\n"
                         "<SCHEDULE-CONTAINER>\n"
-                        " <SCHEDULE startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"4\" >\n" // krazy:exclude=spelling
+                        " <SCHEDULE startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"4\" >\n" // krazy:exclude=spelling
                         "  <PAYMENTS count=\"1\" >\n"
                         "   <PAYMENT date=\"%3\" />\n"
                         "  </PAYMENTS>\n"
@@ -981,7 +981,7 @@ void MyMoneyScheduleTest::testHasReferenceTo()
   QString ref_ok = QString(
                      "<!DOCTYPE TEST>\n"
                      "<SCHEDULE-CONTAINER>\n"
-                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"4\" >\n" // krazy:exclude=spelling
+                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0002\" name=\"A Name\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"4\" >\n" // krazy:exclude=spelling
                      "  <PAYMENTS>\n"
                      "   <PAYMENT date=\"%3\" />\n"
                      "  </PAYMENTS>\n"
@@ -1610,7 +1610,7 @@ void MyMoneyScheduleTest::testPaidEarlyOneTime()
   QString ref_ok = QString(
                      "<!DOCTYPE TEST>\n"
                      "<SCHEDULE-CONTAINER>\n"
-                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"1\" lastPayment=\"%2\" paymentType=\"2\" endDate=\"%3\" type=\"4\" id=\"SCH0042\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"1\" lastPayment=\"%2\" paymentType=\"2\" endDate=\"%3\" type=\"4\" id=\"SCH0042\" name=\"A Name\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"32\" >\n" // krazy:exclude=spelling
                      "  <PAYMENTS/>\n"
                      "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
                      "   <SPLITS>\n"
@@ -1667,7 +1667,7 @@ void MyMoneyScheduleTest::testReplaceId()
   QString ref_ok = QString(
                      "<!DOCTYPE TEST>\n"
                      "<SCHEDULE-CONTAINER>\n"
-                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"1\" lastPayment=\"%2\" paymentType=\"2\" endDate=\"%3\" type=\"4\" id=\"SCH0042\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"1\" lastPayment=\"%2\" paymentType=\"2\" endDate=\"%3\" type=\"4\" id=\"SCH0042\" name=\"A Name\" fixed=\"1\" occurrenceMultiplier=\"1\" occurrence=\"32\" >\n" // krazy:exclude=spelling
                      "  <PAYMENTS/>\n"
                      "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
                      "   <SPLITS>\n"
@@ -1761,7 +1761,7 @@ void MyMoneyScheduleTest::testAttributeNames()
 void MyMoneyScheduleTest::testProcessLastDayInMonth()
 {
   MyMoneySchedule s;
-  // occurence is unrelated
+  // occurrence is unrelated
   s.setOccurrence(Schedule::Occurrence::Any);
   s.setLastDayInMonth(true);
   s.setNextDueDate(QDate(2010, 1, 1));

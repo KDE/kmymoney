@@ -122,7 +122,7 @@ static unsigned char attentionSign[] = {
 
 QColor LedgerDelegate::m_erroneousColor = QColor(Qt::red);
 QColor LedgerDelegate::m_importedColor = QColor(Qt::yellow);
-QColor LedgerDelegate::m_seperatorColor = QColor(0xff, 0xf2, 0x9b);
+QColor LedgerDelegate::m_separatorColor = QColor(0xff, 0xf2, 0x9b);
 
 class LedgerSeperatorDate : public LedgerSeperator
 {
@@ -131,7 +131,7 @@ public:
   virtual ~LedgerSeperatorDate() {}
 
   virtual bool rowHasSeperator(const QModelIndex& index) const;
-  virtual QString seperatorText(const QModelIndex& index) const;
+  virtual QString separatorText(const QModelIndex& index) const;
 
 private:
   QString getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const;
@@ -234,7 +234,7 @@ bool LedgerSeperatorDate::rowHasSeperator(const QModelIndex& index) const
   return rc;
 }
 
-QString LedgerSeperatorDate::seperatorText(const QModelIndex& index) const
+QString LedgerSeperatorDate::separatorText(const QModelIndex& index) const
 {
   QModelIndex nextIdx = nextIndex(index);
   if(nextIdx.isValid()) {
@@ -253,18 +253,18 @@ public:
   Private()
   : m_editor(0)
   , m_view(0)
-  , m_seperator(0)
+  , m_separator(0)
   , m_editorRow(-1)
   {}
 
   ~Private()
   {
-    delete m_seperator;
+    delete m_separator;
   }
 
   NewTransactionEditor*         m_editor;
   LedgerView*                   m_view;
-  LedgerSeperator*              m_seperator;
+  LedgerSeperator*              m_separator;
   int                           m_editorRow;
 };
 
@@ -283,11 +283,11 @@ LedgerDelegate::~LedgerDelegate()
 
 void LedgerDelegate::setSortRole(eLedgerModel::Role role)
 {
-  delete d->m_seperator;
-  d->m_seperator = 0;
+  delete d->m_separator;
+  d->m_separator = 0;
   switch(role) {
     case eLedgerModel::Role::PostDate:
-      d->m_seperator = new LedgerSeperatorDate(role);
+      d->m_separator = new LedgerSeperatorDate(role);
       break;
     default:
       qDebug() << "LedgerDelegate::setSortRole role" << (int)role << "not implemented";
@@ -366,7 +366,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   painter->save();
 
   const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
-  const bool rowHasSeperator = d->m_seperator && d->m_seperator->rowHasSeperator(index);
+  const bool rowHasSeperator = d->m_separator && d->m_separator->rowHasSeperator(index);
 
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
@@ -374,7 +374,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
 
   if (!editWidgetIsVisible && rowHasSeperator) {
-    // don't draw over the seperator space
+    // don't draw over the separator space
     opt.rect.setHeight(opt.rect.height() - lineHeight);
   }
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
@@ -440,7 +440,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
       painter->setPen(m_erroneousColor);
     }
 
-    // collect data for the various colums
+    // collect data for the various columns
     if(index.column() == (int)eLedgerModel::Column::Detail) {
       for(int i = 0; i < lines.count(); ++i) {
         painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
@@ -474,11 +474,11 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->proxy()->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignTop, attention);
   }
 
-  // draw a seperator if any
+  // draw a separator if any
   if (rowHasSeperator) {
     opt.rect.setY(opt.rect.y()+opt.rect.height());
     opt.rect.setHeight(lineHeight);
-    opt.backgroundBrush = m_seperatorColor;
+    opt.backgroundBrush = m_separatorColor;
 
     // never draw it as selected but always enabled
     opt.state &= ~QStyle::State_Selected;
@@ -487,7 +487,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     if(index.column() == (int)eLedgerModel::Column::Detail) {
       QPalette::ColorGroup cg = QPalette::Normal;
       painter->setPen(opt.palette.color(cg, QPalette::Text));
-      painter->drawText(opt.rect, Qt::AlignCenter, d->m_seperator->seperatorText(index));
+      painter->drawText(opt.rect, Qt::AlignCenter, d->m_separator->separatorText(index));
     }
   }
   painter->restore();
@@ -629,7 +629,7 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
     size.setHeight((size.height() * rows) - margin);
   }
 
-  if (d->m_seperator && d->m_seperator->rowHasSeperator(index)) {
+  if (d->m_separator && d->m_separator->rowHasSeperator(index)) {
     size.setHeight(size.height() + lineHeight);
   }
   return size;

@@ -733,7 +733,7 @@ void KMyMoneyApp::initActions()
   // Adding all actions
   // *************
   {
-    // struct for QAction's vital (except icon) informations
+    // struct for QAction's vital (except icon) information
     struct actionInfo {
       Action          action;
       KMyMoneyAppFunc callback;
@@ -7007,7 +7007,7 @@ void KMyMoneyApp::slotPluginLoad(const KPluginMetaData& metaData)
 
   if ( d->m_plugins.contains(metaData.fileName()) ) {
     /** @fixme Handle a reload e.g. objectNames are equal but the object are different (plugin != d->m_plugins[plugin->objectName()])
-     *  Also it could be usefull to drop the dependence on objectName()
+     *  Also it could be useful to drop the dependence on objectName()
      */
 
     /* Note: there is nothing to delete here because if the plugin was loaded already,

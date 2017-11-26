@@ -574,13 +574,13 @@ int MyMoneyStorageSql::upgradeToV3()
 {
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   QSqlQuery q(*this);
-  // kmmSchedules - add occurenceMultiplier
+  // kmmSchedules - add occurrenceMultiplier
   // The default value is given here to populate the column.
   if (!q.exec("ALTER TABLE kmmSchedules ADD COLUMN " +
-              MyMoneyDbIntColumn("occurenceMultiplier",
+              MyMoneyDbIntColumn("occurrenceMultiplier",
                                  MyMoneyDbIntColumn::SMALL, false, false, true)
               .generateDDL(m_driver) + " DEFAULT 0;")) {
-    buildError(q, Q_FUNC_INFO, "Error adding kmmSchedules.occurenceMultiplier");
+    buildError(q, Q_FUNC_INFO, "Error adding kmmSchedules.occurrenceMultiplier");
     return (1);
   }
   //The default is less than any useful value, so as each schedule is hit, it will update
@@ -2194,9 +2194,9 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
   q.bindValue(":name", sch.name());
   q.bindValue(":type", (int)sch.type());
   q.bindValue(":typeString", MyMoneySchedule::scheduleTypeToString(sch.type()));
-  q.bindValue(":occurence", (int)sch.occurrencePeriod()); // krazy:exclude=spelling
-  q.bindValue(":occurenceMultiplier", sch.occurrenceMultiplier());
-  q.bindValue(":occurenceString", sch.occurrenceToString());
+  q.bindValue(":occurrence", (int)sch.occurrencePeriod()); // krazy:exclude=spelling
+  q.bindValue(":occurrenceMultiplier", sch.occurrenceMultiplier());
+  q.bindValue(":occurrenceString", sch.occurrenceToString());
   q.bindValue(":paymentType", (int)sch.paymentType());
   q.bindValue(":paymentTypeString", MyMoneySchedule::paymentMethodToString(sch.paymentType()));
   q.bindValue(":startDate", sch.startDate().toString(Qt::ISODate));
@@ -4251,8 +4251,8 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int typeCol = t.fieldNumber("type");
-  int occurenceCol = t.fieldNumber("occurence"); // krazy:exclude=spelling
-  int occurenceMultiplierCol = t.fieldNumber("occurenceMultiplier");
+  int occurrenceCol = t.fieldNumber("occurrence"); // krazy:exclude=spelling
+  int occurrenceMultiplierCol = t.fieldNumber("occurrenceMultiplier");
   int paymentTypeCol = t.fieldNumber("paymentType");
   int startDateCol = t.fieldNumber("startDate");
   int endDateCol = t.fieldNumber("endDate");
@@ -4270,8 +4270,8 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
     QString sId = GETSTRING(idCol);
     s.setName(GETSTRING(nameCol));
     s.setType(static_cast<Schedule::Type>(GETINT(typeCol)));
-    s.setOccurrencePeriod(static_cast<Schedule::Occurrence>(GETINT(occurenceCol)));
-    s.setOccurrenceMultiplier(GETINT(occurenceMultiplierCol));
+    s.setOccurrencePeriod(static_cast<Schedule::Occurrence>(GETINT(occurrenceCol)));
+    s.setOccurrenceMultiplier(GETINT(occurrenceMultiplierCol));
     s.setPaymentType(static_cast<Schedule::PaymentType>(GETINT(paymentTypeCol)));
     s.setStartDate(GETDATE(startDateCol));
     s.setEndDate(GETDATE(endDateCol));

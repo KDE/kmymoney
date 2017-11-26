@@ -609,40 +609,40 @@ DecimalSymbol CSVImporter::detectDecimalSymbol(const int col, const QString &exc
     int commaPos = txt.lastIndexOf(QLatin1Char(',')); // ...to be able to determine which one is the last
 
     if (dotPos != -1 && commaPos != -1) {
-      if (dotPos > commaPos && commaIsDecimalSeparator == false)    // follwing case 1,234.56
+      if (dotPos > commaPos && commaIsDecimalSeparator == false)    // following case 1,234.56
         dotIsDecimalSeparator = true;
-      else if (dotPos < commaPos && dotIsDecimalSeparator == false) // follwing case 1.234,56
+      else if (dotPos < commaPos && dotIsDecimalSeparator == false) // following case 1.234,56
         commaIsDecimalSeparator = true;
-      else                                                          // follwing case 1.234,56 and somwhere earlier there was 1,234.56 so unresolvable conflict
+      else                                                          // following case 1.234,56 and somwhere earlier there was 1,234.56 so unresolvable conflict
         return detectedSymbol;
-    } else if (dotPos != -1) {                 // follwing case 1.23
+    } else if (dotPos != -1) {                 // following case 1.23
       if (dotIsDecimalSeparator)               // it's already know that dotIsDecimalSeparator
         continue;
       if (!commaIsDecimalSeparator)            // if there is no conflict with comma as decimal separator
         dotIsDecimalSeparator = true;
       else {
-        if (txt.count(QLatin1Char('.')) > 1)                // follwing case 1.234.567 so OK
+        if (txt.count(QLatin1Char('.')) > 1)                // following case 1.234.567 so OK
           continue;
-        else if (txt.length() - 4 == dotPos)   // follwing case 1.234 and somwhere earlier there was 1.234,56 so OK
+        else if (txt.length() - 4 == dotPos)   // following case 1.234 and somwhere earlier there was 1.234,56 so OK
           continue;
-        else                                   // follwing case 1.23 and somwhere earlier there was 1,23 so unresolvable conflict
+        else                                   // following case 1.23 and somwhere earlier there was 1,23 so unresolvable conflict
           return detectedSymbol;
       }
-    } else if (commaPos != -1) {               // follwing case 1,23
+    } else if (commaPos != -1) {               // following case 1,23
       if (commaIsDecimalSeparator)             // it's already know that commaIsDecimalSeparator
         continue;
       else if (!dotIsDecimalSeparator)         // if there is no conflict with dot as decimal separator
         commaIsDecimalSeparator = true;
       else {
-        if (txt.count(QLatin1Char(',')) > 1)                // follwing case 1,234,567 so OK
+        if (txt.count(QLatin1Char(',')) > 1)                // following case 1,234,567 so OK
           continue;
-        else if (txt.length() - 4 == commaPos) // follwing case 1,234 and somwhere earlier there was 1,234.56 so OK
+        else if (txt.length() - 4 == commaPos) // following case 1,234 and somwhere earlier there was 1,234.56 so OK
           continue;
-        else                                   // follwing case 1,23 and somwhere earlier there was 1.23 so unresolvable conflict
+        else                                   // following case 1,23 and somwhere earlier there was 1.23 so unresolvable conflict
           return detectedSymbol;
       }
 
-    } else {                                   // follwing case 123
+    } else {                                   // following case 123
       if (pattern.isEmpty()) {
 
       }

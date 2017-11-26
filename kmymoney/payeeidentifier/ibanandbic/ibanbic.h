@@ -167,7 +167,7 @@ public:
    * @param iban an iban, not needed to be canonical, valid or completed
    * @param separator Overwrite the default separator (e.g. a smaller space)
    */
-  static QString ibanToPaperformat(const QString& iban, const QString& seperator = QLatin1String(" "));
+  static QString ibanToPaperformat(const QString& iban, const QString& separator = QLatin1String(" "));
 
   /**
    * @brief Extract Basic Bank Account Number
