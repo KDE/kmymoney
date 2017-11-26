@@ -98,7 +98,7 @@ bool KOfxDirectConnectDlg::init()
     d->m_fpTrace.write("\n", 1);
     d->m_fpTrace.write("request:\n", 9);
     QByteArray trcData(request);  // make local copy
-    trcData.replace('\r', "");
+    trcData.replace('\r', '\0');
     d->m_fpTrace.write(trcData, trcData.size());
     d->m_fpTrace.write("\n", 1);
     d->m_fpTrace.write("response:\n", 10);
@@ -158,7 +158,7 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
 
   if (d->m_fpTrace.isOpen()) {
     QByteArray trcData(_ba);
-    trcData.replace('\r', "");
+    trcData.replace('\r', '\0');
     d->m_fpTrace.write(trcData, trcData.size());
   }
 }

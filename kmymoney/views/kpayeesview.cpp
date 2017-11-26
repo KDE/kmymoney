@@ -760,16 +760,16 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
   if (!identity.email.isEmpty()) {  // empty e-mail means no identity fetched
     QString txt;
     if (!identity.street.isEmpty())
-      txt.append(identity.street + "\n");
+      txt.append(identity.street + '\n');
     if (!identity.locality.isEmpty()) {
       txt.append(identity.locality);
       if (!identity.postalCode.isEmpty())
-        txt.append(' ' + identity.postalCode + "\n");
+        txt.append(' ' + identity.postalCode + '\n');
       else
-        txt.append("\n");
+        txt.append('\n');
     }
     if (!identity.country.isEmpty())
-      txt.append(identity.country + "\n");
+      txt.append(identity.country + '\n');
 
     if (!txt.isEmpty() && m_payee.address().compare(txt) != 0)
       m_payee.setAddress(txt);

@@ -223,7 +223,7 @@ void sqlcipherdrivertest::reopenDatabase()
   QVERIFY(db.open());
 
   QSqlQuery query;
-  query.prepare("PRAGMA key = '" + passphrase + "'");
+  query.prepare("PRAGMA key = '" + passphrase + '\'');
   QVERIFY(query.exec());
 
   QVERIFY(!query.lastError().isValid());

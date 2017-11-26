@@ -1092,7 +1092,7 @@ void QueryTable::constructTransactionTable()
             QString delimiter;
             for (int i = 0; i < tagIdList.size(); i++) {
               qA[ctTag] += delimiter + file->tag(tagIdList[i]).name().simplified();
-              delimiter = "+";
+              delimiter = '+';
             }
 
             qS[ctPayee] = payee.isEmpty()

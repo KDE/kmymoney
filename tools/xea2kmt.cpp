@@ -173,7 +173,7 @@ public:
             QStringRef _name = xml.name();
             if (xml.isEndElement() && _name == "account") {
                 if (prefixNameWithCode && !code.isEmpty() && !name.startsWith(code))
-                    name = code + " " + name;
+                    name = code + ' ' + name;
                 return true;
             }
             if (xml.isStartElement())
@@ -556,11 +556,14 @@ int convertFileStructure(const QString &indir, const QString &outdir)
 
         // create output file dir
         QFileInfo fi(file);
-        QString outFileName = fi.canonicalFilePath().replace(inPath, outPath).replace("acctchrt_", "").replace(".gnucash-xea", ".kmt");
+        auto outFileName = fi.canonicalFilePath();
+        outFileName.replace(inPath, outPath);
+        outFileName.remove("acctchrt_");
+        outFileName.replace(".gnucash-xea", ".kmt");
         foreach(const QString &key, mapKeys)
         {
-            if (outFileName.contains("/" + key + "/"))
-                outFileName = outFileName.replace("/" + key + "/", "/" + dirNameMap[key] + "/");
+            if (outFileName.contains('/' + key + '/'))
+                outFileName = outFileName.replace('/' + key + '/', '/' + dirNameMap[key] + "/");
         }
         fi.setFile(outFileName);
 

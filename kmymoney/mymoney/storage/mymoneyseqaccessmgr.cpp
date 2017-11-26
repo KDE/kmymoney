@@ -223,7 +223,7 @@ const onlineJob MyMoneySeqAccessMgr::getOnlineJob(const QString &id) const
   if (m_onlineJobList.contains(id)) {
     return m_onlineJobList[id];
   }
-  throw MYMONEYEXCEPTION("Unknown online Job '" + id + "'");
+  throw MYMONEYEXCEPTION("Unknown online Job '" + id + '\'');
 }
 
 const MyMoneyPayee MyMoneySeqAccessMgr::payee(const QString& id) const
