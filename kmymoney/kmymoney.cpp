@@ -173,6 +173,10 @@
 
 #include "misc/platformtools.h"
 
+#ifdef KMM_DEBUG
+#include "mymoneytracer.h"
+#endif
+
 using namespace Icons;
 
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";

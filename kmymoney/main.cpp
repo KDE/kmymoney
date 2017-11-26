@@ -52,6 +52,7 @@
 
 #ifdef KMM_DEBUG
 #include "mymoneyutils.h"
+#include "mymoneytracer.h"
 #endif
 
 bool timersOn = false;
