@@ -36,16 +36,16 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyVie
     ViewInterface(parent, name),
     m_view(view)
 {
-  connect(app, SIGNAL(accountSelected(MyMoneyAccount)), this, SIGNAL(accountSelected(MyMoneyAccount)));
-  connect(app, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)));
-  connect(app, SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)),
-          this, SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
+  connect(app, &KMyMoneyApp::accountSelected, this, &ViewInterface::accountSelected);
+  connect(app, &KMyMoneyApp::transactionsSelected, this, &ViewInterface::transactionsSelected);
+  connect(app, &KMyMoneyApp::accountReconciled,
+          this, &ViewInterface::accountReconciled);
 
 
-  connect(app, SIGNAL(institutionSelected(MyMoneyInstitution)), this, SIGNAL(institutionSelected(MyMoneyInstitution)));
+  connect(app, &KMyMoneyApp::institutionSelected, this, &ViewInterface::institutionSelected);
 
-  connect(m_view, SIGNAL(viewStateChanged(bool)), this, SIGNAL(viewStateChanged(bool)));
-  connect(m_view, SIGNAL(kmmFilePlugin(uint)), this, SIGNAL(kmmFilePlugin(uint)));
+  connect(m_view, &KMyMoneyView::viewStateChanged, this, &ViewInterface::viewStateChanged);
+  connect(m_view, &KMyMoneyView::kmmFilePlugin, this, &ViewInterface::kmmFilePlugin);
 }
 
 //KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)

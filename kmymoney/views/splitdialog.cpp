@@ -130,14 +130,14 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amou
   d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
 
   // setup some connections
-  connect(d->ui->splitView, SIGNAL(aboutToStartEdit()), this, SLOT(disableButtons()));
-  connect(d->ui->splitView, SIGNAL(aboutToFinishEdit()), this, SLOT(enableButtons()));
+  connect(d->ui->splitView, &LedgerView::aboutToStartEdit, this, &SplitDialog::disableButtons);
+  connect(d->ui->splitView, &LedgerView::aboutToFinishEdit, this, &SplitDialog::enableButtons);
 
-  connect(d->ui->deleteAllButton, SIGNAL(pressed()), this, SLOT(deleteAllSplits()));
-  connect(d->ui->deleteButton, SIGNAL(pressed()), this, SLOT(deleteSelectedSplits()));
-  connect(d->ui->deleteZeroButton, SIGNAL(pressed()), this, SLOT(deleteZeroSplits()));
-  connect(d->ui->mergeButton, SIGNAL(pressed()), this, SLOT(mergeSplits()));
-  connect(d->ui->newSplitButton, SIGNAL(pressed()), this, SLOT(newSplit()));
+  connect(d->ui->deleteAllButton, &QAbstractButton::pressed, this, &SplitDialog::deleteAllSplits);
+  connect(d->ui->deleteButton, &QAbstractButton::pressed, this, &SplitDialog::deleteSelectedSplits);
+  connect(d->ui->deleteZeroButton, &QAbstractButton::pressed, this, &SplitDialog::deleteZeroSplits);
+  connect(d->ui->mergeButton, &QAbstractButton::pressed, this, &SplitDialog::mergeSplits);
+  connect(d->ui->newSplitButton, &QAbstractButton::pressed, this, &SplitDialog::newSplit);
 
   // finish polishing the widgets
   QMetaObject::invokeMethod(this, "adjustSummary", Qt::QueuedConnection);
@@ -213,8 +213,8 @@ void SplitDialog::setModel(QAbstractItemModel* model)
   adjustSummary();
 
   // force an update of the summary if data changes in the model
-  connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)), this, SLOT(adjustSummary()));
-  connect(d->ui->splitView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), this, SLOT(selectionChanged()));
+  connect(model, &QAbstractItemModel::dataChanged, this, &SplitDialog::adjustSummary);
+  connect(d->ui->splitView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &SplitDialog::selectionChanged);
 }
 
 void SplitDialog::adjustSummary()
