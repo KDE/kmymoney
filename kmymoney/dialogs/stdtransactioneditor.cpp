@@ -396,7 +396,7 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
     }
     QList<QString> t = d->m_split.tagIdList();
     if (!t.isEmpty()) {
-      for (auto i = 0; i < t.size(); i++)
+      for (auto i = 0; i < t.size(); ++i)
         tag->addTagWidget(t[i]);
     }
 

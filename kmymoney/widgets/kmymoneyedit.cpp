@@ -177,7 +177,7 @@ public:
       if (m_prec > 0) {
         if (!s.contains(decimalSymbol)) {
           s += decimalSymbol;
-          for (auto i = 0; i < m_prec; i++)
+          for (auto i = 0; i < m_prec; ++i)
             s += '0';
         }
       } else if (m_prec == 0) {

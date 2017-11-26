@@ -69,11 +69,11 @@ KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
   auto dToday = QDate::currentDate();
   auto iYear = dToday.year();
 
-  for (auto i = 0; i <= icFutureYears; i++)
-    d->ui->m_cbYear->addItem(QString::number(iYear++));
+  for (auto i = 0; i <= icFutureYears; ++i)
+    d->ui->m_cbYear->addItem(QString::number(iYear++)); // krazy:exclude=postfixop
 
   iYear = dToday.year();
-  for (auto i = 0; i <= icPastYears; i++)
+  for (auto i = 0; i <= icPastYears; ++i)
     d->ui->m_cbYear->addItem(QString::number(--iYear));
 
   connect(d->ui->buttonBox, &QDialogButtonBox::accepted, this, &KNewBudgetDlg::m_pbOk_clicked);

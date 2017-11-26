@@ -285,7 +285,7 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
         case (int)eTransactionForm::Column::Value1:
           align |= Qt::AlignLeft;
           if (!d->m_tagList.isEmpty()) {
-            for (auto i = 0; i < d->m_tagList.size() - 1; i++)
+            for (auto i = 0; i < d->m_tagList.size() - 1; ++i)
               txt += d->m_tagList[i] + ", ";
             txt += d->m_tagList.last();
           }
@@ -371,7 +371,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
               txt = d->m_category;
               if (!d->m_tagList.isEmpty()) {
                 txt += " ( ";
-                for (auto i = 0; i < d->m_tagList.size() - 1; i++) {
+                for (auto i = 0; i < d->m_tagList.size() - 1; ++i) {
                   txt += "<span style='color: " + d->m_tagColorList[i].name() + "'>&#x25CF;</span> " + d->m_tagList[i] + ", ";
                 }
                 txt += "<span style='color: " + d->m_tagColorList.last().name() + "'>&#x25CF;</span> " + d->m_tagList.last() + " )";
@@ -440,7 +440,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
               txt = d->m_category;
               if (!d->m_tagList.isEmpty()) {
                 txt += " ( ";
-                for (auto i = 0; i < d->m_tagList.size() - 1; i++) {
+                for (auto i = 0; i < d->m_tagList.size() - 1; ++i) {
                   txt += "<span style='color: " + d->m_tagColorList[i].name() + "'>&#x25CF;</span> " + d->m_tagList[i] + ", ";
                 }
                 txt += "<span style='color: " + d->m_tagColorList.last().name() + "'>&#x25CF;</span> " + d->m_tagList.last() + " )";
