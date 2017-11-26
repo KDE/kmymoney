@@ -93,8 +93,8 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
 
   d->m_type = static_cast<Schedule::Type>(node.attribute(d->getAttrName(Schedule::Attribute::Type)).toInt());
   d->m_paymentType = static_cast<Schedule::PaymentType>(node.attribute(d->getAttrName(Schedule::Attribute::PaymentType)).toInt());
-  d->m_occurrence = static_cast<Schedule::Occurrence>(node.attribute(d->getAttrName(Schedule::Attribute::Occurrence)).toInt()); // krazy:exclude=spelling
-  d->m_occurrenceMultiplier = node.attribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), "1").toInt(); // krazy:exclude=spelling
+  d->m_occurrence = static_cast<Schedule::Occurrence>(node.attribute(d->getAttrName(Schedule::Attribute::Occurrence)).toInt());
+  d->m_occurrenceMultiplier = node.attribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), "1").toInt();
   // Convert to compound occurrence
   simpleToCompoundOccurrence(d->m_occurrenceMultiplier, d->m_occurrence);
   d->m_lastDayInMonth = static_cast<bool>(node.attribute("lastDayInMonth").toInt());
@@ -948,7 +948,7 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   Q_D(const MyMoneySchedule);
   el.setAttribute(d->getAttrName(Schedule::Attribute::Name), d->m_name);
   el.setAttribute(d->getAttrName(Schedule::Attribute::Type), (int)d->m_type);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence); // krazy:exclude=spelling
+  el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence);
   el.setAttribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), d->m_occurrenceMultiplier);
   el.setAttribute(d->getAttrName(Schedule::Attribute::PaymentType), (int)d->m_paymentType);
   el.setAttribute(d->getAttrName(Schedule::Attribute::StartDate), MyMoneyUtils::dateToString(d->m_startDate));

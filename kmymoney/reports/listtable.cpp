@@ -693,8 +693,8 @@ QString ListTable::tableHeader(const cellTypeE cellType)
       return i18nc("Account name", "Name");
     case ctNextDueDate:
       return i18n("Next Due Date");
-    case ctOccurence:
-      return i18n("Occurrence"); // krazy:exclude=spelling
+    case ctOccurrence:
+      return i18n("Occurrence");
     case ctPaymentType:
       return i18n("Payment Method");
     case ctInstitution:

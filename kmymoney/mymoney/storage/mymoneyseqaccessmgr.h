@@ -865,7 +865,7 @@ public:
     *                  See eMyMoney::Schedule::Type for details.
     *                  Default is eMyMoney::Schedule::Type::Any
     * @param occurrence only schedules of occurrence type @p occurrence are searched for.
-    *                  See eMyMoney::Schedule::Occurence for details.
+    *                  See eMyMoney::Schedule::Occurrence for details.
     *                  Default is eMyMoney::Schedule::Occurrence::Any
     * @param paymentType only schedules of payment method @p paymentType
     *                  are searched for.

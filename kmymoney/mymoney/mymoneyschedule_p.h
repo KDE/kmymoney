@@ -91,8 +91,8 @@ public:
     static const QHash<Schedule::Attribute, QString> attrNames = {
       {Schedule::Attribute::Name,                 QStringLiteral("name")},
       {Schedule::Attribute::Type,                 QStringLiteral("type")},
-      {Schedule::Attribute::Occurrence,           QStringLiteral("occurrence")},
-      {Schedule::Attribute::OccurrenceMultiplier, QStringLiteral("occurrenceMultiplier")},
+      {Schedule::Attribute::Occurrence,           QStringLiteral("occurence")}, // krazy:exclude=spelling
+      {Schedule::Attribute::OccurrenceMultiplier, QStringLiteral("occurenceMultiplier")}, // krazy:exclude=spelling
       {Schedule::Attribute::PaymentType,          QStringLiteral("paymentType")},
       {Schedule::Attribute::Fixed,                QStringLiteral("fixed")},
       {Schedule::Attribute::AutoEnter,            QStringLiteral("autoEnter")},

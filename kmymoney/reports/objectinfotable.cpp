@@ -120,11 +120,11 @@ void ObjectInfoTable::init()
   switch (m_config.rowType()) {
     case MyMoneyReport::eSchedule:
       if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
-        m_columns << ctName << ctPayee << ctPaymentType << ctOccurence
-                  << ctNextDueDate << ctCategory; // krazy:exclude=spelling
+        m_columns << ctName << ctPayee << ctPaymentType << ctOccurrence
+                  << ctNextDueDate << ctCategory;
       } else {
-        m_columns << ctName << ctPayee << ctPaymentType << ctOccurence
-                  << ctNextDueDate; // krazy:exclude=spelling
+        m_columns << ctName << ctPayee << ctPaymentType << ctOccurrence
+                  << ctNextDueDate;
       }
       break;
     case MyMoneyReport::eAccountInfo:
@@ -185,7 +185,7 @@ void ObjectInfoTable::constructScheduleTable()
       scheduleRow[ctName] = schedule.name();
       scheduleRow[ctNextDueDate] = schedule.nextDueDate().toString(Qt::ISODate);
       scheduleRow[ctType] = KMyMoneyUtils::scheduleTypeToString(schedule.type());
-      scheduleRow[ctOccurence] = i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()); // krazy:exclude=spelling
+      scheduleRow[ctOccurrence] = i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1());
       scheduleRow[ctPaymentType] = KMyMoneyUtils::paymentMethodToString(schedule.paymentType());
 
       //scheduleRow["category"] = account.name();

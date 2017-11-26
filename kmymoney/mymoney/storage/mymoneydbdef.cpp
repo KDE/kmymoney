@@ -297,11 +297,11 @@ void MyMoneyDbDef::Schedules()
   appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::TINY, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("typeString"));
-  appendField(MyMoneyDbIntColumn("occurrence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, // krazy:exclude=spelling
+  appendField(MyMoneyDbIntColumn("occurence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, // krazy:exclude=spelling
                                  NOTNULL));
-  appendField(MyMoneyDbIntColumn("occurrenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED,
+  appendField(MyMoneyDbIntColumn("occurenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED, // krazy:exclude=spelling
                                  false, NOTNULL, 3));
-  appendField(MyMoneyDbTextColumn("occurrenceString"));
+  appendField(MyMoneyDbTextColumn("occurenceString")); // krazy:exclude=spelling
   appendField(MyMoneyDbIntColumn("paymentType", MyMoneyDbIntColumn::TINY, UNSIGNED));
   appendField(MyMoneyDbTextColumn("paymentTypeString", MyMoneyDbTextColumn::LONG));
   appendField(MyMoneyDbColumn("startDate", "date", false, NOTNULL));

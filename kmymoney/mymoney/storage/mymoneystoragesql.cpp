@@ -577,10 +577,10 @@ int MyMoneyStorageSql::upgradeToV3()
   // kmmSchedules - add occurrenceMultiplier
   // The default value is given here to populate the column.
   if (!q.exec("ALTER TABLE kmmSchedules ADD COLUMN " +
-              MyMoneyDbIntColumn("occurrenceMultiplier",
+              MyMoneyDbIntColumn("occurenceMultiplier",
                                  MyMoneyDbIntColumn::SMALL, false, false, true)
               .generateDDL(m_driver) + " DEFAULT 0;")) {
-    buildError(q, Q_FUNC_INFO, "Error adding kmmSchedules.occurrenceMultiplier");
+    buildError(q, Q_FUNC_INFO, "Error adding kmmSchedules.occurenceMultiplier");
     return (1);
   }
   //The default is less than any useful value, so as each schedule is hit, it will update
@@ -2194,9 +2194,9 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
   q.bindValue(":name", sch.name());
   q.bindValue(":type", (int)sch.type());
   q.bindValue(":typeString", MyMoneySchedule::scheduleTypeToString(sch.type()));
-  q.bindValue(":occurrence", (int)sch.occurrencePeriod()); // krazy:exclude=spelling
-  q.bindValue(":occurrenceMultiplier", sch.occurrenceMultiplier());
-  q.bindValue(":occurrenceString", sch.occurrenceToString());
+  q.bindValue(":occurence", (int)sch.occurrencePeriod()); // krazy:exclude=spelling
+  q.bindValue(":occurenceMultiplier", sch.occurrenceMultiplier()); // krazy:exclude=spelling
+  q.bindValue(":occurenceString", sch.occurrenceToString()); // krazy:exclude=spelling
   q.bindValue(":paymentType", (int)sch.paymentType());
   q.bindValue(":paymentTypeString", MyMoneySchedule::paymentMethodToString(sch.paymentType()));
   q.bindValue(":startDate", sch.startDate().toString(Qt::ISODate));
@@ -4251,8 +4251,8 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int typeCol = t.fieldNumber("type");
-  int occurrenceCol = t.fieldNumber("occurrence"); // krazy:exclude=spelling
-  int occurrenceMultiplierCol = t.fieldNumber("occurrenceMultiplier");
+  int occurrenceCol = t.fieldNumber("occurence"); // krazy:exclude=spelling
+  int occurrenceMultiplierCol = t.fieldNumber("occurenceMultiplier"); // krazy:exclude=spelling
   int paymentTypeCol = t.fieldNumber("paymentType");
   int startDateCol = t.fieldNumber("startDate");
   int endDateCol = t.fieldNumber("endDate");
