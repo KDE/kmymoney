@@ -50,7 +50,7 @@ public:
     payeeIdentifier = payeeIdentifierModel::payeeIdentifier /**< actual payeeIdentifier */
   };
 
-  payeeIdentifierContainerModel(QObject* parent = 0);
+  explicit payeeIdentifierContainerModel(QObject* parent = 0);
 
   virtual QVariant data(const QModelIndex& index, int role) const;
 

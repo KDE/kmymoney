@@ -40,7 +40,7 @@ class chipTanDialog : public QDialog
   Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth)
 
 public:
-  chipTanDialog(QWidget* parent = 0);
+  explicit chipTanDialog(QWidget* parent = 0);
   ~chipTanDialog();
 
   enum Result { Accepted = 0, Rejected, InternalError };

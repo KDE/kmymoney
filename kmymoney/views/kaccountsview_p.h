@@ -41,39 +41,38 @@ namespace Ui {
 
 class KAccountsViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
-    Q_DECLARE_PUBLIC(KAccountsView)
+  Q_DECLARE_PUBLIC(KAccountsView)
 
 public:
+  explicit KAccountsViewPrivate(KAccountsView *qq) :
+    q_ptr(qq),
+    ui(new Ui::KAccountsView),
+    m_haveUnusedCategories(false)
+  {
+  }
 
-    KAccountsViewPrivate(KAccountsView *qq) :
-        q_ptr(qq),
-        ui(new Ui::KAccountsView),
-        m_haveUnusedCategories(false)
-    {
-    }
+  ~KAccountsViewPrivate()
+  {
+  }
 
-    ~KAccountsViewPrivate()
-    {
-    }
+  void init()
+  {
+    Q_Q(KAccountsView);
+    ui->setupUi(q);
+    m_accountTree = &ui->m_accountTree;
 
-    void init()
-    {
-        Q_Q(KAccountsView);
-        ui->setupUi(q);
-        m_accountTree = &ui->m_accountTree;
+    // setup icons for collapse and expand button
+    ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+    ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
 
-        // setup icons for collapse and expand button
-        ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
-        ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
+    m_proxyModel = ui->m_accountTree->init(View::Accounts);
+    q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+  }
 
-        m_proxyModel = ui->m_accountTree->init(View::Accounts);
-        q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
-        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    }
-
-    KAccountsView       *q_ptr;
-    Ui::KAccountsView   *ui;
-    bool                m_haveUnusedCategories;
+  KAccountsView       *q_ptr;
+  Ui::KAccountsView   *ui;
+  bool                m_haveUnusedCategories;
 };
 
 #endif

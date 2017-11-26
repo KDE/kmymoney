@@ -69,7 +69,7 @@ public:
     // virtual void x();
   };
 
-  KOnlineBankingSetupWizard(QWidget *parent = 0);
+  explicit KOnlineBankingSetupWizard(QWidget *parent = 0);
   ~KOnlineBankingSetupWizard();
 
   bool chosenSettings(MyMoneyKeyValueContainer& settings);

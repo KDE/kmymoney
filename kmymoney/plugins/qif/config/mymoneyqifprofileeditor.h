@@ -43,7 +43,7 @@ class MyMoneyQifProfileNameValidator : public QValidator
   Q_OBJECT
 
 public:
-  MyMoneyQifProfileNameValidator(QObject* o);
+  explicit MyMoneyQifProfileNameValidator(QObject* o);
   virtual ~MyMoneyQifProfileNameValidator();
 
   QValidator::State validate(QString&, int&) const;

@@ -35,7 +35,7 @@ class ibanBicItemEdit : public QWidget
   Q_PROPERTY(QString bic READ bic WRITE setBic NOTIFY bicChanged STORED false DESIGNABLE true)
 
 public:
-  ibanBicItemEdit(QWidget* parent = 0);
+  explicit ibanBicItemEdit(QWidget* parent = 0);
 
   payeeIdentifier identifier() const;
   QString iban() const;

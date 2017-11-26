@@ -77,14 +77,14 @@ public:
     *
     * @param accountid Account which this account descriptor should be based off of
     */
-  ReportAccount(const QString& accountid);
+  explicit ReportAccount(const QString& accountid);
 
   /**
     * Regular constructor
     *
     * @param accountid Account which this account descriptor should be based off of
     */
-  ReportAccount(const MyMoneyAccount& accountid);
+  explicit ReportAccount(const MyMoneyAccount& accountid);
 
   /**
     * @param right The object to compare against

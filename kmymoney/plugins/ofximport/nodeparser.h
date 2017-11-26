@@ -25,9 +25,9 @@ class NodeParser: public xmlpp::Node::NodeList
 {
 public:
   NodeParser(void) {}
-  NodeParser(const xmlpp::Node::NodeList&);
-  NodeParser(const xmlpp::Node*);
-  NodeParser(const xmlpp::DomParser&);
+  explicit NodeParser(const xmlpp::Node::NodeList&);
+  explicit NodeParser(const xmlpp::Node*);
+  explicit NodeParser(const xmlpp::DomParser&);
 
   NodeParser Path(const std::string& path) const;
   NodeParser Select(const std::string& key, const std::string& value) const;

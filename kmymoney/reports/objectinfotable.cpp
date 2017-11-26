@@ -159,7 +159,7 @@ void ObjectInfoTable::constructScheduleTable()
   while (it_schedule != schedules.constEnd()) {
     MyMoneySchedule schedule = *it_schedule;
 
-    ReportAccount account = schedule.account();
+    ReportAccount account(schedule.account());
 
     if (m_config.includes(account))  {
       //get fraction for account
@@ -207,7 +207,7 @@ void ObjectInfoTable::constructScheduleTable()
         QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();
         for (; split_it != splits.constEnd(); ++split_it) {
           TableRow splitRow;
-          ReportAccount splitAcc = (*split_it).accountId();
+          ReportAccount splitAcc((*split_it).accountId());
 
           splitRow[ctRank] = QLatin1Char('1');
           splitRow[ctID] = schedule.id();
@@ -255,7 +255,7 @@ void ObjectInfoTable::constructAccountTable()
   QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
   while (it_account != accounts.constEnd()) {
     TableRow accountRow;
-    ReportAccount account = *it_account;
+    ReportAccount account(*it_account);
 
     if (m_config.includes(account)
         && account.accountType() != eMyMoney::Account::Type::Stock
@@ -308,7 +308,7 @@ void ObjectInfoTable::constructAccountLoanTable()
   QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
   while (it_account != accounts.constEnd()) {
     TableRow accountRow;
-    ReportAccount account = *it_account;
+    ReportAccount account(*it_account);
     MyMoneyAccountLoan loan = *it_account;
 
     if (m_config.includes(account) && account.isLoan() && !account.isClosed()) {

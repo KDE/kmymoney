@@ -178,7 +178,7 @@ public:
     * @param storage pointer to object that implements the IMyMoneyStorage
     *                interface.
     */
-  MyMoneyFile(IMyMoneyStorage *storage);
+  explicit MyMoneyFile(IMyMoneyStorage *storage);
 
   // general get functions
   const MyMoneyPayee& user() const;

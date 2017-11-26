@@ -58,8 +58,8 @@ class TransactionEditorPrivate
   Q_DECLARE_PUBLIC(TransactionEditor)
 
 public:
-  TransactionEditorPrivate(TransactionEditor *qq) :
-  q_ptr(qq)
+  explicit TransactionEditorPrivate(TransactionEditor *qq) :
+    q_ptr(qq)
   {
   }
 

@@ -37,7 +37,7 @@ class LedgerView;
 class LedgerSeperator
 {
 public:
-  LedgerSeperator(eLedgerModel::Role role) : m_role(role) {}
+  explicit LedgerSeperator(eLedgerModel::Role role) : m_role(role) {}
   virtual ~LedgerSeperator() {}
 
   virtual bool rowHasSeperator(const QModelIndex& index) const = 0;

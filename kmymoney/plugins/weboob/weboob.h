@@ -81,7 +81,7 @@ public:
     QList<Transaction> transactions;
   };
 
-  Weboob(QObject* parent = 0);
+  explicit Weboob(QObject* parent = 0);
 
   ~Weboob();
 

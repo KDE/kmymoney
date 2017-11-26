@@ -26,7 +26,7 @@ class charValidator : public QValidator
   Q_OBJECT
 
 public:
-  charValidator(QObject* parent = 0, const QString& characters = QString());
+  explicit charValidator(QObject* parent = 0, const QString& characters = QString());
   virtual QValidator::State validate(QString& , int&) const;
 
   void setAllowedCharacters(const QString&);

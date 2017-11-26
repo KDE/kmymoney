@@ -36,7 +36,7 @@ class HierarchyFilterProxyModel : public AccountsProxyModel
   Q_OBJECT
 
 public:
-  HierarchyFilterProxyModel(QObject *parent = nullptr);
+  explicit HierarchyFilterProxyModel(QObject *parent = nullptr);
 
   Qt::ItemFlags flags(const QModelIndex &index) const override;
 

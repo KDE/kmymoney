@@ -40,7 +40,7 @@ class DateRangeDlgPrivate
   Q_DECLARE_PUBLIC(DateRangeDlg)
 
 public:
-  DateRangeDlgPrivate(DateRangeDlg *qq) :
+  explicit DateRangeDlgPrivate(DateRangeDlg *qq) :
     q_ptr(qq),
     ui(new Ui::DateRangeDlg)
   {

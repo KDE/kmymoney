@@ -99,7 +99,7 @@ private:
 class MyMoneyOfxConnector
 {
 public:
-  MyMoneyOfxConnector(const MyMoneyAccount& _account);
+  explicit MyMoneyOfxConnector(const MyMoneyAccount& _account);
   QString url() const;
 
   /**

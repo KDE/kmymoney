@@ -57,7 +57,7 @@ class gwenKdeGuiTanResult : public QObject
   Q_OBJECT
 
 public:
-  gwenKdeGuiTanResult(QObject* parent = nullptr)
+  explicit gwenKdeGuiTanResult(QObject* parent = nullptr)
       : QObject(parent),
       m_tan(QString()),
       m_aborted(false)

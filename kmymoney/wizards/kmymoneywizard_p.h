@@ -55,7 +55,7 @@ class KMyMoneyWizardPrivate
   Q_DECLARE_PUBLIC(KMyMoneyWizard)
 
 public:
-  KMyMoneyWizardPrivate(KMyMoneyWizard *qq) :
+  explicit KMyMoneyWizardPrivate(KMyMoneyWizard *qq) :
     q_ptr(qq),
     m_step(0)
   {

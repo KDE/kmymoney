@@ -30,7 +30,7 @@ public:
   /** Ctor, initializes the match finder
    * @param matchWindow max number of days the transactions may vary and still be considered to be matching
    */
-  ExistingTransactionMatchFinder(int matchWindow = 3);
+  explicit ExistingTransactionMatchFinder(int matchWindow = 3);
 
 protected:
   typedef QPair<MyMoneyTransaction, MyMoneySplit> TransactionAndSplitPair;

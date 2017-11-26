@@ -42,7 +42,7 @@ class KGncImportOptionsDlgPrivate
   Q_DECLARE_PUBLIC(KGncImportOptionsDlg)
 
 public:
-  KGncImportOptionsDlgPrivate(KGncImportOptionsDlg *qq) :
+  explicit KGncImportOptionsDlgPrivate(KGncImportOptionsDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KGncImportOptionsDlg),
     m_localeCodec(nullptr)

@@ -106,7 +106,7 @@ class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {
   Q_OBJECT
 public:
-  Plugin(QObject* parent = nullptr, const char* name = "");
+  explicit Plugin(QObject* parent = nullptr, const char* name = "");
   virtual ~Plugin();
 
 public slots:

@@ -35,8 +35,9 @@ class KWebView;
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
   Q_OBJECT
+
 public:
-  PluginSettingsWidget(QWidget* parent = 0);
+  explicit PluginSettingsWidget(QWidget* parent = 0);
 
 public slots:
   void urlSelected(const QUrl &url);

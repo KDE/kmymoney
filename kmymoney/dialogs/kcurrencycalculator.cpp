@@ -61,13 +61,13 @@ class KCurrencyCalculatorPrivate
   Q_DECLARE_PUBLIC(KCurrencyCalculator)
 
 public:
-  KCurrencyCalculatorPrivate(KCurrencyCalculator *qq,
-                             const MyMoneySecurity& from,
-                             const MyMoneySecurity& to,
-                             const MyMoneyMoney& value,
-                             const MyMoneyMoney& shares,
-                             const QDate& date,
-                             const signed64 resultFraction) :
+  explicit KCurrencyCalculatorPrivate(KCurrencyCalculator *qq,
+                                      const MyMoneySecurity& from,
+                                      const MyMoneySecurity& to,
+                                      const MyMoneyMoney& value,
+                                      const MyMoneyMoney& shares,
+                                      const QDate& date,
+                                      const signed64 resultFraction) :
     q_ptr(qq),
     ui(new Ui::KCurrencyCalculator),
     m_fromCurrency(from),

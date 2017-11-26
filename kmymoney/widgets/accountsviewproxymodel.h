@@ -48,7 +48,7 @@ class AccountsViewProxyModel : public AccountsProxyModel
   Q_OBJECT
 
 public:
-  AccountsViewProxyModel(QObject *parent = nullptr);
+  explicit AccountsViewProxyModel(QObject *parent = nullptr);
   ~AccountsViewProxyModel();
 
   void setColumnVisibility(eAccountsModel::Column column, bool visible);

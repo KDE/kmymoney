@@ -58,7 +58,7 @@ public:
     TypeAll        = 0x03
   };
 
-  KMyMoneySecuritySelectorPrivate(KMyMoneySecuritySelector *qq):
+  explicit KMyMoneySecuritySelectorPrivate(KMyMoneySecuritySelector *qq):
     q_ptr(qq),
     m_displayItem(FullName),
     m_selectedItemId(0),

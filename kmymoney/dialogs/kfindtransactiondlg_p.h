@@ -77,7 +77,7 @@ public:
     addTagToFilter
   };
 
-  KFindTransactionDlgPrivate(KFindTransactionDlg *qq) :
+  explicit KFindTransactionDlgPrivate(KFindTransactionDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KFindTransactionDlg)
   {

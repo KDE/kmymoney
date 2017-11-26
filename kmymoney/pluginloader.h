@@ -38,7 +38,7 @@ class PluginLoader : public QObject
 {
   Q_OBJECT
 public:
-  PluginLoader(QObject* parent);
+  explicit PluginLoader(QObject* parent);
 
 
   /**

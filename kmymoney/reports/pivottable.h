@@ -72,7 +72,7 @@ public:
     *
     * @param _report The configuration parameters for this report
     */
-  PivotTable(const MyMoneyReport& _report);
+  explicit PivotTable(const MyMoneyReport& _report);
 
   /**
     * virtual Destructur

@@ -14,7 +14,6 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #ifndef TRANSACTIONMATCHFINDER_H
 #define TRANSACTIONMATCHFINDER_H
 
@@ -40,7 +39,7 @@ public:
   /** Initializes the match finder.
    * @param matchWindow max number of days the transactions may vary and still be considered to be matching
    */
-  TransactionMatchFinder(int matchWindow);
+  explicit TransactionMatchFinder(int matchWindow);
   virtual ~TransactionMatchFinder();
 
   /** Searches for a matching transaction. See derived classes to learn where the transaction is looked for.

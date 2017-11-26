@@ -120,7 +120,7 @@ public:
   class badCast : public exception
   {
   public:
-    badCast(const QString& file = "", const long unsigned int& line = 0)
+    explicit badCast(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Casted payeeIdentifier with wrong type", file, line)
     {
       Q_UNUSED(file); Q_UNUSED(line);
@@ -134,7 +134,7 @@ public:
   class empty : public exception
   {
   public:
-    empty(const QString& file = "", const long unsigned int& line = 0)
+    explicit empty(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Requested payeeIdentifierData of empty payeeIdentifier", file, line)
     {
       Q_UNUSED(file); Q_UNUSED(line);

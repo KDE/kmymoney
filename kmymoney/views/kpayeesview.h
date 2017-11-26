@@ -76,7 +76,7 @@ class KPayeesView : public QWidget, private Ui::KPayeesViewDecl
   Q_OBJECT
 
 public:
-  KPayeesView(QWidget *parent = 0);
+  explicit KPayeesView(QWidget *parent = 0);
   ~KPayeesView();
 
   void setDefaultFocus();

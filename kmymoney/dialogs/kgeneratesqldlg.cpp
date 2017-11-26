@@ -61,7 +61,7 @@ class KGenerateSqlDlgPrivate
   Q_DECLARE_PUBLIC(KGenerateSqlDlg)
 
 public:
-  KGenerateSqlDlgPrivate(KGenerateSqlDlg *qq) :
+  explicit KGenerateSqlDlgPrivate(KGenerateSqlDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KGenerateSqlDlg)
   {

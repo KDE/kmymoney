@@ -66,7 +66,7 @@ class KMyMoneyPriceDlgPrivate
   Q_DECLARE_PUBLIC(KMyMoneyPriceDlg)
 
 public:
-  KMyMoneyPriceDlgPrivate(KMyMoneyPriceDlg *qq) :
+  explicit KMyMoneyPriceDlgPrivate(KMyMoneyPriceDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KMyMoneyPriceDlg),
     m_searchWidget(nullptr)

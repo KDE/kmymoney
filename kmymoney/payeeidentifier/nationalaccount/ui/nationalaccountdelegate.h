@@ -28,7 +28,7 @@ class nationalAccountDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 public:
-  nationalAccountDelegate(QObject* parent, const QVariantList& options = QVariantList());
+  explicit nationalAccountDelegate(QObject* parent, const QVariantList& options = QVariantList());
 
   virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;

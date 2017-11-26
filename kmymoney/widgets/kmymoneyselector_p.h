@@ -42,8 +42,7 @@ class KMyMoneySelectorPrivate
   Q_DECLARE_PUBLIC(KMyMoneySelector)
 
 public:
-
-  KMyMoneySelectorPrivate(KMyMoneySelector *qq) :
+  explicit KMyMoneySelectorPrivate(KMyMoneySelector *qq) :
     q_ptr(qq),
     m_treeWidget(nullptr),
     m_layout(nullptr)

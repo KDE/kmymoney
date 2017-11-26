@@ -65,8 +65,7 @@ class KNewAccountDlgPrivate
   Q_DECLARE_PUBLIC(KNewAccountDlg)
 
 public:
-
-  KNewAccountDlgPrivate(KNewAccountDlg *qq) :
+  explicit KNewAccountDlgPrivate(KNewAccountDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KNewAccountDlg)
   {

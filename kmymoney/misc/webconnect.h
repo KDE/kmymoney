@@ -27,7 +27,7 @@ class WebConnect : public QObject
 {
     Q_OBJECT
 public:
-    WebConnect(QObject* parent);
+    explicit WebConnect(QObject* parent);
     virtual ~WebConnect();
 
     bool isClient() const;

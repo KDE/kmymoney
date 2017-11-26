@@ -63,7 +63,7 @@ class AccountsProxyModel : public KRecursiveFilterProxyModel
   Q_OBJECT
 
 public:
-  AccountsProxyModel(QObject *parent = nullptr);
+  explicit AccountsProxyModel(QObject *parent = nullptr);
   ~AccountsProxyModel();
 
   void addAccountType(eMyMoney::Account::Type type);

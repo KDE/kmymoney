@@ -3686,8 +3686,8 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
       MyMoneySecurity sec = security(acc.currencyId());
       fraction = acc.fraction(sec);
     }
-    (*its).setShares((*its).shares().convertDenominator(fraction).canonicalize());
-    (*its).setValue((*its).value().convertDenominator(transactionFraction).canonicalize());
+    (*its).setShares(static_cast<const MyMoneyMoney>((*its).shares().convertDenominator(fraction).canonicalize()));
+    (*its).setValue(static_cast<const MyMoneyMoney>((*its).value().convertDenominator(transactionFraction).canonicalize()));
   }
 }
 

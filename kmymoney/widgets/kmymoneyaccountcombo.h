@@ -56,7 +56,7 @@ template <class baseProxyModel>
 class AccountNamesFilterProxyModelTpl : public baseProxyModel
 {
 public:
-  AccountNamesFilterProxyModelTpl(QObject *parent = 0);
+  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0);
 
   virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
@@ -76,7 +76,7 @@ class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<Acco
 {
   Q_OBJECT
 public:
-  AccountNamesFilterProxyModel(QObject* parent = 0)
+  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
       : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
 };
 

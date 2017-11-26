@@ -45,9 +45,9 @@ class MyQWebEnginePage : public KWebPage
 
 public:
 #ifdef ENABLE_WEBENGINE
-  MyQWebEnginePage(QObject* parent = nullptr) : QWebEnginePage(parent){}
+  explicit MyQWebEnginePage(QObject* parent = nullptr) : QWebEnginePage(parent){}
 #else
-  MyQWebEnginePage(QObject* parent = nullptr) : KWebPage(parent){}
+  explicit MyQWebEnginePage(QObject* parent = nullptr) : KWebPage(parent){}
 #endif
 
 protected:

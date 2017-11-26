@@ -175,7 +175,7 @@ void PivotTable::init()
     file->accountList(accounts);
     foreach (const auto acc, accounts) {
       if (acc.isInvest()) {
-        const ReportAccount repAcc = acc;
+        const ReportAccount repAcc(acc);
         if (m_config.includes(repAcc)) {
           const auto outergroup = acc.accountTypeToString(acc.accountType());
           assignCell(outergroup, repAcc, 0, MyMoneyMoney(), false, false);    // add account stub
@@ -274,7 +274,7 @@ void PivotTable::init()
         MyMoneySchedule sched = file->schedule(tx.value("kmm-schedule-id"));
         const MyMoneySplit& split = tx.amortizationSplit();
         if (!split.id().isEmpty()) {
-          ReportAccount splitAccount = file->account(split.accountId());
+          ReportAccount splitAccount(file->account(split.accountId()));
           eMyMoney::Account::Type type = splitAccount.accountGroup();
           QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
@@ -311,7 +311,7 @@ void PivotTable::init()
       QList<MyMoneySplit> splits = tx.splits();
       QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
       while (it_split != splits.constEnd()) {
-        ReportAccount splitAccount = (*it_split).accountId();
+        ReportAccount splitAccount((*it_split).accountId());
 
         // Each split must be further filtered, because if even one split matches,
         // the ENTIRE transaction is returned with all splits (even non-matching ones)
@@ -607,7 +607,7 @@ void PivotTable::createAccountRows()
   QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
 
   while (it_account != accounts.constEnd()) {
-    ReportAccount account = *it_account;
+    ReportAccount account(*it_account);
 
     // only include this item if its account group is included in this report
     // and if the report includes this account
@@ -645,7 +645,7 @@ void PivotTable::calculateOpeningBalances()
   QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
 
   while (it_account != accounts.constEnd()) {
-    ReportAccount account = *it_account;
+    ReportAccount account(*it_account);
 
     // only include this item if its account group is included in this report
     // and if the report includes this account
@@ -753,7 +753,7 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
     if (newrow.isEmpty())
       return MyMoneyMoney();
 
-    row = newrow;
+    row = ReportAccount(newrow);
   }
 
   // ensure the row already exists (and its parental hierarchy)
@@ -886,7 +886,7 @@ void PivotTable::calculateBudgetMapping()
     QList<MyMoneyBudget::AccountGroup> baccounts = budget.getaccounts();
     QList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.constBegin();
     while (it_bacc != baccounts.constEnd()) {
-      ReportAccount splitAccount = (*it_bacc).id();
+      ReportAccount splitAccount((*it_bacc).id());
 
       //include the budget account only if it is included in the report
       if (m_config.includes(splitAccount)) {
@@ -1015,7 +1015,7 @@ void PivotTable::convertToBaseCurrency()
 
             //convert to lowest fraction
             if (rowType == ePrice)
-              it_row.value()[rowType][column] = PivotCell(value.convertPrecision(pricePrecision));
+              it_row.value()[rowType][column] = PivotCell(MyMoneyMoney(value.convertPrecision(pricePrecision)));
             else
               it_row.value()[rowType][column] = PivotCell(value.convert(fraction));
 
@@ -1231,7 +1231,7 @@ void PivotTable::assignCell(const QString& outergroup, const ReportAccount& _row
     if (newrow.isEmpty())
       return;
 
-    row = newrow;
+    row = ReportAccount(newrow);
   }
 
   // ensure the row already exists (and its parental hierarchy)
@@ -1973,14 +1973,14 @@ void PivotTable::calculateBudgetDiff()
           case eMyMoney::Account::Type::Income:
           case eMyMoney::Account::Type::Asset:
             while (column < m_numColumns) {
-              it_row.value()[eBudgetDiff][column] = it_row.value()[eActual][column] - it_row.value()[eBudget][column];
+              it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eActual][column] - it_row.value()[eBudget][column]);
               ++column;
             }
             break;
           case eMyMoney::Account::Type::Expense:
           case eMyMoney::Account::Type::Liability:
             while (column < m_numColumns) {
-              it_row.value()[eBudgetDiff][column] = it_row.value()[eBudget][column] - it_row.value()[eActual][column];
+              it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eBudget][column] - it_row.value()[eActual][column]);
               ++column;
             }
             break;
@@ -2041,7 +2041,7 @@ void PivotTable::calculateForecast()
         //check whether columns are days or months
         if (m_config.isColumnsAreDays()) {
           while (column < m_numColumns) {
-            it_row.value()[eForecast][column] = forecast.forecastBalance(it_row.key(), forecastDate);
+            it_row.value()[eForecast][column] = PivotCell(forecast.forecastBalance(it_row.key(), forecastDate));
 
             forecastDate = forecastDate.addDays(1);
             ++column;
@@ -2056,7 +2056,7 @@ void PivotTable::calculateForecast()
               forecastDate = m_endDate;
 
             //get forecast balance and set the corresponding column
-            it_row.value()[eForecast][column] = forecast.forecastBalance(it_row.key(), forecastDate);
+            it_row.value()[eForecast][column] = PivotCell(forecast.forecastBalance(it_row.key(), forecastDate));
 
             forecastDate = forecastDate.addMonths(1);
             ++column;
@@ -2149,7 +2149,7 @@ void PivotTable::calculateMovingAverage()
 
             //get the actual value, multiply by the average price and save that value
             MyMoneyMoney averageValue = it_row.value()[eActual][column] * averagePrice;
-            it_row.value()[eAverage][column] = averageValue.convert(10000);
+            it_row.value()[eAverage][column] = PivotCell(averageValue.convert(10000));
 
             ++column;
           }
@@ -2200,7 +2200,7 @@ void PivotTable::calculateMovingAverage()
             MyMoneyMoney averageValue = it_row.value()[eActual][column] * averagePrice;
 
             //fill in the average
-            it_row.value()[eAverage][column] = averageValue.convert(10000);
+            it_row.value()[eAverage][column] = PivotCell(averageValue.convert(10000));
 
             ++column;
           }
@@ -2247,7 +2247,7 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
           //only add the dummy value if there is a price for that date
           if (firstPriceExists) {
             //insert a unit of currency for each account
-            it_row.value()[rowType][column] = MyMoneyMoney::ONE;
+            it_row.value()[rowType][column] = PivotCell(MyMoneyMoney::ONE);
           }
           ++column;
         }

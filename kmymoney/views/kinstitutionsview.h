@@ -45,7 +45,7 @@ class KInstitutionsView : public KMyMoneyAccountsViewBase
   Q_OBJECT
 
 public:
-  KInstitutionsView(QWidget *parent = nullptr);
+  explicit KInstitutionsView(QWidget *parent = nullptr);
   ~KInstitutionsView();
 
   void setDefaultFocus() override;

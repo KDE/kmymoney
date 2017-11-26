@@ -44,7 +44,7 @@ class LedgerModel : public QAbstractTableModel
   Q_OBJECT
 
 public:
-  LedgerModel(QObject* parent = nullptr);
+  explicit LedgerModel(QObject* parent = nullptr);
   virtual ~LedgerModel();
 
   int rowCount(const QModelIndex& parent = QModelIndex()) const override;

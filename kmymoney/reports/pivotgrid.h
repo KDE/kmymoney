@@ -69,7 +69,7 @@ class PivotCell: public MyMoneyMoney
 
 public:
   PivotCell() : m_stockSplit(MyMoneyMoney::ONE), m_cellUsed(false) {}
-  PivotCell(const MyMoneyMoney& value);
+  explicit PivotCell(const MyMoneyMoney& value);
   virtual ~PivotCell();
   static PivotCell stockSplit(const MyMoneyMoney& factor);
   PivotCell operator += (const PivotCell& right);
@@ -90,7 +90,7 @@ class PivotGridRow: public QList<PivotCell>
 {
 public:
 
-  PivotGridRow(unsigned _numcolumns = 0) {
+  explicit PivotGridRow(unsigned _numcolumns = 0) {
     for (uint i = 0; i < _numcolumns; i++)
       append(PivotCell());
   }
@@ -100,13 +100,13 @@ public:
 class PivotGridRowSet: public QMap<ERowType, PivotGridRow>
 {
 public:
-  PivotGridRowSet(unsigned _numcolumns = 0);
+  explicit PivotGridRowSet(unsigned _numcolumns = 0);
 };
 
 class PivotInnerGroup: public QMap<ReportAccount, PivotGridRowSet>
 {
 public:
-  PivotInnerGroup(unsigned _numcolumns = 0): m_total(_numcolumns) {}
+  explicit PivotInnerGroup(unsigned _numcolumns = 0): m_total(_numcolumns) {}
 
   PivotGridRowSet m_total;
 };

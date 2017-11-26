@@ -92,7 +92,7 @@ class KCurrencyEditDlgPrivate
   Q_DECLARE_PUBLIC(KCurrencyEditDlg)
 
 public:
-  KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq) :
+  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KCurrencyEditDlg)
   {

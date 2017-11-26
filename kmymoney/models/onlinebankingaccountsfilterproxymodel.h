@@ -26,7 +26,7 @@ class OnlineBankingAccountsFilterProxyModel : public QSortFilterProxyModel
   Q_OBJECT
 
 public:
-  OnlineBankingAccountsFilterProxyModel(QObject* parent = 0);
+  explicit OnlineBankingAccountsFilterProxyModel(QObject* parent = 0);
   
   /**
    * @brief Makes accounts which do not support any onlineJob non-selectable

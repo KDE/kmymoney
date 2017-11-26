@@ -52,7 +52,7 @@ class KForecastView : public QWidget, private Ui::KForecastViewDecl
 public:
   enum EForecastViewType { eSummary = 0, eDetailed, eAdvanced, eBudget, eUndefined };
 
-  KForecastView(QWidget *parent = 0);
+  explicit KForecastView(QWidget *parent = 0);
   virtual ~KForecastView();
 
   void setDefaultFocus();

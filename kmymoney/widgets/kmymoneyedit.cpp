@@ -89,7 +89,7 @@ class KMyMoneyEditPrivate
   Q_DECLARE_PUBLIC(KMyMoneyEdit)
 
 public:
-  KMyMoneyEditPrivate(KMyMoneyEdit *qq) :
+  explicit KMyMoneyEditPrivate(KMyMoneyEdit *qq) :
     q_ptr(qq)
   {
   }

@@ -28,7 +28,7 @@ class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
   Q_OBJECT
 public:
-  PluginSettingsWidget(QWidget* parent = 0);
+  explicit PluginSettingsWidget(QWidget* parent = 0);
 
 public slots:
 
@@ -38,7 +38,7 @@ private:
 class KCMcsvimport : public KCModule
 {
 public:
-  KCMcsvimport(QWidget* parent, const QVariantList& args);
+  explicit KCMcsvimport(QWidget* parent, const QVariantList& args);
   ~KCMcsvimport();
 };
 

@@ -47,8 +47,7 @@ class KNewInvestmentWizardPrivate
   Q_DECLARE_PUBLIC(KNewInvestmentWizard)
 
 public:
-
-  KNewInvestmentWizardPrivate(KNewInvestmentWizard *qq) :
+  explicit KNewInvestmentWizardPrivate(KNewInvestmentWizard *qq) :
     q_ptr(qq),
     ui(new Ui::KNewInvestmentWizard)
   {

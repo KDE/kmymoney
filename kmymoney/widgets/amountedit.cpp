@@ -52,7 +52,7 @@ class AmountEditPrivate
   Q_DECLARE_PUBLIC(AmountEdit)
 
 public:
-  AmountEditPrivate(AmountEdit* qq) :
+  explicit AmountEditPrivate(AmountEdit* qq) :
     q_ptr(qq),
     m_allowEmpty(false)
   {

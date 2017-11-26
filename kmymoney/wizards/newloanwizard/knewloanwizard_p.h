@@ -66,7 +66,7 @@ class KNewLoanWizardPrivate
   Q_DECLARE_PUBLIC(KNewLoanWizard)
 
 public:
-  KNewLoanWizardPrivate(KNewLoanWizard *qq) :
+  explicit KNewLoanWizardPrivate(KNewLoanWizard *qq) :
     q_ptr(qq),
     ui(new Ui::KNewLoanWizard)
   {

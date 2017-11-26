@@ -83,12 +83,12 @@ public:
 
   // copy constructor
   MyMoneyMoney(const MyMoneyMoney& Amount);
-  MyMoneyMoney(const AlkValue& Amount);
+  explicit MyMoneyMoney(const AlkValue& Amount);
 
   virtual ~MyMoneyMoney();
 
   const MyMoneyMoney abs() const {
-    return AlkValue::abs();
+    return static_cast<const MyMoneyMoney>(AlkValue::abs());
   };
 
   /**
@@ -443,7 +443,7 @@ inline bool MyMoneyMoney::operator!=(const QString& pszAmount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline const MyMoneyMoney MyMoneyMoney::operator-() const
 {
-  return AlkValue::operator-();
+  return static_cast<const MyMoneyMoney>(AlkValue::operator-());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -456,7 +456,7 @@ inline const MyMoneyMoney MyMoneyMoney::operator-() const
 ////////////////////////////////////////////////////////////////////////////////
 inline const MyMoneyMoney MyMoneyMoney::operator*(int factor) const
 {
-  return AlkValue::operator*(factor);
+  return static_cast<const MyMoneyMoney>(AlkValue::operator*(factor));
 }
 
 /**

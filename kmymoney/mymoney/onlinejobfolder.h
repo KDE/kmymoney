@@ -32,7 +32,7 @@
 class onlineJobFolder
 {
 public:
-  inline onlineJobFolder(const onlineJobFolder &other)
+  inline onlineJobFolder(const onlineJobFolder &other) // krazy:exclude=explicit
       : m_folder(other.m_folder) {}
 
   static onlineJobFolder outbox() {
@@ -57,7 +57,7 @@ private:
   };
 
   onlineJobFolder();
-  onlineJobFolder(const onlineJobFolders& folder);
+  explicit onlineJobFolder(const onlineJobFolders& folder);
 
   onlineJobFolders m_folder;
 };

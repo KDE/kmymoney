@@ -72,7 +72,7 @@ class Debug
   bool m_enabled;
   static QString m_sEnableKey;
 public:
-  Debug(const QString& _name);
+  explicit Debug(const QString& _name);
   ~Debug();
   void output(const QString& _text);
   static void enable(bool _e) {

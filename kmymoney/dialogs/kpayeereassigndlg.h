@@ -52,7 +52,7 @@ public:
   };
 
   /** Default constructor */
-  KPayeeReassignDlg(OperationType type, QWidget* parent = nullptr);
+  explicit KPayeeReassignDlg(OperationType type, QWidget* parent = nullptr);
 
   /** Destructor */
   ~KPayeeReassignDlg();

@@ -37,7 +37,7 @@ class CreditDebitHelperPrivate
   Q_DECLARE_PUBLIC(CreditDebitHelper)
 
 public:
-  CreditDebitHelperPrivate(CreditDebitHelper *qq) :
+  explicit CreditDebitHelperPrivate(CreditDebitHelper *qq) :
     q_ptr(qq)
   {
   }

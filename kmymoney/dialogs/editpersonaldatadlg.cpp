@@ -39,7 +39,7 @@ class EditPersonalDataDlgPrivate
   Q_DECLARE_PUBLIC(EditPersonalDataDlg)
 
 public:
-  EditPersonalDataDlgPrivate(EditPersonalDataDlg *qq) :
+  explicit EditPersonalDataDlgPrivate(EditPersonalDataDlg *qq) :
     q_ptr(qq),
     ui(new Ui::EditPersonalDataDlg)
   {

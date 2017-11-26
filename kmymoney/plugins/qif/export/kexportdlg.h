@@ -56,7 +56,7 @@
 class KExportDlgDecl : public QDialog, public Ui::KExportDlgDecl
 {
 public:
-  KExportDlgDecl(QWidget *parent) : QDialog(parent) {
+  explicit KExportDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
@@ -66,7 +66,7 @@ class KExportDlg : public KExportDlgDecl
   Q_OBJECT
 
 public:
-  KExportDlg(QWidget *parent);
+  explicit KExportDlg(QWidget *parent);
   ~KExportDlg();
 
   /**

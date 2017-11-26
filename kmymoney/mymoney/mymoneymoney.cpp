@@ -246,7 +246,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
 ////////////////////////////////////////////////////////////////////////////////
 const MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
 {
-  return AlkValue::operator+(_b);
+  return static_cast<const MyMoneyMoney>(AlkValue::operator+(_b));
 }
 
 
@@ -260,7 +260,7 @@ const MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
 ////////////////////////////////////////////////////////////////////////////////
 const MyMoneyMoney MyMoneyMoney::operator-(const MyMoneyMoney& _b) const
 {
-  return AlkValue::operator-(_b);
+  return static_cast<const MyMoneyMoney>(AlkValue::operator-(_b));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -273,7 +273,7 @@ const MyMoneyMoney MyMoneyMoney::operator-(const MyMoneyMoney& _b) const
 ////////////////////////////////////////////////////////////////////////////////
 const MyMoneyMoney MyMoneyMoney::operator*(const MyMoneyMoney& _b) const
 {
-  return AlkValue::operator*(_b);
+  return static_cast<const MyMoneyMoney>(AlkValue::operator*(_b));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -286,13 +286,13 @@ const MyMoneyMoney MyMoneyMoney::operator*(const MyMoneyMoney& _b) const
 ////////////////////////////////////////////////////////////////////////////////
 const MyMoneyMoney MyMoneyMoney::operator/(const MyMoneyMoney& _b) const
 {
-  return AlkValue::operator/(_b);
+  return static_cast<const MyMoneyMoney>(AlkValue::operator/(_b));
 }
 
 
 MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMethod how) const
 {
-  return convertDenominator(_denom, static_cast<RoundingMethod>(how));
+  return static_cast<const MyMoneyMoney>(convertDenominator(_denom, static_cast<RoundingMethod>(how)));
 }
 
 MyMoneyMoney MyMoneyMoney::reduce() const

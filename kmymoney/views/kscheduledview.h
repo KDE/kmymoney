@@ -55,7 +55,7 @@ public:
   /**
     * Standard constructor for QWidgets.
     */
-  KScheduledView(QWidget *parent = 0);
+  explicit KScheduledView(QWidget *parent = 0);
 
   /**
     * Standard destructor.

@@ -28,7 +28,7 @@ class KMyMoneyTextEditPrivate
   Q_DECLARE_PUBLIC(KMyMoneyTextEdit)
 
 public:
-  KMyMoneyTextEditPrivate(KMyMoneyTextEdit *qq) :
+  explicit KMyMoneyTextEditPrivate(KMyMoneyTextEdit *qq) :
     q_ptr(qq),
     m_maxLength(-1),
     m_maxLineLength(-1),

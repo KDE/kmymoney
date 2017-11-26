@@ -53,7 +53,7 @@ class KMyMoneyAccountTreeViewPrivate
   Q_DECLARE_PUBLIC(KMyMoneyAccountTreeView)
 
 public:
-  KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq) :
+  explicit KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq) :
     q_ptr(qq),
     m_view(View::None)
   {

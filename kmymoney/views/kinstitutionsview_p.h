@@ -36,41 +36,40 @@
 using namespace Icons;
 
 namespace Ui {
-    class KInstitutionsView;
+  class KInstitutionsView;
 }
 class KInstitutionsViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
-    Q_DECLARE_PUBLIC(KInstitutionsView)
+  Q_DECLARE_PUBLIC(KInstitutionsView)
 
 public:
+  explicit KInstitutionsViewPrivate(KInstitutionsView *qq) :
+    q_ptr(qq),
+    ui(new Ui::KInstitutionsView)
+  {
+  }
 
-    KInstitutionsViewPrivate(KInstitutionsView *qq) :
-        q_ptr(qq),
-        ui(new Ui::KInstitutionsView)
-    {
-    }
+  ~KInstitutionsViewPrivate()
+  {
+  }
 
-    ~KInstitutionsViewPrivate()
-    {
-    }
+  void init()
+  {
+    Q_Q(KInstitutionsView);
+    ui->setupUi(q);
+    m_accountTree = &ui->m_accountTree;
 
-    void init()
-    {
-        Q_Q(KInstitutionsView);
-        ui->setupUi(q);
-        m_accountTree = &ui->m_accountTree;
+    // setup icons for collapse and expand button
+    ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+    ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
 
-        // setup icons for collapse and expand button
-        ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
-        ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
+    // the proxy filter model
+    m_proxyModel = ui->m_accountTree->init(View::Institutions);
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+  }
 
-        // the proxy filter model
-        m_proxyModel = ui->m_accountTree->init(View::Institutions);
-        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    }
-
-    KInstitutionsView       *q_ptr;
-    Ui::KInstitutionsView   *ui;
+  KInstitutionsView       *q_ptr;
+  Ui::KInstitutionsView   *ui;
 };
 
 #endif

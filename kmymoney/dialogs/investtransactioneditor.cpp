@@ -1195,13 +1195,13 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
     // assuming that all non-stock splits are monetary
     foreach (auto split, resultSplits) {
       split.clearId();
-      split.setShares(split.shares().convertDenominator(currencyFraction, roundingMethod));
-      split.setValue(split.value().convertDenominator(currencyFraction, roundingMethod));
+      split.setShares(MyMoneyMoney(split.shares().convertDenominator(currencyFraction, roundingMethod)));
+      split.setValue(MyMoneyMoney(split.value().convertDenominator(currencyFraction, roundingMethod)));
       t.addSplit(split);
     }
 
-    s0.setShares(s0.shares().convertDenominator(securityFraction, roundingMethod)); // only shares variable from stock split isn't evaluated in currency
-    s0.setValue(s0.value().convertDenominator(currencyFraction, roundingMethod));
+    s0.setShares(MyMoneyMoney(s0.shares().convertDenominator(securityFraction, roundingMethod))); // only shares variable from stock split isn't evaluated in currency
+    s0.setValue(MyMoneyMoney(s0.value().convertDenominator(currencyFraction, roundingMethod)));
     t.addSplit(s0);
   }
 

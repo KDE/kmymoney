@@ -65,7 +65,7 @@ class KEditScheduleDlgPrivate
   Q_DECLARE_PUBLIC(KEditScheduleDlg)
 
 public:
-  KEditScheduleDlgPrivate(KEditScheduleDlg *qq) :
+  explicit KEditScheduleDlgPrivate(KEditScheduleDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KEditScheduleDlg)
   {

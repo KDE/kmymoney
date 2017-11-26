@@ -53,7 +53,7 @@ class ReportAccount;
 class ObjectInfoTable : public ListTable
 {
 public:
-  ObjectInfoTable(const MyMoneyReport&);
+  explicit ObjectInfoTable(const MyMoneyReport&);
   void init();
 
 protected:

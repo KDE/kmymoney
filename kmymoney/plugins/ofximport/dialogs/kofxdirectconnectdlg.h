@@ -46,7 +46,7 @@ class TransferJob;
 class KOfxDirectConnectDlgDecl : public QDialog, public Ui::KOfxDirectConnectDlgDecl
 {
 public:
-  KOfxDirectConnectDlgDecl(QWidget *parent) : QDialog(parent) {
+  explicit KOfxDirectConnectDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };

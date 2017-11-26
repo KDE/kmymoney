@@ -29,7 +29,7 @@ class sepaStoragePlugin : public KMyMoneyPlugin::storagePlugin
   Q_INTERFACES(KMyMoneyPlugin::storagePlugin)
 
 public:
-  sepaStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());
+  explicit sepaStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());
   virtual bool removePluginData(QSqlDatabase connection);
   virtual bool setupDatabase(QSqlDatabase connection);
 

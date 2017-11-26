@@ -47,7 +47,7 @@ public:
 
   friend class payeeIdentifierLoader;
   /** @todo make private */
-  payeeIdentifierUnavailable(QDomElement data);
+  explicit payeeIdentifierUnavailable(QDomElement data);
 
   /**
    * @name SqlMethods

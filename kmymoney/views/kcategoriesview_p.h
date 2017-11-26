@@ -47,41 +47,40 @@ namespace Ui {
 
 class KCategoriesViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
-    Q_DECLARE_PUBLIC(KCategoriesView)
+  Q_DECLARE_PUBLIC(KCategoriesView)
 
 public:
+  explicit KCategoriesViewPrivate(KCategoriesView *qq) :
+    q_ptr(qq),
+    ui(new Ui::KCategoriesView),
+    m_haveUnusedCategories(false)
+  {
+  }
 
-    KCategoriesViewPrivate(KCategoriesView *qq) :
-        q_ptr(qq),
-        ui(new Ui::KCategoriesView),
-        m_haveUnusedCategories(false)
-    {
-    }
+  ~KCategoriesViewPrivate()
+  {
+  }
 
-    ~KCategoriesViewPrivate()
-    {
-    }
+  void init()
+  {
+    Q_Q(KCategoriesView);
+    ui->setupUi(q);
+    m_accountTree = &ui->m_accountTree;
 
-    void init()
-    {
-        Q_Q(KCategoriesView);
-      ui->setupUi(q);
-      m_accountTree = &ui->m_accountTree;
+    // setup icons for collapse and expand button
+    ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
+    ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
 
-      // setup icons for collapse and expand button
-      ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
-      ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
+    m_proxyModel = ui->m_accountTree->init(View::Categories);
 
-      m_proxyModel = ui->m_accountTree->init(View::Categories);
+    q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
-      q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
-      q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+  }
 
-    }
-
-    KCategoriesView       *q_ptr;
-    Ui::KCategoriesView   *ui;
-    bool                  m_haveUnusedCategories;
+  KCategoriesView       *q_ptr;
+  Ui::KCategoriesView   *ui;
+  bool                  m_haveUnusedCategories;
 };
 
 #endif

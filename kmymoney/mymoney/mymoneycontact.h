@@ -53,7 +53,7 @@ class KMM_MYMONEY_EXPORT MyMoneyContact : public QObject
   Q_OBJECT
 
 public:
-  MyMoneyContact(QObject *parent);
+  explicit MyMoneyContact(QObject *parent);
   /**
     * Properties of the default identity (the current user).
     */

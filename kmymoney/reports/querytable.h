@@ -64,7 +64,7 @@ class CashFlowList;
 class QueryTable : public ListTable
 {
 public:
-  QueryTable(const MyMoneyReport&);
+  explicit QueryTable(const MyMoneyReport&);
   void init();
 
 protected:

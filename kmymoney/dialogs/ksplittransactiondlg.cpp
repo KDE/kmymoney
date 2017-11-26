@@ -79,7 +79,7 @@ class KSplitTransactionDlgPrivate
   Q_DECLARE_PUBLIC(KSplitTransactionDlg)
 
 public:
-  KSplitTransactionDlgPrivate(KSplitTransactionDlg *qq) :
+  explicit KSplitTransactionDlgPrivate(KSplitTransactionDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KSplitTransactionDlg)
   {

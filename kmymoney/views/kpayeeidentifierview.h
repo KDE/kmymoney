@@ -34,7 +34,7 @@ class KPayeeIdentifierView : public QWidget
   Q_OBJECT
 
 public:
-  KPayeeIdentifierView(QWidget* parent);
+  explicit KPayeeIdentifierView(QWidget* parent);
   ~KPayeeIdentifierView();
   QList<payeeIdentifier> identifiers() const;
 
@@ -55,7 +55,7 @@ class payeeIdentifierDelegate : public StyledItemDelegateForwarder
 {
   Q_OBJECT
 public:
-  payeeIdentifierDelegate(QObject* parent = 0);
+  explicit payeeIdentifierDelegate(QObject* parent = 0);
   virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const;
 };
 

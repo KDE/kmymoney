@@ -49,7 +49,7 @@ class kOnlineTransferForm : public QDialog
   Q_OBJECT
 
 public:
-  kOnlineTransferForm(QWidget *parent = nullptr);
+  explicit kOnlineTransferForm(QWidget *parent = nullptr);
   virtual ~kOnlineTransferForm();
 
 signals:

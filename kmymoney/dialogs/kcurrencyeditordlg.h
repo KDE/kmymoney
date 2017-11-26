@@ -38,7 +38,7 @@ class KCurrencyEditorDlg : public QDialog
 {
   Q_OBJECT
 public:
-  KCurrencyEditorDlg(MyMoneySecurity &currency, QWidget *parent = nullptr);
+  explicit KCurrencyEditorDlg(MyMoneySecurity &currency, QWidget *parent = nullptr);
   ~KCurrencyEditorDlg();
 
   Ui::KCurrencyEditorDlg*   ui;

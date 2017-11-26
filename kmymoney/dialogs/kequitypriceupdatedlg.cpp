@@ -71,7 +71,7 @@ class KEquityPriceUpdateDlgPrivate
   Q_DECLARE_PUBLIC(KEquityPriceUpdateDlg)
 
 public:
-  KEquityPriceUpdateDlgPrivate(KEquityPriceUpdateDlg *qq) :
+  explicit KEquityPriceUpdateDlgPrivate(KEquityPriceUpdateDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KEquityPriceUpdateDlg)
   {

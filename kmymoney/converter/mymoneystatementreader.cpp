@@ -794,7 +794,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           return;
         }
         MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
-        s1.setPrice((total / statementTransactionUnderImport.m_shares).convertPrecision(file->security(thisaccount.currencyId()).pricePrecision()));
+        s1.setPrice(MyMoneyMoney((total / statementTransactionUnderImport.m_shares).convertPrecision(file->security(thisaccount.currencyId()).pricePrecision())));
       }
 
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
@@ -869,7 +869,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else if (!statementTransactionUnderImport.m_shares.isZero()) {
         MyMoneyMoney total = statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees.abs();
-        s1.setPrice((total / statementTransactionUnderImport.m_shares).abs().convertPrecision(file->security(thisaccount.currencyId()).pricePrecision()));
+        s1.setPrice(MyMoneyMoney((total / statementTransactionUnderImport.m_shares).abs().convertPrecision(file->security(thisaccount.currencyId()).pricePrecision())));
       }
       if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaBuy)
           s1.setShares(statementTransactionUnderImport.m_shares.abs());

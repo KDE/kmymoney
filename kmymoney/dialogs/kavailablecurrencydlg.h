@@ -38,7 +38,7 @@ class KAvailableCurrencyDlg : public QDialog
 {
   Q_OBJECT
 public:
-  KAvailableCurrencyDlg(QWidget *parent = nullptr);
+  explicit KAvailableCurrencyDlg(QWidget *parent = nullptr);
   ~KAvailableCurrencyDlg();
 
   Ui::KAvailableCurrencyDlg*   ui;

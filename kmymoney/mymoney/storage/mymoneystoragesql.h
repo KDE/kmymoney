@@ -73,7 +73,7 @@ namespace eMyMoney { namespace TransactionFilter { enum class State; } }
 class FilterFail
 {
 public:
-  FilterFail(const MyMoneyTransactionFilter& filter) : m_filter(filter) {}
+  explicit FilterFail(const MyMoneyTransactionFilter& filter) : m_filter(filter) {}
 
   inline bool operator()(const QPair<QString, MyMoneyTransaction>& transactionPair) {
     return (*this)(transactionPair.second);
@@ -113,7 +113,7 @@ private:
 class MyMoneySqlQuery : public QSqlQuery
 {
 public:
-  MyMoneySqlQuery(MyMoneyStorageSql* db = 0);
+  explicit MyMoneySqlQuery(MyMoneyStorageSql* db = 0);
   virtual ~MyMoneySqlQuery();
   bool exec();
   bool exec(const QString & query);

@@ -44,7 +44,7 @@ class OfxHeaderVersion;
 class KOnlineBankingStatusDecl : public QWidget, public Ui::KOnlineBankingStatusDecl
 {
 public:
-  KOnlineBankingStatusDecl(QWidget *parent) : QWidget(parent) {
+  explicit KOnlineBankingStatusDecl(QWidget *parent) : QWidget(parent) {
     setupUi(this);
   }
 };

@@ -54,7 +54,7 @@
 class KImportDlgDecl : public QDialog, public Ui::KImportDlgDecl
 {
 public:
-  KImportDlgDecl(QWidget *parent) : QDialog(parent) {
+  explicit KImportDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
@@ -67,7 +67,7 @@ public:
   /**
     * Standard constructor
     */
-  KImportDlg(QWidget *parent);
+  explicit KImportDlg(QWidget *parent);
 
   /** Standard destructor */
   ~KImportDlg();

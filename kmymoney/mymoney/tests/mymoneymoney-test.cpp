@@ -226,7 +226,7 @@ void MyMoneyMoneyTest::testStringConstructor()
 void MyMoneyMoneyTest::testConvert()
 {
   MyMoneyMoney a(123.456);
-  MyMoneyMoney b = a.convertDenominator(100);
+  MyMoneyMoney b(a.convertDenominator(100));
   QVERIFY(b == MyMoneyMoney(12346 , 100));
 
   a = QString("-123.456");

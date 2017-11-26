@@ -46,7 +46,7 @@ class KReportChartView: public Chart
 public slots:
   void slotNeedUpdate();
 public:
-  KReportChartView(QWidget* parent);
+  explicit KReportChartView(QWidget* parent);
   ~KReportChartView() {}
 
   /**

@@ -721,7 +721,7 @@ void QueryTable::constructTransactionTable()
     QList<MyMoneySplit>::const_iterator myBegin, it_split;
 
     for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
-      ReportAccount splitAcc = (* it_split).accountId();
+      ReportAccount splitAcc((* it_split).accountId());
       // always put split with a "stock" account if it exists
       if (splitAcc.isInvest())
         break;
@@ -763,7 +763,7 @@ void QueryTable::constructTransactionTable()
 
     bool loan_special_case = false;
     if (m_config.queryColumns() & MyMoneyReport::eQCloan) {
-      ReportAccount splitAcc = (*it_split).accountId();
+      ReportAccount splitAcc((*it_split).accountId());
       loan_special_case = splitAcc.isLoan();
     }
 
@@ -779,7 +779,7 @@ void QueryTable::constructTransactionTable()
     QMap<QString, MyMoneyMoney> xrMap; // container for conversion rates from given currency to myBeginCurrency
     do {
       MyMoneyMoney xr;
-      ReportAccount splitAcc = (* it_split).accountId();
+      ReportAccount splitAcc((* it_split).accountId());
       QString splitCurrency;
       if (splitAcc.isInvest())
         splitCurrency = file->account(file->account((*it_split).accountId()).parentAccountId()).currencyId();
@@ -862,7 +862,7 @@ void QueryTable::constructTransactionTable()
           if (!(assetAccountSplit == MyMoneySplit())) {
             for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
               if ((*it_split) == assetAccountSplit) {
-                splitAcc = assetAccountSplit.accountId(); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
+                splitAcc = ReportAccount(assetAccountSplit.accountId()); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
                 myBegin = it_split;                       // set myBegin to asset split, so stock split can be listed in details under splits
                 myBeginCurrency = (file->account((*myBegin).accountId())).currencyId();
                 if (!m_containsNonBaseCurrency && myBeginCurrency != baseCurrency)
@@ -1166,7 +1166,7 @@ void QueryTable::constructTransactionTable()
   for (it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
     TableRow qA;
 
-    ReportAccount account = (* it_account);
+    ReportAccount account(*it_account);
 
     //get fraction for account
     int fraction = account.currency().smallestAccountFraction();
@@ -1856,7 +1856,7 @@ void QueryTable::constructSplitsTable()
     //S_end = splits.end();
 
     for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
-      ReportAccount splitAcc = (* it_split).accountId();
+      ReportAccount splitAcc((* it_split).accountId());
       // always put split with a "stock" account if it exists
       if (splitAcc.isInvest())
         break;
@@ -1892,7 +1892,7 @@ void QueryTable::constructSplitsTable()
     // split entries (qS) normally.
     bool loan_special_case = false;
     if (m_config.queryColumns() & MyMoneyReport::eQCloan) {
-      ReportAccount splitAcc = (*it_split).accountId();
+      ReportAccount splitAcc((*it_split).accountId());
       loan_special_case = splitAcc.isLoan();
     }
 
@@ -1904,7 +1904,7 @@ void QueryTable::constructSplitsTable()
     }
 
     //the account of the beginning splits
-    ReportAccount myBeginAcc = (*myBegin).accountId();
+    ReportAccount myBeginAcc((*myBegin).accountId());
 
     bool include_me = true;
     QString a_fullname;
@@ -1913,7 +1913,7 @@ void QueryTable::constructSplitsTable()
 
     do {
       MyMoneyMoney xr;
-      ReportAccount splitAcc = (* it_split).accountId();
+      ReportAccount splitAcc((* it_split).accountId());
 
       //get fraction for account
       int fraction = splitAcc.currency().smallestAccountFraction();
@@ -2018,7 +2018,7 @@ void QueryTable::constructSplitsTable()
               ++tempSplit;
 
             //show the name of the category, or "transfer to/from" if it as an account
-            ReportAccount tempSplitAcc = (*tempSplit).accountId();
+            ReportAccount tempSplitAcc((*tempSplit).accountId());
             if (! tempSplitAcc.isIncomeExpense()) {
               qA[ctAccount] = ((*it_split).shares().isNegative()) ?
                               i18n("Transfer to %1", tempSplitAcc.fullName())
@@ -2088,7 +2088,7 @@ void QueryTable::constructSplitsTable()
   for (it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
     TableRow qA;
 
-    ReportAccount account = (* it_account);
+    ReportAccount account((* it_account));
 
     //get fraction for account
     int fraction = account.currency().smallestAccountFraction();

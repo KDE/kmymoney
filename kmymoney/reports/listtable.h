@@ -55,7 +55,7 @@ class ReportAccount;
 class ListTable : public ReportTable
 {
 public:
-  ListTable(const MyMoneyReport&);
+  explicit ListTable(const MyMoneyReport&);
   QString renderHTML() const;
   QString renderCSV() const;
   void drawChart(KReportChartView&) const {}
