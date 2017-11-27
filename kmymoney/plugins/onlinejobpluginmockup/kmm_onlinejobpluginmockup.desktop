@@ -18,6 +18,7 @@ Name[x-test]=xxonlinejobpluginmockupxx
 Comment=If mapped to an account, it pretends it could handle all onlineTasks (for developers only).
 Comment[ca]=Si està vinculat a un compte, fa veure que pot gestionar totes les tasques en línia (només per a desenvolupadors).
 Comment[ca@valencia]=Si està vinculat a un compte, fa veure que pot gestionar totes les tasques en línia (només per a desenvolupadors).
+Comment[en_GB]=If mapped to an account, it pretends it could handle all onlineTasks (for developers only).
 Comment[es]=Si se aplica a una cuenta, simula que puede manejar todas las tareas en línea (solo para desarrolladores).
 Comment[fr]=S'il est associé à un compte en ligne, prétend qu'il peut traiter toutes les tâches en ligne (uniquement pour les développeurs).
 Comment[it]=Se associato a un account, finge di poter gestire tutte le operazioni in linea (solo per sviluppatori).
