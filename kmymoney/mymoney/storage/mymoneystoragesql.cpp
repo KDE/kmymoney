@@ -175,7 +175,9 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     setHostName(url.host());
     setUserName(url.userName());
     setPassword(url.password());
-    setConnectOptions("MYSQL_OPT_RECONNECT=1");
+    if (QUrlQuery(url).queryItemValue("driver").contains("QMYSQL")) {
+      setConnectOptions("MYSQL_OPT_RECONNECT=1");
+    }
     switch (openMode) {
       case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
       case QIODevice::ReadWrite:   // Save menu entry with database open
