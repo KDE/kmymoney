@@ -271,7 +271,7 @@ private:
    * @retval found MyMoneyAccount account instance
    * @retval MyMoneyAccount() if not found
    */
-  const MyMoneyAccount& findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
+  MyMoneyAccount findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
 
   /**
    * This method returns the account id for a given account @a name. In

@@ -73,7 +73,7 @@ public:
 
   bool importStatement(const MyMoneyStatement& s);
 
-  const MyMoneyAccount& account(const QString& key, const QString& value) const;
+  MyMoneyAccount account(const QString& key, const QString& value) const;
 
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const;
 

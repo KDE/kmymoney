@@ -152,7 +152,7 @@ namespace NewAccountWizard
     return rc;
   }
 
-  const MyMoneyAccount& GeneralLoanInfoPage::parentAccount()
+  MyMoneyAccount GeneralLoanInfoPage::parentAccount()
   {
     Q_D(GeneralLoanInfoPage);
     return (d->ui->m_loanDirection->currentIndex() == 0)

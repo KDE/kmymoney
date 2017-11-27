@@ -97,7 +97,7 @@ namespace NewAccountWizard
     * @note For now it's either fixed as Asset or Liability. We will provide
     * user selected parent accounts later.
     */
-    const MyMoneyAccount& parentAccount();
+    MyMoneyAccount parentAccount();
 
     /**
    * Returns information about the schedule. If the returned value

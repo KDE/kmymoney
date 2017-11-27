@@ -7111,7 +7111,7 @@ void KMyMoneyApp::slotDateChanged()
   d->m_myMoneyView->slotRefreshViews();
 }
 
-const MyMoneyAccount& KMyMoneyApp::account(const QString& key, const QString& value) const
+MyMoneyAccount KMyMoneyApp::account(const QString& key, const QString& value) const
 {
   QList<MyMoneyAccount> list;
   QList<MyMoneyAccount>::const_iterator it_a;

@@ -979,8 +979,8 @@ void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
   auto isTopLevel = false;                                  // it could be top-level but we don't know it yet
   while (itParent && !isTopLevel) {                         // loop in which we set total values and balances from the bottom to the top
     auto itCurrent = itParent;
-    auto accCurrent = &d->m_file->account(itCurrent->data((int)Role::Account).value<MyMoneyAccount>().id());
-    if (accCurrent->id().isEmpty()) {   // this is institution
+    const auto accCurrent = d->m_file->account(itCurrent->data((int)Role::Account).value<MyMoneyAccount>().id());
+    if (accCurrent.id().isEmpty()) {   // this is institution
       d->setInstitutionTotalValue(invisibleRootItem(), itCurrent->row());
       break;                            // it's top-level node so nothing above that;
     }
@@ -989,7 +989,7 @@ void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
       itParent = this->invisibleRootItem();
       isTopLevel = true;
     }
-    d->setAccountBalanceAndValue(itParent, itCurrent->row(), *accCurrent, d->m_columns);
+    d->setAccountBalanceAndValue(itParent, itCurrent->row(), accCurrent, d->m_columns);
   }
   checkNetWorth();
   checkProfit();

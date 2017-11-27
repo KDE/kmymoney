@@ -51,6 +51,7 @@
 
 #include "mymoneyfinancialcalculator.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneyaccountloan.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"

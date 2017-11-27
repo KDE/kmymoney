@@ -60,7 +60,7 @@ public:
    * If the account is not found in the list of accounts, MyMoneyAccount()
    * is returned.
    */
-  virtual const MyMoneyAccount& account(const QString& key, const QString& value) const = 0;
+  virtual MyMoneyAccount account(const QString& key, const QString& value) const = 0;
 
   /**
    */

@@ -259,7 +259,7 @@ void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMone
   */
 void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
 {
-  const MyMoneyAccount *acc;
+  MyMoneyAccount acc;
   QStandardItem  *itAcc;
   switch (objType) {
     case eMyMoney::File::Object::Account:
@@ -267,8 +267,8 @@ void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyM
         auto tmpAcc = dynamic_cast<const MyMoneyAccount * const>(obj);
         if (!tmpAcc || tmpAcc->accountType() != eMyMoney::Account::Type::Stock)
           return;
-        acc = tmpAcc;
-        itAcc = d->itemFromId(this, acc->id(), Role::EquityID);
+        acc = MyMoneyAccount(*tmpAcc);
+        itAcc = d->itemFromId(this, acc.id(), Role::EquityID);
         break;
       }
     case eMyMoney::File::Object::Security:
@@ -278,20 +278,20 @@ void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyM
         if (!itAcc)
           return;
         const auto idAcc = itAcc->data(Role::EquityID).toString();
-        acc = &d->m_file->account(idAcc);
+        acc = d->m_file->account(idAcc);
         break;
       }
     default:
       return;
   }
 
-  auto itParentAcc = d->itemFromId(this, acc->parentAccountId(), Role::InvestmentID);
+  auto itParentAcc = d->itemFromId(this, acc.parentAccountId(), Role::InvestmentID);
 
   auto modelID = itParentAcc->data(Role::InvestmentID).toString();      // get parent account from model
-  if (modelID == acc->parentAccountId()) {                              // and if it matches with those from file then modify only
-    d->setAccountData(itParentAcc, itAcc->row(), *acc, d->m_columns);
+  if (modelID == acc.parentAccountId()) {                              // and if it matches with those from file then modify only
+    d->setAccountData(itParentAcc, itAcc->row(), acc, d->m_columns);
   } else {                                                              // and if not then reparent
-    slotObjectRemoved(eMyMoney::File::Object::Account, acc->id());
+    slotObjectRemoved(eMyMoney::File::Object::Account, acc.id());
     slotObjectAdded(eMyMoney::File::Object::Account, obj);
   }
 }

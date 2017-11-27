@@ -56,7 +56,7 @@ namespace NewAccountWizard
     QWidget* initialFocusWidget() const override;
 
     eMyMoney::Account::Type accountType() const;
-    const MyMoneyAccount& parentAccount();
+    MyMoneyAccount parentAccount();
     bool allowsParentAccount() const;
     const MyMoneySecurity& currency() const;
 

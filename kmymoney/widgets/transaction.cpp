@@ -43,6 +43,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "register.h"
@@ -680,7 +681,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
     if (d->m_transaction.splits().count() < 2) {
       msg = QString("<qt>%1</qt>").arg(i18n("Transaction is missing a category assignment."));
     } else {
-      const MyMoneySecurity& sec = MyMoneyFile::instance()->security(d->m_account.currencyId());
+      const auto sec = MyMoneyFile::instance()->security(d->m_account.currencyId());
       msg = QString("<qt>%1</qt>").arg(i18n("The transaction has a missing assignment of <b>%1</b>.", MyMoneyUtils::formatMoney(d->m_transaction.splitSum().abs(), d->m_account, sec)));
     }
     return true;
@@ -692,7 +693,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
     auto file = MyMoneyFile::instance();
     QList<MyMoneySplit>::const_iterator it_s;
     QString txt;
-    const MyMoneySecurity& sec = file->security(d->m_transaction.commodity());
+    const auto sec = file->security(d->m_transaction.commodity());
     MyMoneyMoney factor(1, 1);
     if (!d->m_split.value().isNegative())
       factor = -factor;

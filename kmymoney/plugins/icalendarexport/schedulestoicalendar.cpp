@@ -35,6 +35,7 @@
 // KMyMoney includes
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneyutils.h"
 #include "mymoneyschedule.h"
 #include "mymoneyaccount.h"

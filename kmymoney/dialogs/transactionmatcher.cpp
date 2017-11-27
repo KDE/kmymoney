@@ -25,6 +25,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
@@ -60,7 +61,7 @@ TransactionMatcher::~TransactionMatcher()
 void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTransaction ti, MyMoneySplit si, bool allowImportedTransactions)
 {
   Q_D(TransactionMatcher);
-  const MyMoneySecurity& sec = MyMoneyFile::instance()->security(d->m_account.currencyId());
+  auto sec = MyMoneyFile::instance()->security(d->m_account.currencyId());
 
   // Now match the transactions.
   //

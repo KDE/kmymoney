@@ -848,7 +848,7 @@ void MyMoneyQifReader::processCategoryEntry()
   }
 }
 
-const MyMoneyAccount& MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const
+MyMoneyAccount MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const
 {
   static MyMoneyAccount nullAccount;
 
@@ -880,7 +880,7 @@ const MyMoneyAccount& MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, c
       while ((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
         QString part = name.left(pos);
         QString remainder = name.mid(pos + 1);
-        const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
+        const auto existingAccount = file->subAccountByName(parentAccount, part);
         // if account has not been found, continue with next top level parent
         if (existingAccount.id().isEmpty()) {
           notFound = true;
@@ -891,7 +891,7 @@ const MyMoneyAccount& MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, c
       }
       if (notFound)
         continue;
-      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, name);
+      const auto existingAccount = file->subAccountByName(parentAccount, name);
       if (!existingAccount.id().isEmpty()) {
         if (acc.accountType() != eMyMoney::Account::Type::Unknown) {
           if (acc.accountType() != existingAccount.accountType())

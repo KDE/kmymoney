@@ -58,7 +58,7 @@ public:
    * If the account is not found in the list of accounts, MyMoneyAccount()
    * is returned.
    */
-  const MyMoneyAccount& account(const QString& key, const QString& value) const;
+  MyMoneyAccount account(const QString& key, const QString& value) const;
 
   /**
    * This method stores the online parameters in @a kvps used by the plugin

@@ -628,7 +628,7 @@ bool OfxImporterPlugin::importStatement(const MyMoneyStatement& s)
   return statementInterface()->import(s);
 }
 
-const MyMoneyAccount& OfxImporterPlugin::account(const QString& key, const QString& value) const
+MyMoneyAccount OfxImporterPlugin::account(const QString& key, const QString& value) const
 {
   return statementInterface()->account(key, value);
 }

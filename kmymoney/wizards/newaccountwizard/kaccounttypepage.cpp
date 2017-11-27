@@ -249,7 +249,7 @@ namespace NewAccountWizard
     d->ui->m_accountName->setText(acc.name());
   }
 
-  const MyMoneyAccount& AccountTypePage::parentAccount()
+  MyMoneyAccount AccountTypePage::parentAccount()
   {
     switch (accountType()) {
       case Account::Type::CreditCard:

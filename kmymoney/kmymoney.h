@@ -645,7 +645,7 @@ public:
    * is returned. The @a key - @a value pair can be in the account's kvp
    * container or the account's online settings kvp container.
    */
-  const MyMoneyAccount& account(const QString& key, const QString& value) const;
+  MyMoneyAccount account(const QString& key, const QString& value) const;
 
   /**
    * This method set the online parameters stored in @a kvps with the

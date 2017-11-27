@@ -44,7 +44,7 @@ bool KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s, bo
   return m_app->slotStatementImport(s, silent);
 }
 
-const MyMoneyAccount& KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const
+MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const
 {
   return m_app->account(key, value);
 }

@@ -203,7 +203,7 @@ namespace NewAccountWizard
     return t;
   }
 
-  const MyMoneyAccount& Wizard::parentAccount()
+  MyMoneyAccount Wizard::parentAccount()
   {
     Q_D(Wizard);
     return d->m_accountTypePage->allowsParentAccount()

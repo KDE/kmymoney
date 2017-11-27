@@ -37,6 +37,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "mymoneytransaction.h"
@@ -301,8 +302,8 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
   // memo, value, number, payee, tag, account, date
   if (d->m_filterSet.singleFilter.textFilter) {
     MyMoneyFile* file = MyMoneyFile::instance();
-    const MyMoneyAccount& acc = file->account(sp->accountId());
-    const MyMoneySecurity& sec = file->security(acc.currencyId());
+    const auto acc = file->account(sp->accountId());
+    const auto sec = file->security(acc.currencyId());
     if (sp->memo().contains(d->m_text)
         || sp->shares().formatMoney(acc.fraction(sec)).contains(d->m_text)
         || sp->value().formatMoney(acc.fraction(sec)).contains(d->m_text)
@@ -314,7 +315,7 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
       return !d->m_invertText;
 
     if (!sp->payeeId().isEmpty()) {
-      const MyMoneyPayee& payee = file->payee(sp->payeeId());
+      const auto payee = file->payee(sp->payeeId());
       if (payee.name().contains(d->m_text))
         return !d->m_invertText;
     }
@@ -323,7 +324,7 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
       QList<QString>::ConstIterator it_s;
       QList<QString> t = sp->tagIdList();
       for (it_s = t.constBegin(); it_s != t.constEnd(); ++it_s) {
-        const MyMoneyTag& tag = file->tag((*it_s));
+        const auto tag = file->tag((*it_s));
         if (tag.name().contains(d->m_text))
           return !d->m_invertText;
       }

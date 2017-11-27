@@ -818,7 +818,7 @@ bool KBankingPlugin::importStatement(const MyMoneyStatement& s)
 }
 
 
-const MyMoneyAccount& KBankingPlugin::account(const QString& key, const QString& value) const
+MyMoneyAccount KBankingPlugin::account(const QString& key, const QString& value) const
 {
   return statementInterface()->account(key, value);
 }

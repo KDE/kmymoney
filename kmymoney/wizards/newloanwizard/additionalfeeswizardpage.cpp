@@ -37,6 +37,7 @@
 #include "knewloanwizard_p.h"
 #include "ksplittransactiondlg.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 

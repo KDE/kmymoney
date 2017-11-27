@@ -109,7 +109,7 @@ public:
     */
   MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current);
 
-  const MyMoneyAccount& account(const QString& key, const QString& value) const;
+  MyMoneyAccount account(const QString& key, const QString& value) const;
 
   void protocols(QStringList& protocolList) const;
 
