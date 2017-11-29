@@ -39,7 +39,7 @@
 using namespace Icons;
 
 TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol,
-                         const QList<MyMoneyStatement::Transaction::EAction>& validActionTypes) : ui(new Ui::TransactionDlg)
+                         const QList<eMyMoney::Transaction::Action>& validActionTypes) : ui(new Ui::TransactionDlg)
 {
   ui->setupUi(this);
 
@@ -49,13 +49,13 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
   m_errorBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
 
   // initialize action types list according to cbActionTypes
-  m_actionTypes << MyMoneyStatement::Transaction::eaBuy <<
-                 MyMoneyStatement::Transaction::eaSell <<
-                 MyMoneyStatement::Transaction::eaCashDividend <<
-                 MyMoneyStatement::Transaction::eaReinvestDividend <<
-                 MyMoneyStatement::Transaction::eaShrsin <<
-                 MyMoneyStatement::Transaction::eaShrsout <<
-                 MyMoneyStatement::Transaction::eaInterest;
+  m_actionTypes << eMyMoney::Transaction::Action::Buy <<
+                 eMyMoney::Transaction::Action::Sell <<
+                 eMyMoney::Transaction::Action::CashDividend <<
+                 eMyMoney::Transaction::Action::ReinvestDividend <<
+                 eMyMoney::Transaction::Action::Shrsin <<
+                 eMyMoney::Transaction::Action::Shrsout <<
+                 eMyMoney::Transaction::Action::Interest;
 
   QIcon icon = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
   if (!icon.availableSizes().isEmpty())
@@ -148,12 +148,12 @@ void TransactionDlg::slotActionSelected(int index)
   }
 }
 
-MyMoneyStatement::Transaction::EAction TransactionDlg::getActionType()
+eMyMoney::Transaction::Action TransactionDlg::getActionType()
 {
   return m_actionTypes.value(ui->cbActionTypes->currentIndex());
 }
 
-void TransactionDlg::iconifyActionTypesComboBox(const QList<MyMoneyStatement::Transaction::EAction>& validActionTypes)
+void TransactionDlg::iconifyActionTypesComboBox(const QList<eMyMoney::Transaction::Action>& validActionTypes)
 {
   for (int i = 0; i < m_actionTypes.count(); ++i) {
     if (validActionTypes.contains(m_actionTypes[i]))

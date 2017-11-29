@@ -285,5 +285,39 @@ namespace eMyMoney {
       Error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
     };
   }
+
+  namespace Statement {
+    enum class Type {
+      None = 0,
+      Checkings,
+      Savings,
+      Investment,
+      CreditCard,
+      Invalid
+    };
+
+    inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
+
+  namespace Transaction {
+    // the following members are only used for investment accounts (m_eType==etInvestment)
+    // eaNone means the action, shares, and security can be ignored.
+    enum class Action {
+      None = 0,
+      Buy,
+      Sell,
+      ReinvestDividend,
+      CashDividend,
+      Shrsin,
+      Shrsout,
+      Stksplit,
+      Fees,
+      Interest,
+      Invalid
+    };
+
+    inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
+
 }
 #endif

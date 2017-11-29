@@ -419,7 +419,7 @@ bool InvestmentPage::validateActionType()
       case NoActionType:
       {
         bool unknownType = false;
-        if (tr.m_eAction == MyMoneyStatement::Transaction::eaNone)
+        if (tr.m_eAction == eMyMoney::Transaction::Action::None)
           unknownType = true;
 
         QStringList colList;
@@ -428,7 +428,7 @@ bool InvestmentPage::validateActionType()
           colHeaders.append(m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col, Column::Invalid), QString(i18nc("Unused column", "Unused"))));
           colList.append(m_imp->m_file->m_model->item(row, col)->text());
         }
-        QList<MyMoneyStatement::Transaction::EAction> validActionTypes = m_imp->createValidActionTypes(tr);
+        QList<eMyMoney::Transaction::Action> validActionTypes = m_imp->createValidActionTypes(tr);
         QPointer<TransactionDlg> transactionDlg = new TransactionDlg(colList, colHeaders, m_profile->m_colTypeNum.value(Column::Type), validActionTypes);
         if (transactionDlg->exec() == QDialog::Rejected) {
           KMessageBox::information(m_dlg,
@@ -576,7 +576,7 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
   QString buffer;
   QString strEType;
   switch (st.m_eType) {
-  case MyMoneyStatement::etInvestment:
+  case eMyMoney::Statement::Type::Investment:
   default:
     strEType = QStringLiteral("Invst");
   }
@@ -609,28 +609,28 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
     buffer.append(QChar(QLatin1Char('Y')) + it->m_strSecurity + QChar(QLatin1Char('\n')));
     QString txt;
     switch (it->m_eAction) {
-    case MyMoneyStatement::Transaction::eaBuy:
+    case eMyMoney::Transaction::Action::Buy:
       txt = QStringLiteral("Buy");
       break;
-    case MyMoneyStatement::Transaction::eaSell:
+    case eMyMoney::Transaction::Action::Sell:
       txt = QStringLiteral("Sell");
       break;
-    case MyMoneyStatement::Transaction::eaReinvestDividend:
+    case eMyMoney::Transaction::Action::ReinvestDividend:
       txt = QStringLiteral("ReinvDiv");
       break;
-    case MyMoneyStatement::Transaction::eaCashDividend:
+    case eMyMoney::Transaction::Action::CashDividend:
       txt = QStringLiteral("Div");
       break;
-    case MyMoneyStatement::Transaction::eaInterest:
+    case eMyMoney::Transaction::Action::Interest:
       txt = QStringLiteral("IntInc");
       break;
-    case MyMoneyStatement::Transaction::eaShrsin:
+    case eMyMoney::Transaction::Action::Shrsin:
       txt = QStringLiteral("ShrsIn");
       break;
-    case MyMoneyStatement::Transaction::eaShrsout:
+    case eMyMoney::Transaction::Action::Shrsout:
       txt = QStringLiteral("ShrsOut");
       break;
-    case MyMoneyStatement::Transaction::eaStksplit:
+    case eMyMoney::Transaction::Action::Stksplit:
       txt = QStringLiteral("stksplit");
       break;
     default:
@@ -639,7 +639,7 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
 
     buffer.append(QChar(QLatin1Char('N')) + txt + QChar(QLatin1Char('\n')));
 
-    if (it->m_eAction == MyMoneyStatement::Transaction::eaBuy)  // we added 'N' field so buy transaction should have any sign
+    if (it->m_eAction == eMyMoney::Transaction::Action::Buy)  // we added 'N' field so buy transaction should have any sign
       txt.setNum(it->m_amount.abs().toDouble(), 'f', 4);
     else
       txt.setNum(it->m_amount.toDouble(), 'f', 4);

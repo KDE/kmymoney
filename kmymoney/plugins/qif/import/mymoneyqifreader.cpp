@@ -134,7 +134,7 @@ void MyMoneyQifReader::Private::finishStatement()
     qDebug("Statement with %d transactions, %d prices and %d securities added to the statement list",
            st.m_listTransactions.count(), st.m_listPrices.count(), st.m_listSecurities.count());
   }
-  MyMoneyStatement::EType type = st.m_eType; //stash type and...
+  eMyMoney::Statement::Type type = st.m_eType; //stash type and...
   // start with a fresh statement
   st = MyMoneyStatement();
   st.m_skipCategoryMatching = !mapCategories;
@@ -1059,19 +1059,19 @@ void MyMoneyQifReader::processTransactionEntry()
   s1.m_accountId = d->st.m_accountId;
   switch (d->accountType) {
   case eMyMoney::Account::Type::Checkings:
-    d->st.m_eType=MyMoneyStatement::etCheckings;
+    d->st.m_eType=eMyMoney::Statement::Type::Checkings;
     break;
   case eMyMoney::Account::Type::Savings:
-    d->st.m_eType=MyMoneyStatement::etSavings;
+    d->st.m_eType=eMyMoney::Statement::Type::Savings;
     break;
   case eMyMoney::Account::Type::Investment:
-    d->st.m_eType=MyMoneyStatement::etInvestment;
+    d->st.m_eType=eMyMoney::Statement::Type::Investment;
     break;
   case eMyMoney::Account::Type::CreditCard:
-    d->st.m_eType=MyMoneyStatement::etCreditCard;
+    d->st.m_eType=eMyMoney::Statement::Type::CreditCard;
     break;
   default:
-    d->st.m_eType=MyMoneyStatement::etNone;
+    d->st.m_eType=eMyMoney::Statement::Type::None;
     break;
   }
 
@@ -1297,7 +1297,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
   */
 
   MyMoneyStatement::Transaction tr;
-  d->st.m_eType = MyMoneyStatement::etInvestment;
+  d->st.m_eType = eMyMoney::Statement::Type::Investment;
 
 //  t.setCommodity(m_account.currencyId());
   // 'D' field: Date
@@ -1487,7 +1487,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
   if (action == "reinvint" || action == "reinvdiv" || action == "reinvlg" || action == "reinvsh") {
     d->st.m_listPrices += price;
     tr.m_shares = quantity;
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaReinvestDividend);
+    tr.m_eAction = (eMyMoney::Transaction::Action::ReinvestDividend);
     tr.m_price = m_qifProfile.value('I', extractLine('I'));
 
     tr.m_strInterestCategory = extractLine('L');
@@ -1495,7 +1495,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
       tr.m_strInterestCategory = d->typeToAccountName(action);
     }
   } else if (action == "div" || action == "cgshort" || action == "cgmid" || action == "cglong" || action == "rtrncap") {
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaCashDividend);
+    tr.m_eAction = (eMyMoney::Transaction::Action::CashDividend);
 
     // make sure, we have valid category. Either taken from the L-Record above,
     // or derived from the action code
@@ -1515,9 +1515,9 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     s2.m_strCategoryName = extractLine('Y');
     tr.m_listSplits.append(s2);
   } else if (action == "intinc" || action == "miscinc" || action == "miscexp") {
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaInterest);
+    tr.m_eAction = (eMyMoney::Transaction::Action::Interest);
     if (action == "miscexp")
-      tr.m_eAction = (MyMoneyStatement::Transaction::eaFees);
+      tr.m_eAction = (eMyMoney::Transaction::Action::Fees);
 
     // make sure, we have a valid category. Either taken from the L-Record above,
     // or derived from the action code
@@ -1545,7 +1545,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
       return;
     }
 
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaNone);
+    tr.m_eAction = (eMyMoney::Transaction::Action::None);
     MyMoneyStatement::Split s2;
     QString tmp = extractLine('L');
     if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1))) {
@@ -1568,19 +1568,19 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     tr.m_price = m_qifProfile.value('I', extractLine('I'));
     tr.m_shares = quantity;
     tr.m_amount = -amount;
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaBuy);
+    tr.m_eAction = (eMyMoney::Transaction::Action::Buy);
   } else if (action == "sell") {
     d->st.m_listPrices += price;
     tr.m_price = m_qifProfile.value('I', extractLine('I'));
     tr.m_shares = -quantity;
     tr.m_amount = amount;
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaSell);
+    tr.m_eAction = (eMyMoney::Transaction::Action::Sell);
   } else if (action == "shrsin") {
     tr.m_shares = quantity;
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaShrsin);
+    tr.m_eAction = (eMyMoney::Transaction::Action::Shrsin);
   } else if (action == "shrsout") {
     tr.m_shares = -quantity;
-    tr.m_eAction = (MyMoneyStatement::Transaction::eaShrsout);
+    tr.m_eAction = (eMyMoney::Transaction::Action::Shrsout);
   } else if (action == "stksplit") {
     MyMoneyMoney splitfactor = (quantity / MyMoneyMoney(10, 1)).reduce();
 

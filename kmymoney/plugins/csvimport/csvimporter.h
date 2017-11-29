@@ -140,7 +140,7 @@ public:
                     int startLine, int trailerLines,
                     DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
                     QMap<Column, int> colTypeNum,
-                    int priceFraction, QMap <MyMoneyStatement::Transaction::EAction, QStringList> transactionNames) :
+                    int priceFraction, QMap <eMyMoney::Transaction::Action, QStringList> transactionNames) :
     CSVProfile(profileName, encodingMIBEnum,
                startLine, trailerLines,
                dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
@@ -151,7 +151,7 @@ public:
   bool readSettings(const KSharedConfigPtr &config);
   void writeSettings(const KSharedConfigPtr &config);
 
-  QMap <MyMoneyStatement::Transaction::EAction, QStringList> m_transactionNames;
+  QMap <eMyMoney::Transaction::Action, QStringList> m_transactionNames;
 
   QString     m_feeRate;
   QString     m_minFee;
@@ -304,13 +304,13 @@ public:
   MyMoneyMoney processPriceField(const PricesProfile *profile, const int row, const int col);
   MyMoneyMoney processAmountField(const CSVProfile *profile, const int row, const int col);
   MyMoneyMoney processQuantityField(const CSVProfile *profile, const int row, const int col);
-  MyMoneyStatement::Transaction::EAction processActionTypeField(const InvestmentProfile *profile, const int row, const int col);
+  eMyMoney::Transaction::Action processActionTypeField(const InvestmentProfile *profile, const int row, const int col);
 
   /**
   * This method creates valid set of possible transactions
   * according to quantity, amount and price
   */
-  QList<MyMoneyStatement::Transaction::EAction> createValidActionTypes(MyMoneyStatement::Transaction &tr);
+  QList<eMyMoney::Transaction::Action> createValidActionTypes(MyMoneyStatement::Transaction &tr);
 
   /**
   * This method will add fee column to model based on amount and fee rate.
@@ -352,7 +352,7 @@ public:
 
   static const QHash<Column, QString>                            m_colTypeConfName;
   static const QHash<Profile, QString>                           m_profileConfPrefix;
-  static const QHash<MyMoneyStatement::Transaction::EAction, QString> m_transactionConfName;
+  static const QHash<eMyMoney::Transaction::Action, QString> m_transactionConfName;
   static const QHash<miscSettingsE, QString>                          m_miscSettingsConfName;
   static const QString                                                m_confProfileNames;
   static const QString                                                m_confPriorName;

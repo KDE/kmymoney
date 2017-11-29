@@ -10,6 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <acejones@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -46,41 +47,28 @@ Represents the electronic analog of the paper bank statement just like we used t
 
 @author ace jones
 */
-class MyMoneyStatement
+struct MyMoneyStatement
 {
-public:
-  MyMoneyStatement() : m_closingBalance(MyMoneyMoney::autoCalc), m_eType(etNone), m_skipCategoryMatching(false) {}
-
-  enum EType { etNone = 0, etCheckings, etSavings, etInvestment, etCreditCard, etEnd };
-
-  class Split
+  struct Split
   {
-  public:
-    Split() : m_reconcile(eMyMoney::Split::State::NotReconciled) {}
     QString      m_strCategoryName;
     QString      m_strMemo;
     QString      m_accountId;
-    eMyMoney::Split::State m_reconcile;
+    eMyMoney::Split::State m_reconcile = eMyMoney::Split::State::NotReconciled;
     MyMoneyMoney m_amount;
-
   };
 
-  class Transaction
+  struct Transaction
   {
-  public:
-    Transaction() : m_reconcile(eMyMoney::Split::State::NotReconciled), m_eAction(eaNone) {}
     QDate m_datePosted;
     QString m_strPayee;
     QString m_strMemo;
     QString m_strNumber;
     QString m_strBankID;
     MyMoneyMoney m_amount;
-    eMyMoney::Split::State m_reconcile;
+    eMyMoney::Split::State m_reconcile = eMyMoney::Split::State::NotReconciled;
 
-    // the following members are only used for investment accounts (m_eType==etInvestment)
-    // eaNone means the action, shares, and security can be ignored.
-    enum EAction { eaNone = 0, eaBuy, eaSell, eaReinvestDividend, eaCashDividend, eaShrsin, eaShrsout, eaStksplit, eaFees, eaInterest, eaEnd };
-    EAction m_eAction;
+    eMyMoney::Transaction::Action m_eAction = eMyMoney::Transaction::Action::None;
     MyMoneyMoney m_shares;
     MyMoneyMoney m_fees;
     MyMoneyMoney m_price;
@@ -122,14 +110,14 @@ public:
   QString m_strCurrency;
   QDate m_dateBegin;
   QDate m_dateEnd;
-  MyMoneyMoney m_closingBalance;
-  EType m_eType;
+  MyMoneyMoney m_closingBalance = MyMoneyMoney::autoCalc;
+  eMyMoney::Statement::Type m_eType = eMyMoney::Statement::Type::None;
 
   QList<Transaction> m_listTransactions;
   QList<Price> m_listPrices;
   QList<Security> m_listSecurities;
 
-  bool m_skipCategoryMatching;
+  bool m_skipCategoryMatching = false;
 
   void write(QDomElement&, QDomDocument*) const;
   bool read(const QDomElement&);

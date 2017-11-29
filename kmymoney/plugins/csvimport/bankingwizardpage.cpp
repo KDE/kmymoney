@@ -359,10 +359,10 @@ void BankingPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName
   QString strEType;
 
   switch (st.m_eType) {
-  case MyMoneyStatement::etCreditCard:
+  case eMyMoney::Statement::Type::CreditCard:
     strEType = QStringLiteral("CCard");
-  case MyMoneyStatement::etSavings:
-  case MyMoneyStatement::etCheckings:
+  case eMyMoney::Statement::Type::Savings:
+  case eMyMoney::Statement::Type::Checkings:
   default:
     strEType = QStringLiteral("Bank");
   }

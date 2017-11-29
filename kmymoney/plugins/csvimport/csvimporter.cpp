@@ -93,14 +93,14 @@ const QHash<miscSettingsE, QString> CSVImporter::m_miscSettingsConfName {
   {ConfWidth, QStringLiteral("Width")}
 };
 
-const QHash<MyMoneyStatement::Transaction::EAction, QString> CSVImporter::m_transactionConfName {
-  {MyMoneyStatement::Transaction::eaBuy, QStringLiteral("BuyParam")},
-  {MyMoneyStatement::Transaction::eaSell, QStringLiteral("SellParam")},
-  {MyMoneyStatement::Transaction::eaReinvestDividend, QStringLiteral("ReinvdivParam")},
-  {MyMoneyStatement::Transaction::eaCashDividend, QStringLiteral("DivXParam")},
-  {MyMoneyStatement::Transaction::eaInterest, QStringLiteral("IntIncParam")},
-  {MyMoneyStatement::Transaction::eaShrsin, QStringLiteral("ShrsinParam")},
-  {MyMoneyStatement::Transaction::eaShrsout, QStringLiteral("ShrsoutParam")}
+const QHash<eMyMoney::Transaction::Action, QString> CSVImporter::m_transactionConfName {
+  {eMyMoney::Transaction::Action::Buy, QStringLiteral("BuyParam")},
+  {eMyMoney::Transaction::Action::Sell, QStringLiteral("SellParam")},
+  {eMyMoney::Transaction::Action::ReinvestDividend, QStringLiteral("ReinvdivParam")},
+  {eMyMoney::Transaction::Action::CashDividend, QStringLiteral("DivXParam")},
+  {eMyMoney::Transaction::Action::Interest, QStringLiteral("IntIncParam")},
+  {eMyMoney::Transaction::Action::Shrsin, QStringLiteral("ShrsinParam")},
+  {eMyMoney::Transaction::Action::Shrsout, QStringLiteral("ShrsoutParam")}
 };
 
 const QString CSVImporter::m_confProfileNames = QStringLiteral("ProfileNames");
@@ -488,30 +488,30 @@ bool CSVImporter::validateSecurities()
     return true;
 }
 
-MyMoneyStatement::Transaction::EAction CSVImporter::processActionTypeField(const InvestmentProfile *profile, const int row, const int col)
+eMyMoney::Transaction::Action CSVImporter::processActionTypeField(const InvestmentProfile *profile, const int row, const int col)
 {
   if (col == -1)
-    return MyMoneyStatement::Transaction::eaNone;
+    return eMyMoney::Transaction::Action::None;
 
   QString type = m_file->m_model->item(row, col)->text();
-  QList<MyMoneyStatement::Transaction::EAction> actions;
-  actions << MyMoneyStatement::Transaction::eaBuy << MyMoneyStatement::Transaction::eaSell <<                       // first and second most frequent action
-             MyMoneyStatement::Transaction::eaReinvestDividend << MyMoneyStatement::Transaction::eaCashDividend <<  // we don't want "reinv-dividend" to be accidentaly caught by "dividend"
-             MyMoneyStatement::Transaction::eaInterest <<
-             MyMoneyStatement::Transaction::eaShrsin << MyMoneyStatement::Transaction::eaShrsout;
+  QList<eMyMoney::Transaction::Action> actions;
+  actions << eMyMoney::Transaction::Action::Buy << eMyMoney::Transaction::Action::Sell <<                       // first and second most frequent action
+             eMyMoney::Transaction::Action::ReinvestDividend << eMyMoney::Transaction::Action::CashDividend <<  // we don't want "reinv-dividend" to be accidentaly caught by "dividend"
+             eMyMoney::Transaction::Action::Interest <<
+             eMyMoney::Transaction::Action::Shrsin << eMyMoney::Transaction::Action::Shrsout;
 
   foreach (const auto action, actions) {
     if (profile->m_transactionNames.value(action).contains(type, Qt::CaseInsensitive))
       return action;
   }
 
-  return MyMoneyStatement::Transaction::eaNone;
+  return eMyMoney::Transaction::Action::None;
 }
 
 validationResultE CSVImporter::validateActionType(MyMoneyStatement::Transaction &tr)
 {
   validationResultE ret = ValidActionType;
-  QList<MyMoneyStatement::Transaction::EAction> validActionTypes = createValidActionTypes(tr);
+  QList<eMyMoney::Transaction::Action> validActionTypes = createValidActionTypes(tr);
   if (validActionTypes.isEmpty())
     ret = InvalidActionValues;
   else if (!validActionTypes.contains(tr.m_eAction))
@@ -838,19 +838,19 @@ bool CSVImporter::detectAccount(MyMoneyStatement &st)
 
     switch (accounts.first().accountType()) {
       case eMyMoney::Account::Type::Checkings:
-        st.m_eType = MyMoneyStatement::etCheckings;
+        st.m_eType = eMyMoney::Statement::Type::Checkings;
         break;
       case eMyMoney::Account::Type::Savings:
-        st.m_eType = MyMoneyStatement::etSavings;
+        st.m_eType = eMyMoney::Statement::Type::Savings;
         break;
       case eMyMoney::Account::Type::Investment:
-        st.m_eType = MyMoneyStatement::etInvestment;
+        st.m_eType = eMyMoney::Statement::Type::Investment;
         break;
       case eMyMoney::Account::Type::CreditCard:
-        st.m_eType = MyMoneyStatement::etCreditCard;
+        st.m_eType = eMyMoney::Statement::Type::CreditCard;
         break;
       default:
-        st.m_eType = MyMoneyStatement::etNone;
+        st.m_eType = eMyMoney::Statement::Type::None;
     }
     return true;
   }
@@ -1045,16 +1045,16 @@ bool CSVImporter::processInvestRow(MyMoneyStatement &st, const InvestmentProfile
   s2.m_accountId = MyMoneyFile::instance()->checkCategory(tr.m_strInterestCategory, s1.m_amount, s2.m_amount);
 
   // deduct fees from amount
-  if (tr.m_eAction == MyMoneyStatement::Transaction::eaCashDividend ||
-      tr.m_eAction == MyMoneyStatement::Transaction::eaSell ||
-      tr.m_eAction == MyMoneyStatement::Transaction::eaInterest)
+  if (tr.m_eAction == eMyMoney::Transaction::Action::CashDividend ||
+      tr.m_eAction == eMyMoney::Transaction::Action::Sell ||
+      tr.m_eAction == eMyMoney::Transaction::Action::Interest)
     tr.m_amount -= tr.m_fees;
 
-  else if (tr.m_eAction == MyMoneyStatement::Transaction::eaBuy) {
+  else if (tr.m_eAction == eMyMoney::Transaction::Action::Buy) {
     if (tr.m_amount.isPositive())
       tr.m_amount = -tr.m_amount; //if broker doesn't use minus sings for buy transactions, set it manually here
     tr.m_amount -= tr.m_fees;
-  } else if (tr.m_eAction == MyMoneyStatement::Transaction::eaNone)
+  } else if (tr.m_eAction == eMyMoney::Transaction::Action::None)
     tr.m_listSplits.append(s2);
 
   st.m_listTransactions.append(tr); // Add the MyMoneyStatement::Transaction to the statement
@@ -1213,25 +1213,25 @@ MyMoneyMoney CSVImporter::processPriceField(const PricesProfile *profile, const 
 }
 
 
-QList<MyMoneyStatement::Transaction::EAction> CSVImporter::createValidActionTypes(MyMoneyStatement::Transaction &tr)
+QList<eMyMoney::Transaction::Action> CSVImporter::createValidActionTypes(MyMoneyStatement::Transaction &tr)
 {
-  QList<MyMoneyStatement::Transaction::EAction> validActionTypes;
+  QList<eMyMoney::Transaction::Action> validActionTypes;
   if (tr.m_shares.isPositive() &&
       tr.m_price.isPositive() &&
       !tr.m_amount.isZero())
-    validActionTypes << MyMoneyStatement::Transaction::eaReinvestDividend <<
-                        MyMoneyStatement::Transaction::eaBuy <<
-                        MyMoneyStatement::Transaction::eaSell;
+    validActionTypes << eMyMoney::Transaction::Action::ReinvestDividend <<
+                        eMyMoney::Transaction::Action::Buy <<
+                        eMyMoney::Transaction::Action::Sell;
   else if (tr.m_shares.isZero() &&
            tr.m_price.isZero() &&
            !tr.m_amount.isZero())
-    validActionTypes << MyMoneyStatement::Transaction::eaCashDividend <<
-                        MyMoneyStatement::Transaction::eaInterest;
+    validActionTypes << eMyMoney::Transaction::Action::CashDividend <<
+                        eMyMoney::Transaction::Action::Interest;
   else if (tr.m_shares.isPositive() &&
            tr.m_price.isZero() &&
            tr.m_amount.isZero())
-    validActionTypes << MyMoneyStatement::Transaction::eaShrsin <<
-                        MyMoneyStatement::Transaction::eaShrsout;
+    validActionTypes << eMyMoney::Transaction::Action::Shrsin <<
+                        eMyMoney::Transaction::Action::Shrsout;
   return validActionTypes;
 }
 
@@ -1341,7 +1341,7 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
     {
       if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
         return true;
-      st.m_eType = MyMoneyStatement::etNone;
+      st.m_eType = eMyMoney::Statement::Type::None;
       if (m_autodetect.value(AutoAccountBank))
         detectAccount(st);
 
@@ -1359,7 +1359,7 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
     {
       if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
         return true;
-      st.m_eType = MyMoneyStatement::etInvestment;
+      st.m_eType = eMyMoney::Statement::Type::Investment;
       if (m_autodetect.value(AutoAccountInvest))
         detectAccount(st);
 
@@ -1390,7 +1390,7 @@ bool CSVImporter::createStatement(MyMoneyStatement &st)
     {
       if (!st.m_listPrices.isEmpty()) // don't create statement if there is one
         return true;
-      st.m_eType = MyMoneyStatement::etNone;
+      st.m_eType = eMyMoney::Statement::Type::None;
 
       PricesProfile *profile = dynamic_cast<PricesProfile *>(m_profile);
       for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
@@ -1498,19 +1498,19 @@ bool InvestmentProfile::readSettings(const KSharedConfigPtr &config)
   if (!profilesGroup.exists())
     exists = false;
 
-  m_transactionNames[MyMoneyStatement::Transaction::eaBuy] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaBuy),
+  m_transactionNames[eMyMoney::Transaction::Action::Buy] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Buy),
                                                                    QString(i18nc("Type of operation as in financial statement", "buy")).split(',', QString::SkipEmptyParts));
-  m_transactionNames[MyMoneyStatement::Transaction::eaSell] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaSell),
+  m_transactionNames[eMyMoney::Transaction::Action::Sell] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Sell),
                                                                     QString(i18nc("Type of operation as in financial statement", "sell,repurchase")).split(',', QString::SkipEmptyParts));
-  m_transactionNames[MyMoneyStatement::Transaction::eaReinvestDividend] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaReinvestDividend),
+  m_transactionNames[eMyMoney::Transaction::Action::ReinvestDividend] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::ReinvestDividend),
                                                                                 QString(i18nc("Type of operation as in financial statement", "reinvest,reinv,re-inv")).split(',', QString::SkipEmptyParts));
-  m_transactionNames[MyMoneyStatement::Transaction::eaCashDividend] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaCashDividend),
+  m_transactionNames[eMyMoney::Transaction::Action::CashDividend] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::CashDividend),
                                                                             QString(i18nc("Type of operation as in financial statement", "dividend")).split(',', QString::SkipEmptyParts));
-  m_transactionNames[MyMoneyStatement::Transaction::eaInterest] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaInterest),
+  m_transactionNames[eMyMoney::Transaction::Action::Interest] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Interest),
                                                                         QString(i18nc("Type of operation as in financial statement", "interest,income")).split(',', QString::SkipEmptyParts));
-  m_transactionNames[MyMoneyStatement::Transaction::eaShrsin] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaShrsin),
+  m_transactionNames[eMyMoney::Transaction::Action::Shrsin] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Shrsin),
                                                                       QString(i18nc("Type of operation as in financial statement", "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry")).split(',', QString::SkipEmptyParts));
-  m_transactionNames[MyMoneyStatement::Transaction::eaShrsout] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaShrsout),
+  m_transactionNames[eMyMoney::Transaction::Action::Shrsout] = profilesGroup.readEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Shrsout),
                                                                        QString(i18nc("Type of operation as in financial statement", "remove")).split(',', QString::SkipEmptyParts));
 
   m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporter::m_colTypeConfName.value(Column::Date), -1);
@@ -1541,20 +1541,20 @@ void InvestmentProfile::writeSettings(const KSharedConfigPtr &config)
   KConfigGroup profilesGroup(config, CSVImporter::m_profileConfPrefix.value(type()) + QLatin1Char('-') + m_profileName);
   CSVProfile::writeSettings(profilesGroup);
 
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaBuy),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaBuy));
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaSell),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaSell));
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaReinvestDividend),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaReinvestDividend));
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaCashDividend),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaCashDividend));
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaInterest),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaInterest));
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaShrsin),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaShrsin));
-  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(MyMoneyStatement::Transaction::eaShrsout),
-                           m_transactionNames.value(MyMoneyStatement::Transaction::eaShrsout));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Buy),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::Buy));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Sell),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::Sell));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::ReinvestDividend),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::ReinvestDividend));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::CashDividend),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::CashDividend));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Interest),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::Interest));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Shrsin),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::Shrsin));
+  profilesGroup.writeEntry(CSVImporter::m_transactionConfName.value(eMyMoney::Transaction::Action::Shrsout),
+                           m_transactionNames.value(eMyMoney::Transaction::Action::Shrsout));
 
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfPriceFraction), m_priceFraction);
   profilesGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfFeeIsPercentage), m_feeIsPercentage);

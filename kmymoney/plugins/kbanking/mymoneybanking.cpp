@@ -1436,25 +1436,25 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
   // account type
   switch (AB_ImExporterAccountInfo_GetType(ai)) {
     case AB_AccountType_Bank:
-      ks.m_eType = MyMoneyStatement::etSavings;
+      ks.m_eType = eMyMoney::Statement::Type::Savings;
       break;
     case AB_AccountType_CreditCard:
-      ks.m_eType = MyMoneyStatement::etCreditCard;
+      ks.m_eType = eMyMoney::Statement::Type::CreditCard;
       break;
     case AB_AccountType_Checking:
-      ks.m_eType = MyMoneyStatement::etCheckings;
+      ks.m_eType = eMyMoney::Statement::Type::Checkings;
       break;
     case AB_AccountType_Savings:
-      ks.m_eType = MyMoneyStatement::etSavings;
+      ks.m_eType = eMyMoney::Statement::Type::Savings;
       break;
     case AB_AccountType_Investment:
-      ks.m_eType = MyMoneyStatement::etInvestment;
+      ks.m_eType = eMyMoney::Statement::Type::Investment;
       break;
     case AB_AccountType_Cash:
-      ks.m_eType = MyMoneyStatement::etNone;
+      ks.m_eType = eMyMoney::Statement::Type::None;
       break;
     default:
-      ks.m_eType = MyMoneyStatement::etNone;
+      ks.m_eType = eMyMoney::Statement::Type::None;
   }
 
   // account status

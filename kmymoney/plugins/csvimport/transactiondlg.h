@@ -35,7 +35,7 @@ class TransactionDlg : public QDialog
 
 public:
   TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol,
-              const QList<MyMoneyStatement::Transaction::EAction>& validActionTypes);
+              const QList<eMyMoney::Transaction::Action>& validActionTypes);
   ~TransactionDlg();
 
   Ui::TransactionDlg*   ui;
@@ -43,7 +43,7 @@ public:
   QBrush             m_colorBrushText;
   QBrush             m_errorBrush;
   QBrush             m_errorBrushText;
-  MyMoneyStatement::Transaction::EAction getActionType();
+  eMyMoney::Transaction::Action getActionType();
 
 private:
   QPixmap           m_iconYes;
@@ -52,8 +52,8 @@ private:
   QPushButton*      m_buttonOK;
   QPushButton*      m_buttonCancel;
 
-  QList<MyMoneyStatement::Transaction::EAction> m_validActionTypes;
-  QList<MyMoneyStatement::Transaction::EAction> m_actionTypes;
+  QList<eMyMoney::Transaction::Action> m_validActionTypes;
+  QList<eMyMoney::Transaction::Action> m_actionTypes;
 
   QStringList      m_columnList;
 
@@ -69,7 +69,7 @@ private:
   /**
   * This will add appropriate icons to cbActionTypes entries
   */
-  void             iconifyActionTypesComboBox(const QList<MyMoneyStatement::Transaction::EAction>& validActionTypes);
+  void             iconifyActionTypesComboBox(const QList<eMyMoney::Transaction::Action>& validActionTypes);
 private Q_SLOTS:
   void             slotActionSelected(int index);
 };

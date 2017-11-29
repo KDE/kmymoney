@@ -51,9 +51,9 @@ void CsvImporterTest::init()
                                              TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
                                              QMap<Column, int> {{Column::Date, 0}, {Column::Name, 1}, {Column::Type, 2}, {Column::Quantity, 3}, {Column::Price, 4}, {Column::Amount, 5}},
                                              2,
-                                             QMap <MyMoneyStatement::Transaction::EAction, QStringList>{
-                                               {MyMoneyStatement::Transaction::eaBuy, QStringList {"buy"}},
-                                               {MyMoneyStatement::Transaction::eaSell, QStringList {"sell"}}}
+                                             QMap <eMyMoney::Transaction::Action, QStringList>{
+                                               {eMyMoney::Transaction::Action::Buy, QStringList {"buy"}},
+                                               {eMyMoney::Transaction::Action::Sell, QStringList {"sell"}}}
                                              );
 
   pricesProfile = new PricesProfile ("price source",
@@ -102,7 +102,7 @@ void CsvImporterTest::testBasicPriceTable()
 
   auto st = csvImporter->unattendedImport(filename, pricesProfile);
 
-  QVERIFY(st.m_eType == MyMoneyStatement::etNone);
+  QVERIFY(st.m_eType == eMyMoney::Statement::Type::None);
   QVERIFY(st.m_listPrices.count() == 3);
   QVERIFY(st.m_listPrices[2].m_date == QDate(2017, 8, 3));
   QCOMPARE(st.m_listPrices[2].m_amount.toString(), MyMoneyMoney(5.56).toString());
@@ -193,7 +193,7 @@ void CsvImporterTest::testImportByName()
   writeStatementToCSV(csvContent, filename);
 
   auto st = csvImporter->unattendedImport(filename, investmentProfile);
-  QVERIFY(st.m_eType == MyMoneyStatement::etInvestment);
+  QVERIFY(st.m_eType == eMyMoney::Statement::Type::Investment);
 
   QVERIFY(st.m_listSecurities.count() == 3);
   QVERIFY(st.m_listSecurities[0].m_strName == stockNames.at(0));

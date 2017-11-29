@@ -374,20 +374,20 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
       case OFX_BUYOPT:
       case OFX_BUYOTHER:
       case OFX_BUYSTOCK:
-        t.m_eAction = MyMoneyStatement::Transaction::eaBuy;
+        t.m_eAction = eMyMoney::Transaction::Action::Buy;
         break;
       case OFX_REINVEST:
-        t.m_eAction = MyMoneyStatement::Transaction::eaReinvestDividend;
+        t.m_eAction = eMyMoney::Transaction::Action::ReinvestDividend;
         break;
       case OFX_SELLDEBT:
       case OFX_SELLMF:
       case OFX_SELLOPT:
       case OFX_SELLOTHER:
       case OFX_SELLSTOCK:
-        t.m_eAction = MyMoneyStatement::Transaction::eaSell;
+        t.m_eAction = eMyMoney::Transaction::Action::Sell;
         break;
       case OFX_INCOME:
-        t.m_eAction = MyMoneyStatement::Transaction::eaCashDividend;
+        t.m_eAction = eMyMoney::Transaction::Action::CashDividend;
         // NOTE: With CashDividend, the amount of the dividend should
         // be in data.amount.  Since I've never seen an OFX file with
         // cash dividends, this is an assumption on my part. (acejones)
@@ -430,7 +430,7 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
         break;
     }
   } else
-    t.m_eAction = MyMoneyStatement::Transaction::eaNone;
+    t.m_eAction = eMyMoney::Transaction::Action::None;
 
   // In the case of investment transactions, the 'total' is supposed to the total amount
   // of the transaction.  units * unitprice +/- commission.  Easy, right?  Sadly, it seems
@@ -528,19 +528,19 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
 
   if (data.account_type_valid) {
     switch (data.account_type) {
-      case OfxAccountData::OFX_CHECKING : s.m_eType = MyMoneyStatement::etCheckings;
+      case OfxAccountData::OFX_CHECKING : s.m_eType = eMyMoney::Statement::Type::Checkings;
         break;
-      case OfxAccountData::OFX_SAVINGS : s.m_eType = MyMoneyStatement::etSavings;
+      case OfxAccountData::OFX_SAVINGS : s.m_eType = eMyMoney::Statement::Type::Savings;
         break;
-      case OfxAccountData::OFX_MONEYMRKT : s.m_eType = MyMoneyStatement::etInvestment;
+      case OfxAccountData::OFX_MONEYMRKT : s.m_eType = eMyMoney::Statement::Type::Investment;
         break;
-      case OfxAccountData::OFX_CREDITLINE : s.m_eType = MyMoneyStatement::etCreditCard;
+      case OfxAccountData::OFX_CREDITLINE : s.m_eType = eMyMoney::Statement::Type::CreditCard;
         break;
-      case OfxAccountData::OFX_CMA : s.m_eType = MyMoneyStatement::etCreditCard;
+      case OfxAccountData::OFX_CMA : s.m_eType = eMyMoney::Statement::Type::CreditCard;
         break;
-      case OfxAccountData::OFX_CREDITCARD : s.m_eType = MyMoneyStatement::etCreditCard;
+      case OfxAccountData::OFX_CREDITCARD : s.m_eType = eMyMoney::Statement::Type::CreditCard;
         break;
-      case OfxAccountData::OFX_INVESTMENT : s.m_eType = MyMoneyStatement::etInvestment;
+      case OfxAccountData::OFX_INVESTMENT : s.m_eType = eMyMoney::Statement::Type::Investment;
         break;
     }
   }
