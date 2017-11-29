@@ -326,11 +326,6 @@ void PivotTable::init()
             value = -value;
           }
         }
-
-        //get base price for that date
-        if (m_config_f.isConvertCurrency())
-          convertToBaseCurrency(value, splitAccount, postdate);
-
         // add the value to its correct position in the pivot table
         assignCell(outergroup, splitAccount, column, value, false, stockSplit);
       }
@@ -394,6 +389,13 @@ void PivotTable::init()
   //
 
   convertToDeepCurrency();
+
+  //
+  // Convert all values to the base currency
+  //
+
+  if (m_config_f.isConvertCurrency())
+    convertToBaseCurrency();
 
   //
   // Determine column headings
@@ -658,12 +660,7 @@ void PivotTable::calculateOpeningBalances()
       // date
 
       // this is in the underlying currency
-      QDate date = from.addDays(-1);
-      MyMoneyMoney value = file->balance(account.id(), date);
-
-      //get base price for that date
-      if (m_config_f.isConvertCurrency())
-        convertToBaseCurrency(value, account, date);
+      MyMoneyMoney value = file->balance(account.id(), from.addDays(-1));
 
       // place into the 'opening' column...
       assignCell(outergroup, account, 0, value);
@@ -911,15 +908,13 @@ void PivotTable::calculateBudgetMapping()
               QDate budgetDate = budget.budgetStart();
               while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
                 //only show budget values if the budget year and the column date match
+                //no currency conversion is done here because that is done for all columns later
                 if (budgetDate > columnDate(column)) {
                   ++column;
                 } else {
                   if (budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
                       && budgetDate <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
                       && budgetDate > (columnDate(column).addMonths(-m_config_f.columnType()))) {
-                    //get base price for that date
-                    if (m_config_f.isConvertCurrency())
-                      convertToBaseCurrency(value, splitAccount, budgetDate);
                     assignCell(outergroup, splitAccount, column, value, true /*budget*/);
                   }
                   budgetDate = budgetDate.addMonths(1);
@@ -946,11 +941,6 @@ void PivotTable::calculateBudgetMapping()
                             && (*it_period).startDate() > (columnDate(column).addMonths(-m_config_f.columnType()))) {
                           //no currency conversion is done here because that is done for all columns later
                           value = (*it_period).amount() * reverse;
-                          //get base price for that date
-                          if (m_config_f.isConvertCurrency()) {
-                            QDate budgetDate = (*it_period).startDate();
-                            convertToBaseCurrency(value, splitAccount, budgetDate);
-                          }
                           assignCell(outergroup, splitAccount, column, value, true /*budget*/);
                         }
                         ++it_period;
@@ -970,15 +960,50 @@ void PivotTable::calculateBudgetMapping()
   } // end if there was a budget
 }
 
-void PivotTable::convertToBaseCurrency(MyMoneyMoney &value, const ReportAccount &account, const QDate &date)
+void PivotTable::convertToBaseCurrency()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
+
   int fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
-  MyMoneyMoney conversionfactor = account.baseCurrencyPrice(date, m_config_f.isSkippingZero());
-  MyMoneyMoney oldvalue = value;
-  value = (oldvalue * conversionfactor).reduce();
-  value = value.convert(fraction);
-  DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor.toDouble()).arg(DEBUG_SENSITIVE(oldvalue.toDouble())).arg(DEBUG_SENSITIVE(value.toDouble())));
+
+  PivotGrid::iterator it_outergroup = m_grid.begin();
+  while (it_outergroup != m_grid.end()) {
+    PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
+    while (it_innergroup != (*it_outergroup).end()) {
+      PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
+      while (it_row != (*it_innergroup).end()) {
+        int column = 1;
+        while (column < m_numColumns) {
+          if (it_row.value()[eActual].count() <= column)
+            throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToBaseCurrency").arg(column).arg(it_row.value()[eActual].count()));
+
+          QDate valuedate = columnDate(column);
+
+          //get base price for that date
+          MyMoneyMoney conversionfactor = it_row.key().baseCurrencyPrice(valuedate, m_config_f.isSkippingZero());
+
+          for (int i = 0; i < m_rowTypeList.size(); ++i) {
+            if (m_rowTypeList[i] != eAverage) {
+              //calculate base value
+              MyMoneyMoney oldval = it_row.value()[ m_rowTypeList[i] ][column];
+              MyMoneyMoney value = (oldval * conversionfactor).reduce();
+
+              //convert to lowest fraction
+              it_row.value()[ m_rowTypeList[i] ][column] = PivotCell(value.convert(fraction));
+
+              DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[m_rowTypeList[i]][column].toDouble())));
+            }
+          }
+
+
+          ++column;
+        }
+        ++it_row;
+      }
+      ++it_innergroup;
+    }
+    ++it_outergroup;
+  }
 }
 
 void PivotTable::convertToDeepCurrency()
