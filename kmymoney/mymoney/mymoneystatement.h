@@ -47,8 +47,9 @@ Represents the electronic analog of the paper bank statement just like we used t
 
 @author ace jones
 */
-struct MyMoneyStatement
+class MyMoneyStatement
 {
+public:
   struct Split
   {
     QString      m_strCategoryName;
