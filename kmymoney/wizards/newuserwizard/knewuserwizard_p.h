@@ -43,7 +43,7 @@ namespace NewUserWizard
     Q_DISABLE_COPY(WizardPrivate)
 
   public:
-    WizardPrivate(Wizard *qq):
+    explicit WizardPrivate(Wizard *qq):
       KMyMoneyWizardPrivate(qq),
       m_introPage(nullptr)
     {

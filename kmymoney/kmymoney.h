@@ -1465,7 +1465,7 @@ typedef void(KMyMoneyApp::*KMyMoneyAppFunc)();
 class KMStatus
 {
 public:
-  KMStatus(const QString &text);
+  explicit KMStatus(const QString &text);
   ~KMStatus();
 private:
   QString m_prevText;

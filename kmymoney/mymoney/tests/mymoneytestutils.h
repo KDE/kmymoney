@@ -1,9 +1,9 @@
 /***************************************************************************
                             mymoneytestutils.h
                            -------------------
-    copyright            : (C) 2002 by Thomas Baumgart
+    copyright            : (C) 2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
                            (C) 2014 by Christian Dávid
-    email                : ipwizard@users.sourceforge.net
+
  ***************************************************************************/
 
 /***************************************************************************

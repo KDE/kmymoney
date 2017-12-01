@@ -1,8 +1,8 @@
 /***************************************************************************
                           mymoneytestutils.cpp
                              -------------------
-    copyright            : (C) 2002 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+
  ***************************************************************************/
 
 /***************************************************************************

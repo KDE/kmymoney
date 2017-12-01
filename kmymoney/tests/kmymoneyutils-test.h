@@ -21,7 +21,7 @@
 #define KMYMONEYUTILSTEST_H
 
 #include <QObject>
-#include <QtCore/QList>
+#include <QList>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class KMyMoneyUtilsTest;
 

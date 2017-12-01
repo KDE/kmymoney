@@ -41,7 +41,7 @@ namespace NewAccountWizard
     Q_DISABLE_COPY(BrokeragePagePrivate)
 
   public:
-    BrokeragePagePrivate(QObject* parent) :
+    explicit BrokeragePagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KBrokeragePage)
     {

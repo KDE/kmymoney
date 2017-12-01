@@ -13,6 +13,7 @@ set(libmodels_a_SOURCES
     onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     ../mymoney/onlinejobmessage.cpp
+    ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
     models.cpp
     payeeidentifiercontainermodel.cpp
     onlinejobmessagesmodel.cpp

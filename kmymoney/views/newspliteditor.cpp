@@ -171,7 +171,7 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
     foreach(QModelIndex index, list) {
       if(model->data(index, (int)eLedgerModel::Role::AccountId) == ui->accountCombo->getSelected()
         && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
-        WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.").arg(newNumber));
+        WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
         rc = false;
         break;
       }

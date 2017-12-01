@@ -39,7 +39,7 @@ namespace NewUserWizard
     Q_DISABLE_COPY(PreferencePagePrivate)
 
   public:
-    PreferencePagePrivate(QObject* parent) :
+    explicit PreferencePagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KPreferencePage)
     {

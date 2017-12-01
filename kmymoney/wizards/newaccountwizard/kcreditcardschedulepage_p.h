@@ -41,7 +41,7 @@ namespace NewAccountWizard
     Q_DISABLE_COPY(CreditCardSchedulePagePrivate)
 
   public:
-    CreditCardSchedulePagePrivate(QObject* parent) :
+    explicit CreditCardSchedulePagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KCreditCardSchedulePage)
     {

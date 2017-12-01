@@ -45,7 +45,7 @@ namespace NewAccountWizard
     Q_DISABLE_COPY(LoanPaymentPagePrivate)
 
   public:
-    LoanPaymentPagePrivate(QObject* parent) :
+    explicit LoanPaymentPagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KLoanPaymentPage)
     {

@@ -40,7 +40,7 @@ namespace NewUserWizard
     Q_DISABLE_COPY(FilePagePrivate)
 
   public:
-    FilePagePrivate(QObject* parent) :
+    explicit FilePagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KFilePage)
     {

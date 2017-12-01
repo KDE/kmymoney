@@ -403,7 +403,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
         if (rc.isEmpty()) {
           errorMsg = i18n("The profile name cannot be empty. Please provide a name or cancel.");
         } else {
-          errorMsg = i18n("The name <b>%1</b> is already taken. Please change the name or cancel.").arg(rc);
+          errorMsg = i18n("The name <b>%1</b> is already taken. Please change the name or cancel.", rc);
         }
         KMessageBox::sorry(this, errorMsg, i18n("QIF profile name problem"));
         continue;

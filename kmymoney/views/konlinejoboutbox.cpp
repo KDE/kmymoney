@@ -26,7 +26,7 @@
 #include <QTimer>
 #include <QModelIndex>
 #include <QModelIndexList>
-#include <QMessageBox>
+#include <KMessageBox>
 #include <KActionCollection>
 
 #include "models/models.h"
@@ -206,7 +206,7 @@ void KOnlineJobOutbox::slotSendSelectedJobs()
 
   // Abort if not all jobs can be sent
   if (validJobs.count() != indexes.count()) {
-    QMessageBox::information(this, i18nc("The user selected credit transfers to send. But they cannot be sent.",
+    KMessageBox::information(this, i18nc("The user selected credit transfers to send. But they cannot be sent.",
                                          "Cannot send selection"),
                              i18n("Not all selected credit transfers can be sent because some of them are invalid or were already sent."));
     return;

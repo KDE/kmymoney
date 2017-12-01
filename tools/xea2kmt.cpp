@@ -563,7 +563,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
         foreach(const QString &key, mapKeys)
         {
             if (outFileName.contains('/' + key + '/'))
-                outFileName = outFileName.replace('/' + key + '/', '/' + dirNameMap[key] + "/");
+                outFileName = outFileName.replace('/' + key + '/', '/' + dirNameMap[key] + '/');
         }
         fi.setFile(outFileName);
 

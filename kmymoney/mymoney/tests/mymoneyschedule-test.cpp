@@ -767,11 +767,11 @@ void MyMoneyScheduleTest::testWriteXML()
   QCOMPARE(schedule.attribute("id"), QLatin1String("SCH0001"));
   QCOMPARE(schedule.attribute("paymentType"), QLatin1String("1"));
   QCOMPARE(schedule.attribute("autoEnter"), QLatin1String("1"));
-  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123"));
+  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123")); // krazy:exclude=spelling
   QCOMPARE(schedule.attribute("startDate"), QDate::currentDate().toString(Qt::ISODate));
   QCOMPARE(schedule.attribute("lastPayment"), QDate::currentDate().toString(Qt::ISODate));
-  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123"));
-  QCOMPARE(schedule.attribute("occurence"), QLatin1String("4"));
+  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123")); // krazy:exclude=spelling
+  QCOMPARE(schedule.attribute("occurence"), QLatin1String("4")); // krazy:exclude=spelling
   QCOMPARE(schedule.attribute("type"), QLatin1String("1"));
   QCOMPARE(schedule.attribute("name"), QLatin1String("A Name"));
   QCOMPARE(schedule.attribute("fixed"), QLatin1String("1"));

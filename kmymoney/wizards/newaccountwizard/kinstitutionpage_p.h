@@ -42,7 +42,7 @@ namespace NewAccountWizard
     Q_DISABLE_COPY(InstitutionPagePrivate)
 
   public:
-    InstitutionPagePrivate(QObject* parent) :
+    explicit InstitutionPagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KInstitutionPage)
     {

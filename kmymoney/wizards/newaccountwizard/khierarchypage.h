@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KHIERARCHRYPAGE_H
-#define KHIERARCHRYPAGE_H
+#ifndef KHIERARCHYRYPAGE_H
+#define KHIERARCHYRYPAGE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

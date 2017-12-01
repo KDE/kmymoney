@@ -41,7 +41,7 @@ public:
 };
 
 
-KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit * parent) :
+KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit *parent) : // krazy:exclude=qclasses
   Highlighter(parent),
   d_ptr(new KMyMoneyTextEditHighlighterPrivate)
 {

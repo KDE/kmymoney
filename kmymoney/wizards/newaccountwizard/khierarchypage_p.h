@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KHIERACHRYPAGE_P_H
-#define KHIERACHRYPAGE_P_H
+#ifndef KHIERARCHRYPAGE_P_H
+#define KHIERARCHRYPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -43,7 +43,7 @@ namespace NewAccountWizard
     Q_DISABLE_COPY(HierarchyPagePrivate)
 
   public:
-    HierarchyPagePrivate(QObject* parent) :
+    explicit HierarchyPagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KHierarchyPage)
     {

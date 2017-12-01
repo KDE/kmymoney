@@ -28,7 +28,7 @@ class KMyMoneyTextEditHighlighter : public Sonnet::Highlighter
   Q_DISABLE_COPY(KMyMoneyTextEditHighlighter)
 
 public:
-  explicit KMyMoneyTextEditHighlighter(QTextEdit* parent = nullptr);
+  explicit KMyMoneyTextEditHighlighter(QTextEdit* parent = nullptr); // krazy:exclude=qclasses
   ~KMyMoneyTextEditHighlighter();
 
   void setAllowedChars(const QString& chars);

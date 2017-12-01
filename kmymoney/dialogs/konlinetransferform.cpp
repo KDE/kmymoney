@@ -275,7 +275,7 @@ void kOnlineTransferForm::setJobReadOnly(const bool& readOnly)
   if (readOnly) {
     ui->headMessage->setMessageType(KMessageWidget::Information);
     if (activeOnlineJob().sendDate().isValid())
-      ui->headMessage->setText(i18n("This credit-transfer was sent to your bank at %1 therefore cannot be edited anymore. You may create a copy for editing.").arg(activeOnlineJob().sendDate().toString(Qt::DefaultLocaleShortDate)));
+      ui->headMessage->setText(i18n("This credit-transfer was sent to your bank at %1 therefore cannot be edited anymore. You may create a copy for editing.", activeOnlineJob().sendDate().toString(Qt::DefaultLocaleShortDate)));
     else
       ui->headMessage->setText(i18n("This credit-transfer is not editable. You may create a copy for editing."));
 

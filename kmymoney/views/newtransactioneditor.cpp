@@ -224,7 +224,7 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
   Q_FOREACH(QString accountId, accountIds) {
     if(!isDatePostOpeningDate(date, accountId)) {
       MyMoneyAccount account = MyMoneyFile::instance()->account(accountId);
-      WidgetHintFrame::show(ui->dateEdit, i18n("The posting date is prior to the opening date of account <b>%1</b>.").arg(account.name()));
+      WidgetHintFrame::show(ui->dateEdit, i18n("The posting date is prior to the opening date of account <b>%1</b>.", account.name()));
       rc = false;
       break;
     }
@@ -311,7 +311,7 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
     foreach(QModelIndex index, list) {
       if(model->data(index, (int)eLedgerModel::Role::AccountId) == account.id()
         && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
-        WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.").arg(newNumber));
+        WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
         rc = false;
         break;
       }

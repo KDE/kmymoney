@@ -160,13 +160,13 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
         return i18n("Job is being processed at the moment.");
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.").arg(job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
-        case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).").arg(job.sendDate().toString(Qt::DefaultLocaleShortDate));
+        case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+        case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).", job.sendDate().toString(Qt::DefaultLocaleShortDate));
         case onlineJob::abortedByUser: return i18n("Sending this job was manually aborted.");
-        case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.").arg(job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+        case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
         case onlineJob::noBankAnswer:
           if (job.sendDate().isValid())
-            return i18nc("Arg 1 is a date/time", "The bank accepted this job on %1.").arg(job.sendDate().toString(Qt::DefaultLocaleShortDate));
+            return i18nc("Arg 1 is a date/time", "The bank accepted this job on %1.", job.sendDate().toString(Qt::DefaultLocaleShortDate));
           else if (!job.isValid())
             return i18n("This job needs further editing and cannot be sent therefore.");
           else

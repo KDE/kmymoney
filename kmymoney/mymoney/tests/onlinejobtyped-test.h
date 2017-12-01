@@ -19,7 +19,7 @@
 #ifndef ONLINEJOBTYPEDTEST_H
 #define ONLINEJOBTYPEDTEST_H
 
-#include "QtCore/QObject"
+#include "QObject"
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobTypedTest;
 

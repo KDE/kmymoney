@@ -41,7 +41,7 @@ namespace NewAccountWizard
     Q_DISABLE_COPY(AccountTypePagePrivate)
 
   public:
-    AccountTypePagePrivate(QObject* parent) :
+    explicit AccountTypePagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
       ui(new Ui::KAccountTypePage)
     {
