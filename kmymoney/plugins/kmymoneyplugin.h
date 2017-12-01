@@ -154,8 +154,8 @@ protected:
 class KMM_PLUGIN_EXPORT OnlinePlugin
 {
 public:
-  OnlinePlugin() {}
-  virtual ~OnlinePlugin() {}
+  OnlinePlugin();
+  virtual ~OnlinePlugin();
 
   virtual void protocols(QStringList& protocolList) const = 0;
 

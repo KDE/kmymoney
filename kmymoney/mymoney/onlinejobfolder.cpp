@@ -28,3 +28,27 @@ onlineJobFolder::onlineJobFolder(const onlineJobFolders& folder) :
 {
 }
 
+onlineJobFolder::onlineJobFolder(const onlineJobFolder &other)
+    : m_folder(other.m_folder)
+{
+}
+
+onlineJobFolder onlineJobFolder::outbox()
+{
+  return onlineJobFolder(folderOutbox);
+}
+
+onlineJobFolder onlineJobFolder::drafts()
+{
+  return onlineJobFolder(folderDrafts);
+}
+
+onlineJobFolder onlineJobFolder::templates()
+{
+  return onlineJobFolder(folderTemplates);
+}
+
+onlineJobFolder onlineJobFolder::historic()
+{
+  return onlineJobFolder(folderHistoric);
+}

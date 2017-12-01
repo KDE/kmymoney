@@ -69,6 +69,14 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
   return p;
 }
 
+KMyMoneyPlugin::OnlinePlugin::OnlinePlugin()
+{
+}
+
+KMyMoneyPlugin::OnlinePlugin::~OnlinePlugin()
+{
+}
+
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const
 {
   Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().viewInterface);

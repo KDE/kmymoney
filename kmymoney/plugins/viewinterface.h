@@ -60,7 +60,7 @@ class KMM_PLUGIN_EXPORT ViewInterface : public QObject
 
 public:
   explicit ViewInterface(QObject* parent, const char* name = 0);
-  ~ViewInterface() {}
+  virtual ~ViewInterface();
 
   /**
     * This method creates a new page in the application.

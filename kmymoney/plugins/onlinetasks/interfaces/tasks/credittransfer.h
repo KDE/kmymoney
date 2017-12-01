@@ -20,8 +20,9 @@
 #ifndef CREDITTRANSFER_H
 #define CREDITTRANSFER_H
 
-#include "mymoney/mymoneymoney.h"
-#include "mymoney/mymoneysecurity.h"
+#include "QtPlugin"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "payeeidentifier/payeeidentifier.h"
 
 class QValidator;
@@ -36,7 +37,7 @@ class creditTransfer
 {
 
 public:
-  virtual ~creditTransfer() {}
+  virtual ~creditTransfer();
 
   virtual MyMoneyMoney value() const = 0;
   /** @brief The currency the transfer value is in */
@@ -58,11 +59,9 @@ public:
    * @return
    * @todo Move (logic) to a utils class?
    */
-  virtual QString jobTypeName() const {
-    return "Credit Transfer";
-  }
+  virtual QString jobTypeName() const;
 };
 
-Q_DECLARE_INTERFACE(creditTransfer, "org.kmymoney.onlineTasks.creditTransfer");
+Q_DECLARE_INTERFACE(creditTransfer, "org.kmymoney.onlineTasks.creditTransfer")
 
 #endif // CREDITTRANSFER_H

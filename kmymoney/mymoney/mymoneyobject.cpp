@@ -49,6 +49,11 @@ MyMoneyObject::~MyMoneyObject()
 {
 }
 
+QString MyMoneyObject::id() const
+{
+  return m_id;
+}
+
 void MyMoneyObject::setId(const QString& id)
 {
   m_id = id;

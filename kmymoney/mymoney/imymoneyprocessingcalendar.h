@@ -38,8 +38,9 @@ class QDate;
 class IMyMoneyProcessingCalendar
 {
 public:
-  IMyMoneyProcessingCalendar() {}
-  virtual ~IMyMoneyProcessingCalendar() {}
+  // TODO: find out how to move this ctor and dtor out of header
+  IMyMoneyProcessingCalendar() {} // krazy:exclude=inline
+  virtual ~IMyMoneyProcessingCalendar() {} // krazy:exclude=inline
 
   /**
     * returns if a given day is used by an institution to process

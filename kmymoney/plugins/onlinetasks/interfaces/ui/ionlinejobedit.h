@@ -38,10 +38,7 @@ class IonlineJobEdit : public QWidget
   Q_OBJECT
 
 public:
-  explicit IonlineJobEdit(QWidget* parent = 0, QVariantList args = QVariantList())
-      : QWidget(parent) {
-    Q_UNUSED(args);
-  }
+  explicit IonlineJobEdit(QWidget* parent = 0, QVariantList args = QVariantList());
 
   /**
    * @brief Reads interface and creates an onlineJob
@@ -79,7 +76,7 @@ public Q_SLOTS:
    */
   virtual bool setOnlineJob(const onlineJob&) = 0;
   virtual void setOriginAccount(const QString&) = 0;
-  virtual void showAllErrorMessages(const bool) {}
+  virtual void showAllErrorMessages(const bool);
 
 Q_SIGNALS:
   /**

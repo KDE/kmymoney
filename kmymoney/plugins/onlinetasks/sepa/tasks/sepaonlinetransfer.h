@@ -30,12 +30,12 @@
  */
 class sepaOnlineTransfer : public onlineTask, public creditTransfer
 {
-  Q_INTERFACES(creditTransfer);
+  Q_INTERFACES(creditTransfer)
 
 public:
   ONLINETASK_META(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa");
-  sepaOnlineTransfer() : onlineTask(), creditTransfer() {}
-  sepaOnlineTransfer(const sepaOnlineTransfer &other) : onlineTask(other), creditTransfer(other) {}
+  sepaOnlineTransfer();
+  sepaOnlineTransfer(const sepaOnlineTransfer &other);
 
   virtual QString responsibleAccount() const = 0;
   virtual void setOriginAccount(const QString& accountId) = 0;

@@ -69,13 +69,13 @@ public:
   explicit onlineJobTyped(const QString &id, const onlineJobTyped<T>& other);
 
   /** Does not throw */
-  inline T* task();
+  inline T* task(); // krazy:exclude=inline
 
   /** Does not throw */
-  inline const T* task() const;
+  inline const T* task() const; // krazy:exclude=inline
 
   /** Does not throw */
-  inline const T* constTask() const {
+  inline const T* constTask() const { // krazy:exclude=inline
     return task();
   }
 

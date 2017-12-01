@@ -31,3 +31,7 @@ KMyMoneyPlugin::ImportInterface::ImportInterface(QObject* parent, const char* na
 {
   setObjectName(name);
 }
+
+KMyMoneyPlugin::ImportInterface::~ImportInterface()
+{
+}

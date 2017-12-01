@@ -44,7 +44,7 @@ namespace KMyMoney {
   {
     Q_OBJECT
   public:
-    explicit OldDateEdit(const QDate& date, QWidget* parent = nullptr) : QDateEdit(date, parent) {}
+    explicit OldDateEdit(const QDate& date, QWidget* parent = nullptr);
 
   protected:
     /** if the date was cleared (a state which is not supported by QDateEdit)

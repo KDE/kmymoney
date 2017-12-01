@@ -54,6 +54,11 @@ const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
+KMyMoney::OldDateEdit::OldDateEdit(const QDate& date, QWidget* parent) :
+  QDateEdit(date, parent)
+{
+}
+
 void KMyMoney::OldDateEdit::keyPressEvent(QKeyEvent* k)
 {
   if ((lineEdit()->text().isEmpty() || lineEdit()->selectedText() == lineEdit()->text()) && QChar(k->key()).isDigit()) {

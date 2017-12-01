@@ -87,9 +87,7 @@ public:
 
   virtual ~MyMoneyMoney();
 
-  const MyMoneyMoney abs() const {
-    return static_cast<const MyMoneyMoney>(AlkValue::abs());
-  };
+  MyMoneyMoney abs() const;
 
   /**
     * This method returns a formatted string according to the settings

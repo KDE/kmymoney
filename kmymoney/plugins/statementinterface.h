@@ -48,7 +48,7 @@ class KMM_PLUGIN_EXPORT StatementInterface : public QObject
 
 public:
   explicit StatementInterface(QObject* parent, const char* name = 0);
-  ~StatementInterface() {}
+  virtual ~StatementInterface();
 
   /**
     * This method imports a MyMoneyStatement into the engine

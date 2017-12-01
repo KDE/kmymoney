@@ -119,6 +119,11 @@ MyMoneyMoney::~MyMoneyMoney()
 {
 }
 
+MyMoneyMoney MyMoneyMoney::abs() const
+{
+  return static_cast<const MyMoneyMoney>(AlkValue::abs());
+}
+
 QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator) const
 {
   return formatMoney("", denomToPrec(denom), showThousandSeparator);

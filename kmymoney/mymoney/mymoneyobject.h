@@ -57,9 +57,7 @@ public:
     *
     * @return ID of object
     */
-  const QString& id() const {
-    return m_id;
-  };
+  QString id() const;
 
   /**
     * This method clears the id of the object

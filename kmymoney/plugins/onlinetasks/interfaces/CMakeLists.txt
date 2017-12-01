@@ -11,6 +11,7 @@ set ( onlinetask_interfaces_HEADER
 set ( onlinetask_interfaces_SRCS
   converter/onlinetaskconverter.cpp
   tasks/onlinetask.cpp
+  tasks/credittransfer.cpp
   ui/ionlinejobedit.cpp
 )
 

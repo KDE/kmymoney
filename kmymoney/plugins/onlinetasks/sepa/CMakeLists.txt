@@ -3,6 +3,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.json.in ${CMAKE_C
 
 set( sepaOnlineTasks_SRCS
   tasks/sepaonlinetransferimpl.cpp
+  tasks/sepaonlinetransfer.cpp
   ui/sepacredittransferedit.cpp
   sepastorageplugin.cpp
   sepaonlinetasksloader.cpp

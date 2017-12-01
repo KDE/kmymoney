@@ -32,21 +32,12 @@
 class onlineJobFolder
 {
 public:
-  inline onlineJobFolder(const onlineJobFolder &other) // krazy:exclude=explicit
-      : m_folder(other.m_folder) {}
+  onlineJobFolder(const onlineJobFolder &other); // krazy:exclude=explicit
 
-  static onlineJobFolder outbox() {
-    return onlineJobFolder(folderOutbox);
-  }
-  static onlineJobFolder drafts() {
-    return onlineJobFolder(folderDrafts);
-  }
-  static onlineJobFolder templates() {
-    return onlineJobFolder(folderTemplates);
-  }
-  static onlineJobFolder historic() {
-    return onlineJobFolder(folderHistoric);
-  }
+  static onlineJobFolder outbox();
+  static onlineJobFolder drafts();
+  static onlineJobFolder templates();
+  static onlineJobFolder historic();
 
 private:
   enum onlineJobFolders {

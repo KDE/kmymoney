@@ -47,7 +47,7 @@ class KMM_PLUGIN_EXPORT ImportInterface : public QObject
 
 public:
   explicit ImportInterface(QObject* parent, const char* name = 0);
-  ~ImportInterface() {}
+  virtual ~ImportInterface();
 
   /**
    * This method is provided by KMyMoney to select a file to

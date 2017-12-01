@@ -17,3 +17,13 @@
  */
 
 #include "ionlinejobedit.h"
+
+IonlineJobEdit::IonlineJobEdit(QWidget* parent, QVariantList args)
+    : QWidget(parent)
+{
+  Q_UNUSED(args);
+}
+
+void IonlineJobEdit::showAllErrorMessages(const bool)
+{
+}

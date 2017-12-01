@@ -39,7 +39,8 @@ namespace KMyMoneyRegister
   class SelectedTransactions: public QList<SelectedTransaction>
   {
   public:
-    SelectedTransactions() {} // TODO: find out how to move this ctor out of header
+    // TODO: find out how to move this ctor out of header
+    SelectedTransactions() {} // krazy:exclude=inline
     explicit  SelectedTransactions(const Register* r);
 
     /**
