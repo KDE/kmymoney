@@ -69,8 +69,11 @@ protected:
  *
  * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
  *
- * @code typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
- * should work as well
+ * @code
+ * typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
+ * @endcode
+ *
+ * should work as well.
  */
 class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
 {
@@ -89,7 +92,15 @@ typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> O
 
 
 /**
+  * @brief A general account selection widget based on a KComboBox
   *
+  * This widget allows to select an account from the provided set of accounts. This
+  * set is passed as model in the constructor or via setModel(). In case the widget
+  * is configured to be editable via setEditable() the combo box contains a lineedit
+  * widget. This lineedit provides auto completion.
+  *
+  * In addition to the KComboBox which supports a list view popup, this widget
+  * provides a tree view popup to show the account hierarchy.
   *
   * @author Cristian Onet
   */
@@ -166,3 +177,4 @@ bool AccountNamesFilterProxyModelTpl<baseProxyModel>::filterAcceptsColumn(int so
   return false;
 }
 #endif
+// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

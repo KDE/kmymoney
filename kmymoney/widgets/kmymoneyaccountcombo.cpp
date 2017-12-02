@@ -209,7 +209,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
   if(isEditable()) {
     lineEdit()->clear();
   }
-  // find which item has this id and set is as the current item
+  // find which item has this id and set it as the current item
   QModelIndexList list = model()->match(model()->index(0, 0), (int)eAccountsModel::Role::ID,
                                         QVariant(id),
                                         1,
@@ -242,17 +242,28 @@ const QString& KMyMoneyAccountCombo::getSelected() const
 
 void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 {
+  // CAUTION! Assumption is being made that Account column number is always 0
+  if ((int)eAccountsModel::Column::Account != 0) {
+    qFatal("eAccountsModel::Column::Account must be 0 in modelenums.h");
+  }
+
+  // since we create a new popup view, we get rid of an existing one
   delete d->m_popupView;
 
+  // call base class implementation
   KComboBox::setModel(model);
-  model->setFilterKeyColumn((int)eAccountsModel::Column::Account); // CAUTION! Assumption is being made that Account column number is always 0
+
+  // setup filtering criteria
+  model->setFilterKeyColumn((int)eAccountsModel::Column::Account);
   model->setFilterRole((int)eAccountsModel::Role::FullName);
 
+  // create popup view, attach model and allow to select a single item
   d->m_popupView = new QTreeView(this);
   d->m_popupView->setModel(model);
   d->m_popupView->setSelectionMode(QAbstractItemView::SingleSelection);
   setView(d->m_popupView);
 
+  // setup view parameters
   d->m_popupView->setHeaderHidden(true);
   d->m_popupView->setRootIsDecorated(true);
   d->m_popupView->setAlternatingRowColors(true);
@@ -260,6 +271,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
   d->m_popupView->expandAll();
 
+  // setup signal connections
   connect(d->m_popupView, &QAbstractItemView::activated, this, &KMyMoneyAccountCombo::selectItem);
 
   if(isEditable()) {
@@ -354,3 +366,5 @@ void KMyMoneyAccountCombo::hidePopup()
   }
   KComboBox::hidePopup();
 }
+
+// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;
