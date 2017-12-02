@@ -53,8 +53,13 @@ public:
   void loadTransaction(const QString& id);
   void saveTransaction();
 
+  /**
+   * Reimplemented to suppress some events in certain conditions
+   */
+  bool eventFilter(QObject* o, QEvent* e) override;
+
 protected:
-  virtual void keyPressEvent(QKeyEvent* e);
+  virtual void keyPressEvent(QKeyEvent* e) override;
 
 protected Q_SLOTS:
   virtual void reject();

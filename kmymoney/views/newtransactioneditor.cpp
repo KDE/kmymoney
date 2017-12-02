@@ -411,6 +411,12 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
   connect(d->ui->splitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editSplits()));
 
+  // handle some events in certain conditions different from default
+  d->ui->payeeEdit->installEventFilter(this);
+  d->ui->costCenterCombo->installEventFilter(this);
+  d->ui->tagComboBox->installEventFilter(this);
+  d->ui->statusCombo->installEventFilter(this);
+
   // setup tooltip
 
   // setWindowFlags(Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint);
@@ -700,3 +706,17 @@ void NewTransactionEditor::saveTransaction()
   }
 
 }
+
+bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
+{
+  auto cb = qobject_cast<QComboBox*>(o);
+  if (o) {
+    // filter out wheel events for combo boxes if the popup view is not visible
+    if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
+      return true;
+    }
+  }
+  return QFrame::eventFilter(o, e);
+}
+
+// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;
