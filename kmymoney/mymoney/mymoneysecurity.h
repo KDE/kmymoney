@@ -58,8 +58,7 @@ namespace eMyMoney { namespace Security { enum class Type; } }
 class MyMoneySecurityPrivate;
 class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_DECLARE_PRIVATE(MyMoneySecurity)
-  MyMoneySecurityPrivate* d_ptr;
+  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneySecurity)
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -167,8 +166,7 @@ public:
 inline void swap(MyMoneySecurity& first, MyMoneySecurity& second) // krazy:exclude=inline
 {
   using std::swap;
-  swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
+  swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
   swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 

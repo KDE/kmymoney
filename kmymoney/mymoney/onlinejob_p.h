@@ -25,6 +25,7 @@
 #include <QHash>
 #include <QMap>
 
+#include "mymoneyobject_p.h"
 #include "onlinejobmessage.h"
 
 namespace OnlineJob {
@@ -45,12 +46,12 @@ namespace OnlineJob {
   uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-class onlineJobPrivate {
-
+class onlineJobPrivate : public MyMoneyObjectPrivate
+{
 public:
   static QString getElName(const OnlineJob::Element el)
   {
-    static const QMap<OnlineJob::Element, QString> elNames = {
+    static const QMap<OnlineJob::Element, QString> elNames {
       {OnlineJob::Element::OnlineTask, QStringLiteral("onlineTask")}
     };
     return elNames[el];
@@ -58,7 +59,7 @@ public:
 
   static QString getAttrName(const OnlineJob::Attribute attr)
   {
-    static const QHash<OnlineJob::Attribute, QString> attrNames = {
+    static const QHash<OnlineJob::Attribute, QString> attrNames {
       {OnlineJob::Attribute::Send,             QStringLiteral("send")},
       {OnlineJob::Attribute::BankAnswerDate,   QStringLiteral("bankAnswerDate")},
       {OnlineJob::Attribute::BankAnswerState,  QStringLiteral("bankAnswerState")},

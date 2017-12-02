@@ -60,7 +60,6 @@ class MyMoneySchedulePrivate;
 class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
 {
   Q_DECLARE_PRIVATE(MyMoneySchedule)
-  MyMoneySchedulePrivate* d_ptr;
 
   friend class MyMoneyStorageANON;
   KMM_MYMONEY_UNIT_TESTABLE
@@ -712,7 +711,6 @@ inline void swap(MyMoneySchedule& first, MyMoneySchedule& second) // krazy:exclu
 {
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
 }
 
 inline MyMoneySchedule::MyMoneySchedule(MyMoneySchedule && other) : MyMoneySchedule() // krazy:exclude=inline

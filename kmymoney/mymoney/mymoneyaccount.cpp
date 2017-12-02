@@ -54,16 +54,14 @@ using namespace MyMoneyStorageNodes;
 using namespace Icons;
 
 MyMoneyAccount::MyMoneyAccount() :
-  MyMoneyObject(),
-  MyMoneyKeyValueContainer(),
-  d_ptr(new MyMoneyAccountPrivate)
+  MyMoneyObject(*new MyMoneyAccountPrivate),
+  MyMoneyKeyValueContainer()
 {
 }
 
 MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
-    MyMoneyObject(node),
-    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
-    d_ptr(new MyMoneyAccountPrivate)
+    MyMoneyObject(*new MyMoneyAccountPrivate, node),
+    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
 {
   if (nodeNames[nnAccount] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not ACCOUNT");
@@ -113,7 +111,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   }
   setDescription(node.attribute(d->getAttrName(Account::Attribute::Description)));
 
-  m_id = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));
+  d->m_id = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));
   // qDebug("Account %s has id of %s, type of %d, parent is %s.", acc.name().data(), id.data(), type, acc.parentAccountId().data());
 
   //  Process any Sub-Account information found inside the account entry.
@@ -147,23 +145,19 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
 }
 
 MyMoneyAccount::MyMoneyAccount(const MyMoneyAccount& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneyAccountPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), other.id()),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneyAccount::MyMoneyAccount(const QString& id, const MyMoneyAccount& other) :
-  MyMoneyObject(id),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneyAccountPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), id),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneyAccount::~MyMoneyAccount()
 {
-  Q_D(MyMoneyAccount);
-  delete d;
 }
 
 void MyMoneyAccount::touch()
@@ -434,11 +428,11 @@ QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::paye
 
 void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  QDomElement el = document.createElement(nodeNames[nnAccount]);
-
-  writeBaseXML(document, el);
+  auto el = document.createElement(nodeNames[nnAccount]);
 
   Q_D(const MyMoneyAccount);
+  d->writeBaseXML(document, el);
+
   el.setAttribute(d->getAttrName(Account::Attribute::ParentAccount), parentAccountId());
   el.setAttribute(d->getAttrName(Account::Attribute::LastReconciled), MyMoneyUtils::dateToString(lastReconciliationDate()));
   el.setAttribute(d->getAttrName(Account::Attribute::LastModified), MyMoneyUtils::dateToString(lastModified()));

@@ -35,6 +35,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
+
 namespace Institution
 {
   enum class Element { AccountID,
@@ -56,12 +58,12 @@ namespace Institution
   uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-class MyMoneyInstitutionPrivate {
-
+class MyMoneyInstitutionPrivate : public MyMoneyObjectPrivate
+{
 public:
   static QString getElName(const Institution::Element el)
   {
-    static const QMap<Institution::Element, QString> elNames = {
+    static const QMap<Institution::Element, QString> elNames {
       {Institution::Element::AccountID,  QStringLiteral("ACCOUNTID")},
       {Institution::Element::AccountIDS, QStringLiteral("ACCOUNTIDS")},
       {Institution::Element::Address,    QStringLiteral("ADDRESS")}
@@ -71,7 +73,7 @@ public:
 
   static QString getAttrName(const Institution::Attribute attr)
   {
-    static const QHash<Institution::Attribute, QString> attrNames = {
+    static const QHash<Institution::Attribute, QString> attrNames {
       {Institution::Attribute::ID,         QStringLiteral("id")},
       {Institution::Attribute::Name,       QStringLiteral("name")},
       {Institution::Attribute::Manager,    QStringLiteral("manager")},

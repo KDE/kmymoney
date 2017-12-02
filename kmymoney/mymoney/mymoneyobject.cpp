@@ -3,6 +3,7 @@
                           -------------------
     copyright            : (C) 2005 by Thomas Baumagrt
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,68 +16,80 @@
  ***************************************************************************/
 
 #include "mymoneyobject.h"
+#include "mymoneyobject_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QString>
-#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyexception.h"
 
-const QString MyMoneyObject::m_emptyId;
-
-MyMoneyObject::MyMoneyObject(const QString& id)
+MyMoneyObject::MyMoneyObject(const QString& id) :
+  d_ptr(new MyMoneyObjectPrivate)
 {
-  m_id = id;
+  Q_D(MyMoneyObject);
+  d->m_id = id;
 }
 
-MyMoneyObject::MyMoneyObject(const QDomElement& el, const bool forceId)
+MyMoneyObject::MyMoneyObject(const QDomElement& node, bool forceId)
 {
-  m_id = el.attribute("id");
-  if (m_id.length() == 0 && forceId)
+  Q_D(MyMoneyObject);
+  d->m_id = node.attribute(QStringLiteral("id"));
+  if (d->m_id.length() == 0 && forceId)
     throw MYMONEYEXCEPTION("Node has no ID");
 }
 
-MyMoneyObject::MyMoneyObject()
+MyMoneyObject::MyMoneyObject() :
+  d_ptr(new MyMoneyObjectPrivate)
 {
+}
+
+MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd) :
+  d_ptr(&dd)
+{
+}
+
+MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd,
+                             const QString& id) :
+  d_ptr(&dd)
+{
+  Q_D(MyMoneyObject);
+  d->m_id = id;
+}
+
+MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd,
+                             const QDomElement& node,
+                             bool forceId) :
+  d_ptr(&dd)
+{
+  Q_D(MyMoneyObject);
+  d->m_id = node.attribute(QStringLiteral("id"));
+  if (d->m_id.length() == 0 && forceId)
+    throw MYMONEYEXCEPTION("Node has no ID");
 }
 
 MyMoneyObject::~MyMoneyObject()
 {
+  Q_D(MyMoneyObject);
+  delete d;
 }
 
 QString MyMoneyObject::id() const
 {
-  return m_id;
-}
-
-void MyMoneyObject::setId(const QString& id)
-{
-  m_id = id;
+  Q_D(const MyMoneyObject);
+  return d->m_id;
 }
 
 bool MyMoneyObject::operator == (const MyMoneyObject& right) const
 {
-  return m_id == right.m_id;
+  Q_D(const MyMoneyObject);
+  return d->m_id == right.d_func()->m_id;
 }
 
 void MyMoneyObject::clearId()
 {
-  m_id.clear();
-}
-
-const QString& MyMoneyObject::emptyId()
-{
-  return m_emptyId;
-}
-
-void MyMoneyObject::writeBaseXML(QDomDocument& document, QDomElement& el) const
-{
-  Q_UNUSED(document);
-
-  el.setAttribute(QStringLiteral("id"), m_id);
+  Q_D(MyMoneyObject);
+  d->m_id.clear();
 }

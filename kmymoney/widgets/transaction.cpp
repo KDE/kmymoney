@@ -307,7 +307,7 @@ eMyMoney::Split::State Transaction::sortReconcileState() const
   return d->m_split.reconcileFlag();
 }
 
-const QString& Transaction::id() const
+QString Transaction::id() const
 {
   Q_D(const Transaction);
   return d->m_uniqueId;

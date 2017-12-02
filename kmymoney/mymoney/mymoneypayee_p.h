@@ -30,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
+
 namespace Payee
 {
   enum class Element { Address };
@@ -56,8 +58,8 @@ namespace Payee
   uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-class MyMoneyPayeePrivate {
-
+class MyMoneyPayeePrivate : public MyMoneyObjectPrivate
+{
 public:
 
   MyMoneyPayeePrivate() :

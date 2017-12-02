@@ -33,6 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
 #include "mymoneyenums.h"
@@ -70,8 +71,8 @@ namespace eMyMoney
   }
 }
 
-class MyMoneyAccountPrivate {
-
+class MyMoneyAccountPrivate : public MyMoneyObjectPrivate
+{
 public:
 
   MyMoneyAccountPrivate() :

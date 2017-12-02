@@ -63,7 +63,7 @@ void MyMoneySplitTest::testSetFunctions()
   m->setReconcileFlag(eMyMoney::Split::State::Cleared);
   m->setShares(MyMoneyMoney(1234, 100));
   m->setValue(MyMoneyMoney(3456, 100));
-  m->setId("MyID");
+  m->d_func()->setId("MyID");
   m->setPayeeId("Payee");
   m->setCostCenterId("CostCenter");
   QList<QString> tagIdList;
@@ -156,7 +156,7 @@ void MyMoneySplitTest::testInequality()
   QVERIFY(!(n == *m));
 
   n = *m;
-  n.setId("Not My ID");
+  n.d_func()->setId("Not My ID");
   QVERIFY(!(n == *m));
 
   n = *m;

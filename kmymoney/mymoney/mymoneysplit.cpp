@@ -57,16 +57,15 @@ const char MyMoneySplit::ActionSplitShares[] = "Split";
 const char MyMoneySplit::ActionInterestIncome[] = "IntIncome";
 
 MyMoneySplit::MyMoneySplit() :
-d_ptr(new MyMoneySplitPrivate)
+  MyMoneyObject(*new MyMoneySplitPrivate)
 {
   Q_D(MyMoneySplit);
   d->m_reconcileFlag = eMyMoney::Split::State::NotReconciled;
 }
 
 MyMoneySplit::MyMoneySplit(const QDomElement& node) :
-    MyMoneyObject(node, false),
-    MyMoneyKeyValueContainer(node.elementsByTagName(MyMoneySplitPrivate::getElName(Split::Element::KeyValuePairs)).item(0).toElement()),
-    d_ptr(new MyMoneySplitPrivate)
+    MyMoneyObject(*new MyMoneySplitPrivate, node, false),
+    MyMoneyKeyValueContainer(node.elementsByTagName(MyMoneySplitPrivate::getElName(Split::Element::KeyValuePairs)).item(0).toElement())
 {
   Q_D(MyMoneySplit);
   if (d->getElName(Split::Element::Split) != node.tagName())
@@ -94,23 +93,19 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
 }
 
 MyMoneySplit::MyMoneySplit(const MyMoneySplit& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneySplitPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), other.id()),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneySplit::MyMoneySplit(const QString& id, const MyMoneySplit& other) :
-  MyMoneyObject(id),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneySplitPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), id),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneySplit::~MyMoneySplit()
 {
-  Q_D(MyMoneySplit);
-  delete d;
 }
 
 bool MyMoneySplit::operator == (const MyMoneySplit& right) const
@@ -397,9 +392,9 @@ MyMoneyMoney MyMoneySplit::price() const
 void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_D(const MyMoneySplit);
-  QDomElement el = document.createElement(d->getElName(Split::Element::Split));
+  auto el = document.createElement(d->getElName(Split::Element::Split));
 
-  writeBaseXML(document, el);
+  d->writeBaseXML(document, el);
 
   el.setAttribute(d->getAttrName(Split::Attribute::Payee), d->m_payee);
   //el.setAttribute(getAttrName(Split::Attribute::Tag), m_tag);

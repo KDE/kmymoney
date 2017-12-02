@@ -48,8 +48,7 @@ using namespace eMyMoney;
 static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
 
 MyMoneySchedule::MyMoneySchedule() :
-    MyMoneyObject(),
-    d_ptr(new MyMoneySchedulePrivate)
+    MyMoneyObject(*new MyMoneySchedulePrivate)
 {
 }
 
@@ -62,8 +61,7 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
                                  const QDate& endDate,
                                  bool fixed,
                                  bool autoEnter) :
-    MyMoneyObject(),
-    d_ptr(new MyMoneySchedulePrivate)
+    MyMoneyObject(*new MyMoneySchedulePrivate)
 {
   Q_D(MyMoneySchedule);
   // Set up the values possibly differeing from defaults
@@ -79,8 +77,7 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
 }
 
 MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
-    MyMoneyObject(node),
-    d_ptr(new MyMoneySchedulePrivate)
+    MyMoneyObject(*new MyMoneySchedulePrivate, node)
 {
   if (nodeNames[nnScheduleTX] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
@@ -149,21 +146,17 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
 }
 
 MyMoneySchedule::MyMoneySchedule(const MyMoneySchedule& other) :
-  MyMoneyObject(other.id()),
-  d_ptr(new MyMoneySchedulePrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneySchedulePrivate(*other.d_func()), other.id())
 {
 }
 
 MyMoneySchedule::MyMoneySchedule(const QString& id, const MyMoneySchedule& other) :
-  MyMoneyObject(id),
-  d_ptr(new MyMoneySchedulePrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneySchedulePrivate(*other.d_func()), id)
 {
 }
 
 MyMoneySchedule::~MyMoneySchedule()
 {
-  Q_D(MyMoneySchedule);
-  delete d;
 }
 
 Schedule::Occurrence MyMoneySchedule::occurrence() const
@@ -453,10 +446,10 @@ void MyMoneySchedule::validate(bool id_check) const
    * m_transaction
    *   the transaction must contain at least one split (two is better ;-)  )
    */
-  if (id_check && !m_id.isEmpty())
+  Q_D(const MyMoneySchedule);
+  if (id_check && !d->m_id.isEmpty())
     throw MYMONEYEXCEPTION("ID for schedule not empty when required");
 
-  Q_D(const MyMoneySchedule);
   if (d->m_occurrence == Schedule::Occurrence::Any)
     throw MYMONEYEXCEPTION("Invalid occurrence type for schedule");
 
@@ -943,9 +936,9 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
 {
   auto el = document.createElement(nodeNames[nnScheduleTX]);
 
-  writeBaseXML(document, el);
-
   Q_D(const MyMoneySchedule);
+  d->writeBaseXML(document, el);
+
   el.setAttribute(d->getAttrName(Schedule::Attribute::Name), d->m_name);
   el.setAttribute(d->getAttrName(Schedule::Attribute::Type), (int)d->m_type);
   el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence);

@@ -40,7 +40,6 @@ class MyMoneyTagPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 {
   Q_DECLARE_PRIVATE(MyMoneyTag)
-  MyMoneyTagPrivate* d_ptr;
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -107,7 +106,6 @@ inline void swap(MyMoneyTag& first, MyMoneyTag& second) // krazy:exclude=inline
 {
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
 }
 
 inline MyMoneyTag::MyMoneyTag(MyMoneyTag && other) : MyMoneyTag() // krazy:exclude=inline

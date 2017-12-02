@@ -54,7 +54,6 @@ class onlineJobPrivate;
 class KMM_MYMONEY_EXPORT onlineJob : public MyMoneyObject
 {
   Q_DECLARE_PRIVATE(onlineJob)
-  onlineJobPrivate* d_ptr;
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -320,7 +319,6 @@ inline void swap(onlineJob& first, onlineJob& second) // krazy:exclude=inline
 {
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
   swap(first.m_task, second.m_task);
 }
 

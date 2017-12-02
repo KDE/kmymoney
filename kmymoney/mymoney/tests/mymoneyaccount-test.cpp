@@ -224,7 +224,7 @@ void MyMoneyAccountTest::testEquality()
   a.setLastReconciliationDate(QDate::currentDate());
   a.setAccountType(eMyMoney::Account::Type::Asset);
   a.setParentAccountId("P-ID");
-  a.setId("A-ID");
+  a.d_func()->setId("A-ID");
   a.setCurrencyId("C-ID");
   a.setValue("Key", "Value");
 
@@ -269,7 +269,7 @@ void MyMoneyAccountTest::testEquality()
   QVERIFY(!(b == a));
   b = a;
 
-  a.setId("A-noID");
+  a.d_func()->setId("A-noID");
   QVERIFY(!(b == a));
   b = a;
 

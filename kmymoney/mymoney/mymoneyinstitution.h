@@ -43,8 +43,7 @@ class QPixmap;
 class MyMoneyInstitutionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyInstitution : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_DECLARE_PRIVATE(MyMoneyInstitution)
-  MyMoneyInstitutionPrivate* d_ptr;
+  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyInstitution)
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -173,8 +172,7 @@ public:
 inline void swap(MyMoneyInstitution& first, MyMoneyInstitution& second) // krazy:exclude=inline
 {
   using std::swap;
-  swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
+  swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
   swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 

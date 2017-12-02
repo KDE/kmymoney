@@ -7368,7 +7368,7 @@ void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<creditTransfer> job)
 void KMyMoneyApp::slotOnlineJobSave(onlineJob job)
 {
   MyMoneyFileTransaction fileTransaction;
-  if (job.id() == MyMoneyObject::emptyId())
+  if (job.id().isEmpty())
     MyMoneyFile::instance()->addOnlineJob(job);
   else
     MyMoneyFile::instance()->modifyOnlineJob(job);
@@ -7379,7 +7379,7 @@ void KMyMoneyApp::slotOnlineJobSave(onlineJob job)
 void KMyMoneyApp::slotOnlineJobSend(onlineJob job)
 {
   MyMoneyFileTransaction fileTransaction;
-  if (job.id() == MyMoneyObject::emptyId())
+  if (job.id().isEmpty())
     MyMoneyFile::instance()->addOnlineJob(job);
   else
     MyMoneyFile::instance()->modifyOnlineJob(job);
@@ -7397,7 +7397,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 
   // Sort jobs by online plugin & lock them
   foreach (onlineJob job, jobs) {
-    Q_ASSERT(job.id() != MyMoneyObject::emptyId());
+    Q_ASSERT(!job.id().isEmpty());
     // find the provider
     const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
     job.setLock();

@@ -51,8 +51,7 @@ template <typename T> class QList;
 class MyMoneyTransactionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_DECLARE_PRIVATE(MyMoneyTransaction)
-  MyMoneyTransactionPrivate* d_ptr;
+  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyTransaction)
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -307,8 +306,7 @@ public:
 inline void swap(MyMoneyTransaction& first, MyMoneyTransaction& second) // krazy:exclude=inline
 {
   using std::swap;
-  swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
+  swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
   swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 

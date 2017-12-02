@@ -29,6 +29,7 @@
 #include "mymoneyschedule_p.h"
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
+#include "mymoneytransaction_p.h"
 #include "storage/mymoneyseqaccessmgr.h"
 
 QTEST_GUILESS_MAIN(MyMoneyScheduleTest)
@@ -81,7 +82,7 @@ void MyMoneyScheduleTest::testSetFunctions()
 {
   MyMoneySchedule s;
 
-  s.setId("SCHED001");
+  s.d_func()->setId("SCHED001");
   QCOMPARE(s.id(), QLatin1String("SCHED001"));
 
   s.setType(Schedule::Type::Bill);
@@ -96,7 +97,7 @@ void MyMoneyScheduleTest::testCopyConstructor()
 {
   MyMoneySchedule s;
 
-  s.setId("SCHED001");
+  s.d_func()->setId("SCHED001");
   s.setType(Schedule::Type::Bill);
 
   MyMoneySchedule s2(s);
@@ -109,7 +110,7 @@ void MyMoneyScheduleTest::testAssignmentConstructor()
 {
   MyMoneySchedule s;
 
-  s.setId("SCHED001");
+  s.d_func()->setId("SCHED001");
   s.setType(Schedule::Type::Bill);
 
   MyMoneySchedule s2 = s;
@@ -720,12 +721,12 @@ void MyMoneyScheduleTest::testWriteXML()
 
   sch.setLastPayment(QDate::currentDate());
   sch.recordPayment(QDate::currentDate());
-  sch.setId("SCH0001");
+  sch.d_func()->setId("SCH0001");
 
   MyMoneyTransaction t;
   t.setPostDate(QDate(2001, 12, 28));
   t.setEntryDate(QDate(2003, 9, 29));
-  t.setId("T000000000000000001");
+  t.d_func()->setId("T000000000000000001");
   t.setMemo("Wohnung:Miete");
   t.setCommodity("EUR");
   t.setValue("key", "value");

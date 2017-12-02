@@ -45,7 +45,6 @@ class MyMoneyPayeePrivate;
 class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPayeeIdentifierContainer
 {
   Q_DECLARE_PRIVATE(MyMoneyPayee)
-  MyMoneyPayeePrivate* d_ptr;
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -185,7 +184,6 @@ inline void swap(MyMoneyPayee& first, MyMoneyPayee& second) // krazy:exclude=inl
 {
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
   swap(first.m_payeeIdentifiers, second.m_payeeIdentifiers);
 }
 

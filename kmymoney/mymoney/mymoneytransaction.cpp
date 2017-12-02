@@ -36,8 +36,7 @@
 using namespace MyMoneyStorageNodes;
 
 MyMoneyTransaction::MyMoneyTransaction() :
-    MyMoneyObject(),
-    d_ptr(new MyMoneyTransactionPrivate)
+    MyMoneyObject(*new MyMoneyTransactionPrivate)
 {
   Q_D(MyMoneyTransaction);
   d->m_nextSplitID = 1;
@@ -46,8 +45,7 @@ MyMoneyTransaction::MyMoneyTransaction() :
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool forceId) :
-    MyMoneyObject(node, forceId),
-    d_ptr(new MyMoneyTransactionPrivate)
+    MyMoneyObject(*new MyMoneyTransactionPrivate, node, forceId)
 {
   Q_D(MyMoneyTransaction);
   if (nodeNames[nnTransaction] != node.tagName())
@@ -89,16 +87,14 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneyTransactionPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), other.id()),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransaction& other) :
-  MyMoneyObject(id),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneyTransactionPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), id),
+  MyMoneyKeyValueContainer(other)
 {
   Q_D(MyMoneyTransaction);
   if (d->m_entryDate == QDate())
@@ -110,8 +106,6 @@ MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransacti
 
 MyMoneyTransaction::~MyMoneyTransaction()
 {
-  Q_D(MyMoneyTransaction);
-  delete d;
 }
 
 QDate MyMoneyTransaction::entryDate() const
@@ -435,7 +429,7 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
   Q_D(const MyMoneyTransaction);
   auto el = document.createElement(nodeNames[nnTransaction]);
 
-  writeBaseXML(document, el);
+  d->writeBaseXML(document, el);
   el.setAttribute(d->getAttrName(Transaction::Attribute::PostDate), MyMoneyUtils::dateToString(d->m_postDate));
   el.setAttribute(d->getAttrName(Transaction::Attribute::Memo), d->m_memo);
   el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), MyMoneyUtils::dateToString(d->m_entryDate));
@@ -497,12 +491,13 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 
 QString MyMoneyTransaction::uniqueSortKey() const
 {
+  Q_D(const MyMoneyTransaction);
   QString year, month, day, key;
-  const QDate& postdate = postDate();
+  const auto postdate = postDate();
   year = year.setNum(postdate.year()).rightJustified(MyMoneyTransactionPrivate::YEAR_SIZE, '0');
   month = month.setNum(postdate.month()).rightJustified(MyMoneyTransactionPrivate::MONTH_SIZE, '0');
   day = day.setNum(postdate.day()).rightJustified(MyMoneyTransactionPrivate::DAY_SIZE, '0');
-  key = QString(QLatin1String("%1-%2-%3-%4")).arg(year, month, day, m_id);
+  key = QString::fromLatin1("%1-%2-%3-%4").arg(year, month, day, d->m_id);
   return key;
 }
 

@@ -32,6 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneymoney.h"
 
 namespace Budget
@@ -55,8 +56,8 @@ namespace Budget
   uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-class MyMoneyBudgetPrivate {
-
+class MyMoneyBudgetPrivate : public MyMoneyObjectPrivate
+{
 public:
   static QString getElName(const Budget::Element el)
   {

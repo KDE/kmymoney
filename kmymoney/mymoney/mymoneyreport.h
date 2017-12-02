@@ -64,8 +64,7 @@ namespace eMyMoney { namespace Account { enum class Type; }
 class MyMoneyReportPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTransactionFilter
 {
-  Q_DECLARE_PRIVATE(MyMoneyReport)
-  MyMoneyReportPrivate* d_ptr;
+  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyReport)
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -469,8 +468,7 @@ public:
 inline void swap(MyMoneyReport& first, MyMoneyReport& second) // krazy:exclude=inline
 {
   using std::swap;
-  swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
+  swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
   swap(first.MyMoneyTransactionFilter::d_ptr, second.MyMoneyTransactionFilter::d_ptr);
 }
 

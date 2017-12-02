@@ -37,7 +37,6 @@ class MyMoneyCostCenterPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyCostCenter : public MyMoneyObject
 {
   Q_DECLARE_PRIVATE(MyMoneyCostCenter)
-  MyMoneyCostCenterPrivate* d_ptr;
 
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -107,7 +106,6 @@ inline void swap(MyMoneyCostCenter& first, MyMoneyCostCenter& second) // krazy:e
 {
   using std::swap;
   swap(first.d_ptr, second.d_ptr);
-  swap(first.m_id, second.m_id);
 }
 
 inline MyMoneyCostCenter::MyMoneyCostCenter(MyMoneyCostCenter && other) : MyMoneyCostCenter() // krazy:exclude=inline

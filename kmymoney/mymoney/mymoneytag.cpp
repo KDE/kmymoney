@@ -35,12 +35,12 @@ using namespace MyMoneyStorageNodes;
 MyMoneyTag MyMoneyTag::null;
 
 MyMoneyTag::MyMoneyTag() :
-  d_ptr(new MyMoneyTagPrivate)
+  MyMoneyObject(*new MyMoneyTagPrivate)
 {
 }
 
 MyMoneyTag::MyMoneyTag(const QString& name) :
-  d_ptr(new MyMoneyTagPrivate)
+  MyMoneyObject(*new MyMoneyTagPrivate)
 {
   Q_D(MyMoneyTag);
   d->m_name      = name;
@@ -48,7 +48,7 @@ MyMoneyTag::MyMoneyTag(const QString& name) :
 }
 
 MyMoneyTag::MyMoneyTag(const QString& name, const QColor& tabColor) :
-  d_ptr(new MyMoneyTagPrivate)
+  MyMoneyObject(*new MyMoneyTagPrivate)
 {
   Q_D(MyMoneyTag);
   d->m_name      = name;
@@ -56,8 +56,7 @@ MyMoneyTag::MyMoneyTag(const QString& name, const QColor& tabColor) :
 }
 
 MyMoneyTag::MyMoneyTag(const QDomElement& node) :
-  MyMoneyObject(node),
-  d_ptr(new MyMoneyTagPrivate)
+  MyMoneyObject(*new MyMoneyTagPrivate, node)
 {
   if (nodeNames[nnTag] != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not TAG");
@@ -74,14 +73,12 @@ MyMoneyTag::MyMoneyTag(const QDomElement& node) :
 }
 
 MyMoneyTag::MyMoneyTag(const MyMoneyTag& other) :
-  MyMoneyObject(other.id()),
-  d_ptr(new MyMoneyTagPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyTagPrivate(*other.d_func()), other.id())
 {
 }
 
 MyMoneyTag::MyMoneyTag(const QString& id, const MyMoneyTag& other) :
-  MyMoneyObject(id),
-  d_ptr(new MyMoneyTagPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyTagPrivate(*other.d_func()), id)
 {
   Q_D(MyMoneyTag);
   d->m_tag_color = QColor("black");
@@ -89,8 +86,6 @@ MyMoneyTag::MyMoneyTag(const QString& id, const MyMoneyTag& other) :
 
 MyMoneyTag::~MyMoneyTag()
 {
-  Q_D(MyMoneyTag);
-  delete d;
 }
 
 QString MyMoneyTag::name() const
@@ -162,9 +157,9 @@ void MyMoneyTag::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   auto el = document.createElement(nodeNames[nnTag]);
 
-  writeBaseXML(document, el);
-
   Q_D(const MyMoneyTag);
+  d->writeBaseXML(document, el);
+
   el.setAttribute(d->getAttrName(Tag::Attribute::Name), d->m_name);
   el.setAttribute(d->getAttrName(Tag::Attribute::Closed), d->m_closed);
   if (d->m_tag_color.isValid())

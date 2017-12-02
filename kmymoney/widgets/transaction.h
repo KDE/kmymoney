@@ -83,7 +83,7 @@ namespace KMyMoneyRegister
     virtual eWidgets::eRegister::CashFlowDirection sortType() const override;
     virtual const QString& sortCategory() const override;
     virtual eMyMoney::Split::State sortReconcileState() const override;
-    virtual const QString& id() const override;
+    virtual QString id() const override;
     const MyMoneyTransaction& transaction() const;
     const MyMoneySplit& split() const;
     void setBalance(const MyMoneyMoney& balance);

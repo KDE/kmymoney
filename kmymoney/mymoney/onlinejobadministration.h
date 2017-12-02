@@ -92,7 +92,7 @@ public:
   void clearCaches();
 
   /** @brief Use onlineTask::name() to create a corresponding onlineJob */
-  onlineJob createOnlineJob(const QString& name, const QString& id = MyMoneyObject::emptyId()) const;
+  onlineJob createOnlineJob(const QString& name, const QString& id = QString()) const;
 
   /**
    * @brief Return list of IonlineJobEdits

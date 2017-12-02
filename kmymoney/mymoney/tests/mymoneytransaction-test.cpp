@@ -25,6 +25,7 @@
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
+#include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
 #include "mymoneyenums.h"
@@ -129,7 +130,7 @@ void MyMoneyTransactionTest::testInequality()
 
 void MyMoneyTransactionTest::testAddSplits()
 {
-  m->setId("TestID");
+  m->d_func()->setId("TestID");
   MyMoneySplit split1, split2;
   split1.setAccountId("A000001");
   split2.setAccountId("A000002");
@@ -175,7 +176,7 @@ void MyMoneyTransactionTest::testModifySplits()
 
   split = m->splits()[0];
   split.setAccountId("A000003");
-  split.setId("S00000000");
+  split.d_func()->setId("S00000000");
 
   // this one should fail, because the ID is invalid
   try {
@@ -185,7 +186,7 @@ void MyMoneyTransactionTest::testModifySplits()
   }
 
   // set id to correct value, and check that it worked
-  split.setId("S0001");
+  split.d_func()->setId("S0001");
   try {
     m->modifySplit(split);
     QVERIFY(m->splitCount() == 2);
@@ -218,7 +219,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
     QFAIL("Unexpected exception!");
   }
 
-  split.setId("S00000000");
+  split.d_func()->setId("S00000000");
   // this one should fail, because the ID is invalid
   try {
     m->modifySplit(split);
@@ -227,7 +228,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
   }
 
   // set id to correct value, and check that it worked
-  split.setId("S0002");
+  split.d_func()->setId("S0002");
   try {
     m->removeSplit(split);
     QVERIFY(m->splitCount() == 2);
@@ -242,7 +243,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
   }
 
   // set id to the other correct value, and check that it worked
-  split.setId("S0003");
+  split.d_func()->setId("S0003");
   try {
     m->removeSplit(split);
     QVERIFY(m->splitCount() == 1);
@@ -413,7 +414,7 @@ void MyMoneyTransactionTest::testWriteXML()
   MyMoneyTransaction t;
   t.setPostDate(QDate(2001, 12, 28));
   t.setEntryDate(QDate(2003, 9, 29));
-  t.setId("T000000000000000001");
+  t.d_func()->setId("T000000000000000001");
   t.setMemo("Wohnung:Miete");
   t.setCommodity("EUR");
   t.setValue("key", "value");
@@ -613,7 +614,7 @@ void MyMoneyTransactionTest::testHasReferenceTo()
   MyMoneyTransaction t;
   t.setPostDate(QDate(2001, 12, 28));
   t.setEntryDate(QDate(2003, 9, 29));
-  t.setId("T000000000000000001");
+  t.d_func()->setId("T000000000000000001");
   t.setMemo("Wohnung:Miete");
   t.setCommodity("EUR");
   t.setValue("key", "value");

@@ -20,20 +20,44 @@
 #include <QDomDocument>
 #include <QDomElement>
 
+#include "mymoneyobject_p.h"
 #include "mymoneyexception.h"
 #include "mymoneyaccount.h"
 
-class TestMyMoneyObject : public MyMoneyObject
+class TestMyMoneyObjectPrivate : public MyMoneyObjectPrivate
 {
 public:
-  TestMyMoneyObject() : MyMoneyObject() {}
+  TestMyMoneyObjectPrivate()
+  {
+  }
+};
+class TestMyMoneyObject : public MyMoneyObject
+{
+  Q_DECLARE_PRIVATE(TestMyMoneyObject)
+public:
+  TestMyMoneyObject() : MyMoneyObject(*new MyMoneyObjectPrivate) {}
+  TestMyMoneyObject & operator=(TestMyMoneyObject other);
+  friend void swap(TestMyMoneyObject& first, TestMyMoneyObject& second);
+  ~TestMyMoneyObject(){}
   TestMyMoneyObject(const QDomElement& node, const bool forceId = true) :
-      MyMoneyObject(node, forceId) {}
+      MyMoneyObject(*new MyMoneyObjectPrivate, node, forceId) {}
   virtual bool hasReferenceTo(const QString&) const {
     return false;
   }
   virtual void writeXML(QDomDocument&, QDomElement&) const {}
 };
+
+void swap(TestMyMoneyObject& first, TestMyMoneyObject& second)
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+TestMyMoneyObject & TestMyMoneyObject::operator=(TestMyMoneyObject other)
+{
+  swap(*this, other);
+  return *this;
+}
 
 QTEST_GUILESS_MAIN(MyMoneyObjectTest)
 

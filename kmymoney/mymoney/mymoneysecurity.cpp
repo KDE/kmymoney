@@ -46,7 +46,7 @@ using namespace eMyMoney;
 using namespace MyMoneyStorageNodes;
 
 MyMoneySecurity::MyMoneySecurity() :
-  d_ptr(new MyMoneySecurityPrivate)
+  MyMoneyObject(*new MyMoneySecurityPrivate)
 {
 }
 
@@ -56,9 +56,8 @@ MyMoneySecurity::MyMoneySecurity(const QString& id,
                                  const int smallestCashFraction,
                                  const int smallestAccountFraction,
                                  const int pricePrecision) :
-  MyMoneyObject(id),
-  MyMoneyKeyValueContainer(),
-  d_ptr(new MyMoneySecurityPrivate)
+  MyMoneyObject(*new MyMoneySecurityPrivate, id),
+  MyMoneyKeyValueContainer()
 {
   Q_D(MyMoneySecurity);
   d->m_name = name;
@@ -78,9 +77,8 @@ MyMoneySecurity::MyMoneySecurity(const QString& id,
 }
 
 MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
-  MyMoneyObject(node),
-  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
-  d_ptr(new MyMoneySecurityPrivate)
+  MyMoneyObject(*new MyMoneySecurityPrivate, node),
+  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
 {
   {
     const auto tag = node.tagName();
@@ -114,30 +112,26 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
 }
 
 MyMoneySecurity::MyMoneySecurity(const MyMoneySecurity& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneySecurityPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), other.id()),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneySecurity::MyMoneySecurity(const QString& id, const MyMoneySecurity& other) :
-  MyMoneyObject(id),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneySecurityPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), id),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneySecurity::~MyMoneySecurity()
 {
-  Q_D(MyMoneySecurity);
-  delete d;
 }
 
 bool MyMoneySecurity::operator == (const MyMoneySecurity& right) const
 {
   Q_D(const MyMoneySecurity);
   auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
-  return (m_id == right.m_id)
+  return (d->m_id == d2->m_id)
          && (d->m_name == d2->m_name)
          && (d->m_tradingSymbol == d2->m_tradingSymbol)
          && (d->m_tradingMarket == d2->m_tradingMarket)
@@ -293,9 +287,9 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
   else
     el = document.createElement(nodeNames[nnSecurity]);
 
-  writeBaseXML(document, el);
-
   Q_D(const MyMoneySecurity);
+  d->writeBaseXML(document, el);
+
   el.setAttribute(d->getAttrName(Security::Attribute::Name), d->m_name);
   el.setAttribute(d->getAttrName(Security::Attribute::Symbol),d->m_tradingSymbol);
   el.setAttribute(d->getAttrName(Security::Attribute::Type), static_cast<int>(d->m_securityType));

@@ -52,7 +52,7 @@ public:
     *
     * @throws emptyTask if task == 0
     */
-  explicit onlineJobTyped(T* task, const QString& id = MyMoneyObject::m_emptyId);
+  explicit onlineJobTyped(T* task, const QString& id = QString());
 
   /** @brief Copy constructor */
   onlineJobTyped(onlineJobTyped<T> const& other);

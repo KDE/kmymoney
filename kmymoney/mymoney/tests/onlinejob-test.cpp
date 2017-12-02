@@ -32,7 +32,7 @@ QTEST_GUILESS_MAIN(onlineJobTest)
 void onlineJobTest::testDefaultConstructor()
 {
   const onlineJob job = onlineJob();
-  QVERIFY(job.id() == MyMoneyObject::emptyId());
+  QCOMPARE(job.id(), QString());
   QVERIFY(job.isNull());
   QVERIFY(job.sendDate().isNull());
   QVERIFY(job.bankAnswerDate().isNull());

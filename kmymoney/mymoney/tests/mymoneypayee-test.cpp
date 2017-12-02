@@ -33,7 +33,7 @@ void MyMoneyPayeeTest::testXml()
   QDomElement parent = doc.createElement("Test");
   doc.appendChild(parent);
   MyMoneyPayee payee1;
-  payee1.m_id = "some random id";//if the ID isn't set, w ethrow an exception
+  payee1.d_func()->m_id = "some random id";//if the ID isn't set, w ethrow an exception
   payee1.writeXML(doc, parent);
   QString temp1 = "Account1";
   payee1.setDefaultAccountId(temp1);

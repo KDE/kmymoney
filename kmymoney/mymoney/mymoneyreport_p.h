@@ -35,6 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneyenums.h"
 
 using namespace eMyMoney;
@@ -79,8 +80,8 @@ namespace Report
   uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-class MyMoneyReportPrivate {
-
+class MyMoneyReportPrivate : public MyMoneyObjectPrivate
+{
 public:
 
   static QString getElName(const Report::Element el)

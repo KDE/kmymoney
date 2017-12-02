@@ -32,8 +32,7 @@
 using namespace MyMoneyStorageNodes;
 
 onlineJob::onlineJob() :
-  MyMoneyObject(),
-  d_ptr(new onlineJobPrivate),
+  MyMoneyObject(*new onlineJobPrivate),
   m_task(0)
 {
   Q_D(onlineJob);
@@ -45,8 +44,7 @@ onlineJob::onlineJob() :
 }
 
 onlineJob::onlineJob(onlineTask* task, const QString &id) :
-  MyMoneyObject(id),
-  d_ptr(new onlineJobPrivate),
+  MyMoneyObject(*new onlineJobPrivate, id),
   m_task(task)
 {
   Q_D(onlineJob);
@@ -58,8 +56,7 @@ onlineJob::onlineJob(onlineTask* task, const QString &id) :
 }
 
 onlineJob::onlineJob(onlineTask* task) :
-    MyMoneyObject(MyMoneyObject::m_emptyId),
-    d_ptr(new onlineJobPrivate),
+    MyMoneyObject(*new onlineJobPrivate, QString()),
     m_task(task)
 {
   Q_D(onlineJob);
@@ -71,16 +68,14 @@ onlineJob::onlineJob(onlineTask* task) :
 }
 
 onlineJob::onlineJob(onlineJob const& other) :
-  MyMoneyObject(other.id()),
-  d_ptr(new onlineJobPrivate(*other.d_func())),
+  MyMoneyObject(*new onlineJobPrivate(*other.d_func()), other.id()),
   m_task(0)
 {
   copyPointerFromOtherJob(other);
 }
 
 onlineJob::onlineJob(const QString &id, const onlineJob& other) :
-  MyMoneyObject(id),
-  d_ptr(new onlineJobPrivate(*other.d_func())),
+  MyMoneyObject(*new onlineJobPrivate(*other.d_func()), id),
   m_task()
 {
   Q_D(onlineJob);
@@ -93,8 +88,7 @@ onlineJob::onlineJob(const QString &id, const onlineJob& other) :
 }
 
 onlineJob::onlineJob(const QDomElement& element) :
-  MyMoneyObject(element, true),
-  d_ptr(new onlineJobPrivate)
+  MyMoneyObject(*new onlineJobPrivate, element, true)
 {
   Q_D(onlineJob);
   d->m_messageList = QList<onlineJobMessage>();
@@ -135,8 +129,6 @@ void onlineJob::reset()
 
 onlineJob::~onlineJob()
 {
-  Q_D(onlineJob);
-  delete d;
   delete m_task;
 }
 
@@ -280,11 +272,11 @@ QList<onlineJobMessage> onlineJob::jobMessageList() const
 /** @todo give life */
 void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
 {
-  QDomElement el = document.createElement(nodeNames[nnOnlineJob]);
-  writeBaseXML(document, el);
-
+  auto el = document.createElement(nodeNames[nnOnlineJob]);
 
   Q_D(const onlineJob);
+  d->writeBaseXML(document, el);
+
   if (!d->m_jobSend.isNull())
     el.setAttribute(d->getAttrName(OnlineJob::Attribute::Send), d->m_jobSend.toString(Qt::ISODate));
   if (!d->m_jobBankAnswerDate.isNull())

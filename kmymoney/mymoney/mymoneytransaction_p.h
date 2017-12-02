@@ -29,30 +29,35 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneysplit.h"
-
-namespace Transaction
+namespace eMyMoney
 {
-  enum class Element { Split = 0,
-                       Splits };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  namespace Transaction
+  {
+    enum class Element { Split = 0,
+                         Splits };
+    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
-  enum class Attribute { Name = 0,
-                         Type,
-                         PostDate,
-                         Memo,
-                         EntryDate,
-                         Commodity,
-                         BankID,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
+    enum class Attribute { Name = 0,
+                           Type,
+                           PostDate,
+                           Memo,
+                           EntryDate,
+                           Commodity,
+                           BankID,
+                           // insert new entries above this line
+                           LastAttribute
+                         };
 
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
 }
 
-class MyMoneyTransactionPrivate {
+using namespace eMyMoney;
 
+class MyMoneyTransactionPrivate : public MyMoneyObjectPrivate
+{
 public:
   static QString getElName(const Transaction::Element el)
   {

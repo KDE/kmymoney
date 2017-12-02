@@ -35,6 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include <alkimia/alkvalue.h>
 #include "mymoneyenums.h"
 
@@ -60,8 +61,8 @@ namespace eMyMoney
   }
 }
 
-class MyMoneySecurityPrivate {
-
+class MyMoneySecurityPrivate : public MyMoneyObjectPrivate
+{
 public:
 
   MyMoneySecurityPrivate() :
@@ -75,7 +76,7 @@ public:
 
   static QString getAttrName(const Security::Attribute attr)
   {
-    static const QHash<Security::Attribute, QString> attrNames = {
+    static const QHash<Security::Attribute, QString> attrNames {
       {Security::Attribute::Name,             QStringLiteral("name")},
       {Security::Attribute::Symbol,           QStringLiteral("symbol")},
       {Security::Attribute::Type,             QStringLiteral("type")},

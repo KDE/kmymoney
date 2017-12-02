@@ -38,7 +38,7 @@ using namespace MyMoneyStorageNodes;
 MyMoneyPayee MyMoneyPayee::null;
 
 MyMoneyPayee::MyMoneyPayee() :
-  d_ptr(new MyMoneyPayeePrivate)
+  MyMoneyObject(*new MyMoneyPayeePrivate)
 {
 }
 
@@ -49,7 +49,7 @@ MyMoneyPayee::MyMoneyPayee(const QString& name,
                            const QString& postcode,
                            const QString& telephone,
                            const QString& email) :
-  d_ptr(new MyMoneyPayeePrivate)
+  MyMoneyObject(*new MyMoneyPayeePrivate)
 {
   Q_D(MyMoneyPayee);
   d->m_name      = name;
@@ -65,8 +65,7 @@ MyMoneyPayee::MyMoneyPayee(const QString& name,
 }
 
 MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
-    MyMoneyObject(node),
-    d_ptr(new MyMoneyPayeePrivate)
+    MyMoneyObject(*new MyMoneyPayeePrivate, node)
 {
   if (nodeNames[nnPayee] != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not PAYEE");
@@ -110,23 +109,19 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
 }
 
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyPayeeIdentifierContainer(other),
-  d_ptr(new MyMoneyPayeePrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyPayeePrivate(*other.d_func()), other.id()),
+  MyMoneyPayeeIdentifierContainer(other)
 {
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& id, const MyMoneyPayee& other) :
-  MyMoneyObject(id),
-  MyMoneyPayeeIdentifierContainer(other),
-  d_ptr(new MyMoneyPayeePrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyPayeePrivate(*other.d_func()), id),
+  MyMoneyPayeeIdentifierContainer(other)
 {
 }
 
 MyMoneyPayee::~MyMoneyPayee()
 {
-  Q_D(MyMoneyPayee);
-  delete d;
 }
 
 bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
@@ -166,9 +161,9 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   auto el = document.createElement(nodeNames[nnPayee]);
 
-  writeBaseXML(document, el);
-
   Q_D(const MyMoneyPayee);
+  d->writeBaseXML(document, el);
+
   el.setAttribute(d->getAttrName(Payee::Attribute::Name), d->m_name);
   el.setAttribute(d->getAttrName(Payee::Attribute::Reference), d->m_reference);
   el.setAttribute(d->getAttrName(Payee::Attribute::Email), d->m_email);

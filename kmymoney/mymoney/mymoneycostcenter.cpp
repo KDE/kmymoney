@@ -25,6 +25,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragenames.h"
 
@@ -32,27 +33,26 @@ using namespace MyMoneyStorageNodes;
 
 MyMoneyCostCenter MyMoneyCostCenter::null;
 
-class MyMoneyCostCenterPrivate {
-
+class MyMoneyCostCenterPrivate : public MyMoneyObjectPrivate
+{
 public:
   QString m_name;
 };
 
 MyMoneyCostCenter::MyMoneyCostCenter() :
-  d_ptr(new MyMoneyCostCenterPrivate)
+  MyMoneyObject(*new MyMoneyCostCenterPrivate)
 {
 }
 
 MyMoneyCostCenter::MyMoneyCostCenter(const QString& name) :
-  d_ptr(new MyMoneyCostCenterPrivate)
+  MyMoneyObject(*new MyMoneyCostCenterPrivate)
 {
   Q_D(MyMoneyCostCenter);
   d->m_name = name;
 }
 
 MyMoneyCostCenter::MyMoneyCostCenter(const QDomElement& node) :
-    MyMoneyObject(node),
-    d_ptr(new MyMoneyCostCenterPrivate)
+    MyMoneyObject(*new MyMoneyCostCenterPrivate, node)
 {
   if (nodeNames[nnCostCenter] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not COSTCENTER");
@@ -62,21 +62,17 @@ MyMoneyCostCenter::MyMoneyCostCenter(const QDomElement& node) :
 }
 
 MyMoneyCostCenter::MyMoneyCostCenter(const MyMoneyCostCenter& other) :
-  MyMoneyObject(other.id()),
-  d_ptr(new MyMoneyCostCenterPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyCostCenterPrivate(*other.d_func()), other.id())
 {
 }
 
 MyMoneyCostCenter::MyMoneyCostCenter(const QString& id, const MyMoneyCostCenter& other) :
-  MyMoneyObject(id),
-  d_ptr(new MyMoneyCostCenterPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyCostCenterPrivate(*other.d_func()), id)
 {
 }
 
 MyMoneyCostCenter::~MyMoneyCostCenter()
 {
-  Q_D(MyMoneyCostCenter);
-  delete d;
 }
 
 bool MyMoneyCostCenter::operator == (const MyMoneyCostCenter& right) const
@@ -99,9 +95,9 @@ void MyMoneyCostCenter::writeXML(QDomDocument& document, QDomElement& parent) co
 {
   auto el = document.createElement(nodeNames[nnCostCenter]);
 
-  writeBaseXML(document, el);
-
   Q_D(const MyMoneyCostCenter);
+  d->writeBaseXML(document, el);
+
   el.setAttribute(getAttrName(Attribute::Name), d->m_name);
   parent.appendChild(el);
 }

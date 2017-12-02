@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,15 +21,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-class QDomDocument;
-class QDomElement;
+#include <qglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+
+class QString;
+class QDomDocument;
+class QDomElement;
 
 /**
   * @author Thomas Baumgart
@@ -37,15 +40,18 @@ class QDomElement;
 /**
   * This class represents the base class of all MyMoney objects.
   */
+class MyMoneyObjectPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyObject
 {
+  Q_DECLARE_PRIVATE(MyMoneyObject)
+
   KMM_MYMONEY_UNIT_TESTABLE
 
-public:
-  /**
-    * This is the constructor for the MyMoneyObject object
-    */
-  MyMoneyObject();
+  public:
+    /**
+      * This is the constructor for the MyMoneyObject object
+      */
+    MyMoneyObject();
 
   /**
     * This is the destructor for the MyMoneyObject object
@@ -86,9 +92,15 @@ public:
 
   bool operator == (const MyMoneyObject& right) const;
 
-  static const QString& emptyId();
-
 protected:
+  MyMoneyObjectPrivate * d_ptr;
+  MyMoneyObject(MyMoneyObjectPrivate &dd);
+  MyMoneyObject(MyMoneyObjectPrivate &dd,
+                const QString& id);
+  MyMoneyObject(MyMoneyObjectPrivate &dd,
+                const QDomElement& node,
+                bool forceId = true);
+
   /**
     * This contructor assigns the id to the MyMoneyObject
     *
@@ -110,18 +122,7 @@ protected:
    *           used by objects, which are stored w/o id (eg. splits,
    *           transactions within schedules)
    */
-  MyMoneyObject(const QDomElement& node, const bool forceId = true);
-
-  void setId(const QString& id);
-
-  /**
-   * This method writes out the members contained in this object.
-   */
-  void writeBaseXML(QDomDocument& document, QDomElement& el) const;
-
-protected:
-  QString               m_id;
-  static const QString  m_emptyId;
+  explicit MyMoneyObject(const QDomElement& node, bool forceId = true);
 };
 
 #endif

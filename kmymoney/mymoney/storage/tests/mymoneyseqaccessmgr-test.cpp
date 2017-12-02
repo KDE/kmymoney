@@ -28,8 +28,10 @@
 #include "mymoneytag.h"
 #include "mymoneypayee.h"
 #include "mymoneyschedule.h"
+#include "mymoneyschedule_p.h"
 #include "mymoneyreport.h"
 #include "mymoneysplit.h"
+#include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneybudget.h"
 #include "mymoneyprice.h"
@@ -523,7 +525,7 @@ void MyMoneySeqAccessMgrTest::testAddTransactions()
     QVERIFY(s.id().isEmpty());
     t1.addSplit(s);
 
-    s.setId(QString()); // enable re-usage of split variable
+    s.d_func()->setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000005"); // Salary
     s.setShares(MyMoneyMoney(-100000, 100));
     s.setValue(MyMoneyMoney(-100000, 100));
@@ -550,28 +552,28 @@ void MyMoneySeqAccessMgrTest::testAddTransactions()
 
   try {
     // I spent some money, not so great
-    s.setId(QString()); // enable re-usage of split variable
+    s.d_func()->setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000004"); // Grosseries
     s.setShares(MyMoneyMoney(10000, 100));
     s.setValue(MyMoneyMoney(10000, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
-    s.setId(QString()); // enable re-usage of split variable
+    s.d_func()->setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000002"); // 16% sales tax
     s.setShares(MyMoneyMoney(1200, 100));
     s.setValue(MyMoneyMoney(1200, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
-    s.setId(QString()); // enable re-usage of split variable
+    s.d_func()->setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000003"); // 7% sales tax
     s.setShares(MyMoneyMoney(400, 100));
     s.setValue(MyMoneyMoney(400, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
-    s.setId(QString()); // enable re-usage of split variable
+    s.d_func()->setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000006"); // Checkings account
     s.setShares(MyMoneyMoney(-11600, 100));
     s.setValue(MyMoneyMoney(-11600, 100));
@@ -1348,7 +1350,7 @@ void MyMoneySeqAccessMgrTest::testModifySchedule()
   MyMoneySchedule sched;
 
   sched = m->schedule("SCH000001");
-  sched.setId("SCH000002");
+  sched.d_func()->setId("SCH000002");
   try {
     m->modifySchedule(sched);
     QFAIL("Exception expected");
@@ -1376,7 +1378,7 @@ void MyMoneySeqAccessMgrTest::testRemoveSchedule()
   MyMoneySchedule sched;
 
   sched = m->schedule("SCH000001");
-  sched.setId("SCH000002");
+  sched.d_func()->setId("SCH000002");
   try {
     m->removeSchedule(sched);
     m->commitTransaction();

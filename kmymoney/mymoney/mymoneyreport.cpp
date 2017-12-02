@@ -63,7 +63,7 @@ const QStringList kDataLockText = QString("automatic,userdefined").split(',');
 const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(',');
 
 MyMoneyReport::MyMoneyReport() :
-  d_ptr(new MyMoneyReportPrivate)
+  MyMoneyObject(*new MyMoneyReportPrivate)
 {
   Q_D(MyMoneyReport);
   d->m_name = "Unconfigured Pivot Table Report";
@@ -120,7 +120,7 @@ MyMoneyReport::MyMoneyReport(ERowType rt,
                              EDetailLevel ss,
                              const QString& name,
                              const QString& comment) :
-  d_ptr(new MyMoneyReportPrivate)
+  MyMoneyObject(*new MyMoneyReportPrivate)
 {
   Q_D(MyMoneyReport);
   d->m_name = name;
@@ -239,8 +239,7 @@ MyMoneyReport::MyMoneyReport(ERowType rt,
 }
 
 MyMoneyReport::MyMoneyReport(const QDomElement& node) :
-    MyMoneyObject(node),
-    d_ptr(new MyMoneyReportPrivate)
+    MyMoneyObject(*new MyMoneyReportPrivate, node)
 {
   Q_D(MyMoneyReport);
   d->m_currentDateColumn = 0;
@@ -251,16 +250,14 @@ MyMoneyReport::MyMoneyReport(const QDomElement& node) :
 }
 
 MyMoneyReport::MyMoneyReport(const MyMoneyReport& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyTransactionFilter(other),
-  d_ptr(new MyMoneyReportPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), other.id()),
+  MyMoneyTransactionFilter(other)
 {
 }
 
 MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& other) :
-  MyMoneyObject(id),
-  MyMoneyTransactionFilter(other),
-  d_ptr(new MyMoneyReportPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), id),
+  MyMoneyTransactionFilter(other)
 {
   Q_D(MyMoneyReport);
   d->m_movingAverageDays = 0;
@@ -269,8 +266,6 @@ MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& other) :
 
 MyMoneyReport::~MyMoneyReport()
 {
-  Q_D(MyMoneyReport);
-  delete d;
 }
 
 MyMoneyReport::EReportType MyMoneyReport::reportType() const
@@ -1073,11 +1068,11 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     e.setAttribute(d->getAttrName(Report::Attribute::Type), "infotable 1.0");
 
   e.setAttribute(d->getAttrName(Report::Attribute::Group), d->m_group);
-  e.setAttribute(d->getAttrName(Report::Attribute::ID), m_id);
+  e.setAttribute(d->getAttrName(Report::Attribute::ID), d->m_id);
 
   // write general tab
   if (anonymous) {
-    e.setAttribute(d->getAttrName(Report::Attribute::Name), m_id);
+    e.setAttribute(d->getAttrName(Report::Attribute::Name), d->m_id);
     e.setAttribute(d->getAttrName(Report::Attribute::Comment), QString(d->m_comment).fill('x'));
   } else {
     e.setAttribute(d->getAttrName(Report::Attribute::Name), d->m_name);
@@ -1374,7 +1369,7 @@ bool MyMoneyReport::read(const QDomElement& e)
     return false;
 
   d->m_group = e.attribute(d->getAttrName(Report::Attribute::Group));
-  m_id = e.attribute(d->getAttrName(Report::Attribute::ID));
+  d->m_id = e.attribute(d->getAttrName(Report::Attribute::ID));
 
   clearTransactionFilter();
 

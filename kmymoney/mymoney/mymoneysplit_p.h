@@ -38,41 +38,47 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneymoney.h"
 #include "mymoneyenums.h"
-
-namespace Split
+namespace eMyMoney
 {
-  enum class Element { Split = 0,
-                       Tag,
-                       Match,
-                       Container,
-                       KeyValuePairs
-                     };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { ID = 0,
-                         BankID,
-                         Account,
-                         Payee,
+  namespace Split
+  {
+    enum class Element { Split = 0,
                          Tag,
-                         Number,
-                         Action,
-                         Value,
-                         Shares,
-                         Price,
-                         Memo,
-                         CostCenter,
-                         ReconcileDate,
-                         ReconcileFlag,
-                         KMMatchedTx,
-                         // insert new entries above this line
-                         LastAttribute
+                         Match,
+                         Container,
+                         KeyValuePairs
                        };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class Attribute { ID = 0,
+                           BankID,
+                           Account,
+                           Payee,
+                           Tag,
+                           Number,
+                           Action,
+                           Value,
+                           Shares,
+                           Price,
+                           Memo,
+                           CostCenter,
+                           ReconcileDate,
+                           ReconcileFlag,
+                           KMMatchedTx,
+                           // insert new entries above this line
+                           LastAttribute
+                         };
+    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
 }
 
-class MyMoneySplitPrivate {
+using namespace eMyMoney;
+
+class MyMoneySplitPrivate : public MyMoneyObjectPrivate
+{
 
 public:
 

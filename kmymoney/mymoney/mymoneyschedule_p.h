@@ -30,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneyenums.h"
 
@@ -63,8 +64,8 @@ namespace eMyMoney
   }
 }
 
-class MyMoneySchedulePrivate {
-
+class MyMoneySchedulePrivate : public MyMoneyObjectPrivate
+{
 public:
   MyMoneySchedulePrivate()
   : m_occurrence(Schedule::Occurrence::Any)
@@ -79,7 +80,7 @@ public:
 
   static QString getElName(const Schedule::Element el)
   {
-    static const QMap<Schedule::Element, QString> elNames = {
+    static const QMap<Schedule::Element, QString> elNames {
       {Schedule::Element::Payment,  QStringLiteral("PAYMENT")},
       {Schedule::Element::Payments, QStringLiteral("PAYMENTS")}
     };
@@ -88,7 +89,7 @@ public:
 
   static QString getAttrName(const Schedule::Attribute attr)
   {
-    static const QHash<Schedule::Attribute, QString> attrNames = {
+    static const QHash<Schedule::Attribute, QString> attrNames {
       {Schedule::Attribute::Name,                 QStringLiteral("name")},
       {Schedule::Attribute::Type,                 QStringLiteral("type")},
       {Schedule::Attribute::Occurrence,           QStringLiteral("occurence")}, // krazy:exclude=spelling

@@ -157,9 +157,9 @@ int RegisterItem::startRow() const
   return d->m_startRow;
 }
 
-const QString& RegisterItem::id() const
+QString RegisterItem::id() const
 {
-  return MyMoneyObject::emptyId();
+  return QString();
 }
 
 void RegisterItem::setParent(Register* parent)

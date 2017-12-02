@@ -33,7 +33,7 @@ void MyMoneyTagTest::testXml()
   QDomElement parent = doc.createElement("Test");
   doc.appendChild(parent);
   MyMoneyTag tag1;
-  tag1.m_id = "some random id";//if the ID isn't set, w ethrow an exception
+  tag1.d_func()->m_id = "some random id";//if the ID isn't set, w ethrow an exception
   tag1.writeXML(doc, parent);
   QDomElement el = parent.firstChild().toElement();
   QVERIFY(!el.isNull());

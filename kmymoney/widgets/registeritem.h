@@ -137,7 +137,7 @@ namespace KMyMoneyRegister
     virtual void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) = 0;
     virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) = 0;
 
-    virtual const QString& id() const;
+    virtual QString id() const;
 
     /**
     * Sets the parent of this item to be the register @p parent

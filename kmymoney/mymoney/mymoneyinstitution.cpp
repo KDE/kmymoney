@@ -42,9 +42,8 @@ using namespace MyMoneyStorageNodes;
 using namespace Icons;
 
 MyMoneyInstitution::MyMoneyInstitution() :
-  MyMoneyObject(),
-  MyMoneyKeyValueContainer(),
-  d_ptr(new MyMoneyInstitutionPrivate)
+  MyMoneyObject(*new MyMoneyInstitutionPrivate),
+  MyMoneyKeyValueContainer()
 {
 }
 
@@ -55,8 +54,8 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
                                        const QString& telephone,
                                        const QString& manager,
                                        const QString& sortcode) :
-  MyMoneyKeyValueContainer(),
-  d_ptr(new MyMoneyInstitutionPrivate)
+  MyMoneyObject(*new MyMoneyInstitutionPrivate),
+  MyMoneyKeyValueContainer()
 {
   Q_D(MyMoneyInstitution);
   clearId();
@@ -70,9 +69,8 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
-  MyMoneyObject(node),
-  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()),
-  d_ptr(new MyMoneyInstitutionPrivate)
+  MyMoneyObject(*new MyMoneyInstitutionPrivate, node),
+  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
 {
   if (nodeNames[nnInstitution] != node.tagName())
     throw MYMONEYEXCEPTION("Node was not INSTITUTION");
@@ -106,23 +104,19 @@ MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other) :
-  MyMoneyObject(other.id()),
-  MyMoneyKeyValueContainer(other),
-  d_ptr(new MyMoneyInstitutionPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), other.id()),
+  MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other) :
-    MyMoneyObject(id),
-    MyMoneyKeyValueContainer(other),
-    d_ptr(new MyMoneyInstitutionPrivate(*other.d_func()))
+    MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), id),
+    MyMoneyKeyValueContainer(other)
 {
 }
 
 MyMoneyInstitution::~MyMoneyInstitution()
 {
-  Q_D(MyMoneyInstitution);
-  delete d;
 }
 
 QString MyMoneyInstitution::manager() const
@@ -284,11 +278,11 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
 
 void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) const
 {
+  Q_D(const MyMoneyInstitution);
   auto el = document.createElement(nodeNames[nnInstitution]);
 
-  writeBaseXML(document, el);
+  d->writeBaseXML(document, el);
 
-  Q_D(const MyMoneyInstitution);
   el.setAttribute(d->getAttrName(Institution::Attribute::Name), d->m_name);
   el.setAttribute(d->getAttrName(Institution::Attribute::Manager), d->m_manager);
   el.setAttribute(d->getAttrName(Institution::Attribute::SortCode), d->m_sortcode);

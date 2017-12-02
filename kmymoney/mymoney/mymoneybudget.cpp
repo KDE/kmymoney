@@ -357,43 +357,38 @@ bool MyMoneyBudget::AccountGroup::operator == (const AccountGroup& right) const
 }
 
 MyMoneyBudget::MyMoneyBudget() :
-  d_ptr(new MyMoneyBudgetPrivate)
+  MyMoneyObject(*new MyMoneyBudgetPrivate)
 {
   Q_D(MyMoneyBudget);
   d->m_name = QLatin1Literal("Unconfigured Budget");
 }
 
 MyMoneyBudget::MyMoneyBudget(const QString& name) :
-  d_ptr(new MyMoneyBudgetPrivate)
+  MyMoneyObject(*new MyMoneyBudgetPrivate)
 {
   Q_D(MyMoneyBudget);
   d->m_name = name;
 }
 
 MyMoneyBudget::MyMoneyBudget(const QDomElement& node) :
-    MyMoneyObject(node),
-    d_ptr(new MyMoneyBudgetPrivate)
+    MyMoneyObject(*new MyMoneyBudgetPrivate, node)
 {
   if (!read(node))
     clearId();
 }
 
 MyMoneyBudget::MyMoneyBudget(const QString& id, const MyMoneyBudget& other) :
-  MyMoneyObject(id),
-  d_ptr(new MyMoneyBudgetPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), id)
 {
 }
 
 MyMoneyBudget::MyMoneyBudget(const MyMoneyBudget& other) :
-  MyMoneyObject(other.id()),
-  d_ptr(new MyMoneyBudgetPrivate(*other.d_func()))
+  MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), other.id())
 {
 }
 
 MyMoneyBudget::~MyMoneyBudget()
 {
-  Q_D(MyMoneyBudget);
-  delete d;
 }
 
 bool MyMoneyBudget::operator == (const MyMoneyBudget& right) const
@@ -410,9 +405,9 @@ bool MyMoneyBudget::operator == (const MyMoneyBudget& right) const
 
 void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
 {
-  writeBaseXML(*doc, e);
-
   Q_D(const MyMoneyBudget);
+  d->writeBaseXML(*doc, e);
+
   e.setAttribute(d->getAttrName(Budget::Attribute::Name),  d->m_name);
   e.setAttribute(d->getAttrName(Budget::Attribute::Start), d->m_start.toString(Qt::ISODate));
   e.setAttribute(d->getAttrName(Budget::Attribute::Version), BUDGET_VERSION);
@@ -458,7 +453,7 @@ bool MyMoneyBudget::read(const QDomElement& e)
     result = true;
     d->m_name  = e.attribute(d->getAttrName(Budget::Attribute::Name));
     d->m_start = QDate::fromString(e.attribute(d->getAttrName(Budget::Attribute::Start)), Qt::ISODate);
-    m_id    = e.attribute(d->getAttrName(Budget::Attribute::ID));
+    d->m_id    = e.attribute(d->getAttrName(Budget::Attribute::ID));
 
     QDomNode child = e.firstChild();
     while (!child.isNull() && child.isElement()) {

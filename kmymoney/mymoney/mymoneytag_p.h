@@ -28,6 +28,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyobject_p.h"
+
 namespace Tag
 {
   enum class Attribute {
@@ -42,7 +44,7 @@ namespace Tag
   uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-class MyMoneyTagPrivate
+class MyMoneyTagPrivate : public MyMoneyObjectPrivate
 {
 public:
 
