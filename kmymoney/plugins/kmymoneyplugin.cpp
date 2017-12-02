@@ -94,3 +94,11 @@ KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
   Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().importInterface);
   return KMyMoneyPlugin::pluginInterfaces().importInterface;
 }
+
+KMyMoneyPlugin::ImporterPlugin::ImporterPlugin()
+{
+}
+
+KMyMoneyPlugin::ImporterPlugin::~ImporterPlugin()
+{
+}

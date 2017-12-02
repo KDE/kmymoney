@@ -171,18 +171,10 @@ public:
   static MyMoneyMoney minValue;
   static MyMoneyMoney autoCalc;
 
-  bool isNegative() const {
-    return (valueRef() < 0) ? true : false;
-  }
-  bool isPositive() const {
-    return (valueRef() > 0) ? true : false;
-  }
-  bool isZero() const {
-    return valueRef() == 0;
-  }
-  bool isAutoCalc() const {
-    return (*this == autoCalc);
-  }
+  bool isNegative() const;
+  bool isPositive() const;
+  bool isZero() const;
+  bool isAutoCalc() const;
 
   MyMoneyMoney reduce() const;
 

@@ -294,6 +294,25 @@ const MyMoneyMoney MyMoneyMoney::operator/(const MyMoneyMoney& _b) const
   return static_cast<const MyMoneyMoney>(AlkValue::operator/(_b));
 }
 
+bool MyMoneyMoney::isNegative() const
+{
+  return (valueRef() < 0) ? true : false;
+}
+
+bool MyMoneyMoney::isPositive() const
+{
+  return (valueRef() > 0) ? true : false;
+}
+
+bool MyMoneyMoney::isZero() const
+{
+  return valueRef() == 0;
+}
+
+bool MyMoneyMoney::isAutoCalc() const
+{
+  return (*this == autoCalc);
+}
 
 MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMethod how) const
 {

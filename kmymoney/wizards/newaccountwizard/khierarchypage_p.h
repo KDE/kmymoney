@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KHIERARCHRYPAGE_P_H
-#define KHIERARCHRYPAGE_P_H
+#ifndef KHIERARCHYPAGE_P_H
+#define KHIERARCHYPAGE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

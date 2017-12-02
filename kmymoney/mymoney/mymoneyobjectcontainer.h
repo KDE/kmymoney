@@ -53,13 +53,13 @@ public:
   MyMoneyObjectContainer();
   ~MyMoneyObjectContainer();
 
-  const MyMoneyAccount& account(const QString& id);
-  const MyMoneyPayee& payee(const QString& id);
-  const MyMoneyTag& tag(const QString& id);
-  const MyMoneySecurity& security(const QString& id);
-  const MyMoneyInstitution& institution(const QString& id);
-  const MyMoneySchedule& schedule(const QString& id);
-  const MyMoneyCostCenter costCenter(const QString& id);
+  MyMoneyAccount account(const QString& id);
+  MyMoneyPayee payee(const QString& id);
+  MyMoneyTag tag(const QString& id);
+  MyMoneySecurity security(const QString& id);
+  MyMoneyInstitution institution(const QString& id);
+  MyMoneySchedule schedule(const QString& id);
+  MyMoneyCostCenter costCenter(const QString& id);
 
   void account(QList<MyMoneyAccount>& list);
   void payee(QList<MyMoneyPayee>& list);
@@ -87,7 +87,7 @@ public:
   void clear(const QString& id);
   void clear(IMyMoneyStorage* storage = 0);
 
-  const MyMoneyAccount& accountByName(const QString& name) const;
+  MyMoneyAccount accountByName(const QString& name) const;
 
   const MyMoneyObject * object(const QString& id) const;
 

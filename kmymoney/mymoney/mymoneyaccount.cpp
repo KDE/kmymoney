@@ -493,7 +493,7 @@ void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& va
   d->m_onlineBankingSettings = values;
 }
 
-const MyMoneyKeyValueContainer& MyMoneyAccount::onlineBankingSettings() const
+MyMoneyKeyValueContainer MyMoneyAccount::onlineBankingSettings() const
 {
   Q_D(const MyMoneyAccount);
   return d->m_onlineBankingSettings;
@@ -686,7 +686,7 @@ bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& am
   return true;
 }
 
-const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
+QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
 {
   Q_D(MyMoneyAccount);
   // check if the internal history member is already loaded

@@ -841,5 +841,3 @@ const QStringList& OfxImporterPlugin::errors() const
 {
   return d->m_errors;
 }
-
-#include "ofximporterplugin.moc"

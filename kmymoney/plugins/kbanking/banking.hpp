@@ -12,7 +12,7 @@
  * @short A C++ wrapper of the main aqbanking interface
  */
 
-// krazy:exclude=license
+// krazy:excludeall=license
 
 #ifndef AQ_BANKING_CPP_H
 #define AQ_BANKING_CPP_H

@@ -220,8 +220,8 @@ public:
 class KMM_PLUGIN_EXPORT ImporterPlugin
 {
 public:
-  ImporterPlugin() {}
-  virtual ~ImporterPlugin() {}
+  ImporterPlugin();
+  virtual ~ImporterPlugin();
 
   /**
     * This method returns the english-language name of the format

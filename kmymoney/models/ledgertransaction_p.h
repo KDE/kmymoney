@@ -19,14 +19,9 @@
 #ifndef LEDGERTRANSACTION_P_H
 #define LEDGERTRANSACTION_P_H
 
-#include "ledgertransaction.h"
-#include "models.h"
-#include "costcentermodel.h"
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -39,17 +34,10 @@
 
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneypayee.h"
 #include "mymoneymoney.h"
-#include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
-#include "mymoneyenums.h"
-#include "modelenums.h"
-
-using namespace eMyMoney;
 
 class LedgerTransactionPrivate
 {

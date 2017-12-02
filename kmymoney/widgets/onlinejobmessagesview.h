@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// krazy:exclude=dpointer
+// krazy:excludeall=dpointer
 
 #ifndef ONLINEJOBMESSAGESVIEW_H
 #define ONLINEJOBMESSAGESVIEW_H

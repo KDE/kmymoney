@@ -23,6 +23,7 @@
 // QT Includes
 
 #include <QString>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

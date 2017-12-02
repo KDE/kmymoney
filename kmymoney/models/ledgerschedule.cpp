@@ -28,6 +28,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneyschedule.h"
 
 using namespace eMyMoney;

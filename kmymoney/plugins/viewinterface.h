@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-// krazy:exclude=dpointer
+// krazy:excludeall=dpointer
 
 #ifndef VIEWINTERFACE_H
 #define VIEWINTERFACE_H

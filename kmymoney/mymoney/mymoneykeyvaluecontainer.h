@@ -79,7 +79,7 @@ public:
     * @return reference to value of this key. If the key does not exist,
     *         an emtpy string is returned.
     */
-  const QString& value(const QString& key) const;
+  QString value(const QString& key) const;
 
   /**
     * This method is used to add a key/value pair to the container or
@@ -111,7 +111,7 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  const QMap<QString, QString>& pairs() const;
+  QMap<QString, QString> pairs() const;
 
   /**
     * This method is used to initially store a set of key/value pairs
@@ -130,7 +130,7 @@ public:
     */
   bool operator == (const MyMoneyKeyValueContainer &) const;
 
-  const QString& operator[](const QString& k) const;
+  QString operator[](const QString& k) const;
 
   QString& operator[](const QString& k);
 

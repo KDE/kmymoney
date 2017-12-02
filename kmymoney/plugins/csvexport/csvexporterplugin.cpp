@@ -88,5 +88,3 @@ bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
 #endif
   return reallySaveFile;
 }
-
-#include "csvexporterplugin.moc"

@@ -71,7 +71,6 @@ LedgerSplit::LedgerSplit(const LedgerSplit& other) :
 
 LedgerSplit::~LedgerSplit()
 {
-  delete d_ptr;
 }
 
 QString LedgerSplit::memo() const

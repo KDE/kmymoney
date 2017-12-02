@@ -410,7 +410,7 @@ public:
     *
     * @return The container of kvp's needed when connecting to this account
     */
-  const MyMoneyKeyValueContainer& onlineBankingSettings() const;
+  MyMoneyKeyValueContainer onlineBankingSettings() const;
 
   /**
     * This method sets the closed flag for the account. This is just
@@ -564,7 +564,7 @@ public:
     *
     * @sa addReconciliation()
     */
-  const QMap<QDate, MyMoneyMoney>& reconciliationHistory();
+  QMap<QDate, MyMoneyMoney> reconciliationHistory();
 
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);

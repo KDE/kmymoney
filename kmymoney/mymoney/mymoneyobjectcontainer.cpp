@@ -218,7 +218,7 @@ void MyMoneyObjectContainer::account(QList<MyMoneyAccount>& list)
   }
 }
 
-const MyMoneyAccount& MyMoneyObjectContainer::account(const QString& id)
+MyMoneyAccount MyMoneyObjectContainer::account(const QString& id)
 {
   static MyMoneyAccount nullElement;
   if (id.isEmpty())
@@ -238,7 +238,7 @@ const MyMoneyAccount& MyMoneyObjectContainer::account(const QString& id)
   return nullElement;
 }
 
-const MyMoneyAccount& MyMoneyObjectContainer::accountByName(const QString& name) const
+MyMoneyAccount MyMoneyObjectContainer::accountByName(const QString& name) const
 {
   static MyMoneyAccount nullElement;
   QHash<QString, MyMoneyAccount const *>::const_iterator it;
@@ -288,27 +288,27 @@ void MyMoneyObjectContainer::refresh(const QString& id)
   qWarning("Ooops, should refresh an unknown object with id '%s'", qPrintable(id));
 }
 
-const MyMoneyPayee& MyMoneyObjectContainer::payee(const QString& id)
+MyMoneyPayee MyMoneyObjectContainer::payee(const QString& id)
 {
   return d->objectAccessMethodImpl(id, d->payeeCache, &IMyMoneyStorage::payee);
 }
 
-const MyMoneyTag& MyMoneyObjectContainer::tag(const QString& id)
+MyMoneyTag MyMoneyObjectContainer::tag(const QString& id)
 {
   return d->objectAccessMethodImpl(id, d->tagCache, &IMyMoneyStorage::tag);
 }
 
-const MyMoneySecurity& MyMoneyObjectContainer::security(const QString& id)
+MyMoneySecurity MyMoneyObjectContainer::security(const QString& id)
 {
   return d->objectAccessMethodImpl(id, d->securityCache, &IMyMoneyStorage::security);
 }
 
-const MyMoneyInstitution& MyMoneyObjectContainer::institution(const QString& id)
+MyMoneyInstitution MyMoneyObjectContainer::institution(const QString& id)
 {
   return d->objectAccessMethodImpl(id, d->institutionCache, &IMyMoneyStorage::institution);
 }
 
-const MyMoneySchedule& MyMoneyObjectContainer::schedule(const QString& id)
+MyMoneySchedule MyMoneyObjectContainer::schedule(const QString& id)
 {
   return d->objectAccessMethodImpl(id, d->scheduleCache, &IMyMoneyStorage::schedule);
 }

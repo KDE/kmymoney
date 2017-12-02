@@ -72,7 +72,7 @@ MyMoneyKeyValueContainer::~MyMoneyKeyValueContainer()
   delete d;
 }
 
-const QString& MyMoneyKeyValueContainer::value(const QString& key) const
+QString MyMoneyKeyValueContainer::value(const QString& key) const
 {
   Q_D(const MyMoneyKeyValueContainer);
   QMap<QString, QString>::ConstIterator it;
@@ -89,7 +89,7 @@ void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value
   d->m_kvp[key] = value;
 }
 
-const QMap<QString, QString>& MyMoneyKeyValueContainer::pairs() const
+QMap<QString, QString> MyMoneyKeyValueContainer::pairs() const
 {
   Q_D(const MyMoneyKeyValueContainer);
   return d->m_kvp;
@@ -138,7 +138,7 @@ bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& righ
 }
 
 
-const QString& MyMoneyKeyValueContainer::operator[](const QString& k) const
+QString MyMoneyKeyValueContainer::operator[](const QString& k) const
 {
   return value(k);
 }

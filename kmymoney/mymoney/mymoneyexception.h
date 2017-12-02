@@ -104,7 +104,8 @@ public:
   unsigned long line() const;
 
 private:
-  MyMoneyExceptionPrivate * d_ptr;
+  // #define MYMONEYEXCEPTION(what) requires non-const d_ptr
+  MyMoneyExceptionPrivate * d_ptr; // krazy:exclude=dpointer
   Q_DECLARE_PRIVATE(MyMoneyException)
   MyMoneyException();
 };
