@@ -62,7 +62,7 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
   QRegExp regExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
 
   QMap<QString, QString>::ConstIterator it;
-  for (it = pairs().begin(); it != pairs().end(); ++it) {
+  for (it = pairs().constBegin(); it != pairs().constEnd(); ++it) {
     if (regExp.indexIn(it.key()) > -1) {
       if (qstrcmp(it.key().toLatin1(), key.toLatin1()) <= 0)
         val = *it;

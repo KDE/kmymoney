@@ -461,8 +461,8 @@ void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
   // Write online banking settings
   if (d->m_onlineBankingSettings.pairs().count()) {
     QDomElement onlinesettings = document.createElement(d->getElName(Account::Element::OnlineBanking));
-    QMap<QString, QString>::const_iterator it_key = d->m_onlineBankingSettings.pairs().begin();
-    while (it_key != d->m_onlineBankingSettings.pairs().end()) {
+    QMap<QString, QString>::const_iterator it_key = d->m_onlineBankingSettings.pairs().constBegin();
+    while (it_key != d->m_onlineBankingSettings.pairs().constEnd()) {
       onlinesettings.setAttribute(it_key.key(), it_key.value());
       ++it_key;
     }

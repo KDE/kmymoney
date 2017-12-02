@@ -198,7 +198,7 @@ void MyMoneyStorageANON::fakeKeyValuePair(MyMoneyKeyValueContainer& kvp)
   QMap<QString, QString> pairs;
   QMap<QString, QString>::const_iterator it;
 
-  for (it = kvp.pairs().begin(); it != kvp.pairs().end(); ++it) {
+  for (it = kvp.pairs().constBegin(); it != kvp.pairs().constEnd(); ++it) {
     if (zKvpXNumber.contains(it.key()) || it.key().left(3) == "ir-")
       pairs[it.key()] = hideNumber(MyMoneyMoney(it.value())).toString();
     else if (zKvpNoModify.contains(it.key()))
