@@ -100,12 +100,10 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
     } catch (const MyMoneyException &) {
     }
 
-    QList<MyMoneySplit>::const_iterator it_s;
-    const QList<MyMoneySplit>& list = matchedTransaction.splits();
     MyMoneyMoney importedValue;
-    for (it_s = list.begin(); it_s != list.end(); ++it_s) {
-      if ((*it_s).accountId() == d->m_account.id()) {
-        importedValue += (*it_s).shares();
+    foreach (const auto split, matchedTransaction.splits()) {
+      if (split.accountId() == d->m_account.id()) {
+        importedValue += split.shares();
       }
     }
 

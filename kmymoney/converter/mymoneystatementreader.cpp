@@ -1158,12 +1158,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
           // Only copy the splits if the transaction found does not reference a closed account
           if (!MyMoneyFile::instance()->referencesClosedAccount(t_old)) {
-            QList<MyMoneySplit>::ConstIterator it_split;
-            for (it_split = t_old.splits().constBegin(); it_split != t_old.splits().constEnd(); ++it_split) {
+            foreach (const auto split, t_old.splits()) {
               // We don't need the split that covers this account,
               // we just need the other ones.
-              if ((*it_split).accountId() != thisaccount.id()) {
-                MyMoneySplit s(*it_split);
+              if (split.accountId() != thisaccount.id()) {
+                MyMoneySplit s(split);
                 s.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
                 s.clearId();
                 s.setBankID(QString());

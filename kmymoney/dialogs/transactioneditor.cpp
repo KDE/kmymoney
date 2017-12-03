@@ -486,10 +486,9 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
               MyMoneyMoney price;
               if (!(*it_t).split().shares().isZero() && !(*it_t).split().value().isZero())
                 price = (*it_t).split().shares() / (*it_t).split().value();
-              QList<MyMoneySplit>::iterator it_s;
               MyMoneySplit& mySplit = (*it_t).split();
-              for (it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
-                MyMoneySplit s = (*it_s);
+              foreach (const auto split, (*it_t).transaction().splits()) {
+                auto s = split;
                 if (s == mySplit) {
                   s.setValue(s.shares());
                   if (mySplit == d->m_split) {
@@ -648,23 +647,21 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
     MyMoneyFileTransaction ft;
 
     try {
-      QList<MyMoneyTransaction>::iterator it_ts;
       QMap<QString, bool> minBalanceEarly;
       QMap<QString, bool> minBalanceAbsolute;
       QMap<QString, bool> maxCreditEarly;
       QMap<QString, bool> maxCreditAbsolute;
       QMap<QString, bool> accountIds;
 
-      for (it_ts = list.begin(); it_ts != list.end(); ++it_ts) {
+      for (MyMoneyTransaction& transaction : list) {
         // if we have a categorization, make sure we remove
         // the 'imported' flag automagically
-        if ((*it_ts).splitCount() > 1)
-          (*it_ts).setImported(false);
+        if (transaction.splitCount() > 1)
+          transaction.setImported(false);
 
         // create information about min and max balances
-        QList<MyMoneySplit>::const_iterator it_s;
-        for (it_s = (*it_ts).splits().constBegin(); it_s != (*it_ts).splits().constEnd(); ++it_s) {
-          MyMoneyAccount acc = file->account((*it_s).accountId());
+        foreach (const auto split, transaction.splits()) {
+          auto acc = file->account(split.accountId());
           accountIds[acc.id()] = true;
           MyMoneyMoney balance = file->balance(acc.id());
           if (!acc.value("minBalanceEarly").isEmpty()) {
@@ -683,9 +680,9 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           }
         }
 
-        if ((*it_ts).id().isEmpty()) {
+        if (transaction.id().isEmpty()) {
           bool enter = true;
-          if (askForSchedule && (*it_ts).postDate() > QDate::currentDate()) {
+          if (askForSchedule && transaction.postDate() > QDate::currentDate()) {
             KGuiItem enterButton(i18n("&Enter"),
                                  QIcon::fromTheme(g_Icons[Icon::DialogOK]),
                                  i18n("Accepts the entered data and stores it"),
@@ -699,34 +696,34 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           }
           if (enter) {
             // add new transaction
-            file->addTransaction(*it_ts);
+            file->addTransaction(transaction);
             // pass the newly assigned id on to the caller
-            newId = (*it_ts).id();
+            newId = transaction.id();
             // refresh account object for transactional changes
             // refresh account and transaction object because they might have changed
             d->m_account = file->account(d->m_account.id());
-            t = (*it_ts);
+            t = transaction;
 
             // if a new transaction has a valid number, keep it with the account
-            d->keepNewNumber((*it_ts));
+            d->keepNewNumber(transaction);
           } else {
             // turn object creation on, so that moving the focus does
             // not screw up the dialog that might be popping up
             emit objectCreation(true);
-            emit scheduleTransaction(*it_ts, eMyMoney::Schedule::Occurrence::Once);
+            emit scheduleTransaction(transaction, eMyMoney::Schedule::Occurrence::Once);
             emit objectCreation(false);
 
             newTransactionCreated = false;
           }
 
           // send out the post date of this transaction
-          emit lastPostDateUsed((*it_ts).postDate());
+          emit lastPostDateUsed(transaction.postDate());
         } else {
           // modify existing transaction
           // its number might have been edited
           // bearing in mind it could contain alpha characters
-          d->keepNewNumber((*it_ts));
-          file->modifyTransaction(*it_ts);
+          d->keepNewNumber(transaction);
+          file->modifyTransaction(transaction);
         }
       }
       emit statusProgress(i++, 0);
@@ -748,19 +745,18 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
       }
 
       //    Save pricing information
-      QList<MyMoneySplit>::const_iterator it_t;
-      for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
-        if (((*it_t).action() != "Buy") &&
-            ((*it_t).action() != "Reinvest")) {
+      foreach (const auto split, t.splits()) {
+        if ((split.action() != "Buy") &&
+            (split.action() != "Reinvest")) {
           continue;
         }
-        QString id = (*it_t).accountId();
-        MyMoneyAccount acc = file->account(id);
+        QString id = split.accountId();
+        auto acc = file->account(id);
         MyMoneySecurity sec = file->security(acc.currencyId());
         MyMoneyPrice price(acc.currencyId(),
                            sec.tradingCurrency(),
                            t.postDate(),
-                           (*it_t).price(), "Transaction");
+                           split.price(), "Transaction");
         file->addPrice(price);
         break;
       }
@@ -773,7 +769,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
       if (!suppressBalanceWarnings) {
         for (it_a = accountIds.constBegin(); it_a != accountIds.constEnd(); ++it_a) {
           QString msg;
-          MyMoneyAccount acc = file->account(it_a.key());
+          auto acc = file->account(it_a.key());
           MyMoneyMoney balance = file->balance(acc.id());
           const MyMoneySecurity& sec = file->security(acc.currencyId());
           QString key;

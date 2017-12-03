@@ -147,21 +147,22 @@ eRegister::Action StdTransaction::actionType() const
 
   // if at least one split is referencing an income or
   // expense account, we will not call it a transfer
-  QList<MyMoneySplit>::const_iterator it_s;
 
-  for (it_s = d->m_transaction.splits().begin(); it_s != d->m_transaction.splits().end(); ++it_s) {
-    if ((*it_s).accountId() == d->m_split.accountId())
+  auto found = false;
+  foreach (const auto split, d->m_transaction.splits()) {
+    if (split.accountId() == d->m_split.accountId())
       continue;
-    MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+    auto acc = MyMoneyFile::instance()->account(split.accountId());
     if (acc.accountGroup() == eMyMoney::Account::Type::Income
         || acc.accountGroup() == eMyMoney::Account::Type::Expense) {
       // otherwise, we have to determine between deposit and withdrawal
       action = d->m_split.shares().isNegative() ? eRegister::Action::Withdrawal : eRegister::Action::Deposit;
+      found = true;
       break;
     }
   }
   // otherwise, it's a transfer
-  if (it_s == d->m_transaction.splits().end())
+  if (!found)
     action = eRegister::Action::Transfer;
 
   return action;

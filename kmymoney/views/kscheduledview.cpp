@@ -321,41 +321,43 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     MyMoneyTransaction transaction = schedule.transaction();
     MyMoneySplit s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
     MyMoneySplit s2 = (transaction.splits().size() < 2) ? MyMoneySplit() : transaction.splits()[1];
-    QList<MyMoneySplit>::ConstIterator it_s;
     MyMoneySplit split;
     MyMoneyAccount acc;
 
     switch (schedule.type()) {
-      case eMyMoney::Schedule::Type::Deposit:
-        if (s1.value().isNegative())
-          split = s2;
-        else
-          split = s1;
-        break;
+    case eMyMoney::Schedule::Type::Deposit:
+      if (s1.value().isNegative())
+        split = s2;
+      else
+        split = s1;
+      break;
 
-      case eMyMoney::Schedule::Type::LoanPayment:
-        for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-          acc = MyMoneyFile::instance()->account((*it_s).accountId());
-          if (acc.accountGroup() == eMyMoney::Account::Type::Asset
-              || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
-            if (acc.accountType() != eMyMoney::Account::Type::Loan
-                && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
-              split = *it_s;
-              break;
-            }
+    case eMyMoney::Schedule::Type::LoanPayment:
+    {
+      auto found = false;
+      foreach (const auto it_split, transaction.splits()) {
+        acc = MyMoneyFile::instance()->account(it_split.accountId());
+        if (acc.accountGroup() == eMyMoney::Account::Type::Asset
+            || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
+          if (acc.accountType() != eMyMoney::Account::Type::Loan
+              && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
+            split = it_split;
+            found = true;
+            break;
           }
         }
-        if (it_s == transaction.splits().constEnd()) {
-          qWarning("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
-        }
-        break;
-
-      default:
-        if (!s1.value().isPositive())
-          split = s1;
-        else
-          split = s2;
-        break;
+      }
+      if (!found) {
+        qWarning("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
+      }
+      break;
+    }
+    default:
+      if (!s1.value().isPositive())
+        split = s1;
+      else
+        split = s2;
+      break;
     }
     acc = MyMoneyFile::instance()->account(split.accountId());
 

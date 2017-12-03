@@ -58,10 +58,9 @@ public:
     // extract the payee id
     auto payeeId = m_split.payeeId();
     if(payeeId.isEmpty()) {
-      QList<MyMoneySplit>::const_iterator it;
-      for(it = m_transaction.splits().constBegin(); it != m_transaction.splits().constEnd(); ++it) {
-        if(!(*it).payeeId().isEmpty()) {
-          payeeId = (*it).payeeId();
+      foreach (const auto split, m_transaction.splits()) {
+        if(!split.payeeId().isEmpty()) {
+          payeeId = split.payeeId();
           break;
         }
       }
@@ -80,15 +79,14 @@ public:
 
     // ... exactly two splits ...
     } else if(m_transaction.splitCount() == 2) {
-      QList<MyMoneySplit>::const_iterator it;
-      for(it = m_transaction.splits().constBegin(); it != m_transaction.splits().constEnd(); ++it) {
-        if((*it).id() != m_split.id()) {
-          m_counterAccountId = (*it).accountId();
+      foreach (const auto split, m_transaction.splits()) {
+        if(split.id() != m_split.id()) {
+          m_counterAccountId = split.accountId();
           m_counterAccount = MyMoneyFile::instance()->accountToCategory(m_counterAccountId);
           // in case the own split does not have a costcenter, but the counter split does
           // we use it nevertheless
           if(m_costCenterId.isEmpty())
-            m_costCenterId = (*it).costCenterId();
+            m_costCenterId = split.costCenterId();
           break;
         }
       }

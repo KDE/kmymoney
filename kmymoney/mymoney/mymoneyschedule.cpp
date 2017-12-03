@@ -229,34 +229,33 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
   // make sure to clear out some unused information in scheduled transactions
   // we need to do this for the case that the transaction passed as argument
   // is a matched or imported transaction.
-  QList<MyMoneySplit> splits = t.splits();
-  if (splits.count() > 0) {
-    QList<MyMoneySplit>::const_iterator it_s;
-    for (it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
-      MyMoneySplit s = *it_s;
-      // clear out the bankID
-      if (!(*it_s).bankID().isEmpty()) {
-        s.setBankID(QString());
-        t.modifySplit(s);
-      }
+  auto firstSplit = true;
+  foreach (const auto split, t.splits()) {
+    MyMoneySplit s = split;
+    // clear out the bankID
+    if (!split.bankID().isEmpty()) {
+      s.setBankID(QString());
+      t.modifySplit(s);
+    }
 
-      // only clear payees from second split onwards
-      if (it_s == splits.constBegin())
-        continue;
+    // only clear payees from second split onwards
+    if (firstSplit) {
+      firstSplit = false;
+      continue;
+    }
 
-      if (!(*it_s).payeeId().isEmpty()) {
-        // but only if the split references an income/expense category
-        MyMoneyFile* file = MyMoneyFile::instance();
-        // some unit tests don't have a storage attached, so we
-        // simply skip the test
-        // Don't check for accounts with an id of 'Phony-ID' which is used
-        // internally for non-existing accounts (during creation of accounts)
-        if (file->storageAttached() && s.accountId() != QString("Phony-ID")) {
-          MyMoneyAccount acc = file->account(s.accountId());
-          if (acc.isIncomeExpense()) {
-            s.setPayeeId(QString());
-            t.modifySplit(s);
-          }
+    if (!split.payeeId().isEmpty()) {
+      // but only if the split references an income/expense category
+      auto file = MyMoneyFile::instance();
+      // some unit tests don't have a storage attached, so we
+      // simply skip the test
+      // Don't check for accounts with an id of 'Phony-ID' which is used
+      // internally for non-existing accounts (during creation of accounts)
+      if (file->storageAttached() && s.accountId() != QString("Phony-ID")) {
+        auto acc = file->account(s.accountId());
+        if (acc.isIncomeExpense()) {
+          s.setPayeeId(QString());
+          t.modifySplit(s);
         }
       }
     }
@@ -777,7 +776,7 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
   Q_D(const MyMoneySchedule);
   QList<MyMoneySplit> splits = d->m_transaction.splits();
   QList<MyMoneySplit>::ConstIterator it;
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   MyMoneyAccount acc;
 
   // search the first asset or liability account

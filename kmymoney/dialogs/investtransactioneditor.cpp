@@ -130,12 +130,10 @@ public:
 
   MyMoneyMoney subtotal(const QList<MyMoneySplit>& splits) const
   {
-    QList<MyMoneySplit>::const_iterator it_s;
     MyMoneyMoney sum;
 
-    for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-      sum += (*it_s).value();
-    }
+    foreach (const auto split, splits)
+      sum += split.value();
 
     return sum;
   }
@@ -155,9 +153,8 @@ public:
     t.addSplit(split);
     m_phonySplit = split;
 
-    QList<MyMoneySplit>::const_iterator it_s;
-    for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-      split = *it_s;
+    foreach (const auto it_s, splits) {
+      split = it_s;
       split.clearId();
       t.addSplit(split);
     }
@@ -232,13 +229,12 @@ public:
           transaction = dlg->transaction();
           // collect splits out of the transaction
           splits.clear();
-          QList<MyMoneySplit>::const_iterator it_s;
           MyMoneyMoney fees;
-          for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-            if ((*it_s).accountId() == m_phonyAccount.id())
+          foreach (const auto split, transaction.splits()) {
+            if (split.accountId() == m_phonyAccount.id())
               continue;
-            splits << *it_s;
-            fees += (*it_s).shares();
+            splits << split;
+            fees += split.shares();
           }
           if (isIncome)
             fees = -fees;
@@ -656,12 +652,13 @@ void InvestTransactionEditor::loadEditWidgets()
   auto fees = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
 
   // check if the current transaction has a reference to an equity account
-  bool haveEquityAccount = false;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = d->m_transaction.splits().constBegin(); !haveEquityAccount && it_s != d->m_transaction.splits().constEnd(); ++it_s) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountType() == Account::Type::Equity)
+  auto haveEquityAccount = false;
+  foreach (const auto split, d->m_transaction.splits()) {
+    auto acc = MyMoneyFile::instance()->account(split.accountId());
+    if (acc.accountType() == Account::Type::Equity) {
       haveEquityAccount = true;
+      break;
+    }
   }
 
   // asset-account
@@ -970,7 +967,7 @@ eDialogs::PriceMode InvestTransactionEditor::priceMode() const
       accId = d->m_account.id();
   }
   while (!accId.isEmpty() && mode == eDialogs::PriceMode::Price) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(accId);
+    auto acc = MyMoneyFile::instance()->account(accId);
     if (acc.value("priceMode").isEmpty())
       accId = acc.parentAccountId();
     else
@@ -1005,7 +1002,7 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
 {
   Q_D(InvestTransactionEditor);
   auto file = MyMoneyFile::instance();
-  MyMoneyAccount acc = file->account(split.accountId());
+  auto acc = file->account(split.accountId());
   MyMoneySecurity toCurrency(file->security(acc.currencyId()));
   int fract = acc.fraction();
 
@@ -1084,16 +1081,15 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
   // extract price info from original transaction
   d->m_priceInfo.clear();
-  QList<MyMoneySplit>::const_iterator it_s;
   if (!torig.id().isEmpty()) {
-    for (it_s = torig.splits().begin(); it_s != torig.splits().end(); ++it_s) {
-      if ((*it_s).id() != sorig.id()) {
-        MyMoneyAccount cat = file->account((*it_s).accountId());
+    foreach (const auto split, torig.splits()) {
+      if (split.id() != sorig.id()) {
+        auto cat = file->account(split.accountId());
         if (cat.currencyId() != d->m_account.currencyId()) {
           if (cat.currencyId().isEmpty())
             cat.setCurrencyId(d->m_account.currencyId());
-          if (!(*it_s).shares().isZero() && !(*it_s).value().isZero()) {
-            d->m_priceInfo[cat.currencyId()] = ((*it_s).shares() / (*it_s).value()).reduce();
+          if (!split.shares().isZero() && !split.value().isZero()) {
+            d->m_priceInfo[cat.currencyId()] = (split.shares() / split.value()).reduce();
           }
         }
       }

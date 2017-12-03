@@ -101,11 +101,10 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   QList<MyMoneyTransaction>::ConstIterator it_t;
   s << "transactions = " << list_t.count() << ", next id = " << _storage->transactionId() << "\n";
   QMap<int, int> xferCount;
-  for (it_t = list_t.constBegin(); it_t != list_t.constEnd(); ++it_t) {
-    QList<MyMoneySplit>::ConstIterator it_s;
-    int accountCount = 0;
-    for (it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
-      MyMoneyAccount acc = storage->account((*it_s).accountId());
+  foreach (const auto transaction, list_t) {
+    auto accountCount = 0;
+    foreach (const auto split, transaction.splits()) {
+      auto acc = storage->account(split.accountId());
       if (acc.accountGroup() != eMyMoney::Account::Type::Expense
           && acc.accountGroup() != eMyMoney::Account::Type::Income)
         accountCount++;
@@ -409,48 +408,47 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
 
   s << "  Splits\n";
   s << "  ------\n";
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = it_t.splits().constBegin(); it_s != it_t.splits().constEnd(); ++it_s) {
-    s << "   ID = " << (*it_s).id() << "\n";
-    s << "    Transaction = " << (*it_s).transactionId() << "\n";
-    s << "    Payee = " << (*it_s).payeeId();
-    if (!(*it_s).payeeId().isEmpty()) {
-      MyMoneyPayee p = storage->payee((*it_s).payeeId());
+  foreach (const auto split, it_t.splits()) {
+    s << "   ID = " << split.id() << "\n";
+    s << "    Transaction = " << split.transactionId() << "\n";
+    s << "    Payee = " << split.payeeId();
+    if (!split.payeeId().isEmpty()) {
+      MyMoneyPayee p = storage->payee(split.payeeId());
       s << " (" << p.name() << ")" << "\n";
     } else
       s << " ()\n";
-    for (int i = 0; i < (*it_s).tagIdList().size(); i++) {
-      s << "    Tag = " << (*it_s).tagIdList()[i];
-      if (!(*it_s).tagIdList()[i].isEmpty()) {
-        MyMoneyTag ta = storage->tag((*it_s).tagIdList()[i]);
+    for (int i = 0; i < split.tagIdList().size(); i++) {
+      s << "    Tag = " << split.tagIdList()[i];
+      if (!split.tagIdList()[i].isEmpty()) {
+        MyMoneyTag ta = storage->tag(split.tagIdList()[i]);
         s << " (" << ta.name() << ")" << "\n";
       } else
         s << " ()\n";
     }
-    s << "    Account = " << (*it_s).accountId();
+    s << "    Account = " << split.accountId();
     MyMoneyAccount acc;
     try {
-      acc = storage->account((*it_s).accountId());
+      acc = storage->account(split.accountId());
       s << " (" << acc.name() << ") [" << acc.currencyId() << "]\n";
     } catch (const MyMoneyException &) {
       s << " (---) [---]\n";
     }
-    s << "    Memo = " << (*it_s).memo() << "\n";
-    if ((*it_s).value() == MyMoneyMoney::autoCalc)
+    s << "    Memo = " << split.memo() << "\n";
+    if (split.value() == MyMoneyMoney::autoCalc)
       s << "    Value = will be calculated" << "\n";
     else
-      s << "    Value = " << (*it_s).value().formatMoney("", 2)
-      << " (" << (*it_s).value().toString() << ")\n";
-    s << "    Shares = " << (*it_s).shares().formatMoney("", 2)
-    << " (" << (*it_s).shares().toString() << ")\n";
-    s << "    Action = '" << (*it_s).action() << "'\n";
-    s << "    Nr = '" << (*it_s).number() << "'\n";
-    s << "    ReconcileFlag = '" << reconcileToString((*it_s).reconcileFlag()) << "'\n";
-    if ((*it_s).reconcileFlag() != eMyMoney::Split::State::NotReconciled) {
-      s << "    ReconcileDate = " << (*it_s).reconcileDate().toString(Qt::ISODate) << "\n";
+      s << "    Value = " << split.value().formatMoney("", 2)
+      << " (" << split.value().toString() << ")\n";
+    s << "    Shares = " << split.shares().formatMoney("", 2)
+    << " (" << split.shares().toString() << ")\n";
+    s << "    Action = '" << split.action() << "'\n";
+    s << "    Nr = '" << split.number() << "'\n";
+    s << "    ReconcileFlag = '" << reconcileToString(split.reconcileFlag()) << "'\n";
+    if (split.reconcileFlag() != eMyMoney::Split::State::NotReconciled) {
+      s << "    ReconcileDate = " << split.reconcileDate().toString(Qt::ISODate) << "\n";
     }
-    s << "    BankID = " << (*it_s).bankID() << "\n";
-    dumpKVP("KVP:", s, (*it_s), 4);
+    s << "    BankID = " << split.bankID() << "\n";
+    dumpKVP("KVP:", s, split, 4);
     s << "\n";
   }
   s << "\n";

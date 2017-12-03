@@ -146,7 +146,7 @@ void MyMoneySeqAccessMgr::setAccountName(const QString& id, const QString& name)
   if (!isStandardAccount(id))
     throw MYMONEYEXCEPTION("Only standard accounts can be modified using setAccountName()");
 
-  MyMoneyAccount acc = m_accountList[id];
+  auto acc = m_accountList[id];
   acc.setName(name);
   m_accountList.modify(acc.id(), acc);
 }
@@ -403,7 +403,7 @@ void MyMoneySeqAccessMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acc
     throw MYMONEYEXCEPTION(msg);
   }
 
-  MyMoneyAccount acc = *theParent;
+  auto acc = *theParent;
   acc.addAccountId(account.id());
   m_accountList.modify(acc.id(), acc);
   parent = acc;
@@ -433,24 +433,22 @@ unsigned int MyMoneySeqAccessMgr::transactionCount(const QString& account) const
     cnt = m_transactionList.count();
 
   } else {
-    QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-    QList<MyMoneySplit>::ConstIterator it_s;
-
     // scan all transactions
-    for (it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
-
+    foreach (const auto transaction, m_transactionList) {
       // scan all splits of this transaction
-      for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
+      auto found = false;
+      foreach (const auto split, transaction.splits()) {
         // is it a split in our account?
-        if ((*it_s).accountId() == account) {
+        if (split.accountId() == account) {
           // since a transaction can only have one split referencing
           // each account, we're done with the splits here!
+          found = true;
           break;
         }
       }
       // if no split contains the account id, continue with the
       // next transaction
-      if (it_s == (*it_t).splits().end())
+      if (!found)
         continue;
 
       // otherwise count it
@@ -463,14 +461,12 @@ unsigned int MyMoneySeqAccessMgr::transactionCount(const QString& account) const
 const QMap<QString, unsigned long> MyMoneySeqAccessMgr::transactionCountMap() const
 {
   QMap<QString, unsigned long> map;
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan all transactions
-  for (it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
+  foreach (const auto transaction, m_transactionList) {
     // scan all splits of this transaction
-    for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-      map[(*it_s).accountId()]++;
+    foreach (const auto split, transaction.splits()) {
+      map[split.accountId()]++;
     }
   }
   return map;
@@ -565,13 +561,12 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
     throw MYMONEYEXCEPTION("invalid post date");
 
   // now check the splits
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  foreach (const auto split, transaction.splits()) {
     // the following lines will throw an exception if the
     // account or payee do not exist
-    account((*it_s).accountId());
-    if (!(*it_s).payeeId().isEmpty())
-      payee((*it_s).payeeId());
+    account(split.accountId());
+    if (!split.payeeId().isEmpty())
+      payee(split.payeeId());
   }
 
   MyMoneyTransaction newTransaction(nextTransactionID(), transaction);
@@ -583,9 +578,9 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
   transaction = newTransaction;
 
   // adjust the balance of all affected accounts
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    adjustBalance(acc, *it_s);
+  foreach (const auto split, transaction.splits()) {
+    auto acc = m_accountList[split.accountId()];
+    adjustBalance(acc, split);
     if (!skipAccountUpdate) {
       acc.touch();
     }
@@ -699,14 +694,13 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
     throw MYMONEYEXCEPTION("invalid transaction to be modified");
 
   // now check the splits
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  foreach (const auto split, transaction.splits()) {
     // the following lines will throw an exception if the
     // account or payee do not exist
-    account((*it_s).accountId());
-    if (!(*it_s).payeeId().isEmpty())
-      payee((*it_s).payeeId());
-    foreach (const QString& tagId, (*it_s).tagIdList()) {
+    account(split.accountId());
+    if (!split.payeeId().isEmpty())
+      payee(split.payeeId());
+    foreach (const auto tagId, split.tagIdList()) {
       if (!tagId.isEmpty())
         tag(tagId);
     }
@@ -727,13 +721,13 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
   if (it_t == m_transactionList.end())
     throw MYMONEYEXCEPTION("invalid transaction key");
 
-  for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
+  foreach (const auto split, (*it_t).splits()) {
+    auto acc = m_accountList[split.accountId()];
     // we only need to adjust non-investment accounts here
     // as for investment accounts the balance will be recalculated
     // after the transaction has been added.
     if (!acc.isInvest()) {
-      adjustBalance(acc, *it_s, true);
+      adjustBalance(acc, split, true);
       acc.touch();
       m_accountList.modify(acc.id(), acc);
     }
@@ -748,9 +742,9 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
   m_transactionKeys.modify(transaction.id(), newKey);
 
   // adjust account balances
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
-    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    adjustBalance(acc, *it_s);
+  foreach (const auto split, transaction.splits()) {
+    auto acc = m_accountList[split.accountId()];
+    adjustBalance(acc, split);
     acc.touch();
     m_accountList.modify(acc.id(), acc);
   }
@@ -832,10 +826,9 @@ void MyMoneySeqAccessMgr::removeTransaction(const MyMoneyTransaction& transactio
 
   // scan the splits and collect all accounts that need
   // to be updated after the removal of this transaction
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    adjustBalance(acc, *it_s, true);
+  foreach (const auto split, t.splits()) {
+    auto acc = m_accountList[split.accountId()];
+    adjustBalance(acc, split, true);
     acc.touch();
     m_accountList.modify(acc.id(), acc);
   }
@@ -1030,7 +1023,7 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
 
   // new implementation if the above code does not work anymore
   QList<MyMoneyTransaction> list;
-  MyMoneyAccount acc = m_accountList[account];
+  auto acc = m_accountList[account];
   MyMoneyTransactionFilter filter;
 
   if (acc.accountGroup() == eMyMoney::Account::Type::Income
@@ -1048,7 +1041,7 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
 
 const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& date) const
 {
-  MyMoneyAccount acc = account(id);
+  auto acc = account(id);
   if (!date.isValid()) {
     // the balance of all transactions for this account has
     // been requested. no need to calculate anything as we
@@ -1946,16 +1939,13 @@ void MyMoneySeqAccessMgr::rebuildAccountBalances()
   }
 
   // now scan over all transactions and all splits and setup the balances
-  QMap<QString, MyMoneyTransaction>::const_iterator it_t;
-  for (it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
-    const QList<MyMoneySplit>& splits = (*it_t).splits();
-    QList<MyMoneySplit>::const_iterator it_s = splits.begin();
-    for (; it_s != splits.end(); ++it_s) {
-      if (!(*it_s).shares().isZero()) {
-        const QString& id = (*it_s).accountId();
+  foreach (const auto transaction, m_transactionList) {
+    foreach (const auto split, transaction.splits()) {
+      if (!split.shares().isZero()) {
+        const QString& id = split.accountId();
         // locate the account and if present, update data
         if (map.find(id) != map.end()) {
-          map[id].adjustBalance(*it_s);
+          map[id].adjustBalance(split);
         }
       }
     }

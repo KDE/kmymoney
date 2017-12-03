@@ -107,10 +107,9 @@ void KSelectTransactionsDlg::slotEnableOk(const KMyMoneyRegister::SelectedTransa
 void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
 {
   Q_D(KSelectTransactionsDlg);
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if ((*it_s).accountId() == d->m_account.id()) {
-      KMyMoneyRegister::Transaction* tr = KMyMoneyRegister::Register::transactionFactory(d->ui->m_register, t, (*it_s), 0);
+  foreach (const auto split, t.splits()) {
+    if (split.accountId() == d->m_account.id()) {
+      KMyMoneyRegister::Transaction* tr = KMyMoneyRegister::Register::transactionFactory(d->ui->m_register, t, split, 0);
       // force full detail display
       tr->setNumRowsRegister(tr->numRowsRegister(true));
       break;

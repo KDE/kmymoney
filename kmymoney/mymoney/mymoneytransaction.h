@@ -86,7 +86,7 @@ public:
   QString memo() const;
   void setMemo(const QString& memo);
 
-  const QList<MyMoneySplit>& splits() const;
+  QList<MyMoneySplit> splits() const;
   QList<MyMoneySplit>& splits();
   uint splitCount() const;
 

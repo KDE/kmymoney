@@ -169,9 +169,8 @@ void MyMoneyStorageANON::fakeTransaction(MyMoneyTransaction& tx)
   tn.setBankID(hideString(tx.bankID()));
 
   // hide split data
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = tx.splits().constBegin(); it_s != tx.splits().constEnd(); ++it_s) {
-    MyMoneySplit s = (*it_s);
+  foreach (const auto split, tx.splits()) {
+    MyMoneySplit s = split;
     s.setMemo(QString("%1/%2").arg(tn.id()).arg(s.id()));
 
     if (s.value() != MyMoneyMoney::autoCalc) {

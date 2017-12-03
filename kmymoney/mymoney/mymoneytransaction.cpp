@@ -144,7 +144,7 @@ void MyMoneyTransaction::setMemo(const QString& memo)
   d->m_memo = memo;
 }
 
-const QList<MyMoneySplit>& MyMoneyTransaction::splits() const
+QList<MyMoneySplit> MyMoneyTransaction::splits() const
 {
   Q_D(const MyMoneyTransaction);
   return d->m_splits;
@@ -252,10 +252,9 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
     throw MYMONEYEXCEPTION("Cannot modify split that does not contain an account reference");
 
   Q_D(MyMoneyTransaction);
-  QList<MyMoneySplit>::Iterator it;
-  for (it = d->m_splits.begin(); it != d->m_splits.end(); ++it) {
-    if (split.id() == (*it).id()) {
-      *it = split;
+  for (auto& it_split : d->m_splits) {
+    if (split.id() == it_split.id()) {
+      it_split = split;
       return;
     }
   }
@@ -264,19 +263,15 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
 
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
 {
-  QList<MyMoneySplit>::Iterator it;
-  auto removed = false;
-
   Q_D(MyMoneyTransaction);
-  for (it = d->m_splits.begin(); it != d->m_splits.end(); ++it) {
-    if (split.id() == (*it).id()) {
-      d->m_splits.erase(it);
-      removed = true;
-      break;
+  for (auto end = d->m_splits.size(), i = 0; i < end; ++i) {
+    if (split.id() == d->m_splits.at(i).id()) {
+      d->m_splits.removeAt(i);
+      return;
     }
   }
-  if (!removed)
-    throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
+
+  throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
 }
 
 void MyMoneyTransaction::removeSplits()
@@ -435,11 +430,9 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
   el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), MyMoneyUtils::dateToString(d->m_entryDate));
   el.setAttribute(d->getAttrName(Transaction::Attribute::Commodity), d->m_commodity);
 
-  QDomElement splits = document.createElement(d->getElName(Transaction::Element::Splits));
-  QList<MyMoneySplit>::ConstIterator it;
-  for (it = d->m_splits.begin(); it != d->m_splits.end(); ++it) {
-    (*it).writeXML(document, splits);
-  }
+  auto splits = document.createElement(d->getElName(Transaction::Element::Splits));
+  foreach (const auto split, d->m_splits)
+    split.writeXML(document, splits);
   el.appendChild(splits);
 
   MyMoneyKeyValueContainer::writeXML(document, el);
@@ -450,12 +443,14 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
 bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneyTransaction);
-  QList<MyMoneySplit>::const_iterator it;
-  bool rc = (id == d->m_commodity);
-  for (it = d->m_splits.begin(); rc == false && it != d->m_splits.end(); ++it) {
-    rc = (*it).hasReferenceTo(id);
+  if (id == d->m_commodity)
+    return true;
+
+  foreach (const auto split, d->m_splits) {
+    if (split.hasReferenceTo(id))
+      return true;
   }
-  return rc;
+  return false;
 }
 
 bool MyMoneyTransaction::hasAutoCalcSplit() const
@@ -472,10 +467,8 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 {
   Q_D(const MyMoneyTransaction);
   QMap<QString, int> accountList;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = d->m_splits.constBegin(); it_s != d->m_splits.constEnd(); ++it_s) {
-    accountList[(*it_s).accountId()] += 1;
-  }
+  foreach (const auto split, d->m_splits)
+    accountList[split.accountId()] += 1;
 
   QMap<QString, int>::const_iterator it_a;
   QString rc;
@@ -504,11 +497,9 @@ QString MyMoneyTransaction::uniqueSortKey() const
 bool MyMoneyTransaction::replaceId(const QString& newId, const QString& oldId)
 {
   auto changed = false;
-  QList<MyMoneySplit>::Iterator it;
-
   Q_D(MyMoneyTransaction);
-  for (it = d->m_splits.begin(); it != d->m_splits.end(); ++it) {
-    changed |= (*it).replaceId(newId, oldId);
-  }
+  for (MyMoneySplit& split : d->m_splits)
+    changed |= split.replaceId(newId, oldId);
+
   return changed;
 }

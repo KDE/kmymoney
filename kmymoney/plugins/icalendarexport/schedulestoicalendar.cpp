@@ -191,31 +191,30 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
 
 QString scheduleToDescription(const MyMoneySchedule& schedule)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   const MyMoneyAccount& account = schedule.account();
 
-  const MyMoneyTransaction & transaction = schedule.transaction();
+  const MyMoneyTransaction& transaction = schedule.transaction();
   QString payeeName;
 
-  QList<MyMoneySplit>::const_iterator it_s;
   MyMoneyMoney amount;
   QString category;
   bool isTransfer = false;
   bool isIncome = false;
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
-    if ((*it_s).accountId() != account.id()) {
+  foreach (const auto split, transaction.splits()) {
+    if (split.accountId() != account.id()) {
       if (!category.isEmpty())
         category += ", "; // this is a split transaction
-      const MyMoneyAccount& splitAccount = file->account((*it_s).accountId());
+      const MyMoneyAccount& splitAccount = file->account(split.accountId());
       category = splitAccount.name();
 
       isTransfer = splitAccount.accountGroup() == Account::Type::Asset ||
                    splitAccount.accountGroup() == Account::Type::Liability;
       isIncome = splitAccount.accountGroup() == Account::Type::Income;
     } else {
-      payeeName = file->payee((*it_s).payeeId()).name();
+      payeeName = file->payee(split.payeeId()).name();
       // make the amount positive since the message makes it clear if this is an income or expense
-      amount = (*it_s).shares().abs();
+      amount = split.shares().abs();
     }
   }
 
@@ -282,7 +281,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
   }
 
   // export schedules as TODOs
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   QList<MyMoneySchedule> schedules = file->scheduleList();
   for (QList<MyMoneySchedule>::const_iterator itSchedule = schedules.constBegin(); itSchedule != schedules.constEnd(); ++itSchedule) {
     const MyMoneySchedule& myMoneySchedule = *itSchedule;

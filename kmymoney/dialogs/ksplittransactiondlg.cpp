@@ -437,33 +437,31 @@ void KSplitTransactionDlg::slotClearUnusedSplits()
 void KSplitTransactionDlg::slotMergeSplits()
 {
   Q_D(KSplitTransactionDlg);
-  QList<MyMoneySplit> list = d->ui->transactionsTable->getSplits(d->m_transaction);
-  QList<MyMoneySplit>::ConstIterator it;
 
   try {
     // collect all splits, merge them if needed and remove from transaction
     QList<MyMoneySplit> splits;
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
-      QList<MyMoneySplit>::iterator it_s;
-      for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-        if ((*it_s).accountId() == (*it).accountId()
-            && (*it_s).memo().isEmpty() && (*it).memo().isEmpty())
+    foreach (const auto lsplit, d->ui->transactionsTable->getSplits(d->m_transaction)) {
+      auto found = false;
+      for (auto& split : splits) {
+        if (split.accountId() == lsplit.accountId()
+            && split.memo().isEmpty() && lsplit.memo().isEmpty()) {
+          split.setShares(lsplit.shares() + split.shares());
+          split.setValue(lsplit.value() + split.value());
+          found = true;
           break;
+        }
       }
-      if (it_s != splits.end()) {
-        (*it_s).setShares((*it).shares() + (*it_s).shares());
-        (*it_s).setValue((*it).value() + (*it_s).value());
-      } else {
-        splits << *it;
-      }
-      d->m_transaction.removeSplit(*it);
+      if (!found)
+        splits << lsplit;
+
+      d->m_transaction.removeSplit(lsplit);
     }
 
     // now add them back to the transaction
-    QList<MyMoneySplit>::iterator it_s;
-    for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-      (*it_s).clearId();
-      d->m_transaction.addSplit(*it_s);
+    for (auto& split : splits) {
+      split.clearId();
+      d->m_transaction.addSplit(split);
     }
 
     d->ui->transactionsTable->setTransaction(d->m_transaction, d->m_split, d->m_account);

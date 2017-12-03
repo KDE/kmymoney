@@ -1317,7 +1317,7 @@ void KMyMoneyApp::slotFileNew()
         }
 
         // create a possible checking account
-        MyMoneyAccount acc = wizard->account();
+        auto acc = wizard->account();
         if (acc.name().length()) {
           acc.setInstitutionId(inst.id());
           MyMoneyAccount asset = file->asset();
@@ -1668,7 +1668,7 @@ bool KMyMoneyApp::slotFileSaveAs()
       QStringList fields = (*it).split(':', QString::SkipEmptyParts);
       if (fields[0] != recoveryKeyId) {
         // replace parenthesis in name field with brackets
-        QString name = fields[1];
+        auto name = fields[1];
         name.replace('(', "[");
         name.replace(')', "]");
         name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
@@ -2805,7 +2805,7 @@ void KMyMoneyApp::slotAccountNew(MyMoneyAccount& account)
   wizard->setAccount(account);
 
   if (wizard->exec() == QDialog::Accepted) {
-    MyMoneyAccount acc = wizard->account();
+    auto acc = wizard->account();
     if (!(acc == MyMoneyAccount())) {
       MyMoneyFileTransaction ft;
       MyMoneyFile* file = MyMoneyFile::instance();
@@ -4410,16 +4410,13 @@ bool KMyMoneyApp::payeeReassign(int type)
 //     qDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
 
     // now get a list of all schedules that make use of one of the payees
-    QList<MyMoneySchedule> all_schedules = file->scheduleList();
     QList<MyMoneySchedule> used_schedules;
-    for (QList<MyMoneySchedule>::ConstIterator it = all_schedules.constBegin();
-         it != all_schedules.constEnd(); ++it) {
+    foreach (const auto schedule, file->scheduleList()) {
       // loop over all splits in the transaction of the schedule
-      for (QList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().constBegin();
-           s_it != (*it).transaction().splits().constEnd(); ++s_it) {
+      foreach (const auto split, schedule.transaction().splits()) {
         // is the payee in the split to be deleted?
-        if (payeeInList(d->m_selectedPayees, (*s_it).payeeId())) {
-          used_schedules.push_back(*it); // remember this schedule
+        if (payeeInList(d->m_selectedPayees, split.payeeId())) {
+          used_schedules.push_back(schedule); // remember this schedule
           break;
         }
       }
@@ -4499,39 +4496,35 @@ bool KMyMoneyApp::payeeReassign(int type)
       // TODO : check if we have a report that explicitively uses one of our payees
       //        and issue an appropriate warning
       try {
-        QList<MyMoneySplit>::iterator s_it;
         // now loop over all transactions and reassign payee
-        for (QList<MyMoneyTransaction>::iterator it = translist.begin(); it != translist.end(); ++it) {
+        for (auto& transaction : translist) {
           // create a copy of the splits list in the transaction
-          QList<MyMoneySplit> splits = (*it).splits();
           // loop over all splits
-          for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
+          for (auto& split : transaction.splits()) {
             // if the split is assigned to one of the selected payees, we need to modify it
-            if (payeeInList(d->m_selectedPayees, (*s_it).payeeId())) {
-              (*s_it).setPayeeId(payee_id); // first modify payee in current split
+            if (payeeInList(d->m_selectedPayees, split.payeeId())) {
+              split.setPayeeId(payee_id); // first modify payee in current split
               // then modify the split in our local copy of the transaction list
-              (*it).modifySplit(*s_it); // this does not modify the list object 'splits'!
+              transaction.modifySplit(split); // this does not modify the list object 'splits'!
             }
           } // for - Splits
-          file->modifyTransaction(*it);  // modify the transaction in the MyMoney object
+          file->modifyTransaction(transaction);  // modify the transaction in the MyMoney object
         } // for - Transactions
 
         // now loop over all schedules and reassign payees
-        for (QList<MyMoneySchedule>::iterator it = used_schedules.begin();
-             it != used_schedules.end(); ++it) {
+        for (auto& schedule : used_schedules) {
           // create copy of transaction in current schedule
-          MyMoneyTransaction trans = (*it).transaction();
+          auto trans = schedule.transaction();
           // create copy of lists of splits
-          QList<MyMoneySplit> splits = trans.splits();
-          for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
-            if (payeeInList(d->m_selectedPayees, (*s_it).payeeId())) {
-              (*s_it).setPayeeId(payee_id);
-              trans.modifySplit(*s_it); // does not modify the list object 'splits'!
+          for (auto& split : trans.splits()) {
+            if (payeeInList(d->m_selectedPayees, split.payeeId())) {
+              split.setPayeeId(payee_id);
+              trans.modifySplit(split); // does not modify the list object 'splits'!
             }
           } // for - Splits
           // store transaction in current schedule
-          (*it).setTransaction(trans);
-          file->modifySchedule(*it);  // modify the schedule in the MyMoney engine
+          schedule.setTransaction(trans);
+          file->modifySchedule(schedule);  // modify the schedule in the MyMoney engine
         } // for - Schedules
 
         // reassign the payees in the loans that reference the deleted payees
@@ -4724,17 +4717,14 @@ void KMyMoneyApp::slotTagDelete()
 //     qDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
 
     // now get a list of all schedules that make use of one of the tags
-    QList<MyMoneySchedule> all_schedules = file->scheduleList();
     QList<MyMoneySchedule> used_schedules;
-    for (QList<MyMoneySchedule>::ConstIterator it = all_schedules.constBegin();
-         it != all_schedules.constEnd(); ++it) {
+    foreach (const auto schedule, file->scheduleList()) {
       // loop over all splits in the transaction of the schedule
-      for (QList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().constBegin();
-           s_it != (*it).transaction().splits().constEnd(); ++s_it) {
-        for (int i = 0; i < (*s_it).tagIdList().size(); i++) {
+      foreach (const auto split, schedule.transaction().splits()) {
+        for (auto i = 0; i < split.tagIdList().size(); i++) {
           // is the tag in the split to be deleted?
-          if (tagInList(d->m_selectedTags, (*s_it).tagIdList()[i])) {
-            used_schedules.push_back(*it); // remember this schedule
+          if (tagInList(d->m_selectedTags, split.tagIdList()[i])) {
+            used_schedules.push_back(schedule); // remember this schedule
             break;
           }
         }
@@ -4767,14 +4757,12 @@ void KMyMoneyApp::slotTagDelete()
       // TODO : check if we have a report that explicitively uses one of our tags
       //        and issue an appropriate warning
       try {
-        QList<MyMoneySplit>::iterator s_it;
         // now loop over all transactions and reassign tag
-        for (QList<MyMoneyTransaction>::iterator it = translist.begin(); it != translist.end(); ++it) {
+        for (auto& transaction : translist) {
           // create a copy of the splits list in the transaction
-          QList<MyMoneySplit> splits = (*it).splits();
           // loop over all splits
-          for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
-            QList<QString> tagIdList = (*s_it).tagIdList();
+          for (auto& split : transaction.splits()) {
+            QList<QString> tagIdList = split.tagIdList();
             for (int i = 0; i < tagIdList.size(); i++) {
               // if the split is assigned to one of the selected tags, we need to modify it
               if (tagInList(d->m_selectedTags, tagIdList[i])) {
@@ -4784,22 +4772,20 @@ void KMyMoneyApp::slotTagDelete()
                 i = -1; // restart from the first element
               }
             }
-            (*s_it).setTagIdList(tagIdList); // first modify tag list in current split
+            split.setTagIdList(tagIdList); // first modify tag list in current split
             // then modify the split in our local copy of the transaction list
-            (*it).modifySplit(*s_it); // this does not modify the list object 'splits'!
+            transaction.modifySplit(split); // this does not modify the list object 'splits'!
           } // for - Splits
-          file->modifyTransaction(*it);  // modify the transaction in the MyMoney object
+          file->modifyTransaction(transaction);  // modify the transaction in the MyMoney object
         } // for - Transactions
 
         // now loop over all schedules and reassign tags
-        for (QList<MyMoneySchedule>::iterator it = used_schedules.begin();
-             it != used_schedules.end(); ++it) {
+        for (auto& schedule : used_schedules) {
           // create copy of transaction in current schedule
-          MyMoneyTransaction trans = (*it).transaction();
+          auto trans = schedule.transaction();
           // create copy of lists of splits
-          QList<MyMoneySplit> splits = trans.splits();
-          for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
-            QList<QString> tagIdList = (*s_it).tagIdList();
+          for (auto& split : trans.splits()) {
+            QList<QString> tagIdList = split.tagIdList();
             for (int i = 0; i < tagIdList.size(); i++) {
               if (tagInList(d->m_selectedTags, tagIdList[i])) {
                 tagIdList.removeAt(i);
@@ -4808,12 +4794,12 @@ void KMyMoneyApp::slotTagDelete()
                 i = -1; // restart from the first element
               }
             }
-            (*s_it).setTagIdList(tagIdList);
-            trans.modifySplit(*s_it); // does not modify the list object 'splits'!
+            split.setTagIdList(tagIdList);
+            trans.modifySplit(split); // does not modify the list object 'splits'!
           } // for - Splits
           // store transaction in current schedule
-          (*it).setTransaction(trans);
-          file->modifySchedule(*it);  // modify the schedule in the MyMoney engine
+          schedule.setTransaction(trans);
+          file->modifySchedule(schedule);  // modify the schedule in the MyMoney engine
         } // for - Schedules
 
       } catch (const MyMoneyException &e) {
@@ -5095,7 +5081,7 @@ void KMyMoneyApp::slotTransactionDuplicate()
   // since we may jump here via code, we have to make sure to react only
   // if the action is enabled
   if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionDuplicate])->isEnabled()) {
-    KMyMoneyRegister::SelectedTransactions list = d->m_selectedTransactions;
+    KMyMoneyRegister::SelectedTransactions selectionList = d->m_selectedTransactions;
     KMyMoneyRegister::SelectedTransactions::iterator it_t;
 
     int i = 0;
@@ -5105,14 +5091,13 @@ void KMyMoneyApp::slotTransactionDuplicate()
     MyMoneyFileTransaction ft;
     MyMoneyTransaction lt;
     try {
-      for (it_t = list.begin(); it_t != list.end(); ++it_t) {
-        MyMoneyTransaction t = (*it_t).transaction();
-        QList<MyMoneySplit>::iterator it_s;
+      foreach (const auto selection, selectionList) {
+        auto t = selection.transaction();
         // wipe out any reconciliation information
-        for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-          (*it_s).setReconcileFlag(eMyMoney::Split::State::NotReconciled);
-          (*it_s).setReconcileDate(QDate());
-          (*it_s).setBankID(QString());
+        for (auto& split : t.splits()) {
+          split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+          split.setReconcileDate(QDate());
+          split.setBankID(QString());
         }
         // clear invalid data
         t.setEntryDate(QDate());
@@ -5168,7 +5153,7 @@ void KMyMoneyApp::doDeleteTransactions()
         }
       }
       // need to ensure "nextCheckNumber" is still correct
-      MyMoneyAccount acc = file->account((*it_t).split().accountId());
+      auto acc = file->account((*it_t).split().accountId());
       // the "lastNumberUsed" might have been the txn number deleted
       // so adjust it
       QString deletedNum = (*it_t).split().number();
@@ -5469,12 +5454,10 @@ void KMyMoneyApp::slotTransactionsAccept()
       if (t.isImported()) {
         t.setImported(false);
         if (!d->m_selectedAccount.id().isEmpty()) {
-          QList<MyMoneySplit> list = t.splits();
-          QList<MyMoneySplit>::const_iterator it_s;
-          for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
-            if ((*it_s).accountId() == d->m_selectedAccount.id()) {
-              if ((*it_s).reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
-                MyMoneySplit s = (*it_s);
+          foreach (const auto split, t.splits()) {
+            if (split.accountId() == d->m_selectedAccount.id()) {
+              if (split.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
+                MyMoneySplit s = split;
                 s.setReconcileFlag(eMyMoney::Split::State::Cleared);
                 t.modifySplit(s);
               }
@@ -5545,11 +5528,9 @@ void KMyMoneyApp::slotTransactionCreateSchedule()
     s.setReconcileDate(QDate());
     t.removeSplits();
     t.addSplit(s);
-    const QList<MyMoneySplit>& splits = d->m_selectedTransactions[0].transaction().splits();
-    QList<MyMoneySplit>::const_iterator it_s;
-    for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-      if ((*it_s).id() != splitId) {
-        MyMoneySplit s0 = (*it_s);
+    foreach (const auto split, d->m_selectedTransactions[0].transaction().splits()) {
+      if (split.id() != splitId) {
+        MyMoneySplit s0 = split;
         s0.clearId();
         s0.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
         s0.setReconcileDate(QDate());
@@ -5653,17 +5634,16 @@ void KMyMoneyApp::slotMoveToAccount(const QString& id)
   if (!d->m_selectedTransactions.isEmpty()) {
     MyMoneyFileTransaction ft;
     try {
-      KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-      for (it_t = d->m_selectedTransactions.constBegin(); it_t != d->m_selectedTransactions.constEnd(); ++it_t) {
+      foreach (const auto selection, d->m_selectedTransactions) {
         if (d->m_selectedAccount.accountType() == eMyMoney::Account::Type::Investment) {
-          d->moveInvestmentTransaction(d->m_selectedAccount.id(), id, (*it_t).transaction());
+          d->moveInvestmentTransaction(d->m_selectedAccount.id(), id, selection.transaction());
         } else {
-          QList<MyMoneySplit>::const_iterator it_s;
-          bool changed = false;
-          MyMoneyTransaction t = (*it_t).transaction();
-          for (it_s = (*it_t).transaction().splits().constBegin(); it_s != (*it_t).transaction().splits().constEnd(); ++it_s) {
-            if ((*it_s).accountId() == d->m_selectedAccount.id()) {
-              MyMoneySplit s = (*it_s);
+          auto changed = false;
+          auto t = selection.transaction();
+
+          foreach (const auto split, selection.transaction().splits()) {
+            if (split.accountId() == d->m_selectedAccount.id()) {
+              MyMoneySplit s = split;
               s.setAccountId(id);
               t.modifySplit(s);
               changed = true;
@@ -5692,12 +5672,12 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
   QString stockAccountId;
   QString stockSecurityId;
   MyMoneySplit s;
-  for (QList<MyMoneySplit>::const_iterator it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-    stockAccountId = (*it_s).accountId();
+  foreach (const auto split, t.splits()) {
+    stockAccountId = split.accountId();
     stockSecurityId =
       MyMoneyFile::instance()->account(stockAccountId).currencyId();
     if (!MyMoneyFile::instance()->security(stockSecurityId).isCurrency()) {
-      s = *it_s;
+      s = split;
       break;
     }
   }
@@ -5769,11 +5749,9 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu()
 
     accountSet.load(d->m_moveToAccountSelector);
     // remove those accounts that we currently reference
-    KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-    for (it_t = d->m_selectedTransactions.constBegin(); it_t != d->m_selectedTransactions.constEnd(); ++it_t) {
-      QList<MyMoneySplit>::const_iterator it_s;
-      for (it_s = (*it_t).transaction().splits().constBegin(); it_s != (*it_t).transaction().splits().constEnd(); ++it_s) {
-        d->m_moveToAccountSelector->removeItem((*it_s).accountId());
+    foreach (const auto selection, d->m_selectedTransactions) {
+      foreach (const auto split, selection.transaction().splits()) {
+        d->m_moveToAccountSelector->removeItem(split.accountId());
       }
     }
     // remove those accounts from the list that are denominated
@@ -5781,7 +5759,7 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu()
     QStringList list = d->m_moveToAccountSelector->accountList();
     QList<QString>::const_iterator it_a;
     for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
-      MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
+      auto acc = MyMoneyFile::instance()->account(*it_a);
       if (acc.currencyId() != d->m_selectedAccount.currencyId())
         d->m_moveToAccountSelector->removeItem((*it_a));
     }
@@ -6481,10 +6459,10 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
       const MyMoneySplit& sp = d->m_selectedTransactions[0].split();
       if (!sp.payeeId().isEmpty()) {
         try {
-          MyMoneyPayee payee = MyMoneyFile::instance()->payee(sp.payeeId());
+          auto payee = MyMoneyFile::instance()->payee(sp.payeeId());
           if (!payee.name().isEmpty()) {
             d->m_payeeGoto = payee.id();
-            QString name = payee.name();
+            auto name = payee.name();
             name.replace(QRegExp("&(?!&)"), "&&");
             actionCollection()->action(s_Actions[Action::TransactionGoToPayee])->setText(i18n("Go to '%1'", name));
           }
@@ -6492,20 +6470,19 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
         }
       }
       try {
-        QList<MyMoneySplit>::const_iterator it_s;
         const MyMoneyTransaction& t = d->m_selectedTransactions[0].transaction();
         // search the first non-income/non-expense accunt and use it for the 'goto account'
         const MyMoneySplit& sp = d->m_selectedTransactions[0].split();
-        for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-          if ((*it_s).id() != sp.id()) {
-            MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+        foreach (const auto split, t.splits()) {
+          if (split.id() != sp.id()) {
+            auto acc = MyMoneyFile::instance()->account(split.accountId());
             if (!acc.isIncomeExpense()) {
               // for stock accounts we show the portfolio account
               if (acc.isInvest()) {
                 acc = MyMoneyFile::instance()->account(acc.parentAccountId());
               }
               d->m_accountGoto = acc.id();
-              QString name = acc.name();
+              auto name = acc.name();
               name.replace(QRegExp("&(?!&)"), "&&");
               actionCollection()->action(s_Actions[Action::TransactionGoToAccount])->setText(i18n("Go to '%1'", name));
               break;
@@ -7143,7 +7120,7 @@ void KMyMoneyApp::setAccountOnlineParameters(const MyMoneyAccount& _acc, const M
 {
   MyMoneyFileTransaction ft;
   try {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(_acc.id());
+    auto acc = MyMoneyFile::instance()->account(_acc.id());
     acc.setOnlineBankingSettings(kvps);
     MyMoneyFile::instance()->modifyAccount(acc);
     ft.commit();

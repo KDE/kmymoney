@@ -249,31 +249,30 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   QString detailsReport = QString("<h2 class=\"report\">%1</h2>\n").arg(i18n("Outstanding payments"));
   detailsReport += detailsTableHeader;
 
-  int index = 0;
-  for (it = transactionList.begin(); it != transactionList.end(); ++it) {
-    if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled && (*it).second.shares().isNegative()) {
-      QList<MyMoneySplit>::const_iterator it_s;
+  auto index = 0;
+  foreach (const auto transaction, transactionList) {
+    if (transaction.second.reconcileFlag() == eMyMoney::Split::State::NotReconciled && transaction.second.shares().isNegative()) {
       QString category;
-      for (it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
-        if ((*it_s).accountId() != account.id()) {
+      foreach (const auto split, transaction.first.splits()) {
+        if (split.accountId() != account.id()) {
           if (!category.isEmpty())
             category += ", "; // this is a split transaction
-          category = file->account((*it_s).accountId()).name();
+          category = file->account(split.accountId()).name();
         }
       }
 
       detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-      detailsReport += QString("%1").arg(QLocale().toString((*it).first.entryDate(), QLocale::ShortFormat));
+      detailsReport += QString("%1").arg(QLocale().toString(transaction.first.entryDate(), QLocale::ShortFormat));
       detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg((*it).second.number());
+      detailsReport += QString("%1").arg(transaction.second.number());
       detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg(file->payee((*it).second.payeeId()).name());
+      detailsReport += QString("%1").arg(file->payee(transaction.second.payeeId()).name());
       detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg((*it).first.memo());
+      detailsReport += QString("%1").arg(transaction.first.memo());
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg(category);
       detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg(MyMoneyUtils::formatMoney((*it).second.shares(), file->currency(account.currencyId())));
+      detailsReport += QString("%1").arg(MyMoneyUtils::formatMoney(transaction.second.shares(), file->currency(account.currencyId())));
       detailsReport += "</td></tr>";
     }
   }
@@ -288,13 +287,12 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   index = 0;
   for (it = transactionList.begin(); it != transactionList.end(); ++it) {
     if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled && !(*it).second.shares().isNegative()) {
-      QList<MyMoneySplit>::const_iterator it_s;
       QString category;
-      for (it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
-        if ((*it_s).accountId() != account.id()) {
+      foreach (const auto split, (*it).first.splits()) {
+        if (split.accountId() != account.id()) {
           if (!category.isEmpty())
             category += ", "; // this is a split transaction
-          category = file->account((*it_s).accountId()).name();
+          category = file->account(split.accountId()).name();
         }
       }
 

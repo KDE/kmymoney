@@ -535,10 +535,9 @@ void ListTable::includeInvestmentSubAccounts()
     //Check each split for a matching account
     for (; it_t != transactions.constEnd(); ++it_t) {
       const QList<MyMoneySplit>& splits = (*it_t).splits();
-      QList<MyMoneySplit>::const_iterator it_s = splits.begin();
-      for (; it_s != splits.end(); ++it_s) {
-        const QString& accountId = (*it_s).accountId();
-        if (!(*it_s).shares().isZero()
+      foreach (const auto split, splits) {
+        const QString& accountId = split.accountId();
+        if (!split.shares().isZero()
             && subAccountsList.contains(accountId)) {
           subAccountsList.removeOne(accountId);
           m_config.addAccount(accountId);

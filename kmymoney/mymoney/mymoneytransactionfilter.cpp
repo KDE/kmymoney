@@ -645,11 +645,10 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 
 eMyMoney::TransactionFilter::Validity MyMoneyTransactionFilter::validTransaction(const MyMoneyTransaction& t) const
 {
-  QList<MyMoneySplit>::ConstIterator it_s;
   MyMoneyMoney val;
 
-  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    val += (*it_s).value();
+  foreach (const auto split, t.splits()) {
+    val += split.value();
   }
   return (val == MyMoneyMoney()) ? eMyMoney::TransactionFilter::Validity::Valid : eMyMoney::TransactionFilter::Validity::Invalid;
 }

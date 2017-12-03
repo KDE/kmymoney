@@ -1692,17 +1692,13 @@ void KHomeView::showCashFlowSummary()
   QList<MyMoneyTransaction> transactions = file->transactionList(filter);
   //if no transaction then skip and print total in zero
   if (transactions.size() > 0) {
-    QList<MyMoneyTransaction>::const_iterator it_transaction;
 
     //get all transactions for this month
-    for (it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
-
+    foreach (const auto transaction, transactions) {
       //get the splits for each transaction
-      const QList<MyMoneySplit>& splits = (*it_transaction).splits();
-      QList<MyMoneySplit>::const_iterator it_split;
-      for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
-        if (!(*it_split).shares().isZero()) {
-          ReportAccount repSplitAcc = ReportAccount((*it_split).accountId());
+      foreach (const auto split, transaction.splits()) {
+        if (!split.shares().isZero()) {
+          ReportAccount repSplitAcc = ReportAccount(split.accountId());
 
           //only add if it is an income or expense
           if (repSplitAcc.isIncomeExpense()) {
@@ -1710,11 +1706,11 @@ void KHomeView::showCashFlowSummary()
 
             //convert to base currency if necessary
             if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
-              MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice((*it_transaction).postDate());
-              value = ((*it_split).shares() * MyMoneyMoney::MINUS_ONE) * curPrice;
+              MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice(transaction.postDate());
+              value = (split.shares() * MyMoneyMoney::MINUS_ONE) * curPrice;
               value = value.convert(10000);
             } else {
-              value = ((*it_split).shares() * MyMoneyMoney::MINUS_ONE);
+              value = (split.shares() * MyMoneyMoney::MINUS_ONE);
             }
 
             //store depending on account type
@@ -1787,11 +1783,10 @@ void KHomeView::showCashFlowSummary()
         QDate nextDate = (*sched_it).nextPayment((*sched_it).lastPayment());
 
         //make sure we have all 'starting balances' so that the autocalc works
-        QList<MyMoneySplit>::const_iterator it_s;
         QMap<QString, MyMoneyMoney> balanceMap;
 
-        for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-          MyMoneyAccount acc = file->account((*it_s).accountId());
+        foreach (const auto split, transaction.splits()) {
+          auto acc = file->account(split.accountId());
           // collect all overdues on the first day
           QDate schedDate = nextDate;
           if (QDate::currentDate() >= nextDate)

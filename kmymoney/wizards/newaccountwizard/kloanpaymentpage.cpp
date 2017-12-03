@@ -90,10 +90,9 @@ namespace NewAccountWizard
     Q_D(LoanPaymentPage);
     list.clear();
 
-    QList<MyMoneySplit>::ConstIterator it;
-    for (it = d->additionalFeesTransaction.splits().constBegin(); it != d->additionalFeesTransaction.splits().constEnd(); ++it) {
-        if ((*it).accountId() != d->phonyAccount.id()) {
-            list << (*it);
+    foreach (const auto split, d->additionalFeesTransaction.splits()) {
+        if (split.accountId() != d->phonyAccount.id()) {
+            list << split;
           }
       }
   }
@@ -128,14 +127,13 @@ namespace NewAccountWizard
     if (dlg->exec() == QDialog::Accepted) {
         d->additionalFeesTransaction = dlg->transaction();
         // sum up the additional fees
-        QList<MyMoneySplit>::ConstIterator it;
 
         d->additionalFees = MyMoneyMoney();
-        for (it = d->additionalFeesTransaction.splits().constBegin(); it != d->additionalFeesTransaction.splits().constEnd(); ++it) {
-            if ((*it).accountId() != d->phonyAccount.id()) {
-                d->additionalFees += (*it).shares();
-              }
+        foreach (const auto split, d->additionalFeesTransaction.splits()) {
+          if (split.accountId() != d->phonyAccount.id()) {
+            d->additionalFees += split.shares();
           }
+        }
         updateAmounts();
       }
 

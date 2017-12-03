@@ -276,23 +276,18 @@ public:
     filter.setDateFilter(q->forecastStartDate(), q->forecastEndDate());
     filter.setReportAllSplits(false);
 
-    auto transactions = file->transactionList(filter);
-    auto it_t = transactions.constBegin();
-
-    for (; it_t != transactions.constEnd(); ++it_t) {
-      const QList<MyMoneySplit>& splits = (*it_t).splits();
-      QList<MyMoneySplit>::const_iterator it_s = splits.begin();
-      for (; it_s != splits.end(); ++it_s) {
-        if (!(*it_s).shares().isZero()) {
-          auto acc = file->account((*it_s).accountId());
+    foreach (const auto transaction, file->transactionList(filter)) {
+      foreach (const auto split, transaction.splits()) {
+        if (!split.shares().isZero()) {
+          auto acc = file->account(split.accountId());
           if (q->isForecastAccount(acc)) {
             dailyBalances balance;
             balance = m_accountList[acc.id()];
             //if it is income, the balance is stored as negative number
             if (acc.accountType() == eMyMoney::Account::Type::Income) {
-              balance[(*it_t).postDate()] += ((*it_s).shares() * MyMoneyMoney::MINUS_ONE);
+              balance[transaction.postDate()] += (split.shares() * MyMoneyMoney::MINUS_ONE);
             } else {
-              balance[(*it_t).postDate()] += (*it_s).shares();
+              balance[transaction.postDate()] += split.shares();
             }
             m_accountList[acc.id()] = balance;
           }
@@ -371,16 +366,15 @@ public:
         if (!acc.id().isEmpty()) {
           try {
             if (acc.accountType() != eMyMoney::Account::Type::Investment) {
-              MyMoneyTransaction t = (*it).transaction();
+              auto t = (*it).transaction();
 
               // only process the entry, if it is still active
               if (!(*it).isFinished() && nextDate != QDate()) {
                 // make sure we have all 'starting balances' so that the autocalc works
-                QList<MyMoneySplit>::const_iterator it_s;
                 QMap<QString, MyMoneyMoney> balanceMap;
 
-                for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-                  auto acc = file->account((*it_s).accountId());
+                foreach (const auto split, t.splits()) {
+                  auto acc = file->account(split.accountId());
                   if (q->isForecastAccount(acc)) {
                     // collect all overdues on the first day
                     QDate forecastDate = nextDate;
@@ -400,8 +394,8 @@ public:
                 q->calculateAutoLoan(*it, t, balanceMap);
 
                 // now add the splits to the balances
-                for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-                  auto acc = file->account((*it_s).accountId());
+                foreach (const auto split, t.splits()) {
+                  auto acc = file->account(split.accountId());
                   if (q->isForecastAccount(acc)) {
                     dailyBalances balance;
                     balance = m_accountList[acc.id()];
@@ -415,9 +409,9 @@ public:
                       forecastDate = QDate::currentDate().addDays(1);
 
                     if (acc.accountType() == eMyMoney::Account::Type::Income) {
-                      balance[forecastDate] += ((*it_s).shares() * MyMoneyMoney::MINUS_ONE);
+                      balance[forecastDate] += (split.shares() * MyMoneyMoney::MINUS_ONE);
                     } else {
-                      balance[forecastDate] += (*it_s).shares();
+                      balance[forecastDate] += split.shares();
                     }
                     m_accountList[acc.id()] = balance;
                   }
@@ -745,16 +739,11 @@ public:
     filter.setDateFilter(q->historyStartDate(), q->historyEndDate());
     filter.setReportAllSplits(false);
 
-    auto transactions = file->transactionList(filter);
-    auto it_t = transactions.constBegin();
-
     //Check past transactions
-    for (; it_t != transactions.constEnd(); ++it_t) {
-      const QList<MyMoneySplit>& splits = (*it_t).splits();
-      QList<MyMoneySplit>::const_iterator it_s = splits.begin();
-      for (; it_s != splits.end(); ++it_s) {
-        if (!(*it_s).shares().isZero()) {
-          auto acc = file->account((*it_s).accountId());
+    foreach (const auto transaction, file->transactionList(filter)) {
+      foreach (const auto split, transaction.splits()) {
+        if (!split.shares().isZero()) {
+          auto acc = file->account(split.accountId());
 
           //workaround for stock accounts which have faulty opening dates
           QDate openingDate;
@@ -766,15 +755,15 @@ public:
           }
 
           if (q->isForecastAccount(acc) //If it is one of the accounts we are checking, add the amount of the transaction
-              && ((openingDate < (*it_t).postDate() && q->skipOpeningDate())
+              && ((openingDate < transaction.postDate() && q->skipOpeningDate())
                   || !q->skipOpeningDate())) {  //don't take the opening day of the account to calculate balance
             dailyBalances balance;
             //FIXME deal with leap years
             balance = m_accountListPast[acc.id()];
             if (acc.accountType() == eMyMoney::Account::Type::Income) {//if it is income, the balance is stored as negative number
-              balance[(*it_t).postDate()] += ((*it_s).shares() * MyMoneyMoney::MINUS_ONE);
+              balance[transaction.postDate()] += (split.shares() * MyMoneyMoney::MINUS_ONE);
             } else {
-              balance[(*it_t).postDate()] += (*it_s).shares();
+              balance[transaction.postDate()] += split.shares();
             }
             // check if this is a new account for us
             m_accountListPast[acc.id()] = balance;
@@ -1136,16 +1125,12 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, i
   }
 
   filter.setReportAllSplits(false);
-  auto transactions = file->transactionList(filter);
-  auto it_t = transactions.constBegin();
 
   //add all transactions for that account
-  for (; it_t != transactions.constEnd(); ++it_t) {
-    const QList<MyMoneySplit>& splits = (*it_t).splits();
-    QList<MyMoneySplit>::const_iterator it_s = splits.begin();
-    for (; it_s != splits.end(); ++it_s) {
-      if (!(*it_s).shares().isZero()) {
-        if (acc.id() == (*it_s).accountId()) netIncome += (*it_s).value();
+  foreach (const auto transaction, file->transactionList(filter)) {
+    foreach (const auto split, transaction.splits()) {
+      if (!split.shares().isZero()) {
+        if (acc.id() == split.accountId()) netIncome += split.value();
       }
     }
   }

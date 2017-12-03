@@ -447,13 +447,9 @@ void LedgerModel::addSchedules(const QList<MyMoneySchedule> & list, int previewP
           t.setPostDate(schedule.adjustedNextDueDate());
         }
 
-        const QList<MyMoneySplit>& splits = t.splits();
-        QList<MyMoneySplit>::const_iterator it_s;
-
         // create a model entry for each split of the schedule
-        for(it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
-          newList.append(new LedgerSchedule(schedule, t, (*it_s)));
-        }
+        foreach (const auto split, t.splits())
+          newList.append(new LedgerSchedule(schedule, t, split));
 
         // keep track of this payment locally (not in the engine)
         if (schedule.isOverdue()) {

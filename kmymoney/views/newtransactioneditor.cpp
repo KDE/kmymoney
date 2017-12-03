@@ -618,22 +618,21 @@ void NewTransactionEditor::saveTransaction()
 
   QList<MyMoneySplit> splits = t.splits();
   // first remove the splits that are gone
-  QList<MyMoneySplit>::iterator it;
-  for(it = splits.begin(); it != splits.end(); ++it) {
-    if((*it).id() == d->split.id()) {
+  foreach (const auto split, t.splits()) {
+    if(split.id() == d->split.id()) {
       continue;
     }
     int row;
     for(row = 0; row < d->splitModel.rowCount(); ++row) {
       QModelIndex index = d->splitModel.index(row, 0);
-      if(d->splitModel.data(index, (int)eLedgerModel::Role::SplitId).toString() == (*it).id()) {
+      if(d->splitModel.data(index, (int)eLedgerModel::Role::SplitId).toString() == split.id()) {
         break;
       }
     }
 
     // if the split is not in the model, we get rid of it
     if(d->splitModel.rowCount() == row) {
-      t.removeSplit(*it);
+      t.removeSplit(split);
     }
   }
 

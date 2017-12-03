@@ -233,15 +233,13 @@ void Activity::createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& 
 
 MyMoneyMoney Activity::sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const
 {
-  MyMoneyMoney total;
-  total = s0.value();
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = feeSplits.begin(); it_s != feeSplits.end(); ++it_s) {
-    total += (*it_s).value();
-  }
-  for (it_s = interestSplits.begin(); it_s != interestSplits.end(); ++it_s) {
-    total += (*it_s).value();
-  }
+  auto total = s0.value();
+  foreach (const auto feeSplit, feeSplits)
+    total += feeSplit.value();
+
+  foreach (const auto interestSplit, interestSplits)
+    total += interestSplit.value();
+
   return total;
 }
 

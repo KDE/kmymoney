@@ -602,7 +602,7 @@ TransactionEditor* KMyMoneyView::startEdit(const KMyMoneyRegister::SelectedTrans
 void KMyMoneyView::newStorage(storageTypeE t)
 {
   removeStorage();
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   if (t == Memory)
     file->attachStorage(new MyMoneySeqAccessMgr);
   else
@@ -612,7 +612,7 @@ void KMyMoneyView::newStorage(storageTypeE t)
 
 void KMyMoneyView::removeStorage()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   IMyMoneyStorage* p = file->storage();
   if (p != 0) {
     file->detachStorage(p);
@@ -652,7 +652,7 @@ void KMyMoneyView::enableViewsIfFileOpen()
 
 void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& transaction)
 {
-  MyMoneyAccount acc = MyMoneyFile::instance()->account(_accId);
+  auto acc = MyMoneyFile::instance()->account(_accId);
   QString accId(_accId);
 
   switch (acc.accountType()) {
@@ -1028,7 +1028,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
 
 void KMyMoneyView::checkAccountName(const MyMoneyAccount& _acc, const QString& name) const
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   if (_acc.name() != name) {
     MyMoneyAccount acc(_acc);
     acc.setName(name);
@@ -1573,7 +1573,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
 
 void KMyMoneyView::selectBaseCurrency()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
 
   // check if we have a base currency. If not, we need to select one
   QString baseId;
@@ -1634,7 +1634,7 @@ void KMyMoneyView::selectBaseCurrency()
 
 void KMyMoneyView::updateCurrencyNames()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   MyMoneyFileTransaction ft;
 
   QList<MyMoneySecurity> storedCurrencies = MyMoneyFile::instance()->currencyList();
@@ -1660,7 +1660,7 @@ void KMyMoneyView::updateCurrencyNames()
 
 void KMyMoneyView::loadAllCurrencies()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   MyMoneyFileTransaction ft;
   if (!file->currencyList().isEmpty())
     return;
@@ -1747,7 +1747,7 @@ void KMyMoneyView::fixFile_3()
 
 void KMyMoneyView::fixFile_2()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> transactionList;
@@ -1756,30 +1756,27 @@ void KMyMoneyView::fixFile_2()
   // scan the transactions and modify transactions with two splits
   // which reference an account and a category to have the memo text
   // of the account.
-  QList<MyMoneyTransaction>::Iterator it_t;
-  int count = 0;
-  for (it_t = transactionList.begin(); it_t != transactionList.end(); ++it_t) {
-    if ((*it_t).splitCount() == 2) {
+  auto count = 0;
+  foreach (const auto transaction, transactionList) {
+    if (transaction.splitCount() == 2) {
       QString accountId;
       QString categoryId;
       QString accountMemo;
       QString categoryMemo;
-      const QList<MyMoneySplit>& splits = (*it_t).splits();
-      QList<MyMoneySplit>::const_iterator it_s;
-      for (it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
-        MyMoneyAccount acc = file->account((*it_s).accountId());
+      foreach (const auto split, transaction.splits()) {
+        auto acc = file->account(split.accountId());
         if (acc.isIncomeExpense()) {
-          categoryId = (*it_s).id();
-          categoryMemo = (*it_s).memo();
+          categoryId = split.id();
+          categoryMemo = split.memo();
         } else {
-          accountId = (*it_s).id();
-          accountMemo = (*it_s).memo();
+          accountId = split.id();
+          accountMemo = split.memo();
         }
       }
 
       if (!accountId.isEmpty() && !categoryId.isEmpty()
           && accountMemo != categoryMemo) {
-        MyMoneyTransaction t(*it_t);
+        MyMoneyTransaction t(transaction);
         MyMoneySplit s(t.splitById(categoryId));
         s.setMemo(accountMemo);
         t.modifySplit(s);
@@ -1806,7 +1803,7 @@ void KMyMoneyView::fixFile_1()
         QStringList missing;
         QStringList::const_iterator it_a, it_b;
         for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
-          MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
+          auto acc = MyMoneyFile::instance()->account(*it_a);
           if (acc.accountType() == Account::Type::Investment) {
             foreach (const auto accountID, acc.accountList()) {
               if (!list.contains(accountID)) {
@@ -1839,7 +1836,7 @@ if (!m_accountsView->allItemsSelected())
     QStringList missing;
     QStringList::const_iterator it_a, it_b;
     for (it_a = list.begin(); it_a != list.end(); ++it_a) {
-      MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
+      auto acc = MyMoneyFile::instance()->account(*it_a);
       if (acc.accountType() == Account::Type::Investment) {
         foreach (const auto accountID, acc.accountList()) {
           if (!list.contains(accountID)) {
@@ -1868,7 +1865,7 @@ void KMyMoneyView::fixFile_0()
    * out needing fixing anyway.
    */
 
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accountList;
   file->accountList(accountList);
   QList<MyMoneyAccount>::Iterator it_a;
@@ -1891,7 +1888,7 @@ void KMyMoneyView::fixFile_0()
     // MyMoneyFile::reparent would act as NOP.
     if (equityListEmpty && (*it_a).accountType() == Account::Type::Equity) {
       if ((*it_a).parentAccountId() == equity.id()) {
-        MyMoneyAccount acc = *it_a;
+        auto acc = *it_a;
         // tricky, force parent account to be empty so that we really
         // can re-parent it
         acc.setParentAccountId(QString());
@@ -1924,7 +1921,7 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
       if (it_s == splitList.constBegin() && t.commodity().isEmpty()) {
         qDebug() << Q_FUNC_INFO << " " << t.id() << " has no commodity";
         try {
-          MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+          auto acc = MyMoneyFile::instance()->account((*it_s).accountId());
           t.setCommodity(acc.currencyId());
           updated = true;
         } catch (const MyMoneyException &) {
@@ -2003,10 +2000,9 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       // to the account pool. Note: the schedule code used to leave
       // this always the first split, but the loan code leaves it as
       // the second one. So I thought, searching is a good alternative ....
-      QList<MyMoneySplit>::ConstIterator it_s;
-      for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-        if ((*it_s).accountId().isEmpty()) {
-          MyMoneySplit s = (*it_s);
+      foreach (const auto split, t.splits()) {
+        if (split.accountId().isEmpty()) {
+          MyMoneySplit s = split;
           s.setAccountId(newAccount.id());
           t.modifySplit(s);
           break;
@@ -2031,7 +2027,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
 
 void KMyMoneyView::fixTransactions_0()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
 
   QList<MyMoneySchedule> scheduleList = file->scheduleList();
   MyMoneyTransactionFilter filter;
@@ -2053,17 +2049,17 @@ void KMyMoneyView::fixTransactions_0()
     QStringList accounts;
     bool hasDuplicateAccounts = false;
 
-    for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-      if (accounts.contains((*it_s).accountId())) {
+    foreach (const auto split, t.splits()) {
+      if (accounts.contains(split.accountId())) {
         hasDuplicateAccounts = true;
-        qDebug() << Q_FUNC_INFO << " " << t.id() << " has multiple splits with account " << (*it_s).accountId();
+        qDebug() << Q_FUNC_INFO << " " << t.id() << " has multiple splits with account " << split.accountId();
       } else {
-        accounts << (*it_s).accountId();
+        accounts << split.accountId();
       }
 
-      if ((*it_s).action() == MyMoneySplit::ActionInterest) {
-        if (interestAccounts.contains((*it_s).accountId()) == 0) {
-          interestAccounts << (*it_s).accountId();
+      if (split.action() == MyMoneySplit::ActionInterest) {
+        if (interestAccounts.contains(split.accountId()) == 0) {
+          interestAccounts << split.accountId();
         }
       }
     }
@@ -2076,31 +2072,29 @@ void KMyMoneyView::fixTransactions_0()
   }
 
   // scan the transactions and modify loan transactions
-  QList<MyMoneyTransaction>::Iterator it_t;
-  for (it_t = transactionList.begin(); it_t != transactionList.end(); ++it_t) {
+  for (auto& transaction : transactionList) {
     const char *defaultAction = 0;
-    QList<MyMoneySplit> splits = (*it_t).splits();
-    QList<MyMoneySplit>::Iterator it_s;
+    QList<MyMoneySplit> splits = transaction.splits();
     QStringList accounts;
 
     // check if base commodity is set. if not, set baseCurrency
-    if ((*it_t).commodity().isEmpty()) {
-      qDebug() << Q_FUNC_INFO << " " << (*it_t).id() << " has no base currency";
-      (*it_t).setCommodity(file->baseCurrency().id());
-      file->modifyTransaction(*it_t);
+    if (transaction.commodity().isEmpty()) {
+      qDebug() << Q_FUNC_INFO << " " << transaction.id() << " has no base currency";
+      transaction.setCommodity(file->baseCurrency().id());
+      file->modifyTransaction(transaction);
     }
 
     bool isLoan = false;
     // Determine default action
-    if ((*it_t).splitCount() == 2) {
+    if (transaction.splitCount() == 2) {
       // check for transfer
       int accountCount = 0;
       MyMoneyMoney val;
-      for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-        MyMoneyAccount acc = file->account((*it_s).accountId());
+      foreach (const auto split, splits) {
+        auto acc = file->account(split.accountId());
         if (acc.accountGroup() == Account::Type::Asset
             || acc.accountGroup() == Account::Type::Liability) {
-          val = (*it_s).value();
+          val = split.value();
           accountCount++;
           if (acc.accountType() == Account::Type::Loan
               || acc.accountType() == Account::Type::AssetLoan)
@@ -2122,15 +2116,18 @@ void KMyMoneyView::fixTransactions_0()
     }
 
     isLoan = false;
-    for (it_s = splits.begin(); defaultAction == 0 && it_s != splits.end(); ++it_s) {
-      MyMoneyAccount acc = file->account((*it_s).accountId());
-      MyMoneyMoney val = (*it_s).value();
+    foreach (const auto split, splits) {
+      auto acc = file->account(split.accountId());
+      MyMoneyMoney val = split.value();
       if (acc.accountGroup() == Account::Type::Asset
           || acc.accountGroup() == Account::Type::Liability) {
-        if (!val.isPositive())
+        if (!val.isPositive()) {
           defaultAction = MyMoneySplit::ActionWithdrawal;
-        else
+          break;
+        } else {
           defaultAction = MyMoneySplit::ActionDeposit;
+          break;
+        }
       }
     }
 
@@ -2140,7 +2137,7 @@ void KMyMoneyView::fixTransactions_0()
     // The action fields are actually not used anymore in the ledger view logic
     // so we might as well skip this whole thing here!
     for (it_s = splits.begin(); needModify == false && it_s != splits.end(); ++it_s) {
-      MyMoneyAccount acc = file->account((*it_s).accountId());
+      auto acc = file->account((*it_s).accountId());
       MyMoneyMoney val = (*it_s).value();
       if (acc.accountType() == Account::Type::CreditCard) {
         if (val < 0 && (*it_s).action() != MyMoneySplit::ActionWithdrawal && (*it_s).action() != MyMoneySplit::ActionTransfer)
@@ -2156,64 +2153,64 @@ void KMyMoneyView::fixTransactions_0()
     if (needModify == true) {
       for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
         (*it_s).setAction(defaultAction);
-        (*it_t).modifySplit(*it_s);
-        file->modifyTransaction(*it_t);
+        transaction.modifySplit(*it_s);
+        file->modifyTransaction(transaction);
       }
-      splits = (*it_t).splits();    // update local copy
-      qDebug("Fixed credit card assignment in %s", (*it_t).id().data());
+      splits = transaction.splits();    // update local copy
+      qDebug("Fixed credit card assignment in %s", transaction.id().data());
     }
 #endif
 
     // Check for correct assignment of ActionInterest in all splits
     // and check if there are any duplicates in this transactions
-    for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-      MyMoneyAccount splitAccount = file->account((*it_s).accountId());
-      if (!accounts.contains((*it_s).accountId())) {
-        accounts << (*it_s).accountId();
+    for (auto& split : splits) {
+      MyMoneyAccount splitAccount = file->account(split.accountId());
+      if (!accounts.contains(split.accountId())) {
+        accounts << split.accountId();
       }
       // if this split references an interest account, the action
       // must be of type ActionInterest
-      if (interestAccounts.contains((*it_s).accountId())) {
-        if ((*it_s).action() != MyMoneySplit::ActionInterest) {
-          qDebug() << Q_FUNC_INFO << " " << (*it_t).id() << " contains an interest account (" << (*it_s).accountId() << ") but does not have ActionInterest";
-          (*it_s).setAction(MyMoneySplit::ActionInterest);
-          (*it_t).modifySplit(*it_s);
-          file->modifyTransaction(*it_t);
-          qDebug("Fixed interest action in %s", qPrintable((*it_t).id()));
+      if (interestAccounts.contains(split.accountId())) {
+        if (split.action() != MyMoneySplit::ActionInterest) {
+          qDebug() << Q_FUNC_INFO << " " << transaction.id() << " contains an interest account (" << split.accountId() << ") but does not have ActionInterest";
+          split.setAction(MyMoneySplit::ActionInterest);
+          transaction.modifySplit(split);
+          file->modifyTransaction(transaction);
+          qDebug("Fixed interest action in %s", qPrintable(transaction.id()));
         }
         // if it does not reference an interest account, it must not be
         // of type ActionInterest
       } else {
-        if ((*it_s).action() == MyMoneySplit::ActionInterest) {
-          qDebug() << Q_FUNC_INFO << " " << (*it_t).id() << " does not contain an interest account so it should not have ActionInterest";
-          (*it_s).setAction(defaultAction);
-          (*it_t).modifySplit(*it_s);
-          file->modifyTransaction(*it_t);
-          qDebug("Fixed interest action in %s", qPrintable((*it_t).id()));
+        if (split.action() == MyMoneySplit::ActionInterest) {
+          qDebug() << Q_FUNC_INFO << " " << transaction.id() << " does not contain an interest account so it should not have ActionInterest";
+          split.setAction(defaultAction);
+          transaction.modifySplit(split);
+          file->modifyTransaction(transaction);
+          qDebug("Fixed interest action in %s", qPrintable(transaction.id()));
         }
       }
 
       // check that for splits referencing an account that has
       // the same currency as the transactions commodity the value
       // and shares field are the same.
-      if ((*it_t).commodity() == splitAccount.currencyId()
-          && (*it_s).value() != (*it_s).shares()) {
-        qDebug() << Q_FUNC_INFO << " " << (*it_t).id() << " " << (*it_s).id() << " uses the transaction currency, but shares != value";
-        (*it_s).setShares((*it_s).value());
-        (*it_t).modifySplit(*it_s);
-        file->modifyTransaction(*it_t);
+      if (transaction.commodity() == splitAccount.currencyId()
+          && split.value() != split.shares()) {
+        qDebug() << Q_FUNC_INFO << " " << transaction.id() << " " << split.id() << " uses the transaction currency, but shares != value";
+        split.setShares(split.value());
+        transaction.modifySplit(split);
+        file->modifyTransaction(transaction);
       }
 
       // fix the shares and values to have the correct fraction
       if (!splitAccount.isInvest()) {
         try {
           int fract = splitAccount.fraction();
-          if ((*it_s).shares() != (*it_s).shares().convert(fract)) {
-            qDebug("adjusting fraction in %s,%s", qPrintable((*it_t).id()), qPrintable((*it_s).id()));
-            (*it_s).setShares((*it_s).shares().convert(fract));
-            (*it_s).setValue((*it_s).value().convert(fract));
-            (*it_t).modifySplit(*it_s);
-            file->modifyTransaction(*it_t);
+          if (split.shares() != split.shares().convert(fract)) {
+            qDebug("adjusting fraction in %s,%s", qPrintable(transaction.id()), qPrintable(split.id()));
+            split.setShares(split.shares().convert(fract));
+            split.setValue(split.value().convert(fract));
+            transaction.modifySplit(split);
+            file->modifyTransaction(transaction);
           }
         } catch (const MyMoneyException &) {
           qDebug("Missing security '%s', split not altered", qPrintable(splitAccount.currencyId()));

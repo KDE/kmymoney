@@ -547,11 +547,9 @@ void KGlobalLedgerView::loadView()
           } else {
             t.setPostDate(s.adjustedNextDueDate());
           }
-          const QList<MyMoneySplit>& splits = t.splits();
-          QList<MyMoneySplit>::const_iterator it_s;
-          for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-            if ((*it_s).accountId() == m_account.id()) {
-              new KMyMoneyRegister::StdTransactionScheduled(m_register, t, *it_s, uniqueMap[t.id()]);
+          foreach (const auto split, t.splits()) {
+            if (split.accountId() == m_account.id()) {
+              new KMyMoneyRegister::StdTransactionScheduled(m_register, t, split, uniqueMap[t.id()]);
             }
           }
           // keep track of this payment locally (not in the engine)

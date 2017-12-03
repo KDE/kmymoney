@@ -256,17 +256,16 @@ QString KMyMoneyUtils::findResource(QStandardPaths::StandardLocation type, const
 
 const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 {
-  QList<MyMoneySplit>::ConstIterator it_s;
   MyMoneySplit investmentAccountSplit;
-  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if (!(*it_s).accountId().isEmpty()) {
-      MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+  foreach (const auto split, t.splits()) {
+    if (!split.accountId().isEmpty()) {
+      auto acc = MyMoneyFile::instance()->account(split.accountId());
       if (acc.isInvest()) {
-        return *it_s;
+        return split;
       }
       // if we have a reference to an investment account, we remember it here
       if (acc.accountType() == eMyMoney::Account::Type::Investment)
-        investmentAccountSplit = *it_s;
+        investmentAccountSplit = split;
     }
   }
   // if we haven't found a stock split, we see if we've seen
@@ -347,7 +346,7 @@ void KMyMoneyUtils::updateLastNumberUsed(const MyMoneyAccount& acc, const QStrin
   MyMoneyAccount accnt = acc;
   QString num = number;
   // now check if this number has been used already
-  MyMoneyFile* file = MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
   if (file->checkNoUsed(accnt.id(), num)) {
     // if a number has been entered which is immediately prior to
     // an existing number, the next new number produced would clash
@@ -551,25 +550,24 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   // empty), feeSplits is the list of all expenses and interestSplits
   // the list of all incomes
   assetAccountSplit = MyMoneySplit(); // set to none to check later if it was assigned
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
-    MyMoneyAccount acc = file->account((*it_s).accountId());
-    if ((*it_s).id() == split.id()) {
+  auto file = MyMoneyFile::instance();
+  foreach (const auto tsplit, transaction.splits()) {
+    auto acc = file->account(tsplit.accountId());
+    if (tsplit.id() == split.id()) {
       security = file->security(acc.currencyId());
     } else if (acc.accountGroup() == eMyMoney::Account::Type::Expense) {
-      feeSplits.append(*it_s);
-      // feeAmount += (*it_s).value();
+      feeSplits.append(tsplit);
+      // feeAmount += tsplit.value();
     } else if (acc.accountGroup() == eMyMoney::Account::Type::Income) {
-      interestSplits.append(*it_s);
-      // interestAmount += (*it_s).value();
+      interestSplits.append(tsplit);
+      // interestAmount += tsplit.value();
     } else {
       if (assetAccountSplit == MyMoneySplit()) // first asset Account should be our requested brokerage account
-        assetAccountSplit = *it_s;
-      else if ((*it_s).value().isNegative())  // the rest (if present) is handled as fee or interest
-        feeSplits.append(*it_s);              // and shouldn't be allowed to override assetAccountSplit
-      else if ((*it_s).value().isPositive())
-        interestSplits.append(*it_s);
+        assetAccountSplit = tsplit;
+      else if (tsplit.value().isNegative())  // the rest (if present) is handled as fee or interest
+        feeSplits.append(tsplit);              // and shouldn't be allowed to override assetAccountSplit
+      else if (tsplit.value().isPositive())
+        interestSplits.append(tsplit);
     }
   }
 
@@ -615,7 +613,7 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
   }
   if (KMessageBox::questionYesNo(parent, msg, i18n("Delete security"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk) == KMessageBox::Yes) {
     MyMoneyFileTransaction ft;
-    MyMoneyFile* file = MyMoneyFile::instance();
+    auto file = MyMoneyFile::instance();
 
     QBitArray skip((int)eStorage::Reference::Count);
     skip.fill(true);

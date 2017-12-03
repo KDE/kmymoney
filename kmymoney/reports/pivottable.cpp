@@ -299,10 +299,9 @@ void PivotTable::init()
 
           //if the loan split is not included in the report, update the balance for the next occurrence
           if (!m_config.includes(splitAccount)) {
-            QList<MyMoneySplit>::ConstIterator it_loanSplits;
-            for (it_loanSplits = tx.splits().constBegin(); it_loanSplits != tx.splits().constEnd(); ++it_loanSplits) {
-              if ((*it_loanSplits).isAmortizationSplit() && (*it_loanSplits).accountId() == splitAccount.id())
-                loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + (*it_loanSplits).shares();
+            foreach (const auto split, tx.splits()) {
+              if (split.isAmortizationSplit() && split.accountId() == splitAccount.id())
+                loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + split.shares();
             }
           }
         }

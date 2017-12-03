@@ -336,12 +336,13 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   tag->loadTags(MyMoneyFile::instance()->tagList());
 
   // check if the current transaction has a reference to an equity account
-  bool haveEquityAccount = false;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = d->m_transaction.splits().constBegin(); !haveEquityAccount && it_s != d->m_transaction.splits().constEnd(); ++it_s) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    if (acc.accountType() == eMyMoney::Account::Type::Equity)
+  auto haveEquityAccount = false;
+  foreach (const auto split, d->m_transaction.splits()) {
+    auto acc = MyMoneyFile::instance()->account(split.accountId());
+    if (acc.accountType() == eMyMoney::Account::Type::Equity) {
       haveEquityAccount = true;
+      break;
+    }
   }
 
   aSet.clear();
@@ -404,11 +405,10 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
     if (d->m_transaction.splitCount() < 2) {
       category->completion()->setSelected(QString());
     } else {
-      QList<MyMoneySplit>::const_iterator it_s;
-      for (it_s = d->m_transaction.splits().constBegin(); it_s != d->m_transaction.splits().constEnd(); ++it_s) {
-        if ((*it_s) == d->m_split)
+      foreach (const auto split, d->m_transaction.splits()) {
+        if (split == d->m_split)
           continue;
-        d->m_splits.append(*it_s);
+        d->m_splits.append(split);
       }
     }
     QString categoryId;
@@ -641,10 +641,9 @@ MyMoneyMoney StdTransactionEditor::shares(const MyMoneyTransaction& t) const
 {
   Q_D(const StdTransactionEditor);
   MyMoneyMoney result;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if ((*it_s).accountId() == d->m_account.id()) {
-      result += (*it_s).shares();
+  foreach (const auto split, t.splits()) {
+    if (split.accountId() == d->m_account.id()) {
+      result += split.shares();
     }
   }
   return result;
@@ -760,9 +759,8 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       d->m_transaction.removeSplits();
       d->m_split = MyMoneySplit();
       MyMoneySplit otherSplit;
-      QList<MyMoneySplit>::ConstIterator it;
-      for (it = t.splits().constBegin(); it != t.splits().constEnd(); ++it) {
-        MyMoneySplit s(*it);
+      foreach (const auto split, t.splits()) {
+        MyMoneySplit s(split);
         s.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
         s.setReconcileDate(QDate());
         s.clearId();
@@ -812,7 +810,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       action = d->m_split.shares().isNegative() ? eRegister::Action::Withdrawal : eRegister::Action::Deposit;
 
       if (d->m_transaction.splitCount() == 2) {
-        MyMoneyAccount acc = MyMoneyFile::instance()->account(otherSplit.accountId());
+        auto acc = MyMoneyFile::instance()->account(otherSplit.accountId());
         if (acc.isAssetLiability())
           action = eRegister::Action::Transfer;
       }
@@ -914,7 +912,7 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
 
     bool disableTransferTab = false;
     if (!id.isEmpty()) {
-      MyMoneyAccount acc = MyMoneyFile::instance()->account(id);
+      auto acc = MyMoneyFile::instance()->account(id);
       if (acc.isAssetLiability()
           || acc.accountGroup() == eMyMoney::Account::Type::Equity) {
         if (tabbar) {
@@ -1122,15 +1120,14 @@ MyMoneyMoney StdTransactionEditor::removeVatSplit()
   MyMoneySplit c; // category split
   MyMoneySplit t; // tax split
 
-  bool netValue = false;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = d->m_splits.constBegin(); it_s != d->m_splits.constEnd(); ++it_s) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+  auto netValue = false;
+  foreach (const auto split , d->m_splits) {
+    auto acc = MyMoneyFile::instance()->account(split.accountId());
     if (!acc.value("VatAccount").isEmpty()) {
       netValue = (acc.value("VatAmount").toLower() == "net");
-      c = (*it_s);
+      c = split;
     } else if (!acc.value("VatRate").isEmpty()) {
-      t = (*it_s);
+      t = split;
     }
   }
 
@@ -1364,7 +1361,7 @@ void StdTransactionEditor::checkPayeeInSplit(MyMoneySplit& s, const QString& pay
   if (s.accountId().isEmpty())
     return;
 
-  MyMoneyAccount acc = MyMoneyFile::instance()->account(s.accountId());
+  auto acc = MyMoneyFile::instance()->account(s.accountId());
   if (acc.isIncomeExpense()) {
     s.setPayeeId(payeeId);
   } else {
@@ -1418,14 +1415,13 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   Q_D(StdTransactionEditor);
   // extract price info from original transaction
   d->m_priceInfo.clear();
-  QList<MyMoneySplit>::const_iterator it_s;
   if (!torig.id().isEmpty()) {
-    for (it_s = torig.splits().begin(); it_s != torig.splits().end(); ++it_s) {
-      if ((*it_s).id() != sorig.id()) {
-        MyMoneyAccount cat = MyMoneyFile::instance()->account((*it_s).accountId());
+    foreach (const auto split, torig.splits()) {
+      if (split.id() != sorig.id()) {
+        MyMoneyAccount cat = MyMoneyFile::instance()->account(split.accountId());
         if (cat.currencyId() != d->m_account.currencyId()) {
-          if (!(*it_s).shares().isZero() && !(*it_s).value().isZero()) {
-            d->m_priceInfo[cat.currencyId()] = ((*it_s).shares() / (*it_s).value()).reduce();
+          if (!split.shares().isZero() && !split.value().isZero()) {
+            d->m_priceInfo[cat.currencyId()] = (split.shares() / split.value()).reduce();
           }
         }
       }
@@ -1523,11 +1519,10 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   // split or create it
   if (isMultiSelection()) {
     if (torig.splitCount() == 2) {
-      QList<MyMoneySplit>::const_iterator it_s;
-      for (it_s = torig.splits().begin(); it_s != torig.splits().end(); ++it_s) {
-        if ((*it_s).id() == sorig.id())
+      foreach (const auto split, torig.splits()) {
+        if (split.id() == sorig.id())
           continue;
-        s1 = *it_s;
+        s1 = split;
         s1.clearId();
         break;
       }
@@ -1557,7 +1552,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
         // the split will be removed later on anyway.
         if (!s1.memo().isEmpty() && s1.memo() != s0.memo()) {
           if (!s1.accountId().isEmpty()) {
-            MyMoneyAccount acc = MyMoneyFile::instance()->account(s1.accountId());
+            auto acc = MyMoneyFile::instance()->account(s1.accountId());
             if (acc.isIncomeExpense())
               s1.setMemo(s0.memo());
             else if (KMessageBox::questionYesNo(d->m_regForm,
@@ -1594,9 +1589,8 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
       t.addSplit(s1);
 
   } else {
-    QList<MyMoneySplit>::iterator it_s;
-    for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-      s1 = *it_s;
+    foreach (const auto split, splits) {
+      s1 = split;
       s1.clearId();
       checkPayeeInSplit(s1, payeeId);
       t.addSplit(s1);

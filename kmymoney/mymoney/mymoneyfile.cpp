@@ -542,29 +542,27 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // now check the splits
   bool loanAccountAffected = false;
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  foreach (const auto split, transaction.splits()) {
     // the following line will throw an exception if the
     // account does not exist
-    auto acc = MyMoneyFile::account((*it_s).accountId());
+    auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
       throw MYMONEYEXCEPTION("Cannot store split with no account assigned");
-    if (isStandardAccount((*it_s).accountId()))
+    if (isStandardAccount(split.accountId()))
       throw MYMONEYEXCEPTION("Cannot store split referencing standard account");
-    if (acc.isLoan() && ((*it_s).action() == MyMoneySplit::ActionTransfer))
+    if (acc.isLoan() && (split.action() == MyMoneySplit::ActionTransfer))
       loanAccountAffected = true;
   }
 
   // change transfer splits between asset/liability and loan accounts
   // into amortization splits
   if (loanAccountAffected) {
-    QList<MyMoneySplit> list = transaction.splits();
-    for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
-      if ((*it_s).action() == MyMoneySplit::ActionTransfer) {
-        auto acc = MyMoneyFile::account((*it_s).accountId());
+    foreach (const auto split, transaction.splits()) {
+      if (split.action() == MyMoneySplit::ActionTransfer) {
+        auto acc = MyMoneyFile::account(split.accountId());
 
         if (acc.isAssetLiability()) {
-          MyMoneySplit s = (*it_s);
+          MyMoneySplit s = split;
           s.setAction(MyMoneySplit::ActionAmortization);
           tCopy.modifySplit(s);
         }
@@ -580,10 +578,10 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // scan the splits again to update notification list
   // and mark all accounts that are referenced
-  for (it_s = tr.splits().constBegin(); it_s != tr.splits().constEnd(); ++it_s) {
-    d->addCacheNotification((*it_s).accountId(), tr.postDate());
-    d->addCacheNotification((*it_s).payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
+  foreach (const auto split, tr.splits()) {
+    d->addCacheNotification(split.accountId(), tr.postDate());
+    d->addCacheNotification(split.payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
 
   // make sure the value is rounded to the accounts precision
@@ -593,10 +591,10 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   d->m_storage->modifyTransaction(tCopy);
 
   // and mark all accounts that are referenced
-  for (it_s = tCopy.splits().constBegin(); it_s != tCopy.splits().constEnd(); ++it_s) {
-    d->addCacheNotification((*it_s).accountId(), tCopy.postDate());
-    d->addCacheNotification((*it_s).payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
+  foreach (const auto split, tCopy.splits()) {
+    d->addCacheNotification(split.accountId(), tCopy.postDate());
+    d->addCacheNotification(split.payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, transaction);
@@ -734,16 +732,15 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
 
   // get the engine's idea about this transaction
   MyMoneyTransaction tr = MyMoneyFile::transaction(transaction.id());
-  QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan the splits again to update notification list
-  for (it_s = tr.splits().constBegin(); it_s != tr.splits().constEnd(); ++it_s) {
-    auto acc = account((*it_s).accountId());
+  foreach (const auto split, tr.splits()) {
+    auto acc = account(split.accountId());
     if (acc.isClosed())
       throw MYMONEYEXCEPTION(i18n("Cannot remove transaction that references a closed account."));
-    d->addCacheNotification((*it_s).accountId(), tr.postDate());
-    d->addCacheNotification((*it_s).payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
+    d->addCacheNotification(split.accountId(), tr.postDate());
+    d->addCacheNotification(split.payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
 
   d->m_storage->removeTransaction(transaction);
@@ -1307,30 +1304,28 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     throw MYMONEYEXCEPTION("Unable to add transaction with invalid postdate");
 
   // now check the splits
-  bool loanAccountAffected = false;
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  auto loanAccountAffected = false;
+  foreach (const auto split, transaction.splits()) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
-    auto acc = MyMoneyFile::account((*it_s).accountId());
+    auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
       throw MYMONEYEXCEPTION("Cannot add split with no account assigned");
     if (acc.isLoan())
       loanAccountAffected = true;
-    if (isStandardAccount((*it_s).accountId()))
+    if (isStandardAccount(split.accountId()))
       throw MYMONEYEXCEPTION("Cannot add split referencing standard account");
   }
 
   // change transfer splits between asset/liability and loan accounts
   // into amortization splits
   if (loanAccountAffected) {
-    QList<MyMoneySplit> list = transaction.splits();
-    for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
-      if ((*it_s).action() == MyMoneySplit::ActionTransfer) {
-        auto acc = MyMoneyFile::account((*it_s).accountId());
+    foreach (const auto split, transaction.splits()) {
+      if (split.action() == MyMoneySplit::ActionTransfer) {
+        auto acc = MyMoneyFile::account(split.accountId());
 
         if (acc.isAssetLiability()) {
-          MyMoneySplit s = (*it_s);
+          MyMoneySplit s = split;
           s.setAction(MyMoneySplit::ActionAmortization);
           transaction.modifySplit(s);
         }
@@ -1350,10 +1345,10 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   d->m_storage->addTransaction(transaction);
 
   // scan the splits again to update notification list
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-    d->addCacheNotification((*it_s).accountId(), transaction.postDate());
-    d->addCacheNotification((*it_s).payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
+  foreach (const auto split, transaction.splits()) {
+    d->addCacheNotification(split.accountId(), transaction.postDate());
+    d->addCacheNotification(split.payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, transaction);
@@ -1875,15 +1870,13 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  MyMoneyTransaction transaction = sched.transaction();
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  foreach (const auto split, sched.transaction().splits()) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
-    auto acc = MyMoneyFile::account((*it_s).accountId());
+    auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
       throw MYMONEYEXCEPTION("Cannot add split with no account assigned");
-    if (isStandardAccount((*it_s).accountId()))
+    if (isStandardAccount(split.accountId()))
       throw MYMONEYEXCEPTION("Cannot add split referencing standard account");
   }
 
@@ -1903,15 +1896,13 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  MyMoneyTransaction transaction = sched.transaction();
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  foreach (const auto split, sched.transaction().splits()) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
-    auto acc = MyMoneyFile::account((*it_s).accountId());
+    auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
       throw MYMONEYEXCEPTION("Cannot store split with no account assigned");
-    if (isStandardAccount((*it_s).accountId()))
+    if (isStandardAccount(split.accountId()))
       throw MYMONEYEXCEPTION("Cannot store split referencing standard account");
   }
 
@@ -2259,12 +2250,10 @@ QStringList MyMoneyFile::consistencyCheck()
   filter.setReportAllSplits(false);
   d->m_storage->transactionList(tList, filter);
   // Generate the list of interest accounts
-  for (it_t = tList.begin(); it_t != tList.end(); ++it_t) {
-    const MyMoneyTransaction& t = (*it_t);
-    QList<MyMoneySplit>::const_iterator it_s;
-    for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-      if ((*it_s).action() == MyMoneySplit::ActionInterest)
-        interestAccounts[(*it_s).accountId()] = true;
+  foreach (const auto transaction, tList) {
+    foreach (const auto split, transaction.splits()) {
+      if (split.action() == MyMoneySplit::ActionInterest)
+        interestAccounts[split.accountId()] = true;
     }
   }
   QSet<Account::Type> supportedAccountTypes;
@@ -2278,15 +2267,13 @@ QStringList MyMoneyFile::consistencyCheck()
 
   for (it_t = tList.begin(); it_t != tList.end(); ++it_t) {
     MyMoneyTransaction t = (*it_t);
-    QList<MyMoneySplit> splits = t.splits();
-    QList<MyMoneySplit>::const_iterator it_s;
     bool tChanged = false;
     QDate accountOpeningDate;
     QStringList accountList;
-    for (it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
+    foreach (const auto split, t.splits()) {
       bool sChanged = false;
-      MyMoneySplit s = (*it_s);
-      if (payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
+      MyMoneySplit s = split;
+      if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
         s.setPayeeId(payeeConversionMap[s.payeeId()]);
         sChanged = true;
         rc << i18n("  * Payee id updated in split of transaction '%1'.", t.id());
@@ -2345,7 +2332,7 @@ QStringList MyMoneyFile::consistencyCheck()
           ++problemCount;
         }
       } catch (const MyMoneyException &) {
-        rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.", t.id(), (*it_s).id(), (*it_s).accountId());
+        rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.", t.id(), split.id(), split.accountId());
         ++unfixedCount;
       }
 
@@ -2387,18 +2374,18 @@ QStringList MyMoneyFile::consistencyCheck()
       tChanged = true;
       // copy the price information for investments to the new date
       QList<MyMoneySplit>::const_iterator it_t;
-      for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
-        if (((*it_t).action() != "Buy") &&
-            ((*it_t).action() != "Reinvest")) {
+      foreach (const auto split, t.splits()) {
+        if ((split.action() != "Buy") &&
+            (split.action() != "Reinvest")) {
           continue;
         }
-        QString id = (*it_t).accountId();
+        QString id = split.accountId();
         auto acc = this->account(id);
         MyMoneySecurity sec = this->security(acc.currencyId());
         MyMoneyPrice price(acc.currencyId(),
                            sec.tradingCurrency(),
                            t.postDate(),
-                           (*it_t).price(), "Transaction");
+                           split.price(), "Transaction");
         this->addPrice(price);
         break;
       }
@@ -2419,19 +2406,17 @@ QStringList MyMoneyFile::consistencyCheck()
   for (it_sch = schList.begin(); it_sch != schList.end(); ++it_sch) {
     MyMoneySchedule sch = (*it_sch);
     MyMoneyTransaction t = sch.transaction();
-    QList<MyMoneySplit> splits = t.splits();
-    bool tChanged = false;
-    QList<MyMoneySplit>::const_iterator it_s;
-    for (it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
-      MyMoneySplit s = (*it_s);
+    auto tChanged = false;
+    foreach (const auto split, t.splits()) {
+      MyMoneySplit s = split;
       bool sChanged = false;
-      if (payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
+      if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
         s.setPayeeId(payeeConversionMap[s.payeeId()]);
         sChanged = true;
         rc << i18n("  * Payee id updated in split of schedule '%1'.", (*it_sch).name());
         ++problemCount;
       }
-      if (!(*it_s).value().isZero() && (*it_s).shares().isZero()) {
+      if (!split.value().isZero() && split.shares().isZero()) {
         s.setShares(s.value());
         sChanged = true;
         rc << i18n("  * Split in scheduled transaction '%1' contained value != 0 and shares == 0.", (*it_sch).name());
@@ -2440,7 +2425,7 @@ QStringList MyMoneyFile::consistencyCheck()
       }
 
       // make sure, we don't have a bankid stored with a split in a schedule
-      if (!(*it_s).bankID().isEmpty()) {
+      if (!split.bankID().isEmpty()) {
         s.setBankID(QString());
         sChanged = true;
         rc << i18n("  * Removed bankid from split in scheduled transaction '%1'.", (*it_sch).name());
@@ -2465,7 +2450,7 @@ QStringList MyMoneyFile::consistencyCheck()
           ++problemCount;
         }
       } catch (const MyMoneyException &) {
-        rc << i18n("  * Split %2 in schedule '%1' contains a reference to invalid account %3. Please fix manually.", (*it_sch).name(), (*it_s).id(), (*it_s).accountId());
+        rc << i18n("  * Split %2 in schedule '%1' contains a reference to invalid account %3. Please fix manually.", (*it_sch).name(), split.id(), split.accountId());
         ++unfixedCount;
       }
       if (sChanged) {
@@ -3587,29 +3572,29 @@ void MyMoneyFile::preloadCache()
 
 bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 {
-  bool rc = false;
+  auto rc = false;
   if (t.splitCount() == 2) {
-    QList<MyMoneySplit>::const_iterator it_s;
-    for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-      auto acc = account((*it_s).accountId());
-      if (acc.isIncomeExpense())
+    foreach (const auto split, t.splits()) {
+      auto acc = account(split.accountId());
+      if (acc.isIncomeExpense()) {
+        rc = true;
         break;
+      }
     }
-    if (it_s == t.splits().end())
-      rc = true;
   }
   return rc;
 }
 
 bool MyMoneyFile::referencesClosedAccount(const MyMoneyTransaction& t) const
 {
-  QList<MyMoneySplit>::const_iterator it_s;
-  const QList<MyMoneySplit>& list = t.splits();
-  for (it_s = list.begin(); it_s != list.end(); ++it_s) {
-    if (referencesClosedAccount(*it_s))
+  auto ret = false;
+  foreach (const auto split, t.splits()) {
+    if (referencesClosedAccount(split)) {
+      ret = true;
       break;
+    }
   }
-  return it_s != list.end();
+  return ret;
 }
 
 bool MyMoneyFile::referencesClosedAccount(const MyMoneySplit& s) const
@@ -3676,19 +3661,18 @@ int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString&
    */
 void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
 {
-  QList<MyMoneySplit>::iterator its;
-  MyMoneySecurity transactionSecurity = security(t.commodity());
-  int transactionFraction = transactionSecurity.smallestAccountFraction();
+  auto transactionSecurity = security(t.commodity());
+  auto transactionFraction = transactionSecurity.smallestAccountFraction();
 
-  for(its = t.splits().begin(); its != t.splits().end(); ++its) {
-    auto acc = account((*its).accountId());
-    int fraction = acc.fraction();
+  for (auto& split : t.splits()) {
+    auto acc = account(split.accountId());
+    auto fraction = acc.fraction();
     if(fraction == -1) {
-      MyMoneySecurity sec = security(acc.currencyId());
+      auto sec = security(acc.currencyId());
       fraction = acc.fraction(sec);
     }
-    (*its).setShares(static_cast<const MyMoneyMoney>((*its).shares().convertDenominator(fraction).canonicalize()));
-    (*its).setValue(static_cast<const MyMoneyMoney>((*its).value().convertDenominator(transactionFraction).canonicalize()));
+    split.setShares(static_cast<const MyMoneyMoney>(split.shares().convertDenominator(fraction).canonicalize()));
+    split.setValue(static_cast<const MyMoneyMoney>(split.value().convertDenominator(transactionFraction).canonicalize()));
   }
 }
 
