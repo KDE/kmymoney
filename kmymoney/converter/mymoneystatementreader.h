@@ -34,6 +34,8 @@
 class MyMoneyFileTransaction;
 class TransactionMatcher;
 class QStringList;
+class MyMoneyAccount;
+class MyMoneyInstitution;
 
 /**
   * This is a pared-down version of a MyMoneyQifReader object
@@ -120,6 +122,10 @@ private:
     * @param account Reference to MyMoneyAccount object
     */
   bool selectOrCreateAccount(const SelectCreateMode mode, MyMoneyAccount& account);
+
+Q_SIGNALS:
+  void createAccount(MyMoneyAccount& account);
+  void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
 private:
   /// \internal d-pointer class.

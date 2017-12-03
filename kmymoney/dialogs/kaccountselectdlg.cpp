@@ -43,13 +43,17 @@
 #include "ui_kaccountselectdlg.h"
 
 #include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyfile.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
+#include "models.h"
+#include "accountsmodel.h"
 
-#include <../kmymoney.h>
 #include "dialogenums.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
+#include "modelenums.h"
 
 using namespace Icons;
 
@@ -89,8 +93,6 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   // using showAbortButton()
   d->ui->m_kButtonAbort->hide();
 
-  slotReloadWidget();
-
   KGuiItem skipButtonItem(i18n("&Skip"),
                           QIcon::fromTheme(g_Icons[Icon::MediaSkipForward]),
                           i18n("Skip this transaction"),
@@ -110,7 +112,36 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
                            i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
   KGuiItem::assign(d->ui->m_kButtonAbort, abortButtenItem);
 
-  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KAccountSelectDlg::slotReloadWidget);
+  QVector<eMyMoney::Account::Type> accountTypes;
+  if (d->m_accountType & eDialogs::Category::asset)
+    accountTypes.append(eMyMoney::Account::Type::Asset);
+  if (d->m_accountType & eDialogs::Category::liability)
+    accountTypes.append(eMyMoney::Account::Type::Liability);
+  if (d->m_accountType & eDialogs::Category::income)
+    accountTypes.append(eMyMoney::Account::Type::Income);
+  if (d->m_accountType & eDialogs::Category::expense)
+    accountTypes.append(eMyMoney::Account::Type::Expense);
+  if (d->m_accountType & eDialogs::Category::equity)
+    accountTypes.append(eMyMoney::Account::Type::Equity);
+  if (d->m_accountType & eDialogs::Category::checking)
+    accountTypes.append(eMyMoney::Account::Type::Checkings);
+  if (d->m_accountType & eDialogs::Category::savings)
+    accountTypes.append(eMyMoney::Account::Type::Savings);
+  if (d->m_accountType & eDialogs::Category::investment)
+    accountTypes.append(eMyMoney::Account::Type::Investment);
+  if (d->m_accountType & eDialogs::Category::creditCard)
+    accountTypes.append(eMyMoney::Account::Type::CreditCard);
+
+  auto filterProxyModel = new AccountNamesFilterProxyModel(this);
+  filterProxyModel->setHideEquityAccounts(true);
+  filterProxyModel->addAccountGroup(accountTypes);
+
+  auto model = Models::instance()->accountsModel();
+  filterProxyModel->setSourceModel(model);
+  filterProxyModel->setSourceColumns(model->getColumns());
+  filterProxyModel->sort((int)eAccountsModel::Column::Account);
+
+  d->ui->m_accountSelector->setModel(filterProxyModel);
 
   connect(d->ui->m_createButton,  &QAbstractButton::clicked, this, &KAccountSelectDlg::slotCreateAccount);
   connect(d->ui->m_qbuttonOk,     &QAbstractButton::clicked, this, &QDialog::accept);
@@ -122,32 +153,6 @@ KAccountSelectDlg::~KAccountSelectDlg()
 {
   Q_D(KAccountSelectDlg);
   delete d;
-}
-
-void KAccountSelectDlg::slotReloadWidget()
-{
-  Q_D(KAccountSelectDlg);
-  AccountSet set;
-  if (d->m_accountType & eDialogs::Category::asset)
-    set.addAccountGroup(eMyMoney::Account::Type::Asset);
-  if (d->m_accountType & eDialogs::Category::liability)
-    set.addAccountGroup(eMyMoney::Account::Type::Liability);
-  if (d->m_accountType & eDialogs::Category::income)
-    set.addAccountGroup(eMyMoney::Account::Type::Income);
-  if (d->m_accountType & eDialogs::Category::expense)
-    set.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (d->m_accountType & eDialogs::Category::equity)
-    set.addAccountGroup(eMyMoney::Account::Type::Equity);
-  if (d->m_accountType & eDialogs::Category::checking)
-    set.addAccountType(eMyMoney::Account::Type::Checkings);
-  if (d->m_accountType & eDialogs::Category::savings)
-    set.addAccountType(eMyMoney::Account::Type::Savings);
-  if (d->m_accountType & eDialogs::Category::investment)
-    set.addAccountType(eMyMoney::Account::Type::Investment);
-  if (d->m_accountType & eDialogs::Category::creditCard)
-    set.addAccountType(eMyMoney::Account::Type::CreditCard);
-
-  set.load(d->ui->m_accountSelector->selector());
 }
 
 void KAccountSelectDlg::setDescription(const QString& msg)
@@ -166,32 +171,23 @@ void KAccountSelectDlg::setAccount(const MyMoneyAccount& account, const QString&
 {
   Q_D(KAccountSelectDlg);
   d->m_account = account;
-  d->ui->m_accountSelector->setSelectedItem(id);
-}
-
-void KAccountSelectDlg::slotCreateInstitution()
-{
-  kmymoney->slotInstitutionNew();
+  d->ui->m_accountSelector->setSelected(id);
 }
 
 void KAccountSelectDlg::slotCreateAccount()
 {
   Q_D(KAccountSelectDlg);
   if (!((int)d->m_accountType & ((int)eDialogs::Category::expense | (int)eDialogs::Category::income))) {
-    kmymoney->slotAccountNew(d->m_account);
+    emit createAccount(d->m_account);
     if (!d->m_account.id().isEmpty()) {
-      slotReloadWidget();
-      d->ui->m_accountSelector->setSelectedItem(d->m_account.id());
       accept();
     }
   } else {
     if (d->m_account.accountType() == eMyMoney::Account::Type::Expense)
-      kmymoney->createCategory(d->m_account, MyMoneyFile::instance()->expense());
+      emit createCategory(d->m_account, MyMoneyFile::instance()->expense());
     else
-      kmymoney->createCategory(d->m_account, MyMoneyFile::instance()->income());
+      emit createCategory(d->m_account, MyMoneyFile::instance()->income());
     if (!d->m_account.id().isEmpty()) {
-      slotReloadWidget();
-      d->ui->m_accountSelector->setSelectedItem(d->m_account.id());
       accept();
     }
   }
@@ -247,5 +243,16 @@ int KAccountSelectDlg::exec()
 QString KAccountSelectDlg::selectedAccount() const
 {
   Q_D(const KAccountSelectDlg);
-  return d->ui->m_accountSelector->selectedItem();
+
+  // in case an account was created before, it might not be in the
+  // account model (yet) due to the delayed update (an enclosing
+  // MyMoneyFileTransaction has not been committed). Therefor, we
+  // use the id of m_account which carries the id of the newly
+  // created account. If only an account was selected, the object
+  // m_account is empty.
+  if (d->m_account.id().isEmpty())
+    return d->ui->m_accountSelector->getSelected();
+  return d->m_account.id();
 }
+
+// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

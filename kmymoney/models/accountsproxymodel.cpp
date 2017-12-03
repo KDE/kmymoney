@@ -170,6 +170,7 @@ void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> 
         d->m_typeList << eMyMoney::Account::Type::Equity;
         break;
       default:
+        d->m_typeList << group;
         break;
     }
   }

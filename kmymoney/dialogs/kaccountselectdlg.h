@@ -40,6 +40,7 @@
   */
 
 class MyMoneyAccount;
+class MyMoneyInstitution;
 
 namespace eDialogs { enum Category : int; }
 
@@ -134,19 +135,13 @@ protected Q_SLOTS:
   void slotCreateAccount();
 
   /**
-    * This slot is used to fire up the new institution dialog
-    */
-  void slotCreateInstitution();
-
-  /**
     * This slot is used to react on the abort button
     */
   void abort();
 
-  /**
-    * This is the slot which will be called if the engine data is changed.
-    */
-  void slotReloadWidget();
+Q_SIGNALS:
+  void createAccount(MyMoneyAccount& account);
+  void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
 private:
   KAccountSelectDlgPrivate * const d_ptr;
@@ -154,3 +149,5 @@ private:
 };
 
 #endif
+
+// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

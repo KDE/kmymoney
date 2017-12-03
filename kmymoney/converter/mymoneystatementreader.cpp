@@ -53,6 +53,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
+#include "mymoneysecurity.h"
 #include "kmymoneyglobalsettings.h"
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
@@ -60,7 +61,6 @@
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
-#include "kmymoney.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
 #include "models.h"
@@ -69,6 +69,7 @@
 #include "dialogenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "kmymoneyutils.h"
 
 using namespace eMyMoney;
 
@@ -1017,7 +1018,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
-          QPointer<QDialog> dialog = new QDialog(kmymoney);
+          QPointer<QDialog> dialog = new QDialog;
           dialog->setWindowTitle(i18n("Default Category for Payee"));
           dialog->setModal(true);
 
@@ -1360,7 +1361,10 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);
   }
 
-  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney);
+  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", 0);
+  connect(accountSelect, &KAccountSelectDlg::createAccount, this, &MyMoneyStatementReader::createAccount);
+  connect(accountSelect, &KAccountSelectDlg::createCategory, this, &MyMoneyStatementReader::createCategory);
+
   accountSelect->setHeader(i18n("Import transactions"));
   accountSelect->setDescription(msg);
   accountSelect->setAccount(account, accountId);
