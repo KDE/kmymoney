@@ -19,32 +19,20 @@ set(libmodels_a_SOURCES
     onlinejobmessagesmodel.cpp
     equitiesmodel.cpp
     securitiesmodel.cpp
+    $<$<BOOL:"${USE_MODELTEST}">:modeltest.cpp>
 )
-
-if (USE_MODELTEST)
-  add_definitions( -DKMM_MODELTEST )
-  set(libmodels_a_SOURCES ${libmodels_a_SOURCES} modeltest.cpp)
-endif(USE_MODELTEST)
 
 add_library(models STATIC ${libmodels_a_SOURCES})
 
+target_link_libraries(models PUBLIC
+    kmm_mymoney
+    kmymoney_common
+    KF5::ItemModels
+)
+
 if (USE_MODELTEST)
-
-target_link_libraries(models LINK_PUBLIC
-    kmm_mymoney
-    kmymoney_common
-    KF5::ItemModels
-    Qt5::Test
-)
-
-else(USE_MODELTEST)
-
-target_link_libraries(models LINK_PUBLIC
-    kmm_mymoney
-    kmymoney_common
-    KF5::ItemModels
-)
-
-endif(USE_MODELTEST)
+  target_compile_definitions(models PRIVATE -DKMM_MODELTEST)
+  target_link_libraries(models PRIVATE Qt5::Test)
+endif()
 
 add_dependencies(models kmm_config)
