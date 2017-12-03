@@ -19,8 +19,11 @@ set(libmodels_a_SOURCES
     onlinejobmessagesmodel.cpp
     equitiesmodel.cpp
     securitiesmodel.cpp
-    $<$<BOOL:"${USE_MODELTEST}">:modeltest.cpp>
 )
+
+if (USE_MODELTEST)
+  list(APPEND libmodels_a_SOURCES modeltest.cpp)
+endif()
 
 add_library(models STATIC ${libmodels_a_SOURCES})
 
