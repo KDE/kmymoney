@@ -63,8 +63,11 @@ void CsvDateTest::testConvertDate()
   QVERIFY(m_convert->convertDate("13/09/01") == QDate(2001, 9, 13));
   QVERIFY(m_convert->convertDate("13-09-81") == QDate(1981, 9, 13));
   QVERIFY(m_convert->convertDate("13-09-01") == QDate(2001, 9, 13));
-  QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(12) + "-2000")) == QDate(2000, 12, 25));
-  QVERIFY(m_convert->convertDate(QString("25-" + QLocale().standaloneMonthName(12, QLocale::ShortFormat) + "-2000")) == QDate(2000, 12, 25));
+  QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(1, QDate::DateFormat) + "-2000")) == QDate(2000, 1, 25));
+  QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(3, QDate::StandaloneFormat) + "-2000")) == QDate(2000, 3, 25));
+  QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(5) + "-2000")) == QDate(2000, 5, 25));
+  QVERIFY(m_convert->convertDate(QString("25-" + QLocale().standaloneMonthName(7, QLocale::ShortFormat) + "-2000")) == QDate(2000, 7, 25));
+  QVERIFY(m_convert->convertDate(QString("25-" + QLocale().standaloneMonthName(9, QLocale::LongFormat) + "-2000")) == QDate(2000, 9, 25));
   QVERIFY(m_convert->convertDate("13.09.81") == QDate(1981, 9, 13));
   QVERIFY(m_convert->convertDate("32/01/2000") == QDate()); // invalid day
   QVERIFY(m_convert->convertDate(QLatin1String("13-rubbishmonth-2000")) == QDate()); // invalid month

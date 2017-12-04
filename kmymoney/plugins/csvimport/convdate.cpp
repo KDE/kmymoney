@@ -178,21 +178,30 @@ QDate ConvertDate::convertDate(const QString& txt)
     aFormat = QLatin1String("MM");//                              aMonth is numeric
 
   } else {//                                           aMonth NOT numeric
-    QLocale::FormatType monthFormat = QLocale::ShortFormat;
-    if (aMonth.length() > 3)
-      monthFormat = QLocale::LongFormat;
     int i;
-    for(i = 1; i <= 12; ++i) {
-      if (aMonth == QLocale().standaloneMonthName(i, monthFormat)) {
-        break;
+    if (aMonth.length() > 3) {
+      for (i = 1; i <= 12; ++i)
+        if (aMonth.compare(QDate::longMonthName(i, QDate::StandaloneFormat), Qt::CaseInsensitive) == 0)
+          break;
+      if (i == 13) {
+        for (i = 1; i <= 12; ++i)
+          if (aMonth.compare(QDate::longMonthName(i), Qt::CaseInsensitive) == 0)
+            break;
       }
-      if (aMonth == QLocale("C").standaloneMonthName(i, monthFormat)) {
-        break;
+    } else {
+      for (i = 1; i <= 12; ++i)
+        if (aMonth.compare(QDate::shortMonthName(i, QDate::StandaloneFormat), Qt::CaseInsensitive) == 0)
+          break;
+      if (i == 13) {
+        for (i = 1; i <= 12; ++i)
+          if (aMonth.compare(QDate::shortMonthName(i), Qt::CaseInsensitive) == 0)
+            break;
       }
     }
+
     if (i == 13)
       return QDate();
-    aMonth = QString("%1").arg(i, 2, 10, QLatin1Char('0'));
+    aMonth = QString::fromLatin1("%1").arg(i, 2, 10, QLatin1Char('0'));
     aFormat = QLatin1String("MM");
   }
 
