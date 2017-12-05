@@ -426,7 +426,7 @@ QString KMyMoneyCalculator::result() const
   if (txt[0] == '-') {
     txt = txt.mid(1); // get rid of the minus sign
     QString mask;
-    // TODO: port this to kf5
+    // TODO: port this to kf5 (support for paren around negative numbers)
 #if 0
     switch (KLocale::global()->negativeMonetarySignPosition()) {
       case KLocale::ParensAround:
@@ -540,9 +540,10 @@ void KMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   bool negative = false;
   // setup operand
   d->operand = value;
-  // TODO: port this to kf5
-  //operand.replace(QRegExp(QString('\\') + QString()/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/), QChar());
-  d->operand.replace(QRegExp(QString('\\') + d->m_comma), ".");
+  // make sure the group/thousands seperator is removed ...
+  d->operand.replace(QRegExp(QString("\\%1").arg(QLocale().groupSeparator())), QChar());
+  // ... and the decimal is represented by a dot
+  d->operand.replace(QRegExp(QString("\\%1").arg(d->m_comma)), QChar('.'));
   if (d->operand.contains('(')) {
     negative = true;
     d->operand.remove('(');
