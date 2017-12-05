@@ -71,17 +71,17 @@ public:
 
   void recalculateBalances()
   {
-    QModelIndex start = filterModel->index(0, 0);
-    QModelIndexList indexes = filterModel->match(start, (int)eLedgerModel::Role::AccountId, account.id(), -1);
+    const auto start = filterModel->index(0, 0);
+    const auto indexes = filterModel->match(start, (int)eLedgerModel::Role::AccountId, account.id(), -1);
     MyMoneyMoney balance;
-    Q_FOREACH(QModelIndex index, indexes) {
+    for(const auto &index : indexes) {
       if(showValuesInverted) {
         balance -= filterModel->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>();
       } else {
         balance += filterModel->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>();
       }
-      QString txt = balance.formatMoney(account.fraction());
-      QModelIndex dispIndex = filterModel->index(index.row(), (int)eLedgerModel::Column::Balance);
+      const auto txt = balance.formatMoney(account.fraction());
+      const auto dispIndex = filterModel->index(index.row(), (int)eLedgerModel::Column::Balance);
       filterModel->setData(dispIndex, txt, Qt::DisplayRole);
     }
 
@@ -90,7 +90,7 @@ public:
   }
 
   LedgerDelegate*             delegate;
-  LedgerProxyModel* filterModel;
+  LedgerProxyModel*           filterModel;
   MyMoneyAccount              account;
   int                         adjustableColumn;
   bool                        adjustingColumn;
@@ -442,3 +442,5 @@ SplitView::SplitView(QWidget* parent)
 SplitView::~SplitView()
 {
 }
+
+// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;
