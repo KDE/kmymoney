@@ -57,14 +57,11 @@ generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 target_link_libraries(kmm_mymoney
                       PUBLIC
                       kmm_icons
-                      Qt5::Gui
                       Qt5::Xml
                       Qt5::Core
-                      KF5::IconThemes
                       KF5::Service
                       Alkimia::alkimia
                       kmm_storage
-#                     onlinetask_interfaces
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
