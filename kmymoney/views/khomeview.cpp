@@ -376,7 +376,7 @@ void KHomeView::showNetWorthGraph()
   chartWidget->resize(d->m_netWorthGraphLastValidSize);
 
   //save the chart to an image
-  QString chart = QPixmapToDataUri(QPixmap::grabWidget(chartWidget->coordinatePlane()->parent()));
+  QString chart = QPixmapToDataUri(chartWidget->coordinatePlane()->parent()->grab());
 
   d->m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
   d->m_html += QString("<tr>");
