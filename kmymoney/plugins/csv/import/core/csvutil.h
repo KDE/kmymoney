@@ -23,7 +23,7 @@ email                : lukasz.wojnilowicz@gmail.com
 #include <QVector>
 #include "csvenums.h"
 
-#include "csvimport/kmm_csvimport_core_export.h"
+#include "csv/import/core/kmm_csvimport_core_export.h"
 
 class KMM_CSVIMPORT_CORE_EXPORT Parse
 {

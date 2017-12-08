@@ -33,7 +33,7 @@
 
 #include "mymoneystatement.h"
 #include "csvenums.h"
-#include "csvimport/kmm_csvimport_core_export.h"
+#include "csv/import/core/kmm_csvimport_core_export.h"
 
 class MyMoneyAccount;
 class KConfigGroup;
