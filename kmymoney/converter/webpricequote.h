@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "csvimport/csvimporter.h"
+#include "csv/import/core/csvimporter.h"
 
 class KJob;
 class QDate;

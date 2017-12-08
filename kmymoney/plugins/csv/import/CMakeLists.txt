@@ -2,28 +2,14 @@ if(BUILD_TESTING)
   add_subdirectory(tests)
 endif()
 
+add_subdirectory(core)
+
+if(NOT ENABLE_CSVIMPORTER)
+  return()
+endif()
+
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimport.json.in ${CMAKE_CURRENT_BINARY_DIR}/csvimport.json @ONLY)
-
-########### next target ###############
-
-set(kmm_csvimport_core_PART_SRCS
-  csvimporter.cpp
-  convdate.cpp
-  csvutil.cpp
-)
-
-add_library(kmm_csvimport_core SHARED ${kmm_csvimport_core_PART_SRCS})
-generate_export_header(kmm_csvimport_core)
-target_link_libraries(kmm_csvimport_core
-  PUBLIC
-    kmm_mymoney
-)
-
-########### install files ###############
-
-install(TARGETS kmm_csvimport_core
-  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 

@@ -1,8 +1,7 @@
 add_subdirectory( onlinetasks )
 add_subdirectory( ibanbicdata )
 add_subdirectory( interfaces )
-add_subdirectory( csvimport )
-add_subdirectory( csvexport )
+add_subdirectory( csv )
 add_subdirectory( qif )
 add_subdirectory( gnc )
 

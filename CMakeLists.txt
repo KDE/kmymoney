@@ -201,6 +201,9 @@ option(ENABLE_QIFEXPORTER "Enable QIF Exporter" ON)
 
 option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
 
+option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
+option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
+
 # TODO: this should be removed
 enable_testing()
 
