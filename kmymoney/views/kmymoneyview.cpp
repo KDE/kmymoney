@@ -45,6 +45,8 @@
 #include <KSharedConfig>
 #include <KBackup>
 #include <KActionCollection>
+#include <KIO/StoredTransferJob>
+#include <KJobWidgets>
 
 #ifdef KF5Activities_FOUND
 #include <KActivities/ResourceInstance>
@@ -449,7 +451,7 @@ void KMyMoneyView::updateViewType()
 void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show)
 {
   QVector<AccountsViewProxyModel *> proxyModels {m_institutionsView->getProxyModel(), m_accountsView->getProxyModel(),
-                                                 m_categoriesView->getProxyModel(), m_budgetView->getProxyModel()}; 
+                                                 m_categoriesView->getProxyModel(), m_budgetView->getProxyModel()};
 
   for (auto i = proxyModels.count() - 1; i >= 0; --i) { // weed out unloaded views
     if (!proxyModels.at(i))
@@ -800,7 +802,7 @@ void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
 bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
 {
   QString filename;
-
+  bool downloadedFile = false;
   m_fileOpen = false;
   bool isEncrypted = false;
 
@@ -829,16 +831,22 @@ bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
   } else {
-    // TODO: port to kf5 (NetAccess)
-#if 0
-    if (!KIO::NetAccess::download(url, filename, 0)) {
-      KMessageBox::detailedError(this,
+    downloadedFile = true;
+    KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
+    KJobWidgets::setWindow(transferjob, this);
+    if (! transferjob->exec()) {
+        KMessageBox::detailedError(this,
                                  i18n("Error while loading file '%1'.", url.url()),
-                                 KIO::NetAccess::lastErrorString(),
+                                 transferjob->errorString(),
                                  i18n("File access error"));
-      return false;
+        return false;
     }
-#endif
+    QTemporaryFile file;
+    file.setAutoRemove(false);
+    file.open();
+    file.write(transferjob->data());
+    filename = file.fileName();
+    file.close();
   }
 
   // let's glimps into the file to figure out, if it's one
@@ -1019,11 +1027,13 @@ bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
   } catch (const MyMoneyException &) {
   }
 
-  // if a temporary file was constructed by NetAccess::download,
-  // then it will be removed with the next call. Otherwise, it
-  // stays untouched on the local filesystem
-  // TODO: port to KF5 (NetAccess)
-  //KIO::NetAccess::removeTempFile(filename);
+  // if a temporary file was downloaded, then it will be removed
+  // with the next call. Otherwise, it stays untouched on the local
+  // filesystem.
+  if (downloadedFile) {
+    QFile::remove(filename);
+  }
+
   return initializeStorage();
 }
 
@@ -1444,9 +1454,15 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
       tmpfile.open(); // to obtain the name
       tmpfile.close();
       saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
-      // TODO: port to kf5
-      //if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-      //  throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
+
+      Q_CONSTEXPR int permission = -1;
+      QFile file(tmpfile.fileName());
+      file.open(QIODevice::ReadOnly);
+      KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+      if (!putjob->exec()) {
+        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+      }
+      file.close();
     }
     m_fileType = KmmXML;
   } catch (const MyMoneyException &e) {

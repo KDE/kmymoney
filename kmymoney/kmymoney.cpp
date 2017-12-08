@@ -1465,6 +1465,7 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   return result;
 }
 
+
 void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 {
   KMSTATUS(i18n("Loading file..."));
@@ -1525,8 +1526,8 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       }
       delete dialog;
     }
-    // TODO: port KF5 (NetAccess)
-    if ((newurl.scheme() == QLatin1String("sql")) || (newurl.isValid() /*&& KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this)*/)) {
+
+    if (newurl.scheme() == QLatin1String("sql") || KMyMoneyUtils::fileExists(newurl)) {
       slotFileClose();
       if (!d->m_myMoneyView->fileOpen()) {
         try {
@@ -2215,11 +2216,10 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
-  // TODO: port KF5 (NetAccess)
-  //if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
-  //  if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
-  //    reallySaveFile = false;
-  //}
+  if (KMyMoneyUtils::fileExists(url)) {
+    if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    reallySaveFile = false;
+  }
   return reallySaveFile;
 }
 

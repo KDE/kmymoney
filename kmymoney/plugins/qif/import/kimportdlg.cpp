@@ -34,10 +34,12 @@
 // KDE Headers
 
 #include <kcombobox.h>
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <KConfigGroup>
 #include <KGuiItem>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KIO/StatJob>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -45,7 +47,7 @@
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include <KSharedConfig>
+
 #include "../config/mymoneyqifprofile.h"
 #include <icons/icons.h>
 
@@ -138,10 +140,18 @@ void KImportDlg::writeConfig()
 /** Make sure the text input is ok */
 void KImportDlg::slotFileTextChanged(const QString& text)
 {
-  // TODO: port to kf5
-  Q_UNUSED(text)
-#if 0
-  if (!text.isEmpty() && KIO::NetAccess::exists(file(), KIO::NetAccess::SourceSide, KMyMoneyUtils::mainWindow())) {
+  bool fileExists = false;
+  if (file().isValid()) {
+    Q_CONSTEXPR short int detailLevel = 0; // it's a file or a directory or a symlink, or it doesn't exist
+    KIO::StatJob* statjob = KIO::stat(file(), KIO::StatJob::SourceSide, detailLevel);
+    bool noerror = statjob->exec();
+    if (noerror) {
+      // We want a file
+      fileExists = !statjob->statResult().isDir();
+    }
+  }
+
+  if (!text.isEmpty() && fileExists) {
     // m_qcomboboxDateFormat->setEnabled(true);
     m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     m_qlineeditFile->setText(text);
@@ -149,7 +159,6 @@ void KImportDlg::slotFileTextChanged(const QString& text)
     // m_qcomboboxDateFormat->setEnabled(false);
     m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
   }
-#endif
 }
 
 void KImportDlg::loadProfiles(const bool selectLast)

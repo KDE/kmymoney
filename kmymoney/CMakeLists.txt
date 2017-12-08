@@ -132,6 +132,7 @@ target_link_libraries(kmymoney
   KF5::Archive
   KF5::ConfigGui
   KF5::WidgetsAddons
+  KF5::KIOCore
   KF5::CoreAddons
   KChart
   $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>

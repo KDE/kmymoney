@@ -48,6 +48,7 @@
 #include <KXmlGuiWindow>
 #include <KMessageBox>
 #include <KStandardGuiItem>
+#include <KIO/StatJob>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -646,4 +647,19 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
     } catch (const MyMoneyException &) {
     }
   }
+}
+
+bool KMyMoneyUtils::fileExists(const QUrl &url)
+{
+    bool fileExists = false;
+    if (url.isValid()) {
+        short int detailLevel = 0; // Lowest level: file/dir/symlink/none
+        KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
+        bool noerror = statjob->exec();
+        if (noerror) {
+            // We want a file
+            fileExists = !statjob->statResult().isDir();
+        }
+    }
+    return fileExists;
 }

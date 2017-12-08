@@ -29,6 +29,8 @@
 
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KIO/StatJob>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -74,17 +76,24 @@ void CsvExporterPlugin::slotCsvExport()
 
 bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
 {
-  Q_UNUSED(url)
-
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
-  // TODO: port this to KF5 (NetAccess)
-#if 0
-  if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, 0)) {
+  bool fileExists = false;
+
+  if (url.isValid()) {
+    short int detailLevel = 0; // Lowest level: file/dir/symlink/none
+    KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
+    bool noerror = statjob->exec();
+    if (noerror) {
+      // We want a file
+      fileExists = !statjob->statResult().isDir();
+    }
+  }
+
+  if (fileExists) {
     if (KMessageBox::warningYesNo(0, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
-#endif
   return reallySaveFile;
 }

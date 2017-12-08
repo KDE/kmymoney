@@ -28,7 +28,7 @@
 
 #include <QStandardPaths>
 #include <QMap>
-
+#include <QUrl>
 // ----------------------------------------------------------------------------
 // KDE Headers
 
@@ -366,6 +366,13 @@ public:
     * This method deletes security and associated price list but asks beforehand.
     */
   static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = nullptr);
+
+
+  /**
+   * Check whether the url links to an existing file or not
+   * @returns whether the file exists or not
+   */
+  static bool fileExists(const QUrl &url);
 };
 
 #endif

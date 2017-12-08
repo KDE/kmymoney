@@ -33,6 +33,8 @@
 #include <KMessageBox>
 #include <QTemporaryFile>
 #include <KXmlGuiWindow>
+#include <KIO/StoredTransferJob>
+#include <KJobWidgets>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -63,7 +65,7 @@ MyMoneyTemplate::~MyMoneyTemplate()
 bool MyMoneyTemplate::loadTemplate(const QUrl &url)
 {
   QString filename;
-
+  bool downloadedFile = false;
   if (!url.isValid()) {
     qDebug("Invalid template URL '%s'", qPrintable(url.url()));
     return false;
@@ -75,16 +77,23 @@ bool MyMoneyTemplate::loadTemplate(const QUrl &url)
 
   } else {
     bool rc = false;
-    // TODO: port to kf5
-    //rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
-    if (!rc) {
-      KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
+    downloadedFile = true;
+    KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
+    KJobWidgets::setWindow(transferjob, KMyMoneyUtils::mainWindow());
+    rc = transferjob->exec();
+    if (! rc) {
+        KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
                                  i18n("Error while loading file '%1'.", url.url()),
-                                 // TODO: port to kf5
-                                 QString(),//KIO::NetAccess::lastErrorString(),
+                                 transferjob->errorString(),
                                  i18n("File access error"));
-      return false;
+        return false;
     }
+    QTemporaryFile file;
+    file.setAutoRemove(false);
+    file.open();
+    file.write(transferjob->data());
+    filename = file.fileName();
+    file.close();
   }
 
   bool rc = true;
@@ -112,11 +121,12 @@ bool MyMoneyTemplate::loadTemplate(const QUrl &url)
     rc = false;
   }
 
-  // if a temporary file was constructed by NetAccess::download,
-  // then it will be removed with the next call. Otherwise, it
-  // stays untouched on the local filesystem
-  // TODO: port to kf5
-  //KIO::NetAccess::removeTempFile(filename);
+  // if a temporary file was downloaded, then it will be removed
+  // with the next call. Otherwise, it stays untouched on the local
+  // filesystem.
+  if (downloadedFile) {
+    QFile::remove(filename);
+  }
   return rc;
 }
 
@@ -462,18 +472,24 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
     }
   } else {
     QTemporaryFile tmpfile;
+    tmpfile.open();
     QSaveFile qfile(tmpfile.fileName());
     if (qfile.open(QIODevice::WriteOnly)) {
       saveToLocalFile(&qfile);
       if (!qfile.commit()) {
-        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
       }
     } else {
-      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
     }
-    // TODO: port to kf5
-    //if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-    //  throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+    int permission = -1;
+    QFile file(tmpfile.fileName());
+    file.open(QIODevice::ReadOnly);
+    KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+    if (!putjob->exec()) {
+      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+    }
+    file.close();
   }
   return true;
 }
