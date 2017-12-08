@@ -2177,8 +2177,8 @@ bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s, bool silent)
   d->m_smtReader = new MyMoneyStatementReader;
   d->m_smtReader->setAutoCreatePayee(true);
   d->m_smtReader->setProgressCallback(&progressCallback);
-  connect(d->m_smtReader, SIGNAL(createAccount(MyMoneyAccount&)), this, SLOT(slotAccountNew(MyMoneyAccount&)));
-  connect(d->m_smtReader, SIGNAL(createCategory(MyMoneyAccount&,const MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&,const MyMoneyAccount&)));
+  connect(d->m_smtReader, &MyMoneyStatementReader::createAccount, this, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&)>(&KMyMoneyApp::slotAccountNew));
+  connect(d->m_smtReader, &MyMoneyStatementReader::createCategory, this, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&, const MyMoneyAccount&)>(&KMyMoneyApp::slotCategoryNew));
 
   // disable all standard widgets during the import
   setEnabled(false);
