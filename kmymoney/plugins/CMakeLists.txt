@@ -5,9 +5,9 @@ add_subdirectory( csv )
 add_subdirectory( qif )
 add_subdirectory( gnc )
 
-if(LIBOFX_FOUND)
+if(ENABLE_LIBOFX)
   add_subdirectory( ofximport )
-endif(LIBOFX_FOUND)
+endif(ENABLE_LIBOFX)
 
 if (LIBICAL_FOUND)
   add_subdirectory( icalendarexport )
