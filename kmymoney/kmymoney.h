@@ -66,7 +66,6 @@ template <class T> class onlineJobTyped;
 
 enum class Action {
   FileOpenDatabase, FileSaveAsDatabase, FileBackup,
-  FileImportGNC,
   FileImportStatement,
   FileImportTemplate, FileExportTemplate,
   #ifdef KMM_DEBUG
@@ -228,13 +227,6 @@ protected Q_SLOTS:
     * Called when the user asks for the personal information.
     */
   void slotFileViewPersonal();
-
-  /**
-    * Opens a file selector dialog for the user to choose an existing OFX
-    * file from the file system to be imported.  This slot is expected to
-    * be called from the UI.
-    */
-  void slotGncImport();
 
   /**
    * Open a dialog with a chart of the balance for the currently selected

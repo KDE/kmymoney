@@ -64,7 +64,6 @@
 #include "mymoneyexception.h"
 #include "mymoneystoragexml.h"
 #include "mymoneystoragesql.h"
-#include "mymoneygncreader.h"
 #include "mymoneystorageanon.h"
 #include "khomeview.h"
 #include "kaccountsview.h"
@@ -798,7 +797,7 @@ void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
   }
 }
 
-bool KMyMoneyView::readFile(const QUrl &url)
+bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
 {
   QString filename;
 
@@ -941,12 +940,14 @@ bool KMyMoneyView::readFile(const QUrl &url)
                   pReader = new MyMoneyStorageXML;
                   m_fileType = KmmXML;
                 } else if (gncexp.indexIn(txt) != -1) {
-                  MyMoneyFile::instance()->attachStorage(storage);
-                  loadAllCurrencies(); // currency list required for gnc
-                  MyMoneyFile::instance()->detachStorage(storage);
+                  if (pExtReader) {
+                    MyMoneyFile::instance()->attachStorage(storage);
+                    loadAllCurrencies(); // currency list required for gnc
+                    MyMoneyFile::instance()->detachStorage(storage);
 
-                  pReader = new MyMoneyGncReader;
-                  m_fileType = GncXML;
+                    pReader = pExtReader;
+                    m_fileType = GncXML;
+                  }
                 }
               }
             }

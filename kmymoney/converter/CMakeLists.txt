@@ -3,7 +3,6 @@ if(BUILD_TESTING)
 endif()
 
 set (libconverter_a_SOURCES
-  mymoneygncreader.cpp
   mymoneystatementreader.cpp
   mymoneytemplate.cpp
   webpricequote.cpp

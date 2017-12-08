@@ -199,6 +199,8 @@ endif(ENABLE_LIBICAL)
 option(ENABLE_QIFIMPORTER "Enable QIF Importer" ON)
 option(ENABLE_QIFEXPORTER "Enable QIF Exporter" ON)
 
+option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
+
 # TODO: this should be removed
 enable_testing()
 

@@ -191,7 +191,6 @@ const QHash<Action, QString> KMyMoneyApp::s_Actions {
   {Action::FileOpenDatabase, QStringLiteral("open_database")},
   {Action::FileSaveAsDatabase, QStringLiteral("saveas_database")},
   {Action::FileBackup, QStringLiteral("file_backup")},
-  {Action::FileImportGNC, QStringLiteral("file_import_gnc")},
   {Action::FileImportStatement, QStringLiteral("file_import_statement")},
   {Action::FileImportTemplate, QStringLiteral("file_import_template")},
   {Action::FileExportTemplate, QStringLiteral("file_export_template")},
@@ -748,7 +747,6 @@ void KMyMoneyApp::initActions()
       {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase,                 i18n("Open database..."),                           Icon::SVNUpdate},
       {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase,               i18n("Save as database..."),                        Icon::FileArchiver},
       {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile,                   i18n("Backup..."),                                  Icon::Empty},
-      {Action::FileImportGNC,                 &KMyMoneyApp::slotGncImport,                    i18n("GnuCash..."),                                 Icon::Empty},
       {Action::FileImportStatement,           &KMyMoneyApp::slotStatementImport,              i18n("Statement file..."),                          Icon::Empty},
       {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates,         i18n("Account Template..."),                        Icon::Empty},
       {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates,         i18n("Account Template..."),                        Icon::Empty},
@@ -2078,38 +2076,6 @@ void KMyMoneyApp::slotSaveAccountTemplates()
           templ.saveTemplate(QUrl::fromLocalFile(newName));
       }
       delete dlg;
-    }
-  }
-}
-
-void KMyMoneyApp::slotGncImport()
-{
-  if (d->m_myMoneyView->fileOpen()) {
-    switch (KMessageBox::questionYesNoCancel(0,
-            i18n("You cannot import GnuCash data into an existing file. Do you wish to save this file?"), PACKAGE)) {
-      case KMessageBox::Yes:
-        slotFileSave();
-        break;
-      case KMessageBox::No:
-        d->closeFile();
-        break;
-      default:
-        return;
-    }
-  }
-
-  KMSTATUS(i18n("Importing a GnuCash file."));
-
-  QUrl fileToRead = QFileDialog::getOpenFileUrl(this, QString(), QUrl(), i18n("GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"));
-
-  if (!fileToRead.isEmpty()) {
-    // call the importer
-    if (d->m_myMoneyView->readFile(fileToRead)) {
-      // imported files don't have a name
-      d->m_fileName = QUrl();
-
-      updateCaption();
-      emit fileLoaded(d->m_fileName);
     }
   }
 }
@@ -6022,7 +5988,6 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::FilePersonalData, fileOpen)},
       {qMakePair(Action::FileBackup, (fileOpen && !d->m_myMoneyView->isDatabase()))},
       {qMakePair(Action::FileInformation, fileOpen)},
-      {qMakePair(Action::FileImportGNC, !importRunning)},
       {qMakePair(Action::FileImportTemplate, fileOpen && !importRunning)},
       {qMakePair(Action::FileExportTemplate, fileOpen && !importRunning)},
 #ifdef KMM_DEBUG

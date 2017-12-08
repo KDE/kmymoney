@@ -1335,6 +1335,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
   MyMoneyFile::instance()->detachStorage(m_storage);
   signalProgress(0, 1, i18n("Import complete"));  // switch off progress bar
   delete m_xr;
+  signalProgress(0, 1, i18nc("Application is ready to use", "Ready.")); // application is ready for input
   qDebug("Exiting gnucash importer");
 }
 #else
@@ -2288,20 +2289,22 @@ void MyMoneyGncReader::terminate()
       }
     }
 
-    for (si = 0; si < m_suspectList.count(); ++si) {
-      MyMoneySchedule sc = m_storage->schedule(m_suspectList[si]);
-      KEditScheduleDlg *s;
-      switch (KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?", sc.name()), PACKAGE)) {
-        case KMessageBox::Yes:
-          s = new KEditScheduleDlg(sc);
-          if (s->exec())
-            m_storage->modifySchedule(s->schedule());
-          delete s;
-          break;
 
-        default:
-          break;
-      }
+    for (si = 0; si < m_suspectList.count(); ++si) {
+      auto sc = m_storage->schedule(m_suspectList[si]);
+      KMessageBox::information(0, i18n("Problems were encountered in converting schedule '%1'.", sc.name()), PACKAGE);
+//      TODO: return this feature
+//      switch (KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?", sc.name()), PACKAGE)) {
+//        case KMessageBox::Yes:
+//          auto s = new KEditScheduleDlg(sc);
+//          if (s->exec())
+//            m_storage->modifySchedule(s->schedule());
+//          delete s;
+//          break;
+
+//        default:
+//          break;
+//      }
     }
   }
   PASS

@@ -234,7 +234,7 @@ public:
     *
     * @return Whether the read was successful.
     */
-  bool readFile(const QUrl &url);
+  bool readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader = nullptr);
 
   /**
     * Saves the data into permanent storage using the XML format.

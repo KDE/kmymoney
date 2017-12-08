@@ -6,7 +6,6 @@
    <Action append="save_merge" name="saveas_database" />
    <Menu append="save_merge" name="import" >
     <text>&amp;Import</text>
-    <Action name="file_import_gnc" />
     <Merge/>
     <MergeLocal name="import_merge"/>
     <Separator/>

@@ -67,6 +67,35 @@ public:
     */
 //  void addWidget(KMyMoneyViewBase* view, QWidget* w);
 
+  /**
+    * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
+    * data structures in memory.  The return result is examined to make sure no
+    * errors occurred whilst parsing.
+    *
+    * @param url The URL to read from.
+    *            If no protocol is specified, file:// is assumed.
+    *
+    * @return Whether the read was successful.
+    */
+  bool readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader = nullptr) override;
+
+  /**
+    * Makes sure that a MyMoneyFile is open and has been created successfully.
+    *
+    * @return Whether the file is open and initialised
+    */
+  bool fileOpen() override;
+
+  /**
+    * Brings up a dialog to change the list(s) settings and saves them into the
+    * class KMyMoneySettings (a singleton).
+    *
+    * @see KListSettingsDlg
+    * Refreshes all views. Used e.g. after settings have been changed or
+    * data has been loaded from external sources (QIF import).
+    **/
+  void slotRefreshViews() override;
+
 private:
   KMyMoneyView* m_view;
 };

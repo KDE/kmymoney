@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-gncimporter" version="0">
+  <MenuBar>
+    <Menu name="file">
+      <Menu name="import" append="import_merge">
+        <Action name="file_import_gnc" />
+      </Menu>
+    </Menu>
+  </MenuBar>
+</kpartgui>

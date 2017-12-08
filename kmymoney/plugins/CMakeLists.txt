@@ -4,6 +4,7 @@ add_subdirectory( interfaces )
 add_subdirectory( csvimport )
 add_subdirectory( csvexport )
 add_subdirectory( qif )
+add_subdirectory( gnc )
 
 if(LIBOFX_FOUND)
   add_subdirectory( ofximport )
