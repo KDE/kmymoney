@@ -651,10 +651,9 @@ void MyMoneySeqAccessMgr::modifyAccount(const MyMoneyAccount& account, const boo
       if (!account.institutionId().isEmpty())
         institution(account.institutionId());
 
-      QList<QString>::ConstIterator it_a;
-      for (it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
-        this->account(*it_a);
-      }
+      foreach (const auto sAccount, account.accountList())
+        this->account(sAccount);
+
       // update information in account list
       m_accountList.modify(account.id(), account);
 
@@ -1084,16 +1083,10 @@ MyMoneyMoney MyMoneySeqAccessMgr::calculateBalance(const QString& id, const QDat
 
 const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QDate& date) const
 {
-  QStringList accounts;
-  QStringList::ConstIterator it_a;
-
   MyMoneyMoney result(balance(id, date));
 
-  accounts = account(id).accountList();
-
-  for (it_a = accounts.constBegin(); it_a != accounts.constEnd(); ++it_a) {
-    result += totalBalance(*it_a, date);
-  }
+  foreach (const auto sAccount, account(id).accountList())
+    result += totalBalance(sAccount, date);
 
   return result;
 }

@@ -697,20 +697,17 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // (2b) the name of the security matches the name of the security of the transaction.
 
       // search through each subordinate account
-      bool found = false;
-      QStringList accounts = thisaccount.accountList();
-      QStringList::const_iterator it_account = accounts.constBegin();
+      auto found = false;
       QString currencyid;
-      while (!found && it_account != accounts.constEnd()) {
-        currencyid = file->account(*it_account).currencyId();
-        MyMoneySecurity security = file->security(currencyid);
+      foreach (const auto sAccount, thisaccount.accountList()) {
+        currencyid = file->account(sAccount).currencyId();
+        auto security = file->security(currencyid);
         if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, security.tradingSymbol()) ||
             matchNotEmpty(statementTransactionUnderImport.m_strSecurity, security.name())) {
-          thisaccount = file->account(*it_account);
+          thisaccount = file->account(sAccount);
           found = true;
+          break;
         }
-
-        ++it_account;
       }
 
       // If there was no stock account under the m_acccount investment account,

@@ -284,7 +284,7 @@ public:
     * subordinate accounts
     * @return QStringList account ids
     */
-  const QStringList& accountList() const;
+  QStringList accountList() const;
 
   /**
     * This method returns the number of entries in the m_accountList

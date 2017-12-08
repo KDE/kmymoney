@@ -169,13 +169,9 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
   s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? QLatin1Char('E') : QLatin1Char('I'));
   s << endl;
 
-  QStringList list = acc.accountList();
-  QStringList::Iterator it_catList;
-
   name += m_separator;
-  for (it_catList = list.begin(); it_catList != list.end(); ++it_catList) {
-    writeCategoryEntry(s, *it_catList, name);
-  }
+  foreach (const auto sAccount, acc.accountList())
+    writeCategoryEntry(s, sAccount, name);
 }
 
 
@@ -277,11 +273,9 @@ void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const i
 void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  QList<QString> accList = file->account(accountId).accountList();
-  QList<QString>::ConstIterator itAcc;
 
-  for (itAcc = accList.constBegin(); itAcc != accList.constEnd(); ++itAcc) {
-    MyMoneyTransactionFilter filter((*itAcc));
+  foreach (const auto sAccount, file->account(accountId).accountList()) {
+    MyMoneyTransactionFilter filter(sAccount);
     filter.setDateFilter(startDate, endDate);
     QList<MyMoneyTransaction> list = file->transactionList(filter);
     QList<MyMoneyTransaction>::ConstIterator itList;

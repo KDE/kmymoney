@@ -571,15 +571,9 @@ bool AccountSet::includeAccount(const MyMoneyAccount& acc)
   if (d->m_typeList.contains(acc.accountType()))
     return true;
 
-  QStringList accounts = acc.accountList();
+  foreach (const auto sAccount, acc.accountList())
+    if (includeAccount(d->m_file->account(sAccount)))
+      return true;
 
-  if (accounts.size() > 0) {
-    QStringList::ConstIterator it_acc;
-    for (it_acc = accounts.constBegin(); it_acc != accounts.constEnd(); ++it_acc) {
-      MyMoneyAccount account = d->m_file->account(*it_acc);
-      if (includeAccount(account))
-        return true;
-    }
-  }
   return false;
 }

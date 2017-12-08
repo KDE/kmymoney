@@ -496,14 +496,12 @@ void ListTable::includeInvestmentSubAccounts()
     }
   }
 
-  QStringList::const_iterator it_a;
-  for (it_a = accountIdList.constBegin(); it_a != accountIdList.constEnd(); ++it_a) {
-    MyMoneyAccount acc = file->account(*it_a);
+  foreach (const auto sAccount, accountIdList) {
+    auto acc = file->account(sAccount);
     if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-      QStringList::const_iterator it_b;
-      for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
-        if (!accountIdList.contains(*it_b)) {
-          subAccountsList.append(*it_b);
+      foreach (const auto sSubAccount, acc.accountList()) {
+        if (!accountIdList.contains(sSubAccount)) {
+          subAccountsList.append(sSubAccount);
         }
       }
     }

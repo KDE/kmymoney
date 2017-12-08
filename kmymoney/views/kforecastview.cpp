@@ -734,15 +734,10 @@ bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccou
   if (forecast.isForecastAccount(acc))
     return true;
 
-  QStringList accounts = acc.accountList();
-
-  if (accounts.size() > 0) {
-    QStringList::ConstIterator it_acc;
-    for (it_acc = accounts.constBegin(); it_acc != accounts.constEnd(); ++it_acc) {
-      MyMoneyAccount account = file->account(*it_acc);
-      if (includeAccount(forecast, account))
-        return true;
-    }
+  foreach (const auto sAccount, acc.accountList()) {
+    auto account = file->account(sAccount);
+    if (includeAccount(forecast, account))
+      return true;
   }
   return false;
 }
@@ -766,19 +761,17 @@ void KForecastView::adjustHeadersAndResizeToContents(QTreeWidget *widget)
 void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, QTreeWidgetItem* parentItem, int forecastType)
 {
   QMap<QString, QString> nameIdx;
-  QStringList accList;
   MyMoneyFile* file = MyMoneyFile::instance();
   QTreeWidgetItem *forecastItem = 0;
 
   //Get all accounts of the right type to calculate forecast
-  accList = account.accountList();
+  const auto accList = account.accountList();
 
-  if (accList.size() == 0)
+  if (accList.isEmpty())
     return;
 
-  QStringList::ConstIterator accList_t;
-  for (accList_t = accList.constBegin(); accList_t != accList.constEnd(); ++accList_t) {
-    MyMoneyAccount subAccount = file->account(*accList_t);
+  foreach (const auto sAccount, accList) {
+    auto subAccount = file->account(sAccount);
     //only add the account if it is a forecast account or the parent of a forecast account
     if (includeAccount(forecast, subAccount)) {
       nameIdx[subAccount.id()] = subAccount.id();

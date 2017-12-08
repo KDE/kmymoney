@@ -439,13 +439,12 @@ public:
       // account are also selected
       if (!KMyMoneyGlobalSettings::expertMode()) {
         QStringList missing;
-        QStringList::const_iterator it_a, it_b;
-        for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
-          MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
+        foreach (const auto selection, list) {
+          auto acc = MyMoneyFile::instance()->account(selection);
           if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-            for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
-              if (!list.contains(*it_b)) {
-                missing.append(*it_b);
+            foreach (const auto sAccount, acc.accountList()) {
+              if (!list.contains(sAccount)) {
+                missing.append(sAccount);
               }
             }
           }

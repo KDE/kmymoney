@@ -56,8 +56,7 @@ public:
     itInvAcc->setColumnCount(m_columns.count());
     setAccountData(node, itInvAcc->row(), invAcc, m_columns);
 
-    const auto strStkAccList = invAcc.accountList();            // only stock or bond accounts are expected here
-    foreach (const auto strStkAcc, strStkAccList) {
+    foreach (const auto strStkAcc, invAcc.accountList()) { // only stock or bond accounts are expected here
       auto stkAcc = m_file->account(strStkAcc);
       auto itStkAcc = new QStandardItem(strStkAcc);
       itStkAcc->setEditable(false);

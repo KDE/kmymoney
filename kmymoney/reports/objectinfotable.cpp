@@ -349,11 +349,9 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney value = file->balance(acc.id());
-  QStringList accList = acc.accountList();
 
-  QStringList::const_iterator it_a = accList.constBegin();
-  for (; it_a != acc.accountList().constEnd(); ++it_a) {
-    MyMoneyAccount stock = file->account(*it_a);
+  foreach (const auto sAccount, acc.accountList()) {
+    auto stock = file->account(sAccount);
     try {
       MyMoneyMoney val;
       MyMoneyMoney balance = file->balance(stock.id());

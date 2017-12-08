@@ -3818,10 +3818,8 @@ KMyMoneyUtils::CanCloseAccountCodeE KMyMoneyApp::canCloseAccount(const MyMoneyAc
     return KMyMoneyUtils::AccountBalanceNonZero;
 
   // all children must be already closed
-  QStringList::const_iterator it_a;
-  for (it_a = acc.accountList().constBegin(); it_a != acc.accountList().constEnd(); ++it_a) {
-    MyMoneyAccount a = MyMoneyFile::instance()->account(*it_a);
-    if (!a.isClosed()) {
+  foreach (const auto sAccount, acc.accountList()) {
+    if (!MyMoneyFile::instance()->account(sAccount).isClosed()) {
       return KMyMoneyUtils::AccountChildrenOpen;
     }
   }
@@ -5684,11 +5682,10 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
   // Now check the target investment account to see if it
   // contains a stock with this id
   QString newStockAccountId;
-  QStringList accountList = toInvAcc.accountList();
-  for (QStringList::const_iterator it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
-    if (MyMoneyFile::instance()->account((*it_a)).currencyId() ==
+  foreach (const auto sAccount, toInvAcc.accountList()) {
+    if (MyMoneyFile::instance()->account(sAccount).currencyId() ==
         stockSecurityId) {
-      newStockAccountId = (*it_a);
+      newStockAccountId = sAccount;
       break;
     }
   }

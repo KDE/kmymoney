@@ -645,8 +645,7 @@ void AccountsModel::load()
     }
 
     // adding accounts (specific bank/investment accounts) belonging to given accounts category
-    const auto accountsStr = account.accountList();
-    foreach (const auto accStr, accountsStr) {
+    foreach (const auto accStr, account.accountList()) {
       const auto acc = d->m_file->account(accStr);
 
       auto item = new QStandardItem(acc.name());
@@ -1153,9 +1152,10 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const MyMoneyObjec
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  if (!account->accountList().isEmpty()) {
+  const auto sAccounts = account->accountList();
+  if (!sAccounts.isEmpty()) {
     QList<MyMoneyAccount> subAccounts;
-    d->m_file->accountList(subAccounts, account->accountList());
+    d->m_file->accountList(subAccounts, sAccounts);
     foreach (const auto subAccount, subAccounts) {
       if (subAccount.isInvest()) {
         modelUtils->loadInstitution(this, subAccount);

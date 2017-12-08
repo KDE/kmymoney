@@ -278,7 +278,7 @@ void MyMoneyAccount::setParentAccountId(const QString& parent)
   d->m_parentAccount = parent;
 }
 
-const QStringList& MyMoneyAccount::accountList() const
+QStringList MyMoneyAccount::accountList() const
 {
   Q_D(const MyMoneyAccount);
   return d->m_accountList;

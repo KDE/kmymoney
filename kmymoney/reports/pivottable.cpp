@@ -2299,13 +2299,12 @@ void PivotTable::includeInvestmentSubAccounts()
   QStringList accountList;
   if (m_config.accounts(accountList)) {
     if (!KMyMoneyGlobalSettings::expertMode()) {
-      QStringList::const_iterator it_a, it_b;
-      for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
-        MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
+      foreach (const auto sAccount, accountList) {
+        auto acc = MyMoneyFile::instance()->account(sAccount);
         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-          for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
-            if (!accountList.contains(*it_b)) {
-              m_config.addAccount(*it_b);
+          foreach (const auto sSubAccount, acc.accountList()) {
+            if (!accountList.contains(sSubAccount)) {
+              m_config.addAccount(sSubAccount);
             }
           }
         }

@@ -709,9 +709,8 @@ MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& acc, const QS
 {
   static MyMoneyAccount nullAccount;
 
-  QList<QString>::const_iterator it_a;
-  for (it_a = acc.accountList().constBegin(); it_a != acc.accountList().constEnd(); ++it_a) {
-    const auto sacc = account(*it_a);
+  foreach (const auto sAccount, acc.accountList()) {
+    const auto sacc = account(sAccount);
     if (sacc.name() == name)
       return sacc;
   }
@@ -854,8 +853,8 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
   }
 
   // process all accounts in the list and test if they have transactions assigned
-  for (QStringList::ConstIterator it = account_list.constBegin(); it != account_list.constEnd(); ++it) {
-    MyMoneyAccount a = d->m_storage->account(*it);
+  foreach (const auto sAccount, account_list) {
+    auto a = d->m_storage->account(sAccount);
     //qDebug() << "Deleting account '"<< a.name() << "'";
 
     // first remove all sub-accounts
@@ -865,7 +864,7 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
       // then remove account itself, but we first have to get
       // rid of the account list that is still stored in
       // the MyMoneyAccount object. Easiest way is to get a fresh copy.
-      a = d->m_storage->account(*it);
+      a = d->m_storage->account(sAccount);
     }
 
     // make sure to remove the item from the cache
@@ -879,10 +878,10 @@ bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigne
   if (level > 100)
     throw MYMONEYEXCEPTION("Too deep recursion in [MyMoneyFile::hasOnlyUnusedAccounts]!");
   // process all accounts in the list and test if they have transactions assigned
-  for (QStringList::ConstIterator it = account_list.constBegin(); it != account_list.constEnd(); ++it) {
-    if (transactionCount(*it) != 0)
+  foreach (const auto sAccount, account_list) {
+    if (transactionCount(sAccount) != 0)
       return false; // the current account has a transaction assigned
-    if (!hasOnlyUnusedAccounts(account(*it).accountList(), level + 1))
+    if (!hasOnlyUnusedAccounts(account(sAccount).accountList(), level + 1))
       return false; // some sub-account has a transaction assigned
   }
   return true; // all subaccounts unused
@@ -1824,11 +1823,8 @@ QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString&
   level = category.section(AccountSeperator, 0, 0);
   remainder = category.section(AccountSeperator, 1);
 
-  QStringList list = base.accountList();
-  QStringList::ConstIterator it_a;
-
-  for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
-    nextBase = account(*it_a);
+  foreach (const auto sAccount, base.accountList()) {
+    nextBase = account(sAccount);
     if (nextBase.name() == level) {
       if (remainder.isEmpty()) {
         return nextBase.id();
@@ -3214,11 +3210,9 @@ MyMoneyPriceList MyMoneyFile::priceList() const
 bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
 {
   auto acc = d->m_cache.account(id);
-  QStringList list = acc.accountList();
-  QStringList::ConstIterator it;
-  bool rc = false;
-  for (it = list.constBegin(); rc == false && it != list.constEnd(); ++it) {
-    MyMoneyAccount a = d->m_cache.account(*it);
+  auto rc = false;
+  foreach (const auto sAccount, acc.accountList()) {
+    auto a = d->m_cache.account(sAccount);
     if (a.name() == name)
       rc = true;
   }
