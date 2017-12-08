@@ -38,6 +38,7 @@
 #include "creditdebithelper.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
 #include "models.h"

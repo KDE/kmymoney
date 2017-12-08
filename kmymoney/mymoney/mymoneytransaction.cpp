@@ -32,6 +32,7 @@
 #include "mymoneystoragenames.h"
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 
 using namespace MyMoneyStorageNodes;
 

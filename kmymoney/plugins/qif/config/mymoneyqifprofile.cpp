@@ -37,6 +37,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
+#include "mymoneyenums.h"
 
 /*
  * CENTURY_BREAK is used to identfy the century for a two digit year
@@ -680,11 +681,11 @@ const QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& val
 
   _decimalSeparator = MyMoneyMoney::decimalSeparator();
   _thousandsSeparator = MyMoneyMoney::thousandSeparator();
-  MyMoneyMoney::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
+  eMyMoney::Money::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
 
   MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toLatin1());
   MyMoneyMoney::setThousandSeparator(amountThousands(def).toLatin1());
-  MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::BeforeQuantityMoney);
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
   res = valuein.formatMoney("", 2);
 
   MyMoneyMoney::setDecimalSeparator(_decimalSeparator);
@@ -702,11 +703,11 @@ const MyMoneyMoney MyMoneyQifProfile::value(const QChar& def, const QString& val
 
   _decimalSeparator = MyMoneyMoney::decimalSeparator();
   _thousandsSeparator = MyMoneyMoney::thousandSeparator();
-  MyMoneyMoney::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
+  eMyMoney::Money::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
 
   MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toLatin1());
   MyMoneyMoney::setThousandSeparator(amountThousands(def).toLatin1());
-  MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::BeforeQuantityMoney);
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
 
   res = MyMoneyMoney(valuein);
 

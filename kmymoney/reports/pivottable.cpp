@@ -47,6 +47,7 @@
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 namespace KChart { class Widget; }

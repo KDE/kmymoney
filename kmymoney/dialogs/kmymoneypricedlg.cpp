@@ -54,6 +54,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "kpricetreeitem.h"
 #include "icons/icons.h"

@@ -51,6 +51,7 @@
 #include "kmymoneydateinput.h"
 #include "mymoneyprice.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "kmymoneyglobalsettings.h"

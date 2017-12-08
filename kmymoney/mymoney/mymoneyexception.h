@@ -29,7 +29,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
+#include <qglobal.h>
+
+class QString;
+
 /**
   * @file
   * @author Thomas Baumgart

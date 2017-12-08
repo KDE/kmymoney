@@ -40,6 +40,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyenums.h"

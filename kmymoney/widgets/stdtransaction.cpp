@@ -43,6 +43,7 @@
 #include "ktagcontainer.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "register.h"
 #include "transactionform.h"

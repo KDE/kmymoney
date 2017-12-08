@@ -50,6 +50,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyprice.h"
+#include "mymoneyexception.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"

@@ -46,6 +46,7 @@
 #include "ktagcontainer.h"
 #include "tabbar.h"
 #include "mymoneyutils.h"
+#include "mymoneyexception.h"
 #include "kmymoneycategory.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneyedit.h"

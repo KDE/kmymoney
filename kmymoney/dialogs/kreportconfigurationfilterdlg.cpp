@@ -51,6 +51,7 @@
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
 #include "mymoneyfile.h"
+#include "mymoneyexception.h"
 #include "mymoneybudget.h"
 #include "mymoneyreport.h"
 #include "daterangedlg.h"

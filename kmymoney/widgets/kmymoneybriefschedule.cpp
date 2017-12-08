@@ -43,6 +43,7 @@
 
 #include "ui_kmymoneybriefschedule.h"
 
+#include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneyaccount.h"
 #include "mymoneyschedule.h"

@@ -52,6 +52,7 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
+#include "mymoneyexception.h"
 #include "kmymoneyglobalsettings.h"
 
 #include "mymoneystatement.h"

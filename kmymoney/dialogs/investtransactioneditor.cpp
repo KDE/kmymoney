@@ -50,6 +50,7 @@
 #include "kmymoneyaccountselector.h"
 #include "kmymoneymvccombo.h"
 #include "mymoneyfile.h"
+#include "mymoneyexception.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "ksplittransactiondlg.h"
@@ -889,7 +890,7 @@ void InvestTransactionEditor::slotUpdateTotalAmount()
   if (total && total->isVisible()) {
     MyMoneyMoney amount;
     totalAmount(amount);
-    total->setText(amount.convert(d->m_currency.smallestAccountFraction(), static_cast<MyMoneyMoney::roundingMethod>(d->m_security.roundingMethod()))
+    total->setText(amount.convert(d->m_currency.smallestAccountFraction(), d->m_security.roundingMethod())
                    .formatMoney(d->m_currency.tradingSymbol(), MyMoneyMoney::denomToPrec(d->m_currency.smallestAccountFraction())));
   }
 }

@@ -53,6 +53,7 @@
 #include "mymoneyfile.h"
 #include "kmymoneysplittable.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"

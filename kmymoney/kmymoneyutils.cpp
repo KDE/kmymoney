@@ -53,6 +53,7 @@
 // Project Includes
 
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"

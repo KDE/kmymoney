@@ -49,6 +49,7 @@
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneyexception.h"
 
 QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,OpeningBalanceAccount,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term,lastImportedTransactionDate,VatAccount,VatRate,kmm-matched-tx,Imported,priceMode").split(',');
 QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment,lastStatementBalance").split(',');

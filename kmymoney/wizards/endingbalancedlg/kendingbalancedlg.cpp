@@ -39,6 +39,7 @@
 #include "ui_interestchargecheckingswizardpage.h"
 
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
 #include "kmymoneyedit.h"

@@ -43,6 +43,7 @@
 #include "ledgermodel.h"
 #include "splitmodel.h"
 #include "mymoneyaccount.h"
+#include "mymoneyexception.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
 #include "ledgerview.h"

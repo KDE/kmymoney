@@ -319,5 +319,16 @@ namespace eMyMoney {
     inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
+  namespace Money {
+    enum signPosition : int {
+      // keep those in sync with the ones defined in klocale.h
+      ParensAround = 0,
+      BeforeQuantityMoney = 1,
+      AfterQuantityMoney = 2,
+      BeforeMoney = 3,
+      AfterMoney = 4
+    };
+  }
+
 }
 #endif

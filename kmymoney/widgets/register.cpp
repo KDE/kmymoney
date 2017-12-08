@@ -45,6 +45,7 @@
 
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyexception.h"
 #include "mymoneyaccount.h"
 #include "stdtransactiondownloaded.h"
 #include "stdtransactionmatched.h"

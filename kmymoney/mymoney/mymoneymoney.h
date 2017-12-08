@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2000-2002 by Michael Edwardes
     email                : mte@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,26 +17,18 @@
 #ifndef MYMONEYMONEY_H
 #define MYMONEYMONEY_H
 
-// #include <cmath>
-#include <stddef.h>
-
-//FIXME workaround for dealing with lond double
-#include <gmpxx.h>
-
 // So we can save this object
-#include <QChar>
-#include <QString>
 #include <QMetaType>
 
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
-#include "mymoneyexception.h"
 
 #include <alkimia/alkvalue.h>
 
 typedef qint64 signed64;
 typedef quint64 unsigned64;
 
+namespace eMyMoney { namespace Money { enum signPosition : int; } }
 
 /**
   * This class represents a value within the MyMoney Engine
@@ -48,31 +41,6 @@ class KMM_MYMONEY_EXPORT MyMoneyMoney : public AlkValue
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  enum fileVersionE {
-    FILE_4_BYTE_VALUE = 0,
-    FILE_8_BYTE_VALUE
-  };
-
-  enum signPosition {
-    // keep those in sync with the ones defined in klocale.h
-    ParensAround = 0,
-    BeforeQuantityMoney = 1,
-    AfterQuantityMoney = 2,
-    BeforeMoney = 3,
-    AfterMoney = 4
-  };
-
-  enum roundingMethod {
-    RndNever = 0,
-    RndFloor,
-    RndCeil,
-    RndTrunc,
-    RndPromote,
-    RndHalfDown,
-    RndHalfUp,
-    RndRound
-  };
-
   // construction
   MyMoneyMoney();
   explicit MyMoneyMoney(const int iAmount, const signed64 denom);
@@ -124,22 +92,21 @@ public:
     */
   static int denomToPrec(signed64 fract);
 
-  MyMoneyMoney convert(const signed64 denom = 100, const roundingMethod how = RndRound) const;
+  MyMoneyMoney convert(const signed64 denom = 100, const AlkValue::RoundingMethod how = AlkValue::RoundRound) const;
   static signed64 precToDenom(int prec);
   double toDouble() const;
 
   static void setThousandSeparator(const QChar &);
   static void setDecimalSeparator(const QChar &);
-  static void setNegativeMonetarySignPosition(const signPosition pos);
-  static void setPositiveMonetarySignPosition(const signPosition pos);
+  static void setNegativeMonetarySignPosition(const eMyMoney::Money::signPosition pos);
+  static void setPositiveMonetarySignPosition(const eMyMoney::Money::signPosition pos);
   static void setNegativePrefixCurrencySymbol(const bool flags);
   static void setPositivePrefixCurrencySymbol(const bool flags);
 
   static const QChar thousandSeparator();
   static const QChar decimalSeparator();
-  static signPosition negativeMonetarySignPosition();
-  static signPosition positiveMonetarySignPosition();
-  static void setFileVersion(const fileVersionE version);
+  static eMyMoney::Money::signPosition negativeMonetarySignPosition();
+  static eMyMoney::Money::signPosition positiveMonetarySignPosition();
 
   const MyMoneyMoney& operator=(const QString& pszAmount);
   const MyMoneyMoney& operator=(const AlkValue& val);
@@ -180,16 +147,6 @@ public:
 
   static const MyMoneyMoney ONE;
   static const MyMoneyMoney MINUS_ONE;
-
-private:
-
-  static QChar _thousandSeparator;
-  static QChar _decimalSeparator;
-  static signPosition _negativeMonetarySignPosition;
-  static signPosition _positiveMonetarySignPosition;
-  static bool _negativePrefixCurrencySymbol;
-  static bool _positivePrefixCurrencySymbol;
-  static MyMoneyMoney::fileVersionE _fileVersion;
 };
 
 //=============================================================================
@@ -211,22 +168,6 @@ inline MyMoneyMoney::MyMoneyMoney() :
 {
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//      Name: MyMoneyMoney
-//   Purpose: Constructor - constructs object from an amount in a signed64 value
-//   Returns: None
-//    Throws: Nothing.
-// Arguments: Amount - signed 64 object containing amount
-//            denom  - denominator of the object
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
-{
-  if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
-
-  *this = AlkValue(QString("%1/%2").arg(Amount).arg(denom), _decimalSeparator);
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 //      Name: MyMoneyMoney
@@ -240,38 +181,6 @@ inline MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom) :
     AlkValue(dAmount, denom)
 {
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: MyMoneyMoney
-//   Purpose: Constructor - constructs object from an amount in a integer value
-//   Returns: None
-//    Throws: Nothing.
-// Arguments: iAmount - integer object containing amount
-//            denom   - denominator of the object
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
-{
-  if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
-  *this = AlkValue(iAmount, denom);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: MyMoneyMoney
-//   Purpose: Constructor - constructs object from an amount in a long integer value
-//   Returns: None
-//    Throws: Nothing.
-// Arguments: iAmount - integer object containing amount
-//            denom   - denominator of the object
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
-{
-  if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
-  *this = AlkValue(QString("%1/%2").arg(iAmount).arg(denom), _decimalSeparator);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

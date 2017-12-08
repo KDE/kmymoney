@@ -37,6 +37,7 @@
 
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"

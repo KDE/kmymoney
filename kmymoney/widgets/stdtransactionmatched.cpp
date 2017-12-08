@@ -38,6 +38,7 @@
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyexception.h"
 #include "widgetenums.h"
 
 using namespace KMyMoneyRegister;

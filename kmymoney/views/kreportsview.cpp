@@ -63,6 +63,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
+#include "mymoneyexception.h"
 #include "kmymoneyglobalsettings.h"
 #include "querytable.h"
 #include "objectinfotable.h"

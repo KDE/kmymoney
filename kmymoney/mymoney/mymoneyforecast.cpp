@@ -44,6 +44,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyfinancialcalculator.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 enum class eForecastMethod {Scheduled = 0, Historic = 1 };

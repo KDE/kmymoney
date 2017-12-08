@@ -40,6 +40,7 @@
 #include "mymoneyfile.h"
 #include "webpricequote.h"
 #include "kmymoneyutils.h"
+#include "mymoneyexception.h"
 
 class KNewInvestmentWizardPrivate
 {

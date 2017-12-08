@@ -40,6 +40,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneypayee.h"
 #include "mymoneymoney.h"
+#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "modelenums.h"
 
