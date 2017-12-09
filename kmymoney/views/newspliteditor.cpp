@@ -202,8 +202,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->counterAccount = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
-  d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
+  d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
+  d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
   d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
   d->accountsModel->setHideEquityAccounts(false);

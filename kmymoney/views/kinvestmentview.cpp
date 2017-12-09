@@ -178,8 +178,8 @@ void KInvestmentView::init()
   m_securitiesTree->header()->restoreState(cfgHeader);
 
   m_searchSecurities->setProxy(d->m_securitiesProxyModel);
-  m_deleteSecurityButton->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
-  m_editSecurityButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
+  m_deleteSecurityButton->setIcon(Icons::get(Icon::EditDelete));
+  m_editSecurityButton->setIcon(Icons::get(Icon::DocumentEdit));
 
   connect(m_securitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &KInvestmentView::slotSecuritySelected);
   connect(m_editSecurityButton, &QAbstractButton::clicked, this, &KInvestmentView::slotEditSecurity);

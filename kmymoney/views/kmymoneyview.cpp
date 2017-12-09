@@ -156,7 +156,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 0
   m_homeView = new KHomeView();
   viewFrames[View::Home] = m_model->addPage(m_homeView, i18n("Home"));
-  viewFrames[View::Home]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewHome]));
+  viewFrames[View::Home]->setIcon(Icons::get(Icon::ViewHome));
   connect(m_homeView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_homeView, SIGNAL(scheduleSelected(QString)),
@@ -168,14 +168,14 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 1
   m_institutionsView = new KInstitutionsView;
   viewFrames[View::Institutions] = m_model->addPage(m_institutionsView, i18n("Institutions"));
-  viewFrames[View::Institutions]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewInstitutions]));
+  viewFrames[View::Institutions]->setIcon(Icons::get(Icon::ViewInstitutions));
   connect(m_institutionsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_institutionsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 2
   m_accountsView = new KAccountsView;
   viewFrames[View::Accounts] = m_model->addPage(m_accountsView, i18n("Accounts"));
-  viewFrames[View::Accounts]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewAccounts]));
+  viewFrames[View::Accounts]->setIcon(Icons::get(Icon::ViewAccounts));
   connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
@@ -183,7 +183,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   m_scheduledView = new KScheduledView();
 //this is to solve the way long strings are handled differently among versions of KPageWidget
   viewFrames[View::Schedules] = m_model->addPage(m_scheduledView, i18n("Scheduled transactions"));
-  viewFrames[View::Schedules]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewSchedules]));
+  viewFrames[View::Schedules]->setIcon(Icons::get(Icon::ViewSchedules));
 
   connect(m_scheduledView, SIGNAL(scheduleSelected(MyMoneySchedule)), kmymoney, SLOT(slotSelectSchedule(MyMoneySchedule)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowScheduleContextMenu()));
@@ -195,21 +195,21 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 4
   m_categoriesView = new KCategoriesView;
   viewFrames[View::Categories] = m_model->addPage(m_categoriesView, i18n("Categories"));
-  viewFrames[View::Categories]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewCategories]));
+  viewFrames[View::Categories]->setIcon(Icons::get(Icon::ViewCategories));
   connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 5
   m_tagsView = new KTagsView;
   viewFrames[View::Tags] = m_model->addPage(m_tagsView, i18n("Tags"));
-  viewFrames[View::Tags]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewTags]));
+  viewFrames[View::Tags]->setIcon(Icons::get(Icon::ViewTags));
   connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 6
   m_payeesView = new KPayeesView();
   viewFrames[View::Payees] = m_model->addPage(m_payeesView, i18n("Payees"));
-  viewFrames[View::Payees]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewPayees]));
+  viewFrames[View::Payees]->setIcon(Icons::get(Icon::ViewPayees));
 
   connect(kmymoney, SIGNAL(payeeCreated(QString)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(QString)));
   connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotRenameButtonCliked()));
@@ -222,7 +222,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 7
   m_ledgerView = new KGlobalLedgerView();
   viewFrames[View::Ledgers] = m_model->addPage(m_ledgerView, i18n("Ledgers"));
-  viewFrames[View::Ledgers]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewLedgers]));
+  viewFrames[View::Ledgers]->setIcon(Icons::get(Icon::ViewLedgers));
 
   connect(m_ledgerView, SIGNAL(accountSelected(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowTransactionContextMenu()));
@@ -239,12 +239,12 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 8
   m_investmentView = new KInvestmentView(kmymoney, this);
   viewFrames[View::Investments] = m_model->addPage(m_investmentView, i18n("Investments"));
-  viewFrames[View::Investments]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewInvestment]));
+  viewFrames[View::Investments]->setIcon(Icons::get(Icon::ViewInvestment));
 
   // Page 9
   m_reportsView = new KReportsView();
   viewFrames[View::Reports] = m_model->addPage(m_reportsView, i18n("Reports"));
-  viewFrames[View::Reports]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewReports]));
+  viewFrames[View::Reports]->setIcon(Icons::get(Icon::ViewReports));
   connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
@@ -252,19 +252,19 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 10
   m_budgetView = new KBudgetView(kmymoney);
   viewFrames[View::Budget] = m_model->addPage(m_budgetView, i18n("Budgets"));
-  viewFrames[View::Budget]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewBudgets]));
+  viewFrames[View::Budget]->setIcon(Icons::get(Icon::ViewBudgets));
   connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 11
   m_forecastView = new KForecastView();
   viewFrames[View::Forecast] = m_model->addPage(m_forecastView, i18n("Forecast"));
-  viewFrames[View::Forecast]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewForecast]));
+  viewFrames[View::Forecast]->setIcon(Icons::get(Icon::ViewForecast));
 
   // Page 12
   m_onlineJobOutboxView = new KOnlineJobOutbox();
   viewFrames[View::OnlineJobOutbox] = m_model->addPage(m_onlineJobOutboxView, i18n("Outbox"));
-  viewFrames[View::OnlineJobOutbox]->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewOutbox]));
+  viewFrames[View::OnlineJobOutbox]->setIcon(Icons::get(Icon::ViewOutbox));
   connect(m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT(slotOnlineJobSend(QList<onlineJob>)));
   connect(m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)));
   connect(m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()));
@@ -274,7 +274,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 #ifdef ENABLE_UNFINISHEDFEATURES
   SimpleLedgerView* view = new SimpleLedgerView(kmymoney, this);
   KPageWidgetItem* frame = m_model->addPage(view, i18n("New ledger"));
-  frame->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentProperties]));
+  frame->setIcon(Icons::get(Icon::DocumentProperties));
 #endif
 
 

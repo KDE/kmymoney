@@ -83,9 +83,9 @@ public:
     if (q->style()->styleHint(QStyle::SH_DialogButtonBox_ButtonsHaveIcons, 0, q)) {
         m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
         m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
-        m_finishButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOKApply]));
-        m_cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
-        m_helpButton->setIcon(QIcon::fromTheme(g_Icons[Icon::HelpContents]));
+        m_finishButton->setIcon(Icons::get(Icon::DialogOKApply));
+        m_cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+        m_helpButton->setIcon(Icons::get(Icon::HelpContents));
       }
 
     // create button layout

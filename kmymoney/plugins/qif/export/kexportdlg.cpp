@@ -71,13 +71,13 @@ KExportDlg::KExportDlg(QWidget *parent)
   KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem(i18n("&Export"),
-                        QIcon::fromTheme(g_Icons[Icon::DocumentExport]),
+                        Icons::get(Icon::DocumentExport),
                         i18n("Start operation"),
                         i18n("Use this to start the export operation"));
   KGuiItem::assign(m_qbuttonOk, okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
-                            QIcon::fromTheme(g_Icons[Icon::DocumentOpen]),
+                            Icons::get(Icon::DocumentOpen),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);

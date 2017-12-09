@@ -68,8 +68,8 @@ public:
     m_accountTree = &ui->m_accountTree;
 
     // setup icons for collapse and expand button
-    ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
-    ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
+    ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
+    ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
     m_proxyModel = ui->m_accountTree->init(View::Categories);
 

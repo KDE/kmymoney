@@ -58,18 +58,18 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto pluginsPage = KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget();
   const auto reportsPage = new KSettingsReports();
 
-  addPage(generalPage, i18nc("General settings", "General"), g_Icons[Icon::SystemRun]);
-  addPage(homePage, i18n("Home"), g_Icons[Icon::ViewHome]);
-  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), g_Icons[Icon::ViewFinancialList]);
-  addPage(schedulesPage, i18n("Scheduled transactions"), g_Icons[Icon::ViewSchedules]);
-  addPage(onlineQuotesPage, i18n("Online Quotes"), g_Icons[Icon::PreferencesNetwork]);
-  addPage(reportsPage, i18nc("Report settings", "Reports"), g_Icons[Icon::ViewReports]);
-  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), g_Icons[Icon::ViewForecast]);
-  addPage(encryptionPage, i18n("Encryption"), g_Icons[Icon::Kgpg]);
-  addPage(colorsPage, i18n("Colors"), g_Icons[Icon::PreferencesColor]);
-  addPage(fontsPage, i18n("Fonts"), g_Icons[Icon::PreferencesFont]);
-  addPage(iconsPage, i18n("Icons"), g_Icons[Icon::PreferencesIcon]);
-  addPage(pluginsPage, i18n("Plugins"), g_Icons[Icon::NetworkDisconect]);
+  addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::SystemRun).name());
+  addPage(homePage, i18n("Home"), Icons::get(Icon::ViewHome).name());
+  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::ViewFinancialList).name());
+  addPage(schedulesPage, i18n("Scheduled transactions"), Icons::get(Icon::ViewSchedules).name());
+  addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
+  addPage(reportsPage, i18nc("Report settings", "Reports"), Icons::get(Icon::ViewReports).name());
+  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), Icons::get(Icon::ViewForecast).name());
+  addPage(encryptionPage, i18n("Encryption"), Icons::get(Icon::Kgpg).name());
+  addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColor).name());
+  addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFont).name());
+  addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcon).name());
+  addPage(pluginsPage, i18n("Plugins"), Icons::get(Icon::NetworkDisconect).name());
 
   setHelp("details.settings", "kmymoney");
 

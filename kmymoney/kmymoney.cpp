@@ -724,7 +724,7 @@ void KMyMoneyApp::initActions()
   /* Look-up table for all custom actions.
   It's required for:
   1) building QList with QActions to be added to ActionCollection
-  2) adding custom features to QActions like e.g. overlaid icon or keyboard shortcut
+  2) adding custom features to QActions like e.g. keyboard shortcut
   */
   QHash<Action, QAction *> lutActions;
 
@@ -758,7 +758,7 @@ void KMyMoneyApp::initActions()
       // *************
       // The Edit menu
       // *************
-      {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction,              i18n("Find transaction..."),                        Icon::Empty},
+      {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction,              i18n("Find transaction..."),                        Icon::EditFindTransaction},
       // *************
       // The View menu
       // *************
@@ -769,41 +769,41 @@ void KMyMoneyApp::initActions()
       // *********************
       // The institutions menu
       // *********************
-      {Action::InstitutionNew,                &KMyMoneyApp::slotInstitutionNew,               i18n("New institution..."),                         Icon::Empty},
-      {Action::InstitutionEdit,               &KMyMoneyApp::slotInstitutionEditEmpty,         i18n("Edit institution..."),                        Icon::Empty},
-      {Action::InstitutionDelete,             &KMyMoneyApp::slotInstitutionDelete,            i18n("Delete institution..."),                      Icon::Empty},
+      {Action::InstitutionNew,                &KMyMoneyApp::slotInstitutionNew,               i18n("New institution..."),                         Icon::InstitutionNew},
+      {Action::InstitutionEdit,               &KMyMoneyApp::slotInstitutionEditEmpty,         i18n("Edit institution..."),                        Icon::InstitutionEdit},
+      {Action::InstitutionDelete,             &KMyMoneyApp::slotInstitutionDelete,            i18n("Delete institution..."),                      Icon::InstitutionDelete},
       // *****************
       // The accounts menu
       // *****************
-      {Action::AccountNew,                    &KMyMoneyApp::slotAccountNew,                   i18n("New account..."),                             Icon::Empty},
+      {Action::AccountNew,                    &KMyMoneyApp::slotAccountNew,                   i18n("New account..."),                             Icon::AccountNew},
       {Action::AccountOpen,                   &KMyMoneyApp::slotAccountOpenEmpty,             i18n("Open ledger"),                                Icon::ViewFinancialList},
       {Action::AccountStartReconciliation,    &KMyMoneyApp::slotAccountReconcileStart,        i18n("Reconcile..."),                               Icon::Reconcile},
-      {Action::AccountFinishReconciliation,   &KMyMoneyApp::slotAccountReconcileFinish,       i18nc("Finish reconciliation", "Finish"),           Icon::Empty},
+      {Action::AccountFinishReconciliation,   &KMyMoneyApp::slotAccountReconcileFinish,       i18nc("Finish reconciliation", "Finish"),           Icon::AccountFinishReconciliation},
       {Action::AccountPostponeReconciliation, &KMyMoneyApp::slotAccountReconcilePostpone,     i18n("Postpone reconciliation"),                    Icon::MediaPlaybackPause},
-      {Action::AccountEdit,                   &KMyMoneyApp::slotAccountEdit,                  i18n("Edit account..."),                            Icon::Empty},
-      {Action::AccountDelete,                 &KMyMoneyApp::slotAccountDelete,                i18n("Delete account..."),                          Icon::Empty},
-      {Action::AccountClose,                  &KMyMoneyApp::slotAccountClose,                 i18n("Close account"),                              Icon::Empty},
-      {Action::AccountReopen,                 &KMyMoneyApp::slotAccountReopen,                i18n("Reopen account"),                             Icon::Empty},
+      {Action::AccountEdit,                   &KMyMoneyApp::slotAccountEdit,                  i18n("Edit account..."),                            Icon::AccountEdit},
+      {Action::AccountDelete,                 &KMyMoneyApp::slotAccountDelete,                i18n("Delete account..."),                          Icon::AccountDelete},
+      {Action::AccountClose,                  &KMyMoneyApp::slotAccountClose,                 i18n("Close account"),                              Icon::AccountClose},
+      {Action::AccountReopen,                 &KMyMoneyApp::slotAccountReopen,                i18n("Reopen account"),                             Icon::AccountReopen},
       {Action::AccountTransactionReport,      &KMyMoneyApp::slotAccountTransactionReport,     i18n("Transaction report"),                         Icon::ViewFinancialList},
       {Action::AccountBalanceChart,           &KMyMoneyApp::slotAccountChart,                 i18n("Show balance chart..."),                      Icon::OfficeChartLine},
       {Action::AccountOnlineMap,              &KMyMoneyApp::slotAccountMapOnline,             i18n("Map account..."),                             Icon::NewsSubscribe},
       {Action::AccountOnlineUnmap,            &KMyMoneyApp::slotAccountUnmapOnline,           i18n("Unmap account..."),                           Icon::NewsUnsubscribe},
-      {Action::AccountUpdateMenu,             &KMyMoneyApp::slotAccountUpdateOnline,          i18nc("Update online accounts menu", "Update"),     Icon::Empty},
-      {Action::AccountUpdate,                 &KMyMoneyApp::slotAccountUpdateOnline,          i18n("Update account..."),                          Icon::Empty},
-      {Action::AccountUpdateAll,              &KMyMoneyApp::slotAccountUpdateOnlineAll,       i18n("Update all accounts..."),                     Icon::Empty},
-      {Action::AccountCreditTransfer,         &KMyMoneyApp::slotNewOnlineTransfer,            i18n("New credit transfer"),                        Icon::Empty},
+      {Action::AccountUpdateMenu,             &KMyMoneyApp::slotAccountUpdateOnline,          i18nc("Update online accounts menu", "Update"),     Icon::AccountUpdateMenu},
+      {Action::AccountUpdate,                 &KMyMoneyApp::slotAccountUpdateOnline,          i18n("Update account..."),                          Icon::AccountUpdate},
+      {Action::AccountUpdateAll,              &KMyMoneyApp::slotAccountUpdateOnlineAll,       i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
+      {Action::AccountCreditTransfer,         &KMyMoneyApp::slotNewOnlineTransfer,            i18n("New credit transfer"),                        Icon::AccountCreditTransfer},
       // *******************
       // The categories menu
       // *******************
-      {Action::CategoryNew,                   &KMyMoneyApp::slotCategoryNew,                  i18n("New category..."),                            Icon::Empty},
-      {Action::CategoryEdit,                  &KMyMoneyApp::slotAccountEdit,                  i18n("Edit category..."),                           Icon::Empty},
-      {Action::CategoryDelete,                &KMyMoneyApp::slotAccountDelete,                i18n("Delete category..."),                         Icon::Empty},
+      {Action::CategoryNew,                   &KMyMoneyApp::slotCategoryNew,                  i18n("New category..."),                            Icon::CategoryNew},
+      {Action::CategoryEdit,                  &KMyMoneyApp::slotAccountEdit,                  i18n("Edit category..."),                           Icon::CategoryEdit},
+      {Action::CategoryDelete,                &KMyMoneyApp::slotAccountDelete,                i18n("Delete category..."),                         Icon::CategoryDelete},
       // **************
       // The tools menu
       // **************
       {Action::ToolCurrencies,                &KMyMoneyApp::slotCurrencyDialog,               i18n("Currencies..."),                              Icon::ViewCurrencyList},
       {Action::ToolPrices,                    &KMyMoneyApp::slotPriceDialog,                  i18n("Prices..."),                                  Icon::Empty},
-      {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate,            i18n("Update Stock and Currency Prices..."),        Icon::Empty},
+      {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate,            i18n("Update Stock and Currency Prices..."),        Icon::ToolUpdatePrices},
       {Action::ToolConsistency,               &KMyMoneyApp::slotFileConsistencyCheck,         i18n("Consistency Check"),                          Icon::Empty},
       {Action::ToolPerformance,               &KMyMoneyApp::slotPerformanceTest,              i18n("Performance-Test"),                           Icon::Fork},
       {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql,                  i18n("Generate Database SQL"),                      Icon::Empty},
@@ -819,15 +819,15 @@ void KMyMoneyApp::initActions()
       // ***************************
       // Actions w/o main menu entry
       // ***************************
-      {Action::TransactionNew,                &KMyMoneyApp::slotTransactionsNew,              i18nc("New transaction button", "New"),             Icon::Empty},
-      {Action::TransactionEdit,               &KMyMoneyApp::slotTransactionsEdit,             i18nc("Edit transaction button", "Edit"),           Icon::Empty},
+      {Action::TransactionNew,                &KMyMoneyApp::slotTransactionsNew,              i18nc("New transaction button", "New"),             Icon::TransactionNew},
+      {Action::TransactionEdit,               &KMyMoneyApp::slotTransactionsEdit,             i18nc("Edit transaction button", "Edit"),           Icon::TransactionEdit},
       {Action::TransactionEnter,              &KMyMoneyApp::slotTransactionsEnter,            i18nc("Enter transaction", "Enter"),                Icon::DialogOK},
       {Action::TransactionEditSplits,         &KMyMoneyApp::slotTransactionsEditSplits,       i18nc("Edit split button", "Edit splits"),          Icon::Split},
       {Action::TransactionCancel,             &KMyMoneyApp::slotTransactionsCancel,           i18nc("Cancel transaction edit", "Cancel"),         Icon::DialogCancel},
       {Action::TransactionDelete,             &KMyMoneyApp::slotTransactionsDelete,           i18nc("Delete transaction", "Delete"),              Icon::EditDelete},
       {Action::TransactionDuplicate,          &KMyMoneyApp::slotTransactionDuplicate,         i18nc("Duplicate transaction", "Duplicate"),        Icon::EditCopy},
-      {Action::TransactionMatch,              &KMyMoneyApp::slotTransactionMatch,             i18nc("Button text for match transaction", "Match"),Icon::Empty},
-      {Action::TransactionAccept,             &KMyMoneyApp::slotTransactionsAccept,           i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::Empty},
+      {Action::TransactionMatch,              &KMyMoneyApp::slotTransactionMatch,             i18nc("Button text for match transaction", "Match"),Icon::TransactionMatch},
+      {Action::TransactionAccept,             &KMyMoneyApp::slotTransactionsAccept,           i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::TransactionAccept},
       {Action::TransactionToggleReconciled,   &KMyMoneyApp::slotToggleReconciliationFlag,     i18nc("Toggle reconciliation flag", "Toggle"),      Icon::Empty},
       {Action::TransactionToggleCleared,      &KMyMoneyApp::slotMarkTransactionCleared,       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
       {Action::TransactionReconciled,         &KMyMoneyApp::slotMarkTransactionReconciled,    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
@@ -840,10 +840,10 @@ void KMyMoneyApp::initActions()
       {Action::TransactionCombine,            &KMyMoneyApp::slotTransactionCombine,           i18nc("Combine transactions", "Combine"),           Icon::Empty},
       {Action::TransactionCopySplits,         &KMyMoneyApp::slotTransactionCopySplits,        i18n("Copy splits"),                                Icon::Empty},
       //Investment
-      {Action::InvestmentNew,                 &KMyMoneyApp::slotInvestmentNew,                i18n("New investment..."),                          Icon::Empty},
-      {Action::InvestmentEdit,                &KMyMoneyApp::slotInvestmentEdit,               i18n("Edit investment..."),                         Icon::Empty},
-      {Action::InvestmentDelete,              &KMyMoneyApp::slotInvestmentDelete,             i18n("Delete investment..."),                       Icon::Empty},
-      {Action::InvestmentOnlinePrice,         &KMyMoneyApp::slotOnlinePriceUpdate,            i18n("Online price update..."),                     Icon::Empty},
+      {Action::InvestmentNew,                 &KMyMoneyApp::slotInvestmentNew,                i18n("New investment..."),                          Icon::InvestmentNew},
+      {Action::InvestmentEdit,                &KMyMoneyApp::slotInvestmentEdit,               i18n("Edit investment..."),                         Icon::InvestmentEdit},
+      {Action::InvestmentDelete,              &KMyMoneyApp::slotInvestmentDelete,             i18n("Delete investment..."),                       Icon::InvestmentDelete},
+      {Action::InvestmentOnlinePrice,         &KMyMoneyApp::slotOnlinePriceUpdate,            i18n("Online price update..."),                     Icon::InvestmentOnlinePrice},
       {Action::InvestmentManualPrice,         &KMyMoneyApp::slotManualPriceUpdate,            i18n("Manual price update..."),                     Icon::Empty},
       //Schedule
       {Action::ScheduleNew,                   &KMyMoneyApp::slotScheduleNew,                  i18n("New scheduled transaction"),                  Icon::AppointmentNew},
@@ -862,10 +862,10 @@ void KMyMoneyApp::initActions()
       {Action::TagRename,                     &KMyMoneyApp::slotTagRename,                        i18n("Rename tag"),                                 Icon::TagRename},
       {Action::TagDelete,                     &KMyMoneyApp::slotTagDelete,                    i18n("Delete tag"),                                 Icon::ListRemoveTag},
       //Budget
-      {Action::BudgetNew,                     &KMyMoneyApp::slotBudgetNew,                    i18n("New budget"),                                 Icon::Empty},
-      {Action::BudgetRename,                  &KMyMoneyApp::budgetRename,                     i18n("Rename budget"),                              Icon::Empty},
-      {Action::BudgetDelete,                  &KMyMoneyApp::slotBudgetDelete,                 i18n("Delete budget"),                              Icon::Empty},
-      {Action::BudgetCopy,                    &KMyMoneyApp::slotBudgetCopy,                   i18n("Copy budget"),                                Icon::Empty},
+      {Action::BudgetNew,                     &KMyMoneyApp::slotBudgetNew,                    i18n("New budget"),                                 Icon::BudgetNew},
+      {Action::BudgetRename,                  &KMyMoneyApp::budgetRename,                     i18n("Rename budget"),                              Icon::BudgetRename},
+      {Action::BudgetDelete,                  &KMyMoneyApp::slotBudgetDelete,                 i18n("Delete budget"),                              Icon::BudgetDelete},
+      {Action::BudgetCopy,                    &KMyMoneyApp::slotBudgetCopy,                   i18n("Copy budget"),                                Icon::BudgetCopy},
       {Action::BudgetChangeYear,              &KMyMoneyApp::slotBudgetChangeYear,             i18n("Change budget year"),                         Icon::ViewCalendar},
       {Action::BudgetForecast,                &KMyMoneyApp::slotBudgetForecast,               i18n("Budget based on forecast"),                   Icon::ViewForecast},
       //Currency actions
@@ -876,7 +876,7 @@ void KMyMoneyApp::initActions()
       //Price actions
       {Action::PriceNew,                      &KMyMoneyApp::priceNew,                         i18n("New price..."),                               Icon::DocumentNew},
       {Action::PriceEdit,                     &KMyMoneyApp::priceEdit,                        i18n("Edit price..."),                              Icon::DocumentEdit},
-      {Action::PriceUpdate,                   &KMyMoneyApp::priceOnlineUpdate,                i18n("Online Price Update..."),                     Icon::Empty},
+      {Action::PriceUpdate,                   &KMyMoneyApp::priceOnlineUpdate,                i18n("Online Price Update..."),                     Icon::PriceUpdate},
       {Action::PriceDelete,                   &KMyMoneyApp::priceDelete,                      i18n("Delete price..."),                            Icon::EditDelete},
       //debug actions
 #ifdef KMM_DEBUG
@@ -897,7 +897,7 @@ void KMyMoneyApp::initActions()
       a->setObjectName(s_Actions.value(info.action));
       a->setText(info.text);
       if (info.icon != Icon::Empty) // no need to set empty icon
-        a->setIcon(QIcon::fromTheme(g_Icons.value(info.icon)));
+        a->setIcon(Icons::get(info.icon));
       connect(a, &QAction::triggered, this, info.callback);
       lutActions.insert(info.action, a);  // store QAction's pointer for later processing
     }
@@ -919,56 +919,6 @@ void KMyMoneyApp::initActions()
 
     foreach (const auto it, checkableActions)
       lutActions[it]->setCheckable(true);
-  }
-
-  // *************
-  // Setting custom icons for some of added actions
-  // *************
-  {
-    // struct for QAction's icon overlays
-    struct iconOverlayInfo {
-      Action action;
-      Icon icon;
-      Icon overlay;
-      Qt::Corner corner;
-    };
-
-    const QVector<iconOverlayInfo> actionOverlaidIcons {
-      {Action::EditFindTransaction,         Icon::ViewFinancialTransfer,    Icon::EditFind,       Qt::BottomRightCorner},
-      {Action::InstitutionNew,              Icon::ViewBank,                 Icon::ListAdd,        Qt::BottomRightCorner},
-      {Action::InstitutionEdit,             Icon::ViewBank,                 Icon::DocumentEdit,   Qt::BottomRightCorner},
-      {Action::InstitutionDelete,           Icon::ViewBank,                 Icon::EditDelete,     Qt::BottomRightCorner},
-      {Action::AccountNew,                  Icon::ViewBankAccount,          Icon::ListAdd,        Qt::TopRightCorner},
-      {Action::AccountFinishReconciliation, Icon::Merge,                    Icon::DialogOK,       Qt::BottomRightCorner},
-      {Action::AccountEdit,                 Icon::ViewBankAccount,          Icon::DocumentEdit,   Qt::BottomRightCorner},
-      {Action::AccountDelete,               Icon::ViewBankAccount,          Icon::EditDelete,     Qt::BottomRightCorner},
-      {Action::AccountClose,                Icon::ViewBankAccount,          Icon::DialogClose,    Qt::BottomRightCorner},
-      {Action::AccountReopen,               Icon::ViewBankAccount,          Icon::DialogOK,       Qt::BottomRightCorner},
-      {Action::AccountUpdateMenu,           Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner},
-      {Action::AccountUpdate,               Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner},
-      {Action::AccountUpdateAll,            Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner},
-      {Action::AccountCreditTransfer,       Icon::ViewBankAccount,          Icon::MailMessageNew, Qt::BottomRightCorner},
-      {Action::CategoryNew,                 Icon::ViewFinancialCategories,  Icon::ListAdd,        Qt::TopRightCorner},
-      {Action::CategoryEdit,                Icon::ViewFinancialCategories,  Icon::DocumentEdit,   Qt::BottomRightCorner},
-      {Action::CategoryDelete,              Icon::ViewFinancialCategories,  Icon::EditDelete,     Qt::BottomRightCorner},
-      {Action::ToolUpdatePrices,            Icon::ViewInvestment,           Icon::Download,       Qt::BottomRightCorner},
-      {Action::TransactionNew,              Icon::ViewFinancialTransfer,    Icon::ListAdd,        Qt::TopRightCorner},
-      {Action::TransactionEdit,             Icon::ViewFinancialTransfer,    Icon::DocumentEdit,   Qt::BottomRightCorner},
-      {Action::TransactionMatch,            Icon::ViewFinancialTransfer,    Icon::DocumentImport, Qt::BottomRightCorner},
-      {Action::TransactionAccept,           Icon::ViewFinancialTransfer,    Icon::DialogOKApply,  Qt::BottomRightCorner},
-      {Action::InvestmentNew,               Icon::ViewInvestment,           Icon::ListAdd,        Qt::TopRightCorner},
-      {Action::InvestmentEdit,              Icon::ViewInvestment,           Icon::DocumentEdit,   Qt::BottomRightCorner},
-      {Action::InvestmentDelete,            Icon::ViewInvestment,           Icon::EditDelete,     Qt::BottomRightCorner},
-      {Action::InvestmentOnlinePrice,       Icon::ViewInvestment,           Icon::Download,       Qt::BottomRightCorner},
-      {Action::BudgetNew,                   Icon::ViewTimeScheduleCalculus, Icon::ListAdd,        Qt::TopRightCorner},
-      {Action::BudgetRename,                Icon::ViewTimeScheduleCalculus, Icon::DocumentEdit,   Qt::BottomRightCorner},
-      {Action::BudgetDelete,                Icon::ViewTimeScheduleCalculus, Icon::EditDelete,     Qt::BottomRightCorner},
-      {Action::BudgetCopy,                  Icon::ViewTimeScheduleCalculus, Icon::EditCopy,       Qt::BottomRightCorner},
-      {Action::PriceUpdate,                 Icon::ViewCurrencyList,         Icon::Download,       Qt::BottomRightCorner}
-    };
-
-    for(const auto& it : actionOverlaidIcons)
-      lutActions[it.action]->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[it.icon], g_Icons[it.overlay], it.corner));
   }
 
   // *************
@@ -1034,10 +984,10 @@ void KMyMoneyApp::initActions()
 
   QMenu *menuContainer;
   menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("import"), this));
-  menuContainer->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentImport]));
+  menuContainer->setIcon(Icons::get(Icon::DocumentImport));
 
   menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("export"), this));
-  menuContainer->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentExport]));
+  menuContainer->setIcon(Icons::get(Icon::DocumentExport));
 }
 
 void KMyMoneyApp::connectActionsAndViews()

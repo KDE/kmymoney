@@ -83,15 +83,15 @@ void KMyMoneyValidationFeedback::setFeedback(ValidationFeedback::MessageType typ
     QIcon icon;
     switch (type) {
       case ValidationFeedback::MessageType::Error:
-        icon = QIcon::fromTheme(g_Icons[Icon::DialogError]);
+        icon = Icons::get(Icon::DialogError);
         break;
       case ValidationFeedback::MessageType::Positive:
       case ValidationFeedback::MessageType::Information:
-        icon = QIcon::fromTheme(g_Icons[Icon::DialogInformation]);
+        icon = Icons::get(Icon::DialogInformation);
         break;
       case ValidationFeedback::MessageType::Warning:
       default:
-        icon = QIcon::fromTheme(g_Icons[Icon::DialogWarning]);
+        icon = Icons::get(Icon::DialogWarning);
     }
     d->ui->icon->setPixmap(icon.pixmap(24));
   }

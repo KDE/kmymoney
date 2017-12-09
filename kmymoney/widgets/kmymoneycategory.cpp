@@ -86,7 +86,7 @@ KMyMoneyCategory::KMyMoneyCategory(bool splitButton, QWidget* parent) :
 
     // create button
     KGuiItem splitButtonItem(QString(),
-                             QIcon::fromTheme(g_Icons[Icon::Split]), QString(), QString());
+                             Icons::get(Icon::Split), QString(), QString());
     d->splitButton = new QPushButton(d->frame);
     d->splitButton->setObjectName("splitButton");
     KGuiItem::assign(d->splitButton, splitButtonItem);

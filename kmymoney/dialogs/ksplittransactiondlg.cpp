@@ -112,12 +112,12 @@ public:
     user1Button->setText(i18n("Clear &All"));
     user1Button->setToolTip(i18n("Clear all splits"));
     user1Button->setWhatsThis(i18n("Use this to clear all splits of this transaction"));
-    user1Button->setIcon(QIcon::fromTheme(g_Icons[Icon::EditClear]));
+    user1Button->setIcon(Icons::get(Icon::EditClear));
 
     //clearZero button
     user2Button->setText(i18n("Clear &Zero"));
     user2Button->setToolTip(i18n("Removes all splits that have a value of zero"));
-    user2Button->setIcon(QIcon::fromTheme(g_Icons[Icon::EditClear]));
+    user2Button->setIcon(Icons::get(Icon::EditClear));
 
     //merge button
     user3Button->setText(i18n("&Merge"));

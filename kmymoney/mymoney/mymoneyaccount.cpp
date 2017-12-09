@@ -602,11 +602,12 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   };
 
   Icon ixIcon = accToIco.value(accountType(), Icon::ViewLiability);
-  QString kyIcon = g_Icons.value(ixIcon) + QString::number(size);
+
+  QString kyIcon = accountTypeToString(accountType()) + QString::number(size);
   QPixmap pxIcon;
 
   if (!QPixmapCache::find(kyIcon, pxIcon)) {
-    pxIcon = QIcon::fromTheme(g_Icons.value(ixIcon)).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
+    pxIcon = Icons::get(ixIcon).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
     QPixmapCache::insert(kyIcon, pxIcon);
   }
 
@@ -619,7 +620,7 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   else
     return pxIcon;
 
-  QPixmap pxOverlay = QIcon::fromTheme(g_Icons[ixIcon]).pixmap(size);
+  QPixmap pxOverlay = Icons::get(ixIcon).pixmap(size);
   QPainter pxPainter(&pxIcon);
   const QSize szIcon = pxIcon.size();
   pxPainter.drawPixmap(szIcon.width() / 2, szIcon.height() / 2,

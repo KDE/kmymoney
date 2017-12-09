@@ -51,7 +51,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     m_requiredFields(new KMandatoryFieldGroup(this))
 {
   ui->setupUi(this);
-  ui->unsupportedIcon->setPixmap(QIcon::fromTheme(g_Icons[Icon::DialogInformation]).pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
+  ui->unsupportedIcon->setPixmap(Icons::get(Icon::DialogInformation).pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
   // The ui designer fills the QScrollArea with a QWidget. Remove it so we can simply check for .widget() == nullptr
   // if it contains a valid widget
   delete ui->creditTransferEdit->takeWidget();

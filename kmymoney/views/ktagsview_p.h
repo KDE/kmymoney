@@ -87,10 +87,10 @@ public:
     ui->m_filterBox->addItem(i18nc("@item Show only closed tags", "Closed"));
     ui->m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    ui->m_newButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListAddTag]));
-    ui->m_renameButton->setIcon(QIcon::fromTheme(g_Icons[Icon::EditRename]));
-    ui->m_deleteButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListRemoveTag]));
-    ui->m_updateButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
+    ui->m_newButton->setIcon(Icons::get(Icon::ListAddTag));
+    ui->m_renameButton->setIcon(Icons::get(Icon::EditRename));
+    ui->m_deleteButton->setIcon(Icons::get(Icon::ListRemoveTag));
+    ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
     ui->m_updateButton->setEnabled(false);
 
     ui->m_register->setupRegister(MyMoneyAccount(),

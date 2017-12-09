@@ -179,7 +179,7 @@ public:
       }
     }
 
-    const auto checkMark = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
+    const auto checkMark = Icons::get(Icon::DialogOK);
     switch (account.accountType()) {
       case Account::Type::Income:
       case Account::Type::Expense:
@@ -579,7 +579,7 @@ void AccountsModel::load()
     QMap<int, QVariant> itemData;
     itemData[Qt::DisplayRole] = itemData[Qt::EditRole] = itemData[(int)Role::FullName] = i18n("Favorites");
     itemData[Qt::FontRole] = font;
-    itemData[Qt::DecorationRole] = QIcon::fromTheme(g_Icons.value(Icon::ViewBankAccount));
+    itemData[Qt::DecorationRole] = Icons::get(Icon::ViewBankAccount);
     itemData[(int)Role::ID] = favoritesAccountId;
     itemData[(int)Role::DisplayOrder] = 0;
     this->setItemData(favoriteAccountsItem->index(), itemData);
@@ -1067,7 +1067,7 @@ public:
   void addInstitutionItem(QStandardItemModel *model, const MyMoneyInstitution &institution) {
     QFont font;
     font.setBold(true);
-    auto itInstitution = new QStandardItem(QIcon::fromTheme(g_Icons.value(Icon::ViewInstitutions)), institution.name());
+    auto itInstitution = new QStandardItem(Icons::get(Icon::ViewInstitutions), institution.name());
     itInstitution->setFont(font);
     itInstitution->setData(QVariant::fromValue(MyMoneyMoney()), (int)Role::TotalValue);
     itInstitution->setData(institution.id(), (int)Role::ID);

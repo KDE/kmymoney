@@ -141,19 +141,19 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
     } else if (role == Qt::DecorationRole) {
       if (job.isLocked())
-        return QIcon::fromTheme(g_Icons[Icon::TaskOngoing]);
+        return Icons::get(Icon::TaskOngoing);
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return QIcon::fromTheme(g_Icons[Icon::TaskComplete]);
+        case onlineJob::acceptedByBank: return Icons::get(Icon::TaskComplete);
         case onlineJob::sendingError:
         case onlineJob::abortedByUser:
-        case onlineJob::rejectedByBank: return QIcon::fromTheme(g_Icons[Icon::TaskReject]);
+        case onlineJob::rejectedByBank: return Icons::get(Icon::TaskReject);
         case onlineJob::noBankAnswer: break;
       }
       if (job.sendDate().isValid()) {
-        return QIcon::fromTheme(g_Icons[Icon::TaskAccepted]);
+        return Icons::get(Icon::TaskAccepted);
       } else if (!job.isValid()) {
-        return QIcon::fromTheme(g_Icons[Icon::TaskAttention]);
+        return Icons::get(Icon::TaskAttention);
       }
     } else if (role == Qt::ToolTipRole) {
       if (job.isLocked())

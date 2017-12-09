@@ -53,7 +53,7 @@ KBackupDlg::KBackupDlg(QWidget* parent) :
   ui->setupUi(this);
   readConfig();
 
-  ui->chooseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::Folder]));
+  ui->chooseButton->setIcon(Icons::get(Icon::Folder));
 
   connect(ui->chooseButton, &QAbstractButton::clicked, this, &KBackupDlg::chooseButtonClicked);
 }

@@ -641,8 +641,8 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-        QString pathEnter = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::KeyEnter]).pixmap(QSize(16,16)));
-        QString pathSkip = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::MediaSkipForward]).pixmap(QSize(16,16)));
+        QString pathEnter = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(16,16)));
+        QString pathSkip = QPixmapToDataUri(Icons::get(Icon::MediaSkipForward).pixmap(QSize(16,16)));
 
         //show payment date
         tmp = QString("<td>") +
@@ -780,7 +780,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += "<tr class=\"item\">";
 
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
-      QString pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::Download]).pixmap(QSize(16,16)));
+      QString pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(16,16)));
       d->m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
     }
 
@@ -892,9 +892,9 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
   if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
     //show account's online-status
-    pathOK = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::DialogOKApply]).pixmap(QSize(16,16)));
-    pathTODO = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::MailReceive]).pixmap(QSize(16,16)));
-    pathNotOK = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::DialogCancel]).pixmap(QSize(16,16)));
+    pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(16,16)));
+    pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(16,16)));
+    pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(16,16)));
 
     if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
       cellStatus = '-';
@@ -1321,7 +1321,7 @@ void KHomeView::showAssetsLiabilities()
     QString statusHeader;
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
-      pathStatusHeader = QPixmapToDataUri(QIcon::fromTheme(g_Icons[Icon::ViewOutbox]).pixmap(QSize(16,16)));
+      pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::ViewOutbox).pixmap(QSize(16,16)));
       statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
     }
 

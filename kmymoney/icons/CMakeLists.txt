@@ -33,7 +33,7 @@ set (icons_SOURCES
 
 add_library(kmm_icons SHARED ${icons_SOURCES})
 generate_export_header(kmm_icons)
-target_link_libraries(kmm_icons PUBLIC Qt5::Core)
+target_link_libraries(kmm_icons PRIVATE Qt5::Core Qt5::Gui)
 
 install(TARGETS kmm_icons
   ${INSTALL_TARGETS_DEFAULT_ARGS} )

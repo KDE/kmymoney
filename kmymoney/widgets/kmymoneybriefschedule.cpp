@@ -149,10 +149,10 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent) :
 {
   Q_D(KMyMoneyBriefSchedule);
   d->ui->setupUi(this);
-  d->ui->m_nextButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
-  d->ui->m_prevButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
-  d->ui->m_skipButton->setIcon(QIcon::fromTheme(g_Icons[Icon::MediaSeekForward]));
-  d->ui->m_buttonEnter->setIcon(QIcon::fromTheme(g_Icons[Icon::KeyEnter]));
+  d->ui->m_nextButton->setIcon(Icons::get(Icon::ArrowRight));
+  d->ui->m_prevButton->setIcon(Icons::get(Icon::ArrowLeft));
+  d->ui->m_skipButton->setIcon(Icons::get(Icon::MediaSeekForward));
+  d->ui->m_buttonEnter->setIcon(Icons::get(Icon::KeyEnter));
 
   connect(d->ui->m_prevButton, &QAbstractButton::clicked, this, &KMyMoneyBriefSchedule::slotPrevClicked);
   connect(d->ui->m_nextButton, &QAbstractButton::clicked, this, &KMyMoneyBriefSchedule::slotNextClicked);

@@ -68,8 +68,8 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
   d->ui->setupUi(this);
   d->ui->m_homePageList->setSortingEnabled(false);
 
-  d->ui->m_upButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowUp]));
-  d->ui->m_downButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowDown]));
+  d->ui->m_upButton->setIcon(Icons::get(Icon::ArrowUp));
+  d->ui->m_downButton->setIcon(Icons::get(Icon::ArrowDown));
 
   d->ui->m_upButton->setEnabled(false);
   d->ui->m_downButton->setEnabled(false);

@@ -73,13 +73,13 @@ CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
   m_lastId = -1;
   m_wiz->installEventFilter(this); // event filter for escape key presses
 
-  m_wiz->button(QWizard::BackButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
-  m_wiz->button(QWizard::CancelButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
-  m_wiz->button(QWizard::CustomButton2)->setIcon(QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
-  m_wiz->button(QWizard::FinishButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOKApply]));
-  m_wiz->button(QWizard::CustomButton1)->setIcon(QIcon::fromTheme(g_Icons[Icon::FileArchiver]));
-  m_wiz->button(QWizard::CustomButton3)->setIcon(QIcon::fromTheme(g_Icons[Icon::InvestApplet]));
-  m_wiz->button(QWizard::NextButton)->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
+  m_wiz->button(QWizard::BackButton)->setIcon(Icons::get(Icon::ArrowLeft));
+  m_wiz->button(QWizard::CancelButton)->setIcon(Icons::get(Icon::DialogCancel));
+  m_wiz->button(QWizard::CustomButton2)->setIcon(Icons::get(Icon::KMyMoney));
+  m_wiz->button(QWizard::FinishButton)->setIcon(Icons::get(Icon::DialogOKApply));
+  m_wiz->button(QWizard::CustomButton1)->setIcon(Icons::get(Icon::FileArchiver));
+  m_wiz->button(QWizard::CustomButton3)->setIcon(Icons::get(Icon::InvestApplet));
+  m_wiz->button(QWizard::NextButton)->setIcon(Icons::get(Icon::ArrowRight));
 
   m_pageIntro = new IntroPage(this, m_imp);
   m_wiz->setPage(PageIntro, m_pageIntro);

@@ -114,13 +114,13 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   m_tableView->setZoomFactor(KMyMoneyGlobalSettings::zoomFactor());
 
   //set button icons
-  m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::OfficeChartLine]));
-  m_control->ui->buttonClose->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentClose]));
-  m_control->ui->buttonConfigure->setIcon(QIcon::fromTheme(g_Icons[Icon::Configure]));
-  m_control->ui->buttonCopy->setIcon(QIcon::fromTheme(g_Icons[Icon::EditCopy]));
-  m_control->ui->buttonDelete->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
-  m_control->ui->buttonExport->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentExport]));
-  m_control->ui->buttonNew->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
+  m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeChartLine));
+  m_control->ui->buttonClose->setIcon(Icons::get(Icon::DocumentClose));
+  m_control->ui->buttonConfigure->setIcon(Icons::get(Icon::Configure));
+  m_control->ui->buttonCopy->setIcon(Icons::get(Icon::EditCopy));
+  m_control->ui->buttonDelete->setIcon(Icons::get(Icon::EditDelete));
+  m_control->ui->buttonExport->setIcon(Icons::get(Icon::DocumentExport));
+  m_control->ui->buttonNew->setIcon(Icons::get(Icon::DocumentNew));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
@@ -164,7 +164,7 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
     m_control->ui->buttonDelete->setEnabled(false);
 
   int tabNr = parent->addTab(this,
-                         QIcon::fromTheme(g_Icons[Icon::Spreadsheet]),
+                         Icons::get(Icon::Spreadsheet),
                          report.name());
   parent->setTabEnabled(tabNr, true);
   parent->setCurrentIndex(tabNr);
@@ -288,7 +288,7 @@ void KReportsView::KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Chart"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the chart version of this report"));
-    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::OfficeChartLine]));
+    m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeChartLine));
   } else {
     if (!m_isChartViewValid)
       m_table->drawChart(*m_chartView);
@@ -298,7 +298,7 @@ void KReportsView::KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Report"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->ui->buttonChart->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewFinancialList]));
+    m_control->ui->buttonChart->setIcon(Icons::get(Icon::ViewFinancialList));
   }
   m_showingChart = ! m_showingChart;
 }

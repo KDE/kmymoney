@@ -35,6 +35,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class QIcon;
+
 /**
   * @author Thomas Baumgart
   */
@@ -355,12 +357,6 @@ public:
     * for the QWizard passed as argument.
     */
   static void updateWizardButtons(QWizard *);
-
-  /**
-    * This method overlays an icon over another one, to get a composite one
-    * eg. an icon to add accounts
-    */
-  static QPixmap overlayIcon(const QString &iconName, const QString &overlayName, const Qt::Corner corner = Qt::BottomRightCorner, const int size = 64);
 
   static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
 

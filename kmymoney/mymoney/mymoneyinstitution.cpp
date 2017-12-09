@@ -316,9 +316,9 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 QPixmap MyMoneyInstitution::pixmap(const int size) const
 {
   QPixmap pxIcon;
-  auto kyIcon = g_Icons.value(Icon::ViewInstitutions) + QString::number(size);
+  auto kyIcon = QLatin1String("view_institution") + QString::number(size);
   if (!QPixmapCache::find(kyIcon, pxIcon)) {
-    pxIcon = QIcon::fromTheme(g_Icons.value(Icon::ViewInstitutions)).pixmap(size);
+    pxIcon = Icons::get(Icon::ViewInstitutions).pixmap(size);
     QPixmapCache::insert(kyIcon, pxIcon);
   }
   return pxIcon;

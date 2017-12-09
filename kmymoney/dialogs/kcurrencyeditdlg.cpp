@@ -157,9 +157,9 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   d->m_searchWidget->setFocus();
   d->ui->verticalLayout->insertWidget(0, d->m_searchWidget);
   d->ui->m_currencyList->setItemDelegate(new KCurrencyEditDelegate(d->ui->m_currencyList));
-  d->ui->m_closeButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogClose]));
-  d->ui->m_editCurrencyButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
-  d->ui->m_selectBaseCurrencyButton->setIcon(QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
+  d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+  d->ui->m_editCurrencyButton->setIcon(Icons::get(Icon::DocumentEdit));
+  d->ui->m_selectBaseCurrencyButton->setIcon(Icons::get(Icon::KMyMoney));
 
   connect(d->ui->m_currencyList, &QWidget::customContextMenuRequested, this, &KCurrencyEditDlg::slotOpenContextMenu);
   connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KCurrencyEditDlg::slotLoadCurrencies);
@@ -238,7 +238,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     p->setText(2, (*it).tradingSymbol());
 
     if ((*it).id() == baseCurrency) {
-      p->setData(0, Qt::DecorationRole, QIcon::fromTheme(g_Icons[Icon::KMyMoney]));
+      p->setData(0, Qt::DecorationRole, Icons::get(Icon::KMyMoney));
       if (d->m_currency.id().isEmpty())
         first = p;
     } else {

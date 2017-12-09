@@ -87,7 +87,7 @@ void SimpleLedgerView::init()
 {
   d->m_needLoad = false;
   d->ui->setupUi(this);
-  d->ui->ledgerTab->setTabIcon(0, QIcon::fromTheme(g_Icons[Icon::ListAdd]));
+  d->ui->ledgerTab->setTabIcon(0, Icons::get(Icon::ListAdd));
   d->ui->ledgerTab->setTabText(0, QString());
   d->newTabWidget = d->ui->ledgerTab->widget(0);
 

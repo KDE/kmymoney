@@ -192,10 +192,10 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
   // setup the context menu
   d->m_contextMenu = new QMenu(this);
   d->m_contextMenu->setTitle(i18n("Split Options"));
-  d->m_contextMenu->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewFinancialTransfer]));
-  d->m_contextMenu->addAction(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]), i18n("Edit..."), this, SLOT(slotStartEdit()));
-  d->m_contextMenuDuplicate = d->m_contextMenu->addAction(QIcon::fromTheme(g_Icons[Icon::EditCopy]), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
-  d->m_contextMenuDelete = d->m_contextMenu->addAction(QIcon::fromTheme(g_Icons[Icon::EditDelete]),
+  d->m_contextMenu->setIcon(Icons::get(Icon::ViewFinancialTransfer));
+  d->m_contextMenu->addAction(Icons::get(Icon::DocumentEdit), i18n("Edit..."), this, SLOT(slotStartEdit()));
+  d->m_contextMenuDuplicate = d->m_contextMenu->addAction(Icons::get(Icon::EditCopy), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
+  d->m_contextMenuDelete = d->m_contextMenu->addAction(Icons::get(Icon::EditDelete),
                         i18n("Delete..."),
                         this, SLOT(slotDeleteSplit()));
 
@@ -941,9 +941,9 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   QHBoxLayout* l = new QHBoxLayout(d->m_registerButtonFrame);
   l->setContentsMargins(0, 0, 0, 0);
   l->setSpacing(0);
-  d->m_registerEnterButton = new QPushButton(QIcon::fromTheme(g_Icons[Icon::DialogOK])
+  d->m_registerEnterButton = new QPushButton(Icons::get(Icon::DialogOK)
                                           , QString(), d->m_registerButtonFrame);
-  d->m_registerCancelButton = new QPushButton(QIcon::fromTheme(g_Icons[Icon::DialogCancel])
+  d->m_registerCancelButton = new QPushButton(Icons::get(Icon::DialogCancel)
                                            , QString(), d->m_registerButtonFrame);
 
   l->addWidget(d->m_registerEnterButton);

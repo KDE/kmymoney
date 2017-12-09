@@ -77,7 +77,7 @@ namespace NewUserWizard
       QTreeWidgetItem* p = insertCurrency(*it);
       if ((*it).id() == baseCurrency) {
         first = p;
-        QIcon icon = QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]);
+        QIcon icon = Icons::get(Icon::ViewBankAccount);
         p->setIcon(0, icon);
       } else {
         p->setIcon(0, QIcon());

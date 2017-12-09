@@ -171,7 +171,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId,  QIcon::fromTheme(g_Icons[Icon::ViewBankAccount]), display);
+      insertItem(itemId,  Icons::get(Icon::ViewBankAccount), display);
     } else {
       insertItem(itemId, emptyIcon, display);
     }

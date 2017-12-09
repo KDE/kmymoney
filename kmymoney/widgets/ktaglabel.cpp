@@ -40,7 +40,7 @@ KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
   QFrame(parent)
 {
   QToolButton *t = new QToolButton(this);
-  t->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogClose]));
+  t->setIcon(Icons::get(Icon::DialogClose));
   t->setAutoRaise(true);
   QLabel *l = new QLabel(name, this);
   m_tagId = id;

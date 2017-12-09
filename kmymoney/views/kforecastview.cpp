@@ -92,7 +92,7 @@ void KForecastView::init()
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
-  m_forecastButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ViewForecast]));
+  m_forecastButton->setIcon(Icons::get(Icon::ViewForecast));
 
   connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabChanged(int)));
 

@@ -57,13 +57,13 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
                  eMyMoney::Transaction::Action::Shrsout <<
                  eMyMoney::Transaction::Action::Interest;
 
-  QIcon icon = QIcon::fromTheme(g_Icons[Icon::DialogOK]);
+  QIcon icon = Icons::get(Icon::DialogOK);
   if (!icon.availableSizes().isEmpty())
     m_iconYes = icon.pixmap(icon.availableSizes().first());
   else
     m_iconYes = QPixmap();
 
-  icon = QIcon::fromTheme(g_Icons[Icon::DialogCancel]);
+  icon = Icons::get(Icon::DialogCancel);
   if (!icon.availableSizes().isEmpty())
     m_iconNo = icon.pixmap(icon.availableSizes().first());
   else

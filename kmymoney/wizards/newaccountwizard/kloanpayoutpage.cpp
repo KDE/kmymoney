@@ -74,7 +74,7 @@ namespace NewAccountWizard
     d->m_mandatoryGroup->add(d->ui->m_loanAccount->lineEdit());
 
     KGuiItem createAssetButtenItem(i18n("&Create..."),
-                                   QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
+                                   Icons::get(Icon::DocumentNew),
         i18n("Create a new asset account"),
         i18n("If the asset account does not yet exist, press this button to create it."));
     KGuiItem::assign(d->ui->m_createAssetButton, createAssetButtenItem);

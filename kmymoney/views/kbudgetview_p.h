@@ -68,13 +68,13 @@ public:
     m_accountTree = &ui->m_accountTree;
 
     ui->m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->m_newButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
-    ui->m_renameButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::ListAdd], Qt::TopRightCorner));
-    ui->m_deleteButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewTimeScheduleCalculus], g_Icons[Icon::EditDelete]));
-    ui->m_updateButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentSave]));
-    ui->m_resetButton->setIcon(QIcon::fromTheme(g_Icons[Icon::EditUndo]));
-    ui->m_collapseButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListCollapse]));
-    ui->m_expandButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ListExpand]));
+    ui->m_newButton->setIcon(Icons::get(Icon::BudgetNew));
+    ui->m_renameButton->setIcon(Icons::get(Icon::BudgetRename));
+    ui->m_deleteButton->setIcon(Icons::get(Icon::BudgetDelete));
+    ui->m_updateButton->setIcon(Icons::get(Icon::DocumentSave));
+    ui->m_resetButton->setIcon(Icons::get(Icon::EditUndo));
+    ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
+    ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
     m_budgetProxyModel = qobject_cast<BudgetViewProxyModel *>(ui->m_accountTree->init(View::Budget));
     m_proxyModel = m_budgetProxyModel;

@@ -21,11 +21,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QHash>
 #include <icons/kmm_icons_export.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+class QString;
+class QIcon;
 
 namespace Icons {
 
@@ -84,26 +86,24 @@ enum class Icon { SVNUpdate, Merge, Reconcile, Split, Tip, Fork,
                   HelpContents, Folder, InvestApplet,
                   PreferencesFont, PreferencesColor, PreferencesIcon,
                   PreferencesNetwork, NetworkDisconect, Kgpg,
-                  Empty
-                   };
-
-inline uint qHash(const Icon key, uint seed)
-{
-  return ::qHash(static_cast<uint>(key), seed);
-}
+                  Empty, EditFindTransaction,
+                  InstitutionNew, InstitutionEdit, InstitutionDelete,
+                  AccountNew, AccountEdit, AccountDelete,
+                  AccountClose, AccountReopen,
+                  AccountUpdateMenu, AccountUpdate, AccountUpdateAll,
+                  AccountCreditTransfer, AccountFinishReconciliation,
+                  CategoryNew, CategoryEdit, CategoryDelete,
+                  TransactionNew, TransactionEdit,
+                  TransactionMatch, TransactionAccept,
+                  InvestmentNew, InvestmentEdit,
+                  InvestmentDelete, InvestmentOnlinePrice,
+                  BudgetNew, BudgetRename, BudgetDelete, BudgetCopy,
+                  PriceUpdate, ToolUpdatePrices
+                };
 
 KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName);
-
-namespace detail {
-const QHash<Icon, QString> getCommonNames();
-const QHash<Icon, QString> getKDENames();
-const QHash<Icon, QString> getOxygenNames();
-const QHash<Icon, QString> getBreezeNames();
-const QHash<Icon, QString> getTangoNames();
-}
+KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);
 
 }
-
-KMM_ICONS_EXPORT extern QHash<Icons::Icon, QString> g_Icons;
 
 #endif

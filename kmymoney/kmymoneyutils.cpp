@@ -104,7 +104,7 @@ const QString KMyMoneyUtils::scheduleTypeToString(eMyMoney::Schedule::Type type)
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&New Schedule..."),
-                        QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
+                        Icons::get(Icon::DocumentNew),
                         i18n("Create a new schedule."),
                         i18n("Use this to create a new schedule."));
 
@@ -114,7 +114,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&Filter"),
-                        QIcon::fromTheme(g_Icons[Icon::ViewFilter]),
+                        Icons::get(Icon::ViewFilter),
                         i18n("Filter out accounts"),
                         i18n("Use this to filter out accounts"));
 
@@ -497,55 +497,6 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
   wizard->button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
-}
-
-QPixmap KMyMoneyUtils::overlayIcon(const QString &iconName, const QString &overlayName, const Qt::Corner corner, const int size)
-{
-  QPixmap pxIcon;
-  QString kyIcon = iconName + overlayName;
-
-  // If found in the cache, return quickly
-  if (QPixmapCache::find(kyIcon, pxIcon))
-    return pxIcon;
-
-  // try to retrieve the main icon from cache
-  if (!QPixmapCache::find(iconName, pxIcon)) {
-    pxIcon = QIcon::fromTheme(iconName).pixmap(size);
-    QPixmapCache::insert(iconName, pxIcon);
-  }
-
-  if (overlayName.isEmpty()) // call from MyMoneyAccount::accountPixmap can have no overlay icon, so handle that appropriately
-    return pxIcon;
-
-  QPainter pixmapPainter(&pxIcon);
-  QPixmap pxOverlay = QIcon::fromTheme(overlayName).pixmap(size);
-
-  int x, y;
-  switch (corner) {
-    case Qt::TopLeftCorner:
-      x = 0;
-      y = 0;
-      break;
-    case Qt::TopRightCorner:
-      x = pxIcon.width() / 2;
-      y = 0;
-      break;
-    case Qt::BottomLeftCorner:
-      x = 0;
-      y = pxIcon.height() / 2;
-      break;
-    case Qt::BottomRightCorner:
-    default:
-      x = pxIcon.width() / 2;
-      y = pxIcon.height() / 2;
-      break;
-  }
-  pixmapPainter.drawPixmap(x, y, pxIcon.width() / 2, pxIcon.height() / 2, pxOverlay);
-
-  //save for later use
-  QPixmapCache::insert(kyIcon, pxIcon);
-
-  return pxIcon;
 }
 
 void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType)

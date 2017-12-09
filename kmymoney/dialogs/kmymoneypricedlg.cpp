@@ -107,11 +107,11 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   d->ui->m_priceList->header()->setStretchLastSection(true);
   d->ui->m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  d->ui->m_deleteButton->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
-  d->ui->m_newButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
-  d->ui->m_editButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentEdit]));
+  d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditDelete));
+  d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
+  d->ui->m_editButton->setIcon(Icons::get(Icon::DocumentEdit));
 
-  d->ui->m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon(g_Icons[Icon::ViewInvestment], g_Icons[Icon::Download]));
+  d->ui->m_onlineQuoteButton->setIcon(Icons::get(Icon::ToolUpdatePrices));
 
   connect(d->ui->m_editButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotEditPrice);
   connect(d->ui->m_deleteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotDeletePrice);

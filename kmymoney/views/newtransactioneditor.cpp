@@ -385,8 +385,8 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->payeeEdit->setModelColumn(0);
   d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
-  d->ui->enterButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
-  d->ui->cancelButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogCancel]));
+  d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
+  d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
   d->ui->statusCombo->setModel(&d->statusModel);
 

@@ -76,9 +76,9 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent) :
 
   d->ui->m_updateButton->setEnabled(false);
 
-  d->ui->m_updateButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DialogOK]));
-  d->ui->m_deleteButton->setIcon(QIcon::fromTheme(g_Icons[Icon::EditDelete]));
-  d->ui->m_newButton->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentNew]));
+  d->ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
+  d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditDelete));
+  d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
 
   d->ui->m_editIdentifyBy->addItem(i18n("Symbol"), WebPriceQuoteSource::identifyBy::Symbol);
   d->ui->m_editIdentifyBy->addItem(i18n("Identification number"), WebPriceQuoteSource::identifyBy::IdentificationNumber);

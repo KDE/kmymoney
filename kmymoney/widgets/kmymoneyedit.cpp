@@ -125,7 +125,7 @@ public:
     calculatorFrameVBoxLayout->addWidget(m_calculator);
     m_calculatorFrame->hide();
 
-    m_calcButton = new QPushButton(QIcon::fromTheme(g_Icons[Icon::AccessoriesCalculator]), QString(), q);
+    m_calcButton = new QPushButton(Icons::get(Icon::AccessoriesCalculator), QString(), q);
     m_calcButton->setFocusProxy(m_edit);
     editLayout->addWidget(m_calcButton);
 

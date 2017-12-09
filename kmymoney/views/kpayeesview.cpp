@@ -149,21 +149,21 @@ void KPayeesView::init()
   m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
   KGuiItem newButtonItem(QString(),
-                         QIcon::fromTheme(g_Icons[Icon::ListAddUser]),
+                         Icons::get(Icon::ListAddUser),
                          i18n("Creates a new payee"),
                          i18n("Use this to create a new payee."));
   KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(),
-                            QIcon::fromTheme(g_Icons[Icon::UserProperties]),
+                            Icons::get(Icon::UserProperties),
                             i18n("Rename the current selected payee"),
                             i18n("Use this to start renaming the selected payee."));
   KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(),
-                            QIcon::fromTheme(g_Icons[Icon::ListRemoveUser]),
+                            Icons::get(Icon::ListRemoveUser),
                             i18n("Delete selected payee(s)"),
                             i18n("Use this to delete the selected payee. You can also select "
                                  "multiple payees to be deleted."));
@@ -171,26 +171,26 @@ void KPayeesView::init()
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem mergeButtonItem(QString(),
-                           QIcon::fromTheme(g_Icons[Icon::Merge]),
+                           Icons::get(Icon::Merge),
                            i18n("Merge multiple selected payees"),
                            i18n("Use this to merge multiple selected payees."));
   KGuiItem::assign(m_mergeButton, mergeButtonItem);
   m_mergeButton->setToolTip(mergeButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update payee", "Update"),
-                            QIcon::fromTheme(g_Icons[Icon::DialogOK]),
+                            Icons::get(Icon::DialogOK),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);
 
   KGuiItem syncButtonItem(i18nc("Sync payee", "Sync"),
-                            QIcon::fromTheme(g_Icons[Icon::Refresh]),
+                            Icons::get(Icon::Refresh),
                             i18n("Fetches the payee's data from your addressbook."),
                             i18n("Use this to fetch payee's data."));
   KGuiItem::assign(m_syncAddressbook, syncButtonItem);
 
   KGuiItem sendMailButtonItem(i18nc("Send mail", "Send"),
-                            QIcon::fromTheme(g_Icons[Icon::MailMessage]),
+                            Icons::get(Icon::MailMessage),
                             i18n("Creates new e-mail to your payee."),
                             i18n("Use this to create new e-mail to your payee."));
   KGuiItem::assign(m_sendMail, sendMailButtonItem);

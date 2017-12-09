@@ -173,7 +173,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     m_scheduleTree->setSortingEnabled(false);
 
     KScheduleTreeItem *itemBills = new KScheduleTreeItem(m_scheduleTree);
-    itemBills->setIcon(0, QIcon::fromTheme(g_Icons[Icon::ViewExpense]));
+    itemBills->setIcon(0, Icons::get(Icon::ViewExpense));
     itemBills->setText(0, i18n("Bills"));
     itemBills->setData(0, KScheduleTreeItem::OrderRole, QVariant("0"));
     itemBills->setFirstColumnSpanned(true);
@@ -182,21 +182,21 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     bold.setBold(true);
     itemBills->setFont(0, bold);
     KScheduleTreeItem *itemDeposits = new KScheduleTreeItem(m_scheduleTree);
-    itemDeposits->setIcon(0, QIcon::fromTheme(g_Icons[Icon::ViewIncome]));
+    itemDeposits->setIcon(0, Icons::get(Icon::ViewIncome));
     itemDeposits->setText(0, i18n("Deposits"));
     itemDeposits->setData(0, KScheduleTreeItem::OrderRole, QVariant("1"));
     itemDeposits->setFirstColumnSpanned(true);
     itemDeposits->setFlags(Qt::ItemIsEnabled);
     itemDeposits->setFont(0, bold);
     KScheduleTreeItem *itemLoans = new KScheduleTreeItem(m_scheduleTree);
-    itemLoans->setIcon(0, QIcon::fromTheme(g_Icons[Icon::ViewLoan]));
+    itemLoans->setIcon(0, Icons::get(Icon::ViewLoan));
     itemLoans->setText(0, i18n("Loans"));
     itemLoans->setData(0, KScheduleTreeItem::OrderRole, QVariant("2"));
     itemLoans->setFirstColumnSpanned(true);
     itemLoans->setFlags(Qt::ItemIsEnabled);
     itemLoans->setFont(0, bold);
     KScheduleTreeItem *itemTransfers = new KScheduleTreeItem(m_scheduleTree);
-    itemTransfers->setIcon(0, QIcon::fromTheme(g_Icons[Icon::ViewFinancialTransfer]));
+    itemTransfers->setIcon(0, Icons::get(Icon::ViewFinancialTransfer));
     itemTransfers->setText(0, i18n("Transfers"));
     itemTransfers->setData(0, KScheduleTreeItem::OrderRole, QVariant("3"));
     itemTransfers->setFirstColumnSpanned(true);
@@ -299,17 +299,17 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
   item->setData(0, KScheduleTreeItem::OrderRole, schedule.name());
   if (!schedule.isFinished()) {
     if (schedule.isOverdue()) {
-      item->setIcon(0, QIcon::fromTheme(g_Icons[Icon::ViewUpcominEvents]));
+      item->setIcon(0, Icons::get(Icon::ViewUpcominEvents));
       QBrush brush = item->foreground(0);
       brush.setColor(Qt::red);
       for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {
         item->setForeground(i, brush);
       }
     } else {
-      item->setIcon(0, QIcon::fromTheme(g_Icons[Icon::ViewCalendarDay]));
+      item->setIcon(0, Icons::get(Icon::ViewCalendarDay));
     }
   } else {
-    item->setIcon(0, QIcon::fromTheme(g_Icons[Icon::DialogClose]));
+    item->setIcon(0, Icons::get(Icon::DialogClose));
     QBrush brush = item->foreground(0);
     brush.setColor(Qt::darkGreen);
     for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {

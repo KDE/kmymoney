@@ -94,20 +94,20 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   d->ui->m_kButtonAbort->hide();
 
   KGuiItem skipButtonItem(i18n("&Skip"),
-                          QIcon::fromTheme(g_Icons[Icon::MediaSkipForward]),
+                          Icons::get(Icon::MediaSkipForward),
                           i18n("Skip this transaction"),
                           i18n("Use this to skip importing this transaction and proceed with the next one."));
   KGuiItem::assign(d->ui->m_qbuttonCancel, skipButtonItem);
 
   KGuiItem createButtenItem(i18n("&Create..."),
-                            QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
+                            Icons::get(Icon::DocumentNew),
                             i18n("Create a new account/category"),
                             i18n("Use this to add a new account/category to the file"));
   KGuiItem::assign(d->ui->m_createButton, createButtenItem);
   KGuiItem::assign(d->ui->m_qbuttonOk, KStandardGuiItem::ok());
 
   KGuiItem abortButtenItem(i18n("&Abort"),
-                           QIcon::fromTheme(g_Icons[Icon::DialogCancel]),
+                           Icons::get(Icon::DialogCancel),
                            i18n("Abort the import operation and dismiss all changes"),
                            i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
   KGuiItem::assign(d->ui->m_kButtonAbort, abortButtenItem);

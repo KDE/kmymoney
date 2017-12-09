@@ -57,7 +57,7 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
 
   // load button icons
   KGuiItem createAssetButtonItem(i18n("&Create..."),
-                                 QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
+                                 Icons::get(Icon::DocumentNew),
                                  i18n("Create a new asset account"),
                                  i18n("Use this to create a new account to which the initial payment should be made"));
   KGuiItem::assign(ui->m_createNewAssetButton, createAssetButtonItem);

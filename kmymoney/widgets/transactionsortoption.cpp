@@ -60,10 +60,10 @@ TransactionSortOption::TransactionSortOption(QWidget *parent) :
 {
   ui->setupUi(this);
 
-  ui->m_addButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowRight]));
-  ui->m_removeButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowLeft]));
-  ui->m_upButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowUp]));
-  ui->m_downButton->setIcon(QIcon::fromTheme(g_Icons[Icon::ArrowDown]));
+  ui->m_addButton->setIcon(Icons::get(Icon::ArrowRight));
+  ui->m_removeButton->setIcon(Icons::get(Icon::ArrowLeft));
+  ui->m_upButton->setIcon(Icons::get(Icon::ArrowUp));
+  ui->m_downButton->setIcon(Icons::get(Icon::ArrowDown));
 
   // don't allow sorting of the selected entries
   ui->m_selectedList->setSortingEnabled(false);
@@ -184,9 +184,9 @@ void TransactionSortOption::toggleDirection(QListWidgetItem* item)
 void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 {
   if (item->data(Qt::UserRole).toInt() > 0) {
-    item->setIcon(QIcon::fromTheme(g_Icons[Icon::SortAscending]));
+    item->setIcon(Icons::get(Icon::SortAscending));
   } else {
-    item->setIcon(QIcon::fromTheme(g_Icons[Icon::SortDescending]));
+    item->setIcon(Icons::get(Icon::SortDescending));
   }
 }
 

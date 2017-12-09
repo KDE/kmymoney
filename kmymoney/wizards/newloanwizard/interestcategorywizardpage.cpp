@@ -57,7 +57,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
 
   // load button icons
   KGuiItem createCategoryButtonItem(i18n("&Create..."),
-                                    QIcon::fromTheme(g_Icons[Icon::DocumentNew]),
+                                    Icons::get(Icon::DocumentNew),
                                     i18n("Create a new category"),
                                     i18n("Use this to open the new account editor"));
   KGuiItem::assign(ui->m_createCategoryButton, createCategoryButtonItem);
