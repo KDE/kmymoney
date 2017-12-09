@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QList>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -276,6 +277,44 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
   } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(0, i18n("Unable to create all objects for the investment"), QString("%1 caugt in %2:%3").arg(e.what()).arg(e.file()).arg(e.line()));
   }
+}
+
+void KNewInvestmentWizard::newInvestment(const MyMoneyAccount& parent)
+{
+  QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;
+  if (dlg->exec() == QDialog::Accepted)
+    dlg->createObjects(parent.id());
+  delete dlg;
+}
+
+void KNewInvestmentWizard::newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  QString dontShowAgain = "CreateNewInvestments";
+  if (KMessageBox::questionYesNo(nullptr,
+                                 i18n("<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</b>. "
+                                                        "Do you want to create it?</qt>", account.name(), parent.name()), i18n("Create security"),
+                                 KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain) == KMessageBox::Yes) {
+    QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;
+    dlg->setName(account.name());
+    if (dlg->exec() == QDialog::Accepted) {
+      dlg->createObjects(parent.id());
+      account = dlg->account();
+    }
+    delete dlg;
+  } else {
+    // in case the user said no but turned on the don't show again selection, we will enable
+    // the message no matter what. Otherwise, the user is not able to use this feature
+    // in the future anymore.
+    KMessageBox::enableMessage(dontShowAgain);
+  }
+}
+
+void KNewInvestmentWizard::editInvestment(const MyMoneyAccount& parent)
+{
+  QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(parent);
+  if (dlg->exec() == QDialog::Accepted)
+    dlg->createObjects(parent.id());
+  delete dlg;
 }
 
 MyMoneyAccount KNewInvestmentWizard::account() const

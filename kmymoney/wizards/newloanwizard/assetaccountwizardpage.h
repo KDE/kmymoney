@@ -49,6 +49,9 @@ public:
   bool isComplete() const;
 
   Ui::AssetAccountWizardPage *ui;
+
+public Q_SLOTS:
+  void slotAccountNew();
 };
 
 #endif

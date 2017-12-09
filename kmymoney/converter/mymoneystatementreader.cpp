@@ -485,20 +485,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   if (!m_userAbort) {
     try {
       signalProgress(0, s.m_listPrices.count(), "Importing Statement ...");
-      QList<MyMoneySecurity> slist = MyMoneyFile::instance()->securityList();
-      QList<MyMoneySecurity>::const_iterator it_s;
-      for (it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
-        d->securitiesBySymbol[(*it_s).tradingSymbol()] = *it_s;
-        d->securitiesByName[(*it_s).name()] = *it_s;
-      }
-
-      int progress = 0;
-      QList<MyMoneyStatement::Price>::const_iterator it_p = s.m_listPrices.begin();
-      while (it_p != s.m_listPrices.end()) {
-        processPriceEntry(*it_p);
-        signalProgress(++progress, 0);
-        ++it_p;
-      }
+      KMyMoneyUtils::processPriceList(s);
     } catch (const MyMoneyException &e) {
       if (e.what() == "USERABORT")
         m_userAbort = true;
@@ -558,31 +545,6 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   qDebug("Importing statement for '%s' done", qPrintable(d->m_account.name()));
 
   return rc;
-}
-
-void MyMoneyStatementReader::processPriceEntry(const MyMoneyStatement::Price& p_in)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QString currency = file->baseCurrency().id();
-  QString security;
-
-  if (!p_in.m_strCurrency.isEmpty()) {
-    security = p_in.m_strSecurity;
-    currency = p_in.m_strCurrency;
-  } else if (d->securitiesBySymbol.contains(p_in.m_strSecurity)) {
-    security = d->securitiesBySymbol[p_in.m_strSecurity].id();
-    currency = file->security(file->security(security).tradingCurrency()).id();
-  } else if (d->securitiesByName.contains(p_in.m_strSecurity)) {
-    security = d->securitiesByName[p_in.m_strSecurity].id();
-    currency = file->security(file->security(security).tradingCurrency()).id();
-  } else
-    return;
-
-  MyMoneyPrice price(security,
-                     currency,
-                     p_in.m_date,
-                     p_in.m_amount, p_in.m_sourceName.isEmpty() ? i18n("Prices Importer") : p_in.m_sourceName);
-  MyMoneyFile::instance()->addPrice(price);
 }
 
 void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Security& sec_in)

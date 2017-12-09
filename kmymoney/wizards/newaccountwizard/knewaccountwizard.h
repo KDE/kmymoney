@@ -143,10 +143,14 @@ namespace NewAccountWizard
    */
     MyMoneyPrice conversionRate() const;
 
+    static void newAccount(MyMoneyAccount& account);
+
   Q_SIGNALS:
-    void createInstitution(MyMoneyInstitution& institution);
     void createAccount(MyMoneyAccount& account);
-    void createCategory(MyMoneyAccount&, const MyMoneyAccount&);
+
+  public Q_SLOTS:
+    void slotPayeeNew(const QString& txt, QString& id);
+    void slotAccountNew(MyMoneyAccount& account);
 
   protected:
     /**

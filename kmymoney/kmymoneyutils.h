@@ -54,6 +54,8 @@ class MyMoneySecurity;
 class MyMoneySchedule;
 class MyMoneySplit;
 class MyMoneyTransaction;
+class MyMoneyStatement;
+class MyMoneyInstitution;
 
 namespace eMyMoney { namespace Schedule { enum class Occurrence;
                                           enum class PaymentType;
@@ -362,17 +364,30 @@ public:
 
   static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
 
+  static void processPriceList(const MyMoneyStatement& st);
+
   /**
     * This method deletes security and associated price list but asks beforehand.
     */
   static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = nullptr);
-
 
   /**
    * Check whether the url links to an existing file or not
    * @returns whether the file exists or not
    */
   static bool fileExists(const QUrl &url);
+
+  static bool newPayee(const QString& newnameBase, QString& id);
+
+  static void newTag(const QString& newnameBase, QString& id);
+
+  /**
+    * Creates a new institution entry in the MyMoneyFile engine
+    *
+    * @param institution MyMoneyInstitution object containing the data of
+    *                    the institution to be created.
+    */
+  static void newInstitution(MyMoneyInstitution& institution);
 };
 
 #endif

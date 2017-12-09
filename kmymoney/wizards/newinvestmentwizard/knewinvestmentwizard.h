@@ -75,6 +75,14 @@ public:
     */
   void createObjects(const QString& parentId);
 
+  /**
+    * Create a new investment in a given @p parent investment account
+    */
+  static void newInvestment(const MyMoneyAccount& parent);
+  static void newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+  static void editInvestment(const MyMoneyAccount& parent);
+
   MyMoneyAccount account() const;
 
 protected Q_SLOTS:

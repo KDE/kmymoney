@@ -45,6 +45,7 @@
 #include "kloanpayoutpage.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
+#include "knewaccountdlg.h"
 #include "mymoneymoney.h"
 #include "wizardpage.h"
 #include "mymoneyenums.h"
@@ -82,7 +83,7 @@ namespace NewAccountWizard
     else
       parent = MyMoneyFile::instance()->income();
 
-    emit d->m_wizard->createCategory(acc, parent);
+    KNewAccountDlg::newCategory(acc, parent);
 
     // return id
     id = acc.id();

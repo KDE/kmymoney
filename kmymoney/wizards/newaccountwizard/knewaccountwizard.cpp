@@ -24,12 +24,14 @@
 
 #include <QCheckBox>
 #include <QList>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
 #include <KLineEdit>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -57,6 +59,7 @@
 
 #include "kmymoneycurrencyselector.h"
 #include "kcurrencycalculator.h"
+#include "kmymoneyutils.h"
 
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
@@ -64,6 +67,7 @@
 #include "mymoneyprice.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 using namespace NewAccountWizard;
@@ -112,6 +116,7 @@ namespace NewAccountWizard
     d->m_accountSummaryPage = new AccountSummaryPage(this);
 
     d->setFirstPage(d->m_institutionPage);
+    connect(this, &Wizard::createAccount, this, &Wizard::slotAccountNew);
   }
 
   Wizard::~Wizard()
@@ -369,6 +374,78 @@ namespace NewAccountWizard
                         d->m_accountTypePage->d_func()->ui->m_openingDate->date(),
                         d->m_accountTypePage->d_func()->ui->m_conversionRate->value(),
                         i18n("User"));
+  }
+
+  void Wizard::newAccount(MyMoneyAccount& account)
+  {
+
+    QPointer<NewAccountWizard::Wizard> wizard = new NewAccountWizard::Wizard();
+
+    wizard->setAccount(account);
+
+    if (wizard->exec() == QDialog::Accepted) {
+      auto acc = wizard->account();
+      if (!(acc == MyMoneyAccount())) {
+        MyMoneyFileTransaction ft;
+        auto file = MyMoneyFile::instance();
+        try {
+          // create the account
+          MyMoneyAccount parent = wizard->parentAccount();
+          file->addAccount(acc, parent);
+
+          // tell the wizard about the account id which it
+          // needs to create a possible schedule and transactions
+          wizard->setAccount(acc);
+
+          // store a possible conversion rate for the currency
+          if (acc.currencyId() != file->baseCurrency().id()) {
+            file->addPrice(wizard->conversionRate());
+          }
+
+          // create the opening balance transaction if any
+          file->createOpeningBalanceTransaction(acc, wizard->openingBalance());
+          // create the payout transaction for loans if any
+          MyMoneyTransaction payoutTransaction = wizard->payoutTransaction();
+          if (payoutTransaction.splits().count() > 0) {
+            file->addTransaction(payoutTransaction);
+          }
+
+          // create a brokerage account if selected
+          MyMoneyAccount brokerageAccount = wizard->brokerageAccount();
+          if (!(brokerageAccount == MyMoneyAccount())) {
+            file->addAccount(brokerageAccount, parent);
+          }
+
+          // create a possible schedule
+          MyMoneySchedule sch = wizard->schedule();
+          if (!(sch == MyMoneySchedule())) {
+            MyMoneyFile::instance()->addSchedule(sch);
+            if (acc.isLoan()) {
+              MyMoneyAccountLoan accLoan = MyMoneyFile::instance()->account(acc.id());
+              accLoan.setSchedule(sch.id());
+              acc = accLoan;
+              MyMoneyFile::instance()->modifyAccount(acc);
+            }
+          }
+          ft.commit();
+          account = acc;
+        } catch (const MyMoneyException &e) {
+          KMessageBox::error(nullptr, i18n("Unable to create account: %1", e.what()));
+        }
+      }
+    }
+    delete wizard;
+
+  }
+
+  void Wizard::slotPayeeNew(const QString& txt, QString& id)
+  {
+    KMyMoneyUtils::newPayee(txt, id);
+  }
+
+  void Wizard::slotAccountNew(MyMoneyAccount& account)
+  {
+    Wizard::newAccount(account);
   }
 
   bool Wizard::moneyBorrowed() const

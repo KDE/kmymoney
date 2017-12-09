@@ -625,13 +625,6 @@ public:
   void showContextMenu(const QString& containerName);
 
   /**
-   * This method opens the category editor with the data found in @a account. The
-   * parent account is preset to @a parent but can be modified. If the user
-   * acknowledges, the category is created.
-   */
-  void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
-
-  /**
    * This method returns the account for a given @a key - @a value pair.
    * If the account is not found in the list of accounts, MyMoneyAccount()
    * is returned. The @a key - @a value pair can be in the account's kvp
@@ -812,14 +805,6 @@ protected:
     * and the schedule updated.
     */
   eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& s, bool autoEnter = false, bool extendedKeys = false);
-
-  /**
-    * Creates a new institution entry in the MyMoneyFile engine
-    *
-    * @param institution MyMoneyInstitution object containing the data of
-    *                    the institution to be created.
-    */
-  void createInstitution(MyMoneyInstitution& institution);
 
   /**
    * This method unmatches the currently selected transactions
@@ -1133,11 +1118,6 @@ public Q_SLOTS:
   void slotInvestmentNew();
 
   /**
-    * Create a new investment in a given @p parent investment account
-    */
-  void slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
-
-  /**
     * This slot opens the investment editor to edit the currently
     * selected investment if possible
     */
@@ -1151,7 +1131,6 @@ public Q_SLOTS:
   /**
     */
   void slotPayeeNew(const QString& newnameBase, QString& id);
-  bool createPayeeNew(const QString& newnameBase, QString& id);
   void slotPayeeNew();
 
   /**

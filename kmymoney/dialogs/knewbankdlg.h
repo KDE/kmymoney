@@ -43,6 +43,8 @@ public:
   ~KNewBankDlg();
   const MyMoneyInstitution& institution();
 
+  static void newInstitution(MyMoneyInstitution& institution);
+
 protected Q_SLOTS:
   void okClicked();
   void institutionNameChanged(const QString &);

@@ -59,7 +59,10 @@
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyschedule.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
 #include "mymoneyprice.h"
+#include "mymoneystatement.h"
 #include "mymoneyforecast.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
@@ -598,6 +601,41 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   }
 }
 
+void KMyMoneyUtils::processPriceList(const MyMoneyStatement &st)
+{
+  auto file = MyMoneyFile::instance();
+  QHash<QString, MyMoneySecurity> secBySymbol;
+  QHash<QString, MyMoneySecurity> secByName;
+
+  for (const auto& sec : file->securityList()) {
+    secBySymbol[sec.tradingSymbol()] = sec;
+    secByName[sec.name()] = sec;
+  }
+
+  for (const auto& stPrice : st.m_listPrices) {
+    auto currency = file->baseCurrency().id();
+    QString security;
+
+    if (!stPrice.m_strCurrency.isEmpty()) {
+      security = stPrice.m_strSecurity;
+      currency = stPrice.m_strCurrency;
+    } else if (secBySymbol.contains(stPrice.m_strSecurity)) {
+      security = secBySymbol[stPrice.m_strSecurity].id();
+      currency = file->security(file->security(security).tradingCurrency()).id();
+    } else if (secByName.contains(stPrice.m_strSecurity)) {
+      security = secByName[stPrice.m_strSecurity].id();
+      currency = file->security(file->security(security).tradingCurrency()).id();
+    } else
+      return;
+
+    MyMoneyPrice price(security,
+                       currency,
+                       stPrice.m_date,
+                       stPrice.m_amount, stPrice.m_sourceName.isEmpty() ? i18n("Prices Importer") : stPrice.m_sourceName);
+    file->addPrice(price);
+  }
+}
+
 void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* parent)
 {
   QString msg, msg2;
@@ -662,4 +700,113 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
         }
     }
     return fileExists;
+}
+
+bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
+{
+  bool doit = true;
+
+  if (newnameBase != i18n("New Payee")) {
+    // Ask the user if that is what he intended to do?
+    const auto msg = i18n("<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>", newnameBase);
+
+    if (KMessageBox::questionYesNo(nullptr, msg, i18n("New payee/receiver"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewPayee") == KMessageBox::No) {
+      doit = false;
+      // we should not keep the 'no' setting because that can confuse people like
+      // I have seen in some usability tests. So we just delete it right away.
+      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+      if (kconfig) {
+        kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewPayee"));
+      }
+    }
+  }
+
+  if (doit) {
+    MyMoneyFileTransaction ft;
+    try {
+      QString newname(newnameBase);
+      // adjust name until a unique name has been created
+      int count = 0;
+      for (;;) {
+        try {
+          MyMoneyFile::instance()->payeeByName(newname);
+          newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
+        } catch (const MyMoneyException &) {
+          break;
+        }
+      }
+
+      MyMoneyPayee p;
+      p.setName(newname);
+      MyMoneyFile::instance()->addPayee(p);
+      id = p.id();
+      ft.commit();
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee"),
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      doit = false;
+    }
+  }
+  return doit;
+}
+
+void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
+{
+  bool doit = true;
+
+  if (newnameBase != i18n("New Tag")) {
+    // Ask the user if that is what he intended to do?
+    const auto msg = i18n("<qt>Do you want to add <b>%1</b> as tag?</qt>", newnameBase);
+
+    if (KMessageBox::questionYesNo(nullptr, msg, i18n("New tag"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewTag") == KMessageBox::No) {
+      doit = false;
+      // we should not keep the 'no' setting because that can confuse people like
+      // I have seen in some usability tests. So we just delete it right away.
+      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+      if (kconfig) {
+        kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewTag"));
+      }
+    }
+  }
+
+  if (doit) {
+    MyMoneyFileTransaction ft;
+    try {
+      QString newname(newnameBase);
+      // adjust name until a unique name has been created
+      int count = 0;
+      for (;;) {
+        try {
+          MyMoneyFile::instance()->tagByName(newname);
+          newname = QString::fromLatin1("%1 [%2]").arg(newnameBase, ++count);
+        } catch (const MyMoneyException &) {
+          break;
+        }
+      }
+
+      MyMoneyTag ta;
+      ta.setName(newname);
+      MyMoneyFile::instance()->addTag(ta);
+      id = ta.id();
+      ft.commit();
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to add tag"),
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    }
+  }
+}
+
+void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)
+{
+  auto file = MyMoneyFile::instance();
+
+  MyMoneyFileTransaction ft;
+
+  try {
+    file->addInstitution(institution);
+    ft.commit();
+
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(nullptr, i18n("Cannot add institution: %1", e.what()));
+  }
 }

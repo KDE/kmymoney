@@ -72,7 +72,7 @@ namespace NewAccountWizard
     connect(d->ui->m_payee, &KMyMoneyMVCCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_date, &KMyMoneyDateInput::dateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
 
-    connect(d->ui->m_payee, &KMyMoneyMVCCombo::createItem, wizard, &KMyMoneyWizard::createPayee);
+    connect(d->ui->m_payee, &KMyMoneyMVCCombo::createItem, wizard, &Wizard::slotPayeeNew);
 
     d->ui->m_reminderCheckBox->setChecked(true);
     connect(d->ui->m_reminderCheckBox, &QAbstractButton::toggled, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);

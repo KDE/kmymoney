@@ -2550,36 +2550,15 @@ void KMyMoneyApp::slotCloseSearchDialog()
   d->m_searchDlg = 0;
 }
 
-void KMyMoneyApp::createInstitution(MyMoneyInstitution& institution)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  MyMoneyFileTransaction ft;
-
-  try {
-    file->addInstitution(institution);
-    ft.commit();
-
-  } catch (const MyMoneyException &e) {
-    KMessageBox::information(this, i18n("Cannot add institution: %1", e.what()));
-  }
-}
-
 void KMyMoneyApp::slotInstitutionNew()
 {
   MyMoneyInstitution institution;
-  slotInstitutionNew(institution);
+  KNewBankDlg::newInstitution(institution);
 }
 
 void KMyMoneyApp::slotInstitutionNew(MyMoneyInstitution& institution)
 {
-  institution.clearId();
-  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
-  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-    institution = dlg->institution();
-    createInstitution(institution);
-  }
-  delete dlg;
+  KNewBankDlg::newInstitution(institution);
 }
 
 void KMyMoneyApp::slotInstitutionEditEmpty()
@@ -2680,30 +2659,19 @@ void KMyMoneyApp::slotCategoryNew(const QString& name, QString& id)
   MyMoneyAccount account;
   account.setName(name);
 
-  slotCategoryNew(account, MyMoneyFile::instance()->expense());
+  KNewAccountDlg::newCategory(account, MyMoneyFile::instance()->expense());
 
   id = account.id();
 }
 
 void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
-  if (KMessageBox::questionYesNo(this,
-                                 QString("<qt>%1</qt>").arg(i18n("<p>The category <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account will default to <b>%2</b> but can be changed in the following dialog</i>.</p>", account.name(), parent.name())), i18n("Create category"),
-                                 KStandardGuiItem::yes(), KStandardGuiItem::no(), "CreateNewCategories") == KMessageBox::Yes) {
-    createCategory(account, parent);
-  } else {
-    // we should not keep the 'no' setting because that can confuse people like
-    // I have seen in some usability tests. So we just delete it right away.
-    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
-    if (kconfig) {
-      kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("CreateNewCategories"));
-    }
-  }
+  KNewAccountDlg::newCategory(account, parent);
 }
 
 void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account)
 {
-  slotCategoryNew(account, MyMoneyAccount());
+  KNewAccountDlg::newCategory(account, MyMoneyAccount());
 }
 
 void KMyMoneyApp::slotCategoryNew()
@@ -2720,145 +2688,31 @@ void KMyMoneyApp::slotCategoryNew()
     }
   }
 
-  createCategory(account, parent);
-}
-
-void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
-{
-  if (!parent.id().isEmpty()) {
-    try {
-      // make sure parent account exists
-      MyMoneyFile::instance()->account(parent.id());
-      account.setParentAccountId(parent.id());
-      account.setAccountType(parent.accountType());
-    } catch (const MyMoneyException &) {
-    }
-  }
-
-  QPointer<KNewAccountDlg> dialog =
-    new KNewAccountDlg(account, false, true, 0, i18n("Create a new Category"));
-
-  dialog->setOpeningBalanceShown(false);
-  dialog->setOpeningDateShown(false);
-
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    MyMoneyAccount parentAccount, brokerageAccount;
-    account = dialog->account();
-    parentAccount = dialog->parentAccount();
-
-    MyMoneyFile::instance()->createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
-  }
-  delete dialog;
+  KNewAccountDlg::createCategory(account, parent);
 }
 
 void KMyMoneyApp::slotAccountNew()
 {
-  MyMoneyAccount acc;
-  acc.setInstitutionId(d->m_selectedInstitution.id());
-  acc.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+  MyMoneyAccount account;
+  account.setInstitutionId(d->m_selectedInstitution.id());
+  account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
 
-  slotAccountNew(acc);
+  NewAccountWizard::Wizard::newAccount(account);
 }
 
 void KMyMoneyApp::slotAccountNew(MyMoneyAccount& account)
 {
-  NewAccountWizard::Wizard* wizard = new NewAccountWizard::Wizard();
-  connect(wizard, SIGNAL(createInstitution(MyMoneyInstitution&)), this, SLOT(slotInstitutionNew(MyMoneyInstitution&)));
-  connect(wizard, SIGNAL(createAccount(MyMoneyAccount&)), this, SLOT(slotAccountNew(MyMoneyAccount&)));
-  connect(wizard, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
-  connect(wizard, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
-
-  wizard->setAccount(account);
-
-  if (wizard->exec() == QDialog::Accepted) {
-    auto acc = wizard->account();
-    if (!(acc == MyMoneyAccount())) {
-      MyMoneyFileTransaction ft;
-      MyMoneyFile* file = MyMoneyFile::instance();
-      try {
-        // create the account
-        MyMoneyAccount parent = wizard->parentAccount();
-        file->addAccount(acc, parent);
-
-        // tell the wizard about the account id which it
-        // needs to create a possible schedule and transactions
-        wizard->setAccount(acc);
-
-        // store a possible conversion rate for the currency
-        if (acc.currencyId() != file->baseCurrency().id()) {
-          file->addPrice(wizard->conversionRate());
-        }
-
-        // create the opening balance transaction if any
-        file->createOpeningBalanceTransaction(acc, wizard->openingBalance());
-        // create the payout transaction for loans if any
-        MyMoneyTransaction payoutTransaction = wizard->payoutTransaction();
-        if (payoutTransaction.splits().count() > 0) {
-          file->addTransaction(payoutTransaction);
-        }
-
-        // create a brokerage account if selected
-        MyMoneyAccount brokerageAccount = wizard->brokerageAccount();
-        if (!(brokerageAccount == MyMoneyAccount())) {
-          file->addAccount(brokerageAccount, parent);
-        }
-
-        // create a possible schedule
-        MyMoneySchedule sch = wizard->schedule();
-        if (!(sch == MyMoneySchedule())) {
-          MyMoneyFile::instance()->addSchedule(sch);
-          if (acc.isLoan()) {
-            MyMoneyAccountLoan accLoan = MyMoneyFile::instance()->account(acc.id());
-            accLoan.setSchedule(sch.id());
-            acc = accLoan;
-            MyMoneyFile::instance()->modifyAccount(acc);
-          }
-        }
-        ft.commit();
-        account = acc;
-      } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Unable to create account: %1", e.what()));
-      }
-    }
-  }
-  delete wizard;
-}
-
-void KMyMoneyApp::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
-{
-  QString dontShowAgain = "CreateNewInvestments";
-  if (KMessageBox::questionYesNo(this,
-                                 QString("<qt>") + i18n("The security <b>%1</b> currently does not exist as sub-account of <b>%2</b>. "
-                                                        "Do you want to create it?", account.name(), parent.name()) + QString("</qt>"), i18n("Create security"),
-                                 KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain) == KMessageBox::Yes) {
-    KNewInvestmentWizard dlg;
-    dlg.setName(account.name());
-    if (dlg.exec() == QDialog::Accepted) {
-      dlg.createObjects(parent.id());
-      account = dlg.account();
-    }
-  } else {
-    // in case the user said no but turned on the don't show again selection, we will enable
-    // the message no matter what. Otherwise, the user is not able to use this feature
-    // in the future anymore.
-    KMessageBox::enableMessage(dontShowAgain);
-  }
+  NewAccountWizard::Wizard::newAccount(account);
 }
 
 void KMyMoneyApp::slotInvestmentNew()
 {
-  QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(this);
-  if (dlg->exec() == QDialog::Accepted)
-    dlg->createObjects(d->m_selectedAccount.id());
-  delete dlg;
+  KNewInvestmentWizard::newInvestment(d->m_selectedAccount);
 }
 
 void KMyMoneyApp::slotInvestmentEdit()
 {
-  QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(d->m_selectedInvestment);
-  if (dlg->exec() == QDialog::Accepted)
-    dlg->createObjects(d->m_selectedAccount.id());
-  delete dlg;
+  KNewInvestmentWizard::editInvestment(d->m_selectedAccount);
 }
 
 void KMyMoneyApp::slotInvestmentDelete()
@@ -4246,61 +4100,13 @@ eDialogs::ScheduleResultCode KMyMoneyApp::enterSchedule(MyMoneySchedule& schedul
 
 void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
 {
-  createPayeeNew(newnameBase, id);
-}
-
-bool KMyMoneyApp::createPayeeNew(const QString& newnameBase, QString& id)
-{
-  bool doit = true;
-
-  if (newnameBase != i18n("New Payee")) {
-    // Ask the user if that is what he intended to do?
-    QString msg = QLatin1String("<qt>") + i18n("Do you want to add <b>%1</b> as payer/receiver?", newnameBase) + QLatin1String("</qt>");
-
-    if (KMessageBox::questionYesNo(this, msg, i18n("New payee/receiver"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewPayee") == KMessageBox::No) {
-      doit = false;
-      // we should not keep the 'no' setting because that can confuse people like
-      // I have seen in some usability tests. So we just delete it right away.
-      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
-      if (kconfig) {
-        kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewPayee"));
-      }
-    }
-  }
-
-  if (doit) {
-    MyMoneyFileTransaction ft;
-    try {
-      QString newname(newnameBase);
-      // adjust name until a unique name has been created
-      int count = 0;
-      for (;;) {
-        try {
-          MyMoneyFile::instance()->payeeByName(newname);
-          newname = QString("%1 [%2]").arg(newnameBase).arg(++count);
-        } catch (const MyMoneyException &) {
-          break;
-        }
-      }
-
-      MyMoneyPayee p;
-      p.setName(newname);
-      MyMoneyFile::instance()->addPayee(p);
-      id = p.id();
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to add payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
-      doit = false;
-    }
-  }
-  return doit;
+  KMyMoneyUtils::newPayee(newnameBase, id);
 }
 
 void KMyMoneyApp::slotPayeeNew()
 {
   QString id;
-  slotPayeeNew(i18n("New Payee"), id);
+  KMyMoneyUtils::newPayee(i18n("New Payee"), id);
 
   // the callbacks should have made sure, that the payees view has been
   // updated already. So we search for the id in the list of items
@@ -4449,7 +4255,7 @@ bool KMyMoneyApp::payeeReassign(int type)
         if (type == KPayeeReassignDlg::TypeMerge) {
           // it's ok to use payee_id for both arguments since the first is const,
           // so it's garantee not to change its content
-          if (!createPayeeNew(payee_id, payee_id))
+          if (!KMyMoneyUtils::newPayee(payee_id, payee_id))
             return false; // the user aborted the dialog, so let's abort as well
           newPayee = file->payee(payee_id);
         } else {
@@ -4571,54 +4377,13 @@ bool KMyMoneyApp::payeeReassign(int type)
 
 void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
 {
-  bool doit = true;
-
-  if (newnameBase != i18n("New Tag")) {
-    // Ask the user if that is what he intended to do?
-    QString msg = QString("<qt>") + i18n("Do you want to add <b>%1</b> as tag?", newnameBase) + QString("</qt>");
-
-    if (KMessageBox::questionYesNo(this, msg, i18n("New tag"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewTag") == KMessageBox::No) {
-      doit = false;
-      // we should not keep the 'no' setting because that can confuse people like
-      // I have seen in some usability tests. So we just delete it right away.
-      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
-      if (kconfig) {
-        kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewTag"));
-      }
-    }
-  }
-
-  if (doit) {
-    MyMoneyFileTransaction ft;
-    try {
-      QString newname(newnameBase);
-      // adjust name until a unique name has been created
-      int count = 0;
-      for (;;) {
-        try {
-          MyMoneyFile::instance()->tagByName(newname);
-          newname = QString("%1 [%2]").arg(newnameBase).arg(++count);
-        } catch (const MyMoneyException &) {
-          break;
-        }
-      }
-
-      MyMoneyTag ta;
-      ta.setName(newname);
-      MyMoneyFile::instance()->addTag(ta);
-      id = ta.id();
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to add tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
-    }
-  }
+  KMyMoneyUtils::newTag(newnameBase, id);
 }
 
 void KMyMoneyApp::slotTagNew()
 {
   QString id;
-  slotTagNew(i18n("New Tag"), id);
+  KMyMoneyUtils::newTag(i18n("New Tag"), id);
 
   // the callbacks should have made sure, that the tags view has been
   // updated already. So we search for the id in the list of items

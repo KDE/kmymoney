@@ -76,7 +76,7 @@ namespace NewAccountWizard
 
     slotLoadWidgets();
 
-    connect(d->ui->m_payee, &KMyMoneyMVCCombo::createItem, wizard, &KMyMoneyWizard::createPayee);
+    connect(d->ui->m_payee, &KMyMoneyMVCCombo::createItem, wizard, &Wizard::slotPayeeNew);
     connect(d->ui->m_anyPayments, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_recordings, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
 

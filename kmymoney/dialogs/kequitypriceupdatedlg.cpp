@@ -49,13 +49,14 @@
 
 #include "ui_kequitypriceupdatedlg.h"
 
-#include "kmymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "webpricequote.h"
 #include "kequitypriceupdateconfdlg.h"
+#include "kmymoneyutils.h"
+#include "mymoneyexception.h"
 #include "dialogenums.h"
 
 #define WEBID_COL       0
@@ -661,15 +662,19 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
     }
 
     if (!st.m_listPrices.isEmpty()) {
-      kmymoney->slotStatementImport(st, true);
+      MyMoneyFileTransaction ft;
+      KMyMoneyUtils::processPriceList(st);
+      ft.commit();
 
+      // latest price could be in the last or in the first row
       MyMoneyStatement::Price priceClass;
       if (st.m_listPrices.first().m_date > st.m_listPrices.last().m_date)
         priceClass = st.m_listPrices.first();
       else
         priceClass = st.m_listPrices.last();
 
-      QDate latestDate = QDate::fromString(item->text(DATE_COL),Qt::ISODate);
+      // update latest price in dialog if applicable
+      auto latestDate = QDate::fromString(item->text(DATE_COL),Qt::ISODate);
       if (latestDate <= priceClass.m_date && priceClass.m_amount.isPositive()) {
         item->setText(PRICE_COL, priceClass.m_amount.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
         item->setText(DATE_COL, priceClass.m_date.toString(Qt::ISODate));

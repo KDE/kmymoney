@@ -97,7 +97,6 @@ private:
 
   void processTransactionEntry(const MyMoneyStatement::Transaction& t_in);
   void processSecurityEntry(const MyMoneyStatement::Security& s_in);
-  void processPriceEntry(const MyMoneyStatement::Price& p_in);
 
   enum SelectCreateMode {
     Create = 0,

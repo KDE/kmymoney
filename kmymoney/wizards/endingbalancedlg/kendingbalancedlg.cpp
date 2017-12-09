@@ -56,6 +56,7 @@
 #include "kmymoneyutils.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneysettings.h"
+#include "knewaccountdlg.h"
 #include "mymoneyenums.h"
 
 class KEndingBalanceDlgPrivate
@@ -287,7 +288,7 @@ void KEndingBalanceDlg::createCategory(const QString& txt, QString& id, const My
   MyMoneyAccount acc;
   acc.setName(txt);
 
-  emit createCategory(acc, parent);
+  KNewAccountDlg::createCategory(acc, parent);
 
   id = acc.id();
 }

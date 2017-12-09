@@ -36,6 +36,7 @@
 #include "ui_knewbankdlg.h"
 
 #include "mymoneyinstitution.h"
+#include "kmymoneyutils.h"
 
 class KNewBankDlgPrivate
 {
@@ -120,4 +121,15 @@ const MyMoneyInstitution& KNewBankDlg::institution()
 {
   Q_D(KNewBankDlg);
   return d->m_institution;
+}
+
+void KNewBankDlg::newInstitution(MyMoneyInstitution& institution)
+{
+  institution.clearId();
+  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
+  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+    institution = dlg->institution();
+    KMyMoneyUtils::newInstitution(institution);
+  }
+  delete dlg;
 }

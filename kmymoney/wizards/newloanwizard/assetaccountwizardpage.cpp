@@ -33,7 +33,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney.h"
+#include "kmymoneyglobalsettings.h"
+#include "mymoneyaccount.h"
+#include "wizards/newaccountwizard/knewaccountwizard.h"
 #include "icons/icons.h"
 
 using namespace Icons;
@@ -59,7 +61,8 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
                                  i18n("Create a new asset account"),
                                  i18n("Use this to create a new account to which the initial payment should be made"));
   KGuiItem::assign(ui->m_createNewAssetButton, createAssetButtonItem);
-  connect(ui->m_createNewAssetButton, &QAbstractButton::clicked, kmymoney, static_cast<void (KMyMoneyApp::*)()>(&KMyMoneyApp::slotAccountNew));
+
+  connect(ui->m_createNewAssetButton, &QAbstractButton::clicked, this, &AssetAccountWizardPage::slotAccountNew);
 
   ui->m_assetAccountEdit->removeButtons();
   ui->m_dontCreatePayoutCheckBox->setChecked(false);
@@ -89,4 +92,11 @@ bool AssetAccountWizardPage::isComplete() const
       return true;
   }
   return false;
+}
+
+void AssetAccountWizardPage::slotAccountNew()
+{
+  MyMoneyAccount account;
+  account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+  NewAccountWizard::Wizard::newAccount(account);
 }

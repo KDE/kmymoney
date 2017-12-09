@@ -31,6 +31,7 @@
 // Project Includes
 
 class MyMoneySchedule;
+class MyMoneyAccount;
 class MyMoneyTransaction;
 class TransactionEditor;
 
@@ -80,6 +81,11 @@ private Q_SLOTS:
   void slotShowHelp();
   void slotOccurrenceMultiplierChanged(int mult);
   void slotFilterPaymentType(int index);
+
+  void slotPayeeNew(const QString& newnameBase, QString& id);
+  void slotTagNew(const QString& newnameBase, QString& id);
+  void slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
+  void slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
   /// Overridden for internal reasons. No API changes.
   void accept() override;

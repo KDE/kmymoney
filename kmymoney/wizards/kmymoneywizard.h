@@ -177,23 +177,23 @@ public:
   virtual ~KMyMoneyWizard();
 
 Q_SIGNALS:
-  /**
-    * This signal is sent out, when a new payee needs to be created
-    * @sa KMyMoneyCombo::createItem()
-    *
-    * @param txt The name of the payee to be created
-    * @param id A connected slot should store the id of the created object in this variable
-    */
-  void createPayee(const QString& txt, QString& id);
+//  /**
+//    * This signal is sent out, when a new payee needs to be created
+//    * @sa KMyMoneyCombo::createItem()
+//    *
+//    * @param txt The name of the payee to be created
+//    * @param id A connected slot should store the id of the created object in this variable
+//    */
+//  void createPayee(const QString& txt, QString& id);
 
-  /**
-    * This signal is sent out, when a new category needs to be created
-    * @sa KMyMoneyCombo::createItem()
-    *
-    * @param txt The name of the category to be created
-    * @param id A connected slot should store the id of the created object in this variable
-    */
-  void createCategory(const QString& txt, QString& id);
+//  /**
+//    * This signal is sent out, when a new category needs to be created
+//    * @sa KMyMoneyCombo::createItem()
+//    *
+//    * @param txt The name of the category to be created
+//    * @param id A connected slot should store the id of the created object in this variable
+//    */
+//  void createCategory(const QString& txt, QString& id);
 
 protected:
   KMyMoneyWizardPrivate * const d_ptr;

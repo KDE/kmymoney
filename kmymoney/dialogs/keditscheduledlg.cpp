@@ -42,18 +42,23 @@
 
 #include "tabbar.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "register.h"
 #include "transactionform.h"
 #include "transaction.h"
+#include "selectedtransactions.h"
 #include "transactioneditor.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneymvccombo.h"
 #include "kguiutils.h"
-#include "kmymoney.h"
+#include "kmymoneyutils.h"
+#include "knewaccountdlg.h"
+#include "knewinvestmentwizard.h"
 #include "mymoneyenums.h"
 #include "widgetenums.h"
 
@@ -257,10 +262,10 @@ TransactionEditor* KEditScheduleDlg::startEdit()
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
     // connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
-    connect(editor, &TransactionEditor::createPayee, kmymoney, static_cast<void (KMyMoneyApp::*)(const QString&, QString&)>(&KMyMoneyApp::slotPayeeNew));
-    connect(editor, &TransactionEditor::createTag, kmymoney, static_cast<void (KMyMoneyApp::*)(const QString&, QString&)>(&KMyMoneyApp::slotTagNew));
-    connect(editor, &TransactionEditor::createCategory, kmymoney, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&, const MyMoneyAccount&)>(&KMyMoneyApp::slotCategoryNew));
-    connect(editor, &TransactionEditor::createSecurity, kmymoney, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&, const MyMoneyAccount&)>(&KMyMoneyApp::slotInvestmentNew));
+    connect(editor, &TransactionEditor::createPayee,    this, &KEditScheduleDlg::slotPayeeNew);
+    connect(editor, &TransactionEditor::createTag,      this, &KEditScheduleDlg::slotTagNew);
+    connect(editor, &TransactionEditor::createCategory, this, &KEditScheduleDlg::slotCategoryNew);
+    connect(editor, &TransactionEditor::createSecurity, this, &KEditScheduleDlg::slotInvestmentNew);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
 
     // create the widgets, place them in the parent and load them with data
@@ -662,3 +667,24 @@ void KEditScheduleDlg::slotFilterPaymentType(int index)
   }
 
 }
+
+void KEditScheduleDlg::slotPayeeNew(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newPayee(newnameBase, id);
+}
+
+void KEditScheduleDlg::slotTagNew(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newTag(newnameBase, id);
+}
+
+void KEditScheduleDlg::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewAccountDlg::newCategory(account, parent);
+}
+
+void KEditScheduleDlg::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewInvestmentWizard::newInvestment(account, parent);
+}
+

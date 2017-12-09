@@ -45,15 +45,20 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 #include "mymoneyschedule.h"
 #include "register.h"
 #include "transactionform.h"
 #include "transaction.h"
+#include "selectedtransactions.h"
 #include "transactioneditor.h"
 #include "kmymoneyutils.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneydateinput.h"
-#include "kmymoney.h"
+#include "knewaccountdlg.h"
+#include "knewinvestmentwizard.h"
+#include "mymoneyexception.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
@@ -249,10 +254,10 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
     // connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
-    connect(editor, &TransactionEditor::createPayee, kmymoney, static_cast<void (KMyMoneyApp::*)(const QString&, QString&)>(&KMyMoneyApp::slotPayeeNew));
-    connect(editor, &TransactionEditor::createTag, kmymoney, static_cast<void (KMyMoneyApp::*)(const QString&, QString&)>(&KMyMoneyApp::slotTagNew));
-    connect(editor, &TransactionEditor::createCategory, kmymoney, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&,const MyMoneyAccount&)>(&KMyMoneyApp::slotCategoryNew));
-    connect(editor, &TransactionEditor::createSecurity, kmymoney, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&,const MyMoneyAccount&)>(&KMyMoneyApp::slotInvestmentNew));
+    connect(editor, &TransactionEditor::createPayee,    this, &KEnterScheduleDlg::slotPayeeNew);
+    connect(editor, &TransactionEditor::createTag,      this, &KEnterScheduleDlg::slotTagNew);
+    connect(editor, &TransactionEditor::createCategory, this, &KEnterScheduleDlg::slotCategoryNew);
+    connect(editor, &TransactionEditor::createSecurity, this, &KEnterScheduleDlg::slotInvestmentNew);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
 
     // create the widgets, place them in the parent and load them with data
@@ -381,4 +386,24 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 void KEnterScheduleDlg::slotShowHelp()
 {
   KHelpClient::invokeHelp("details.schedules.entering");
+}
+
+void KEnterScheduleDlg::slotPayeeNew(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newPayee(newnameBase, id);
+}
+
+void KEnterScheduleDlg::slotTagNew(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newTag(newnameBase, id);
+}
+
+void KEnterScheduleDlg::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewAccountDlg::newCategory(account, parent);
+}
+
+void KEnterScheduleDlg::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewInvestmentWizard::newInvestment(account, parent);
 }

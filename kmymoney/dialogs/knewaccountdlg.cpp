@@ -915,3 +915,47 @@ void KNewAccountDlg::addTab(QWidget* w, const QString& name)
     d->ui->m_tab->addTab(w, name);
   }
 }
+
+void KNewAccountDlg::newCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  if (KMessageBox::questionYesNo(nullptr,
+                                 QString::fromLatin1("<qt>%1</qt>").arg(i18n("<p>The category <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account will default to <b>%2</b> but can be changed in the following dialog</i>.</p>", account.name(), parent.name())), i18n("Create category"),
+                                 KStandardGuiItem::yes(), KStandardGuiItem::no(), "CreateNewCategories") == KMessageBox::Yes) {
+    KNewAccountDlg::createCategory(account, parent);
+  } else {
+    // we should not keep the 'no' setting because that can confuse people like
+    // I have seen in some usability tests. So we just delete it right away.
+    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+    if (kconfig) {
+      kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("CreateNewCategories"));
+    }
+  }
+}
+
+void KNewAccountDlg::createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  if (!parent.id().isEmpty()) {
+    try {
+      // make sure parent account exists
+      MyMoneyFile::instance()->account(parent.id());
+      account.setParentAccountId(parent.id());
+      account.setAccountType(parent.accountType());
+    } catch (const MyMoneyException &) {
+    }
+  }
+
+  QPointer<KNewAccountDlg> dialog =
+    new KNewAccountDlg(account, false, true, 0, i18n("Create a new Category"));
+
+  dialog->setOpeningBalanceShown(false);
+  dialog->setOpeningDateShown(false);
+
+  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+    MyMoneyAccount parentAccount, brokerageAccount;
+    account = dialog->account();
+    parentAccount = dialog->parentAccount();
+
+    MyMoneyFile::instance()->createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
+  }
+  delete dialog;
+}
