@@ -24,3 +24,5 @@
 #cmakedefine ENABLE_WEBENGINE 0
 
 #cmakedefine IS_GNU 0
+
+#cmakedefine ENABLE_UNFINISHEDFEATURES 0

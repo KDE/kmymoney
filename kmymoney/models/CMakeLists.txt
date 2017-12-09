@@ -1,11 +1,4 @@
 set(libmodels_a_SOURCES
-    ledgermodel.cpp
-    ledgeritem.cpp
-    ledgerproxymodel.cpp
-    ledgerschedule.cpp
-    ledgersplit.cpp
-    ledgertransaction.cpp
-    splitmodel.cpp
     costcentermodel.cpp
     payeesmodel.cpp
     accountsmodel.cpp
@@ -20,6 +13,18 @@ set(libmodels_a_SOURCES
     equitiesmodel.cpp
     securitiesmodel.cpp
 )
+
+if(ENABLE_UNFINISHEDFEATURES)
+  list(APPEND libmodels_a_SOURCES
+    ledgermodel.cpp
+    ledgeritem.cpp
+    ledgerproxymodel.cpp
+    ledgerschedule.cpp
+    ledgersplit.cpp
+    ledgertransaction.cpp
+    splitmodel.cpp
+  )
+endif()
 
 if (USE_MODELTEST)
   list(APPEND libmodels_a_SOURCES modeltest.cpp)

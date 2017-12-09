@@ -5,7 +5,6 @@ set(libviews_a_SOURCES
   kcategoriesview.cpp
   kforecastview.cpp
   kgloballedgerview.cpp
-  ledgerview.cpp
   kwelcomepage.cpp
   khomeview.cpp
   kinstitutionsview.cpp
@@ -25,18 +24,23 @@ set(libviews_a_SOURCES
   konlinejoboutbox.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
-  simpleledgerview.cpp
-  ledgerviewpage.cpp
-  ledgerview.cpp
-  ledgerdelegate.cpp
-  newspliteditor.cpp
-  newtransactioneditor.cpp
-  newtransactionform.cpp
-  splitdialog.cpp
-  splitdelegate.cpp
-  widgethintframe.cpp
   kmymoneywebpage.cpp
 )
+
+if(ENABLE_UNFINISHEDFEATURES)
+  list(APPEND libviews_a_SOURCES
+    simpleledgerview.cpp
+    ledgerviewpage.cpp
+    ledgerview.cpp
+    ledgerdelegate.cpp
+    newspliteditor.cpp
+    newtransactioneditor.cpp
+    newtransactionform.cpp
+    splitdialog.cpp
+    splitdelegate.cpp
+    widgethintframe.cpp
+  )
+endif()
 
 set(libviews_a_UI
   kaccountsview.ui
@@ -50,15 +54,19 @@ set(libviews_a_UI
   ktagsview.ui
   konlinejoboutbox.ui
   kpayeeidentifierview.ui
-  simpleledgerview.ui
-  ledgerview.ui
-  ledgerviewpage.ui
-  simpleledgerview.ui
-  splitdialog.ui
-  newspliteditor.ui
-  newtransactioneditor.ui
-  newtransactionform.ui
 )
+
+if(ENABLE_UNFINISHEDFEATURES)
+  list(APPEND libviews_a_UI 
+    simpleledgerview.ui
+    ledgerview.ui
+    ledgerviewpage.ui
+    splitdialog.ui
+    newspliteditor.ui
+    newtransactioneditor.ui
+    newtransactionform.ui
+  )
+endif()
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)

@@ -55,6 +55,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#ifdef ENABLE_UNFINISHEDFEATURES
+#include "simpleledgerview.h"
+#endif
+
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneytitlelabel.h"
 #include <libkgpgfile/kgpgfile.h>
@@ -75,7 +79,6 @@
 #include "ktagsview.h"
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
-#include "simpleledgerview.h"
 #include "kinvestmentview.h"
 #include "kreportsview.h"
 #include "kbudgetview.h"
@@ -268,9 +271,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
   connect(m_onlineJobOutboxView, SIGNAL(showContextMenu(onlineJob)), kmymoney, SLOT(slotShowOnlineJobContextMenu()));
 
+#ifdef ENABLE_UNFINISHEDFEATURES
   SimpleLedgerView* view = new SimpleLedgerView(kmymoney, this);
   KPageWidgetItem* frame = m_model->addPage(view, i18n("New ledger"));
   frame->setIcon(QIcon::fromTheme(g_Icons[Icon::DocumentProperties]));
+#endif
 
 
   //set the model

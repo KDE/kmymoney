@@ -128,6 +128,7 @@ onlineJobModel* Models::onlineJobsModel()
   return d->m_onlineJobModel;
 }
 
+#ifdef ENABLE_UNFINISHEDFEATURES
 /**
  * This is the function to get a reference to the core @ref LedgerModel.
  * The returned object is owned by this object so don't delete it. It creates the
@@ -143,6 +144,7 @@ LedgerModel* Models::ledgerModel()
   }
   return d->m_ledgerModel;
 }
+#endif
 
 /**
  * This is the function to get a reference to the core @ref CostCenterModel.
@@ -229,7 +231,9 @@ void Models::fileOpened()
   institutionsModel()->load();
   onlineJobsModel()->load();
   costCenterModel()->load();
+  #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->load();
+  #endif
   payeesModel()->load();
   equitiesModel()->load();
   securitiesModel()->load();
@@ -244,7 +248,9 @@ void Models::fileClosed()
   accountsModel()->removeRows(0, accountsModel()->rowCount());
   institutionsModel()->removeRows(0, institutionsModel()->rowCount());
   onlineJobsModel()->unload();
+  #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->unload();
+  #endif
   costCenterModel()->unload();
   payeesModel()->unload();
   equitiesModel()->removeRows(0, equitiesModel()->rowCount());
