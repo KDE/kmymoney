@@ -52,7 +52,6 @@ class MyMoneyObject;
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySecurity;
-class MyMoneyBudget;
 class MyMoneyPayee;
 class MyMoneyPrice;
 class MyMoneyStatement;
@@ -115,8 +114,6 @@ enum class Action {
   PayeeNew, PayeeRename, PayeeDelete,
   PayeeMerge,
   TagNew, TagRename, TagDelete,
-  BudgetNew, BudgetRename, BudgetDelete,
-  BudgetCopy, BudgetChangeYear, BudgetForecast,
   CurrencyNew, CurrencyRename, CurrencyDelete,
   CurrencySetBase,
   PriceNew, PriceDelete,
@@ -346,26 +343,6 @@ protected Q_SLOTS:
     * Slot that merges two or more selected payess into a new payee
     */
   void slotPayeeMerge();
-
-  /**
-    */
-  void slotBudgetNew();
-
-  /**
-    */
-  void slotBudgetDelete();
-
-  /**
-   */
-  void slotBudgetCopy();
-
-  /**
-    */
-  void slotBudgetChangeYear();
-
-  /**
-    */
-  void slotBudgetForecast();
 
   /**
     */
@@ -1066,12 +1043,6 @@ public Q_SLOTS:
   void slotShowTagContextMenu();
 
   /**
-    * This slot opens the budget options menu at the current cursor
-    * position.
-    */
-  void slotShowBudgetContextMenu();
-
-  /**
     * This slot opens the transaction options menu at the current cursor
     * position.
     */
@@ -1189,8 +1160,6 @@ public Q_SLOTS:
   void slotSelectPayees(const QList<MyMoneyPayee>& list);
 
   void slotSelectTags(const QList<MyMoneyTag>& list);
-
-  void slotSelectBudget(const QList<MyMoneyBudget>& list);
 
   void slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions& list);
 
@@ -1332,15 +1301,6 @@ Q_SIGNALS:
     * the Select all transactions action.
     */
   void selectAllTransactions();
-
-  /**
-    * This signal is emitted when a list of budgets has been selected by
-    * the GUI. If no budget is selected or the selection is removed,
-    * @a budget is identical to an empty QList. This signal is used
-    * by plugins to get information about changes.
-    */
-  void budgetSelected(const QList<MyMoneyBudget>& budget);
-  void budgetRename();
 
   /**
     * This signal is emitted when a new account has been selected by

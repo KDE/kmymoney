@@ -20,15 +20,23 @@
 #ifndef KBUDGETVIEW_P_H
 #define KBUDGETVIEW_P_H
 
+#include "kbudgetview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QObject>
+#include <QMenu>
+#include <QDate>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KActionCollection>
+#include <KMessageBox>
+#include <KConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -36,22 +44,66 @@
 #include "ui_kbudgetview.h"
 #include "kmymoneyaccountsviewbase_p.h"
 
+#include "mymoneyfile.h"
+#include "mymoneyaccount.h"
+#include "mymoneyforecast.h"
+#include "kmymoneyedit.h"
+#include "kbudgetvalues.h"
+#include "kmymoneyutils.h"
+
 #include "budgetviewproxymodel.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney.h"
 #include "icons.h"
+#include "modelenums.h"
+#include "menuenums.h"
 
 using namespace Icons;
 
-namespace Ui {
-  class KBudgetView;
-}
+/**
+  * @author Darren Gould
+  * @author Thomas Baumgart
+  *
+  * This class represents an item in the budgets list view.
+  */
+class KBudgetListItem : public QTreeWidgetItem
+{
+public:
+  /**
+    * Constructor to be used to construct a budget entry object.
+    *
+    * @param parent pointer to the QTreeWidget object this entry should be
+    *               added to.
+    * @param budget const reference to MyMoneyBudget for which
+    *               the QTreeWidget entry is constructed
+    */
+  explicit KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget):
+    QTreeWidgetItem(parent),
+    m_budget(budget)
+  {
+    setText(0, budget.name());
+    setText(1, QString::fromLatin1("%1").arg(budget.budgetStart().year()));
+    setFlags(flags() | Qt::ItemIsEditable);
+  }
+  ~KBudgetListItem() {}
+
+  const MyMoneyBudget& budget() {
+    return m_budget;
+  }
+  void setBudget(const MyMoneyBudget& budget) {
+    m_budget = budget;
+  }
+
+private:
+  MyMoneyBudget  m_budget;
+};
+
 class KBudgetViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KBudgetView)
 
 public:
   explicit KBudgetViewPrivate(KBudgetView *qq) :
+    KMyMoneyAccountsViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KBudgetView)
   {
@@ -59,6 +111,13 @@ public:
 
   ~KBudgetViewPrivate()
   {
+    if(m_proxyModel) {
+      // remember the splitter settings for startup
+      KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+      grp.writeEntry("KBudgetViewSplitterSize", ui->m_splitter->saveState());
+      grp.sync();
+    }
+    delete ui;
   }
 
   void init()
@@ -81,10 +140,9 @@ public:
 
     q->connect(m_budgetProxyModel, &BudgetViewProxyModel::balanceChanged, q, &KBudgetView::slotBudgetBalanceChanged);
 
-    q->connect(ui->m_accountTree, SIGNAL(selectObject(MyMoneyObject)), q, SLOT(slotSelectAccount(MyMoneyObject)));
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectObject, q, &KBudgetView::slotSelectAccount);
 
-    q->connect(ui->m_budgetList, &QWidget::customContextMenuRequested,
-               q, &KBudgetView::slotOpenContextMenu);
+    q->connect(ui->m_budgetList, &QTreeWidget::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
     q->connect(ui->m_budgetList, &QTreeWidget::itemChanged, q, &KBudgetView::slotItemChanged);
 
@@ -92,8 +150,8 @@ public:
 
     // connect the buttons to the actions. Make sure the enabled state
     // of the actions is reflected by the buttons
-    q->connect(ui->m_renameButton, &QAbstractButton::clicked, kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename]), &QAction::trigger);
-    q->connect(ui->m_deleteButton, &QAbstractButton::clicked, kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete]), &QAction::trigger);
+    q->connect(ui->m_renameButton, &QAbstractButton::clicked, q, &KBudgetView::slotStartRename);
+    q->connect(ui->m_deleteButton, &QAbstractButton::clicked, q, &KBudgetView::slotDeleteBudget);
 
     q->connect(ui->m_budgetValue, &KBudgetValues::valuesChanged, q, &KBudgetView::slotBudgetedAmountChanged);
 
@@ -103,21 +161,221 @@ public:
 
     q->connect(ui->m_hideUnusedButton, &QAbstractButton::toggled, q, &KBudgetView::slotHideUnused);
 
-    q->connect(ui->m_searchWidget, SIGNAL(textChanged(QString)), m_budgetProxyModel, SLOT(setFilterFixedString(QString)));
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_budgetProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KBudgetView::refresh);
 
     // setup initial state
-    ui->m_newButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetNew])->isEnabled());
-    ui->m_renameButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetRename])->isEnabled());
-    ui->m_deleteButton->setEnabled(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetDelete])->isEnabled());
+    updateButtonStates();
 
     auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
     ui->m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
     ui->m_splitter->setChildrenCollapsible(false);
   }
 
+  QHash<eMenu::Action, bool> actionStates()
+  {
+    QHash<eMenu::Action, bool> actionStates;
+    actionStates[eMenu::Action::NewBudget] = true;
+    auto b = m_budgetList.size() >= 1 ? true : false;
+    actionStates[eMenu::Action::DeleteBudget] = b;
+
+    b = m_budgetList.size() == 1 ? true : false;
+    actionStates[eMenu::Action::ChangeBudgetYear] = b;
+    actionStates[eMenu::Action::CopyBudget] = b;
+    actionStates[eMenu::Action::RenameBudget] = b;
+    actionStates[eMenu::Action::BudgetForecast] = b;
+    return actionStates;
+  }
+
+  void updateButtonStates()
+  {
+    const auto actionStates = KBudgetViewPrivate::actionStates();
+    ui->m_newButton->setEnabled(actionStates[eMenu::Action::NewBudget]);
+    ui->m_renameButton->setEnabled(actionStates[eMenu::Action::RenameBudget]);
+    ui->m_deleteButton->setEnabled(actionStates[eMenu::Action::DeleteBudget]);
+  }
+
+  void askSave()
+  {
+    Q_Q(KBudgetView);
+    // check if the content of a currently selected budget was modified
+    // and ask to store the data
+    if (ui->m_updateButton->isEnabled()) {
+      if (KMessageBox::questionYesNo(q, i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", m_budget.name()),
+                                     i18n("Save changes")) == KMessageBox::Yes) {
+        m_inSelection = true;
+        q->slotUpdateBudget();
+        m_inSelection = false;
+      }
+    }
+  }
+
+  void refreshHideUnusedButton()
+  {
+    ui->m_hideUnusedButton->setDisabled(m_budget.getaccounts().isEmpty());
+  }
+
+  void loadAccounts()
+  {
+    // if no budgets are selected, don't load the accounts
+    // and clear out the previously shown list
+    if (m_budget.id().isEmpty()) {
+      ui->m_budgetValue->clear();
+      ui->m_updateButton->setEnabled(false);
+      ui->m_resetButton->setEnabled(false);
+      return;
+    }
+    ui->m_updateButton->setEnabled(!(selectedBudget() == m_budget));
+    ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
+
+    m_budgetProxyModel->setBudget(m_budget);
+  }
+
+  const MyMoneyBudget& selectedBudget() const
+  {
+    static MyMoneyBudget nullBudget;
+
+    QTreeWidgetItemIterator it_l(ui->m_budgetList, QTreeWidgetItemIterator::Selected);
+    KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(*it_l);
+    if (item) {
+      return item->budget();
+    }
+    return nullBudget;
+  }
+
+  void AccountEnter()
+  {
+    if (m_budget.id().isEmpty())
+      return;
+  }
+
+  void clearSubBudgets(const QModelIndex &index)
+  {
+    const auto children = ui->m_accountTree->model()->rowCount(index);
+
+    for (auto i = 0; i < children; ++i) {
+      const auto childIdx = index.child(i, 0);
+      const auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
+      m_budget.removeReference(accountID);
+      clearSubBudgets(childIdx);
+    }
+  }
+
+  bool collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const
+  {
+    auto rc = false;
+    const auto children = ui->m_accountTree->model()->rowCount(index);
+
+    for (auto i = 0; i < children; ++i) {
+      auto childIdx = index.child(i, 0);
+      auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
+      MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
+      if (auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
+          && !auxAccount.isZero()) {
+        rc = true;
+        // add the subaccount
+        // TODO: deal with budgets in different currencies
+        //    https://bugs.kde.org/attachment.cgi?id=54813 contains a demo file
+        destination += auxAccount;
+      }
+      rc |= collectSubBudgets(destination, childIdx);
+    }
+    return rc;
+  }
+
+  /**
+   * This method loads all available budgets into the budget list widget. If a budget is
+   * currently selected it remains selected if it is still present.
+   */
+  void loadBudgets()
+  {
+    Q_Q(KBudgetView);
+    m_budgetProxyModel->invalidate();
+
+    // remember which item is currently selected
+    QString id = m_budget.id();
+
+    // clear the budget list
+    ui->m_budgetList->clear();
+
+    // add the correct years to the drop down list
+    QDate date = QDate::currentDate();
+    int iStartYear = date.year() - m_iBudgetYearsBack;
+
+    m_yearList.clear();
+    for (int i = 0; i < m_iBudgetYearsAhead + m_iBudgetYearsBack; i++)
+      m_yearList += QString::number(iStartYear + i);
+
+    KBudgetListItem* currentItem = 0;
+
+    QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
+    QList<MyMoneyBudget>::ConstIterator it;
+    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+      KBudgetListItem* item = new KBudgetListItem(ui->m_budgetList, *it);
+
+      // create a list of unique years
+      if (m_yearList.indexOf(QString::number((*it).budgetStart().year())) == -1)
+        m_yearList += QString::number((*it).budgetStart().year());
+
+      //sort the list by name
+      ui->m_budgetList->sortItems((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
+
+      if (item->budget().id() == id) {
+        m_budget = (*it);
+        currentItem = item;
+        item->setSelected(true);
+      }
+    }
+    m_yearList.sort();
+
+    if (currentItem) {
+      ui->m_budgetList->setCurrentItem(currentItem);
+    }
+
+    // reset the status of the buttons
+    ui->m_updateButton->setEnabled(false);
+    ui->m_resetButton->setEnabled(false);
+
+    // make sure the world around us knows what we have selected
+    q->slotSelectBudget();
+  }
+
+  void ensureBudgetVisible(const QString& id)
+  {
+    const auto widgetIt = QTreeWidgetItemIterator(ui->m_budgetList);
+    while (*widgetIt) {
+      const auto p = dynamic_cast<KBudgetListItem*>(*widgetIt);
+      if ((p)->budget().id() == id) {
+        ui->m_budgetList->scrollToItem((p), QAbstractItemView::PositionAtCenter);
+        ui->m_budgetList->setCurrentItem(p, 0, QItemSelectionModel::ClearAndSelect);      // active item and deselect all others
+      }
+    }
+  }
+
   KBudgetView          *q_ptr;
   Ui::KBudgetView      *ui;
   BudgetViewProxyModel *m_budgetProxyModel;
+
+  MyMoneyBudget        m_budget;
+  QMap<QString, ulong> m_transactionCountMap;
+  QStringList          m_yearList;
+  QList<MyMoneyBudget> m_budgetList;
+
+  /**
+    * Set if we are in the selection of a different budget
+    **/
+  bool                 m_inSelection;
+
+  void adaptHideUnusedButton();
+
+  static const int m_iBudgetYearsAhead = 5;
+  static const int m_iBudgetYearsBack = 3;
+
+  /**
+    * This signals whether a budget is being edited
+    **/
+  bool m_budgetInEditing;
 };
 
 #endif

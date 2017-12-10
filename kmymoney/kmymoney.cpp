@@ -277,12 +277,6 @@ const QHash<Action, QString> KMyMoneyApp::s_Actions {
   {Action::TagNew, QStringLiteral("tag_new")},
   {Action::TagRename, QStringLiteral("tag_rename")},
   {Action::TagDelete, QStringLiteral("tag_delete")},
-  {Action::BudgetNew, QStringLiteral("budget_new")},
-  {Action::BudgetRename, QStringLiteral("budget_rename")},
-  {Action::BudgetDelete, QStringLiteral("budget_delete")},
-  {Action::BudgetCopy, QStringLiteral("budget_copy")},
-  {Action::BudgetChangeYear, QStringLiteral("budget_change_year")},
-  {Action::BudgetForecast, QStringLiteral("budget_forecast")},
   {Action::CurrencyNew, QStringLiteral("currency_new")},
   {Action::CurrencyRename, QStringLiteral("currency_rename")},
   {Action::CurrencyDelete, QStringLiteral("currency_delete")},
@@ -454,7 +448,6 @@ public:
   MyMoneyPrice          m_selectedPrice;
   QList<MyMoneyPayee>   m_selectedPayees;
   QList<MyMoneyTag>     m_selectedTags;
-  QList<MyMoneyBudget>  m_selectedBudgets;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
   // This is Auto Saving related
@@ -861,13 +854,6 @@ void KMyMoneyApp::initActions()
       {Action::TagNew,                        &KMyMoneyApp::slotTagNew,                       i18n("New tag"),                                    Icon::ListAddTag},
       {Action::TagRename,                     &KMyMoneyApp::slotTagRename,                        i18n("Rename tag"),                                 Icon::TagRename},
       {Action::TagDelete,                     &KMyMoneyApp::slotTagDelete,                    i18n("Delete tag"),                                 Icon::ListRemoveTag},
-      //Budget
-      {Action::BudgetNew,                     &KMyMoneyApp::slotBudgetNew,                    i18n("New budget"),                                 Icon::BudgetNew},
-      {Action::BudgetRename,                  &KMyMoneyApp::budgetRename,                     i18n("Rename budget"),                              Icon::BudgetRename},
-      {Action::BudgetDelete,                  &KMyMoneyApp::slotBudgetDelete,                 i18n("Delete budget"),                              Icon::BudgetDelete},
-      {Action::BudgetCopy,                    &KMyMoneyApp::slotBudgetCopy,                   i18n("Copy budget"),                                Icon::BudgetCopy},
-      {Action::BudgetChangeYear,              &KMyMoneyApp::slotBudgetChangeYear,             i18n("Change budget year"),                         Icon::ViewCalendar},
-      {Action::BudgetForecast,                &KMyMoneyApp::slotBudgetForecast,               i18n("Budget based on forecast"),                   Icon::ViewForecast},
       //Currency actions
       {Action::CurrencyNew,                   &KMyMoneyApp::slotCurrencyNew,                  i18n("New currency"),                               Icon::Empty},
       {Action::CurrencyRename,                &KMyMoneyApp::currencyRename,                   i18n("Rename currency"),                            Icon::EditRename},
@@ -4575,159 +4561,6 @@ void KMyMoneyApp::slotCurrencySetBase()
   }
 }
 
-void KMyMoneyApp::slotBudgetNew()
-{
-  QDate date = QDate::currentDate();
-  date.setDate(date.year(), KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
-  QString newname = i18n("Budget %1", date.year());
-
-  MyMoneyBudget budget;
-
-  // make sure we have a unique name
-  try {
-    int i = 1;
-    // Exception thrown when the name is not found
-    while (1) {
-      MyMoneyFile::instance()->budgetByName(newname);
-      newname = i18n("Budget %1 %2", date.year(), i++);
-    }
-  } catch (const MyMoneyException &) {
-    // all ok, the name is unique
-  }
-
-  MyMoneyFileTransaction ft;
-  try {
-    budget.setName(newname);
-    budget.setBudgetStart(date);
-
-    MyMoneyFile::instance()->addBudget(budget);
-    ft.commit();
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
-  }
-}
-
-void KMyMoneyApp::slotBudgetDelete()
-{
-  if (d->m_selectedBudgets.isEmpty())
-    return; // shouldn't happen
-
-  MyMoneyFile * file = MyMoneyFile::instance();
-
-  // get confirmation from user
-  QString prompt;
-  if (d->m_selectedBudgets.size() == 1)
-    prompt = i18n("<p>Do you really want to remove the budget <b>%1</b>?</p>", d->m_selectedBudgets.front().name());
-  else
-    prompt = i18n("Do you really want to remove all selected budgets?");
-
-  if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Budget")) == KMessageBox::No)
-    return;
-
-  MyMoneyFileTransaction ft;
-  try {
-    // now loop over all selected budgets and remove them
-    for (QList<MyMoneyBudget>::iterator it = d->m_selectedBudgets.begin();
-         it != d->m_selectedBudgets.end(); ++it) {
-      file->removeBudget(*it);
-    }
-    ft.commit();
-
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to remove budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
-  }
-}
-
-void KMyMoneyApp::slotBudgetCopy()
-{
-  if (d->m_selectedBudgets.size() == 1) {
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyBudget budget = d->m_selectedBudgets.first();
-      budget.clearId();
-      budget.setName(i18n("Copy of %1", budget.name()));
-
-      MyMoneyFile::instance()->addBudget(budget);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
-    }
-  }
-}
-
-void KMyMoneyApp::slotBudgetChangeYear()
-{
-  if (d->m_selectedBudgets.size() == 1) {
-    QStringList years;
-    int current = 0;
-    bool haveCurrent = false;
-    MyMoneyBudget budget = *(d->m_selectedBudgets.begin());
-    for (int i = (QDate::currentDate().year() - 3); i < (QDate::currentDate().year() + 5); ++i) {
-      years << QString("%1").arg(i);
-      if (i == budget.budgetStart().year()) {
-        haveCurrent = true;
-      }
-      if (!haveCurrent)
-        ++current;
-    }
-    if (!haveCurrent)
-      current = 0;
-    bool ok = false;
-
-    QString yearString = QInputDialog::getItem(this, i18n("Select year"), i18n("Budget year"), years, current, false, &ok);
-
-    if (ok) {
-      int year = yearString.toInt(0, 0);
-      QDate newYear = QDate(year, budget.budgetStart().month(), budget.budgetStart().day());
-      if (newYear != budget.budgetStart()) {
-        MyMoneyFileTransaction ft;
-        try {
-          budget.setBudgetStart(newYear);
-          MyMoneyFile::instance()->modifyBudget(budget);
-          ft.commit();
-        } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
-        }
-      }
-    }
-  }
-}
-
-void KMyMoneyApp::slotBudgetForecast()
-{
-  if (d->m_selectedBudgets.size() == 1) {
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyBudget budget = d->m_selectedBudgets.first();
-      bool calcBudget = budget.getaccounts().count() == 0;
-      if (!calcBudget) {
-        if (KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18nc("Warning message box", "Warning")) == KMessageBox::Continue)
-          calcBudget = true;
-      }
-
-      if (calcBudget) {
-        QDate historyStart;
-        QDate historyEnd;
-        QDate budgetStart;
-        QDate budgetEnd;
-
-        budgetStart = budget.budgetStart();
-        budgetEnd = budgetStart.addYears(1).addDays(-1);
-        historyStart = budgetStart.addYears(-1);
-        historyEnd = budgetEnd.addYears(-1);
-
-        MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
-        forecast.createBudget(budget, historyStart, historyEnd, budgetStart, budgetEnd, true);
-
-        MyMoneyFile::instance()->modifyBudget(budget);
-        ft.commit();
-      }
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
-    }
-  }
-}
-
 void KMyMoneyApp::slotNewFeature()
 {
 }
@@ -5600,11 +5433,6 @@ void KMyMoneyApp::slotShowTagContextMenu()
   showContextMenu("tag_context_menu");
 }
 
-void KMyMoneyApp::slotShowBudgetContextMenu()
-{
-  showContextMenu("budget_context_menu");
-}
-
 void KMyMoneyApp::slotShowCurrencyContextMenu()
 {
   showContextMenu("currency_context_menu");
@@ -5680,7 +5508,6 @@ void KMyMoneyApp::slotUpdateActions()
           Action::InvestmentEdit, Action::InvestmentNew, Action::InvestmentDelete, Action::InvestmentOnlinePrice, Action::InvestmentManualPrice,
           Action::ScheduleEdit, Action::ScheduleDelete, Action::ScheduleEnter, Action::ScheduleSkip,
           Action::PayeeDelete, Action::PayeeRename, Action::PayeeMerge, Action::TagDelete, Action::TagRename,
-          Action::BudgetDelete, Action::BudgetRename, Action::BudgetChangeYear, Action::BudgetNew, Action::BudgetCopy, Action::BudgetForecast,
           Action::TransactionEdit, Action::TransactionEditSplits, Action::TransactionEnter,
           Action::TransactionCancel, Action::TransactionDelete, Action::TransactionMatch,
           Action::TransactionAccept, Action::TransactionDuplicate, Action::TransactionToggleReconciled, Action::TransactionToggleCleared,
@@ -6029,17 +5856,6 @@ void KMyMoneyApp::slotUpdateActions()
     aC->action(s_Actions[Action::TagDelete])->setEnabled(true);
   }
 
-  aC->action(s_Actions[Action::BudgetNew])->setEnabled(true);
-  if (d->m_selectedBudgets.count() >= 1) {
-    aC->action(s_Actions[Action::BudgetDelete])->setEnabled(true);
-    if (d->m_selectedBudgets.count() == 1) {
-      aC->action(s_Actions[Action::BudgetChangeYear])->setEnabled(true);
-      aC->action(s_Actions[Action::BudgetCopy])->setEnabled(true);
-      aC->action(s_Actions[Action::BudgetRename])->setEnabled(true);
-      aC->action(s_Actions[Action::BudgetForecast])->setEnabled(true);
-    }
-  }
-
   if (!d->m_selectedCurrency.id().isEmpty()) {
     aC->action(s_Actions[Action::CurrencyRename])->setEnabled(true);
     // no need to check each transaction. accounts are enough in this case
@@ -6070,7 +5886,6 @@ void KMyMoneyApp::slotResetSelections()
   slotSelectPrice();
   slotSelectPayees(QList<MyMoneyPayee>());
   slotSelectTags(QList<MyMoneyTag>());
-  slotSelectBudget(QList<MyMoneyBudget>());
   slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
   slotUpdateActions();
 }
@@ -6097,13 +5912,6 @@ void KMyMoneyApp::slotSelectPrice(const MyMoneyPrice& price)
   d->m_selectedPrice = price;
   slotUpdateActions();
   emit priceSelected(d->m_selectedPrice);
-}
-
-void KMyMoneyApp::slotSelectBudget(const QList<MyMoneyBudget>& list)
-{
-  d->m_selectedBudgets = list;
-  slotUpdateActions();
-  emit budgetSelected(d->m_selectedBudgets);
 }
 
 void KMyMoneyApp::slotSelectPayees(const QList<MyMoneyPayee>& list)
@@ -7238,7 +7046,6 @@ void KMyMoneyApp::Private::closeFile()
   q->slotSelectInvestment(MyMoneyAccount());
   q->slotSelectSchedule();
   q->slotSelectCurrency();
-  q->slotSelectBudget(QList<MyMoneyBudget>());
   q->slotSelectPayees(QList<MyMoneyPayee>());
   q->slotSelectTags(QList<MyMoneyTag>());
   q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());

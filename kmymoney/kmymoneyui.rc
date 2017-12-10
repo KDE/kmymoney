@@ -168,15 +168,6 @@
   <Action name="tag_rename" />
   <Action name="tag_delete" />
  </Menu>
- <Menu name="budget_context_menu">
-  <title>Budget options</title>
-   <Action name="budget_new" />
-   <Action name="budget_rename" />
-   <Action name="budget_change_year" />
-   <Action name="budget_delete" />
-   <Action name="budget_copy" />
-   <Action name="budget_forecast" />
- </Menu>
  <Menu name="investment_context_menu">
   <title>Investment options</title>
   <Action name="investment_new" />

@@ -23,8 +23,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -33,16 +31,16 @@
 
 #include "kmymoneyaccountsviewbase.h"
 
-#include "mymoneybudget.h"
+class QTreeWidgetItem;
+
+class MyMoneyObject;
+class MyMoneyBudget;
+class MyMoneyMoney;
 
 /**
   * @author Darren Gould
   * @author Thomas Baumgart
   */
-
-class QString;
-class QTreeWidgetItem;
-
 class KBudgetViewPrivate;
 class KBudgetView : public KMyMoneyAccountsViewBase
 {
@@ -50,88 +48,28 @@ class KBudgetView : public KMyMoneyAccountsViewBase
 
 public:
   explicit KBudgetView(QWidget *parent = nullptr);
-  ~KBudgetView();
+  ~KBudgetView() override;
 
   void setDefaultFocus() override;
   void refresh() override;
 
-  /**
-    * This method is used to suppress updates for specific times
-    * (e.g. during creation of a new MyMoneyFile object when the
-    * default accounts are loaded). The behaviour of update() is
-    * controlled with the parameter.
-    *
-    * @param suspend Suspend updates or not. Possible values are
-    *
-    * @li true updates are suspended
-    * @li false updates will be performed immediately
-    *
-    * When a true/false transition of the parameter between
-    * calls to this method is detected,
-    * refresh() will be invoked once automatically.
-    */
-  void suspendUpdate(const bool suspend);
-
-public Q_SLOTS:
-  void slotSelectBudget();
-  void slotHideUnused(bool);
-  void slotRefreshHideUnusedButton();
-  void slotStartRename();
-
-  /**
-    *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box
-   */
-  void cb_includesSubaccounts_clicked();
-
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;
-  void loadAccounts();
 
-  /**
-   * This method loads all available budgets into the budget list widget. If a budget is
-   * currently selected it remains selected if it is still present.
-   */
-  void loadBudgets();
-  void ensureBudgetVisible(const QString& id);
-  const MyMoneyBudget& selectedBudget() const;
-  void askSave();
-
-  bool collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const;
-  void clearSubBudgets(const QModelIndex &index);
-
-protected Q_SLOTS:
-
-  /**
-    * This slot is called when the data of a budget is changed inside
-    * the budget list view and only a single budget is selected.
-    *
-    * @param p The listviewitem containing the budget name
-    * @param col The column that has changed
-    */
-  void slotItemChanged(QTreeWidgetItem* p, int col);
-
-  /**
-    * This slot is called when the amount of a budget is changed. It
-    * updates the budget and stores it in the engine
-    */
-  void slotBudgetedAmountChanged();
-
-  /**
-    */
-  void slotSelectAccount(const MyMoneyObject &);
-
-  void AccountEnter();
-
-  void slotUpdateBudget();
-
-  void slotResetBudget();
-
-  void slotNewBudget();
-
-  void slotBudgetBalanceChanged(const MyMoneyMoney &);
+private:
+  Q_DECLARE_PRIVATE(KBudgetView)
 
 private Q_SLOTS:
+  void slotNewBudget();
+  void slotDeleteBudget();
+  void slotCopyBudget();
+  void slotChangeBudgetYear();
+  void slotBudgetForecast();
+  void slotResetBudget();
+  void slotUpdateBudget();
+  void slotStartRename();
+
   /**
     * This slot receives the signal from the listview control that an
     * item was right-clicked,
@@ -139,43 +77,18 @@ private Q_SLOTS:
     *
     * @param p position of the pointing device
     */
-  void slotOpenContextMenu(const QPoint& p);
-
-Q_SIGNALS:
+  void slotOpenContextMenu(const QPoint&);
+  void slotItemChanged(QTreeWidgetItem* p, int col);
+  void slotSelectAccount(const MyMoneyObject &obj);
+  void slotBudgetedAmountChanged();
   /**
-    * This signal serves as proxy for KMyMoneyBudgetList::selectObject()
-    */
-  void openContextMenu(const MyMoneyObject& obj);
-  void selectObjects(const QList<MyMoneyBudget>& budget);
+    *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box
+   */
+  void cb_includesSubaccounts_clicked();
+  void slotBudgetBalanceChanged(const MyMoneyMoney &balance);
+  void slotSelectBudget();
+  void slotHideUnused(bool toggled);
 
-private:
-  Q_DECLARE_PRIVATE(KBudgetView)
-
-  typedef enum {
-    eNone = -1,
-    eYearly = 0,
-    eMonthly = 1,
-    eMonthByMonth = 2
-  } eTimePeriodColumn;
-
-  MyMoneyBudget                       m_budget;
-  QMap<QString, unsigned long>        m_transactionCountMap;
-  QStringList                         m_yearList;
-
-  /**
-    * Set if we are in the selection of a different budget
-    **/
-  bool                                m_inSelection;
-
-  void adaptHideUnusedButton();
-
-  static const int m_iBudgetYearsAhead;
-  static const int m_iBudgetYearsBack;
-
-  /**
-    * This signals whether a budget is being edited
-    **/
-  bool m_budgetInEditing;
 };
 
 #endif

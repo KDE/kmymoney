@@ -17,7 +17,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "kbudgetview.h"
 #include "kbudgetview_p.h"
 
 #include <typeinfo>
@@ -30,81 +29,18 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-#include <KConfig>
-#include <KMessageBox>
-#include <KSharedConfig>
-#include <KActionCollection>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kbudgetview.h"
-
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "kmymoneyedit.h"
-#include "kbudgetvalues.h"
-#include "kmymoney.h"
-#include "modelenums.h"
-#include "viewenums.h"
+#include "mymoneyexception.h"
 
 using namespace Icons;
 
-/**
-  * @author Darren Gould
-  * @author Thomas Baumgart
-  *
-  * This class represents an item in the budgets list view.
-  */
-class KBudgetListItem : public QTreeWidgetItem
-{
-public:
-  /**
-    * Constructor to be used to construct a budget entry object.
-    *
-    * @param parent pointer to the QTreeWidget object this entry should be
-    *               added to.
-    * @param budget const reference to MyMoneyBudget for which
-    *               the QTreeWidget entry is constructed
-    */
-  KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget);
-  ~KBudgetListItem();
-
-  const MyMoneyBudget& budget() {
-    return m_budget;
-  };
-  void setBudget(const MyMoneyBudget& budget) {
-    m_budget = budget;
-  }
-
-private:
-  MyMoneyBudget  m_budget;
-};
-
-// *** KBudgetListItem Implementation ***
-KBudgetListItem::KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget) :
-    QTreeWidgetItem(parent),
-    m_budget(budget)
-{
-  setText(0, budget.name());
-  setText(1, QString("%1").arg(budget.budgetStart().year()));
-  setFlags(flags() | Qt::ItemIsEditable);
-}
-
-KBudgetListItem::~KBudgetListItem()
-{
-}
-
-// *** KBudgetView Implementation ***
-//TODO: This has to go to user settings
-const int KBudgetView::m_iBudgetYearsAhead = 5;
-const int KBudgetView::m_iBudgetYearsBack = 3;
-
 KBudgetView::KBudgetView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KBudgetViewPrivate(this), parent),
-    m_inSelection(false)
+    KMyMoneyAccountsViewBase(*new KBudgetViewPrivate(this), parent)
 {
+  Q_D(KBudgetView);
+  d->m_inSelection = false;
 }
 
 KBudgetView::KBudgetView(KBudgetViewPrivate &dd, QWidget *parent)
@@ -114,13 +50,6 @@ KBudgetView::KBudgetView(KBudgetViewPrivate &dd, QWidget *parent)
 
 KBudgetView::~KBudgetView()
 {
-  Q_D(KBudgetView);
-  if(d->m_proxyModel) {
-    // remember the splitter settings for startup
-    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-    grp.writeEntry("KBudgetViewSplitterSize", d->ui->m_splitter->saveState());
-    grp.sync();
-  }
 }
 
 void KBudgetView::setDefaultFocus()
@@ -144,80 +73,14 @@ void KBudgetView::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
-void KBudgetView::loadBudgets()
-{
-  Q_D(KBudgetView);
-  d->m_budgetProxyModel->invalidate();
-
-  // remember which item is currently selected
-  QString id = m_budget.id();
-
-  // clear the budget list
-  d->ui->m_budgetList->clear();
-
-  // add the correct years to the drop down list
-  QDate date = QDate::currentDate();
-  int iStartYear = date.year() - m_iBudgetYearsBack;
-
-  m_yearList.clear();
-  for (int i = 0; i < m_iBudgetYearsAhead + m_iBudgetYearsBack; i++)
-    m_yearList += QString::number(iStartYear + i);
-
-  KBudgetListItem* currentItem = 0;
-
-  QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
-  QList<MyMoneyBudget>::ConstIterator it;
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    KBudgetListItem* item = new KBudgetListItem(d->ui->m_budgetList, *it);
-
-    // create a list of unique years
-    if (m_yearList.indexOf(QString::number((*it).budgetStart().year())) == -1)
-      m_yearList += QString::number((*it).budgetStart().year());
-
-    //sort the list by name
-    d->ui->m_budgetList->sortItems((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
-
-    if (item->budget().id() == id) {
-      m_budget = (*it);
-      currentItem = item;
-      item->setSelected(true);
-    }
-  }
-  m_yearList.sort();
-
-  if (currentItem) {
-    d->ui->m_budgetList->setCurrentItem(currentItem);
-  }
-
-  // reset the status of the buttons
-  d->ui->m_updateButton->setEnabled(false);
-  d->ui->m_resetButton->setEnabled(false);
-
-  // make sure the world around us knows what we have selected
-  slotSelectBudget();
-}
-
-void KBudgetView::ensureBudgetVisible(const QString& id)
-{
-  Q_D(KBudgetView);
-  const auto widgetIt = QTreeWidgetItemIterator(d->ui->m_budgetList);
-  while (*widgetIt) {
-    const auto p = dynamic_cast<KBudgetListItem*>(*widgetIt);
-    if ((p)->budget().id() == id) {
-      d->ui->m_budgetList->scrollToItem((p), QAbstractItemView::PositionAtCenter);
-      d->ui->m_budgetList->setCurrentItem(p, 0, QItemSelectionModel::ClearAndSelect);      // active item and deselect all others
-    }
-  }
-}
-
 void KBudgetView::refresh()
 {
   Q_D(KBudgetView);
   if (isVisible()) {
-    if (m_inSelection)
+    if (d->m_inSelection)
       QTimer::singleShot(0, this, SLOT(refresh()));
     else {
-      loadBudgets();
+      d->loadBudgets();
       d->m_needsRefresh = false;
     }
   } else {
@@ -225,119 +88,194 @@ void KBudgetView::refresh()
   }
 }
 
-void KBudgetView::loadAccounts()
+void KBudgetView::slotNewBudget()
 {
   Q_D(KBudgetView);
-  // if no budgets are selected, don't load the accounts
-  // and clear out the previously shown list
-  if (m_budget.id().isEmpty()) {
-    d->ui->m_budgetValue->clear();
-    d->ui->m_updateButton->setEnabled(false);
-    d->ui->m_resetButton->setEnabled(false);
-    return;
-  }
-  d->ui->m_updateButton->setEnabled(!(selectedBudget() == m_budget));
-  d->ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
+  d->askSave();
+  auto date = QDate::currentDate();
+  date.setDate(date.year(), KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  auto newname = i18n("Budget %1", date.year());
 
-  d->m_budgetProxyModel->setBudget(m_budget);
-}
+  MyMoneyBudget budget;
 
-void KBudgetView::askSave()
-{
-  Q_D(KBudgetView);
-  // check if the content of a currently selected budget was modified
-  // and ask to store the data
-  if (d->ui->m_updateButton->isEnabled()) {
-    if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
-                                     i18n("Do you want to save the changes for <b>%1</b>?", m_budget.name())),
-                                   i18n("Save changes")) == KMessageBox::Yes) {
-      m_inSelection = true;
-      slotUpdateBudget();
-      m_inSelection = false;
+  // make sure we have a unique name
+  try {
+    int i = 1;
+    // Exception thrown when the name is not found
+    while (1) {
+      MyMoneyFile::instance()->budgetByName(newname);
+      newname = i18n("Budget %1 %2", date.year(), i++);
     }
+  } catch (const MyMoneyException &) {
+    // all ok, the name is unique
+  }
+
+  MyMoneyFileTransaction ft;
+  try {
+    budget.setName(newname);
+    budget.setBudgetStart(date);
+
+    MyMoneyFile::instance()->addBudget(budget);
+    ft.commit();
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
-void KBudgetView::slotRefreshHideUnusedButton()
+void KBudgetView::slotDeleteBudget()
 {
   Q_D(KBudgetView);
-  d->ui->m_hideUnusedButton->setDisabled(m_budget.getaccounts().isEmpty());
-}
+  if (d->m_budgetList.isEmpty())
+    return; // shouldn't happen
 
-void KBudgetView::slotSelectBudget()
-{
-  Q_D(KBudgetView);
-  askSave();
-  KBudgetListItem* item;
+  auto file = MyMoneyFile::instance();
 
-  QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(d->ui->m_budgetList);
-  if (m_budget.id().isEmpty()) {
-    item = dynamic_cast<KBudgetListItem*>(*widgetIt);
-    if (item) {
-      d->ui->m_budgetList->blockSignals(true);
-      d->ui->m_budgetList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
-      d->ui->m_budgetList->blockSignals(false);
-    }
-  }
-
-  d->ui->m_accountTree->setEnabled(false);
-  d->ui->m_assignmentBox->setEnabled(false);
-  m_budget = MyMoneyBudget();
-
-  QTreeWidgetItemIterator it_l(d->ui->m_budgetList, QTreeWidgetItemIterator::Selected);
-  item = dynamic_cast<KBudgetListItem*>(*it_l);
-  if (item) {
-    m_budget = item->budget();
-    d->ui->m_accountTree->setEnabled(true);
-  }
-
-  slotRefreshHideUnusedButton();
-  loadAccounts();
-  const auto index = d->ui->m_accountTree->currentIndex();
-  if (index.isValid()) {
-    const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
-    slotSelectAccount(acc);
-  } else {
-    d->ui->m_budgetValue->clear();
-  }
-
-  QList<MyMoneyBudget> budgetList;
-  if (!m_budget.id().isEmpty())
-    budgetList << m_budget;
-  emit selectObjects(budgetList);
-}
-
-void KBudgetView::slotHideUnused(bool toggled)
-{
-  Q_D(KBudgetView);
-  // make sure we show all items for an empty budget
-  const auto prevState = !toggled;
-  slotRefreshHideUnusedButton();
-  if (prevState != d->ui->m_hideUnusedButton->isChecked())
-    d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
-}
-
-const MyMoneyBudget& KBudgetView::selectedBudget() const
-{
-  Q_D(const KBudgetView);
-  static MyMoneyBudget nullBudget;
-
-  QTreeWidgetItemIterator it_l(d->ui->m_budgetList, QTreeWidgetItemIterator::Selected);
-  KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(*it_l);
-  if (item) {
-    return item->budget();
-  }
-  return nullBudget;
-}
-
-void KBudgetView::slotOpenContextMenu(const QPoint& p)
-{
-  Q_D(KBudgetView);
-  auto item = dynamic_cast<KBudgetListItem*>(d->ui->m_budgetList->itemAt(p));
-  if (item)
-    emit openContextMenu(item->budget());
+  // get confirmation from user
+  QString prompt;
+  if (d->m_budgetList.size() == 1)
+    prompt = i18n("<p>Do you really want to remove the budget <b>%1</b>?</p>", d->m_budgetList.front().name());
   else
-    emit openContextMenu(MyMoneyBudget());
+    prompt = i18n("Do you really want to remove all selected d->m_budgetList?");
+
+  if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Budget")) == KMessageBox::No)
+    return;
+
+  try {
+    MyMoneyFileTransaction ft;
+    // now loop over all selected d->m_budgetList and remove them
+    for (const auto& budget : d->m_budgetList)
+      file->removeBudget(budget);
+    ft.commit();
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to remove budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+  }
+}
+
+void KBudgetView::slotCopyBudget()
+{
+  Q_D(KBudgetView);
+  if (d->m_budgetList.size() == 1) {
+    MyMoneyFileTransaction ft;
+    try {
+      MyMoneyBudget budget = d->m_budgetList.first();
+      budget.clearId();
+      budget.setName(i18n("Copy of %1", budget.name()));
+
+      MyMoneyFile::instance()->addBudget(budget);
+      ft.commit();
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+    }
+  }
+}
+
+void KBudgetView::slotChangeBudgetYear()
+{
+  Q_D(KBudgetView);
+  if (d->m_budgetList.size() == 1) {
+    QStringList years;
+    int current = 0;
+    bool haveCurrent = false;
+    MyMoneyBudget budget = *(d->m_budgetList.begin());
+    for (int i = (QDate::currentDate().year() - 3); i < (QDate::currentDate().year() + 5); ++i) {
+      years << QString::fromLatin1("%1").arg(i);
+      if (i == budget.budgetStart().year()) {
+        haveCurrent = true;
+      }
+      if (!haveCurrent)
+        ++current;
+    }
+    if (!haveCurrent)
+      current = 0;
+    bool ok = false;
+
+    auto yearString = QInputDialog::getItem(this, i18n("Select year"), i18n("Budget year"), years, current, false, &ok);
+
+    if (ok) {
+      int year = yearString.toInt(0, 0);
+      QDate newYear = QDate(year, budget.budgetStart().month(), budget.budgetStart().day());
+      if (newYear != budget.budgetStart()) {
+        MyMoneyFileTransaction ft;
+        try {
+          budget.setBudgetStart(newYear);
+          MyMoneyFile::instance()->modifyBudget(budget);
+          ft.commit();
+        } catch (const MyMoneyException &e) {
+          KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+        }
+      }
+    }
+  }
+}
+
+void KBudgetView::slotBudgetForecast()
+{
+  Q_D(KBudgetView);
+  if (d->m_budgetList.size() == 1) {
+    MyMoneyFileTransaction ft;
+    try {
+      MyMoneyBudget budget = d->m_budgetList.first();
+      bool calcBudget = budget.getaccounts().count() == 0;
+      if (!calcBudget) {
+        if (KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18nc("Warning message box", "Warning")) == KMessageBox::Continue)
+          calcBudget = true;
+      }
+
+      if (calcBudget) {
+        QDate historyStart;
+        QDate historyEnd;
+        QDate budgetStart;
+        QDate budgetEnd;
+
+        budgetStart = budget.budgetStart();
+        budgetEnd = budgetStart.addYears(1).addDays(-1);
+        historyStart = budgetStart.addYears(-1);
+        historyEnd = budgetEnd.addYears(-1);
+
+        MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
+        forecast.createBudget(budget, historyStart, historyEnd, budgetStart, budgetEnd, true);
+
+        MyMoneyFile::instance()->modifyBudget(budget);
+        ft.commit();
+      }
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+    }
+  }
+}
+
+void KBudgetView::slotResetBudget()
+{
+  Q_D(KBudgetView);
+  try {
+    d->m_budget = MyMoneyFile::instance()->budget(d->m_budget.id());
+    d->loadAccounts();
+    const auto index = d->ui->m_accountTree->currentIndex();
+    if (index.isValid()) {
+      const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      slotSelectAccount(acc);
+    } else {
+      d->ui->m_budgetValue->clear();
+    }
+
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Unable to reset budget"),
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+  }
+}
+
+void KBudgetView::slotUpdateBudget()
+{
+  Q_D(KBudgetView);
+  MyMoneyFileTransaction ft;
+  try {
+    MyMoneyFile::instance()->modifyBudget(d->m_budget);
+    ft.commit();
+    d->refreshHideUnusedButton();
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Unable to modify budget"),
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+  }
 }
 
 void KBudgetView::slotStartRename()
@@ -348,6 +286,35 @@ void KBudgetView::slotStartRename()
   if ((it_v = *it_l) != 0) {
     d->ui->m_budgetList->editItem(it_v, 0);
   }
+}
+
+void KBudgetView::slotOpenContextMenu(const QPoint&)
+{
+  Q_D(KBudgetView);
+
+  typedef void(KBudgetView::*KBudgetViewFunc)();
+  struct actionInfo {
+    KBudgetViewFunc callback;
+    QString         text;
+    Icon            icon;
+    bool            enabled;
+  };
+  const auto actionStates = d->actionStates();
+
+  const QVector<actionInfo> actionInfos {
+    {&KBudgetView::slotNewBudget,        i18n("New budget"),               Icon::BudgetNew,    actionStates[eMenu::Action::NewBudget]},
+    {&KBudgetView::slotStartRename,      i18n("Rename budget"),            Icon::BudgetRename, actionStates[eMenu::Action::RenameBudget]},
+    {&KBudgetView::slotDeleteBudget,     i18n("Delete budget"),            Icon::BudgetDelete, actionStates[eMenu::Action::DeleteBudget]},
+    {&KBudgetView::slotCopyBudget,       i18n("Copy budget"),              Icon::BudgetCopy,   actionStates[eMenu::Action::CopyBudget]},
+    {&KBudgetView::slotChangeBudgetYear, i18n("Change budget year"),       Icon::ViewCalendar, actionStates[eMenu::Action::ChangeBudgetYear]},
+    {&KBudgetView::slotBudgetForecast,   i18n("Budget based on forecast"), Icon::ViewForecast, actionStates[eMenu::Action::BudgetForecast]}
+  };
+  auto menu = new QMenu(i18nc("Menu header", "Budget options"));
+  for (const auto& info : actionInfos) {
+    auto a = menu->addAction(Icons::get(info.icon), info.text, this, info.callback);
+    a->setEnabled(info.enabled);
+  }
+  menu->exec(QCursor::pos());
 }
 
 void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
@@ -398,7 +365,7 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
+      KMessageBox::detailedSorry(this, i18n("Unable to modify budget"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
@@ -416,61 +383,55 @@ void KBudgetView::slotSelectAccount(const MyMoneyObject &obj)
   const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(obj);
   d->ui->m_assignmentBox->setEnabled(true);
 
-  if (m_budget.id().isEmpty())
+  if (d->m_budget.id().isEmpty())
     return;
 
   QString id = acc.id();
   d->ui->m_leAccounts->setText(MyMoneyFile::instance()->accountToCategory(id));
-  d->ui->m_cbBudgetSubaccounts->setChecked(m_budget.account(id).budgetSubaccounts());
-  d->ui->m_accountTotal->setValue(m_budget.account(id).totalBalance());
-  MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(id);
+  d->ui->m_cbBudgetSubaccounts->setChecked(d->m_budget.account(id).budgetSubaccounts());
+  d->ui->m_accountTotal->setValue(d->m_budget.account(id).totalBalance());
+  MyMoneyBudget::AccountGroup budgetAccount = d->m_budget.account(id);
   if (id != budgetAccount.id()) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
   }
-  d->ui->m_budgetValue->setBudgetValues(m_budget, budgetAccount);
+  d->ui->m_budgetValue->setBudgetValues(d->m_budget, budgetAccount);
 }
 
 void KBudgetView::slotBudgetedAmountChanged()
 {
-  if (m_budget.id().isEmpty())
-    return;
   Q_D(KBudgetView);
+  if (d->m_budget.id().isEmpty())
+    return;
 
   const auto indexes = d->ui->m_accountTree->selectionModel()->selectedIndexes();
   if (indexes.empty())
     return;
   QString accountID = indexes.front().data((int)eAccountsModel::Role::ID).toString();
 
-  MyMoneyBudget::AccountGroup accountGroup = m_budget.account(accountID);
+  MyMoneyBudget::AccountGroup accountGroup = d->m_budget.account(accountID);
   accountGroup.setId(accountID);
-  d->ui->m_budgetValue->budgetValues(m_budget, accountGroup);
-  m_budget.setAccount(accountGroup, accountID);
+  d->ui->m_budgetValue->budgetValues(d->m_budget, accountGroup);
+  d->m_budget.setAccount(accountGroup, accountID);
 
-  d->m_budgetProxyModel->setBudget(m_budget);
+  d->m_budgetProxyModel->setBudget(d->m_budget);
   d->ui->m_accountTotal->setValue(accountGroup.totalBalance());
 
-  d->ui->m_updateButton->setEnabled(!(selectedBudget() == m_budget));
-  d->ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
-}
-
-void KBudgetView::AccountEnter()
-{
-  if (m_budget.id().isEmpty())
-    return;
+  d->ui->m_updateButton->setEnabled(!(d->selectedBudget() == d->m_budget));
+  d->ui->m_resetButton->setEnabled(!(d->selectedBudget() == d->m_budget));
 }
 
 void KBudgetView::cb_includesSubaccounts_clicked()
 {
-  if (m_budget.id().isEmpty())
-    return;
   Q_D(KBudgetView);
+  if (d->m_budget.id().isEmpty())
+    return;
 
   QModelIndexList indexes = d->ui->m_accountTree->selectionModel()->selectedIndexes();
   if (!indexes.empty()) {
     QString accountID = indexes.front().data((int)eAccountsModel::Role::ID).toString();
     // now, we get a reference to the accountgroup, to modify its attribute,
     // and then put the resulting account group instead of the original
-    MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
+    MyMoneyBudget::AccountGroup auxAccount = d->m_budget.account(accountID);
     auxAccount.setBudgetSubaccounts(d->ui->m_cbBudgetSubaccounts->isChecked());
 
     // in case we turn the option on, we check that no subordinate account
@@ -480,102 +441,27 @@ void KBudgetView::cb_includesSubaccounts_clicked()
       // TODO: asking the user needs to be added. So long, we assume yes
       if (1) {
         MyMoneyBudget::AccountGroup subAccount;
-        if (collectSubBudgets(subAccount, indexes.front())) {
+        if (d->collectSubBudgets(subAccount, indexes.front())) {
           // we found a sub-budget somewhere
           // so we add those figures found and
           // clear the subaccounts
           auxAccount += subAccount;
-          clearSubBudgets(indexes.front());
+          d->clearSubBudgets(indexes.front());
         }
 
         if (auxAccount.budgetLevel() == MyMoneyBudget::AccountGroup::eNone) {
           MyMoneyBudget::PeriodGroup period;
-          auxAccount.addPeriod(m_budget.budgetStart(), period);
+          auxAccount.addPeriod(d->m_budget.budgetStart(), period);
           auxAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
         }
       }
     }
 
-    m_budget.setAccount(auxAccount, accountID);
-    d->m_budgetProxyModel->setBudget(m_budget);
-    d->ui->m_budgetValue->setBudgetValues(m_budget, auxAccount);
+    d->m_budget.setAccount(auxAccount, accountID);
+    d->m_budgetProxyModel->setBudget(d->m_budget);
+    d->ui->m_budgetValue->setBudgetValues(d->m_budget, auxAccount);
 
-    loadAccounts();
-  }
-}
-
-void KBudgetView::clearSubBudgets(const QModelIndex &index)
-{
-  Q_D(KBudgetView);
-  const auto children = d->ui->m_accountTree->model()->rowCount(index);
-
-  for (auto i = 0; i < children; ++i) {
-    const auto childIdx = index.child(i, 0);
-    const auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
-    m_budget.removeReference(accountID);
-    clearSubBudgets(childIdx);
-  }
-}
-
-bool KBudgetView::collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const
-{
-  Q_D(const KBudgetView);
-  auto rc = false;
-  const auto children = d->ui->m_accountTree->model()->rowCount(index);
-
-  for (auto i = 0; i < children; ++i) {
-    auto childIdx = index.child(i, 0);
-    auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
-    MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
-    if (auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
-        && !auxAccount.isZero()) {
-      rc = true;
-      // add the subaccount
-      // TODO: deal with budgets in different currencies
-      //    https://bugs.kde.org/attachment.cgi?id=54813 contains a demo file
-      destination += auxAccount;
-    }
-    rc |= collectSubBudgets(destination, childIdx);
-  }
-  return rc;
-}
-
-void KBudgetView::slotNewBudget()
-{
-  askSave();
-  kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::BudgetNew])->trigger();
-}
-
-void KBudgetView::slotResetBudget()
-{
-  Q_D(KBudgetView);
-  try {
-    m_budget = MyMoneyFile::instance()->budget(m_budget.id());
-    loadAccounts();
-    const auto index = d->ui->m_accountTree->currentIndex();
-    if (index.isValid()) {
-      const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
-      slotSelectAccount(acc);
-    } else {
-      d->ui->m_budgetValue->clear();
-    }
-
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to reset budget"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
-  }
-}
-
-void KBudgetView::slotUpdateBudget()
-{
-  MyMoneyFileTransaction ft;
-  try {
-    MyMoneyFile::instance()->modifyBudget(m_budget);
-    ft.commit();
-    slotRefreshHideUnusedButton();
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    d->loadAccounts();
   }
 }
 
@@ -583,4 +469,58 @@ void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
 {
   Q_D(KBudgetView);
   d->netBalProChanged(balance, d->ui->m_balanceLabel, View::Budget);
+}
+
+void KBudgetView::slotSelectBudget()
+{
+  Q_D(KBudgetView);
+  d->askSave();
+  KBudgetListItem* item;
+
+  QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(d->ui->m_budgetList);
+  if (d->m_budget.id().isEmpty()) {
+    item = dynamic_cast<KBudgetListItem*>(*widgetIt);
+    if (item) {
+      d->ui->m_budgetList->blockSignals(true);
+      d->ui->m_budgetList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
+      d->ui->m_budgetList->blockSignals(false);
+    }
+  }
+
+  d->ui->m_accountTree->setEnabled(false);
+  d->ui->m_assignmentBox->setEnabled(false);
+  d->m_budget = MyMoneyBudget();
+
+  QTreeWidgetItemIterator it_l(d->ui->m_budgetList, QTreeWidgetItemIterator::Selected);
+  item = dynamic_cast<KBudgetListItem*>(*it_l);
+  if (item) {
+    d->m_budget = item->budget();
+    d->ui->m_accountTree->setEnabled(true);
+  }
+
+  d->refreshHideUnusedButton();
+  d->loadAccounts();
+  const auto index = d->ui->m_accountTree->currentIndex();
+  if (index.isValid()) {
+    const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+    slotSelectAccount(acc);
+  } else {
+    d->ui->m_budgetValue->clear();
+  }
+
+  d->m_budgetList.clear();
+  if (!d->m_budget.id().isEmpty())
+    d->m_budgetList << d->m_budget;
+  d->actionStates();
+  d->updateButtonStates();
+}
+
+void KBudgetView::slotHideUnused(bool toggled)
+{
+  Q_D(KBudgetView);
+  // make sure we show all items for an empty budget
+  const auto prevState = !toggled;
+  d->refreshHideUnusedButton();
+  if (prevState != d->ui->m_hideUnusedButton->isChecked())
+    d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
 }

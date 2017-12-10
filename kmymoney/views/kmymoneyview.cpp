@@ -251,7 +251,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 10
-  m_budgetView = new KBudgetView(kmymoney);
+  m_budgetView = new KBudgetView;
   viewFrames[View::Budget] = m_model->addPage(m_budgetView, i18n("Budgets"));
   viewFrames[View::Budget]->setIcon(Icons::get(Icon::ViewBudgets));
   connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
@@ -2331,12 +2331,6 @@ void KMyMoneyView::connectView(const View view)
       connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInvestment);
       connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
       connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
-
-      connect(m_budgetView, &KBudgetView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowBudgetContextMenu);
-      connect(m_budgetView, &KBudgetView::selectObjects, kmymoney, &KMyMoneyApp::slotSelectBudget);
-      connect(kmymoney, &KMyMoneyApp::budgetRename, m_budgetView, &KBudgetView::slotStartRename);
-      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_budgetView, &KBudgetView::refresh);
-
       connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
       break;
     default:

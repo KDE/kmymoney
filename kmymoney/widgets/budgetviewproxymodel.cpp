@@ -51,7 +51,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
   if (!MyMoneyFile::instance()->storageAttached())
     return QVariant();
   const auto sourceColumn = m_mdlColumns->at(mapToSource(index).column());
-  static QVector<Column> columnsToProcess {Column::TotalBalance, Column::TotalValue/*, AccountsModel::PostedValue*/, Column::Account};
+  static QVector<Column> columnsToProcess {Column::TotalBalance, Column::TotalValue/*, AccountsModel::PostedValue, Column::Account*/};
   if (columnsToProcess.contains(sourceColumn)) {
         const auto ixAccount = mapToSource(BudgetViewProxyModel::index(index.row(), static_cast<int>(Column::Account), index.parent()));
         const auto account = ixAccount.data((int)Role::Account).value<MyMoneyAccount>();
