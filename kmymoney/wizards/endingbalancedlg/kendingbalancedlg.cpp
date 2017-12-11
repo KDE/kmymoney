@@ -93,6 +93,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   QString value;
   MyMoneyMoney endBalance, startBalance;
 
+  d->ui->setupUi(this);
   d->m_account = account;
 
   MyMoneySecurity currency = MyMoneyFile::instance()->security(account.currencyId());
