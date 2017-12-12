@@ -96,10 +96,10 @@ public:
       QVariant data = q->model()->data(index, (int)eAccountsModel::Role::Account);
       if (data.isValid()) {
         if (data.canConvert<MyMoneyAccount>()) {
-          emit q->openObject(data.value<MyMoneyAccount>());
+          emit q->openObjectRequested(data.value<MyMoneyAccount>());
         }
         if (data.canConvert<MyMoneyInstitution>()) {
-          emit q->openObject(data.value<MyMoneyInstitution>());
+          emit q->openObjectRequested(data.value<MyMoneyInstitution>());
         }
       }
     }
@@ -221,12 +221,12 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
     const auto data = model()->data(index, (int)eAccountsModel::Role::Account);
     if (data.isValid()) {
       if (data.canConvert<MyMoneyAccount>()) {
-        emit selectObject(data.value<MyMoneyAccount>());
-        emit openContextMenu(data.value<MyMoneyAccount>());
+        emit objectSelected(data.value<MyMoneyAccount>());
+        emit contextMenuRequested(data.value<MyMoneyAccount>());
       }
       if (data.canConvert<MyMoneyInstitution>()) {
-        emit selectObject(data.value<MyMoneyInstitution>());
-        emit openContextMenu(data.value<MyMoneyInstitution>());
+        emit objectSelected(data.value<MyMoneyInstitution>());
+        emit contextMenuRequested(data.value<MyMoneyInstitution>());
       }
     }
   }
@@ -241,10 +241,10 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
       const auto data = model()->data(model()->index(indexes.front().row(), (int)eAccountsModel::Column::Account, indexes.front().parent()), (int)eAccountsModel::Role::Account);
       if (data.isValid()) {
         if (data.canConvert<MyMoneyAccount>()) {
-          emit selectObject(data.value<MyMoneyAccount>());
+          emit objectSelected(data.value<MyMoneyAccount>());
         }
         if (data.canConvert<MyMoneyInstitution>()) {
-          emit selectObject(data.value<MyMoneyInstitution>());
+          emit objectSelected(data.value<MyMoneyInstitution>());
         }
         // an object was successfully selected
         return;
@@ -252,6 +252,6 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
     }
   }
   // since no object was selected reset the object selection
-  emit selectObject(MyMoneyAccount());
-  emit selectObject(MyMoneyInstitution());
+  emit objectSelected(MyMoneyAccount());
+  emit objectSelected(MyMoneyInstitution());
 }

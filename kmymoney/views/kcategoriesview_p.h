@@ -23,6 +23,8 @@
 #ifndef KCATEGORIESVIEW_P_H
 #define KCATEGORIESVIEW_P_H
 
+#include "kcategoriesview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,14 +38,10 @@
 #include "kmymoneyaccountsviewbase_p.h"
 
 #include "accountsviewproxymodel.h"
-#include "kmymoneyglobalsettings.h"
+#include "mymoneyaccount.h"
 #include "icons.h"
 
 using namespace Icons;
-
-namespace Ui {
-  class KCategoriesView;
-}
 
 class KCategoriesViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
@@ -75,12 +73,13 @@ public:
 
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KCategoriesView::refresh);
   }
 
   KCategoriesView       *q_ptr;
   Ui::KCategoriesView   *ui;
   bool                  m_haveUnusedCategories;
+  MyMoneyAccount        m_currentCategory;
 };
 
 #endif

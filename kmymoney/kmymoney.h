@@ -2,6 +2,7 @@
                           kmymoney.h
                              -------------------
     copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -63,74 +64,9 @@ class creditTransfer;
 
 template <class T> class onlineJobTyped;
 
-enum class Action {
-  FileOpenDatabase, FileSaveAsDatabase, FileBackup,
-  FileImportStatement,
-  FileImportTemplate, FileExportTemplate,
-  #ifdef KMM_DEBUG
-  FileDump,
-  #endif
-  FilePersonalData, FileInformation,
-  EditFindTransaction,
-  ViewTransactionDetail, ViewHideReconciled,
-  ViewHideCategories, ViewShowAll,
-  InstitutionNew, InstitutionEdit,
-  InstitutionDelete,
-  AccountNew, AccountOpen,
-  AccountStartReconciliation, AccountFinishReconciliation,
-  AccountPostponeReconciliation, AccountEdit,
-  AccountDelete, AccountClose, AccountReopen,
-  AccountTransactionReport, AccountBalanceChart,
-  AccountUpdateMenu,
-  AccountOnlineMap, AccountOnlineUnmap,
-  AccountUpdate, AccountUpdateAll,
-  AccountCreditTransfer,
-  CategoryNew, CategoryEdit,
-  CategoryDelete,
-  ToolCurrencies,
-  ToolPrices, ToolUpdatePrices,
-  ToolConsistency, ToolPerformance,
-  ToolSQL, ToolCalculator,
-  SettingsAllMessages,
-  HelpShow,
-  TransactionNew, TransactionEdit,
-  TransactionEnter, TransactionEditSplits,
-  TransactionCancel, TransactionDelete,
-  TransactionDuplicate, TransactionMatch,
-  TransactionAccept, TransactionToggleReconciled,
-  TransactionToggleCleared, TransactionReconciled,
-  TransactionNotReconciled, TransactionSelectAll,
-  TransactionGoToAccount, TransactionGoToPayee,
-  TransactionCreateSchedule, TransactionAssignNumber,
-  TransactionCombine, TransactionCopySplits,
-  TransactionMoveMenu, TransactionMarkMenu,
-  TransactionContextMarkMenu,
-  InvestmentNew, InvestmentEdit,
-  InvestmentDelete, InvestmentOnlinePrice,
-  InvestmentManualPrice,
-  ScheduleNew, ScheduleEdit,
-  ScheduleDelete, ScheduleDuplicate,
-  ScheduleEnter, ScheduleSkip,
-  PayeeNew, PayeeRename, PayeeDelete,
-  PayeeMerge,
-  TagNew, TagRename, TagDelete,
-  CurrencyNew, CurrencyRename, CurrencyDelete,
-  CurrencySetBase,
-  PriceNew, PriceDelete,
-  PriceUpdate, PriceEdit,
-  #ifdef KMM_DEBUG
-  WizardNewUser, DebugTraces,
-  #endif
-  DebugTimers,
-  OnlineJobDelete, OnlineJobEdit, OnlineJobLog
-};
-
 namespace eDialogs { enum class ScheduleResultCode; }
-
-inline uint qHash(const Action key, uint seed)
-{
-  return ::qHash(static_cast<uint>(key), seed);
-}
+namespace eMenu { enum class Action;
+                  enum class Menu; }
 
 /*! \mainpage KMyMoney Main Page for API documentation.
  *
@@ -226,13 +162,6 @@ protected Q_SLOTS:
   void slotFileViewPersonal();
 
   /**
-   * Open a dialog with a chart of the balance for the currently selected
-   * account (m_selectedAccount). Return once the dialog is closed. Don't do
-   * anything if no account is selected or charts are not available.
-   */
-  void slotAccountChart();
-
-  /**
     * Opens a file selector dialog for the user to choose an existing KMM
     * statement file from the file system to be imported.  This is for testing
     * only.  KMM statement files are not designed to be exposed to the user.
@@ -302,33 +231,9 @@ protected Q_SLOTS:
   void slotCloseSearchDialog();
 
   /**
-    * Brings up the new category editor and saves the information.
-    * The dialog will be preset with the name. The parent defaults to
-    * MyMoneyFile::expense()
-    *
-    * @param name Name of the account to be created. Could include a full hierarchy
-    * @param id reference to storage which will receive the id after successful creation
-    *
-    * @note Typically, this slot can be connected to the
-    *       StdTransactionEditor::createCategory(const QString&, QString&) or
-    *       KMyMoneyCombo::createItem(const QString&, QString&) signal.
-    */
-  void slotCategoryNew(const QString& name, QString& id);
-
-  /**
     * Calls the print logic for the current view
     */
   void slotPrintView();
-
-  /**
-    * Performs online update for currently selected investment
-    */
-  void slotOnlinePriceUpdate();
-
-  /**
-    * Performs manual update for currently selected investment
-    */
-  void slotManualPriceUpdate();
 
   /**
     * Call this slot, if any configuration parameter has changed
@@ -671,8 +576,17 @@ protected:
    */
   void readOptions();
 
-  /** initializes the KActions of the application */
-  void initActions();
+  /**
+   * Gets pointers for menus preset by KXMLGUIFactory
+   * @return pointers for menus
+   */
+  QHash<eMenu::Menu, QMenu *> initMenus();
+
+  /**
+   * Initializes QActions (names, object names, icons, some connections, shortcuts)
+   * @return pointers for actions
+   */
+  QHash<eMenu::Action, QAction *> initActions();
 
   /** initializes the dynamic menus (account selectors) */
   void initDynamicMenus();
@@ -703,29 +617,6 @@ protected:
   virtual void resizeEvent(QResizeEvent*);
 
   void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
-
-  /**
-    * This method checks, if an account can be closed or not. An account
-    * can be closed if:
-    *
-    * - the balance is zero and
-    * - all children are already closed and
-    * - there is no unfinished schedule referencing the account
-    *
-    * @param acc reference to MyMoneyAccount object in question
-    * @retval true account can be closed
-    * @retval false account cannot be closed
-    */
-  KMyMoneyUtils::CanCloseAccountCodeE canCloseAccount(const MyMoneyAccount& acc) const;
-
-  /**
-   * This method checks if an account can be closed and enables/disables
-   * the close account action
-   * If disabled, it sets a tooltip explaning why it cannot be closed
-   * @brief enableCloseAccountAction
-   * @param acc reference to MyMoneyAccount object in question
-   */
-  void enableCloseAccountAction(const MyMoneyAccount& acc);
 
   /**
     * Check if a list contains a payee with a given id
@@ -929,6 +820,9 @@ public Q_SLOTS:
     */
   bool slotStatementImport(const QString& url);
 
+  void slotOnlineTransferRequested(const MyMoneyAccount& acc);
+  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);
+  void slotReconciliationRequested(const MyMoneyAccount& acc, eMenu::Action action);
   /**
     * This slot starts the reconciliation of the currently selected account
     */
@@ -944,45 +838,12 @@ public Q_SLOTS:
     */
   void slotAccountReconcilePostpone();
 
-  /**
-    * This slot deletes the currently selected account if possible
-    */
-  void slotAccountDelete();
-
-  /**
-    * This slot opens the account editor to edit the currently
-    * selected account if possible
-    */
-  void slotAccountEdit();
 
   /**
     * This slot opens the selected account in the ledger view
     */
   void slotAccountOpenEmpty();
   void slotAccountOpen(const MyMoneyObject&);
-
-  /**
-    * Preloads the input dialog with the data of the current
-    * selected institution and brings up the input dialog
-    * and saves the information entered.
-    */
-  void slotInstitutionEditEmpty();
-  void slotInstitutionEdit(const MyMoneyObject &obj);
-
-  /**
-    * Deletes the current selected institution.
-    */
-  void slotInstitutionDelete();
-
-  /**
-    * This slot closes the currently selected account if possible
-    */
-  void slotAccountClose();
-
-  /**
-    * This slot re-openes the currently selected account if possible
-    */
-  void slotAccountReopen();
 
   /**
     * This slot reparents account @p src to be a child of account @p dest
@@ -1007,28 +868,10 @@ public Q_SLOTS:
   void slotAccountTransactionReport();
 
   /**
-    * This slot opens the account options menu at the current cursor
-    * position.
-    */
-  void slotShowAccountContextMenu(const MyMoneyObject&);
-
-  /**
     * This slot opens the schedule options menu at the current cursor
     * position.
     */
   void slotShowScheduleContextMenu();
-
-  /**
-    * This slot opens the institution options menu at the current cursor
-    * position.
-    */
-  void slotShowInstitutionContextMenu(const MyMoneyObject&);
-
-  /**
-    * This slot opens the investment options menu at the current cursor
-    * position.
-    */
-  void slotShowInvestmentContextMenu();
 
   /**
     * This slot opens the payee options menu at the current cursor
@@ -1067,11 +910,6 @@ public Q_SLOTS:
 
   /**
     * Brings up the new category editor and saves the information.
-    */
-  void slotCategoryNew();
-
-  /**
-    * Brings up the new category editor and saves the information.
     * The dialog will be preset with the name and parent account.
     *
     * @param account reference of category to be created. The @p name member
@@ -1082,22 +920,6 @@ public Q_SLOTS:
     */
   void slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
   void slotCategoryNew(MyMoneyAccount& account);
-
-  /**
-    * Create a new investment
-    */
-  void slotInvestmentNew();
-
-  /**
-    * This slot opens the investment editor to edit the currently
-    * selected investment if possible
-    */
-  void slotInvestmentEdit();
-
-  /**
-    * Deletes the current selected investment.
-    */
-  void slotInvestmentDelete();
 
   /**
     */
@@ -1150,10 +972,6 @@ public Q_SLOTS:
 
   void slotSelectAccount(const MyMoneyObject& account);
 
-  void slotSelectInstitution(const MyMoneyObject& institution);
-
-  void slotSelectInvestment(const MyMoneyObject& account);
-
   void slotSelectSchedule();
   void slotSelectSchedule(const MyMoneySchedule& schedule);
 
@@ -1174,28 +992,12 @@ public Q_SLOTS:
   /**
     * Brings up the new account wizard and saves the information.
     */
-  void slotAccountNew();
   void slotAccountNew(MyMoneyAccount&);
 
   /**
     * This method updates all KAction items to the current state.
     */
   void slotUpdateActions();
-
-  /**
-    * Brings up the input dialog and saves the information.
-    */
-  void slotInstitutionNew();
-
-  /**
-    * Brings up the input dialog and saves the information. If
-    * the institution has been created, the @a id member is filled,
-    * otherwise it is empty.
-    *
-    * @param institution reference to data to be used to create the
-    *                    institution. id member will be updated.
-    */
-  void slotInstitutionNew(MyMoneyInstitution& institution);
 
   /**
    * Loads a plugin
@@ -1309,7 +1111,6 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void accountSelected(const MyMoneyAccount& account);
-  void investmentSelected(const MyMoneyAccount& account);
 
   /**
     * This signal is emitted when a new institution has been selected by
@@ -1375,8 +1176,8 @@ Q_SIGNALS:
 
 public:
 
-  bool isActionToggled(const Action _a);
-  static const QHash<Action, QString> s_Actions;
+  bool isActionToggled(const eMenu::Action _a);
+  static const QHash<eMenu::Action, QString> s_Actions;
 
 private:
   /// \internal d-pointer class.
@@ -1391,7 +1192,6 @@ private:
 };
 
 extern KMyMoneyApp *kmymoney;
-typedef void(KMyMoneyApp::*KMyMoneyAppFunc)();
 
 class KMStatus
 {

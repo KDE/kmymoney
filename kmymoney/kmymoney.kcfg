@@ -228,6 +228,10 @@
    <label>Hide closed accounts</label>
    <default>false</default>
   </entry>
+  <entry name="ShowAllAccounts" type="Bool">
+   <label>Show all accounts</label>
+   <default>false</default>
+  </entry>
   <entry name="ShowCategoriesInAccountsView" type="Bool">
    <label>Show categories in the accounts view</label>
    <default>false</default>

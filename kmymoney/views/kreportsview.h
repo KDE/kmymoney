@@ -229,6 +229,7 @@ public Q_SLOTS:
   void slotItemDoubleClicked(QTreeWidgetItem* item, int);
   void slotOpenReport(const QString&);
   void slotOpenReport(const MyMoneyReport&);
+  void slotReportAccountTransactions(const MyMoneyAccount& acc);
   void slotCloseCurrent();
   void slotClose(int index);
   void slotCloseAll();

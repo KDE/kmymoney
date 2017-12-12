@@ -40,7 +40,6 @@
 #include <KMessageBox>
 #include <KToolBar>
 #include <KPassivePopup>
-#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -65,7 +64,6 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneysplit.h"
-#include "mymoneyutils.h"
 #include "mymoneytracer.h"
 #include "transaction.h"
 #include "transactionform.h"
@@ -73,6 +71,9 @@
 #include "widgetenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "menuenums.h"
+
+using namespace eMenu;
 
 class KGlobalLedgerView::Private
 {
@@ -308,13 +309,13 @@ void KGlobalLedgerView::init()
   m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   buttonLayout->addWidget(m_buttonbar);
 
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionNew]));
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionDelete]));
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEdit]));
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEnter]));
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionCancel]));
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionAccept]));
-  m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionMatch]));
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionNew]);
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionDelete]);
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionEdit]);
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionEnter]);
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionCancel]);
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionAccept]);
+  m_buttonbar->addAction(pActions[eMenu::Action::TransactionMatch]);
 
   // create the transaction form frame
   m_formFrame = new QFrame(this);
@@ -1017,11 +1018,11 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
     m_newAccountLoaded = true;
 
     if (acc.id().isEmpty()) {
-      m_buttonbar->removeAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountPostponeReconciliation]));
-      m_buttonbar->removeAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountFinishReconciliation]));
+      m_buttonbar->removeAction(pActions[eMenu::Action::PostponeAccountReconciliation]);
+      m_buttonbar->removeAction(pActions[eMenu::Action::FinishAccountReconciliation]);
     } else {
-      m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountPostponeReconciliation]));
-      m_buttonbar->addAction(kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::AccountFinishReconciliation]));
+      m_buttonbar->addAction(pActions[eMenu::Action::PostponeAccountReconciliation]);
+      m_buttonbar->addAction(pActions[eMenu::Action::FinishAccountReconciliation]);
       // when we start reconciliation, we need to reload the view
       // because no data has been changed. When postponing or finishing
       // reconciliation, the data change in the engine takes care of updateing
@@ -1250,9 +1251,9 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       }
 
       m_inEditMode = true;
-      connect(editor, SIGNAL(transactionDataSufficient(bool)), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEnter]), SLOT(setEnabled(bool)));
-      connect(editor, SIGNAL(returnPressed()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionEnter]), SLOT(trigger()));
-      connect(editor, SIGNAL(escapePressed()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::TransactionCancel]), SLOT(trigger()));
+      connect(editor, &TransactionEditor::transactionDataSufficient, pActions[eMenu::Action::TransactionEnter], &QAction::setEnabled);
+      connect(editor, &TransactionEditor::returnPressed, pActions[eMenu::Action::TransactionEnter], &QAction::trigger);
+      connect(editor, &TransactionEditor::escapePressed, pActions[eMenu::Action::TransactionCancel], &QAction::trigger);
 
       connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
       connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));

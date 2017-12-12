@@ -53,11 +53,13 @@
 // Project Includes
 
 #include <config-kmymoney.h>
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "mymoneyaccount.h"
 #include "mymoneyprice.h"
+#include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "mymoneysecurity.h"
@@ -69,6 +71,7 @@
 #include "widgetenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "menuenums.h"
 
 using namespace Icons;
 
@@ -229,8 +232,8 @@ void KPayeesView::init()
   connect(m_payeesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
 
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::PayeeDelete]), SLOT(trigger()));
-  connect(m_mergeButton, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::PayeeMerge]), SLOT(trigger()));
+  connect(m_deleteButton, &QAbstractButton::clicked, pActions[eMenu::Action::PayeeDelete], &QAction::trigger);
+  connect(m_mergeButton, &QAbstractButton::clicked, pActions[eMenu::Action::PayeeMerge], &QAction::trigger);
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotPayeeNew()));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
@@ -969,7 +972,7 @@ void KPayeesView::slotOpenContextMenu(const QPoint& /*p*/)
 
 void KPayeesView::slotPayeeNew()
 {
-  kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::PayeeNew])->trigger();
+  pActions[eMenu::Action::PayeeNew]->trigger();
 }
 
 void KPayeesView::slotHelp()

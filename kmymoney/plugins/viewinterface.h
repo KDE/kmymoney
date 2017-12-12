@@ -131,7 +131,7 @@ Q_SIGNALS:
    * @a institution is identical to MyMoneyInstitution(). This signal is used
    * by plugins to get information about changes.
    */
-  void institutionSelected(const MyMoneyInstitution& institution);
+//  void institutionSelected(const MyMoneyInstitution& institution);
 
   /**
    * This signal is emitted when an account has been successfully reconciled

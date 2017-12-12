@@ -17,6 +17,8 @@
 #ifndef KINSTITUTIONSVIEW_P_H
 #define KINSTITUTIONSVIEW_P_H
 
+#include "kinstitutionsview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -30,14 +32,11 @@
 #include "kmymoneyaccountsviewbase_p.h"
 
 #include "accountsviewproxymodel.h"
-#include "kmymoneyglobalsettings.h"
+#include "mymoneyinstitution.h"
 #include "icons.h"
 
 using namespace Icons;
 
-namespace Ui {
-  class KInstitutionsView;
-}
 class KInstitutionsViewPrivate : public KMyMoneyAccountsViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KInstitutionsView)
@@ -66,10 +65,12 @@ public:
     // the proxy filter model
     m_proxyModel = ui->m_accountTree->init(View::Institutions);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KInstitutionsView::refresh);
   }
 
   KInstitutionsView       *q_ptr;
   Ui::KInstitutionsView   *ui;
+  MyMoneyInstitution       m_currentInstitution;
 };
 
 #endif

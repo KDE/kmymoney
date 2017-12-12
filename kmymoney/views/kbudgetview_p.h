@@ -140,7 +140,7 @@ public:
 
     q->connect(m_budgetProxyModel, &BudgetViewProxyModel::balanceChanged, q, &KBudgetView::slotBudgetBalanceChanged);
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectObject, q, &KBudgetView::slotSelectAccount);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KBudgetView::slotSelectAccount);
 
     q->connect(ui->m_budgetList, &QTreeWidget::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);

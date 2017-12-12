@@ -41,8 +41,7 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyVie
   connect(app, &KMyMoneyApp::accountReconciled,
           this, &ViewInterface::accountReconciled);
 
-
-  connect(app, &KMyMoneyApp::institutionSelected, this, &ViewInterface::institutionSelected);
+//  connect(app, &KMyMoneyApp::institutionSelected, this, &ViewInterface::institutionSelected);
 
   connect(m_view, &KMyMoneyView::viewStateChanged, this, &ViewInterface::viewStateChanged);
   connect(m_view, &KMyMoneyView::kmmFilePlugin, this, &ViewInterface::kmmFilePlugin);

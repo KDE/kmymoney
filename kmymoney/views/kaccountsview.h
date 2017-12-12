@@ -28,10 +28,19 @@
 
 #include "kmymoneyaccountsviewbase.h"
 
+class MyMoneyMoney;
+class MyMoneyAccount;
+class MyMoneyObject;
+
+namespace eMenu { enum class Action; }
+namespace KMyMoneyPlugin { class OnlinePlugin; }
+
+template <class Key, class Value> class QMap;
+
 /**
   * This class implements the accounts hierarchical and iconic 'view'.
   */
-class MyMoneyMoney;
+
 class KAccountsViewPrivate;
 class KAccountsView : public KMyMoneyAccountsViewBase
 {
@@ -43,19 +52,37 @@ public:
 
   void setDefaultFocus() override;
   void refresh() override;
+  void updateActions(const MyMoneyObject &obj) override;
+
+  /**
+   * Gets access to plugins found in KMyMoneyApp
+   * @param plugins
+   */
+  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin *>& plugins);
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &);
+  void slotShowAccountMenu(const MyMoneyAccount& acc);
+
+Q_SIGNALS:
+  void selectObject(const MyMoneyObject&);
 
 protected:
-  KAccountsView(KAccountsViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;
-
-protected Q_SLOTS:
-  void slotUnusedIncomeExpenseAccountHidden();
 
 private:
   Q_DECLARE_PRIVATE(KAccountsView)
+
+private Q_SLOTS:
+  void slotUnusedIncomeExpenseAccountHidden();
+  void slotNewAccount();
+  void slotEditAccount();
+  void slotDeleteAccount();
+  void slotCloseAccount();
+  void slotReopenAccount();
+  void slotChartAccountBalance();
+  void slotNewCategory();
+  void slotNewPayee(const QString& nameBase, QString& id);
 };
 
 #endif

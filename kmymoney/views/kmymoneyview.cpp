@@ -94,11 +94,11 @@
 #include "amountedit.h"
 #include "kmymoneyaccounttreeview.h"
 #include "accountsviewproxymodel.h"
-#include "mymoneybudget.h"
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 #include "kmymoneyedit.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
@@ -238,9 +238,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_ledgerView, &KAccountsView::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 8
-  m_investmentView = new KInvestmentView(kmymoney, this);
+  m_investmentView = new KInvestmentView;
   viewFrames[View::Investments] = m_model->addPage(m_investmentView, i18n("Investments"));
   viewFrames[View::Investments]->setIcon(Icons::get(Icon::ViewInvestment));
+  connect(m_investmentView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_investmentView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 9
   m_reportsView = new KReportsView();
@@ -487,6 +489,11 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
       proxyModel->invalidate();
     }
   }
+}
+
+void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
+{
+  m_accountsView->setOnlinePlugins(plugins);
 }
 
 bool KMyMoneyView::showPageHeader() const
@@ -1726,12 +1733,12 @@ void KMyMoneyView::slotRefreshViews()
   m_accountsView->refresh();
   m_institutionsView->refresh();
   m_categoriesView->refresh();
-  m_payeesView->slotLoadPayees();
+  m_payeesView->refresh();
   m_tagsView->refresh();
   m_ledgerView->slotLoadView();
   m_budgetView->refresh();
   m_homeView->slotLoadView();
-  m_investmentView->slotLoadView();
+  m_investmentView->refresh();
   m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
   m_scheduledView->slotReloadView();
@@ -2275,43 +2282,36 @@ void KMyMoneyView::connectView(const View view)
     case View::Accounts:
       disconnect(m_accountsView, &KAccountsView::aboutToShow, this, &KMyMoneyView::connectView);
       treeView = m_accountsView->getTreeView();
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInstitution);
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInvestment);
-      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
-      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
-      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
+      connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
       connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, m_accountsView, &KAccountsView::slotNetWorthChanged);
-      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_accountsView, &KAccountsView::refresh);
       break;
+
     case View::Institutions:
       disconnect(m_institutionsView, &KInstitutionsView::aboutToShow, this, &KMyMoneyView::connectView);
       treeView = m_institutionsView->getTreeView();
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInstitution);
-      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
-      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotInstitutionEdit);
-      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
-      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowInstitutionContextMenu);
-      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
+      connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
       connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, m_institutionsView, &KInstitutionsView::slotNetWorthChanged);
-      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_institutionsView, &KInstitutionsView::refresh);
       break;
+
     case View::Categories:
       disconnect(m_categoriesView, &KCategoriesView::aboutToShow, this, &KMyMoneyView::connectView);
       treeView = m_categoriesView->getTreeView();
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
-      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
-      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
-
-      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
+      connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
       connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, m_categoriesView, &KCategoriesView::slotProfitChanged);
-      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_categoriesView, &KCategoriesView::refresh);
-
       break;
+
     case View::Tags:
       disconnect(m_tagsView, &KTagsView::aboutToShow, this, &KMyMoneyView::connectView);
       connect(kmymoney,   &KMyMoneyApp::tagCreated,         m_tagsView, static_cast<void (KTagsView::*)(const QString&)>(&KTagsView::slotSelectTagAndTransaction));
@@ -2323,17 +2323,73 @@ void KMyMoneyView::connectView(const View view)
       connect(m_tagsView, &KTagsView::transactionSelected,  this,       &KMyMoneyView::slotLedgerSelected);
       connect(m_tagsView, &KMyMoneyViewBase::aboutToShow,   this,       &KMyMoneyView::aboutToChangeView);
       break;
+
     case View::Budget:
       disconnect(m_budgetView, &KBudgetView::aboutToShow, this, &KMyMoneyView::connectView);
       treeView = m_budgetView->getTreeView();
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectAccount);
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInstitution);
-      connect(treeView, &KMyMoneyAccountTreeView::selectObject, kmymoney, &KMyMoneyApp::slotSelectInvestment);
-      connect(treeView, &KMyMoneyAccountTreeView::openObject, kmymoney, &KMyMoneyApp::slotAccountOpen);
-      connect(treeView, &KMyMoneyAccountTreeView::openContextMenu, kmymoney, &KMyMoneyApp::slotShowAccountContextMenu);
-      connect(treeView, &KMyMoneyAccountTreeView::columnToggled , this, &KMyMoneyView::slotAccountTreeViewChanged);
+      connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
+      connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
       break;
+
+  case View::Investments:
+      disconnect(m_investmentView, &KInvestmentView::aboutToShow, this, &KMyMoneyView::connectView);
+      connect(m_investmentView, &KInvestmentView::accountSelected, kmymoney, &KMyMoneyApp::slotSelectAccount);
+
+      connect(m_investmentView, &KInvestmentView::objectSelected,       this, &KMyMoneyView::slotObjectSelected);
+      connect(m_investmentView, &KInvestmentView::contextMenuRequested, this, &KMyMoneyView::slotContextMenuRequested);
+
+    break;
     default:
       break;
   }
+}
+
+void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
+{
+  if (typeid(obj) == typeid(MyMoneyAccount)) {
+    const auto& acc = static_cast<const MyMoneyAccount&>(obj);
+    // check if we can open this account
+    // currently it make's sense for asset and liability accounts
+    if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
+        slotLedgerSelected(acc.id());
+
+  } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
+//    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
+    m_institutionsView->slotEditInstitution();
+  }
+}
+
+void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
+{
+  // carrying some slots over to views isn't easy for all slots...
+  // ...so calls to kmymoney still must be here
+  if (typeid(obj) == typeid(MyMoneyAccount)) {
+    kmymoney->slotSelectAccount(obj);
+    m_investmentView->updateActions(obj);
+    m_categoriesView->updateActions(obj);
+    m_accountsView->updateActions(obj);
+  } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
+    m_institutionsView->updateActions(obj);
+  }
+}
+
+void KMyMoneyView::slotContextMenuRequested(const MyMoneyObject& obj)
+{
+  if (typeid(obj) == typeid(MyMoneyAccount)) {
+    const auto& acc = static_cast<const MyMoneyAccount&>(obj);
+    if (acc.isInvest()) {
+      m_investmentView->slotShowInvestmentMenu(acc);
+      return;
+    } else if (acc.isIncomeExpense()) {
+      m_categoriesView->slotShowCategoriesMenu(acc);
+    } else {
+      m_accountsView->slotShowAccountMenu(acc);
+    }
+  } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
+    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
+    m_institutionsView->slotShowInstitutionsMenu(inst);
+  }
+
 }

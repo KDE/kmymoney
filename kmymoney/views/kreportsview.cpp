@@ -987,6 +987,25 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
 
 }
 
+void KReportsView::slotReportAccountTransactions(const MyMoneyAccount& acc)
+{
+  // Generate a transaction report that contains transactions for only the
+  // currently selected account.
+  if (!acc.id().isEmpty()) {
+    MyMoneyReport report(
+      MyMoneyReport::eAccount,
+      MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+      eMyMoney::TransactionFilter::Date::YearToDate,
+      MyMoneyReport::eDetailAll,
+      i18n("%1 YTD Account Transactions", acc.name()),
+      i18n("Generated Report")
+    );
+    report.setGroup(i18n("Transactions"));
+    report.addAccount(acc.id());
+    slotOpenReport(report);
+  }
+}
+
 void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 {
   TocItem* tocItem = dynamic_cast<TocItem*>(item);

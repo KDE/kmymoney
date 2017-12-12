@@ -41,9 +41,9 @@ class ResourceInstance;
 }
 #endif
 
-namespace eAccountsModel {
-  enum class Column;
-}
+namespace eAccountsModel { enum class Column; }
+namespace eMenu { enum class Action; }
+namespace KMyMoneyPlugin { class OnlinePlugin; }
 
 class KMyMoneyApp;
 class KHomeView;
@@ -68,6 +68,7 @@ class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
 class MyMoneyAccount;
 class MyMoneyMoney;
+class MyMoneyObject;
 class QLabel;
 
 /**
@@ -406,7 +407,7 @@ public:
 
   void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
 
-  void slotNetBalProChanged(const MyMoneyMoney &val, QLabel *label, const View view);
+  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
 
 protected:
   /**
@@ -503,6 +504,13 @@ public Q_SLOTS:
     */
   void slotShowTransactionDetail(bool detailed);
 
+  /**
+   * Informs respective views about selected object, so they can
+   * update action states and current object.
+   * @param obj Account, Category, Investment, Stock, Institution
+   */
+  void slotObjectSelected(const MyMoneyObject& obj);
+
 private Q_SLOTS:
   /**
     * This slots switches the view to the specific page
@@ -520,6 +528,18 @@ private Q_SLOTS:
   void slotShowBudgetPage();
   void slotShowForecastPage();
   void slotShowOutboxPage();
+
+  /**
+   * Opens object in ledgers or edits in case of institution
+   * @param obj Account, Category, Investment, Stock, Institution
+   */
+  void slotOpenObjectRequested(const MyMoneyObject& obj);
+
+  /**
+   * Opens context menu based on objects's type
+   * @param obj Account, Category, Investment, Stock, Institution
+   */
+  void slotContextMenuRequested(const MyMoneyObject& obj);
 
 protected Q_SLOTS:
   /**

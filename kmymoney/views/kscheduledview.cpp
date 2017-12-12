@@ -38,7 +38,6 @@
 #include <KConfig>
 #include <KMessageBox>
 #include <KSharedConfig>
-#include <KActionCollection>
 #include <KTreeWidgetSearchLine>
 #include <KTreeWidgetSearchLineWidget>
 
@@ -47,17 +46,21 @@
 
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
+#include "mymoneyexception.h"
 #include "kscheduletreeitem.h"
 #include "ktreewidgetfilterlinewidget.h"
-#include "kmymoney.h"
 #include "icons/icons.h"
 #include "mymoneyutils.h"
 #include "mymoneyaccount.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "mymoneyschedule.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyenums.h"
+#include "menuenums.h"
 
 using namespace Icons;
 
@@ -98,7 +101,7 @@ void KScheduledView::init()
 
   readConfig();
 
-  connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->actionCollection()->action(kmymoney->s_Actions[Action::ScheduleNew]), SLOT(trigger()));
+  connect(m_qbuttonNew, &QAbstractButton::clicked, pActions[eMenu::Action::ScheduleNew], &QAction::trigger);
 
   // attach popup to 'Filter...' button
   m_kaccPopup = new QMenu(this);

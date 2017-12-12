@@ -28,9 +28,8 @@
 
 #include "kmymoneyaccountsviewbase.h"
 
-namespace Ui {
-  class KInstitutionsView;
-}
+class MyMoneyInstitution;
+class MyMoneyMoney;
 
 /**
   * @author Thomas Baumgart
@@ -38,7 +37,6 @@ namespace Ui {
 /**
   * This class implements the institutions hierarchical 'view'.
   */
-class MyMoneyMoney;
 class KInstitutionsViewPrivate;
 class KInstitutionsView : public KMyMoneyAccountsViewBase
 {
@@ -50,16 +48,22 @@ public:
 
   void setDefaultFocus() override;
   void refresh() override;
+  void updateActions(const MyMoneyObject &obj) override;
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &);
+  void slotShowInstitutionsMenu(const MyMoneyInstitution& inst);
+  void slotEditInstitution();
 
 protected:
-  KInstitutionsView(KInstitutionsViewPrivate &dd, QWidget *parent);
-  virtual void showEvent(QShowEvent * event) override;
+  void showEvent(QShowEvent * event) override;
 
 private:
   Q_DECLARE_PRIVATE(KInstitutionsView)
+
+private Q_SLOTS:
+  void slotNewInstitution();
+  void slotDeleteInstitution();
 };
 
 #endif

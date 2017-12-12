@@ -30,6 +30,8 @@
 
 #include "viewenums.h"
 
+class MyMoneyObject;
+
 /**
   * This class is an abstract base class that all specific views
   * should be based on.
@@ -40,11 +42,12 @@ class KMyMoneyViewBase : public QWidget
   Q_OBJECT
 
 public:
-    explicit KMyMoneyViewBase(QWidget* parent = nullptr);
-    virtual ~KMyMoneyViewBase();
+  explicit KMyMoneyViewBase(QWidget* parent = nullptr);
+  virtual ~KMyMoneyViewBase();
 
-    virtual void setDefaultFocus() {}
-    virtual void refresh() {}
+  virtual void setDefaultFocus() {}
+  virtual void refresh() {}
+  virtual void updateActions(const MyMoneyObject&) {}
 
 Q_SIGNALS:
   void aboutToShow(const View view);

@@ -33,41 +33,46 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kinvestmentview.h"
+#include "kmymoneyviewbase.h"
 
-class KMyMoneyApp;
-class KMyMoneyView;
+class MyMoneyAccount;
 class MyMoneyObject;
-class MyMoneySecurity;
 
 /**
   * @author Kevin Tambascio
   * @author Łukasz Wojniłowicz
   */
-class KInvestmentView : public QWidget, private Ui::KInvestmentView
+class KInvestmentViewPrivate;
+class KInvestmentView : public KMyMoneyViewBase
 {
   Q_OBJECT
 
 public:
-  explicit KInvestmentView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
-  ~KInvestmentView();
+  explicit KInvestmentView(QWidget *parent = nullptr);
+  ~KInvestmentView() override;
 
-  void setDefaultFocus();
+  void setDefaultFocus() override;
+  void refresh() override;
+  void updateActions(const MyMoneyObject &obj) override;
 
 public Q_SLOTS:
-  /**
-    * This slot is used to reload all data from the MyMoneyFile engine.
-    * All existing data in the view will be invalidated.
-    * Call this e.g. if a new file has been loaded.
-    */
-  void slotLoadView();
-
   /**
     * This slot is used to preselect investment account from ledger view
     */
   void slotSelectAccount(const MyMoneyObject &obj);
 
-  void showEvent(QShowEvent* event);
+  void slotShowInvestmentMenu(const MyMoneyAccount& acc);
+
+Q_SIGNALS:
+  void accountSelected(const MyMoneyObject&);
+  void objectSelected(const MyMoneyObject&);
+  void contextMenuRequested(const MyMoneyObject& obj);
+
+protected:
+  void showEvent(QShowEvent* event) override;
+
+private:
+  Q_DECLARE_PRIVATE(KInvestmentView)
 
 private Q_SLOTS:
   /**
@@ -76,9 +81,13 @@ private Q_SLOTS:
   void slotLoadTab(int index);
 
   void slotEquitySelected(const QModelIndex &current, const QModelIndex &previous);
-  void slotEquityRightClicked(const QPoint& point);
-  void slotEquityDoubleClicked();
   void slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous);
+
+  void slotNewInvestment();
+  void slotEditInvestment();
+  void slotDeleteInvestment();
+  void slotUpdatePriceOnline();
+  void slotUpdatePriceManually();
 
   void slotEditSecurity();
   void slotDeleteSecurity();
@@ -93,48 +102,7 @@ private Q_SLOTS:
     */
   void slotLoadAccount(const QString &id);
 
-Q_SIGNALS:
-  void accountSelected(const MyMoneyObject&);
-
-  void equityRightClicked();
-
-  /**
-    * This signal is emitted whenever the view is about to be shown.
-    */
-  void aboutToShow();
-
-private:
-  class Private;
-  Private* const d;
-
-  KMyMoneyApp                         *m_kmymoney;
-  KMyMoneyView                        *m_kmymoneyview;
-
-  /** Initializes page and sets its load status to initialized
-   */
-  void init();
-
-  /**
-    * This slot is used to programatically preselect default account in investment view
-    */
-  void selectDefaultInvestmentAccount();
-  enum Tab { Equities = 0, Securities };
-
-  /**
-    * This slots are used to reload tabs
-    */
-  void loadInvestmentTab();
-  void loadSecuritiesTab();
-
-  /**
-    * This slots returns security currently selected in tree view
-    */
-  MyMoneySecurity currentSecurity();
-
-  /**
-    * This member holds the load state of page
-    */
-  bool m_needLoad;
+  void slotInvestmentMenuRequested(const QPoint&);
 };
 
 #endif

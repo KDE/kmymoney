@@ -68,7 +68,7 @@ Q_SIGNALS:
     *
     * @param obj const reference to object
     */
-  void selectObject(const MyMoneyObject& obj);
+  void objectSelected(const MyMoneyObject& obj);
 
   /**
     * This signal serves as proxy for
@@ -76,7 +76,7 @@ Q_SIGNALS:
     *
     * @param obj const reference to object
     */
-  void openContextMenu(const MyMoneyObject& obj);
+  void contextMenuRequested(const MyMoneyObject& obj);
 
   /**
     * This signal is emitted whenever the user requests to open an object
@@ -84,7 +84,7 @@ Q_SIGNALS:
     * @param obj reference to actual MyMoneyObject (is either
     *            MyMoneyAccount or MyMoneyInstitution depending on selected item)
     */
-  void openObject(const MyMoneyObject& obj);
+  void openObjectRequested(const MyMoneyObject& obj);
 
   void columnToggled(const eAccountsModel::Column column, const bool show);
 

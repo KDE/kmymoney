@@ -3,6 +3,7 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
                            (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ****************************************************************************/
 
@@ -170,6 +171,7 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
+#include "menuenums.h"
 
 #include "misc/platformtools.h"
 
@@ -178,6 +180,7 @@
 #endif
 
 using namespace Icons;
+using namespace eMenu;
 
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
@@ -187,113 +190,8 @@ static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 #define RECOVER_KEY_EXPIRATION_WARNING 30
 #endif
 
-const QHash<Action, QString> KMyMoneyApp::s_Actions {
-  {Action::FileOpenDatabase, QStringLiteral("open_database")},
-  {Action::FileSaveAsDatabase, QStringLiteral("saveas_database")},
-  {Action::FileBackup, QStringLiteral("file_backup")},
-  {Action::FileImportStatement, QStringLiteral("file_import_statement")},
-  {Action::FileImportTemplate, QStringLiteral("file_import_template")},
-  {Action::FileExportTemplate, QStringLiteral("file_export_template")},
-  {Action::FilePersonalData, QStringLiteral("view_personal_data")},
-  #ifdef KMM_DEBUG
-  {Action::FileDump, QStringLiteral("file_dump")},
-  #endif
-  {Action::FileInformation, QStringLiteral("view_file_info")},
-  {Action::EditFindTransaction, QStringLiteral("edit_find_transaction")},
-  {Action::ViewTransactionDetail, QStringLiteral("view_show_transaction_detail")},
-  {Action::ViewHideReconciled, QStringLiteral("view_hide_reconciled_transactions")},
-  {Action::ViewHideCategories, QStringLiteral("view_hide_unused_categories")},
-  {Action::ViewShowAll, QStringLiteral("view_show_all_accounts")},
-  {Action::InstitutionNew, QStringLiteral("institution_new")},
-  {Action::InstitutionEdit, QStringLiteral("institution_edit")},
-  {Action::InstitutionDelete, QStringLiteral("institution_delete")},
-  {Action::AccountNew, QStringLiteral("account_new")},
-  {Action::AccountOpen, QStringLiteral("account_open")},
-  {Action::AccountStartReconciliation, QStringLiteral("account_reconcile")},
-  {Action::AccountFinishReconciliation, QStringLiteral("account_reconcile_finish")},
-  {Action::AccountPostponeReconciliation, QStringLiteral("account_reconcile_postpone")},
-  {Action::AccountEdit, QStringLiteral("account_edit")},
-  {Action::AccountDelete, QStringLiteral("account_delete")},
-  {Action::AccountClose, QStringLiteral("account_close")},
-  {Action::AccountReopen, QStringLiteral("account_reopen")},
-  {Action::AccountTransactionReport, QStringLiteral("account_transaction_report")},
-  {Action::AccountBalanceChart, QStringLiteral("account_chart")},
-  {Action::AccountOnlineMap, QStringLiteral("account_online_map")},
-  {Action::AccountOnlineUnmap, QStringLiteral("account_online_unmap")},
-  {Action::AccountUpdateMenu, QStringLiteral("account_online_update_menu")},
-  {Action::AccountUpdate, QStringLiteral("account_online_update")},
-  {Action::AccountUpdateAll, QStringLiteral("account_online_update_all")},
-  {Action::AccountCreditTransfer, QStringLiteral("account_online_new_credit_transfer")},
-  {Action::CategoryNew, QStringLiteral("category_new")},
-  {Action::CategoryEdit, QStringLiteral("category_edit")},
-  {Action::CategoryDelete, QStringLiteral("category_delete")},
-  {Action::ToolCurrencies, QStringLiteral("tools_currency_editor")},
-  {Action::ToolPrices, QStringLiteral("tools_price_editor")},
-  {Action::ToolUpdatePrices, QStringLiteral("tools_update_prices")},
-  {Action::ToolConsistency, QStringLiteral("tools_consistency_check")},
-  {Action::ToolPerformance, QStringLiteral("tools_performancetest")},
-  {Action::ToolSQL, QStringLiteral("tools_generate_sql")},
-  {Action::ToolCalculator, QStringLiteral("tools_kcalc")},
-  {Action::SettingsAllMessages, QStringLiteral("settings_enable_messages")},
-  {Action::HelpShow, QStringLiteral("help_show_tip")},
-  {Action::TransactionNew, QStringLiteral("transaction_new")},
-  {Action::TransactionEdit, QStringLiteral("transaction_edit")},
-  {Action::TransactionEnter, QStringLiteral("transaction_enter")},
-  {Action::TransactionEditSplits, QStringLiteral("transaction_editsplits")},
-  {Action::TransactionCancel, QStringLiteral("transaction_cancel")},
-  {Action::TransactionDelete, QStringLiteral("transaction_delete")},
-  {Action::TransactionDuplicate, QStringLiteral("transaction_duplicate")},
-  {Action::TransactionMatch, QStringLiteral("transaction_match")},
-  {Action::TransactionAccept, QStringLiteral("transaction_accept")},
-  {Action::TransactionToggleReconciled, QStringLiteral("transaction_mark_toggle")},
-  {Action::TransactionToggleCleared, QStringLiteral("transaction_mark_cleared")},
-  {Action::TransactionReconciled, QStringLiteral("transaction_mark_reconciled")},
-  {Action::TransactionNotReconciled, QStringLiteral("transaction_mark_notreconciled")},
-  {Action::TransactionSelectAll, QStringLiteral("transaction_select_all")},
-  {Action::TransactionGoToAccount, QStringLiteral("transaction_goto_account")},
-  {Action::TransactionGoToPayee, QStringLiteral("transaction_goto_payee")},
-  {Action::TransactionCreateSchedule, QStringLiteral("transaction_create_schedule")},
-  {Action::TransactionAssignNumber, QStringLiteral("transaction_assign_number")},
-  {Action::TransactionCombine, QStringLiteral("transaction_combine")},
-  {Action::TransactionCopySplits, QStringLiteral("transaction_copy_splits")},
-  {Action::TransactionMoveMenu, QStringLiteral("transaction_move_menu")},
-  {Action::TransactionMarkMenu, QStringLiteral("transaction_mark_menu")},
-  {Action::TransactionContextMarkMenu, QStringLiteral("transaction_context_mark_menu")},
-  {Action::InvestmentNew, QStringLiteral("investment_new")},
-  {Action::InvestmentEdit, QStringLiteral("investment_edit")},
-  {Action::InvestmentDelete, QStringLiteral("investment_delete")},
-  {Action::InvestmentOnlinePrice, QStringLiteral("investment_online_price_update")},
-  {Action::InvestmentManualPrice, QStringLiteral("investment_manual_price_update")},
-  {Action::ScheduleNew, QStringLiteral("schedule_new")},
-  {Action::ScheduleEdit, QStringLiteral("schedule_edit")},
-  {Action::ScheduleDelete, QStringLiteral("schedule_delete")},
-  {Action::ScheduleDuplicate, QStringLiteral("schedule_duplicate")},
-  {Action::ScheduleEnter, QStringLiteral("schedule_enter")},
-  {Action::ScheduleSkip, QStringLiteral("schedule_skip")},
-  {Action::PayeeNew, QStringLiteral("payee_new")},
-  {Action::PayeeRename, QStringLiteral("payee_rename")},
-  {Action::PayeeDelete, QStringLiteral("payee_delete")},
-  {Action::PayeeMerge, QStringLiteral("payee_merge")},
-  {Action::TagNew, QStringLiteral("tag_new")},
-  {Action::TagRename, QStringLiteral("tag_rename")},
-  {Action::TagDelete, QStringLiteral("tag_delete")},
-  {Action::CurrencyNew, QStringLiteral("currency_new")},
-  {Action::CurrencyRename, QStringLiteral("currency_rename")},
-  {Action::CurrencyDelete, QStringLiteral("currency_delete")},
-  {Action::CurrencySetBase, QStringLiteral("currency_setbase")},
-  {Action::PriceNew, QStringLiteral("price_new")},
-  {Action::PriceEdit, QStringLiteral("price_edit")},
-  {Action::PriceUpdate, QStringLiteral("price_update")},
-  {Action::PriceDelete, QStringLiteral("price_delete")},
-  #ifdef KMM_DEBUG
-  {Action::WizardNewUser, QStringLiteral("new_user_wizard")},
-  {Action::DebugTraces, QStringLiteral("debug_traces")},
-  #endif
-  {Action::DebugTimers, QStringLiteral("debug_timers")},
-  {Action::OnlineJobDelete, QStringLiteral("onlinejob_delete")},
-  {Action::OnlineJobEdit, QStringLiteral("onlinejob_edit")},
-  {Action::OnlineJobLog, QStringLiteral("onlinejob_log")},
-};
+QHash<eMenu::Action, QAction *> pActions;
+QHash<eMenu::Menu, QMenu *> pMenus;
 
 enum backupStateE {
   BACKUP_IDLE = 0,
@@ -441,8 +339,6 @@ public:
 
   MyMoneyAccount        m_selectedAccount;
   MyMoneyAccount        m_reconciliationAccount;
-  MyMoneyAccount        m_selectedInvestment;
-  MyMoneyInstitution    m_selectedInstitution;
   MyMoneySchedule       m_selectedSchedule;
   MyMoneySecurity       m_selectedCurrency;
   MyMoneyPrice          m_selectedPrice;
@@ -533,7 +429,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   }
 
   initStatusBar();
-  initActions();
+  pActions = initActions();
+  pMenus = initMenus();
 
   initDynamicMenus();
 
@@ -552,13 +449,14 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // now initialize the plugin structure
   createInterfaces();
   loadPlugins();
+  d->m_myMoneyView->setOnlinePlugins(d->m_onlinePlugins);
 
   setCentralWidget(frame);
 
   connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotBackupHandleEvents()));
 
   // force to show the home page if the file is closed
-  connect(actionCollection()->action(s_Actions[Action::ViewTransactionDetail]), &QAction::toggled, d->m_myMoneyView, &KMyMoneyView::slotShowTransactionDetail);
+  connect(pActions[Action::ViewTransactionDetail], &QAction::toggled, d->m_myMoneyView, &KMyMoneyView::slotShowTransactionDetail);
 
   d->m_backupState = BACKUP_IDLE;
 
@@ -697,9 +595,24 @@ void KMyMoneyApp::initDynamicMenus()
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotUpdateMoveToAccountMenu()));
 }
 
-void KMyMoneyApp::initActions()
+QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
 {
-  KActionCollection *aC = actionCollection();
+  QHash<Menu, QMenu *> lutMenus;
+  const QHash<Menu, QString> menuNames {
+    {Menu::Institution, QStringLiteral("institution_context_menu")},
+    {Menu::Account,     QStringLiteral("account_context_menu")},
+    {Menu::Category,    QStringLiteral("category_context_menu")},
+    {Menu::Investment,  QStringLiteral("investment_context_menu")}
+  };
+
+  for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it)
+    lutMenus.insert(it.key(), qobject_cast<QMenu*>(factory()->container(it.value(), this)));
+  return lutMenus;
+}
+
+QHash<Action, QAction *> KMyMoneyApp::initActions()
+{
+  auto aC = actionCollection();
 
   // *************
   // Adding standard actions
@@ -725,168 +638,292 @@ void KMyMoneyApp::initActions()
   // Adding all actions
   // *************
   {
-    // struct for QAction's vital (except icon) information
+    // struct for creating useless (unconnected) QAction
     struct actionInfo {
-      Action          action;
-      KMyMoneyAppFunc callback;
-      QString         text;
-      Icon            icon;
+      Action  action;
+      QString name;
+      QString text;
+      Icon    icon;
     };
 
     const QVector<actionInfo> actionInfos {
       // *************
       // The File menu
       // *************
-      {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase,                 i18n("Open database..."),                           Icon::SVNUpdate},
-      {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase,               i18n("Save as database..."),                        Icon::FileArchiver},
-      {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile,                   i18n("Backup..."),                                  Icon::Empty},
-      {Action::FileImportStatement,           &KMyMoneyApp::slotStatementImport,              i18n("Statement file..."),                          Icon::Empty},
-      {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates,         i18n("Account Template..."),                        Icon::Empty},
-      {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates,         i18n("Account Template..."),                        Icon::Empty},
-      {Action::FilePersonalData,              &KMyMoneyApp::slotFileViewPersonal,             i18n("Personal Data..."),                           Icon::UserProperties},
+      {Action::FileOpenDatabase,              QStringLiteral("open_database"),                  i18n("Open database..."),                           Icon::SVNUpdate},
+      {Action::FileSaveAsDatabase,            QStringLiteral("saveas_database"),                i18n("Save as database..."),                        Icon::FileArchiver},
+      {Action::FileBackup,                    QStringLiteral("file_backup"),                    i18n("Backup..."),                                  Icon::Empty},
+      {Action::FileImportStatement,           QStringLiteral("file_import_statement"),          i18n("Statement file..."),                          Icon::Empty},
+      {Action::FileImportTemplate,            QStringLiteral("file_import_template"),           i18n("Account Template..."),                        Icon::Empty},
+      {Action::FileExportTemplate,            QStringLiteral("file_export_template"),           i18n("Account Template..."),                        Icon::Empty},
+      {Action::FilePersonalData,              QStringLiteral("view_personal_data"),             i18n("Personal Data..."),                           Icon::UserProperties},
 #ifdef KMM_DEBUG
-      {Action::FileDump,                      &KMyMoneyApp::slotFileFileInfo,                 i18n("Dump Memory"),                                Icon::Empty},
+      {Action::FileDump,                      QStringLiteral("file_dump"),                      i18n("Dump Memory"),                                Icon::Empty},
 #endif
-      {Action::FileInformation,               &KMyMoneyApp::slotFileInfoDialog,               i18n("File-Information..."),                        Icon::DocumentProperties},
+      {Action::FileInformation,               QStringLiteral("view_file_info"),                 i18n("File-Information..."),                        Icon::DocumentProperties},
       // *************
       // The Edit menu
       // *************
-      {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction,              i18n("Find transaction..."),                        Icon::EditFindTransaction},
+      {Action::EditFindTransaction,           QStringLiteral("edit_find_transaction"),          i18n("Find transaction..."),                        Icon::EditFindTransaction},
       // *************
       // The View menu
       // *************
-      {Action::ViewTransactionDetail,         &KMyMoneyApp::slotShowTransactionDetail,        i18n("Show Transaction Detail"),                    Icon::ViewTransactionDetail},
-      {Action::ViewHideReconciled,            &KMyMoneyApp::slotHideReconciledTransactions,   i18n("Hide reconciled transactions"),               Icon::HideReconciled},
-      {Action::ViewHideCategories,            &KMyMoneyApp::slotHideUnusedCategories,         i18n("Hide unused categories"),                     Icon::HideCategories},
-      {Action::ViewShowAll,                   &KMyMoneyApp::slotShowAllAccounts,              i18n("Show all accounts"),                          Icon::Empty},
+      {Action::ViewTransactionDetail,         QStringLiteral("view_show_transaction_detail"),   i18n("Show Transaction Detail"),                    Icon::ViewTransactionDetail},
+      {Action::ViewHideReconciled,            QStringLiteral("view_hide_reconciled_transactions"), i18n("Hide reconciled transactions"),            Icon::HideReconciled},
+      {Action::ViewHideCategories,            QStringLiteral("view_hide_unused_categories"),    i18n("Hide unused categories"),                     Icon::HideCategories},
+      {Action::ViewShowAll,                   QStringLiteral("view_show_all_accounts"),         i18n("Show all accounts"),                          Icon::Empty},
       // *********************
       // The institutions menu
       // *********************
-      {Action::InstitutionNew,                &KMyMoneyApp::slotInstitutionNew,               i18n("New institution..."),                         Icon::InstitutionNew},
-      {Action::InstitutionEdit,               &KMyMoneyApp::slotInstitutionEditEmpty,         i18n("Edit institution..."),                        Icon::InstitutionEdit},
-      {Action::InstitutionDelete,             &KMyMoneyApp::slotInstitutionDelete,            i18n("Delete institution..."),                      Icon::InstitutionDelete},
+      {Action::NewInstitution,                QStringLiteral("institution_new"),                i18n("New institution..."),                         Icon::InstitutionNew},
+      {Action::EditInstitution,               QStringLiteral("institution_edit"),               i18n("Edit institution..."),                        Icon::InstitutionEdit},
+      {Action::DeleteInstitution,             QStringLiteral("institution_delete"),             i18n("Delete institution..."),                      Icon::InstitutionDelete},
       // *****************
       // The accounts menu
       // *****************
-      {Action::AccountNew,                    &KMyMoneyApp::slotAccountNew,                   i18n("New account..."),                             Icon::AccountNew},
-      {Action::AccountOpen,                   &KMyMoneyApp::slotAccountOpenEmpty,             i18n("Open ledger"),                                Icon::ViewFinancialList},
-      {Action::AccountStartReconciliation,    &KMyMoneyApp::slotAccountReconcileStart,        i18n("Reconcile..."),                               Icon::Reconcile},
-      {Action::AccountFinishReconciliation,   &KMyMoneyApp::slotAccountReconcileFinish,       i18nc("Finish reconciliation", "Finish"),           Icon::AccountFinishReconciliation},
-      {Action::AccountPostponeReconciliation, &KMyMoneyApp::slotAccountReconcilePostpone,     i18n("Postpone reconciliation"),                    Icon::MediaPlaybackPause},
-      {Action::AccountEdit,                   &KMyMoneyApp::slotAccountEdit,                  i18n("Edit account..."),                            Icon::AccountEdit},
-      {Action::AccountDelete,                 &KMyMoneyApp::slotAccountDelete,                i18n("Delete account..."),                          Icon::AccountDelete},
-      {Action::AccountClose,                  &KMyMoneyApp::slotAccountClose,                 i18n("Close account"),                              Icon::AccountClose},
-      {Action::AccountReopen,                 &KMyMoneyApp::slotAccountReopen,                i18n("Reopen account"),                             Icon::AccountReopen},
-      {Action::AccountTransactionReport,      &KMyMoneyApp::slotAccountTransactionReport,     i18n("Transaction report"),                         Icon::ViewFinancialList},
-      {Action::AccountBalanceChart,           &KMyMoneyApp::slotAccountChart,                 i18n("Show balance chart..."),                      Icon::OfficeChartLine},
-      {Action::AccountOnlineMap,              &KMyMoneyApp::slotAccountMapOnline,             i18n("Map account..."),                             Icon::NewsSubscribe},
-      {Action::AccountOnlineUnmap,            &KMyMoneyApp::slotAccountUnmapOnline,           i18n("Unmap account..."),                           Icon::NewsUnsubscribe},
-      {Action::AccountUpdateMenu,             &KMyMoneyApp::slotAccountUpdateOnline,          i18nc("Update online accounts menu", "Update"),     Icon::AccountUpdateMenu},
-      {Action::AccountUpdate,                 &KMyMoneyApp::slotAccountUpdateOnline,          i18n("Update account..."),                          Icon::AccountUpdate},
-      {Action::AccountUpdateAll,              &KMyMoneyApp::slotAccountUpdateOnlineAll,       i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
-      {Action::AccountCreditTransfer,         &KMyMoneyApp::slotNewOnlineTransfer,            i18n("New credit transfer"),                        Icon::AccountCreditTransfer},
+      {Action::NewAccount,                    QStringLiteral("account_new"),                    i18n("New account..."),                             Icon::AccountNew},
+      {Action::OpenAccount,                   QStringLiteral("account_open"),                   i18n("Open ledger"),                                Icon::ViewFinancialList},
+      {Action::StartAccountReconciliation,    QStringLiteral("account_reconcile"),              i18n("Reconcile..."),                               Icon::Reconcile},
+      {Action::FinishAccountReconciliation,   QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),           Icon::AccountFinishReconciliation},
+      {Action::PostponeAccountReconciliation, QStringLiteral("account_reconcile_postpone"),     i18n("Postpone reconciliation"),                    Icon::MediaPlaybackPause},
+      {Action::EditAccount,                   QStringLiteral("account_edit"),                   i18n("Edit account..."),                            Icon::AccountEdit},
+      {Action::DeleteAccount,                 QStringLiteral("account_delete"),                 i18n("Delete account..."),                          Icon::AccountDelete},
+      {Action::CloseAccount,                  QStringLiteral("account_close"),                  i18n("Close account"),                              Icon::AccountClose},
+      {Action::ReopenAccount,                 QStringLiteral("account_reopen"),                 i18n("Reopen account"),                             Icon::AccountReopen},
+      {Action::ReportAccountTransactions,     QStringLiteral("account_transaction_report"),     i18n("Transaction report"),                         Icon::ViewFinancialList},
+      {Action::ChartAccountBalance,           QStringLiteral("account_chart"),                  i18n("Show balance chart..."),                      Icon::OfficeChartLine},
+      {Action::MapOnlineAccount,              QStringLiteral("account_online_map"),             i18n("Map account..."),                             Icon::NewsSubscribe},
+      {Action::UnmapOnlineAccount,            QStringLiteral("account_online_unmap"),           i18n("Unmap account..."),                           Icon::NewsUnsubscribe},
+      {Action::UpdateAccount,                 QStringLiteral("account_online_update"),          i18n("Update account..."),                          Icon::AccountUpdate},
+      {Action::UpdateAllAccounts,             QStringLiteral("account_online_update_all"),      i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
+      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                        Icon::AccountCreditTransfer},
       // *******************
       // The categories menu
       // *******************
-      {Action::CategoryNew,                   &KMyMoneyApp::slotCategoryNew,                  i18n("New category..."),                            Icon::CategoryNew},
-      {Action::CategoryEdit,                  &KMyMoneyApp::slotAccountEdit,                  i18n("Edit category..."),                           Icon::CategoryEdit},
-      {Action::CategoryDelete,                &KMyMoneyApp::slotAccountDelete,                i18n("Delete category..."),                         Icon::CategoryDelete},
+      {Action::NewCategory,                   QStringLiteral("category_new"),                   i18n("New category..."),                            Icon::CategoryNew},
+      {Action::EditCategory,                  QStringLiteral("category_edit"),                  i18n("Edit category..."),                           Icon::CategoryEdit},
+      {Action::DeleteCategory,                QStringLiteral("category_delete"),                i18n("Delete category..."),                         Icon::CategoryDelete},
       // **************
       // The tools menu
       // **************
-      {Action::ToolCurrencies,                &KMyMoneyApp::slotCurrencyDialog,               i18n("Currencies..."),                              Icon::ViewCurrencyList},
-      {Action::ToolPrices,                    &KMyMoneyApp::slotPriceDialog,                  i18n("Prices..."),                                  Icon::Empty},
-      {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate,            i18n("Update Stock and Currency Prices..."),        Icon::ToolUpdatePrices},
-      {Action::ToolConsistency,               &KMyMoneyApp::slotFileConsistencyCheck,         i18n("Consistency Check"),                          Icon::Empty},
-      {Action::ToolPerformance,               &KMyMoneyApp::slotPerformanceTest,              i18n("Performance-Test"),                           Icon::Fork},
-      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql,                  i18n("Generate Database SQL"),                      Icon::Empty},
-      {Action::ToolCalculator,                &KMyMoneyApp::slotToolsStartKCalc,              i18n("Calculator..."),                              Icon::AccessoriesCalculator},
+      {Action::ToolCurrencies,                QStringLiteral("tools_currency_editor"),          i18n("Currencies..."),                              Icon::ViewCurrencyList},
+      {Action::ToolPrices,                    QStringLiteral("tools_price_editor"),             i18n("Prices..."),                                  Icon::Empty},
+      {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::ToolUpdatePrices},
+      {Action::ToolConsistency,               QStringLiteral("tools_consistency_check"),        i18n("Consistency Check"),                          Icon::Empty},
+      {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::Fork},
+      {Action::ToolSQL,                       QStringLiteral("tools_generate_sql"),             i18n("Generate Database SQL"),                      Icon::Empty},
+      {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::AccessoriesCalculator},
       // *****************
       // The settings menu
       // *****************
-      {Action::SettingsAllMessages,           &KMyMoneyApp::slotEnableMessages,               i18n("Enable all messages"),                        Icon::Empty},
+      {Action::SettingsAllMessages,           QStringLiteral("settings_enable_messages"),       i18n("Enable all messages"),                        Icon::Empty},
       // *************
       // The help menu
       // *************
-      {Action::HelpShow,                      &KMyMoneyApp::slotShowTipOfTheDay,              i18n("&Show tip of the day"),                       Icon::Tip},
+      {Action::HelpShow,                      QStringLiteral("help_show_tip"),                  i18n("&Show tip of the day"),                       Icon::Tip},
       // ***************************
       // Actions w/o main menu entry
       // ***************************
-      {Action::TransactionNew,                &KMyMoneyApp::slotTransactionsNew,              i18nc("New transaction button", "New"),             Icon::TransactionNew},
-      {Action::TransactionEdit,               &KMyMoneyApp::slotTransactionsEdit,             i18nc("Edit transaction button", "Edit"),           Icon::TransactionEdit},
-      {Action::TransactionEnter,              &KMyMoneyApp::slotTransactionsEnter,            i18nc("Enter transaction", "Enter"),                Icon::DialogOK},
-      {Action::TransactionEditSplits,         &KMyMoneyApp::slotTransactionsEditSplits,       i18nc("Edit split button", "Edit splits"),          Icon::Split},
-      {Action::TransactionCancel,             &KMyMoneyApp::slotTransactionsCancel,           i18nc("Cancel transaction edit", "Cancel"),         Icon::DialogCancel},
-      {Action::TransactionDelete,             &KMyMoneyApp::slotTransactionsDelete,           i18nc("Delete transaction", "Delete"),              Icon::EditDelete},
-      {Action::TransactionDuplicate,          &KMyMoneyApp::slotTransactionDuplicate,         i18nc("Duplicate transaction", "Duplicate"),        Icon::EditCopy},
-      {Action::TransactionMatch,              &KMyMoneyApp::slotTransactionMatch,             i18nc("Button text for match transaction", "Match"),Icon::TransactionMatch},
-      {Action::TransactionAccept,             &KMyMoneyApp::slotTransactionsAccept,           i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::TransactionAccept},
-      {Action::TransactionToggleReconciled,   &KMyMoneyApp::slotToggleReconciliationFlag,     i18nc("Toggle reconciliation flag", "Toggle"),      Icon::Empty},
-      {Action::TransactionToggleCleared,      &KMyMoneyApp::slotMarkTransactionCleared,       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
-      {Action::TransactionReconciled,         &KMyMoneyApp::slotMarkTransactionReconciled,    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
-      {Action::TransactionNotReconciled,      &KMyMoneyApp::slotMarkTransactionNotReconciled, i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
-      {Action::TransactionSelectAll,          &KMyMoneyApp::selectAllTransactions,            i18nc("Select all transactions", "Select all"),     Icon::Empty},
-      {Action::TransactionGoToAccount,        &KMyMoneyApp::slotTransactionGotoAccount,       i18n("Go to account"),                              Icon::GoJump},
-      {Action::TransactionGoToPayee,          &KMyMoneyApp::slotTransactionGotoPayee,         i18n("Go to payee"),                                Icon::GoJump},
-      {Action::TransactionCreateSchedule,     &KMyMoneyApp::slotTransactionCreateSchedule,    i18n("Create scheduled transaction..."),            Icon::AppointmentNew},
-      {Action::TransactionAssignNumber,       &KMyMoneyApp::slotTransactionAssignNumber,      i18n("Assign next number"),                         Icon::Empty},
-      {Action::TransactionCombine,            &KMyMoneyApp::slotTransactionCombine,           i18nc("Combine transactions", "Combine"),           Icon::Empty},
-      {Action::TransactionCopySplits,         &KMyMoneyApp::slotTransactionCopySplits,        i18n("Copy splits"),                                Icon::Empty},
+      {Action::TransactionNew,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New"),             Icon::TransactionNew},
+      {Action::TransactionEdit,               QStringLiteral("transaction_edit"),               i18nc("Edit transaction button", "Edit"),           Icon::TransactionEdit},
+      {Action::TransactionEnter,              QStringLiteral("transaction_enter"),              i18nc("Enter transaction", "Enter"),                Icon::DialogOK},
+      {Action::TransactionEditSplits,         QStringLiteral("transaction_editsplits"),         i18nc("Edit split button", "Edit splits"),          Icon::Split},
+      {Action::TransactionCancel,             QStringLiteral("transaction_cancel"),             i18nc("Cancel transaction edit", "Cancel"),         Icon::DialogCancel},
+      {Action::TransactionDelete,             QStringLiteral("transaction_delete"),             i18nc("Delete transaction", "Delete"),              Icon::EditDelete},
+      {Action::TransactionDuplicate,          QStringLiteral("transaction_duplicate"),          i18nc("Duplicate transaction", "Duplicate"),        Icon::EditCopy},
+      {Action::TransactionMatch,              QStringLiteral("transaction_match"),              i18nc("Button text for match transaction", "Match"),Icon::TransactionMatch},
+      {Action::TransactionAccept,             QStringLiteral("transaction_accept"),             i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::TransactionAccept},
+      {Action::TransactionToggleReconciled,   QStringLiteral("transaction_mark_toggle"),        i18nc("Toggle reconciliation flag", "Toggle"),      Icon::Empty},
+      {Action::TransactionToggleCleared,      QStringLiteral("transaction_mark_cleared"),       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
+      {Action::TransactionReconciled,         QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
+      {Action::TransactionNotReconciled,      QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
+      {Action::TransactionSelectAll,          QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::Empty},
+      {Action::TransactionGoToAccount,        QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::GoJump},
+      {Action::TransactionGoToPayee,          QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::GoJump},
+      {Action::TransactionCreateSchedule,     QStringLiteral("transaction_create_schedule"),    i18n("Create scheduled transaction..."),            Icon::AppointmentNew},
+      {Action::TransactionAssignNumber,       QStringLiteral("transaction_assign_number"),      i18n("Assign next number"),                         Icon::Empty},
+      {Action::TransactionCombine,            QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),           Icon::Empty},
+      {Action::TransactionCopySplits,         QStringLiteral("transaction_copy_splits"),        i18n("Copy splits"),                                Icon::Empty},
       //Investment
-      {Action::InvestmentNew,                 &KMyMoneyApp::slotInvestmentNew,                i18n("New investment..."),                          Icon::InvestmentNew},
-      {Action::InvestmentEdit,                &KMyMoneyApp::slotInvestmentEdit,               i18n("Edit investment..."),                         Icon::InvestmentEdit},
-      {Action::InvestmentDelete,              &KMyMoneyApp::slotInvestmentDelete,             i18n("Delete investment..."),                       Icon::InvestmentDelete},
-      {Action::InvestmentOnlinePrice,         &KMyMoneyApp::slotOnlinePriceUpdate,            i18n("Online price update..."),                     Icon::InvestmentOnlinePrice},
-      {Action::InvestmentManualPrice,         &KMyMoneyApp::slotManualPriceUpdate,            i18n("Manual price update..."),                     Icon::Empty},
+      {Action::NewInvestment,                 QStringLiteral("investment_new"),                 i18n("New investment..."),                          Icon::InvestmentNew},
+      {Action::EditInvestment,                QStringLiteral("investment_edit"),                i18n("Edit investment..."),                         Icon::InvestmentEdit},
+      {Action::DeleteInvestment,              QStringLiteral("investment_delete"),              i18n("Delete investment..."),                       Icon::InvestmentDelete},
+      {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::InvestmentOnlinePrice},
+      {Action::UpdatePriceManually,           QStringLiteral("investment_manual_price_update"), i18n("Manual price update..."),                     Icon::Empty},
       //Schedule
-      {Action::ScheduleNew,                   &KMyMoneyApp::slotScheduleNew,                  i18n("New scheduled transaction"),                  Icon::AppointmentNew},
-      {Action::ScheduleEdit,                  &KMyMoneyApp::slotScheduleEdit,                 i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
-      {Action::ScheduleDelete,                &KMyMoneyApp::slotScheduleDelete,               i18n("Delete scheduled transaction"),               Icon::EditDelete},
-      {Action::ScheduleDuplicate,             &KMyMoneyApp::slotScheduleDuplicate,            i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
-      {Action::ScheduleEnter,                 &KMyMoneyApp::slotScheduleEnter,                i18n("Enter next transaction..."),                  Icon::KeyEnter},
-      {Action::ScheduleSkip,                  &KMyMoneyApp::slotScheduleSkip,                 i18n("Skip next transaction..."),                   Icon::MediaSeekForward},
+      {Action::ScheduleNew,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::AppointmentNew},
+      {Action::ScheduleEdit,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
+      {Action::ScheduleDelete,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditDelete},
+      {Action::ScheduleDuplicate,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
+      {Action::ScheduleEnter,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
+      {Action::ScheduleSkip,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::MediaSeekForward},
       //Payees
-      {Action::PayeeNew,                      &KMyMoneyApp::slotPayeeNew,                     i18n("New payee"),                                  Icon::ListAddUser},
-      {Action::PayeeRename,                   &KMyMoneyApp::payeeRename,                      i18n("Rename payee"),                               Icon::PayeeRename},
-      {Action::PayeeDelete,                   &KMyMoneyApp::slotPayeeDelete,                  i18n("Delete payee"),                               Icon::ListRemoveUser},
-      {Action::PayeeMerge,                    &KMyMoneyApp::slotPayeeMerge,                   i18n("Merge payees"),                               Icon::PayeeMerge},
+      {Action::PayeeNew,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::ListAddUser},
+      {Action::PayeeRename,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
+      {Action::PayeeDelete,                   QStringLiteral("payee_delete"),                   i18n("Delete payee"),                               Icon::ListRemoveUser},
+      {Action::PayeeMerge,                    QStringLiteral("payee_merge"),                    i18n("Merge payees"),                               Icon::PayeeMerge},
       //Tags
-      {Action::TagNew,                        &KMyMoneyApp::slotTagNew,                       i18n("New tag"),                                    Icon::ListAddTag},
-      {Action::TagRename,                     &KMyMoneyApp::slotTagRename,                        i18n("Rename tag"),                                 Icon::TagRename},
-      {Action::TagDelete,                     &KMyMoneyApp::slotTagDelete,                    i18n("Delete tag"),                                 Icon::ListRemoveTag},
+      {Action::TagNew,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::ListAddTag},
+      {Action::TagRename,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
+      {Action::TagDelete,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::ListRemoveTag},
       //Currency actions
-      {Action::CurrencyNew,                   &KMyMoneyApp::slotCurrencyNew,                  i18n("New currency"),                               Icon::Empty},
-      {Action::CurrencyRename,                &KMyMoneyApp::currencyRename,                   i18n("Rename currency"),                            Icon::EditRename},
-      {Action::CurrencyDelete,                &KMyMoneyApp::slotCurrencyDelete,               i18n("Delete currency"),                            Icon::EditDelete},
-      {Action::CurrencySetBase,               &KMyMoneyApp::slotCurrencySetBase,              i18n("Select as base currency"),                    Icon::KMyMoney},
+      {Action::CurrencyNew,                   QStringLiteral("currency_new"),                   i18n("New currency"),                               Icon::Empty},
+      {Action::CurrencyRename,                QStringLiteral("currency_rename"),                i18n("Rename currency"),                            Icon::EditRename},
+      {Action::CurrencyDelete,                QStringLiteral("currency_delete"),                i18n("Delete currency"),                            Icon::EditDelete},
+      {Action::CurrencySetBase,               QStringLiteral("currency_setbase"),               i18n("Select as base currency"),                    Icon::KMyMoney},
       //Price actions
-      {Action::PriceNew,                      &KMyMoneyApp::priceNew,                         i18n("New price..."),                               Icon::DocumentNew},
-      {Action::PriceEdit,                     &KMyMoneyApp::priceEdit,                        i18n("Edit price..."),                              Icon::DocumentEdit},
-      {Action::PriceUpdate,                   &KMyMoneyApp::priceOnlineUpdate,                i18n("Online Price Update..."),                     Icon::PriceUpdate},
-      {Action::PriceDelete,                   &KMyMoneyApp::priceDelete,                      i18n("Delete price..."),                            Icon::EditDelete},
+      {Action::PriceNew,                      QStringLiteral("price_new"),                      i18n("New price..."),                               Icon::DocumentNew},
+      {Action::PriceEdit,                     QStringLiteral("price_edit"),                     i18n("Edit price..."),                              Icon::DocumentEdit},
+      {Action::PriceUpdate,                   QStringLiteral("price_update"),                   i18n("Online Price Update..."),                     Icon::PriceUpdate},
+      {Action::PriceDelete,                   QStringLiteral("price_delete"),                   i18n("Delete price..."),                            Icon::EditDelete},
       //debug actions
 #ifdef KMM_DEBUG
-      {Action::WizardNewUser,                 &KMyMoneyApp::slotNewFeature,                   i18n("Test new feature"),                           Icon::Empty},
-      {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces,                 i18n("Debug Traces"),                               Icon::Empty},
+      {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
+      {Action::DebugTraces,                   QStringLiteral("debug_traces"),                   i18n("Debug Traces"),                               Icon::Empty},
 #endif
-      {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers,                 i18n("Debug Timers"),                               Icon::Empty},
+      {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
       // onlineJob actions
-      {Action::OnlineJobDelete,               &KMyMoneyApp::slotRemoveJob,                    i18n("Remove credit transfer"),                     Icon::EditDelete},
-      {Action::OnlineJobEdit,                 &KMyMoneyApp::slotEditJob,                      i18n("Edit credit transfer"),                       Icon::DocumentEdit},
-      {Action::OnlineJobLog,                  &KMyMoneyApp::slotOnlineJobLog,                 i18n("Show log"),                                   Icon::Empty},
+      {Action::OnlineJobDelete,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditDelete},
+      {Action::OnlineJobEdit,                 QStringLiteral("onlinejob_edit"),                 i18n("Edit credit transfer"),                       Icon::DocumentEdit},
+      {Action::OnlineJobLog,                  QStringLiteral("onlinejob_log"),                  i18n("Show log"),                                   Icon::Empty},
     };
 
-    foreach (const auto info, actionInfos) {
-      QAction *a = new QAction(0);
+    for (const auto& info : actionInfos) {
+      auto a = new QAction(nullptr);
       // KActionCollection::addAction by name sets object name anyways,
       // so, as better alternative, set it here right from the start
-      a->setObjectName(s_Actions.value(info.action));
+      a->setObjectName(info.name);
       a->setText(info.text);
       if (info.icon != Icon::Empty) // no need to set empty icon
         a->setIcon(Icons::get(info.icon));
-      connect(a, &QAction::triggered, this, info.callback);
+      a->setEnabled(false);
       lutActions.insert(info.action, a);  // store QAction's pointer for later processing
     }
+  }
+
+  {
+    // List with slots that get connected here. Other slots get connected in e.g. appropriate views
+    typedef void(KMyMoneyApp::*KMyMoneyAppFunc)();
+    const QHash<eMenu::Action, KMyMoneyAppFunc> actionConnections {
+      // *************
+      // The File menu
+      // *************
+      {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase},
+      {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase},
+      {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile},
+      {Action::FileImportStatement,           &KMyMoneyApp::slotStatementImport},
+      {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates},
+      {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates},
+      {Action::FilePersonalData,              &KMyMoneyApp::slotFileViewPersonal},
+#ifdef KMM_DEBUG
+      {Action::FileDump,                      &KMyMoneyApp::slotFileFileInfo},
+#endif
+      {Action::FileInformation,               &KMyMoneyApp::slotFileInfoDialog},
+      // *************
+      // The Edit menu
+      // *************
+      {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction},
+      // *************
+      // The View menu
+      // *************
+      {Action::ViewTransactionDetail,         &KMyMoneyApp::slotShowTransactionDetail},
+      {Action::ViewHideReconciled,            &KMyMoneyApp::slotHideReconciledTransactions},
+      {Action::ViewHideCategories,            &KMyMoneyApp::slotHideUnusedCategories},
+      {Action::ViewShowAll,                   &KMyMoneyApp::slotShowAllAccounts},
+      // *****************
+      // The accounts menu
+      // *****************
+      {Action::OpenAccount,                   &KMyMoneyApp::slotAccountOpenEmpty},
+      {Action::StartAccountReconciliation,    &KMyMoneyApp::slotAccountReconcileStart},
+      {Action::FinishAccountReconciliation,   &KMyMoneyApp::slotAccountReconcileFinish},
+      {Action::PostponeAccountReconciliation, &KMyMoneyApp::slotAccountReconcilePostpone},
+      {Action::ReportAccountTransactions,     &KMyMoneyApp::slotAccountTransactionReport},
+      {Action::MapOnlineAccount,              &KMyMoneyApp::slotAccountMapOnline},
+      {Action::UnmapOnlineAccount,            &KMyMoneyApp::slotAccountUnmapOnline},
+      {Action::UpdateAccount,                 &KMyMoneyApp::slotAccountUpdateOnline},
+      {Action::UpdateAllAccounts,             &KMyMoneyApp::slotAccountUpdateOnlineAll},
+      {Action::AccountCreditTransfer,         &KMyMoneyApp::slotNewOnlineTransfer},
+      // **************
+      // The tools menu
+      // **************
+      {Action::ToolCurrencies,                &KMyMoneyApp::slotCurrencyDialog},
+      {Action::ToolPrices,                    &KMyMoneyApp::slotPriceDialog},
+      {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate},
+      {Action::ToolConsistency,               &KMyMoneyApp::slotFileConsistencyCheck},
+      {Action::ToolPerformance,               &KMyMoneyApp::slotPerformanceTest},
+      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql},
+      {Action::ToolCalculator,                &KMyMoneyApp::slotToolsStartKCalc},
+      // *****************
+      // The settings menu
+      // *****************
+      {Action::SettingsAllMessages,           &KMyMoneyApp::slotEnableMessages},
+      // *************
+      // The help menu
+      // *************
+      {Action::HelpShow,                      &KMyMoneyApp::slotShowTipOfTheDay},
+      // ***************************
+      // Actions w/o main menu entry
+      // ***************************
+      {Action::TransactionNew,                &KMyMoneyApp::slotTransactionsNew},
+      {Action::TransactionEdit,               &KMyMoneyApp::slotTransactionsEdit},
+      {Action::TransactionEnter,              &KMyMoneyApp::slotTransactionsEnter},
+      {Action::TransactionEditSplits,         &KMyMoneyApp::slotTransactionsEditSplits},
+      {Action::TransactionCancel,             &KMyMoneyApp::slotTransactionsCancel},
+      {Action::TransactionDelete,             &KMyMoneyApp::slotTransactionsDelete},
+      {Action::TransactionDuplicate,          &KMyMoneyApp::slotTransactionDuplicate},
+      {Action::TransactionMatch,              &KMyMoneyApp::slotTransactionMatch},
+      {Action::TransactionAccept,             &KMyMoneyApp::slotTransactionsAccept},
+      {Action::TransactionToggleReconciled,   &KMyMoneyApp::slotToggleReconciliationFlag},
+      {Action::TransactionToggleCleared,      &KMyMoneyApp::slotMarkTransactionCleared},
+      {Action::TransactionReconciled,         &KMyMoneyApp::slotMarkTransactionReconciled},
+      {Action::TransactionNotReconciled,      &KMyMoneyApp::slotMarkTransactionNotReconciled},
+      {Action::TransactionSelectAll,          &KMyMoneyApp::selectAllTransactions},
+      {Action::TransactionGoToAccount,        &KMyMoneyApp::slotTransactionGotoAccount},
+      {Action::TransactionGoToPayee,          &KMyMoneyApp::slotTransactionGotoPayee},
+      {Action::TransactionCreateSchedule,     &KMyMoneyApp::slotTransactionCreateSchedule},
+      {Action::TransactionAssignNumber,       &KMyMoneyApp::slotTransactionAssignNumber},
+      {Action::TransactionCombine,            &KMyMoneyApp::slotTransactionCombine},
+      {Action::TransactionCopySplits,         &KMyMoneyApp::slotTransactionCopySplits},
+      //Schedule
+      {Action::ScheduleNew,                   &KMyMoneyApp::slotScheduleNew},
+      {Action::ScheduleEdit,                  &KMyMoneyApp::slotScheduleEdit},
+      {Action::ScheduleDelete,                &KMyMoneyApp::slotScheduleDelete},
+      {Action::ScheduleDuplicate,             &KMyMoneyApp::slotScheduleDuplicate},
+      {Action::ScheduleEnter,                 &KMyMoneyApp::slotScheduleEnter},
+      {Action::ScheduleSkip,                  &KMyMoneyApp::slotScheduleSkip},
+      //Payees
+      {Action::PayeeNew,                      &KMyMoneyApp::slotPayeeNew},
+      {Action::PayeeRename,                   &KMyMoneyApp::payeeRename},
+      {Action::PayeeDelete,                   &KMyMoneyApp::slotPayeeDelete},
+      {Action::PayeeMerge,                    &KMyMoneyApp::slotPayeeMerge},
+      //Tags
+      {Action::TagNew,                        &KMyMoneyApp::slotTagNew},
+      {Action::TagRename,                     &KMyMoneyApp::slotTagRename},
+      {Action::TagDelete,                     &KMyMoneyApp::slotTagDelete},
+      //Currency actions
+      {Action::CurrencyNew,                   &KMyMoneyApp::slotCurrencyNew},
+      {Action::CurrencyRename,                &KMyMoneyApp::currencyRename},
+      {Action::CurrencyDelete,                &KMyMoneyApp::slotCurrencyDelete},
+      {Action::CurrencySetBase,               &KMyMoneyApp::slotCurrencySetBase},
+      //Price actions
+      {Action::PriceNew,                      &KMyMoneyApp::priceNew},
+      {Action::PriceEdit,                     &KMyMoneyApp::priceEdit},
+      {Action::PriceUpdate,                   &KMyMoneyApp::priceOnlineUpdate},
+      {Action::PriceDelete,                   &KMyMoneyApp::priceDelete},
+      //debug actions
+#ifdef KMM_DEBUG
+      {Action::WizardNewUser,                 &KMyMoneyApp::slotNewFeature},
+      {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
+#endif
+      {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
+      // onlineJob actions
+      {Action::OnlineJobDelete,               &KMyMoneyApp::slotRemoveJob},
+      {Action::OnlineJobEdit,                 &KMyMoneyApp::slotEditJob},
+      {Action::OnlineJobLog,                  &KMyMoneyApp::slotOnlineJobLog},
+    };
+
+    for (auto connection = actionConnections.cbegin(); connection != actionConnections.cend(); ++connection)
+      connect(lutActions[connection.key()], &QAction::triggered, this, connection.value());
   }
 
   // *************
@@ -903,8 +940,10 @@ void KMyMoneyApp::initActions()
           Action::ViewShowAll
     };
 
-    foreach (const auto it, checkableActions)
+    for (const auto& it : checkableActions) {
       lutActions[it]->setCheckable(true);
+      lutActions[it]->setEnabled(true);
+    }
   }
 
   // *************
@@ -917,7 +956,7 @@ void KMyMoneyApp::initActions()
       {qMakePair(Action::ViewHideReconciled,          Qt::CTRL + Qt::Key_R)},
       {qMakePair(Action::ViewHideCategories,          Qt::CTRL + Qt::Key_U)},
       {qMakePair(Action::ViewShowAll,                 Qt::CTRL + Qt::SHIFT + Qt::Key_A)},
-      {qMakePair(Action::AccountStartReconciliation,  Qt::CTRL + Qt::SHIFT + Qt::Key_R)},
+      {qMakePair(Action::StartAccountReconciliation,  Qt::CTRL + Qt::SHIFT + Qt::Key_R)},
       {qMakePair(Action::TransactionNew,              Qt::CTRL + Qt::Key_Insert)},
       {qMakePair(Action::TransactionToggleReconciled, Qt::CTRL + Qt::Key_Space)},
       {qMakePair(Action::TransactionToggleCleared,    Qt::CTRL + Qt::Key_Alt + Qt::Key_Space)},
@@ -948,7 +987,7 @@ void KMyMoneyApp::initActions()
   // Adding actions to ActionCollection
   // *************
   actionCollection()->addActions(lutActions.values());
-
+  connect( lutActions[Action::FileInformation], &QAction::triggered, this, &KMyMoneyApp::slotFileInfoDialog);
   // ************************
   // Currently unused actions
   // ************************
@@ -964,7 +1003,7 @@ void KMyMoneyApp::initActions()
   setupGUI();
 
   // reconnect about app entry to dialog with full credits information
-  QAction *aboutApp = aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::AboutApp)));
+  auto aboutApp = aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::AboutApp)));
   aboutApp->disconnect();
   connect(aboutApp, &QAction::triggered, this, &KMyMoneyApp::slotShowCredits);
 
@@ -974,6 +1013,7 @@ void KMyMoneyApp::initActions()
 
   menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("export"), this));
   menuContainer->setIcon(Icons::get(Icon::DocumentExport));
+  return lutActions;
 }
 
 void KMyMoneyApp::connectActionsAndViews()
@@ -981,11 +1021,11 @@ void KMyMoneyApp::connectActionsAndViews()
   KOnlineJobOutbox *const outbox = d->m_myMoneyView->getOnlineJobOutbox();
   Q_CHECK_PTR(outbox);
 
-  QAction *const onlineJob_delete = actionCollection()->action(s_Actions[Action::OnlineJobDelete]);
+  QAction *const onlineJob_delete = pActions[Action::OnlineJobDelete];
   Q_CHECK_PTR(onlineJob_delete);
   connect(onlineJob_delete, SIGNAL(triggered()), outbox, SLOT(slotRemoveJob()));
 
-  QAction *const onlineJob_edit = actionCollection()->action(s_Actions[Action::OnlineJobEdit]);
+  QAction *const onlineJob_edit = pActions[Action::OnlineJobEdit];
   Q_CHECK_PTR(onlineJob_edit);
   connect(onlineJob_edit, SIGNAL(triggered()), outbox, SLOT(slotEditJob()));
 }
@@ -1001,7 +1041,7 @@ void KMyMoneyApp::dumpActions() const
 
 bool KMyMoneyApp::isActionToggled(const Action _a)
 {
-  return actionCollection()->action(s_Actions[_a])->isChecked();
+  return pActions[_a]->isChecked();
 }
 
 void KMyMoneyApp::initStatusBar()
@@ -1042,8 +1082,8 @@ void KMyMoneyApp::readOptions()
   KConfigGroup grp = d->m_config->group("General Options");
 
 
-  actionCollection()->action(s_Actions[Action::ViewHideReconciled])->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
-  actionCollection()->action(s_Actions[Action::ViewHideCategories])->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
+  pActions[Action::ViewHideReconciled]->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
+  pActions[Action::ViewHideCategories]->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
 
   d->m_recentFiles->loadEntries(d->m_config->group("Recent Files"));
 
@@ -1802,25 +1842,26 @@ void KMyMoneyApp::slotShowTransactionDetail()
 
 void KMyMoneyApp::slotHideReconciledTransactions()
 {
-  KMyMoneyGlobalSettings::setHideReconciledTransactions(actionCollection()->action(s_Actions[Action::ViewHideReconciled])->isChecked());
+  KMyMoneyGlobalSettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
   d->m_myMoneyView->slotRefreshViews();
 }
 
 void KMyMoneyApp::slotHideUnusedCategories()
 {
-  KMyMoneyGlobalSettings::setHideUnusedCategory(actionCollection()->action(s_Actions[Action::ViewHideCategories])->isChecked());
+  KMyMoneyGlobalSettings::setHideUnusedCategory(pActions[Action::ViewHideCategories]->isChecked());
   d->m_myMoneyView->slotRefreshViews();
 }
 
 void KMyMoneyApp::slotShowAllAccounts()
 {
+  KMyMoneyGlobalSettings::setShowAllAccounts(pActions[Action::ViewShowAll]->isChecked());
   d->m_myMoneyView->slotRefreshViews();
 }
 
 #ifdef KMM_DEBUG
 void KMyMoneyApp::slotToggleTraces()
 {
-  MyMoneyTracer::onOff(actionCollection()->action(s_Actions[Action::DebugTraces])->isChecked() ? 1 : 0);
+  MyMoneyTracer::onOff(pActions[Action::DebugTraces]->isChecked() ? 1 : 0);
 }
 #endif
 
@@ -1828,7 +1869,7 @@ void KMyMoneyApp::slotToggleTimers()
 {
   extern bool timersOn; // main.cpp
 
-  timersOn = actionCollection()->action(s_Actions[Action::DebugTimers])->isChecked();
+  timersOn = pActions[Action::DebugTimers]->isChecked();
 }
 
 QString KMyMoneyApp::slotStatusMsg(const QString &text)
@@ -2016,16 +2057,6 @@ void KMyMoneyApp::slotSaveAccountTemplates()
     }
   }
 }
-
-void KMyMoneyApp::slotAccountChart()
-{
-  if (!d->m_selectedAccount.id().isEmpty()) {
-    QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_selectedAccount, this);
-    dlg->exec();
-    delete dlg;
-  }
-}
-
 
 //
 // KMyMoneyApp::slotStatementImport() is for testing only.  The MyMoneyStatement
@@ -2489,79 +2520,6 @@ void KMyMoneyApp::slotCloseSearchDialog()
   d->m_searchDlg = 0;
 }
 
-void KMyMoneyApp::slotInstitutionNew()
-{
-  MyMoneyInstitution institution;
-  KNewBankDlg::newInstitution(institution);
-}
-
-void KMyMoneyApp::slotInstitutionNew(MyMoneyInstitution& institution)
-{
-  KNewBankDlg::newInstitution(institution);
-}
-
-void KMyMoneyApp::slotInstitutionEditEmpty()
-{
-  slotInstitutionEdit(MyMoneyInstitution());
-}
-
-void KMyMoneyApp::slotInstitutionEdit(const MyMoneyObject& obj)
-{
-  if (typeid(obj) != typeid(MyMoneyInstitution))
-    return;
-
-  // make sure the selected object has an id
-  if (d->m_selectedInstitution.id().isEmpty())
-    return;
-
-  try {
-    MyMoneyFile* file = MyMoneyFile::instance();
-
-    //grab a pointer to the view, regardless of it being a account or institution view.
-    MyMoneyInstitution institution = file->institution(d->m_selectedInstitution.id());
-
-    // bankSuccess is not checked anymore because d->m_file->institution will throw anyway
-    QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-      MyMoneyFileTransaction ft;
-      try {
-        file->modifyInstitution(dlg->institution());
-        ft.commit();
-        slotSelectInstitution(file->institution(dlg->institution().id()));
-
-      } catch (const MyMoneyException &e) {
-        KMessageBox::information(this, i18n("Unable to store institution: %1", e.what()));
-      }
-    }
-    delete dlg;
-
-  } catch (const MyMoneyException &e) {
-    if (!obj.id().isEmpty())
-      KMessageBox::information(this, i18n("Unable to edit institution: %1", e.what()));
-  }
-}
-
-void KMyMoneyApp::slotInstitutionDelete()
-{
-  MyMoneyFile *file = MyMoneyFile::instance();
-  try {
-
-    MyMoneyInstitution institution = file->institution(d->m_selectedInstitution.id());
-    if ((KMessageBox::questionYesNo(this, i18n("<p>Do you really want to delete the institution <b>%1</b>?</p>", institution.name()))) == KMessageBox::No)
-      return;
-    MyMoneyFileTransaction ft;
-
-    try {
-      file->removeInstitution(institution);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
-    }
-  } catch (const MyMoneyException &e) {
-    KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
-  }
-}
-
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
 {
   MyMoneyFile *file = MyMoneyFile::instance();
@@ -2593,16 +2551,6 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
   }
 }
 
-void KMyMoneyApp::slotCategoryNew(const QString& name, QString& id)
-{
-  MyMoneyAccount account;
-  account.setName(name);
-
-  KNewAccountDlg::newCategory(account, MyMoneyFile::instance()->expense());
-
-  id = account.id();
-}
-
 void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
   KNewAccountDlg::newCategory(account, parent);
@@ -2613,100 +2561,9 @@ void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account)
   KNewAccountDlg::newCategory(account, MyMoneyAccount());
 }
 
-void KMyMoneyApp::slotCategoryNew()
-{
-  MyMoneyAccount parent;
-  MyMoneyAccount account;
-
-  // Preselect the parent account by looking at the current selected account/category
-  if (!d->m_selectedAccount.id().isEmpty() && d->m_selectedAccount.isIncomeExpense()) {
-    MyMoneyFile* file = MyMoneyFile::instance();
-    try {
-      parent = file->account(d->m_selectedAccount.id());
-    } catch (const MyMoneyException &) {
-    }
-  }
-
-  KNewAccountDlg::createCategory(account, parent);
-}
-
-void KMyMoneyApp::slotAccountNew()
-{
-  MyMoneyAccount account;
-  account.setInstitutionId(d->m_selectedInstitution.id());
-  account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
-
-  NewAccountWizard::Wizard::newAccount(account);
-}
-
 void KMyMoneyApp::slotAccountNew(MyMoneyAccount& account)
 {
   NewAccountWizard::Wizard::newAccount(account);
-}
-
-void KMyMoneyApp::slotInvestmentNew()
-{
-  KNewInvestmentWizard::newInvestment(d->m_selectedAccount);
-}
-
-void KMyMoneyApp::slotInvestmentEdit()
-{
-  KNewInvestmentWizard::editInvestment(d->m_selectedAccount);
-}
-
-void KMyMoneyApp::slotInvestmentDelete()
-{
-  if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>", d->m_selectedInvestment.name()), i18n("Delete investment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeleteInvestment") == KMessageBox::Yes) {
-    MyMoneyFile* file = MyMoneyFile::instance();
-    MyMoneyFileTransaction ft;
-    try {
-      d->m_selectedAccount = MyMoneyAccount(); // CAUTION: deleting equity from investments view needs this, if ID of the equity to be deleted is the smallest from all
-      file->removeAccount(d->m_selectedInvestment);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to delete investment: %1", e.what()));
-    }
-  } else {
-    // we should not keep the 'no' setting because that can confuse people like
-    // I have seen in some usability tests. So we just delete it right away.
-    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
-    if (kconfig) {
-      kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("DeleteInvestment"));
-    }
-  }
-}
-
-void KMyMoneyApp::slotOnlinePriceUpdate()
-{
-  if (!d->m_selectedInvestment.id().isEmpty()) {
-    QPointer<KEquityPriceUpdateDlg> dlg =
-      new KEquityPriceUpdateDlg(0, d->m_selectedInvestment.currencyId());
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-      dlg->storePrices();
-    }
-    delete dlg;
-  }
-}
-
-void KMyMoneyApp::slotManualPriceUpdate()
-{
-  if (!d->m_selectedInvestment.id().isEmpty()) {
-    try {
-      MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedInvestment.currencyId());
-      MyMoneySecurity currency = MyMoneyFile::instance()->security(security.tradingCurrency());
-      const MyMoneyPrice &price = MyMoneyFile::instance()->price(security.id(), currency.id());
-
-      QPointer<KCurrencyCalculator> calc =
-        new KCurrencyCalculator(security, currency, MyMoneyMoney::ONE, price.rate(currency.id()), price.date(), MyMoneyMoney::precToDenom(security.pricePrecision()));
-      calc->setupPriceEditor();
-
-      // The dialog takes care of adding the price if necessary
-      calc->exec();
-      delete calc;
-    } catch (const MyMoneyException &e) {
-      qDebug("Error in price update: %s", qPrintable(e.what()));
-    }
-  }
 }
 
 void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)
@@ -2740,402 +2597,6 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
       }
     } catch (const MyMoneyException &e) {
       KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e.what()));
-    }
-  }
-}
-
-void KMyMoneyApp::slotAccountDelete()
-{
-  if (d->m_selectedAccount.id().isEmpty())
-    return;  // need an account ID
-
-  MyMoneyFile* file = MyMoneyFile::instance();
-  // can't delete standard accounts or account which still have transactions assigned
-  if (file->isStandardAccount(d->m_selectedAccount.id()))
-    return;
-
-  // check if the account is referenced by a transaction or schedule
-  QBitArray skip((int)eStorage::Reference::Count);
-  skip.fill(false);
-  skip.setBit((int)eStorage::Reference::Account);
-  skip.setBit((int)eStorage::Reference::Institution);
-  skip.setBit((int)eStorage::Reference::Payee);
-  skip.setBit((int)eStorage::Reference::Tag);
-  skip.setBit((int)eStorage::Reference::Security);
-  skip.setBit((int)eStorage::Reference::Currency);
-  skip.setBit((int)eStorage::Reference::Price);
-  bool hasReference = file->isReferenced(d->m_selectedAccount, skip);
-
-  // make sure we only allow transactions in a 'category' (income/expense account)
-  switch (d->m_selectedAccount.accountType()) {
-    case eMyMoney::Account::Type::Income:
-    case eMyMoney::Account::Type::Expense:
-      break;
-
-    default:
-      // if the account is still referenced
-      if (hasReference) {
-        return;
-      }
-      break;
-  }
-
-  // if we get here and still have transactions referencing the account, we
-  // need to check with the user to possibly re-assign them to a different account
-  bool needAskUser = true;
-  bool exit = false;
-
-  MyMoneyFileTransaction ft;
-
-  if (hasReference) {
-    // show transaction reassignment dialog
-
-    needAskUser = false;
-    KCategoryReassignDlg* dlg = new KCategoryReassignDlg(this);
-    QString categoryId = dlg->show(d->m_selectedAccount);
-    delete dlg; // and kill the dialog
-    if (categoryId.isEmpty())
-      return; // the user aborted the dialog, so let's abort as well
-
-    MyMoneyAccount newCategory = file->account(categoryId);
-    try {
-      {
-        KMSTATUS(i18n("Adjusting transactions..."));
-        /*
-          d->m_selectedAccount.id() is the old id, categoryId the new one
-          Now search all transactions and schedules that reference d->m_selectedAccount.id()
-          and replace that with categoryId.
-        */
-        // get the list of all transactions that reference the old account
-        MyMoneyTransactionFilter filter(d->m_selectedAccount.id());
-        filter.setReportAllSplits(false);
-        QList<MyMoneyTransaction> tlist;
-        QList<MyMoneyTransaction>::iterator it_t;
-        file->transactionList(tlist, filter);
-
-        slotStatusProgressBar(0, tlist.count());
-        int cnt = 0;
-        for (it_t = tlist.begin(); it_t != tlist.end(); ++it_t) {
-          slotStatusProgressBar(++cnt, 0);
-          MyMoneyTransaction t = (*it_t);
-          if (t.replaceId(categoryId, d->m_selectedAccount.id()))
-            file->modifyTransaction(t);
-        }
-        slotStatusProgressBar(tlist.count(), 0);
-      }
-      // now fix all schedules
-      {
-        KMSTATUS(i18n("Adjusting scheduled transactions..."));
-        QList<MyMoneySchedule> slist = file->scheduleList(d->m_selectedAccount.id());
-        QList<MyMoneySchedule>::iterator it_s;
-
-        int cnt = 0;
-        slotStatusProgressBar(0, slist.count());
-        for (it_s = slist.begin(); it_s != slist.end(); ++it_s) {
-          slotStatusProgressBar(++cnt, 0);
-          MyMoneySchedule sch = (*it_s);
-          if (sch.replaceId(categoryId, d->m_selectedAccount.id())) {
-            file->modifySchedule(sch);
-          }
-        }
-        slotStatusProgressBar(slist.count(), 0);
-      }
-      // now fix all budgets
-      {
-        KMSTATUS(i18n("Adjusting budgets..."));
-        QList<MyMoneyBudget> blist = file->budgetList();
-        QList<MyMoneyBudget>::const_iterator it_b;
-        for (it_b = blist.constBegin(); it_b != blist.constEnd(); ++it_b) {
-          if ((*it_b).hasReferenceTo(d->m_selectedAccount.id())) {
-            MyMoneyBudget b = (*it_b);
-            MyMoneyBudget::AccountGroup fromBudget = b.account(d->m_selectedAccount.id());
-            MyMoneyBudget::AccountGroup toBudget = b.account(categoryId);
-            toBudget += fromBudget;
-            b.setAccount(toBudget, categoryId);
-            b.removeReference(d->m_selectedAccount.id());
-            file->modifyBudget(b);
-
-          }
-        }
-        slotStatusProgressBar(blist.count(), 0);
-      }
-    } catch (MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_selectedAccount.name(), newCategory.name(), e.what()));
-      exit = true;
-    }
-    slotStatusProgressBar(-1, -1);
-  }
-
-  if (exit)
-    return;
-
-  // retain the account name for a possible later usage in the error message box
-  // since the account removal notifies the views the selected account can be changed
-  // so we make sure by doing this that we display the correct name in the error message
-  QString selectedAccountName = d->m_selectedAccount.name();
-
-  // at this point, we must not have a reference to the account
-  // to be deleted anymore
-  switch (d->m_selectedAccount.accountGroup()) {
-      // special handling for categories to allow deleting of empty subcategories
-    case eMyMoney::Account::Type::Income:
-    case eMyMoney::Account::Type::Expense: { // open a compound statement here to be able to declare variables
-        // which would otherwise not work within a case label.
-
-        // case A - only a single, unused category without subcats selected
-        if (d->m_selectedAccount.accountList().isEmpty()) {
-          if (!needAskUser || (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to delete category <b>%1</b>?", selectedAccountName) + QString("</qt>")) == KMessageBox::Yes)) {
-            try {
-              file->removeAccount(d->m_selectedAccount);
-              d->m_selectedAccount.clearId();
-              slotUpdateActions();
-              ft.commit();
-            } catch (const MyMoneyException &e) {
-              KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", selectedAccountName, e.what()) + QString("</qt>"));
-            }
-          }
-          return;
-        }
-        // case B - we have some subcategories, maybe the user does not want to
-        //          delete them all, but just the category itself?
-        MyMoneyAccount parentAccount = file->account(d->m_selectedAccount.parentAccountId());
-
-        QStringList accountsToReparent;
-        int result = KMessageBox::questionYesNoCancel(this, QString("<qt>") +
-                     i18n("Do you want to delete category <b>%1</b> with all its sub-categories or only "
-                          "the category itself? If you only delete the category itself, all its sub-categories "
-                          "will be made sub-categories of <b>%2</b>.", selectedAccountName, parentAccount.name()) + QString("</qt>"),
-                     QString(),
-                     KGuiItem(i18n("Delete all")),
-                     KGuiItem(i18n("Just the category")));
-        if (result == KMessageBox::Cancel)
-          return; // cancel pressed? ok, no delete then...
-        // "No" means "Just the category" and that means we need to reparent all subaccounts
-        bool need_confirmation = false;
-        // case C - User only wants to delete the category itself
-        if (result == KMessageBox::No)
-          accountsToReparent = d->m_selectedAccount.accountList();
-        else {
-          // case D - User wants to delete all subcategories, now check all subcats of
-          //          d->m_selectedAccount and remember all that cannot be deleted and
-          //          must be "reparented"
-          foreach (const auto accountID, d->m_selectedAccount.accountList()) {
-            // reparent account if a transaction is assigned
-            if (file->transactionCount(accountID) != 0)
-              accountsToReparent.push_back(accountID);
-            else if (!file->account(accountID).accountList().isEmpty()) {
-              // or if we have at least one sub-account that is used for transactions
-              if (!file->hasOnlyUnusedAccounts(file->account(accountID).accountList())) {
-                accountsToReparent.push_back(accountID);
-                //qDebug() << "subaccount not empty";
-              }
-            }
-          }
-          if (!accountsToReparent.isEmpty())
-            need_confirmation = true;
-        }
-        if (!accountsToReparent.isEmpty() && need_confirmation) {
-          if (KMessageBox::questionYesNo(this, i18n("<p>Some sub-categories of category <b>%1</b> cannot "
-                                         "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>", selectedAccountName, parentAccount.name())) != KMessageBox::Yes) {
-            return; // user gets wet feet...
-          }
-        }
-        // all good, now first reparent selected sub-categories
-        try {
-          MyMoneyAccount parent = file->account(d->m_selectedAccount.parentAccountId());
-          for (QStringList::const_iterator it = accountsToReparent.constBegin(); it != accountsToReparent.constEnd(); ++it) {
-            MyMoneyAccount child = file->account(*it);
-            file->reparentAccount(child, parent);
-          }
-          // reload the account because the sub-account list might have changed
-          d->m_selectedAccount = file->account(d->m_selectedAccount.id());
-          // now recursively delete remaining sub-categories
-          file->removeAccountList(d->m_selectedAccount.accountList());
-          // don't forget to update d->m_selectedAccount, because we still have a copy of
-          // the old account list, which is no longer valid
-          d->m_selectedAccount = file->account(d->m_selectedAccount.id());
-        } catch (const MyMoneyException &e) {
-          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", selectedAccountName, e.what()) + QString("</qt>"));
-          return;
-        }
-      }
-      break; // the category/account is deleted after the switch
-
-    default:
-      if (!d->m_selectedAccount.accountList().isEmpty())
-        return; // can't delete accounts which still have subaccounts
-
-      if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to "
-                                     "delete account <b>%1</b>?</p>", selectedAccountName)) != KMessageBox::Yes) {
-        return; // ok, you don't want to? why did you click then, hmm?
-      }
-  } // switch;
-
-  try {
-    file->removeAccount(d->m_selectedAccount);
-    d->m_selectedAccount.clearId();
-    slotUpdateActions();
-    ft.commit();
-  } catch (const MyMoneyException &e) {
-    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e.what()));
-  }
-}
-
-void KMyMoneyApp::slotAccountEdit()
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-  if (!d->m_selectedAccount.id().isEmpty()) {
-    if (!file->isStandardAccount(d->m_selectedAccount.id())) {
-      if (d->m_selectedAccount.accountType() != eMyMoney::Account::Type::Loan
-          && d->m_selectedAccount.accountType() != eMyMoney::Account::Type::AssetLoan) {
-        QString caption;
-        bool category = false;
-        switch (d->m_selectedAccount.accountGroup()) {
-          default:
-            caption = i18n("Edit account '%1'", d->m_selectedAccount.name());
-            break;
-
-          case eMyMoney::Account::Type::Expense:
-          case eMyMoney::Account::Type::Income:
-            caption = i18n("Edit category '%1'", d->m_selectedAccount.name());
-            category = true;
-            break;
-        }
-
-        // set a status message so that the application can't be closed until the editing is done
-        slotStatusMsg(caption);
-
-        QString tid = file->openingBalanceTransaction(d->m_selectedAccount);
-        MyMoneyTransaction t;
-        MyMoneySplit s0, s1;
-        QPointer<KNewAccountDlg> dlg =
-          new KNewAccountDlg(d->m_selectedAccount, true, category, 0, caption);
-
-        if (category) {
-          dlg->setOpeningBalanceShown(false);
-          dlg->setOpeningDateShown(false);
-          tid.clear();
-        } else {
-          if (!tid.isEmpty()) {
-            try {
-              t = file->transaction(tid);
-              s0 = t.splitByAccount(d->m_selectedAccount.id());
-              s1 = t.splitByAccount(d->m_selectedAccount.id(), false);
-              dlg->setOpeningBalance(s0.shares());
-              if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
-                dlg->setOpeningBalance(-s0.shares());
-              }
-            } catch (const MyMoneyException &e) {
-              qDebug() << "Error retrieving opening balance transaction " << tid << ": " << e.what() << "\n";
-              tid.clear();
-            }
-          }
-        }
-
-        // check for online modules
-        QMap<QString, KMyMoneyPlugin::OnlinePlugin *>::const_iterator it_plugin = d->m_onlinePlugins.constEnd();
-        const MyMoneyKeyValueContainer& kvp = d->m_selectedAccount.onlineBankingSettings();
-        if (!kvp["provider"].isEmpty()) {
-          // if we have an online provider for this account, we need to check
-          // that we have the corresponding plugin. If that exists, we ask it
-          // to provide an additional tab for the account editor.
-          it_plugin = d->m_onlinePlugins.constFind(kvp["provider"]);
-          if (it_plugin != d->m_onlinePlugins.constEnd()) {
-            QString name;
-            QWidget *w = (*it_plugin)->accountConfigTab(d->m_selectedAccount, name);
-            dlg->addTab(w, name);
-          }
-        }
-
-        if (dlg != 0 && dlg->exec() == QDialog::Accepted) {
-          try {
-            MyMoneyFileTransaction ft;
-
-            MyMoneyAccount account = dlg->account();
-            MyMoneyAccount parent = dlg->parentAccount();
-            if (it_plugin != d->m_onlinePlugins.constEnd()) {
-              account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
-            }
-            MyMoneyMoney bal = dlg->openingBalance();
-            if (d->m_selectedAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
-              bal = -bal;
-            }
-
-            // we need to modify first, as reparent would override all other changes
-            file->modifyAccount(account);
-            if (account.parentAccountId() != parent.id()) {
-              file->reparentAccount(account, parent);
-            }
-            if (!tid.isEmpty() && dlg->openingBalance().isZero()) {
-              file->removeTransaction(t);
-
-            } else if (!tid.isEmpty() && !dlg->openingBalance().isZero()) {
-              s0.setShares(bal);
-              s0.setValue(bal);
-              t.modifySplit(s0);
-              s1.setShares(-bal);
-              s1.setValue(-bal);
-              t.modifySplit(s1);
-              t.setPostDate(account.openingDate());
-              file->modifyTransaction(t);
-
-            } else if (tid.isEmpty() && !dlg->openingBalance().isZero()) {
-              file->createOpeningBalanceTransaction(d->m_selectedAccount, bal);
-            }
-
-            ft.commit();
-
-            // reload the account object as it might have changed in the meantime
-            slotSelectAccount(file->account(account.id()));
-
-          } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("Unable to modify account '%1'. Cause: %2", d->m_selectedAccount.name(), e.what()));
-          }
-        }
-
-        delete dlg;
-        ready();
-      } else {
-        QPointer<KEditLoanWizard> wizard = new KEditLoanWizard(d->m_selectedAccount);
-        connect(wizard, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
-        connect(wizard, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
-        if (wizard->exec() == QDialog::Accepted && wizard != 0) {
-          MyMoneySchedule sch;
-          try {
-            MyMoneySchedule sch = file->schedule(d->m_selectedAccount.value("schedule").toLatin1());
-          } catch (const MyMoneyException &e) {
-            qDebug() << "schedule" << d->m_selectedAccount.value("schedule").toLatin1() << "not found";
-          }
-          if (!(d->m_selectedAccount == wizard->account())
-              || !(sch == wizard->schedule())) {
-            MyMoneyFileTransaction ft;
-            try {
-              file->modifyAccount(wizard->account());
-              if (!sch.id().isEmpty()) {
-                sch = wizard->schedule();
-              }
-              try {
-                file->schedule(sch.id());
-                file->modifySchedule(sch);
-                ft.commit();
-              } catch (const MyMoneyException &) {
-                try {
-                  if(sch.transaction().splitCount() >= 2) {
-                    file->addSchedule(sch);
-                  }
-                  ft.commit();
-                } catch (const MyMoneyException &e) {
-                  qDebug("Cannot add schedule: '%s'", qPrintable(e.what()));
-                }
-              }
-            } catch (const MyMoneyException &e) {
-              qDebug("Unable to modify account %s: '%s'", qPrintable(d->m_selectedAccount.name()),
-                     qPrintable(e.what()));
-            }
-          }
-        }
-        delete wizard;
-      }
     }
   }
 }
@@ -3250,6 +2711,24 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
 
   kmymoney->slotStatusProgressBar(-1, -1);
   return result;
+}
+
+void KMyMoneyApp::slotReconciliationRequested(const MyMoneyAccount& acc, eMenu::Action action)
+{
+  d->m_selectedAccount = acc;
+  switch (action) {
+    case eMenu::Action::StartAccountReconciliation:
+      slotAccountReconcileStart();
+      break;
+    case eMenu::Action::PostponeAccountReconciliation:
+      slotAccountReconcilePostpone();
+      break;
+    case eMenu::Action::FinishAccountReconciliation:
+      slotAccountReconcileFinish();
+      break;
+    default:
+      break;
+  }
 }
 
 void KMyMoneyApp::slotAccountReconcileStart()
@@ -3543,103 +3022,6 @@ void KMyMoneyApp::slotAccountOpen(const MyMoneyObject& obj)
   }
 }
 
-void KMyMoneyApp::enableCloseAccountAction(const MyMoneyAccount& acc)
-{
-  QAction *a = actionCollection()->action(s_Actions[Action::AccountClose]);
-  switch (canCloseAccount(acc)) {
-    case KMyMoneyUtils::AccountCanClose: {
-        a->setEnabled(true);
-        break;
-      }
-    case KMyMoneyUtils::AccountBalanceNonZero: {
-        a->setEnabled(false);
-        a->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
-        break;
-      }
-    case KMyMoneyUtils::AccountChildrenOpen: {
-        a->setEnabled(false);
-        a->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
-        break;
-      }
-    case KMyMoneyUtils::AccountScheduleReference: {
-        a->setEnabled(false);
-        a->setToolTip(i18n("This account is still included in an active schedule"));
-        break;
-      }
-  }
-}
-
-
-KMyMoneyUtils::CanCloseAccountCodeE KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
-{
-  // balance must be zero
-  if (!acc.balance().isZero())
-    return KMyMoneyUtils::AccountBalanceNonZero;
-
-  // all children must be already closed
-  foreach (const auto sAccount, acc.accountList()) {
-    if (!MyMoneyFile::instance()->account(sAccount).isClosed()) {
-      return KMyMoneyUtils::AccountChildrenOpen;
-    }
-  }
-
-  // there must be no unfinished schedule referencing the account
-  QList<MyMoneySchedule> list = MyMoneyFile::instance()->scheduleList();
-  QList<MyMoneySchedule>::const_iterator it_l;
-  for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
-    if ((*it_l).isFinished())
-      continue;
-    if ((*it_l).hasReferenceTo(acc.id()))
-      return KMyMoneyUtils::AccountScheduleReference;
-  }
-  return KMyMoneyUtils::AccountCanClose;
-}
-
-void KMyMoneyApp::slotAccountClose()
-{
-  MyMoneyAccount a;
-  if (!d->m_selectedInvestment.id().isEmpty())
-    a = d->m_selectedInvestment;
-  else if (!d->m_selectedAccount.id().isEmpty())
-    a = d->m_selectedAccount;
-  if (a.id().isEmpty())
-    return;  // need an account ID
-
-  MyMoneyFileTransaction ft;
-  try {
-    a.setClosed(true);
-    MyMoneyFile::instance()->modifyAccount(a);
-    ft.commit();
-    if (KMyMoneyGlobalSettings::hideClosedAccounts()) {
-      KMessageBox::information(this, QString("<qt>") + i18n("You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.") + QString("</qt>"), i18n("Information"), "CloseAccountInfo");
-    }
-  } catch (const MyMoneyException &) {
-  }
-}
-
-void KMyMoneyApp::slotAccountReopen()
-{
-  MyMoneyAccount a;
-  if (!d->m_selectedInvestment.id().isEmpty())
-    a = d->m_selectedInvestment;
-  else if (!d->m_selectedAccount.id().isEmpty())
-    a = d->m_selectedAccount;
-  if (a.id().isEmpty())
-    return;  // need an account ID
-
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyFileTransaction ft;
-  try {
-    while (a.isClosed()) {
-      a.setClosed(false);
-      file->modifyAccount(a);
-      a = file->account(a.parentAccountId());
-    }
-    ft.commit();
-  } catch (const MyMoneyException &) {
-  }
-}
-
 void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyInstitution& _dst)
 {
   MyMoneyAccount src(_src);
@@ -3830,7 +3212,7 @@ void KMyMoneyApp::slotScheduleDuplicate()
 {
   // since we may jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::ScheduleDuplicate])->isEnabled()) {
+  if (pActions[Action::ScheduleDuplicate]->isEnabled()) {
     MyMoneySchedule sch = d->m_selectedSchedule;
     sch.clearId();
     sch.setLastPayment(QDate());
@@ -3927,8 +3309,8 @@ eDialogs::ScheduleResultCode KMyMoneyApp::enterSchedule(MyMoneySchedule& schedul
             schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
         // force actions to be available no matter what (will be updated according to the state during
         // slotTransactionsEnter or slotTransactionsCancel)
-        kmymoney->actionCollection()->action(s_Actions[Action::TransactionCancel])->setEnabled(true);
-        kmymoney->actionCollection()->action(s_Actions[Action::TransactionEnter])->setEnabled(true);
+        pActions[Action::TransactionCancel]->setEnabled(true);
+        pActions[Action::TransactionEnter]->setEnabled(true);
 
         KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
         if (!autoEnter || !schedule.isFixed()) {
@@ -4569,7 +3951,7 @@ void KMyMoneyApp::slotTransactionsDelete()
 {
   // since we may jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (!kmymoney->actionCollection()->action(s_Actions[Action::TransactionDelete])->isEnabled())
+  if (!pActions[Action::TransactionDelete]->isEnabled())
     return;
   if (d->m_selectedTransactions.isEmpty())
     return;
@@ -4595,7 +3977,7 @@ void KMyMoneyApp::slotTransactionDuplicate()
 {
   // since we may jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionDuplicate])->isEnabled()) {
+  if (pActions[Action::TransactionDuplicate]->isEnabled()) {
     KMyMoneyRegister::SelectedTransactions selectionList = d->m_selectedTransactions;
     KMyMoneyRegister::SelectedTransactions::iterator it_t;
 
@@ -4692,7 +4074,7 @@ void KMyMoneyApp::slotTransactionsNew()
 {
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionNew])->isEnabled()) {
+  if (pActions[Action::TransactionNew]->isEnabled()) {
     if (d->m_myMoneyView->createNewTransaction()) {
       d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
       if (d->m_transactionEditor) {
@@ -4721,7 +4103,7 @@ void KMyMoneyApp::slotTransactionsEdit()
   // qDebug("KMyMoneyApp::slotTransactionsEdit()");
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionEdit])->isEnabled()) {
+  if (pActions[Action::TransactionEdit]->isEnabled()) {
     // as soon as we edit a transaction, we don't remember the last payee entered
     d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
@@ -4743,7 +4125,7 @@ void KMyMoneyApp::slotTransactionsEditSplits()
 {
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionEditSplits])->isEnabled()) {
+  if (pActions[Action::TransactionEditSplits]->isEnabled()) {
     // as soon as we edit a transaction, we don't remember the last payee entered
     d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
@@ -4772,9 +4154,9 @@ void KMyMoneyApp::slotTransactionsCancel()
 {
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionCancel])->isEnabled()) {
+  if (pActions[Action::TransactionCancel]->isEnabled()) {
     // make sure, we block the enter function
-    actionCollection()->action(s_Actions[Action::TransactionEnter])->setEnabled(false);
+    pActions[Action::TransactionEnter]->setEnabled(false);
     // qDebug("KMyMoneyApp::slotTransactionsCancel");
     deleteTransactionEditor();
     slotUpdateActions();
@@ -4785,11 +4167,11 @@ void KMyMoneyApp::slotTransactionsEnter()
 {
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
-  if (kmymoney->actionCollection()->action(s_Actions[Action::TransactionEnter])->isEnabled()) {
+  if (pActions[Action::TransactionEnter]->isEnabled()) {
     // disable the action while we process it to make sure it's processed only once since
     // d->m_transactionEditor->enterTransactions(newId) will run QCoreApplication::processEvents
     // we could end up here twice which will cause a crash slotUpdateActions() will enable the action again
-    kmymoney->actionCollection()->action(s_Actions[Action::TransactionEnter])->setEnabled(false);
+    pActions[Action::TransactionEnter]->setEnabled(false);
     if (d->m_transactionEditor) {
       QString accountId = d->m_selectedAccount.id();
       QString newId;
@@ -4817,7 +4199,7 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
     QString dontShowAgain = "CancelOrEditTransaction";
     // qDebug("KMyMoneyApp::slotCancelOrEndEdit");
     if (d->m_transactionEditor) {
-      if (KMyMoneyGlobalSettings::focusChangeIsEnter() && kmymoney->actionCollection()->action(s_Actions[Action::TransactionEnter])->isEnabled()) {
+      if (KMyMoneyGlobalSettings::focusChangeIsEnter() && pActions[Action::TransactionEnter]->isEnabled()) {
         slotTransactionsEnter();
         if (d->m_transactionEditor) {
           // if at this stage the editor is still there that means that entering the transaction was cancelled
@@ -4832,9 +4214,9 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
         KGuiItem cancelGuiItem = KStandardGuiItem::cont();
 
         // if the transaction can't be entered make sure that it can't be entered by pressing no either
-        if (!kmymoney->actionCollection()->action(s_Actions[Action::TransactionEnter])->isEnabled()) {
+        if (!pActions[Action::TransactionEnter]->isEnabled()) {
           noGuiItem.setEnabled(false);
-          noGuiItem.setToolTip(kmymoney->actionCollection()->action(s_Actions[Action::TransactionEnter])->toolTip());
+          noGuiItem.setToolTip(pActions[Action::TransactionEnter]->toolTip());
         }
         if (okToSelect == true) {
           rc = KMessageBox::warningYesNoCancel(0, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, cancelGuiItem, dontShowAgain);
@@ -4893,10 +4275,10 @@ void KMyMoneyApp::slotMarkTransactionNotReconciled()
 
 void KMyMoneyApp::markTransaction(eMyMoney::Split::State flag)
 {
-  KMyMoneyRegister::SelectedTransactions list = d->m_selectedTransactions;
+  auto list = d->m_selectedTransactions;
   KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-  int cnt = list.count();
-  int i = 0;
+  auto cnt = list.count();
+  auto i = 0;
   slotStatusProgressBar(0, cnt);
   MyMoneyFileTransaction ft;
   try {
@@ -4906,8 +4288,8 @@ void KMyMoneyApp::markTransaction(eMyMoney::Split::State flag)
       MyMoneyFile::instance()->blockSignals(cnt != 0);
 
       // get a fresh copy
-      MyMoneyTransaction t = MyMoneyFile::instance()->transaction((*it_t).transaction().id());
-      MyMoneySplit sp = t.splitById((*it_t).split().id());
+      auto t = MyMoneyFile::instance()->transaction((*it_t).transaction().id());
+      auto sp = t.splitById((*it_t).split().id());
       if (sp.reconcileFlag() != flag) {
         if (flag == eMyMoney::Split::State::Unknown) {
           if (d->m_reconciliationAccount.id().isEmpty()) {
@@ -5283,7 +4665,7 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu()
 void KMyMoneyApp::slotTransactionMatch()
 {
   // if the menu action is retrieved it can contain an '&' character for the accelerator causing the comparison to fail if not removed
-  QString transactionActionText = actionCollection()->action(s_Actions[Action::TransactionMatch])->text();
+  QString transactionActionText = pActions[Action::TransactionMatch]->text();
   transactionActionText.remove('&');
   if (transactionActionText == i18nc("Button text for match transaction", "Match"))
     transactionMatch();
@@ -5386,41 +4768,9 @@ void KMyMoneyApp::slotShowTransactionContextMenu()
   }
 }
 
-void KMyMoneyApp::slotShowInvestmentContextMenu()
-{
-  showContextMenu("investment_context_menu");
-}
-
 void KMyMoneyApp::slotShowScheduleContextMenu()
 {
   showContextMenu("schedule_context_menu");
-}
-
-void KMyMoneyApp::slotShowAccountContextMenu(const MyMoneyObject& obj)
-{
-//  qDebug("KMyMoneyApp::slotShowAccountContextMenu");
-  if (typeid(obj) != typeid(MyMoneyAccount))
-    return;
-
-  const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(obj);
-
-  // if the selected account is actually a stock account, we
-  // call the right slot instead
-  if (acc.isInvest()) {
-    showContextMenu("investment_context_menu");
-  } else if (acc.isIncomeExpense()) {
-    showContextMenu("category_context_menu");
-  } else {
-    showContextMenu("account_context_menu");
-  }
-}
-
-void KMyMoneyApp::slotShowInstitutionContextMenu(const MyMoneyObject& obj)
-{
-  if (typeid(obj) != typeid(MyMoneyInstitution))
-    return;
-
-  showContextMenu("institution_context_menu");
 }
 
 void KMyMoneyApp::slotShowPayeeContextMenu()
@@ -5500,12 +4850,10 @@ void KMyMoneyApp::slotUpdateActions()
   // *************
   {
     static const QVector<Action> disabledActions {
-          Action::AccountStartReconciliation, Action::AccountFinishReconciliation, Action::AccountPostponeReconciliation,
-          Action::AccountEdit, Action::AccountDelete, Action::AccountOpen, Action::AccountClose, Action::AccountReopen,
-          Action::AccountTransactionReport, Action::AccountOnlineMap, Action::AccountOnlineUnmap,
-          Action::AccountUpdate, Action::AccountUpdateAll, Action::AccountBalanceChart,
-          Action::CategoryEdit, Action::CategoryDelete, Action::InstitutionEdit, Action::InstitutionDelete,
-          Action::InvestmentEdit, Action::InvestmentNew, Action::InvestmentDelete, Action::InvestmentOnlinePrice, Action::InvestmentManualPrice,
+          Action::StartAccountReconciliation, Action::FinishAccountReconciliation, Action::PostponeAccountReconciliation,
+          Action::OpenAccount,
+          Action::ReportAccountTransactions, Action::MapOnlineAccount, Action::UnmapOnlineAccount,
+          Action::UpdateAccount, Action::UpdateAllAccounts,
           Action::ScheduleEdit, Action::ScheduleDelete, Action::ScheduleEnter, Action::ScheduleSkip,
           Action::PayeeDelete, Action::PayeeRename, Action::PayeeMerge, Action::TagDelete, Action::TagRename,
           Action::TransactionEdit, Action::TransactionEditSplits, Action::TransactionEnter,
@@ -5518,8 +4866,8 @@ void KMyMoneyApp::slotUpdateActions()
           Action::PriceEdit, Action::PriceDelete, Action::PriceUpdate
     };
 
-    foreach (const auto a, disabledActions)
-      aC->action(s_Actions.value(a))->setEnabled(false);
+    for (const auto& a : disabledActions)
+      pActions[a]->setEnabled(false);
   }
 
   // *************
@@ -5543,19 +4891,21 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::ToolPrices, fileOpen)},
       {qMakePair(Action::ToolUpdatePrices, fileOpen)},
       {qMakePair(Action::ToolConsistency, fileOpen)},
-      {qMakePair(Action::AccountNew, fileOpen)},
+      {qMakePair(Action::NewAccount, fileOpen)},
       {qMakePair(Action::AccountCreditTransfer, onlineJobAdministration::instance()->canSendCreditTransfer())},
-      {qMakePair(Action::CategoryDelete, fileOpen)},
-      {qMakePair(Action::InstitutionNew, fileOpen)},
+      {qMakePair(Action::NewInstitution, fileOpen)},
       {qMakePair(Action::TransactionNew, (fileOpen && d->m_myMoneyView->canCreateTransactions(KMyMoneyRegister::SelectedTransactions(), tooltip)))},
       {qMakePair(Action::ScheduleNew, fileOpen)},
       {qMakePair(Action::CurrencyNew, fileOpen)},
       {qMakePair(Action::PriceNew, fileOpen)},
     };
 
-    foreach (const auto a, actionStates)
-      aC->action(s_Actions.value(a.first))->setEnabled(a.second);
+    for (const auto& a : actionStates)
+      pActions[a.first]->setEnabled(a.second);
   }
+  const auto sTransactionMoveMenu = QStringLiteral("transaction_move_menu");
+  const auto sTransactionMarkMenu = QStringLiteral("transaction_mark_menu");
+  const auto sTransactionContextMarkMenu = QStringLiteral("transaction_context_mark_menu");
 
   // *************
   // Disabling standard actions based on conditions
@@ -5565,18 +4915,18 @@ void KMyMoneyApp::slotUpdateActions()
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(fileOpen);
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Print)))->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
 
-  aC->action(s_Actions[Action::TransactionMatch])->setText(i18nc("Button text for match transaction", "Match"));
-  aC->action(s_Actions[Action::TransactionNew])->setToolTip(i18n("Create a new transaction"));
+  pActions[Action::TransactionMatch]->setText(i18nc("Button text for match transaction", "Match"));
+  pActions[Action::TransactionNew]->setToolTip(i18n("Create a new transaction"));
 
-  w = factory()->container(s_Actions[Action::TransactionMoveMenu], this);
+  w = factory()->container(sTransactionMoveMenu, this);
   if (w)
     w->setEnabled(false);
 
-  w = factory()->container(s_Actions[Action::TransactionMarkMenu], this);
+  w = factory()->container(sTransactionMarkMenu, this);
   if (w)
     w->setEnabled(false);
 
-  w = factory()->container(s_Actions[Action::TransactionContextMarkMenu], this);
+  w = factory()->container(sTransactionContextMarkMenu, this);
   if (w)
     w->setEnabled(false);
 
@@ -5586,7 +4936,7 @@ void KMyMoneyApp::slotUpdateActions()
 
   // FIXME for now it's always on, but we should only allow it, if we
   //       can select at least a single transaction
-  aC->action(s_Actions[Action::TransactionSelectAll])->setEnabled(true);
+  pActions[Action::TransactionSelectAll]->setEnabled(true);
   if (!d->m_selectedTransactions.isEmpty()) {
     // enable 'delete transaction' only if at least one of the
     // selected transactions does not reference a closed account
@@ -5595,49 +4945,49 @@ void KMyMoneyApp::slotUpdateActions()
     for (it_t = d->m_selectedTransactions.constBegin(); (enable == false) && (it_t != d->m_selectedTransactions.constEnd()); ++it_t) {
       enable = !(*it_t).transaction().id().isEmpty() && !file->referencesClosedAccount((*it_t).transaction());
     }
-    aC->action(s_Actions[Action::TransactionDelete])->setEnabled(enable);
+    pActions[Action::TransactionDelete]->setEnabled(enable);
 
     if (!d->m_transactionEditor) {
       QString tooltip = i18n("Duplicate the current selected transactions");
-      aC->action(s_Actions[Action::TransactionDuplicate])->setEnabled(d->m_myMoneyView->canDuplicateTransactions(d->m_selectedTransactions, tooltip) && !d->m_selectedTransactions[0].transaction().id().isEmpty());
-      aC->action(s_Actions[Action::TransactionDuplicate])->setToolTip(tooltip);
+      pActions[Action::TransactionDuplicate]->setEnabled(d->m_myMoneyView->canDuplicateTransactions(d->m_selectedTransactions, tooltip) && !d->m_selectedTransactions[0].transaction().id().isEmpty());
+      pActions[Action::TransactionDuplicate]->setToolTip(tooltip);
 
       if (d->m_myMoneyView->canEditTransactions(d->m_selectedTransactions, tooltip)) {
-        aC->action(s_Actions[Action::TransactionEdit])->setEnabled(true);
+        pActions[Action::TransactionEdit]->setEnabled(true);
         // editing splits is allowed only if we have one transaction selected
         if (d->m_selectedTransactions.count() == 1) {
-          aC->action(s_Actions[Action::TransactionEditSplits])->setEnabled(true);
+          pActions[Action::TransactionEditSplits]->setEnabled(true);
         }
         if (d->m_selectedAccount.isAssetLiability() && d->m_selectedAccount.accountType() != eMyMoney::Account::Type::Investment) {
-          aC->action(s_Actions[Action::TransactionCreateSchedule])->setEnabled(d->m_selectedTransactions.count() == 1);
+          pActions[Action::TransactionCreateSchedule]->setEnabled(d->m_selectedTransactions.count() == 1);
         }
       }
-      aC->action(s_Actions[Action::TransactionEdit])->setToolTip(tooltip);
+      pActions[Action::TransactionEdit]->setToolTip(tooltip);
 
       if (!d->m_selectedAccount.isClosed()) {
-        w = factory()->container(s_Actions[Action::TransactionMoveMenu], this);
+        w = factory()->container(sTransactionMoveMenu, this);
         if (w)
           w->setEnabled(true);
       }
 
-      w = factory()->container(s_Actions[Action::TransactionMarkMenu], this);
+      w = factory()->container(sTransactionMarkMenu, this);
       if (w)
         w->setEnabled(true);
 
-      w = factory()->container(s_Actions[Action::TransactionContextMarkMenu], this);
+      w = factory()->container(sTransactionContextMarkMenu, this);
       if (w)
         w->setEnabled(true);
 
       // Allow marking the transaction if at least one is selected
-      aC->action(s_Actions[Action::TransactionToggleCleared])->setEnabled(true);
-      aC->action(s_Actions[Action::TransactionReconciled])->setEnabled(true);
-      aC->action(s_Actions[Action::TransactionNotReconciled])->setEnabled(true);
-      aC->action(s_Actions[Action::TransactionToggleReconciled])->setEnabled(true);
+      pActions[Action::TransactionToggleCleared]->setEnabled(true);
+      pActions[Action::TransactionReconciled]->setEnabled(true);
+      pActions[Action::TransactionNotReconciled]->setEnabled(true);
+      pActions[Action::TransactionToggleReconciled]->setEnabled(true);
 
       if (!d->m_accountGoto.isEmpty())
-        aC->action(s_Actions[Action::TransactionGoToAccount])->setEnabled(true);
+        pActions[Action::TransactionGoToAccount]->setEnabled(true);
       if (!d->m_payeeGoto.isEmpty())
-        aC->action(s_Actions[Action::TransactionGoToPayee])->setEnabled(true);
+        pActions[Action::TransactionGoToPayee]->setEnabled(true);
 
       // Matching is enabled as soon as one regular and one imported transaction is selected
       int matchedCount = 0;
@@ -5650,19 +5000,19 @@ void KMyMoneyApp::slotUpdateActions()
           ++matchedCount;
       }
 
-      if (d->m_selectedTransactions.count() == 2 /* && aC->action(s_Actions[Action::TransactionEdit])->isEnabled() */) {
-        aC->action(s_Actions[Action::TransactionMatch])->setEnabled(true);
+      if (d->m_selectedTransactions.count() == 2 /* && pActions[Action::TransactionEdit]->isEnabled() */) {
+        pActions[Action::TransactionMatch]->setEnabled(true);
       }
       if (importedCount != 0 || matchedCount != 0)
-        aC->action(s_Actions[Action::TransactionAccept])->setEnabled(true);
+        pActions[Action::TransactionAccept]->setEnabled(true);
       if (matchedCount != 0) {
-        aC->action(s_Actions[Action::TransactionMatch])->setEnabled(true);
-        aC->action(s_Actions[Action::TransactionMatch])->setText(i18nc("Button text for unmatch transaction", "Unmatch"));
-        aC->action(s_Actions[Action::TransactionMatch])->setIcon(QIcon("process-stop"));
+        pActions[Action::TransactionMatch]->setEnabled(true);
+        pActions[Action::TransactionMatch]->setText(i18nc("Button text for unmatch transaction", "Unmatch"));
+        pActions[Action::TransactionMatch]->setIcon(QIcon("process-stop"));
       }
 
       if (d->m_selectedTransactions.count() > 1) {
-        aC->action(s_Actions[Action::TransactionCombine])->setEnabled(true);
+        pActions[Action::TransactionCombine]->setEnabled(true);
       }
       if (d->m_selectedTransactions.count() >= 2) {
         int singleSplitTransactions = 0;
@@ -5680,7 +5030,7 @@ void KMyMoneyApp::slotUpdateActions()
           }
         }
         if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
-          aC->action(s_Actions[Action::TransactionCopySplits])->setEnabled(true);
+          pActions[Action::TransactionCopySplits]->setEnabled(true);
         }
       }
       if (d->m_selectedTransactions.count() >= 2) {
@@ -5699,21 +5049,21 @@ void KMyMoneyApp::slotUpdateActions()
           }
         }
         if(singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
-          aC->action(s_Actions[Action::TransactionCopySplits])->setEnabled(true);
+          pActions[Action::TransactionCopySplits]->setEnabled(true);
         }
       }
     } else {
-      aC->action(s_Actions[Action::TransactionAssignNumber])->setEnabled(d->m_transactionEditor->canAssignNumber());
-      aC->action(s_Actions[Action::TransactionNew])->setEnabled(false);
-      aC->action(s_Actions[Action::TransactionDelete])->setEnabled(false);
+      pActions[Action::TransactionAssignNumber]->setEnabled(d->m_transactionEditor->canAssignNumber());
+      pActions[Action::TransactionNew]->setEnabled(false);
+      pActions[Action::TransactionDelete]->setEnabled(false);
       QString reason;
-      aC->action(s_Actions[Action::TransactionEnter])->setEnabled(d->m_transactionEditor->isComplete(reason));
+      pActions[Action::TransactionEnter]->setEnabled(d->m_transactionEditor->isComplete(reason));
       //FIXME: Port to KDE4
       // the next line somehow worked in KDE3 but does not have
       // any influence under KDE4
       ///  Works for me when 'reason' is set. Allan
-      aC->action(s_Actions[Action::TransactionEnter])->setToolTip(reason);
-      aC->action(s_Actions[Action::TransactionCancel])->setEnabled(true);
+      pActions[Action::TransactionEnter]->setToolTip(reason);
+      pActions[Action::TransactionCancel]->setEnabled(true);
     }
   }
 
@@ -5729,8 +5079,7 @@ void KMyMoneyApp::slotUpdateActions()
         QStringList protocols;
         (*it_p)->protocols(protocols);
         if (protocols.count() > 0) {
-          aC->action(s_Actions[Action::AccountUpdateAll])->setEnabled(true);
-          aC->action(s_Actions[Action::AccountUpdateMenu])->setEnabled(true);
+          pActions[Action::UpdateAllAccounts]->setEnabled(true);
         }
       }
     }
@@ -5742,34 +5091,25 @@ void KMyMoneyApp::slotUpdateActions()
         case eMyMoney::Account::Type::Asset:
         case eMyMoney::Account::Type::Liability:
         case eMyMoney::Account::Type::Equity:
-          aC->action(s_Actions[Action::AccountTransactionReport])->setEnabled(true);
-          aC->action(s_Actions[Action::AccountEdit])->setEnabled(true);
-          aC->action(s_Actions[Action::AccountDelete])->setEnabled(!file->isReferenced(d->m_selectedAccount));
-          aC->action(s_Actions[Action::AccountOpen])->setEnabled(true);
+          pActions[Action::ReportAccountTransactions]->setEnabled(true);
+          pActions[Action::OpenAccount]->setEnabled(true);
           if (d->m_selectedAccount.accountGroup() != eMyMoney::Account::Type::Equity) {
             if (d->m_reconciliationAccount.id().isEmpty()) {
-              aC->action(s_Actions[Action::AccountStartReconciliation])->setEnabled(true);
-              aC->action(s_Actions[Action::AccountStartReconciliation])->setToolTip(i18n("Reconcile"));
+              pActions[Action::StartAccountReconciliation]->setEnabled(true);
+              pActions[Action::StartAccountReconciliation]->setToolTip(i18n("Reconcile"));
             } else {
               QString tip;
               tip = i18n("Reconcile - disabled because you are currently reconciling <b>%1</b>", d->m_reconciliationAccount.name());
-              aC->action(s_Actions[Action::AccountStartReconciliation])->setToolTip(tip);
+              pActions[Action::StartAccountReconciliation]->setToolTip(tip);
               if (!d->m_transactionEditor) {
-                aC->action(s_Actions[Action::AccountFinishReconciliation])->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
-                aC->action(s_Actions[Action::AccountPostponeReconciliation])->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
+                pActions[Action::FinishAccountReconciliation]->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
+                pActions[Action::PostponeAccountReconciliation]->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
               }
             }
           }
 
-          if (d->m_selectedAccount.accountType() == eMyMoney::Account::Type::Investment)
-            aC->action(s_Actions[Action::InvestmentNew])->setEnabled(true);
-
-          if (d->m_selectedAccount.isClosed())
-            aC->action(s_Actions[Action::AccountReopen])->setEnabled(true);
-          else enableCloseAccountAction(d->m_selectedAccount);
-
           if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty()) {
-            aC->action(s_Actions[Action::AccountOnlineUnmap])->setEnabled(true);
+            pActions[Action::UnmapOnlineAccount]->setEnabled(true);
             // check if provider is available
             QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
             it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider"));
@@ -5777,31 +5117,19 @@ void KMyMoneyApp::slotUpdateActions()
               QStringList protocols;
               (*it_p)->protocols(protocols);
               if (protocols.count() > 0) {
-                aC->action(s_Actions[Action::AccountUpdate])->setEnabled(true);
-                aC->action(s_Actions[Action::AccountUpdateMenu])->setEnabled(true);
+                pActions[Action::UpdateAccount]->setEnabled(true);
               }
             }
           } else {
-            aC->action(s_Actions[Action::AccountOnlineMap])->setEnabled(d->m_onlinePlugins.count() > 0);
+            pActions[Action::MapOnlineAccount]->setEnabled(d->m_onlinePlugins.count() > 0);
           }
 
-          aC->action(s_Actions[Action::AccountBalanceChart])->setEnabled(true);
+          pActions[Action::ChartAccountBalance]->setEnabled(true);
           break;
 
         case eMyMoney::Account::Type::Income :
         case eMyMoney::Account::Type::Expense :
-          aC->action(s_Actions[Action::CategoryEdit])->setEnabled(true);
-          // enable delete action, if category/account itself is not referenced
-          // by any object except accounts, because we want to allow
-          // deleting of sub-categories. Also, we allow transactions, schedules and budgets
-          // to be present because we can re-assign them during the delete process
-          skip.fill(false);
-          skip.setBit((int)eStorage::Reference::Transaction);
-          skip.setBit((int)eStorage::Reference::Account);
-          skip.setBit((int)eStorage::Reference::Schedule);
-          skip.setBit((int)eStorage::Reference::Budget);
-          aC->action(s_Actions[Action::CategoryDelete])->setEnabled(!file->isReferenced(d->m_selectedAccount, skip));
-          aC->action(s_Actions[Action::AccountOpen])->setEnabled(true);
+          pActions[Action::OpenAccount]->setEnabled(true);
           break;
 
         default:
@@ -5810,77 +5138,55 @@ void KMyMoneyApp::slotUpdateActions()
     }
   }
 
-  if (!d->m_selectedInstitution.id().isEmpty()) {
-    aC->action(s_Actions[Action::InstitutionEdit])->setEnabled(true);
-    aC->action(s_Actions[Action::InstitutionDelete])->setEnabled(!file->isReferenced(d->m_selectedInstitution));
-  }
-
-  if (!d->m_selectedInvestment.id().isEmpty()) {
-    aC->action(s_Actions[Action::InvestmentEdit])->setEnabled(true);
-    aC->action(s_Actions[Action::InvestmentDelete])->setEnabled(!file->isReferenced(d->m_selectedInvestment));
-    aC->action(s_Actions[Action::InvestmentManualPrice])->setEnabled(true);
-    try {
-      MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedInvestment.currencyId());
-      if (!security.value("kmm-online-source").isEmpty())
-        aC->action(s_Actions[Action::InvestmentOnlinePrice])->setEnabled(true);
-
-    } catch (const MyMoneyException &e) {
-      qDebug("Error retrieving security for investment %s: %s", qPrintable(d->m_selectedInvestment.name()), qPrintable(e.what()));
-    }
-    if (d->m_selectedInvestment.isClosed())
-      aC->action(s_Actions[Action::AccountReopen])->setEnabled(true);
-    else enableCloseAccountAction(d->m_selectedInvestment);
-  }
-
   if (!d->m_selectedSchedule.id().isEmpty()) {
-    aC->action(s_Actions[Action::ScheduleEdit])->setEnabled(true);
-    aC->action(s_Actions[Action::ScheduleDuplicate])->setEnabled(true);
-    aC->action(s_Actions[Action::ScheduleDelete])->setEnabled(!file->isReferenced(d->m_selectedSchedule));
+    pActions[Action::ScheduleEdit]->setEnabled(true);
+    pActions[Action::ScheduleDuplicate]->setEnabled(true);
+    pActions[Action::ScheduleDelete]->setEnabled(!file->isReferenced(d->m_selectedSchedule));
     if (!d->m_selectedSchedule.isFinished()) {
-      aC->action(s_Actions[Action::ScheduleEnter])->setEnabled(true);
+      pActions[Action::ScheduleEnter]->setEnabled(true);
       // a schedule with a single occurrence cannot be skipped
       if (d->m_selectedSchedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
-        aC->action(s_Actions[Action::ScheduleSkip])->setEnabled(true);
+        pActions[Action::ScheduleSkip]->setEnabled(true);
       }
     }
   }
 
   if (d->m_selectedPayees.count() >= 1) {
-    aC->action(s_Actions[Action::PayeeRename])->setEnabled(d->m_selectedPayees.count() == 1);
-    aC->action(s_Actions[Action::PayeeMerge])->setEnabled(d->m_selectedPayees.count() > 1);
-    aC->action(s_Actions[Action::PayeeDelete])->setEnabled(true);
+    pActions[Action::PayeeRename]->setEnabled(d->m_selectedPayees.count() == 1);
+    pActions[Action::PayeeMerge]->setEnabled(d->m_selectedPayees.count() > 1);
+    pActions[Action::PayeeDelete]->setEnabled(true);
   }
 
   if (d->m_selectedTags.count() >= 1) {
-    aC->action(s_Actions[Action::TagRename])->setEnabled(d->m_selectedTags.count() == 1);
-    aC->action(s_Actions[Action::TagDelete])->setEnabled(true);
+    pActions[Action::TagRename]->setEnabled(d->m_selectedTags.count() == 1);
+    pActions[Action::TagDelete]->setEnabled(true);
   }
 
   if (!d->m_selectedCurrency.id().isEmpty()) {
-    aC->action(s_Actions[Action::CurrencyRename])->setEnabled(true);
+    pActions[Action::CurrencyRename]->setEnabled(true);
     // no need to check each transaction. accounts are enough in this case
     skip.fill(false);
     skip.setBit((int)eStorage::Reference::Transaction);
-    aC->action(s_Actions[Action::CurrencyDelete])->setEnabled(!file->isReferenced(d->m_selectedCurrency, skip));
+    pActions[Action::CurrencyDelete]->setEnabled(!file->isReferenced(d->m_selectedCurrency, skip));
     if (d->m_selectedCurrency.id() != file->baseCurrency().id())
-      aC->action(s_Actions[Action::CurrencySetBase])->setEnabled(true);
+      pActions[Action::CurrencySetBase]->setEnabled(true);
   }
 
   if (!d->m_selectedPrice.from().isEmpty() && d->m_selectedPrice.source() != QLatin1String("KMyMoney")) {
-    aC->action(s_Actions[Action::PriceEdit])->setEnabled(true);
-    aC->action(s_Actions[Action::PriceDelete])->setEnabled(true);
+    pActions[Action::PriceEdit]->setEnabled(true);
+    pActions[Action::PriceDelete]->setEnabled(true);
 
     //enable online update if it is a currency
     MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedPrice.from());
-    aC->action(s_Actions[Action::PriceUpdate])->setEnabled(security.isCurrency());
+    pActions[Action::PriceUpdate]->setEnabled(security.isCurrency());
   }
 }
 
 void KMyMoneyApp::slotResetSelections()
 {
   slotSelectAccount(MyMoneyAccount());
-  slotSelectInstitution(MyMoneyInstitution());
-  slotSelectInvestment(MyMoneyAccount());
+  d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
+  d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
   slotSelectSchedule();
   slotSelectCurrency();
   slotSelectPrice();
@@ -5952,7 +5258,7 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
             d->m_payeeGoto = payee.id();
             auto name = payee.name();
             name.replace(QRegExp("&(?!&)"), "&&");
-            actionCollection()->action(s_Actions[Action::TransactionGoToPayee])->setText(i18n("Go to '%1'", name));
+            pActions[Action::TransactionGoToPayee]->setText(i18n("Go to '%1'", name));
           }
         } catch (const MyMoneyException &) {
         }
@@ -5972,7 +5278,7 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
               d->m_accountGoto = acc.id();
               auto name = acc.name();
               name.replace(QRegExp("&(?!&)"), "&&");
-              actionCollection()->action(s_Actions[Action::TransactionGoToAccount])->setText(i18n("Go to '%1'", name));
+              pActions[Action::TransactionGoToAccount]->setText(i18n("Go to '%1'", name));
               break;
             }
           }
@@ -5993,20 +5299,9 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
 
   // make sure, we show some neutral menu entry if we don't have an object
   if (d->m_payeeGoto.isEmpty())
-    actionCollection()->action(s_Actions[Action::TransactionGoToPayee])->setText(i18n("Go to payee"));
+    pActions[Action::TransactionGoToPayee]->setText(i18n("Go to payee"));
   if (d->m_accountGoto.isEmpty())
-    actionCollection()->action(s_Actions[Action::TransactionGoToAccount])->setText(i18n("Go to account"));
-}
-
-void KMyMoneyApp::slotSelectInstitution(const MyMoneyObject& institution)
-{
-  if (typeid(institution) != typeid(MyMoneyInstitution))
-    return;
-
-  d->m_selectedInstitution = dynamic_cast<const MyMoneyInstitution&>(institution);
-  // qDebug("slotSelectInstitution('%s')", d->m_selectedInstitution.name().data());
-  slotUpdateActions();
-  emit institutionSelected(d->m_selectedInstitution);
+    pActions[Action::TransactionGoToAccount]->setText(i18n("Go to account"));
 }
 
 void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
@@ -6022,21 +5317,6 @@ void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
   // qDebug("slotSelectAccount('%s')", d->m_selectedAccount.name().data());
   slotUpdateActions();
   emit accountSelected(d->m_selectedAccount);
-}
-
-void KMyMoneyApp::slotSelectInvestment(const MyMoneyObject& obj)
-{
-  if (typeid(obj) != typeid(MyMoneyAccount))
-    return;
-
-  // qDebug("slotSelectInvestment('%s')", account.name().data());
-  d->m_selectedInvestment = MyMoneyAccount();
-  const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(obj);
-  if (acc.isInvest())
-    d->m_selectedInvestment = acc;
-
-  slotUpdateActions();
-  emit investmentSelected(d->m_selectedInvestment);
 }
 
 void KMyMoneyApp::slotSelectSchedule()
@@ -6618,6 +5898,33 @@ void KMyMoneyApp::setAccountOnlineParameters(const MyMoneyAccount& _acc, const M
   }
 }
 
+void KMyMoneyApp::slotOnlineTransferRequested(const MyMoneyAccount& acc)
+{
+  d->m_selectedAccount = acc;
+  slotNewOnlineTransfer();
+}
+
+void KMyMoneyApp::slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action)
+{
+  d->m_selectedAccount = acc;
+  switch (action) {
+    case eMenu::Action::UnmapOnlineAccount:
+      slotAccountUnmapOnline();
+      break;
+    case eMenu::Action::MapOnlineAccount:
+      slotAccountMapOnline();
+      break;
+    case eMenu::Action::UpdateAccount:
+      slotAccountUpdateOnline();
+      break;
+    case eMenu::Action::UpdateAllAccounts:
+      slotAccountUpdateOnlineAll();
+      break;
+    default:
+      break;
+  }
+}
+
 void KMyMoneyApp::slotAccountUnmapOnline()
 {
   // no account selected
@@ -6739,9 +6046,9 @@ void KMyMoneyApp::slotAccountUpdateOnlineAll()
     } else
       ++it_a;
   }
-  QVector<Action> disabledActions {Action::AccountUpdate, Action::AccountUpdateMenu, Action::AccountUpdateAll};
-  foreach (const auto a, disabledActions)
-    actionCollection()->action(s_Actions.value(a))->setEnabled(false);
+  const QVector<Action> disabledActions {Action::UpdateAccount, Action::UpdateAllAccounts};
+  for (const auto& a : disabledActions)
+    pActions[a]->setEnabled(false);
 
   // now work on the remaining list of accounts
   int cnt = accList.count() - 1;
@@ -6769,9 +6076,9 @@ void KMyMoneyApp::slotAccountUpdateOnline()
   if (d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty())
     return;
 
-  QVector<Action> disabledActions {Action::AccountUpdate, Action::AccountUpdateMenu, Action::AccountUpdateAll};
-  foreach (const auto a, disabledActions)
-    actionCollection()->action(s_Actions.value(a))->setEnabled(false);
+  const QVector<Action> disabledActions {Action::UpdateAccount, Action::UpdateAllAccounts};
+  for (const auto& a : disabledActions)
+    pActions[a]->setEnabled(false);
 
   // find the provider
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
@@ -7042,8 +6349,8 @@ void KMyMoneyApp::Private::unlinkStatementXML()
 void KMyMoneyApp::Private::closeFile()
 {
   q->slotSelectAccount(MyMoneyAccount());
-  q->slotSelectInstitution(MyMoneyInstitution());
-  q->slotSelectInvestment(MyMoneyAccount());
+  q->d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
+  q->d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
   q->slotSelectSchedule();
   q->slotSelectCurrency();
   q->slotSelectPayees(QList<MyMoneyPayee>());

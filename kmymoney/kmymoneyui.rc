@@ -135,10 +135,6 @@
   <Action name="account_online_new_credit_transfer" />
   <Separator/>
   <Action name="investment_new" />
-  <Action name="investment_edit" />
-  <Action name="investment_delete" />
-  <Action name="investment_online_price_update" />
-  <Action name="investment_manual_price_update" />
  </Menu>
  <Menu name="category_context_menu">
   <title>Category options</title>
@@ -262,7 +258,6 @@
   <Action name="account_open" />
   <Action name="account_edit" />
   <Action name="account_reconcile" />
-  <Action name="account_online_update_menu" />
   <Action name="account_online_new_credit_transfer" />
   <Action name="account_chart" />
   <Separator lineSeparator="true"/>

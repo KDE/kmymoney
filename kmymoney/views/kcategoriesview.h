@@ -34,6 +34,9 @@
 
 #include "kmymoneyaccountsviewbase.h"
 
+class MyMoneyMoney;
+class MyMoneyAccount;
+
 /**
   * @brief  This class contains the implementation of the categories view.
   * @author Michael Edwardes, Thomas Baumgart
@@ -54,8 +57,6 @@
   * kmymoney.cpp): category_new, category_edit and category_delete. They are
   * accessible from either the main menu or the context menu.
   */
-
-class MyMoneyMoney;
 class KCategoriesViewPrivate;
 class KCategoriesView : public KMyMoneyAccountsViewBase
 {
@@ -67,12 +68,14 @@ public:
 
   void setDefaultFocus() override;
   void refresh() override;
+  void updateActions(const MyMoneyObject& obj) override;
 
 public Q_SLOTS:
   void slotProfitChanged(const MyMoneyMoney &);
 
+  void slotShowCategoriesMenu(const MyMoneyAccount& acc);
+
 protected:
-  KCategoriesView(KCategoriesViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;
 
 protected Q_SLOTS:
@@ -80,6 +83,11 @@ protected Q_SLOTS:
 
 private:
   Q_DECLARE_PRIVATE(KCategoriesView)
+
+private Q_SLOTS:
+  void slotNewCategory();
+  void slotEditCategory();
+  void slotDeleteCategory();
 };
 
 #endif
