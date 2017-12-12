@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHashFunctions>
-
 #ifndef MYMONEYENUMS_H
 #define MYMONEYENUMS_H
+
+#include <QHashFunctions>
 
 namespace eMyMoney {
   /**

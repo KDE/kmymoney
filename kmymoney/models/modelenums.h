@@ -14,11 +14,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHashFunctions>
-#include <qnamespace.h>
-
 #ifndef MODELENUMS_H
 #define MODELENUMS_H
+
+#include <QHashFunctions>
+#include <qnamespace.h>
 
 namespace eAccountsModel {
     enum class Column {

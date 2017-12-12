@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHashFunctions>
-
 #ifndef VIEWENUMS_H
 #define VIEWENUMS_H
+
+#include <QHashFunctions>
 
 enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
                   Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, None };

@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QMetaType>
-#include <QHashFunctions>
 
 // ----------------------------------------------------------------------------
 // Project Includes

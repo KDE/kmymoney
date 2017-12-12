@@ -21,7 +21,6 @@
 #define ONLINEJOB_H
 
 #include <QMetaType>
-#include <QHashFunctions>
 
 #include "mymoneyobject.h"
 #include "mymoneyexception.h"

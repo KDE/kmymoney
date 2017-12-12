@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QHash>
-
 #ifndef STORAGEENUMS_H
 #define STORAGEENUMS_H
+
+#include <QHashFunctions>
 
 namespace eStorage {
     enum class Reference {
