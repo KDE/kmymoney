@@ -14,6 +14,9 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
+// krazy:excludeall=dpointer
+
 #ifndef MYMONEYMONEY_H
 #define MYMONEYMONEY_H
 

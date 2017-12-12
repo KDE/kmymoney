@@ -540,7 +540,7 @@ void KMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   bool negative = false;
   // setup operand
   d->operand = value;
-  // make sure the group/thousands seperator is removed ...
+  // make sure the group/thousands separator is removed ...
   d->operand.replace(QRegExp(QString("\\%1").arg(QLocale().groupSeparator())), QChar());
   // ... and the decimal is represented by a dot
   d->operand.replace(QRegExp(QString("\\%1").arg(d->m_comma)), QChar('.'));

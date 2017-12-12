@@ -833,7 +833,7 @@ bool Transaction::matches(const RegisterFilter& filter) const
     }
     if (!split.tagIdList().isEmpty()) {
       const QList<QString>& t = split.tagIdList();
-      for (auto i = 0; i < t.count(); i++) {
+      for (auto i = 0; i < t.count(); ++i) {
         if ((file->tag(t[i])).name().contains(filter.text, Qt::CaseInsensitive))
           return true;
       }
