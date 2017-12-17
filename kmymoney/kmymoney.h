@@ -883,6 +883,11 @@ public Q_SLOTS:
   void slotShowOnlineJobContextMenu();
 
   /**
+    * Create a new investment in a given @p parent investment account
+    */
+  void slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+  /**
     * Brings up the new category editor and saves the information.
     * The dialog will be preset with the name and parent account.
     *

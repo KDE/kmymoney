@@ -2546,6 +2546,11 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
   }
 }
 
+void KMyMoneyApp::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewInvestmentWizard::newInvestment(account, parent);
+}
+
 void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
   KNewAccountDlg::newCategory(account, parent);
