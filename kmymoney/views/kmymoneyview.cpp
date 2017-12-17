@@ -1733,7 +1733,7 @@ void KMyMoneyView::slotRefreshViews()
   m_accountsView->refresh();
   m_institutionsView->refresh();
   m_categoriesView->refresh();
-  m_payeesView->refresh();
+  m_payeesView->slotLoadPayees();
   m_tagsView->refresh();
   m_ledgerView->slotLoadView();
   m_budgetView->refresh();
