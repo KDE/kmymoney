@@ -58,6 +58,8 @@ public:
   QStringList availableJobs(QString accountId);
   IonlineTaskSettings::ptr settings(QString accountId, QString taskName);
   void sendOnlineJob(QList< onlineJob >& jobs);
+  void plug() override {};
+  void unplug() override {};
 };
 
 #endif // ONLINEJOBPLUGINMOCKUP_H

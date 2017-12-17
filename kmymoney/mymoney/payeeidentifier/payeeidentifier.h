@@ -20,6 +20,7 @@
 #define PAYEEIDENTIFIER_H
 
 #include <QMetaType>
+#include <QString>
 #include <qglobal.h>
 
 /** @todo fix include path after upgrade to cmake 3 */

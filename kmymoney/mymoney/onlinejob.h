@@ -21,7 +21,7 @@
 #define ONLINEJOB_H
 
 #include <QMetaType>
-
+#include <QString>
 #include "mymoneyobject.h"
 #include "mymoneyexception.h"
 #include "onlinejobmessage.h"
@@ -291,7 +291,7 @@ public:
   class badTaskCast : public MyMoneyException
   {
   public:
-    explicit badTaskCast(const QString& file = "", const long unsigned int& line = 0)
+    explicit badTaskCast(const QString& file = QString(), const long unsigned int& line = 0)
       : MyMoneyException("Casted onlineTask with wrong type", file, line) {}
   };
 
@@ -301,7 +301,7 @@ public:
   class emptyTask : public MyMoneyException
   {
   public:
-    explicit emptyTask(const QString& file = "", const long unsigned int& line = 0)
+    explicit emptyTask(const QString& file = QString(), const long unsigned int& line = 0)
       : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line) {}
   };
 
