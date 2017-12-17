@@ -534,8 +534,8 @@ void NewTransactionEditor::loadTransaction(const QString& id)
     d->updateWidgetState();
   }
 
-  // set focus to payee edit once we return to event loop
-  QMetaObject::invokeMethod(d->ui->payeeEdit, "setFocus", Qt::QueuedConnection);
+  // set focus to date edit once we return to event loop
+  QMetaObject::invokeMethod(d->ui->dateEdit, "setFocus", Qt::QueuedConnection);
 }
 
 void NewTransactionEditor::numberChanged(const QString& newNumber)
