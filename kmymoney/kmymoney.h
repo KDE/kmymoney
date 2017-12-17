@@ -364,10 +364,6 @@ protected Q_SLOTS:
     */
   void slotScheduleNew(const MyMoneyTransaction& t, eMyMoney::Schedule::Occurrence occurrence = eMyMoney::Schedule::Occurrence::Monthly);
 
-  /**
-    */
-  void slotScheduleDuplicate();
-
   void slotAccountMapOnline();
   void slotAccountUnmapOnline();
   void slotAccountUpdateOnline();
@@ -633,28 +629,6 @@ protected:
   void markTransaction(eMyMoney::Split::State flag);
 
   /**
-    * This method allows to skip the next scheduled transaction of
-    * the given schedule @a s.
-    *
-    */
-  void skipSchedule(MyMoneySchedule& s);
-
-  /**
-    * This method allows to enter the next scheduled transaction of
-    * the given schedule @a s. In case @a extendedKeys is @a true,
-    * the given schedule can also be skipped or ignored.
-    * If @a autoEnter is @a true and the schedule does not contain
-    * an estimated value, the schedule is entered as is without further
-    * interaction with the user. In all other cases, the user will
-    * be presented a dialog and allowed to adjust the values for this
-    * instance of the schedule.
-    *
-    * The transaction will be created and entered into the ledger
-    * and the schedule updated.
-    */
-  eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& s, bool autoEnter = false, bool extendedKeys = false);
-
-  /**
    * This method unmatches the currently selected transactions
    */
   void transactionUnmatch();
@@ -848,12 +822,6 @@ public Q_SLOTS:
   void slotAccountTransactionReport();
 
   /**
-    * This slot opens the schedule options menu at the current cursor
-    * position.
-    */
-  void slotShowScheduleContextMenu();
-
-  /**
     * This slot opens the tag options menu at the current cursor
     * position.
     */
@@ -905,34 +873,6 @@ public Q_SLOTS:
   void slotPayeeNew(const QString& newnameBase, QString& id);
 
   /**
-    * This slot collects information for a new scheduled transaction
-    * and saves it in the engine. @sa slotScheduleNew(const MyMoneyTransaction&)
-    */
-  void slotScheduleNew();
-
-  /**
-    * This slot allows to edit information the currently selected schedule
-    */
-  void slotScheduleEdit();
-
-  /**
-    * This slot allows to delete the currently selected schedule
-    */
-  void slotScheduleDelete();
-
-  /**
-    * This slot allows to enter the next scheduled transaction of
-    * the currently selected schedule
-    */
-  void slotScheduleEnter();
-
-  /**
-   * This slot allows to skip the next scheduled transaction of
-   * the currently selected schedule
-   */
-  void slotScheduleSkip();
-
-  /**
     */
   void slotTagNew(const QString& newnameBase, QString& id);
   void slotTagNew();
@@ -949,9 +889,6 @@ public Q_SLOTS:
   void slotResetSelections();
 
   void slotSelectAccount(const MyMoneyObject& account);
-
-  void slotSelectSchedule();
-  void slotSelectSchedule(const MyMoneySchedule& schedule);
 
   void slotSelectTags(const QList<MyMoneyTag>& list);
 

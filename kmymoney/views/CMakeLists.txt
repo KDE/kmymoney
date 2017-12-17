@@ -50,7 +50,7 @@ set(libviews_a_UI
   kinstitutionsview.ui
   kinvestmentview.ui
   kpayeesview.ui
-  kscheduledviewdecl.ui
+  kscheduledview.ui
   ktagsview.ui
   konlinejoboutbox.ui
   kpayeeidentifierview.ui

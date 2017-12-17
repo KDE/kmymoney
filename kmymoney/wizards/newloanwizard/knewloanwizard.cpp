@@ -35,6 +35,7 @@
 // Project Includes
 
 #include "kmymoneyaccountselector.h"
+#include "knewaccountdlg.h"
 #include "mymoneypayee.h"
 
 KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
@@ -231,4 +232,14 @@ QDate KNewLoanWizard::initialPaymentDate() const
     return QDate();
   }
   return field("paymentDate").toDate();
+}
+
+void KNewLoanWizard::slotNewCategory(MyMoneyAccount& acc)
+{
+  KNewAccountDlg::newCategory(acc, MyMoneyAccount());
+}
+
+void KNewLoanWizard::slotNewPayee(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newPayee(newnameBase, id);
 }

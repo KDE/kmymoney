@@ -98,9 +98,9 @@ namespace eMenu {
     // *************
     // The schedule menu
     // *************
-    ScheduleNew, ScheduleEdit,
-    ScheduleDelete, ScheduleDuplicate,
-    ScheduleEnter, ScheduleSkip,
+    NewSchedule, EditSchedule,
+    DeleteSchedule, DuplicateSchedule,
+    EnterSchedule, SkipSchedule,
     // *************
     // The payee menu
     // *************
@@ -140,6 +140,7 @@ namespace eMenu {
   enum class Menu {
     Institution,
     Account,
+    Schedule,
     Category,
     Payee,
     Investment

@@ -44,6 +44,7 @@ class ResourceInstance;
 namespace eAccountsModel { enum class Column; }
 namespace eMenu { enum class Action; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
+namespace eDialogs { enum class ScheduleResultCode; }
 
 class KMyMoneyApp;
 class KHomeView;
@@ -408,6 +409,12 @@ public:
   void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
 
   void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
+
+  // TODO: remove that function
+  /**
+   * ugly proxy function
+   */
+  eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
 
 protected:
   /**

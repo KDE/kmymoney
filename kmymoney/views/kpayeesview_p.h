@@ -124,7 +124,6 @@ public:
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KPayeesView),
-    m_needsRefresh(false),
     m_needLoad(true),
     m_inSelection(false),
     m_allowEditing(true),
@@ -354,7 +353,6 @@ public:
 
   void clearItemData()
   {
-    Q_Q(KPayeesView);
     ui->addressEdit->setText(QString());
     ui->postcodeEdit->setText(QString());
     ui->telephoneEdit->setText(QString());
@@ -371,7 +369,6 @@ public:
     */
   void showTransactions()
   {
-    Q_Q(KPayeesView);
     MyMoneyMoney balance;
     const auto file = MyMoneyFile::instance();
     MyMoneySecurity base = file->baseCurrency();
@@ -730,13 +727,6 @@ public:
     * q member holds a list of all transactions
     */
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
-
-
-  /**
-    * q member holds the state of the toggle switch used
-    * to suppress updates due to MyMoney engine data changes
-    */
-  bool m_needsRefresh;
 
   /**
     * q member holds the load state of page

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-  <class>KScheduledViewDecl</class>
-  <widget class="QWidget" name="KScheduledViewDecl">
+  <class>KScheduledView</class>
+  <widget class="QWidget" name="KScheduledView">
     <property name="geometry">
       <rect>
         <x>0</x>

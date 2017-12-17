@@ -35,6 +35,8 @@ class MyMoneyAccount;
 class MyMoneyTransaction;
 class TransactionEditor;
 
+namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
+
 /**
   * @author Thomas Baumgart
   */
@@ -57,6 +59,9 @@ public:
     * @return MyMoneySchedule The schedule details.
     **/
   const MyMoneySchedule& schedule();
+
+  static void newSchedule(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence);
+  static void editSchedule(const MyMoneySchedule& inputSchedule);
 
 protected:
   /**

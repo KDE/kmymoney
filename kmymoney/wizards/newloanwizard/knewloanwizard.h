@@ -160,6 +160,10 @@ protected:
 private:
   Q_DISABLE_COPY(KNewLoanWizard)
   Q_DECLARE_PRIVATE(KNewLoanWizard)
+
+private Q_SLOTS:
+  void slotNewCategory(MyMoneyAccount &acc);
+  void slotNewPayee(const QString& newnameBase, QString& id);
 };
 
 #endif

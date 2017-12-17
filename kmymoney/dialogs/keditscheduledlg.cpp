@@ -33,6 +33,7 @@
 #include <KStandardGuiItem>
 #include <KLineEdit>
 #include <KHelpClient>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -41,6 +42,7 @@
 #include "ui_keditscheduledlg.h"
 
 #include "tabbar.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
@@ -59,6 +61,8 @@
 #include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
 #include "knewinvestmentwizard.h"
+#include "keditloanwizard.h"
+#include "kmymoneysettings.h"
 #include "mymoneyenums.h"
 #include "widgetenums.h"
 
@@ -466,6 +470,116 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
     }
   }
   return d->m_schedule;
+}
+
+void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence)
+{
+  MyMoneySchedule schedule;
+  schedule.setOccurrence(occurrence);
+
+  // if the schedule is based on an existing transaction,
+  // we take the post date and project it to the next
+  // schedule in a month.
+  if (_t != MyMoneyTransaction()) {
+    MyMoneyTransaction t(_t);
+    schedule.setTransaction(t);
+    if (occurrence != eMyMoney::Schedule::Occurrence::Once)
+      schedule.setNextDueDate(schedule.nextPayment(t.postDate()));
+  }
+
+  QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, nullptr);
+  QPointer<TransactionEditor> transactionEditor = dlg->startEdit();
+  if (transactionEditor) {
+    KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
+    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+      MyMoneyFileTransaction ft;
+      try {
+        schedule = dlg->schedule();
+        MyMoneyFile::instance()->addSchedule(schedule);
+        ft.commit();
+
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(nullptr, i18n("Unable to add scheduled transaction: %1", e.what()), i18n("Add scheduled transaction"));
+      }
+    }
+  }
+  delete transactionEditor;
+  delete dlg;
+}
+
+void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
+{
+    try {
+      auto schedule = MyMoneyFile::instance()->schedule(inputSchedule.id());
+
+      KEditScheduleDlg* sched_dlg = nullptr;
+      KEditLoanWizard* loan_wiz = nullptr;
+
+      switch (schedule.type()) {
+        case eMyMoney::Schedule::Type::Bill:
+        case eMyMoney::Schedule::Type::Deposit:
+        case eMyMoney::Schedule::Type::Transfer:
+        {
+          sched_dlg = new KEditScheduleDlg(schedule, nullptr);
+          QPointer<TransactionEditor> transactionEditor = sched_dlg->startEdit();
+          if (transactionEditor) {
+            KMyMoneyMVCCombo::setSubstringSearchForChildren(sched_dlg, !KMyMoneySettings::stringMatchFromStart());
+            if (sched_dlg->exec() == QDialog::Accepted) {
+              MyMoneyFileTransaction ft;
+              try {
+                MyMoneySchedule sched = sched_dlg->schedule();
+                // Check whether the new Schedule Date
+                // is at or before the lastPaymentDate
+                // If it is, ask the user whether to clear the
+                // lastPaymentDate
+                const auto& next = sched.nextDueDate();
+                const auto& last = sched.lastPayment();
+                if (next.isValid() && last.isValid() && next <= last) {
+                  // Entered a date effectively no later
+                  // than previous payment.  Date would be
+                  // updated automatically so we probably
+                  // want to clear it.  Let's ask the user.
+                  if (KMessageBox::questionYesNo(nullptr, i18n("<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?</qt>", QLocale().toString(next, QLocale::ShortFormat), QLocale().toString(last, QLocale::ShortFormat)), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
+                    sched.setLastPayment(QDate());
+                  }
+                }
+                MyMoneyFile::instance()->modifySchedule(sched);
+                // delete the editor before we emit the dataChanged() signal from the
+                // engine. Calling this twice in a row does not hurt.
+                delete transactionEditor;
+                ft.commit();
+              } catch (const MyMoneyException &e) {
+                KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), e.what());
+              }
+            }
+            delete transactionEditor;
+          }
+          delete sched_dlg;
+          break;
+        }
+        case eMyMoney::Schedule::Type::LoanPayment:
+        {
+          loan_wiz = new KEditLoanWizard(schedule.account(2));
+          if (loan_wiz->exec() == QDialog::Accepted) {
+            MyMoneyFileTransaction ft;
+            try {
+              MyMoneyFile::instance()->modifySchedule(loan_wiz->schedule());
+              MyMoneyFile::instance()->modifyAccount(loan_wiz->account());
+              ft.commit();
+            } catch (const MyMoneyException &e) {
+              KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), e.what());
+            }
+          }
+          delete loan_wiz;
+          break;
+        }
+        case eMyMoney::Schedule::Type::Any:
+          break;
+      }
+
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), e.what());
+    }
 }
 
 bool KEditScheduleDlg::focusNextPrevChild(bool next)

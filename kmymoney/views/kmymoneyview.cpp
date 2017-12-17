@@ -181,17 +181,12 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 3
-  m_scheduledView = new KScheduledView();
+  m_scheduledView = new KScheduledView;
 //this is to solve the way long strings are handled differently among versions of KPageWidget
   viewFrames[View::Schedules] = m_model->addPage(m_scheduledView, i18n("Scheduled transactions"));
   viewFrames[View::Schedules]->setIcon(Icons::get(Icon::ViewSchedules));
-
-  connect(m_scheduledView, SIGNAL(scheduleSelected(MyMoneySchedule)), kmymoney, SLOT(slotSelectSchedule(MyMoneySchedule)));
-  connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowScheduleContextMenu()));
-  connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney, SLOT(slotScheduleEnter()));
-  connect(m_scheduledView, SIGNAL(skipSchedule()), kmymoney, SLOT(slotScheduleSkip()));
-  connect(m_scheduledView, SIGNAL(editSchedule()), kmymoney, SLOT(slotScheduleEdit()));
-  connect(m_scheduledView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect(m_scheduledView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_scheduledView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 4
   m_categoriesView = new KCategoriesView;
@@ -490,6 +485,11 @@ void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>
   m_accountsView->setOnlinePlugins(plugins);
 }
 
+eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
+{
+  return m_scheduledView->enterSchedule(schedule, autoEnter, extendedKeys);
+}
+
 bool KMyMoneyView::showPageHeader() const
 {
   return false;
@@ -713,8 +713,7 @@ void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, c
 
 void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
 {
-  MyMoneySchedule sched = MyMoneyFile::instance()->schedule(scheduleId);
-  kmymoney->slotSelectSchedule(sched);
+  m_scheduledView->objectSelected(MyMoneyFile::instance()->schedule(scheduleId));
 }
 
 void KMyMoneyView::slotShowReport(const QString& reportid)
@@ -1735,7 +1734,7 @@ void KMyMoneyView::slotRefreshViews()
   m_investmentView->refresh();
   m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
-  m_scheduledView->slotReloadView();
+  m_scheduledView->refresh();
 }
 
 void KMyMoneyView::slotShowTransactionDetail(bool detailed)
@@ -2263,7 +2262,6 @@ void KMyMoneyView::slotPrintView()
     m_homeView->slotPrintView();
 }
 
-
 void KMyMoneyView::resetViewSelection(const View)
 {
   emit aboutToChangeView();
@@ -2282,6 +2280,13 @@ void KMyMoneyView::connectView(const View view)
       connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
       connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, m_accountsView, &KAccountsView::slotNetWorthChanged);
+      break;
+
+    case View::Schedules:
+      disconnect(m_scheduledView, &KScheduledView::aboutToShow, this, &KMyMoneyView::connectView);
+      connect(m_scheduledView, &KScheduledView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(m_scheduledView, &KScheduledView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(m_scheduledView, &KScheduledView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       break;
 
     case View::Institutions:
@@ -2357,6 +2362,8 @@ void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
 //    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
     m_institutionsView->slotEditInstitution();
+  } else if (typeid(obj) == typeid(MyMoneySchedule)) {
+    m_scheduledView->slotEditSchedule();
   }
 }
 
@@ -2371,6 +2378,9 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
     m_accountsView->updateActions(obj);
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
     m_institutionsView->updateActions(obj);
+  } else if (typeid(obj) == typeid(MyMoneySchedule)) {
+    kmymoney->slotUpdateActions();
+    m_scheduledView->updateActions(obj);
   }
 }
 
@@ -2389,6 +2399,9 @@ void KMyMoneyView::slotContextMenuRequested(const MyMoneyObject& obj)
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
     const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
     m_institutionsView->slotShowInstitutionsMenu(inst);
+  } else if (typeid(obj) == typeid(MyMoneySchedule)) {
+    const auto& sch = static_cast<const MyMoneySchedule&>(obj);
+    m_scheduledView->slotShowScheduleMenu(sch);
   }
 
 }

@@ -600,6 +600,7 @@ QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
   const QHash<Menu, QString> menuNames {
     {Menu::Institution, QStringLiteral("institution_context_menu")},
     {Menu::Account,     QStringLiteral("account_context_menu")},
+    {Menu::Schedule,    QStringLiteral("schedule_context_menu")},
     {Menu::Category,    QStringLiteral("category_context_menu")},
     {Menu::Payee,       QStringLiteral("payee_context_menu")},
     {Menu::Investment,  QStringLiteral("investment_context_menu")}
@@ -751,12 +752,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::InvestmentOnlinePrice},
       {Action::UpdatePriceManually,           QStringLiteral("investment_manual_price_update"), i18n("Manual price update..."),                     Icon::Empty},
       //Schedule
-      {Action::ScheduleNew,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::AppointmentNew},
-      {Action::ScheduleEdit,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
-      {Action::ScheduleDelete,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditDelete},
-      {Action::ScheduleDuplicate,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
-      {Action::ScheduleEnter,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
-      {Action::ScheduleSkip,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::MediaSeekForward},
+      {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::AppointmentNew},
+      {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
+      {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditDelete},
+      {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
+      {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
+      {Action::SkipSchedule,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::MediaSeekForward},
       //Payees
       {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::ListAddUser},
       {Action::RenamePayee,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
@@ -884,13 +885,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::TransactionAssignNumber,       &KMyMoneyApp::slotTransactionAssignNumber},
       {Action::TransactionCombine,            &KMyMoneyApp::slotTransactionCombine},
       {Action::TransactionCopySplits,         &KMyMoneyApp::slotTransactionCopySplits},
-      //Schedule
-      {Action::ScheduleNew,                   &KMyMoneyApp::slotScheduleNew},
-      {Action::ScheduleEdit,                  &KMyMoneyApp::slotScheduleEdit},
-      {Action::ScheduleDelete,                &KMyMoneyApp::slotScheduleDelete},
-      {Action::ScheduleDuplicate,             &KMyMoneyApp::slotScheduleDuplicate},
-      {Action::ScheduleEnter,                 &KMyMoneyApp::slotScheduleEnter},
-      {Action::ScheduleSkip,                  &KMyMoneyApp::slotScheduleSkip},
       //Tags
       {Action::TagNew,                        &KMyMoneyApp::slotTagNew},
       {Action::TagRename,                     &KMyMoneyApp::slotTagRename},
@@ -2757,7 +2751,7 @@ void KMyMoneyApp::slotAccountReconcileStart()
 
               // and enter it if it is not on the skip list
               if (skipMap.find((*it_sch).id()) == skipMap.end()) {
-                rc = enterSchedule(sch, false, true);
+                rc = d->m_myMoneyView->enterSchedule(sch, false, true);
                 if (rc == eDialogs::ScheduleResultCode::Ignore) {
                   skipMap[(*it_sch).id()] = true;
                 }
@@ -3068,355 +3062,9 @@ void KMyMoneyApp::slotAccountTransactionReport()
   }
 }
 
-void KMyMoneyApp::slotScheduleNew()
-{
-  slotScheduleNew(MyMoneyTransaction());
-}
-
 void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence)
 {
-  MyMoneySchedule schedule;
-  schedule.setOccurrence(occurrence);
-
-  // if the schedule is based on an existing transaction,
-  // we take the post date and project it to the next
-  // schedule in a month.
-  if (_t != MyMoneyTransaction()) {
-    MyMoneyTransaction t(_t);
-    schedule.setTransaction(t);
-    if (occurrence != eMyMoney::Schedule::Occurrence::Once)
-      schedule.setNextDueDate(schedule.nextPayment(t.postDate()));
-  }
-
-  QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, this);
-  TransactionEditor* transactionEditor = dlg->startEdit();
-  if (transactionEditor) {
-    KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-      MyMoneyFileTransaction ft;
-      try {
-        schedule = dlg->schedule();
-        MyMoneyFile::instance()->addSchedule(schedule);
-        ft.commit();
-
-      } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Unable to add scheduled transaction: %1", e.what()), i18n("Add scheduled transaction"));
-      }
-    }
-  }
-  delete transactionEditor;
-  delete dlg;
-}
-
-void KMyMoneyApp::slotScheduleEdit()
-{
-  if (!d->m_selectedSchedule.id().isEmpty()) {
-    try {
-      MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
-
-      KEditScheduleDlg* sched_dlg = 0;
-      KEditLoanWizard* loan_wiz = 0;
-
-      switch (schedule.type()) {
-        case eMyMoney::Schedule::Type::Bill:
-        case eMyMoney::Schedule::Type::Deposit:
-        case eMyMoney::Schedule::Type::Transfer:
-          sched_dlg = new KEditScheduleDlg(schedule, this);
-          d->m_transactionEditor = sched_dlg->startEdit();
-          if (d->m_transactionEditor) {
-            KMyMoneyMVCCombo::setSubstringSearchForChildren(sched_dlg, !KMyMoneySettings::stringMatchFromStart());
-            if (sched_dlg->exec() == QDialog::Accepted) {
-              MyMoneyFileTransaction ft;
-              try {
-                MyMoneySchedule sched = sched_dlg->schedule();
-                // Check whether the new Schedule Date
-                // is at or before the lastPaymentDate
-                // If it is, ask the user whether to clear the
-                // lastPaymentDate
-                const QDate& next = sched.nextDueDate();
-                const QDate& last = sched.lastPayment();
-                if (next.isValid() && last.isValid() && next <= last) {
-                  // Entered a date effectively no later
-                  // than previous payment.  Date would be
-                  // updated automatically so we probably
-                  // want to clear it.  Let's ask the user.
-                  if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?", QLocale().toString(next, QLocale::ShortFormat), QLocale().toString(last, QLocale::ShortFormat)) + QString("</qt>"), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
-                    sched.setLastPayment(QDate());
-                  }
-                }
-                MyMoneyFile::instance()->modifySchedule(sched);
-                // delete the editor before we emit the dataChanged() signal from the
-                // engine. Calling this twice in a row does not hurt.
-                deleteTransactionEditor();
-                ft.commit();
-              } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
-              }
-            }
-            deleteTransactionEditor();
-          }
-          delete sched_dlg;
-          break;
-
-        case eMyMoney::Schedule::Type::LoanPayment:
-          loan_wiz = new KEditLoanWizard(schedule.account(2));
-          connect(loan_wiz, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
-          connect(loan_wiz, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
-          if (loan_wiz->exec() == QDialog::Accepted) {
-            MyMoneyFileTransaction ft;
-            try {
-              MyMoneyFile::instance()->modifySchedule(loan_wiz->schedule());
-              MyMoneyFile::instance()->modifyAccount(loan_wiz->account());
-              ft.commit();
-            } catch (const MyMoneyException &e) {
-              KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
-            }
-          }
-          delete loan_wiz;
-          break;
-
-        case eMyMoney::Schedule::Type::Any:
-          break;
-      }
-
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
-    }
-  }
-}
-
-void KMyMoneyApp::slotScheduleDelete()
-{
-  if (!d->m_selectedSchedule.id().isEmpty()) {
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneySchedule sched = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
-      QString msg = i18n("<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>", d->m_selectedSchedule.name());
-      if (sched.type() == eMyMoney::Schedule::Type::LoanPayment) {
-        msg += QString(" ");
-        msg += i18n("In case of loan payments it is currently not possible to recreate the scheduled transaction.");
-      }
-      if (KMessageBox::questionYesNo(this, msg) == KMessageBox::No)
-        return;
-
-      MyMoneyFile::instance()->removeSchedule(sched);
-      ft.commit();
-
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to remove scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
-    }
-  }
-}
-
-void KMyMoneyApp::slotScheduleDuplicate()
-{
-  // since we may jump here via code, we have to make sure to react only
-  // if the action is enabled
-  if (pActions[Action::ScheduleDuplicate]->isEnabled()) {
-    MyMoneySchedule sch = d->m_selectedSchedule;
-    sch.clearId();
-    sch.setLastPayment(QDate());
-    sch.setName(i18nc("Copy of scheduled transaction name", "Copy of %1", sch.name()));
-    // make sure that we set a valid next due date if the original next due date is invalid
-    if (!sch.nextDueDate().isValid())
-      sch.setNextDueDate(QDate::currentDate());
-
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyFile::instance()->addSchedule(sch);
-      ft.commit();
-
-      // select the new schedule in the view
-      if (!d->m_selectedSchedule.id().isEmpty())
-        d->m_myMoneyView->slotScheduleSelected(sch.id());
-
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_selectedSchedule.name()), e.what());
-    }
-  }
-}
-
-void KMyMoneyApp::slotScheduleSkip()
-{
-  if (!d->m_selectedSchedule.id().isEmpty()) {
-    try {
-      MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
-      skipSchedule(schedule);
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
-    }
-  }
-}
-
-void KMyMoneyApp::skipSchedule(MyMoneySchedule& schedule)
-{
-  if (!schedule.id().isEmpty()) {
-    try {
-      schedule = MyMoneyFile::instance()->schedule(schedule.id());
-      if (!schedule.isFinished()) {
-        if (schedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
-          QDate next = schedule.nextDueDate();
-          if (!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)) + QString("</qt>"))) == KMessageBox::Yes) {
-            MyMoneyFileTransaction ft;
-            schedule.setLastPayment(next);
-            schedule.setNextDueDate(schedule.nextPayment(next));
-            MyMoneyFile::instance()->modifySchedule(schedule);
-            ft.commit();
-          }
-        }
-      }
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, QString("<qt>") + i18n("Unable to skip scheduled transaction <b>%1</b>.", schedule.name()) + QString("</qt>"), e.what());
-    }
-  }
-}
-
-void KMyMoneyApp::slotScheduleEnter()
-{
-  if (!d->m_selectedSchedule.id().isEmpty()) {
-    try {
-      MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
-      enterSchedule(schedule);
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
-    }
-  }
-}
-
-eDialogs::ScheduleResultCode KMyMoneyApp::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
-{
-  eDialogs::ScheduleResultCode rc = eDialogs::ScheduleResultCode::Cancel;
-  if (!schedule.id().isEmpty()) {
-    try {
-      schedule = MyMoneyFile::instance()->schedule(schedule.id());
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
-      return rc;
-    }
-
-    QPointer<KEnterScheduleDlg> dlg = new KEnterScheduleDlg(this, schedule);
-
-    try {
-      QDate origDueDate = schedule.nextDueDate();
-
-      dlg->showExtendedKeys(extendedKeys);
-
-      d->m_transactionEditor = dlg->startEdit();
-      if (d->m_transactionEditor) {
-        KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-        MyMoneyTransaction torig, taccepted;
-        d->m_transactionEditor->createTransaction(torig, dlg->transaction(),
-            schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
-        // force actions to be available no matter what (will be updated according to the state during
-        // slotTransactionsEnter or slotTransactionsCancel)
-        pActions[Action::TransactionCancel]->setEnabled(true);
-        pActions[Action::TransactionEnter]->setEnabled(true);
-
-        KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
-        if (!autoEnter || !schedule.isFixed()) {
-          for (; dlg != 0;) {
-            rc = eDialogs::ScheduleResultCode::Cancel;
-            if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-              rc = dlg->resultCode();
-              if (rc == eDialogs::ScheduleResultCode::Enter) {
-                d->m_transactionEditor->createTransaction(taccepted, torig, torig.splits().isEmpty() ? MyMoneySplit() : torig.splits().front(), true);
-                // make sure to suppress comparison of some data: postDate
-                torig.setPostDate(taccepted.postDate());
-                if (torig != taccepted) {
-                  QPointer<KConfirmManualEnterDlg> cdlg =
-                    new KConfirmManualEnterDlg(schedule, this);
-                  cdlg->loadTransactions(torig, taccepted);
-                  if (cdlg->exec() == QDialog::Accepted) {
-                    action = cdlg->action();
-                    delete cdlg;
-                    break;
-                  }
-                  delete cdlg;
-                  // the user has chosen 'cancel' during confirmation,
-                  // we go back to the editor
-                  continue;
-                }
-              } else if (rc == eDialogs::ScheduleResultCode::Skip) {
-                slotTransactionsCancel();
-                skipSchedule(schedule);
-              } else {
-                slotTransactionsCancel();
-              }
-            } else {
-              if (autoEnter) {
-                if (KMessageBox::warningYesNo(this, i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will prompt you again next time it starts unless you manually enter it later.")) == KMessageBox::No) {
-                  // the user has chosen 'No' for the above question,
-                  // we go back to the editor
-                  continue;
-                }
-              }
-              slotTransactionsCancel();
-            }
-            break;
-          }
-        }
-
-        // if we still have the editor around here, the user did not cancel
-        if ((d->m_transactionEditor != 0) && (dlg != 0)) {
-          MyMoneyFileTransaction ft;
-          try {
-            MyMoneyTransaction t;
-            // add the new transaction
-            switch (action) {
-              case KConfirmManualEnterDlg::UseOriginal:
-                // setup widgets with original transaction data
-                d->m_transactionEditor->setTransaction(dlg->transaction(), dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front());
-                // and create a transaction based on that data
-                taccepted = MyMoneyTransaction();
-                d->m_transactionEditor->createTransaction(taccepted, dlg->transaction(),
-                    dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front(), true);
-                break;
-
-              case KConfirmManualEnterDlg::ModifyAlways:
-                torig = taccepted;
-                torig.setPostDate(origDueDate);
-                schedule.setTransaction(torig);
-                break;
-
-              case KConfirmManualEnterDlg::ModifyOnce:
-                break;
-            }
-
-            QString newId;
-            connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
-            if (d->m_transactionEditor->enterTransactions(newId, false)) {
-              if (!newId.isEmpty()) {
-                MyMoneyTransaction t = MyMoneyFile::instance()->transaction(newId);
-                schedule.setLastPayment(t.postDate());
-              }
-              // in case the next due date is invalid, the schedule is finished
-              // we mark it as such by setting the next due date to one day past the end
-              QDate nextDueDate = schedule.nextPayment(origDueDate);
-              if (!nextDueDate.isValid()) {
-                schedule.setNextDueDate(schedule.endDate().addDays(1));
-              } else {
-                schedule.setNextDueDate(nextDueDate);
-              }
-              MyMoneyFile::instance()->modifySchedule(schedule);
-              rc = eDialogs::ScheduleResultCode::Enter;
-
-              // delete the editor before we emit the dataChanged() signal from the
-              // engine. Calling this twice in a row does not hurt.
-              deleteTransactionEditor();
-              ft.commit();
-            }
-          } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
-          }
-          deleteTransactionEditor();
-        }
-      }
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
-    }
-    delete dlg;
-  }
-  return rc;
+  KEditScheduleDlg::newSchedule(_t, occurrence);
 }
 
 void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
@@ -4489,16 +4137,11 @@ void KMyMoneyApp::showContextMenu(const QString& containerName)
 
 void KMyMoneyApp::slotShowTransactionContextMenu()
 {
-  if (d->m_selectedTransactions.isEmpty() && d->m_selectedSchedule != MyMoneySchedule()) {
-    showContextMenu("schedule_context_menu");
-  } else {
+//  if (d->m_selectedTransactions.isEmpty() && d->m_selectedSchedule != MyMoneySchedule()) {
+//    showContextMenu("schedule_context_menu");
+//  } else {
     showContextMenu("transaction_context_menu");
-  }
-}
-
-void KMyMoneyApp::slotShowScheduleContextMenu()
-{
-  showContextMenu("schedule_context_menu");
+//  }
 }
 
 void KMyMoneyApp::slotShowTagContextMenu()
@@ -4577,14 +4220,12 @@ void KMyMoneyApp::slotUpdateActions()
           Action::OpenAccount,
           Action::ReportAccountTransactions, Action::MapOnlineAccount, Action::UnmapOnlineAccount,
           Action::UpdateAccount, Action::UpdateAllAccounts,
-          Action::ScheduleEdit, Action::ScheduleDelete, Action::ScheduleEnter, Action::ScheduleSkip,
-          Action::DeletePayee, Action::RenamePayee, Action::MergePayee, Action::TagDelete, Action::TagRename,
+          Action::TagDelete, Action::TagRename,
           Action::TransactionEdit, Action::TransactionEditSplits, Action::TransactionEnter,
           Action::TransactionCancel, Action::TransactionDelete, Action::TransactionMatch,
           Action::TransactionAccept, Action::TransactionDuplicate, Action::TransactionToggleReconciled, Action::TransactionToggleCleared,
           Action::TransactionGoToAccount, Action::TransactionGoToPayee, Action::TransactionAssignNumber, Action::TransactionCreateSchedule,
           Action::TransactionCombine, Action::TransactionSelectAll, Action::TransactionCopySplits,
-          Action::ScheduleEdit, Action::ScheduleDelete, Action::ScheduleDuplicate, Action::ScheduleEnter, Action::ScheduleSkip,
           Action::CurrencyRename, Action::CurrencyDelete, Action::CurrencySetBase,
           Action::PriceEdit, Action::PriceDelete, Action::PriceUpdate
     };
@@ -4618,7 +4259,7 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::AccountCreditTransfer, onlineJobAdministration::instance()->canSendCreditTransfer())},
       {qMakePair(Action::NewInstitution, fileOpen)},
       {qMakePair(Action::TransactionNew, (fileOpen && d->m_myMoneyView->canCreateTransactions(KMyMoneyRegister::SelectedTransactions(), tooltip)))},
-      {qMakePair(Action::ScheduleNew, fileOpen)},
+      {qMakePair(Action::NewSchedule, fileOpen)},
       {qMakePair(Action::CurrencyNew, fileOpen)},
       {qMakePair(Action::PriceNew, fileOpen)},
     };
@@ -4861,19 +4502,6 @@ void KMyMoneyApp::slotUpdateActions()
     }
   }
 
-  if (!d->m_selectedSchedule.id().isEmpty()) {
-    pActions[Action::ScheduleEdit]->setEnabled(true);
-    pActions[Action::ScheduleDuplicate]->setEnabled(true);
-    pActions[Action::ScheduleDelete]->setEnabled(!file->isReferenced(d->m_selectedSchedule));
-    if (!d->m_selectedSchedule.isFinished()) {
-      pActions[Action::ScheduleEnter]->setEnabled(true);
-      // a schedule with a single occurrence cannot be skipped
-      if (d->m_selectedSchedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
-        pActions[Action::ScheduleSkip]->setEnabled(true);
-      }
-    }
-  }
-
   if (d->m_selectedTags.count() >= 1) {
     pActions[Action::TagRename]->setEnabled(d->m_selectedTags.count() == 1);
     pActions[Action::TagDelete]->setEnabled(true);
@@ -4904,7 +4532,7 @@ void KMyMoneyApp::slotResetSelections()
   slotSelectAccount(MyMoneyAccount());
   d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
   d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
-  slotSelectSchedule();
+  d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   slotSelectCurrency();
   slotSelectPrice();
   slotSelectTags(QList<MyMoneyTag>());
@@ -5000,7 +4628,8 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
     emit transactionsSelected(d->m_selectedTransactions);
 
   } else if (!list.isEmpty()) {
-    slotSelectSchedule(MyMoneyFile::instance()->schedule(list.first().scheduleId()));
+    // it should be selected, but what for?
+    // slotSelectSchedule(MyMoneyFile::instance()->schedule(list.first().scheduleId()));
 
   } else {
     slotUpdateActions();
@@ -5026,19 +4655,6 @@ void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
   // qDebug("slotSelectAccount('%s')", d->m_selectedAccount.name().data());
   slotUpdateActions();
   emit accountSelected(d->m_selectedAccount);
-}
-
-void KMyMoneyApp::slotSelectSchedule()
-{
-  slotSelectSchedule(MyMoneySchedule());
-}
-
-void KMyMoneyApp::slotSelectSchedule(const MyMoneySchedule& schedule)
-{
-  // qDebug("slotSelectSchedule('%s')", schedule.name().data());
-  d->m_selectedSchedule = schedule;
-  slotUpdateActions();
-  emit scheduleSelected(d->m_selectedSchedule);
 }
 
 void KMyMoneyApp::slotDataChanged()
@@ -5211,7 +4827,7 @@ void KMyMoneyApp::slotCheckSchedules()
           while (!schedule.isFinished() && (schedule.adjustedNextDueDate() <= checkDate)
                  && rc != eDialogs::ScheduleResultCode::Ignore
                  && rc != eDialogs::ScheduleResultCode::Cancel) {
-            rc = enterSchedule(schedule, true, true);
+            rc = d->m_myMoneyView->enterSchedule(schedule, true, true);
             schedule = file->schedule((*it).id()); // get a copy of the modified schedule
           }
         } catch (const MyMoneyException &) {
@@ -6060,7 +5676,7 @@ void KMyMoneyApp::Private::closeFile()
   q->slotSelectAccount(MyMoneyAccount());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
-  q->slotSelectSchedule();
+  q->d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   q->slotSelectCurrency();
   q->slotSelectTags(QList<MyMoneyTag>());
   q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());

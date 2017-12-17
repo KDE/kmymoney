@@ -92,9 +92,9 @@ public:
     q->setOption(QWizard::IndependentPages, true);
 
     // connect(m_payeeEdit, SIGNAL(newPayee(QString)), this, SLOT(slotNewPayee(QString)));
-    q->connect(ui->m_namePage->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, q, &KNewLoanWizard::createPayee);
+    q->connect(ui->m_namePage->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, q, &KNewLoanWizard::slotNewPayee);
 
-    q->connect(ui->m_additionalFeesPage, &AdditionalFeesWizardPage::newCategory, q, &KNewLoanWizard::newCategory);
+    q->connect(ui->m_additionalFeesPage, &AdditionalFeesWizardPage::newCategory, q, &KNewLoanWizard::slotNewCategory);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KNewLoanWizard::slotReloadEditWidgets);
 
