@@ -342,7 +342,6 @@ public:
   MyMoneySchedule       m_selectedSchedule;
   MyMoneySecurity       m_selectedCurrency;
   MyMoneyPrice          m_selectedPrice;
-  QList<MyMoneyPayee>   m_selectedPayees;
   QList<MyMoneyTag>     m_selectedTags;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
@@ -602,6 +601,7 @@ QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
     {Menu::Institution, QStringLiteral("institution_context_menu")},
     {Menu::Account,     QStringLiteral("account_context_menu")},
     {Menu::Category,    QStringLiteral("category_context_menu")},
+    {Menu::Payee,       QStringLiteral("payee_context_menu")},
     {Menu::Investment,  QStringLiteral("investment_context_menu")}
   };
 
@@ -758,10 +758,10 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::ScheduleEnter,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
       {Action::ScheduleSkip,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::MediaSeekForward},
       //Payees
-      {Action::PayeeNew,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::ListAddUser},
-      {Action::PayeeRename,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
-      {Action::PayeeDelete,                   QStringLiteral("payee_delete"),                   i18n("Delete payee"),                               Icon::ListRemoveUser},
-      {Action::PayeeMerge,                    QStringLiteral("payee_merge"),                    i18n("Merge payees"),                               Icon::PayeeMerge},
+      {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::ListAddUser},
+      {Action::RenamePayee,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
+      {Action::DeletePayee,                   QStringLiteral("payee_delete"),                   i18n("Delete payee"),                               Icon::ListRemoveUser},
+      {Action::MergePayee,                    QStringLiteral("payee_merge"),                    i18n("Merge payees"),                               Icon::PayeeMerge},
       //Tags
       {Action::TagNew,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::ListAddTag},
       {Action::TagRename,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
@@ -891,11 +891,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::ScheduleDuplicate,             &KMyMoneyApp::slotScheduleDuplicate},
       {Action::ScheduleEnter,                 &KMyMoneyApp::slotScheduleEnter},
       {Action::ScheduleSkip,                  &KMyMoneyApp::slotScheduleSkip},
-      //Payees
-      {Action::PayeeNew,                      &KMyMoneyApp::slotPayeeNew},
-      {Action::PayeeRename,                   &KMyMoneyApp::payeeRename},
-      {Action::PayeeDelete,                   &KMyMoneyApp::slotPayeeDelete},
-      {Action::PayeeMerge,                    &KMyMoneyApp::slotPayeeMerge},
       //Tags
       {Action::TagNew,                        &KMyMoneyApp::slotTagNew},
       {Action::TagRename,                     &KMyMoneyApp::slotTagRename},
@@ -3424,278 +3419,6 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
   KMyMoneyUtils::newPayee(newnameBase, id);
 }
 
-void KMyMoneyApp::slotPayeeNew()
-{
-  QString id;
-  KMyMoneyUtils::newPayee(i18n("New Payee"), id);
-
-  // the callbacks should have made sure, that the payees view has been
-  // updated already. So we search for the id in the list of items
-  // and select it.
-  emit payeeCreated(id);
-}
-
-bool KMyMoneyApp::payeeInList(const QList<MyMoneyPayee>& list, const QString& id) const
-{
-  bool rc = false;
-  QList<MyMoneyPayee>::const_iterator it_p = list.begin();
-  while (it_p != list.end()) {
-    if ((*it_p).id() == id) {
-      rc = true;
-      break;
-    }
-    ++it_p;
-  }
-  return rc;
-}
-
-void KMyMoneyApp::slotPayeeDelete()
-{
-  if (d->m_selectedPayees.isEmpty())
-    return; // shouldn't happen
-
-  // get confirmation from user
-  QString prompt;
-  if (d->m_selectedPayees.size() == 1)
-    prompt = i18n("<p>Do you really want to remove the payee <b>%1</b>?</p>", d->m_selectedPayees.front().name());
-  else
-    prompt = i18n("Do you really want to remove all selected payees?");
-
-  if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Payee")) == KMessageBox::No)
-    return;
-
-  payeeReassign(KPayeeReassignDlg::TypeDelete);
-}
-
-void KMyMoneyApp::slotPayeeMerge()
-{
-  if (d->m_selectedPayees.size() < 1)
-    return; // shouldn't happen
-
-  if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to merge the selected payees?"),
-                                 i18n("Merge Payees")) == KMessageBox::No)
-    return;
-
-  if (payeeReassign(KPayeeReassignDlg::TypeMerge))
-    // clean selection since we just deleted the selected payees
-    slotSelectPayees(QList<MyMoneyPayee>());
-}
-
-bool KMyMoneyApp::payeeReassign(int type)
-{
-  if (!(type >= 0 && type < KPayeeReassignDlg::TypeCount))
-    return false;
-
-  MyMoneyFile * file = MyMoneyFile::instance();
-
-  MyMoneyFileTransaction ft;
-  try {
-    // create a transaction filter that contains all payees selected for removal
-    MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
-    for (QList<MyMoneyPayee>::const_iterator it = d->m_selectedPayees.constBegin();
-         it != d->m_selectedPayees.constEnd(); ++it) {
-      f.addPayee((*it).id());
-    }
-    // request a list of all transactions that still use the payees in question
-    QList<MyMoneyTransaction> translist = file->transactionList(f);
-//     qDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
-
-    // now get a list of all schedules that make use of one of the payees
-    QList<MyMoneySchedule> used_schedules;
-    foreach (const auto schedule, file->scheduleList()) {
-      // loop over all splits in the transaction of the schedule
-      foreach (const auto split, schedule.transaction().splits()) {
-        // is the payee in the split to be deleted?
-        if (payeeInList(d->m_selectedPayees, split.payeeId())) {
-          used_schedules.push_back(schedule); // remember this schedule
-          break;
-        }
-      }
-    }
-//     qDebug() << "[KPayeesView::slotDeletePayee]  " << used_schedules.count() << " schedules use one of the selected payees";
-
-    // and a list of all loan accounts that references one of the payees
-    QList<MyMoneyAccount> allAccounts;
-    QList<MyMoneyAccount> usedAccounts;
-    file->accountList(allAccounts);
-    foreach (const MyMoneyAccount &account, allAccounts) {
-      if (account.isLoan()) {
-        MyMoneyAccountLoan loanAccount(account);
-        foreach (const MyMoneyPayee &payee, d->m_selectedPayees) {
-          if (loanAccount.hasReferenceTo(payee.id())) {
-            usedAccounts.append(account);
-          }
-        }
-      }
-    }
-
-
-    MyMoneyPayee newPayee;
-    bool addToMatchList = false;
-    // if at least one payee is still referenced, we need to reassign its transactions first
-    if (!translist.isEmpty() || !used_schedules.isEmpty() || !usedAccounts.isEmpty()) {
-
-      // first create list with all non-selected payees
-      QList<MyMoneyPayee> remainingPayees;
-      if (type == KPayeeReassignDlg::TypeMerge) {
-        remainingPayees = d->m_selectedPayees;
-      } else {
-        remainingPayees = file->payeeList();
-        QList<MyMoneyPayee>::iterator it_p;
-        for (it_p = remainingPayees.begin(); it_p != remainingPayees.end();) {
-          if (d->m_selectedPayees.contains(*it_p)) {
-            it_p = remainingPayees.erase(it_p);
-          } else {
-            ++it_p;
-          }
-        }
-      }
-
-      // show error message if no payees remain
-      if (remainingPayees.isEmpty()) {
-        KMessageBox::sorry(this, i18n("At least one transaction/scheduled transaction or loan account is still referenced by a payee. "
-                                      "Currently you have all payees selected. However, at least one payee must remain so "
-                                      "that the transaction/scheduled transaction or loan account can be reassigned."));
-        return false;
-      }
-
-      // show transaction reassignment dialog
-      KPayeeReassignDlg * dlg = new KPayeeReassignDlg(static_cast<KPayeeReassignDlg::OperationType>(type), this);
-      KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-      QString payee_id = dlg->show(remainingPayees);
-      addToMatchList = dlg->addToMatchList();
-      delete dlg; // and kill the dialog
-      if (payee_id.isEmpty())
-        return false; // the user aborted the dialog, so let's abort as well
-
-      // try to get selected payee. If not possible and we are merging payees,
-      // then we create a new one
-      try {
-        newPayee = file->payee(payee_id);
-      } catch (const MyMoneyException &e) {
-        if (type == KPayeeReassignDlg::TypeMerge) {
-          // it's ok to use payee_id for both arguments since the first is const,
-          // so it's garantee not to change its content
-          if (!KMyMoneyUtils::newPayee(payee_id, payee_id))
-            return false; // the user aborted the dialog, so let's abort as well
-          newPayee = file->payee(payee_id);
-        } else {
-          return false;
-        }
-      }
-
-      // TODO : check if we have a report that explicitively uses one of our payees
-      //        and issue an appropriate warning
-      try {
-        // now loop over all transactions and reassign payee
-        for (auto& transaction : translist) {
-          // create a copy of the splits list in the transaction
-          // loop over all splits
-          for (auto& split : transaction.splits()) {
-            // if the split is assigned to one of the selected payees, we need to modify it
-            if (payeeInList(d->m_selectedPayees, split.payeeId())) {
-              split.setPayeeId(payee_id); // first modify payee in current split
-              // then modify the split in our local copy of the transaction list
-              transaction.modifySplit(split); // this does not modify the list object 'splits'!
-            }
-          } // for - Splits
-          file->modifyTransaction(transaction);  // modify the transaction in the MyMoney object
-        } // for - Transactions
-
-        // now loop over all schedules and reassign payees
-        for (auto& schedule : used_schedules) {
-          // create copy of transaction in current schedule
-          auto trans = schedule.transaction();
-          // create copy of lists of splits
-          for (auto& split : trans.splits()) {
-            if (payeeInList(d->m_selectedPayees, split.payeeId())) {
-              split.setPayeeId(payee_id);
-              trans.modifySplit(split); // does not modify the list object 'splits'!
-            }
-          } // for - Splits
-          // store transaction in current schedule
-          schedule.setTransaction(trans);
-          file->modifySchedule(schedule);  // modify the schedule in the MyMoney engine
-        } // for - Schedules
-
-        // reassign the payees in the loans that reference the deleted payees
-        foreach (const MyMoneyAccount &account, usedAccounts) {
-          MyMoneyAccountLoan loanAccount(account);
-          loanAccount.setPayee(payee_id);
-          file->modifyAccount(loanAccount);
-        }
-
-      } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(0, i18n("Unable to reassign payee of transaction/split"),
-                                   i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
-      }
-    } else { // if !translist.isEmpty()
-      if (type == KPayeeReassignDlg::TypeMerge) {
-        KMessageBox::sorry(this, i18n("Nothing to merge."), i18n("Merge Payees"));
-        return false;
-      }
-    }
-
-    bool ignorecase;
-    QStringList payeeNames;
-    MyMoneyPayee::payeeMatchType matchType = newPayee.matchData(ignorecase, payeeNames);
-    QStringList deletedPayeeNames;
-
-    // now loop over all selected payees and remove them
-    for (QList<MyMoneyPayee>::iterator it = d->m_selectedPayees.begin();
-         it != d->m_selectedPayees.end(); ++it) {
-      if (newPayee.id() != (*it).id()) {
-        if (addToMatchList) {
-          deletedPayeeNames << (*it).name();
-        }
-        file->removePayee(*it);
-      }
-    }
-
-    // if we initially have no matching turned on, we just ignore the case (default)
-    if (matchType == MyMoneyPayee::matchDisabled)
-      ignorecase = true;
-
-    // update the destination payee if this was requested by the user
-    if (addToMatchList && deletedPayeeNames.count() > 0) {
-      // add new names to the list
-      // TODO: it would be cool to somehow shrink the list to make better use
-      //       of regular expressions at this point. For now, we leave this task
-      //       to the user himeself.
-      QStringList::const_iterator it_n;
-      for (it_n = deletedPayeeNames.constBegin(); it_n != deletedPayeeNames.constEnd(); ++it_n) {
-        if (matchType == MyMoneyPayee::matchKey) {
-          // make sure we really need it and it is not caught by an existing regexp
-          QStringList::const_iterator it_k;
-          for (it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
-            QRegExp exp(*it_k, ignorecase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-            if (exp.indexIn(*it_n) != -1)
-              break;
-          }
-          if (it_k == payeeNames.constEnd())
-            payeeNames << QRegExp::escape(*it_n);
-        } else if (payeeNames.contains(*it_n) == 0)
-          payeeNames << QRegExp::escape(*it_n);
-      }
-
-      // and update the payee in the engine context
-      // make sure to turn on matching for this payee in the right mode
-      newPayee.setMatchData(MyMoneyPayee::matchKey, ignorecase, payeeNames);
-      file->modifyPayee(newPayee);
-    }
-    ft.commit();
-
-    // If we just deleted the payees, they sure don't exist anymore
-    slotSelectPayees(QList<MyMoneyPayee>());
-
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to remove payee(s)"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
-  }
-
-  return true;
-}
-
 void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
 {
   KMyMoneyUtils::newTag(newnameBase, id);
@@ -4773,11 +4496,6 @@ void KMyMoneyApp::slotShowScheduleContextMenu()
   showContextMenu("schedule_context_menu");
 }
 
-void KMyMoneyApp::slotShowPayeeContextMenu()
-{
-  showContextMenu("payee_context_menu");
-}
-
 void KMyMoneyApp::slotShowTagContextMenu()
 {
   showContextMenu("tag_context_menu");
@@ -4855,7 +4573,7 @@ void KMyMoneyApp::slotUpdateActions()
           Action::ReportAccountTransactions, Action::MapOnlineAccount, Action::UnmapOnlineAccount,
           Action::UpdateAccount, Action::UpdateAllAccounts,
           Action::ScheduleEdit, Action::ScheduleDelete, Action::ScheduleEnter, Action::ScheduleSkip,
-          Action::PayeeDelete, Action::PayeeRename, Action::PayeeMerge, Action::TagDelete, Action::TagRename,
+          Action::DeletePayee, Action::RenamePayee, Action::MergePayee, Action::TagDelete, Action::TagRename,
           Action::TransactionEdit, Action::TransactionEditSplits, Action::TransactionEnter,
           Action::TransactionCancel, Action::TransactionDelete, Action::TransactionMatch,
           Action::TransactionAccept, Action::TransactionDuplicate, Action::TransactionToggleReconciled, Action::TransactionToggleCleared,
@@ -5151,12 +4869,6 @@ void KMyMoneyApp::slotUpdateActions()
     }
   }
 
-  if (d->m_selectedPayees.count() >= 1) {
-    pActions[Action::PayeeRename]->setEnabled(d->m_selectedPayees.count() == 1);
-    pActions[Action::PayeeMerge]->setEnabled(d->m_selectedPayees.count() > 1);
-    pActions[Action::PayeeDelete]->setEnabled(true);
-  }
-
   if (d->m_selectedTags.count() >= 1) {
     pActions[Action::TagRename]->setEnabled(d->m_selectedTags.count() == 1);
     pActions[Action::TagDelete]->setEnabled(true);
@@ -5190,7 +4902,6 @@ void KMyMoneyApp::slotResetSelections()
   slotSelectSchedule();
   slotSelectCurrency();
   slotSelectPrice();
-  slotSelectPayees(QList<MyMoneyPayee>());
   slotSelectTags(QList<MyMoneyTag>());
   slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
   slotUpdateActions();
@@ -5218,13 +4929,6 @@ void KMyMoneyApp::slotSelectPrice(const MyMoneyPrice& price)
   d->m_selectedPrice = price;
   slotUpdateActions();
   emit priceSelected(d->m_selectedPrice);
-}
-
-void KMyMoneyApp::slotSelectPayees(const QList<MyMoneyPayee>& list)
-{
-  d->m_selectedPayees = list;
-  slotUpdateActions();
-  emit payeesSelected(d->m_selectedPayees);
 }
 
 void KMyMoneyApp::slotSelectTags(const QList<MyMoneyTag>& list)
@@ -6353,7 +6057,6 @@ void KMyMoneyApp::Private::closeFile()
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
   q->slotSelectSchedule();
   q->slotSelectCurrency();
-  q->slotSelectPayees(QList<MyMoneyPayee>());
   q->slotSelectTags(QList<MyMoneyTag>());
   q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
 

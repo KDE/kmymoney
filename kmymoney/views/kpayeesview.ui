@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KPayeesViewDecl</class>
- <widget class="QWidget" name="KPayeesViewDecl">
+ <class>KPayeesView</class>
+ <widget class="QWidget" name="KPayeesView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -40,6 +40,12 @@
         <layout class="QHBoxLayout">
          <item>
           <widget class="QPushButton" name="m_newButton">
+                       <property name="toolTip">
+            <string>Creates a new payee</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to create a new payee.</string>
+           </property>
            <property name="text">
             <string comment="New payee">New</string>
            </property>
@@ -47,6 +53,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="m_renameButton">
+                       <property name="toolTip">
+            <string>Rename the current selected payee</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to start renaming the selected payee.</string>
+           </property>
            <property name="text">
             <string>Ren</string>
            </property>
@@ -54,6 +66,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="m_deleteButton">
+                       <property name="toolTip">
+            <string>Delete selected payee(s)</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to delete the selected payee. You can also select multiple payees to be deleted.</string>
+           </property>
            <property name="text">
             <string>Del</string>
            </property>
@@ -64,6 +82,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="m_mergeButton">
+                       <property name="toolTip">
+            <string>Merge multiple selected payees</string>
+           </property>
+           <property name="whatsThis">
+            <string>Use this to merge multiple selected payees.</string>
+           </property>
            <property name="text">
             <string>Merge</string>
            </property>
@@ -260,7 +284,17 @@
          </widget>
         </item>
         <item row="3" column="2">
-         <widget class="QPushButton" name="m_sendMail"/>
+                     <widget class="QPushButton" name="m_sendMail">
+             <property name="toolTip">
+              <string>Creates new e-mail to your payee.</string>
+             </property>
+             <property name="whatsThis">
+              <string>Use this to create new e-mail to your payee.</string>
+             </property>
+             <property name="text">
+              <string>Send</string>
+             </property>
+            </widget>
         </item>
         <item row="2" column="1" colspan="2">
          <widget class="KLineEdit" name="telephoneEdit"/>
@@ -459,7 +493,17 @@ new transactions with this payee</string>
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="m_syncAddressbook"/>
+            <widget class="QPushButton" name="m_syncAddressbook">
+       <property name="toolTip">
+        <string>Fetches the payee's data from your addressbook.</string>
+       </property>
+       <property name="whatsThis">
+        <string>Use this to fetch payee's data.</string>
+       </property>
+       <property name="text">
+        <string>Sync</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="m_updateButton">
@@ -468,6 +512,15 @@ new transactions with this payee</string>
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+                <property name="toolTip">
+        <string>Accepts the entered data and stores it</string>
+       </property>
+       <property name="whatsThis">
+        <string>Use this to accept the modified data.</string>
+       </property>
+       <property name="text">
+        <string>Update</string>
        </property>
       </widget>
      </item>

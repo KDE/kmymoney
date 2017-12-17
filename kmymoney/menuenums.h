@@ -104,8 +104,8 @@ namespace eMenu {
     // *************
     // The payee menu
     // *************
-    PayeeNew, PayeeRename, PayeeDelete,
-    PayeeMerge,
+    NewPayee, RenamePayee, DeletePayee,
+    MergePayee,
     // *************
     // The tag menu
     // *************
@@ -141,6 +141,7 @@ namespace eMenu {
     Institution,
     Account,
     Category,
+    Payee,
     Investment
   };
 

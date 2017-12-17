@@ -208,17 +208,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 6
-  m_payeesView = new KPayeesView();
+  m_payeesView = new KPayeesView;
   viewFrames[View::Payees] = m_model->addPage(m_payeesView, i18n("Payees"));
   viewFrames[View::Payees]->setIcon(Icons::get(Icon::ViewPayees));
-
-  connect(kmymoney, SIGNAL(payeeCreated(QString)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(QString)));
-  connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotRenameButtonCliked()));
-  connect(m_payeesView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowPayeeContextMenu()));
-  connect(m_payeesView, SIGNAL(selectObjects(QList<MyMoneyPayee>)), kmymoney, SLOT(slotSelectPayees(QList<MyMoneyPayee>)));
-  connect(m_payeesView, SIGNAL(transactionSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
-  connect(m_payeesView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect(m_payeesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_payeesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 7
   m_ledgerView = new KGlobalLedgerView();
@@ -1733,7 +1727,7 @@ void KMyMoneyView::slotRefreshViews()
   m_accountsView->refresh();
   m_institutionsView->refresh();
   m_categoriesView->refresh();
-  m_payeesView->slotLoadPayees();
+  m_payeesView->refresh();
   m_tagsView->refresh();
   m_ledgerView->slotLoadView();
   m_budgetView->refresh();
@@ -2322,6 +2316,11 @@ void KMyMoneyView::connectView(const View view)
       connect(m_tagsView, &KTagsView::selectObjects,        kmymoney,   &KMyMoneyApp::slotSelectTags);
       connect(m_tagsView, &KTagsView::transactionSelected,  this,       &KMyMoneyView::slotLedgerSelected);
       connect(m_tagsView, &KMyMoneyViewBase::aboutToShow,   this,       &KMyMoneyView::aboutToChangeView);
+      break;
+
+    case View::Payees:
+      disconnect(m_payeesView, &KTagsView::aboutToShow, this, &KMyMoneyView::connectView);
+      connect(m_payeesView, &KPayeesView::transactionSelected, this, &KMyMoneyView::slotLedgerSelected);
       break;
 
     case View::Budget:

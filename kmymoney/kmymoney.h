@@ -242,15 +242,6 @@ protected Q_SLOTS:
 
   /**
     */
-  void slotPayeeDelete();
-
-  /**
-    * Slot that merges two or more selected payess into a new payee
-    */
-  void slotPayeeMerge();
-
-  /**
-    */
   void slotCurrencyNew();
 
   /**
@@ -619,17 +610,6 @@ protected:
   void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
 
   /**
-    * Check if a list contains a payee with a given id
-    *
-    * @param list const reference to value list
-    * @param id const reference to id
-    *
-    * @retval true object has been found
-    * @retval false object is not in list
-    */
-  bool payeeInList(const QList<MyMoneyPayee>& list, const QString& id) const;
-
-  /**
     * Check if a list contains a tag with a given id
     *
     * @param list const reference to value list
@@ -874,12 +854,6 @@ public Q_SLOTS:
   void slotShowScheduleContextMenu();
 
   /**
-    * This slot opens the payee options menu at the current cursor
-    * position.
-    */
-  void slotShowPayeeContextMenu();
-
-  /**
     * This slot opens the tag options menu at the current cursor
     * position.
     */
@@ -924,7 +898,6 @@ public Q_SLOTS:
   /**
     */
   void slotPayeeNew(const QString& newnameBase, QString& id);
-  void slotPayeeNew();
 
   /**
     * This slot collects information for a new scheduled transaction
@@ -974,8 +947,6 @@ public Q_SLOTS:
 
   void slotSelectSchedule();
   void slotSelectSchedule(const MyMoneySchedule& schedule);
-
-  void slotSelectPayees(const QList<MyMoneyPayee>& list);
 
   void slotSelectTags(const QList<MyMoneyTag>& list);
 
@@ -1062,25 +1033,12 @@ private:
     */
   int askSaveOnClose();
 
-  /**
-    * Implement common task when deleting or merging payees
-    */
-  bool payeeReassign(int type);
-
 Q_SIGNALS:
   /**
     * This signal is emitted when a new file is loaded. In the case file
     * is closed, this signal is also emitted with an empty url.
     */
   void fileLoaded(const QUrl &url);
-
-  /**
-    * This signal is emitted when a payee/list of payees has been selected by
-    * the GUI. If no payee is selected or the selection is removed,
-    * @p payees is identical to an empty QList. This signal is used
-    * by plugins to get information about changes.
-    */
-  void payeesSelected(const QList<MyMoneyPayee>& payees);
 
   /**
     * This signal is emitted when a tag/list of tags has been selected by
@@ -1142,9 +1100,6 @@ Q_SIGNALS:
     * @a price is identical to MyMoneyPrice().
     */
   void priceSelected(const MyMoneyPrice& price);
-
-  void payeeRename();
-  void payeeCreated(const QString& id);
 
   void slotTagRename();
   void tagCreated(const QString& id);
