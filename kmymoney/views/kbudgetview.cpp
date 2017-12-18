@@ -135,7 +135,7 @@ void KBudgetView::slotDeleteBudget()
   if (d->m_budgetList.size() == 1)
     prompt = i18n("<p>Do you really want to remove the budget <b>%1</b>?</p>", d->m_budgetList.front().name());
   else
-    prompt = i18n("Do you really want to remove all selected d->m_budgetList?");
+    prompt = i18n("Do you really want to remove all selected budgets?");
 
   if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Budget")) == KMessageBox::No)
     return;

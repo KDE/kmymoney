@@ -262,7 +262,7 @@ void KAccountsView::slotCloseAccount()
     getTreeView()->objectSelected(d->m_currentAccount);
     ft.commit();
     if (KMyMoneyGlobalSettings::hideClosedAccounts())
-      KMessageBox::information(this, i18n("<qt>You have closed this d->m_currentAccountount. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all d->m_currentAccountounts</b> or by deselecting the <b>Do not show closed d->m_currentAccountounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
+      KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
   } catch (const MyMoneyException &) {
   }
 }
