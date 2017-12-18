@@ -53,8 +53,8 @@ namespace eMenu {
     // *************
     NewAccount, EditAccount, DeleteAccount,
     OpenAccount, CloseAccount, ReopenAccount,
-    StartAccountReconciliation, FinishAccountReconciliation,
-    PostponeAccountReconciliation,
+    StartReconciliation, FinishReconciliation,
+    PostponeReconciliation,
     ReportAccountTransactions, ChartAccountBalance,
     UpdateAccountMenu, UpdateAccount, UpdateAllAccounts,
     MapOnlineAccount, UnmapOnlineAccount,
@@ -66,18 +66,17 @@ namespace eMenu {
     // *************
     // The transaction menu
     // *************
-    TransactionNew, TransactionEdit,
-    TransactionEnter, TransactionEditSplits,
-    TransactionCancel, TransactionDelete,
-    TransactionDuplicate, TransactionMatch,
-    TransactionAccept, TransactionToggleReconciled,
-    TransactionToggleCleared, TransactionReconciled,
-    TransactionNotReconciled, TransactionSelectAll,
-    TransactionGoToAccount, TransactionGoToPayee,
-    TransactionCreateSchedule, TransactionAssignNumber,
-    TransactionCombine, TransactionCopySplits,
-    TransactionMoveMenu, TransactionMarkMenu,
-    TransactionContextMarkMenu,
+    NewTransaction, EditTransaction, DeleteTransaction,
+    EnterTransaction, CancelTransaction,
+    DuplicateTransaction,
+    MatchTransaction, AcceptTransaction,
+    EditSplits, CopySplits,
+    ToggleReconciliationFlag, MarkCleared,
+    MarkReconciled, MarkNotReconciled,
+    SelectAllTransactions,
+    GoToAccount, GoToPayee,
+    NewScheduledTransaction, AssignTransactionsNumber,
+    CombineTransactions,
     // *************
     // The tools menu
     // *************
@@ -143,7 +142,11 @@ namespace eMenu {
     Schedule,
     Category,
     Payee,
-    Investment
+    Investment,
+    Transaction,
+    MoveTransaction,
+    MarkTransaction,
+    MarkTransactionContext,
   };
 
   inline uint qHash(const Menu key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

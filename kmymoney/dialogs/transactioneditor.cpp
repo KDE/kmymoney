@@ -43,6 +43,8 @@
 // Project Includes
 
 #include "kmymoneytagcombo.h"
+#include "knewinvestmentwizard.h"
+#include "knewaccountdlg.h"
 #include "ktagcontainer.h"
 #include "tabbar.h"
 #include "mymoneyutils.h"
@@ -824,4 +826,24 @@ void TransactionEditor::resizeForm()
   if (form) {
     QMetaObject::invokeMethod(form, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, (int)eWidgets::eTransactionForm::Column::Value1));
   }
+}
+
+void TransactionEditor::slotNewPayee(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newPayee(newnameBase, id);
+}
+
+void TransactionEditor::slotNewTag(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newTag(newnameBase, id);
+}
+
+void TransactionEditor::slotNewCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewAccountDlg::newCategory(account, parent);
+}
+
+void TransactionEditor::slotNewInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+  KNewInvestmentWizard::newInvestment(account, parent);
 }

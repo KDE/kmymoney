@@ -155,7 +155,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   connect(d->ui->m_statementInfoPageCheckings->ui->m_statementDate, &KMyMoneyDateInput::dateChanged, this, &KEndingBalanceDlg::slotUpdateBalances);
   connect(d->ui->m_interestChargeCheckings->ui->m_interestCategoryEdit, &KMyMoneyCombo::createItem, this, &KEndingBalanceDlg::slotCreateInterestCategory);
   connect(d->ui->m_interestChargeCheckings->ui->m_chargesCategoryEdit, &KMyMoneyCombo::createItem, this, &KEndingBalanceDlg::slotCreateChargesCategory);
-  connect(d->ui->m_interestChargeCheckings->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, this, &KEndingBalanceDlg::createPayee);
+  connect(d->ui->m_interestChargeCheckings->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, this, &KEndingBalanceDlg::slotNewPayee);
 
   KMyMoneyMVCCombo::setSubstringSearchForChildren(d->ui->m_interestChargeCheckings, !KMyMoneySettings::stringMatchFromStart());
 
@@ -292,6 +292,11 @@ void KEndingBalanceDlg::createCategory(const QString& txt, QString& id, const My
   KNewAccountDlg::createCategory(acc, parent);
 
   id = acc.id();
+}
+
+void KEndingBalanceDlg::slotNewPayee(const QString& newnameBase, QString& id)
+{
+  KMyMoneyUtils::newPayee(newnameBase, id);
 }
 
 MyMoneyMoney KEndingBalanceDlg::endingBalance() const

@@ -353,13 +353,13 @@ void InvestTransactionEditor::createEditWidgets()
   connect(security, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateSecurity);
   connect(security, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
   connect(security, &KMyMoneyCombo::createItem, this, &InvestTransactionEditor::slotCreateSecurity);
-  connect(security, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(security, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
 
   auto asset = new KMyMoneyCategory(false, nullptr);
   asset->setPlaceholderText(i18n("Asset account"));
   d->m_editWidgets["asset-account"] = asset;
   connect(asset, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(asset, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(asset, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
 
   auto fees = new KMyMoneyCategory(true, nullptr);
   fees->setPlaceholderText(i18n("Fees"));
@@ -368,7 +368,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(fees, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
   connect(fees, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateFeeVisibility);
   connect(fees, &KMyMoneyCombo::createItem, this, &InvestTransactionEditor::slotCreateFeeCategory);
-  connect(fees, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(fees, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
   connect(fees->splitButton(), &QAbstractButton::clicked, this, &InvestTransactionEditor::slotEditFeeSplits);
 
   auto interest = new KMyMoneyCategory(true, nullptr);
@@ -378,7 +378,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(interest, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
   connect(interest, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateInterestVisibility);
   connect(interest, &KMyMoneyCombo::createItem, this, &InvestTransactionEditor::slotCreateInterestCategory);
-  connect(interest, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(interest, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
   connect(interest->splitButton(), &QAbstractButton::clicked, this, &InvestTransactionEditor::slotEditInterestSplits);
 
   auto tag = new KTagContainer;
@@ -386,8 +386,8 @@ void InvestTransactionEditor::createEditWidgets()
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   d->m_editWidgets["tag"] = tag;
   connect(tag->tagCombo(), &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &TransactionEditor::createTag);
-  connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &InvestTransactionEditor::slotNewTag);
+  connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
 
   auto memo = new KTextEdit;
   memo->setTabChangesFocus(true);
@@ -508,7 +508,7 @@ void InvestTransactionEditor::slotCreateSecurity(const QString& name, QString& i
   if (exp.indexIn(name) != -1) {
     acc.setName(exp.cap(1));
 
-    emit createSecurity(acc, d->m_account);
+    slotNewInvestment(acc, d->m_account);
 
     // return id
     id = acc.id();
@@ -524,7 +524,7 @@ void InvestTransactionEditor::slotCreateFeeCategory(const QString& name, QString
   MyMoneyAccount acc;
   acc.setName(name);
 
-  emit createCategory(acc, MyMoneyFile::instance()->expense());
+  slotNewCategory(acc, MyMoneyFile::instance()->expense());
 
   // return id
   id = acc.id();
@@ -600,7 +600,7 @@ void InvestTransactionEditor::slotCreateInterestCategory(const QString& name, QS
   MyMoneyAccount acc;
   acc.setName(name);
 
-  emit createCategory(acc, MyMoneyFile::instance()->income());
+  slotNewCategory(acc, MyMoneyFile::instance()->income());
 
   id = acc.id();
 }

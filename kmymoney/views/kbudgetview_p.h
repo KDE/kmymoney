@@ -162,6 +162,7 @@ public:
     q->connect(ui->m_hideUnusedButton, &QAbstractButton::toggled, q, &KBudgetView::slotHideUnused);
 
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_budgetProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KBudgetView::objectSelected);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KBudgetView::refresh);
 

@@ -157,7 +157,7 @@ void KInstitutionsView::slotEditInstitution()
       try {
         file->modifyInstitution(dlg->institution());
         ft.commit();
-        getTreeView()->objectSelected(dlg->institution());
+        emit objectSelected(dlg->institution());
       } catch (const MyMoneyException &e) {
         KMessageBox::information(this, i18n("Unable to store institution: %1", e.what()));
       }
@@ -181,7 +181,7 @@ void KInstitutionsView::slotDeleteInstitution()
 
     try {
       file->removeInstitution(institution);
-      getTreeView()->objectSelected(MyMoneyInstitution());
+      emit objectSelected(MyMoneyInstitution());
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));

@@ -31,6 +31,12 @@ namespace eView {
                    Opened,     // not closed tags
                    Closed      // closed tags
                  };
+
+  namespace Schedules {
+    enum class Requester {
+      Reconciliation
+    };
+  }
 }
 
 #endif

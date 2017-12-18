@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,120 +27,54 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QList>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-class KToolBar;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyviewbase.h"
-#include "mymoneyaccount.h"
-#include "registeritem.h"
-#include "selectedtransactions.h"
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
 
+class MyMoneyAccount;
 class MyMoneyReport;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class TransactionEditor;
-class QLabel;
-class QFrame;
 
-namespace KMyMoneyRegister { class Register; }
+namespace KMyMoneyRegister { class SelectedTransactions; }
+namespace KMyMoneyRegister { class RegisterItem; }
 namespace KMyMoneyRegister { class Transaction; }
 namespace KMyMoneyTransactionForm { class TransactionForm; }
 namespace eWidgets { namespace eRegister { enum class Action; } }
+namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
 
-/**
-  * helper class implementing an event filter to detect mouse button press
-  * events on widgets outside a given set of widgets. This is used internally
-  * to detect when to leave the edit mode.
-  */
-class MousePressFilter : public QObject
-{
-  Q_OBJECT
-public:
-  explicit MousePressFilter(QWidget* parent = 0);
-
-  /**
-    * Add widget @p w to the list of possible parent objects. See eventFilter() how
-    * they will be used.
-    */
-  void addWidget(QWidget* w);
-
-public Q_SLOTS:
-  /**
-    * This slot allows to activate/deactivate the filter. By default the
-    * filter is active.
-    *
-    * @param state Allows to activate (@a true) or deactivate (@a false) the filter
-    */
-  void setFilterActive(bool state = true);
-
-  /**
-    * This slot allows to activate/deactivate the filter. By default the
-    * filter is active.
-    *
-    * @param state Allows to deactivate (@a true) or activate (@a false) the filter
-    */
-  void setFilterDeactive(bool state = false) {
-    setFilterActive(!state);
-  }
-
-protected:
-  /**
-    * This method checks if the widget @p child is a child of
-    * the widget @p parent and returns either @a true or @a false.
-    *
-    * @param child pointer to child widget
-    * @param parent pointer to parent widget
-    * @retval true @p child points to widget which has @p parent as parent or grand-parent
-    * @retval false @p child points to a widget which is not related to @p parent
-    */
-  bool isChildOf(QWidget* child, QWidget* parent);
-
-  /**
-    * Reimplemented from base class. Sends out the mousePressedOnExternalWidget() signal
-    * if object @p o points to an object which is not a child widget of any added previously
-    * using the addWidget() method. The signal is sent out only once for each event @p e.
-    *
-    * @param o pointer to QObject
-    * @param e pointer to QEvent
-    * @return always returns @a false
-    */
-  bool eventFilter(QObject* o, QEvent* e);
-
-Q_SIGNALS:
-  void mousePressedOnExternalWidget(bool&);
-
-private:
-  QList<QWidget*>      m_parents;
-  QEvent*              m_lastMousePressEvent;
-  bool                 m_filterActive;
-};
+template <class T1, class T2> struct QPair;
+template <typename T> class QList;
 
 /**
   * @author Thomas Baumgart
   */
+class KGlobalLedgerViewPrivate;
 class KGlobalLedgerView : public KMyMoneyViewBase
 {
   Q_OBJECT
 public:
   explicit KGlobalLedgerView(QWidget *parent = nullptr);
-  ~KGlobalLedgerView();
+  ~KGlobalLedgerView() override;
 
   void setDefaultFocus() override;
+  void refresh() override;
+  void updateActions(const MyMoneyObject& obj) override;
+  void updateLedgerActions(const KMyMoneyRegister::SelectedTransactions& list);
+  void updateLedgerActionsInternal();
 
   /**
     * This method returns the id of the currently selected account
     * or QString() if none is selected.
     */
-  const QString accountId() const {
-    return m_account.id();
-  }
+  QString accountId() const;
 
   /**
     * Checks if new transactions can be created in the current context
@@ -192,13 +127,6 @@ public:
   bool selectEmptyTransaction();
 
 public Q_SLOTS:
-  void showEvent(QShowEvent* event) override;
-
-  /**
-    * This method loads the view with data from the MyMoney engine.
-    */
-  void slotLoadView();
-
   /**
     * This slot is used to select the correct ledger view type for
     * the account specified by @p id in a specific mode.
@@ -211,12 +139,13 @@ public Q_SLOTS:
     * @retval true selection of account referenced by @p id succeeded
     * @retval false selection of account failed
     */
-  bool slotSelectAccount(const QString& accountId, const QString& transactionId = QString());
+  void slotSelectAccount(const QString& accountId);
+  bool slotSelectAccount(const QString& accountId, const QString& transactionId);
 
   /**
     * This method is provided for convenience and acts as the method above.
     */
-  bool slotSelectAccount(const MyMoneyObject& acc);
+  void slotSelectAccount(const MyMoneyObject& acc);
 
   /**
    * Switch to reconciliation mode for account @a account.
@@ -233,150 +162,38 @@ public Q_SLOTS:
   void slotSetReconcileAccount(const MyMoneyAccount& account, const QDate& reconciliationDate);
   void slotSetReconcileAccount(const MyMoneyAccount& account);
   void slotSetReconcileAccount();
+  void slotShowTransactionMenu(const MyMoneySplit &sp);
 
   /**
-    * Select all transactions in the ledger that are not hidden.
-    */
-  void slotSelectAllTransactions();
-
-private:
-  void showTooltip(const QString msg) const;
-
-protected:
-  /**
-    * This method reloads the account selection combo box of the
-    * view with all asset and liability accounts from the engine.
-    * If the account id of the current account held in @p m_accountId is
-    * empty or if the referenced account does not exist in the engine,
-    * the first account found in the list will be made the current account.
-    */
-  void loadAccounts();
+   * Slot that should be entered after entering all due scheduled transasactions
+   * @param req is requester that made request to enter scheduled transactions
+   * it's here to avoid reconcilation in case of random entering of scheduled transactions request
+   */
+  void slotContinueReconciliation(eView::Schedules::Requester req);
 
   /**
-    * This method clears the register, form, transaction list. See @sa m_register,
-    * @sa m_transactionList
-    */
-  void clear();
-
-  void loadView();
-
-  void resizeEvent(QResizeEvent*) override;
-
-  void selectTransaction(const QString& id);
-
-  /**
-    * This method handles the focus of the keyboard. When in edit mode
-    * (m_inEditMode is true) the keyboard focus is handled
-    * according to the widgets that are referenced in m_tabOrderWidgets.
-    * If not in edit mode, the base class functionality is provided.
+    * Called, whenever the ledger view should pop up and a specific
+    * transaction in an account should be shown. If @p transaction
+    * is empty, the last transaction should be selected
     *
-    * @param next true if forward-tab, false if backward-tab was
-    *             pressed by the user
+    * @param acc The ID of the account to be shown
+    * @param transaction The ID of the transaction to be selected
     */
-  bool focusNextPrevChild(bool next) override;
-
-  bool eventFilter(QObject* o, QEvent* e) override;
-
-  /**
-    * Returns @a true if setReconciliationAccount() has been called for
-    * the current loaded account.
-    *
-    * @retval true current account is in reconciliation mode
-    * @retval false current account is not in reconciliation mode
-    */
-  bool isReconciliationAccount() const;
-
-  /**
-    * Updates the values on the summary line beneath the register with
-    * the given values. The contents shown differs between reconciliation
-    * mode and normal mode.
-    *
-    * @param actBalance map of account indexed values to be used as actual balance
-    * @param clearedBalance map of account indexed values to be used as cleared balance
-    */
-  void updateSummaryLine(const QMap<QString, MyMoneyMoney>& actBalance, const QMap<QString, MyMoneyMoney>& clearedBalance);
-
-  /**
-    * setup the default action according to the current account type
-    */
-  void setupDefaultAction();
-
-protected Q_SLOTS:
-  void slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions& list);
-  void slotNewTransaction();
-  void slotNewTransaction(eWidgets::eRegister::Action);
-
-  void slotSortOptions();
-  void slotToggleTransactionMark(KMyMoneyRegister::Transaction* t);
-
-  void slotKeepPostDate(const QDate&);
-
-  void slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&);
-
-  void slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&);
-
-protected:
-  /**
-    * This member keeps the date that was used as the last posting date.
-    * It will be updated whenever the user modifies the post date
-    * and is used to preset the posting date when new transactions are created.
-    * This member is initialised to the current date when the program is started.
-    */
-  static QDate         m_lastPostDate;
-
-private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
-
-  // frames
-  QFrame*                       m_toolbarFrame;
-  QFrame*                       m_registerFrame;
-  QFrame*                       m_buttonFrame;
-  QFrame*                       m_formFrame;
-  QFrame*                       m_summaryFrame;
-
-  // widgets
-  KMyMoneyRegister::Register*   m_register;
-  KToolBar*                     m_buttonbar;
-
-  /**
-    * This member holds the currently selected account
-    */
-  MyMoneyAccount m_account;
-
-  /**
-    * This member holds the transaction list
-    */
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> >  m_transactionList;
-
-  QLabel*                         m_leftSummaryLabel;
-  QLabel*                         m_centerSummaryLabel;
-  QLabel*                         m_rightSummaryLabel;
-
-  KMyMoneyTransactionForm::TransactionForm* m_form;
-
-  bool                            m_needReload;
-
-  /**
-    * This member holds the load state of page
-    */
-  bool                            m_needLoad;
-
-  bool                            m_newAccountLoaded;
-  bool                            m_inEditMode;
-
-  QWidgetList                     m_tabOrderWidgets;
-  QPoint                          m_tooltipPosn;
+  void slotLedgerSelected(const QString& _accId, const QString& transaction);
 
 Q_SIGNALS:
-  void accountSelected(const MyMoneyObject&);
+  void objectSelected(const MyMoneyObject& obj);
+  void contextMenuRequested(const MyMoneyObject& obj);
+  void openObjectRequested(const MyMoneyObject& obj);
+
+  void openPayeeRequested(const QString& payee, const QString& account, const QString& transaction);
+  void transactionsContextMenuRequested(const KMyMoneyRegister::SelectedTransactions& list);
+
+  void enterOverdueSchedulesRequested(const MyMoneyAccount& acc, eView::Schedules::Requester req);
+
+  void switchViewRequested(View view);
+
   void transactionsSelected(const KMyMoneyRegister::SelectedTransactions&);
-  void newTransaction();
-  void startEdit();
-  void endEdit();
-  void cancelOrEndEdit(bool&);
 
   /**
     * This signal is emitted, when a new report has been generated.  A
@@ -396,6 +213,20 @@ Q_SIGNALS:
     */
   void reportGenerated(const MyMoneyReport& report);
 
+  /**
+    * This signal is emitted when an account has been successfully reconciled
+    * and all transactions are updated in the engine. It can be used by plugins
+    * to create reconciliation reports.
+    *
+    * @param account the account data
+    * @param date the reconciliation date as provided through the dialog
+    * @param startingBalance the starting balance as provided through the dialog
+    * @param endingBalance the ending balance as provided through the dialog
+    * @param transactionList reference to QList of QPair containing all
+    *        transaction/split pairs processed by the reconciliation.
+    */
+  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+
   void openContextMenu();
 
   /**
@@ -404,12 +235,109 @@ Q_SIGNALS:
     */
   void toggleReconciliationFlag();
 
-private:
-  bool canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
-
-  /** Initializes page and sets its load status to initialized
+  /**
+   * @brief proxy signal
    */
-  void init();
+  void statusMsg(const QString& txt);
+
+  /**
+   * @brief proxy signal
+   */
+  void statusProgress(int cnt, int base);
+protected:
+  void showEvent(QShowEvent* event) override;
+  void resizeEvent(QResizeEvent*) override;
+
+  /**
+    * This method handles the focus of the keyboard. When in edit mode
+    * (m_inEditMode is true) the keyboard focus is handled
+    * according to the widgets that are referenced in m_tabOrderWidgets.
+    * If not in edit mode, the base class functionality is provided.
+    *
+    * @param next true if forward-tab, false if backward-tab was
+    *             pressed by the user
+    */
+  bool focusNextPrevChild(bool next) override;
+
+  bool eventFilter(QObject* o, QEvent* e) override;
+
+private:
+  Q_DECLARE_PRIVATE(KGlobalLedgerView)
+
+private Q_SLOTS:
+
+  void slotTransactionsContextMenuRequested();
+  void slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions& list);
+
+  void slotSortOptions();
+  void slotToggleTransactionMark(KMyMoneyRegister::Transaction* t);
+
+  void slotKeepPostDate(const QDate&);
+
+  void slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&);
+
+  void slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&);
+
+  void slotMoveToAccount(const QString& id);
+  void slotUpdateMoveToAccountMenu();
+  void slotObjectDestroyed(QObject* o);
+  void slotCancelOrEnterTransactions(bool& okToSelect);
+  void slotNewSchedule(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence);
+  void slotNewTransactionForm(eWidgets::eRegister::Action);
+
+  void slotNewTransaction();
+  void slotEditTransaction();
+  void slotDeleteTransaction();
+  void slotDuplicateTransaction();
+  void slotEnterTransaction();
+
+  /**
+    * Accept the selected transactions that are marked as 'imported' and remove the flag
+    */
+  void slotAcceptTransaction();
+  void slotCancelTransaction();
+  void slotEditSplits();
+
+  /**
+   * This method takes the selected splits and checks that only one transaction (src)
+   * has more than one split and all others have only a single one. It then copies the
+   * splits of the @b src transaction to all others.
+   */
+  void slotCopySplits();
+  void slotGoToPayee();
+  void slotGoToAccount();
+  void slotMatchTransactions();
+  void slotCombineTransactions();
+  void slotToggleReconciliationFlag();
+  void slotMarkCleared();
+  void slotMarkReconciled();
+  void slotMarkNotReconciled();
+  void slotSelectAllTransactions();
+  void slotCreateScheduledTransaction();
+  void slotAssignNumber();
+
+  /**
+    * Used to start reconciliation of account @a account. It switches the
+    * ledger view into reconciliation mode and updates the view.
+    *
+    * @param account account which should be reconciled
+    * @param reconciliationDate the statement date
+    * @param endingBalance the ending balance entered for this account
+    *
+    * @retval true Reconciliation started
+    * @retval false Account cannot be reconciled
+    */
+  void slotStartReconciliation();
+
+  /**
+    * Used to finish reconciliation of account @a account. It switches the
+    * ledger view to normal mode and updates the view.
+    *
+    * @param account account which should be reconciled
+    */
+  void slotFinishReconciliation();
+  void slotPostponeReconciliation();
+  void slotOpenAccount();
 };
 
 #endif

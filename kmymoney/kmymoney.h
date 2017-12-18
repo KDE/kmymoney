@@ -262,86 +262,6 @@ protected Q_SLOTS:
   void slotNewFeature();
 
   /**
-    */
-  void slotTransactionsNew();
-
-  /**
-    */
-  void slotTransactionsEdit();
-
-  /**
-    */
-  void slotTransactionsEditSplits();
-
-  /**
-    */
-  void slotTransactionsDelete();
-
-  /**
-    */
-  void slotTransactionsEnter();
-
-  /**
-    */
-  void slotTransactionsCancel();
-
-  /**
-    */
-  void slotTransactionsCancelOrEnter(bool& okToSelect);
-
-  /**
-    */
-  void slotTransactionDuplicate();
-
-  /**
-    */
-  void slotToggleReconciliationFlag();
-
-  /**
-    */
-  void slotMarkTransactionCleared();
-
-  /**
-    */
-  void slotMarkTransactionReconciled();
-
-  /**
-    */
-  void slotMarkTransactionNotReconciled();
-
-  /**
-    */
-  void slotTransactionGotoAccount();
-
-  /**
-    */
-  void slotTransactionGotoPayee();
-
-  /**
-    */
-  void slotTransactionCreateSchedule();
-
-  /**
-    */
-  void slotTransactionAssignNumber();
-
-  /**
-    */
-  void slotTransactionCombine();
-
-  /**
-   * This method takes the selected splits and checks that only one transaction (src)
-   * has more than one split and all others have only a single one. It then copies the
-   * splits of the @b src transaction to all others.
-   */
-  void slotTransactionCopySplits();
-
-  /**
-    * Accept the selected transactions that are marked as 'imported' and remove the flag
-    */
-  void slotTransactionsAccept();
-
-  /**
     * This slot triggers an update of all views and restarts
     * a single shot timer to call itself again at beginning of
     * the next day.
@@ -353,10 +273,6 @@ protected Q_SLOTS:
     * and the application object needs to update its state.
     */
   void slotDataChanged();
-
-  void slotMoveToAccount(const QString& id);
-
-  void slotUpdateMoveToAccountMenu();
 
   /**
     * This slot collects information for a new scheduled transaction
@@ -617,33 +533,12 @@ protected:
   bool tagInList(const QList<MyMoneyTag>& list, const QString& id) const;
 
   /**
-    * Mark the selected transactions as provided by @a flag. If
-    * flag is @a MyMoneySplit::Unknown, the future state depends
-    * on the current stat of the split's flag accoring to the
-    * following table:
-    *
-    * - NotReconciled --> Cleared
-    * - Cleared --> Reconciled
-    * - Reconciled --> NotReconciled
-    */
-  void markTransaction(eMyMoney::Split::State flag);
-
-  /**
-   * This method unmatches the currently selected transactions
-   */
-  void transactionUnmatch();
-
-  /**
-   * This method matches the currently selected transactions
-   */
-  void transactionMatch();
-
-  /**
     * This method preloads the holidays for the duration of the default forecast period
     */
   void preloadHolidays();
 
 public Q_SLOTS:
+
   void slotFileInfoDialog();
 
   /** */
@@ -775,29 +670,7 @@ public Q_SLOTS:
   bool slotStatementImport(const QString& url);
 
   void slotOnlineTransferRequested(const MyMoneyAccount& acc);
-  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);
-  void slotReconciliationRequested(const MyMoneyAccount& acc, eMenu::Action action);
-  /**
-    * This slot starts the reconciliation of the currently selected account
-    */
-  void slotAccountReconcileStart();
-
-  /**
-    * This slot finishes a previously started reconciliation
-    */
-  void slotAccountReconcileFinish();
-
-  /**
-    * This slot postpones a previously started reconciliations
-    */
-  void slotAccountReconcilePostpone();
-
-
-  /**
-    * This slot opens the selected account in the ledger view
-    */
-  void slotAccountOpenEmpty();
-  void slotAccountOpen(const MyMoneyObject&);
+  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);  
 
   /**
     * This slot reparents account @p src to be a child of account @p dest
@@ -826,12 +699,6 @@ public Q_SLOTS:
     * position.
     */
   void slotShowTagContextMenu();
-
-  /**
-    * This slot opens the transaction options menu at the current cursor
-    * position.
-    */
-  void slotShowTransactionContextMenu();
 
   /**
     * This slot opens the currency options menu at the current cursor
@@ -892,15 +759,11 @@ public Q_SLOTS:
 
   void slotSelectTags(const QList<MyMoneyTag>& list);
 
-  void slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions& list);
-
   void slotSelectCurrency();
   void slotSelectCurrency(const MyMoneySecurity& currency);
 
   void slotSelectPrice();
   void slotSelectPrice(const MyMoneyPrice& price);
-
-  void slotTransactionMatch();
 
   /**
     * Brings up the new account wizard and saves the information.
@@ -927,11 +790,6 @@ public Q_SLOTS:
 
 private:
   /**
-    * Create the transaction move menu and setup necessary connections.
-    */
-  void createTransactionMoveMenu();
-
-  /**
     * This method sets the holidayRegion for use by the processing calendar.
     */
   void setHolidayRegion(const QString& holidayRegion);
@@ -950,17 +808,6 @@ private:
     * @retval false application is active working on a longer operation
     */
   bool isReady();
-
-  /**
-    * Delete a possibly existing transaction editor but make sure to remove
-    * any reference to it so that we avoid using a half-dead object
-    */
-  void deleteTransactionEditor();
-
-  /**
-    * delete all selected transactions w/o further questions
-    */
-  void doDeleteTransactions();
 
   /**
     * Re-implemented from IMyMoneyProcessingCalendar
@@ -1056,20 +903,6 @@ Q_SIGNALS:
 
   void startMatchTransaction(const MyMoneyTransaction& t);
   void cancelMatchTransaction();
-
-  /**
-    * This signal is emitted when an account has been successfully reconciled
-    * and all transactions are updated in the engine. It can be used by plugins
-    * to create reconciliation reports.
-    *
-    * @param account the account data
-    * @param date the reconciliation date as provided through the dialog
-    * @param startingBalance the starting balance as provided through the dialog
-    * @param endingBalance the ending balance as provided through the dialog
-    * @param transactionList reference to QList of QPair containing all
-    *        transaction/split pairs processed by the reconciliation.
-    */
-  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
 public:
 

@@ -254,10 +254,6 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
     // connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
-    connect(editor, &TransactionEditor::createPayee,    this, &KEnterScheduleDlg::slotPayeeNew);
-    connect(editor, &TransactionEditor::createTag,      this, &KEnterScheduleDlg::slotTagNew);
-    connect(editor, &TransactionEditor::createCategory, this, &KEnterScheduleDlg::slotCategoryNew);
-    connect(editor, &TransactionEditor::createSecurity, this, &KEnterScheduleDlg::slotInvestmentNew);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
 
     // create the widgets, place them in the parent and load them with data
@@ -386,24 +382,4 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 void KEnterScheduleDlg::slotShowHelp()
 {
   KHelpClient::invokeHelp("details.schedules.entering");
-}
-
-void KEnterScheduleDlg::slotPayeeNew(const QString& newnameBase, QString& id)
-{
-  KMyMoneyUtils::newPayee(newnameBase, id);
-}
-
-void KEnterScheduleDlg::slotTagNew(const QString& newnameBase, QString& id)
-{
-  KMyMoneyUtils::newTag(newnameBase, id);
-}
-
-void KEnterScheduleDlg::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
-{
-  KNewAccountDlg::newCategory(account, parent);
-}
-
-void KEnterScheduleDlg::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
-{
-  KNewInvestmentWizard::newInvestment(account, parent);
 }

@@ -208,7 +208,7 @@ void KAccountsView::slotEditAccount()
       d->editAccount();
       break;
   }
-  getTreeView()->objectSelected(d->m_currentAccount);
+  emit objectSelected(d->m_currentAccount);
 }
 
 void KAccountsView::slotDeleteAccount()
@@ -245,7 +245,7 @@ void KAccountsView::slotDeleteAccount()
   try {
     file->removeAccount(d->m_currentAccount);
     d->m_currentAccount.clearId();
-    getTreeView()->objectSelected(MyMoneyAccount());
+    emit objectSelected(MyMoneyAccount());
     ft.commit();
   } catch (const MyMoneyException &e) {
     KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e.what()));
@@ -259,7 +259,7 @@ void KAccountsView::slotCloseAccount()
   try {
     d->m_currentAccount.setClosed(true);
     MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
-    getTreeView()->objectSelected(d->m_currentAccount);
+    emit objectSelected(d->m_currentAccount);
     ft.commit();
     if (KMyMoneyGlobalSettings::hideClosedAccounts())
       KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
@@ -279,7 +279,7 @@ void KAccountsView::slotReopenAccount()
       file->modifyAccount(acc);
       acc = file->account(acc.parentAccountId());
     }
-    getTreeView()->objectSelected(d->m_currentAccount);
+    emit objectSelected(d->m_currentAccount);
     ft.commit();
   } catch (const MyMoneyException &) {
   }

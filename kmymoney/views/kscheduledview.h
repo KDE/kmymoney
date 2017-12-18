@@ -37,8 +37,10 @@
 class QTreeWidgetItem;
 class KTreeWidgetSearchLineWidget;
 class MyMoneySchedule;
+class MyMoneyAccount;
 
 namespace eDialogs { enum class ScheduleResultCode; }
+namespace eView { namespace Schedules { enum class Requester; } }
 
 /**
   * Contains all the scheduled transactions be they bills, deposits or transfers.
@@ -82,10 +84,13 @@ public Q_SLOTS:
   void slotShowScheduleMenu(const MyMoneySchedule& sch);
   void slotEditSchedule();
 
+  void slotEnterOverdueSchedules(const MyMoneyAccount& acc, eView::Schedules::Requester req);
+
 Q_SIGNALS:
   void objectSelected(const MyMoneyObject& obj);
   void contextMenuRequested(const MyMoneyObject& obj);
   void openObjectRequested(const MyMoneyObject& obj);
+  void enterOverdueSchedulesFinished(eView::Schedules::Requester req);
 
 protected:
   void showEvent(QShowEvent* event) override;

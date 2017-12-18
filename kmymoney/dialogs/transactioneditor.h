@@ -232,42 +232,6 @@ Q_SIGNALS:
   void transactionDataSufficient(bool state);
 
   /**
-    * This signal is sent out, when a new payee needs to be created
-    * @sa KMyMoneyCombo::createItem()
-    *
-    * @param txt The name of the payee to be created
-    * @param id A connected slot should store the id of the created object in this variable
-    */
-  bool createPayee(const QString& txt, QString& id);
-
-  /**
-    * This signal is sent out, when a new category needs to be created
-    * Depending on the setting of either a payment or deposit, the parent
-    * account will be preset to Expense or Income.
-    *
-    * @param account reference to account info. Will be filled by called slot
-    * @param parent reference to parent account
-    */
-  void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
-
-  /**
-    * This signal is sent out, when a new tag needs to be created
-    * @param txt The name of the tag to be created
-    * @param id A connected slot should store the id of the created object in this variable
-    */
-  void createTag(const QString& txt, QString& id);
-
-  /**
-    * This signal is sent out, when a new security (e.g. stock )needs to be created
-    * @a Parent should be the investment account under which the security account
-    * will be created.
-    *
-    * @param account reference to account info. Will be filled by called slot
-    * @param parent reference to parent account
-    */
-  void createSecurity(MyMoneyAccount& account, const MyMoneyAccount& parent);
-
-  /**
     * Signal is emitted, if any of the widgets enters (@a state equals @a true)
     *  or leaves (@a state equals @a false) object creation mode.
     *
@@ -320,6 +284,12 @@ Q_SIGNALS:
 protected:
   QScopedPointer<TransactionEditorPrivate> d_ptr;
   TransactionEditor(TransactionEditorPrivate &dd);
+
+protected Q_SLOTS:
+  void slotNewPayee(const QString& newnameBase, QString& id);
+  void slotNewTag(const QString& newnameBase, QString& id);
+  void slotNewCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
+  void slotNewInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
 private:
   Q_DECLARE_PRIVATE(TransactionEditor)

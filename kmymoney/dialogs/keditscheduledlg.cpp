@@ -266,10 +266,6 @@ TransactionEditor* KEditScheduleDlg::startEdit()
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
     // connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
-    connect(editor, &TransactionEditor::createPayee,    this, &KEditScheduleDlg::slotPayeeNew);
-    connect(editor, &TransactionEditor::createTag,      this, &KEditScheduleDlg::slotTagNew);
-    connect(editor, &TransactionEditor::createCategory, this, &KEditScheduleDlg::slotCategoryNew);
-    connect(editor, &TransactionEditor::createSecurity, this, &KEditScheduleDlg::slotInvestmentNew);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
 
     // create the widgets, place them in the parent and load them with data
@@ -781,24 +777,3 @@ void KEditScheduleDlg::slotFilterPaymentType(int index)
   }
 
 }
-
-void KEditScheduleDlg::slotPayeeNew(const QString& newnameBase, QString& id)
-{
-  KMyMoneyUtils::newPayee(newnameBase, id);
-}
-
-void KEditScheduleDlg::slotTagNew(const QString& newnameBase, QString& id)
-{
-  KMyMoneyUtils::newTag(newnameBase, id);
-}
-
-void KEditScheduleDlg::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
-{
-  KNewAccountDlg::newCategory(account, parent);
-}
-
-void KEditScheduleDlg::slotInvestmentNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
-{
-  KNewInvestmentWizard::newInvestment(account, parent);
-}
-

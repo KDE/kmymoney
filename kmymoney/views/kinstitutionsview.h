@@ -55,6 +55,9 @@ public Q_SLOTS:
   void slotShowInstitutionsMenu(const MyMoneyInstitution& inst);
   void slotEditInstitution();
 
+Q_SIGNALS:
+  void objectSelected(const MyMoneyObject& obj);
+
 protected:
   void showEvent(QShowEvent * event) override;
 

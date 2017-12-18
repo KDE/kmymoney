@@ -501,8 +501,8 @@ public:
               schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
           // force actions to be available no matter what (will be updated according to the state during
           // slotTransactionsEnter or slotTransactionsCancel)
-          pActions[eMenu::Action::TransactionCancel]->setEnabled(true);
-          pActions[eMenu::Action::TransactionEnter]->setEnabled(true);
+          pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
+          pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
 
           KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
           if (!autoEnter || !schedule.isFixed()) {
@@ -616,9 +616,9 @@ public:
     Q_Q(KScheduledView);
     // since we jump here via code, we have to make sure to react only
     // if the action is enabled
-    if (pActions[eMenu::Action::TransactionCancel]->isEnabled()) {
+    if (pActions[eMenu::Action::CancelTransaction]->isEnabled()) {
       // make sure, we block the enter function
-      pActions[eMenu::Action::TransactionEnter]->setEnabled(false);
+      pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
       // qDebug("KMyMoneyApp::slotTransactionsCancel");
       delete editor;
       emit q->objectSelected(schedule);

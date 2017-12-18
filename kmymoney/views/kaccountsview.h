@@ -65,7 +65,7 @@ public Q_SLOTS:
   void slotShowAccountMenu(const MyMoneyAccount& acc);
 
 Q_SIGNALS:
-  void selectObject(const MyMoneyObject&);
+  void objectSelected(const MyMoneyObject& obj);
 
 protected:
   void showEvent(QShowEvent * event) override;

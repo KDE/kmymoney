@@ -191,6 +191,42 @@ void KScheduledView::slotRearrange()
   resizeEvent(0);
 }
 
+void KScheduledView::slotEnterOverdueSchedules(const MyMoneyAccount& acc, eView::Schedules::Requester req)
+{
+  Q_D(KScheduledView);
+  const auto file = MyMoneyFile::instance();
+  auto schedules = file->scheduleList(acc.id(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
+  if (!schedules.isEmpty()) {
+    if (KMessageBox::questionYesNo(this,
+                                   i18n("KMyMoney has detected some overdue scheduled transactions for this account. Do you want to enter those scheduled transactions now?"),
+                                   i18n("Scheduled transactions found")) == KMessageBox::Yes) {
+
+      QMap<QString, bool> skipMap;
+      bool processedOne;
+      auto rc = eDialogs::ScheduleResultCode::Enter;
+      do {
+        processedOne = false;
+        QList<MyMoneySchedule>::const_iterator it_sch;
+        for (it_sch = schedules.constBegin(); (rc != eDialogs::ScheduleResultCode::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
+          MyMoneySchedule sch(*(it_sch));
+
+          // and enter it if it is not on the skip list
+          if (skipMap.find((*it_sch).id()) == skipMap.end()) {
+            rc = d->enterSchedule(sch, false, true);
+            if (rc == eDialogs::ScheduleResultCode::Ignore) {
+              skipMap[(*it_sch).id()] = true;
+            }
+          }
+        }
+
+        // reload list (maybe this schedule needs to be added again)
+        schedules = file->scheduleList(acc.id(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
+      } while (processedOne);
+    }
+  }
+  emit enterOverdueSchedulesFinished(req);
+}
+
 void KScheduledView::customContextMenuRequested(const QPoint)
 {
   Q_D(KScheduledView);

@@ -316,47 +316,6 @@ public:
   void showPage(KPageWidgetItem* pageItem);
 
   /**
-    * check if the current view allows to create a transaction
-    *
-    * @param list list of selected transactions
-    * @param tooltip reference to string receiving the tooltip text
-    *        which explains why the modify function is not available (in case
-    *        of returning @c false)
-    *
-    * @retval true Yes, view allows to create a transaction (tooltip is not changed)
-    * @retval false No, view cannot to create a transaction (tooltip is updated with message)
-    */
-  bool canCreateTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
-
-  /**
-    * check if the current view allows to modify (edit/delete) the selected transactions
-    *
-    * @param list list of selected transactions
-    * @param tooltip reference to string receiving the tooltip text
-    *        which explains why the modify function is not available (in case
-    *        of returning @c false)
-    *
-    * @retval true Yes, view allows to edit/delete transactions (tooltip is not changed)
-    * @retval false No, view cannot edit/delete transactions (tooltip is updated with message)
-    */
-  bool canModifyTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
-
-  bool canDuplicateTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
-
-  /**
-  * check if the current view allows to edit the selected transactions
-  *
-  * @param list list of selected transactions
-  * @param tooltip reference to string receiving the tooltip text
-  *        which explains why the edit function is not available (in case
-  *        of returning @c false)
-  *
-  * @retval true Yes, view allows to enter/edit transactions
-  * @retval false No, view cannot enter/edit transactions
-  */
-  bool canEditTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
-
-  /**
     * check if the current view allows to print something
     *
     * @retval true Yes, view allows to print
@@ -364,29 +323,6 @@ public:
     */
   bool canPrint();
 
-  TransactionEditor* startEdit(const KMyMoneyRegister::SelectedTransactions&);
-
-  bool createNewTransaction();
-
-  /**
-    * Used to start reconciliation of account @a account. It switches the
-    * ledger view into reconciliation mode and updates the view.
-    *
-    * @param account account which should be reconciled
-    * @param reconciliationDate the statement date
-    * @param endingBalance the ending balance entered for this account
-    *
-    * @retval true Reconciliation started
-    * @retval false Account cannot be reconciled
-    */
-  bool startReconciliation(const MyMoneyAccount& account, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
-
-  /**
-    * Used to finish reconciliation of account @a account. It switches the
-    * ledger view to normal mode and updates the view.
-    *
-    * @param account account which should be reconciled
-    */
   void finishReconciliation(const MyMoneyAccount& account);
 
   /**
@@ -445,16 +381,6 @@ public Q_SLOTS:
   void slotRefreshViews();
 
   /**
-    * Called, whenever the ledger view should pop up and a specific
-    * transaction in an account should be shown. If @p transaction
-    * is empty, the last transaction should be selected
-    *
-    * @param acc The ID of the account to be shown
-    * @param transaction The ID of the transaction to be selected
-    */
-  void slotLedgerSelected(const QString& acc, const QString& transaction = QString());
-
-  /**
     * Called, whenever the payees view should pop up and a specific
     * transaction in an account should be shown.
     *
@@ -511,12 +437,16 @@ public Q_SLOTS:
     */
   void slotShowTransactionDetail(bool detailed);
 
+
+
   /**
    * Informs respective views about selected object, so they can
    * update action states and current object.
    * @param obj Account, Category, Investment, Stock, Institution
    */
   void slotObjectSelected(const MyMoneyObject& obj);
+
+  void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
 
 private Q_SLOTS:
   /**
@@ -547,6 +477,10 @@ private Q_SLOTS:
    * @param obj Account, Category, Investment, Stock, Institution
    */
   void slotContextMenuRequested(const MyMoneyObject& obj);
+
+  void slotTransactionsMenuRequested(const KMyMoneyRegister::SelectedTransactions& list);
+
+  void slotSwitchView(View view);
 
 protected Q_SLOTS:
   /**
@@ -623,18 +557,6 @@ Q_SIGNALS:
   void kmmFilePlugin(unsigned int action);
 
   /**
-    * Signal is emitted when reconciliation starts or ends. In case of end,
-    * @a account is MyMoneyAccount()
-    *
-    * @param account account for which reconciliation starts or MyMoneyAccount()
-    *                if reconciliation ends.
-    * @param reconciliationDate the statement date
-    * @param endingBalance collected ending balance when reconciliation starts
-    *                0 otherwise
-    */
-  void reconciliationStarts(const MyMoneyAccount& account, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
-
-  /**
    * This signal is emitted after a data source has been closed
    */
   void fileClosed();
@@ -643,6 +565,26 @@ Q_SIGNALS:
    * This signal is emitted after a data source has been opened
    */
   void fileOpened();
+
+  /**
+   * @brief proxy signal
+   */
+  void statusMsg(const QString& txt);
+
+  /**
+   * @brief proxy signal
+   */
+  void statusProgress(int cnt, int base);
+
+  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+
+  /**
+    * This signal is emitted when a transaction/list of transactions has been selected by
+    * the GUI. If no transaction is selected or the selection is removed,
+    * @p transactions is identical to an empty QList. This signal is used
+    * by plugins to get information about changes.
+    */
+  void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 };
 
 #endif

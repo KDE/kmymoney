@@ -129,8 +129,8 @@ void StdTransactionEditor::createEditWidgets()
   payee->setObjectName(QLatin1String("Payee"));
   d->m_editWidgets["payee"] = payee;
 
-  connect(payee, &KMyMoneyMVCCombo::createItem, this, &TransactionEditor::createPayee);
-  connect(payee, &KMyMoneyMVCCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(payee, &KMyMoneyMVCCombo::createItem, this, &StdTransactionEditor::slotNewPayee);
+  connect(payee, &KMyMoneyMVCCombo::objectCreation, this, &StdTransactionEditor::objectCreation);
   connect(payee, &KMyMoneyMVCCombo::itemSelected, this, &StdTransactionEditor::slotUpdatePayee);
   connect(payee, &QComboBox::editTextChanged, this, &StdTransactionEditor::slotUpdateButtonState);
 
@@ -141,7 +141,7 @@ void StdTransactionEditor::createEditWidgets()
   connect(category, &KMyMoneyCombo::itemSelected, this, &StdTransactionEditor::slotUpdateCategory);
   connect(category, &QComboBox::editTextChanged, this, &StdTransactionEditor::slotUpdateButtonState);
   connect(category, &KMyMoneyCombo::createItem, this, &StdTransactionEditor::slotCreateCategory);
-  connect(category, &KMyMoneyCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(category, &KMyMoneyCombo::objectCreation, this, &StdTransactionEditor::objectCreation);
   connect(category->splitButton(), &QAbstractButton::clicked, this, &StdTransactionEditor::slotEditSplits);
   // initially disable the split button since we don't have an account set
   if (category->splitButton())
@@ -151,8 +151,8 @@ void StdTransactionEditor::createEditWidgets()
   tag->tagCombo()->setPlaceholderText(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   d->m_editWidgets["tag"] = tag;
-  connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &TransactionEditor::createTag);
-  connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &TransactionEditor::objectCreation);
+  connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &StdTransactionEditor::slotNewTag);
+  connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &StdTransactionEditor::objectCreation);
 
   auto memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
@@ -1264,7 +1264,7 @@ void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)
   // of our top categories. If so, remove it and select the parent
   // according to this information.
 
-  emit createCategory(acc, parent);
+  slotNewCategory(acc, parent);
 
   // return id
   id = acc.id();
@@ -1332,8 +1332,8 @@ int StdTransactionEditor::slotEditSplits()
                                  MyMoneyMoney(),
                                  d->m_priceInfo,
                                  d->m_regForm);
-      connect(dlg, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
-      connect(dlg, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)));
+      connect(dlg.data(), &KSplitTransactionDlg::objectCreation, this, &StdTransactionEditor::objectCreation);
+      connect(dlg.data(), &KSplitTransactionDlg::createCategory, this, &StdTransactionEditor::slotNewCategory);
 
       if ((rc = dlg->exec()) == QDialog::Accepted) {
         d->m_transaction = dlg->transaction();

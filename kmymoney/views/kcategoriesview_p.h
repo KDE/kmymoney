@@ -73,6 +73,7 @@ public:
 
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KCategoriesView::objectSelected);
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KCategoriesView::refresh);
   }
 

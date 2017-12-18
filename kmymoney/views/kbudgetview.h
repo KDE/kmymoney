@@ -53,6 +53,9 @@ public:
   void setDefaultFocus() override;
   void refresh() override;
 
+Q_SIGNALS:
+  void objectSelected(const MyMoneyObject& obj);
+
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;

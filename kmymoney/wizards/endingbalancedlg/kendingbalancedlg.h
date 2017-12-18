@@ -99,6 +99,9 @@ Q_SIGNALS:
 private:
   KEndingBalanceDlgPrivate * const d_ptr;
   Q_DECLARE_PRIVATE(KEndingBalanceDlg)
+
+private Q_SLOTS:
+  void slotNewPayee(const QString& newnameBase, QString& id);
 };
 
 #endif

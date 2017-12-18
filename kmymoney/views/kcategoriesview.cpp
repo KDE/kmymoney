@@ -232,7 +232,7 @@ void KCategoriesView::slotEditCategory()
       ft.commit();
 
       // reload the account object as it might have changed in the meantime
-      getTreeView()->objectSelected(account);
+      emit objectSelected(account);
 
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), e.what()));
@@ -370,7 +370,7 @@ void KCategoriesView::slotDeleteCategory()
           try {
             file->removeAccount(d->m_currentCategory);
             d->m_currentCategory.clearId();
-            getTreeView()->objectSelected(d->m_currentCategory);
+            emit objectSelected(d->m_currentCategory);
             ft.commit();
           } catch (const MyMoneyException &e) {
             KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, e.what()));
@@ -447,7 +447,7 @@ void KCategoriesView::slotDeleteCategory()
     try {
       file->removeAccount(d->m_currentCategory);
       d->m_currentCategory.clearId();
-      getTreeView()->objectSelected(MyMoneyAccount());
+      emit objectSelected(MyMoneyAccount());
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, e.what()));
