@@ -1587,6 +1587,8 @@ void KMyMoneyView::slotRefreshViews()
   m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
   m_scheduledView->refresh();
+
+  m_payeesView->slotClosePayeeIdentifierSource();
 }
 
 void KMyMoneyView::slotShowTransactionDetail(bool detailed)

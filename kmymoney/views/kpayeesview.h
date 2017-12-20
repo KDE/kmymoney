@@ -69,6 +69,11 @@ public Q_SLOTS:
   void slotStartRename(QListWidgetItem*);
   void slotHelp();
 
+  /**
+   * @brief proxy slot to close a model based on file open/close
+   */
+  void slotClosePayeeIdentifierSource();
+
 Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);

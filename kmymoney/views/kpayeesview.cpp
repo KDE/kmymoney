@@ -49,6 +49,7 @@
 #include <config-kmymoney.h>
 #include "ui_kpayeesview.h"
 #include "kmymoneyviewbase_p.h"
+#include "kpayeeidentifierview.h"
 #include "mymoneypayee.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -137,6 +138,13 @@ void KPayeesView::slotChooseDefaultAccount()
     d->ui->comboDefaultCategory->setSelected(most_frequent.key());
     d->setDirty(true);
   }
+}
+
+void KPayeesView::slotClosePayeeIdentifierSource()
+{
+  Q_D(KPayeesView);
+  if (!d->m_needLoad)
+    d->ui->payeeIdentifiers->closeSource();
 }
 
 void KPayeesView::slotStartRename(QListWidgetItem* item)

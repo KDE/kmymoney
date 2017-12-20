@@ -21,13 +21,12 @@
 
 #include <QWidget>
 
-#include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "widgets/styleditemdelegateforwarder.h"
 
-namespace Ui
-{
-class KPayeeIdentifierView;
-};
+class payeeIdentifier;
+class MyMoneyPayeeIdentifierContainer;
+
+namespace Ui { class KPayeeIdentifierView; }
 
 class KPayeeIdentifierView : public QWidget
 {
@@ -37,6 +36,8 @@ public:
   explicit KPayeeIdentifierView(QWidget* parent);
   ~KPayeeIdentifierView();
   QList<payeeIdentifier> identifiers() const;
+
+  void closeSource();
 
 Q_SIGNALS:
   void dataChanged();

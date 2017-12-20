@@ -25,7 +25,6 @@
 #include <QAbstractItemDelegate>
 #include <QStyledItemDelegate>
 
-#include "kmymoney.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiercontainermodel.h"
 #include "payeeidentifierselectiondelegate.h"
@@ -75,8 +74,9 @@ KPayeeIdentifierView::~KPayeeIdentifierView()
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
   if (ui->view->model() == 0) {
-    payeeIdentifierContainerModel* model = new payeeIdentifierContainerModel(ui->view);
-    connect(kmymoney, &KMyMoneyApp::fileLoaded, model, &payeeIdentifierContainerModel::closeSource);
+    // this model must be closed after each KMyMoneyApp::fileLoaded signal
+    // to limit includes, it is connected outside of this class
+    auto model = new payeeIdentifierContainerModel(ui->view);
     connect(model, &payeeIdentifierContainerModel::dataChanged, this, &KPayeeIdentifierView::dataChanged);
     connect(model, &payeeIdentifierContainerModel::rowsRemoved, this, &KPayeeIdentifierView::dataChanged);
     ui->view->setModel(model);
@@ -87,6 +87,13 @@ void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 
   // Open persistent editor for last row
   ui->view->openPersistentEditor(ui->view->model()->index(ui->view->model()->rowCount(QModelIndex()) - 1, 0));
+}
+
+void KPayeeIdentifierView::closeSource()
+{
+  auto model = ui->view->model();
+  if (model)
+    static_cast<payeeIdentifierContainerModel*>(model)->closeSource();
 }
 
 QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const

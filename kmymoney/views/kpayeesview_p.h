@@ -68,7 +68,6 @@
 #include "mymoneyaccountloan.h"
 #include "mymoneysplit.h"
 #include "mymoneyprice.h"
-#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "icons/icons.h"
 #include "transaction.h"
