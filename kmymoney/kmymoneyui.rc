@@ -227,13 +227,6 @@
   <Action name="currency_delete" />
   <Action name="currency_setbase" />
  </Menu>
- <Menu name="price_context_menu">
-  <title>Price options</title>
-  <Action name="price_new" />
-  <Action name="price_edit" />
-  <Action name="price_update" />
-  <Action name="price_delete" />
- </Menu>
  <Menu name="onlinejob_context_menu">
    <title>Credit transfer options</title>
    <Action name="account_online_new_credit_transfer" />

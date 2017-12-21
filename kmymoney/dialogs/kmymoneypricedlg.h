@@ -55,14 +55,10 @@ protected Q_SLOTS:
   void slotSelectPrice();
   void slotNewPrice();
   void slotDeletePrice();
-  int slotEditPrice();
+  void slotEditPrice();
   void slotLoadWidgets();
   void slotOnlinePriceUpdate();
-  void slotOpenContextMenu(const QPoint& p);
-
-Q_SIGNALS:
-  void openContextMenu(const MyMoneyPrice& price);
-  void selectObject(const MyMoneyPrice& price);
+  void slotShowPriceMenu(const QPoint& p);
 
 private:
   KMyMoneyPriceDlgPrivate * const d_ptr;

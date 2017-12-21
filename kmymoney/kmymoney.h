@@ -690,12 +690,6 @@ public Q_SLOTS:
   void slotShowCurrencyContextMenu();
 
   /**
-    * This slot opens the price options menu at the current cursor
-    * position.
-    */
-  void slotShowPriceContextMenu();
-
-  /**
    * Open onlineJob options menu at current cursor position.
    */
   void slotShowOnlineJobContextMenu();
@@ -733,9 +727,6 @@ public Q_SLOTS:
 
   void slotSelectCurrency();
   void slotSelectCurrency(const MyMoneySecurity& currency);
-
-  void slotSelectPrice();
-  void slotSelectPrice(const MyMoneyPrice& price);
 
   /**
     * Brings up the new account wizard and saves the information.
@@ -847,20 +838,8 @@ Q_SIGNALS:
     */
   void currencySelected(const MyMoneySecurity& currency);
 
-  /**
-    * This signal is emitted when a new price has been selected by
-    * the GUI. If no price is selected or the selection is removed,
-    * @a price is identical to MyMoneyPrice().
-    */
-  void priceSelected(const MyMoneyPrice& price);
-
   void currencyRename();
   void currencyCreated(const QString& id);
-
-  void priceEdit();
-  void priceNew();
-  void priceDelete();
-  void priceOnlineUpdate();
 
   void startMatchTransaction(const MyMoneyTransaction& t);
   void cancelMatchTransaction();

@@ -340,7 +340,6 @@ public:
   MyMoneyAccount        m_reconciliationAccount;
   MyMoneySchedule       m_selectedSchedule;
   MyMoneySecurity       m_selectedCurrency;
-  MyMoneyPrice          m_selectedPrice;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
   // This is Auto Saving related
@@ -752,11 +751,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::CurrencyRename,                QStringLiteral("currency_rename"),                i18n("Rename currency"),                            Icon::EditRename},
       {Action::CurrencyDelete,                QStringLiteral("currency_delete"),                i18n("Delete currency"),                            Icon::EditDelete},
       {Action::CurrencySetBase,               QStringLiteral("currency_setbase"),               i18n("Select as base currency"),                    Icon::KMyMoney},
-      //Price actions
-      {Action::PriceNew,                      QStringLiteral("price_new"),                      i18n("New price..."),                               Icon::DocumentNew},
-      {Action::PriceEdit,                     QStringLiteral("price_edit"),                     i18n("Edit price..."),                              Icon::DocumentEdit},
-      {Action::PriceUpdate,                   QStringLiteral("price_update"),                   i18n("Online Price Update..."),                     Icon::PriceUpdate},
-      {Action::PriceDelete,                   QStringLiteral("price_delete"),                   i18n("Delete price..."),                            Icon::EditDelete},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
@@ -846,11 +840,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::CurrencyRename,                &KMyMoneyApp::currencyRename},
       {Action::CurrencyDelete,                &KMyMoneyApp::slotCurrencyDelete},
       {Action::CurrencySetBase,               &KMyMoneyApp::slotCurrencySetBase},
-      //Price actions
-      {Action::PriceNew,                      &KMyMoneyApp::priceNew},
-      {Action::PriceEdit,                     &KMyMoneyApp::priceEdit},
-      {Action::PriceUpdate,                   &KMyMoneyApp::priceOnlineUpdate},
-      {Action::PriceDelete,                   &KMyMoneyApp::priceDelete},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 &KMyMoneyApp::slotNewFeature},
@@ -2855,11 +2844,6 @@ void KMyMoneyApp::slotShowCurrencyContextMenu()
   showContextMenu("currency_context_menu");
 }
 
-void KMyMoneyApp::slotShowPriceContextMenu()
-{
-  showContextMenu("price_context_menu");
-}
-
 void KMyMoneyApp::slotShowOnlineJobContextMenu()
 {
   showContextMenu("onlinejob_context_menu");
@@ -2918,8 +2902,7 @@ void KMyMoneyApp::slotUpdateActions()
     static const QVector<Action> disabledActions {
           Action::ReportAccountTransactions, Action::MapOnlineAccount, Action::UnmapOnlineAccount,
           Action::UpdateAccount, Action::UpdateAllAccounts,
-          Action::CurrencyRename, Action::CurrencyDelete, Action::CurrencySetBase,
-          Action::PriceEdit, Action::PriceDelete, Action::PriceUpdate
+          Action::CurrencyRename, Action::CurrencyDelete, Action::CurrencySetBase
     };
 
     for (const auto& a : disabledActions)
@@ -2953,7 +2936,7 @@ void KMyMoneyApp::slotUpdateActions()
 //      {qMakePair(Action::TransactionNew, (fileOpen && d->m_myMoneyView->canCreateTransactions(KMyMoneyRegister::SelectedTransactions(), tooltip)))},
       {qMakePair(Action::NewSchedule, fileOpen)},
       {qMakePair(Action::CurrencyNew, fileOpen)},
-      {qMakePair(Action::PriceNew, fileOpen)},
+//      {qMakePair(Action::PriceNew, fileOpen)},
     };
 
     for (const auto& a : actionStates)
@@ -3029,15 +3012,6 @@ void KMyMoneyApp::slotUpdateActions()
     if (d->m_selectedCurrency.id() != file->baseCurrency().id())
       pActions[Action::CurrencySetBase]->setEnabled(true);
   }
-
-  if (!d->m_selectedPrice.from().isEmpty() && d->m_selectedPrice.source() != QLatin1String("KMyMoney")) {
-    pActions[Action::PriceEdit]->setEnabled(true);
-    pActions[Action::PriceDelete]->setEnabled(true);
-
-    //enable online update if it is a currency
-    MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedPrice.from());
-    pActions[Action::PriceUpdate]->setEnabled(security.isCurrency());
-  }
 }
 
 void KMyMoneyApp::slotResetSelections()
@@ -3049,7 +3023,6 @@ void KMyMoneyApp::slotResetSelections()
   d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
   d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
   slotSelectCurrency();
-  slotSelectPrice();
   slotUpdateActions();
 }
 
@@ -3063,18 +3036,6 @@ void KMyMoneyApp::slotSelectCurrency(const MyMoneySecurity& currency)
   d->m_selectedCurrency = currency;
   slotUpdateActions();
   emit currencySelected(d->m_selectedCurrency);
-}
-
-void KMyMoneyApp::slotSelectPrice()
-{
-  slotSelectPrice(MyMoneyPrice());
-}
-
-void KMyMoneyApp::slotSelectPrice(const MyMoneyPrice& price)
-{
-  d->m_selectedPrice = price;
-  slotUpdateActions();
-  emit priceSelected(d->m_selectedPrice);
 }
 
 void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
@@ -3122,13 +3083,8 @@ void KMyMoneyApp::slotCurrencyDialog()
 void KMyMoneyApp::slotPriceDialog()
 {
   QPointer<KMyMoneyPriceDlg> dlg = new KMyMoneyPriceDlg(this);
-  connect(dlg, SIGNAL(selectObject(MyMoneyPrice)), this, SLOT(slotSelectPrice(MyMoneyPrice)));
-  connect(dlg, SIGNAL(openContextMenu(MyMoneyPrice)), this, SLOT(slotShowPriceContextMenu()));
-  connect(this, SIGNAL(priceNew()), dlg, SLOT(slotNewPrice()));
-  connect(this, SIGNAL(priceEdit()), dlg, SLOT(slotEditPrice()));
-  connect(this, SIGNAL(priceDelete()), dlg, SLOT(slotDeletePrice()));
-  connect(this, SIGNAL(priceOnlineUpdate()), dlg, SLOT(slotOnlinePriceUpdate()));
   dlg->exec();
+  delete dlg;
 }
 
 void KMyMoneyApp::slotFileConsistencyCheck()

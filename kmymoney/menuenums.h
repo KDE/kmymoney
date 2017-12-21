@@ -115,11 +115,6 @@ namespace eMenu {
     CurrencyNew, CurrencyRename, CurrencyDelete,
     CurrencySetBase,
     // *************
-    // The price menu
-    // *************
-    PriceNew, PriceDelete,
-    PriceUpdate, PriceEdit,
-    // *************
     // The budget menu
     // *************
     NewBudget, RenameBudget, DeleteBudget,

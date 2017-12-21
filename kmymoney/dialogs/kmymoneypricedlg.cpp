@@ -30,6 +30,8 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QVBoxLayout>
+#include <QMenu>
+#include <QVector>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -61,6 +63,19 @@
 
 using namespace Icons;
 
+// duplicated eMenu namespace from menuenums.h for consistency
+// there shouldn't be any clash, because we don't need menuenums.h here
+namespace eMenu {
+  enum class Action {
+    // *************
+    // The price menu
+    // *************
+    NewPrice, DeletePrice,
+    UpdatePrice, EditPrice
+  };
+  inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+}
+
 class KMyMoneyPriceDlgPrivate
 {
   Q_DISABLE_COPY(KMyMoneyPriceDlgPrivate)
@@ -77,6 +92,32 @@ public:
   ~KMyMoneyPriceDlgPrivate()
   {
     delete ui;
+  }
+
+  int editPrice()
+  {
+    Q_Q(KMyMoneyPriceDlg);
+    int rc = QDialog::Rejected;
+    auto item = ui->m_priceList->currentItem();
+    if (item) {
+      MyMoneySecurity from(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from()));
+      MyMoneySecurity to(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to()));
+      signed64 fract = MyMoneyMoney::precToDenom(from.pricePrecision());
+
+      QPointer<KCurrencyCalculator> calc =
+        new KCurrencyCalculator(from,
+                                to,
+                                MyMoneyMoney::ONE,
+                                item->data(0, Qt::UserRole).value<MyMoneyPrice>().rate(to.id()),
+                                item->data(0, Qt::UserRole).value<MyMoneyPrice>().date(),
+                                fract,
+                                q);
+      calc->setupPriceEditor();
+
+      rc = calc->exec();
+      delete calc;
+    }
+    return rc;
   }
 
   KMyMoneyPriceDlg      *q_ptr;
@@ -118,7 +159,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   connect(d->ui->m_newButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotNewPrice);
   connect(d->ui->m_priceList, &QTreeWidget::itemSelectionChanged, this, &KMyMoneyPriceDlg::slotSelectPrice);
   connect(d->ui->m_onlineQuoteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotOnlinePriceUpdate);
-  connect(d->ui->m_priceList, &QWidget::customContextMenuRequested, this, &KMyMoneyPriceDlg::slotOpenContextMenu);
+  connect(d->ui->m_priceList, &QWidget::customContextMenuRequested, this, &KMyMoneyPriceDlg::slotShowPriceMenu);
 
   connect(d->ui->m_showAllPrices, &QAbstractButton::toggled, this, &KMyMoneyPriceDlg::slotLoadWidgets);
   connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KMyMoneyPriceDlg::slotLoadWidgets);
@@ -249,7 +290,7 @@ void KMyMoneyPriceDlg::slotSelectPrice()
     MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
     if (price.source() == "KMyMoney" || itemsList.count() > 1)
       d->ui->m_editButton->setEnabled(false);
-    emit selectObject(price);
+//    emit selectObject(price);
   }
 }
 
@@ -273,7 +314,7 @@ void KMyMoneyPriceDlg::slotNewPrice()
       d->ui->m_priceList->setCurrentItem(p, true);
       // If the user cancels the following operation, we delete the new item
       // and re-select any previously selected one
-      if (slotEditPrice() == Rejected) {
+      if (d->editPrice() == Rejected) {
         delete p;
         if (item)
           d->ui->m_priceList->setCurrentItem(item, true);
@@ -286,32 +327,11 @@ void KMyMoneyPriceDlg::slotNewPrice()
   delete dlg;
 }
 
-int KMyMoneyPriceDlg::slotEditPrice()
+void KMyMoneyPriceDlg::slotEditPrice()
 {
   Q_D(KMyMoneyPriceDlg);
-  int rc = Rejected;
-  auto item = d->ui->m_priceList->currentItem();
-  if (item) {
-    MyMoneySecurity from(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from()));
-    MyMoneySecurity to(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to()));
-    signed64 fract = MyMoneyMoney::precToDenom(from.pricePrecision());
-
-    QPointer<KCurrencyCalculator> calc =
-      new KCurrencyCalculator(from,
-                              to,
-                              MyMoneyMoney::ONE,
-                              item->data(0, Qt::UserRole).value<MyMoneyPrice>().rate(to.id()),
-                              item->data(0, Qt::UserRole).value<MyMoneyPrice>().date(),
-                              fract,
-                              this);
-    calc->setupPriceEditor();
-
-    rc = calc->exec();
-    delete calc;
-  }
-  return rc;
+  d->editPrice();
 }
-
 
 void KMyMoneyPriceDlg::slotDeletePrice()
 {
@@ -341,12 +361,41 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate()
   delete dlg;
 }
 
-void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)
+void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
 {
   Q_D(KMyMoneyPriceDlg);
   auto item = d->ui->m_priceList->itemAt(p);
   if (item) {
     d->ui->m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
-    emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
+    const auto price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
+    const auto cond1 = !price.from().isEmpty() && price.source() != QLatin1String("KMyMoney");
+    const auto cond2 = cond1 && MyMoneyFile::instance()->security(price.from()).isCurrency();
+    auto menu = new QMenu;
+    typedef void(KMyMoneyPriceDlg::*KMyMoneyPriceDlgFunc)();
+    struct actionInfo {
+      eMenu::Action        action;
+      KMyMoneyPriceDlgFunc callback;
+      QString              text;
+      Icon                 icon;
+      bool                 enabled;
+    };
+
+    const QVector<actionInfo> actionInfos {
+      {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,   true},
+      {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,  cond1},
+      {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::PriceUpdate,   cond2},
+      {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price..."),        Icon::EditDelete,    cond1}
+    };
+
+    QList<QAction*> LUTActions;
+    for (const auto& info : actionInfos) {
+      auto a = new QAction(Icons::get(info.icon), info.text); // WARNING: no empty Icon::Empty here
+      a->setEnabled(info.enabled);
+      connect(a, &QAction::triggered, this, info.callback);
+      LUTActions.append(a);
+    }
+    menu->addSection(i18nc("Menu header","Price options"));
+    menu->addActions(LUTActions);
+    menu->exec(QCursor::pos());
   }
 }
