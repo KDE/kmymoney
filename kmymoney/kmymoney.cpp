@@ -339,7 +339,6 @@ public:
   MyMoneyAccount        m_selectedAccount;
   MyMoneyAccount        m_reconciliationAccount;
   MyMoneySchedule       m_selectedSchedule;
-  MyMoneySecurity       m_selectedCurrency;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
   // This is Auto Saving related
@@ -746,11 +745,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::ListAddTag},
       {Action::RenameTag,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
       {Action::DeleteTag,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::ListRemoveTag},
-      //Currency actions
-      {Action::CurrencyNew,                   QStringLiteral("currency_new"),                   i18n("New currency"),                               Icon::Empty},
-      {Action::CurrencyRename,                QStringLiteral("currency_rename"),                i18n("Rename currency"),                            Icon::EditRename},
-      {Action::CurrencyDelete,                QStringLiteral("currency_delete"),                i18n("Delete currency"),                            Icon::EditDelete},
-      {Action::CurrencySetBase,               QStringLiteral("currency_setbase"),               i18n("Select as base currency"),                    Icon::KMyMoney},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
@@ -835,11 +829,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // ***************************
       // Actions w/o main menu entry
       // ***************************
-      //Currency actions
-      {Action::CurrencyNew,                   &KMyMoneyApp::slotCurrencyNew},
-      {Action::CurrencyRename,                &KMyMoneyApp::currencyRename},
-      {Action::CurrencyDelete,                &KMyMoneyApp::slotCurrencyDelete},
-      {Action::CurrencySetBase,               &KMyMoneyApp::slotCurrencySetBase},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 &KMyMoneyApp::slotNewFeature},
@@ -2704,73 +2693,6 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
   KMyMoneyUtils::newPayee(newnameBase, id);
 }
 
-void KMyMoneyApp::slotCurrencyNew()
-{
-  QString sid = QInputDialog::getText(0, i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"));
-  if (!sid.isEmpty()) {
-    QString id(sid);
-    MyMoneySecurity currency(id, i18n("New currency"));
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyFile::instance()->addCurrency(currency);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", e.what()), i18n("New currency"));
-    }
-    emit currencyCreated(id);
-  }
-}
-
-void KMyMoneyApp::slotCurrencyUpdate(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-  try {
-    if (currencyName != d->m_selectedCurrency.name() || currencyTradingSymbol != d->m_selectedCurrency.tradingSymbol()) {
-      MyMoneySecurity currency = file->currency(currencyId);
-      currency.setName(currencyName);
-      currency.setTradingSymbol(currencyTradingSymbol);
-      MyMoneyFileTransaction ft;
-      try {
-        file->modifyCurrency(currency);
-        d->m_selectedCurrency = currency;
-        ft.commit();
-      } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
-      }
-    }
-  } catch (const MyMoneyException &e) {
-    KMessageBox::sorry(this, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
-  }
-}
-
-void KMyMoneyApp::slotCurrencyDelete()
-{
-  if (!d->m_selectedCurrency.id().isEmpty()) {
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyFile::instance()->removeCurrency(d->m_selectedCurrency);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_selectedCurrency.name(), e.what()), i18n("Delete currency"));
-    }
-  }
-}
-
-void KMyMoneyApp::slotCurrencySetBase()
-{
-  if (!d->m_selectedCurrency.id().isEmpty()) {
-    if (d->m_selectedCurrency.id() != MyMoneyFile::instance()->baseCurrency().id()) {
-      MyMoneyFileTransaction ft;
-      try {
-        MyMoneyFile::instance()->setBaseCurrency(d->m_selectedCurrency);
-        ft.commit();
-      } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_selectedCurrency.name(), e.what()), i18n("Set base currency"));
-      }
-    }
-  }
-}
-
 void KMyMoneyApp::slotNewFeature()
 {
 }
@@ -2839,11 +2761,6 @@ void KMyMoneyApp::showContextMenu(const QString& containerName)
     qDebug("menu '%s' not found: w = %p, menu = %p", qPrintable(containerName), w, menu);
 }
 
-void KMyMoneyApp::slotShowCurrencyContextMenu()
-{
-  showContextMenu("currency_context_menu");
-}
-
 void KMyMoneyApp::slotShowOnlineJobContextMenu()
 {
   showContextMenu("onlinejob_context_menu");
@@ -2901,8 +2818,7 @@ void KMyMoneyApp::slotUpdateActions()
   {
     static const QVector<Action> disabledActions {
           Action::ReportAccountTransactions, Action::MapOnlineAccount, Action::UnmapOnlineAccount,
-          Action::UpdateAccount, Action::UpdateAllAccounts,
-          Action::CurrencyRename, Action::CurrencyDelete, Action::CurrencySetBase
+          Action::UpdateAccount, Action::UpdateAllAccounts
     };
 
     for (const auto& a : disabledActions)
@@ -2935,7 +2851,7 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::NewInstitution, fileOpen)},
 //      {qMakePair(Action::TransactionNew, (fileOpen && d->m_myMoneyView->canCreateTransactions(KMyMoneyRegister::SelectedTransactions(), tooltip)))},
       {qMakePair(Action::NewSchedule, fileOpen)},
-      {qMakePair(Action::CurrencyNew, fileOpen)},
+//      {qMakePair(Action::CurrencyNew, fileOpen)},
 //      {qMakePair(Action::PriceNew, fileOpen)},
     };
 
@@ -3002,16 +2918,6 @@ void KMyMoneyApp::slotUpdateActions()
       }
     }
   }
-
-  if (!d->m_selectedCurrency.id().isEmpty()) {
-    pActions[Action::CurrencyRename]->setEnabled(true);
-    // no need to check each transaction. accounts are enough in this case
-    skip.fill(false);
-    skip.setBit((int)eStorage::Reference::Transaction);
-    pActions[Action::CurrencyDelete]->setEnabled(!file->isReferenced(d->m_selectedCurrency, skip));
-    if (d->m_selectedCurrency.id() != file->baseCurrency().id())
-      pActions[Action::CurrencySetBase]->setEnabled(true);
-  }
 }
 
 void KMyMoneyApp::slotResetSelections()
@@ -3022,20 +2928,7 @@ void KMyMoneyApp::slotResetSelections()
   d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
   d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
-  slotSelectCurrency();
   slotUpdateActions();
-}
-
-void KMyMoneyApp::slotSelectCurrency()
-{
-  slotSelectCurrency(MyMoneySecurity());
-}
-
-void KMyMoneyApp::slotSelectCurrency(const MyMoneySecurity& currency)
-{
-  d->m_selectedCurrency = currency;
-  slotUpdateActions();
-  emit currencySelected(d->m_selectedCurrency);
 }
 
 void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
@@ -3067,17 +2960,8 @@ void KMyMoneyApp::slotDataChanged()
 void KMyMoneyApp::slotCurrencyDialog()
 {
   QPointer<KCurrencyEditDlg> dlg = new KCurrencyEditDlg(this);
-  connect(dlg, SIGNAL(selectObject(MyMoneySecurity)), this, SLOT(slotSelectCurrency(MyMoneySecurity)));
-  connect(dlg, SIGNAL(openContextMenu(MyMoneySecurity)), this, SLOT(slotShowCurrencyContextMenu()));
-  connect(this, SIGNAL(currencyRename()), dlg, SLOT(slotStartRename()));
-  connect(dlg, SIGNAL(updateCurrency(QString,QString,QString)), this, SLOT(slotCurrencyUpdate(QString,QString,QString)));
-  connect(this, SIGNAL(currencyCreated(QString)), dlg, SLOT(slotSelectCurrency(QString)));
-  connect(dlg, SIGNAL(selectBaseCurrency(MyMoneySecurity)), this, SLOT(slotCurrencySetBase()));
-
   dlg->exec();
   delete dlg;
-
-  slotSelectCurrency(MyMoneySecurity());
 }
 
 void KMyMoneyApp::slotPriceDialog()
@@ -4070,7 +3954,6 @@ void KMyMoneyApp::Private::closeFile()
   q->d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
   q->d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
-  q->slotSelectCurrency();
 //  q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
 
   m_reconciliationAccount = MyMoneyAccount();

@@ -110,11 +110,6 @@ namespace eMenu {
     // *************
     NewTag, RenameTag, DeleteTag,
     // *************
-    // The currency menu
-    // *************
-    CurrencyNew, CurrencyRename, CurrencyDelete,
-    CurrencySetBase,
-    // *************
     // The budget menu
     // *************
     NewBudget, RenameBudget, DeleteBudget,

@@ -220,13 +220,6 @@
   <Action name="transaction_match" />
   <Action name="transaction_accept" />
  </Menu>
- <Menu name="currency_context_menu">
-  <title>Currency options</title>
-  <Action name="currency_new" />
-  <Action name="currency_rename" />
-  <Action name="currency_delete" />
-  <Action name="currency_setbase" />
- </Menu>
  <Menu name="onlinejob_context_menu">
    <title>Credit transfer options</title>
    <Action name="account_online_new_credit_transfer" />

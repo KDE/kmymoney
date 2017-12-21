@@ -241,22 +241,6 @@ protected Q_SLOTS:
   void slotUpdateConfiguration();
 
   /**
-    */
-  void slotCurrencyNew();
-
-  /**
-    */
-  void slotCurrencyUpdate(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol);
-
-  /**
-    */
-  void slotCurrencyDelete();
-
-  /**
-    */
-  void slotCurrencySetBase();
-
-  /**
     * This slot is used to start new features during the development cycle
     */
   void slotNewFeature();
@@ -684,12 +668,6 @@ public Q_SLOTS:
   void slotAccountTransactionReport();
 
   /**
-    * This slot opens the currency options menu at the current cursor
-    * position.
-    */
-  void slotShowCurrencyContextMenu();
-
-  /**
    * Open onlineJob options menu at current cursor position.
    */
   void slotShowOnlineJobContextMenu();
@@ -724,9 +702,6 @@ public Q_SLOTS:
   void slotResetSelections();
 
   void slotSelectAccount(const MyMoneyObject& account);
-
-  void slotSelectCurrency();
-  void slotSelectCurrency(const MyMoneySecurity& currency);
 
   /**
     * Brings up the new account wizard and saves the information.
@@ -829,17 +804,6 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void scheduleSelected(const MyMoneySchedule& schedule);
-
-  /**
-    * This signal is emitted when a new currency has been selected by
-    * the GUI. If no currency is selected or the selection is removed,
-    * @a currency is identical to MyMoneySecurity(). This signal is used
-    * by plugins to get information about changes.
-    */
-  void currencySelected(const MyMoneySecurity& currency);
-
-  void currencyRename();
-  void currencyCreated(const QString& id);
 
   void startMatchTransaction(const MyMoneyTransaction& t);
   void cancelMatchTransaction();
