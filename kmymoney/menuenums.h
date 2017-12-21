@@ -108,7 +108,7 @@ namespace eMenu {
     // *************
     // The tag menu
     // *************
-    TagNew, TagRename, TagDelete,
+    NewTag, RenameTag, DeleteTag,
     // *************
     // The currency menu
     // *************
@@ -141,6 +141,7 @@ namespace eMenu {
     Account,
     Schedule,
     Category,
+    Tag,
     Payee,
     Investment,
     Transaction,

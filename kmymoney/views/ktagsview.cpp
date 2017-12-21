@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QTimer>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,10 +37,16 @@
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "kmymoneyglobalsettings.h"
+#include "ktagreassigndlg.h"
+#include "kmymoneyutils.h"
+#include "kmymoneymvccombo.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyschedule.h"
+#include "mymoneytransaction.h"
 #include "transaction.h"
+#include "menuenums.h"
 
 using namespace Icons;
 
@@ -47,69 +54,23 @@ using namespace Icons;
 /*                         KTransactionPtrVector                            */
 /* -------------------------------------------------------------------------*/
 
-// *** KTagListItem Implementation ***
-
-/**
-  * This class represents an item in the tags list view.
-  */
-class KTagListItem : public QListWidgetItem
-{
-public:
-  /**
-    * Constructor to be used to construct a tag entry object.
-    *
-    * @param parent pointer to the QListWidget object this entry should be
-    *               added to.
-    * @param tag    const reference to MyMoneyTag for which
-    *               the QListWidget entry is constructed
-    */
-  explicit KTagListItem(QListWidget *parent, const MyMoneyTag& tag);
-  ~KTagListItem();
-
-  MyMoneyTag tag() const;
-
-private:
-  MyMoneyTag  m_tag;
-};
-
-KTagListItem::KTagListItem(QListWidget *parent, const MyMoneyTag& tag) :
-    QListWidgetItem(parent, QListWidgetItem::UserType),
-    m_tag(tag)
-{
-  setText(tag.name());
-  // allow in column rename
-  setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-}
-
-KTagListItem::~KTagListItem()
-{
-}
-
-MyMoneyTag KTagListItem::tag() const
-{
-  return m_tag;
-}
-
 // *** KTagsView Implementation ***
 KTagsView::KTagsView(QWidget *parent) :
     KMyMoneyViewBase(*new KTagsViewPrivate(this), parent)
 {
-  Q_D(KTagsView);
-  d->m_needLoad = true;
-  d->m_inSelection = false;
-  d->m_allowEditing = true;
-  d->m_tagFilterType = 0;
+  typedef void(KTagsView::*KTagsViewFunc)();
+  const QHash<eMenu::Action, KTagsViewFunc> actionConnections {
+    {eMenu::Action::NewTag,    &KTagsView::slotNewTag},
+    {eMenu::Action::RenameTag, &KTagsView::slotRenameTag},
+    {eMenu::Action::DeleteTag, &KTagsView::slotDeleteTag}
+  };
+
+  for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
+    connect(pActions[a.key()], &QAction::triggered, this, a.value());
 }
 
 KTagsView::~KTagsView()
 {
-  Q_D(KTagsView);
-  if (!d->m_needLoad) {
-    // remember the splitter settings for startup
-    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-    grp.writeEntry("KTagsViewSplitterSize", d->ui->m_splitter->saveState());
-    grp.sync();
-  }
 }
 
 void KTagsView::setDefaultFocus()
@@ -140,16 +101,8 @@ void KTagsView::slotStartRename(QListWidgetItem* item)
   d->ui->m_tagsList->editItem(item);
 }
 
-void KTagsView::slotRenameButtonCliked()
-{
-  Q_D(KTagsView);
-  if (d->ui->m_tagsList->currentItem() && d->ui->m_tagsList->selectedItems().count() == 1) {
-    slotStartRename(d->ui->m_tagsList->currentItem());
-  }
-}
-
 // This variant is only called when a single tag is selected and renamed.
-void KTagsView::slotRenameTag(QListWidgetItem* ta)
+void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
 {
   Q_D(KTagsView);
   //if there is no current item selected, exit
@@ -158,7 +111,7 @@ void KTagsView::slotRenameTag(QListWidgetItem* ta)
 
   //qDebug() << "[KTagsView::slotRenameTag]";
   // create a copy of the new name without appended whitespaces
-  QString new_name = ta->text();
+  auto new_name = ta->text();
   if (d->m_tag.name() != new_name) {
     MyMoneyFileTransaction ft;
     try {
@@ -194,7 +147,7 @@ void KTagsView::slotRenameTag(QListWidgetItem* ta)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify tag"),
+      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
@@ -257,8 +210,7 @@ void KTagsView::slotSelectTag()
   // obtain last selected tag
   QList<MyMoneyTag> tagsList;
   selectedTags(tagsList);
-
-  emit selectObjects(tagsList);
+  slotSelectTags(tagsList);
 
   if (tagsList.isEmpty()) {
     d->ui->m_tabWidget->setEnabled(false); // disable tab widget
@@ -430,7 +382,7 @@ void KTagsView::slotUpdateTag()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify tag"),
+      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
@@ -452,7 +404,18 @@ void KTagsView::showEvent(QShowEvent* event)
 
   QList<MyMoneyTag> list;
   selectedTags(list);
-  emit selectObjects(list);
+  slotSelectTags(list);
+}
+
+void KTagsView::updateTagActions(const QList<MyMoneyTag>& tags)
+{
+  Q_D(KTagsView);
+  pActions[eMenu::Action::NewTag]->setEnabled(true);
+  const auto tagsCount = tags.count();
+  auto b = tagsCount == 1 ? true : false;
+  pActions[eMenu::Action::RenameTag]->setEnabled(b);
+  b = tagsCount >= 1 ? true : false;
+  pActions[eMenu::Action::DeleteTag]->setEnabled(b);
 }
 
 void KTagsView::loadTags()
@@ -588,13 +551,13 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId)
   slotSelectTagAndTransaction(tagId, QString(), QString());
 }
 
-void KTagsView::slotOpenContextMenu(const QPoint& /*ta*/)
+void KTagsView::slotShowTagsMenu(const QPoint& /*ta*/)
 {
   Q_D(KTagsView);
   auto item = dynamic_cast<KTagListItem*>(d->ui->m_tagsList->currentItem());
   if (item) {
     slotSelectTag();
-    emit openContextMenu(item->tag());
+    pMenus[eMenu::Menu::Tag]->exec(QCursor::pos());
   }
 }
 
@@ -610,4 +573,176 @@ void KTagsView::slotChangeFilter(int index)
   //update the filter type then reload the tags list
   d->m_tagFilterType = index;
   loadTags();
+}
+
+void KTagsView::slotSelectTags(const QList<MyMoneyTag>& list)
+{
+  Q_D(KTagsView);
+  d->m_selectedTags = list;
+  updateTagActions(list);
+}
+
+void KTagsView::slotNewTag()
+{
+  QString id;
+  KMyMoneyUtils::newTag(i18n("New Tag"), id);
+  slotSelectTagAndTransaction(id);
+}
+
+void KTagsView::slotRenameTag()
+{
+  Q_D(KTagsView);
+  if (d->ui->m_tagsList->currentItem() && d->ui->m_tagsList->selectedItems().count() == 1) {
+    slotStartRename(d->ui->m_tagsList->currentItem());
+  }
+}
+
+void KTagsView::slotDeleteTag()
+{
+  Q_D(KTagsView);
+  if (d->m_selectedTags.isEmpty())
+    return; // shouldn't happen
+
+  const auto file = MyMoneyFile::instance();
+
+  // first create list with all non-selected tags
+  QList<MyMoneyTag> remainingTags = file->tagList();
+  QList<MyMoneyTag>::iterator it_ta;
+  for (it_ta = remainingTags.begin(); it_ta != remainingTags.end();) {
+    if (d->m_selectedTags.contains(*it_ta)) {
+      it_ta = remainingTags.erase(it_ta);
+    } else {
+      ++it_ta;
+    }
+  }
+
+  // get confirmation from user
+  QString prompt;
+  if (d->m_selectedTags.size() == 1)
+    prompt = i18n("<p>Do you really want to remove the tag <b>%1</b>?</p>", d->m_selectedTags.front().name());
+  else
+    prompt = i18n("Do you really want to remove all selected tags?");
+
+  if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Tag")) == KMessageBox::No)
+    return;
+
+  MyMoneyFileTransaction ft;
+  try {
+    // create a transaction filter that contains all tags selected for removal
+    MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
+    for (QList<MyMoneyTag>::const_iterator it = d->m_selectedTags.constBegin();
+         it != d->m_selectedTags.constEnd(); ++it) {
+      f.addTag((*it).id());
+    }
+    // request a list of all transactions that still use the tags in question
+    auto translist = file->transactionList(f);
+//     qDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
+
+    // now get a list of all schedules that make use of one of the tags
+    QList<MyMoneySchedule> used_schedules;
+    foreach (const auto schedule, file->scheduleList()) {
+      // loop over all splits in the transaction of the schedule
+      foreach (const auto split, schedule.transaction().splits()) {
+        for (auto i = 0; i < split.tagIdList().size(); ++i) {
+          // is the tag in the split to be deleted?
+          if (d->tagInList(d->m_selectedTags, split.tagIdList()[i])) {
+            used_schedules.push_back(schedule); // remember this schedule
+            break;
+          }
+        }
+      }
+    }
+//     qDebug() << "[KTagsView::slotDeleteTag]  " << used_schedules.count() << " schedules use one of the selected tags";
+
+    MyMoneyTag newTag;
+    // if at least one tag is still referenced, we need to reassign its transactions first
+    if (!translist.isEmpty() || !used_schedules.isEmpty()) {
+      // show error message if no tags remain
+      //FIXME-ALEX Tags are optional so we can delete all of them and simply delete every tagId from every transaction
+      if (remainingTags.isEmpty()) {
+        KMessageBox::sorry(this, i18n("At least one transaction/scheduled transaction is still referenced by a tag. "
+                                      "Currently you have all tags selected. However, at least one tag must remain so "
+                                      "that the transaction/scheduled transaction can be reassigned."));
+        return;
+      }
+
+      // show transaction reassignment dialog
+      auto dlg = new KTagReassignDlg(this);
+      KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
+      auto tag_id = dlg->show(remainingTags);
+      delete dlg; // and kill the dialog
+      if (tag_id.isEmpty())  //FIXME-ALEX Let the user choose to not reassign a to-be deleted tag to another one.
+        return; // the user aborted the dialog, so let's abort as well
+
+      newTag = file->tag(tag_id);
+
+      // TODO : check if we have a report that explicitively uses one of our tags
+      //        and issue an appropriate warning
+      try {
+        // now loop over all transactions and reassign tag
+        for (auto& transaction : translist) {
+          // create a copy of the splits list in the transaction
+          // loop over all splits
+          for (auto& split : transaction.splits()) {
+            QList<QString> tagIdList = split.tagIdList();
+            for (int i = 0; i < tagIdList.size(); ++i) {
+              // if the split is assigned to one of the selected tags, we need to modify it
+              if (d->tagInList(d->m_selectedTags, tagIdList[i])) {
+                tagIdList.removeAt(i);
+                if (tagIdList.indexOf(tag_id) == -1)
+                  tagIdList.append(tag_id);
+                i = -1; // restart from the first element
+              }
+            }
+            split.setTagIdList(tagIdList); // first modify tag list in current split
+            // then modify the split in our local copy of the transaction list
+            transaction.modifySplit(split); // this does not modify the list object 'splits'!
+          } // for - Splits
+          file->modifyTransaction(transaction);  // modify the transaction in the MyMoney object
+        } // for - Transactions
+
+        // now loop over all schedules and reassign tags
+        for (auto& schedule : used_schedules) {
+          // create copy of transaction in current schedule
+          auto trans = schedule.transaction();
+          // create copy of lists of splits
+          for (auto& split : trans.splits()) {
+            QList<QString> tagIdList = split.tagIdList();
+            for (auto i = 0; i < tagIdList.size(); ++i) {
+              if (d->tagInList(d->m_selectedTags, tagIdList[i])) {
+                tagIdList.removeAt(i);
+                if (tagIdList.indexOf(tag_id) == -1)
+                  tagIdList.append(tag_id);
+                i = -1; // restart from the first element
+              }
+            }
+            split.setTagIdList(tagIdList);
+            trans.modifySplit(split); // does not modify the list object 'splits'!
+          } // for - Splits
+          // store transaction in current schedule
+          schedule.setTransaction(trans);
+          file->modifySchedule(schedule);  // modify the schedule in the MyMoney engine
+        } // for - Schedules
+
+      } catch (const MyMoneyException &e) {
+        KMessageBox::detailedSorry(this, i18n("Unable to reassign tag of transaction/split"),
+                                   i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      }
+    } // if !translist.isEmpty()
+
+    // now loop over all selected tags and remove them
+    for (QList<MyMoneyTag>::iterator it = d->m_selectedTags.begin();
+         it != d->m_selectedTags.end(); ++it) {
+      file->removeTag(*it);
+    }
+
+    ft.commit();
+
+    // If we just deleted the tags, they sure don't exist anymore
+    slotSelectTags(QList<MyMoneyTag>());
+
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"),
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+  }
 }

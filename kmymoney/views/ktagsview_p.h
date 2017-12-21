@@ -50,6 +50,42 @@
 using namespace Icons;
 namespace Ui { class KTagsView; }
 
+// *** KTagListItem Implementation ***
+
+/**
+  * This class represents an item in the tags list view.
+  */
+class KTagListItem : public QListWidgetItem
+{
+public:
+  /**
+    * Constructor to be used to construct a tag entry object.
+    *
+    * @param parent pointer to the QListWidget object this entry should be
+    *               added to.
+    * @param tag    const reference to MyMoneyTag for which
+    *               the QListWidget entry is constructed
+    */
+  explicit KTagListItem(QListWidget *parent, const MyMoneyTag& tag) :
+    QListWidgetItem(parent, QListWidgetItem::UserType),
+    m_tag(tag)
+  {
+    setText(tag.name());
+    // allow in column rename
+    setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  }
+
+  ~KTagListItem() {}
+
+  MyMoneyTag tag() const
+  {
+    return m_tag;
+  }
+
+private:
+  MyMoneyTag  m_tag;
+};
+
 class KTagsViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KTagsView)
@@ -57,12 +93,22 @@ class KTagsViewPrivate : public KMyMoneyViewBasePrivate
 public:
   explicit KTagsViewPrivate(KTagsView *qq) :
     q_ptr(qq),
-    ui(new Ui::KTagsView)
+    ui(new Ui::KTagsView),
+    m_needLoad(true),
+    m_inSelection(false),
+    m_allowEditing(true),
+    m_tagFilterType(0)
   {
   }
 
   ~KTagsViewPrivate()
   {
+    if (!m_needLoad) {
+      // remember the splitter settings for startup
+      KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+      grp.writeEntry("KTagsViewSplitterSize", ui->m_splitter->saveState());
+      grp.sync();
+    }
     delete ui;
   }
 
@@ -108,12 +154,12 @@ public:
     q->connect(ui->m_tagsList, &QListWidget::currentItemChanged, q, static_cast<void (KTagsView::*)(QListWidgetItem *, QListWidgetItem *)>(&KTagsView::slotSelectTag));
     q->connect(ui->m_tagsList, &QListWidget::itemSelectionChanged, q, static_cast<void (KTagsView::*)()>(&KTagsView::slotSelectTag));
     q->connect(ui->m_tagsList, &QListWidget::itemDoubleClicked, q, &KTagsView::slotStartRename);
-    q->connect(ui->m_tagsList, &QListWidget::itemChanged, q, &KTagsView::slotRenameTag);
-    q->connect(ui->m_tagsList, &QWidget::customContextMenuRequested, q, &KTagsView::slotOpenContextMenu);
+    q->connect(ui->m_tagsList, &QListWidget::itemChanged, q, &KTagsView::slotRenameSingleTag);
+    q->connect(ui->m_tagsList, &QWidget::customContextMenuRequested, q, &KTagsView::slotShowTagsMenu);
 
-    q->connect(ui->m_newButton,    &QAbstractButton::clicked, q, &KTagsView::tagNewClicked);
-    q->connect(ui->m_renameButton, &QAbstractButton::clicked, q, &KTagsView::slotRenameButtonCliked);
-    q->connect(ui->m_deleteButton, &QAbstractButton::clicked, q, &KTagsView::tagDeleteClicked);
+    q->connect(ui->m_newButton,    &QAbstractButton::clicked, q, &KTagsView::slotNewTag);
+    q->connect(ui->m_renameButton, &QAbstractButton::clicked, q, &KTagsView::slotRenameTag);
+    q->connect(ui->m_deleteButton, &QAbstractButton::clicked, q, &KTagsView::slotDeleteTag);
 
     q->connect(ui->m_colorbutton, &KColorButton::changed,   q, &KTagsView::slotTagDataChanged);
     q->connect(ui->m_closed,      &QCheckBox::stateChanged, q, &KTagsView::slotTagDataChanged);
@@ -139,6 +185,29 @@ public:
     ui->m_renameButton->setEnabled(false);
     m_tag = MyMoneyTag(); // make sure we don't access an undefined tag
     q->clearItemData();
+  }
+
+  /**
+    * Check if a list contains a tag with a given id
+    *
+    * @param list const reference to value list
+    * @param id const reference to id
+    *
+    * @retval true object has been found
+    * @retval false object is not in list
+    */
+  bool tagInList(const QList<MyMoneyTag>& list, const QString& id) const
+  {
+    bool rc = false;
+    QList<MyMoneyTag>::const_iterator it_p = list.begin();
+    while (it_p != list.end()) {
+      if ((*it_p).id() == id) {
+        rc = true;
+        break;
+      }
+      ++it_p;
+    }
+    return rc;
   }
 
   KTagsView       *q_ptr;
@@ -176,6 +245,8 @@ public:
       * This holds the filter type
       */
   int m_tagFilterType;
+
+  QList<MyMoneyTag> m_selectedTags;
 };
 
 

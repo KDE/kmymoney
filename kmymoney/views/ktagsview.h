@@ -48,21 +48,20 @@ class KTagsView : public KMyMoneyViewBase
 
 public:
   explicit KTagsView(QWidget *parent = nullptr);
-  ~KTagsView();
+  ~KTagsView() override;
 
   void setDefaultFocus() override;
   void refresh() override;
-
-  void showEvent(QShowEvent* event) override;
+  void updateTagActions(const QList<MyMoneyTag>& tags);
 
 public Q_SLOTS:
   void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId, const QString& transactionId);
   void slotSelectTagAndTransaction(const QString& tagId);
   void slotStartRename(QListWidgetItem*);
-  void slotRenameButtonCliked();
   void slotHelp();
 
 protected:
+  void showEvent(QShowEvent* event) override;
   void loadTags();
   void selectedTags(QList<MyMoneyTag>& tagsList) const;
   void ensureTagVisible(const QString& id);
@@ -98,7 +97,7 @@ protected Q_SLOTS:
     * This slot is called when the name of a tag is changed inside
     * the tag list view and only a single tag is selected.
     */
-  void slotRenameTag(QListWidgetItem *ta);
+  void slotRenameSingleTag(QListWidgetItem *ta);
 
   /**
     * Updates the tag data in m_tag from the information in the
@@ -110,6 +109,13 @@ protected Q_SLOTS:
 
   void slotChangeFilter(int index);
 
+Q_SIGNALS:
+  void transactionSelected(const QString& accountId, const QString& transactionId);
+
+private:
+  Q_DISABLE_COPY(KTagsView)
+  Q_DECLARE_PRIVATE(KTagsView)
+
 private Q_SLOTS:
   /**
     * This slot receives the signal from the listview control that an item was right-clicked,
@@ -117,18 +123,13 @@ private Q_SLOTS:
     *
     * @param p position of the pointer device
     */
-  void slotOpenContextMenu(const QPoint& p);
+  void slotShowTagsMenu(const QPoint& p);
 
-Q_SIGNALS:
-  void transactionSelected(const QString& accountId, const QString& transactionId);
-  void openContextMenu(const MyMoneyObject& obj);
-  void selectObjects(const QList<MyMoneyTag>& tags);
-  void tagNewClicked();
-  void tagDeleteClicked();
+  void slotSelectTags(const QList<MyMoneyTag>& list);
 
-private:
-  Q_DISABLE_COPY(KTagsView)
-  Q_DECLARE_PRIVATE(KTagsView)
+  void slotNewTag();
+  void slotRenameTag();
+  void slotDeleteTag();
 };
 
 #endif

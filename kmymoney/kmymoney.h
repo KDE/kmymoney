@@ -522,17 +522,6 @@ protected:
   void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
 
   /**
-    * Check if a list contains a tag with a given id
-    *
-    * @param list const reference to value list
-    * @param id const reference to id
-    *
-    * @retval true object has been found
-    * @retval false object is not in list
-    */
-  bool tagInList(const QList<MyMoneyTag>& list, const QString& id) const;
-
-  /**
     * This method preloads the holidays for the duration of the default forecast period
     */
   void preloadHolidays();
@@ -695,12 +684,6 @@ public Q_SLOTS:
   void slotAccountTransactionReport();
 
   /**
-    * This slot opens the tag options menu at the current cursor
-    * position.
-    */
-  void slotShowTagContextMenu();
-
-  /**
     * This slot opens the currency options menu at the current cursor
     * position.
     */
@@ -740,15 +723,6 @@ public Q_SLOTS:
   void slotPayeeNew(const QString& newnameBase, QString& id);
 
   /**
-    */
-  void slotTagNew(const QString& newnameBase, QString& id);
-  void slotTagNew();
-
-  /**
-    */
-  void slotTagDelete();
-
-  /**
     * This slot fires up the KCalc application
     */
   void slotToolsStartKCalc();
@@ -756,8 +730,6 @@ public Q_SLOTS:
   void slotResetSelections();
 
   void slotSelectAccount(const MyMoneyObject& account);
-
-  void slotSelectTags(const QList<MyMoneyTag>& list);
 
   void slotSelectCurrency();
   void slotSelectCurrency(const MyMoneySecurity& currency);
@@ -830,14 +802,6 @@ Q_SIGNALS:
   void fileLoaded(const QUrl &url);
 
   /**
-    * This signal is emitted when a tag/list of tags has been selected by
-    * the GUI. If no tag is selected or the selection is removed,
-    * @p tags is identical to an empty QList. This signal is used
-    * by plugins to get information about changes.
-    */
-  void tagsSelected(const QList<MyMoneyTag>& tags);
-
-  /**
     * This signal is emitted when a transaction/list of transactions has been selected by
     * the GUI. If no transaction is selected or the selection is removed,
     * @p transactions is identical to an empty QList. This signal is used
@@ -889,9 +853,6 @@ Q_SIGNALS:
     * @a price is identical to MyMoneyPrice().
     */
   void priceSelected(const MyMoneyPrice& price);
-
-  void slotTagRename();
-  void tagCreated(const QString& id);
 
   void currencyRename();
   void currencyCreated(const QString& id);

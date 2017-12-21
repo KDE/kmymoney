@@ -2168,14 +2168,7 @@ void KMyMoneyView::connectView(const View view)
 
     case View::Tags:
       disconnect(m_tagsView, &KTagsView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(kmymoney,   &KMyMoneyApp::tagCreated,         m_tagsView, static_cast<void (KTagsView::*)(const QString&)>(&KTagsView::slotSelectTagAndTransaction));
-      connect(kmymoney,   &KMyMoneyApp::slotTagRename,      m_tagsView, &KTagsView::slotRenameButtonCliked);
-      connect(m_tagsView, &KTagsView::tagNewClicked,        kmymoney,   static_cast<void (KMyMoneyApp::*)()>(&KMyMoneyApp::slotTagNew));
-      connect(m_tagsView, &KTagsView::tagDeleteClicked,     kmymoney,   static_cast<void (KMyMoneyApp::*)()>(&KMyMoneyApp::slotTagDelete));
-      connect(m_tagsView, &KTagsView::openContextMenu,      kmymoney,   &KMyMoneyApp::slotShowTagContextMenu);
-      connect(m_tagsView, &KTagsView::selectObjects,        kmymoney,   &KMyMoneyApp::slotSelectTags);
-      connect(m_tagsView, &KTagsView::transactionSelected,  m_ledgerView,       &KGlobalLedgerView::slotLedgerSelected);
-      connect(m_tagsView, &KMyMoneyViewBase::aboutToShow,   this,       &KMyMoneyView::aboutToChangeView);
+      connect(m_tagsView, &KTagsView::transactionSelected,  m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
       break;
 
     case View::Payees:
