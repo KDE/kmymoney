@@ -138,6 +138,7 @@ public:
       grp.writeEntry("KPayeesViewSplitterSize", ui->m_splitter->saveState());
       grp.sync();
     }
+    delete ui;
   }
 
   void init()

@@ -292,7 +292,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   auto aC = kmymoney->actionCollection();
   auto pageCount = 0;
   foreach (const pageInfo info, pageInfos) {
-    auto a = new QAction(0);
+    auto a = new QAction(this);
     // KActionCollection::addAction by name sets object name anyways,
     // so, as better alternative, set it here right from the start
     a->setObjectName(QLatin1String("ShowPage") + QString::number(pageCount++));
@@ -315,6 +315,9 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 KMyMoneyView::~KMyMoneyView()
 {
   KMyMoneyGlobalSettings::setLastViewSelected(m_lastViewSelected);
+#ifdef KF5Activities_FOUND
+delete m_activityResourceInstance;
+#endif
   removeStorage();
 }
 

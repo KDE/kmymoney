@@ -82,7 +82,7 @@ public:
   MyMoneyPayee & operator=(MyMoneyPayee other);
   friend void swap(MyMoneyPayee& first, MyMoneyPayee& second);
 
-  ~MyMoneyPayee();
+  ~MyMoneyPayee() override;
 
   QString name() const;
   void setName(const QString& val);

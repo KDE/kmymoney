@@ -649,6 +649,7 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
             // We want a file
             fileExists = !statjob->statResult().isDir();
         }
+        statjob->kill();
     }
     return fileExists;
 }

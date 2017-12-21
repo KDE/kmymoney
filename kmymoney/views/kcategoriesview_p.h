@@ -57,6 +57,7 @@ public:
 
   ~KCategoriesViewPrivate()
   {
+    delete ui;
   }
 
   void init()

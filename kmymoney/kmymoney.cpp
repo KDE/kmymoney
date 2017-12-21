@@ -758,7 +758,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     };
 
     for (const auto& info : actionInfos) {
-      auto a = new QAction(nullptr);
+      auto a = new QAction(this);
       // KActionCollection::addAction by name sets object name anyways,
       // so, as better alternative, set it here right from the start
       a->setObjectName(info.name);

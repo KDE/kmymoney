@@ -99,6 +99,7 @@ public:
   {
     if(!m_needLoad)
       writeConfig();
+    delete ui;
   }
 
   void init()

@@ -66,6 +66,7 @@ public:
 
   ~KAccountsViewPrivate()
   {
+    delete ui;
   }
 
   void init()

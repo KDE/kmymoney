@@ -29,7 +29,9 @@
 class KMyMoneyViewBasePrivate
 {
 public:
-    bool m_needsRefresh;
+  virtual ~KMyMoneyViewBasePrivate(){}
+
+  bool m_needsRefresh;
 };
 
 #endif

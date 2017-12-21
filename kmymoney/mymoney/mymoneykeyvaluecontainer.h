@@ -69,7 +69,7 @@ public:
   MyMoneyKeyValueContainer(MyMoneyKeyValueContainer && other);
   MyMoneyKeyValueContainer & operator=(MyMoneyKeyValueContainer other);
   friend void swap(MyMoneyKeyValueContainer& first, MyMoneyKeyValueContainer& second);
-  ~MyMoneyKeyValueContainer();
+  virtual ~MyMoneyKeyValueContainer();
 
   /**
     * This method can be used to retrieve the value for a specific @p key.

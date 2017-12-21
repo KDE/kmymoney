@@ -101,7 +101,7 @@ public:
   {
   }
 
-  ~KTagsViewPrivate()
+  ~KTagsViewPrivate() override
   {
     if (!m_needLoad) {
       // remember the splitter settings for startup

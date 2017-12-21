@@ -71,6 +71,7 @@ PluginLoader::~PluginLoader()
     pluginDisabled(pluginData);
   }
 
+  delete m_pluginSelector;
   s_instance = nullptr;
 }
 

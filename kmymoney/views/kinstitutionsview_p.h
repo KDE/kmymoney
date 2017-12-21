@@ -50,6 +50,7 @@ public:
 
   ~KInstitutionsViewPrivate()
   {
+    delete ui;
   }
 
   void init()
