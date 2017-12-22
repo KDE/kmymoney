@@ -252,8 +252,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
       // make sure that the row gets resized according to the requirements of the editor
       // and is completely visible
       resizeRowToContents(index.row());
-      QMetaObject::invokeMethod(this, "scrollTo", Q_ARG(QModelIndex, index), Q_ARG(ScrollHint, EnsureVisible));
-
+      QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
     } else {
       rc = false;
     }
@@ -272,7 +271,7 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
 
   emit aboutToFinishEdit();
 
-  ensureCurrentItemIsVisible();
+  QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
 }
 
 void LedgerView::mousePressEvent(QMouseEvent* event)
@@ -426,7 +425,7 @@ void LedgerView::scrollTo(const QModelIndex& index, QAbstractItemView::ScrollHin
 
 void LedgerView::ensureCurrentItemIsVisible()
 {
-  QMetaObject::invokeMethod(this, "scrollTo", Q_ARG(QModelIndex, currentIndex()), Q_ARG(ScrollHint, EnsureVisible));
+  scrollTo(currentIndex(), EnsureVisible);
 }
 
 void LedgerView::setShowEntryForNewTransaction(bool show)

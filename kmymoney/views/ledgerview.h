@@ -42,11 +42,6 @@ public:
   virtual QString accountId() const;
 
   /**
-   * This method scrolls the ledger so that the current item is visible
-   */
-  void ensureCurrentItemIsVisible();
-
-  /**
    * This method is used to modify the visibilty of the
    * empty entry at the end of the ledger. The default
    * for the parameter @a show is @c true.
@@ -60,6 +55,11 @@ public:
   bool showValuesInverted() const;
 
 public Q_SLOTS:
+  /**
+   * This method scrolls the ledger so that the current item is visible
+   */
+  void ensureCurrentItemIsVisible();
+
   /**
    * Overridden for internal reasons. No change in base functionality
    */
