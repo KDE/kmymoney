@@ -451,7 +451,7 @@ void KCurrencyEditDlg::slotShowCurrencyMenu(const QPoint& p)
 
     QList<QAction*> LUTActions;
     for (const auto& info : actionInfos) {
-      auto a = new QAction(Icons::get(info.icon), info.text); // WARNING: no empty Icon::Empty here
+      auto a = new QAction(Icons::get(info.icon), info.text, nullptr); // WARNING: no empty Icon::Empty here
       a->setEnabled(info.enabled);
       connect(a, &QAction::triggered, this, info.callback);
       LUTActions.append(a);
