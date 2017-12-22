@@ -65,11 +65,6 @@ public Q_SLOTS:
    */
   void edit(const QModelIndex& index) { QTableView::edit(index); }
 
-  /**
-   * Reimplemented for internal reasons
-   */
-  void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible);
-
 protected:
   bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event);
   virtual void mousePressEvent(QMouseEvent* event);

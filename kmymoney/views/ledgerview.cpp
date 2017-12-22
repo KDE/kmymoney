@@ -418,11 +418,6 @@ void LedgerView::adjustDetailColumn(int newViewportWidth)
   d->adjustingColumn = false;
 }
 
-void LedgerView::scrollTo(const QModelIndex& index, QAbstractItemView::ScrollHint hint)
-{
-  QTableView::scrollTo(index, hint);
-}
-
 void LedgerView::ensureCurrentItemIsVisible()
 {
   scrollTo(currentIndex(), EnsureVisible);
