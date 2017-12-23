@@ -4,6 +4,7 @@
     begin                : Mon Apr 14 2008
     copyright            : (C) 2008 Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,8 +27,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KMyMoneyApp;
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -45,13 +44,10 @@ class KMMImportInterface : public ImportInterface
   Q_OBJECT
 
 public:
-  KMMImportInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
+  KMMImportInterface(QObject* parent, const char* name = 0);
   ~KMMImportInterface() {}
 
   QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const;
-
-private:
-  KMyMoneyApp*    m_app;
 };
 
 } // namespace

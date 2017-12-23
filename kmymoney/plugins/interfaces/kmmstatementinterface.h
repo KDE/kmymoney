@@ -4,6 +4,7 @@
     begin                : Wed Jan 5 2005
     copyright            : (C) 2005 Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KMyMoneyApp;
 class MyMoneyAccount;
 class MyMoneyKeyValueContainer;
 
@@ -45,7 +45,7 @@ class KMMStatementInterface : public StatementInterface
   Q_OBJECT
 
 public:
-  KMMStatementInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
+  KMMStatementInterface(QObject* parent, const char* name = 0);
   ~KMMStatementInterface() {}
 
   /**
@@ -56,7 +56,8 @@ public:
   /**
    * This method returns the account for a given @a key - @a value pair.
    * If the account is not found in the list of accounts, MyMoneyAccount()
-   * is returned.
+   * is returned. The @a key - @a value pair can be in the account's kvp
+   * container or the account's online settings kvp container.
    */
   MyMoneyAccount account(const QString& key, const QString& value) const;
 
@@ -65,9 +66,6 @@ public:
    * with the account @a acc.
    */
   void setAccountOnlineParameters(const MyMoneyAccount&acc, const MyMoneyKeyValueContainer& kvps) const;
-
-private:
-  KMyMoneyApp*    m_app;
 };
 
 } // namespace

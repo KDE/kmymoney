@@ -780,7 +780,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase},
       {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase},
       {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile},
-      {Action::FileImportStatement,           &KMyMoneyApp::slotStatementImport},
       {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates},
       {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates},
       {Action::FilePersonalData,              &KMyMoneyApp::slotFileViewPersonal},
@@ -1262,42 +1261,6 @@ void KMyMoneyApp::slotFileNew()
 
     emit fileLoaded(d->m_fileName);
   }
-}
-
-QUrl KMyMoneyApp::selectFile(const QString& title, const QString& _path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget)
-{
-  QString path(_path);
-
-  // if the path is not specified open the file dialog in the last used directory
-  // 'kmymoney' is the keyword that identifies the last used directory in KFileDialog
-  if (path.isEmpty()) {
-    path = KRecentDirs::dir(":kmymoney-import");
-  }
-
-  QPointer<QFileDialog> dialog = new QFileDialog(this, title, path, mask);
-  dialog->setFileMode(mode);
-
-  QUrl url;
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    QList<QUrl> selectedUrls = dialog->selectedUrls();
-    if (!selectedUrls.isEmpty()) {
-      url = selectedUrls.first();
-      if (_path.isEmpty()) {
-        KRecentDirs::add(":kmymoney-import", url.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
-      }
-    }
-  }
-
-  // in case we have an additional widget, we remove it from the
-  // dialog, so that the caller can still access it. Therefore, it is
-  // the callers responsibility to delete the object
-
-  if (widget)
-    widget->setParent(0);
-
-  delete dialog;
-
-  return url;
 }
 
 // General open
@@ -1975,124 +1938,6 @@ void KMyMoneyApp::slotSaveAccountTemplates()
       delete dlg;
     }
   }
-}
-
-//
-// KMyMoneyApp::slotStatementImport() is for testing only.  The MyMoneyStatement
-// is not intended to be exposed to users in XML form.
-//
-
-void KMyMoneyApp::slotStatementImport()
-{
-  bool result = false;
-  KMSTATUS(i18n("Importing an XML Statement."));
-
-  QList<QUrl> files{QFileDialog::getOpenFileUrls(this, QString(), QUrl(),
-      i18n("XML files (*.xml);;All files (*)"))};
-
-  if (!files.isEmpty()) {
-    d->m_collectingStatements = (files.count() > 1);
-
-    foreach (const QUrl &url, files) {
-      qDebug("Processing '%s'", qPrintable(url.path()));
-      result |= slotStatementImport(url.path());
-    }
-    /*    QFile f( dialog->selectedURL().path() );
-        f.open( QIODevice::ReadOnly );
-        QString error = "Unable to parse file";
-        QDomDocument* doc = new QDomDocument;
-        if(doc->setContent(&f, FALSE))
-        {
-          if ( doc->doctype().name() == "KMYMONEY-STATEMENT" )
-          {
-            QDomElement rootElement = doc->documentElement();
-            if(!rootElement.isNull())
-            {
-              QDomNode child = rootElement.firstChild();
-              if(!child.isNull() && child.isElement())
-              {
-                MyMoneyStatement s;
-                if ( s.read(child.toElement()) )
-                  result = slotStatementImport(s);
-                else
-                  error = "File does not contain any statements";
-              }
-            }
-          }
-          else
-            error = "File is not a KMyMoney Statement";
-        }
-        delete doc;
-
-        if ( !result )
-        {
-          QMessageBox::critical( this, i18n("Critical Error"), i18n("Unable to read file %1: %2").arg( dialog->selectedURL().path()).arg(error), QMessageBox::Ok, 0 );
-
-        }*/
-  }
-
-  if (!result) {
-    // re-enable all standard widgets
-    setEnabled(true);
-  }
-}
-
-bool KMyMoneyApp::slotStatementImport(const QString& url)
-{
-  bool result = false;
-  MyMoneyStatement s;
-  if (MyMoneyStatement::readXMLFile(s, url))
-    result = slotStatementImport(s);
-  else
-    KMessageBox::error(this, i18n("Error importing %1: This file is not a valid KMM statement file.", url), i18n("Invalid Statement"));
-
-  return result;
-}
-
-bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s, bool silent)
-{
-  bool result = false;
-
-  // keep a copy of the statement
-  if (KMyMoneySettings::logImportedStatements()) {
-    QString logFile = QString("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath()).arg(d->m_statementXMLindex++);
-    MyMoneyStatement::writeXMLFile(s, logFile);
- }
-
-  // we use an object on the heap here, so that we can check the presence
-  // of it during slotUpdateActions() by looking at the pointer.
-  d->m_smtReader = new MyMoneyStatementReader;
-  d->m_smtReader->setAutoCreatePayee(true);
-  d->m_smtReader->setProgressCallback(&progressCallback);
-  connect(d->m_smtReader, &MyMoneyStatementReader::createAccount, this, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&)>(&KMyMoneyApp::slotAccountNew));
-  connect(d->m_smtReader, &MyMoneyStatementReader::createCategory, this, static_cast<void (KMyMoneyApp::*)(MyMoneyAccount&, const MyMoneyAccount&)>(&KMyMoneyApp::slotCategoryNew));
-
-  // disable all standard widgets during the import
-  setEnabled(false);
-
-  QStringList messages;
-  result = d->m_smtReader->import(s, messages);
-
-  bool transactionAdded = d->m_smtReader->anyTransactionAdded();
-
-  // get rid of the statement reader and tell everyone else
-  // about the destruction by setting the pointer to zero
-  delete d->m_smtReader;
-  d->m_smtReader = 0;
-
-  slotStatusProgressBar(-1, -1);
-  ready();
-
-  // re-enable all standard widgets
-  setEnabled(true);
-
-  if (!d->m_collectingStatements && !silent)
-    KMessageBox::informationList(this, i18n("The statement has been processed with the following results:"), messages, i18n("Statement stats"));
-  else if (transactionAdded)
-    d->m_statementResults += messages;
-
-  slotUpdateActions();//  Re-enable menu items after import via plugin.
-  return result;
 }
 
 bool KMyMoneyApp::okToWriteFile(const QUrl &url)
@@ -2809,7 +2654,7 @@ void KMyMoneyApp::slotUpdateActions()
   const auto file = MyMoneyFile::instance();
   const bool fileOpen = d->m_myMoneyView->fileOpen();
   const bool modified = file->dirty();
-  const bool importRunning = (d->m_smtReader != 0);
+//  const bool importRunning = (d->m_smtReader != 0);
   auto aC = actionCollection();
 
   // *************
@@ -2836,8 +2681,8 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::FilePersonalData, fileOpen)},
       {qMakePair(Action::FileBackup, (fileOpen && !d->m_myMoneyView->isDatabase()))},
       {qMakePair(Action::FileInformation, fileOpen)},
-      {qMakePair(Action::FileImportTemplate, fileOpen && !importRunning)},
-      {qMakePair(Action::FileExportTemplate, fileOpen && !importRunning)},
+      {qMakePair(Action::FileImportTemplate, fileOpen/* && !importRunning*/)},
+      {qMakePair(Action::FileExportTemplate, fileOpen/* && !importRunning*/)},
 #ifdef KMM_DEBUG
       {qMakePair(Action::FileDump, fileOpen)},
 #endif
@@ -3277,7 +3122,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         // to users.
         if (it_plugin == d->m_importerPlugins.constEnd())
           if (MyMoneyStatement::isStatementFile(url))
-            slotStatementImport(url);
+            MyMoneyStatementReader::importStatement(url, false, &progressCallback);
 
       }
       // remove the current processed item from the queue
@@ -3295,9 +3140,9 @@ void KMyMoneyApp::slotEnableMessages()
 void KMyMoneyApp::createInterfaces()
 {
   // Sets up the plugin interface
-  KMyMoneyPlugin::pluginInterfaces().importInterface = new KMyMoneyPlugin::KMMImportInterface(this, this);
-  KMyMoneyPlugin::pluginInterfaces().statementInterface = new KMyMoneyPlugin::KMMStatementInterface(this, this);
-  KMyMoneyPlugin::pluginInterfaces().viewInterface = new KMyMoneyPlugin::KMMViewInterface(this, d->m_myMoneyView, this);
+  KMyMoneyPlugin::pluginInterfaces().importInterface = new KMyMoneyPlugin::KMMImportInterface(this);
+  KMyMoneyPlugin::pluginInterfaces().statementInterface = new KMyMoneyPlugin::KMMStatementInterface(this);
+  KMyMoneyPlugin::pluginInterfaces().viewInterface = new KMyMoneyPlugin::KMMViewInterface(d->m_myMoneyView, this);
 
   // setup the calendar interface for schedules
   MyMoneySchedule::setProcessingCalendar(this);
@@ -3456,46 +3301,6 @@ void KMyMoneyApp::slotDateChanged()
   // signal is sent (this way we also avoid setting the timer to 0)
   QTimer::singleShot((dt.secsTo(nextDay) + 1)*1000, this, SLOT(slotDateChanged()));
   d->m_myMoneyView->slotRefreshViews();
-}
-
-MyMoneyAccount KMyMoneyApp::account(const QString& key, const QString& value) const
-{
-  QList<MyMoneyAccount> list;
-  QList<MyMoneyAccount>::const_iterator it_a;
-  MyMoneyFile::instance()->accountList(list);
-  QString accId;
-  for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
-    // search in the account's kvp container
-    const QString& accountKvpValue = (*it_a).value(key);
-    // search in the account's online settings kvp container
-    const QString& onlineSettingsKvpValue = (*it_a).onlineBankingSettings().value(key);
-    if (accountKvpValue.contains(value) || onlineSettingsKvpValue.contains(value)) {
-      if(accId.isEmpty()) {
-        accId = (*it_a).id();
-      }
-    }
-    if (accountKvpValue == value || onlineSettingsKvpValue == value) {
-      accId = (*it_a).id();
-      break;
-    }
-  }
-
-  // return the account found or an empty element
-  return MyMoneyFile::instance()->account(accId);
-}
-
-void KMyMoneyApp::setAccountOnlineParameters(const MyMoneyAccount& _acc, const MyMoneyKeyValueContainer& kvps)
-{
-  MyMoneyFileTransaction ft;
-  try {
-    auto acc = MyMoneyFile::instance()->account(_acc.id());
-    acc.setOnlineBankingSettings(kvps);
-    MyMoneyFile::instance()->modifyAccount(acc);
-    ft.commit();
-
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", _acc.name()), e.what());
-  }
 }
 
 void KMyMoneyApp::slotOnlineTransferRequested(const MyMoneyAccount& acc)

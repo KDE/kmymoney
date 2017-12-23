@@ -47,6 +47,7 @@
 #include "mymoneyfile.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
+#include "knewaccountdlg.h"
 #include "models.h"
 #include "accountsmodel.h"
 
@@ -184,9 +185,9 @@ void KAccountSelectDlg::slotCreateAccount()
     }
   } else {
     if (d->m_account.accountType() == eMyMoney::Account::Type::Expense)
-      emit createCategory(d->m_account, MyMoneyFile::instance()->expense());
+      KNewAccountDlg::newCategory(d->m_account, MyMoneyFile::instance()->expense());
     else
-      emit createCategory(d->m_account, MyMoneyFile::instance()->income());
+      KNewAccountDlg::newCategory(d->m_account, MyMoneyFile::instance()->income());
     if (!d->m_account.id().isEmpty()) {
       accept();
     }

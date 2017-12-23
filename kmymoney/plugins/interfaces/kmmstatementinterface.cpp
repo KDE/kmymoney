@@ -4,6 +4,7 @@
     begin                : Wed Jan 5 2005
     copyright            : (C) 2005 Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,28 +29,63 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
+#include "mymoneystatementreader.h"
 
-KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(KMyMoneyApp* app, QObject* parent, const char* name) :
-    StatementInterface(parent, name),
-    m_app(app)
+KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(QObject* parent, const char* name) :
+    StatementInterface(parent, name)
 {
 }
 
 bool KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s, bool silent)
 {
   qDebug("KMyMoneyPlugin::KMMStatementInterface::import start");
-  return m_app->slotStatementImport(s, silent);
+  if (MyMoneyStatementReader::importStatement(s, silent).isEmpty())
+    return false;
+  else
+    return true;
 }
 
 MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const
 {
-  return m_app->account(key, value);
+  QList<MyMoneyAccount> list;
+  QList<MyMoneyAccount>::const_iterator it_a;
+  MyMoneyFile::instance()->accountList(list);
+  QString accId;
+  for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+    // search in the account's kvp container
+    const auto& accountKvpValue = (*it_a).value(key);
+    // search in the account's online settings kvp container
+    const auto& onlineSettingsKvpValue = (*it_a).onlineBankingSettings().value(key);
+    if (accountKvpValue.contains(value) || onlineSettingsKvpValue.contains(value)) {
+      if(accId.isEmpty()) {
+        accId = (*it_a).id();
+      }
+    }
+    if (accountKvpValue == value || onlineSettingsKvpValue == value) {
+      accId = (*it_a).id();
+      break;
+    }
+  }
+
+  // return the account found or an empty element
+  return MyMoneyFile::instance()->account(accId);
 }
 
 void KMyMoneyPlugin::KMMStatementInterface::setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const
 {
-  m_app->setAccountOnlineParameters(acc, kvps);
+  MyMoneyFileTransaction ft;
+  try {
+    auto oAcc = MyMoneyFile::instance()->account(acc.id());
+    oAcc.setOnlineBankingSettings(kvps);
+    MyMoneyFile::instance()->modifyAccount(oAcc);
+    ft.commit();
+
+  } catch (const MyMoneyException) {
+    qDebug("Unable to setup online parameters for account '%s'", qPrintable(acc.name()));
+//    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", acc.name()), e.what());
+  }
 }

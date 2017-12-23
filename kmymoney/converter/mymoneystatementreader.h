@@ -86,6 +86,14 @@ public:
    */
   bool anyTransactionAdded() const;
 
+  /**
+    * Imports a KMM statement into the engine, triggering the appropriate
+    * UI to handle account matching, payee creation, and someday
+    * payee and transaction matching.
+    */
+  static QStringList importStatement(const QString& url, bool silent = false, void(*callback)(int, int, const QString&) = nullptr);
+  static QStringList importStatement(const MyMoneyStatement& s, bool silent = false, void(*callback)(int, int, const QString&) = nullptr);
+
 private:
   /**
     * This method is used to update the progress information. It
@@ -122,10 +130,6 @@ private:
     */
   bool selectOrCreateAccount(const SelectCreateMode mode, MyMoneyAccount& account);
 
-Q_SIGNALS:
-  void createAccount(MyMoneyAccount& account);
-  void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
-
 private:
   /// \internal d-pointer class.
   class Private;
@@ -159,6 +163,9 @@ private:
    * @return true, if user confirmed to enter the schedule to match it with imported transaction; false otherwise
    */
   bool askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit, const MyMoneyTransaction & importedTransaction) const;
+
+private Q_SLOTS:
+  void slotNewAccount(const MyMoneyAccount& acc);
 };
 
 #endif

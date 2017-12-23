@@ -4,6 +4,7 @@
     begin                : Wed Jan 5 2005
     copyright            : (C) 2005 Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KMyMoneyApp;
 class KMyMoneyView;
 
 // ----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class KMMViewInterface : public ViewInterface
   Q_OBJECT
 
 public:
-  KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name = 0);
+  KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
   ~KMMViewInterface() {}
 
   /**

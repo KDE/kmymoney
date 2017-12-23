@@ -585,6 +585,14 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
+
+  /**
+    * This signal is emitted when a new account has been selected by
+    * the GUI. If no account is selected or the selection is removed,
+    * @a account is identical to MyMoneyAccount(). This signal is used
+    * by plugins to get information about changes.
+    */
+  void accountSelected(const MyMoneyAccount& account);
 };
 
 #endif

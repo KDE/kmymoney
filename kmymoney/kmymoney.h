@@ -55,7 +55,6 @@ class MyMoneyAccount;
 class MyMoneySecurity;
 class MyMoneyPayee;
 class MyMoneyPrice;
-class MyMoneyStatement;
 class MyMoneyTag;
 class MyMoneySplit;
 class MyMoneyTransaction;
@@ -160,13 +159,6 @@ protected Q_SLOTS:
     * Called when the user asks for the personal information.
     */
   void slotFileViewPersonal();
-
-  /**
-    * Opens a file selector dialog for the user to choose an existing KMM
-    * statement file from the file system to be imported.  This is for testing
-    * only.  KMM statement files are not designed to be exposed to the user.
-    */
-  void slotStatementImport();
 
   void slotLoadAccountTemplates();
   void slotSaveAccountTemplates();
@@ -393,22 +385,6 @@ public:
     */
   void showContextMenu(const QString& containerName);
 
-  /**
-   * This method returns the account for a given @a key - @a value pair.
-   * If the account is not found in the list of accounts, MyMoneyAccount()
-   * is returned. The @a key - @a value pair can be in the account's kvp
-   * container or the account's online settings kvp container.
-   */
-  MyMoneyAccount account(const QString& key, const QString& value) const;
-
-  /**
-   * This method set the online parameters stored in @a kvps with the
-   * account referenced by @a acc.
-   */
-  void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps);
-
-  QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode, QWidget *widget);
-
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
   QString filename() const;
@@ -628,19 +604,6 @@ public Q_SLOTS:
     * Called to update stock and currency prices from the user menu
     */
   void slotEquityPriceUpdate();
-
-  /**
-    * Imports a KMM statement into the engine, triggering the appropriate
-    * UI to handle account matching, payee creation, and someday
-    * payee and transaction matching.
-    */
-  bool slotStatementImport(const MyMoneyStatement& s, bool silent = false);
-
-  /**
-    * Essentially similar to the above slot, except this will load the file
-    * from disk first, given the URL.
-    */
-  bool slotStatementImport(const QString& url);
 
   void slotOnlineTransferRequested(const MyMoneyAccount& acc);
   void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);  

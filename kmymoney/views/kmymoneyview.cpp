@@ -2244,6 +2244,12 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
     m_categoriesView->updateActions(obj);
     m_accountsView->updateActions(obj);
     m_ledgerView->updateActions(obj);
+
+    // for plugin only
+    const auto& acc = static_cast<const MyMoneyAccount&>(obj);
+    if (!acc.isIncomeExpense() &&
+        !MyMoneyFile::instance()->isStandardAccount(acc.id()))
+      emit accountSelected(acc);
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
     m_institutionsView->updateActions(obj);
   } else if (typeid(obj) == typeid(MyMoneySchedule)) {

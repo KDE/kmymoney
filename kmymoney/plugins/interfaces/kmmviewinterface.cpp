@@ -4,6 +4,7 @@
     begin                : Wed Jan 5 2005
     copyright            : (C) 2005 Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,15 +29,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney.h"
 #include "kmymoneyview.h"
 #include "selectedtransactions.h"
 
-KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name) :
+KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name) :
     ViewInterface(parent, name),
     m_view(view)
 {
-  connect(app, &KMyMoneyApp::accountSelected, this, &ViewInterface::accountSelected);
+  connect(m_view, &KMyMoneyView::accountSelected, this, &ViewInterface::accountSelected);
   connect(m_view, &KMyMoneyView::transactionsSelected, this, &ViewInterface::transactionsSelected);
   connect(m_view, &KMyMoneyView::accountReconciled,
           this, &ViewInterface::accountReconciled);

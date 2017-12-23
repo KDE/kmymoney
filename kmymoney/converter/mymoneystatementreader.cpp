@@ -59,7 +59,9 @@
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
 #include "kmymoneyedit.h"
+#include "kmymoneysettings.h"
 #include "kaccountselectdlg.h"
+#include "knewaccountwizard.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
 #include "kmymoneyaccountcombo.h"
@@ -110,6 +112,7 @@ public:
   QMap<QString, MyMoneySecurity> securitiesBySymbol;
   QMap<QString, MyMoneySecurity> securitiesByName;
   bool                           m_skipCategoryMatching;
+  void (*m_progressCallback)(int, int, const QString&);
 private:
   void scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName);
   /**
@@ -354,6 +357,62 @@ void MyMoneyStatementReader::setAutoCreatePayee(bool create)
 void MyMoneyStatementReader::setAskPayeeCategory(bool ask)
 {
   m_askPayeeCategory = ask;
+}
+
+QStringList MyMoneyStatementReader::importStatement(const QString& url, bool silent, void(*callback)(int, int, const QString&))
+{
+  QStringList summary;
+  MyMoneyStatement s;
+  if (MyMoneyStatement::readXMLFile(s, url))
+    summary = MyMoneyStatementReader::importStatement(s, silent, callback);
+  else
+    KMessageBox::error(nullptr, i18n("Error importing %1: This file is not a valid KMM statement file.", url), i18n("Invalid Statement"));
+
+  return summary;
+}
+
+QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, bool silent, void(*callback)(int, int, const QString&))
+{
+  auto result = false;
+
+  // keep a copy of the statement
+  if (KMyMoneySettings::logImportedStatements()) {
+    auto logFile = QString::fromLatin1("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath(),
+                                                                      QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd hh-mm-ss")));
+    MyMoneyStatement::writeXMLFile(s, logFile);
+ }
+
+  // we use an object on the heap here, so that we can check the presence
+  // of it during slotUpdateActions() by looking at the pointer.
+  auto reader = new MyMoneyStatementReader;
+  reader->setAutoCreatePayee(true);
+  if (callback)
+    reader->setProgressCallback(callback);
+
+  // disable all standard widgets during the import
+//  setEnabled(false);
+
+  QStringList messages;
+  result = reader->import(s, messages);
+
+  auto transactionAdded = reader->anyTransactionAdded();
+
+  // get rid of the statement reader and tell everyone else
+  // about the destruction by setting the pointer to zero
+  delete reader;
+
+  if (callback)
+    callback(-1, -1, QString());
+
+  // re-enable all standard widgets
+//  setEnabled(true);
+
+  if (!silent && transactionAdded)
+    KMessageBox::informationList(nullptr,
+                                 i18n("The statement has been processed with the following results:"), messages, i18n("Statement stats"));
+  if (!result)
+    messages.clear();
+  return messages;
 }
 
 bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& messages)
@@ -1321,8 +1380,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   }
 
   QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", 0);
-  connect(accountSelect, &KAccountSelectDlg::createAccount, this, &MyMoneyStatementReader::createAccount);
-  connect(accountSelect, &KAccountSelectDlg::createCategory, this, &MyMoneyStatementReader::createCategory);
+  connect(accountSelect, &KAccountSelectDlg::createAccount, this, &MyMoneyStatementReader::slotNewAccount);
 
   accountSelect->setHeader(i18n("Import transactions"));
   accountSelect->setDescription(msg);
@@ -1509,4 +1567,10 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
   const int userAnswer = KMessageBox::questionYesNo(0, QLatin1String("<html>") + questionMsg + QLatin1String("</html>"), i18n("Schedule found"));
 
   return (userAnswer == KMessageBox::Yes);
+}
+
+void MyMoneyStatementReader::slotNewAccount(const MyMoneyAccount& acc)
+{
+  auto newAcc = acc;
+  NewAccountWizard::Wizard::newAccount(newAcc);
 }
