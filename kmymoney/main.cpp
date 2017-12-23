@@ -308,7 +308,7 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
 
   } else {
     // the instantQuit flag is set, so we force the app to quit right away
-    QMetaObject::invokeMethod(kmymoney, "slotFileQuit");
+    kmymoney->slotFileQuit();
   }
 
   kmymoney->updateCaption();
