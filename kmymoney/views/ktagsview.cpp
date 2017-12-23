@@ -44,7 +44,6 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyschedule.h"
-#include "mymoneytransaction.h"
 #include "transaction.h"
 #include "menuenums.h"
 
@@ -409,7 +408,6 @@ void KTagsView::showEvent(QShowEvent* event)
 
 void KTagsView::updateTagActions(const QList<MyMoneyTag>& tags)
 {
-  Q_D(KTagsView);
   pActions[eMenu::Action::NewTag]->setEnabled(true);
   const auto tagsCount = tags.count();
   auto b = tagsCount == 1 ? true : false;

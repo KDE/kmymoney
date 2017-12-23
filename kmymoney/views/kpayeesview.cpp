@@ -547,7 +547,6 @@ void KPayeesView::showEvent(QShowEvent* event)
 
 void KPayeesView::updatePayeeActions(const QList<MyMoneyPayee> &payees)
 {
-  Q_D(KPayeesView);
   pActions[eMenu::Action::NewPayee]->setEnabled(true);
   const auto payeesCount = payees.count();
   auto b = payeesCount == 1 ? true : false;

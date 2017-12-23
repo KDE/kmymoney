@@ -236,7 +236,6 @@ void KScheduledView::customContextMenuRequested(const QPoint)
 
 void KScheduledView::slotListItemExecuted(QTreeWidgetItem* item, int)
 {
-  Q_D(KScheduledView);
   if (!item)
     return;
 
