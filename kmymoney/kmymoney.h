@@ -625,12 +625,6 @@ public Q_SLOTS:
   void slotReparentAccount(const MyMoneyAccount& src, const MyMoneyInstitution& dest);
 
   /**
-    * This slot creates a transaction report for the selected account
-    * and opens it in the reports view.
-    */
-  void slotAccountTransactionReport();
-
-  /**
    * Open onlineJob options menu at current cursor position.
    */
   void slotShowOnlineJobContextMenu();

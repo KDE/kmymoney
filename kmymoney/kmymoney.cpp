@@ -801,7 +801,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *****************
       // The accounts menu
       // *****************
-      {Action::ReportAccountTransactions,     &KMyMoneyApp::slotAccountTransactionReport},
       {Action::MapOnlineAccount,              &KMyMoneyApp::slotAccountMapOnline},
       {Action::UnmapOnlineAccount,            &KMyMoneyApp::slotAccountUnmapOnline},
       {Action::UpdateAccount,                 &KMyMoneyApp::slotAccountUpdateOnline},
@@ -2508,26 +2507,6 @@ void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyA
   }
 }
 
-void KMyMoneyApp::slotAccountTransactionReport()
-{
-  // Generate a transaction report that contains transactions for only the
-  // currently selected account.
-  if (!d->m_selectedAccount.id().isEmpty()) {
-    MyMoneyReport report(
-      MyMoneyReport::eAccount,
-      MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
-      eMyMoney::TransactionFilter::Date::YearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("%1 YTD Account Transactions", d->m_selectedAccount.name()),
-      i18n("Generated Report")
-    );
-    report.setGroup(i18n("Transactions"));
-    report.addAccount(d->m_selectedAccount.id());
-
-    d->m_myMoneyView->slotShowReport(report);
-  }
-}
-
 void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence)
 {
   KEditScheduleDlg::newSchedule(_t, occurrence);
@@ -2662,7 +2641,7 @@ void KMyMoneyApp::slotUpdateActions()
   // *************
   {
     static const QVector<Action> disabledActions {
-          Action::ReportAccountTransactions, Action::MapOnlineAccount, Action::UnmapOnlineAccount,
+          Action::MapOnlineAccount, Action::UnmapOnlineAccount,
           Action::UpdateAccount, Action::UpdateAllAccounts
     };
 

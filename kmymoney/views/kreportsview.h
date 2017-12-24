@@ -10,6 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.jones@hotpop.com>
+                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,15 +29,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QList>
-#include <QPrinter>
-#include <QPointer>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KChartAbstractCoordinatePlane>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -58,6 +52,7 @@ class QListWidget;
 class MyQWebEnginePage;
 class TocItemGroup;
 class ReportControl;
+class ReportGroup;
 
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;
@@ -72,120 +67,10 @@ class KWebView;
   *
   * @short A view for reports.
 **/
+class KReportsViewPrivate;
 class KReportsView : public KMyMoneyViewBase
 {
   Q_OBJECT
-public:
-
-  /**
-    * Helper class for KReportView.
-    *
-    * This is the widget which displays a single report in the TabWidget that comprises this view.
-    *
-    * @author Ace Jones
-    */
-
-  class KReportTab: public QWidget
-  {
-  private:
-    #ifdef ENABLE_WEBENGINE
-    QWebEngineView            *m_tableView;
-    #else
-    KWebView                  *m_tableView;
-    #endif
-    reports::KReportChartView *m_chartView;
-    ReportControl             *m_control;
-    QVBoxLayout               *m_layout;
-    QPrinter                  *m_currentPrinter;
-    MyMoneyReport m_report;
-    bool m_deleteMe;
-    bool m_chartEnabled;
-    bool m_showingChart;
-    bool m_needReload;
-    bool m_isChartViewValid;
-    bool m_isTableViewValid;
-    QPointer<reports::ReportTable> m_table;
-
-    /**
-     * Users character set encoding.
-     */
-    QByteArray m_encoding;
-
-  public:
-    KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView *eventHandler);
-    ~KReportTab();
-    const MyMoneyReport& report() const {
-      return m_report;
-    }
-    void print();
-    void toggleChart();
-    /**
-     * Updates information about ploted chart in report's data
-     */
-    void updateDataRange();
-    void copyToClipboard();
-    void saveAs(const QString& filename, bool includeCSS = false);
-    void updateReport();
-    QString createTable(const QString& links = QString());
-    const ReportControl* control() const {
-      return m_control;
-    }
-    bool isReadyToDelete() const {
-      return m_deleteMe;
-    }
-    void setReadyToDelete(bool f) {
-      m_deleteMe = f;
-    }
-    void modifyReport(const MyMoneyReport& report) {
-      m_report = report;
-    }
-    void showEvent(QShowEvent * event);
-    void loadTab();
-  };
-
-  /**
-    * Helper class for KReportView.
-    *
-    * This is a named list of reports, which will be one section
-    * in the list of default reports
-    *
-    * @author Ace Jones
-    */
-  class ReportGroup: public QList<MyMoneyReport>
-  {
-  private:
-    QString m_name;     ///< the title of the group in non-translated form
-    QString m_title;    ///< the title of the group in i18n-ed form
-  public:
-    ReportGroup() {}
-    ReportGroup(const QString& name, const QString& title): m_name(name), m_title(title) {}
-    const QString& name() const {
-      return m_name;
-    }
-    const QString& title() const {
-      return m_title;
-    }
-  };
-
-private:
-  bool m_needReload;
-
-  /**
-    * This member holds the load state of page
-    */
-  bool m_needLoad;
-
-  QListWidget* m_reportListView;
-  QTabWidget* m_reportTabWidget;
-  QWidget* m_listTab;
-  QVBoxLayout* m_listTabLayout;
-  QTreeWidget* m_tocTreeWidget;
-  QMap<QString, TocItemGroup*> m_allTocItemGroups;
-  QString m_selectedExportFilter;
-
-  bool m_columnsAlreadyAdjusted;
-
-  void restoreTocExpandState(QMap<QString, bool>& expandStates);
 
 public:
   /**
@@ -199,46 +84,11 @@ public:
     * @see ~KReportsView
     */
   explicit KReportsView(QWidget *parent = nullptr);
+  ~KReportsView() override;
 
-  void setDefaultFocus();
-
-  /**
-    * Overridden so we can reload the view if necessary.
-    *
-    * @return Nothing.
-    */
-  void showEvent(QShowEvent * event);
-
-protected:
-  void addReportTab(const MyMoneyReport&);
-  void loadView();
-  static void defaultReports(QList<ReportGroup>&);
-  bool columnsAlreadyAdjusted();
-  void setColumnsAlreadyAdjusted(bool adjusted);
-
-public Q_SLOTS:
-  void slotOpenUrl(const QUrl &url);
-
-  void slotLoadView();
-  void slotPrintView();
-  void slotCopyView();
-  void slotSaveView();
-  void slotConfigure();
-  void slotDuplicate();
-  void slotToggleChart();
-  void slotItemDoubleClicked(QTreeWidgetItem* item, int);
-  void slotOpenReport(const QString&);
-  void slotOpenReport(const MyMoneyReport&);
-  void slotReportAccountTransactions(const MyMoneyAccount& acc);
-  void slotCloseCurrent();
-  void slotClose(int index);
-  void slotCloseAll();
-  void slotDelete();
-  void slotListContextMenu(const QPoint &);
-  void slotOpenFromList();
-  void slotConfigureFromList();
-  void slotNewFromList();
-  void slotDeleteFromList();
+  void setDefaultFocus() override;
+  void refresh() override;
+  void updateActions(const MyMoneyObject &obj) override;
 
 Q_SIGNALS:
   /**
@@ -249,17 +99,49 @@ Q_SIGNALS:
   /**
     * This signal is emitted whenever a transaction is selected
     */
-  void ledgerSelected(const QString&, const QString&);
+  void transactionSelected(const QString&, const QString&);
+
+  void switchViewRequested(View view);
+
+protected:
+  /**
+    * Overridden so we can reload the view if necessary.
+    *
+    * @return Nothing.
+    */
+  void showEvent(QShowEvent * event) override;
+
+public Q_SLOTS:
+  void slotOpenUrl(const QUrl &url);
+
+  void slotPrintView();
+  void slotCopyView();
+  void slotSaveView();
+  void slotConfigure();
+  void slotDuplicate();
+  void slotToggleChart();
+  void slotItemDoubleClicked(QTreeWidgetItem* item, int);
+  void slotOpenReport(const QString&);
+  void slotOpenReport(const MyMoneyReport&);
+  void slotCloseCurrent();
+  void slotClose(int index);
+  void slotCloseAll();
+  void slotDelete();
+  void slotListContextMenu(const QPoint &);
+  void slotOpenFromList();
+  void slotConfigureFromList();
+  void slotNewFromList();
+  void slotDeleteFromList();
 
 private:
-  /**
-    * Display a dialog to confirm report deletion
-    */
-  int deleteReportDialog(const QString&);
+  Q_DECLARE_PRIVATE(KReportsView)
 
-  /** Initializes page and sets its load status to initialized
-   */
-  void init();
+private Q_SLOTS:
+  /**
+    * This slot creates a transaction report for the selected account
+    * and opens it in the reports view.
+    */
+  void slotReportAccountTransactions();
 };
 
 #endif

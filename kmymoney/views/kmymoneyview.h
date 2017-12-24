@@ -417,14 +417,6 @@ public Q_SLOTS:
   void slotShowReport(const QString& reportid);
 
   /**
-    * Same as the above, but the caller passes in an actual report
-    * definition to be shown.
-    *
-    * @param report The report to be shown
-    */
-  void slotShowReport(const MyMoneyReport& report);
-
-  /**
     * This slot prints the current view.
     */
   void slotPrintView();

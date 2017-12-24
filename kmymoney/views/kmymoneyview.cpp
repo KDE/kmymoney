@@ -220,11 +220,13 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_investmentView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 9
-  m_reportsView = new KReportsView();
+  m_reportsView = new KReportsView;
   viewFrames[View::Reports] = m_model->addPage(m_reportsView, i18n("Reports"));
   viewFrames[View::Reports]->setIcon(Icons::get(Icon::ViewReports));
-  connect(m_reportsView, &KReportsView::ledgerSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+  connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+
+  connect(m_reportsView, &KReportsView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
 
   // Page 10
   m_budgetView = new KBudgetView;
@@ -597,12 +599,6 @@ void KMyMoneyView::slotShowReport(const QString& reportid)
 {
   showPage(viewFrames[View::Reports]);
   m_reportsView->slotOpenReport(reportid);
-}
-
-void KMyMoneyView::slotShowReport(const MyMoneyReport& report)
-{
-  showPage(viewFrames[View::Reports]);
-  m_reportsView->slotOpenReport(report);
 }
 
 bool KMyMoneyView::fileOpen()
@@ -1587,7 +1583,7 @@ void KMyMoneyView::slotRefreshViews()
   m_budgetView->refresh();
   m_homeView->slotLoadView();
   m_investmentView->refresh();
-  m_reportsView->slotLoadView();
+  m_reportsView->refresh();
   m_forecastView->slotLoadForecast();
   m_scheduledView->refresh();
 
@@ -2204,14 +2200,19 @@ void KMyMoneyView::connectView(const View view)
       connect(m_budgetView, &KBudgetView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
       break;
 
-  case View::Investments:
+    case View::Investments:
       disconnect(m_investmentView, &KInvestmentView::aboutToShow, this, &KMyMoneyView::connectView);
       connect(m_investmentView, &KInvestmentView::accountSelected, kmymoney, &KMyMoneyApp::slotSelectAccount);
 
       connect(m_investmentView, &KInvestmentView::objectSelected,       this, &KMyMoneyView::slotObjectSelected);
       connect(m_investmentView, &KInvestmentView::contextMenuRequested, this, &KMyMoneyView::slotContextMenuRequested);
+      break;
 
-    break;
+    case View::Reports:
+      disconnect(m_reportsView, &KReportsView::aboutToShow, this, &KMyMoneyView::connectView);
+      connect(m_reportsView, &KReportsView::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+      break;
+
     default:
       break;
   }
@@ -2244,6 +2245,7 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
     m_categoriesView->updateActions(obj);
     m_accountsView->updateActions(obj);
     m_ledgerView->updateActions(obj);
+    m_reportsView->updateActions(obj);
 
     // for plugin only
     const auto& acc = static_cast<const MyMoneyAccount&>(obj);
