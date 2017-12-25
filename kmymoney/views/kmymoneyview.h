@@ -401,22 +401,6 @@ public Q_SLOTS:
   void slotTagSelected(const QString& tagId, const QString& accountId, const QString& transactionId);
 
   /**
-    * Called, whenever the schedule view should pop up and a specific
-    * schedule should be shown.
-    *
-    * @param schedule The ID of the schedule to be shown
-    */
-  void slotScheduleSelected(const QString& schedule);
-
-  /**
-    * Called, whenever the report view should pop up and a specific
-    * report should be shown.
-    *
-    * @param reportid The ID of the report to be shown
-    */
-  void slotShowReport(const QString& reportid);
-
-  /**
     * This slot prints the current view.
     */
   void slotPrintView();

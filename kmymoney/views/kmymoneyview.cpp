@@ -152,11 +152,10 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(kmymoney, &KMyMoneyApp::fileLoaded, this, &KMyMoneyView::slotRefreshViews);
 
   // Page 0
-  m_homeView = new KHomeView();
+  m_homeView = new KHomeView;
   viewFrames[View::Home] = m_model->addPage(m_homeView, i18n("Home"));
   viewFrames[View::Home]->setIcon(Icons::get(Icon::ViewHome));
-  connect(m_homeView, &KHomeView::scheduleSelected, this, &KMyMoneyView::slotScheduleSelected);
-  connect(m_homeView, &KHomeView::reportSelected, this, static_cast<void (KMyMoneyView::*)(const QString&)>(&KMyMoneyView::slotShowReport));
+  connect(m_homeView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_homeView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 1
@@ -209,9 +208,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_ledgerView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_ledgerView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
-  connect(m_ledgerView, &KGlobalLedgerView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
-  connect(m_homeView, &KHomeView::ledgerSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
-
   // Page 8
   m_investmentView = new KInvestmentView;
   viewFrames[View::Investments] = m_model->addPage(m_investmentView, i18n("Investments"));
@@ -225,8 +221,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   viewFrames[View::Reports]->setIcon(Icons::get(Icon::ViewReports));
   connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  connect(m_reportsView, &KReportsView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
 
   // Page 10
   m_budgetView = new KBudgetView;
@@ -249,6 +243,10 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()));
   connect(m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
   connect(m_onlineJobOutboxView, SIGNAL(showContextMenu(onlineJob)), kmymoney, SLOT(slotShowOnlineJobContextMenu()));
+
+  connect(m_reportsView, &KReportsView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
+  connect(m_ledgerView, &KGlobalLedgerView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
+  connect(m_homeView, &KHomeView::ledgerSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
 
 #ifdef ENABLE_UNFINISHEDFEATURES
   SimpleLedgerView* view = new SimpleLedgerView(kmymoney, this);
@@ -590,17 +588,6 @@ void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, c
   m_tagsView->slotSelectTagAndTransaction(tag, account, transaction);
 }
 
-void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
-{
-  m_scheduledView->objectSelected(MyMoneyFile::instance()->schedule(scheduleId));
-}
-
-void KMyMoneyView::slotShowReport(const QString& reportid)
-{
-  showPage(viewFrames[View::Reports]);
-  m_reportsView->slotOpenReport(reportid);
-}
-
 bool KMyMoneyView::fileOpen()
 {
   return m_fileOpen;
@@ -652,7 +639,7 @@ void KMyMoneyView::closeFile()
   disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
              Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
 
-  disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::slotLoadView);
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::refresh);
 
   // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
   Models::instance()->fileClosed();
@@ -1164,7 +1151,7 @@ bool KMyMoneyView::initializeStorage()
   MyMoneyFile::instance()->forceDataChanged();
 
   // views can wait since they are going to be refresed in slotRefreshViews
-  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::slotLoadView);
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::refresh);
 
   // if we currently see a different page, then select the right one
   if (page != currentPage()) {
@@ -1581,7 +1568,7 @@ void KMyMoneyView::slotRefreshViews()
   m_tagsView->refresh();
   m_ledgerView->refresh();
   m_budgetView->refresh();
-  m_homeView->slotLoadView();
+  m_homeView->refresh();
   m_investmentView->refresh();
   m_reportsView->refresh();
   m_forecastView->slotLoadForecast();
@@ -2124,6 +2111,12 @@ void KMyMoneyView::connectView(const View view)
 {
   KMyMoneyAccountTreeView *treeView;
   switch (view) {
+    case View::Home:
+      disconnect(m_homeView, &KHomeView::aboutToShow, this, &KMyMoneyView::connectView);
+      connect(m_homeView, &KHomeView::objectSelected,      this, &KMyMoneyView::slotObjectSelected);
+      connect(m_homeView, &KHomeView::openObjectRequested, this, &KMyMoneyView::slotOpenObjectRequested);
+      break;
+
     case View::Accounts:
       disconnect(m_accountsView, &KAccountsView::aboutToShow, this, &KMyMoneyView::connectView);
       treeView = m_accountsView->getTreeView();
@@ -2232,6 +2225,9 @@ void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
     m_institutionsView->slotEditInstitution();
   } else if (typeid(obj) == typeid(MyMoneySchedule)) {
     m_scheduledView->slotEditSchedule();
+  } else if (typeid(obj) == typeid(MyMoneyReport)) {
+    const auto& rep = static_cast<const MyMoneyReport&>(obj);
+    m_reportsView->slotOpenReport(rep);
   }
 }
 
