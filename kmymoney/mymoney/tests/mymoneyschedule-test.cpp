@@ -28,6 +28,7 @@
 #include "mymoneyschedule.h"
 #include "mymoneyschedule_p.h"
 #include "mymoneyfile.h"
+#include "mymoneyexception.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
 #include "storage/mymoneyseqaccessmgr.h"

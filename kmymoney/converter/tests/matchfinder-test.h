@@ -21,6 +21,7 @@
 #include <QScopedPointer>
 
 #include "mymoneyaccount.h"
+#include "mymoneypayee.h"
 #include "mymoneyseqaccessmgr.h"
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"

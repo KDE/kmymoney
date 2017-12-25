@@ -85,3 +85,16 @@ const QHash<attrNameE, QString> attrNames = {
 };
 
 }
+
+namespace MyMoneyStandardAccounts {
+
+  // definitions for the ID's of the standard accounts
+  const QHash<idNameE, QString> stdAccNames {
+    {stdAccLiability, QStringLiteral("AStd::Liability")},
+    {stdAccAsset,     QStringLiteral("AStd::Asset")},
+    {stdAccExpense,   QStringLiteral("AStd::Expense")},
+    {stdAccIncome,    QStringLiteral("AStd::Income")},
+    {stdAccEquity,    QStringLiteral("AStd::Equity")},
+  };
+
+}

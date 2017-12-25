@@ -19,6 +19,8 @@
 
 #include <QtTest>
 
+#include "mymoneydatabasemgr_p.h"
+#include "mymoneystoragesql_p.h"
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
@@ -34,6 +36,7 @@
 #include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneybudget.h"
+#include "mymoneystoragesql.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "misc/platformtools.h"
@@ -113,9 +116,10 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
 
   QCOMPARE(m->payeeList().count(), 0);
   QCOMPARE(m->tagList().count(), 0);
-  QCOMPARE(m->scheduleList().count(), 0);
+  QCOMPARE(m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                           QDate(), QDate(), false).count(), 0);
 
-  QCOMPARE(m->m_creationDate, QDate::currentDate());
+  QCOMPARE(m->creationDate(), QDate::currentDate());
 }
 
 void MyMoneyDatabaseMgrTest::setupUrl(const QString& fname)
@@ -219,7 +223,7 @@ void MyMoneyDatabaseMgrTest::testDisconnection()
     QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   try {
-    ((QSqlDatabase*)(m->m_sql.data()))->close();
+    ((QSqlDatabase*)(m->d_func()->m_sql.data()))->close();
     QList<MyMoneyAccount> accList;
     m->accountList(accList);
   } catch (const MyMoneyException &e) {
@@ -299,11 +303,11 @@ void MyMoneyDatabaseMgrTest::testIsStandardAccount()
   if (!m_canOpen)
     QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
-  QVERIFY(m->isStandardAccount(STD_ACC_LIABILITY) == true);
-  QVERIFY(m->isStandardAccount(STD_ACC_ASSET) == true);
-  QVERIFY(m->isStandardAccount(STD_ACC_EXPENSE) == true);
-  QVERIFY(m->isStandardAccount(STD_ACC_INCOME) == true);
-  QVERIFY(m->isStandardAccount(STD_ACC_EQUITY) == true);
+  QVERIFY(m->isStandardAccount(stdAccNames[stdAccLiability]) == true);
+  QVERIFY(m->isStandardAccount(stdAccNames[stdAccAsset]) == true);
+  QVERIFY(m->isStandardAccount(stdAccNames[stdAccExpense]) == true);
+  QVERIFY(m->isStandardAccount(stdAccNames[stdAccIncome]) == true);
+  QVERIFY(m->isStandardAccount(stdAccNames[stdAccEquity]) == true);
   QVERIFY(m->isStandardAccount("A0002") == false);
 }
 
@@ -635,7 +639,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
     MyMoneyFile::instance()->preloadCache();
     QVERIFY(m->expense().accountCount() == 3);
     QVERIFY(m->account(ex1.id()).accountCount() == 1);
-    QVERIFY(ex3.parentAccountId() == STD_ACC_EXPENSE);
+    QVERIFY(ex3.parentAccountId() == stdAccNames[stdAccExpense]);
 
     //for (int i = 0; i < 100; ++i) {
     m->reparentAccount(ex3, ex1);
@@ -689,7 +693,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     m->addTransaction(t1);
     QVERIFY(t1.id() == "T000000000000000001");
     QVERIFY(t1.splitCount() == 2);
-    QVERIFY(m->transactionCount() == 1);
+    QVERIFY(m->transactionCount(QString()) == 1);
     ch = m->account("A000006");
     QVERIFY(ch.value("Key") == "Value");
   } catch (const MyMoneyException &e) {
@@ -735,7 +739,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     m->addTransaction(t2);
     QVERIFY(t2.id() == "T000000000000000002");
     QVERIFY(t2.splitCount() == 4);
-    QVERIFY(m->transactionCount() == 2);
+    QVERIFY(m->transactionCount(QString()) == 2);
 
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
@@ -1211,7 +1215,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTransaction()
   m->setDirty();
   try {
     m->removeTransaction(t);
-    QVERIFY(m->transactionCount() == 1);
+    QVERIFY(m->transactionCount(QString()) == 1);
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
@@ -1312,22 +1316,22 @@ void MyMoneyDatabaseMgrTest::testSetAccountName()
     QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   try {
-    m->setAccountName(STD_ACC_LIABILITY, "Verbindlichkeiten");
+    m->setAccountName(stdAccNames[stdAccLiability], "Verbindlichkeiten");
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
-    m->setAccountName(STD_ACC_ASSET, "Verm�gen");
+    m->setAccountName(stdAccNames[stdAccAsset], "Verm�gen");
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
-    m->setAccountName(STD_ACC_EXPENSE, "Ausgaben");
+    m->setAccountName(stdAccNames[stdAccExpense], "Ausgaben");
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
-    m->setAccountName(STD_ACC_INCOME, "Einnahmen");
+    m->setAccountName(stdAccNames[stdAccIncome], "Einnahmen");
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
@@ -1657,22 +1661,23 @@ void MyMoneyDatabaseMgrTest::testTagName()
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAssignment()
-{
-  testAttachDb();
+// disabled because of no real world use case
+//void MyMoneyDatabaseMgrTest::testAssignment()
+//{
+//  testAttachDb();
 
-  if (!m_canOpen)
-    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+//  if (!m_canOpen)
+//    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
-  testAddTransactions();
+//  testAddTransactions();
 
-  MyMoneyPayee user;
-  user.setName("Thomas");
-  m->setUser(user);
+//  MyMoneyPayee user;
+//  user.setName("Thomas");
+//  m->setUser(user);
 
-  MyMoneyDatabaseMgr test = *m;
-  testEquality(&test);
-}
+//  MyMoneyDatabaseMgr test = *m;
+//  testEquality(&test);
+//}
 
 void MyMoneyDatabaseMgrTest::testEquality(const MyMoneyDatabaseMgr *t)
 {
@@ -1694,8 +1699,8 @@ void MyMoneyDatabaseMgrTest::testEquality(const MyMoneyDatabaseMgr *t)
   //QVERIFY(m->nextPayeeID() == t->nextPayeeID());
   //QVERIFY(m->m_nextScheduleID == t->m_nextScheduleID);
   QVERIFY(m->dirty() == t->dirty());
-  QVERIFY(m->m_creationDate == t->m_creationDate);
-  QVERIFY(m->m_lastModificationDate == t->m_lastModificationDate);
+  QVERIFY(m->creationDate() == t->creationDate());
+  QVERIFY(m->lastModificationDate() == t->lastModificationDate());
 
   /*
    * make sure, that the keys and values are the same
@@ -1720,21 +1725,22 @@ void MyMoneyDatabaseMgrTest::testEquality(const MyMoneyDatabaseMgr *t)
 //  QVERIFY(m->scheduleList().values() == t->scheduleList().values());
 }
 
-void MyMoneyDatabaseMgrTest::testDuplicate()
-{
-  testAttachDb();
+// disabled because of no real world use case
+//void MyMoneyDatabaseMgrTest::testDuplicate()
+//{
+//  testAttachDb();
 
-  if (!m_canOpen)
-    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+//  if (!m_canOpen)
+//    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
-  const MyMoneyDatabaseMgr* t;
+//  const MyMoneyDatabaseMgr* t;
 
-  testModifyTransaction();
+//  testModifyTransaction();
 
-  t = m->duplicate();
-  testEquality(t);
-  delete t;
-}
+//  t = m->duplicate();
+//  testEquality(t);
+//  delete t;
+//}
 
 void MyMoneyDatabaseMgrTest::testAddSchedule()
 {
@@ -1754,7 +1760,8 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
   testReparentAccount();
 
   try {
-    QVERIFY(m->scheduleList().count() == 0);
+    QVERIFY(m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                            QDate(), QDate(), false).count() == 0);
     MyMoneyTransaction t1;
     MyMoneySplit s1, s2;
     s1.setAccountId("A000001");
@@ -1774,7 +1781,8 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
 
     m->addSchedule(schedule);
 
-    QVERIFY(m->scheduleList().count() == 1);
+    QVERIFY(m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                            QDate(), QDate(), false).count() == 1);
     QVERIFY(schedule.id() == "SCH000001");
     //MyMoneyFile::instance()->clearCache(); // test passes without this, so why is it here for?
     QVERIFY(m->schedule("SCH000001").id() == "SCH000001");
@@ -1796,7 +1804,8 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
   } catch (const MyMoneyException &) {
   }
 
-  QVERIFY(m->scheduleList().count() == 1);
+  QVERIFY(m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                          QDate(), QDate(), false).count() == 1);
 
   // now try with a bad account, so this should cause an exception
   try {
@@ -1823,7 +1832,8 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
     // Exception caught as expected.
   }
 
-  QVERIFY(m->scheduleList().count() == 1);
+  QVERIFY(m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                          QDate(), QDate(), false).count() == 1);
 }
 
 void MyMoneyDatabaseMgrTest::testSchedule()
@@ -1869,9 +1879,11 @@ void MyMoneyDatabaseMgrTest::testModifySchedule()
   sched.setName("New Sched-Name");
   try {
     m->modifySchedule(sched);
-    QVERIFY(m->scheduleList().count() == 1);
-    QVERIFY((*(m->scheduleList().begin())).name() == "New Sched-Name");
-    QVERIFY((*(m->scheduleList().begin())).id() == "SCH000001");
+    auto sch = m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                               QDate(), QDate(), false);
+    QVERIFY(sch.count() == 1);
+    QVERIFY((*(sch.begin())).name() == "New Sched-Name");
+    QVERIFY((*(sch.begin())).id() == "SCH000001");
 
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
@@ -1900,7 +1912,8 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule()
   sched = m->schedule("SCH000001");
   try {
     m->removeSchedule(sched);
-    QVERIFY(m->scheduleList().count() == 0);
+    QVERIFY(m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                            QDate(), QDate(), false).count() == 0);
 
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
@@ -2004,34 +2017,41 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
   QList<MyMoneySchedule> list;
 
   // no filter
-  list = m->scheduleList();
+  list = m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 4);
 
   // filter by type
-  list = m->scheduleList(QString(), Schedule::Type::Bill);
+  list = m->scheduleList(QString(), Schedule::Type::Bill, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 2);
   QVERIFY(list[0].name() == "Schedule 1");
   QVERIFY(list[1].name() == "Schedule 4");
 
   // filter by occurrence
   list = m->scheduleList(QString(), Schedule::Type::Any,
-                         Schedule::Occurrence::Daily);
+                         Schedule::Occurrence::Daily, Schedule::PaymentType::Any,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 1);
   QVERIFY(list[0].name() == "Schedule 2");
 
   // filter by payment type
   list = m->scheduleList(QString(), Schedule::Type::Any,
                          Schedule::Occurrence::Any,
-                         Schedule::PaymentType::DirectDeposit);
+                         Schedule::PaymentType::DirectDeposit,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 1);
   QVERIFY(list[0].name() == "Schedule 2");
 
   // filter by account
-  list = m->scheduleList("A01");
+  list = m->scheduleList("A01", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 0);
-  list = m->scheduleList("A000001");
+  list = m->scheduleList("A000001", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 2);
-  list = m->scheduleList("A000002");
+  list = m->scheduleList("A000002", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                         QDate(), QDate(), false);
   QVERIFY(list.count() == 1);
 
   // filter by start date
@@ -2351,6 +2371,6 @@ void MyMoneyDatabaseMgrTest::testHighestNumberFromIdString()
 
   testAddTransactions();
 
-  QCOMPARE(m->m_sql->highestNumberFromIdString(QLatin1String("kmmTransactions"), QLatin1String("id"), 1), 2ul);
-  QCOMPARE(m->m_sql->highestNumberFromIdString(QLatin1String("kmmAccounts"), QLatin1String("id"), 1), 6ul);
+  QCOMPARE(m->d_func()->m_sql->d_func()->highestNumberFromIdString(QLatin1String("kmmTransactions"), QLatin1String("id"), 1), 2ul);
+  QCOMPARE(m->d_func()->m_sql->d_func()->highestNumberFromIdString(QLatin1String("kmmAccounts"), QLatin1String("id"), 1), 6ul);
 }

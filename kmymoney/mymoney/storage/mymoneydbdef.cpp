@@ -30,6 +30,7 @@
 #include "mymoneydbdriver.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyexception.h"
 #include "imymoneystorage.h"
 
 #include <alkimia/alkvalue.h>

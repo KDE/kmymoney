@@ -48,6 +48,7 @@
 
 #include "ui_kgeneratesqldlg.h"
 
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
 #include "kguiutils.h"

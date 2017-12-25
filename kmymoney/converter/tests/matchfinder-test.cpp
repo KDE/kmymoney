@@ -22,6 +22,7 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneymoney.h"
+#include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MatchFinderTest)
 

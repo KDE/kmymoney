@@ -128,12 +128,14 @@
 #include "mymoney/mymoneypayee.h"
 #include "mymoney/mymoneytag.h"
 #include "mymoney/mymoneybudget.h"
+#include "mymoney/mymoneyreport.h"
 #include "mymoney/mymoneysplit.h"
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
 #include "mymoney/storage/mymoneystoragedump.h"
 #include "mymoney/storage/imymoneystorage.h"
 #include "mymoney/mymoneyforecast.h"
+#include "mymoney/mymoneytransactionfilter.h"
 
 #include "mymoney/onlinejobmessage.h"
 

@@ -64,6 +64,7 @@ public:
       m_isNotNull(inotnull),
       m_initVersion(initVersion),
       m_lastVersion(lastVersion) {}
+
   MyMoneyDbColumn() {}
   virtual ~MyMoneyDbColumn() {}
 
@@ -393,6 +394,7 @@ private:
 class MyMoneyDbDef
 {
   friend class MyMoneyStorageSql;
+  friend class MyMoneyStorageSqlPrivate;
 public:
   MyMoneyDbDef();
   ~MyMoneyDbDef() {}

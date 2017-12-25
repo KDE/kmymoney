@@ -31,8 +31,10 @@
 #include "mymoneystoragedump.h"
 #include "mymoneyreport.h"
 #include "mymoneysplit.h"
+#include "mymoneypayee.h"
 #include "mymoneystatement.h"
 #include "mymoneystoragexml.h"
+#include "mymoneyexception.h"
 
 using namespace reports;
 using namespace test;

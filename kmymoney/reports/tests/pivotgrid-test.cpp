@@ -24,6 +24,8 @@
 #include "pivotgrid.h"
 #include "mymoneyinstitution.h"
 #include "mymoneysecurity.h"
+#include "mymoneypayee.h"
+#include "mymoneyenums.h"
 
 using namespace reports;
 using namespace test;

@@ -51,13 +51,18 @@
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneycostcenter.h"
+#include "mymoneyexception.h"
+#include "onlinejob.h"
 #include "storageenums.h"
+#include "mymoneystoragenames.h"
 #include "mymoneyenums.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
 
 using namespace eMyMoney;
+using namespace MyMoneyStandardAccounts;
 
 const QString MyMoneyFile::AccountSeperator = QChar(':');
 
@@ -1587,35 +1592,35 @@ MyMoneyAccount MyMoneyFile::liability() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(STD_ACC_LIABILITY);
+  return d->m_cache.account(stdAccNames[stdAccLiability]);
 }
 
 MyMoneyAccount MyMoneyFile::asset() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(STD_ACC_ASSET);
+  return d->m_cache.account(stdAccNames[stdAccAsset]);
 }
 
 MyMoneyAccount MyMoneyFile::expense() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(STD_ACC_EXPENSE);
+  return d->m_cache.account(stdAccNames[stdAccExpense]);
 }
 
 MyMoneyAccount MyMoneyFile::income() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(STD_ACC_INCOME);
+  return d->m_cache.account(stdAccNames[stdAccIncome]);
 }
 
 MyMoneyAccount MyMoneyFile::equity() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(STD_ACC_EQUITY);
+  return d->m_cache.account(stdAccNames[stdAccEquity]);
 }
 
 unsigned int MyMoneyFile::transactionCount(const QString& account) const
@@ -3560,7 +3565,8 @@ void MyMoneyFile::preloadCache()
   d->m_cache.preloadInstitution(d->m_storage->institutionList());
   d->m_cache.preloadSecurity(d->m_storage->securityList() +
                              d->m_storage->currencyList());
-  d->m_cache.preloadSchedule(d->m_storage->scheduleList());
+  d->m_cache.preloadSchedule(d->m_storage->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+                                                        QDate(), QDate(), false));
   d->m_cache.preloadOnlineJob(d->m_storage->onlineJobList());
 }
 

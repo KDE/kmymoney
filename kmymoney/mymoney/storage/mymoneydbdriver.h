@@ -4,6 +4,7 @@
     begin                : 19 February 2010
     copyright            : (C) 2010 by Fernando Vilas
     email                : Fernando Vilas <fvilas@iname.com>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,15 +22,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QSql>
+#include <QSharedData>
 #include <QMap>
-#include <QString>
-#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+template <class T> class QExplicitlySharedDataPointer;
 
 /**
 @author Tony Bloomfield
@@ -44,6 +46,7 @@ class MyMoneyDbColumn;
 class MyMoneyDbDatetimeColumn;
 class MyMoneyDbIntColumn;
 class MyMoneyDbTextColumn;
+
 class MyMoneyDbDriver : public QSharedData
 {
 public:
@@ -85,24 +88,24 @@ public:
    *
    * @return The name of the default database
    */
-  virtual const QString defaultDbName() const;
+  virtual QString defaultDbName() const;
 
   /**
    * @return The SQL string to create a database
    */
-  virtual const QString createDbString(const QString& name) const;
+  virtual QString createDbString(const QString& name) const;
 
   /**
    * @return " FOR UPDATE" in most cases, but "" for SQLITE
    */
-  virtual const QString forUpdateString() const;
+  virtual QString forUpdateString() const;
 
   /**
    * @param name The name of the table
    *
    * @return The SQL string to drop a primary key from a table
    */
-  virtual const QString dropPrimaryKeyString(const QString& name) const;
+  virtual QString dropPrimaryKeyString(const QString& name) const;
 
 
   /**
@@ -111,7 +114,7 @@ public:
    *
    * @return The SQL string to drop an index from a table
    */
-  virtual const QString dropIndexString(const QString& tableName, const QString& indexName) const;
+  virtual QString dropIndexString(const QString& tableName, const QString& indexName) const;
 
   /**
    * modifyColumnString will generate the SQL to modify the type of a column,
@@ -123,28 +126,28 @@ public:
    *
    * @return The SQL string to modify the column appropriately
    */
-  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
 
   /**
    * @param c The integer column definition
    *
    * @return The SQL to create the appropriately sized integer column
    */
-  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual QString intString(const MyMoneyDbIntColumn& c) const;
 
   /**
    * @param c The text column definition
    *
    * @return The SQL to create the appropriately sized text column
    */
-  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual QString textString(const MyMoneyDbTextColumn& c) const;
 
   /**
    * @param c The integer column definition
    *
    * @return The SQL to create the appropriate timestamp/datetime column
    */
-  virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  virtual QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
 
   /**
    * @return Whether this DBMS requires an external file for storage
@@ -160,17 +163,17 @@ public:
    * Some DBMS require additional options to create-table
    * @return additional option string
    */
-  virtual const QString tableOptionString() const;
+  virtual QString tableOptionString() const;
 
   /**
    * @return The SQL string to find the highest ID number with an arbitrary prefix
    */
-  virtual const QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
 
   /**
    * Override standard tables() call for bug 252841
    */
-  virtual const QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
+  virtual QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
 
   /**
    * @return Returns if this driver supports setting of passwords

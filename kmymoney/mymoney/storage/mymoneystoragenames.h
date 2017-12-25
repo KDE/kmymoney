@@ -61,4 +61,11 @@ enum attrNameE { anID, anDate, anCount, anFrom, anTo,
 extern const QHash<attrNameE, QString>    attrNames;
 }
 
+namespace MyMoneyStandardAccounts {
+
+enum idNameE { stdAccLiability, stdAccAsset, stdAccExpense, stdAccIncome, stdAccEquity };
+
+extern const QHash<idNameE, QString>    stdAccNames;
+}
+
 #endif
