@@ -48,6 +48,7 @@
 #include <KActionCollection>
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
+#include <KLocalizedString>
 
 #ifdef KF5Activities_FOUND
 #include <KActivities/ResourceInstance>
@@ -230,9 +231,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 11
-  m_forecastView = new KForecastView();
+  m_forecastView = new KForecastView;
   viewFrames[View::Forecast] = m_model->addPage(m_forecastView, i18n("Forecast"));
   viewFrames[View::Forecast]->setIcon(Icons::get(Icon::ViewForecast));
+  connect(m_forecastView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_forecastView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 12
   m_onlineJobOutboxView = new KOnlineJobOutbox;
@@ -1569,7 +1572,7 @@ void KMyMoneyView::slotRefreshViews()
   m_homeView->refresh();
   m_investmentView->refresh();
   m_reportsView->refresh();
-  m_forecastView->slotLoadForecast();
+  m_forecastView->refresh();
   m_scheduledView->refresh();
 
   m_payeesView->slotClosePayeeIdentifierSource();
@@ -2202,6 +2205,10 @@ void KMyMoneyView::connectView(const View view)
     case View::Reports:
       disconnect(m_reportsView, &KReportsView::aboutToShow, this, &KMyMoneyView::connectView);
       connect(m_reportsView, &KReportsView::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+      break;
+
+    case View::Forecast:
+      disconnect(m_forecastView, &KForecastView::aboutToShow, this, &KMyMoneyView::connectView);
       break;
 
     case View::OnlineJobOutbox:
