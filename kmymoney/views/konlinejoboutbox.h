@@ -19,60 +19,46 @@
 #ifndef KONLINEJOBOUTBOX_H
 #define KONLINEJOBOUTBOX_H
 
-#include <memory>
-
-#include <QWidget>
+#include "kmymoneyviewbase.h"
 
 #include "onlinejob.h"
 
-namespace Ui
-{
-class KOnlineJobOutbox;
-}
-
 class QModelIndex;
-class KOnlineJobOutbox : public QWidget
+
+namespace KMyMoneyPlugin { class OnlinePlugin; }
+
+class KOnlineJobOutboxPrivate;
+class KOnlineJobOutbox : public KMyMoneyViewBase
 {
   Q_OBJECT
 
 public:
   explicit KOnlineJobOutbox(QWidget *parent = 0);
-  ~KOnlineJobOutbox();
+  ~KOnlineJobOutbox() override;
 
-  void setDefaultFocus();
+  void setDefaultFocus() override;
+  void updateActions(const MyMoneyObject& obj) override;
 
   QStringList selectedOnlineJobs() const;
 
-  void showEvent(QShowEvent* event);
+  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
 
 Q_SIGNALS:
   void sendJobs(QList<onlineJob>);
   void editJob(QString);
   void newCreditTransfer();
 
-  void aboutToShow();
-  void showContextMenu(onlineJob);
-
 protected:
-  void contextMenuEvent(QContextMenuEvent*);
+  void showEvent(QShowEvent* event) override;
+  void contextMenuEvent(QContextMenuEvent*) override;
+
+private:
+  Q_DECLARE_PRIVATE(KOnlineJobOutbox)
 
 private Q_SLOTS:
   void updateNewCreditTransferButton();
   void updateButtonState() const;
 
-private:
-  std::unique_ptr<Ui::KOnlineJobOutbox> ui;
-
-  /**
-    * This member holds the load state of page
-    */
-  bool m_needLoad;
-
-  /** Initializes page and sets its load status to initialized
-   */
-  void init();
-
-private Q_SLOTS:
   void slotRemoveJob();
 
   /** @brief If any job is selected, send it. Send all valid jobs otherwise. */
@@ -86,6 +72,14 @@ private Q_SLOTS:
 
   void slotEditJob();
   void slotEditJob(const QModelIndex&);
+
+  void slotOnlineJobSave(onlineJob job);
+  void slotOnlineJobSend(onlineJob job);
+  void slotOnlineJobSend(QList<onlineJob> jobs);
+
+  void slotOnlineJobLog();
+  void slotOnlineJobLog(const QStringList& onlineJobIds);
+  void slotNewCreditTransfer();
 };
 
 #endif // KONLINEJOBOUTBOX_H

@@ -261,54 +261,6 @@ protected Q_SLOTS:
   void slotAccountUpdateOnline();
   void slotAccountUpdateOnlineAll();
 
-  /**
-   * @brief Start dialog for an online banking transfer
-   */
-  void slotNewOnlineTransfer();
-
-  /**
-   * @brief Start dialog to edit onlineJob if possible
-   * @param onlineJob id to edit
-   */
-  void slotEditOnlineJob(const QString);
-
-  /**
-   * @brief Start dialog to edit onlineJob if possible
-   */
-  void slotEditOnlineJob(const onlineJob);
-
-  /**
-   * @brief Start dialog to edit onlineJob if possible
-   */
-  void slotEditOnlineJob(const onlineJobTyped<creditTransfer>);
-
-  /**
-   * @brief Saves an online banking job
-   */
-  void slotOnlineJobSave(onlineJob job);
-
-  /**
-   * @brief Queue an online banking job
-   */
-  void slotOnlineJobSend(onlineJob job);
-
-  /**
-   * @brief Send a list of onlineJobs
-   */
-  void slotOnlineJobSend(QList<onlineJob> jobs);
-
-  /**
-    * dummy method needed just for initialization
-    */
-  void slotRemoveJob();
-  void slotEditJob();
-
-  /**
-   * @brief Show the log currently selected online job
-   */
-  void slotOnlineJobLog();
-  void slotOnlineJobLog(const QStringList& onlineJobIds);
-
   void slotManageGpgKeys();
   void slotKeySelected(int idx);
 
@@ -459,13 +411,6 @@ protected:
    */
   void initStatusBar();
 
-  /**
-   * @brief Establish connections between actions and views
-   *
-   * Must be called after creation of actions and views.
-   */
-  void connectActionsAndViews();
-
   /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
    * default implementation (only returns true), this calls saveModified() on the document object to ask if the document shall
    * be saved if Modified; on cancel the closeEvent is rejected.
@@ -605,7 +550,6 @@ public Q_SLOTS:
     */
   void slotEquityPriceUpdate();
 
-  void slotOnlineTransferRequested(const MyMoneyAccount& acc);
   void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);  
 
   /**
@@ -623,11 +567,6 @@ public Q_SLOTS:
     * @param dest new parent institution
     */
   void slotReparentAccount(const MyMoneyAccount& src, const MyMoneyInstitution& dest);
-
-  /**
-   * Open onlineJob options menu at current cursor position.
-   */
-  void slotShowOnlineJobContextMenu();
 
   /**
     * Create a new investment in a given @p parent investment account

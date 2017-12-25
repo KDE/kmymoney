@@ -235,14 +235,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   viewFrames[View::Forecast]->setIcon(Icons::get(Icon::ViewForecast));
 
   // Page 12
-  m_onlineJobOutboxView = new KOnlineJobOutbox();
+  m_onlineJobOutboxView = new KOnlineJobOutbox;
   viewFrames[View::OnlineJobOutbox] = m_model->addPage(m_onlineJobOutboxView, i18n("Outbox"));
   viewFrames[View::OnlineJobOutbox]->setIcon(Icons::get(Icon::ViewOutbox));
-  connect(m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT(slotOnlineJobSend(QList<onlineJob>)));
-  connect(m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)));
-  connect(m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()));
-  connect(m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
-  connect(m_onlineJobOutboxView, SIGNAL(showContextMenu(onlineJob)), kmymoney, SLOT(slotShowOnlineJobContextMenu()));
+  connect(m_onlineJobOutboxView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+  connect(m_onlineJobOutboxView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   connect(m_reportsView, &KReportsView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
   connect(m_ledgerView, &KGlobalLedgerView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
@@ -471,6 +468,7 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
   m_accountsView->setOnlinePlugins(plugins);
+  m_onlineJobOutboxView->setOnlinePlugins(plugins);
 }
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
@@ -2206,6 +2204,10 @@ void KMyMoneyView::connectView(const View view)
       connect(m_reportsView, &KReportsView::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
       break;
 
+    case View::OnlineJobOutbox:
+      disconnect(m_onlineJobOutboxView, &KOnlineJobOutbox::aboutToShow, this, &KMyMoneyView::connectView);
+      break;
+
     default:
       break;
   }
@@ -2242,6 +2244,7 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
     m_accountsView->updateActions(obj);
     m_ledgerView->updateActions(obj);
     m_reportsView->updateActions(obj);
+    m_onlineJobOutboxView->updateActions(obj);
 
     // for plugin only
     const auto& acc = static_cast<const MyMoneyAccount&>(obj);

@@ -436,8 +436,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
 
-  connectActionsAndViews();
-
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts
   readOptions();
@@ -581,7 +579,8 @@ QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
     {Menu::Transaction,             QStringLiteral("transaction_context_menu")},
     {Menu::MoveTransaction,         QStringLiteral("transaction_move_menu")},
     {Menu::MarkTransaction,         QStringLiteral("transaction_mark_menu")},
-    {Menu::MarkTransactionContext,  QStringLiteral("transaction_context_mark_menu")}
+    {Menu::MarkTransactionContext,  QStringLiteral("transaction_context_mark_menu")},
+    {Menu::OnlineJob,               QStringLiteral("onlinejob_context_menu")}
   };
 
   for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it)
@@ -752,9 +751,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
       {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
       // onlineJob actions
-      {Action::OnlineJobDelete,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditDelete},
-      {Action::OnlineJobEdit,                 QStringLiteral("onlinejob_edit"),                 i18n("Edit credit transfer"),                       Icon::DocumentEdit},
-      {Action::OnlineJobLog,                  QStringLiteral("onlinejob_log"),                  i18n("Show log"),                                   Icon::Empty},
+      {Action::DeleteOnlineJob,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditDelete},
+      {Action::EditOnlineJob,                 QStringLiteral("onlinejob_edit"),                 i18n("Edit credit transfer"),                       Icon::DocumentEdit},
+      {Action::LogOnlineJob,                  QStringLiteral("onlinejob_log"),                  i18n("Show log"),                                   Icon::Empty},
     };
 
     for (const auto& info : actionInfos) {
@@ -805,7 +804,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::UnmapOnlineAccount,            &KMyMoneyApp::slotAccountUnmapOnline},
       {Action::UpdateAccount,                 &KMyMoneyApp::slotAccountUpdateOnline},
       {Action::UpdateAllAccounts,             &KMyMoneyApp::slotAccountUpdateOnlineAll},
-      {Action::AccountCreditTransfer,         &KMyMoneyApp::slotNewOnlineTransfer},
       // **************
       // The tools menu
       // **************
@@ -833,10 +831,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
 #endif
       {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
-      // onlineJob actions
-      {Action::OnlineJobDelete,               &KMyMoneyApp::slotRemoveJob},
-      {Action::OnlineJobEdit,                 &KMyMoneyApp::slotEditJob},
-      {Action::OnlineJobLog,                  &KMyMoneyApp::slotOnlineJobLog},
     };
 
     for (auto connection = actionConnections.cbegin(); connection != actionConnections.cend(); ++connection)
@@ -931,20 +925,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("export"), this));
   menuContainer->setIcon(Icons::get(Icon::DocumentExport));
   return lutActions;
-}
-
-void KMyMoneyApp::connectActionsAndViews()
-{
-  KOnlineJobOutbox *const outbox = d->m_myMoneyView->getOnlineJobOutbox();
-  Q_CHECK_PTR(outbox);
-
-  QAction *const onlineJob_delete = pActions[Action::OnlineJobDelete];
-  Q_CHECK_PTR(onlineJob_delete);
-  connect(onlineJob_delete, SIGNAL(triggered()), outbox, SLOT(slotRemoveJob()));
-
-  QAction *const onlineJob_edit = pActions[Action::OnlineJobEdit];
-  Q_CHECK_PTR(onlineJob_edit);
-  connect(onlineJob_edit, SIGNAL(triggered()), outbox, SLOT(slotEditJob()));
 }
 
 #ifdef KMM_DEBUG
@@ -2585,11 +2565,6 @@ void KMyMoneyApp::showContextMenu(const QString& containerName)
     qDebug("menu '%s' not found: w = %p, menu = %p", qPrintable(containerName), w, menu);
 }
 
-void KMyMoneyApp::slotShowOnlineJobContextMenu()
-{
-  showContextMenu("onlinejob_context_menu");
-}
-
 void KMyMoneyApp::slotPrintView()
 {
   d->m_myMoneyView->slotPrintView();
@@ -3282,12 +3257,6 @@ void KMyMoneyApp::slotDateChanged()
   d->m_myMoneyView->slotRefreshViews();
 }
 
-void KMyMoneyApp::slotOnlineTransferRequested(const MyMoneyAccount& acc)
-{
-  d->m_selectedAccount = acc;
-  slotNewOnlineTransfer();
-}
-
 void KMyMoneyApp::slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action)
 {
   d->m_selectedAccount = acc;
@@ -3479,159 +3448,6 @@ void KMyMoneyApp::slotAccountUpdateOnline()
 
   // re-enable the disabled actions
   slotUpdateActions();
-}
-
-void KMyMoneyApp::slotNewOnlineTransfer()
-{
-  kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
-  if (!d->m_selectedAccount.id().isEmpty()) {
-    transferForm->setCurrentAccount(d->m_selectedAccount.id());
-  }
-  connect(transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
-  connect(transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
-  connect(transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
-  connect(transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
-  transferForm->show();
-}
-
-void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
-{
-  try {
-    const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob(jobId);
-    slotEditOnlineJob(constJob);
-  } catch (MyMoneyException&) {
-    // Prevent a crash in very rare cases
-  }
-}
-
-void KMyMoneyApp::slotEditOnlineJob(onlineJob job)
-{
-  try {
-    slotEditOnlineJob(onlineJobTyped<creditTransfer>(job));
-  } catch (MyMoneyException&) {
-  }
-}
-
-void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<creditTransfer> job)
-{
-  kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
-  transferForm->setOnlineJob(job);
-  connect(transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
-  connect(transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
-  connect(transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
-  connect(transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
-  transferForm->show();
-}
-
-void KMyMoneyApp::slotOnlineJobSave(onlineJob job)
-{
-  MyMoneyFileTransaction fileTransaction;
-  if (job.id().isEmpty())
-    MyMoneyFile::instance()->addOnlineJob(job);
-  else
-    MyMoneyFile::instance()->modifyOnlineJob(job);
-  fileTransaction.commit();
-}
-
-/** @todo when onlineJob queue is used, continue here */
-void KMyMoneyApp::slotOnlineJobSend(onlineJob job)
-{
-  MyMoneyFileTransaction fileTransaction;
-  if (job.id().isEmpty())
-    MyMoneyFile::instance()->addOnlineJob(job);
-  else
-    MyMoneyFile::instance()->modifyOnlineJob(job);
-  fileTransaction.commit();
-
-  QList<onlineJob> jobList;
-  jobList.append(job);
-  slotOnlineJobSend(jobList);
-}
-
-void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
-{
-  MyMoneyFile *const kmmFile = MyMoneyFile::instance();
-  QMultiMap<QString, onlineJob> jobsByPlugin;
-
-  // Sort jobs by online plugin & lock them
-  foreach (onlineJob job, jobs) {
-    Q_ASSERT(!job.id().isEmpty());
-    // find the provider
-    const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
-    job.setLock();
-    job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Debug, "KMyMoneyApp::slotOnlineJobSend", "Added to queue for plugin '" + originAcc.onlineBankingSettings().value("provider") + '\''));
-    MyMoneyFileTransaction fileTransaction;
-    kmmFile->modifyOnlineJob(job);
-    fileTransaction.commit();
-    jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider"), job);
-  }
-
-  // Send onlineJobs to plugins
-  QList<QString> usedPlugins = jobsByPlugin.keys();
-  std::sort(usedPlugins.begin(), usedPlugins.end());
-  const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
-  usedPlugins.erase(newEnd, usedPlugins.end());
-
-  foreach (const QString& pluginKey, usedPlugins) {
-    QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constFind(pluginKey);
-
-    if (it_p != d->m_onlinePlugins.constEnd()) {
-      // plugin found, call it
-      KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
-      if (pluginExt == 0) {
-        qWarning("Job given for plugin which is not an extended plugin");
-        continue;
-      }
-      //! @fixme remove debug message
-      qDebug() << "Sending " << jobsByPlugin.count(pluginKey) << " job(s) to online plugin " << pluginKey;
-      QList<onlineJob> jobsToExecute = jobsByPlugin.values(pluginKey);
-      QList<onlineJob> executedJobs = jobsToExecute;
-      pluginExt->sendOnlineJob(executedJobs);
-
-      // Save possible changes of the online job and remove lock
-      MyMoneyFileTransaction fileTransaction;
-      foreach (onlineJob job, executedJobs) {
-        fileTransaction.restart();
-        job.setLock(false);
-        kmmFile->modifyOnlineJob(job);
-        fileTransaction.commit();
-      }
-
-      if (Q_UNLIKELY(executedJobs.size() != jobsToExecute.size())) {
-        // OnlinePlugin did not return all jobs
-        qWarning() << "Error saving send online tasks. After restart you should see at minimum all successfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
-      }
-
-    } else {
-      qWarning() << "Error, got onlineJob for an account without online plugin.";
-      /** @FIXME can this actually happen? */
-    }
-  }
-}
-
-void KMyMoneyApp::slotRemoveJob()
-{
-}
-
-void KMyMoneyApp::slotEditJob()
-{
-}
-
-void KMyMoneyApp::slotOnlineJobLog()
-{
-  QStringList jobIds = d->m_myMoneyView->getOnlineJobOutbox()->selectedOnlineJobs();
-  slotOnlineJobLog(jobIds);
-}
-
-void KMyMoneyApp::slotOnlineJobLog(const QStringList& onlineJobIds)
-{
-  onlineJobMessagesView *const dialog = new onlineJobMessagesView();
-  onlineJobMessagesModel *const model = new onlineJobMessagesModel(dialog);
-  model->setOnlineJob(MyMoneyFile::instance()->getOnlineJob(onlineJobIds.first()));
-  dialog->setModel(model);
-  dialog->setAttribute(Qt::WA_DeleteOnClose);
-  dialog->show();
-  // Note: Objects are not deleted here, Qt's parent-child system has to do that.
 }
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
