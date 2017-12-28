@@ -28,14 +28,18 @@
 class KPluginInfo;
 class QPrinter;
 class QObject;
-class KMMPrintCheckPlugin: public KMyMoneyPlugin::Plugin
+class PrintCheck : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.printcheck" FILE "kmm_printcheck.json")
 
 public:
-  KMMPrintCheckPlugin();
-  ~KMMPrintCheckPlugin();
+  explicit PrintCheck(QObject *parent, const QVariantList &args);
+  ~PrintCheck() override;
+
+public Q_SLOTS:
+  void plug() override;
+  void unplug() override;
+  void configurationChanged() override;
 
 private:
   void readCheckTemplate();
@@ -46,10 +50,6 @@ private:
 protected Q_SLOTS:
   void slotPrintCheck();
   void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
-  // the plugin loader plugs in a plugin
-  void slotPlug(KPluginInfo*);
-  // the plugin's configurations has changed
-  void slotUpdateConfig();
 
 private:
   struct Private;

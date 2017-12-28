@@ -35,13 +35,13 @@
 // Project Includes
 
 #include "csvwizard.h"
-#include "csvimporter.h"
+#include "core/csvimportercore.h"
 
 #include "ui_bankingwizardpage.h"
 
 // ----------------------------------------------------------------------------
 
-BankingPage::BankingPage(CSVWizard *dlg, CSVImporter *imp) :
+BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
   ui(new Ui::BankingPage)
 {

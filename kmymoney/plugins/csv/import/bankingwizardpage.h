@@ -46,7 +46,7 @@ class BankingPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit BankingPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit BankingPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~BankingPage();
 
   bool validateCreditDebit();

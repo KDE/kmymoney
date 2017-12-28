@@ -1,9 +1,7 @@
 /***************************************************************************
                           pluginloader.h
                              -------------------
-    begin                : Thu Feb 12 2009
-    copyright            : (C) 2009 Cristian Onet
-    email                : onet.cristian@gmail.com
+  (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,78 +16,79 @@
 #ifndef PLUGINLOADER_H
 #define PLUGINLOADER_H
 
-#include <QObject>
-#include <QSet>
-#include <KPluginMetaData>
+// ----------------------------------------------------------------------------
+// QT Includes
 
-class KPluginSelector;
-class KConfigGroup;
+#include <QMap>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
+class KPluginMetaData;
+class KXMLGUIFactory;
+
+class QObject;
+class QString;
+
+template <class Key, class T> class QMap;
 
 namespace KMyMoneyPlugin
 {
-class Plugin;
+  class Plugin;
+  class OnlinePlugin;
+  class OnlinePluginExtended;
+  class ImporterPlugin;
 
-/**
- * @brief User Interface for plugins
- *
- * For historic reasons it is still called plugin loader even though it does not load any plugin anymore.
- */
-class PluginLoader : public QObject
-{
-  Q_OBJECT
-public:
-  explicit PluginLoader(QObject* parent);
-
+  enum class eListing;
 
   /**
-   * Needed to delete the unique_ptr which is of incomplete type in the header file
+   * @brief The Action enum is for specifing action on plugins
    */
-  virtual ~PluginLoader();
-  static PluginLoader* instance();
-
-  KPluginSelector* pluginSelectorWidget();
-  static inline bool isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup);
-
-public Q_SLOTS:
-  /** @brief Adds the given plugins to the plugin selection ui */
-  void addPluginInfo(const QVector<KPluginMetaData>& metaData);
-
-  /** @brief Find all available plugins */
-  void detectPlugins();
-
-Q_SIGNALS:
-  /** Load the shared module and emits plug() */
-  void pluginEnabled(const KPluginMetaData& metaData);
-  void pluginDisabled(const KPluginMetaData& metaData);
-  void configChanged(Plugin*);  // configuration of the plugin has changed not the enabled/disabled state
-
-private Q_SLOTS:
-  void changed();
-
-private:
-  KPluginSelector* m_pluginSelector;
+  enum Action {
+    Load,         // load all enabled plugins
+    Unload,       // unload all loaded plugins
+    Reorganize    // load requested and unload unneeded plugins
+  };
 
   /**
-   * @{
-   * Translated strings
-   *
-   * They are created on creation time because they are used as identifiers.
+   * @brief The Category enum is some arbitrary categorization of plugins
    */
-  QString m_categoryKMyMoneyPlugin;
-  QString m_categoryOnlineTask;
-  QString m_categoryPayeeIdentifier;
-  /** @} */
+  enum Category {
+    OnlineBankOperations,
+    PayeeIdentifier,
+    StandardPlugin
+  };
 
   /**
-   * @brief All plugins which are listed in the UI
-   *
-   * The set contains the plugin file name.
-   * Maybe it can/should be replaced by something different.
+   * @brief The Container struct to hold all plugin interfaces
    */
-  QSet<QString> m_displayedPlugins;
+  struct Container {
+    QMap<QString, Plugin*>               standard;  // this should contain all loaded plugins because every plugin should inherit Plugin class
+    QMap<QString, OnlinePlugin*>         online;    // casted standard plugin, if such interface is available
+    QMap<QString, OnlinePluginExtended*> extended;  // casted standard plugin, if such interface is available
+    QMap<QString, ImporterPlugin*>       importer;  // casted standard plugin, if such interface is available
+  };
 
-  QString categoryByPluginType(const KPluginMetaData& mataData);
-};
+  Category pluginCategory(const KPluginMetaData& pluginInfo);
+
+  /**
+   * @brief It lists all kmymoney plugins
+   * @param onlyEnabled = true if plugins should be listed according to on/off saved state in kmymoneyrc
+   * @return
+   */
+  QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled);
+
+  /**
+   * @brief It should be used to handle all plugin actions
+   * @param action Action to be taken to all plugins
+   * @param ctnPlugins Plugin container to be loaded/unloaded with plugins
+   * @param parent Parent of plugins. This should be KMyMoneyApp
+   * @param guiFactory GUI Factory of plugins. This should be GUI Factory of KMyMoneyApp
+   */
+  void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory);
 }
 
-#endif /* PLUGINLOADER_H */
+#endif

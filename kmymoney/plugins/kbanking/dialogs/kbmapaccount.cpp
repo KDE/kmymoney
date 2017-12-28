@@ -21,7 +21,7 @@
 // QBanking includes
 #include "kbmapaccount.h"
 #include "../widgets/kbaccountlist.h"
-#include "../mymoneybanking.h"
+#include "../kbanking.h"
 
 // QT includes
 #include <QLabel>
@@ -35,11 +35,11 @@
 
 struct KBMapAccount::Private {
   Ui::KBMapAccount ui;
-  KMyMoneyBanking *banking;
+  KBankingExt *banking;
   AB_ACCOUNT *account;
 };
 
-KBMapAccount::KBMapAccount(KMyMoneyBanking *kb,
+KBMapAccount::KBMapAccount(KBankingExt *kb,
                            const char *bankCode,
                            const char *accountId,
                            QWidget* parent,

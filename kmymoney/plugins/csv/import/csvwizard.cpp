@@ -42,10 +42,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "csvimporterplugin.h"
-#include "csvutil.h"
-#include "convdate.h"
 #include "csvimporter.h"
+#include "core/csvutil.h"
+#include "core/convdate.h"
+#include "core/csvimportercore.h"
 #include "investmentwizardpage.h"
 #include "bankingwizardpage.h"
 #include "priceswizardpage.h"
@@ -58,7 +58,7 @@
 
 using namespace Icons;
 
-CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
+CSVWizard::CSVWizard(CSVImporter *plugin, CSVImporterCore* importer) :
   ui(new Ui::CSVWizard),
   m_plugin(plugin),
   m_imp(importer),
@@ -66,7 +66,7 @@ CSVWizard::CSVWizard(CsvImporterPlugin* plugin, CSVImporter* importer) :
 {
   ui->setupUi(this);
   ui->tableView->setModel(m_imp->m_file->m_model);
-  readWindowSize(CSVImporter::configFile());
+  readWindowSize(CSVImporterCore::configFile());
   m_wiz->setWizardStyle(QWizard::ClassicStyle);
   ui->horizontalLayout->addWidget(m_wiz);
   m_curId = -1;
@@ -140,17 +140,17 @@ void CSVWizard::showStage()
 }
 
 void CSVWizard::readWindowSize(const KSharedConfigPtr& config) {
-  KConfigGroup miscGroup(config, CSVImporter::m_confMiscName);
-  m_initialWidth = miscGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfWidth), 800);
-  m_initialHeight = miscGroup.readEntry(CSVImporter::m_miscSettingsConfName.value(ConfHeight), 400);
+  KConfigGroup miscGroup(config, CSVImporterCore::m_confMiscName);
+  m_initialWidth = miscGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfWidth), 800);
+  m_initialHeight = miscGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfHeight), 400);
 }
 
 void CSVWizard::saveWindowSize(const KSharedConfigPtr& config) {
-  KConfigGroup miscGroup(config, CSVImporter::m_confMiscName);
+  KConfigGroup miscGroup(config, CSVImporterCore::m_confMiscName);
   m_initialHeight = this->geometry().height();
   m_initialWidth = this->geometry().width();
-  miscGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfWidth), m_initialWidth);
-  miscGroup.writeEntry(CSVImporter::m_miscSettingsConfName.value(ConfHeight), m_initialHeight);
+  miscGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfWidth), m_initialWidth);
+  miscGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfHeight), m_initialHeight);
   miscGroup.sync();
 }
 
@@ -308,7 +308,7 @@ bool CSVWizard::eventFilter(QObject *object, QEvent *event)
 void CSVWizard::slotClose()
 {
   m_imp->m_profile->m_lastUsedDirectory = m_imp->m_file->m_inFileName;
-  m_imp->m_profile->writeSettings(CSVImporter::configFile());
+  m_imp->m_profile->writeSettings(CSVImporterCore::configFile());
   m_imp->profilesAction(m_imp->m_profile->type(), ProfileAction::UpdateLastUsed, m_imp->m_profile->m_profileName, m_imp->m_profile->m_profileName);
   close();
 }
@@ -316,7 +316,7 @@ void CSVWizard::slotClose()
 void CSVWizard::fileDialogClicked()
 {
   m_imp->profileFactory(m_pageIntro->m_profileType, m_pageIntro->ui->m_profiles->currentText());
-  bool profileExists = m_imp->m_profile->readSettings(CSVImporter::configFile());
+  bool profileExists = m_imp->m_profile->readSettings(CSVImporterCore::configFile());
 
   if (!m_fileName.isEmpty()) {
     if (!m_imp->m_file->getInFileName(m_fileName)) {
@@ -327,7 +327,7 @@ void CSVWizard::fileDialogClicked()
   } else if (!m_imp->m_file->getInFileName(m_imp->m_profile->m_lastUsedDirectory))
     return;
 
-  saveWindowSize(CSVImporter::configFile());
+  saveWindowSize(CSVImporterCore::configFile());
   m_imp->m_file->readFile(m_imp->m_profile);
   m_imp->m_file->setupParser(m_imp->m_profile);
 
@@ -443,7 +443,7 @@ void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
 }
 
 //-------------------------------------------------------------------------------------------------------
-IntroPage::IntroPage(CSVWizard *dlg, CSVImporter *imp) :
+IntroPage::IntroPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
   ui(new Ui::IntroPage)
 {
@@ -551,7 +551,7 @@ void IntroPage::profileChanged(const ProfileAction action)
       break;
   }
 
-  if (CSVImporter::profilesAction(m_profileType, action, m_profiles.value(cbIndex), cbText)) {
+  if (CSVImporterCore::profilesAction(m_profileType, action, m_profiles.value(cbIndex), cbText)) {
     switch (action) {
       case ProfileAction::Add:
         m_profiles.append(cbText);
@@ -601,7 +601,7 @@ void IntroPage::profileTypeChanged(const Profile profileType, bool toggled)
   if (!toggled)
     return;
 
-  KConfigGroup profilesGroup(CSVImporter::configFile(), CSVImporter::m_confProfileNames);
+  KConfigGroup profilesGroup(CSVImporterCore::configFile(), CSVImporterCore::m_confProfileNames);
   m_profileType = profileType;
   QString profileTypeStr;
   switch (m_profileType) {
@@ -628,10 +628,10 @@ void IntroPage::profileTypeChanged(const Profile profileType, bool toggled)
     default:
       break;
   }
-  profileTypeStr = CSVImporter::m_profileConfPrefix.value(m_profileType);
+  profileTypeStr = CSVImporterCore::m_profileConfPrefix.value(m_profileType);
 
   m_profiles = profilesGroup.readEntry(profileTypeStr, QStringList());
-  int priorProfile = profilesGroup.readEntry(CSVImporter::m_confPriorName + profileTypeStr, 0);
+  int priorProfile = profilesGroup.readEntry(CSVImporterCore::m_confPriorName + profileTypeStr, 0);
   ui->m_profiles->clear();
   ui->m_profiles->addItems(m_profiles);
   ui->m_profiles->setCurrentIndex(priorProfile);
@@ -659,7 +659,7 @@ void IntroPage::slotStockPricesRadioToggled(bool toggled)
   profileTypeChanged(Profile::StockPrices, toggled);
 }
 
-SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporter *imp) :
+SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
   ui(new Ui::SeparatorPage)
 {
@@ -827,7 +827,7 @@ void SeparatorPage::cleanupPage()
   m_dlg->m_pageIntro->initializePage();  //  Need to show button(QWizard::CustomButton1) not 'NextButton'
 }
 
-RowsPage::RowsPage(CSVWizard *dlg, CSVImporter *imp) :
+RowsPage::RowsPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
     ui(new Ui::RowsPage)
 {
@@ -924,7 +924,7 @@ void RowsPage::endRowChanged(int val)
 }
 
 
-FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporter *imp) :
+FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
     ui(new Ui::FormatsPage)
 {

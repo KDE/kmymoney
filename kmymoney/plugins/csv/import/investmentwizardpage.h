@@ -50,7 +50,7 @@ class InvestmentPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit InvestmentPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~InvestmentPage();
 
   /**

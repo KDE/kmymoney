@@ -20,16 +20,23 @@
 
 #include <QDebug>
 
+#include <KPluginFactory>
+
 #include "mymoneyfile.h"
 #include "onlinejobadministration.h"
 
 #include "plugins/onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"
 
-onlineJobPluginMockup::onlineJobPluginMockup()
-    : OnlinePluginExtended(nullptr, "onlinejobpluginmockup")
+onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const QVariantList &args) :
+  OnlinePluginExtended(parent, "onlinejobpluginmockup")
 {
+  Q_UNUSED(args);
   qDebug("onlineJobPluginMockup should be used during development only!");
+}
+
+onlineJobPluginMockup::~onlineJobPluginMockup()
+{
 }
 
 void onlineJobPluginMockup::protocols(QStringList& protocolList) const
@@ -60,7 +67,7 @@ MyMoneyKeyValueContainer onlineJobPluginMockup::onlineBankingSettings(const MyMo
 bool onlineJobPluginMockup::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 {
   Q_UNUSED(moreAccounts);
-  if (acc.onlineBankingSettings().value("provider") == objectName())
+  if (acc.onlineBankingSettings().value("provider").toLower() == objectName())
     return true;
   return false;
 }
@@ -68,7 +75,7 @@ bool onlineJobPluginMockup::updateAccount(const MyMoneyAccount& acc, bool moreAc
 QStringList onlineJobPluginMockup::availableJobs(QString accountId)
 {
   try {
-    if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
+    if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName())
       return onlineJobAdministration::instance()->availableOnlineTasks();
   } catch (MyMoneyException&) {
   }
@@ -79,7 +86,7 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId)
 IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QString taskName)
 {
   try {
-    if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
+    if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName())
       return IonlineTaskSettings::ptr(new sepaCreditTransferSettingsMockup);
   } catch (MyMoneyException&) {
   }
@@ -92,3 +99,7 @@ void onlineJobPluginMockup::sendOnlineJob(QList< onlineJob >& jobs)
     qDebug() << "Pretend to send: " << job.taskIid() << job.id();
   }
 }
+
+K_PLUGIN_FACTORY_WITH_JSON(onlineJobPluginMockupFactory, "onlinejobpluginmockup.json", registerPlugin<onlineJobPluginMockup>();)
+
+#include "onlinejobpluginmockup.moc"

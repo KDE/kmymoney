@@ -30,8 +30,8 @@
 
 struct WbMapAccountDialog::Private
 {
-  QFutureWatcher<QList<Weboob::Account> > watcher;
-  QFutureWatcher<QList<Weboob::Backend> > watcher2;
+  QFutureWatcher<QList<WeboobExt::Account> > watcher;
+  QFutureWatcher<QList<WeboobExt::Backend> > watcher2;
   std::unique_ptr<QProgressDialog> progress;
 };
 
@@ -98,7 +98,7 @@ void WbMapAccountDialog::newPage(int id)
 
         QCoreApplication::processEvents();
 
-        QFuture<QList<Weboob::Backend> > future = QtConcurrent::run(weboob, &Weboob::getBackends);
+        QFuture<QList<WeboobExt::Backend> > future = QtConcurrent::run(weboob, &WeboobExt::getBackends);
         d2->watcher2.setFuture(future);
 
         break;
@@ -110,7 +110,7 @@ void WbMapAccountDialog::newPage(int id)
 
         QCoreApplication::processEvents();
 
-        QFuture<QList<Weboob::Account> > future = QtConcurrent::run(weboob, &Weboob::getAccounts, backendsList->currentItem()->text(0));
+        QFuture<QList<WeboobExt::Account> > future = QtConcurrent::run(weboob, &WeboobExt::getAccounts, backendsList->currentItem()->text(0));
         d->watcher.setFuture(future);
         button(QWizard::BackButton)->setEnabled(false);
         accountsList->setEnabled(false);
@@ -126,10 +126,10 @@ void WbMapAccountDialog::newPage(int id)
 
 void WbMapAccountDialog::gotBackends()
 {
-  QList<Weboob::Backend> backends = d2->watcher2.result();
+  QList<WeboobExt::Backend> backends = d2->watcher2.result();
 
-  for (QListIterator<Weboob::Backend> it(backends); it.hasNext();) {
-    Weboob::Backend backend = it.next();
+  for (QListIterator<WeboobExt::Backend> it(backends); it.hasNext();) {
+    WeboobExt::Backend backend = it.next();
     QStringList headers;
     headers << backend.name << backend.module;
     backendsList->addTopLevelItem(new QTreeWidgetItem(headers));
@@ -140,10 +140,10 @@ void WbMapAccountDialog::gotBackends()
 
 void WbMapAccountDialog::gotAccounts()
 {
-  QList<Weboob::Account> accounts = d->watcher.result();
+  QList<WeboobExt::Account> accounts = d->watcher.result();
 
-  for (QListIterator<Weboob::Account> it(accounts); it.hasNext();) {
-    Weboob::Account account = it.next();
+  for (QListIterator<WeboobExt::Account> it(accounts); it.hasNext();) {
+    WeboobExt::Account account = it.next();
     QStringList headers;
     headers << account.id << account.name << account.balance.formatMoney(QString(), 2);
     accountsList->addTopLevelItem(new QTreeWidgetItem(headers));

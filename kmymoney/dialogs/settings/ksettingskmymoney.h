@@ -29,6 +29,12 @@ class KSettingsKMyMoney : public KConfigDialog
 {
 public:
   explicit KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config);
+
+Q_SIGNALS:
+  void pluginsChanged();
+
+private Q_SLOTS:
+  void slotPluginsChanged(bool changed);
 };
 
 

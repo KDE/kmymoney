@@ -43,7 +43,7 @@
 #include "mymoneypayee.h"
 #include "mymoneyexception.h"
 #include "csvexportdlg.h"
-#include "csvexporterplugin.h"
+#include "csvexporter.h"
 #include "mymoneyenums.h"
 
 CsvWriter::CsvWriter() :

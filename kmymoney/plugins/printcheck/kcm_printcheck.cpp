@@ -67,20 +67,9 @@ void PluginSettingsWidget::returnPressed(const QString& url)
     m_checkTemplatePreviewHTMLPart->load(QUrl::fromUserInput(url));
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_kmm_printcheck.json", registerPlugin<KCMPrintCheck>();)
-
 KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args)
   : KCModule(parent, args)
 {
-  KAboutData *about = new KAboutData(QStringLiteral("kmm_printcheck"),
-                                    i18n("KMyMoney print check"),
-                                    QStringLiteral(VERSION), QString(),
-                                    KAboutLicense::GPL,
-                                    i18n("Copyright 2009" ) );
-  about->addAuthor( QString::fromUtf8("Cristian Oneț") );
-
-  setAboutData( about );
-
   PluginSettingsWidget* w = new PluginSettingsWidget(this);
   addConfig(PluginSettings::self(), w);
   QVBoxLayout *layout = new QVBoxLayout;
@@ -93,5 +82,7 @@ KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args)
 KCMPrintCheck::~KCMPrintCheck()
 {
 }
+
+K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_printcheck.json", registerPlugin<KCMPrintCheck>();)
 
 #include "kcm_printcheck.moc"

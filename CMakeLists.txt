@@ -120,21 +120,21 @@ endif(ENABLE_WEBENGINE)
 
 # check for optional OFX support
 set(LIBOFX_DEFAULT "AUTO")
-if(DEFINED ENABLE_LIBOFX)
-  set(LIBOFX_DEFAULT ${ENABLE_LIBOFX})
-endif(DEFINED ENABLE_LIBOFX)
-option(ENABLE_LIBOFX "Enable OFX plugin" ON)
-if(ENABLE_LIBOFX)
+if(DEFINED ENABLE_OFXIMPORTER)
+  set(LIBOFX_DEFAULT ${ENABLE_OFXIMPORTER})
+endif(DEFINED ENABLE_OFXIMPORTER)
+
+if(ENABLE_OFXIMPORTER)
   find_package(LibOfx)
   if(NOT LIBOFX_FOUND)
     if(NOT LIBOFX_DEFAULT STREQUAL "AUTO")
       message(FATAL_ERROR "LibOFX not found")
     endif(NOT LIBOFX_DEFAULT STREQUAL "AUTO")
-    set(ENABLE_LIBOFX OFF CACHE BOOL "Enable OFX plugin" FORCE)
+    set(ENABLE_OFXIMPORTER OFF CACHE BOOL "Enable OFX plugin" FORCE)
   else(NOT LIBOFX_FOUND)
     check_struct_has_member("struct OfxFiLogin" "clientuid" "libofx/libofx.h" LIBOFX_HAVE_CLIENTUID)
   endif(NOT LIBOFX_FOUND)
-endif(ENABLE_LIBOFX)
+endif(ENABLE_OFXIMPORTER)
 
 # check for optional KBanking support
 set(KBANKING_FOUND "AUTO")
@@ -203,6 +203,8 @@ option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
 
 option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
 option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
+
+option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON)
 
 option(ENABLE_UNFINISHEDFEATURES "For devs only" OFF)
 

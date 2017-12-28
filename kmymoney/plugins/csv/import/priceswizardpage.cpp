@@ -32,7 +32,7 @@
 #include "mymoneysecurity.h"
 
 #include "csvwizard.h"
-#include "csvimporter.h"
+#include "core/csvimportercore.h"
 
 #include "securitydlg.h"
 #include "currenciesdlg.h"
@@ -43,7 +43,7 @@
 
 // ----------------------------------------------------------------------------
 
-PricesPage::PricesPage(CSVWizard *dlg, CSVImporter *imp) :
+PricesPage::PricesPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
   ui(new Ui::PricesPage)
 {

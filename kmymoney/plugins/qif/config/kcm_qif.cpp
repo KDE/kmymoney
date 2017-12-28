@@ -22,24 +22,14 @@
 #include <config-kmymoney-version.h>
 
 // KDE includes
+
 #include <KPluginFactory>
 #include <KAboutData>
 
 #include "mymoneyqifprofileeditor.h"
 
-K_PLUGIN_FACTORY(KCMqifFactory, registerPlugin<KCMqif>();)
-
 KCMqif::KCMqif(QWidget *parent, const QVariantList& args) : KCModule(parent, args)
 {
-  KAboutData *about = new KAboutData(QStringLiteral("kmm_csvimport"),
-                                    i18n("KMyMoney QIF importer"),
-                                    QStringLiteral(VERSION), QString(),
-                                    KAboutLicense::GPL,
-                                    i18n("Copyright 2002-2017" ) );
-  about->addAuthor( QLatin1String("Thomas Baumgart") );
-
-  setAboutData( about );
-
   auto editor = new MyMoneyQifProfileEditor(true, this);
   auto layout = new QVBoxLayout;
   setLayout(layout);
@@ -47,5 +37,7 @@ KCMqif::KCMqif(QWidget *parent, const QVariantList& args) : KCModule(parent, arg
   setButtons(NoAdditionalButton);
   load();
 }
+
+K_PLUGIN_FACTORY(KCMqifFactory, registerPlugin<KCMqif>();)
 
 #include "kcm_qif.moc"

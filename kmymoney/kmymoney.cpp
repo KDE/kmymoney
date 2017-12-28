@@ -67,8 +67,6 @@
 #include <KRecentDirs>
 #include <KProcess>
 #include <KAboutApplicationDialog>
-#include <KPluginMetaData>
-#include <KPluginLoader>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -211,7 +209,6 @@ public:
       m_statementXMLindex(0),
       m_balanceWarning(0),
       m_collectingStatements(false),
-      m_pluginLoader(0),
       m_backupResult(0),
       m_backupMount(0),
       m_ignoreBackupExitCode(false),
@@ -262,32 +259,15 @@ public:
 
   bool                          m_collectingStatements;
   QStringList                   m_statementResults;
-  KMyMoneyPlugin::PluginLoader* m_pluginLoader;
   QString                       m_lastPayeeEnteredId;
 
   /** the configuration object of the application */
   KSharedConfigPtr m_config;
 
   /**
-   * @brief List of all plugged plugins
-   *
-   * The key is the file name of the plugin.
+   * @brief Structure of plugins objects by their interfaces
    */
-  QMap<QString, KMyMoneyPlugin::Plugin*> m_plugins;
-
-  /**
-   * @brief List of plugged importer plugins
-   *
-   * The key is the objectName of the plugin.
-   */
-  QMap<QString, KMyMoneyPlugin::ImporterPlugin*> m_importerPlugins;
-
-  /**
-   * @brief List of plugged online plugins
-   *
-   * The key is the objectName of the plugin.
-   */
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*> m_onlinePlugins;
+  KMyMoneyPlugin::Container m_plugins;
 
   /**
     * The following variable represents the state while crafting a backup.
@@ -335,8 +315,6 @@ public:
   // allows multiple imports to be launched trough web connect and to be executed sequentially
   QQueue<QString> m_importUrlsQueue;
   KFindTransactionDlg* m_searchDlg;
-
-  QObject*              m_pluginInterface;
 
   MyMoneyAccount        m_selectedAccount;
   MyMoneyAccount        m_reconciliationAccount;
@@ -444,8 +422,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // now initialize the plugin structure
   createInterfaces();
-  loadPlugins();
-  d->m_myMoneyView->setOnlinePlugins(d->m_onlinePlugins);
+  KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, d->m_plugins, this, guiFactory());
+  onlineJobAdministration::instance()->setOnlinePlugins(d->m_plugins.extended);
+  d->m_myMoneyView->setOnlinePlugins(d->m_plugins.online);
 
   setCentralWidget(frame);
 
@@ -484,7 +463,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   d->m_balanceWarning = new KBalanceWarning(this);
 
   // setup the initial configuration
-  slotUpdateConfiguration();
+  slotUpdateConfiguration(QString());
 
   // kickstart date change timer
   slotDateChanged();
@@ -500,7 +479,7 @@ KMyMoneyApp::~KMyMoneyApp()
   onlineJobAdministration::instance()->clearCaches();
 
   // we need to unload all plugins before we destroy anything else
-  unloadPlugins();
+  KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Unload, d->m_plugins, this, guiFactory());
 
   delete d->m_searchDlg;
   delete d->m_transactionEditor;
@@ -1281,8 +1260,8 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   bool result = false;
 
   // Iterate through the plugins and see if there's a loaded plugin who can handle it
-  QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = d->m_importerPlugins.constBegin();
-  while (it_plugin != d->m_importerPlugins.constEnd()) {
+  QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = d->m_plugins.importer.constBegin();
+  while (it_plugin != d->m_plugins.importer.constEnd()) {
     if ((*it_plugin)->isMyFormat(url.path())) {
       result = true;
       break;
@@ -1293,7 +1272,7 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   // If we did not find a match, try importing it as a KMM statement file,
   // which is really just for testing.  the statement file is not exposed
   // to users.
-  if (it_plugin == d->m_importerPlugins.constEnd())
+  if (it_plugin == d->m_plugins.importer.constEnd())
     if (MyMoneyStatement::isStatementFile(url.path()))
       result = true;
 
@@ -1942,8 +1921,8 @@ void KMyMoneyApp::slotSettings()
     return;
 
   // otherwise, we have to create it
-  KConfigDialog* dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
-  connect(dlg, &KConfigDialog::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
+  auto dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
+  connect(dlg, &KSettingsKMyMoney::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
   dlg->show();
 }
 
@@ -1954,8 +1933,13 @@ void KMyMoneyApp::slotShowCredits()
   dlg.exec();
 }
 
-void KMyMoneyApp::slotUpdateConfiguration()
+void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 {
+  if(dialogName.compare(QLatin1String("Plugins")) == 0) {
+    KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, d->m_plugins, this, guiFactory());
+    onlineJobAdministration::instance()->updateActions();
+    return;
+  }
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
 #ifdef ENABLE_UNFINISHEDFEATURES
@@ -2674,12 +2658,12 @@ void KMyMoneyApp::slotUpdateActions()
   QList<MyMoneyAccount> accList;
   file->accountList(accList);
   QList<MyMoneyAccount>::const_iterator it_a;
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constEnd();
-  for (it_a = accList.constBegin(); (it_p == d->m_onlinePlugins.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
+  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_plugins.online.constEnd();
+  for (it_a = accList.constBegin(); (it_p == d->m_plugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
     if ((*it_a).hasOnlineMapping()) {
       // check if provider is available
-      it_p = d->m_onlinePlugins.constFind((*it_a).onlineBankingSettings().value("provider"));
-      if (it_p != d->m_onlinePlugins.constEnd()) {
+      it_p = d->m_plugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+      if (it_p != d->m_plugins.online.constEnd()) {
         QStringList protocols;
         (*it_p)->protocols(protocols);
         if (protocols.count() > 0) {
@@ -2701,8 +2685,8 @@ void KMyMoneyApp::slotUpdateActions()
             pActions[Action::UnmapOnlineAccount]->setEnabled(true);
             // check if provider is available
             QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-            it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value(QLatin1String("provider")));
-            if (it_p != d->m_onlinePlugins.constEnd()) {
+            it_p = d->m_plugins.online.constFind(d->m_selectedAccount.onlineBankingSettings().value(QLatin1String("provider")));
+            if (it_p != d->m_plugins.online.constEnd()) {
               QStringList protocols;
               (*it_p)->protocols(protocols);
               if (protocols.count() > 0) {
@@ -2710,7 +2694,7 @@ void KMyMoneyApp::slotUpdateActions()
               }
             }
           } else {
-            pActions[Action::MapOnlineAccount]->setEnabled(d->m_onlinePlugins.count() > 0);
+            pActions[Action::MapOnlineAccount]->setEnabled(d->m_plugins.online.count() > 0);
           }
           break;
 
@@ -3060,8 +3044,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         // remove the statement files
         d->unlinkStatementXML();
 
-        QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = d->m_importerPlugins.constBegin();
-        while (it_plugin != d->m_importerPlugins.constEnd()) {
+        QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = d->m_plugins.importer.constBegin();
+        while (it_plugin != d->m_plugins.importer.constEnd()) {
           if ((*it_plugin)->isMyFormat(url)) {
             QList<MyMoneyStatement> statements;
             if (!(*it_plugin)->import(url)) {
@@ -3076,7 +3060,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         // If we did not find a match, try importing it as a KMM statement file,
         // which is really just for testing.  the statement file is not exposed
         // to users.
-        if (it_plugin == d->m_importerPlugins.constEnd())
+        if (it_plugin == d->m_plugins.importer.constEnd())
           if (MyMoneyStatement::isStatementFile(url))
             MyMoneyStatementReader::importStatement(url, false, &progressCallback);
 
@@ -3102,125 +3086,6 @@ void KMyMoneyApp::createInterfaces()
 
   // setup the calendar interface for schedules
   MyMoneySchedule::setProcessingCalendar(this);
-}
-
-void KMyMoneyApp::loadPlugins()
-{
-  Q_ASSERT(!d->m_pluginLoader);
-  d->m_pluginLoader = new KMyMoneyPlugin::PluginLoader(this);
-
-  //! @todo Junior Job: Improve the config read system
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup group{ config->group("Plugins") };
-
-  const auto plugins = KPluginLoader::findPlugins("kmymoney");
-  d->m_pluginLoader->addPluginInfo(plugins);
-
-  for (const KPluginMetaData & pluginData : plugins) {
-    // Only load plugins which are enabled and have the right serviceType. Other serviceTypes are loaded on demand.
-    if (isPluginEnabled(pluginData, group))
-      slotPluginLoad(pluginData);
-  }
-
-  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::pluginEnabled, this, &KMyMoneyApp::slotPluginLoad);
-  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::pluginDisabled, this, &KMyMoneyApp::slotPluginUnload);
-}
-
-void KMyMoneyApp::unloadPlugins()
-{
-  Q_ASSERT(d->m_pluginLoader);
-  delete d->m_pluginLoader;
-}
-
-inline bool KMyMoneyApp::isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup)
-{
-  //! @fixme: there is a function in KMyMoneyPlugin::PluginLoader which has to have the same content
-  if (metaData.serviceTypes().contains("KMyMoney/Plugin")) {
-    const QString keyName{metaData.name() + "Enabled"};
-    if (configGroup.hasKey(keyName))
-      return configGroup.readEntry(keyName, true);
-    return metaData.isEnabledByDefault();
-  }
-  return false;
-}
-
-void KMyMoneyApp::slotPluginLoad(const KPluginMetaData& metaData)
-{
-  std::unique_ptr<QPluginLoader> loader{new QPluginLoader{metaData.fileName()}};
-  QObject* plugin = loader->instance();
-  if (!plugin) {
-    qWarning("Could not load plugin '%s', error: %s", qPrintable(metaData.fileName()), qPrintable(loader->errorString()));
-    return;
-  }
-
-  if ( d->m_plugins.contains(metaData.fileName()) ) {
-    /** @fixme Handle a reload e.g. objectNames are equal but the object are different (plugin != d->m_plugins[plugin->objectName()])
-     *  Also it could be useful to drop the dependence on objectName()
-     */
-
-    /* Note: there is nothing to delete here because if the plugin was loaded already,
-       plugin points to the same object as the previously loaded one. */
-    return;
-  }
-
-  KMyMoneyPlugin::Plugin* kmmPlugin = qobject_cast<KMyMoneyPlugin::Plugin*>(plugin);
-  if (!kmmPlugin) {
-    qWarning("Could not load plugin '%s'.", qPrintable(metaData.fileName()));
-    return;
-  }
-
-  // check for online plugin
-  KMyMoneyPlugin::OnlinePlugin* op = dynamic_cast<KMyMoneyPlugin::OnlinePlugin *>(plugin);
-  // check for extended online plugin
-  KMyMoneyPlugin::OnlinePluginExtended* ope = dynamic_cast<KMyMoneyPlugin::OnlinePluginExtended*>(plugin);
-  // check for importer plugin
-  KMyMoneyPlugin::ImporterPlugin* ip = dynamic_cast<KMyMoneyPlugin::ImporterPlugin *>(plugin);
-
-  // Tell the plugin it is about to get plugged
-  kmmPlugin->plug();
-
-  // plug the plugin
-  guiFactory()->addClient(kmmPlugin);
-
-  d->m_plugins[metaData.fileName()] = kmmPlugin;
-
-  if (op)
-    d->m_onlinePlugins[plugin->objectName()] = op;
-
-  if (ope)
-    onlineJobAdministration::instance()->addPlugin(plugin->objectName(), ope);
-
-  if (ip)
-    d->m_importerPlugins[plugin->objectName()] = ip;
-
-  slotUpdateActions();
-}
-
-void KMyMoneyApp::slotPluginUnload(const KPluginMetaData& metaData)
-{
-  KMyMoneyPlugin::Plugin* plugin = d->m_plugins[metaData.fileName()];
-
-  // Remove and test if the plugin was actually loaded
-  if (!d->m_plugins.remove(metaData.fileName()) || plugin == nullptr)
-    return;
-
-  // check for online plugin
-  KMyMoneyPlugin::OnlinePlugin* op = dynamic_cast<KMyMoneyPlugin::OnlinePlugin *>(plugin);
-  // check for importer plugin
-  KMyMoneyPlugin::ImporterPlugin* ip = dynamic_cast<KMyMoneyPlugin::ImporterPlugin *>(plugin);
-
-  // unplug the plugin
-  guiFactory()->removeClient(plugin);
-
-  if (op)
-    d->m_onlinePlugins.remove(plugin->objectName());
-
-  if (ip)
-    d->m_importerPlugins.remove(plugin->objectName());
-
-  plugin->unplug();
-  slotUpdateActions();
-
 }
 
 void KMyMoneyApp::slotAutoSave()
@@ -3328,18 +3193,18 @@ void KMyMoneyApp::slotAccountMapOnline()
   // if we have more than one provider let the user select the current provider
   QString provider;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  switch (d->m_onlinePlugins.count()) {
+  switch (d->m_plugins.online.count()) {
     case 0:
       break;
     case 1:
-      provider = d->m_onlinePlugins.begin().key();
+      provider = d->m_plugins.online.begin().key();
       break;
     default: {
         QMenu popup(this);
         popup.setTitle(i18n("Select online banking plugin"));
 
         // Populate the pick list with all the provider
-        for (it_p = d->m_onlinePlugins.constBegin(); it_p != d->m_onlinePlugins.constEnd(); ++it_p) {
+        for (it_p = d->m_plugins.online.constBegin(); it_p != d->m_plugins.online.constEnd(); ++it_p) {
           popup.addAction(it_p.key())->setData(it_p.key());
         }
 
@@ -3362,8 +3227,8 @@ void KMyMoneyApp::slotAccountMapOnline()
     return;
 
   // find the provider
-  it_p = d->m_onlinePlugins.constFind(provider);
-  if (it_p != d->m_onlinePlugins.constEnd()) {
+  it_p = d->m_plugins.online.constFind(provider);
+  if (it_p != d->m_plugins.online.constEnd()) {
     // plugin found, call it
     MyMoneyKeyValueContainer settings;
     if ((*it_p)->mapAccount(d->m_selectedAccount, settings)) {
@@ -3396,7 +3261,7 @@ void KMyMoneyApp::slotAccountUpdateOnlineAll()
   // provider is not currently present
   for (it_a = accList.begin(); it_a != accList.end();) {
     if (!(*it_a).hasOnlineMapping()
-        || d->m_onlinePlugins.find((*it_a).onlineBankingSettings().value("provider")) == d->m_onlinePlugins.end()) {
+        || d->m_plugins.online.find((*it_a).onlineBankingSettings().value("provider").toLower()) == d->m_plugins.online.end()) {
       it_a = accList.erase(it_a);
     } else
       ++it_a;
@@ -3408,7 +3273,7 @@ void KMyMoneyApp::slotAccountUpdateOnlineAll()
   // now work on the remaining list of accounts
   int cnt = accList.count() - 1;
   for (it_a = accList.begin(); it_a != accList.end(); ++it_a) {
-    it_p = d->m_onlinePlugins.constFind((*it_a).onlineBankingSettings().value("provider"));
+    it_p = d->m_plugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
     (*it_p)->updateAccount(*it_a, cnt != 0);
     --cnt;
   }
@@ -3437,8 +3302,8 @@ void KMyMoneyApp::slotAccountUpdateOnline()
 
   // find the provider
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider"));
-  if (it_p != d->m_onlinePlugins.constEnd()) {
+  it_p = d->m_plugins.online.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider").toLower());
+  if (it_p != d->m_plugins.online.constEnd()) {
     // plugin found, call it
     d->m_collectingStatements = true;
     d->m_statementResults.clear();

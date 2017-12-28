@@ -28,13 +28,13 @@ class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
 
-class KMMReconciliationReportPlugin: public KMyMoneyPlugin::Plugin
+class ReconciliationReport: public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.reconcilationreport" FILE "kmm_reconciliationreport.json")
 
 public:
-  KMMReconciliationReportPlugin();
+  explicit ReconciliationReport(QObject *parent, const QVariantList &args);
+  ~ReconciliationReport() override;
 
 public Q_SLOTS:
   void plug() override;

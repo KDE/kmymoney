@@ -45,13 +45,13 @@
 
 struct KBPickStartDate::Private {
   Ui::KBPickStartDate ui;
-  KMyMoneyBanking *banking;
+  KBankingExt *banking;
   QDate firstPossible;
   QDate lastUpdate;
 };
 
 
-KBPickStartDate::KBPickStartDate(KMyMoneyBanking* qb,
+KBPickStartDate::KBPickStartDate(KBankingExt* qb,
                                  const QDate &firstPossible,
                                  const QDate &lastUpdate,
                                  const QString& accountName,

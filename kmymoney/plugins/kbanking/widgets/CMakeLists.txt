@@ -1,23 +1,23 @@
 
 ########### next target ###############
 
-set(kmm_kbanking_widgets_la_SOURCES
+set(kbanking_widgets_la_SOURCES
   chiptandialog.cpp
   kbaccountlist.cpp
   kbjoblist.cpp
 )
 
-set(kmm_kbanking_widgets_UI
+set(kbanking_widgets_UI
   chiptandialog.ui
 )
 
-kconfig_add_kcfg_files(kmm_kbanking_widgets_la_SOURCES ../kbankingsettings.kcfgc)
+kconfig_add_kcfg_files(kbanking_widgets_la_SOURCES ../kbankingsettings.kcfgc)
 
-ki18n_wrap_ui(kmm_kbanking_widgets_la_SOURCES ${kmm_kbanking_widgets_UI})
+ki18n_wrap_ui(kbanking_widgets_la_SOURCES ${kbanking_widgets_UI})
 
-add_library(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})
+add_library(kbanking_widgets STATIC ${kbanking_widgets_la_SOURCES})
 
-target_link_libraries(kmm_kbanking_widgets
+target_link_libraries(kbanking_widgets
   Qt5::Widgets
   Qt5::QuickWidgets
   aqbanking::aqbanking

@@ -38,7 +38,7 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "csvwizard.h"
-#include "csvimporter.h"
+#include "core/csvimportercore.h"
 
 #include "transactiondlg.h"
 #include "securitydlg.h"
@@ -50,7 +50,7 @@
 
 // ----------------------------------------------------------------------------
 
-InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporter *imp) :
+InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
   ui(new Ui::InvestmentPage)
 {

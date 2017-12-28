@@ -243,7 +243,7 @@ void KSettingsOnlineQuotes::slotEntryChanged(bool)
 void KSettingsOnlineQuotes::slotDumpCSVProfile()
 {
   Q_D(KSettingsOnlineQuotes);
-  KSharedConfigPtr config = CSVImporter::configFile();
+  KSharedConfigPtr config = CSVImporterCore::configFile();
   PricesProfile profile;
   profile.m_profileName = d->m_currentItem.m_name;
   profile.m_profileType = Profile::StockPrices;
@@ -270,10 +270,10 @@ void KSettingsOnlineQuotes::slotDumpCSVProfile()
     profile = quoteSources.value(d->m_currentItem.m_name);
     if (profile.m_profileName.compare(d->m_currentItem.m_name, Qt::CaseInsensitive) == 0) {
       profile.writeSettings(config);
-      CSVImporter::profilesAction(profile.type(), ProfileAction::Add, profile.m_profileName, profile.m_profileName);
+      CSVImporterCore::profilesAction(profile.type(), ProfileAction::Add, profile.m_profileName, profile.m_profileName);
     }
   }
-  CSVImporter::profilesAction(profile.type(), ProfileAction::UpdateLastUsed, profile.m_profileName, profile.m_profileName);
+  CSVImporterCore::profilesAction(profile.type(), ProfileAction::UpdateLastUsed, profile.m_profileName, profile.m_profileName);
 }
 
 void KSettingsOnlineQuotes::slotUpdateEntry()

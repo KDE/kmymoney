@@ -20,81 +20,49 @@
 #ifndef WEBOOB_HPP
 #define WEBOOB_HPP
 
-#include <QObject>
-#include <QDateTime>
-#include <QMutex>
-#include <kross/core/action.h>
+#include <memory>
 
-#include "mymoneymoney.h"
+#ifdef HAVE_CONFIG_H
+#include <config-kmymoney.h>
+#endif
 
-class Weboob : public QObject
+#include "kmymoneyplugin.h"
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "weboobext.h"
+
+class Weboob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
 {
   Q_OBJECT
-
-  Kross::Action* action;
-  QMutex *mutex;
-  QString path;
+  Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
+  WeboobExt weboob;
+  explicit Weboob(QObject *parent, const QVariantList &args);
+  ~Weboob() override;
 
-  struct Backend {
-    QString name;
-    QString module;
-  };
+  void plug() override;
+  void unplug() override;
 
-  struct Transaction {
-    QString id;
-    QDate date;
-    QDate rdate;
-    enum type_t {
-      TYPE_UNKNOWN = 0,
-      TYPE_TRANSFER,
-      TYPE_ORDER,
-      TYPE_CHECK,
-      TYPE_DEPOSIT,
-      TYPE_PAYBACK,
-      TYPE_WITHDRAWAL,
-      TYPE_CARD,
-      TYPE_LOAN_PAYMENT,
-      TYPE_BANK
-    } type;
-    QString raw;
-    QString category;
-    QString label;
-    MyMoneyMoney amount;
-  };
+  void protocols(QStringList& protocolList) const override;
 
-  struct Account {
-    QString id;
-    QString name;
-    enum type_t {
-      TYPE_UNKNOWN = 0,
-      TYPE_CHECKING,
-      TYPE_SAVINGS,
-      TYPE_DEPOSIT,
-      TYPE_LOAN,
-      TYPE_MARKET,
-      TYPE_JOINT
-    } type;
-    MyMoneyMoney balance;
+  QWidget* accountConfigTab(const MyMoneyAccount& account, QString& tabName) override;
 
-    QList<Transaction> transactions;
-  };
+  MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current) override;
 
-  explicit Weboob(QObject* parent = 0);
+  bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings) override;
 
-  ~Weboob();
+  bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
 
-  QStringList getProtocols();
+protected Q_SLOTS:
 
-  QList<Backend> getBackends();
+  void gotAccount();
 
-  QList<Account> getAccounts(QString backend);
+private:
 
-  Account getAccount(QString backend, QString account, QString max);
-
-  QVariant execute(QString method, QVariantList args);
-
+  struct Private;
+  /// \internal d-pointer instance.
+  const std::unique_ptr<Private> d;
 };
 
-#endif /* WEBOOB_HPP */
+#endif /* WEBOOB_PLUGIN_HPP */

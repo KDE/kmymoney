@@ -4,15 +4,8 @@ add_subdirectory( interfaces )
 add_subdirectory( csv )
 add_subdirectory( qif )
 add_subdirectory( gnc )
-
-if(ENABLE_LIBOFX)
-  add_subdirectory( ofximport )
-endif(ENABLE_LIBOFX)
-
-if (LIBICAL_FOUND)
-  add_subdirectory( icalendarexport )
-endif (LIBICAL_FOUND)
-
+add_subdirectory( ofx )
+add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
 add_subdirectory( printcheck )
 

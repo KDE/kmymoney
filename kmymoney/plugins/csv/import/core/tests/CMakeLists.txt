@@ -16,6 +16,6 @@ ecm_add_tests(${tests_sources}
     "csvimport-"
   LINK_LIBRARIES
     Qt5::Test
-    kmm_csvimport_core
+    kmm_csvimportercore
     csvimport_testcommon
 )

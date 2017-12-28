@@ -395,11 +395,11 @@ void KOnlineJobOutbox::slotOnlineJobSend(QList<onlineJob> jobs)
     // find the provider
     const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
     job.setLock();
-    job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Debug, "KMyMoneyApp::slotOnlineJobSend", "Added to queue for plugin '" + originAcc.onlineBankingSettings().value("provider") + '\''));
+    job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Debug, "KMyMoneyApp::slotOnlineJobSend", "Added to queue for plugin '" + originAcc.onlineBankingSettings().value("provider").toLower() + '\''));
     MyMoneyFileTransaction fileTransaction;
     kmmFile->modifyOnlineJob(job);
     fileTransaction.commit();
-    jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider"), job);
+    jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider").toLower(), job);
   }
 
   // Send onlineJobs to plugins

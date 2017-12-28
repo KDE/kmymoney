@@ -34,7 +34,7 @@
 class QTextStream;
 class MyMoneyTransaction;
 class MyMoneySplit;
-class CsvExporterPlugin;
+class CSVExporter;
 
 /**
   * @author Thomas Baumgart
@@ -54,7 +54,7 @@ public:
   CsvWriter();
   ~CsvWriter();
 
-  CsvExporterPlugin* m_plugin;
+  CSVExporter* m_plugin;
 
   /**
     * This method is used to start the conversion. The parameters control

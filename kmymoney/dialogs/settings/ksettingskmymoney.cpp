@@ -21,7 +21,6 @@
 
 #include <QPushButton>
 
-#include <KPluginSelector>
 #include <KLocalizedString>
 
 #include "ksettingsgeneral.h"
@@ -35,9 +34,9 @@
 #include "ksettingshome.h"
 #include "ksettingsforecast.h"
 #include "ksettingsreports.h"
+#include "ksettingsplugins.h"
 
-#include "pluginloader.h"
-#include "icons/icons.h"
+#include "icons.h"
 
 using namespace Icons;
 
@@ -55,8 +54,8 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto iconsPage = new KSettingsIcons();
   const auto onlineQuotesPage = new KSettingsOnlineQuotes();
   const auto forecastPage = new KSettingsForecast();
-  const auto pluginsPage = KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget();
   const auto reportsPage = new KSettingsReports();
+  const auto pluginsPage = new KSettingsPlugins();
 
   addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::SystemRun).name());
   addPage(homePage, i18n("Home"), Icons::get(Icon::ViewHome).name());
@@ -69,15 +68,25 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColor).name());
   addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFont).name());
   addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcon).name());
-  addPage(pluginsPage, i18n("Plugins"), Icons::get(Icon::NetworkDisconect).name());
+  addPage(pluginsPage, i18n("Plugins"), Icons::get(Icon::NetworkDisconect).name(), QString(), false);
 
   setHelp("details.settings", "kmymoney");
 
-  auto defaultButton = button(QDialogButtonBox::RestoreDefaults);
   connect(this, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
   connect(this, &KConfigDialog::rejected, iconsPage, &KSettingsIcons::slotResetTheme);
   connect(this, &KConfigDialog::settingsChanged, generalPage, &KSettingsGeneral::slotUpdateEquitiesVisibility);
 
-  connect(this, &KConfigDialog::accepted, pluginsPage, &KPluginSelector::save);
-  connect(defaultButton, &QPushButton::clicked, pluginsPage, &KPluginSelector::defaults);
+  auto defaultButton = button(QDialogButtonBox::RestoreDefaults);
+  auto applyButton = button(QDialogButtonBox::Apply);
+  connect(this, &KConfigDialog::accepted, pluginsPage, &KSettingsPlugins::slotSavePluginConfiguration);
+  connect(applyButton, &QPushButton::clicked, pluginsPage, &KSettingsPlugins::slotSavePluginConfiguration);
+  connect(defaultButton, &QPushButton::clicked, pluginsPage, &KSettingsPlugins::slotResetToDefaults);
+  connect(pluginsPage, &KSettingsPlugins::changed, this, &KSettingsKMyMoney::slotPluginsChanged);
+  connect(pluginsPage, &KSettingsPlugins::settingsChanged, this, &KConfigDialog::settingsChanged);
+}
+
+void KSettingsKMyMoney::slotPluginsChanged(bool changed)
+{
+  auto applyButton = button(QDialogButtonBox::Apply);
+  applyButton->setEnabled(changed);
 }

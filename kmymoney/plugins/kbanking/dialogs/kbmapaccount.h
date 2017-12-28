@@ -19,13 +19,13 @@
 
 #include <aqbanking/account.h>
 
-class KMyMoneyBanking;
+class KBankingExt;
 
 class KBMapAccount: public QDialog
 {
   Q_OBJECT
 public:
-  KBMapAccount(KMyMoneyBanking *kb,
+  KBMapAccount(KBankingExt *kb,
                const char *bankCode,
                const char *accountId,
                QWidget* parent = 0,

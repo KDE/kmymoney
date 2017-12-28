@@ -47,7 +47,7 @@ class PricesPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit PricesPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit PricesPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~PricesPage();
 
 private:

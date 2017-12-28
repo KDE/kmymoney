@@ -173,7 +173,7 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
     d->m_CSVSource.m_profileType = Profile::StockPrices;
 
   d->m_CSVSource.m_profileName = sourcename;
-  if (!d->m_CSVSource.readSettings(CSVImporter::configFile())) {
+  if (!d->m_CSVSource.readSettings(CSVImporterCore::configFile())) {
     QMap<QString, PricesProfile> result = defaultCSVQuoteSources();
     d->m_CSVSource = result.value(sourcename);
     if (d->m_CSVSource.m_profileName.isEmpty()) {
@@ -410,7 +410,7 @@ void WebPriceQuote::slotParseCSVQuote(const QString& filename)
     isOK = false;
   else {
     MyMoneyStatement st;
-    CSVImporter* csvImporter = new CSVImporter;
+    CSVImporterCore* csvImporter = new CSVImporterCore;
     st = csvImporter->unattendedImport(filename, &d->m_CSVSource);
     if (!st.m_listPrices.isEmpty())
       emit csvquote(d->m_kmmID, d->m_webID, st);

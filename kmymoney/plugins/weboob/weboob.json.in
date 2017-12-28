@@ -1,0 +1,47 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "romain@weboob.org",
+                "Name": "Romain Bignon"
+            }
+        ],
+        "Description": "Plugin for weboob",
+        "Description[ca@valencia]": "Connector pel Weboob",
+        "Description[ca]": "Connector pel Weboob",
+        "Description[en_GB]": "Plugin for weboob",
+        "Description[es]": "Complemento para weboob",
+        "Description[fi]": "Weboob-liitännäinen",
+        "Description[gl]": "Complemento para Weboob",
+        "Description[nl]": "Plug-in voor weboob",
+        "Description[pl]": "Wtyczka do weboob",
+        "Description[pt]": "'Plugin' para o Weboob",
+        "Description[pt_BR]": "Plugin para o Weboob",
+        "Description[sv]": "Insticksprogram för weboob",
+        "Description[uk]": "Додаток для роботи з weboob",
+        "Description[x-test]": "xxPlugin for weboobxx",
+        "EnabledByDefault": true,
+        "Icon": "network-connect",
+        "Id": "weboob",
+        "License": "GPL",
+        "Name": "Weboob",
+        "Name[ca@valencia]": "Weboob",
+        "Name[ca]": "Weboob",
+        "Name[en_GB]": "Weboob",
+        "Name[es]": "Weboob",
+        "Name[fi]": "Weboob",
+        "Name[gl]": "Weboob",
+        "Name[nl]": "Weboob",
+        "Name[pl]": "Weboob",
+        "Name[pt]": "Weboob",
+        "Name[pt_BR]": "Weboob",
+        "Name[sv]": "Weboob",
+        "Name[uk]": "Weboob",
+        "Name[x-test]": "xxWeboobxx",
+        "ServiceTypes": [
+            "KMyMoney/Plugin"
+        ],
+        "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
+        "Website": "https://kmymoney.org/plugins.html"
+    }
+}

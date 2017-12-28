@@ -24,7 +24,7 @@
 #include <QDateTime>
 #include <QDialog>
 
-class KMyMoneyBanking;
+class KBankingExt;
 
 /**
   * Class derived from QBPickStartDate and modified to
@@ -37,7 +37,7 @@ class KBPickStartDate : public QDialog
 {
   Q_OBJECT
 public:
-  KBPickStartDate(KMyMoneyBanking* qb,
+  KBPickStartDate(KBankingExt* qb,
                   const QDate &firstPossible,
                   const QDate &lastUpdate,
                   const QString& accountName,

@@ -23,9 +23,9 @@ email                : lukasz.wojnilowicz@gmail.com
 #include <QDate>
 #include "csvenums.h"
 
-#include "csv/import/core/kmm_csvimport_core_export.h"
+#include "csv/import/core/kmm_csvimportercore_export.h"
 
-class KMM_CSVIMPORT_CORE_EXPORT ConvertDate
+class KMM_CSVIMPORTERCORE_EXPORT ConvertDate
 {
 
 public:

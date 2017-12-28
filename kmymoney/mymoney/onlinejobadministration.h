@@ -201,6 +201,17 @@ public:
   template<class baseTask>
   bool isInherited(const QString& taskIid) const;
 
+  /**
+   * @brief makes plugins loaded in KMyMoneyApp available here
+   * @param plugins
+   */
+  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>& plugins);
+
+  /**
+   * @brief updates online actions and should be called after plugin enable or disable
+   */
+  void updateActions();
+
 Q_SIGNALS:
   /**
    * @brief Emitted if canSendAnyTask() changed
@@ -217,8 +228,6 @@ Q_SIGNALS:
   void canSendCreditTransferChanged(bool);
 
 public Q_SLOTS:
-  void addPlugin(const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended*);
-
   /**
    * @brief Slot for plugins to make an onlineTask available.
    * @param task the task to register, I take ownership
@@ -289,7 +298,7 @@ private:
   /**
    * The key is the onlinePlugin's name
    */
-  QMap<QString, KMyMoneyPlugin::OnlinePluginExtended *> m_onlinePlugins;
+  QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>* m_onlinePlugins;
 
   /**
    * The key is the name of the task

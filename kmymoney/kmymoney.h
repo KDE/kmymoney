@@ -48,7 +48,6 @@
 #include "mymoneyenums.h"
 
 class QResizeEvent;
-class KPluginMetaData;
 class MyMoneyObject;
 class MyMoneyInstitution;
 class MyMoneyAccount;
@@ -230,7 +229,7 @@ protected Q_SLOTS:
   /**
     * Call this slot, if any configuration parameter has changed
     */
-  void slotUpdateConfiguration();
+  void slotUpdateConfiguration(const QString &dialogName);
 
   /**
     * This slot is used to start new features during the development cycle
@@ -365,26 +364,6 @@ protected:
     * this method must be called prior to loadPlugins().
     */
   void createInterfaces();
-
-  /**
-    * load all available plugins. Make sure you have called createInterfaces()
-    * before you call this one.
-    */
-  void loadPlugins();
-
-  /**
-    * unload all available plugins. Make sure you have called loadPlugins()
-    * before you call this one.
-    */
-  void unloadPlugins();
-
-  /**
-   * @brief Checks if the given plugin is loaded on start up
-   *
-   * This filters plugins which are loaded on demand only and deactivated plugins.
-   * The configGroup must point to the correct group already.
-   */
-  bool isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup);
 
   /**
    * read general options again and initialize all variables like the recent file list
@@ -608,16 +587,6 @@ public Q_SLOTS:
     * This method updates all KAction items to the current state.
     */
   void slotUpdateActions();
-
-  /**
-   * Loads a plugin
-   */
-  void slotPluginLoad(const KPluginMetaData& metaData);
-
-  /**
-   * Unloads a plugin
-   */
-  void slotPluginUnload(const KPluginMetaData& metaData);
 
   void webConnect(const QString& sourceUrl, const QByteArray &asn_id);
   void webConnect(const QUrl url) { webConnect(url.path(), QByteArray()); }

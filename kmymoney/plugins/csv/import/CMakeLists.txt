@@ -5,12 +5,12 @@ if(NOT ENABLE_CSVIMPORTER)
 endif()
 
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimport.json.in ${CMAKE_CURRENT_BINARY_DIR}/csvimport.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.in ${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json @ONLY)
 
 ########### next target ###############
 
-set(kmm_csvimport_PART_SRCS
-  csvimporterplugin.cpp
+set(csvimporter_PART_SRCS
+  csvimporter.cpp
   csvwizard.cpp
   bankingwizardpage.cpp
   investmentwizardpage.cpp
@@ -21,9 +21,9 @@ set(kmm_csvimport_PART_SRCS
   currenciesdlg.cpp
 )
 
-kconfig_add_kcfg_files(kmm_csvimport_PART_SRCS pluginsettings.kcfgc)
+kconfig_add_kcfg_files(csvimporter_PART_SRCS pluginsettings.kcfgc)
 
-ki18n_wrap_ui(kmm_csvimport_PART_SRCS
+ki18n_wrap_ui(csvimporter_PART_SRCS
   csvwizard.ui
   transactiondlg.ui
   introwizardpage.ui
@@ -39,42 +39,42 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
 )
 
 # Use static library for tests and prices importer only
-add_library(kmm_csvimport MODULE ${kmm_csvimport_PART_SRCS})
+add_library(csvimporter MODULE ${csvimporter_PART_SRCS})
 
-target_link_libraries(kmm_csvimport
+target_link_libraries(csvimporter
   PUBLIC
-    kmm_csvimport_core
+    kmm_csvimportercore
     kmm_plugin
 )
 
 ########### install files ###############
 
-install(FILES kmm_csvimport.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_csvimport")
+install(FILES csvimporter.rc
+        DESTINATION "${KXMLGUI_INSTALL_DIR}/csvimporter")
 
-install(TARGETS kmm_csvimport
+install(TARGETS csvimporter
         DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 # the KCM module
-set(kcm_kmm_csvimport_PART_SRCS
-    kcm_csvimport.cpp
+set(kcm_csvimporter_PART_SRCS
+    kcm_csvimporter.cpp
     )
 
-kconfig_add_kcfg_files(kcm_kmm_csvimport_PART_SRCS pluginsettings.kcfgc)
+kconfig_add_kcfg_files(kcm_csvimporter_PART_SRCS pluginsettings.kcfgc)
 
-ki18n_wrap_ui(kcm_kmm_csvimport_PART_SRCS pluginsettingsdecl.ui)
+ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
-add_library(kcm_kmm_csvimport MODULE ${kcm_kmm_csvimport_PART_SRCS})
+add_library(kcm_csvimporter MODULE ${kcm_csvimporter_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_kmm_csvimport kcm_kmm_csvimport.desktop)
+kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)
 
-target_link_libraries(kcm_kmm_csvimport
+target_link_libraries(kcm_csvimporter
                       KF5::I18n
                       KF5::ConfigWidgets
                       )
 
-install(TARGETS kcm_kmm_csvimport
+install(TARGETS kcm_csvimporter
         DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
-install(FILES kcm_kmm_csvimport.desktop
+install(FILES kcm_csvimporter.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

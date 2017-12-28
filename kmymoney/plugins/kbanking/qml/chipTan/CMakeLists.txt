@@ -5,4 +5,4 @@ set( kbanking_qml_files
   positionmarker.svg
 )
 
-install(FILES ${kbanking_qml_files} DESTINATION ${DATA_INSTALL_DIR}/kmm_kbanking/qml/chipTan/)
+install(FILES ${kbanking_qml_files} DESTINATION ${DATA_INSTALL_DIR}/kbanking/qml/chipTan/)

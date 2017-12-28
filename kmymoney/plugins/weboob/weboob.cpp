@@ -2,6 +2,7 @@
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014-2015 Romain Bignon <romain@symlink.me>
  * Copyright (C) 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
+ * Copyright (C) 2016 Christian David <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,119 +19,172 @@
  */
 
 #include "weboob.h"
+#include "weboobext.h"
 
-#include <QDebug>
-#include <QMutex>
-#include <QStandardPaths>
+#include <QtConcurrentRun>
+#include <QFutureWatcher>
+#include <QProgressDialog>
 
-Weboob::Weboob(QObject* parent)
-    : QObject(parent)
+#include <KPluginFactory>
+#include <KLocalizedString>
+
+#include "dialogs/mapaccount.h"
+#include "dialogs/webaccount.h"
+
+#include "mymoneystatement.h"
+#include "statementinterface.h"
+
+struct Weboob::Private
 {
-  mutex = new QMutex();
-  path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kmm_weboob/weboob.py");
-  action = new Kross::Action(0, path);
-  action->setFile(path);
+  QFutureWatcher<WeboobExt::Account> watcher;
+  std::unique_ptr<QProgressDialog> progress;
+  WebAccountSettings* accountSettings;
+};
+
+Weboob::Weboob(QObject *parent, const QVariantList &args) :
+  KMyMoneyPlugin::Plugin(parent, "weboob"),
+  d(new Private())
+{
+  Q_UNUSED(args)
+  setComponentName("weboob", i18n("Weboob"));
+  setXMLFile("weboob.rc");
+
+  qDebug("Plugins: weboob loaded");
 }
 
 Weboob::~Weboob()
 {
-  delete mutex;
-  action->finalize();
-  delete action;
+  qDebug("Plugins: weboob unloaded");
 }
 
-QVariant Weboob::execute(QString method, QVariantList args)
+void Weboob::plug()
 {
-  QVariant result;
-
-  mutex->lock();
-  result = action->callFunction(method, args);
-  mutex->unlock();
-
-  return result;
+  connect(&d->watcher, &QFutureWatcher<WeboobExt::Account>::finished, this, &Weboob::gotAccount);
 }
 
-QList<Weboob::Backend> Weboob::getBackends()
+void Weboob::unplug()
 {
-  QList<Weboob::Backend> backendsList;
+  disconnect(&d->watcher, &QFutureWatcher<WeboobExt::Account>::finished, this, &Weboob::gotAccount);
+}
 
-  QVariantList args;
+void Weboob::protocols(QStringList& protocolList) const
+{
+  protocolList << "weboob";
+}
 
-  QVariant result = this->execute("get_backends", args);
+QWidget* Weboob::accountConfigTab(const MyMoneyAccount& account, QString& tabName)
+{
+  const MyMoneyKeyValueContainer& kvp = account.onlineBankingSettings();
+  tabName = i18n("Weboob configuration");
 
-  QMap<QString, QVariant> list = result.toMap();
-  QMapIterator<QString, QVariant> it(list);
+  d->accountSettings = new WebAccountSettings(account, 0);
+  d->accountSettings->loadUi(kvp);
 
-  while (it.hasNext()) {
-    it.next();
-    QMap<QString, QVariant> params = it.value().toMap();
+  return d->accountSettings;
+}
 
-    Weboob::Backend backend;
-    backend.name = it.key();
-    backend.module = params["module"].toString();
+MyMoneyKeyValueContainer Weboob::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
+{
+  MyMoneyKeyValueContainer kvp(current);
+  kvp["provider"] = objectName();
+  if (d->accountSettings) {
+    d->accountSettings->loadKvp(kvp);
+  }
+  return kvp;
+}
 
-    backendsList.append(backend);
+bool Weboob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings)
+{
+  Q_UNUSED(acc);
+
+  WbMapAccountDialog w;
+  w.weboob = &weboob;
+  if (w.exec() == QDialog::Accepted) {
+    onlineBankingSettings.setValue("wb-backend", w.backendsList->currentItem()->text(0));
+    onlineBankingSettings.setValue("wb-id", w.accountsList->currentItem()->text(0));
+    onlineBankingSettings.setValue("wb-max", "0");
+    return true;
+  }
+  return false;
+}
+
+bool Weboob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
+{
+  Q_UNUSED(moreAccounts);
+
+  QString bname = kacc.onlineBankingSettings().value("wb-backend");
+  QString id = kacc.onlineBankingSettings().value("wb-id");
+  QString max = kacc.onlineBankingSettings().value("wb-max");
+
+  //! @todo C++14 use make_unique()
+  d->progress = std::unique_ptr<QProgressDialog>(new QProgressDialog());
+  d->progress->setWindowTitle(i18n("Connecting to bank..."));
+  d->progress->setLabelText(i18n("Retrieving transactions..."));
+  d->progress->setModal(true);
+  d->progress->setCancelButton(nullptr);
+  d->progress->setMinimum(0);
+  d->progress->setMaximum(0);
+  d->progress->setMinimumDuration(0);
+
+  QFuture<WeboobExt::Account> future = QtConcurrent::run(&weboob, &WeboobExt::getAccount, bname, id, max);
+  d->watcher.setFuture(future);
+
+  d->progress->exec();
+  d->progress.reset();
+
+  return true;
+}
+
+void Weboob::gotAccount()
+{
+  WeboobExt::Account acc = d->watcher.result();
+
+  MyMoneyAccount kacc = statementInterface()->account("wb-id", acc.id);
+  MyMoneyStatement ks;
+
+  ks.m_accountId = kacc.id();
+  ks.m_strAccountName = acc.name;
+  ks.m_closingBalance = acc.balance;
+  if (acc.transactions.length() > 0)
+    ks.m_dateEnd = acc.transactions.front().date;
+
+#if 0
+  switch (acc.type) {
+    case Weboob::Account::TYPE_CHECKING:
+      ks.m_eType = MyMoneyStatement::etCheckings;
+      break;
+    case Weboob::Account::TYPE_SAVINGS:
+      ks.m_eType = MyMoneyStatement::etSavings;
+      break;
+    case Weboob::Account::TYPE_MARKET:
+      ks.m_eType = MyMoneyStatement::etInvestment;
+      break;
+    case Weboob::Account::TYPE_DEPOSIT:
+    case Weboob::Account::TYPE_LOAN:
+    case Weboob::Account::TYPE_JOINT:
+    case Weboob::Account::TYPE_UNKNOWN:
+      break;
+  }
+#endif
+
+  for (QListIterator<WeboobExt::Transaction> it(acc.transactions); it.hasNext();) {
+    WeboobExt::Transaction tr = it.next();
+    MyMoneyStatement::Transaction kt;
+
+    kt.m_strBankID = QLatin1String("ID ") + tr.id;
+    kt.m_datePosted = tr.rdate;
+    kt.m_amount = tr.amount;
+    kt.m_strMemo = tr.raw;
+    kt.m_strPayee = tr.label;
+
+    ks.m_listTransactions += kt;
   }
 
-  return backendsList;
+  statementInterface()->import(ks);
+
+  d->progress->hide();
 }
 
+K_PLUGIN_FACTORY_WITH_JSON(WeboobFactory, "weboob.json", registerPlugin<Weboob>();)
 
-QList<Weboob::Account> Weboob::getAccounts(QString backend)
-{
-  QList<Weboob::Account> accountsList;
-
-  QVariantList args;
-  args << backend;
-  QVariant result = this->execute("get_accounts", args);
-
-  QMap<QString, QVariant> list = result.toMap();
-  for (QMapIterator<QString, QVariant> it(list); it.hasNext();) {
-    it.next();
-    QMap<QString, QVariant> params = it.value().toMap();
-
-    Weboob::Account account;
-    account.id = it.key();
-    account.name = params["name"].toString();
-    account.balance = MyMoneyMoney(params["balance"].toInt(), 100);
-    account.type = (Weboob::Account::type_t)params["type"].toInt();
-
-    accountsList.append(account);
-  }
-
-  return accountsList;
-}
-
-Weboob::Account Weboob::getAccount(QString backend, QString accid, QString max)
-{
-  Weboob::Account acc;
-
-  QVariantList args;
-  args << backend;
-  args << accid;
-  args << max;
-  QMap<QString, QVariant> result = this->execute("get_transactions", args).toMap();
-
-  acc.id = result["id"].toString();
-  acc.name = result["name"].toString();
-  acc.balance = MyMoneyMoney(result["balance"].toInt(), 100);
-  acc.type = (Weboob::Account::type_t)result["type"].toInt();
-
-  QList<QVariant> list = result["transactions"].toList();
-  for (QListIterator<QVariant> it(list); it.hasNext();) {
-    QMap<QString, QVariant> params = it.next().toMap();
-    Weboob::Transaction tr;
-
-    tr.id = params["id"].toString();
-    tr.date = QDate::fromString(params["date"].toString(), "yyyy-MM-dd");
-    tr.rdate = QDate::fromString(params["rdate"].toString(), "yyyy-MM-dd");
-    tr.type = (Weboob::Transaction::type_t)params["type"].toInt();
-    tr.raw = params["raw"].toString();
-    tr.category = params["category"].toString();
-    tr.label = params["label"].toString();
-    tr.amount = MyMoneyMoney(params["amount"].toInt(), 100);
-
-    acc.transactions.append(tr);
-  }
-  return acc;
-}
+#include "weboob.moc"

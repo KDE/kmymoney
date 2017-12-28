@@ -12,6 +12,7 @@ set (libsettings_a_SOURCES
   ksettingsschedules.cpp
   ksettingsreports.cpp
   ksettingskmymoney.cpp
+  ksettingsplugins.cpp
   )
 
 set (libsettings_a_UI

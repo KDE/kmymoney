@@ -1,9 +1,7 @@
 /***************************************************************************
                           pluginloader.cpp
                              -------------------
-    begin                : Thu Feb 12 2009
-    copyright            : (C) 2009 Cristian Onet
-    email                : onet.cristian@gmail.com
+  (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,128 +18,131 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringList>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-#include <KPluginInfo>
 #include <KPluginLoader>
-#include <KPluginSelector>
+#include <KPluginFactory>
+#include <KPluginInfo>
+#include <KPluginMetaData>
+#include <KXMLGUIFactory>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyplugin.h"
+#include "onlinepluginextended.h"
+
 namespace KMyMoneyPlugin
 {
-
-//---------------------------------------------------------------------
-//
-// PluginLoader
-//
-//---------------------------------------------------------------------
-static PluginLoader* s_instance = nullptr;
-
-PluginLoader::PluginLoader(QObject* parent)
-  : QObject(parent),
-  m_displayedPlugins{}
-{
-  Q_ASSERT(s_instance == nullptr);
-  s_instance = this;
-
-  m_categoryKMyMoneyPlugin = i18n("KMyMoney Plugins");
-  m_categoryOnlineTask = i18n("Online Banking Operations");
-  m_categoryPayeeIdentifier = i18n("Payee Identifier");
-
-  m_pluginSelector = new KPluginSelector();
-  connect(m_pluginSelector, &KPluginSelector::configCommitted, this, &PluginLoader::changed);
-}
-
-PluginLoader::~PluginLoader()
-{
-  Q_ASSERT(s_instance != nullptr);
-
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup group{ config->group("Plugins") };
-
-  for (const QString& fileName: m_displayedPlugins) {
-    KPluginMetaData pluginData{fileName};
-    pluginDisabled(pluginData);
+  Category pluginCategory(const KPluginMetaData& pluginInfo)
+  {
+    if (!pluginInfo.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
+      auto jsonKMyMoneyData = pluginInfo.rawData()[QLatin1String("KMyMoney")].toObject();
+      if (!jsonKMyMoneyData[QLatin1String("OnlineTask")].isNull())
+        return OnlineBankOperations;
+      else if (!jsonKMyMoneyData[QLatin1String("PayeeIdentifier")].isNull())
+        return PayeeIdentifier;
+    }
+    return StandardPlugin;
   }
 
-  delete m_pluginSelector;
-  s_instance = nullptr;
-}
-
-void PluginLoader::detectPlugins()
-{
-    addPluginInfo(KPluginLoader::findPlugins("kmymoney"));
-}
-
-inline bool PluginLoader::isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup)
-{
-  //! @fixme: there is a function in KMyMoneyApp which has to have the same content
-  if (metaData.serviceTypes().contains("KMyMoney/Plugin")) {
-    const QString keyName{metaData.name() + "Enabled"};
-    if (configGroup.hasKey(keyName))
-      return configGroup.readEntry(keyName, true);
-    return metaData.isEnabledByDefault();
+  bool isPluginEnabled(const KPluginMetaData& pluginData, const KConfigGroup& pluginSection)
+  {
+    return pluginSection.readEntry(QString::fromLatin1("%1Enabled").    // we search here for e.g. "csvimporterEnabled = true"
+                                   arg(pluginData.pluginId()),
+                                   pluginData.isEnabledByDefault());    // if not found, then get default from plugin's json file
   }
-  return false;
-}
 
-void PluginLoader::addPluginInfo(const QVector<KPluginMetaData>& metaData)
-{
-  m_displayedPlugins.reserve(metaData.size());
-  for(const auto& plugin: metaData) {
-    m_displayedPlugins.insert(plugin.fileName());
-    KPluginInfo info {plugin};
-    KPluginSelector::PluginLoadMethod loadMethod = (plugin.serviceTypes().contains("KMyMoney/Plugin"))
-      ? KPluginSelector::PluginLoadMethod::ReadConfigFile
-      : KPluginSelector::PluginLoadMethod::IgnoreConfigFile;
-    m_pluginSelector->addPlugins(QList<KPluginInfo> {info}, loadMethod, categoryByPluginType(plugin));
-    //! @fixme The not all plugins are deactivated correctly at the moment. This has to change or the user should not get any option to enable and disable them
+  QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
+  {
+    QMap<QString, KPluginMetaData> plugins;
+    const auto pluginDatas = KPluginLoader::findPlugins(QStringLiteral("kmymoney"));          // that means search for plugins in "/lib64/plugins/kmymoney/"
+    const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));  // section of config where plugin on/off were saved
+
+    for (const KPluginMetaData& pluginData : pluginDatas) {
+      if (pluginData.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
+        if (!onlyEnabled ||
+            (onlyEnabled && isPluginEnabled(pluginData, pluginSection))) {
+          plugins.insert(pluginData.pluginId(), pluginData);
+        }
+      }
+    }
+    return plugins;
   }
-}
 
-QString PluginLoader::categoryByPluginType(const KPluginMetaData& mataData)
-{
-  if (!mataData.serviceTypes().contains("KMyMoney/Plugin")) {
-    QJsonObject jsonKMyMoneyData = mataData.rawData()["KMyMoney"].toObject();
-    if (!jsonKMyMoneyData["OnlineTask"].isNull())
-      return m_categoryOnlineTask;
-    else if (!jsonKMyMoneyData["PayeeIdentifier"].isNull())
-      return m_categoryPayeeIdentifier;
-  }
-  return m_categoryKMyMoneyPlugin;
-}
+  void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory)
+  {
 
-void PluginLoader::changed()
-{
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup group{ config->group("Plugins") };
+    QMap<QString, KPluginMetaData> referencePluginDatas;
+    if (action == Action::Load ||
+        action == Action::Reorganize)
+      referencePluginDatas = listPlugins(true);
 
-  for (const QString& fileName: m_displayedPlugins) {
-    KPluginMetaData pluginData{fileName};
-    if (isPluginEnabled(pluginData, group)) {
-      pluginEnabled(pluginData);
-    } else {
-      pluginDisabled(pluginData);
+    if (action == Action::Unload ||
+        action == Action::Reorganize) {
+      auto& plugins = ctnPlugins.standard;
+      auto& refPlugins = referencePluginDatas;
+      for (auto it = plugins.begin(); it != plugins.end();) {
+        if (!refPlugins.contains(it.key())) {
+
+          ctnPlugins.online.remove(it.key());
+          ctnPlugins.extended.remove(it.key());
+          ctnPlugins.importer.remove(it.key());
+
+          guiFactory->removeClient(it.value());
+          it.value()->unplug();
+          delete it.value();
+          it = plugins.erase(it);
+          continue;
+
+        }
+        ++it;
+      }
+    }
+
+    if (action == Action::Load ||
+        action == Action::Reorganize) {
+
+      auto& refPlugins = referencePluginDatas;
+      for (auto it = refPlugins.cbegin(); it != refPlugins.cend(); ++it) {
+        if (!ctnPlugins.standard.contains(it.key())) {
+
+          KPluginLoader loader((*it).fileName());
+          auto factory = loader.factory();
+          if (!factory) {
+            qWarning("Could not load plugin '%s', error: %s", qPrintable((*it).fileName()), qPrintable(loader.errorString()));
+            loader.unload();
+            continue;
+          }
+
+          Plugin* plugin = factory->create<Plugin>(parent);
+          if (!plugin) {
+            qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
+            loader.unload();
+            continue;
+          }
+
+          ctnPlugins.standard.insert((*it).pluginId(), plugin);
+          plugin->plug();
+          guiFactory->addClient(plugin);
+
+          auto IOnline = qobject_cast<OnlinePlugin *>(plugin);
+          if (IOnline)
+            ctnPlugins.online.insert((*it).pluginId(), IOnline);
+
+          auto IExtended = qobject_cast<OnlinePluginExtended *>(plugin);
+          if (IExtended )
+            ctnPlugins.extended.insert((*it).pluginId(), IExtended );
+
+          auto IImporter = qobject_cast<ImporterPlugin *>(plugin);
+          if (IImporter)
+            ctnPlugins.importer.insert((*it).pluginId(), IImporter);
+
+        }
+      }
+
     }
   }
 }
-
-PluginLoader* PluginLoader::instance()
-{
-  Q_ASSERT(s_instance);
-  return s_instance;
-}
-
-KPluginSelector* PluginLoader::pluginSelectorWidget()
-{
-  return m_pluginSelector;
-}
-
-} // namespace

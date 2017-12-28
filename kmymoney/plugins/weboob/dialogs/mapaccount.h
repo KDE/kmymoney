@@ -32,7 +32,7 @@ class WbMapAccountDialog : public QWizard, public Ui::WbMapAccountDialog
   Q_OBJECT
 public:
 
-  Weboob *weboob;
+  WeboobExt *weboob;
   explicit WbMapAccountDialog(QWidget *parent = 0);
   virtual ~WbMapAccountDialog();
 

@@ -18,19 +18,19 @@
 #define CSVWIZARDPAGE_H
 
 #include <QWizardPage>
-#include "csvenums.h"
+#include "core/csvenums.h"
 
 class CSVWizard;
-class CSVImporter;
+class CSVImporterCore;
 
 class CSVWizardPage : public QWizardPage
 {
 public:
-  CSVWizardPage(CSVWizard *dlg, CSVImporter *imp) : QWizardPage(nullptr), m_dlg(dlg), m_imp(imp) {}
+  CSVWizardPage(CSVWizard *dlg, CSVImporterCore *imp) : QWizardPage(nullptr), m_dlg(dlg), m_imp(imp) {}
 
 protected:
   CSVWizard   *m_dlg;
-  CSVImporter *m_imp;
+  CSVImporterCore *m_imp;
 };
 
 #endif // CSVWIZARDPAGE_H

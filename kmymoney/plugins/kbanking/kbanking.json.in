@@ -39,7 +39,7 @@
         "Description[zh_TW]": "新增線上銀行到 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "network-connect",
-        "Id": "KBanking",
+        "Id": "kbanking",
         "License": "GPL",
         "Name": "KBanking",
         "Name[ar]": "مصرفك",

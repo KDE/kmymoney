@@ -36,8 +36,8 @@
 #include "csvwizardpage.h"
 #include "mymoneystatement.h"
 
-class CsvImporterPlugin;
 class CSVImporter;
+class CSVImporterCore;
 
 class IntroPage;
 class SeparatorPage;
@@ -57,7 +57,7 @@ class CSVWizard : public QDialog
   Q_OBJECT
 
 public:
-  CSVWizard(CsvImporterPlugin *plugin, CSVImporter *importer);
+  explicit CSVWizard(CSVImporter *plugin, CSVImporterCore *importer);
   ~CSVWizard();
 
   enum wizardPageE  { PageIntro, PageSeparator, PageRows,
@@ -109,8 +109,8 @@ private:
   QPointer<PricesPage>         m_pagePrices;
   FormatsPage                 *m_pageFormats;
 
-  CsvImporterPlugin*  m_plugin;
-  CSVImporter*        m_imp;
+  CSVImporter*  m_plugin;
+  CSVImporterCore*        m_imp;
   QWizard*            m_wiz;
   QString             m_fileName;
 
@@ -118,8 +118,8 @@ private:
   void saveWindowSize(const KSharedConfigPtr& config);
   void showStage();
 
-  void closeEvent(QCloseEvent *event);
-  bool eventFilter(QObject *object, QEvent *event);
+  void closeEvent(QCloseEvent *event) override;
+  bool eventFilter(QObject *object, QEvent *event) override;
 
 private Q_SLOTS:
   /**
@@ -145,10 +145,10 @@ class IntroPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit IntroPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit IntroPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~IntroPage();
 
-  void             initializePage();
+  void             initializePage() override;
 
   Profile     m_profileType;
   Ui::IntroPage   *ui;
@@ -161,8 +161,8 @@ Q_SIGNALS:
 private:
   QStringList      m_profiles;
 
-  bool             validatePage();
-  int              nextId() const;
+  bool             validatePage() override;
+  int              nextId() const override;
 
   void             profileChanged(const ProfileAction action);
   void             profileTypeChanged(const Profile profileType, bool toggled);
@@ -188,7 +188,7 @@ class SeparatorPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit SeparatorPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~SeparatorPage();
 
 private Q_SLOTS:
@@ -202,10 +202,10 @@ Q_SIGNALS:
 private:
   Ui::SeparatorPage   *ui;
   void                initializeEncodingCombobox();
-  void                initializePage();
-  bool                isComplete() const;
-  void                cleanupPage();
-  bool                validatePage();
+  void                initializePage() override;
+  bool                isComplete() const override;
+  void                cleanupPage() override;
+  bool                validatePage() override;
 };
 
 namespace Ui
@@ -218,7 +218,7 @@ class RowsPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit RowsPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit RowsPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~RowsPage();
 
 private Q_SLOTS:
@@ -233,9 +233,9 @@ private Q_SLOTS:
   void            endRowChanged(int val);
 private:
   Ui::RowsPage   *ui;
-  void            initializePage();
-  int             nextId() const;
-  void            cleanupPage();
+  void            initializePage() override;
+  int             nextId() const override;
+  void            cleanupPage() override;
 };
 
 namespace Ui
@@ -248,7 +248,7 @@ class FormatsPage : public CSVWizardPage
   Q_OBJECT
 
 public:
-  explicit FormatsPage(CSVWizard *dlg, CSVImporter *imp);
+  explicit FormatsPage(CSVWizard *dlg, CSVImporterCore *imp);
   ~FormatsPage();
 
 private:
@@ -268,9 +268,9 @@ private:
   */
   bool              validateDateFormat(const int index);
 
-  void              initializePage();
-  bool              isComplete() const;
-  void              cleanupPage();
+  void              initializePage() override;
+  bool              isComplete() const override;
+  void              cleanupPage() override;
 
 Q_SIGNALS:
   void              completeChanged();

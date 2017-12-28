@@ -27,6 +27,7 @@
 #include <QDate>
 
 // KDE includes
+#include <KPluginFactory>
 #include <KColorScheme>
 #include <KLocalizedString>
 
@@ -44,23 +45,30 @@
 
 #include "kreconciliationreportdlg.h"
 
-KMMReconciliationReportPlugin::KMMReconciliationReportPlugin()
-    : KMyMoneyPlugin::Plugin(nullptr, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
+ReconciliationReport::ReconciliationReport(QObject *parent, const QVariantList &args) :
+  KMyMoneyPlugin::Plugin(parent, "reconciliationreport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
+  Q_UNUSED(args);
+  qDebug("Plugins: reconciliation report loaded");
 }
 
-void KMMReconciliationReportPlugin::plug()
+ReconciliationReport::~ReconciliationReport()
 {
-  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &KMMReconciliationReportPlugin::slotGenerateReconciliationReport);
-  qDebug() << "Connect was done" << viewInterface();
+  qDebug("Plugins: reconciliation report unloaded");
 }
 
-void KMMReconciliationReportPlugin::unplug()
+void ReconciliationReport::plug()
 {
-  disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &KMMReconciliationReportPlugin::slotGenerateReconciliationReport);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &ReconciliationReport::slotGenerateReconciliationReport);
+//  qDebug() << "Connect was done" << viewInterface();
 }
 
-void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList)
+void ReconciliationReport::unplug()
+{
+  disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &ReconciliationReport::slotGenerateReconciliationReport);
+}
+
+void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneySecurity currency = file->currency(account.currencyId());
@@ -322,3 +330,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   dlg->exec();
   delete dlg;
 }
+
+K_PLUGIN_FACTORY_WITH_JSON(ReconciliationReportFactory, "reconciliationreport.json", registerPlugin<ReconciliationReport>();)
+
+#include "reconciliationreport.moc"
