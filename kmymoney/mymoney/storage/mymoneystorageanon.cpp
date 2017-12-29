@@ -30,6 +30,8 @@
 #include <QList>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QTime>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

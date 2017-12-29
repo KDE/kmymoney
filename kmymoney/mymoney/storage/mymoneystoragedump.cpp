@@ -42,6 +42,7 @@
 
 #include "imymoneyserialize.h"
 #include "imymoneystorage.h"
+#include "mymoneyexception.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
@@ -120,7 +121,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "payees = " << _storage->payeeList().count() << ", next id = " << _storage->payeeId() << "\n";
   s << "tags = " << _storage->tagList().count() << ", next id = " << _storage->tagId() << "\n";
   s << "institutions = " << _storage->institutionList().count() << ", next id = " << _storage->institutionId() << "\n";
-  s << "schedules = " << _storage->scheduleList().count() << ", next id = " << _storage->scheduleId() << "\n";
+  s << "schedules = " << _storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
+                                                QDate(), QDate(), false).count() << ", next id = " << _storage->scheduleId() << "\n";
   s << "\n";
 
   s << "Institutions\n";
@@ -319,7 +321,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Schedules" << "\n";
   s << "---------" << "\n";
 
-  QList<MyMoneySchedule> list_s = storage->scheduleList();
+  auto list_s = storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
+                                      QDate(), QDate(), false);
   QList<MyMoneySchedule>::ConstIterator it_s;
   for (it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
     s << "  ID = " << (*it_s).id() << "\n";

@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,33 +24,19 @@
 #ifndef IMYMONEYSERIALIZE_H
 #define IMYMONEYSERIALIZE_H
 
+#include <sys/types.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QDate>
-#include <QMap>
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-
 class QUrl;
+class QDate;
+class QString;
+class QStringList;
 
-template <typename T> class QList;
-
-class MyMoneyPrice;
-typedef QPair<QString, QString> MyMoneySecurityPair;
-typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
-typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
-
-/**
-  * @author Thomas Baumgart
-  */
-
-/**
-  * This class represents the interface to serialize a MyMoneyStorage object
-  */
 class MyMoneyAccount;
 class MyMoneyBudget;
 class MyMoneyCostCenter;
@@ -57,6 +44,7 @@ class MyMoneyInstitution;
 class MyMoneyReport;
 class MyMoneySecurity;
 class MyMoneyPayee;
+class MyMoneyPrice;
 class MyMoneySchedule;
 class MyMoneyStorageSql;
 class MyMoneyTag;
@@ -64,23 +52,44 @@ class MyMoneyPrice;
 class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
+
+template <class T> class QExplicitlySharedDataPointer;
+template <class Key, class T> class QMap;
+template <typename T> class QList;
+template <class T1, class T2> struct QPair;
+
+typedef QPair<QString, QString> MyMoneySecurityPair;
+typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
+typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
+
+namespace eMyMoney { namespace Schedule { enum class Type; } }
+namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
+namespace eMyMoney { namespace Schedule { enum class PaymentType; } }
+
+/**
+  * @author Thomas Baumgart
+  * @author Łukasz Wojniłowicz
+  */
+
+/**
+  * This class represents the interface to serialize a MyMoneyStorage object
+  */
 class IMyMoneySerialize
 {
 public:
-  IMyMoneySerialize();
-  virtual ~IMyMoneySerialize();
+  virtual ~IMyMoneySerialize() = default;
 
   // general get functions
-  virtual const MyMoneyPayee& user() const = 0;
-  virtual const QDate creationDate() const = 0;
-  virtual const QDate lastModificationDate() const = 0;
-  virtual unsigned int currentFixVersion() const = 0;
-  virtual unsigned int fileFixVersion() const = 0;
+  virtual MyMoneyPayee user() const = 0;
+  virtual QDate creationDate() const = 0;
+  virtual QDate lastModificationDate() const = 0;
+  virtual uint currentFixVersion() const = 0;
+  virtual uint fileFixVersion() const = 0;
 
   // general set functions
   virtual void setUser(const MyMoneyPayee& val) = 0;
   virtual void setCreationDate(const QDate& val) = 0;
-  virtual void setFileFixVersion(const unsigned int v) = 0;
+  virtual void setFileFixVersion(uint v) = 0;
   /**
    * This method is used to get a SQL reader for subsequent database access
    */
@@ -118,7 +127,7 @@ public:
     *
     * @return QMap containing the institution information
     */
-  virtual const QList<MyMoneyInstitution> institutionList() const = 0;
+  virtual QList<MyMoneyInstitution> institutionList() const = 0;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -144,7 +153,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  virtual const QList<MyMoneyPayee> payeeList() const = 0;
+  virtual QList<MyMoneyPayee> payeeList() const = 0;
 
   /**
     * This method returns a list of the tags
@@ -152,7 +161,7 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  virtual const QList<MyMoneyTag> tagList() const = 0;
+  virtual QList<MyMoneyTag> tagList() const = 0;
 
   /**
     * This method returns a list of the scheduled transactions
@@ -160,29 +169,29 @@ public:
     * list of the transactions, all arguments should be used with their
     * default arguments.
     */
-  virtual const QList<MyMoneySchedule> scheduleList(const QString& = QString(),
-      const eMyMoney::Schedule::Type = eMyMoney::Schedule::Type::Any,
-      const eMyMoney::Schedule::Occurrence = eMyMoney::Schedule::Occurrence::Any,
-      const eMyMoney::Schedule::PaymentType = eMyMoney::Schedule::PaymentType::Any,
-      const QDate& = QDate(),
-      const QDate& = QDate(),
-      const bool = false) const = 0;
+  virtual QList<MyMoneySchedule> scheduleList(const QString&,
+      eMyMoney::Schedule::Type,
+      eMyMoney::Schedule::Occurrence,
+      eMyMoney::Schedule::PaymentType,
+      const QDate&,
+      const QDate&,
+      bool) const = 0;
 
   /**
    * This method returns a list of security objects that the engine has
    * knowledge of.
    */
-  virtual const QList<MyMoneySecurity> securityList() const = 0;
+  virtual QList<MyMoneySecurity> securityList() const = 0;
 
   /**
    * This method returns a list of onlineJobs the engine has
    */
-  virtual const QList<onlineJob> onlineJobList() const = 0;
+  virtual QList<onlineJob> onlineJobList() const = 0;
 
   /**
    * This method returns a list of cost center objects the engine knows about
    */
-  virtual const QList<MyMoneyCostCenter> costCenterList() const = 0;
+  virtual QList<MyMoneyCostCenter> costCenterList() const = 0;
 
   /**
     * This method is used to return the standard liability account
@@ -291,7 +300,7 @@ public:
     *             this compatibility mode this method will disappear from
     *             this interface!
     */
-  virtual void addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate = false) = 0;
+  virtual void addTransaction(MyMoneyTransaction& transaction, bool skipAccountUpdate = false) = 0;
 
   virtual void loadAccounts(const QMap<QString, MyMoneyAccount>& map) = 0;
   virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map) = 0;
@@ -307,29 +316,29 @@ public:
   virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) = 0;
   virtual void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters) = 0;
 
-  virtual unsigned long accountId() const = 0;
-  virtual unsigned long transactionId() const = 0;
-  virtual unsigned long payeeId() const = 0;
-  virtual unsigned long tagId() const = 0;
-  virtual unsigned long institutionId() const = 0;
-  virtual unsigned long scheduleId() const = 0;
-  virtual unsigned long securityId() const = 0;
-  virtual unsigned long reportId() const = 0;
-  virtual unsigned long budgetId() const = 0;
-  virtual unsigned long onlineJobId() const = 0;
-  virtual unsigned long costCenterId() const = 0;
+  virtual ulong accountId() const = 0;
+  virtual ulong transactionId() const = 0;
+  virtual ulong payeeId() const = 0;
+  virtual ulong tagId() const = 0;
+  virtual ulong institutionId() const = 0;
+  virtual ulong scheduleId() const = 0;
+  virtual ulong securityId() const = 0;
+  virtual ulong reportId() const = 0;
+  virtual ulong budgetId() const = 0;
+  virtual ulong onlineJobId() const = 0;
+  virtual ulong costCenterId() const = 0;
 
-  virtual void loadAccountId(const unsigned long id) = 0;
-  virtual void loadTransactionId(const unsigned long id) = 0;
-  virtual void loadPayeeId(const unsigned long id) = 0;
-  virtual void loadTagId(const unsigned long id) = 0;
-  virtual void loadInstitutionId(const unsigned long id) = 0;
-  virtual void loadScheduleId(const unsigned long id) = 0;
-  virtual void loadSecurityId(const unsigned long id) = 0;
-  virtual void loadReportId(const unsigned long id) = 0;
-  virtual void loadBudgetId(const unsigned long id) = 0;
-  virtual void loadOnlineJobId(const unsigned long id) = 0;
-  virtual void loadCostCenterId(const unsigned long id) = 0;
+  virtual void loadAccountId(ulong id) = 0;
+  virtual void loadTransactionId(ulong id) = 0;
+  virtual void loadPayeeId(ulong id) = 0;
+  virtual void loadTagId(ulong id) = 0;
+  virtual void loadInstitutionId(ulong id) = 0;
+  virtual void loadScheduleId(ulong id) = 0;
+  virtual void loadSecurityId(ulong id) = 0;
+  virtual void loadReportId(ulong id) = 0;
+  virtual void loadBudgetId(ulong id) = 0;
+  virtual void loadOnlineJobId(ulong id) = 0;
+  virtual void loadCostCenterId(ulong id) = 0;
 
   /**
     * This method is used to retrieve the whole set of key/value pairs
@@ -339,7 +348,7 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  virtual const QMap<QString, QString> pairs() const = 0;
+  virtual QMap<QString, QString> pairs() const = 0;
 
   /**
     * This method is used to initially store a set of key/value pairs
@@ -354,11 +363,11 @@ public:
     */
   virtual void setPairs(const QMap<QString, QString>& list) = 0;
 
-  virtual const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
+  virtual QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
       int scheduleOcurrences,
       int schedulePaymentTypes,
       QDate startDate,
-      const QStringList& accounts = QStringList()) const = 0;
+      const QStringList& accounts) const = 0;
 
   /**
     * This method is used to retrieve the list of all currencies
@@ -368,7 +377,7 @@ public:
     *
     * @return QList of all MyMoneySecurity objects representing a currency.
     */
-  virtual const QList<MyMoneySecurity> currencyList() const = 0;
+  virtual QList<MyMoneySecurity> currencyList() const = 0;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -378,7 +387,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList() const = 0;
+  virtual QList<MyMoneyReport> reportList() const = 0;
 
   /**
     * This method is used to retrieve the list of all budgets
@@ -388,7 +397,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList() const = 0;
+  virtual QList<MyMoneyBudget> budgetList() const = 0;
 
 
   /**
@@ -401,7 +410,7 @@ public:
     *
     * @return MyMoneyPriceList of all MyMoneyPrice objects.
     */
-  virtual const MyMoneyPriceList priceList() const = 0;
+  virtual MyMoneyPriceList priceList() const = 0;
 
   /**
     * This method recalculates the balances of all accounts
@@ -409,6 +418,18 @@ public:
     */
   virtual void rebuildAccountBalances() = 0;
 
+protected:
+  virtual QString nextAccountID() = 0;
+  virtual QString nextTransactionID() = 0;
+  virtual QString nextPayeeID() = 0;
+  virtual QString nextTagID() = 0;
+  virtual QString nextInstitutionID() = 0;
+  virtual QString nextScheduleID() = 0;
+  virtual QString nextSecurityID() = 0;
+  virtual QString nextReportID() = 0;
+  virtual QString nextBudgetID() = 0;
+  virtual QString nextOnlineJobID() = 0;
+  virtual QString nextCostCenterID() = 0;
 };
 
 #endif

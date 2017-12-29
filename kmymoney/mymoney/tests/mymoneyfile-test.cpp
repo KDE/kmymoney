@@ -23,6 +23,7 @@
 #include <QList>
 #include <QtTest>
 
+#include "mymoneyseqaccessmgr_p.h"
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyinstitution.h"
@@ -32,10 +33,16 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneysplit.h"
 #include "mymoneyprice.h"
+#include "mymoneypayee.h"
+#include "mymoneyenums.h"
+#include "onlinejob.h"
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiertyped.h"
+
+#include "mymoneystoragenames.h"
+using namespace MyMoneyStandardAccounts;
 
 QTEST_GUILESS_MAIN(MyMoneyFileTest)
 
@@ -140,7 +147,7 @@ void MyMoneyFileTest::testAddOneInstitution()
   QString id;
 
   QCOMPARE(m->institutionCount(), static_cast<unsigned>(0));
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   clearObjectLists();
   MyMoneyFileTransaction ft;
@@ -200,7 +207,7 @@ void MyMoneyFileTest::testAddTwoInstitutions()
 
   QString id;
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   MyMoneyFileTransaction ft;
   try {
     m->addInstitution(institution);
@@ -213,7 +220,7 @@ void MyMoneyFileTest::testAddTwoInstitutions()
     QFAIL("Unexpected exception");
   }
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   try {
     institution = m->institution("I000001");
@@ -244,7 +251,7 @@ void MyMoneyFileTest::testRemoveInstitution()
 
   clearObjectLists();
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   MyMoneyFileTransaction ft;
   try {
     m->removeInstitution(i);
@@ -262,7 +269,7 @@ void MyMoneyFileTest::testRemoveInstitution()
     QFAIL("Unexpected exception");
   }
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   try {
     m->institution("I000001");
@@ -290,7 +297,7 @@ void MyMoneyFileTest::testInstitutionRetrieval()
 
   testAddOneInstitution();
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   MyMoneyInstitution institution;
 
@@ -318,14 +325,14 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
 {
   QList<MyMoneyInstitution> list;
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   list = m->institutionList();
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 0);
 
   testAddTwoInstitutions();
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   list = m->institutionList();
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 2);
@@ -354,7 +361,7 @@ void MyMoneyFileTest::testInstitutionModify()
   institution.setName("new name");
   institution.setSortcode("new sortcode");
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   clearObjectLists();
   MyMoneyFileTransaction ft;
@@ -387,7 +394,7 @@ void MyMoneyFileTest::testInstitutionModify()
   QCOMPARE(newInstitution.name(), QLatin1String("new name"));
   QCOMPARE(newInstitution.sortcode(), QLatin1String("new sortcode"));
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   ft.restart();
   MyMoneyInstitution failInstitution2("I000003", newInstitution);
@@ -415,35 +422,35 @@ void MyMoneyFileTest::testSetFunctions()
   QCOMPARE(user.email(), QString());
 
   MyMoneyFileTransaction ft;
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setName("Name");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setAddress("Street");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setCity("Town");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setState("County");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setPostcode("Postcode");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setTelephone("Telephone");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   user.setEmail("Email");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   ft.commit();
   user = m->user();
@@ -465,7 +472,7 @@ void MyMoneyFileTest::testAddAccounts()
 
   MyMoneyInstitution institution;
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
 
@@ -524,7 +531,7 @@ void MyMoneyFileTest::testAddAccounts()
   a = m->account("A000001");
   QCOMPARE(a.name(), QLatin1String("Account1"));
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   // check if we can get the same info to a different object
   c = m->account("A000001");
@@ -594,7 +601,7 @@ void MyMoneyFileTest::testAddCategories()
   a.setOpeningDate(QDate::currentDate());
   b.setAccountType(eMyMoney::Account::Type::Expense);
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
   QCOMPARE(a.openingDate(), QDate::currentDate());
@@ -661,7 +668,7 @@ void MyMoneyFileTest::testAddCategories()
 void MyMoneyFileTest::testModifyAccount()
 {
   testAddAccounts();
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   MyMoneyAccount p = m->account("A000001");
   MyMoneyInstitution institution;
@@ -691,7 +698,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   // try to move account to new institution
   p.setInstitutionId("I000002");
@@ -727,7 +734,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   // try to change to an account type that is allowed
   p.setAccountType(eMyMoney::Account::Type::Savings);
@@ -744,7 +751,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   // try to change to an account type that is not allowed
   p.setAccountType(eMyMoney::Account::Type::CreditCard);
@@ -755,7 +762,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     ft.commit();
   }
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   // try to fool engine a bit
   p.setParentAccountId("A000001");
@@ -771,7 +778,7 @@ void MyMoneyFileTest::testModifyAccount()
 void MyMoneyFileTest::testReparentAccount()
 {
   testAddAccounts();
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   MyMoneyAccount p = m->account("A000001");
   MyMoneyAccount q = m->account("A000002");
@@ -828,7 +835,7 @@ void MyMoneyFileTest::testRemoveAccount()
 
   testAddAccounts();
   QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   QString id;
   MyMoneyAccount p = m->account("A000001");
@@ -930,14 +937,14 @@ void MyMoneyFileTest::testAccountListRetrieval()
 {
   QList<MyMoneyAccount> list;
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   m->accountList(list);
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 0);
 
   testAddAccounts();
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   list.clear();
   m->accountList(list);
   QCOMPARE(m->dirty(), false);
@@ -1015,7 +1022,7 @@ void MyMoneyFileTest::testAddTransaction()
           t.setNumber("1234");
           t.setState(MyMoneyCheckingTransaction::Cleared);
   */
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   ft.restart();
   clearObjectLists();
@@ -1049,7 +1056,7 @@ void MyMoneyFileTest::testAddTransaction()
   QCOMPARE(b.lastModified(), QDate::currentDate());
   QCOMPARE(b.balance(), MyMoneyMoney(1000, 100));
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   // locate transaction in MyMoneyFile via id
 
@@ -1119,7 +1126,7 @@ void MyMoneyFileTest::testModifyTransactionSimple()
 
   MyMoneyTransaction t = m->transaction("T000000000000000001");
   t.setMemo("New Memotext");
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   MyMoneyFileTransaction ft;
   clearObjectLists();
@@ -1150,7 +1157,7 @@ void MyMoneyFileTest::testModifyTransactionNewPostDate()
 
   MyMoneyTransaction t = m->transaction("T000000000000000001");
   t.setPostDate(QDate(2004, 2, 1));
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   MyMoneyFileTransaction ft;
   clearObjectLists();
@@ -1187,7 +1194,7 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
   s.setAccountId("A000002");
   t.modifySplit(s);
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   MyMoneyFileTransaction ft;
   clearObjectLists();
   try {
@@ -1230,7 +1237,7 @@ void MyMoneyFileTest::testRemoveTransaction()
   MyMoneyTransaction t;
   t = m->transaction("T000000000000000001");
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
   MyMoneyFileTransaction ft;
   clearObjectLists();
   try {
@@ -1358,7 +1365,7 @@ void MyMoneyFileTest::testSetAccountName()
   MyMoneyFileTransaction ft;
   clearObjectLists();
   try {
-    m->setAccountName(STD_ACC_LIABILITY, "Verbindlichkeiten");
+    m->setAccountName(stdAccNames[stdAccLiability], "Verbindlichkeiten");
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1373,7 +1380,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(STD_ACC_ASSET, QString::fromUtf8("Vermögen"));
+    m->setAccountName(stdAccNames[stdAccAsset], QString::fromUtf8("Vermögen"));
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1388,7 +1395,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(STD_ACC_EXPENSE, "Ausgaben");
+    m->setAccountName(stdAccNames[stdAccExpense], "Ausgaben");
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1403,7 +1410,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(STD_ACC_INCOME, "Einnahmen");
+    m->setAccountName(stdAccNames[stdAccIncome], "Einnahmen");
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1563,7 +1570,7 @@ void MyMoneyFileTest::testAddTransactionStd()
   split1.setAccountId("A000001");
   split1.setShares(MyMoneyMoney(-1000, 100));
   split1.setValue(MyMoneyMoney(-1000, 100));
-  split2.setAccountId(STD_ACC_EXPENSE);
+  split2.setAccountId(stdAccNames[stdAccExpense]);
   split2.setValue(MyMoneyMoney(1000, 100));
   split2.setShares(MyMoneyMoney(1000, 100));
   try {
@@ -1582,7 +1589,7 @@ void MyMoneyFileTest::testAddTransactionStd()
           t.setNumber("1234");
           t.setState(MyMoneyCheckingTransaction::Cleared);
   */
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   MyMoneyFileTransaction ft;
   try {
@@ -2071,7 +2078,7 @@ void MyMoneyFileTest::testAddAccountMissingCurrency()
 
   MyMoneyInstitution institution;
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
 
@@ -2250,7 +2257,7 @@ void MyMoneyFileTest::AddOneAccount()
   MyMoneyAccount  a;
   a.setAccountType(eMyMoney::Account::Type::Checkings);
 
-  storage->m_dirty = false;
+  storage->d_func()->m_dirty = false;
 
   QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
 

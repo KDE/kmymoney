@@ -65,9 +65,9 @@ private Q_SLOTS:
   void testTagName();
   void testRemoveTag();
   void testRemoveAccountFromTree();
-  void testAssignment();
+//  void testAssignment();
   void testEquality(const MyMoneySeqAccessMgr* t);
-  void testDuplicate();
+//  void testDuplicate();
   void testAddSchedule();
   void testSchedule();
   void testModifySchedule();

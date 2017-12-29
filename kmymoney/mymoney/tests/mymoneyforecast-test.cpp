@@ -33,6 +33,7 @@
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneyschedule.h"
+#include "mymoneypayee.h"
 #include "mymoneyenums.h"
 
 using namespace eMyMoney;

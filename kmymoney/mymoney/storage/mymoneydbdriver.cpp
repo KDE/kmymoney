@@ -4,6 +4,7 @@
     begin                : 19 February 2010
     copyright            : (C) 2010 by Fernando Vilas
     email                : Fernando Vilas <fvilas@iname.com>
+                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,7 +41,7 @@ public:
   MyMoneyDb2Driver() {
   }
 
-  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual QString textString(const MyMoneyDbTextColumn& c) const;
 };
 
 class MyMoneyInterbaseDriver : public MyMoneyDbDriver
@@ -58,16 +59,16 @@ public:
 
   virtual bool isTested() const;
   virtual bool canAutocreate() const;
-  virtual const QString defaultDbName() const;
-  virtual const QString createDbString(const QString& name) const;
-  virtual const QString dropPrimaryKeyString(const QString& name) const;
-  virtual const QString dropIndexString(const QString& tableName, const QString& indexName) const;
-  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
-  virtual const QString tableOptionString() const;
-  virtual const QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
-  virtual const QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
+  virtual QString defaultDbName() const;
+  virtual QString createDbString(const QString& name) const;
+  virtual QString dropPrimaryKeyString(const QString& name) const;
+  virtual QString dropIndexString(const QString& tableName, const QString& indexName) const;
+  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  virtual QString tableOptionString() const;
+  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+  virtual QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
 };
 
 class MyMoneyOracleDriver : public MyMoneyDbDriver
@@ -76,11 +77,11 @@ public:
   MyMoneyOracleDriver() {
   }
 
-  virtual const QString dropPrimaryKeyString(const QString& name) const;
-  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
-  virtual const QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+  virtual QString dropPrimaryKeyString(const QString& name) const;
+  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
 };
 
 class MyMoneyODBCDriver : public MyMoneyDbDriver
@@ -89,7 +90,7 @@ public:
   MyMoneyODBCDriver() {
   }
 
-  virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  virtual QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
 };
 
 class MyMoneyPostgresqlDriver : public MyMoneyDbDriver
@@ -100,13 +101,13 @@ public:
 
   virtual bool isTested() const;
   virtual bool canAutocreate() const;
-  virtual const QString defaultDbName() const;
-  virtual const QString createDbString(const QString& name) const;
-  virtual const QString dropPrimaryKeyString(const QString& name) const;
-  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
-  virtual const QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+  virtual QString defaultDbName() const;
+  virtual QString createDbString(const QString& name) const;
+  virtual QString dropPrimaryKeyString(const QString& name) const;
+  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
 };
 
 class MyMoneySybaseDriver : public MyMoneyDbDriver
@@ -123,8 +124,8 @@ public:
   }
 
   virtual bool isTested() const;
-  virtual const QString forUpdateString() const;
-  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual QString forUpdateString() const;
+  virtual QString intString(const MyMoneyDbIntColumn& c) const;
   virtual bool requiresExternalFile() const;
   virtual bool requiresCreation() const;
   virtual bool isPasswordSupported() const;
@@ -229,19 +230,19 @@ bool MyMoneyPostgresqlDriver::canAutocreate() const
 
 //*******************************************************
 // By default, there is no default name
-const QString MyMoneyDbDriver::defaultDbName() const
+QString MyMoneyDbDriver::defaultDbName() const
 {
   return "";
 }
 
 // The default db for Mysql is "mysql"
-const QString MyMoneyMysqlDriver::defaultDbName() const
+QString MyMoneyMysqlDriver::defaultDbName() const
 {
   return "mysql";
 }
 
 // The default db for Postgres is "template1"
-const QString MyMoneyPostgresqlDriver::defaultDbName() const
+QString MyMoneyPostgresqlDriver::defaultDbName() const
 {
   return "template1";
 }
@@ -249,17 +250,17 @@ const QString MyMoneyPostgresqlDriver::defaultDbName() const
 //*******************************************************
 // By default, just attempt to create the database
 // Mysql and Postgres need the character set specified.
-const QString MyMoneyDbDriver::createDbString(const QString& name) const
+QString MyMoneyDbDriver::createDbString(const QString& name) const
 {
   return QString("CREATE DATABASE %1").arg(name);
 }
 
-const QString MyMoneyMysqlDriver::createDbString(const QString& name) const
+QString MyMoneyMysqlDriver::createDbString(const QString& name) const
 {
   return MyMoneyDbDriver::createDbString(name) + " CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'";
 }
 
-const QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) const
+QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) const
 {
   return MyMoneyDbDriver::createDbString(name) + " WITH ENCODING='UTF8' LC_CTYPE='C' TEMPLATE=template0";
 }
@@ -293,23 +294,23 @@ bool MyMoneySqlite3Driver::requiresCreation() const
 //*******************************************************
 // There is no standard for dropping a primary key.
 // If it is supported, it will have to be implemented for each DBMS
-const QString MyMoneyDbDriver::dropPrimaryKeyString(const QString& name) const
+QString MyMoneyDbDriver::dropPrimaryKeyString(const QString& name) const
 {
   Q_UNUSED(name);
   return "";
 }
 
-const QString MyMoneyMysqlDriver::dropPrimaryKeyString(const QString& name) const
+QString MyMoneyMysqlDriver::dropPrimaryKeyString(const QString& name) const
 {
   return QString("ALTER TABLE %1 DROP PRIMARY KEY;").arg(name);
 }
 
-const QString MyMoneyOracleDriver::dropPrimaryKeyString(const QString& name) const
+QString MyMoneyOracleDriver::dropPrimaryKeyString(const QString& name) const
 {
   return QString("ALTER TABLE %1 DROP PRIMARY KEY;").arg(name);
 }
 
-const QString MyMoneyPostgresqlDriver::dropPrimaryKeyString(const QString& name) const
+QString MyMoneyPostgresqlDriver::dropPrimaryKeyString(const QString& name) const
 {
   return QString("ALTER TABLE %1 DROP CONSTRAINT %2_pkey;").arg(name).arg(name);
 }
@@ -317,13 +318,13 @@ const QString MyMoneyPostgresqlDriver::dropPrimaryKeyString(const QString& name)
 //*******************************************************
 // There is apparently no standard for dropping an index.
 // If it is supported, it will have to be implemented for each DBMS
-const QString MyMoneyDbDriver::dropIndexString(const QString& tableName, const QString& indexName) const
+QString MyMoneyDbDriver::dropIndexString(const QString& tableName, const QString& indexName) const
 {
   Q_UNUSED(tableName);
   return QString("DROP INDEX %1;").arg(indexName);
 }
 
-const QString MyMoneyMysqlDriver::dropIndexString(const QString& tableName, const QString& indexName) const
+QString MyMoneyMysqlDriver::dropIndexString(const QString& tableName, const QString& indexName) const
 {
   return QString("DROP INDEX %1 ON %2;").arg(indexName).arg(tableName);
 }
@@ -331,7 +332,7 @@ const QString MyMoneyMysqlDriver::dropIndexString(const QString& tableName, cons
 //*******************************************************
 // There is no standard for modifying a column
 // If it is supported, it will have to be implemented for each DBMS
-const QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
 
   Q_UNUSED(tableName);
@@ -341,7 +342,7 @@ const QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, cons
   return "";
 }
 
-const QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
   return QString("ALTER TABLE %1 CHANGE %2 %3")
          .arg(tableName)
@@ -349,7 +350,7 @@ const QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, c
          .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
 }
 
-const QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
   return QString("ALTER TABLE %1 ALTER COLUMN %2 TYPE %3")
          .arg(tableName)
@@ -357,7 +358,7 @@ const QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableNa
          .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
 }
 
-const QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
   return QString("ALTER TABLE %1 MODIFY %2 %3")
          .arg(tableName)
@@ -368,7 +369,7 @@ const QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, 
 //*******************************************************
 // Define the integer column types in terms of the standard
 // Each DBMS typically has its own variation of this
-const QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const
+QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const
 {
   QString qs = c.name();
 
@@ -390,33 +391,7 @@ const QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const
   return qs;
 }
 
-const QString MyMoneyMysqlDriver::intString(const MyMoneyDbIntColumn& c) const
-{
-  QString qs = c.name();
-
-  switch (c.type()) {
-    case MyMoneyDbIntColumn::TINY:
-      qs += " tinyint";
-      break;
-    case MyMoneyDbIntColumn::SMALL:
-      qs += " smallint";
-      break;
-    case MyMoneyDbIntColumn::BIG:
-      qs += " bigint";
-      break;
-    case MyMoneyDbIntColumn::MEDIUM:
-    default:
-      qs += " int";
-      break;
-  }
-
-  if (! c.isSigned()) qs += " unsigned";
-
-  if (c.isNotNull()) qs += " NOT NULL";
-  return qs;
-}
-
-const QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
+QString MyMoneyMysqlDriver::intString(const MyMoneyDbIntColumn& c) const
 {
   QString qs = c.name();
 
@@ -442,7 +417,33 @@ const QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
   return qs;
 }
 
-const QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) const
+QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
+{
+  QString qs = c.name();
+
+  switch (c.type()) {
+    case MyMoneyDbIntColumn::TINY:
+      qs += " tinyint";
+      break;
+    case MyMoneyDbIntColumn::SMALL:
+      qs += " smallint";
+      break;
+    case MyMoneyDbIntColumn::BIG:
+      qs += " bigint";
+      break;
+    case MyMoneyDbIntColumn::MEDIUM:
+    default:
+      qs += " int";
+      break;
+  }
+
+  if (! c.isSigned()) qs += " unsigned";
+
+  if (c.isNotNull()) qs += " NOT NULL";
+  return qs;
+}
+
+QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) const
 {
   QString qs = c.name();
 
@@ -467,7 +468,7 @@ const QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) co
   return qs;
 }
 
-const QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const
+QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const
 {
   QString qs = c.name();
 
@@ -497,7 +498,7 @@ const QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const
 //*******************************************************
 // Define the text column types in terms of the standard
 // Each DBMS typically has its own variation of this
-const QString MyMoneyDbDriver::textString(const MyMoneyDbTextColumn& c) const
+QString MyMoneyDbDriver::textString(const MyMoneyDbTextColumn& c) const
 {
   QString qs = c.name();
 
@@ -522,7 +523,7 @@ const QString MyMoneyDbDriver::textString(const MyMoneyDbTextColumn& c) const
   return qs;
 }
 
-const QString MyMoneyDb2Driver::textString(const MyMoneyDbTextColumn& c) const
+QString MyMoneyDb2Driver::textString(const MyMoneyDbTextColumn& c) const
 {
   QString qs = c.name();
 
@@ -547,7 +548,7 @@ const QString MyMoneyDb2Driver::textString(const MyMoneyDbTextColumn& c) const
   return qs;
 }
 
-const QString MyMoneyOracleDriver::textString(const MyMoneyDbTextColumn& c) const
+QString MyMoneyOracleDriver::textString(const MyMoneyDbTextColumn& c) const
 {
   QString qs = c.name();
   switch (c.type()) {
@@ -567,7 +568,7 @@ const QString MyMoneyOracleDriver::textString(const MyMoneyDbTextColumn& c) cons
   return qs;
 }
 
-const QString MyMoneyPostgresqlDriver::textString(const MyMoneyDbTextColumn& c) const
+QString MyMoneyPostgresqlDriver::textString(const MyMoneyDbTextColumn& c) const
 {
   QString qs = QString("%1 text").arg(c.name());
 
@@ -579,7 +580,7 @@ const QString MyMoneyPostgresqlDriver::textString(const MyMoneyDbTextColumn& c) 
 //*******************************************************
 // Define the timestamp column types in terms of the standard
 // Each DBMS typically has its own variation of this
-const QString MyMoneyDbDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
+QString MyMoneyDbDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
 {
   QString qs = QString("%1 timestamp").arg(c.name());
 
@@ -589,7 +590,7 @@ const QString MyMoneyDbDriver::timestampString(const MyMoneyDbDatetimeColumn& c)
 }
 
 // Mysql has a timestamp type, but datetime is closer to the standard
-const QString MyMoneyMysqlDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
+QString MyMoneyMysqlDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
 {
   QString qs = QString("%1 datetime").arg(c.name());
 
@@ -598,7 +599,7 @@ const QString MyMoneyMysqlDriver::timestampString(const MyMoneyDbDatetimeColumn&
   return qs;
 }
 
-const QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
+QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
 {
   QString qs = QString("%1 datetime").arg(c.name());
 
@@ -610,12 +611,12 @@ const QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& 
 //***********************************************
 // Define the FOR UPDATE string
 // So far, only SQLite requires special handling.
-const QString MyMoneyDbDriver::forUpdateString() const
+QString MyMoneyDbDriver::forUpdateString() const
 {
   return " FOR UPDATE";
 }
 
-const QString MyMoneySqlite3Driver::forUpdateString() const
+QString MyMoneySqlite3Driver::forUpdateString() const
 {
   return "";
 }
@@ -623,12 +624,12 @@ const QString MyMoneySqlite3Driver::forUpdateString() const
 //***********************************************
 // Define the table option string
 // So far, only mysql requires special handling.
-const QString MyMoneyMysqlDriver::tableOptionString() const
+QString MyMoneyMysqlDriver::tableOptionString() const
 {
   return " ENGINE = InnoDB";
 }
 
-const QString MyMoneyDbDriver::tableOptionString() const
+QString MyMoneyDbDriver::tableOptionString() const
 {
   return "";
 }
@@ -636,22 +637,22 @@ const QString MyMoneyDbDriver::tableOptionString() const
 //***********************************************
 // Define the highestIdNum string
 // PostgreSQL and Oracle return errors when a non-numerical string is cast to an integer, so a regex is used to skip strings that aren't entirely numerical after the prefix is removed
-const QString MyMoneyDbDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
+QString MyMoneyDbDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
   return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3;").arg(tableField).arg(prefixLength + 1).arg(tableName);
 }
 
-const QString MyMoneyMysqlDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
+QString MyMoneyMysqlDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
   return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS UNSIGNED INTEGER)) FROM %3;").arg(tableField).arg(prefixLength + 1).arg(tableName);
 }
 
-const QString MyMoneyPostgresqlDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
+QString MyMoneyPostgresqlDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
   return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3 WHERE SUBSTR(%1, %2) ~ '^[0-9]+$';").arg(tableField).arg(prefixLength + 1).arg(tableName);
 }
 
-const QString MyMoneyOracleDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
+QString MyMoneyOracleDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
   return QString("SELECT MAX(TO_NUMBER(SUBSTR(%1, %2))) FROM %3 WHERE REGEXP_LIKE(SUBSTR(%1, %2), '^[0-9]+$');").arg(tableField).arg(prefixLength + 1).arg(tableName);
 }
@@ -676,12 +677,12 @@ bool MyMoneySqlCipher3Driver::isPasswordSupported() const
 //*************************************************
 // replace the QSqlDatabase::tables() call for Mysql only
 // see bug 252841
-const QStringList MyMoneyDbDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const
+QStringList MyMoneyDbDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const
 {
   return (db.tables(tt));
 }
 
-const QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const
+QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const
 {
   QStringList tableList;
   QSqlQuery q(db);

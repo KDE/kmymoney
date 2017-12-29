@@ -3,6 +3,7 @@
  * Copyright (C) 2005 Tony Bloomfield <tonybloom@users.sourceforge.net>
  * Copyright (C)      Fernando Vilas <fvilas@iname.com>
  * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,38 +22,19 @@
 #ifndef MYMONEYSTORAGESQL_H
 #define MYMONEYSTORAGESQL_H
 
-#include <limits>
-
-#include <QDateTime>
-#include <QPair>
-#include <QString>
-#include <QDebug>
 #include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QList>
-#include <QStack>
-#include <QUrl>
-#include <QExplicitlySharedDataPointer>
-
-class QIODevice;
+#include <QSharedData>
 
 #include "imymoneystorageformat.h"
-#include "mymoneyprice.h"
-#include "mymoneyreport.h"
-#include "mymoneykeyvaluecontainer.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
-#include "mymoneydbdef.h"
-#include "mymoneydbdriver.h"
-#include "onlinejob.h"
-#include "payeeidentifier/payeeidentifier.h"
+#include "mymoneyunittestable.h"
 
 // This is a convenience functor to make it easier to use STL algorithms
 // It will return false if the MyMoneyTransaction DOES match the filter.
 // This functor may disappear when all filtering can be handled in SQL.
 
-template <class T1, class T2> struct QPair;
+class QUrl;
+class QDate;
+class QIODevice;
 
 class IMyMoneyStorage;
 class MyMoneyInstitution;
@@ -65,62 +47,24 @@ class MyMoneyPayee;
 class MyMoneyTag;
 class MyMoneySplit;
 class MyMoneyTransaction;
+class MyMoneyTransactionFilter;
 class MyMoneyBudget;
+class MyMoneyReport;
+class MyMoneyPrice;
+class payeeIdentifier;
+class onlineJob;
 class databaseStoreableObject;
+class MyMoneyStorageSql;
+class IMyMoneySerialize;
+
+template <class T1, class T2> struct QPair;
+template <class Key, class Value> class QMap;
+
+typedef QPair<QString, QString> MyMoneySecurityPair;
+typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
+typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
 namespace eMyMoney { namespace TransactionFilter { enum class State; } }
-
-class FilterFail
-{
-public:
-  explicit FilterFail(const MyMoneyTransactionFilter& filter) : m_filter(filter) {}
-
-  inline bool operator()(const QPair<QString, MyMoneyTransaction>& transactionPair) {
-    return (*this)(transactionPair.second);
-  }
-
-  inline bool operator()(const MyMoneyTransaction& transaction) {
-    return (! m_filter.match(transaction)) && (m_filter.matchingSplits().count() == 0);
-  }
-
-private:
-  MyMoneyTransactionFilter m_filter;
-};
-
-class MyMoneyStorageSql;
-
-//*****************************************************************************
-// Create a class to handle db transactions using scope
-//
-// Don't let the database object get destroyed while this object exists,
-// that would result in undefined behavior.
-class MyMoneyDbTransaction
-{
-public:
-  MyMoneyDbTransaction(MyMoneyStorageSql& db, const QString& name);
-
-  ~MyMoneyDbTransaction();
-private:
-  MyMoneyStorageSql& m_db;
-  QString m_name;
-};
-
-/**
-  * The MyMoneySqlQuery class is derived from QSqlQuery to provide
-  * a way to adjust some queries based on database type and make
-  * debugging easier by providing a place to put debug statements.
-  */
-class MyMoneySqlQuery : public QSqlQuery
-{
-public:
-  explicit MyMoneySqlQuery(MyMoneyStorageSql* db = 0);
-  virtual ~MyMoneySqlQuery();
-  bool exec();
-  bool exec(const QString & query);
-  bool prepare(const QString & query);
-};
-
-class IMyMoneySerialize;
 
 /**
   * The MyMoneyDbColumn class is a base type for generic db columns.
@@ -128,18 +72,19 @@ class IMyMoneySerialize;
   *
   * @todo Remove unneeded columns which store the row count of tables from kmmFileInfo
   */
+
+class MyMoneyStorageSqlPrivate;
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public QSharedData
 {
+  Q_DISABLE_COPY(MyMoneyStorageSql)
   friend class MyMoneyDbDef;
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl& = QUrl());
-  virtual ~MyMoneyStorageSql();
+  explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl&);
+  ~MyMoneyStorageSql() override;
 
-  unsigned int currentVersion() const {
-    return (m_db.currentVersion());
-  };
+  uint currentVersion() const;
 
   /**
   * MyMoneyStorageSql - open database file
@@ -182,16 +127,7 @@ public:
    * @return : error message to be displayed
    *
    */
-  const QString& lastError() const {
-    return (m_error);
-  };
-
-  /**
-   * MyMoneyStorageSql get highest ID number from the database
-   *
-   * @return : highest ID number
-   */
-  long unsigned highestNumberFromIdString(QString tableName, QString tableField, int prefixLength);
+  QString lastError() const;  
 
   /**
    * This method is used when a database file is open, and the data is to
@@ -244,10 +180,8 @@ public:
   void modifyPayeeIdentifier(const payeeIdentifier& ident);
   void removePayeeIdentifier(const payeeIdentifier& ident);
 
-  unsigned long transactionCount(const QString& aid = QString()) const;
-  inline const QHash<QString, unsigned long> transactionCountMap() const {
-    return (m_transactionCountMap);
-  };
+  ulong transactionCount(const QString& aid) const;
+  QHash<QString, ulong> transactionCountMap() const;
 
   /**
    * The following functions are perform the same operations as the
@@ -260,84 +194,115 @@ public:
   /**
     * the storage manager also needs the following read entry points
     */
-  const QMap<QString, MyMoneyAccount> fetchAccounts(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyMoney> fetchBalance(const QStringList& id, const QDate& date) const;
-  const QMap<QString, MyMoneyBudget> fetchBudgets(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneySecurity> fetchCurrencies(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyInstitution> fetchInstitutions(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, onlineJob> fetchOnlineJobs(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyCostCenter> fetchCostCenters(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
+  QMap<QString, MyMoneyAccount> fetchAccounts(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyAccount> fetchAccounts() const;
+
+  QMap<QString, MyMoneyMoney> fetchBalance(const QStringList& id, const QDate& date) const;
+
+  QMap<QString, MyMoneyBudget> fetchBudgets(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyBudget> fetchBudgets() const;
+
+  QMap<QString, MyMoneySecurity> fetchCurrencies(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneySecurity> fetchCurrencies() const;
+
+  QMap<QString, MyMoneyInstitution> fetchInstitutions(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyInstitution> fetchInstitutions() const;
+
+  QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyPayee> fetchPayees() const;
+
+  QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyTag> fetchTags() const;
+
+  QMap<QString, onlineJob> fetchOnlineJobs(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, onlineJob> fetchOnlineJobs() const;
+
+  QMap<QString, MyMoneyCostCenter> fetchCostCenters(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyCostCenter> fetchCostCenters() const;
+
+  MyMoneyPriceList fetchPrices(const QStringList& fromIdList, const QStringList& toIdList, bool forUpdate = false) const;
+  MyMoneyPriceList fetchPrices() const;
+
   MyMoneyPrice fetchSinglePrice(const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool = false) const;
-  const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneySchedule> fetchSchedules(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneySecurity> fetchSecurities(const QStringList& idList = QStringList(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList = QString(), const QString& dateClause = QString(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyTransaction> fetchTransactions(const MyMoneyTransactionFilter& filter) const;
+
+  QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneyReport> fetchReports() const;
+
+  QMap<QString, MyMoneySchedule> fetchSchedules(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneySchedule> fetchSchedules() const;
+
+  QMap<QString, MyMoneySecurity> fetchSecurities(const QStringList& idList, bool forUpdate = false) const;
+  QMap<QString, MyMoneySecurity> fetchSecurities() const;
+
+  QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList, const QString& dateClause, bool forUpdate = false) const;
+  QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList) const;
+  QMap<QString, MyMoneyTransaction> fetchTransactions() const;
+
+  QMap<QString, MyMoneyTransaction> fetchTransactions(const MyMoneyTransactionFilter& filter) const;
   payeeIdentifier fetchPayeeIdentifier(const QString& id) const;
-  const QMap<QString, payeeIdentifier> fetchPayeeIdentifiers(const QStringList& idList = QStringList()) const;
+
+  QMap<QString, payeeIdentifier> fetchPayeeIdentifiers(const QStringList& idList) const;
+  QMap<QString, payeeIdentifier> fetchPayeeIdentifiers() const;
+
   bool isReferencedByTransaction(const QString& id) const;
 
   void readPayees(const QString&);
-  void readPayees(const QList<QString>& payeeList = QList<QString>());
+  void readPayees(const QList<QString>& payeeList);
+  void readPayees();
+
   void readTags(const QString&);
-  void readTags(const QList<QString>& tagList = QList<QString>());
+  void readTags(const QList<QString>& tagList);
+  void readTags();
 
   void readTransactions(const MyMoneyTransactionFilter& filter);
-  void setProgressCallback(void(*callback)(int, int, const QString&));
+  void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
-  virtual void readFile(QIODevice* s, IMyMoneySerialize* storage) {
-    Q_UNUSED(s); Q_UNUSED(storage)
-  };
-  virtual void writeFile(QIODevice* s, IMyMoneySerialize* storage) {
-    Q_UNUSED(s); Q_UNUSED(storage)
-  };
+  void readFile(QIODevice* s, IMyMoneySerialize* storage) override;
+  void writeFile(QIODevice* s, IMyMoneySerialize* storage) override;
 
   void startCommitUnit(const QString& callingFunction);
   bool endCommitUnit(const QString& callingFunction);
   void cancelCommitUnit(const QString& callingFunction);
 
-  long unsigned getRecCount(const QString& table) const;
-  long unsigned getNextBudgetId() const;
-  long unsigned getNextAccountId() const;
-  long unsigned getNextInstitutionId() const;
-  long unsigned getNextPayeeId() const;
-  long unsigned getNextTagId() const;
-  long unsigned getNextOnlineJobId() const;
-  long unsigned getNextPayeeIdentifierId() const;
-  long unsigned getNextReportId() const;
-  long unsigned getNextScheduleId() const;
-  long unsigned getNextSecurityId() const;
-  long unsigned getNextTransactionId() const;
-  long unsigned getNextCostCenterId() const;
+  ulong getRecCount(const QString& table) const;
+  ulong getNextBudgetId() const;
+  ulong getNextAccountId() const;
+  ulong getNextInstitutionId() const;
+  ulong getNextPayeeId() const;
+  ulong getNextTagId() const;
+  ulong getNextOnlineJobId() const;
+  ulong getNextPayeeIdentifierId() const;
+  ulong getNextReportId() const;
+  ulong getNextScheduleId() const;
+  ulong getNextSecurityId() const;
+  ulong getNextTransactionId() const;
+  ulong getNextCostCenterId() const;
 
-  long unsigned incrementBudgetId();
-  long unsigned incrementAccountId();
-  long unsigned incrementInstitutionId();
-  long unsigned incrementPayeeId();
-  long unsigned incrementTagId();
-  long unsigned incrementReportId();
-  long unsigned incrementScheduleId();
-  long unsigned incrementSecurityId();
-  long unsigned incrementTransactionId();
-  long unsigned incrementOnlineJobId();
-  long unsigned incrementPayeeIdentfierId();
-  long unsigned incrementCostCenterId();
+  ulong incrementBudgetId();
+  ulong incrementAccountId();
+  ulong incrementInstitutionId();
+  ulong incrementPayeeId();
+  ulong incrementTagId();
+  ulong incrementReportId();
+  ulong incrementScheduleId();
+  ulong incrementSecurityId();
+  ulong incrementTransactionId();
+  ulong incrementOnlineJobId();
+  ulong incrementPayeeIdentfierId();
+  ulong incrementCostCenterId();
 
-  void loadAccountId(const unsigned long& id);
-  void loadTransactionId(const unsigned long& id);
-  void loadPayeeId(const unsigned long& id);
-  void loadTagId(const unsigned long& id);
-  void loadInstitutionId(const unsigned long& id);
-  void loadScheduleId(const unsigned long& id);
-  void loadSecurityId(const unsigned long& id);
-  void loadReportId(const unsigned long& id);
-  void loadBudgetId(const unsigned long& id);
-  void loadOnlineJobId(const unsigned long& id);
-  void loadPayeeIdentifierId(const unsigned long& id);
-  void loadCostCenterId(const unsigned long& id);
+  void loadAccountId(ulong id);
+  void loadTransactionId(ulong id);
+  void loadPayeeId(ulong id);
+  void loadTagId(ulong id);
+  void loadInstitutionId(ulong id);
+  void loadScheduleId(ulong id);
+  void loadSecurityId(ulong id);
+  void loadReportId(ulong id);
+  void loadBudgetId(ulong id);
+  void loadOnlineJobId(ulong id);
+  void loadPayeeIdentifierId(ulong id);
+  void loadCostCenterId(ulong id);
 
   /**
     * This method allows to modify the precision with which prices
@@ -352,267 +317,7 @@ public:
   static void setStartDate(const QDate &startDate);
 
 private:
-  bool fileExists(const QString& dbName);
-  /** @brief a function to build a comprehensive error message for an SQL error */
-  QString& buildError(const QSqlQuery& q, const QString& function, const QString& message) const;
-
-  /** @copydoc buildError */
-  QString& buildError(const QSqlQuery& q, const QString& function, const QString& message,
-                      const QSqlDatabase*) const;
-
-  /**
-   * @name writeFromStorageMethods
-   * @{
-   * These method write all data from m_storage to the database. Data which is
-   * stored in the database is deleted.
-   */
-  void writeUserInformation();
-  void writeInstitutions();
-  void writePayees();
-  void writeTags();
-  void writeAccounts();
-  void writeTransactions();
-  void writeSchedules();
-  void writeSecurities();
-  void writePrices();
-  void writeCurrencies();
-  void writeFileInfo();
-  void writeReports();
-  void writeBudgets();
-  void writeOnlineJobs();
-  /** @} */
-
-  /**
-   * @name writeMethods
-   * @{
-   * These methods bind the data fields of MyMoneyObjects to a given query and execute the query.
-   * This is helpfull as the query has usually an update and a insert format.
-   */
-  void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);
-  void writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isUserInfo = false);
-  void writeTag(const MyMoneyTag& p, QSqlQuery& q);
-  void writeAccountList(const QList<MyMoneyAccount>& accList, QSqlQuery& q);
-  void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, QSqlQuery& q, const QString& type);
-  void writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList);
-  void writeTagSplitsList(const QString& txId, const QList<MyMoneySplit>& splitList, const QList<int>& splitIdList);
-  void writeSplitList(const QString& txId, const QList<MyMoneySplit>& splitList, const QString& type, const QList<int>& splitIdList, QSqlQuery& q);
-  void writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, bool insert);
-  void writeSecurity(const MyMoneySecurity& security, QSqlQuery& q);
-  void writePricePair(const MyMoneyPriceEntries& p);
-  void writePrice(const MyMoneyPrice& p);
-  void writeCurrency(const MyMoneySecurity& currency, QSqlQuery& q);
-  void writeReport(const MyMoneyReport& rep, QSqlQuery& q);
-  void writeBudget(const MyMoneyBudget& bud, QSqlQuery& q);
-  void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs);
-  void writeOnlineJob(const onlineJob& job, QSqlQuery& query);
-  void writePayeeIdentifier(const payeeIdentifier& pid, QSqlQuery& query);
-  /** @} */
-
-  /**
-   * @name readMethods
-   * @{
-   */
-  void readFileInfo();
-  void readLogonData();
-  void readUserInformation();
-  void readInstitutions();
-  void readAccounts();
-  void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
-  void readSplit(MyMoneySplit& s, const QSqlQuery& q) const;
-  const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const;
-  const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs(const QString& kvpType, const QStringList& kvpIdList) const;
-  void readSchedules();
-  void readSecurities();
-  void readPrices();
-  void readCurrencies();
-  void readReports();
-  void readBudgets();
-  /** @} */
-
-  template<long unsigned MyMoneyStorageSql::* cache>
-  long unsigned int getNextId(const QString& table, const QString& id, const int prefixLength) const;
-
-  void deleteTransaction(const QString& id);
-  void deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList);
-  void deleteSchedule(const QString& id);
-  void deleteKeyValuePairs(const QString& kvpType, const QVariantList& kvpId);
-  long unsigned calcHighId(const long unsigned&, const QString&);
-
-  void setVersion(const QString& version);
-
-  void signalProgress(int current, int total, const QString& = "") const;
-  void (*m_progressCallback)(int, int, const QString&);
-
-  //void startCommitUnit (const QString& callingFunction);
-  //void endCommitUnit (const QString& callingFunction);
-  //void cancelCommitUnit (const QString& callingFunction);
-  int splitState(const eMyMoney::TransactionFilter::State& state) const;
-
-  inline const QDate getDate(const QString& date) const {
-    return (date.isNull() ? QDate() : QDate::fromString(date, Qt::ISODate));
-  }
-
-  inline const QDateTime getDateTime(const QString& date) const {
-    return (date.isNull() ? QDateTime() : QDateTime::fromString(date, Qt::ISODate));
-  }
-
-  // open routines
-  /**
-   * MyMoneyStorageSql create database
-   *
-   * @param url pseudo-URL of database to be opened
-   *
-   * @return true - creation successful
-   * @return false - could not create
-   *
-   */
-  bool createDatabase(const QUrl &url);
-  int upgradeDb();
-  int upgradeToV1();
-  int upgradeToV2();
-  int upgradeToV3();
-  int upgradeToV4();
-  int upgradeToV5();
-  int upgradeToV6();
-  int upgradeToV7();
-  int upgradeToV8();
-  int upgradeToV9();
-  int upgradeToV10();
-  int upgradeToV11();
-  int upgradeToV12();
-
-  int createTables();
-  void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
-  bool alterTable(const MyMoneyDbTable& t, int fromVersion);
-  void clean();
-  int isEmpty();
-  // for bug 252841
-  const QStringList tables(QSql::TableType tt) {
-    return (m_driver->tables(tt, static_cast<const QSqlDatabase&>(*this)));
-  };
-
-  //! Returns 1 in case the @a column exists in @a table, 0 if not. In case of error, -1 is returned.
-  int haveColumnInTable(const QString& table, const QString& column);
-
-  /**
-   * @brief Ensure the storagePlugin with iid was setup
-   *
-   * @throws MyMoneyException in case of an error which makes the use
-   * of the plugin unavailable.
-   */
-  bool setupStoragePlugin(QString iid);
-
-  void insertStorableObject(const databaseStoreableObject& obj, const QString& id);
-  void updateStorableObject(const databaseStoreableObject& obj, const QString& id);
-  void deleteStorableObject(const databaseStoreableObject& obj, const QString& id);
-
-  // data
-  QExplicitlySharedDataPointer<MyMoneyDbDriver> m_driver;
-
-  MyMoneyDbDef m_db;
-  unsigned int m_dbVersion;
-  IMyMoneySerialize *m_storage;
-  IMyMoneyStorage *m_storagePtr;
-  // input options
-  bool m_loadAll; // preload all data
-  bool m_override; // override open if already in use
-  // error message
-  QString m_error;
-  // record counts
-  long unsigned m_institutions;
-  long unsigned m_accounts;
-  long unsigned m_payees;
-  long unsigned m_tags;
-  long unsigned m_transactions;
-  long unsigned m_splits;
-  long unsigned m_securities;
-  long unsigned m_prices;
-  long unsigned m_currencies;
-  long unsigned m_schedules;
-  long unsigned m_reports;
-  long unsigned m_kvps;
-  long unsigned m_budgets;
-  long unsigned m_onlineJobs;
-  long unsigned m_payeeIdentifier;
-
-  // Cache for next id to use
-  // value 0 means data is not available and has to be loaded from the database
-  long unsigned m_hiIdInstitutions;
-  long unsigned m_hiIdPayees;
-  long unsigned m_hiIdTags;
-  long unsigned m_hiIdAccounts;
-  long unsigned m_hiIdTransactions;
-  long unsigned m_hiIdSchedules;
-  long unsigned m_hiIdSecurities;
-  long unsigned m_hiIdReports;
-  long unsigned m_hiIdBudgets;
-  long unsigned m_hiIdOnlineJobs;
-  long unsigned m_hiIdPayeeIdentifier;
-  long unsigned m_hiIdCostCenter;
-
-  // encrypt option - usage TBD
-  QString m_encryptData;
-
-  /**
-    * This variable is used to suppress status messages except during
-   * initial data load and final write
-
-  */
-  bool m_displayStatus;
-
-  void alert(QString s) const {
-    qDebug() << s;
-  }; // FIXME: remove...
-  /** The following keeps track of commitment units (known as transactions in SQL
-    * though it would be confusing to use that term within KMM). It is implemented
-    * as a stack for debug purposes. Long term, probably a count would suffice
-    */
-  QStack<QString> m_commitUnitStack;
-  /**
-    * This member variable is used to preload transactions for preferred accounts
-    */
-  MyMoneyTransactionFilter m_preferred;
-  /**
-    * This member variable is used because reading prices from a file uses the 'add...' function rather than a
-    * 'load...' function which other objects use. Having this variable allows us to avoid needing to check the
-    * database to see if this really is a new or modified price
-    */
-  bool m_readingPrices;
-  /**
-    * This member variable holds a map of transaction counts per account, indexed by
-    * the account id. It is used
-    * to avoid having to scan all transactions whenever a count is needed. It should
-    * probably be moved into the MyMoneyAccount object; maybe we will do that once
-    * the database code has been properly checked out
-    */
-  QHash<QString, unsigned long> m_transactionCountMap;
-  /**
-    * These member variables hold the user name and date/time of logon
-    */
-  QString m_logonUser;
-  QDateTime m_logonAt;
-  QDate m_txPostDate; // FIXME: remove when Tom puts date into split object
-
-  //Disable copying
-  MyMoneyStorageSql(const MyMoneyStorageSql& rhs);
-  MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
-  bool m_newDatabase;
-
-  /**
-    * This member keeps the current precision to be used fro prices.
-    * @sa setPrecision()
-    */
-  static int m_precision;
-
-  /**
-    * This member keeps the current start date used for transaction retrieval.
-    * @sa setStartDate()
-    */
-  static QDate m_startDate;
-
-  /**
-    *
-    */
-  QSet<QString> m_loadedStoragePlugins;
+  MyMoneyStorageSqlPrivate* const d_ptr;
+  Q_DECLARE_PRIVATE(MyMoneyStorageSql)
 };
 #endif // MYMONEYSTORAGESQL_H

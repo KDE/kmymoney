@@ -29,6 +29,7 @@
 #include <QDomDocument>
 #include <QDomElement>
 #include <QDebug>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -56,6 +57,7 @@
 #include "mymoneycostcenter.h"
 #include "mymoneytransaction.h"
 #include "onlinejob.h"
+#include "mymoneyenums.h"
 
 using namespace MyMoneyStorageTags;
 using namespace MyMoneyStorageNodes;
@@ -808,7 +810,8 @@ void MyMoneyStorageXML::writeTransaction(QDomElement& transaction, const MyMoney
 
 void MyMoneyStorageXML::writeSchedules(QDomElement& scheduled)
 {
-  const QList<MyMoneySchedule> list = m_storage->scheduleList();
+  const QList<MyMoneySchedule> list = m_storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
+                                                              QDate(), QDate(), false);
   QList<MyMoneySchedule>::ConstIterator it;
   scheduled.setAttribute(attrNames[anCount], list.count());
 

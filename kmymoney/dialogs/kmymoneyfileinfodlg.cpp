@@ -23,6 +23,7 @@
 
 #include <QLabel>
 #include <QList>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -86,7 +87,8 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
   ui->m_transactionCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
   filter.setReportAllSplits(true);
   ui->m_splitCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
-  ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(storage->scheduleList().count()));
+  ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
+                                                                                   QDate(), QDate(), false).count()));
   MyMoneyPriceList list = storage->priceList();
   MyMoneyPriceList::const_iterator it_p;
   int pCount = 0;

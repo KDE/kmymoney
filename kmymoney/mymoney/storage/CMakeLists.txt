@@ -10,7 +10,7 @@ set(storage_HEADERS
 
 set(storage_a_SOURCES
   imymoneystorageformat.cpp mymoneystoragexml.cpp mymoneystoragedump.cpp
-  mymoneyseqaccessmgr.cpp imymoneystorage.cpp imymoneyserialize.cpp
+  mymoneyseqaccessmgr.cpp
   mymoneystorageanon.cpp
   mymoneystoragesql.cpp
   mymoneydatabasemgr.cpp
