@@ -296,19 +296,19 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
 
     if(filterModel) {
       const auto completionStr = QStringLiteral(".*");
-      if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
+      if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
         // for some reason it helps to avoid internal errors if we
         // clear the filter before setting it to a new value
         filterModel->setFilterFixedString(QString());
         const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegExp::escape(txt)).arg(completionStr);
         filterModel->setFilterRegExp(QRegExp(filterString, Qt::CaseInsensitive));
       } else {
-        QStringList parts = txt.split(MyMoneyFile::AccountSeperator /*, QString::SkipEmptyParts */);
+        QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, QString::SkipEmptyParts */);
         QString pattern;
         QStringList::iterator it;
         for (it = parts.begin(); it != parts.end(); ++it) {
           if (pattern.length() > 1)
-            pattern += MyMoneyFile::AccountSeperator;
+            pattern += MyMoneyFile::AccountSeparator;
           pattern += QRegExp::escape(QString(*it).trimmed()) + completionStr;
         }
         // for some reason it helps to avoid internal errors if we
@@ -320,7 +320,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
         if (filterModel->visibleItems() == 0) {
           // for some reason it helps to avoid internal errors if we
           // clear the filter before setting it to a new value
-          pattern = pattern.prepend(completionStr + MyMoneyFile::AccountSeperator);
+          pattern = pattern.prepend(completionStr + MyMoneyFile::AccountSeparator);
           filterModel->setFilterFixedString(QString());
           filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
         }

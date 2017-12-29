@@ -59,7 +59,7 @@
 
 using namespace eMyMoney;
 
-const QString MyMoneyFile::AccountSeperator = QChar(':');
+const QString MyMoneyFile::AccountSeparator = QChar(':');
 
 MyMoneyFile MyMoneyFile::file;
 
@@ -254,10 +254,10 @@ public:
 
   bool                   m_inTransaction;
   MyMoneySecurity        m_baseCurrency;
-  
+
   /**
    * @brief Cache for MyMoneyObjects
-   * 
+   *
    * It is also used to emit the objectAdded() and objectModified() signals.
    * => If one of these signals is used, you must use this cache.
    */
@@ -925,7 +925,7 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
   try {
     int pos;
     // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeparator)) != -1) {
       QString part = newAccount.name().left(pos);
       QString remainder = newAccount.name().mid(pos + 1);
       const MyMoneyAccount& existingAccount = subAccountByName(parentAccount, part);
@@ -1766,7 +1766,7 @@ QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeSta
     acc = account(accountId);
     do {
       if (!rc.isEmpty())
-        rc = AccountSeperator + rc;
+        rc = AccountSeparator + rc;
       rc = acc.name() + rc;
       acc = account(acc.parentAccountId());
     } while (!acc.id().isEmpty() && (includeStandardAccounts || !isStandardAccount(acc.id())));
@@ -1813,15 +1813,15 @@ QString MyMoneyFile::nameToAccount(const QString& name) const
 
 QString MyMoneyFile::parentName(const QString& name) const
 {
-  return name.section(AccountSeperator, 0, -2);
+  return name.section(AccountSeparator, 0, -2);
 }
 
 QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString& category) const
 {
   MyMoneyAccount nextBase;
   QString level, remainder;
-  level = category.section(AccountSeperator, 0, 0);
-  remainder = category.section(AccountSeperator, 1);
+  level = category.section(AccountSeparator, 0, 0);
+  remainder = category.section(AccountSeparator, 1);
 
   foreach (const auto sAccount, base.accountList()) {
     nextBase = account(sAccount);
@@ -2626,7 +2626,7 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
   if (base.id() != expense().id() && base.id() != income().id())
     throw MYMONEYEXCEPTION("Invalid base category");
 
-  QStringList subAccounts = name.split(AccountSeperator);
+  QStringList subAccounts = name.split(AccountSeparator);
   QStringList::Iterator it;
   for (it = subAccounts.begin(); it != subAccounts.end(); ++it) {
     MyMoneyAccount categoryAccount;
@@ -2637,7 +2637,7 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
     if (it == subAccounts.begin())
       categoryText += *it;
     else
-      categoryText += (AccountSeperator + *it);
+      categoryText += (AccountSeparator + *it);
 
     // Only create the account if it doesn't exist
     try {
@@ -3402,7 +3402,7 @@ void MyMoneyFile::costCenterList(QList< MyMoneyCostCenter >& list) const
   d->checkStorage();
   list = d->m_storage->costCenterList();
 }
- 
+
 bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)
 {
   bool rc = false;

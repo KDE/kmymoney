@@ -672,7 +672,7 @@ void KNewAccountDlg::okClicked()
     acctype = parent.accountGroup();
     QString newName;
     if (!MyMoneyFile::instance()->isStandardAccount(parent.id())) {
-      newName = MyMoneyFile::instance()->accountToCategory(parent.id()) + MyMoneyFile::AccountSeperator;
+      newName = MyMoneyFile::instance()->accountToCategory(parent.id()) + MyMoneyFile::AccountSeparator;
     }
     newName += accountNameText;
     if (!file->categoryToAccount(newName, acctype).isEmpty()

@@ -158,7 +158,7 @@ QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAc
     newAccount.setName(name) ;
     int pos;
     // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeparator)) != -1) {
       QString part = newAccount.name().left(pos);
       QString remainder = newAccount.name().mid(pos + 1);
       const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);

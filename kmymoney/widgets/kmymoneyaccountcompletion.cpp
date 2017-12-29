@@ -91,16 +91,16 @@ void KMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
   //  return;
 
   auto cnt = 0;
-  if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
+  if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
     d->m_lastCompletion = QRegExp(QRegExp::escape(txt), Qt::CaseInsensitive);
     cnt = selector()->slotMakeCompletion(txt);
   } else {
-    QStringList parts = txt.split(MyMoneyFile::AccountSeperator, QString::SkipEmptyParts);
+    QStringList parts = txt.split(MyMoneyFile::AccountSeparator, QString::SkipEmptyParts);
     QString pattern("^");
     QStringList::iterator it;
     for (it = parts.begin(); it != parts.end(); ++it) {
       if (pattern.length() > 1)
-        pattern += MyMoneyFile::AccountSeperator;
+        pattern += MyMoneyFile::AccountSeparator;
       pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
     }
     pattern += '$';
@@ -109,7 +109,7 @@ void KMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
     // if we don't have a match, we try it again, but this time
     // we add a wildcard for the top level
     if (cnt == 0) {
-      pattern = pattern.insert(1, QString(".*") + MyMoneyFile::AccountSeperator);
+      pattern = pattern.insert(1, QString(".*") + MyMoneyFile::AccountSeparator);
       d->m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
       cnt = selector()->slotMakeCompletion(d->m_lastCompletion);
     }

@@ -878,7 +878,7 @@ MyMoneyAccount MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const My
       // check for ':' in the name and use it as separator for a hierarchy
       QString name = acc.name();
       bool notFound = false;
-      while ((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+      while ((pos = name.indexOf(MyMoneyFile::AccountSeparator)) != -1) {
         QString part = name.left(pos);
         QString remainder = name.mid(pos + 1);
         const auto existingAccount = file->subAccountByName(parentAccount, part);

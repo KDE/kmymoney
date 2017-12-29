@@ -425,7 +425,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
         if (includeAccount(acc)
             && (!isHidingClosedAccounts() || !acc.isClosed())) {
           QString tmpKey;
-          tmpKey = key + MyMoneyFile::AccountSeperator + acc.name();
+          tmpKey = key + MyMoneyFile::AccountSeparator + acc.name();
           QTreeWidgetItem* subItem = selector->newItem(item, acc.name(), tmpKey, acc.id());
           subItem->setIcon(0, acc.accountPixmap());
           if (acc.value("PreferredAccount") == "Yes"
@@ -491,7 +491,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector, const QString& baseName,
       continue;
     QString tmpKey;
     // the first character must be preset. Since we don't know any sort order here, we just use A
-    tmpKey = QString("A%1%2%3").arg(baseName, MyMoneyFile::AccountSeperator, acc.name());
+    tmpKey = QString("A%1%2%3").arg(baseName, MyMoneyFile::AccountSeparator, acc.name());
     selector->newItem(item, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountPixmap());
     ++d->m_count;
     ++count;
@@ -541,7 +541,7 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
     if (includeAccount(acc)
         && (!isHidingClosedAccounts() || !acc.isClosed())) {
       QString tmpKey;
-      tmpKey = key + MyMoneyFile::AccountSeperator + acc.name();
+      tmpKey = key + MyMoneyFile::AccountSeparator + acc.name();
       ++count;
       ++d->m_count;
       QTreeWidgetItem* item = selector->newItem(parent, acc.name(), tmpKey, acc.id());
