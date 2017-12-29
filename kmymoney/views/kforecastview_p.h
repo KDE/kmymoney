@@ -289,7 +289,6 @@ public:
 
   void loadSummaryView()
   {
-    Q_Q(KForecastView);
     MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
     QList<MyMoneyAccount> accList;
     int dropMinimum;
