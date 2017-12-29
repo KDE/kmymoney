@@ -550,7 +550,7 @@ void MyMoneyAccountTest::reconciliationHistory()
 }
 
 void MyMoneyAccountTest::testElementNames()
-{  
+{
   for (auto i = (int)Account::Element::SubAccount; i <= (int)Account::Element::OnlineBanking; ++i) {
     auto isEmpty = MyMoneyAccountPrivate::getElName(static_cast<Account::Element>(i)).isEmpty();
     if (isEmpty)
@@ -567,4 +567,14 @@ void MyMoneyAccountTest::testAttributeNames()
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
   }
+}
+
+void MyMoneyAccountTest::testHasOnlineMapping()
+{
+  MyMoneyAccount a;
+  QCOMPARE(a.hasOnlineMapping(), false);
+  MyMoneyKeyValueContainer kvp = a.onlineBankingSettings();
+  kvp.setValue(QLatin1String("provider"), QLatin1String("bla"));
+  a.setOnlineBankingSettings(kvp);
+  QCOMPARE(a.hasOnlineMapping(), true);
 }

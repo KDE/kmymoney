@@ -49,6 +49,7 @@ private Q_SLOTS:
   void reconciliationHistory();
   void testElementNames();
   void testAttributeNames();
+  void testHasOnlineMapping();
 };
 
 #endif

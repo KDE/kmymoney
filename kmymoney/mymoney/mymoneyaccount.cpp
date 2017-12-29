@@ -615,7 +615,7 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
     ixIcon = Icon::AccountClosed;
   else if (reconcileFlag)
     ixIcon = Icon::FlagGreen;
-  else if (!onlineBankingSettings().value("provider").isEmpty())
+  else if (hasOnlineMapping())
     ixIcon = Icon::Download;
   else
     return pxIcon;
@@ -738,4 +738,10 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   }
 
   return list;
+}
+
+bool MyMoneyAccount::hasOnlineMapping() const
+{
+  Q_D(const MyMoneyAccount);
+  return !d->m_onlineBankingSettings.value(QLatin1String("provider")).isEmpty();
 }

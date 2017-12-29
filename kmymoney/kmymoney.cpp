@@ -2674,7 +2674,7 @@ void KMyMoneyApp::slotUpdateActions()
   QList<MyMoneyAccount>::const_iterator it_a;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constEnd();
   for (it_a = accList.constBegin(); (it_p == d->m_onlinePlugins.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
-    if (!(*it_a).onlineBankingSettings().value("provider").isEmpty()) {
+    if ((*it_a).hasOnlineMapping()) {
       // check if provider is available
       it_p = d->m_onlinePlugins.constFind((*it_a).onlineBankingSettings().value("provider"));
       if (it_p != d->m_onlinePlugins.constEnd()) {
@@ -2695,11 +2695,11 @@ void KMyMoneyApp::slotUpdateActions()
         case eMyMoney::Account::Type::Equity:
           pActions[Action::ReportAccountTransactions]->setEnabled(true);
 
-          if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty()) {
+          if (d->m_selectedAccount.hasOnlineMapping()) {
             pActions[Action::UnmapOnlineAccount]->setEnabled(true);
             // check if provider is available
             QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-            it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider"));
+            it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value(QLatin1String("provider")));
             if (it_p != d->m_onlinePlugins.constEnd()) {
               QStringList protocols;
               (*it_p)->protocols(protocols);
@@ -3285,7 +3285,7 @@ void KMyMoneyApp::slotAccountUnmapOnline()
     return;
 
   // not a mapped account
-  if (d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty())
+  if (!d->m_selectedAccount.hasOnlineMapping())
     return;
 
   if (KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.", d->m_selectedAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
@@ -3313,7 +3313,7 @@ void KMyMoneyApp::slotAccountMapOnline()
     return;
 
   // already an account mapped
-  if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty())
+  if (d->m_selectedAccount.hasOnlineMapping())
     return;
 
   // check if user tries to map a brokerageAccount
@@ -3393,7 +3393,7 @@ void KMyMoneyApp::slotAccountUpdateOnlineAll()
   // remove all those from the list, that don't have a 'provider' or the
   // provider is not currently present
   for (it_a = accList.begin(); it_a != accList.end();) {
-    if ((*it_a).onlineBankingSettings().value("provider").isEmpty()
+    if (!(*it_a).hasOnlineMapping()
         || d->m_onlinePlugins.find((*it_a).onlineBankingSettings().value("provider")) == d->m_onlinePlugins.end()) {
       it_a = accList.erase(it_a);
     } else
@@ -3426,7 +3426,7 @@ void KMyMoneyApp::slotAccountUpdateOnline()
     return;
 
   // no online account mapped
-  if (d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty())
+  if (!d->m_selectedAccount.hasOnlineMapping())
     return;
 
   const QVector<Action> disabledActions {Action::UpdateAccount, Action::UpdateAllAccounts};
