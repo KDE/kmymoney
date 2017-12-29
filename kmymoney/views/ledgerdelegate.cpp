@@ -262,6 +262,11 @@ public:
     delete m_separator;
   }
 
+  inline bool displaySeperator(const QModelIndex& index) const
+  {
+    return m_separator && m_separator->rowHasSeperator(index);
+  }
+
   NewTransactionEditor*         m_editor;
   LedgerView*                   m_view;
   LedgerSeperator*              m_separator;
@@ -349,14 +354,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   // show the focus only on the detail column
   opt.state &= ~QStyle::State_HasFocus;
-  if(index.column() == (int)eLedgerModel::Column::Detail) {
-    QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
-    if(view) {
-      if(view->currentIndex().row() == index.row()) {
-        opt.state |= QStyle::State_HasFocus;
-      }
-    }
-  }
+
   // if selected, always show as active, so that the
   // background does not change when the editor is shown
   if (opt.state & QStyle::State_Selected) {
@@ -365,216 +363,149 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   painter->save();
 
+  QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
   const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
-  const bool rowHasSeperator = d->m_separator && d->m_separator->rowHasSeperator(index);
+  const bool rowHasSeperator = d->displaySeperator(index);
 
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
   const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
 
-  if (!editWidgetIsVisible && rowHasSeperator) {
+  if (rowHasSeperator) {
     // don't draw over the separator space
-    opt.rect.setHeight(opt.rect.height() - lineHeight);
+    opt.rect.setHeight(opt.rect.height() - lineHeight );
   }
+
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
   // Do not paint text if the edit widget is shown
-  if (editWidgetIsVisible) {
-    painter->restore();
-    return;
-  }
-
-  const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
-  const bool selected = opt.state & QStyle::State_Selected;
-
-  QStringList lines;
-  if(index.column() == (int)eLedgerModel::Column::Detail) {
-    lines << index.model()->data(index, (int)eLedgerModel::Role::PayeeName).toString();
-    if(selected) {
-      lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
-      lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
-
-    } else {
-      if(lines.at(0).isEmpty()) {
-        lines.clear();
-        lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
-      }
-      if(lines.at(0).isEmpty()) {
-        lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
+  if (!editWidgetIsVisible) {
+    if(view && (index.column() == (int)eLedgerModel::Column::Detail)) {
+      if(view->currentIndex().row() == index.row()) {
+        opt.state |= QStyle::State_HasFocus;
       }
     }
-    lines.removeAll(QString());
-  }
+    const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
+    const bool selected = opt.state & QStyle::State_Selected;
 
-  const bool erroneous = index.model()->data(index, (int)eLedgerModel::Role::Erroneous).toBool();
-
-  // draw the text items
-  if(!opt.text.isEmpty() || !lines.isEmpty()) {
-
-    // check if it is a scheduled transaction and display it as inactive
-    if(!index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
-      opt.state &= ~QStyle::State_Enabled;
-    }
-
-    QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
-                              ? QPalette::Normal : QPalette::Disabled;
-
-    if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
-      cg = QPalette::Inactive;
-    }
-    if (opt.state & QStyle::State_Selected) {
-      // always use the normal palette since the background is also in normal
-      painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
-    } else {
-      painter->setPen(opt.palette.color(cg, QPalette::Text));
-    }
-    if (opt.state & QStyle::State_Editing) {
-      painter->setPen(opt.palette.color(cg, QPalette::Text));
-      painter->drawRect(textArea.adjusted(0, 0, -1, -1));
-    }
-
-    // Don't play with the color if it's selected
-    // otherwise switch the color if the transaction has errors
-    if(erroneous && !selected) {
-      painter->setPen(m_erroneousColor);
-    }
-
-    // collect data for the various columns
+    QStringList lines;
     if(index.column() == (int)eLedgerModel::Column::Detail) {
-      for(int i = 0; i < lines.count(); ++i) {
-        painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
+      lines << index.model()->data(index, (int)eLedgerModel::Role::PayeeName).toString();
+      if(selected) {
+        lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
+        lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
+
+      } else {
+        if(lines.at(0).isEmpty()) {
+          lines.clear();
+          lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
+        }
+        if(lines.at(0).isEmpty()) {
+          lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
+        }
+      }
+      lines.removeAll(QString());
+    }
+
+    const bool erroneous = index.model()->data(index, (int)eLedgerModel::Role::Erroneous).toBool();
+
+    // draw the text items
+    if(!opt.text.isEmpty() || !lines.isEmpty()) {
+
+      // check if it is a scheduled transaction and display it as inactive
+      if(!index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
+        opt.state &= ~QStyle::State_Enabled;
       }
 
-    } else {
-      painter->drawText(textArea, opt.displayAlignment, opt.text);
+      QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
+                                ? QPalette::Normal : QPalette::Disabled;
+
+      if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
+        cg = QPalette::Inactive;
+      }
+      if (opt.state & QStyle::State_Selected) {
+        // always use the normal palette since the background is also in normal
+        painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
+      } else {
+        painter->setPen(opt.palette.color(cg, QPalette::Text));
+      }
+      if (opt.state & QStyle::State_Editing) {
+        painter->setPen(opt.palette.color(cg, QPalette::Text));
+        painter->drawRect(textArea.adjusted(0, 0, -1, -1));
+      }
+
+      // Don't play with the color if it's selected
+      // otherwise switch the color if the transaction has errors
+      if(erroneous && !selected) {
+        painter->setPen(m_erroneousColor);
+      }
+
+      // collect data for the various columns
+      if(index.column() == (int)eLedgerModel::Column::Detail) {
+        for(int i = 0; i < lines.count(); ++i) {
+          painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
+        }
+
+      } else {
+        painter->drawText(textArea, opt.displayAlignment, opt.text);
+      }
     }
-  }
 
-  // draw the focus rect
-  if(opt.state & QStyle::State_HasFocus) {
-    QStyleOptionFocusRect o;
-    o.QStyleOption::operator=(opt);
-    o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
-    o.state |= QStyle::State_KeyboardFocusChange;
-    o.state |= QStyle::State_Item;
+    // draw the focus rect
+    if(opt.state & QStyle::State_HasFocus) {
+      QStyleOptionFocusRect o;
+      o.QStyleOption::operator=(opt);
+      o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
+      o.state |= QStyle::State_KeyboardFocusChange;
+      o.state |= QStyle::State_Item;
 
-    QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
-                              ? QPalette::Normal : QPalette::Disabled;
-    o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected)
-                                             ? QPalette::Highlight : QPalette::Window);
-    style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
-  }
+      QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
+                                ? QPalette::Normal : QPalette::Disabled;
+      o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected)
+                                              ? QPalette::Highlight : QPalette::Window);
+      style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
+    }
 
-  // draw the attention mark
-  if((index.column() == (int)eLedgerModel::Column::Detail)
-  && erroneous) {
-    QPixmap attention;
-    attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
-    style->proxy()->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignTop, attention);
+    // draw the attention mark
+    if((index.column() == (int)eLedgerModel::Column::Detail)
+    && erroneous) {
+      QPixmap attention;
+      attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
+      style->proxy()->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignTop, attention);
+    }
   }
 
   // draw a separator if any
   if (rowHasSeperator) {
-    opt.rect.setY(opt.rect.y()+opt.rect.height());
-    opt.rect.setHeight(lineHeight);
+    opt.rect.setY(opt.rect.y() + opt.rect.height());
+    opt.rect.setHeight(lineHeight + margin);
     opt.backgroundBrush = m_separatorColor;
 
     // never draw it as selected but always enabled
     opt.state &= ~QStyle::State_Selected;
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
-    if(index.column() == (int)eLedgerModel::Column::Detail) {
+    // when the editor is shown, the row has only a single column
+    // so we need to paint the seperator if we get here in this casee
+    bool needPaint = editWidgetIsVisible;
+
+    if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
+      needPaint = true;
+      // adjust the rect to cover all columns
+      if(view && view->viewport()) {
+        opt.rect.setX(0);
+        opt.rect.setWidth(view->viewport()->width());
+      }
+    }
+
+    if(needPaint) {
       QPalette::ColorGroup cg = QPalette::Normal;
       painter->setPen(opt.palette.color(cg, QPalette::Text));
       painter->drawText(opt.rect, Qt::AlignCenter, d->m_separator->separatorText(index));
     }
   }
   painter->restore();
-#if 0
-  const QHeaderView* horizontalHeader = view->horizontalHeader();
-  const QHeaderView* verticalHeader = view->verticalHeader();
-  const QWidget* viewport = view->viewport();
-  const bool showGrid = view->showGrid() && !view->indexWidget(index);
-  const int gridSize = showGrid ? 1 : 0;
-  const int gridHint = style->styleHint(QStyle::SH_Table_GridLineColor, &option, view);
-  const QColor gridColor = static_cast<QRgb>(gridHint);
-  const QPen gridPen = QPen(gridColor, 0, view->gridStyle());
-  const bool rightToLeft = view->isRightToLeft();
-  const int viewportOffset = horizontalHeader->offset();
-
-
-  // QStyledItemDelegate::paint(painter, opt, index);
-
-  if(!horizontalHeader->isSectionHidden(LedgerModel::DateColumn)) {
-    QDate postDate = index.data(LedgerModel::PostDateRole).toDate();
-    if(postDate.isValid()) {
-      int ofs = horizontalHeader->sectionViewportPosition(LedgerModel::DateColumn) + viewportOffset;
-      QRect oRect = opt.rect;
-      opt.displayAlignment = Qt::AlignLeft | Qt::AlignTop;
-      opt.rect.setLeft(opt.rect.left()+ofs);
-      opt.rect.setTop(opt.rect.top()+margin);
-      opt.rect.setWidth(horizontalHeader->sectionSize(LedgerModel::DateColumn));
-      opt.text = KGlobal::locale()->formatDate(postDate, QLocale::ShortFormat);
-      style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, opt.widget);
-      opt.rect = oRect;
-    }
-  }
-
-  if(!horizontalHeader->isSectionHidden(LedgerModel::DetailColumn)) {
-    QString payee = index.data(LedgerModel::PayeeRole).toString();
-    QString counterAccount = index.data(LedgerModel::CounterAccountRole).toString();
-    QString txt = payee;
-    if(payee.length() > 0)
-      txt += '\n';
-    txt += counterAccount;
-    int ofs = horizontalHeader->sectionViewportPosition(LedgerModel::DetailColumn) + viewportOffset;
-    QRect oRect = opt.rect;
-    opt.displayAlignment = Qt::AlignLeft | Qt::AlignTop;
-    opt.rect.setLeft(opt.rect.left()+ofs);
-    opt.rect.setTop(opt.rect.top()+margin);
-    opt.rect.setWidth(horizontalHeader->sectionSize(LedgerModel::DetailColumn));
-    opt.text = txt;
-    style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, opt.widget);
-    opt.rect = oRect;
-
-  }
-#if 0
-  opt.features |= QStyleOptionViewItemV2::HasDisplay;
-  QString txt = QString("%1").arg(index.isValid() ? "true" : "false");
-  if(index.isValid())
-    txt += QString(" %1 - %2").arg(index.row()).arg(view->verticalHeader()->sectionViewportPosition(index.row()));
-  opt.text = displayText(txt, opt.locale);
-
-  style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, opt.widget);
-#endif
-
-  // paint grid
-  if(showGrid) {
-    painter->save();
-    QPen old = painter->pen();
-    painter->setPen(gridPen);
-
-    // qDebug() << "Paint grid for" << index.row() << "in" << opt.rect;
-    for(int i=0; i < horizontalHeader->count(); ++i) {
-      if(!horizontalHeader->isSectionHidden(i)) {
-        int ofs = horizontalHeader->sectionViewportPosition(i) + viewportOffset;
-        if(!rightToLeft) {
-          ofs += horizontalHeader->sectionSize(i) - gridSize;
-        }
-        if(ofs-viewportOffset < viewport->width()) {
-          // I have no idea, why I need to paint the grid for the selected row and the one below
-          // but it was the only way to get this working correctly. Otherwise the grid was missing
-          // while moving the mouse over the view from bottom to top.
-          painter->drawLine(opt.rect.x()+ofs, opt.rect.y(), opt.rect.x()+ofs, opt.rect.height());
-          painter->drawLine(opt.rect.x()+ofs, opt.rect.y()+verticalHeader->sectionSize(index.row()), opt.rect.x()+ofs, opt.rect.height());
-        }
-      }
-    }
-    painter->setPen(old);
-    painter->restore();
-  }
-#endif
 }
 
 QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -591,6 +522,13 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
 
   QSize size;
   QStyleOptionViewItem opt = option;
+  int rows = 1;
+  initStyleOption(&opt, index);
+
+  QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
+  const int lineHeight = opt.fontMetrics.lineSpacing();
+
   if(index.isValid()) {
     // check if we are showing the edit widget
     // const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
@@ -600,20 +538,17 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
         QWidget* editor = d->m_view->indexWidget(editIndex);
         if(editor) {
           size = editor->minimumSizeHint();
+          if(d->displaySeperator(index)) {
+            // don't draw over the separator space
+            size += QSize(0, lineHeight + margin);
+          }
           return size;
         }
       }
     }
   }
 
-  int rows = 1;
-  initStyleOption(&opt, index);
-
-  QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) * 2;
-  const int lineHeight = (opt.fontMetrics.lineSpacing() + margin);
-
-  size = QSize(100, lineHeight);
+  size = QSize(100, lineHeight + 2*margin);
 
   if(fullDisplay) {
     auto payee = index.data((int)eLedgerModel::Role::PayeeName).toString();
@@ -626,11 +561,12 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
       rows = 1;
     }
     // leave a few pixels as margin for each space between rows
-    size.setHeight((size.height() * rows) - margin);
+    size.setHeight((size.height() * rows) - (margin * (rows - 1)));
+
   }
 
   if (d->m_separator && d->m_separator->rowHasSeperator(index)) {
-    size.setHeight(size.height() + lineHeight);
+    size.setHeight(size.height() + lineHeight + margin);
   }
   return size;
 }
@@ -638,7 +574,11 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
 void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   Q_UNUSED(index);
-  QStyleOptionViewItem opt = option;
+
+  QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
+  const int lineHeight = option.fontMetrics.lineSpacing();
+
   int ofs = 8;
   if(d->m_view) {
     if(d->m_view->verticalScrollBar()->isVisible()) {
@@ -646,12 +586,15 @@ void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVie
     }
   }
 
-  QRect r(opt.rect);
-  r.setWidth(opt.widget->width() - ofs);
+  QRect r(option.rect);
+  r.setWidth(option.widget->width() - ofs);
+
+  if(d->displaySeperator(index)) {
+    // consider the separator space
+    r.setHeight(r.height() - lineHeight - margin);
+  }
   editor->setGeometry(r);
   editor->update();
-  // int flags = editor->windowFlags();
-  // qDebug() << "updateEditorGeometry" << r << QString("%1").arg(flags, 8, 16, QChar('0'));
 }
 
 void LedgerDelegate::endEdit()
