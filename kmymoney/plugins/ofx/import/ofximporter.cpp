@@ -313,6 +313,16 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
       break;
   }
 
+  // for investment transactions we don't use the meme as payee
+  if (data.invtransactiontype_valid) {
+    values.clear();
+    validity[0] = data.payee_id_valid;
+    validity[1] = data.name_valid;
+    validity[2] = false;
+    values += QString::fromUtf8(data.payee_id);
+    values += QString::fromUtf8(data.name);
+  }
+
   for (int idx = 0; idx < 3; ++idx) {
     if (validity[idx]) {
       t.m_strPayee = values[idx];
