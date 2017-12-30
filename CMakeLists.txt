@@ -204,8 +204,6 @@ option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
 option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
 option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
 
-option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON)
-
 option(ENABLE_UNFINISHEDFEATURES "For devs only" OFF)
 
 # TODO: this should be removed
