@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QStyledItemDelegate>
+class QColor;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,6 +34,7 @@
 #include "modelenums.h"
 
 class LedgerView;
+class MyMoneyMoney;
 
 class LedgerSeperator
 {
@@ -42,6 +44,8 @@ public:
 
   virtual bool rowHasSeperator(const QModelIndex& index) const = 0;
   virtual QString separatorText(const QModelIndex& index) const = 0;
+
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const = 0;
 
   static void setFirstFiscalDate(int firstMonth, int firstDay);
   static void setShowFiscalDate(bool show) { showFiscalDate = show; }
@@ -81,6 +85,8 @@ public:
    * or -1 if no editor is open
    */
   virtual int editorRow() const;
+
+  void setOnlineBalance(const QDate& date, const MyMoneyMoney& amount, int fraction = 0);
 
   static void setErroneousColor(const QColor& color);
   static void setImportedColor(const QColor& color);

@@ -87,6 +87,8 @@ protected Q_SLOTS:
 
   virtual void recalculateBalances();
 
+  virtual void accountChanged();
+
 Q_SIGNALS:
   void transactionSelected(const QString& transactionSplitId);
   void aboutToStartEdit();

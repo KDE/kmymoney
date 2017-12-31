@@ -30,6 +30,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -124,6 +125,7 @@ QColor LedgerDelegate::m_erroneousColor = QColor(Qt::red);
 QColor LedgerDelegate::m_importedColor = QColor(Qt::yellow);
 QColor LedgerDelegate::m_separatorColor = QColor(0xff, 0xf2, 0x9b);
 
+
 class LedgerSeperatorDate : public LedgerSeperator
 {
 public:
@@ -132,11 +134,29 @@ public:
 
   virtual bool rowHasSeperator(const QModelIndex& index) const;
   virtual QString separatorText(const QModelIndex& index) const;
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
 
-private:
+protected:
   QString getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const;
   QMap<QDate, QString>      m_entries;
 };
+
+class LedgerSeparatorOnlineBalance : public LedgerSeperatorDate
+{
+public:
+  LedgerSeparatorOnlineBalance(eLedgerModel::Role role);
+  virtual ~LedgerSeparatorOnlineBalance() {}
+
+  virtual bool rowHasSeperator(const QModelIndex& index) const;
+  virtual QString separatorText(const QModelIndex& index) const;
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
+
+  void setSeparatorData(const QDate& date, const MyMoneyMoney& amount, int fraction);
+
+private:
+  QString m_balanceAmount;
+};
+
 
 
 QDate LedgerSeperator::firstFiscalDate;
@@ -160,8 +180,6 @@ QModelIndex LedgerSeperator::nextIndex(const QModelIndex& index) const
   }
   return QModelIndex();
 }
-
-
 
 LedgerSeperatorDate::LedgerSeperatorDate(eLedgerModel::Role role)
   : LedgerSeperator(role)
@@ -206,13 +224,15 @@ QString LedgerSeperatorDate::getEntry(const QModelIndex& index, const QModelInde
 
   const QAbstractItemModel* model = index.model();
   QString rc;
-  if (model->data(index, (int)m_role).toDate() != model->data(nextIndex, (int)m_role).toDate()) {
-    const QDate key = model->data(index, (int)m_role).toDate();
-    const QDate endKey = model->data(nextIndex, (int)m_role).toDate();
-    QMap<QDate, QString>::const_iterator it = m_entries.upperBound(key);
-    while((it != m_entries.cend()) && (it.key() <= endKey)) {
-      rc = *it;
-      ++it;
+  if(!m_entries.isEmpty()) {
+    if (model->data(index, (int)m_role).toDate() != model->data(nextIndex, (int)m_role).toDate()) {
+      const QDate key = model->data(index, (int)m_role).toDate();
+      const QDate endKey = model->data(nextIndex, (int)m_role).toDate();
+      QMap<QDate, QString>::const_iterator it = m_entries.upperBound(key);
+      while((it != m_entries.cend()) && (it.key() <= endKey)) {
+        rc = *it;
+        ++it;
+      }
     }
   }
   return rc;
@@ -221,14 +241,16 @@ QString LedgerSeperatorDate::getEntry(const QModelIndex& index, const QModelInde
 bool LedgerSeperatorDate::rowHasSeperator(const QModelIndex& index) const
 {
   bool rc = false;
-  QModelIndex nextIdx = nextIndex(index);
-  if(nextIdx.isValid() ) {
-    const QString id = nextIdx.model()->data(nextIdx, (int)eLedgerModel::Role::TransactionSplitId).toString();
-    // For a new transaction the id is completely empty, for a split view the transaction
-    // part is filled but the split id is empty and the string ends with a dash
-    // and we never draw a separator in front of that row
-    if(!id.isEmpty() && !id.endsWith('-')) {
-      rc = !getEntry(index, nextIdx).isEmpty();
+  if(!m_entries.isEmpty()) {
+    QModelIndex nextIdx = nextIndex(index);
+    if(nextIdx.isValid() ) {
+      const QString id = nextIdx.model()->data(nextIdx, (int)eLedgerModel::Role::TransactionSplitId).toString();
+      // For a new transaction the id is completely empty, for a split view the transaction
+      // part is filled but the split id is empty and the string ends with a dash
+      // and we never draw a separator in front of that row
+      if(!id.isEmpty() && !id.endsWith('-')) {
+        rc = !getEntry(index, nextIdx).isEmpty();
+      }
     }
   }
   return rc;
@@ -243,6 +265,74 @@ QString LedgerSeperatorDate::separatorText(const QModelIndex& index) const
   return QString();
 }
 
+void LedgerSeperatorDate::adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const
+{
+  Q_UNUSED(index);
+  KColorScheme::adjustBackground(palette, KColorScheme::ActiveBackground, QPalette::Base, KColorScheme::Button, KSharedConfigPtr());
+}
+
+
+
+LedgerSeparatorOnlineBalance::LedgerSeparatorOnlineBalance(eLedgerModel::Role role)
+  : LedgerSeperatorDate(role)
+{
+  // we don't need the standard values
+  m_entries.clear();
+}
+
+void LedgerSeparatorOnlineBalance::setSeparatorData(const QDate& date, const MyMoneyMoney& amount, int fraction)
+{
+  m_entries.clear();
+  if (date.isValid()) {
+    m_balanceAmount = amount.formatMoney(fraction);
+    m_entries[date] = i18n("Online statement balance: %1").arg(m_balanceAmount);
+  }
+}
+
+bool LedgerSeparatorOnlineBalance::rowHasSeperator(const QModelIndex& index) const
+{
+  bool rc = false;
+  if(!m_entries.isEmpty()) {
+    QModelIndex nextIdx = nextIndex(index);
+    const QAbstractItemModel* model = index.model();
+    // if this is not the last entry?
+    if(nextIdx.isValid() ) {
+      // index points to the last entry of a date
+      rc = (model->data(index, (int)m_role).toDate() != model->data(nextIdx, (int)m_role).toDate());
+      if (rc) {
+        // check if this the spot for the online balance data
+        rc &= ((model->data(index, (int)m_role).toDate() <= m_entries.firstKey())
+          && (model->data(nextIdx, (int)m_role).toDate() > m_entries.firstKey()));
+      }
+    } else {
+      rc = (model->data(index, (int)m_role).toDate() <= m_entries.firstKey());
+    }
+  }
+  return rc;
+}
+
+QString LedgerSeparatorOnlineBalance::separatorText(const QModelIndex& index) const
+{
+  if(rowHasSeperator(index)) {
+    return m_entries.first();
+  }
+  return QString();
+}
+
+void LedgerSeparatorOnlineBalance::adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const
+{
+  const QAbstractItemModel* model = index.model();
+  QModelIndex amountIndex = model->index(index.row(), (int)eLedgerModel::Column::Balance);
+  QString amount = model->data(amountIndex).toString();
+  KColorScheme::BackgroundRole role = KColorScheme::PositiveBackground;
+
+  if (!m_entries.isEmpty()) {
+    if(amount != m_balanceAmount) {
+      role = KColorScheme::NegativeBackground;
+    }
+  }
+  KColorScheme::adjustBackground(palette, role, QPalette::Base, KColorScheme::Button, KSharedConfigPtr());
+}
 
 
 
@@ -253,8 +343,9 @@ public:
   Private()
   : m_editor(0)
   , m_view(0)
-  , m_separator(0)
   , m_editorRow(-1)
+  , m_separator(0)
+  , m_onlineBalanceSeparator(0)
   {}
 
   ~Private()
@@ -267,10 +358,16 @@ public:
     return m_separator && m_separator->rowHasSeperator(index);
   }
 
+  inline bool displayOnlineBalanceSeparator(const QModelIndex& index) const
+  {
+    return m_onlineBalanceSeparator && m_onlineBalanceSeparator->rowHasSeperator(index);
+  }
+
   NewTransactionEditor*         m_editor;
   LedgerView*                   m_view;
-  LedgerSeperator*              m_separator;
   int                           m_editorRow;
+  LedgerSeperator*              m_separator;
+  LedgerSeparatorOnlineBalance* m_onlineBalanceSeparator;
 };
 
 
@@ -289,10 +386,14 @@ LedgerDelegate::~LedgerDelegate()
 void LedgerDelegate::setSortRole(eLedgerModel::Role role)
 {
   delete d->m_separator;
+  delete d->m_onlineBalanceSeparator;
   d->m_separator = 0;
+  d->m_onlineBalanceSeparator = 0;
+
   switch(role) {
     case eLedgerModel::Role::PostDate:
       d->m_separator = new LedgerSeperatorDate(role);
+      d->m_onlineBalanceSeparator = new LedgerSeparatorOnlineBalance(role);
       break;
     default:
       qDebug() << "LedgerDelegate::setSortRole role" << (int)role << "not implemented";
@@ -300,12 +401,17 @@ void LedgerDelegate::setSortRole(eLedgerModel::Role role)
   }
 }
 
-
 void LedgerDelegate::setErroneousColor(const QColor& color)
 {
   m_erroneousColor = color;
 }
 
+void LedgerDelegate::setOnlineBalance(const QDate& date, const MyMoneyMoney& amount, int fraction)
+{
+  if(d->m_onlineBalanceSeparator) {
+    d->m_onlineBalanceSeparator->setSeparatorData(date, amount, fraction);
+  }
+}
 
 QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
@@ -366,6 +472,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
   const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
   const bool rowHasSeperator = d->displaySeperator(index);
+  const bool rowHasOnlineBalance = d->displayOnlineBalanceSeparator(index);
 
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
@@ -376,8 +483,14 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     // don't draw over the separator space
     opt.rect.setHeight(opt.rect.height() - lineHeight );
   }
+  if (rowHasOnlineBalance) {
+    // don't draw over the online balance space
+    opt.rect.setHeight(opt.rect.height() - lineHeight );
+  }
 
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+
+  QPalette::ColorGroup cg;
 
   // Do not paint text if the edit widget is shown
   if (!editWidgetIsVisible) {
@@ -418,27 +531,25 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
         opt.state &= ~QStyle::State_Enabled;
       }
 
-      QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
-                                ? QPalette::Normal : QPalette::Disabled;
+      cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
 
       if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
         cg = QPalette::Inactive;
       }
-      if (opt.state & QStyle::State_Selected) {
+      if (selected) {
         // always use the normal palette since the background is also in normal
         painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
+
+      } else if (erroneous) {
+        painter->setPen(m_erroneousColor);
+
       } else {
         painter->setPen(opt.palette.color(cg, QPalette::Text));
       }
+
       if (opt.state & QStyle::State_Editing) {
         painter->setPen(opt.palette.color(cg, QPalette::Text));
         painter->drawRect(textArea.adjusted(0, 0, -1, -1));
-      }
-
-      // Don't play with the color if it's selected
-      // otherwise switch the color if the transaction has errors
-      if(erroneous && !selected) {
-        painter->setPen(m_erroneousColor);
       }
 
       // collect data for the various columns
@@ -460,8 +571,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
       o.state |= QStyle::State_KeyboardFocusChange;
       o.state |= QStyle::State_Item;
 
-      QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
-                                ? QPalette::Normal : QPalette::Disabled;
+      cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
       o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected)
                                               ? QPalette::Highlight : QPalette::Window);
       style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
@@ -477,10 +587,11 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   }
 
   // draw a separator if any
-  if (rowHasSeperator) {
+  if (rowHasOnlineBalance) {
     opt.rect.setY(opt.rect.y() + opt.rect.height());
-    opt.rect.setHeight(lineHeight + margin);
-    opt.backgroundBrush = m_separatorColor;
+    opt.rect.setHeight(lineHeight);
+    d->m_onlineBalanceSeparator->adjustBackgroundScheme(opt.palette, index);
+    opt.backgroundBrush = opt.palette.base();
 
     // never draw it as selected but always enabled
     opt.state &= ~QStyle::State_Selected;
@@ -500,8 +611,36 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     }
 
     if(needPaint) {
-      QPalette::ColorGroup cg = QPalette::Normal;
-      painter->setPen(opt.palette.color(cg, QPalette::Text));
+      painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
+      painter->drawText(opt.rect, Qt::AlignCenter, d->m_onlineBalanceSeparator->separatorText(index));
+    }
+  }
+
+  if (rowHasSeperator) {
+    opt.rect.setY(opt.rect.y() + opt.rect.height());
+    opt.rect.setHeight(lineHeight);
+    d->m_separator->adjustBackgroundScheme(opt.palette, index);
+    opt.backgroundBrush = opt.palette.base();
+
+    // never draw it as selected but always enabled
+    opt.state &= ~QStyle::State_Selected;
+    style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+
+    // when the editor is shown, the row has only a single column
+    // so we need to paint the seperator if we get here in this casee
+    bool needPaint = editWidgetIsVisible;
+
+    if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
+      needPaint = true;
+      // adjust the rect to cover all columns
+      if(view && view->viewport()) {
+        opt.rect.setX(0);
+        opt.rect.setWidth(view->viewport()->width());
+      }
+    }
+
+    if(needPaint) {
+      painter->setPen(opt.palette.foreground().color());
       painter->drawText(opt.rect, Qt::AlignCenter, d->m_separator->separatorText(index));
     }
   }
@@ -542,6 +681,10 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
             // don't draw over the separator space
             size += QSize(0, lineHeight + margin);
           }
+          if(d->displayOnlineBalanceSeparator(index)) {
+            // don't draw over the separator space
+            size += QSize(0, lineHeight + margin);
+          }
           return size;
         }
       }
@@ -568,6 +711,9 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   if (d->m_separator && d->m_separator->rowHasSeperator(index)) {
     size.setHeight(size.height() + lineHeight + margin);
   }
+  if (d->m_onlineBalanceSeparator && d->m_onlineBalanceSeparator->rowHasSeperator(index)) {
+    size.setHeight(size.height() + lineHeight + margin);
+  }
   return size;
 }
 
@@ -590,6 +736,10 @@ void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVie
   r.setWidth(option.widget->width() - ofs);
 
   if(d->displaySeperator(index)) {
+    // consider the separator space
+    r.setHeight(r.height() - lineHeight - margin);
+  }
+  if(d->displayOnlineBalanceSeparator(index)) {
     // consider the separator space
     r.setHeight(r.height() - lineHeight - margin);
   }

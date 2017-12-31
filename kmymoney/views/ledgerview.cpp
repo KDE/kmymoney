@@ -23,6 +23,7 @@
 #include <QHeaderView>
 #include <QPainter>
 #include <QResizeEvent>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,6 +38,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "accountsmodel.h"
 
 class LedgerView::Private
 {
@@ -175,6 +177,14 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
   d->filterModel->setAccountType(acc.accountType());
   d->setSortRole(eLedgerModel::Role::PostDate, (int)eLedgerModel::Column::Date);
 
+  if (acc.hasOnlineMapping()) {
+    connect(Models::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
+    accountChanged();
+  } else {
+    disconnect(Models::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
+    d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
+  }
+
   // if balance calculation has not been triggered, then run it immediately
   if(!d->balanceCalculationPending) {
     recalculateBalances();
@@ -203,6 +213,24 @@ QString LedgerView::accountId() const
   if(d->filterModel->filterRole() == (int)eLedgerModel::Role::AccountId)
     id = d->account.id();
   return id;
+}
+
+void LedgerView::accountChanged()
+{
+  QString id = accountId();
+  if(!id.isEmpty()) {
+    d->account = MyMoneyFile::instance()->account(id);
+    QDate onlineBalanceDate = QDate::fromString(d->account.value(QLatin1String("lastImportedTransactionDate")), Qt::ISODate);
+    MyMoneyMoney amount(d->account.value(QLatin1String("lastStatementBalance")));
+    if (d->showValuesInverted) {
+      amount = -amount;
+    }
+    d->delegate->setOnlineBalance(onlineBalanceDate, amount, d->account.fraction());
+  } else {
+    d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
+  }
+  // force redraw
+  d->filterModel->invalidate();
 }
 
 void LedgerView::recalculateBalances()
