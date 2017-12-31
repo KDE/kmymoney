@@ -13,7 +13,7 @@ kde4_add_ui_files( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.ui
 )
 
-kde4_add_plugin(konlinetasks_sepa
+add_library(konlinetasks_sepa MODULE
   ${sepaOnlineTasks_SRCS}
 )
 
