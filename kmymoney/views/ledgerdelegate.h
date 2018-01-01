@@ -36,11 +36,11 @@ class QColor;
 class LedgerView;
 class MyMoneyMoney;
 
-class LedgerSeperator
+class LedgerSeparator
 {
 public:
-  explicit LedgerSeperator(eLedgerModel::Role role) : m_role(role) {}
-  virtual ~LedgerSeperator() {}
+  explicit LedgerSeparator(eLedgerModel::Role role) : m_role(role) {}
+  virtual ~LedgerSeparator() {}
 
   virtual bool rowHasSeperator(const QModelIndex& index) const = 0;
   virtual QString separatorText(const QModelIndex& index) const = 0;

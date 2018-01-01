@@ -126,13 +126,13 @@ QColor LedgerDelegate::m_importedColor = QColor(Qt::yellow);
 QColor LedgerDelegate::m_separatorColor = QColor(0xff, 0xf2, 0x9b);
 
 
-class LedgerSeperatorDate : public LedgerSeperator
+class LedgerSeparatorDate : public LedgerSeparator
 {
 public:
-  LedgerSeperatorDate(eLedgerModel::Role role);
-  virtual ~LedgerSeperatorDate() {}
+  LedgerSeparatorDate(eLedgerModel::Role role);
+  virtual ~LedgerSeparatorDate() {}
 
-  virtual bool rowHasSeperator(const QModelIndex& index) const;
+  virtual bool rowHasSeparator(const QModelIndex& index) const;
   virtual QString separatorText(const QModelIndex& index) const;
   virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
 
@@ -141,13 +141,13 @@ protected:
   QMap<QDate, QString>      m_entries;
 };
 
-class LedgerSeparatorOnlineBalance : public LedgerSeperatorDate
+class LedgerSeparatorOnlineBalance : public LedgerSeparatorDate
 {
 public:
   LedgerSeparatorOnlineBalance(eLedgerModel::Role role);
   virtual ~LedgerSeparatorOnlineBalance() {}
 
-  virtual bool rowHasSeperator(const QModelIndex& index) const;
+  virtual bool rowHasSeparator(const QModelIndex& index) const;
   virtual QString separatorText(const QModelIndex& index) const;
   virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
 
@@ -159,19 +159,19 @@ private:
 
 
 
-QDate LedgerSeperator::firstFiscalDate;
-bool  LedgerSeperator::showFiscalDate = true;
-bool  LedgerSeperator::showFancyDate = true;
+QDate LedgerSeparator::firstFiscalDate;
+bool  LedgerSeparator::showFiscalDate = true;
+bool  LedgerSeparator::showFancyDate = true;
 
 
-void LedgerSeperator::setFirstFiscalDate(int firstMonth, int firstDay)
+void LedgerSeparator::setFirstFiscalDate(int firstMonth, int firstDay)
 {
   firstFiscalDate = QDate(QDate::currentDate().year(), firstMonth, firstDay);
   if (QDate::currentDate() < firstFiscalDate)
     firstFiscalDate = firstFiscalDate.addYears(-1);
 }
 
-QModelIndex LedgerSeperator::nextIndex(const QModelIndex& index) const
+QModelIndex LedgerSeparator::nextIndex(const QModelIndex& index) const
 {
   const int nextRow = index.row() + 1;
   if (index.isValid() && (nextRow < index.model()->rowCount(QModelIndex()))) {
@@ -181,8 +181,8 @@ QModelIndex LedgerSeperator::nextIndex(const QModelIndex& index) const
   return QModelIndex();
 }
 
-LedgerSeperatorDate::LedgerSeperatorDate(eLedgerModel::Role role)
-  : LedgerSeperator(role)
+LedgerSeparatorDate::LedgerSeparatorDate(eLedgerModel::Role role)
+  : LedgerSeparator(role)
 {
   const QDate today = QDate::currentDate();
   const QDate thisMonth(today.year(), today.month(), 1);
@@ -216,7 +216,7 @@ LedgerSeperatorDate::LedgerSeperatorDate(eLedgerModel::Role role)
 }
 
 
-QString LedgerSeperatorDate::getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const
+QString LedgerSeparatorDate::getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const
 {
   Q_ASSERT(index.isValid());
   Q_ASSERT(nextIndex.isValid());
@@ -238,7 +238,7 @@ QString LedgerSeperatorDate::getEntry(const QModelIndex& index, const QModelInde
   return rc;
 }
 
-bool LedgerSeperatorDate::rowHasSeperator(const QModelIndex& index) const
+bool LedgerSeparatorDate::rowHasSeparator(const QModelIndex& index) const
 {
   bool rc = false;
   if(!m_entries.isEmpty()) {
@@ -256,7 +256,7 @@ bool LedgerSeperatorDate::rowHasSeperator(const QModelIndex& index) const
   return rc;
 }
 
-QString LedgerSeperatorDate::separatorText(const QModelIndex& index) const
+QString LedgerSeparatorDate::separatorText(const QModelIndex& index) const
 {
   QModelIndex nextIdx = nextIndex(index);
   if(nextIdx.isValid()) {
@@ -265,7 +265,7 @@ QString LedgerSeperatorDate::separatorText(const QModelIndex& index) const
   return QString();
 }
 
-void LedgerSeperatorDate::adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const
+void LedgerSeparatorDate::adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const
 {
   Q_UNUSED(index);
   KColorScheme::adjustBackground(palette, KColorScheme::ActiveBackground, QPalette::Base, KColorScheme::Button, KSharedConfigPtr());
@@ -274,7 +274,7 @@ void LedgerSeperatorDate::adjustBackgroundScheme(QPalette& palette, const QModel
 
 
 LedgerSeparatorOnlineBalance::LedgerSeparatorOnlineBalance(eLedgerModel::Role role)
-  : LedgerSeperatorDate(role)
+  : LedgerSeparatorDate(role)
 {
   // we don't need the standard values
   m_entries.clear();
@@ -289,7 +289,7 @@ void LedgerSeparatorOnlineBalance::setSeparatorData(const QDate& date, const MyM
   }
 }
 
-bool LedgerSeparatorOnlineBalance::rowHasSeperator(const QModelIndex& index) const
+bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) const
 {
   bool rc = false;
   if(!m_entries.isEmpty()) {
@@ -313,7 +313,7 @@ bool LedgerSeparatorOnlineBalance::rowHasSeperator(const QModelIndex& index) con
 
 QString LedgerSeparatorOnlineBalance::separatorText(const QModelIndex& index) const
 {
-  if(rowHasSeperator(index)) {
+  if(rowHasSeparator(index)) {
     return m_entries.first();
   }
   return QString();
@@ -353,20 +353,20 @@ public:
     delete m_separator;
   }
 
-  inline bool displaySeperator(const QModelIndex& index) const
+inline bool displaySeparator(const QModelIndex& index) const
   {
-    return m_separator && m_separator->rowHasSeperator(index);
+    return m_separator && m_separator->rowHasSeparator(index);
   }
 
   inline bool displayOnlineBalanceSeparator(const QModelIndex& index) const
   {
-    return m_onlineBalanceSeparator && m_onlineBalanceSeparator->rowHasSeperator(index);
+    return m_onlineBalanceSeparator && m_onlineBalanceSeparator->rowHasSeparator(index);
   }
 
   NewTransactionEditor*         m_editor;
   LedgerView*                   m_view;
   int                           m_editorRow;
-  LedgerSeperator*              m_separator;
+  LedgerSeparator*              m_separator;
   LedgerSeparatorOnlineBalance* m_onlineBalanceSeparator;
 };
 
@@ -392,7 +392,7 @@ void LedgerDelegate::setSortRole(eLedgerModel::Role role)
 
   switch(role) {
     case eLedgerModel::Role::PostDate:
-      d->m_separator = new LedgerSeperatorDate(role);
+      d->m_separator = new LedgerSeparatorDate(role);
       d->m_onlineBalanceSeparator = new LedgerSeparatorOnlineBalance(role);
       break;
     default:
@@ -471,7 +471,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
   const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
-  const bool rowHasSeperator = d->displaySeperator(index);
+  const bool rowHasSeparator = d->displaySeparator(index);
   const bool rowHasOnlineBalance = d->displayOnlineBalanceSeparator(index);
 
   // Background
@@ -479,7 +479,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
   const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
 
-  if (rowHasSeperator) {
+  if (rowHasSeparator) {
     // don't draw over the separator space
     opt.rect.setHeight(opt.rect.height() - lineHeight );
   }
@@ -616,7 +616,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     }
   }
 
-  if (rowHasSeperator) {
+  if (rowHasSeparator) {
     opt.rect.setY(opt.rect.y() + opt.rect.height());
     opt.rect.setHeight(lineHeight);
     d->m_separator->adjustBackgroundScheme(opt.palette, index);
@@ -677,7 +677,7 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
         QWidget* editor = d->m_view->indexWidget(editIndex);
         if(editor) {
           size = editor->minimumSizeHint();
-          if(d->displaySeperator(index)) {
+          if(d->displaySeparator(index)) {
             // don't draw over the separator space
             size += QSize(0, lineHeight + margin);
           }
@@ -708,10 +708,10 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
 
   }
 
-  if (d->m_separator && d->m_separator->rowHasSeperator(index)) {
+  if (d->m_separator && d->m_separator->rowHasSeparator(index)) {
     size.setHeight(size.height() + lineHeight + margin);
   }
-  if (d->m_onlineBalanceSeparator && d->m_onlineBalanceSeparator->rowHasSeperator(index)) {
+  if (d->m_onlineBalanceSeparator && d->m_onlineBalanceSeparator->rowHasSeparator(index)) {
     size.setHeight(size.height() + lineHeight + margin);
   }
   return size;
@@ -735,7 +735,7 @@ void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVie
   QRect r(option.rect);
   r.setWidth(option.widget->width() - ofs);
 
-  if(d->displaySeperator(index)) {
+  if(d->displaySeparator(index)) {
     // consider the separator space
     r.setHeight(r.height() - lineHeight - margin);
   }

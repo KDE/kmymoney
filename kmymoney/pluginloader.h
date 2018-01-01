@@ -45,7 +45,7 @@ namespace KMyMoneyPlugin
   enum class eListing;
 
   /**
-   * @brief The Action enum is for specifing action on plugins
+   * @brief The Action enum is for specifying action on plugins
    */
   enum Action {
     Load,         // load all enabled plugins
