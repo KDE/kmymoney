@@ -285,7 +285,7 @@ void LedgerSeparatorOnlineBalance::setSeparatorData(const QDate& date, const MyM
   m_entries.clear();
   if (date.isValid()) {
     m_balanceAmount = amount.formatMoney(fraction);
-    m_entries[date] = i18n("Online statement balance: %1").arg(m_balanceAmount);
+    m_entries[date] = i18n("Online statement balance: %1", m_balanceAmount);
   }
 }
 
