@@ -2602,8 +2602,7 @@ void KMyMoneyApp::slotUpdateActions()
   // *************
   {
     static const QVector<Action> disabledActions {
-          Action::MapOnlineAccount, Action::UnmapOnlineAccount,
-          Action::UpdateAccount, Action::UpdateAllAccounts
+      Action::UpdateAllAccounts
     };
 
     for (const auto& a : disabledActions)
@@ -2669,37 +2668,6 @@ void KMyMoneyApp::slotUpdateActions()
         if (protocols.count() > 0) {
           pActions[Action::UpdateAllAccounts]->setEnabled(true);
         }
-      }
-    }
-  }
-  QBitArray skip((int)eStorage::Reference::Count);
-  if (!d->m_selectedAccount.id().isEmpty()) {
-    if (!file->isStandardAccount(d->m_selectedAccount.id())) {
-      switch (d->m_selectedAccount.accountGroup()) {
-        case eMyMoney::Account::Type::Asset:
-        case eMyMoney::Account::Type::Liability:
-        case eMyMoney::Account::Type::Equity:
-          pActions[Action::ReportAccountTransactions]->setEnabled(true);
-
-          if (d->m_selectedAccount.hasOnlineMapping()) {
-            pActions[Action::UnmapOnlineAccount]->setEnabled(true);
-            // check if provider is available
-            QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-            it_p = d->m_plugins.online.constFind(d->m_selectedAccount.onlineBankingSettings().value(QLatin1String("provider")));
-            if (it_p != d->m_plugins.online.constEnd()) {
-              QStringList protocols;
-              (*it_p)->protocols(protocols);
-              if (protocols.count() > 0) {
-                pActions[Action::UpdateAccount]->setEnabled(true);
-              }
-            }
-          } else {
-            pActions[Action::MapOnlineAccount]->setEnabled(d->m_plugins.online.count() > 0);
-          }
-          break;
-
-        default:
-          break;
       }
     }
   }

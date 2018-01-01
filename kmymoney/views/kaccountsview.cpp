@@ -117,6 +117,7 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
         eMenu::Action::NewAccount, eMenu::Action::EditAccount, eMenu::Action::DeleteAccount,
         eMenu::Action::CloseAccount, eMenu::Action::ReopenAccount,
         eMenu::Action::ChartAccountBalance,
+        eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount, eMenu::Action::UpdateAccount
   };
 
   for (const auto& a : actionsToBeDisabled)
@@ -153,11 +154,49 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
       }
 
       pActions[eMenu::Action::ChartAccountBalance]->setEnabled(true);
+
+      if (d->m_currentAccount.hasOnlineMapping()) {
+        pActions[eMenu::Action::UnmapOnlineAccount]->setEnabled(true);
+
+        if (d->m_onlinePlugins) {
+          // check if provider is available
+          QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+          it_p = d->m_onlinePlugins->constFind(d->m_currentAccount.onlineBankingSettings().value(QLatin1String("provider")));
+          if (it_p != d->m_onlinePlugins->constEnd()) {
+            QStringList protocols;
+            (*it_p)->protocols(protocols);
+            if (protocols.count() > 0) {
+              pActions[eMenu::Action::UpdateAccount]->setEnabled(true);
+            }
+          }
+        }
+
+      } else {
+        pActions[eMenu::Action::MapOnlineAccount]->setEnabled(d->m_onlinePlugins && !d->m_onlinePlugins->isEmpty());
+      }
+
       break;
     }
     default:
       break;
   }
+
+  QBitArray skip((int)eStorage::Reference::Count);
+  if (!d->m_currentAccount.id().isEmpty()) {
+    if (!file->isStandardAccount(d->m_currentAccount.id())) {
+      switch (d->m_currentAccount.accountGroup()) {
+        case eMyMoney::Account::Type::Asset:
+        case eMyMoney::Account::Type::Liability:
+        case eMyMoney::Account::Type::Equity:
+
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
 }
 
 void KAccountsView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
