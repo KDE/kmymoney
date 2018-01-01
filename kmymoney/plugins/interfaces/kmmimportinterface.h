@@ -44,7 +44,7 @@ class KMMImportInterface : public ImportInterface
   Q_OBJECT
 
 public:
-  KMMImportInterface(QObject* parent, const char* name = 0);
+  explicit KMMImportInterface(QObject* parent, const char* name = 0);
   ~KMMImportInterface() {}
 
   QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const;

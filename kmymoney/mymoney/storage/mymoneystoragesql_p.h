@@ -185,7 +185,7 @@ class MyMoneyStorageSqlPrivate
   Q_DECLARE_PUBLIC(MyMoneyStorageSql)
 
 public:
-  MyMoneyStorageSqlPrivate(MyMoneyStorageSql* qq) :
+  explicit MyMoneyStorageSqlPrivate(MyMoneyStorageSql* qq) :
     q_ptr(qq),
     m_dbVersion(0),
     m_loadAll(false),

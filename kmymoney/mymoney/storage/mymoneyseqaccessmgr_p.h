@@ -64,7 +64,7 @@ class MyMoneySeqAccessMgrPrivate
   Q_DECLARE_PUBLIC(MyMoneySeqAccessMgr)
 
 public:
-  MyMoneySeqAccessMgrPrivate(MyMoneySeqAccessMgr* qq) :
+  explicit MyMoneySeqAccessMgrPrivate(MyMoneySeqAccessMgr* qq) :
     q_ptr(qq),
     m_nextInstitutionID(0),
     m_nextAccountID(0),

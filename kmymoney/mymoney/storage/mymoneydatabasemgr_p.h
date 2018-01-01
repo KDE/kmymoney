@@ -65,7 +65,7 @@ class MyMoneyDatabaseMgrPrivate
   Q_DECLARE_PUBLIC(MyMoneyDatabaseMgr)
 
 public:
-  MyMoneyDatabaseMgrPrivate(MyMoneyDatabaseMgr* qq) :
+  explicit MyMoneyDatabaseMgrPrivate(MyMoneyDatabaseMgr* qq) :
     q_ptr(qq),
     m_creationDate(QDate::currentDate()),
     m_currentFixVersion(0),
