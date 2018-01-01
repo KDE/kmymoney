@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QSplashScreen>
+#include <QStandardPaths>
 #ifdef KMM_DBUS
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
@@ -38,6 +39,8 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <Kdelibs4ConfigMigrator>
+#include <KConfig>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -60,23 +63,17 @@ bool timersOn = false;
 KMyMoneyApp* kmymoney;
 
 static int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile);
+static void migrateConfigFiles();
 
 int main(int argc, char *argv[])
 {
-  {
-    // Copy KDE 4 config files to the KF5 location
-    Kdelibs4ConfigMigrator migrator(QStringLiteral("kmymoney"));
-    migrator.setConfigFiles(QStringList{"kmymoneyrc"});
-    migrator.setUiFiles(QStringList{"kmymoneyui.rc"});
-    migrator.migrate();
-  }
-
   /**
    * Create application first
    */
   QApplication app(argc, argv);
   KLocalizedString::setApplicationDomain("kmymoney");
 
+  migrateConfigFiles();
 
   /**
    * construct and register about data
@@ -318,4 +315,54 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
 
   const int rc = a->exec();
   return rc;
+}
+
+static void migrateConfigFiles()
+{
+  const QString sMainConfigName(QStringLiteral("kmymoneyrc"));
+  const QString sMainConfigSubdirectory(QStringLiteral("kmymoney/")); // all KMM config files should be in ~/.config/kmymoney/
+  const QString sMainConfigPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+                                  QLatin1Char('/') +
+                                  sMainConfigSubdirectory;
+
+  if (!QFile::exists(sMainConfigPath + sMainConfigName)) { // if main config file doesn't exist, then it's first run
+
+    // it could be migration from KDE4 to KF5 so prepare list of configuration files to migrate
+    QStringList sConfigNames
+    {
+      sMainConfigName,
+      QStringLiteral("csvimporterrc"),
+      QStringLiteral("printcheckpluginrc"),
+      QStringLiteral("icalendarexportpluginrc"),
+      QStringLiteral("kbankingrc"),
+    };
+
+    // Copy KDE 4 config files to the KF5 location
+    Kdelibs4ConfigMigrator migrator(QStringLiteral("kmymoney"));
+    migrator.setConfigFiles(sConfigNames);
+    migrator.setUiFiles(QStringList{QStringLiteral("kmymoneyui.rc")});
+    migrator.migrate();
+
+    QFileInfo fileInfo(sMainConfigPath + sMainConfigName);
+    QDir().mkpath(fileInfo.absolutePath());
+    const QString sOldMainConfigPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+                                       QLatin1Char('/');
+
+    // some files have changed their names during switch to KF5, so prepare map for name replacements
+    QMap<QString, QString> configNamesChange {
+      {QStringLiteral("printcheckpluginrc"), QStringLiteral("checkprintingrc")},
+      {QStringLiteral("icalendarexportpluginrc"), QStringLiteral("icalendarexporterrc")}
+    };
+
+    for (const auto& sConfigName : sConfigNames) {
+      const auto sOldConfigFilename = sOldMainConfigPath + sConfigName;
+      const auto sNewConfigFilename = sMainConfigPath + configNamesChange.value(sConfigName, sConfigName);
+      if (QFile::exists(sOldConfigFilename)) {
+        if (QFile::copy(sOldConfigFilename, sNewConfigFilename))
+          QFile::remove(sOldConfigFilename);
+      }
+    }
+  }
+  KConfig::setMainConfigName(sMainConfigSubdirectory + sMainConfigName); // otherwise it would be ~/.config/kmymoneyrc and not ~/.config/kmymoney/kmymoneyrc
+  KMyMoneySettings::instance(KSharedConfig::openConfig().data()->name());  // kcfg settings file should be kmymoneyrc, so define it here in one place instead in kmymoney.kcfg
 }

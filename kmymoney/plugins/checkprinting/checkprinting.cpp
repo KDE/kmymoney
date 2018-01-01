@@ -18,7 +18,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#include "printcheck.h"
+#include "checkprinting.h"
 
 #include <config-kmymoney.h>
 
@@ -57,30 +57,30 @@
 #include "pluginsettings.h"
 #include "mymoneyenums.h"
 
-struct PrintCheck::Private {
+struct CheckPrinting::Private {
   QAction* m_action;
   QString  m_checkTemplateHTML;
   QStringList m_printedTransactionIdList;
   KMyMoneyRegister::SelectedTransactions m_transactions;
 };
 
-PrintCheck::PrintCheck(QObject *parent, const QVariantList &args) :
-  KMyMoneyPlugin::Plugin(parent, "printcheck"/*must be the same as X-KDE-PluginInfo-Name*/)
+CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
+  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
   // Tell the host application to load my GUI component
-  setComponentName("printcheck", i18n("Print check"));
-  setXMLFile("printcheck.rc");
+  setComponentName("checkprinting", i18nc("It's about printing bank checks", "Check printing"));
+  setXMLFile("checkprinting.rc");
 
   // For ease announce that we have been loaded.
-  qDebug("Plugins: printcheck loaded");
+  qDebug("Plugins: checkprinting loaded");
 
   d = std::unique_ptr<Private>(new Private);
 
   // Create the actions of this plugin
   QString actionName = i18n("Print check");
 
-  d->m_action = actionCollection()->addAction("transaction_printcheck", this, SLOT(slotPrintCheck()));
+  d->m_action = actionCollection()->addAction("transaction_checkprinting", this, SLOT(slotPrintCheck()));
   d->m_action->setText(actionName);
 
   // wait until a transaction is selected before enableing the action
@@ -97,24 +97,24 @@ PrintCheck::PrintCheck(QObject *parent, const QVariantList &args) :
 /**
  * @internal Destructor is needed because destructor call of unique_ptr must be in this compile unit
  */
-PrintCheck::~PrintCheck()
+CheckPrinting::~CheckPrinting()
 {
-  qDebug("Plugins: printcheck unloaded");
+  qDebug("Plugins: checkprinting unloaded");
 }
 
-void PrintCheck::plug()
+void CheckPrinting::plug()
 {
-  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &PrintCheck::slotTransactionsSelected);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
 }
 
-void PrintCheck::unplug()
+void CheckPrinting::unplug()
 {
-  disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &PrintCheck::slotTransactionsSelected);
+  disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
 }
 
-void PrintCheck::readCheckTemplate()
+void CheckPrinting::readCheckTemplate()
 {
-  QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "printcheck/check_template.html");
+  QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "checkprinting/check_template.html");
 
   if (PluginSettings::checkTemplateFile().isEmpty()) {
     PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);
@@ -131,7 +131,7 @@ void PrintCheck::readCheckTemplate()
   checkTemplateHTMLFile.close();
 }
 
-bool PrintCheck::canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const
+bool CheckPrinting::canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   bool isACheck = file->account(selectedTransaction.split().accountId()).accountType() == eMyMoney::Account::Type::Checkings && selectedTransaction.split().shares().isNegative();
@@ -139,12 +139,12 @@ bool PrintCheck::canBePrinted(const KMyMoneyRegister::SelectedTransaction & sele
   return isACheck && d->m_printedTransactionIdList.contains(selectedTransaction.transaction().id()) == 0;
 }
 
-void PrintCheck::markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction)
+void CheckPrinting::markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction)
 {
   d->m_printedTransactionIdList.append(selectedTransaction.transaction().id());
 }
 
-void PrintCheck::slotPrintCheck()
+void CheckPrinting::slotPrintCheck()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoneyToWordsConverter converter;
@@ -216,7 +216,7 @@ void PrintCheck::slotPrintCheck()
   delete htmlPart;
 }
 
-void PrintCheck::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions)
+void CheckPrinting::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions)
 {
   d->m_transactions = transactions;
   bool actionEnabled = false;
@@ -233,7 +233,7 @@ void PrintCheck::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransa
 }
 
 // the plugin's configurations has changed
-void PrintCheck::configurationChanged()
+void CheckPrinting::configurationChanged()
 {
   PluginSettings::self()->load();
   // re-read the data because the configuration has changed
@@ -241,6 +241,6 @@ void PrintCheck::configurationChanged()
   d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(PrintCheckFactory, "printcheck.json", registerPlugin<PrintCheck>();)
+K_PLUGIN_FACTORY_WITH_JSON(CheckPrintingFactory, "checkprinting.json", registerPlugin<CheckPrinting>();)
 
-#include "printcheck.moc"
+#include "checkprinting.moc"

@@ -148,8 +148,7 @@ MyMoneyStatement CSVImporterCore::unattendedImport(const QString &filename, CSVP
 
 KSharedConfigPtr CSVImporterCore::configFile()
 {
-  return KSharedConfig::openConfig(QDir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation))
-                                   .filePath(QStringLiteral("csvimporterrc")));
+  return KSharedConfig::openConfig(QStringLiteral("kmymoney/csvimporterrc"));
 }
 
 void CSVImporterCore::profileFactory(const Profile type, const QString &name)

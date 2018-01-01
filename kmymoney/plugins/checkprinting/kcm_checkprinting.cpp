@@ -18,7 +18,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#include "kcm_printcheck.h"
+#include "kcm_checkprinting.h"
 #include <config-kmymoney-version.h>
 
 // Qt includes
@@ -67,7 +67,7 @@ void PluginSettingsWidget::returnPressed(const QString& url)
     m_checkTemplatePreviewHTMLPart->load(QUrl::fromUserInput(url));
 }
 
-KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args)
+KCMCheckPrinting::KCMCheckPrinting(QWidget *parent, const QVariantList& args)
   : KCModule(parent, args)
 {
   PluginSettingsWidget* w = new PluginSettingsWidget(this);
@@ -79,10 +79,10 @@ KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args)
   w->urlSelected(QUrl::fromUserInput(PluginSettings::checkTemplateFile()));
 }
 
-KCMPrintCheck::~KCMPrintCheck()
+KCMCheckPrinting::~KCMCheckPrinting()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_printcheck.json", registerPlugin<KCMPrintCheck>();)
+K_PLUGIN_FACTORY_WITH_JSON(KCMCheckPrintingFactory, "kcm_checkprinting.json", registerPlugin<KCMCheckPrinting>();)
 
-#include "kcm_printcheck.moc"
+#include "kcm_checkprinting.moc"

@@ -4,7 +4,7 @@
 		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 		http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
-	<kcfgfile name="csvimporterrc"/>
+	<kcfgfile name="kmymoney/csvimporterrc"/>
 	<group name="Misc">
     <entry name="AutoFieldDelimiter" type="Bool">
       <label>Determines whether field delimiter will be autodetected.</label>

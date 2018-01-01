@@ -17,8 +17,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef KCM_PRINTCHECK_H
-#define KCM_PRINTCHECK_H
+#ifndef KCM_CHECKPRINTING_H
+#define KCM_CHECKPRINTING_H
 
 #include <config-kmymoney.h>
 
@@ -51,12 +51,12 @@ private:
   #endif
 };
 
-class KCMPrintCheck : public KCModule
+class KCMCheckPrinting : public KCModule
 {
 public:
-  KCMPrintCheck(QWidget* parent, const QVariantList& args);
-  ~KCMPrintCheck();
+  KCMCheckPrinting(QWidget* parent, const QVariantList& args);
+  ~KCMCheckPrinting();
 };
 
-#endif // KCM_PRINTCHECK_H
+#endif
 

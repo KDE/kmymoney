@@ -1,0 +1,11 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoney-plugins-checkprinting" version="3">
+  <MenuBar>
+    <Menu name="transaction">
+      <Action name="transaction_checkprinting"/>
+    </Menu>
+  </MenuBar>
+  <Menu name="transaction_context_menu">
+    <Action name="transaction_checkprinting"/>
+  </Menu>
+</kpartgui>

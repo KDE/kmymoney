@@ -4,7 +4,7 @@
 		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 		http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
-	<kcfgfile name="printcheckpluginrc"/>
+	<kcfgfile name="kmymoney/checkprintingrc"/>
 	<group name="General">
     <entry name="checkTemplateFile" type="String">
       <label>The check template file which defines the way the printed check will look.</label>

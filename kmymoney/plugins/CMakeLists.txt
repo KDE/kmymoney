@@ -7,7 +7,7 @@ add_subdirectory( gnc )
 add_subdirectory( ofx )
 add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
-add_subdirectory( printcheck )
+add_subdirectory( checkprinting )
 
 if (KBANKING_FOUND)
   add_subdirectory( kbanking )

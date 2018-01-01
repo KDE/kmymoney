@@ -17,8 +17,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef PRINTCHECK_H
-#define PRINTCHECK_H
+#ifndef CHECKPRINTING_H
+#define CHECKPRINTING_H
 
 #include <memory>
 
@@ -28,13 +28,13 @@
 class KPluginInfo;
 class QPrinter;
 class QObject;
-class PrintCheck : public KMyMoneyPlugin::Plugin
+class CheckPrinting : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
 
 public:
-  explicit PrintCheck(QObject *parent, const QVariantList &args);
-  ~PrintCheck() override;
+  explicit CheckPrinting(QObject *parent, const QVariantList &args);
+  ~CheckPrinting() override;
 
 public Q_SLOTS:
   void plug() override;
@@ -57,5 +57,5 @@ private:
   QPrinter                *m_currentPrinter;
 };
 
-#endif // PRINTCHECK_H
+#endif
 

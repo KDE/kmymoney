@@ -3,7 +3,7 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 		http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-	<kcfgfile name="icalendarexportpluginrc"/>
+	<kcfgfile name="kmymoney/icalendarexporterrc"/>
 	<group name="General">
 		<entry name="createAlarm" type="Bool">
 			<label>To create an alarm for the exported schedules</label>
