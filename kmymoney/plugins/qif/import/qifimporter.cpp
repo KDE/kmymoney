@@ -26,7 +26,6 @@
 #include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
-#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes

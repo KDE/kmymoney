@@ -48,7 +48,6 @@
 #include <QMenu>
 #include <QPointer>
 #include <QPrinter>
-#include <QPrintDialog>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -76,7 +75,6 @@
 #include "kmymoneyglobalsettings.h"
 #include "querytable.h"
 #include "objectinfotable.h"
-#include "kreportconfigurationfilterdlg.h"
 #include "icons/icons.h"
 #include <kmymoneywebpage.h>
 #include "tocitem.h"
@@ -330,7 +328,7 @@ void KReportTab::loadTab()
 }
 
 void KReportTab::showEvent(QShowEvent * event)
-{ 
+{
   if (m_needReload) {
     m_needReload = false;
     updateReport();

@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <memory>
-
 #include "konlinejoboutbox.h"
+
+#include <memory>
 
 #include "ui_konlinejoboutbox.h"
 #include "kmymoneyviewbase_p.h"

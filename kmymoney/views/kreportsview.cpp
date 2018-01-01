@@ -67,7 +67,6 @@
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
 #include "kmymoneyglobalsettings.h"
-#include "kreportsview_p.h"
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
