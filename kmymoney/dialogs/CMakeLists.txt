@@ -73,7 +73,6 @@ set(dialogs_UI
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
-  ../widgets/kaccounttemplateselector.ui ../widgets/transactionsortoption.ui
   konlinetransferform.ui
 )
 

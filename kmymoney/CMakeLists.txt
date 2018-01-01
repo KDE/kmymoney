@@ -81,7 +81,7 @@ target_link_libraries(kmymoney_common
 # from transactionsortoption.ui first
 add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
 add_dependencies(wizardpages widgets)
-
+add_dependencies(dialogs widgets)
 
 if(USE_MODELTEST)
   set( kmymoney_common_LIBS ${kmymoney_common_LIBS} ${QT_QTTEST_LIBRARY})
