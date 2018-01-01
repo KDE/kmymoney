@@ -879,7 +879,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   // Adding actions to ActionCollection
   // *************
   actionCollection()->addActions(lutActions.values());
-  connect( lutActions[Action::FileInformation], &QAction::triggered, this, &KMyMoneyApp::slotFileInfoDialog);
+
   // ************************
   // Currently unused actions
   // ************************
