@@ -121,11 +121,18 @@ endif(ENABLE_WEBENGINE)
 # check for optional LibOFX support
 find_package(LibOfx)
 if(LIBOFX_FOUND)
+  option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON)
   check_struct_has_member("struct OfxFiLogin" "clientuid" "libofx/libofx.h" LIBOFX_HAVE_CLIENTUID)
   if(NOT ENABLE_OFXIMPORTER)
     unset(LIBOFX_FOUND CACHE)
     unset(LIBOFX_HAVE_CLIENTUID CACHE)
   endif(NOT ENABLE_OFXIMPORTER)
+else(LIBOFX_FOUND)
+  option(ENABLE_OFXIMPORTER "Enable OFX Importer" OFF)
+  if(ENABLE_OFXIMPORTER)
+    unset(LIBOFX_FOUND CACHE)
+    unset(LIBOFX_HAVE_CLIENTUID CACHE)
+  endif(ENABLE_OFXIMPORTER)
 endif(LIBOFX_FOUND)
 
 # check for optional KBanking support
@@ -195,8 +202,6 @@ option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
 
 option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
 option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
-
-option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON)
 
 option(ENABLE_UNFINISHEDFEATURES "For devs only" OFF)
 
