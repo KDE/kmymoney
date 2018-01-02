@@ -112,18 +112,20 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
   // make sure that the dummy transaction is shown last in any case
   if(left.data((int)Role::TransactionSplitId).toString().isEmpty()) {
     return false;
+
   } else if(right.data((int)Role::TransactionSplitId).toString().isEmpty()) {
     return true;
   }
 
+  const QString leftString(left.data((int)Role::ScheduleId).toString());
+  const QString rightString(right.data((int)Role::ScheduleId).toString());
+
   // make sure schedules are shown past real transactions
-  if(!left.data((int)Role::ScheduleId).toString().isEmpty()
-  && right.data((int)Role::ScheduleId).toString().isEmpty()) {
+  if(!leftString.isEmpty() && rightString.isEmpty()) {
     // left is schedule, right is not
     return false;
 
-  } else if(left.data((int)Role::ScheduleId).toString().isEmpty()
-         && !right.data((int)Role::ScheduleId).toString().isEmpty()) {
+  } else if(leftString.isEmpty() && !rightString.isEmpty()) {
     // right is schedule, left is not
     return true;
   }
@@ -134,13 +136,18 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
 
 bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
-  if(m_showNewTransaction) {
-    QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-    if(idx.data((int)Role::TransactionSplitId).toString().isEmpty()) {
-      return true;
-    }
+  QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+  bool rc = idx.data((int)Role::AccountId).toString().compare(m_accountId) == 0;
+  if(!rc && m_showNewTransaction) {
+    rc = idx.data((int)Role::TransactionSplitId).toString().isEmpty();
   }
-  return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+  return rc;
+}
+
+void LedgerProxyModel::setAccount(const QString& id)
+{
+  m_accountId = id;
+  setFilterKeyColumn(0);
 }
 
 bool LedgerProxyModel::setData(const QModelIndex& index, const QVariant& value, int role)
@@ -151,9 +158,6 @@ bool LedgerProxyModel::setData(const QModelIndex& index, const QVariant& value, 
 
 void LedgerProxyModel::setShowNewTransaction(bool show)
 {
-  const bool changed = show != m_showNewTransaction;
   m_showNewTransaction = show;
-  if(changed) {
-    invalidate();
-  }
 }
+

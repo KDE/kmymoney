@@ -44,7 +44,8 @@ class LedgerView::Private
 {
 public:
   Private(LedgerView* p)
-  : delegate(0)
+  : q(p)
+  , delegate(0)
   , filterModel(new LedgerProxyModel(p))
   , adjustableColumn((int)eLedgerModel::Column::Detail)
   , adjustingColumn(false)
@@ -87,10 +88,15 @@ public:
       filterModel->setData(dispIndex, txt, Qt::DisplayRole);
     }
 
-    filterModel->invalidate();
+    // filterModel->invalidate();
+    const QModelIndex top = filterModel->index(0, (int)eLedgerModel::Column::Balance);
+    const QModelIndex bottom = filterModel->index(filterModel->rowCount()-1, (int)eLedgerModel::Column::Balance);
+
+    q->dataChanged(top, bottom);
     balanceCalculationPending = false;
   }
 
+  LedgerView*                 q;
   LedgerDelegate*             delegate;
   LedgerProxyModel*           filterModel;
   MyMoneyAccount              account;
@@ -173,7 +179,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
     d->showValuesInverted = true;
   }
 
-  d->filterModel->setFilterFixedString(acc.id());
+  d->filterModel->setAccount(acc.id());
   d->filterModel->setAccountType(acc.accountType());
   d->setSortRole(eLedgerModel::Role::PostDate, (int)eLedgerModel::Column::Date);
 
@@ -191,12 +197,14 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
   }
 
   if(d->filterModel->rowCount() > 0) {
-    // we need to check that the last row may contain a scheduled transaction
+    // we need to check that the last row may contain a scheduled transaction or
+    // the row that is shown for new transacations.
     // in that case, we need to go back to find the actual last transaction
     int row = d->filterModel->rowCount()-1;
     while(row >= 0) {
-      QModelIndex index = d->filterModel->index(row, 0);
-      if(index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
+      const QModelIndex index = d->filterModel->index(row, 0);
+      if(d->filterModel->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()
+      && !d->filterModel->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString().isEmpty() ) {
         setCurrentIndex(index);
         selectRow(index.row());
         scrollTo(index, PositionAtBottom);
@@ -464,5 +472,3 @@ SplitView::SplitView(QWidget* parent)
 SplitView::~SplitView()
 {
 }
-
-// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

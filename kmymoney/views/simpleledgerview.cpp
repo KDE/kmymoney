@@ -146,9 +146,9 @@ void SimpleLedgerView::openNewLedger(QString accountId)
     // create new ledger view page
     MyMoneyAccount acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
     view = new LedgerViewPage(this);
+    view->setShowEntryForNewTransaction();
     view->setAccount(acc);
 
-    view->setShowEntryForNewTransaction();
     /// @todo setup current global setting for form visibility
     // view->showTransactionForm(...);
 

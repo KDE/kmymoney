@@ -39,8 +39,20 @@ public:
   explicit LedgerProxyModel(QObject* parent = nullptr);
   virtual ~LedgerProxyModel();
 
+  /**
+   * Set if the attached views shall show an empty transaction at
+   * the end of the ledger which clicked starts editing a new transaction.
+   *
+   * @note This must be called before setAccount().
+   */
   void setShowNewTransaction(bool show);
+
   void setAccountType(eMyMoney::Account::Type type);
+
+  /**
+   * Setup filter for account with @a id. @sa filterAcceptsRow()
+   */
+  void setAccount(const QString& id);
 
   /**
    * This method maps the @a index to the base model and calls setData on it
@@ -55,11 +67,17 @@ public:
 
 protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
+  /**
+   * Currently filtering only on account id provided by @sa setAccount()
+   *
+   * @note This does not call the base class implementation for speed purposes
+   */
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-  bool                 m_showNewTransaction;
-  eMyMoney::Account::Type    m_accountType;
+  bool                      m_showNewTransaction;
+  eMyMoney::Account::Type   m_accountType;
+  QString                   m_accountId;
 };
 
 #endif // LEDGERPROXYMODEL_H
