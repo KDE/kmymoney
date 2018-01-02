@@ -39,11 +39,11 @@ LedgerProxyModel::LedgerProxyModel(QObject* parent)
   : QSortFilterProxyModel(parent)
   , m_showNewTransaction(false)
   , m_accountType(Account::Type::Asset)
+  , m_filterRole(Qt::DisplayRole)
 {
   setFilterRole((int)Role::AccountId);
   setFilterKeyColumn(0);
   setSortRole((int)Role::PostDate);
-  setDynamicSortFilter(true);
 }
 
 LedgerProxyModel::~LedgerProxyModel()
@@ -137,17 +137,26 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
 bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-  bool rc = idx.data((int)Role::AccountId).toString().compare(m_accountId) == 0;
+  bool rc = idx.data(m_filterRole).toString().compare(m_filterId) == 0;
   if(!rc && m_showNewTransaction) {
     rc = idx.data((int)Role::TransactionSplitId).toString().isEmpty();
   }
   return rc;
 }
 
-void LedgerProxyModel::setAccount(const QString& id)
+void LedgerProxyModel::setFilterFixedString(const QString& id)
 {
-  m_accountId = id;
-  setFilterKeyColumn(0);
+  m_filterId = id;
+}
+
+int LedgerProxyModel::filterRole() const
+{
+  return m_filterRole;
+}
+
+void LedgerProxyModel::setFilterRole(int role)
+{
+  m_filterRole = role;
 }
 
 bool LedgerProxyModel::setData(const QModelIndex& index, const QVariant& value, int role)
@@ -160,4 +169,3 @@ void LedgerProxyModel::setShowNewTransaction(bool show)
 {
   m_showNewTransaction = show;
 }
-

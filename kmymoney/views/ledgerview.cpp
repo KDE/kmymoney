@@ -179,8 +179,11 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
     d->showValuesInverted = true;
   }
 
-  d->filterModel->setAccount(acc.id());
+  d->filterModel->setFilterRole((int)eLedgerModel::Role::AccountId);
+  d->filterModel->setFilterKeyColumn(0);
+  d->filterModel->setFilterFixedString(acc.id());
   d->filterModel->setAccountType(acc.accountType());
+
   d->setSortRole(eLedgerModel::Role::PostDate, (int)eLedgerModel::Column::Date);
 
   if (acc.hasOnlineMapping()) {

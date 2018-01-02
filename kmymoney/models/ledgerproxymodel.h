@@ -49,10 +49,11 @@ public:
 
   void setAccountType(eMyMoney::Account::Type type);
 
-  /**
-   * Setup filter for account with @a id. @sa filterAcceptsRow()
-   */
-  void setAccount(const QString& id);
+  void setFilterFixedString(const QString& filter);
+
+  void setFilterRole(int role);
+
+  int filterRole() const;
 
   /**
    * This method maps the @a index to the base model and calls setData on it
@@ -77,7 +78,8 @@ protected:
 private:
   bool                      m_showNewTransaction;
   eMyMoney::Account::Type   m_accountType;
-  QString                   m_accountId;
+  QString                   m_filterId;
+  int                       m_filterRole;
 };
 
 #endif // LEDGERPROXYMODEL_H
