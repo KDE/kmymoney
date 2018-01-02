@@ -762,3 +762,8 @@ void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)
     KMessageBox::information(nullptr, i18n("Cannot add institution: %1", e.what()));
   }
 }
+
+QDebug KMyMoneyUtils::debug()
+{
+  return qDebug() << QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss.zzz"));
+}

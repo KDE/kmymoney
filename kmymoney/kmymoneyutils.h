@@ -29,6 +29,8 @@
 #include <QStandardPaths>
 #include <QMap>
 #include <QUrl>
+#include <QDebug>
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
@@ -379,6 +381,8 @@ public:
     *                    the institution to be created.
     */
   static void newInstitution(MyMoneyInstitution& institution);
+
+  static QDebug debug();
 };
 
 #endif
