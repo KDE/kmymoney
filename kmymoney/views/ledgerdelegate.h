@@ -42,7 +42,7 @@ public:
   explicit LedgerSeparator(eLedgerModel::Role role) : m_role(role) {}
   virtual ~LedgerSeparator() {}
 
-  virtual bool rowHasSeperator(const QModelIndex& index) const = 0;
+  virtual bool rowHasSeparator(const QModelIndex& index) const = 0;
   virtual QString separatorText(const QModelIndex& index) const = 0;
 
   virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const = 0;

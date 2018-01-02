@@ -1943,7 +1943,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
 #ifdef ENABLE_UNFINISHEDFEATURES
-  LedgerSeperator::setFirstFiscalDate(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  LedgerSeparator::setFirstFiscalDate(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 #endif
 
   d->m_myMoneyView->updateViewType();
