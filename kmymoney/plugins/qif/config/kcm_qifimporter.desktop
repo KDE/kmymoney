@@ -25,6 +25,7 @@ Keywords[ca@valencia]=qifimporter;kmymoney;
 Keywords[en_GB]=qifimporter;kmymoney;
 Keywords[nl]=qifimporter;kmymoney;
 Keywords[pt]=importação qif;kmymoney;
+Keywords[sv]=qifimporter;kmymoney;
 Keywords[uk]=qifimporter;kmymoney;імпортування;кіф;кмаймані;
 Keywords[x-test]=xxqifimporterxx;xxkmymoneyxx;
 X-KDE-Library=kcm_qif

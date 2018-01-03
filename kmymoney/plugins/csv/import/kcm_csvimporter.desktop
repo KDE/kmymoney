@@ -29,6 +29,7 @@ Keywords[ca@valencia]=csvimporter;kmymoney;
 Keywords[en_GB]=csvimporter;kmymoney;
 Keywords[nl]=csvimporter;kmymoney;
 Keywords[pt]=importação csv;kmymoney;
+Keywords[sv]=csvimporter;kmymoney;
 Keywords[uk]=csvimporter;kmymoney;імпортування;кома;кмаймані;
 Keywords[x-test]=xxcsvimporterxx;xxkmymoneyxx;
 X-KDE-Library=kcm_csvimporter
