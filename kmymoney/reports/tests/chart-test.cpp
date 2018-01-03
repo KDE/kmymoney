@@ -14,18 +14,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QApplication>
+#include "chart-test.h"
+
+#include <QTest>
 #include <QTimer>
 
 #include <KChartWidget>
 #include <KChartLineDiagram>
 #include <KChartCartesianAxis>
 
-using namespace KChart;
-
-int main( int argc, char** argv )
+void ChartTest::createChart()
 {
-  QApplication app( argc, argv );
+  using namespace KChart;
 
   Widget widget;
   widget.resize( 600, 600 );
@@ -45,10 +45,10 @@ int main( int argc, char** argv )
   yAxis->setTitleText ( "Ordinate left position" );
   widget.lineDiagram()->addAxis( xAxis );
   widget.lineDiagram()->addAxis( yAxis );
+
+
   widget.show();
-
-  // make sure the test terminates
-  QTimer::singleShot(5000, &widget, SLOT(close()));
-
-  return app.exec();
+  QVERIFY(QTest::qWaitForWindowActive(&widget));
 }
+
+QTEST_MAIN(ChartTest)
