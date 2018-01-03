@@ -9,7 +9,13 @@ target_link_libraries(reports_testcommon
   reports
 )
 
-file(GLOB tests_sources "*-test.cpp")
+set(tests_sources
+  chart-test.cpp
+  pivotgrid-test.cpp
+  pivottable-test.cpp
+  querytable-test.cpp
+)
+
 ecm_add_tests(${tests_sources}
   NAME_PREFIX
     "reports-"
@@ -21,4 +27,9 @@ ecm_add_tests(${tests_sources}
 )
 
 add_executable(reports-chart-test chart-test.cpp)
-target_link_libraries(reports-chart-test reports Qt5::Core Qt5::Gui)
+target_link_libraries(reports-chart-test
+  reports
+  Qt5::Core
+  Qt5::Gui
+  Qt5::Test
+)
