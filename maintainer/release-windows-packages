@@ -26,7 +26,7 @@ ARCHOUT64=x86_64-w64-mingw32
 
 REPO=openSUSE_Leap_42.2
 SRCREPO=$REPO
-VERSION=4.8.1
+VERSION=4.8.1.1
 
 PHABURL=https://phabricator.kde.org
 oscoptions="-A https://api.opensuse.org"
