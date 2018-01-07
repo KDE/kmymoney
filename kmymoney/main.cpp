@@ -39,8 +39,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <Kdelibs4ConfigMigrator>
-#include <KConfig>
-#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -364,5 +362,4 @@ static void migrateConfigFiles()
     }
   }
   KConfig::setMainConfigName(sMainConfigSubdirectory + sMainConfigName); // otherwise it would be ~/.config/kmymoneyrc and not ~/.config/kmymoney/kmymoneyrc
-  KMyMoneySettings::instance(KSharedConfig::openConfig().data()->name());  // kcfg settings file should be kmymoneyrc, so define it here in one place instead in kmymoney.kcfg
 }
