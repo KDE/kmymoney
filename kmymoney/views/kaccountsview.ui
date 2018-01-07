@@ -11,37 +11,19 @@
    </rect>
   </property>
   <layout class="QVBoxLayout">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout">
-     <property name="leftMargin">
-      <number>2</number>
-     </property>
-     <property name="topMargin">
-      <number>2</number>
-     </property>
-     <property name="rightMargin">
-      <number>2</number>
-     </property>
-     <property name="bottomMargin">
-      <number>2</number>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="margin">
+      <number>0</number>
      </property>
      <item>
       <widget class="KMyMoneyAccountTreeView" name="m_accountTree"/>
      </item>
      <item>
-      <layout class="QHBoxLayout">
+      <layout class="QHBoxLayout" name="searchLayout">
        <item>
         <widget class="KLineEdit" name="m_searchWidget">
          <property name="showClearButton" stdset="0">
