@@ -32,6 +32,14 @@
 
 #include "mymoneyforecast.h"
 
+// include kmymoneysettings.cpp here to gain access to s_globalKMyMoneySettings
+#include "kmymoneysettings.cpp"
+
+void KMyMoneyGlobalSettings::injectExternalSettings(KMyMoneySettings* p)
+{
+  s_globalKMyMoneySettings()->q = p;
+}
+
 QFont KMyMoneyGlobalSettings::listCellFont()
 {
   if (useSystemFont()) {

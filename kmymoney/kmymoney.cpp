@@ -174,6 +174,10 @@
 
 #include "misc/platformtools.h"
 
+// includes needed for shared global settings
+#include "mymoney_config.h"
+#include "widgets_config.h"
+
 #ifdef KMM_DEBUG
 #include "mymoneytracer.h"
 #endif
@@ -379,6 +383,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
 
+  MyMoney::injectExternalSettings(KMyMoneyGlobalSettings::self());
+  Widgets::injectExternalSettings(KMyMoneyGlobalSettings::self());
+
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
   d->m_config = KSharedConfig::openConfig();
@@ -488,6 +495,8 @@ KMyMoneyApp::~KMyMoneyApp()
 #ifdef KF5Holidays_FOUND
   delete d->m_holidayRegion;
 #endif
+  Widgets::injectExternalSettings(nullptr);
+  MyMoney::injectExternalSettings(nullptr);
   delete d;
 }
 

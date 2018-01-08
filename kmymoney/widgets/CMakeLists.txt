@@ -11,7 +11,7 @@ set(kmymoney_STAT_HEADERS
   kmymoneytitlelabel.h register.h registeritem.h groupmarker.h fancydategroupmarker.h
   scheduledtransaction.h selectedtransaction.h selectedtransactions.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
-  transactionform.h transaction.h investtransaction.h stdtransaction.h 
+  transactionform.h transaction.h investtransaction.h stdtransaction.h
   transactionsortoption.h reporttabimpl.h reportcontrolimpl.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
@@ -21,6 +21,7 @@ set(kmymoney_STAT_HEADERS
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
+  widgets_config.cpp
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp

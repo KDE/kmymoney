@@ -51,6 +51,8 @@ enum class SchemeColor {
 class KMyMoneyGlobalSettings : public KMyMoneySettings
 {
 public:
+  static void injectExternalSettings(KMyMoneySettings* p);
+
   static QColor schemeColor(const SchemeColor color);
 
   static QFont listCellFont();
