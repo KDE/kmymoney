@@ -74,7 +74,7 @@ target_link_libraries(kcm_csvimporter
                       )
 
 install(TARGETS kcm_csvimporter
-        DESTINATION ${KDE_INSTALL_PLUGINDIR})
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kcm_csvimporter.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

@@ -66,7 +66,7 @@ else(ENABLE_WEBENGINE)
 endif(ENABLE_WEBENGINE)
 
 install(TARGETS kcm_checkprinting
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}")
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kcm_checkprinting.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")
