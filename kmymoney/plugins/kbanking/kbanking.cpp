@@ -290,7 +290,7 @@ QWidget* KBanking::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 MyMoneyKeyValueContainer KBanking::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
   MyMoneyKeyValueContainer kvp(current);
-  kvp["provider"] = objectName();
+  kvp["provider"] = objectName().toLower();
   if (m_accountSettings) {
     m_accountSettings->loadKvp(kvp);
   }
@@ -431,7 +431,7 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_a
       }
 
       kvp.setValue("kbanking-acc-ref", val);
-      kvp.setValue("provider", objectName());
+      kvp.setValue("provider", objectName().toLower());
       setAccountOnlineParameters(acc, kvp);
     }
   } else {

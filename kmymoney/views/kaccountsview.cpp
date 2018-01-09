@@ -161,7 +161,7 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
         if (d->m_onlinePlugins) {
           // check if provider is available
           QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-          it_p = d->m_onlinePlugins->constFind(d->m_currentAccount.onlineBankingSettings().value(QLatin1String("provider")));
+          it_p = d->m_onlinePlugins->constFind(d->m_currentAccount.onlineBankingSettings().value(QLatin1String("provider")).toLower());
           if (it_p != d->m_onlinePlugins->constEnd()) {
             QStringList protocols;
             (*it_p)->protocols(protocols);

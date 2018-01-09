@@ -3204,12 +3204,12 @@ void KMyMoneyApp::slotAccountMapOnline()
     return;
 
   // find the provider
-  it_p = d->m_plugins.online.constFind(provider);
+  it_p = d->m_plugins.online.constFind(provider.toLower());
   if (it_p != d->m_plugins.online.constEnd()) {
     // plugin found, call it
     MyMoneyKeyValueContainer settings;
     if ((*it_p)->mapAccount(d->m_selectedAccount, settings)) {
-      settings["provider"] = provider;
+      settings["provider"] = provider.toLower();
       MyMoneyAccount acc(d->m_selectedAccount);
       acc.setOnlineBankingSettings(settings);
       MyMoneyFileTransaction ft;

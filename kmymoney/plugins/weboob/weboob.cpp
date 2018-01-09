@@ -86,7 +86,7 @@ QWidget* Weboob::accountConfigTab(const MyMoneyAccount& account, QString& tabNam
 MyMoneyKeyValueContainer Weboob::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
   MyMoneyKeyValueContainer kvp(current);
-  kvp["provider"] = objectName();
+  kvp["provider"] = objectName().toLower();
   if (d->accountSettings) {
     d->accountSettings->loadKvp(kvp);
   }
