@@ -570,7 +570,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   if (security.id().isEmpty()) {
     security.setName(sec_in.m_strName);
     security.setTradingSymbol(sec_in.m_strSymbol);
-    security.setSmallestAccountFraction(1000);
+    security.setSmallestAccountFraction(10000);
     security.setTradingCurrency(file->baseCurrency().id());
     security.setValue("kmm-security-id", sec_in.m_strId);
     security.setValue("kmm-online-source", "KMyMoney Currency");
