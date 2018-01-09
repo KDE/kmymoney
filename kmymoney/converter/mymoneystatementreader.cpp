@@ -573,7 +573,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     security.setSmallestAccountFraction(1000);
     security.setTradingCurrency(file->baseCurrency().id());
     security.setValue("kmm-security-id", sec_in.m_strId);
-    security.setValue("kmm-online-source", "Yahoo");
+    security.setValue("kmm-online-source", "KMyMoney Currency");
     security.setSecurityType(MyMoneySecurity::SECURITY_STOCK);
     MyMoneyFileTransaction ft;
     try {
