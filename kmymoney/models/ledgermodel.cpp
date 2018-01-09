@@ -472,9 +472,11 @@ void LedgerModel::addSchedules(const QList<MyMoneySchedule> & list, int previewP
         }
       }
     }
-    beginInsertRows(QModelIndex(), rowCount(), rowCount() + newList.count() - 1);
-    d->m_ledgerItems += newList;
-    endInsertRows();
+    if(!newList.isEmpty()) {
+      beginInsertRows(QModelIndex(), rowCount(), rowCount() + newList.count() - 1);
+      d->m_ledgerItems += newList;
+      endInsertRows();
+    }
   }
 }
 
