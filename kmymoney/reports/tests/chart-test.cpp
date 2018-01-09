@@ -48,7 +48,7 @@ void ChartTest::createChart()
 
 
   widget.show();
-  QVERIFY(QTest::qWaitForWindowActive(&widget));
+  QVERIFY(QTest::qWaitForWindowActive(&widget, 10000));
 }
 
 QTEST_MAIN(ChartTest)
