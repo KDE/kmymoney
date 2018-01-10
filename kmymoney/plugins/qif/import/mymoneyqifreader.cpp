@@ -1590,7 +1590,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
 
 //    s1.setShares(splitfactor);
 //    s1.setValue(0);
-//   s1.setAction(MyMoneySplit::ActionSplitShares);
+//   s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
 
 //     return;
   } else {

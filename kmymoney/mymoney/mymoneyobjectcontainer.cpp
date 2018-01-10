@@ -221,21 +221,19 @@ void MyMoneyObjectContainer::account(QList<MyMoneyAccount>& list)
 MyMoneyAccount MyMoneyObjectContainer::account(const QString& id)
 {
   static MyMoneyAccount nullElement;
-  if (id.isEmpty())
-    return nullElement;
-  QHash<QString, MyMoneyAccount const *>::iterator it = d->accountCache.find(id);
-  if (it == d->accountCache.end()) {
+
+  auto acc = d->accountCache.value(id, &nullElement);
+
+  if (id.isEmpty()) {
+    return *acc;
+  } else if (acc->id().isEmpty()) {
     /* not found, need to load from engine */
-    const MyMoneyAccount &x = d->storage->account(id);
-    MyMoneyAccount* item = new MyMoneyAccount(x);
-    d->assignFraction(item);
-    d->accountCache[id] = item;
-    return *item;
-  } else {
-    d->assignFraction(const_cast<MyMoneyAccount*>(*it));
-    return **it;
+    acc = new MyMoneyAccount(d->storage->account(id));
+    d->accountCache.insert(id, acc);
   }
-  return nullElement;
+
+  d->assignFraction(const_cast<MyMoneyAccount*>(acc));
+  return *acc;
 }
 
 MyMoneyAccount MyMoneyObjectContainer::accountByName(const QString& name) const

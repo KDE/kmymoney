@@ -189,17 +189,15 @@ public:
     filter.setReportAllSplits(false);
     q->transactionList(list, filter);
 
-    for (QList<MyMoneyTransaction>::const_iterator it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-      const QList<MyMoneySplit>& splits = (*it_t).splits();
-      for (QList<MyMoneySplit>::const_iterator it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
-        const MyMoneySplit &split = (*it_s);
-        if (split.accountId() != id)
+    for (const auto& transaction : list) {
+      const auto splits = transaction.splits();
+      for (const auto& split : splits) {
+        if (split.accountId().compare(id) != 0)
           continue;
-        if (split.action() == MyMoneySplit::ActionSplitShares) {
-          balance = balance * split.shares();
-        } else {
+        else if (split.action().compare(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) == 0)
+          balance *= split.shares();
+        else
           balance += split.shares();
-        }
       }
     }
 

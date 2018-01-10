@@ -668,7 +668,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
   if (!_t.memo().isEmpty())
     invtran.element("MEMO", _t.memo());
 
-  if (s.action() == MyMoneySplit::ActionBuyShares) {
+  if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
     if (s.shares().isNegative()) {
       return Tag("SELLSTOCK")
              .subtag(Tag("INVSELL")
@@ -692,7 +692,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
                      .element("SUBACCTFUND", "CASH"))
              .element("BUYTYPE", "BUY");
     }
-  } else if (s.action() == MyMoneySplit::ActionReinvestDividend) {
+  } else if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
     // Should the TOTAL tag really be negative for a REINVEST?  That's very strange, but
     // it's what they look like coming from my bank, and I can't find any information to refute it.
 
@@ -704,7 +704,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
            .element("SUBACCTSEC", "CASH")
            .element("UNITS", QString((s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
            .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")));
-  } else if (s.action() == MyMoneySplit::ActionDividend) {
+  } else if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
     // find the split with the category, which has the actual amount of the dividend
     QList<MyMoneySplit> splits = _t.splits();
     QList<MyMoneySplit>::const_iterator it_split = splits.begin();

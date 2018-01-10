@@ -306,7 +306,7 @@ namespace NewAccountWizard
         s.setShares(MyMoneyMoney::autoCalc);
         s.setValue(MyMoneyMoney::autoCalc);
         s.setMemo(i18n("Amortization"));
-        s.setAction(MyMoneySplit::ActionAmortization);
+        s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
         t.addSplit(s);
 
         // interest split
@@ -317,7 +317,7 @@ namespace NewAccountWizard
           s.setShares(MyMoneyMoney::autoCalc);
           s.setValue(MyMoneyMoney::autoCalc);
           s.setMemo(i18n("Interest"));
-          s.setAction(MyMoneySplit::ActionInterest);
+          s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
           t.addSplit(s);
         }
 

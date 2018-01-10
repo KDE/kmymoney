@@ -40,23 +40,6 @@
 #include "mymoneytransaction.h"
 #include "mymoneyexception.h"
 
-const char MyMoneySplit::ActionCheck[] = "Check";
-const char MyMoneySplit::ActionDeposit[] = "Deposit";
-const char MyMoneySplit::ActionTransfer[] = "Transfer";
-const char MyMoneySplit::ActionWithdrawal[] = "Withdrawal";
-const char MyMoneySplit::ActionATM[] = "ATM";
-
-const char MyMoneySplit::ActionAmortization[] = "Amortization";
-const char MyMoneySplit::ActionInterest[] = "Interest";
-
-const char MyMoneySplit::ActionBuyShares[] = "Buy";
-const char MyMoneySplit::ActionDividend[] = "Dividend";
-const char MyMoneySplit::ActionReinvestDividend[] = "Reinvest";
-const char MyMoneySplit::ActionYield[] = "Yield";
-const char MyMoneySplit::ActionAddShares[] = "Add";
-const char MyMoneySplit::ActionSplitShares[] = "Split";
-const char MyMoneySplit::ActionInterestIncome[] = "IntIncome";
-
 MyMoneySplit::MyMoneySplit() :
   MyMoneyObject(*new MyMoneySplitPrivate)
 {
@@ -263,26 +246,26 @@ void MyMoneySplit::setAction(eMyMoney::Split::InvestmentTransactionType type)
   switch (type) {
     case eMyMoney::Split::InvestmentTransactionType::BuyShares:
     case eMyMoney::Split::InvestmentTransactionType::SellShares:
-      setAction(ActionBuyShares);
+      setAction(actionName(Split::Action::BuyShares));
       break;
     case eMyMoney::Split::InvestmentTransactionType::Dividend:
-      setAction(ActionDividend);
+      setAction(actionName(Split::Action::Dividend));
       break;
     case eMyMoney::Split::InvestmentTransactionType::Yield:
-      setAction(ActionYield);
+      setAction(actionName(Split::Action::Yield));
       break;
     case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
-      setAction(ActionReinvestDividend);
+      setAction(actionName(Split::Action::ReinvestDividend));
       break;
     case eMyMoney::Split::InvestmentTransactionType::AddShares:
     case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
-      setAction(ActionAddShares);
+      setAction(actionName(Split::Action::AddShares));
       break;
     case eMyMoney::Split::InvestmentTransactionType::SplitShares:
-      setAction(ActionSplitShares);
+      setAction(actionName(Split::Action::SplitShares));
       break;
     case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
-      setAction(ActionInterestIncome);
+      setAction(actionName(Split::Action::InterestIncome));
       break;
     case eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType:
       break;
@@ -304,13 +287,13 @@ void MyMoneySplit::setAction(const QString& action)
 bool MyMoneySplit::isAmortizationSplit() const
 {
   Q_D(const MyMoneySplit);
-  return d->m_action == ActionAmortization;
+  return d->m_action == actionName(Split::Action::Amortization);
 }
 
 bool MyMoneySplit::isInterestSplit() const
 {
   Q_D(const MyMoneySplit);
-  return d->m_action == ActionInterest;
+  return d->m_action == actionName(Split::Action::Interest);
 }
 
 QString MyMoneySplit::number() const
@@ -510,4 +493,25 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
   }
 
   return changed;
+}
+
+QString MyMoneySplit::actionName(Split::Action action)
+{
+  static const QHash<Split::Action, QString> actionNames {
+    {Split::Action::Check,            QStringLiteral("Check")},
+    {Split::Action::Deposit,          QStringLiteral("Deposit")},
+    {Split::Action::Transfer,         QStringLiteral("Transfer")},
+    {Split::Action::Withdrawal,       QStringLiteral("Withdrawal")},
+    {Split::Action::ATM,              QStringLiteral("ATM")},
+    {Split::Action::Amortization,     QStringLiteral("Amortization")},
+    {Split::Action::Interest,         QStringLiteral("Interest")},
+    {Split::Action::BuyShares,        QStringLiteral("Buy")},
+    {Split::Action::Dividend,         QStringLiteral("Dividend")},
+    {Split::Action::ReinvestDividend, QStringLiteral("Reinvest")},
+    {Split::Action::Yield,            QStringLiteral("Yield")},
+    {Split::Action::AddShares,        QStringLiteral("Add")},
+    {Split::Action::SplitShares,      QStringLiteral("Split")},
+    {Split::Action::InterestIncome,   QStringLiteral("IntIncome")},
+  };
+  return actionNames[action];
 }

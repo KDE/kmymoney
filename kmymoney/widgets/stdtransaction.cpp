@@ -90,17 +90,17 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
     MyMoneySplit split = KMyMoneyUtils::stockSplit(d->m_transaction);
     d->m_payee = MyMoneyFile::instance()->account(split.accountId()).name();
     QString addon;
-    if (split.action() == MyMoneySplit::ActionBuyShares) {
+    if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
       if (split.value().isNegative()) {
         addon = i18n("Sell");
       } else {
         addon = i18n("Buy");
       }
-    } else if (split.action() == MyMoneySplit::ActionDividend) {
+    } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
       addon = i18n("Dividend");
-    } else if (split.action() == MyMoneySplit::ActionYield) {
+    } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
       addon = i18n("Yield");
-    } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
+    } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
       addon = i18n("Interest Income");
     }
     if (!addon.isEmpty()) {

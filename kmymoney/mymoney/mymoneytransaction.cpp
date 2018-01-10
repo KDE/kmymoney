@@ -33,6 +33,7 @@
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 using namespace MyMoneyStorageNodes;
 
@@ -156,6 +157,13 @@ QList<MyMoneySplit>& MyMoneyTransaction::splits()
   Q_D(MyMoneyTransaction);
   return d->m_splits;
 }
+
+MyMoneySplit MyMoneyTransaction::firstSplit() const
+{
+  Q_D(const MyMoneyTransaction);
+  return d->m_splits.first();
+}
+
 uint MyMoneyTransaction::splitCount() const
 {
   Q_D(const MyMoneyTransaction);
@@ -404,7 +412,7 @@ unsigned long MyMoneyTransaction::hash(const QString& txt, unsigned long h)
 bool MyMoneyTransaction::isStockSplit() const
 {
   Q_D(const MyMoneyTransaction);
-  return (d->m_splits.count() == 1 && d->m_splits[0].action() == MyMoneySplit::ActionSplitShares);
+  return (d->m_splits.count() == 1 && d->m_splits.first().action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
 }
 
 bool MyMoneyTransaction::isImported() const

@@ -110,7 +110,7 @@ void KPayeesView::slotChooseDefaultAccount()
       const MyMoneyAccount& acc = file->account(s.accountId());
 
       QString txt;
-      if (s.action() != MyMoneySplit::ActionAmortization
+      if (s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)
           && acc.accountType() != eMyMoney::Account::Type::AssetLoan
           && !file->isTransfer(t->transaction())
           && t->transaction().splitCount() == 2) {

@@ -846,7 +846,7 @@ void QueryTable::constructTransactionTable()
           qA[ctShares] = shares.isZero() ? QString() : shares.toString();
           qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
 
-          if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && shares.isNegative())
+          if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
             qA[ctAction] = "Sell";
 
           qA[ctInvestAccount] = splitAcc.parent().name();
@@ -894,7 +894,7 @@ void QueryTable::constructTransactionTable()
         a_fullname = splitAcc.fullName();
         a_memo = (*it_split).memo();
 
-        transaction_text = m_config.match(&(*it_split));
+        transaction_text = m_config.match((*it_split));
 
         qA[ctInstitution] = institution.isEmpty()
                             ? i18n("No Institution")
@@ -962,10 +962,10 @@ void QueryTable::constructTransactionTable()
           if (loan_special_case) {
             MyMoneyMoney value = (-(* it_split).shares() * xr).convert(fraction);
 
-            if ((*it_split).action() == MyMoneySplit::ActionAmortization) {
+            if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
               // put the payment in the "payment" column and convert to lowest fraction
               qA[ctPayee] = value.toString();
-            } else if ((*it_split).action() == MyMoneySplit::ActionInterest) {
+            } else if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
               // put the interest in the "interest" column and convert to lowest fraction
               qA[ctInterest] = value.toString();
             } else if (splits.count() > 2) {
@@ -1044,10 +1044,10 @@ void QueryTable::constructTransactionTable()
               //if the filter is "does not contain" exclude the split if it does not match
               //even it matches the whole split
               if ((m_config.isInvertingText() &&
-                   m_config.match(&(*it_split)))
+                   m_config.match((*it_split)))
                   || (!m_config.isInvertingText()
                       && (transaction_text
-                          || m_config.match(&(*it_split))))) {
+                          || m_config.match((*it_split))))) {
                 if (tag_special_case) {
                   if (!tagIdListCache.size())
                     qA[ctTag] = i18n("[No Tag]");
@@ -1104,10 +1104,10 @@ void QueryTable::constructTransactionTable()
             //if the filter is "does not contain" exclude the split if it does not match
             //even it matches the whole split
             if ((m_config.isInvertingText() &&
-                 m_config.match(&(*it_split)))
+                 m_config.match((*it_split)))
                 || (!m_config.isInvertingText()
                     && (transaction_text
-                        || m_config.match(&(*it_split))))) {
+                        || m_config.match((*it_split))))) {
               m_rows += qS;
 
               // track accts that will need opening and closing balances
@@ -1948,7 +1948,7 @@ void QueryTable::constructSplitsTable()
         qA[ctShares] = shares.isZero() ? QString() : (*it_split).shares().toString();
         qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
 
-        if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && (*it_split).shares().isNegative())
+        if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && (*it_split).shares().isNegative())
           qA[ctAction] = "Sell";
 
         qA[ctInvestAccount] = splitAcc.parent().name();

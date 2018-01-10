@@ -1639,7 +1639,7 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
   while (!m_splitList.isEmpty()) {
     split = *it;
     // at this point, if m_potentialTransfer is still true, it is actually one!
-    if (m_potentialTransfer) split.setAction(MyMoneySplit::ActionTransfer);
+    if (m_potentialTransfer) split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer));
     if ((m_useTxNotes) // if use txnotes option is set
         && (nonSplitTx) // and it's a (GnuCash) non-split transaction
         && (!tx.memo().isEmpty())) // and tx notes are present
@@ -1721,8 +1721,8 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
     case Account::Type::Asset:
       if (splitAccount.accountType() == Account::Type::Stock) {
         split.value().isZero() ?
-        split.setAction(MyMoneySplit::ActionAddShares) :      // free shares?
-        split.setAction(MyMoneySplit::ActionBuyShares);
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) :      // free shares?
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
         m_potentialTransfer = false; // ?
         // add a price history entry
         MyMoneySecurity e = m_storage->security(splitAccount.currencyId());
@@ -1744,7 +1744,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
             m_storage->addPrice(dealPrice);
           } CATCH {
             // stock transfer; treat like free shares?
-            split.setAction(MyMoneySplit::ActionAddShares);
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
           }
         }
       } else { // not stock
@@ -1754,20 +1754,20 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
             split.number().toLong(&isNumeric);    // No QString.isNumeric()??
           }
           if (isNumeric) {
-            split.setAction(MyMoneySplit::ActionCheck);
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Check));
           } else {
-            split.setAction(MyMoneySplit::ActionWithdrawal);
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
           }
         } else {
-          split.setAction(MyMoneySplit::ActionDeposit);
+          split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
         }
       }
       m_splitList.append(split);
       break;
     case Account::Type::Liability:
       split.value().isNegative() ?
-      split.setAction(MyMoneySplit::ActionWithdrawal) :
-      split.setAction(MyMoneySplit::ActionDeposit);
+      split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal)) :
+      split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
       m_liabilitySplitList.append(split);
       break;
     default:
@@ -1825,14 +1825,14 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction(const QString& s
   while (!m_splitList.isEmpty()) {
     split = *it;
     if (m_potentialTransfer) {
-      split.setAction(MyMoneySplit::ActionTransfer);
+      split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer));
     } else {
       if (split.value().isNegative()) {
         //split.setAction (negativeActionType);
-        split.setAction(MyMoneySplit::ActionWithdrawal);
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
       } else {
         //split.setAction (positiveActionType);
-        split.setAction(MyMoneySplit::ActionDeposit);
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
       }
     }
     split.setNumber(gtx->no()); // set cheque no (or equivalent description)
@@ -2140,9 +2140,9 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     //qDebug(QString("autoEnter set to %1").arg(sc.autoEnter()));
     // type
     QString actionType = tx.splits().first().action();
-    if (actionType == MyMoneySplit::ActionDeposit) {
+    if (actionType == MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit)) {
       sc.setType((Schedule::Type)Schedule::Type::Deposit);
-    } else if (actionType == MyMoneySplit::ActionTransfer) {
+    } else if (actionType == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
       sc.setType((Schedule::Type)Schedule::Type::Transfer);
     } else {
       sc.setType((Schedule::Type)Schedule::Type::Bill);

@@ -238,6 +238,25 @@ namespace eMyMoney {
     };
 
     inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class Action {
+      Check,
+      Deposit,
+      Transfer,
+      Withdrawal,
+      ATM,
+      Amortization,
+      Interest,
+      BuyShares,
+      Dividend,
+      ReinvestDividend,
+      Yield,
+      AddShares,
+      SplitShares,
+      InterestIncome
+    };
+
+    inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace File {

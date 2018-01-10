@@ -555,7 +555,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
       throw MYMONEYEXCEPTION("Cannot store split with no account assigned");
     if (isStandardAccount(split.accountId()))
       throw MYMONEYEXCEPTION("Cannot store split referencing standard account");
-    if (acc.isLoan() && (split.action() == MyMoneySplit::ActionTransfer))
+    if (acc.isLoan() && (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)))
       loanAccountAffected = true;
   }
 
@@ -563,12 +563,12 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // into amortization splits
   if (loanAccountAffected) {
     foreach (const auto split, transaction.splits()) {
-      if (split.action() == MyMoneySplit::ActionTransfer) {
+      if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
         auto acc = MyMoneyFile::account(split.accountId());
 
         if (acc.isAssetLiability()) {
           MyMoneySplit s = split;
-          s.setAction(MyMoneySplit::ActionAmortization);
+          s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
           tCopy.modifySplit(s);
         }
       }
@@ -1325,12 +1325,12 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   // into amortization splits
   if (loanAccountAffected) {
     foreach (const auto split, transaction.splits()) {
-      if (split.action() == MyMoneySplit::ActionTransfer) {
+      if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
         auto acc = MyMoneyFile::account(split.accountId());
 
         if (acc.isAssetLiability()) {
           MyMoneySplit s = split;
-          s.setAction(MyMoneySplit::ActionAmortization);
+          s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
           transaction.modifySplit(s);
         }
       }
@@ -2253,7 +2253,7 @@ QStringList MyMoneyFile::consistencyCheck()
   // Generate the list of interest accounts
   foreach (const auto transaction, tList) {
     foreach (const auto split, transaction.splits()) {
-      if (split.action() == MyMoneySplit::ActionInterest)
+      if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))
         interestAccounts[split.accountId()] = true;
     }
   }
@@ -2339,8 +2339,8 @@ QStringList MyMoneyFile::consistencyCheck()
 
       // make sure the interest splits are marked correct as such
       if (interestAccounts.find(s.accountId()) != interestAccounts.end()
-          && s.action() != MyMoneySplit::ActionInterest) {
-        s.setAction(MyMoneySplit::ActionInterest);
+          && s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
+        s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
         sChanged = true;
         rc << i18n("  * action marked as interest in split of transaction '%1'.", t.id());
         ++problemCount;
@@ -3545,8 +3545,7 @@ bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) c
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   filter.setDateFilter(date.addDays(+1), QDate());
-  QList<MyMoneyTransaction> transactions = transactionList(filter);
-  return transactions.count() > 0;
+  return !transactionList(filter).isEmpty();
 }
 
 void MyMoneyFile::clearCache()

@@ -88,6 +88,7 @@ public:
 
   QList<MyMoneySplit> splits() const;
   QList<MyMoneySplit>& splits();
+  MyMoneySplit firstSplit() const;
   uint splitCount() const;
 
   QString commodity() const;
@@ -192,7 +193,7 @@ public:
     * contains information of a loan payment or not.
     * Loan payment transactions have at least one
     * split that is identified with a MyMoneySplit::action() of type
-    * MyMoneySplit::ActionAmortization.
+    * MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization).
     *
     * @retval false transaction is no loan payment transaction
     * @retval true  transaction is a loan payment transaction

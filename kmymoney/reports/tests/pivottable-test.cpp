@@ -154,9 +154,9 @@ void PivotTableTest::testNetWorthOpeningPrior()
   // Test the net worth report to make sure that transactions prior to the report
   // period are included in the opening balance
 
-  TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acChecking, acChild);
+  TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acChecking, acChild);
 
   filter.setName("Net Worth Opening Prior 2");
   PivotTable networth_f2(filter);
@@ -191,19 +191,19 @@ void PivotTableTest::testNetWorthOpening()
   auto ctBasicIncome = makeAccount(QString("Basic Income"), eMyMoney::Account::Type::Income, MyMoneyMoney(), QDate(2016, 1, 1), acIncome);
   auto ctBasicExpense = makeAccount(QString("Basic Expense"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2016, 1, 1), acExpense);
 
-  TransactionHelper t1(QDate(2016, 7, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-6200000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t2(QDate(2016, 8, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t3(QDate(2016, 9, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t4(QDate(2016, 10, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t5(QDate(2016, 11, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t6(QDate(2016, 12, 1), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(100000), acBasicAccount, ctBasicExpense);
-  TransactionHelper t7(QDate(2017, 1, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t8(QDate(2017, 2, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t9(QDate(2017, 3, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t10(QDate(2017, 4, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t11(QDate(2017, 5, 1), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(4500000), acBasicAccount, ctBasicExpense);
-  TransactionHelper t12(QDate(2017, 6, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-  TransactionHelper t13(QDate(2017, 7, 1), MyMoneySplit::ActionDeposit, MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t1(QDate(2016, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-6200000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t2(QDate(2016, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t3(QDate(2016, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t4(QDate(2016, 10, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t5(QDate(2016, 11, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t6(QDate(2016, 12, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(100000), acBasicAccount, ctBasicExpense);
+  TransactionHelper t7(QDate(2017, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t8(QDate(2017, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t9(QDate(2017, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t10(QDate(2017, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t11(QDate(2017, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(4500000), acBasicAccount, ctBasicExpense);
+  TransactionHelper t12(QDate(2017, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
+  TransactionHelper t13(QDate(2017, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eAssetLiability);
@@ -246,7 +246,7 @@ void PivotTableTest::testSpendingEmpty()
 void PivotTableTest::testSingleTransaction()
 {
   // Test a single transaction
-  TransactionHelper t(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
+  TransactionHelper t(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -274,9 +274,9 @@ void PivotTableTest::testSubAccount()
 {
   // Test a sub-account with a value, under an account with a value
 
-  TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+  TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -310,9 +310,9 @@ void PivotTableTest::testSubAccount()
 void PivotTableTest::testFilterIEvsIE()
 {
   // Test that removing an income/spending account will remove the entry from an income/spending report
-  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -331,9 +331,9 @@ void PivotTableTest::testFilterIEvsIE()
 void PivotTableTest::testFilterALvsAL()
 {
   // Test that removing an asset/liability account will remove the entry from an asset/liability report
-  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eAssetLiability);
@@ -349,9 +349,9 @@ void PivotTableTest::testFilterALvsAL()
 void PivotTableTest::testFilterALvsIE()
 {
   // Test that removing an asset/liability account will remove the entry from an income/spending report
-  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -371,9 +371,9 @@ void PivotTableTest::testFilterAllvsIE()
 {
   // Test that removing an asset/liability account AND an income/expense
   // category will remove the entry from an income/spending report
-  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -390,10 +390,10 @@ void PivotTableTest::testFilterAllvsIE()
 void PivotTableTest::testFilterBasics()
 {
   // Test that the filters are operating the way that the reports expect them to
-  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
-  TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+  TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
+  TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
   MyMoneyTransactionFilter filter;
   filter.clear();
@@ -445,12 +445,12 @@ void PivotTableTest::testMultipleCurrencies()
   makePrice("JPY", QDate(2004, 6, 30), MyMoneyMoney(moJpyPrice3));
   makePrice("JPY", QDate(2004, 7, 15), MyMoneyMoney(moJpyPrice4));
 
-  TransactionHelper t1(QDate(2004, 2, 20), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
-  TransactionHelper t2(QDate(2004, 3, 20), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
-  TransactionHelper t3(QDate(2004, 4, 20), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
-  TransactionHelper t4(QDate(2004, 2, 20), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
-  TransactionHelper t5(QDate(2004, 3, 20), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
-  TransactionHelper t6(QDate(2004, 4, 20), MyMoneySplit::ActionWithdrawal, MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
+  TransactionHelper t1(QDate(2004, 2, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
+  TransactionHelper t2(QDate(2004, 3, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
+  TransactionHelper t3(QDate(2004, 4, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
+  TransactionHelper t4(QDate(2004, 2, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
+  TransactionHelper t5(QDate(2004, 3, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
+  TransactionHelper t6(QDate(2004, 4, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
 
 #if 0
   QFile g("multicurrencykmy.xml");
@@ -539,8 +539,8 @@ void PivotTableTest::testAdvancedFilter()
 
   // amount
   {
-    TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+    TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -553,10 +553,10 @@ void PivotTableTest::testAdvancedFilter()
 
   // payee (specific)
   {
-    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
-    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
+    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
+    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -572,10 +572,10 @@ void PivotTableTest::testAdvancedFilter()
   }
   // payee (no payee)
   {
-    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
-    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moNoPayee, acCredit, acParent, QString(), QString());
+    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
+    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moNoPayee, acCredit, acParent, QString(), QString());
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -589,10 +589,10 @@ void PivotTableTest::testAdvancedFilter()
 
   // text
   {
-    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
-    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
+    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
+    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -604,9 +604,9 @@ void PivotTableTest::testAdvancedFilter()
 
   // type (payment, deposit, transfer)
   {
-    TransactionHelper t1(QDate(2004, 1, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2(QDate(2004, 2, 1), MyMoneySplit::ActionDeposit, -moParent1, acCredit, acParent);
-    TransactionHelper t3(QDate(2004, 11, 1), MyMoneySplit::ActionTransfer, moChild, acCredit, acChecking);
+    TransactionHelper t1(QDate(2004, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), -moParent1, acCredit, acParent);
+    TransactionHelper t3(QDate(2004, 11, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer), moChild, acCredit, acChecking);
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -643,10 +643,10 @@ void PivotTableTest::testAdvancedFilter()
 
   // state (reconciled, cleared, not)
   {
-    TransactionHelper t1(QDate(2004, 1, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2(QDate(2004, 2, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3(QDate(2004, 3, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
-    TransactionHelper t4(QDate(2004, 4, 1), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+    TransactionHelper t1(QDate(2004, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3(QDate(2004, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
+    TransactionHelper t4(QDate(2004, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
     QList<MyMoneySplit> splits = t1.splits();
     splits[0].setReconcileFlag(eMyMoney::Split::State::Cleared);
@@ -688,10 +688,10 @@ void PivotTableTest::testAdvancedFilter()
 
   // number
   {
-    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
-    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
+    TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
+    TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
     QList<MyMoneySplit> splits = t1.splits();
     splits[0].setNumber("1");
@@ -735,17 +735,17 @@ void PivotTableTest::testAdvancedFilter()
 
   // blank dates
   {
-    TransactionHelper t1y1(QDate(2003, 10, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2y1(QDate(2003, 11, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3y1(QDate(2003, 12, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+    TransactionHelper t1y1(QDate(2003, 10, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2y1(QDate(2003, 11, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3y1(QDate(2003, 12, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-    TransactionHelper t1y2(QDate(2004, 4, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2y2(QDate(2004, 5, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3y2(QDate(2004, 6, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+    TransactionHelper t1y2(QDate(2004, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2y2(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3y2(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-    TransactionHelper t1y3(QDate(2005, 1, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-    TransactionHelper t2y3(QDate(2005, 5, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-    TransactionHelper t3y3(QDate(2005, 9, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+    TransactionHelper t1y3(QDate(2005, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+    TransactionHelper t2y3(QDate(2005, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+    TransactionHelper t3y3(QDate(2005, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
     MyMoneyReport filter;
     filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -767,17 +767,17 @@ void PivotTableTest::testColumnType()
 {
   // test column type values of other than 'month'
 
-  TransactionHelper t1q1(QDate(2004, 1, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2q1(QDate(2004, 2, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3q1(QDate(2004, 3, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t1q1(QDate(2004, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2q1(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3q1(QDate(2004, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-  TransactionHelper t1q2(QDate(2004, 4, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2q2(QDate(2004, 5, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3q2(QDate(2004, 6, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t1q2(QDate(2004, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2q2(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3q2(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-  TransactionHelper t1y2(QDate(2005, 1, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2y2(QDate(2005, 5, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3y2(QDate(2005, 9, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t1y2(QDate(2005, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2y2(QDate(2005, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3y2(QDate(2005, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -851,17 +851,17 @@ void PivotTableTest::testColumnType()
 
   // Test days-based reports
 
-  TransactionHelper t1d1(QDate(2004, 7, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2d1(QDate(2004, 7, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3d1(QDate(2004, 7, 4), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t1d1(QDate(2004, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2d1(QDate(2004, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3d1(QDate(2004, 7, 4), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-  TransactionHelper t1d2(QDate(2004, 7, 14), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2d2(QDate(2004, 7, 15), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3d2(QDate(2004, 7, 20), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t1d2(QDate(2004, 7, 14), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2d2(QDate(2004, 7, 15), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3d2(QDate(2004, 7, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-  TransactionHelper t1d3(QDate(2004, 8, 2), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
-  TransactionHelper t2d3(QDate(2004, 8, 3), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3d3(QDate(2004, 8, 4), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t1d3(QDate(2004, 8, 2), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
+  TransactionHelper t2d3(QDate(2004, 8, 3), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
+  TransactionHelper t3d3(QDate(2004, 8, 4), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
   filter.setDateFilter(QDate(2004, 7, 2), QDate(2004, 7, 14));
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -917,14 +917,14 @@ void PivotTableTest::testInvestment()
 
     // Transactions
     //                         Date             Action                                              Shares                 Price   Stock     Asset       Income
-    InvTransactionHelper s1b1(QDate(2004, 2, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-    InvTransactionHelper s1b2(QDate(2004, 3, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString());
-    InvTransactionHelper s1s1(QDate(2004, 4, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString());
-    InvTransactionHelper s1s2(QDate(2004, 5, 1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-    InvTransactionHelper s1r1(QDate(2004, 6, 1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends);
-    InvTransactionHelper s1r2(QDate(2004, 7, 1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(50.00), MyMoneyMoney(80.00), acStock1, QString(), acDividends);
-    InvTransactionHelper s1c1(QDate(2004, 8, 1), MyMoneySplit::ActionDividend,         MyMoneyMoney(10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends);
-    InvTransactionHelper s1c2(QDate(2004, 9, 1), MyMoneySplit::ActionDividend,         MyMoneyMoney(10.00), MyMoneyMoney(120.00), acStock1, acChecking, acDividends);
+    InvTransactionHelper s1b1(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1b2(QDate(2004, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1s1(QDate(2004, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1s2(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
+    InvTransactionHelper s1r1(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend), MyMoneyMoney(50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends);
+    InvTransactionHelper s1r2(QDate(2004, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend), MyMoneyMoney(50.00), MyMoneyMoney(80.00), acStock1, QString(), acDividends);
+    InvTransactionHelper s1c1(QDate(2004, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),         MyMoneyMoney(10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends);
+    InvTransactionHelper s1c2(QDate(2004, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),         MyMoneyMoney(10.00), MyMoneyMoney(120.00), acStock1, acChecking, acDividends);
 
     makeEquityPrice(eqStock1, QDate(2004, 10, 1), MyMoneyMoney(100.00));
 

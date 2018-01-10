@@ -199,7 +199,7 @@ void ObjectInfoTable::constructScheduleTable()
       m_rows += scheduleRow;
 
       //the text matches the main split
-      bool transaction_text = m_config.match(&split);
+      bool transaction_text = m_config.match(split);
 
       if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
         //get the information for all splits
@@ -233,7 +233,7 @@ void ObjectInfoTable::constructScheduleTable()
           }
 
           //add the split only if it matches the text or it matches the main split
-          if (m_config.match(&(*split_it))
+          if (m_config.match((*split_it))
               || transaction_text)
             m_rows += splitRow;
         }

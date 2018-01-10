@@ -1926,7 +1926,7 @@ void KMyMoneyView::fixTransactions_0()
         accounts << split.accountId();
       }
 
-      if (split.action() == MyMoneySplit::ActionInterest) {
+      if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
         if (interestAccounts.contains(split.accountId()) == 0) {
           interestAccounts << split.accountId();
         }
@@ -1942,7 +1942,7 @@ void KMyMoneyView::fixTransactions_0()
 
   // scan the transactions and modify loan transactions
   for (auto& transaction : transactionList) {
-    const char *defaultAction = 0;
+    QString defaultAction;
     QList<MyMoneySplit> splits = transaction.splits();
     QStringList accounts;
 
@@ -1973,14 +1973,14 @@ void KMyMoneyView::fixTransactions_0()
       }
       if (accountCount == 2) {
         if (isLoan)
-          defaultAction = MyMoneySplit::ActionAmortization;
+          defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization);
         else
-          defaultAction = MyMoneySplit::ActionTransfer;
+          defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer);
       } else {
         if (val.isNegative())
-          defaultAction = MyMoneySplit::ActionWithdrawal;
+          defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal);
         else
-          defaultAction = MyMoneySplit::ActionDeposit;
+          defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit);
       }
     }
 
@@ -1991,10 +1991,10 @@ void KMyMoneyView::fixTransactions_0()
       if (acc.accountGroup() == Account::Type::Asset
           || acc.accountGroup() == Account::Type::Liability) {
         if (!val.isPositive()) {
-          defaultAction = MyMoneySplit::ActionWithdrawal;
+          defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal);
           break;
         } else {
-          defaultAction = MyMoneySplit::ActionDeposit;
+          defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit);
           break;
         }
       }
@@ -2009,9 +2009,9 @@ void KMyMoneyView::fixTransactions_0()
       auto acc = file->account((*it_s).accountId());
       MyMoneyMoney val = (*it_s).value();
       if (acc.accountType() == Account::Type::CreditCard) {
-        if (val < 0 && (*it_s).action() != MyMoneySplit::ActionWithdrawal && (*it_s).action() != MyMoneySplit::ActionTransfer)
+        if (val < 0 && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal) && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer))
           needModify = true;
-        if (val >= 0 && (*it_s).action() != MyMoneySplit::ActionDeposit && (*it_s).action() != MyMoneySplit::ActionTransfer)
+        if (val >= 0 && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit) && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer))
           needModify = true;
       }
     }
@@ -2040,9 +2040,9 @@ void KMyMoneyView::fixTransactions_0()
       // if this split references an interest account, the action
       // must be of type ActionInterest
       if (interestAccounts.contains(split.accountId())) {
-        if (split.action() != MyMoneySplit::ActionInterest) {
+        if (split.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
           qDebug() << Q_FUNC_INFO << " " << transaction.id() << " contains an interest account (" << split.accountId() << ") but does not have ActionInterest";
-          split.setAction(MyMoneySplit::ActionInterest);
+          split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
           transaction.modifySplit(split);
           file->modifyTransaction(transaction);
           qDebug("Fixed interest action in %s", qPrintable(transaction.id()));
@@ -2050,7 +2050,7 @@ void KMyMoneyView::fixTransactions_0()
         // if it does not reference an interest account, it must not be
         // of type ActionInterest
       } else {
-        if (split.action() == MyMoneySplit::ActionInterest) {
+        if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
           qDebug() << Q_FUNC_INFO << " " << transaction.id() << " does not contain an interest account so it should not have ActionInterest";
           split.setAction(defaultAction);
           transaction.modifySplit(split);

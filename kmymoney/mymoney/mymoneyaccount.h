@@ -379,7 +379,7 @@ public:
   /**
     * This method adjusts the balance of this account
     * according to the difference contained in the split @p s.
-    * If the s.action() is MyMoneySplit::ActionSplitShares then
+    * If the s.action() is MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares) then
     * the balance will be adjusted accordingly.
     *
     * @param s const reference to MyMoneySplit object containing the

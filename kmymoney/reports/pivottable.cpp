@@ -315,7 +315,7 @@ void PivotTable::init()
 
         // Each split must be further filtered, because if even one split matches,
         // the ENTIRE transaction is returned with all splits (even non-matching ones)
-        if (m_config.includes(splitAccount) && m_config.match(&(*it_split))) {
+        if (m_config.includes(splitAccount) && m_config.match((*it_split))) {
           // reverse sign to match common notation for cash flow direction, only for expense/income splits
           MyMoneyMoney reverse(splitAccount.isIncomeExpense() ? -1 : 1, 1);
 

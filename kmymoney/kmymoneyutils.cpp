@@ -528,19 +528,19 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   }
 
   // determine transaction type
-  if (split.action() == MyMoneySplit::ActionAddShares) {
+  if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
     transactionType = (!split.shares().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::AddShares : eMyMoney::Split::InvestmentTransactionType::RemoveShares;
-  } else if (split.action() == MyMoneySplit::ActionBuyShares) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
     transactionType = (!split.value().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::BuyShares : eMyMoney::Split::InvestmentTransactionType::SellShares;
-  } else if (split.action() == MyMoneySplit::ActionDividend) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::Dividend;
-  } else if (split.action() == MyMoneySplit::ActionReinvestDividend) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::ReinvestDividend;
-  } else if (split.action() == MyMoneySplit::ActionYield) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::Yield;
-  } else if (split.action() == MyMoneySplit::ActionSplitShares) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::SplitShares;
-  } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::InterestIncome;
   } else
     transactionType = eMyMoney::Split::InvestmentTransactionType::BuyShares;

@@ -164,16 +164,16 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
   s1.setValue(value);
   s1.setAccountId(_stockaccountid);
 
-  if (_action == MyMoneySplit::ActionReinvestDividend) {
+  if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
     s1.setShares(_shares);
-    s1.setAction(MyMoneySplit::ActionReinvestDividend);
+    s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend));
 
     MyMoneySplit s2;
     s2.setAccountId(_categoryid);
     s2.setShares(-value);
     s2.setValue(-value);
     addSplit(s2);
-  } else if (_action == MyMoneySplit::ActionDividend || _action == MyMoneySplit::ActionYield) {
+  } else if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend) || _action == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
     s1.setAccountId(_categoryid);
     s1.setShares(-value);
     s1.setValue(-value);
@@ -193,10 +193,10 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
     s3.setShares(value);
     s3.setValue(value);
     addSplit(s3);
-  } else if (_action == MyMoneySplit::ActionBuyShares) {
+  } else if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
     s1.setShares(_shares);
     s1.setValue(value);
-    s1.setAction(MyMoneySplit::ActionBuyShares);
+    s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
 
     MyMoneySplit s3;
     s3.setAccountId(_transferid);
@@ -211,7 +211,7 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
       s2.setShares(_fee);
       addSplit(s2);
     }
-  } else if (_action == MyMoneySplit::ActionSplitShares) {
+  } else if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     s1.setShares(_shares.abs());
     s1.setValue(MyMoneyMoney());
     s1.setPrice(MyMoneyMoney());
@@ -226,7 +226,7 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
   //qDebug() << "updating price...";
 
   // update the price, while we're here
-  if (_action != MyMoneySplit::ActionSplitShares) {
+  if (_action != MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     QString stockid = stockaccount.currencyId();
     QString basecurrencyid = file->baseCurrency().id();
     MyMoneyPrice price = file->price(stockid, basecurrencyid, _date, true);

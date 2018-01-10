@@ -767,8 +767,8 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         s.setBankID(QString());
         // older versions of KMyMoney used to set the action
         // we don't need this anymore
-        if (s.action() != MyMoneySplit::ActionAmortization
-            && s.action() != MyMoneySplit::ActionInterest)  {
+        if (s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)
+            && s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))  {
           s.setAction(QString());
         }
 

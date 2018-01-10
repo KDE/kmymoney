@@ -449,7 +449,7 @@ public:
       sInterest.setAccountId(q->field("interestAccountEdit").toStringList().first());
       sInterest.setValue(MyMoneyMoney::autoCalc);
       sInterest.setShares(sInterest.value());
-      sInterest.setAction(MyMoneySplit::ActionInterest);
+      sInterest.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
     }
 
     // values
@@ -470,8 +470,8 @@ public:
     t.setCommodity(acc.currencyId());
 
     // actions
-    sPayment.setAction(MyMoneySplit::ActionAmortization);
-    sAmortization.setAction(MyMoneySplit::ActionAmortization);
+    sPayment.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
+    sAmortization.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
 
     // payee
     QString payeeId = q->field("payeeEdit").toString();

@@ -97,7 +97,7 @@ public:
   }
 
   inline bool operator()(const MyMoneyTransaction& transaction) {
-    return (! m_filter.match(transaction)) && (m_filter.matchingSplits().count() == 0);
+    return !m_filter.match(transaction);
   }
 
 private:

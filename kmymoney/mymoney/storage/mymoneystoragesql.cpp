@@ -1676,7 +1676,7 @@ QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringList& i
       }
       oldId = id;
     }
-    if (MyMoneySplit::ActionSplitShares == query.value(0).toString())
+    if (MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares) == query.value(0).toString())
       temp *= MyMoneyMoney(query.value(1).toString());
     else
       temp += MyMoneyMoney(query.value(1).toString());

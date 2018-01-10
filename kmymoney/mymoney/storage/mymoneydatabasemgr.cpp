@@ -1137,16 +1137,9 @@ void MyMoneyDatabaseMgr::transactionList(QList<QPair<MyMoneyTransaction, MyMoney
     throw;
   }
 
-
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  QMap<QString, MyMoneyTransaction>::ConstIterator txEnd = transactionList.end();
-
-  for (it_t = transactionList.begin(); it_t != txEnd; ++it_t) {
-    if (filter.match(*it_t)) {
-      foreach (const auto split, filter.matchingSplits())
-        list.append(qMakePair(*it_t, split));
-    }
-  }
+  for (const auto& transaction : transactionList)
+    for (const auto& split : filter.matchingSplits(transaction))
+      list.append(qMakePair(transaction, split));
 }
 
 void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
@@ -1311,7 +1304,7 @@ MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& date) c
     foreach (const MyMoneyTransaction& it_t, list) {
       foreach (const MyMoneySplit& it_s, it_t.splits()) {
         const QString aid = it_s.accountId();
-        if (it_s.action() == MyMoneySplit::ActionSplitShares) {
+        if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
           balances[aid] *= it_s.shares();
         } else {
           balances[aid] += it_s.value(it_t.commodity(), accountList[aid].currencyId());

@@ -242,7 +242,7 @@ void MyMoneySplitTest::testAmortization()
   QCOMPARE(m->isAmortizationSplit(), false);
   testSetFunctions();
   QCOMPARE(m->isAmortizationSplit(), false);
-  m->setAction(MyMoneySplit::ActionAmortization);
+  m->setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
   QCOMPARE(m->isAmortizationSplit(), true);
 }
 
@@ -270,21 +270,21 @@ void MyMoneySplitTest::testSetAction()
 {
   QCOMPARE(m->action().isEmpty(), true);
   m->setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionBuyShares));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::SellShares);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionBuyShares));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::Dividend);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionDividend));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::Yield);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionYield));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::Yield));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::ReinvestDividend);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionReinvestDividend));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionAddShares));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::RemoveShares);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionAddShares));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
   m->setAction(eMyMoney::Split::InvestmentTransactionType::SplitShares);
-  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionSplitShares));
+  QCOMPARE(m->action(), MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
 }
 
 void MyMoneySplitTest::testIsAutoCalc()
@@ -314,7 +314,7 @@ void MyMoneySplitTest::testWriteXML()
   s.setCostCenterId("C000005");
   s.setNumber("124");
   s.setBankID("SPID");
-  s.setAction(MyMoneySplit::ActionDeposit);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
   s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
 
   QDomDocument doc("TEST");
@@ -404,7 +404,7 @@ void MyMoneySplitTest::testReadXML()
     QCOMPARE(s.number(), QLatin1String("124"));
     QCOMPARE(s.bankID(), QLatin1String("SPID"));
     QCOMPARE(s.reconcileFlag(), eMyMoney::Split::State::Reconciled);
-    QCOMPARE(s.action(), QLatin1String(MyMoneySplit::ActionDeposit));
+    QCOMPARE(s.action(), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
     QCOMPARE(s.accountId(), QLatin1String("A000076"));
     QCOMPARE(s.costCenterId(), QLatin1String("C000005"));
     QCOMPARE(s.memo(), QLatin1String("MyMemo"));

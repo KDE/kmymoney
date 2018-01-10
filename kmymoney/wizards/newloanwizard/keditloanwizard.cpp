@@ -207,7 +207,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
       d->m_transaction.addSplit(d->m_split);
     }
 
-    if (it_s.action() == MyMoneySplit::ActionInterest) {
+    if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
       interestAccountId = it_s.accountId();
     }
 
@@ -465,9 +465,9 @@ void KEditLoanWizard::updateEditSummary()
     foreach (const MyMoneySplit& it_s, it.splits()) {
       // we only count those transactions that have an interest
       // and amortization part
-      if (it_s.action() == MyMoneySplit::ActionInterest)
+      if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))
         match |= 0x01;
-      if (it_s.action() == MyMoneySplit::ActionAmortization)
+      if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization))
         match |= 0x02;
     }
     if (match == 0x03)

@@ -202,7 +202,7 @@ MyMoneyAccount MyMoneySeqAccessMgr::account(const QString& id) const
     return d->m_accountList[id];
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown account id '" + id + '\'';
+  const auto msg = QString::fromLatin1("Unknown account id '%1'").arg(id);
   throw MYMONEYEXCEPTION(msg);
 }
 
@@ -897,25 +897,16 @@ void MyMoneySeqAccessMgr::transactionList(QList<MyMoneyTransaction>& list, MyMon
   Q_D(const MyMoneySeqAccessMgr);
   list.clear();
 
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t_end = d->m_transactionList.end();
-
-  for (it_t = d->m_transactionList.begin(); it_t != it_t_end; ++it_t) {
+  for (const auto& transaction : d->m_transactionList) {
     // This code is used now. It adds the transaction to the list for
     // each matching split exactly once. This allows to show information
     // about different splits in the same register view (e.g. search result)
     //
     // I have no idea, if this has some impact on the functionality. So far,
     // I could not see it.  (ipwizard 9/5/2003)
-    if (filter.match(*it_t)) {
-      uint cnt = filter.matchingSplits().count();
-      if (cnt > 1) {
-        for (uint i = 0; i < cnt; ++i)
-          list.append(*it_t);
-      } else {
-        list.append(*it_t);
-      }
-    }
+    const auto cnt = filter.matchingSplitsCount(transaction);
+    for (uint i = 0; i < cnt; ++i)
+      list.append(transaction);
   }
 }
 
@@ -924,15 +915,9 @@ void MyMoneySeqAccessMgr::transactionList(QList< QPair<MyMoneyTransaction, MyMon
   Q_D(const MyMoneySeqAccessMgr);
   list.clear();
 
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t_end = d->m_transactionList.end();
-
-  for (it_t = d->m_transactionList.begin(); it_t != it_t_end; ++it_t) {
-    if (filter.match(*it_t)) {
-      foreach (const auto split, filter.matchingSplits())
-        list.append(qMakePair(*it_t, split));
-    }
-  }
+  for (const auto& transaction : d->m_transactionList)
+    for (const auto& split : filter.matchingSplits(transaction))
+      list.append(qMakePair(transaction, split));
 }
 
 QList<MyMoneyTransaction> MyMoneySeqAccessMgr::transactionList(MyMoneyTransactionFilter& filter) const
@@ -1032,17 +1017,13 @@ MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& date) 
   if (!d->m_accountList.contains(id))
     throw MYMONEYEXCEPTION(QString("Unknown account id '%1'").arg(id));
 
-  if (!date.isValid()) {
-    // the balance of all transactions for this account has
-    // been requested. no need to calculate anything as we
-    // have this number with the account object already.
-    if (d->m_accountList.find(id) != d->m_accountList.end()) {
-      return d->m_accountList[id].balance();
-    }
-    return MyMoneyMoney();
-  }
-
-  return d->calculateBalance(id, date);
+  // the balance of all transactions for this account has
+  // been requested. no need to calculate anything as we
+  // have this number with the account object already.
+  if (!date.isValid())
+    return d->m_accountList[id].balance();
+  else
+    return d->calculateBalance(id, date);
 }
 
 

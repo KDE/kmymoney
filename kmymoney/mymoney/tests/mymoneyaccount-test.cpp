@@ -188,7 +188,7 @@ void MyMoneyAccountTest::testAdjustBalance()
   a.adjustBalance(s, true);
   QVERIFY(a.balance() == MyMoneyMoney(-2, 1));
   s.setShares(MyMoneyMoney(2, 1));
-  s.setAction(MyMoneySplit::ActionSplitShares);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
   a.adjustBalance(s);
   QVERIFY(a.balance() == MyMoneyMoney(-4, 1));
   s.setShares(MyMoneyMoney(4, 1));

@@ -803,7 +803,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     d->assignUniqueBankID(s1, statementTransactionUnderImport);
 
     if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::ReinvestDividend) {
-      s1.setAction(MyMoneySplit::ActionReinvestDividend);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend));
       s1.setShares(statementTransactionUnderImport.m_shares);
 
       if (!statementTransactionUnderImport.m_price.isZero()) {
@@ -843,7 +843,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
-      s2.setAction(MyMoneySplit::ActionDividend);
+      s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend));
       s2.setAccountId(thisaccount.id());
 
       /*  at this point any fees have been taken into account already
@@ -868,7 +868,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
-      s2.setAction(MyMoneySplit::ActionInterestIncome);
+      s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome));
       s2.setAccountId(thisaccount.id());
       transfervalue = statementTransactionUnderImport.m_amount;
 
@@ -884,7 +884,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       } else if ((statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Buy) ||
                  (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Sell)) {
-      s1.setAction(MyMoneySplit::ActionBuyShares);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
       if (!statementTransactionUnderImport.m_price.isZero())  {
         s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else if (!statementTransactionUnderImport.m_shares.isZero()) {
@@ -902,7 +902,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Shrsout)) {
       s1.setValue(MyMoneyMoney());
       s1.setShares(statementTransactionUnderImport.m_shares);
-      s1.setAction(MyMoneySplit::ActionAddShares);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
     } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::None) {
       // User is attempting to import a non-investment transaction into this
       // investment account.  This is not supportable the way KMyMoney is

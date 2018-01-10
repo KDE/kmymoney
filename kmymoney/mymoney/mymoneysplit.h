@@ -46,8 +46,9 @@ class QDate;
 class MyMoneyMoney;
 class MyMoneyTransaction;
 
-namespace eMyMoney { namespace Split { enum class State;
-                                       enum class InvestmentTransactionType; } }
+namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
+namespace eMyMoney { namespace Split { enum class State; } }
+namespace eMyMoney { namespace Split { enum class Action; } }
 
 /**
   * @author Thomas Baumgart
@@ -216,22 +217,7 @@ public:
    */
   bool replaceId(const QString& newId, const QString& oldId);
 
-  static const char ActionCheck[];
-  static const char ActionDeposit[];
-  static const char ActionTransfer[];
-  static const char ActionWithdrawal[];
-  static const char ActionATM[];
-
-  static const char ActionAmortization[];
-  static const char ActionInterest[];
-
-  static const char ActionBuyShares[];  // negative amount is sellShares
-  static const char ActionDividend[];
-  static const char ActionReinvestDividend[];
-  static const char ActionYield[];
-  static const char ActionAddShares[];  // negative amount is removeShares
-  static const char ActionSplitShares[];
-  static const char ActionInterestIncome[];
+  static QString actionName(eMyMoney::Split::Action action);
 };
 
 

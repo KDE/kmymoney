@@ -338,17 +338,17 @@ void MyMoneyTransactionTest::testIsLoanPayment()
   s1 = m->splits()[0];
   s2 = m->splits()[1];
 
-  s1.setAction(MyMoneySplit::ActionAmortization);
+  s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
   m->modifySplit(s1);
   QVERIFY(m->isLoanPayment() == true);
-  s1.setAction(MyMoneySplit::ActionWithdrawal);
+  s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   m->modifySplit(s1);
   QVERIFY(m->isLoanPayment() == false);
 
-  s2.setAction(MyMoneySplit::ActionAmortization);
+  s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
   m->modifySplit(s2);
   QVERIFY(m->isLoanPayment() == true);
-  s2.setAction(MyMoneySplit::ActionWithdrawal);
+  s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   m->modifySplit(s2);
   QVERIFY(m->isLoanPayment() == false);
 }
@@ -426,7 +426,7 @@ void MyMoneyTransactionTest::testWriteXML()
   s.setTagIdList(tagIdList);
   s.setShares(MyMoneyMoney(96379, 100));
   s.setValue(MyMoneyMoney(96379, 100));
-  s.setAction(MyMoneySplit::ActionWithdrawal);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   s.setAccountId("A000076");
   s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   s.setBankID("SPID");
@@ -626,7 +626,7 @@ void MyMoneyTransactionTest::testHasReferenceTo()
   s.setTagIdList(tagIdList);
   s.setShares(MyMoneyMoney(96379, 100));
   s.setValue(MyMoneyMoney(96379, 100));
-  s.setAction(MyMoneySplit::ActionWithdrawal);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   s.setAccountId("A000076");
   s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t.addSplit(s);
@@ -660,7 +660,7 @@ void MyMoneyTransactionTest::testIsStockSplit()
   m->removeSplits();
   MyMoneySplit s;
   s.setShares(MyMoneyMoney(1, 2));
-  s.setAction(MyMoneySplit::ActionSplitShares);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
   s.setAccountId("A0001");
   m->addSplit(s);
   QVERIFY(m->isStockSplit() == true);
