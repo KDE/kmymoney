@@ -142,7 +142,7 @@
         </property>
         <property name="filter">
          <string>*.css|CSS files
-*|All files</string>
+*|All files (*)</string>
         </property>
         <property name="kcfg_property" stdset="0">
          <cstring>text</cstring>

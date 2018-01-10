@@ -61,7 +61,7 @@ namespace NewUserWizard
       folder = QDir::homePath();
     d->ui->m_dataFileEdit->setStartDir(QUrl::fromLocalFile(folder));
     d->ui->m_dataFileEdit->setUrl(QUrl::fromLocalFile(folder + QLatin1Char('/') + user.loginName() + QLatin1String(".kmy")));
-    d->ui->m_dataFileEdit->setFilter(i18n("*.kmy *.xml|KMyMoney files\n*|All files"));
+    d->ui->m_dataFileEdit->setFilter(i18n("*.kmy *.xml|KMyMoney files (*.kmy *.xml);;*|All files (*)"));
     d->ui->m_dataFileEdit->setMode(KFile::File);
   }
 
