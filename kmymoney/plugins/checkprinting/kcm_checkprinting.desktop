@@ -2,6 +2,7 @@
 Name=Configure the check printing plugin
 Name[ca]=Configura el connector d'impressió de xecs
 Name[ca@valencia]=Configura el connector d'impressió de xecs
+Name[fr]=Configurer le module externe pour l'impression de chèques
 Name[gl]=Complemento para configurar a impresión de cheques
 Name[it]=Configura l'estensione di stampa degli assegni
 Name[nl]=De plugin voor printen van een cheque configureren
@@ -18,6 +19,7 @@ Categories=Qt;KDE;kmymoney;
 Keywords=checkprinting;kmymoney;
 Keywords[ca]=impressió de xec;kmymoney;
 Keywords[ca@valencia]=impressió de xec;kmymoney;
+Keywords[fr]=checkprinting;kmymoney;
 Keywords[gl]=checkprinting;kmymoney;impresión;cheque;
 Keywords[it]=stampa assegni;kmymoney;
 Keywords[nl]=printen van cheque;kmymoney;
