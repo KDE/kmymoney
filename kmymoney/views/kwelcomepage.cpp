@@ -42,6 +42,17 @@ KWelcomePage::~KWelcomePage()
 {
 }
 
+bool KWelcomePage::isGroupHeader(const QString& item)
+{
+  return item.startsWith(QLatin1Char('*'));
+}
+
+bool KWelcomePage::isGroupItem(const QString& item)
+{
+  return item.startsWith(QLatin1Char('-'));
+}
+
+
 const QString KWelcomePage::welcomePage()
 {
   QString header;
@@ -170,17 +181,32 @@ const QString KWelcomePage::whatsNewPage()
   body += QString("<p>" + i18n("We are pleased to announce a major step forward for what has been described as \"the BEST personal finance manager for FREE users\".") + "</p>");
   body += QString("<h4>" + i18n("What's new in this version:") + "</h4>");
 
-  body += QString("<ul>");
-
   QStringList featuresList = KWelcomePage::featuresList();
 
+  bool inGroup = false;
   QStringList::ConstIterator feature_it;
   for (feature_it = featuresList.constBegin(); feature_it != featuresList.constEnd(); ++feature_it) {
-    body += QString("<li>");
-    body += *feature_it;
-    body += QString("</li>");
+    if (isGroupHeader(*feature_it)) {
+      if (inGroup) {
+        body += QString("</ul>");
+      }
+      body += QString("<b>");
+      body += (*feature_it).midRef(2);
+      body += QString("</b><br/>");
+      body += QString("<ul>");
+      inGroup = true;
+
+    } else if(isGroupItem(*feature_it)) {
+      body += QString("<li>");
+      body += (*feature_it).midRef(2);
+      body += QString("</li>");
+    } else {
+      body += *feature_it;
+    }
   }
-  body += QString("</ul>");
+  if (inGroup) {
+    body += QString("</ul>");
+  }
 
   body += QString("<p>" + i18n("Let us know what you think. We hope that you enjoy using the application.") + "</p>");
   body += QString("<p>" + i18n("Please let us know about any abnormal behavior in the program by selecting <a href=\"/action?id=help_report_bug\">\"Report bug...\"</a> from the help menu or by sending an e-mail to the developers mailing list."));
@@ -208,21 +234,28 @@ const QStringList KWelcomePage::featuresList()
 {
   QStringList featuresList;
 
-  featuresList.append(i18n("Added support for online SEPA transactions"));
-  featuresList.append(i18n("A plugin to import data using Weboob was added"));
-  featuresList.append(i18n("Improved payee matching when importing transactions"));
-  featuresList.append(i18n("When an account cannot be closed, a tooltip explains the reason"));
-  featuresList.append(i18n("Transaction tags were added"));
-  featuresList.append(i18n("Proper input methods support was added"));
-  featuresList.append(i18n("Improved the transaction form"));
-  featuresList.append(i18n("Added a frozen column to improve visualizing forecast details"));
-  featuresList.append(i18n("Improved multiple records management actions (payees, transactions)"));
-  featuresList.append(i18n("Better performance of the user interface"));
-  featuresList.append(i18n("Homepage can show accounts online banking status"));
-  featuresList.append(i18n("Improved the icon theme"));
-  featuresList.append(i18n("CSV importer was improved"));
-  featuresList.append(i18n("CSV exporter added"));
-  featuresList.append(i18n("OFX plugin now allows custom application version"));
+  featuresList.append(i18n("* General changes"));
+  featuresList.append(i18n("- Port to KDE frameworks and Qt5"));
+
+  featuresList.append(i18n("* User Interface changes"));
+  featuresList.append(i18n("- Show more tooltips why features are not available"));
+  featuresList.append(i18n("- Improved compatibility with dark color schemes"));
+  featuresList.append(i18n("- Fast switching of main views via Ctrl + number key"));
+  featuresList.append(i18n("- Improved keyboard navigation"));
+  featuresList.append(i18n("- View columns are user selectable"));
+  featuresList.append(i18n("- Use QWebEngine in favor of KHTML when available"));
+
+  featuresList.append(i18n("* Im-/Exporter"));
+  featuresList.append(i18n("- Added support for Weboob"));
+  featuresList.append(i18n("- Improved CSV importer"));
+  featuresList.append(i18n("- Added CSV exporter"));
+  featuresList.append(i18n("- Improved payee matching when importing transactions"));
+
+  featuresList.append(i18n("* Online services"));
+  featuresList.append(i18n("- Updated list of application versions for OFX direct import"));
+  featuresList.append(i18n("- Get rid of Yahoo as price source"));
+  featuresList.append(i18n("- Supporting OFX client uid required by some banks"));
+  featuresList.append(i18n("- Support price download by ISIN"));
 
   return featuresList;
 }
