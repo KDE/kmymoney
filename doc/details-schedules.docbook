@@ -58,7 +58,7 @@
 
 <para>
   There are four different types of schedules in the current version of
-  &kappname;:
+  &kmymoney;:
 </para>
 
 <itemizedlist>
@@ -138,7 +138,7 @@
 	
 <para>
   To create a new schedule click on the button. For Bill, Deposit, and Transfer
-  schedules, &kappname; will display the new schedule dialog. Loan schedules are
+  schedules, &kmymoney; will display the new schedule dialog. Loan schedules are
   handled differently, and are described in the section on Loans.
 </para>
 </sect1>
@@ -200,20 +200,20 @@
 </sect2>
 
 <sect2>
-<title>Letting &kappname; enter the transaction into the register</title>
+<title>Letting &kmymoney; enter the transaction into the register</title>
 
 <para>
-  To let &kappname; automatically enter the transaction for you when needed,
+  To let &kmymoney; automatically enter the transaction for you when needed,
   make sure that the check box labeled <guilabel>Enter this schedule into the
   ledger automatically when it is due</guilabel> is checked.  Otherwise, when
-  the transaction is due to be entered, &kappname; will open a dialog box asking
+  the transaction is due to be entered, &kmymoney; will open a dialog box asking
   you to confirm that you want it to be entered.  This behavior is configurable,
   and more information can be found in the Settings section.
 </para>
 </sect2>
 
 <sect2>
-<title>Letting &kappname; know when the schedule will finish</title>
+<title>Letting &kmymoney; know when the schedule will finish</title>
 
 <para>
   If you know how many transactions are left or when they are due to finish,
@@ -353,12 +353,12 @@
   <listitem><para>Manually via the popup window in the calendar view</para></listitem>
   <listitem>
     <para>
-      &kappname; can enter them with or without your interaction upon startup
+      &kmymoney; can enter them with or without your interaction upon startup
     </para>
   </listitem>
   <listitem>
     <para>
-      &kappname; can enter them with your interaction during online banking or
+      &kmymoney; can enter them with your interaction during online banking or
       import of an electronic bank statement
     </para>
   </listitem>
@@ -421,23 +421,23 @@
 </sect2>
 
 <sect2>
-<title>Letting &kappname; enter the scheduled transaction(s) for you</title>
+<title>Letting &kmymoney; enter the scheduled transaction(s) for you</title>
 
 <para>	
-  Alternatively, &kappname; can check which schedules are due upon startup and
+  Alternatively, &kmymoney; can check which schedules are due upon startup and
   enter them for you if the appropriate option was checked when setting up the
   schedule.
 </para>
 
 <para>
-  If the option was not checked then &kappname; will open the previously
-  mentioned dialog and you can follow the steps mentioned there.  &kappname;
+  If the option was not checked then &kmymoney; will open the previously
+  mentioned dialog and you can follow the steps mentioned there.  &kmymoney;
   will also open the dialog if the amount is an estimate so you can enter the
   real amount.
 </para>
 
 <para>
-  You can also opt to have &kappname; not check which transactions are scheduled
+  You can also opt to have &kmymoney; not check which transactions are scheduled
   on startup by deselecting the option in the Settings dialog and any overdue
   transaction or transactions due 'today' will be shown in the Home view for you
   to enter manually.

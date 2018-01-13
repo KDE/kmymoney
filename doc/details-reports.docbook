@@ -200,7 +200,7 @@
   <listitem><para>Export: Reports can be saved in &HTML; or CSV
     format.</para></listitem>
   <listitem><para>Delete: Customized reports can be deleted.  The default
-    reports that ship with &kappname; cannot be deleted.</para></listitem>
+    reports that ship with &kmymoney; cannot be deleted.</para></listitem>
   <listitem><para>Close: Close the current report.</para></listitem>
 </itemizedlist>
 </sect1>
@@ -375,7 +375,7 @@
   Care should be taken to limit the amount of data you choose to display on a
   chart. If you are not careful, using the same configuration for both textual
   and graphical forms means it's possible to configure a chart to be visually
-  cluttered, unappealing, and uninformative. &kappname; will not force you to
+  cluttered, unappealing, and uninformative. &kmymoney; will not force you to
   keep your charts readable and useful!
 </para>
 

@@ -14,7 +14,7 @@
 <title>Understanding Loans</title>
 
 <para>
-  This section provides an overview of how &kappname; handles loans.  Loan
+  This section provides an overview of how &kmymoney; handles loans.  Loan
   regulations and customs vary from locality to locality. For detailed
   explanations of loans, as well as information on local regulations and
   customs, please see other resources.
@@ -22,12 +22,12 @@
 
 <para>
   A loan is an agreement under which a borrower receives money from a lender and
-  agrees to repay the money at some future date. &kappname; allows you to track
+  agrees to repay the money at some future date. &kmymoney; allows you to track
   loans by which you, as borrower, borrow money from or, as lender, lend money
   to someone else. Most individuals borrow more than they lend, so you will
   generally be the borrower and a finance company will generally be the
   lender. If you lend money to a family member or a friend, you can use
-  &kappname; to keep track of this loan as well.
+  &kmymoney; to keep track of this loan as well.
 </para>
 
 <para>
@@ -62,7 +62,7 @@
   The repayment of the principal to the lender is generally not done as a lump
   sum. Instead, a series of repayments are made, each representing a portion of
   the principal. Such repayments are sometimes known as <quote>amortization
-  payments</quote> and in &kappname; <quote>Amortization</quote> is defined as
+  payments</quote> and in &kmymoney; <quote>Amortization</quote> is defined as
   the act of paying off a loan in installments.
 </para>
 </formalpara>
@@ -70,7 +70,7 @@
 <formalpara><title>Payment Frequency</title>
 <para>
   The frequency of installments is referred to as <quote>Payment
-  Frequency</quote> in &kappname;. Examples of period might be weekly,
+  Frequency</quote> in &kmymoney;. Examples of period might be weekly,
   bi-weekly, monthly, quarterly, or yearly. In the US, periodic payments are
   most commonly made every month, therefore the loan's period is one month.
 </para>
@@ -147,7 +147,7 @@
   months or 5 years.  The term of the loan could also be described as 60
   payments since there will be one payment per month for 5 years. The repayment
   frequency is one month since periodic repayments will be made once a
-  month. The periodic repayment, which is calculated by &kappname;, would be
+  month. The periodic repayment, which is calculated by &kmymoney;, would be
   $477.53.
 </para>
 
@@ -163,7 +163,7 @@
 <title>Creating a New Loan</title>
 
 <para>
-  In &kappname;, a loan is a type of account. Therefore, to create a new loan,
+  In &kmymoney;, a loan is a type of account. Therefore, to create a new loan,
   you begin by selecting <menuchoice><guimenu>Account</guimenu><guimenuitem>New
   Account</guimenuitem></menuchoice>. Continue by answering the questions that
   the wizard poses to you.

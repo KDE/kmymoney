@@ -113,7 +113,7 @@
 <title>Overview</title>
 
 <para>
- &kappname; has the ability to automatically assign the proper payee to imported
+ &kmymoney; has the ability to automatically assign the proper payee to imported
  transactions.  This can be handy when importing transactions from your bank,
  when the payee name has extra unnecessary characters, or worse, if the payee
  names change.
@@ -194,7 +194,7 @@
   <quote>SUNTRUST BANK MAPLE VALLEY,GA</quote> or even
   <quote>MORGENSUNTRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
   <note><para> If a transaction payee matches more than one Match Key, the
-  behavior is undefined.  &kappname; will arbitrarily pick one of the matching
+  behavior is undefined.  &kmymoney; will arbitrarily pick one of the matching
   payees.  </para></note>
 </para>
 </sect3>

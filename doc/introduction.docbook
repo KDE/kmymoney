@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2018-01-13</date>
+  <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
 
 <title>Introduction</title>
 
 <sect1 id="what-is-kmymoney">
-<title>What is &kappname;?</title>
+<title>What is &kmymoney;?</title>
 
 <para>
-  Put simply, &kappname; is a personal finance manager by &kde;.  It enables
+  Put simply, &kmymoney; is a personal finance manager by &kde;.  It enables
   users of open source operating systems and applications to keep careful track
   of their personal finances by providing a broad array of financial features
   and tools.
@@ -25,9 +25,9 @@
   <listitem>
     <formalpara><title>Feature Parity</title>
       <para>
-        &kappname; intends to provide all important features found in the
+        &kmymoney; intends to provide all important features found in the
         commercially available personal finance managers.  Although every release
-        of &kappname; gets closer and closer to that goal, there is still work to
+        of &kmymoney; gets closer and closer to that goal, there is still work to
 	be done.
       </para>
     </formalpara>
@@ -36,7 +36,7 @@
   <listitem>
     <formalpara><title>Ease of Use.</title>
       <para>
-        &kappname; strives to be the easiest open source personal finance
+        &kmymoney; strives to be the easiest open source personal finance
         manager to use, especially for the non-technical user.
       </para>
     </formalpara>
@@ -45,7 +45,7 @@
   <listitem>
     <formalpara><title>Correctness.</title>
       <para>
-        Based on tried and tested double entry accounting principles &kappname;
+        Based on tried and tested double entry accounting principles &kmymoney;
         ensures that your finances are kept in correct order.
       </para>
     </formalpara>
@@ -55,20 +55,20 @@
 </sect1>
 
 <sect1 id="what-kmymoney-is-not">
-<title>What &kappname; is not</title>
+<title>What &kmymoney; is not</title>
 
 <para>
-  As a personal finance manager, &kappname; is not intended to scale to the
+  As a personal finance manager, &kmymoney; is not intended to scale to the
   needs of an average business.  A small business might find sufficient
-  functionality to use &kappname;, but features such as accounts-receivable and
+  functionality to use &kmymoney;, but features such as accounts-receivable and
   accounts-payable are not directly supported.  However, it would be possible to
   create client, supplier, document, or other features through plugins.
 </para>
 
 <para>
-  &kappname; is not simply a clone of the commercially available personal
-  finance programs. Although many of the features present in &kappname; can be
-  found in other similar applications, &kappname; strives to present an
+  &kmymoney; is not simply a clone of the commercially available personal
+  finance programs. Although many of the features present in &kmymoney; can be
+  found in other similar applications, &kmymoney; strives to present an
   individual and unique view of your finances.
 </para>
 

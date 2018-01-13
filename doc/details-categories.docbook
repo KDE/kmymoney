@@ -81,9 +81,9 @@
   category to a different parent.
 -->
   You can change the parent category by clicking on another category in this
-  view of the category hierarchy.  In an earlier version of &kappname; it was possible to change the parent of
+  view of the category hierarchy.  In an earlier version of &kmymoney; it was possible to change the parent of
   a category by dragging and dropping.  This functionality will return in a future version, but possibly not
-  until the conversion of &kappname; to &kde; Frameworks.
+  until the conversion of &kmymoney; to &kde; Frameworks.
 </para>
 
 <para>
@@ -107,7 +107,7 @@
 </para>
  
 <para>
-  Categories can be assigned a VAT category, which allows &kappname; to split a
+  Categories can be assigned a VAT category, which allows &kmymoney; to split a
   transaction for a category into two parts, one for the category and one for
   the VAT. Depending on the setting of the gross/net amount switch, the amount
   you enter for the transaction is the gross or net amount.
@@ -124,7 +124,7 @@
 <para>
   When I buy goods, I enter them into a transaction. Let's assume I have
   selected the gross amount entry method, once I enter the category and amount,
-  &kappname; will recognize that there's a VAT assignment and calculate the VAT
+  &kmymoney; will recognize that there's a VAT assignment and calculate the VAT
   part, create a second split with the VAT account and VAT amount and reduce the
   category amount.
 </para>

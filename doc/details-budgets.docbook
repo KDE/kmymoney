@@ -19,7 +19,7 @@
 </para>
 
 <para>
-  The Budget facility of &kappname; allows you to create annual budgets.  More
+  The Budget facility of &kmymoney; allows you to create annual budgets.  More
   than one Budget can be created for any year. You set monthly Budget values
   against any Income or Expense categories that you have defined. The values can
   be set in three ways, depending on the Period:
@@ -47,7 +47,7 @@
 </variablelist>
 
 <para>
-  &kappname; provides a number of reports which compare actual income
+  &kmymoney; provides a number of reports which compare actual income
   and expenses against the entered Budgets.  These are described in
   more detail in 
   <link linkend="budget.details.reports">another section</link>.
@@ -59,7 +59,7 @@
 
 <para>
   You can access your budgets by clicking the appropriate icon in the navigation
-  pane at the left hand side of your &kappname; window.
+  pane at the left hand side of your &kmymoney; window.
 </para>
 
 <para>
@@ -78,7 +78,7 @@
 
 <para>
   This section of the Budgets window displays the list of Budgets
-  contained in the current &kappname; file. If no Budget has yet been
+  contained in the current &kmymoney; file. If no Budget has yet been
   created the list will be empty.  The list of Budgets has two
   columns:
 </para>
@@ -97,7 +97,7 @@
       <para>Fiscal year of the Budget.  Note that the starting month
         and day of the fiscal year can be specified in
         the <link linkend="details.settings.general.global">Configure
-        &kappname; dialog.</link></para>
+        &kmymoney; dialog.</link></para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -107,7 +107,7 @@
   different Budget you can click on the Budget in the list.  Alternatively, when
   the list has focus, you can select a different Budget using the up and down
   keys. If you have made changes to a Budget and then select a different budget
-  &kappname; will ask you whether you want to save or discard the changes.
+  &kmymoney; will ask you whether you want to save or discard the changes.
 </para>
 
 <para>
@@ -209,7 +209,7 @@
   <varlistentry>
     <term>Budget based on forecast</term>
     <listitem>
-      <para>Fills in budget amounts based on data from &kappname;'s
+      <para>Fills in budget amounts based on data from &kmymoney;'s
 	Forecast values.  See the section on
 	<link linkend="details.forecast.define">Forecasts</link> for
 	more information.
@@ -224,8 +224,8 @@
 
 <para>
   The Accounts List displays the list of Income and Expense Categories.
-  (Remember, within &kappname;, categories are treated as a special type of
-  account.)  As in other places in &kappname;, the list is organized in a tree
+  (Remember, within &kmymoney;, categories are treated as a special type of
+  account.)  As in other places in &kmymoney;, the list is organized in a tree
   structure. The list can be expanded or collapsed to show or hide Subcategories
   within a Category. The Accounts List has a number of columns:
 </para>
@@ -404,7 +404,7 @@
 
       <para>
         If a value is or values are already specified and the Period is changed
-        &kappname; will ask whether to use the current total yearly value to
+        &kmymoney; will ask whether to use the current total yearly value to
         assign the new values.
       </para>
     </listitem>
@@ -418,7 +418,7 @@
 <para>
   For performance reasons, changes made to a Budget are not saved
   immediately.  Instead, they must first be stored using the Update
-  button and then permanently saved using the &kappname; Save.
+  button and then permanently saved using the &kmymoney; Save.
 </para>
 
 <para>
@@ -428,9 +428,9 @@
 </para>
 
 <para>
-  The &kappname; Save only saves changes that have been stored using the Update
+  The &kmymoney; Save only saves changes that have been stored using the Update
   button. Thus, if you have modified a Budget but not yet stored the changes
-  &kappname; Save will not affect the modified Budget and the Update and Revert
+  &kmymoney; Save will not affect the modified Budget and the Update and Revert
   buttons remain enabled.
 </para>
 
@@ -440,8 +440,8 @@
 </para>
 
 <para>
-  Changes stored using Update but not yet saved using &kappname; Save can only
-  be reverted by reloading the &kappname; file.
+  Changes stored using Update but not yet saved using &kmymoney; Save can only
+  be reverted by reloading the &kmymoney; file.
 </para>
 </sect2>
 </sect1>
@@ -450,7 +450,7 @@
 <title>Budget Reports</title>
 
 <para>
-  &kappname; provides a number of reports to compare actual income and expenses
+  &kmymoney; provides a number of reports to compare actual income and expenses
   against a Budget. These are listed in Reports under "Budgeting". There are two
   types of Budget Reports:
 </para>

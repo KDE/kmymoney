@@ -8,7 +8,7 @@
 <title>What's new in this release</title>
 
 <para>
-  As with every release, the &kappname; development team has been working hard
+  As with every release, the &kmymoney; development team has been working hard
   to make this release better and easier to use in every way. We have also made
   quite a few improvements. We are confident you will like what you see.
 </para>
@@ -39,7 +39,7 @@
 
   <listitem>
     <para>
-      Proper input methods support was added. &kappname; can now be safely used with languages that need input methods for easier use.
+      Proper input methods support was added. &kmymoney; can now be safely used with languages that need input methods for easier use.
     </para>
   </listitem>
 

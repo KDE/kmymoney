@@ -96,7 +96,7 @@
 <para>
   Only the name is required in the New Institution Dialog, all other fields are
   optional.  As with the personal information dialog, this data is not currently
-  used by &kappname;, but will be required by future releases for certain
+  used by &kmymoney;, but will be required by future releases for certain
   features.  In particular, the Routing Number and the <acronym><ulink
   url="http://en.wikipedia.org/wiki/ISO_9362">BIC (Bank Identifier
   Code)</ulink></acronym> will be required for online banking.

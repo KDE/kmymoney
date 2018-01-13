@@ -39,13 +39,13 @@
 
 <para>
   In the Icon view, the Asset and Liability accounts are shown with icons
-  indicating the account type.  &kappname; initially places the icons
+  indicating the account type.  &kmymoney; initially places the icons
   alphabetically, but you can move the icons to any position you want, just by
   dragging the icon with the mouse.  Note, however, that just moving an icon
-  does not currently trigger &kappname; to think that any data has been changed.
+  does not currently trigger &kmymoney; to think that any data has been changed.
   This means that you need to make some other change, such as editing an account
   or a transaction and saying OK (even without actually changing any data) so
-  &kappname; allows you to save the file.  The saved file will include the new
+  &kmymoney; allows you to save the file.  The saved file will include the new
   icon positions.
 </para>
 </sect1>
@@ -110,7 +110,7 @@
   The Account Number and the <acronym><ulink
   url="http://en.wikipedia.org/wiki/International_Bank_Account_Number">IBAN
   (International Bank Account Number)</ulink></acronym> are not currently used
-  by &kappname;.  These fields may be left blank and filled in at a later time;
+  by &kmymoney;.  These fields may be left blank and filled in at a later time;
   they are only required for online banking.
 </para>
 
@@ -191,7 +191,7 @@
     <listitem>
       <para>
         An account to manage a loan for money either borrowed or lent.  With a
-        Loan account &kappname; automatically calculates interest payments to
+        Loan account &kmymoney; automatically calculates interest payments to
         help you track the remaining principal on the loan.  Loans with no
         interest might use the plain Asset or Liability type below, depending on
         whether the money is lent or borrowed.
@@ -246,7 +246,7 @@
 
 <para>
   Selecting the <emphasis>Preferred Account</emphasis> check box will allow
-  preferred access in some dialogs and views of &kappname;.
+  preferred access in some dialogs and views of &kmymoney;.
 </para>
 
 <para>
@@ -258,7 +258,7 @@
 <title>Credit Card Accounts</title>
 
 <para>
-  When creating a Credit Card account, you can optionally have &kappname; create
+  When creating a Credit Card account, you can optionally have &kmymoney; create
   a <link linkend="details.schedules">scheduled transaction</link> for you.
 </para>
 
@@ -315,8 +315,8 @@
 
 <para>
   Loan accounts are special accounts used to help you manage Loans with interest
-  and scheduled repayments.  By providing &kappname; with information about the
-  loan, &kappname; can help you track interest payments and the remaining
+  and scheduled repayments.  By providing &kmymoney; with information about the
+  loan, &kmymoney; can help you track interest payments and the remaining
   principal of the loan.
 </para>
 
@@ -346,7 +346,7 @@
 	
 <para>
   Next, select the payee or payer of the loan.  As always, if the name doesn't
-  yet exist in the Payees list, enter it here and &kappname; will create it for
+  yet exist in the Payees list, enter it here and &kmymoney; will create it for
   you.
 </para>
 
@@ -374,7 +374,7 @@
   Finally, enter information about how the interest rate varies.  If the loan is
   fixed-rate there is nothing to do.  If the rate varies, select Variable in
   "Type of interest rate" and then enter the interval between interest rate
-  changes and the date the first change of interest rate is due: &kappname; will
+  changes and the date the first change of interest rate is due: &kmymoney; will
   ask you to update the interest rate when that date arrives.
 </para>
 	
@@ -460,17 +460,17 @@
   you have entered.  You must have entered either all or all but one of the
   values listed above.  If you omit two or more values the button is disabled
   because it is not possible to check that the entered values are consistent: in
-  that case you will not be able to use the Loan account facility in &kappname;
+  that case you will not be able to use the Loan account facility in &kmymoney;
   and will instead have to use a Liability or Asset account to track the loan
   manually.
 </para>
 	
 <para>
-  If you omit one value &kappname; will try to calculate it for you.  If you
-  have entered all values &kappname; will check the values are consistent.
-  &kappname; will not adjust entered values other than the "Balloon payment",
+  If you omit one value &kmymoney; will try to calculate it for you.  If you
+  have entered all values &kmymoney; will check the values are consistent.
+  &kmymoney; will not adjust entered values other than the "Balloon payment",
   which it may adjust slightly to deal with rounding.  If the values are
-  inconsistent or &kappname; cannot calculate the omitted value &kappname; will
+  inconsistent or &kmymoney; cannot calculate the omitted value &kmymoney; will
   let you know so that you can correct any errors and repeat the calculation.
 </para>
 	
@@ -520,7 +520,7 @@
 </para>
 	  
 <para>
-  &kappname; will create a <link linkend="details.schedules">scheduled
+  &kmymoney; will create a <link linkend="details.schedules">scheduled
   transaction</link> for your loan.  The Schedule page is where you enter the
   remaining details needed to create the schedule.
 </para>
@@ -550,7 +550,7 @@
 </para>
 
 <para>
-  Optionally, &kappname; can create a transaction representing what was received
+  Optionally, &kmymoney; can create a transaction representing what was received
   or paid when the loan was created.
 </para>
 	
@@ -566,7 +566,7 @@
 	
 <para>
   If you re-financed an existing Loan check the "Refinance existing loan"
-  check box, select the Loan account and &kappname; will create a transfer
+  check box, select the Loan account and &kmymoney; will create a transfer
   transaction paying off the existing loan.
 </para>
 	
@@ -717,7 +717,7 @@
 <formalpara><title>Limits</title>
 <para>
   This tab is only present for asset and liability accounts.  If you
-  enter amounts in the available fields, &kappname; will warn you when
+  enter amounts in the available fields, &kmymoney; will warn you when
   the account balance reaches those values.
 </para>
 </formalpara>
@@ -749,7 +749,7 @@
 <listitem>
 <para>
   <emphasis>OFX Details</emphasis> Here you can adjust certain details
-  &kappname; uses when it establishes an OFX connection with the
+  &kmymoney; uses when it establishes an OFX connection with the
   institution.  This should only be necessary if you get certain
   errors when you first set up the online account, or perhaps if your
   institution changes its OFX server software.
@@ -758,7 +758,7 @@
 
 <listitem>
 <para>
-  <emphasis>Import Details</emphasis> Here you can tell &kappname;
+  <emphasis>Import Details</emphasis> Here you can tell &kmymoney;
  what to use as the start date for the import.  In addition, starting
  with version 4.6, you can choose whether the payee's name is based
  on the PAYEEID, NAME, or MEMO field of the imported transaction.
@@ -780,7 +780,7 @@
 <para>
   If you are unable to delete an account which looks like it has no transactions
   in it, check your filter. See <menuchoice> <guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kappname;</guimenuitem>
+  <guimenuitem>Configure &kmymoney;</guimenuitem>
   <guimenuitem>General</guimenuitem> <guimenuitem>Filter</guimenuitem>
   </menuchoice>. Clear all filters. Set the start date to 1.1.1900 or so.
 </para>
@@ -788,7 +788,7 @@
 <para>
   There may be transactions in your ledger that are not shown, for example, if
   you have inadvertently typed in the wrong year when making an entry so that an
-  entry remains outside the opening date of &kappname;. This appears beneath the
+  entry remains outside the opening date of &kmymoney;. This appears beneath the
   ledger page as remaining funds.
 </para>
 </sect1>

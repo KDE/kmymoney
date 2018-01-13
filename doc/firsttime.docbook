@@ -8,13 +8,13 @@
   <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
-<title>Using &kappname; for the first time</title>
+<title>Using &kmymoney; for the first time</title>
 
 <sect1 id="firstime-1">
-<title>Running &kappname; for the first time</title>
+<title>Running &kmymoney; for the first time</title>
 
 <para>
-  Once &kappname; has fully loaded two windows will be opened. The top window,
+  Once &kmymoney; has fully loaded two windows will be opened. The top window,
   'Tip of the Day' offers one of a series of important or useful pieces of
   information about the application.
   <screenshot>
@@ -38,14 +38,14 @@
 
 <para>
   Once you have read the tips the window can be closed; it will re-open each
-  time &kappname; is started.  To stop this default behavior, uncheck the
+  time &kmymoney; is started.  To stop this default behavior, uncheck the
   appropriate option on the Tip of the Day window.
 </para>
 
 <note>
   <para>
     Tips can be read at anytime by selecting <guimenuitem>Show tip of the
-    day</guimenuitem> from the <guimenu>Help</guimenu> menu within &kappname;.
+    day</guimenuitem> from the <guimenu>Help</guimenu> menu within &kmymoney;.
   </para>
 </note>
 
@@ -80,7 +80,7 @@
 </para>
 
 <para>
-  The &kappname; main window consists of four major parts
+  The &kmymoney; main window consists of four major parts
 </para>
 
 <itemizedlist>
@@ -91,9 +91,9 @@
 </itemizedlist>
 
 <para>
-  The menu and toolbars provide access to the features of &kappname; and allow
+  The menu and toolbars provide access to the features of &kmymoney; and allow
   you to <link linkend="firsttime.3">Create</link> files or configure how
-  &kappname; operates.
+  &kmymoney; operates.
 </para>
 
 <para>
@@ -222,7 +222,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Payees: All Payees used by &kappname;.
+      Payees: All Payees used by &kmymoney;.
     </para>
   </listitem>
 
@@ -331,13 +331,13 @@
 <title>Creating a new file</title>
 
 <para>
-  &kappname; keeps all the data about your finances in a file.  As was stated in
+  &kmymoney; keeps all the data about your finances in a file.  As was stated in
   <link linkend="makingmostof.basicaccounting.personalaccounts">Defining the
   accounts (personal records)</link>, you can keep more than one set of
   accounts, but the data for each will be kept in a separate file, and
-  &kappname; can only have one file open at a time.  See the chapter on <link
+  &kmymoney; can only have one file open at a time.  See the chapter on <link
   linkend="details.formats">File Formats</link> for more details about
-  &kappname;'s data files.
+  &kmymoney;'s data files.
 </para>
 
 <para>
@@ -349,7 +349,7 @@
 </para>
 
 <para>
-  &kappname; will then open the <quote>New File Setup Wizard</quote> which will
+  &kmymoney; will then open the <quote>New File Setup Wizard</quote> which will
   guide you through the process of creating the file.
 </para>
 
@@ -368,10 +368,10 @@
 </para>
 
 <para>
-  Since all fields are optional, you can use &kappname; without entering any
+  Since all fields are optional, you can use &kmymoney; without entering any
   information now.  Any information entered here is used only to personalize
   your file.  In the future, it may be used in some reports and for online
-  banking. If &kappname; requires any personal information in future releases
+  banking. If &kmymoney; requires any personal information in future releases
   and finds none, you will be prompted to enter the relevant data then.
 </para>
 
@@ -383,14 +383,14 @@
 <para>
   In case you have an address for yourself stored in the &kaddressbook;, the
   button <guibutton>Load from Addressbook</guibutton> is enabled and pressing it
-  imports all information into &kappname;.
+  imports all information into &kmymoney;.
 </para>
 
 <para>
-  &kappname; supports multiple currencies.  To set your base currency (the
+  &kmymoney; supports multiple currencies.  To set your base currency (the
   currency you use day to day and which will be used for your reports), select
   the appropriate entry from the list provided and press
-  <guibutton>Next</guibutton>. A default will be selected from &kappname; based
+  <guibutton>Next</guibutton>. A default will be selected from &kmymoney; based
   upon your locale settings.
 </para>
 
@@ -410,7 +410,7 @@
 
 <para>
   The following page allows you to create an initial account. For the typical
-  &kappname; user this is a checking account.
+  &kmymoney; user this is a checking account.
 </para>
 
 <para>
@@ -430,7 +430,7 @@
 <para>
   Enter the name of the account and a possible reference number assigned by the
   institution managing the account.  Enter the opening date of the account and
-  the opening balance of the account.  For example, you want to use &kappname;
+  the opening balance of the account.  For example, you want to use &kmymoney;
   to manage all your finances as of 2008-01-01, then enter the balance of the
   account at the beginning of this date.  The number can possibly be obtained
   from a paper statement.  Also enter the name and routing number of the
@@ -517,12 +517,12 @@
 
 <para>
   Now you have entered all relevant information to create the file. Press
-  <guibutton>Finish</guibutton> and &kappname; will create the file for you and
+  <guibutton>Finish</guibutton> and &kmymoney; will create the file for you and
   open it.
 </para>
 
 <!--
-<para>After &kappname; has finished loading the default accounts your financial
+<para>After &kmymoney; has finished loading the default accounts your financial
 summary will be displayed.  As you have defined no accounts to hold your
 transactions this is currently empty.</para>
 -->
@@ -566,7 +566,7 @@ transactions this is currently empty.</para>
 
 <tip>
   <para>
-    Note that &kappname; uses the context menus a lot throughout the whole
+    Note that &kmymoney; uses the context menus a lot throughout the whole
     application.  If you find yourself stuck trying to figure out how to do
     something, try right-clicking where you would expect to see a feature.
   </para>
@@ -587,7 +587,7 @@ transactions this is currently empty.</para>
 </para>
 
 <para>
-  Now that one or more accounts exist in &kappname;, your account summary is
+  Now that one or more accounts exist in &kmymoney;, your account summary is
   shown in the Home view.  You can create transactions manually in the <link
   linkend="details.ledgers">Ledgers</link> view, or set up automatic
   transactions through the <link linkend="details.schedules">Schedules</link>
@@ -603,7 +603,7 @@ transactions this is currently empty.</para>
   linkend="details.schedules">Schedule</link> is a transaction that occurs one
   or more times over a certain period of time.  A typical example is your pay
   check that you receive every month or week.  Rather than have to enter the
-  transaction details each time you get paid, you can instruct &kappname; to
+  transaction details each time you get paid, you can instruct &kmymoney; to
   create a schedule that will enter a transaction for you when you get paid.
 </para>
 
@@ -667,7 +667,7 @@ transactions this is currently empty.</para>
 <title>Quicken Interchange Format (QIF) Import</title>
 
 <para>
-  If you currently use a financial manager application, &kappname; can import an
+  If you currently use a financial manager application, &kmymoney; can import an
   account's transactions as long as they are in the Quicken Interchange Format
   (QIF).  Most financial programs can export this format and the different
   applications methods of exporting QIF is not discussed here for brevity.
@@ -683,7 +683,7 @@ transactions this is currently empty.</para>
 <title>Searching for transactions</title>
 
 <para>
-  &kappname; provides a useful and powerful transaction search facility in the
+  &kmymoney; provides a useful and powerful transaction search facility in the
   form of the search dialog.
 </para>
 
@@ -733,15 +733,15 @@ transactions this is currently empty.</para>
 
 <para>
   Now that you have created some accounts and entered transactions it's a good
-  idea to perform a backup.  Because the file used by &kappname; is a standard
+  idea to perform a backup.  Because the file used by &kmymoney; is a standard
   Unix file you can just copy the file to another location to back it up or use
-  the dialog provided by &kappname;.  Using the dialog is the preferred method
-  because if &kappname; ever starts using other file formats, such as SQL, then
+  the dialog provided by &kmymoney;.  Using the dialog is the preferred method
+  because if &kmymoney; ever starts using other file formats, such as SQL, then
   it would be much harder to copy the file manually.
 </para>
 
 <para>
-  To backup your file through &kappname; Select
+  To backup your file through &kmymoney; Select
   <guimenuitem>Backup</guimenuitem> from the <guimenu>File</guimenu> menu and
   enter the folder where you wish the file to be copied to.  If the folder
   needs mounting first and you have the sufficient privileges then check the
@@ -756,32 +756,32 @@ transactions this is currently empty.</para>
 </sect1>
 
 <sect1 id="firsttime.launch">
-<title>Launching &kappname;</title>
+<title>Launching &kmymoney;</title>
 
 <para>
-  Most commonly, you will launch &kappname; from an icon or a start menu of your
-  window manager.  In this case, the default behavior is that &kappname; will
+  Most commonly, you will launch &kmymoney; from an icon or a start menu of your
+  window manager.  In this case, the default behavior is that &kmymoney; will
   open the last file you had open.  However, in some circumstances, you will
-  want or need to launch &kappname; from the command line.
+  want or need to launch &kmymoney; from the command line.
 </para>
 
 <para>
   For a complete description of all the available line options, see the man page
-  for &kappname;.  However, there are two special cases which we describe here.
+  for &kmymoney;.  However, there are two special cases which we describe here.
 </para>
 
 <formalpara><title><command>kmymoney -n</command></title>
   <para>
-    The -n option tells &kappname; not to open the last file it had open.  This
+    The -n option tells &kmymoney; not to open the last file it had open.  This
     can be useful if the program crashes on startup.
   </para>
 </formalpara>
 
 <formalpara><title><command>kmymoney &lt;path to file&gt;</command></title>
   <para>
-    Giving &kappname; a filename on the command line tells it to open that file
+    Giving &kmymoney; a filename on the command line tells it to open that file
     instead of the last file it had open.  You can use the name of any valid
-    &kappname; file, as described in the chapter on <link
+    &kmymoney; file, as described in the chapter on <link
     linkend="details.formats">file formats</link>.  In addition, this can be
     used to import a <link linkend="details.impexp.gnucash">GnuCash</link> file.
   </para>
@@ -789,15 +789,15 @@ transactions this is currently empty.</para>
 </sect1>
 
 <sect1 id="firsttime.newpc">
-<title>How to move &kappname; to a new computer</title>
+<title>How to move &kmymoney; to a new computer</title>
 
 <sect2 id="firsttime.newpc.data">
 <title>Moving your data</title>
 
 <para>
   If you get a new computer, it's very easy to move your data.  In fact, all you
-  have to do is to copy your &kappname; data file.  The name of the file is
-  shown in the title bar when &kappname; is running, it usually ends in .kmy.
+  have to do is to copy your &kmymoney; data file.  The name of the file is
+  shown in the title bar when &kmymoney; is running, it usually ends in .kmy.
   The first time you run the application on the new computer you will have to
   tell it where you have put the data file, either by running from the command
   line, or from the
@@ -816,7 +816,7 @@ transactions this is currently empty.</para>
 </para>
 
 <para>
-  Note that this assumes you have installed the same version of &kappname; on the new
+  Note that this assumes you have installed the same version of &kmymoney; on the new
   computer as you were running on the old computer.  Installing a newer version should
   also be safe, but you need to be aware of any issues related to that upgrade.  Any such
   issues should be noted in the release notes for the new version.
@@ -828,7 +828,7 @@ transactions this is currently empty.</para>
 
 <para>
   If you only move your data file to the new machine, as described in the
-  previous section, &kappname; will work correctly, but you will have lost any
+  previous section, &kmymoney; will work correctly, but you will have lost any
   settings you changed from the default on your old machine.  To maintain these
   settings, you also need to copy your configuration file.  This file is called
   <quote>kmymoneyrc</quote>.  This file will be in a directory with other &kde;
@@ -841,7 +841,7 @@ transactions this is currently empty.</para>
 <title>Moving plugin settings</title>
 
 <para>
-  If you have run any &kappname; plugins, such as the csv importer or exporter,
+  If you have run any &kmymoney; plugins, such as the csv importer or exporter,
   it may also have created a configuration file in that same directory, such as
   csvimporterrc or csvexporterrc.  These should also be copied to the new
   computer.
@@ -856,9 +856,9 @@ transactions this is currently empty.</para>
 
 <note>
 <para>
-  These instructions are solely for moving your &kappname; data and settings.
+  These instructions are solely for moving your &kmymoney; data and settings.
   However, there may be important items which are stored by &kde; and not by
-  &kappname;, such as any passwords stored in kwallet.  Moving other parts of
+  &kmymoney;, such as any passwords stored in kwallet.  Moving other parts of
   your &kde; setup is beyond the scope of this manual, although many of the
   relevant files are also stored under <quote>$KDEHOME</quote>.
 </para>
@@ -874,13 +874,13 @@ transactions this is currently empty.</para>
 <title>Contacting the developers</title>
 
 <para>
-  For general questions or comments about &kappname;, there is a users' mailing
+  For general questions or comments about &kmymoney;, there is a users' mailing
   list &userlist;.  In addition, you can contact the developers through their
   mailing list &devlist;.
 </para>
 
 <para>
-  We're happy to hear about your experiences using &kappname;.
+  We're happy to hear about your experiences using &kmymoney;.
 </para>
 </sect2>
 
@@ -888,7 +888,7 @@ transactions this is currently empty.</para>
 <title>Reporting bugs</title>
 
 <para>
-  To report a bug please use the interface provided by &kappname; by selecting
+  To report a bug please use the interface provided by &kmymoney; by selecting
   <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
   Bug</guimenuitem></menuchoice> and filling in the required information.
   However, in case you have any difficulties with that method, you can report a
@@ -929,7 +929,7 @@ transactions this is currently empty.</para>
     but if you would prefer not to use this interface, there are several items
     you need to include in the report.  We will need to know what operating
     system you are using (&Linux;, &MacOS;, or &Windows;), the version of &kde;
-    and the version of &kappname; you're running, and either the version of
+    and the version of &kmymoney; you're running, and either the version of
     &MacOS; or &Windows; or the name and version of your &Linux; distribution
     and the version of your kernel.
   </para>
@@ -952,11 +952,11 @@ transactions this is currently empty.</para>
 
 <formalpara><title>Include specific steps</title>
   <para>
-    This is a bad bug report: <quote>I entered a transaction, and &kappname;
+    This is a bad bug report: <quote>I entered a transaction, and &kmymoney;
     crashed.</quote> A much better bug report is: <quote>Using the transaction
     form, I entered a new transaction in my Credit Card account.  I selected the
     Transfer tab, entered in an amount, then changed to the Deposit tab, and
-    back to the Transfer tab.  When I returned to the Transfer tab, &kappname;
+    back to the Transfer tab.  When I returned to the Transfer tab, &kmymoney;
     crashed.  This bug is fully reproducible for me.</quote>
   </para>
 </formalpara>
@@ -973,14 +973,14 @@ transactions this is currently empty.</para>
   <para>
     By compiling a version configured with --enable-debug=full you can ensure
     that the best possible backtraces are generated.  If you encounter a crash,
-    run &kappname; again from within gdb, and reproduce the crash.  When it
+    run &kmymoney; again from within gdb, and reproduce the crash.  When it
     crashes, type <quote>bt</quote> to generate a backtrace.
   </para>
 </formalpara>
 
 <para>
   Running this way is a bit more difficult, so we don't expect all users to do
-  this.  However, if you're interested in helping &kappname; become as stable as
+  this.  However, if you're interested in helping &kmymoney; become as stable as
   possible, this is the best way to do it short of finding the bug in the code
   and sending in a patch.
 </para>

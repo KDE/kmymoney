@@ -12,7 +12,7 @@
 
 <para>
   This chapter addresses a number of issues that frequently cause confusion,
-  especially in new users of &kappname;. If you find that &kappname; is doing
+  especially in new users of &kmymoney;. If you find that &kmymoney; is doing
   something you don't understand (or sometimes not doing something you want it
   to do,) please check this list before asking for help on one of the mailing
   lists.  If your problem is not mentioned here, refer to the section on <link
@@ -25,19 +25,19 @@
 
 <qandaentry>
  <question>
-   <para>&kappname; crashes when I try to launch it.</para>
+   <para>&kmymoney; crashes when I try to launch it.</para>
  </question>
  <answer>
-   <para>There are many reasons &kappname; might crash or give an error instead
+   <para>There are many reasons &kmymoney; might crash or give an error instead
    of starting up normally.  You first need to determine if the problem is with
    the software or with your data.  So, the first thing to try is to <link
-   linkend="firsttime.launch">launch &kappname;</link> without opening your data
+   linkend="firsttime.launch">launch &kmymoney;</link> without opening your data
    file.  If the application starts up, but crashes when you try to load your
    data file, try loading an older copy of your file.  (You did make a backup,
    didn't you?)</para>
-   <para>If &kappname; crashes on startup without trying to load a data file,
+   <para>If &kmymoney; crashes on startup without trying to load a data file,
    there may be a problem with your installation.  See the section on <link
-   linkend="installation">installing &kappname;</link> or the section on <link
+   linkend="installation">installing &kmymoney;</link> or the section on <link
    linkend="firsttime.contact">getting help</link>.</para>
  </answer>
 </qandaentry>
@@ -96,7 +96,7 @@
    to the code that requires a clean reconfigure.  See the end of the section on
    <link linkend="installation.fromsource">compiling from source</link> for
    instructions.  If you follow these steps carefully, and still have a problem
-   compiling, please post a message to the &kappname; Developers List at
+   compiling, please post a message to the &kmymoney; Developers List at
    &devlist;, and include the failed output of either the cmake or
    make command.
 </para>
@@ -120,11 +120,11 @@
 
 <qandaentry>
  <question>
-   <para>Will &kappname; work on my X/&ubuntu; desktop? Will &kappname; work
+   <para>Will &kmymoney; work on my X/&ubuntu; desktop? Will &kmymoney; work
    without a full KDE desktop?</para>
  </question>
  <answer>
-   <para>Yes, &kappname; will work without a full &kde; desktop, but you will
+   <para>Yes, &kmymoney; will work without a full &kde; desktop, but you will
    have to install the basic &kde; libraries first.  The easiest way to do this
    is to use <link linkend="installation.distribution">your distribution's
    package management system</link>, which will handle these requirements
@@ -132,7 +132,7 @@
    need development versions of those libraries; refer to these <link
    linkend="installation.fromsource">instructions</link> for details.</para>
    <para>There has been at least one report of an error message about a
-   &kappname; process which did not come from any &kappname; or &kde;
+   &kmymoney; process which did not come from any &kmymoney; or &kde;
    source.  This is not necessarily bad, but it can be very difficult to
    determine the actual cause.</para>
  </answer>
@@ -149,7 +149,7 @@
  <answer>
    <para>Yes, you can easily set the start of the year in the <link
    linkend="details.settings.general.global">Global Options</link> section of
-   the <guilabel>Configure &kappname;</guilabel> dialog.</para>
+   the <guilabel>Configure &kmymoney;</guilabel> dialog.</para>
  </answer>
 </qandaentry>
 
@@ -165,7 +165,7 @@
    <para>You cannot make any changes to a transaction with a date before the
    opening date of the account it is in.  The most common reason for this is
    importing all the data for an account.  If the import file does not contain
-   an opening date for the account, &kappname; will use the current date.  The
+   an opening date for the account, &kmymoney; will use the current date.  The
    way to fix this is to edit the account, and <link
    linkend="details.accounts.edit">change the opening date</link> to be earlier
    than any transaction in that account.</para>
@@ -208,7 +208,7 @@
  </question>
  <answer>
    <para>You can easily change an account type between checking, savings, and
-   cash.  However, because of the way &kappname; stores the account information,
+   cash.  However, because of the way &kmymoney; stores the account information,
    it does not allow other changes of account type.  The way around this is to
    create a new account of the correct type, move all the transactions from the
    old to the new account, and then delete the old account.</para>
@@ -245,7 +245,7 @@
    status,</quote> then only transaction of the selected type will be shown.  In
    addition, there are two important settings in the <link
    linkend="details.settings.general.filter">filter options</link> section on
-   the &kappname; Settings dialog.  If the <guilabel>Do not show transactions prior
+   the &kmymoney; Settings dialog.  If the <guilabel>Do not show transactions prior
    to</guilabel> field is set, only transactions on or after that date will be
    shown in the ledger.  If the <guilabel>Do not show reconciled
    transactions</guilabel> box is checked, then no reconciled transactions will be
@@ -274,7 +274,7 @@
    <para>Why can't I delete an account?</para>
  </question>
  <answer>
-   <para>In order to delete an account, &kappname; can have no other references
+   <para>In order to delete an account, &kmymoney; can have no other references
    to it.  That means you must delete all transactions, or move them to another
    account.  If you still can't delete an account, there may be scheduled
    transactions referring to that account, which may not be visible in the
@@ -307,11 +307,11 @@
    <para>Why is there no translation for 'my' language?</para>
  </question>
  <answer>
-   <para>&kappname; uses the &kde; settings for language, so first, make
+   <para>&kmymoney; uses the &kde; settings for language, so first, make
    sure that your region and language settings are correct.  If they are, the
    most likely reason is that no one has offered to translate it yet.
    Translating &kde;/&Qt;-based applications is very simple, and does not
-   require any programming skills. If you would like to translate &kappname;
+   require any programming skills. If you would like to translate &kmymoney;
    into your language, please post a message to the proper <ulink
    url="http://l10n.kde.org/teams-list.php">team mailing list</ulink>. Should
    you fail to find your language in the list or could not contact the team
@@ -319,7 +319,7 @@
    translation mailing list</ulink> (<ulink
    url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc">subscription</ulink>
    required) and we will give you the details on how you can
-   easily provide a translation for &kappname;.
+   easily provide a translation for &kmymoney;.
 </para>
  </answer>
 </qandaentry>
@@ -332,8 +332,8 @@
  <answer>
    <para>The use of KMyMoney2 was a historical legacy from when the project went
    from &kde; 1 to &kde; 2.  To avoid changing the name every time there was a
-   new &kde; version, we decided to stick with &kappname;.</para>
-   <para>The first version of &kappname; that was considered sufficiently stable
+   new &kde; version, we decided to stick with &kmymoney;.</para>
+   <para>The first version of &kmymoney; that was considered sufficiently stable
    was labeled 1.0, even though it ran under &kde; 3.  As the project is now
    becoming more closely aligned with &kde; we decided to use the same major
    release number.</para>

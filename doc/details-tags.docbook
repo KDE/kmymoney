@@ -68,7 +68,7 @@
 
 <note>
 <para>
-  As Tags have just been introduced to &kappname; in version 4.7, none of the
+  As Tags have just been introduced to &kmymoney; in version 4.7, none of the
   methods for importing data are able to import tags.  It is understood that
   this is an important feature, and each import method is likely to introduce
   it in an upcoming release.

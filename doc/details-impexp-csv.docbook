@@ -21,7 +21,7 @@
   was initially created, before becoming a CSV importer, to produce QIF files
   from CSV, which could then be imported.  This functionality is still present,
   but is likely to be removed, as the plugin now focuses on directly importing
-  CSV files.  Also, &kappname; has the native ability to <link
+  CSV files.  Also, &kmymoney; has the native ability to <link
   linkend="details.impexp.qifexp">export QIF files</link>, so there is no real
   reason to produce a QIF file from a CSV file.
 </para>
@@ -31,7 +31,7 @@
 <title>Getting the plugin</title>
 
 <para>
-  &kappname; will import CSV files.  This functionality is provided as a plugin,
+  &kmymoney; will import CSV files.  This functionality is provided as a plugin,
   and it is now built into the core program, both in distro packages and in the
   source files.  Once the distro package is installed, or the source files are
   compiled and installed, the menu choice to import CSV files will automatically
@@ -43,19 +43,19 @@
 <para>
   The CSV importer plugin is much newer than the OFX plugin, but most
   distributions are now built with the CSV importer already included or
-  available as a separate package.  Ensure that it is enabled within &kappname;.
+  available as a separate package.  Ensure that it is enabled within &kmymoney;.
   Check the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
   KMyMoney</guimenuitem><guimenuitem>Plugins</guimenuitem></menuchoice> menu.
   If the CSV importer does not seem to be installed in your version, the first
-  place to check is in the same place you got your base &kappname; package. See
+  place to check is in the same place you got your base &kmymoney; package. See
   if a later version is available, or if the importer is available as a separate
   package.
 </para>
 
 <para> 
   If you have installed from RPM or Deb, the CSV Importer Plugin should be
-  contained within the &kappname; package.  If you have built from source, there
-  should be no additional requirements.  The &kappname; build process should
+  contained within the &kmymoney; package.  If you have built from source, there
+  should be no additional requirements.  The &kmymoney; build process should
   detect the plugin source and compile the plugin.
 </para>
 </sect2>
@@ -223,7 +223,7 @@
 <para>
   One particular reason to also capture the Payee/Descriptor field in the Memo
   field is that the incoming Payee/Description field might get completely
-  changed on import when &kappname; does transaction matching.  Selecting that
+  changed on import when &kmymoney; does transaction matching.  Selecting that
   field also as Memo will preserve that data, which would otherwise get lost.
 </para>
 </listitem>
@@ -279,8 +279,8 @@
 <para>
   The <guilabel>Price Fraction</guilabel> selector is to indicate the
   fraction/multiplier for compatibility between imported and stored prices.  For
-  instance, if the import file price is in cents, but your &kappname; account is
-  priced in dollars, select 0.01.  Or, if your &kappname; data file pricing is
+  instance, if the import file price is in cents, but your &kmymoney; account is
+  priced in dollars, select 0.01.  Or, if your &kmymoney; data file pricing is
   in dollars, and so is the CSV file being imported, then set <guilabel>Price
   Fraction</guilabel> to 1.0.
 </para>
@@ -313,7 +313,7 @@
   the drop-down list for future use. You may subsequently wish to remove that
   name from the list.  If so, select it, then click the <guilabel>Hide
   security</guilabel> button.  This removes it only from this list, and has no
-  effect on your main &kappname; file.
+  effect on your main &kmymoney; file.
   </para>
   </listitem>
 
@@ -403,7 +403,7 @@
 <para>
   For an Investment file, after the <guilabel>Lines</guilabel> page has been
   accepted, you need to assure that each security in the file is matched to the
-  correct security in your &kappname; file, before import can proceed.  At this
+  correct security in your &kmymoney; file, before import can proceed.  At this
   point, another window will open, showing the securities and symbols contained
   in the import file.  Note that unlike the data display in the main wizard
   windows, the changes you make on this page <emphasis>are</emphasis> imported.
@@ -422,7 +422,7 @@
     <listitem>
     <para> 
       Each security name must match exactly the existing security as specified
-      in &kappname;.  If it does not match, it will be created as a new
+      in &kmymoney;.  If it does not match, it will be created as a new
       security, which you probably do not want, unless it represents the
       purchase of a new security.
     </para>
@@ -450,7 +450,7 @@
   each security, if necessary, edit the name in one of its rows, If the correct
   security name appears in the imported file, double click on it to select it,
   then copy and paste/edit, taking care if you have used a variation or
-  abbreviation within &kappname;.  If you edit a security name, that edit will
+  abbreviation within &kmymoney;.  If you edit a security name, that edit will
   be applied to all rows with the same symbol.
 </para>
 
@@ -462,14 +462,14 @@
   will generally be the Brokerage account you chose or created when you created
   the Investment account.  Similarly enter the column number containing the
   payee, if requested. If a mistake is made when entering the account name, the
-  import will go ahead, but &kappname; will not recognize it, and will flag
+  import will go ahead, but &kmymoney; will not recognize it, and will flag
   those transactions as missing a category assignment.  If the required account
   name is rather long, just enter a few characters.  The import will proceed but
-  the transactions will be flagged by &kappname; as missing a category
+  the transactions will be flagged by &kmymoney; as missing a category
   assignment, and you will need to select the correct transfer account after the
   import. Click <guilabel>OK</guilabel> when done. The import process then gets
   handed over to
-  &kappname;
+  &kmymoney;
 </para>
 
 <para>
@@ -515,7 +515,7 @@
   On reaching the Final page, the plugin automatically validates the values.  If
   the numeric value column/s is/are highlighted in green, then the validation
   was successful and all that is necessary is to click <guilabel>Import
-  CSV</guilabel> and control then passes to the main &kappname; program.
+  CSV</guilabel> and control then passes to the main &kmymoney; program.
   However, if the start and/or end lines are incorrectly set, or if the wrong
   columns were selected, the highlighting will be in red, and an error message
   will appear indicating where the error lies.  The user will then need to click
@@ -558,7 +558,7 @@
 <formalpara><title>Import CSV</title>
 <para>
   Clicking this button tells the plugin to actually import the data from the
-  file, based on the choices you have made above.  &kappname; will prompt you
+  file, based on the choices you have made above.  &kmymoney; will prompt you
   for the correct account into which to import the data.
 </para>
 </formalpara>
@@ -570,7 +570,7 @@
   This button gives you the ability, after the import has been completed, to
   save the data from the csv file as a qif file, should you require one for any
   reason. This was actually the original functionality that drove the creation
-  of this plugin.  However, as &kappname; itself is now able to export a qif
+  of this plugin.  However, as &kmymoney; itself is now able to export a qif
   file, the capability is now probably of little use and is likely to be removed
   eventually.
 </para>
@@ -580,7 +580,7 @@
 <title>Finishing up</title>
 <para>
   For a <guilabel>Banking</guilabel> import, the plugin has finished, and
-  &kappname; will prompt you, as stated above, for the correct account into
+  &kmymoney; will prompt you, as stated above, for the correct account into
   which to import the data. For an <guilabel>Investment</guilabel> import,
   however, a little more may be required.  If, during import of a transaction,
   the plugin finds no valid transaction type, it will display the offending
@@ -650,7 +650,7 @@
  When this plugin was created, only a few investment formats had been seen as
  examples, and it may well be that you will encounter one which cannot be
  handled correctly.  If you find such a file, please send a suitable example
- (edited to remove or replace personal information) to the &kappname; user list
+ (edited to remove or replace personal information) to the &kmymoney; user list
  &userlist; or developer list &devlist;, the developer will do his best to
  modify the plugin to handle it.
 </para>

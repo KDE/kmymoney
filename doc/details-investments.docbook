@@ -11,7 +11,7 @@
 <title>Investments</title>
 
 <sect1 id="details.investments.overview">
-<title>Investments in &kappname;</title>
+<title>Investments in &kmymoney;</title>
 
 <sect2>
 <title>Investments</title>
@@ -20,7 +20,7 @@
   Investments are instruments for investing money that are traded on a market.
   Stocks, bonds, and mutual funds are the most common investments; so they are
   the ones supported most directly.  Futures, commodities, options, and more
-  complex derivatives are also sometimes used, but &kappname; has no special
+  complex derivatives are also sometimes used, but &kmymoney; has no special
   functionality for them.  As long as they behave like a stock or a bond, they
   can be tracked easily.
 </para>
@@ -129,7 +129,7 @@
 
 <itemizedlist>
   <listitem><para> Trading Symbol.  The ticker symbol used to identify the
-    investment on whatever market it trades.  &kappname; requires a trading
+    investment on whatever market it trades.  &kmymoney; requires a trading
     symbol for all investments; however some investments do not have symbols.
     In this case, you will need to make up a symbol for it.
   </para></listitem>
@@ -148,7 +148,7 @@
   
   <listitem><para> Trading market.  Where the stock trades.  This is an optional
     field which is provided for your convenience.  This information is not used
-    anywhere else in &kappname;.
+    anywhere else in &kmymoney;.
   </para></listitem>
 
   <listitem><para>Identification.  An optional field to enter additional
@@ -175,7 +175,7 @@
 
 <para>
   Finally, you're presented with the Online Update screen.  This is where you
-  tell &kappname; how you would like to update the prices of your investment.
+  tell &kmymoney; how you would like to update the prices of your investment.
   The following items are set here:
 </para>
 
@@ -347,7 +347,7 @@
 <para>
   For buy, sell, and cash dividend transactions, the number of shares, the price
   per share, and the total amount of the transaction must be established.  You
-  can enter any two of these, and &kappname; will calculate the third.  It's
+  can enter any two of these, and &kmymoney; will calculate the third.  It's
   usually best to enter just the total amount and the number of shares, because
   these are the known facts of the transaction.  The price per share can be
   calculated from these.
@@ -383,7 +383,7 @@
 <title>Working With Foreign Investments</title>
 
 <para>
-  &kappname; supports multiple currencies and investments, and you may want to
+  &kmymoney; supports multiple currencies and investments, and you may want to
   combine the two.  However, doing so requires extra care.  As noted above, when
   you added an investment, you had to specify its trading currency.  This might
   not be the same as your base currency, and it also might not be the same as
@@ -453,7 +453,7 @@
 <title>Updating Prices</title>
 <para>
   There are two ways of updating the prices for your investments.  You can
-  either enter the new price manually or have &kappname; fetch it from the web.
+  either enter the new price manually or have &kmymoney; fetch it from the web.
 
 </para>
 
@@ -469,14 +469,14 @@
 <sect2 id="details.investments.onlinequotes">
 <title>Online Price Quotes</title>
 <para>
-  &kappname; has the ability to download the latest prices for your investments
+  &kmymoney; has the ability to download the latest prices for your investments
   and currencies via the web.  
 </para>
 
 <sect3>
 <title>How Online Quotes Work</title>
 <para>
-  At your request, &kappname; will fetch a page from the web that contains the
+  At your request, &kmymoney; will fetch a page from the web that contains the
   latest price for each item.  By default, prices are fetched from
   <ulink url="http://finance.yahoo.com">finance.yahoo.com</ulink>, and are subject to the terms and conditions of that
   site.
@@ -503,7 +503,7 @@
   In order to get online price quotes, you first have to enable it for each
   investment or currency you want updated, by setting a <quote>Online Quote
   Source</quote>.  This is the name of the service from which the quote should
-  be fetched.  &kappname; ships with several sources to choose from.  Yahoo is the
+  be fetched.  &kmymoney; ships with several sources to choose from.  Yahoo is the
   recommended default source, and should work for most investments and all
   currencies.
 </para>
@@ -518,7 +518,7 @@
 </para>
 
 <para>
-  Versions of &kappname; starting with 0.9 contain support for the
+  Versions of &kmymoney; starting with 0.9 contain support for the
   Finance::Quote package for obtaining online quotes. This is intended primarily
   as a convenience for those users converting from the GnuCash finance package,
   which uses it as its native method. If you do select this option, you should
@@ -559,7 +559,7 @@
   at once.  Choose the <menuchoice><guimenu>Tools</guimenu><guimenuitem>Update
   Stock and Currency Prices...</guimenuitem></menuchoice> menu option to bring
   up the online price quotes dialog.  Press <guibutton>Update All</guibutton> to
-  fetch quotes for all investments and currencies in your &kappname; file.
+  fetch quotes for all investments and currencies in your &kmymoney; file.
 </para>
 
 <para>
@@ -592,7 +592,7 @@
   If you do feel up to the challenge, here's how it works.  The quote sources
   are contained in the settings dialog.
   Choose <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-  &kappname;</guimenuitem></menuchoice>.  From there, choose
+  &kmymoney;</guimenuitem></menuchoice>.  From there, choose
   the <guilabel>Online Quotes</guilabel> section.  You can choose an existing
   source to edit, or create a new one.  When you are done with your changes, be
   sure to press the <guibutton>Update</guibutton> button before exiting the
@@ -639,7 +639,7 @@
 <title>Unimplemented Features</title>
 <para>
   Certain common features that are normally found with investments are not yet
-  implemented in &kappname;.  These include: Derivatives (options, futures,
+  implemented in &kmymoney;.  These include: Derivatives (options, futures,
   etc), capital gains, and tax reporting for investments.
 </para>
 </sect1>
