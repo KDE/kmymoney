@@ -110,11 +110,14 @@ void KInvestmentView::updateActions(const MyMoneyObject& obj)
 
   const auto& acc = static_cast<const MyMoneyAccount&>(obj);
 
-  auto b = acc.accountType() == eMyMoney::Account::Type::Investment ? true : false;
-  pActions[eMenu::Action::NewInvestment]->setEnabled(b);
-
   const auto file = MyMoneyFile::instance();
-  b = acc.isInvest() ? true : false;
+  if (!d->m_idInvAcc.isEmpty()) {
+    const auto account = file->account(d->m_idInvAcc);
+    auto b = account.accountType() == eMyMoney::Account::Type::Investment ? true : false;
+    pActions[eMenu::Action::NewInvestment]->setEnabled(b);
+  }
+
+  auto b = acc.isInvest() ? true : false;
   pActions[eMenu::Action::EditInvestment]->setEnabled(b);
   pActions[eMenu::Action::DeleteInvestment]->setEnabled(b && !file->isReferenced(acc));
   pActions[eMenu::Action::UpdatePriceManually]->setEnabled(b);
@@ -199,12 +202,15 @@ void KInvestmentView::slotLoadAccount(const QString &id)
   Q_D(KInvestmentView);
   const auto indexList = d->m_equitiesProxyModel->match(d->m_equitiesProxyModel->index(0,0), EquitiesModel::InvestmentID, id, 1,
                                                    Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive | Qt::MatchWrap));
+
+  const auto acc = MyMoneyFile::instance()->account(id);
   if (!indexList.isEmpty()) {
     d->ui->m_equitiesTree->setRootIndex(indexList.first());
     d->m_idInvAcc = id;
     if (isVisible())
-      emit accountSelected(MyMoneyFile::instance()->account(id));
+      emit accountSelected(acc);
   }
+  updateActions(acc);
 }
 
 void KInvestmentView::slotInvestmentMenuRequested(const QPoint&)
@@ -216,8 +222,7 @@ void KInvestmentView::slotInvestmentMenuRequested(const QPoint&)
     auto mdlItem = d->m_equitiesProxyModel->index(treeItem.row(), EquitiesModel::Equity, treeItem.parent());
     acc = MyMoneyFile::instance()->account(mdlItem.data(EquitiesModel::EquityID).toString());
   }
-//  slotShowInvestmentMenu(acc);
-  emit contextMenuRequested(acc);
+  slotShowInvestmentMenu(acc);
 }
 
 void KInvestmentView::slotShowInvestmentMenu(const MyMoneyAccount& acc)
