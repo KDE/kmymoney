@@ -106,7 +106,7 @@ QSize ibanBicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
 
   // A bic has maximal 11 characters, an IBAN 32
-  return QSize((32 + 11)*metrics.width(QLatin1Char('X')) + 3*margin, 2*metrics.lineSpacing() + metrics.leading() + 2*margin);
+  return QSize((32 + 11)*metrics.width(QLatin1Char('X')) + 3*margin, 3*metrics.lineSpacing() + metrics.leading() + 2*margin);
 }
 
 QWidget* ibanBicItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
