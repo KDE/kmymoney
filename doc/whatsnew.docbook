@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
 <chapterinfo>
-  <date>2017-07-25</date>
-  <releaseinfo>4.8.1</releaseinfo>
+  <date>2018-01-19</date>
+  <releaseinfo>4.8.2</releaseinfo>
 </chapterinfo>
 
 <title>What's new in this release</title>
@@ -24,14 +24,14 @@
 <itemizedlist>
   <listitem>
     <para>
-      <ulink url="https://www.kmymoney.org/resolvedbugs.php?4.8.1">The complete
+      <ulink url="https://www.kmymoney.org/resolvedbugs.php?4.8.2">The complete
              list of bugs fixed in this release</ulink>
     </para>
   </listitem>
 
   <listitem>
     <para>
-      <ulink url="https://www.kmymoney.org/resolvedfeatures.php?4.8.1">The
+      <ulink url="https://www.kmymoney.org/resolvedfeatures.php?4.8.2">The
              complete list of new features in this release</ulink>
     </para>
   </listitem>
