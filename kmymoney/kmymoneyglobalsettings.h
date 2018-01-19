@@ -78,5 +78,7 @@ public:
     * Construct a MyMoneyForecast object setup with all KMyMoneySettings
     */
   static MyMoneyForecast forecast();
+  static int forecastDays();
+  static int forecastAccountCycle();
 };
 #endif

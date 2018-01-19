@@ -42,6 +42,7 @@
 // Project Includes
 
 #include "ui_kforecastview.h"
+#include "forecastviewsettings.h"
 #include "kmymoneyviewbase_p.h"
 #include "mymoneymoney.h"
 #include "mymoneyforecast.h"
@@ -692,15 +693,15 @@ public:
   void loadForecastSettings()
   {
     //fill the settings controls
-    ui->m_forecastDays->setValue(KMyMoneyGlobalSettings::forecastDays());
-    ui->m_accountsCycle->setValue(KMyMoneyGlobalSettings::forecastAccountCycle());
-    ui->m_beginDay->setValue(KMyMoneyGlobalSettings::beginForecastDay());
-    ui->m_forecastCycles->setValue(KMyMoneyGlobalSettings::forecastCycles());
+    ui->m_forecastDays->setValue(ForecastViewSettings::forecastDays());
+    ui->m_accountsCycle->setValue(ForecastViewSettings::forecastAccountCycle());
+    ui->m_beginDay->setValue(ForecastViewSettings::beginForecastDay());
+    ui->m_forecastCycles->setValue(ForecastViewSettings::forecastCycles());
     ui->m_historyMethod->setId(ui->radioButton11, 0); // simple moving avg
     ui->m_historyMethod->setId(ui->radioButton12, 1); // weighted moving avg
     ui->m_historyMethod->setId(ui->radioButton13, 2); // linear regression
-    ui->m_historyMethod->button(KMyMoneyGlobalSettings::historyMethod())->setChecked(true);
-    switch (KMyMoneyGlobalSettings::forecastMethod()) {
+    ui->m_historyMethod->button(ForecastViewSettings::historyMethod())->setChecked(true);
+    switch (ForecastViewSettings::forecastMethod()) {
       case 0:
         ui->m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
         ui->m_forecastCycles->setDisabled(true);

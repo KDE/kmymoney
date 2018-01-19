@@ -330,52 +330,6 @@
    <default>false</default>
   </entry>
  </group>
- <group name="Forecast Options">
-  <entry name="forecastMethod" type="Int">
-   <label>Method to calculate forecast</label>
-   <default>0</default>
-  </entry>
-  <entry name="forecastDays" type="Int">
-   <label>Days to forecast</label>
-   <default>90</default>
-   <min>1</min>
-   <max>999</max>
-  </entry>
-  <entry name="forecastAccountCycle" type="Int">
-   <label>Days of normal account cycle</label>
-   <default>30</default>
-   <min>1</min>
-   <max>999</max>
-  </entry>
-  <entry name="forecastCycles" type="Int">
-   <label>Number of historic cycles to use in forecast</label>
-   <default>3</default>
-   <min>1</min>
-   <max>999</max>
-  </entry>
-  <entry name="beginForecastDay" type="Int">
-   <label>Day of month to start forecast</label>
-   <default>0</default>
-   <min>0</min>
-   <max>31</max>
-  </entry>
-  <entry name="historyMethod" type="Int">
-   <label>Method to calculate history-based forecast</label>
-   <default>1</default>
-  </entry>
-  <entry name="skipOpeningDate" type="Bool">
-   <label>Skip opening date when fetching transactions</label>
-   <default>true</default>
-  </entry>
-  <entry name="includeFutureTransactions" type="Bool">
-   <label>Include future transaction when using Schedule Forecast</label>
-   <default>true</default>
-  </entry>
-  <entry name="includeScheduledTransactions" type="Bool">
-   <label>Include scheduled transactions when using Schedule Forecast</label>
-   <default>true</default>
-  </entry>
- </group>
  <group name="QIF Options">
   <entry name="qifCash" type="String">
    <label>additional names for cash account</label>

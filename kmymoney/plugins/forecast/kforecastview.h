@@ -49,7 +49,7 @@ class KForecastView : public KMyMoneyViewBase
   Q_OBJECT
 
 public:
-  explicit KForecastView(QWidget *parent = 0);
+  explicit KForecastView(QWidget *parent = nullptr);
   ~KForecastView() override;
 
   void setDefaultFocus() override;

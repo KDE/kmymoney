@@ -81,7 +81,6 @@
 #include "kinvestmentview.h"
 #include "kreportsview.h"
 #include "kbudgetview.h"
-#include "kforecastview.h"
 #include "konlinejoboutbox.h"
 #include "kmymoney.h"
 #include "models.h"
@@ -230,11 +229,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
   // Page 11
-  m_forecastView = new KForecastView;
-  viewFrames[View::Forecast] = m_model->addPage(m_forecastView, i18n("Forecast"));
-  viewFrames[View::Forecast]->setIcon(Icons::get(Icon::ViewForecast));
-  connect(m_forecastView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_forecastView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  // KForecastView
 
   // Page 12
   m_onlineJobOutboxView = new KOnlineJobOutbox;
@@ -387,8 +382,10 @@ void KMyMoneyView::slotShowBudgetPage()
 
 void KMyMoneyView::slotShowForecastPage()
 {
-  showPage(viewFrames[View::Forecast]);
-  m_forecastView->setDefaultFocus();
+  if (viewFrames.contains(View::Forecast)) {
+    showPage(viewFrames[View::Forecast]);
+    viewBases[View::Forecast]->setDefaultFocus();
+  }
 }
 
 void KMyMoneyView::slotShowOutboxPage()
@@ -488,6 +485,39 @@ eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedu
   return m_scheduledView->enterSchedule(schedule, autoEnter, extendedKeys);
 }
 
+void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idView)
+{
+  auto isViewInserted = false;
+  for (auto i = (int)idView; i < (int)View::None; ++i) {
+    if (viewFrames.contains((View)i)) {
+      viewFrames[idView] = m_model->insertPage(viewFrames[(View)i],view, name);
+      viewBases[idView] = view;
+      isViewInserted = true;
+      break;
+    }
+  }
+
+  if (!isViewInserted)
+    viewFrames[idView] = m_model->addPage(view, name);
+
+  auto icon = Icon::ViewForecast;
+  switch (idView) {
+    case View::Forecast:
+      icon = Icon::ViewForecast;
+      break;
+    default:
+      break;
+  }
+  viewFrames[idView]->setIcon(Icons::get(icon));
+}
+
+void KMyMoneyView::removeView(View idView)
+{
+  m_model->removePage(viewFrames[idView]);
+  viewFrames.remove(idView);
+  viewBases.remove(idView);
+}
+
 bool KMyMoneyView::showPageHeader() const
 {
   return false;
@@ -555,30 +585,10 @@ void KMyMoneyView::removeStorage()
 void KMyMoneyView::enableViewsIfFileOpen()
 {
   // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
-  if (viewFrames[View::Accounts]->isEnabled() != m_fileOpen)
-    viewFrames[View::Accounts]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Institutions]->isEnabled() != m_fileOpen)
-    viewFrames[View::Institutions]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Schedules]->isEnabled() != m_fileOpen)
-    viewFrames[View::Schedules]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Categories]->isEnabled() != m_fileOpen)
-    viewFrames[View::Categories]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Payees]->isEnabled() != m_fileOpen)
-    viewFrames[View::Payees]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Tags]->isEnabled() != m_fileOpen)
-    viewFrames[View::Tags]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Budget]->isEnabled() != m_fileOpen)
-    viewFrames[View::Budget]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Ledgers]->isEnabled() != m_fileOpen)
-    viewFrames[View::Ledgers]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Investments]->isEnabled() != m_fileOpen)
-    viewFrames[View::Investments]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Reports]->isEnabled() != m_fileOpen)
-    viewFrames[View::Reports]->setEnabled(m_fileOpen);
-  if (viewFrames[View::Forecast]->isEnabled() != m_fileOpen)
-    viewFrames[View::Forecast]->setEnabled(m_fileOpen);
-  if (viewFrames[View::OnlineJobOutbox]->isEnabled() != m_fileOpen)
-    viewFrames[View::OnlineJobOutbox]->setEnabled(m_fileOpen);
+  for (auto i = (int)View::Home; i < (int)View::None; ++i)
+    if (viewFrames.contains(View(i)))
+      if (viewFrames[View(i)]->isEnabled() != m_fileOpen)
+        viewFrames[View(i)]->setEnabled(m_fileOpen);
   emit viewStateChanged(m_fileOpen);
 }
 
@@ -1503,8 +1513,10 @@ void KMyMoneyView::slotRefreshViews()
   m_homeView->refresh();
   m_investmentView->refresh();
   m_reportsView->refresh();
-  m_forecastView->refresh();
   m_scheduledView->refresh();
+  for (auto i = (int)View::Home; i < (int)View::None; ++i)
+    if (viewBases.contains(View(i)))
+      viewBases[View(i)]->refresh();
 
   m_payeesView->slotClosePayeeIdentifierSource();
 }
@@ -2136,10 +2148,6 @@ void KMyMoneyView::connectView(const View view)
     case View::Reports:
       disconnect(m_reportsView, &KReportsView::aboutToShow, this, &KMyMoneyView::connectView);
       connect(m_reportsView, &KReportsView::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
-      break;
-
-    case View::Forecast:
-      disconnect(m_forecastView, &KForecastView::aboutToShow, this, &KMyMoneyView::connectView);
       break;
 
     case View::OnlineJobOutbox:

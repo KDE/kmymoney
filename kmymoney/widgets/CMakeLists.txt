@@ -89,7 +89,6 @@ install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
 set(_uncritial_common_sources
-  fixedcolumntreeview.cpp
   kbudgetvalues.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountselector.cpp

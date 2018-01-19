@@ -57,6 +57,16 @@ void KMyMoneyPlugin::KMMViewInterface::slotRefreshViews()
   m_view->slotRefreshViews();
 }
 
+void KMyMoneyPlugin::KMMViewInterface::addView(KMyMoneyViewBase* view, const QString& name, View idView)
+{
+  m_view->addView(view, name, idView);
+}
+
+void KMyMoneyPlugin::KMMViewInterface::removeView(View idView)
+{
+  m_view->removeView(idView);
+}
+
 bool KMyMoneyPlugin::KMMViewInterface::fileOpen()
 {
   return m_view->fileOpen();

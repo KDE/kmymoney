@@ -46,6 +46,7 @@ namespace eMenu { enum class Action; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 namespace KMyMoneyPlugin { class StoragePlugin; }
 namespace eDialogs { enum class ScheduleResultCode; }
+namespace Icons { enum class Icon; }
 
 class KMyMoneyApp;
 class KHomeView;
@@ -65,13 +66,13 @@ class MyMoneySchedule;
 class MyMoneySecurity;
 class MyMoneyReport;
 class TransactionEditor;
-class KForecastView;
 class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
 class MyMoneyAccount;
 class MyMoneyMoney;
 class MyMoneyObject;
 class QLabel;
+class KMyMoneyViewBase;
 
 /**
   * This class represents the view of the MyMoneyFile which contains
@@ -124,10 +125,10 @@ private:
   KGlobalLedgerView *m_ledgerView;
   KInvestmentView *m_investmentView;
   KReportsView* m_reportsView;
-  KForecastView* m_forecastView;
   KOnlineJobOutbox* m_onlineJobOutboxView;
 
-  QHash<View,KPageWidgetItem*> viewFrames;
+  QHash<View, KPageWidgetItem*> viewFrames;
+  QHash<View, KMyMoneyViewBase*> viewBases;
 
   KMyMoneyTitleLabel* m_header;
   bool m_inConstructor;
@@ -333,6 +334,9 @@ public:
    * ugly proxy function
    */
   eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
+
+  void addView(KMyMoneyViewBase* view, const QString& name, View idView);
+  void removeView(View idView);
 
 protected:
   /**

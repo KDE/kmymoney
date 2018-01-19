@@ -120,6 +120,8 @@ if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
   set(KMM_ADDRESSBOOK_FOUND true)
 endif()
 
+option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
+
 CMAKE_DEPENDENT_OPTION(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
 

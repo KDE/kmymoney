@@ -98,6 +98,8 @@ public:
     **/
   void slotRefreshViews() override;
 
+  void addView(KMyMoneyViewBase* view, const QString& name, View idView) override;
+  void removeView(View idView) override;
 private:
   KMyMoneyView* m_view;
 };

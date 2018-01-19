@@ -34,6 +34,7 @@
 
 // include kmymoneysettings.cpp here to gain access to s_globalKMyMoneySettings
 #include "kmymoneysettings.cpp"
+#include "forecastviewsettings.h"
 
 void KMyMoneyGlobalSettings::injectExternalSettings(KMyMoneySettings* p)
 {
@@ -159,16 +160,26 @@ MyMoneyForecast KMyMoneyGlobalSettings::forecast()
   MyMoneyForecast forecast;
 
   // override object defaults with those of the application
-  forecast.setForecastCycles(KMyMoneyGlobalSettings::forecastCycles());
-  forecast.setAccountsCycle(KMyMoneyGlobalSettings::forecastAccountCycle());
+  forecast.setForecastCycles(ForecastViewSettings::forecastCycles());
+  forecast.setAccountsCycle(ForecastViewSettings::forecastAccountCycle());
   forecast.setHistoryStartDate(QDate::currentDate().addDays(-forecast.forecastCycles()*forecast.accountsCycle()));
   forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
-  forecast.setForecastDays(KMyMoneyGlobalSettings::forecastDays());
-  forecast.setBeginForecastDay(KMyMoneyGlobalSettings::beginForecastDay());
-  forecast.setForecastMethod(KMyMoneyGlobalSettings::forecastMethod());
-  forecast.setHistoryMethod(KMyMoneyGlobalSettings::historyMethod());
-  forecast.setIncludeFutureTransactions(KMyMoneyGlobalSettings::includeFutureTransactions());
-  forecast.setIncludeScheduledTransactions(KMyMoneyGlobalSettings::includeScheduledTransactions());
+  forecast.setForecastDays(ForecastViewSettings::forecastDays());
+  forecast.setBeginForecastDay(ForecastViewSettings::beginForecastDay());
+  forecast.setForecastMethod(ForecastViewSettings::forecastMethod());
+  forecast.setHistoryMethod(ForecastViewSettings::historyMethod());
+  forecast.setIncludeFutureTransactions(ForecastViewSettings::includeFutureTransactions());
+  forecast.setIncludeScheduledTransactions(ForecastViewSettings::includeScheduledTransactions());
 
   return forecast;
+}
+
+int KMyMoneyGlobalSettings::forecastDays()
+{
+  return ForecastViewSettings::forecastDays();
+}
+
+int KMyMoneyGlobalSettings::forecastAccountCycle()
+{
+  return ForecastViewSettings::forecastAccountCycle();
 }

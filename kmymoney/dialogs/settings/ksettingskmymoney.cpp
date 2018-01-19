@@ -32,7 +32,6 @@
 #include "ksettingsschedules.h"
 #include "ksettingsonlinequotes.h"
 #include "ksettingshome.h"
-#include "ksettingsforecast.h"
 #include "ksettingsreports.h"
 #include "ksettingsplugins.h"
 
@@ -53,7 +52,6 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto fontsPage = new KSettingsFonts();
   const auto iconsPage = new KSettingsIcons();
   const auto onlineQuotesPage = new KSettingsOnlineQuotes();
-  const auto forecastPage = new KSettingsForecast();
   const auto reportsPage = new KSettingsReports();
   const auto pluginsPage = new KSettingsPlugins();
 
@@ -63,7 +61,6 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   addPage(schedulesPage, i18n("Scheduled transactions"), Icons::get(Icon::ViewSchedules).name());
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
   addPage(reportsPage, i18nc("Report settings", "Reports"), Icons::get(Icon::ViewReports).name());
-  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), Icons::get(Icon::ViewForecast).name());
   addPage(encryptionPage, i18n("Encryption"), Icons::get(Icon::Kgpg).name());
   addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColor).name());
   addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFont).name());

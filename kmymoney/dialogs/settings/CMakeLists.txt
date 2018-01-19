@@ -3,7 +3,6 @@ set (libsettings_a_SOURCES
   ksettingscolors.cpp
   ksettingsfonts.cpp
   ksettingsicons.cpp
-  ksettingsforecast.cpp
   ksettingsgeneral.cpp
   ksettingsgpg.cpp
   ksettingshome.cpp
@@ -19,7 +18,6 @@ set (libsettings_a_UI
   ksettingscolors.ui
   ksettingsfonts.ui
   ksettingsicons.ui
-  ksettingsforecast.ui
   ksettingsgeneral.ui
   ksettingsgpg.ui
   ksettingshome.ui

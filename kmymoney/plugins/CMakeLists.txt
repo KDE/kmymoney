@@ -9,6 +9,10 @@ add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
 
+if(ENABLE_FORECASTVIEW)
+  add_subdirectory(forecast)
+endif()
+
 if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
 endif()

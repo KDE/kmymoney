@@ -42,11 +42,14 @@ namespace KMyMoneyRegister
 class SelectedTransactions;
 }
 
+enum class View;
+
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class IMyMoneyOperationsFormat;
+class KMyMoneyViewBase;
 
 namespace KMyMoneyPlugin
 {
@@ -108,6 +111,9 @@ public:
     * @param w widget to be added to @p page
     */
 //  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
+
+    virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView) = 0;
+    virtual void removeView(View idView) = 0;
 
 Q_SIGNALS:
   /**

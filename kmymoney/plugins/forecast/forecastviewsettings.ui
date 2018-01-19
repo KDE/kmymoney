@@ -3,8 +3,8 @@
   <author></author>
   <comment></comment>
   <exportmacro></exportmacro>
-  <class>KSettingsForecast</class>
-  <widget class="QWidget" name="KSettingsForecast">
+  <class>ForecastViewSettings</class>
+  <widget class="QWidget" name="ForecastViewSettings">
     <property name="geometry">
       <rect>
         <x>0</x>
