@@ -674,6 +674,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
     qDebug("more or less than one interest split in Reinvest::createTransaction. Not created.");
     return false;
   }
+  assetAccountSplit.setAccountId(QString());
 
   MyMoneySplit& s1 = interestSplits[0];
 
