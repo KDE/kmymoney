@@ -193,57 +193,53 @@ void SecuritiesModel::load()
   * Notify the model that an object has been added. An action is performed only if the object is a security.
   *
   */
-void SecuritiesModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
+void SecuritiesModel::slotObjectAdded(eMyMoney::File::Object objType, const QString& id)
 {
   // check whether change is about security
   if (objType != eMyMoney::File::Object::Security)
     return;
 
   // check that we're about to add security
-  auto sec = dynamic_cast<const MyMoneySecurity * const>(obj);
-  if (!sec)
-    return;
+  auto sec = MyMoneyFile::instance()->security(id);
 
-  auto itSec = d->itemFromSecurityId(this, sec->id());
+  auto itSec = d->itemFromSecurityId(this, id);
 
   QStandardItem *node;
-  if (sec->isCurrency())
+  if (sec.isCurrency())
     node = d->m_ndCurrencies;
   else
     node = d->m_ndSecurities;
 
   // if security doesn't exist in model then add it
   if (!itSec) {
-    itSec = new QStandardItem(sec->name());
+    itSec = new QStandardItem(sec.name());
     node->appendRow(itSec);
     itSec->setEditable(false);
   }
 
-  d->setSecurityData(node, itSec->row(), *sec, d->m_columns);
+  d->setSecurityData(node, itSec->row(), sec, d->m_columns);
 }
 
 /**
   * Notify the model that an object has been modified. An action is performed only if the object is a security.
   *
   */
-void SecuritiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
+void SecuritiesModel::slotObjectModified(eMyMoney::File::Object objType, const QString& id)
 {
   if (objType != eMyMoney::File::Object::Security)
     return;
 
   // check that we're about to modify security
-  auto sec = dynamic_cast<const MyMoneySecurity * const>(obj);
-  if (!sec)
-    return;
+  auto sec = MyMoneyFile::instance()->security(id);
 
-  auto itSec = d->itemFromSecurityId(this, sec->id());
+  auto itSec = d->itemFromSecurityId(this, id);
 
   QStandardItem *node;
-  if (sec->isCurrency())
+  if (sec.isCurrency())
     node = d->m_ndCurrencies;
   else
     node = d->m_ndSecurities;
-  d->setSecurityData(node, itSec->row(), *sec, d->m_columns);
+  d->setSecurityData(node, itSec->row(), sec, d->m_columns);
 }
 
 /**

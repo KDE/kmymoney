@@ -244,21 +244,21 @@ bool onlineJobModel::removeRows(int row, int count, const QModelIndex & parent)
   return true;
 }
 
-void onlineJobModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
+void onlineJobModel::slotObjectAdded(eMyMoney::File::Object objType, const QString& id)
 {
   if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
     return;
   beginInsertRows(QModelIndex(), rowCount(), rowCount());
-  m_jobIdList.append(obj->id());
+  m_jobIdList.append(id);
   endInsertRows();
 }
 
-void onlineJobModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
+void onlineJobModel::slotObjectModified(eMyMoney::File::Object objType, const QString& id)
 {
   if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
     return;
 
-  int row = m_jobIdList.indexOf(obj->id());
+  int row = m_jobIdList.indexOf(id);
   if (row != -1)
     emit dataChanged(index(row, 0), index(row, columnCount() - 1));
 }

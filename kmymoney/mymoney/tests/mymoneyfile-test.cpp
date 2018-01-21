@@ -46,10 +46,10 @@ using namespace MyMoneyStandardAccounts;
 
 QTEST_GUILESS_MAIN(MyMoneyFileTest)
 
-void MyMoneyFileTest::objectAdded(eMyMoney::File::Object type, const MyMoneyObject * const obj)
+void MyMoneyFileTest::objectAdded(eMyMoney::File::Object type, const QString& id)
 {
   Q_UNUSED(type);
-  m_objectsAdded += obj->id();
+  m_objectsAdded += id;
 }
 
 void MyMoneyFileTest::objectRemoved(eMyMoney::File::Object type, const QString& id)
@@ -58,10 +58,10 @@ void MyMoneyFileTest::objectRemoved(eMyMoney::File::Object type, const QString& 
   m_objectsRemoved += id;
 }
 
-void MyMoneyFileTest::objectModified(eMyMoney::File::Object type, const MyMoneyObject * const obj)
+void MyMoneyFileTest::objectModified(eMyMoney::File::Object type, const QString& id)
 {
   Q_UNUSED(type);
-  m_objectsModified += obj->id();
+  m_objectsModified += id;
 }
 
 void MyMoneyFileTest::clearObjectLists()
@@ -88,11 +88,11 @@ void MyMoneyFileTest::initTestCase()
 {
   m = MyMoneyFile::instance();
 
-  connect(m, SIGNAL(objectAdded(eMyMoney::File::Object,MyMoneyObject*const)), this, SLOT(objectAdded(eMyMoney::File::Object,MyMoneyObject*const)));
-  connect(m, SIGNAL(objectRemoved(eMyMoney::File::Object,QString)), this, SLOT(objectRemoved(eMyMoney::File::Object,QString)));
-  connect(m, SIGNAL(objectModified(eMyMoney::File::Object,MyMoneyObject*const)), this, SLOT(objectModified(eMyMoney::File::Object,MyMoneyObject*const)));
-  connect(m, SIGNAL(balanceChanged(MyMoneyAccount)), this, SLOT(balanceChanged(MyMoneyAccount)));
-  connect(m, SIGNAL(valueChanged(MyMoneyAccount)), this, SLOT(valueChanged(MyMoneyAccount)));
+  connect(m, &MyMoneyFile::objectAdded, this, &MyMoneyFileTest::objectAdded);
+  connect(m, &MyMoneyFile::objectRemoved, this, &MyMoneyFileTest::objectRemoved);
+  connect(m, &MyMoneyFile::objectModified, this, &MyMoneyFileTest::objectModified);
+  connect(m, &MyMoneyFile::balanceChanged, this, &MyMoneyFileTest::balanceChanged);
+  connect(m, &MyMoneyFile::valueChanged, this, &MyMoneyFileTest::valueChanged);
 }
 
 // this method will be called before each testfunction

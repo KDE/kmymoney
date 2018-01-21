@@ -1024,7 +1024,7 @@ void KMyMoneyApp::slotPerformanceTest()
   qDebug("--- Starting performance tests ---");
 
   // AccountList
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   timer.start();
   for (int i = 0; i < 1000; ++i) {
@@ -1039,7 +1039,7 @@ void KMyMoneyApp::slotPerformanceTest()
   std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
   // Balance of asset account(s)
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   acc = MyMoneyFile::instance()->asset();
   for (int i = 0; i < 1000; ++i) {
@@ -1052,7 +1052,7 @@ void KMyMoneyApp::slotPerformanceTest()
   std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
   // total balance of asset account
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   acc = MyMoneyFile::instance()->asset();
   for (int i = 0; i < 1000; ++i) {
@@ -1065,7 +1065,7 @@ void KMyMoneyApp::slotPerformanceTest()
   std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
   // Balance of expense account(s)
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   acc = MyMoneyFile::instance()->expense();
   for (int i = 0; i < 1000; ++i) {
@@ -1078,7 +1078,7 @@ void KMyMoneyApp::slotPerformanceTest()
   std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
   // total balance of expense account
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   acc = MyMoneyFile::instance()->expense();
   timer.start();
@@ -1092,7 +1092,7 @@ void KMyMoneyApp::slotPerformanceTest()
   std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
   // transaction list
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   if (MyMoneyFile::instance()->asset().accountCount()) {
     MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList()[0]);
@@ -1111,7 +1111,7 @@ void KMyMoneyApp::slotPerformanceTest()
   }
 
   // transaction list
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
   measurement[0] = measurement[1] = 0;
   if (MyMoneyFile::instance()->asset().accountCount()) {
     MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList()[0]);
@@ -1128,7 +1128,7 @@ void KMyMoneyApp::slotPerformanceTest()
     std::cerr << "Total time: " << (measurement[0] + measurement[1]) << " msec" << std::endl;
     std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 100 << " msec" << std::endl;
   }
-  MyMoneyFile::instance()->preloadCache();
+//  MyMoneyFile::instance()->preloadCache();
 }
 
 void KMyMoneyApp::slotFileNew()

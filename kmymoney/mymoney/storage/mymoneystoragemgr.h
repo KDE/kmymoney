@@ -120,6 +120,17 @@ public:
   MyMoneyAccount account(const QString& id) const;
 
   /**
+    * This method is used to retrieve the id to a corresponding
+    * name of an account.
+    * An exception will be thrown upon error conditions.
+    *
+    * @param name QString reference to name of account
+    *
+    * @return MyMoneyAccount reference to object of account
+    */
+  MyMoneyAccount accountByName(const QString& name) const;
+
+  /**
     * This method is used to check whether a given
     * account id references one of the standard accounts or not.
     *

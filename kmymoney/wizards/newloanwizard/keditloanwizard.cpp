@@ -503,9 +503,8 @@ const MyMoneyAccount KEditLoanWizard::account() const
 
   QString institution = d->ui->m_loanAttributesPage->ui->m_qcomboboxInstitutions->currentText();
   if (institution != i18n("(No Institution)")) {
-    QList<MyMoneyInstitution> list;
-    file->institutionList(list);
-    Q_FOREACH(const MyMoneyInstitution& testInstitution, list) {
+    const auto list = file->institutionList();
+    for (const auto& testInstitution : list) {
       if (testInstitution.name() == institution) {
         acc.setInstitutionId(testInstitution.id());
         break;

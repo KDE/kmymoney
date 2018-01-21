@@ -272,7 +272,8 @@ namespace eMyMoney {
       Tag,
       Schedule,
       Security,
-      OnlineJob
+      OnlineJob,
+      CostCenter
     };
 
     /**

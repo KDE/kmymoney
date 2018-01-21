@@ -235,13 +235,12 @@ public:
   {
     Q_Q(const MyMoneyStorageMgr);
     MyMoneyMoney balance;
-    QList<MyMoneyTransaction> list;
 
     MyMoneyTransactionFilter filter;
     filter.setDateFilter(QDate(), date);
     filter.setReportAllSplits(false);
-    q->transactionList(list, filter);
 
+    const auto list = q->transactionList(filter);
     for (const auto& transaction : list) {
       const auto splits = transaction.splits();
       for (const auto& split : splits) {

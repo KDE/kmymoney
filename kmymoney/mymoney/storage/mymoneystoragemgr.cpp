@@ -139,6 +139,23 @@ MyMoneyAccount MyMoneyStorageMgr::account(const QString& id) const
   throw MYMONEYEXCEPTION(msg);
 }
 
+MyMoneyAccount MyMoneyStorageMgr::accountByName(const QString& name) const
+{
+  Q_D(const MyMoneyStorageMgr);
+  if (name.isEmpty())
+    return MyMoneyAccount();
+
+  QMap<QString, MyMoneyAccount>::ConstIterator it_a;
+
+  for (it_a = d->m_accountList.begin(); it_a != d->m_accountList.end(); ++it_a) {
+    if ((*it_a).name() == name) {
+      return *it_a;
+    }
+  }
+
+  throw MYMONEYEXCEPTION("Unknown account '" + name + '\'');
+}
+
 void MyMoneyStorageMgr::accountList(QList<MyMoneyAccount>& list) const
 {
   Q_D(const MyMoneyStorageMgr);
@@ -830,7 +847,8 @@ void MyMoneyStorageMgr::transactionList(QList<MyMoneyTransaction>& list, MyMoney
   Q_D(const MyMoneyStorageMgr);
   list.clear();
 
-  for (const auto& transaction : d->m_transactionList) {
+  const auto& transactions = d->m_transactionList;
+  for (const auto& transaction : transactions) {
     // This code is used now. It adds the transaction to the list for
     // each matching split exactly once. This allows to show information
     // about different splits in the same register view (e.g. search result)
@@ -927,7 +945,6 @@ MyMoneyTransaction MyMoneyStorageMgr::transaction(const QString& account, const 
   */
 
   // new implementation if the above code does not work anymore
-  QList<MyMoneyTransaction> list;
   auto acc = d->m_accountList[account];
   MyMoneyTransactionFilter filter;
 
@@ -937,7 +954,7 @@ MyMoneyTransaction MyMoneyStorageMgr::transaction(const QString& account, const 
   else
     filter.addAccount(account);
 
-  transactionList(list, filter);
+  const auto list = transactionList(filter);
   if (idx < 0 || idx >= static_cast<int>(list.count()))
     throw MYMONEYEXCEPTION("Unknown idx for transaction");
 
@@ -1441,6 +1458,12 @@ MyMoneySecurity MyMoneyStorageMgr::security(const QString& id) const
   Q_D(const MyMoneyStorageMgr);
   QMap<QString, MyMoneySecurity>::ConstIterator it = d->m_securitiesList.find(id);
   if (it != d->m_securitiesList.end()) {
+    return it.value();
+  }
+
+  // FIXME: in places where a currency is needed, a currency method should be called even if the currency is in fact a security
+  it = d->m_currencyList.find(id);
+  if (it != d->m_currencyList.end()) {
     return it.value();
   }
 

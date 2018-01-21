@@ -96,11 +96,11 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
   void removeTransaction(eMyMoney::File::Object objType, const QString& id);
-  void addTransaction   (eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void modifyTransaction(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void addTransaction   (eMyMoney::File::Object objType, const QString& id);
+  void modifyTransaction(eMyMoney::File::Object objType, const QString& id);
   void removeSchedule   (eMyMoney::File::Object objType, const QString& id);
-  void addSchedule      (eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void modifySchedule   (eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void addSchedule      (eMyMoney::File::Object objType, const QString& id);
+  void modifySchedule   (eMyMoney::File::Object objType, const QString& id);
 
 private:
   Q_DISABLE_COPY(LedgerModel)

@@ -886,30 +886,28 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
   * Notify the model that an object has been added. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * const obj)
+void AccountsModel::slotObjectAdded(File::Object objType, const QString& id)
 {
   if (objType != File::Object::Account)
     return;
 
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!account)
-    return;
+  const auto account = MyMoneyFile::instance()->account(id);
 
   auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
-  auto parentAccountItem = d->itemFromAccountId(this, account->parentAccountId());
-  auto item = d->itemFromAccountId(parentAccountItem, account->id());
+  auto parentAccountItem = d->itemFromAccountId(this, account.parentAccountId());
+  auto item = d->itemFromAccountId(parentAccountItem, account.id());
   if (!item) {
-    item = new QStandardItem(account->name());
+    item = new QStandardItem(account.name());
     parentAccountItem->appendRow(item);
     item->setEditable(false);
   }
   // load the sub-accounts if there are any - there could be sub accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  d->loadSubaccounts(item, favoriteAccountsItem, account->accountList());
+  d->loadSubaccounts(item, favoriteAccountsItem, account.accountList());
 
   const auto row = item->row();
-  d->setAccountData(parentAccountItem, row, *account, d->m_columns);
-  d->loadPreferredAccount(*account, parentAccountItem, row, favoriteAccountsItem);
+  d->setAccountData(parentAccountItem, row, account, d->m_columns);
+  d->loadPreferredAccount(account, parentAccountItem, row, favoriteAccountsItem);
 
   checkNetWorth();
   checkProfit();
@@ -919,34 +917,33 @@ void AccountsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * 
   * Notify the model that an object has been modified. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectModified(File::Object objType, const MyMoneyObject * const obj)
+void AccountsModel::slotObjectModified(File::Object objType, const QString& id)
 {
   if (objType != File::Object::Account)
     return;
 
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!account)
-    return;
+  const auto account = MyMoneyFile::instance()->account(id);
+
   auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
-  auto accountItem = d->itemFromAccountId(this, account->id());
+  auto accountItem = d->itemFromAccountId(this, account.id());
   const auto oldAccount = accountItem->data((int)Role::Account).value<MyMoneyAccount>();
-  if (oldAccount.parentAccountId() == account->parentAccountId()) {
+  if (oldAccount.parentAccountId() == account.parentAccountId()) {
     // the hierarchy did not change so update the account data
     auto parentAccountItem = accountItem->parent();
     if (!parentAccountItem)
       parentAccountItem = this->invisibleRootItem();
     const auto row = accountItem->row();
-    d->setAccountData(parentAccountItem, row, *account, d->m_columns);
+    d->setAccountData(parentAccountItem, row, account, d->m_columns);
     // and the child of the favorite item if the account is a favorite account or it's favorite status has just changed
-    auto favItem = d->itemFromAccountId(favoriteAccountsItem, account->id());
-    if (account->value("PreferredAccount") == QLatin1String("Yes"))
-      d->loadPreferredAccount(*account, parentAccountItem, row, favoriteAccountsItem);
+    auto favItem = d->itemFromAccountId(favoriteAccountsItem, account.id());
+    if (account.value("PreferredAccount") == QLatin1String("Yes"))
+      d->loadPreferredAccount(account, parentAccountItem, row, favoriteAccountsItem);
     else if (favItem)
       favoriteAccountsItem->removeRow(favItem->row()); // it's not favorite anymore
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(File::Object::Account, oldAccount.id());
-    slotObjectAdded(File::Object::Account, obj);
+    slotObjectAdded(File::Object::Account, id);
   }
 
   checkNetWorth();
@@ -1096,8 +1093,7 @@ InstitutionsModel::InstitutionsModel(QObject *parent /*= 0*/)
 void InstitutionsModel::load()
 {
   // create items for all the institutions
-  QList<MyMoneyInstitution> institutionList;
-  d->m_file->institutionList(institutionList);
+  auto institutionList = d->m_file->institutionList();
   MyMoneyInstitution none;
   none.setName(i18n("Accounts with no institution assigned"));
   institutionList.append(none);
@@ -1128,32 +1124,30 @@ void InstitutionsModel::load()
   * Notify the model that an object has been added. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * const obj)
+void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
 {
   auto modelUtils = static_cast<InstitutionsPrivate *>(d);
   if (objType == File::Object::Institution) {
     // if an institution was added then add the item which will represent it
-    const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
-    if (!institution)
-      return;
-    modelUtils->addInstitutionItem(this, *institution);
+    const auto institution = MyMoneyFile::instance()->institution(id);
+    modelUtils->addInstitutionItem(this, institution);
   }
 
   if (objType != File::Object::Account)
     return;
 
   // if an account was added then add the item which will represent it only for real accounts
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
+  const auto account = MyMoneyFile::instance()->account(id);
   // nothing to do for root accounts and categories
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense())
+  if (account.parentAccountId().isEmpty() || account.isIncomeExpense())
     return;
 
   // load the account into the institution
-  modelUtils->loadInstitution(this, *account);
+  modelUtils->loadInstitution(this, account);
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  const auto sAccounts = account->accountList();
+  const auto sAccounts = account.accountList();
   if (!sAccounts.isEmpty()) {
     QList<MyMoneyAccount> subAccounts;
     d->m_file->accountList(subAccounts, sAccounts);
@@ -1169,37 +1163,35 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const MyMoneyObjec
   * Notify the model that an object has been modified. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectModified(File::Object objType, const MyMoneyObject * const obj)
+void InstitutionsModel::slotObjectModified(File::Object objType, const QString& id)
 {
   if (objType == File::Object::Institution) {
     // if an institution was modified then modify the item which represents it
-    const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
-    if (!institution)
-      return;
-    auto institutionItem = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, institution->id());
-    institutionItem->setData(institution->name(), Qt::DisplayRole);
-    institutionItem->setData(QVariant::fromValue(*institution), (int)Role::Account);
-    institutionItem->setIcon(institution->pixmap());
+    const auto institution = MyMoneyFile::instance()->institution(id);
+    auto institutionItem = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, institution.id());
+    institutionItem->setData(institution.name(), Qt::DisplayRole);
+    institutionItem->setData(QVariant::fromValue(institution), (int)Role::Account);
+    institutionItem->setIcon(institution.pixmap());
   }
 
   if (objType != File::Object::Account)
     return;
 
   // if an account was modified then modify the item which represents it
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
+  const auto account = MyMoneyFile::instance()->account(id);
   // nothing to do for root accounts, categories and equity accounts since they don't have a representation in this model
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == Account::Type::Equity)
+  if (account.parentAccountId().isEmpty() || account.isIncomeExpense() || account.accountType() == Account::Type::Equity)
     return;
 
-  auto accountItem = d->itemFromAccountId(this, account->id());
+  auto accountItem = d->itemFromAccountId(this, account.id());
   const auto oldAccount = accountItem->data((int)Role::Account).value<MyMoneyAccount>();
-  if (oldAccount.institutionId() == account->institutionId()) {
+  if (oldAccount.institutionId() == account.institutionId()) {
     // the hierarchy did not change so update the account data
-    d->setAccountData(accountItem->parent(), accountItem->row(), *account, d->m_columns);
+    d->setAccountData(accountItem->parent(), accountItem->row(), account, d->m_columns);
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(File::Object::Account, oldAccount.id());
-    slotObjectAdded(File::Object::Account, obj);
+    slotObjectAdded(File::Object::Account, id);
   }
 }
 

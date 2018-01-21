@@ -66,7 +66,7 @@ LedgerModel::LedgerModel(QObject* parent) :
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  connect(file, &MyMoneyFile::objectAdded,    this, static_cast<void (LedgerModel::*)(File::Object, const MyMoneyObject * const)>(&LedgerModel::addTransaction));
+  connect(file, &MyMoneyFile::objectAdded,    this, static_cast<void (LedgerModel::*)(File::Object, const QString&)>(&LedgerModel::addTransaction));
   connect(file, &MyMoneyFile::objectModified, this, &LedgerModel::modifyTransaction);
   connect(file, &MyMoneyFile::objectRemoved,  this, &LedgerModel::removeTransaction);
 
@@ -502,37 +502,37 @@ void LedgerModel::load()
   qDebug() << "Loaded" << rowCount() << "elements";
 }
 
-void LedgerModel::addTransaction(File::Object objType, const MyMoneyObject * const obj)
+void LedgerModel::addTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
   }
   Q_D(LedgerModel);
-  qDebug() << "Adding transaction" << obj->id();
+  qDebug() << "Adding transaction" << id;
 
-  const MyMoneyTransaction * const t = static_cast<const MyMoneyTransaction * const>(obj);
+  const auto t = MyMoneyFile::instance()->transaction(id);
 
-  beginInsertRows(QModelIndex(), rowCount(), rowCount() + t->splitCount() - 1);
-  foreach (auto s, t->splits())
-    d->m_ledgerItems.append(new LedgerTransaction(*t, s));
+  beginInsertRows(QModelIndex(), rowCount(), rowCount() + t.splitCount() - 1);
+  foreach (auto s, t.splits())
+    d->m_ledgerItems.append(new LedgerTransaction(t, s));
   endInsertRows();
 
   // just make sure we're in sync
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* const obj)
+void LedgerModel::modifyTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
   }
 
   Q_D(LedgerModel);
-  const MyMoneyTransaction * const t = static_cast<const MyMoneyTransaction * const>(obj);
+  const auto t = MyMoneyFile::instance()->transaction(id);
   // get indexes of all existing splits for this transaction
-  QModelIndexList list = match(index(0, 0), (int)Role::TransactionId, obj->id(), -1);
+  auto list = match(index(0, 0), (int)Role::TransactionId, id, -1);
   // get list of splits to be stored
-  QList<MyMoneySplit> splits = t->splits();
+  auto splits = t.splits();
 
   int lastRowUsed = -1;
   int firstRowUsed = 99999999;
@@ -547,9 +547,9 @@ void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* c
     QModelIndex index = list.takeFirst();
     MyMoneySplit split = splits.takeFirst();
     // get rid of the old split and store new split
-    qDebug() << "Modify split in row:" << index.row() << t->id() << split.id();
+    qDebug() << "Modify split in row:" << index.row() << t.id() << split.id();
     delete d->m_ledgerItems[index.row()];
-    d->m_ledgerItems[index.row()] = new LedgerTransaction(*t, split);
+    d->m_ledgerItems[index.row()] = new LedgerTransaction(t, split);
   }
 
   // inform every one else about the changes
@@ -567,7 +567,7 @@ void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* c
     d->m_ledgerItems.insert(lastRowUsed, splits.count(), 0);
     while(!splits.isEmpty()) {
       MyMoneySplit split = splits.takeFirst();
-      d->m_ledgerItems[lastRowUsed] = new LedgerTransaction(*t, split);
+      d->m_ledgerItems[lastRowUsed] = new LedgerTransaction(t, split);
       lastRowUsed++;
     }
     endInsertRows();
@@ -616,9 +616,9 @@ void LedgerModel::removeTransaction(File::Object objType, const QString& id)
   }
 }
 
-void LedgerModel::addSchedule(File::Object objType, const MyMoneyObject*const obj)
+void LedgerModel::addSchedule(File::Object objType, const QString& id)
 {
-  Q_UNUSED(obj);
+  Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
     return;
   }
@@ -626,9 +626,9 @@ void LedgerModel::addSchedule(File::Object objType, const MyMoneyObject*const ob
   /// @todo implement LedgerModel::addSchedule
 }
 
-void LedgerModel::modifySchedule(File::Object objType, const MyMoneyObject*const obj)
+void LedgerModel::modifySchedule(File::Object objType, const QString& id)
 {
-  Q_UNUSED(obj);
+  Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
     return;
   }

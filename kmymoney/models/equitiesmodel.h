@@ -48,8 +48,8 @@ public:
   static QString getHeaderName(const Column column);
 
 public Q_SLOTS:
-  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectAdded(eMyMoney::File::Object objType, const QString &id);
+  void slotObjectModified(eMyMoney::File::Object objType, const QString &id);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
   void slotBalanceOrValueChanged(const MyMoneyAccount &account);
 

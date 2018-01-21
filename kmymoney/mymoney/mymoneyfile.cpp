@@ -46,7 +46,6 @@
 #include "mymoneybalancecache.h"
 #include "mymoneybudget.h"
 #include "mymoneyprice.h"
-#include "mymoneyobjectcontainer.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "mymoneyschedule.h"
@@ -170,16 +169,9 @@ public:
     * @param reload reload the object (@c true) or not (@c false). The default is @c true
     * @see attach, detach
     */
-  void addCacheNotification(const QString& id, bool reload = true) {
+  void addCacheNotification(const QString& id, const QDate& date) {
     if (!id.isEmpty())
-      m_notificationList[id] = reload;
-  }
-
-  void addCacheNotification(const QString& id, const QDate& date, bool reload = true) {
-    if (!id.isEmpty()) {
-      m_notificationList[id] = reload;
       m_balanceNotifyList.append(std::make_pair(id, date));
-    }
   }
 
   /**
@@ -187,7 +179,6 @@ public:
     */
   void clearCacheNotification() {
     // reset list to be empty
-    m_notificationList.clear();
     m_balanceNotifyList.clear();
   }
 
@@ -196,15 +187,6 @@ public:
     * objects mentioned in m_notificationList from the cache.
     */
   void notify() {
-    QMap<QString, bool>::ConstIterator it = m_notificationList.constBegin();
-    while (it != m_notificationList.constEnd()) {
-      if (*it)
-        m_cache.refresh(it.key());
-      else
-        m_cache.clear(it.key());
-      ++it;
-    }
-
     foreach (const BalanceNotifyList::value_type & i, m_balanceNotifyList) {
       m_balanceChangedSet += i.first;
       if (i.second.isValid()) {
@@ -267,19 +249,8 @@ public:
    * It is also used to emit the objectAdded() and objectModified() signals.
    * => If one of these signals is used, you must use this cache.
    */
-  MyMoneyObjectContainer m_cache;
   MyMoneyPriceList       m_priceCache;
   MyMoneyBalanceCache    m_balanceCache;
-
-  /**
-    * This member keeps a list of ids to notify after a single
-    * operation is completed. The boolean is used as follows
-    * during processing of the list:
-    *
-    * false - don't reload the object immediately
-    * true  - reload the object immediately
-    */
-  CacheNotifyList   m_notificationList;
 
   /**
     * This member keeps a list of account ids to notify
@@ -322,10 +293,10 @@ class MyMoneyNotifier
 public:
   MyMoneyNotifier(MyMoneyFile::Private* file) {
     m_file = file; m_file->clearCacheNotification();
-  };
+  }
   ~MyMoneyNotifier() {
     m_file->notify();
-  };
+  }
 private:
   MyMoneyFile::Private* m_file;
 };
@@ -368,9 +339,7 @@ void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
 
   // and the whole cache
   d->m_balanceCache.clear();
-  d->m_cache.clear(storage);
   d->m_priceCache.clear();
-  preloadCache();
 
   // notify application about new data availability
   emit beginChangeNotification();
@@ -381,9 +350,8 @@ void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
 void MyMoneyFile::detachStorage(MyMoneyStorageMgr* const /* storage */)
 {
   d->m_balanceCache.clear();
-  d->m_cache.clear();
   d->m_priceCache.clear();
-  d->m_storage = 0;
+  d->m_storage = nullptr;
 }
 
 MyMoneyStorageMgr* MyMoneyFile::storage() const
@@ -418,7 +386,7 @@ void MyMoneyFile::commitTransaction()
   d->checkTransaction(Q_FUNC_INFO);
 
   // commit the transaction in the storage
-  bool changed = d->m_storage->commitTransaction();
+  const auto changed = d->m_storage->commitTransaction();
   d->m_inTransaction = false;
 
   // inform the outside world about the beginning of notifications
@@ -427,37 +395,22 @@ void MyMoneyFile::commitTransaction()
   // Now it's time to send out some signals to the outside world
   // First we go through the d->m_changeSet and emit respective
   // signals about addition, modification and removal of engine objects
-  QList<MyMoneyNotification>::const_iterator it = d->m_changeSet.constBegin();
-  while (it != d->m_changeSet.constEnd()) {
-    if ((*it).notificationMode() == File::Mode::Remove) {
-      emit objectRemoved((*it).objectType(), (*it).id());
-      // if there is a balance change recorded for this account remove it since the account itself will be removed
-      // this can happen when deleting categories that have transactions and the reassign category feature was used
-      d->m_balanceChangedSet.remove((*it).id());
-    } else {
-      const MyMoneyObject * obj = 0;
-      MyMoneyTransaction tr;
-
-      switch((*it).objectType()) {
-        case File::Object::Transaction:
-          tr = transaction((*it).id());
-          obj = &tr;
-          break;
-
-        default:
-          obj = d->m_cache.object((*it).id());
-          break;
-      }
-      if (obj) {
-        if ((*it).notificationMode() == File::Mode::Add) {
-          emit objectAdded((*it).objectType(), obj);
-
-        } else {
-          emit objectModified((*it).objectType(), obj);
-        }
-      }
+  const auto& changes = d->m_changeSet;
+  for (const auto& change : changes) {
+    switch (change.notificationMode()) {
+      case File::Mode::Remove:
+        emit objectRemoved(change.objectType(), change.id());
+        // if there is a balance change recorded for this account remove it since the account itself will be removed
+        // this can happen when deleting categories that have transactions and the reassign category feature was used
+        d->m_balanceChangedSet.remove(change.id());
+        break;
+      case File::Mode::Add:
+        emit objectAdded(change.objectType(), change.id());
+        break;
+      case File::Mode::Modify:
+        emit objectModified(change.objectType(), change.id());
+        break;
     }
-    ++it;
   }
 
   // we're done with the change set, so we clear it
@@ -466,26 +419,25 @@ void MyMoneyFile::commitTransaction()
   // now send out the balanceChanged signal for all those
   // accounts for which we have an indication about a possible
   // change.
-  foreach (const QString& id, d->m_balanceChangedSet) {
+  const auto& balanceChanges = d->m_balanceChangedSet;
+  for (const auto& id : balanceChanges) {
     // if we notify about balance change we don't need to notify about value change
     // for the same account since a balance change implies a value change
     d->m_valueChangedSet.remove(id);
-    const auto acc = d->m_cache.account(id);
-    emit balanceChanged(acc);
+    emit balanceChanged(account(id));
   }
   d->m_balanceChangedSet.clear();
 
   // now notify about the remaining value changes
-  foreach (const QString& id, d->m_valueChangedSet) {
-    const auto acc = d->m_cache.account(id);
-    emit valueChanged(acc);
-  }
+  const auto& m_valueChanges = d->m_valueChangedSet;
+  for (const auto& id : m_valueChanges)
+    emit valueChanged(account(id));
+
   d->m_valueChangedSet.clear();
 
   // as a last action, send out the global dataChanged signal
-  if (changed) {
+  if (changed)
     emit dataChanged();
-  }
 
   // inform the outside world about the end of notifications
   emit endChangeNotification();
@@ -497,7 +449,6 @@ void MyMoneyFile::rollbackTransaction()
 
   d->m_storage->rollbackTransaction();
   d->m_inTransaction = false;
-  preloadCache();
   d->m_balanceChangedSet.clear();
   d->m_valueChangedSet.clear();
   d->m_changeSet.clear();
@@ -515,15 +466,7 @@ void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)
 
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addInstitution(institution);
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadInstitution(institution);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, institution);
 }
 
@@ -531,12 +474,7 @@ void MyMoneyFile::modifyInstitution(const MyMoneyInstitution& institution)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->modifyInstitution(institution);
-
-  d->addCacheNotification(institution.id());
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
 }
 
@@ -548,7 +486,8 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // now check the splits
   bool loanAccountAffected = false;
-  foreach (const auto split, transaction.splits()) {
+  const auto splits1 = transaction.splits();
+  for (const auto& split : splits1) {
     // the following line will throw an exception if the
     // account does not exist
     auto acc = MyMoneyFile::account(split.accountId());
@@ -563,7 +502,8 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // change transfer splits between asset/liability and loan accounts
   // into amortization splits
   if (loanAccountAffected) {
-    foreach (const auto split, transaction.splits()) {
+    const auto splits = transaction.splits();
+    for (const auto& split : splits) {
       if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
         auto acc = MyMoneyFile::account(split.accountId());
 
@@ -584,11 +524,9 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // scan the splits again to update notification list
   // and mark all accounts that are referenced
-  foreach (const auto split, tr.splits()) {
+  const auto splits2 = tr.splits();
+  foreach (const auto& split, splits2)
     d->addCacheNotification(split.accountId(), tr.postDate());
-    d->addCacheNotification(split.payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
-  }
 
   // make sure the value is rounded to the accounts precision
   fixSplitPrecision(tCopy);
@@ -597,11 +535,9 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   d->m_storage->modifyTransaction(tCopy);
 
   // and mark all accounts that are referenced
-  foreach (const auto split, tCopy.splits()) {
+  const auto splits3 = tCopy.splits();
+  for (const auto& split : splits3)
     d->addCacheNotification(split.accountId(), tCopy.postDate());
-    d->addCacheNotification(split.payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
-  }
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, transaction);
 }
@@ -632,9 +568,6 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
       !account.isLiquidAsset() && !acc.isLiquidAsset())
     throw MYMONEYEXCEPTION("Unable to change account type");
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   // if the account was moved to another institution, we notify
   // the old one as well as the new one and the structure change
   if (acc.institutionId() != account.institutionId()) {
@@ -651,13 +584,9 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
       modifyInstitution(inst);
       // modifyInstitution updates d->m_changeSet already
     }
-    d->addCacheNotification(acc.institutionId());
-    d->addCacheNotification(account.institutionId());
   }
 
   d->m_storage->modifyAccount(account);
-
-  d->addCacheNotification(account.id());
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, account);
 }
 
@@ -679,19 +608,10 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
     if (parent.accountType() == Account::Type::Investment && !acc.isInvest())
       throw MYMONEYEXCEPTION("Unable to reparent non-stock to investment account");
 
-    // clear all changed objects from cache
-    MyMoneyNotifier notifier(d);
-
     // keep a notification of the current parent
     MyMoneyAccount curParent = account(acc.parentAccountId());
 
-    d->addCacheNotification(curParent.id());
-
     d->m_storage->reparentAccount(acc, parent);
-
-    // and also keep one for the account itself and the new parent
-    d->addCacheNotification(acc.id());
-    d->addCacheNotification(parent.id());
 
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, curParent);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
@@ -703,21 +623,25 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 
 MyMoneyInstitution MyMoneyFile::institution(const QString& id) const
 {
-  return d->m_cache.institution(id);
+  return d->m_storage->institution(id);
 }
 
 MyMoneyAccount MyMoneyFile::account(const QString& id) const
 {
-  return d->m_cache.account(id);
+  if (Q_UNLIKELY(id.isEmpty())) // FIXME: Stop requesting accounts with empty id
+    return MyMoneyAccount();
+
+  return d->m_storage->account(id);
 }
 
 MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& acc, const QString& name) const
 {
   static MyMoneyAccount nullAccount;
 
-  foreach (const auto sAccount, acc.accountList()) {
-    const auto sacc = account(sAccount);
-    if (sacc.name() == name)
+  const auto accounts = acc.accountList();
+  for (const auto& acc : accounts) {
+    const auto sacc = account(acc);
+    if (sacc.name().compare(name) == 0)
       return sacc;
   }
   return nullAccount;
@@ -725,7 +649,7 @@ MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& acc, const QS
 
 MyMoneyAccount MyMoneyFile::accountByName(const QString& name) const
 {
-  return d->m_cache.accountByName(name);
+  return d->m_storage->accountByName(name);
 }
 
 void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
@@ -739,12 +663,12 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
   MyMoneyTransaction tr = MyMoneyFile::transaction(transaction.id());
 
   // scan the splits again to update notification list
-  foreach (const auto split, tr.splits()) {
+  const auto splits = tr.splits();
+  for (const auto& split : splits) {
     auto acc = account(split.accountId());
     if (acc.isClosed())
       throw MYMONEYEXCEPTION(i18n("Cannot remove transaction that references a closed account."));
     d->addCacheNotification(split.accountId(), tr.postDate());
-    d->addCacheNotification(split.payeeId());
     //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
 
@@ -782,12 +706,8 @@ void MyMoneyFile::setAccountName(const QString& id, const QString& name) const
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  MyMoneyNotifier notifier(d);
-
   auto acc = account(id);
   d->m_storage->setAccountName(id, name);
-  d->addCacheNotification(id);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, acc);
 }
 
@@ -814,18 +734,12 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
     throw MYMONEYEXCEPTION("Unable to remove account with active splits");
   }
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   // collect all sub-ordinate accounts for notification
-  foreach (const QString& id, acc.accountList()) {
-    d->addCacheNotification(id);
-    const auto acc = MyMoneyFile::account(id);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, acc);
-  }
+  const auto accounts = acc.accountList();
+  for (const auto& id : accounts)
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, MyMoneyFile::account(id));
+
   // don't forget the parent and a possible institution
-  d->addCacheNotification(parent.id());
-  d->addCacheNotification(account.institutionId());
 
   if (!institution.id().isEmpty()) {
     institution.removeAccountId(account.id());
@@ -836,8 +750,6 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   d->m_storage->removeAccount(acc);
 
-  d->addCacheNotification(acc.id(), false);
-  d->m_cache.clear(acc.id());
   d->m_balanceCache.clear(acc.id());
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
@@ -874,7 +786,6 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
     }
 
     // make sure to remove the item from the cache
-    d->m_cache.clear(a.id());
     removeAccount(a);
   }
 }
@@ -884,7 +795,7 @@ bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigne
   if (level > 100)
     throw MYMONEYEXCEPTION("Too deep recursion in [MyMoneyFile::hasOnlyUnusedAccounts]!");
   // process all accounts in the list and test if they have transactions assigned
-  foreach (const auto sAccount, account_list) {
+  for (const auto& sAccount : account_list) {
     if (transactionCount(sAccount) != 0)
       return false; // the current account has a transaction assigned
     if (!hasOnlyUnusedAccounts(account(sAccount).accountList(), level + 1))
@@ -898,27 +809,22 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
-  QList<QString>::ConstIterator it_a;
   MyMoneyInstitution inst = MyMoneyFile::institution(institution.id());
 
   bool blocked = signalsBlocked();
   blockSignals(true);
-  for (it_a = inst.accountList().constBegin(); it_a != inst.accountList().constEnd(); ++it_a) {
-    auto acc = account(*it_a);
-    acc.setInstitutionId(QString());
-    modifyAccount(acc);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, acc);
+  const auto accounts = inst.accountList();
+  for (const auto& acc : accounts) {
+    auto a = account(acc);
+    a.setInstitutionId(QString());
+    modifyAccount(a);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, a);
   }
   blockSignals(blocked);
 
   d->m_storage->removeInstitution(institution);
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, institution);
-
-  d->addCacheNotification(institution.id(), false);
 }
 
 void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
@@ -1065,9 +971,6 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   if (!account.isInvest() && parent.accountType() == Account::Type::Investment)
     throw MYMONEYEXCEPTION("Investment account can only have stock accounts as children");
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   // if an institution is set, verify that it exists
   if (account.institutionId().length() != 0) {
     // check the presence of the institution. if it
@@ -1104,14 +1007,7 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     institution.addAccountId(account.id());
     d->m_storage->modifyInstitution(institution);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
-    d->addCacheNotification(institution.id());
   }
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadAccount(account);
-
-  d->addCacheNotification(parent.id());
 }
 
 MyMoneyTransaction MyMoneyFile::createOpeningBalanceTransaction(const MyMoneyAccount& acc, const MyMoneyMoney& balance)
@@ -1310,7 +1206,8 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
   // now check the splits
   auto loanAccountAffected = false;
-  foreach (const auto split, transaction.splits()) {
+  const auto splits1 = transaction.splits();
+  for (const auto& split : splits1) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
     auto acc = MyMoneyFile::account(split.accountId());
@@ -1350,11 +1247,9 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   d->m_storage->addTransaction(transaction);
 
   // scan the splits again to update notification list
-  foreach (const auto split, transaction.splits()) {
+  const auto splits2 = transaction.splits();
+  for (const auto& split : splits2)
     d->addCacheNotification(split.accountId(), transaction.postDate());
-    d->addCacheNotification(split.payeeId());
-    //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
-  }
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, transaction);
 }
@@ -1377,41 +1272,30 @@ void MyMoneyFile::addPayee(MyMoneyPayee& payee)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addPayee(payee);
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadPayee(payee);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, payee);
 }
 
 MyMoneyPayee MyMoneyFile::payee(const QString& id) const
 {
-  return d->m_cache.payee(id);
+  if (Q_UNLIKELY(id.isEmpty()))
+    return MyMoneyPayee();
+
+  return d->m_storage->payee(id);
 }
 
 MyMoneyPayee MyMoneyFile::payeeByName(const QString& name) const
 {
   d->checkStorage();
 
-  return d->m_cache.payee(d->m_storage->payeeByName(name).id());
+  return d->m_storage->payeeByName(name);
 }
 
 void MyMoneyFile::modifyPayee(const MyMoneyPayee& payee)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
-  d->addCacheNotification(payee.id());
-
   d->m_storage->modifyPayee(payee);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, payee);
 }
 
@@ -1420,14 +1304,7 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
   d->checkTransaction(Q_FUNC_INFO);
 
   // FIXME we need to make sure, that the payee is not referenced anymore
-
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->removePayee(payee);
-
-  d->addCacheNotification(payee.id(), false);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, payee);
 }
 
@@ -1435,41 +1312,27 @@ void MyMoneyFile::addTag(MyMoneyTag& tag)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addTag(tag);
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadTag(tag);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, tag);
 }
 
 MyMoneyTag MyMoneyFile::tag(const QString& id) const
 {
-  return d->m_cache.tag(id);
+  return d->m_storage->tag(id);
 }
 
 MyMoneyTag MyMoneyFile::tagByName(const QString& name) const
 {
   d->checkStorage();
 
-  return d->m_cache.tag(d->m_storage->tagByName(name).id());
+  return d->m_storage->tagByName(name);
 }
 
 void MyMoneyFile::modifyTag(const MyMoneyTag& tag)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
-  d->addCacheNotification(tag.id());
-
   d->m_storage->modifyTag(tag);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, tag);
 }
 
@@ -1478,21 +1341,14 @@ void MyMoneyFile::removeTag(const MyMoneyTag& tag)
   d->checkTransaction(Q_FUNC_INFO);
 
   // FIXME we need to make sure, that the tag is not referenced anymore
-
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->removeTag(tag);
-
-  d->addCacheNotification(tag.id(), false);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, tag);
 }
 
 void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
 {
   if (idlist.isEmpty()) {
-    d->m_cache.account(list);
+    d->m_storage->accountList(list);
 
 #if 0
     // TODO: I have no idea what this was good for, but it caused the networth report
@@ -1514,7 +1370,7 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
   } else {
     QList<MyMoneyAccount>::ConstIterator it;
     QList<MyMoneyAccount> list_a;
-    d->m_cache.account(list_a);
+    d->m_storage->accountList(list_a);
 
     for (it = list_a.constBegin(); it != list_a.constEnd(); ++it) {
       if (!isStandardAccount((*it).id())) {
@@ -1529,16 +1385,9 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
   }
 }
 
-void MyMoneyFile::institutionList(QList<MyMoneyInstitution>& list) const
-{
-  d->m_cache.institution(list);
-}
-
 QList<MyMoneyInstitution> MyMoneyFile::institutionList() const
 {
-  QList<MyMoneyInstitution> list;
-  institutionList(list);
-  return list;
+  return d->m_storage->institutionList();
 }
 
 // general get functions
@@ -1552,9 +1401,6 @@ MyMoneyPayee MyMoneyFile::user() const
 void MyMoneyFile::setUser(const MyMoneyPayee& user)
 {
   d->checkTransaction(Q_FUNC_INFO);
-
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
 
   d->m_storage->setUser(user);
 }
@@ -1593,35 +1439,35 @@ MyMoneyAccount MyMoneyFile::liability() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(stdAccNames[stdAccLiability]);
+  return account(stdAccNames[stdAccLiability]);
 }
 
 MyMoneyAccount MyMoneyFile::asset() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(stdAccNames[stdAccAsset]);
+  return account(stdAccNames[stdAccAsset]);
 }
 
 MyMoneyAccount MyMoneyFile::expense() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(stdAccNames[stdAccExpense]);
+  return account(stdAccNames[stdAccExpense]);
 }
 
 MyMoneyAccount MyMoneyFile::income() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(stdAccNames[stdAccIncome]);
+  return account(stdAccNames[stdAccIncome]);
 }
 
 MyMoneyAccount MyMoneyFile::equity() const
 {
   d->checkStorage();
 
-  return d->m_cache.account(stdAccNames[stdAccEquity]);
+  return account(stdAccNames[stdAccEquity]);
 }
 
 unsigned int MyMoneyFile::transactionCount(const QString& account) const
@@ -1744,23 +1590,18 @@ void MyMoneyFile::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransa
 
 QList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
 {
-  QList<MyMoneyTransaction> list;
-  transactionList(list, filter);
-  return list;
+  d->checkStorage();
+  return d->m_storage->transactionList(filter);
 }
 
 QList<MyMoneyPayee> MyMoneyFile::payeeList() const
 {
-  QList<MyMoneyPayee> list;
-  d->m_cache.payee(list);
-  return list;
+  return d->m_storage->payeeList();
 }
 
 QList<MyMoneyTag> MyMoneyFile::tagList() const
 {
-  QList<MyMoneyTag> list;
-  d->m_cache.tag(list);
-  return list;
+  return d->m_storage->tagList();
 }
 
 QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeStandardAccounts) const
@@ -1852,18 +1693,12 @@ void MyMoneyFile::setValue(const QString& key, const QString& val)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->setValue(key, val);
 }
 
 void MyMoneyFile::deletePair(const QString& key)
 {
   d->checkTransaction(Q_FUNC_INFO);
-
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
 
   d->m_storage->deletePair(key);
 }
@@ -1872,25 +1707,18 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  foreach (const auto split, sched.transaction().splits()) {
+  const auto splits = sched.transaction().splits();
+  for (const auto& split : splits) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
-    auto acc = MyMoneyFile::account(split.accountId());
+    const auto acc = account(split.accountId());
     if (acc.id().isEmpty())
       throw MYMONEYEXCEPTION("Cannot add split with no account assigned");
     if (isStandardAccount(split.accountId()))
       throw MYMONEYEXCEPTION("Cannot add split referencing standard account");
   }
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addSchedule(sched);
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadSchedule(sched);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, sched);
 }
 
@@ -1908,12 +1736,7 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
       throw MYMONEYEXCEPTION("Cannot store split referencing standard account");
   }
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->modifySchedule(sched);
-
-  d->addCacheNotification(sched.id());
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, sched);
 }
 
@@ -1921,18 +1744,13 @@ void MyMoneyFile::removeSchedule(const MyMoneySchedule& sched)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->removeSchedule(sched);
-
-  d->addCacheNotification(sched.id(), false);
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, sched);
 }
 
 MyMoneySchedule MyMoneyFile::schedule(const QString& id) const
 {
-  return d->m_cache.schedule(id);
+  return d->m_storage->schedule(id);
 }
 
 QList<MyMoneySchedule> MyMoneyFile::scheduleList(
@@ -1987,9 +1805,6 @@ QStringList MyMoneyFile::consistencyCheck()
 
   // check that we have a storage object
   d->checkTransaction(Q_FUNC_INFO);
-
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
 
   // get the current list of accounts
   accountList(list);
@@ -2109,8 +1924,6 @@ QStringList MyMoneyFile::consistencyCheck()
       rc << i18n("    New parent account is the top level account '%1'.", toplevel.name());
       (*it_a).setParentAccountId(toplevel.id());
 
-      d->addCacheNotification((*it_a).id());
-
       // make sure to rebuild the sub-accounts of the top account
       if (accountRebuild.contains(toplevel.id()) == 0)
         accountRebuild << toplevel.id();
@@ -2181,7 +1994,6 @@ QStringList MyMoneyFile::consistencyCheck()
     if (!(d->m_storage->account((*it_a).id()) == (*it_a))) {
       try {
         d->m_storage->modifyAccount(*it_a, true);
-        d->addCacheNotification((*it_a).id());
       } catch (const MyMoneyException &) {
         rc << i18n("  * Unable to update account data in engine.");
         return rc;
@@ -2221,7 +2033,6 @@ QStringList MyMoneyFile::consistencyCheck()
     if (accountRebuild.contains((*it_a).id())) {
       try {
         d->m_storage->modifyAccount(*it_a, true);
-        d->addCacheNotification((*it_a).id());
       } catch (const MyMoneyException &) {
         rc << i18n("  * Unable to update account data for account %1 in engine", (*it_a).name());
       }
@@ -2247,13 +2058,13 @@ QStringList MyMoneyFile::consistencyCheck()
   }
 
   // Fix the transactions
-  QList<MyMoneyTransaction> tList;
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
-  d->m_storage->transactionList(tList, filter);
+  const auto tList = d->m_storage->transactionList(filter);
   // Generate the list of interest accounts
-  foreach (const auto transaction, tList) {
-    foreach (const auto split, transaction.splits()) {
+  for (const auto& transaction : tList) {
+    const auto splits = transaction.splits();
+    for (const auto& split : splits) {
       if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))
         interestAccounts[split.accountId()] = true;
     }
@@ -2267,12 +2078,13 @@ QStringList MyMoneyFile::consistencyCheck()
   << Account::Type::Liability;
   QSet<QString> reportedUnsupportedAccounts;
 
-  for (it_t = tList.begin(); it_t != tList.end(); ++it_t) {
-    MyMoneyTransaction t = (*it_t);
+  for (const auto& transaction : tList) {
+    MyMoneyTransaction t = transaction;
     bool tChanged = false;
     QDate accountOpeningDate;
     QStringList accountList;
-    foreach (const auto split, t.splits()) {
+    const auto splits = t.splits();
+    foreach (const auto split, splits) {
       bool sChanged = false;
       MyMoneySplit s = split;
       if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
@@ -2731,15 +2543,7 @@ void MyMoneyFile::addSecurity(MyMoneySecurity& security)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addSecurity(security);
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadSecurity(security);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, security);
 }
 
@@ -2747,13 +2551,7 @@ void MyMoneyFile::modifySecurity(const MyMoneySecurity& security)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->modifySecurity(security);
-
-  d->addCacheNotification(security.id());
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, security);
 }
 
@@ -2763,22 +2561,16 @@ void MyMoneyFile::removeSecurity(const MyMoneySecurity& security)
 
   // FIXME check that security is not referenced by other object
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->removeSecurity(security);
-
-  d->addCacheNotification(security.id(), false);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, security);
 }
 
 MyMoneySecurity MyMoneyFile::security(const QString& id) const
 {
-  if (id.isEmpty())
+  if (Q_UNLIKELY(id.isEmpty()))
     return baseCurrency();
 
-  return d->m_cache.security(id);
+  return d->m_storage->security(id);
 }
 
 QList<MyMoneySecurity> MyMoneyFile::securityList() const
@@ -2792,15 +2584,7 @@ void MyMoneyFile::addCurrency(const MyMoneySecurity& currency)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addCurrency(currency);
-
-  // The notifier mechanism only refreshes the cache but does not
-  // load new objects. So we simply force loading of the new one here
-  d->m_cache.preloadSecurity(currency);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, currency);
 }
 
@@ -2808,17 +2592,11 @@ void MyMoneyFile::modifyCurrency(const MyMoneySecurity& currency)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   // force reload of base currency object
   if (currency.id() == d->m_baseCurrency.id())
     d->m_baseCurrency.clearId();
 
   d->m_storage->modifyCurrency(currency);
-
-  d->addCacheNotification(currency.id());
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, currency);
 }
 
@@ -2826,19 +2604,12 @@ void MyMoneyFile::removeCurrency(const MyMoneySecurity& currency)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  if (currency.id() == d->m_baseCurrency.id()) {
+  if (currency.id() == d->m_baseCurrency.id())
     throw MYMONEYEXCEPTION("Cannot delete base currency.");
-  }
 
   // FIXME check that security is not referenced by other object
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->removeCurrency(currency);
-
-  d->addCacheNotification(currency.id(), false);
-
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, currency);
 }
 
@@ -2847,12 +2618,10 @@ MyMoneySecurity MyMoneyFile::currency(const QString& id) const
   if (id.isEmpty())
     return baseCurrency();
 
-  const MyMoneySecurity& curr = d->m_cache.security(id);
-  if (curr.id().isEmpty()) {
-    QString msg;
-    msg = QString("Currency '%1' not found.").arg(id);
-    throw MYMONEYEXCEPTION(msg);
-  }
+  const auto curr = d->m_storage->currency(id);
+  if (curr.id().isEmpty())
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Currency '%1' not found.").arg(id));
+
   return curr;
 }
 
@@ -3117,9 +2886,6 @@ void MyMoneyFile::setBaseCurrency(const MyMoneySecurity& curr)
   // make sure the currency exists
   MyMoneySecurity c = currency(curr.id());
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   if (c.id() != d->m_baseCurrency.id()) {
     setValue("kmm-baseCurrency", curr.id());
     // force reload of base currency cache
@@ -3134,12 +2900,8 @@ void MyMoneyFile::addPrice(const MyMoneyPrice& price)
 
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   // store the account's which are affected by this price regarding their value
   d->priceChanged(*this, price);
-
   d->m_storage->addPrice(price);
 }
 
@@ -3147,12 +2909,8 @@ void MyMoneyFile::removePrice(const MyMoneyPrice& price)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   // store the account's which are affected by this price regarding their value
   d->priceChanged(*this, price);
-
   d->m_storage->removePrice(price);
 }
 
@@ -3224,14 +2982,12 @@ MyMoneyPriceList MyMoneyFile::priceList() const
 
 bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
 {
-  auto acc = d->m_cache.account(id);
-  auto rc = false;
-  foreach (const auto sAccount, acc.accountList()) {
-    auto a = d->m_cache.account(sAccount);
-    if (a.name() == name)
-      rc = true;
+  const auto accounts = account(id).accountList();
+  for (const auto& acc : accounts) {
+    if (account(acc).name().compare(name) == 0)
+      return true;
   }
-  return rc;
+  return false;
 }
 
 QList<MyMoneyReport> MyMoneyFile::reportList() const
@@ -3245,9 +3001,6 @@ void MyMoneyFile::addReport(MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->addReport(report);
 }
 
@@ -3255,12 +3008,7 @@ void MyMoneyFile::modifyReport(const MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->modifyReport(report);
-
-  d->addCacheNotification(report.id());
 }
 
 unsigned MyMoneyFile::countReports() const
@@ -3280,11 +3028,8 @@ MyMoneyReport MyMoneyFile::report(const QString& id) const
 void MyMoneyFile::removeReport(const MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
-  MyMoneyNotifier notifier(d);
 
   d->m_storage->removeReport(report);
-
-  d->addCacheNotification(report.id(), false);
 }
 
 
@@ -3298,9 +3043,6 @@ QList<MyMoneyBudget> MyMoneyFile::budgetList() const
 void MyMoneyFile::addBudget(MyMoneyBudget &budget)
 {
   d->checkTransaction(Q_FUNC_INFO);
-
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
 
   d->m_storage->addBudget(budget);
 }
@@ -3316,12 +3058,7 @@ void MyMoneyFile::modifyBudget(const MyMoneyBudget& budget)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->modifyBudget(budget);
-
-  d->addCacheNotification(budget.id());
 }
 
 unsigned MyMoneyFile::countBudgets() const
@@ -3342,22 +3079,14 @@ void MyMoneyFile::removeBudget(const MyMoneyBudget& budget)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
-
   d->m_storage->removeBudget(budget);
-
-  d->addCacheNotification(budget.id(), false);
 }
 
 void MyMoneyFile::addOnlineJob(onlineJob& job)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
   d->m_storage->addOnlineJob(job);
-  d->m_cache.preloadOnlineJob(job);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, job);
 }
 
@@ -3366,7 +3095,6 @@ void MyMoneyFile::modifyOnlineJob(const onlineJob job)
   d->checkTransaction(Q_FUNC_INFO);
   d->m_storage->modifyOnlineJob(job);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, job);
-  d->addCacheNotification(job.id());
 }
 
 onlineJob MyMoneyFile::getOnlineJob(const QString &jobId) const
@@ -3396,11 +3124,9 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
   d->checkTransaction(Q_FUNC_INFO);
 
   // clear all changed objects from cache
-  MyMoneyNotifier notifier(d);
   if (job.isLocked()) {
     return;
   }
-  d->addCacheNotification(job.id(), false);
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, job);
   d->m_storage->removeOnlineJob(job);
 }
@@ -3552,31 +3278,12 @@ bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) c
 void MyMoneyFile::clearCache()
 {
   d->checkStorage();
-  d->m_cache.clear();
   d->m_balanceCache.clear();
 }
 
 void MyMoneyFile::forceDataChanged()
 {
   emit dataChanged();
-}
-
-void MyMoneyFile::preloadCache()
-{
-  d->checkStorage();
-
-  d->m_cache.clear();
-  QList<MyMoneyAccount> a_list;
-  d->m_storage->accountList(a_list);
-  d->m_cache.preloadAccount(a_list);
-  d->m_cache.preloadPayee(d->m_storage->payeeList());
-  d->m_cache.preloadTag(d->m_storage->tagList());
-  d->m_cache.preloadInstitution(d->m_storage->institutionList());
-  d->m_cache.preloadSecurity(d->m_storage->securityList() +
-                             d->m_storage->currencyList());
-  d->m_cache.preloadSchedule(d->m_storage->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
-                                                        QDate(), QDate(), false));
-  d->m_cache.preloadOnlineJob(d->m_storage->onlineJobList());
 }
 
 bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const

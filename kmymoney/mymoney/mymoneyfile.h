@@ -696,14 +696,6 @@ public:
 
   /**
     * This method returns a list of the institutions
-    * inside a MyMoneyFile object
-    *
-    * @param list reference to the list. It will be cleared by this method first
-    */
-  void institutionList(QList<MyMoneyInstitution>& list) const;
-
-  /**
-    * This method returns a list of the institutions
     * inside a MyMoneyFile object. This is a convenience method
     * to the one above
     *
@@ -1516,8 +1508,6 @@ public:
 
   void forceDataChanged();
 
-  void preloadCache();
-
   /**
     * This returns @p true if file and online balance of a specific
     * @p account are matching. Returns false if there is no online balance.
@@ -1611,7 +1601,7 @@ Q_SIGNALS:
     * had been added. The data for the new object is contained in
     * @a obj.
     */
-  void objectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void objectAdded(eMyMoney::File::Object objType, const QString& id);
 
   /**
     * This signal is emitted by the engine whenever an object
@@ -1629,7 +1619,7 @@ Q_SIGNALS:
     * had been changed. The new state of the object is contained
     * in @a obj.
     */
-  void objectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void objectModified(eMyMoney::File::Object objType, const QString& id);
 
   /**
     * This signal is emitted by the engine whenever the balance

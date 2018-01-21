@@ -107,8 +107,8 @@ private Q_SLOTS:
   void testEmptyFilter();
 
 private Q_SLOTS:
-  void objectAdded(eMyMoney::File::Object type, const MyMoneyObject * const obj);
-  void objectModified(eMyMoney::File::Object type, const MyMoneyObject * const obj);
+  void objectAdded(eMyMoney::File::Object type, const QString &id);
+  void objectModified(eMyMoney::File::Object type, const QString &id);
   void objectRemoved(eMyMoney::File::Object type, const QString& id);
   void balanceChanged(const MyMoneyAccount& account);
   void valueChanged(const MyMoneyAccount& account);

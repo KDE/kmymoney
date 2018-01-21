@@ -60,8 +60,8 @@ Q_SIGNALS:
 public Q_SLOTS:
   void reloadAll();
 
-  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectAdded(eMyMoney::File::Object objType, const QString &id);
+  void slotObjectModified(eMyMoney::File::Object objType, const QString &id);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
   /** @brief Load data from MyMoneyFile */

@@ -788,8 +788,7 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
 {
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
-  QList<MyMoneyTransaction> list;
-  m_storage->transactionList(list, filter);
+  const auto list = m_storage->transactionList(filter);
   transactions.setAttribute(attrNames[anCount], list.count());
 
   QList<MyMoneyTransaction>::ConstIterator it;

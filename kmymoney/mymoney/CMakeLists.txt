@@ -18,7 +18,6 @@ set(kmm_mymoney_LIB_SRCS
   mymoneycostcenter.cpp
   mymoneyaccount.cpp mymoneyaccountloan.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
-  mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
   onlinejob.cpp
@@ -37,7 +36,7 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneypayee.h mymoneytag.h mymoneyprice.h mymoneyreport.h
   mymoneyschedule.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
   mymoneytransactionfilter.h mymoneytransaction.h
-  mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
+  mymoneyutils.h mymoneybudget.h mymoneyforecast.h
   imymoneyprocessingcalendar.h
   mymoneycostcenter.h
   mymoneyunittestable.h

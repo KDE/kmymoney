@@ -1147,7 +1147,6 @@ bool KMyMoneyView::initializeStorage()
              Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
 
   // inform everyone about new data
-  MyMoneyFile::instance()->preloadCache();
   MyMoneyFile::instance()->forceDataChanged();
 
   // views can wait since they are going to be refresed in slotRefreshViews

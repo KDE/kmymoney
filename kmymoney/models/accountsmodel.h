@@ -97,8 +97,8 @@ public:
 public Q_SLOTS:
 
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
-  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectAdded(eMyMoney::File::Object objType, const QString &id);
+  void slotObjectModified(eMyMoney::File::Object objType, const QString &id);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
   void slotBalanceOrValueChanged(const MyMoneyAccount &account);
 
@@ -160,8 +160,8 @@ public:
   void load();
 
 public Q_SLOTS:
-  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectAdded(eMyMoney::File::Object objType, const QString &id);
+  void slotObjectModified(eMyMoney::File::Object objType, const QString &id);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
 private:

@@ -679,7 +679,7 @@ void MyMoneyStorageMgrTest::testReparentAccount()
     ft.commit();
     QVERIFY(ch.value("Key") == "Value");
 
-    MyMoneyFile::instance()->preloadCache();
+    // MyMoneyFile::instance()->preloadCache();
     QVERIFY(m->expense().accountCount() == 3);
     QVERIFY(m->account(ex1.id()).accountCount() == 1);
     QVERIFY(ex3.parentAccountId() == stdAccNames[stdAccExpense]);
@@ -689,7 +689,7 @@ void MyMoneyStorageMgrTest::testReparentAccount()
     m->reparentAccount(ex3, ex1);
     ft.commit();
     //}
-    MyMoneyFile::instance()->preloadCache();
+    // MyMoneyFile::instance()->preloadCache();
     QVERIFY(m->expense().accountCount() == 2);
     QVERIFY(m->account(ex1.id()).accountCount() == 2);
     QVERIFY(ex3.parentAccountId() == ex1.id());
@@ -1211,7 +1211,7 @@ void MyMoneyStorageMgrTest::testRemoveUnusedAccount()
   // now really remove an account
 
   try {
-    MyMoneyFile::instance()->preloadCache();
+    // MyMoneyFile::instance()->preloadCache();
     i = m->institution("I000001");
 
     QVERIFY(i.accountCount() == 0);
@@ -1440,7 +1440,7 @@ void MyMoneyStorageMgrTest::testSetAccountName()
     unexpectedException(e);
   }
 
-  MyMoneyFile::instance()->preloadCache();
+  // MyMoneyFile::instance()->preloadCache();
 
   try {
     QVERIFY(m->liability().name() == "Verbindlichkeiten");

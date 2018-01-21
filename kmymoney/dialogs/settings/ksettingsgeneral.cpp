@@ -136,8 +136,8 @@ void KSettingsGeneral::slotUpdateEquitiesVisibility()
         accountsModel->slotObjectRemoved(eMyMoney::File::Object::Account, account.id());     // remove item from accounts' page
         institutionsModel->slotObjectRemoved(eMyMoney::File::Object::Account, account.id()); // remove item from institutions' page
       } else {
-        accountsModel->slotObjectAdded(eMyMoney::File::Object::Account, dynamic_cast<const MyMoneyObject* const>(&account));     // add item to accounts' page
-        institutionsModel->slotObjectAdded(eMyMoney::File::Object::Account, dynamic_cast<const MyMoneyObject* const>(&account)); // add item to institutions' page
+        accountsModel->slotObjectAdded(eMyMoney::File::Object::Account, account.id());     // add item to accounts' page
+        institutionsModel->slotObjectAdded(eMyMoney::File::Object::Account, account.id()); // add item to institutions' page
       }
     }
   }

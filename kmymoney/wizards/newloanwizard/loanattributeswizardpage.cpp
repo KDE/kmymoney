@@ -56,8 +56,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
   try {
     MyMoneyFile *file = MyMoneyFile::instance();
 
-    QList<MyMoneyInstitution> list;
-    file->institutionList(list);
+    auto list = file->institutionList();
     qSort(list);
 
     Q_FOREACH(const MyMoneyInstitution &institution, list) {

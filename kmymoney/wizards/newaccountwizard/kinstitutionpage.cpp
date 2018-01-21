@@ -71,7 +71,7 @@ namespace NewAccountWizard
     d_func()->ui->m_institutionComboBox->clear();
 
     d->m_list.clear();
-    MyMoneyFile::instance()->institutionList(d->m_list);
+    d->m_list = MyMoneyFile::instance()->institutionList();
     qSort(d->m_list);
 
     QList<MyMoneyInstitution>::const_iterator it_l;
