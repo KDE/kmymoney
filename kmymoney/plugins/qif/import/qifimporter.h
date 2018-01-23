@@ -33,12 +33,14 @@ class MyMoneyQifReader;
 class QIFImporter : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
-  
+
 public:
   explicit QIFImporter(QObject *parent, const QVariantList &args);
   ~QIFImporter() override;
 
   QAction          *m_action;
+
+  void injectExternalSettings(KMyMoneySettings* p) override;
 
 private:
   MyMoneyQifReader *m_qifReader;

@@ -44,6 +44,8 @@ public:
     return m_dlg;
   }
 
+  void injectExternalSettings(KMyMoneySettings* p) override;
+
 private:
   CsvExportDlg*     m_dlg;
 

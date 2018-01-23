@@ -32,12 +32,14 @@ class MyMoneyGncReader;
 class GNCImporter : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
-  
+
 public:
   explicit GNCImporter(QObject *parent, const QVariantList &args);
   ~GNCImporter() override;
 
   QAction          *m_action;
+
+  void injectExternalSettings(KMyMoneySettings* p) override;
 
 private:
   MyMoneyGncReader *m_gncReader;

@@ -33,6 +33,7 @@
 #include "kimportdlg.h"
 #include "mymoneyqifreader.h"
 #include "statementinterface.h"
+#include "kmymoneyglobalsettings.h"
 
 class MyMoneyStatement;
 
@@ -50,6 +51,11 @@ QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
 QIFImporter::~QIFImporter()
 {
   qDebug("Plugins: qifimporter unloaded");
+}
+
+void QIFImporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void QIFImporter::createActions()

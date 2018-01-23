@@ -41,6 +41,8 @@ public Q_SLOTS:
   void unplug() override;
   void configurationChanged() override;
 
+  void injectExternalSettings(KMyMoneySettings* p) override;
+
 private:
   void readCheckTemplate();
 

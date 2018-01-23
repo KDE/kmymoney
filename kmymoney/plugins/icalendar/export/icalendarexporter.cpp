@@ -37,6 +37,7 @@
 
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 struct iCalendarExporter::Private {
   QAction* m_action;
@@ -91,6 +92,11 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) 
 iCalendarExporter::~iCalendarExporter()
 {
   qDebug("Plugins: icalendarexporter unloaded");
+}
+
+void iCalendarExporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void iCalendarExporter::slotFirstExport()

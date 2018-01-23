@@ -88,6 +88,8 @@ public:
   void plug() override;
   void unplug() override;
 
+  void injectExternalSettings(KMyMoneySettings* p) override;
+
 private:
   /**
     * creates the action objects available through the application menus

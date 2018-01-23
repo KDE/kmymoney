@@ -49,6 +49,7 @@
 #include "statementinterface.h"
 #include "importinterface.h"
 #include "ui_importoption.h"
+#include "kmymoneyglobalsettings.h"
 
 //#define DEBUG_LIBOFX
 
@@ -104,6 +105,11 @@ OFXImporter::~OFXImporter()
 {
   delete d;
   qDebug("Plugins: ofximporter unloaded");
+}
+
+void OFXImporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void OFXImporter::createActions()

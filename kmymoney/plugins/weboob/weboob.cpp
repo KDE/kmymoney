@@ -33,6 +33,7 @@
 
 #include "mymoneystatement.h"
 #include "statementinterface.h"
+#include "kmymoneyglobalsettings.h"
 
 struct Weboob::Private
 {
@@ -55,6 +56,11 @@ Weboob::Weboob(QObject *parent, const QVariantList &args) :
 Weboob::~Weboob()
 {
   qDebug("Plugins: weboob unloaded");
+}
+
+void Weboob::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void Weboob::plug()
