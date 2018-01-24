@@ -19,7 +19,8 @@
 #ifndef PLATFORMTOOLS_H
 #define PLATFORMTOOLS_H
 
-#include <sys/types.h>
+
+#include <QtGlobal>
 
 class QString;
 

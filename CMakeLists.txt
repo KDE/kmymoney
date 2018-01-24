@@ -84,7 +84,6 @@ endif(DOXYGEN_FOUND)
 # check some include files exists
 set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
 include (CheckIncludeFile)
-check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
 check_include_file("unistd.h" HAVE_UNISTD_H)
 check_include_file("pwd.h" HAVE_PWD_H)
 check_include_file("windows.h" HAVE_WINDOWS_H)
