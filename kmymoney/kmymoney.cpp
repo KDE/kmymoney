@@ -2044,9 +2044,6 @@ void KMyMoneyApp::slotBackupFile()
   }
 
   QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
-#ifdef Q_OS_WIN
-  backupDlg->mountCheckBox->setEnabled(false);
-#endif
   int returncode = backupDlg->exec();
   if (returncode == QDialog::Accepted && backupDlg != 0) {
 

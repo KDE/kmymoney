@@ -50,6 +50,11 @@ find_package(KF5 5.2 REQUIRED
   OPTIONAL_COMPONENTS ${OPT_KF5_COMPONENTS}
 )
 find_package(LibAlkimia5 7.0.0 REQUIRED)
+
+if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+  include_directories(${GMP_INCLUDE_DIR})
+endif()
+
 find_package(KChart 2.6.0 REQUIRED)
 
 if(KF5Gpgmepp_FOUND)
@@ -121,7 +126,15 @@ endif(ENABLE_WEBENGINE)
 find_package(LibOfx)
 if(LIBOFX_FOUND)
   option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON)
-  check_struct_has_member("struct OfxFiLogin" "clientuid" "libofx/libofx.h" LIBOFX_HAVE_CLIENTUID)
+  if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    set(PATH_TO_LIBOFX_HEADER "${LIBOFX_INCLUDE_DIR}/libofx/libofx.h")  # Windows doesn't even see the header if it's not full path
+  else()
+    set(PATH_TO_LIBOFX_HEADER "libofx/libofx.h")
+  endif()
+
+  unset(LIBOFX_HAVE_CLIENTUID)
+  unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
+  check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID)
   if(NOT ENABLE_OFXIMPORTER)
     unset(LIBOFX_FOUND CACHE)
     unset(LIBOFX_HAVE_CLIENTUID CACHE)
@@ -252,6 +265,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
   endif()
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:Multiple")
 endif()
 
 # preprocessor definitions in case this is a debug build

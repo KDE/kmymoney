@@ -19,6 +19,8 @@
 #ifndef MYMONEYFORECAST_H
 #define MYMONEYFORECAST_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -27,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
 
 class QDate;
