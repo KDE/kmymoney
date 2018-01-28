@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
 <chapterinfo>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2018-02-01</date>
+  <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
 
 <title>What's new in this release</title>
@@ -14,10 +14,21 @@
 </para>
 
 <para>
-  In addition to numerous bug fixes, this version also includes new features and
-  functionality.  Although all new features have had some testing, this is
-  considered a development release, in preparation for a full release 4.8 early
-  in 2015.
+
+  The largest amount of work has gone towards basing this version on KDE
+  Frameworks.  Many of the underlying libraries used by the application have
+  been reorganized and improved, but most of that is behind the scenes, and not
+  directly visible to the end user.  Some of the general look and feel may have
+  changed, but the basic functionality of the program remains the same, aside
+  from intentional improvements and additions.
+</para>
+
+<para>
+  In addition to adapting to new and updated libraries, there have also been
+  numerous bug fixes, as well as several new features and improved
+  functionality.  Although this means there have been some major changes to the
+  underlying code, this version has actually been used in production by many of
+  the developers, so it has actually had a significant amount of testing.
 </para>
 
 <para>
@@ -27,60 +38,77 @@
 <itemizedlist>
   <listitem>
     <para>
-      Transaction tags were added. This was long requested feature and allows an improved categorization of transaction.
+      Multiple improvements to reports, including better performance.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Better performance of the user interface.  Performance in general has been improved by fixing performance issues spotted using a profiler.
+      Allow logarithmic axes in report graphs.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Proper input methods support was added. &kmymoney; can now be safely used with languages that need input methods for easier use.
+      When deleting a security, automatically delete its prices.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Added a frozen column to improve visualizing forecast details. This way the account name won't be shifted out of the view when horizontally scrolling the forecast details.
+      Allow separate beginning balance accounts for different currencies.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      The application icons were improved.
+      Added support for several new currencies
+    </para>
+  </listitem>
+
+<para>
+  Here are some of the major bugs which have been fixed:
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+      Elimination of several crashes.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Many improvements in the importing and online banking modules, including:
+      Fix problems with report graphs using older data.
     </para>
   </listitem>
 
   <listitem>
-    <itemizedlist>
-      <listitem>
-        <para>
-          The homepage can show accounts online banking status.
-        </para>
-      </listitem>
+    <para>
+      Fix rounding errors in some investment transactions.
+    </para>
+  </listitem>
 
-      <listitem>
-        <para>
-          OFX plugin now allows custom application version.
-        </para>
-      </listitem>
+  <listitem>
+    <para>
+      Removed Yahoo from stock and currency price sources, as they no longer
+      provide this service
+    </para>
+  </listitem>
 
-      <listitem>
-        <para>
-          There is a new plugin to export csv files.
-        </para>
-      </listitem>
-    </itemizedlist>
+<para>
+  There are a some changes which will need some adjustments on the user's side
+  if you are upgrading from 4.8.x or an older version
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+      The program searches for the templates for the printcheck plugin in
+      different locations.  The user needs to account for this in the plugins
+      setting dialog, <link linkend="details.settings.plugins">see this section
+      for more details.</link>
+    </para>
   </listitem>
 </itemizedlist>
 
