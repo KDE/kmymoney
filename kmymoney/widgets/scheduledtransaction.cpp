@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
@@ -38,7 +38,7 @@ StdTransactionScheduled::StdTransactionScheduled(Register *parent, const MyMoney
   StdTransaction(parent, transaction, split, uniqueId)
 {
   // setup initial size
-  setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
+  setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
 }
 
 StdTransactionScheduled::~StdTransactionScheduled()

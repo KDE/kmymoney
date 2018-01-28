@@ -130,8 +130,6 @@ public Q_SLOTS:
    */
   virtual void configurationChanged() ;
 
-  virtual void injectExternalSettings(KMyMoneySettings* p) = 0;
-
 protected:
   /** See KMyMoneyApp::toggleAction() for a description */
   KToggleAction* toggleAction(const QString& name) const;

@@ -62,6 +62,7 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneyStatement;
 class MyMoneyInstitution;
+class MyMoneyForecast;
 
 namespace eMyMoney { namespace Schedule { enum class Occurrence;
                                           enum class PaymentType;
@@ -383,6 +384,8 @@ public:
   static void newInstitution(MyMoneyInstitution& institution);
 
   static QDebug debug();
+
+  static MyMoneyForecast forecast();
 };
 
 #endif

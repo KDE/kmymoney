@@ -46,7 +46,7 @@
 #include "mymoneyexception.h"
 //#include "mymoneystoragemgr.h"
 #include "icons.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 using namespace Icons;
 
@@ -64,11 +64,6 @@ SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
 SQLStorage::~SQLStorage()
 {
   qDebug("Plugins: sqlstorage unloaded");
-}
-
-void SQLStorage::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 bool SQLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)

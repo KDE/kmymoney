@@ -34,7 +34,7 @@
 
 #include "ui_ksettingshome.h"
 
-#include "kmymoney/kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoney/kmymoneyutils.h"
 #include "icons/icons.h"
 
@@ -100,7 +100,7 @@ void KSettingsHome::slotLoadItems()
   if (d->m_noNeedToUpdateList)
     return;
 
-  QStringList list = KMyMoneyGlobalSettings::itemList();
+  QStringList list = KMyMoneySettings::listOfItems();
   QStringList::ConstIterator it;
   d->ui->m_homePageList->clear();
   QListWidgetItem *sel = 0;

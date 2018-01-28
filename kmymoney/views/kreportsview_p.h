@@ -72,7 +72,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "icons/icons.h"
@@ -208,7 +208,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
 {
   m_layout->setSpacing(6);
   m_tableView->setPage(new MyQWebEnginePage(m_tableView));
-  m_tableView->setZoomFactor(KMyMoneyGlobalSettings::zoomFactor());
+  m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
 
   //set button icons
   m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeChartLine));

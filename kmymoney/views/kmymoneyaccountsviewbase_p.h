@@ -34,7 +34,7 @@
 
 #include "mymoneyutils.h"
 #include "kmymoneyviewbase_p.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
@@ -91,7 +91,7 @@ public:
     if (isNegative)
       s.append(QLatin1String("</font></b>"));
 
-    label->setFont(KMyMoneyGlobalSettings::listCellFont());
+    label->setFont(KMyMoneySettings::listCellFontEx());
     label->setText(s);
   }
 

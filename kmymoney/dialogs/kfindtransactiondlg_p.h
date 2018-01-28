@@ -51,7 +51,7 @@
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "register.h"
 #include "transaction.h"
 #include "daterangedlg.h"
@@ -317,7 +317,7 @@ public:
   void loadView()
   {
     // setup sort order
-    ui->m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
+    ui->m_register->setSortOrder(KMyMoneySettings::sortSearchView());
 
     // clear out old data
     ui->m_register->clear();
@@ -437,7 +437,7 @@ public:
       // if we're not in expert mode, we need to make sure
       // that all stock accounts for the selected investment
       // account are also selected
-      if (!KMyMoneyGlobalSettings::expertMode()) {
+      if (!KMyMoneySettings::expertMode()) {
         QStringList missing;
         foreach (const auto selection, list) {
           auto acc = MyMoneyFile::instance()->account(selection);
@@ -606,7 +606,7 @@ public:
       accountSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
     //set the accountset to show closed account if the settings say so
-    accountSet.setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
+    accountSet.setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
     accountSet.load(ui->m_accountsView);
     q->connect(ui->m_accountsView, &KMyMoneyAccountSelector::stateChanged, q, &KFindTransactionDlg::slotUpdateSelections);
   }

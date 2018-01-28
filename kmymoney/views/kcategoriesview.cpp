@@ -40,7 +40,7 @@
 // Project Includes
 
 #include "mymoneyexception.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
 #include "kcategoryreassigndlg.h"
 #include "mymoneyschedule.h"
@@ -81,12 +81,12 @@ void KCategoriesView::refresh()
   d->m_needsRefresh = false;
 
   d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
 
   // reinitialize the default state of the hidden categories label
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();
-  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneyGlobalSettings::hideUnusedCategory());
+  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
 }
 
 void KCategoriesView::showEvent(QShowEvent * event)

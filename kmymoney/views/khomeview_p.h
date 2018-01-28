@@ -64,7 +64,7 @@
 #include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 #include "kwelcomepage.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyprice.h"
@@ -134,9 +134,9 @@ public:
 
   ~KHomeViewPrivate() {
     // if user wants to remember the font size, store it here
-    if (KMyMoneyGlobalSettings::rememberZoomFactor() && m_view) {
-        KMyMoneyGlobalSettings::setZoomFactor(m_view->zoomFactor());
-        KMyMoneyGlobalSettings::self()->save();
+    if (KMyMoneySettings::rememberZoomFactor() && m_view) {
+        KMyMoneySettings::setZoomFactor(m_view->zoomFactor());
+        KMyMoneySettings::self()->save();
       }
   }
 
@@ -199,7 +199,7 @@ public:
 
     QString cellStatus, cellCounts, pathOK, pathTODO, pathNotOK;
 
-    if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+    if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
       //show account's online-status
       pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(16,16)));
       pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(16,16)));
@@ -224,16 +224,16 @@ public:
     int countNotMarked = 0, countCleared = 0, countNotReconciled = 0;
     QString countStr;
 
-    if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions() || KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+    if (KMyMoneySettings::showCountOfUnmarkedTransactions() || KMyMoneySettings::showCountOfNotReconciledTransactions())
       countNotMarked = file->countTransactionsWithSpecificReconciliationState(acc.id(), TransactionFilter::State::NotReconciled);
 
-    if (KMyMoneyGlobalSettings::showCountOfClearedTransactions() || KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+    if (KMyMoneySettings::showCountOfClearedTransactions() || KMyMoneySettings::showCountOfNotReconciledTransactions())
       countCleared = file->countTransactionsWithSpecificReconciliationState(acc.id(), TransactionFilter::State::Cleared);
 
-    if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+    if (KMyMoneySettings::showCountOfNotReconciledTransactions())
       countNotReconciled = countNotMarked + countCleared;
 
-    if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions()) {
+    if (KMyMoneySettings::showCountOfUnmarkedTransactions()) {
       if (countNotMarked)
         countStr = QString("%1").arg(countNotMarked);
       else
@@ -241,7 +241,7 @@ public:
       tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
     }
 
-    if (KMyMoneyGlobalSettings::showCountOfClearedTransactions()) {
+    if (KMyMoneySettings::showCountOfClearedTransactions()) {
       if (countCleared)
         countStr = QString("%1").arg(countCleared);
       else
@@ -249,7 +249,7 @@ public:
       tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
     }
 
-    if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions()) {
+    if (KMyMoneySettings::showCountOfNotReconciledTransactions()) {
       if (countNotReconciled)
         countStr = QString("%1").arg(countNotReconciled);
       else
@@ -280,7 +280,7 @@ public:
     MyMoneySecurity currency = file->currency(acc.currencyId());
     MyMoneyMoney value;
 
-    bool showLimit = KMyMoneyGlobalSettings::showLimitInfo();
+    bool showLimit = KMyMoneySettings::showLimitInfo();
 
     if (acc.accountType() == Account::Type::Investment) {
       //investment accounts show the balances of all its subaccounts
@@ -356,7 +356,7 @@ public:
   {
     if (isNegative) {
       //if negative, get the settings for negative numbers
-      return QString("<font color=\"%1\">%2</font>").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name(), amount);
+      return QString("<font color=\"%1\">%2</font>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), amount);
     }
 
     //if positive, return the same string
@@ -372,7 +372,7 @@ public:
     m_accountList.clear();
 
     //reinitialize the object
-    m_forecast = KMyMoneyGlobalSettings::forecast();
+    m_forecast = KMyMoneyUtils::forecast();
 
     //If forecastDays lower than accountsCycle, adjust to the first cycle
     if (m_forecast.accountsCycle() > m_forecast.forecastDays())
@@ -407,7 +407,7 @@ public:
 
   void loadView()
   {
-    m_view->setZoomFactor(KMyMoneyGlobalSettings::zoomFactor());
+    m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     QList<MyMoneyAccount> list;
     MyMoneyFile::instance()->accountList(list);
@@ -431,7 +431,7 @@ public:
 
       m_html += QString("<div id=\"summarytitle\">%1</div>").arg(i18n("Your Financial Summary"));
 
-      QStringList settings = KMyMoneyGlobalSettings::itemList();
+      QStringList settings = KMyMoneySettings::listOfItems();
 
       QStringList::ConstIterator it;
 
@@ -935,7 +935,7 @@ public:
       m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
       m_html += "<tr class=\"item\">";
 
-      if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+      if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
         QString pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(16,16)));
         m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
       }
@@ -944,13 +944,13 @@ public:
       m_html += i18n("Account");
       m_html += "</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions())
+      if (KMyMoneySettings::showCountOfUnmarkedTransactions())
         m_html += QString("<td class=\"center\">!M</td>");
 
-      if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
+      if (KMyMoneySettings::showCountOfClearedTransactions())
         m_html += QString("<td class=\"center\">C</td>");
 
-      if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+      if (KMyMoneySettings::showCountOfNotReconciledTransactions())
         m_html += QString("<td class=\"center\">!R</td>");
 
       m_html += "<td width=\"25%\" class=\"right\">";
@@ -958,7 +958,7 @@ public:
       m_html += "</td>";
 
       //only show limit info if user chose to do so
-      if (KMyMoneyGlobalSettings::showLimitInfo()) {
+      if (KMyMoneySettings::showLimitInfo()) {
         m_html += "<td width=\"40%\" class=\"right\">";
         m_html += i18n("To Minimum Balance / Maximum Credit");
         m_html += "</td>";
@@ -974,11 +974,11 @@ public:
       }
       m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       QString amount = m_total.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-      if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) m_html += "<td></td>";
+      if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) m_html += "<td></td>";
       m_html += QString("<td class=\"right\"><b>%1</b></td>").arg(i18n("Total"));
-      if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions()) m_html += "<td></td>";
-      if (KMyMoneyGlobalSettings::showCountOfClearedTransactions()) m_html += "<td></td>";
-      if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions()) m_html += "<td></td>";
+      if (KMyMoneySettings::showCountOfUnmarkedTransactions()) m_html += "<td></td>";
+      if (KMyMoneySettings::showCountOfClearedTransactions()) m_html += "<td></td>";
+      if (KMyMoneySettings::showCountOfNotReconciledTransactions()) m_html += "<td></td>";
       m_html += QString("<td class=\"right\"><b>%1</b></td></tr>").arg(showColoredAmount(amount, m_total.isNegative()));
       m_html += "</table></div></div>";
     }
@@ -1248,7 +1248,7 @@ public:
       qStableSort(assets.begin(), assets.end(), accountNameLess);
       qStableSort(liabilities.begin(), liabilities.end(), accountNameLess);
       QString statusHeader;
-      if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+      if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
         QString pathStatusHeader;
         pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::ViewOutbox).pixmap(QSize(16,16)));
         statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
@@ -1262,7 +1262,7 @@ public:
 
       m_html += "<tr class=\"item\">";
 
-      if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+      if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
         m_html += "<td class=\"setcolor\">";
         m_html += statusHeader;
         m_html += "</td>";
@@ -1272,13 +1272,13 @@ public:
       m_html += i18n("Asset Accounts");
       m_html += "</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions())
+      if (KMyMoneySettings::showCountOfUnmarkedTransactions())
         m_html += "<td class=\"setcolor\">!M</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
+      if (KMyMoneySettings::showCountOfClearedTransactions())
         m_html += "<td class=\"setcolor\">C</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+      if (KMyMoneySettings::showCountOfNotReconciledTransactions())
         m_html += "<td class=\"setcolor\">!R</td>";
 
       m_html += "<td width=\"15%\" class=\"right\">";
@@ -1288,7 +1288,7 @@ public:
       //intermediate row to separate both columns
       m_html += "<td width=\"10%\" class=\"setcolor\"></td>";
 
-      if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+      if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
         m_html += "<td class=\"setcolor\">";
         m_html += statusHeader;
         m_html += "</td>";
@@ -1298,13 +1298,13 @@ public:
       m_html += i18n("Liability Accounts");
       m_html += "</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions())
+      if (KMyMoneySettings::showCountOfUnmarkedTransactions())
         m_html += "<td class=\"setcolor\">!M</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
+      if (KMyMoneySettings::showCountOfClearedTransactions())
         m_html += "<td class=\"setcolor\">C</td>";
 
-      if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+      if (KMyMoneySettings::showCountOfNotReconciledTransactions())
         m_html += "<td class=\"setcolor\">!R</td>";
 
       m_html += "<td width=\"15%\" class=\"right\">";
@@ -1312,10 +1312,10 @@ public:
       m_html += "</td></tr>";
 
       QString placeHolder_Status, placeHolder_Counts;
-      if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) placeHolder_Status = "<td></td>";
-      if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions()) placeHolder_Counts = "<td></td>";
-      if (KMyMoneyGlobalSettings::showCountOfClearedTransactions()) placeHolder_Counts += "<td></td>";
-      if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions()) placeHolder_Counts += "<td></td>";
+      if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) placeHolder_Status = "<td></td>";
+      if (KMyMoneySettings::showCountOfUnmarkedTransactions()) placeHolder_Counts = "<td></td>";
+      if (KMyMoneySettings::showCountOfClearedTransactions()) placeHolder_Counts += "<td></td>";
+      if (KMyMoneySettings::showCountOfNotReconciledTransactions()) placeHolder_Counts += "<td></td>";
 
       //get asset and liability accounts
       QList<MyMoneyAccount>::const_iterator asset_it = assets.constBegin();

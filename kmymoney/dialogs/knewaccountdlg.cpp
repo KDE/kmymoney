@@ -48,7 +48,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneycurrencyselector.h"
 #include "knewbankdlg.h"
 #include "models.h"
@@ -118,7 +118,7 @@ public:
     // the proxy filter model
     m_filterProxyModel = new HierarchyFilterProxyModel(q);
     m_filterProxyModel->setHideClosedAccounts(true);
-    m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+    m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_filterProxyModel->addAccountGroup(filterAccountGroup);
     m_filterProxyModel->setCurrentAccountId(m_account.id());
     auto const model = Models::instance()->accountsModel();
@@ -152,7 +152,7 @@ public:
     bool haveMinBalance = false;
     bool haveMaxCredit = false;
     if (!m_account.openingDate().isValid()) {
-      m_account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+      m_account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
     }
     ui->m_openingDateEdit->setDate(m_account.openingDate());
 
@@ -697,7 +697,7 @@ void KNewAccountDlg::okClicked()
       d->m_account.setValue("minimumBalance", d->ui->m_minBalanceAbsoluteEdit->value().toString());
     }
   } else {
-    if (KMyMoneyGlobalSettings::hideUnusedCategory() && !d->m_isEditing) {
+    if (KMyMoneySettings::hideUnusedCategory() && !d->m_isEditing) {
       KMessageBox::information(this, i18n("You have selected to suppress the display of unused categories in the KMyMoney configuration dialog. The category you just created will therefore only be shown if it is used. Otherwise, it will be hidden in the accounts/categories view."), i18n("Hidden categories"), "NewHiddenCategory");
     }
     d->m_account.setCostCenterRequired(d->ui->m_costCenterRequiredCheckBox->isChecked());

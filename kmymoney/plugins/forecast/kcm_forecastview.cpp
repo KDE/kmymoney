@@ -24,7 +24,7 @@
 // KDE includes
 #include <KPluginFactory>
 #include <KAboutData>
-#include "forecastviewsettings.h"
+#include "kmymoneysettings.h"
 
 ForecastViewSettingsWidget::ForecastViewSettingsWidget(QWidget* parent) :
     QWidget(parent)
@@ -36,7 +36,8 @@ KCMForecastView::KCMForecastView(QWidget *parent, const QVariantList& args)
   : KCModule(parent, args)
 {
   ForecastViewSettingsWidget* w = new ForecastViewSettingsWidget(this);
-  addConfig(ForecastViewSettings::self(), w);
+  // addConfig(ForecastViewSettings::self(), w);
+  addConfig(KMyMoneySettings::self(), w);
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout(layout);
   layout->addWidget(w);

@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
@@ -57,7 +57,7 @@ QString reports::ReportTable::cssFileNameGet()
 
   if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
     // if no report specific stylesheet was found, try to use the configured one
-    cssfilename = KMyMoneyGlobalSettings::cssFileDefault();
+    cssfilename = KMyMoneySettings::cssFileDefault();
   }
 
   if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {

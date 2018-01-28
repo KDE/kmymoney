@@ -54,7 +54,7 @@
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 class KCurrencyCalculatorPrivate
 {
@@ -116,7 +116,7 @@ public:
 
     ui->m_dateText->setText(QLocale().toString(m_date));
 
-    ui->m_updateButton->setChecked(KMyMoneyGlobalSettings::priceHistoryUpdate());
+    ui->m_updateButton->setChecked(KMyMoneySettings::priceHistoryUpdate());
 
     // setup initial result
     if (m_result == MyMoneyMoney() && !m_value.isZero()) {
@@ -369,7 +369,7 @@ void KCurrencyCalculator::accept()
   }
 
   // remember setting for next round
-  KMyMoneyGlobalSettings::setPriceHistoryUpdate(d->ui->m_updateButton->isChecked());
+  KMyMoneySettings::setPriceHistoryUpdate(d->ui->m_updateButton->isChecked());
   QDialog::accept();
 }
 

@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "kmymoneytextedit.h"
 #include "kmymoneypayeecombo.h"
@@ -158,7 +158,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
     }
 
     QPalette palette = widget->palette();
-    palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::FieldRequired));
+    palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::FieldRequired));
     widget->setPalette(palette);
     d->m_widgets.append(widget);
     changed();

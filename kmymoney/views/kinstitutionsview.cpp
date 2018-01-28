@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyexception.h"
 #include "knewbankdlg.h"
 #include "menuenums.h"
@@ -67,8 +67,8 @@ void KInstitutionsView::refresh()
   d->m_needsRefresh = false;
 
   d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
 }
 
 void KInstitutionsView::showEvent(QShowEvent * event)

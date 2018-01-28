@@ -51,7 +51,7 @@
 #include "mymoneyaccount.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneytemplate.h"
 #include "mymoneyenums.h"
 
@@ -63,7 +63,7 @@ namespace NewUserWizard
     KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
   {
     Q_D(Wizard);
-    bool isFirstTime = KMyMoneyGlobalSettings::firstTimeRun();
+    bool isFirstTime = KMyMoneySettings::firstTimeRun();
 
     stepCount = 1;
 

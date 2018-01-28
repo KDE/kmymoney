@@ -66,7 +66,7 @@
 #include "mymoneyforecast.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
@@ -204,9 +204,9 @@ QString KMyMoneyUtils::variableCSS()
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
   css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-         .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
+         .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
   css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-         .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
+         .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
   css += QString("a { color: %1 }\n").arg(link.name());
   css += "-->\n</style>\n";
   return css;
@@ -766,4 +766,23 @@ void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)
 QDebug KMyMoneyUtils::debug()
 {
   return qDebug() << QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss.zzz"));
+}
+
+MyMoneyForecast KMyMoneyUtils::forecast()
+{
+  MyMoneyForecast forecast;
+
+  // override object defaults with those of the application
+  forecast.setForecastCycles(KMyMoneySettings::forecastCycles());
+  forecast.setAccountsCycle(KMyMoneySettings::forecastAccountCycle());
+  forecast.setHistoryStartDate(QDate::currentDate().addDays(-forecast.forecastCycles()*forecast.accountsCycle()));
+  forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
+  forecast.setForecastDays(KMyMoneySettings::forecastDays());
+  forecast.setBeginForecastDay(KMyMoneySettings::beginForecastDay());
+  forecast.setForecastMethod(KMyMoneySettings::forecastMethod());
+  forecast.setHistoryMethod(KMyMoneySettings::historyMethod());
+  forecast.setIncludeFutureTransactions(KMyMoneySettings::includeFutureTransactions());
+  forecast.setIncludeScheduledTransactions(KMyMoneySettings::includeScheduledTransactions());
+
+  return forecast;
 }

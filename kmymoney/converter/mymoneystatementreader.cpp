@@ -55,7 +55,7 @@
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
 #include "mymoneysecurity.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
 #include "kmymoneyedit.h"
@@ -336,7 +336,7 @@ MyMoneyStatementReader::MyMoneyStatementReader() :
     m_ft(0),
     m_progressCallback(0)
 {
-  m_askPayeeCategory = KMyMoneyGlobalSettings::askForPayeeCategory();
+  m_askPayeeCategory = KMyMoneySettings::askForPayeeCategory();
 }
 
 MyMoneyStatementReader::~MyMoneyStatementReader()
@@ -1049,7 +1049,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           topcontents->addWidget(label1);
 
           auto filterProxyModel = new AccountNamesFilterProxyModel(this);
-          filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+          filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
           filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
           auto const model = Models::instance()->accountsModel();
@@ -1269,7 +1269,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     TransactionMatcher matcher(thisaccount);
     d->transactionsCount++;
 
-    ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneyGlobalSettings::matchInterval());
+    ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneySettings::matchInterval());
     result = existingTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneyTransaction matchedTransaction = existingTrMatchFinder.getMatchedTransaction();
@@ -1283,7 +1283,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
 
     addTransaction(transactionUnderImport);
-    ScheduledTransactionMatchFinder scheduledTrMatchFinder(thisaccount, KMyMoneyGlobalSettings::matchInterval());
+    ScheduledTransactionMatchFinder scheduledTrMatchFinder(thisaccount, KMyMoneySettings::matchInterval());
     result = scheduledTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneySplit matchedSplit = scheduledTrMatchFinder.getMatchedSplit();
@@ -1553,7 +1553,7 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
 
   // check that dates are within user's setting
   const int gap = std::abs(matchedSchedule.transaction().postDate().toJulianDay() - importedTransaction.postDate().toJulianDay());
-  if (gap > KMyMoneyGlobalSettings::matchInterval())
+  if (gap > KMyMoneySettings::matchInterval())
     questionMsg = i18np("KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
                         "Schedule name: <b>%2</b><br/>"
                         "Transaction: <i>%3 %4</i><br/>"

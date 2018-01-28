@@ -43,7 +43,7 @@
 #include <KChartRingDiagram>
 #include <KChartCartesianAxis>
 #include <KChartFrameAttributes>
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include <kbalanceaxis.h>
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
@@ -513,14 +513,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   }
 
   // the legend is needed only if at least two data sets are rendered
-  if (qMin(static_cast<int>(KMyMoneyGlobalSettings::maximumLegendItems()), rowNum) > 1) {
+  if (qMin(static_cast<int>(KMyMoneySettings::maximumLegendItems()), rowNum) > 1) {
     //the legend will be used later
     Legend* legend = new Legend(planeDiagram, this);
     legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
     //set the legend basic attributes
     //this is done after adding the legend because the values are overridden when adding the legend to the chart
-    const auto maxLegendItems = KMyMoneyGlobalSettings::maximumLegendItems();
+    const auto maxLegendItems = KMyMoneySettings::maximumLegendItems();
     auto legendItems = legendNames.count();
 
     auto i = 0;

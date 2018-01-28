@@ -60,7 +60,7 @@
 #include "kmymoneycompletion.h"
 #include "transaction.h"
 #include "transactionform.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "transactioneditorcontainer.h"
 
 #include "kcurrencycalculator.h"
@@ -285,7 +285,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           // key into a TAB key to move between the fields. Of course, we only need
           // to do this as long as the appropriate option is set. In all other cases,
           // we treat the return/enter key as such.
-          if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+          if (KMyMoneySettings::enterMovesBetweenFields()) {
             for (it_w = d->m_finalEditWidgets.constBegin(); !isFinal && it_w != d->m_finalEditWidgets.constEnd(); ++it_w) {
               if (*it_w == o) {
                 if (dynamic_cast<const KMyMoneyEdit*>(*it_w)) {

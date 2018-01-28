@@ -58,7 +58,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kpayeereassigndlg.h"
 #include "models.h"
 #include "accountsmodel.h"
@@ -149,7 +149,7 @@ public:
 
     m_contact = new MyMoneyContact(q);
     m_filterProxyModel = new AccountNamesFilterProxyModel(q);
-    m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+    m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
 
     auto const model = Models::instance()->accountsModel();
@@ -374,7 +374,7 @@ public:
     MyMoneySecurity base = file->baseCurrency();
 
     // setup sort order
-    ui->m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
+    ui->m_register->setSortOrder(KMyMoneySettings::sortSearchView());
 
     // clear the register
     ui->m_register->clear();
@@ -392,7 +392,7 @@ public:
          ++it)
       filter.addPayee((*it).id());
 
-    filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
+    filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
 
     // retrieve the list from the engine
     file->transactionList(m_transactionList, filter);

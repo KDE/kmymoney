@@ -55,7 +55,7 @@
 #include "registerfilter.h"
 #include "tabbar.h"
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 #include "mymoneyenums.h"
 
@@ -224,14 +224,14 @@ void Transaction::setFocus(bool focus, bool updateLens)
     d->m_focus = focus;
   }
   if (updateLens) {
-    if (KMyMoneyGlobalSettings::ledgerLens()
-        || !KMyMoneyGlobalSettings::transactionForm()
-        || KMyMoneyGlobalSettings::showRegisterDetailed()
+    if (KMyMoneySettings::ledgerLens()
+        || !KMyMoneySettings::transactionForm()
+        || KMyMoneySettings::showRegisterDetailed()
         || d->m_parent->ledgerLens()) {
       if (focus)
         setNumRowsRegister(numRowsRegister(true));
       else
-        setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
+        setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
     }
   }
 }
@@ -374,7 +374,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
 
   // do we need to switch to the error color?
   if (d->m_erroneous) {
-    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
+    option.palette.setColor(QPalette::Text, KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
   }
 
   // do we need to switch to the negative balance color?
@@ -383,7 +383,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability && !d->m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
-      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
+      option.palette.setColor(QPalette::Text, KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
   }
   return true;
 }
@@ -646,7 +646,7 @@ bool Transaction::haveNumberField() const
     case eMyMoney::Account::Type::Asset:
     case eMyMoney::Account::Type::Liability:
     case eMyMoney::Account::Type::Equity:
-      rc = KMyMoneyGlobalSettings::alwaysShowNrField();
+      rc = KMyMoneySettings::alwaysShowNrField();
       break;
 
     case eMyMoney::Account::Type::Checkings:

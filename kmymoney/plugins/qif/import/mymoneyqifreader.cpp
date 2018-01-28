@@ -53,7 +53,7 @@
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneyexception.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 #include "mymoneystatement.h"
 
@@ -500,22 +500,22 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
     line = line.mid(5);
 
     // exportable accounts
-    if (line.toLower() == "ccard" || KMyMoneyGlobalSettings::qifCreditCard().toLower().contains(line.toLower())) {
+    if (line.toLower() == "ccard" || KMyMoneySettings::qifCreditCard().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::CreditCard;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if (line.toLower() == "bank" || KMyMoneyGlobalSettings::qifBank().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "bank" || KMyMoneySettings::qifBank().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::Checkings;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if (line.toLower() == "cash" || KMyMoneyGlobalSettings::qifCash().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "cash" || KMyMoneySettings::qifCash().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::Cash;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if (line.toLower() == "oth a" || KMyMoneyGlobalSettings::qifAsset().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "oth a" || KMyMoneySettings::qifAsset().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::Asset;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
@@ -529,7 +529,7 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       d->accountType = eMyMoney::Account::Type::Investment;
       d->transactionType = m_entryType = EntryInvestmentTransaction;
 
-    } else if (line.toLower() == "invoice" || KMyMoneyGlobalSettings::qifInvoice().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "invoice" || KMyMoneySettings::qifInvoice().toLower().contains(line.toLower())) {
       m_entryType = EntrySkip;
 
     } else if (line.toLower() == "tax") {
@@ -1045,7 +1045,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
   if (d->firstTransaction) {
     // check if this is an opening balance transaction and process it out of the statement
-    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneyGlobalSettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
+    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneySettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
       createOpeningBalance(d->accountType);
       d->firstTransaction = false;
       return;
@@ -1541,7 +1541,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
       tr.m_strMemo = (QString("%1 %2").arg(extractLine('Y')).arg(d->typeToAccountName(action))).trimmed();
   } else if (action == "xin" || action == "xout") {
     QString payee = extractLine('P');
-    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneyGlobalSettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
+    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneySettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
       createOpeningBalance(eMyMoney::Account::Type::Investment);
       return;
     }

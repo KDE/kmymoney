@@ -45,7 +45,7 @@
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
 #include "kmymoneygeneralcombo.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneywizardpage.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
@@ -81,7 +81,7 @@ namespace NewAccountWizard
     d->ui->m_typeSelection->insertItem(i18n("Investment"), (int)Account::Type::Investment);
     d->ui->m_typeSelection->insertItem(i18n("Asset"), (int)Account::Type::Asset);
     d->ui->m_typeSelection->insertItem(i18n("Liability"), (int)Account::Type::Liability);
-    if (KMyMoneyGlobalSettings::expertMode()) {
+    if (KMyMoneySettings::expertMode()) {
         d->ui->m_typeSelection->insertItem(i18n("Equity"), (int)Account::Type::Equity);
       }
 

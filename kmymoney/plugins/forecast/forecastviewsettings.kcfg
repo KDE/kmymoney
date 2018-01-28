@@ -4,6 +4,8 @@
 		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 		http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
+	<kcfgfile name="kmymoney/kmymoneyrc"/>
+<!-- moved to settings/kmymoney.kcfg for backward compatibility
 	<kcfgfile name="kmymoney/forecastviewrc"/>
  <group name="Forecast Options">
   <entry name="forecastMethod" type="Int">
@@ -51,4 +53,5 @@
    <default>true</default>
   </entry>
  </group>
+-->
 </kcfg>

@@ -48,7 +48,7 @@
 #include "kstartuplogo.h"
 #include "kcreditswindow.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "misc/webconnect.h"
 #include "platformtools.h"
 
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
   KMyMoneyUtils::checkConstants();
 
   // show startup logo
-  std::unique_ptr<QSplashScreen> splash(KMyMoneyGlobalSettings::showSplash() ? createStartupLogo() : nullptr);
+  std::unique_ptr<QSplashScreen> splash(KMyMoneySettings::showSplash() ? createStartupLogo() : nullptr);
   app.processEvents();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
@@ -294,10 +294,10 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
     KTipDialog::showTip(kmymoney, QString(), false);
     if (url.isValid() && !noFile) {
       kmymoney->slotFileOpenRecent(url);
-    } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
+    } else if (KMyMoneySettings::firstTimeRun()) {
       kmymoney->slotFileNew();
     }
-    KMyMoneyGlobalSettings::setFirstTimeRun(false);
+    KMyMoneySettings::setFirstTimeRun(false);
 
     if (!importfile.isEmpty())
       kmymoney->webConnect(importfile, QByteArray());

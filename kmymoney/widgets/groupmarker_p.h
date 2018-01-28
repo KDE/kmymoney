@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "register.h"
 #include "registeritem_p.h"
 
@@ -82,7 +82,7 @@ namespace KMyMoneyRegister
       if (m_parent) {
         h = m_parent->rowHeightHint();
       } else {
-        QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+        QFontMetrics fm(KMyMoneySettings::listCellFontEx());
         h = fm.lineSpacing() + 6;
       }
 

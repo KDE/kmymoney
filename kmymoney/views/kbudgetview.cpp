@@ -93,7 +93,7 @@ void KBudgetView::slotNewBudget()
   Q_D(KBudgetView);
   d->askSave();
   auto date = QDate::currentDate();
-  date.setDate(date.year(), KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  date.setDate(date.year(), KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
   auto newname = i18n("Budget %1", date.year());
 
   MyMoneyBudget budget;
@@ -232,7 +232,7 @@ void KBudgetView::slotBudgetForecast()
         historyStart = budgetStart.addYears(-1);
         historyEnd = budgetEnd.addYears(-1);
 
-        MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
+        MyMoneyForecast forecast = KMyMoneyUtils::forecast();
         forecast.createBudget(budget, historyStart, historyEnd, budgetStart, budgetEnd, true);
 
         MyMoneyFile::instance()->modifyBudget(budget);

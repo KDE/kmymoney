@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
@@ -54,8 +54,8 @@ bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleO
   auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
   }
   return rc;
 }
@@ -79,8 +79,8 @@ bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QSty
   auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
   }
   return rc;
 }

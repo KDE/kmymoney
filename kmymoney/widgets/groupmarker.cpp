@@ -122,11 +122,11 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
   cellRect.setWidth(d->m_parent->viewport()->width());
   cellRect.setHeight(d->m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous) : KMyMoneyGlobalSettings::schemeColor(SchemeColor::GroupMarker));
+  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous) : KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
+  painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::ListGrid));
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text

@@ -62,7 +62,7 @@
 #include "kmymoneyaccountselector.h"
 #include "kmymoneylineedit.h"
 #include "mymoneysecurity.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
@@ -171,13 +171,13 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
   getContentsMargins(&left, &top, &right, &bottom);
   setContentsMargins(0, top, right, bottom);
 
-  setFont(KMyMoneyGlobalSettings::listCellFont());
+  setFont(KMyMoneySettings::listCellFontEx());
 
   setAlternatingRowColors(true);
 
   verticalHeader()->hide();
   horizontalHeader()->setSectionsMovable(false);
-  horizontalHeader()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+  horizontalHeader()->setFont(KMyMoneySettings::listHeaderFontEx());
 
   KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTable");
   QByteArray columns;
@@ -185,7 +185,7 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
   horizontalHeader()->restoreState(columns);
   horizontalHeader()->setStretchLastSection(true);
 
-  setShowGrid(KMyMoneyGlobalSettings::showGrid());
+  setShowGrid(KMyMoneySettings::showGrid());
 
   setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -284,7 +284,7 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
       case Qt::Key_Return:
       case Qt::Key_Enter:
         if (row < d->m_transaction.splits().count() - 1
-            && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+            && KMyMoneySettings::enterMovesBetweenFields()) {
           slotStartEdit();
         } else
           emit returnPressed();
@@ -360,7 +360,7 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
 
         // in case we have the 'enter moves focus between fields', we need to simulate
         // a TAB key when the object 'o' points to the category or memo field.
-        if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+        if (KMyMoneySettings::enterMovesBetweenFields()) {
           if (o == d->m_editCategory->lineEdit() || o == d->m_editMemo) {
             terminate = false;
             QKeyEvent evt(e->type(),
@@ -441,7 +441,7 @@ void KMyMoneySplitTable::slotSetFocus(const QModelIndex& index, int button)
   scrollTo(model()->index(row, 0));
 
   if (isEditMode()) {                   // in edit mode?
-    if (isEditSplitValid() && KMyMoneyGlobalSettings::focusChangeIsEnter())
+    if (isEditSplitValid() && KMyMoneySettings::focusChangeIsEnter())
       endEdit(false/*keyboard driven*/, false/*set focus to next row*/);
     else
       slotCancelEdit();
@@ -537,7 +537,7 @@ void KMyMoneySplitTable::setRowCount(int irows)
 
   // determine row height according to the edit widgets
   // we use the category widget as the base
-  QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+  QFontMetrics fm(KMyMoneySettings::listCellFontEx());
   int height = fm.lineSpacing() + 6;
 #if 0
   // recalculate row height hint
@@ -857,7 +857,7 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
   // in case we have selected 'enter moves between fields'
   if (keyboardDriven
       && currentRow() < d->m_transaction.splits().count() - 1
-      && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+      && KMyMoneySettings::enterMovesBetweenFields()) {
     slotStartEdit();
   }
 
@@ -914,7 +914,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   emit editStarted();
 
   Q_D(KMyMoneySplitTable);
-  auto cellFont = KMyMoneyGlobalSettings::listCellFont();
+  auto cellFont = KMyMoneySettings::listCellFontEx();
   d->m_tabOrderWidgets.clear();
 
   // create the widgets
@@ -1020,7 +1020,7 @@ void KMyMoneySplitTable::slotLoadEditWidgets()
   aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
   aSet.addAccountGroup(eMyMoney::Account::Type::Income);
   aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (KMyMoneyGlobalSettings::expertMode())
+  if (KMyMoneySettings::expertMode())
     aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
   // remove the accounts with invalid types at this point

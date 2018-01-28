@@ -58,7 +58,7 @@
 #include "transaction.h"
 #include "transactionform.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "transactioneditorcontainer.h"
 
 #include "ksplittransactiondlg.h"
@@ -172,7 +172,7 @@ void StdTransactionEditor::createEditWidgets()
     case eMyMoney::Account::Type::Asset:
     case eMyMoney::Account::Type::Liability:
     case eMyMoney::Account::Type::Equity:
-      showNumberField = KMyMoneyGlobalSettings::alwaysShowNrField();
+      showNumberField = KMyMoneySettings::alwaysShowNrField();
       break;
 
     case eMyMoney::Account::Type::Income:
@@ -350,7 +350,7 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
   aSet.addAccountGroup(eMyMoney::Account::Type::Income);
   aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (KMyMoneyGlobalSettings::expertMode() || haveEquityAccount)
+  if (KMyMoneySettings::expertMode() || haveEquityAccount)
     aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
   aSet.removeAccountType(eMyMoney::Account::Type::CertificateDep);
@@ -383,7 +383,7 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
       if (d->m_transaction.id().isEmpty()                              // new transaction
           && dynamic_cast<KMyMoneyLineEdit*>(w)->text().isEmpty()   // no number filled in
           && d->m_account.accountType() == eMyMoney::Account::Type::Checkings   // checkings account
-          && KMyMoneyGlobalSettings::autoIncCheckNumber()           // and auto inc number turned on?
+          && KMyMoneySettings::autoIncCheckNumber()           // and auto inc number turned on?
           && action != eRegister::Action::Deposit              // only transfers or withdrawals
           && d->m_paymentMethod == eMyMoney::Schedule::PaymentType::WriteChecque) {// only for WriteChecque
         assignNextNumber();
@@ -540,7 +540,7 @@ void StdTransactionEditor::slotReloadEditWidgets()
   aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
   aSet.addAccountGroup(eMyMoney::Account::Type::Income);
   aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (KMyMoneyGlobalSettings::expertMode())
+  if (KMyMoneySettings::expertMode())
     aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
   aSet.load(category->selector());
 
@@ -584,7 +584,7 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
   // in the account.
   if (d->m_transaction.id().isEmpty()
       && d->m_splits.count() == 0
-      && KMyMoneyGlobalSettings::autoFillTransaction() != 0) {
+      && KMyMoneySettings::autoFillTransaction() != 0) {
     // check if category is empty
     KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
     QStringList list;
@@ -679,7 +679,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         if (it_u == uniqList.end()) {
           uniqList[ukey].t = &((*it_t).first);
           uniqList[ukey].cnt = 1;
-        } else if (KMyMoneyGlobalSettings::autoFillTransaction() == 1) {
+        } else if (KMyMoneySettings::autoFillTransaction() == 1) {
           // we already have a transaction with this signature. we must
           // now check, if we should really treat it as a duplicate according
           // to the value comparison delta.
@@ -695,11 +695,11 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
             diff = s1.abs();
           else
             diff = ((s1 - s2) / s2).convert(10000);
-          if (diff.isPositive() && diff <= MyMoneyMoney(KMyMoneyGlobalSettings::autoFillDifference(), 100)) {
+          if (diff.isPositive() && diff <= MyMoneyMoney(KMyMoneySettings::autoFillDifference(), 100)) {
             uniqList[ukey].t = &((*it_t).first);
             break;    // end while loop
           }
-        } else if (KMyMoneyGlobalSettings::autoFillTransaction() == 2) {
+        } else if (KMyMoneySettings::autoFillTransaction() == 2) {
           (*it_u).cnt++;
           break;      // end while loop
         }
@@ -709,7 +709,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
     }
 
     MyMoneyTransaction t;
-    if (KMyMoneyGlobalSettings::autoFillTransaction() != 2) {
+    if (KMyMoneySettings::autoFillTransaction() != 2) {
 #if 0
       // I removed this code to allow cancellation of an autofill if
       // it does not match even if there is only a single matching
@@ -794,7 +794,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         // the current account. This allows the user to change
         // the autofilled memo text which will then also be used
         // in this split. See createTransaction() for this logic.
-        if ((s.accountId() != d->m_account.id() && t.splitCount() == 2) || !KMyMoneyGlobalSettings::autoFillUseMemos())
+        if ((s.accountId() != d->m_account.id() && t.splitCount() == 2) || !KMyMoneySettings::autoFillUseMemos())
           s.setMemo(QString());
 
         d->m_transaction.addSplit(s);
@@ -1183,7 +1183,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     }
 
     if (postDate->date().isValid() && (postDate->date() < accountOpeningDate)) {
-      postDate->markAsBadDate(true, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
+      postDate->markAsBadDate(true, KMyMoneySettings::schemeColor(SchemeColor::Negative));
       reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
       postDate->setToolTip(reason);
       return false;

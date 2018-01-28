@@ -40,8 +40,6 @@ public:
 
   QAction          *m_action;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private:
   MyMoneyQifReader *m_qifReader;
 

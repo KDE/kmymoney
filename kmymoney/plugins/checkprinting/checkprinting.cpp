@@ -56,7 +56,6 @@
 #include "numbertowords.h"
 #include "pluginsettings.h"
 #include "mymoneyenums.h"
-#include "kmymoneyglobalsettings.h"
 
 struct CheckPrinting::Private {
   QAction* m_action;
@@ -101,11 +100,6 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
 CheckPrinting::~CheckPrinting()
 {
   qDebug("Plugins: checkprinting unloaded");
-}
-
-void CheckPrinting::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void CheckPrinting::plug()

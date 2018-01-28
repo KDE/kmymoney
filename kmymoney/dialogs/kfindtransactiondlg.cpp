@@ -46,7 +46,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "kmymoneyedit.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "register.h"
 #include "transaction.h"
 #include "daterangedlg.h"
@@ -450,13 +450,13 @@ void KFindTransactionDlg::slotSortOptions()
 {
   QPointer<KSortOptionDlg> dlg = new KSortOptionDlg(this);
 
-  dlg->setSortOption(KMyMoneyGlobalSettings::sortSearchView(), QString());
+  dlg->setSortOption(KMyMoneySettings::sortSearchView(), QString());
   dlg->hideDefaultButton();
 
   if (dlg->exec() == QDialog::Accepted) {
     QString sortOrder = dlg->sortOption();
-    if (sortOrder != KMyMoneyGlobalSettings::sortSearchView()) {
-      KMyMoneyGlobalSettings::setSortSearchView(sortOrder);
+    if (sortOrder != KMyMoneySettings::sortSearchView()) {
+      KMyMoneySettings::setSortSearchView(sortOrder);
       slotRefreshView();
     }
   }

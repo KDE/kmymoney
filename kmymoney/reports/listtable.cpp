@@ -42,7 +42,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyenums.h"
 
 namespace reports
@@ -358,7 +358,7 @@ void ListTable::render(QString& result, QString& csv) const
             QString colorBegin;
             QString colorEnd;
             if ((rowRank == 4 || rowRank == 5) && value.isNegative()) {
-              colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
+              colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
               colorEnd = QLatin1String("</font>");
             }
 
@@ -382,13 +382,13 @@ void ListTable::render(QString& result, QString& csv) const
             QString colorBegin;
             QString colorEnd;
             if ((rowRank == 4 || rowRank == 5) && value.isNegative()) {
-              colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name());
+              colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
               colorEnd = QLatin1String("</font>");
             }
 
             if ((rowRank == 4 || rowRank == 5) && value.isNegative())
               valueStr = QString::fromLatin1("<font color=%1>%2</font>")
-                  .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name(), valueStr);
+                  .arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), valueStr);
             result.append(QString::fromLatin1("<td>%2%4%1%%5%3</td>").arg(valueStr, tlinkBegin, tlinkEnd, colorBegin, colorEnd));
           }
           break;
@@ -472,7 +472,7 @@ void ListTable::includeInvestmentSubAccounts()
   // that all stock accounts for the selected investment
   // account are also selected.
   // In case we get called for a non investment only report we quit
-  if (KMyMoneyGlobalSettings::expertMode() || !m_config.isInvestmentsOnly()) {
+  if (KMyMoneySettings::expertMode() || !m_config.isInvestmentsOnly()) {
     return;
   }
 

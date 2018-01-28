@@ -33,7 +33,6 @@
 
 #include "kmymoneyplugin.h"
 #include "onlinepluginextended.h"
-#include "kmymoneyglobalsettings.h"
 
 namespace KMyMoneyPlugin
 {
@@ -95,7 +94,6 @@ namespace KMyMoneyPlugin
 
           guiFactory->removeClient(it.value());
           it.value()->unplug();
-          it.value()->injectExternalSettings(0);
           delete it.value();
           it = plugins.erase(it);
           continue;
@@ -128,7 +126,6 @@ namespace KMyMoneyPlugin
           }
 
           ctnPlugins.standard.insert((*it).pluginId(), plugin);
-          plugin->injectExternalSettings(KMyMoneyGlobalSettings::self());
           plugin->plug();
           guiFactory->addClient(plugin);
 

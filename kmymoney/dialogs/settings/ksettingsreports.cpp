@@ -35,7 +35,7 @@
 
 #include "ui_ksettingsreports.h"
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 class KSettingsReportsPrivate
 {
@@ -136,10 +136,10 @@ KSettingsReports::KSettingsReports(QWidget* parent) :
   d->ui->setupUi(this);
 
   // keep initial (default) css file in mind
-  d->m_cssFileOld = KMyMoneyGlobalSettings::cssFileDefault();
+  d->m_cssFileOld = KMyMoneySettings::cssFileDefault();
 
   // set default css file in ksettingsreports dialog
-  d->ui->kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneyGlobalSettings::cssFileDefault()));
+  d->ui->kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneySettings::cssFileDefault()));
 
   d->m_fileKLineEdit = d->ui->kcfg_CssFileDefault->lineEdit();
 

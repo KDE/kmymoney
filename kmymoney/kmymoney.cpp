@@ -75,7 +75,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyadaptor.h"
 
 #include "dialogs/settings/ksettingskmymoney.h"
@@ -169,10 +169,6 @@
 #include "menuenums.h"
 
 #include "misc/platformtools.h"
-
-// includes needed for shared global settings
-#include "mymoney_config.h"
-#include "widgets_config.h"
 
 #ifdef KMM_DEBUG
 #include "mymoney/storage/mymoneystoragedump.h"
@@ -380,16 +376,13 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
 
-  MyMoney::injectExternalSettings(KMyMoneyGlobalSettings::self());
-  Widgets::injectExternalSettings(KMyMoneyGlobalSettings::self());
-
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
   d->m_config = KSharedConfig::openConfig();
 
   d->setThemedCSS();
 
-  MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
   updateCaption(true);
 
@@ -493,8 +486,6 @@ KMyMoneyApp::~KMyMoneyApp()
 #ifdef KF5Holidays_FOUND
   delete d->m_holidayRegion;
 #endif
-  Widgets::injectExternalSettings(nullptr);
-  MyMoney::injectExternalSettings(nullptr);
   delete d;
 }
 
@@ -874,9 +865,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   connect(onlineJobAdministration::instance(), &onlineJobAdministration::canSendCreditTransferChanged,  lutActions.value(Action::AccountCreditTransfer), &QAction::setEnabled);
 
   // Setup transaction detail switch
-  lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneyGlobalSettings::showRegisterDetailed());
-  lutActions[Action::ViewHideReconciled]->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
-  lutActions[Action::ViewHideCategories]->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
+  lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
+  lutActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+  lutActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
   lutActions[Action::ViewShowAll]->setChecked(false);
 
   // *************
@@ -964,8 +955,8 @@ void KMyMoneyApp::readOptions()
   KConfigGroup grp = d->m_config->group("General Options");
 
 
-  pActions[Action::ViewHideReconciled]->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
-  pActions[Action::ViewHideCategories]->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
+  pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+  pActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
 
   d->m_recentFiles->loadEntries(d->m_config->group("Recent Files"));
 
@@ -982,7 +973,7 @@ void KMyMoneyApp::resizeEvent(QResizeEvent* ev)
 int KMyMoneyApp::askSaveOnClose()
 {
   int ans;
-  if (KMyMoneyGlobalSettings::autoSaveOnClose()) {
+  if (KMyMoneySettings::autoSaveOnClose()) {
     ans = KMessageBox::Yes;
   } else {
     ans = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it?"));
@@ -1194,7 +1185,7 @@ void KMyMoneyApp::slotFileNew()
 
         d->m_fileName = wizard->url();
         ft.commit();
-        KMyMoneyGlobalSettings::setFirstTimeRun(false);
+        KMyMoneySettings::setFirstTimeRun(false);
 
         // FIXME This is a bit clumsy. We re-read the freshly
         // created file to be able to run through all the
@@ -1393,8 +1384,8 @@ bool KMyMoneyApp::slotFileSaveAs()
     KGPGFile::secretKeyList(keyList);
 
     QPointer<KGpgKeySelectionDlg> dlg = new KGpgKeySelectionDlg(this);
-    dlg->setSecretKeys(keyList, KMyMoneyGlobalSettings::gpgRecipient());
-    dlg->setAdditionalKeys(KMyMoneyGlobalSettings::gpgRecipientList());
+    dlg->setSecretKeys(keyList, KMyMoneySettings::gpgRecipient());
+    dlg->setAdditionalKeys(KMyMoneySettings::gpgRecipientList());
     const int rc = dlg->exec();
     if ((rc == QDialog::Accepted) && (dlg != 0)) {
       d->m_additionalGpgKeys = dlg->additionalKeys();
@@ -1585,19 +1576,19 @@ void KMyMoneyApp::slotShowTransactionDetail()
 
 void KMyMoneyApp::slotHideReconciledTransactions()
 {
-  KMyMoneyGlobalSettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
+  KMyMoneySettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
   d->m_myMoneyView->slotRefreshViews();
 }
 
 void KMyMoneyApp::slotHideUnusedCategories()
 {
-  KMyMoneyGlobalSettings::setHideUnusedCategory(pActions[Action::ViewHideCategories]->isChecked());
+  KMyMoneySettings::setHideUnusedCategory(pActions[Action::ViewHideCategories]->isChecked());
   d->m_myMoneyView->slotRefreshViews();
 }
 
 void KMyMoneyApp::slotShowAllAccounts()
 {
-  KMyMoneyGlobalSettings::setShowAllAccounts(pActions[Action::ViewShowAll]->isChecked());
+  KMyMoneySettings::setShowAllAccounts(pActions[Action::ViewShowAll]->isChecked());
   d->m_myMoneyView->slotRefreshViews();
 }
 
@@ -1822,7 +1813,7 @@ void KMyMoneyApp::slotSettings()
     return;
 
   // otherwise, we have to create it
-  auto dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
+  auto dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneySettings::self());
   connect(dlg, &KSettingsKMyMoney::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
   dlg->show();
 }
@@ -1841,28 +1832,28 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     onlineJobAdministration::instance()->updateActions();
     return;
   }
-  MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
 #ifdef ENABLE_UNFINISHEDFEATURES
-  LedgerSeparator::setFirstFiscalDate(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  LedgerSeparator::setFirstFiscalDate(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 #endif
 
   d->m_myMoneyView->updateViewType();
 
   // update the sql storage module settings
-//  MyMoneyStorageSql::setStartDate(KMyMoneyGlobalSettings::startDate().date());
+//  MyMoneyStorageSql::setStartDate(KMyMoneySettings::startDate().date());
 
   // update the report module settings
-  MyMoneyReport::setLineWidth(KMyMoneyGlobalSettings::lineWidth());
+  MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
 
   // update the holiday region configuration
-  setHolidayRegion(KMyMoneyGlobalSettings::holidayRegion());
+  setHolidayRegion(KMyMoneySettings::holidayRegion());
 
   d->m_myMoneyView->slotRefreshViews();
 
   // re-read autosave configuration
-  d->m_autoSaveEnabled = KMyMoneyGlobalSettings::autoSaveFile();
-  d->m_autoSavePeriod = KMyMoneyGlobalSettings::autoSavePeriod();
+  d->m_autoSaveEnabled = KMyMoneySettings::autoSaveFile();
+  d->m_autoSavePeriod = KMyMoneySettings::autoSavePeriod();
 
   // stop timer if turned off but running
   if (d->m_autoSaveTimer->isActive() && !d->m_autoSaveEnabled) {
@@ -2113,7 +2104,7 @@ void KMyMoneyApp::slotGenerateSql()
 
 void KMyMoneyApp::slotToolsStartKCalc()
 {
-  QString cmd = KMyMoneyGlobalSettings::externalCalculator();
+  QString cmd = KMyMoneySettings::externalCalculator();
   // if none is present, we fall back to the default
   if (cmd.isEmpty()) {
 #if defined(Q_OS_WIN32)
@@ -2718,11 +2709,11 @@ void KMyMoneyApp::Private::setThemedCSS()
           QTextStream cssStream(&cssFile);
           auto cssText = cssStream.readAll();
           cssText.replace(QLatin1String("./"), defaultCSSDir, Qt::CaseSensitive);
-          cssText.replace(QLatin1String("WindowText"),    KMyMoneyGlobalSettings::schemeColor(SchemeColor::WindowText).name(),        Qt::CaseSensitive);
-          cssText.replace(QLatin1String("Window"),        KMyMoneyGlobalSettings::schemeColor(SchemeColor::WindowBackground).name(),  Qt::CaseSensitive);
-          cssText.replace(QLatin1String("HighlightText"), KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListHighlightText).name(), Qt::CaseSensitive);
-          cssText.replace(QLatin1String("Highlight"),     KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListHighlight).name(),     Qt::CaseSensitive);
-          cssText.replace(QLatin1String("black"),         KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid).name(),          Qt::CaseSensitive);
+          cssText.replace(QLatin1String("WindowText"),    KMyMoneySettings::schemeColor(SchemeColor::WindowText).name(),        Qt::CaseSensitive);
+          cssText.replace(QLatin1String("Window"),        KMyMoneySettings::schemeColor(SchemeColor::WindowBackground).name(),  Qt::CaseSensitive);
+          cssText.replace(QLatin1String("HighlightText"), KMyMoneySettings::schemeColor(SchemeColor::ListHighlightText).name(), Qt::CaseSensitive);
+          cssText.replace(QLatin1String("Highlight"),     KMyMoneySettings::schemeColor(SchemeColor::ListHighlight).name(),     Qt::CaseSensitive);
+          cssText.replace(QLatin1String("black"),         KMyMoneySettings::schemeColor(SchemeColor::ListGrid).name(),          Qt::CaseSensitive);
           cssStream.seek(0);
           cssStream << cssText;
           cssFile.close();
@@ -2734,11 +2725,11 @@ void KMyMoneyApp::Private::setThemedCSS()
 
 void KMyMoneyApp::slotCheckSchedules()
 {
-  if (KMyMoneyGlobalSettings::checkSchedule() == true) {
+  if (KMyMoneySettings::checkSchedule() == true) {
 
     KMSTATUS(i18n("Checking for overdue scheduled transactions..."));
     MyMoneyFile *file = MyMoneyFile::instance();
-    QDate checkDate = QDate::currentDate().addDays(KMyMoneyGlobalSettings::checkSchedulePreview());
+    QDate checkDate = QDate::currentDate().addDays(KMyMoneySettings::checkSchedulePreview());
 
     QList<MyMoneySchedule> scheduleList =  file->scheduleList();
     QList<MyMoneySchedule>::Iterator it;
@@ -3248,7 +3239,7 @@ void KMyMoneyApp::preloadHolidays()
   //only do this if it is a valid region
   if (d->m_holidayRegion && d->m_holidayRegion->isValid()) {
     //load holidays for the forecast days plus 1 cycle, to be on the safe side
-    int forecastDays = KMyMoneyGlobalSettings::forecastDays() + KMyMoneyGlobalSettings::forecastAccountCycle();
+    int forecastDays = KMyMoneySettings::forecastDays() + KMyMoneySettings::forecastAccountCycle();
     QDate endDate = QDate::currentDate().addDays(forecastDays);
 
     //look for holidays for the next 2 years as a minimum. That should give a good margin for the cache

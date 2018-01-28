@@ -38,7 +38,6 @@
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragemgr.h"
-#include "kmymoneyglobalsettings.h"
 
 class MyMoneyStatement;
 
@@ -56,11 +55,6 @@ GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
 GNCImporter::~GNCImporter()
 {
   qDebug("Plugins: gncimporter unloaded");
-}
-
-void GNCImporter::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void GNCImporter::createActions()

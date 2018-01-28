@@ -39,8 +39,6 @@ public:
 
   QAction          *m_action;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private:
   MyMoneyGncReader *m_gncReader;
 

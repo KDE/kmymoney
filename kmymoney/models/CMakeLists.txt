@@ -43,4 +43,4 @@ if (USE_MODELTEST)
   target_link_libraries(models PRIVATE Qt5::Test)
 endif()
 
-add_dependencies(models kmm_config)
+add_dependencies(models kmm_settings)

@@ -45,7 +45,7 @@
 #include "kmymoneycategory.h"
 #include "transaction.h"
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 #include "widgetenums.h"
 #include "mymoneyenums.h"
@@ -328,7 +328,7 @@ void TransactionForm::adjustColumn(eTransactionForm::Column col)
 
   if (d->m_transaction) {
     QString txt;
-    QFontMetrics fontMetrics(KMyMoneyGlobalSettings::listCellFont());
+    QFontMetrics fontMetrics(KMyMoneySettings::listCellFontEx());
 
     // scan through the rows
     for (int i = rowCount() - 1; i >= 0; --i) {

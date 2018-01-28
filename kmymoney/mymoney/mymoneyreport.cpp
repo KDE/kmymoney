@@ -37,7 +37,6 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
-#include "kmymoneyglobalsettings.h"
 
 using namespace MyMoneyStorageNodes;
 
@@ -197,7 +196,7 @@ MyMoneyReport::MyMoneyReport(ERowType rt,
     addAccountGroup(Account::Type::Cash);
     addAccountGroup(Account::Type::Checkings);
     addAccountGroup(Account::Type::CreditCard);
-    if (KMyMoneyGlobalSettings::expertMode())
+    if (m_expertMode)
       addAccountGroup(Account::Type::Equity);
     addAccountGroup(Account::Type::Expense);
     addAccountGroup(Account::Type::Income);
@@ -1581,10 +1580,16 @@ bool MyMoneyReport::hasReferenceTo(const QString& id) const
 }
 
 int MyMoneyReport::m_lineWidth = 2;
+bool MyMoneyReport::m_expertMode = false;
 
 void MyMoneyReport::setLineWidth(int width)
 {
   m_lineWidth = width;
+}
+
+void MyMoneyReport::setExpertMode(bool expertMode)
+{
+  m_expertMode = expertMode;
 }
 
 QString MyMoneyReport::toString(ERowType type)

@@ -41,7 +41,7 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyaccount.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
 #include "models.h"
@@ -177,11 +177,11 @@ public:
   void loadInvestmentTab()
   {
     Q_Q(KInvestmentView);
-    m_equitiesProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !KMyMoneyGlobalSettings::showAllAccounts());
-    m_equitiesProxyModel->setHideZeroBalanceAccounts(KMyMoneyGlobalSettings::hideZeroBalanceEquities());
+    m_equitiesProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+    m_equitiesProxyModel->setHideZeroBalanceAccounts(KMyMoneySettings::hideZeroBalanceEquities());
     m_equitiesProxyModel->invalidate();
 
-    m_accountsProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !KMyMoneyGlobalSettings::showAllAccounts());
+    m_accountsProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
     m_accountsProxyModel->invalidate();
 
     if (!m_idInvAcc.isEmpty()) {                                          // check if account to be selected exist

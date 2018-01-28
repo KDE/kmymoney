@@ -42,7 +42,7 @@ target_link_libraries(konlinetasks_sepa
   PRIVATE
     KF5::I18n
     KF5::Service
-    kmm_config
+    kmm_settings
     kmm_utils_validators
     payeeidentifier_iban_bic_widgets
     KF5::ItemModels

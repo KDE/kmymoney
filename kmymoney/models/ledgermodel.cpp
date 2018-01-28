@@ -213,7 +213,7 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
 
     case Qt::BackgroundColorRole:
       if(d->m_ledgerItems[index.row()]->isImported()) {
-        return KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported);
+        return KMyMoneySettings::schemeColor(SchemeColor::TransactionImported);
       }
       break;
 
@@ -493,7 +493,7 @@ void LedgerModel::load()
   // load all scheduled transactoins and splits into the model
   const int splitCount = rowCount();
   QList<MyMoneySchedule> sList = MyMoneyFile::instance()->scheduleList();
-  addSchedules(sList, KMyMoneyGlobalSettings::schedulePreview());
+  addSchedules(sList, KMyMoneySettings::schedulePreview());
   qDebug() << "Loaded" << rowCount()-splitCount << "elements";
 
   // create a dummy entry for new transactions

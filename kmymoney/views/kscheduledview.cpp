@@ -50,7 +50,7 @@
 #include "ui_kscheduledview.h"
 #include "keditloanwizard.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyexception.h"
 #include "kscheduletreeitem.h"
 #include "keditscheduledlg.h"

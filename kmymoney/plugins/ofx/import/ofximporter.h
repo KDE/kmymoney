@@ -115,8 +115,6 @@ public:
   bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings) override;
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts) override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 protected Q_SLOTS:
   void slotImportFile();
   void slotImportFile(const QString& url);

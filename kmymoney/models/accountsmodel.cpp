@@ -43,7 +43,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
@@ -256,7 +256,7 @@ public:
     }
     QColor color;
     if (valInstitution.isNegative())
-      color = KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative);
+      color = KMyMoneySettings::schemeColor(SchemeColor::Negative);
     else
       color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
 
@@ -338,7 +338,7 @@ public:
         getCell(colNum);
         QColor color;
         if (accountTotalValue.isNegative())
-          color = KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative);
+          color = KMyMoneySettings::schemeColor(SchemeColor::Negative);
         else
           color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
 
@@ -656,7 +656,7 @@ void AccountsModel::load()
       // filter out stocks with zero balance if requested by user
       for (auto subaccStr = subaccountsStr.begin(); subaccStr != subaccountsStr.end();) {
         const auto subacc = d->m_file->account(*subaccStr);
-        if (subacc.isInvest() && KMyMoneyGlobalSettings::hideZeroBalanceEquities() && subacc.balance().isZero())
+        if (subacc.isInvest() && KMyMoneySettings::hideZeroBalanceEquities() && subacc.balance().isZero())
           subaccStr = subaccountsStr.erase(subaccStr);
         else
           ++subaccStr;
@@ -1116,7 +1116,7 @@ void InstitutionsModel::load()
   }
 
   foreach (const auto stock, stocksList) {
-    if (!(KMyMoneyGlobalSettings::hideZeroBalanceEquities() && stock.balance().isZero()))
+    if (!(KMyMoneySettings::hideZeroBalanceEquities() && stock.balance().isZero()))
       modelUtils->loadInstitution(this, stock);
   }
 

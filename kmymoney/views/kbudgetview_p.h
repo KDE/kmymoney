@@ -52,7 +52,7 @@
 #include "kmymoneyutils.h"
 
 #include "budgetviewproxymodel.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons.h"
 #include "modelenums.h"
 #include "menuenums.h"

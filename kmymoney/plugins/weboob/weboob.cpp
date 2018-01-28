@@ -47,7 +47,6 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneystatement.h"
 #include "statementinterface.h"
-#include "kmymoneyglobalsettings.h"
 
 class WeboobPrivate
 {
@@ -82,11 +81,6 @@ Weboob::~Weboob()
   Q_D(Weboob);
   delete d;
   qDebug("Plugins: weboob unloaded");
-}
-
-void Weboob::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void Weboob::plug()

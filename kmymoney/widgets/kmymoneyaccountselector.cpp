@@ -43,7 +43,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
@@ -533,7 +533,7 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
   for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     const MyMoneyAccount& acc = d->m_file->account(*it_l);
     // don't include stock accounts if not in expert mode
-    if (acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+    if (acc.isInvest() && !KMyMoneySettings::expertMode())
       continue;
 
     //this will include an account if it matches the account type and

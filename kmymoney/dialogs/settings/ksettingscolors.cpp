@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "ksettingscolors.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -44,10 +44,10 @@ KSettingsColors::~KSettingsColors()
 
 void KSettingsColors::slotCustomColorsToggled(bool)
 {
-  ui->kcfg_transactionErroneousColor->setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
-  ui->kcfg_missingConversionRateColor->setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::MissingConversionRate));
-  ui->kcfg_groupMarkerColor->setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::GroupMarker));
-  ui->kcfg_fieldRequiredColor->setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::FieldRequired));
-  ui->kcfg_transactionImportedColor->setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
-  ui->kcfg_transactionMatchedColor->setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionMatched));
+  ui->kcfg_transactionErroneousColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
+  ui->kcfg_missingConversionRateColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::MissingConversionRate));
+  ui->kcfg_groupMarkerColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
+  ui->kcfg_fieldRequiredColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::FieldRequired));
+  ui->kcfg_transactionImportedColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+  ui->kcfg_transactionMatchedColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
 }

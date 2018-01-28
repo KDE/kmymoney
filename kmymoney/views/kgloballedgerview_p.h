@@ -61,7 +61,7 @@
 #include "register.h"
 #include "transactioneditor.h"
 #include "selectedtransactions.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "registersearchline.h"
 #include "scheduledtransaction.h"
 #include "accountsmodel.h"
@@ -403,8 +403,8 @@ public:
     // TODO: check why the invalidate is needed here
     m_filterProxyModel->invalidate();
     m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
-    m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !KMyMoneyGlobalSettings::showAllAccounts());
-    m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+    m_filterProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+    m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_accountComboBox->expandAll();
 
     if (m_currentAccount.id().isEmpty()) {
@@ -464,7 +464,7 @@ public:
     m_register->clear();
 
     // setup header font
-    QFont font = KMyMoneyGlobalSettings::listHeaderFont();
+    QFont font = KMyMoneySettings::listHeaderFontEx();
     QFontMetrics fm(font);
     int height = fm.lineSpacing() + 6;
     m_register->horizontalHeader()->setMinimumHeight(height);
@@ -472,7 +472,7 @@ public:
     m_register->horizontalHeader()->setFont(font);
 
     // setup cell font
-    font = KMyMoneyGlobalSettings::listCellFont();
+    font = KMyMoneySettings::listCellFontEx();
     m_register->setFont(font);
 
     // clear the form
@@ -494,7 +494,7 @@ public:
     Q_Q(KGlobalLedgerView);
 
     // setup form visibility
-    m_formFrame->setVisible(KMyMoneyGlobalSettings::transactionForm());
+    m_formFrame->setVisible(KMyMoneySettings::transactionForm());
 
     // no account selected
 //    emit q->objectSelected(MyMoneyAccount());
@@ -565,14 +565,14 @@ public:
 
       if (isReconciliationAccount()) {
         key = "kmm-sort-reconcile";
-        sortOrder = KMyMoneyGlobalSettings::sortReconcileView();
+        sortOrder = KMyMoneySettings::sortReconcileView();
         filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
         filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
       } else {
-        filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
+        filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
         key = "kmm-sort-std";
-        sortOrder = KMyMoneyGlobalSettings::sortNormalView();
-        if (KMyMoneyGlobalSettings::hideReconciledTransactions()
+        sortOrder = KMyMoneySettings::sortNormalView();
+        if (KMyMoneySettings::hideReconciledTransactions()
             && !m_currentAccount.isIncomeExpense()) {
           filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
           filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
@@ -610,7 +610,7 @@ public:
       }
 
       // create dummy entries for the scheduled transactions if sorted by postdate
-      int period = KMyMoneyGlobalSettings::schedulePreview();
+      int period = KMyMoneySettings::schedulePreview();
       if (m_register->primarySortKey() == eWidgets::SortField::PostDate) {
         // show scheduled transactions which have a scheduled postdate
         // within the next 'period' days. In reconciliation mode, the
@@ -827,7 +827,7 @@ public:
       split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
       // make sure to use the value specified in the option during reconciliation
       if (isReconciliationAccount())
-        split.setReconcileFlag(static_cast<eMyMoney::Split::State>(KMyMoneyGlobalSettings::defaultReconciliationState()));
+        split.setReconcileFlag(static_cast<eMyMoney::Split::State>(KMyMoneySettings::defaultReconciliationState()));
       KMyMoneyRegister::Register::transactionFactory(m_register, MyMoneyTransaction(), split, 0);
 
       m_register->updateRegister(true);
@@ -856,7 +856,7 @@ public:
       clear();
     }
 
-    m_showDetails = KMyMoneyGlobalSettings::showRegisterDetailed();
+    m_showDetails = KMyMoneySettings::showRegisterDetailed();
 
     // and tell everyone what's selected
     emit q->objectSelected(m_currentAccount);

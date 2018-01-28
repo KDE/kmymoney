@@ -1,8 +1,8 @@
 /***************************************************************************
-                          kmymoneyglobalsettings.cpp
+                          kmymoneysettings_addons.cpp
                              -------------------
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2018 by Thomas Baumgart
+    email                : tbaumgart@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -13,8 +13,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
-#include "kmymoneyglobalsettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -30,38 +28,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyforecast.h"
-
-// include kmymoneysettings.cpp here to gain access to s_globalKMyMoneySettings
-#include "kmymoneysettings.cpp"
-#include "forecastviewsettings.h"
-
-void KMyMoneyGlobalSettings::injectExternalSettings(KMyMoneySettings* p)
-{
-  s_globalKMyMoneySettings()->q = p;
-}
-
-QFont KMyMoneyGlobalSettings::listCellFont()
+QFont KMyMoneySettings::listCellFontEx()
 {
   if (useSystemFont()) {
     return QFontDatabase::systemFont(QFontDatabase::GeneralFont);
   } else {
-    return KMyMoneySettings::listCellFont();
+    return listCellFont();
   }
 }
 
-QFont KMyMoneyGlobalSettings::listHeaderFont()
+QFont KMyMoneySettings::listHeaderFontEx()
 {
   if (useSystemFont()) {
     QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
     font.setBold(true);
     return font;
   } else {
-    return KMyMoneySettings::listHeaderFont();
+    return listHeaderFont();
   }
 }
 
-QColor KMyMoneyGlobalSettings::schemeColor(const SchemeColor color)
+QColor KMyMoneySettings::schemeColor(const SchemeColor color)
 {
   switch(color) {
     case SchemeColor::ListBackground1:
@@ -84,32 +71,32 @@ QColor KMyMoneyGlobalSettings::schemeColor(const SchemeColor color)
       return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
     case SchemeColor::TransactionImported:
       if (useCustomColors())
-        return KMyMoneySettings::transactionImportedColor();
+        return transactionImportedColor();
       else
         return KColorScheme (QPalette::Active, KColorScheme::Complementary).background(KColorScheme::NeutralBackground).color();
     case SchemeColor::TransactionMatched:
       if (useCustomColors())
-        return KMyMoneySettings::transactionMatchedColor();
+        return transactionMatchedColor();
       else
       return KColorScheme (QPalette::Active, KColorScheme::Complementary).background(KColorScheme::PositiveBackground).color();
     case SchemeColor::TransactionErroneous:
       if (useCustomColors())
-        return KMyMoneySettings::transactionErroneousColor();
+        return transactionErroneousColor();
       else
       return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
     case SchemeColor::FieldRequired:
       if (useCustomColors())
-        return KMyMoneySettings::fieldRequiredColor();
+        return fieldRequiredColor();
       else
         return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NeutralBackground).color();
     case SchemeColor::GroupMarker:
       if (useCustomColors())
-        return KMyMoneySettings::groupMarkerColor();
+        return groupMarkerColor();
       else
       return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::LinkBackground).color();
     case SchemeColor::MissingConversionRate:
       if (useCustomColors())
-        return KMyMoneySettings::missingConversionRateColor();
+        return missingConversionRateColor();
       else
       return KColorScheme (QPalette::Active, KColorScheme::Complementary).foreground(KColorScheme::LinkText).color();
     default:
@@ -118,12 +105,12 @@ QColor KMyMoneyGlobalSettings::schemeColor(const SchemeColor color)
   }
 }
 
-QStringList KMyMoneyGlobalSettings::itemList()
+QStringList KMyMoneySettings::listOfItems()
 {
   bool prevValue = self()->useDefaults(true);
-  QStringList all = KMyMoneySettings::itemList().split(',', QString::SkipEmptyParts);
+  QStringList all = itemList().split(',', QString::SkipEmptyParts);
   self()->useDefaults(prevValue);
-  QStringList list = KMyMoneySettings::itemList().split(',', QString::SkipEmptyParts);
+  QStringList list = itemList().split(',', QString::SkipEmptyParts);
 
   // now add all from 'all' that are missing in 'list'
   QRegExp exp("-?(\\d+)");
@@ -137,17 +124,17 @@ QStringList KMyMoneyGlobalSettings::itemList()
   return list;
 }
 
-int KMyMoneyGlobalSettings::firstFiscalMonth()
+int KMyMoneySettings::firstFiscalMonth()
 {
-  return KMyMoneySettings::fiscalYearBegin() + 1;
+  return fiscalYearBegin() + 1;
 }
 
-int KMyMoneyGlobalSettings::firstFiscalDay()
+int KMyMoneySettings::firstFiscalDay()
 {
-  return KMyMoneySettings::fiscalYearBeginDay();
+  return fiscalYearBeginDay();
 }
 
-QDate KMyMoneyGlobalSettings::firstFiscalDate()
+QDate KMyMoneySettings::firstFiscalDate()
 {
   QDate date = QDate(QDate::currentDate().year(), firstFiscalMonth(), firstFiscalDay());
   if (date > QDate::currentDate())
@@ -155,31 +142,3 @@ QDate KMyMoneyGlobalSettings::firstFiscalDate()
   return date;
 }
 
-MyMoneyForecast KMyMoneyGlobalSettings::forecast()
-{
-  MyMoneyForecast forecast;
-
-  // override object defaults with those of the application
-  forecast.setForecastCycles(ForecastViewSettings::forecastCycles());
-  forecast.setAccountsCycle(ForecastViewSettings::forecastAccountCycle());
-  forecast.setHistoryStartDate(QDate::currentDate().addDays(-forecast.forecastCycles()*forecast.accountsCycle()));
-  forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
-  forecast.setForecastDays(ForecastViewSettings::forecastDays());
-  forecast.setBeginForecastDay(ForecastViewSettings::beginForecastDay());
-  forecast.setForecastMethod(ForecastViewSettings::forecastMethod());
-  forecast.setHistoryMethod(ForecastViewSettings::historyMethod());
-  forecast.setIncludeFutureTransactions(ForecastViewSettings::includeFutureTransactions());
-  forecast.setIncludeScheduledTransactions(ForecastViewSettings::includeScheduledTransactions());
-
-  return forecast;
-}
-
-int KMyMoneyGlobalSettings::forecastDays()
-{
-  return ForecastViewSettings::forecastDays();
-}
-
-int KMyMoneyGlobalSettings::forecastAccountCycle()
-{
-  return ForecastViewSettings::forecastAccountCycle();
-}

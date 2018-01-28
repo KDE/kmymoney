@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 
 using namespace eWidgets;
@@ -409,7 +409,7 @@ QTreeWidget* KMyMoneySelector::listView() const
 int KMyMoneySelector::slotMakeCompletion(const QString& _txt)
 {
   QString txt(QRegExp::escape(_txt));
-  if (KMyMoneyGlobalSettings::stringMatchFromStart() && QLatin1String(this->metaObject()->className()) == QLatin1String("KMyMoneySelector"))
+  if (KMyMoneySettings::stringMatchFromStart() && QLatin1String(this->metaObject()->className()) == QLatin1String("KMyMoneySelector"))
     txt.prepend('^');
   return slotMakeCompletion(QRegExp(txt, Qt::CaseInsensitive));
 }

@@ -1,9 +1,8 @@
 /***************************************************************************
-                             csvexporter.h
+                          kmymoneysettings_addon.h
                              -------------------
-    begin                : Wed Mar 20 2013
-    copyright            : (C) 2013 by Allan Anderson
-    email                : agander93@gmail.com
+    copyright            : (C) 2018 by Thomas Baumgart
+    email                : tbaumgart@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,43 +14,36 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CSVEXPORTER_H
-#define CSVEXPORTER_H
+
+// ----------------------------------------------------------------------------
+// QT Includes
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
-// QT Includes
-
 // Project Includes
 
-#include "kmymoneyplugin.h"
-
-class CsvExportDlg;
-
-class CSVExporter : public KMyMoneyPlugin::Plugin
-{
-  Q_OBJECT
 
 public:
-  explicit CSVExporter(QObject *parent, const QVariantList &args);
-  ~CSVExporter() override;
 
-  QAction*          m_action;
-  bool              okToWriteFile(const QUrl &url);
-  CsvExportDlg*     exporterDialog() {
-    return m_dlg;
-  }
+  static QColor schemeColor(const SchemeColor color);
 
-private:
-  CsvExportDlg*     m_dlg;
+  static QFont listCellFontEx();
+  static QFont listHeaderFontEx();
+  static QStringList listOfItems();
 
-protected Q_SLOTS:
-  void slotCsvExport();
+  /**
+    * returns the number of the first month in the fiscal year
+    */
+  static int firstFiscalMonth();
 
-protected:
-  void createActions();
-};
+  /**
+    * returns the number of the first day of the fiscal year
+    */
+  static int firstFiscalDay();
 
-#endif
+  /**
+    * returns the date of the first day in the current fiscal year
+    */
+  static QDate firstFiscalDate();

@@ -4,7 +4,6 @@ add_subdirectory( payeeidentifier )
 ########### next target ###############
 
 set(kmm_mymoney_LIB_SRCS
-  mymoney_config.cpp
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp
   mymoneytransactionfilter.cpp
   mymoneyfile.cpp mymoneykeyvaluecontainer.cpp
@@ -67,7 +66,6 @@ target_link_libraries(kmm_mymoney
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
-                      kmm_config
                       # TODO: fix this
                       KF5::XmlGui
                       PRIVATE

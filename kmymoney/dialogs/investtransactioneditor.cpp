@@ -55,7 +55,7 @@
 #include "mymoneyprice.h"
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "investactivities.h"
 #include "kmymoneycompletion.h"
 #include "dialogenums.h"
@@ -671,7 +671,7 @@ void InvestTransactionEditor::loadEditWidgets()
   aSet.addAccountType(Account::Type::Asset);
   aSet.addAccountType(Account::Type::Currency);
   aSet.addAccountType(Account::Type::CreditCard);
-  if (KMyMoneyGlobalSettings::expertMode() || haveEquityAccount)
+  if (KMyMoneySettings::expertMode() || haveEquityAccount)
     aSet.addAccountGroup(Account::Type::Equity);
   aSet.load(asset->selector());
 

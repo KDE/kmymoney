@@ -2,6 +2,8 @@ include(ECMAddAppIcon)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/settings/
+                    ${CMAKE_CURRENT_BINARY_DIR}/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/
                     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets/
@@ -33,6 +35,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${KMyMoney_SOURCE_DIR}/libkgpgfile/ )
 
 add_subdirectory( mymoney )
+add_subdirectory( settings )
 add_subdirectory( models  )
 add_subdirectory( plugins )
 add_subdirectory( reports )
@@ -51,14 +54,7 @@ if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
 
-set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
-
-########### settings code (kmm_config) STATIC ###############
-set( kmm_config_SRCS kmymoneyglobalsettings.cpp )
-kconfig_add_kcfg_files( kmm_config_SRCS kmymoneysettings.kcfgc )
-kconfig_add_kcfg_files( kmm_config_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/plugins/forecast/forecastviewsettings.kcfgc )
-add_library(kmm_config STATIC ${kmm_config_SRCS})
-target_link_libraries(kmm_config KF5::WidgetsAddons KF5::ConfigWidgets Qt5::Sql Alkimia::alkimia)
+set( _HEADERS kmymoneyutils.h )
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
@@ -80,7 +76,7 @@ target_link_libraries(kmymoney_common
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
+add_dependencies(kmymoney_common generate_base_ui_srcs kmm_settings)
 add_dependencies(wizardpages widgets)
 add_dependencies(dialogs widgets)
 
@@ -121,7 +117,7 @@ target_link_libraries(kmymoney
   settings
   converter
   models
-  kmm_config
+  kmm_settings
   kmm_widgets
   kmm_storage
   kmm_mymoney
@@ -162,12 +158,6 @@ endif()
 
 install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES kmymoney.kcfg
-  DESTINATION ${KCFG_INSTALL_DIR}
-  )
-install(FILES kmymoney.upd
-  DESTINATION ${KCONF_UPDATE_INSTALL_DIR}
-  )
 install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )

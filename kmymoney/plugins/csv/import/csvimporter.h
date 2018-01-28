@@ -92,8 +92,6 @@ public:
     */
   virtual QString lastError() const override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private:
   bool              m_silent;
 public Q_SLOTS:

@@ -131,7 +131,7 @@ void MyMoneyForecastTest::testDoForecastInit()
   /*
   //check the illegal argument validation
   try {
-    KMyMoneyGlobalSettings::setForecastDays(-10);
+    KMyMoneySettings::setForecastDays(-10);
     a.doForecast();
   }
   catch (const MyMoneyException &e)
@@ -139,14 +139,14 @@ void MyMoneyForecastTest::testDoForecastInit()
     QFAIL("Unexpected exception");
   }
   try {
-    KMyMoneyGlobalSettings::setForecastAccountCycle(-20);
+    KMyMoneySettings::setForecastAccountCycle(-20);
       a.doForecast();
     }
     catch (const MyMoneyException &e) {
       QFAIL("Unexpected exception");
   }
   try {
-    KMyMoneyGlobalSettings::setForecastCycles(-10);
+    KMyMoneySettings::setForecastCycles(-10);
     a.doForecast();
   }
   catch (const MyMoneyException &e) {
@@ -154,16 +154,16 @@ void MyMoneyForecastTest::testDoForecastInit()
   }
 
   try {
-    KMyMoneyGlobalSettings::setForecastAccountCycle(0);
+    KMyMoneySettings::setForecastAccountCycle(0);
     a.doForecast();
   }
   catch (const MyMoneyException &e) {
     QFAIL("Unexpected exception");
   }
   try {
-    KMyMoneyGlobalSettings::setForecastDays(0);
-    KMyMoneyGlobalSettings::setForecastCycles(0);
-    KMyMoneyGlobalSettings::setForecastAccountCycle(0);
+    KMyMoneySettings::setForecastDays(0);
+    KMyMoneySettings::setForecastCycles(0);
+    KMyMoneySettings::setForecastAccountCycle(0);
     a.doForecast();
   }
   catch (const MyMoneyException &e) {

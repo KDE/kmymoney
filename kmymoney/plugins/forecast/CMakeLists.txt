@@ -42,6 +42,7 @@ target_link_libraries(kcm_forecastview
                       KF5::Completion
                       KF5::KIOWidgets
                       KF5::CoreAddons
+                      kmm_settings
                       )
 
 install(TARGETS kcm_forecastview

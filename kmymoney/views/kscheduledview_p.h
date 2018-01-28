@@ -57,7 +57,7 @@
 #include "kconfirmmanualenterdlg.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyexception.h"
 #include "kscheduletreeitem.h"
 #include "ktreewidgetfilterlinewidget.h"
@@ -151,7 +151,7 @@ public:
   void refreshSchedule(bool full, const QString& schedId)
   {
     Q_Q(KScheduledView);
-    ui->m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+    ui->m_scheduleTree->header()->setFont(KMyMoneySettings::listHeaderFontEx());
 
     ui->m_scheduleTree->clear();
 
@@ -269,7 +269,7 @@ public:
 
         }
         if (parent) {
-          if (!KMyMoneyGlobalSettings::hideFinishedSchedules() || !schedData.isFinished()) {
+          if (!KMyMoneySettings::hideFinishedSchedules() || !schedData.isFinished()) {
             item = addScheduleItem(parent, schedData);
             if (schedData.id() == schedId)
               openItem = item;
@@ -325,7 +325,7 @@ public:
     QByteArray columns;
     columns = grp.readEntry("KScheduleView_treeState", columns);
     ui->m_scheduleTree->header()->restoreState(columns);
-    ui->m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+    ui->m_scheduleTree->header()->setFont(KMyMoneySettings::listHeaderFontEx());
   }
 
   void writeConfig()

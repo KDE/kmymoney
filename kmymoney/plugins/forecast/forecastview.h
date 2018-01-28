@@ -40,8 +40,6 @@ public:
   void plug() override;
   void unplug() override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private:
   KForecastView* m_view;
 };

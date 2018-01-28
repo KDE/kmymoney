@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 
 using namespace KMyMoneyRegister;
@@ -120,15 +120,15 @@ void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionVie
   cellRect.setHeight(d->m_parent->rowHeight(index.row() + d->m_startRow));
 
   if (d->m_alternate)
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground2));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::ListBackground2));
   else
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground1));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::ListBackground1));
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   backgroundBrush.setStyle(Qt::Dense5Pattern);
-  backgroundBrush.setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
+  backgroundBrush.setColor(KMyMoneySettings::schemeColor(SchemeColor::ListGrid));
   painter->eraseRect(cellRect);
   painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
+  painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::ListGrid));
   painter->restore();
 }

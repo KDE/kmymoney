@@ -89,7 +89,6 @@
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 #include "viewinterface.h"
-#include "kmymoneyglobalsettings.h"
 
 #ifdef KMM_DEBUG
 // Added an option to open the chipTanDialog from the menu for debugging purposes
@@ -172,11 +171,6 @@ KBanking::~KBanking()
 {
   delete d;
   qDebug("Plugins: kbanking unloaded");
-}
-
-void KBanking::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void KBanking::plug()

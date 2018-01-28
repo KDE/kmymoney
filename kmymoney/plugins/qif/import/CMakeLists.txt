@@ -19,6 +19,7 @@ ki18n_wrap_ui(qifimporter_PART_SRCS ${qifimporter_PART_UI})
 add_library(qifimporter MODULE ${qifimporter_PART_SRCS})
 
 target_link_libraries(qifimporter
+  kmm_settings
   kmm_plugin
   Alkimia::alkimia
 )

@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
@@ -48,7 +48,7 @@ StdTransactionMatched::StdTransactionMatched(Register *parent, const MyMoneyTran
   StdTransaction(parent, transaction, split, uniqueId)
 {
   // setup initial size
-  setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
+  setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
 }
 
 StdTransactionMatched::~StdTransactionMatched()
@@ -66,8 +66,8 @@ bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOpti
 
   // if not selected paint in matched background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionMatched));
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionMatched));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
   }
   //TODO: the first line needs to be painted across all columns
   return rc;

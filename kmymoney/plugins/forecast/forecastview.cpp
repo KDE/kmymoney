@@ -31,7 +31,6 @@
 
 #include "viewinterface.h"
 #include "kforecastview.h"
-#include "kmymoneyglobalsettings.h"
 
 ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "forecastview"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -45,11 +44,6 @@ ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
 ForecastView::~ForecastView()
 {
   qDebug("Plugins: forecastview unloaded");
-}
-
-void ForecastView::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void ForecastView::plug()

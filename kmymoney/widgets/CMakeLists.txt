@@ -21,7 +21,6 @@ set(kmymoney_STAT_HEADERS
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
-  widgets_config.cpp
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp
@@ -61,6 +60,7 @@ ki18n_wrap_ui(kmm_widgets_sources
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
 target_link_libraries(kmm_widgets PUBLIC
+  kmm_settings
   KF5::TextWidgets
   KF5::KIOWidgets
   KF5::Completion
@@ -71,7 +71,6 @@ target_link_libraries(kmm_widgets PUBLIC
   Qt5::Sql
   Qt5::Core
   Alkimia::alkimia
-  kmm_config
   kmm_mymoney
 )
 
@@ -151,9 +150,9 @@ add_custom_target(generate_base_ui_srcs DEPENDS
 # We can compile the uncritical sources without KMM_DESIGNER flags
 add_library(kmymoney_base STATIC ${_uncritial_common_sources})
 # TODO: fix dependencies
-target_link_libraries(kmymoney_base KF5::XmlGui KF5::TextWidgets KF5::IconThemes KF5::I18n KF5::ConfigWidgets KF5::ConfigCore KF5::Completion KF5::Service Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Xml Alkimia::alkimia)
+target_link_libraries(kmymoney_base KF5::XmlGui KF5::TextWidgets KF5::IconThemes KF5::I18n KF5::ConfigWidgets KF5::ConfigCore KF5::Completion KF5::Service Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Xml kmm_settings Alkimia::alkimia)
 
-add_dependencies(kmymoney_base kmm_config)
+add_dependencies(kmymoney_base kmm_settings)
 
 ########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
@@ -180,7 +179,7 @@ if( USE_QT_DESIGNER )
   # dialogs and converter libraries.  If a widget references something
   # from one of these libraries it is most likely due to code that needs
   # to be excluded with a KMM_DESIGNER ifndef.
-  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config models)
+  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_settings models)
 
   install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
 endif( USE_QT_DESIGNER )
@@ -221,7 +220,7 @@ add_library(widgets STATIC
   )
 target_link_libraries(widgets KF5::XmlGui kmymoney_base)
 
-add_dependencies(widgets kmm_config)
+add_dependencies(widgets kmm_settings)
 
 ########### install files ###############
 

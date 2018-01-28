@@ -49,7 +49,7 @@
 #include "investtransactioneditor.h"
 #include "kmymoneyutils.h"
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 
 using namespace eWidgets;
@@ -110,7 +110,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
   d->m_rowsForm = 7;
 
   // setup initial size
-  setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
+  setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
 
   emit parent->itemAdded(this);
 }
@@ -570,7 +570,7 @@ int InvestTransaction::registerColWidth(int col, const QFontMetrics& cellFontMet
 
     case PriceColumn:
       if (havePrice()) {
-        txt = (m_split.value() / m_split.shares()).formatMoney(QString(), KMyMoneyGlobalSettings::pricePrecision());
+        txt = (m_split.value() / m_split.shares()).formatMoney(QString(), KMyMoneySettings::pricePrecision());
         nw = cellFontMetrics.width(txt + "  ");
       }
       break;

@@ -24,4 +24,4 @@ target_link_libraries(reports
     kmymoney_common
 )
 
-add_dependencies(reports kmm_config)
+add_dependencies(reports kmm_settings)

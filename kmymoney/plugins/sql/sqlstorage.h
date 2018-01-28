@@ -61,8 +61,6 @@ private:
   bool saveAsDatabase(const QUrl &url);
   bool saveDatabase(const QUrl &url);
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private Q_SLOTS:
   void slotOpenDatabase();
   void slotSaveAsDatabase();

@@ -1,8 +1,8 @@
 /***************************************************************************
-                          kmymoneyglobalsettings.h
+                          kmymoneysettings_addon.h
                              -------------------
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2018 by Thomas Baumgart
+    email                : tbaumgart@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KMYMONEYGLOBALSETTINGS_H
-#define KMYMONEYGLOBALSETTINGS_H
+#ifndef KMYMONEYSETTINGS_ADDON_H
+#define KMYMONEYSETTINGS_ADDON_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -25,8 +25,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneysettings.h"
 
 class MyMoneyForecast;
 
@@ -48,37 +46,4 @@ enum class SchemeColor {
   MissingConversionRate
 };
 
-class KMyMoneyGlobalSettings : public KMyMoneySettings
-{
-public:
-  static void injectExternalSettings(KMyMoneySettings* p);
-
-  static QColor schemeColor(const SchemeColor color);
-
-  static QFont listCellFont();
-  static QFont listHeaderFont();
-  static QStringList itemList();
-
-  /**
-    * returns the number of the first month in the fiscal year
-    */
-  static int firstFiscalMonth();
-
-  /**
-    * returns the number of the first day of the fiscal year
-    */
-  static int firstFiscalDay();
-
-  /**
-    * returns the date of the first day in the current fiscal year
-    */
-  static QDate firstFiscalDate();
-
-  /**
-    * Construct a MyMoneyForecast object setup with all KMyMoneySettings
-    */
-  static MyMoneyForecast forecast();
-  static int forecastDays();
-  static int forecastAccountCycle();
-};
 #endif

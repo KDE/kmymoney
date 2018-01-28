@@ -446,6 +446,9 @@ public:
     */
   static int m_lineWidth;
 
+  static void setExpertMode(bool expertMode);
+  static bool m_expertMode;
+
   /**
    * Return row type as string.
    *

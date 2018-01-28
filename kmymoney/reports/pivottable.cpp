@@ -36,7 +36,7 @@
 #include "pivotgrid.h"
 #include "reportdebug.h"
 #include "kreportchartview.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
 #include "mymoneyprice.h"
@@ -1955,7 +1955,7 @@ QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& cur
   const auto value = amount.formatMoney(currencySymbol, prec);
   if (amount.isNegative())
     return QString::fromLatin1("<font color=%1>%2</font>")
-        .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative).name(), value);
+        .arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), value);
   else
     return value;
 }
@@ -1999,7 +1999,7 @@ void PivotTable::calculateBudgetDiff()
 void PivotTable::calculateForecast()
 {
   //setup forecast
-  MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
+  MyMoneyForecast forecast = KMyMoneyUtils::forecast();
 
   //since this is a net worth forecast we want to include all account even those that are not in use
   forecast.setIncludeUnusedAccounts(true);
@@ -2299,7 +2299,7 @@ void PivotTable::includeInvestmentSubAccounts()
   // account are also selected
   QStringList accountList;
   if (m_config.accounts(accountList)) {
-    if (!KMyMoneyGlobalSettings::expertMode()) {
+    if (!KMyMoneySettings::expertMode()) {
       foreach (const auto sAccount, accountList) {
         auto acc = MyMoneyFile::instance()->account(sAccount);
         if (acc.accountType() == eMyMoney::Account::Type::Investment) {

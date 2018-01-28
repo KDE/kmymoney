@@ -29,7 +29,7 @@
 // Project Includes
 
 #include "register.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyobject.h"
 #include "mymoneymoney.h"
 #include "mymoneyenums.h"
@@ -295,6 +295,6 @@ int RegisterItem::rowHeightHint() const
     return d->m_parent->rowHeightHint();
   }
 
-  QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+  QFontMetrics fm(KMyMoneySettings::listCellFontEx());
   return fm.lineSpacing() + 6;
 }

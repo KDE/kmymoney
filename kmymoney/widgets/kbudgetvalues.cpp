@@ -45,7 +45,7 @@
 
 #include "mymoneybudget.h"
 #include "kmymoneyedit.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 class KBudgetValuesPrivate
 {
@@ -93,7 +93,7 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
   Q_D(KBudgetValues);
   d->ui->setupUi(this);
   d->m_currentTab = d->ui->m_monthlyButton;
-  d->m_budgetDate = QDate(2007, KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
+  d->m_budgetDate = QDate(2007, KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
   d->m_field[0] = d->ui->m_amount1;
   d->m_field[1] = d->ui->m_amount2;

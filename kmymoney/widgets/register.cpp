@@ -51,7 +51,7 @@
 #include "stdtransactionmatched.h"
 #include "selectedtransactions.h"
 #include "scheduledtransaction.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "groupmarkers.h"
@@ -266,7 +266,7 @@ namespace KMyMoneyRegister
       case Account::Type::Asset:
       case Account::Type::Liability:
       case Account::Type::Equity:
-        if (KMyMoneyGlobalSettings::alwaysShowNrField())
+        if (KMyMoneySettings::alwaysShowNrField())
           showColumn((int)eTransaction::Column::Number);
         break;
 
@@ -442,7 +442,7 @@ namespace KMyMoneyRegister
 
 #ifndef KMM_DESIGNER
     // recalculate row height hint
-    QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+    QFontMetrics fm(KMyMoneySettings::listCellFontEx());
     d->m_rowHeightHint = fm.lineSpacing() + 6;
 #endif
 
@@ -822,7 +822,7 @@ namespace KMyMoneyRegister
       // Resize the date and money fields to either
       // a) the size required by the input widget if no transaction form is shown and the register is used with an editor
       // b) the adjusted value for the input widget if the transaction form is visible or an editor is not used
-      if (d->m_usedWithEditor && !KMyMoneyGlobalSettings::transactionForm()) {
+      if (d->m_usedWithEditor && !KMyMoneySettings::transactionForm()) {
         QPushButton *pushButton = new QPushButton;
         const int pushButtonSpacing = pushButton->sizeHint().width() + 5;
         setColumnWidth((int)eTransaction::Column::Date, columnWidth((int)eTransaction::Column::Date) + pushButtonSpacing + 4/* space for the spinbox arrows */);
@@ -893,7 +893,7 @@ namespace KMyMoneyRegister
 #else
     int maxWidth = 0;
     int minWidth = 0;
-    QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
+    QFontMetrics cellFontMetrics(KMyMoneySettings::listCellFontEx());
     switch (col) {
       case (int)eTransaction::Column::Date:
         minWidth = cellFontMetrics.width(QLocale().toString(QDate(6999, 12, 29), QLocale::ShortFormat) + "  ");
@@ -1163,7 +1163,7 @@ namespace KMyMoneyRegister
       d->m_focusItem = focusItem;
       d->m_focusItem->setFocus(true);
       if (d->m_listsDirty)
-        updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
+        updateRegister(KMyMoneySettings::ledgerLens() | !KMyMoneySettings::transactionForm());
       ensureItemVisible(d->m_focusItem);
       return true;
     } else
@@ -1693,10 +1693,10 @@ namespace KMyMoneyRegister
         thisWeek = today.addDays(-weekStartOfs);
         lastWeek = thisWeek.addDays(-7);
         thisYear.setDate(today.year(), 1, 1);
-        if (KMyMoneyGlobalSettings::startDate().date() != QDate(1900, 1, 1))
-          new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneyGlobalSettings::startDate().date(), i18n("Prior transactions possibly filtered"));
+        if (KMyMoneySettings::startDate().date() != QDate(1900, 1, 1))
+          new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneySettings::startDate().date(), i18n("Prior transactions possibly filtered"));
 
-        if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (KMyMoneySettings::showFancyMarker()) {
           if (d->m_account.lastReconciliationDate().isValid())
             new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, d->m_account.lastReconciliationDate(), i18n("Last reconciliation"));
 
@@ -1726,8 +1726,8 @@ namespace KMyMoneyRegister
         } else {
           new KMyMoneyRegister::SimpleDateGroupMarker(this, today.addDays(1), i18n("Future transactions"));
         }
-        if (KMyMoneyGlobalSettings::showFiscalMarker()) {
-          QDate currentFiscalYear = KMyMoneyGlobalSettings::firstFiscalDate();
+        if (KMyMoneySettings::showFiscalMarker()) {
+          QDate currentFiscalYear = KMyMoneySettings::firstFiscalDate();
           new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear, i18n("Current fiscal year"));
           new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(-1), i18n("Previous fiscal year"));
           new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(1), i18n("Next fiscal year"));
@@ -1735,14 +1735,14 @@ namespace KMyMoneyRegister
         break;
 
       case SortField::Type:
-        if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (KMyMoneySettings::showFancyMarker()) {
           new KMyMoneyRegister::TypeGroupMarker(this, eRegister::CashFlowDirection::Deposit, d->m_account.accountType());
           new KMyMoneyRegister::TypeGroupMarker(this, eRegister::CashFlowDirection::Payment, d->m_account.accountType());
         }
         break;
 
       case SortField::ReconcileState:
-        if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (KMyMoneySettings::showFancyMarker()) {
           new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::NotReconciled);
           new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::Cleared);
           new KMyMoneyRegister::ReconcileGroupMarker(this, eMyMoney::Split::State::Reconciled);
@@ -1751,7 +1751,7 @@ namespace KMyMoneyRegister
         break;
 
       case SortField::Payee:
-        if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (KMyMoneySettings::showFancyMarker()) {
           while (p) {
             t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
             if (t) {
@@ -1770,7 +1770,7 @@ namespace KMyMoneyRegister
         break;
 
       case SortField::Category:
-        if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (KMyMoneySettings::showFancyMarker()) {
           while (p) {
             t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
             if (t) {
@@ -1789,7 +1789,7 @@ namespace KMyMoneyRegister
         break;
 
       case SortField::Security:
-        if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (KMyMoneySettings::showFancyMarker()) {
           while (p) {
             t = dynamic_cast<KMyMoneyRegister::InvestTransaction*>(p);
             if (t) {

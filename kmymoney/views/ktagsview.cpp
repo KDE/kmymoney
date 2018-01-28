@@ -36,7 +36,7 @@
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "ktagreassigndlg.h"
 #include "kmymoneyutils.h"
 #include "kmymoneymvccombo.h"
@@ -277,7 +277,7 @@ void KTagsView::showTransactions()
   MyMoneySecurity base = file->baseCurrency();
 
   // setup sort order
-  d->ui->m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
+  d->ui->m_register->setSortOrder(KMyMoneySettings::sortSearchView());
 
   // clear the register
   d->ui->m_register->clear();
@@ -290,7 +290,7 @@ void KTagsView::showTransactions()
   // setup the list and the pointer vector
   MyMoneyTransactionFilter filter;
   filter.addTag(d->m_tag.id());
-  filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
+  filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
 
   // retrieve the list from the engine
   file->transactionList(d->m_transactionList, filter);

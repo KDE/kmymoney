@@ -50,7 +50,7 @@
 #include "register.h"
 #include "transactioneditor.h"
 #include "selectedtransactions.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
 #include "kmymoneysettings.h"
@@ -412,7 +412,7 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
           showNegative = !showNegative;
         if (showNegative) {
           QPalette palette = d->m_rightSummaryLabel->palette();
-          palette.setColor(d->m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
+          palette.setColor(d->m_rightSummaryLabel->foregroundRole(), KMyMoneySettings::schemeColor(SchemeColor::Negative));
           d->m_rightSummaryLabel->setPalette(palette);
         }
       } else {
@@ -508,7 +508,7 @@ void KGlobalLedgerView::slotContinueReconciliation(eView::Schedules::Requester r
     if (account.isAssetLiability()) {
 
       if (d->m_endingBalanceDlg->exec() == QDialog::Accepted) {
-        if (KMyMoneyGlobalSettings::autoReconciliation()) {
+        if (KMyMoneySettings::autoReconciliation()) {
           MyMoneyMoney startBalance = d->m_endingBalanceDlg->previousBalance();
           MyMoneyMoney endBalance = d->m_endingBalanceDlg->endingBalance();
           QDate endDate = d->m_endingBalanceDlg->statementDate();
@@ -801,7 +801,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
     if (editor) {
       if (parent == d->m_register) {
         // make sure, the height of the table is correct
-        d->m_register->updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
+        d->m_register->updateRegister(KMyMoneySettings::ledgerLens() | !KMyMoneySettings::transactionForm());
       }
 
       d->m_inEditMode = true;
@@ -974,10 +974,10 @@ void KGlobalLedgerView::slotSortOptions()
   QString sortOrder, def;
   if (d->isReconciliationAccount()) {
     key = "kmm-sort-reconcile";
-    def = KMyMoneyGlobalSettings::sortReconcileView();
+    def = KMyMoneySettings::sortReconcileView();
   } else {
     key = "kmm-sort-std";
-    def = KMyMoneyGlobalSettings::sortNormalView();
+    def = KMyMoneySettings::sortNormalView();
   }
 
   // check if we have an account override of the sort order
@@ -1279,7 +1279,7 @@ void KGlobalLedgerView::slotCancelOrEnterTransactions(bool& okToSelect)
     auto dontShowAgain = "CancelOrEditTransaction";
     // qDebug("KMyMoneyApp::slotCancelOrEndEdit");
     if (d->m_transactionEditor) {
-      if (KMyMoneyGlobalSettings::focusChangeIsEnter() && pActions[Action::EnterTransaction]->isEnabled()) {
+      if (KMyMoneySettings::focusChangeIsEnter() && pActions[Action::EnterTransaction]->isEnabled()) {
         slotEnterTransaction();
         if (d->m_transactionEditor) {
           // if at this stage the editor is still there that means that entering the transaction was cancelled

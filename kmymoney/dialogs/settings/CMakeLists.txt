@@ -49,4 +49,4 @@ if (KF5Holidays_FOUND)
   target_link_libraries(settings PUBLIC KF5::Holidays)
 endif()
 
-add_dependencies(settings widgets kmm_config)
+add_dependencies(settings widgets kmm_settings)

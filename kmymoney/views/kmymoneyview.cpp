@@ -61,7 +61,7 @@
 #include "simpleledgerview.h"
 #endif
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneytitlelabel.h"
 #include <libkgpgfile/kgpgfile.h>
 #include "kcurrencyeditdlg.h"
@@ -140,7 +140,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
       m_header->setObjectName("titleLabel");
       m_header->setMinimumSize(QSize(100, 30));
       m_header->setRightImageFile("pics/titlelabel_background.png");
-      m_header->setVisible(KMyMoneyGlobalSettings::showTitleBar());
+      m_header->setVisible(KMyMoneySettings::showTitleBar());
       gridLayout->addWidget(m_header, 1, 1);
     }
   }
@@ -307,7 +307,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 
 KMyMoneyView::~KMyMoneyView()
 {
-  KMyMoneyGlobalSettings::setLastViewSelected(m_lastViewSelected);
+  KMyMoneySettings::setLastViewSelected(m_lastViewSelected);
 #ifdef KF5Activities_FOUND
 delete m_activityResourceInstance;
 #endif
@@ -908,7 +908,7 @@ bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyOperationsFormat* pExtReade
 
   // make sure we setup the encryption key correctly
   if (isEncrypted && MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty()) {
-    MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneyGlobalSettings::gpgRecipientList().join(","));
+    MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneySettings::gpgRecipientList().join(","));
   }
 
   // make sure we setup the name of the base accounts in translated form
@@ -1042,8 +1042,8 @@ bool KMyMoneyView::initializeStorage()
   KPageWidgetItem* page;
   KConfigGroup grp = config->group("General Options");
 
-  if (KMyMoneyGlobalSettings::startLastViewSelected() != 0)
-    page = viewFrames.value(static_cast<View>(KMyMoneyGlobalSettings::lastViewSelected()));
+  if (KMyMoneySettings::startLastViewSelected() != 0)
+    page = viewFrames.value(static_cast<View>(KMyMoneySettings::lastViewSelected()));
   else
     page = viewFrames[View::Home];
 
@@ -1172,7 +1172,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyOperationsF
       KMessageBox::sorry(this, i18n("GPG does not seem to be installed on your system. Please make sure that GPG can be found using the standard search path. This time, encryption is disabled."), i18n("GPG not found"));
       encryptFile = false;
     } else {
-      if (KMyMoneyGlobalSettings::encryptRecover()) {
+      if (KMyMoneySettings::encryptRecover()) {
         encryptRecover = true;
         if (!KGPGFile::keyAvailable(QString(recoveryKeyId))) {
           KMessageBox::sorry(this, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(recoveryKeyId)), i18n("GPG Key not found"));
@@ -1307,7 +1307,7 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
     if (url.isLocalFile()) {
       filename = url.toLocalFile();
       try {
-        const unsigned int nbak = KMyMoneyGlobalSettings::autoBackupCopies();
+        const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
         if (nbak) {
           KBackup::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
         }
@@ -1507,12 +1507,12 @@ void KMyMoneyView::slotRefreshViews()
 
 
   // TODO turn sync between ledger and investment view if selected by user
-  if (KMyMoneyGlobalSettings::syncLedgerInvestment()) {
+  if (KMyMoneySettings::syncLedgerInvestment()) {
     connect(m_investmentView, &KInvestmentView::accountSelected, m_ledgerView, static_cast<void (KGlobalLedgerView::*)(const MyMoneyObject&)>(&KGlobalLedgerView::slotSelectAccount));
     connect(m_ledgerView, &KGlobalLedgerView::objectSelected, m_investmentView, static_cast<void (KInvestmentView::*)(const MyMoneyObject&)>(&KInvestmentView::slotSelectAccount));
   }
 
-  showTitleBar(KMyMoneyGlobalSettings::showTitleBar());
+  showTitleBar(KMyMoneySettings::showTitleBar());
 
   m_accountsView->refresh();
   m_institutionsView->refresh();
@@ -1534,7 +1534,7 @@ void KMyMoneyView::slotRefreshViews()
 
 void KMyMoneyView::slotShowTransactionDetail(bool detailed)
 {
-  KMyMoneyGlobalSettings::setShowRegisterDetailed(detailed);
+  KMyMoneySettings::setShowRegisterDetailed(detailed);
   slotRefreshViews();
 }
 
@@ -1611,7 +1611,7 @@ void KMyMoneyView::fixFile_1()
   // we need to fix reports. If the account filter list contains
   // investment accounts, we need to add the stock accounts to the list
   // as well if we don't have the expert mode enabled
-  if (!KMyMoneyGlobalSettings::expertMode()) {
+  if (!KMyMoneySettings::expertMode()) {
     try {
       QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
       QList<MyMoneyReport>::iterator it_r;
@@ -1650,7 +1650,7 @@ if (!m_accountsView->allItemsSelected())
   // if we're not in expert mode, we need to make sure
   // that all stock accounts for the selected investment
   // account are also selected
-  if (!KMyMoneyGlobalSettings::expertMode()) {
+  if (!KMyMoneySettings::expertMode()) {
     QStringList missing;
     QStringList::const_iterator it_a, it_b;
     for (it_a = list.begin(); it_a != list.end(); ++it_a) {

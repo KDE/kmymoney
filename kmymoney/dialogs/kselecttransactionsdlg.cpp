@@ -43,7 +43,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "transaction.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
@@ -64,7 +64,7 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   d->ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
 
   // setup header font
-  auto font = KMyMoneyGlobalSettings::listHeaderFont();
+  auto font = KMyMoneySettings::listHeaderFontEx();
   QFontMetrics fm(font);
   auto height = fm.lineSpacing() + 6;
   d->ui->m_register->horizontalHeader()->setMinimumHeight(height);
@@ -72,7 +72,7 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   d->ui->m_register->horizontalHeader()->setFont(font);
 
   // setup cell font
-  font = KMyMoneyGlobalSettings::listCellFont();
+  font = KMyMoneySettings::listCellFontEx();
   d->ui->m_register->setFont(font);
 
   // ... setup the register columns ...
