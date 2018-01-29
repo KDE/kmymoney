@@ -65,6 +65,7 @@
       Added support for several new currencies
     </para>
   </listitem>
+</itemizedlist>
 
 <para>
   Here are some of the major bugs which have been fixed:
@@ -95,6 +96,7 @@
       provide this service
     </para>
   </listitem>
+</itemizedlist>
 
 <para>
   There are a some changes which will need some adjustments on the user's side
