@@ -20,8 +20,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef MYMONEYBANKING_H
-#define MYMONEYBANKING_H
+#ifndef KBANKING_H
+#define KBANKING_H
 
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
@@ -250,4 +250,4 @@ private:
   QSet<QString>   m_sepaKeywords;
 };
 
-#endif
+#endif // KBANKING
