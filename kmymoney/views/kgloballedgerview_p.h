@@ -183,9 +183,13 @@ protected:
   {
     if (m_filterActive) {
       if (e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
+        QWidget* w = qobject_cast<QWidget*>(o);
+        if (!w) {
+          return QObject::eventFilter(o, e);
+        }
         QList<QWidget*>::const_iterator it_w;
         for (it_w = m_parents.constBegin(); it_w != m_parents.constEnd(); ++it_w) {
-          if (isChildOf((QWidget*)o, (*it_w))) {
+          if (isChildOf(w, (*it_w))) {
             m_lastMousePressEvent = e;
             break;
           }
