@@ -151,6 +151,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   mask.clear();
   empty.setMask(mask);
 
+  m_currencyList->setSortingEnabled(false);
   m_currencyList->clear();
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     QTreeWidgetItem *p = new QTreeWidgetItem(m_currencyList);
@@ -177,6 +178,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   }
 
   m_currencyList->sortItems(0, Qt::AscendingOrder);
+  m_currencyList->setSortingEnabled(true);
 
   connect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
   connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
