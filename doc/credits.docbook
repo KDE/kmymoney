@@ -8,29 +8,21 @@
 <title>Credits</title>
 
 <para>
-  Program Copyright &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-  2010, 2011, 2012, 2013, 2014 The KMyMoney Development Team
+  Program Copyright &copy; 2000-2018 The KMyMoney Development Team
 </para>
 
 <para>
-  Documentation Copyright &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008,
-  2009, 2010, 2011, 2012, 2013, 2014 The KMyMoney Development Team
+&underGPL;            <!-- GPL License -->
 </para>
 
-<sect1 id="credits.original">
-<title>Original Author</title>
+<para>
+  Documentation Copyright &copy; 2000-2018 The KMyMoney Development Team
+</para>
 
-<itemizedlist>
-  <listitem>
-    <formalpara>
-      <title>Michael Edwardes &Michael.T.Edwardes.mail;</title>
-      <para>
-        Original idea, much initial source code. Project admin.
-      </para>
-    </formalpara>
-  </listitem>
-</itemizedlist>
-</sect1>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+<para>
+&underFDL;            <!-- FDL: do not remove -->
+</para>
 
 <sect1 id="credits.active">
 <title>Active Developers</title>
@@ -47,29 +39,15 @@
 
   <listitem>
     <formalpara>
-      <title>Tony Bloomfield &Tony.Bloomfield.mail;</title>
-      <para>GnuCash Importer. Database support.</para>
+      <title>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para>Developer.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Robert Wadley &Robert.Wadley.mail;</title>
-      <para>Artist. Icons, splash screen, home view. Screenshots.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
-      <para>Forecast. Reports.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title>Fernando Vilas &Fernando.Vilas.mail;</title>
-      <para>Database support.</para>
+      <title>Ralf Habacker &Ralf.Habacker.mail;</title>
+      <para>Developer.</para>
     </formalpara>
   </listitem>
 
@@ -82,29 +60,23 @@
 
   <listitem>
     <formalpara>
-      <title>Jack H. Ostroff &Jack.H.Ostroff.mail;</title>
-      <para>Documentation.</para>
+      <title>Cristian Dávid &Christian.David.mail;</title>
+      <para>Developer</para>
     </formalpara>
   </listitem>
 
-  <listitem>
-    <formalpara>
-      <title>Migration to &kde;4/&Qt;4</title>
-      <para>This was a massive effort, and many developers contributed.
-      Apologies to any we forgot to name explicitly.</para>
-    </formalpara>
-  </listitem>
 </itemizedlist>
 
 </sect1>
-<sect1 id="credits.past">
-<title>Developers of Previous Versions</title>
+
+<sect1 id="credits.special">
+<title>Special Thanks</title>
 
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Ace Jones &Ace.Jones.mail;</title>
-      <para>Reports. OFX Import. Online Quotes. Documentation editor.</para>
+      <title>Jack Ostroff &Jack.H.Ostroff.mail;</title>
+      <para>Documentation and user support.</para>
     </formalpara>
   </listitem>
 
@@ -117,26 +89,6 @@
 
   <listitem>
     <formalpara>
-      <title>Felix Rodriguez <email>frodriguez@users.sourceforge.net</email></title>
-      <para>Project admin.</para>
-    </formalpara>
-  </listitem>
- 
-  <listitem>
-    <formalpara>
-      <title>John C <email>tacoturtle@users.sourceforge.net</email></title>
-      <para>Developer.</para>
-    </formalpara>
-  </listitem>
-</itemizedlist>
-</sect1>
-
-<sect1 id="credits.special">
-<title>Special Thanks</title>
-
-<itemizedlist>
-  <listitem>
-    <formalpara>
       <title>Javier Campos Morales <email>javi_c@users.sourceforge.net</email></title>
       <para>Developer &amp; Artist.</para>
     </formalpara>
@@ -144,10 +96,97 @@
 
   <listitem>
     <formalpara>
+      <title>Robert Wadley &Robert.Wadley.mail;</title>
+      <para>Artist. Icons, splash screen, home view.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
       <title>Laurent Montel <email>montel@kde.org</email></title>
+      <para>Patches and port to &kde;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Wolfgang Rohdewald<email>woro@users.sourceforge.net</email></title>
       <para>Patches.</para>
     </formalpara>
   </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Marko Käning<email>mk-lists@email.de</email></title>
+      <para>Patches, packaging and KF5-CI for OS-X</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Allan Anderson ✝&Allan.Anderson.mail;</title>
+      <para>Patches.  CSV import/export.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past">
+<title>Inactive Developers and Contributors to Previous Versions</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para>
+        Original author, much initial source code. Project admin.
+      </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para>Forecast. Reports.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Ace Jones &Ace.Jones.mail;</title>
+      <para>Reporting logic. OFX Import. Online Quotes. Documentation editor.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para>GnuCash Importer. Database support.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Felix Rodriguez <email>frodriguez@users.sourceforge.net</email></title>
+      <para>Project admin.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>John C <email>tacoturtle@users.sourceforge.net</email></title>
+      <para>Developer.</para>
+    </formalpara>
+  </listitem>
+ 
+  <listitem>
+    <formalpara>
+      <title>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para>Database support.</para>
+    </formalpara>
+  </listitem>
+
 
   <listitem>
     <formalpara>
@@ -160,13 +199,6 @@
     <formalpara>
       <title>Darin Strait &Darin.Strait.mail;</title>
       <para>Documentation.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title>Allan Anderson &Allan.Anderson.mail;</title>
-      <para>Patches.  CSV Importer Plugin.</para>
     </formalpara>
   </listitem>
 
@@ -190,12 +222,16 @@
       <para>Scheduled transactions and calendars.</para>
     </formalpara>
   </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Migration to &kde;4/&Qt;4</title>
+      <para>This was a massive effort, and many developers contributed.
+      Apologies to any we forgot to name explicitly.</para>
+    </formalpara>
+  </listitem>
+
 </itemizedlist>
 
-<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-&underFDL;           <!-- FDL: do not remove -->
-
-&underGPL;        	 <!-- GPL License -->
 </sect1>
 </chapter>

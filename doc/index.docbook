@@ -15,17 +15,29 @@
   <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
   <!ENTITY userlist "<email>kmymoney@kde.org</email>">
 
-  <!-- the following author entitys was added to contributor.entities in 4.5 branch and trunk of svn
+  <!-- the following author entity was added to contributor.entities in 4.5 branch and trunk of svn
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
 
   <!ENTITY Ace.Jones "  <personname><firstname>Ace</firstname><surname>Jones</surname></personname>">
   <!ENTITY Ace.Jones.mail "<email>acejones@users.sourceforge.net</email>">
 
-  <!-- the following author entity was been added to contributor.entities in trunk and probably 4.6 branch of svn
+  <!-- the following author entity was added to contributor.entities in trunk and probably 4.6 branch of svn
        it can be removed from this file once it is present in the kdelibs minimum version required by &kmymoney; -->
 
   <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname></personname>">
   <!ENTITY Allan.Anderson.mail "<email>agander93@gmail.com</email>">
+
+  <!-- the following author entities were added to contributor.entities for the 5.0 release
+       they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
+
+  <!ENTITY Lukasz.Wojnilowiczs "<personname><firstname>Łukasz</firstname><surname>Wojniłowicz</surname></personname>">
+  <!ENTITY Lukasz.Wojnilowicz.mail "<email>lukasz.wojnilowicz@gmail.com</email>">
+
+  <!ENTITY Ralf.Habacker "<personname><firstname>Ralf</firstname><surname>Habacker</surname></personname>">
+  <!ENTITY Ralf.Habacker.mail "<email>ralf.habacker@freenet.de</email>">
+
+  <!ENTITY Christian.David "<personname><firstname>Christian</firstname><surname>Dávid</surname></personname>">
+  <!ENTITY Christian.David.mail "<email>christian-david@web.de</email>">
 
   <!-- the following entities have been added to user.entities in trunk and probably 4.7 branch of svn
        they are only in the french branch, and are required for processing of the french documentation
