@@ -283,6 +283,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   mask.clear();
   empty.setMask(mask);
 
+  d->ui->m_currencyList->setSortingEnabled(false);
   d->ui->m_currencyList->clear();
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     QTreeWidgetItem *p = new QTreeWidgetItem(d->ui->m_currencyList);
@@ -309,6 +310,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   }
   d->ui->m_removeUnusedCurrencyButton->setDisabled(list.count() <= 1);
   d->ui->m_currencyList->sortItems(0, Qt::AscendingOrder);
+  d->ui->m_currencyList->setSortingEnabled(true);
 
   connect(d->ui->m_currencyList, &QTreeWidget::currentItemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, QTreeWidgetItem *)>(&KCurrencyEditDlg::slotSelectCurrency));
   connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
