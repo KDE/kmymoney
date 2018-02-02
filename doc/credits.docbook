@@ -110,14 +110,14 @@
 
   <listitem>
     <formalpara>
-      <title>Wolfgang Rohdewald<email>woro@users.sourceforge.net</email></title>
+      <title>Wolfgang Rohdewald <email>woro@users.sourceforge.net</email></title>
       <para>Patches.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Marko Käning<email>mk-lists@email.de</email></title>
+      <title>Marko Käning <email>mk-lists@email.de</email></title>
       <para>Patches, packaging and KF5-CI for OS-X</para>
     </formalpara>
   </listitem>

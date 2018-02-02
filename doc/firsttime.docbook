@@ -185,7 +185,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Scheduled Transactionss: Your recurring bills and deposits.
+      Scheduled Transactions: Your recurring bills and deposits.
     </para>
   </listitem>
 
@@ -574,11 +574,11 @@
         <guiicon><inlinemediaobject><imageobject><imagedata
         fileref="accounts_view.png"/></imageobject></inlinemediaobject></guiicon>
         in the view selector to display the Accounts View.  Right click on the
-        eitehr the Asset tree icon or the Liability tree icon in the right hand
+        either the Asset tree icon or the Liability tree icon in the right hand
         view and select <guimenuitem>New account</guimenuitem> from the popup
         menu.  The Asset tree holds all of your accounts that are an asset, such
         as savings and investments.  Liabilities are accounts that represent
-        money you owe, such as loand and credit cards.  These and all the other
+        money you owe, such as loans and credit cards.  These and all the other
         account types are discussed in more detail later in this manual.
       </para>
     </listitem>
@@ -923,7 +923,7 @@
   url="https://mail.kde.org/mailman/listinfo/kmymoney">more details
   here</ulink>.) In addition, you can contact the developers through their
   mailing list &devlist;. (<ulink
-  url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"> more deatils
+  url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"> more details
   here</ulink>.)  Since replies are often sent only to the list, you may not get
   any response unless you subscribe to one of the lists before sending to it,
 </para>
