@@ -609,7 +609,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     // when the editor is shown, the row has only a single column
-    // so we need to paint the seperator if we get here in this casee
+    // so we need to paint the separator if we get here in this casee
     bool needPaint = editWidgetIsVisible;
 
     if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
@@ -638,7 +638,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     // when the editor is shown, the row has only a single column
-    // so we need to paint the seperator if we get here in this casee
+    // so we need to paint the separator if we get here in this casee
     bool needPaint = editWidgetIsVisible;
 
     if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
