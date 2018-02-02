@@ -291,7 +291,13 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     p->setData(0, Qt::UserRole, QVariant::fromValue(*it));
     p->setFlags(p->flags() | Qt::ItemIsEditable);
     p->setText(1, (*it).id());
-    p->setText(2, (*it).tradingSymbol());
+    // fix the ATS problem
+    QString symbol = (*it).tradingSymbol();
+    if (((*it).id() == QLatin1String("ATS")) && (symbol != QString::fromUtf8("ÖS"))) {
+      symbol = QString::fromUtf8("ÖS");
+      d->updateCurrency((*it).id(), (*it).name(), symbol);
+    }
+    p->setText(2, symbol);
 
     if ((*it).id() == baseCurrency) {
       p->setData(0, Qt::DecorationRole, Icons::get(Icon::KMyMoney));
