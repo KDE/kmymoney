@@ -871,7 +871,7 @@
   <quote>$KDEHOME/share/config</quote> where <quote>$KDEHOME</quote> is usually
   <quote>.config</quote> within your home directory.  If you are migrating from
   a version of &kmymoney; prior to 5.0 to 5.0 or later, the old location
-  of<quote>$KDEHOME</quote> was <quote>.kde4</quote>.
+  of <quote>$KDEHOME</quote> was <quote>.kde4</quote>.
 </para>
 
 <sect3 id="firsttime.newpc.settings.plugins">
@@ -919,13 +919,13 @@
 
 <para>
   For general questions or comments about &kmymoney;, there is a users' mailing
-  list &userlist;.  (<ulink
+  list &userlist;. (<ulink
   url="https://mail.kde.org/mailman/listinfo/kmymoney">more details
   here</ulink>.) In addition, you can contact the developers through their
   mailing list &devlist;. (<ulink
-  url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"> more details
+  url="https://mail.kde.org/mailman/listinfo/kmymoney-devel">more details
   here</ulink>.)  Since replies are often sent only to the list, you may not get
-  any response unless you subscribe to one of the lists before sending to it,
+  any response unless you subscribe to one of the lists before sending to it.
 </para>
 
 <para>
