@@ -3,23 +3,28 @@
 <chapterinfo>
   <authorgroup>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2018-02-01</date>
+  <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
 
 <title>Institutions</title>
 
 <para>
-  The Institutions screen provides a summary of all the accounts grouped under
-  their respective institutions. Asset accounts are symbolized with a black
-  arrow, and liability accounts are symbolized with a red arrow.
+  The Institutions view provides a summary of all the accounts grouped under
+  their respective institutions.  The list accounts under any institution can be
+  expanded or collapsed by clicking on the arrow to the left of the institution
+  name.
 </para>
 
 <para>
-  The Institutions screen displays several columns, including the type of
-  account and the value of each account.  It also shows the total value of all
-  accounts in each institution.
+  The Institutions view displays several columns, including the type of account
+  and the value of each account.  It also shows the total value of all accounts
+  in each institution.  You can select which columns are shown by right clicking
+  on any column heading and selecting or unselecting the checkbox next to the
+  name of the column.
+  <!-- need to add a description of all available columns -->
 </para>
 
 <para>
@@ -88,8 +93,8 @@
 <para>
   <emphasis>
     NOTE: You must have a file open before you can create a new institution. If
-    you do not have an existing file, you will need to create a <link
-    linkend="firsttime.3">new file</link>.
+    you do not have an existing file, you will need to <link
+    linkend="firsttime.3">create one</link>.
   </emphasis>
 </para>
 
@@ -116,11 +121,12 @@
   <guimenuitem>Edit account</guimenuitem> brings up a window allowing you to
   change an account's name, start date, associated banking institution, and
   parent account. Deleting an account is only possible if there are no
-  transactions associated with that account.  Selecting
+  transactions associated with that account, and the account is not referred to
+  in any scheduled transaction.  Selecting
   <guimenuitem>Reconcile...</guimenuitem> opens up the Reconcile Wizard, which
-  steps you through the process of comparing your bank account statements to
-  your electronic entries. More details, as well as information about the other
-  options is presented in the appropriate sections of this manual.
+  steps you through the process of comparing your account statement to your
+  electronic entries. More details, as well as information about the other
+  options, are presented in the appropriate sections of this manual.
 </para>
 
 <para>

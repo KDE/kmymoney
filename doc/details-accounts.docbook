@@ -4,9 +4,10 @@
   <authorgroup>
     <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2011-07-21</date>
-  <releaseinfo>4.6</releaseinfo>
+  <date>2018-02-01</date>
+  <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
   
 <title>Accounts</title>
@@ -15,10 +16,12 @@
 <title>The Accounts View</title>
 
 <para>
-  The Accounts View provides a summary of all the accounts. There are four
-  different account categories: Asset, Liability, Income, and Expense.  Typical
-  asset accounts include bank accounts, cash, and investments, while typical
-  liability accounts include credit cards and loans.
+  The Accounts View provides a summary of all the accounts. It is similar to the
+  Institution view, except accounts are grouped under the Asset or Liability
+  asset categories.  Typical asset accounts include bank accounts, cash, and
+  investments, while typical liability accounts include credit cards and loans.
+  <!-- FIXME: Income and Expense were previously mentioned here, but now
+       explanation of them is deferred to Categories view. -->
 </para>
 
 <para>
@@ -27,6 +30,22 @@
 </para>
 
 <para>
+<screenshot>
+    	<screeninfo>account view</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_view.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>account view</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+  <!-- FIXME: MUST RECONCILE WHICH CATEGORIES ARE DESCRIBE OR MENTIONED HERE AND
+       WHICH DEFERRED FOR CATEGORIES VEIW -->
   In the List view, the accounts are grouped under four headings: Asset,
   Liability, Income, and Expense. List view shows the name and balance or value
   of each account.  Income and Expense list the categories that each transaction
@@ -56,18 +75,18 @@
 <para>
   <emphasis>
     NOTE: You must have a file open before you can create a new account. If you
-    do not have an existing file, you will need to create a <link
-    linkend="firsttime.3">new file</link>.
+    do not have an existing file, you will need to <link
+    linkend="firsttime.3">create one</link>.
   </emphasis>
 </para>
 
 <para>
   To create a new account, you can either select
   <menuchoice><guimenu>Account</guimenu><guimenuitem>New
-  account...</guimenuitem></menuchoice> from the menu or choose the
-  <guiicon><inlinemediaobject><imageobject><imagedata fileref="newacct.png"
-  format="PNG"/></imageobject><textobject>
-  <phrase>New</phrase></textobject></inlinemediaobject></guiicon> icon from the
+  account...</guimenuitem></menuchoice> from the menu or choose the <guilabel>New
+  account...</guilabel> icon <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="newacct.png" format="PNG"/></imageobject><textobject>
+  <phrase>New</phrase></textobject></inlinemediaobject></guiicon> from the
   toolbar.
 </para>
 
