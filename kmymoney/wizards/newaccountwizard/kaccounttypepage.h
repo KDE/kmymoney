@@ -58,6 +58,7 @@ namespace NewAccountWizard
     eMyMoney::Account::Type accountType() const;
     MyMoneyAccount parentAccount();
     bool allowsParentAccount() const;
+    bool accountTypeSupportsOpeningBalance(eMyMoney::Account::Type type) const;
     const MyMoneySecurity& currency() const;
 
     void setAccount(const MyMoneyAccount& acc);

@@ -130,7 +130,7 @@ namespace NewAccountWizard
     if (d->m_wizard->d_func()->currency().id() != MyMoneyFile::instance()->baseCurrency().id()) {
         d->ui->m_dataList->append(i18n("Conversion rate: %1", d->m_wizard->conversionRate().rate(QString()).formatMoney(QString(), d->m_wizard->d_func()->currency().pricePrecision())));
       }
-    if (!acc.isLoan() || !d->m_wizard->openingBalance().isZero())
+    if ((!acc.isLoan() && acc.accountType() != Account::Type::Investment) || !d->m_wizard->openingBalance().isZero())
       d->ui->m_dataList->append(i18n("Opening balance: %1", MyMoneyUtils::formatMoney(d->m_wizard->openingBalance(), acc, sec)));
 
     if (!d->m_wizard->d_func()->m_institutionPage->institution().id().isEmpty()) {
@@ -219,5 +219,5 @@ namespace NewAccountWizard
     Q_D(const AccountSummaryPage);
     return d->ui->m_dataList;
   }
-  
+
 }
