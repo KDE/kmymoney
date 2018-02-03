@@ -13,18 +13,16 @@
 
 <para>
   The Institutions view provides a summary of all the accounts grouped under
-  their respective institutions.  The list accounts under any institution can be
+  their respective institutions.  The list of accounts under any institution can be
   expanded or collapsed by clicking on the arrow to the left of the institution
-  name.
+  name.  The last listed institution is "Accounts with no institution assigned."
 </para>
 
 <para>
-  The Institutions view displays several columns, including the type of account
-  and the value of each account.  It also shows the total value of all accounts
-  in each institution.  You can select which columns are shown by right clicking
-  on any column heading and selecting or unselecting the checkbox next to the
-  name of the column.
-  <!-- need to add a description of all available columns -->
+  The Institutions view displays several columns, showing information about the
+  account.  It also shows the total value of all accounts in each institution.
+  You can select which columns are shown by right clicking on any column heading
+  and selecting or unselecting the checkbox next to the name of the column.
 </para>
 
 <para>
@@ -39,6 +37,118 @@
 	</textobject>
 	</mediaobject>
 </screenshot>
+</para>
+
+<para>
+  The following columns are available in the Institutions view.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Account</term>
+    <listitem>
+      <para>
+        The name of the institution or account
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Type</term>
+    <listitem>
+      <para>
+        The type of account, &eg;, Savings, Checking, Credit Card, ...
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Tax</term>
+    <listitem>
+      <para>
+        An indication whether this account has been configured as important for
+        tax purposes.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>VAT</term>
+    <listitem>
+      <para>
+        An indication whether this account has been configured to apply a VAT on
+        transaction.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>CC (Cost Center)</term>
+    <listitem>
+      <para>
+        An indication that a cost center assignment is necessary under certain
+        conditions when entering a transaction for this account.  This is a new
+        feature, which is not yet implemented, so this column is not currently
+        used.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Total Balance</term>
+    <listitem>
+      <para>
+        Another new feature, not yet implemented.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Posted Value</term>
+    <listitem>
+      <para>
+        This is the balance of the account as provided by the institution.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Total Value</term>
+    <listitem>
+      <para>
+        The balance of the account in &kmymoney;.  Note that for Institutions,
+        this is the total of the balances for all accounts in that institution.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Number</term>
+    <listitem>
+      <para>
+        The account number, if one was entered.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Sort Code</term>
+    <listitem>
+      <para>
+        This shows the IBAN number, if there is a value entered in the
+        appropriate field on the Account information dialog.
+      </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para>
+  Note that many of these same columns are also available in other views, such
+  as the Accounts view.  When you select or unselect a checkbox to display or
+  remove a column, you will see a popup asking if you want to show or remove
+  that column from all other views where it is present. If you check "No," you
+  will only change the display of that column in the current view.
 </para>
 
 <sect1 id="details.institutions.institution">
