@@ -3068,12 +3068,21 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("ZMK", i18n("Zambian Kwacha")));
   currencyList.append(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"));
 
+  currencyList.append(ancientCurrencies().keys());
+
+  // sort the currencies ...
+  qSort(currencyList.begin(), currencyList.end(),
+        [] (const MyMoneySecurity& c1, const MyMoneySecurity& c2)
+        {
+          return c1.name().compare(c2.name()) < 0;
+        });
+
+  // ... and add a few precious metals at the ned
   currencyList.append(MyMoneySecurity("XAU", i18n("Gold"),       "XAU", 1000000));
   currencyList.append(MyMoneySecurity("XPD", i18n("Palladium"),  "XPD", 1000000));
   currencyList.append(MyMoneySecurity("XPT", i18n("Platinum"),   "XPT", 1000000));
   currencyList.append(MyMoneySecurity("XAG", i18n("Silver"),     "XAG", 1000000));
 
-  currencyList.append(ancientCurrencies().keys());
   return currencyList;
 }
 

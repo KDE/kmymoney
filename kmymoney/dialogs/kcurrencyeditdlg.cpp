@@ -108,9 +108,10 @@ class KCurrencyEditDlgPrivate
   Q_DECLARE_PUBLIC(KCurrencyEditDlg)
 
 public:
-  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq) :
-    q_ptr(qq),
-    ui(new Ui::KCurrencyEditDlg)
+  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq)
+    : q_ptr(qq)
+    , ui(new Ui::KCurrencyEditDlg)
+    , m_inLoading(false)
   {
   }
 
@@ -199,6 +200,7 @@ public:
     * Search widget for the list
     */
   KTreeWidgetSearchLineWidget*    m_searchWidget;
+  bool                   m_inLoading;
 };
 
 KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
@@ -260,12 +262,34 @@ KCurrencyEditDlg::~KCurrencyEditDlg()
 
 void KCurrencyEditDlg::slotLoadCurrencies()
 {
+  const QSet<QString> metalSymbols { "XAU", "XPD", "XPT", "XAG" };
+
   Q_D(KCurrencyEditDlg);
+
+  // catch recursive calls and avoid them
+  if (d->m_inLoading)
+    return;
+  d->m_inLoading = true;
+
   disconnect(d->ui->m_currencyList, &QTreeWidget::currentItemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, QTreeWidgetItem *)>(&KCurrencyEditDlg::slotSelectCurrency));
   disconnect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
+
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
   QList<MyMoneySecurity>::ConstIterator it;
   QTreeWidgetItem *first = 0;
+
+  // sort the currencies ...
+  // ... and make sure a few precious metals are at the ned
+  qSort(list.begin(), list.end(),
+        [=] (const MyMoneySecurity& c1, const MyMoneySecurity& c2)
+        {
+          const bool c1Metal = c1.tradingSymbol().startsWith(QLatin1Char('X')) && metalSymbols.contains(c1.tradingSymbol());
+          const bool c2Metal = c2.tradingSymbol().startsWith(QLatin1Char('X')) && metalSymbols.contains(c2.tradingSymbol());
+          if (c1Metal ^ c2Metal)
+            return c2Metal;
+
+          return c1.name().compare(c2.name()) < 0;
+        });
 
   QString localCurrency(localeconv()->int_curr_symbol);
   localCurrency.truncate(3);
@@ -294,8 +318,10 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     // fix the ATS problem
     QString symbol = (*it).tradingSymbol();
     if (((*it).id() == QLatin1String("ATS")) && (symbol != QString::fromUtf8("ÖS"))) {
+      MyMoneySecurity tmp = d->m_currentCurrency;
       symbol = QString::fromUtf8("ÖS");
       d->updateCurrency((*it).id(), (*it).name(), symbol);
+      d->m_currentCurrency = tmp;
     }
     p->setText(2, symbol);
 
@@ -315,8 +341,6 @@ void KCurrencyEditDlg::slotLoadCurrencies()
       first = p;
   }
   d->ui->m_removeUnusedCurrencyButton->setDisabled(list.count() <= 1);
-  d->ui->m_currencyList->sortItems(0, Qt::AscendingOrder);
-  d->ui->m_currencyList->setSortingEnabled(true);
 
   connect(d->ui->m_currencyList, &QTreeWidget::currentItemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, QTreeWidgetItem *)>(&KCurrencyEditDlg::slotSelectCurrency));
   connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
@@ -329,6 +353,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   }
 
   slotSelectCurrency(first);
+  d->m_inLoading = false;
 }
 
 void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* citem, int)
