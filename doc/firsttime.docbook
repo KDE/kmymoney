@@ -406,8 +406,7 @@
   currency you use day to day and which will be used for your reports), select
   the appropriate entry from the list provided and press
   <guibutton>Next</guibutton>. A default will be selected from &kmymoney; based
-  upon your locale settings.  If you don't see your currency, be sure to look
-  through the entire list, in case it it simply not sorted as you might expect.
+  upon your locale settings.
 </para>
 
 <para>

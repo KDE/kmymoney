@@ -71,8 +71,8 @@
 <para>
   To create a new account, you can either select
   <menuchoice><guimenu>Account</guimenu><guimenuitem>New
-  account...</guimenuitem></menuchoice> from the menu or choose the <guilabel>New
-  account...</guilabel> icon <guiicon><inlinemediaobject><imageobject><imagedata
+  account...</guimenuitem></menuchoice> from the menu or choose the New
+  account... icon <guiicon><inlinemediaobject><imageobject><imagedata
   fileref="newacct.png" format="PNG"/></imageobject><textobject>
   <phrase>New</phrase></textobject></inlinemediaobject></guiicon> from the
   toolbar.  You can also create an account from the Accounts view; click on the
@@ -297,9 +297,15 @@
 <title>Investment Accounts</title>
 
 <para>
-  For Investment accounts, you have the option to create an associated Brokerage
-  account.  For more information see <link
-  linkend="details.investments">Investments</link>
+  In &kmymoney;, Investment accounts contain only equities (stocks, bonds,
+  &etc;) but do not contain cash.  (This is why you cannot specify a Opening
+  balance for an Investment account.)  If a transaction in an Investment account
+  requires or generates cash (such as to buy or sell stock,) a Brokerage account
+  is used for the cash.  Brokerage accounts are described further in the chapter
+  on <link linkend="details.investments">Investments</link>.  When you create a
+  new Investment account, after entering the basic information, and clicking
+  <guibutton>Next</guibutton>, you have the option to create an associated
+  Brokerage account.
 </para>
 
 <para>
@@ -313,6 +319,14 @@
               </textobject>
             </mediaobject>
   </screenshot>
+</para>
+
+<para>
+  It is generally best to create the Brokerage account here, which will be given
+  the same name as the Investment account, with "(Brokerage)" appended.
+  Currently it is not possible to specify the opening date or balance for the
+  Brokerage account at this point; you may do by editing the account details
+  after the account has been created.
 </para>
 </sect2>
 
@@ -332,7 +346,6 @@
               <imageobject>
                 <imagedata fileref="accwiz8_1.png" format="PNG" />
               </imageobject>
-
               <textobject>
                 <phrase>Account Wizard</phrase>
               </textobject>
@@ -358,30 +371,32 @@
 
 <para>
   The next three items are for handling Loans on which you've already made
-  payments.  If you select Yes in the "Have you made/received any payments yet?"
-  item you can then select whether you want to record all payments or just those
-  from the beginning of the current year.  If you want to record from the
-  beginning of the current year, you are than asked to input the current
-  balance.
+  payments.  If you select Yes in the <guilabel>"Did you make/receive any
+  payments yet?"</guilabel> dropdown, you can then select whether you want to
+  record all payments or just those from the beginning of the current year.  If
+  you want to record from the beginning of the current year, you are than asked
+  to input the balance at the beginning of this year.
 </para>
 	
 <para>
-  Then, select how often payments will be made and how often interest is
+  Next, select how often payments will be made and how often interest is
   compounded.  Compounding is where the interest is added to the amount owed on
   the loan so that when the interest is next calculated there will be more
   interest paid on the interest.  It's common for interest to be compounded at
   the same frequency that payments are made.
 </para>
 
-<para>Next, enter the date the first recorded payment will be made.
+<para>
+  Next, enter the date the first payment to be recorded.
 </para>
 	
 <para>
   Finally, enter information about how the interest rate varies.  If the loan is
   fixed-rate there is nothing to do.  If the rate varies, select Variable in
-  "Type of interest rate" and then enter the interval between interest rate
-  changes and the date the first change of interest rate is due: &kmymoney; will
-  ask you to update the interest rate when that date arrives.
+  <guilabel>"Type of interest rate"</guilabel> and then enter the interval
+  between interest rate changes and the date the first change of interest rate
+  is due: &kmymoney; will ask you to update the interest rate when that date
+  arrives.  Click <guibutton>Next</guibutton> to continue.
 </para>
 	
 <para>
@@ -390,7 +405,6 @@
               <imageobject>
                 <imagedata fileref="accwiz8_2.png" format="PNG" />
               </imageobject>
-
               <textobject>
                 <phrase>Account Wizard</phrase>
               </textobject>
@@ -417,7 +431,7 @@
   <varlistentry>
     <term>Loan amount</term>
     <listitem>
-      <para> The amount of the loan.</para>
+      <para>The amount of the loan.</para>
     </listitem>
   </varlistentry>
 
@@ -442,8 +456,8 @@
     <term>Payment (principal and interest)</term>
     <listitem>
       <para>
-        The amount paid for each loan payment.  This is the total of the
-        principal and interest paid with each payment.
+        The amount of each loan payment.  This is the total of the principal and
+        interest paid with each payment.
       </para>
     </listitem>
   </varlistentry>
@@ -472,16 +486,16 @@
 </para>
 	
 <para>
-  If you omit one value &kmymoney; will try to calculate it for you.  If you
+  If you omit one value, &kmymoney; will try to calculate it for you.  If you
   have entered all values &kmymoney; will check the values are consistent.
   &kmymoney; will not adjust entered values other than the "Balloon payment",
   which it may adjust slightly to deal with rounding.  If the values are
-  inconsistent or &kmymoney; cannot calculate the omitted value &kmymoney; will
+  inconsistent or &kmymoney; cannot calculate the omitted value, &kmymoney; will
   let you know so that you can correct any errors and repeat the calculation.
 </para>
-	
+
 <para>
-  Once the values are consistent the <guibutton>Next</guibutton> button is
+  Once the values are consistent, the <guibutton>Next</guibutton> button is
   enabled and you can advance to the next page.
 </para>
 	
@@ -491,40 +505,38 @@
               <imageobject>
                 <imagedata fileref="accwiz8_3.png" format="PNG" />
               </imageobject>
-
               <textobject>
                 <phrase>Account Wizard</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
 </para>
-	 
+
 <para>
   The Fees page is where you can enter any fees added to the loan payments.
 </para>
-	
+
 <para>
   If there are any fees press the <guibutton>Additional Fees</guibutton> button.
   The Transaction Split editor will be displayed for entry of the fees.  Any
   lines added here will be included in the payment schedule for the loan.  When
   you save the splits the Fees page will display the principal and interest
-  payment, the total additional fees and the total periodic payment.
+  payment, the total additional fees, and the total periodic payment.
 </para>
-	
+
 <para>
   <screenshot>
             <mediaobject>
               <imageobject>
                 <imagedata fileref="accwiz8_4.png" format="PNG" />
               </imageobject>
-
               <textobject>
                 <phrase>Account Wizard</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
 </para>
-	  
+
 <para>
   &kmymoney; will create a <link linkend="details.schedules">scheduled
   transaction</link> for your loan.  The Schedule page is where you enter the
@@ -547,7 +559,6 @@
               <imageobject>
                 <imagedata fileref="accwiz8_5.png" format="PNG" />
               </imageobject>
-
               <textobject>
                 <phrase>Account Wizard</phrase>
               </textobject>
@@ -571,14 +582,14 @@
 </para>
 	
 <para>
-  If you re-financed an existing Loan check the "Refinance existing loan"
-  check box, select the Loan account and &kmymoney; will create a transfer
-  transaction paying off the existing loan.
+  If you re-financed an existing Loan, check the <guilabel>"Refinance existing
+  loan"</guilabel> check box, select the Loan account and &kmymoney; will create
+  a transfer transaction paying off the existing loan.
 </para>
 	
 <para>
-  If you don't want to create the payout transaction, check the "Do not create
-  transaction" check box.
+  If you don't want to create the payout transaction, check the <guilabel>"Do
+  not create payout transaction"</guilabel> check box.
 </para>
 </sect2>
 
@@ -600,14 +611,9 @@
 </para>
 
 <para>
-  This is the penultimate step in creating a new account. A tree of accounts is
-  displayed. The tree will be of your Asset or Liability accounts, depending on
-  the type of account that is being created.
-</para>
-
-<para>
-  Select the account you wish contain the new account.  If you do not select a
-  parent account, the new account will be created at the top level.
+  This is the penultimate step in creating any new account except a loan.
+  Depending on the type of account that is being created, a tree of your Asset
+  or Liability accounts will be displayed.
 </para>
 
 <para>
@@ -615,6 +621,12 @@
   be created as subaccounts.  Also, Investment accounts cannot contain other
   accounts so they are not shown in the tree.
 </para>
+
+<para>
+  Select the account you wish contain the new account.  If you do not select a
+  parent account, the new account will be created at the top level.
+</para>
+
 </sect2>
 
 <sect2>
@@ -636,13 +648,15 @@
 
 <para>
   This is the final step in creating a new account. A summary of the information
-  entered is displayed. Review it, and if everything is OK press the Finish
-  button. Otherwise, either press the <guibutton>Back</guibutton> button to make
-  corrections or the Cancel button to abandon creating a new account.
+  entered is displayed. Review it, and if everything is OK press
+  <guibutton>Finish</guibutton>. Otherwise, either press
+  <guibutton>Back</guibutton> to make corrections or
+  <guibutton>Cancel</guibutton> to abandon creating the new account.
 </para>
 
 <para>
-  NOTE: The Type and Currency cannot at present be changed after the account is created.
+  NOTE: The Type and Currency cannot at present be changed after the account is
+  created.
 </para>
 </sect2>
 </sect1>
