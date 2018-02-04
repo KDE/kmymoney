@@ -25,9 +25,9 @@
 <para>
   There are actually two other account categories: Income and
   Expense. Categories are a way to organize your transaction; they are grouped
-  under either the Income or Expense account category) and are treated
-  internally by &kmymoney; as accounts.  They are described in more detail in
-  the chapter on <link linkend="details.categories"> Categories</link>.  The
+  under either the Income or Expense account category and are treated
+  internally by &kmymoney; as accounts. They are described in more detail in
+  the chapter on <link linkend="details.categories">Categories</link>. The
   Income and Expense account categories are always displayed in the Categories
   view, but it is possible to <link linkend="details.settings">configure
   &kmymoney;</link> to also display them on the Accounts view.
@@ -48,11 +48,11 @@
 </para>
 
 <para>
-  Similar to the Institutions view, the Accounts veiw displays several columns
+  Similar to the Institutions view, the Accounts view displays several columns
   with descriptive and summary information about each account.  The rest of this
   chapter will focus on Asset and Liability account functionality.  Income and
-  Expense accounts, &ie;, Categories, are describe in the chapter on <link
-  linkend="details.categories"> Categories</link>.
+  Expense accounts, &ie;, Categories, are described in the chapter on <link
+  linkend="details.categories">Categories</link>.
 </para>
 
 </sect1>
@@ -142,9 +142,9 @@
 
 <para>
   Next, select the type of account from one of the types available from the
-  dropdown list.  Different account types are handled differently withing
+  dropdown list.  Different account types are handled differently within
   &kmymoney;, so it is important to choose the correct type when creating the
-  account.  Also, different type of accounts require different setup
+  account.  Also, different types of accounts require different setup
   information, and may display different pages in the new account setup wizard
   to collect that information.
 </para>
