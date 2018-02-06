@@ -4,3 +4,4 @@ Singleton=true
 Mutators=true
 Visibility=KMM_SETTINGS_EXPORT
 IncludeFiles=kmm_settings_export.h
+UseEnumTypes=true

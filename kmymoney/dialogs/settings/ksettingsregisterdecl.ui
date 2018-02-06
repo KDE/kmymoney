@@ -237,6 +237,52 @@
               <item>
                 <layout class="QHBoxLayout">
                   <item>
+                    <widget class="QLabel" name="textLabel2_1">
+                      <property name="text">
+                        <string>Initial cursor position within the date field</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QComboBox" name="kcfg_initialDateFieldCursorPosition">
+                      <item>
+                        <property name="text">
+                        <string>Day</string>
+                        </property>
+                      </item>
+                      <item>
+                        <property name="text">
+                        <string>Month</string>
+                        </property>
+                      </item>
+                      <item>
+                        <property name="text">
+                        <string>Year</string>
+                        </property>
+                      </item>
+                    </widget>
+                  </item>
+                  <item>
+                    <spacer name="spacer16">
+                      <property name="sizeHint">
+                        <size>
+                          <width>31</width>
+                          <height>20</height>
+                        </size>
+                      </property>
+                      <property name="sizeType">
+                        <enum>QSizePolicy::Expanding</enum>
+                      </property>
+                      <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                      </property>
+                    </spacer>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout">
+                  <item>
                     <widget class="QLabel" name="textLabel2_2">
                       <property name="text">
                         <string>Default reconciliation state</string>

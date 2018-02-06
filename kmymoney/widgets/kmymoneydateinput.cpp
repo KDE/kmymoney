@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "kmymoneydateinput.h"
+#include "kmymoneysettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -168,16 +169,23 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   // see if we find a known format. If it's unknown, then we use YMD (international)
   if (order == "mdy") {
     d->m_dateEdit->setDisplayFormat(QString("MM%1dd%2yyyy").arg(separator, separator));
-    d->m_dateEdit->setInitialSection(QDateTimeEdit::MonthSection);
   } else if (order == "dmy") {
     d->m_dateEdit->setDisplayFormat(QString("dd%1MM%2yyyy").arg(separator, separator));
-    d->m_dateEdit->setInitialSection(QDateTimeEdit::DaySection);
   } else if (order == "ydm") {
     d->m_dateEdit->setDisplayFormat(QString("yyyy%1dd%2MM").arg(separator, separator));
-    d->m_dateEdit->setInitialSection(QDateTimeEdit::YearSection);
   } else {
     d->m_dateEdit->setDisplayFormat(QString("yyyy%1MM%2dd").arg(separator, separator));
-    d->m_dateEdit->setInitialSection(QDateTimeEdit::YearSection);
+  }
+  switch(KMyMoneySettings::initialDateFieldCursorPosition()) {
+    case KMyMoneySettings::Day:
+      d->m_dateEdit->setInitialSection(QDateTimeEdit::DaySection);
+      break;
+    case KMyMoneySettings::Month:
+      d->m_dateEdit->setInitialSection(QDateTimeEdit::MonthSection);
+      break;
+    case KMyMoneySettings::Year:
+      d->m_dateEdit->setInitialSection(QDateTimeEdit::YearSection);
+      break;
   }
 
   d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
