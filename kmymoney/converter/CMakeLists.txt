@@ -29,6 +29,6 @@ if( KDE4_BUILD_TESTS )
 
   set( matchfindertest_SRCS matchfindertest.cpp )
   kde4_add_unit_test( matchfindertest TESTNAME kmymoney-matchfindertest ${matchfindertest_SRCS} )
-  target_link_libraries( matchfindertest converter widgets kmymoney_common dialogs widgets kmm_config kmm_storage ${KDE4_KUTILS_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( matchfindertest converter widgets kmymoney_common dialogs widgets kmm_settings kmm_storage ${KDE4_KUTILS_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
 endif( KDE4_BUILD_TESTS )

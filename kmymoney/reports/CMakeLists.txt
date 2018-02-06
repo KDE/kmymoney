@@ -12,7 +12,7 @@ set (libreports_a_SOURCES
 
 kde4_add_library(reports STATIC ${libreports_a_SOURCES})
 
-add_dependencies(reports kmm_config)
+add_dependencies(reports kmm_settings)
 
 ############## tests ####################
 if( KDE4_BUILD_TESTS )
@@ -30,17 +30,17 @@ if( KDE4_BUILD_TESTS )
 
   kde4_add_unit_test( pivottabletest TESTNAME kmymoney-pivottabletest ${pivottabletest_SRCS} )
 
-  add_dependencies( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_kdchart kmm_storage kmm_config )
+  add_dependencies( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_kdchart kmm_storage kmm_settings )
 
-  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage kmm_config ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage kmm_settings ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # Query Table
   set( querytabletest_SRCS querytabletest.cpp reportstestcommon.cpp ../mymoney/mymoneytestutils.cpp )
 
   kde4_add_unit_test( querytabletest TESTNAME kmymoney-querytabletest ${querytabletest_SRCS} )
-  add_dependencies( querytabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage kmm_config )
+  add_dependencies( querytabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage kmm_settings )
 
-  target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_settings ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   kde4_add_executable( reportcharttest reportcharttest.cpp )
   target_link_libraries( reportcharttest reports kmm_kdchart ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} )

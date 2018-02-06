@@ -41,7 +41,7 @@ kde4_add_ui_files(kmm_widgets_sources
 
 kde4_add_library(kmm_widgets SHARED ${kmm_widgets_sources})
 target_link_libraries(kmm_widgets LINK_PUBLIC ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS}
-  kmm_config
+  kmm_settings
   kmm_mymoney
 )
 
@@ -107,7 +107,7 @@ add_custom_target(generate_base_ui_srcs DEPENDS
 # We can compile the uncritical sources without KMM_DESIGNER flags
 kde4_add_library(kmymoney_base STATIC ${_uncritial_common_sources})
 
-add_dependencies(kmymoney_base kmm_config)
+add_dependencies(kmymoney_base kmm_settings)
 
 ########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
@@ -134,7 +134,7 @@ if( USE_QT_DESIGNER )
   # dialogs and converter libraries.  If a widget references something
   # from one of these libraries it is most likely due to code that needs
   # to be excluded with a KMM_DESIGNER ifndef.
-  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config models ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_settings models ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
   install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
 endif( USE_QT_DESIGNER )
@@ -174,7 +174,7 @@ kde4_add_library(widgets STATIC
   )
 target_link_libraries(widgets kmymoney_base)
 
-add_dependencies(widgets kmm_config)
+add_dependencies(widgets kmm_settings)
 
 ########### install files ###############
 

@@ -24,7 +24,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepastorageplugin.desktop.in
 target_link_libraries( konlinetasks_sepa
   kmm_mymoney
   kmm_widgets
-  kmm_config
+  kmm_settings
   kmm_plugin
   kmm_utils_validators
   onlinetask_interfaces

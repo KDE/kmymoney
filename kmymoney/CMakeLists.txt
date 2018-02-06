@@ -6,6 +6,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/
                     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets/
+                    ${CMAKE_CURRENT_BINARY_DIR}/settings/
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/storage/
                     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/
@@ -32,6 +33,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${KMyMoney_SOURCE_DIR}/libkgpgfile/
                     ${KMyMoney_SOURCE_DIR}/libkdchart/include/KDChart )
 
+add_subdirectory( settings )
 add_subdirectory( mymoney )
 add_subdirectory( models  )
 add_subdirectory( plugins )
@@ -48,30 +50,28 @@ add_subdirectory( misc )
 add_subdirectory( payeeidentifier )
 
 set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
-
-########### settings code (kmm_config) STATIC ###############
-set( kmm_config_SRCS kmymoneyglobalsettings.cpp )
-kde4_add_kcfg_files( kmm_config_SRCS kmymoneysettings.kcfgc )
-kde4_add_library(kmm_config STATIC ${kmm_config_SRCS})
-
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 
-set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
+set( kmymoney_common_SRCS
+  kmymoneyutils.cpp
+  kstartuplogo.cpp
+  kmymoneyglobalsettings.cpp
+)
 kde4_add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 target_link_libraries(kmymoney_common
   ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${LIBALKIMIA_LIBRARIES} kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
+add_dependencies(kmymoney_common generate_base_ui_srcs kmm_settings)
 add_dependencies(wizardpages widgets)
 
 set( kmymoney_common_LIBS
   views reports kmymoney_base kmymoney_common
   newuserwizard newaccountwizard newinvestmentwizard newloanwizard
   endingbalancedlg wizardpages
-  dialogs widgets settings converter models kmm_config
+  dialogs widgets settings converter models kmm_settings
   kmm_widgets
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY}
@@ -135,7 +135,7 @@ if( KDE4_BUILD_TESTS )
   set(target_link_libraries_test
         kmm_mymoney
         kmymoney_common
-        kmm_config
+        kmm_settings
         widgets
         ${KDE4_KHTML_LIBS}
         ${KDE4_KDEUI_LIBS}

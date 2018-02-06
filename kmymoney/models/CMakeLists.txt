@@ -14,4 +14,4 @@ target_link_libraries(models LINK_PUBLIC
     kmymoney_common
 )
 
-add_dependencies(models kmm_config)
+add_dependencies(models kmm_settings)
