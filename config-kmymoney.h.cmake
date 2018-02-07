@@ -3,12 +3,6 @@
 /* Name of package */
 #define PACKAGE "kmymoney"
 
-/* Define to 1 if you have the <sys/types.h> header file. */
-#cmakedefine HAVE_SYS_TYPES_H 1
-
-/* Define to 1 if you have the <unistd.h> header file. */
-#cmakedefine HAVE_UNISTD_H 1
-
 #cmakedefine KMM_DESIGNER 1
 
 #cmakedefine KMM_DBUS 1

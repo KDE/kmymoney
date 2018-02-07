@@ -15,7 +15,7 @@
 <title>The Ledger View</title>
 
 <para>
-  The Ledger view is where most of the functionality of &kappname; lies.  This
+  The Ledger view is where most of the functionality of &kmymoney; lies.  This
   view is for examining and entering transaction data in the various
   accounts. The view is split into three main areas: the filter area, the
   transaction list, and the input area.
@@ -115,7 +115,7 @@
   up a dialog that allows you to change the sort order of the transactions. For
   instructions on how to change the default sort order, see the <link
   linkend="details.settings.register.sorting">Sorting tab</link> section of the
-  <link linkend="details.settings">&kappname; Settings</link> Chapter.
+  <link linkend="details.settings">&kmymoney; Settings</link> Chapter.
 </para>
 
 <para>
@@ -125,7 +125,7 @@
 </para>
 
 <para>
-  At the bottom of the transaction list, &kappname; displays three values:
+  At the bottom of the transaction list, &kmymoney; displays three values:
 </para>
 
 <formalpara><title>Last reconciled</title>
@@ -147,7 +147,7 @@
 
 <formalpara><title>Balance</title>
   <para>
-    This is where &kappname; displays the total balance of the account, which is
+    This is where &kmymoney; displays the total balance of the account, which is
     the sum of all transactions in the account.  However, if you select more
     than one transaction in the transaction list, this changes to display the
     sum of the selected transactions.  This returns to the balance when only one
@@ -217,7 +217,7 @@
 
 <para>
   Please note that the actual transaction method is not used directly by
-  &kappname; but is purely for grouping/reporting purposes.
+  &kmymoney; but is purely for grouping/reporting purposes.
 </para>
 
 <para>
@@ -238,10 +238,10 @@
 <para>
   Enter the information using the following notes on the available fields.  Note
   that many fields have 'Auto Completion' turned on.  That is, if you start
-  typing, &kappname; will offer alternatives matching the characters you have
+  typing, &kmymoney; will offer alternatives matching the characters you have
   entered so far.  To select an entry click on it using the mouse or keyboard,
   or if your entry is not listed keep typing to add the new value.  The next
-  time you type the value in, &kappname; will find it for you after the first
+  time you type the value in, &kmymoney; will find it for you after the first
   few characters have been input.
 </para>
 
@@ -250,7 +250,7 @@
 
 <para>
   The Payee is who the money came from/to.  If the payee is a new entry
-  &kappname; will ask if you wish to add this to the list of Payees.  Any other
+  &kmymoney; will ask if you wish to add this to the list of Payees.  Any other
   information related to a payee or payer, such as address details can be
   updated in the Payees view later.
 </para>
@@ -263,13 +263,13 @@
   The Category associates a transaction with an income or expense category for
   accounting and reporting purposes, and enables you to group certain
   transactions. Type the name of the category into the required field.  If you
-  have entered the category and it does not exist then &kappname; will ask if
+  have entered the category and it does not exist then &kmymoney; will ask if
   you want to create a new one.
 </para>
 
 <para>
   If you wish to associate parts of the transaction with different categories,
-  &kappname; can let you do that.  An example transaction might be a cash
+  &kmymoney; can let you do that.  An example transaction might be a cash
   machine withdrawal of 50 of which you use 10 on food, 20 on beer and 20 as
   spare cash.  The transaction will therefore be assigned three categories:
   Food, Beer, and Cash.  To do this, you need to use <link
@@ -278,7 +278,7 @@
 </para>
 
 <para>
-  See the special <link linkend="reference.widgets">&kappname; fields</link>
+  See the special <link linkend="reference.widgets">&kmymoney; fields</link>
   section for more information on how to use this field.
 </para>
 </sect3>
@@ -287,7 +287,7 @@
 <title>The Tag</title>
 
 <para>
-  Tags were introduced to &kappname; in version 4.7, and they are not yet fully
+  Tags were introduced to &kmymoney; in version 4.7, and they are not yet fully
   documented in this handbook.  Tags are similar to Categories, and can be used
   to maintain an orthogonal view to Categories.  For example, you might have
   a Category for each different type of automotice expenses, and then have a Tag
@@ -319,7 +319,7 @@
 
 <para>
   The transaction's posting date must be entered to specify when the transaction
-  took place.  See the special <link linkend="reference.widgets">&kappname;
+  took place.  See the special <link linkend="reference.widgets">&kmymoney;
   fields</link> section for more information on how the date input field can be
   used to make entering dates quicker and easier.
 </para>
@@ -368,14 +368,14 @@
 </para>
 
 <para>
-  To do this you must first let &kappname; know that you don't want to use the
+  To do this you must first let &kmymoney; know that you don't want to use the
   transaction form by opening the settings dialog and unchecking the
   <guilabel>Show transaction form</guilabel> option.
 </para>
 
 <para>
   This is performed by selecting <menuchoice><guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kappname;</guimenuitem></menuchoice> from the menu bar and
+  <guimenuitem>Configure &kmymoney;</guimenuitem></menuchoice> from the menu bar and
   selecting the <guiicon><inlinemediaobject><imageobject><imagedata
   fileref="ledgers_view.png"/></imageobject></inlinemediaobject>
   Register</guiicon> icon from the list on the left. The option to uncheck is
@@ -497,7 +497,7 @@
 <title id="details.ledgers.match.title">Matching Transactions</title>
 
 <para>
-  Generally, when importing transactions, either via QIF, OFX, or HBCI, &kappname;
+  Generally, when importing transactions, either via QIF, OFX, or HBCI, &kmymoney;
   will automatically attempt to match them against existing transactions. To
   allow for differences in the dates, there is a default setting of 4 days,
   which may be changed in the settings - Register/Import. Any transactions so
@@ -520,7 +520,7 @@
 </para> 
 
 <para>
-  The solution is to tell &kappname; that the transactions are the same, using
+  The solution is to tell &kmymoney; that the transactions are the same, using
   the manual matching interface. This allows you to match an imported
   transaction with a hand-entered (non-imported) transaction. To do so, select
   one of the transactions to be matched by clicking on it, then select the other
@@ -535,7 +535,7 @@
 
 <para>
   During import of online statements - either directly or by importing a
-  downloaded file - &kappname; performs matching as best as it can based on the
+  downloaded file - &kmymoney; performs matching as best as it can based on the
   name of the payee and the amount of the transaction. In case of an invalid
   match, a matched transaction can be unmatched.
 </para>
@@ -601,7 +601,7 @@
   There are several settings options that change the appearance and behavior of
   the ledger view in terms of transactions. These settings are found by
   selecting <guimenu>Settings</guimenu> <guimenuitem>Configure
-  &kappname;</guimenuitem> from the menu bar, and selecting the
+  &kmymoney;</guimenuitem> from the menu bar, and selecting the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="ledgers_view.png" />
   </imageobject></inlinemediaobject>Register</guiicon> icon from the list on the
   left.

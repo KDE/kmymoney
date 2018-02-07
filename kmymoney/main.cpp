@@ -60,7 +60,7 @@ bool timersOn = false;
 
 KMyMoneyApp* kmymoney;
 
-static int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile);
+static int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile);
 static void migrateConfigFiles();
 
 int main(int argc, char *argv[])
@@ -158,11 +158,6 @@ int main(int argc, char *argv[])
     fileUrls = parser.positionalArguments();
   }
 
-  /**
-   * enable high dpi icons
-   */
-  app.setAttribute(Qt::AA_UseHighDpiPixmaps);
-
   // create the singletons before we start memory checking
   // to avoid false error reports
   MyMoneyFile::instance();
@@ -210,7 +205,7 @@ int main(int argc, char *argv[])
   // in case a filename is provided we need to check if it is a local
   // file. In case the name does not start with "file://" or "./" or "/"
   // we need to prepend "./" to fake a relative filename. Otherwiese, QUrl prepends
-  // "http.//" and uses the full path which will not work.
+  // "http://" and uses the full path which will not work.
   //
   // The handling might be different on other OSes
   if (!fileUrls.isEmpty()) {
@@ -227,10 +222,10 @@ int main(int argc, char *argv[])
   int rc = 0;
   if (isNoCatchOption) {
     qDebug("Running w/o global try/catch block");
-    rc = runKMyMoney(&app, std::move(splash), url, isNoFileOption);
+    rc = runKMyMoney(app, std::move(splash), url, isNoFileOption);
   } else {
     try {
-      rc = runKMyMoney(&app, std::move(splash), url, isNoFileOption);
+      rc = runKMyMoney(app, std::move(splash), url, isNoFileOption);
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
                                  i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
@@ -241,9 +236,14 @@ int main(int argc, char *argv[])
   return rc;
 }
 
-int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile)
+int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile)
 {
   bool instantQuit = false;
+
+  /**
+   * enable high dpi icons
+   */
+  a.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
   if (kmymoney->webConnect()->isClient()) {
     // If the user launches a second copy of the app and includes a file to
@@ -311,7 +311,7 @@ int runKMyMoney(QApplication *a, std::unique_ptr<QSplashScreen> splash, const QU
   kmymoney->show();
   splash.reset();
 
-  const int rc = a->exec();
+  const int rc = a.exec();
   return rc;
 }
 

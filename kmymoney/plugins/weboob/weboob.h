@@ -54,6 +54,8 @@ public:
 
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
 
+  void injectExternalSettings(KMyMoneySettings* p) override;
+
 protected Q_SLOTS:
 
   void gotAccount();

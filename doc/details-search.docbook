@@ -27,7 +27,7 @@
 
 <para>
   The results will be displayed under the <quote>Result</quote> tab after the
-  search has completed. Below the list of results, &kappname; shows the number
+  search has completed. Below the list of results, &kmymoney; shows the number
   of transactions that met the search criteria.  Double-clicking on an
   individual transaction in the result list will bring up the appropriate ledger
   and display the transaction.
@@ -58,7 +58,7 @@
 <para>
   There are several sub-tabs under the main <quote>Criteria</quote> tab, each of
   which allows you to specify different types of search criteria.  Below the
-  area for specifying the criteria, &kappname; lists each of the different types
+  area for specifying the criteria, &kmymoney; lists each of the different types
   of criteria that are currently specified for the search.
 </para>
 

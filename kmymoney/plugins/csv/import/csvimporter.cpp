@@ -37,6 +37,7 @@
 #include "core/csvimportercore.h"
 #include "csvwizard.h"
 #include "statementinterface.h"
+#include "kmymoneyglobalsettings.h"
 
 CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -52,6 +53,11 @@ CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
 CSVImporter::~CSVImporter()
 {
   qDebug("Plugins: csvimporter unloaded");
+}
+
+void CSVImporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void CSVImporter::createActions()

@@ -27,7 +27,7 @@ target_link_libraries(kcm_qif
                       )
 
 install(TARGETS kcm_qif
-        DESTINATION ${KDE_INSTALL_PLUGINDIR})
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 if(ENABLE_QIFIMPORTER)
   install(FILES kcm_qifimporter.desktop

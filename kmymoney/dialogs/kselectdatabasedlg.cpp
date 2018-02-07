@@ -18,8 +18,6 @@
 
 #include "kselectdatabasedlg.h"
 
-#include <sys/types.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 

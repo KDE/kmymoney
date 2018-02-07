@@ -84,7 +84,7 @@ public:
   {
     delete ui;
   }
-  
+
   void init()
   {
     Q_Q(KEditScheduleDlg);
@@ -209,7 +209,7 @@ public:
     t.setEntryDate(QDate());
     return t;
   }
-  
+
   KEditScheduleDlg              *q_ptr;
   Ui::KEditScheduleDlg          *ui;
   MyMoneySchedule                m_schedule;
@@ -371,7 +371,6 @@ TransactionEditor* KEditScheduleDlg::startEdit()
     d->m_requiredFields->add(d->ui->m_nameEdit);
     d->m_requiredFields->add(editor->haveWidget("account"));
     d->m_requiredFields->add(editor->haveWidget("category"));
-    d->m_requiredFields->add(editor->haveWidget("amount"));
 
     // fix labels
     QLabel* label = dynamic_cast<QLabel*>(editor->haveWidget("date-label"));

@@ -4,6 +4,7 @@ add_subdirectory( payeeidentifier )
 ########### next target ###############
 
 set(kmm_mymoney_LIB_SRCS
+  mymoney_config.cpp
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp
   mymoneytransactionfilter.cpp
   mymoneyfile.cpp mymoneykeyvaluecontainer.cpp
@@ -39,8 +40,8 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   imymoneyprocessingcalendar.h
-  mymoneyfile.h mymoneycostcenter.h
-  mymoneyunittestable.h imymoneyprocessingcalendar.h
+  mymoneycostcenter.h
+  mymoneyunittestable.h
   mymoneypayeeidentifiercontainer.h
   onlinejob.h
   onlinejobtyped.h

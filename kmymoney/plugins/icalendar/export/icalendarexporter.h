@@ -38,6 +38,8 @@ public:
   explicit iCalendarExporter(QObject *parent, const QVariantList &args);
   ~iCalendarExporter() override;
 
+  void injectExternalSettings(KMyMoneySettings* p) override;
+
 protected Q_SLOTS:
   // this is the export function called when the user selects the interface menu
   void slotFirstExport();

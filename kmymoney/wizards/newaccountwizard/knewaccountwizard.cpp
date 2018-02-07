@@ -346,8 +346,8 @@ namespace NewAccountWizard
   MyMoneyMoney Wizard::openingBalance() const
   {
     Q_D(const Wizard);
-    // equity accounts don't have an opening balance
-    if (d->m_accountTypePage->accountType() == Account::Type::Equity)
+    // return 0 if account type does not support an opening balance
+    if (!d->m_accountTypePage->accountTypeSupportsOpeningBalance(d->m_accountTypePage->accountType()))
       return MyMoneyMoney();
 
     if (d->m_accountTypePage->accountType() == Account::Type::Loan) {

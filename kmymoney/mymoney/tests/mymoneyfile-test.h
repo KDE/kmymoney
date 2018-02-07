@@ -104,6 +104,7 @@ private Q_SLOTS:
   void testClearedBalance();
   void testAdjustedValues();
   void testVatAssignment();
+  void testEmptyFilter();
 
 private Q_SLOTS:
   void objectAdded(eMyMoney::File::Object type, const MyMoneyObject * const obj);

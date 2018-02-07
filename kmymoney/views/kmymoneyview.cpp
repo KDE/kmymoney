@@ -465,6 +465,11 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
       proxyModel->setColumnVisibility(column, show);
       proxyModel->invalidate();
     }
+  } else if(show) {
+    // in case we need to show it, we have to make sure to set the visibility
+    // in the base model as well. Otherwise, we don't see the column through the proxy model
+    Models::instance()->accountsModel()->setColumnVisibility(column, show);
+    Models::instance()->institutionsModel()->setColumnVisibility(column, show);
   }
 }
 

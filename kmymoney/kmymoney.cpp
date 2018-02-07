@@ -174,6 +174,10 @@
 
 #include "misc/platformtools.h"
 
+// includes needed for shared global settings
+#include "mymoney_config.h"
+#include "widgets_config.h"
+
 #ifdef KMM_DEBUG
 #include "mymoneytracer.h"
 #endif
@@ -379,6 +383,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
 
+  MyMoney::injectExternalSettings(KMyMoneyGlobalSettings::self());
+  Widgets::injectExternalSettings(KMyMoneyGlobalSettings::self());
+
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
   d->m_config = KSharedConfig::openConfig();
@@ -488,6 +495,8 @@ KMyMoneyApp::~KMyMoneyApp()
 #ifdef KF5Holidays_FOUND
   delete d->m_holidayRegion;
 #endif
+  Widgets::injectExternalSettings(nullptr);
+  MyMoney::injectExternalSettings(nullptr);
   delete d;
 }
 
@@ -2035,9 +2044,6 @@ void KMyMoneyApp::slotBackupFile()
   }
 
   QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
-#ifdef Q_OS_WIN
-  backupDlg->mountCheckBox->setEnabled(false);
-#endif
   int returncode = backupDlg->exec();
   if (returncode == QDialog::Accepted && backupDlg != 0) {
 
@@ -3195,12 +3201,12 @@ void KMyMoneyApp::slotAccountMapOnline()
     return;
 
   // find the provider
-  it_p = d->m_plugins.online.constFind(provider);
+  it_p = d->m_plugins.online.constFind(provider.toLower());
   if (it_p != d->m_plugins.online.constEnd()) {
     // plugin found, call it
     MyMoneyKeyValueContainer settings;
     if ((*it_p)->mapAccount(d->m_selectedAccount, settings)) {
-      settings["provider"] = provider;
+      settings["provider"] = provider.toLower();
       MyMoneyAccount acc(d->m_selectedAccount);
       acc.setOnlineBankingSettings(settings);
       MyMoneyFileTransaction ft;

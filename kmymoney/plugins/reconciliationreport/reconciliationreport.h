@@ -36,6 +36,8 @@ public:
   explicit ReconciliationReport(QObject *parent, const QVariantList &args);
   ~ReconciliationReport() override;
 
+  void injectExternalSettings(KMyMoneySettings* p) override;
+
 public Q_SLOTS:
   void plug() override;
   void unplug() override;

@@ -53,21 +53,21 @@ bool onlineJobPluginMockup::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValu
 {
   Q_UNUSED(acc);
 
-  onlineBankingSettings.setValue("provider", objectName());
+  onlineBankingSettings.setValue("provider", objectName().toLower());
   return true;
 }
 
 MyMoneyKeyValueContainer onlineJobPluginMockup::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
   MyMoneyKeyValueContainer nextKvp(current);
-  nextKvp.setValue("provider", objectName());
+  nextKvp.setValue("provider", objectName().toLower());
   return nextKvp;
 }
 
 bool onlineJobPluginMockup::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 {
   Q_UNUSED(moreAccounts);
-  if (acc.onlineBankingSettings().value("provider").toLower() == objectName())
+  if (acc.onlineBankingSettings().value("provider").toLower() == objectName().toLower())
     return true;
   return false;
 }
@@ -75,7 +75,7 @@ bool onlineJobPluginMockup::updateAccount(const MyMoneyAccount& acc, bool moreAc
 QStringList onlineJobPluginMockup::availableJobs(QString accountId)
 {
   try {
-    if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName())
+    if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
       return onlineJobAdministration::instance()->availableOnlineTasks();
   } catch (MyMoneyException&) {
   }
@@ -86,7 +86,7 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId)
 IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QString taskName)
 {
   try {
-    if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName())
+    if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
       return IonlineTaskSettings::ptr(new sepaCreditTransferSettingsMockup);
   } catch (MyMoneyException&) {
   }

@@ -14,7 +14,7 @@
 <title>What is a Forecast?</title>
 
 <para>
-  In &kappname;, a Forecast is a prediction of the balances of Accounts during a
+  In &kmymoney;, a Forecast is a prediction of the balances of Accounts during a
   specified future period of time.</para>
 
 <para>
@@ -25,7 +25,7 @@
   <varlistentry>
     <term>Scheduled and Future Transactions</term>
     <listitem>
-      <para>&kappname; uses a combination of future transactions already entered
+      <para>&kmymoney; uses a combination of future transactions already entered
         into the ledgers and the entries in the Schedule.</para>
     </listitem>
   </varlistentry>
@@ -33,19 +33,19 @@
   <varlistentry>
     <term>History-based</term>
     <listitem>
-      <para>&kappname; uses values from past transactions in the ledgers to
+      <para>&kmymoney; uses values from past transactions in the ledgers to
         predict future transactions.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para>
-  The forecast method and forecast period can be set in the &kappname; Settings,
+  The forecast method and forecast period can be set in the &kmymoney; Settings,
   in the Forecast pane.
 </para>
 
 <para>
-  &kappname; Forecast provides a summary, showing the predicted balances at
+  &kmymoney; Forecast provides a summary, showing the predicted balances at
   account cycle dates and the expected difference between the starting and
   ending balances.  The length of the account cycle can be set by the user.  The
   summary also displays messages about significant predicted changes to the
@@ -53,7 +53,7 @@
 </para>
 
 <para>
-  As well as the summary, &kappname; Forecast also allows you to view day-by-day
+  As well as the summary, &kmymoney; Forecast also allows you to view day-by-day
   balances and view the minimum and maximum balances for each forecast account
   cycle.
 </para>
@@ -69,7 +69,7 @@
 
 <para>
   You can view a Forecast by clicking the appropriate icon in the navigation
-  pane at the left hand side of your &kappname; window.
+  pane at the left hand side of your &kmymoney; window.
 </para>
 
 <para>

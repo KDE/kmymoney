@@ -32,7 +32,7 @@ class MyMoneyQifReader;
 class QIFExporter : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
-  
+
 public:
   explicit QIFExporter(QObject *parent, const QVariantList &args);
   ~QIFExporter() override;
@@ -40,6 +40,8 @@ public:
   QAction          *m_action;
 
   MyMoneyQifReader *m_qifReader;
+
+  void injectExternalSettings(KMyMoneySettings* p) override;
 
 public Q_SLOTS:
   /**

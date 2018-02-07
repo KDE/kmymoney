@@ -15,7 +15,7 @@
 
 <para>
   Reconciliation is the process of matching the transactions you have entered
-  into &kappname; with the transactions listed for that account by the
+  into &kmymoney; with the transactions listed for that account by the
   institution.  This is most commonly done with the list of transactions in a
   statement, be it a bank statement, credit card statement, loan statement, or
   any other statement. It can also be done against an on-line listing of the
@@ -115,7 +115,7 @@
   what you have entered.  Note that this completes the Reconciliation Wizard,
   but not the process of reconciliation.  It also changes the ledger display by
   only showing transactions that have not already been marked as reconciled.  As
-  described below, you still need to clear transactions and then tell &kappname;
+  described below, you still need to clear transactions and then tell &kmymoney;
   that the account is reconciled.
 </para>
 </sect2>
@@ -165,7 +165,7 @@
 <para>
   When the difference between the statement and the cleared balance is zero then
   the account is reconciled and you can click the <guibutton>Finish</guibutton>
-  button.  When you do this, &kappname; takes all the transactions which have
+  button.  When you do this, &kmymoney; takes all the transactions which have
   been marked as cleared and marks them as reconciled, and the value in the
   <guilabel>C</guilabel> column changes from <quote>C</quote> to
   <quote>R</quote> to reflect the change. In addition, it saves the changes and
@@ -180,20 +180,20 @@
   If you're having trouble completing the reconciliation, or you need to gather
   some additional information before you can complete the process, you can
   postpone the process to a later time by clicking on the
-  <guibutton>Postpone</guibutton> button. When you do this, &kappname; remembers
+  <guibutton>Postpone</guibutton> button. When you do this, &kmymoney; remembers
   the values you entered when you started the wizard, it does not mark cleared
   transactions as reconciled, and it returns the ledger to its normal view.  If
-  you exit &kappname; before clicking either <guibutton>Finish</guibutton> or
+  you exit &kmymoney; before clicking either <guibutton>Finish</guibutton> or
   <guibutton>Postpone</guibutton>, it has the same effect as clicking
   <guibutton>Postpone</guibutton>.  Any edits you have made, such as marking
   transactions cleared or entering new transactions, are not touched, and you
-  can still save them before you exit &kappname;.  However, you will have to run
+  can still save them before you exit &kmymoney;.  However, you will have to run
   the reconciliation wizard again in order to reconcile the account.
 </para>
 
 <para>
   When you run the reconciliation wizard on this account the next time,
-  &kappname; remembers the values you entered when you previously ran the
+  &kmymoney; remembers the values you entered when you previously ran the
   wizard, and you will be able to change them, if necessary.  In this case, the
   initial screen of the wizard is different, to remind you of this.
 </para>

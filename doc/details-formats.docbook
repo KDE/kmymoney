@@ -12,17 +12,17 @@
 
 <para>
   Unless you choose to use a <link linkend="details.database">relational
-  database</link>, &kappname; will store all your financial information in a
+  database</link>, &kmymoney; will store all your financial information in a
   file ending in .kmy.  Also, unless you use a <link
   linkend="firsttime.launch">command line option</link> that tells it not to do
-  so, when you launch &kappname;, it will open the last file it had open.
+  so, when you launch &kmymoney;, it will open the last file it had open.
   However, it is important to know that there is more than one type of file
-  &kappname; can use to hold your financial data.
+  &kmymoney; can use to hold your financial data.
 </para>
 
 <para>
-  This chapter describes the formats in which &kappname; stores its data in
-  permanent form on the user's storage device. In general, &kappname; stores its
+  This chapter describes the formats in which &kmymoney; stores its data in
+  permanent form on the user's storage device. In general, &kmymoney; stores its
   information in form of an &XML; document. Depending on the actual format, this
   &XML; document will be written
 
@@ -54,9 +54,9 @@
 <caution>
   <para>
     Manual modification of the file is not recommended to the normal user, and
-    should only be performed if the internal working of &kappname; is fully
+    should only be performed if the internal working of &kmymoney; is fully
     understood or if instructions from the developers tell you what to do. Don't
-    blame the &kappname; developers if you screw up your data: You have been
+    blame the &kmymoney; developers if you screw up your data: You have been
     warned!
   </para>
 </caution>
@@ -66,7 +66,7 @@
 <sect1 id="details.formats.compressed">
 <title>GZIP-compressed file</title>
 <para>
-  This is the normal format used by &kappname; when you store a file with the
+  This is the normal format used by &kmymoney; when you store a file with the
   extension <literal role="extension">.kmy</literal>.
 </para>
 
@@ -83,7 +83,7 @@
   rename <filename>myfinances.kmy</filename>
   to <filename>myfinances.kmy.gz</filename>), then use <command>gunzip</command>
   to uncompress the file and look at it. You don't have to compress it before
-  loading it into &kappname; the next time, because &kappname; can read the
+  loading it into &kmymoney; the next time, because &kmymoney; can read the
   uncompressed data as well. Nevertheless, if you save it thereafter, it will be
   saved compressed again. Use
   the <link linkend="details.formats.plain">.xml</link> extension to write it in
@@ -95,7 +95,7 @@
 <title>GPG-encrypted file</title>
 <para>
   Using the GPG-encrypted file format is a very secure method of storing your
-  personal finance data on your storage device. When &kappname; has been
+  personal finance data on your storage device. When &kmymoney; has been
   instructed through the settings dialog to store your data encrypted, it will
   cipher the data using GPG and the key you provided before actually storing
   it. When opening an encrypted file, you have to provide the passphrase
@@ -114,7 +114,7 @@
 <para>
   If you have not done so already for mail encryption, you need to generate a
   key-pair in order to use the GPG encryption feature of
-  &kappname;. Also, <application>GPG</application> must be installed on your
+  &kmymoney;. Also, <application>GPG</application> must be installed on your
   system.
 </para>
 
@@ -126,7 +126,7 @@
 </sect2>
 
 <sect2 id="details.formats.encrypted.keysettings">
-<title>Setting the keys in &kappname;</title>
+<title>Setting the keys in &kmymoney;</title>
 <para>
   On the encryption page of the settings dialog, there is a drop down 
   list where you can select the key that should be used for encryption and 
@@ -134,7 +134,7 @@
   key-id of a key not in the listbox. You can use either the key-id, the 
   email address associated with this key, or any other valid GPG key 
   identification as the value for this field. When you enter the key-id, 
-  &kappname; will check its validity and display a green LED icon in the 
+  &kmymoney; will check its validity and display a green LED icon in the 
   dialog if a key is found.
   <caution>
     <para>
@@ -147,25 +147,25 @@
 </sect2>
 
 <sect2 id="details.formats.encrypted.recoverkey">
-<title>The &kappname; recover key</title>
+<title>The &kmymoney; recover key</title>
 <para>
   Also on this page of the settings dialog you have the choice of selecting
-  supplemental encryption with the &kappname; recover key. This option is
+  supplemental encryption with the &kmymoney; recover key. This option is
   available to you if that key is stored in your <application>GPG</application>
   keyring. Selecting this option will allow you to recover your data even in the
   case you lose your own private key. This is possible because the data is not
-  only encrypted for your own key, but also for the &kappname; recover key. This
-  key is only available to selected &kappname; developers (at the time of
-  writing only to the author).  As of the release of &kappname; version 4.7, the
+  only encrypted for your own key, but also for the &kmymoney; recover key. This
+  key is only available to selected &kmymoney; developers (at the time of
+  writing only to the author).  As of the release of &kmymoney; version 4.7, the
   recover key is set to expire on 3 January 2015.
 </para>
 
 <para>
   Under normal circumstances, you will open/save/close your file as usual. In
   the abnormal case of loss of your key, you have the chance to contact one of
-  the developers who has access to the &kappname; recover key and request help
+  the developers who has access to the &kmymoney; recover key and request help
   to recover your data. You may contact the developers via email to the
-  &kappname; developer mailing list at &devlist;.
+  &kmymoney; developer mailing list at &devlist;.
 </para>
 </sect2>
 </sect1>
@@ -174,7 +174,7 @@
 <title>Anonymous file</title>
 <para>
   This format is not intended to be used for normal data storage.  It is
-  supported so that in case of a problem, you can supply the &kappname;
+  supported so that in case of a problem, you can supply the &kmymoney;
   development team with your file without disclosing any of the confidential
   details in your financial data.  For example, it changes institution, account,
   payee, and category names to strings such as "I000001" and "A000001," it makes

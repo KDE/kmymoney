@@ -2763,3 +2763,18 @@ void MyMoneyFileTest::testVatAssignment()
   QCOMPARE(tr.splitByAccount(vat.id()).shares().toString(), MyMoneyMoney(-284, 100).toString());
   QCOMPARE(tr.splitSum().toString(), MyMoneyMoney().toString());
 }
+
+void MyMoneyFileTest::testEmptyFilter()
+{
+  testAddTransaction();
+
+  try {
+    QList<QPair<MyMoneyTransaction, MyMoneySplit> > tList;
+    MyMoneyTransactionFilter filter;
+    MyMoneyFile::instance()->transactionList(tList, filter);
+    QCOMPARE(tList.count(), 2);
+
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+}

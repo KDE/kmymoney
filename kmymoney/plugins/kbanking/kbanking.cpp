@@ -89,6 +89,7 @@
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 #include "viewinterface.h"
+#include "kmymoneyglobalsettings.h"
 
 #ifdef KMM_DEBUG
 // Added an option to open the chipTanDialog from the menu for debugging purposes
@@ -171,6 +172,11 @@ KBanking::~KBanking()
 {
   delete d;
   qDebug("Plugins: kbanking unloaded");
+}
+
+void KBanking::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void KBanking::plug()
@@ -290,7 +296,7 @@ QWidget* KBanking::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 MyMoneyKeyValueContainer KBanking::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
   MyMoneyKeyValueContainer kvp(current);
-  kvp["provider"] = objectName();
+  kvp["provider"] = objectName().toLower();
   if (m_accountSettings) {
     m_accountSettings->loadKvp(kvp);
   }
@@ -431,7 +437,7 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_a
       }
 
       kvp.setValue("kbanking-acc-ref", val);
-      kvp.setValue("provider", objectName());
+      kvp.setValue("provider", objectName().toLower());
       setAccountOnlineParameters(acc, kvp);
     }
   } else {

@@ -11,7 +11,7 @@
 <title>Widgets</title>
 
 <para>
-  &kappname; has some specific widgets not found in other applications. The
+  &kmymoney; has some specific widgets not found in other applications. The
   usage of these widgets is explained in this chapter.
 </para>
 
@@ -19,7 +19,7 @@
 <title>Date entry widget</title>
 
 <para>
-  Whenever &kappname; needs information about a specific date, &eg;, the posting
+  Whenever &kmymoney; needs information about a specific date, &eg;, the posting
   date of a transaction or the opening date of an account, it offers the user
   the <emphasis>date entry widget</emphasis>. This widget consists of three
   fields and a button. The fields present the <emphasis>day</emphasis>, the
@@ -130,7 +130,7 @@
 <para>
   When you are requested to enter a payee/payer for a transaction, you can start
   entering the name by pressing keys on your keyboard.  As long as matching
-  entries exist in the list of payees/payers maintained by &kappname; they will
+  entries exist in the list of payees/payers maintained by &kmymoney; they will
   be presented in a box beneath or above the text entry area. Using the mouse or
   the up/down keys one can select a name from that list. Using the keyboard
   additionally requires you to select the entry by pressing the RETURN key.
@@ -151,7 +151,7 @@
 </para>
 
 <para>
-  If a name is entered that is not yet known to &kappname; you will be asked if
+  If a name is entered that is not yet known to &kmymoney; you will be asked if
   you want to create a new payee/payer record.  If you do not wish to do so,
   then the field will be blanked. Otherwise, the record will be created and
   added to the list.
@@ -171,7 +171,7 @@
 <para>
   When you are requested to enter the name of a category or account, you can
   start entering the name by pressing keys on your keyboard.  As long as
-  matching entries exist in the list of categories/accounts known to &kappname;
+  matching entries exist in the list of categories/accounts known to &kmymoney;
   they will be presented in a box beneath or above the text entry area. Using
   the mouse or the up/down keys one can select a name from that list. Using the
   keyboard additionally requires you to select the entry by pressing the RETURN
@@ -193,7 +193,7 @@
 </para>
 
 <para>
-  If a name is entered that is not yet known to &kappname; you will be asked if
+  If a name is entered that is not yet known to &kmymoney; you will be asked if
   you want to create a new category record.  If you do not wish to do so, then
   the field will be blanked. Otherwise, the record will be created and added to
   the list.

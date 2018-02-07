@@ -8,13 +8,13 @@
   <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
-<title id="details.settings.title">&kappname; Settings</title>
+<title id="details.settings.title">&kmymoney; Settings</title>
 
 <para>
-   The settings described below modify the behavior of &kappname;. These
+   The settings described below modify the behavior of &kmymoney;. These
    settings can be changed
    through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-   &kappname;...</guimenuitem></menuchoice>.
+   &kmymoney;...</guimenuitem></menuchoice>.
 </para>
 
 <sect1 id="details.settings.general">
@@ -37,7 +37,7 @@
   <varlistentry>
     <term><guilabel>Autosave periodically</guilabel></term>
     <listitem>
-      <para>Check this box if you wish &kappname; to autosave your files
+      <para>Check this box if you wish &kmymoney; to autosave your files
         periodically. The default is 10 minutes.</para>
     </listitem>
   </varlistentry>
@@ -459,7 +459,7 @@
         </listitem>
         <listitem>
           <para>Same transaction if amount differs less than X percent</para>
-          <para>When entering a new transaction with this option, &kappname;
+          <para>When entering a new transaction with this option, &kmymoney;
             will display a list of previous transaction for the payee and
             account. If previous transactions differ in less than X percent,
             they will be considered identical. If the percentage is 0, all
@@ -471,7 +471,7 @@
         <listitem>
           <para>With previously most often used transaction for the payee</para>
           <para>When entering a new transaction with this option enabled,
-            &kappname; will fill in all the transaction details based on the
+            &kmymoney; will fill in all the transaction details based on the
             previously most often used transaction with the selected
             payee.</para>
         </listitem>
@@ -519,7 +519,7 @@
   <varlistentry>
     <term><guilabel>Check schedules upon startup</guilabel></term>
     <listitem>
-      <para>Enables checking the schedule upon startup of &kappname;.</para>
+      <para>Enables checking the schedule upon startup of &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -554,7 +554,7 @@
 </para>
 
 <para>
-  This tab allows you to change the online quote sources for &kappname;.
+  This tab allows you to change the online quote sources for &kmymoney;.
   Generally speaking, this is an advanced feature, and should only be attempted
   by the most technically adept users.
 </para>
@@ -616,7 +616,7 @@
     <term><guilabel>Number of cycles to use in forecast</guilabel></term>
     <listitem>
       <para>If using a history-based method, how many previous account cycles
-        should &kappname; use to calculate the forecast.</para>
+        should &kmymoney; use to calculate the forecast.</para>
     </listitem>
   </varlistentry>
 
@@ -676,8 +676,8 @@
   <varlistentry>
     <term><guilabel>Also encrypt with kmymoney-recover key</guilabel></term>
     <listitem>
-      <para>Encrypts data with the &kappname; recover key.  Selecting this
-        option will allow core &kappname; developers to decrypt your data file
+      <para>Encrypts data with the &kmymoney; recover key.  Selecting this
+        option will allow core &kmymoney; developers to decrypt your data file
         in case you lose your encryption key.</para>
     </listitem>
   </varlistentry>
@@ -689,7 +689,7 @@
 <title id="details.settings.colors.title">Colors</title>
 
 <para>
-   These options allow you to change colors within &kappname;.
+   These options allow you to change colors within &kmymoney;.
 </para>
 
 <sect2 id="details.settings.colors.foreground">
@@ -711,7 +711,7 @@
 
 <para>
   Note the <guilabel>Use system colors</guilabel> checkbox at the top of the
-  tab.  If this is checked, &kappname; uses colors provided by the system, such
+  tab.  If this is checked, &kmymoney; uses colors provided by the system, such
   as those associated with a selected theme, although the details depend on
   which operating system and possibly which window system or display manager is
   running.  Very often, if you experience odd colors or odd combination of
@@ -757,7 +757,7 @@
 
 <para>
   These options allow you to modify the behavior of any installed plugins.  Note
-  that the list of plugins displayed will depend on which plugins &kappname;
+  that the list of plugins displayed will depend on which plugins &kmymoney;
   found when it started.  It does not matter whether the plugin was compiled as
   part of the application or added as a separate package.
   <screenshot>
@@ -787,7 +787,7 @@
 <title>Print check plugin</title>
 
 <para>
-  This plugin is included with the source of &kappname;, and should always be
+  This plugin is included with the source of &kmymoney;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
   transaction, with the layout controlled by an html template. You need to use a 
   template which is matched to your pre-printed checks.  When you click on the
@@ -800,7 +800,7 @@
 <para>
   A template file is an html file, in which specific strings are used to
   reference the fields from the transaction and from the current account and
-  institution to show where they will be printed on the check.  &kappname; is
+  institution to show where they will be printed on the check.  &kmymoney; is
   shipped with some sample template files.  You should either be able to use one
   of them, or modify one to suit your needs.  When the default template is
   selected, the configuration dialog will show you the directory which contains

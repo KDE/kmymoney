@@ -11,7 +11,7 @@
 <title>Currencies</title>
 
 <para>
-  &kappname; supports the use of multiple currencies in different accounts. For
+  &kmymoney; supports the use of multiple currencies in different accounts. For
   example, you can set up a bank account in Euros, another in British Pounds, and
   still have your credit card account in US Dollars.
 </para>
@@ -20,7 +20,7 @@
 <title>Base currency</title>
 
 <para>
-  Once you create a &kappname; file, you will be asked for the base currency. The
+  Once you create a &kmymoney; file, you will be asked for the base currency. The
   base currency is the one that all income and expense categories use and that
   reports will be based on. Usually, the base currency is the currency you use
   in your country. If not otherwise selected, new accounts will use this
@@ -48,7 +48,7 @@
   Although it does not happen often, sometimes a new currency is introduced.
   This can be a new virtual currency, such as Bitcoin, or a change introduced by
   a country for financial policy reasons.  While any such currency will be added
-  to the next version of &kappname; it is possible to add it manually, in case
+  to the next version of &kmymoney; it is possible to add it manually, in case
   you have a need to begin using it immediately.
 </para>
 
@@ -123,7 +123,7 @@
 </para>
 
 <para>
-  In &kappname; a <quote>Price</quote> is the price of one currency in terms of
+  In &kmymoney; a <quote>Price</quote> is the price of one currency in terms of
   a second currency.  For example, as I write this, the price of 1 USD in terms
   of 1 EUR is 0.83; that is, 1 USD costs 0.83 EUR.  The first currency is the
   one being bought or sold, and the second one is the currency used to buy or
@@ -155,7 +155,7 @@
 <title>Online currency updates</title>
 
 <para>
-  &kappname; will fetch currency conversions from the web.  Once you have
+  &kmymoney; will fetch currency conversions from the web.  Once you have
   entered a single price for a pair of currencies, the online quote feature will
   always list that pair amongst its options.
 </para>

@@ -33,6 +33,7 @@
 #include "kexportdlg.h"
 
 #include "mymoneyqifwriter.h"
+#include "kmymoneyglobalsettings.h"
 
 QIFExporter::QIFExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "qifexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -49,6 +50,12 @@ QIFExporter::~QIFExporter()
 {
   qDebug("Plugins: qifexporter unloaded");
 }
+
+void QIFExporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
+}
+
 
 void QIFExporter::createActions()
 {

@@ -24,10 +24,10 @@
 #ifndef IMYMONEYSERIALIZE_H
 #define IMYMONEYSERIALIZE_H
 
-#include <sys/types.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QtGlobal>
 
 // ----------------------------------------------------------------------------
 // Project Includes

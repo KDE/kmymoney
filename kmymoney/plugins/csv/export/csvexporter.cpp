@@ -35,6 +35,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyglobalsettings.h"
+
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
@@ -49,6 +51,11 @@ CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
 CSVExporter::~CSVExporter()
 {
   qDebug("Plugins: csvexporter unloaded");
+}
+
+void CSVExporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void CSVExporter::createActions()

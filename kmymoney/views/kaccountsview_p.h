@@ -181,7 +181,7 @@ public:
         // if we have an online provider for this account, we need to check
         // that we have the corresponding plugin. If that exists, we ask it
         // to provide an additional tab for the account editor.
-        it_plugin = m_onlinePlugins->constFind(kvp["provider"]);
+        it_plugin = m_onlinePlugins->constFind(kvp["provider"].toLower());
         if (it_plugin != m_onlinePlugins->constEnd()) {
           QString name;
           auto w = (*it_plugin)->accountConfigTab(m_currentAccount, name);

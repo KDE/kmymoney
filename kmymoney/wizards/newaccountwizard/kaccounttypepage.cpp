@@ -110,7 +110,9 @@ namespace NewAccountWizard
   {
     Q_D(AccountTypePage);
     hideShowPages(static_cast<Account::Type>(i));
-    d->ui->m_openingBalance->setDisabled(static_cast<Account::Type>(i) == Account::Type::Equity);
+    const bool enabled = accountTypeSupportsOpeningBalance(static_cast<Account::Type>(i));
+    d->ui->m_openingBalance->setEnabled(enabled);
+    d->ui->m_openingBalanceLabel->setEnabled(enabled);
   }
 
   void AccountTypePage::hideShowPages(Account::Type accountType) const
@@ -221,6 +223,18 @@ namespace NewAccountWizard
       }
     hideShowPages(accountType());
     return rc;
+  }
+
+  bool AccountTypePage::accountTypeSupportsOpeningBalance(Account::Type type) const
+  {
+    switch(type) {
+      case Account::Type::Equity:
+      case Account::Type::Investment:
+        return false;
+      default:
+        break;
+    }
+    return true;
   }
 
   Account::Type AccountTypePage::accountType() const

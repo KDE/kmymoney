@@ -30,6 +30,7 @@ private:
   MyMoneyFile* file;
 
 private Q_SLOTS:
+  void setup();
   void init();
   void cleanup();
   void testQueryBasics();

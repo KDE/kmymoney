@@ -38,11 +38,17 @@
 
 #include "pivottable.h"
 #include "reportstestcommon.h"
+#include "kmymoneysettings.h"
 
 using namespace reports;
 using namespace test;
 
 QTEST_GUILESS_MAIN(PivotTableTest)
+
+void PivotTableTest::setup()
+{
+  KMyMoneySettings::instance(QString());
+}
 
 void PivotTableTest::init()
 {

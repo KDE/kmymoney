@@ -24,10 +24,10 @@
 #ifndef IMYMONEYSTORAGE_H
 #define IMYMONEYSTORAGE_H
 
-#include <sys/types.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QtGlobal>
 
 // ----------------------------------------------------------------------------
 // Project Includes

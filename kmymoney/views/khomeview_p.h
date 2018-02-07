@@ -123,6 +123,7 @@ public:
   explicit KHomeViewPrivate(KHomeView *qq) :
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
+    m_view(nullptr),
     m_showAllSchedules(false),
     m_needLoad(true),
     m_netWorthGraphLastValidSize(400, 300)
@@ -131,7 +132,7 @@ public:
 
   ~KHomeViewPrivate() {
     // if user wants to remember the font size, store it here
-    if (KMyMoneyGlobalSettings::rememberZoomFactor()) {
+    if (KMyMoneyGlobalSettings::rememberZoomFactor() && m_view) {
         KMyMoneyGlobalSettings::setZoomFactor(m_view->zoomFactor());
         KMyMoneyGlobalSettings::self()->save();
       }

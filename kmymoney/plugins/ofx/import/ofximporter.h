@@ -43,7 +43,7 @@ class OFXImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Import
   Q_OBJECT
   Q_INTERFACES(KMyMoneyPlugin::ImporterPlugin)
   Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
-  
+
 public:
   explicit OFXImporter(QObject *parent, const QVariantList &args);
   ~OFXImporter() override;
@@ -114,6 +114,8 @@ public:
 
   bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings) override;
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts) override;
+
+  void injectExternalSettings(KMyMoneySettings* p) override;
 
 protected Q_SLOTS:
   void slotImportFile();

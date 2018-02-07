@@ -295,17 +295,28 @@ bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) con
   if(!m_entries.isEmpty()) {
     QModelIndex nextIdx = nextIndex(index);
     const QAbstractItemModel* model = index.model();
-    // if this is not the last entry?
-    if(nextIdx.isValid() ) {
-      // index points to the last entry of a date
-      rc = (model->data(index, (int)m_role).toDate() != model->data(nextIdx, (int)m_role).toDate());
-      if (rc) {
-        // check if this the spot for the online balance data
-        rc &= ((model->data(index, (int)m_role).toDate() <= m_entries.firstKey())
-          && (model->data(nextIdx, (int)m_role).toDate() > m_entries.firstKey()));
+    const QDate date = model->data(index, (int)m_role).toDate();
+    // only a real transaction can have an online balance separator
+    if(model->data(index, (int) eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
+      // if this is not the last entry and not a schedule?
+      if(nextIdx.isValid()) {
+        // index points to the last entry of a date
+        rc = (date != model->data(nextIdx, (int)m_role).toDate());
+        if (!rc) {
+          // in case it's the same date, we need to check if this is the last real transaction
+          // and the next one is a scheduled transaction
+          if(!model->data(nextIdx, (int) eLedgerModel::Role::ScheduleId).toString().isEmpty() ) {
+            rc = true;
+          }
+        }
+        if (rc) {
+          // check if this the spot for the online balance data
+          rc &= ((date <= m_entries.firstKey())
+            && (model->data(nextIdx, (int)m_role).toDate() >= m_entries.firstKey()));
+        }
+      } else {
+        rc = (date <= m_entries.firstKey());
       }
-    } else {
-      rc = (model->data(index, (int)m_role).toDate() <= m_entries.firstKey());
     }
   }
   return rc;
@@ -598,7 +609,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     // when the editor is shown, the row has only a single column
-    // so we need to paint the seperator if we get here in this casee
+    // so we need to paint the separator if we get here in this casee
     bool needPaint = editWidgetIsVisible;
 
     if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
@@ -627,7 +638,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     // when the editor is shown, the row has only a single column
-    // so we need to paint the seperator if we get here in this casee
+    // so we need to paint the separator if we get here in this casee
     bool needPaint = editWidgetIsVisible;
 
     if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {

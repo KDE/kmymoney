@@ -50,6 +50,8 @@ public:
 protected:
 
   static const QStringList featuresList();
+  static bool isGroupHeader(const QString& item);
+  static bool isGroupItem(const QString& item);
 };
 
 #endif

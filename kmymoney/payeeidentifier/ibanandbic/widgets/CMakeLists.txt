@@ -69,7 +69,7 @@ configure_file(kmymoney-ibanbic-delegate.desktop.in kmymoney-ibanbic-delegate.de
 kcoreaddons_desktop_to_json(payeeidentifier_iban_bic_widgets "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-delegate.desktop")
 
 install(TARGETS payeeidentifier_iban_bic_delegates
-        DESTINATION ${KDE_INSTALL_PLUGINDIR}
+        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney"
 )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-delegate.desktop

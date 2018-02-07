@@ -56,7 +56,7 @@ namespace KMyMoneyRegister
   };
 }
 
-TypeGroupMarker::TypeGroupMarker(Register* parent, eRegister::CashFlowDirection dir, Account::Type accType) :
+TypeGroupMarker::TypeGroupMarker(KMyMoneyRegister::Register* parent, eRegister::CashFlowDirection dir, Account::Type accType) :
     GroupMarker(*new TypeGroupMarkerPrivate, parent, QString())
 {
   Q_D(TypeGroupMarker);
@@ -90,7 +90,7 @@ eRegister::CashFlowDirection TypeGroupMarker::sortType() const
   return d->m_dir;
 }
 
-PayeeGroupMarker::PayeeGroupMarker(Register* parent, const QString& name) :
+PayeeGroupMarker::PayeeGroupMarker(KMyMoneyRegister::Register* parent, const QString& name) :
     GroupMarker(parent, name)
 {
 }
@@ -105,7 +105,7 @@ const QString& PayeeGroupMarker::sortPayee() const
   return d->m_txt;
 }
 
-CategoryGroupMarker::CategoryGroupMarker(Register* parent, const QString& category) :
+CategoryGroupMarker::CategoryGroupMarker(KMyMoneyRegister::Register* parent, const QString& category) :
     GroupMarker(parent, category)
 {
 }
@@ -139,7 +139,7 @@ namespace KMyMoneyRegister
   };
 }
 
-ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, eMyMoney::Split::State state) :
+ReconcileGroupMarker::ReconcileGroupMarker(KMyMoneyRegister::Register* parent, eMyMoney::Split::State state) :
     GroupMarker(*new ReconcileGroupMarkerPrivate, parent, QString())
 {
   Q_D(ReconcileGroupMarker);

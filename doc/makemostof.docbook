@@ -10,17 +10,17 @@
   <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Making the most of &kappname;</title>
+<title>Making the most of &kmymoney;</title>
 
 <para>
   While you could go ahead, clicking some buttons and filling in some data,
   after a time, you could decide you have done it wrong and start again, even if
-  you did read the documentation on each part of &kappname;.
+  you did read the documentation on each part of &kmymoney;.
 </para>
 
 <para>
   You will get a more effective system if you spend a little time planning how
-  you are going to use &kappname;, so follow the steps given here.
+  you are going to use &kmymoney;, so follow the steps given here.
 </para>
 
 <sect1 id="makingmostof.basicaccounting">
@@ -103,7 +103,7 @@
 
 <para>
   Consider how you want to track and analyze your income and expenses. This will
-  help you decide how to set them up in &kappname;.
+  help you decide how to set them up in &kmymoney;.
 </para>
 
 <para>
@@ -119,20 +119,20 @@
 <para>
   There are similarities to setting up accounts for personal use, but there are
   additional considerations, including legal guidelines and requirements.
-  &kappname; does not explicitly address any of these issues, as it has been
+  &kmymoney; does not explicitly address any of these issues, as it has been
   designed as a <quote>personal</quote> finance manager.  In addition, these
   additional issues are not addressed in this handbook, but you must be aware of
-  them if you are going to attempt to use &kappname; for a business.
+  them if you are going to attempt to use &kmymoney; for a business.
 </para>
 </sect2>
 </sect1>
 
 <sect1 id="makingmostof.mapping">
-<title>Mapping your finances to &kappname;</title>
+<title>Mapping your finances to &kmymoney;</title>
 
 <para>
   So, collect up your papers and see the following sections for each item in
-  &kappname;.
+  &kmymoney;.
 </para>
 
 <sect2 id="makingmostof.mapping.accounts">
@@ -313,7 +313,7 @@
   Unless you keep your money under your mattress or under the floorboards, you
   probably make use of one or more institutions where you have accounts, which
   may be in credit or debit. In order to familiarize yourself with the way
-  &kappname; works, choose an account you want to track with &kappname; and
+  &kmymoney; works, choose an account you want to track with &kmymoney; and
   select <menuchoice><guimenu>File</guimenu>
   <guimenuitem>New</guimenuitem></menuchoice> in order
   to set up an account file.
@@ -321,14 +321,14 @@
 
 <para>
   If you have used another personal finance manager, you may be able to import
-  the data from it into &kappname;.
+  the data from it into &kmymoney;.
 </para>
 
 <para>
   If you have some regular receipts into or outgoings from this account, go to
   Payee and enter the names of both the payers and the payees involved; then go
   to Schedule and fill in a New Schedule for each recurring transaction. If you
-  haven't entered the payee or payer, &kappname; will offer you the opportunity
+  haven't entered the payee or payer, &kmymoney; will offer you the opportunity
   to do this in the middle of entering the schedule.
 </para>
 
@@ -342,18 +342,18 @@
   You will probably find that the default Categories do not exactly match your
   needs; you can easily delete ones you know you are never going to need and add
   others that you need. But when you are entering a transaction, you only have
-  to type a few letters of a category and &kappname; will offer you a drop down
+  to type a few letters of a category and &kmymoney; will offer you a drop down
   list of the matching categories from which to choose.
 </para>
 
 <para>
   You can add different accounts managed by different institutions; the
-  preferred one will show when you open &kappname; but you can quickly switch to
+  preferred one will show when you open &kmymoney; but you can quickly switch to
   any of the others.
 </para>
 
 <para>
-  When you make a payment, &kappname; will work out what the next check number
+  When you make a payment, &kmymoney; will work out what the next check number
   should be; delete this if you are not making a check payment or edit it if
   the first check you enter is not check number 1. Alternatively, it is
   possible to switch off auto-increment of check numbers.
@@ -361,7 +361,7 @@
 
 <para>
   Every so often you may get statements of your account from the institutions
-  you use; you can reconcile your &kappname; accounts against these statements
+  you use; you can reconcile your &kmymoney; accounts against these statements
   so that you have an accurate statement of the current state of your finances.
 </para>
 
@@ -373,9 +373,9 @@
 </para>
 
 <para>
-  Though &kappname; is not intended for use in a business context, if you are
+  Though &kmymoney; is not intended for use in a business context, if you are
   running a business on your own and so do not need payroll functions, you will
-  probably find that &kappname; is sufficiently customizable to meet your needs
+  probably find that &kmymoney; is sufficiently customizable to meet your needs
   particularly as it comes with budgeting and forecasting features and you can
   export your customized reports via CSV into other applications.
 </para>

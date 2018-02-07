@@ -49,6 +49,7 @@
 #include "statementinterface.h"
 #include "importinterface.h"
 #include "ui_importoption.h"
+#include "kmymoneyglobalsettings.h"
 
 //#define DEBUG_LIBOFX
 
@@ -106,6 +107,11 @@ OFXImporter::~OFXImporter()
   qDebug("Plugins: ofximporter unloaded");
 }
 
+void OFXImporter::injectExternalSettings(KMyMoneySettings* p)
+{
+  KMyMoneyGlobalSettings::injectExternalSettings(p);
+}
+
 void OFXImporter::createActions()
 {
   QAction *action = actionCollection()->addAction("file_import_ofx");
@@ -121,7 +127,7 @@ void OFXImporter::slotImportFile()
 
   QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
              "",
-             "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*|All files",
+             "*.ofx *.qfx *.ofc|OFX files (*.ofx *.qfx *.ofc);;*|All files (*)",
              QFileDialog::ExistingFile,
              widget);
 

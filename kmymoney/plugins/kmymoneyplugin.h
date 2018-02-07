@@ -39,6 +39,7 @@ class KToggleAction;
 #include "mymoneykeyvaluecontainer.h"
 
 class MyMoneyAccount;
+class KMyMoneySettings;
 namespace KMyMoneyPlugin { class ImportInterface; }
 namespace KMyMoneyPlugin { class StatementInterface; }
 namespace KMyMoneyPlugin { class ViewInterface; }
@@ -125,6 +126,8 @@ public Q_SLOTS:
    * @todo Implement
    */
   virtual void configurationChanged() ;
+
+  virtual void injectExternalSettings(KMyMoneySettings* p) = 0;
 
 protected:
   /** See KMyMoneyApp::toggleAction() for a description */
