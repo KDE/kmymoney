@@ -47,7 +47,6 @@ QTEST_GUILESS_MAIN(PivotTableTest)
 
 void PivotTableTest::setup()
 {
-  KMyMoneySettings::instance(QString());
 }
 
 void PivotTableTest::init()

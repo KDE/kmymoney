@@ -44,7 +44,6 @@ QTEST_GUILESS_MAIN(QueryTableTest)
 
 void QueryTableTest::setup()
 {
-  KMyMoneySettings::instance(QString());
 }
 
 void QueryTableTest::init()
