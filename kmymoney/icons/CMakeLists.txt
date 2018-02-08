@@ -3,21 +3,21 @@ include(ECMInstallIcons)
 file(GLOB_RECURSE KMYMONEY_HICOLOR_ICONS "hicolor/*")
 ecm_install_icons(
   ICONS ${KMYMONEY_HICOLOR_ICONS}
-  DESTINATION ${ICON_INSTALL_DIR} # or stay to ${DATA_INSTALL_DIR}/kmymoney/icons ?
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   THEME "hicolor"
 )
 
 file(GLOB_RECURSE KMYMONEY_OXYGEN_ICONS "oxygen/*")
 ecm_install_icons(
   ICONS ${KMYMONEY_OXYGEN_ICONS}
-  DESTINATION ${ICON_INSTALL_DIR}
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   THEME "oxygen"
 )
 
 file(GLOB_RECURSE KMYMONEY_TANGO_ICONS "Tango/*")
 ecm_install_icons(
   ICONS ${KMYMONEY_TANGO_ICONS}
-  DESTINATION ${ICON_INSTALL_DIR}
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   THEME "Tango"
 )
 
