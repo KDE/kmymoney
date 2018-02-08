@@ -3,23 +3,28 @@ if(BUILD_TESTING)
 endif()
 
 set(storage_HEADERS
-  imymoneystorage.h imymoneyserialize.h imymoneystorageformat.h
+  imymoneystorageformat.h
+  mymoneystoragemgr.h
   kmymoneystorageplugin.h
   databasestoreableobject.h
   )
 
 set(storage_a_SOURCES
-  imymoneystorageformat.cpp mymoneystoragexml.cpp mymoneystoragedump.cpp
-  mymoneyseqaccessmgr.cpp
+  imymoneystorageformat.cpp
+  mymoneystoragexml.cpp
+  mymoneystoragemgr.cpp
   mymoneystorageanon.cpp
   mymoneystoragesql.cpp
-  mymoneydatabasemgr.cpp
   mymoneydbdef.cpp
   mymoneydbdriver.cpp
   kmymoneystorageplugin.cpp
   mymoneystoragenames.cpp
   )
 
+if(KMM_DEBUG)
+  list(APPEND storage_a_SOURCES mymoneystoragedump.cpp)
+endif()
+  
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.
 add_library( kmm_storage STATIC ${storage_a_SOURCES} )

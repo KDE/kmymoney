@@ -50,7 +50,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "storage/mymoneyseqaccessmgr.h"
+#include "storage/mymoneystoragemgr.h"
 #include "kguiutils.h"
 #include "misc/platformtools.h"
 #include "mymoneydbdriver.h"
@@ -133,7 +133,7 @@ public:
   bool m_sqliteSelected;
   QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
   QString m_dbName;
-  MyMoneySeqAccessMgr* m_storage;
+  MyMoneyStorageMgr* m_storage;
   bool m_mustDetachStorage;
 };
 
@@ -315,7 +315,7 @@ void KGenerateSqlDlg::slotdriverSelected()
   d->ui->textSQL->setEnabled(true);
   // check if we have a storage; if not, create a skeleton one
   // we need a storage for MyMoneyDbDef to generate standard accounts
-  d->m_storage = new MyMoneySeqAccessMgr;
+  d->m_storage = new MyMoneyStorageMgr;
   d->m_mustDetachStorage = true;
   try {
     MyMoneyFile::instance()->attachStorage(d->m_storage);

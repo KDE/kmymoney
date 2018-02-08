@@ -33,18 +33,7 @@
 #include "mymoneystoragexml.h"
 #include "mymoneymoney.h"
 
-//class QDomElement;
-
-//class MyMoneyAccount;
-//class MyMoneyInstitution;
-//class MyMoneySecurity;
-//class MyMoneyBudget;
-//class MyMoneySchedule;
-//class MyMoneyPayee;
-//class MyMoneyTag;
-//class MyMoneyTransaction;
 class MyMoneyKeyValueContainer;
-//class onlineJob;
 
 /**
   * @author Kevin Tambascio (ktambascio@users.sourceforge.net)
@@ -96,7 +85,7 @@ protected:
 
   void writeReport(QDomElement& reports, const MyMoneyReport& r);
 
-  void readFile(QIODevice* s, IMyMoneySerialize* storage);
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage);
 
   void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security);
 

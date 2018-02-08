@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneydatabasemgrtest.h
+                          mymoneygenericstoragetest.h
                           -------------------
     copyright            : (C) 2008 by Fernando Vilas
     email                : fvilas@iname.com
@@ -17,39 +17,44 @@
 #ifndef MYMONEYDATABASEMGRTEST_H
 #define MYMONEYDATABASEMGRTEST_H
 
+#include <memory>
+
 #include <QObject>
 #include <QTemporaryFile>
 #include <QElapsedTimer>
 #include <QUrl>
 
-#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyDatabaseMgrTest;
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyStorageMgrTest;
 
 #include "../mymoneyobject.h"
-#include "mymoneydatabasemgr.h"
+#include "mymoneystoragemgr.h"
+#include "mymoneystoragesql.h"
 
-class MyMoneyDatabaseMgrTest : public QObject
+class MyMoneyStorageMgrTest : public QObject
 {
   Q_OBJECT
 
 protected:
-  MyMoneyDatabaseMgr *m;
+  MyMoneyStorageMgr *m;
   bool m_dbAttached;
   bool m_canOpen;
   bool m_haveEmptyDataBase;
   QUrl m_url;
   QTemporaryFile m_file;
   QTemporaryFile m_emptyFile;
+  std::unique_ptr<MyMoneyStorageSql> m_sql;
 
 private:
   QElapsedTimer testStepTimer;
   QElapsedTimer testCaseTimer;
 
 public:
-  MyMoneyDatabaseMgrTest();
+  MyMoneyStorageMgrTest();
+  ~MyMoneyStorageMgrTest();
 
 private:
   void setupUrl(const QString& fname);
-  void testEquality(const MyMoneyDatabaseMgr* t);
+  void testEquality(const MyMoneyStorageMgr* t);
   void copyDatabaseFile(QFile& src, QFile& dest);
 
 private Q_SLOTS:

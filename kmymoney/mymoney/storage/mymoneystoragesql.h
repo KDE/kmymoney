@@ -36,7 +36,6 @@ class QUrl;
 class QDate;
 class QIODevice;
 
-class IMyMoneyStorage;
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySecurity;
@@ -55,7 +54,7 @@ class payeeIdentifier;
 class onlineJob;
 class databaseStoreableObject;
 class MyMoneyStorageSql;
-class IMyMoneySerialize;
+class MyMoneyStorageMgr;
 
 template <class T1, class T2> struct QPair;
 template <class Key, class Value> class QMap;
@@ -74,14 +73,14 @@ namespace eMyMoney { namespace TransactionFilter { enum class State; } }
   */
 
 class MyMoneyStorageSqlPrivate;
-class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public QSharedData
+class MyMoneyStorageSql : public IMyMoneyOperationsFormat, public QSqlDatabase, public QSharedData
 {
   Q_DISABLE_COPY(MyMoneyStorageSql)
   friend class MyMoneyDbDef;
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl&);
+  explicit MyMoneyStorageSql(MyMoneyStorageMgr *storage, const QUrl&);
   ~MyMoneyStorageSql() override;
 
   uint currentVersion() const;
@@ -127,7 +126,7 @@ public:
    * @return : error message to be displayed
    *
    */
-  QString lastError() const;  
+  QString lastError() const;
 
   /**
    * This method is used when a database file is open, and the data is to
@@ -257,8 +256,8 @@ public:
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
-  void readFile(QIODevice* s, IMyMoneySerialize* storage) override;
-  void writeFile(QIODevice* s, IMyMoneySerialize* storage) override;
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
 
   void startCommitUnit(const QString& callingFunction);
   bool endCommitUnit(const QString& callingFunction);

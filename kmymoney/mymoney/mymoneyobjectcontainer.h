@@ -36,7 +36,7 @@
 /**
   * This class represents a generic container for all MyMoneyObject derived objects.
   */
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
 class MyMoneyObject;
 class MyMoneyInstitution;
 class MyMoneyAccount;
@@ -85,7 +85,7 @@ public:
   void preloadOnlineJob(const onlineJob& job);
 
   void clear(const QString& id);
-  void clear(IMyMoneyStorage* storage = 0);
+  void clear(MyMoneyStorageMgr* storage = 0);
 
   MyMoneyAccount accountByName(const QString& name) const;
 

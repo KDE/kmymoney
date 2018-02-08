@@ -23,7 +23,7 @@ class BankingProfile;
 class PricesProfile;
 class InvestmentProfile;
 class MyMoneyFile;
-class MyMoneySeqAccessMgr;
+class MyMoneyStorageMgr;
 
 class CSVImporterCoreTest : public QObject
 {
@@ -35,7 +35,7 @@ class CSVImporterCoreTest : public QObject
   PricesProfile       *pricesProfile;
   InvestmentProfile   *investmentProfile;
   MyMoneyFile         *file;
-  MyMoneySeqAccessMgr *storage;
+  MyMoneyStorageMgr *storage;
 private Q_SLOTS:
   void initTestCase();
   void init();

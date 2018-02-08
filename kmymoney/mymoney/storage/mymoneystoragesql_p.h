@@ -56,8 +56,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneystorage.h"
-#include "imymoneyserialize.h"
+#include "mymoneystoragemgr.h"
 #include "kmymoneystorageplugin.h"
 #include "onlinejobadministration.h"
 #include "payeeidentifier/payeeidentifierloader.h"
@@ -441,7 +440,7 @@ public:
     QList<MyMoneyAccount> insertList;
     // Update the accounts that exist; insert the ones that do not.
     foreach (const MyMoneyAccount& it, list) {
-      m_transactionCountMap[it.id()] = m_storagePtr->transactionCount(it.id());
+      m_transactionCountMap[it.id()] = m_storage->transactionCount(it.id());
       if (dbList.contains(it.id())) {
         dbList.removeAll(it.id());
         updateList << it;
@@ -461,7 +460,7 @@ public:
 
       query.prepare("DELETE FROM kmmAccounts WHERE id = :id");
       foreach (const QString& it, dbList) {
-        if (!m_storagePtr->isStandardAccount(it)) {
+        if (!m_storage->isStandardAccount(it)) {
           kvpList << it;
         }
       }
@@ -1028,7 +1027,7 @@ public:
       //FIXME: Using exceptions for branching always feels like a kludge.
       //       Look for a better way.
       try {
-        MyMoneyMoney bal = m_storagePtr->balance(a.id(), QDate());
+        MyMoneyMoney bal = m_storage->balance(a.id(), QDate());
         balanceList << bal.toString();
         balanceFormattedList << bal.formatMoney("", -1, false);
       } catch (const MyMoneyException &) {
@@ -1224,8 +1223,8 @@ public:
       valueList << s.value().toString();
       valueFormattedList << s.value().formatMoney("", -1, false).replace(QChar(','), QChar('.'));
       sharesList << s.shares().toString();
-      MyMoneyAccount acc = m_storagePtr->account(s.accountId());
-      MyMoneySecurity sec = m_storagePtr->security(acc.currencyId());
+      MyMoneyAccount acc = m_storage->account(s.accountId());
+      MyMoneySecurity sec = m_storage->security(acc.currencyId());
       sharesFormattedList << s.price().
       formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
       replace(QChar(','), QChar('.'));
@@ -1580,7 +1579,6 @@ public:
       QMap<QString, MyMoneyInstitution> iList = q->fetchInstitutions();
       m_storage->loadInstitutions(iList);
       readFileInfo();
-      m_storage->loadInstitutionId(m_hiIdInstitutions);
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1590,7 +1588,6 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     m_storage->loadAccounts(q->fetchAccounts());
-    m_storage->loadAccountId(m_hiIdAccounts);
   }
 
   void readTransactions(const QString& tidList, const QString& dateClause)
@@ -1598,7 +1595,6 @@ public:
     Q_Q(MyMoneyStorageSql);
     try {
       m_storage->loadTransactions(q->fetchTransactions(tidList, dateClause));
-      m_storage->loadTransactionId(q->getNextTransactionId());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1725,7 +1721,6 @@ public:
     Q_Q(MyMoneyStorageSql);
     try {
       m_storage->loadSchedules(q->fetchSchedules());
-      m_storage->loadScheduleId(q->getNextScheduleId());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1737,7 +1732,6 @@ public:
     Q_Q(MyMoneyStorageSql);
     try {
       m_storage->loadSecurities(q->fetchSecurities());
-      m_storage->loadSecurityId(q->getNextSecurityId());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1768,7 +1762,6 @@ public:
     Q_Q(MyMoneyStorageSql);
     try {
       m_storage->loadReports(q->fetchReports());
-      m_storage->loadReportId(q->getNextReportId());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -2357,7 +2350,6 @@ public:
       writeReport(*it_r, query);
     }
 
-    m_storage->loadReportId(m_hiIdReports);
     q->endCommitUnit(Q_FUNC_INFO);
     return 0;
   }
@@ -2721,8 +2713,7 @@ public:
 
   MyMoneyDbDef m_db;
   uint m_dbVersion;
-  IMyMoneySerialize *m_storage;
-  IMyMoneyStorage *m_storagePtr;
+  MyMoneyStorageMgr *m_storage;
   // input options
   bool m_loadAll; // preload all data
   bool m_override; // override open if already in use

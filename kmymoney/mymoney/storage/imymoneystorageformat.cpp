@@ -22,10 +22,10 @@
 
 #include "imymoneystorageformat.h"
 
-IMyMoneyStorageFormat::IMyMoneyStorageFormat()
+IMyMoneyOperationsFormat::IMyMoneyOperationsFormat()
 {
 }
 
-IMyMoneyStorageFormat::~IMyMoneyStorageFormat()
+IMyMoneyOperationsFormat::~IMyMoneyOperationsFormat()
 {
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneyseqaccessmgrtest.cpp
+                          mymoneystoragemgrtest.cpp
                           -------------------
     copyright            : (C) 2002 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
@@ -14,12 +14,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneyseqaccessmgr-test.h"
+#include "mymoneystoragemgr-test.h"
 #include <iostream>
 #include <QList>
 #include <QtTest>
 
-#include "mymoneyseqaccessmgr_p.h"
+#include "mymoneystoragemgr_p.h"
 
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
@@ -47,17 +47,17 @@
 using namespace eMyMoney;
 using namespace MyMoneyStandardAccounts;
 
-QTEST_GUILESS_MAIN(MyMoneySeqAccessMgrTest)
+QTEST_GUILESS_MAIN(MyMoneyStorageMgrTest)
 
-void MyMoneySeqAccessMgrTest::init()
+void MyMoneyStorageMgrTest::init()
 {
-  m = new MyMoneySeqAccessMgr;
+  m = new MyMoneyStorageMgr;
   MyMoneyFile* file = MyMoneyFile::instance();
   file->attachStorage(m);
   m->startTransaction();
 }
 
-void MyMoneySeqAccessMgrTest::cleanup()
+void MyMoneyStorageMgrTest::cleanup()
 {
   m->commitTransaction();
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -65,7 +65,7 @@ void MyMoneySeqAccessMgrTest::cleanup()
   delete m;
 }
 
-void MyMoneySeqAccessMgrTest::testEmptyConstructor()
+void MyMoneyStorageMgrTest::testEmptyConstructor()
 {
   MyMoneyPayee user = m->user();
 
@@ -76,12 +76,12 @@ void MyMoneySeqAccessMgrTest::testEmptyConstructor()
   QVERIFY(user.postcode().isEmpty());
   QVERIFY(user.telephone().isEmpty());
   QVERIFY(user.email().isEmpty());
-  QCOMPARE(m->institutionId(), 0ul);
-  QCOMPARE(m->accountId(), 0ul);
-  QCOMPARE(m->transactionId(), 0ul);
-  QCOMPARE(m->payeeId(), 0ul);
-  QCOMPARE(m->scheduleId(), 0ul);
-  QCOMPARE(m->reportId(), 0ul);
+  QCOMPARE(m->d_func()->m_nextInstitutionID, 0ul);
+  QCOMPARE(m->d_func()->m_nextAccountID, 0ul);
+  QCOMPARE(m->d_func()->m_nextTransactionID, 0ul);
+  QCOMPARE(m->d_func()->m_nextPayeeID, 0ul);
+  QCOMPARE(m->d_func()->m_nextScheduleID, 0ul);
+  QCOMPARE(m->d_func()->m_nextReportID, 0ul);
   QCOMPARE(m->d_func()->m_institutionList.count(), 0);
   QCOMPARE(m->d_func()->m_accountList.count(), 5);
   QCOMPARE(m->d_func()->m_transactionList.count(), 0);
@@ -100,7 +100,7 @@ void MyMoneySeqAccessMgrTest::testEmptyConstructor()
   QCOMPARE(m->equity().name(), QLatin1String("Equity"));
 }
 
-void MyMoneySeqAccessMgrTest::testSetFunctions()
+void MyMoneyStorageMgrTest::testSetFunctions()
 {
   MyMoneyPayee user = m->user();
 
@@ -169,27 +169,27 @@ void MyMoneySeqAccessMgrTest::testSetFunctions()
   QCOMPARE(m->dirty(), true);
 }
 
-void MyMoneySeqAccessMgrTest::testSupportFunctions()
+void MyMoneyStorageMgrTest::testSupportFunctions()
 {
-  QCOMPARE(m->nextInstitutionID(), QLatin1String("I000001"));
-  QCOMPARE(m->institutionId(), 1ul);
-  QCOMPARE(m->nextAccountID(), QLatin1String("A000001"));
-  QCOMPARE(m->accountId(), 1ul);
-  QCOMPARE(m->nextTransactionID(), QLatin1String("T000000000000000001"));
-  QCOMPARE(m->transactionId(), 1ul);
-  QCOMPARE(m->nextPayeeID(), QLatin1String("P000001"));
-  QCOMPARE(m->payeeId(), 1ul);
-  QCOMPARE(m->nextTagID(), QLatin1String("G000001"));
-  QCOMPARE(m->tagId(), 1ul);
-  QCOMPARE(m->nextScheduleID(), QLatin1String("SCH000001"));
-  QCOMPARE(m->scheduleId(), 1ul);
-  QCOMPARE(m->nextReportID(), QLatin1String("R000001"));
-  QCOMPARE(m->reportId(), 1ul);
-  QCOMPARE(m->nextOnlineJobID(), QLatin1String("O000001"));
-  QCOMPARE(m->onlineJobId(), 1ul);
+  QCOMPARE(m->d_func()->nextInstitutionID(), QLatin1String("I000001"));
+  QCOMPARE(m->d_func()->m_nextInstitutionID, 1ul);
+  QCOMPARE(m->d_func()->nextAccountID(), QLatin1String("A000001"));
+  QCOMPARE(m->d_func()->m_nextAccountID, 1ul);
+  QCOMPARE(m->d_func()->nextTransactionID(), QLatin1String("T000000000000000001"));
+  QCOMPARE(m->d_func()->m_nextTransactionID, 1ul);
+  QCOMPARE(m->d_func()->nextPayeeID(), QLatin1String("P000001"));
+  QCOMPARE(m->d_func()->m_nextPayeeID, 1ul);
+  QCOMPARE(m->d_func()->nextTagID(), QLatin1String("G000001"));
+  QCOMPARE(m->d_func()->m_nextTagID, 1ul);
+  QCOMPARE(m->d_func()->nextScheduleID(), QLatin1String("SCH000001"));
+  QCOMPARE(m->d_func()->m_nextScheduleID, 1ul);
+  QCOMPARE(m->d_func()->nextReportID(), QLatin1String("R000001"));
+  QCOMPARE(m->d_func()->m_nextReportID, 1ul);
+  QCOMPARE(m->d_func()->nextOnlineJobID(), QLatin1String("O000001"));
+  QCOMPARE(m->d_func()->m_nextOnlineJobID, 1ul);
 }
 
-void MyMoneySeqAccessMgrTest::testIsStandardAccount()
+void MyMoneyStorageMgrTest::testIsStandardAccount()
 {
   QCOMPARE(m->isStandardAccount(stdAccNames[stdAccLiability]), true);
   QCOMPARE(m->isStandardAccount(stdAccNames[stdAccAsset]), true);
@@ -198,7 +198,7 @@ void MyMoneySeqAccessMgrTest::testIsStandardAccount()
   QCOMPARE(m->isStandardAccount("A0002"), false);
 }
 
-void MyMoneySeqAccessMgrTest::testNewAccount()
+void MyMoneyStorageMgrTest::testNewAccount()
 {
   MyMoneyAccount a;
 
@@ -209,13 +209,13 @@ void MyMoneySeqAccessMgrTest::testNewAccount()
   m->commitTransaction();
   m->startTransaction();
 
-  QCOMPARE(m->accountId(), 1ul);
+  QCOMPARE(m->d_func()->m_nextAccountID, 1ul);
   QCOMPARE(m->dirty(), true);
   QCOMPARE(m->d_func()->m_accountList.count(), 6);
   QCOMPARE(m->d_func()->m_accountList["A000001"].name(), QLatin1String("AccountName"));
 }
 
-void MyMoneySeqAccessMgrTest::testAccount()
+void MyMoneyStorageMgrTest::testAccount()
 {
   testNewAccount();
   m->d_func()->m_dirty = false;
@@ -245,7 +245,7 @@ void MyMoneySeqAccessMgrTest::testAccount()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testAddNewAccount()
+void MyMoneyStorageMgrTest::testAddNewAccount()
 {
   testNewAccount();
 
@@ -258,7 +258,7 @@ void MyMoneySeqAccessMgrTest::testAddNewAccount()
 
   m->d_func()->m_dirty = false;
 
-  QCOMPARE(m->accountId(), 2ul);
+  QCOMPARE(m->d_func()->m_nextAccountID, 2ul);
   QCOMPARE(m->d_func()->m_accountList.count(), 7);
 
   // try to add account to undefined account
@@ -288,7 +288,7 @@ void MyMoneySeqAccessMgrTest::testAddNewAccount()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testAddInstitution()
+void MyMoneyStorageMgrTest::testAddInstitution()
 {
   MyMoneyInstitution i;
 
@@ -296,11 +296,11 @@ void MyMoneySeqAccessMgrTest::testAddInstitution()
 
   m->addInstitution(i);
   QCOMPARE(m->d_func()->m_institutionList.count(), 1);
-  QCOMPARE(m->institutionId(), 1ul);
+  QCOMPARE(m->d_func()->m_nextInstitutionID, 1ul);
   QCOMPARE(m->d_func()->m_institutionList["I000001"].name(), QLatin1String("Inst Name"));
 }
 
-void MyMoneySeqAccessMgrTest::testInstitution()
+void MyMoneyStorageMgrTest::testInstitution()
 {
   testAddInstitution();
   MyMoneyInstitution i;
@@ -326,7 +326,7 @@ void MyMoneySeqAccessMgrTest::testInstitution()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testAccount2Institution()
+void MyMoneyStorageMgrTest::testAccount2Institution()
 {
   testAddInstitution();
   testAddNewAccount();
@@ -372,7 +372,7 @@ void MyMoneySeqAccessMgrTest::testAccount2Institution()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testModifyAccount()
+void MyMoneyStorageMgrTest::testModifyAccount()
 {
   testAccount2Institution();
 
@@ -420,7 +420,7 @@ void MyMoneySeqAccessMgrTest::testModifyAccount()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testModifyInstitution()
+void MyMoneyStorageMgrTest::testModifyInstitution()
 {
   testAddInstitution();
   MyMoneyInstitution i = m->institution("I000001");
@@ -448,7 +448,7 @@ void MyMoneySeqAccessMgrTest::testModifyInstitution()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testReparentAccount()
+void MyMoneyStorageMgrTest::testReparentAccount()
 {
   // this one adds some accounts to the database
   MyMoneyAccount ex1;
@@ -514,7 +514,7 @@ void MyMoneySeqAccessMgrTest::testReparentAccount()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testAddTransactions()
+void MyMoneyStorageMgrTest::testAddTransactions()
 {
   testReparentAccount();
 
@@ -635,7 +635,7 @@ void MyMoneySeqAccessMgrTest::testAddTransactions()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testTransactionCount()
+void MyMoneyStorageMgrTest::testTransactionCount()
 {
   testAddTransactions();
   QCOMPARE(m->transactionCount("A000001"), 0u);
@@ -646,7 +646,7 @@ void MyMoneySeqAccessMgrTest::testTransactionCount()
   QCOMPARE(m->transactionCount("A000006"), 2u);
 }
 
-void MyMoneySeqAccessMgrTest::testBalance()
+void MyMoneyStorageMgrTest::testBalance()
 {
   testAddTransactions();
 
@@ -659,7 +659,7 @@ void MyMoneySeqAccessMgrTest::testBalance()
   QCOMPARE(m->balance("A000006", QDate(2002, 5, 10)),  MyMoneyMoney(88400, 100));
 }
 
-void MyMoneySeqAccessMgrTest::testModifyTransaction()
+void MyMoneyStorageMgrTest::testModifyTransaction()
 {
   testAddTransactions();
 
@@ -737,7 +737,7 @@ void MyMoneySeqAccessMgrTest::testModifyTransaction()
 }
 
 
-void MyMoneySeqAccessMgrTest::testRemoveUnusedAccount()
+void MyMoneyStorageMgrTest::testRemoveUnusedAccount()
 {
   testAccount2Institution();
 
@@ -797,7 +797,7 @@ void MyMoneySeqAccessMgrTest::testRemoveUnusedAccount()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveUsedAccount()
+void MyMoneyStorageMgrTest::testRemoveUsedAccount()
 {
   testAddTransactions();
 
@@ -810,7 +810,7 @@ void MyMoneySeqAccessMgrTest::testRemoveUsedAccount()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveInstitution()
+void MyMoneyStorageMgrTest::testRemoveInstitution()
 {
   testModifyInstitution();
   testReparentAccount();
@@ -846,7 +846,7 @@ void MyMoneySeqAccessMgrTest::testRemoveInstitution()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveTransaction()
+void MyMoneyStorageMgrTest::testRemoveTransaction()
 {
   testAddTransactions();
 
@@ -867,7 +867,7 @@ void MyMoneySeqAccessMgrTest::testRemoveTransaction()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testTransactionList()
+void MyMoneyStorageMgrTest::testTransactionList()
 {
   testAddTransactions();
 
@@ -891,26 +891,26 @@ void MyMoneySeqAccessMgrTest::testTransactionList()
   QCOMPARE(list.at(1).id(), QLatin1String("T000000000000000001"));
 }
 
-void MyMoneySeqAccessMgrTest::testAddPayee()
+void MyMoneyStorageMgrTest::testAddPayee()
 {
   MyMoneyPayee p;
 
   p.setName("THB");
   m->d_func()->m_dirty = false;
   try {
-    QCOMPARE(m->payeeId(), 0ul);
+    QCOMPARE(m->d_func()->m_nextPayeeID, 0ul);
     m->addPayee(p);
     m->commitTransaction();
     m->startTransaction();
     QCOMPARE(m->dirty(), true);
-    QCOMPARE(m->payeeId(), 1ul);
+    QCOMPARE(m->d_func()->m_nextPayeeID, 1ul);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 
 }
 
-void MyMoneySeqAccessMgrTest::testSetAccountName()
+void MyMoneyStorageMgrTest::testSetAccountName()
 {
   try {
     m->setAccountName(stdAccNames[stdAccLiability], "Verbindlichkeiten");
@@ -945,7 +945,7 @@ void MyMoneySeqAccessMgrTest::testSetAccountName()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testModifyPayee()
+void MyMoneyStorageMgrTest::testModifyPayee()
 {
   MyMoneyPayee p;
 
@@ -966,7 +966,7 @@ void MyMoneySeqAccessMgrTest::testModifyPayee()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testRemovePayee()
+void MyMoneyStorageMgrTest::testRemovePayee()
 {
   testAddPayee();
   m->d_func()->m_dirty = false;
@@ -1023,25 +1023,25 @@ void MyMoneySeqAccessMgrTest::testRemovePayee()
   QCOMPARE(m->d_func()->m_payeeList.count(), 1);
 }
 
-void MyMoneySeqAccessMgrTest::testAddTag()
+void MyMoneyStorageMgrTest::testAddTag()
 {
   MyMoneyTag ta;
 
   ta.setName("THB");
   m->d_func()->m_dirty = false;
   try {
-    QCOMPARE(m->tagId(), 0ul);
+    QCOMPARE(m->d_func()->m_nextTagID, 0ul);
     m->addTag(ta);
     m->commitTransaction();
     m->startTransaction();
     QCOMPARE(m->dirty(), true);
-    QCOMPARE(m->tagId(), 1ul);
+    QCOMPARE(m->d_func()->m_nextTagID, 1ul);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }
 
-void MyMoneySeqAccessMgrTest::testModifyTag()
+void MyMoneyStorageMgrTest::testModifyTag()
 {
   MyMoneyTag ta;
 
@@ -1062,7 +1062,7 @@ void MyMoneySeqAccessMgrTest::testModifyTag()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveTag()
+void MyMoneyStorageMgrTest::testRemoveTag()
 {
   testAddTag();
   m->d_func()->m_dirty = false;
@@ -1121,7 +1121,7 @@ void MyMoneySeqAccessMgrTest::testRemoveTag()
   QCOMPARE(m->d_func()->m_tagList.count(), 1);
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveAccountFromTree()
+void MyMoneyStorageMgrTest::testRemoveAccountFromTree()
 {
   MyMoneyAccount a, b, c;
   a.setName("Acc A");
@@ -1167,7 +1167,7 @@ void MyMoneySeqAccessMgrTest::testRemoveAccountFromTree()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testPayeeName()
+void MyMoneyStorageMgrTest::testPayeeName()
 {
   testAddPayee();
 
@@ -1192,7 +1192,7 @@ void MyMoneySeqAccessMgrTest::testPayeeName()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testTagName()
+void MyMoneyStorageMgrTest::testTagName()
 {
   testAddTag();
 
@@ -1218,7 +1218,7 @@ void MyMoneySeqAccessMgrTest::testTagName()
 }
 
 // disabled because of no real world use case
-//void MyMoneySeqAccessMgrTest::testAssignment()
+//void MyMoneyStorageMgrTest::testAssignment()
 //{
 //  testAddTransactions();
 
@@ -1226,11 +1226,11 @@ void MyMoneySeqAccessMgrTest::testTagName()
 //  user.setName("Thomas");
 //  m->setUser(user);
 
-//  MyMoneySeqAccessMgr test = *m;
+//  MyMoneyStorageMgr test = *m;
 //  testEquality(&test);
 //}
 
-void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
+void MyMoneyStorageMgrTest::testEquality(const MyMoneyStorageMgr *t)
 {
   QCOMPARE(m->user().name(), t->user().name());
   QCOMPARE(m->user().address(), t->user().address());
@@ -1239,12 +1239,12 @@ void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
   QCOMPARE(m->user().postcode(), t->user().postcode());
   QCOMPARE(m->user().telephone(), t->user().telephone());
   QCOMPARE(m->user().email(), t->user().email());
-  QCOMPARE(m->institutionId(), t->institutionId());
-  QCOMPARE(m->accountId(), t->accountId());
-  QCOMPARE(m->transactionId(), t->transactionId());
-  QCOMPARE(m->payeeId(), t->payeeId());
-  QCOMPARE(m->tagId(), t->tagId());
-  QCOMPARE(m->scheduleId(), t->scheduleId());
+  QCOMPARE(m->d_func()->m_nextInstitutionID, t->d_func()->m_nextInstitutionID);
+  QCOMPARE(m->d_func()->m_nextAccountID, t->d_func()->m_nextAccountID);
+  QCOMPARE(m->d_func()->m_nextTransactionID, t->d_func()->m_nextTransactionID);
+  QCOMPARE(m->d_func()->m_nextPayeeID, t->d_func()->m_nextPayeeID);
+  QCOMPARE(m->d_func()->m_nextTagID, t->d_func()->m_nextTagID);
+  QCOMPARE(m->d_func()->m_nextScheduleID, t->d_func()->m_nextScheduleID);
   QCOMPARE(m->dirty(), t->dirty());
   QCOMPARE(m->creationDate(), t->creationDate());
   QCOMPARE(m->lastModificationDate(), t->lastModificationDate());
@@ -1271,9 +1271,9 @@ void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
 }
 
 // disabled because of no real world use case
-//void MyMoneySeqAccessMgrTest::testDuplicate()
+//void MyMoneyStorageMgrTest::testDuplicate()
 //{
-//  const MyMoneySeqAccessMgr* t;
+//  const MyMoneyStorageMgr* t;
 
 //  testModifyTransaction();
 
@@ -1282,7 +1282,7 @@ void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
 //  delete t;
 //}
 
-void MyMoneySeqAccessMgrTest::testAddSchedule()
+void MyMoneyStorageMgrTest::testAddSchedule()
 {
   /* Note addSchedule() now calls validate as it should
    * so we need an account id.  Later this will
@@ -1300,6 +1300,11 @@ void MyMoneySeqAccessMgrTest::testAddSchedule()
     t1.addSplit(s1);
     s2.setAccountId("A000002");
     t1.addSplit(s2);
+    MyMoneyAccount a1("A000001", MyMoneyAccount());
+    MyMoneyAccount a2("A000002", MyMoneyAccount());
+    m->addAccount(a1);
+    m->addAccount(a2);
+
     MyMoneySchedule schedule("Sched-Name",
                              Schedule::Type::Deposit,
                              Schedule::Occurrence::Daily, 1,
@@ -1310,7 +1315,6 @@ void MyMoneySeqAccessMgrTest::testAddSchedule()
                              false);
     t1.setPostDate(QDate(2003, 7, 10));
     schedule.setTransaction(t1);
-
     m->addSchedule(schedule);
 
     QCOMPARE(m->d_func()->m_scheduleList.count(), 1);
@@ -1335,7 +1339,7 @@ void MyMoneySeqAccessMgrTest::testAddSchedule()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testSchedule()
+void MyMoneyStorageMgrTest::testSchedule()
 {
   testAddSchedule();
   MyMoneySchedule sched;
@@ -1351,7 +1355,7 @@ void MyMoneySeqAccessMgrTest::testSchedule()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testModifySchedule()
+void MyMoneyStorageMgrTest::testModifySchedule()
 {
   testAddSchedule();
   MyMoneySchedule sched;
@@ -1377,7 +1381,7 @@ void MyMoneySeqAccessMgrTest::testModifySchedule()
 
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveSchedule()
+void MyMoneyStorageMgrTest::testRemoveSchedule()
 {
   testAddSchedule();
   m->commitTransaction();
@@ -1408,7 +1412,7 @@ void MyMoneySeqAccessMgrTest::testRemoveSchedule()
   m->startTransaction();
 }
 
-void MyMoneySeqAccessMgrTest::testScheduleList()
+void MyMoneyStorageMgrTest::testScheduleList()
 {
   QDate testDate = QDate::currentDate();
   QDate notOverdue = testDate.addDays(2);
@@ -1421,6 +1425,10 @@ void MyMoneySeqAccessMgrTest::testScheduleList()
   t1.addSplit(s1);
   s2.setAccountId("A000002");
   t1.addSplit(s2);
+  MyMoneyAccount a1("A000001", MyMoneyAccount());
+  MyMoneyAccount a2("A000002", MyMoneyAccount());
+  m->addAccount(a1);
+  m->addAccount(a2);
   MyMoneySchedule schedule1("Schedule 1",
                             Schedule::Type::Bill,
                             Schedule::Occurrence::Once, 1,
@@ -1439,6 +1447,8 @@ void MyMoneySeqAccessMgrTest::testScheduleList()
   t2.addSplit(s3);
   s4.setAccountId("A000003");
   t2.addSplit(s4);
+  MyMoneyAccount a3("A000003", MyMoneyAccount());
+  m->addAccount(a3);
   MyMoneySchedule schedule2("Schedule 2",
                             Schedule::Type::Deposit,
                             Schedule::Occurrence::Daily, 1,
@@ -1457,6 +1467,12 @@ void MyMoneySeqAccessMgrTest::testScheduleList()
   t3.addSplit(s5);
   s6.setAccountId("A000006");
   t3.addSplit(s6);
+  MyMoneyAccount a5("A000005", MyMoneyAccount());
+  MyMoneyAccount a6("A000006", MyMoneyAccount());
+  MyMoneyAccount a7("A000007", MyMoneyAccount());
+  m->addAccount(a5);
+  m->addAccount(a6);
+  m->addAccount(a7);
   MyMoneySchedule schedule3("Schedule 3",
                             Schedule::Type::Transfer,
                             Schedule::Occurrence::Weekly, 1,
@@ -1581,7 +1597,7 @@ void MyMoneySeqAccessMgrTest::testScheduleList()
   QCOMPARE(list[0].name(), QLatin1String("Schedule 4"));
 }
 
-void MyMoneySeqAccessMgrTest::testAddCurrency()
+void MyMoneyStorageMgrTest::testAddCurrency()
 {
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   QCOMPARE(m->d_func()->m_currencyList.count(), 0);
@@ -1608,7 +1624,7 @@ void MyMoneySeqAccessMgrTest::testAddCurrency()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testModifyCurrency()
+void MyMoneyStorageMgrTest::testModifyCurrency()
 {
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   testAddCurrency();
@@ -1638,7 +1654,7 @@ void MyMoneySeqAccessMgrTest::testModifyCurrency()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testRemoveCurrency()
+void MyMoneyStorageMgrTest::testRemoveCurrency()
 {
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   testAddCurrency();
@@ -1666,7 +1682,7 @@ void MyMoneySeqAccessMgrTest::testRemoveCurrency()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testCurrency()
+void MyMoneyStorageMgrTest::testCurrency()
 {
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   MyMoneySecurity newCurr;
@@ -1693,7 +1709,7 @@ void MyMoneySeqAccessMgrTest::testCurrency()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testCurrencyList()
+void MyMoneyStorageMgrTest::testCurrencyList()
 {
   QCOMPARE(m->currencyList().count(), 0);
 
@@ -1712,7 +1728,7 @@ void MyMoneySeqAccessMgrTest::testCurrencyList()
   }
 }
 
-void MyMoneySeqAccessMgrTest::testAccountList()
+void MyMoneyStorageMgrTest::testAccountList()
 {
   QList<MyMoneyAccount> accounts;
   m->accountList(accounts);
@@ -1730,7 +1746,7 @@ void MyMoneySeqAccessMgrTest::testAccountList()
   QCOMPARE(accounts.count(), 2);
 }
 
-void MyMoneySeqAccessMgrTest::testLoaderFunctions()
+void MyMoneyStorageMgrTest::testLoaderFunctions()
 {
   // we don't need the transaction started by setup() here
   m->rollbackTransaction();
@@ -1742,7 +1758,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadAccounts(amap);
   QCOMPARE(m->d_func()->m_accountList.values(), amap.values());
   QCOMPARE(m->d_func()->m_accountList.keys(), amap.keys());
-  QCOMPARE(m->accountId(), 176ul);
+  QCOMPARE(m->d_func()->m_nextAccountID, 176ul);
 
   // transaction loader
   QMap<QString, MyMoneyTransaction> tmap;
@@ -1751,7 +1767,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadTransactions(tmap);
   QCOMPARE(m->d_func()->m_transactionList.values(), tmap.values());
   QCOMPARE(m->d_func()->m_transactionList.keys(), tmap.keys());
-  QCOMPARE(m->transactionId(), 108ul);
+  QCOMPARE(m->d_func()->m_nextTransactionID, 108ul);
 
   // institution loader
   QMap<QString, MyMoneyInstitution> imap;
@@ -1760,7 +1776,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadInstitutions(imap);
   QCOMPARE(m->d_func()->m_institutionList.values(), imap.values());
   QCOMPARE(m->d_func()->m_institutionList.keys(), imap.keys());
-  QCOMPARE(m->institutionId(), 28ul);
+  QCOMPARE(m->d_func()->m_nextInstitutionID, 28ul);
 
   // payee loader
   QMap<QString, MyMoneyPayee> pmap;
@@ -1769,7 +1785,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadPayees(pmap);
   QCOMPARE(m->d_func()->m_payeeList.values(), pmap.values());
   QCOMPARE(m->d_func()->m_payeeList.keys(), pmap.keys());
-  QCOMPARE(m->payeeId(), 1234ul);
+  QCOMPARE(m->d_func()->m_nextPayeeID, 1234ul);
 
   // tag loader
   QMap<QString, MyMoneyTag> tamap;
@@ -1778,7 +1794,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadTags(tamap);
   QCOMPARE(m->d_func()->m_tagList.values(), tamap.values());
   QCOMPARE(m->d_func()->m_tagList.keys(), tamap.keys());
-  QCOMPARE(m->tagId(), 1234ul);
+  QCOMPARE(m->d_func()->m_nextTagID, 1234ul);
 
   // security loader
   QMap<QString, MyMoneySecurity> smap;
@@ -1787,7 +1803,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadSecurities(smap);
   QCOMPARE(m->d_func()->m_securitiesList.values(), smap.values());
   QCOMPARE(m->d_func()->m_securitiesList.keys(), smap.keys());
-  QCOMPARE(m->securityId(), 54321ul);
+  QCOMPARE(m->d_func()->m_nextSecurityID, 54321ul);
 
   // schedule loader
   QMap<QString, MyMoneySchedule> schmap;
@@ -1796,7 +1812,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadSchedules(schmap);
   QCOMPARE(m->d_func()->m_scheduleList.values(), schmap.values());
   QCOMPARE(m->d_func()->m_scheduleList.keys(), schmap.keys());
-  QCOMPARE(m->scheduleId(), 6789ul);
+  QCOMPARE(m->d_func()->m_nextScheduleID, 6789ul);
 
   // report loader
   QMap<QString, MyMoneyReport> rmap;
@@ -1805,7 +1821,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadReports(rmap);
   QCOMPARE(m->d_func()->m_reportList.values(), rmap.values());
   QCOMPARE(m->d_func()->m_reportList.keys(), rmap.keys());
-  QCOMPARE(m->reportId(), 1298ul);
+  QCOMPARE(m->d_func()->m_nextReportID, 1298ul);
 
   // budget loader
   QMap<QString, MyMoneyBudget> bmap;
@@ -1814,13 +1830,13 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->loadBudgets(bmap);
   QCOMPARE(m->d_func()->m_budgetList.values(), bmap.values());
   QCOMPARE(m->d_func()->m_budgetList.keys(), bmap.keys());
-  QCOMPARE(m->budgetId(), 89765ul);
+  QCOMPARE(m->d_func()->m_nextBudgetID, 89765ul);
 
   // restart a transaction so that teardown() is happy
   m->startTransaction();
 }
 
-void MyMoneySeqAccessMgrTest::testAddOnlineJob()
+void MyMoneyStorageMgrTest::testAddOnlineJob()
 {
   // Add a onlineJob
   onlineJob job(new dummyTask());
@@ -1831,7 +1847,7 @@ void MyMoneySeqAccessMgrTest::testAddOnlineJob()
   m->commitTransaction();
   m->startTransaction();
 
-  QCOMPARE(m->onlineJobId(), 1ul);
+  QCOMPARE(m->d_func()->m_nextOnlineJobID, 1ul);
   QCOMPARE(m->dirty(), true);
   QCOMPARE(m->d_func()->m_onlineJobList.count(), 1);
   QVERIFY(! m->d_func()->m_onlineJobList["O000001"].isNull());

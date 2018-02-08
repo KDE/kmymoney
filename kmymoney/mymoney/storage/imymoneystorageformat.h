@@ -37,25 +37,24 @@ class QIODevice;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class IMyMoneySerialize;
+class MyMoneyStorageMgr;
 
-
-class IMyMoneyStorageFormat
+class IMyMoneyOperationsFormat
 {
 public:
-  IMyMoneyStorageFormat();
-  virtual ~IMyMoneyStorageFormat();
+  IMyMoneyOperationsFormat();
+  virtual ~IMyMoneyOperationsFormat();
 
   enum fileVersionDirectionType {
     Reading = 0,          /**< version of file to be read */
     Writing = 1           /**< version to be used when writing a file */
   };
 
-  virtual void readFile(QIODevice* qf, IMyMoneySerialize* storage) = 0;
-  // virtual void readStream(QDataStream& s, IMyMoneySerialize* storage) = 0;
+  virtual void readFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
+  // virtual void readStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
-  virtual void writeFile(QIODevice* qf, IMyMoneySerialize* storage) = 0;
-  //virtual void writeStream(QDataStream& s, IMyMoneySerialize* storage) = 0;
+  virtual void writeFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
+  //virtual void writeStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
   virtual void setProgressCallback(void(*callback)(int, int, const QString&)) = 0;
   /**

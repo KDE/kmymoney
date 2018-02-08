@@ -178,8 +178,7 @@ class MyMoneyGncReader;
 class QIODevice;
 class QDate;
 class QTextCodec;
-class IMyMoneySerialize;
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
 class QXmlAttributes;
 class QXmlInputSource;
 class QXmlSimpleReader;
@@ -825,7 +824,7 @@ private:
   */
 
 #ifndef _GNCFILEANON
-class MyMoneyGncReader : public IMyMoneyStorageFormat
+class MyMoneyGncReader : public IMyMoneyOperationsFormat
 {
 #else
 class MyMoneyGncReader
@@ -844,8 +843,8 @@ public:
     *
     */
 #ifndef _GNCFILEANON
-  void readFile(QIODevice* pDevice, IMyMoneySerialize* storage);  // main entry point, IODevice is gnucash file
-  void writeFile(QIODevice*, IMyMoneySerialize*) {
+  void readFile(QIODevice* pDevice, MyMoneyStorageMgr *storage);  // main entry point, IODevice is gnucash file
+  void writeFile(QIODevice*, MyMoneyStorageMgr*) {
     return ;
   }; // dummy entry needed by kmymoneywiew. we will not be writing
 #else
@@ -1005,7 +1004,7 @@ private:
   bool writeReportToFile(const QList<QString>&);
   // main storage
 #ifndef _GNCFILEANON
-  IMyMoneyStorage *m_storage;
+  MyMoneyStorageMgr *m_storage;
 #else
   QTextStream oStream;
 #endif // _GNCFILEANON

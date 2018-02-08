@@ -31,7 +31,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
-#include "imymoneystorage.h"
+#include "mymoneystoragemgr.h"
 
 #include <alkimia/alkvalue.h>
 

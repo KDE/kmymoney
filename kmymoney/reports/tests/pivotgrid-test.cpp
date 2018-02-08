@@ -34,7 +34,7 @@ QTEST_GUILESS_MAIN(PivotGridTest)
 
 void PivotGridTest::init()
 {
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
 

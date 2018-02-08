@@ -44,7 +44,7 @@ class QDomElement;
 class QDomDocument;
 class QDate;
 
-class IMyMoneySerialize;
+class MyMoneyStorageMgr;
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySecurity;
@@ -63,7 +63,7 @@ typedef QPair<QString, QString> MyMoneySecurityPair;
 typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
 typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
-class MyMoneyStorageXML : public IMyMoneyStorageFormat
+class MyMoneyStorageXML : public IMyMoneyOperationsFormat
 {
   friend class MyMoneyXmlContentHandler;
 public:
@@ -142,8 +142,8 @@ protected:
 
   virtual QDomElement writeKeyValuePairs(const QMap<QString, QString> pairs);
 
-  virtual void readFile(QIODevice* s, IMyMoneySerialize* storage);
-  virtual void writeFile(QIODevice* s, IMyMoneySerialize* storage);
+  virtual void readFile(QIODevice* s, MyMoneyStorageMgr* storage);
+  virtual void writeFile(QIODevice* s, MyMoneyStorageMgr* storage);
 
   bool readUserInformation(const QDomElement& userElement);
 
@@ -163,7 +163,7 @@ private:
   static const QString getElName(const elNameE _el);
 
 protected:
-  IMyMoneySerialize *m_storage;
+  MyMoneyStorageMgr *m_storage;
   QDomDocument *m_doc;
 
 private:

@@ -50,7 +50,7 @@ void MatchFinderTest::cleanup()
 
 void MatchFinderTest::setupStorage()
 {
-  storage.reset(new MyMoneySeqAccessMgr);
+  storage.reset(new MyMoneyStorageMgr);
   file->attachStorage(storage.data());
 }
 

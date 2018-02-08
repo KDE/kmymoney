@@ -46,7 +46,7 @@ class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
-class IMyMoneyStorageFormat;
+class IMyMoneyOperationsFormat;
 
 namespace KMyMoneyPlugin
 {
@@ -74,7 +74,7 @@ public:
     *
     * @return Whether the read was successful.
     */
-  virtual bool readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader = nullptr) = 0;
+  virtual bool readFile(const QUrl &url, IMyMoneyOperationsFormat *pExtReader = nullptr) = 0;
 
   /**
     * Makes sure that a MyMoneyFile is open and has been created successfully.

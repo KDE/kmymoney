@@ -19,7 +19,7 @@ email                : lukasz.wojnilowicz@gmail.com
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include <mymoneyseqaccessmgr.h>
+#include <mymoneystoragemgr.h>
 
 #include "csvimportercore.h"
 #include "csvimporttestcommon.h"
@@ -35,7 +35,7 @@ void CSVImporterCoreTest::initTestCase()
 
 void CSVImporterCoreTest::init()
 {
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
 

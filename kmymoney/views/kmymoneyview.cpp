@@ -65,9 +65,7 @@
 #include "kmymoneytitlelabel.h"
 #include <libkgpgfile/kgpgfile.h>
 #include "kcurrencyeditdlg.h"
-#include "mymoneyseqaccessmgr.h"
-#include "mymoneydatabasemgr.h"
-#include "imymoneystorageformat.h"
+#include "mymoneystoragemgr.h"
 #include "mymoneystoragebin.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragexml.h"
@@ -531,22 +529,18 @@ bool KMyMoneyView::canPrint()
   return rc;
 }
 
-void KMyMoneyView::newStorage(storageTypeE t)
+void KMyMoneyView::newStorage()
 {
   removeStorage();
   auto file = MyMoneyFile::instance();
-  if (t == Memory)
-    file->attachStorage(new MyMoneySeqAccessMgr);
-  else
-    file->attachStorage(new MyMoneyDatabaseMgr);
-
+  file->attachStorage(new MyMoneyStorageMgr);
 }
 
 void KMyMoneyView::removeStorage()
 {
   auto file = MyMoneyFile::instance();
-  IMyMoneyStorage* p = file->storage();
-  if (p != 0) {
+  auto p = file->storage();
+  if (p) {
     file->detachStorage(p);
     delete p;
   }
@@ -671,14 +665,14 @@ void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
   }
 }
 
-bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
+bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyOperationsFormat* pExtReader)
 {
   QString filename;
   bool downloadedFile = false;
   m_fileOpen = false;
   bool isEncrypted = false;
 
-  IMyMoneyStorageFormat* pReader = 0;
+  IMyMoneyOperationsFormat* pReader = 0;
 
   if (!url.isValid()) {
     qDebug("Invalid URL '%s'", qPrintable(url.url()));
@@ -698,7 +692,7 @@ bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
     return (openDatabase(newUrl)); // on error, any message will have been displayed
   }
 
-  IMyMoneyStorage *storage = new MyMoneySeqAccessMgr;
+  auto storage = new MyMoneyStorageMgr;
 
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
@@ -833,7 +827,7 @@ bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyStorageFormat* pExtReader)
             }
             if (pReader) {
               pReader->setProgressCallback(&KMyMoneyView::progressCallback);
-              pReader->readFile(qfile, dynamic_cast<IMyMoneySerialize*>(storage));
+              pReader->readFile(qfile, storage);
             } else {
               if (m_fileType == KmmBinary) {
                 KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.", filename)));
@@ -924,13 +918,12 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
   m_fileOpen = false;
 
   // open the database
-  IMyMoneySerialize* pStorage = dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage());
-  MyMoneyDatabaseMgr* pDBMgr = 0;
-  if (! pStorage) {
-    pDBMgr = new MyMoneyDatabaseMgr;
-    pStorage = dynamic_cast<IMyMoneySerialize*>(pDBMgr);
-  }
-  QExplicitlySharedDataPointer <MyMoneyStorageSql> reader = pStorage->connectToDatabase(url);
+  auto pStorage = MyMoneyFile::instance()->storage();
+  if (!pStorage)
+    pStorage = new MyMoneyStorageMgr;
+
+  auto reader = std::make_unique<MyMoneyStorageSql>(pStorage, url);
+
   QUrl dbURL(url);
   bool retry = true;
   while (retry) {
@@ -940,16 +933,16 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
         break;
       case 1: // permanent error
         KMessageBox::detailedError(this, i18n("Cannot open database %1\n", dbURL.toDisplayString()), reader->lastError());
-        if (pDBMgr) {
+        if (pStorage) {
           removeStorage();
-          delete pDBMgr;
+          delete pStorage;
         }
         return false;
       case -1: // retryable error
         if (KMessageBox::warningYesNo(this, reader->lastError(), PACKAGE) == KMessageBox::No) {
-          if (pDBMgr) {
+          if (pStorage) {
             removeStorage();
-            delete pDBMgr;
+            delete pStorage;
           }
           return false;
         } else {
@@ -967,22 +960,24 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
         }
     }
   }
-  if (pDBMgr) {
-    removeStorage();
-    MyMoneyFile::instance()->attachStorage(pDBMgr);
-  }
   // single user mode; read some of the data into memory
   // FIXME - readFile no longer relevant?
   // tried removing it but then got no indication that loading was complete
   // also, didn't show home page
   reader->setProgressCallback(&KMyMoneyView::progressCallback);
   if (!reader->readFile()) {
-    KMessageBox::detailedError(0,
+    KMessageBox::detailedError(this,
                                i18n("An unrecoverable error occurred while reading the database"),
                                reader->lastError().toLatin1(),
                                i18n("Database malfunction"));
     return false;
   }
+
+  if (pStorage) {
+    removeStorage();
+    MyMoneyFile::instance()->attachStorage(pStorage);
+  }
+
   m_fileOpen = true;
   reader->setProgressCallback(0);
   return initializeStorage();
@@ -1060,7 +1055,7 @@ bool KMyMoneyView::initializeStorage()
     MyMoneyFileTransaction ft;
     try {
       // Check if we have to modify the file before we allow to work with it
-      IMyMoneyStorage* s = MyMoneyFile::instance()->storage();
+      auto s = MyMoneyFile::instance()->storage();
       while (s->fileFixVersion() < s->currentFixVersion()) {
         qDebug("%s", qPrintable((QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion()))));
         switch (s->fileFixVersion()) {
@@ -1168,7 +1163,7 @@ bool KMyMoneyView::initializeStorage()
   return true;
 }
 
-void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageFormat* pWriter, bool plaintext, const QString& keyList)
+void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* pWriter, bool plaintext, const QString& keyList)
 {
   // Check GPG encryption
   bool encryptFile = true;
@@ -1260,7 +1255,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
   }
 
   pWriter->setProgressCallback(&KMyMoneyView::progressCallback);
-  pWriter->writeFile(device.get(), dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
+  pWriter->writeFile(device.get(), MyMoneyFile::instance()->storage());
   device->close();
 
   // Check for errors if possible, only possible for KGPGFile
@@ -1290,16 +1285,16 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
   }
 
   emit kmmFilePlugin(preSave);
-  std::unique_ptr<IMyMoneyStorageFormat> storageWriter;
+  std::unique_ptr<IMyMoneyOperationsFormat> storageWriter;
 
   // If this file ends in ".ANON.XML" then this should be written using the
   // anonymous writer.
   bool plaintext = filename.right(4).toLower() == ".xml";
   if (filename.right(9).toLower() == ".anon.xml") {
     //! @todo C++14: use std::make_unique, also some lines below
-    storageWriter = std::unique_ptr<IMyMoneyStorageFormat>(new MyMoneyStorageANON);
+    storageWriter = std::unique_ptr<IMyMoneyOperationsFormat>(new MyMoneyStorageANON);
   } else {
-    storageWriter = std::unique_ptr<IMyMoneyStorageFormat>(new MyMoneyStorageXML);
+    storageWriter = std::unique_ptr<IMyMoneyOperationsFormat>(new MyMoneyStorageXML);
   }
 
   // actually, url should be the parameter to this function
@@ -1348,19 +1343,14 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
 
 bool KMyMoneyView::saveAsDatabase(const QUrl &url)
 {
-  bool rc = false;
-  if (!fileOpen()) {
-    KMessageBox::error(this, i18n("Tried to access a file when it has not been opened"));
-    return (rc);
-  }
-  MyMoneyStorageSql *writer = new MyMoneyStorageSql(dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()), url);
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
   bool canWrite = false;
   switch (writer->open(url, QIODevice::WriteOnly)) {
     case 0:
       canWrite = true;
       break;
     case -1: // dbase already has data, see if he wants to clear it out
-      if (KMessageBox::warningContinueCancel(0,
+      if (KMessageBox::warningContinueCancel(this,
                                              i18n("Database contains data which must be removed before using Save As.\n"
                                                   "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
         if (writer->open(url, QIODevice::WriteOnly, true) == 0)
@@ -1371,26 +1361,42 @@ bool KMyMoneyView::saveAsDatabase(const QUrl &url)
       }
       break;
   }
+  delete writer;
   if (canWrite) {
-    writer->setProgressCallback(&KMyMoneyView::progressCallback);
-    if (!writer->writeFile()) {
-      KMessageBox::detailedError(0,
-                                 i18n("An unrecoverable error occurred while writing to the database.\n"
-                                      "It may well be corrupt."),
-                                 writer->lastError().toLatin1(),
-                                 i18n("Database malfunction"));
-      rc =  false;
-    }
-    writer->setProgressCallback(0);
-    rc = true;
+    saveDatabase(url);
+    return true;
   } else {
     KMessageBox::detailedError(this,
                                i18n("Cannot open or create database %1.\n"
                                     "Retry Save As Database and click Help"
                                     " for further info.", url.toDisplayString()), writer->lastError());
+    return false;
   }
+}
+
+bool KMyMoneyView::saveDatabase(const QUrl &url)
+{
+  auto rc = false;
+  if (!fileOpen()) {
+    KMessageBox::error(this, i18n("Tried to access a file when it has not been opened"));
+    return (rc);
+  }
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
+  writer->open(url, QIODevice::WriteOnly);
+  writer->setProgressCallback(&KMyMoneyView::progressCallback);
+  if (!writer->writeFile()) {
+    KMessageBox::detailedError(this,
+                               i18n("An unrecoverable error occurred while writing to the database.\n"
+                                    "It may well be corrupt."),
+                               writer->lastError().toLatin1(),
+                               i18n("Database malfunction"));
+    rc =  false;
+  } else {
+    rc = true;
+  }
+  writer->setProgressCallback(0);
   delete writer;
-  return (rc);
+  return rc;
 }
 
 bool KMyMoneyView::dirty()

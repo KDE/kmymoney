@@ -51,7 +51,7 @@ void PivotTableTest::setup()
 
 void PivotTableTest::init()
 {
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
 
@@ -456,8 +456,8 @@ void PivotTableTest::testMultipleCurrencies()
   QFile g("multicurrencykmy.xml");
   g.open(QIODevice::WriteOnly);
   MyMoneyStorageXML xml;
-  IMyMoneyStorageFormat& interface = xml;
-  interface.writeFile(&g, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
+  IMyMoneyOperationsFormat& interface = xml;
+  interface.writeFile(&g, dynamic_cast<IMyMoneySerialization*>(MyMoneyFile::instance()->storage()));
   g.close();
 #endif
 
@@ -965,8 +965,8 @@ void PivotTableTest::testInvestment()
     QFile g("investmentkmy.xml");
     g.open(QIODevice::WriteOnly);
     MyMoneyStorageXML xml;
-    IMyMoneyStorageFormat& interface = xml;
-    interface.writeFile(&g, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
+    IMyMoneyOperationsFormat& interface = xml;
+    interface.writeFile(&g, dynamic_cast<IMyMoneySerialization*>(MyMoneyFile::instance()->storage()));
     g.close();
 
     invtran.dump("invtran.html", "<html><head></head><body>%1</body></html>");

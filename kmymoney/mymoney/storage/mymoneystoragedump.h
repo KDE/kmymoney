@@ -35,8 +35,8 @@
   * @author Thomas Baumgart
   */
 
-class IMyMoneySerialize;
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
+class MyMoneyStorageMgr;
 class MyMoneyTransaction;
 class QTextStream;
 
@@ -48,11 +48,11 @@ public:
   MyMoneyStorageDump();
   ~MyMoneyStorageDump();
 
-  void readStream(QDataStream& s, IMyMoneySerialize* storage);
-  void writeStream(QDataStream& s, IMyMoneySerialize* storage);
+  void readStream(QDataStream& s, MyMoneyStorageMgr* storage);
+  void writeStream(QDataStream& s, MyMoneyStorageMgr* storage);
 
 private:
-  void dumpTransaction(QTextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t);
+  void dumpTransaction(QTextStream& s, MyMoneyStorageMgr* storage, const MyMoneyTransaction& it_t);
   void dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent = 0);
   const QString reconcileToString(eMyMoney::Split::State flag) const;
 };

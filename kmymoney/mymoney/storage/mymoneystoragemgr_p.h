@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneyseqaccessmgr.cpp
+                          mymoneystoragemgr.cpp
                              -------------------
     begin                : Sun May 5 2002
     copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
@@ -17,10 +17,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MYMONEYSEQACCESSMGR_P_H
-#define MYMONEYSEQACCESSMGR_P_H
+#ifndef MYMONEYSTORAGEMGR_P_H
+#define MYMONEYSTORAGEMGR_P_H
 
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,7 +38,6 @@
 // Project Includes
 
 #include "mymoneyexception.h"
-#include "mymoneystoragesql.h"
 #include "storageenums.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
@@ -54,17 +53,32 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneycostcenter.h"
 #include "mymoneymap.h"
+#include "onlinejob.h"
 #include "mymoneyenums.h"
+#include "mymoneystoragenames.h"
 
+using namespace MyMoneyStandardAccounts;
 using namespace eStorage;
 
-class MyMoneySeqAccessMgrPrivate
+const int INSTITUTION_ID_SIZE = 6;
+const int ACCOUNT_ID_SIZE = 6;
+const int TRANSACTION_ID_SIZE = 18;
+const int PAYEE_ID_SIZE = 6;
+const int TAG_ID_SIZE = 6;
+const int SCHEDULE_ID_SIZE = 6;
+const int SECURITY_ID_SIZE = 6;
+const int REPORT_ID_SIZE = 6;
+const int BUDGET_ID_SIZE = 6;
+const int ONLINE_JOB_ID_SIZE = 6;
+const int COSTCENTER_ID_SIZE = 6;
+
+class MyMoneyStorageMgrPrivate
 {
-  Q_DISABLE_COPY(MyMoneySeqAccessMgrPrivate)
-  Q_DECLARE_PUBLIC(MyMoneySeqAccessMgr)
+  Q_DISABLE_COPY(MyMoneyStorageMgrPrivate)
+  Q_DECLARE_PUBLIC(MyMoneyStorageMgr)
 
 public:
-  explicit MyMoneySeqAccessMgrPrivate(MyMoneySeqAccessMgr* qq) :
+  explicit MyMoneyStorageMgrPrivate(MyMoneyStorageMgr* qq) :
     q_ptr(qq),
     m_nextInstitutionID(0),
     m_nextAccountID(0),
@@ -86,8 +100,47 @@ public:
   {
   }
 
-  ~MyMoneySeqAccessMgrPrivate()
+  ~MyMoneyStorageMgrPrivate()
   {
+  }
+
+  void init()
+  {
+    // setup standard accounts
+    MyMoneyAccount acc_l;
+    acc_l.setAccountType(eMyMoney::Account::Type::Liability);
+    acc_l.setName("Liability");
+    MyMoneyAccount liability(stdAccNames[stdAccLiability], acc_l);
+
+    MyMoneyAccount acc_a;
+    acc_a.setAccountType(eMyMoney::Account::Type::Asset);
+    acc_a.setName("Asset");
+    MyMoneyAccount asset(stdAccNames[stdAccAsset], acc_a);
+
+    MyMoneyAccount acc_e;
+    acc_e.setAccountType(eMyMoney::Account::Type::Expense);
+    acc_e.setName("Expense");
+    MyMoneyAccount expense(stdAccNames[stdAccExpense], acc_e);
+
+    MyMoneyAccount acc_i;
+    acc_i.setAccountType(eMyMoney::Account::Type::Income);
+    acc_i.setName("Income");
+    MyMoneyAccount income(stdAccNames[stdAccIncome], acc_i);
+
+    MyMoneyAccount acc_q;
+    acc_q.setAccountType(eMyMoney::Account::Type::Equity);
+    acc_q.setName("Equity");
+    MyMoneyAccount equity(stdAccNames[stdAccEquity], acc_q);
+
+    QMap<QString, MyMoneyAccount> map;
+    map[stdAccNames[stdAccAsset]] = asset;
+    map[stdAccNames[stdAccLiability]] = liability;
+    map[stdAccNames[stdAccIncome]] = income;
+    map[stdAccNames[stdAccExpense]] = expense;
+    map[stdAccNames[stdAccEquity]] = equity;
+
+    // load account list with initial accounts
+    m_accountList = map;
   }
 
   /**
@@ -125,7 +178,7 @@ public:
     */
   void reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent, bool /* sendNotification */)
   {
-    Q_Q(MyMoneySeqAccessMgr);
+    Q_Q(MyMoneyStorageMgr);
     QMap<QString, MyMoneyAccount>::ConstIterator oldParent;
     QMap<QString, MyMoneyAccount>::ConstIterator newParent;
     QMap<QString, MyMoneyAccount>::ConstIterator childAccount;
@@ -180,7 +233,7 @@ public:
     */
   MyMoneyMoney calculateBalance(const QString& id, const QDate& date) const
   {
-    Q_Q(const MyMoneySeqAccessMgr);
+    Q_Q(const MyMoneyStorageMgr);
     MyMoneyMoney balance;
     QList<MyMoneyTransaction> list;
 
@@ -224,7 +277,149 @@ public:
     }
   }
 
-  MyMoneySeqAccessMgr *q_ptr;
+  /**
+    * The member variable m_nextAccountID keeps the number that will be
+    * assigned to the next institution created. It is maintained by
+    * nextAccountID().
+    */
+  QString nextAccountID()
+  {
+    QString id;
+    id.setNum(++m_nextAccountID);
+    id = 'A' + id.rightJustified(ACCOUNT_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+     * The member variable m_nextTransactionID keeps the number that will be
+     * assigned to the next transaction created. It is maintained by
+     * nextTransactionID().
+     */
+  QString nextTransactionID()
+  {
+    QString id;
+    id.setNum(++m_nextTransactionID);
+    id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextPayeeID keeps the number that will be
+    * assigned to the next payee created. It is maintained by
+    * nextPayeeID()
+    */
+  QString nextPayeeID()
+  {
+    QString id;
+    id.setNum(++m_nextPayeeID);
+    id = 'P' + id.rightJustified(PAYEE_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextTagID keeps the number that will be
+    * assigned to the next tag created. It is maintained by
+    * nextTagID()
+    */
+  QString nextTagID()
+  {
+    QString id;
+    id.setNum(++m_nextTagID);
+    id = 'G' + id.rightJustified(TAG_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextInstitutionID keeps the number that will be
+    * assigned to the next institution created. It is maintained by
+    * nextInstitutionID().
+    */
+  QString nextInstitutionID()
+  {
+    QString id;
+    id.setNum(++m_nextInstitutionID);
+    id = 'I' + id.rightJustified(INSTITUTION_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextScheduleID keeps the number that will be
+    * assigned to the next schedule created. It is maintained by
+    * nextScheduleID()
+    */
+  QString nextScheduleID()
+  {
+    QString id;
+    id.setNum(++m_nextScheduleID);
+    id = "SCH" + id.rightJustified(SCHEDULE_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextSecurityID keeps the number that will be
+    * assigned to the next security object created.  It is maintained by
+    * nextSecurityID()
+    */
+  QString nextSecurityID()
+  {
+    QString id;
+    id.setNum(++m_nextSecurityID);
+    id = 'E' + id.rightJustified(SECURITY_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextReportID keeps the number that will be
+    * assigned to the next report object created.  It is maintained by
+    * nextReportID()
+    */
+  QString nextReportID()
+  {
+    QString id;
+    id.setNum(++m_nextReportID);
+    id = 'R' + id.rightJustified(REPORT_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * The member variable m_nextBudgetID keeps the number that will be
+    * assigned to the next budget object created.  It is maintained by
+    * nextBudgetID()
+    */
+  QString nextBudgetID()
+  {
+    QString id;
+    id.setNum(++m_nextBudgetID);
+    id = 'B' + id.rightJustified(BUDGET_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * This member variable keeps the number that will be assigned to the
+    * next onlineJob object created. It is maintained by nextOnlineJobID()
+    */
+  QString nextOnlineJobID()
+  {
+    QString id;
+    id.setNum(++m_nextOnlineJobID);
+    id = 'O' + id.rightJustified(ONLINE_JOB_ID_SIZE, '0');
+    return id;
+  }
+
+  /**
+    * This member variable keeps the number that will be assigned to the
+    * next cost center object created. It is maintained by nextCostCenterID()
+    */
+  QString nextCostCenterID()
+  {
+    QString id;
+    id.setNum(++m_nextCostCenterID);
+    id = 'C' + id.rightJustified(COSTCENTER_ID_SIZE, '0');
+    return id;
+  }
+
+  MyMoneyStorageMgr *q_ptr;
+
   /**
     * This member variable keeps the User information.
     * @see setUser()
@@ -381,7 +576,7 @@ public:
   bool  m_dirty;
 
   /**
-    * This member variable keeps the creation date of this MyMoneySeqAccessMgr
+    * This member variable keeps the creation date of this MyMoneyStorageMgr
     * object. It is set during the constructor and can only be modified using
     * the stream read operator.
     */
@@ -389,7 +584,7 @@ public:
 
   /**
     * This member variable keeps the date of the last modification of
-    * the MyMoneySeqAccessMgr object.
+    * the MyMoneyStorageMgr object.
     */
   QDate m_lastModificationDate;
 

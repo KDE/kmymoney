@@ -28,12 +28,12 @@
 #include <klocale.h>
 
 #include "kmymoneyfile.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 
 KMyMoneyFile::KMyMoneyFile()
 {
   // m_file = MyMoneyFile::instance();
-  m_storage = new MyMoneySeqAccessMgr;
+  m_storage = new MyMoneyStorageMgr;
   // m_file->attachStorage(m_storage);
   m_open = false;  // lie a little bit for now
 }
@@ -71,7 +71,7 @@ MyMoneyFile* KMyMoneyFile::file()
 }
 */
 
-MyMoneySeqAccessMgr* KMyMoneyFile::storage()
+MyMoneyStorageMgr* KMyMoneyFile::storage()
 {
   return m_storage;
 }
@@ -81,7 +81,7 @@ void KMyMoneyFile::reset()
   /*
     delete m_storage;
     delete m_file;
-    m_storage = new MyMoneySeqAccessMgr;
+    m_storage = new MyMoneyStorageMgr;
     m_file = new MyMoneyFile(m_storage);
   */
 }
@@ -91,7 +91,7 @@ void KMyMoneyFile::open()
   if (m_storage != 0)
     close();
 
-  m_storage = new MyMoneySeqAccessMgr;
+  m_storage = new MyMoneyStorageMgr;
   MyMoneyFile::instance()->attachStorage(m_storage);
   m_open = true;
 }

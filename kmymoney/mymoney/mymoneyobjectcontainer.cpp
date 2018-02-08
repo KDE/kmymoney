@@ -24,7 +24,7 @@
 
 #include "mymoney/onlinejob.h"
 
-#include "imymoneystorage.h"
+#include "mymoneystoragemgr.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
@@ -133,7 +133,7 @@ struct MyMoneyObjectContainer::Private {
   QHash<QString, onlineJob const *> onlineJobCache;
   QHash<QString, MyMoneyCostCenter const*> costCenterCache;
 
-  IMyMoneyStorage* storage;
+  MyMoneyStorageMgr* storage;
   MyMoneyObjectContainer *pub;
 };
 
@@ -147,7 +147,7 @@ MyMoneyObjectContainer::~MyMoneyObjectContainer()
   delete d;
 }
 
-void MyMoneyObjectContainer::clear(IMyMoneyStorage* storage)
+void MyMoneyObjectContainer::clear(MyMoneyStorageMgr* storage)
 {
   d->clearCache(d->accountCache);
   d->clearCache(d->payeeCache);
@@ -254,19 +254,19 @@ void MyMoneyObjectContainer::refresh(const QString& id)
   if (id.isEmpty())
     return;
 
-  if (d->refreshObject(id, d->accountCache, &IMyMoneyStorage::account))
+  if (d->refreshObject(id, d->accountCache, &MyMoneyStorageMgr::account))
     return;
-  if (d->refreshObject(id, d->payeeCache, &IMyMoneyStorage::payee))
+  if (d->refreshObject(id, d->payeeCache, &MyMoneyStorageMgr::payee))
     return;
-  if (d->refreshObject(id, d->tagCache, &IMyMoneyStorage::tag))
+  if (d->refreshObject(id, d->tagCache, &MyMoneyStorageMgr::tag))
     return;
-  if (d->refreshObject(id, d->institutionCache, &IMyMoneyStorage::institution))
+  if (d->refreshObject(id, d->institutionCache, &MyMoneyStorageMgr::institution))
     return;
-  if (d->refreshObject(id, d->scheduleCache, &IMyMoneyStorage::schedule))
+  if (d->refreshObject(id, d->scheduleCache, &MyMoneyStorageMgr::schedule))
     return;
-  if (d->refreshObject(id, d->onlineJobCache, &IMyMoneyStorage::getOnlineJob))
+  if (d->refreshObject(id, d->onlineJobCache, &MyMoneyStorageMgr::getOnlineJob))
     return;
-  if (d->refreshObject(id, d->costCenterCache, &IMyMoneyStorage::costCenter))
+  if (d->refreshObject(id, d->costCenterCache, &MyMoneyStorageMgr::costCenter))
     return;
 
   // special handling of securities
@@ -288,27 +288,27 @@ void MyMoneyObjectContainer::refresh(const QString& id)
 
 MyMoneyPayee MyMoneyObjectContainer::payee(const QString& id)
 {
-  return d->objectAccessMethodImpl(id, d->payeeCache, &IMyMoneyStorage::payee);
+  return d->objectAccessMethodImpl(id, d->payeeCache, &MyMoneyStorageMgr::payee);
 }
 
 MyMoneyTag MyMoneyObjectContainer::tag(const QString& id)
 {
-  return d->objectAccessMethodImpl(id, d->tagCache, &IMyMoneyStorage::tag);
+  return d->objectAccessMethodImpl(id, d->tagCache, &MyMoneyStorageMgr::tag);
 }
 
 MyMoneySecurity MyMoneyObjectContainer::security(const QString& id)
 {
-  return d->objectAccessMethodImpl(id, d->securityCache, &IMyMoneyStorage::security);
+  return d->objectAccessMethodImpl(id, d->securityCache, &MyMoneyStorageMgr::security);
 }
 
 MyMoneyInstitution MyMoneyObjectContainer::institution(const QString& id)
 {
-  return d->objectAccessMethodImpl(id, d->institutionCache, &IMyMoneyStorage::institution);
+  return d->objectAccessMethodImpl(id, d->institutionCache, &MyMoneyStorageMgr::institution);
 }
 
 MyMoneySchedule MyMoneyObjectContainer::schedule(const QString& id)
 {
-  return d->objectAccessMethodImpl(id, d->scheduleCache, &IMyMoneyStorage::schedule);
+  return d->objectAccessMethodImpl(id, d->scheduleCache, &MyMoneyStorageMgr::schedule);
 }
 
 void MyMoneyObjectContainer::preloadAccount(const QList<MyMoneyAccount>& list)

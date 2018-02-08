@@ -39,7 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneyserialize.h"
+#include "mymoneystoragemgr.h"
 #include "mymoneyreport.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
@@ -74,7 +74,7 @@ MyMoneyStorageANON::~MyMoneyStorageANON()
 {
 }
 
-void MyMoneyStorageANON::readFile(QIODevice* , IMyMoneySerialize*)
+void MyMoneyStorageANON::readFile(QIODevice* , MyMoneyStorageMgr*)
 {
   throw MYMONEYEXCEPTION("Cannot read a file through MyMoneyStorageANON!!");
 }

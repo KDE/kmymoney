@@ -36,7 +36,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "imymoneystorage.h"
+
+#include "mymoneystoragemgr.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneyaccountloan.h"
@@ -254,7 +255,7 @@ public:
   /**
     * This member points to the storage strategy
     */
-  IMyMoneyStorage *m_storage;
+  MyMoneyStorageMgr *m_storage;
 
 
   bool                   m_inTransaction;
@@ -341,7 +342,7 @@ MyMoneyFile::~MyMoneyFile()
   delete d;
 }
 
-MyMoneyFile::MyMoneyFile(IMyMoneyStorage *storage) :
+MyMoneyFile::MyMoneyFile(MyMoneyStorageMgr *storage) :
     d(new Private)
 {
   attachStorage(storage);
@@ -352,7 +353,7 @@ MyMoneyFile* MyMoneyFile::instance()
   return &file;
 }
 
-void MyMoneyFile::attachStorage(IMyMoneyStorage* const storage)
+void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
 {
   if (d->m_storage != 0)
     throw MYMONEYEXCEPTION("Storage already attached");
@@ -377,7 +378,7 @@ void MyMoneyFile::attachStorage(IMyMoneyStorage* const storage)
   emit endChangeNotification();
 }
 
-void MyMoneyFile::detachStorage(IMyMoneyStorage* const /* storage */)
+void MyMoneyFile::detachStorage(MyMoneyStorageMgr* const /* storage */)
 {
   d->m_balanceCache.clear();
   d->m_cache.clear();
@@ -385,7 +386,7 @@ void MyMoneyFile::detachStorage(IMyMoneyStorage* const /* storage */)
   d->m_storage = 0;
 }
 
-IMyMoneyStorage* MyMoneyFile::storage() const
+MyMoneyStorageMgr* MyMoneyFile::storage() const
 {
   return d->m_storage;
 }

@@ -53,13 +53,13 @@
   * As the MyMoneyFile object represents the business logic, a storage
   * manager must be attached to it. This mechanism allows to use different
   * access methods to store the objects. The interface to access such an
-  * storage manager is defined in the class IMyMoneyStorage. The methods
+  * storage manager is defined in the class MyMoneyStorageMgr. The methods
   * attachStorage() and detachStorage() are used to attach/detach a
   * storage manager object. The following code can be used to create a
   * functional MyMoneyFile instance:
   *
   * @code
-  * IMyMoneyStorage *storage = ....
+  * MyMoneyStorageMgr *storage = ....
   * MyMoneyFile *file = MyMoneyFile::instance();
   * file->attachStorage(storage);
   * @endcode
@@ -121,7 +121,7 @@ template <class Key, class T> class QMap;
 class QString;
 class QStringList;
 class QBitArray;
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
 class MyMoneyCostCenter;
 class MyMoneyAccount;
 class MyMoneyInstitution;
@@ -173,10 +173,10 @@ public:
     * @deprecated This is a convenience constructor. Do not use it anymore.
     * It will be deprecated in a future version of the engine.
     *
-    * @param storage pointer to object that implements the IMyMoneyStorage
+    * @param storage pointer to object that implements the MyMoneyStorageMgr
     *                interface.
     */
-  explicit MyMoneyFile(IMyMoneyStorage *storage);
+  explicit MyMoneyFile(MyMoneyStorageMgr *storage);
 
   // general get functions
   MyMoneyPayee user() const;
@@ -198,24 +198,24 @@ public:
     * - there is no other @a storage object attached (use detachStorage()
     *   to revert the attachStorage() operation.
     *
-    * @param storage pointer to object that implements the IMyMoneyStorage
+    * @param storage pointer to object that implements the MyMoneyStorageMgr
     *                interface.
     *
     * @sa detachStorage()
     */
-  void attachStorage(IMyMoneyStorage* const storage);
+  void attachStorage(MyMoneyStorageMgr* const storage);
 
   /**
     * This method is used to detach a previously attached storage
     * object from the MyMoneyFile object. If no storage object
     * is attached to the engine, this is a NOP.
     *
-    * @param storage pointer to object that implements the IMyMoneyStorage
+    * @param storage pointer to object that implements the MyMoneyStorageMgr
     *                interface.
     *
     * @sa attachStorage()
     */
-  void detachStorage(IMyMoneyStorage* const storage = 0);
+  void detachStorage(MyMoneyStorageMgr* const storage = 0);
 
   /**
     * This method returns whether a storage is currently attached to
@@ -231,7 +231,7 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  IMyMoneyStorage* storage() const;
+  MyMoneyStorageMgr* storage() const;
 
   /**
     * This method must be called before any single change or a series of changes

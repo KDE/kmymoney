@@ -23,7 +23,7 @@
 #include <QList>
 #include <QtTest>
 
-#include "mymoneyseqaccessmgr_p.h"
+#include "mymoneystoragemgr_p.h"
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyinstitution.h"
@@ -98,7 +98,7 @@ void MyMoneyFileTest::initTestCase()
 // this method will be called before each testfunction
 void MyMoneyFileTest::init()
 {
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   m->attachStorage(storage);
   clearObjectLists();
 }
@@ -1604,7 +1604,7 @@ void MyMoneyFileTest::testAddTransactionStd()
 
 void MyMoneyFileTest::testAttachStorage()
 {
-  IMyMoneyStorage *store = new MyMoneySeqAccessMgr;
+  MyMoneyStorageMgr *store = new MyMoneyStorageMgr;
   MyMoneyFile *file = new MyMoneyFile;
 
   QCOMPARE(file->storageAttached(), false);
@@ -1668,10 +1668,10 @@ void MyMoneyFileTest::testAttachedStorage()
 {
   QCOMPARE(m->storageAttached(), true);
   QVERIFY(m->storage() != 0);
-  IMyMoneyStorage *p = m->storage();
+  MyMoneyStorageMgr *p = m->storage();
   m->detachStorage(p);
   QCOMPARE(m->storageAttached(), false);
-  QCOMPARE(m->storage(), static_cast<IMyMoneyStorage*>(0));
+  QCOMPARE(m->storage(), static_cast<MyMoneyStorageMgr*>(0));
   m->attachStorage(p);
   QCOMPARE(m->storageAttached(), true);
   QVERIFY(m->storage() != 0);
@@ -1874,7 +1874,7 @@ void MyMoneyFileTest::testBaseCurrency()
   // check if it gets reset when attaching a new storage
   m->detachStorage(storage);
 
-  MyMoneySeqAccessMgr* newStorage = new MyMoneySeqAccessMgr;
+  MyMoneyStorageMgr* newStorage = new MyMoneyStorageMgr;
   m->attachStorage(newStorage);
 
   ref = m->baseCurrency();

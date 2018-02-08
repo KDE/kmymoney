@@ -51,9 +51,8 @@ email                : mte@users.sourceforge.net
 // ------------------------------------------------------------Box21----------------
 // Project Includes
 #include <config-kmymoney.h>
-#include "imymoneyserialize.h"
+#include "mymoneystoragemgr.h"
 #ifndef _GNCFILEANON
-#include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -1306,12 +1305,12 @@ MyMoneyGncReader::~MyMoneyGncReader() {}
 
 //**************************** Main Entry Point ************************************
 #ifndef _GNCFILEANON
-void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
+void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
 {
   Q_CHECK_PTR(pDevice);
   Q_CHECK_PTR(storage);
 
-  m_storage = dynamic_cast<IMyMoneyStorage *>(storage);
+  m_storage = storage;
   qDebug("Entering gnucash importer");
   setOptions();
   // get a file anonymization factor from the user

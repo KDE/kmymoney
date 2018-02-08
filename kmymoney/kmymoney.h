@@ -128,11 +128,6 @@ protected Q_SLOTS:
   void slotEnableMessages();
 
   /**
-    * Called when the user asks for file information.
-    */
-  void slotFileFileInfo();
-
-  /**
     * Called to run performance test.
     */
   void slotPerformanceTest();
@@ -143,6 +138,11 @@ protected Q_SLOTS:
   void slotGenerateSql();
 
 #ifdef KMM_DEBUG
+  /**
+    * Called when the user asks for file information.
+    */
+  void slotFileFileInfo();
+
   /**
     * Debugging only: turn on/off traces
     */
@@ -529,7 +529,7 @@ public Q_SLOTS:
     */
   void slotEquityPriceUpdate();
 
-  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);  
+  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);
 
   /**
     * This slot reparents account @p src to be a child of account @p dest

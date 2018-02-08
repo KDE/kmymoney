@@ -130,8 +130,6 @@
 #include "mymoney/mymoneysplit.h"
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
-#include "mymoney/storage/mymoneystoragedump.h"
-#include "mymoney/storage/imymoneystorage.h"
 #include "mymoney/mymoneyforecast.h"
 #include "mymoney/mymoneytransactionfilter.h"
 
@@ -153,7 +151,7 @@
 
 #include "misc/webconnect.h"
 
-#include "storage/imymoneyserialize.h"
+#include "storage/mymoneystoragemgr.h"
 #include "storage/mymoneystoragesql.h"
 
 #include <libkgpgfile/kgpgfile.h>
@@ -179,6 +177,7 @@
 #include "widgets_config.h"
 
 #ifdef KMM_DEBUG
+#include "mymoney/storage/mymoneystoragedump.h"
 #include "mymoneytracer.h"
 #endif
 
@@ -1011,8 +1010,8 @@ bool KMyMoneyApp::queryClose()
       return saved;
     }
   }
-  if (d->m_myMoneyView->isDatabase())
-    slotFileClose(); // close off the database
+//  if (d->m_myMoneyView->isDatabase())
+//    slotFileClose(); // close off the database
   saveOptions();
   return true;
 }
@@ -1403,11 +1402,11 @@ bool KMyMoneyApp::slotFileSave()
 
   d->consistencyCheck(false);
 
-  /*if (myMoneyView->isDatabase()) {
-    rc = myMoneyView->saveDatabase(m_fileName);
-    // the 'save' function is no longer relevant for a database*/
   setEnabled(false);
-  rc = d->m_myMoneyView->saveFile(d->m_fileName, MyMoneyFile::instance()->value("kmm-encryption-key"));
+  if (d->m_myMoneyView->isDatabase())
+    rc = d->m_myMoneyView->saveDatabase(d->m_fileName);
+  else
+    rc = d->m_myMoneyView->saveFile(d->m_fileName, MyMoneyFile::instance()->value("kmm-encryption-key"));
   setEnabled(true);
 
   d->m_autoSaveTimer->stop();
@@ -1453,9 +1452,6 @@ void KMyMoneyApp::slotKeySelected(int idx)
 bool KMyMoneyApp::slotFileSaveAs()
 {
   bool rc = false;
-  // in event of it being a database, ensure that all data is read into storage for saveas
-  if (d->m_myMoneyView->isDatabase())
-    dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage())->fillStorage();
   KMSTATUS(i18n("Saving file with a new filename..."));
 
   // fill the additional key list with the default
@@ -1581,10 +1577,9 @@ bool KMyMoneyApp::saveAsDatabase()
   bool rc = false;
   QUrl oldUrl;
   // in event of it being a database, ensure that all data is read into storage for saveas
-  if (d->m_myMoneyView->isDatabase()) {
-    dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage())->fillStorage();
+  if (d->m_myMoneyView->isDatabase())
     oldUrl = d->m_fileName.isEmpty() ? lastOpenedURL() : d->m_fileName;
-  }
+
   KMSTATUS(i18n("Saving file to database..."));
   QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
   QUrl url = oldUrl;
@@ -1710,6 +1705,21 @@ void KMyMoneyApp::slotShowAllAccounts()
 }
 
 #ifdef KMM_DEBUG
+void KMyMoneyApp::slotFileFileInfo()
+{
+  if (!d->m_myMoneyView->fileOpen()) {
+    KMessageBox::information(this, i18n("No KMyMoneyFile open"));
+    return;
+  }
+
+  QFile g("kmymoney.dump");
+  g.open(QIODevice::WriteOnly);
+  QDataStream st(&g);
+  MyMoneyStorageDump dumper;
+  dumper.writeStream(st, MyMoneyFile::instance()->storage());
+  g.close();
+}
+
 void KMyMoneyApp::slotToggleTraces()
 {
   MyMoneyTracer::onOff(pActions[Action::DebugTraces]->isChecked() ? 1 : 0);
@@ -1823,21 +1833,6 @@ void KMyMoneyApp::slotFileViewPersonal()
     }
   }
   delete editPersonalDataDlg;
-}
-
-void KMyMoneyApp::slotFileFileInfo()
-{
-  if (!d->m_myMoneyView->fileOpen()) {
-    KMessageBox::information(this, i18n("No KMyMoneyFile open"));
-    return;
-  }
-
-  QFile g("kmymoney.dump");
-  g.open(QIODevice::WriteOnly);
-  QDataStream st(&g);
-  MyMoneyStorageDump dumper;
-  dumper.writeStream(st, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
-  g.close();
 }
 
 void KMyMoneyApp::slotLoadAccountTemplates()
@@ -2652,7 +2647,7 @@ void KMyMoneyApp::slotUpdateActions()
   // *************
   // Disabling standard actions based on conditions
   // *************
-  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(modified && !d->m_myMoneyView->isDatabase());
+  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(modified /*&& !d->m_myMoneyView->isDatabase()*/);
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(fileOpen);
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(fileOpen);
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Print)))->setEnabled(fileOpen && d->m_myMoneyView->canPrint());

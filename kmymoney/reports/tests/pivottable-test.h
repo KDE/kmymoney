@@ -28,7 +28,7 @@ class PivotTableTest;
 #define KMM_MYMONEY_UNIT_TESTABLE friend class reports::PivotTableTest;
 
 #include "mymoneyfile.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 #include "reporttable.h"
 
 namespace reports
@@ -38,7 +38,7 @@ class PivotTableTest : public QObject
 {
   Q_OBJECT
 private:
-  MyMoneySeqAccessMgr* storage;
+  MyMoneyStorageMgr* storage;
   MyMoneyFile* file;
 
 private Q_SLOTS:

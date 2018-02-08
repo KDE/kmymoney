@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneyseqaccessmgr.h  -  description
+                          mymoneystoragemgr.h  -  description
                              -------------------
     begin                : Sun May 5 2002
     copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
@@ -20,8 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MYMONEYSEQACCESSMGR_H
-#define MYMONEYSEQACCESSMGR_H
+#ifndef MYMONEYSTORAGEMGR_H
+#define MYMONEYSTORAGEMGR_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -29,9 +29,43 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneystorage.h"
-#include "imymoneyserialize.h"
 #include "mymoneykeyvaluecontainer.h"
+
+class QUrl;
+class QString;
+class QStringList;
+class QDate;
+class QBitArray;
+
+class MyMoneyObject;
+class MyMoneyMoney;
+class MyMoneyInstitution;
+class MyMoneyAccount;
+class MyMoneySecurity;
+class MyMoneyPayee;
+class MyMoneyTag;
+class MyMoneyPrice;
+class MyMoneyReport;
+class MyMoneySchedule;
+class MyMoneyBudget;
+class MyMoneySplit;
+class MyMoneyTransaction;
+class MyMoneyTransactionFilter;
+class MyMoneyCostCenter;
+class onlineJob;
+class MyMoneyStorageSql;
+
+template <class Key, class T> class QMap;
+template <typename T> class QList;
+template <class T1, class T2> struct QPair;
+
+typedef QPair<QString, QString> MyMoneySecurityPair;
+typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
+typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
+
+namespace eMyMoney { namespace Schedule { enum class Type; } }
+namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
+namespace eMyMoney { namespace Schedule { enum class PaymentType; } }
 
 /**
   * @author Thomas Baumgart
@@ -39,61 +73,42 @@
   */
 
 /**
-  * The MyMoneySeqAccessMgr class represents the storage engine for sequential
+  * The MyMoneyStorageMgr class represents the storage engine for sequential
   * files. The actual file type and it's internal storage format (e.g. binary
-  * or XML) is not important and handled through the IMyMoneySerialize() interface.
+  * or XML) is not important.
   *
-  * The MyMoneySeqAccessMgr must be loaded by an application using the
-  * IMyMoneySerialize() interface and can then be accessed through the
-  * IMyMoneyStorage() interface. All data is loaded into memory, modified
+  * The MyMoneyStorageMgr must be loaded by an application using loadAccounts()
+  * method and etc. and can then be accessed through the
+  * account() method and etc.. All data is loaded into memory, modified
   * and kept there. It is the subject of an outside object to store the
-  * modified data in a persistant storage area using the IMyMoneySerialize()
-  * interface. As indication, if data has been changed, the retrun value
+  * modified data in a persistant storage area using the accountList() method and etc.
+  * As indication, if data has been changed, the retrun value
   * of the method dirty() can be used.
   */
 
-class MyMoneySeqAccessMgrPrivate;
-class MyMoneySeqAccessMgr : public IMyMoneyStorage, public IMyMoneySerialize,
-    public MyMoneyKeyValueContainer
+class MyMoneyStorageMgrPrivate;
+class MyMoneyStorageMgr : public MyMoneyKeyValueContainer
 {
-  Q_DISABLE_COPY(MyMoneySeqAccessMgr)
+  Q_DISABLE_COPY(MyMoneyStorageMgr)
   KMM_MYMONEY_UNIT_TESTABLE
+  friend class MyMoneyStorageDump;
 
 public:
-
-  MyMoneySeqAccessMgr();
-  ~MyMoneySeqAccessMgr();
+  MyMoneyStorageMgr();
+  ~MyMoneyStorageMgr();
 
   // general get functions
-  MyMoneyPayee user() const override;
-  QDate creationDate() const override;
-  QDate lastModificationDate() const override;
-  uint currentFixVersion() const override;
-  uint fileFixVersion() const override;
+  MyMoneyPayee user() const;
+  QDate creationDate() const;
+  QDate lastModificationDate() const;
+  uint currentFixVersion() const;
+  uint fileFixVersion() const;
 
   // general set functions
-  void setUser(const MyMoneyPayee& user) override;
-  void setCreationDate(const QDate& val) override;
-  void setLastModificationDate(const QDate& val) override;
-  void setFileFixVersion(uint v) override;
-
-  /**
-    * This method is used to get a SQL reader for subsequent database access
-    */
-  QExplicitlySharedDataPointer <MyMoneyStorageSql> connectToDatabase(const QUrl &url) override;
-  /**
-  * This method is used when a database file is open, and the data is to
-  * be saved in a different file or format. It will ensure that all data
-  * from the database is available in memory to enable it to be written.
-  */
-  void fillStorage() override;
-
-  /**
-    * This method is used to duplicate the MyMoneySeqAccessMgr object and return
-    * a pointer to the newly created copy. The caller of this method is the
-    * new owner of the object and must destroy it.
-    */
-//  MyMoneySeqAccessMgr const * duplicate() override;
+  void setUser(const MyMoneyPayee& user);
+  void setCreationDate(const QDate& val);
+  void setLastModificationDate(const QDate& val);
+  void setFileFixVersion(uint v);
 
   /**
     * Returns the account addressed by it's id.
@@ -102,7 +117,7 @@ public:
     * @return reference to MyMoneyAccount object. An exception is thrown
     *         if the id is unknown
     */
-  MyMoneyAccount account(const QString& id) const override;
+  MyMoneyAccount account(const QString& id) const;
 
   /**
     * This method is used to check whether a given
@@ -111,7 +126,7 @@ public:
     * @param id account id
     * @return true if account-id is one of the standards, false otherwise
     */
-  bool isStandardAccount(const QString& id) const override;
+  bool isStandardAccount(const QString& id) const;
 
   /**
     * This method is used to set the name for the specified standard account
@@ -130,7 +145,7 @@ public:
     * @param name QString reference to the name to be set
     *
     */
-  void setAccountName(const QString& id, const QString& name) override;
+  void setAccountName(const QString& id, const QString& name);
 
   /**
     * This method is used to create a new account
@@ -139,7 +154,7 @@ public:
     *
     * @param account MyMoneyAccount filled with data
     */
-  void addAccount(MyMoneyAccount& account) override;
+  void addAccount(MyMoneyAccount& account);
 
   /**
     * This method is used to create a new payee
@@ -148,12 +163,12 @@ public:
     *
     * @param payee MyMoneyPayee reference to payee information
     */
-  void addPayee(MyMoneyPayee& payee) override;
+  void addPayee(MyMoneyPayee& payee);
 
   /**
    * Create now onlineJob
    */
-  void addOnlineJob(onlineJob& job) override;
+  void addOnlineJob(onlineJob& job);
 
   /**
     * This method is used to retrieve information about a payee
@@ -163,7 +178,7 @@ public:
     *
     * @return MyMoneyPayee object of payee
     */
-  MyMoneyPayee payee(const QString& id) const override;
+  MyMoneyPayee payee(const QString& id) const;
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -174,7 +189,7 @@ public:
     *
     * @return MyMoneyPayee reference to object of payee
     */
-  MyMoneyPayee payeeByName(const QString& payee) const override;
+  MyMoneyPayee payeeByName(const QString& payee) const;
 
   /**
     * This method is used to modify an existing payee
@@ -183,7 +198,7 @@ public:
     *
     * @param payee MyMoneyPayee reference to payee information
     */
-  void modifyPayee(const MyMoneyPayee& payee) override;
+  void modifyPayee(const MyMoneyPayee& payee);
 
   /**
     * This method is used to remove an existing payee
@@ -192,7 +207,7 @@ public:
     *
     * @param payee MyMoneyPayee reference to payee information
     */
-  void removePayee(const MyMoneyPayee& payee) override;
+  void removePayee(const MyMoneyPayee& payee);
 
   /**
     * This method returns a list of the payees
@@ -200,7 +215,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  QList<MyMoneyPayee> payeeList() const override;
+  QList<MyMoneyPayee> payeeList() const;
 
   /**
     * This method is used to create a new tag
@@ -209,7 +224,7 @@ public:
     *
     * @param tag MyMoneyTag reference to tag information
     */
-  void addTag(MyMoneyTag& tag) override;
+  void addTag(MyMoneyTag& tag);
 
   /**
     * This method is used to retrieve information about a tag
@@ -219,7 +234,7 @@ public:
     *
     * @return MyMoneyTag object of tag
     */
-  MyMoneyTag tag(const QString& id) const override;
+  MyMoneyTag tag(const QString& id) const;
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -230,7 +245,7 @@ public:
     *
     * @return MyMoneyTag reference to object of tag
     */
-  MyMoneyTag tagByName(const QString& tag) const override;
+  MyMoneyTag tagByName(const QString& tag) const;
 
   /**
     * This method is used to modify an existing tag
@@ -239,7 +254,7 @@ public:
     *
     * @param tag MyMoneyTag reference to tag information
     */
-  void modifyTag(const MyMoneyTag& tag) override;
+  void modifyTag(const MyMoneyTag& tag);
 
   /**
     * This method is used to remove an existing tag
@@ -248,7 +263,7 @@ public:
     *
     * @param tag MyMoneyTag reference to tag information
     */
-  void removeTag(const MyMoneyTag& tag) override;
+  void removeTag(const MyMoneyTag& tag);
 
   /**
     * This method returns a list of the tags
@@ -256,7 +271,7 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  QList<MyMoneyTag> tagList() const override;
+  QList<MyMoneyTag> tagList() const;
 
   /**
     * This method is used to add one account as sub-ordinate to another
@@ -267,7 +282,7 @@ public:
     * @param account the account to be added
     */
 
-  void addAccount(MyMoneyAccount& parent, MyMoneyAccount& account) override;
+  void addAccount(MyMoneyAccount& parent, MyMoneyAccount& account);
 
   /**
     * Adds an institution to the storage. A
@@ -278,7 +293,7 @@ public:
     * @param institution The complete institution information in a
     *        MyMoneyInstitution object
     */
-  void addInstitution(MyMoneyInstitution& institution) override;
+  void addInstitution(MyMoneyInstitution& institution);
 
   /**
     * Adds a transaction to the file-global transaction pool. A respective
@@ -291,7 +306,7 @@ public:
     *        referenced in the splits are not updated. This is used for
     *        bulk loading a lot of transactions but not during normal operation
     */
-  void addTransaction(MyMoneyTransaction& transaction, bool skipAccountUpdate = false) override;
+  void addTransaction(MyMoneyTransaction& transaction, bool skipAccountUpdate = false);
 
   /**
     * Modifies an already existing account in the file global account pool.
@@ -305,7 +320,7 @@ public:
     *                  procedure to be able to reload accounts. The default
     *                  setting of this parameter is @p false.
     */
-  void modifyAccount(const MyMoneyAccount& account, bool skipCheck = false) override;
+  void modifyAccount(const MyMoneyAccount& account, bool skipCheck = false);
 
   /**
     * Modifies an already existing institution in the file global
@@ -315,7 +330,7 @@ public:
     *
     * @param institution The complete new institution information
     */
-  void modifyInstitution(const MyMoneyInstitution& institution) override;
+  void modifyInstitution(const MyMoneyInstitution& institution);
 
   /**
     * This method is used to update a specific transaction in the
@@ -325,10 +340,10 @@ public:
     *
     * @param transaction reference to transaction to be changed
     */
-  void modifyTransaction(const MyMoneyTransaction& transaction) override;
+  void modifyTransaction(const MyMoneyTransaction& transaction);
 
   /** @todo implement */
-  void modifyOnlineJob(const onlineJob& job) override;
+  void modifyOnlineJob(const onlineJob& job);
 
   /**
     * This method re-parents an existing account
@@ -338,7 +353,7 @@ public:
     * @param account MyMoneyAccount reference to account to be re-parented
     * @param parent  MyMoneyAccount reference to new parent account
     */
-  void reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent) override;
+  void reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent);
 
   /**
     * This method is used to remove a transaction from the transaction
@@ -346,7 +361,7 @@ public:
     *
     * @param transaction const reference to transaction to be deleted
     */
-  void removeTransaction(const MyMoneyTransaction& transaction) override;
+  void removeTransaction(const MyMoneyTransaction& transaction);
 
   /**
     * Deletes an existing account from the file global account pool
@@ -357,7 +372,7 @@ public:
     *
     * @param account reference to the account to be deleted.
     */
-  void removeAccount(const MyMoneyAccount& account) override;
+  void removeAccount(const MyMoneyAccount& account);
 
   /**
     * Deletes an existing institution from the file global institution pool
@@ -366,13 +381,13 @@ public:
     *
     * @param institution institution to be deleted.
     */
-  void removeInstitution(const MyMoneyInstitution& institution) override;
+  void removeInstitution(const MyMoneyInstitution& institution);
 
-  onlineJob getOnlineJob(const QString& id) const override;
+  onlineJob getOnlineJob(const QString& id) const;
   /** @todo implement */
-  ulong onlineJobId() const override;
+  ulong onlineJobId() const;
 
-  void removeOnlineJob(const onlineJob &) override;
+  void removeOnlineJob(const onlineJob &);
 
   /**
     * This method is used to extract a transaction from the file global
@@ -382,7 +397,7 @@ public:
     * @param id id of transaction as QString.
     * @return reference to the requested transaction
     */
-  MyMoneyTransaction transaction(const QString& id) const override;
+  MyMoneyTransaction transaction(const QString& id) const;
 
   /**
     * This method is used to extract a transaction from the file global
@@ -392,7 +407,7 @@ public:
     * @param idx number of transaction in this account
     * @return reference to MyMoneyTransaction object
     */
-  MyMoneyTransaction transaction(const QString& account, const int idx) const override;
+  MyMoneyTransaction transaction(const QString& account, const int idx) const;
 
   /**
     * This method is used to determince, if the account with the
@@ -401,7 +416,7 @@ public:
     * @param id id of the account to be checked for
     * @return true if account is referenced, false otherwise
     */
-  bool hasActiveSplits(const QString& id) const override;
+  bool hasActiveSplits(const QString& id) const;
 
   /**
     * This method is used to return the actual balance of an account
@@ -414,7 +429,7 @@ public:
     * @param date return balance for specific date
     * @return balance of the account as MyMoneyMoney object
     */
-  MyMoneyMoney balance(const QString& id, const QDate& date) const override;
+  MyMoneyMoney balance(const QString& id, const QDate& date) const;
 
   /**
     * This method is used to return the actual balance of an account
@@ -427,7 +442,7 @@ public:
     * @param date return balance for specific date
     * @return balance of the account as MyMoneyMoney object
     */
-  MyMoneyMoney totalBalance(const QString& id, const QDate& date) const override;
+  MyMoneyMoney totalBalance(const QString& id, const QDate& date) const;
 
   /**
     * Returns the institution of a given ID
@@ -436,7 +451,7 @@ public:
     * @return MyMoneyInstitution object filled with data. If the institution
     *         could not be found, an exception will be thrown
     */
-  MyMoneyInstitution institution(const QString& id) const override;
+  MyMoneyInstitution institution(const QString& id) const;
 
   /**
     * This method returns an indicator if the storage object has been
@@ -444,7 +459,7 @@ public:
     *
     * @return true if changed, false if not
     */
-  bool dirty() const override;
+  bool dirty() const;
 
   /**
     * This method can be used by an external object to force the
@@ -452,7 +467,7 @@ public:
     * to an external destination failed but the previous storage
     * to a local disk was ok.
     */
-  void setDirty() override;
+  void setDirty();
 
   /**
     * This method returns a list of the institutions
@@ -460,7 +475,7 @@ public:
     *
     * @return QMap containing the institution information
     */
-  QList<MyMoneyInstitution> institutionList() const override;
+  QList<MyMoneyInstitution> institutionList() const;
 
   /**
     * This method returns a list of accounts inside the storage object.
@@ -469,7 +484,7 @@ public:
     *
     * @note The standard accounts will not be returned
     */
-  void accountList(QList<MyMoneyAccount>& list) const override;
+  void accountList(QList<MyMoneyAccount>& list) const;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -487,7 +502,7 @@ public:
     *
     * @return set of transactions in form of a QList<MyMoneyTransaction>
     */
-  void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const override;
+  void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -505,33 +520,33 @@ public:
     *
     * @return set of transactions in form of a QList<QPair<MyMoneyTransaction,MyMoneySplit> >
     */
-  void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const override;
+  void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * Compatibility interface for the previous method.
     */
-  QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const override;
+  QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
   /**
    * @brief Return all onlineJobs
    */
-  QList<onlineJob> onlineJobList() const override;
+  QList<onlineJob> onlineJobList() const;
 
   /**
    * @brief Return all cost center objects
    */
-  QList< MyMoneyCostCenter > costCenterList() const override;
+  QList< MyMoneyCostCenter > costCenterList() const;
 
   /**
    * @brief Return cost center object by id
    */
-  MyMoneyCostCenter costCenter(const QString& id) const override;
+  MyMoneyCostCenter costCenter(const QString& id) const;
 
   /**
     * This method returns whether a given transaction is already in memory, to avoid
     * reloading it from the database
     */
-  bool isDuplicateTransaction(const QString& id) const override;
+  bool isDuplicateTransaction(const QString& id) const;
 
   /**
     * This method returns the number of transactions currently known to file
@@ -544,9 +559,9 @@ public:
     *
     * @return number of transactions in journal/account
     */
-  uint transactionCount(const QString& account) const override;
+  uint transactionCount(const QString& account) const;
 
-  QMap<QString, ulong> transactionCountMap() const override;
+  QMap<QString, ulong> transactionCountMap() const;
 
   /**
     * This method returns the number of institutions currently known to file
@@ -554,7 +569,7 @@ public:
     *
     * @return number of institutions known to file
     */
-  uint institutionCount() const override;
+  uint institutionCount() const;
 
   /**
     * This method returns the number of accounts currently known to file
@@ -562,81 +577,49 @@ public:
     *
     * @return number of accounts currently known inside a MyMoneyFile object
     */
-  uint accountCount() const override;
+  uint accountCount() const;
 
   /**
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  MyMoneyAccount liability() const override;
+  MyMoneyAccount liability() const;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  MyMoneyAccount asset() const override;
+  MyMoneyAccount asset() const;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  MyMoneyAccount expense() const override;
+  MyMoneyAccount expense() const;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  MyMoneyAccount income() const override;
+  MyMoneyAccount income() const;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  MyMoneyAccount equity() const override;
+  MyMoneyAccount equity() const;
 
-  void loadAccounts(const QMap<QString, MyMoneyAccount>& acc) override;
-  void loadTransactions(const QMap<QString, MyMoneyTransaction>& map) override;
-  void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map) override;
-  void loadPayees(const QMap<QString, MyMoneyPayee>& map) override;
-  void loadTags(const QMap<QString, MyMoneyTag>& map) override;
-  void loadSchedules(const QMap<QString, MyMoneySchedule>& map) override;
-  void loadSecurities(const QMap<QString, MyMoneySecurity>& map) override;
-  void loadCurrencies(const QMap<QString, MyMoneySecurity>& map) override;
-  void loadPrices(const MyMoneyPriceList& list) override;
-  void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) override;
-  void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters) override;
-
-  void loadAccountId(ulong id) override;
-  void loadTransactionId(ulong id) override;
-  void loadPayeeId(ulong id) override;
-  void loadTagId(ulong id) override;
-  void loadInstitutionId(ulong id) override;
-  void loadScheduleId(ulong id) override;
-  void loadSecurityId(ulong id) override;
-  void loadReportId(ulong id) override;
-  void loadBudgetId(ulong id) override;
-  void loadOnlineJobId(ulong id) override;
-  void loadCostCenterId(ulong id) override;
-
-  ulong accountId() const override;
-  ulong transactionId() const override;
-  ulong payeeId() const override;
-  ulong tagId() const override;
-  ulong institutionId() const override;
-  ulong scheduleId() const override;
-  ulong securityId() const override;
-  ulong reportId() const override;
-  ulong budgetId() const override;
-  ulong costCenterId() const override;
-
-  /**
-    * This method is used to extract a value from
-    * KeyValueContainer. For details see MyMoneyKeyValueContainer::value().
-    *
-    * @param key const reference to QString containing the key
-    * @return QString containing the value
-    */
-  QString value(const QString& key) const override;
+  void loadAccounts(const QMap<QString, MyMoneyAccount>& acc);
+  void loadTransactions(const QMap<QString, MyMoneyTransaction>& map);
+  void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map);
+  void loadPayees(const QMap<QString, MyMoneyPayee>& map);
+  void loadTags(const QMap<QString, MyMoneyTag>& map);
+  void loadSchedules(const QMap<QString, MyMoneySchedule>& map);
+  void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
+  void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
+  void loadPrices(const MyMoneyPriceList& list);
+  void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
+  void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters);
 
   /**
     * This method is used to set a value in the
@@ -645,7 +628,7 @@ public:
     * @param key const reference to QString containing the key
     * @param val const reference to QString containing the value
     */
-  void setValue(const QString& key, const QString& val) override;
+  void setValue(const QString& key, const QString& val);
 
   /**
     * This method is used to delete a key-value-pair from the
@@ -654,13 +637,20 @@ public:
     *
     * @param key const reference to QString containing the key
     */
-  void deletePair(const QString& key) override;
+  void deletePair(const QString& key);
 
-  // documented in IMyMoneySerialize base class
-  QMap<QString, QString> pairs() const override;
-
-  // documented in IMyMoneySerialize base class
-  void setPairs(const QMap<QString, QString>& list) override;
+  /**
+    * This method is used to initially store a set of key/value pairs
+    * in the container. It is meant to be used for loading functionality
+    * from permanent storage. See MyMoneyKeyValueContainer::setPairs()
+    * for details
+    *
+    * @param list const QMap<QString, QString> containing the set of
+    *             key/value pairs to be loaded into the container.
+    *
+    * @note All existing key/value pairs in the container will be deleted.
+    */
+  void setPairs(const QMap<QString, QString>& list);
 
   /**
     * This method is used to add a scheduled transaction to the engine.
@@ -672,7 +662,7 @@ public:
     *
     * @param sched reference to the MyMoneySchedule object
     */
-  void addSchedule(MyMoneySchedule& sched) override;
+  void addSchedule(MyMoneySchedule& sched);
 
   /**
     * This method is used to modify an existing MyMoneySchedule
@@ -682,7 +672,7 @@ public:
     *
     * @param sched const reference to the MyMoneySchedule object to be updated
     */
-  void modifySchedule(const MyMoneySchedule& sched) override;
+  void modifySchedule(const MyMoneySchedule& sched);
 
   /**
     * This method is used to remove an existing MyMoneySchedule object
@@ -692,7 +682,7 @@ public:
     *
     * @param sched const reference to the MyMoneySchedule object to be updated
     */
-  void removeSchedule(const MyMoneySchedule& sched) override;
+  void removeSchedule(const MyMoneySchedule& sched);
 
   /**
     * This method is used to retrieve a single MyMoneySchedule object.
@@ -703,7 +693,7 @@ public:
     * @param id QString containing the id of the MyMoneySchedule object
     * @return MyMoneySchedule object
     */
-  MyMoneySchedule schedule(const QString& id) const override;
+  MyMoneySchedule schedule(const QString& id) const;
 
   /**
     * This method is used to create a new security object.  The ID will be created
@@ -714,7 +704,7 @@ public:
     *
     * @param security MyMoneySecurity filled with data
     */
-  void addSecurity(MyMoneySecurity& security) override;
+  void addSecurity(MyMoneySecurity& security);
 
   /**
     * This method is used to modify an existing MyMoneySchedule
@@ -724,7 +714,7 @@ public:
     *
     * @param security reference to the MyMoneySecurity object to be updated
     */
-  void modifySecurity(const MyMoneySecurity& security) override;
+  void modifySecurity(const MyMoneySecurity& security);
 
   /**
     * This method is used to remove an existing MyMoneySecurity object
@@ -734,7 +724,7 @@ public:
     *
     * @param security reference to the MyMoneySecurity object to be removed
     */
-  void removeSecurity(const MyMoneySecurity& security) override;
+  void removeSecurity(const MyMoneySecurity& security);
 
   /**
     * This method is used to retrieve a single MyMoneySchedule object.
@@ -745,14 +735,14 @@ public:
     * @param id QString containing the id of the MyMoneySchedule object
     * @return MyMoneySchedule object
     */
-  MyMoneySecurity security(const QString& id) const override;
+  MyMoneySecurity security(const QString& id) const;
 
 
   /**
     * This method returns a list of security objects that the engine has
     * knowledge of.
     */
-  QList<MyMoneySecurity> securityList() const override;
+  QList<MyMoneySecurity> securityList() const;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -763,7 +753,7 @@ public:
     *
     * @param currency reference to the MyMoneyCurrency object
     */
-  void addCurrency(const MyMoneySecurity& currency) override;
+  void addCurrency(const MyMoneySecurity& currency);
 
   /**
     * This method is used to modify an existing MyMoneyCurrency
@@ -773,7 +763,7 @@ public:
     *
     * @param currency reference to the MyMoneyCurrency object
     */
-  void modifyCurrency(const MyMoneySecurity& currency) override;
+  void modifyCurrency(const MyMoneySecurity& currency);
 
   /**
     * This method is used to remove an existing MyMoneyCurrency object
@@ -783,7 +773,7 @@ public:
     *
     * @param currency reference to the MyMoneyCurrency object
     */
-  void removeCurrency(const MyMoneySecurity& currency) override;
+  void removeCurrency(const MyMoneySecurity& currency);
 
   /**
     * This method is used to retrieve a single MyMoneySchedule object.
@@ -794,7 +784,7 @@ public:
     * @param id QString containing the id of the MyMoneySchedule object
     * @return MyMoneySchedule object
     */
-  MyMoneySecurity currency(const QString& id) const override;
+  MyMoneySecurity currency(const QString& id) const;
 
   /**
     * This method is used to retrieve the list of all currencies
@@ -804,7 +794,7 @@ public:
     *
     * @return QList of all MyMoneyCurrency objects.
     */
-  QList<MyMoneySecurity> currencyList() const override;
+  QList<MyMoneySecurity> currencyList() const;
 
   /**
     * This method is used to extract a list of scheduled transactions
@@ -838,13 +828,13 @@ public:
       eMyMoney::Schedule::PaymentType paymentType,
       const QDate& startDate,
       const QDate& endDate,
-      bool overdue) const override;
+      bool overdue) const;
 
   QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
       int scheduleOcurrences,
       int schedulePaymentTypes,
       QDate startDate,
-      const QStringList& accounts) const override;
+      const QStringList& accounts) const;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -854,7 +844,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  QList<MyMoneyReport> reportList() const override;
+  QList<MyMoneyReport> reportList() const;
 
   /**
     * This method is used to add a new report to the engine.
@@ -866,7 +856,7 @@ public:
     *
     * @param report reference to the MyMoneyReport object
     */
-  void addReport(MyMoneyReport& report) override;
+  void addReport(MyMoneyReport& report);
 
   /**
     * This method is used to load a set of reports into the engine.  This is
@@ -876,7 +866,7 @@ public:
     *
     * @param reports reference to the map of MyMoneyReport objects
     */
-  void loadReports(const QMap<QString, MyMoneyReport>& reports) override;
+  void loadReports(const QMap<QString, MyMoneyReport>& reports);
 
   /**
     * This method is used to modify an existing MyMoneyReport
@@ -886,7 +876,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  void modifyReport(const MyMoneyReport& report) override;
+  void modifyReport(const MyMoneyReport& report);
 
   /**
     * This method returns the number of reports currently known to file
@@ -894,7 +884,7 @@ public:
     *
     * @return number of reports known to file
     */
-  uint countReports() const override;
+  uint countReports() const;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -905,7 +895,7 @@ public:
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
     */
-  MyMoneyReport report(const QString& id) const override;
+  MyMoneyReport report(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyReport object
@@ -915,7 +905,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  void removeReport(const MyMoneyReport& report) override;
+  void removeReport(const MyMoneyReport& report);
 
   /**
     * This method is used to retrieve the list of all budgets
@@ -925,7 +915,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  QList<MyMoneyBudget> budgetList() const override;
+  QList<MyMoneyBudget> budgetList() const;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -937,7 +927,7 @@ public:
     *
     * @param budget reference to the MyMoneyBudget object
     */
-  void addBudget(MyMoneyBudget& budget) override;
+  void addBudget(MyMoneyBudget& budget);
 
   /**
     * This method is used to load a set of budgets into the engine.  This is
@@ -947,7 +937,7 @@ public:
     *
     * @param budgets reference to the map of MyMoneyBudget object
     */
-  void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets) override;
+  void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets);
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -958,7 +948,7 @@ public:
     *
     * @return MyMoneyBudget reference to object of budget
     */
-  MyMoneyBudget budgetByName(const QString& budget) const override;
+  MyMoneyBudget budgetByName(const QString& budget) const;
 
   /**
     * This method is used to modify an existing MyMoneyBudget
@@ -968,7 +958,7 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  void modifyBudget(const MyMoneyBudget& budget) override;
+  void modifyBudget(const MyMoneyBudget& budget);
 
   /**
     * This method returns the number of budgets currently known to file
@@ -976,7 +966,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  uint countBudgets() const override;
+  uint countBudgets() const;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -987,7 +977,7 @@ public:
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
     */
-  MyMoneyBudget budget(const QString& id) const override;
+  MyMoneyBudget budget(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyBudget object
@@ -997,28 +987,28 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  void removeBudget(const MyMoneyBudget& budget) override;
+  void removeBudget(const MyMoneyBudget& budget);
 
   /**
     * This method adds/replaces a price to/from the price list
     */
-  void addPrice(const MyMoneyPrice& price) override;
+  void addPrice(const MyMoneyPrice& price);
 
   /**
     * This method removes a price from the price list
     */
-  void removePrice(const MyMoneyPrice& price) override;
+  void removePrice(const MyMoneyPrice& price);
 
   /**
     * This method retrieves a price from the price list.
     * If @p date is inValid, QDate::currentDate() is assumed.
     */
-  MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& _date, bool exactDate) const override;
+  MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& _date, bool exactDate) const;
 
   /**
     * This method returns a list of all price entries.
     */
-  MyMoneyPriceList priceList() const override;
+  MyMoneyPriceList priceList() const;
 
   /**
     * This method checks, if the given @p object is referenced
@@ -1031,96 +1021,25 @@ public:
     * @retval false @p object is not referenced
     * @retval true @p institution is referenced
     */
-  bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const override;
+  bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const;
 
   /**
     * This method recalculates the balances of all accounts
     * based on the transactions stored in the engine.
     */
-  void rebuildAccountBalances() override;
+  void rebuildAccountBalances();
 
-  void startTransaction() override;
-  bool commitTransaction() override;
-  void rollbackTransaction() override;
-
-protected:
-  /**
-    * The member variable m_nextAccountID keeps the number that will be
-    * assigned to the next institution created. It is maintained by
-    * nextAccountID().
-    */
-  QString nextAccountID() override;
-
-  /**
-     * The member variable m_nextTransactionID keeps the number that will be
-     * assigned to the next transaction created. It is maintained by
-     * nextTransactionID().
-     */
-  QString nextTransactionID() override;
-
-  /**
-    * The member variable m_nextPayeeID keeps the number that will be
-    * assigned to the next payee created. It is maintained by
-    * nextPayeeID()
-    */
-  QString nextPayeeID() override;
-
-  /**
-    * The member variable m_nextTagID keeps the number that will be
-    * assigned to the next tag created. It is maintained by
-    * nextTagID()
-    */
-  QString nextTagID() override;
-
-  /**
-    * The member variable m_nextInstitutionID keeps the number that will be
-    * assigned to the next institution created. It is maintained by
-    * nextInstitutionID().
-    */
-  QString nextInstitutionID() override;
-
-  /**
-    * The member variable m_nextScheduleID keeps the number that will be
-    * assigned to the next schedule created. It is maintained by
-    * nextScheduleID()
-    */
-  QString nextScheduleID() override;
-
-  /**
-    * The member variable m_nextSecurityID keeps the number that will be
-    * assigned to the next security object created.  It is maintained by
-    * nextSecurityID()
-    */
-  QString nextSecurityID() override;
-
-  QString nextReportID() override;
-
-  /**
-    * The member variable m_nextBudgetID keeps the number that will be
-    * assigned to the next budget object created.  It is maintained by
-    * nextBudgetID()
-    */
-  QString nextBudgetID() override;
-
-  /**
-    * This member variable keeps the number that will be assigned to the
-    * next onlineJob object created. It is maintained by nextOnlineJobID()
-    */
-  QString nextOnlineJobID() override;
-
-  /**
-    * This member variable keeps the number that will be assigned to the
-    * next cost center object created. It is maintained by nextCostCenterID()
-    */
-  QString nextCostCenterID() override;
-
-private:
-  MyMoneySeqAccessMgrPrivate* const d_ptr;
-  Q_DECLARE_PRIVATE_D(MyMoneySeqAccessMgr::d_ptr, MyMoneySeqAccessMgr)
+  void startTransaction();
+  bool commitTransaction();
+  void rollbackTransaction();
 
   /**
    * This method will close a database and log the use roff
    */
-  void close() override;
+  void close();
+
+private:
+  MyMoneyStorageMgrPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(MyMoneyStorageMgr)
 };
 #endif

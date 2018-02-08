@@ -47,7 +47,7 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* 
   connect(m_view, &KMyMoneyView::kmmFilePlugin, this, &ViewInterface::kmmFilePlugin);
 }
 
-bool KMyMoneyPlugin::KMMViewInterface::readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader)
+bool KMyMoneyPlugin::KMMViewInterface::readFile(const QUrl &url, IMyMoneyOperationsFormat *pExtReader)
 {
   return m_view->readFile(url, pExtReader);
 }

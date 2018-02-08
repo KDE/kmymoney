@@ -33,7 +33,7 @@
 
 #include "ui_kmymoneyfileinfodlg.h"
 
-#include <imymoneystorage.h>
+#include "mymoneystoragemgr.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"

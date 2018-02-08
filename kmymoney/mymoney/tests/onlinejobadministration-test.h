@@ -23,7 +23,7 @@
 #include <QString>
 
 class MyMoneyFile;
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobAdministrationTest;
 
@@ -31,7 +31,7 @@ class onlineJobAdministrationTest : public QObject
 {
   Q_OBJECT
 
-  IMyMoneyStorage* storage;
+  MyMoneyStorageMgr* storage;
   MyMoneyFile* file;
   QString accountId;
 private Q_SLOTS:

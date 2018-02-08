@@ -23,7 +23,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 
 #include "mymoneyforecast.h"
 
@@ -60,7 +60,7 @@ protected:
   MyMoneyForecast *m;
 
 private:
-  MyMoneySeqAccessMgr* storage;
+  MyMoneyStorageMgr* storage;
   MyMoneyFile* file;
 
   MyMoneyMoney moT1;

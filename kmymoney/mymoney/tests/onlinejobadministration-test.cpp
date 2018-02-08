@@ -23,7 +23,7 @@
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoney/storage/mymoneystoragemgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "mymoneyenums.h"
 
@@ -32,7 +32,7 @@ QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 void onlineJobAdministrationTest::initTestCase()
 {
   file = MyMoneyFile::instance();
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file->attachStorage(storage);
 
   try {

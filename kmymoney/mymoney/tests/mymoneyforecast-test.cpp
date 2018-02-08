@@ -55,7 +55,7 @@ void MyMoneyForecastTest::init()
 
   //all this has been taken from pivottabletest.cpp, by Thomas Baumgart and Ace Jones
 
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
 

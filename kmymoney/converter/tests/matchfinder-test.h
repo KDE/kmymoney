@@ -22,7 +22,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneypayee.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 
@@ -36,7 +36,7 @@ private:
   MyMoneyFile *                       file;
   QScopedPointer<MyMoneyAccount>      account;
   QScopedPointer<MyMoneyAccount>      otherAccount;
-  QScopedPointer<MyMoneySeqAccessMgr> storage;
+  QScopedPointer<MyMoneyStorageMgr> storage;
   MyMoneyPayee                        payee;
   MyMoneyPayee                        otherPayee;
   static const int                    MATCH_WINDOW = 4;

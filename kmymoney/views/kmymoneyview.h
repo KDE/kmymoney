@@ -56,7 +56,7 @@ class KTagsView;
 class KBudgetView;
 class KScheduledView;
 class KGlobalLedgerView;
-class IMyMoneyStorageFormat;
+class IMyMoneyOperationsFormat;
 class MyMoneyTransaction;
 class KInvestmentView;
 class KReportsView;
@@ -164,7 +164,7 @@ private:
     * object. It calls removeStorage() to remove a possibly attached
     * storage object.
     */
-  void newStorage(storageTypeE = Memory);
+  void newStorage();
 
   /**
     * This method removes an attached storage from the MyMoneyFile
@@ -232,7 +232,7 @@ public:
     *
     * @return Whether the read was successful.
     */
-  bool readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader = nullptr);
+  bool readFile(const QUrl &url, IMyMoneyOperationsFormat *pExtReader = nullptr);
 
   /**
     * Saves the data into permanent storage using the XML format.
@@ -265,6 +265,7 @@ public:
    * @retval true save operation was successful
    */
   bool saveAsDatabase(const QUrl &url);
+  bool saveDatabase(const QUrl &url);
 
   /**
     * Call this to find out if the currently open file is native KMM
@@ -497,7 +498,7 @@ private:
     *
     * @note This method will close the file when it is written.
     */
-  void saveToLocalFile(const QString& localFile, IMyMoneyStorageFormat* writer, bool plaintext = false, const QString& keyList = QString());
+  void saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* writer, bool plaintext = false, const QString& keyList = QString());
 
   /**
     * Internal method used by slotAccountNew() and slotAccountCategory().

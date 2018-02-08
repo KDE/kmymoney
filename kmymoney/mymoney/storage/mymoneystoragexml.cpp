@@ -39,7 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneyserialize.h"
+#include "mymoneystoragemgr.h"
 #include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyaccount.h"
@@ -462,7 +462,7 @@ MyMoneyStorageXML::~MyMoneyStorageXML()
 }
 
 // Function to read in the file, send to XML parser.
-void MyMoneyStorageXML::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
+void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
 {
   Q_CHECK_PTR(storage);
   Q_CHECK_PTR(pDevice);
@@ -510,7 +510,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
   signalProgress(-1, -1);
 }
 
-void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
+void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage)
 {
   Q_CHECK_PTR(qf);
   Q_CHECK_PTR(storage);
@@ -590,7 +590,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   QDomElement onlineJobs = m_doc->createElement(tagNames[tnOnlineJobs]);
   writeOnlineJobs(onlineJobs);
   mainElement.appendChild(onlineJobs);
-  
+
   QTextStream stream(qf);
   stream.setCodec("UTF-8");
   stream << m_doc->toString();

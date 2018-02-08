@@ -77,7 +77,7 @@ public:
     *
     * @return Whether the read was successful.
     */
-  bool readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader = nullptr) override;
+  bool readFile(const QUrl &url, IMyMoneyOperationsFormat *pExtReader = nullptr) override;
 
   /**
     * Makes sure that a MyMoneyFile is open and has been created successfully.

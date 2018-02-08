@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneyseqaccessmgrtest.h
+                          mymoneystoragemgrtest.h
                           -------------------
     copyright            : (C) 2002 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
@@ -14,24 +14,24 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MYMONEYSEQACCESSMGRTEST_H
-#define MYMONEYSEQACCESSMGRTEST_H
+#ifndef MYMONEYSTORAGEMGRTEST_H
+#define MYMONEYSTORAGEMGRTEST_H
 
 #include <QObject>
 
-#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySeqAccessMgrTest;
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyStorageMgrTest;
 
 #include "mymoneyobject.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 
-class MyMoneySeqAccessMgrTest : public QObject
+class MyMoneyStorageMgrTest : public QObject
 {
   Q_OBJECT
 
 public:
   void testAccount();
 protected:
-  MyMoneySeqAccessMgr *m;
+  MyMoneyStorageMgr *m;
 private Q_SLOTS:
   void init();
   void cleanup();
@@ -66,7 +66,7 @@ private Q_SLOTS:
   void testRemoveTag();
   void testRemoveAccountFromTree();
 //  void testAssignment();
-  void testEquality(const MyMoneySeqAccessMgr* t);
+  void testEquality(const MyMoneyStorageMgr* t);
 //  void testDuplicate();
   void testAddSchedule();
   void testSchedule();

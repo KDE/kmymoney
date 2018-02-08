@@ -41,7 +41,7 @@ using namespace convertertest;
 
 void ConverterTest::init()
 {
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
 

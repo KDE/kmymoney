@@ -37,7 +37,7 @@
 #include "viewinterface.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 #include "kmymoneyglobalsettings.h"
 
 class MyMoneyStatement;

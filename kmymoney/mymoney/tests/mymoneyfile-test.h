@@ -24,14 +24,14 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "storage/mymoneyseqaccessmgr.h"
+#include "storage/mymoneystoragemgr.h"
 
 class MyMoneyFileTest : public QObject
 {
   Q_OBJECT
 protected:
   MyMoneyFile *m;
-  MyMoneySeqAccessMgr* storage;
+  MyMoneyStorageMgr* storage;
   MyMoneyAccount  m_inv;
 
 private Q_SLOTS:

@@ -20,7 +20,7 @@
 
 #include <QObject>
 #include "mymoneyfile.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneystoragemgr.h"
 
 class KReportsViewTest : public QObject
 {
@@ -29,7 +29,7 @@ class KReportsViewTest : public QObject
 private:
   MyMoneyAccount  *m;
 
-  MyMoneySeqAccessMgr* storage;
+  MyMoneyStorageMgr* storage;
   MyMoneyFile* file;
 
 private Q_SLOTS:
