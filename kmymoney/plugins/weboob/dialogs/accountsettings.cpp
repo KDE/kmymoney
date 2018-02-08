@@ -18,8 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WEBOOB_H
-#define WEBOOB_H
+#include "accountsettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -30,42 +29,51 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyplugin.h"
+#include "ui_accountsettings.h"
 
-class MyMoneyAccount;
-class MyMoneyKeyValueContainer;
+#include "mymoneykeyvaluecontainer.h"
 
-class WeboobPrivate;
-class Weboob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
+class AccountSettingsPrivate
 {
-  Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
-
 public:
-  explicit Weboob(QObject *parent, const QVariantList &args);
-  ~Weboob() override;
+  AccountSettingsPrivate() :
+    ui(new Ui::AccountSettings)
+  {
+  }
 
-  void plug() override;
-  void unplug() override;
-
-  void protocols(QStringList& protocolList) const override;
-
-  QWidget* accountConfigTab(const MyMoneyAccount& account, QString& tabName) override;
-
-  MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current) override;
-
-  bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings) override;
-
-  bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
-
-  void injectExternalSettings(KMyMoneySettings* p) override;
-  
-private:
-  Q_DECLARE_PRIVATE(Weboob)
-  WeboobPrivate * const d_ptr;
-
-private Q_SLOTS:
-  void gotAccount();
+  ~AccountSettingsPrivate()
+  {
+    delete ui;
+  }
+  Ui::AccountSettings *ui;
 };
 
-#endif
+AccountSettings::AccountSettings(const MyMoneyAccount& /*acc*/, QWidget* parent) :
+    QWidget(parent),
+    d_ptr(new AccountSettingsPrivate)
+{
+  Q_D(AccountSettings);
+  d->ui->setupUi(this);
+}
+
+AccountSettings::~AccountSettings()
+{
+  Q_D(AccountSettings);
+  delete d;
+}
+
+void AccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
+{
+  Q_D(AccountSettings);
+  d->ui->id->setText(kvp.value("wb-id"));
+  d->ui->backend->setText(kvp.value("wb-backend"));
+  d->ui->max_history->setText(kvp.value("wb-max"));
+}
+
+void AccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
+{
+  Q_D(AccountSettings);
+  kvp.setValue("wb-id", d->ui->id->text());
+  kvp.setValue("wb-backend", d->ui->backend->text());
+  kvp.setValue("wb-max", d->ui->max_history->text());
+}
