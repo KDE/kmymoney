@@ -17,6 +17,10 @@ target_link_libraries(kmm_csvimportercore
     kmm_mymoney
 )
 
+set_target_properties(kmm_csvimportercore PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
 ########### install files ###############
 
 install(TARGETS kmm_csvimportercore
