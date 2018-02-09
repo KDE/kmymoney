@@ -1,5 +1,7 @@
 set (libinterfaces_a_SOURCES
-  kmmimportinterface.cpp kmmstatementinterface.cpp
+  kmmappinterface.cpp
+  kmmimportinterface.cpp
+  kmmstatementinterface.cpp
   kmmviewinterface.cpp
   )
 

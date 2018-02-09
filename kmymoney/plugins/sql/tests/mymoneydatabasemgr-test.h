@@ -26,9 +26,9 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyStorageMgrTest;
 
-#include "../mymoneyobject.h"
+#include "mymoneyobject.h"
 #include "mymoneystoragemgr.h"
-#include "mymoneystoragesql.h"
+#include "../mymoneystoragesql.h"
 
 class MyMoneyStorageMgrTest : public QObject
 {

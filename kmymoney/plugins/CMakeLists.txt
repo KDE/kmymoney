@@ -9,6 +9,10 @@ add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
 
+if(ENABLE_SQLSTORAGE)
+  add_subdirectory(sql)
+endif()
+
 if (KBANKING_FOUND)
   add_subdirectory( kbanking )
 endif (KBANKING_FOUND)
@@ -30,6 +34,7 @@ endif ()
 ########### next target ###############
 
 set(kmm_plugin_LIB_SRCS
+  appinterface.cpp
   importinterface.cpp
   kmymoneyplugin.cpp
   statementinterface.cpp
@@ -39,6 +44,7 @@ set(kmm_plugin_LIB_SRCS
 )
 
 set(plugins_HEADERS
+  appinterface.h
   importinterface.h
   kmymoneyplugin.h
   statementinterface.h

@@ -1,0 +1,13 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-sqlstorage" version="0">
+  <MenuBar>
+    <Menu name="file">
+      <Action name="open_database" group="open_db_group"/>
+      <Action name="saveas_database" group="save_db_group"/>
+    </Menu>
+    <Menu name="kmmtools" >
+      <Text>T&amp;ools</Text>
+      <Action name="tools_generate_sql" group="tools_group"/>
+    </Menu>  
+  </MenuBar>
+</kpartgui>

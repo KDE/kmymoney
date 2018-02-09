@@ -22,7 +22,6 @@ set(libdialogs_a_SOURCES
   kequitypriceupdatedlg.cpp
   kequitypriceupdateconfdlg.cpp
   kfindtransactiondlg.cpp
-  kgeneratesqldlg.cpp
   kgpgkeyselectiondlg.cpp
   kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp
@@ -38,7 +37,6 @@ set(libdialogs_a_SOURCES
   kpayeereassigndlg.cpp
   ktagreassigndlg.cpp
   kreportconfigurationfilterdlg.cpp
-  kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp
   ksplittransactiondlg.cpp
   ktemplateexportdlg.cpp
@@ -63,13 +61,13 @@ set(dialogs_UI
   keditscheduledlg.ui
   kenterscheduledlg.ui
   kequitypriceupdatedlg.ui kequitypriceupdateconfdlg.ui
-  kfindtransactiondlg.ui kgeneratesqldlg.ui
+  kfindtransactiondlg.ui
   kloadtemplatedlg.ui
   kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
   knewaccountdlg.ui knewbankdlg.ui knewbudgetdlg.ui
   knewequityentrydlg.ui editpersonaldatadlg.ui kpayeereassigndlg.ui
   ktagreassigndlg.ui
-  kselectdatabasedlg.ui kselecttransactionsdlg.ui
+  kselecttransactionsdlg.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui

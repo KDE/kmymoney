@@ -120,6 +120,9 @@ if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
   set(KMM_ADDRESSBOOK_FOUND true)
 endif()
 
+CMAKE_DEPENDENT_OPTION(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
+                       "Qt5Sql_FOUND" OFF)
+
 # check for optional QWebEngine
 option(ENABLE_WEBENGINE "Enable QWebEngine" OFF)
 if(ENABLE_WEBENGINE)

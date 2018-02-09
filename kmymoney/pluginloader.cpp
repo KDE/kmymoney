@@ -91,6 +91,7 @@ namespace KMyMoneyPlugin
           ctnPlugins.online.remove(it.key());
           ctnPlugins.extended.remove(it.key());
           ctnPlugins.importer.remove(it.key());
+          ctnPlugins.storage.remove(it.key());
 
           guiFactory->removeClient(it.value());
           it.value()->unplug();
@@ -142,6 +143,10 @@ namespace KMyMoneyPlugin
           auto IImporter = qobject_cast<ImporterPlugin *>(plugin);
           if (IImporter)
             ctnPlugins.importer.insert((*it).pluginId(), IImporter);
+
+          auto IStorage = qobject_cast<StoragePlugin *>(plugin);
+          if (IStorage)
+            ctnPlugins.storage.insert((*it).pluginId(), IStorage);
 
         }
       }

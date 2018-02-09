@@ -41,6 +41,7 @@ namespace KMyMoneyPlugin
   class OnlinePlugin;
   class OnlinePluginExtended;
   class ImporterPlugin;
+  class StoragePlugin;
 
   enum class eListing;
 
@@ -70,6 +71,7 @@ namespace KMyMoneyPlugin
     QMap<QString, OnlinePlugin*>         online;    // casted standard plugin, if such interface is available
     QMap<QString, OnlinePluginExtended*> extended;  // casted standard plugin, if such interface is available
     QMap<QString, ImporterPlugin*>       importer;  // casted standard plugin, if such interface is available
+    QMap<QString, StoragePlugin*>        storage;   // casted standard plugin, if such interface is available
   };
 
   Category pluginCategory(const KPluginMetaData& pluginInfo);

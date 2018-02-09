@@ -62,6 +62,12 @@ bool KMyMoneyPlugin::KMMViewInterface::fileOpen()
   return m_view->fileOpen();
 }
 
+bool KMyMoneyPlugin::KMMViewInterface::isDatabase()
+{
+  return m_view->isDatabase();
+}
+
+
 //KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)
 //{
 //  return m_view->addBasePage(item, icon);

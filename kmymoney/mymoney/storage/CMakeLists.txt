@@ -14,9 +14,6 @@ set(storage_a_SOURCES
   mymoneystoragexml.cpp
   mymoneystoragemgr.cpp
   mymoneystorageanon.cpp
-  mymoneystoragesql.cpp
-  mymoneydbdef.cpp
-  mymoneydbdriver.cpp
   kmymoneystorageplugin.cpp
   mymoneystoragenames.cpp
   )
@@ -45,7 +42,3 @@ target_link_libraries( kmm_storage
 
 install(FILES ${storage_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel )
-
-install(FILES kmymoney-sqlstorageplugin.desktop
-  DESTINATION ${SERVICETYPES_INSTALL_DIR}
-)

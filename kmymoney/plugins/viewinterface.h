@@ -83,6 +83,7 @@ public:
     */
   virtual bool fileOpen() = 0;
 
+  virtual bool isDatabase() = 0;
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
     * class KMyMoneySettings (a singleton).

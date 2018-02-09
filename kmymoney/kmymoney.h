@@ -339,6 +339,10 @@ public:
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
   QString filename() const;
+  QUrl filenameURL() const;
+
+  void addToRecentFiles(const QUrl& url);
+  QTimer* autosaveTimer();
 
   /**
     * Checks if the file with the @a url already exists. If so,
@@ -419,6 +423,8 @@ public Q_SLOTS:
 
   /** open a file and load it into the document*/
   void slotFileOpen();
+
+  bool isFileOpenedInAnotherInstance(const QUrl &url);
 
   /** opens a file from the recent files menu */
 

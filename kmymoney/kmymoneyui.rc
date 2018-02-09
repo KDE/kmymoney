@@ -1,9 +1,9 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="43" name="kmymoney" >
+<kpartgui version="44" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
-   <Action append="open_merge" name="open_database" />
-   <Action append="save_merge" name="saveas_database" />
+   <DefineGroup name="open_db_group" append="open_merge"/>
+   <DefineGroup name="save_db_group" append="save_merge"/>
    <Menu append="save_merge" name="import" >
     <text>&amp;Import</text>
     <Merge/>
@@ -99,7 +99,7 @@
    <Action name="tools_update_prices" />
    <Action name="tools_consistency_check" />
    <Action name="tools_performancetest" />
-   <Action name="tools_generate_sql" />
+   <DefineGroup name="tools_group" append="tools_group"/>
    <Separator/>
    <Action name="tools_plugin_list" />
    <Action name="debug_traces" />

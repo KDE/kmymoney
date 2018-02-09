@@ -20,7 +20,8 @@
 #include <QtTest>
 
 #include "mymoneystoragemgr_p.h"
-#include "mymoneystoragesql_p.h"
+#include "../mymoneystoragesql.h"
+#include "../mymoneystoragesql_p.h"
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
@@ -36,7 +37,6 @@
 #include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneybudget.h"
-#include "mymoneystoragesql.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "misc/platformtools.h"

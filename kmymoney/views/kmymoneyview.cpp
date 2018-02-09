@@ -69,7 +69,6 @@
 #include "mymoneystoragebin.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragexml.h"
-#include "mymoneystoragesql.h"
 #include "mymoneystorageanon.h"
 #include "khomeview.h"
 #include "kaccountsview.h"
@@ -102,6 +101,7 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyreport.h"
+#include "kmymoneyplugin.h"
 #include "mymoneyenums.h"
 
 using namespace Icons;
@@ -118,7 +118,8 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     m_inConstructor(true),
     m_fileOpen(false),
     m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
-    m_lastViewSelected(0)
+    m_lastViewSelected(0),
+    m_storagePlugins(nullptr)
 #ifdef KF5Activities_FOUND
     , m_activityResourceInstance(0)
 #endif
@@ -477,6 +478,11 @@ void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>
   m_onlineJobOutboxView->setOnlinePlugins(plugins);
 }
 
+void KMyMoneyView::setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin*>& plugins)
+{
+  m_storagePlugins = &plugins;
+}
+
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
 {
   return m_scheduledView->enterSchedule(schedule, autoEnter, extendedKeys);
@@ -689,7 +695,10 @@ bool KMyMoneyView::readFile(const QUrl &url, IMyMoneyOperationsFormat* pExtReade
     QUrlQuery query(url);
     query.removeQueryItem("mode");
     newUrl.setQuery(query);
-    return (openDatabase(newUrl)); // on error, any message will have been displayed
+    auto rc = openDatabase(newUrl); // on error, any message will have been displayed
+    if (!rc)
+      MyMoneyFile::instance()->attachStorage(new MyMoneyStorageMgr);
+    return rc;
   }
 
   auto storage = new MyMoneyStorageMgr;
@@ -922,54 +931,24 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
   if (!pStorage)
     pStorage = new MyMoneyStorageMgr;
 
-  auto reader = std::make_unique<MyMoneyStorageSql>(pStorage, url);
-
-  QUrl dbURL(url);
-  bool retry = true;
-  while (retry) {
-    switch (reader->open(dbURL, QIODevice::ReadWrite)) {
-      case 0: // opened okay
-        retry = false;
+  auto rc = false;
+  auto pluginFound = false;
+  if (m_storagePlugins) {
+    for (const auto& plugin : *m_storagePlugins) {
+      if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
+        rc = plugin->open(pStorage, url);
+        pluginFound = true;
         break;
-      case 1: // permanent error
-        KMessageBox::detailedError(this, i18n("Cannot open database %1\n", dbURL.toDisplayString()), reader->lastError());
-        if (pStorage) {
-          removeStorage();
-          delete pStorage;
-        }
-        return false;
-      case -1: // retryable error
-        if (KMessageBox::warningYesNo(this, reader->lastError(), PACKAGE) == KMessageBox::No) {
-          if (pStorage) {
-            removeStorage();
-            delete pStorage;
-          }
-          return false;
-        } else {
-          QUrlQuery query(dbURL);
-          const QString optionKey = QLatin1String("options");
-          QString options = query.queryItemValue(optionKey);
-          if(!options.isEmpty()) {
-            options += QLatin1Char(',');
-          }
-          options += QLatin1String("override");
-          query.removeQueryItem(QLatin1String("mode"));
-          query.removeQueryItem(optionKey);
-          query.addQueryItem(optionKey, options);
-          dbURL.setQuery(query);
-        }
+      }
     }
   }
-  // single user mode; read some of the data into memory
-  // FIXME - readFile no longer relevant?
-  // tried removing it but then got no indication that loading was complete
-  // also, didn't show home page
-  reader->setProgressCallback(&KMyMoneyView::progressCallback);
-  if (!reader->readFile()) {
-    KMessageBox::detailedError(this,
-                               i18n("An unrecoverable error occurred while reading the database"),
-                               reader->lastError().toLatin1(),
-                               i18n("Database malfunction"));
+
+  if(!pluginFound)
+    KMessageBox::error(this, i18n("Couldn't find suitable plugin to read your storage."));
+
+  if(!rc) {
+    removeStorage();
+    delete pStorage;
     return false;
   }
 
@@ -979,7 +958,6 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
   }
 
   m_fileOpen = true;
-  reader->setProgressCallback(0);
   return initializeStorage();
 }
 
@@ -1338,64 +1316,6 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
     rc = false;
   }
   emit kmmFilePlugin(postSave);
-  return rc;
-}
-
-bool KMyMoneyView::saveAsDatabase(const QUrl &url)
-{
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
-  bool canWrite = false;
-  switch (writer->open(url, QIODevice::WriteOnly)) {
-    case 0:
-      canWrite = true;
-      break;
-    case -1: // dbase already has data, see if he wants to clear it out
-      if (KMessageBox::warningContinueCancel(this,
-                                             i18n("Database contains data which must be removed before using Save As.\n"
-                                                  "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
-        if (writer->open(url, QIODevice::WriteOnly, true) == 0)
-          canWrite = true;
-      } else {
-        delete writer;
-        return false;
-      }
-      break;
-  }
-  delete writer;
-  if (canWrite) {
-    saveDatabase(url);
-    return true;
-  } else {
-    KMessageBox::detailedError(this,
-                               i18n("Cannot open or create database %1.\n"
-                                    "Retry Save As Database and click Help"
-                                    " for further info.", url.toDisplayString()), writer->lastError());
-    return false;
-  }
-}
-
-bool KMyMoneyView::saveDatabase(const QUrl &url)
-{
-  auto rc = false;
-  if (!fileOpen()) {
-    KMessageBox::error(this, i18n("Tried to access a file when it has not been opened"));
-    return (rc);
-  }
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
-  writer->open(url, QIODevice::WriteOnly);
-  writer->setProgressCallback(&KMyMoneyView::progressCallback);
-  if (!writer->writeFile()) {
-    KMessageBox::detailedError(this,
-                               i18n("An unrecoverable error occurred while writing to the database.\n"
-                                    "It may well be corrupt."),
-                               writer->lastError().toLatin1(),
-                               i18n("Database malfunction"));
-    rc =  false;
-  } else {
-    rc = true;
-  }
-  writer->setProgressCallback(0);
-  delete writer;
   return rc;
 }
 

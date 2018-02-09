@@ -91,7 +91,6 @@
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "dialogs/knewaccountdlg.h"
 #include "dialogs/editpersonaldatadlg.h"
-#include "dialogs/kselectdatabasedlg.h"
 #include "dialogs/kcurrencycalculator.h"
 #include "dialogs/keditscheduledlg.h"
 #include "wizards/newloanwizard/keditloanwizard.h"
@@ -99,7 +98,6 @@
 #include "dialogs/kcategoryreassigndlg.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
-#include "dialogs/kgeneratesqldlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/kgpgkeyselectiondlg.h"
 #include "dialogs/ktemplateexportdlg.h"
@@ -138,6 +136,7 @@
 #include "converter/mymoneystatementreader.h"
 #include "converter/mymoneytemplate.h"
 
+#include "plugins/interfaces/kmmappinterface.h"
 #include "plugins/interfaces/kmmviewinterface.h"
 #include "plugins/interfaces/kmmstatementinterface.h"
 #include "plugins/interfaces/kmmimportinterface.h"
@@ -152,7 +151,6 @@
 #include "misc/webconnect.h"
 
 #include "storage/mymoneystoragemgr.h"
-#include "storage/mymoneystoragesql.h"
 
 #include <libkgpgfile/kgpgfile.h>
 
@@ -431,6 +429,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, d->m_plugins, this, guiFactory());
   onlineJobAdministration::instance()->setOnlinePlugins(d->m_plugins.extended);
   d->m_myMoneyView->setOnlinePlugins(d->m_plugins.online);
+  d->m_myMoneyView->setStoragePlugins(d->m_plugins.storage);
 
   setCentralWidget(frame);
 
@@ -617,8 +616,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *************
       // The File menu
       // *************
-      {Action::FileOpenDatabase,              QStringLiteral("open_database"),                  i18n("Open database..."),                           Icon::SVNUpdate},
-      {Action::FileSaveAsDatabase,            QStringLiteral("saveas_database"),                i18n("Save as database..."),                        Icon::FileArchiver},
       {Action::FileBackup,                    QStringLiteral("file_backup"),                    i18n("Backup..."),                                  Icon::Empty},
       {Action::FileImportStatement,           QStringLiteral("file_import_statement"),          i18n("Statement file..."),                          Icon::Empty},
       {Action::FileImportTemplate,            QStringLiteral("file_import_template"),           i18n("Account Template..."),                        Icon::Empty},
@@ -678,7 +675,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::ToolUpdatePrices},
       {Action::ToolConsistency,               QStringLiteral("tools_consistency_check"),        i18n("Consistency Check"),                          Icon::Empty},
       {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::Fork},
-      {Action::ToolSQL,                       QStringLiteral("tools_generate_sql"),             i18n("Generate Database SQL"),                      Icon::Empty},
       {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::AccessoriesCalculator},
       // *****************
       // The settings menu
@@ -765,8 +761,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *************
       // The File menu
       // *************
-      {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase},
-      {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase},
+//      {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase},
+//      {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase},
       {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile},
       {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates},
       {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates},
@@ -801,7 +797,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate},
       {Action::ToolConsistency,               &KMyMoneyApp::slotFileConsistencyCheck},
       {Action::ToolPerformance,               &KMyMoneyApp::slotPerformanceTest},
-      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql},
+//      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql},
       {Action::ToolCalculator,                &KMyMoneyApp::slotToolsStartKCalc},
       // *****************
       // The settings menu
@@ -1250,17 +1246,17 @@ void KMyMoneyApp::slotFileOpen()
 
 void KMyMoneyApp::slotOpenDatabase()
 {
-  KMSTATUS(i18n("Open a file."));
-  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite);
-  if (!dialog->checkDrivers()) {
-    delete dialog;
-    return;
-  }
+//  KMSTATUS(i18n("Open a file."));
+//  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite);
+//  if (!dialog->checkDrivers()) {
+//    delete dialog;
+//    return;
+//  }
 
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    slotFileOpenRecent(dialog->selectedURL());
-  }
-  delete dialog;
+//  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+//    slotFileOpenRecent(dialog->selectedURL());
+//  }
+//  delete dialog;
 }
 
 bool KMyMoneyApp::isImportableFile(const QUrl &url)
@@ -1291,68 +1287,28 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   return result;
 }
 
+bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
+{
+  const auto instances = instanceList();
+#ifdef KMM_DBUS
+  // check if there are other instances which might have this file open
+  for (const auto& instance : instances) {
+    QDBusInterface remoteApp(instance, "/KMymoney", "org.kde.kmymoney");
+    QDBusReply<QString> reply = remoteApp.call("filename");
+    if (!reply.isValid())
+      qDebug("D-Bus error while calling app->filename()");
+    else if (reply.value() == url.url())
+      return true;
+  }
+#endif
+  return false;
+}
 
 void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 {
   KMSTATUS(i18n("Loading file..."));
-  QUrl lastFile = d->m_fileName;
-
-  // check if there are other instances which might have this file open
-  QList<QString> list = instanceList();
-  QList<QString>::ConstIterator it;
-  bool duplicate = false;
-#ifdef KMM_DBUS
-  for (it = list.constBegin(); duplicate == false && it != list.constEnd(); ++it) {
-    QDBusInterface remoteApp(*it, "/KMymoney", "org.kde.kmymoney");
-    QDBusReply<QString> reply = remoteApp.call("filename");
-    if (!reply.isValid()) {
-      qDebug("D-Bus error while calling app->filename()");
-    } else {
-      if (reply.value() == url.url()) {
-        duplicate = true;
-      }
-    }
-  }
-#endif
-  if (!duplicate) {
+  if (!isFileOpenedInAnotherInstance(url)) {
     QUrl newurl = url;
-    if ((newurl.scheme() == QLatin1String("sql"))) {
-      const QString key = QLatin1String("driver");
-      // take care and convert some old url to their new counterpart
-      QUrlQuery query(newurl);
-      if (query.queryItemValue(key) == QLatin1String("QMYSQL3")) { // fix any old urls
-        query.removeQueryItem(key);
-        query.addQueryItem(key, QLatin1String("QMYSQL"));
-      }
-      if (query.queryItemValue(key) == QLatin1String("QSQLITE3")) {
-        query.removeQueryItem(key);
-        query.addQueryItem(key, QLatin1String("QSQLITE"));
-      }
-      newurl.setQuery(query);
-
-      if (query.queryItemValue(key) == QLatin1String("QSQLITE")) {
-        newurl.setUserInfo(QString());
-        newurl.setHost(QString());
-      }
-      // check if a password is needed. it may be if the URL came from the last/recent file list
-      QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, newurl);
-      if (!dialog->checkDrivers()) {
-        delete dialog;
-        return;
-      }
-      // if we need to supply a password, then show the dialog
-      // otherwise it isn't needed
-      if ((query.queryItemValue("secure").toLower() == QLatin1String("yes")) && newurl.password().isEmpty()) {
-        if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
-          newurl = dialog->selectedURL();
-        } else {
-          delete dialog;
-          return;
-        }
-      }
-      delete dialog;
-    }
-
     if (newurl.scheme() == QLatin1String("sql") || KMyMoneyUtils::fileExists(newurl)) {
       slotFileClose();
       if (!d->m_myMoneyView->fileOpen()) {
@@ -1403,10 +1359,20 @@ bool KMyMoneyApp::slotFileSave()
   d->consistencyCheck(false);
 
   setEnabled(false);
-  if (d->m_myMoneyView->isDatabase())
-    rc = d->m_myMoneyView->saveDatabase(d->m_fileName);
-  else
+  if (d->m_myMoneyView->isDatabase()) {
+    auto pluginFound = false;
+    for (const auto& plugin : d->m_plugins.storage) {
+      if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
+        rc = plugin->save(d->m_fileName);
+        pluginFound = true;
+        break;
+      }
+    }
+    if(!pluginFound)
+      KMessageBox::error(this, i18n("Couldn't find suitable plugin to save your storage."));
+  } else {
     rc = d->m_myMoneyView->saveFile(d->m_fileName, MyMoneyFile::instance()->value("kmm-encryption-key"));
+  }
   setEnabled(true);
 
   d->m_autoSaveTimer->stop();
@@ -1574,48 +1540,49 @@ void KMyMoneyApp::slotSaveAsDatabase()
 
 bool KMyMoneyApp::saveAsDatabase()
 {
-  bool rc = false;
-  QUrl oldUrl;
-  // in event of it being a database, ensure that all data is read into storage for saveas
-  if (d->m_myMoneyView->isDatabase())
-    oldUrl = d->m_fileName.isEmpty() ? lastOpenedURL() : d->m_fileName;
+//  bool rc = false;
+//  QUrl oldUrl;
+//  // in event of it being a database, ensure that all data is read into storage for saveas
+//  if (d->m_myMoneyView->isDatabase())
+//    oldUrl = d->m_fileName.isEmpty() ? lastOpenedURL() : d->m_fileName;
 
-  KMSTATUS(i18n("Saving file to database..."));
-  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
-  QUrl url = oldUrl;
-  if (!dialog->checkDrivers()) {
-    delete dialog;
-    return (false);
-  }
+//  KMSTATUS(i18n("Saving file to database..."));
+//  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
+//  QUrl url = oldUrl;
+//  if (!dialog->checkDrivers()) {
+//    delete dialog;
+//    return (false);
+//  }
 
-  while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != 0) {
-    url = dialog->selectedURL();
-    // If the protocol is SQL for the old and new, and the hostname and database names match
-    // Let the user know that the current database cannot be saved on top of itself.
-    if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
-        && oldUrl.host() == url.host()
-        && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
-        && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
-      KMessageBox::sorry(this, i18n("Cannot save to current database."));
-    } else {
-      try {
-        rc = d->m_myMoneyView->saveAsDatabase(url);
-      } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot save to current database: %1", e.what()));
-      }
-    }
-  }
-  delete dialog;
+//  while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != 0) {
+//    url = dialog->selectedURL();
+//    // If the protocol is SQL for the old and new, and the hostname and database names match
+//    // Let the user know that the current database cannot be saved on top of itself.
+//    if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
+//        && oldUrl.host() == url.host()
+//        && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
+//        && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
+//      KMessageBox::sorry(this, i18n("Cannot save to current database."));
+//    } else {
+//      try {
+//        rc = d->m_myMoneyView->saveAsDatabase(url);
+//      } catch (const MyMoneyException &e) {
+//        KMessageBox::sorry(this, i18n("Cannot save to current database: %1", e.what()));
+//      }
+//    }
+//  }
+//  delete dialog;
 
-  if (rc) {
-    //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-    //if(p)
-    d->m_recentFiles->addUrl(url);
-    writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
-  }
-  d->m_autoSaveTimer->stop();
-  updateCaption();
-  return rc;
+//  if (rc) {
+//    //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+//    //if(p)
+//    d->m_recentFiles->addUrl(url);
+//    writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
+//  }
+//  d->m_autoSaveTimer->stop();
+//  updateCaption();
+//  return rc;
+  return false;
 }
 
 void KMyMoneyApp::slotFileCloseWindow()
@@ -1953,7 +1920,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   d->m_myMoneyView->updateViewType();
 
   // update the sql storage module settings
-  MyMoneyStorageSql::setStartDate(KMyMoneyGlobalSettings::startDate().date());
+//  MyMoneyStorageSql::setStartDate(KMyMoneyGlobalSettings::startDate().date());
 
   // update the report module settings
   MyMoneyReport::setLineWidth(KMyMoneyGlobalSettings::lineWidth());
@@ -2208,10 +2175,10 @@ void KMyMoneyApp::slotShowNextView()
 
 void KMyMoneyApp::slotGenerateSql()
 {
-  QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(this);
-  editor->setObjectName("Generate Database SQL");
-  editor->exec();
-  delete editor;
+//  QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(this);
+//  editor->setObjectName("Generate Database SQL");
+//  editor->exec();
+//  delete editor;
 }
 
 void KMyMoneyApp::slotToolsStartKCalc()
@@ -2616,8 +2583,8 @@ void KMyMoneyApp::slotUpdateActions()
   {
     QString tooltip = i18n("Create a new transaction");
     const QVector<QPair<Action, bool>> actionStates {
-      {qMakePair(Action::FileOpenDatabase, true)},
-      {qMakePair(Action::FileSaveAsDatabase, fileOpen)},
+//      {qMakePair(Action::FileOpenDatabase, true)},
+//      {qMakePair(Action::FileSaveAsDatabase, fileOpen)},
       {qMakePair(Action::FilePersonalData, fileOpen)},
       {qMakePair(Action::FileBackup, (fileOpen && !d->m_myMoneyView->isDatabase()))},
       {qMakePair(Action::FileInformation, fileOpen)},
@@ -2937,6 +2904,21 @@ QString KMyMoneyApp::filename() const
   return d->m_fileName.url();
 }
 
+QUrl KMyMoneyApp::filenameURL() const
+{
+  return d->m_fileName;
+}
+
+void KMyMoneyApp::addToRecentFiles(const QUrl& url)
+{
+  d->m_recentFiles->addUrl(url);
+}
+
+QTimer* KMyMoneyApp::autosaveTimer()
+{
+  return d->m_autoSaveTimer;
+}
+
 WebConnect* KMyMoneyApp::webConnect() const
 {
   return d->m_webConnect;
@@ -3049,6 +3031,7 @@ void KMyMoneyApp::slotEnableMessages()
 void KMyMoneyApp::createInterfaces()
 {
   // Sets up the plugin interface
+  KMyMoneyPlugin::pluginInterfaces().appInterface = new KMyMoneyPlugin::KMMAppInterface(this, this);
   KMyMoneyPlugin::pluginInterfaces().importInterface = new KMyMoneyPlugin::KMMImportInterface(this);
   KMyMoneyPlugin::pluginInterfaces().statementInterface = new KMyMoneyPlugin::KMMStatementInterface(this);
   KMyMoneyPlugin::pluginInterfaces().viewInterface = new KMyMoneyPlugin::KMMViewInterface(d->m_myMoneyView, this);

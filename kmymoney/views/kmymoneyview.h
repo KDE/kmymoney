@@ -44,6 +44,7 @@ class ResourceInstance;
 namespace eAccountsModel { enum class Column; }
 namespace eMenu { enum class Action; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
+namespace KMyMoneyPlugin { class StoragePlugin; }
 namespace eDialogs { enum class ScheduleResultCode; }
 
 class KMyMoneyApp;
@@ -133,6 +134,8 @@ private:
   bool m_fileOpen;
   QFileDevice::Permissions m_fmode;
   int m_lastViewSelected;
+
+  QMap<QString, KMyMoneyPlugin::StoragePlugin*>* m_storagePlugins;
 
   // Keep a note of the file type
   typedef enum _fileTypeE {
@@ -247,25 +250,6 @@ public:
     * @retval true save operation was successful
     */
   bool saveFile(const QUrl &url, const QString& keyList = QString());
-  /**
-   * Saves the data into permanent storage on a new or empty SQL database.
-   *
-   * @param url The pseudo of tyhe database
-   *
-   * @retval false save operation failed
-   * @retval true save operation was successful
-   */
-  //const bool saveDatabase(const QUrl &url); This no longer relevant
-  /**
-   * Saves the data into permanent storage on a new or empty SQL database.
-   *
-   * @param url The pseudo URL of the database
-   *
-   * @retval false save operation failed
-   * @retval true save operation was successful
-   */
-  bool saveAsDatabase(const QUrl &url);
-  bool saveDatabase(const QUrl &url);
 
   /**
     * Call this to find out if the currently open file is native KMM
@@ -342,6 +326,7 @@ public:
   void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
 
   void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
+  void setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin*>& plugins);
 
   // TODO: remove that function
   /**

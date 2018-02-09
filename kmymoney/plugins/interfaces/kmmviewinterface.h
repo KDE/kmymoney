@@ -86,6 +86,8 @@ public:
     */
   bool fileOpen() override;
 
+  bool isDatabase() override;
+
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
     * class KMyMoneySettings (a singleton).
