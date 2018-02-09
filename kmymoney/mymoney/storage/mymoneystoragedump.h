@@ -36,7 +36,6 @@
   */
 
 class MyMoneyStorageMgr;
-class MyMoneyStorageMgr;
 class MyMoneyTransaction;
 class QTextStream;
 
