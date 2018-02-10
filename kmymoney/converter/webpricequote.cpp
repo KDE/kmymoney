@@ -313,7 +313,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   result["KMyMoney Currency"] = WebPriceQuoteSource("KMyMoney Currency",
                                           "https://fx-rate.net/%1/%2",
                                            QString(),  // symbolregexp
-                                          "1\\s[^=]+\\s=</span><br\\s/>\\s([^\\s]+)",
+                                          "1[ a-zA-Z]+=</span><br */?> *(\\d+\\.\\d+)",
                                           "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
                                           "%d/%m/%y",
                                           true // skip HTML stripping
