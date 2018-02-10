@@ -167,10 +167,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //get the diagram for later use
   AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
   planeDiagram->setAntiAliasing(true);
-  CartesianCoordinatePlane* plane = dynamic_cast<CartesianCoordinatePlane*>(coordinatePlane());
-  if (plane) {
-    plane->setAutoAdjustVerticalRangeToData(101);
-  }
+
   //set grid attributes
   GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
   gridAttr.setGridVisible(config.isChartGridLines());
@@ -501,6 +498,18 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   if (qMin(static_cast<uint>(KMyMoneyGlobalSettings::maximumLegendItems()), legend->datasetCount()) < 2) {
     // the legend is needed only if at least two data sets are rendered
     removeLegend();
+  }
+
+  // fix vertical plane range in case only one value is displayed
+  CartesianCoordinatePlane* plane = dynamic_cast<CartesianCoordinatePlane*>(coordinatePlane());
+  if (plane) {
+    QPair<qreal,qreal> range = plane->verticalRange();
+    double center = (range.first + range.second) / 2.0;
+    if (fabs(range.first - range.second) < 0.01) {
+      range.first = center - 1.001;
+      range.second = center + 1.001;
+      plane->setVerticalRange(range);
+    }
   }
 }
 
