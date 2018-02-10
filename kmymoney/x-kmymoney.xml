@@ -2,18 +2,6 @@
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-kmymoney">
     <comment>KMyMoney File</comment>
-    <comment xml:lang="da">KMyMoney-fil</comment>
-    <comment xml:lang="el">Αρχείο KMyMoney</comment>
-    <comment xml:lang="en_GB">KMyMoney File</comment>
-    <comment xml:lang="et">KMyMoney fail</comment>
-    <comment xml:lang="fr">Fichier KMyMoney</comment>
-    <comment xml:lang="pt">Ficheiro do KMyMoney</comment>
-    <comment xml:lang="pt_BR">Arquivo KMyMoney</comment>
-    <comment xml:lang="ro">Fișier KMyMoney</comment>
-    <comment xml:lang="sv">Kmymoney-fil</comment>
-    <comment xml:lang="tr">KMyMoney Dosyası</comment>
-    <comment xml:lang="uk">Файл KMyMoney</comment>
-    <comment xml:lang="x-test">xxKMyMoney Filexx</comment>
     <glob pattern="*.kmy"/>
     <glob pattern="*.kmt"/>
   </mime-type>
