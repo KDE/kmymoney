@@ -860,13 +860,13 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {qMakePair(Action::StartReconciliation,         Qt::CTRL + Qt::SHIFT + Qt::Key_R)},
       {qMakePair(Action::NewTransaction,              Qt::CTRL + Qt::Key_Insert)},
       {qMakePair(Action::ToggleReconciliationFlag,    Qt::CTRL + Qt::Key_Space)},
-      {qMakePair(Action::MarkCleared,                 Qt::CTRL + Qt::Key_Alt + Qt::Key_Space)},
-      {qMakePair(Action::MarkReconciled,              Qt::CTRL + Qt::Key_Shift + Qt::Key_Space)},
+      {qMakePair(Action::MarkCleared,                 Qt::CTRL + Qt::ALT+ Qt::Key_Space)},
+      {qMakePair(Action::MarkReconciled,              Qt::CTRL + Qt::SHIFT + Qt::Key_Space)},
       {qMakePair(Action::SelectAllTransactions,       Qt::CTRL + Qt::Key_A)},
 #ifdef KMM_DEBUG
       {qMakePair(Action::WizardNewUser,               Qt::CTRL + Qt::Key_G)},
 #endif
-      {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::Key_Shift + Qt::Key_N)}
+      {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)}
     };
 
     for(const auto& it : actionShortcuts)
