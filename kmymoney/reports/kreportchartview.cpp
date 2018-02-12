@@ -17,6 +17,8 @@
 
 #include "kreportchartview.h"
 
+#include <math.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QLabel>
