@@ -49,20 +49,18 @@ public:
 
 public Q_SLOTS:
   void setSettings(const QString& settings);
-  void toggleDirection(QListWidgetItem * item);
 
 protected:
   QListWidgetItem * addEntry(QListWidget * p, QListWidgetItem * after, int idx);
   void setDirectionIcon(QListWidgetItem* item);
 
 protected Q_SLOTS:
-  void slotAvailableSelected();
-  void slotSelectedSelected();
+  void slotUpdateButtons();
   void slotAddItem();
   void slotRemoveItem();
   void slotUpItem();
   void slotDownItem();
-  void slotFocusChanged(QWidget *o, QWidget *n);
+  void slotToggleDirection();
 
 Q_SIGNALS:
   void settingsChanged(const QString&);
