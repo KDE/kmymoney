@@ -118,7 +118,7 @@ if(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 find_package(LibAlkimia REQUIRED)
-if("${LibAlkimia_VERSION_MAJOR}" GREATER_EQUAL 7)
+if("${LibAlkimia_VERSION_MAJOR}" EQUAL 7 OR "${LibAlkimia_VERSION_MAJOR}" GREATER 7)
   set(LIBALKIMIA_LIBRARIES Alkimia::alkimia)
 else()
   #TODO: remove when LibAlkimia minimum version will be raised
