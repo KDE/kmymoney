@@ -394,8 +394,10 @@ void KMyMoneyView::slotShowForecastPage()
 
 void KMyMoneyView::slotShowOutboxPage()
 {
-  showPage(viewFrames[View::OnlineJobOutbox]);
-  m_onlineJobOutboxView->setDefaultFocus();
+  if (m_onlineJobOutboxView) {
+    showPage(viewFrames[View::OnlineJobOutbox]);
+    m_onlineJobOutboxView->setDefaultFocus();
+  }
 }
 
 void KMyMoneyView::showTitleBar(bool show)
@@ -475,8 +477,15 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
 
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
+  qDebug() << "Online plugins found" << plugins.count();
   m_accountsView->setOnlinePlugins(plugins);
-  m_onlineJobOutboxView->setOnlinePlugins(plugins);
+  if (m_onlineJobOutboxView) {
+    m_onlineJobOutboxView->setOnlinePlugins(plugins);
+  }
+  if (plugins.isEmpty()) {
+    m_model->removePage(viewFrames[View::OnlineJobOutbox]);
+    m_onlineJobOutboxView = nullptr;
+  }
 }
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
@@ -577,8 +586,10 @@ void KMyMoneyView::enableViewsIfFileOpen()
     viewFrames[View::Reports]->setEnabled(m_fileOpen);
   if (viewFrames[View::Forecast]->isEnabled() != m_fileOpen)
     viewFrames[View::Forecast]->setEnabled(m_fileOpen);
-  if (viewFrames[View::OnlineJobOutbox]->isEnabled() != m_fileOpen)
-    viewFrames[View::OnlineJobOutbox]->setEnabled(m_fileOpen);
+  if (m_onlineJobOutboxView) {
+    if (viewFrames[View::OnlineJobOutbox]->isEnabled() != m_fileOpen)
+      viewFrames[View::OnlineJobOutbox]->setEnabled(m_fileOpen);
+  }
   emit viewStateChanged(m_fileOpen);
 }
 
@@ -2256,7 +2267,9 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
     m_accountsView->updateActions(obj);
     m_ledgerView->updateActions(obj);
     m_reportsView->updateActions(obj);
-    m_onlineJobOutboxView->updateActions(obj);
+    if (m_onlineJobOutboxView) {
+      m_onlineJobOutboxView->updateActions(obj);
+    }
 
     // for plugin only
     const auto& acc = static_cast<const MyMoneyAccount&>(obj);
