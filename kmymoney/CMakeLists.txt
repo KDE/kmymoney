@@ -92,9 +92,6 @@ target_link_libraries( kmymoney ${kmymoney_common_LIBS} )
 
 install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES kmymoney.kcfg
-  DESTINATION ${KCFG_INSTALL_DIR}
-  )
 install(FILES kmymoney.upd
   DESTINATION ${KCONF_UPDATE_INSTALL_DIR}
   )

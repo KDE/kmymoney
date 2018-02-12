@@ -11,3 +11,4 @@ target_link_libraries(kmm_settings
   ${KDE4_KDEUI_LIBS}
 )
 install(TARGETS kmm_settings ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES kmymoney.kcfg DESTINATION ${KCFG_INSTALL_DIR})
