@@ -118,18 +118,18 @@ if(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 find_package(LibAlkimia REQUIRED)
-if(${LibAlkimia_VERSION_MAJOR} GREATER_EQUAL 7)
+if("${LibAlkimia_VERSION_MAJOR}" GREATER_EQUAL 7)
   set(LIBALKIMIA_LIBRARIES Alkimia::alkimia)
 else()
   #TODO: remove when LibAlkimia minimum version will be raised
-  if (NOT LIBALKIMIA_LIBRARIES AND LIBALKIMIA_LIBRARY)
+  if (NOT "${LIBALKIMIA_LIBRARIES}" AND "${LIBALKIMIA_LIBRARY}")
     # LibAlkimia 4.3.2 does not properly define LIBALKIMIA_LIBRARIES
     find_package(GMP REQUIRED)
     set(LIBALKIMIA_LIBRARIES ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} )
   endif()
 endif()
 # make sure LIBALKIMIA_LIBRARIES is set
-if(${LibAlkimia_FOUND} AND NOT LIBALKIMIA_LIBRARIES)
+if("${LibAlkimia_FOUND}" AND NOT "${LIBALKIMIA_LIBRARIES}")
   set(LIBALKIMIA_LIBRARIES Alkimia::alkimia)
 endif()
 # make sure we have the matching version of LibAlkimia (not too new)
