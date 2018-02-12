@@ -25,6 +25,8 @@
 
 #include "khomeview.h"
 
+#include <config-kmymoney.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
