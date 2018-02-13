@@ -2048,7 +2048,7 @@ void KMyMoneyApp::slotBackupFile()
   if (returncode == QDialog::Accepted && backupDlg != 0) {
 
 
-    d->m_backupMount = backupDlg->mountCheckBox();
+    d->m_backupMount = backupDlg->mountCheckBoxChecked();
     d->m_proc.clearProgram();
     d->m_backupState = BACKUP_MOUNTING;
     d->m_mountpoint = backupDlg->mountPoint();

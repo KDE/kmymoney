@@ -69,9 +69,9 @@ QString KBackupDlg::mountPoint() const
   return ui->txtMountPoint->text();
 }
 
-bool KBackupDlg::mountCheckBox() const
+bool KBackupDlg::mountCheckBoxChecked() const
 {
-  return ui->mountCheckBox;
+  return ui->mountCheckBox->isChecked();
 }
 
 void KBackupDlg::chooseButtonClicked()
