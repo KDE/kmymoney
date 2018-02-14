@@ -281,8 +281,23 @@ void KMyMoneyMVCCombo::checkCurrentText()
 
     // update the field to a possibly created object
     d->m_id = id;
+    addEntry(currentText(), id);
     setCurrentTextById(id);
   }
+}
+
+void KMyMoneyMVCCombo::addEntry(const QString& newTxt, const QString& id)
+{
+    // find the correct position in the list
+    int idx;
+    for(idx = 0; idx < model()->rowCount(); ++idx) {
+      const QString txt = itemText(idx);
+      if (txt.compare(newTxt) > 0) {
+        break;
+      }
+    }
+    // and insert the new item
+    insertItem(idx - 1, QIcon(), currentText(), id);
 }
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)

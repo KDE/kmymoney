@@ -138,6 +138,8 @@ protected:
   void setCurrentText(const QString& txt);
   void setCurrentText();
 
+  void addEntry(const QString& newTxt, const QString& id);
+
 Q_SIGNALS:
   void itemSelected(const QString& id);
   void objectCreation(bool);
