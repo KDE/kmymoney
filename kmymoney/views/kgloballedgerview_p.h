@@ -156,14 +156,18 @@ protected:
       return true;
 
     while (child) {
+      // if we are a child of the given parent, we have a match
       if (child == parent)
         return true;
+      // if we are at the application level, we don't have a match
+      if (child->inherits("KMyMoneyApp"))
+        return false;
       // If one of the ancestors is a KPassivePopup or a KDialog or a popup widget then
       // it's as if it is a child of our own because these widgets could
       // appear during transaction entry (message boxes, completer widgets)
       if (dynamic_cast<KPassivePopup*>(child) ||
           ((child->windowFlags() & Qt::Popup) && /*child != kmymoney*/
-           child->parentWidget())) // has no parent, then it must be top-level window like KMyMoneyApp
+           !child->parentWidget())) // has no parent, then it must be top-level window
         return true;
       child = child->parentWidget();
     }
