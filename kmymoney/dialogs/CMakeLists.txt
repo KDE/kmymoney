@@ -64,6 +64,7 @@ set(dialogs_UI
   kenterscheduledlg.ui
   kequitypriceupdatedlg.ui kequitypriceupdateconfdlg.ui
   kfindtransactiondlg.ui kgeneratesqldlg.ui
+  kgpgkeyselectiondlg.ui
   kloadtemplatedlg.ui
   kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
   knewaccountdlg.ui knewbankdlg.ui knewbudgetdlg.ui

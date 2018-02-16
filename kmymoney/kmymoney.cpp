@@ -1416,40 +1416,6 @@ bool KMyMoneyApp::slotFileSave()
   return rc;
 }
 
-void KMyMoneyApp::slotFileSaveAsFilterChanged(const QString& filter)
-{
-  if (!d->m_saveEncrypted)
-    return;
-  if (filter.compare(QLatin1String("*.kmy"), Qt::CaseInsensitive) != 0) {
-    d->m_saveEncrypted->setCurrentItem(0);
-    d->m_saveEncrypted->setEnabled(false);
-  } else {
-    d->m_saveEncrypted->setEnabled(true);
-  }
-}
-
-void KMyMoneyApp::slotManageGpgKeys()
-{
-  QPointer<KGpgKeySelectionDlg> dlg = new KGpgKeySelectionDlg(this);
-  dlg->setKeys(d->m_additionalGpgKeys);
-  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-    d->m_additionalGpgKeys = dlg->keys();
-    d->m_additionalKeyLabel->setText(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()));
-  }
-  delete dlg;
-}
-
-void KMyMoneyApp::slotKeySelected(int idx)
-{
-  int cnt = 0;
-  if (idx != 0) {
-    cnt = d->m_additionalGpgKeys.count();
-  }
-  d->m_additionalKeyLabel->setEnabled(idx != 0);
-  d->m_additionalKeyButton->setEnabled(idx != 0);
-  d->m_additionalKeyLabel->setText(i18n("Additional encryption keys to be used: %1", cnt));
-}
-
 bool KMyMoneyApp::slotFileSaveAs()
 {
   bool rc = false;
@@ -1458,51 +1424,23 @@ bool KMyMoneyApp::slotFileSaveAs()
     dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage())->fillStorage();
   KMSTATUS(i18n("Saving file with a new filename..."));
 
-  // fill the additional key list with the default
-  d->m_additionalGpgKeys = KMyMoneyGlobalSettings::gpgRecipientList();
-
-  QWidget* vbox = new QWidget();
-  QVBoxLayout *vboxVBoxLayout = new QVBoxLayout(vbox);
-  vboxVBoxLayout->setMargin(0);
-  if (KGPGFile::GPGAvailable()) {
-    QWidget* keyBox = new QWidget(vbox);
-    QHBoxLayout *keyBoxHBoxLayout = new QHBoxLayout(keyBox);
-    keyBoxHBoxLayout->setMargin(0);
-    vboxVBoxLayout->addWidget(keyBox);
-    QLabel *keyLabel = new QLabel(i18n("Encryption key to be used"), keyBox);
-    keyBoxHBoxLayout->addWidget(keyLabel);
-    d->m_saveEncrypted = new KComboBox(keyBox);
-    keyBoxHBoxLayout->addWidget(d->m_saveEncrypted);
-
-    QWidget* labelBox = new QWidget(vbox);
-    QHBoxLayout *labelBoxHBoxLayout = new QHBoxLayout(labelBox);
-    labelBoxHBoxLayout->setMargin(0);
-    vboxVBoxLayout->addWidget(labelBox);
-    d->m_additionalKeyLabel = new QLabel(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()), labelBox);
-    labelBoxHBoxLayout->addWidget(d->m_additionalKeyLabel);
-    d->m_additionalKeyButton = new QPushButton(i18n("Manage additional keys"), labelBox);
-    labelBoxHBoxLayout->addWidget(d->m_additionalKeyButton);
-    connect(d->m_additionalKeyButton, SIGNAL(clicked()), this, SLOT(slotManageGpgKeys()));
-    connect(d->m_saveEncrypted, SIGNAL(activated(int)), this, SLOT(slotKeySelected(int)));
-
+  QString selectedKeyName;
+  if (KGPGFile::GPGAvailable() && KMyMoneySettings::writeDataEncrypted()) {
     // fill the secret key list and combo box
     QStringList keyList;
     KGPGFile::secretKeyList(keyList);
-    d->m_saveEncrypted->addItem(i18n("No encryption"));
 
-    for (QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
-      QStringList fields = (*it).split(':', QString::SkipEmptyParts);
-      if (fields[0] != recoveryKeyId) {
-        // replace parenthesis in name field with brackets
-        auto name = fields[1];
-        name.replace('(', "[");
-        name.replace(')', "]");
-        name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
-        d->m_saveEncrypted->addItem(name);
-        if (name.contains(KMyMoneyGlobalSettings::gpgRecipient())) {
-          d->m_saveEncrypted->setCurrentItem(name);
-        }
-      }
+    QPointer<KGpgKeySelectionDlg> dlg = new KGpgKeySelectionDlg(this);
+    dlg->setSecretKeys(keyList, KMyMoneyGlobalSettings::gpgRecipient());
+    dlg->setAdditionalKeys(KMyMoneyGlobalSettings::gpgRecipientList());
+    const int rc = dlg->exec();
+    if ((rc == QDialog::Accepted) && (dlg != 0)) {
+      d->m_additionalGpgKeys = dlg->additionalKeys();
+      selectedKeyName = dlg->secretKey();
+    }
+    delete dlg;
+    if ((rc != QDialog::Accepted) || (dlg == 0)) {
+      return false;
     }
   }
 
@@ -1517,19 +1455,11 @@ bool KMyMoneyApp::slotFileSaveAs()
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml")).arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
   dlg->setAcceptMode(QFileDialog::AcceptSave);
-  connect(dlg, SIGNAL(filterSelected(QString)), this, SLOT(slotFileSaveAsFilterChanged(QString)));
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     QUrl newURL = dlg->selectedUrls().first();
     if (!newURL.fileName().isEmpty()) {
       d->consistencyCheck(false);
-      // deleting the dialog will delete the combobox pointed to by d->m_saveEncrypted so get the key name here
-      QString selectedKeyName;
-      if (d->m_saveEncrypted && d->m_saveEncrypted->currentIndex() != 0)
-        selectedKeyName = d->m_saveEncrypted->currentText();
-
-      d->m_saveEncrypted = 0;
-
       QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
       // append extension if not present
@@ -1550,11 +1480,11 @@ bool KMyMoneyApp::slotFileSaveAs()
         QRegExp keyExp(".* \\((.*)\\)");
         if (keyExp.indexIn(selectedKeyName) != -1) {
           encryptionKeys = keyExp.cap(1);
-        }
-        if (!d->m_additionalGpgKeys.isEmpty()) {
-          if (!encryptionKeys.isEmpty())
-            encryptionKeys.append(QLatin1Char(','));
-          encryptionKeys.append(d->m_additionalGpgKeys.join(QLatin1Char(',')));
+          if (!d->m_additionalGpgKeys.isEmpty()) {
+            if (!encryptionKeys.isEmpty())
+              encryptionKeys.append(QLatin1Char(','));
+            encryptionKeys.append(d->m_additionalGpgKeys.join(QLatin1Char(',')));
+          }
         }
         rc = d->m_myMoneyView->saveFile(d->m_fileName, encryptionKeys);
         //write the directory used for this file as the default one for next time.
