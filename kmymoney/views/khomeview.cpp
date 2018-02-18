@@ -94,7 +94,7 @@ void KHomeView::slotPrintView()
       return;
     }
     #ifdef ENABLE_WEBENGINE
-    d->m_view->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+    d->m_view->page()->print(d->m_currentPrinter, [=] (bool) {delete d->m_currentPrinter; d->m_currentPrinter = nullptr;});
     #else
       d->m_view->print(d->m_currentPrinter);
     #endif

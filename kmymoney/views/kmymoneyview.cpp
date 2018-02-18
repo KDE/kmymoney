@@ -233,8 +233,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 
   // Page 12
   m_onlineJobOutboxView = new KOnlineJobOutbox;
-  viewFrames[View::OnlineJobOutbox] = m_model->addPage(m_onlineJobOutboxView, i18n("Outbox"));
-  viewFrames[View::OnlineJobOutbox]->setIcon(Icons::get(Icon::ViewOutbox));
+  addView(m_onlineJobOutboxView, i18n("Outbox"), View::OnlineJobOutbox);
   connect(m_onlineJobOutboxView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_onlineJobOutboxView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
 
@@ -390,8 +389,10 @@ void KMyMoneyView::slotShowForecastPage()
 
 void KMyMoneyView::slotShowOutboxPage()
 {
-  showPage(viewFrames[View::OnlineJobOutbox]);
-  m_onlineJobOutboxView->setDefaultFocus();
+  if (viewFrames[View::OnlineJobOutbox]) {
+    showPage(viewFrames[View::OnlineJobOutbox]);
+    viewBases[View::OnlineJobOutbox]->setDefaultFocus();
+  }
 }
 
 void KMyMoneyView::showTitleBar(bool show)
@@ -472,7 +473,13 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
   m_accountsView->setOnlinePlugins(plugins);
-  m_onlineJobOutboxView->setOnlinePlugins(plugins);
+  if (m_onlineJobOutboxView) {
+    m_onlineJobOutboxView->setOnlinePlugins(plugins);
+  }
+  if (plugins.isEmpty()) {
+    removeView(View::OnlineJobOutbox);
+    m_onlineJobOutboxView = nullptr;
+  }
 }
 
 void KMyMoneyView::setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin*>& plugins)
@@ -504,6 +511,9 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   switch (idView) {
     case View::Forecast:
       icon = Icon::ViewForecast;
+      break;
+    case View::OnlineJobOutbox:
+      icon = Icon::ViewOutbox;
       break;
     default:
       break;
@@ -589,6 +599,7 @@ void KMyMoneyView::enableViewsIfFileOpen()
     if (viewFrames.contains(View(i)))
       if (viewFrames[View(i)]->isEnabled() != m_fileOpen)
         viewFrames[View(i)]->setEnabled(m_fileOpen);
+
   emit viewStateChanged(m_fileOpen);
 }
 
@@ -2190,7 +2201,9 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
     m_accountsView->updateActions(obj);
     m_ledgerView->updateActions(obj);
     m_reportsView->updateActions(obj);
-    m_onlineJobOutboxView->updateActions(obj);
+    if (m_onlineJobOutboxView) {
+      m_onlineJobOutboxView->updateActions(obj);
+    }
 
     // for plugin only
     const auto& acc = static_cast<const MyMoneyAccount&>(obj);

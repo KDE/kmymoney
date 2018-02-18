@@ -109,8 +109,6 @@ private Q_SLOTS:
   void slotShowContextMenuForConsistencyCheck(const QPoint &);
 
 protected Q_SLOTS:
-  void slotFileSaveAsFilterChanged(const QString& filter);
-
   /**
     * This slot is intended to be used as part of auto saving. This is used when the
     * QTimer emits the timeout signal and simply checks that the file is dirty (has
@@ -259,9 +257,6 @@ protected Q_SLOTS:
   void slotAccountUnmapOnline();
   void slotAccountUpdateOnline();
   void slotAccountUpdateOnlineAll();
-
-  void slotManageGpgKeys();
-  void slotKeySelected(int idx);
 
   void slotStatusProgressDone();
 

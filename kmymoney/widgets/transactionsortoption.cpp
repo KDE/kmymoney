@@ -68,11 +68,16 @@ TransactionSortOption::TransactionSortOption(QWidget *parent) :
   // don't allow sorting of the selected entries
   ui->m_selectedList->setSortingEnabled(false);
 
-  setSettings(QString());
+  connect(ui->m_addButton, &QPushButton::pressed, this, &TransactionSortOption::slotAddItem);
+  connect(ui->m_removeButton, &QPushButton::pressed, this, &TransactionSortOption::slotRemoveItem);
+  connect(ui->m_upButton, &QPushButton::pressed, this, &TransactionSortOption::slotUpItem);
+  connect(ui->m_downButton, &QPushButton::pressed, this, &TransactionSortOption::slotDownItem);
 
-  // update UI when focus changes
-  connect(qApp, &QApplication::focusChanged,
-          this, &TransactionSortOption::slotFocusChanged);
+  connect(ui->m_availableList, &QListWidget::currentItemChanged, this, &TransactionSortOption::slotUpdateButtons);
+  connect(ui->m_selectedList, &QListWidget::currentItemChanged, this, &TransactionSortOption::slotUpdateButtons);
+  connect(ui->m_selectedList, &QListWidget::doubleClicked, this, &TransactionSortOption::slotToggleDirection);
+
+  setSettings(QString());
 }
 
 TransactionSortOption::~TransactionSortOption()
@@ -151,7 +156,7 @@ void TransactionSortOption::setSettings(const QString& settings)
     ui->m_selectedList->setCurrentItem(p);
   }
 
-  slotAvailableSelected();
+  slotUpdateButtons();
 }
 
 QListWidgetItem* TransactionSortOption::addEntry(QListWidget* p, QListWidgetItem* after, int idx)
@@ -169,10 +174,9 @@ QListWidgetItem* TransactionSortOption::addEntry(QListWidget* p, QListWidgetItem
   return item;
 }
 
-
-
-void TransactionSortOption::toggleDirection(QListWidgetItem* item)
+void TransactionSortOption::slotToggleDirection()
 {
+  const auto item = ui->m_selectedList->currentItem();
   if (item) {
     int direction = item->data(Qt::UserRole).toInt() * (-1);
     item->setData(Qt::UserRole, QVariant(direction));
@@ -209,33 +213,15 @@ QString TransactionSortOption::settings() const
   return rc;
 }
 
-void TransactionSortOption::slotFocusChanged(QWidget *o, QWidget *n)
+void TransactionSortOption::slotUpdateButtons()
 {
-  Q_UNUSED(o);
-
-  if (n == ui->m_availableList)
-    slotAvailableSelected();
-  if (n == ui->m_selectedList)
-    slotSelectedSelected();
-}
-
-void TransactionSortOption::slotAvailableSelected()
-{
-  auto item = ui->m_availableList->currentItem();
-  ui->m_addButton->setEnabled(item != 0);
-  ui->m_removeButton->setDisabled(true);
-  ui->m_upButton->setDisabled(true);
-  ui->m_downButton->setDisabled(true);
-}
-
-void TransactionSortOption::slotSelectedSelected()
-{
-  auto item = ui->m_selectedList->currentItem();
-  ui->m_addButton->setDisabled(true);
-  ui->m_removeButton->setEnabled(item != 0);
-  if (item) {
-    ui->m_upButton->setEnabled(ui->m_selectedList->row(item) != 0);
-    ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
+  auto availableItem = ui->m_availableList->currentItem();
+  auto selectedItem = ui->m_selectedList->currentItem();
+  ui->m_addButton->setEnabled(availableItem != 0);
+  ui->m_removeButton->setEnabled(selectedItem != 0);
+  if (selectedItem) {
+    ui->m_upButton->setEnabled(ui->m_selectedList->row(selectedItem) != 0);
+    ui->m_downButton->setEnabled(ui->m_selectedList->row(selectedItem) < ui->m_selectedList->count() - 1);
   } else {
     ui->m_upButton->setEnabled(false);
     ui->m_downButton->setEnabled(false);

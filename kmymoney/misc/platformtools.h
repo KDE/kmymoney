@@ -38,6 +38,16 @@ namespace platformTools
    * This function returns the PID associated with the current process.
    */
   uint processId();
+
+  enum currencySymbolPosition_t
+  {
+    BeforeQuantityMoney,
+    BeforeQuantityMoneyWithSpace,
+    AfterQuantityMoney,
+    AfterQuantityMoneyWithSpace
+  };
+
+  currencySymbolPosition_t currencySymbolPosition(bool negativeValues = false);
 };
 
 #endif // PLATFORMTOOLS_H

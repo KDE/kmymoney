@@ -39,7 +39,7 @@ public:
   ~KBackupDlg();
 
   QString mountPoint() const;
-  bool mountCheckBox() const;
+  bool mountCheckBoxChecked() const;
 
 protected Q_SLOTS:
   void chooseButtonClicked();

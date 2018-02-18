@@ -19,25 +19,17 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QLabel>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QGroupBox>
+#include <QPushButton>
+#include <QDialogButtonBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KEditListWidget>
-#include <KLed>
-#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <kgpgfile.h>
-#include <QDialogButtonBox>
-#include <QPushButton>
+#include <ui_kgpgkeyselectiondlg.h>
 
 class KGpgKeySelectionDlgPrivate
 {
@@ -45,6 +37,10 @@ class KGpgKeySelectionDlgPrivate
 
 public:
   KGpgKeySelectionDlgPrivate()
+  : ui(new Ui::KGpgKeySelectionDlg)
+  , needCheckList(true)
+  , listOk(false)
+  , checkCount(0)
   {
   }
 
@@ -52,11 +48,10 @@ public:
   {
   }
 
-  KEditListWidget*   m_listWidget;
-  KLed*           m_keyLed;
-  bool            m_needCheckList;
-  bool            m_listOk;
-  int             m_checkCount;
+  Ui::KGpgKeySelectionDlg*  ui;
+  bool                      needCheckList;
+  bool                      listOk;
+  int                       checkCount;
 };
 
 
@@ -65,57 +60,11 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
     d_ptr(new KGpgKeySelectionDlgPrivate)
 {
   Q_D(KGpgKeySelectionDlg);
-  d->m_needCheckList = true;
-  d->m_listOk = false;
-  d->m_checkCount = 0;
-  // TODO: check port to kf5
-  setWindowTitle(i18n("Select additional keys"));
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-  QWidget *mainWidget = new QWidget(this);
-  QVBoxLayout *mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-  mainLayout->addWidget(mainWidget);
-  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-  buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
-  setModal(true);
-  QWidget* page = new QWidget(this);
-  mainLayout->addWidget(page);
-  mainLayout->addWidget(buttonBox);
-
-  QGroupBox *listBox = new QGroupBox(i18n("User identification"), page);
-  QVBoxLayout *verticalLayout = new QVBoxLayout(listBox);
-  verticalLayout->setSpacing(6);
-  verticalLayout->setContentsMargins(0, 0, 0, 0);
-  d->m_listWidget = new KEditListWidget(listBox);
-  d->m_listWidget->connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-  d->m_listWidget->connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-  d->m_listWidget->setWhatsThis(i18n("Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id, do not forget the leading 0x."));
-  verticalLayout->addWidget(d->m_listWidget);
-
-  // add a LED for the availability of all keys
-  QHBoxLayout* ledBox = new QHBoxLayout();
-  ledBox->setContentsMargins(0, 0, 0, 0);
-  ledBox->setSpacing(6);
-  ledBox->setObjectName("ledBoxLayout");
-
-  d->m_keyLed = new KLed(page);
-  mainLayout->addWidget(d->m_keyLed);
-  d->m_keyLed->setShape(KLed::Circular);
-  d->m_keyLed->setLook(KLed::Sunken);
-
-  ledBox->addWidget(d->m_keyLed);
-  ledBox->addWidget(new QLabel(i18n("Keys for all of the above user ids found"), page));
-  ledBox->addItem(new QSpacerItem(50, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
-
-  verticalLayout->addLayout(ledBox);
-
-  connect(d->m_listWidget, &KEditListWidget::changed, this, &KGpgKeySelectionDlg::slotIdChanged);
-  connect(d->m_listWidget, &KEditListWidget::added, this, &KGpgKeySelectionDlg::slotKeyListChanged);
-  connect(d->m_listWidget, &KEditListWidget::removed, this, &KGpgKeySelectionDlg::slotKeyListChanged);
+  d->ui->setupUi(this);
+  connect(d->ui->m_secretKey, SIGNAL(currentIndexChanged(int)), this, SLOT(slotIdChanged()));
+  connect(d->ui->m_listWidget, &KEditListWidget::changed, this, &KGpgKeySelectionDlg::slotIdChanged);
+  connect(d->ui->m_listWidget, &KEditListWidget::added, this, &KGpgKeySelectionDlg::slotKeyListChanged);
+  connect(d->ui->m_listWidget, &KEditListWidget::removed, this, &KGpgKeySelectionDlg::slotKeyListChanged);
 }
 
 KGpgKeySelectionDlg::~KGpgKeySelectionDlg()
@@ -124,18 +73,52 @@ KGpgKeySelectionDlg::~KGpgKeySelectionDlg()
   delete d;
 }
 
-void KGpgKeySelectionDlg::setKeys(const QStringList& list)
+void KGpgKeySelectionDlg::setSecretKeys(const QStringList& keyList, const QString& defaultKey)
+{
+  static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
+
+  Q_D(KGpgKeySelectionDlg);
+  d->ui->m_secretKey->addItem(i18n("No encryption"));
+
+  foreach(auto key, keyList) {
+    QStringList fields = key.split(':', QString::SkipEmptyParts);
+    if (fields[0] != recoveryKeyId) {
+      // replace parenthesis in name field with brackets
+      auto name = fields[1];
+      name.replace('(', "[");
+      name.replace(')', "]");
+      name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
+      d->ui->m_secretKey->addItem(name);
+      if (name.contains(defaultKey)) {
+        d->ui->m_secretKey->setCurrentText(name);
+      }
+    }
+  }
+}
+
+QString KGpgKeySelectionDlg::secretKey() const
+{
+  Q_D(const KGpgKeySelectionDlg);
+  const bool enabled = (d->ui->m_secretKey->currentIndex() != 0);
+  QString key;
+  if (enabled) {
+    key = d->ui->m_secretKey->currentText();
+  }
+  return key;
+}
+
+void KGpgKeySelectionDlg::setAdditionalKeys(const QStringList& list)
 {
   Q_D(KGpgKeySelectionDlg);
-  d->m_listWidget->clear();
-  d->m_listWidget->insertStringList(list);
+  d->ui->m_listWidget->clear();
+  d->ui->m_listWidget->insertStringList(list);
   slotKeyListChanged();
 }
 
-QStringList KGpgKeySelectionDlg::keys() const
+QStringList KGpgKeySelectionDlg::additionalKeys() const
 {
   Q_D(const KGpgKeySelectionDlg);
-  return d->m_listWidget->items();
+  return d->ui->m_listWidget->items();
 }
 
 #if 0
@@ -152,7 +135,7 @@ void KGpgKeySelectionDlg::slotShowHelp()
 void KGpgKeySelectionDlg::slotKeyListChanged()
 {
   Q_D(KGpgKeySelectionDlg);
-  d->m_needCheckList = true;
+  d->needCheckList = true;
   slotIdChanged();
 }
 
@@ -168,43 +151,49 @@ void KGpgKeySelectionDlg::slotIdChanged()
   // The second invocation is counted, but the check is not started until the
   // first one finishes. Once the external process finishes, we check if we
   // were called in the meantime and restart the check.
-  if (++d->m_checkCount == 1) {
-    while (1) {
+  if (++d->checkCount == 1) {
+    const bool enabled = (d->ui->m_secretKey->currentIndex() != 0);
+    d->ui->m_listWidget->setEnabled(enabled);
+    d->ui->m_keyLed->setState(enabled ? KLed::On : KLed::Off);
+    while (enabled) {
       // first we check the current edit field if filled
       bool keysOk = true;
-      if (!d->m_listWidget->currentText().isEmpty()) {
-        keysOk = KGPGFile::keyAvailable(d->m_listWidget->currentText());
+      if (!d->ui->m_listWidget->currentText().isEmpty()) {
+        keysOk = KGPGFile::keyAvailable(d->ui->m_listWidget->currentText());
       }
 
       // if it is available, then scan the current list if we need to
       if (keysOk) {
-        if (d->m_needCheckList) {
-          QStringList keys = d->m_listWidget->items();
+        if (d->needCheckList) {
+          QStringList keys = d->ui->m_listWidget->items();
           QStringList::const_iterator it_s;
           for (it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
             if (!KGPGFile::keyAvailable(*it_s))
               keysOk = false;
           }
-          d->m_listOk = keysOk;
-          d->m_needCheckList = false;
+          d->listOk = keysOk;
+          d->needCheckList = false;
 
         } else {
-          keysOk = d->m_listOk;
+          keysOk = d->listOk;
         }
       }
 
       // did we receive some more requests to check?
-      if (d->m_checkCount > 1) {
-        d->m_checkCount = 1;
+      if (d->checkCount > 1) {
+        d->checkCount = 1;
         continue;
       }
 
-      d->m_keyLed->setState(static_cast<KLed::State>(keysOk && (d->m_listWidget->items().count() != 0) ? KLed::On : KLed::Off));
-      // TODO: port to kf5
-      // okButton->setEnabled((m_listWidget->items().count() == 0) || (m_keyLed->state() == KLed::On));
+      if (!d->ui->m_listWidget->items().isEmpty())  {
+        d->ui->m_keyLed->setState(static_cast<KLed::State>(keysOk ? KLed::On : KLed::Off));
+      } else {
+        d->ui->m_keyLed->setState(KLed::On);
+      }
       break;
     }
 
-    --d->m_checkCount;
+    --d->checkCount;
+    d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!enabled || (d->ui->m_keyLed->state() == KLed::On));
   }
 }

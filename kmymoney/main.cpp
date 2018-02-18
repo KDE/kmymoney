@@ -50,6 +50,7 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include "misc/webconnect.h"
+#include "platformtools.h"
 
 #ifdef KMM_DEBUG
 #include "mymoneyutils.h"
@@ -174,8 +175,8 @@ int main(int argc, char *argv[])
   // TODO: port to kf5 (negative numbers in parens)
   //MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
   //MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
-  //MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
-  //MyMoneyMoney::setPositivePrefixCurrencySymbol(KLocale::global()->positivePrefixCurrencySymbol());
+  MyMoneyMoney::setNegativePrefixCurrencySymbol(platformTools::currencySymbolPosition(true) < platformTools::AfterQuantityMoney);
+  MyMoneyMoney::setPositivePrefixCurrencySymbol(platformTools::currencySymbolPosition(false) < platformTools::AfterQuantityMoney);
 
 //  QString language = parser.value(langOption);
 //  if (!language.isEmpty()) {

@@ -126,6 +126,7 @@ void KMyMoneyTagCombo::checkCurrentText()
 
     // update the field to a possibly created object
     //m_id = id;
+    addEntry(currentText(), id);
     setCurrentTextById(id);
   }
 }
