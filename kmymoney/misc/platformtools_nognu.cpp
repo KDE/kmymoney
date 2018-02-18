@@ -39,3 +39,8 @@ uint platformTools::processId()
 {
     return _getpid();
 }
+
+platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
+{
+  return platformTools::AfterQuantityMoneyWithSpace;
+}
