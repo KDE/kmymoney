@@ -42,7 +42,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 
