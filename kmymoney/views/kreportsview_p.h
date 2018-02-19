@@ -225,6 +225,8 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
   m_layout->addWidget(m_control);
   m_layout->addWidget(m_tableView);
   m_layout->addWidget(m_chartView);
+  m_layout->setStretch(1, 10);
+  m_layout->setStretch(2, 10);
 
   connect(m_control->ui->buttonChart, &QAbstractButton::clicked,
           eventHandler, &KReportsView::slotToggleChart);
