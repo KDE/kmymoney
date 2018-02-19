@@ -1,15 +1,12 @@
 [Desktop Entry]
 Name=Forecast view configuration
-Name[x-test]=xxForecast view configurationxx
 Icon=forecast
 Type=Service
 ServiceTypes=KCModule
 Exec=kcmshell5 forecastview
 Categories=Qt;KDE;kmymoney;
 Keywords=forecastview;kmymoney;
-Keywords[x-test]=xxforecastviewxx;xxkmymoneyxx;
 X-KDE-Library=kmymoney/kcm_forecastview
 X-KDE-ParentApp=forecastview
 X-KDE-ParentComponents=forecastview
 Comment=Configuration for forecast view plugin
-Comment[x-test]=xxConfiguration for forecast view pluginxx
