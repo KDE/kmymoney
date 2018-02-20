@@ -1268,6 +1268,12 @@ namespace KMyMoneyRegister
     }
   }
 
+  void Register::ensureFocusItemVisible()
+  {
+    Q_D(Register);
+    ensureItemVisible(d->m_focusItem);
+  }
+
   void Register::ensureItemVisible(RegisterItem* item)
   {
     Q_D(Register);

@@ -244,6 +244,9 @@ namespace KMyMoneyRegister
     eWidgets::eRegister::DetailColumn getDetailsColumnType() const;
     void setDetailsColumnType(eWidgets::eRegister::DetailColumn detailsColumnType);
 
+  public Q_SLOTS:
+      void ensureFocusItemVisible();
+
   protected:
 
     void mouseReleaseEvent(QMouseEvent *e) override;
