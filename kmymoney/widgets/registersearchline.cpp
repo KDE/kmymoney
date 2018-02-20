@@ -68,7 +68,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
     KLineEdit(parent),
     d(new RegisterSearchLinePrivate)
 {
-  setClearButtonEnabled(true);
+  setClearButtonShown(true); // it allows to emit KLineEdit::clearButtonClicked and is not equal in that sense to setClearButtonEnabled(true)
   init(reg);
 }
 
@@ -177,7 +177,14 @@ void RegisterSearchLine::updateSearch(const QString& s)
   // it on screen
   if (focusItem && focusItem->isVisible()) {
     d->reg->update();
-    d->reg->ensureItemVisible(focusItem);
+     /* it's totally fine to call ensureFocusItemVisible instantly
+      * while narrowing (by adding another letter) filtered results
+      * because removing items from QTableWidget is fast
+      * but while widening (by removing some letter) filtered results
+      * QTableWidget lags and ensureFocusItemVisible() happens before
+      * its update and focused item isn't made visible therefore
+     */
+    QTimer::singleShot(500, d->reg, SLOT(ensureFocusItemVisible()));
   }
   // if the scrollbar's visibility changed, we need to resize the contents
   if (scrollBarVisible != d->reg->verticalScrollBar()->isVisible()) {
