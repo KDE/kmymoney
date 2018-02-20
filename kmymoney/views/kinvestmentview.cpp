@@ -111,13 +111,13 @@ void KInvestmentView::updateActions(const MyMoneyObject& obj)
   const auto& acc = static_cast<const MyMoneyAccount&>(obj);
 
   const auto file = MyMoneyFile::instance();
-  if (!d->m_idInvAcc.isEmpty()) {
-    const auto account = file->account(d->m_idInvAcc);
-    auto b = account.accountType() == eMyMoney::Account::Type::Investment ? true : false;
-    pActions[eMenu::Action::NewInvestment]->setEnabled(b);
-  }
+  auto b = acc.accountType() == eMyMoney::Account::Type::Investment ? true : false;
+  if (isVisible() && !d->m_idInvAcc.isEmpty())
+    b = true;
 
-  auto b = acc.isInvest() ? true : false;
+  pActions[eMenu::Action::NewInvestment]->setEnabled(b);
+
+  b = acc.isInvest() ? true : false;
   pActions[eMenu::Action::EditInvestment]->setEnabled(b);
   pActions[eMenu::Action::DeleteInvestment]->setEnabled(b && !file->isReferenced(acc));
   pActions[eMenu::Action::UpdatePriceManually]->setEnabled(b);
@@ -234,7 +234,10 @@ void KInvestmentView::slotShowInvestmentMenu(const MyMoneyAccount& acc)
 void KInvestmentView::slotNewInvestment()
 {
   Q_D(KInvestmentView);
-  KNewInvestmentWizard::newInvestment(d->m_currentEquity);
+  if (!isVisible())
+    KNewInvestmentWizard::newInvestment(d->m_currentEquity);
+  else
+    KNewInvestmentWizard::newInvestment(MyMoneyFile::instance()->account(d->m_idInvAcc));
 }
 
 void KInvestmentView::slotEditInvestment()
