@@ -174,7 +174,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   // Page 3
   m_scheduledView = new KScheduledView;
 //this is to solve the way long strings are handled differently among versions of KPageWidget
-  viewFrames[View::Schedules] = m_model->addPage(m_scheduledView, i18n("Scheduled transactions"));
+  viewFrames[View::Schedules] = m_model->addPage(m_scheduledView, i18nc("use \u2028 as line break", "Scheduled\u2028transactions"));
   viewFrames[View::Schedules]->setIcon(Icons::get(Icon::ViewSchedules));
   connect(m_scheduledView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
   connect(m_scheduledView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
