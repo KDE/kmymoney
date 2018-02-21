@@ -127,7 +127,6 @@ target_link_libraries(kmymoney
   models
   kmm_settings
   kmm_widgets
-  kmm_storage
   kmm_mymoney
   kgpgfile
   interfaces

@@ -264,6 +264,12 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     set(IS_GNU 1)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
+
+    # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
+    if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xlinker --allow-multiple-definition")
+      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Xlinker --allow-multiple-definition")
+    endif()
   endif()
 
   # DebugKMM, Debugfull, Profile

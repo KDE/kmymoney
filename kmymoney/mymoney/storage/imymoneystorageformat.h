@@ -28,6 +28,8 @@
   * @author Kevin Tambascio (ktambascio@yahoo.com)
   */
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -39,7 +41,7 @@ class QIODevice;
 
 class MyMoneyStorageMgr;
 
-class IMyMoneyOperationsFormat
+class KMM_MYMONEY_EXPORT IMyMoneyOperationsFormat
 {
 public:
   IMyMoneyOperationsFormat();

@@ -28,6 +28,23 @@ set(kmm_mymoney_LIB_SRCS
   payeeidentifiermodel.cpp
   )
 
+  # storage_a_SOURCES cannot be set in storage directory on MS Windows
+  # because, while building kmm_storage, linker reports many undefined symbols
+  # which are in fact available in kmm_mymoney
+  set(storage_a_SOURCES
+    ./storage/imymoneystorageformat.cpp
+    ./storage/mymoneystoragexml.cpp
+    ./storage/mymoneystoragemgr.cpp
+    ./storage/mymoneystorageanon.cpp
+    ./storage/kmymoneystorageplugin.cpp
+    ./storage/mymoneystoragenames.cpp
+    )
+
+  if(KMM_DEBUG)
+    list(APPEND storage_a_SOURCES ./storage/mymoneystoragedump.cpp)
+  endif()
+
+list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
 
 set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h
@@ -48,6 +65,7 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   )
 
 add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
+kde_target_enable_exceptions(kmm_mymoney PUBLIC)
 
 target_compile_features(kmm_mymoney PUBLIC cxx_nullptr PRIVATE cxx_decltype cxx_lambdas cxx_constexpr cxx_range_for)
 
@@ -58,9 +76,11 @@ target_link_libraries(kmm_mymoney
                       kmm_icons
                       Qt5::Xml
                       Qt5::Core
+                      Qt5::Gui
+                      Qt5::Sql
                       KF5::Service
+                      KF5::I18n
                       Alkimia::alkimia
-                      kmm_storage
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic

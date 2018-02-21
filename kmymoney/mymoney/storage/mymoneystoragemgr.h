@@ -23,6 +23,8 @@
 #ifndef MYMONEYSTORAGEMGR_H
 #define MYMONEYSTORAGEMGR_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -87,7 +89,7 @@ namespace eMyMoney { namespace Schedule { enum class PaymentType; } }
   */
 
 class MyMoneyStorageMgrPrivate;
-class MyMoneyStorageMgr : public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneyStorageMgr : public MyMoneyKeyValueContainer
 {
   Q_DISABLE_COPY(MyMoneyStorageMgr)
   KMM_MYMONEY_UNIT_TESTABLE

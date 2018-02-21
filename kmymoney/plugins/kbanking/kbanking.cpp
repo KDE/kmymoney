@@ -121,7 +121,7 @@ public:
           if (exp.exactMatch(proxy)) {
             proxy = exp.cap(2);
             qDebug("Setting GWEN_PROXY to '%s'", qPrintable(proxy));
-            if (setenv("GWEN_PROXY", qPrintable(proxy), 1) == -1) {
+            if (!qputenv("GWEN_PROXY", qPrintable(proxy))) {
               qDebug("Unable to setup GWEN_PROXY");
             }
           }

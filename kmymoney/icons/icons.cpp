@@ -304,11 +304,16 @@ namespace Icons {
   KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName)
   {
     sStandardIcons = getCommonNames();
+    auto isWindows = false;
+
+#ifdef Q_OS_WIN
+    isWindows = true;
+#endif
 
     QStringList kdeThemes {QStringLiteral("oxygen"), QStringLiteral("breeze"), QStringLiteral("breeze-dark")};
     QHash<Icon, QString> iconNames;
 
-    if (kdeThemes.contains(_themeName)) {
+    if (kdeThemes.contains(_themeName) || isWindows) { // on Craft build system there is breeze icon theme, but it's in no way discoverable
       iconNames = getKDENames();
       for (auto it = iconNames.cbegin(); it != iconNames.cend(); ++it)
         sStandardIcons.insert(it.key(), it.value());
@@ -317,7 +322,7 @@ namespace Icons {
     // get icon replacements for specific theme
     if (_themeName == kdeThemes.at(0))
       iconNames = getOxygenNames();
-    else if (_themeName == kdeThemes.at(1) || _themeName == kdeThemes.at(2))
+    else if (_themeName == kdeThemes.at(1) || _themeName == kdeThemes.at(2) || isWindows)
       iconNames = getBreezeNames();
     else if (_themeName == QLatin1String("Tango"))
       iconNames = getTangoNames();

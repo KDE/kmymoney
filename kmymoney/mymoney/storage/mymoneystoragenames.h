@@ -18,6 +18,8 @@
 #ifndef MYMONEYSTORAGENAMES_H
 #define MYMONEYSTORAGENAMES_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -65,7 +67,7 @@ namespace MyMoneyStandardAccounts {
 
 enum idNameE { stdAccLiability, stdAccAsset, stdAccExpense, stdAccIncome, stdAccEquity };
 
-extern const QHash<idNameE, QString>    stdAccNames;
+extern const KMM_MYMONEY_EXPORT QHash<idNameE, QString>    stdAccNames;
 }
 
 #endif
