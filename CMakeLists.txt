@@ -191,7 +191,7 @@ find_package(PythonInterp 2.6)
 find_package(PythonLibs ${PYTHON_VERSION_STRING})
 
 if(PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND)
-  if(PYTHON_VERSION_MAJOR GREATER_EQUAL 3)
+  if(NOT PYTHON_VERSION_MAJOR VERSION_LESS 3)
     unset(PYTHONLIBS_FOUND)
     unset(PYTHONINTERP_FOUND)
     message(WARNING "Python 2 required, but Python 3 found.")
