@@ -230,8 +230,7 @@ void KGlobalLedgerView::updateLedgerActions(const KMyMoneyRegister::SelectedTran
 {
   Q_D(KGlobalLedgerView);
 
-  if (!d->selectTransactions(list))
-    return;
+  d->selectTransactions(list);
   updateLedgerActionsInternal();
 }
 
@@ -259,7 +258,7 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
   pMenus[Menu::MarkTransactionContext]->setEnabled(false);
 
   pActions[Action::SelectAllTransactions]->setEnabled(true);
-  if (!d->m_selectedTransactions.isEmpty()) {
+  if (!d->m_selectedTransactions.isEmpty() && !d->m_selectedTransactions.first().isScheduled()) {
     // enable 'delete transaction' only if at least one of the
     // selected transactions does not reference a closed account
     bool enable = false;

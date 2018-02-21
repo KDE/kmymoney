@@ -2128,6 +2128,7 @@ void KMyMoneyView::connectView(const View view)
       connect(m_ledgerView, &KGlobalLedgerView::openPayeeRequested,     this, &KMyMoneyView::slotPayeeSelected);
       connect(m_ledgerView, &KGlobalLedgerView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
       connect(m_ledgerView, &KGlobalLedgerView::transactionsSelected,   this, &KMyMoneyView::slotTransactionsSelected);
+      connect(m_ledgerView, &KGlobalLedgerView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       connect(m_ledgerView, &KGlobalLedgerView::transactionsContextMenuRequested,   this, &KMyMoneyView::slotTransactionsMenuRequested);
       connect(m_ledgerView, &KGlobalLedgerView::statusProgress,   this, &KMyMoneyView::statusProgress);
       connect(m_ledgerView, &KGlobalLedgerView::statusMsg,   this, &KMyMoneyView::statusMsg);

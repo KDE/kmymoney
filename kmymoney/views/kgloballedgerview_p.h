@@ -943,6 +943,7 @@ public:
           }
       } else if (!list.isEmpty()) {
         sch = MyMoneyFile::instance()->schedule(list.first().scheduleId());
+        m_selectedTransactions.append(list.first());
         ret = false;
       }
 
