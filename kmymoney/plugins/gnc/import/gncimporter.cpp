@@ -35,6 +35,7 @@
 
 #include "mymoneygncreader.h"
 #include "viewinterface.h"
+#include "appinterface.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragemgr.h"
@@ -46,8 +47,6 @@ GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
 {
   Q_UNUSED(args)
   setComponentName("gncimporter", i18n("GnuCash importer"));
-  setXMLFile("gncimporter.rc");
-  createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: gncimporter loaded");
 }
@@ -57,31 +56,32 @@ GNCImporter::~GNCImporter()
   qDebug("Plugins: gncimporter unloaded");
 }
 
-void GNCImporter::createActions()
+bool GNCImporter::open(MyMoneyStorageMgr *storage, const QUrl &url)
 {
-  m_action = actionCollection()->addAction("file_import_gnc");
-  m_action->setText(i18n("GnuCash..."));
-  connect(m_action, &QAction::triggered, this, &GNCImporter::slotGNCImport);
+  Q_UNUSED(url)
+  Q_UNUSED(storage)
+  return false;
 }
 
-void GNCImporter::slotGNCImport()
+bool GNCImporter::save(const QUrl &url)
 {
-  m_action->setEnabled(false);
+  Q_UNUSED(url)
+  return false;
+}
 
-  if (viewInterface()->fileOpen()) {
-    KMessageBox::information(nullptr, i18n("You cannot import GnuCash data into an existing file. Please close it."));
-    m_action->setEnabled(true);
-    return;
-  }
+IMyMoneyOperationsFormat* GNCImporter::reader()
+{
+  return new MyMoneyGncReader;
+}
 
-  auto url = QFileDialog::getOpenFileUrl(nullptr, QString(), QUrl(), i18n("GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"));
-  if (url.isLocalFile()) {
-    auto pReader = new MyMoneyGncReader;
-    if (viewInterface()->readFile(url, pReader))
-      viewInterface()->slotRefreshViews();
-  }
+QString GNCImporter::formatName() const
+{
+  return QStringLiteral("GNC");
+}
 
-  m_action->setEnabled(true);
+QString GNCImporter::fileExtension() const
+{
+  return i18n("GnuCash files (*.gnucash *.xac *.gnc)");
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(GNCImporterFactory, "gncimporter.json", registerPlugin<GNCImporter>();)

@@ -371,6 +371,8 @@ public:
    */
   static bool fileExists(const QUrl &url);
 
+  static QString downloadFile(const QUrl &url);
+
   static bool newPayee(const QString& newnameBase, QString& id);
 
   static void newTag(const QString& newnameBase, QString& id);

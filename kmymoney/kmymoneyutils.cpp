@@ -38,6 +38,7 @@
 #include <QBitArray>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QTemporaryFile>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -49,6 +50,7 @@
 #include <KMessageBox>
 #include <KStandardGuiItem>
 #include <KIO/StatJob>
+#include <KIO/StoredTransferJob>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -652,6 +654,28 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
         statjob->kill();
     }
     return fileExists;
+}
+
+QString KMyMoneyUtils::downloadFile(const QUrl &url)
+{
+  QString filename;
+  KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
+//  KJobWidgets::setWindow(transferjob, this);
+  if (! transferjob->exec()) {
+      KMessageBox::detailedError(nullptr,
+                               i18n("Error while loading file '%1'.", url.url()),
+                               transferjob->errorString(),
+                               i18n("File access error"));
+      return filename;
+  }
+
+  QTemporaryFile file;
+  file.setAutoRemove(false);
+  file.open();
+  file.write(transferjob->data());
+  filename = file.fileName();
+  file.close();
+  return filename;
 }
 
 bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)

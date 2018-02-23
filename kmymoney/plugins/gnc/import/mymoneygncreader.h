@@ -1081,6 +1081,10 @@ private:
   MyMoneyAccount checkConsistency(MyMoneyAccount& parent, MyMoneyAccount& child);  // gnucash is sometimes TOO flexible
   void checkInvestmentOption(QString stockId);  // implement user investment option
   void getPriceSource(MyMoneySecurity stock, QString gncSource);
+  /**
+    * This method loads all known currencies and saves them to the storage
+    */
+  void loadAllCurrencies();
 #endif // _GNCFILEANON
 };
 

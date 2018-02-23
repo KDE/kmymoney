@@ -67,6 +67,10 @@
 #include <KRecentDirs>
 #include <KProcess>
 #include <KAboutApplicationDialog>
+#include <KIO/StoredTransferJob>
+#include <KJobWidgets>
+#include <KCompressionDevice>
+#include <KBackup>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -108,12 +112,17 @@
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneypayeecombo.h"
 #include "widgets/onlinejobmessagesview.h"
-
+#include "widgets/amountedit.h"
+#include "widgets/kmymoneyedit.h"
 #include "widgets/kmymoneymvccombo.h"
 
 #include "views/kmymoneyview.h"
 #include "views/konlinejoboutbox.h"
 #include "models/onlinejobmessagesmodel.h"
+#include "models/models.h"
+#include "models/accountsmodel.h"
+#include "models/equitiesmodel.h"
+#include "models/securitiesmodel.h"
 
 #include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneyfile.h"
@@ -122,6 +131,7 @@
 #include "mymoney/mymoneyaccountloan.h"
 #include "mymoney/mymoneysecurity.h"
 #include "mymoney/mymoneypayee.h"
+#include "mymoney/mymoneyprice.h"
 #include "mymoney/mymoneytag.h"
 #include "mymoney/mymoneybudget.h"
 #include "mymoney/mymoneyreport.h"
@@ -151,6 +161,9 @@
 #include "misc/webconnect.h"
 
 #include "storage/mymoneystoragemgr.h"
+#include "storage/mymoneystoragexml.h"
+#include "storage/mymoneystoragebin.h"
+#include "storage/mymoneystorageanon.h"
 
 #include <libkgpgfile/kgpgfile.h>
 
@@ -178,7 +191,9 @@
 using namespace Icons;
 using namespace eMenu;
 
-static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
+static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
+static constexpr char recoveryKeyId[] = "0xD2B08440";
+static constexpr char recoveryKeyId2[] = "59B0F826D2B08440";
 
 // define the default period to warn about an expiring recoverkey to 30 days
 // but allows to override this setting during build time
@@ -209,6 +224,8 @@ public:
       m_backupResult(0),
       m_backupMount(0),
       m_ignoreBackupExitCode(false),
+      m_fileOpen(false),
+      m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
       m_myMoneyView(0),
       m_progressBar(0),
       m_smtReader(0),
@@ -293,6 +310,11 @@ public:
     */
   bool    m_ignoreBackupExitCode;
 
+  bool m_fileOpen;
+  QFileDevice::Permissions m_fmode;
+
+  KMyMoneyApp::fileTypeE m_fileType;
+
   KProcess m_proc;
 
   /// A pointer to the view holding the tabs.
@@ -360,6 +382,1246 @@ public:
   static void setThemedCSS();
   void copyConsistencyCheckResults();
   void saveConsistencyCheckResults();
+
+  void checkAccountName(const MyMoneyAccount& _acc, const QString& name) const
+  {
+    auto file = MyMoneyFile::instance();
+    if (_acc.name() != name) {
+      MyMoneyAccount acc(_acc);
+      acc.setName(name);
+      file->modifyAccount(acc);
+    }
+  }
+
+  /**
+    * This method updates names of currencies from file to localized names
+    */
+  void updateCurrencyNames()
+  {
+    auto file = MyMoneyFile::instance();
+    MyMoneyFileTransaction ft;
+
+    QList<MyMoneySecurity> storedCurrencies = MyMoneyFile::instance()->currencyList();
+    QList<MyMoneySecurity> availableCurrencies = MyMoneyFile::instance()->availableCurrencyList();
+    QStringList currencyIDs;
+
+    foreach (auto currency, availableCurrencies)
+      currencyIDs.append(currency.id());
+
+    try {
+      foreach (auto currency, storedCurrencies) {
+        int i = currencyIDs.indexOf(currency.id());
+        if (i != -1 && availableCurrencies.at(i).name() != currency.name()) {
+          currency.setName(availableCurrencies.at(i).name());
+          file->modifyCurrency(currency);
+        }
+      }
+      ft.commit();
+    } catch (const MyMoneyException &e) {
+      qDebug("Error %s updating currency names", qPrintable(e.what()));
+    }
+  }
+
+  void updateAccountNames()
+  {
+    // make sure we setup the name of the base accounts in translated form
+    try {
+      MyMoneyFileTransaction ft;
+      const auto file = MyMoneyFile::instance();
+      checkAccountName(file->asset(), i18n("Asset"));
+      checkAccountName(file->liability(), i18n("Liability"));
+      checkAccountName(file->income(), i18n("Income"));
+      checkAccountName(file->expense(), i18n("Expense"));
+      checkAccountName(file->equity(), i18n("Equity"));
+      ft.commit();
+    } catch (const MyMoneyException &) {
+    }
+  }
+
+  void ungetString(QIODevice *qfile, char *buf, int len)
+  {
+    buf = &buf[len-1];
+    while (len--) {
+      qfile->ungetChar(*buf--);
+    }
+  }
+
+  bool applyFileFixes()
+  {
+    const auto blocked = MyMoneyFile::instance()->blockSignals(true);
+    KSharedConfigPtr config = KSharedConfig::openConfig();
+
+    KConfigGroup grp = config->group("General Options");
+
+    // For debugging purposes, we can turn off the automatic fix manually
+    // by setting the entry in kmymoneyrc to true
+    grp = config->group("General Options");
+    if (grp.readEntry("SkipFix", false) != true) {
+      MyMoneyFileTransaction ft;
+      try {
+        // Check if we have to modify the file before we allow to work with it
+        auto s = MyMoneyFile::instance()->storage();
+        while (s->fileFixVersion() < s->currentFixVersion()) {
+          qDebug("%s", qPrintable((QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion()))));
+          switch (s->fileFixVersion()) {
+            case 0:
+              fixFile_0();
+              s->setFileFixVersion(1);
+              break;
+
+            case 1:
+              fixFile_1();
+              s->setFileFixVersion(2);
+              break;
+
+            case 2:
+              fixFile_2();
+              s->setFileFixVersion(3);
+              break;
+
+            case 3:
+              fixFile_3();
+              s->setFileFixVersion(4);
+              break;
+
+              // add new levels above. Don't forget to increase currentFixVersion() for all
+              // the storage backends this fix applies to
+            default:
+              throw MYMONEYEXCEPTION(i18n("Unknown fix level in input file"));
+          }
+        }
+        ft.commit();
+      } catch (const MyMoneyException &) {
+        MyMoneyFile::instance()->blockSignals(blocked);
+        return false;
+      }
+    } else {
+      qDebug("Skipping automatic transaction fix!");
+    }
+    MyMoneyFile::instance()->blockSignals(blocked);
+    return true;
+  }
+
+  void connectStorageToModels()
+  {
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->accountsModel(), &AccountsModel::slotObjectAdded);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->accountsModel(), &AccountsModel::slotObjectModified);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->accountsModel(), &AccountsModel::slotObjectRemoved);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectAdded);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectModified);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectRemoved);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectAdded);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectModified);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectRemoved);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectAdded);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectModified);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
+  }
+
+  void disconnectStorageFromModels()
+  {
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->accountsModel(), &AccountsModel::slotObjectAdded);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->accountsModel(), &AccountsModel::slotObjectModified);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->accountsModel(), &AccountsModel::slotObjectRemoved);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectAdded);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectModified);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectRemoved);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectAdded);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectModified);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectRemoved);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
+               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
+               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectAdded);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
+               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectModified);
+    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
+               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
+  }
+
+  /**
+   * This method is used after a file or database has been
+   * read into storage, and performs various initialization tasks
+   *
+   * @retval true all went okay
+   * @retval false an exception occurred during this process
+   */
+  bool initializeStorage()
+  {
+    const auto blocked = MyMoneyFile::instance()->blockSignals(true);
+
+    updateAccountNames();
+    updateCurrencyNames();
+    selectBaseCurrency();
+
+    // setup the standard precision
+    AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+    KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+
+    if (!applyFileFixes())
+      return false;
+
+    MyMoneyFile::instance()->blockSignals(blocked);
+
+    emit q->kmmFilePlugin(KMyMoneyApp::postOpen);
+
+    Models::instance()->fileOpened();
+    connectStorageToModels();
+
+    // inform everyone about new data
+    MyMoneyFile::instance()->forceDataChanged();
+
+    q->slotCheckSchedules();
+
+    m_myMoneyView->slotFileOpened();
+    return true;
+  }
+
+  /**
+    * This method attaches an empty storage object to the MyMoneyFile
+    * object. It calls removeStorage() to remove a possibly attached
+    * storage object.
+    */
+  void newStorage()
+  {
+    removeStorage();
+    auto file = MyMoneyFile::instance();
+    file->attachStorage(new MyMoneyStorageMgr);
+  }
+
+  /**
+    * This method removes an attached storage from the MyMoneyFile
+    * object.
+    */
+  void removeStorage()
+  {
+    auto file = MyMoneyFile::instance();
+    auto p = file->storage();
+    if (p) {
+      file->detachStorage(p);
+      delete p;
+    }
+  }
+
+  /**
+    * if no base currency is defined, start the dialog and force it to be set
+    */
+  void selectBaseCurrency()
+  {
+    auto file = MyMoneyFile::instance();
+
+    // check if we have a base currency. If not, we need to select one
+    QString baseId;
+    try {
+      baseId = MyMoneyFile::instance()->baseCurrency().id();
+    } catch (const MyMoneyException &e) {
+      qDebug("%s", qPrintable(e.what()));
+    }
+
+    if (baseId.isEmpty()) {
+      QPointer<KCurrencyEditDlg> dlg = new KCurrencyEditDlg(q);
+  //    connect(dlg, SIGNAL(selectBaseCurrency(MyMoneySecurity)), this, SLOT(slotSetBaseCurrency(MyMoneySecurity)));
+      dlg->exec();
+      delete dlg;
+    }
+
+    try {
+      baseId = MyMoneyFile::instance()->baseCurrency().id();
+    } catch (const MyMoneyException &e) {
+      qDebug("%s", qPrintable(e.what()));
+    }
+
+    if (!baseId.isEmpty()) {
+      // check that all accounts have a currency
+      QList<MyMoneyAccount> list;
+      file->accountList(list);
+      QList<MyMoneyAccount>::Iterator it;
+
+      // don't forget those standard accounts
+      list << file->asset();
+      list << file->liability();
+      list << file->income();
+      list << file->expense();
+      list << file->equity();
+
+
+      for (it = list.begin(); it != list.end(); ++it) {
+        QString cid;
+        try {
+          if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
+            cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
+        } catch (const MyMoneyException& e) {
+          qDebug() << QLatin1String("Account") << (*it).id() << (*it).name() << e.what();
+        }
+
+        if (cid.isEmpty()) {
+          (*it).setCurrencyId(baseId);
+          MyMoneyFileTransaction ft;
+          try {
+            file->modifyAccount(*it);
+            ft.commit();
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), qPrintable((*it).id()), qPrintable(e.what()));
+          }
+        }
+      }
+    }
+  }
+
+  /**
+    * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
+    * data structures in memory.  The return result is examined to make sure no
+    * errors occurred whilst parsing.
+    *
+    * @param url The URL to read from.
+    *            If no protocol is specified, file:// is assumed.
+    *
+    * @return Whether the read was successful.
+    */
+  bool openNondatabase(const QUrl &url)
+  {
+    if (!url.isValid())
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid URL %1").arg(qPrintable(url.url())));
+
+    QString fileName;
+    auto downloadedFile = false;
+    if (url.isLocalFile()) {
+      fileName = url.toLocalFile();
+    } else {
+      fileName = KMyMoneyUtils::downloadFile(url);
+      downloadedFile = true;
+    }
+
+    if (!KMyMoneyUtils::fileExists(QUrl::fromLocalFile(fileName)))
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Error opening the file.\n"
+                                                 "Requested file: '%1'.\n"
+                                                 "Downloaded file: '%2'").arg(qPrintable(url.url()), fileName));
+
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly))
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+
+    QByteArray qbaFileHeader(2, '\0');
+    const auto sFileToShort = QString::fromLatin1("File %1 is too short.").arg(fileName);
+    if (file.read(qbaFileHeader.data(), 2) != 2)
+      throw MYMONEYEXCEPTION(sFileToShort);
+
+    file.close();
+
+    // There's a problem with the KFilterDev and KGPGFile classes:
+    // One supports the at(n) member but not ungetch() together with
+    // read() and the other does not provide an at(n) method but
+    // supports read() that considers the ungetch() buffer. QFile
+    // supports everything so this is not a problem. We solve the problem
+    // for now by keeping track of which method can be used.
+    auto haveAt = true;
+    auto isEncrypted = false;
+
+    emit q->kmmFilePlugin(preOpen);
+
+    QIODevice* qfile = nullptr;
+    QString sFileHeader(qbaFileHeader);
+    if (sFileHeader == QString("\037\213")) {        // gzipped?
+      qfile = new KCompressionDevice(fileName, COMPRESSION_TYPE);
+    } else if (sFileHeader == QString("--") ||        // PGP ASCII armored?
+               sFileHeader == QString("\205\001") ||  // PGP binary?
+               sFileHeader == QString("\205\002")) {  // PGP binary?
+      if (KGPGFile::GPGAvailable()) {
+        qfile = new KGPGFile(fileName);
+        haveAt = false;
+        isEncrypted = true;
+      } else {
+        throw MYMONEYEXCEPTION(QString::fromLatin1("%1").arg(i18n("GPG is not available for decryption of file <b>%1</b>", fileName)));
+      }
+    } else {
+      // we can't use file directly, as we delete qfile later on
+      qfile = new QFile(file.fileName());
+    }
+
+    if (!qfile->open(QIODevice::ReadOnly)) {
+      delete qfile;
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+    }
+
+    qbaFileHeader.resize(8);
+    if (qfile->read(qbaFileHeader.data(), 8) != 8)
+      throw MYMONEYEXCEPTION(sFileToShort);
+
+    if (haveAt)
+      qfile->seek(0);
+    else
+      ungetString(qfile, qbaFileHeader.data(), 8);
+
+    // Ok, we got the first block of 8 bytes. Read in the two
+    // unsigned long int's by preserving endianess. This is
+    // achieved by reading them through a QDataStream object
+    qint32 magic0, magic1;
+    QDataStream s(&qbaFileHeader, QIODevice::ReadOnly);
+    s >> magic0;
+    s >> magic1;
+
+    // If both magic numbers match (we actually read in the
+    // text 'KMyMoney' then we assume a binary file and
+    // construct a reader for it. Otherwise, we construct
+    // an XML reader object.
+    //
+    // The expression magic0 < 30 is only used to create
+    // a binary reader if we assume an old binary file. This
+    // should be removed at some point. An alternative is to
+    // check the beginning of the file against an pattern
+    // of the XML file (e.g. '?<xml' ).
+    if ((magic0 == MAGIC_0_50 && magic1 == MAGIC_0_51) ||
+        magic0 < 30) {
+      // we do not support this file format anymore
+      throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>%1</qt>").arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.", fileName)));
+    }
+
+    // Scan the first 70 bytes to see if we find something
+    // we know. For now, we support our own XML format and
+    // GNUCash XML format. If the file is smaller, then it
+    // contains no valid data and we reject it anyway.
+    qbaFileHeader.resize(70);
+    if (qfile->read(qbaFileHeader.data(), 70) != 70)
+      throw MYMONEYEXCEPTION(sFileToShort);
+
+    if (haveAt)
+      qfile->seek(0);
+    else
+      ungetString(qfile, qbaFileHeader.data(), 70);
+
+    IMyMoneyOperationsFormat* pReader = nullptr;
+    QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
+    QRegExp gncexp("<gnc-v(\\d+)");
+    QByteArray txt(qbaFileHeader, 70);
+    if (kmyexp.indexIn(txt) != -1) {
+      pReader = new MyMoneyStorageXML;
+      m_fileType = KMyMoneyApp::KmmXML;
+    } else if (gncexp.indexIn(txt) != -1) {
+
+      for (const auto& plugin : m_plugins.storage) {
+        if (plugin->formatName().compare(QLatin1String("GNC")) == 0) {
+          pReader = plugin->reader();
+          break;
+        }
+      }
+      if (!pReader) {
+        KMessageBox::error(q, i18n("Couldn't find suitable plugin to read your storage."));
+        return false;
+      }
+      m_fileType = KMyMoneyApp::GncXML;
+    } else {
+      throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>%1</qt>").arg(i18n("File <b>%1</b> contains an unknown file format.", fileName)));
+    }
+
+    // disconnect the current storga manager from the engine
+    MyMoneyFile::instance()->detachStorage();
+
+    auto storage = new MyMoneyStorageMgr;
+    pReader->setProgressCallback(&KMyMoneyApp::progressCallback);
+    pReader->readFile(qfile, storage);
+    pReader->setProgressCallback(0);
+    delete pReader;
+
+    qfile->close();
+    delete qfile;
+
+    // if a temporary file was downloaded, then it will be removed
+    // with the next call. Otherwise, it stays untouched on the local
+    // filesystem.
+    if (downloadedFile)
+      QFile::remove(fileName);
+
+    // things are finished, now we connect the storage to the engine
+    // which forces a reload of the cache in the engine with those
+    // objects that are cached
+    MyMoneyFile::instance()->attachStorage(storage);
+
+    // encapsulate transactions to the engine to be able to commit/rollback
+    MyMoneyFileTransaction ft;
+    // make sure we setup the encryption key correctly
+    if (isEncrypted && MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty())
+      MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneySettings::gpgRecipientList().join(","));
+    ft.commit();
+    return true;
+  }
+
+  /**
+   * This method is called from readFile to open a database file which
+   * is to be processed in 'proper' database mode, i.e. in-place updates
+   *
+   * @param dbaseURL pseudo-QUrl representation of database
+   *
+   * @retval true Database opened successfully
+   * @retval false Could not open or read database
+   */
+  bool openDatabase(const QUrl &url)
+  {
+    // open the database
+    auto pStorage = MyMoneyFile::instance()->storage();
+    if (!pStorage)
+      pStorage = new MyMoneyStorageMgr;
+
+    auto rc = false;
+    auto pluginFound = false;
+    for (const auto& plugin : m_plugins.storage) {
+      if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
+        rc = plugin->open(pStorage, url);
+        pluginFound = true;
+        break;
+      }
+    }
+
+    if(!pluginFound)
+      KMessageBox::error(q, i18n("Couldn't find suitable plugin to read your storage."));
+
+    if(!rc) {
+      removeStorage();
+      delete pStorage;
+      return false;
+    }
+
+    if (pStorage) {
+      MyMoneyFile::instance()->detachStorage();
+      MyMoneyFile::instance()->attachStorage(pStorage);
+    }
+    return true;
+  }
+
+  /**
+    * Close the currently opened file and create an empty new file.
+    *
+    * @see MyMoneyFile
+    */
+  void newFile()
+  {
+    closeFile();
+    m_fileType = KMyMoneyApp::KmmXML; // assume native type until saved
+    m_fileOpen = true;
+  }
+
+  /**
+    * Saves the data into permanent storage using the XML format.
+    *
+    * @param url The URL to save into.
+    *            If no protocol is specified, file:// is assumed.
+    * @param keyList QString containing a comma separated list of keys
+    *            to be used for encryption. If @p keyList is empty,
+    *            the file will be saved unencrypted (the default)
+    *
+    * @retval false save operation failed
+    * @retval true save operation was successful
+    */
+  bool saveFile(const QUrl &url, const QString& keyList = QString())
+  {
+    QString filename = url.path();
+
+    if (!m_fileOpen) {
+      KMessageBox::error(q, i18n("Tried to access a file when it has not been opened"));
+      return false;
+    }
+
+    emit q->kmmFilePlugin(KMyMoneyApp::preSave);
+    std::unique_ptr<IMyMoneyOperationsFormat> storageWriter;
+
+    // If this file ends in ".ANON.XML" then this should be written using the
+    // anonymous writer.
+    bool plaintext = filename.right(4).toLower() == ".xml";
+    if (filename.right(9).toLower() == ".anon.xml")
+      storageWriter = std::make_unique<MyMoneyStorageANON>();
+    else
+      storageWriter = std::make_unique<MyMoneyStorageXML>();
+
+    // actually, url should be the parameter to this function
+    // but for now, this would involve too many changes
+    bool rc = true;
+    try {
+      if (! url.isValid()) {
+        throw MYMONEYEXCEPTION(i18n("Malformed URL '%1'", url.url()));
+      }
+
+      if (url.isLocalFile()) {
+        filename = url.toLocalFile();
+        try {
+          const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
+          if (nbak) {
+            KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
+          }
+          saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
+        } catch (const MyMoneyException &) {
+          throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+        }
+      } else {
+        QTemporaryFile tmpfile;
+        tmpfile.open(); // to obtain the name
+        tmpfile.close();
+        saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
+
+        Q_CONSTEXPR int permission = -1;
+        QFile file(tmpfile.fileName());
+        file.open(QIODevice::ReadOnly);
+        KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+        if (!putjob->exec()) {
+          throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+        }
+        file.close();
+      }
+      m_fileType = KMyMoneyApp::KmmXML;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(q, e.what());
+      MyMoneyFile::instance()->setDirty();
+      rc = false;
+    }
+    emit q->kmmFilePlugin(postSave);
+    return rc;
+  }
+
+  /**
+    * This method is used by saveFile() to store the data
+    * either directly in the destination file if it is on
+    * the local file system or in a temporary file when
+    * the final destination is reached over a network
+    * protocol (e.g. FTP)
+    *
+    * @param localFile the name of the local file
+    * @param writer pointer to the formatter
+    * @param plaintext whether to override any compression & encryption settings
+    * @param keyList QString containing a comma separated list of keys to be used for encryption
+    *            If @p keyList is empty, the file will be saved unencrypted
+    *
+    * @note This method will close the file when it is written.
+    */
+  void saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* pWriter, bool plaintext, const QString& keyList)
+  {
+    // Check GPG encryption
+    bool encryptFile = true;
+    bool encryptRecover = false;
+    if (!keyList.isEmpty()) {
+      if (!KGPGFile::GPGAvailable()) {
+        KMessageBox::sorry(q, i18n("GPG does not seem to be installed on your system. Please make sure that GPG can be found using the standard search path. This time, encryption is disabled."), i18n("GPG not found"));
+        encryptFile = false;
+      } else {
+        if (KMyMoneySettings::encryptRecover()) {
+          encryptRecover = true;
+          if (!KGPGFile::keyAvailable(QString(recoveryKeyId))) {
+            KMessageBox::sorry(q, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(recoveryKeyId)), i18n("GPG Key not found"));
+            encryptRecover = false;
+          }
+        }
+
+        for(const QString& key: keyList.split(',', QString::SkipEmptyParts)) {
+          if (!KGPGFile::keyAvailable(key)) {
+            KMessageBox::sorry(q, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>", key), i18n("GPG Key not found"));
+            encryptFile = false;
+            break;
+          }
+        }
+
+        if (encryptFile == true) {
+          QString msg = i18n("<p>You have configured to save your data in encrypted form using GPG. Make sure you understand that you might lose all your data if you encrypt it, but cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
+          if (KMessageBox::questionYesNo(q, msg, i18n("Store GPG encrypted"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "StoreEncrypted") == KMessageBox::No) {
+            encryptFile = false;
+          }
+        }
+      }
+    }
+
+
+    // Create a temporary file if needed
+    QString writeFile = localFile;
+    QTemporaryFile tmpFile;
+    if (QFile::exists(localFile)) {
+      tmpFile.open();
+      writeFile = tmpFile.fileName();
+      tmpFile.close();
+    }
+
+    /**
+     * @brief Automatically restore settings when scope is left
+     */
+    struct restorePreviousSettingsHelper {
+      restorePreviousSettingsHelper()
+        : m_signalsWereBlocked{MyMoneyFile::instance()->signalsBlocked()}
+      {
+        MyMoneyFile::instance()->blockSignals(true);
+      }
+
+      ~restorePreviousSettingsHelper()
+      {
+        MyMoneyFile::instance()->blockSignals(m_signalsWereBlocked);
+      }
+      const bool m_signalsWereBlocked;
+    } restoreHelper;
+
+    MyMoneyFileTransaction ft;
+    MyMoneyFile::instance()->deletePair("kmm-encryption-key");
+    std::unique_ptr<QIODevice> device;
+
+    if (!keyList.isEmpty() && encryptFile && !plaintext) {
+      std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
+      if (kgpg) {
+        for(const QString& key: keyList.split(',', QString::SkipEmptyParts)) {
+          kgpg->addRecipient(key.toLatin1());
+        }
+
+        if (encryptRecover) {
+          kgpg->addRecipient(recoveryKeyId);
+        }
+        MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
+        device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());
+      }
+    } else {
+      QFile *file = new QFile(writeFile);
+      // The second parameter of KCompressionDevice means that KCompressionDevice will delete the QFile object
+      device = std::unique_ptr<decltype(device)::element_type>(new KCompressionDevice{file, true, (plaintext) ? KCompressionDevice::None : COMPRESSION_TYPE});
+    }
+
+    ft.commit();
+
+    if (!device || !device->open(QIODevice::WriteOnly)) {
+      throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
+    }
+
+    pWriter->setProgressCallback(&KMyMoneyApp::progressCallback);
+    pWriter->writeFile(device.get(), MyMoneyFile::instance()->storage());
+    device->close();
+
+    // Check for errors if possible, only possible for KGPGFile
+    QFileDevice *fileDevice = qobject_cast<QFileDevice*>(device.get());
+    if (fileDevice && fileDevice->error() != QFileDevice::NoError) {
+      throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
+    }
+
+    if (writeFile != localFile) {
+      // This simple comparison is possible because the strings are equal if no temporary file was created.
+      // If a temporary file was created, it is made in a way that the name is definitely different. So no
+      // symlinks etc. have to be evaluated.
+      if (!QFile::remove(localFile) || !QFile::rename(writeFile, localFile))
+        throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
+    }
+    QFile::setPermissions(localFile, m_fmode);
+    pWriter->setProgressCallback(0);
+  }
+
+  /**
+    * Call this to see if the MyMoneyFile contains any unsaved data.
+    *
+    * @retval true if any data has been modified but not saved
+    * @retval false otherwise
+    */
+  bool dirty()
+  {
+    if (!m_fileOpen)
+      return false;
+
+    return MyMoneyFile::instance()->dirty();
+  }
+
+
+  /* DO NOT ADD code to this function or any of it's called ones.
+     Instead, create a new function, fixFile_n, and modify the initializeStorage()
+     logic above to call it */
+
+  void fixFile_3()
+  {
+    // make sure each storage object contains a (unique) id
+    MyMoneyFile::instance()->storageId();
+  }
+
+  void fixFile_2()
+  {
+    auto file = MyMoneyFile::instance();
+    MyMoneyTransactionFilter filter;
+    filter.setReportAllSplits(false);
+    QList<MyMoneyTransaction> transactionList;
+    file->transactionList(transactionList, filter);
+
+    // scan the transactions and modify transactions with two splits
+    // which reference an account and a category to have the memo text
+    // of the account.
+    auto count = 0;
+    foreach (const auto transaction, transactionList) {
+      if (transaction.splitCount() == 2) {
+        QString accountId;
+        QString categoryId;
+        QString accountMemo;
+        QString categoryMemo;
+        foreach (const auto split, transaction.splits()) {
+          auto acc = file->account(split.accountId());
+          if (acc.isIncomeExpense()) {
+            categoryId = split.id();
+            categoryMemo = split.memo();
+          } else {
+            accountId = split.id();
+            accountMemo = split.memo();
+          }
+        }
+
+        if (!accountId.isEmpty() && !categoryId.isEmpty()
+            && accountMemo != categoryMemo) {
+          MyMoneyTransaction t(transaction);
+          MyMoneySplit s(t.splitById(categoryId));
+          s.setMemo(accountMemo);
+          t.modifySplit(s);
+          file->modifyTransaction(t);
+          ++count;
+        }
+      }
+    }
+    qDebug("%d transactions fixed in fixFile_2", count);
+  }
+
+  void fixFile_1()
+  {
+    // we need to fix reports. If the account filter list contains
+    // investment accounts, we need to add the stock accounts to the list
+    // as well if we don't have the expert mode enabled
+    if (!KMyMoneySettings::expertMode()) {
+      try {
+        QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
+        QList<MyMoneyReport>::iterator it_r;
+        for (it_r = reports.begin(); it_r != reports.end(); ++it_r) {
+          QStringList list;
+          (*it_r).accounts(list);
+          QStringList missing;
+          QStringList::const_iterator it_a, it_b;
+          for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+            auto acc = MyMoneyFile::instance()->account(*it_a);
+            if (acc.accountType() == eMyMoney::Account::Type::Investment) {
+              foreach (const auto accountID, acc.accountList()) {
+                if (!list.contains(accountID)) {
+                  missing.append(accountID);
+                }
+              }
+            }
+          }
+          if (!missing.isEmpty()) {
+            (*it_r).addAccount(missing);
+            MyMoneyFile::instance()->modifyReport(*it_r);
+          }
+        }
+      } catch (const MyMoneyException &) {
+      }
+    }
+  }
+
+  #if 0
+  if (!m_accountsView->allItemsSelected())
+  {
+    // retrieve a list of selected accounts
+    QStringList list;
+    m_accountsView->selectedItems(list);
+
+    // if we're not in expert mode, we need to make sure
+    // that all stock accounts for the selected investment
+    // account are also selected
+    if (!KMyMoneySettings::expertMode()) {
+      QStringList missing;
+      QStringList::const_iterator it_a, it_b;
+      for (it_a = list.begin(); it_a != list.end(); ++it_a) {
+        auto acc = MyMoneyFile::instance()->account(*it_a);
+        if (acc.accountType() == Account::Type::Investment) {
+          foreach (const auto accountID, acc.accountList()) {
+            if (!list.contains(accountID)) {
+              missing.append(accountID);
+            }
+          }
+        }
+      }
+      list += missing;
+    }
+
+    m_filter.addAccount(list);
+  }
+
+  #endif
+
+
+
+
+
+  void fixFile_0()
+  {
+    /* (Ace) I am on a crusade against file fixups.  Whenever we have to fix the
+     * file, it is really a warning.  So I'm going to print a debug warning, and
+     * then go track them down when I see them to figure out how they got saved
+     * out needing fixing anyway.
+     */
+
+    auto file = MyMoneyFile::instance();
+    QList<MyMoneyAccount> accountList;
+    file->accountList(accountList);
+    QList<MyMoneyAccount>::Iterator it_a;
+    QList<MyMoneySchedule> scheduleList = file->scheduleList();
+    QList<MyMoneySchedule>::Iterator it_s;
+
+    MyMoneyAccount equity = file->equity();
+    MyMoneyAccount asset = file->asset();
+    bool equityListEmpty = equity.accountList().count() == 0;
+
+    for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+      if ((*it_a).accountType() == eMyMoney::Account::Type::Loan
+          || (*it_a).accountType() == eMyMoney::Account::Type::AssetLoan) {
+        fixLoanAccount_0(*it_a);
+      }
+      // until early before 0.8 release, the equity account was not saved to
+      // the file. If we have an equity account with no sub-accounts but
+      // find and equity account that has equity() as it's parent, we reparent
+      // this account. Need to move it to asset() first, because otherwise
+      // MyMoneyFile::reparent would act as NOP.
+      if (equityListEmpty && (*it_a).accountType() == eMyMoney::Account::Type::Equity) {
+        if ((*it_a).parentAccountId() == equity.id()) {
+          auto acc = *it_a;
+          // tricky, force parent account to be empty so that we really
+          // can re-parent it
+          acc.setParentAccountId(QString());
+          file->reparentAccount(acc, equity);
+          qDebug() << Q_FUNC_INFO << " fixed account " << acc.id() << " reparented to " << equity.id();
+        }
+      }
+    }
+
+    for (it_s = scheduleList.begin(); it_s != scheduleList.end(); ++it_s) {
+      fixSchedule_0(*it_s);
+    }
+
+    fixTransactions_0();
+  }
+
+  void fixSchedule_0(MyMoneySchedule sched)
+  {
+    MyMoneyTransaction t = sched.transaction();
+    QList<MyMoneySplit> splitList = t.splits();
+    QList<MyMoneySplit>::ConstIterator it_s;
+    bool updated = false;
+
+    try {
+      // Check if the splits contain valid data and set it to
+      // be valid.
+      for (it_s = splitList.constBegin(); it_s != splitList.constEnd(); ++it_s) {
+        // the first split is always the account on which this transaction operates
+        // and if the transaction commodity is not set, we take this
+        if (it_s == splitList.constBegin() && t.commodity().isEmpty()) {
+          qDebug() << Q_FUNC_INFO << " " << t.id() << " has no commodity";
+          try {
+            auto acc = MyMoneyFile::instance()->account((*it_s).accountId());
+            t.setCommodity(acc.currencyId());
+            updated = true;
+          } catch (const MyMoneyException &) {
+          }
+        }
+        // make sure the account exists. If not, remove the split
+        try {
+          MyMoneyFile::instance()->account((*it_s).accountId());
+        } catch (const MyMoneyException &) {
+          qDebug() << Q_FUNC_INFO << " " << sched.id() << " " << (*it_s).id() << " removed, because account '" << (*it_s).accountId() << "' does not exist.";
+          t.removeSplit(*it_s);
+          updated = true;
+        }
+        if ((*it_s).reconcileFlag() != eMyMoney::Split::State::NotReconciled) {
+          qDebug() << Q_FUNC_INFO << " " << sched.id() << " " << (*it_s).id() << " should be 'not reconciled'";
+          MyMoneySplit split = *it_s;
+          split.setReconcileDate(QDate());
+          split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+          t.modifySplit(split);
+          updated = true;
+        }
+        // the schedule logic used to operate only on the value field.
+        // This is now obsolete.
+        if ((*it_s).shares().isZero() && !(*it_s).value().isZero()) {
+          MyMoneySplit split = *it_s;
+          split.setShares(split.value());
+          t.modifySplit(split);
+          updated = true;
+        }
+      }
+
+      // If there have been changes, update the schedule and
+      // the engine data.
+      if (updated) {
+        sched.setTransaction(t);
+        MyMoneyFile::instance()->modifySchedule(sched);
+      }
+    } catch (const MyMoneyException &e) {
+      qWarning("Unable to update broken schedule: %s", qPrintable(e.what()));
+    }
+  }
+
+  void fixLoanAccount_0(MyMoneyAccount acc)
+  {
+    if (acc.value("final-payment").isEmpty()
+        || acc.value("term").isEmpty()
+        || acc.value("periodic-payment").isEmpty()
+        || acc.value("loan-amount").isEmpty()
+        || acc.value("interest-calculation").isEmpty()
+        || acc.value("schedule").isEmpty()
+        || acc.value("fixed-interest").isEmpty()) {
+      KMessageBox::information(q,
+                               i18n("<p>The account \"%1\" was previously created as loan account but some information is missing.</p><p>The new loan wizard will be started to collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 or later and earlier than version 0.9 to correct the problem.</p>"
+                                    , acc.name()),
+                               i18n("Account problem"));
+
+      throw MYMONEYEXCEPTION("Fix LoanAccount0 not supported anymore");
+    }
+  }
+
+  void fixTransactions_0()
+  {
+    auto file = MyMoneyFile::instance();
+
+    QList<MyMoneySchedule> scheduleList = file->scheduleList();
+    MyMoneyTransactionFilter filter;
+    filter.setReportAllSplits(false);
+    QList<MyMoneyTransaction> transactionList;
+    file->transactionList(transactionList, filter);
+
+    QList<MyMoneySchedule>::Iterator it_x;
+    QStringList interestAccounts;
+
+    KMSTATUS(i18n("Fix transactions"));
+    q->slotStatusProgressBar(0, scheduleList.count() + transactionList.count());
+
+    int cnt = 0;
+    // scan the schedules to find interest accounts
+    for (it_x = scheduleList.begin(); it_x != scheduleList.end(); ++it_x) {
+      MyMoneyTransaction t = (*it_x).transaction();
+      QList<MyMoneySplit>::ConstIterator it_s;
+      QStringList accounts;
+      bool hasDuplicateAccounts = false;
+
+      foreach (const auto split, t.splits()) {
+        if (accounts.contains(split.accountId())) {
+          hasDuplicateAccounts = true;
+          qDebug() << Q_FUNC_INFO << " " << t.id() << " has multiple splits with account " << split.accountId();
+        } else {
+          accounts << split.accountId();
+        }
+
+        if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
+          if (interestAccounts.contains(split.accountId()) == 0) {
+            interestAccounts << split.accountId();
+          }
+        }
+      }
+      if (hasDuplicateAccounts) {
+        fixDuplicateAccounts_0(t);
+      }
+      ++cnt;
+      if (!(cnt % 10))
+        q->slotStatusProgressBar(cnt);
+    }
+
+    // scan the transactions and modify loan transactions
+    for (auto& transaction : transactionList) {
+      QString defaultAction;
+      QList<MyMoneySplit> splits = transaction.splits();
+      QStringList accounts;
+
+      // check if base commodity is set. if not, set baseCurrency
+      if (transaction.commodity().isEmpty()) {
+        qDebug() << Q_FUNC_INFO << " " << transaction.id() << " has no base currency";
+        transaction.setCommodity(file->baseCurrency().id());
+        file->modifyTransaction(transaction);
+      }
+
+      bool isLoan = false;
+      // Determine default action
+      if (transaction.splitCount() == 2) {
+        // check for transfer
+        int accountCount = 0;
+        MyMoneyMoney val;
+        foreach (const auto split, splits) {
+          auto acc = file->account(split.accountId());
+          if (acc.accountGroup() == eMyMoney::Account::Type::Asset
+              || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
+            val = split.value();
+            accountCount++;
+            if (acc.accountType() == eMyMoney::Account::Type::Loan
+                || acc.accountType() == eMyMoney::Account::Type::AssetLoan)
+              isLoan = true;
+          } else
+            break;
+        }
+        if (accountCount == 2) {
+          if (isLoan)
+            defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization);
+          else
+            defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer);
+        } else {
+          if (val.isNegative())
+            defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal);
+          else
+            defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit);
+        }
+      }
+
+      isLoan = false;
+      foreach (const auto split, splits) {
+        auto acc = file->account(split.accountId());
+        MyMoneyMoney val = split.value();
+        if (acc.accountGroup() == eMyMoney::Account::Type::Asset
+            || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
+          if (!val.isPositive()) {
+            defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal);
+            break;
+          } else {
+            defaultAction = MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit);
+            break;
+          }
+        }
+      }
+
+  #if 0
+      // Check for correct actions in transactions referencing credit cards
+      bool needModify = false;
+      // The action fields are actually not used anymore in the ledger view logic
+      // so we might as well skip this whole thing here!
+      for (it_s = splits.begin(); needModify == false && it_s != splits.end(); ++it_s) {
+        auto acc = file->account((*it_s).accountId());
+        MyMoneyMoney val = (*it_s).value();
+        if (acc.accountType() == Account::Type::CreditCard) {
+          if (val < 0 && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal) && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer))
+            needModify = true;
+          if (val >= 0 && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit) && (*it_s).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer))
+            needModify = true;
+        }
+      }
+
+      // (Ace) Extended the #endif down to cover this conditional, because as-written
+      // it will ALWAYS be skipped.
+
+      if (needModify == true) {
+        for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
+          (*it_s).setAction(defaultAction);
+          transaction.modifySplit(*it_s);
+          file->modifyTransaction(transaction);
+        }
+        splits = transaction.splits();    // update local copy
+        qDebug("Fixed credit card assignment in %s", transaction.id().data());
+      }
+  #endif
+
+      // Check for correct assignment of ActionInterest in all splits
+      // and check if there are any duplicates in this transactions
+      for (auto& split : splits) {
+        MyMoneyAccount splitAccount = file->account(split.accountId());
+        if (!accounts.contains(split.accountId())) {
+          accounts << split.accountId();
+        }
+        // if this split references an interest account, the action
+        // must be of type ActionInterest
+        if (interestAccounts.contains(split.accountId())) {
+          if (split.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
+            qDebug() << Q_FUNC_INFO << " " << transaction.id() << " contains an interest account (" << split.accountId() << ") but does not have ActionInterest";
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
+            transaction.modifySplit(split);
+            file->modifyTransaction(transaction);
+            qDebug("Fixed interest action in %s", qPrintable(transaction.id()));
+          }
+          // if it does not reference an interest account, it must not be
+          // of type ActionInterest
+        } else {
+          if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
+            qDebug() << Q_FUNC_INFO << " " << transaction.id() << " does not contain an interest account so it should not have ActionInterest";
+            split.setAction(defaultAction);
+            transaction.modifySplit(split);
+            file->modifyTransaction(transaction);
+            qDebug("Fixed interest action in %s", qPrintable(transaction.id()));
+          }
+        }
+
+        // check that for splits referencing an account that has
+        // the same currency as the transactions commodity the value
+        // and shares field are the same.
+        if (transaction.commodity() == splitAccount.currencyId()
+            && split.value() != split.shares()) {
+          qDebug() << Q_FUNC_INFO << " " << transaction.id() << " " << split.id() << " uses the transaction currency, but shares != value";
+          split.setShares(split.value());
+          transaction.modifySplit(split);
+          file->modifyTransaction(transaction);
+        }
+
+        // fix the shares and values to have the correct fraction
+        if (!splitAccount.isInvest()) {
+          try {
+            int fract = splitAccount.fraction();
+            if (split.shares() != split.shares().convert(fract)) {
+              qDebug("adjusting fraction in %s,%s", qPrintable(transaction.id()), qPrintable(split.id()));
+              split.setShares(split.shares().convert(fract));
+              split.setValue(split.value().convert(fract));
+              transaction.modifySplit(split);
+              file->modifyTransaction(transaction);
+            }
+          } catch (const MyMoneyException &) {
+            qDebug("Missing security '%s', split not altered", qPrintable(splitAccount.currencyId()));
+          }
+        }
+      }
+
+      ++cnt;
+      if (!(cnt % 10))
+        q->slotStatusProgressBar(cnt);
+    }
+
+    q->slotStatusProgressBar(-1, -1);
+  }
+
+  void fixDuplicateAccounts_0(MyMoneyTransaction& t)
+  {
+    qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
+  }
+
+
+
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -408,6 +1670,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   pActions = initActions();
   pMenus = initMenus();
 
+  d->newStorage();
   d->m_myMoneyView = new KMyMoneyView(this/*the global variable kmymoney is not yet assigned. So we pass it here*/);
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, &KMyMoneyView::aboutToChangeView, this, &KMyMoneyApp::slotResetSelections);
@@ -476,6 +1739,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
 KMyMoneyApp::~KMyMoneyApp()
 {
+  d->removeStorage();
   // delete cached objects since the are in the way
   // when unloading the plugins
   onlineJobAdministration::instance()->clearCaches();
@@ -1006,7 +2270,7 @@ bool KMyMoneyApp::queryClose()
   if (!isReady())
     return false;
 
-  if (d->m_myMoneyView->dirty()) {
+  if (d->dirty()) {
     int ans = askSaveOnClose();
 
     if (ans == KMessageBox::Cancel)
@@ -1157,9 +2421,9 @@ void KMyMoneyApp::slotFileNew()
 
   slotFileClose();
 
-  if (!d->m_myMoneyView->fileOpen()) {
+  if (!d->m_fileOpen) {
     // next line required until we move all file handling out of KMyMoneyView
-    d->m_myMoneyView->newFile();
+    d->newFile();
 
     d->m_fileName = QUrl();
     updateCaption();
@@ -1212,7 +2476,10 @@ void KMyMoneyApp::slotFileNew()
         // fixup logic and then save it to keep the modified
         // flag off.
         slotFileSave();
-        d->m_myMoneyView->readFile(d->m_fileName);
+        if (d->openNondatabase(d->m_fileName)) {
+          d->m_fileOpen = true;
+          d->initializeStorage();
+        }
         slotFileSave();
 
         // now keep the filename in the recent files used list
@@ -1223,13 +2490,13 @@ void KMyMoneyApp::slotFileNew()
 
       } catch (const MyMoneyException &) {
         // next line required until we move all file handling out of KMyMoneyView
-        d->m_myMoneyView->closeFile();
+        d->closeFile();
       }
       if (wizard->startSettingsAfterFinished())
         slotSettings();
     } else {
       // next line required until we move all file handling out of KMyMoneyView
-      d->m_myMoneyView->closeFile();
+      d->closeFile();
     }
     delete wizard;
     updateCaption();
@@ -1238,14 +2505,41 @@ void KMyMoneyApp::slotFileNew()
   }
 }
 
+bool KMyMoneyApp::isDatabase()
+{
+  return (d->m_fileOpen && ((d->m_fileType == KmmDb)));
+}
+
+bool KMyMoneyApp::isNativeFile()
+{
+  return (d->m_fileOpen && (d->m_fileType < MaxNativeFileType));
+}
+
+bool KMyMoneyApp::fileOpen() const
+{
+  return d->m_fileOpen;
+}
+
 // General open
 void KMyMoneyApp::slotFileOpen()
 {
   KMSTATUS(i18n("Open a file."));
 
   QString prevDir = readLastUsedDir();
-  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), prevDir,
-                                                 i18n("KMyMoney files (*.kmy *.xml);;All files"));
+  QString fileExtensions;
+  fileExtensions.append(i18n("KMyMoney files (*.kmy *.xml)"));
+  fileExtensions.append(QLatin1String(";;"));
+
+  for (const auto& plugin : d->m_plugins.storage) {
+    const auto fileExtension = plugin->fileExtension();
+    if (!fileExtension.isEmpty()) {
+      fileExtensions.append(fileExtension);
+      fileExtensions.append(QLatin1String(";;"));
+    }
+  }
+  fileExtensions.append(i18n("All files (*)"));
+
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), prevDir, fileExtensions);
   dialog->setFileMode(QFileDialog::ExistingFile);
   dialog->setAcceptMode(QFileDialog::AcceptOpen);
 
@@ -1253,21 +2547,6 @@ void KMyMoneyApp::slotFileOpen()
     slotFileOpenRecent(dialog->selectedUrls().first());
   }
   delete dialog;
-}
-
-void KMyMoneyApp::slotOpenDatabase()
-{
-//  KMSTATUS(i18n("Open a file."));
-//  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite);
-//  if (!dialog->checkDrivers()) {
-//    delete dialog;
-//    return;
-//  }
-
-//  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-//    slotFileOpenRecent(dialog->selectedURL());
-//  }
-//  delete dialog;
 }
 
 bool KMyMoneyApp::isImportableFile(const QUrl &url)
@@ -1318,46 +2597,62 @@ bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
 void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 {
   KMSTATUS(i18n("Loading file..."));
-  if (!isFileOpenedInAnotherInstance(url)) {
-    QUrl newurl = url;
-    if (newurl.scheme() == QLatin1String("sql") || KMyMoneyUtils::fileExists(newurl)) {
-      slotFileClose();
-      if (!d->m_myMoneyView->fileOpen()) {
-        try {
-          if (d->m_myMoneyView->readFile(newurl)) {
-            if ((d->m_myMoneyView->isNativeFile())) {
-              d->m_fileName = newurl;
-              updateCaption();
-              d->m_recentFiles->addUrl(newurl);
-              writeLastUsedFile(newurl.toDisplayString(QUrl::PreferLocalFile));
-            } else {
-              d->m_fileName = QUrl(); // imported files have no filename
-            }
-            // Check the schedules
-            slotCheckSchedules();
-          }
-        } catch (const MyMoneyException &e) {
-          KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", e.what()));
-        }
-        updateCaption();
-        emit fileLoaded(d->m_fileName);
-      } else {
-        /*fileOpen failed - should we do something
-         or maybe fileOpen puts out the message... - it does for database*/
-      }
-    } else { // newurl invalid
-      slotFileClose();
-      KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
-    }
-  } else { // isDuplicate
+  if (isFileOpenedInAnotherInstance(url)) {
     KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
+    return;
   }
+
+  if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
+    return;
+  }
+
+  if (d->m_fileOpen)
+    slotFileClose();
+
+  if (d->m_fileOpen)
+    return;
+
+  try {
+    auto isOpened = false;
+    if (url.scheme() == QLatin1String("sql"))
+      isOpened = d->openDatabase(url);
+    else
+      isOpened = d->openNondatabase(url);
+
+    if (!isOpened)
+      return;
+
+    d->m_fileOpen = true;
+    if (!d->initializeStorage()) {
+      d->m_fileOpen = false;
+      return;
+    }
+
+    if (isNativeFile()) {
+      d->m_fileName = url;
+      updateCaption();
+      writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
+      /* Dont't use url variable after KRecentFilesAction::addUrl
+       * as it might delete it.
+       * More in API reference to this method
+       */
+      d->m_recentFiles->addUrl(url);
+    } else {
+      d->m_fileName = QUrl(); // imported files have no filename
+    }
+
+  } catch (const MyMoneyException &e) {
+    KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", e.what()));
+  }
+  updateCaption();
+  emit fileLoaded(d->m_fileName);
 }
 
 bool KMyMoneyApp::slotFileSave()
 {
   // if there's nothing changed, there's no need to save anything
-  if (!d->m_myMoneyView->dirty())
+  if (!d->dirty())
     return true;
 
   bool rc = false;
@@ -1370,7 +2665,7 @@ bool KMyMoneyApp::slotFileSave()
   d->consistencyCheck(false);
 
   setEnabled(false);
-  if (d->m_myMoneyView->isDatabase()) {
+  if (isDatabase()) {
     auto pluginFound = false;
     for (const auto& plugin : d->m_plugins.storage) {
       if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
@@ -1382,7 +2677,7 @@ bool KMyMoneyApp::slotFileSave()
     if(!pluginFound)
       KMessageBox::error(this, i18n("Couldn't find suitable plugin to save your storage."));
   } else {
-    rc = d->m_myMoneyView->saveFile(d->m_fileName, MyMoneyFile::instance()->value("kmm-encryption-key"));
+    rc = d->saveFile(d->m_fileName, MyMoneyFile::instance()->value("kmm-encryption-key"));
   }
   setEnabled(true);
 
@@ -1418,7 +2713,7 @@ bool KMyMoneyApp::slotFileSaveAs()
   }
 
   QString prevDir; // don't prompt file name if not a native file
-  if (d->m_myMoneyView->isNativeFile())
+  if (isNativeFile())
     prevDir = readLastUsedDir();
 
   QPointer<QFileDialog> dlg =
@@ -1446,7 +2741,7 @@ bool KMyMoneyApp::slotFileSaveAs()
       // If this is the anonymous file export, just save it, don't actually take the
       // name, or remember it! Don't even try to encrypt it
       if (newName.endsWith(QLatin1String(".anon.xml"), Qt::CaseInsensitive))
-        rc = d->m_myMoneyView->saveFile(newURL);
+        rc = d->saveFile(newURL);
       else {
         d->m_fileName = newURL;
         QString encryptionKeys;
@@ -1459,7 +2754,7 @@ bool KMyMoneyApp::slotFileSaveAs()
             encryptionKeys.append(d->m_additionalGpgKeys.join(QLatin1Char(',')));
           }
         }
-        rc = d->m_myMoneyView->saveFile(d->m_fileName, encryptionKeys);
+        rc = d->saveFile(d->m_fileName, encryptionKeys);
         //write the directory used for this file as the default one for next time.
         writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
         writeLastUsedFile(newName);
@@ -1474,63 +2769,11 @@ bool KMyMoneyApp::slotFileSaveAs()
   return rc;
 }
 
-void KMyMoneyApp::slotSaveAsDatabase()
-{
-  saveAsDatabase();
-}
-
-bool KMyMoneyApp::saveAsDatabase()
-{
-//  bool rc = false;
-//  QUrl oldUrl;
-//  // in event of it being a database, ensure that all data is read into storage for saveas
-//  if (d->m_myMoneyView->isDatabase())
-//    oldUrl = d->m_fileName.isEmpty() ? lastOpenedURL() : d->m_fileName;
-
-//  KMSTATUS(i18n("Saving file to database..."));
-//  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
-//  QUrl url = oldUrl;
-//  if (!dialog->checkDrivers()) {
-//    delete dialog;
-//    return (false);
-//  }
-
-//  while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != 0) {
-//    url = dialog->selectedURL();
-//    // If the protocol is SQL for the old and new, and the hostname and database names match
-//    // Let the user know that the current database cannot be saved on top of itself.
-//    if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
-//        && oldUrl.host() == url.host()
-//        && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
-//        && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
-//      KMessageBox::sorry(this, i18n("Cannot save to current database."));
-//    } else {
-//      try {
-//        rc = d->m_myMoneyView->saveAsDatabase(url);
-//      } catch (const MyMoneyException &e) {
-//        KMessageBox::sorry(this, i18n("Cannot save to current database: %1", e.what()));
-//      }
-//    }
-//  }
-//  delete dialog;
-
-//  if (rc) {
-//    //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-//    //if(p)
-//    d->m_recentFiles->addUrl(url);
-//    writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
-//  }
-//  d->m_autoSaveTimer->stop();
-//  updateCaption();
-//  return rc;
-  return false;
-}
-
 void KMyMoneyApp::slotFileCloseWindow()
 {
   KMSTATUS(i18n("Closing window..."));
 
-  if (d->m_myMoneyView->dirty()) {
+  if (d->dirty()) {
     int answer = askSaveOnClose();
     if (answer == KMessageBox::Cancel)
       return;
@@ -1551,7 +2794,7 @@ void KMyMoneyApp::slotFileClose()
     return;
 
   // no update status here, as we might delete the status too early.
-  if (d->m_myMoneyView->dirty()) {
+  if (d->dirty()) {
     int answer = askSaveOnClose();
     if (answer == KMessageBox::Cancel)
       return;
@@ -1615,7 +2858,7 @@ void KMyMoneyApp::slotShowAllAccounts()
 #ifdef KMM_DEBUG
 void KMyMoneyApp::slotFileFileInfo()
 {
-  if (!d->m_myMoneyView->fileOpen()) {
+  if (!d->m_fileOpen) {
     KMessageBox::information(this, i18n("No KMyMoneyFile open"));
     return;
   }
@@ -1710,7 +2953,7 @@ void KMyMoneyApp::progressCallback(int current, int total, const QString& msg)
 
 void KMyMoneyApp::slotFileViewPersonal()
 {
-  if (!d->m_myMoneyView->fileOpen()) {
+  if (!d->m_fileOpen) {
     KMessageBox::information(this, i18n("No KMyMoneyFile open"));
     return;
   }
@@ -1880,7 +3123,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     d->m_autoSaveTimer->stop();
   }
   // start timer if turned on and needed but not running
-  if (!d->m_autoSaveTimer->isActive() && d->m_autoSaveEnabled && d->m_myMoneyView->dirty()) {
+  if (!d->m_autoSaveTimer->isActive() && d->m_autoSaveEnabled && d->dirty()) {
     d->m_autoSaveTimer->setSingleShot(true);
     d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
   }
@@ -1892,7 +3135,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
     if (KGPGFile::GPGAvailable()) {
       KGPGFile file;
-      QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId));
+      QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId2));
       if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
         bool skipMessage = false;
 
@@ -1921,7 +3164,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 void KMyMoneyApp::slotBackupFile()
 {
   // Save the file first so isLocalFile() works
-  if (d->m_myMoneyView && d->m_myMoneyView->dirty())
+  if (d->m_myMoneyView && d->dirty())
 
   {
     if (KMessageBox::questionYesNo(this, i18n("The file must be saved first "
@@ -2471,7 +3714,7 @@ void KMyMoneyApp::updateCaption(bool skipActions)
 
   caption = d->m_fileName.fileName();
 
-  if (caption.isEmpty() && d->m_myMoneyView && d->m_myMoneyView->fileOpen())
+  if (caption.isEmpty() && d->m_myMoneyView && d->m_fileOpen)
     caption = i18n("Untitled");
 
   // MyMoneyFile::instance()->dirty() throws an exception, if
@@ -2493,7 +3736,7 @@ void KMyMoneyApp::updateCaption(bool skipActions)
   setCaption(caption, modified);
 
   if (!skipActions) {
-    d->m_myMoneyView->enableViewsIfFileOpen();
+    d->m_myMoneyView->enableViewsIfFileOpen(d->m_fileOpen);
     slotUpdateActions();
   }
 }
@@ -2501,7 +3744,7 @@ void KMyMoneyApp::updateCaption(bool skipActions)
 void KMyMoneyApp::slotUpdateActions()
 {
   const auto file = MyMoneyFile::instance();
-  const bool fileOpen = d->m_myMoneyView->fileOpen();
+  const bool fileOpen = d->m_fileOpen;
   const bool modified = file->dirty();
 //  const bool importRunning = (d->m_smtReader != 0);
   auto aC = actionCollection();
@@ -2527,7 +3770,7 @@ void KMyMoneyApp::slotUpdateActions()
 //      {qMakePair(Action::FileOpenDatabase, true)},
 //      {qMakePair(Action::FileSaveAsDatabase, fileOpen)},
       {qMakePair(Action::FilePersonalData, fileOpen)},
-      {qMakePair(Action::FileBackup, (fileOpen && !d->m_myMoneyView->isDatabase()))},
+      {qMakePair(Action::FileBackup, (fileOpen && !isDatabase()))},
       {qMakePair(Action::FileInformation, fileOpen)},
       {qMakePair(Action::FileImportTemplate, fileOpen/* && !importRunning*/)},
       {qMakePair(Action::FileExportTemplate, fileOpen/* && !importRunning*/)},
@@ -2925,12 +4168,12 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
       //KStartupInfo::setNewStartupId(this, asn_id);
 
       // Make sure we have an open file
-      if (! d->m_myMoneyView->fileOpen() &&
+      if (! d->m_fileOpen &&
           KMessageBox::warningContinueCancel(kmymoney, i18n("You must first select a KMyMoney file before you can import a statement.")) == KMessageBox::Continue)
         kmymoney->slotFileOpen();
 
       // only continue if the user really did open a file.
-      if (d->m_myMoneyView->fileOpen()) {
+      if (d->m_fileOpen) {
         KMSTATUS(i18n("Importing a statement via Web Connect"));
 
         // remove the statement files
@@ -2991,7 +4234,7 @@ void KMyMoneyApp::slotAutoSave()
 
     //calls slotFileSave if needed, and restart the timer
     //it the file is not saved, reinitializes the countdown.
-    if (d->m_myMoneyView->dirty() && d->m_autoSaveEnabled) {
+    if (d->dirty() && d->m_autoSaveEnabled) {
       if (!slotFileSave() && d->m_autoSavePeriod > 0) {
         d->m_autoSaveTimer->setSingleShot(true);
         d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
@@ -3319,7 +4562,21 @@ void KMyMoneyApp::Private::closeFile()
   m_reconciliationAccount = MyMoneyAccount();
   m_myMoneyView->finishReconciliation(MyMoneyAccount());
 
-  m_myMoneyView->closeFile();
+  m_myMoneyView->slotFileClosed();
+
+  disconnectStorageFromModels();
+
+  // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
+  Models::instance()->fileClosed();
+
+  emit q->kmmFilePlugin(KMyMoneyApp::preClose);
+  if (q->isDatabase())
+    MyMoneyFile::instance()->storage()->close(); // to log off a database user
+  newStorage();
+
+  emit q->kmmFilePlugin(postClose);
+  m_fileOpen = false;
+
   m_fileName = QUrl();
   q->updateCaption();
 

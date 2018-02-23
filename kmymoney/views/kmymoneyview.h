@@ -62,6 +62,7 @@ class IMyMoneyOperationsFormat;
 class MyMoneyTransaction;
 class KInvestmentView;
 class KReportsView;
+class SimpleLedgerView;
 class MyMoneySchedule;
 class MyMoneySecurity;
 class MyMoneyReport;
@@ -127,28 +128,18 @@ private:
   KReportsView* m_reportsView;
   KOnlineJobOutbox* m_onlineJobOutboxView;
 
+  #ifdef ENABLE_UNFINISHEDFEATURES
+  SimpleLedgerView* m_simpleLedgerView;
+  #endif
+
   QHash<View, KPageWidgetItem*> viewFrames;
   QHash<View, KMyMoneyViewBase*> viewBases;
 
   KMyMoneyTitleLabel* m_header;
   bool m_inConstructor;
-  bool m_fileOpen;
-  QFileDevice::Permissions m_fmode;
   int m_lastViewSelected;
 
   QMap<QString, KMyMoneyPlugin::StoragePlugin*>* m_storagePlugins;
-
-  // Keep a note of the file type
-  typedef enum _fileTypeE {
-    KmmBinary = 0,  // native, binary
-    KmmXML,        // native, XML
-    KmmDb,         //  SQL database
-    /* insert new native file types above this line */
-    MaxNativeFileType,
-    /* and non-native types below */
-    GncXML         // Gnucash XML
-  } fileTypeE;
-  fileTypeE m_fileType;
 
 #ifdef KF5Activities_FOUND
 private:
@@ -156,50 +147,9 @@ private:
 #endif
 
 private:
-  void ungetString(QIODevice *qfile, char * buf, int len);
-
-  /**
-    * if no base currency is defined, start the dialog and force it to be set
-    */
-  void selectBaseCurrency();
-
-  /**
-    * This method attaches an empty storage object to the MyMoneyFile
-    * object. It calls removeStorage() to remove a possibly attached
-    * storage object.
-    */
-  void newStorage();
-
-  /**
-    * This method removes an attached storage from the MyMoneyFile
-    * object.
-    */
-  void removeStorage();
-
   void viewAccountList(const QString& selectAccount); // Show the accounts view
 
-  static void progressCallback(int current, int total, const QString&);
-
-  /**
-    */
-  void fixFile_0();
-  void fixFile_1();
-  void fixFile_2();
-  void fixFile_3();
-
-  /**
-    */
-  void fixLoanAccount_0(MyMoneyAccount acc);
-
-  /**
-    */
-  void fixTransactions_0();
-  void fixSchedule_0(MyMoneySchedule sched);
-  void fixDuplicateAccounts_0(MyMoneyTransaction& t);
-
   void createSchedule(MyMoneySchedule s, MyMoneyAccount& a);
-
-  void checkAccountName(const MyMoneyAccount& acc, const QString& name) const;
 
 public:
   /**
@@ -214,84 +164,12 @@ public:
   ~KMyMoneyView();
 
   /**
-    * Makes sure that a MyMoneyFile is open and has been created successfully.
-    *
-    * @return Whether the file is open and initialised
-    */
-  bool fileOpen();
-
-  /**
-    * Closes the open MyMoneyFile and frees all the allocated memory, I hope !
-    */
-  void closeFile();
-
-
-  /**
-    * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
-    * data structures in memory.  The return result is examined to make sure no
-    * errors occurred whilst parsing.
-    *
-    * @param url The URL to read from.
-    *            If no protocol is specified, file:// is assumed.
-    *
-    * @return Whether the read was successful.
-    */
-  bool readFile(const QUrl &url, IMyMoneyOperationsFormat *pExtReader = nullptr);
-
-  /**
-    * Saves the data into permanent storage using the XML format.
-    *
-    * @param url The URL to save into.
-    *            If no protocol is specified, file:// is assumed.
-    * @param keyList QString containing a comma separated list of keys
-    *            to be used for encryption. If @p keyList is empty,
-    *            the file will be saved unencrypted (the default)
-    *
-    * @retval false save operation failed
-    * @retval true save operation was successful
-    */
-  bool saveFile(const QUrl &url, const QString& keyList = QString());
-
-  /**
-    * Call this to find out if the currently open file is native KMM
-    *
-    * @retval true file is native
-    * @retval false file is foreign
-    */
-  bool isNativeFile() {
-    return (m_fileOpen && (m_fileType < MaxNativeFileType));
-  }
-
-  /**
-   * Call this to find out if the currently open file is a sql database
-   *
-   * @retval true file is database
-   * @retval false file is serial
-   */
-  bool isDatabase() {
-    return (m_fileOpen && ((m_fileType == KmmDb)));
-  }
-
-  /**
-    * Call this to see if the MyMoneyFile contains any unsaved data.
-    *
-    * @retval true if any data has been modified but not saved
-    * @retval false otherwise
-    */
-  bool dirty();
-
-  /**
-    * Close the currently opened file and create an empty new file.
-    *
-    * @see MyMoneyFile
-    */
-  void newFile();
-
-  /**
     * This method enables the state of all views (except home view) according
     * to an open file.
     */
-  void enableViewsIfFileOpen();
+  void enableViewsIfFileOpen(bool fileOpen);
+  void switchToDefaultView();
+  void switchToHomeView();
 
   void addWidget(QWidget* w);
 
@@ -306,16 +184,6 @@ public:
   bool canPrint();
 
   void finishReconciliation(const MyMoneyAccount& account);
-
-  /**
-    * This method updates names of currencies from file to localized names
-    */
-  void updateCurrencyNames();
-
-  /**
-    * This method loads all known currencies and saves them to the storage
-    */
-  void loadAllCurrencies();
 
   void showTitleBar(bool show);
 
@@ -399,8 +267,6 @@ public Q_SLOTS:
     */
   void slotShowTransactionDetail(bool detailed);
 
-
-
   /**
    * Informs respective views about selected object, so they can
    * update action states and current object.
@@ -409,6 +275,9 @@ public Q_SLOTS:
   void slotObjectSelected(const MyMoneyObject& obj);
 
   void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
+
+  void slotFileOpened();
+  void slotFileClosed();
 
 private Q_SLOTS:
   /**
@@ -454,40 +323,6 @@ protected Q_SLOTS:
   void slotSetBaseCurrency(const MyMoneySecurity& baseCurrency);
 
 private:
-  /**
-   * This method is called from readFile to open a database file which
-   * is to be processed in 'proper' database mode, i.e. in-place updates
-   *
-   * @param dbaseURL pseudo-QUrl representation of database
-   *
-   * @retval true Database opened successfully
-   * @retval false Could not open or read database
-   */
-  bool openDatabase(const QUrl &dbaseURL);
-  /**
-   * This method is used after a file or database has been
-   * read into storage, and performs various initialization tasks
-   *
-   * @retval true all went okay
-   * @retval false an exception occurred during this process
-   */
-  bool initializeStorage();
-  /**
-    * This method is used by saveFile() to store the data
-    * either directly in the destination file if it is on
-    * the local file system or in a temporary file when
-    * the final destination is reached over a network
-    * protocol (e.g. FTP)
-    *
-    * @param localFile the name of the local file
-    * @param writer pointer to the formatter
-    * @param plaintext whether to override any compression & encryption settings
-    * @param keyList QString containing a comma separated list of keys to be used for encryption
-    *            If @p keyList is empty, the file will be saved unencrypted
-    *
-    * @note This method will close the file when it is written.
-    */
-  void saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* writer, bool plaintext = false, const QString& keyList = QString());
 
   /**
     * Internal method used by slotAccountNew() and slotAccountCategory().
@@ -517,16 +352,6 @@ Q_SIGNALS:
     * occur. The Action parameter distinguishes between them.
     */
   void kmmFilePlugin(unsigned int action);
-
-  /**
-   * This signal is emitted after a data source has been closed
-   */
-  void fileClosed();
-
-  /**
-   * This signal is emitted after a data source has been opened
-   */
-  void fileOpened();
 
   /**
    * @brief proxy signal

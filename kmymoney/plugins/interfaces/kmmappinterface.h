@@ -48,6 +48,14 @@ namespace KMyMoneyPlugin
     explicit KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
     ~KMMAppInterface() override = default;
 
+    /**
+      * Makes sure that a MyMoneyFile is open and has been created successfully.
+      *
+      * @return Whether the file is open and initialised
+      */
+    bool fileOpen() override;
+
+    bool isDatabase() override;
     QUrl filenameURL() const override;
     QUrl lastOpenedURL() override;
     void writeLastUsedFile(const QString& fileName) override;

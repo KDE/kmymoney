@@ -105,8 +105,6 @@ void SimpleLedgerView::init()
   connect(d->ui->ledgerTab, &QTabWidget::currentChanged, this, &SimpleLedgerView::tabSelected);
   connect(Models::instance(), &Models::modelsLoaded, this, &SimpleLedgerView::updateModels);
   connect(d->ui->ledgerTab, &QTabWidget::tabCloseRequested, this, &SimpleLedgerView::closeLedger);
-  connect(m_kmymoneyview, &KMyMoneyView::fileClosed, this, &SimpleLedgerView::closeLedgers);
-  connect(m_kmymoneyview, &KMyMoneyView::fileOpened, this, &SimpleLedgerView::openFavoriteLedgers);
 
   d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
@@ -209,7 +207,9 @@ void SimpleLedgerView::showTransactionForm(bool show)
 
 void SimpleLedgerView::closeLedgers()
 {
-  int tabCount = d->ui->ledgerTab->count();
+  if (d->m_needLoad)
+    return;
+  auto tabCount = d->ui->ledgerTab->count();
   // check that we have a least one tab that can be closed
   if(tabCount > 1) {
     // we keep the tab with the selector open at all times
@@ -224,6 +224,9 @@ void SimpleLedgerView::closeLedgers()
 
 void SimpleLedgerView::openFavoriteLedgers()
 {
+  if (d->m_needLoad)
+    return;
+
   AccountsModel* model = Models::instance()->accountsModel();
   QModelIndex start = model->index(0, 0);
   QModelIndexList indexes = model->match(start, (int)eAccountsModel::Role::Favorite, QVariant(true), -1, Qt::MatchRecursive);

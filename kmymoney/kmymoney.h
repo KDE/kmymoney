@@ -59,6 +59,7 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class WebConnect;
 class creditTransfer;
+class IMyMoneyOperationsFormat;
 
 template <class T> class onlineJobTyped;
 
@@ -261,6 +262,21 @@ protected Q_SLOTS:
   void slotStatusProgressDone();
 
 public:
+  enum fileActions {
+    preOpen, postOpen, preSave, postSave, preClose, postClose
+  };
+
+  // Keep a note of the file type
+  typedef enum _fileTypeE {
+    KmmBinary = 0,  // native, binary
+    KmmXML,        // native, XML
+    KmmDb,         //  SQL database
+    /* insert new native file types above this line */
+    MaxNativeFileType,
+    /* and non-native types below */
+    GncXML         // Gnucash XML
+  } fileTypeE;
+
   /**
     * This method checks if there is at least one asset or liability account
     * in the current storage object. If not, it starts the new account wizard.
@@ -352,6 +368,24 @@ public:
    */
   WebConnect* webConnect() const;
 
+  /**
+   * Call this to find out if the currently open file is a sql database
+   *
+   * @retval true file is database
+   * @retval false file is serial
+   */
+  bool isDatabase();
+
+  /**
+    * Call this to find out if the currently open file is native KMM
+    *
+    * @retval true file is native
+    * @retval false file is foreign
+    */
+  bool isNativeFile();
+
+  bool fileOpen() const;
+
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
    * file
@@ -425,9 +459,6 @@ public Q_SLOTS:
 
   void slotFileOpenRecent(const QUrl &url);
 
-  /** open a SQL database */
-  void slotOpenDatabase();
-
   /**
     * saves the current document. If it has no name yet, the user
     * will be queried for it.
@@ -444,15 +475,6 @@ public Q_SLOTS:
     * @retval true save operation was successful
     */
   bool slotFileSaveAs();
-
-  /**
-   * ask the user to select a database and save the current document
-   *
-   * @retval false save operation failed
-   * @retval true save operation was successful
-   */
-  bool saveAsDatabase();
-  void slotSaveAsDatabase();
 
   /** asks for saving if the file is modified, then closes the actual file and window */
   void slotFileCloseWindow();
@@ -673,6 +695,8 @@ Q_SIGNALS:
 
   void startMatchTransaction(const MyMoneyTransaction& t);
   void cancelMatchTransaction();
+
+  void kmmFilePlugin(unsigned int);
 
 public:
 

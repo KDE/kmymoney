@@ -45,6 +45,7 @@ public:
   bool open(MyMoneyStorageMgr *storage, const QUrl &url) override;
   bool save(const QUrl &url) override;
   QString formatName() const override;
+  QString fileExtension() const override;
 
 protected:
   void createActions();

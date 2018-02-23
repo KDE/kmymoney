@@ -24,11 +24,8 @@ target_link_libraries(gncimporter
   kmm_plugin
   Alkimia::alkimia
 )
-                      
-########### install files ###############
 
-install(FILES gncimporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/gncimporter")
+########### install files ###############
 
 install(TARGETS gncimporter
         DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

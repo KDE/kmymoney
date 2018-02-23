@@ -33,6 +33,17 @@ KMyMoneyPlugin::KMMAppInterface::KMMAppInterface(KMyMoneyApp* app, QObject* pare
     AppInterface(parent, name),
     m_app(app)
 {
+  connect(m_app, &KMyMoneyApp::kmmFilePlugin, this, &AppInterface::kmmFilePlugin);
+}
+
+bool KMyMoneyPlugin::KMMAppInterface::fileOpen()
+{
+  return m_app->fileOpen();
+}
+
+bool KMyMoneyPlugin::KMMAppInterface::isDatabase()
+{
+  return m_app->isDatabase();
 }
 
 QUrl KMyMoneyPlugin::KMMAppInterface::filenameURL() const

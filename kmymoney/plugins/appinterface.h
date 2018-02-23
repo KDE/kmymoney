@@ -32,6 +32,8 @@
 
 class QTimer;
 
+class IMyMoneyOperationsFormat;
+
 namespace KMyMoneyPlugin
 {
   class KMM_PLUGIN_EXPORT AppInterface : public QObject
@@ -42,6 +44,14 @@ namespace KMyMoneyPlugin
     explicit AppInterface(QObject* parent, const char* name = 0);
     virtual ~AppInterface();
 
+    /**
+      * Makes sure that a MyMoneyFile is open and has been created successfully.
+      *
+      * @return Whether the file is open and initialised
+      */
+    virtual bool fileOpen() = 0;
+
+    virtual bool isDatabase() = 0;
     virtual QUrl filenameURL() const = 0;
     virtual QUrl lastOpenedURL() = 0;
     virtual void writeLastUsedFile(const QString& fileName) = 0;
@@ -49,6 +59,9 @@ namespace KMyMoneyPlugin
     virtual void addToRecentFiles(const QUrl& url) = 0;
     virtual void updateCaption(bool skipActions = false) = 0;
     virtual QTimer* autosaveTimer() = 0;
+
+   Q_SIGNALS:
+    void kmmFilePlugin(unsigned int);
   };
 
 }

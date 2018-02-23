@@ -126,6 +126,11 @@ QString SQLStorage::formatName() const
   return QStringLiteral("SQL");
 }
 
+QString SQLStorage::fileExtension() const
+{
+  return QString();
+}
+
 void SQLStorage::createActions()
 {
   m_openDBaction = actionCollection()->addAction("open_database");
@@ -201,7 +206,7 @@ void SQLStorage::slotSaveAsDatabase()
   bool rc = false;
   QUrl oldUrl;
   // in event of it being a database, ensure that all data is read into storage for saveas
-  if (viewInterface()->isDatabase())
+  if (appInterface()->isDatabase())
     oldUrl = appInterface()->filenameURL().isEmpty() ? appInterface()->lastOpenedURL() : appInterface()->filenameURL();
 
   QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
@@ -285,7 +290,7 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
 bool SQLStorage::saveDatabase(const QUrl &url)
 {
   auto rc = false;
-  if (!viewInterface()->fileOpen()) {
+  if (!appInterface()->fileOpen()) {
     KMessageBox::error(nullptr, i18n("Tried to access a file when it has not been opened"));
     return (rc);
   }

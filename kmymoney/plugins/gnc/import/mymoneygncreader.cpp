@@ -1318,6 +1318,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
   //m_defaultPayee = createPayee (i18n("Unknown payee"));
 
   MyMoneyFile::instance()->attachStorage(m_storage);
+  loadAllCurrencies();
   MyMoneyFileTransaction ft;
   m_xr = new XmlReader(this);
   bool blocked = MyMoneyFile::instance()->signalsBlocked();
@@ -2637,6 +2638,26 @@ void MyMoneyGncReader::getPriceSource(MyMoneySecurity stock, QString gncSource)
   if (dlg->alwaysUse()) m_mapSources[gncSource] = s;
   delete dlg;
   return;
+}
+
+void MyMoneyGncReader::loadAllCurrencies()
+{
+  auto file = MyMoneyFile::instance();
+  MyMoneyFileTransaction ft;
+  if (!file->currencyList().isEmpty())
+    return;
+  auto ancientCurrencies = file->ancientCurrencies();
+  try {
+  foreach (auto currency, file->availableCurrencyList()) {
+    file->addCurrency(currency);
+    MyMoneyPrice price = ancientCurrencies.value(currency, MyMoneyPrice());
+    if (price != MyMoneyPrice())
+      file->addPrice(price);
+  }
+  ft.commit();
+  } catch (const MyMoneyException &e) {
+    qDebug("Error %s loading currency", qPrintable(e.what()));
+  }
 }
 
 // functions to control the progress bar

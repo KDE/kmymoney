@@ -48,7 +48,6 @@ class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
-class IMyMoneyOperationsFormat;
 class KMyMoneyViewBase;
 
 namespace KMyMoneyPlugin
@@ -67,26 +66,6 @@ public:
   explicit ViewInterface(QObject* parent, const char* name = 0);
   virtual ~ViewInterface();
 
-  /**
-    * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
-    * data structures in memory.  The return result is examined to make sure no
-    * errors occurred whilst parsing.
-    *
-    * @param url The URL to read from.
-    *            If no protocol is specified, file:// is assumed.
-    *
-    * @return Whether the read was successful.
-    */
-  virtual bool readFile(const QUrl &url, IMyMoneyOperationsFormat *pExtReader = nullptr) = 0;
-
-  /**
-    * Makes sure that a MyMoneyFile is open and has been created successfully.
-    *
-    * @return Whether the file is open and initialised
-    */
-  virtual bool fileOpen() = 0;
-
-  virtual bool isDatabase() = 0;
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
     * class KMyMoneySettings (a singleton).
@@ -155,7 +134,6 @@ Q_SIGNALS:
   void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
   void viewStateChanged(bool);
-  void kmmFilePlugin(unsigned int);
 };
 
 } // namespace

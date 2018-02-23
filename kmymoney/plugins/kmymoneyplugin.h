@@ -41,6 +41,7 @@ class KToggleAction;
 class MyMoneyStorageMgr;
 class MyMoneyAccount;
 class KMyMoneySettings;
+class IMyMoneyOperationsFormat;
 
 namespace KMyMoneyPlugin { class AppInterface; }
 namespace KMyMoneyPlugin { class ImportInterface; }
@@ -304,10 +305,18 @@ public:
   virtual bool save(const QUrl &url) = 0;
 
   /**
+   * @brief Returns storage reader
+   * @return storage reader
+   */
+  virtual IMyMoneyOperationsFormat* reader(){ return nullptr; }
+
+  /**
    * @brief Storage identifier
    * @return Storage identifier
    */
   virtual QString formatName() const = 0;
+
+  virtual QString fileExtension() const = 0;
 };
 
 
