@@ -23,6 +23,8 @@
 #ifndef MYMONEYSTORAGEDUMP_H
 #define MYMONEYSTORAGEDUMP_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,7 @@ class QTextStream;
 
 namespace eMyMoney { namespace Split { enum class State; } }
 
-class MyMoneyStorageDump
+class KMM_MYMONEY_EXPORT MyMoneyStorageDump
 {
 public:
   MyMoneyStorageDump();
