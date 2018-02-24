@@ -740,7 +740,7 @@ public:
   void removeSecurity(const MyMoneySecurity& security);
 
   /**
-    * This method is used to retrieve a single MyMoneySchedule object.
+    * This method is used to retrieve a single MyMoneySecurity object.
     * The id of the object must be supplied in the parameter @p id.
     *
     * An exception will be thrown upon erroneous situations.
@@ -789,7 +789,7 @@ public:
   void removeCurrency(const MyMoneySecurity& currency);
 
   /**
-    * This method is used to retrieve a single MyMoneySchedule object.
+    * This method is used to retrieve a single MyMoneySecurity object.
     * The id of the object must be supplied in the parameter @p id.
     *
     * An exception will be thrown upon erroneous situations.

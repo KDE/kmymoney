@@ -1175,9 +1175,10 @@ public:
   void removeCurrency(const MyMoneySecurity& currency);
 
   /**
-    * This method is used to retrieve a single MyMoneySchedule object.
+    * This method is used to retrieve a single MyMoneySecurity object.
     * The id of the object must be supplied in the parameter @p id.
-    * If @p id is empty, this method returns baseCurrency().
+    * If @p id is empty, this method returns baseCurrency(). In case
+    * no currency is found, @p id is searched in the loaded set of securities.
     *
     * An exception will be thrown upon erroneous situations.
     *
