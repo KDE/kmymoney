@@ -2618,11 +2618,20 @@ MyMoneySecurity MyMoneyFile::currency(const QString& id) const
   if (id.isEmpty())
     return baseCurrency();
 
-  const auto curr = d->m_storage->currency(id);
-  if (curr.id().isEmpty())
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Currency '%1' not found.").arg(id));
+  try {
+    const auto currency = d->m_storage->currency(id);
+    if (currency.id().isEmpty())
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Currency '%1' not found.").arg(id));
 
-  return curr;
+    return currency;
+
+  } catch(const MyMoneyException&) {
+    const auto security = d->m_storage->security(id);
+    if (security.id().isEmpty()) {
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Security '%1' not found.").arg(id));
+    }
+    return security;
+  }
 }
 
 QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
