@@ -2778,3 +2778,51 @@ void MyMoneyFileTest::testEmptyFilter()
     QFAIL("Unexpected exception!");
   }
 }
+
+void MyMoneyFileTest::testAddSecurity()
+{
+  // create a checking account, an expeense, an investment account and a stock
+  AddOneAccount();
+
+  MyMoneyAccount exp1;
+  exp1.setAccountType(eMyMoney::Account::Type::Expense);
+  exp1.setName("Expense1");
+  exp1.setCurrencyId("EUR");
+
+  MyMoneyFileTransaction ft;
+  try {
+    MyMoneyAccount parent = m->expense();
+    m->addAccount(exp1, parent);
+    ft.commit();
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+
+  testAddEquityAccount();
+
+  testBaseCurrency();
+  MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
+  stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
+  // add the security
+  ft.restart();
+  try {
+    m->addSecurity(stockSecurity);
+    ft.commit();
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  // check that we can get it via the security method
+  try {
+    MyMoneySecurity sec = m->security(stockSecurity.id());
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  // and also via the currency method
+  try {
+    MyMoneySecurity sec = m->currency(stockSecurity.id());
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+}

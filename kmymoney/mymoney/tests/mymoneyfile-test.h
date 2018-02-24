@@ -105,6 +105,7 @@ private Q_SLOTS:
   void testAdjustedValues();
   void testVatAssignment();
   void testEmptyFilter();
+  void testAddSecurity();
 
 private Q_SLOTS:
   void objectAdded(eMyMoney::File::Object type, const QString &id);
