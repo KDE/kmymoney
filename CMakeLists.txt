@@ -292,6 +292,11 @@ endif()
 set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
 
+# and a variable we can use in the build environment to detect debug builds
+if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
+  set(KMM_DEBUG "1")
+endif()
+
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
 
