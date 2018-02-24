@@ -1493,7 +1493,8 @@ void KMyMoneyView::selectBaseCurrency()
       try {
         if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
           cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
-      } catch (const MyMoneyException &) {
+      } catch (const MyMoneyException& e) {
+        qDebug() << QLatin1String("Account") << (*it).id() << (*it).name() << e.what();
       }
 
       if (cid.isEmpty()) {
