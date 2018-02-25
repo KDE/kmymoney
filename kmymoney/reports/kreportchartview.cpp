@@ -512,6 +512,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
   }
 
+  // set the text attributes after calling replaceLegend() otherwise fon sizes will get overwritten
+  qreal generalFontSize = QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSizeF();
+  if (generalFontSize == -1)
+    generalFontSize = 8; // this is a fallback if the fontsize was specified in pixels
+
   // the legend is needed only if at least two data sets are rendered
   if (qMin(static_cast<int>(KMyMoneyGlobalSettings::maximumLegendItems()), rowNum) > 1) {
     //the legend will be used later
@@ -543,10 +548,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       legend->setLegendStyle(KChart::Legend::LinesOnly);
     replaceLegend(legend);
 
-    // set the text attributes after calling replaceLegend() otherwise fon sizes will get overwritten
-    qreal generalFontSize = QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSizeF();
-    if (generalFontSize == -1)
-      generalFontSize = 8; // this is a fallback if the fontsize was specified in pixels
     TextAttributes legendTextAttr(legend->textAttributes());
     legendTextAttr.setPen(m_foregroundBrush.color());
     legendTextAttr.setFontSize(KChart::Measure(generalFontSize, KChartEnums::MeasureCalculationModeAbsolute));
@@ -567,6 +568,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueAttr.setMarkerAttributes(markerAttr);
   TextAttributes dataValueTextAttr(dataValueAttr.textAttributes());
   dataValueTextAttr.setPen(m_foregroundBrush.color());
+  dataValueTextAttr.setFontSize(KChart::Measure(generalFontSize, KChartEnums::MeasureCalculationModeAbsolute));
   dataValueAttr.setTextAttributes(dataValueTextAttr);
   m_precision = config.yLabelsPrecision();
   dataValueAttr.setDecimalDigits(config.yLabelsPrecision());
