@@ -146,7 +146,7 @@ qt_wrap_cpp(kdchart kdchart_LIB_SRCS KDChart/KDChartEnums.h)
 
 kde4_add_library(kmm_kdchart SHARED ${kdchart_LIB_SRCS})
 
-target_link_libraries(kmm_kdchart LINK_PUBLIC ${QT_QTSVG_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${ZLIB_LIBRARY} )
+target_link_libraries(kmm_kdchart LINK_PUBLIC ${QT_QTSVG_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${ZLIB_LIBRARY} ${KDE4_KDECORE_LIBRARY})
 set_target_properties(kmm_kdchart PROPERTIES VERSION ${GENERIC_LIB_VERSION}
 SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kmm_kdchart  ${INSTALL_TARGETS_DEFAULT_ARGS})

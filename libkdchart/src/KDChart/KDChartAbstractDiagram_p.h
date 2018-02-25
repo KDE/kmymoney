@@ -124,7 +124,6 @@ namespace KDChart {
         const QFontMetrics* cachedFontMetrics( const QFont& font, const QPaintDevice* paintDevice) const;
         const QFontMetrics cachedFontMetrics() const;
 
-        QString formatNumber( qreal value, int decimalDigits ) const;
         QString formatDataValueText( const DataValueAttributes &dva,
                                      const QModelIndex& index, qreal value ) const;
 

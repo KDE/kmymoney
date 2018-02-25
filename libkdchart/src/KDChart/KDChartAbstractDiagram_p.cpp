@@ -42,6 +42,8 @@
 #include <QApplication>
 
 #include <KDABLibFakes>
+#include <KGlobal>
+#include <KLocale>
 
 
 using namespace KDChart;
@@ -355,28 +357,6 @@ const QFontMetrics AbstractDiagram::Private::cachedFontMetrics() const
     return mCachedFontMetrics;
 }
 
-QString AbstractDiagram::Private::formatNumber( qreal value, int decimalDigits ) const
-{
-    const int digits = qMax(decimalDigits, 0);
-    const qreal roundingEpsilon = pow( 0.1, digits ) * ( value >= 0.0 ? 0.5 : -0.5 );
-    QString asString = QString::number( value + roundingEpsilon, 'f' );
-    const int decimalPos = asString.indexOf( QLatin1Char( '.' ) );
-    if ( decimalPos < 0 ) {
-        return asString;
-    }
-
-    int last = qMin( decimalPos + digits, asString.length() - 1 );
-    // remove trailing zeros (and maybe decimal dot)
-    while ( last > decimalPos && asString[ last ] == QLatin1Char( '0' ) ) {
-        last--;
-    }
-    if ( last == decimalPos ) {
-         last--;
-    }
-    asString.chop( asString.length() - last - 1 );
-    return asString;
-}
-
 void AbstractDiagram::Private::forgetAlreadyPaintedDataValues()
 {
     alreadyDrawnDataValueTexts.clear();
@@ -454,7 +434,7 @@ QString AbstractDiagram::Private::formatDataValueText( const DataValueAttributes
 
     QString ret;
     if ( dva.dataLabel().isNull() ) {
-        ret = formatNumber( value, dva.decimalDigits() );
+        ret = KGlobal::locale()->formatNumber( value, dva.decimalDigits() );
     } else {
         ret = dva.dataLabel();
     }
