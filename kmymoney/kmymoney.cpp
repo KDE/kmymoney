@@ -1632,7 +1632,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   new KmymoneyAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/KMymoney", this);
   QDBusConnection::sessionBus().interface()->registerService(
-    "org.kde.kmymoney", QDBusConnectionInterface::DontQueueService);
+    "org.kde.kmymoney-" + QString::number(platformTools::processId()), QDBusConnectionInterface::DontQueueService);
 #endif
   // Register the main engine types used as meta-objects
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
