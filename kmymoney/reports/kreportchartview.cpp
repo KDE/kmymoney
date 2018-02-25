@@ -491,6 +491,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueAttr.setMarkerAttributes(markerAttr);
   TextAttributes dataValueTextAttr(dataValueAttr.textAttributes());
   dataValueTextAttr.setPen(m_foregroundBrush.color());
+  dataValueTextAttr.setFontSize(KDChart::Measure(generalFontSize, KDChartEnums::MeasureCalculationModeAbsolute));
   dataValueAttr.setTextAttributes(dataValueTextAttr);
   dataValueAttr.setVisible(config.isChartDataLabels());
   dataValueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
