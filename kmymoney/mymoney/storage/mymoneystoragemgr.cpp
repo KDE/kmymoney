@@ -159,10 +159,9 @@ MyMoneyAccount MyMoneyStorageMgr::accountByName(const QString& name) const
 void MyMoneyStorageMgr::accountList(QList<MyMoneyAccount>& list) const
 {
   Q_D(const MyMoneyStorageMgr);
-  QMap<QString, MyMoneyAccount>::ConstIterator it;
-  for (it = d->m_accountList.begin(); it != d->m_accountList.end(); ++it) {
-    if (!isStandardAccount((*it).id())) {
-      list.append(*it);
+  foreach(const QString& accountId, d->m_accountList.keys()) {
+    if (!isStandardAccount(accountId)) {
+      list.append(account(accountId));
     }
   }
 }
