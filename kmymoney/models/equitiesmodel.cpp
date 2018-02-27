@@ -153,6 +153,7 @@ public:
         auto prec = MyMoneyMoney::denomToPrec(security.smallestAccountFraction());
         auto strQuantity = QVariant(balance.formatMoney(QString(), prec));
         cell->setData(strQuantity, Qt::DisplayRole);
+        cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
       }
     }
 

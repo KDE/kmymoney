@@ -473,6 +473,7 @@ bool MyMoneyQifReader::startImport()
 #endif
     } else {
       arguments << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);
+      program = arguments.takeFirst();
     }
     m_entryType = EntryUnknown;
 

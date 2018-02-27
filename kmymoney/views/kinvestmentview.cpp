@@ -182,8 +182,11 @@ void KInvestmentView::slotSelectAccount(const QString &id)
   Q_D(KInvestmentView);
   if (!id.isEmpty()) {
     d->m_idInvAcc = id;
-    if (isVisible())
+    if (isVisible()) {
       d->ui->m_accountComboBox->setSelected(id);
+      slotSecuritySelected(QModelIndex(), QModelIndex());
+      slotEquitySelected(QModelIndex(), QModelIndex());
+    }
   }
 }
 
