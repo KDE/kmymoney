@@ -51,7 +51,6 @@ public:
   ~KTagsView() override;
 
   void setDefaultFocus() override;
-  void refresh() override;
   void updateTagActions(const QList<MyMoneyTag>& tags);
 
 public Q_SLOTS:
@@ -59,6 +58,7 @@ public Q_SLOTS:
   void slotSelectTagAndTransaction(const QString& tagId);
   void slotStartRename(QListWidgetItem*);
   void slotHelp();
+  void refresh() override;
 
 protected:
   void showEvent(QShowEvent* event) override;
