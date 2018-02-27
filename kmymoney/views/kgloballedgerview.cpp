@@ -1918,6 +1918,7 @@ void KGlobalLedgerView::slotFinishReconciliation()
   d->m_reconciliationAccount = MyMoneyAccount();
   updateActions(d->m_currentAccount);
   updateLedgerActionsInternal();
+  d->loadView();
 //  slotUpdateActions();
 }
 
@@ -1955,6 +1956,7 @@ void KGlobalLedgerView::slotPostponeReconciliation()
     // Turn off reconciliation mode
     Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+    d->loadView();
   }
 }
 
