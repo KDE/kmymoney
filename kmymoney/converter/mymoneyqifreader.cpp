@@ -2108,7 +2108,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
   if (!msg.isEmpty())
     accountSelect->setWindowTitle(msg);
 
-  it = m_accountTranslation.constFind(QString(leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower());
+  it = m_accountTranslation.constFind(QString(leadIn + MyMoneyFile::AccountSeparator + account.name()).toLower());
   if (it != m_accountTranslation.constEnd()) {
     try {
       account = file->account(*it);
@@ -2181,7 +2181,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
           if (!accountSelect->selectedAccount().isEmpty()) {
             accountId = accountSelect->selectedAccount();
 
-            m_accountTranslation[QString(leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower()] = accountId;
+            m_accountTranslation[QString(leadIn + MyMoneyFile::AccountSeparator + account.name()).toLower()] = accountId;
 
             // MMAccount::openingBalance() is where the accountSelect dialog has
             // stashed the opening balance that the user chose.

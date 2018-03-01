@@ -1063,7 +1063,7 @@ public:
     * MyMoneyFile::AccountSeperator is used as the separator
     * between account names to form a hierarchy.
     */
-  static const QString AccountSeperator;
+  static const QString AccountSeparator;
 
   /**
     * createCategory creates a category from a text name.

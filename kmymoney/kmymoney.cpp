@@ -2964,7 +2964,7 @@ const MyMoneyAccount& KMyMoneyApp::findAccount(const MyMoneyAccount& acc, const 
       // check for ':' in the name and use it as separator for a hierarchy
       QString name = acc.name();
       bool notFound = false;
-      while ((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+      while ((pos = name.indexOf(MyMoneyFile::AccountSeparator)) != -1) {
         QString part = name.left(pos);
         QString remainder = name.mid(pos + 1);
         const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
@@ -3005,7 +3005,7 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
   try {
     int pos;
     // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeparator)) != -1) {
       QString part = newAccount.name().left(pos);
       QString remainder = newAccount.name().mid(pos + 1);
       const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
