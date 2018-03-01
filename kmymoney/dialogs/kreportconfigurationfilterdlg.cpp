@@ -10,7 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.j@hotpop.com>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,41 +23,32 @@
  ***************************************************************************/
 
 #include "kreportconfigurationfilterdlg.h"
-#include "kfindtransactiondlg_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVariant>
-#include <QCheckBox>
-#include <QLabel>
 #include <QPushButton>
-#include <QRadioButton>
-#include <QSpinBox>
-#include <QTabWidget>
-#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLineEdit>
-#include <KComboBox>
 #include <KHelpClient>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
+#include "ktransactionfilter.h"
+#include "kmymoneyaccountselector.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
 #include "mymoneybudget.h"
 #include "mymoneyreport.h"
 #include "daterangedlg.h"
 #include "reporttabimpl.h"
+#include "mymoneyenums.h"
 
-#include "ui_kfindtransactiondlg.h"
+#include <ui_kreportconfigurationfilterdlg.h>
 #include <ui_reporttabgeneral.h>
 #include <ui_reporttabrowcolpivot.h>
 #include <ui_reporttabrowcolquery.h>
@@ -66,19 +57,29 @@
 #include <ui_reporttabcapitalgain.h>
 #include <ui_reporttabperformance.h>
 
-class KReportConfigurationFilterDlgPrivate : public KFindTransactionDlgPrivate
+class KReportConfigurationFilterDlgPrivate
 {
   Q_DISABLE_COPY(KReportConfigurationFilterDlgPrivate)
 
 public:
   KReportConfigurationFilterDlgPrivate(KReportConfigurationFilterDlg *qq) :
-    KFindTransactionDlgPrivate(qq),
+    q_ptr(qq),
+    ui(new Ui::KReportConfigurationFilterDlg),
     m_tabRowColPivot(nullptr),
     m_tabRowColQuery(nullptr),
     m_tabChart(nullptr),
-    m_tabRange(nullptr)
+    m_tabRange(nullptr),
+    m_dateRange(nullptr)
   {
   }
+
+  ~KReportConfigurationFilterDlgPrivate()
+  {
+    delete ui;
+  }
+
+  KReportConfigurationFilterDlg      *q_ptr;
+  Ui::KReportConfigurationFilterDlg  *ui;
 
   QPointer<ReportTabGeneral>     m_tabGeneral;
   QPointer<ReportTabRowColPivot> m_tabRowColPivot;
@@ -87,17 +88,21 @@ public:
   QPointer<ReportTabRange>       m_tabRange;
   QPointer<ReportTabCapitalGain> m_tabCapitalGain;
   QPointer<ReportTabPerformance> m_tabPerformance;
+  QPointer<KTransactionFilter>           m_tabFilters;
 
   MyMoneyReport m_initialState;
   MyMoneyReport m_currentState;
   QVector<MyMoneyBudget> m_budgets;
+  DateRangeDlg                    *m_dateRange;
 };
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent) :
-  KFindTransactionDlg(*new KReportConfigurationFilterDlgPrivate(this), parent, (report.rowType() == MyMoneyReport::eAccount))
+  QDialog(parent),
+  d_ptr(new KReportConfigurationFilterDlgPrivate(this))
 {
   Q_D(KReportConfigurationFilterDlg);
 
+  d->ui->setupUi(this);
   d->m_initialState = report;
   d->m_currentState = report;
 
@@ -106,19 +111,32 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
   //
 
   setWindowTitle(i18n("Report Configuration"));
-  delete d->ui->TextLabel1;
   //
   // Rework the buttons
   //
 
   // the Apply button is always enabled
-  disconnect(SIGNAL(selectionNotEmpty(bool)));
   d->ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
   d->ui->buttonBox->button(QDialogButtonBox::Apply)->setToolTip(i18nc("@info:tooltip for report configuration apply button", "Apply the configuration changes to the report"));
+
+
+  connect(d->ui->buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &KReportConfigurationFilterDlg::slotSearch);
+  connect(d->ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, this, &QDialog::close);
+  connect(d->ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &KReportConfigurationFilterDlg::slotReset);
+  connect(d->ui->buttonBox->button(QDialogButtonBox::Help), &QAbstractButton::clicked, this, &KReportConfigurationFilterDlg::slotShowHelp);
 
   //
   // Add new tabs
   //
+  if (d->m_initialState.reportType() == MyMoneyReport::ePivotTable) {
+    // we will use date range together with data range
+    d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == MyMoneyReport::eAccount), false);
+  } else {
+    d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == MyMoneyReport::eAccount));
+    d->m_dateRange = d->m_tabFilters->dateRange();
+  }
+
+  d->ui->m_tabWidget->addTab(d->m_tabFilters, i18nc("Filters tab", "Filters"));
 
   d->m_tabGeneral = new ReportTabGeneral(d->ui->m_criteriaTab);
   d->ui->m_criteriaTab->insertTab(0, d->m_tabGeneral, i18nc("General tab", "General"));
@@ -131,7 +149,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
       connect(d->m_tabRowColPivot->ui->m_comboRows, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotRowTypeChanged));
       connect(d->m_tabRowColPivot->ui->m_comboRows, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
       //control the state of the includeTransfer check
-      connect(d->ui->m_categoriesView, &KMyMoneySelector::stateChanged, this, &KReportConfigurationFilterDlg::slotUpdateCheckTransfers);
+      connect(d->m_tabFilters->categoriesView(), &KMyMoneySelector::stateChanged, this, &KReportConfigurationFilterDlg::slotUpdateCheckTransfers);
     }
 
     d->m_tabChart = new ReportTabChart(d->ui->m_criteriaTab);
@@ -140,15 +158,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
     d->m_tabRange = new ReportTabRange(d->ui->m_criteriaTab);
     d->ui->m_criteriaTab->insertTab(tabNr++, d->m_tabRange, i18n("Range"));
 
-    // date tab is going to be replaced by range tab, so delete it
-    d->ui->dateRangeLayout->removeWidget(d->m_dateRange);
-    d->m_dateRange->deleteLater();
-    d->ui->m_criteriaTab->removeTab(d->ui->m_criteriaTab->indexOf(d->ui->m_dateTab));
-    d->ui->m_dateTab->deleteLater();
-
     d->m_dateRange = d->m_tabRange->m_dateRange;
-    // reconnect signal
-    connect(d->m_dateRange, &DateRangeDlg::rangeChanged, this, &KReportConfigurationFilterDlg::slotUpdateSelections);
 
     if (!(d->m_initialState.isIncludingPrice() || d->m_initialState.isIncludingAveragePrice())) {
       connect(d->m_tabRange->ui->m_comboColumns, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &KReportConfigurationFilterDlg::slotColumnTypeChanged);
@@ -201,10 +211,10 @@ void KReportConfigurationFilterDlg::slotSearch()
 {
   Q_D(KReportConfigurationFilterDlg);
   // setup the filter from the dialog widgets
-  d->setupFilter();
+  auto filter = d->m_tabFilters->setupFilter();
 
   // Copy the m_filter over to the filter part of m_currentConfig.
-  d->m_currentState.assignFilter(d->m_filter);
+  d->m_currentState.assignFilter(filter);
 
   // Then extract the report properties
   d->m_currentState.setName(d->m_tabGeneral->ui->m_editName->text());
@@ -316,6 +326,7 @@ void KReportConfigurationFilterDlg::slotSearch()
 
     //TODO (Ace) This should be implicit in the call above.  MMReport needs fixin'
     d->m_currentState.setColumnsAreDays(dy[d->m_tabRange->ui->m_comboColumns->currentIndex()]);
+    d->m_currentState.setDateFilter(d->m_dateRange->fromDate(), d->m_dateRange->toDate());
   }
 
   // setup the date lock
@@ -609,180 +620,30 @@ void KReportConfigurationFilterDlg::slotReset()
     d->m_tabPerformance->ui->m_investmentSum->setCurrentIndex(d->m_tabPerformance->ui->m_investmentSum->findData(d->m_initialState.investmentSum()));
   }
 
-  //
-  // Text Filter
-  //
+  d->m_tabFilters->resetFilter(d->m_initialState);
 
-  QRegExp textfilter;
-  if (d->m_initialState.textFilter(textfilter)) {
-    d->ui->m_textEdit->setText(textfilter.pattern());
-    d->ui->m_caseSensitive->setChecked(Qt::CaseSensitive == textfilter.caseSensitivity());
-    d->ui->m_regExp->setChecked(QRegExp::RegExp == textfilter.patternSyntax());
-    d->ui->m_textNegate->setCurrentIndex(d->m_initialState.isInvertingText());
-  }
-
-  //
-  // Type & State Filters
-  //
-
-  int type;
-  if (d->m_initialState.firstType(type))
-    d->ui->m_typeBox->setCurrentIndex(type);
-
-  int state;
-  if (d->m_initialState.firstState(state))
-    d->ui->m_stateBox->setCurrentIndex(state);
-
-  //
-  // Number Filter
-  //
-
-  QString nrFrom, nrTo;
-  if (d->m_initialState.numberFilter(nrFrom, nrTo)) {
-    if (nrFrom == nrTo) {
-      d->ui->m_nrEdit->setEnabled(true);
-      d->ui->m_nrFromEdit->setEnabled(false);
-      d->ui->m_nrToEdit->setEnabled(false);
-      d->ui->m_nrEdit->setText(nrFrom);
-      d->ui->m_nrFromEdit->setText(QString());
-      d->ui->m_nrToEdit->setText(QString());
-      d->ui->m_nrButton->setChecked(true);
-      d->ui->m_nrRangeButton->setChecked(false);
+  if (d->m_dateRange) {
+    d->m_initialState.updateDateFilter();
+    QDate dateFrom, dateTo;
+    if (d->m_initialState.dateFilter(dateFrom, dateTo)) {
+      if (d->m_initialState.isDateUserDefined()) {
+        d->m_dateRange->setDateRange(dateFrom, dateTo);
+      } else {
+        d->m_dateRange->setDateRange(d->m_initialState.dateRange());
+      }
     } else {
-      d->ui->m_nrEdit->setEnabled(false);
-      d->ui->m_nrFromEdit->setEnabled(true);
-      d->ui->m_nrToEdit->setEnabled(false);
-      d->ui->m_nrEdit->setText(QString());
-      d->ui->m_nrFromEdit->setText(nrFrom);
-      d->ui->m_nrToEdit->setText(nrTo);
-      d->ui->m_nrButton->setChecked(false);
-      d->ui->m_nrRangeButton->setChecked(true);
+      d->m_dateRange->setDateRange(eMyMoney::TransactionFilter::Date::All);
     }
-  } else {
-    d->ui->m_nrEdit->setEnabled(true);
-    d->ui->m_nrFromEdit->setEnabled(false);
-    d->ui->m_nrToEdit->setEnabled(false);
-    d->ui->m_nrEdit->setText(QString());
-    d->ui->m_nrFromEdit->setText(QString());
-    d->ui->m_nrToEdit->setText(QString());
-    d->ui->m_nrButton->setChecked(true);
-    d->ui->m_nrRangeButton->setChecked(false);
   }
-
-  //
-  // Amount Filter
-  //
-
-  MyMoneyMoney from, to;
-  if (d->m_initialState.amountFilter(from, to)) { // bool getAmountFilter(MyMoneyMoney&,MyMoneyMoney&);
-    if (from == to) {
-      d->ui->m_amountEdit->setEnabled(true);
-      d->ui->m_amountFromEdit->setEnabled(false);
-      d->ui->m_amountToEdit->setEnabled(false);
-      d->ui->m_amountEdit->loadText(QString::number(from.toDouble()));
-      d->ui->m_amountFromEdit->loadText(QString());
-      d->ui->m_amountToEdit->loadText(QString());
-      d->ui->m_amountButton->setChecked(true);
-      d->ui->m_amountRangeButton->setChecked(false);
-    } else {
-      d->ui->m_amountEdit->setEnabled(false);
-      d->ui->m_amountFromEdit->setEnabled(true);
-      d->ui->m_amountToEdit->setEnabled(true);
-      d->ui->m_amountEdit->loadText(QString());
-      d->ui->m_amountFromEdit->loadText(QString::number(from.toDouble()));
-      d->ui->m_amountToEdit->loadText(QString::number(to.toDouble()));
-      d->ui->m_amountButton->setChecked(false);
-      d->ui->m_amountRangeButton->setChecked(true);
-    }
-  } else {
-    d->ui->m_amountEdit->setEnabled(true);
-    d->ui->m_amountFromEdit->setEnabled(false);
-    d->ui->m_amountToEdit->setEnabled(false);
-    d->ui->m_amountEdit->loadText(QString());
-    d->ui->m_amountFromEdit->loadText(QString());
-    d->ui->m_amountToEdit->loadText(QString());
-    d->ui->m_amountButton->setChecked(true);
-    d->ui->m_amountRangeButton->setChecked(false);
-  }
-
-  //
-  // Payees Filter
-  //
-
-  QStringList payees;
-  if (d->m_initialState.payees(payees)) {
-    if (payees.empty()) {
-      d->ui->m_emptyPayeesButton->setChecked(true);
-    } else {
-      d->selectAllItems(d->ui->m_payeesView, false);
-      d->selectItems(d->ui->m_payeesView, payees, true);
-    }
-  } else {
-    d->selectAllItems(d->ui->m_payeesView, true);
-  }
-
-  //
-  // Tags Filter
-  //
-
-  QStringList tags;
-  if (d->m_initialState.tags(tags)) {
-    if (tags.empty()) {
-      d->ui->m_emptyTagsButton->setChecked(true);
-    } else {
-      d->selectAllItems(d->ui->m_tagsView, false);
-      d->selectItems(d->ui->m_tagsView, tags, true);
-    }
-  } else {
-    d->selectAllItems(d->ui->m_tagsView, true);
-  }
-
-  //
-  // Accounts Filter
-  //
-
-  QStringList accounts;
-  if (d->m_initialState.accounts(accounts)) {
-    d->ui->m_accountsView->selectAllItems(false);
-    d->ui->m_accountsView->selectItems(accounts, true);
-  } else
-    d->ui->m_accountsView->selectAllItems(true);
-
-  //
-  // Categories Filter
-  //
-
-  if (d->m_initialState.categories(accounts)) {
-    d->ui->m_categoriesView->selectAllItems(false);
-    d->ui->m_categoriesView->selectItems(accounts, true);
-  } else
-    d->ui->m_categoriesView->selectAllItems(true);
-
-  //
-  // Date Filter
-  //
-
-  // the following call implies a call to slotUpdateSelections,
-  // that's why we call it last
-
-  d->m_initialState.updateDateFilter();
-  QDate dateFrom, dateTo;
-  if (d->m_initialState.dateFilter(dateFrom, dateTo)) {
-    if (d->m_initialState.isDateUserDefined()) {
-      d->m_dateRange->setDateRange(dateFrom, dateTo);
-    } else {
-      d->m_dateRange->setDateRange(d->m_initialState.dateRange());
-    }
-  } else {
-    d->m_dateRange->setDateRange(eMyMoney::TransactionFilter::Date::All);
-  }
-
-  slotRightSize();
 }
 
 void KReportConfigurationFilterDlg::slotShowHelp()
 {
-  KHelpClient::invokeHelp("details.reports.config");
+  Q_D(KReportConfigurationFilterDlg);
+  if (d->ui->m_tabWidget->currentIndex() == 1)
+    d->m_tabFilters->slotShowHelp();
+  else
+    KHelpClient::invokeHelp("details.reports.config");
 }
 
 //TODO Fix the reports and engine to include transfers even if categories are filtered - bug #1523508
@@ -790,7 +651,7 @@ void KReportConfigurationFilterDlg::slotUpdateCheckTransfers()
 {
   Q_D(KReportConfigurationFilterDlg);
   auto cb = d->m_tabRowColPivot->ui->m_checkTransfers;
-  if (!d->ui->m_categoriesView->allItemsSelected()) {
+  if (!d->m_tabFilters->categoriesView()->allItemsSelected()) {
     cb->setChecked(false);
     cb->setDisabled(true);
   } else {

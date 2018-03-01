@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfindtransactiondlg.h
+                          ktransactionfilter.h
                              -------------------
     copyright            : (C) 2003 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
@@ -15,13 +15,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KFINDTRANSACTIONDLG_H
-#define KFINDTRANSACTIONDLG_H
+#ifndef KTRANSACTIONFILTER_H
+#define KTRANSACTIONFILTER_H
+
+#include "kmm_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDialog>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,68 +32,57 @@
 // Project Includes
 
 class QTreeWidgetItem;
-
-namespace Ui { class KSortOptionDlg; }
+class MyMoneyTransactionFilter;
+class KMyMoneyAccountSelector;
+class MyMoneyReport;
+class DateRangeDlg;
 
 /**
   * @author Thomas Baumgart
+  * @author Łukasz Wojniłowicz
   */
-class KSortOptionDlg : public QDialog
+
+class KTransactionFilterPrivate;
+class KMM_WIDGETS_EXPORT KTransactionFilter : public QWidget
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KSortOptionDlg)
-
-public:
-  explicit KSortOptionDlg(QWidget *parent = nullptr);
-  ~KSortOptionDlg();
-
-  void setSortOption(const QString& option, const QString& def);
-  QString sortOption() const;
-  void hideDefaultButton();
-
-private:
-  Ui::KSortOptionDlg *ui;
-};
-
-class KFindTransactionDlgPrivate;
-class KFindTransactionDlg : public QDialog
-{
-  Q_OBJECT
-  Q_DISABLE_COPY(KFindTransactionDlg)
+  Q_DISABLE_COPY(KTransactionFilter)
 
 public:
   /**
    @param withEquityAccounts set to false to hide equity accounts in account page
   */
-  explicit KFindTransactionDlg(QWidget *parent = nullptr, bool withEquityAccounts = false);
-  virtual ~KFindTransactionDlg();
+  explicit KTransactionFilter(QWidget *parent = nullptr, bool withEquityAccounts = false, bool withDataTab = true);
+  ~KTransactionFilter();
 
-  bool eventFilter(QObject *o, QEvent *e) override;
-
-protected Q_SLOTS:
-  virtual void slotReset();
-  virtual void slotSearch();
+  MyMoneyTransactionFilter setupFilter();
+  void resetFilter(MyMoneyReport& rep);
+  KMyMoneyAccountSelector* categoriesView();
+  DateRangeDlg* dateRange();
 
   /**
     * This slot opens the detailed help page in khelpcenter. The
     * anchor for the information is taken from m_helpAnchor.
     */
-  virtual void slotShowHelp();
+  void slotShowHelp();
+  void slotReset();
 
-  void slotRefreshView();
+private Q_SLOTS:
+  void slotUpdateSelections();
 
-  /**
-    * This slot selects the current selected transaction/split and emits
-    * the signal @a transactionSelected(const QString& accountId, const QString& transactionId)
-    */
-  void slotSelectTransaction();
+  void slotAmountSelected();
+  void slotAmountRangeSelected();
 
-  void slotRightSize();
+  void slotSelectAllPayees();
+  void slotDeselectAllPayees();
 
-  void slotSortOptions();
+  void slotSelectAllTags();
+  void slotDeselectAllTags();
+
+  void slotNrSelected();
+  void slotNrRangeSelected();
 
 Q_SIGNALS:
-  void transactionSelected(const QString& accountId, const QString& transactionId);
 
   /**
     * This signal is sent out when a selection has been made. It is
@@ -101,15 +92,9 @@ Q_SIGNALS:
     */
   void selectionNotEmpty(bool);
 
-protected:
-  KFindTransactionDlgPrivate * const d_ptr;
-  KFindTransactionDlg(KFindTransactionDlgPrivate &dd, QWidget *parent, bool withEquityAccounts);
-
-  void resizeEvent(QResizeEvent*) override;
-  void showEvent(QShowEvent* event) override;
-
 private:
-  Q_DECLARE_PRIVATE(KFindTransactionDlg)
+  Q_DECLARE_PRIVATE(KTransactionFilter)
+  KTransactionFilterPrivate * const d_ptr;
 };
 
 #endif

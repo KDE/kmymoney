@@ -10,7 +10,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.j@hotpop.com>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,21 +28,24 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kfindtransactiondlg.h"
+//#include "kfindtransactiondlg.h"
 
 class MyMoneyReport;
 
 /**
   * @author Ace Jones
+  * @author Łukasz Wojniłowicz
   */
 class KReportConfigurationFilterDlgPrivate;
-class KReportConfigurationFilterDlg : public KFindTransactionDlg
+class KReportConfigurationFilterDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KReportConfigurationFilterDlg)
@@ -65,6 +68,7 @@ protected Q_SLOTS:
   void slotLogAxisChanged(int state);
 
 private:
-    Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
+  Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
+  KReportConfigurationFilterDlgPrivate * const d_ptr;
 };
 #endif

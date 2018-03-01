@@ -3,7 +3,7 @@
                              -------------------
     copyright            : (C) 2003, 2007 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -53,7 +53,6 @@
 
 #include "ui_kfindtransactiondlg.h"
 #include "ui_ksortoptiondlg.h"
-
 
 KSortOptionDlg::KSortOptionDlg(QWidget *parent) :
   QDialog(parent),
@@ -117,198 +116,7 @@ KFindTransactionDlg::~KFindTransactionDlg()
 void KFindTransactionDlg::slotReset()
 {
   Q_D(KFindTransactionDlg);
-  d->ui->m_textEdit->setText(QString());
-  d->ui->m_regExp->setChecked(false);
-  d->ui->m_caseSensitive->setChecked(false);
-  d->ui->m_textNegate->setCurrentItem(0);
-
-  d->ui->m_amountEdit->setEnabled(true);
-  d->ui->m_amountFromEdit->setEnabled(false);
-  d->ui->m_amountToEdit->setEnabled(false);
-  d->ui->m_amountEdit->loadText(QString());
-  d->ui->m_amountFromEdit->loadText(QString());
-  d->ui->m_amountToEdit->loadText(QString());
-  d->ui->m_amountButton->setChecked(true);
-  d->ui->m_amountRangeButton->setChecked(false);
-
-  d->ui->m_emptyPayeesButton->setChecked(false);
-  d->selectAllItems(d->ui->m_payeesView, true);
-
-  d->ui->m_emptyTagsButton->setChecked(false);
-  d->selectAllItems(d->ui->m_tagsView, true);
-
-  d->ui->m_typeBox->setCurrentIndex((int)eMyMoney::TransactionFilter::Type::All);
-  d->ui->m_stateBox->setCurrentIndex((int)eMyMoney::TransactionFilter::State::All);
-  d->ui->m_validityBox->setCurrentIndex((int)eMyMoney::TransactionFilter::Validity::Any);
-
-  d->ui->m_nrEdit->setEnabled(true);
-  d->ui->m_nrFromEdit->setEnabled(false);
-  d->ui->m_nrToEdit->setEnabled(false);
-  d->ui->m_nrEdit->setText(QString());
-  d->ui->m_nrFromEdit->setText(QString());
-  d->ui->m_nrToEdit->setText(QString());
-  d->ui->m_nrButton->setChecked(true);
-  d->ui->m_nrRangeButton->setChecked(false);
-
-  d->ui->m_tabWidget->setTabEnabled(d->ui->m_tabWidget->indexOf(d->ui->m_resultPage), false);
-  d->ui->m_tabWidget->setCurrentIndex(d->ui->m_tabWidget->indexOf(d->ui->m_criteriaTab));
-
-  // the following call implies a call to slotUpdateSelections,
-  // that's why we call it last
-  d->m_dateRange->slotReset();
-  slotUpdateSelections();
-}
-
-void KFindTransactionDlg::slotUpdateSelections()
-{
-  Q_D(KFindTransactionDlg);
-  QString txt;
-
-  // Text tab
-  if (!d->ui->m_textEdit->text().isEmpty()) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Text");
-    d->ui->m_regExp->setEnabled(QRegExp(d->ui->m_textEdit->text()).isValid());
-  } else
-    d->ui->m_regExp->setEnabled(false);
-
-  d->ui->m_caseSensitive->setEnabled(!d->ui->m_textEdit->text().isEmpty());
-  d->ui->m_textNegate->setEnabled(!d->ui->m_textEdit->text().isEmpty());
-
-  // Account tab
-  if (!d->ui->m_accountsView->allItemsSelected()) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Account");
-  }
-
-  if (d->m_dateRange->dateRange() != eMyMoney::TransactionFilter::Date::All) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Date");
-  }
-
-  // Amount tab
-  if ((d->ui->m_amountButton->isChecked() && d->ui->m_amountEdit->isValid())
-      || (d->ui->m_amountRangeButton->isChecked()
-          && (d->ui->m_amountFromEdit->isValid() || d->ui->m_amountToEdit->isValid()))) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Amount");
-  }
-
-  // Categories tab
-  if (!d->ui->m_categoriesView->allItemsSelected()) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Category");
-  }
-
-  // Tags tab
-  if (!d->allItemsSelected(d->ui->m_tagsView)
-      || d->ui->m_emptyTagsButton->isChecked()) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Tags");
-  }
-  d->ui->m_tagsView->setEnabled(!d->ui->m_emptyTagsButton->isChecked());
-
-  // Payees tab
-  if (!d->allItemsSelected(d->ui->m_payeesView)
-      || d->ui->m_emptyPayeesButton->isChecked()) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Payees");
-  }
-  d->ui->m_payeesView->setEnabled(!d->ui->m_emptyPayeesButton->isChecked());
-
-  // Details tab
-  if (d->ui->m_typeBox->currentIndex() != 0
-      || d->ui->m_stateBox->currentIndex() != 0
-      || d->ui->m_validityBox->currentIndex() != 0
-      || (d->ui->m_nrButton->isChecked() && d->ui->m_nrEdit->text().length() != 0)
-      || (d->ui->m_nrRangeButton->isChecked()
-          && (d->ui->m_nrFromEdit->text().length() != 0 || d->ui->m_nrToEdit->text().length() != 0))) {
-    if (!txt.isEmpty())
-      txt += ", ";
-    txt += i18n("Details");
-  }
-
-  //Show a warning about transfers if Categories are filtered - bug #1523508
-  if (!d->ui->m_categoriesView->allItemsSelected()) {
-    d->ui->m_transferWarning->setText(i18n("Warning: Filtering by Category will exclude all transfers from the results."));
-  } else {
-    d->ui->m_transferWarning->setText("");
-  }
-
-  // disable the search button if no selection is made
-  emit selectionNotEmpty(!txt.isEmpty());
-
-  if (txt.isEmpty()) {
-    txt = i18nc("No selection", "(None)");
-  }
-  d->ui->m_selectedCriteria->setText(i18n("Current selections: %1", txt));
-}
-
-void KFindTransactionDlg::slotAmountSelected()
-{
-  Q_D(KFindTransactionDlg);
-  d->ui->m_amountEdit->setEnabled(true);
-  d->ui->m_amountFromEdit->setEnabled(false);
-  d->ui->m_amountToEdit->setEnabled(false);
-  slotUpdateSelections();
-}
-
-void KFindTransactionDlg::slotAmountRangeSelected()
-{
-  Q_D(KFindTransactionDlg);
-  d->ui->m_amountEdit->setEnabled(false);
-  d->ui->m_amountFromEdit->setEnabled(true);
-  d->ui->m_amountToEdit->setEnabled(true);
-  slotUpdateSelections();
-}
-
-void KFindTransactionDlg::slotSelectAllPayees()
-{
-  Q_D(KFindTransactionDlg);
-  d->selectAllItems(d->ui->m_payeesView, true);
-}
-
-void KFindTransactionDlg::slotDeselectAllPayees()
-{
-  Q_D(KFindTransactionDlg);
-  d->selectAllItems(d->ui->m_payeesView, false);
-}
-
-void KFindTransactionDlg::slotSelectAllTags()
-{
-  Q_D(KFindTransactionDlg);
-  d->selectAllItems(d->ui->m_tagsView, true);
-}
-
-void KFindTransactionDlg::slotDeselectAllTags()
-{
-  Q_D(KFindTransactionDlg);
-  d->selectAllItems(d->ui->m_tagsView, false);
-}
-
-void KFindTransactionDlg::slotNrSelected()
-{
-  Q_D(KFindTransactionDlg);
-  d->ui->m_nrEdit->setEnabled(true);
-  d->ui->m_nrFromEdit->setEnabled(false);
-  d->ui->m_nrToEdit->setEnabled(false);
-  slotUpdateSelections();
-}
-
-void KFindTransactionDlg::slotNrRangeSelected()
-{
-  Q_D(KFindTransactionDlg);
-  d->ui->m_nrEdit->setEnabled(false);
-  d->ui->m_nrFromEdit->setEnabled(true);
-  d->ui->m_nrToEdit->setEnabled(true);
-  slotUpdateSelections();
+  d->m_tabFilters->slotReset();
 }
 
 void KFindTransactionDlg::slotSearch()
@@ -319,7 +127,7 @@ void KFindTransactionDlg::slotSearch()
     return;
 
   // setup the filter from the dialog widgets
-  d->setupFilter();
+  d->m_filter = d->m_tabFilters->setupFilter();
 
   // filter is setup, now fill the register
   slotRefreshView();
@@ -396,7 +204,6 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
   d->ui->m_register->setColumnWidth(4, w);
 }
 
-
 void KFindTransactionDlg::slotSelectTransaction()
 {
   Q_D(KFindTransactionDlg);
@@ -439,11 +246,8 @@ bool KFindTransactionDlg::eventFilter(QObject* o, QEvent* e)
 void KFindTransactionDlg::slotShowHelp()
 {
   Q_D(KFindTransactionDlg);
-  auto anchor = d->m_helpAnchor[d->ui->m_criteriaTab->currentWidget()];
-  if (anchor.isEmpty())
-    anchor = QString("details.search");
-
-  KHelpClient::invokeHelp(anchor);
+  if (d->ui->m_tabWidget->currentIndex() == 0)
+    d->m_tabFilters->slotShowHelp();
 }
 
 void KFindTransactionDlg::slotSortOptions()

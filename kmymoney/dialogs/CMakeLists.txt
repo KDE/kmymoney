@@ -73,6 +73,7 @@ set(dialogs_UI
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
   konlinetransferform.ui
+  kreportconfigurationfilterdlg.ui
 )
 
 ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )

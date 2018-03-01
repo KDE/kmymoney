@@ -39,6 +39,7 @@ set(kmm_widgets_sources
   kmymoneyperiodcombo.cpp
   kmymoneyreconcilecombo.cpp
   kmymoneytagcombo.cpp
+  kmymoneyaccountselector.cpp
   ktagcontainer.cpp
   ktaglabel.cpp
   kmymoneyselector.cpp
@@ -51,11 +52,15 @@ set(kmm_widgets_sources
   amountedit.cpp
   amountvalidator.cpp
   creditdebithelper.cpp
+  daterangedlg.cpp
+  ktransactionfilter.cpp
   )
 
 ki18n_wrap_ui(kmm_widgets_sources
   kmymoneyvalidationfeedback.ui
   onlinejobmessagesview.ui
+  daterangedlg.ui
+  ktransactionfilter.ui
 )
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
@@ -90,7 +95,6 @@ install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 set(_uncritial_common_sources
   kbudgetvalues.cpp
   kmymoneyaccountcombo.cpp
-  kmymoneyaccountselector.cpp
   kmymoneyaccounttreeview.cpp
   accountsviewproxymodel.cpp
   budgetviewproxymodel.cpp
@@ -193,7 +197,6 @@ set(libwidgets_a_SOURCES
   transactioneditorcontainer.cpp
   reporttabimpl.cpp
   reportcontrolimpl.cpp
-  daterangedlg.cpp
   )
 
 set(libwidgets_a_UI
@@ -202,7 +205,6 @@ set(libwidgets_a_UI
   reporttabrowcolquery.ui reporttabrowcolpivot.ui
   reporttabrange.ui reporttabchart.ui
   reporttabcapitalgain.ui reporttabperformance.ui
-  daterangedlg.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic

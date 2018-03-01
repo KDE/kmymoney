@@ -18,6 +18,8 @@
 #ifndef DATERANGEDLG_H
 #define DATERANGEDLG_H
 
+#include "kmm_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,7 +34,7 @@
 namespace eMyMoney { namespace TransactionFilter { enum class Date; } }
 
 class DateRangeDlgPrivate;
-class DateRangeDlg : public QWidget
+class KMM_WIDGETS_EXPORT DateRangeDlg : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(DateRangeDlg)
