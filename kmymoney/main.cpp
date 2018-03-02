@@ -312,7 +312,7 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
   kmymoney->show();
   splash.reset();
 
-  const int rc = a.exec();
+  const int rc = a.exec();      //krazy:exclude=crashy
   return rc;
 }
 

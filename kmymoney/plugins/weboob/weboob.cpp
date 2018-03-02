@@ -128,14 +128,16 @@ bool Weboob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onl
   Q_D(Weboob);
   Q_UNUSED(acc);
 
-  MapAccountWizard w(nullptr, &d->weboob);
-  if (w.exec() == QDialog::Accepted) {
-    onlineBankingSettings.setValue("wb-backend", w.currentBackend());
-    onlineBankingSettings.setValue("wb-id", w.currentAccount());
+  bool rc = false;
+  QPointer<MapAccountWizard> w = new MapAccountWizard(nullptr, &d->weboob);
+  if (w->exec() == QDialog::Accepted && w != nullptr) {
+    onlineBankingSettings.setValue("wb-backend", w->currentBackend());
+    onlineBankingSettings.setValue("wb-id", w->currentAccount());
     onlineBankingSettings.setValue("wb-max", "0");
-    return true;
+    rc = true;
   }
-  return false;
+  delete w;
+  return rc;
 }
 
 bool Weboob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)

@@ -18,8 +18,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Python.h>
 #include "weboobinterface.h"
+#include <Python.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
