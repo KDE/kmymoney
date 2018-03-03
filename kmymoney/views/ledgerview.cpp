@@ -188,11 +188,11 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
 
   if (acc.hasOnlineMapping()) {
     connect(Models::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
-    accountChanged();
   } else {
     disconnect(Models::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
     d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
   }
+  accountChanged();
 
   // if balance calculation has not been triggered, then run it immediately
   if(!d->balanceCalculationPending) {
