@@ -649,7 +649,11 @@ MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& acc, const QS
 
 MyMoneyAccount MyMoneyFile::accountByName(const QString& name) const
 {
-  return d->m_storage->accountByName(name);
+  try {
+    return d->m_storage->accountByName(name);
+  } catch(const MyMoneyException&) {
+  }
+  return MyMoneyAccount();
 }
 
 void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
