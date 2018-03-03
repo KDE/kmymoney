@@ -839,6 +839,20 @@ bool Transaction::matches(const RegisterFilter& filter) const
       }
     }
     const MyMoneyAccount& acc = file->account(split.accountId());
+    // search for account hierachy
+    if (filter.text.contains(MyMoneyFile::AccountSeparator)) {
+      QStringList names;
+      MyMoneyAccount current = acc;
+      QString accountId;
+      do {
+        names.prepend(current.name());
+        accountId = current.parentAccountId();
+        current = file->account(accountId);
+      } while (current.accountType() != eMyMoney::Account::Type::Unknown && !MyMoneyFile::instance()->isStandardAccount(accountId));
+      if (names.size() > 1 && names.join(MyMoneyFile::AccountSeparator).contains(filter.text, Qt::CaseInsensitive))
+        return true;
+    }
+
     if (acc.name().contains(filter.text, Qt::CaseInsensitive))
       return true;
 
