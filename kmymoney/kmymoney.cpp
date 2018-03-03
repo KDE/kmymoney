@@ -855,7 +855,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     const QVector<eMenu::Action> alwaysEnabled {
       Action::HelpShow,
       Action::SettingsAllMessages,
-      Action::ToolPerformance
+      Action::ToolPerformance,
+      Action::ToolCalculator
     };
     for (const auto& action : alwaysEnabled) {
       lutActions[action]->setEnabled(true);
