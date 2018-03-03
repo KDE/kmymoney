@@ -34,6 +34,10 @@ private Q_SLOTS:
   * including alpha month names, and different field separators.
   */
   void testConvertDate();
+  /**
+   * This test checks that Feb 30th is mapped to the last day in February
+   */
+  void testLastDayInFebruary();
 
 private:
   ConvertDate* m_convert;

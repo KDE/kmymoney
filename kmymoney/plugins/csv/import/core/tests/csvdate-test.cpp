@@ -77,3 +77,11 @@ void CsvDateTest::testConvertDate()
   QVERIFY(m_convert->convertDate("31-1-2010") == QDate(2010, 1, 31)); // single digit month
   QVERIFY(m_convert->convertDate("13091981") == QDate(1981, 9, 13));
 }
+
+void CsvDateTest::testLastDayInFebruary()
+{
+  m_convert->setDateFormatIndex(DateFormat::YearMonthDay);  //           ISO date format
+
+  QCOMPARE(m_convert->convertDate(QLatin1String("2018-02-30")).toString(), QDate(2018,2,28).toString());
+  QCOMPARE(m_convert->convertDate(QLatin1String("2020-02-30")).toString(), QDate(2020,2,29).toString());
+}
