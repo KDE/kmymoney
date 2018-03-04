@@ -258,10 +258,7 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
       if (kmymoney->isImportableFile(file)) {
         instantQuit = true;
         kmymoney->webConnect()->loadFile(file);
-
       }
-    } else if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
-      instantQuit = true;
     }
   }
 
