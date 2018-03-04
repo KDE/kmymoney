@@ -821,12 +821,13 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   // Setting some of added actions checkable
   // *************
   {
-    // Some of acitions schould be checkable,
+    // Some actions are checkable,
     // so set them here
     const QVector<Action> checkableActions {
       Action::ViewTransactionDetail, Action::ViewHideReconciled, Action::ViewHideCategories,
     #ifdef KMM_DEBUG
           Action::DebugTraces,
+          Action::DebugTimers,
     #endif
           Action::ViewShowAll
     };
@@ -834,6 +835,21 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     for (const auto& it : checkableActions) {
       lutActions[it]->setCheckable(true);
       lutActions[it]->setEnabled(true);
+    }
+  }
+
+  // *************
+  // Setting actions that are always enabled
+  // *************
+  {
+    const QVector<eMenu::Action> alwaysEnabled {
+      Action::HelpShow,
+      Action::SettingsAllMessages,
+      Action::ToolPerformance,
+      Action::ToolCalculator
+    };
+    for (const auto& action : alwaysEnabled) {
+      lutActions[action]->setEnabled(true);
     }
   }
 

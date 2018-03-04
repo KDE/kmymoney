@@ -176,7 +176,6 @@ QDate ConvertDate::convertDate(const QString& txt)
       return QDate();//                            not a valid day
     }
     aFormat = QLatin1String("MM");//                              aMonth is numeric
-
   } else {//                                           aMonth NOT numeric
     int i;
     if (aMonth.length() > 3) {
@@ -206,6 +205,14 @@ QDate ConvertDate::convertDate(const QString& txt)
   }
 
   QString dateFormat;
+  // deal with Feb 30th
+  if ((aMonth == QLatin1Literal("02")) && (aDay == QLatin1Literal("30"))) {
+    if (QDate(aYear.toUInt(), 2, 29).isValid()) {
+      aDay = QLatin1Literal("29");
+    } else {
+      aDay = QLatin1Literal("28");
+    }
+  }
   switch (m_dateFormatIndex) {
     case DateFormat::YearMonthDay:   //                                 %y %m %d
       dateFormat = QString::fromLatin1("yyyy%1dd").arg(aFormat);

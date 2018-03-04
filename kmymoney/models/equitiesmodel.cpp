@@ -19,6 +19,7 @@
 // QT Includes
 
 #include <QMenu>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -221,7 +222,6 @@ void EquitiesModel::load()
 
 /**
   * Notify the model that an object has been added. An action is performed only if the object is an account.
-  *
   */
 void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const QString& id)
 {
@@ -254,7 +254,6 @@ void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const QStrin
 
 /**
   * Notify the model that an object has been modified. An action is performed only if the object is an account.
-  *
   */
 void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const QString& id)
 {
@@ -273,6 +272,10 @@ void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const QSt
     case eMyMoney::File::Object::Security:
       {
         auto sec = MyMoneyFile::instance()->security(id);
+        // in case we hit a currency, we simply bail out here
+        // as there is nothing to do for us
+        if(sec.isCurrency())
+          return;
         itAcc = d->itemFromId(this, sec.id(), Role::SecurityID);
         if (!itAcc)
           return;
@@ -285,6 +288,11 @@ void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const QSt
   }
 
   auto itParentAcc = d->itemFromId(this, acc.parentAccountId(), Role::InvestmentID);
+  // in case something went wrong, we bail out
+  if(itParentAcc == nullptr) {
+    qWarning() << "EquitiesModel::slotObjectModified: itParentAcc == 0";
+    return;
+  }
 
   auto modelID = itParentAcc->data(Role::InvestmentID).toString();      // get parent account from model
   if (modelID == acc.parentAccountId()) {                              // and if it matches with those from file then modify only
