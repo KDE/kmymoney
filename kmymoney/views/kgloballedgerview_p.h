@@ -391,10 +391,11 @@ public:
 
     // check if the current account still exists and make it the
     // current account
-    if (!m_currentAccount.id().isEmpty()) {
+    if (!m_lastSelectedAccountID.isEmpty()) {
       try {
-        m_currentAccount = file->account(m_currentAccount.id());
+        m_currentAccount = file->account(m_lastSelectedAccountID);
       } catch (const MyMoneyException &) {
+        m_lastSelectedAccountID.clear();
         m_currentAccount = MyMoneyAccount();
         return;
       }
