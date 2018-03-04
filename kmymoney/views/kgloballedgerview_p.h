@@ -1583,6 +1583,7 @@ public:
     * This member holds the currently selected account
     */
   MyMoneyAccount m_currentAccount;
+  QString m_lastSelectedAccountID;
 
   MyMoneyAccount m_reconciliationAccount;
 

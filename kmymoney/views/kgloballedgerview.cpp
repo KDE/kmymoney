@@ -154,7 +154,16 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
     }
 
   } else {
-    slotSelectAccount(d->m_accountComboBox->getSelected());
+    if (!d->m_lastSelectedAccountID.isEmpty()) {
+      try {
+        const auto acc = MyMoneyFile::instance()->account(d->m_lastSelectedAccountID);
+        slotSelectAccount(acc.id());
+      } catch (const MyMoneyException &) {
+        d->m_lastSelectedAccountID.clear();                                               // account is invalid
+      }
+    } else {
+      slotSelectAccount(d->m_accountComboBox->getSelected());
+    }
 
 //    emit objectSelected(d->m_currentAccount);
     KMyMoneyRegister::SelectedTransactions list(d->m_register);
@@ -629,14 +638,7 @@ void KGlobalLedgerView::slotSelectAccount(const MyMoneyObject& obj)
   if (typeid(obj) != typeid(MyMoneyAccount))
     return/* false */;
 
-  if (d->m_recursion)
-    return /* false */;
-
-  d->m_recursion = true;
-  const auto& acc = dynamic_cast<const MyMoneyAccount&>(obj);
-  /*bool rc =*/ slotSelectAccount(acc.id(), QString());
-  d->m_recursion = false;
-//  return rc;
+  d->m_lastSelectedAccountID = obj.id();
 }
 
 void KGlobalLedgerView::slotSelectAccount(const QString& id)
@@ -658,6 +660,7 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
         if (d->m_currentAccount.isInvest()) {
           d->m_currentAccount = MyMoneyFile::instance()->account(d->m_currentAccount.parentAccountId());
         }
+        d->m_lastSelectedAccountID = d->m_currentAccount.id();
         d->m_newAccountLoaded = true;
         refresh();
       } catch (const MyMoneyException &) {
