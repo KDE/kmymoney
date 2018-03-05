@@ -176,13 +176,13 @@ void KReportsView::KReportTab::updateReport()
   delete m_table;
   m_table = 0;
 
-  if (m_report.reportType() == MyMoneyReport::ePivotTable) {
+  if (m_report.reportType() == MyMoneyReport::Report::PivotTable) {
     m_table = new PivotTable(m_report);
     m_chartEnabled = true;
-  } else if (m_report.reportType() == MyMoneyReport::eQueryTable) {
+  } else if (m_report.reportType() == MyMoneyReport::Report::QueryTable) {
     m_table = new QueryTable(m_report);
     m_chartEnabled = false;
-  } else if (m_report.reportType() == MyMoneyReport::eInfoTable) {
+  } else if (m_report.reportType() == MyMoneyReport::Report::InfoTable) {
     m_table = new ObjectInfoTable(m_report);
     m_chartEnabled = false;
   }

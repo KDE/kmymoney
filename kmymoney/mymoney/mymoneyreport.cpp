@@ -34,6 +34,7 @@
 #include "mymoneyfile.h"
 #include "reportdebug.h"
 
+const MyMoneyReport::Report::Type MyMoneyReport::Report::kTypeArray[] = { NoReport, PivotTable, PivotTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, QueryTable, PivotTable, PivotTable, InfoTable, InfoTable, InfoTable, QueryTable, QueryTable, NoReport };
 const QStringList MyMoneyReport::Column::kTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
 // if you add names here, don't forget to update the bitmap for QueryColumns::Type
 // and shift the bit for QueryColumns::end one position to the left
@@ -41,7 +42,6 @@ const QStringList MyMoneyReport::QueryColumns::kText = QString("none,number,paye
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 
-const MyMoneyReport::EReportType MyMoneyReport::kTypeArray[] = { eNoReport, ePivotTable, ePivotTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, ePivotTable, ePivotTable, eInfoTable, eInfoTable, eInfoTable, eQueryTable, eQueryTable, eNoReport };
 const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(',');
 const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
 
@@ -51,6 +51,17 @@ const QStringList kStateText = QString("all,notreconciled,cleared,reconciled,fro
 const QStringList kDateLockText = QString("alldates,untiltoday,currentmonth,currentyear,monthtodate,yeartodate,yeartomonth,lastmonth,lastyear,last7days,last30days,last3months,last6months,last12months,next7days,next30days,next3months,next6months,next12months,userdefined,last3tonext3months,last11Months,currentQuarter,lastQuarter,nextQuarter,currentFiscalYear,lastFiscalYear,today,next18months").split(',');
 const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(',');
 
+QString MyMoneyReport::Report::toString(Type type)
+{
+  switch(type) {
+  case NoReport:   return "NoReport";
+  case PivotTable: return "PivotTable";
+  case QueryTable: return "QueryTable";
+  case InfoTable:  return "InfoTable";
+  default:         return "undefined";
+  }
+}
+
 MyMoneyReport::MyMoneyReport() :
     m_name("Unconfigured Pivot Table Report"),
     m_detailLevel(eDetailNone),
@@ -59,7 +70,7 @@ MyMoneyReport::MyMoneyReport() :
     m_tax(false),
     m_investments(false),
     m_loans(false),
-    m_reportType(kTypeArray[eExpenseIncome]),
+    m_reportType(Report::kTypeArray[eExpenseIncome]),
     m_rowType(eExpenseIncome),
     m_columnType(Column::Months),
     m_columnsAreDays(false),
@@ -105,7 +116,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_tax(false),
     m_investments(false),
     m_loans(false),
-    m_reportType(kTypeArray[_rt]),
+    m_reportType(Report::kTypeArray[_rt]),
     m_rowType(_rt),
     m_columnType(Column::Months),
     m_columnsAreDays(false),
@@ -134,15 +145,15 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
   m_chartLineWidth = m_lineWidth;
 
   //set report type
-  if (m_reportType == ePivotTable)
+  if (m_reportType == Report::PivotTable)
     m_columnType = static_cast<Column::Type>(_ct);
-  if (m_reportType == eQueryTable)
+  if (m_reportType == Report::QueryTable)
     m_queryColumns = static_cast<QueryColumns::Type>(_ct);
   setDateFilter(_dl);
 
   //throw exception if the type is inconsistent
-  if ((_rt > static_cast<ERowType>(sizeof(kTypeArray) / sizeof(kTypeArray[0])))
-      || (m_reportType == eNoReport))
+  if ((_rt > static_cast<ERowType>(sizeof(Report::kTypeArray) / sizeof(Report::kTypeArray[0])))
+      || (m_reportType == Report::NoReport))
     throw MYMONEYEXCEPTION("Invalid report type");
 
   //add the corresponding account groups
@@ -190,7 +201,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
   }
 #ifdef DEBUG_REPORTS
   QDebug dbg = qDebug();
-  dbg << _name << toString(_rt) << toString(m_reportType);
+  dbg << _name << toString(_rt) << Report::toString(m_reportType);
   foreach(const MyMoneyAccount::accountTypeE accountType, m_accountGroups)
     dbg << MyMoneyAccount::accountTypeToString(accountType);
   if (m_accounts.size() > 0)
@@ -263,7 +274,7 @@ void MyMoneyReport::validDateRange(QDate& _db, QDate& _de)
 void MyMoneyReport::setRowType(ERowType _rt)
 {
   m_rowType = _rt;
-  m_reportType = kTypeArray[_rt];
+  m_reportType = Report::kTypeArray[_rt];
 
   m_accountGroupFilter = false;
   m_accountGroups.clear();
@@ -397,12 +408,12 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("chartlinewidth", m_chartLineWidth);
   e.setAttribute("skipZero", m_skipZero);
 
-  if (m_reportType == ePivotTable) {
+  if (m_reportType == Report::PivotTable) {
     e.setAttribute("type", "pivottable 1.15");
     e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
     e.setAttribute("columntype", Column::kTypeText[m_columnType]);
     e.setAttribute("showrowtotals", m_showRowTotals);
-  } else if (m_reportType == eQueryTable) {
+  } else if (m_reportType == Report::QueryTable) {
     e.setAttribute("type", "querytable 1.14");
 
     QStringList columns;
@@ -416,7 +427,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
       index++;
     }
     e.setAttribute("querycolumns", columns.join(","));
-  } else if (m_reportType == eInfoTable) {
+  } else if (m_reportType == Report::InfoTable) {
     e.setAttribute("type", "infotable 1.0");
     e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
     e.setAttribute("showrowtotals", m_showRowTotals);
@@ -629,13 +640,13 @@ bool MyMoneyReport::read(const QDomElement& e)
 
     //set report type
     if (!e.attribute("type").indexOf("pivottable")) {
-      m_reportType = MyMoneyReport::ePivotTable;
+      m_reportType = MyMoneyReport::Report::PivotTable;
     } else if (!e.attribute("type").indexOf("querytable")) {
-      m_reportType = MyMoneyReport::eQueryTable;
+      m_reportType = MyMoneyReport::Report::QueryTable;
     } else if (!e.attribute("type").indexOf("infotable")) {
-      m_reportType = MyMoneyReport::eInfoTable;
+      m_reportType = MyMoneyReport::Report::InfoTable;
     } else {
-      m_reportType = MyMoneyReport::eNoReport;
+      m_reportType = MyMoneyReport::Report::NoReport;
     }
 
     // Removed the line that screened out loading reports that are called
@@ -680,7 +691,7 @@ bool MyMoneyReport::read(const QDomElement& e)
 
     //only load chart data if it is a pivot table
     m_chartType = static_cast<EChartType>(0);
-    if (m_reportType == ePivotTable) {
+    if (m_reportType == Report::PivotTable) {
       i = kChartTypeText.indexOf(e.attribute("charttype"));
 
       if (i >= 0)
@@ -853,16 +864,5 @@ QString MyMoneyReport::toString(ERowType type)
   case eAccountReconcile   : return "eAccountReconcile";
   case eCashFlow           : return "eCashFlow";
   default                  : return "undefined";
-  }
-}
-
-QString MyMoneyReport::toString(MyMoneyReport::EReportType type)
-{
-  switch(type) {
-  case eNoReport:   return "eNoReport";
-  case ePivotTable: return "ePivotTable";
-  case eQueryTable: return "eQueryTable";
-  case eInfoTable:  return "eInfoTable";
-  default:          return "undefined";
   }
 }

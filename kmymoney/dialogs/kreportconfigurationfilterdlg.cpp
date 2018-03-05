@@ -97,7 +97,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   m_tab1->setObjectName("kMyMoneyReportConfigTab1");
   m_ui->m_criteriaTab->insertTab(0, m_tab1, i18n("Report"));
 
-  if (m_initialState.reportType() == MyMoneyReport::ePivotTable) {
+  if (m_initialState.reportType() == MyMoneyReport::Report::PivotTable) {
     m_tab2 = new kMyMoneyReportConfigTab2Decl(m_ui->m_criteriaTab);
     m_tab2->setObjectName("kMyMoneyReportConfigTab2");
     m_ui->m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
@@ -111,7 +111,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_tabChart = new kMyMoneyReportConfigTabChartDecl(m_ui->m_criteriaTab);
     m_tabChart->setObjectName("kMyMoneyReportConfigTabChart");
     m_ui->m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
-  } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
+  } else if (m_initialState.reportType() == MyMoneyReport::Report::QueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
     if (m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount) {

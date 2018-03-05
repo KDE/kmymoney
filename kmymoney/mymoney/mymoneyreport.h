@@ -57,7 +57,19 @@ class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTran
 public:
   // When adding a new row type, be sure to add a corresponding entry in kTypeArray
   enum ERowType { eNoRows = 0, eAssetLiability, eExpenseIncome, eCategory, eTopCategory, eAccount, eTag, ePayee, eMonth, eWeek, eTopAccount, eAccountByTopAccount, eEquityType, eAccountType, eInstitution, eBudget, eBudgetActual, eSchedule, eAccountInfo, eAccountLoanInfo, eAccountReconcile, eCashFlow};
-  enum EReportType { eNoReport = 0, ePivotTable, eQueryTable, eInfoTable };
+  class Report {
+  public:
+    enum Type { NoReport = 0, PivotTable, QueryTable, InfoTable };
+    /**
+     * Return report type as string.
+     *
+     * @param type report type to get string for
+     * @return report type converted to string
+     */
+    static QString toString(Type type);
+    static const Type kTypeArray[];
+  };
+
   class Column {
   public:
     enum Type { NoColumns = 0, Days = 1, Months = 1, BiMonths = 2, Quarters = 3, Weeks = 7, Years = 12 };
@@ -78,7 +90,6 @@ public:
   static const QStringList kRowTypeText;
   static const QStringList kDetailLevelText;
   static const QStringList kChartTypeText;
-  static const EReportType kTypeArray[];
 
 public:
   MyMoneyReport();
@@ -99,7 +110,7 @@ public:
   bool isShowingRowTotals() const {
     return (m_showRowTotals);
   }
-  EReportType reportType() const {
+  Report::Type reportType() const {
     return m_reportType;
   }
   ERowType rowType() const {
@@ -504,14 +515,6 @@ public:
    */
   static QString toString(ERowType type);
 
-  /**
-   * Return report type as string.
-   *
-   * @param type report type to get string for
-   * @return report type converted to string
-   */
-  static QString toString(EReportType type);
-
 private:
   /**
     * The user-assigned name of the report
@@ -558,7 +561,7 @@ private:
   /**
     * What sort of algorithm should be used to run the report
     */
-  enum EReportType m_reportType;
+  Report::Type m_reportType;
   /**
     * What sort of values should show up on the ROWS of this report
     */
