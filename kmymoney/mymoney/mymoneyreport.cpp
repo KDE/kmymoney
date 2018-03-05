@@ -32,9 +32,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-
-// define this to debug reports
-// #define DEBUG_REPORTS
+#include "reportdebug.h"
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');

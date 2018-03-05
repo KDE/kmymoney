@@ -991,7 +991,7 @@ void PivotTable::convertToBaseCurrency()
               //convert to lowest fraction
               it_row.value()[ m_rowTypeList[i] ][column] = PivotCell(value.convert(fraction));
 
-              DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[m_rowTypeList[i]][column].toDouble())));
+              DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor.toDouble()).arg(DEBUG_SENSITIVE(oldval.toDouble())).arg(DEBUG_SENSITIVE(it_row.value()[m_rowTypeList[i]][column].toDouble())));
             }
           }
 
