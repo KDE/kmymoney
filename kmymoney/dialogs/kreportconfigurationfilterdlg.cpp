@@ -170,7 +170,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     if (m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex() == 0)
       m_currentState.setShowingRowTotals(m_tab2->findChild<QCheckBox*>("m_checkTotalColumn")->isChecked());
 
-    MyMoneyReport::EColumnType ct[6] = { MyMoneyReport::eDays, MyMoneyReport::eWeeks, MyMoneyReport::eMonths, MyMoneyReport::eBiMonths, MyMoneyReport::eQuarters, MyMoneyReport::eYears };
+    MyMoneyReport::Column::Type ct[6] = { MyMoneyReport::Column::Days, MyMoneyReport::Column::Weeks, MyMoneyReport::Column::Months, MyMoneyReport::Column::BiMonths, MyMoneyReport::Column::Quarters, MyMoneyReport::Column::Years };
     bool dy[6] = { true, true, false, false, false, false };
     m_currentState.setColumnType(ct[m_tab2->findChild<KComboBox*>("m_comboColumns")->currentIndex()]);
 
@@ -334,11 +334,11 @@ void KReportConfigurationFilterDlg::slotReset()
     combo = m_tab2->findChild<KComboBox*>("m_comboColumns");
     if (m_initialState.isColumnsAreDays()) {
       switch (m_initialState.columnType()) {
-        case MyMoneyReport::eNoColumns:
-        case MyMoneyReport::eDays:
+        case MyMoneyReport::Column::NoColumns:
+        case MyMoneyReport::Column::Days:
           combo->setCurrentItem(i18nc("@item the columns will display daily data", "Daily"), false);
           break;
-        case MyMoneyReport::eWeeks:
+        case MyMoneyReport::Column::Weeks:
           combo->setCurrentItem(i18nc("@item the columns will display weekly data", "Weekly"), false);
           break;
         default:
@@ -346,17 +346,17 @@ void KReportConfigurationFilterDlg::slotReset()
       }
     } else {
       switch (m_initialState.columnType()) {
-        case MyMoneyReport::eNoColumns:
-        case MyMoneyReport::eMonths:
+        case MyMoneyReport::Column::NoColumns:
+        case MyMoneyReport::Column::Months:
           combo->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
           break;
-        case MyMoneyReport::eBiMonths:
+        case MyMoneyReport::Column::BiMonths:
           combo->setCurrentItem(i18nc("@item the columns will display bi-monthly data", "Bi-Monthly"), false);
           break;
-        case MyMoneyReport::eQuarters:
+        case MyMoneyReport::Column::Quarters:
           combo->setCurrentItem(i18nc("@item the columns will display quarterly data", "Quarterly"), false);
           break;
-        case MyMoneyReport::eYears:
+        case MyMoneyReport::Column::Years:
           combo->setCurrentItem(i18nc("@item the columns will display yearly data", "Yearly"), false);
           break;
         default:
@@ -393,7 +393,7 @@ void KReportConfigurationFilterDlg::slotReset()
   } else if (m_tab3) {
     KComboBox *combo = m_tab3->findChild<KComboBox*>("m_comboOrganizeBy");
     switch (m_initialState.rowType()) {
-      case MyMoneyReport::eNoColumns:
+      case MyMoneyReport::Column::NoColumns:
       case MyMoneyReport::eCategory:
         combo->setCurrentItem(i18n("Categories"), false);
         break;

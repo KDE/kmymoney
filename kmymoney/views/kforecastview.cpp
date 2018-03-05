@@ -1009,7 +1009,7 @@ void KForecastView::loadChartView()
 
   MyMoneyReport reportCfg = MyMoneyReport(
                               MyMoneyReport::eAssetLiability,
-                              MyMoneyReport::eMonths,
+                              MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
                               detailLevel[m_comboDetail->currentIndex()],
                               i18n("Net Worth Forecast"),

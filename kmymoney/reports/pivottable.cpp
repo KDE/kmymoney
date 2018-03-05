@@ -901,10 +901,10 @@ void PivotTable::calculateBudgetMapping()
           case MyMoneyBudget::AccountGroup::eMonthly:
             // place the single monthly value in each column of the report
             // only add the value if columns are monthly or longer
-            if (m_config_f.columnType() == MyMoneyReport::eBiMonths
-                || m_config_f.columnType() == MyMoneyReport::eMonths
-                || m_config_f.columnType() == MyMoneyReport::eYears
-                || m_config_f.columnType() == MyMoneyReport::eQuarters) {
+            if (m_config_f.columnType() == MyMoneyReport::Column::BiMonths
+                || m_config_f.columnType() == MyMoneyReport::Column::Months
+                || m_config_f.columnType() == MyMoneyReport::Column::Years
+                || m_config_f.columnType() == MyMoneyReport::Column::Quarters) {
               QDate budgetDate = budget.budgetStart();
               while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
                 //only show budget values if the budget year and the column date match
@@ -932,10 +932,10 @@ void PivotTable::calculateBudgetMapping()
                   ++column;
                 } else {
                   switch (m_config_f.columnType()) {
-                    case MyMoneyReport::eYears:
-                    case MyMoneyReport::eBiMonths:
-                    case MyMoneyReport::eQuarters:
-                    case MyMoneyReport::eMonths: {
+                    case MyMoneyReport::Column::Years:
+                    case MyMoneyReport::Column::BiMonths:
+                    case MyMoneyReport::Column::Quarters:
+                    case MyMoneyReport::Column::Months: {
                         if ((*it_period).startDate() >= m_beginDate.addDays(-m_beginDate.day() + 1)
                             && (*it_period).startDate() <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
                             && (*it_period).startDate() > (columnDate(column).addMonths(-m_config_f.columnType()))) {
@@ -2079,7 +2079,7 @@ void PivotTable::calculateMovingAverage()
         int column = 1;
 
         //check whether columns are days or months
-        if (m_config_f.columnType() == MyMoneyReport::eDays) {
+        if (m_config_f.columnType() == MyMoneyReport::Column::Days) {
           while (column < m_numColumns) {
             MyMoneyMoney totalPrice = MyMoneyMoney();
 
@@ -2110,23 +2110,23 @@ void PivotTable::calculateMovingAverage()
 
             //set the right start date depending on the column type
             switch (m_config_f.columnType()) {
-              case MyMoneyReport::eYears: {
+              case MyMoneyReport::Column::Years: {
                   averageStart = QDate(columnDate(column).year(), 1, 1);
                   break;
                 }
-              case MyMoneyReport::eBiMonths: {
+              case MyMoneyReport::Column::BiMonths: {
                   averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
                   break;
                 }
-              case MyMoneyReport::eQuarters: {
+              case MyMoneyReport::Column::Quarters: {
                   averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
                   break;
                 }
-              case MyMoneyReport::eMonths: {
+              case MyMoneyReport::Column::Months: {
                   averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1);
                   break;
                 }
-              case MyMoneyReport::eWeeks: {
+              case MyMoneyReport::Column::Weeks: {
                   averageStart = columnDate(column).addDays(-columnDate(column).dayOfWeek() + 1);
                   break;
                 }

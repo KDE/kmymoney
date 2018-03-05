@@ -34,8 +34,9 @@
 #include "mymoneyfile.h"
 #include "reportdebug.h"
 
+const QStringList MyMoneyReport::Column::kTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
+
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
-const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
 
 // if you add names here, don't forget to update the bitmap for EQueryColumns
 // and shift the bit for eQCend one position to the left
@@ -61,7 +62,7 @@ MyMoneyReport::MyMoneyReport() :
     m_loans(false),
     m_reportType(kTypeArray[eExpenseIncome]),
     m_rowType(eExpenseIncome),
-    m_columnType(eMonths),
+    m_columnType(Column::Months),
     m_columnsAreDays(false),
     m_queryColumns(eQCnone),
     m_dateLock(userDefined),
@@ -107,7 +108,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_loans(false),
     m_reportType(kTypeArray[_rt]),
     m_rowType(_rt),
-    m_columnType(eMonths),
+    m_columnType(Column::Months),
     m_columnsAreDays(false),
     m_queryColumns(eQCnone),
     m_dateLock(_dl),
@@ -135,7 +136,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
 
   //set report type
   if (m_reportType == ePivotTable)
-    m_columnType = static_cast<EColumnType>(_ct);
+    m_columnType = static_cast<Column::Type>(_ct);
   if (m_reportType == eQueryTable)
     m_queryColumns = static_cast<EQueryColumns>(_ct);
   setDateFilter(_dl);
@@ -400,7 +401,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   if (m_reportType == ePivotTable) {
     e.setAttribute("type", "pivottable 1.15");
     e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
-    e.setAttribute("columntype", kColumnTypeText[m_columnType]);
+    e.setAttribute("columntype", Column::kTypeText[m_columnType]);
     e.setAttribute("showrowtotals", m_showRowTotals);
   } else if (m_reportType == eQueryTable) {
     e.setAttribute("type", "querytable 1.14");
@@ -726,9 +727,9 @@ bool MyMoneyReport::read(const QDomElement& e)
     if (e.hasAttribute("showrowtotals"))
       m_showRowTotals = e.attribute("showrowtotals").toUInt();
 
-    i = kColumnTypeText.indexOf(e.attribute("columntype", "months"));
+    i = Column::kTypeText.indexOf(e.attribute("columntype", "months"));
     if (i != -1)
-      setColumnType(static_cast<EColumnType>(i));
+      setColumnType(static_cast<Column::Type>(i));
 
     unsigned qc = 0;
     QStringList columns = e.attribute("querycolumns", "none").split(',');

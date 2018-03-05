@@ -297,7 +297,7 @@ void KHomeView::showNetWorthGraph()
 
   MyMoneyReport reportCfg = MyMoneyReport(
                               MyMoneyReport::eAssetLiability,
-                              MyMoneyReport::eMonths,
+                              MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
                               MyMoneyReport::eDetailTotal,
                               i18n("Net Worth Forecast"),
@@ -1454,7 +1454,7 @@ void KHomeView::showBudget()
     //config report just like "Monthly Budgeted vs Actual
     MyMoneyReport reportCfg = MyMoneyReport(
                                 MyMoneyReport::eBudgetActual,
-                                MyMoneyReport::eMonths,
+                                MyMoneyReport::Column::Months,
                                 MyMoneyTransactionFilter::currentMonth,
                                 MyMoneyReport::eDetailAll,
                                 i18n("Monthly Budgeted vs. Actual"),

@@ -1174,7 +1174,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentMonth,
                      MyMoneyReport::eDetailAll,
                      i18n("Income and Expenses This Month"),
@@ -1182,7 +1182,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Income and Expenses This Year"),
@@ -1190,7 +1190,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
-                     MyMoneyReport::eYears,
+                     MyMoneyReport::Column::Years,
                      MyMoneyTransactionFilter::allDates,
                      MyMoneyReport::eDetailAll,
                      i18n("Income and Expenses By Year"),
@@ -1199,7 +1199,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last12Months,
                      MyMoneyReport::eDetailTop,
                      i18n("Income and Expenses Graph"),
@@ -1211,7 +1211,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailGroup,
                      i18n("Income and Expenses Pie Chart"),
@@ -1228,7 +1228,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailTop,
                      i18n("Net Worth By Month"),
@@ -1236,7 +1236,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::today,
                      MyMoneyReport::eDetailTop,
                      i18n("Net Worth Today"),
@@ -1244,7 +1244,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eYears,
+                     MyMoneyReport::Column::Years,
                      MyMoneyTransactionFilter::allDates,
                      MyMoneyReport::eDetailTop,
                      i18n("Net Worth By Year"),
@@ -1252,7 +1252,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::next7Days,
                      MyMoneyReport::eDetailTop,
                      i18n("7-day Cash Flow Forecast"),
@@ -1263,7 +1263,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last12Months,
                      MyMoneyReport::eDetailTotal,
                      i18n("Net Worth Graph"),
@@ -1430,7 +1430,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setInvestmentsOnly(true);
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::today,
                      MyMoneyReport::eDetailAll,
                      i18n("Investment Holdings Pie"),
@@ -1443,7 +1443,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last12Months,
                      MyMoneyReport::eDetailAll,
                      i18n("Investment Worth Graph"),
@@ -1457,7 +1457,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last12Months,
                      MyMoneyReport::eDetailAll,
                      i18n("Investment Price Graph"),
@@ -1476,7 +1476,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last12Months,
                      MyMoneyReport::eDetailAll,
                      i18n("Investment Moving Average Price Graph"),
@@ -1495,7 +1495,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last30Days,
                      MyMoneyReport::eDetailAll,
                      i18n("Investment Moving Average"),
@@ -1511,7 +1511,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::last30Days,
                      MyMoneyReport::eDetailAll,
                      i18n("Investment Moving Average vs Actual"),
@@ -1573,7 +1573,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudgetActual,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Budgeted vs. Actual This Year"),
@@ -1584,7 +1584,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudgetActual,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::yearToMonth,
                      MyMoneyReport::eDetailAll,
                      i18n("Budgeted vs. Actual This Year (YTM)"),
@@ -1599,7 +1599,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudgetActual,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentMonth,
                      MyMoneyReport::eDetailAll,
                      i18n("Monthly Budgeted vs. Actual"),
@@ -1609,7 +1609,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudgetActual,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentYear,
                      MyMoneyReport::eDetailAll,
                      i18n("Yearly Budgeted vs. Actual"),
@@ -1620,7 +1620,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudget,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentMonth,
                      MyMoneyReport::eDetailAll,
                      i18n("Monthly Budget"),
@@ -1630,7 +1630,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudget,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentYear,
                      MyMoneyReport::eDetailAll,
                      i18n("Yearly Budget"),
@@ -1640,7 +1640,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setShowingRowTotals(true);
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eBudgetActual,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentYear,
                      MyMoneyReport::eDetailGroup,
                      i18n("Yearly Budgeted vs Actual Graph"),
@@ -1658,7 +1658,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::next12Months,
                      MyMoneyReport::eDetailTop,
                      i18n("Forecast By Month"),
@@ -1668,7 +1668,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::nextQuarter,
                      MyMoneyReport::eDetailTop,
                      i18n("Forecast Next Quarter"),
@@ -1679,7 +1679,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::currentYear,
                      MyMoneyReport::eDetailTop,
                      i18n("Income and Expenses Forecast This Year"),
@@ -1689,7 +1689,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::next3Months,
                      MyMoneyReport::eDetailTotal,
                      i18n("Net Worth Forecast Graph"),
@@ -1707,7 +1707,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eSchedule,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::next12Months,
                      MyMoneyReport::eDetailAll,
                      i18n("Schedule Information"),
@@ -1716,7 +1716,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setDetailLevel(MyMoneyReport::eDetailAll);
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eSchedule,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::next12Months,
                      MyMoneyReport::eDetailAll,
                      i18n("Schedule Summary Information"),
@@ -1725,7 +1725,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setDetailLevel(MyMoneyReport::eDetailTop);
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAccountInfo,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::today,
                      MyMoneyReport::eDetailAll,
                      i18n("Account Information"),
@@ -1734,7 +1734,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setConvertCurrency(false);
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAccountLoanInfo,
-                     MyMoneyReport::eMonths,
+                     MyMoneyReport::Column::Months,
                      MyMoneyTransactionFilter::today,
                      MyMoneyReport::eDetailAll,
                      i18n("Loan Information"),

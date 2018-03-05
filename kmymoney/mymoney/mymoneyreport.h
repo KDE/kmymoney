@@ -58,7 +58,11 @@ public:
   // When adding a new row type, be sure to add a corresponding entry in kTypeArray
   enum ERowType { eNoRows = 0, eAssetLiability, eExpenseIncome, eCategory, eTopCategory, eAccount, eTag, ePayee, eMonth, eWeek, eTopAccount, eAccountByTopAccount, eEquityType, eAccountType, eInstitution, eBudget, eBudgetActual, eSchedule, eAccountInfo, eAccountLoanInfo, eAccountReconcile, eCashFlow};
   enum EReportType { eNoReport = 0, ePivotTable, eQueryTable, eInfoTable };
-  enum EColumnType { eNoColumns = 0, eDays = 1, eMonths = 1, eBiMonths = 2, eQuarters = 3, eWeeks = 7, eYears = 12 };
+  class Column {
+  public:
+    enum Type { NoColumns = 0, Days = 1, Months = 1, BiMonths = 2, Quarters = 3, Weeks = 7, Years = 12 };
+    static const QStringList kTypeText;
+  };
 
   // if you add bits to this bitmask, start with the value currently assigned to eQCend and update its value afterwards
   // also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
@@ -68,7 +72,6 @@ public:
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
   static const QStringList kRowTypeText;
-  static const QStringList kColumnTypeText;
   static const QStringList kQueryColumnsText;
   static const QStringList kDetailLevelText;
   static const QStringList kChartTypeText;
@@ -99,7 +102,7 @@ public:
   ERowType rowType() const {
     return m_rowType;
   }
-  EColumnType columnType() const {
+  Column::Type columnType() const {
     return m_columnType;
   }
   bool isRunningSum() const {
@@ -213,7 +216,7 @@ public:
     m_convertCurrency = _f;
   }
   void setRowType(ERowType _rt);
-  void setColumnType(EColumnType _ct) {
+  void setColumnType(Column::Type _ct) {
     m_columnType = _ct;
   }
   void setComment(const QString& _comment) {
@@ -563,7 +566,7 @@ private:
     * QUANTITY of months or days.  Whether it's months or days is determined
     * by m_columnsAreDays.
     */
-  enum EColumnType m_columnType;
+  Column::Type m_columnType;
   /**
    * Whether the base unit of columns of this report is days.  Only applies to
    * 'PivotTable' reports.  If false, then columns are months or multiples thereof.

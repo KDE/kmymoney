@@ -736,7 +736,7 @@ void PivotTableTest::testColumnType()
   filter.setRowType(MyMoneyReport::eExpenseIncome);
   filter.setDateFilter(QDate(2003, 12, 31), QDate(2005, 12, 31));
   filter.setRowType(MyMoneyReport::eExpenseIncome);
-  filter.setColumnType(MyMoneyReport::eBiMonths);
+  filter.setColumnType(MyMoneyReport::Column::BiMonths);
   XMLandback(filter);
   PivotTable spending_b(filter);
 
@@ -754,7 +754,7 @@ void PivotTableTest::testColumnType()
   QVERIFY(spending_b.m_grid.m_total[eActual][12] == -moParent2);
   QVERIFY(spending_b.m_grid.m_total[eActual][13] == moZero);
 
-  filter.setColumnType(MyMoneyReport::eQuarters);
+  filter.setColumnType(MyMoneyReport::Column::Quarters);
   XMLandback(filter);
   PivotTable spending_q(filter);
 
@@ -785,7 +785,7 @@ void PivotTableTest::testColumnType()
   QVERIFY(networth_q.m_grid.m_total[eActual][9] == -moParent2 - moParent1 - moSolo - moSolo - moParent - moSolo - moParent + moCheckingOpen + moCreditOpen);
 
   filter.setRowType(MyMoneyReport::eExpenseIncome);
-  filter.setColumnType(MyMoneyReport::eYears);
+  filter.setColumnType(MyMoneyReport::Column::Years);
   XMLandback(filter);
   PivotTable spending_y(filter);
 
@@ -818,7 +818,7 @@ void PivotTableTest::testColumnType()
 
   filter.setDateFilter(QDate(2004, 7, 2), QDate(2004, 7, 14));
   filter.setRowType(MyMoneyReport::eExpenseIncome);
-  filter.setColumnType(MyMoneyReport::eMonths);
+  filter.setColumnType(MyMoneyReport::Column::Months);
   filter.setColumnsAreDays(true);
   filter.setName("Spending by Days");
 
@@ -835,7 +835,7 @@ void PivotTableTest::testColumnType()
 
   filter.setDateFilter(QDate(2004, 7, 2), QDate(2004, 8, 1));
   filter.setRowType(MyMoneyReport::eExpenseIncome);
-  filter.setColumnType(static_cast<MyMoneyReport::EColumnType>(7));
+  filter.setColumnType(static_cast<MyMoneyReport::Column::Type>(7));
   filter.setColumnsAreDays(true);
   filter.setName("Spending by Weeks");
 
@@ -941,7 +941,7 @@ void PivotTableTest::testBudget()
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acSolo, false, MyMoneyMoney(100.0));
 
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
-                         MyMoneyReport::eMonths,
+                         MyMoneyReport::Column::Months,
                          MyMoneyTransactionFilter::yearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
@@ -953,7 +953,7 @@ void PivotTableTest::testBudget()
     BudgetHelper budget;
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acParent, false, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
-                         MyMoneyReport::eMonths,
+                         MyMoneyReport::Column::Months,
                          MyMoneyTransactionFilter::yearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
@@ -969,7 +969,7 @@ void PivotTableTest::testBudget()
     BudgetHelper budget;
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acParent, true, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
-                         MyMoneyReport::eMonths,
+                         MyMoneyReport::Column::Months,
                          MyMoneyTransactionFilter::yearToDate,
                          MyMoneyReport::eDetailTop ,
                          "Yearly Budgeted vs. Actual", "Default Report");
@@ -986,7 +986,7 @@ void PivotTableTest::testBudget()
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acChild, false, MyMoneyMoney(100.0));
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acSecondChild, true, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
-                         MyMoneyReport::eMonths,
+                         MyMoneyReport::Column::Months,
                          MyMoneyTransactionFilter::yearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
@@ -1003,7 +1003,7 @@ void PivotTableTest::testBudget()
     BudgetHelper budget;
     budget += BudgetEntryHelper(QDate(2006, 1, 1), acSolo, false, MyMoneyMoney(100.0));
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
-                         MyMoneyReport::eMonths,
+                         MyMoneyReport::Column::Months,
                          MyMoneyTransactionFilter::yearToDate,
                          MyMoneyReport::eDetailTop,
                          "Yearly Budgeted vs. Actual", "Default Report");
