@@ -64,15 +64,18 @@ public:
     static const QStringList kTypeText;
   };
 
-  // if you add bits to this bitmask, start with the value currently assigned to eQCend and update its value afterwards
-  // also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
-  enum EQueryColumns { eQCnone = 0x0, eQCbegin = 0x1, eQCnumber = 0x1, eQCpayee = 0x2, eQCcategory = 0x4, eQCtag = 0x8, eQCmemo = 0x10, eQCaccount = 0x20, eQCreconciled = 0x40, eQCaction = 0x80, eQCshares = 0x100, eQCprice = 0x200, eQCperformance = 0x400, eQCloan = 0x800, eQCbalance = 0x1000, eQCend = 0x2000 };
+  // if you add bits to this bitmask, start with the value currently assigned to end and update its value afterwards
+  // also don't forget to add column names to QueryColumns::kText in mymoneyreport.cpp
+  class QueryColumns {
+  public:
+    enum Type { None = 0x0, Begin = 0x1, Number = 0x1, Payee = 0x2, Category = 0x4, Tag = 0x8, Memo = 0x10, Account = 0x20, Reconciled = 0x40, Action = 0x80, Shares = 0x100, Price = 0x200, Performance = 0x400, Loan = 0x800, Balance = 0x1000, End = 0x2000 };
+    static const QStringList kText;
+  };
 
   enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
   static const QStringList kRowTypeText;
-  static const QStringList kQueryColumnsText;
   static const QStringList kDetailLevelText;
   static const QStringList kChartTypeText;
   static const EReportType kTypeArray[];
@@ -120,7 +123,7 @@ public:
   const QString& comment() const {
     return m_comment;
   }
-  EQueryColumns queryColumns() const {
+  QueryColumns::Type queryColumns() const {
     return m_queryColumns;
   }
   const QString& group() const {
@@ -228,7 +231,7 @@ public:
   void setFavorite(bool _f) {
     m_favorite = _f;
   }
-  void setQueryColumns(EQueryColumns _qc) {
+  void setQueryColumns(QueryColumns::Type _qc) {
     m_queryColumns = _qc;
   }
   void setTax(bool _f) {
@@ -576,7 +579,7 @@ private:
      * What sort of values should show up on the COLUMNS of this report,
      * in the case of a 'QueryTable' report
      */
-  enum EQueryColumns m_queryColumns;
+  enum QueryColumns::Type m_queryColumns;
 
   /**
     * The plain-language description of what the date range should be locked

@@ -197,36 +197,36 @@ void KReportConfigurationFilterDlg::slotSearch()
     MyMoneyReport::ERowType rtq[8] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::eTag, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
     m_currentState.setRowType(rtq[m_tab3->findChild<KComboBox*>("m_comboOrganizeBy")->currentIndex()]);
 
-    unsigned qc = MyMoneyReport::eQCnone;
+    unsigned qc = MyMoneyReport::QueryColumns::None;
 
-    if (m_currentState.queryColumns() & MyMoneyReport::eQCloan)
+    if (m_currentState.queryColumns() & MyMoneyReport::QueryColumns::Loan)
       // once a loan report, always a loan report
-      qc = MyMoneyReport::eQCloan;
+      qc = MyMoneyReport::QueryColumns::Loan;
 
     if (m_tab3->findChild<QCheckBox*>("m_checkNumber")->isChecked())
-      qc |= MyMoneyReport::eQCnumber;
+      qc |= MyMoneyReport::QueryColumns::Number;
     if (m_tab3->findChild<QCheckBox*>("m_checkPayee")->isChecked())
-      qc |= MyMoneyReport::eQCpayee;
+      qc |= MyMoneyReport::QueryColumns::Payee;
     if (m_tab3->findChild<QCheckBox*>("m_checkTag")->isChecked())
-      qc |= MyMoneyReport::eQCtag;
+      qc |= MyMoneyReport::QueryColumns::Tag;
     if (m_tab3->findChild<QCheckBox*>("m_checkCategory")->isChecked())
-      qc |= MyMoneyReport::eQCcategory;
+      qc |= MyMoneyReport::QueryColumns::Category;
     if (m_tab3->findChild<QCheckBox*>("m_checkMemo")->isChecked())
-      qc |= MyMoneyReport::eQCmemo;
+      qc |= MyMoneyReport::QueryColumns::Memo;
     if (m_tab3->findChild<QCheckBox*>("m_checkAccount")->isChecked())
-      qc |= MyMoneyReport::eQCaccount;
+      qc |= MyMoneyReport::QueryColumns::Account;
     if (m_tab3->findChild<QCheckBox*>("m_checkReconciled")->isChecked())
-      qc |= MyMoneyReport::eQCreconciled;
+      qc |= MyMoneyReport::QueryColumns::Reconciled;
     if (m_tab3->findChild<QCheckBox*>("m_checkAction")->isChecked())
-      qc |= MyMoneyReport::eQCaction;
+      qc |= MyMoneyReport::QueryColumns::Action;
     if (m_tab3->findChild<QCheckBox*>("m_checkShares")->isChecked())
-      qc |= MyMoneyReport::eQCshares;
+      qc |= MyMoneyReport::QueryColumns::Shares;
     if (m_tab3->findChild<QCheckBox*>("m_checkPrice")->isChecked())
-      qc |= MyMoneyReport::eQCprice;
+      qc |= MyMoneyReport::QueryColumns::Price;
     if (m_tab3->findChild<QCheckBox*>("m_checkBalance")->isChecked())
-      qc |= MyMoneyReport::eQCbalance;
+      qc |= MyMoneyReport::QueryColumns::Balance;
 
-    m_currentState.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(qc));
+    m_currentState.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(qc));
 
     m_currentState.setTax(m_tab3->findChild<QCheckBox*>("m_checkTax")->isChecked());
     m_currentState.setInvestmentsOnly(m_tab3->findChild<QCheckBox*>("m_checkInvestments")->isChecked());
@@ -423,17 +423,17 @@ void KReportConfigurationFilterDlg::slotReset()
     }
 
     unsigned qc = m_initialState.queryColumns();
-    m_tab3->findChild<QCheckBox*>("m_checkNumber")->setChecked(qc & MyMoneyReport::eQCnumber);
-    m_tab3->findChild<QCheckBox*>("m_checkPayee")->setChecked(qc & MyMoneyReport::eQCpayee);
-    m_tab3->findChild<QCheckBox*>("m_checkTag")->setChecked(qc & MyMoneyReport::eQCtag);
-    m_tab3->findChild<QCheckBox*>("m_checkCategory")->setChecked(qc & MyMoneyReport::eQCcategory);
-    m_tab3->findChild<QCheckBox*>("m_checkMemo")->setChecked(qc & MyMoneyReport::eQCmemo);
-    m_tab3->findChild<QCheckBox*>("m_checkAccount")->setChecked(qc & MyMoneyReport::eQCaccount);
-    m_tab3->findChild<QCheckBox*>("m_checkReconciled")->setChecked(qc & MyMoneyReport::eQCreconciled);
-    m_tab3->findChild<QCheckBox*>("m_checkAction")->setChecked(qc & MyMoneyReport::eQCaction);
-    m_tab3->findChild<QCheckBox*>("m_checkShares")->setChecked(qc & MyMoneyReport::eQCshares);
-    m_tab3->findChild<QCheckBox*>("m_checkPrice")->setChecked(qc & MyMoneyReport::eQCprice);
-    m_tab3->findChild<QCheckBox*>("m_checkBalance")->setChecked(qc & MyMoneyReport::eQCbalance);
+    m_tab3->findChild<QCheckBox*>("m_checkNumber")->setChecked(qc & MyMoneyReport::QueryColumns::Number);
+    m_tab3->findChild<QCheckBox*>("m_checkPayee")->setChecked(qc & MyMoneyReport::QueryColumns::Payee);
+    m_tab3->findChild<QCheckBox*>("m_checkTag")->setChecked(qc & MyMoneyReport::QueryColumns::Tag);
+    m_tab3->findChild<QCheckBox*>("m_checkCategory")->setChecked(qc & MyMoneyReport::QueryColumns::Category);
+    m_tab3->findChild<QCheckBox*>("m_checkMemo")->setChecked(qc & MyMoneyReport::QueryColumns::Memo);
+    m_tab3->findChild<QCheckBox*>("m_checkAccount")->setChecked(qc & MyMoneyReport::QueryColumns::Account);
+    m_tab3->findChild<QCheckBox*>("m_checkReconciled")->setChecked(qc & MyMoneyReport::QueryColumns::Reconciled);
+    m_tab3->findChild<QCheckBox*>("m_checkAction")->setChecked(qc & MyMoneyReport::QueryColumns::Action);
+    m_tab3->findChild<QCheckBox*>("m_checkShares")->setChecked(qc & MyMoneyReport::QueryColumns::Shares);
+    m_tab3->findChild<QCheckBox*>("m_checkPrice")->setChecked(qc & MyMoneyReport::QueryColumns::Price);
+    m_tab3->findChild<QCheckBox*>("m_checkBalance")->setChecked(qc & MyMoneyReport::QueryColumns::Balance);
 
     m_tab3->findChild<QCheckBox*>("m_checkTax")->setChecked(m_initialState.isTax());
     m_tab3->findChild<QCheckBox*>("m_checkInvestments")->setChecked(m_initialState.isInvestmentsOnly());

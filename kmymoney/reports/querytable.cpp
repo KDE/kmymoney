@@ -364,33 +364,33 @@ void QueryTable::init()
 
   unsigned qc = m_config.queryColumns();
 
-  if (qc & MyMoneyReport::eQCnumber)
+  if (qc & MyMoneyReport::QueryColumns::Number)
     m_columns += ",number";
-  if (qc & MyMoneyReport::eQCpayee)
+  if (qc & MyMoneyReport::QueryColumns::Payee)
     m_columns += ",payee";
-  if (qc & MyMoneyReport::eQCtag)
+  if (qc & MyMoneyReport::QueryColumns::Tag)
     m_columns += ",tag";
-  if (qc & MyMoneyReport::eQCcategory)
+  if (qc & MyMoneyReport::QueryColumns::Category)
     m_columns += ",category";
-  if (qc & MyMoneyReport::eQCaccount)
+  if (qc & MyMoneyReport::QueryColumns::Account)
     m_columns += ",account";
-  if (qc & MyMoneyReport::eQCreconciled)
+  if (qc & MyMoneyReport::QueryColumns::Reconciled)
     m_columns += ",reconcileflag";
-  if (qc & MyMoneyReport::eQCmemo)
+  if (qc & MyMoneyReport::QueryColumns::Memo)
     m_columns += ",memo";
-  if (qc & MyMoneyReport::eQCaction)
+  if (qc & MyMoneyReport::QueryColumns::Action)
     m_columns += ",action";
-  if (qc & MyMoneyReport::eQCshares)
+  if (qc & MyMoneyReport::QueryColumns::Shares)
     m_columns += ",shares";
-  if (qc & MyMoneyReport::eQCprice)
+  if (qc & MyMoneyReport::QueryColumns::Price)
     m_columns += ",price";
-  if (qc & MyMoneyReport::eQCperformance)
+  if (qc & MyMoneyReport::QueryColumns::Performance)
     m_columns += ",startingbal,buys,sells,reinvestincome,cashincome,return,returninvestment";
-  if (qc & MyMoneyReport::eQCloan) {
+  if (qc & MyMoneyReport::QueryColumns::Loan) {
     m_columns += ",payment,interest,fees";
     m_postcolumns = "balance";
   }
-  if (qc & MyMoneyReport::eQCbalance)
+  if (qc & MyMoneyReport::QueryColumns::Balance)
     m_postcolumns = "balance";
 
   TableRow::setSortCriteria(sort);
@@ -521,7 +521,7 @@ void QueryTable::constructTransactionTable()
     // split entries (qS) normally.
 
     bool loan_special_case = false;
-    if (m_config.queryColumns() & MyMoneyReport::eQCloan) {
+    if (m_config.queryColumns() & MyMoneyReport::QueryColumns::Loan) {
       ReportAccount splitAcc = (*it_split).accountId();
       loan_special_case = splitAcc.isLoan();
     }
@@ -1302,7 +1302,7 @@ void QueryTable::constructSplitsTable()
     // reference (loan) account (qA). however, we process the matching
     // split entries (qS) normally.
     bool loan_special_case = false;
-    if (m_config.queryColumns() & MyMoneyReport::eQCloan) {
+    if (m_config.queryColumns() & MyMoneyReport::QueryColumns::Loan) {
       ReportAccount splitAcc = (*it_split).accountId();
       loan_special_case = splitAcc.isLoan();
     }

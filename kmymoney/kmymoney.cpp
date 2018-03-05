@@ -4290,7 +4290,7 @@ void KMyMoneyApp::slotAccountTransactionReport()
   if (!d->m_selectedAccount.id().isEmpty()) {
     MyMoneyReport report(
       MyMoneyReport::eAccount,
-      MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+      MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category,
       MyMoneyTransactionFilter::yearToDate,
       MyMoneyReport::eDetailAll,
       i18n("%1 YTD Account Transactions", d->m_selectedAccount.name()),

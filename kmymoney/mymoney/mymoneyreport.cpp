@@ -35,12 +35,11 @@
 #include "reportdebug.h"
 
 const QStringList MyMoneyReport::Column::kTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
+// if you add names here, don't forget to update the bitmap for QueryColumns::Type
+// and shift the bit for QueryColumns::end one position to the left
+const QStringList MyMoneyReport::QueryColumns::kText = QString("none,number,payee,category,tag,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
-
-// if you add names here, don't forget to update the bitmap for EQueryColumns
-// and shift the bit for eQCend one position to the left
-const QStringList MyMoneyReport::kQueryColumnsText = QString("none,number,payee,category,tag,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
 
 const MyMoneyReport::EReportType MyMoneyReport::kTypeArray[] = { eNoReport, ePivotTable, ePivotTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, ePivotTable, ePivotTable, eInfoTable, eInfoTable, eInfoTable, eQueryTable, eQueryTable, eNoReport };
 const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(',');
@@ -64,7 +63,7 @@ MyMoneyReport::MyMoneyReport() :
     m_rowType(eExpenseIncome),
     m_columnType(Column::Months),
     m_columnsAreDays(false),
-    m_queryColumns(eQCnone),
+    m_queryColumns(QueryColumns::None),
     m_dateLock(userDefined),
     m_accountGroupFilter(false),
     m_chartType(eChartLine),
@@ -110,7 +109,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_rowType(_rt),
     m_columnType(Column::Months),
     m_columnsAreDays(false),
-    m_queryColumns(eQCnone),
+    m_queryColumns(QueryColumns::None),
     m_dateLock(_dl),
     m_accountGroupFilter(false),
     m_chartType(eChartLine),
@@ -138,7 +137,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
   if (m_reportType == ePivotTable)
     m_columnType = static_cast<Column::Type>(_ct);
   if (m_reportType == eQueryTable)
-    m_queryColumns = static_cast<EQueryColumns>(_ct);
+    m_queryColumns = static_cast<QueryColumns::Type>(_ct);
   setDateFilter(_dl);
 
   //throw exception if the type is inconsistent
@@ -408,11 +407,11 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
     QStringList columns;
     unsigned qc = m_queryColumns;
-    unsigned it_qc = eQCbegin;
+    unsigned it_qc = QueryColumns::Begin;
     unsigned index = 1;
-    while (it_qc != eQCend) {
+    while (it_qc != QueryColumns::End) {
       if (qc & it_qc)
-        columns += kQueryColumnsText[index];
+        columns += QueryColumns::kText[index];
       it_qc *= 2;
       index++;
     }
@@ -735,13 +734,13 @@ bool MyMoneyReport::read(const QDomElement& e)
     QStringList columns = e.attribute("querycolumns", "none").split(',');
     QStringList::const_iterator it_column = columns.constBegin();
     while (it_column != columns.constEnd()) {
-      i = kQueryColumnsText.indexOf(*it_column);
+      i = QueryColumns::kText.indexOf(*it_column);
       if (i > 0)
         qc |= (1 << (i - 1));
 
       ++it_column;
     }
-    setQueryColumns(static_cast<EQueryColumns>(qc));
+    setQueryColumns(static_cast<QueryColumns::Type>(qc));
 
     QDomNode child = e.firstChild();
     while (!child.isNull() && child.isElement()) {
