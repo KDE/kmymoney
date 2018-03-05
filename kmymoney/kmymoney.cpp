@@ -2707,7 +2707,7 @@ bool KMyMoneyApp::slotFileSaveAs()
       selectedKeyName = dlg->secretKey();
     }
     delete dlg;
-    if ((rc != QDialog::Accepted) || (dlg == 0)) {
+    if (rc != QDialog::Accepted) {
       return false;
     }
   }
