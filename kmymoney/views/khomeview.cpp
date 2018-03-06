@@ -296,7 +296,7 @@ void KHomeView::showNetWorthGraph()
   d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
 
   MyMoneyReport reportCfg = MyMoneyReport(
-                              MyMoneyReport::eAssetLiability,
+                              MyMoneyReport::Row::AssetLiability,
                               MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
                               MyMoneyReport::eDetailTotal,
@@ -1453,7 +1453,7 @@ void KHomeView::showBudget()
 
     //config report just like "Monthly Budgeted vs Actual
     MyMoneyReport reportCfg = MyMoneyReport(
-                                MyMoneyReport::eBudgetActual,
+                                MyMoneyReport::Row::BudgetActual,
                                 MyMoneyReport::Column::Months,
                                 MyMoneyTransactionFilter::currentMonth,
                                 MyMoneyReport::eDetailAll,

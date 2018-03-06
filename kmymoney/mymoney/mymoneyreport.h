@@ -56,7 +56,19 @@ class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTran
 {
 public:
   // When adding a new row type, be sure to add a corresponding entry in kTypeArray
-  enum ERowType { eNoRows = 0, eAssetLiability, eExpenseIncome, eCategory, eTopCategory, eAccount, eTag, ePayee, eMonth, eWeek, eTopAccount, eAccountByTopAccount, eEquityType, eAccountType, eInstitution, eBudget, eBudgetActual, eSchedule, eAccountInfo, eAccountLoanInfo, eAccountReconcile, eCashFlow};
+  class Row {
+  public:
+    enum Type { NoRows = 0, AssetLiability, ExpenseIncome, Category, TopCategory, Account, Tag, Payee, Month, Week, TopAccount, AccountByTopAccount, EquityType, AccountType, Institution, Budget, BudgetActual, Schedule, AccountInfo, AccountLoanInfo, AccountReconcile, CashFlow};
+    /**
+     * Return row type as string.
+     *
+     * @param type type to get string for
+     * @return row type converted to string
+     */
+    static QString toString(Type type);
+    static const QStringList kText;
+   };
+
   class Report {
   public:
     enum Type { NoReport = 0, PivotTable, QueryTable, InfoTable };
@@ -87,13 +99,12 @@ public:
   enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
-  static const QStringList kRowTypeText;
   static const QStringList kDetailLevelText;
   static const QStringList kChartTypeText;
 
 public:
   MyMoneyReport();
-  MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment);
+  MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment);
   MyMoneyReport(const QString& id, const MyMoneyReport& right);
 
   /**
@@ -113,14 +124,14 @@ public:
   Report::Type reportType() const {
     return m_reportType;
   }
-  ERowType rowType() const {
+  Row::Type rowType() const {
     return m_rowType;
   }
   Column::Type columnType() const {
     return m_columnType;
   }
   bool isRunningSum() const {
-    return (m_rowType == eAssetLiability);
+    return (m_rowType == Row::AssetLiability);
   }
   bool isConvertCurrency() const {
     return m_convertCurrency;
@@ -229,7 +240,7 @@ public:
   void setConvertCurrency(bool _f) {
     m_convertCurrency = _f;
   }
-  void setRowType(ERowType _rt);
+  void setRowType(Row::Type _rt);
   void setColumnType(Column::Type _ct) {
     m_columnType = _ct;
   }
@@ -507,14 +518,6 @@ public:
     */
   static void setLineWidth(int width);
 
-  /**
-   * Return row type as string.
-   *
-   * @param type type to get string for
-   * @return row type converted to string
-   */
-  static QString toString(ERowType type);
-
 private:
   /**
     * The user-assigned name of the report
@@ -565,7 +568,7 @@ private:
   /**
     * What sort of values should show up on the ROWS of this report
     */
-  enum ERowType m_rowType;
+  Row::Type m_rowType;
   /**
     * What sort of values should show up on the COLUMNS of this report,
     * in the case of a 'PivotTable' report.  Really this is used more as a

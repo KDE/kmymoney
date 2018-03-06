@@ -1008,7 +1008,7 @@ void KForecastView::loadChartView()
   MyMoneyReport::EDetailLevel detailLevel[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
 
   MyMoneyReport reportCfg = MyMoneyReport(
-                              MyMoneyReport::eAssetLiability,
+                              MyMoneyReport::Row::AssetLiability,
                               MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
                               detailLevel[m_comboDetail->currentIndex()],

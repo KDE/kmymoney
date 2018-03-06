@@ -107,7 +107,7 @@ void QueryTableTest::testQueryBasics()
     unsigned cols;
 
     MyMoneyReport filter;
-    filter.setRowType(MyMoneyReport::eCategory);
+    filter.setRowType(MyMoneyReport::Row::Category);
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Account;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
     filter.setName("Transactions by Category");
@@ -132,7 +132,7 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
-    filter.setRowType(MyMoneyReport::eTopCategory);
+    filter.setRowType(MyMoneyReport::Row::TopCategory);
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Account;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
     filter.setName("Transactions by Top Category");
@@ -160,7 +160,7 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(MyMoneyReport::Row::Account);
     filter.setName("Transactions by Account");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
@@ -194,7 +194,7 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(searchHTML(html, i18nc("Total balance for credit card", "Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::ePayee);
+    filter.setRowType(MyMoneyReport::Row::Payee);
     filter.setName("Transactions by Payee");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Memo | MyMoneyReport::QueryColumns::Category;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
@@ -220,7 +220,7 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eMonth);
+    filter.setRowType(MyMoneyReport::Row::Month);
     filter.setName("Transactions by Month");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
@@ -248,7 +248,7 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-05-01") == -moParent1 + moCheckingOpen);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eWeek);
+    filter.setRowType(MyMoneyReport::Row::Week);
     filter.setName("Transactions by Week");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
@@ -337,7 +337,7 @@ void QueryTableTest::testAccountQuery()
     //
 
     MyMoneyReport filter;
-    filter.setRowType(MyMoneyReport::eInstitution);
+    filter.setRowType(MyMoneyReport::Row::Institution);
     filter.setName("Accounts by Institution (No transactions)");
     XMLandback(filter);
     QueryTable qtbl_1(filter);
@@ -377,7 +377,7 @@ void QueryTableTest::testAccountQuery()
     TransactionHelper t3y2(QDate(2005, 9, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
     TransactionHelper t4y2(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
 
-    filter.setRowType(MyMoneyReport::eInstitution);
+    filter.setRowType(MyMoneyReport::Row::Institution);
     filter.setName("Accounts by Institution (With Transactions)");
     XMLandback(filter);
     QueryTable qtbl_2(filter);
@@ -397,7 +397,7 @@ void QueryTableTest::testAccountQuery()
     // Account TYPES
     //
 
-    filter.setRowType(MyMoneyReport::eAccountType);
+    filter.setRowType(MyMoneyReport::Row::AccountType);
     filter.setName("Accounts by Type");
     XMLandback(filter);
     QueryTable qtbl_3(filter);
@@ -452,7 +452,7 @@ void QueryTableTest::testInvestment()
     //
 
     MyMoneyReport invtran_r(
-      MyMoneyReport::eTopAccount,
+      MyMoneyReport::Row::TopAccount,
       MyMoneyReport::QueryColumns::Action | MyMoneyReport::QueryColumns::Shares | MyMoneyReport::QueryColumns::Price,
       MyMoneyTransactionFilter::userDefined,
       MyMoneyReport::eDetailAll,
@@ -544,7 +544,7 @@ void QueryTableTest::testInvestment()
     //
 
     MyMoneyReport invhold_r(
-      MyMoneyReport::eAccountByTopAccount,
+      MyMoneyReport::Row::AccountByTopAccount,
       MyMoneyReport::QueryColumns::Performance,
       MyMoneyTransactionFilter::userDefined,
       MyMoneyReport::eDetailAll,
@@ -613,7 +613,7 @@ void QueryTableTest::testBalanceColumn()
 
     MyMoneyReport filter;
 
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(MyMoneyReport::Row::Account);
     filter.setName("Transactions by Account");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category | MyMoneyReport::QueryColumns::Balance;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));   //
@@ -675,7 +675,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
     MyMoneyReport filter;
 
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(MyMoneyReport::Row::Account);
     filter.setName("Transactions by Account");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category | MyMoneyReport::QueryColumns::Balance;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));
@@ -769,7 +769,7 @@ void QueryTableTest::testTaxReport()
     unsigned cols;
     MyMoneyReport filter;
 
-    filter.setRowType(MyMoneyReport::eCategory);
+    filter.setRowType(MyMoneyReport::Row::Category);
     filter.setName("Tax Transactions");
     cols = MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Account;
     filter.setQueryColumns(static_cast<MyMoneyReport::QueryColumns::Type>(cols));

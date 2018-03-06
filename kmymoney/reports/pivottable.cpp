@@ -134,7 +134,7 @@ void PivotTable::init()
   //
   // Initialize outer groups of the grid
   //
-  if (m_config_f.rowType() == MyMoneyReport::eAssetLiability) {
+  if (m_config_f.rowType() == MyMoneyReport::Row::AssetLiability) {
     m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset), PivotOuterGroup(m_numColumns));
     m_grid.insert(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
   } else {
@@ -236,7 +236,7 @@ void PivotTable::init()
 
   // whether asset & liability transactions are actually to be considered
   // transfers
-  bool al_transfers = (m_config_f.rowType() == MyMoneyReport::eExpenseIncome) && (m_config_f.isIncludingTransfers());
+  bool al_transfers = (m_config_f.rowType() == MyMoneyReport::Row::ExpenseIncome) && (m_config_f.isIncludingTransfers());
 
   //this is to store balance for loan accounts when not included in the report
   QMap<QString, MyMoneyMoney> loanBalances;
@@ -1146,7 +1146,7 @@ void PivotTable::calculateTotals()
     // Outer Row Group Totals
     //
 
-    const bool isIncomeExpense = (m_config_f.rowType() == MyMoneyReport::eExpenseIncome);
+    const bool isIncomeExpense = (m_config_f.rowType() == MyMoneyReport::Row::ExpenseIncome);
     const bool invert_total = (*it_outergroup).m_inverted;
     int column = 1;
     while (column < m_numColumns) {
@@ -1972,7 +1972,7 @@ void PivotTable::calculateForecast()
   }
 
   //run forecast
-  if (m_config_f.rowType() == MyMoneyReport::eAssetLiability) { //asset and liability
+  if (m_config_f.rowType() == MyMoneyReport::Row::AssetLiability) { //asset and liability
     forecast.doForecast();
   } else { //income and expenses
     MyMoneyBudget budget;

@@ -4289,7 +4289,7 @@ void KMyMoneyApp::slotAccountTransactionReport()
   // currently selected account.
   if (!d->m_selectedAccount.id().isEmpty()) {
     MyMoneyReport report(
-      MyMoneyReport::eAccount,
+      MyMoneyReport::Row::Account,
       MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category,
       MyMoneyTransactionFilter::yearToDate,
       MyMoneyReport::eDetailAll,

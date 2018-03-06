@@ -73,7 +73,7 @@ KBalanceChartDlg::~KBalanceChartDlg()
 KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
 {
   MyMoneyReport reportCfg = MyMoneyReport(
-                              MyMoneyReport::eAssetLiability,
+                              MyMoneyReport::Row::AssetLiability,
                               MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::last3ToNext3Months,
                               MyMoneyReport::eDetailTotal,

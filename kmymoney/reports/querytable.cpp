@@ -259,27 +259,27 @@ QueryTable::QueryTable(const MyMoneyReport& _report): ListTable(_report)
 void QueryTable::init()
 {
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccountByTopAccount:
-    case MyMoneyReport::eEquityType:
-    case MyMoneyReport::eAccountType:
-    case MyMoneyReport::eInstitution:
+    case MyMoneyReport::Row::AccountByTopAccount:
+    case MyMoneyReport::Row::EquityType:
+    case MyMoneyReport::Row::AccountType:
+    case MyMoneyReport::Row::Institution:
       constructAccountTable();
       m_columns = "account";
       break;
 
-    case MyMoneyReport::eAccount:
+    case MyMoneyReport::Row::Account:
       constructTransactionTable();
       m_columns = "accountid,postdate";
       break;
 
-    case MyMoneyReport::ePayee:
-    case MyMoneyReport::eTag:
-    case MyMoneyReport::eMonth:
-    case MyMoneyReport::eWeek:
+    case MyMoneyReport::Row::Payee:
+    case MyMoneyReport::Row::Tag:
+    case MyMoneyReport::Row::Month:
+    case MyMoneyReport::Row::Week:
       constructTransactionTable();
       m_columns = "postdate,account";
       break;
-    case MyMoneyReport::eCashFlow:
+    case MyMoneyReport::Row::CashFlow:
       constructSplitsTable();
       m_columns = "postdate";
       break;
@@ -292,46 +292,46 @@ void QueryTable::init()
   m_subtotal = "value";
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eCashFlow:
+    case MyMoneyReport::Row::CashFlow:
       m_group = "categorytype,topcategory,category";
       break;
-    case MyMoneyReport::eCategory:
+    case MyMoneyReport::Row::Category:
       m_group = "categorytype,topcategory,category";
       break;
-    case MyMoneyReport::eTopCategory:
+    case MyMoneyReport::Row::TopCategory:
       m_group = "categorytype,topcategory";
       break;
-    case MyMoneyReport::eTopAccount:
+    case MyMoneyReport::Row::TopAccount:
       m_group = "topaccount,account";
       break;
-    case MyMoneyReport::eAccount:
+    case MyMoneyReport::Row::Account:
       m_group = "account";
       break;
-    case MyMoneyReport::eAccountReconcile:
+    case MyMoneyReport::Row::AccountReconcile:
       m_group = "account,reconcileflag";
       break;
-    case MyMoneyReport::ePayee:
+    case MyMoneyReport::Row::Payee:
       m_group = "payee";
       break;
-    case MyMoneyReport::eTag:
+    case MyMoneyReport::Row::Tag:
       m_group = "tag";
       break;
-    case MyMoneyReport::eMonth:
+    case MyMoneyReport::Row::Month:
       m_group = "month";
       break;
-    case MyMoneyReport::eWeek:
+    case MyMoneyReport::Row::Week:
       m_group = "week";
       break;
-    case MyMoneyReport::eAccountByTopAccount:
+    case MyMoneyReport::Row::AccountByTopAccount:
       m_group = "topaccount";
       break;
-    case MyMoneyReport::eEquityType:
+    case MyMoneyReport::Row::EquityType:
       m_group = "equitytype";
       break;
-    case MyMoneyReport::eAccountType:
+    case MyMoneyReport::Row::AccountType:
       m_group = "type";
       break;
-    case MyMoneyReport::eInstitution:
+    case MyMoneyReport::Row::Institution:
       m_group = "institution,topaccount";
       break;
     default:
@@ -340,8 +340,8 @@ void QueryTable::init()
 
   QString sort;
   switch (m_config.rowType()) {
-    case MyMoneyReport::eMonth:
-    case MyMoneyReport::eWeek:
+    case MyMoneyReport::Row::Month:
+    case MyMoneyReport::Row::Week:
       sort = m_group + "sort," + m_columns + ",id,rank";
       break;
 
@@ -351,10 +351,10 @@ void QueryTable::init()
   }
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccountByTopAccount:
-    case MyMoneyReport::eEquityType:
-    case MyMoneyReport::eAccountType:
-    case MyMoneyReport::eInstitution:
+    case MyMoneyReport::Row::AccountByTopAccount:
+    case MyMoneyReport::Row::EquityType:
+    case MyMoneyReport::Row::AccountType:
+    case MyMoneyReport::Row::Institution:
       m_columns = "account";
       break;
 
@@ -415,18 +415,18 @@ void QueryTable::constructTransactionTable()
   bool tag_special_case = false;
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eCategory:
-    case MyMoneyReport::eTopCategory:
+    case MyMoneyReport::Row::Category:
+    case MyMoneyReport::Row::TopCategory:
       use_summary = false;
       use_transfers = false;
       hide_details = false;
       break;
-    case MyMoneyReport::ePayee:
+    case MyMoneyReport::Row::Payee:
       use_summary = false;
       use_transfers = false;
       hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
       break;
-    case MyMoneyReport::eTag:
+    case MyMoneyReport::Row::Tag:
       use_summary = false;
       use_transfers = false;
       hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
@@ -843,8 +843,8 @@ void QueryTable::constructTransactionTable()
   // now run through our accts list and add opening and closing balances
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccount:
-    case MyMoneyReport::eTopAccount:
+    case MyMoneyReport::Row::Account:
+    case MyMoneyReport::Row::TopAccount:
       break;
 
       // case MyMoneyReport::eCategory:
@@ -1474,8 +1474,8 @@ void QueryTable::constructSplitsTable()
   // now run through our accts list and add opening and closing balances
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccount:
-    case MyMoneyReport::eTopAccount:
+    case MyMoneyReport::Row::Account:
+    case MyMoneyReport::Row::TopAccount:
       break;
 
       // case MyMoneyReport::eCategory:

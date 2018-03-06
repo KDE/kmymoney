@@ -65,7 +65,7 @@
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
-    : KFindTransactionDlg(parent, report.rowType() == MyMoneyReport::eAccount),
+    : KFindTransactionDlg(parent, report.rowType() == MyMoneyReport::Row::Account),
     m_tab2(0),
     m_tab3(0),
     m_tabChart(0),
@@ -114,7 +114,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   } else if (m_initialState.reportType() == MyMoneyReport::Report::QueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
-    if (m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount) {
+    if (m_initialState.rowType() < MyMoneyReport::Row::AccountByTopAccount) {
       m_tab3 = new kMyMoneyReportConfigTab3Decl(m_ui->m_criteriaTab);
       m_tab3->setObjectName("kMyMoneyReportConfigTab3");
       m_ui->m_criteriaTab->insertTab(1, m_tab3, i18n("Rows/Columns"));
@@ -162,7 +162,7 @@ void KReportConfigurationFilterDlg::slotSearch()
 
     // modify the rowtype only if the widget is enabled
     if (m_tab2->findChild<KComboBox*>("m_comboRows")->isEnabled()) {
-      MyMoneyReport::ERowType rt[2] = { MyMoneyReport::eExpenseIncome, MyMoneyReport::eAssetLiability };
+      MyMoneyReport::Row::Type rt[2] = { MyMoneyReport::Row::ExpenseIncome, MyMoneyReport::Row::AssetLiability };
       m_currentState.setRowType(rt[m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex()]);
     }
 
@@ -184,7 +184,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     m_currentState.setIncludingUnusedAccounts(m_tab2->findChild<QCheckBox*>("m_checkUnused")->isChecked());
 
     if (m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled()) {
-      m_currentState.setBudget(m_budgets[m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->currentItem()].id(), m_initialState.rowType() == MyMoneyReport::eBudgetActual);
+      m_currentState.setBudget(m_budgets[m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->currentItem()].id(), m_initialState.rowType() == MyMoneyReport::Row::BudgetActual);
     } else {
       m_currentState.setBudget(QString(), false);
     }
@@ -194,7 +194,7 @@ void KReportConfigurationFilterDlg::slotSearch()
       m_currentState.setMovingAverageDays(m_tab2->findChild<QSpinBox*>("m_movingAverageDays")->value());
     }
   } else if (m_tab3) {
-    MyMoneyReport::ERowType rtq[8] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::eTag, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
+    MyMoneyReport::Row::Type rtq[8] = { MyMoneyReport::Row::Category, MyMoneyReport::Row::TopCategory, MyMoneyReport::Row::Tag, MyMoneyReport::Row::Payee, MyMoneyReport::Row::Account, MyMoneyReport::Row::TopAccount, MyMoneyReport::Row::Month, MyMoneyReport::Row::Week };
     m_currentState.setRowType(rtq[m_tab3->findChild<KComboBox*>("m_comboOrganizeBy")->currentIndex()]);
 
     unsigned qc = MyMoneyReport::QueryColumns::None;
@@ -318,9 +318,9 @@ void KReportConfigurationFilterDlg::slotReset()
 
     combo = m_tab2->findChild<KComboBox*>("m_comboRows");
     switch (m_initialState.rowType()) {
-      case MyMoneyReport::eExpenseIncome:
-      case MyMoneyReport::eBudget:
-      case MyMoneyReport::eBudgetActual:
+      case MyMoneyReport::Row::ExpenseIncome:
+      case MyMoneyReport::Row::Budget:
+      case MyMoneyReport::Row::BudgetActual:
         combo->setCurrentItem(i18n("Income & Expenses"), false); // income / expense
         break;
       default:
@@ -365,8 +365,8 @@ void KReportConfigurationFilterDlg::slotReset()
     }
 
     //load budgets combo
-    if (m_initialState.rowType() == MyMoneyReport::eBudget
-        || m_initialState.rowType() == MyMoneyReport::eBudgetActual) {
+    if (m_initialState.rowType() == MyMoneyReport::Row::Budget
+        || m_initialState.rowType() == MyMoneyReport::Row::BudgetActual) {
       m_tab2->findChild<KComboBox*>("m_comboRows")->setEnabled(false);
       m_tab2->findChild<QFrame*>("m_budgetFrame")->setEnabled(!m_budgets.empty());
       int i = 0;
@@ -393,29 +393,29 @@ void KReportConfigurationFilterDlg::slotReset()
   } else if (m_tab3) {
     KComboBox *combo = m_tab3->findChild<KComboBox*>("m_comboOrganizeBy");
     switch (m_initialState.rowType()) {
-      case MyMoneyReport::Column::NoColumns:
-      case MyMoneyReport::eCategory:
+      case MyMoneyReport::Row::NoRows:
+      case MyMoneyReport::Row::Category:
         combo->setCurrentItem(i18n("Categories"), false);
         break;
-      case MyMoneyReport::eTopCategory:
+      case MyMoneyReport::Row::TopCategory:
         combo->setCurrentItem(i18n("Top Categories"), false);
         break;
-      case MyMoneyReport::eTag:
+      case MyMoneyReport::Row::Tag:
         combo->setCurrentItem(i18n("Tags"), false);
         break;
-      case MyMoneyReport::ePayee:
+      case MyMoneyReport::Row::Payee:
         combo->setCurrentItem(i18n("Payees"), false);
         break;
-      case MyMoneyReport::eAccount:
+      case MyMoneyReport::Row::Account:
         combo->setCurrentItem(i18n("Accounts"), false);
         break;
-      case MyMoneyReport::eTopAccount:
+      case MyMoneyReport::Row::TopAccount:
         combo->setCurrentItem(i18n("Top Accounts"), false);
         break;
-      case MyMoneyReport::eMonth:
+      case MyMoneyReport::Row::Month:
         combo->setCurrentItem(i18n("Month"), false);
         break;
-      case MyMoneyReport::eWeek:
+      case MyMoneyReport::Row::Week:
         combo->setCurrentItem(i18n("Week"), false);
         break;
       default:

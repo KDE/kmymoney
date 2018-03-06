@@ -72,15 +72,15 @@ ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report): ListTable(_repor
 void ObjectInfoTable::init()
 {
   switch (m_config.rowType()) {
-    case MyMoneyReport::eSchedule:
+    case MyMoneyReport::Row::Schedule:
       constructScheduleTable();
       m_columns = "nextduedate,name";
       break;
-    case MyMoneyReport::eAccountInfo:
+    case MyMoneyReport::Row::AccountInfo:
       constructAccountTable();
       m_columns = "institution,type,name";
       break;
-    case MyMoneyReport::eAccountLoanInfo:
+    case MyMoneyReport::Row::AccountLoanInfo:
       constructAccountLoanTable();
       m_columns = "institution,type,name";
       break;
@@ -92,12 +92,12 @@ void ObjectInfoTable::init()
   m_subtotal = "value";
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eSchedule:
+    case MyMoneyReport::Row::Schedule:
       m_group = "type";
       m_subtotal = "value";
       break;
-    case MyMoneyReport::eAccountInfo:
-    case MyMoneyReport::eAccountLoanInfo:
+    case MyMoneyReport::Row::AccountInfo:
+    case MyMoneyReport::Row::AccountLoanInfo:
       m_group = "topcategory,institution";
       m_subtotal = "currentbalance";
       break;
@@ -108,17 +108,17 @@ void ObjectInfoTable::init()
   QString sort = m_group + ',' + m_columns + ",id,rank";
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eSchedule:
+    case MyMoneyReport::Row::Schedule:
       if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
         m_columns = "name,payee,paymenttype,occurence,nextduedate,category"; // krazy:exclude=spelling
       } else {
         m_columns = "name,payee,paymenttype,occurence,nextduedate"; // krazy:exclude=spelling
       }
       break;
-    case MyMoneyReport::eAccountInfo:
+    case MyMoneyReport::Row::AccountInfo:
       m_columns = "type,name,number,description,openingdate,currencyname,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,tax,favorite";
       break;
-    case MyMoneyReport::eAccountLoanInfo:
+    case MyMoneyReport::Row::AccountLoanInfo:
       m_columns = "type,name,number,description,openingdate,currencyname,payee,loanamount,interestrate,nextinterestchange,periodicpayment,finalpayment,favorite";
       break;
     default:
