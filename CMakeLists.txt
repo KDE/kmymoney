@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 # Setting the name of the main project
-project(KMyMoney VERSION "5.0.80")
+project(KMyMoney VERSION "5.0.80" LANGUAGES CXX)
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
@@ -98,12 +98,12 @@ endif(DOXYGEN_FOUND)
 
 # check some include files exists
 set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
-include (CheckIncludeFile)
-check_include_file("unistd.h" HAVE_UNISTD_H)
-check_include_file("pwd.h" HAVE_PWD_H)
-check_include_file("windows.h" HAVE_WINDOWS_H)
-check_include_file("lmcons.h" HAVE_LMCONS_H)
-check_include_file("process.h" HAVE_PROCESS_H)
+include (CheckIncludeFileCXX)
+check_include_file_cxx("unistd.h" HAVE_UNISTD_H)
+check_include_file_cxx("pwd.h" HAVE_PWD_H)
+check_include_file_cxx("windows.h" HAVE_WINDOWS_H)
+check_include_file_cxx("lmcons.h" HAVE_LMCONS_H)
+check_include_file_cxx("process.h" HAVE_PROCESS_H)
 
 # include check for members in structs
 include (CheckStructHasMember)
@@ -149,7 +149,7 @@ if(LIBOFX_FOUND)
 
   unset(LIBOFX_HAVE_CLIENTUID)
   unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
-  check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID)
+  check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID LANGUAGE CXX)
   if(NOT ENABLE_OFXIMPORTER)
     unset(LIBOFX_FOUND CACHE)
     unset(LIBOFX_HAVE_CLIENTUID CACHE)
