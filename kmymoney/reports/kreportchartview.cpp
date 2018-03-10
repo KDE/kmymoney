@@ -116,9 +116,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   setAccountSeries(true);
 
   switch (config.chartType()) {
-    case MyMoneyReport::eChartNone:
-    case MyMoneyReport::eChartEnd:
-    case MyMoneyReport::eChartLine: {
+    case MyMoneyReport::Chart::None:
+    case MyMoneyReport::Chart::End:
+    case MyMoneyReport::Chart::Line: {
         KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
 
         if (config.isSkippingZero()) {
@@ -132,14 +132,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         coordinatePlane()->replaceDiagram(diagram);
         break;
       }
-    case MyMoneyReport::eChartBar: {
+    case MyMoneyReport::Chart::Bar: {
         KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
         CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
         replaceCoordinatePlane(cartesianPlane);
         coordinatePlane()->replaceDiagram(diagram);
         break;
       }
-    case MyMoneyReport::eChartStackedBar: {
+    case MyMoneyReport::Chart::StackedBar: {
         KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
         CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
         replaceCoordinatePlane(cartesianPlane);
@@ -147,7 +147,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         coordinatePlane()->replaceDiagram(diagram);
         break;
       }
-    case MyMoneyReport::eChartPie: {
+    case MyMoneyReport::Chart::Pie: {
         KDChart::PieDiagram* diagram = new KDChart::PieDiagram;
         PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
         replaceCoordinatePlane(polarPlane);
@@ -156,7 +156,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         setSeriesTotals(true);
         break;
       }
-    case MyMoneyReport::eChartRing: {
+    case MyMoneyReport::Chart::Ring: {
         KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
         PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
         replaceCoordinatePlane(polarPlane);
@@ -194,9 +194,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
   //set up the axes for cartesian diagrams
-  if (config.chartType() == MyMoneyReport::eChartLine ||
-      config.chartType() == MyMoneyReport::eChartBar ||
-      config.chartType() == MyMoneyReport::eChartStackedBar) {
+  if (config.chartType() == MyMoneyReport::Chart::Line ||
+      config.chartType() == MyMoneyReport::Chart::Bar ||
+      config.chartType() == MyMoneyReport::Chart::StackedBar) {
     //set x axis
     CartesianAxis *xAxis = new CartesianAxis();
     xAxis->setPosition(CartesianAxis::Bottom);
@@ -241,12 +241,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     yAxis->setRulerAttributes(yAxisRulerAttr);
 
     //add the axes to the corresponding diagram
-    if (config.chartType() == MyMoneyReport::eChartLine) {
+    if (config.chartType() == MyMoneyReport::Chart::Line) {
       KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
       lineDiagram->addAxis(xAxis);
       lineDiagram->addAxis(yAxis);
-    } else if (config.chartType() == MyMoneyReport::eChartBar ||
-               config.chartType() == MyMoneyReport::eChartStackedBar) {
+    } else if (config.chartType() == MyMoneyReport::Chart::Bar ||
+               config.chartType() == MyMoneyReport::Chart::StackedBar) {
       KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
       barDiagram->addAxis(xAxis);
       barDiagram->addAxis(yAxis);

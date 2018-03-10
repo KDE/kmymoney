@@ -1017,7 +1017,7 @@ void KForecastView::loadChartView()
 
   reportCfg.setChartByDefault(true);
   reportCfg.setChartGridLines(false);
-  reportCfg.setChartType(MyMoneyReport::eChartLine);
+  reportCfg.setChartType(MyMoneyReport::Chart::Line);
   reportCfg.setIncludingSchedules(false);
   // FIXME: this causes a crash
   //reportCfg.setColumnsAreDays( true );

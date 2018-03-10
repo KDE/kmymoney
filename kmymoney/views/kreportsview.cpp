@@ -1206,7 +1206,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     list.back().setChartDataLabels(false);
 
     list.push_back(MyMoneyReport(
@@ -1218,7 +1218,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartByDefault(true);
-    list.back().setChartType(MyMoneyReport::eChartPie);
+    list.back().setChartType(MyMoneyReport::Chart::Pie);
     list.back().setShowingRowTotals(false);
 
     groups.push_back(list);
@@ -1271,7 +1271,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::Row::Institution,
@@ -1438,7 +1438,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartPie);
+    list.back().setChartType(MyMoneyReport::Chart::Pie);
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
@@ -1451,7 +1451,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
 
@@ -1465,7 +1465,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(false);
@@ -1484,7 +1484,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(false);
@@ -1502,7 +1502,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                      i18n("Default Report")
                    ));
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(false);
@@ -1519,7 +1519,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(true);
@@ -1649,7 +1649,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setBudget("Any", true);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
 
     groups.push_back(list);
   }
@@ -1699,7 +1699,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingForecast(true);
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setChartType(MyMoneyReport::eChartLine);
+    list.back().setChartType(MyMoneyReport::Chart::Line);
     groups.push_back(list);
   }
   {

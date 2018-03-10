@@ -102,9 +102,11 @@ public:
     static const QStringList kText;
   };
 
-  enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
-
-  static const QStringList kChartTypeText;
+  class Chart {
+  public:
+    enum Type { None = 0, Line, Bar, Pie, Ring, StackedBar, End };
+    static const QStringList kText;
+  };
 
 public:
   MyMoneyReport();
@@ -170,7 +172,7 @@ public:
   DetailLevel::Type detailLevel() const {
     return m_detailLevel;
   }
-  EChartType chartType() const {
+  Chart::Type chartType() const {
     return m_chartType;
   }
   bool isChartDataLabels() const {
@@ -272,7 +274,7 @@ public:
   void setDetailLevel(DetailLevel::Type _detail) {
     m_detailLevel = _detail;
   }
-  void setChartType(EChartType _type) {
+  void setChartType(Chart::Type _type) {
     m_chartType = _type;
   }
   void setChartDataLabels(bool _f) {
@@ -614,7 +616,7 @@ private:
   /**
     * What format should be used to draw this report as a chart
     */
-  enum EChartType m_chartType;
+  Chart::Type m_chartType;
   /**
     * Whether the value of individual data points should be drawn on the chart
     */

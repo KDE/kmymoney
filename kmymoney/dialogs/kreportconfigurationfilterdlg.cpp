@@ -237,7 +237,7 @@ void KReportConfigurationFilterDlg::slotSearch()
   }
 
   if (m_tabChart) {
-    MyMoneyReport::EChartType ct[5] = { MyMoneyReport::eChartLine, MyMoneyReport::eChartBar, MyMoneyReport::eChartStackedBar, MyMoneyReport::eChartPie, MyMoneyReport::eChartRing };
+    MyMoneyReport::Chart::Type ct[5] = { MyMoneyReport::Chart::Line, MyMoneyReport::Chart::Bar, MyMoneyReport::Chart::StackedBar, MyMoneyReport::Chart::Pie, MyMoneyReport::Chart::Ring };
     m_currentState.setChartType(ct[m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_comboType")->currentIndex()]);
 
     m_currentState.setChartGridLines(m_tabChart->findChild<QCheckBox*>("m_checkGridLines")->isChecked());
@@ -446,17 +446,17 @@ void KReportConfigurationFilterDlg::slotReset()
   if (m_tabChart) {
     KMyMoneyGeneralCombo* combo = m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_comboType");
     switch (m_initialState.chartType()) {
-      case MyMoneyReport::eChartNone:
-        combo->setCurrentItem(MyMoneyReport::eChartLine);
+      case MyMoneyReport::Chart::None:
+        combo->setCurrentItem(MyMoneyReport::Chart::Line);
         break;
-      case MyMoneyReport::eChartLine:
-      case MyMoneyReport::eChartBar:
-      case MyMoneyReport::eChartStackedBar:
-      case MyMoneyReport::eChartPie:
-      case MyMoneyReport::eChartRing:
+      case MyMoneyReport::Chart::Line:
+      case MyMoneyReport::Chart::Bar:
+      case MyMoneyReport::Chart::StackedBar:
+      case MyMoneyReport::Chart::Pie:
+      case MyMoneyReport::Chart::Ring:
         combo->setCurrentItem(m_initialState.chartType());
         break;
-      case MyMoneyReport::eChartEnd:
+      case MyMoneyReport::Chart::End:
         throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
     m_tabChart->findChild<QCheckBox*>("m_checkGridLines")->setChecked(m_initialState.isChartGridLines());

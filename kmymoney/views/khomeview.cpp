@@ -306,7 +306,7 @@ void KHomeView::showNetWorthGraph()
   reportCfg.setChartByDefault(true);
   reportCfg.setChartGridLines(false);
   reportCfg.setChartDataLabels(false);
-  reportCfg.setChartType(MyMoneyReport::eChartLine);
+  reportCfg.setChartType(MyMoneyReport::Chart::Line);
   reportCfg.setIncludingSchedules(false);
   reportCfg.addAccountGroup(MyMoneyAccount::Asset);
   reportCfg.addAccountGroup(MyMoneyAccount::Liability);

@@ -41,7 +41,7 @@ const QStringList MyMoneyReport::Column::kTypeText = QString("none,months,bimont
 // and shift the bit for QueryColumns::end one position to the left
 const QStringList MyMoneyReport::QueryColumns::kText = QString("none,number,payee,category,tag,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
 const QStringList MyMoneyReport::DetailLevel::kText = QString("none,all,top,group,total,invalid").split(',');
-const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
+const QStringList MyMoneyReport::Chart::kText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
 
 // This should live in mymoney/mymoneytransactionfilter.h
 const QStringList kTypeText = QString("all,payments,deposits,transfers,none").split(',');
@@ -104,7 +104,7 @@ MyMoneyReport::MyMoneyReport() :
     m_queryColumns(QueryColumns::None),
     m_dateLock(userDefined),
     m_accountGroupFilter(false),
-    m_chartType(eChartLine),
+    m_chartType(Chart::Line),
     m_chartDataLabels(true),
     m_chartGridLines(true),
     m_chartByDefault(false),
@@ -150,7 +150,7 @@ MyMoneyReport::MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, Detai
     m_queryColumns(QueryColumns::None),
     m_dateLock(_dl),
     m_accountGroupFilter(false),
-    m_chartType(eChartLine),
+    m_chartType(Chart::Line),
     m_chartDataLabels(true),
     m_chartGridLines(true),
     m_chartByDefault(false),
@@ -423,11 +423,11 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   if (m_includeMovingAverage)
     e.setAttribute("movingaveragedays", m_movingAverageDays);
 
-  if (m_chartType < 0 || m_chartType >= kChartTypeText.size()) {
+  if (m_chartType < 0 || m_chartType >= Chart::kText.size()) {
     qDebug("m_chartType out of bounds with %d on report of type %d. Default to none.", m_chartType, m_reportType);
-    e.setAttribute("charttype", kChartTypeText[0]);
+    e.setAttribute("charttype", Chart::kText[0]);
   } else {
-    e.setAttribute("charttype", kChartTypeText[m_chartType]);
+    e.setAttribute("charttype", Chart::kText[m_chartType]);
   }
   e.setAttribute("chartdatalabels", m_chartDataLabels);
   e.setAttribute("chartgridlines", m_chartGridLines);
@@ -717,16 +717,16 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_movingAverageDays = e.attribute("movingaveragedays", "1").toUInt();
 
     //only load chart data if it is a pivot table
-    m_chartType = static_cast<EChartType>(0);
+    m_chartType = static_cast<Chart::Type>(0);
     if (m_reportType == Report::PivotTable) {
-      i = kChartTypeText.indexOf(e.attribute("charttype"));
+      i = Chart::kText.indexOf(e.attribute("charttype"));
 
       if (i >= 0)
-        m_chartType = static_cast<EChartType>(i);
+        m_chartType = static_cast<Chart::Type>(i);
 
       // if it is invalid, set to first type
-      if (m_chartType >= eChartEnd)
-        m_chartType = eChartLine;
+      if (m_chartType >= Chart::End)
+        m_chartType = Chart::Line;
 
       m_chartDataLabels = e.attribute("chartdatalabels", "1").toUInt();
       m_chartGridLines = e.attribute("chartgridlines", "1").toUInt();

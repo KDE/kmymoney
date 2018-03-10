@@ -79,11 +79,11 @@ kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *pare
   ui = new Ui::kMyMoneyReportConfigTabChartDecl;
   ui->setupUi(this);
 
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::eChartLine);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), MyMoneyReport::eChartBar);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::Chart::Line);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), MyMoneyReport::Chart::Bar);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::Chart::StackedBar);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::Chart::Pie);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::Chart::Ring);
 }
 
 kMyMoneyReportConfigTabChartDecl::~kMyMoneyReportConfigTabChartDecl()
