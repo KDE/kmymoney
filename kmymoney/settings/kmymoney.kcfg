@@ -188,6 +188,10 @@
    <label>Show number of not reconciled (not marked + cleared) transactions per account on the Homepage [!R]</label>
    <default>false</default>
   </entry>
+  <entry name="ShowDateOfLastReconciliation" type="Bool">
+   <label>Show date of last reconciliation on the Homepage</label>
+   <default>false</default>
+  </entry>
  </group>
  <group name="Color Options">
   <entry name="useCustomColors" type="Bool">

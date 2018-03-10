@@ -257,6 +257,11 @@ public:
       tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
     }
 
+    if (KMyMoneySettings::showDateOfLastReconciliation()) {
+      const auto lastReconciliationDate = acc.lastReconciliationDate().toString(Qt::SystemLocaleShortDate);
+      tmp += QString("<td>%1</d>").arg(lastReconciliationDate);
+    }
+
     //show account balance
     tmp += QString("<td class=\"right\">%1</td>").arg(showColoredAmount(amount, value.isNegative()));
 
@@ -953,6 +958,9 @@ public:
       if (KMyMoneySettings::showCountOfNotReconciledTransactions())
         m_html += QString("<td class=\"center\">!R</td>");
 
+      if (KMyMoneySettings::showDateOfLastReconciliation())
+        m_html += QString("<td>%1</td>").arg(i18n("Last Reconciled"));
+
       m_html += "<td width=\"25%\" class=\"right\">";
       m_html += i18n("Current Balance");
       m_html += "</td>";
@@ -979,6 +987,7 @@ public:
       if (KMyMoneySettings::showCountOfUnmarkedTransactions()) m_html += "<td></td>";
       if (KMyMoneySettings::showCountOfClearedTransactions()) m_html += "<td></td>";
       if (KMyMoneySettings::showCountOfNotReconciledTransactions()) m_html += "<td></td>";
+      if (KMyMoneySettings::showDateOfLastReconciliation()) m_html += "<td></td>";
       m_html += QString("<td class=\"right\"><b>%1</b></td></tr>").arg(showColoredAmount(amount, m_total.isNegative()));
       m_html += "</table></div></div>";
     }
@@ -1281,6 +1290,9 @@ public:
       if (KMyMoneySettings::showCountOfNotReconciledTransactions())
         m_html += "<td class=\"setcolor\">!R</td>";
 
+      if (KMyMoneySettings::showDateOfLastReconciliation())
+        m_html += "<td class=\"setcolor\">" + i18n("Last Reconciled") + "</td>";
+
       m_html += "<td width=\"15%\" class=\"right\">";
       m_html += i18n("Current Balance");
       m_html += "</td>";
@@ -1307,6 +1319,9 @@ public:
       if (KMyMoneySettings::showCountOfNotReconciledTransactions())
         m_html += "<td class=\"setcolor\">!R</td>";
 
+      if (KMyMoneySettings::showDateOfLastReconciliation())
+        m_html += "<td class=\"setcolor\">" + i18n("Last Reconciled") + "</td>";
+
       m_html += "<td width=\"15%\" class=\"right\">";
       m_html += i18n("Current Balance");
       m_html += "</td></tr>";
@@ -1316,6 +1331,7 @@ public:
       if (KMyMoneySettings::showCountOfUnmarkedTransactions()) placeHolder_Counts = "<td></td>";
       if (KMyMoneySettings::showCountOfClearedTransactions()) placeHolder_Counts += "<td></td>";
       if (KMyMoneySettings::showCountOfNotReconciledTransactions()) placeHolder_Counts += "<td></td>";
+      if (KMyMoneySettings::showDateOfLastReconciliation()) placeHolder_Counts += "<td></td>";
 
       //get asset and liability accounts
       QList<MyMoneyAccount>::const_iterator asset_it = assets.constBegin();
