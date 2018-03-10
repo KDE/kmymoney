@@ -254,9 +254,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   }
 
   switch (config.detailLevel()) {
-    case MyMoneyReport::eDetailNone:
-    case MyMoneyReport::eDetailEnd:
-    case MyMoneyReport::eDetailAll: {
+    case MyMoneyReport::DetailLevel::None:
+    case MyMoneyReport::DetailLevel::End:
+    case MyMoneyReport::DetailLevel::All: {
         int rowNum = 0;
 
         // iterate over outer groups
@@ -303,7 +303,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
 
-    case MyMoneyReport::eDetailTop: {
+    case MyMoneyReport::DetailLevel::Top: {
         int rowNum = 0;
 
         // iterate over outer groups
@@ -341,7 +341,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
 
-    case MyMoneyReport::eDetailGroup: {
+    case MyMoneyReport::DetailLevel::Group: {
         int rowNum = 0;
 
         // iterate over outer groups
@@ -397,7 +397,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
 
-    case MyMoneyReport::eDetailTotal: {
+    case MyMoneyReport::DetailLevel::Total: {
         int rowNum = 0;
 
         //iterate row types

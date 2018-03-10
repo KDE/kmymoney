@@ -1433,7 +1433,7 @@ QString PivotTable::renderCSV() const
       bool finishrow = true;
       QString finalRow;
       bool isUsed = false;
-      if (m_config_f.detailLevel() == MyMoneyReport::eDetailAll && ((*it_innergroup).size() > 1)) {
+      if (m_config_f.detailLevel() == MyMoneyReport::DetailLevel::All && ((*it_innergroup).size() > 1)) {
         // Print the individual rows
         result += innergroupdata;
 
@@ -1618,7 +1618,7 @@ QString PivotTable::renderBody() const
 
 
   // Skip the body of the report if the report only calls for totals to be shown
-  if (m_config_f.detailLevel() != MyMoneyReport::eDetailTotal) {
+  if (m_config_f.detailLevel() != MyMoneyReport::DetailLevel::Total) {
     //
     // Outer groups
     //
@@ -1651,7 +1651,7 @@ QString PivotTable::renderBody() const
       result += QString("<tr class=\"sectionheader\"><td class=\"left\"%1>%2</td></tr>\n").arg(colspan).arg((*it_outergroup).m_displayName);
 
       // Skip the inner groups if the report only calls for outer group totals to be shown
-      if (m_config_f.detailLevel() != MyMoneyReport::eDetailGroup) {
+      if (m_config_f.detailLevel() != MyMoneyReport::DetailLevel::Group) {
 
         //
         // Inner Groups
@@ -1733,7 +1733,7 @@ QString PivotTable::renderBody() const
           bool finishrow = true;
           QString finalRow;
           bool isUsed = false;
-          if (m_config_f.detailLevel() == MyMoneyReport::eDetailAll && ((*it_innergroup).size() > 1)) {
+          if (m_config_f.detailLevel() == MyMoneyReport::DetailLevel::All && ((*it_innergroup).size() > 1)) {
             // Print the individual rows
             result += innergroupdata;
 
@@ -1760,7 +1760,7 @@ QString PivotTable::renderBody() const
             isUsed |= !rowname.isClosed();
             finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3.0em;\">%5%6</td>")
                        .arg(rownum & 0x01 ? "even" : "odd")
-                       .arg(m_config_f.detailLevel() == MyMoneyReport::eDetailAll ? "id=\"solo\"" : "")
+                       .arg(m_config_f.detailLevel() == MyMoneyReport::DetailLevel::All ? "id=\"solo\"" : "")
                        .arg(rowname.hierarchyDepth() - 1)
                        .arg(rowname.name().replace(QRegExp(" "), "&nbsp;"))
                        .arg((m_config_f.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));

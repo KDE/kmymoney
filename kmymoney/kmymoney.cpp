@@ -4292,7 +4292,7 @@ void KMyMoneyApp::slotAccountTransactionReport()
       MyMoneyReport::Row::Account,
       MyMoneyReport::QueryColumns::Number | MyMoneyReport::QueryColumns::Payee | MyMoneyReport::QueryColumns::Category,
       MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
+      MyMoneyReport::DetailLevel::All,
       i18n("%1 YTD Account Transactions", d->m_selectedAccount.name()),
       i18n("Generated Report")
     );

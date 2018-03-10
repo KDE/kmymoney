@@ -455,7 +455,7 @@ void QueryTableTest::testInvestment()
       MyMoneyReport::Row::TopAccount,
       MyMoneyReport::QueryColumns::Action | MyMoneyReport::QueryColumns::Shares | MyMoneyReport::QueryColumns::Price,
       MyMoneyTransactionFilter::userDefined,
-      MyMoneyReport::eDetailAll,
+      MyMoneyReport::DetailLevel::All,
       i18n("Investment Transactions"),
       i18n("Test Report")
     );
@@ -547,7 +547,7 @@ void QueryTableTest::testInvestment()
       MyMoneyReport::Row::AccountByTopAccount,
       MyMoneyReport::QueryColumns::Performance,
       MyMoneyTransactionFilter::userDefined,
-      MyMoneyReport::eDetailAll,
+      MyMoneyReport::DetailLevel::All,
       i18n("Investment Performance by Account"),
       i18n("Test Report")
     );

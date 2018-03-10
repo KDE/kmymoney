@@ -96,15 +96,19 @@ public:
     static const QStringList kText;
   };
 
-  enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
+  class DetailLevel {
+  public:
+    enum Type { None = 0, All, Top, Group, Total, End };
+    static const QStringList kText;
+  };
+
   enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
 
-  static const QStringList kDetailLevelText;
   static const QStringList kChartTypeText;
 
 public:
   MyMoneyReport();
-  MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment);
+  MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, DetailLevel::Type _ss, const QString& _name, const QString& _comment);
   MyMoneyReport(const QString& id, const MyMoneyReport& right);
 
   /**
@@ -163,7 +167,7 @@ public:
   bool isLoansOnly() const {
     return m_loans;
   }
-  EDetailLevel detailLevel() const {
+  DetailLevel::Type detailLevel() const {
     return m_detailLevel;
   }
   EChartType chartType() const {
@@ -265,7 +269,7 @@ public:
   void setLoansOnly(bool _f) {
     m_loans = _f; if (_f) m_investments = false;
   }
-  void setDetailLevel(EDetailLevel _detail) {
+  void setDetailLevel(DetailLevel::Type _detail) {
     m_detailLevel = _detail;
   }
   void setChartType(EChartType _type) {
@@ -536,7 +540,7 @@ private:
   /**
     * How much detail to show in the accounts
     */
-  enum EDetailLevel m_detailLevel;
+  DetailLevel::Type m_detailLevel;
   /**
     * Whether to convert all currencies to the base currency of the file (true).
     * If this is false, it's up to the report generator to decide how to handle

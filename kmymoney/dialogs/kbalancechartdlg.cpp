@@ -76,7 +76,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
                               MyMoneyReport::Row::AssetLiability,
                               MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::last3ToNext3Months,
-                              MyMoneyReport::eDetailTotal,
+                              MyMoneyReport::DetailLevel::Total,
                               i18n("%1 Balance History", account.name()),
                               i18n("Generated Report")
                             );

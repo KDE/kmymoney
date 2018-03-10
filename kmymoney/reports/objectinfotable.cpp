@@ -109,7 +109,7 @@ void ObjectInfoTable::init()
 
   switch (m_config.rowType()) {
     case MyMoneyReport::Row::Schedule:
-      if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
+      if (m_config.detailLevel() == MyMoneyReport::DetailLevel::All) {
         m_columns = "name,payee,paymenttype,occurence,nextduedate,category"; // krazy:exclude=spelling
       } else {
         m_columns = "name,payee,paymenttype,occurence,nextduedate"; // krazy:exclude=spelling
@@ -183,7 +183,7 @@ void ObjectInfoTable::constructScheduleTable()
       //the text matches the main split
       bool transaction_text = m_config.match(&split);
 
-      if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
+      if (m_config.detailLevel() == MyMoneyReport::DetailLevel::All) {
         //get the information for all splits
         QList<MyMoneySplit> splits = transaction.splits();
         QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();

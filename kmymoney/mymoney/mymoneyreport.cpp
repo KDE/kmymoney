@@ -40,7 +40,7 @@ const QStringList MyMoneyReport::Column::kTypeText = QString("none,months,bimont
 // if you add names here, don't forget to update the bitmap for QueryColumns::Type
 // and shift the bit for QueryColumns::end one position to the left
 const QStringList MyMoneyReport::QueryColumns::kText = QString("none,number,payee,category,tag,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
-const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(',');
+const QStringList MyMoneyReport::DetailLevel::kText = QString("none,all,top,group,total,invalid").split(',');
 const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
 
 // This should live in mymoney/mymoneytransactionfilter.h
@@ -91,7 +91,7 @@ QString MyMoneyReport::Report::toString(Type type)
 
 MyMoneyReport::MyMoneyReport() :
     m_name("Unconfigured Pivot Table Report"),
-    m_detailLevel(eDetailNone),
+    m_detailLevel(DetailLevel::None),
     m_convertCurrency(true),
     m_favorite(false),
     m_tax(false),
@@ -134,7 +134,7 @@ MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
   setId(id);
 }
 
-MyMoneyReport::MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment) :
+MyMoneyReport::MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, DetailLevel::Type _ss, const QString& _name, const QString& _comment) :
     m_name(_name),
     m_comment(_comment),
     m_detailLevel(_ss),
@@ -437,7 +437,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
 
   if (m_reportType == Report::PivotTable) {
     e.setAttribute("type", "pivottable 1.15");
-    e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
+    e.setAttribute("detail", DetailLevel::kText[m_detailLevel]);
     e.setAttribute("columntype", Column::kTypeText[m_columnType]);
     e.setAttribute("showrowtotals", m_showRowTotals);
   } else if (m_reportType == Report::QueryTable) {
@@ -456,7 +456,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     e.setAttribute("querycolumns", columns.join(","));
   } else if (m_reportType == Report::InfoTable) {
     e.setAttribute("type", "infotable 1.0");
-    e.setAttribute("detail", kDetailLevelText[m_detailLevel]);
+    e.setAttribute("detail", DetailLevel::kText[m_detailLevel]);
     e.setAttribute("showrowtotals", m_showRowTotals);
   }
 
@@ -684,15 +684,15 @@ bool MyMoneyReport::read(const QDomElement& e)
 
     //check for reports with older settings which didn't have the detail attribute
     if (e.hasAttribute("detail")) {
-      i = kDetailLevelText.indexOf(e.attribute("detail", "all"));
+      i = DetailLevel::kText.indexOf(e.attribute("detail", "all"));
       if (i != -1)
-        m_detailLevel = static_cast<EDetailLevel>(i);
+        m_detailLevel = static_cast<DetailLevel::Type>(i);
     } else if (e.attribute("showsubaccounts", "0").toUInt()) {
       //set to show all accounts
-      m_detailLevel = eDetailAll;
+      m_detailLevel = DetailLevel::All;
     } else {
       //set to show the top level account instead
-      m_detailLevel = eDetailTop;
+      m_detailLevel = DetailLevel::Top;
     }
 
     m_convertCurrency = e.attribute("convertcurrency", "1").toUInt();

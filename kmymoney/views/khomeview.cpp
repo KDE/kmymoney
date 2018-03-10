@@ -299,7 +299,7 @@ void KHomeView::showNetWorthGraph()
                               MyMoneyReport::Row::AssetLiability,
                               MyMoneyReport::Column::Months,
                               MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
-                              MyMoneyReport::eDetailTotal,
+                              MyMoneyReport::DetailLevel::Total,
                               i18n("Net Worth Forecast"),
                               i18n("Generated Report"));
 
@@ -1456,7 +1456,7 @@ void KHomeView::showBudget()
                                 MyMoneyReport::Row::BudgetActual,
                                 MyMoneyReport::Column::Months,
                                 MyMoneyTransactionFilter::currentMonth,
-                                MyMoneyReport::eDetailAll,
+                                MyMoneyReport::DetailLevel::All,
                                 i18n("Monthly Budgeted vs. Actual"),
                                 i18n("Generated Report"));
 

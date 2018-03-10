@@ -156,7 +156,7 @@ void KReportConfigurationFilterDlg::slotSearch()
   m_currentState.setSkipZero(m_tab1->findChild<QCheckBox*>("m_skipZero")->isChecked());
 
   if (m_tab2) {
-    MyMoneyReport::EDetailLevel dl[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
+    MyMoneyReport::DetailLevel::Type dl[4] = { MyMoneyReport::DetailLevel::All, MyMoneyReport::DetailLevel::Top, MyMoneyReport::DetailLevel::Group, MyMoneyReport::DetailLevel::Total };
 
     m_currentState.setDetailLevel(dl[m_tab2->findChild<KComboBox*>("m_comboDetail")->currentIndex()]);
 
@@ -233,7 +233,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     m_currentState.setLoansOnly(m_tab3->findChild<QCheckBox*>("m_checkLoans")->isChecked());
 
     m_currentState.setDetailLevel(m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->isChecked() ?
-                                  MyMoneyReport::eDetailNone : MyMoneyReport::eDetailAll);
+                                  MyMoneyReport::DetailLevel::None : MyMoneyReport::DetailLevel::All);
   }
 
   if (m_tabChart) {
@@ -300,18 +300,18 @@ void KReportConfigurationFilterDlg::slotReset()
   if (m_tab2) {
     KComboBox *combo = m_tab2->findChild<KComboBox*>("m_comboDetail");
     switch (m_initialState.detailLevel()) {
-      case MyMoneyReport::eDetailNone:
-      case MyMoneyReport::eDetailEnd:
-      case MyMoneyReport::eDetailAll:
+      case MyMoneyReport::DetailLevel::None:
+      case MyMoneyReport::DetailLevel::End:
+      case MyMoneyReport::DetailLevel::All:
         combo->setCurrentItem(i18nc("All accounts", "All"), false);
         break;
-      case MyMoneyReport::eDetailTop:
+      case MyMoneyReport::DetailLevel::Top:
         combo->setCurrentItem(i18n("Top-Level"), false);
         break;
-      case MyMoneyReport::eDetailGroup:
+      case MyMoneyReport::DetailLevel::Group:
         combo->setCurrentItem(i18n("Groups"), false);
         break;
-      case MyMoneyReport::eDetailTotal:
+      case MyMoneyReport::DetailLevel::Total:
         combo->setCurrentItem(i18n("Totals"), false);
         break;
     }
@@ -440,7 +440,7 @@ void KReportConfigurationFilterDlg::slotReset()
     m_tab3->findChild<QCheckBox*>("m_checkLoans")->setChecked(m_initialState.isLoansOnly());
 
     m_tab3->findChild<QCheckBox*>("m_checkHideSplitDetails")->setChecked
-    (m_initialState.detailLevel() == MyMoneyReport::eDetailNone);
+    (m_initialState.detailLevel() == MyMoneyReport::DetailLevel::None);
   }
 
   if (m_tabChart) {

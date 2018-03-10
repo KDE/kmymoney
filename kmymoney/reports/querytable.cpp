@@ -424,18 +424,18 @@ void QueryTable::constructTransactionTable()
     case MyMoneyReport::Row::Payee:
       use_summary = false;
       use_transfers = false;
-      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      hide_details = (m_config.detailLevel() == MyMoneyReport::DetailLevel::None);
       break;
     case MyMoneyReport::Row::Tag:
       use_summary = false;
       use_transfers = false;
-      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      hide_details = (m_config.detailLevel() == MyMoneyReport::DetailLevel::None);
       tag_special_case = true;
       break;
     default:
       use_summary = true;
       use_transfers = true;
-      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      hide_details = (m_config.detailLevel() == MyMoneyReport::DetailLevel::None);
       break;
   }
 

@@ -1005,7 +1005,7 @@ void KForecastView::itemCollapsed(QTreeWidgetItem *item)
 
 void KForecastView::loadChartView()
 {
-  MyMoneyReport::EDetailLevel detailLevel[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
+  MyMoneyReport::DetailLevel::Type detailLevel[4] = { MyMoneyReport::DetailLevel::All, MyMoneyReport::DetailLevel::Top, MyMoneyReport::DetailLevel::Group, MyMoneyReport::DetailLevel::Total };
 
   MyMoneyReport reportCfg = MyMoneyReport(
                               MyMoneyReport::Row::AssetLiability,
