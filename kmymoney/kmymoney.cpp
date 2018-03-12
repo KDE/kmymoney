@@ -1657,7 +1657,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   {
     #ifdef Q_OS_WIN
-    QString themeName = QLatin1Literal("system")                        // using QIcon::setThemeName on Craft build system causes icons to disappear
+    QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
     #else
     QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
     #endif
