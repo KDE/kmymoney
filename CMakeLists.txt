@@ -60,9 +60,10 @@ find_package(KF5 5.2 REQUIRED
 )
 find_package(LibAlkimia5 7.0.0 REQUIRED)
 
-if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-  include_directories(${GMP_INCLUDE_DIR})
-endif()
+# Recent changes to LibAlkimia should allow us to remove this construct
+#if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+#  include_directories(${GMP_INCLUDE_DIR})
+#endif()
 
 find_package(KChart 2.6.0 REQUIRED)
 
