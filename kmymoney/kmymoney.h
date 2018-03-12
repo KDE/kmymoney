@@ -636,6 +636,12 @@ Q_SIGNALS:
   void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
   /**
+   * This signal is emitted if a specific transaction with @a transactionId in account
+   * @a accountId is selected
+   */
+  void transactionSelected(const QString accountId, const QString& transactionId);
+
+  /**
     * This signal is sent out, when the user presses Ctrl+A or activates
     * the Select all transactions action.
     */

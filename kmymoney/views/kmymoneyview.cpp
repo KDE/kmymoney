@@ -248,6 +248,8 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(m_ledgerView, &KGlobalLedgerView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
   connect(m_homeView, &KHomeView::ledgerSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
 
+  connect(kmymoney, &KMyMoneyApp::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+
 #ifdef ENABLE_UNFINISHEDFEATURES
   SimpleLedgerView* view = new SimpleLedgerView(kmymoney, this);
   KPageWidgetItem* frame = m_model->addPage(view, i18n("New ledger"));

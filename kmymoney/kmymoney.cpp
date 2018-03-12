@@ -2187,7 +2187,7 @@ void KMyMoneyApp::slotFindTransaction()
     d->m_searchDlg = new KFindTransactionDlg(this);
     connect(d->m_searchDlg, SIGNAL(destroyed()), this, SLOT(slotCloseSearchDialog()));
     connect(d->m_searchDlg, SIGNAL(transactionSelected(QString,QString)),
-            d->m_myMoneyView, SLOT(slotLedgerSelected(QString,QString)));
+            this, SIGNAL(transactionSelected(QString,QString)));
   }
   d->m_searchDlg->show();
   d->m_searchDlg->raise();
