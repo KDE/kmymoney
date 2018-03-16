@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "onlinejobadministration.h"
 #include "knewaccountwizard.h"
 #include "kbalancechartdlg.h"
 #include "kmymoneyutils.h"
@@ -52,6 +53,10 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(pActions[eMenu::Action::CloseAccount],        &QAction::triggered, this, &KAccountsView::slotCloseAccount);
   connect(pActions[eMenu::Action::ReopenAccount],       &QAction::triggered, this, &KAccountsView::slotReopenAccount);
   connect(pActions[eMenu::Action::ChartAccountBalance], &QAction::triggered, this, &KAccountsView::slotChartAccountBalance);
+  connect(pActions[eMenu::Action::MapOnlineAccount],    &QAction::triggered, this, &KAccountsView::slotAccountMapOnline);
+  connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
+  connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
+  connect(pActions[eMenu::Action::UpdateAllAccounts],   &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnlineAll);
 }
 
 KAccountsView::~KAccountsView()
@@ -107,6 +112,28 @@ void KAccountsView::showEvent(QShowEvent * event)
 void KAccountsView::updateActions(const MyMoneyObject& obj)
 {
   Q_D(KAccountsView);
+
+  const auto file = MyMoneyFile::instance();
+
+  if (d->m_onlinePlugins) {
+    QList<MyMoneyAccount> accList;
+    file->accountList(accList);
+    QList<MyMoneyAccount>::const_iterator it_a;
+    auto it_p = d->m_onlinePlugins->constEnd();
+    for (it_a = accList.constBegin(); (it_p == d->m_onlinePlugins->constEnd()) && (it_a != accList.constEnd()); ++it_a) {
+      if ((*it_a).hasOnlineMapping()) {
+        // check if provider is available
+        it_p = d->m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+        if (it_p != d->m_onlinePlugins->constEnd()) {
+          QStringList protocols;
+          (*it_p)->protocols(protocols);
+          if (!protocols.isEmpty())
+            pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(true);
+        }
+      }
+    }
+  }
+
   if (typeid(obj) != typeid(MyMoneyAccount) &&
       (obj.id().isEmpty() && d->m_currentAccount.id().isEmpty())) // do not disable actions that were already disabled)
     return;
@@ -125,7 +152,6 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
 
   pActions[eMenu::Action::NewAccount]->setEnabled(true);
 
-  const auto file = MyMoneyFile::instance();
   if (acc.id().isEmpty()) {
     d->m_currentAccount = MyMoneyAccount();
     return;
@@ -343,4 +369,173 @@ void KAccountsView::slotNewCategory()
 void KAccountsView::slotNewPayee(const QString& nameBase, QString& id)
 {
   KMyMoneyUtils::newPayee(nameBase, id);
+}
+
+void KAccountsView::slotAccountUnmapOnline()
+{
+  Q_D(KAccountsView);
+  // no account selected
+  if (d->m_currentAccount.id().isEmpty())
+    return;
+
+  // not a mapped account
+  if (!d->m_currentAccount.hasOnlineMapping())
+    return;
+
+  if (KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.", d->m_currentAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
+    MyMoneyFileTransaction ft;
+    try {
+      d->m_currentAccount.setOnlineBankingSettings(MyMoneyKeyValueContainer());
+      // delete the kvp that is used in MyMoneyStatementReader too
+      // we should really get rid of it, but since I don't know what it
+      // is good for, I'll keep it around. (ipwizard)
+      d->m_currentAccount.deletePair("StatementKey");
+      MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
+      ft.commit();
+      // The mapping could disable the online task system
+      onlineJobAdministration::instance()->updateOnlineTaskProperties();
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e.what()));
+    }
+  }
+  updateActions(d->m_currentAccount);
+}
+
+void KAccountsView::slotAccountMapOnline()
+{
+  Q_D(KAccountsView);
+  // no account selected
+  if (d->m_currentAccount.id().isEmpty())
+    return;
+
+  // already an account mapped
+  if (d->m_currentAccount.hasOnlineMapping())
+    return;
+
+  // check if user tries to map a brokerageAccount
+  if (d->m_currentAccount.name().contains(i18n(" (Brokerage)"))) {
+    if (KMessageBox::warningContinueCancel(this, i18n("You try to map a brokerage account to an online account. This is usually not advisable. In general, the investment account should be mapped to the online account. Please cancel if you intended to map the investment account, continue otherwise"), i18n("Mapping brokerage account")) == KMessageBox::Cancel) {
+      return;
+    }
+  }
+  if (!d->m_onlinePlugins)
+    return;
+
+  // if we have more than one provider let the user select the current provider
+  QString provider;
+  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+  switch (d->m_onlinePlugins->count()) {
+    case 0:
+      break;
+    case 1:
+      provider = d->m_onlinePlugins->begin().key();
+      break;
+    default: {
+        QMenu popup(this);
+        popup.setTitle(i18n("Select online banking plugin"));
+
+        // Populate the pick list with all the provider
+        for (it_p = d->m_onlinePlugins->constBegin(); it_p != d->m_onlinePlugins->constEnd(); ++it_p) {
+          popup.addAction(it_p.key())->setData(it_p.key());
+        }
+
+        QAction *item = popup.actions()[0];
+        if (item) {
+          popup.setActiveAction(item);
+        }
+
+        // cancelled
+        if ((item = popup.exec(QCursor::pos(), item)) == 0) {
+          return;
+        }
+
+        provider = item->data().toString();
+      }
+      break;
+  }
+
+  if (provider.isEmpty())
+    return;
+
+  // find the provider
+  it_p = d->m_onlinePlugins->constFind(provider.toLower());
+  if (it_p != d->m_onlinePlugins->constEnd()) {
+    // plugin found, call it
+    MyMoneyKeyValueContainer settings;
+    if ((*it_p)->mapAccount(d->m_currentAccount, settings)) {
+      settings["provider"] = provider.toLower();
+      MyMoneyAccount acc(d->m_currentAccount);
+      acc.setOnlineBankingSettings(settings);
+      MyMoneyFileTransaction ft;
+      try {
+        MyMoneyFile::instance()->modifyAccount(acc);
+        ft.commit();
+        // The mapping could enable the online task system
+        onlineJobAdministration::instance()->updateOnlineTaskProperties();
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(this, i18n("Unable to map account to online account: %1", e.what()));
+      }
+    }
+  }
+  updateActions(d->m_currentAccount);
+}
+
+void KAccountsView::slotAccountUpdateOnlineAll()
+{
+  Q_D(KAccountsView);
+  QList<MyMoneyAccount> accList;
+  MyMoneyFile::instance()->accountList(accList);
+  QList<MyMoneyAccount>::iterator it_a;
+  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+
+  // remove all those from the list, that don't have a 'provider' or the
+  // provider is not currently present
+  for (it_a = accList.begin(); it_a != accList.end();) {
+    if (!(*it_a).hasOnlineMapping()
+        || d->m_onlinePlugins->find((*it_a).onlineBankingSettings().value("provider").toLower()) == d->m_onlinePlugins->end()) {
+      it_a = accList.erase(it_a);
+    } else
+      ++it_a;
+  }
+  const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
+  for (const auto& a : disabledActions)
+    pActions[a]->setEnabled(false);
+
+  // now work on the remaining list of accounts
+  int cnt = accList.count() - 1;
+  for (it_a = accList.begin(); it_a != accList.end(); ++it_a) {
+    it_p = d->m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+    (*it_p)->updateAccount(*it_a, cnt != 0);
+    --cnt;
+  }
+
+  // re-enable the disabled actions
+  updateActions(d->m_currentAccount);
+}
+
+void KAccountsView::slotAccountUpdateOnline()
+{
+  Q_D(KAccountsView);
+  // no account selected
+  if (d->m_currentAccount.id().isEmpty())
+    return;
+
+  // no online account mapped
+  if (!d->m_currentAccount.hasOnlineMapping())
+    return;
+
+  const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
+  for (const auto& a : disabledActions)
+    pActions[a]->setEnabled(false);
+
+  // find the provider
+  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+  it_p = d->m_onlinePlugins->constFind(d->m_currentAccount.onlineBankingSettings().value("provider").toLower());
+  if (it_p != d->m_onlinePlugins->constEnd()) {
+    // plugin found, call it
+    (*it_p)->updateAccount(d->m_currentAccount);
+  }
+
+  // re-enable the disabled actions
+  updateActions(d->m_currentAccount);
 }

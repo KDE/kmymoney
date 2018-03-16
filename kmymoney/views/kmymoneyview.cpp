@@ -855,7 +855,6 @@ void KMyMoneyView::connectView(const View view)
 
     case View::Investments:
       disconnect(m_investmentView, &KInvestmentView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_investmentView, &KInvestmentView::accountSelected, kmymoney, &KMyMoneyApp::slotSelectAccount);
 
       connect(m_investmentView, &KInvestmentView::objectSelected,       this, &KMyMoneyView::slotObjectSelected);
       connect(m_investmentView, &KInvestmentView::contextMenuRequested, this, &KMyMoneyView::slotContextMenuRequested);
@@ -900,7 +899,6 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
   // carrying some slots over to views isn't easy for all slots...
   // ...so calls to kmymoney still must be here
   if (typeid(obj) == typeid(MyMoneyAccount)) {
-    kmymoney->slotSelectAccount(obj);
     m_investmentView->updateActions(obj);
     m_categoriesView->updateActions(obj);
     m_accountsView->updateActions(obj);
@@ -918,7 +916,6 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
     m_institutionsView->updateActions(obj);
   } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-    kmymoney->slotUpdateActions();
     m_scheduledView->updateActions(obj);
   }
 }

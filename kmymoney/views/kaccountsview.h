@@ -83,6 +83,10 @@ private Q_SLOTS:
   void slotChartAccountBalance();
   void slotNewCategory();
   void slotNewPayee(const QString& nameBase, QString& id);
+  void slotAccountMapOnline();
+  void slotAccountUnmapOnline();
+  void slotAccountUpdateOnline();
+  void slotAccountUpdateOnlineAll();
 };
 
 #endif

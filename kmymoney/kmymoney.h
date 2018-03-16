@@ -254,11 +254,6 @@ protected Q_SLOTS:
     */
   void slotScheduleNew(const MyMoneyTransaction& t, eMyMoney::Schedule::Occurrence occurrence = eMyMoney::Schedule::Occurrence::Monthly);
 
-  void slotAccountMapOnline();
-  void slotAccountUnmapOnline();
-  void slotAccountUpdateOnline();
-  void slotAccountUpdateOnlineAll();
-
   void slotStatusProgressDone();
 
 public:
@@ -552,8 +547,6 @@ public Q_SLOTS:
     */
   void slotEquityPriceUpdate();
 
-  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);
-
   /**
     * This slot reparents account @p src to be a child of account @p dest
     *
@@ -598,8 +591,6 @@ public Q_SLOTS:
   void slotToolsStartKCalc();
 
   void slotResetSelections();
-
-  void slotSelectAccount(const MyMoneyObject& account);
 
   /**
     * Brings up the new account wizard and saves the information.
@@ -668,14 +659,6 @@ Q_SIGNALS:
     * the Select all transactions action.
     */
   void selectAllTransactions();
-
-  /**
-    * This signal is emitted when a new account has been selected by
-    * the GUI. If no account is selected or the selection is removed,
-    * @a account is identical to MyMoneyAccount(). This signal is used
-    * by plugins to get information about changes.
-    */
-  void accountSelected(const MyMoneyAccount& account);
 
   /**
     * This signal is emitted when a new institution has been selected by

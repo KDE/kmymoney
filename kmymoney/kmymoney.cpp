@@ -220,7 +220,6 @@ public:
       m_moveToAccountSelector(0),
       m_statementXMLindex(0),
       m_balanceWarning(0),
-      m_collectingStatements(false),
       m_backupResult(0),
       m_backupMount(0),
       m_ignoreBackupExitCode(false),
@@ -228,7 +227,6 @@ public:
       m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
       m_myMoneyView(0),
       m_progressBar(0),
-      m_smtReader(0),
       m_searchDlg(0),
       m_autoSaveTimer(0),
       m_progressTimer(0),
@@ -270,10 +268,6 @@ public:
   KMyMoneyAccountSelector*      m_moveToAccountSelector;
   int                           m_statementXMLindex;
   KBalanceWarning*              m_balanceWarning;
-
-  bool                          m_collectingStatements;
-  QStringList                   m_statementResults;
-  QString                       m_lastPayeeEnteredId;
 
   /** the configuration object of the application */
   KSharedConfigPtr m_config;
@@ -330,15 +324,9 @@ public:
   QTime         m_lastUpdate;
   QLabel*       m_statusLabel;
 
-  MyMoneyStatementReader* m_smtReader;
   // allows multiple imports to be launched trough web connect and to be executed sequentially
   QQueue<QString> m_importUrlsQueue;
   KFindTransactionDlg* m_searchDlg;
-
-  MyMoneyAccount        m_selectedAccount;
-  MyMoneyAccount        m_reconciliationAccount;
-  MyMoneySchedule       m_selectedSchedule;
-  KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
   // This is Auto Saving related
   bool                  m_autoSaveEnabled;
@@ -2041,13 +2029,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::ViewHideReconciled,            &KMyMoneyApp::slotHideReconciledTransactions},
       {Action::ViewHideCategories,            &KMyMoneyApp::slotHideUnusedCategories},
       {Action::ViewShowAll,                   &KMyMoneyApp::slotShowAllAccounts},
-      // *****************
-      // The accounts menu
-      // *****************
-      {Action::MapOnlineAccount,              &KMyMoneyApp::slotAccountMapOnline},
-      {Action::UnmapOnlineAccount,            &KMyMoneyApp::slotAccountUnmapOnline},
-      {Action::UpdateAccount,                 &KMyMoneyApp::slotAccountUpdateOnline},
-      {Action::UpdateAllAccounts,             &KMyMoneyApp::slotAccountUpdateOnlineAll},
       // **************
       // The tools menu
       // **************
@@ -3750,18 +3731,6 @@ void KMyMoneyApp::slotUpdateActions()
   auto aC = actionCollection();
 
   // *************
-  // Disabling actions to be disabled at this point
-  // *************
-  {
-    static const QVector<Action> disabledActions {
-      Action::UpdateAllAccounts
-    };
-
-    for (const auto& a : disabledActions)
-      pActions[a]->setEnabled(false);
-  }
-
-  // *************
   // Disabling actions based on conditions
   // *************
   {
@@ -3802,53 +3771,16 @@ void KMyMoneyApp::slotUpdateActions()
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(fileOpen);
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(fileOpen);
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Print)))->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
-
-  // *************
-  // Enabling actions based on conditions
-  // *************
-  QList<MyMoneyAccount> accList;
-  file->accountList(accList);
-  QList<MyMoneyAccount>::const_iterator it_a;
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_plugins.online.constEnd();
-  for (it_a = accList.constBegin(); (it_p == d->m_plugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
-    if ((*it_a).hasOnlineMapping()) {
-      // check if provider is available
-      it_p = d->m_plugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-      if (it_p != d->m_plugins.online.constEnd()) {
-        QStringList protocols;
-        (*it_p)->protocols(protocols);
-        if (protocols.count() > 0) {
-          pActions[Action::UpdateAllAccounts]->setEnabled(true);
-        }
-      }
-    }
-  }
 }
 
 void KMyMoneyApp::slotResetSelections()
 {
-  slotSelectAccount(MyMoneyAccount());
   d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
   d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
   d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
   d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
   slotUpdateActions();
-}
-
-void KMyMoneyApp::slotSelectAccount(const MyMoneyObject& obj)
-{
-  if (typeid(obj) != typeid(MyMoneyAccount))
-    return;
-
-  d->m_selectedAccount = MyMoneyAccount();
-  const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(obj);
-  if (!acc.isInvest())
-    d->m_selectedAccount = acc;
-
-  // qDebug("slotSelectAccount('%s')", d->m_selectedAccount.name().data());
-  slotUpdateActions();
-  emit accountSelected(d->m_selectedAccount);
 }
 
 void KMyMoneyApp::slotDataChanged()
@@ -4260,199 +4192,6 @@ void KMyMoneyApp::slotDateChanged()
   d->m_myMoneyView->slotRefreshViews();
 }
 
-void KMyMoneyApp::slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action)
-{
-  d->m_selectedAccount = acc;
-  switch (action) {
-    case eMenu::Action::UnmapOnlineAccount:
-      slotAccountUnmapOnline();
-      break;
-    case eMenu::Action::MapOnlineAccount:
-      slotAccountMapOnline();
-      break;
-    case eMenu::Action::UpdateAccount:
-      slotAccountUpdateOnline();
-      break;
-    case eMenu::Action::UpdateAllAccounts:
-      slotAccountUpdateOnlineAll();
-      break;
-    default:
-      break;
-  }
-}
-
-void KMyMoneyApp::slotAccountUnmapOnline()
-{
-  // no account selected
-  if (d->m_selectedAccount.id().isEmpty())
-    return;
-
-  // not a mapped account
-  if (!d->m_selectedAccount.hasOnlineMapping())
-    return;
-
-  if (KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.", d->m_selectedAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
-    MyMoneyFileTransaction ft;
-    try {
-      d->m_selectedAccount.setOnlineBankingSettings(MyMoneyKeyValueContainer());
-      // delete the kvp that is used in MyMoneyStatementReader too
-      // we should really get rid of it, but since I don't know what it
-      // is good for, I'll keep it around. (ipwizard)
-      d->m_selectedAccount.deletePair("StatementKey");
-      MyMoneyFile::instance()->modifyAccount(d->m_selectedAccount);
-      ft.commit();
-      // The mapping could disable the online task system
-      onlineJobAdministration::instance()->updateOnlineTaskProperties();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e.what()));
-    }
-  }
-}
-
-void KMyMoneyApp::slotAccountMapOnline()
-{
-  // no account selected
-  if (d->m_selectedAccount.id().isEmpty())
-    return;
-
-  // already an account mapped
-  if (d->m_selectedAccount.hasOnlineMapping())
-    return;
-
-  // check if user tries to map a brokerageAccount
-  if (d->m_selectedAccount.name().contains(i18n(" (Brokerage)"))) {
-    if (KMessageBox::warningContinueCancel(this, i18n("You try to map a brokerage account to an online account. This is usually not advisable. In general, the investment account should be mapped to the online account. Please cancel if you intended to map the investment account, continue otherwise"), i18n("Mapping brokerage account")) == KMessageBox::Cancel) {
-      return;
-    }
-  }
-
-  // if we have more than one provider let the user select the current provider
-  QString provider;
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  switch (d->m_plugins.online.count()) {
-    case 0:
-      break;
-    case 1:
-      provider = d->m_plugins.online.begin().key();
-      break;
-    default: {
-        QMenu popup(this);
-        popup.setTitle(i18n("Select online banking plugin"));
-
-        // Populate the pick list with all the provider
-        for (it_p = d->m_plugins.online.constBegin(); it_p != d->m_plugins.online.constEnd(); ++it_p) {
-          popup.addAction(it_p.key())->setData(it_p.key());
-        }
-
-        QAction *item = popup.actions()[0];
-        if (item) {
-          popup.setActiveAction(item);
-        }
-
-        // cancelled
-        if ((item = popup.exec(QCursor::pos(), item)) == 0) {
-          return;
-        }
-
-        provider = item->data().toString();
-      }
-      break;
-  }
-
-  if (provider.isEmpty())
-    return;
-
-  // find the provider
-  it_p = d->m_plugins.online.constFind(provider.toLower());
-  if (it_p != d->m_plugins.online.constEnd()) {
-    // plugin found, call it
-    MyMoneyKeyValueContainer settings;
-    if ((*it_p)->mapAccount(d->m_selectedAccount, settings)) {
-      settings["provider"] = provider.toLower();
-      MyMoneyAccount acc(d->m_selectedAccount);
-      acc.setOnlineBankingSettings(settings);
-      MyMoneyFileTransaction ft;
-      try {
-        MyMoneyFile::instance()->modifyAccount(acc);
-        ft.commit();
-        // The mapping could enable the online task system
-        onlineJobAdministration::instance()->updateOnlineTaskProperties();
-      } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Unable to map account to online account: %1", e.what()));
-      }
-    }
-  }
-}
-
-void KMyMoneyApp::slotAccountUpdateOnlineAll()
-{
-  QList<MyMoneyAccount> accList;
-  MyMoneyFile::instance()->accountList(accList);
-  QList<MyMoneyAccount>::iterator it_a;
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  d->m_statementResults.clear();
-  d->m_collectingStatements = true;
-
-  // remove all those from the list, that don't have a 'provider' or the
-  // provider is not currently present
-  for (it_a = accList.begin(); it_a != accList.end();) {
-    if (!(*it_a).hasOnlineMapping()
-        || d->m_plugins.online.find((*it_a).onlineBankingSettings().value("provider").toLower()) == d->m_plugins.online.end()) {
-      it_a = accList.erase(it_a);
-    } else
-      ++it_a;
-  }
-  const QVector<Action> disabledActions {Action::UpdateAccount, Action::UpdateAllAccounts};
-  for (const auto& a : disabledActions)
-    pActions[a]->setEnabled(false);
-
-  // now work on the remaining list of accounts
-  int cnt = accList.count() - 1;
-  for (it_a = accList.begin(); it_a != accList.end(); ++it_a) {
-    it_p = d->m_plugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-    (*it_p)->updateAccount(*it_a, cnt != 0);
-    --cnt;
-  }
-
-  d->m_collectingStatements = false;
-  if (!d->m_statementResults.isEmpty())
-    KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
-
-  // re-enable the disabled actions
-  slotUpdateActions();
-}
-
-void KMyMoneyApp::slotAccountUpdateOnline()
-{
-  // no account selected
-  if (d->m_selectedAccount.id().isEmpty())
-    return;
-
-  // no online account mapped
-  if (!d->m_selectedAccount.hasOnlineMapping())
-    return;
-
-  const QVector<Action> disabledActions {Action::UpdateAccount, Action::UpdateAllAccounts};
-  for (const auto& a : disabledActions)
-    pActions[a]->setEnabled(false);
-
-  // find the provider
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  it_p = d->m_plugins.online.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider").toLower());
-  if (it_p != d->m_plugins.online.constEnd()) {
-    // plugin found, call it
-    d->m_collectingStatements = true;
-    d->m_statementResults.clear();
-    (*it_p)->updateAccount(d->m_selectedAccount);
-    d->m_collectingStatements = false;
-    if (!d->m_statementResults.isEmpty())
-      KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
-  }
-
-  // re-enable the disabled actions
-  slotUpdateActions();
-}
-
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
 #ifdef KF5Holidays_FOUND
@@ -4551,15 +4290,12 @@ void KMyMoneyApp::Private::unlinkStatementXML()
 
 void KMyMoneyApp::Private::closeFile()
 {
-  q->slotSelectAccount(MyMoneyAccount());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   q->d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
   q->d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
-//  q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
 
-  m_reconciliationAccount = MyMoneyAccount();
   m_myMoneyView->finishReconciliation(MyMoneyAccount());
 
   m_myMoneyView->slotFileClosed();
