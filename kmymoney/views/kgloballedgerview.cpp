@@ -53,7 +53,6 @@
 #include "kmymoneysettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
-#include "kmymoneysettings.h"
 #include "accountsmodel.h"
 #include "models.h"
 #include "mymoneyschedule.h"

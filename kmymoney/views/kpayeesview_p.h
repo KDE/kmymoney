@@ -547,7 +547,7 @@ public:
         // then we create a new one
         try {
           newPayee = file->payee(payee_id);
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException &) {
           if (type == KPayeeReassignDlg::TypeMerge) {
             // it's ok to use payee_id for both arguments since the first is const,
             // so it's garantee not to change its content

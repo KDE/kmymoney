@@ -132,7 +132,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
   }
 
   m_profileComboBox->setCurrentItem(0);
-  if (list.contains(current) > 0)
+  if (list.contains(current))
     m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(current, Qt::MatchExactly));
 }
 

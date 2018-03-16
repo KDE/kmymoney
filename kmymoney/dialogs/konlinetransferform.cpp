@@ -127,7 +127,7 @@ void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration:
 
     if (showWidget)
       showEditWidget(widget);
-  } catch (MyMoneyException& e) {
+  } catch (MyMoneyException&) {
     qWarning("Error while loading a plugin (IonlineJobEdit).");
   }
 }

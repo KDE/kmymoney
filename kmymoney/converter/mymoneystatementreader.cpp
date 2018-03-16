@@ -59,7 +59,6 @@
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
 #include "kmymoneyedit.h"
-#include "kmymoneysettings.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
 #include "transactionmatcher.h"

@@ -104,7 +104,7 @@ public:
       MyMoneySchedule sch;
       try {
         MyMoneySchedule sch = file->schedule(m_currentAccount.value("schedule").toLatin1());
-      } catch (const MyMoneyException &e) {
+      } catch (const MyMoneyException &) {
         qDebug() << "schedule" << m_currentAccount.value("schedule").toLatin1() << "not found";
       }
       if (!(m_currentAccount == wizard->account())

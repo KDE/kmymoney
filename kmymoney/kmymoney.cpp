@@ -2614,7 +2614,7 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       d->m_fileName = url;
       updateCaption();
       writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
-      /* Dont't use url variable after KRecentFilesAction::addUrl
+      /* Don't use url variable after KRecentFilesAction::addUrl
        * as it might delete it.
        * More in API reference to this method
        */

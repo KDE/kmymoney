@@ -308,7 +308,7 @@ public:
    * @brief Returns storage reader
    * @return storage reader
    */
-  virtual IMyMoneyOperationsFormat* reader(){ return nullptr; }
+  virtual IMyMoneyOperationsFormat* reader();
 
   /**
    * @brief Storage identifier

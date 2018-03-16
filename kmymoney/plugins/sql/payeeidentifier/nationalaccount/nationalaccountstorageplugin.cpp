@@ -22,13 +22,11 @@
 #include <QSqlError>
 
 #include <KExportPlugin>
+#include <KPluginFactory>
 
 #include "kmymoneystorageplugin.h"
 
-/*K_PLUGIN_FACTORY(nationalAccountStoragePluginFactory,
-                 registerPlugin<nationalAccountStoragePlugin>();
-                )*/
-K_EXPORT_PLUGIN(nationalAccountStoragePluginFactory("ibanBicStoragePlugin"))
+K_PLUGIN_FACTORY_WITH_JSON(nationalAccountStoragePluginFactory, "kmymoney-nationalaccountnumberplugin.json", registerPlugin<nationalAccountStoragePlugin>();)
 
 QString nationalAccountStoragePlugin::iid()
 {
@@ -101,3 +99,5 @@ bool nationalAccountStoragePlugin::setupDatabase(QSqlDatabase connection)
 
   return false;
 }
+
+#include "nationalaccountstorageplugin.moc"
