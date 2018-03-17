@@ -2,7 +2,7 @@
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014-2015 Romain Bignon <romain@symlink.me>
  * Copyright (C) 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
- *
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -17,48 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WEBOOB_MAPACCOUNT_HPP
-#define WEBOOB_MAPACCOUNT_HPP
+#ifndef WEBOOBEXC_H
+#define WEBOOBEXC_H
 
-#include <memory>
+// ----------------------------------------------------------------------------
+// QT Includes
 
-#include <QWizard>
+#include <QException>
 
-#include "../weboob.h"
-#include "ui_mapaccount.h"
+// ----------------------------------------------------------------------------
+// KDE Includes
 
-class WbMapAccountDialog : public QWizard, public Ui::WbMapAccountDialog
-{
-  Q_OBJECT
-public:
+// ----------------------------------------------------------------------------
+// Project Includes
 
-  WeboobExt *weboob;
-  explicit WbMapAccountDialog(QWidget *parent = 0);
-  virtual ~WbMapAccountDialog();
-
-protected Q_SLOTS:
-  void checkNextButton(void);
-  void newPage(int id);
-  void gotAccounts();
-  void gotBackends();
-
-protected:
-  bool finishAccountPage(void);
-  bool finishLoginPage(void);
-  bool finishFiPage(void);
-
-private:
-
-  enum {
-    BACKENDS_PAGE = 0,
-    ACCOUNTS_PAGE
-  };
-
-  struct Private;
-  /// \internal d-pointer instance.
-  const std::unique_ptr<Private> d;
-  const std::unique_ptr<Private> d2;
+enum class ExceptionCode {
+  BrowserIncorrectPassword
 };
 
-
-#endif /* WEBOOB_MAPACCOUNT_HPP */
+class WeboobException : public QException
+{
+public:
+    explicit WeboobException(ExceptionCode ec) : m_exceptionCode(ec) {}
+    ExceptionCode msg() const { return m_exceptionCode; }
+    void raise() const { throw *this; }
+    WeboobException *clone() const { return new WeboobException(*this); }
+    ExceptionCode m_exceptionCode;
+};
+#endif

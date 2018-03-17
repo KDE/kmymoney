@@ -2,6 +2,7 @@
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014-2015 Romain Bignon <romain@symlink.me>
  * Copyright (C) 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,23 +18,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WEBOOBEXT_HPP
-#define WEBOOBEXT_HPP
+#ifndef WEBOOBINTERFACE_H
+#define WEBOOBINTERFACE_H
 
-#include <QObject>
-#include <QDateTime>
-#include <QMutex>
-#include <kross/core/action.h>
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QDate>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include "mymoneymoney.h"
 
-class WeboobExt : public QObject
-{
-  Q_OBJECT
+struct _object;
+typedef _object PyObject;
 
-  Kross::Action* action;
-  QMutex *mutex;
-  QString path;
+class WeboobInterface
+{
+  PyObject  *m_weboobInterface;
 
 public:
 
@@ -81,9 +87,9 @@ public:
     QList<Transaction> transactions;
   };
 
-  explicit WeboobExt(QObject* parent = 0);
+  explicit WeboobInterface();
 
-  ~WeboobExt();
+  ~WeboobInterface();
 
   QStringList getProtocols();
 
@@ -93,8 +99,12 @@ public:
 
   Account getAccount(QString backend, QString account, QString max);
 
-  QVariant execute(QString method, QVariantList args);
+private:
 
+  PyObject* execute(QString method, QVariantList args);
+
+  QString extractDictStringValue(PyObject* pyContainer, const char *szKey);
+  long extractDictLongValue(PyObject* pyContainer, const char* szKey);
 };
 
-#endif /* WEBOOBEXT_HPP */
+#endif

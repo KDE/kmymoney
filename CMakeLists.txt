@@ -36,12 +36,13 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(FeatureSummary)
+include(CMakeDependentOption)
 
 include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
 set(GPG_ENCRYPTION "no")
-set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities Kross)
+set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
   set(GPG_ENCRYPTION "yes")
@@ -49,7 +50,9 @@ else()
   set(OPT_KF5_COMPONENTS ${OPT_KF5_COMPONENTS} Gpgmepp)
 endif()
 
-find_package(Qt5 5.6 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport)
+find_package(Qt5 5.6 REQUIRED
+  COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport
+  OPTIONAL_COMPONENTS Concurrent)
 
 find_package(KF5 5.2 REQUIRED
   COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
@@ -178,24 +181,23 @@ if(ENABLE_KBANKING)
   endif ()
 endif(ENABLE_KBANKING)
 
-# check for optional Weboob support
-set(WEBOOB_FOUND "AUTO")
-mark_as_advanced(WEBOOB_FOUND)
-if(DEFINED ENABLE_WEBOOB)
-  set(WEBOOB_FOUND OFF)
-endif(DEFINED ENABLE_WEBOOB)
-option(ENABLE_WEBOOB "Enable weboob plugin" ON)
-if(ENABLE_WEBOOB)
-  if(KF5Kross_FOUND)
-    set(WEBOOB_FOUND ON)
-  else(KF5Kross_FOUND)
-    if(NOT WEBOOB_FOUND STREQUAL "AUTO")
-      message(FATAL_ERROR "Weboob requirements not met")
-    endif(NOT WEBOOB_FOUND STREQUAL "AUTO")
-    set(WEBOOB_FOUND OFF)
-    set(ENABLE_WEBOOB OFF CACHE BOOL "Enable weboob plugin" FORCE)
-  endif(KF5Kross_FOUND)
-endif(ENABLE_WEBOOB)
+set(Python_ADDITIONAL_VERSIONS 2.7 2.6)
+find_package(PythonInterp 2.6)
+find_package(PythonLibs ${PYTHON_VERSION_STRING})
+
+if(PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND)
+  if(NOT (PYTHON_VERSION_MAJOR LESS 3))
+    unset(PYTHONLIBS_FOUND)
+    unset(PYTHONINTERP_FOUND)
+    message(WARNING "Python 2 required, but Python 3 found.")
+  else()
+    include(FindPythonModule)
+    find_python_module(weboob REQUIRED)
+  endif()
+endif()
+
+CMAKE_DEPENDENT_OPTION(ENABLE_WEBOOB "Enable Weboob plugin" ON
+                       "PYTHONLIBS_FOUND;PYTHONINTERP_FOUND;PY_WEBOOB;Qt5Concurrent_FOUND" OFF)
 
 # check for optional ical support
 set(LIBICAL_DEFAULT "AUTO")

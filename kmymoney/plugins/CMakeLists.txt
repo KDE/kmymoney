@@ -23,9 +23,9 @@ if (ENABLE_ONLINEJOBPLUGINMOCKUP)
   add_subdirectory(onlinejobpluginmockup)
 endif()
 
-if (WEBOOB_FOUND)
+if (ENABLE_WEBOOB)
   add_subdirectory( weboob )
-endif (WEBOOB_FOUND)
+endif ()
 
 ########### next target ###############
 

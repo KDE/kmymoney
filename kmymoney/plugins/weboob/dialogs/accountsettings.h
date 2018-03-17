@@ -2,7 +2,7 @@
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2014-2015 Romain Bignon <romain@symlink.me>
  * Copyright (C) 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
- *
+ * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -17,29 +17,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WEBOOB_WEBACCOUNTSETTINGS_H
-#define WEBOOB_WEBACCOUNTSETTINGS_H
+#ifndef ACCOUNTSETTINGS_H
+#define ACCOUNTSETTINGS_H
+
+// ----------------------------------------------------------------------------
+// QT Includes
 
 #include <QWidget>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 class MyMoneyAccount;
 class MyMoneyKeyValueContainer;
 
-class WebAccountSettings: public QWidget
+class AccountSettingsPrivate;
+class AccountSettings: public QWidget
 {
+  Q_OBJECT
+
 public:
-  WebAccountSettings(const MyMoneyAccount& acc, QWidget* parent);
-  ~WebAccountSettings();
+  explicit AccountSettings(const MyMoneyAccount& acc, QWidget* parent);
+  ~AccountSettings();
 
   void loadUi(const MyMoneyKeyValueContainer& kvp);
 
   void loadKvp(MyMoneyKeyValueContainer& kvp);
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+
+  Q_DECLARE_PRIVATE(AccountSettings)
+  AccountSettingsPrivate * const d_ptr;
 };
 
 
-#endif /* WEBOOB_WEBACCOUNTSETTINGS_H */
+#endif

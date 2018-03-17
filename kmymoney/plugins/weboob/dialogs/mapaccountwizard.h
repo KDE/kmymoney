@@ -18,11 +18,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WEBOOB_H
-#define WEBOOB_H
+#ifndef MAPACCOUNTWIZARD_H
+#define MAPACCOUNTWIZARD_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QWizard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,42 +32,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyplugin.h"
+class WeboobInterface;
 
-class MyMoneyAccount;
-class MyMoneyKeyValueContainer;
-
-class WeboobPrivate;
-class Weboob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
+class MapAccountWizardPrivate;
+class MapAccountWizard : public QWizard
 {
   Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
-  explicit Weboob(QObject *parent, const QVariantList &args);
-  ~Weboob() override;
+  explicit MapAccountWizard(QWidget *parent, WeboobInterface *weboob);
+  ~MapAccountWizard();
 
-  void plug() override;
-  void unplug() override;
+  QString currentBackend() const;
+  QString currentAccount() const;
 
-  void protocols(QStringList& protocolList) const override;
-
-  QWidget* accountConfigTab(const MyMoneyAccount& account, QString& tabName) override;
-
-  MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current) override;
-
-  bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings) override;
-
-  bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
-
-  void injectExternalSettings(KMyMoneySettings* p) override;
-  
 private:
-  Q_DECLARE_PRIVATE(Weboob)
-  WeboobPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(MapAccountWizard)
+  MapAccountWizardPrivate * const d_ptr;
 
 private Q_SLOTS:
-  void gotAccount();
+  void slotCheckNextButton(void);
+  void slotNewPage(int id);
+  void slotGotAccounts();
+  void slotGotBackends();
 };
 
 #endif
