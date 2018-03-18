@@ -2029,6 +2029,14 @@ void PivotTable::calculateForecast()
     forecast.createBudget(budget, m_beginDate.addYears(-1), m_beginDate.addDays(-1), m_beginDate, m_endDate, false);
   }
 
+  // check if we need to copy the opening balances
+  // the conditions might be too tight but those fix a reported
+  // problem and should avoid side effects in other situations
+  // see https://bugs.kde.org/show_bug.cgi?id=391961
+  const bool copyOpeningBalances = (m_startColumn == 1) &&
+                                   !m_config.isIncludingSchedules() &&
+                                   (m_config.isRunningSum());
+
   //go through the data and add forecast
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while (it_outergroup != m_grid.end()) {
@@ -2038,6 +2046,10 @@ void PivotTable::calculateForecast()
       while (it_row != (*it_innergroup).end()) {
         int column = m_startColumn;
         QDate forecastDate = m_beginDate;
+        // check whether the opening balance needs to be setup
+        if (copyOpeningBalances) {
+          it_row.value()[eForecast][0] += it_row.value()[eActual][0];
+        }
         //check whether columns are days or months
         if (m_config.isColumnsAreDays()) {
           while (column < m_numColumns) {
