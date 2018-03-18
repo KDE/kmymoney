@@ -13,7 +13,16 @@ set(sqlstorage_SOURCES
 
 ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
 
-add_library(sqlstorage MODULE ${sqlstorage_SOURCES} )
+kcoreaddons_add_plugin(sqlstorage
+                       SOURCES ${sqlstorage_SOURCES}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/sqlstorage.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(sqlstorage
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+
 kde_target_enable_exceptions(sqlstorage PUBLIC)
 
 target_link_libraries(sqlstorage
@@ -25,9 +34,6 @@ target_link_libraries(sqlstorage
 
 install(FILES sqlstorage.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/sqlstorage")
-
-install(TARGETS sqlstorage
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kmymoney-sqlstorageplugin.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR}

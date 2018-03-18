@@ -17,7 +17,15 @@ set(kbanking_PART_SRCS
 
 kconfig_add_kcfg_files(kbanking_PART_SRCS kbankingsettings.kcfgc)
 
-add_library(kbanking MODULE ${kbanking_PART_SRCS})
+kcoreaddons_add_plugin(kbanking
+                       SOURCES ${kbanking_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kbanking.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(kbanking
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kbanking
                       kbanking_dialogs
@@ -53,9 +61,6 @@ configure_file(kbanking.rc "${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc" @ONLY)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc
         DESTINATION ${KXMLGUI_INSTALL_DIR}/kbanking)
-
-install(TARGETS kbanking
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 install(FILES kbanking.kcfg
         DESTINATION ${KCFG_INSTALL_DIR})

@@ -30,7 +30,7 @@ endif()
 
 ######################### General Requirements ##########################
 
-find_package(ECM 0.0.11 REQUIRED NO_MODULE)
+find_package(ECM 5.10 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 include(KDEInstallDirs)

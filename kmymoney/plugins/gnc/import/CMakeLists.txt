@@ -18,14 +18,17 @@ set(gncimporter_PART_UI
 
 ki18n_wrap_ui(gncimporter_PART_SRCS ${gncimporter_PART_UI})
 
-add_library(gncimporter MODULE ${gncimporter_PART_SRCS})
+kcoreaddons_add_plugin(gncimporter
+                       SOURCES ${gncimporter_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/gncimporter.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(gncimporter
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(gncimporter
   kmm_plugin
   Alkimia::alkimia
 )
-
-########### install files ###############
-
-install(TARGETS gncimporter
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

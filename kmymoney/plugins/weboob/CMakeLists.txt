@@ -13,7 +13,15 @@ set(weboob_PART_SRCS
   weboob.cpp
 )
 
-add_library(weboob MODULE ${weboob_PART_SRCS})
+kcoreaddons_add_plugin(weboob
+                       SOURCES ${weboob_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/weboob.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(weboob
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(
   weboob
@@ -30,7 +38,3 @@ target_link_libraries(
 
 install(FILES weboob.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/weboob")
-
-install(TARGETS weboob
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
-

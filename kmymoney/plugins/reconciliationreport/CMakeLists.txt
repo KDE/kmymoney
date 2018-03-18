@@ -11,7 +11,15 @@ set(reconciliationreport_PART_SRCS
 
 ki18n_wrap_ui(reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 
-add_library(reconciliationreport MODULE ${reconciliationreport_PART_SRCS})
+kcoreaddons_add_plugin(reconciliationreport
+                       SOURCES ${reconciliationreport_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/reconciliationreport.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(reconciliationreport
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(reconciliationreport
   Qt5::PrintSupport
@@ -24,6 +32,3 @@ if(ENABLE_WEBENGINE)
 else(ENABLE_WEBENGINE)
  target_link_libraries(reconciliationreport KF5::WebKit)
 endif(ENABLE_WEBENGINE)
-
-install(TARGETS reconciliationreport
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

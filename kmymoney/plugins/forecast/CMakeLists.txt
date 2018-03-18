@@ -9,7 +9,15 @@ set(forecastview_SOURCES
 ki18n_wrap_ui(forecastview_SOURCES kforecastview.ui)
 kconfig_add_kcfg_files(forecastview_SOURCES forecastviewsettings.kcfgc)
 
-add_library(forecastview MODULE ${forecastview_SOURCES} )
+kcoreaddons_add_plugin(forecastview
+                       SOURCES ${forecastview_SOURCES}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/forecastview.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(forecastview
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(forecastview
   PUBLIC
@@ -32,9 +40,17 @@ kconfig_add_kcfg_files(kcm_forecastview_PART_SRCS forecastviewsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_forecastview_PART_SRCS forecastviewsettings.ui)
 
-add_library(kcm_forecastview MODULE ${kcm_forecastview_PART_SRCS})
+kcoreaddons_add_plugin(kcm_forecastview
+                       SOURCES ${kcm_forecastview_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_forecastview.json"
+                       INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_forecastview kcm_forecastview.desktop)
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(kcm_forecastview
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_forecastview
                       KF5::I18n
@@ -44,9 +60,6 @@ target_link_libraries(kcm_forecastview
                       KF5::CoreAddons
                       kmm_settings
                       )
-
-install(TARGETS kcm_forecastview
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kcm_forecastview.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")

@@ -19,9 +19,15 @@ ki18n_wrap_ui( sepaOnlineTasks_SRCS
 
 add_library(konlinetasks_sepa_interface INTERFACE)
 
-add_library(konlinetasks_sepa MODULE
-  ${sepaOnlineTasks_SRCS}
-)
+kcoreaddons_add_plugin(konlinetasks_sepa
+                       SOURCES ${sepaOnlineTasks_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/konlinetasks_sepa.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(konlinetasks_sepa
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 # TODO some dependencies can be moved to konlinetasks_sepa
 target_link_libraries( konlinetasks_sepa_interface
@@ -47,9 +53,6 @@ target_link_libraries(konlinetasks_sepa
     payeeidentifier_iban_bic_widgets
     KF5::ItemModels
 )
-
-install(TARGETS konlinetasks_sepa
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 install(FILES ${sepaOnlineTasks_HEADER}
         DESTINATION "${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/sepa/"

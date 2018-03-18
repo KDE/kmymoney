@@ -9,7 +9,15 @@ set(checkprinting_PART_SRCS
 
 kconfig_add_kcfg_files(checkprinting_PART_SRCS pluginsettings.kcfgc)
 
-add_library(checkprinting MODULE ${checkprinting_PART_SRCS})
+kcoreaddons_add_plugin(checkprinting
+                       SOURCES ${checkprinting_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/checkprinting.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(checkprinting
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(checkprinting
   Qt5::PrintSupport
@@ -23,9 +31,6 @@ if(ENABLE_WEBENGINE)
 else(ENABLE_WEBENGINE)
  target_link_libraries(checkprinting KF5::WebKit)
 endif(ENABLE_WEBENGINE)
-
-install(TARGETS checkprinting
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
 
 install(FILES checkprinting.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/checkprinting")
@@ -46,9 +51,17 @@ kconfig_add_kcfg_files(kcm_checkprinting_PART_SRCS pluginsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_checkprinting_PART_SRCS pluginsettingsdecl.ui)
 
-add_library(kcm_checkprinting MODULE ${kcm_checkprinting_PART_SRCS})
+kcoreaddons_add_plugin(kcm_checkprinting
+                       SOURCES ${kcm_checkprinting_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_checkprinting.json"
+                       INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_checkprinting kcm_checkprinting.desktop)
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(kcm_checkprinting
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_checkprinting
                       Qt5::PrintSupport
@@ -64,9 +77,6 @@ if(ENABLE_WEBENGINE)
 else(ENABLE_WEBENGINE)
  target_link_libraries(kcm_checkprinting KF5::WebKit)
 endif(ENABLE_WEBENGINE)
-
-install(TARGETS kcm_checkprinting
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kcm_checkprinting.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")
