@@ -21,7 +21,7 @@ add_library(konlinetasks_sepa_interface INTERFACE)
 
 kcoreaddons_add_plugin(konlinetasks_sepa
                        SOURCES ${sepaOnlineTasks_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/konlinetasks_sepa.json"
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
