@@ -22,6 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAction>
 #include <QDesktopWidget>
 #include <QCloseEvent>
 #include <QTextCodec>

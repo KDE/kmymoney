@@ -19,6 +19,8 @@
 #include "splitadjustdialog.h"
 #include "ui_splitadjustdialog.h"
 
+#include <QButtonGroup>
+
 #include <KLocalizedString>
 
 class SplitAdjustDialog::Private {
