@@ -20,7 +20,7 @@
 
 #include <pwd.h>
 #include <unistd.h>
-#include <locale.h>
+#include <clocale>
 
 #include <QString>
 
@@ -42,7 +42,7 @@ uint platformTools::processId()
 platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
 {
   platformTools::currencySymbolPosition_t  rc = platformTools::AfterQuantityMoneyWithSpace;
-  struct lconv* lc = localeconv();
+  struct lconv* lc = std::localeconv();
   if (lc) {
     const char precedes = negativeValues ? lc->n_cs_precedes : lc->p_cs_precedes;
     const char space = negativeValues ? lc->n_sep_by_space : lc->p_sep_by_space;
