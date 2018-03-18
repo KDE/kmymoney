@@ -145,105 +145,63 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 
   connect(kmymoney, &KMyMoneyApp::fileLoaded, this, &KMyMoneyView::slotRefreshViews);
 
-  // Page 0
-  m_homeView = new KHomeView;
-  viewFrames[View::Home] = m_model->addPage(m_homeView, i18n("Home"));
-  viewFrames[View::Home]->setIcon(Icons::get(Icon::ViewHome));
-  connect(m_homeView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_homeView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  viewBases[View::Home] = new KHomeView;
+  viewBases[View::Institutions] = new KInstitutionsView;
+  viewBases[View::Accounts] = new KAccountsView;
+  viewBases[View::Schedules] = new KScheduledView;
+  viewBases[View::Categories] = new KCategoriesView;
+  viewBases[View::Tags] = new KTagsView;
+  viewBases[View::Payees] = new KPayeesView;
+  viewBases[View::Ledgers] = new KGlobalLedgerView;
+  viewBases[View::Investments] = new KInvestmentView;
+  viewBases[View::Reports] = new KReportsView;
+  viewBases[View::Budget] = new KBudgetView;
+  viewBases[View::OnlineJobOutbox] = new KOnlineJobOutbox;
+  #ifdef ENABLE_UNFINISHEDFEATURES
+  viewBases[View::NewLedgers] = new SimpleLedgerView;
+  #endif
 
-  // Page 1
-  m_institutionsView = new KInstitutionsView;
-  viewFrames[View::Institutions] = m_model->addPage(m_institutionsView, i18n("Institutions"));
-  viewFrames[View::Institutions]->setIcon(Icons::get(Icon::ViewInstitutions));
-  connect(m_institutionsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_institutionsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  struct viewInfo
+  {
+    View id;
+    QString name;
+    Icon icon;
+  };
 
-  // Page 2
-  m_accountsView = new KAccountsView;
-  viewFrames[View::Accounts] = m_model->addPage(m_accountsView, i18n("Accounts"));
-  viewFrames[View::Accounts]->setIcon(Icons::get(Icon::ViewAccounts));
-  connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_accountsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  const QVector<viewInfo> viewsInfo
+  {
+    {View::Home,            i18n("Home"),                         Icon::ViewHome},
+    {View::Institutions,    i18n("Institutions"),                 Icon::ViewInstitutions},
+    {View::Accounts,        i18n("Accounts"),                     Icon::ViewAccounts},
+    {View::Schedules,       i18n("Scheduled\u2028transactions"),  Icon::ViewSchedules},
+    {View::Categories,      i18n("Categories"),                   Icon::ViewCategories},
+    {View::Tags,            i18n("Tags"),                         Icon::ViewTags},
+    {View::Payees,          i18n("Payees"),                       Icon::ViewPayees},
+    {View::Ledgers,         i18n("Ledgers"),                      Icon::ViewLedgers},
+    {View::Investments,     i18n("Investments"),                  Icon::ViewInvestment},
+    {View::Reports,         i18n("Reports"),                      Icon::ViewReports},
+    {View::Budget,          i18n("Budgets"),                      Icon::ViewBudgets},
+    {View::OnlineJobOutbox, i18n("Outbox"),                       Icon::ViewOutbox},
+    #ifdef ENABLE_UNFINISHEDFEATURES
+    {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
+    #endif
+  };
 
-  // Page 3
-  m_scheduledView = new KScheduledView;
-//this is to solve the way long strings are handled differently among versions of KPageWidget
-  viewFrames[View::Schedules] = m_model->addPage(m_scheduledView, i18nc("use \u2028 as line break", "Scheduled\u2028transactions"));
-  viewFrames[View::Schedules]->setIcon(Icons::get(Icon::ViewSchedules));
-  connect(m_scheduledView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_scheduledView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  for (const viewInfo& view : viewsInfo) {
+    viewFrames[view.id] = m_model->addPage(viewBases[view.id], view.name);
+    viewFrames[view.id]->setIcon(Icons::get(view.icon));
+    connect(viewBases[view.id], &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+    connect(viewBases[view.id], &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  }
 
-  // Page 4
-  m_categoriesView = new KCategoriesView;
-  viewFrames[View::Categories] = m_model->addPage(m_categoriesView, i18n("Categories"));
-  viewFrames[View::Categories]->setIcon(Icons::get(Icon::ViewCategories));
-  connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_categoriesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
+  const auto& homeView = static_cast<KHomeView*>(viewBases[View::Home]);
+  const auto& ledgersView = static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers]);
+  const auto& reportsView = static_cast<KReportsView*>(viewBases[View::Reports]);
 
-  // Page 5
-  m_tagsView = new KTagsView;
-  viewFrames[View::Tags] = m_model->addPage(m_tagsView, i18n("Tags"));
-  viewFrames[View::Tags]->setIcon(Icons::get(Icon::ViewTags));
-  connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_tagsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  // Page 6
-  m_payeesView = new KPayeesView;
-  viewFrames[View::Payees] = m_model->addPage(m_payeesView, i18n("Payees"));
-  viewFrames[View::Payees]->setIcon(Icons::get(Icon::ViewPayees));
-  connect(m_payeesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_payeesView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  // Page 7
-  m_ledgerView = new KGlobalLedgerView;
-  viewFrames[View::Ledgers] = m_model->addPage(m_ledgerView, i18n("Ledgers"));
-  viewFrames[View::Ledgers]->setIcon(Icons::get(Icon::ViewLedgers));
-  connect(m_ledgerView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_ledgerView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  // Page 8
-  m_investmentView = new KInvestmentView;
-  viewFrames[View::Investments] = m_model->addPage(m_investmentView, i18n("Investments"));
-  viewFrames[View::Investments]->setIcon(Icons::get(Icon::ViewInvestment));
-  connect(m_investmentView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_investmentView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  // Page 9
-  m_reportsView = new KReportsView;
-  viewFrames[View::Reports] = m_model->addPage(m_reportsView, i18n("Reports"));
-  viewFrames[View::Reports]->setIcon(Icons::get(Icon::ViewReports));
-  connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_reportsView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  // Page 10
-  m_budgetView = new KBudgetView;
-  viewFrames[View::Budget] = m_model->addPage(m_budgetView, i18n("Budgets"));
-  viewFrames[View::Budget]->setIcon(Icons::get(Icon::ViewBudgets));
-  connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_budgetView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  // Page 11
-  // KForecastView
-
-  // Page 12
-  m_onlineJobOutboxView = new KOnlineJobOutbox;
-  addView(m_onlineJobOutboxView, i18n("Outbox"), View::OnlineJobOutbox);
-  connect(m_onlineJobOutboxView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
-  connect(m_onlineJobOutboxView, &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::resetViewSelection);
-
-  connect(m_reportsView, &KReportsView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
-  connect(m_ledgerView, &KGlobalLedgerView::switchViewRequested, this, &KMyMoneyView::slotSwitchView);
-  connect(m_homeView, &KHomeView::ledgerSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
-
-  connect(kmymoney, &KMyMoneyApp::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
-
-#ifdef ENABLE_UNFINISHEDFEATURES
-  m_simpleLedgerView = new SimpleLedgerView(kmymoney, this);
-  KPageWidgetItem* frame = m_model->addPage(m_simpleLedgerView, i18n("New ledger"));
-  frame->setIcon(Icons::get(Icon::DocumentProperties));
-#endif
-
+  connect(reportsView, &KReportsView::switchViewRequested, this, &KMyMoneyView::showPage);
+  connect(ledgersView, &KGlobalLedgerView::switchViewRequested, this, &KMyMoneyView::showPage);
+  connect(homeView, &KHomeView::ledgerSelected, ledgersView, &KGlobalLedgerView::slotLedgerSelected);
+  connect(kmymoney, &KMyMoneyApp::transactionSelected, ledgersView, &KGlobalLedgerView::slotLedgerSelected);
 
   //set the model
   setModel(m_model);
@@ -314,100 +272,85 @@ delete m_activityResourceInstance;
 void KMyMoneyView::slotFileOpened()
 {
   #ifdef ENABLE_UNFINISHEDFEATURES
-  m_simpleLedgerView->openFavoriteLedgers();
+  static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
   #endif
   switchToDefaultView();
 }
 
 void KMyMoneyView::slotFileClosed()
 {
-  if (m_reportsView)
-    m_reportsView->slotCloseAll();
+
+  if (viewBases.contains(View::Reports))
+    static_cast<KReportsView*>(viewBases[View::Reports])->slotCloseAll();
   #ifdef ENABLE_UNFINISHEDFEATURES
-  m_simpleLedgerView->closeLedgers();
+  static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
   #endif
   slotShowHomePage();
 }
 
 void KMyMoneyView::slotShowHomePage()
 {
-  showPage(viewFrames[View::Home]);
+  showPageAndFocus(View::Home);
 }
 
 void KMyMoneyView::slotShowInstitutionsPage()
 {
-  showPage(viewFrames[View::Institutions]);
-  m_institutionsView->setDefaultFocus();
+  showPageAndFocus(View::Institutions);
 }
 
 void KMyMoneyView::slotShowAccountsPage()
 {
-  showPage(viewFrames[View::Accounts]);
-  m_accountsView->setDefaultFocus();
+  showPageAndFocus(View::Accounts);
 }
 
 void KMyMoneyView::slotShowSchedulesPage()
 {
-  showPage(viewFrames[View::Schedules]);
-  m_scheduledView->setDefaultFocus();
+  showPageAndFocus(View::Schedules);
 }
 
 void KMyMoneyView::slotShowCategoriesPage()
 {
-  showPage(viewFrames[View::Categories]);
-  m_categoriesView->setDefaultFocus();
+  showPageAndFocus(View::Categories);
 }
 
 void KMyMoneyView::slotShowTagsPage()
 {
-  showPage(viewFrames[View::Tags]);
-  m_tagsView->setDefaultFocus();
+  showPageAndFocus(View::Tags);
 }
 
 void KMyMoneyView::slotShowPayeesPage()
 {
-  showPage(viewFrames[View::Payees]);
-  m_payeesView->setDefaultFocus();
+  showPageAndFocus(View::Payees);
 }
 
 void KMyMoneyView::slotShowLedgersPage()
 {
-  showPage(viewFrames[View::Ledgers]);
-  m_ledgerView->setDefaultFocus();
+  showPageAndFocus(View::Ledgers);
 }
 
 void KMyMoneyView::slotShowInvestmentsPage()
 {
-  showPage(viewFrames[View::Investments]);
-  m_investmentView->setDefaultFocus();
+  showPageAndFocus(View::Investments);
 }
 
 void KMyMoneyView::slotShowReportsPage()
 {
-  showPage(viewFrames[View::Reports]);
-  m_reportsView->setDefaultFocus();
+  showPageAndFocus(View::Reports);
 }
 
 void KMyMoneyView::slotShowBudgetPage()
 {
-  showPage(viewFrames[View::Budget]);
-  m_budgetView->setDefaultFocus();
+  showPageAndFocus(View::Budget);
 }
 
 void KMyMoneyView::slotShowForecastPage()
 {
-  if (viewFrames.contains(View::Forecast)) {
-    showPage(viewFrames[View::Forecast]);
-    viewBases[View::Forecast]->setDefaultFocus();
-  }
+  showPageAndFocus(View::Forecast);
 }
 
 void KMyMoneyView::slotShowOutboxPage()
 {
-  if (viewFrames[View::OnlineJobOutbox]) {
-    showPage(viewFrames[View::OnlineJobOutbox]);
-    viewBases[View::OnlineJobOutbox]->setDefaultFocus();
-  }
+  showPageAndFocus(View::OnlineJobOutbox);
 }
 
 void KMyMoneyView::showTitleBar(bool show)
@@ -447,8 +390,13 @@ void KMyMoneyView::updateViewType()
 
 void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show)
 {
-  QVector<AccountsViewProxyModel *> proxyModels {m_institutionsView->getProxyModel(), m_accountsView->getProxyModel(),
-                                                 m_categoriesView->getProxyModel(), m_budgetView->getProxyModel()};
+  QVector<AccountsViewProxyModel *> proxyModels
+  {
+    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Institutions])->getProxyModel(),
+    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Accounts])->getProxyModel(),
+    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Categories])->getProxyModel(),
+    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Budget])->getProxyModel(),
+  };
 
   for (auto i = proxyModels.count() - 1; i >= 0; --i) { // weed out unloaded views
     if (!proxyModels.at(i))
@@ -487,13 +435,12 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
 
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
-  m_accountsView->setOnlinePlugins(plugins);
-  if (m_onlineJobOutboxView) {
-    m_onlineJobOutboxView->setOnlinePlugins(plugins);
-  }
-  if (plugins.isEmpty()) {
-    removeView(View::OnlineJobOutbox);
-    m_onlineJobOutboxView = nullptr;
+  static_cast<KAccountsView*>(viewBases[View::Accounts])->setOnlinePlugins(plugins);
+  if (viewBases.contains(View::OnlineJobOutbox)) {
+    if (plugins.isEmpty())
+      removeView(View::OnlineJobOutbox);
+    else
+      static_cast<KOnlineJobOutbox*>(viewBases[View::OnlineJobOutbox])->setOnlinePlugins(plugins);
   }
 }
 
@@ -504,7 +451,8 @@ void KMyMoneyView::setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
 {
-  return m_scheduledView->enterSchedule(schedule, autoEnter, extendedKeys);
+
+  return static_cast<KScheduledView*>(viewBases[View::Schedules])->enterSchedule(schedule, autoEnter, extendedKeys);
 }
 
 void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idView)
@@ -548,13 +496,17 @@ bool KMyMoneyView::showPageHeader() const
   return false;
 }
 
-void KMyMoneyView::slotSwitchView(View view)
+void KMyMoneyView::showPageAndFocus(View idView)
 {
-  showPage(viewFrames[view]);
+  if (viewFrames.contains(idView)) {
+    showPage(idView);
+    viewBases[idView]->setDefaultFocus();
+  }
 }
 
-void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
+void KMyMoneyView::showPage(View idView)
 {
+  const auto pageItem = viewFrames[idView];
   // reset all selected items before showing the selected view
   // but not while we're in our own constructor
   if (!m_inConstructor && pageItem != currentPage()) {
@@ -603,32 +555,30 @@ void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
 
 void KMyMoneyView::switchToDefaultView()
 {
-  KPageWidgetItem* page;
-  if (KMyMoneySettings::startLastViewSelected() != 0)
-    page = viewFrames.value(static_cast<View>(KMyMoneySettings::lastViewSelected()));
-  else
-    page = viewFrames[View::Home];
+  const auto idView = KMyMoneySettings::startLastViewSelected() ?
+        static_cast<View>(KMyMoneySettings::lastViewSelected()) :
+        View::Home;
   // if we currently see a different page, then select the right one
-  if (page != currentPage())
-    showPage(page);
+  if (viewFrames.contains(idView) && viewFrames[idView] != currentPage())
+    showPage(idView);
 }
 
 void KMyMoneyView::slotPayeeSelected(const QString& payee, const QString& account, const QString& transaction)
 {
-  showPage(viewFrames[View::Payees]);
-  m_payeesView->slotSelectPayeeAndTransaction(payee, account, transaction);
+  showPage(View::Payees);
+  static_cast<KPayeesView*>(viewBases[View::Payees])->slotSelectPayeeAndTransaction(payee, account, transaction);
 }
 
 void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, const QString& transaction)
 {
-  showPage(viewFrames[View::Tags]);
-  m_tagsView->slotSelectTagAndTransaction(tag, account, transaction);
+  showPage(View::Tags);
+  static_cast<KTagsView*>(viewBases[View::Tags])->slotSelectTagAndTransaction(tag, account, transaction);
 }
 
 void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
 {
   Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
-  m_ledgerView->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+  static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 
 void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
@@ -658,41 +608,31 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 {
   if (viewFrames[View::Accounts] != currentPage())
-    showPage(viewFrames[View::Accounts]);
-  m_accountsView->show();
+    showPage(View::Accounts);
+  viewBases[View::Accounts]->show();
 }
 
 void KMyMoneyView::slotRefreshViews()
 {
+  const auto& investmentsView = static_cast<KInvestmentView*>(viewBases[View::Investments]);
+  const auto& ledgersView = static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers]);
   // turn off sync between ledger and investment view
-  disconnect(m_investmentView, &KInvestmentView::accountSelected, m_ledgerView, static_cast<void (KGlobalLedgerView::*)(const MyMoneyObject&)>(&KGlobalLedgerView::slotSelectAccount));
-  disconnect(m_ledgerView, &KGlobalLedgerView::objectSelected, m_investmentView, static_cast<void (KInvestmentView::*)(const MyMoneyObject&)>(&KInvestmentView::slotSelectAccount));
-
+  disconnect(investmentsView, &KInvestmentView::accountSelected, ledgersView, static_cast<void (KGlobalLedgerView::*)(const MyMoneyObject&)>(&KGlobalLedgerView::slotSelectAccount));
+  disconnect(ledgersView, &KGlobalLedgerView::objectSelected, investmentsView, static_cast<void (KInvestmentView::*)(const MyMoneyObject&)>(&KInvestmentView::slotSelectAccount));
 
   // TODO turn sync between ledger and investment view if selected by user
   if (KMyMoneySettings::syncLedgerInvestment()) {
-    connect(m_investmentView, &KInvestmentView::accountSelected, m_ledgerView, static_cast<void (KGlobalLedgerView::*)(const MyMoneyObject&)>(&KGlobalLedgerView::slotSelectAccount));
-    connect(m_ledgerView, &KGlobalLedgerView::objectSelected, m_investmentView, static_cast<void (KInvestmentView::*)(const MyMoneyObject&)>(&KInvestmentView::slotSelectAccount));
+    connect(investmentsView, &KInvestmentView::accountSelected, ledgersView, static_cast<void (KGlobalLedgerView::*)(const MyMoneyObject&)>(&KGlobalLedgerView::slotSelectAccount));
+    connect(ledgersView, &KGlobalLedgerView::objectSelected, investmentsView, static_cast<void (KInvestmentView::*)(const MyMoneyObject&)>(&KInvestmentView::slotSelectAccount));
   }
 
   showTitleBar(KMyMoneySettings::showTitleBar());
 
-  m_accountsView->refresh();
-  m_institutionsView->refresh();
-  m_categoriesView->refresh();
-  m_payeesView->refresh();
-  m_tagsView->refresh();
-  m_ledgerView->refresh();
-  m_budgetView->refresh();
-  m_homeView->refresh();
-  m_investmentView->refresh();
-  m_reportsView->refresh();
-  m_scheduledView->refresh();
   for (auto i = (int)View::Home; i < (int)View::None; ++i)
     if (viewBases.contains(View(i)))
       viewBases[View(i)]->refresh();
 
-  m_payeesView->slotClosePayeeIdentifierSource();
+  static_cast<KPayeesView*>(viewBases[View::Payees])->slotClosePayeeIdentifierSource();
 }
 
 void KMyMoneyView::slotShowTransactionDetail(bool detailed)
@@ -756,9 +696,9 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
 void KMyMoneyView::slotPrintView()
 {
   if (viewFrames[View::Reports] == currentPage())
-    m_reportsView->slotPrintView();
+    static_cast<KReportsView*>(viewBases[View::Reports])->slotPrintView();
   else if (viewFrames[View::Home] == currentPage())
-    m_homeView->slotPrintView();
+    static_cast<KHomeView*>(viewBases[View::Home])->slotPrintView();
 }
 
 void KMyMoneyView::resetViewSelection(const View)
@@ -769,107 +709,133 @@ void KMyMoneyView::resetViewSelection(const View)
 void KMyMoneyView::connectView(const View view)
 {
   KMyMoneyAccountTreeView *treeView;
+
+  if (!viewBases.contains(view))
+    return;
+
+  disconnect(viewBases[view], &KMyMoneyViewBase::aboutToShow, this, &KMyMoneyView::connectView);
+
   switch (view) {
     case View::Home:
-      disconnect(m_homeView, &KHomeView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_homeView, &KHomeView::objectSelected,      this, &KMyMoneyView::slotObjectSelected);
-      connect(m_homeView, &KHomeView::openObjectRequested, this, &KMyMoneyView::slotOpenObjectRequested);
+      {
+      const auto homeView = static_cast<KHomeView*>(viewBases[view]);
+      connect(homeView, &KHomeView::objectSelected,      this, &KMyMoneyView::slotObjectSelected);
+      connect(homeView, &KHomeView::openObjectRequested, this, &KMyMoneyView::slotOpenObjectRequested);
       // views can wait since they are going to be refresed in slotRefreshViews
-      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, m_homeView, &KHomeView::refresh);
+      connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, homeView, &KHomeView::refresh);
       break;
-
+      }
     case View::Accounts:
-      disconnect(m_accountsView, &KAccountsView::aboutToShow, this, &KMyMoneyView::connectView);
-      treeView = m_accountsView->getTreeView();
+      {
+      const auto accountsView = static_cast<KAccountsView*>(viewBases[view]);
+      treeView = static_cast<KMyMoneyAccountsViewBase*>(viewBases[view])->getTreeView();
       connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
       connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-      connect(m_accountsView, &KAccountsView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
-      connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, m_accountsView, &KAccountsView::slotNetWorthChanged);
+      connect(accountsView, &KAccountsView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
+      connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, accountsView, &KAccountsView::slotNetWorthChanged);
       break;
+      }
 
     case View::Schedules:
-      disconnect(m_scheduledView, &KScheduledView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_scheduledView, &KScheduledView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
-      connect(m_scheduledView, &KScheduledView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
-      connect(m_scheduledView, &KScheduledView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
+      {
+      const auto schedulesView = static_cast<KScheduledView*>(viewBases[view]);
+      connect(schedulesView, &KScheduledView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(schedulesView, &KScheduledView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(schedulesView, &KScheduledView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       break;
+      }
 
     case View::Institutions:
-      disconnect(m_institutionsView, &KInstitutionsView::aboutToShow, this, &KMyMoneyView::connectView);
-      treeView = m_institutionsView->getTreeView();
+      {
+      const auto institutionsView = static_cast<KInstitutionsView*>(viewBases[view]);
+      treeView = static_cast<KMyMoneyAccountsViewBase*>(viewBases[view])->getTreeView();
       connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
       connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-      connect(m_institutionsView, &KInstitutionsView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
-      connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, m_institutionsView, &KInstitutionsView::slotNetWorthChanged);
+      connect(institutionsView, &KInstitutionsView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
+      connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, institutionsView, &KInstitutionsView::slotNetWorthChanged);
       break;
+      }
 
     case View::Categories:
-      disconnect(m_categoriesView, &KCategoriesView::aboutToShow, this, &KMyMoneyView::connectView);
-      treeView = m_categoriesView->getTreeView();
+      {
+      const auto categoriesView = static_cast<KCategoriesView*>(viewBases[view]);
+      treeView = static_cast<KMyMoneyAccountsViewBase*>(viewBases[view])->getTreeView();
       connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
       connect(treeView, &KMyMoneyAccountTreeView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
       connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-      connect(m_categoriesView, &KCategoriesView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
-      connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, m_categoriesView, &KCategoriesView::slotProfitChanged);
+      connect(categoriesView, &KCategoriesView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
+      connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, categoriesView, &KCategoriesView::slotProfitChanged);
       break;
+      }
 
     case View::Tags:
-      disconnect(m_tagsView, &KTagsView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_tagsView, &KTagsView::transactionSelected,  m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+      {
+      const auto tagsView = static_cast<KTagsView*>(viewBases[view]);
+      const auto ledgersView = static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers]);
+      connect(tagsView, &KTagsView::transactionSelected,  ledgersView, &KGlobalLedgerView::slotLedgerSelected);
       break;
+      }
 
     case View::Payees:
-      disconnect(m_payeesView, &KTagsView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_payeesView, &KPayeesView::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+      {
+      const auto payeesView = static_cast<KPayeesView*>(viewBases[view]);
+      const auto ledgersView = static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers]);
+      connect(payeesView, &KPayeesView::transactionSelected, ledgersView, &KGlobalLedgerView::slotLedgerSelected);
       break;
+      }
 
     case View::Ledgers:
-      disconnect(m_ledgerView, &KGlobalLedgerView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_ledgerView, &KGlobalLedgerView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
-      connect(m_ledgerView, &KGlobalLedgerView::openPayeeRequested,     this, &KMyMoneyView::slotPayeeSelected);
-      connect(m_ledgerView, &KGlobalLedgerView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
-      connect(m_ledgerView, &KGlobalLedgerView::transactionsSelected,   this, &KMyMoneyView::slotTransactionsSelected);
-      connect(m_ledgerView, &KGlobalLedgerView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
-      connect(m_ledgerView, &KGlobalLedgerView::transactionsContextMenuRequested,   this, &KMyMoneyView::slotTransactionsMenuRequested);
-      connect(m_ledgerView, &KGlobalLedgerView::statusProgress,   this, &KMyMoneyView::statusProgress);
-      connect(m_ledgerView, &KGlobalLedgerView::statusMsg,   this, &KMyMoneyView::statusMsg);
+      {
+      const auto ledgersView = static_cast<KGlobalLedgerView*>(viewBases[view]);
+      const auto schedulesView = static_cast<KScheduledView*>(viewBases[View::Schedules]);
+      connect(ledgersView, &KGlobalLedgerView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
+      connect(ledgersView, &KGlobalLedgerView::openPayeeRequested,     this, &KMyMoneyView::slotPayeeSelected);
+      connect(ledgersView, &KGlobalLedgerView::objectSelected,         this, &KMyMoneyView::slotObjectSelected);
+      connect(ledgersView, &KGlobalLedgerView::transactionsSelected,   this, &KMyMoneyView::slotTransactionsSelected);
+      connect(ledgersView, &KGlobalLedgerView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
+      connect(ledgersView, &KGlobalLedgerView::transactionsContextMenuRequested,   this, &KMyMoneyView::slotTransactionsMenuRequested);
+      connect(ledgersView, &KGlobalLedgerView::statusProgress,   this, &KMyMoneyView::statusProgress);
+      connect(ledgersView, &KGlobalLedgerView::statusMsg,   this, &KMyMoneyView::statusMsg);
 
-      connect(m_ledgerView, &KGlobalLedgerView::accountReconciled, this, &KMyMoneyView::accountReconciled);
-      connect(m_ledgerView, &KGlobalLedgerView::enterOverdueSchedulesRequested, m_scheduledView, &KScheduledView::slotEnterOverdueSchedules);
-      connect(m_scheduledView, &KScheduledView::enterOverdueSchedulesFinished,   m_ledgerView, &KGlobalLedgerView::slotContinueReconciliation);
+      connect(ledgersView, &KGlobalLedgerView::accountReconciled, this, &KMyMoneyView::accountReconciled);
+      connect(ledgersView, &KGlobalLedgerView::enterOverdueSchedulesRequested, schedulesView, &KScheduledView::slotEnterOverdueSchedules);
+      connect(schedulesView, &KScheduledView::enterOverdueSchedulesFinished, ledgersView, &KGlobalLedgerView::slotContinueReconciliation);
       break;
+      }
 
     case View::Budget:
-      disconnect(m_budgetView, &KBudgetView::aboutToShow, this, &KMyMoneyView::connectView);
-      treeView = m_budgetView->getTreeView();
+      {
+      const auto budgetView = static_cast<KBudgetView*>(viewBases[view]);
+      treeView = static_cast<KMyMoneyAccountsViewBase*>(viewBases[view])->getTreeView();
       connect(treeView, &KMyMoneyAccountTreeView::openObjectRequested,    this, &KMyMoneyView::slotOpenObjectRequested);
       connect(treeView, &KMyMoneyAccountTreeView::contextMenuRequested,   this, &KMyMoneyView::slotContextMenuRequested);
       connect(treeView, &KMyMoneyAccountTreeView::columnToggled,          this, &KMyMoneyView::slotAccountTreeViewChanged);
 
-      connect(m_budgetView, &KBudgetView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
+      connect(budgetView, &KBudgetView::objectSelected, this, &KMyMoneyView::slotObjectSelected);
       break;
+      }
 
     case View::Investments:
-      disconnect(m_investmentView, &KInvestmentView::aboutToShow, this, &KMyMoneyView::connectView);
-
-      connect(m_investmentView, &KInvestmentView::objectSelected,       this, &KMyMoneyView::slotObjectSelected);
-      connect(m_investmentView, &KInvestmentView::contextMenuRequested, this, &KMyMoneyView::slotContextMenuRequested);
+      {
+      const auto investmentsView = static_cast<KInvestmentView*>(viewBases[view]);
+      connect(investmentsView, &KInvestmentView::objectSelected,       this, &KMyMoneyView::slotObjectSelected);
+      connect(investmentsView, &KInvestmentView::contextMenuRequested, this, &KMyMoneyView::slotContextMenuRequested);
       break;
+      }
 
     case View::Reports:
-      disconnect(m_reportsView, &KReportsView::aboutToShow, this, &KMyMoneyView::connectView);
-      connect(m_reportsView, &KReportsView::transactionSelected, m_ledgerView, &KGlobalLedgerView::slotLedgerSelected);
+      {
+      const auto reportsView = static_cast<KReportsView*>(viewBases[view]);
+      const auto ledgersView = static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers]);
+      connect(reportsView, &KReportsView::transactionSelected, ledgersView, &KGlobalLedgerView::slotLedgerSelected);
       break;
-
-    case View::OnlineJobOutbox:
-      disconnect(m_onlineJobOutboxView, &KOnlineJobOutbox::aboutToShow, this, &KMyMoneyView::connectView);
-      break;
+      }
 
     default:
       break;
@@ -883,16 +849,16 @@ void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
     // check if we can open this account
     // currently it make's sense for asset and liability accounts
     if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
-        m_ledgerView->slotLedgerSelected(acc.id(), QString());
+      static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotLedgerSelected(acc.id(), QString());
 
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
 //    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
-    m_institutionsView->slotEditInstitution();
+    static_cast<KInstitutionsView*>(viewBases[View::Institutions])->slotEditInstitution();
   } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-    m_scheduledView->slotEditSchedule();
+    static_cast<KScheduledView*>(viewBases[View::Schedules])->slotEditSchedule();
   } else if (typeid(obj) == typeid(MyMoneyReport)) {
     const auto& rep = static_cast<const MyMoneyReport&>(obj);
-    m_reportsView->slotOpenReport(rep);
+    static_cast<KReportsView*>(viewBases[View::Reports])->slotOpenReport(rep);
   }
 }
 
@@ -901,14 +867,11 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
   // carrying some slots over to views isn't easy for all slots...
   // ...so calls to kmymoney still must be here
   if (typeid(obj) == typeid(MyMoneyAccount)) {
-    m_investmentView->updateActions(obj);
-    m_categoriesView->updateActions(obj);
-    m_accountsView->updateActions(obj);
-    m_ledgerView->updateActions(obj);
-    m_reportsView->updateActions(obj);
-    if (m_onlineJobOutboxView) {
-      m_onlineJobOutboxView->updateActions(obj);
-    }
+    QVector<View> views {View::Investments, View::Categories, View::Accounts,
+                         View::Ledgers, View::Reports, View::OnlineJobOutbox};
+    for (const auto view : views)
+      if (viewBases.contains(view))
+        viewBases[view]->updateActions(obj);
 
     // for plugin only
     const auto& acc = static_cast<const MyMoneyAccount&>(obj);
@@ -916,9 +879,9 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
         !MyMoneyFile::instance()->isStandardAccount(acc.id()))
       emit accountSelected(acc);
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-    m_institutionsView->updateActions(obj);
+    viewBases[View::Institutions]->updateActions(obj);
   } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-    m_scheduledView->updateActions(obj);
+    viewBases[View::Schedules]->updateActions(obj);
   }
 }
 
@@ -927,30 +890,30 @@ void KMyMoneyView::slotContextMenuRequested(const MyMoneyObject& obj)
   if (typeid(obj) == typeid(MyMoneyAccount)) {
     const auto& acc = static_cast<const MyMoneyAccount&>(obj);
     if (acc.isInvest()) {
-      m_investmentView->slotShowInvestmentMenu(acc);
+      static_cast<KInvestmentView*>(viewBases[View::Investments])->slotShowInvestmentMenu(acc);
       return;
     } else if (acc.isIncomeExpense()) {
-      m_categoriesView->slotShowCategoriesMenu(acc);
+      static_cast<KCategoriesView*>(viewBases[View::Categories])->slotShowCategoriesMenu(acc);
     } else {
-      m_accountsView->slotShowAccountMenu(acc);
+      static_cast<KAccountsView*>(viewBases[View::Accounts])->slotShowAccountMenu(acc);
     }
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
     const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
-    m_institutionsView->slotShowInstitutionsMenu(inst);
+    static_cast<KInstitutionsView*>(viewBases[View::Institutions])->slotShowInstitutionsMenu(inst);
   } else if (typeid(obj) == typeid(MyMoneySchedule)) {
     const auto& sch = static_cast<const MyMoneySchedule&>(obj);
-    m_scheduledView->slotShowScheduleMenu(sch);
+    static_cast<KScheduledView*>(viewBases[View::Schedules])->slotShowScheduleMenu(sch);
   }
 }
 
 void KMyMoneyView::slotTransactionsMenuRequested(const KMyMoneyRegister::SelectedTransactions& list)
 {
   Q_UNUSED(list)
-  m_ledgerView->slotShowTransactionMenu(MyMoneySplit());
+  static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotShowTransactionMenu(MyMoneySplit());
 }
 
 void KMyMoneyView::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list)
 {
-  m_ledgerView->updateLedgerActions(list);
+  static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->updateLedgerActions(list);
   emit transactionsSelected(list); // for plugins
 }

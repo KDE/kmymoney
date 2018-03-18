@@ -115,23 +115,6 @@ private:
 
   KPageWidgetModel* m_model;
 
-  KHomeView *m_homeView;
-  KAccountsView *m_accountsView;
-  KInstitutionsView *m_institutionsView;
-  KCategoriesView *m_categoriesView;
-  KPayeesView *m_payeesView;
-  KTagsView *m_tagsView;
-  KBudgetView *m_budgetView;
-  KScheduledView *m_scheduledView;
-  KGlobalLedgerView *m_ledgerView;
-  KInvestmentView *m_investmentView;
-  KReportsView* m_reportsView;
-  KOnlineJobOutbox* m_onlineJobOutboxView;
-
-  #ifdef ENABLE_UNFINISHEDFEATURES
-  SimpleLedgerView* m_simpleLedgerView;
-  #endif
-
   QHash<View, KPageWidgetItem*> viewFrames;
   QHash<View, KMyMoneyViewBase*> viewBases;
 
@@ -173,7 +156,8 @@ public:
 
   void addWidget(QWidget* w);
 
-  void showPage(KPageWidgetItem* pageItem);
+  void showPageAndFocus(View idView);
+  void showPage(View idView);
 
   /**
     * check if the current view allows to print something
@@ -310,8 +294,6 @@ private Q_SLOTS:
   void slotContextMenuRequested(const MyMoneyObject& obj);
 
   void slotTransactionsMenuRequested(const KMyMoneyRegister::SelectedTransactions& list);
-
-  void slotSwitchView(View view);
 
 protected Q_SLOTS:
   /**

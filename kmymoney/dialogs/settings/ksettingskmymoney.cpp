@@ -58,7 +58,7 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::SystemRun).name());
   addPage(homePage, i18n("Home"), Icons::get(Icon::ViewHome).name());
   addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::ViewFinancialList).name());
-  addPage(schedulesPage, i18nc("use \u2028 as line break", "Scheduled\u2028transactions"), Icons::get(Icon::ViewSchedules).name());
+  addPage(schedulesPage, i18n("Scheduled\u2028transactions"), Icons::get(Icon::ViewSchedules).name());
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
   addPage(reportsPage, i18nc("Report settings", "Reports"), Icons::get(Icon::ViewReports).name());
   addPage(encryptionPage, i18n("Encryption"), Icons::get(Icon::Kgpg).name());
