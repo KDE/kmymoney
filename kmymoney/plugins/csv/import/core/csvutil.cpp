@@ -89,6 +89,12 @@ QStringList Parse::parseFile(const QString &buf)
       continue;
     }
   }
+  // in case the buffer does not end with a CR or LF we
+  // end up here and add the line nevertheless
+  if (!line.isEmpty()) {
+    ++lineCount;
+    lines.append(line);
+  }
   m_lastLine = lineCount;
   return lines;
 }

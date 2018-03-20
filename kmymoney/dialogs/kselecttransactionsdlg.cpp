@@ -23,8 +23,9 @@
 // QT Includes
 
 #include <QEvent>
-#include <QList>
+#include <QHeaderView>
 #include <QKeyEvent>
+#include <QList>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------

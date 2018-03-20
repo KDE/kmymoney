@@ -186,7 +186,7 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://kmymoney.org</url>
-  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=kmymoney4&amp;format=guided</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=kmymoney&amp;format=guided</url>
   <url type="help">https://docs.kde.org/stable/en/extragear-office/kmymoney/index.html</url>
   <project_group>KDE</project_group>
   <provides>

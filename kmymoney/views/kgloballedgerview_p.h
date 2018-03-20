@@ -387,7 +387,6 @@ public:
   void loadAccounts()
   {
     const auto file = MyMoneyFile::instance();
-    auto const model = Models::instance()->accountsModel();
 
     // check if the current account still exists and make it the
     // current account
@@ -410,7 +409,7 @@ public:
 
     if (m_currentAccount.id().isEmpty()) {
       // find the first favorite account
-      QModelIndexList list = model->match(model->index(0, 0),
+      QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
                              (int)eAccountsModel::Role::Favorite,
                              QVariant(true),
                              1,
@@ -424,7 +423,7 @@ public:
 
       if (m_currentAccount.id().isEmpty()) {
         // there are no favorite accounts find any account
-        QModelIndexList list = model->match(model->index(0, 0),
+        QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
                                Qt::DisplayRole,
                                QVariant(QString("*")),
                                -1,
@@ -435,7 +434,7 @@ public:
           QVariant accountId = (*it).data((int)eAccountsModel::Role::ID);
           if (accountId.isValid()) {
             MyMoneyAccount a = file->account(accountId.toString());
-            if (!a.isInvest()) {
+            if (!a.isInvest() && !a.isClosed()) {
               m_currentAccount = a;
               break;
             }

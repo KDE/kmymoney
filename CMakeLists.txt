@@ -334,7 +334,7 @@ nice_yesno("KMM_ADDRESSBOOK_FOUND")
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("LIBOFX_HAVE_CLIENTUID")
 nice_yesno("KBANKING_FOUND")
-nice_yesno("WEBOOB_FOUND")
+nice_yesno("ENABLE_WEBOOB")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
@@ -357,7 +357,7 @@ OFX plugin:                              ${nice_LIBOFX_FOUND}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 
-weboob plugin:                           ${nice_WEBOOB_FOUND}
+weboob plugin:                           ${nice_ENABLE_WEBOOB}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
 
