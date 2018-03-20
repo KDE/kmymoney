@@ -30,7 +30,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -254,13 +253,8 @@ public:
       cell = new QStandardItem;
       node->setChild(row, colTotalValue, cell);
     }
-    QColor color;
-    if (valInstitution.isNegative())
-      color = KMyMoneySettings::schemeColor(SchemeColor::Negative);
-    else
-      color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
-
-    cell->setData(QVariant(color),                                                   Qt::ForegroundRole);
+    const auto fontColor = KMyMoneySettings::schemeColor(valInstitution.isNegative() ? SchemeColor::Negative : SchemeColor::Positive);
+    cell->setData(QVariant(fontColor),                                               Qt::ForegroundRole);
     cell->setData(QVariant(itInstitution->data(Qt::FontRole).value<QFont>()),        Qt::FontRole);
     cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter),                       Qt::TextAlignmentRole);
     cell->setData(MyMoneyUtils::formatMoney(valInstitution, m_file->baseCurrency()), Qt::DisplayRole);
@@ -324,9 +318,11 @@ public:
       if (colNum != -1) {
         const auto accountValueStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()));
         getCell(colNum);
-        cell->setData(accountValueStr, Qt::DisplayRole);
-        cell->setData(font,       Qt::FontRole);
-        cell->setData(alignment,  Qt::TextAlignmentRole);
+        const auto fontColor = KMyMoneySettings::schemeColor(accountValue.isNegative() ? SchemeColor::Negative : SchemeColor::Positive);
+        cell->setData(QVariant(fontColor),  Qt::ForegroundRole);
+        cell->setData(accountValueStr,      Qt::DisplayRole);
+        cell->setData(font,                 Qt::FontRole);
+        cell->setData(alignment,            Qt::TextAlignmentRole);
       }
     }
 
@@ -336,15 +332,10 @@ public:
       if (colNum != -1) {
         const auto accountTotalValueStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()));
         getCell(colNum);
-        QColor color;
-        if (accountTotalValue.isNegative())
-          color = KMyMoneySettings::schemeColor(SchemeColor::Negative);
-        else
-          color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
-
+        const auto fontColor = KMyMoneySettings::schemeColor(accountTotalValue.isNegative() ? SchemeColor::Negative : SchemeColor::Positive);
         cell->setData(accountTotalValueStr, Qt::DisplayRole);
         cell->setData(font,                 Qt::FontRole);
-        cell->setData(QVariant(color),      Qt::ForegroundRole);
+        cell->setData(QVariant(fontColor),  Qt::ForegroundRole);
         cell->setData(alignment,            Qt::TextAlignmentRole);
       }
     }
