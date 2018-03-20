@@ -59,7 +59,13 @@ class TransactionEditorPrivate
 
 public:
   explicit TransactionEditorPrivate(TransactionEditor *qq) :
-    q_ptr(qq)
+    q_ptr(qq),
+    m_paymentMethod(eMyMoney::Schedule::PaymentType::Any),
+    m_regForm(nullptr),
+    m_item(nullptr),
+    m_initialAction(eWidgets::eRegister::Action::None),
+    m_openEditSplits(false),
+    m_memoChanged(false)
   {
   }
 

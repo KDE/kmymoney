@@ -48,7 +48,16 @@ namespace KMyMoneyRegister
   class  TransactionPrivate : public RegisterItemPrivate
   {
   public:
-    TransactionPrivate()
+    TransactionPrivate() :
+      m_form(nullptr),
+      m_formRowHeight(-1),
+      m_selected(false),
+      m_focus(false),
+      m_erroneous(false),
+      m_inEdit(false),
+      m_inRegisterEdit(false),
+      m_showBalance(true),
+      m_reducedIntensity(false)
     {
     }
 
@@ -58,15 +67,6 @@ namespace KMyMoneyRegister
 
     void init(int uniqueId)
     {
-      m_formRowHeight = -1;
-      m_selected = false;
-      m_focus = false;
-      m_erroneous = false;
-      m_inEdit = false;
-      m_inRegisterEdit = false;
-      m_showBalance = true;
-      m_reducedIntensity = false;
-
       auto file = MyMoneyFile::instance();
 
       // load the account

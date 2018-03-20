@@ -199,11 +199,14 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_chartView(new KReportChartView(this)),
     m_control(new ReportControl(this)),
     m_layout(new QVBoxLayout(this)),
+    m_currentPrinter(nullptr),
     m_report(report),
     m_deleteMe(false),
     m_chartEnabled(false),
     m_showingChart(report.isChartByDefault()),
     m_needReload(true),
+    m_isChartViewValid(false),
+    m_isTableViewValid(false),
     m_table(0)
 {
   m_layout->setSpacing(6);
@@ -443,7 +446,12 @@ public:
   explicit KReportsViewPrivate(KReportsView *qq):
     q_ptr(qq),
     m_needLoad(true),
-    m_reportListView(0)
+    m_reportListView(nullptr),
+    m_reportTabWidget(nullptr),
+    m_listTab(nullptr),
+    m_listTabLayout(nullptr),
+    m_tocTreeWidget(nullptr),
+    m_columnsAlreadyAdjusted(false)
   {
   }
 
@@ -719,12 +727,13 @@ public:
     int index = 1;
     while (index < m_reportTabWidget->count()) {
       // TODO: Find some way of detecting the file is closed and kill these tabs!!
-      KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
-      if (tab->isReadyToDelete() /* || ! reports.count() */) {
-        delete tab;
-        --index;
-      } else {
-        tab->loadTab();
+      if (auto tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index))) {
+        if (tab->isReadyToDelete() /* || ! reports.count() */) {
+          delete tab;
+          --index;
+        } else {
+          tab->loadTab();
+        }
       }
       ++index;
     }

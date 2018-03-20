@@ -230,11 +230,24 @@ public:
     q_ptr(qq),
     m_mousePressFilter(0),
     m_registerSearchLine(0),
+    m_precision(2),
     m_recursion(false),
     m_showDetails(false),
+    m_action(eWidgets::eRegister::Action::None),
     m_filterProxyModel(0),
     m_accountComboBox(0),
     m_balanceIsApproximated(false),
+    m_toolbarFrame(nullptr),
+    m_registerFrame(nullptr),
+    m_buttonFrame(nullptr),
+    m_formFrame(nullptr),
+    m_summaryFrame(nullptr),
+    m_register(nullptr),
+    m_buttonbar(nullptr),
+    m_leftSummaryLabel(nullptr),
+    m_centerSummaryLabel(nullptr),
+    m_rightSummaryLabel(nullptr),
+    m_form(nullptr),
     m_needLoad(true),
     m_newAccountLoaded(true),
     m_inEditMode(false),
@@ -1098,20 +1111,20 @@ public:
     if (m_register->focusItem() == 0)
       return false;
 
-    bool rc = true;
+//    bool rc = true;
     if (list.warnLevel() == 3) {  //Closed account somewhere
-      KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-      for (it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
-        QList<MyMoneySplit> splitList = (*it_t).transaction().splits();
-        QString id = splitList.first().accountId();
+      auto it_t = list.first();
+//      for (auto it_t = list.cbegin(); rc && it_t != list.cend(); ++it_t) {
+        auto splitList = it_t.transaction().splits();
+        auto id = splitList.first().accountId();
         acc = MyMoneyFile::instance()->account(id);
         if (!acc.isClosed()) {  //wrong split, try other
           id = splitList.last().accountId();
           acc = MyMoneyFile::instance()->account(id);
         }
         closedAccount = acc.name();
-        break;
-      }
+//        break;
+//      }
       tooltip = i18n("Cannot process transactions in account %1, which is closed.", closedAccount);
       showTooltip(tooltip);
       return false;

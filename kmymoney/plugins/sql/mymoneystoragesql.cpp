@@ -1249,50 +1249,51 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
   const int matchKeysCol = record.indexOf("matchKeys");
   const int identIdCol = record.indexOf("identId");
 
-  query.next();
-  while (query.isValid()) {
-    QString pid;
-    QString boolChar;
-    MyMoneyPayee payee;
-    uint type;
-    bool ignoreCase;
-    QString matchKeys;
-    pid = GETSTRING(idCol);
-    payee.setName(GETSTRING(nameCol));
-    payee.setReference(GETSTRING(referenceCol));
-    payee.setEmail(GETSTRING(emailCol));
-    payee.setAddress(GETSTRING(addressStreetCol));
-    payee.setCity(GETSTRING(addressCityCol));
-    payee.setPostcode(GETSTRING(addressZipcodeCol));
-    payee.setState(GETSTRING(addressStateCol));
-    payee.setTelephone(GETSTRING(telephoneCol));
-    payee.setNotes(GETSTRING(notesCol));
-    payee.setDefaultAccountId(GETSTRING(defaultAccountIdCol));
-    type = GETINT(matchDataCol);
-    ignoreCase = (GETSTRING(matchIgnoreCaseCol) == "Y");
-    matchKeys = GETSTRING(matchKeysCol);
+  if (query.next()) {
+    while (query.isValid()) {
+      QString pid;
+      QString boolChar;
+      MyMoneyPayee payee;
+      uint type;
+      bool ignoreCase;
+      QString matchKeys;
+      pid = GETSTRING(idCol);
+      payee.setName(GETSTRING(nameCol));
+      payee.setReference(GETSTRING(referenceCol));
+      payee.setEmail(GETSTRING(emailCol));
+      payee.setAddress(GETSTRING(addressStreetCol));
+      payee.setCity(GETSTRING(addressCityCol));
+      payee.setPostcode(GETSTRING(addressZipcodeCol));
+      payee.setState(GETSTRING(addressStateCol));
+      payee.setTelephone(GETSTRING(telephoneCol));
+      payee.setNotes(GETSTRING(notesCol));
+      payee.setDefaultAccountId(GETSTRING(defaultAccountIdCol));
+      type = GETINT(matchDataCol);
+      ignoreCase = (GETSTRING(matchIgnoreCaseCol) == "Y");
+      matchKeys = GETSTRING(matchKeysCol);
 
-    payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(type), ignoreCase, matchKeys);
+      payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(type), ignoreCase, matchKeys);
 
-    // Get payeeIdentifier ids
-    QStringList identifierIds;
-    do {
-      identifierIds.append(GETSTRING(identIdCol));
-    } while (query.next() && GETSTRING(idCol) == pid);   // as long as the payeeId is unchanged
+      // Get payeeIdentifier ids
+      QStringList identifierIds;
+      do {
+        identifierIds.append(GETSTRING(identIdCol));
+      } while (query.next() && GETSTRING(idCol) == pid);   // as long as the payeeId is unchanged
 
-    // Fetch and save payeeIdentifier
-    if (!identifierIds.isEmpty()) {
-      QList< ::payeeIdentifier > identifier = fetchPayeeIdentifiers(identifierIds).values();
-      payee.resetPayeeIdentifiers(identifier);
+      // Fetch and save payeeIdentifier
+      if (!identifierIds.isEmpty()) {
+        QList< ::payeeIdentifier > identifier = fetchPayeeIdentifiers(identifierIds).values();
+        payee.resetPayeeIdentifiers(identifier);
+      }
+
+      if (pid == "USER")
+        d->m_storage->setUser(payee);
+      else
+        pList[pid] = MyMoneyPayee(pid, payee);
+
+      if (d->m_displayStatus)
+        d->signalProgress(++progress, 0);
     }
-
-    if (pid == "USER")
-      d->m_storage->setUser(payee);
-    else
-      pList[pid] = MyMoneyPayee(pid, payee);
-
-    if (d->m_displayStatus)
-      d->signalProgress(++progress, 0);
   }
   return pList;
 }
@@ -1598,7 +1599,8 @@ QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList
       while (sq.isValid() && it_acc != accListEnd
              && it_acc.value().id() == sq.value(1).toString()) {
         it_acc.value().addAccountId(sq.value(0).toString());
-        sq.next();
+        if (!sq.next())
+          break;
       }
       sq.previous();
     }
@@ -1884,7 +1886,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   QDate end = filter.toDate();
   // not entirely sure if the following is correct, but at best, saves a lot of reads, at worst
   // it only causes us to read a few more transactions that strictly necessary (I think...)
-  if (start == d->m_startDate) start = QDate();
+  if (start == MyMoneyStorageSqlPrivate::m_startDate) start = QDate();
   bool txFilterActive = ((start != QDate()) || (end != QDate())); // and this for fields in the transaction table
 
   QString whereClause = "";

@@ -120,10 +120,14 @@ public:
   ~MyMoneyDbTransaction()
   {
     if (std::uncaught_exception()) {
-        m_db.cancelCommitUnit(m_name);
-      } else {
+      m_db.cancelCommitUnit(m_name);
+    } else {
+      try{
         m_db.endCommitUnit(m_name);
+      } catch(MyMoneyException&) {
+        m_db.cancelCommitUnit(m_name);
       }
+    }
   }
 private:
   MyMoneyStorageSql& m_db;
@@ -187,8 +191,24 @@ public:
   explicit MyMoneyStorageSqlPrivate(MyMoneyStorageSql* qq) :
     q_ptr(qq),
     m_dbVersion(0),
+    m_storage(nullptr),
     m_loadAll(false),
     m_override(false),
+    m_institutions(0),
+    m_accounts(0),
+    m_payees(0),
+    m_tags(0),
+    m_transactions(0),
+    m_splits(0),
+    m_securities(0),
+    m_prices(0),
+    m_currencies(0),
+    m_schedules(0),
+    m_reports(0),
+    m_kvps(0),
+    m_budgets(0),
+    m_onlineJobs(0),
+    m_payeeIdentifier(0),
     m_hiIdInstitutions(0),
     m_hiIdPayees(0),
     m_hiIdTags(0),

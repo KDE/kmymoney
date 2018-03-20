@@ -25,7 +25,8 @@ QTEST_GUILESS_MAIN(SymbolTest);
 
 Parse* m_parse;
 
-SymbolTest::SymbolTest()
+SymbolTest::SymbolTest() :
+  m_parse(nullptr)
 {
 }
 

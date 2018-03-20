@@ -43,7 +43,8 @@ namespace NewAccountWizard
   public:
     explicit AccountTypePagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KAccountTypePage)
+      ui(new Ui::KAccountTypePage),
+      m_showPriceWarning(false)
     {
     }
 

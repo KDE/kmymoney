@@ -105,7 +105,10 @@ public:
   explicit KBudgetViewPrivate(KBudgetView *qq) :
     KMyMoneyAccountsViewBasePrivate(),
     q_ptr(qq),
-    ui(new Ui::KBudgetView)
+    ui(new Ui::KBudgetView),
+    m_budgetProxyModel(nullptr),
+    m_inSelection(false),
+    m_budgetInEditing(false)
   {
   }
 

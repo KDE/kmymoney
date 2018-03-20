@@ -104,8 +104,9 @@ void KPayeesView::slotChooseDefaultAccount()
   while (item) {
     //only walk through selectable items. eg. transactions and not group markers
     if (item->isSelectable()) {
-      KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
-
+      auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
+      if (!t)
+        return;
       MyMoneySplit s = t->transaction().splitByPayee(d->m_payee.id());
       const MyMoneyAccount& acc = file->account(s.accountId());
 
@@ -443,9 +444,7 @@ void KPayeesView::slotSyncAddressBook()
   }
 
   if (d->m_payeeRows.count() <= d->m_payeeRow) {
-    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem());
-
-    if (item) { // update ui if something is selected
+    if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) { // update ui if something is selected
       d->m_payee = item->payee();
       d->ui->addressEdit->setText(d->m_payee.address());
       d->ui->postcodeEdit->setText(d->m_payee.postcode());
@@ -456,8 +455,7 @@ void KPayeesView::slotSyncAddressBook()
     return;
   }
 
-  KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->item(d->m_payeeRows.at(d->m_payeeRow)));
-  if (item)
+  if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->item(d->m_payeeRows.at(d->m_payeeRow))))
     d->m_payee = item->payee();
   ++d->m_payeeRow;
 
@@ -583,8 +581,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
     QList<QListWidgetItem *> selectedItems = d->ui->m_payeesList->selectedItems();
     QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
     while (payeesIt != selectedItems.constEnd()) {
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*payeesIt);
-      if (item)
+      if (auto item = dynamic_cast<KPayeeListItem*>(*payeesIt))
         item->setSelected(false);
       ++payeesIt;
     }
@@ -593,7 +590,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
     QListWidgetItem* it;
     for (int i = 0; i < d->ui->m_payeesList->count(); ++i) {
       it = d->ui->m_payeesList->item(i);
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem *>(it);
+      auto item = dynamic_cast<KPayeeListItem *>(it);
       if (item && item->payee().id() == payeeId) {
         d->ui->m_payeesList->scrollToItem(it, QAbstractItemView::PositionAtCenter);
 
@@ -606,8 +603,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
         KMyMoneyRegister::RegisterItem *item = 0;
         for (int i = 0; i < d->ui->m_register->rowCount(); ++i) {
           item = d->ui->m_register->itemAtRow(i);
-          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
-          if (t) {
+          if (auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(item)) {
             if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
               d->ui->m_register->selectItem(item);
               d->ui->m_register->ensureItemVisible(item);
@@ -627,8 +623,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
 void KPayeesView::slotShowPayeesMenu(const QPoint& /*p*/)
 {
   Q_D(KPayeesView);
-  auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem());
-  if (item) {
+  if (dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) {
     slotSelectPayee();
     pMenus[eMenu::Menu::Payee]->exec(QCursor::pos());
   }

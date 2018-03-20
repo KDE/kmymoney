@@ -194,7 +194,7 @@ public:
   inline void map(QMap<Key, T>& that) const {
     //QMap<Key, T>* ptr = dynamic_cast<QMap<Key, T>* >(this);
     //that = *ptr;
-    that = *(dynamic_cast<QMap<Key, T>* >(const_cast<MyMoneyMap<Key, T>* >(this)));
+    that = *(static_cast<QMap<Key, T>* >(const_cast<MyMoneyMap<Key, T>* >(this)));
   }
 
   inline int count(void) const {

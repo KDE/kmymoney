@@ -26,6 +26,12 @@
 
 QTEST_GUILESS_MAIN(MatchFinderTest)
 
+MatchFinderTest::MatchFinderTest() :
+  matchResult(TransactionMatchFinder::MatchResult::MatchNotFound)
+{
+
+}
+
 void MatchFinderTest::init()
 {
   file = MyMoneyFile::instance();

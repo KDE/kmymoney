@@ -157,8 +157,7 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
 }
 
 Transaction::Transaction(TransactionPrivate &dd, Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  RegisterItem(dd, parent),
-  d_ptr(&dd)
+  RegisterItem(dd, parent)
 {
   Q_D(Transaction);
   d->m_form = nullptr;
@@ -731,8 +730,8 @@ void Transaction::startEditMode()
   d->m_inEdit = true;
 
   // hide the original tabbar since the edit tabbar will be added
-  KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form);
-  form->getTabBar()->setVisible(false);
+  if (auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form))
+    form->getTabBar()->setVisible(false);
 
   // only update the number of lines displayed if we edit inside the register
   if (d->m_inRegisterEdit)
@@ -748,8 +747,8 @@ void Transaction::leaveEditMode()
 {
   Q_D(Transaction);
   // show the original tabbar since the edit tabbar was removed
-  KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form);
-  form->getTabBar()->setVisible(true);
+  if (auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form))
+    form->getTabBar()->setVisible(true);
 
   // make sure we reset the row height of all the transaction's rows because it could have been changed during edit
   if (d->m_parent) {
@@ -907,8 +906,7 @@ void Transaction::setVisible(bool visible)
       // about it so that they don't show the balance
       p = prevItem();
       while (p) {
-        t = dynamic_cast<Transaction*>(p);
-        if (t) {
+        if ((t = dynamic_cast<Transaction*>(p))) {
           if (!t->d_func()->m_showBalance)
             break;
           t->d_func()->m_showBalance = false;
@@ -929,8 +927,7 @@ void Transaction::setVisible(bool visible)
         d->m_showBalance = true;
         p = prevItem();
         while (p && p->isVisible()) {
-          t = dynamic_cast<Transaction*>(p);
-          if (t) {
+          if ((t = dynamic_cast<Transaction*>(p))) {
             if (t->d_func()->m_showBalance)
               break;
             t->d_func()->m_showBalance = true;

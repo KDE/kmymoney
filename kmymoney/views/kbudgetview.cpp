@@ -323,7 +323,9 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
   if (!p)
     return;
 
-  KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
+  auto pBudget = dynamic_cast<KBudgetListItem*>(p);
+  if (!pBudget)
+    return;
   if (col == 1) {
     pBudget->setText(1, QString().setNum(pBudget->budget().budgetStart().year()));
     return;

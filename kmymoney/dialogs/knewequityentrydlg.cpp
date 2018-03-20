@@ -42,11 +42,11 @@
 class KNewEquityEntryDlgPrivate
 {
   Q_DISABLE_COPY(KNewEquityEntryDlgPrivate)
-  Q_DECLARE_PUBLIC(KNewEquityEntryDlg)
 
 public:
   KNewEquityEntryDlgPrivate() :
-    ui(new Ui::KNewEquityEntryDlg)
+    ui(new Ui::KNewEquityEntryDlg),
+    m_fraction(2)
   {
   }
 
@@ -55,7 +55,6 @@ public:
     delete ui;
   }
 
-  KNewEquityEntryDlg      *q_ptr;
   Ui::KNewEquityEntryDlg  *ui;
   QString                  m_strSymbolName;
   QString                  m_strName;

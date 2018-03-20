@@ -51,7 +51,8 @@ class KPayeeReassignDlgPrivate
 
 public:
   KPayeeReassignDlgPrivate() :
-    ui(new Ui::KPayeeReassignDlg)
+    ui(new Ui::KPayeeReassignDlg),
+    m_type(KPayeeReassignDlg::OperationType::TypeMerge)
   {
   }
 

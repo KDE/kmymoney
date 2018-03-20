@@ -61,6 +61,7 @@ using namespace Icons;
 
 CSVWizard::CSVWizard(CSVImporter *plugin, CSVImporterCore* importer) :
   ui(new Ui::CSVWizard),
+  m_skipSetup(false),
   m_plugin(plugin),
   m_imp(importer),
   m_wiz(new QWizard)
@@ -446,6 +447,7 @@ void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
 //-------------------------------------------------------------------------------------------------------
 IntroPage::IntroPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
+  m_profileType(Profile::Banking),
   ui(new Ui::IntroPage)
 {
   ui->setupUi(this);
@@ -780,12 +782,6 @@ void SeparatorPage::textDelimiterChanged(const int index)
 
   m_imp->m_profile->m_textDelimiter = static_cast<TextDelimiter>(index);
   m_imp->m_file->setupParser(m_imp->m_profile);
-
-  if (index == -1) {
-    ui->m_textDelimiter->blockSignals(true);
-    ui->m_textDelimiter->setCurrentIndex((int)m_imp->m_profile->m_textDelimiter);
-    ui->m_textDelimiter->blockSignals(false);
-  }
   emit completeChanged();
 }
 
@@ -927,7 +923,9 @@ void RowsPage::endRowChanged(int val)
 
 FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
-    ui(new Ui::FormatsPage)
+    ui(new Ui::FormatsPage),
+    m_isDecimalSymbolOK(false),
+    m_isDateFormatOK(false)
 {
   ui->setupUi(this);
   connect(ui->m_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));

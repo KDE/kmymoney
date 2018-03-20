@@ -90,7 +90,14 @@ class KMyMoneyEditPrivate
 
 public:
   explicit KMyMoneyEditPrivate(KMyMoneyEdit *qq) :
-    q_ptr(qq)
+    q_ptr(qq),
+    m_calculator(nullptr),
+    m_calculatorFrame(nullptr),
+    m_edit(nullptr),
+    m_calcButton(nullptr),
+    m_resetButton(nullptr),
+    m_prec(2),
+    allowEmpty(true)
   {
   }
 

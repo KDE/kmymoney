@@ -39,6 +39,7 @@ public:
       _payeeNameMaxLines(0),
       _payeeNameLength(0),
       _payeeNameMinLength(0),
+      m_endToEndReferenceLength(0),
       _allowedChars(QString("")) {}
 
   // Limits getter

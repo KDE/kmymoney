@@ -42,10 +42,6 @@ protected:
 private:
   KMyMoneyTextEditHighlighterPrivate * const d_ptr;
   Q_DECLARE_PRIVATE(KMyMoneyTextEditHighlighter)
-  QString m_allowedChars;
-  int m_maxLines;
-  int m_maxLineLength;
-  int m_maxLength;
 };
 
 #endif // KMYMONEYTEXTEDIT_H

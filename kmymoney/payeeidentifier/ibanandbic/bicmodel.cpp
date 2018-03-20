@@ -62,8 +62,8 @@ bicModel::bicModel(QObject* parent)
 
   if (services.isEmpty()) {
     // Set a valid query
-    query.exec("SELECT null;");
-    setQuery(query);
+    if (query.exec("SELECT null;"))
+      setQuery(query);
     return;
   }
 

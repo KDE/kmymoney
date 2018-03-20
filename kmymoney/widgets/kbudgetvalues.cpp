@@ -53,8 +53,13 @@ class KBudgetValuesPrivate
 
 public:
   KBudgetValuesPrivate() :
-    ui(new Ui::KBudgetValues)
+    ui(new Ui::KBudgetValues),
+    m_currentTab(nullptr)
   {
+    for (int i = 0; i < 12; ++i) {
+      m_label[i] = nullptr;
+      m_field[i] = nullptr;
+    }
   }
 
   ~KBudgetValuesPrivate()
@@ -161,9 +166,9 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
 
   if (o->isWidgetType()
       && (e->type() == QEvent::KeyPress)) {
-    QKeyEvent* k = dynamic_cast<QKeyEvent*>(e);
-    if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
-        || (k->modifiers() & Qt::KeypadModifier) != 0) {
+    auto k = dynamic_cast<QKeyEvent*>(e);
+    if ((k && k->modifiers() & Qt::KeyboardModifierMask) == 0
+        || (k && k->modifiers() & Qt::KeypadModifier) != 0) {
       QKeyEvent evt(e->type(),
                     Qt::Key_Tab, k->modifiers(), QString(),
                     k->isAutoRepeat(), k->count());

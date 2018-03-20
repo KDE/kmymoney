@@ -69,7 +69,9 @@ class KEditLoanWizardPrivate : public KNewLoanWizardPrivate
 
 public:
   KEditLoanWizardPrivate(KEditLoanWizard *qq) :
-    KNewLoanWizardPrivate(qq)
+    KNewLoanWizardPrivate(qq),
+    m_lastSelection(0),
+    m_fullyRepayLoan(false)
   {
   }
 

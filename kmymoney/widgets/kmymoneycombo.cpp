@@ -56,7 +56,7 @@ KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *parent) :
 {
   Q_D(KMyMoneyCombo);
   if (rw) {
-    d->m_edit = new KMyMoneyLineEdit(this, "combo edit");
+    d->m_edit = new KMyMoneyLineEdit(this, true);
     setLineEdit(d->m_edit);
   }
 }
@@ -67,7 +67,7 @@ KMyMoneyCombo::KMyMoneyCombo(KMyMoneyComboPrivate &dd, bool rw, QWidget *parent)
 {
   Q_D(KMyMoneyCombo);
   if (rw) {
-    d->m_edit = new KMyMoneyLineEdit(this, "combo edit");
+    d->m_edit = new KMyMoneyLineEdit(this, true);
     setLineEdit(d->m_edit);
   }
 }
@@ -118,7 +118,7 @@ void KMyMoneyCombo::setEditable(bool y)
 
   // make sure we use our own line edit style
   if (y) {
-    d->m_edit = new KMyMoneyLineEdit(this, "combo edit");
+    d->m_edit = new KMyMoneyLineEdit(this, true);
     setLineEdit(d->m_edit);
     d->m_edit->setPalette(palette());
   } else {

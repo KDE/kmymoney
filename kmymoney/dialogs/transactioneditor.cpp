@@ -114,7 +114,7 @@ TransactionEditor::~TransactionEditor()
   // After all, the editor is about to die
 
   //disconnect first tagCombo:
-  KTagContainer *w = dynamic_cast<KTagContainer*>(haveWidget("tag"));
+  auto w = dynamic_cast<KTagContainer*>(haveWidget("tag"));
   if (w && w->tagCombo()) {
     w->tagCombo()->disconnect(this);
   }
@@ -153,7 +153,8 @@ void TransactionEditor::setupPrecision()
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget * w;
     if ((w = haveWidget(*it_w)) != 0) {
-      dynamic_cast<KMyMoneyEdit*>(w)->setPrecision(prec);
+      if (auto precisionWidget = dynamic_cast<KMyMoneyEdit*>(w))
+        precisionWidget->setPrecision(prec);
     }
   }
 }
@@ -268,12 +269,13 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
 
   // if the object is a widget, the event is a key press event and
   // the object is one of our edit widgets, then ....
+  auto numberWiget = dynamic_cast<QWidget*>(o);
   if (o->isWidgetType()
       && (e->type() == QEvent::KeyPress)
-      && d->m_editWidgets.values().contains(dynamic_cast<QWidget*>(o))) {
-    QKeyEvent* k = dynamic_cast<QKeyEvent*>(e);
-    if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
-        || (k->modifiers() & Qt::KeypadModifier) != 0) {
+      && numberWiget && d->m_editWidgets.values().contains(numberWiget)) {
+    auto k = dynamic_cast<QKeyEvent*>(e);
+    if ((k && k->modifiers() & Qt::KeyboardModifierMask) == 0
+        || (k && k->modifiers() & Qt::KeypadModifier) != 0) {
       bool isFinal = false;
       QList<const QWidget*>::const_iterator it_w;
       switch (k->key()) {
@@ -288,8 +290,8 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           if (KMyMoneySettings::enterMovesBetweenFields()) {
             for (it_w = d->m_finalEditWidgets.constBegin(); !isFinal && it_w != d->m_finalEditWidgets.constEnd(); ++it_w) {
               if (*it_w == o) {
-                if (dynamic_cast<const KMyMoneyEdit*>(*it_w)) {
-                  isFinal = !(dynamic_cast<const KMyMoneyEdit*>(*it_w)->value().isZero());
+                if (auto widget = dynamic_cast<const KMyMoneyEdit*>(*it_w)) {
+                  isFinal = !(widget->value().isZero());
                 } else
                   isFinal = true;
               }
@@ -306,7 +308,8 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
             QApplication::sendEvent(o, &evt);
             // in case of a category item and the split button is visible
             // send a second event so that we get passed the button.
-            if (dynamic_cast<KMyMoneyCategory*>(o) && dynamic_cast<KMyMoneyCategory*>(o)->splitButton())
+            auto widget = dynamic_cast<KMyMoneyCategory*>(o);
+            if (widget && widget->splitButton())
               QApplication::sendEvent(o, &evt);
 
           } else {
@@ -329,7 +332,6 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
 {
   Q_D(TransactionEditor);
   auto next = txt;
-  KMyMoneyLineEdit* number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
   QString schedInfo;
   if (!d->m_scheduleInfo.isEmpty()) {
     schedInfo = i18n("<center>Processing schedule for %1.</center>", d->m_scheduleInfo);
@@ -340,7 +342,7 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
                                    "<center>Do you want to replace it with the next available number?</center>", next, d->m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
       assignNextNumber();
       next = KMyMoneyUtils::nextCheckNumber(d->m_account);
-    } else {
+    } else if (auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"))) {
       number->setText(QString());
       break;
     }
@@ -526,7 +528,7 @@ void TransactionEditor::assignNextNumber()
 {
   Q_D(TransactionEditor);
   if (canAssignNumber()) {
-    KMyMoneyLineEdit* number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
+    auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
     QString num = KMyMoneyUtils::nextCheckNumber(d->m_account);
     bool showMessage = true;
     int rc = KMessageBox::No;
@@ -544,20 +546,23 @@ void TransactionEditor::assignNextNumber()
         num = KMyMoneyUtils::nextCheckNumber(d->m_account);
         KMyMoneyUtils::updateLastNumberUsed(d->m_account, num);
         d->m_account.setValue("lastNumberUsed", num);
-        number->loadText(num);
+        if (number)
+          number->loadText(num);
       } else {
         num = QString();
         break;
       }
     }
-    number->setText(num);
+    if (number)
+      number->setText(num);
   }
 }
 
 bool TransactionEditor::canAssignNumber() const
 {
-  auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
-  return (number != 0);
+  if (dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number")))
+    return true;
+  return false;
 }
 
 void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool /* allowObjectCreation */)
@@ -822,10 +827,9 @@ void TransactionEditor::resizeForm()
 {
   Q_D(TransactionEditor);
   // force resizeing of the columns in the form
-  auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_regForm);
-  if (form) {
+
+  if (auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_regForm))
     QMetaObject::invokeMethod(form, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, (int)eWidgets::eTransactionForm::Column::Value1));
-  }
 }
 
 void TransactionEditor::slotNewPayee(const QString& newnameBase, QString& id)

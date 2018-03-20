@@ -82,7 +82,11 @@ class KSplitTransactionDlgPrivate
 public:
   explicit KSplitTransactionDlgPrivate(KSplitTransactionDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KSplitTransactionDlg)
+    ui(new Ui::KSplitTransactionDlg),
+    m_buttonBox(nullptr),
+    m_precision(2),
+    m_amountValid(false),
+    m_isDeposit(false)
   {
   }
 

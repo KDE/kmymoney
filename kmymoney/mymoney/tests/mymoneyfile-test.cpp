@@ -46,6 +46,12 @@ using namespace MyMoneyStandardAccounts;
 
 QTEST_GUILESS_MAIN(MyMoneyFileTest)
 
+MyMoneyFileTest::MyMoneyFileTest() :
+  m(nullptr),
+  storage(nullptr)
+{
+}
+
 void MyMoneyFileTest::objectAdded(eMyMoney::File::Object type, const QString& id)
 {
   Q_UNUSED(type);
@@ -2369,11 +2375,13 @@ void MyMoneyFileTest::testAddOnlineJob()
 void MyMoneyFileTest::testGetOnlineJob()
 {
   QSKIP("Need dummy task for this test", SkipAll);
+  #if 0
   testAddOnlineJob();
 
   const onlineJob requestedJob = m->getOnlineJob("O000001");
   QVERIFY(!requestedJob.isNull());
   QCOMPARE(requestedJob.id(), QString("O000001"));
+  #endif
 }
 
 void MyMoneyFileTest::testRemoveOnlineJob()

@@ -39,7 +39,8 @@ class KTagContainerPrivate
   Q_DISABLE_COPY(KTagContainerPrivate)
 
 public:
-  KTagContainerPrivate()
+  KTagContainerPrivate() :
+    m_tagCombo(nullptr)
   {
   }
 

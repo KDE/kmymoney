@@ -33,7 +33,8 @@ class KMyMoneyValidationFeedbackPrivate
 
 public:
   KMyMoneyValidationFeedbackPrivate() :
-    ui(new Ui::KMyMoneyValidationFeedback)
+    ui(new Ui::KMyMoneyValidationFeedback),
+    type(ValidationFeedback::MessageType::None)
   {
   }
 

@@ -64,7 +64,12 @@ class KGenerateSqlDlgPrivate
 public:
   explicit KGenerateSqlDlgPrivate(KGenerateSqlDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KGenerateSqlDlg)
+    ui(new Ui::KGenerateSqlDlg),
+    m_createTablesButton(nullptr),
+    m_saveSqlButton(nullptr),
+    m_sqliteSelected(false),
+    m_storage(nullptr),
+    m_mustDetachStorage(false)
   {
   }
 

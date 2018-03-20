@@ -161,7 +161,8 @@ int main(int argc, char *argv[])
 
   // create the singletons before we start memory checking
   // to avoid false error reports
-  MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
+  Q_UNUSED(file)
 
   KMyMoneyUtils::checkConstants();
 

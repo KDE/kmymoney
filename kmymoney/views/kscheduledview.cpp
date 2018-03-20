@@ -264,7 +264,7 @@ void KScheduledView::slotAccountActivated()
     QStringList accountList = file->asset().accountList();
     accountList.append(file->liability().accountList());
     file->accountList(list, accountList, true);
-    qStableSort(list.begin(), list.end(), d->accountNameLessThan);
+    qStableSort(list.begin(), list.end(), KScheduledViewPrivate::accountNameLessThan);
 
     QList<MyMoneyAccount>::ConstIterator it_a;
     for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {

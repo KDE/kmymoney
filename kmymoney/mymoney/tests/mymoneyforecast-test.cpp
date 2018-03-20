@@ -41,7 +41,10 @@ using namespace test;
 
 QTEST_GUILESS_MAIN(MyMoneyForecastTest)
 
-MyMoneyForecastTest::MyMoneyForecastTest()
+MyMoneyForecastTest::MyMoneyForecastTest() :
+  m(nullptr),
+  storage(nullptr),
+  file(nullptr)
 {
   this->moT1 = MyMoneyMoney(57, 1);
   this->moT2 = MyMoneyMoney(63, 1);
@@ -606,7 +609,8 @@ void MyMoneyForecastTest::testDaysToZeroBalance()
   //test invalid arguments
   MyMoneyAccount nullAcc;
   try {
-    a.daysToZeroBalance(nullAcc);
+    auto days = a.daysToZeroBalance(nullAcc);
+    Q_UNUSED(days)
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }

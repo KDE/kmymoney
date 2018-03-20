@@ -475,7 +475,7 @@ void KReportConfigurationFilterDlg::slotReset()
   } else if (d->m_tabRowColQuery) {
     KComboBox *combo = d->m_tabRowColQuery->ui->m_comboOrganizeBy;
     switch (d->m_initialState.rowType()) {
-      case MyMoneyReport::eNoColumns:
+      case MyMoneyReport::eNoRows:
       case MyMoneyReport::eCategory:
         combo->setCurrentItem(i18n("Categories"), false);
         break;

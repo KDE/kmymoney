@@ -37,7 +37,8 @@
 class MyMoneyExceptionPrivate
 {
 public:
-  MyMoneyExceptionPrivate()
+  MyMoneyExceptionPrivate() :
+    m_line(0)
   {
   }
 

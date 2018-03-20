@@ -81,6 +81,9 @@ public:
     m_currentRow(0),
     m_maxRows(0),
     m_precision(2),
+    m_contextMenu(nullptr),
+    m_contextMenuDelete(nullptr),
+    m_contextMenuDuplicate(nullptr),
     m_editCategory(0),
     m_editMemo(0),
     m_editAmount(0)
@@ -350,11 +353,12 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         // a completion list. In this case, we close the completion list and
         // do not end editing of the transaction.
         if (o->inherits("KLineEdit")) {
-          KLineEdit* le = dynamic_cast<KLineEdit*>(o);
-          KCompletionBox* box = le->completionBox(false);
-          if (box && box->isVisible()) {
-            terminate = false;
-            le->completionBox(false)->hide();
+          if (auto le = dynamic_cast<KLineEdit*>(o)) {
+            KCompletionBox* box = le->completionBox(false);
+            if (box && box->isVisible()) {
+              terminate = false;
+              le->completionBox(false)->hide();
+            }
           }
         }
 

@@ -135,6 +135,7 @@ void OFXImporter::slotImportFile()
     }
 
   }
+  delete option;
   delete widget;
 }
 

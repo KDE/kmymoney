@@ -95,6 +95,7 @@ public:
     q_ptr(qq),
     ui(new Ui::KTagsView),
     m_needLoad(true),
+    m_searchWidget(nullptr),
     m_inSelection(false),
     m_allowEditing(true),
     m_tagFilterType(0)

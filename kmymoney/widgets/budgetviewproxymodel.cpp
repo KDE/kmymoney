@@ -74,6 +74,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
                 default:
                   break;
               }
+              break;
             }
           case (int)Role::Balance:
             if (file->security(account.currencyId()) != file->baseCurrency())

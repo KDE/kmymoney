@@ -26,9 +26,14 @@
 class SplitAdjustDialog::Private {
 public:
   Private()
-    : ui(new Ui_SplitAdjustDialog)
+    : ui(new Ui_SplitAdjustDialog),
+      buttonGroup(nullptr)
     {}
 
+  ~Private()
+  {
+    delete ui;
+  }
   Ui_SplitAdjustDialog*	ui;
   QButtonGroup* buttonGroup;
 };
@@ -58,8 +63,8 @@ void SplitAdjustDialog::setValues(QString transactionSum, QString splitSum, QStr
 {
   // now modify the text items of the dialog to contain the correct values
   QString q = i18n("The total amount of this transaction is %1 while "
-		    "the sum of the splits is %2. The remaining %3 are "
-		    "unassigned.", transactionSum, splitSum, diff);
+                    "the sum of the splits is %2. The remaining %3 are "
+                    "unassigned.", transactionSum, splitSum, diff);
   d->ui->explanation->setText(q);
 
   q = i18n("Change &total amount of transaction to %1.", splitSum);

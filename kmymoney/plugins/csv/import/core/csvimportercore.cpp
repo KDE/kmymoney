@@ -107,8 +107,9 @@ const QString CSVImporterCore::m_confProfileNames = QStringLiteral("ProfileNames
 const QString CSVImporterCore::m_confPriorName = QStringLiteral("Prior");
 const QString CSVImporterCore::m_confMiscName = QStringLiteral("Misc");
 
-CSVImporterCore::CSVImporterCore()
-  : m_profile(0)
+CSVImporterCore::CSVImporterCore() :
+  m_profile(0),
+  m_isActionTypeValidated(false)
 {
   m_convertDate = new ConvertDate;
   m_file = new CSVFile;
@@ -520,7 +521,7 @@ validationResultE CSVImporterCore::validateActionType(MyMoneyStatement::Transact
 
 bool CSVImporterCore::calculateFee()
 {
-  InvestmentProfile *profile = dynamic_cast<InvestmentProfile *>(m_profile);
+  auto profile = dynamic_cast<InvestmentProfile *>(m_profile);
   if (!profile)
     return false;
   if ((profile->m_feeRate.isEmpty() ||                  // check whether feeRate...
@@ -1362,10 +1363,10 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
       if (m_autodetect.value(AutoAccountInvest))
         detectAccount(st);
 
-      InvestmentProfile *profile = dynamic_cast<InvestmentProfile *>(m_profile);
+      auto profile = dynamic_cast<InvestmentProfile *>(m_profile);
       if ((m_profile->m_colTypeNum.value(Column::Fee, -1) == -1 ||
            m_profile->m_colTypeNum.value(Column::Fee, -1) >= m_file->m_columnCount) &&
-          !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
+          profile && !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
         calculateFee();
 
       for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
@@ -1391,9 +1392,9 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
         return true;
       st.m_eType = eMyMoney::Statement::Type::None;
 
-      PricesProfile *profile = dynamic_cast<PricesProfile *>(m_profile);
+      auto*profile = dynamic_cast<PricesProfile *>(m_profile);
       for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
-        if (!processPriceRow(st, profile, row)) { // parse fields
+        if (profile && !processPriceRow(st, profile, row)) { // parse fields
           st = MyMoneyStatement();
           return false;
         }
@@ -1620,7 +1621,9 @@ void PricesProfile::writeSettings(const KSharedConfigPtr &config)
   profilesGroup.config()->sync();
 }
 
-CSVFile::CSVFile()
+CSVFile::CSVFile() :
+  m_columnCount(0),
+  m_rowCount(0)
 {
   m_parse = new Parse;
   m_model = new QStandardItemModel;

@@ -86,6 +86,7 @@ public:
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KScheduledView),
+    m_kaccPopup(nullptr),
     m_openBills(true),
     m_openDeposits(true),
     m_openTransfers(true),
@@ -664,7 +665,6 @@ public:
   bool m_openDeposits;
   bool m_openTransfers;
   bool m_openLoans;
-  bool m_needsRefresh;
 
   /**
     * This member holds the load state of page

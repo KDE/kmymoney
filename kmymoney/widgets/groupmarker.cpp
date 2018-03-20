@@ -140,7 +140,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
   cellRect.setHeight(d->GroupMarkerPrivate::m_bg->height());
 
   // now it's time to draw the background
-  painter->drawPixmap(cellRect, *d->GroupMarkerPrivate::m_bg);
+  painter->drawPixmap(cellRect, *KMyMoneyRegister::GroupMarkerPrivate::m_bg);
 
   // in case we need to show the date, we just paint it in col 1
   if (d->m_showDate) {

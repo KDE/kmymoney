@@ -128,7 +128,8 @@ public:
     m_view(nullptr),
     m_showAllSchedules(false),
     m_needLoad(true),
-    m_netWorthGraphLastValidSize(400, 300)
+    m_netWorthGraphLastValidSize(400, 300),
+    m_currentPrinter(nullptr)
   {
   }
 
@@ -1125,8 +1126,6 @@ public:
             && (dropMinimum < dropZero
                 || dropZero == -1)) {
           switch (dropMinimum) {
-            case -1:
-              break;
             case 0:
               msg = i18n("The balance of %1 is below the minimum balance %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(minBalance, *it_account, currency));
               msg = showColoredAmount(msg, true);

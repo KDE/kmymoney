@@ -41,7 +41,8 @@ class EditPersonalDataDlgPrivate
 public:
   explicit EditPersonalDataDlgPrivate(EditPersonalDataDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::EditPersonalDataDlg)
+    ui(new Ui::EditPersonalDataDlg),
+    m_contact(nullptr)
   {
   }
 

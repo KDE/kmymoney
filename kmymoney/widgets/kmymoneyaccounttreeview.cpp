@@ -55,6 +55,7 @@ class KMyMoneyAccountTreeViewPrivate
 public:
   explicit KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq) :
     q_ptr(qq),
+    m_model(nullptr),
     m_view(View::None)
   {
   }

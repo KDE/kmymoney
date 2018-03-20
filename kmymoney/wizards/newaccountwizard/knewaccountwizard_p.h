@@ -55,7 +55,18 @@ namespace NewAccountWizard
 
   public:
     explicit WizardPrivate(Wizard *qq):
-      KMyMoneyWizardPrivate(qq)
+      KMyMoneyWizardPrivate(qq),
+      m_institutionPage(nullptr),
+      m_accountTypePage(nullptr),
+      m_brokeragepage(nullptr),
+      m_schedulePage(nullptr),
+      m_generalLoanInfoPage(nullptr),
+      m_loanDetailsPage(nullptr),
+      m_loanPaymentPage(nullptr),
+      m_loanSchedulePage(nullptr),
+      m_loanPayoutPage(nullptr),
+      m_hierarchyPage(nullptr),
+      m_accountSummaryPage(nullptr)
     {
     }
 

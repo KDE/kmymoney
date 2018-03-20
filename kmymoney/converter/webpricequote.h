@@ -102,7 +102,7 @@ private:
   */
 struct WebPriceQuoteSource {
   enum identifyBy {Symbol, IdentificationNumber, Name};
-  WebPriceQuoteSource() : m_skipStripping(false) {}
+  WebPriceQuoteSource() : m_webIDBy(Symbol), m_skipStripping(false) {}
   explicit WebPriceQuoteSource(const QString& name);
   WebPriceQuoteSource(const QString& name, const QString& url, const QString& csvUrl, const QString& id, const identifyBy idBy, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
   ~WebPriceQuoteSource() {}

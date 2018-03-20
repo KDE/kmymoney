@@ -36,7 +36,9 @@ class WizardPagePrivate : public KMyMoneyWizardPagePrivate
 {
 public:
   WizardPagePrivate(QObject* parent) :
-    KMyMoneyWizardPagePrivate(parent)
+    KMyMoneyWizardPagePrivate(parent),
+    m_wizard(nullptr),
+    m_wizardBase(nullptr)
   {
   }
 

@@ -65,6 +65,8 @@ class KAccountSelectDlgPrivate
 public:
   KAccountSelectDlgPrivate() :
     ui(new Ui::KAccountSelectDlg),
+    m_mode(0),
+    m_accountType(eDialogs::Category::none),
     m_aborted(false)
   {
   }

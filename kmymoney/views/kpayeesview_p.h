@@ -123,10 +123,14 @@ public:
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KPayeesView),
+    m_contact(nullptr),
+    m_payeeRow(0),
     m_needLoad(true),
+    m_searchWidget(nullptr),
     m_inSelection(false),
     m_allowEditing(true),
-    m_payeeFilterType(0)
+    m_payeeFilterType(0),
+    m_filterProxyModel(nullptr)
   {
   }
 

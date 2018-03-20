@@ -55,30 +55,35 @@ KMyMoneyTextEditHighlighter::~KMyMoneyTextEditHighlighter()
 
 void KMyMoneyTextEditHighlighter::setAllowedChars(const QString& chars)
 {
-  m_allowedChars = chars;
+  Q_D(KMyMoneyTextEditHighlighter);
+  d->m_allowedChars = chars;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::setMaxLength(const int& length)
 {
-  m_maxLength = length;
+  Q_D(KMyMoneyTextEditHighlighter);
+  d->m_maxLength = length;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::setMaxLines(const int& lines)
 {
-  m_maxLines = lines;
+  Q_D(KMyMoneyTextEditHighlighter);
+  d->m_maxLines = lines;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::setMaxLineLength(const int& length)
 {
-  m_maxLineLength = length;
+  Q_D(KMyMoneyTextEditHighlighter);
+  d->m_maxLineLength = length;
   rehighlight();
 }
 
 void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 {
+  Q_D(KMyMoneyTextEditHighlighter);
   // Spell checker first
   Highlighter::highlightBlock(text);
 
@@ -90,29 +95,29 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
   // Check used characters
   const int length = text.length();
   for (auto i = 0; i < length; ++i) {
-    if (!m_allowedChars.contains(text.at(i))) {
+    if (!d->m_allowedChars.contains(text.at(i))) {
       setFormat(i, 1, invalidFormat);
     }
   }
 
-  if (m_maxLines != -1) {
+  if (d->m_maxLines != -1) {
     //! @todo Is using QTextBlock::blockNumber() as line number dangerous?
-    if (currentBlock().blockNumber() >= m_maxLines) {
+    if (currentBlock().blockNumber() >= d->m_maxLines) {
       setFormat(0, length, invalidFormat);
       return;
     }
   }
 
-  if (m_maxLength != -1) {
+  if (d->m_maxLength != -1) {
     const int blockPosition = currentBlock().position();
-    if (m_maxLength < (length + blockPosition)) {
-      setFormat(m_maxLength, length - m_maxLength - blockPosition, invalidFormat);
+    if (d->m_maxLength < (length + blockPosition)) {
+      setFormat(d->m_maxLength, length - d->m_maxLength - blockPosition, invalidFormat);
       return;
     }
   }
 
-  if (m_maxLineLength != -1 && length >= m_maxLineLength) {
-    setFormat(m_maxLineLength, length - m_maxLineLength, invalidFormat);
+  if (d->m_maxLineLength != -1 && length >= d->m_maxLineLength) {
+    setFormat(d->m_maxLineLength, length - d->m_maxLineLength, invalidFormat);
     return;
   }
 }

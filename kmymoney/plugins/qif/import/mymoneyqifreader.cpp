@@ -73,7 +73,10 @@ class MyMoneyQifReader::Private
 public:
   Private() :
       accountType(eMyMoney::Account::Type::Checkings),
-      mapCategories(true) {}
+      firstTransaction(true),
+      mapCategories(true),
+      transactionType(MyMoneyQifReader::QifEntryTypeE::EntryUnknown)
+  {}
 
   const QString accountTypeToQif(eMyMoney::Account::Type type) const;
 
@@ -243,7 +246,13 @@ eMyMoney::Split::State MyMoneyQifReader::Private::reconcileState(const QString& 
 
 
 MyMoneyQifReader::MyMoneyQifReader() :
-    d(new Private)
+    d(new Private),
+    m_file(nullptr),
+    m_extractedLine(0),
+    m_autoCreatePayee(true),
+    m_pos(0),
+    m_linenumber(0),
+    m_ft(nullptr)
 {
   m_skipAccount = false;
   m_transactionsProcessed =
@@ -428,8 +437,7 @@ bool MyMoneyQifReader::startImport()
     qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_filename;
     KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_filename), -1, KIO::Overwrite);
 //    KJobWidgets::setWindow(job, kmymoney);
-    job->exec();
-    if (job->error()) {
+    if (job->exec() && job->error()) {
       KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
                                  job->errorString(),
                                  i18n("File access error"));
@@ -946,7 +954,8 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
     if (name.isEmpty()) {
       name = i18n("QIF imported, no account name supplied");
     }
-    d->isTransfer(name, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1));
+    auto b = d->isTransfer(name, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1));
+    Q_UNUSED(b)
     QStringList entry = m_qifEntry;   // keep a temp copy
     m_qifEntry.clear();               // and construct a temp entry to create/search the account
     m_qifEntry << QString("N%1").arg(name);

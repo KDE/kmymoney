@@ -103,6 +103,8 @@ private Q_SLOTS:
   void testScheduleMatch_overdue();
   void testScheduleMismatch_dueDate();
   void testScheduleMismatch_amount();
+public:
+  MatchFinderTest();
 };
 
 #endif // MATCHFINDERTEST_H

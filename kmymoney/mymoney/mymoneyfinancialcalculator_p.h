@@ -47,7 +47,18 @@ class MyMoneyFinancialCalculatorPrivate
 
 public:
 
-  MyMoneyFinancialCalculatorPrivate()
+  MyMoneyFinancialCalculatorPrivate() :
+    m_ir(0.0),
+    m_pv(0.0),
+    m_pmt(0.0),
+    m_fv(0.0),
+    m_npp(0.0),
+    m_CF(0),
+    m_PF(0),
+    m_prec(2),
+    m_bep(false),
+    m_disc(false),
+    m_mask(0)
   {
   }
 

@@ -35,7 +35,9 @@
 #include <KWebView>
 #endif
 
-KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)
+KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) :
+  QDialog(parent),
+  m_currentPrinter(nullptr)
 {
   setupUi(this);
   #ifdef ENABLE_WEBENGINE

@@ -51,7 +51,8 @@
 #include "tasks/onlinetask.h"
 
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_onlinePlugins(nullptr)
 {
 }
 

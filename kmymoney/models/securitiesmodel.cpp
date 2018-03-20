@@ -35,7 +35,10 @@
 class SecuritiesModel::Private
 {
 public:
-  Private() : m_file(MyMoneyFile::instance())
+  Private() :
+    m_file(MyMoneyFile::instance()),
+    m_ndCurrencies(nullptr),
+    m_ndSecurities(nullptr)
   {
     QVector<Column> columns {
       Column::Security, Column::Symbol, Column::Type,

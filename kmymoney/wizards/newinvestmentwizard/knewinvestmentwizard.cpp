@@ -51,7 +51,8 @@ class KNewInvestmentWizardPrivate
 public:
   explicit KNewInvestmentWizardPrivate(KNewInvestmentWizard *qq) :
     q_ptr(qq),
-    ui(new Ui::KNewInvestmentWizard)
+    ui(new Ui::KNewInvestmentWizard),
+    m_createAccount(false)
   {
   }
 
@@ -59,7 +60,7 @@ public:
   {
     delete ui;
   }
-  
+
   void init1()
   {
     Q_Q(KNewInvestmentWizard);
@@ -67,13 +68,13 @@ public:
 
     // make sure, the back button does not clear fields
     q->setOption(QWizard::IndependentPages, true);
-  
+
     // enable the help button
     q->setOption(q->HaveHelpButton, true);
     q->connect(q, &KNewInvestmentWizard::helpRequested, q, &KNewInvestmentWizard::slotHelp);
-  
+
     m_createAccount = true;
-  
+
     // Update label in case of edit
     if (!m_account.id().isEmpty()) {
       ui->m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected investment."));
@@ -81,10 +82,10 @@ public:
     if (!m_security.id().isEmpty()) {
       ui->m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected security."));
     }
-  
+
     KMyMoneyUtils::updateWizardButtons(q);
   }
-  
+
   void init2()
   {
     ui->m_investmentTypePage->init2(m_security);
@@ -92,10 +93,10 @@ public:
     ui->m_onlineUpdatePage->init2(m_security);
     ui->m_onlineUpdatePage->slotCheckPage(m_security.value("kmm-online-source"));
   }
-  
+
   KNewInvestmentWizard      *q_ptr;
   Ui::KNewInvestmentWizard  *ui;
-  
+
   MyMoneyAccount    m_account;
   MyMoneySecurity   m_security;
   bool              m_createAccount;

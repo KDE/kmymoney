@@ -57,7 +57,19 @@ class KMyMoneyWizardPrivate
 public:
   explicit KMyMoneyWizardPrivate(KMyMoneyWizard *qq) :
     q_ptr(qq),
-    m_step(0)
+    m_cancelButton(nullptr),
+    m_backButton(nullptr),
+    m_nextButton(nullptr),
+    m_finishButton(nullptr),
+    m_helpButton(nullptr),
+    m_wizardLayout(nullptr),
+    m_stepLayout(nullptr),
+    m_pageLayout(nullptr),
+    m_buttonLayout(nullptr),
+    m_stepFrame(nullptr),
+    m_stepLabel(nullptr),
+    m_step(0),
+    m_titleLabel(nullptr)
   {
   }
 

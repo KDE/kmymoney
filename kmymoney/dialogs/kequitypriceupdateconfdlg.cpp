@@ -27,7 +27,8 @@ class EquityPriceUpdateConfDlgPrivate
 
 public:
   EquityPriceUpdateConfDlgPrivate() :
-    ui(new Ui::EquityPriceUpdateConfDlg)
+    ui(new Ui::EquityPriceUpdateConfDlg),
+    m_updatingPricePolicy(eDialogs::UpdatePrice::All)
   {
   }
 

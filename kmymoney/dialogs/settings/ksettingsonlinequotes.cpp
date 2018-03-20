@@ -49,7 +49,8 @@ class KSettingsOnlineQuotesPrivate
 
 public:
   KSettingsOnlineQuotesPrivate() :
-    ui(new Ui::KSettingsOnlineQuotes)
+    ui(new Ui::KSettingsOnlineQuotes),
+    m_quoteInEditing(false)
   {
   }
 

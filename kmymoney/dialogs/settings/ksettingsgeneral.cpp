@@ -44,7 +44,8 @@ class KSettingsGeneralPrivate
 
 public:
   KSettingsGeneralPrivate() :
-    ui(new Ui::KSettingsGeneral)
+    ui(new Ui::KSettingsGeneral),
+    initialHideZeroBalanceEquities(false)
   {
   }
 

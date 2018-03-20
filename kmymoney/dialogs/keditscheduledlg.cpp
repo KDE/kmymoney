@@ -76,7 +76,10 @@ class KEditScheduleDlgPrivate
 public:
   explicit KEditScheduleDlgPrivate(KEditScheduleDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KEditScheduleDlg)
+    ui(new Ui::KEditScheduleDlg),
+    m_item(nullptr),
+    m_editor(nullptr),
+    m_requiredFields(nullptr)
   {
   }
 
@@ -315,8 +318,10 @@ TransactionEditor* KEditScheduleDlg::startEdit()
     // a possibly assigned check number
     if (d->m_schedule.paymentType() != Schedule::PaymentType::WriteChecque) {
       QWidget* w = editor->haveWidget("number");
-      if (w)
-        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(QString());
+      if (w) {
+        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
+          numberWidget->loadText(QString());
+      }
     }
 
     Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
@@ -361,8 +366,7 @@ TransactionEditor* KEditScheduleDlg::startEdit()
     }
 
     // connect the postdate modification signal to our update routine
-    KMyMoneyDateInput* dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate"));
-    if (dateEdit)
+    if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate")))
       connect(dateEdit, &KMyMoneyDateInput::dateChanged, this, &KEditScheduleDlg::slotPostDateChanged);
 
     d->ui->m_nameEdit->setFocus();
@@ -373,10 +377,8 @@ TransactionEditor* KEditScheduleDlg::startEdit()
     d->m_requiredFields->add(editor->haveWidget("category"));
 
     // fix labels
-    QLabel* label = dynamic_cast<QLabel*>(editor->haveWidget("date-label"));
-    if (label) {
+    if (auto label = dynamic_cast<QLabel*>(editor->haveWidget("date-label")))
       label->setText(i18n("Next due date"));
-    }
 
     d->m_editor = editor;
     slotSetPaymentMethod((int)d->m_schedule.paymentType());
@@ -434,8 +436,7 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
 
     d->m_schedule.setType(Schedule::Type::Bill);
 
-    KMyMoneyTransactionForm::TabBar* tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(d->m_editor->haveWidget("tabbar"));
-    if (tabbar) {
+    if (auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(d->m_editor->haveWidget("tabbar"))) {
       switch (static_cast<eWidgets::eRegister::Action>(tabbar->currentIndex())) {
         case eWidgets::eRegister::Action::Deposit:
           d->m_schedule.setType(Schedule::Type::Deposit);
@@ -625,8 +626,8 @@ void KEditScheduleDlg::slotRemainingChanged(int value)
 {
   Q_D(KEditScheduleDlg);
   // Make sure the required fields are set
-  auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate"));
-  d->m_schedule.setNextDueDate(dateEdit->date());
+  if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate")))
+    d->m_schedule.setNextDueDate(dateEdit->date());
   d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(d->ui->m_frequencyEdit->currentItem()));
   d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
 
@@ -641,8 +642,8 @@ void KEditScheduleDlg::slotEndDateChanged(const QDate& date)
 {
   Q_D(KEditScheduleDlg);
   // Make sure the required fields are set
-  auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate"));
-  d->m_schedule.setNextDueDate(dateEdit->date());
+  if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate")))
+    d->m_schedule.setNextDueDate(dateEdit->date());
   d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(d->ui->m_frequencyEdit->currentItem()));
   d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
 
@@ -669,16 +670,13 @@ void KEditScheduleDlg::slotPostDateChanged(const QDate& date)
 void KEditScheduleDlg::slotSetPaymentMethod(int item)
 {
   Q_D(KEditScheduleDlg);
-  auto dateEdit = dynamic_cast<KMyMoneyLineEdit*>(d->m_editor->haveWidget("number"));
-  if (dateEdit) {
+  if (auto dateEdit = dynamic_cast<KMyMoneyLineEdit*>(d->m_editor->haveWidget("number"))) {
     dateEdit->setVisible(item == (int)Schedule::PaymentType::WriteChecque);
 
     // hiding the label does not work, because the label underneath will shine
     // through. So we either write the label or a blank
-    QLabel* label = dynamic_cast<QLabel *>(d->m_editor->haveWidget("number-label"));
-    if (label) {
+    if (auto label = dynamic_cast<QLabel *>(d->m_editor->haveWidget("number-label")))
       label->setText((item == (int)Schedule::PaymentType::WriteChecque) ? i18n("Number") : " ");
-    }
   }
 }
 
@@ -714,8 +712,8 @@ void KEditScheduleDlg::slotFrequencyChanged(int item)
   if (isEndSeries && (item != (int)Schedule::Occurrence::Once)) {
     // Changing the frequency changes the number
     // of remaining transactions
-    KMyMoneyDateInput* dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate"));
-    d->m_schedule.setNextDueDate(dateEdit->date());
+    if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate")))
+      d->m_schedule.setNextDueDate(dateEdit->date());
     d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
     d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(item));
     d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
@@ -730,8 +728,8 @@ void KEditScheduleDlg::slotOccurrenceMultiplierChanged(int multiplier)
   auto oldOccurrenceMultiplier = d->m_schedule.occurrenceMultiplier();
   if (multiplier != oldOccurrenceMultiplier) {
     if (d->ui->m_endOptionsFrame->isEnabled()) {
-      KMyMoneyDateInput* dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate"));
-      d->m_schedule.setNextDueDate(dateEdit->date());
+      if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(d->m_editor->haveWidget("postdate")))
+        d->m_schedule.setNextDueDate(dateEdit->date());
       d->m_schedule.setOccurrenceMultiplier(multiplier);
       d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(d->ui->m_frequencyEdit->currentItem()));
       d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());

@@ -1318,10 +1318,10 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
 
     if (!startTime)
       startTime = ti;
-    else {
+    /*else { dead code
       if (GWEN_Time_Diff(ti, startTime) < 0)
         startTime = ti;
-    }
+    }*/
 
     if (!GWEN_Time_GetBrokenDownDate(ti, &day, &month, &year)) {
       kt.m_datePosted = QDate(year, month + 1, day);

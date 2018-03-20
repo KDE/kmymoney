@@ -58,7 +58,8 @@ KReportChartView::KReportChartView(QWidget* parent) :
     m_numColumns(0),
     m_skipZero(0),
     m_backgroundBrush(KColorScheme(QPalette::Current).background()),
-    m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
+    m_foregroundBrush(KColorScheme(QPalette::Current).foreground()),
+    m_precision(2)
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults

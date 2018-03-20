@@ -88,6 +88,8 @@ public:
       transactionsAdded(0),
       transactionsMatched(0),
       transactionsDuplicate(0),
+      m_skipCategoryMatching(true),
+      m_progressCallback(nullptr),
       scannedCategories(false) {}
 
   const QString& feeId(const MyMoneyAccount& invAcc);

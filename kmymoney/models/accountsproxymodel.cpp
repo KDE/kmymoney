@@ -63,7 +63,9 @@ public:
 };
 
 AccountsProxyModel::AccountsProxyModel(QObject *parent)
-  : KRecursiveFilterProxyModel(parent), d(new Private)
+  : KRecursiveFilterProxyModel(parent),
+    m_mdlColumns(nullptr),
+    d(new Private)
 {
   setDynamicSortFilter(true);
   setSortLocaleAware(true);

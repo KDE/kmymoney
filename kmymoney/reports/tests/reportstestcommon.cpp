@@ -478,12 +478,15 @@ void XMLandback(MyMoneyReport& filter)
 
 MyMoneyMoney searchHTML(const QString& _html, const QString& _search)
 {
+  Q_UNUSED(_html)
   QRegExp re(QString("%1[<>/td]*([\\-.0-9,]*)").arg(_search));
-  re.indexIn(_html);
-  QString found = re.cap(1);
-  found.remove(',');
+  if (re.indexIn(_html) > -1) {
+    QString found = re.cap(1);
+    found.remove(',');
 
-  return MyMoneyMoney(found.toDouble());
+    return MyMoneyMoney(found.toDouble());
+  }
+  return MyMoneyMoney();
 }
 
 } // end namespace test

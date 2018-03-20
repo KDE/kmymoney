@@ -50,6 +50,7 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
             case eMyMoney::OnlineJob::MessageType::Information: return Icons::get(Icon::DialogInformation);
             case eMyMoney::OnlineJob::MessageType::Warning: return Icons::get(Icon::DialogWarning);
             case eMyMoney::OnlineJob::MessageType::Error: return Icons::get(Icon::DialogError);
+            break;
           }
         case Qt::ToolTipRole: switch (messages[index.row()].type()) {
             case eMyMoney::OnlineJob::MessageType::Debug: return i18n("Information to find issues.");
@@ -57,6 +58,7 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
             case eMyMoney::OnlineJob::MessageType::Information: return i18n("Informative message without certain significance.");
             case eMyMoney::OnlineJob::MessageType::Warning: return i18n("Warning message.");
             case eMyMoney::OnlineJob::MessageType::Error: return i18n("Error");
+            break;
           }
         default: return QVariant();
       }

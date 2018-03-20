@@ -85,6 +85,7 @@ public:
   explicit KMyMoneyPriceDlgPrivate(KMyMoneyPriceDlg *qq) :
     q_ptr(qq),
     ui(new Ui::KMyMoneyPriceDlg),
+    m_currentItem(nullptr),
     m_searchWidget(nullptr)
   {
   }

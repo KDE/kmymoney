@@ -89,38 +89,32 @@ void RegisterItem::setFocus(bool /*focus*/, bool updateLens)
 
 QDate RegisterItem::sortPostDate() const
 {
-  Q_D(const RegisterItem);
-  return d->nullDate;
+  return KMyMoneyRegister::RegisterItemPrivate::nullDate;
 }
 
 QDate RegisterItem::sortEntryDate() const
 {
-  Q_D(const RegisterItem);
-  return d->nullDate;
+  return KMyMoneyRegister::RegisterItemPrivate::nullDate;
 }
 
 const QString& RegisterItem::sortPayee() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 MyMoneyMoney RegisterItem::sortValue() const
 {
-  Q_D(const RegisterItem);
-  return d->nullValue;
+  return KMyMoneyRegister::RegisterItemPrivate::nullValue;
 }
 
 QString RegisterItem::sortNumber() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 const QString& RegisterItem::sortEntryOrder() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 eWidgets::eRegister::CashFlowDirection RegisterItem::sortType() const
@@ -130,8 +124,7 @@ eWidgets::eRegister::CashFlowDirection RegisterItem::sortType() const
 
 const QString& RegisterItem::sortCategory() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 eMyMoney::Split::State RegisterItem::sortReconcileState() const
@@ -141,8 +134,7 @@ eMyMoney::Split::State RegisterItem::sortReconcileState() const
 
 const QString RegisterItem::sortSecurity() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 void RegisterItem::setStartRow(int row)

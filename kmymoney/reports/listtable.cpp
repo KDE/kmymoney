@@ -228,9 +228,9 @@ void ListTable::render(QString& result, QString& csv) const
             else
               result.append(QLatin1String("<tr class=\"sectionfooterlast\">"));
           }
-        } else {
+        }/* else { dead code
           result.append(QLatin1String("<tr class=\"sectionfooter\">"));
-        }
+        }*/
       } else {
         result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
       }

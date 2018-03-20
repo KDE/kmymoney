@@ -390,8 +390,6 @@ public:
           && (dropMinimum < dropZero
               || dropZero == -1)) {
         switch (dropMinimum) {
-          case -1:
-            break;
           case 0:
             msg = QString("<font color=\"%1\">").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
             msg += i18n("The balance of %1 is below the minimum balance %2 today.", acc.name(), MyMoneyUtils::formatMoney(minBalance, acc, currency));

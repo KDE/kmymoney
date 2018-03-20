@@ -23,7 +23,8 @@
 
 QTEST_GUILESS_MAIN(ParseDataTest);
 
-ParseDataTest::ParseDataTest()
+ParseDataTest::ParseDataTest() :
+  m_parse(nullptr)
 {
 }
 

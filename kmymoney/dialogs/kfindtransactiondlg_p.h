@@ -70,7 +70,8 @@ public:
 
   explicit KFindTransactionDlgPrivate(KFindTransactionDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KFindTransactionDlg)
+    ui(new Ui::KFindTransactionDlg),
+    m_needReload(true)
   {
   }
 

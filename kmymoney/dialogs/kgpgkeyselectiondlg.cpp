@@ -46,6 +46,7 @@ public:
 
   ~KGpgKeySelectionDlgPrivate()
   {
+    delete ui;
   }
 
   Ui::KGpgKeySelectionDlg*  ui;

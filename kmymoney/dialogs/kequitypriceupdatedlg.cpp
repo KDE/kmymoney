@@ -74,7 +74,9 @@ class KEquityPriceUpdateDlgPrivate
 public:
   explicit KEquityPriceUpdateDlgPrivate(KEquityPriceUpdateDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KEquityPriceUpdateDlg)
+    ui(new Ui::KEquityPriceUpdateDlg),
+    m_fUpdateAll(false),
+    m_updatingPricePolicy(eDialogs::UpdatePrice::All)
   {
   }
 
@@ -519,11 +521,13 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
 
   // Give the user some options
   int result;
-  if (_kmmID.contains(" ")) {
+  if (_kmmID.contains(" "))
     result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.", _webID, item->text(SOURCE_COL)), i18n("Price Update Failed"));
-  } else {
-    result = KMessageBox::questionYesNoCancel(this, QString("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _webID, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
-  }
+  else if (!item)
+    return;
+  else
+    result = KMessageBox::questionYesNoCancel(this, QString::fromLatin1("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _webID, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+
 
   if (result == KMessageBox::No) {
     // Disable price updates for this security
@@ -631,7 +635,7 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
               break;
             case eDialogs::UpdatePrice::Ask:
             {
-              int result = KMessageBox::questionYesNoCancel(this,
+              auto result = KMessageBox::questionYesNoCancel(this,
                                                             i18n("For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>"
                                                                  "Do you want to replace it with <b>%4</b>?",
                                                                  storedPrice.from(), storedPrice.date().toString(Qt::ISODate),

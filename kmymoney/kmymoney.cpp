@@ -220,23 +220,28 @@ public:
       m_moveToAccountSelector(0),
       m_statementXMLindex(0),
       m_balanceWarning(0),
+      m_backupState(backupStateE::BACKUP_IDLE),
       m_backupResult(0),
       m_backupMount(0),
       m_ignoreBackupExitCode(false),
       m_fileOpen(false),
       m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
-      m_myMoneyView(0),
-      m_progressBar(0),
-      m_searchDlg(0),
-      m_autoSaveTimer(0),
-      m_progressTimer(0),
+      m_myMoneyView(nullptr),
+      m_startDialog(false),
+      m_progressBar(nullptr),
+      m_statusLabel(nullptr),
+      m_searchDlg(nullptr),
+      m_autoSaveEnabled(true),
+      m_autoSaveTimer(nullptr),
+      m_progressTimer(nullptr),
+      m_autoSavePeriod(0),
       m_inAutoSaving(false),
-      m_transactionEditor(0),
-      m_endingBalanceDlg(0),
-      m_saveEncrypted(0),
-      m_additionalKeyLabel(0),
-      m_additionalKeyButton(0),
-      m_recentFiles(0),
+      m_transactionEditor(nullptr),
+      m_endingBalanceDlg(nullptr),
+      m_saveEncrypted(nullptr),
+      m_additionalKeyLabel(nullptr),
+      m_additionalKeyButton(nullptr),
+      m_recentFiles(nullptr),
 #ifdef KF5Holidays_FOUND
       m_holidayRegion(0),
 #endif
@@ -2766,13 +2771,13 @@ void KMyMoneyApp::slotFileCloseWindow()
 
 void KMyMoneyApp::slotFileClose()
 {
-  bool okToSelect = true;
+//  bool okToSelect = true;
 
   // check if transaction editor is open and ask user what he wants to do
 //  slotTransactionsCancelOrEnter(okToSelect);
 
-  if (!okToSelect)
-    return;
+//  if (!okToSelect)
+//    return;
 
   // no update status here, as we might delete the status too early.
   if (d->dirty()) {
@@ -3677,8 +3682,7 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
 void KMyMoneyApp::showContextMenu(const QString& containerName)
 {
   QWidget* w = factory()->container(containerName, this);
-  QMenu *menu = dynamic_cast<QMenu*>(w);
-  if (menu)
+  if (auto menu = dynamic_cast<QMenu*>(w))
     menu->exec(QCursor::pos());
   else
     qDebug("menu '%s' not found: w = %p, menu = %p", qPrintable(containerName), w, menu);

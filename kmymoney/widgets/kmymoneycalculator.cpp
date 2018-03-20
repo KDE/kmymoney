@@ -46,7 +46,13 @@ class KMyMoneyCalculatorPrivate
   Q_DISABLE_COPY(KMyMoneyCalculatorPrivate)
 
 public:
-  KMyMoneyCalculatorPrivate()
+  KMyMoneyCalculatorPrivate() :
+    op0(0.0),
+    op1(0.0),
+    op(0),
+    stackedOp(0),
+    display(nullptr),
+    m_clearOperandOnDigit(false)
   {
   }
 

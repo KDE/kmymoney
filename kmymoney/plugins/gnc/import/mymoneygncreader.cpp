@@ -2434,7 +2434,7 @@ QDate MyMoneyGncReader::incrDate(QDate lastDate, unsigned char interval, unsigne
         return (lastDate);
     }
     throw MYMONEYEXCEPTION(i18n("Internal error - invalid interval char in incrDate"));
-    QDate r = QDate(); return (r); // to keep compiler happy
+//    QDate r = QDate(); return (r); // to keep compiler happy
   }
   PASS
 }

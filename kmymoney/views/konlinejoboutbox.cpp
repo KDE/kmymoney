@@ -60,7 +60,8 @@ public:
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KOnlineJobOutbox),
-    m_needLoad(true)
+    m_needLoad(true),
+    m_onlinePlugins(nullptr)
   {
   }
 

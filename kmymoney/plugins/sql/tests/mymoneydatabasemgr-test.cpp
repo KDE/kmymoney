@@ -47,12 +47,13 @@ using namespace eMyMoney;
 
 QTEST_GUILESS_MAIN(MyMoneyStorageMgrTest)
 
-MyMoneyStorageMgrTest::MyMoneyStorageMgrTest()
-    : m_dbAttached(false),
-    m_canOpen(true),
-    m_haveEmptyDataBase(false),
-    m_file(this),
-    m_emptyFile(this)
+MyMoneyStorageMgrTest::MyMoneyStorageMgrTest() :
+  m(nullptr),
+  m_dbAttached(false),
+  m_canOpen(true),
+  m_haveEmptyDataBase(false),
+  m_file(this),
+  m_emptyFile(this)
 {
   // Open and close the temp file so that it exists
   m_file.open();
@@ -2438,7 +2439,7 @@ void MyMoneyStorageMgrTest::testAddOnlineJob()
   m->setDirty();
 
   QSKIP("Test not fully implemented, yet.", SkipAll);
-
+  #if 0
   try {
     m->addOnlineJob(job);
 
@@ -2459,6 +2460,7 @@ void MyMoneyStorageMgrTest::testAddOnlineJob()
   } catch (const MyMoneyException &) {
     QCOMPARE(m->dirty(), false);
   }
+  #endif
 }
 
 void MyMoneyStorageMgrTest::testModifyOnlineJob()
@@ -2473,7 +2475,7 @@ void MyMoneyStorageMgrTest::testModifyOnlineJob()
   m->setDirty();
 
   QSKIP("Test not fully implemented, yet.", SkipAll);
-
+  #if 0
   // update online job
   try {
     MyMoneyFileTransaction ft;
@@ -2497,6 +2499,7 @@ void MyMoneyStorageMgrTest::testModifyOnlineJob()
   } catch (const MyMoneyException &) {
     QVERIFY(m->dirty() == false);
   }
+  #endif
 }
 
 void MyMoneyStorageMgrTest::testRemoveOnlineJob()
@@ -2511,7 +2514,7 @@ void MyMoneyStorageMgrTest::testRemoveOnlineJob()
   m->setDirty();
 
   QSKIP("Test not fully implemented, yet.", SkipAll);
-
+  #if 0
   try {
     MyMoneyFileTransaction ft;
     m->removeOnlineJob(job);
@@ -2532,6 +2535,7 @@ void MyMoneyStorageMgrTest::testRemoveOnlineJob()
   } catch (const MyMoneyException &) {
     QVERIFY(m->dirty() == false);
   }
+  #endif
 }
 
 void MyMoneyStorageMgrTest::testHighestNumberFromIdString()

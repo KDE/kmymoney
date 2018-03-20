@@ -74,7 +74,8 @@ public:
   KEnterScheduleDlgPrivate() :
     ui(new Ui::KEnterScheduleDlg),
     m_item(nullptr),
-    m_showWarningOnce(true)
+    m_showWarningOnce(true),
+    m_extendedReturnCode(eDialogs::ScheduleResultCode::Cancel)
   {
   }
 
@@ -82,7 +83,7 @@ public:
   {
     delete ui;
   }
-  
+
   Ui::KEnterScheduleDlg         *ui;
   MyMoneySchedule                m_schedule;
   KMyMoneyRegister::Transaction* m_item;
@@ -294,14 +295,15 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
       num = KMyMoneyUtils::nextCheckNumber(d->m_schedule.account());
       KMyMoneyUtils::updateLastNumberUsed(d->m_schedule.account(), num);
       d->m_schedule.account().setValue("lastNumberUsed", num);
-      if (w) {
-        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(num);
-      }
+      if (w)
+        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
+          numberWidget->loadText(num);
     } else {
       // if it's not a check, then we need to clear
       // a possibly assigned check number
       if (w)
-        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(QString());
+        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
+          numberWidget->loadText(QString());
     }
 
     Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
@@ -337,10 +339,8 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     focusWidget->setFocus();
 
     // Make sure, we use the adjusted date
-    KMyMoneyDateInput* dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate"));
-    if (dateEdit) {
+    if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate")))
       dateEdit->setDate(d->m_schedule.adjustedNextDueDate());
-    }
   }
 
   return editor;
@@ -350,7 +350,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 {
   Q_D(KEnterScheduleDlg);
   auto rc = false;
-  
+
   auto w = qApp->focusWidget();
   int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
   while (w && currentWidgetIndex == -1) {

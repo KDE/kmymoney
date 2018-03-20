@@ -48,11 +48,6 @@ class KMM_MYMONEY_EXPORT MyMoneyObject
   KMM_MYMONEY_UNIT_TESTABLE
 
   public:
-    /**
-      * This is the constructor for the MyMoneyObject object
-      */
-    MyMoneyObject();
-
   /**
     * This is the destructor for the MyMoneyObject object
     */

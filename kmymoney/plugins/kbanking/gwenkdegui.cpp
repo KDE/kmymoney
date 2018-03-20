@@ -51,7 +51,6 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     QString infoText = QString::fromUtf8(text);
     QRegExp hhdRegExp = QRegExp("^(.*)\\$OBEGIN\\$(.*)\\$OEND\\$(.*)$", Qt::CaseInsensitive);
     hhdRegExp.setMinimal(true);
-    hhdRegExp.indexIn(infoText);
     QStringList captured = hhdRegExp.capturedTexts();
     QString hhdCode = captured.at(2);
     infoText = captured.at(1) + captured.at(3);

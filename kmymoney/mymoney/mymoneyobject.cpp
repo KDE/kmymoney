@@ -3,7 +3,7 @@
                           -------------------
     copyright            : (C) 2005 by Thomas Baumagrt
     email                : ipwizard@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,18 +25,6 @@
 // Project Includes
 
 #include "mymoneyexception.h"
-
-MyMoneyObject::MyMoneyObject(const QString& id) :
-  d_ptr(new MyMoneyObjectPrivate)
-{
-  Q_D(MyMoneyObject);
-  d->m_id = id;
-}
-
-MyMoneyObject::MyMoneyObject() :
-  d_ptr(new MyMoneyObjectPrivate)
-{
-}
 
 MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd) :
   d_ptr(&dd)

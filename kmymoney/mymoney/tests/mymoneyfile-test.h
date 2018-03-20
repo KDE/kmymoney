@@ -29,6 +29,9 @@
 class MyMoneyFileTest : public QObject
 {
   Q_OBJECT
+public:
+  MyMoneyFileTest();
+
 protected:
   MyMoneyFile *m;
   MyMoneyStorageMgr* storage;

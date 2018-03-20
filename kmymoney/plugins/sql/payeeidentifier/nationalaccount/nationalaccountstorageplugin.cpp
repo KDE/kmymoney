@@ -66,7 +66,8 @@ bool nationalAccountStoragePlugin::setupDatabase(QSqlDatabase connection)
   if (currentVersion == 0) {
     // If the database is recreated the table may be still there. So drop it if needed. No error handling needed
     // as this step is not necessary - only the creation is important.
-    query.exec("DROP TABLE IF EXISTS kmmNationalAccountNumber;");
+    if (!query.exec("DROP TABLE IF EXISTS kmmNationalAccountNumber;"))
+      return false;
 
     if (!query.exec(
           "CREATE TABLE kmmNationalAccountNumber ("

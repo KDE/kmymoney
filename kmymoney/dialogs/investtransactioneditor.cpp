@@ -4,7 +4,7 @@
     begin                : Fri Dec 15 2006
     copyright            : (C) 2006 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -74,7 +74,8 @@ class InvestTransactionEditorPrivate : public TransactionEditorPrivate
 public:
   InvestTransactionEditorPrivate(InvestTransactionEditor* qq) :
       TransactionEditorPrivate(qq),
-      m_activity(0)
+      m_activity(0),
+      m_transactionType(eMyMoney::Split::InvestmentTransactionType::BuyShares)
   {
     m_phonyAccount = MyMoneyAccount("Phony-ID", MyMoneyAccount());
   }
@@ -87,7 +88,7 @@ public:
   void hideCategory(const QString& name)
   {
     Q_Q(InvestTransactionEditor);
-    if (KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(q->haveWidget(name))) {
+    if (auto cat = dynamic_cast<KMyMoneyCategory*>(q->haveWidget(name))) {
       cat->hide();
       cat->splitButton()->hide();
     }
@@ -188,12 +189,16 @@ public:
       m_openEditSplits = true;
 
       // force focus change to update all data
-      KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets[categoryWidgetName]);
+      auto category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets[categoryWidgetName]);
+      if (!category)
+        return rc;
       QWidget* w = category->splitButton();
       if (w)
         w->setFocus();
 
-      KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(q->haveWidget(amountWidgetName));
+      auto amount = dynamic_cast<KMyMoneyEdit*>(q->haveWidget(amountWidgetName));
+      if (!amount)
+        return rc;
 
       MyMoneyTransaction transaction;
       transaction.setCommodity(m_currency.id());
@@ -262,10 +267,13 @@ public:
   void updatePriceMode(const MyMoneySplit& split = MyMoneySplit())
   {
     Q_Q(InvestTransactionEditor);
-    auto label = dynamic_cast<QLabel*>(q->haveWidget("price-label"));
-    if (label) {
+    if (auto label = dynamic_cast<QLabel*>(q->haveWidget("price-label"))) {
       auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(q->haveWidget("shares"));
       auto priceEdit = dynamic_cast<KMyMoneyEdit*>(q->haveWidget("price"));
+
+      if (!sharesEdit || !priceEdit)
+        return;
+
       MyMoneyMoney price;
       if (!split.id().isEmpty())
         price = split.price().reduce();
@@ -541,12 +549,16 @@ void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
   static const QSet<eMyMoney::Split::InvestmentTransactionType> transactionTypesWithoutFee = QSet<eMyMoney::Split::InvestmentTransactionType>()
       << eMyMoney::Split::InvestmentTransactionType::AddShares << eMyMoney::Split::InvestmentTransactionType::RemoveShares << eMyMoney::Split::InvestmentTransactionType::SplitShares;
 
-  KMyMoneyEdit* feeAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
+  auto feeAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
+  if (!feeAmount)
+    return;
   feeAmount->setHidden(txt.isEmpty());
-  QLabel* l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
+  auto l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
 
-  KMyMoneyCategory* fee = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  const bool hideFee = txt.isEmpty() || transactionTypesWithoutFee.contains(d->m_activity->type());
+  auto fee = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
+  if (!fee)
+    return;
+  const auto hideFee = txt.isEmpty() || transactionTypesWithoutFee.contains(d->m_activity->type());
   //  no fee expected so hide
   if (hideFee) {
     if (l) {
@@ -576,10 +588,10 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
 
   QWidget* w = haveWidget("interest-amount");
   w->setHidden(txt.isEmpty());
-  QLabel* l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
+  auto l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
 
-  KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  const bool showInterest = !txt.isEmpty() && transactionTypesWithInterest.contains(d->m_activity->type());
+  auto interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
+  const auto showInterest = !txt.isEmpty() && transactionTypesWithInterest.contains(d->m_activity->type());
   if (interest && showInterest) {
     interest->splitButton()->show();
     w->show();
@@ -611,6 +623,9 @@ void InvestTransactionEditor::slotReloadEditWidgets()
   auto interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   auto fees = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
   auto security = dynamic_cast<KMyMoneySecurity*>(haveWidget("security"));
+
+  if (!interest || !fees || !security)
+    return;
 
   AccountSet aSet;
   QString id;
@@ -651,6 +666,10 @@ void InvestTransactionEditor::loadEditWidgets()
   KMyMoneyEdit* value;
   auto interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   auto fees = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
+
+  if (!postDate || !reconcile || !security || !activity ||
+      !asset || !memo || !interest || !fees)
+    return;
 
   // check if the current transaction has a reference to an equity account
   auto haveEquityAccount = false;
@@ -725,6 +744,8 @@ void InvestTransactionEditor::loadEditWidgets()
     // don't set the value if the number of shares is zero so that
     // we can see the hint
     value = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+    if (!value)
+      return;
     if (typeid(*(d->m_activity)) != typeid(Invest::Split(this)))
       value->setPrecision(MyMoneyMoney::denomToPrec(d->m_security.smallestAccountFraction()));
     else
@@ -738,10 +759,14 @@ void InvestTransactionEditor::loadEditWidgets()
 
     // fee amount
     value = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
+    if (!value)
+      return;
     value->setValue(d->subtotal(d->m_feeSplits));
 
     // interest amount
     value = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
+    if (!value)
+      return;
     value->setValue(-d->subtotal(d->m_interestSplits));
 
     // total
@@ -776,6 +801,8 @@ void InvestTransactionEditor::loadEditWidgets()
     QStringList::const_iterator it_f;
     for (it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
       value = dynamic_cast<KMyMoneyEdit*>(haveWidget((*it_f)));
+      if (!value)
+        return;
       value->setText("");
       value->setAllowEmpty();
     }
@@ -814,10 +841,12 @@ void InvestTransactionEditor::slotUpdateSecurity(const QString& stockId)
   if (!currencyKnown) {
     d->m_currency.setTradingSymbol("???");
   } else {
-    if (typeid(*(d->m_activity)) != typeid(Invest::Split(this))) {
-      dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"))->setPrecision(MyMoneyMoney::denomToPrec(d->m_security.smallestAccountFraction()));
-    } else {
-      dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"))->setPrecision(-1);
+    auto sharesWidget = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+    if (sharesWidget) {
+      if (typeid(*(d->m_activity)) != typeid(Invest::Split(this)))
+        sharesWidget->setPrecision(MyMoneyMoney::denomToPrec(d->m_security.smallestAccountFraction()));
+      else
+        sharesWidget->setPrecision(-1);
     }
   }
 
@@ -848,6 +877,10 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
   auto priceEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
   auto feesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
   auto interestEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
+
+  if (!activityCombo || !sharesEdit || !priceEdit ||
+      !feesEdit || !interestEdit)
+    return;
 
   if (priceMode() == eDialogs::PriceMode::PricePerTransaction)
     amount = priceEdit->value().abs();
@@ -885,7 +918,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
 void InvestTransactionEditor::slotUpdateTotalAmount()
 {
   Q_D(InvestTransactionEditor);
-  QLabel* total = dynamic_cast<QLabel*>(haveWidget("total"));
+  auto total = dynamic_cast<QLabel*>(haveWidget("total"));
 
   if (total && total->isVisible()) {
     MyMoneyMoney amount;
@@ -941,14 +974,14 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
   d->m_activity->showWidgets();
   d->m_activity->preloadAssetAccount();
 
-  if (KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"))) {
+  if (auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"))) {
   if (cat->parentWidget()->isVisible())
     slotUpdateInterestVisibility(cat->currentText());
   else
     cat->splitButton()->hide();
   }
 
-  if (KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"))) {
+  if (auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"))) {
   if (cat->parentWidget()->isVisible())
     slotUpdateFeeVisibility(cat->currentText());
   else
@@ -960,9 +993,10 @@ eDialogs::PriceMode InvestTransactionEditor::priceMode() const
 {
   Q_D(const InvestTransactionEditor);
   eDialogs::PriceMode mode = static_cast<eDialogs::PriceMode>(eDialogs::PriceMode::Price);
-  KMyMoneySecurity* sec = dynamic_cast<KMyMoneySecurity*>(d->m_editWidgets["security"]);
+  auto sec = dynamic_cast<KMyMoneySecurity*>(d->m_editWidgets["security"]);
+
   QString accId;
-  if (!sec->currentText().isEmpty()) {
+  if (sec && !sec->currentText().isEmpty()) {
     accId = sec->selectedItem();
     if (accId.isEmpty())
       accId = d->m_account.id();
@@ -1064,8 +1098,8 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   MyMoneySplit s0 = sorig;
   s0.clearId();
 
-  KMyMoneySecurity* sec = dynamic_cast<KMyMoneySecurity*>(d->m_editWidgets["security"]);
-  if (!isMultiSelection() || (isMultiSelection() && !sec->currentText().isEmpty())) {
+  auto sec = dynamic_cast<KMyMoneySecurity*>(d->m_editWidgets["security"]);
+  if (!isMultiSelection() || (isMultiSelection() && sec && !sec->currentText().isEmpty())) {
     QString securityId = sec->selectedItem();
     if (!securityId.isEmpty()) {
       s0.setAccountId(securityId);
@@ -1099,8 +1133,8 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
   t.removeSplits();
 
-  KMyMoneyDateInput* postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
-  if (postDate->date().isValid()) {
+  auto postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
+  if (postDate && postDate->date().isValid()) {
     t.setPostDate(postDate->date());
   }
 
@@ -1109,7 +1143,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   // FIXME a better approach would be to have a 'dirty' flag with the widgets
   //       which identifies if the originally loaded value has been modified
   //       by the user
-  KTextEdit* memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
+  auto memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
   if (memo) {
     if (!isMultiSelection() || (isMultiSelection() && d->m_activity->memoChanged()))
       s0.setMemo(memo->toPlainText());
@@ -1147,13 +1181,13 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   // if the activity is not set in the combo widget, we keep
   // the one which is used in the original transaction
   auto activityCombo = dynamic_cast<KMyMoneyActivityCombo*>(haveWidget("activity"));
-  if (activityCombo->activity() == eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
+  if (activityCombo && activityCombo->activity() == eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
     d->activityFactory(transactionType);
   }
 
   // if we mark the split reconciled here, we'll use today's date if no reconciliation date is given
   auto status = dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"]);
-  if (status->state() != eMyMoney::Split::State::Unknown)
+  if (status && status->state() != eMyMoney::Split::State::Unknown)
     s0.setReconcileFlag(status->state());
 
   if (s0.reconcileFlag() == eMyMoney::Split::State::Reconciled && !s0.reconcileDate().isValid())

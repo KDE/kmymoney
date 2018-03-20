@@ -54,6 +54,10 @@ class AmountEditPrivate
 public:
   explicit AmountEditPrivate(AmountEdit* qq) :
     q_ptr(qq),
+    m_calculatorFrame(nullptr),
+    m_calculator(nullptr),
+    m_calculatorButton(nullptr),
+    m_prec(2),
     m_allowEmpty(false)
   {
     Q_Q(AmountEdit);

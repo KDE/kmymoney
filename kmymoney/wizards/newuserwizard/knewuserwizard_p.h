@@ -45,7 +45,13 @@ namespace NewUserWizard
   public:
     explicit WizardPrivate(Wizard *qq):
       KMyMoneyWizardPrivate(qq),
-      m_introPage(nullptr)
+      m_introPage(nullptr),
+      m_generalPage(nullptr),
+      m_currencyPage(nullptr),
+      m_accountPage(nullptr),
+      m_categoriesPage(nullptr),
+      m_preferencePage(nullptr),
+      m_filePage(nullptr)
     {
     }
 

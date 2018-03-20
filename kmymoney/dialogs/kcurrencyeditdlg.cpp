@@ -108,10 +108,13 @@ class KCurrencyEditDlgPrivate
   Q_DECLARE_PUBLIC(KCurrencyEditDlg)
 
 public:
-  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq)
-    : q_ptr(qq)
-    , ui(new Ui::KCurrencyEditDlg)
-    , m_inLoading(false)
+  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq) :
+    q_ptr(qq),
+    ui(new Ui::KCurrencyEditDlg),
+    m_availableCurrencyDlg(nullptr),
+    m_currencyEditorDlg(nullptr),
+    m_searchWidget(nullptr),
+    m_inLoading(false)
   {
   }
 

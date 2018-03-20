@@ -203,7 +203,6 @@ namespace KMyMoneyRegister
 
     virtual void setupPalette(const QPalette& palette, QMap<QString, QWidget*>& editWidgets);
 
-    TransactionPrivate *d_ptr;
     Transaction(TransactionPrivate &dd, Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     Transaction(TransactionPrivate &dd); //for copy-constructor of derived class
 

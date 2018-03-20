@@ -52,7 +52,8 @@ namespace NewUserWizard
 
   public:
     GeneralPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent)
+      WizardPagePrivate<Wizard>(parent),
+      m_contact(nullptr)
     {
     }
 

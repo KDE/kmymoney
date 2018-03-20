@@ -71,12 +71,13 @@ namespace KMyMoneyRegister
   {
   public:
     RegisterPrivate() :
-      m_selectAnchor(0),
-      m_focusItem(0),
-      m_firstItem(0),
-      m_lastItem(0),
-      m_firstErroneous(0),
-      m_lastErroneous(0),
+      m_selectAnchor(nullptr),
+      m_focusItem(nullptr),
+      m_ensureVisibleItem(nullptr),
+      m_firstItem(nullptr),
+      m_lastItem(nullptr),
+      m_firstErroneous(nullptr),
+      m_lastErroneous(nullptr),
       m_rowHeightHint(0),
       m_ledgerLensForced(false),
       m_selectionMode(QTableWidget::MultiSelection),
@@ -87,6 +88,7 @@ namespace KMyMoneyRegister
       m_usedWithEditor(false),
       m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
       m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
+      m_lastCol(eTransaction::Column::Account),
       m_detailsColumnType(eRegister::DetailColumn::PayeeFirst)
     {
     }
@@ -191,8 +193,8 @@ namespace KMyMoneyRegister
   bool Register::eventFilter(QObject* o, QEvent* e)
   {
     if (o == this && e->type() == QEvent::KeyPress) {
-      QKeyEvent* ke = dynamic_cast<QKeyEvent*>(e);
-      if (ke->key() == Qt::Key_Menu) {
+      auto ke = dynamic_cast<QKeyEvent*>(e);
+      if (ke && ke->key() == Qt::Key_Menu) {
         emit openContextMenu();
         return true;
       }
@@ -392,7 +394,7 @@ namespace KMyMoneyRegister
     item = d->m_lastItem;
     bool showBalance = true;
     while (item) {
-      Transaction* t = dynamic_cast<Transaction*>(item);
+      auto t = dynamic_cast<Transaction*>(item);
       if (t) {
         t->setShowBalance(showBalance);
         if (!t->isVisible()) {
@@ -591,13 +593,13 @@ namespace KMyMoneyRegister
   {
     bool lastWasGroupMarker = false;
     KMyMoneyRegister::RegisterItem* p = lastItem();
-    KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
+    auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
     if (t && t->transaction().id().isEmpty()) {
       lastWasGroupMarker = true;
       p = p->prevItem();
     }
     while (p) {
-      KMyMoneyRegister::GroupMarker* m = dynamic_cast<KMyMoneyRegister::GroupMarker*>(p);
+      auto m = dynamic_cast<KMyMoneyRegister::GroupMarker*>(p);
       if (m) {
         // make adjacent group marker invisible except those that show statement information
         if (lastWasGroupMarker && (dynamic_cast<KMyMoneyRegister::StatementGroupMarker*>(m) == 0)) {
@@ -907,7 +909,7 @@ namespace KMyMoneyRegister
       RegisterItem* const item = d->m_items[i];
       if (!item)
         continue;
-      Transaction* t = dynamic_cast<Transaction*>(item);
+      auto t = dynamic_cast<Transaction*>(item);
       if (t) {
         int nw = 0;
         try {
@@ -1010,7 +1012,7 @@ namespace KMyMoneyRegister
   {
     Q_D(const Register);
     if (d->m_focusItem && d->m_focusItem->isSelected() && d->m_focusItem->isVisible()) {
-      Transaction* t = dynamic_cast<Transaction*>(d->m_focusItem);
+      auto t = dynamic_cast<Transaction*>(d->m_focusItem);
       if (t) {
         QString id;
         if (t->isScheduled())
@@ -1026,7 +1028,7 @@ namespace KMyMoneyRegister
       if (item == d->m_focusItem)
         continue;
       if (item && item->isSelected() && item->isVisible()) {
-        Transaction* t = dynamic_cast<Transaction*>(item);
+        auto t = dynamic_cast<Transaction*>(item);
         if (t) {
           QString id;
           if (t->isScheduled())
@@ -1130,7 +1132,7 @@ namespace KMyMoneyRegister
       // selectItem() might have changed the pointers, so we
       // need to reconstruct it here
       item = itemById(id);
-      Transaction* t = dynamic_cast<Transaction*>(item);
+      auto t = dynamic_cast<Transaction*>(item);
       if (t) {
         if (!id.isEmpty()) {
           if (t && col == (int)eTransaction::Column::ReconcileFlag && selectedItemsCount() == 1 && !t->isScheduled())
@@ -1155,7 +1157,7 @@ namespace KMyMoneyRegister
       if (d->m_focusItem) {
         d->m_focusItem->setFocus(false);
       }
-      Transaction* item = dynamic_cast<Transaction*>(focusItem);
+      auto item = dynamic_cast<Transaction*>(focusItem);
       if (d->m_focusItem != focusItem && item) {
         emit focusChanged(item);
       }
@@ -1380,16 +1382,17 @@ namespace KMyMoneyRegister
     }
 
     // now delete the widgets
-    KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(focusItem());
-    for (int row = t->startRow(); row < t->startRow() + t->numRowsRegister(true); ++row) {
-      for (int col = 0; col < columnCount(); ++col) {
-        if (cellWidget(row, col)) {
-          cellWidget(row, col)->hide();
-          setCellWidget(row, col, 0);
+    if (auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(focusItem())) {
+      for (int row = t->startRow(); row < t->startRow() + t->numRowsRegister(true); ++row) {
+        for (int col = 0; col < columnCount(); ++col) {
+          if (cellWidget(row, col)) {
+            cellWidget(row, col)->hide();
+            setCellWidget(row, col, 0);
+          }
         }
+        // make sure to reduce the possibly size to what it was before editing started
+        setRowHeight(row, t->rowHeightHint());
       }
-      // make sure to reduce the possibly size to what it was before editing started
-      setRowHeight(row, t->rowHeightHint());
     }
   }
 
@@ -1552,7 +1555,7 @@ namespace KMyMoneyRegister
     }
 
     // make sure to avoid selecting a possible empty transaction at the end
-    Transaction* t = dynamic_cast<Transaction*>(item);
+    auto t = dynamic_cast<Transaction*>(item);
     if (t && t->transaction().id().isEmpty()) {
       if (t->prevItem()) {
         item = t->prevItem();
@@ -1759,10 +1762,8 @@ namespace KMyMoneyRegister
       case SortField::Payee:
         if (KMyMoneySettings::showFancyMarker()) {
           while (p) {
-            t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-            if (t) {
+            if ((t = dynamic_cast<KMyMoneyRegister::Transaction*>(p)))
               list[t->sortPayee()] = 1;
-            }
             p = p->nextItem();
           }
           for (it = list.constBegin(); it != list.constEnd(); ++it) {
@@ -1778,10 +1779,8 @@ namespace KMyMoneyRegister
       case SortField::Category:
         if (KMyMoneySettings::showFancyMarker()) {
           while (p) {
-            t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-            if (t) {
+            if ((t = dynamic_cast<KMyMoneyRegister::Transaction*>(p)))
               list[t->sortCategory()] = 1;
-            }
             p = p->nextItem();
           }
           for (it = list.constBegin(); it != list.constEnd(); ++it) {
@@ -1797,10 +1796,8 @@ namespace KMyMoneyRegister
       case SortField::Security:
         if (KMyMoneySettings::showFancyMarker()) {
           while (p) {
-            t = dynamic_cast<KMyMoneyRegister::InvestTransaction*>(p);
-            if (t) {
+            if ((t = dynamic_cast<KMyMoneyRegister::InvestTransaction*>(p)))
               list[t->sortSecurity()] = 1;
-            }
             p = p->nextItem();
           }
           for (it = list.constBegin(); it != list.constEnd(); ++it) {
@@ -1838,7 +1835,7 @@ namespace KMyMoneyRegister
     p = lastItem();
     while (p) {
       q = p;
-      KMyMoneyRegister::GroupMarker* m = dynamic_cast<KMyMoneyRegister::GroupMarker*>(p);
+      auto m = dynamic_cast<KMyMoneyRegister::GroupMarker*>(p);
       p = p->prevItem();
       if (m) {
         m->markVisible(true);

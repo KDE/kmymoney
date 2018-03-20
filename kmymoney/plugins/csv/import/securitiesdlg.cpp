@@ -24,7 +24,9 @@
 
 #include "ui_securitiesdlg.h"
 
-SecuritiesDlg::SecuritiesDlg() : ui(new Ui::SecuritiesDlg)
+SecuritiesDlg::SecuritiesDlg() :
+  ui(new Ui::SecuritiesDlg),
+  m_RowCount(0)
 {
   ui->setupUi(this);
   m_validRowCount = 0;

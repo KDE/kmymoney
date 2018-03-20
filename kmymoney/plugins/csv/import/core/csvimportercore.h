@@ -63,13 +63,24 @@ enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
 class KMM_CSVIMPORTERCORE_NO_EXPORT CSVProfile
 {
 protected:
-  CSVProfile() {}
+  CSVProfile() :
+  m_encodingMIBEnum(0),
+    m_startLine(0),
+    m_endLine(0),
+    m_trailerLines(0),
+    m_dateFormat(DateFormat::DayMonthYear),
+    m_fieldDelimiter(FieldDelimiter::Auto),
+    m_textDelimiter(TextDelimiter::DoubleQuote),
+    m_decimalSymbol(DecimalSymbol::Auto)
+  {
+  }
+
   CSVProfile(const QString &profileName, int encodingMIBEnum,
              int startLine, int trailerLines,
              DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
              QMap<Column, int> &colTypeNum) :
     m_profileName(profileName), m_encodingMIBEnum(encodingMIBEnum),
-    m_startLine(startLine), m_trailerLines(trailerLines),
+    m_startLine(startLine), m_endLine(startLine), m_trailerLines(trailerLines),
     m_dateFormat(dateFormat), m_fieldDelimiter(fieldDelimiter),
     m_textDelimiter(textDelimiter), m_decimalSymbol(decimalSymbol),
     m_colTypeNum(colTypeNum)
@@ -110,7 +121,7 @@ public:
 class KMM_CSVIMPORTERCORE_EXPORT BankingProfile : public CSVProfile
 {
 public:
-  explicit BankingProfile() : CSVProfile() {}
+  explicit BankingProfile() : CSVProfile(), m_oppositeSigns(false) {}
   BankingProfile(QString profileName, int encodingMIBEnum,
                  int startLine, int trailerLines,
                  DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
@@ -135,7 +146,14 @@ public:
 class KMM_CSVIMPORTERCORE_EXPORT InvestmentProfile : public CSVProfile
 {
 public:
-  explicit InvestmentProfile() : CSVProfile() {}
+  explicit InvestmentProfile() :
+    CSVProfile(),
+    m_priceFraction(2),
+    m_dontAsk(0),
+    m_feeIsPercentage(false)
+  {
+  }
+
   InvestmentProfile(QString profileName, int encodingMIBEnum,
                     int startLine, int trailerLines,
                     DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
@@ -145,7 +163,12 @@ public:
                startLine, trailerLines,
                dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
                colTypeNum),
-    m_transactionNames(transactionNames), m_priceFraction(priceFraction), m_feeIsPercentage(false) {}
+    m_transactionNames(transactionNames),
+    m_priceFraction(priceFraction),
+    m_dontAsk(0),
+    m_feeIsPercentage(false)
+  {
+  }
 
   Profile type() const { return Profile::Investment; }
   bool readSettings(const KSharedConfigPtr &config);
@@ -170,7 +193,14 @@ class KMM_CSVIMPORTERCORE_EXPORT PricesProfile : public CSVProfile
 {
 public:
   explicit PricesProfile() : CSVProfile() {}
-  explicit PricesProfile(const Profile profileType) : CSVProfile(), m_profileType(profileType) {}
+  explicit PricesProfile(const Profile profileType) :
+    CSVProfile(),
+    m_dontAsk(0),
+    m_priceFraction(2),
+    m_profileType(profileType)
+  {
+  }
+
   PricesProfile(QString profileName, int encodingMIBEnum,
                      int startLine, int trailerLines,
                      DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
@@ -180,7 +210,11 @@ public:
                startLine, trailerLines,
                dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
                colTypeNum),
-    m_priceFraction(priceFraction), m_profileType(profileType) {}
+    m_dontAsk(0),
+    m_priceFraction(priceFraction),
+    m_profileType(profileType)
+  {
+  }
 
   Profile type() const { return m_profileType; }
   bool readSettings(const KSharedConfigPtr &config);

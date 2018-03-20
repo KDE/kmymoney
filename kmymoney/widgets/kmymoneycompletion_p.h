@@ -44,7 +44,11 @@ class KMyMoneyCompletionPrivate
   Q_DISABLE_COPY(KMyMoneyCompletionPrivate)
 
 public:
-  KMyMoneyCompletionPrivate()
+  KMyMoneyCompletionPrivate() :
+    m_parent(nullptr),
+    m_widget(nullptr),
+    m_lv(nullptr),
+    m_selector(nullptr)
   {
   }
 

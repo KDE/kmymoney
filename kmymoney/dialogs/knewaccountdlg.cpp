@@ -67,7 +67,10 @@ class KNewAccountDlgPrivate
 public:
   explicit KNewAccountDlgPrivate(KNewAccountDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KNewAccountDlg)
+    ui(new Ui::KNewAccountDlg),
+    m_filterProxyModel(nullptr),
+    m_categoryEditor(false),
+    m_isEditing(false)
   {
   }
 
