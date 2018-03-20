@@ -2,7 +2,7 @@
                           kaccountsview.cpp
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -63,10 +63,23 @@ KAccountsView::~KAccountsView()
 {
 }
 
-void KAccountsView::setDefaultFocus()
+void KAccountsView::executeCustomAction(eView::Action action)
 {
-  Q_D(KAccountsView);
-  QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KAccountsView);
+        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KAccountsView::refresh()
@@ -100,7 +113,7 @@ void KAccountsView::showEvent(QShowEvent * event)
   if (!d->m_proxyModel)
     d->init();
 
-  emit aboutToShow(View::Accounts);
+  emit customActionRequested(View::Accounts, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -253,6 +266,35 @@ void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)
   pMenus[eMenu::Menu::Account]->exec(QCursor::pos());
 }
 
+void KAccountsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::OpenContextMenu:
+      slotShowAccountMenu(static_cast<const MyMoneyAccount&>(obj));
+      break;
+
+    default:
+      break;
+  }
+}
+
+void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  Q_D(KAccountsView);
+  switch (intent) {
+    case eView::Intent::UpdateNetWorth:
+      if (variant.count() == 1 && d->m_proxyModel)
+        slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
+      break;
+    default:
+      break;
+  }
+}
+
 void KAccountsView::slotNewAccount()
 {
   MyMoneyAccount account;
@@ -273,7 +315,7 @@ void KAccountsView::slotEditAccount()
       d->editAccount();
       break;
   }
-  emit objectSelected(d->m_currentAccount);
+  emit selectByObject(d->m_currentAccount, eView::Intent::None);
 }
 
 void KAccountsView::slotDeleteAccount()
@@ -310,7 +352,7 @@ void KAccountsView::slotDeleteAccount()
   try {
     file->removeAccount(d->m_currentAccount);
     d->m_currentAccount.clearId();
-    emit objectSelected(MyMoneyAccount());
+    emit selectByObject(MyMoneyAccount(), eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &e) {
     KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e.what()));
@@ -324,7 +366,7 @@ void KAccountsView::slotCloseAccount()
   try {
     d->m_currentAccount.setClosed(true);
     MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
-    emit objectSelected(d->m_currentAccount);
+    emit selectByObject(d->m_currentAccount, eView::Intent::None);
     ft.commit();
     if (KMyMoneySettings::hideClosedAccounts())
       KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
@@ -344,7 +386,7 @@ void KAccountsView::slotReopenAccount()
       file->modifyAccount(acc);
       acc = file->account(acc.parentAccountId());
     }
-    emit objectSelected(d->m_currentAccount);
+    emit selectByObject(d->m_currentAccount, eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &) {
   }

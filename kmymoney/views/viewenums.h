@@ -32,11 +32,40 @@ namespace eView {
                    Closed      // closed tags
                  };
 
-  namespace Schedules {
-    enum class Requester {
-      Reconciliation
-    };
-  }
+  enum class Intent {
+    None,
+    UpdateActions,
+    OpenContextMenu,
+    OpenObject,
+    ShowPayee,
+    ShowTransaction,
+    SynchronizeAccountInInvestmentView,
+    SynchronizeAccountInLedgersView,
+    ToggleColumn,
+    UpdateNetWorth,
+    UpdateProfit,
+    StartEnteringOverdueScheduledTransactions,
+    FinishEnteringOverdueScheduledTransactions,
+    EnterSchedule,
+    ReportProgress,
+    ReportProgressMessage,
+    SelectRegisterTransactions,
+    AccountReconciled
+  };
+
+  enum class Action {
+    None,
+    Refresh,
+    SetDefaultFocus,
+    AboutToShow,
+    Print,
+    SwitchView,
+    ClosePayeeIdentifierSource,
+    EditInstitution,
+    EditSchedule,
+    CleanupBeforeFileClose
+  };
+
 }
 
 #endif

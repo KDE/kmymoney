@@ -51,10 +51,27 @@ KInstitutionsView::~KInstitutionsView()
 {
 }
 
-void KInstitutionsView::setDefaultFocus()
+void KInstitutionsView::executeCustomAction(eView::Action action)
 {
-  Q_D(KInstitutionsView);
-  QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KInstitutionsView);
+        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+      }
+      break;
+
+    case eView::Action::EditInstitution:
+      slotEditInstitution();
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KInstitutionsView::refresh()
@@ -77,7 +94,7 @@ void KInstitutionsView::showEvent(QShowEvent * event)
   if (!d->m_proxyModel)
     d->init();
 
-  emit aboutToShow(View::Institutions);
+  emit customActionRequested(View::Institutions, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -157,7 +174,7 @@ void KInstitutionsView::slotEditInstitution()
       try {
         file->modifyInstitution(dlg->institution());
         ft.commit();
-        emit objectSelected(dlg->institution());
+        emit selectByObject(dlg->institution(), eView::Intent::None);
       } catch (const MyMoneyException &e) {
         KMessageBox::information(this, i18n("Unable to store institution: %1", e.what()));
       }
@@ -166,6 +183,35 @@ void KInstitutionsView::slotEditInstitution()
 
   } catch (const MyMoneyException &e) {
     KMessageBox::information(this, i18n("Unable to edit institution: %1", e.what()));
+  }
+}
+
+void KInstitutionsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::OpenContextMenu:
+      slotShowInstitutionsMenu(static_cast<const MyMoneyInstitution&>(obj));
+      break;
+
+    default:
+      break;
+  }
+}
+
+void KInstitutionsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  Q_D(KInstitutionsView);
+  switch (intent) {
+    case eView::Intent::UpdateNetWorth:
+      if (variant.count() == 1 && d->m_proxyModel)
+        slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
+      break;
+    default:
+      break;
   }
 }
 
@@ -181,7 +227,7 @@ void KInstitutionsView::slotDeleteInstitution()
 
     try {
       file->removeInstitution(institution);
-      emit objectSelected(MyMoneyInstitution());
+      emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));

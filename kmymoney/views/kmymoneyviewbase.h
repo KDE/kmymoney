@@ -45,12 +45,16 @@ public:
   explicit KMyMoneyViewBase(QWidget* parent = nullptr);
   virtual ~KMyMoneyViewBase();
 
-  virtual void setDefaultFocus() {}
-  virtual void refresh() {}
-  virtual void updateActions(const MyMoneyObject&) {}
+  virtual void executeCustomAction(eView::Action) {}
 
 Q_SIGNALS:
-  void aboutToShow(const View view);
+  void selectByObject(const MyMoneyObject&, eView::Intent);
+  void selectByVariant(const QVariantList&, eView::Intent);
+  void customActionRequested(View, eView::Action);
+
+public slots:
+  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
+  virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
 
 protected:
   const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;

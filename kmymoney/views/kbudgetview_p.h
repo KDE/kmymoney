@@ -143,7 +143,7 @@ public:
 
     q->connect(m_budgetProxyModel, &BudgetViewProxyModel::balanceChanged, q, &KBudgetView::slotBudgetBalanceChanged);
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KBudgetView::slotSelectAccount);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::slotSelectAccount);
 
     q->connect(ui->m_budgetList, &QTreeWidget::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
@@ -165,7 +165,8 @@ public:
     q->connect(ui->m_hideUnusedButton, &QAbstractButton::toggled, q, &KBudgetView::slotHideUnused);
 
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_budgetProxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KBudgetView::objectSelected);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::selectByObject);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KBudgetView::selectByVariant);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KBudgetView::refresh);
 

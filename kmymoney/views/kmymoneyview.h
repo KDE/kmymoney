@@ -3,7 +3,7 @@
                              -------------------
     copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
                                2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -46,6 +46,8 @@ namespace eMenu { enum class Action; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 namespace KMyMoneyPlugin { class StoragePlugin; }
 namespace eDialogs { enum class ScheduleResultCode; }
+namespace eView { enum class Intent; }
+namespace eView { enum class Action; }
 namespace Icons { enum class Icon; }
 
 class KMyMoneyApp;
@@ -258,7 +260,9 @@ public Q_SLOTS:
    */
   void slotObjectSelected(const MyMoneyObject& obj);
 
-  void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
+  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent);
+  void slotCustomActionRequested(View view, eView::Action action);
 
   void slotFileOpened();
   void slotFileClosed();
@@ -293,8 +297,6 @@ private Q_SLOTS:
    */
   void slotContextMenuRequested(const MyMoneyObject& obj);
 
-  void slotTransactionsMenuRequested(const KMyMoneyRegister::SelectedTransactions& list);
-
 protected Q_SLOTS:
   /**
    * eventually replace this with KMyMoneyApp::slotCurrencySetBase().
@@ -312,7 +314,6 @@ private:
   void accountNew(const bool createCategory);
 
   void resetViewSelection(const View);
-  void connectView(const View);
 
 Q_SIGNALS:
   /**

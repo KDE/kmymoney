@@ -372,7 +372,7 @@ public:
 //    q->connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KGlobalLedgerView::slotAccountSelected);
     q->connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, static_cast<void (KGlobalLedgerView::*)(const QString&)>(&KGlobalLedgerView::slotSelectAccount));
     q->connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KGlobalLedgerView::slotUpdateMoveToAccountMenu);
-    q->connect(m_register, &KMyMoneyRegister::Register::transactionsSelected, q, &KGlobalLedgerView::transactionsSelected);
+    q->connect(m_register, &KMyMoneyRegister::Register::transactionsSelected, q, &KGlobalLedgerView::slotTransactionsSelected);
     q->connect(m_register, &KMyMoneyRegister::Register::transactionsSelected, q, &KGlobalLedgerView::slotUpdateMoveToAccountMenu);
     q->connect(m_register, &KMyMoneyRegister::Register::editTransaction, q, &KGlobalLedgerView::slotEditTransaction);
     q->connect(m_register, &KMyMoneyRegister::Register::emptyItemSelected, q, &KGlobalLedgerView::slotNewTransaction);
@@ -513,7 +513,7 @@ public:
 //    emit q->objectSelected(MyMoneyAccount());
     // no transaction selected
     KMyMoneyRegister::SelectedTransactions list;
-    emit q->transactionsSelected(list);
+    emit q->selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
 
     QMap<QString, bool> isSelected;
     QString focusItemId;
@@ -603,7 +603,7 @@ public:
       // retrieve the list from the engine
       MyMoneyFile::instance()->transactionList(m_transactionList, filter);
 
-      emit q->statusProgress(0, m_transactionList.count());
+      emit q->slotStatusProgress(0, m_transactionList.count());
 
       // create the elements for the register
       QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
@@ -613,7 +613,7 @@ public:
         uniqueMap[(*it).first.id()]++;
         KMyMoneyRegister::Transaction* t = KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
         actBalance[t->split().accountId()] = MyMoneyMoney();
-        emit q->statusProgress(++i, 0);
+        emit q->slotStatusProgress(++i, 0);
         // if we're in reconciliation and the state is cleared, we
         // force the item to show in dimmed intensity to get a visual focus
         // on those items, that we need to work on
@@ -862,7 +862,7 @@ public:
       }
 
       updateSummaryLine(actBalance, clearedBalance);
-      emit q->statusProgress(-1, -1);
+      emit q->slotStatusProgress(-1, -1);
 
     } catch (const MyMoneyException &) {
       m_currentAccount = MyMoneyAccount();
@@ -872,9 +872,9 @@ public:
     m_showDetails = KMyMoneySettings::showRegisterDetailed();
 
     // and tell everyone what's selected
-    emit q->objectSelected(m_currentAccount);
+    emit q->selectByObject(m_currentAccount, eView::Intent::None);
     KMyMoneyRegister::SelectedTransactions actualSelection(m_register);
-    emit q->transactionsSelected(actualSelection);
+    emit q->selectByVariant(QVariantList {QVariant::fromValue(actualSelection)}, eView::Intent::SelectRegisterTransactions);
   }
 
   void selectTransaction(const QString& id)
@@ -960,7 +960,7 @@ public:
         ret = false;
       }
 
-    emit q->objectSelected(sch);
+    emit q->selectByObject(sch, eView::Intent::None);
 
     // make sure, we show some neutral menu entry if we don't have an object
     if (m_payeeGoto.isEmpty())
@@ -1173,7 +1173,7 @@ public:
     KMyMoneyRegister::SelectedTransactions::iterator it_t;
     int cnt = list.count();
     int i = 0;
-    emit q->statusProgress(0, cnt);
+    emit q->slotStatusProgress(0, cnt);
     MyMoneyFileTransaction ft;
     const auto file = MyMoneyFile::instance();
     try {
@@ -1208,13 +1208,13 @@ public:
         file->modifyAccount(acc);
         list.erase(it_t);
         it_t = list.begin();
-        emit q->statusProgress(i++, 0);
+        emit q->slotStatusProgress(i++, 0);
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(q, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
     }
-    emit q->statusProgress(-1, -1);
+    emit q->slotStatusProgress(-1, -1);
   }
 
   void deleteTransactionEditor()
@@ -1321,7 +1321,7 @@ public:
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
     auto cnt = list.count();
     auto i = 0;
-    emit q->statusProgress(0, cnt);
+    emit q->slotStatusProgress(0, cnt);
     MyMoneyFileTransaction ft;
     try {
       for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
@@ -1369,9 +1369,9 @@ public:
           t.modifySplit(sp);
           MyMoneyFile::instance()->modifyTransaction(t);
         }
-        emit q->statusProgress(i++, 0);
+        emit q->slotStatusProgress(i++, 0);
       }
-      emit q->statusProgress(-1, -1);
+      emit q->slotStatusProgress(-1, -1);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(q, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
@@ -1460,7 +1460,7 @@ public:
 
 //    KMSTATUS(i18n("Running automatic reconciliation"));
     auto progressBarIndex = 0;
-    q->statusProgress(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
+    q->slotStatusProgress(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
 
     // optimize the most common case - all transactions should be cleared
     QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
@@ -1473,7 +1473,7 @@ public:
       result = transactions;
       return result;
     }
-    q->statusProgress(progressBarIndex++, 0);
+    q->slotStatusProgress(progressBarIndex++, 0);
     // only one transaction is uncleared
     itTransactionSplitResult.toFront();
     int index = 0;
@@ -1485,7 +1485,7 @@ public:
       }
       index++;
     }
-    q->statusProgress(progressBarIndex++, 0);
+    q->slotStatusProgress(progressBarIndex++, 0);
 
     // more than one transaction is uncleared - apply the algorithm
     result.clear();
@@ -1518,7 +1518,7 @@ public:
         sumToComponentsMap[transactionSplit.second.shares() + sum] = splitIds;
         int size = sumToComponentsMap.size();
         if (size % PROGRESSBAR_STEPS == 0) {
-          q->statusProgress(progressBarIndex++, 0);
+          q->slotStatusProgress(progressBarIndex++, 0);
         }
         if (size > NR_OF_STEPS_LIMIT) {
           return result; // it's taking too much resources abort the algorithm
@@ -1541,7 +1541,7 @@ public:
       }
     }
 
-    q->statusProgress(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
+    q->slotStatusProgress(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
     if (sumToComponentsMap.contains(amount)) {
       QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
       while (itTransactionSplit.hasNext()) {
@@ -1558,7 +1558,7 @@ public:
            qPrintable(MyMoneyUtils::formatMoney(amount, security)), sumToComponentsMap.size(), transactions.size());
   #endif
 
-    q->statusProgress(-1, -1);
+    q->slotStatusProgress(-1, -1);
     return result;
   }
 

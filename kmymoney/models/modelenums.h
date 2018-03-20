@@ -19,6 +19,7 @@
 
 #include <QHashFunctions>
 #include <qnamespace.h>
+#include <QMetaType>
 
 namespace eAccountsModel {
     enum class Column {
@@ -111,5 +112,10 @@ namespace eLedgerModel {
 
   };
 }
+
+/**
+  * Make it possible to hold eAccountsModel::Column objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(eAccountsModel::Column)
 
 #endif

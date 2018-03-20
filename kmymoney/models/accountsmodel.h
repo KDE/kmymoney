@@ -54,6 +54,7 @@ class MyMoneyAccount;
 
 namespace eMyMoney { namespace File { enum class Object; } }
 namespace eAccountsModel { enum class Column; }
+namespace eView { enum class Intent; }
 
 class AccountsModel : public QStandardItemModel
 {
@@ -106,12 +107,12 @@ Q_SIGNALS:
   /**
     * Emit this signal when the net worth based on the value of the loaded accounts is changed.
     */
-  void netWorthChanged(const MyMoneyMoney &);
+  void netWorthChanged(const QVariantList&, eView::Intent);
 
   /**
     * Emit this signal when the profit based on the value of the loaded accounts is changed.
     */
-  void profitChanged(const MyMoneyMoney &);
+  void profitChanged(const QVariantList&, eView::Intent);
 
 private:
   AccountsModel(QObject *parent = 0);

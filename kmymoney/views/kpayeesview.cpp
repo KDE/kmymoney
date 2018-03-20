@@ -88,12 +88,6 @@ KPayeesView::~KPayeesView()
 {
 }
 
-void KPayeesView::setDefaultFocus()
-{
-  Q_D(KPayeesView);
-  QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
-}
-
 void KPayeesView::slotChooseDefaultAccount()
 {
   Q_D(KPayeesView);
@@ -147,6 +141,19 @@ void KPayeesView::slotClosePayeeIdentifierSource()
   if (!d->m_needLoad)
     d->ui->payeeIdentifiers->closeSource();
 }
+
+void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  switch (intent) {
+    case eView::Intent::ShowPayee:
+      if (variant.count() == 3)
+        slotSelectPayeeAndTransaction(variant.at(0).toString(), variant.at(1).toString(), variant.at(2).toString());
+      break;
+    default:
+      break;
+  }
+}
+
 
 void KPayeesView::slotStartRename(QListWidgetItem* item)
 {
@@ -509,6 +516,29 @@ void KPayeesView::slotSendMail()
     QDesktopServices::openUrl(QUrl(QStringLiteral("mailto:?to=") + d->m_payee.email(), QUrl::TolerantMode));
 }
 
+void KPayeesView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KPayeesView);
+        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+      }
+      break;
+
+    case eView::Action::ClosePayeeIdentifierSource:
+      slotClosePayeeIdentifierSource();
+      break;
+
+    default:
+      break;
+  }
+}
+
 void KPayeesView::refresh()
 {
   Q_D(KPayeesView);
@@ -530,7 +560,7 @@ void KPayeesView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Payees);
+  emit customActionRequested(View::Payees, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -562,7 +592,7 @@ void KPayeesView::slotSelectTransaction()
   if (!list.isEmpty()) {
     const auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (t)
-      emit transactionSelected(t->split().accountId(), t->transaction().id());
+      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id()) }, eView::Intent::ShowTransaction);
   }
 }
 

@@ -623,7 +623,7 @@ public:
       pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
       // qDebug("KMyMoneyApp::slotTransactionsCancel");
       delete editor;
-      emit q->objectSelected(schedule);
+      emit q->selectByObject(schedule, eView::Intent::None);
     }
   }
 

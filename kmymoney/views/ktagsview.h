@@ -50,15 +50,16 @@ public:
   explicit KTagsView(QWidget *parent = nullptr);
   ~KTagsView() override;
 
-  void setDefaultFocus() override;
   void updateTagActions(const QList<MyMoneyTag>& tags);
+  void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
   void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId, const QString& transactionId);
   void slotSelectTagAndTransaction(const QString& tagId);
   void slotStartRename(QListWidgetItem*);
   void slotHelp();
-  void refresh() override;
+
+  void refresh();
 
 protected:
   void showEvent(QShowEvent* event) override;

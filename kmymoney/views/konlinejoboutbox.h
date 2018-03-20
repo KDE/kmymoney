@@ -36,12 +36,16 @@ public:
   explicit KOnlineJobOutbox(QWidget *parent = 0);
   ~KOnlineJobOutbox() override;
 
-  void setDefaultFocus() override;
-  void updateActions(const MyMoneyObject& obj) override;
+  void executeCustomAction(eView::Action action) override;
+
+  void updateActions(const MyMoneyObject& obj);
 
   QStringList selectedOnlineJobs() const;
 
   void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
+
+public Q_SLOTS:
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
 Q_SIGNALS:
   void sendJobs(QList<onlineJob>);

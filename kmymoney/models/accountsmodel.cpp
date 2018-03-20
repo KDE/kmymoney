@@ -46,6 +46,7 @@
 #include "icons.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
+#include "viewenums.h"
 
 using namespace Icons;
 using namespace eAccountsModel;
@@ -809,7 +810,7 @@ void AccountsModel::checkNetWorth()
   }
   if (d->m_lastNetWorth != netWorth) {
     d->m_lastNetWorth = netWorth;
-    emit netWorthChanged(d->m_lastNetWorth);
+    emit netWorthChanged(QVariantList {QVariant::fromValue(d->m_lastNetWorth)}, eView::Intent::UpdateNetWorth);
   }
 }
 
@@ -841,7 +842,7 @@ void AccountsModel::checkProfit()
   }
   if (d->m_lastProfit != profit) {
     d->m_lastProfit = profit;
-    emit profitChanged(d->m_lastProfit);
+    emit profitChanged(QVariantList {QVariant::fromValue(d->m_lastProfit)}, eView::Intent::UpdateProfit);
   }
 }
 

@@ -64,9 +64,9 @@ public:
   explicit KGlobalLedgerView(QWidget *parent = nullptr);
   ~KGlobalLedgerView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
-  void updateActions(const MyMoneyObject& obj) override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
+  void updateActions(const MyMoneyObject& obj);
   void updateLedgerActions(const KMyMoneyRegister::SelectedTransactions& list);
   void updateLedgerActionsInternal();
 
@@ -169,7 +169,7 @@ public Q_SLOTS:
    * @param req is requester that made request to enter scheduled transactions
    * it's here to avoid reconcilation in case of random entering of scheduled transactions request
    */
-  void slotContinueReconciliation(eView::Schedules::Requester req);
+  void slotContinueReconciliation();
 
   /**
     * Called, whenever the ledger view should pop up and a specific
@@ -181,20 +181,10 @@ public Q_SLOTS:
     */
   void slotLedgerSelected(const QString& _accId, const QString& transaction);
 
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+
 Q_SIGNALS:
-  void objectSelected(const MyMoneyObject& obj);
-  void contextMenuRequested(const MyMoneyObject& obj);
-  void openObjectRequested(const MyMoneyObject& obj);
-
-  void openPayeeRequested(const QString& payee, const QString& account, const QString& transaction);
-  void transactionsContextMenuRequested(const KMyMoneyRegister::SelectedTransactions& list);
-
-  void enterOverdueSchedulesRequested(const MyMoneyAccount& acc, eView::Schedules::Requester req);
-
-  void switchViewRequested(View view);
-
-  void transactionsSelected(const KMyMoneyRegister::SelectedTransactions&);
-
   /**
     * This signal is emitted, when a new report has been generated.  A
     * 'generated' report is halfway between a default report and a custom
@@ -214,36 +204,11 @@ Q_SIGNALS:
   void reportGenerated(const MyMoneyReport& report);
 
   /**
-    * This signal is emitted when an account has been successfully reconciled
-    * and all transactions are updated in the engine. It can be used by plugins
-    * to create reconciliation reports.
-    *
-    * @param account the account data
-    * @param date the reconciliation date as provided through the dialog
-    * @param startingBalance the starting balance as provided through the dialog
-    * @param endingBalance the ending balance as provided through the dialog
-    * @param transactionList reference to QList of QPair containing all
-    *        transaction/split pairs processed by the reconciliation.
-    */
-  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
-
-  void openContextMenu();
-
-  /**
     * This signal is sent out, when the current selected transaction should
     * be marked different
     */
   void toggleReconciliationFlag();
 
-  /**
-   * @brief proxy signal
-   */
-  void statusMsg(const QString& txt);
-
-  /**
-   * @brief proxy signal
-   */
-  void statusProgress(int cnt, int base);
 protected:
   void showEvent(QShowEvent* event) override;
   void resizeEvent(QResizeEvent*) override;
@@ -338,6 +303,9 @@ private Q_SLOTS:
   void slotFinishReconciliation();
   void slotPostponeReconciliation();
   void slotOpenAccount();
+  void slotStatusMsg(const QString& txt);
+  void slotStatusProgress(int cnt, int base);
+  void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
 };
 
 #endif

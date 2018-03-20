@@ -72,15 +72,27 @@ KTagsView::~KTagsView()
 {
 }
 
-void KTagsView::setDefaultFocus()
+void KTagsView::executeCustomAction(eView::Action action)
 {
-  Q_D(KTagsView);
-  QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KTagsView);
+        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KTagsView::refresh()
 {
-
   Q_D(KTagsView);
   if (isVisible()) {
     if (d->m_inSelection)
@@ -393,7 +405,7 @@ void KTagsView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Tags);
+  emit customActionRequested(View::Tags, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -484,7 +496,7 @@ void KTagsView::slotSelectTransaction()
   if (!list.isEmpty()) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (t)
-      emit transactionSelected(t->split().accountId(), t->transaction().id());
+      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id())}, eView::Intent::ShowTransaction);
   }
 }
 

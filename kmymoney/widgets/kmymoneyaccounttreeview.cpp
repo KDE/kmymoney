@@ -97,10 +97,10 @@ public:
       QVariant data = q->model()->data(index, (int)eAccountsModel::Role::Account);
       if (data.isValid()) {
         if (data.canConvert<MyMoneyAccount>()) {
-          emit q->openObjectRequested(data.value<MyMoneyAccount>());
+          emit q->selectByObject(data.value<MyMoneyAccount>(), eView::Intent::OpenObject);
         }
         if (data.canConvert<MyMoneyInstitution>()) {
-          emit q->openObjectRequested(data.value<MyMoneyInstitution>());
+          emit q->selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::OpenObject);
         }
       }
     }
@@ -187,7 +187,7 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
   setModel(d->m_model);
 
   connect(this->header(), &QWidget::customContextMenuRequested, d->m_model, &AccountsViewProxyModel::slotColumnsMenu);
-  connect(d->m_model, &AccountsViewProxyModel::columnToggled, this, &KMyMoneyAccountTreeView::columnToggled);
+  connect(d->m_model, &AccountsViewProxyModel::columnToggled, this, &KMyMoneyAccountTreeView::slotColumnToggled);
 
   // restore the headers
   const auto grp = KSharedConfig::openConfig()->group(d->getConfGrpName(view));
@@ -222,12 +222,12 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
     const auto data = model()->data(index, (int)eAccountsModel::Role::Account);
     if (data.isValid()) {
       if (data.canConvert<MyMoneyAccount>()) {
-        emit objectSelected(data.value<MyMoneyAccount>());
-        emit contextMenuRequested(data.value<MyMoneyAccount>());
+        emit selectByObject(data.value<MyMoneyAccount>(), eView::Intent::None);
+        emit selectByObject(data.value<MyMoneyAccount>(), eView::Intent::OpenContextMenu);
       }
       if (data.canConvert<MyMoneyInstitution>()) {
-        emit objectSelected(data.value<MyMoneyInstitution>());
-        emit contextMenuRequested(data.value<MyMoneyInstitution>());
+        emit selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::None);
+        emit selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::OpenContextMenu);
       }
     }
   }
@@ -241,18 +241,23 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
     if (!indexes.empty()) {
       const auto data = model()->data(model()->index(indexes.front().row(), (int)eAccountsModel::Column::Account, indexes.front().parent()), (int)eAccountsModel::Role::Account);
       if (data.isValid()) {
-        if (data.canConvert<MyMoneyAccount>()) {
-          emit objectSelected(data.value<MyMoneyAccount>());
-        }
-        if (data.canConvert<MyMoneyInstitution>()) {
-          emit objectSelected(data.value<MyMoneyInstitution>());
-        }
+        if (data.canConvert<MyMoneyAccount>())
+          emit selectByObject(data.value<MyMoneyAccount>(), eView::Intent::None);
+
+        if (data.canConvert<MyMoneyInstitution>())
+          emit selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::None);
+
         // an object was successfully selected
         return;
       }
     }
   }
   // since no object was selected reset the object selection
-  emit objectSelected(MyMoneyAccount());
-  emit objectSelected(MyMoneyInstitution());
+  emit selectByObject(MyMoneyAccount(), eView::Intent::None);
+  emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
+}
+
+void KMyMoneyAccountTreeView::slotColumnToggled(const eAccountsModel::Column column, const bool show)
+{
+  emit selectByVariant(QVariantList {QVariant::fromValue(column), QVariant(show)}, eView::Intent::ToggleColumn);
 }

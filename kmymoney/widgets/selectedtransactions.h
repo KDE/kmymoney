@@ -23,6 +23,7 @@
 // QT Includes
 
 #include <QList>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,6 +54,8 @@ namespace KMyMoneyRegister
   };
 
 } // namespace
+
+Q_DECLARE_METATYPE(KMyMoneyRegister::SelectedTransactions)
 
 #endif
 

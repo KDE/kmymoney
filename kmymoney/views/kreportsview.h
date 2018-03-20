@@ -86,9 +86,9 @@ public:
   explicit KReportsView(QWidget *parent = nullptr);
   ~KReportsView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
-  void updateActions(const MyMoneyObject &obj) override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
+  void updateActions(const MyMoneyObject &obj);
 
 Q_SIGNALS:
   /**
@@ -132,6 +132,8 @@ public Q_SLOTS:
   void slotConfigureFromList();
   void slotNewFromList();
   void slotDeleteFromList();
+
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
 private:
   Q_DECLARE_PRIVATE(KReportsView)

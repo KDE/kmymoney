@@ -50,11 +50,8 @@ public:
   explicit KBudgetView(QWidget *parent = nullptr);
   ~KBudgetView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
-
-Q_SIGNALS:
-  void objectSelected(const MyMoneyObject& obj);
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
 
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
@@ -82,7 +79,7 @@ private Q_SLOTS:
     */
   void slotOpenContextMenu(const QPoint&);
   void slotItemChanged(QTreeWidgetItem* p, int col);
-  void slotSelectAccount(const MyMoneyObject &obj);
+  void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
   void slotBudgetedAmountChanged();
   /**
     *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box

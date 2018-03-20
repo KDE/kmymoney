@@ -3787,7 +3787,7 @@ void KMyMoneyApp::slotResetSelections()
   d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
   d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
   d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
-  d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
+  d->m_myMoneyView->slotSelectByVariant(QVariantList {QVariant::fromValue(KMyMoneyRegister::SelectedTransactions())}, eView::Intent::SelectRegisterTransactions);
   slotUpdateActions();
 }
 
@@ -4298,11 +4298,11 @@ void KMyMoneyApp::Private::unlinkStatementXML()
 
 void KMyMoneyApp::Private::closeFile()
 {
-  q->d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
-  q->d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
-  q->d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
-  q->d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
-  q->d->m_myMoneyView->slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions());
+  m_myMoneyView->slotObjectSelected(MyMoneyAccount());
+  m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
+  m_myMoneyView->slotObjectSelected(MyMoneySchedule());
+  m_myMoneyView->slotObjectSelected(MyMoneyTag());
+  m_myMoneyView->slotSelectByVariant(QVariantList {QVariant::fromValue(KMyMoneyRegister::SelectedTransactions())}, eView::Intent::SelectRegisterTransactions);
 
   m_myMoneyView->finishReconciliation(MyMoneyAccount());
 

@@ -52,25 +52,38 @@ KBudgetView::~KBudgetView()
 {
 }
 
-void KBudgetView::setDefaultFocus()
-{
-  Q_D(KBudgetView);
-  QTimer::singleShot(0, d->ui->m_budgetList, SLOT(setFocus()));
-}
-
 void KBudgetView::showEvent(QShowEvent * event)
 {
   Q_D(KBudgetView);
   if (!d->m_proxyModel)
     d->init();
 
-  emit aboutToShow(View::Budget);
+  emit customActionRequested(View::Budget, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
 
   // don't forget base class implementation
   QWidget::showEvent(event);
+}
+
+void KBudgetView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KBudgetView);
+        QTimer::singleShot(0, d->ui->m_budgetList, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KBudgetView::refresh()
@@ -253,7 +266,7 @@ void KBudgetView::slotResetBudget()
     const auto index = d->ui->m_accountTree->currentIndex();
     if (index.isValid()) {
       const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
-      slotSelectAccount(acc);
+      slotSelectAccount(acc, eView::Intent::None);
     } else {
       d->ui->m_budgetValue->clear();
     }
@@ -375,8 +388,9 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
   }
 }
 
-void KBudgetView::slotSelectAccount(const MyMoneyObject &obj)
+void KBudgetView::slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent)
 {
+  Q_UNUSED(intent)
   Q_D(KBudgetView);
   d->ui->m_assignmentBox->setEnabled(false);
   if (typeid(obj) != typeid(MyMoneyAccount))
@@ -505,7 +519,7 @@ void KBudgetView::slotSelectBudget()
   const auto index = d->ui->m_accountTree->currentIndex();
   if (index.isValid()) {
     const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
-    slotSelectAccount(acc);
+    slotSelectAccount(acc, eView::Intent::None);
   } else {
     d->ui->m_budgetValue->clear();
   }

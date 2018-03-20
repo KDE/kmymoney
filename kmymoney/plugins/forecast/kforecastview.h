@@ -52,8 +52,8 @@ public:
   explicit KForecastView(QWidget *parent = nullptr);
   ~KForecastView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
 
 protected:
   void showEvent(QShowEvent* event) override;

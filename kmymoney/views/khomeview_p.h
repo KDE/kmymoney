@@ -177,6 +177,8 @@ public:
     q->connect(m_view->page(), &KWebPage::linkClicked,
             q, &KHomeView::slotOpenUrl);
   #endif
+
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
   }
 
   /**

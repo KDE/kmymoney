@@ -152,12 +152,6 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
 {
 }
 
-void KOnlineJobOutbox::setDefaultFocus()
-{
-  Q_D(KOnlineJobOutbox);
-  QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
-}
-
 void KOnlineJobOutbox::updateButtonState() const
 {
   Q_D(const KOnlineJobOutbox);
@@ -249,6 +243,18 @@ void KOnlineJobOutbox::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlug
 {
   Q_D(KOnlineJobOutbox);
   d->m_onlinePlugins = &plugins;
+}
+
+void KOnlineJobOutbox::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KOnlineJobOutbox::slotSendJobs()
@@ -343,9 +349,24 @@ void KOnlineJobOutbox::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::OnlineJobOutbox);
+  emit customActionRequested(View::OnlineJobOutbox, eView::Action::AboutToShow);
   // don't forget base class implementation
   QWidget::showEvent(event);
+}
+
+void KOnlineJobOutbox::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KOnlineJobOutbox);
+        QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KOnlineJobOutbox::updateActions(const MyMoneyObject& obj)

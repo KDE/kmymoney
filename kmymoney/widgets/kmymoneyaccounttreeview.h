@@ -37,6 +37,7 @@ class MyMoneyObject;
 class AccountsViewProxyModel;
 
 namespace eAccountsModel { enum class Column; }
+namespace eView { enum class Intent; }
 enum class View;
 
 /**
@@ -63,34 +64,15 @@ protected Q_SLOTS:
   void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
 Q_SIGNALS:
-  /**
-    * This signal serves as proxy for KMyMoneyAccountTree::selectObject()
-    *
-    * @param obj const reference to object
-    */
-  void objectSelected(const MyMoneyObject& obj);
-
-  /**
-    * This signal serves as proxy for
-    * KMyMoneyAccountTree::openContextMenu(const MyMoneyObject&)
-    *
-    * @param obj const reference to object
-    */
-  void contextMenuRequested(const MyMoneyObject& obj);
-
-  /**
-    * This signal is emitted whenever the user requests to open an object
-    *
-    * @param obj reference to actual MyMoneyObject (is either
-    *            MyMoneyAccount or MyMoneyInstitution depending on selected item)
-    */
-  void openObjectRequested(const MyMoneyObject& obj);
-
-  void columnToggled(const eAccountsModel::Column column, const bool show);
+  void selectByObject(const MyMoneyObject&, eView::Intent);
+  void selectByVariant(const QVariantList&, eView::Intent);
 
 private:
   KMyMoneyAccountTreeViewPrivate * const d_ptr;
   Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
+
+private Q_SLOTS:
+  void slotColumnToggled(const eAccountsModel::Column column, const bool show);
 };
 
 #endif // KMYMONEYACCOUNTTREEVIEW_H

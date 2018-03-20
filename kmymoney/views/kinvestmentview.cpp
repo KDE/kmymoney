@@ -76,6 +76,22 @@ void KInvestmentView::setDefaultFocus()
   }
 }
 
+void KInvestmentView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      setDefaultFocus();
+      break;
+
+    default:
+      break;
+  }
+}
+
 void KInvestmentView::refresh()
 {
   Q_D(KInvestmentView);
@@ -90,7 +106,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Investments);
+  emit customActionRequested(View::Investments, eView::Action::AboutToShow);
 
   d->m_needReload[eView::Investment::Tab::Equities] = true;  // ensure tree view will be reloaded after selecting account in ledger view
   if (d->m_needReload[eView::Investment::Tab::Equities] == true ||
@@ -156,7 +172,7 @@ void KInvestmentView::slotEquitySelected(const QModelIndex &current, const QMode
   Q_D(KInvestmentView);
   Q_UNUSED(current);
   Q_UNUSED(previous);
-  emit objectSelected(d->currentEquity());
+  emit selectByObject(d->currentEquity(), eView::Intent::None);
 }
 
 void KInvestmentView::slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous)
@@ -211,7 +227,7 @@ void KInvestmentView::slotLoadAccount(const QString &id)
     d->ui->m_equitiesTree->setRootIndex(indexList.first());
     d->m_idInvAcc = id;
     if (isVisible())
-      emit accountSelected(acc);
+      emit selectByObject(acc, eView::Intent::SynchronizeAccountInLedgersView);
   }
   updateActions(acc);
 }
@@ -232,6 +248,27 @@ void KInvestmentView::slotShowInvestmentMenu(const MyMoneyAccount& acc)
 {
   Q_UNUSED(acc);
   pMenus[eMenu::Menu::Investment]->exec(QCursor::pos());
+}
+
+void KInvestmentView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::SynchronizeAccountInInvestmentView:
+      if (KMyMoneySettings::syncLedgerInvestment())
+        slotSelectAccount(obj);
+      break;
+
+    case eView::Intent::OpenContextMenu:
+      slotShowInvestmentMenu(static_cast<const MyMoneyAccount&>(obj));
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KInvestmentView::slotNewInvestment()

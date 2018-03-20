@@ -65,10 +65,23 @@ KCategoriesView::~KCategoriesView()
 {
 }
 
-void KCategoriesView::setDefaultFocus()
+void KCategoriesView::executeCustomAction(eView::Action action)
 {
-  Q_D(KCategoriesView);
-  QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KCategoriesView);
+        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KCategoriesView::refresh()
@@ -95,7 +108,7 @@ void KCategoriesView::showEvent(QShowEvent * event)
   if (!d->m_proxyModel)
     d->init();
 
-  emit aboutToShow(View::Categories);
+  emit customActionRequested(View::Categories, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -172,6 +185,35 @@ void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)
   pMenus[eMenu::Menu::Category]->exec(QCursor::pos());
 }
 
+void KCategoriesView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::OpenContextMenu:
+      slotShowCategoriesMenu(static_cast<const MyMoneyAccount&>(obj));
+      break;
+
+    default:
+      break;
+  }
+}
+
+void KCategoriesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  Q_D(KCategoriesView);
+  switch (intent) {
+    case eView::Intent::UpdateProfit:
+      if (variant.count() == 1 && d->m_proxyModel)
+        slotProfitChanged(variant.first().value<MyMoneyMoney>());
+      break;
+    default:
+      break;
+  }
+}
+
 void KCategoriesView::slotNewCategory()
 {
   Q_D(KCategoriesView);
@@ -232,7 +274,7 @@ void KCategoriesView::slotEditCategory()
       ft.commit();
 
       // reload the account object as it might have changed in the meantime
-      emit objectSelected(account);
+      emit selectByObject(account, eView::Intent::None);
 
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), e.what()));
@@ -370,7 +412,7 @@ void KCategoriesView::slotDeleteCategory()
           try {
             file->removeAccount(d->m_currentCategory);
             d->m_currentCategory.clearId();
-            emit objectSelected(d->m_currentCategory);
+            emit selectByObject(d->m_currentCategory, eView::Intent::None);
             ft.commit();
           } catch (const MyMoneyException &e) {
             KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, e.what()));
@@ -447,7 +489,7 @@ void KCategoriesView::slotDeleteCategory()
     try {
       file->removeAccount(d->m_currentCategory);
       d->m_currentCategory.clearId();
-      emit objectSelected(MyMoneyAccount());
+      emit selectByObject(MyMoneyAccount(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, e.what()));

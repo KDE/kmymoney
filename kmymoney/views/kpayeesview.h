@@ -60,8 +60,8 @@ public:
   explicit KPayeesView(QWidget *parent = nullptr);
   ~KPayeesView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
   void updatePayeeActions(const QList<MyMoneyPayee>& payees);
 
 public Q_SLOTS:
@@ -74,6 +74,8 @@ public Q_SLOTS:
    */
   void slotClosePayeeIdentifierSource();
 
+  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+
 Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);
@@ -85,7 +87,7 @@ protected:
 private:
   Q_DECLARE_PRIVATE(KPayeesView)
 
-private Q_SLOTS:  
+private Q_SLOTS:
   /**
     * This slot is called whenever the selection in m_payeesList
     * is about to change.

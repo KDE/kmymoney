@@ -106,10 +106,31 @@ KReportsView::~KReportsView()
 {
 }
 
-void KReportsView::setDefaultFocus()
+void KReportsView::executeCustomAction(eView::Action action)
 {
-  Q_D(KReportsView);
-  QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KReportsView);
+        QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
+      }
+      break;
+
+    case eView::Action::Print:
+      slotPrintView();
+      break;
+
+    case eView::Action::CleanupBeforeFileClose:
+      slotCloseAll();
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KReportsView::refresh()
@@ -129,7 +150,7 @@ void KReportsView::showEvent(QShowEvent * event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Reports);
+  emit customActionRequested(View::Reports, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -204,7 +225,7 @@ void KReportsView::slotOpenUrl(const QUrl &url)
       qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
   } else if (view == VIEW_LEDGER) {
-    emit transactionSelected(id, tid);
+    emit selectByVariant(QVariantList {QVariant(id), QVariant(tid)}, eView::Intent::ShowTransaction);
   } else {
     qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
   }
@@ -642,6 +663,20 @@ void KReportsView::slotDeleteFromList()
   }
 }
 
+void KReportsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::OpenObject:
+      slotOpenReport(static_cast<const MyMoneyReport&>(obj));
+    default:
+      break;
+  }
+}
+
 void KReportsView::slotReportAccountTransactions()
 {
   Q_D(KReportsView);
@@ -658,7 +693,7 @@ void KReportsView::slotReportAccountTransactions()
     );
     report.setGroup(i18n("Transactions"));
     report.addAccount(d->m_currentAccount.id());
-    emit switchViewRequested(View::Reports);
+    emit customActionRequested(View::Reports, eView::Action::SwitchView);
     slotOpenReport(report);
   }
 }
