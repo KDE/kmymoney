@@ -58,7 +58,7 @@ private:
 
 public:
   MyMoneyMap() : QMap<Key, T>() {}
-  virtual ~MyMoneyMap() {}
+  ~MyMoneyMap() {}
 
   void startTransaction(unsigned long* id = 0) {
     m_stack.push(new MyMoneyMapStart(this, id));

@@ -29,6 +29,12 @@
 
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
+onlineJobAdministrationTest::onlineJobAdministrationTest()
+  : storage(nullptr)
+  , file(nullptr)
+{
+}
+
 void onlineJobAdministrationTest::initTestCase()
 {
   file = MyMoneyFile::instance();
