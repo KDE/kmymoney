@@ -33,14 +33,6 @@ MyMoneyObject::MyMoneyObject(const QString& id) :
   d->m_id = id;
 }
 
-MyMoneyObject::MyMoneyObject(const QDomElement& node, bool forceId)
-{
-  Q_D(MyMoneyObject);
-  d->m_id = node.attribute(QStringLiteral("id"));
-  if (d->m_id.length() == 0 && forceId)
-    throw MYMONEYEXCEPTION("Node has no ID");
-}
-
 MyMoneyObject::MyMoneyObject() :
   d_ptr(new MyMoneyObjectPrivate)
 {

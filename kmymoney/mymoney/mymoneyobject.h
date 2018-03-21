@@ -107,22 +107,6 @@ protected:
     * @param id ID of object
     */
   MyMoneyObject(const QString& id);
-
-  /**
-   * This contructor reads the id from the @p id attribute of the
-   * QDomElement.
-   *
-   * @param node const reference to the QDomElement from which to
-   *           obtain the id of the object
-   * @param forceId flag to be able to suppress enforcement of an id
-   *           defaults to true which requires the node to have an
-   *           attribute with name @p id. If it does not contain such
-   *           an attribute, an exception will be thrown. If @p forceId
-   *           is false, no check for an id is performed. This will be
-   *           used by objects, which are stored w/o id (eg. splits,
-   *           transactions within schedules)
-   */
-  explicit MyMoneyObject(const QDomElement& node, bool forceId = true);
 };
 
 #endif
