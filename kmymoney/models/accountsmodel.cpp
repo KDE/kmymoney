@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
+ *   Copyright 2017, 2018  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -52,18 +52,32 @@ using namespace Icons;
 using namespace eAccountsModel;
 using namespace eMyMoney;
 
-class AccountsModel::Private
+class AccountsModelPrivate
 {
+  Q_DECLARE_PUBLIC(AccountsModel)
+
 public:
   /**
     * The pimpl.
     */
-  Private() :
-      m_file(MyMoneyFile::instance()) {
+  AccountsModelPrivate(AccountsModel *qq) :
+    q_ptr(qq),
+    m_file(MyMoneyFile::instance())
+  {
     m_columns.append(Column::Account);
   }
 
-  ~Private() {
+  virtual ~AccountsModelPrivate()
+  {
+  }
+
+  void init()
+  {
+    Q_Q(AccountsModel);
+    QStringList headerLabels;
+    for (const auto& column : m_columns)
+      headerLabels.append(q->getHeaderName(column));
+    q->setHorizontalHeaderLabels(headerLabels);
   }
 
   void loadPreferredAccount(const MyMoneyAccount &acc, QStandardItem *fromNode /*accounts' regular node*/, const int row, QStandardItem *toNode /*accounts' favourite node*/)
@@ -72,8 +86,7 @@ public:
       return;
 
     auto favRow = toNode->rowCount();
-    auto favItem = itemFromAccountId(toNode, acc.id());
-    if (favItem)
+    if (auto favItem = itemFromAccountId(toNode, acc.id()))
       favRow = favItem->row();
 
     for (auto i = 0; i < fromNode->columnCount(); ++i) {
@@ -94,9 +107,7 @@ public:
     */
   void loadSubaccounts(QStandardItem *node, QStandardItem *favoriteAccountsItem, const QStringList& subaccounts)
   {
-    if (subaccounts.isEmpty())
-      return;
-    foreach (const auto subaccStr, subaccounts) {
+    for (const auto& subaccStr : subaccounts) {
       const auto subacc = m_file->account(subaccStr);
 
       auto item = new QStandardItem(subacc.name());                         // initialize first column of subaccount
@@ -487,13 +498,15 @@ public:
   QStandardItem *itemFromAccountId(QStandardItemModel *model, const QString &accountId)
   {
     const auto list = model->match(model->index(0, 0), (int)Role::ID, QVariant(accountId), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-    foreach (const QModelIndex &index, list) {
+    for (const auto& index : list) {
       // always return the account which is not the child of the favorite accounts item
       if (index.parent().data((int)Role::ID).toString() != AccountsModel::favoritesAccountId)
         return model->itemFromIndex(index);
     }
     return nullptr;
   }
+
+  AccountsModel *q_ptr;
 
   /**
     * Used to load the accounts data.
@@ -517,37 +530,34 @@ public:
   static const QString m_accountsModelColumnSelection;
 };
 
-const QString AccountsModel::Private::m_accountsModelConfGroup = QStringLiteral("AccountsModel");
-const QString AccountsModel::Private::m_accountsModelColumnSelection = QStringLiteral("ColumnSelection");
+const QString AccountsModelPrivate::m_accountsModelConfGroup = QStringLiteral("AccountsModel");
+const QString AccountsModelPrivate::m_accountsModelColumnSelection = QStringLiteral("ColumnSelection");
 
 const QString AccountsModel::favoritesAccountId(QStringLiteral("Favorites"));
 
 /**
   * The constructor is private so that only the @ref Models object can create such an object.
   */
-AccountsModel::AccountsModel(QObject *parent /*= 0*/)
-    : QStandardItemModel(parent), d(new Private)
+AccountsModel::AccountsModel(QObject *parent) :
+  QStandardItemModel(parent),
+  d_ptr(new AccountsModelPrivate(this))
 {
-  init();
+  Q_D(AccountsModel);
+  d->init();
 }
 
-AccountsModel::AccountsModel(Private* const priv, QObject *parent /*= 0*/)
-    : QStandardItemModel(parent), d(priv)
+AccountsModel::AccountsModel(AccountsModelPrivate &dd, QObject *parent) :
+  QStandardItemModel(parent),
+  d_ptr(&dd)
 {
-  init();
+  Q_D(AccountsModel);
+  d->init();
 }
 
 AccountsModel::~AccountsModel()
 {
+  Q_D(AccountsModel);
   delete d;
-}
-
-void AccountsModel::init()
-{
-  QStringList headerLabels;
-  foreach (const auto column, d->m_columns)
-    headerLabels.append(getHeaderName(column));
-  setHorizontalHeaderLabels(headerLabels);
 }
 
 /**
@@ -557,6 +567,7 @@ void AccountsModel::init()
   */
 void AccountsModel::load()
 {
+  Q_D(AccountsModel);
   this->blockSignals(true);
   QStandardItem *rootItem = invisibleRootItem();
 
@@ -578,13 +589,13 @@ void AccountsModel::load()
   }
 
   // adding account categories (asset, liability, etc.) node
-  QVector <Account::Type> categories {
+  const QVector <Account::Type> categories {
     Account::Type::Asset, Account::Type::Liability,
     Account::Type::Income, Account::Type::Expense,
     Account::Type::Equity
   };
 
-  foreach (const auto category, categories) {
+  for (const auto category : categories) {
     MyMoneyAccount account;
     QString accountName;
     int displayOrder;
@@ -638,7 +649,7 @@ void AccountsModel::load()
     }
 
     // adding accounts (specific bank/investment accounts) belonging to given accounts category
-    foreach (const auto accStr, account.accountList()) {
+    for (const auto& accStr : account.accountList()) {
       const auto acc = d->m_file->account(accStr);
 
       auto item = new QStandardItem(acc.name());
@@ -685,11 +696,13 @@ QModelIndex AccountsModel::accountById(const QString& id) const
 
 QList<Column> *AccountsModel::getColumns()
 {
+  Q_D(AccountsModel);
   return &d->m_columns;
 }
 
 void AccountsModel::setColumnVisibility(const Column column, const bool show)
 {
+  Q_D(AccountsModel);
   const auto ixCol = d->m_columns.indexOf(column);  // get column index in our column's map
   if (!show && ixCol != -1) {                       // start removing column row by row from bottom to up
     d->m_columns.removeOne(column);                 // remove it from our column's map
@@ -735,7 +748,7 @@ void AccountsModel::setColumnVisibility(const Column column, const bool show)
           childItem->insertColumns(newColPos, 1);
           if (childItem->hasChildren())
             self(self, childItem);
-          this->d->setAccountData(item, j, childItem->data((int)Role::Account).value<MyMoneyAccount>(), QList<Column> {column});
+          d->setAccountData(item, j, childItem->data((int)Role::Account).value<MyMoneyAccount>(), QList<Column> {column});
         }
         return true;
       };
@@ -787,6 +800,7 @@ QString AccountsModel::getHeaderName(const Column column)
   */
 void AccountsModel::checkNetWorth()
 {
+  Q_D(AccountsModel);
   // compute the net woth
   QModelIndexList assetList = match(index(0, 0),
                                     (int)Role::ID,
@@ -819,6 +833,7 @@ void AccountsModel::checkNetWorth()
   */
 void AccountsModel::checkProfit()
 {
+  Q_D(AccountsModel);
   // compute the profit
   const auto incomeList = match(index(0, 0),
                                 (int)Role::ID,
@@ -848,6 +863,7 @@ void AccountsModel::checkProfit()
 
 MyMoneyMoney AccountsModel::accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance)
 {
+  Q_D(AccountsModel);
   return d->value(account, balance);
 }
 
@@ -856,19 +872,20 @@ MyMoneyMoney AccountsModel::accountValue(const MyMoneyAccount &account, const My
   */
 void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance)
 {
+  Q_D(AccountsModel);
   Q_UNUSED(reconciliationDate)
   Q_UNUSED(endingBalance)
   if (d->m_reconciledAccount.id() != account.id()) {
     // first clear the flag of the old reconciliation account
     if (!d->m_reconciledAccount.id().isEmpty()) {
       const auto list = match(index(0, 0), (int)Role::ID, QVariant(d->m_reconciledAccount.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-      foreach (const auto index, list)
+      for (const auto& index : list)
         setData(index, QVariant(QIcon(account.accountPixmap(false))), Qt::DecorationRole);
     }
 
     // then set the reconciliation flag of the new reconciliation account
     const auto list = match(index(0, 0), (int)Role::ID, QVariant(account.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-    foreach (const auto index, list)
+    for (const auto& index : list)
       setData(index, QVariant(QIcon(account.accountPixmap(true))), Qt::DecorationRole);
     d->m_reconciledAccount = account;
   }
@@ -880,6 +897,7 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
   */
 void AccountsModel::slotObjectAdded(File::Object objType, const QString& id)
 {
+  Q_D(AccountsModel);
   if (objType != File::Object::Account)
     return;
 
@@ -911,13 +929,17 @@ void AccountsModel::slotObjectAdded(File::Object objType, const QString& id)
   */
 void AccountsModel::slotObjectModified(File::Object objType, const QString& id)
 {
+  Q_D(AccountsModel);
   if (objType != File::Object::Account)
     return;
 
   const auto account = MyMoneyFile::instance()->account(id);
+  auto accountItem = d->itemFromAccountId(this, id);
+  if (!accountItem) {
+    qDebug() << "Unexpected null accountItem in AccountsModel::slotObjectModified";
+    return;
+  }
 
-  auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
-  auto accountItem = d->itemFromAccountId(this, account.id());
   const auto oldAccount = accountItem->data((int)Role::Account).value<MyMoneyAccount>();
   if (oldAccount.parentAccountId() == account.parentAccountId()) {
     // the hierarchy did not change so update the account data
@@ -927,11 +949,12 @@ void AccountsModel::slotObjectModified(File::Object objType, const QString& id)
     const auto row = accountItem->row();
     d->setAccountData(parentAccountItem, row, account, d->m_columns);
     // and the child of the favorite item if the account is a favorite account or it's favorite status has just changed
-    auto favItem = d->itemFromAccountId(favoriteAccountsItem, account.id());
-    if (account.value("PreferredAccount") == QLatin1String("Yes"))
-      d->loadPreferredAccount(account, parentAccountItem, row, favoriteAccountsItem);
-    else if (favItem)
-      favoriteAccountsItem->removeRow(favItem->row()); // it's not favorite anymore
+    if (auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId)) {
+      if (account.value("PreferredAccount") == QLatin1String("Yes"))
+        d->loadPreferredAccount(account, parentAccountItem, row, favoriteAccountsItem);
+      else if (auto favItem = d->itemFromAccountId(favoriteAccountsItem, account.id()))
+        favoriteAccountsItem->removeRow(favItem->row()); // it's not favorite anymore
+    }
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(File::Object::Account, oldAccount.id());
@@ -951,8 +974,8 @@ void AccountsModel::slotObjectRemoved(File::Object objType, const QString& id)
   if (objType != File::Object::Account)
     return;
 
-  auto list = match(index(0, 0), (int)Role::ID, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
-  foreach (const auto index, list)
+  const auto list = match(index(0, 0), (int)Role::ID, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
+  for (const auto& index : list)
     removeRow(index.row(), index.parent());
 
   checkNetWorth();
@@ -964,6 +987,7 @@ void AccountsModel::slotObjectRemoved(File::Object objType, const QString& id)
   */
 void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
 {
+  Q_D(AccountsModel);
   auto itParent = d->itemFromAccountId(this, account.id()); // get node of account in model
   auto isTopLevel = false;                                  // it could be top-level but we don't know it yet
   while (itParent && !isTopLevel) {                         // loop in which we set total values and balances from the bottom to the top
@@ -987,9 +1011,18 @@ void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
 /**
   * The pimpl of the @ref InstitutionsModel derived from the pimpl of the @ref AccountsModel.
   */
-class InstitutionsModel::InstitutionsPrivate : public AccountsModel::Private
+class InstitutionsModelPrivate : public AccountsModelPrivate
 {
 public:
+  InstitutionsModelPrivate(InstitutionsModel *qq) :
+    AccountsModelPrivate(qq)
+  {
+  }
+
+  ~InstitutionsModelPrivate() override
+  {
+  }
+
   /**
     * Function to get the institution item from an institution id.
     *
@@ -1022,6 +1055,7 @@ public:
       const auto investmentAccount = m_file->account(account.parentAccountId());  // ...get investment account it's under and...
       idInstitution = investmentAccount.institutionId();                          // ...get institution from investment account
     }
+
     auto itInstitution = institutionItemFromId(model, idInstitution);
     auto itAccount = itemFromAccountId(itInstitution, account.id());  // check if account already exists under institution
     // only stock accounts are added to their parent in the institutions view
@@ -1072,8 +1106,12 @@ public:
   * The institution model contains the accounts grouped by institution.
   *
   */
-InstitutionsModel::InstitutionsModel(QObject *parent /*= 0*/)
-    : AccountsModel(new InstitutionsPrivate, parent)
+InstitutionsModel::InstitutionsModel(QObject *parent) :
+  AccountsModel(*new InstitutionsModelPrivate(this), parent)
+{
+}
+
+InstitutionsModel::~InstitutionsModel()
 {
 }
 
@@ -1084,28 +1122,28 @@ InstitutionsModel::InstitutionsModel(QObject *parent /*= 0*/)
   */
 void InstitutionsModel::load()
 {
+  Q_D(InstitutionsModel);
   // create items for all the institutions
   auto institutionList = d->m_file->institutionList();
   MyMoneyInstitution none;
   none.setName(i18n("Accounts with no institution assigned"));
   institutionList.append(none);
-  auto modelUtils = static_cast<InstitutionsPrivate *>(d);
-  foreach (const auto institution, institutionList)   // add all known institutions as top-level nodes
-    modelUtils->addInstitutionItem(this, institution);
+  for (const auto& institution : institutionList)   // add all known institutions as top-level nodes
+    d->addInstitutionItem(this, institution);
 
   QList<MyMoneyAccount> accountsList;
   QList<MyMoneyAccount> stocksList;
   d->m_file->accountList(accountsList);
-  foreach (const auto account, accountsList) {  // add account nodes under institution nodes...
+  for (const auto& account : accountsList) {  // add account nodes under institution nodes...
     if (account.isInvest())                     // ...but wait with stocks until investment accounts appear
       stocksList.append(account);
     else
-      modelUtils->loadInstitution(this, account);
+      d->loadInstitution(this, account);
   }
 
-  foreach (const auto stock, stocksList) {
+  for (const auto& stock : stocksList) {
     if (!(KMyMoneySettings::hideZeroBalanceEquities() && stock.balance().isZero()))
-      modelUtils->loadInstitution(this, stock);
+      d->loadInstitution(this, stock);
   }
 
   for (auto i = 0 ; i < rowCount(); ++i)
@@ -1118,11 +1156,11 @@ void InstitutionsModel::load()
   */
 void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
 {
-  auto modelUtils = static_cast<InstitutionsPrivate *>(d);
+  Q_D(InstitutionsModel);
   if (objType == File::Object::Institution) {
     // if an institution was added then add the item which will represent it
     const auto institution = MyMoneyFile::instance()->institution(id);
-    modelUtils->addInstitutionItem(this, institution);
+    d->addInstitutionItem(this, institution);
   }
 
   if (objType != File::Object::Account)
@@ -1135,7 +1173,7 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
     return;
 
   // load the account into the institution
-  modelUtils->loadInstitution(this, account);
+  d->loadInstitution(this, account);
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
@@ -1143,9 +1181,9 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
   if (!sAccounts.isEmpty()) {
     QList<MyMoneyAccount> subAccounts;
     d->m_file->accountList(subAccounts, sAccounts);
-    foreach (const auto subAccount, subAccounts) {
+    for (const auto& subAccount : subAccounts) {
       if (subAccount.isInvest()) {
-        modelUtils->loadInstitution(this, subAccount);
+        d->loadInstitution(this, subAccount);
       }
     }
   }
@@ -1157,13 +1195,15 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
   */
 void InstitutionsModel::slotObjectModified(File::Object objType, const QString& id)
 {
+  Q_D(InstitutionsModel);
   if (objType == File::Object::Institution) {
     // if an institution was modified then modify the item which represents it
     const auto institution = MyMoneyFile::instance()->institution(id);
-    auto institutionItem = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, institution.id());
-    institutionItem->setData(institution.name(), Qt::DisplayRole);
-    institutionItem->setData(QVariant::fromValue(institution), (int)Role::Account);
-    institutionItem->setIcon(institution.pixmap());
+    if (auto institutionItem = d->institutionItemFromId(this, id)) {
+      institutionItem->setData(institution.name(), Qt::DisplayRole);
+      institutionItem->setData(QVariant::fromValue(institution), (int)Role::Account);
+      institutionItem->setIcon(MyMoneyInstitution::pixmap());
+    }
   }
 
   if (objType != File::Object::Account)
@@ -1193,10 +1233,10 @@ void InstitutionsModel::slotObjectModified(File::Object objType, const QString& 
   */
 void InstitutionsModel::slotObjectRemoved(File::Object objType, const QString& id)
 {
+  Q_D(InstitutionsModel);
   if (objType == File::Object::Institution) {
     // if an institution was removed then remove the item which represents it
-    auto itInstitution = static_cast<InstitutionsPrivate *>(d)->institutionItemFromId(this, id);
-    if (itInstitution)
+    if (auto itInstitution = d->institutionItemFromId(this, id))
       removeRow(itInstitution->row(), itInstitution->index().parent());
   }
 
@@ -1209,8 +1249,8 @@ void InstitutionsModel::slotObjectRemoved(File::Object objType, const QString& i
     return; // this could happen if the account isIncomeExpense
 
   const auto account = itAccount->data((int)Role::Account).value<MyMoneyAccount>();
-  auto itInstitution = d->itemFromAccountId(this, account.institutionId());
-
-  AccountsModel::slotObjectRemoved(objType, id);
-  d->setInstitutionTotalValue(invisibleRootItem(), itInstitution->row());
+  if (auto itInstitution = d->itemFromAccountId(this, account.institutionId())) {
+    AccountsModel::slotObjectRemoved(objType, id);
+    d->setInstitutionTotalValue(invisibleRootItem(), itInstitution->row());
+  }
 }

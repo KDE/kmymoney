@@ -228,8 +228,8 @@ QModelIndex Models::indexById(QAbstractItemModel* model, int role, const QString
 
 void Models::fileOpened()
 {
-  accountsModel()->load();
-  institutionsModel()->load();
+  accountsModel()->AccountsModel::load();
+  institutionsModel()->InstitutionsModel::load();
   onlineJobsModel()->load();
   costCenterModel()->load();
   #ifdef ENABLE_UNFINISHEDFEATURES
