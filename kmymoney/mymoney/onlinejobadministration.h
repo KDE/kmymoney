@@ -67,8 +67,10 @@ class KMM_MYMONEY_EXPORT onlineJobAdministration : public QObject
   Q_PROPERTY(bool canSendAnyTask READ canSendAnyTask NOTIFY canSendAnyTaskChanged STORED false);
   Q_PROPERTY(bool canSendCreditTransfer READ canSendCreditTransfer NOTIFY canSendCreditTransferChanged STORED false);
 
-public:
+protected:
   explicit onlineJobAdministration(QObject *parent = 0);
+
+public:
   ~onlineJobAdministration();
 
   struct onlineJobEditOffer {
@@ -83,10 +85,7 @@ public:
    */
   QStringList availableOnlineTasks();
 
-  static onlineJobAdministration* instance() {
-    static onlineJobAdministration m_instance;
-    return &m_instance;
-  }
+  static onlineJobAdministration* instance();
 
   /** @brief clear the internal caches for shutdown */
   void clearCaches();
@@ -247,6 +246,11 @@ public Q_SLOTS:
 
 private:
   /**
+   * Register all available online tasks
+   */
+  void registerAllOnlineTasks();
+
+  /**
    * @brief Find onlinePlugin which is responsible for accountId
    * @param accountId
    * @return Pointer to onlinePluginExtended, do not delete.
@@ -314,6 +318,8 @@ private:
    * Intances of editors
    */
   QList<IonlineJobEdit*> m_onlineTaskEditors;
+
+  bool m_inRegistration;
 };
 
 template<class T>

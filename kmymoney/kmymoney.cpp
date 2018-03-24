@@ -616,6 +616,8 @@ public:
     q->slotCheckSchedules();
 
     m_myMoneyView->slotFileOpened();
+
+    onlineJobAdministration::instance()->updateActions();
     return true;
   }
 
@@ -859,7 +861,14 @@ public:
     // disconnect the current storga manager from the engine
     MyMoneyFile::instance()->detachStorage();
 
+    // create a new empty storage object
     auto storage = new MyMoneyStorageMgr;
+
+    // attach the storage before reading the file, since the online
+    // onlineJobAdministration object queries the engine during
+    // loading.
+    MyMoneyFile::instance()->attachStorage(storage);
+
     pReader->setProgressCallback(&KMyMoneyApp::progressCallback);
     pReader->readFile(qfile, storage);
     pReader->setProgressCallback(0);
@@ -873,11 +882,6 @@ public:
     // filesystem.
     if (downloadedFile)
       QFile::remove(fileName);
-
-    // things are finished, now we connect the storage to the engine
-    // which forces a reload of the cache in the engine with those
-    // objects that are cached
-    MyMoneyFile::instance()->attachStorage(storage);
 
     // encapsulate transactions to the engine to be able to commit/rollback
     MyMoneyFileTransaction ft;
@@ -1733,7 +1737,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 KMyMoneyApp::~KMyMoneyApp()
 {
   d->removeStorage();
-  // delete cached objects since the are in the way
+  // delete cached objects since they are in the way
   // when unloading the plugins
   onlineJobAdministration::instance()->clearCaches();
 

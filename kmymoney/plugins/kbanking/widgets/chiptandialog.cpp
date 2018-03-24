@@ -47,7 +47,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &chipTanDialog::reject);
   connect(ui->tanInput, &QLineEdit::textEdited, this, &chipTanDialog::tanInputChanged);
 
-  ui->declarativeView->setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kmm_kbanking/qml/chipTan/ChipTan.qml"))));
+  ui->declarativeView->setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kbanking/qml/chipTan/ChipTan.qml"))));
 
   setFlickerFieldWidth(KBankingSettings::width());
   setFlickerFieldClockSetting(KBankingSettings::clocksetting());

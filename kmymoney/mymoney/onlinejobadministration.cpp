@@ -50,15 +50,22 @@
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "tasks/onlinetask.h"
 
-onlineJobAdministration::onlineJobAdministration(QObject *parent) :
-    QObject(parent),
-    m_onlinePlugins(nullptr)
+onlineJobAdministration::onlineJobAdministration(QObject *parent)
+  : QObject(parent)
+  , m_onlinePlugins(nullptr)
+  , m_inRegistration(false)
 {
 }
 
 onlineJobAdministration::~onlineJobAdministration()
 {
   clearCaches();
+}
+
+onlineJobAdministration* onlineJobAdministration::instance()
+{
+  static onlineJobAdministration m_instance;
+  return &m_instance;
 }
 
 void onlineJobAdministration::clearCaches()
@@ -103,7 +110,7 @@ QStringList onlineJobAdministration::availableOnlineTasks()
 
   QStringList list;
   for(const KPluginMetaData& plugin: plugins) {
-    QJsonValue array = plugin.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iid"];
+    QJsonValue array = plugin.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
     if (array.isArray())
       list.append(array.toVariant().toStringList());
   }
@@ -313,6 +320,21 @@ onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const 
   return bestConvert;
 }
 
+void onlineJobAdministration::registerAllOnlineTasks()
+{
+  // avoid recursive entrance
+  if (m_inRegistration)
+    return;
+
+  m_inRegistration = true;
+  QStringList availableTasks = availableOnlineTasks();
+  foreach (const auto& name, availableTasks) {
+    onlineTask* const task = rootOnlineTask(name);
+    Q_UNUSED(task);
+  }
+  m_inRegistration = false;
+}
+
 void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
 {
   if (Q_UNLIKELY(task == 0))
@@ -322,7 +344,6 @@ void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
   const bool sendCreditTransfer = canSendCreditTransfer();
 
   m_onlineTasks.insert(task->taskName(), task);
-  qDebug() << "onlineTask available" << task->taskName();
 
   if (sendAnyTask != canSendAnyTask())
     emit canSendAnyTaskChanged(!sendAnyTask);
@@ -375,14 +396,19 @@ bool onlineJobAdministration::canSendAnyTask()
   if (!m_onlinePlugins)
     return false;
 
+  if (m_onlineTasks.isEmpty()) {
+    registerAllOnlineTasks();
+  }
+
   // Check if any plugin supports a loaded online task
   foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, *m_onlinePlugins) {
     QList<MyMoneyAccount> accounts;
     MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
     foreach (MyMoneyAccount account, accounts) {
       foreach (QString onlineTaskIid, plugin->availableJobs(account.id())) {
-        if (m_onlineTasks.contains(onlineTaskIid))
+        if (m_onlineTasks.contains(onlineTaskIid)) {
           return true;
+        }
       }
     }
   }
@@ -393,6 +419,10 @@ bool onlineJobAdministration::canSendCreditTransfer()
 {
   if (!m_onlinePlugins)
     return false;
+
+  if (m_onlineTasks.isEmpty()) {
+    registerAllOnlineTasks();
+  }
 
   foreach (onlineTask* task, m_onlineTasks) {
     // Check if a online task has the correct type
