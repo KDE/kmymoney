@@ -41,18 +41,18 @@ include(CMakeDependentOption)
 include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
-set(GPG_ENCRYPTION "no")
 set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
-  set(GPG_ENCRYPTION "yes")
+  set(GPG_ENCRYPTION ON)
 else()
-  set(OPT_KF5_COMPONENTS ${OPT_KF5_COMPONENTS} Gpgmepp)
+  set(GPG_ENCRYPTION OFF)
+  list(APPEND OPT_KF5_COMPONENTS Gpgmepp)
 endif()
 
 find_package(Qt5 5.6 REQUIRED
   COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport
-  OPTIONAL_COMPONENTS Concurrent)
+  OPTIONAL_COMPONENTS Concurrent QuickWidgets)
 
 find_package(KF5 5.2 REQUIRED
   COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
@@ -68,9 +68,11 @@ find_package(LibAlkimia5 7.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
 if(KF5Gpgmepp_FOUND)
-  set(GPG_ENCRYPTION "yes")
+  set(GPG_ENCRYPTION ON)
   add_definitions(-DGpgmepp_FOUND)
 endif()
+
+add_feature_info("Encryption" GPG_ENCRYPTION "It allows encrypting your financial data.")
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
 set(CMAKE_CXX_STANDARD 14)
@@ -95,6 +97,7 @@ if(DOXYGEN_FOUND)
 
   add_custom_target(apidoc "${DOXYGEN}" "${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen")
 endif(DOXYGEN_FOUND)
+add_feature_info("Doxygen" DOXYGEN_FOUND "Generate API documentation with Doxygen (for devs only).")
 
 # check some include files exists
 set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
@@ -121,10 +124,16 @@ if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
   set(KMM_ADDRESSBOOK_FOUND true)
 endif()
 
+add_feature_info("Address book" KMM_ADDRESSBOOK_FOUND "It allows fetching payee informations from KDE PIM system.")
+add_feature_info("Holidays" KF5Holidays_FOUND "It allows fetching holidays from KDE PIM system.")
+
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
+add_feature_info("Forecast view" ENABLE_FORECASTVIEW "It adds possibility to calculate forecasts.")
 
 CMAKE_DEPENDENT_OPTION(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
+
+add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database (note: no encryption yet supported, no iban yet supported).")
 
 # check for optional QWebEngine
 option(ENABLE_WEBENGINE "Enable QWebEngine" OFF)
@@ -139,54 +148,48 @@ endif(ENABLE_WEBENGINE)
 
 # check for optional LibOFX support
 find_package(LibOfx)
-if(LIBOFX_FOUND)
-  option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON)
-  if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    set(PATH_TO_LIBOFX_HEADER "${LIBOFX_INCLUDE_DIR}/libofx/libofx.h")  # Windows doesn't even see the header if it's not full path
-  else()
-    set(PATH_TO_LIBOFX_HEADER "libofx/libofx.h")
+CMAKE_DEPENDENT_OPTION(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
+                       "LIBOFX_FOUND" OFF)
+
+if(ENABLE_OFXIMPORTER)
+  if(NOT LIBOFX_HAVE_CLIENTUID)
+    if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+      set(PATH_TO_LIBOFX_HEADER "${LIBOFX_INCLUDE_DIR}/libofx/libofx.h")  # Windows doesn't even see the header if it's not full path
+    else()
+      set(PATH_TO_LIBOFX_HEADER "libofx/libofx.h")
+    endif()
+
+    unset(LIBOFX_HAVE_CLIENTUID)
+    unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
+    check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID LANGUAGE CXX)
   endif()
 
+  if (LIBOFX_HAVE_CLIENTUID)
+    set (nice_LIBOFX_HAVE_CLIENTUID "yes")
+  else()
+    set (nice_LIBOFX_HAVE_CLIENTUID "no")
+  endif()
+
+else()
+  set (nice_LIBOFX_HAVE_CLIENTUID "unknown")
   unset(LIBOFX_HAVE_CLIENTUID)
-  unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
-  check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID LANGUAGE CXX)
-  if(NOT ENABLE_OFXIMPORTER)
-    unset(LIBOFX_FOUND CACHE)
-    unset(LIBOFX_HAVE_CLIENTUID CACHE)
-  endif(NOT ENABLE_OFXIMPORTER)
-else(LIBOFX_FOUND)
-  option(ENABLE_OFXIMPORTER "Enable OFX Importer" OFF)
-  if(ENABLE_OFXIMPORTER)
-    unset(LIBOFX_FOUND CACHE)
-    unset(LIBOFX_HAVE_CLIENTUID CACHE)
-  endif(ENABLE_OFXIMPORTER)
-endif(LIBOFX_FOUND)
+  unset(LIBOFX_HAVE_CLIENTUID CACHE)
+endif(ENABLE_OFXIMPORTER)
+
+add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "It allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
 
 # check for optional KBanking support
-set(KBANKING_FOUND "AUTO")
-mark_as_advanced(KBANKING_FOUND)
-if(DEFINED ENABLE_KBANKING)
-  set(KBANKING_FOUND OFF)
-endif(DEFINED ENABLE_KBANKING)
-option(ENABLE_KBANKING "Enable KBanking plugin" ON)
-if(ENABLE_KBANKING)
-  find_package(Qt5QuickWidgets) # Includes Qt5Qml
+find_package(AQBANKING 5.6.5)
+find_package(gwenhywfar 4.15.3)
+find_package(gwengui-cpp)
+find_package(gwengui-qt5)
 
-  find_package(AQBANKING 5.6.5)
-  find_package(gwenhywfar 4.15.3)
-  find_package(gwengui-cpp)
-  find_package(gwengui-qt5)
-  if (AQBANKING_FOUND AND gwengui-cpp_FOUND AND gwengui-qt5_FOUND AND Qt5QuickWidgets_FOUND)
-    set(KBANKING_FOUND ON)
-  else()
-    if(NOT KBANKING_FOUND STREQUAL "AUTO")
-      message(FATAL_ERROR "KBanking requirements not met")
-    endif(NOT KBANKING_FOUND STREQUAL "AUTO")
-    set(KBANKING_FOUND OFF)
-    set(ENABLE_KBANKING OFF CACHE BOOL "Enable KBanking plugin" FORCE)
-  endif ()
-endif(ENABLE_KBANKING)
+CMAKE_DEPENDENT_OPTION(ENABLE_KBANKING "Enable KBanking plugin" ON
+                       "AQBANKING_FOUND;gwengui-cpp_FOUND;gwengui-qt5_FOUND;Qt5QuickWidgets_FOUND" OFF)
 
+add_feature_info(KBanking ENABLE_KBANKING "Interface for the following online banking protocols: HBCI, EBICS, OFX Direct Connect, Paypal")
+
+# check for optional Weboob support
 set(Python_ADDITIONAL_VERSIONS 2.7 2.6)
 find_package(PythonInterp 2.6)
 find_package(PythonLibs ${PYTHON_VERSION_STRING})
@@ -204,30 +207,28 @@ endif()
 
 CMAKE_DEPENDENT_OPTION(ENABLE_WEBOOB "Enable Weboob plugin" ON
                        "PYTHONLIBS_FOUND;PYTHONINTERP_FOUND;PY_WEBOOB;Qt5Concurrent_FOUND" OFF)
+add_feature_info(Weboob ENABLE_WEBOOB "Online banking interface using Weboob.")
+
 
 # check for optional ical support
-set(LIBICAL_DEFAULT "AUTO")
-if(DEFINED ENABLE_LIBICAL)
-  set(LIBICAL_DEFAULT ${ENABLE_LIBICAL})
-endif(DEFINED ENABLE_LIBICAL)
-option(ENABLE_LIBICAL "Enable Calendar plugin" ON)
-if(ENABLE_LIBICAL)
-  find_package(Libical)
-  if(NOT LIBICAL_FOUND)
-    if(NOT LIBICAL_DEFAULT STREQUAL "AUTO")
-      message(FATAL_ERROR "LIBICAL not found")
-    endif(NOT LIBICAL_DEFAULT STREQUAL "AUTO")
-    set(ENABLE_LIBICAL OFF CACHE BOOL "Enable Calendar plugin" FORCE)
-  endif(NOT LIBICAL_FOUND)
-endif(ENABLE_LIBICAL)
+find_package(Libical)
+CMAKE_DEPENDENT_OPTION(ENABLE_LIBICAL "Enable Calendar plugin" ON
+                       "LIBICAL_FOUND" OFF)
+add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
+
 
 option(ENABLE_QIFIMPORTER "Enable QIF Importer" ON)
 option(ENABLE_QIFEXPORTER "Enable QIF Exporter" ON)
+add_feature_info("QIF Importer" ENABLE_QIFIMPORTER "It allows importing QIF files.")
+add_feature_info("QIF Exporter" ENABLE_QIFEXPORTER "It allows exporting QIF files.")
 
 option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
+add_feature_info("GNC Importer" ENABLE_GNCIMPORTER "It allows importing GNUCash files.")
 
 option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
 option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
+add_feature_info("CSV Importer" ENABLE_CSVIMPORTER "It allows importing CSV files.")
+add_feature_info("CSV Exporter" ENABLE_CSVEXPORTER "It allows exporting CSV files.")
 
 option(ENABLE_UNFINISHEDFEATURES "For devs only" OFF)
 
@@ -301,8 +302,12 @@ endif()
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
 
+add_feature_info("Model test" USE_MODELTEST "Generate modeltest code (for devs only).")
+
 option(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
+
+add_feature_info("QtDesigner" USE_QT_DESIGNER "Qt-Designer library support (for devs only).")
 
 ######################### The Actual Targets ##########################
 add_subdirectory( libkgpgfile )
@@ -318,64 +323,17 @@ endif()
 configure_file("config-kmymoney.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h")
 configure_file("config-kmymoney-version.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h")
 
-# this macro maps the boolean variable ${_varname} to "yes"/"no"
-# and writes the output to the variable nice_${_varname}
-macro(nice_yesno _varname)
-  if(${_varname})
-    set("nice_${_varname}" "yes")
-  else(${_varname})
-    set("nice_${_varname}" "no")
-  endif(${_varname})
-endmacro()
-
-nice_yesno("KF5Holidays_FOUND")
-nice_yesno("Gpgmepp_FOUND")
-nice_yesno("KMM_ADDRESSBOOK_FOUND")
-nice_yesno("LIBOFX_FOUND")
-nice_yesno("LIBOFX_HAVE_CLIENTUID")
-nice_yesno("KBANKING_FOUND")
-nice_yesno("ENABLE_WEBOOB")
-nice_yesno("LIBICAL_FOUND")
-nice_yesno("ENABLE_SQLCIPHER")
-nice_yesno("USE_QT_DESIGNER")
-nice_yesno("USE_MODELTEST")
-nice_yesno("DOXYGEN_FOUND")
-nice_yesno("ENABLE_WEBENGINE")
-message("
--------- KMyMoney ${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX} --------
-
-Configure results (user options):
---------------------------------------------
-GpgME Encryption:                        ${GPG_ENCRYPTION}
-
-KDE PIM holidays:                        ${nice_KF5Holidays_FOUND}
-
-KDE PIM addressbook:                     ${nice_KMM_ADDRESSBOOK_FOUND}
-
-OFX plugin:                              ${nice_LIBOFX_FOUND}
-  OFX supports CLIENTUID:                ${nice_LIBOFX_HAVE_CLIENTUID}
-
-KBanking plugin:                         ${nice_KBANKING_FOUND}
-
-weboob plugin:                           ${nice_ENABLE_WEBOOB}
-
-iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
-
-SQLCipher plugin:                        ${nice_ENABLE_SQLCIPHER}
-
-QWebEngine:                              ${nice_ENABLE_WEBENGINE}
-
---------------------------------------------
-
-
-Configure results (developer options):
---------------------------------------------
-Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
-
-Generate modeltest code:                 ${nice_USE_MODELTEST}
-
-Generate API documentation with Doxygen: ${nice_DOXYGEN_FOUND}")
-
 message("
 Build type: ${CMAKE_BUILD_TYPE}")
 
+feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND
+                DESCRIPTION "The following REQUIRED packages have not been found:")
+
+feature_summary(WHAT OPTIONAL_PACKAGES_NOT_FOUND
+                DESCRIPTION "The following OPTIONAL packages have not been found:")
+
+feature_summary(WHAT ENABLED_FEATURES
+                DESCRIPTION "The following features have been enabled:")
+
+feature_summary(WHAT DISABLED_FEATURES
+                DESCRIPTION "The following features have been disabled:")

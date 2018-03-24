@@ -17,9 +17,9 @@ if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
 endif()
 
-if (KBANKING_FOUND)
+if (ENABLE_KBANKING)
   add_subdirectory( kbanking )
-endif (KBANKING_FOUND)
+endif (ENABLE_KBANKING)
 
 option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
 if (ENABLE_SQLCIPHER)

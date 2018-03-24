@@ -1,3 +1,3 @@
-if(LIBICAL_FOUND)
+if(ENABLE_LIBICAL)
   add_subdirectory( export )
-endif(LIBICAL_FOUND)
+endif(ENABLE_LIBICAL)
