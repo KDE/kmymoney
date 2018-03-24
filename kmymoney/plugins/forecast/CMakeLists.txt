@@ -27,9 +27,6 @@ target_link_libraries(forecastview
     viewbase
 )
 
-install(TARGETS forecastview
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
-
 # the KCM module
 
 set(kcm_forecastview_PART_SRCS
