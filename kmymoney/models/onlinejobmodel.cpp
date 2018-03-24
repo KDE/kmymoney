@@ -188,6 +188,8 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
     if (index.column() == columns::ColValue) {
       if (role == Qt::DisplayRole)
         return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
+      if (role == Qt::TextAlignmentRole)
+        return int (Qt::AlignVCenter | Qt::AlignRight);
     } else if (index.column() == columns::ColDestination) {
       if (role == Qt::DisplayRole) {
         const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
