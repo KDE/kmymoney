@@ -83,15 +83,13 @@ bool creditTransferSettingsBase::isBicMandatory(const QString& payeeIban, const 
 
   /**
    * Data source for sepa participants:
-   * @url http://www.europeanpaymentscouncil.eu/index.cfm/knowledge-bank/epc-documents/epc-list-of-sepa-scheme-countries/
-   * EPC409-09
-   * Version 2.0
-   * Date issued: 20 January 2014
+   * @url https://www.europeanpaymentscouncil.eu/document-library/other/epc-list-sepa-scheme-countries
+   * Document Name: EPC409-09 EPC List of SEPA Scheme Countries
+   * Version 2.4
+   * Date issued: 28 April 2016
    */
-  QStringList sepaParticipants;
-  sepaParticipants << "FI" << "AT" << "PT" << "BE" << "BG" << "ES" << "HR" << "CY" << "CZ" << "DK" << "EE" << "FI"
-  << "FR" << "DE" << "GI" << "GR" << "HU" << "IS" << "IE" << "IT" << "LV" << "LI" << "LT" << "LU" << "PT" << "MT" << "MC" << "NL"
-  << "NO" << "PL" << "RO" << "SM" << "SK" << "SI" << "ES" << "SE" << "CH" << "GB";
+  const QString countries = QStringLiteral("FI;AT;PT;BE;BG;ES;HR;CY;CZ;DK;EE;FI;FR;GF;DE;GI;GR;GP;GG;HU;IS;IE;IM;IT;JE;LV;LI;LT;LU;PT;MT;MQ;YT;MC;NL;NO;PL;PT;RE;RO;BL;MF;PM;SM;SK;SI;ES;SE;CH;GB");
+  QStringList sepaParticipants = countries.split(QLatin1Char(';'));
 
   // Starting form 1st Febuary 2016 no bic is needed between sepa countries
   if (QDate::currentDate() >= QDate(2016, 2, 1))
