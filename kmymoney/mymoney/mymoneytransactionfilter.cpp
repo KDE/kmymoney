@@ -48,10 +48,12 @@
 class MyMoneyTransactionFilterPrivate {
 
 public:
-  MyMoneyTransactionFilterPrivate() :
-    m_matchOnly(false),
-    m_matchingSplitsCount(0),
-    m_invertText(false)
+  MyMoneyTransactionFilterPrivate()
+    : m_reportAllSplits(false)
+    , m_considerCategory(false)
+    , m_matchOnly(false)
+    , m_matchingSplitsCount(0)
+    , m_invertText(false)
   {
     m_filterSet.allFilter = 0;
     m_invertText = false;
@@ -89,12 +91,7 @@ MyMoneyTransactionFilter::MyMoneyTransactionFilter() :
 MyMoneyTransactionFilter::MyMoneyTransactionFilter(const QString& id) :
   d_ptr(new MyMoneyTransactionFilterPrivate)
 {
-  Q_D(MyMoneyTransactionFilter);
-  d->m_reportAllSplits = false;
-  d->m_considerCategory = false;
-
   addAccount(id);
-  // addCategory(id);
 }
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter(const MyMoneyTransactionFilter& other) :
