@@ -30,17 +30,17 @@ class creditTransferSettingsBase : public sepaOnlineTransfer::settings
 {
 public:
   creditTransferSettingsBase()
-      : _purposeMaxLines(0),
-      _purposeLineLength(0),
-      _purposeMinLength(0),
-      _recipientNameMaxLines(0),
-      _recipientNameLength(0),
-      _recipientNameMinLength(0),
-      _payeeNameMaxLines(0),
-      _payeeNameLength(0),
-      _payeeNameMinLength(0),
-      m_endToEndReferenceLength(0),
-      _allowedChars(QString("")) {}
+      : _purposeMaxLines(0)
+      , _purposeLineLength(0)
+      , _purposeMinLength(0)
+      , _recipientNameMaxLines(0)
+      , _recipientNameLength(0)
+      , _recipientNameMinLength(0)
+      , _payeeNameMaxLines(0)
+      , _payeeNameLength(0)
+      , _payeeNameMinLength(0)
+      , m_endToEndReferenceLength(0)
+      {}
 
   // Limits getter
   int purposeMaxLines() const {
