@@ -124,7 +124,7 @@ if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
   set(KMM_ADDRESSBOOK_FOUND true)
 endif()
 
-add_feature_info("Address book" KMM_ADDRESSBOOK_FOUND "It allows fetching payee informations from KDE PIM system.")
+add_feature_info("Address book" KMM_ADDRESSBOOK_FOUND "It allows fetching payee information from KDE PIM system.")
 add_feature_info("Holidays" KF5Holidays_FOUND "It allows fetching holidays from KDE PIM system.")
 
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)

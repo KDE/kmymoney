@@ -24,6 +24,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+// This file is included as part of generated code and therefore
+// does not contain the usually expected leadin of a class declaration
+// and include guards.
+
+// krazy:exclude=includes
 
 public:
 
