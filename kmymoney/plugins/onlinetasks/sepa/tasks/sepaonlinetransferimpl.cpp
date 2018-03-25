@@ -177,23 +177,30 @@ bool sepaOnlineTransferImpl::isValid() const
 
 payeeIdentifier sepaOnlineTransferImpl::originAccountIdentifier() const
 {
-    QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > idents = QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > ();
-    // line below causes problems with on MS Windows
-//  QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::ibanBic>();
-  if (!idents.isEmpty()) {
-    payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = idents[0];
-    ident->setOwnerName(MyMoneyFile::instance()->user().name());
-    return ident;
+  if (!_originAccount.isEmpty()) {
+    QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > idents;
+#ifndef Q_OS_WIN
+    /// @todo Fix loading originAccountIdentifier on MS-Windows
+    // the next statment causes problems on MS Windows () according to
+    // https://phabricator.kde.org/D10125 which was pushed in commit
+    // 44f846f13d0f7c7cca1178d56492471cb9f5092b
+    idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::ibanBic>();
+#endif
+    if (!idents.isEmpty()) {
+      payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = idents[0];
+      ident->setOwnerName(MyMoneyFile::instance()->user().name());
+      return ident;
+    }
   }
   return payeeIdentifier(new payeeIdentifiers::ibanBic);
 }
 
-/** @todo Return EUR */
 MyMoneySecurity sepaOnlineTransferImpl::currency() const
 {
-#if 0
-  return MyMoneyFile::instance()->security(originMyMoneyAccount().currencyId());
-#endif
+  if (!_originAccount.isEmpty()) {
+    const QString currencyId = MyMoneyFile::instance()->account(_originAccount).currencyId();
+    return MyMoneyFile::instance()->security(currencyId);
+  }
   return MyMoneyFile::instance()->baseCurrency();
 }
 
