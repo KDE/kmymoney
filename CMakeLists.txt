@@ -130,7 +130,7 @@ add_feature_info("Holidays" KF5Holidays_FOUND "It allows fetching holidays from 
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
 add_feature_info("Forecast view" ENABLE_FORECASTVIEW "It adds possibility to calculate forecasts.")
 
-CMAKE_DEPENDENT_OPTION(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
+cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
 
 add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database (note: no encryption yet supported, no iban yet supported).")
@@ -148,7 +148,7 @@ endif(ENABLE_WEBENGINE)
 
 # check for optional LibOFX support
 find_package(LibOfx)
-CMAKE_DEPENDENT_OPTION(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
+cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
                        "LIBOFX_FOUND" OFF)
 
 if(ENABLE_OFXIMPORTER)
@@ -184,7 +184,7 @@ find_package(gwenhywfar 4.15.3)
 find_package(gwengui-cpp)
 find_package(gwengui-qt5)
 
-CMAKE_DEPENDENT_OPTION(ENABLE_KBANKING "Enable KBanking plugin" ON
+cmake_dependent_option(ENABLE_KBANKING "Enable KBanking plugin" ON
                        "AQBANKING_FOUND;gwengui-cpp_FOUND;gwengui-qt5_FOUND;Qt5QuickWidgets_FOUND" OFF)
 
 add_feature_info(KBanking ENABLE_KBANKING "Interface for the following online banking protocols: HBCI, EBICS, OFX Direct Connect, Paypal")
@@ -205,14 +205,14 @@ if(PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND)
   endif()
 endif()
 
-CMAKE_DEPENDENT_OPTION(ENABLE_WEBOOB "Enable Weboob plugin" ON
+cmake_dependent_option(ENABLE_WEBOOB "Enable Weboob plugin" ON
                        "PYTHONLIBS_FOUND;PYTHONINTERP_FOUND;PY_WEBOOB;Qt5Concurrent_FOUND" OFF)
 add_feature_info(Weboob ENABLE_WEBOOB "Online banking interface using Weboob.")
 
 
 # check for optional ical support
 find_package(Libical)
-CMAKE_DEPENDENT_OPTION(ENABLE_LIBICAL "Enable Calendar plugin" ON
+cmake_dependent_option(ENABLE_LIBICAL "Enable Calendar plugin" ON
                        "LIBICAL_FOUND" OFF)
 add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
 
