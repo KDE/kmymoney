@@ -28,7 +28,7 @@
 // does not contain the usually expected leadin of a class declaration
 // and include guards.
 
-// krazy:exclude=includes
+// krazy:excludeall=includes
 
 public:
 
