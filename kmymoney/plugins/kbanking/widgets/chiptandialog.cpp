@@ -64,6 +64,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
     done(InternalError);
 
   tanInputChanged(QString());
+  ui->tanInput->setFocus();
 }
 
 chipTanDialog::~chipTanDialog()
@@ -148,6 +149,7 @@ void chipTanDialog::flickerFieldClockSettingChanged(const int& takt)
 
 void chipTanDialog::flickerFieldWidthChanged(const int& width)
 {
+  ui->declarativeView->setFixedWidth(width);
   KBankingSettings::setWidth(width);
   KBankingSettings::self()->save();
 }
