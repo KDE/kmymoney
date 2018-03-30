@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 # Setting the name of the main project
-project(KMyMoney VERSION "5.0.0")
+project(KMyMoney VERSION "5.0.2")
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
