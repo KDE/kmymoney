@@ -313,10 +313,10 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
   return false;
 }
 
-QPixmap MyMoneyInstitution::pixmap(const int size) const
+QPixmap MyMoneyInstitution::pixmap(const int size)
 {
   QPixmap pxIcon;
-  auto kyIcon = QLatin1String("view_institution") + QString::number(size);
+  auto kyIcon = QString::fromLatin1("view_institution%1").arg(QString::number(size));
   if (!QPixmapCache::find(kyIcon, pxIcon)) {
     pxIcon = Icons::get(Icon::ViewInstitutions).pixmap(size);
     QPixmapCache::insert(kyIcon, pxIcon);

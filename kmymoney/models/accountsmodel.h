@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
+ *   Copyright 2017, 2018  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -45,7 +45,7 @@
   * @see MyMoneyFile
   *
   * @author Cristian Onet 2010
-  * @author Łukasz Wojniłowicz 2017
+  * @author Łukasz Wojniłowicz 2017, 2018
   *
   */
 class MyMoneyObject;
@@ -55,9 +55,11 @@ class MyMoneyAccount;
 namespace eMyMoney { namespace File { enum class Object; } }
 namespace eAccountsModel { enum class Column; }
 
+class AccountsModelPrivate;
 class AccountsModel : public QStandardItemModel
 {
   Q_OBJECT
+  Q_DISABLE_COPY(AccountsModel)
 
 public:
   /**
@@ -65,7 +67,8 @@ public:
     */
   static const QString favoritesAccountId;
 
-  ~AccountsModel();
+  explicit AccountsModel(QObject *parent = nullptr);
+  virtual ~AccountsModel() override;
 
   /**
     * This method must be used to perform the initial load of the model.
@@ -95,7 +98,6 @@ public:
   static QString getHeaderName(const eAccountsModel::Column column);
 
 public Q_SLOTS:
-
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
   void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
   void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
@@ -113,32 +115,20 @@ Q_SIGNALS:
     */
   void profitChanged(const MyMoneyMoney &);
 
-private:
-  AccountsModel(QObject *parent = 0);
+protected:
+  AccountsModelPrivate * const d_ptr;
+  AccountsModel(AccountsModelPrivate &dd, QObject *parent);
 
-  void init();
+private:
+  Q_DECLARE_PRIVATE(AccountsModel)
+
   void checkNetWorth();
   void checkProfit();
-
-  /**
-    * The copy-constructor is private so that only the @ref Models object can create such an object.
-    */
-  AccountsModel(const AccountsModel&);
-  AccountsModel& operator=(AccountsModel&);
 
   /**
     * Allow only the @ref Models object to create such an object.
     */
   friend class Models;
-
-protected:
-  class Private;
-  Private* const d;
-
-  /**
-    * This constructor can be used from derived classes in order to use a derived Private class.
-    */
-  AccountsModel(Private* const priv, QObject *parent = 0);
 };
 
 /**
@@ -146,14 +136,19 @@ protected:
   * in @ref AccountsModel to enable the grouping of the accounts by institutions.
   *
   * @author Cristian Onet 2011
-  * @author Łukasz Wojniłowicz 2017
+  * @author Łukasz Wojniłowicz 2017, 2018
   *
   */
+class InstitutionsModelPrivate;
 class InstitutionsModel : public AccountsModel
 {
   Q_OBJECT
+  Q_DISABLE_COPY(InstitutionsModel)
 
 public:
+  explicit InstitutionsModel(QObject *parent = nullptr);
+  ~InstitutionsModel() override;
+
   /**
     * This method must be used to perform the initial load of the model.
     */
@@ -165,23 +160,12 @@ public Q_SLOTS:
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
 private:
-  InstitutionsModel(QObject *parent = 0);
-
-  /**
-    * The copy-constructor is private so that only the @ref Models object can create such an object.
-    */
-  InstitutionsModel(const InstitutionsModel&);
-  InstitutionsModel& operator=(InstitutionsModel&);
+  Q_DECLARE_PRIVATE(InstitutionsModel)
 
   /**
     * Allow only the @ref Models object to create such an object.
     */
   friend class Models;
-
-  /**
-    * The implementation object is derived from the @ref AccountsModel objects implementation object.
-    */
-  class InstitutionsPrivate;
 };
 
 #endif

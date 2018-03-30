@@ -166,7 +166,7 @@ public:
     */
   bool hasReferenceTo(const QString& id) const override;
 
-  QPixmap pixmap(const int size = 64) const;
+  static QPixmap pixmap(const int size = 64);
 };
 
 inline void swap(MyMoneyInstitution& first, MyMoneyInstitution& second) // krazy:exclude=inline
