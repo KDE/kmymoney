@@ -744,7 +744,8 @@ void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVie
   }
 
   QRect r(option.rect);
-  r.setWidth(option.widget->width() - ofs);
+  if (option.widget)
+    r.setWidth(option.widget->width() - ofs);
 
   if(d->displaySeparator(index)) {
     // consider the separator space

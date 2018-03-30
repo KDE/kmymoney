@@ -231,7 +231,7 @@ bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategor
 void Activity::createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const
 {
   auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("asset-account"));
-  if (!isMultiSelection() || (isMultiSelection() && cat && !cat->currentText().isEmpty())) {
+  if (cat && (!isMultiSelection() || (isMultiSelection() && !cat->currentText().isEmpty()))) {
     auto categoryId = cat->selectedItem();
     split.setAccountId(categoryId);
   }
@@ -376,13 +376,13 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   if (!s0.shares().isZero())
     price = (s0.value() / s0.shares()).reduce();
 
-  if (!isMultiSelection() || (isMultiSelection() && sharesEdit && !sharesEdit->value().isZero())) {
+  if (sharesEdit && (!isMultiSelection() || (isMultiSelection() && !sharesEdit->value().isZero()))) {
     shares = sharesEdit->value().abs();
     s0.setShares(shares);
     s0.setValue((shares * price).reduce());
     s0.setPrice(price);
   }
-  if (!isMultiSelection() || (isMultiSelection() && priceEdit && !priceEdit->value().isZero())) {
+  if (priceEdit && (!isMultiSelection() || (isMultiSelection() && !priceEdit->value().isZero()))) {
     price = priceEdit->value().abs();
     if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
       s0.setValue(price.reduce());
@@ -480,13 +480,13 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   if (!s0.shares().isZero())
     price = (s0.value() / s0.shares()).reduce();
 
-  if (!isMultiSelection() || (isMultiSelection() && sharesEdit && !sharesEdit->value().isZero())) {
+  if (sharesEdit && (!isMultiSelection() || (isMultiSelection() && !sharesEdit->value().isZero()))) {
     shares = -sharesEdit->value().abs();
     s0.setShares(shares);
     s0.setValue((shares * price).reduce());
     s0.setPrice(price);
   }
-  if (!isMultiSelection() || (isMultiSelection() && priceEdit && !priceEdit->value().isZero())) {
+  if (priceEdit && (!isMultiSelection() || (isMultiSelection() && !priceEdit->value().isZero()))) {
     price = priceEdit->value().abs();
     if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
       price = -price;
@@ -672,13 +672,13 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   if (!s0.shares().isZero())
     price = (s0.value() / s0.shares()).reduce();
 
-  if (!isMultiSelection() || (isMultiSelection() && sharesEdit && !sharesEdit->value().isZero())) {
+  if (sharesEdit && (!isMultiSelection() || (isMultiSelection() && !sharesEdit->value().isZero()))) {
     shares = sharesEdit->value().abs();
     s0.setShares(shares);
     s0.setValue((shares * price).reduce());
     s0.setPrice(price);
   }
-  if (!isMultiSelection() || (isMultiSelection() && priceEdit && !priceEdit->value().isZero())) {
+  if (priceEdit && (!isMultiSelection() || (isMultiSelection() && !priceEdit->value().isZero()))) {
     price = priceEdit->value().abs();
     if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
       s0.setValue(price.reduce());

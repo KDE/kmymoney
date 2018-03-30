@@ -125,7 +125,11 @@ public:
       try{
         m_db.endCommitUnit(m_name);
       } catch(MyMoneyException&) {
-        m_db.cancelCommitUnit(m_name);
+        try {
+          m_db.cancelCommitUnit(m_name);
+        } catch (const MyMoneyException & e) {
+          qDebug() << e.what();
+        }
       }
     }
   }
@@ -220,6 +224,7 @@ public:
     m_hiIdBudgets(0),
     m_hiIdOnlineJobs(0),
     m_hiIdPayeeIdentifier(0),
+    m_hiIdCostCenter(0),
     m_displayStatus(false),
     m_readingPrices(false),
     m_newDatabase(false),
@@ -2637,6 +2642,9 @@ public:
    */
   bool setupStoragePlugin(QString iid)
   {
+    Q_UNUSED(iid)
+    return false;
+    #if 0
     Q_Q(MyMoneyStorageSql);
     // setupDatabase has to be called every time because this simple technique to check if was updated already
     // does not work if a user opens another file
@@ -2646,7 +2654,7 @@ public:
 
     QString errorMsg;
     // TODO: port KF5 (needed for payeeidentifier plugin)
-  #if 0
+
     KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
       QLatin1String("KMyMoney/sqlStoragePlugin"),
       QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(iid.replace(QLatin1Char('\''), QLatin1String("\\'"))),
@@ -2654,9 +2662,6 @@ public:
       QVariantList(),
       &errorMsg
     );
-  #else
-    KMyMoneyPlugin::storagePlugin* plugin = 0;
-  #endif
 
     if (plugin == 0)
       throw MYMONEYEXCEPTION(QString("Could not load sqlStoragePlugin '%1', (error: %2)").arg(iid, errorMsg));
@@ -2668,6 +2673,7 @@ public:
     }
 
     throw MYMONEYEXCEPTION(QString("Could not install sqlStoragePlugin '%1' in database.").arg(iid));
+#endif
   }
 
   void insertStorableObject(const databaseStoreableObject& obj, const QString& id)

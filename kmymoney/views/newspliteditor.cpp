@@ -64,6 +64,7 @@ struct NewSplitEditor::Private
   , costCenterRequired(false)
   , costCenterOk(false)
   , showValuesInverted(false)
+  , amountHelper(nullptr)
   {
     accountsModel->setObjectName("AccountNamesFilterProxyModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
@@ -76,6 +77,11 @@ struct NewSplitEditor::Private
     createStatusEntry(eMyMoney::Split::State::Cleared);
     createStatusEntry(eMyMoney::Split::State::Reconciled);
     // createStatusEntry(eMyMoney::Split::State::Frozen);
+  }
+
+  ~Private()
+  {
+    delete ui;
   }
 
   void createStatusEntry(eMyMoney::Split::State status);
@@ -381,5 +387,5 @@ void NewSplitEditor::costCenterChanged(int costCenterIndex)
 
 void NewSplitEditor::amountChanged()
 {
-  d->amountChanged(d->amountHelper);
+//  d->amountChanged(d->amountHelper); // useless call as reported by coverity scan
 }

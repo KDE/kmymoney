@@ -52,6 +52,7 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
             case eMyMoney::OnlineJob::MessageType::Error: return Icons::get(Icon::DialogError);
             break;
           }
+          break;
         case Qt::ToolTipRole: switch (messages[index.row()].type()) {
             case eMyMoney::OnlineJob::MessageType::Debug: return i18n("Information to find issues.");
             case eMyMoney::OnlineJob::MessageType::Log: return i18n("Information stored for provability.");
@@ -60,6 +61,7 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
             case eMyMoney::OnlineJob::MessageType::Error: return i18n("Error");
             break;
           }
+          break;
         default: return QVariant();
       }
     case 1: switch (role) { // Origin column

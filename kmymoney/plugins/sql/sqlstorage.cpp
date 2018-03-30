@@ -274,8 +274,8 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
       }
       break;
   }
-  delete writer;
   if (canWrite) {
+    delete writer;
     saveDatabase(url);
     return true;
   } else {
@@ -283,6 +283,7 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
                                i18n("Cannot open or create database %1.\n"
                                     "Retry Save As Database and click Help"
                                     " for further info.", url.toDisplayString()), writer->lastError());
+    delete writer;
     return false;
   }
 }

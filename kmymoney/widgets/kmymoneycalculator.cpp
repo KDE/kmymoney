@@ -54,6 +54,8 @@ public:
     display(nullptr),
     m_clearOperandOnDigit(false)
   {
+    for (auto& button : buttons)
+      button = nullptr;
   }
 
   /**

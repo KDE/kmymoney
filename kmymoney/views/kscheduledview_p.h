@@ -92,6 +92,7 @@ public:
     m_openTransfers(true),
     m_openLoans(true),
     m_needLoad(true),
+    m_searchWidget(nullptr),
     m_balanceWarning(nullptr)
   {
   }

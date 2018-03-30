@@ -51,6 +51,12 @@ public:
     ui->splitter->setStretchFactor(1, 1);
     ui->splitter->setSizes(QList<int>() << 10000 << ui->formWidget->sizeHint().height());
   }
+
+  ~Private()
+  {
+    delete ui;
+  }
+
   Ui_LedgerViewPage*  ui;
   NewTransactionForm* form;
   QSet<QString>       hideFormReasons;

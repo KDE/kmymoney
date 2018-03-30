@@ -128,6 +128,7 @@ WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::Wind
 
 WidgetHintFrame::~WidgetHintFrame()
 {
+  delete d;
 }
 
 bool WidgetHintFrame::isErroneous() const

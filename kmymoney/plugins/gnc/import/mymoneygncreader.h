@@ -9,6 +9,7 @@
                         John C <thetacoturtle@users.sourceforge.net>
                         Thomas Baumgart <ipwizard@users.sourceforge.net>
                         Kevin Tambascio <ktambascio@users.sourceforge.net>
+                        (C) 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************

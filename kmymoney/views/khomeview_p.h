@@ -1562,8 +1562,8 @@ public:
 
       //if no negative differences are found, then inform that
       if (!isOverrun) {
-        m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
-        m_html += QString("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
+        m_html += QString::fromLatin1("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(((i++ & 1) == 1) ? QLatin1String("even") : QLatin1String("odd"));
+        m_html += QString::fromLatin1("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
         m_html += "</tr>";
       }
       m_html += "</table></div></div>";

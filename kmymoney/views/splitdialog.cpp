@@ -48,7 +48,14 @@ public:
   Private(SplitDialog* p)
   : parent(p)
   , ui(new Ui_SplitDialog)
+  , splitDelegate(nullptr)
+  , transactionEditor(nullptr)
   {
+  }
+
+  ~Private()
+  {
+    delete ui;
   }
 
   void deleteSplits(QModelIndexList indexList);

@@ -1099,7 +1099,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   s0.clearId();
 
   auto sec = dynamic_cast<KMyMoneySecurity*>(d->m_editWidgets["security"]);
-  if (!isMultiSelection() || (isMultiSelection() && sec && !sec->currentText().isEmpty())) {
+  if (sec && (!isMultiSelection() || (isMultiSelection() && !sec->currentText().isEmpty()))) {
     QString securityId = sec->selectedItem();
     if (!securityId.isEmpty()) {
       s0.setAccountId(securityId);

@@ -1369,11 +1369,13 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
           profile && !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
         calculateFee();
 
-      for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
-        if (!processInvestRow(st, profile, row)) { // parse fields
-          st = MyMoneyStatement();
-          return false;
-        }
+      if (profile) {
+        for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
+          if (!processInvestRow(st, profile, row)) { // parse fields
+            st = MyMoneyStatement();
+            return false;
+          }
+      }
 
       for (QMap<QString, QString>::const_iterator it = m_mapSymbolName.cbegin(); it != m_mapSymbolName.cend(); ++it) {
         MyMoneyStatement::Security security;
@@ -1392,12 +1394,13 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
         return true;
       st.m_eType = eMyMoney::Statement::Type::None;
 
-      auto*profile = dynamic_cast<PricesProfile *>(m_profile);
-      for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
-        if (profile && !processPriceRow(st, profile, row)) { // parse fields
-          st = MyMoneyStatement();
-          return false;
-        }
+      if (auto profile = dynamic_cast<PricesProfile *>(m_profile)) {
+        for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
+          if (!processPriceRow(st, profile, row)) { // parse fields
+            st = MyMoneyStatement();
+            return false;
+          }
+      }
 
       for (QMap<QString, QString>::const_iterator it = m_mapSymbolName.cbegin(); it != m_mapSymbolName.cend(); ++it) {
         MyMoneyStatement::Security security;

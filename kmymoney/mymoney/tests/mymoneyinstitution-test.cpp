@@ -85,17 +85,15 @@ void MyMoneyInstitutionTest::testNonemptyConstructor()
 
 void MyMoneyInstitutionTest::testCopyConstructor()
 {
-  MyMoneyInstitution* n1 = new MyMoneyInstitution("GUID1", *n);
+  QScopedPointer<MyMoneyInstitution> n1 (new MyMoneyInstitution("GUID1", *n));
   MyMoneyInstitution n2(*n1);
 
   QVERIFY(*n1 == n2);
-
-  delete n1;
 }
 
 void MyMoneyInstitutionTest::testMyMoneyFileConstructor()
 {
-  MyMoneyInstitution *t = new MyMoneyInstitution("GUID", *n);
+  QScopedPointer<MyMoneyInstitution> t (new MyMoneyInstitution("GUID", *n));
 
   QVERIFY(t->id() == "GUID");
 
@@ -106,8 +104,6 @@ void MyMoneyInstitutionTest::testMyMoneyFileConstructor()
   QVERIFY(t->manager() == "manager");
   QVERIFY(t->name() == "name");
   QVERIFY(t->sortcode() == "sortcode");
-
-  delete t;
 }
 
 void MyMoneyInstitutionTest::testEquality()
@@ -141,24 +137,21 @@ void MyMoneyInstitutionTest::testEquality()
   t.setManager("manager");
   QVERIFY(t == *n);
 
-  MyMoneyInstitution* n1 = new MyMoneyInstitution("GUID1", *n);
-  MyMoneyInstitution* n2 = new MyMoneyInstitution("GUID1", *n);
+  QScopedPointer<MyMoneyInstitution> n1 (new MyMoneyInstitution("GUID1", *n));
+  QScopedPointer<MyMoneyInstitution> n2 (new MyMoneyInstitution("GUID1", *n));
 
   n1->addAccountId("A000001");
   n2->addAccountId("A000001");
 
   QVERIFY(*n1 == *n2);
-
-  delete n1;
-  delete n2;
 }
 
 void MyMoneyInstitutionTest::testInequality()
 {
-  MyMoneyInstitution* n1 = new MyMoneyInstitution("GUID0", *n);
-  MyMoneyInstitution* n2 = new MyMoneyInstitution("GUID1", *n);
-  MyMoneyInstitution* n3 = new MyMoneyInstitution("GUID2", *n);
-  MyMoneyInstitution* n4 = new MyMoneyInstitution("GUID2", *n);
+  QScopedPointer<MyMoneyInstitution> n1 (new MyMoneyInstitution("GUID0", *n));
+  QScopedPointer<MyMoneyInstitution> n2 (new MyMoneyInstitution("GUID1", *n));
+  QScopedPointer<MyMoneyInstitution> n3 (new MyMoneyInstitution("GUID2", *n));
+  QScopedPointer<MyMoneyInstitution> n4 (new MyMoneyInstitution("GUID2", *n));
 
   QVERIFY(!(*n1 == *n2));
   QVERIFY(!(*n1 == *n3));
@@ -167,11 +160,6 @@ void MyMoneyInstitutionTest::testInequality()
   n3->addAccountId("A000001");
   n4->addAccountId("A000002");
   QVERIFY(!(*n3 == *n4));
-
-  delete n1;
-  delete n2;
-  delete n3;
-  delete n4;
 }
 
 void MyMoneyInstitutionTest::testAccountIDList()
@@ -348,7 +336,7 @@ void MyMoneyInstitutionTest::testReadXML()
 }
 
 void MyMoneyInstitutionTest::testElementNames()
-{  
+{
   for (auto i = (int)Institution::Element::AccountID; i <= (int)Institution::Element::Address; ++i) {
     auto isEmpty = MyMoneyInstitutionPrivate::getElName(static_cast<Institution::Element>(i)).isEmpty();
     if (isEmpty)

@@ -56,7 +56,6 @@ public:
     , m_invertText(false)
   {
     m_filterSet.allFilter = 0;
-    m_invertText = false;
   }
 
   MyMoneyTransactionFilter::FilterSet m_filterSet;

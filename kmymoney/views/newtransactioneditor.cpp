@@ -70,6 +70,7 @@ public:
   , payeesModel(new QSortFilterProxyModel(parent))
   , accepted(false)
   , costCenterRequired(false)
+  , amountHelper(nullptr)
   {
     accountsModel->setObjectName("NewTransactionEditor::accountsModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
@@ -87,6 +88,11 @@ public:
     createStatusEntry(eMyMoney::Split::State::Cleared);
     createStatusEntry(eMyMoney::Split::State::Reconciled);
     // createStatusEntry(eMyMoney::Split::State::Frozen);
+  }
+
+  ~Private()
+  {
+    delete ui;
   }
 
   void createStatusEntry(eMyMoney::Split::State status);

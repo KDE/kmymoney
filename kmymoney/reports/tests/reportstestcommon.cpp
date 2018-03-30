@@ -24,6 +24,7 @@
 #include <QTextStream>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QDebug>
 
 #include "pivottable.h"
 #include "querytable.h"
@@ -135,8 +136,12 @@ TransactionHelper::TransactionHelper(const QDate& _date, const QString& _action,
 TransactionHelper::~TransactionHelper()
 {
   MyMoneyFileTransaction ft;
-  MyMoneyFile::instance()->removeTransaction(*this);
-  ft.commit();
+  try {
+    MyMoneyFile::instance()->removeTransaction(*this);
+    ft.commit();
+  } catch (const MyMoneyException & e) {
+    qDebug() << e.what();
+  }
 }
 
 void TransactionHelper::update()

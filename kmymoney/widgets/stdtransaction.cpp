@@ -543,10 +543,10 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
 
   auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form);
   auto w = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(editWidgets["tabbar"]);
-  if (w) {
+  if (w && form) {
     // insert the tabbar in the boxlayout so it will take the place of the original tabbar which was hidden
-    QBoxLayout* boxLayout = dynamic_cast<QBoxLayout*>(form->getTabBar()->parentWidget()->layout());
-    boxLayout->insertWidget(0, w);
+    if (auto boxLayout = dynamic_cast<QBoxLayout*>(form->getTabBar()->parentWidget()->layout()))
+      boxLayout->insertWidget(0, w);
   }
 }
 

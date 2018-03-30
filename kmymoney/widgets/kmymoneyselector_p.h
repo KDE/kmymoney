@@ -45,6 +45,7 @@ public:
   explicit KMyMoneySelectorPrivate(KMyMoneySelector *qq) :
     q_ptr(qq),
     m_treeWidget(nullptr),
+    m_selMode(QTreeWidget::SingleSelection),
     m_layout(nullptr)
   {
   }

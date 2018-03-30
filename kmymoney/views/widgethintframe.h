@@ -43,7 +43,7 @@ public:
   };
 
   explicit WidgetHintFrame(QWidget* editWidget, FrameStyle style = Error, Qt::WindowFlags f = 0);
-  virtual ~WidgetHintFrame();
+  ~WidgetHintFrame();
 
   void attachToWidget(QWidget* w);
   void detachFromWidget();

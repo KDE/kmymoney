@@ -179,12 +179,14 @@ namespace KMyMoneyRegister
   {
   public:
     RegisterPrivate() :
-      m_selectAnchor(0),
-      m_focusItem(0),
-      m_firstItem(0),
-      m_lastItem(0),
-      m_firstErroneous(0),
-      m_lastErroneous(0),
+      m_selectAnchor(nullptr),
+      m_focusItem(nullptr),
+      m_ensureVisibleItem(nullptr),
+      m_firstItem(nullptr),
+      m_lastItem(nullptr),
+      m_firstErroneous(nullptr),
+      m_lastErroneous(nullptr),
+      m_markErroneousTransactions(0),
       m_rowHeightHint(0),
       m_ledgerLensForced(false),
       m_selectionMode(QTableWidget::MultiSelection),
@@ -195,6 +197,7 @@ namespace KMyMoneyRegister
       m_usedWithEditor(false),
       m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
       m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
+      m_lastCol(eTransaction::Column::Account),
       m_detailsColumnType(eRegister::DetailColumn::PayeeFirst)
     {
     }

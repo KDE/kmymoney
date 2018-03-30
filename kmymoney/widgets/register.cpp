@@ -1203,7 +1203,11 @@ namespace KMyMoneyRegister
       QList<RegisterItem*> itemList = selectedItems();
       bool okToSelect = true;
       auto cnt = itemList.count();
-      const bool scheduledTransactionSelected = (cnt > 0 && itemList.front() && (typeid(*(itemList.front())) == typeid(StdTransactionScheduled)));
+      auto scheduledTransactionSelected = false;
+      if (cnt > 0) {
+        auto& r = *(itemList.front());
+        scheduledTransactionSelected = (typeid(r) == typeid(StdTransactionScheduled));
+      }
       if (buttonState & Qt::LeftButton) {
         if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
             || (d->m_selectAnchor == 0)) {
@@ -1244,7 +1248,8 @@ namespace KMyMoneyRegister
                 // pointer 'item' might have changed. reconstruct it.
                 item = itemById(id);
                 unselectItems();
-                selectItems(rowToIndex(d->m_selectAnchor->startRow()), rowToIndex(item->startRow()));
+                if (d->m_selectAnchor)
+                  selectItems(rowToIndex(d->m_selectAnchor->startRow()), rowToIndex(item->startRow()));
                 setFocusItem(item);
               }
               break;

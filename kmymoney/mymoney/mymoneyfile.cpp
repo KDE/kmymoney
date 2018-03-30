@@ -28,6 +28,7 @@
 #include <QUuid>
 #include <QLocale>
 #include <QBitArray>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -3433,7 +3434,11 @@ MyMoneyFileTransaction::MyMoneyFileTransaction() :
 
 MyMoneyFileTransaction::~MyMoneyFileTransaction()
 {
-  rollback();
+  try {
+    rollback();
+  } catch (const MyMoneyException & e) {
+    qDebug() << e.what();
+  }
   Q_D(MyMoneyFileTransaction);
   delete d;
 }

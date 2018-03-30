@@ -46,11 +46,15 @@ MyMoneyForecastTest::MyMoneyForecastTest() :
   storage(nullptr),
   file(nullptr)
 {
-  this->moT1 = MyMoneyMoney(57, 1);
-  this->moT2 = MyMoneyMoney(63, 1);
-  this->moT3 = MyMoneyMoney(84, 1);
-  this->moT4 = MyMoneyMoney(62, 1);
-  this->moT5 = MyMoneyMoney(104, 1);
+  try {
+    this->moT1 = MyMoneyMoney(57, 1);
+    this->moT2 = MyMoneyMoney(63, 1);
+    this->moT3 = MyMoneyMoney(84, 1);
+    this->moT4 = MyMoneyMoney(62, 1);
+    this->moT5 = MyMoneyMoney(104, 1);
+  } catch (const MyMoneyException & e) {
+    qDebug() << e.what();
+  }
 }
 
 void MyMoneyForecastTest::init()

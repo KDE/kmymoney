@@ -62,7 +62,8 @@ namespace KMyMoneyTransactionForm
   public:
     TransactionFormPrivate() :
       m_transaction(nullptr),
-      m_tabBar(nullptr)
+      m_tabBar(nullptr),
+      m_itemDelegate(nullptr)
     {
     }
 

@@ -232,9 +232,11 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
 {
   Q_D(KEnterScheduleDlg);
   KMyMoneyRegister::SelectedTransactions list(d->ui->m_register);
-  TransactionEditor* editor = d->m_item->createEditor(d->ui->m_form, list, QDate());
-  editor->setScheduleInfo(d->m_schedule.name());
-  editor->setPaymentMethod(d->m_schedule.paymentType());
+  auto editor = d->m_item->createEditor(d->ui->m_form, list, QDate());
+  if (editor) {
+    editor->setScheduleInfo(d->m_schedule.name());
+    editor->setPaymentMethod(d->m_schedule.paymentType());
+  }
 
   // check that we use the same transaction commodity in all selected transactions
   // if not, we need to update this in the editor's list. The user can also bail out

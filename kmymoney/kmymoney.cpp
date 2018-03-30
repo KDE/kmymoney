@@ -226,6 +226,7 @@ public:
       m_ignoreBackupExitCode(false),
       m_fileOpen(false),
       m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
+      m_fileType(KMyMoneyApp::KmmXML),
       m_myMoneyView(nullptr),
       m_startDialog(false),
       m_progressBar(nullptr),
@@ -2580,6 +2581,8 @@ bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
     else if (reply.value() == url.url())
       return true;
   }
+#else
+  Q_UNUSED(url)
 #endif
   return false;
 }

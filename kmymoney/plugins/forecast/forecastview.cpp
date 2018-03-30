@@ -33,7 +33,8 @@
 #include "kforecastview.h"
 
 ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
-  KMyMoneyPlugin::Plugin(parent, "forecastview"/*must be the same as X-KDE-PluginInfo-Name*/)
+  KMyMoneyPlugin::Plugin(parent, "forecastview"/*must be the same as X-KDE-PluginInfo-Name*/),
+  m_view(nullptr)
 {
   Q_UNUSED(args)
   setComponentName("forecastview", i18n("Forecast view"));

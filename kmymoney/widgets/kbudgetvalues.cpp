@@ -166,22 +166,23 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
 
   if (o->isWidgetType()
       && (e->type() == QEvent::KeyPress)) {
-    auto k = dynamic_cast<QKeyEvent*>(e);
-    if ((k && k->modifiers() & Qt::KeyboardModifierMask) == 0
-        || (k && k->modifiers() & Qt::KeypadModifier) != 0) {
-      QKeyEvent evt(e->type(),
-                    Qt::Key_Tab, k->modifiers(), QString(),
-                    k->isAutoRepeat(), k->count());
-      switch (k->key()) {
-        case Qt::Key_Return:
-        case Qt::Key_Enter:
-          // send out a TAB key event
-          QApplication::sendEvent(o, &evt);
-          // don't process this one any further
-          rc = true;
-          break;
-        default:
-          break;
+    if (auto k = dynamic_cast<QKeyEvent*>(e)) {
+      if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
+          || (k->modifiers() & Qt::KeypadModifier) != 0) {
+        QKeyEvent evt(e->type(),
+                      Qt::Key_Tab, k->modifiers(), QString(),
+                      k->isAutoRepeat(), k->count());
+        switch (k->key()) {
+          case Qt::Key_Return:
+          case Qt::Key_Enter:
+            // send out a TAB key event
+            QApplication::sendEvent(o, &evt);
+            // don't process this one any further
+            rc = true;
+            break;
+          default:
+            break;
+        }
       }
     }
   }

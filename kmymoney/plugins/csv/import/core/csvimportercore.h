@@ -192,7 +192,14 @@ public:
 class KMM_CSVIMPORTERCORE_EXPORT PricesProfile : public CSVProfile
 {
 public:
-  explicit PricesProfile() : CSVProfile() {}
+  explicit PricesProfile() :
+    CSVProfile(),
+    m_dontAsk(0),
+    m_priceFraction(2),
+    m_profileType(Profile::CurrencyPrices)
+  {
+  }
+
   explicit PricesProfile(const Profile profileType) :
     CSVProfile(),
     m_dontAsk(0),

@@ -45,9 +45,8 @@ bicModel::bicModel(QObject* parent)
     db = QSqlDatabase::addDatabase("QSQLITE", "bicModel");
     db.setDatabaseName(":memory:");
     db.setConnectOptions("QSQLITE_OPEN_READONLY=1;QSQLITE_ENABLE_SHARED_CACHE=1;");
-    db.open();
-    // Database was not opened before
-    attachDatabases = true;
+    if (db.open())
+      attachDatabases = true; // Database was not opened before
   }
 
   if (!db.isOpen()) {
@@ -100,8 +99,8 @@ bicModel::bicModel(QObject* parent)
     queries.append(QString("SELECT bic, name FROM %1.institutions").arg(dbName));
   }
 
-  query.exec(queries.join(QLatin1String(" UNION ")));
-  setQuery(query);
+  if (query.exec(queries.join(QLatin1String(" UNION "))))
+    setQuery(query);
 }
 
 QVariant bicModel::data(const QModelIndex& item, int role) const
