@@ -9,7 +9,6 @@ set (libsettings_a_SOURCES
   ksettingsonlinequotes.cpp
   ksettingsregister.cpp
   ksettingsschedules.cpp
-  ksettingsreports.cpp
   ksettingskmymoney.cpp
   ksettingsplugins.cpp
   )
@@ -24,7 +23,6 @@ set (libsettings_a_UI
   ksettingsonlinequotes.ui
   ksettingsregister.ui
   ksettingsschedules.ui
-  ksettingsreports.ui
   )
 
 ki18n_wrap_ui(libsettings_a_SOURCES ${libsettings_a_UI} )

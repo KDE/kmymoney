@@ -2,7 +2,7 @@
                           kmymoney.h
                              -------------------
     copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 

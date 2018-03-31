@@ -129,6 +129,8 @@ add_feature_info("Holidays" KF5Holidays_FOUND "It allows fetching holidays from 
 
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
 add_feature_info("Forecast view" ENABLE_FORECASTVIEW "It adds possibility to calculate forecasts.")
+option(ENABLE_REPORTSVIEW "Enable reports view" ON)
+add_feature_info("Reports view" ENABLE_REPORTSVIEW "It adds possibility to display chart and table reports.")
 
 cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)

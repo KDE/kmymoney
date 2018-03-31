@@ -8,10 +8,7 @@ add_subdirectory( ofx )
 add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
-
-if(ENABLE_FORECASTVIEW)
-  add_subdirectory(forecast)
-endif()
+add_subdirectory( views )
 
 if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)

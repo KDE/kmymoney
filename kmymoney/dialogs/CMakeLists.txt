@@ -36,7 +36,6 @@ set(libdialogs_a_SOURCES
   editpersonaldatadlg.cpp
   kpayeereassigndlg.cpp
   ktagreassigndlg.cpp
-  kreportconfigurationfilterdlg.cpp
   kselecttransactionsdlg.cpp
   ksplittransactiondlg.cpp
   ktemplateexportdlg.cpp
@@ -73,7 +72,6 @@ set(dialogs_UI
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
   konlinetransferform.ui
-  kreportconfigurationfilterdlg.ui
 )
 
 ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )

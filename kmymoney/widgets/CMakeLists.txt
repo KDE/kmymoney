@@ -12,7 +12,7 @@ set(kmymoney_STAT_HEADERS
   scheduledtransaction.h selectedtransaction.h selectedtransactions.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h investtransaction.h stdtransaction.h
-  transactionsortoption.h reporttabimpl.h reportcontrolimpl.h
+  transactionsortoption.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   kmymoneydateedit.h
@@ -195,16 +195,10 @@ set(libwidgets_a_SOURCES
   kmymoneybriefschedule.cpp
   registersearchline.cpp
   transactioneditorcontainer.cpp
-  reporttabimpl.cpp
-  reportcontrolimpl.cpp
   )
 
 set(libwidgets_a_UI
-  kmymoneybriefschedule.ui reportcontrol.ui
-  reporttabgeneral.ui
-  reporttabrowcolquery.ui reporttabrowcolpivot.ui
-  reporttabrange.ui reporttabchart.ui
-  reporttabcapitalgain.ui reporttabperformance.ui
+  kmymoneybriefschedule.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic

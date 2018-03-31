@@ -58,7 +58,6 @@
 // KDE Includes
 
 #include <KMessageBox>
-#include <KRecentDirs>
 #include <KLocalizedString>
 #include <KChartAbstractCoordinatePlane>
 
@@ -83,7 +82,7 @@
 #include "kreportchartview.h"
 #include "pivottable.h"
 #include "reporttable.h"
-#include "../widgets/reportcontrolimpl.h"
+#include "reportcontrolimpl.h"
 #include "mymoneyenums.h"
 
 using namespace reports;

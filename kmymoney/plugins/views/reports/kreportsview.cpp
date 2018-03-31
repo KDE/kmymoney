@@ -78,7 +78,7 @@
 #include "kreportchartview.h"
 #include "pivottable.h"
 #include "reporttable.h"
-#include "../widgets/reportcontrolimpl.h"
+#include "reportcontrolimpl.h"
 #include "mymoneyenums.h"
 #include "menuenums.h"
 

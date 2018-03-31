@@ -3,7 +3,7 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
                            (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ****************************************************************************/
 
@@ -200,9 +200,6 @@ static constexpr char recoveryKeyId2[] = "59B0F826D2B08440";
 #ifndef RECOVER_KEY_EXPIRATION_WARNING
 #define RECOVER_KEY_EXPIRATION_WARNING 30
 #endif
-
-QHash<eMenu::Action, QAction *> pActions;
-QHash<eMenu::Menu, QMenu *> pMenus;
 
 enum backupStateE {
   BACKUP_IDLE = 0,

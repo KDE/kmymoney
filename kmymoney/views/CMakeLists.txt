@@ -20,11 +20,7 @@ set(libviews_a_SOURCES
   kmymoneyaccountsviewbase.cpp
   kmymoneyview.cpp
   kpayeesview.cpp
-  kreportsview.cpp
   kscheduledview.cpp
-  tocitem.cpp
-  tocitemgroup.cpp
-  tocitemreport.cpp
   kscheduletreeitem.cpp
   ktagsview.cpp
   konlinejoboutbox.cpp

@@ -79,7 +79,6 @@
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
-#include "kreportsview.h"
 #include "kbudgetview.h"
 #include "konlinejoboutbox.h"
 #include "kmymoney.h"
@@ -154,7 +153,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   viewBases[View::Payees] = new KPayeesView;
   viewBases[View::Ledgers] = new KGlobalLedgerView;
   viewBases[View::Investments] = new KInvestmentView;
-  viewBases[View::Reports] = new KReportsView;
   viewBases[View::Budget] = new KBudgetView;
   viewBases[View::OnlineJobOutbox] = new KOnlineJobOutbox;
   #ifdef ENABLE_UNFINISHEDFEATURES
@@ -179,7 +177,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     {View::Payees,          i18n("Payees"),                       Icon::ViewPayees},
     {View::Ledgers,         i18n("Ledgers"),                      Icon::ViewLedgers},
     {View::Investments,     i18n("Investments"),                  Icon::ViewInvestment},
-    {View::Reports,         i18n("Reports"),                      Icon::ViewReports},
     {View::Budget,          i18n("Budgets"),                      Icon::ViewBudgets},
     {View::OnlineJobOutbox, i18n("Outbox"),                       Icon::ViewOutbox},
     #ifdef ENABLE_UNFINISHEDFEATURES
@@ -461,6 +458,9 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     if (viewFrames.contains((View)i)) {
       viewFrames[idView] = m_model->insertPage(viewFrames[(View)i],view, name);
       viewBases[idView] = view;
+      connect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
+      connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
+      connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
       isViewInserted = true;
       break;
     }
@@ -471,6 +471,9 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
   auto icon = Icon::ViewForecast;
   switch (idView) {
+    case View::Reports:
+      icon = Icon::ViewReports;
+      break;
     case View::Forecast:
       icon = Icon::ViewForecast;
       break;
@@ -485,9 +488,17 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
 void KMyMoneyView::removeView(View idView)
 {
+  if (!viewBases.contains(idView))
+    return;
+
+  disconnect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
+  disconnect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
+  disconnect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+
   m_model->removePage(viewFrames[idView]);
   viewFrames.remove(idView);
   viewBases.remove(idView);
+
 }
 
 bool KMyMoneyView::showPageHeader() const
@@ -534,11 +545,9 @@ void KMyMoneyView::showPage(View idView)
 
 bool KMyMoneyView::canPrint()
 {
-  bool rc = (
-              viewFrames[View::Reports] == currentPage()
-              || viewFrames[View::Home] == currentPage()
-            );
-  return rc;
+  return ((viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage()) ||
+          (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage())
+         );
 }
 
 void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
@@ -682,9 +691,9 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
 
 void KMyMoneyView::slotPrintView()
 {
-  if (viewFrames[View::Reports] == currentPage())
+  if (viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage())
     viewBases[View::Reports]->executeCustomAction(eView::Action::Print);
-  else if (viewFrames[View::Home] == currentPage())
+  else if (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage())
     viewBases[View::Home]->executeCustomAction(eView::Action::Print);
 }
 

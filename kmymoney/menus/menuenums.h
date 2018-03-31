@@ -1,7 +1,7 @@
 /***************************************************************************
                           menuenums.h
                              -------------------
-    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    copyright            : (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -17,7 +17,10 @@
 #ifndef MENUENUMS_H
 #define MENUENUMS_H
 
+#include "kmm_menus_export.h"
 #include <QHashFunctions>
+#include <QHash>
+
 class QAction;
 class QMenu;
 
@@ -144,7 +147,7 @@ namespace eMenu {
   inline uint qHash(const Menu key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
 
-extern QHash<eMenu::Action, QAction *> pActions;
-extern QHash<eMenu::Menu, QMenu *> pMenus;
+KMM_MENUS_EXPORT extern QHash<eMenu::Action, QAction *> pActions;
+KMM_MENUS_EXPORT extern QHash<eMenu::Menu, QMenu *> pMenus;
 
 #endif

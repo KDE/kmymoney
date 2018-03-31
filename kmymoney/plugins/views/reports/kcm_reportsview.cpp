@@ -1,21 +1,25 @@
 /***************************************************************************
-                             ksettingsreports.cpp
-                             --------------------
-    copyright            : (C) 2010 by Bernd Gonsior
-    email                : bernd.gonsior@googlemail.com
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *   Copyright 2018  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or         *
+ *   modify it under the terms of the GNU General Public License as        *
+ *   published by the Free Software Foundation; either version 2 of        *
+ *   the License or (at your option) version 3 or any later version        *
+ *   accepted by the membership of KDE e.V. (or its successor approved     *
+ *   by the membership of KDE e.V.), which shall act as a proxy            *
+ *   defined in Section 14 of version 3 of the license.                    *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
-#include "ksettingsreports.h"
+#include "kcm_reportsview.h"
+#include <config-kmymoney-version.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KPluginFactory>
+#include <KAboutData>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KLineEdit>
@@ -33,22 +39,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ksettingsreports.h"
-
+#include "ui_reportsviewsettings.h"
 #include "kmymoneysettings.h"
 
-class KSettingsReportsPrivate
+class ReportsViewSettingsWidgetPrivate
 {
-  Q_DISABLE_COPY(KSettingsReportsPrivate)
+  Q_DISABLE_COPY(ReportsViewSettingsWidgetPrivate)
 
 public:
-  KSettingsReportsPrivate() :
-    ui(new Ui::KSettingsReports),
+  ReportsViewSettingsWidgetPrivate() :
+    ui(new Ui::ReportsViewSettings),
     m_fileKLineEdit(nullptr)
   {
   }
 
-  ~KSettingsReportsPrivate()
+  ~ReportsViewSettingsWidgetPrivate()
   {
     delete ui;
   }
@@ -65,8 +70,8 @@ public:
    *
    * @param[in] css  css file name
    *
-   * @see KSettingsReports#slotCssUrlSelected
-   * @see KSettingsReports#slotEditingFinished
+   * @see ReportsViewSettingsWidget#slotCssUrlSelected
+   * @see ReportsViewSettingsWidget#slotEditingFinished
    */
   void checkCssFile(QString& css) {
 
@@ -113,7 +118,7 @@ public:
     KMessageBox::sorry(0, out);
   }
 
-  Ui::KSettingsReports *ui;
+  Ui::ReportsViewSettings *ui;
   /**
    * Old value of css file to avoid warnings
    * when a signal is emitted
@@ -128,31 +133,31 @@ public:
   KLineEdit* m_fileKLineEdit;
 };
 
-KSettingsReports::KSettingsReports(QWidget* parent) :
+ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent) :
   QWidget(parent),
-  d_ptr(new KSettingsReportsPrivate)
+  d_ptr(new ReportsViewSettingsWidgetPrivate)
 {
-  Q_D(KSettingsReports);
+  Q_D(ReportsViewSettingsWidget);
   d->ui->setupUi(this);
 
   // keep initial (default) css file in mind
   d->m_cssFileOld = KMyMoneySettings::cssFileDefault();
 
-  // set default css file in ksettingsreports dialog
+  // set default css file in ReportsViewSettingsWidget dialog
   d->ui->kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneySettings::cssFileDefault()));
 
   d->m_fileKLineEdit = d->ui->kcfg_CssFileDefault->lineEdit();
 
   connect(d->ui->kcfg_CssFileDefault, &KUrlRequester::urlSelected,
-          this, &KSettingsReports::slotCssUrlSelected);
+          this, &ReportsViewSettingsWidget::slotCssUrlSelected);
 
   connect(d->m_fileKLineEdit, &QLineEdit::editingFinished,
-          this, &KSettingsReports::slotEditingFinished);
+          this, &ReportsViewSettingsWidget::slotEditingFinished);
 }
 
-KSettingsReports::~KSettingsReports()
+ReportsViewSettingsWidget::~ReportsViewSettingsWidget()
 {
-  Q_D(KSettingsReports);
+  Q_D(ReportsViewSettingsWidget);
   delete d;
 }
 
@@ -164,11 +169,11 @@ KSettingsReports::~KSettingsReports()
  *
  * @param[in] cssUrl  url of css file
  *
- * @see KSettingsReports#Private#checkCssFile
+ * @see ReportsViewSettingsWidget#Private#checkCssFile
  */
-void KSettingsReports::slotCssUrlSelected(const QUrl &cssUrl)
+void ReportsViewSettingsWidget::slotCssUrlSelected(const QUrl &cssUrl)
 {
-  Q_D(KSettingsReports);
+  Q_D(ReportsViewSettingsWidget);
   auto css = cssUrl.toLocalFile();
   d->checkCssFile(css);
 }
@@ -180,11 +185,32 @@ void KSettingsReports::slotCssUrlSelected(const QUrl &cssUrl)
  * on focus out only,
  * not  when a file is selected with the file chooser.
  *
- * @see KSettingsReports#Private#checkCssFile
+ * @see ReportsViewSettingsWidget#Private#checkCssFile
  */
-void KSettingsReports::slotEditingFinished()
+void ReportsViewSettingsWidget::slotEditingFinished()
 {
-  Q_D(KSettingsReports);
+  Q_D(ReportsViewSettingsWidget);
   auto txt = d->m_fileKLineEdit->text();
   d->checkCssFile(txt);
 }
+
+KCMReportsView::KCMReportsView(QWidget *parent, const QVariantList& args)
+  : KCModule(parent, args)
+{
+  ReportsViewSettingsWidget* w = new ReportsViewSettingsWidget(this);
+  // addConfig(ReportsViewSettings::self(), w);
+  addConfig(KMyMoneySettings::self(), w);
+  QVBoxLayout *layout = new QVBoxLayout;
+  setLayout(layout);
+  layout->addWidget(w);
+  setButtons(NoAdditionalButton);
+  load();
+}
+
+KCMReportsView::~KCMReportsView()
+{
+}
+
+K_PLUGIN_FACTORY_WITH_JSON(KCMReportsViewFactory, "kcm_reportsview.json", registerPlugin<KCMReportsView>();)
+
+#include "kcm_reportsview.moc"

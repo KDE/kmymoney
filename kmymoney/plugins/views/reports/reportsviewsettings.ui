@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KSettingsReports</class>
- <widget class="QWidget" name="KSettingsReports">
+ <class>ReportsViewSettings</class>
+ <widget class="QWidget" name="ReportsViewSettings">
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Reports view configuration
+Icon=report
+Type=Service
+ServiceTypes=KCModule
+Exec=kcmshell5 reportsview
+Categories=Qt;KDE;kmymoney;
+Keywords=reportsview;kmymoney;
+Keywords[x-test]=xxreportsviewxx;xxkmymoneyxx;
+X-KDE-Library=kmymoney/kcm_reportsview
+X-KDE-ParentApp=reportsview
+X-KDE-ParentComponents=reportsview
+Comment=Configuration for reports view plugin
+Comment[x-test]=xxConfiguration for reports view pluginxx

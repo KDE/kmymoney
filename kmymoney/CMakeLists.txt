@@ -29,6 +29,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/models/
                     ${CMAKE_CURRENT_SOURCE_DIR}/icons/
                     ${CMAKE_CURRENT_BINARY_DIR}/icons/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/menus/
+                    ${CMAKE_CURRENT_BINARY_DIR}/menus/
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/widgets/ # TODO: this line should be moved to the target it belongs
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/nationalaccount/
@@ -50,6 +52,7 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( payeeidentifier )
 add_subdirectory( icons )
+add_subdirectory( menus )
 if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
@@ -126,6 +129,7 @@ target_link_libraries(kmymoney
   converter
   models
   kmm_settings
+  kmm_menus
   kmm_widgets
   kmm_mymoney
   kgpgfile

@@ -1,7 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
  * Copyright (C) 2016 Christian Dávid <christian-david@web.de>
- * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
