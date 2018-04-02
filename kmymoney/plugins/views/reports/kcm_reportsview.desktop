@@ -1,12 +1,21 @@
 [Desktop Entry]
 Name=Reports view configuration
+Name[ca]=Configuració de la vista d'informes
+Name[nl]=Configuratie van rapportenweergave
+Name[x-test]=xxReports view configurationxx
 Icon=report
 Type=Service
 ServiceTypes=KCModule
 Exec=kcmshell5 reportsview
 Categories=Qt;KDE;kmymoney;
 Keywords=reportsview;kmymoney;
+Keywords[ca]=vista d'informes;kmymoney;
+Keywords[nl]=rapportenweergave;kmymoney;
+Keywords[x-test]=xxreportsviewxx;xxkmymoneyxx;
 X-KDE-Library=kmymoney/kcm_reportsview
 X-KDE-ParentApp=reportsview
 X-KDE-ParentComponents=reportsview
 Comment=Configuration for reports view plugin
+Comment[ca]=Configuració del connector de la vista d'informes
+Comment[nl]=Configuratie voor plug-in voor rapportenweergave
+Comment[x-test]=xxConfiguration for reports view pluginxx
