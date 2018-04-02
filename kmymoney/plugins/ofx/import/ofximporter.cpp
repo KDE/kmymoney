@@ -665,7 +665,7 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
 {
   MyMoneyKeyValueContainer kvp(current);
   // keep the provider name in sync with the one found in kmm_ofximport.desktop
-  kvp["provider"] = QLatin1String("OFX Importer");
+  kvp["provider"] = objectName().toLower();
   if (d->m_statusDlg) {
     kvp.deletePair("appId");
     kvp.deletePair("kmmofx-headerVersion");
