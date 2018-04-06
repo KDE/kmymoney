@@ -92,8 +92,8 @@ OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
     d(new Private)
 {
   Q_UNUSED(args)
-  setComponentName("ofximporter", i18n("OFX Importer"));
-  setXMLFile("ofximporter.rc");
+  setComponentName(QStringLiteral("ofximporter"), i18n("OFX Importer"));
+  setXMLFile(QStringLiteral("ofximporter.rc"));
   createActions();
 
   // For ease announce that we have been loaded.
@@ -120,8 +120,8 @@ void OFXImporter::slotImportFile()
   option->setupUi(widget);
 
   QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
-             "",
-             "*.ofx *.qfx *.ofc|OFX files (*.ofx *.qfx *.ofc);;*|All files (*)",
+             QString(),
+             QStringLiteral("*.ofx *.qfx *.ofc|OFX files (*.ofx *.qfx *.ofc);;*|All files (*)"),
              QFileDialog::ExistingFile,
              widget);
 
@@ -141,12 +141,12 @@ void OFXImporter::slotImportFile()
 
 QString OFXImporter::formatName() const
 {
-  return "OFX";
+  return QStringLiteral("OFX");
 }
 
 QString OFXImporter::formatFilenameFilter() const
 {
-  return "*.ofx *.qfx *.ofc";
+  return QStringLiteral("*.ofx *.qfx *.ofc");
 }
 
 
@@ -165,8 +165,8 @@ bool OFXImporter::isMyFormat(const QString& filename) const
     while (!ts.atEnd() && !result  && lineCount != 0) {
       // get a line of data and remove all unnecessary whitepace chars
       QString line = ts.readLine().simplified();
-      if (line.contains("<OFX>", Qt::CaseInsensitive)
-          || line.contains("<OFC>", Qt::CaseInsensitive))
+      if (line.contains(QStringLiteral("<OFX>"), Qt::CaseInsensitive)
+          || line.contains(QStringLiteral("<OFC>"), Qt::CaseInsensitive))
         result = true;
       // count only lines that contain some non white space chars
       if (!line.isEmpty())
@@ -230,7 +230,7 @@ QString OFXImporter::lastError() const
 {
   if (d->m_errors.count() == 0)
     return d->m_fatalerror;
-  return d->m_errors.join("<p>");
+  return d->m_errors.join(QStringLiteral("<p>"));
 }
 
 /* __________________________________________________________________________
@@ -276,9 +276,9 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
   }
 
   if (data.fi_id_valid) {
-    t.m_strBankID = QString("ID ") + QString::fromUtf8(data.fi_id);
+    t.m_strBankID = QStringLiteral("ID ") + QString::fromUtf8(data.fi_id);
   } else if (data.reference_number_valid) {
-    t.m_strBankID = QString("REF ") + QString::fromUtf8(data.reference_number);
+    t.m_strBankID = QStringLiteral("REF ") + QString::fromUtf8(data.reference_number);
   }
 
   // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
@@ -413,31 +413,31 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         //
       case OFX_CLOSUREOPT:
         unhandledtype = true;
-        type = "CLOSUREOPT (Close a position for an option)";
+        type = QStringLiteral("CLOSUREOPT (Close a position for an option)");
         break;
       case OFX_INVEXPENSE:
         unhandledtype = true;
-        type = "INVEXPENSE (Misc investment expense that is associated with a specific security)";
+        type = QStringLiteral("INVEXPENSE (Misc investment expense that is associated with a specific security)");
         break;
       case OFX_JRNLFUND:
         unhandledtype = true;
-        type = "JRNLFUND (Journaling cash holdings between subaccounts within the same investment account)";
+        type = QStringLiteral("JRNLFUND (Journaling cash holdings between subaccounts within the same investment account)");
         break;
       case OFX_MARGININTEREST:
         unhandledtype = true;
-        type = "MARGININTEREST (Margin interest expense)";
+        type = QStringLiteral("MARGININTEREST (Margin interest expense)");
         break;
       case OFX_RETOFCAP:
         unhandledtype = true;
-        type = "RETOFCAP (Return of capital)";
+        type = QStringLiteral("RETOFCAP (Return of capital)");
         break;
       case OFX_SPLIT:
         unhandledtype = true;
-        type = "SPLIT (Stock or mutial fund split)";
+        type = QStringLiteral("SPLIT (Stock or mutial fund split)");
         break;
       case OFX_TRANSFER:
         unhandledtype = true;
-        type = "TRANSFER (Transfer holdings in and out of the investment account)";
+        type = QStringLiteral("TRANSFER (Transfer holdings in and out of the investment account)");
         break;
       default:
         unhandledtype = true;
@@ -561,7 +561,7 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
   }
 
   // ask KMyMoney for an account id
-  s.m_accountId = pofx->account("kmmofx-acc-ref", QString("%1-%2").arg(s.m_strRoutingNumber, s.m_strAccountNumber)).id();
+  s.m_accountId = pofx->account(QStringLiteral("kmmofx-acc-ref"), QString("%1-%2").arg(s.m_strRoutingNumber, s.m_strAccountNumber)).id();
 
   // copy over the securities
   s.m_listSecurities = pofx->d->m_securitylist;
@@ -627,7 +627,7 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
         break;
       default:
         pofx->addWarning(message);
-        pofx->addWarning("Previous message was an unknown type.  'WARNING' was assumed.");
+        pofx->addWarning(QStringLiteral("Previous message was an unknown type.  'WARNING' was assumed."));
         break;
     }
   }
@@ -651,7 +651,7 @@ MyMoneyAccount OFXImporter::account(const QString& key, const QString& value) co
 void OFXImporter::protocols(QStringList& protocolList) const
 {
   protocolList.clear();
-  protocolList << "OFX";
+  protocolList << QStringLiteral("OFX");
 }
 
 QWidget* OFXImporter::accountConfigTab(const MyMoneyAccount& acc, QString& name)
@@ -665,17 +665,17 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
 {
   MyMoneyKeyValueContainer kvp(current);
   // keep the provider name in sync with the one found in kmm_ofximport.desktop
-  kvp["provider"] = objectName().toLower();
+  kvp[QStringLiteral("provider")] = objectName().toLower();
   if (d->m_statusDlg) {
-    kvp.deletePair("appId");
-    kvp.deletePair("kmmofx-headerVersion");
-    kvp.deletePair("password");
+    kvp.deletePair(QStringLiteral("appId"));
+    kvp.deletePair(QStringLiteral("kmmofx-headerVersion"));
+    kvp.deletePair(QStringLiteral("password"));
 
     d->m_wallet = openSynchronousWallet();
     if (d->m_wallet && (d->m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) ||
                         d->m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) &&
         d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {
-      QString key = OFX_PASSWORD_KEY(kvp.value("url"), kvp.value("uniqueId"));
+      QString key = OFX_PASSWORD_KEY(kvp.value(QStringLiteral("url")), kvp.value(QStringLiteral("uniqueId")));
       if (d->m_statusDlg->m_storePassword->isChecked()) {
         d->m_wallet->writePassword(key, d->m_statusDlg->m_password->text());
       } else {
@@ -685,25 +685,25 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
       }
     } else {
       if (d->m_statusDlg->m_storePassword->isChecked()) {
-        kvp.setValue("password", d->m_statusDlg->m_password->text());
+        kvp.setValue(QStringLiteral("password"), d->m_statusDlg->m_password->text());
       }
     }
 
     if (!d->m_statusDlg->appId().isEmpty())
-      kvp.setValue("appId", d->m_statusDlg->appId());
-    kvp.setValue("kmmofx-headerVersion", d->m_statusDlg->headerVersion());
-    kvp.setValue("kmmofx-numRequestDays", QString::number(d->m_statusDlg->m_numdaysSpin->value()));
-    kvp.setValue("kmmofx-todayMinus", QString::number(d->m_statusDlg->m_todayRB->isChecked()));
-    kvp.setValue("kmmofx-lastUpdate", QString::number(d->m_statusDlg->m_lastUpdateRB->isChecked()));
-    kvp.setValue("kmmofx-pickDate", QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
-    kvp.setValue("kmmofx-specificDate", d->m_statusDlg->m_specificDate->date().toString());
-    kvp.setValue("kmmofx-preferName", QString::number(d->m_statusDlg->m_preferredPayee->currentIndex()));
+      kvp.setValue(QStringLiteral("appId"), d->m_statusDlg->appId());
+    kvp.setValue(QStringLiteral("kmmofx-headerVersion"), d->m_statusDlg->headerVersion());
+    kvp.setValue(QStringLiteral("kmmofx-numRequestDays"), QString::number(d->m_statusDlg->m_numdaysSpin->value()));
+    kvp.setValue(QStringLiteral("kmmofx-todayMinus"), QString::number(d->m_statusDlg->m_todayRB->isChecked()));
+    kvp.setValue(QStringLiteral("kmmofx-lastUpdate"), QString::number(d->m_statusDlg->m_lastUpdateRB->isChecked()));
+    kvp.setValue(QStringLiteral("kmmofx-pickDate"), QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
+    kvp.setValue(QStringLiteral("kmmofx-specificDate"), d->m_statusDlg->m_specificDate->date().toString());
+    kvp.setValue(QStringLiteral("kmmofx-preferName"), QString::number(d->m_statusDlg->m_preferredPayee->currentIndex()));
     if (!d->m_statusDlg->m_clientUidEdit->text().isEmpty())
-      kvp.setValue("clientUid", d->m_statusDlg->m_clientUidEdit->text());
+      kvp.setValue(QStringLiteral("clientUid"), d->m_statusDlg->m_clientUidEdit->text());
     else
-      kvp.deletePair("clientUid");
+      kvp.deletePair(QStringLiteral("clientUid"));
     // get rid of pre 4.6 values
-    kvp.deletePair("kmmofx-preferPayeeid");
+    kvp.deletePair(QStringLiteral("kmmofx-preferPayeeid"));
   }
   return kvp;
 }
@@ -733,7 +733,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   try {
     if (!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
-      d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value("kmmofx-preferName").toInt());
+      d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName")).toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
       connect(dlg, SIGNAL(statementReady(QString)),
@@ -742,16 +742,16 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       // get the date of the earliest transaction that we are interested in
       // from the settings for this account
       MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
-      if (!settings.value("provider").isEmpty()) {
-        if ((settings.value("kmmofx-todayMinus").toInt() != 0) && !settings.value("kmmofx-numRequestDays").isEmpty()) {
+      if (!settings.value(QStringLiteral("provider")).isEmpty()) {
+        if ((settings.value(QStringLiteral("kmmofx-todayMinus")).toInt() != 0) && !settings.value(QStringLiteral("kmmofx-numRequestDays")).isEmpty()) {
           //kDebug(0) << "start date = today minus";
-          d->m_updateStartDate = QDate::currentDate().addDays(-settings.value("kmmofx-numRequestDays").toInt());
-        } else if ((settings.value("kmmofx-lastUpdate").toInt() != 0) && !acc.value("lastImportedTransactionDate").isEmpty()) {
+          d->m_updateStartDate = QDate::currentDate().addDays(-settings.value(QStringLiteral("kmmofx-numRequestDays")).toInt());
+        } else if ((settings.value(QStringLiteral("kmmofx-lastUpdate")).toInt() != 0) && !acc.value(QStringLiteral("lastImportedTransactionDate")).isEmpty()) {
           //kDebug(0) << "start date = last update";
-          d->m_updateStartDate = QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate);
-        } else if ((settings.value("kmmofx-pickDate").toInt() != 0) && !settings.value("kmmofx-specificDate").isEmpty()) {
+          d->m_updateStartDate = QDate::fromString(acc.value(QStringLiteral("lastImportedTransactionDate")), Qt::ISODate);
+        } else if ((settings.value(QStringLiteral("kmmofx-pickDate")).toInt() != 0) && !settings.value(QStringLiteral("kmmofx-specificDate")).isEmpty()) {
           //kDebug(0) << "start date = pick date";
-          d->m_updateStartDate = QDate::fromString(settings.value("kmmofx-specificDate"));
+          d->m_updateStartDate = QDate::fromString(settings.value(QStringLiteral("kmmofx-specificDate")));
         }
         else {
           //kDebug(0) << "start date = today - 2 months";
