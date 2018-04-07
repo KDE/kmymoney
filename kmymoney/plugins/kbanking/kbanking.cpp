@@ -1456,8 +1456,6 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
       ks.m_eType = eMyMoney::Statement::Type::Investment;
       break;
     case AB_AccountType_Cash:
-      ks.m_eType = eMyMoney::Statement::Type::None;
-      break;
     default:
       ks.m_eType = eMyMoney::Statement::Type::None;
   }

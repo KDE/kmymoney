@@ -163,15 +163,15 @@ onlineJob onlineJobAdministration::createOnlineJob(const QString& name, const QS
 onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
 {
   const onlineTask* task = rootOnlineTask(name);
-  if (task != 0)
+  if (task)
     return task->clone();
-  return 0;
+  return nullptr;
 }
 
 onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, const QDomElement& element) const
 {
   onlineTask* task = rootOnlineTask(iid);
-  if (task != 0) {
+  if (task) {
     return task->createFromXml(element);
   }
   qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
@@ -181,11 +181,11 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
 onlineTask* onlineJobAdministration::createOnlineTaskFromSqlDatabase(const QString& iid, const QString& onlineTaskId, QSqlDatabase connection) const
 {
   onlineTask* task = rootOnlineTask(iid);
-  if (task != 0)
+  if (task)
     return task->createFromSqlDatabase(connection, onlineTaskId);
 
   qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
-  return 0;
+  return nullptr;
 }
 
 /**
@@ -213,14 +213,14 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
   std::unique_ptr<QPluginLoader> loader = std::unique_ptr<QPluginLoader>(new QPluginLoader{plugins.first().fileName()});
   QObject* plugin = loader->instance();
   if (!plugin) {
-    qWarning() << "Could not load plugin for online task \"" << name << "\", file name \"" << plugins.first().fileName() << "\".";
+    qWarning() << "Could not load plugin for online task " << name << ", file name " << plugins.first().fileName() << ".";
     return nullptr;
   }
 
   // Cast to KPluginFactory
   KPluginFactory* pluginFactory = qobject_cast< KPluginFactory* >(plugin);
   if (!pluginFactory) {
-    qWarning() << "Could not create plugin factory for online task \"" << name << "\", file name \"" << plugins.first().fileName() << "\".";
+    qWarning() << "Could not create plugin factory for online task " << name << ", file name " << plugins.first().fileName() << ".";
     return nullptr;
   }
 
@@ -230,7 +230,7 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
   QObject* taskFactoryObject = pluginFactory->create<QObject>(pluginKeyword, onlineJobAdministration::instance());
   KMyMoneyPlugin::onlineTaskFactory* taskFactory = qobject_cast< KMyMoneyPlugin::onlineTaskFactory* >(taskFactoryObject);
   if (!taskFactory) {
-    qWarning() << "Could not create online task factory for online task \"" << name << "\", file name \"" << plugins.first().fileName() << "\".";
+    qWarning() << "Could not create online task factory for online task " << name << ", file name " << plugins.first().fileName() << ".";
     return nullptr;
   }
 

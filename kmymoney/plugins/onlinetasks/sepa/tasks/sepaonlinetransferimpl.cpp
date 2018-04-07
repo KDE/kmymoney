@@ -205,7 +205,7 @@ MyMoneySecurity sepaOnlineTransferImpl::currency() const
 }
 
 /**
- * @internal To ensure that we never return a null_ptr, @a sepaOnlineTransferSettingsFallback is used if the online plugin fails
+ * @internal To ensure that we never return a nullptr, @a sepaOnlineTransferSettingsFallback is used if the online plugin fails
  * to give us an correct value
  */
 QSharedPointer<const sepaOnlineTransfer::settings> sepaOnlineTransferImpl::getSettings() const
