@@ -178,7 +178,7 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
         rc = true;
       }
     } else {
-      str.append(".");
+      str.append(QLatin1Char('.'));
       str.append(strExtToUse);
       rc = true;
     }
