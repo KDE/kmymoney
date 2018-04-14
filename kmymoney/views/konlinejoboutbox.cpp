@@ -172,7 +172,7 @@ void KOnlineJobOutbox::updateButtonState() const
     if (!job.isEditable()) {
       editable = false;
       if (job.sendDate().isValid())
-        tooltip = i18n("This job cannot be edited anymore because is was sent already.");
+        tooltip = i18n("This job cannot be edited anymore because it was sent already.");
       else if (job.isLocked())
         tooltip = i18n("Job is being processed at the moment.");
       else
@@ -183,7 +183,7 @@ void KOnlineJobOutbox::updateButtonState() const
     }
   } else {
     editable = false;
-    tooltip = i18n("You must select a single job for editing.");
+    tooltip = i18n("You need to select a single job for editing.");
   }
 
   QAction *const onlinejob_edit = pActions[eMenu::Action::EditOnlineJob];
