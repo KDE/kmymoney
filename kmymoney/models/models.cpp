@@ -31,7 +31,6 @@
 // Project Includes
 
 #include "accountsmodel.h"
-#include "onlinejobmodel.h"
 #include "ledgermodel.h"
 #include "costcentermodel.h"
 #include "payeesmodel.h"
@@ -48,7 +47,6 @@ struct Models::Private {
   Private()
   : m_accountsModel(0)
   , m_institutionsModel(0)
-  , m_onlineJobModel(0)
   , m_ledgerModel(0)
   , m_costCenterModel(0)
   , m_payeesModel(0)
@@ -58,7 +56,6 @@ struct Models::Private {
 
   AccountsModel *m_accountsModel;
   InstitutionsModel *m_institutionsModel;
-  onlineJobModel *m_onlineJobModel;
   LedgerModel *m_ledgerModel;
   CostCenterModel *m_costCenterModel;
   PayeesModel *m_payeesModel;
@@ -115,18 +112,6 @@ InstitutionsModel* Models::institutionsModel()
 #endif
   }
   return d->m_institutionsModel;
-}
-
-onlineJobModel* Models::onlineJobsModel()
-{
-  if (!d->m_onlineJobModel) {
-    d->m_onlineJobModel = new onlineJobModel(this);
-#ifdef KMM_MODELTEST
-    /// @todo using the ModelTest feature on the onlineJobModel crashes. Need to fix.
-    // new ModelTest(d->m_onlineJobModel, Models::instance());
-#endif
-  }
-  return d->m_onlineJobModel;
 }
 
 #ifdef ENABLE_UNFINISHEDFEATURES
@@ -230,7 +215,6 @@ void Models::fileOpened()
 {
   accountsModel()->AccountsModel::load();
   institutionsModel()->InstitutionsModel::load();
-  onlineJobsModel()->load();
   costCenterModel()->load();
   #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->load();
@@ -248,7 +232,6 @@ void Models::fileClosed()
   // to avoid any uncaught KMyMoneyExceptions while using the account objects from this model after the file has been closed
   accountsModel()->removeRows(0, accountsModel()->rowCount());
   institutionsModel()->removeRows(0, institutionsModel()->rowCount());
-  onlineJobsModel()->unload();
   #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->unload();
   #endif

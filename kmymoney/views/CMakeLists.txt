@@ -1,7 +1,7 @@
 set(viewbase_SOURCES
     kmymoneyviewbase.cpp
    )
-   
+
 add_library(viewbase STATIC ${viewbase_SOURCES})
 
 target_link_libraries(viewbase PUBLIC KF5::TextWidgets)
@@ -23,7 +23,6 @@ set(libviews_a_SOURCES
   kscheduledview.cpp
   kscheduletreeitem.cpp
   ktagsview.cpp
-  konlinejoboutbox.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
   kmymoneywebpage.cpp
@@ -53,12 +52,11 @@ set(libviews_a_UI
   kpayeesview.ui
   kscheduledview.ui
   ktagsview.ui
-  konlinejoboutbox.ui
   kpayeeidentifierview.ui
 )
 
 if(ENABLE_UNFINISHEDFEATURES)
-  list(APPEND libviews_a_UI 
+  list(APPEND libviews_a_UI
     simpleledgerview.ui
     ledgerview.ui
     ledgerviewpage.ui

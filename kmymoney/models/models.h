@@ -37,7 +37,6 @@
   */
 class AccountsModel;
 class InstitutionsModel;
-class onlineJobModel;
 class LedgerModel;
 class CostCenterModel;
 class PayeesModel;
@@ -76,7 +75,6 @@ public:
 
   AccountsModel* accountsModel();
   InstitutionsModel* institutionsModel();
-  onlineJobModel* onlineJobsModel();
   LedgerModel* ledgerModel();
   CostCenterModel* costCenterModel();
   PayeesModel* payeesModel();

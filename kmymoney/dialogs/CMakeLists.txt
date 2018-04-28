@@ -43,7 +43,6 @@ set(libdialogs_a_SOURCES
   transactioneditor.cpp
   stdtransactioneditor.cpp
   transactionmatcher.cpp
-  konlinetransferform.cpp
 )
 
 set(dialogs_HEADERS
@@ -71,7 +70,6 @@ set(dialogs_UI
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
-  konlinetransferform.ui
 )
 
 ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )

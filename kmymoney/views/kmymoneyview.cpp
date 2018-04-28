@@ -80,7 +80,6 @@
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
 #include "kbudgetview.h"
-#include "konlinejoboutbox.h"
 #include "kmymoney.h"
 #include "models.h"
 #include "accountsmodel.h"
@@ -154,7 +153,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   viewBases[View::Ledgers] = new KGlobalLedgerView;
   viewBases[View::Investments] = new KInvestmentView;
   viewBases[View::Budget] = new KBudgetView;
-  viewBases[View::OnlineJobOutbox] = new KOnlineJobOutbox;
   #ifdef ENABLE_UNFINISHEDFEATURES
   viewBases[View::NewLedgers] = new SimpleLedgerView;
   #endif
@@ -178,7 +176,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     {View::Ledgers,         i18n("Ledgers"),                      Icon::ViewLedgers},
     {View::Investments,     i18n("Investments"),                  Icon::ViewInvestment},
     {View::Budget,          i18n("Budgets"),                      Icon::ViewBudgets},
-    {View::OnlineJobOutbox, i18n("Outbox"),                       Icon::ViewOutbox},
     #ifdef ENABLE_UNFINISHEDFEATURES
     {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
     #endif
@@ -268,6 +265,9 @@ delete m_activityResourceInstance;
 
 void KMyMoneyView::slotFileOpened()
 {
+  if (viewBases.contains(View::OnlineJobOutbox))
+    viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
+
   #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
   #endif
@@ -279,6 +279,10 @@ void KMyMoneyView::slotFileClosed()
 
   if (viewBases.contains(View::Reports))
     viewBases[View::Reports]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
+
+  if (viewBases.contains(View::OnlineJobOutbox))
+    viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
+
   #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
   #endif
@@ -432,13 +436,11 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
 
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
-  static_cast<KAccountsView*>(viewBases[View::Accounts])->setOnlinePlugins(plugins);
-  if (viewBases.contains(View::OnlineJobOutbox)) {
-    if (plugins.isEmpty())
-      removeView(View::OnlineJobOutbox);
-    else
-      static_cast<KOnlineJobOutbox*>(viewBases[View::OnlineJobOutbox])->setOnlinePlugins(plugins);
-  }
+  if (viewBases.contains(View::Accounts))
+    viewBases[View::Accounts]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
+
+  if (viewBases.contains(View::OnlineJobOutbox))
+    viewBases[View::OnlineJobOutbox]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
 }
 
 void KMyMoneyView::setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin*>& plugins)
@@ -457,10 +459,6 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   for (auto i = (int)idView; i < (int)View::None; ++i) {
     if (viewFrames.contains((View)i)) {
       viewFrames[idView] = m_model->insertPage(viewFrames[(View)i],view, name);
-      viewBases[idView] = view;
-      connect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
-      connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
-      connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
       isViewInserted = true;
       break;
     }
@@ -468,6 +466,11 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
   if (!isViewInserted)
     viewFrames[idView] = m_model->addPage(view, name);
+
+  viewBases[idView] = view;
+  connect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
+  connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
+  connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
 
   auto icon = Icon::ViewForecast;
   switch (idView) {

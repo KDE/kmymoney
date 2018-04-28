@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KONLINEJOBOUTBOX_H
-#define KONLINEJOBOUTBOX_H
+#ifndef KONLINEJOBOUTBOXVIEW_H
+#define KONLINEJOBOUTBOXVIEW_H
 
 #include "kmymoneyviewbase.h"
 
@@ -27,14 +27,14 @@ class QModelIndex;
 
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 
-class KOnlineJobOutboxPrivate;
-class KOnlineJobOutbox : public KMyMoneyViewBase
+class KOnlineJobOutboxViewPrivate;
+class KOnlineJobOutboxView : public KMyMoneyViewBase
 {
   Q_OBJECT
 
 public:
-  explicit KOnlineJobOutbox(QWidget *parent = 0);
-  ~KOnlineJobOutbox() override;
+  explicit KOnlineJobOutboxView(QWidget *parent = 0);
+  ~KOnlineJobOutboxView() override;
 
   void executeCustomAction(eView::Action action) override;
 
@@ -42,10 +42,9 @@ public:
 
   QStringList selectedOnlineJobs() const;
 
-  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
-
 public Q_SLOTS:
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 Q_SIGNALS:
   void sendJobs(QList<onlineJob>);
@@ -57,7 +56,7 @@ protected:
   void contextMenuEvent(QContextMenuEvent*) override;
 
 private:
-  Q_DECLARE_PRIVATE(KOnlineJobOutbox)
+  Q_DECLARE_PRIVATE(KOnlineJobOutboxView)
 
 private Q_SLOTS:
   void updateNewCreditTransferButton();
@@ -86,4 +85,4 @@ private Q_SLOTS:
   void slotNewCreditTransfer();
 };
 
-#endif // KONLINEJOBOUTBOX_H
+#endif // KONLINEJOBOUTBOXVIEW_H

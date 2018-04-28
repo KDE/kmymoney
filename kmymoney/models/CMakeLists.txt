@@ -3,13 +3,11 @@ set(libmodels_a_SOURCES
     payeesmodel.cpp
     accountsmodel.cpp
     accountsproxymodel.cpp
-    onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     ../mymoney/onlinejobmessage.cpp
     ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
     models.cpp
     payeeidentifiercontainermodel.cpp
-    onlinejobmessagesmodel.cpp
     equitiesmodel.cpp
     securitiesmodel.cpp
 )

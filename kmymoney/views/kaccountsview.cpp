@@ -238,12 +238,6 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
 
 }
 
-void KAccountsView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
-{
-  Q_D(KAccountsView);
-  d->m_onlinePlugins = &plugins;
-}
-
 /**
   * The view is notified that an unused income expense account has been hidden.
   */
@@ -290,6 +284,12 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
       if (variant.count() == 1 && d->m_proxyModel)
         slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
       break;
+
+    case eView::Intent::SetOnlinePlugins:
+      if (variant.count() == 1)
+        d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());
+      break;
+
     default:
       break;
   }

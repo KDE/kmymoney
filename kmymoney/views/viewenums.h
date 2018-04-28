@@ -50,7 +50,8 @@ namespace eView {
     ReportProgress,
     ReportProgressMessage,
     SelectRegisterTransactions,
-    AccountReconciled
+    AccountReconciled,
+    SetOnlinePlugins
   };
 
   enum class Action {
@@ -63,7 +64,8 @@ namespace eView {
     ClosePayeeIdentifierSource,
     EditInstitution,
     EditSchedule,
-    CleanupBeforeFileClose
+    CleanupBeforeFileClose,
+    InitializeAfterFileOpen
   };
 
 }

@@ -117,8 +117,6 @@
 #include "widgets/kmymoneymvccombo.h"
 
 #include "views/kmymoneyview.h"
-#include "views/konlinejoboutbox.h"
-#include "models/onlinejobmessagesmodel.h"
 #include "models/models.h"
 #include "models/accountsmodel.h"
 #include "models/equitiesmodel.h"
@@ -168,7 +166,6 @@
 #include <libkgpgfile/kgpgfile.h>
 
 #include "transactioneditor.h"
-#include "konlinetransferform.h"
 #include <QHBoxLayout>
 #include <QFileDialog>
 
@@ -179,6 +176,7 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
+#include "viewenums.h"
 #include "menuenums.h"
 
 #include "misc/platformtools.h"
@@ -3075,6 +3073,9 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   if(dialogName.compare(QLatin1String("Plugins")) == 0) {
     KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, d->m_plugins, this, guiFactory());
     onlineJobAdministration::instance()->updateActions();
+    onlineJobAdministration::instance()->setOnlinePlugins(d->m_plugins.extended);
+    d->m_myMoneyView->setOnlinePlugins(d->m_plugins.online);
+    d->m_myMoneyView->setStoragePlugins(d->m_plugins.storage);
     return;
   }
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());

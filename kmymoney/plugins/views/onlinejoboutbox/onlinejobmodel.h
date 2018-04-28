@@ -46,6 +46,10 @@ public:
     ColValue
   };
 
+  /** Only @ref Models should be able to construct this class */
+  explicit onlineJobModel(QObject *parent = nullptr);
+  friend class Models;
+
   int rowCount(const QModelIndex & parent = QModelIndex()) const;
   int columnCount(const QModelIndex & parent = QModelIndex()) const;
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
@@ -67,11 +71,6 @@ public Q_SLOTS:
   /** @brief Load data from MyMoneyFile */
   void load();
   void unload();
-
-protected:
-  /** Only @ref Models should be able to construct this class */
-  explicit onlineJobModel(QObject *parent = 0);
-  friend class Models;
 
 private:
   QStringList m_jobIdList;

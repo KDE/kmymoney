@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "konlinejoboutbox.h"
+#include "konlinejoboutboxview.h"
 
 #include <memory>
 
-#include "ui_konlinejoboutbox.h"
+#include "ui_konlinejoboutboxview.h"
 #include "kmymoneyviewbase_p.h"
 #include "konlinetransferform.h"
 #include "kmymoneyplugin.h"
@@ -51,52 +51,66 @@
 
 #include <QDebug>
 
-class KOnlineJobOutboxPrivate : public KMyMoneyViewBasePrivate
+class KOnlineJobOutboxViewPrivate : public KMyMoneyViewBasePrivate
 {
-  Q_DECLARE_PUBLIC(KOnlineJobOutbox)
+  Q_DECLARE_PUBLIC(KOnlineJobOutboxView)
 
 public:
-  explicit KOnlineJobOutboxPrivate(KOnlineJobOutbox *qq) :
+  explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView *qq) :
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
-    ui(new Ui::KOnlineJobOutbox),
+    ui(new Ui::KOnlineJobOutboxView),
     m_needLoad(true),
-    m_onlinePlugins(nullptr)
+    m_onlinePlugins(nullptr),
+    m_onlineJobModel(nullptr)
   {
   }
 
-  ~KOnlineJobOutboxPrivate()
+  ~KOnlineJobOutboxViewPrivate()
   {
     if (!m_needLoad) {
       // Save column state
-      KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
+      KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutboxView");
       configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
     }
   }
 
   void init()
   {
-    Q_Q(KOnlineJobOutbox);
+    Q_Q(KOnlineJobOutboxView);
     m_needLoad = false;
     ui->setupUi(q);
 
     // Restore column state
-    KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
+    KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutboxView");
     QByteArray columns;
     columns = configGroup.readEntry("HeaderState", columns);
     ui->m_onlineJobView->header()->restoreState(columns);
 
-    ui->m_onlineJobView->setModel(Models::instance()->onlineJobsModel());
-    q->connect(ui->m_buttonSend, &QAbstractButton::clicked, q, &KOnlineJobOutbox::slotSendJobs);
-    q->connect(ui->m_buttonRemove, &QAbstractButton::clicked, q, &KOnlineJobOutbox::slotRemoveJob);
-    q->connect(ui->m_buttonEdit, &QAbstractButton::clicked, q, static_cast<void (KOnlineJobOutbox::*)()>(&KOnlineJobOutbox::slotEditJob));
-    q->connect(ui->m_onlineJobView, &QAbstractItemView::doubleClicked, q, static_cast<void (KOnlineJobOutbox::*)(const QModelIndex &)>(&KOnlineJobOutbox::slotEditJob));
-    q->connect(ui->m_onlineJobView->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KOnlineJobOutbox::updateButtonState);
+    ui->m_onlineJobView->setModel(this->onlineJobsModel());
+    q->connect(ui->m_buttonSend, &QAbstractButton::clicked, q, &KOnlineJobOutboxView::slotSendJobs);
+    q->connect(ui->m_buttonRemove, &QAbstractButton::clicked, q, &KOnlineJobOutboxView::slotRemoveJob);
+    q->connect(ui->m_buttonEdit, &QAbstractButton::clicked, q, static_cast<void (KOnlineJobOutboxView::*)()>(&KOnlineJobOutboxView::slotEditJob));
+    q->connect(ui->m_onlineJobView, &QAbstractItemView::doubleClicked, q, static_cast<void (KOnlineJobOutboxView::*)(const QModelIndex &)>(&KOnlineJobOutboxView::slotEditJob));
+    q->connect(ui->m_onlineJobView->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KOnlineJobOutboxView::updateButtonState);
 
     // Set new credit transfer button
-    q->connect(pActions[eMenu::Action::AccountCreditTransfer], &QAction::changed, q, &KOnlineJobOutbox::updateNewCreditTransferButton);
-    q->connect(ui->m_buttonNewCreditTransfer, &QAbstractButton::clicked, q, &KOnlineJobOutbox::slotNewCreditTransfer);
+    q->connect(pActions[eMenu::Action::AccountCreditTransfer], &QAction::changed, q, &KOnlineJobOutboxView::updateNewCreditTransferButton);
+    q->connect(ui->m_buttonNewCreditTransfer, &QAbstractButton::clicked, q, &KOnlineJobOutboxView::slotNewCreditTransfer);
     q->updateNewCreditTransferButton();
+  }
+
+  onlineJobModel* onlineJobsModel()
+  {
+    Q_Q(KOnlineJobOutboxView);
+    if (!m_onlineJobModel) {
+      m_onlineJobModel = new onlineJobModel(q);
+  #ifdef KMM_MODELTEST
+      /// @todo using the ModelTest feature on the onlineJobModel crashes. Need to fix.
+      // new ModelTest(m_onlineJobModel, Models::instance());
+  #endif
+    }
+    return m_onlineJobModel;
   }
 
 
@@ -120,41 +134,42 @@ public:
 
   void editJob(const onlineJobTyped<creditTransfer> job)
   {
-    Q_Q(KOnlineJobOutbox);
+    Q_Q(KOnlineJobOutboxView);
     auto transferForm = new kOnlineTransferForm(q);
     transferForm->setOnlineJob(job);
     q->connect(transferForm, &QDialog::rejected, transferForm, &QObject::deleteLater);
-    q->connect(transferForm, &kOnlineTransferForm::acceptedForSave, q, &KOnlineJobOutbox::slotOnlineJobSave);
-    q->connect(transferForm, &kOnlineTransferForm::acceptedForSend, q, static_cast<void (KOnlineJobOutbox::*)(onlineJob)>(&KOnlineJobOutbox::slotOnlineJobSend));
+    q->connect(transferForm, &kOnlineTransferForm::acceptedForSave, q, &KOnlineJobOutboxView::slotOnlineJobSave);
+    q->connect(transferForm, &kOnlineTransferForm::acceptedForSend, q, static_cast<void (KOnlineJobOutboxView::*)(onlineJob)>(&KOnlineJobOutboxView::slotOnlineJobSend));
     q->connect(transferForm, &QDialog::accepted, transferForm, &QObject::deleteLater);
     transferForm->show();
   }
 
-  KOnlineJobOutbox     *q_ptr;
-  std::unique_ptr<Ui::KOnlineJobOutbox> ui;
+  KOnlineJobOutboxView     *q_ptr;
+  std::unique_ptr<Ui::KOnlineJobOutboxView> ui;
 
   /**
     * This member holds the load state of page
     */
   bool m_needLoad;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
+  onlineJobModel *m_onlineJobModel;
   MyMoneyAccount m_currentAccount;
 };
 
-KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
-  KMyMoneyViewBase(*new KOnlineJobOutboxPrivate(this), parent)
+KOnlineJobOutboxView::KOnlineJobOutboxView(QWidget *parent) :
+  KMyMoneyViewBase(*new KOnlineJobOutboxViewPrivate(this), parent)
 {
-  connect(pActions[eMenu::Action::LogOnlineJob], &QAction::triggered, this, static_cast<void (KOnlineJobOutbox::*)()>(&KOnlineJobOutbox::slotOnlineJobLog));
-  connect(pActions[eMenu::Action::AccountCreditTransfer], &QAction::triggered, this, &KOnlineJobOutbox::slotNewCreditTransfer);
+  connect(pActions[eMenu::Action::LogOnlineJob], &QAction::triggered, this, static_cast<void (KOnlineJobOutboxView::*)()>(&KOnlineJobOutboxView::slotOnlineJobLog));
+  connect(pActions[eMenu::Action::AccountCreditTransfer], &QAction::triggered, this, &KOnlineJobOutboxView::slotNewCreditTransfer);
 }
 
-KOnlineJobOutbox::~KOnlineJobOutbox()
+KOnlineJobOutboxView::~KOnlineJobOutboxView()
 {
 }
 
-void KOnlineJobOutbox::updateButtonState() const
+void KOnlineJobOutboxView::updateButtonState() const
 {
-  Q_D(const KOnlineJobOutbox);
+  Q_D(const KOnlineJobOutboxView);
   const QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
   const int selectedItems = indexes.count();
 
@@ -201,17 +216,17 @@ void KOnlineJobOutbox::updateButtonState() const
   d->ui->m_buttonRemove->setEnabled(onlinejob_delete->isEnabled());
 }
 
-void KOnlineJobOutbox::updateNewCreditTransferButton()
+void KOnlineJobOutboxView::updateNewCreditTransferButton()
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   auto action = pActions[eMenu::Action::AccountCreditTransfer];
   Q_CHECK_PTR(action);
   d->ui->m_buttonNewCreditTransfer->setEnabled(action->isEnabled());
 }
 
-void KOnlineJobOutbox::slotRemoveJob()
+void KOnlineJobOutboxView::slotRemoveJob()
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   QAbstractItemModel* model = d->ui->m_onlineJobView->model();
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
 
@@ -221,9 +236,9 @@ void KOnlineJobOutbox::slotRemoveJob()
   }
 }
 
-QStringList KOnlineJobOutbox::selectedOnlineJobs() const
+QStringList KOnlineJobOutboxView::selectedOnlineJobs() const
 {
-  Q_D(const KOnlineJobOutbox);
+  Q_D(const KOnlineJobOutboxView);
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
 
   if (indexes.isEmpty())
@@ -239,13 +254,7 @@ QStringList KOnlineJobOutbox::selectedOnlineJobs() const
   return list;
 }
 
-void KOnlineJobOutbox::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
-{
-  Q_D(KOnlineJobOutbox);
-  d->m_onlinePlugins = &plugins;
-}
-
-void KOnlineJobOutbox::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+void KOnlineJobOutboxView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
 {
   switch(intent) {
     case eView::Intent::UpdateActions:
@@ -257,16 +266,29 @@ void KOnlineJobOutbox::slotSelectByObject(const MyMoneyObject& obj, eView::Inten
   }
 }
 
-void KOnlineJobOutbox::slotSendJobs()
+void KOnlineJobOutboxView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
+  switch(intent) {
+    case eView::Intent::SetOnlinePlugins:
+      if (variant.count() == 1)
+        d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());
+      break;
+    default:
+      break;
+  }
+}
+
+void KOnlineJobOutboxView::slotSendJobs()
+{
+  Q_D(KOnlineJobOutboxView);
   if (d->ui->m_onlineJobView->selectionModel()->hasSelection())
     slotSendSelectedJobs();
   else
     slotSendAllSendableJobs();
 }
 
-void KOnlineJobOutbox::slotSendAllSendableJobs()
+void KOnlineJobOutboxView::slotSendAllSendableJobs()
 {
   QList<onlineJob> validJobs;
   foreach (const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
@@ -279,9 +301,9 @@ void KOnlineJobOutbox::slotSendAllSendableJobs()
 //    emit sendJobs(validJobs);
 }
 
-void KOnlineJobOutbox::slotSendSelectedJobs()
+void KOnlineJobOutboxView::slotSendSelectedJobs()
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
   if (indexes.isEmpty())
     return;
@@ -310,9 +332,9 @@ void KOnlineJobOutbox::slotSendSelectedJobs()
 //  emit sendJobs(validJobs);
 }
 
-void KOnlineJobOutbox::slotEditJob()
+void KOnlineJobOutboxView::slotEditJob()
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedIndexes();
   if (!indexes.isEmpty()) {
     QString jobId = d->ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobId).toString();
@@ -322,17 +344,17 @@ void KOnlineJobOutbox::slotEditJob()
   }
 }
 
-void KOnlineJobOutbox::slotEditJob(const QModelIndex &index)
+void KOnlineJobOutboxView::slotEditJob(const QModelIndex &index)
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   auto jobId = d->ui->m_onlineJobView->model()->data(index, onlineJobModel::OnlineJobId).toString();
   d->editJob(jobId);
 //  emit editJob(jobId);
 }
 
-void KOnlineJobOutbox::contextMenuEvent(QContextMenuEvent*)
+void KOnlineJobOutboxView::contextMenuEvent(QContextMenuEvent*)
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedIndexes();
   if (!indexes.isEmpty()) {
 //    onlineJob job = d->ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobRole).value<onlineJob>();
@@ -343,9 +365,9 @@ void KOnlineJobOutbox::contextMenuEvent(QContextMenuEvent*)
 /**
  * Do not know why this is needed, but all other views in KMyMoney have it.
  */
-void KOnlineJobOutbox::showEvent(QShowEvent* event)
+void KOnlineJobOutboxView::showEvent(QShowEvent* event)
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   if (d->m_needLoad)
     d->init();
 
@@ -354,14 +376,23 @@ void KOnlineJobOutbox::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KOnlineJobOutbox::executeCustomAction(eView::Action action)
+void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
 {
+  Q_D(KOnlineJobOutboxView);
   switch(action) {
     case eView::Action::SetDefaultFocus:
       {
-        Q_D(KOnlineJobOutbox);
+        Q_D(KOnlineJobOutboxView);
         QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
       }
+      break;
+
+    case eView::Action::InitializeAfterFileOpen:
+      d->onlineJobsModel()->load();
+      break;
+
+    case eView::Action::CleanupBeforeFileClose:
+      d->onlineJobsModel()->unload();
       break;
 
     default:
@@ -369,9 +400,9 @@ void KOnlineJobOutbox::executeCustomAction(eView::Action action)
   }
 }
 
-void KOnlineJobOutbox::updateActions(const MyMoneyObject& obj)
+void KOnlineJobOutboxView::updateActions(const MyMoneyObject& obj)
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   if (typeid(obj) != typeid(MyMoneyAccount) &&
       (obj.id().isEmpty() && d->m_currentAccount.id().isEmpty())) // do not disable actions that were already disabled)))
     return;
@@ -380,7 +411,7 @@ void KOnlineJobOutbox::updateActions(const MyMoneyObject& obj)
   d->m_currentAccount = acc;
 }
 
-void KOnlineJobOutbox::slotOnlineJobSave(onlineJob job)
+void KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
 {
   MyMoneyFileTransaction fileTransaction;
   if (job.id().isEmpty())
@@ -391,7 +422,7 @@ void KOnlineJobOutbox::slotOnlineJobSave(onlineJob job)
 }
 
 /** @todo when onlineJob queue is used, continue here */
-void KOnlineJobOutbox::slotOnlineJobSend(onlineJob job)
+void KOnlineJobOutboxView::slotOnlineJobSend(onlineJob job)
 {
   MyMoneyFileTransaction fileTransaction;
   if (job.id().isEmpty())
@@ -405,9 +436,9 @@ void KOnlineJobOutbox::slotOnlineJobSend(onlineJob job)
   slotOnlineJobSend(jobList);
 }
 
-void KOnlineJobOutbox::slotOnlineJobSend(QList<onlineJob> jobs)
+void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   MyMoneyFile *const kmmFile = MyMoneyFile::instance();
   QMultiMap<QString, onlineJob> jobsByPlugin;
 
@@ -467,13 +498,13 @@ void KOnlineJobOutbox::slotOnlineJobSend(QList<onlineJob> jobs)
   }
 }
 
-void KOnlineJobOutbox::slotOnlineJobLog()
+void KOnlineJobOutboxView::slotOnlineJobLog()
 {
   QStringList jobIds = this->selectedOnlineJobs();
   slotOnlineJobLog(jobIds);
 }
 
-void KOnlineJobOutbox::slotOnlineJobLog(const QStringList& onlineJobIds)
+void KOnlineJobOutboxView::slotOnlineJobLog(const QStringList& onlineJobIds)
 {
   onlineJobMessagesView *const dialog = new onlineJobMessagesView();
   onlineJobMessagesModel *const model = new onlineJobMessagesModel(dialog);
@@ -484,16 +515,16 @@ void KOnlineJobOutbox::slotOnlineJobLog(const QStringList& onlineJobIds)
   // Note: Objects are not deleted here, Qt's parent-child system has to do that.
 }
 
-void KOnlineJobOutbox::slotNewCreditTransfer()
+void KOnlineJobOutboxView::slotNewCreditTransfer()
 {
-  Q_D(KOnlineJobOutbox);
+  Q_D(KOnlineJobOutboxView);
   auto *transferForm = new kOnlineTransferForm(this);
   if (!d->m_currentAccount.id().isEmpty()) {
     transferForm->setCurrentAccount(d->m_currentAccount.id());
   }
   connect(transferForm, &QDialog::rejected, transferForm, &QObject::deleteLater);
-  connect(transferForm, &kOnlineTransferForm::acceptedForSave, this, &KOnlineJobOutbox::slotOnlineJobSave);
-  connect(transferForm, &kOnlineTransferForm::acceptedForSend, this, static_cast<void (KOnlineJobOutbox::*)(onlineJob)>(&KOnlineJobOutbox::slotOnlineJobSend));
+  connect(transferForm, &kOnlineTransferForm::acceptedForSave, this, &KOnlineJobOutboxView::slotOnlineJobSave);
+  connect(transferForm, &kOnlineTransferForm::acceptedForSend, this, static_cast<void (KOnlineJobOutboxView::*)(onlineJob)>(&KOnlineJobOutboxView::slotOnlineJobSend));
   connect(transferForm, &QDialog::accepted, transferForm, &QObject::deleteLater);
   transferForm->show();
 }

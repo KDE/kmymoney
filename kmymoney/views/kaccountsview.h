@@ -54,12 +54,6 @@ public:
   void refresh();
   void updateActions(const MyMoneyObject &obj);
 
-  /**
-   * Gets access to plugins found in KMyMoneyApp
-   * @param plugins
-   */
-  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin *>& plugins);
-
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &);
   void slotShowAccountMenu(const MyMoneyAccount& acc);
