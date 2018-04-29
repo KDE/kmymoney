@@ -534,7 +534,7 @@ public:
       // and the one that has the selection anchor
       storeId(m_register->anchorItem(), anchorItemId, backUpAnchorItemId);
     } else {
-      m_registerSearchLine->searchLine()->reset();
+      m_registerSearchLine->searchLine()->clear();
     }
 
     // clear the current contents ...

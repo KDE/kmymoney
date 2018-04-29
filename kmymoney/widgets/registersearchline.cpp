@@ -68,12 +68,8 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
     KLineEdit(parent),
     d(new RegisterSearchLinePrivate)
 {
-  setClearButtonShown(true); // it allows to emit KLineEdit::clearButtonClicked and is not equal in that sense to setClearButtonEnabled(true)
-  init(reg);
-}
+  setClearButtonEnabled(true);
 
-void RegisterSearchLine::init(Register *reg)
-{
   if (!parentWidget()->layout())
     parentWidget()->setLayout(new QHBoxLayout);
   parentWidget()->layout()->addWidget(this);
@@ -95,8 +91,6 @@ void RegisterSearchLine::init(Register *reg)
   d->combo->insertItem((int)eRegister::ItemState::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));
   d->combo->setCurrentIndex((int)eRegister::ItemState::Any);
   connect(d->combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
-  connect(this, &KLineEdit::clearButtonClicked, this, &RegisterSearchLine::reset);
-
   label->setBuddy(d->combo);
 
   if (reg) {
@@ -190,11 +184,6 @@ void RegisterSearchLine::updateSearch(const QString& s)
   if (scrollBarVisible != d->reg->verticalScrollBar()->isVisible()) {
     d->reg->resize((int)eTransaction::Column::Detail);
   }
-}
-
-void RegisterSearchLine::reset()
-{
-  clear();
 }
 
 void RegisterSearchLine::itemAdded(RegisterItem* item) const

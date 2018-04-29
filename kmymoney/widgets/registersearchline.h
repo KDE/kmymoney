@@ -71,7 +71,6 @@ public:
 
 public Q_SLOTS:
   virtual void updateSearch(const QString& s = QString());
-  virtual void reset();
 
 protected Q_SLOTS:
   void queueSearch(const QString& search);
