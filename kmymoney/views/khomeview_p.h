@@ -261,7 +261,7 @@ public:
     }
 
     if (KMyMoneySettings::showDateOfLastReconciliation()) {
-      const auto lastReconciliationDate = acc.lastReconciliationDate().toString(Qt::SystemLocaleShortDate);
+      const auto lastReconciliationDate = acc.lastReconciliationDate().toString(Qt::SystemLocaleShortDate).replace(QChar(' '), "&nbsp;");
       tmp += QString("<td>%1</d>").arg(lastReconciliationDate);
     }
 
