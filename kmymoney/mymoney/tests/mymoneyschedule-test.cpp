@@ -1587,6 +1587,8 @@ void MyMoneyScheduleTest::testSimpleToFromCompoundOccurrence()
 
 void MyMoneyScheduleTest::testProcessingDates()
 {
+  /// @todo extend test to cover application usage (with a processing calendar defined) ?
+
   // There should be no processing calendar defined so
   // make sure fall back works
 

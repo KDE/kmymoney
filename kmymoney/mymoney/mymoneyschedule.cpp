@@ -1534,6 +1534,7 @@ bool MyMoneySchedule::isProcessingDate(const QDate& date) const
   if (processingCalendarPtr)
     return processingCalendarPtr->isProcessingDate(date);
 
+  /// @todo test against m_processingDays instead?  (currently only for tests)
   return date.dayOfWeek() < Qt::Saturday;
 }
 
