@@ -443,17 +443,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   d->m_backupState = BACKUP_IDLE;
 
   QLocale locale;
-  int weekStart = locale.firstDayOfWeek();
-  int weekEnd = weekStart-1;
-  if (weekEnd < Qt::Monday) {
-    weekEnd = Qt::Sunday;
-  }
-  bool startFirst = (weekStart < weekEnd);
-  for (int i = 0; i < 8; ++i) {
-    if (startFirst)
-      d->m_processingDays.setBit(i, (i >= weekStart && i <= weekEnd));
-    else
-      d->m_processingDays.setBit(i, (i >= weekStart || i <= weekEnd));
+  for (auto const& weekDay: locale.weekdays())
+  {
+    d->m_processingDays.setBit(static_cast<int>(weekDay));
   }
   d->m_autoSaveTimer = new QTimer(this);
   d->m_progressTimer = new QTimer(this);
@@ -3258,9 +3250,9 @@ void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 
 bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 {
-#ifdef KF5Holidays_FOUND
   if (!d->m_processingDays.testBit(date.dayOfWeek()))
     return false;
+#ifdef KF5Holidays_FOUND
   if (!d->m_holidayRegion || !d->m_holidayRegion->isValid())
     return true;
 
@@ -3273,7 +3265,6 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
     return processingDay;
   }
 #else
-  Q_UNUSED(date);
   return true;
 #endif
 }
