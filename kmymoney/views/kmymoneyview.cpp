@@ -167,7 +167,7 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     {View::Home,            i18n("Home"),                         Icon::ViewHome},
     {View::Institutions,    i18n("Institutions"),                 Icon::ViewInstitutions},
     {View::Accounts,        i18n("Accounts"),                     Icon::ViewAccounts},
-    {View::Schedules,       i18n("Scheduled\u2028transactions"),  Icon::ViewSchedules},
+    {View::Schedules,       i18n("Scheduled\ntransactions"),      Icon::ViewSchedules},
     {View::Categories,      i18n("Categories"),                   Icon::ViewCategories},
     {View::Tags,            i18n("Tags"),                         Icon::ViewTags},
     {View::Payees,          i18n("Payees"),                       Icon::ViewPayees},
@@ -179,7 +179,13 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   };
 
   for (const viewInfo& view : viewsInfo) {
-    viewFrames[view.id] = m_model->addPage(viewBases[view.id], view.name);
+    /* There is a bug in
+    static int layoutText(QTextLayout *layout, int maxWidth)
+    from kpageview_p.cpp from kwidgetsaddons.
+    The method doesn't break strings that are too long. Following line
+    workarounds this by using LINE SEPARATOR character which is accepted by
+    QTextLayout::createLine().*/
+    viewFrames[view.id] = m_model->addPage(viewBases[view.id], QString(view.name).replace('\n', QString::fromLocal8Bit("\xe2\x80\xa8")));
     viewFrames[view.id]->setIcon(Icons::get(view.icon));
     connect(viewBases[view.id], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
     connect(viewBases[view.id], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
