@@ -1649,7 +1649,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setSpacing(6);
 
   {
-    #ifdef Q_OS_WIN
+    #if defined(Q_OS_WIN) or defined(Q_OS_MACOS)
     QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
     #else
     QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
