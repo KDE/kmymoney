@@ -79,7 +79,6 @@
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
-#include "kbudgetview.h"
 #include "kmymoney.h"
 #include "models.h"
 #include "accountsmodel.h"
@@ -152,7 +151,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   viewBases[View::Payees] = new KPayeesView;
   viewBases[View::Ledgers] = new KGlobalLedgerView;
   viewBases[View::Investments] = new KInvestmentView;
-  viewBases[View::Budget] = new KBudgetView;
   #ifdef ENABLE_UNFINISHEDFEATURES
   viewBases[View::NewLedgers] = new SimpleLedgerView;
   #endif
@@ -175,7 +173,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     {View::Payees,          i18n("Payees"),                       Icon::ViewPayees},
     {View::Ledgers,         i18n("Ledgers"),                      Icon::ViewLedgers},
     {View::Investments,     i18n("Investments"),                  Icon::ViewInvestment},
-    {View::Budget,          i18n("Budgets"),                      Icon::ViewBudgets},
     #ifdef ENABLE_UNFINISHEDFEATURES
     {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
     #endif
@@ -395,9 +392,11 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
   {
     static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Institutions])->getProxyModel(),
     static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Accounts])->getProxyModel(),
-    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Categories])->getProxyModel(),
-    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Budget])->getProxyModel(),
+    static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Categories])->getProxyModel()
   };
+
+  if (viewBases.contains(View::Budget))
+    proxyModels.append(static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Budget])->getProxyModel());
 
   for (auto i = proxyModels.count() - 1; i >= 0; --i) { // weed out unloaded views
     if (!proxyModels.at(i))
@@ -476,6 +475,9 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   switch (idView) {
     case View::Reports:
       icon = Icon::ViewReports;
+      break;
+    case View::Budget:
+      icon = Icon::ViewBudgets;
       break;
     case View::Forecast:
       icon = Icon::ViewForecast;

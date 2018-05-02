@@ -1,15 +1,6 @@
-set(viewbase_SOURCES
-    kmymoneyviewbase.cpp
-   )
-
-add_library(viewbase STATIC ${viewbase_SOURCES})
-
-target_link_libraries(viewbase PUBLIC KF5::TextWidgets)
-
 ############# next target (views) STATIC ###################
 set(libviews_a_SOURCES
   kaccountsview.cpp
-  kbudgetview.cpp
   kcategoriesview.cpp
   kgloballedgerview.cpp
   kwelcomepage.cpp
@@ -17,7 +8,6 @@ set(libviews_a_SOURCES
   kinstitutionsview.cpp
   kinvestmentview.cpp
   kmymoneyfile.cpp
-  kmymoneyaccountsviewbase.cpp
   kmymoneyview.cpp
   kpayeesview.cpp
   kscheduledview.cpp
@@ -45,7 +35,6 @@ endif()
 
 set(libviews_a_UI
   kaccountsview.ui
-  kbudgetview.ui
   kcategoriesview.ui
   kinstitutionsview.ui
   kinvestmentview.ui
@@ -91,7 +80,7 @@ target_link_libraries( views PUBLIC
   payeeidentifier_iban_bic
   payeeidentifier_nationalAccount
   kmm_mymoney # needed to load payeeIdentifier
-  viewbase
+  kmm_widgets
 )
 
 # we rely on some of the dialogs to be generated

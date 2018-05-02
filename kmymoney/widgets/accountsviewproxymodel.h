@@ -22,6 +22,8 @@
 #ifndef ACCOUNTSVIEWPROXYMODEL_H
 #define ACCOUNTSVIEWPROXYMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -43,7 +45,7 @@ class QPoint;
   * This model is specialized to organize the data for the accounts tree view
   * based on the data of the @ref AccountsModel.
   */
-class AccountsViewProxyModel : public AccountsProxyModel
+class KMM_MODELS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
 {
   Q_OBJECT
 

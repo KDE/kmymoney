@@ -27,9 +27,9 @@ set_target_properties(onlinejoboutboxview
 target_link_libraries(onlinejoboutboxview
   PUBLIC
     kmm_plugin
-    models
+    kmm_models
+    kmm_widgets
     onlinetask_interfaces
     KF5::TextWidgets
-    viewbase
     kmm_menus
 )

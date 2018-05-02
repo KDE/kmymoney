@@ -19,6 +19,8 @@
 #ifndef SPLITMODEL_H
 #define SPLITMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,7 @@
 // Project Includes
 
 class SplitModelPrivate;
-class SplitModel : public QAbstractTableModel
+class KMM_MODELS_EXPORT SplitModel : public QAbstractTableModel
 {
   Q_OBJECT
 

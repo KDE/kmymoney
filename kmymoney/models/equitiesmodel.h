@@ -16,6 +16,8 @@
 #ifndef EQUITIESMODEL_H
 #define EQUITIESMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,7 +36,7 @@ class MyMoneyAccount;
 
 namespace eMyMoney { namespace File { enum class Object; } }
 
-class EquitiesModel : public QStandardItemModel
+class KMM_MODELS_EXPORT EquitiesModel : public QStandardItemModel
 {
   Q_OBJECT
 
@@ -67,7 +69,7 @@ protected:
   Private* const d;
 };
 
-class EquitiesFilterProxyModel : public KRecursiveFilterProxyModel
+class KMM_MODELS_EXPORT EquitiesFilterProxyModel : public KRecursiveFilterProxyModel
 {
   Q_OBJECT
 

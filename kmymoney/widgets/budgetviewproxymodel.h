@@ -19,6 +19,8 @@
 #ifndef BUDGETVIEWPROXYMODEL_H
 #define BUDGETVIEWPROXYMODEL_H
 
+#include "kmm_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -42,7 +44,7 @@ class MyMoneyAccount;
   *
   * @author Cristin Oneț
   */
-class BudgetViewProxyModel : public AccountsViewProxyModel
+class KMM_WIDGETS_EXPORT BudgetViewProxyModel : public AccountsViewProxyModel
 {
   Q_OBJECT
 

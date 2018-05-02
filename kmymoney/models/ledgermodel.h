@@ -19,6 +19,8 @@
 #ifndef LEDGERMODEL_H
 #define LEDGERMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -39,7 +41,7 @@ class LedgerTransaction;
 namespace eMyMoney { namespace File { enum class Object; } }
 
 class LedgerModelPrivate;
-class LedgerModel : public QAbstractTableModel
+class KMM_MODELS_EXPORT LedgerModel : public QAbstractTableModel
 {
   Q_OBJECT
 

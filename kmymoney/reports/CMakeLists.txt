@@ -22,6 +22,9 @@ target_link_libraries(reports
     Qt5::Sql
     Qt5::PrintSupport
     kmymoney_common
+    kmm_settings
+    PRIVATE
+    KF5::I18n
 )
 
 add_dependencies(reports kmm_settings)

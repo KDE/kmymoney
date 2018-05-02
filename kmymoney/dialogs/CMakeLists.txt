@@ -31,7 +31,6 @@ set(libdialogs_a_SOURCES
   knewaccountdlg.cpp
   hierarchyfilterproxymodel.cpp
   knewbankdlg.cpp
-  knewbudgetdlg.cpp
   knewequityentrydlg.cpp
   editpersonaldatadlg.cpp
   kpayeereassigndlg.cpp
@@ -63,7 +62,7 @@ set(dialogs_UI
   kgpgkeyselectiondlg.ui
   kloadtemplatedlg.ui
   kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
-  knewaccountdlg.ui knewbankdlg.ui knewbudgetdlg.ui
+  knewaccountdlg.ui knewbankdlg.ui
   knewequityentrydlg.ui editpersonaldatadlg.ui kpayeereassigndlg.ui
   ktagreassigndlg.ui
   kselecttransactionsdlg.ui

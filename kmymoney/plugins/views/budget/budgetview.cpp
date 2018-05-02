@@ -1,9 +1,9 @@
 /***************************************************************************
-                          kmymoneyaccountsviewbase.h
+                            budgetview.cpp
                              -------------------
-    copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
-                               2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                               2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+
+    copyright            : (C) 2018 by Łukasz Wojniłowicz
+    email                : lukasz.wojnilowicz@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,8 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KMYMONEYACCOUNTSVIEWBASE_H
-#define KMYMONEYACCOUNTSVIEWBASE_H
+#include "budgetview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,35 +23,41 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kmymoneyviewbase.h"
+#include <KPluginFactory>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KMyMoneyAccountTreeView;
-class AccountsViewProxyModel;
+#include "viewinterface.h"
+#include "kbudgetview.h"
 
-/**
-  * This class is an abstract base class that all specific views
-  * should be based on.
-  */
-class KMyMoneyAccountsViewBasePrivate;
-class KMyMoneyAccountsViewBase : public KMyMoneyViewBase
+BudgetView::BudgetView(QObject *parent, const QVariantList &args) :
+  KMyMoneyPlugin::Plugin(parent, "budgetview"/*must be the same as X-KDE-PluginInfo-Name*/),
+  m_view(nullptr)
 {
-  Q_OBJECT
+  Q_UNUSED(args)
+  setComponentName("budgetview", i18n("Budgets view"));
+  // For information, announce that we have been loaded.
+  qDebug("Plugins: budgetview loaded");
+}
 
-public:
-  explicit KMyMoneyAccountsViewBase(QWidget* parent = nullptr);
-  virtual ~KMyMoneyAccountsViewBase();
+BudgetView::~BudgetView()
+{
+  qDebug("Plugins: budgetview unloaded");
+}
 
-  AccountsViewProxyModel  *getProxyModel();
-  KMyMoneyAccountTreeView *getTreeView();
+void BudgetView::plug()
+{
+  m_view = new KBudgetView;
+  viewInterface()->addView(m_view, i18n("Budgets"), View::Budget);
+}
 
-protected:
-  KMyMoneyAccountsViewBase(KMyMoneyAccountsViewBasePrivate &dd, QWidget *parent);
+void BudgetView::unplug()
+{
+  viewInterface()->removeView(View::Budget);
+}
 
-private:
-  Q_DECLARE_PRIVATE(KMyMoneyAccountsViewBase)
-};
+K_PLUGIN_FACTORY_WITH_JSON(BudgetViewFactory, "budgetview.json", registerPlugin<BudgetView>();)
 
-#endif
+#include "budgetview.moc"

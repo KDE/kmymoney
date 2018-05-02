@@ -28,17 +28,22 @@ if (USE_MODELTEST)
   list(APPEND libmodels_a_SOURCES modeltest.cpp)
 endif()
 
-add_library(models STATIC ${libmodels_a_SOURCES})
+add_library(kmm_models SHARED ${libmodels_a_SOURCES})
 
-target_link_libraries(models PUBLIC
+generate_export_header(kmm_models BASE_NAME kmm_models)
+
+target_link_libraries(kmm_models PUBLIC
     kmm_mymoney
-    kmymoney_common
+    kmm_settings
     KF5::ItemModels
+    $<$<BOOL:${ENABLE_UNFINISHEDFEATURES}>:kmymoney_common>
 )
 
 if (USE_MODELTEST)
-  target_compile_definitions(models PRIVATE -DKMM_MODELTEST)
-  target_link_libraries(models PRIVATE Qt5::Test)
+  target_compile_definitions(kmm_models PRIVATE -DKMM_MODELTEST)
+  target_link_libraries(kmm_models PRIVATE Qt5::Test)
 endif()
 
-add_dependencies(models kmm_settings)
+add_dependencies(kmm_models kmm_settings)
+
+install(TARGETS kmm_models ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )

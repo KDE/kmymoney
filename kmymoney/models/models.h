@@ -20,6 +20,8 @@
 #ifndef MODELS_H
 #define MODELS_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -59,7 +61,7 @@ class SecuritiesModel;
   * @author Cristian Onet 2010
   *
   */
-class Models : public QObject
+class KMM_MODELS_EXPORT Models : public QObject
 {
   Q_OBJECT
 

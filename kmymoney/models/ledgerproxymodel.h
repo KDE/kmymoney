@@ -19,6 +19,8 @@
 #ifndef LEDGERPROXYMODEL_H
 #define LEDGERPROXYMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,7 +34,7 @@
 
 #include "mymoneyenums.h"
 
-class LedgerProxyModel : public QSortFilterProxyModel
+class KMM_MODELS_EXPORT LedgerProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 public:

@@ -29,7 +29,8 @@ set_target_properties(qifexporter
 
 target_link_libraries(qifexporter
   kmm_plugin
-  models #TODO: Get rid of this big dependency
+  kmm_models
+  kmm_widgets
 )
 
 ########### install files ###############

@@ -17,6 +17,8 @@
 #ifndef KMYMONEYVIEWBASE_H
 #define KMYMONEYVIEWBASE_H
 
+#include "kmm_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,7 +39,7 @@ class MyMoneyObject;
   * should be based on.
   */
 class KMyMoneyViewBasePrivate;
-class KMyMoneyViewBase : public QWidget
+class KMM_WIDGETS_EXPORT KMyMoneyViewBase : public QWidget
 {
   Q_OBJECT
 

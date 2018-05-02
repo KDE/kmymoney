@@ -37,8 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "selectedtransactions.h"
-
 class QIcon;
 
 /**

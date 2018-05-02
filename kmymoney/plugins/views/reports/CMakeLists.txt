@@ -44,7 +44,7 @@ target_link_libraries(reportsview
     KF5::KIOWidgets
     KF5::KIONTLM
     reports
-    viewbase
+    kmm_widgets
     kmm_menus
 )
 

@@ -24,7 +24,7 @@ target_link_libraries(forecastview
     kmm_plugin
     KF5::TextWidgets
     reports
-    viewbase
+    kmm_widgets
 )
 
 # the KCM module

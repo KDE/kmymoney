@@ -70,11 +70,17 @@ target_link_libraries(kmymoney_common
     Qt5::Core
     KF5::ConfigGui
     KF5::WidgetsAddons
+    KF5::KIOCore
+    KF5::KIOFileWidgets
+    KF5::KIOWidgets
+    KF5::KIONTLM
     Alkimia::alkimia
-    kmm_widgets
     kmm_mymoney
     kmm_utils_webconnect
     kmm_utils_platformtools
+    PRIVATE
+    KF5::I18n
+    kmm_settings
 )
 
 # must build kmymoney/transactionsortoption.h
@@ -127,7 +133,7 @@ target_link_libraries(kmymoney
   widgets
   settings
   converter
-  models
+  kmm_models
   kmm_settings
   kmm_menus
   kmm_widgets

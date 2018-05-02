@@ -131,6 +131,8 @@ option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
 add_feature_info("Forecast view" ENABLE_FORECASTVIEW "It adds possibility to calculate forecasts.")
 option(ENABLE_REPORTSVIEW "Enable reports view" ON)
 add_feature_info("Reports view" ENABLE_REPORTSVIEW "It adds possibility to display chart and table reports.")
+option(ENABLE_BUDGETVIEW "Enable budget view" ON)
+add_feature_info("Budget view" ENABLE_BUDGETVIEW "It adds possibility to plan a budget.")
 option(ENABLE_ONLINEJOBOUTBOXVIEW "Enable online job outbox view" ON)
 add_feature_info("Online job outbox view" ENABLE_ONLINEJOBOUTBOXVIEW "It adds outbox for sending online jobs.")
 

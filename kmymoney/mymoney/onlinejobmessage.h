@@ -19,6 +19,8 @@
 #ifndef ONLINEJOBMESSAGE_H
 #define ONLINEJOBMESSAGE_H
 
+#include "kmm_mymoney_export.h"
+
 #include <qglobal.h>
 
 class QDateTime;
@@ -29,7 +31,7 @@ namespace eMyMoney { namespace OnlineJob { enum class MessageType; } }
  * @brief Represets a log message for onlineJobs
  */
 class onlineJobMessagePrivate;
-class onlineJobMessage
+class KMM_MYMONEY_EXPORT onlineJobMessage
 {
   Q_DECLARE_PRIVATE(onlineJobMessage)
   onlineJobMessagePrivate * d_ptr;

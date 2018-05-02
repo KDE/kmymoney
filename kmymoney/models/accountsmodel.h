@@ -22,6 +22,8 @@
 #ifndef ACCOUNTSMODEL_H
 #define ACCOUNTSMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -57,7 +59,7 @@ namespace eAccountsModel { enum class Column; }
 namespace eView { enum class Intent; }
 
 class AccountsModelPrivate;
-class AccountsModel : public QStandardItemModel
+class KMM_MODELS_EXPORT AccountsModel : public QStandardItemModel
 {
   Q_OBJECT
   Q_DISABLE_COPY(AccountsModel)
@@ -141,7 +143,7 @@ private:
   *
   */
 class InstitutionsModelPrivate;
-class InstitutionsModel : public AccountsModel
+class KMM_MODELS_EXPORT InstitutionsModel : public AccountsModel
 {
   Q_OBJECT
   Q_DISABLE_COPY(InstitutionsModel)

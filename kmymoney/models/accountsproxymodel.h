@@ -22,6 +22,8 @@
 #ifndef ACCOUNTSPROXYMODEL_H
 #define ACCOUNTSPROXYMODEL_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -58,7 +60,7 @@
 namespace eMyMoney { namespace Account {enum class Type;} }
 namespace eAccountsModel { enum class Column; }
 
-class AccountsProxyModel : public KRecursiveFilterProxyModel
+class KMM_MODELS_EXPORT AccountsProxyModel : public KRecursiveFilterProxyModel
 {
   Q_OBJECT
 

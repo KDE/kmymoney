@@ -19,9 +19,10 @@
 #ifndef ONLINEBANKINGACCOUNTSFILTERPROXYMODEL_H
 #define ONLINEBANKINGACCOUNTSFILTERPROXYMODEL_H
 
+#include "kmm_models_export.h"
 #include <QSortFilterProxyModel>
 
-class OnlineBankingAccountsFilterProxyModel : public QSortFilterProxyModel
+class KMM_MODELS_EXPORT OnlineBankingAccountsFilterProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 

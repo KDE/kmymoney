@@ -19,6 +19,8 @@
 #ifndef PAYEEIDENTIFIERCONTAINERMODEL_H
 #define PAYEEIDENTIFIERCONTAINERMODEL_H
 
+#include "kmm_models_export.h"
+
 #include <QAbstractListModel>
 #include <QSharedPointer>
 
@@ -35,7 +37,7 @@
  */
 class MyMoneyPayeeIdentifierContainer;
 class payeeIdentifier;
-class payeeIdentifierContainerModel : public QAbstractListModel
+class KMM_MODELS_EXPORT payeeIdentifierContainerModel : public QAbstractListModel
 {
   Q_OBJECT
 

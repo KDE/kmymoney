@@ -1,7 +1,7 @@
 
 ########### create links ###############
 set(kmymoney_STAT_HEADERS
-  kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
+  kaccounttemplateselector.h kguiutils.h
   kmymoneyaccountcombo.h kmymoneyaccountcompletion.h
   kmymoneyaccountselector.h
   kmymoneycategory.h
@@ -54,6 +54,11 @@ set(kmm_widgets_sources
   creditdebithelper.cpp
   daterangedlg.cpp
   ktransactionfilter.cpp
+  kmymoneyaccounttreeview.cpp
+  accountsviewproxymodel.cpp
+  budgetviewproxymodel.cpp
+  kmymoneyviewbase.cpp
+  kmymoneyaccountsviewbase.cpp
   )
 
 ki18n_wrap_ui(kmm_widgets_sources
@@ -77,6 +82,7 @@ target_link_libraries(kmm_widgets PUBLIC
   Qt5::Core
   Alkimia::alkimia
   kmm_mymoney
+  kmm_models
 )
 
 set_target_properties(kmm_widgets PROPERTIES
@@ -93,11 +99,7 @@ install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
 set(_uncritial_common_sources
-  kbudgetvalues.cpp
   kmymoneyaccountcombo.cpp
-  kmymoneyaccounttreeview.cpp
-  accountsviewproxymodel.cpp
-  budgetviewproxymodel.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
   kmymoneytitlelabel.cpp
@@ -138,7 +140,7 @@ set (_critial_common_sources
 
 
 set (kmymoney_base_UI
-  kbudgetvalues.ui transactionsortoption.ui kaccounttemplateselector.ui
+  transactionsortoption.ui kaccounttemplateselector.ui
   )
 
 ki18n_wrap_ui(kmymoney_base_ui_srcs ${kmymoney_base_UI})
