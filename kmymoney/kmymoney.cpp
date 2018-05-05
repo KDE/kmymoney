@@ -75,6 +75,9 @@
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
 #endif
+#ifdef KF5Activities_FOUND
+#include <KActivities/ResourceInstance>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -90,7 +93,6 @@
 #include "dialogs/kcurrencyeditdlg.h"
 #include "dialogs/kequitypriceupdatedlg.h"
 #include "dialogs/kmymoneyfileinfodlg.h"
-#include "dialogs/kfindtransactiondlg.h"
 #include "dialogs/knewbankdlg.h"
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "dialogs/knewaccountdlg.h"
@@ -211,8 +213,6 @@ class KMyMoneyApp::Private
 public:
   Private(KMyMoneyApp *app) :
       q(app),
-      m_ft(0),
-      m_moveToAccountSelector(0),
       m_statementXMLindex(0),
       m_balanceWarning(0),
       m_backupState(backupStateE::BACKUP_IDLE),
@@ -226,20 +226,20 @@ public:
       m_startDialog(false),
       m_progressBar(nullptr),
       m_statusLabel(nullptr),
-      m_searchDlg(nullptr),
       m_autoSaveEnabled(true),
       m_autoSaveTimer(nullptr),
       m_progressTimer(nullptr),
       m_autoSavePeriod(0),
       m_inAutoSaving(false),
-      m_transactionEditor(nullptr),
-      m_endingBalanceDlg(nullptr),
       m_saveEncrypted(nullptr),
       m_additionalKeyLabel(nullptr),
       m_additionalKeyButton(nullptr),
       m_recentFiles(nullptr),
 #ifdef KF5Holidays_FOUND
-      m_holidayRegion(0),
+      m_holidayRegion(nullptr),
+#endif
+#ifdef KF5Activities_FOUND
+      m_activityResourceInstance(nullptr),
 #endif
       m_applicationIsReady(true),
       m_webConnect(new WebConnect(app)) {
@@ -265,8 +265,6 @@ public:
     */
   KMyMoneyApp * const q;
 
-  MyMoneyFileTransaction*       m_ft;
-  KMyMoneyAccountSelector*      m_moveToAccountSelector;
   int                           m_statementXMLindex;
   KBalanceWarning*              m_balanceWarning;
 
@@ -327,7 +325,6 @@ public:
 
   // allows multiple imports to be launched trough web connect and to be executed sequentially
   QQueue<QString> m_importUrlsQueue;
-  KFindTransactionDlg* m_searchDlg;
 
   // This is Auto Saving related
   bool                  m_autoSaveEnabled;
@@ -335,12 +332,6 @@ public:
   QTimer*               m_progressTimer;
   int                   m_autoSavePeriod;
   bool                  m_inAutoSaving;
-
-  // pointer to the current transaction editor
-  TransactionEditor*    m_transactionEditor;
-
-  // Reconciliation dialog
-  KEndingBalanceDlg*    m_endingBalanceDlg;
 
   // Pointer to the combo box used for key selection during
   // File/Save as
@@ -359,6 +350,11 @@ public:
   // used by the calendar interface for schedules
   KHolidays::HolidayRegion* m_holidayRegion;
 #endif
+
+#ifdef KF5Activities_FOUND
+  KActivities::ResourceInstance * m_activityResourceInstance;
+#endif
+
   QBitArray             m_processingDays;
   QMap<QDate, bool>     m_holidayMap;
   QStringList           m_consistencyCheckResult;
@@ -1664,7 +1660,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   pMenus = initMenus();
 
   d->newStorage();
-  d->m_myMoneyView = new KMyMoneyView(this/*the global variable kmymoney is not yet assigned. So we pass it here*/);
+  d->m_myMoneyView = new KMyMoneyView;
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, &KMyMoneyView::aboutToChangeView, this, &KMyMoneyApp::slotResetSelections);
   connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
@@ -1672,6 +1668,19 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
+
+  connect(this, &KMyMoneyApp::fileLoaded, d->m_myMoneyView, &KMyMoneyView::slotRefreshViews);
+
+  // Initialize kactivities resource instance
+#ifdef KF5Activities_FOUND
+  d->m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId(), this);
+  connect(this, &KMyMoneyApp::fileLoaded, d->m_activityResourceInstance, &KActivities::ResourceInstance::setUri);
+#endif
+
+  const auto viewActions = d->m_myMoneyView->actionsToBeConnected();
+  actionCollection()->addActions(viewActions.values());
+  for (auto it = viewActions.cbegin(); it != viewActions.cend(); ++it)
+    pActions.insert(it.key(), it.value());
 
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts
@@ -1732,13 +1741,14 @@ KMyMoneyApp::~KMyMoneyApp()
   // we need to unload all plugins before we destroy anything else
   KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Unload, d->m_plugins, this, guiFactory());
 
-  delete d->m_searchDlg;
-  delete d->m_transactionEditor;
-  delete d->m_endingBalanceDlg;
-  delete d->m_moveToAccountSelector;
 #ifdef KF5Holidays_FOUND
   delete d->m_holidayRegion;
 #endif
+
+#ifdef KF5Activities_FOUND
+  delete d->m_activityResourceInstance;
+#endif
+
   delete d;
 }
 
@@ -1753,13 +1763,6 @@ QUrl KMyMoneyApp::lastOpenedURL()
   ready();
 
   return url;
-}
-
-void KMyMoneyApp::slotObjectDestroyed(QObject* o)
-{
-  if (o == d->m_moveToAccountSelector) {
-    d->m_moveToAccountSelector = 0;
-  }
 }
 
 void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
@@ -1824,6 +1827,13 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 {
   auto aC = actionCollection();
 
+  /* Look-up table for all custom and standard actions.
+  It's required for:
+  1) building QList with QActions to be added to ActionCollection
+  2) adding custom features to QActions like e.g. keyboard shortcut
+  */
+  QHash<Action, QAction *> lutActions;
+
   // *************
   // Adding standard actions
   // *************
@@ -1834,15 +1844,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   KStandardAction::saveAs(this, &KMyMoneyApp::slotFileSaveAs, aC);
   KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC);
   KStandardAction::quit(this, &KMyMoneyApp::slotFileQuit, aC);
-  KStandardAction::print(this, &KMyMoneyApp::slotPrintView, aC);
+  lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotPrintView, aC));
   KStandardAction::preferences(this, &KMyMoneyApp::slotSettings, aC);
-
-  /* Look-up table for all custom actions.
-  It's required for:
-  1) building QList with QActions to be added to ActionCollection
-  2) adding custom features to QActions like e.g. keyboard shortcut
-  */
-  QHash<Action, QAction *> lutActions;
 
   // *************
   // Adding all actions
@@ -2015,10 +2018,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::FileDump,                      &KMyMoneyApp::slotFileFileInfo},
 #endif
       {Action::FileInformation,               &KMyMoneyApp::slotFileInfoDialog},
-      // *************
-      // The Edit menu
-      // *************
-      {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction},
       // *************
       // The View menu
       // *************
@@ -3364,26 +3363,6 @@ void KMyMoneyApp::slotToolsStartKCalc()
   KRun::runCommand(cmd, this);
 }
 
-void KMyMoneyApp::slotFindTransaction()
-{
-  if (d->m_searchDlg == 0) {
-    d->m_searchDlg = new KFindTransactionDlg(this);
-    connect(d->m_searchDlg, SIGNAL(destroyed()), this, SLOT(slotCloseSearchDialog()));
-    connect(d->m_searchDlg, SIGNAL(transactionSelected(QString,QString)),
-            this, SIGNAL(transactionSelected(QString,QString)));
-  }
-  d->m_searchDlg->show();
-  d->m_searchDlg->raise();
-  d->m_searchDlg->activateWindow();
-}
-
-void KMyMoneyApp::slotCloseSearchDialog()
-{
-  if (d->m_searchDlg)
-    d->m_searchDlg->deleteLater();
-  d->m_searchDlg = 0;
-}
-
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
 {
   MyMoneyFile *file = MyMoneyFile::instance();
@@ -3480,7 +3459,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
 
   KMSTATUS(i18n("Running automatic reconciliation"));
   int progressBarIndex = 0;
-  kmymoney->slotStatusProgressBar(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
+  q->slotStatusProgressBar(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
 
   // optimize the most common case - all transactions should be cleared
   QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
@@ -3493,7 +3472,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
     result = transactions;
     return result;
   }
-  kmymoney->slotStatusProgressBar(progressBarIndex++, 0);
+  q->slotStatusProgressBar(progressBarIndex++, 0);
   // only one transaction is uncleared
   itTransactionSplitResult.toFront();
   int index = 0;
@@ -3505,7 +3484,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
     }
     index++;
   }
-  kmymoney->slotStatusProgressBar(progressBarIndex++, 0);
+  q->slotStatusProgressBar(progressBarIndex++, 0);
 
   // more than one transaction is uncleared - apply the algorithm
   result.clear();
@@ -3538,7 +3517,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
       sumToComponentsMap[transactionSplit.second.shares() + sum] = splitIds;
       int size = sumToComponentsMap.size();
       if (size % PROGRESSBAR_STEPS == 0) {
-        kmymoney->slotStatusProgressBar(progressBarIndex++, 0);
+        q->slotStatusProgressBar(progressBarIndex++, 0);
       }
       if (size > NR_OF_STEPS_LIMIT) {
         return result; // it's taking too much resources abort the algorithm
@@ -3561,7 +3540,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
     }
   }
 
-  kmymoney->slotStatusProgressBar(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
+  q->slotStatusProgressBar(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
   if (sumToComponentsMap.contains(amount)) {
     QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
     while (itTransactionSplit.hasNext()) {
@@ -3578,7 +3557,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
          qPrintable(MyMoneyUtils::formatMoney(amount, security)), sumToComponentsMap.size(), transactions.size());
 #endif
 
-  kmymoney->slotStatusProgressBar(-1, -1);
+  q->slotStatusProgressBar(-1, -1);
   return result;
 }
 
@@ -4102,8 +4081,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
       // Make sure we have an open file
       if (! d->m_fileOpen &&
-          KMessageBox::warningContinueCancel(kmymoney, i18n("You must first select a KMyMoney file before you can import a statement.")) == KMessageBox::Continue)
-        kmymoney->slotFileOpen();
+          KMessageBox::warningContinueCancel(this, i18n("You must first select a KMyMoney file before you can import a statement.")) == KMessageBox::Continue)
+        slotFileOpen();
 
       // only continue if the user really did open a file.
       if (d->m_fileOpen) {

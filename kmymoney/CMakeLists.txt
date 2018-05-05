@@ -151,6 +151,7 @@ target_link_libraries(kmymoney
   KChart
   $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
   $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
+  $<$<BOOL:${KF5Activities_FOUND}>:KF5::Activities>
 )
 
 # own plist magic for mac os

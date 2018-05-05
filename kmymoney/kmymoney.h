@@ -95,11 +95,6 @@ class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
 
 private Q_SLOTS:
   /**
-    * Keep track of objects that are destroyed by external events
-    */
-  void slotObjectDestroyed(QObject* o);
-
-  /**
     * Add a context menu to the list used by KMessageBox::informationList to display the consistency check results.
     */
   void slotInstallConsistencyCheckContextMenu();
@@ -208,17 +203,6 @@ protected Q_SLOTS:
   void slotShowPreviousView();
 
   void slotShowNextView();
-
-  /**
-    * Brings up a dialog to let the user search for specific transaction(s).  It then
-    * opens a results window to display those transactions.
-    */
-  void slotFindTransaction();
-
-  /**
-    * Destroys a possibly open the search dialog
-    */
-  void slotCloseSearchDialog();
 
   /**
     * Calls the print logic for the current view

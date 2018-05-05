@@ -32,6 +32,7 @@ namespace eMenu {
     FileOpenDatabase, FileSaveAsDatabase, FileBackup,
     FileImportStatement,
     FileImportTemplate, FileExportTemplate,
+    Print,
     #ifdef KMM_DEBUG
     FileDump,
     #endif
@@ -117,6 +118,14 @@ namespace eMenu {
     // *************
     NewBudget, RenameBudget, DeleteBudget,
     CopyBudget, ChangeBudgetYear, BudgetForecast,
+    // *************
+    // The show actions
+    // *************
+    ShowHomeView, ShowInstitutionsView, ShowAccountsView,
+    ShowSchedulesView, ShowCategoriesView, ShowTagsView,
+    ShowPayeesView, ShowLedgersView, ShowInvestmentsView,
+    ShowReportsView, ShowBudgetView, ShowForecastView,
+    ShowOnlineJobOutboxView,
     // *************
     // The misc actions
     // *************

@@ -48,6 +48,7 @@
 
 #include "kmymoneyviewbase_p.h"
 #include "kendingbalancedlg.h"
+#include "kfindtransactiondlg.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneyutils.h"
 #include "mymoneyexception.h"
@@ -254,7 +255,8 @@ public:
     m_transactionEditor(nullptr),
     m_balanceWarning(nullptr),
     m_moveToAccountSelector(nullptr),
-    m_endingBalanceDlg(nullptr)
+    m_endingBalanceDlg(nullptr),
+    m_searchDlg(nullptr)
   {
   }
 
@@ -262,6 +264,7 @@ public:
   {
     delete m_moveToAccountSelector;
     delete m_endingBalanceDlg;
+    delete m_searchDlg;
   }
 
   void init()
@@ -1640,6 +1643,7 @@ public:
 
   // Reconciliation dialog
   KEndingBalanceDlg*    m_endingBalanceDlg;
+  KFindTransactionDlg*  m_searchDlg;
 };
 
 #endif

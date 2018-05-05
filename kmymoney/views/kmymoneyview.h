@@ -121,15 +121,9 @@ private:
   QHash<View, KMyMoneyViewBase*> viewBases;
 
   KMyMoneyTitleLabel* m_header;
-  bool m_inConstructor;
   int m_lastViewSelected;
 
   QMap<QString, KMyMoneyPlugin::StoragePlugin*>* m_storagePlugins;
-
-#ifdef KF5Activities_FOUND
-private:
-  KActivities::ResourceInstance * m_activityResourceInstance;
-#endif
 
 private:
   void viewAccountList(const QString& selectAccount); // Show the accounts view
@@ -141,7 +135,7 @@ public:
     * The constructor for KMyMoneyView. Just creates all the tabs for the
     * different aspects of the MyMoneyFile.
     */
-  explicit KMyMoneyView(KMyMoneyApp *kmymoney);
+  KMyMoneyView();
 
   /**
     * Destructor
@@ -191,6 +185,13 @@ public:
 
   void addView(KMyMoneyViewBase* view, const QString& name, View idView);
   void removeView(View idView);
+
+  /**
+   * @brief actionsToBeConnected are actions that need ActionCollection
+   * which is available in KMyMoneyApp
+   * @return QHash of action id and QAction itself
+   */
+  QHash<eMenu::Action, QAction *> actionsToBeConnected();
 
 protected:
   /**

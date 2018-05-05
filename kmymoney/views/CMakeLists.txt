@@ -70,10 +70,6 @@ else(ENABLE_WEBENGINE)
  target_link_libraries(views PUBLIC KF5::WebKit)
 endif(ENABLE_WEBENGINE)
 
-if(KF5Activities_FOUND)
- target_link_libraries(views PRIVATE KF5::Activities)
-endif()
-
 # TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
 # This should be replaced by virtual methods in a pure abstract object.
 target_link_libraries( views PUBLIC

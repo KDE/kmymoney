@@ -50,10 +50,6 @@
 #include <KJobWidgets>
 #include <KLocalizedString>
 
-#ifdef KF5Activities_FOUND
-#include <KActivities/ResourceInstance>
-#endif
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -79,7 +75,6 @@
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
-#include "kmymoney.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
@@ -99,21 +94,18 @@
 #include "mymoneyreport.h"
 #include "kmymoneyplugin.h"
 #include "mymoneyenums.h"
+#include "menuenums.h"
 
 using namespace Icons;
 using namespace eMyMoney;
 
 typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
 
-KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
+KMyMoneyView::KMyMoneyView()
     : KPageWidget(nullptr),
     m_header(0),
-    m_inConstructor(true),
     m_lastViewSelected(0),
     m_storagePlugins(nullptr)
-#ifdef KF5Activities_FOUND
-    , m_activityResourceInstance(0)
-#endif
 {
   // this is a workaround for the bug in KPageWidget that causes the header to be shown
   // for a short while during page switch which causes a kind of bouncing of the page's
@@ -139,8 +131,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
 
 //  newStorage();
   m_model = new KPageWidgetModel(this); // cannot be parentless, otherwise segfaults at exit
-
-  connect(kmymoney, &KMyMoneyApp::fileLoaded, this, &KMyMoneyView::slotRefreshViews);
 
   viewBases[View::Home] = new KHomeView;
   viewBases[View::Institutions] = new KInstitutionsView;
@@ -192,10 +182,6 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
     connect(viewBases[view.id], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   }
 
-  const auto& ledgersView = static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers]);
-
-  connect(kmymoney, &KMyMoneyApp::transactionSelected, ledgersView, &KGlobalLedgerView::slotLedgerSelected);
-
   connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
   connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
   connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
@@ -206,64 +192,11 @@ KMyMoneyView::KMyMoneyView(KMyMoneyApp *kmymoney)
   connect(this, SIGNAL(currentPageChanged(QModelIndex,QModelIndex)), this, SLOT(slotCurrentPageChanged(QModelIndex,QModelIndex)));
 
   updateViewType();
-
-  m_inConstructor = false;
-
-  // add fast switching of main views through Ctrl + NUM_X
-  struct pageInfo {
-    View             view;
-    KMyMoneyViewFunc callback;
-    QString          text;
-    QKeySequence     shortcut = QKeySequence();
-  };
-
-  const QVector<pageInfo> pageInfos {
-    {View::Home,            &KMyMoneyView::slotShowHomePage,          i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
-    {View::Institutions,    &KMyMoneyView::slotShowInstitutionsPage,  i18n("Show institutions page"),           Qt::CTRL + Qt::Key_2},
-    {View::Accounts,        &KMyMoneyView::slotShowAccountsPage,      i18n("Show accounts page"),               Qt::CTRL + Qt::Key_3},
-    {View::Schedules,       &KMyMoneyView::slotShowSchedulesPage,     i18n("Show scheduled transactions page"), Qt::CTRL + Qt::Key_4},
-    {View::Categories,      &KMyMoneyView::slotShowCategoriesPage,    i18n("Show categories page"),             Qt::CTRL + Qt::Key_5},
-    {View::Tags,            &KMyMoneyView::slotShowTagsPage,          i18n("Show tags page"),                   },
-    {View::Payees,          &KMyMoneyView::slotShowPayeesPage,        i18n("Show payees page"),                 Qt::CTRL + Qt::Key_6},
-    {View::Ledgers,         &KMyMoneyView::slotShowLedgersPage,       i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
-    {View::Investments,     &KMyMoneyView::slotShowInvestmentsPage,   i18n("Show investments page"),            Qt::CTRL + Qt::Key_8},
-    {View::Reports,         &KMyMoneyView::slotShowReportsPage,       i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
-    {View::Budget,          &KMyMoneyView::slotShowBudgetPage,        i18n("Show budget page"),                },
-    {View::Forecast,        &KMyMoneyView::slotShowForecastPage,      i18n("Show forecast page"),              },
-    {View::OnlineJobOutbox, &KMyMoneyView::slotShowOutboxPage,        i18n("Show outbox page")                 }
-  };
-
-  QHash<View, QAction *> lutActions;
-  auto aC = kmymoney->actionCollection();
-  auto pageCount = 0;
-  foreach (const pageInfo info, pageInfos) {
-    auto a = new QAction(this);
-    // KActionCollection::addAction by name sets object name anyways,
-    // so, as better alternative, set it here right from the start
-    a->setObjectName(QLatin1String("ShowPage") + QString::number(pageCount++));
-    a->setText(info.text);
-    connect(a, &QAction::triggered, this, info.callback);
-    lutActions.insert(info.view, a);  // store QAction's pointer for later processing
-    if (!info.shortcut.isEmpty())
-      aC->setDefaultShortcut(a, info.shortcut);
-  }
-  aC->addActions(lutActions.values());
-
-  // Initialize kactivities resource instance
-
-#ifdef KF5Activities_FOUND
-  m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId(), this);
-  connect(kmymoney, SIGNAL(fileLoaded(QUrl)), m_activityResourceInstance, SLOT(setUri(QUrl)));
-#endif
 }
 
 KMyMoneyView::~KMyMoneyView()
 {
   KMyMoneySettings::setLastViewSelected(m_lastViewSelected);
-#ifdef KF5Activities_FOUND
-delete m_activityResourceInstance;
-#endif
-//  removeStorage();
 }
 
 void KMyMoneyView::slotFileOpened()
@@ -509,7 +442,49 @@ void KMyMoneyView::removeView(View idView)
   m_model->removePage(viewFrames[idView]);
   viewFrames.remove(idView);
   viewBases.remove(idView);
+}
 
+QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
+{
+  using namespace eMenu;
+  // add fast switching of main views through Ctrl + NUM_X
+  struct pageInfo {
+    Action           view;
+    KMyMoneyViewFunc callback;
+    QString          text;
+    QKeySequence     shortcut = QKeySequence();
+  };
+
+  const QVector<pageInfo> pageInfos {
+    {Action::ShowHomeView,            &KMyMoneyView::slotShowHomePage,          i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
+    {Action::ShowInstitutionsView,    &KMyMoneyView::slotShowInstitutionsPage,  i18n("Show institutions page"),           Qt::CTRL + Qt::Key_2},
+    {Action::ShowAccountsView,        &KMyMoneyView::slotShowAccountsPage,      i18n("Show accounts page"),               Qt::CTRL + Qt::Key_3},
+    {Action::ShowSchedulesView,       &KMyMoneyView::slotShowSchedulesPage,     i18n("Show scheduled transactions page"), Qt::CTRL + Qt::Key_4},
+    {Action::ShowCategoriesView,      &KMyMoneyView::slotShowCategoriesPage,    i18n("Show categories page"),             Qt::CTRL + Qt::Key_5},
+    {Action::ShowTagsView,            &KMyMoneyView::slotShowTagsPage,          i18n("Show tags page"),                   },
+    {Action::ShowPayeesView,          &KMyMoneyView::slotShowPayeesPage,        i18n("Show payees page"),                 Qt::CTRL + Qt::Key_6},
+    {Action::ShowLedgersView,         &KMyMoneyView::slotShowLedgersPage,       i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
+    {Action::ShowInvestmentsView,     &KMyMoneyView::slotShowInvestmentsPage,   i18n("Show investments page"),            Qt::CTRL + Qt::Key_8},
+    {Action::ShowReportsView,         &KMyMoneyView::slotShowReportsPage,       i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
+    {Action::ShowBudgetView,          &KMyMoneyView::slotShowBudgetPage,        i18n("Show budget page"),                },
+    {Action::ShowForecastView,        &KMyMoneyView::slotShowForecastPage,      i18n("Show forecast page"),              },
+    {Action::ShowOnlineJobOutboxView, &KMyMoneyView::slotShowOutboxPage,        i18n("Show outbox page")                 }
+  };
+
+  QHash<Action, QAction *> lutActions;
+  auto pageCount = 0;
+  for (const pageInfo& info : pageInfos) {
+    auto a = new QAction(this);
+    // KActionCollection::addAction by name sets object name anyways,
+    // so, as better alternative, set it here right from the start
+    a->setObjectName(QString::fromLatin1("ShowPage%1").arg(QString::number(pageCount++)));
+    a->setText(info.text);
+    connect(a, &QAction::triggered, this, info.callback);
+    lutActions.insert(info.view, a);  // store QAction's pointer for later processing
+    if (!info.shortcut.isEmpty())
+      a->setShortcut(info.shortcut);
+  }
+  return lutActions;
 }
 
 bool KMyMoneyView::showPageHeader() const
@@ -527,31 +502,13 @@ void KMyMoneyView::showPageAndFocus(View idView)
 
 void KMyMoneyView::showPage(View idView)
 {
-  const auto pageItem = viewFrames[idView];
-  // reset all selected items before showing the selected view
-  // but not while we're in our own constructor
-  if (!m_inConstructor && pageItem != currentPage()) {
-    kmymoney->slotResetSelections();
-  }
+  if (!viewFrames.contains(idView) ||
+      currentPage() == viewFrames[idView])
+    return;
 
-  // pretend we're in the constructor to avoid calling the
-  // above resets. For some reason which I don't know the details
-  // of, KJanusWidget::showPage() calls itself recursively. This
-  // screws up the action handling, as items could have been selected
-  // in the meantime. We prevent this by setting the m_inConstructor
-  // to true and reset it to the previos value when we leave this method.
-  bool prevConstructor = m_inConstructor;
-  m_inConstructor = true;
-
-  setCurrentPage(pageItem);
-
-  m_inConstructor = prevConstructor;
-
-  if (!m_inConstructor) {
-    // fixup some actions that are dependant on the view
-    // this does not work during construction
-    kmymoney->slotUpdateActions();
-  }
+  setCurrentPage(viewFrames[idView]);
+  pActions[eMenu::Action::Print]->setEnabled(canPrint());
+  emit aboutToChangeView();
 }
 
 bool KMyMoneyView::canPrint()

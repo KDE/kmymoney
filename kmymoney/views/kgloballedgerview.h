@@ -303,6 +303,18 @@ private Q_SLOTS:
   void slotFinishReconciliation();
   void slotPostponeReconciliation();
   void slotOpenAccount();
+
+  /**
+    * Brings up a dialog to let the user search for specific transaction(s).  It then
+    * opens a results window to display those transactions.
+    */
+  void slotFindTransaction();
+
+  /**
+    * Destroys a possibly open the search dialog
+    */
+  void slotCloseSearchDialog();
+
   void slotStatusMsg(const QString& txt);
   void slotStatusProgress(int cnt, int base);
   void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);

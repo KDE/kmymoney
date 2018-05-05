@@ -98,7 +98,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
     {Action::StartReconciliation,       &KGlobalLedgerView::slotStartReconciliation},
     {Action::FinishReconciliation,      &KGlobalLedgerView::slotFinishReconciliation},
     {Action::PostponeReconciliation,    &KGlobalLedgerView::slotPostponeReconciliation},
-    {Action::OpenAccount,               &KGlobalLedgerView::slotOpenAccount}
+    {Action::OpenAccount,               &KGlobalLedgerView::slotOpenAccount},
+    {Action::EditFindTransaction,       &KGlobalLedgerView::slotFindTransaction},
   };
 
   for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
@@ -2031,6 +2032,28 @@ void KGlobalLedgerView::slotOpenAccount()
   Q_D(KGlobalLedgerView);
   if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id()))
     slotLedgerSelected(d->m_currentAccount.id(), QString());
+}
+
+void KGlobalLedgerView::slotFindTransaction()
+{
+  Q_D(KGlobalLedgerView);
+  if (!d->m_searchDlg) {
+    d->m_searchDlg = new KFindTransactionDlg(this);
+    connect(d->m_searchDlg, &QObject::destroyed, this, &KGlobalLedgerView::slotCloseSearchDialog);
+    connect(d->m_searchDlg, &KFindTransactionDlg::transactionSelected,
+            this, &KGlobalLedgerView::slotLedgerSelected);
+  }
+  d->m_searchDlg->show();
+  d->m_searchDlg->raise();
+  d->m_searchDlg->activateWindow();
+}
+
+void KGlobalLedgerView::slotCloseSearchDialog()
+{
+  Q_D(KGlobalLedgerView);
+  if (d->m_searchDlg)
+    d->m_searchDlg->deleteLater();
+  d->m_searchDlg = nullptr;
 }
 
 void KGlobalLedgerView::slotStatusMsg(const QString& txt)
