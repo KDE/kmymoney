@@ -33,6 +33,7 @@ add_library(kmm_models SHARED ${libmodels_a_SOURCES})
 generate_export_header(kmm_models BASE_NAME kmm_models)
 
 target_link_libraries(kmm_models PUBLIC
+    Qt5::Core
     kmm_mymoney
     kmm_settings
     KF5::ItemModels
