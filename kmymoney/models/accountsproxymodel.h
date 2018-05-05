@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
+ *   Copyright 2017-2018  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -60,13 +60,15 @@
 namespace eMyMoney { namespace Account {enum class Type;} }
 namespace eAccountsModel { enum class Column; }
 
+class AccountsProxyModelPrivate;
 class KMM_MODELS_EXPORT AccountsProxyModel : public KRecursiveFilterProxyModel
 {
   Q_OBJECT
+  Q_DISABLE_COPY(AccountsProxyModel)
 
 public:
   explicit AccountsProxyModel(QObject *parent = nullptr);
-  ~AccountsProxyModel();
+  virtual ~AccountsProxyModel();
 
   void addAccountType(eMyMoney::Account::Type type);
   void addAccountGroup(const QVector<eMyMoney::Account::Type> &groups);
@@ -87,9 +89,10 @@ public:
 
   void setSourceColumns(QList<eAccountsModel::Column> *columns);
 
-  QList<eAccountsModel::Column> *m_mdlColumns;
-
 protected:
+  const QScopedPointer<AccountsProxyModelPrivate> d_ptr;
+  AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent);
+
   bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
   bool acceptSourceItem(const QModelIndex &source) const;
@@ -102,8 +105,7 @@ Q_SIGNALS:
   void unusedIncomeExpenseAccountHidden() const;
 
 private:
-  class Private;
-  Private* const d;
+  Q_DECLARE_PRIVATE(AccountsProxyModel)
 };
 
 #endif

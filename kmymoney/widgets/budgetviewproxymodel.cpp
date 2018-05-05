@@ -3,7 +3,7 @@
                              -------------------
     Copyright (C) 2006 by Darren Gould <darren_gould@gmx.de>
     Copyright (C) 2006 by Alvaro Soliverez <asoliverez@gmail.com>
-    Copyright (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    Copyright (C) 2017-2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "budgetviewproxymodel.h"
+#include "accountsviewproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -31,14 +32,38 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
+#include "mymoneymoney.h"
+#include "mymoneybudget.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "modelenums.h"
 
 using namespace eAccountsModel;
 
+class BudgetViewProxyModelPrivate : public AccountsViewProxyModelPrivate
+{
+  Q_DISABLE_COPY(BudgetViewProxyModelPrivate)
+
+public:
+  BudgetViewProxyModelPrivate() :
+    AccountsViewProxyModelPrivate()
+  {
+  }
+
+  ~BudgetViewProxyModelPrivate() override
+  {
+  }
+
+  MyMoneyBudget m_budget;
+  MyMoneyMoney m_lastBalance;
+};
+
 BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :
-    AccountsViewProxyModel(parent)
+  AccountsViewProxyModel(*new BudgetViewProxyModelPrivate, parent)
+{
+}
+
+BudgetViewProxyModel::~BudgetViewProxyModel()
 {
 }
 
@@ -48,9 +73,10 @@ BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :
   */
 QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
 {
+  Q_D(const BudgetViewProxyModel);
   if (!MyMoneyFile::instance()->storageAttached())
     return QVariant();
-  const auto sourceColumn = m_mdlColumns->at(mapToSource(index).column());
+  const auto sourceColumn = d->m_mdlColumns->at(mapToSource(index).column());
   static QVector<Column> columnsToProcess {Column::TotalBalance, Column::TotalValue/*, AccountsModel::PostedValue, Column::Account*/};
   if (columnsToProcess.contains(sourceColumn)) {
         const auto ixAccount = mapToSource(BudgetViewProxyModel::index(index.row(), static_cast<int>(Column::Account), index.parent()));
@@ -94,6 +120,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags BudgetViewProxyModel::flags(const QModelIndex &index) const
 {
+  Q_D(const BudgetViewProxyModel);
   Qt::ItemFlags flags = AccountsViewProxyModel::flags(index);
   if (!index.parent().isValid())
     return flags & ~Qt::ItemIsSelectable;
@@ -107,7 +134,7 @@ Qt::ItemFlags BudgetViewProxyModel::flags(const QModelIndex &index) const
     if (accountData.canConvert<MyMoneyAccount>()) {
       MyMoneyAccount account = accountData.value<MyMoneyAccount>();
       // find out if the account is budgeted
-      MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(account.id());
+      MyMoneyBudget::AccountGroup budgetAccount = d->m_budget.account(account.id());
       if (budgetAccount.id() == account.id()) {
         if (budgetAccount.budgetSubaccounts()) {
           return flags & ~Qt::ItemIsEnabled;
@@ -121,13 +148,15 @@ Qt::ItemFlags BudgetViewProxyModel::flags(const QModelIndex &index) const
 
 void BudgetViewProxyModel::setBudget(const MyMoneyBudget& budget)
 {
-  m_budget = budget;
+  Q_D(BudgetViewProxyModel);
+  d->m_budget = budget;
   invalidate();
   checkBalance();
 }
 
 bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
+  Q_D(const BudgetViewProxyModel);
   if (hideUnusedIncomeExpenseAccounts()) {
     const auto index = sourceModel()->index(source_row, static_cast<int>(Column::Account), source_parent);
     const auto accountData = sourceModel()->data(index, (int)Role::Account);
@@ -135,7 +164,7 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
       const auto account = accountData.value<MyMoneyAccount>();
       MyMoneyMoney balance;
       // find out if the account is budgeted
-      const auto budgetAccount = m_budget.account(account.id());
+      const auto budgetAccount = d->m_budget.account(account.id());
       if (budgetAccount.id() == account.id()) {
         balance = budgetAccount.balance();
         switch (budgetAccount.budgetLevel()) {
@@ -160,9 +189,10 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
 
 MyMoneyMoney BudgetViewProxyModel::accountBalance(const QString &accountId) const
 {
+  Q_D(const BudgetViewProxyModel);
   MyMoneyMoney balance;
   // find out if the account is budgeted
-  MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(accountId);
+  MyMoneyBudget::AccountGroup budgetAccount = d->m_budget.account(accountId);
   if (budgetAccount.id() == accountId) {
     balance = budgetAccount.balance();
     switch (budgetAccount.budgetLevel()) {
@@ -193,6 +223,7 @@ MyMoneyMoney BudgetViewProxyModel::computeTotalValue(const QModelIndex &source_i
 
 void BudgetViewProxyModel::checkBalance()
 {
+  Q_D(BudgetViewProxyModel);
   // compute the balance
   QModelIndexList incomeList = match(index(0, 0),
                                      (int)Role::ID,
@@ -215,8 +246,8 @@ void BudgetViewProxyModel::checkBalance()
       balance = incomeValue.value<MyMoneyMoney>() - expenseValue.value<MyMoneyMoney>();
     }
   }
-  if (m_lastBalance != balance) {
-    m_lastBalance = balance;
-    emit balanceChanged(m_lastBalance);
+  if (d->m_lastBalance != balance) {
+    d->m_lastBalance = balance;
+    emit balanceChanged(d->m_lastBalance);
   }
 }

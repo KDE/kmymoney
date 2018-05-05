@@ -4,7 +4,7 @@
     begin                : Tue Sep 25 2006
     copyright            : (C) 2007 Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017-2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "hierarchyfilterproxymodel.h"
+#include "accountsproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -33,8 +34,27 @@
 
 namespace NewAccountWizard
 {
-  HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
-    : AccountsProxyModel(parent)
+  class HierarchyFilterProxyModelPrivate : public AccountsProxyModelPrivate
+  {
+    Q_DISABLE_COPY(HierarchyFilterProxyModelPrivate)
+
+  public:
+    HierarchyFilterProxyModelPrivate() :
+      AccountsProxyModelPrivate()
+    {
+    }
+
+    ~HierarchyFilterProxyModelPrivate() override
+    {
+    }
+  };
+
+  HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent) :
+    AccountsProxyModel(*new HierarchyFilterProxyModelPrivate, parent)
+  {
+  }
+
+  HierarchyFilterProxyModel::~HierarchyFilterProxyModel()
   {
   }
 
@@ -43,8 +63,9 @@ namespace NewAccountWizard
   */
   bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
   {
+    Q_D(const HierarchyFilterProxyModel);
     if (!source_parent.isValid()) {
-        auto accCol = m_mdlColumns->indexOf(eAccountsModel::Column::Account);
+        auto accCol = d->m_mdlColumns->indexOf(eAccountsModel::Column::Account);
         QVariant data = sourceModel()->index(source_row, accCol, source_parent).data((int)eAccountsModel::Role::ID);
         if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
           return false;

@@ -19,16 +19,13 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef ACCOUNTSVIEWPROXYMODEL_H
-#define ACCOUNTSVIEWPROXYMODEL_H
-
-#include "kmm_models_export.h"
+#ifndef ACCOUNTSPROXYMODELPRIVATE_H
+#define ACCOUNTSPROXYMODELPRIVATE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSet>
-#include <QPoint>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,41 +33,33 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountsproxymodel.h"
+#include "mymoneyenums.h"
 #include "modelenums.h"
 
-class QPoint;
-
-/**
-  * This model is specialized to organize the data for the accounts tree view
-  * based on the data of the @ref AccountsModel.
-  */
-class AccountsViewProxyModelPrivate;
-class KMM_MODELS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
+class AccountsProxyModelPrivate
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(AccountsViewProxyModel)
+  Q_DISABLE_COPY(AccountsProxyModelPrivate)
 
 public:
-  explicit AccountsViewProxyModel(QObject *parent = nullptr);
-  ~AccountsViewProxyModel() override;
+  AccountsProxyModelPrivate() :
+    m_mdlColumns(nullptr),
+    m_hideClosedAccounts(true),
+    m_hideEquityAccounts(true),
+    m_hideUnusedIncomeExpenseAccounts(false),
+    m_haveHiddenUnusedIncomeExpenseAccounts(false)
+  {
+  }
 
-  void setColumnVisibility(eAccountsModel::Column column, bool visible);
-  QSet<eAccountsModel::Column> getVisibleColumns();
+  virtual ~AccountsProxyModelPrivate()
+  {
+  }
 
-public Q_SLOTS:
-  void slotColumnsMenu(const QPoint);
-
-Q_SIGNALS:
-  void columnToggled(const eAccountsModel::Column column, const bool show);
-
-protected:
-  AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent);
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
-
-private:
-  Q_DECLARE_PRIVATE(AccountsViewProxyModel)
+  QList<eMyMoney::Account::Type> m_typeList;
+  QList<eAccountsModel::Column> *m_mdlColumns;
+  bool m_hideClosedAccounts;
+  bool m_hideEquityAccounts;
+  bool m_hideUnusedIncomeExpenseAccounts;
+  bool m_haveHiddenUnusedIncomeExpenseAccounts;
 };
 
 #endif

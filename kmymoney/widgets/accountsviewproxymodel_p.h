@@ -19,16 +19,15 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef ACCOUNTSVIEWPROXYMODEL_H
-#define ACCOUNTSVIEWPROXYMODEL_H
+#ifndef ACCOUNTSVIEWPROXYMODELPRIVATE_H
+#define ACCOUNTSVIEWPROXYMODELPRIVATE_H
 
-#include "kmm_models_export.h"
+#include "accountsproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QSet>
-#include <QPoint>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,41 +35,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountsproxymodel.h"
 #include "modelenums.h"
 
-class QPoint;
-
-/**
-  * This model is specialized to organize the data for the accounts tree view
-  * based on the data of the @ref AccountsModel.
-  */
-class AccountsViewProxyModelPrivate;
-class KMM_MODELS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
+class AccountsViewProxyModelPrivate : public AccountsProxyModelPrivate
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(AccountsViewProxyModel)
+  Q_DISABLE_COPY(AccountsViewProxyModelPrivate)
 
 public:
-  explicit AccountsViewProxyModel(QObject *parent = nullptr);
-  ~AccountsViewProxyModel() override;
+  AccountsViewProxyModelPrivate() :
+    AccountsProxyModelPrivate()
+  {
+  }
 
-  void setColumnVisibility(eAccountsModel::Column column, bool visible);
-  QSet<eAccountsModel::Column> getVisibleColumns();
+  virtual ~AccountsViewProxyModelPrivate() override
+  {
+  }
 
-public Q_SLOTS:
-  void slotColumnsMenu(const QPoint);
-
-Q_SIGNALS:
-  void columnToggled(const eAccountsModel::Column column, const bool show);
-
-protected:
-  AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent);
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
-
-private:
-  Q_DECLARE_PRIVATE(AccountsViewProxyModel)
+  QSet<eAccountsModel::Column> m_visColumns;
 };
 
 #endif

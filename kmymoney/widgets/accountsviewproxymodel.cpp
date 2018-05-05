@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
+ *   Copyright 2017-2018  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -20,6 +20,7 @@
  ***************************************************************************/
 
 #include "accountsviewproxymodel.h"
+#include "accountsviewproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -40,10 +41,15 @@
 
 using namespace eAccountsModel;
 
-AccountsViewProxyModel::AccountsViewProxyModel(QObject *parent)
-    : AccountsProxyModel(parent)
+AccountsViewProxyModel::AccountsViewProxyModel(QObject *parent) :
+  AccountsProxyModel(*new AccountsViewProxyModelPrivate, parent)
 {
   setFilterKeyColumn(-1); // set-up filter to search in all columns
+}
+
+AccountsViewProxyModel::AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent) :
+  AccountsProxyModel(dd, parent)
+{
 }
 
 AccountsViewProxyModel::~AccountsViewProxyModel()
@@ -65,27 +71,31 @@ bool AccountsViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex 
 
 bool AccountsViewProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
 {
+  Q_D(const AccountsViewProxyModel);
   Q_UNUSED(source_parent)
-  if (m_visColumns.contains(m_mdlColumns->at(source_column)))
+  if (d->m_visColumns.contains(d->m_mdlColumns->at(source_column)))
       return true;
   return false;
 }
 
 QSet<Column> AccountsViewProxyModel::getVisibleColumns()
 {
-  return m_visColumns;
+  Q_D(AccountsViewProxyModel);
+  return d->m_visColumns;
 }
 
 void AccountsViewProxyModel::setColumnVisibility(Column column, bool show)
 {
+  Q_D(AccountsViewProxyModel);
   if (show)
-    m_visColumns.insert(column);                                                  // add column to filter
+    d->m_visColumns.insert(column);                                                  // add column to filter
   else
-    m_visColumns.remove(column);
+    d->m_visColumns.remove(column);
 }
 
 void AccountsViewProxyModel::slotColumnsMenu(const QPoint)
 {
+  Q_D(AccountsViewProxyModel);
   // construct all hideable columns list
   const QVector<Column> idColumns = { Column::Type, Column::Tax,
                                       Column::VAT, Column::CostCenter,
@@ -102,7 +112,7 @@ void AccountsViewProxyModel::slotColumnsMenu(const QPoint)
     a->setObjectName(QString::number(static_cast<int>(idColumn)));
     a->setText(AccountsModel::getHeaderName(idColumn));
     a->setCheckable(true);
-    a->setChecked(m_visColumns.contains(idColumn));
+    a->setChecked(d->m_visColumns.contains(idColumn));
     actions.append(a);
   }
   menu.addActions(actions);
