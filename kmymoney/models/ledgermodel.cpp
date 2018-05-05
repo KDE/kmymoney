@@ -66,7 +66,7 @@ LedgerModel::LedgerModel(QObject* parent) :
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  connect(file, &MyMoneyFile::objectAdded,    this, static_cast<void (LedgerModel::*)(File::Object, const QString&)>(&LedgerModel::addTransaction));
+  connect(file, &MyMoneyFile::objectAdded,    this, &LedgerModel::slotAddTransaction);
   connect(file, &MyMoneyFile::objectModified, this, &LedgerModel::modifyTransaction);
   connect(file, &MyMoneyFile::objectRemoved,  this, &LedgerModel::removeTransaction);
 
@@ -502,7 +502,7 @@ void LedgerModel::load()
   qDebug() << "Loaded" << rowCount() << "elements";
 }
 
-void LedgerModel::addTransaction(File::Object objType, const QString& id)
+void LedgerModel::slotAddTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
