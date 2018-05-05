@@ -18,7 +18,6 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
 #include "models.h"
 
 // ----------------------------------------------------------------------------
@@ -31,7 +30,9 @@
 // Project Includes
 
 #include "accountsmodel.h"
+#ifdef ENABLE_UNFINISHEDFEATURES
 #include "ledgermodel.h"
+#endif
 #include "costcentermodel.h"
 #include "payeesmodel.h"
 #include "equitiesmodel.h"
@@ -47,7 +48,9 @@ struct Models::Private {
   Private()
   : m_accountsModel(0)
   , m_institutionsModel(0)
+#ifdef ENABLE_UNFINISHEDFEATURES
   , m_ledgerModel(0)
+#endif
   , m_costCenterModel(0)
   , m_payeesModel(0)
   , m_equitiesModel(0)
@@ -56,7 +59,9 @@ struct Models::Private {
 
   AccountsModel *m_accountsModel;
   InstitutionsModel *m_institutionsModel;
+#ifdef ENABLE_UNFINISHEDFEATURES
   LedgerModel *m_ledgerModel;
+#endif
   CostCenterModel *m_costCenterModel;
   PayeesModel *m_payeesModel;
   EquitiesModel *m_equitiesModel;

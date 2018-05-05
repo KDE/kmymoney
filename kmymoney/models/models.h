@@ -20,6 +20,7 @@
 #ifndef MODELS_H
 #define MODELS_H
 
+#include <config-kmymoney.h>
 #include "kmm_models_export.h"
 
 // ----------------------------------------------------------------------------
@@ -39,7 +40,9 @@
   */
 class AccountsModel;
 class InstitutionsModel;
+#ifdef ENABLE_UNFINISHEDFEATURES
 class LedgerModel;
+#endif
 class CostCenterModel;
 class PayeesModel;
 class EquitiesModel;
@@ -77,7 +80,9 @@ public:
 
   AccountsModel* accountsModel();
   InstitutionsModel* institutionsModel();
+#ifdef ENABLE_UNFINISHEDFEATURES
   LedgerModel* ledgerModel();
+#endif
   CostCenterModel* costCenterModel();
   PayeesModel* payeesModel();
   EquitiesModel* equitiesModel();
