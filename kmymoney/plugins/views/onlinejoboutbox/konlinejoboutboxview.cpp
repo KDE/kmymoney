@@ -358,7 +358,7 @@ void KOnlineJobOutboxView::contextMenuEvent(QContextMenuEvent*)
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedIndexes();
   if (!indexes.isEmpty()) {
 //    onlineJob job = d->ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobRole).value<onlineJob>();
-    pMenus[eMenu::Menu::OnlineJob]->exec();
+    pMenus[eMenu::Menu::OnlineJob]->exec(QCursor::pos());
   }
 }
 
