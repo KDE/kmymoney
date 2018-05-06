@@ -21,7 +21,6 @@
 
 #include <QString>
 
-#include "onlinejobmessage.h"
 #include <qobject.h>
 #include "storage/databasestoreableobject.h"
 

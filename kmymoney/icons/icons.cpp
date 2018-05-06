@@ -306,7 +306,7 @@ namespace Icons {
     sStandardIcons = getCommonNames();
     auto hasIconsResource = false;
 
-#if defined(Q_OS_WIN) or defined(Q_OS_MACOS)
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
     hasIconsResource = true;
 #endif
 

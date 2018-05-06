@@ -4,7 +4,6 @@ set(libmodels_a_SOURCES
     accountsmodel.cpp
     accountsproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
-    ../mymoney/onlinejobmessage.cpp
     ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
     models.cpp
     payeeidentifiercontainermodel.cpp

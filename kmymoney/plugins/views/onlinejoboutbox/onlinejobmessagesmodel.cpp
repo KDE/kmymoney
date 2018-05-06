@@ -64,14 +64,19 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
           break;
         default: return QVariant();
       }
+      break;
     case 1: switch (role) { // Origin column
         case Qt::DisplayRole: return messages[index.row()].sender();
         default: return QVariant();
       }
+      break;
     case 2: switch (role) { // Message column
         case Qt::DisplayRole: return messages[index.row()].message();
         default: return QVariant();
       }
+      break;
+    default:
+      break;
   }
 
   // Actually we should never get here. But let's make this model bullet proof.

@@ -113,7 +113,6 @@
 #include "dialogs/kbalancewarning.h"
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneypayeecombo.h"
-#include "widgets/onlinejobmessagesview.h"
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneyedit.h"
 #include "widgets/kmymoneymvccombo.h"
@@ -141,7 +140,6 @@
 #include "mymoney/mymoneyforecast.h"
 #include "mymoney/mymoneytransactionfilter.h"
 
-#include "mymoney/onlinejobmessage.h"
 
 #include "converter/mymoneystatementreader.h"
 #include "converter/mymoneytemplate.h"
@@ -1645,7 +1643,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setSpacing(6);
 
   {
-    #if defined(Q_OS_WIN) or defined(Q_OS_MACOS)
+    #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
     QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
     #else
     QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants

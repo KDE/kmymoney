@@ -26,6 +26,15 @@
 class onlineJobMessagePrivate
 {
 public:
+  onlineJobMessagePrivate() :
+    m_type(eMyMoney::OnlineJob::MessageType::Log)
+  {
+  }
+
+  ~onlineJobMessagePrivate()
+  {
+  }
+
   eMyMoney::OnlineJob::MessageType m_type;
   QString m_sender;
   QString m_message;
