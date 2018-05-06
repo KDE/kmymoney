@@ -8,7 +8,6 @@ add_subdirectory( tasksettings )
 
 set(kbanking_PART_SRCS
     kbanking.cpp
-    ../../mymoney/onlinejobmessage.cpp
     banking.cpp
     aqbankingkmmoperators.cpp
     gwenhywfarqtoperators.cpp
