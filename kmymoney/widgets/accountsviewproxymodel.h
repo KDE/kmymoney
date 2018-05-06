@@ -22,7 +22,7 @@
 #ifndef ACCOUNTSVIEWPROXYMODEL_H
 #define ACCOUNTSVIEWPROXYMODEL_H
 
-#include "kmm_models_export.h"
+#include "kmm_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -46,7 +46,7 @@ class QPoint;
   * based on the data of the @ref AccountsModel.
   */
 class AccountsViewProxyModelPrivate;
-class KMM_MODELS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
+class KMM_WIDGETS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
 {
   Q_OBJECT
   Q_DISABLE_COPY(AccountsViewProxyModel)
