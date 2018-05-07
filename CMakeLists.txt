@@ -257,48 +257,47 @@ The default value is: 'RelWithDebInfo'" FORCE)
 include(KDECompilerSettings)
 kde_enable_exceptions()
 
-if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+# Set linker flags
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
-endif()
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed -Wl,--no-undefined")
+  # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
+  set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--as-needed -Wl,--allow-multiple-definition")
 
-# IDEA: Set on a per target base
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  # be more pedantic about common symbols
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wextra")
-
-  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    set(IS_GNU 1)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
-
-    # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
-    if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xlinker --allow-multiple-definition")
-      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Xlinker --allow-multiple-definition")
-    endif()
-  endif()
-
-  # DebugKMM, Debugfull, Profile
-  set(CMAKE_CXX_FLAGS_DEBUGKMM
-    "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
-  set(CMAKE_CXX_FLAGS_DEBUGFULL
-    "-g3 -fno-inline")
-  set(CMAKE_CXX_FLAGS_PROFILE
-    "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
-
-  # be pedantic about undefined symbols when linking shared libraries
-  if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
-  endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:Multiple")
 endif()
 
-# preprocessor definitions in case this is a debug build
-set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
+# Set compiler flags
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wlogical-op -Wnull-dereference -Wshadow -Wmisleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2  -fno-common")
+
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wcast-qual -Wformat=2 -Wunreachable-code -fno-common")
+
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Wall")
+endif()
+
+
+# IDEA: Set on a per target base
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
+    if(CMAKE_BUILD_TYPE MATCHES "DebugKMM" OR CMAKE_BUILD_TYPE MATCHES "Debugfull" OR CMAKE_BUILD_TYPE MATCHES "Profile")
+        # DebugKMM, Debugfull, Profile
+        set(CMAKE_CXX_FLAGS_DEBUGKMM
+            "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
+        set(CMAKE_CXX_FLAGS_DEBUGFULL
+            "-g3 -fno-inline")
+        set(CMAKE_CXX_FLAGS_PROFILE
+            "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
+
+        # preprocessor definitions in case this is a debug build
+        set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
+        set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
+    endif()
+endif()
 
 # and a variable we can use in the build environment to detect debug builds
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")

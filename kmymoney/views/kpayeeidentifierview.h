@@ -57,7 +57,7 @@ class payeeIdentifierDelegate : public StyledItemDelegateForwarder
   Q_OBJECT
 public:
   explicit payeeIdentifierDelegate(QObject* parent = 0);
-  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const;
+  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const override;
 };
 
 #endif // KPAYEEIDENTIFIERVIEW_H

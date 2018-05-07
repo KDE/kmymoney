@@ -35,12 +35,12 @@ class KMM_WIDGETS_EXPORT StyledItemDelegateForwarder : public QAbstractItemDeleg
 
 public:
   explicit StyledItemDelegateForwarder(QObject* parent = 0);
-  virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual void setEditorData(QWidget* editor, const QModelIndex& index) const;
-  virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-  virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
+  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
   /**
    * @brief Return delegate for a given index

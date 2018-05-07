@@ -24,12 +24,11 @@
 #ifndef MYMONEYTRACER_H
 #define MYMONEYTRACER_H
 
-#include <config-kmymoney.h>
 #include "kmm_mymoney_export.h"
 
 #include "qglobal.h"
 
-#ifdef IS_GNU
+#ifdef __GNUC__
 #  define KMM_PRINTF_FORMAT(x, y) __attribute__((format(__printf__, x, y)))
 #else
 #  define KMM_PRINTF_FORMAT(x, y) /*NOTHING*/
