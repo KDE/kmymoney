@@ -50,8 +50,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
-// TODO: port KF5 (needed for payeeidentifier plugin)
-//#include <KServiceTypeTrader>
+#include <KServiceTypeTrader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -2643,8 +2642,6 @@ public:
   bool setupStoragePlugin(QString iid)
   {
     Q_UNUSED(iid)
-    return false;
-    #if 0
     Q_Q(MyMoneyStorageSql);
     // setupDatabase has to be called every time because this simple technique to check if was updated already
     // does not work if a user opens another file
@@ -2653,8 +2650,6 @@ public:
       return false;
 
     QString errorMsg;
-    // TODO: port KF5 (needed for payeeidentifier plugin)
-
     KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
       QLatin1String("KMyMoney/sqlStoragePlugin"),
       QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(iid.replace(QLatin1Char('\''), QLatin1String("\\'"))),
@@ -2673,7 +2668,6 @@ public:
     }
 
     throw MYMONEYEXCEPTION(QString("Could not install sqlStoragePlugin '%1' in database.").arg(iid));
-#endif
   }
 
   void insertStorableObject(const databaseStoreableObject& obj, const QString& id)

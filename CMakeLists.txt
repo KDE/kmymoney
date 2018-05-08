@@ -139,7 +139,7 @@ add_feature_info("Online job outbox view" ENABLE_ONLINEJOBOUTBOXVIEW "It adds ou
 cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
 
-add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database (note: no encryption yet supported, no iban yet supported).")
+add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database (note: no encryption yet supported).")
 
 # check for optional QWebEngine
 option(ENABLE_WEBENGINE "Enable QWebEngine" OFF)
