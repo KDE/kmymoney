@@ -173,12 +173,8 @@ void SQLStorage::slotOpenDatabase()
       }
       newurl.setQuery(query);
 
-      if (query.queryItemValue(key) == QLatin1String("QSQLITE")) {
-        newurl.setUserInfo(QString());
-        newurl.setHost(QString());
-      }
       // check if a password is needed. it may be if the URL came from the last/recent file list
-      QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, newurl);
+      dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, newurl);
       if (!dialog->checkDrivers()) {
         delete dialog;
         return;

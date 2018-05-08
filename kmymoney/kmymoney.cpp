@@ -970,38 +970,53 @@ public:
 
     // actually, url should be the parameter to this function
     // but for now, this would involve too many changes
-    bool rc = true;
+    auto rc = true;
     try {
       if (! url.isValid()) {
         throw MYMONEYEXCEPTION(i18n("Malformed URL '%1'", url.url()));
       }
 
-      if (url.isLocalFile()) {
-        filename = url.toLocalFile();
-        try {
-          const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
-          if (nbak) {
-            KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
-          }
-          saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
-        } catch (const MyMoneyException &) {
-          throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
-        }
-      } else {
-        QTemporaryFile tmpfile;
-        tmpfile.open(); // to obtain the name
-        tmpfile.close();
-        saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
+      if (url.scheme() == QLatin1String("sql")) {
+          rc = false;
+          auto pluginFound = false;
+          for (const auto& plugin : m_plugins.storage) {
+              if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
+                  rc = plugin->save(url);
+                  pluginFound = true;
+                  break;
+                }
+            }
 
-        Q_CONSTEXPR int permission = -1;
-        QFile file(tmpfile.fileName());
-        file.open(QIODevice::ReadOnly);
-        KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
-        if (!putjob->exec()) {
-          throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+          if(!pluginFound)
+            throw MYMONEYEXCEPTION(i18n("Couldn't find suitable plugin to save your storage."));
+
+        } else if (url.isLocalFile()) {
+          filename = url.toLocalFile();
+          try {
+            const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
+            if (nbak) {
+                KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
+              }
+            saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
+          } catch (const MyMoneyException &) {
+            throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+          }
+        } else {
+
+          QTemporaryFile tmpfile;
+          tmpfile.open(); // to obtain the name
+          tmpfile.close();
+          saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
+
+          Q_CONSTEXPR int permission = -1;
+          QFile file(tmpfile.fileName());
+          file.open(QIODevice::ReadOnly);
+          KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+          if (!putjob->exec()) {
+              throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+            }
+          file.close();
         }
-        file.close();
-      }
       m_fileType = KMyMoneyApp::KmmXML;
     } catch (const MyMoneyException &e) {
       KMessageBox::error(q, e.what());
