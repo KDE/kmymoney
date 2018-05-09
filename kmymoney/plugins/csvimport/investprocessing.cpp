@@ -1799,7 +1799,9 @@ void InvestProcessing::slotImportClicked()
   m_securityName = m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentText();
   if (m_securityName.isEmpty()) {
     m_securityName = m_csvDialog->m_symbolTableDlg->m_securityName;
-  } else if (m_securityName.isEmpty()) {
+  }
+
+  if (m_securityName.isEmpty()) {
     m_securityName = m_trInvestData.security;
   }
 
