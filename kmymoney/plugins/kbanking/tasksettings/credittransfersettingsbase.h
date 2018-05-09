@@ -43,53 +43,53 @@ public:
       {}
 
   // Limits getter
-  int purposeMaxLines() const {
+  int purposeMaxLines() const final override {
     return _purposeMaxLines;
   }
-  int purposeLineLength() const {
+  int purposeLineLength() const final override {
     return _purposeLineLength;
   }
-  int purposeMinLength() const {
+  int purposeMinLength() const final override {
     return _purposeMinLength;
   }
 
-  int recipientNameLineLength() const {
+  int recipientNameLineLength() const final override {
     return _recipientNameLength;
   }
-  int recipientNameMinLength() const {
+  int recipientNameMinLength() const final override {
     return _recipientNameMinLength;
   }
 
-  int payeeNameLineLength() const {
+  int payeeNameLineLength() const final override {
     return _payeeNameLength;
   }
-  int payeeNameMinLength() const {
+  int payeeNameMinLength() const final override {
     return _payeeNameMinLength;
   }
 
-  QString allowedChars() const {
+  QString allowedChars() const final override {
     return _allowedChars;
   }
 
-  virtual int endToEndReferenceLength() const {
+  virtual int endToEndReferenceLength() const final override {
     return m_endToEndReferenceLength;
   }
 
   // Checker
-  bool checkPurposeCharset(const QString& string) const;
-  bool checkPurposeLineLength(const QString& purpose) const;
-  validators::lengthStatus checkPurposeLength(const QString& purpose) const;
-  bool checkPurposeMaxLines(const QString& purpose) const;
+  bool checkPurposeCharset(const QString& string) const final override;
+  bool checkPurposeLineLength(const QString& purpose) const final override;
+  validators::lengthStatus checkPurposeLength(const QString& purpose) const final override;
+  bool checkPurposeMaxLines(const QString& purpose) const final override;
 
-  validators::lengthStatus checkNameLength(const QString& name) const;
-  bool checkNameCharset(const QString& name) const;
+  validators::lengthStatus checkNameLength(const QString& name) const final override;
+  bool checkNameCharset(const QString& name) const final override;
 
-  validators::lengthStatus checkRecipientLength(const QString& name) const;
-  bool checkRecipientCharset(const QString& name) const;
+  validators::lengthStatus checkRecipientLength(const QString& name) const final override;
+  bool checkRecipientCharset(const QString& name) const final override;
 
-  virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
+  virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const final override;
 
-  virtual bool checkRecipientBic(const QString& bic) const;
+  virtual bool checkRecipientBic(const QString& bic) const final override;
 
   /**
    * @brief Checks if the bic is mandatory for the given iban
@@ -99,7 +99,7 @@ public:
    *
    * There is no need to format fromIban or toIban in any way (it is trimmed automatically).
    */
-  virtual bool isBicMandatory(const QString& fromIban, const QString& toIban) const;
+  virtual bool isBicMandatory(const QString& fromIban, const QString& toIban) const final override;
 
   validators::lengthStatus checkRecipientAccountNumber(const QString& accountNumber) const;
 

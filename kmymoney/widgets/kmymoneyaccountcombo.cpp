@@ -158,9 +158,9 @@ void KMyMoneyAccountCombo::collapseAll()
 
 void KMyMoneyAccountCombo::activated()
 {
-  QVariant data = view()->currentIndex().data((int)eAccountsModel::Role::ID);
-  if (data.isValid()) {
-    setSelected(data.toString());
+  auto variant = view()->currentIndex().data((int)eAccountsModel::Role::ID);
+  if (variant.isValid()) {
+    setSelected(variant.toString());
   }
 }
 

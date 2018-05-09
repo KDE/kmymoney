@@ -141,7 +141,7 @@ class MyDoubleValidator : public QDoubleValidator
 public:
   explicit MyDoubleValidator(int decimals, QObject * parent = 0);
 
-  QValidator::State validate(QString &s, int &i) const;
+  QValidator::State validate(QString &s, int &i) const final override;
 };
 #endif /* REPORTTABIMPL_H */
 

@@ -90,7 +90,7 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const final override;
 
 };
 

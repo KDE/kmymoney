@@ -47,7 +47,7 @@ public:
    * Overload the initializePage function to set widgets based on
    * the inputs from previous pages.
    */
-  void initializePage();
+  void initializePage() final override;
 
 private:
   Ui::RecordPaymentWizardPage *ui;

@@ -41,13 +41,13 @@ class SummaryEditWizardPage : public QWizardPage
   Q_OBJECT
 public:
   explicit SummaryEditWizardPage(QWidget *parent = nullptr);
-  ~SummaryEditWizardPage();
+  ~SummaryEditWizardPage() override;
 
   /**
    * Overload the initializePage function to set widgets based on
    * the inputs from previous pages.
    */
-  void initializePage();
+  void initializePage() final override;
 
 private:
   Ui::SummaryEditWizardPage *ui;

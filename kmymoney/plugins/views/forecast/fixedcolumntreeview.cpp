@@ -48,7 +48,7 @@ public:
       m_sourceView(sourceView) {
   }
 
-  virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
+  virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const final override {
     QStyleOptionViewItem optV4 = option;
     initStyleOption(&optV4, index);
     // the fixed column's position has always this value
@@ -66,32 +66,32 @@ public:
 
 struct FixedColumnTreeView::Private {
   Private(FixedColumnTreeView *pub, QTreeView *parent) :
-      pub(pub),
-      parent(parent) {
+      m_pub(pub),
+      m_parent(parent) {
   }
 
   void syncExpanded(const QModelIndex& parentIndex = QModelIndex()) {
-    const int rows = parent->model()->rowCount(parentIndex);
+    const int rows = m_parent->model()->rowCount(parentIndex);
     for (auto i = 0; i < rows; ++i) {
-      const QModelIndex &index = parent->model()->index(i, 0, parentIndex);
-      if (parent->isExpanded(index)) {
-        pub->expand(index);
+      const QModelIndex &index = m_parent->model()->index(i, 0, parentIndex);
+      if (m_parent->isExpanded(index)) {
+        m_pub->expand(index);
         syncExpanded(index);
       }
     }
   }
 
   void syncModels() {
-    if (pub->model() != parent->model()) {
+    if (m_pub->model() != m_parent->model()) {
       // set the model
-      pub->setModel(parent->model());
+      m_pub->setModel(m_parent->model());
 
       // hide all but the first column
-      for (int col = 1; col < pub->model()->columnCount(); ++col)
-        pub->setColumnHidden(col, true);
+      for (int col = 1; col < m_pub->model()->columnCount(); ++col)
+        m_pub->setColumnHidden(col, true);
 
       // set the selection model
-      pub->setSelectionModel(parent->selectionModel());
+      m_pub->setSelectionModel(m_parent->selectionModel());
 
       // when the model has changed we need to sync the expanded state of the views
       syncExpanded();
@@ -100,20 +100,20 @@ struct FixedColumnTreeView::Private {
 
   void syncProperties() {
     //pub->setAllColumnsShowFocus(parent->allColumnsShowFocus());
-    pub->setAlternatingRowColors(parent->alternatingRowColors());
-    pub->setIconSize(parent->iconSize());
-    pub->setSortingEnabled(parent->isSortingEnabled());
-    pub->setUniformRowHeights(pub->uniformRowHeights());
+    m_pub->setAlternatingRowColors(m_parent->alternatingRowColors());
+    m_pub->setIconSize(m_parent->iconSize());
+    m_pub->setSortingEnabled(m_parent->isSortingEnabled());
+    m_pub->setUniformRowHeights(m_pub->uniformRowHeights());
   }
 
   void syncGeometry() {
     // update the geometry of the fixed column view to match that of the source model's geometry
-    pub->setGeometry(parent->frameWidth(), parent->frameWidth(), parent->columnWidth(0),
-                     parent->viewport()->height() + (parent->header()->isVisible() ? parent->header()->height() : 0));
+    m_pub->setGeometry(m_parent->frameWidth(), m_parent->frameWidth(), m_parent->columnWidth(0),
+                     m_parent->viewport()->height() + (m_parent->header()->isVisible() ? m_parent->header()->height() : 0));
   }
 
-  FixedColumnTreeView *pub;
-  QTreeView *parent;
+  FixedColumnTreeView *m_pub;
+  QTreeView *m_parent;
 };
 
 FixedColumnTreeView::FixedColumnTreeView(QTreeView *parent)
@@ -128,53 +128,53 @@ FixedColumnTreeView::FixedColumnTreeView(QTreeView *parent)
   setFocusProxy(parent);
 
   // perform the special selection and hover drawing even when the fixed column view has no focus
-  setItemDelegate(new FixedColumnDelegate(this, d->parent));
+  setItemDelegate(new FixedColumnDelegate(this, d->m_parent));
 
   // stack the source view under the fixed column view
-  d->parent->viewport()->stackUnder(this);
+  d->m_parent->viewport()->stackUnder(this);
 
   // the resize mode of the fixed view needs to be fixed to allow a user resize only from the parent tree
   header()->sectionResizeMode(QHeaderView::Fixed);
 
   // connect the scroll bars to keep the two views in sync
-  connect(verticalScrollBar(), &QAbstractSlider::valueChanged, d->parent->verticalScrollBar(), &QAbstractSlider::setValue);
-  connect(d->parent->verticalScrollBar(), &QAbstractSlider::valueChanged, verticalScrollBar(), &QAbstractSlider::setValue);
+  connect(verticalScrollBar(), &QAbstractSlider::valueChanged, d->m_parent->verticalScrollBar(), &QAbstractSlider::setValue);
+  connect(d->m_parent->verticalScrollBar(), &QAbstractSlider::valueChanged, verticalScrollBar(), &QAbstractSlider::setValue);
 
   // keep the expanded/collapsed states synchronized between the two views
-  connect(d->parent, &QTreeView::expanded, this, &FixedColumnTreeView::onExpanded);
+  connect(d->m_parent, &QTreeView::expanded, this, &FixedColumnTreeView::onExpanded);
   connect(this, &QTreeView::expanded, this, &FixedColumnTreeView::onExpanded);
-  connect(d->parent, &QTreeView::collapsed, this, &FixedColumnTreeView::onCollapsed);
+  connect(d->m_parent, &QTreeView::collapsed, this, &FixedColumnTreeView::onCollapsed);
   connect(this, &QTreeView::collapsed, this, &FixedColumnTreeView::onCollapsed);
 
   // keep the sort indicators synchronized between the two views
-  connect(d->parent->header(), &QHeaderView::sortIndicatorChanged, this, &FixedColumnTreeView::updateSortIndicator);
+  connect(d->m_parent->header(), &QHeaderView::sortIndicatorChanged, this, &FixedColumnTreeView::updateSortIndicator);
   connect(header(), &QHeaderView::sortIndicatorChanged, this, &FixedColumnTreeView::updateSortIndicator);
 
   // forward all signals
-  connect(this, &QAbstractItemView::activated, d->parent, &QAbstractItemView::activated);
-  connect(this, &QAbstractItemView::clicked, d->parent, &QAbstractItemView::clicked);
-  connect(this, &QAbstractItemView::doubleClicked, d->parent, &QAbstractItemView::doubleClicked);
-  connect(this, &QAbstractItemView::entered, d->parent, &QAbstractItemView::entered);
-  connect(this, &QAbstractItemView::pressed, d->parent, &QAbstractItemView::pressed);
-  connect(this, &QAbstractItemView::viewportEntered, d->parent, &QAbstractItemView::viewportEntered);
+  connect(this, &QAbstractItemView::activated, d->m_parent, &QAbstractItemView::activated);
+  connect(this, &QAbstractItemView::clicked, d->m_parent, &QAbstractItemView::clicked);
+  connect(this, &QAbstractItemView::doubleClicked, d->m_parent, &QAbstractItemView::doubleClicked);
+  connect(this, &QAbstractItemView::entered, d->m_parent, &QAbstractItemView::entered);
+  connect(this, &QAbstractItemView::pressed, d->m_parent, &QAbstractItemView::pressed);
+  connect(this, &QAbstractItemView::viewportEntered, d->m_parent, &QAbstractItemView::viewportEntered);
 
   // handle the resize of the first column in the source view
-  connect(d->parent->header(), &QHeaderView::sectionResized, this, &FixedColumnTreeView::updateSectionWidth);
+  connect(d->m_parent->header(), &QHeaderView::sectionResized, this, &FixedColumnTreeView::updateSectionWidth);
 
   // forward right click to the source list
-  setContextMenuPolicy(d->parent->contextMenuPolicy());
+  setContextMenuPolicy(d->m_parent->contextMenuPolicy());
   if (contextMenuPolicy() == Qt::CustomContextMenu) {
-    connect(this, &QWidget::customContextMenuRequested, d->parent, &QWidget::customContextMenuRequested);
+    connect(this, &QWidget::customContextMenuRequested, d->m_parent, &QWidget::customContextMenuRequested);
   }
 
   // enable hover indicator synchronization between the two views
-  d->parent->viewport()->installEventFilter(this);
-  d->parent->viewport()->setMouseTracking(true);
+  d->m_parent->viewport()->installEventFilter(this);
+  d->m_parent->viewport()->setMouseTracking(true);
   viewport()->setMouseTracking(true);
 
   d->syncProperties();
 
-  if (d->parent->isVisible()) {
+  if (d->m_parent->isVisible()) {
     // the source view is already visible so show the frozen column also
     d->syncModels();
     show();
@@ -195,22 +195,22 @@ void FixedColumnTreeView::sourceModelUpdated()
 
 void FixedColumnTreeView::onExpanded(const QModelIndex& index)
 {
-  if (sender() == this && !d->parent->isExpanded(index)) {
-    d->parent->expand(index);
+  if (sender() == this && !d->m_parent->isExpanded(index)) {
+    d->m_parent->expand(index);
   }
 
-  if (sender() == d->parent && !isExpanded(index)) {
+  if (sender() == d->m_parent && !isExpanded(index)) {
     expand(index);
   }
 }
 
 void FixedColumnTreeView::onCollapsed(const QModelIndex& index)
 {
-  if (sender() == this && d->parent->isExpanded(index)) {
-    d->parent->collapse(index);
+  if (sender() == this && d->m_parent->isExpanded(index)) {
+    d->m_parent->collapse(index);
   }
 
-  if (sender() == d->parent && isExpanded(index)) {
+  if (sender() == d->m_parent && isExpanded(index)) {
     collapse(index);
   }
 }
@@ -220,7 +220,7 @@ bool FixedColumnTreeView::viewportEvent(QEvent *event)
   if (underMouse()) {
     // forward mouse move and hover leave events to the source list
     if (event->type() == QEvent::MouseMove || event->type() == QEvent::HoverLeave) {
-      QApplication::sendEvent(d->parent->viewport(), event);
+      QApplication::sendEvent(d->m_parent->viewport(), event);
     }
   }
   return QTreeView::viewportEvent(event);
@@ -228,10 +228,10 @@ bool FixedColumnTreeView::viewportEvent(QEvent *event)
 
 bool FixedColumnTreeView::eventFilter(QObject *object, QEvent *event)
 {
-  if (object == d->parent->viewport()) {
+  if (object == d->m_parent->viewport()) {
     switch (event->type()) {
       case QEvent::MouseMove:
-        if (!underMouse() && d->parent->underMouse()) {
+        if (!underMouse() && d->m_parent->underMouse()) {
           QMouseEvent *me = static_cast<QMouseEvent*>(event);
           // translate the position of the event but don't send buttons or modifiers because we only need the movement for the hover
           QMouseEvent translatedMouseEvent(me->type(), QPoint(width() - 2, me->pos().y()), Qt::NoButton, Qt::MouseButtons(), Qt::KeyboardModifiers());
@@ -239,7 +239,7 @@ bool FixedColumnTreeView::eventFilter(QObject *object, QEvent *event)
         }
         break;
       case QEvent::HoverLeave:
-        if (!underMouse() && d->parent->underMouse()) {
+        if (!underMouse() && d->m_parent->underMouse()) {
           QApplication::sendEvent(viewport(), event);
         }
         break;
@@ -260,10 +260,10 @@ bool FixedColumnTreeView::eventFilter(QObject *object, QEvent *event)
 void FixedColumnTreeView::updateSectionWidth(int logicalIndex, int, int newSize)
 {
   if (logicalIndex == 0) {
-    const int maxFirstColumnWidth = d->parent->width() * 0.8;
+    const int maxFirstColumnWidth = d->m_parent->width() * 0.8;
     if (newSize > maxFirstColumnWidth) {
       // limit the size of the first column so that it will not become larger than the view's width
-      d->parent->setColumnWidth(logicalIndex, maxFirstColumnWidth);
+      d->m_parent->setColumnWidth(logicalIndex, maxFirstColumnWidth);
     } else {
       // update the size of the fixed column
       setColumnWidth(0, newSize);
@@ -275,11 +275,11 @@ void FixedColumnTreeView::updateSectionWidth(int logicalIndex, int, int newSize)
 
 void FixedColumnTreeView::updateSortIndicator(int logicalIndex, Qt::SortOrder order)
 {
-  if (sender() == header() && d->parent->header()->sortIndicatorSection() != logicalIndex) {
-    d->parent->header()->setSortIndicator(logicalIndex, order);
+  if (sender() == header() && d->m_parent->header()->sortIndicatorSection() != logicalIndex) {
+    d->m_parent->header()->setSortIndicator(logicalIndex, order);
   }
 
-  if (sender() == d->parent->header() && header()->sortIndicatorSection() != logicalIndex) {
+  if (sender() == d->m_parent->header() && header()->sortIndicatorSection() != logicalIndex) {
     header()->setSortIndicator(logicalIndex, order);
   }
 }

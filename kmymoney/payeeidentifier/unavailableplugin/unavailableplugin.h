@@ -39,10 +39,10 @@ public:
   PAYEEIDENTIFIER_IID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
 
   payeeIdentifierUnavailable();
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
-  virtual payeeIdentifierUnavailable* createFromXml(const QDomElement& element) const;
-  virtual bool isValid() const;
-  virtual bool operator==(const payeeIdentifierData& other) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
+  payeeIdentifierUnavailable* createFromXml(const QDomElement& element) const final override;
+  bool isValid() const final override;
+  bool operator==(const payeeIdentifierData& other) const final override;
   bool operator==(const payeeIdentifierUnavailable& other) const;
 
   friend class payeeIdentifierLoader;
@@ -55,15 +55,15 @@ public:
    * For SQL databases this plugin is not needed nor used. So these functions
    * do not have a real implementation.
    */
-  virtual QString storagePluginIid() const;
-  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const;
+  QString storagePluginIid() const final override;
+  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
+  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
+  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
+  payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const final override;
   /** @} */
 
 protected:
-  virtual payeeIdentifierUnavailable* clone() const;
+  payeeIdentifierUnavailable* clone() const final override;
 
 private:
   QDomElement m_data;

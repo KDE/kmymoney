@@ -110,7 +110,7 @@ public:
     */
   QDate initialPaymentDate() const;
 
-  bool validateCurrentPage();
+  bool validateCurrentPage() override;
 
   const MyMoneyAccountLoan account() const;
 
@@ -120,7 +120,7 @@ public:
    *
    * @return id of the next page or -1 if there is no next page
    */
-  int nextId() const;
+  int nextId() const final override;
 
 protected Q_SLOTS:
 

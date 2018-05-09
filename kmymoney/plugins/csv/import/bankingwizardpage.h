@@ -56,9 +56,9 @@ public:
   void                makeQIF(const MyMoneyStatement &st, const QString &outFileName);
 
 private:
-  void                initializePage();
-  bool                isComplete() const;
-  int                 nextId() const;
+  void initializePage() final override;
+  bool isComplete() const final override;
+  int nextId() const final override;
 
   bool                validateMemoComboBox();
   void                resetComboBox(const Column comboBox);

@@ -80,17 +80,17 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
   if (!index.isValid())
     return QVariant();
 
-  const bool isPayeeIdentifier = index.parent().isValid();
+  const auto isPayeeIdentifierValid = index.parent().isValid();
   if (role == payeeIdentifierModel::isPayeeIdentifier)
-    return isPayeeIdentifier;
+    return isPayeeIdentifierValid;
 
-  const MyMoneyPayee payee = (isPayeeIdentifier) ? payeeByIndex(index.parent()) : payeeByIndex(index);
+  const MyMoneyPayee payee = (isPayeeIdentifierValid) ? payeeByIndex(index.parent()) : payeeByIndex(index);
 
 
-  if (role == payeeName || (!isPayeeIdentifier && role == Qt::DisplayRole)) {
+  if (role == payeeName || (!isPayeeIdentifierValid && role == Qt::DisplayRole)) {
     // Return data for MyMoneyPayee
     return payee.name();
-  } else if (isPayeeIdentifier) {
+  } else if (isPayeeIdentifierValid) {
     // Return data for payeeIdentifier
     if (index.row() >= 0 && static_cast<unsigned int>(index.row()) < payee.payeeIdentifierCount()) {
       ::payeeIdentifier ident = payee.payeeIdentifier(index.row());

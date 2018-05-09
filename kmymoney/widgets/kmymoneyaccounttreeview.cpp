@@ -219,15 +219,15 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
 {
   const auto index = model()->index(currentIndex().row(), (int)eAccountsModel::Column::Account, currentIndex().parent());
   if (index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    const auto data = model()->data(index, (int)eAccountsModel::Role::Account);
-    if (data.isValid()) {
-      if (data.canConvert<MyMoneyAccount>()) {
-        emit selectByObject(data.value<MyMoneyAccount>(), eView::Intent::None);
-        emit selectByObject(data.value<MyMoneyAccount>(), eView::Intent::OpenContextMenu);
+    const auto dataVariant = model()->data(index, (int)eAccountsModel::Role::Account);
+    if (dataVariant.isValid()) {
+      if (dataVariant.canConvert<MyMoneyAccount>()) {
+        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::None);
+        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::OpenContextMenu);
       }
-      if (data.canConvert<MyMoneyInstitution>()) {
-        emit selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::None);
-        emit selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::OpenContextMenu);
+      if (dataVariant.canConvert<MyMoneyInstitution>()) {
+        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::None);
+        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::OpenContextMenu);
       }
     }
   }
@@ -239,13 +239,13 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
   if (!selected.empty()) {
     auto indexes = selected.front().indexes();
     if (!indexes.empty()) {
-      const auto data = model()->data(model()->index(indexes.front().row(), (int)eAccountsModel::Column::Account, indexes.front().parent()), (int)eAccountsModel::Role::Account);
-      if (data.isValid()) {
-        if (data.canConvert<MyMoneyAccount>())
-          emit selectByObject(data.value<MyMoneyAccount>(), eView::Intent::None);
+      const auto dataVariant = model()->data(model()->index(indexes.front().row(), (int)eAccountsModel::Column::Account, indexes.front().parent()), (int)eAccountsModel::Role::Account);
+      if (dataVariant.isValid()) {
+        if (dataVariant.canConvert<MyMoneyAccount>())
+          emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::None);
 
-        if (data.canConvert<MyMoneyInstitution>())
-          emit selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::None);
+        if (dataVariant.canConvert<MyMoneyInstitution>())
+          emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::None);
 
         // an object was successfully selected
         return;

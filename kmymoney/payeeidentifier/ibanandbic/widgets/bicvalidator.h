@@ -31,7 +31,7 @@ class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT bicValidator : public QValidator
 
 public:
   explicit bicValidator(QObject* parent = 0);
-  virtual QValidator::State validate(QString& , int&) const;
+  QValidator::State validate(QString& , int&) const final override;
 
   static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };

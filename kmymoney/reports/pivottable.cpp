@@ -300,9 +300,9 @@ void PivotTable::init()
 
           //if the loan split is not included in the report, update the balance for the next occurrence
           if (!m_config.includes(splitAccount)) {
-            foreach (const auto split, tx.splits()) {
-              if (split.isAmortizationSplit() && split.accountId() == splitAccount.id())
-                loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + split.shares();
+            foreach (const auto txsplit, tx.splits()) {
+              if (txsplit.isAmortizationSplit() && txsplit.accountId() == splitAccount.id())
+                loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + txsplit.shares();
             }
           }
         }
@@ -1352,7 +1352,7 @@ QString PivotTable::renderCSV() const
 
   // Row Type Header
   if (m_rowTypeList.size() > 1) {
-    auto column = 0;
+    column = 0;
     while (column < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString(",%1").arg(m_columnTypeHeaderList[i]);
@@ -1402,7 +1402,7 @@ QString PivotTable::renderCSV() const
         //
 
         QString rowdata;
-        auto column = 0;
+        column = 0;
 
         bool isUsed = false;
         for (int i = 0; i < m_rowTypeList.size(); ++i)
@@ -1506,7 +1506,7 @@ QString PivotTable::renderCSV() const
 
       // Finish the row started above, unless told not to
       if (finishrow) {
-        auto column = 0;
+        column = 0;
 
         for (int i = 0; i < m_rowTypeList.size(); ++i)
           isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][0].isUsed();
@@ -1540,7 +1540,7 @@ QString PivotTable::renderCSV() const
 
     if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
       result += QString("%1 %2").arg(i18nc("Total balance", "Total")).arg(it_outergroup.key());
-      auto column = 0;
+      column = 0;
       while (column < m_numColumns) {
         for (int i = 0; i < m_rowTypeList.size(); ++i)
           result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(QString(), precision, false));
@@ -1623,7 +1623,7 @@ QString PivotTable::renderHTML() const
   if (span > 1) {
     result += "<tr><td></td>";
 
-    auto column = 0;
+    column = 0;
     while (column < m_numColumns) {
       QString lb;
       if (column != 0)
@@ -1705,7 +1705,7 @@ QString PivotTable::renderHTML() const
             //
 
             QString rowdata;
-            auto column = 0;
+            column = 0;
             pricePrecision = 0; // new row => new account => new precision
             currencyPrecision = 0;
             bool isUsed = it_row.value()[eActual][0].isUsed();
@@ -1826,7 +1826,7 @@ QString PivotTable::renderHTML() const
 
           // Finish the row started above, unless told not to
           if (finishrow) {
-            auto column = 0;
+            column = 0;
             isUsed |= (*it_innergroup).m_total[eActual][0].isUsed();
             while (column < m_numColumns) {
               QString lb;
@@ -1870,7 +1870,7 @@ QString PivotTable::renderHTML() const
 
       if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
         result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18nc("Total balance", "Total")).arg((*it_outergroup).m_displayName);
-        auto column = 0;
+        column = 0;
         while (column < m_numColumns) {
           QString lb;
           if (column != 0)

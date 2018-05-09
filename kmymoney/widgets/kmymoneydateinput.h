@@ -50,16 +50,16 @@ namespace KMyMoney {
     /** if the date was cleared (a state which is not supported by QDateEdit)
       * make sure that a date can be entered again
       */
-    virtual void keyPressEvent(QKeyEvent* k);
+    void keyPressEvent(QKeyEvent* k) final override;
 
     /** reimplemented for internal reasons */
-    virtual bool event(QEvent* e);
+    bool event(QEvent* e) final override;
 
     /** reimplemented for internal reasons */
-    virtual bool focusNextPrevChild(bool next);
+    bool focusNextPrevChild(bool next) final override;
 
     /** reimplemented for internal reasons */
-    virtual void focusInEvent(QFocusEvent *event);
+    void focusInEvent(QFocusEvent *event) final override;
 
   };
 }; // namespace

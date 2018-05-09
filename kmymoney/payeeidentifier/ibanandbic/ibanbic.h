@@ -51,9 +51,9 @@ public:
   ibanBic();
   ibanBic(const ibanBic& other);
 
-  ibanBic* clone() const;
-  ibanBic* createFromXml(const QDomElement& element) const;
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  ibanBic* clone() const final override;
+  ibanBic* createFromXml(const QDomElement& element) const final override;
+  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
   /**
    * @brief Set an owner name for this account
@@ -141,9 +141,9 @@ public:
     return institutionNameByBic(bic());
   }
 
-  virtual bool operator==(const payeeIdentifierData& other) const;
+  bool operator==(const payeeIdentifierData& other) const final override;
   bool operator==(const ibanBic& other) const;
-  virtual bool isValid() const;
+  bool isValid() const final override;
 
   /**
    * @brief Extends a bic to 11 characters
@@ -231,12 +231,12 @@ public:
 
   static const int ibanMaxLength;
 
-  QString storagePluginIid() const {
+  QString storagePluginIid() const final override {
     return QLatin1String("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin");
   }
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const;
+  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const final override;
+  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const final override;
+  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const final override;
 
 private:
   /**
@@ -260,7 +260,7 @@ private:
   static ::ibanBicData* m_ibanBicData;
 
   bool writeQuery(QSqlQuery& query, const QString& id) const;
-  payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const;
+  payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const final override;
 
   static QString canonizeBic(const QString& bic);
 };

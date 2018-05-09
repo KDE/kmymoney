@@ -35,8 +35,8 @@ class unavailableTask : public onlineTask
 {
 public:
   ONLINETASK_META(unavailableTask, "org.kmymoney.onlineTask.unavailableTask");
-  virtual bool isValid() const;
-  virtual QString jobTypeName() const;
+  bool isValid() const override;
+  QString jobTypeName() const override;
 
   /**
    * @name SqlMethods
@@ -44,19 +44,19 @@ public:
    * For sql databases this plugin is not needed nor used. So these functions
    * do not have a real implementation.
    */
-  virtual QString storagePluginIid() const;
-  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const;
+  QString storagePluginIid() const override;
+  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const override;
+  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const override;
+  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const override;
+  onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const override;
   /** @} */
 
 protected:
-  virtual QString responsibleAccount() const;
-  virtual unavailableTask* createFromXml(const QDomElement& element) const;
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
-  virtual bool hasReferenceTo(const QString& id) const;
-  virtual unavailableTask* clone() const;
+  QString responsibleAccount() const override;
+  unavailableTask* createFromXml(const QDomElement& element) const override;
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
+  bool hasReferenceTo(const QString& id) const override;
+  unavailableTask* clone() const override;
 
 private:
   explicit unavailableTask(const QDomElement& element);

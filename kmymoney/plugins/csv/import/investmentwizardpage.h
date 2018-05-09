@@ -66,10 +66,10 @@ public:
   bool                validateActionType();
 
 private:
-  void                initializePage();
-  bool                isComplete() const;
-  bool                validatePage();
-  void                cleanupPage();
+  void initializePage() final override;
+  bool isComplete() const final override;
+  bool validatePage() final override;
+  void cleanupPage() final override;
 
   void                clearFeeCol();
 

@@ -49,7 +49,7 @@ public:
       : StyledItemDelegateForwarder(parent) {}
 
 protected:
-  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const {
+  QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const final override {
     static QPointer<QAbstractItemDelegate> defaultDelegate;
     static QPointer<QAbstractItemDelegate> ibanBicDelegate;
 
@@ -104,7 +104,7 @@ public:
   ibanBicFilterProxyModel(QObject* parent = 0)
       : QSortFilterProxyModel(parent) {}
 
-  virtual QVariant data(const QModelIndex &index, int role) const {
+  QVariant data(const QModelIndex &index, int role) const final override {
     if (role == payeeIban) {
       if (!index.isValid())
         return QVariant();
@@ -122,7 +122,7 @@ public:
     return QSortFilterProxyModel::data(index, role);
   }
 
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const {
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const final override {
     if (!source_parent.isValid())
       return true;
 

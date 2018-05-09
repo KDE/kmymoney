@@ -139,9 +139,9 @@ void KMyMoneyMVCCombo::setPlaceholderText(const QString& hint) const
 QString KMyMoneyMVCCombo::selectedItem() const
 {
   Q_D(const KMyMoneyMVCCombo);
-  QVariant data = itemData(currentIndex());
-  if (data.isValid())
-    d->m_id = data.toString();
+  auto dataVariant = itemData(currentIndex());
+  if (dataVariant.isValid())
+    d->m_id = dataVariant.toString();
   else
     d->m_id.clear();
   return d->m_id;
@@ -157,9 +157,9 @@ void KMyMoneyMVCCombo::setSelectedItem(const QString& id)
 void KMyMoneyMVCCombo::activated(int index)
 {
   Q_D(KMyMoneyMVCCombo);
-  QVariant data = itemData(index);
-  if (data.isValid()) {
-    d->m_id = data.toString();
+  auto dataVariant = itemData(index);
+  if (dataVariant.isValid()) {
+    d->m_id = dataVariant.toString();
     emit itemSelected(d->m_id);
   }
 }

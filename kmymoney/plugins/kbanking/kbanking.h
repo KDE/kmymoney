@@ -230,13 +230,13 @@ public:
   virtual bool interactiveImport();
 
 protected:
-  int init();
-  int fini();
+  int init() final override;
+  int fini() final override;
 
   bool askMapAccount(const MyMoneyAccount& acc);
   QString mappingId(const MyMoneyObject& object) const;
 
-  bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
+  bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags) final override;
   const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);
   void _xaToStatement(MyMoneyStatement &ks,
                       const MyMoneyAccount&,

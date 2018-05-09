@@ -675,12 +675,12 @@ int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, 
 
 void KReportChartView::setDataCell(int row, int column, const double value, QString tip)
 {
-  QMap<int, QVariant> data;
-  data.insert(Qt::DisplayRole, QVariant(value));
+  QMap<int, QVariant> cellMap;
+  cellMap.insert(Qt::DisplayRole, QVariant(value));
   if (!tip.isEmpty())
-    data.insert(Qt::ToolTipRole, QVariant(tip));
+    cellMap.insert(Qt::ToolTipRole, QVariant(tip));
   const QModelIndex index = m_model.index(row, column);
-  m_model.setItemData(index, data);
+  m_model.setItemData(index, cellMap);
 }
 
 /**

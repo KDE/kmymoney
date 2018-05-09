@@ -34,43 +34,43 @@ class onlineTaskDummy3 : public onlineTask, public onlineTaskInterface
 public:
   ONLINETASK_META(dummyTask, "org.kmymoney.onlinetasks.dummytask");
 
-  virtual bool isValid() const {
+  bool isValid() const final override {
     return true;
   }
-  virtual QString jobTypeName() const {
+  QString jobTypeName() const final override {
     return QLatin1String("Dummy credit transfer");
   }
-  virtual QString storagePluginIid() const {
+  QString storagePluginIid() const final override {
     return QString();
   }
-  virtual bool sqlModify(QSqlDatabase, const QString&) const {
+  bool sqlModify(QSqlDatabase, const QString&) const final override {
     return false;
   }
-  virtual bool sqlSave(QSqlDatabase, const QString&) const {
+  bool sqlSave(QSqlDatabase, const QString&) const final override {
     return false;
   }
-  virtual bool sqlRemove(QSqlDatabase, const QString&) const {
+  bool sqlRemove(QSqlDatabase, const QString&) const final override {
     return false;
   }
 
 protected:
 
-  virtual onlineTaskDummy3* clone() const {
+  onlineTaskDummy3* clone() const final override {
     return (new onlineTaskDummy3);
   }
-  virtual bool hasReferenceTo(const QString&) const {
+  bool hasReferenceTo(const QString&) const final override {
     return false;
   }
-  virtual void writeXML(QDomDocument&, QDomElement&) const {}
-  virtual onlineTaskDummy3* createFromXml(const QDomElement &) const {
+  void writeXML(QDomDocument&, QDomElement&) const final override {}
+  onlineTaskDummy3* createFromXml(const QDomElement &) const final override {
     return (new onlineTaskDummy3);
   }
-  virtual onlineTask* createFromSqlDatabase(QSqlDatabase, const QString&) const {
+  onlineTask* createFromSqlDatabase(QSqlDatabase, const QString&) const final override {
     return (new onlineTaskDummy3);
   }
-  virtual QString responsibleAccount() const {
+  QString responsibleAccount() const final override {
     return QString();
-  };
+  }
 };
 
 void onlineJobTypedTest::initTestCase()

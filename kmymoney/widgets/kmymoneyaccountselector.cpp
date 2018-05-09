@@ -312,11 +312,10 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
   QString currentId;
 
   if (selector->selectionMode() == QTreeWidget::SingleSelection) {
-    QStringList list;
-    selector->selectedItems(list);
-    if (!list.isEmpty())
-      currentId = list.first();
-  }
+      selector->selectedItems(list);
+      if (!list.isEmpty())
+        currentId = list.first();
+    }
   if (d->m_typeList.contains(Account::Type::Checkings)
       || d->m_typeList.contains(Account::Type::Savings)
       || d->m_typeList.contains(Account::Type::Cash)

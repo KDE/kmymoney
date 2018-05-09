@@ -2125,19 +2125,19 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
     // read the associated transaction
 //    m_payeeList.clear();
 
-    const MyMoneyDbTable& t = d->m_db.m_tables["kmmTransactions"];
+    const MyMoneyDbTable& transactionTable = d->m_db.m_tables["kmmTransactions"];
     QSqlQuery q2(*const_cast <MyMoneyStorageSql*>(this));
-    q2.prepare(t.selectAllString(false) + " WHERE id = :id;");
+    q2.prepare(transactionTable.selectAllString(false) + " WHERE id = :id;");
     q2.bindValue(":id", s.id());
     if (!q2.exec()) throw MYMONEYEXCEPTION(d->buildError(q2, Q_FUNC_INFO, QString("reading Scheduled Transaction"))); // krazy:exclude=crashy
     QSqlRecord rec = q2.record();
     if (!q2.next()) throw MYMONEYEXCEPTION(d->buildError(q2, Q_FUNC_INFO, QString("retrieving scheduled transaction")));
     MyMoneyTransaction tx(s.id(), MyMoneyTransaction());
-    tx.setPostDate(d->GETDATE(q2.value(t.fieldNumber("postDate")).toString()));
-    tx.setMemo(q2.value(t.fieldNumber("memo")).toString());
-    tx.setEntryDate(d->GETDATE(q2.value(t.fieldNumber("entryDate")).toString()));
-    tx.setCommodity(q2.value(t.fieldNumber("currencyId")).toString());
-    tx.setBankID(q2.value(t.fieldNumber("bankId")).toString());
+    tx.setPostDate(d->GETDATE(q2.value(transactionTable.fieldNumber("postDate")).toString()));
+    tx.setMemo(q2.value(transactionTable.fieldNumber("memo")).toString());
+    tx.setEntryDate(d->GETDATE(q2.value(transactionTable.fieldNumber("entryDate")).toString()));
+    tx.setCommodity(q2.value(transactionTable.fieldNumber("currencyId")).toString());
+    tx.setBankID(q2.value(transactionTable.fieldNumber("bankId")).toString());
 
     qs.bindValue(":id", s.id());
     if (!qs.exec()) throw MYMONEYEXCEPTION(d->buildError(qs, Q_FUNC_INFO, "reading Scheduled Splits")); // krazy:exclude=crashy

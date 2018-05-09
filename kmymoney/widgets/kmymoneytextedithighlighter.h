@@ -37,7 +37,7 @@ public:
   void setMaxLineLength(const int& length);
 
 protected:
-  virtual void highlightBlock(const QString& text);
+  void highlightBlock(const QString& text) final override;
 
 private:
   KMyMoneyTextEditHighlighterPrivate * const d_ptr;

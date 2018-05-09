@@ -97,7 +97,7 @@ private:
    *  list.at(1) = "<the-name-of-the-report>"
    * </pre>
    */
-  bool operator<(const QTreeWidgetItem &other)const;
+  bool operator<(const QTreeWidgetItem &other) const final override;
 };
 
 #endif

@@ -37,17 +37,17 @@ public:
   sepaOnlineTransfer();
   sepaOnlineTransfer(const sepaOnlineTransfer &other);
 
-  virtual QString responsibleAccount() const = 0;
+  virtual QString responsibleAccount() const override = 0;
   virtual void setOriginAccount(const QString& accountId) = 0;
 
-  virtual MyMoneyMoney value() const = 0;
+  virtual MyMoneyMoney value() const override = 0;
   virtual void setValue(MyMoneyMoney value) = 0;
 
   virtual void setBeneficiary(const payeeIdentifiers::ibanBic& accountIdentifier) = 0;
   virtual payeeIdentifiers::ibanBic beneficiaryTyped() const = 0;
 
   virtual void setPurpose(const QString purpose) = 0;
-  virtual QString purpose() const = 0;
+  virtual QString purpose() const override = 0;
 
   virtual void setEndToEndReference(const QString& reference) = 0;
   virtual QString endToEndReference() const = 0;
@@ -61,16 +61,16 @@ public:
   /**
    * National account can handle the currency of the related account only.
    */
-  virtual MyMoneySecurity currency() const = 0;
+  virtual MyMoneySecurity currency() const override = 0;
 
-  virtual bool isValid() const = 0;
+  virtual bool isValid() const override = 0;
 
-  virtual QString jobTypeName() const = 0;
+  virtual QString jobTypeName() const override = 0;
 
   virtual unsigned short int textKey() const = 0;
   virtual unsigned short int subTextKey() const = 0;
 
-  virtual bool hasReferenceTo(const QString& id) const = 0;
+  virtual bool hasReferenceTo(const QString& id) const override = 0;
 
   class settings : public IonlineTaskSettings
   {
@@ -120,10 +120,10 @@ public:
   virtual QSharedPointer<const settings> getSettings() const = 0;
 
 protected:
-  virtual sepaOnlineTransfer* clone() const = 0;
+  virtual sepaOnlineTransfer* clone() const override = 0;
 
-  virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const = 0;
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const = 0;
+  virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const override = 0;
+  virtual void writeXML(QDomDocument& document, QDomElement& parent) const override = 0;
 
 };
 

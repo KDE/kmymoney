@@ -69,30 +69,30 @@ public:
   virtual ~MyMoneyStorageANON();
 
 protected:
-  void writeUserInformation(QDomElement& userInfo);
+  void writeUserInformation(QDomElement& userInfo) final override;
 
-  void writeInstitution(QDomElement& institutions, const MyMoneyInstitution& i);
+  void writeInstitution(QDomElement& institutions, const MyMoneyInstitution& i) final override;
 
-  void writePayee(QDomElement& payees, const MyMoneyPayee& p);
+  void writePayee(QDomElement& payees, const MyMoneyPayee& p) final override;
 
-  void writeTag(QDomElement& tags, const MyMoneyTag& ta);
+  void writeTag(QDomElement& tags, const MyMoneyTag& ta) final override;
 
-  void writeAccount(QDomElement& accounts, const MyMoneyAccount& p);
+  void writeAccount(QDomElement& accounts, const MyMoneyAccount& p) final override;
 
-  void writeTransaction(QDomElement& transactions, const MyMoneyTransaction& tx);
+  void writeTransaction(QDomElement& transactions, const MyMoneyTransaction& tx) final override;
 
-  void writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx);
+  void writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx) final override;
 
-  void writeBudget(QDomElement& budgets, const MyMoneyBudget& b);
+  void writeBudget(QDomElement& budgets, const MyMoneyBudget& b) final override;
 
-  void writeReport(QDomElement& reports, const MyMoneyReport& r);
+  void writeReport(QDomElement& reports, const MyMoneyReport& r) final override;
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage);
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) final override;
 
-  void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security);
+  void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security) final override;
 
   /** Cannot remove prive data from plugins, yet. It is simply doing nothing. */
-  void writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job);
+  void writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job) final override;
 
   QDomElement findChildElement(const QString& name, const QDomElement& root);
 

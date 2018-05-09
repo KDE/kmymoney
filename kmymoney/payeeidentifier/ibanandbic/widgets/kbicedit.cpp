@@ -33,8 +33,8 @@ class bicItemDelegate : public QStyledItemDelegate
 {
 public:
   explicit bicItemDelegate(QObject* parent = 0) : QStyledItemDelegate(parent) {}
-  void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index) const;
-  virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index) const final override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
 private:
   inline QFont getSmallFont(const QStyleOptionViewItem& option) const;

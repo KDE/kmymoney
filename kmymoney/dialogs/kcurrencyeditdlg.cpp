@@ -88,7 +88,7 @@ public:
   explicit KCurrencyEditDelegate(QObject *parent = 0);
 
 protected:
-  QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const final override;
 };
 
 KCurrencyEditDelegate::KCurrencyEditDelegate(QObject* parent): QStyledItemDelegate(parent)

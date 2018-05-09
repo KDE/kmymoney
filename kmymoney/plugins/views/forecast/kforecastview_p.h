@@ -629,8 +629,8 @@ public:
     headerLabels << i18n("Account");
 
     {
-      QDate forecastStartDate = forecast.forecastStartDate();
-      QDate forecastEndDate = forecast.forecastEndDate();
+      forecastStartDate = forecast.forecastStartDate();
+      forecastEndDate = forecast.forecastEndDate();
 
       //add cycle interval columns
       QDate f_date = forecastStartDate;
@@ -902,7 +902,7 @@ public:
     it_c++;
 
     //iterate through all other columns
-    for (QDate summaryDate = QDate::currentDate().addDays(daysToBeginDay); summaryDate <= forecast.forecastEndDate(); summaryDate = summaryDate.addDays(forecast.accountsCycle()), ++it_c) {
+    for (summaryDate = QDate::currentDate().addDays(daysToBeginDay); summaryDate <= forecast.forecastEndDate(); summaryDate = summaryDate.addDays(forecast.accountsCycle()), ++it_c) {
       amountMM = forecast.forecastBalance(account, summaryDate);
 
       //calculate the balance in base currency for the total row

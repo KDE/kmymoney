@@ -862,8 +862,8 @@ bool Transaction::matches(const RegisterFilter& filter) const
       QString r = split.value().formatMoney(d->m_account.fraction(), false);
       if (r.contains(s, Qt::CaseInsensitive))
         return true;
-      const MyMoneyAccount& acc = file->account(split.accountId());
-      r = split.shares().formatMoney(acc.fraction(), false);
+      const MyMoneyAccount& splitAcc = file->account(split.accountId());
+      r = split.shares().formatMoney(splitAcc.fraction(), false);
       if (r.contains(s, Qt::CaseInsensitive))
         return true;
     }

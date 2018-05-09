@@ -197,7 +197,7 @@ protected:
   /**
     * Overwritten because KMyMoney has it's custom header.
     */
-  virtual bool showPageHeader() const;
+  bool showPageHeader() const final override;
 
 
 public Q_SLOTS:

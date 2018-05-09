@@ -87,20 +87,20 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
   d->m_rowsForm = 6;
 
   if (KMyMoneyUtils::transactionType(d->m_transaction) == KMyMoneyUtils::InvestmentTransaction) {
-    MyMoneySplit split = KMyMoneyUtils::stockSplit(d->m_transaction);
-    d->m_payee = MyMoneyFile::instance()->account(split.accountId()).name();
+    MyMoneySplit stockSplit = KMyMoneyUtils::stockSplit(d->m_transaction);
+    d->m_payee = MyMoneyFile::instance()->account(stockSplit.accountId()).name();
     QString addon;
-    if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
-      if (split.value().isNegative()) {
+    if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
+      if (stockSplit.value().isNegative()) {
         addon = i18n("Sell");
       } else {
         addon = i18n("Buy");
       }
-    } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
+    } else if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
       addon = i18n("Dividend");
-    } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
+    } else if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
       addon = i18n("Yield");
-    } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
+    } else if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
       addon = i18n("Interest Income");
     }
     if (!addon.isEmpty()) {
@@ -568,7 +568,7 @@ void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
       // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
       // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
       // go haywire when someone changes the KMyMoneyCategory object ...
-      QWidget* w = d->m_form->cellWidget(2, (int)eTransactionForm::Column::Value1);
+      w = d->m_form->cellWidget(2, (int)eTransactionForm::Column::Value1);
       tabOrderWidgets.append(focusWidget(w));
       w = w->findChild<QPushButton*>("splitButton");
       if (w)

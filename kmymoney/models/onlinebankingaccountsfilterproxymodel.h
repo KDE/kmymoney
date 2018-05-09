@@ -32,10 +32,10 @@ public:
   /**
    * @brief Makes accounts which do not support any onlineJob non-selectable
    */
-  virtual Qt::ItemFlags flags(const QModelIndex& index) const;
+  Qt::ItemFlags flags(const QModelIndex& index) const override;
 
 protected:
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const final override;
 
 private:
   /**

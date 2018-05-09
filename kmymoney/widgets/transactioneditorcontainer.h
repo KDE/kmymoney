@@ -52,7 +52,7 @@ Q_SIGNALS:
   void geometriesUpdated();
 
 protected Q_SLOTS:
-  void updateGeometries();
+  void updateGeometries() final override;
 };
 
 #endif

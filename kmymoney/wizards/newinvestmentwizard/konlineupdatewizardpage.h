@@ -48,7 +48,7 @@ public:
   /**
    * Overload the isComplete function to control the Next button
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
   void init2(const MyMoneySecurity& security);
 
   /**

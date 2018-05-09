@@ -28,8 +28,8 @@ class nationalAccountStoragePlugin : public KMyMoneyPlugin::storagePlugin
 
 public:
   explicit nationalAccountStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());
-  virtual bool removePluginData(QSqlDatabase connection);
-  virtual bool setupDatabase(QSqlDatabase connection);
+  bool removePluginData(QSqlDatabase connection) final override;
+  bool setupDatabase(QSqlDatabase connection) final override;
   static QString iid();
 };
 

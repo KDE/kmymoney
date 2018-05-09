@@ -729,7 +729,7 @@ public:
    * @return First MyMoneyAccount object found carrying the @p name.
    * An empty MyMoneyAccount object will be returned if the name is not found.
    */
-  MyMoneyAccount subAccountByName(const MyMoneyAccount& acc, const QString& name) const;
+  MyMoneyAccount subAccountByName(const MyMoneyAccount& account, const QString& name) const;
 
   /**
     * This method returns a list of accounts inside a MyMoneyFile object.

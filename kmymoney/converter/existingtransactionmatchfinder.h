@@ -30,7 +30,7 @@ public:
   /** Ctor, initializes the match finder
    * @param matchWindow max number of days the transactions may vary and still be considered to be matching
    */
-  explicit ExistingTransactionMatchFinder(int matchWindow = 3);
+  explicit ExistingTransactionMatchFinder(int m_matchWindow = 3);
 
 protected:
   typedef QPair<MyMoneyTransaction, MyMoneySplit> TransactionAndSplitPair;
@@ -38,7 +38,7 @@ protected:
 
   /** Creates a list of transactions within matchWindow range and with the same amount as the imported transaction we're trying to match
    */
-  virtual void createListOfMatchCandidates();
+  void createListOfMatchCandidates() final override;
 
   /** Searches for a matching transaction in the ledger
    *
@@ -46,7 +46,7 @@ protected:
    * @ref MatchDuplicate is set if the imported transaction has the same bank id as the existing transaction;
    * @ref MatchImprecise is set when transaction dates are not equal, but within matchWindow range
    */
-  virtual void findMatchInMatchCandidatesList();
+  void findMatchInMatchCandidatesList() final override;
 };
 
 #endif // EXISTINGTRANSACTIONMATCHFINDER_H

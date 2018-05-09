@@ -702,7 +702,7 @@ bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
         if (!memoPresent) {  //                     If no memo, clear previous
           q.m_strMemo.clear();
         }
-        qSplit q;  //                               Start new split
+        q = qSplit();  //                               Start new split
         neededCount = 0;
         ret = true;
       }
@@ -1195,7 +1195,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
     if (!accountId.isEmpty()) {
       try {
-        MyMoneyAccount account = file->account(accountId);
+        account = file->account(accountId);
         // FIXME: check that the type matches and ask if not
 
         if (account.accountType() == eMyMoney::Account::Type::Investment) {
@@ -1537,10 +1537,10 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     }
 
     if (action == "intinc") {
-      MyMoneyMoney price = m_qifProfile.value('I', extractLine('I'));
+      MyMoneyMoney priceValue = m_qifProfile.value('I', extractLine('I'));
       tr.m_amount -= tr.m_fees;
-      if ((!quantity.isZero()) && (!price.isZero()))
-        tr.m_amount = -(quantity * price);
+      if ((!quantity.isZero()) && (!priceValue.isZero()))
+        tr.m_amount = -(quantity * priceValue);
     } else
       // For historic reasons (coming from the OFX importer) the statement
       // reader expects the dividend with a reverse sign. So we just do that.
@@ -1558,7 +1558,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
 
     tr.m_eAction = (eMyMoney::Transaction::Action::None);
     MyMoneyStatement::Split s2;
-    QString tmp = extractLine('L');
+    tmp = extractLine('L');
     if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1))) {
       s2.m_accountId = transferAccount(tmp);
       s2.m_strCategoryName = tmp;
@@ -1852,14 +1852,14 @@ const QString MyMoneyQifReader::findOrCreateIncomeAccount(const QString& searchn
 
   // If we did not find the account, now we must create one.
   if (result.isEmpty()) {
-    MyMoneyAccount acc;
-    acc.setName(searchname);
-    acc.setAccountType(eMyMoney::Account::Type::Income);
+    MyMoneyAccount newAccount;
+    newAccount.setName(searchname);
+    newAccount.setAccountType(eMyMoney::Account::Type::Income);
     MyMoneyAccount income = file->income();
     MyMoneyFileTransaction ft;
-    file->addAccount(acc, income);
+    file->addAccount(newAccount, income);
     ft.commit();
-    result = acc.id();
+    result = newAccount.id();
   }
 
   return result;
@@ -1888,14 +1888,14 @@ const QString MyMoneyQifReader::findOrCreateExpenseAccount(const QString& search
 
   // If we did not find the account, now we must create one.
   if (result.isEmpty()) {
-    MyMoneyAccount acc;
-    acc.setName(searchname);
-    acc.setAccountType(eMyMoney::Account::Type::Expense);
+    MyMoneyAccount newAccount;
+    newAccount.setName(searchname);
+    newAccount.setAccountType(eMyMoney::Account::Type::Expense);
     MyMoneyFileTransaction ft;
     MyMoneyAccount expense = file->expense();
-    file->addAccount(acc, expense);
+    file->addAccount(newAccount, expense);
     ft.commit();
-    result = acc.id();
+    result = newAccount.id();
   }
 
   return result;

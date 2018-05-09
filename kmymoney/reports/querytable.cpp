@@ -567,7 +567,7 @@ void QueryTable::constructTotalRows()
               totalsRow[groups.at(j)] = m_rows.at(iCurrentRow)[groups.at(j)];   // ...and identification
             }
 
-            QString currencyID = currencyGrp.key();
+            currencyID = currencyGrp.key();
             if (currencyID.isEmpty() && totalCurrency.count() > 1)
               currencyID = file->baseCurrency().id();
             totalsRow[ctCurrency] = currencyID;
@@ -622,7 +622,7 @@ void QueryTable::constructTotalRows()
           totalsRow[groups.at(j)] = QString();      // no identification
         }
 
-        QString currencyID = currencyGrp.key();
+        currencyID = currencyGrp.key();
         if (currencyID.isEmpty() && totalCurrency.count() > 1)
           currencyID = file->baseCurrency().id();
         totalsRow[ctCurrency] = currencyID;

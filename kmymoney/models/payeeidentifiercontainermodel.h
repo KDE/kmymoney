@@ -54,20 +54,20 @@ public:
 
   explicit payeeIdentifierContainerModel(QObject* parent = 0);
 
-  virtual QVariant data(const QModelIndex& index, int role) const;
+  QVariant data(const QModelIndex& index, int role) const final override;
 
   /**
    * This model only supports to edit payeeIdentifier role with a QVariant of type
    * payeeIdentifier.
    */
-  virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
-  virtual Qt::ItemFlags flags(const QModelIndex& index) const;
+  Qt::ItemFlags flags(const QModelIndex& index) const final override;
 
-  virtual int rowCount(const QModelIndex& parent) const;
+  int rowCount(const QModelIndex& parent) const final override;
 
-  virtual bool insertRows(int row, int count, const QModelIndex& parent);
-  virtual bool removeRows(int row, int count, const QModelIndex& parent);
+  bool insertRows(int row, int count, const QModelIndex& parent) final override;
+  bool removeRows(int row, int count, const QModelIndex& parent) final override;
 
   /**
    * @brief Set source of data

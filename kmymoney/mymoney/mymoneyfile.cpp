@@ -635,13 +635,13 @@ MyMoneyAccount MyMoneyFile::account(const QString& id) const
   return d->m_storage->account(id);
 }
 
-MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& acc, const QString& name) const
+MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& account, const QString& name) const
 {
   static MyMoneyAccount nullAccount;
 
-  const auto accounts = acc.accountList();
+  const auto accounts = account.accountList();
   for (const auto& acc : accounts) {
-    const auto sacc = account(acc);
+    const auto sacc = MyMoneyFile::account(acc);
     if (sacc.name().compare(name) == 0)
       return sacc;
   }
@@ -2287,16 +2287,15 @@ QStringList MyMoneyFile::consistencyCheck()
   QList<MyMoneyReport> rList = reportList();
   for (it_r = rList.begin(); it_r != rList.end(); ++it_r) {
     MyMoneyReport r = *it_r;
-    QStringList pList;
-    QStringList::Iterator it_p;
-    (*it_r).payees(pList);
+    QStringList payeeList;
+    (*it_r).payees(payeeList);
     bool rChanged = false;
-    for (it_p = pList.begin(); it_p != pList.end(); ++it_p) {
-      if (payeeConversionMap.find(*it_p) != payeeConversionMap.end()) {
+    for (auto it_payee = payeeList.begin(); it_payee != payeeList.end(); ++it_payee) {
+      if (payeeConversionMap.find(*it_payee) != payeeConversionMap.end()) {
         rc << i18n("  * Payee id updated in report '%1'.", (*it_r).name());
         ++problemCount;
-        r.removeReference(*it_p);
-        r.addPayee(payeeConversionMap[*it_p]);
+        r.removeReference(*it_payee);
+        r.addPayee(payeeConversionMap[*it_payee]);
         rChanged = true;
       }
     }
@@ -2523,20 +2522,20 @@ QString MyMoneyFile::checkCategory(const QString& name, const MyMoneyMoney& valu
 
     // if we did not find the category, we create it
     if (!found) {
-      MyMoneyAccount parent;
+        MyMoneyAccount parentAccount;
       if (newAccount.parentAccountId().isEmpty()) {
         if (!value.isNegative() && value2.isNegative())
-          parent = income();
+          parentAccount = income();
         else
-          parent = expense();
+          parentAccount = expense();
       } else {
-        parent = account(newAccount.parentAccountId());
+        parentAccount = account(newAccount.parentAccountId());
       }
       newAccount.setAccountType((!value.isNegative() && value2.isNegative()) ? Account::Type::Income : Account::Type::Expense);
       MyMoneyAccount brokerage;
       // clear out the parent id, because createAccount() does not like that
       newAccount.setParentAccountId(QString());
-      createAccount(newAccount, parent, brokerage, MyMoneyMoney());
+      createAccount(newAccount, parentAccount, brokerage, MyMoneyMoney());
       accountId = newAccount.id();
     }
   }

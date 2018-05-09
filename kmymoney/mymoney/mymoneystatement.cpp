@@ -258,7 +258,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
         t.m_strBankID = c.attribute(getAttrName(Statement::Attribute::BankID));
         t.m_reconcile = static_cast<eMyMoney::Split::State>(c.attribute(getAttrName(Statement::Attribute::Reconcile)).toInt());
 
-        auto txt = c.attribute(getAttrName(Statement::Attribute::Action), txAction[eMyMoney::Transaction::Action::Buy]);
+        txt = c.attribute(getAttrName(Statement::Attribute::Action), txAction[eMyMoney::Transaction::Action::Buy]);
         t.m_eAction = txAction.key(txt, t.m_eAction);
 
         if (m_eType == eMyMoney::Statement::Type::Investment) {
@@ -268,9 +268,9 @@ bool MyMoneyStatement::read(const QDomElement& _e)
         }
 
         // process splits (if any)
-        QDomNode child = c.firstChild();
+        child = c.firstChild();
         while (!child.isNull() && child.isElement()) {
-          QDomElement c = child.toElement();
+          c = child.toElement();
           if (c.tagName() == getElName(Statement::Element::Split)) {
             MyMoneyStatement::Split s;
             s.m_accountId = c.attribute(getAttrName(Statement::Attribute::AccountID));

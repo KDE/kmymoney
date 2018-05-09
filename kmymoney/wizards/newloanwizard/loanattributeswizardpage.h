@@ -46,13 +46,13 @@ public:
   /**
    * Overload the isComplete function to control the Next button
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
 
   /**
    * Overload the initializePage function to set widgets based on
    * the inputs from previous pages.
    */
-  void initializePage();
+  void initializePage() final override;
 
   /**
    * Set the institution combobox to the name given

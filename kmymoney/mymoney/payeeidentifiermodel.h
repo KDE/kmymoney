@@ -47,12 +47,12 @@ public:
   };
 
   explicit payeeIdentifierModel(QObject* parent = 0);
-  virtual QVariant data(const QModelIndex& index, int role) const;
-  virtual int columnCount(const QModelIndex& parent) const;
-  virtual int rowCount(const QModelIndex& parent) const;
-  virtual QModelIndex parent(const QModelIndex& child) const;
-  virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+  QVariant data(const QModelIndex& index, int role) const final override;
+  int columnCount(const QModelIndex& parent) const final override;
+  int rowCount(const QModelIndex& parent) const final override;
+  QModelIndex parent(const QModelIndex& child) const final override;
+  QModelIndex index(int row, int column, const QModelIndex &parent) const final override;
+  Qt::ItemFlags flags(const QModelIndex &index) const final override;
 
   /**
    * @brief Set which payeeIdentifier types to show

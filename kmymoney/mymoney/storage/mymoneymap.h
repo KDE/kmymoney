@@ -247,7 +247,7 @@ private:
         m_id = *id;
     }
     ~MyMoneyMapStart() final {}
-    void undo(void) final {
+    void undo(void) final override {
       if (m_idPtr != 0)
         *m_idPtr = m_id;
     }
@@ -266,7 +266,7 @@ private:
     }
 
     ~MyMoneyMapInsert() final {}
-    void undo(void) final {
+    void undo(void) final override {
       // m_container->remove(m_key) does not work on GCC 4.0.2
       // using this-> to access those member does the trick
       this->m_container->QMap<Key, T>::remove(this->m_key);
@@ -282,7 +282,7 @@ private:
     }
 
     ~MyMoneyMapRemove() final {}
-    void undo(void) final {
+    void undo(void) final override {
       this->m_container->insert(this->m_key, this->m_obj);
     }
   };
@@ -296,7 +296,7 @@ private:
     }
 
     ~MyMoneyMapModify() final {}
-    void undo(void) final {
+    void undo(void) final override {
       this->m_container->QMap<Key, T>::insert(this->m_key, this->m_obj);
     }
   };

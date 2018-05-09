@@ -327,7 +327,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     d->m_tabOrderWidgets.append(d->ui->buttonHelp);
 
     for (auto i = 0; i < d->m_tabOrderWidgets.size(); ++i) {
-      QWidget* w = d->m_tabOrderWidgets.at(i);
+      w = d->m_tabOrderWidgets.at(i);
       if (w) {
         w->installEventFilter(this);
         w->installEventFilter(editor);

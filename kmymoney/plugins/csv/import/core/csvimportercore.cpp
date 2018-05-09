@@ -718,7 +718,6 @@ QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Accoun
   file->accountList(accountList);
   QList<MyMoneyAccount> filteredTypes;
   QList<MyMoneyAccount> filteredAccounts;
-  QList<MyMoneyAccount>::iterator account;
   QRegularExpression filterOutChars(QStringLiteral("[-., ]"));
 
   foreach (const auto account, accountList) {
@@ -738,7 +737,7 @@ QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Accoun
 
   // if filtering returned more results, filter out accounts whose numbers aren't in statements header
   if (filteredAccounts.count() > 1) {
-    for (account = filteredAccounts.begin(); account != filteredAccounts.end();) {
+    for (auto account = filteredAccounts.begin(); account != filteredAccounts.end();) {
       QString txt = (*account).number();
       txt.remove(filterOutChars);
       if (txt.isEmpty() || txt.length() < 3) {

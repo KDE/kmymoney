@@ -38,19 +38,19 @@ class PayeesModel : public QAbstractListModel
 
 public:
   explicit PayeesModel(QObject* parent = 0);
-  virtual ~PayeesModel();
+  ~PayeesModel();
 
   enum Roles {
     PayeeIdRole = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem,
   };
 
-  virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
-  virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
-  virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-  virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+  int rowCount(const QModelIndex& parent = QModelIndex()) const final override;
+  int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+  QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  virtual Qt::ItemFlags flags(const QModelIndex& index) const;
-  virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+  Qt::ItemFlags flags(const QModelIndex& index) const final override;
+  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
   /**
    * clears all objects currently in the model

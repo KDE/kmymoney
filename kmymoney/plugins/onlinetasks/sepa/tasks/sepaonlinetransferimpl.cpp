@@ -40,77 +40,77 @@ class sepaOnlineTransferSettingsFallback : public sepaOnlineTransfer::settings
 {
 public:
   // Limits getter
-  virtual int purposeMaxLines() const {
+  int purposeMaxLines() const final override {
     return 1;
   }
-  virtual int purposeLineLength() const {
+  int purposeLineLength() const final override {
     return 27;
   }
-  virtual int purposeMinLength() const {
+  int purposeMinLength() const final override {
     return 0;
   }
 
-  virtual int recipientNameLineLength() const {
+  int recipientNameLineLength() const final override {
     return 1;
   }
-  virtual int recipientNameMinLength() const {
+  int recipientNameMinLength() const final override {
     return 0;
   }
 
-  virtual int payeeNameLineLength() const {
+  int payeeNameLineLength() const final override {
     return 0;
   }
-  virtual int payeeNameMinLength() const {
+  int payeeNameMinLength() const final override {
     return 0;
   }
 
-  virtual QString allowedChars() const {
+  QString allowedChars() const final override {
     return QString();
   }
 
   // Checker
-  virtual bool checkPurposeCharset(const QString&) const {
+  bool checkPurposeCharset(const QString&) const final override {
     return false;
   }
-  virtual bool checkPurposeLineLength(const QString&) const {
+  bool checkPurposeLineLength(const QString&) const final override {
     return false;
   }
-  virtual validators::lengthStatus checkPurposeLength(const QString&) const {
+  validators::lengthStatus checkPurposeLength(const QString&) const final override {
     return validators::tooLong;
   }
-  virtual bool checkPurposeMaxLines(const QString&) const {
+  bool checkPurposeMaxLines(const QString&) const final override {
     return false;
   }
 
-  virtual validators::lengthStatus checkNameLength(const QString&) const {
+  validators::lengthStatus checkNameLength(const QString&) const final override {
     return validators::tooLong;
   }
-  virtual bool checkNameCharset(const QString&) const {
+  bool checkNameCharset(const QString&) const final override{
     return false;
   }
 
-  virtual validators::lengthStatus checkRecipientLength(const QString&) const {
+  validators::lengthStatus checkRecipientLength(const QString&) const final override {
     return validators::tooLong;
   }
-  virtual bool checkRecipientCharset(const QString&) const {
+  bool checkRecipientCharset(const QString&) const final override {
     return false;
   }
 
-  virtual int endToEndReferenceLength() const {
+  int endToEndReferenceLength() const final override {
     return 0;
   }
-  virtual validators::lengthStatus checkEndToEndReferenceLength(const QString&) const {
+  validators::lengthStatus checkEndToEndReferenceLength(const QString&) const final override {
     return validators::tooLong;
   }
   virtual bool isIbanValid(const QString&) const {
     return false;
   }
 
-  virtual bool checkRecipientBic(const QString&) const {
+  bool checkRecipientBic(const QString&) const final override {
     return false;
   }
 
-  virtual bool isBicMandatory(const QString&, const QString&) const {
+  bool isBicMandatory(const QString&, const QString&) const final override {
     return true;
   }
 };
@@ -159,16 +159,16 @@ bool sepaOnlineTransferImpl::isValid() const
   } catch (payeeIdentifier::exception&) {
   }
 
-  QSharedPointer<const sepaOnlineTransfer::settings> settings = getSettings();
-  if (settings->checkPurposeLength(_purpose) == validators::ok
-      && settings->checkPurposeMaxLines(_purpose)
-      && settings->checkPurposeLineLength(_purpose)
-      && settings->checkPurposeCharset(_purpose)
-      && settings->checkEndToEndReferenceLength(_endToEndReference) == validators::ok
+  QSharedPointer<const sepaOnlineTransfer::settings> localSettings = getSettings();
+  if (localSettings->checkPurposeLength(_purpose) == validators::ok
+      && localSettings->checkPurposeMaxLines(_purpose)
+      && localSettings->checkPurposeLineLength(_purpose)
+      && localSettings->checkPurposeCharset(_purpose)
+      && localSettings->checkEndToEndReferenceLength(_endToEndReference) == validators::ok
       //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
       //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName()) == validators::ok
       && _beneficiaryAccount.isIbanValid() // do not check the BIC, maybe it is not needed
-      && (!settings->isBicMandatory(iban, _beneficiaryAccount.electronicIban()) || (settings->checkRecipientBic(_beneficiaryAccount.bic()) && _beneficiaryAccount.isValid() /** @todo double check of BIC here, fix that */))
+      && (!localSettings->isBicMandatory(iban, _beneficiaryAccount.electronicIban()) || (localSettings->checkRecipientBic(_beneficiaryAccount.bic()) && _beneficiaryAccount.isValid() /** @todo double check of BIC here, fix that */))
       && value().isPositive()
      )
     return true;

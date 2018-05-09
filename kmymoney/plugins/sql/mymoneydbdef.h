@@ -126,8 +126,8 @@ public:
                                    const int initVersion = 0):
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion) {}
   virtual ~MyMoneyDbDatetimeColumn() {}
-  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
-  virtual MyMoneyDbDatetimeColumn* clone() const;
+  const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const final override;
+  MyMoneyDbDatetimeColumn* clone() const final override;
 private:
   static const QString calcType();
 };
@@ -152,8 +152,8 @@ public:
       m_type(type),
       m_isSigned(isigned) {}
   virtual ~MyMoneyDbIntColumn() {}
-  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
-  virtual MyMoneyDbIntColumn* clone() const;
+  const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const final override;
+  MyMoneyDbIntColumn* clone() const final override;
   size type() const {
     return m_type;
   }
@@ -182,8 +182,8 @@ public:
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
       m_type(type) {}
   virtual ~MyMoneyDbTextColumn() {}
-  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
-  virtual MyMoneyDbTextColumn* clone() const;
+  const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const final override;
+  MyMoneyDbTextColumn* clone() const final override;
   size type() const {
     return m_type;
   }

@@ -33,21 +33,21 @@ public:
   nationalAccount();
   nationalAccount(const nationalAccount& other);
 
-  virtual bool isValid() const;
-  virtual bool operator==(const payeeIdentifierData& other) const;
+  bool isValid() const final override;
+  bool operator==(const payeeIdentifierData& other) const final override;
   bool operator==(const nationalAccount& other) const;
 
-  nationalAccount* clone() const {
+  nationalAccount* clone() const final override {
     return new nationalAccount(*this);
   }
-  nationalAccount* createFromXml(const QDomElement& element) const;
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  nationalAccount* createFromXml(const QDomElement& element) const final override;
+  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
-  QString storagePluginIid() const;
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const;
-  nationalAccount* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const;
+  QString storagePluginIid() const final override;
+  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const final override;
+  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const final override;
+  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const final override;
+  nationalAccount* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const final override;
 
   void setBankCode(const QString& bankCode) {
     m_bankCode = bankCode;

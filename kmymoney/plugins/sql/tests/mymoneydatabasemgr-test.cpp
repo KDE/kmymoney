@@ -399,7 +399,7 @@ void MyMoneyStorageMgrTest::testAddNewAccount()
   // try to add account to undefined account
   try {
     MyMoneyAccount c("UnknownID", b);
-    MyMoneyFileTransaction ft;
+    ft.restart();
     m->addAccount(c, a);
     ft.commit();
     QFAIL("Exception expected");
@@ -411,7 +411,7 @@ void MyMoneyStorageMgrTest::testAddNewAccount()
   try {
     a = m->account("A000001");
     QVERIFY(m->asset().accountList().count() == 0);
-    MyMoneyFileTransaction ft;
+    ft.restart();
     m->addAccount(b, a);
     ft.commit();
     MyMoneyAccount acc(m->account("A000002"));
@@ -1386,12 +1386,12 @@ void MyMoneyStorageMgrTest::testAddPayee()
     QVERIFY(p.postcode() == p1.postcode());
     QVERIFY(p.telephone() == p1.telephone());
     QVERIFY(p.email() == p1.email());
-    MyMoneyPayee::payeeMatchType m, m1;
+    MyMoneyPayee::payeeMatchType m1, m2;
     bool ignore, ignore1;
     QStringList keys, keys1;
-    m = p.matchData(ignore, keys);
-    m1 = p1.matchData(ignore1, keys1);
-    QVERIFY(m == m1);
+    m1 = p.matchData(ignore, keys);
+    m2 = p1.matchData(ignore1, keys1);
+    QVERIFY(m1 == m2);
     QVERIFY(ignore == ignore1);
     QVERIFY(keys == keys1);
     QVERIFY(p.reference() == p1.reference());

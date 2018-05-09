@@ -54,7 +54,7 @@ public:
   bool showValuesInverted();
 
 protected:
-  virtual void keyPressEvent(QKeyEvent* e);
+  void keyPressEvent(QKeyEvent* e) final override;
 
 public Q_SLOTS:
   /**

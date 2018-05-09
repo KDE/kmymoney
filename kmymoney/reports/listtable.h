@@ -56,10 +56,10 @@ class ListTable : public ReportTable
 {
 public:
   explicit ListTable(const MyMoneyReport&);
-  QString renderHTML() const;
-  QString renderCSV() const;
-  void drawChart(KReportChartView&) const {}
-  void dump(const QString& file, const QString& context = QString()) const;
+  QString renderHTML() const final override;
+  QString renderCSV() const final override;
+  void drawChart(KReportChartView&) const final override {}
+  void dump(const QString& file, const QString& context = QString()) const final override;
   void init();
 
 public:

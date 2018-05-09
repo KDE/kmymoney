@@ -419,7 +419,7 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_a
 
     QString val = QString("%1-%2").arg(routingNumber, accountNumber);
     if (val != acc.onlineBankingSettings().value("kbanking-acc-ref")) {
-      MyMoneyKeyValueContainer kvp;
+      kvp.clear();
 
       // make sure to keep our own previous settings
       const QMap<QString, QString>& vals = acc.onlineBankingSettings().pairs();

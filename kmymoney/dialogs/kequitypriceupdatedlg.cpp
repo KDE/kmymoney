@@ -371,19 +371,19 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
   if (item) {
     MyMoneyMoney rate(item->text(PRICE_COL));
     if (!rate.isZero()) {
-      QString id = item->text(KMMID_COL).toUtf8();
+      QString kmm_id = item->text(KMMID_COL).toUtf8();
 
       // if the ID has a space, then this is TWO ID's, so it's a currency quote
-      if (id.contains(" ")) {
-        QStringList ids = id.split(' ', QString::SkipEmptyParts);
+      if (kmm_id.contains(" ")) {
+        QStringList ids = kmm_id.split(' ', QString::SkipEmptyParts);
         QString fromid = ids[0].toUtf8();
         QString toid = ids[1].toUtf8();
         price = MyMoneyPrice(fromid, toid, QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
       } else
         // otherwise, it's a security quote
       {
-        MyMoneySecurity security = MyMoneyFile::instance()->security(id);
-        price = MyMoneyPrice(id, security.tradingCurrency(), QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
+        MyMoneySecurity security = MyMoneyFile::instance()->security(kmm_id);
+        price = MyMoneyPrice(kmm_id, security.tradingCurrency(), QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
       }
     }
   }

@@ -73,12 +73,12 @@ public:
 
   ~KGPGFile();
 
-  virtual bool open(OpenMode mode);
-  virtual void close();
+  bool open(OpenMode mode) final override;
+  void close() final override;
   virtual void flush();
 
-  virtual qint64 readData(char *data, qint64 maxlen);
-  virtual qint64 writeData(const char *data, qint64 maxlen);
+  qint64 readData(char *data, qint64 maxlen) final override;
+  qint64 writeData(const char *data, qint64 maxlen) final override;
 
   /**
     * Adds a recipient for whom the file should be encrypted.

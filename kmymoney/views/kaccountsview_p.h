@@ -105,7 +105,7 @@ public:
     if (wizard->exec() == QDialog::Accepted && wizard != 0) {
       MyMoneySchedule sch;
       try {
-        MyMoneySchedule sch = file->schedule(m_currentAccount.value("schedule").toLatin1());
+        sch = file->schedule(m_currentAccount.value("schedule").toLatin1());
       } catch (const MyMoneyException &) {
         qDebug() << "schedule" << m_currentAccount.value("schedule").toLatin1() << "not found";
       }

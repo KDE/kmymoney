@@ -31,15 +31,15 @@ public:
    * @param account the account for which the scheduled transactions shall be considered
    * @param matchWindow max number of days the transactions may vary and still be considered to be matching
    */
-  ScheduledTransactionMatchFinder(const MyMoneyAccount& account, int matchWindow);
+  ScheduledTransactionMatchFinder(const MyMoneyAccount& m_account, int m_matchWindow);
 
 private:
-  MyMoneyAccount          account;
+  MyMoneyAccount          m_account;
   QList<MyMoneySchedule>  listOfMatchCandidates;
 
   /** Fills @ref listOfSchedules member with list of scheduled transactions for the @ref account
    */
-  virtual void createListOfMatchCandidates();
+  void createListOfMatchCandidates() final override;
 
   /** Searches for a matching transaction in the scheduled transactions
    *
@@ -47,7 +47,7 @@ private:
    * @ref TransactionMatchFinder::findMatch().
    * @ref MatchImprecise is returned when transaction dates are not equal, but within matchWindow range
    */
-  virtual void findMatchInMatchCandidatesList();
+  void findMatchInMatchCandidatesList() final override;
 };
 
 #endif // SCHEDULEDTRANSACTIONMATCHFINDER_H

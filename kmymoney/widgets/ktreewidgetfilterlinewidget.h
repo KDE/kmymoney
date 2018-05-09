@@ -36,7 +36,7 @@ protected Q_SLOTS:
    *
    * After widgets are created, this version finds the label and renames it to "Filter"
    */
-  virtual void createWidgets();
+  void createWidgets() final override;
 };
 
 #endif // KTREEWIDGETFILTERLINEWIDGET_H

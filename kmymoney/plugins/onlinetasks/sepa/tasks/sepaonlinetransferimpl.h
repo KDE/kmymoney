@@ -34,73 +34,73 @@ public:
   sepaOnlineTransferImpl();
   sepaOnlineTransferImpl(const sepaOnlineTransferImpl &other);
 
-  QString responsibleAccount() const {
+  QString responsibleAccount() const final override {
     return _originAccount;
   }
-  void setOriginAccount(const QString& accountId);
+  void setOriginAccount(const QString& accountId) final override;
 
-  MyMoneyMoney value() const {
+  MyMoneyMoney value() const final override{
     return _value;
   }
-  virtual void setValue(MyMoneyMoney value) {
+  void setValue(MyMoneyMoney value) final override {
     _value = value;
   }
 
-  virtual void setBeneficiary(const payeeIdentifiers::ibanBic& accountIdentifier) {
+  void setBeneficiary(const payeeIdentifiers::ibanBic& accountIdentifier) final override {
     _beneficiaryAccount = accountIdentifier;
-  };
-  virtual payeeIdentifier beneficiary() const {
+  }
+  payeeIdentifier beneficiary() const final override {
     return payeeIdentifier(_beneficiaryAccount.clone());
   }
-  virtual payeeIdentifiers::ibanBic beneficiaryTyped() const {
+  payeeIdentifiers::ibanBic beneficiaryTyped() const final override {
     return _beneficiaryAccount;
   }
 
-  virtual void setPurpose(const QString purpose) {
+  void setPurpose(const QString purpose) final override {
     _purpose = purpose;
   }
-  QString purpose() const {
+  QString purpose() const final override {
     return _purpose;
   }
 
-  virtual void setEndToEndReference(const QString& reference) {
+  void setEndToEndReference(const QString& reference) final override {
     _endToEndReference = reference;
   }
-  QString endToEndReference() const {
+  QString endToEndReference() const final override {
     return _endToEndReference;
   }
 
-  payeeIdentifier originAccountIdentifier() const;
+  payeeIdentifier originAccountIdentifier() const final override;
 
-  MyMoneySecurity currency() const;
+  MyMoneySecurity currency() const final override;
 
-  bool isValid() const;
+  bool isValid() const final override;
 
-  QString jobTypeName() const;
-  virtual QString storagePluginIid() const {
+  QString jobTypeName() const final override;
+  QString storagePluginIid() const final override {
     return sepaStoragePlugin::iid;
   }
-  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
-  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
+  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
+  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
 
-  unsigned short int textKey() const {
+  unsigned short int textKey() const final override {
     return _textKey;
   }
-  unsigned short int subTextKey() const {
+  unsigned short int subTextKey() const final override {
     return _subTextKey;
   }
 
-  virtual bool hasReferenceTo(const QString& id) const;
+  bool hasReferenceTo(const QString& id) const final override;
 
-  QSharedPointer<const sepaOnlineTransfer::settings> getSettings() const;
+  QSharedPointer<const sepaOnlineTransfer::settings> getSettings() const final override;
 
 protected:
-  sepaOnlineTransfer* clone() const;
+  sepaOnlineTransfer* clone() const final override;
 
-  virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const;
-  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const;
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
+  sepaOnlineTransfer* createFromXml(const QDomElement &element) const final override;
+  onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const final override;
+  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
 private:
   void bindValuesToQuery(QSqlQuery& query, const QString& id) const;

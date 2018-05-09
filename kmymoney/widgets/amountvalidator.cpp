@@ -58,32 +58,32 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
   // 3. positiveSign  == <empty>
   // 4. thousandsSeparator() == <empty> (we don't check that there
   //    are exactly three decimals between each separator):
-  QString dec = locale.decimalPoint(),
+  QString decimalPoint = locale.decimalPoint(),
               n = locale.negativeSign(),
                   p = locale.positiveSign(),
-                      t = locale.groupSeparator();
+                      separatorCharacter = locale.groupSeparator();
   // first, delete p's and t's:
   if (!p.isEmpty())
     for (int idx = s.indexOf(p) ; idx >= 0 ; idx = s.indexOf(p, idx))
       s.remove(idx, p.length());
 
 
-  if (!t.isEmpty())
-    for (int idx = s.indexOf(t) ; idx >= 0 ; idx = s.indexOf(t, idx))
-      s.remove(idx, t.length());
+  if (!separatorCharacter.isEmpty())
+    for (int idx = s.indexOf(separatorCharacter) ; idx >= 0 ; idx = s.indexOf(separatorCharacter, idx))
+      s.remove(idx, separatorCharacter.length());
 
   // then, replace the d's and n's
   if ((!n.isEmpty() && n.indexOf('.') != -1) ||
-      (!dec.isEmpty() && dec.indexOf('-') != -1)) {
+      (!decimalPoint.isEmpty() && decimalPoint.indexOf('-') != -1)) {
     // make sure we don't replace something twice:
     qWarning() << "KDoubleValidator: decimal symbol contains '-' or "
     "negative sign contains '.' -> improve algorithm" << endl;
     return Invalid;
   }
 
-  if (!dec.isEmpty() && dec != ".")
-    for (int idx = s.indexOf(dec) ; idx >= 0 ; idx = s.indexOf(dec, idx + 1))
-      s.replace(idx, dec.length(), ".");
+  if (!decimalPoint.isEmpty() && decimalPoint != ".")
+    for (int idx = s.indexOf(decimalPoint) ; idx >= 0 ; idx = s.indexOf(decimalPoint, idx + 1))
+      s.replace(idx, decimalPoint.length(), ".");
 
   if (!n.isEmpty() && n != "-")
     for (int idx = s.indexOf(n) ; idx >= 0 ; idx = s.indexOf(n, idx + 1))

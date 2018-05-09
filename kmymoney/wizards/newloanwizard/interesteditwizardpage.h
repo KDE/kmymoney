@@ -41,12 +41,12 @@ class InterestEditWizardPage : public QWizardPage
   Q_OBJECT
 public:
   explicit InterestEditWizardPage(QWidget *parent = nullptr);
-  ~InterestEditWizardPage();
+  ~InterestEditWizardPage() override;
 
   /**
    * Overload the isComplete function to control the Next button
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
 
   Ui::InterestEditWizardPage *ui;
 };

@@ -33,9 +33,9 @@ class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanValidator : public QValidator
 
 public:
   explicit ibanValidator(QObject* parent = 0);
-  virtual State validate(QString& , int&) const;
+  State validate(QString& , int&) const final override;
   State validate(const QString&) const;
-  virtual void fixup(QString&) const;
+  void fixup(QString&) const final override;
 
   static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };

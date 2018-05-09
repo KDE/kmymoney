@@ -37,8 +37,8 @@ public:
   explicit ReportsView(QObject *parent, const QVariantList &args);
   ~ReportsView() final;
 
-  void plug() final;
-  void unplug() final;
+  void plug() final override;
+  void unplug() final override;
 
 private:
   KReportsView* m_view;

@@ -511,7 +511,6 @@ public:
     QList<MyMoneyTransaction> list;
     m_storage->transactionList(list, filter);
     signalProgress(0, list.count(), "Writing Transactions...");
-    QList<MyMoneyTransaction>::ConstIterator it;
     QSqlQuery q2(*q);
     query.prepare(m_db.m_tables["kmmTransactions"].updateString());
     q2.prepare(m_db.m_tables["kmmTransactions"].insertString());
@@ -1134,12 +1133,11 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Split list")); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toUInt());
 
-    QList<MyMoneySplit>::ConstIterator it;
-    uint i = 0;
     QSqlQuery query2(*q);
     query.prepare(m_db.m_tables["kmmSplits"].updateString());
     query2.prepare(m_db.m_tables["kmmSplits"].insertString());
-    for (it = splitList.constBegin(), i = 0; it != splitList.constEnd(); ++it, ++i) {
+    auto i = 0;
+    for (auto it = splitList.constBegin(); it != splitList.constEnd(); ++it) {
       if (dbList.contains(i)) {
         dbList.removeAll(i);
         updateList << *it;
@@ -1149,6 +1147,7 @@ public:
         insertList << *it;
         insertIdList << i;
       }
+      ++i;
     }
 
     if (!insertList.isEmpty()) {

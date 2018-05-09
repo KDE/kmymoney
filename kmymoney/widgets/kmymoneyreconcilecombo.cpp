@@ -94,10 +94,10 @@ Split::State KMyMoneyReconcileCombo::state() const
 {
   Split::State state = Split::State::NotReconciled;
 
-  QVariant data = itemData(currentIndex());
+  auto dataVariant = itemData(currentIndex());
   QString dataVal;
-  if (data.isValid())
-    dataVal = data.toString();
+  if (dataVariant.isValid())
+    dataVal = dataVariant.toString();
   else
     return state;
 

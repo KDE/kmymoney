@@ -31,7 +31,7 @@ class KBalanceAxis : public KChart::CartesianAxis
 public:
   KBalanceAxis();
   explicit KBalanceAxis(KChart::AbstractCartesianDiagram* parent);
-  const QString customizedLabel(const QString& label) const;
+  const QString customizedLabel(const QString& label) const final override;
 };
 
 

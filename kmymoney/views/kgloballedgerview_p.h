@@ -184,7 +184,7 @@ protected:
     * @param e pointer to QEvent
     * @return always returns @a false
     */
-  bool eventFilter(QObject* o, QEvent* e)
+  bool eventFilter(QObject* o, QEvent* e) final override
   {
     if (m_filterActive) {
       if (e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
@@ -439,7 +439,7 @@ public:
 
       if (m_currentAccount.id().isEmpty()) {
         // there are no favorite accounts find any account
-        QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
+        list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
                                Qt::DisplayRole,
                                QVariant(QString("*")),
                                -1,
@@ -937,9 +937,9 @@ public:
             try {
               const auto& t = m_selectedTransactions[0].transaction();
               // search the first non-income/non-expense accunt and use it for the 'goto account'
-              const auto& sp = m_selectedTransactions[0].split();
+              const auto& selectedTransactionSplit = m_selectedTransactions[0].split();
               foreach (const auto split, t.splits()) {
-                  if (split.id() != sp.id()) {
+                  if (split.id() != selectedTransactionSplit.id()) {
                       auto acc = MyMoneyFile::instance()->account(split.accountId());
                       if (!acc.isIncomeExpense()) {
                           // for stock accounts we show the portfolio account
@@ -1502,9 +1502,9 @@ public:
     QMap<MyMoneyMoney, QList<QPair<QString, QString> > > sumToComponentsMap;
 
     // compute the possible matches
-    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
-    while (itTransactionSplit.hasNext()) {
-      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit.next();
+    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > it_ts(transactions);
+    while (it_ts.hasNext()) {
+      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = it_ts.next();
       QListIterator<MyMoneyMoney> itSum(sumList);
       QList<MyMoneyMoney> tempList;
       while (itSum.hasNext()) {

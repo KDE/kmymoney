@@ -33,7 +33,7 @@ public:
   };
 
   explicit bicModel(QObject* parent = 0);
-  virtual QVariant data(const QModelIndex& item, int role = Qt::DisplayRole) const;
+  QVariant data(const QModelIndex& item, int role = Qt::DisplayRole) const final override;
 
 };
 

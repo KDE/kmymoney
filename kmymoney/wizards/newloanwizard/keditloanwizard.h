@@ -44,7 +44,7 @@ class KEditLoanWizard : public KNewLoanWizard
   Q_OBJECT
 public:
   explicit KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent = nullptr);
-  ~KEditLoanWizard();
+  ~KEditLoanWizard() override;
 
   /**
     * This method returns the schedule for the payments. The account
@@ -68,7 +68,7 @@ public:
 
   const MyMoneyTransaction transaction() const;
 
-  bool validateCurrentPage();
+  bool validateCurrentPage() final override;
 
 protected:
   void updateEditSummary();

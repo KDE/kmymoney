@@ -495,7 +495,7 @@ public:
   void recordPayment(const QDate&);
   QList<QDate> recordedPayments() const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
+  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -506,7 +506,7 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  virtual bool hasReferenceTo(const QString& id) const final override;
 
   /**
    * This method replaces all occurrences of id @a oldId with

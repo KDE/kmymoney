@@ -51,9 +51,9 @@ public:
   ~PricesPage();
 
 private:
-  void                initializePage();
-  bool                isComplete() const;
-  bool                validatePage();
+  void initializePage() final override;
+  bool isComplete() const final override;
+  bool validatePage() final override;
 
   void                resetComboBox(const Column comboBox);
   /**

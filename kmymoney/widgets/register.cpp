@@ -1721,9 +1721,9 @@ namespace KMyMoneyRegister
               balance = -balance;
             auto txt = i18n("Online Statement Balance: %1", balance.formatMoney(d->m_account.fraction()));
 
-            KMyMoneyRegister::StatementGroupMarker *p = new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, QDate::fromString(d->m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
+            KMyMoneyRegister::StatementGroupMarker *pGroupMarker = new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, QDate::fromString(d->m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
 
-            p->setErroneous(!MyMoneyFile::instance()->hasMatchingOnlineBalance(d->m_account));
+            pGroupMarker->setErroneous(!MyMoneyFile::instance()->hasMatchingOnlineBalance(d->m_account));
           }
 
           new KMyMoneyRegister::FancyDateGroupMarker(this, thisYear, i18n("This year"));

@@ -104,9 +104,9 @@ namespace NewAccountWizard
   const MyMoneyAccount& HierarchyPage::parentAccount()
   {
     Q_D(HierarchyPage);
-    QVariant data = d->ui->m_parentAccounts->model()->data(d->ui->m_parentAccounts->currentIndex(), (int)eAccountsModel::Role::Account);
-    if (data.isValid()) {
-        d->m_parentAccount = data.value<MyMoneyAccount>();
+    auto dataVariant = d->ui->m_parentAccounts->model()->data(d->ui->m_parentAccounts->currentIndex(), (int)eAccountsModel::Role::Account);
+    if (dataVariant.isValid()) {
+        d->m_parentAccount = dataVariant.value<MyMoneyAccount>();
       } else {
         d->m_parentAccount = MyMoneyAccount();
       }

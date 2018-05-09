@@ -581,7 +581,7 @@ public:
               q->connect(transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), m_balanceWarning.data(), SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
               if (transactionEditor->enterTransactions(newId, false)) {
                 if (!newId.isEmpty()) {
-                  MyMoneyTransaction t = MyMoneyFile::instance()->transaction(newId);
+                  t = MyMoneyFile::instance()->transaction(newId);
                   schedule.setLastPayment(t.postDate());
                 }
                 // in case the next due date is invalid, the schedule is finished

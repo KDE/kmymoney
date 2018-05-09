@@ -79,9 +79,9 @@ QVariant KMyMoneyFrequencyCombo::currentData() const
   return itemData(currentIndex(), Qt::UserRole);
 }
 
-void KMyMoneyFrequencyCombo::setCurrentData(QVariant data)
+void KMyMoneyFrequencyCombo::setCurrentData(QVariant datavar)
 {
-  setItemData(currentIndex(), data, Qt::UserRole);
+  setItemData(currentIndex(), datavar, Qt::UserRole);
 }
 
 void KMyMoneyFrequencyCombo::slotCurrentDataChanged()

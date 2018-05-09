@@ -214,16 +214,16 @@ void onlineJob::setJobSend()
   setJobSend(QDateTime::currentDateTime());
 }
 
-void onlineJob::setBankAnswer(const onlineJob::sendingState sendingState, const QDateTime &dateTime)
+void onlineJob::setBankAnswer(const onlineJob::sendingState state, const QDateTime &dateTime)
 {
   Q_D(onlineJob);
-  d->m_jobBankAnswerState = sendingState;
+  d->m_jobBankAnswerState = state;
   d->m_jobBankAnswerDate = dateTime;
 }
 
-void onlineJob::setBankAnswer(const onlineJob::sendingState sendingState)
+void onlineJob::setBankAnswer(const onlineJob::sendingState state)
 {
-  setBankAnswer(sendingState, QDateTime::currentDateTime());
+  setBankAnswer(state, QDateTime::currentDateTime());
 }
 
 QDateTime onlineJob::bankAnswerDate() const

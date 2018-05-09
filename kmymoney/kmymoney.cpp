@@ -2693,7 +2693,7 @@ bool KMyMoneyApp::slotFileSaveAs()
     QPointer<KGpgKeySelectionDlg> dlg = new KGpgKeySelectionDlg(this);
     dlg->setSecretKeys(keyList, KMyMoneySettings::gpgRecipient());
     dlg->setAdditionalKeys(KMyMoneySettings::gpgRecipientList());
-    const int rc = dlg->exec();
+    rc = dlg->exec();
     if ((rc == QDialog::Accepted) && (dlg != 0)) {
       d->m_additionalGpgKeys = dlg->additionalKeys();
       selectedKeyName = dlg->secretKey();
@@ -3006,9 +3006,9 @@ void KMyMoneyApp::slotSaveAccountTemplates()
   KMSTATUS(i18n("Exporting account templates."));
 
   QString savePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/templates/" + QLocale().name();
-  QDir d(savePath);
-  if (!d.exists())
-      d.mkpath(savePath);
+  QDir templatesDir(savePath);
+  if (!templatesDir.exists())
+      templatesDir.mkpath(savePath);
   QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), savePath,
                     i18n("KMyMoney template files (*.kmt);;All files (*)"));
 
@@ -3555,9 +3555,9 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
 
   q->slotStatusProgressBar(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
   if (sumToComponentsMap.contains(amount)) {
-    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
-    while (itTransactionSplit.hasNext()) {
-      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit.next();
+    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit2(transactions);
+    while (itTransactionSplit2.hasNext()) {
+      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit2.next();
       const QList<QPair<QString, QString> > &splitIds = sumToComponentsMap.value(amount);
       if (splitIds.contains(qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id()))) {
         result.append(transactionSplit);

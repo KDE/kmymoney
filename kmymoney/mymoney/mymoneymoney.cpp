@@ -220,13 +220,13 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // and limit the precision to 9 digits (the max we can
   // present with 31 bits
 #if 1
-  signed int d;
+  signed int denominator;
   if (mpz_fits_sint_p(denom.get_mpz_t())) {
-    d = mpz_get_si(denom.get_mpz_t());
+    denominator = mpz_get_si(denom.get_mpz_t());
   } else {
-    d = 1000000000;
+    denominator = 1000000000;
   }
-  value = static_cast<const MyMoneyMoney>(convertDenominator(d)).valueRef().get_num();
+  value = static_cast<const MyMoneyMoney>(convertDenominator(denominator)).valueRef().get_num();
 #else
   value = static_cast<const MyMoneyMoney>(convertDenominator(denom)).valueRef().get_num();
 #endif
@@ -234,7 +234,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // Once we really support multiple currencies then this method will
   // be much better than using KLocale::global()->formatMoney.
   bool bNegative = false;
-  mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(d)).valueRef().get_den();
+  mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(denominator)).valueRef().get_den();
   mpz_class right = mpz_class((valueRef() - mpq_class(left)) * denom);
 
   if (right < 0) {

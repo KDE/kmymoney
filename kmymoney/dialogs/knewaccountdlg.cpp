@@ -625,8 +625,6 @@ void KNewAccountDlg::okClicked()
     QString institutionNameText = d->ui->m_qcomboboxInstitutions->currentText();
     if (institutionNameText != i18n("(No Institution)")) {
       try {
-        auto file = MyMoneyFile::instance();
-
         QList<MyMoneyInstitution> list = file->institutionList();
         QList<MyMoneyInstitution>::ConstIterator institutionIterator;
         for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {

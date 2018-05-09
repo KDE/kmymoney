@@ -46,7 +46,7 @@ namespace KMyMoneyRegister
     explicit RegisterItemDelegate(Register *parent);
     ~RegisterItemDelegate();
 
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const final override;
 
   private:
     Register *m_register;

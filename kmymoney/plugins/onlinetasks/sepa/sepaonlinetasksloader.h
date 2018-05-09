@@ -28,7 +28,7 @@ class sepaOnlineTasksLoader : public QObject, public KMyMoneyPlugin::onlineTaskF
 
 public:
   explicit sepaOnlineTasksLoader(QObject* parent = nullptr, const QVariantList& options = QVariantList{});
-  virtual onlineTask* createOnlineTask(const QString& taskId) const;
+  onlineTask* createOnlineTask(const QString& taskId) const final override;
 
 };
 

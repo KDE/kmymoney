@@ -409,11 +409,11 @@ protected:
    * @see KMainWindow#queryClose
    * @see QWidget#closeEvent
    */
-  virtual bool queryClose();
+  bool queryClose() final override;
 
   void slotCheckSchedules();
 
-  virtual void resizeEvent(QResizeEvent*);
+  void resizeEvent(QResizeEvent*) final override;
 
   void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
 
@@ -613,7 +613,7 @@ private:
   /**
     * Re-implemented from IMyMoneyProcessingCalendar
     */
-  bool isProcessingDate(const QDate& date) const;
+  bool isProcessingDate(const QDate& date) const final override;
 
   /**
     * Depending on the setting of AutoSaveOnQuit, this method

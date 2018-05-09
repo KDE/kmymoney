@@ -421,13 +421,13 @@ public:
     MyMoneyMoney value = balance;
     {
       QList<MyMoneyPrice>::const_iterator it_p;
-      QString security = account.currencyId();
+      QString securityID = account.currencyId();
       for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
-        value = (value * (MyMoneyMoney::ONE / (*it_p).rate(security))).convertPrecision(m_file->security(security).pricePrecision());
-        if ((*it_p).from() == security)
-          security = (*it_p).to();
+        value = (value * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(m_file->security(securityID).pricePrecision());
+        if ((*it_p).from() == securityID)
+          securityID = (*it_p).to();
         else
-          security = (*it_p).from();
+          securityID = (*it_p).from();
       }
       value = value.convert(m_file->baseCurrency().smallestAccountFraction());
     }

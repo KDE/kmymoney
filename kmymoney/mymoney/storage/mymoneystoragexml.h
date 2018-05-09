@@ -78,7 +78,7 @@ public:
   };
 
 protected:
-  void          setProgressCallback(void(*callback)(int, int, const QString&));
+  void          setProgressCallback(void(*callback)(int, int, const QString&)) override;
   void          signalProgress(int current, int total, const QString& = "");
 
   /**
@@ -144,8 +144,8 @@ protected:
 
   virtual QDomElement writeKeyValuePairs(const QMap<QString, QString> pairs);
 
-  virtual void readFile(QIODevice* s, MyMoneyStorageMgr* storage);
-  virtual void writeFile(QIODevice* s, MyMoneyStorageMgr* storage);
+  virtual void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  virtual void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
 
   bool readUserInformation(const QDomElement& userElement);
 

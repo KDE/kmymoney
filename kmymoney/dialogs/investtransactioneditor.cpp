@@ -788,18 +788,16 @@ void InvestTransactionEditor::loadEditWidgets()
 
     // scan the list of selected transactions and check that they have
     // the same activity.
-    KMyMoneyRegister::SelectedTransactions::iterator it_t = d->m_transactions.begin();
     const QString& action = d->m_item->split().action();
     bool isNegative = d->m_item->split().shares().isNegative();
     bool allSameActivity = true;
-    for (it_t = d->m_transactions.begin(); allSameActivity && (it_t != d->m_transactions.end()); ++it_t) {
+    for (auto it_t = d->m_transactions.begin(); allSameActivity && (it_t != d->m_transactions.end()); ++it_t) {
       allSameActivity = (action == (*it_t).split().action() && (*it_t).split().shares().isNegative() == isNegative);
     }
 
     QStringList fields;
     fields << "shares" << "price" << "fee-amount" << "interest-amount";
-    QStringList::const_iterator it_f;
-    for (it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
+    for (auto it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
       value = dynamic_cast<KMyMoneyEdit*>(haveWidget((*it_f)));
       if (!value)
         return;
@@ -810,8 +808,7 @@ void InvestTransactionEditor::loadEditWidgets()
     // if we have transactions with different activities, disable some more widgets
     if (!allSameActivity) {
       fields << "asset-account" << "fee-account" << "interest-account";
-      QStringList::const_iterator it_f;
-      for (it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
+      for (auto it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
         haveWidget(*it_f)->setDisabled(true);
       }
     }

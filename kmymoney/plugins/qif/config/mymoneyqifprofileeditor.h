@@ -46,7 +46,7 @@ public:
   explicit MyMoneyQifProfileNameValidator(QObject* o);
   virtual ~MyMoneyQifProfileNameValidator();
 
-  QValidator::State validate(QString&, int&) const;
+  QValidator::State validate(QString&, int&) const final override;
 };
 
 

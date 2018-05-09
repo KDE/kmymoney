@@ -224,7 +224,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       const MyMoneyTransaction& t = (*it_t).first;
       MyMoneySplit s = (*it_t).second;
 
-      MyMoneyAccount acc = file->account(s.accountId());
+      acc = file->account(s.accountId());
       // stock split shouldn't be fee or interest bacause it won't play nice with dissectTransaction
       // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
       if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
@@ -521,7 +521,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     try {
       qDebug("Processing transactions (%s)", qPrintable(d->m_account.name()));
       signalProgress(0, s.m_listTransactions.count(), "Importing Statement ...");
-      int progress = 0;
+      progress = 0;
       QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
       while (it_t != s.m_listTransactions.end() && !m_userAbort) {
         processTransactionEntry(*it_t);
@@ -910,7 +910,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // written.  However, if a user has an associated brokerage account,
       // we can stuff the transaction there.
 
-      QString brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
+      brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
       if (brokerageactid.isEmpty()) {
         brokerageactid = file->accountByName(d->m_account.brokerageName()).id();
       }

@@ -50,7 +50,7 @@ class payeeIdentifierLoader;
     return _pidid; \
   } \
   /** @brief Returns the payeeIdentifier Id */ \
-  virtual QString payeeIdentifierId() const { \
+  QString payeeIdentifierId() const final override { \
     return className::staticPayeeIdentifierIid(); \
   }
 

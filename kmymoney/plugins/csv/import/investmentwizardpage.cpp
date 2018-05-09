@@ -424,7 +424,7 @@ bool InvestmentPage::validateActionType()
 
         QStringList colList;
         QStringList colHeaders;
-        for (int col = 0; col < m_imp->m_file->m_columnCount; ++col) {
+        for (col = 0; col < m_imp->m_file->m_columnCount; ++col) {
           colHeaders.append(m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col, Column::Invalid), QString(i18nc("Unused column", "Unused"))));
           colList.append(m_imp->m_file->m_model->item(row, col)->text());
         }

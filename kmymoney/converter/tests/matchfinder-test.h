@@ -46,7 +46,7 @@ private:
   TransactionMatchFinder::MatchResult matchResult;
   QScopedPointer<ExistingTransactionMatchFinder> existingTrFinder;
 
-  MyMoneySchedule                     schedule;
+  MyMoneySchedule                     m_schedule;
   QScopedPointer<ScheduledTransactionMatchFinder> scheduledTrFinder;
 
   void setupStorage();

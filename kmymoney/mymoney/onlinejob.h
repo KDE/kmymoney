@@ -216,8 +216,8 @@ public:
    *
    * Set dateTime to QDateTime() and bankAnswer to noState to mark unsend. If bankAnswer == noState dateTime.isNull() must be true!
    */
-  void setBankAnswer(const sendingState sendingState, const QDateTime &dateTime);
-  void setBankAnswer(const sendingState sendingState);
+  void setBankAnswer(const sendingState state, const QDateTime &dateTime);
+  void setBankAnswer(const sendingState state);
 
   /**
    * @brief DateTime of the last status update by the bank

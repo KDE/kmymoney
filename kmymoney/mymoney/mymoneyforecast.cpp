@@ -375,17 +375,17 @@ public:
                 QMap<QString, MyMoneyMoney> balanceMap;
 
                 foreach (const auto split, t.splits()) {
-                  auto acc = file->account(split.accountId());
-                  if (q->isForecastAccount(acc)) {
+                  auto accountFromSplit = file->account(split.accountId());
+                  if (q->isForecastAccount(accountFromSplit)) {
                     // collect all overdues on the first day
                     QDate forecastDate = nextDate;
                     if (QDate::currentDate() >= nextDate)
                       forecastDate = QDate::currentDate().addDays(1);
 
                     dailyBalances balance;
-                    balance = m_accountList[acc.id()];
+                    balance = m_accountList[accountFromSplit.id()];
                     for (QDate f_day = QDate::currentDate(); f_day < forecastDate;) {
-                      balanceMap[acc.id()] += m_accountList[acc.id()][f_day];
+                      balanceMap[accountFromSplit.id()] += m_accountList[accountFromSplit.id()][f_day];
                       f_day = f_day.addDays(1);
                     }
                   }
@@ -396,10 +396,10 @@ public:
 
                 // now add the splits to the balances
                 foreach (const auto split, t.splits()) {
-                  auto acc = file->account(split.accountId());
-                  if (q->isForecastAccount(acc)) {
+                  auto accountFromSplit = file->account(split.accountId());
+                  if (q->isForecastAccount(accountFromSplit)) {
                     dailyBalances balance;
-                    balance = m_accountList[acc.id()];
+                    balance = m_accountList[accountFromSplit.id()];
                     //int offset = QDate::currentDate().daysTo(nextDate);
                     //if(offset <= 0) {  // collect all overdues on the first day
                     //  offset = 1;
@@ -409,12 +409,12 @@ public:
                     if (QDate::currentDate() >= nextDate)
                       forecastDate = QDate::currentDate().addDays(1);
 
-                    if (acc.accountType() == eMyMoney::Account::Type::Income) {
+                    if (accountFromSplit.accountType() == eMyMoney::Account::Type::Income) {
                       balance[forecastDate] += (split.shares() * MyMoneyMoney::MINUS_ONE);
                     } else {
                       balance[forecastDate] += split.shares();
                     }
-                    m_accountList[acc.id()] = balance;
+                    m_accountList[accountFromSplit.id()] = balance;
                   }
                 }
               }

@@ -50,14 +50,14 @@ public:
   explicit onlineJobModel(QObject *parent = nullptr);
   friend class Models;
 
-  int rowCount(const QModelIndex & parent = QModelIndex()) const;
-  int columnCount(const QModelIndex & parent = QModelIndex()) const;
-  QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-  QVariant headerData(int section, Qt::Orientation orientation , int role = Qt::DisplayRole) const;
+  int rowCount(const QModelIndex & parent = QModelIndex()) const final override;
+  int columnCount(const QModelIndex & parent = QModelIndex()) const final override;
+  QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const final override;
+  QVariant headerData(int section, Qt::Orientation orientation , int role = Qt::DisplayRole) const final override;
   /** @brief Remove onlineJob identified by row */
   bool removeRow(int row, const QModelIndex & parent = QModelIndex());
   /** @brief Remove onlineJobs identified by row and count */
-  bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
+  bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex()) final override;
 
 Q_SIGNALS:
 

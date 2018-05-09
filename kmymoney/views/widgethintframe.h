@@ -69,7 +69,7 @@ public:
   static void hide(QWidget* editWidget, const QString& tooltip = QString());
 
 protected:
-  virtual bool eventFilter(QObject* o, QEvent* e);
+  bool eventFilter(QObject* o, QEvent* e) final override;
 
 Q_SIGNALS:
   void changed();

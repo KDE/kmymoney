@@ -41,10 +41,10 @@ public:
   ~TestMyMoneyObject(){}
   TestMyMoneyObject(const QDomElement& node, const bool forceId = true) :
       MyMoneyObject(*new MyMoneyObjectPrivate, node, forceId) {}
-  virtual bool hasReferenceTo(const QString&) const {
+  bool hasReferenceTo(const QString&) const final override {
     return false;
   }
-  virtual void writeXML(QDomDocument&, QDomElement&) const {}
+  void writeXML(QDomDocument&, QDomElement&) const final override {}
 };
 
 void swap(TestMyMoneyObject& first, TestMyMoneyObject& second)

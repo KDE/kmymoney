@@ -105,20 +105,20 @@ class MyMoneyXmlContentHandler : public QXmlContentHandler
 public:
   MyMoneyXmlContentHandler(MyMoneyStorageXML* reader);
   virtual ~MyMoneyXmlContentHandler() {}
-  virtual void setDocumentLocator(QXmlLocator * locator) {
+  virtual void setDocumentLocator(QXmlLocator * locator) final override {
     m_loc = locator;
   }
-  virtual bool startDocument();
-  virtual bool endDocument();
-  virtual bool startPrefixMapping(const QString & prefix, const QString & uri);
-  virtual bool endPrefixMapping(const QString & prefix);
-  virtual bool startElement(const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts);
-  virtual bool endElement(const QString & namespaceURI, const QString & localName, const QString & qName);
-  virtual bool characters(const QString & ch);
-  virtual bool ignorableWhitespace(const QString & ch);
-  virtual bool processingInstruction(const QString & target, const QString & data);
-  virtual bool skippedEntity(const QString & name);
-  virtual QString errorString() const ;
+  virtual bool startDocument() final override;
+  virtual bool endDocument() final override;
+  virtual bool startPrefixMapping(const QString & prefix, const QString & uri) final override;
+  virtual bool endPrefixMapping(const QString & prefix) final override;
+  virtual bool startElement(const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts) final override;
+  virtual bool endElement(const QString & namespaceURI, const QString & localName, const QString & qName) final override;
+  virtual bool characters(const QString & ch) final override;
+  virtual bool ignorableWhitespace(const QString & ch) final override;
+  virtual bool processingInstruction(const QString & target, const QString & data) final override;
+  virtual bool skippedEntity(const QString & name) final override;
+  virtual QString errorString() const final override;
 private:
   MyMoneyStorageXML* m_reader;
   QXmlLocator*       m_loc;
@@ -298,14 +298,14 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
             m_reader->d->taList[ta.id()] = ta;
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeNames[nnCurrency]) {
-          MyMoneySecurity s(m_baseNode);
-          if (!s.id().isEmpty())
-            m_reader->d->secList[s.id()] = s;
+          MyMoneySecurity sec(m_baseNode);
+          if (!sec.id().isEmpty())
+            m_reader->d->secList[sec.id()] = sec;
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeNames[nnSecurity]) {
-          MyMoneySecurity s(m_baseNode);
-          if (!s.id().isEmpty())
-            m_reader->d->secList[s.id()] = s;
+          MyMoneySecurity sec(m_baseNode);
+          if (!sec.id().isEmpty())
+            m_reader->d->secList[sec.id()] = sec;
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeNames[nnKeyValuePairs]) {
           MyMoneyKeyValueContainer kvp(m_baseNode);
@@ -330,9 +330,9 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           rc = m_reader->readUserInformation(m_baseNode);
           m_reader->signalProgress(-1, -1);
         } else if (s == nodeNames[nnScheduleTX]) {
-          MyMoneySchedule s(m_baseNode);
-          if (!s.id().isEmpty())
-            m_reader->d->sList[s.id()] = s;
+          MyMoneySchedule sch(m_baseNode);
+          if (!sch.id().isEmpty())
+            m_reader->d->sList[sch.id()] = sch;
         } else if (s == nodeNames[nnPrice]) {
           MyMoneyPrice p(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity, m_baseNode);
           m_reader->d->prList[MyMoneySecurityPair(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity)][p.date()] = p;

@@ -134,9 +134,9 @@ public:
     m_oppositeSigns(oppositeSigns) {}
 
 
-  Profile type() const { return Profile::Banking; }
-  bool readSettings(const KSharedConfigPtr &config);
-  void writeSettings(const KSharedConfigPtr &config);
+  Profile type() const final override { return Profile::Banking; }
+  bool readSettings(const KSharedConfigPtr &config) final override;
+  void writeSettings(const KSharedConfigPtr &config) final override;
 
   QList<int>       m_memoColList;
 
@@ -170,9 +170,9 @@ public:
   {
   }
 
-  Profile type() const { return Profile::Investment; }
-  bool readSettings(const KSharedConfigPtr &config);
-  void writeSettings(const KSharedConfigPtr &config);
+  Profile type() const final override { return Profile::Investment; }
+  bool readSettings(const KSharedConfigPtr &config) final override;
+  void writeSettings(const KSharedConfigPtr &config) final override;
 
   QMap <eMyMoney::Transaction::Action, QStringList> m_transactionNames;
 
@@ -223,9 +223,9 @@ public:
   {
   }
 
-  Profile type() const { return m_profileType; }
-  bool readSettings(const KSharedConfigPtr &config);
-  void writeSettings(const KSharedConfigPtr &config);
+  Profile type() const final override { return m_profileType; }
+  bool readSettings(const KSharedConfigPtr &config) final override;
+  void writeSettings(const KSharedConfigPtr &config) final override;
 
   QString m_securityName;
   QString m_securitySymbol;

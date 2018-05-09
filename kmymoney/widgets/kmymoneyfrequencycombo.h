@@ -62,7 +62,7 @@ public:
 
   QVariant currentData() const;
 
-  void setCurrentData(QVariant data);
+  void setCurrentData(QVariant datavar);
 
 Q_SIGNALS:
   void currentDataChanged(QVariant data);

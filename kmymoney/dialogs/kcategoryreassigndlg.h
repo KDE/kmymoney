@@ -59,7 +59,7 @@ public:
   QString show(const MyMoneyAccount& category);
 
 protected:
-  void accept();
+  void accept() final override;
 
 private:
   Ui::KCategoryReassignDlg *ui;

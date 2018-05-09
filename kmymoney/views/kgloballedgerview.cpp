@@ -1871,8 +1871,7 @@ void KGlobalLedgerView::slotFinishReconciliation()
     actBalance = clearedBalance = balance;
 
     // walk the list of transactions to figure out the balance(s)
-    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-    for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
+    for (auto it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
       if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
         clearedBalance -= (*it).second.shares();
       }
@@ -1928,9 +1927,8 @@ void KGlobalLedgerView::slotFinishReconciliation()
       */
 
       // walk the list of transactions/splits and mark the cleared ones as reconciled
-      QList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it;
 
-      for (it = transactionList.begin(); it != transactionList.end(); ++it) {
+      for (auto it = transactionList.begin(); it != transactionList.end(); ++it) {
         MyMoneySplit sp = (*it).second;
         // skip the ones that are not marked cleared
         if (sp.reconcileFlag() != eMyMoney::Split::State::Cleared)

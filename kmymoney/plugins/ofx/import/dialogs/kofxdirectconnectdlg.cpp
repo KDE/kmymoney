@@ -92,9 +92,9 @@ bool KOfxDirectConnectDlg::init()
   }
 
   if (d->m_fpTrace.isOpen()) {
-    QByteArray data = m_connector.url().toUtf8();
+    QByteArray connectorData = m_connector.url().toUtf8();
     d->m_fpTrace.write("url: ", 5);
-    d->m_fpTrace.write(data, strlen(data));
+    d->m_fpTrace.write(connectorData, strlen(connectorData));
     d->m_fpTrace.write("\n", 1);
     d->m_fpTrace.write("request:\n", 9);
     QByteArray trcData(request);  // make local copy

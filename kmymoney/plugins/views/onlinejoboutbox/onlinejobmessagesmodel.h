@@ -29,11 +29,11 @@ class onlineJobMessagesModel : public QAbstractTableModel
 
 public:
   explicit onlineJobMessagesModel(QObject* parent = 0);
-  virtual QVariant data(const QModelIndex& index, int role) const;
-  virtual int columnCount(const QModelIndex& parent) const;
-  virtual int rowCount(const QModelIndex& parent) const;
-  virtual QModelIndex parent(const QModelIndex& child) const;
-  virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+  QVariant data(const QModelIndex& index, int role) const final override;
+  int columnCount(const QModelIndex& parent) const final override;
+  int rowCount(const QModelIndex& parent) const final override;
+  QModelIndex parent(const QModelIndex& child) const final override;
+  QVariant headerData(int section, Qt::Orientation orientation, int role) const final override;
 
 public Q_SLOTS:
   void setOnlineJob(const onlineJob& job);

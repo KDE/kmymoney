@@ -60,8 +60,8 @@ Q_SIGNALS:
   void acceptedForSend(onlineJob);
 
 public Q_SLOTS:
-  virtual void accept();
-  virtual void reject();
+  void accept() final override;
+  void reject()final override;
 
   /** @brief sets the current origin account */
   virtual void setCurrentAccount(const QString& accountId);

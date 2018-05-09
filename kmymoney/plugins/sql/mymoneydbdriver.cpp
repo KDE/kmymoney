@@ -41,7 +41,7 @@ public:
   MyMoneyDb2Driver() {
   }
 
-  virtual QString textString(const MyMoneyDbTextColumn& c) const;
+  QString textString(const MyMoneyDbTextColumn& c) const final override;
 };
 
 class MyMoneyInterbaseDriver : public MyMoneyDbDriver
@@ -57,18 +57,18 @@ public:
   MyMoneyMysqlDriver() {
   }
 
-  virtual bool isTested() const;
-  virtual bool canAutocreate() const;
-  virtual QString defaultDbName() const;
-  virtual QString createDbString(const QString& name) const;
-  virtual QString dropPrimaryKeyString(const QString& name) const;
-  virtual QString dropIndexString(const QString& tableName, const QString& indexName) const;
-  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-  virtual QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
-  virtual QString tableOptionString() const;
-  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
-  virtual QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
+  bool isTested() const final override;
+  bool canAutocreate() const final override;
+  QString defaultDbName() const final override;
+  QString createDbString(const QString& name) const final override;
+  QString dropPrimaryKeyString(const QString& name) const final override;
+  QString dropIndexString(const QString& tableName, const QString& indexName) const final override;
+  QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const final override;
+  QString intString(const MyMoneyDbIntColumn& c) const final override;
+  QString timestampString(const MyMoneyDbDatetimeColumn& c) const final override;
+  QString tableOptionString() const final override;
+  QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const final override;
+  QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const final override;
 };
 
 class MyMoneyOracleDriver : public MyMoneyDbDriver
@@ -77,11 +77,11 @@ public:
   MyMoneyOracleDriver() {
   }
 
-  virtual QString dropPrimaryKeyString(const QString& name) const;
-  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-  virtual QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual QString textString(const MyMoneyDbTextColumn& c) const;
-  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+  QString dropPrimaryKeyString(const QString& name) const final override;
+  QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const final override;
+  QString intString(const MyMoneyDbIntColumn& c) const final override;
+  QString textString(const MyMoneyDbTextColumn& c) const final override;
+  QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const final override;
 };
 
 class MyMoneyODBCDriver : public MyMoneyDbDriver
@@ -90,7 +90,7 @@ public:
   MyMoneyODBCDriver() {
   }
 
-  virtual QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  QString timestampString(const MyMoneyDbDatetimeColumn& c) const final override;
 };
 
 class MyMoneyPostgresqlDriver : public MyMoneyDbDriver
@@ -99,15 +99,15 @@ public:
   MyMoneyPostgresqlDriver() {
   }
 
-  virtual bool isTested() const;
-  virtual bool canAutocreate() const;
-  virtual QString defaultDbName() const;
-  virtual QString createDbString(const QString& name) const;
-  virtual QString dropPrimaryKeyString(const QString& name) const;
-  virtual QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-  virtual QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual QString textString(const MyMoneyDbTextColumn& c) const;
-  virtual QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+  bool isTested() const final override;
+  bool canAutocreate() const final override;
+  QString defaultDbName() const final override;
+  QString createDbString(const QString& name) const final override;
+  QString dropPrimaryKeyString(const QString& name) const final override;
+  QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const final override;
+  QString intString(const MyMoneyDbIntColumn& c) const final override;
+  QString textString(const MyMoneyDbTextColumn& c) const final override;
+  QString highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const final override;
 };
 
 class MyMoneySybaseDriver : public MyMoneyDbDriver
@@ -123,18 +123,18 @@ public:
   MyMoneySqlite3Driver() {
   }
 
-  virtual bool isTested() const;
-  virtual QString forUpdateString() const;
-  virtual QString intString(const MyMoneyDbIntColumn& c) const;
-  virtual bool requiresExternalFile() const;
-  virtual bool requiresCreation() const;
-  virtual bool isPasswordSupported() const;
+  bool isTested() const final override;
+  QString forUpdateString() const final override;
+  QString intString(const MyMoneyDbIntColumn& c) const final override;
+  bool requiresExternalFile() const final override;
+  bool requiresCreation() const final override;
+  bool isPasswordSupported() const override;
 };
 
 class MyMoneySqlCipher3Driver : public MyMoneySqlite3Driver
 {
 public:
-  virtual bool isPasswordSupported() const;
+  bool isPasswordSupported() const final override;
 };
 
 //********************* The driver map *********************

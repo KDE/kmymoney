@@ -157,7 +157,7 @@ public:
   void modifyReport(const MyMoneyReport& report) {
     m_report = report;
   }
-  void showEvent(QShowEvent * event);
+  void showEvent(QShowEvent * event) final override;
   void loadTab();
 };
 
@@ -563,7 +563,7 @@ public:
     // save expand states of all top-level items
     QMap<QString, bool> expandStates;
     for (int i = 0; i < m_tocTreeWidget->topLevelItemCount(); ++i) {
-      QTreeWidgetItem* item = m_tocTreeWidget->topLevelItem(i);
+      item = m_tocTreeWidget->topLevelItem(i);
 
       if (item) {
         QString itemLabel = item->text(0);
@@ -627,7 +627,7 @@ public:
     m_allTocItemGroups.insert(groupName, chartTocItemGroup);
 
     while (it_group != defaultreports.constEnd()) {
-      QString groupName = (*it_group).name();
+      groupName = (*it_group).name();
 
       TocItemGroup* defaultTocItemGroup =
         new TocItemGroup(m_tocTreeWidget, defaultGroupNo++,
@@ -681,7 +681,7 @@ public:
 
       MyMoneyReport report = *it_report;
 
-      QString groupName = (*it_report).group();
+      groupName = (*it_report).group();
 
       // If this report is in a known group, place it there
       // KReportGroupListItem* groupnode = groupitems[(*it_report).group()];
@@ -696,7 +696,7 @@ public:
           // group for orphaned reports
           int orphanGroupNo = favoriteGroupNo + 1;
 
-          QString groupName = I18N_NOOP("Old Customized Reports");
+          groupName = I18N_NOOP("Old Customized Reports");
 
           orphanTocItemGroup =
             new TocItemGroup(m_tocTreeWidget, orphanGroupNo,

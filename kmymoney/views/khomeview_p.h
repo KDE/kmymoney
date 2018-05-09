@@ -1679,13 +1679,13 @@ public:
 
         // take care of the autoCalc stuff
         if ((*sched_it).type() == Schedule::Type::LoanPayment) {
-          QDate nextDate = (*sched_it).nextPayment((*sched_it).lastPayment());
+          nextDate = (*sched_it).nextPayment((*sched_it).lastPayment());
 
           //make sure we have all 'starting balances' so that the autocalc works
           QMap<QString, MyMoneyMoney> balanceMap;
 
           foreach (const auto split, transaction.splits()) {
-            auto acc = file->account(split.accountId());
+            acc = file->account(split.accountId());
             // collect all overdues on the first day
             QDate schedDate = nextDate;
             if (QDate::currentDate() >= nextDate)
