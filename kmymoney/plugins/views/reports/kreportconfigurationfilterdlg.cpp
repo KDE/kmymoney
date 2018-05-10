@@ -501,7 +501,7 @@ void KReportConfigurationFilterDlg::slotReset()
         combo->setCurrentItem(i18n("Week"), false);
         break;
       default:
-        throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): QueryTable report has invalid rowtype");
+        throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): QueryTable report has invalid rowtype");
     }
 
     unsigned qc = d->m_initialState.queryColumns();
@@ -543,7 +543,7 @@ void KReportConfigurationFilterDlg::slotReset()
         combo->setCurrentItem(d->m_initialState.chartType());
         break;
       default:
-        throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
+        throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
     d->m_tabChart->ui->m_checkCHGridLines->setChecked(d->m_initialState.isChartCHGridLines());
     d->m_tabChart->ui->m_checkSVGridLines->setChecked(d->m_initialState.isChartSVGridLines());

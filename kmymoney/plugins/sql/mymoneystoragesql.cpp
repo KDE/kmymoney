@@ -45,7 +45,7 @@ MyMoneyStorageSql::~MyMoneyStorageSql()
 {
   try {
     close(true);
-  } catch (const MyMoneyException& e) {
+  } catch (const MyMoneyException &e) {
     qDebug() << "Caught Exception in MMStorageSql dtor: " << e.what();
   }
   Q_D(MyMoneyStorageSql);
@@ -279,7 +279,7 @@ void MyMoneyStorageSql::startCommitUnit(const QString& callingFunction)
 {
   Q_D(MyMoneyStorageSql);
   if (d->m_commitUnitStack.isEmpty()) {
-    if (!transaction()) throw MYMONEYEXCEPTION(d->buildError(QSqlQuery(), callingFunction, "starting commit unit") + ' ' + callingFunction);
+    if (!transaction()) throw MYMONEYEXCEPTION(d->buildError(QSqlQuery(), callingFunction, "starting commit unit"));
   }
   d->m_commitUnitStack.push(callingFunction);
 }
@@ -294,7 +294,7 @@ bool MyMoneyStorageSql::endCommitUnit(const QString& callingFunction)
   // as value of this method.
   bool rc = true;
   if (d->m_commitUnitStack.isEmpty()) {
-    throw MYMONEYEXCEPTION("Empty commit unit stack while trying to commit");
+    throw MYMONEYEXCEPTION_CSTRING("Empty commit unit stack while trying to commit");
   }
 
   if (callingFunction != d->m_commitUnitStack.top())
@@ -366,10 +366,10 @@ void MyMoneyStorageSql::removeInstitution(const MyMoneyInstitution& inst)
   QVariantList kvpList;
   kvpList << inst.id();
   d->deleteKeyValuePairs("OFXSETTINGS", kvpList);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmInstitutions"].deleteString());
-  q.bindValue(":id", inst.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting  Institution"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmInstitutions"].deleteString());
+  query.bindValue(":id", inst.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting  Institution")); // krazy:exclude=crashy
   --d->m_institutions;
   d->writeFileInfo();
 }
@@ -378,9 +378,9 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmPayees"].insertString());
-  d->writePayee(payee, q);
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmPayees"].insertString());
+  d->writePayee(payee, query);
   ++d->m_payees;
 
   QVariantList identIds;
@@ -392,7 +392,7 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
         // note: this changes ident
         addPayeeIdentifier(ident);
       identIds.append(ident.idString());
-    } catch (payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::empty &) {
       }
   }
 
@@ -407,12 +407,12 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
       order << i;
       payeeIdList << payee.id();
     }
-    q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, identifierId, userOrder) VALUES(?, ?, ?)");
-    q.bindValue(0, payeeIdList);
-    q.bindValue(1, identIds);
-    q.bindValue(2, order);
-    if (!q.execBatch())
-      throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("writing payee's identifiers"))); // krazy:exclude=crashy
+    query.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, identifierId, userOrder) VALUES(?, ?, ?)");
+    query.bindValue(0, payeeIdList);
+    query.bindValue(1, identIds);
+    query.bindValue(2, order);
+    if (!query.execBatch())
+      throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("writing payee's identifiers")); // krazy:exclude=crashy
   }
 
   d->writeFileInfo();
@@ -422,20 +422,20 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmPayees"].updateString());
-  d->writePayee(payee, q);
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmPayees"].updateString());
+  d->writePayee(payee, query);
 
   // Get a list of old identifiers first
-  q.prepare("SELECT identifierId FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
-  q.bindValue(0, payee.id());
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("modifying payee's identifiers (getting old values failed)"))); // krazy:exclude=crashy
+  query.prepare("SELECT identifierId FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
+  query.bindValue(0, payee.id());
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("modifying payee's identifiers (getting old values failed)")); // krazy:exclude=crashy
 
   QStringList oldIdentIds;
-  oldIdentIds.reserve(q.numRowsAffected());
-  while (q.next())
-    oldIdentIds << q.value(0).toString();
+  oldIdentIds.reserve(query.numRowsAffected());
+  while (query.next())
+    oldIdentIds << query.value(0).toString();
 
   // Add new and modify old payeeIdentifiers
   foreach (payeeIdentifier ident, payee.payeeIdentifiers()) {
@@ -460,10 +460,10 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
   }
 
   // Update relation table
-  q.prepare("DELETE FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
-  q.bindValue(0, payee.id());
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("modifying payee's identifiers (delete from mapping table)"))); // krazy:exclude=crashy
+  query.prepare("DELETE FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
+  query.bindValue(0, payee.id());
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("modifying payee's identifiers (delete from mapping table)")); // krazy:exclude=crashy
 
   // Get list again because modifiyPayeeIdentifier which is used above may change the id
   QList<payeeIdentifier> idents(payee.payeeIdentifiers());
@@ -485,12 +485,12 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     }
   }
 
-  q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, userOrder, identifierId) VALUES(?, ?, ?)");
-  q.bindValue(0, payeeIdList);
-  q.bindValue(1, order);
-  q.bindValue(2, identIdList);
-  if (!q.execBatch())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("writing payee's identifiers during modify"))); // krazy:exclude=crashy
+  query.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, userOrder, identifierId) VALUES(?, ?, ?)");
+  query.bindValue(0, payeeIdList);
+  query.bindValue(1, order);
+  query.bindValue(2, identIdList);
+  if (!query.execBatch())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("writing payee's identifiers during modify")); // krazy:exclude=crashy
 
   d->writeFileInfo();
 }
@@ -509,17 +509,17 @@ void MyMoneyStorageSql::removePayee(const MyMoneyPayee& payee)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
+  QSqlQuery query(*this);
 
   // Get identifiers first so we know which to delete
-  q.prepare("SELECT identifierId FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
-  q.bindValue(0, payee.id());
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("removing payee's identifiers (getting old values failed)"))); // krazy:exclude=crashy
+  query.prepare("SELECT identifierId FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
+  query.bindValue(0, payee.id());
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("removing payee's identifiers (getting old values failed)")); // krazy:exclude=crashy
 
   QStringList identIds;
-  while (q.next())
-    identIds << q.value(0).toString();
+  while (query.next())
+    identIds << query.value(0).toString();
 
   QMap<QString, payeeIdentifier> idents = fetchPayeeIdentifiers(identIds);
   foreach (payeeIdentifier ident, idents) {
@@ -527,15 +527,15 @@ void MyMoneyStorageSql::removePayee(const MyMoneyPayee& payee)
   }
 
   // Delete entries from mapping table
-  q.prepare("DELETE FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
-  q.bindValue(0, payee.id());
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("removing payee's identifiers (delete from mapping table)"))); // krazy:exclude=crashy
+  query.prepare("DELETE FROM kmmPayeesPayeeIdentifier WHERE payeeId = ?");
+  query.bindValue(0, payee.id());
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("removing payee's identifiers (delete from mapping table)")); // krazy:exclude=crashy
 
   // Delete payee
-  q.prepare(d->m_db.m_tables["kmmPayees"].deleteString());
-  q.bindValue(":id", payee.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting  Payee"))); // krazy:exclude=crashy
+  query.prepare(d->m_db.m_tables["kmmPayees"].deleteString());
+  query.bindValue(":id", payee.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting  Payee")); // krazy:exclude=crashy
   --d->m_payees;
 
   d->writeFileInfo();
@@ -567,10 +567,10 @@ void MyMoneyStorageSql::removeTag(const MyMoneyTag& tag)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmTags"].deleteString());
-  q.bindValue(":id", tag.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting  Tag"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmTags"].deleteString());
+  query.bindValue(":id", tag.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting  Tag")); // krazy:exclude=crashy
   --d->m_tags;
   d->writeFileInfo();
 }
@@ -620,10 +620,10 @@ void MyMoneyStorageSql::removeAccount(const MyMoneyAccount& acc)
   kvpList << acc.id();
   d->deleteKeyValuePairs("ACCOUNT", kvpList);
   d->deleteKeyValuePairs("ONLINEBANKING", kvpList);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmAccounts"].deleteString());
-  q.bindValue(":id", acc.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting Account"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmAccounts"].deleteString());
+  query.bindValue(":id", acc.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting Account")); // krazy:exclude=crashy
   --d->m_accounts;
   d->writeFileInfo();
 }
@@ -656,17 +656,17 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   // remove the splits of the old tx from the count table
-  QSqlQuery q(*this);
-  q.prepare("SELECT accountId FROM kmmSplits WHERE transactionId = :txId;");
-  q.bindValue(":txId", tx.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, "retrieving old splits"));
-  while (q.next()) {
-    QString id = q.value(0).toString();
+  QSqlQuery query(*this);
+  query.prepare("SELECT accountId FROM kmmSplits WHERE transactionId = :txId;");
+  query.bindValue(":txId", tx.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("retrieving old splits"));
+  while (query.next()) {
+    QString id = query.value(0).toString();
     --d->m_transactionCountMap[id];
   }
   // add the transaction and splits
-  q.prepare(d->m_db.m_tables["kmmTransactions"].updateString());
-  d->writeTransaction(tx.id(), tx, q, "N");
+  query.prepare(d->m_db.m_tables["kmmTransactions"].updateString());
+  d->writeTransaction(tx.id(), tx, query, "N");
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
@@ -763,10 +763,10 @@ void MyMoneyStorageSql::removeSecurity(const MyMoneySecurity& sec)
   QVariantList kvpList;
   kvpList << sec.id();
   d->deleteKeyValuePairs("SECURITY", kvpList);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmSecurities"].deleteString());
-  q.bindValue(":id", kvpList);
-  if (!q.execBatch()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting Security")));
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmSecurities"].deleteString());
+  query.bindValue(":id", kvpList);
+  if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting Security"));
   --d->m_securities;
   d->writeFileInfo();
 }
@@ -779,30 +779,30 @@ void MyMoneyStorageSql::addPrice(const MyMoneyPrice& p)
   // the app always calls addPrice, whether or not there is already one there
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   bool newRecord = false;
-  QSqlQuery q(*this);
+  QSqlQuery query(*this);
   QString s = d->m_db.m_tables["kmmPrices"].selectAllString(false);
   s += " WHERE fromId = :fromId AND toId = :toId AND priceDate = :priceDate;";
-  q.prepare(s);
-  q.bindValue(":fromId", p.from());
-  q.bindValue(":toId", p.to());
-  q.bindValue(":priceDate", p.date().toString(Qt::ISODate));
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("finding Price"))); // krazy:exclude=crashy
-  if (q.next()) {
-    q.prepare(d->m_db.m_tables["kmmPrices"].updateString());
+  query.prepare(s);
+  query.bindValue(":fromId", p.from());
+  query.bindValue(":toId", p.to());
+  query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("finding Price")); // krazy:exclude=crashy
+  if (query.next()) {
+    query.prepare(d->m_db.m_tables["kmmPrices"].updateString());
   } else {
-    q.prepare(d->m_db.m_tables["kmmPrices"].insertString());
+    query.prepare(d->m_db.m_tables["kmmPrices"].insertString());
     ++d->m_prices;
     newRecord = true;
   }
-  q.bindValue(":fromId", p.from());
-  q.bindValue(":toId", p.to());
-  q.bindValue(":priceDate", p.date().toString(Qt::ISODate));
-  q.bindValue(":price", p.rate(QString()).toString());
+  query.bindValue(":fromId", p.from());
+  query.bindValue(":toId", p.to());
+  query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
+  query.bindValue(":price", p.rate(QString()).toString());
   const MyMoneySecurity sec = d->m_storage->security(p.to());
-  q.bindValue(":priceFormatted",
+  query.bindValue(":priceFormatted",
               p.rate(QString()).formatMoney("", sec.pricePrecision()));
-  q.bindValue(":priceSource", p.source());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("writing Price"))); // krazy:exclude=crashy
+  query.bindValue(":priceSource", p.source());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("writing Price")); // krazy:exclude=crashy
 
   if (newRecord) d->writeFileInfo();
 }
@@ -811,12 +811,12 @@ void MyMoneyStorageSql::removePrice(const MyMoneyPrice& p)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmPrices"].deleteString());
-  q.bindValue(":fromId", p.from());
-  q.bindValue(":toId", p.to());
-  q.bindValue(":priceDate", p.date().toString(Qt::ISODate));
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting Price"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmPrices"].deleteString());
+  query.bindValue(":fromId", p.from());
+  query.bindValue(":toId", p.to());
+  query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting Price")); // krazy:exclude=crashy
   --d->m_prices;
   d->writeFileInfo();
 }
@@ -847,10 +847,10 @@ void MyMoneyStorageSql::removeCurrency(const MyMoneySecurity& sec)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmCurrencies"].deleteString());
-  q.bindValue(":ISOcode", sec.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting Currency"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmCurrencies"].deleteString());
+  query.bindValue(":ISOcode", sec.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting Currency")); // krazy:exclude=crashy
   --d->m_currencies;
   d->writeFileInfo();
 }
@@ -880,10 +880,10 @@ void MyMoneyStorageSql::removeReport(const MyMoneyReport& rep)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
-  q.bindValue(":id", rep.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting Report"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
+  query.bindValue(":id", rep.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting Report")); // krazy:exclude=crashy
   --d->m_reports;
   d->writeFileInfo();
 }
@@ -913,10 +913,10 @@ void MyMoneyStorageSql::removeBudget(const MyMoneyBudget& bud)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmBudgetConfig"].deleteString());
-  q.bindValue(":id", bud.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting Budget"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmBudgetConfig"].deleteString());
+  query.bindValue(":id", bud.id());
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting Budget")); // krazy:exclude=crashy
   --d->m_budgets;
   d->writeFileInfo();
 }
@@ -925,11 +925,11 @@ void MyMoneyStorageSql::addOnlineJob(const onlineJob& job)
 {
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  QSqlQuery q(*this);
-  q.prepare("INSERT INTO kmmOnlineJobs (id, type, jobSend, bankAnswerDate, state, locked) VALUES(:id, :type, :jobSend, :bankAnswerDate, :state, :locked);");
-  d->writeOnlineJob(job, q);
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("writing onlineJob"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare("INSERT INTO kmmOnlineJobs (id, type, jobSend, bankAnswerDate, state, locked) VALUES(:id, :type, :jobSend, :bankAnswerDate, :state, :locked);");
+  d->writeOnlineJob(job, query);
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("writing onlineJob")); // krazy:exclude=crashy
   ++d->m_onlineJobs;
 
   try {
@@ -958,7 +958,7 @@ void MyMoneyStorageSql::modifyOnlineJob(const onlineJob& job)
 
   d->writeOnlineJob(job, query);
   if (!query.exec())
-    throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("writing onlineJob"))); // krazy:exclude=crashy
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("writing onlineJob")); // krazy:exclude=crashy
 
   try {
     // Modify online task
@@ -982,11 +982,11 @@ void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
   } catch (onlineJob::emptyTask&) {
   }
 
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmOnlineJobs"].deleteString());
-  q.bindValue(":id", job.id());
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting onlineJob"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmOnlineJobs"].deleteString());
+  query.bindValue(":id", job.id());
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting onlineJob")); // krazy:exclude=crashy
   --d->m_onlineJobs;
 }
 
@@ -1004,7 +1004,7 @@ void MyMoneyStorageSql::addPayeeIdentifier(payeeIdentifier& ident)
 
   try {
     d->insertStorableObject(*ident.data(), ident.idString());
-  } catch (payeeIdentifier::empty&) {
+  } catch (const payeeIdentifier::empty &) {
   }
 }
 
@@ -1013,38 +1013,38 @@ void MyMoneyStorageSql::modifyPayeeIdentifier(const payeeIdentifier& ident)
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
 
-  QSqlQuery q(*this);
-  q.prepare("SELECT type FROM kmmPayeeIdentifier WHERE id = ?");
-  q.bindValue(0, ident.idString());
-  if (!q.exec() || !q.next())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("modifying payeeIdentifier"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare("SELECT type FROM kmmPayeeIdentifier WHERE id = ?");
+  query.bindValue(0, ident.idString());
+  if (!query.exec() || !query.next())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("modifying payeeIdentifier")); // krazy:exclude=crashy
 
-  bool typeChanged = (q.value(0).toString() != ident.iid());
+  bool typeChanged = (query.value(0).toString() != ident.iid());
 
   if (typeChanged) {
     // Delete old identifier if type changed
     const payeeIdentifier oldIdent(fetchPayeeIdentifier(ident.idString()));
     try {
       d->deleteStorableObject(*oldIdent.data(), ident.idString());
-    } catch (payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::empty &) {
       // Note: this should not happen because the ui does not offer a way to change
       // the type of an payeeIdentifier if it was not correctly loaded.
-      throw MYMONEYEXCEPTION(QLatin1String("Could not modify payeeIdentifier '")
+      throw MYMONEYEXCEPTION((QString::fromLatin1("Could not modify payeeIdentifier '")
         + ident.idString()
-        + QLatin1String("' because type changed and could not remove identifier of old type. Maybe a plugin is missing?")
+        + QLatin1String("' because type changed and could not remove identifier of old type. Maybe a plugin is missing?"))
       ); // krazy:exclude=crashy
     }
   }
 
-  q.prepare("UPDATE kmmPayeeIdentifier SET type = :type WHERE id = :id");
-  d->writePayeeIdentifier(ident, q);
+  query.prepare("UPDATE kmmPayeeIdentifier SET type = :type WHERE id = :id");
+  d->writePayeeIdentifier(ident, query);
 
   try {
     if (typeChanged)
       d->insertStorableObject(*ident.data(), ident.idString());
     else
       d->updateStorableObject(*ident.data(), ident.idString());
-  } catch (payeeIdentifier::empty&) {
+  } catch (const payeeIdentifier::empty &) {
   }
 }
 
@@ -1057,14 +1057,14 @@ void MyMoneyStorageSql::removePayeeIdentifier(const payeeIdentifier& ident)
   // of row in kmmPayeeIdentifier
   try {
     d->deleteStorableObject(*ident.data(), ident.idString());
-  } catch (payeeIdentifier::empty&) {
+  } catch (const payeeIdentifier::empty &) {
   }
 
-  QSqlQuery q(*this);
-  q.prepare(d->m_db.m_tables["kmmPayeeIdentifier"].deleteString());
-  q.bindValue(":id", ident.idString());
-  if (!q.exec())
-    throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("deleting payeeIdentifier"))); // krazy:exclude=crashy
+  QSqlQuery query(*this);
+  query.prepare(d->m_db.m_tables["kmmPayeeIdentifier"].deleteString());
+  query.bindValue(":id", ident.idString());
+  if (!query.exec())
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("deleting payeeIdentifier")); // krazy:exclude=crashy
   --d->m_payeeIdentifier;
 }
 
@@ -1120,7 +1120,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
     }
   }
 
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Institution"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString::fromLatin1("reading Institution"))); // krazy:exclude=crashy
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int managerCol = t.fieldNumber("manager");
@@ -1142,7 +1142,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
     inst.setTelephone(GETSTRING(telephoneCol));
     // get list of subaccounts
     sq.bindValue(":id", iid);
-    if (!sq.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Institution AccountList"))); // krazy:exclude=crashy
+    if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Institution AccountList")); // krazy:exclude=crashy
     QStringList aList;
     while (sq.next()) aList.append(sq.value(0).toString());
     foreach (const QString& it, aList)
@@ -1231,7 +1231,7 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
   }
 
   if (!query.exec())
-    throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Payee"))); // krazy:exclude=crashy
+    throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString::fromLatin1("reading Payee"))); // krazy:exclude=crashy
   const QSqlRecord record = query.record();
   const int idCol = record.indexOf("id");
   const int nameCol = record.indexOf("name");
@@ -1349,7 +1349,7 @@ QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& i
     }
   }
   if (!query.exec())
-    throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading onlineJobs"))); // krazy:exclude=crashy
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading onlineJobs")); // krazy:exclude=crashy
 
   // Create onlineJobs
   int progress = 0;
@@ -1392,7 +1392,7 @@ payeeIdentifier MyMoneyStorageSql::fetchPayeeIdentifier(const QString& id) const
   QMap<QString, payeeIdentifier> list = fetchPayeeIdentifiers(QStringList(id));
   QMap<QString, payeeIdentifier>::const_iterator iter = list.constFind(id);
   if (iter == list.constEnd())
-    throw MYMONEYEXCEPTION(QLatin1String("payeeIdentifier with id '") + id + QLatin1String("' not found.")); // krazy:exclude=crashy
+    throw MYMONEYEXCEPTION(QString::fromLatin1("payeeIdentifier with id '%1' not found").arg(id)); // krazy:exclude=crashy
   return *iter;
 }
 
@@ -1415,7 +1415,7 @@ QMap< QString, payeeIdentifier > MyMoneyStorageSql::fetchPayeeIdentifiers(const 
     }
   }
   if (!query.exec())
-    throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading payee identifiers"))); // krazy:exclude=crashy
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading payee identifiers")); // krazy:exclude=crashy
 
   QMap<QString, payeeIdentifier> identList;
 
@@ -1459,7 +1459,7 @@ QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList
     whereClause += ')';
     query.prepare(t.selectAllString(false) + whereClause);
   }
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Tag"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Tag")); // krazy:exclude=crashy
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int notesCol = t.fieldNumber("notes");
@@ -1538,8 +1538,8 @@ QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList
     }
   }
 
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Account"))); // krazy:exclude=crashy
-  if (!sq.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading subAccountList"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Account")); // krazy:exclude=crashy
+  if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading subAccountList")); // krazy:exclude=crashy
 
   // Reserve enough space for all values. Approximate it with the size of the
   // idList in case the db doesn't support reporting the size of the
@@ -1666,7 +1666,7 @@ QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringList& i
   }
 
   if (!query.exec()) // krazy:exclude=crashy
-    throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("fetching balance")));
+    throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("fetching balance"));
   QString id;
   QString oldId;
   MyMoneyMoney temp;
@@ -1721,7 +1721,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
   const MyMoneyDbTable& t = d->m_db.m_tables["kmmTransactions"];
   QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
   query.prepare(t.selectAllString(false) + whereClause + " ORDER BY id;");
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Transaction"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Transaction")); // krazy:exclude=crashy
   const MyMoneyDbTable& ts = d->m_db.m_tables["kmmSplits"];
   whereClause = " WHERE txType = 'N' ";
   if (! tidList.isEmpty()) {
@@ -2078,7 +2078,7 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
     }
   }
 
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Schedules"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Schedules")); // krazy:exclude=crashy
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int typeCol = t.fieldNumber("type");
@@ -2164,7 +2164,7 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
 
     // read in the recorded payments
     sq.bindValue(":id", s.id());
-    if (!sq.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading schedule payment history"))); // krazy:exclude=crashy
+    if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading schedule payment history")); // krazy:exclude=crashy
     while (sq.next()) s.recordPayment(sq.value(0).toDate());
 
     sList[s.id()] = s;
@@ -2196,7 +2196,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QStringL
   const MyMoneyDbTable& t = d->m_db.m_tables["kmmSecurities"];
   QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
   query.prepare(t.selectAllString(false) + " ORDER BY id;");
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Securities"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Securities")); // krazy:exclude=crashy
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int symbolCol = t.fieldNumber("symbol");
@@ -2351,7 +2351,7 @@ MyMoneyPriceList MyMoneyStorageSql::fetchPrices(const QStringList& fromIdList, c
     }
   }
 
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Prices"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Prices")); // krazy:exclude=crashy
   static const int fromIdCol = t.fieldNumber("fromId");
   static const int toIdCol = t.fieldNumber("toId");
   static const int priceDateCol = t.fieldNumber("priceDate");
@@ -2413,7 +2413,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QStringL
     }
   }
 
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading Currencies"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Currencies")); // krazy:exclude=crashy
   int ISOcodeCol = t.fieldNumber("ISOcode");
   int nameCol = t.fieldNumber("name");
   int typeCol = t.fieldNumber("type");
@@ -2459,7 +2459,7 @@ QMap<QString, MyMoneyReport> MyMoneyStorageSql::fetchReports(const QStringList& 
   const MyMoneyDbTable& t = d->m_db.m_tables["kmmReportConfig"];
   QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
   query.prepare(t.selectAllString(true));
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading reports"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading reports")); // krazy:exclude=crashy
   int xmlCol = t.fieldNumber("XML");
   QMap<QString, MyMoneyReport> rList;
   while (query.next()) {
@@ -2501,7 +2501,7 @@ QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QStringList& 
   queryString += ';';
 
   query.prepare(queryString);
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading budgets"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading budgets")); // krazy:exclude=crashy
   QMap<QString, MyMoneyBudget> budgets;
   int xmlCol = t.fieldNumber("XML");
   while (query.next()) {
@@ -2816,7 +2816,7 @@ QMap< QString, MyMoneyCostCenter > MyMoneyStorageSql::fetchCostCenters(const QSt
     whereClause += ')';
     query.prepare(t.selectAllString(false) + whereClause);
   }
-  if (!query.exec()) throw MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, QString("reading CostCenter"))); // krazy:exclude=crashy
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading CostCenter")); // krazy:exclude=crashy
   const int idCol = t.fieldNumber("id");
   const int nameCol = t.fieldNumber("name");
 

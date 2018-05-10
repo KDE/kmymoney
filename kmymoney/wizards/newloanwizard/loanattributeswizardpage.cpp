@@ -63,7 +63,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
       ui->m_qcomboboxInstitutions->addItem(institution.name());
     }
   } catch (const MyMoneyException &e) {
-    qDebug("Exception in institution load: %s", qPrintable(e.what()));
+    qDebug("Exception in institution load: %s", e.what());
   }
 }
 

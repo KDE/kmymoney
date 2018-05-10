@@ -128,12 +128,12 @@ public:
               }
               ft.commit();
             } catch (const MyMoneyException &e) {
-              qDebug("Cannot add schedule: '%s'", qPrintable(e.what()));
+              qDebug("Cannot add schedule: '%s'", e.what());
             }
           }
         } catch (const MyMoneyException &e) {
           qDebug("Unable to modify account %s: '%s'", qPrintable(m_currentAccount.name()),
-                 qPrintable(e.what()));
+                 e.what());
         }
       }
     }

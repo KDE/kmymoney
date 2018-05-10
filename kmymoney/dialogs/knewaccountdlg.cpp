@@ -339,7 +339,7 @@ public:
       else
         institutionName.clear();
     } catch (const MyMoneyException &e) {
-      qDebug("exception in init for account dialog: %s", qPrintable(e.what()));
+      qDebug("exception in init for account dialog: %s", e.what());
     }
 
     if (m_account.isInvest())
@@ -632,7 +632,7 @@ void KNewAccountDlg::okClicked()
             d->m_account.setInstitutionId((*institutionIterator).id());
         }
       } catch (const MyMoneyException &e) {
-        qDebug("Exception in account institution set: %s", qPrintable(e.what()));
+        qDebug("Exception in account institution set: %s", e.what());
       }
     } else {
       d->m_account.setInstitutionId(QString());
@@ -794,7 +794,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 
     d->ui->m_qcomboboxInstitutions->setCurrentItem(name, false);
   } catch (const MyMoneyException &e) {
-    qDebug("Exception in institution load: %s", qPrintable(e.what()));
+    qDebug("Exception in institution load: %s", e.what());
   }
 }
 

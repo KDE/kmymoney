@@ -175,7 +175,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       messageDetail += i18n("<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(this, i18n("Fatal error in determining data: %1", e.what()));
+    KMessageBox::error(this, i18n("Fatal error in determining data: %1", QString::fromLatin1(e.what())));
   }
 
   messageDetail += "</qt>";

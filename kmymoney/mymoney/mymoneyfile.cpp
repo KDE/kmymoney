@@ -206,7 +206,7 @@ public:
     */
   inline void checkStorage() const {
     if (m_storage == 0)
-      throw MYMONEYEXCEPTION("No storage object attached to MyMoneyFile");
+      throw MYMONEYEXCEPTION_CSTRING("No storage object attached to MyMoneyFile");
   }
 
   /**
@@ -216,9 +216,8 @@ public:
     */
   void checkTransaction(const char* txt) const {
     checkStorage();
-    if (!m_inTransaction) {
-      throw MYMONEYEXCEPTION(QString("No transaction started for %1").arg(txt));
-    }
+    if (!m_inTransaction)
+      throw MYMONEYEXCEPTION(QString::fromLatin1("No transaction started for %1").arg(QString::fromLatin1(txt)));
   }
 
   void priceChanged(const MyMoneyFile& file, const MyMoneyPrice price) {
@@ -328,10 +327,10 @@ MyMoneyFile* MyMoneyFile::instance()
 void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
 {
   if (d->m_storage != 0)
-    throw MYMONEYEXCEPTION("Storage already attached");
+    throw MYMONEYEXCEPTION_CSTRING("Storage already attached");
 
   if (storage == 0)
-    throw MYMONEYEXCEPTION("Storage must not be 0");
+    throw MYMONEYEXCEPTION_CSTRING("Storage must not be 0");
 
   d->m_storage = storage;
 
@@ -369,7 +368,7 @@ void MyMoneyFile::startTransaction()
 {
   d->checkStorage();
   if (d->m_inTransaction) {
-    throw MYMONEYEXCEPTION("Already started a transaction!");
+    throw MYMONEYEXCEPTION_CSTRING("Already started a transaction!");
   }
 
   d->m_storage->startTransaction();
@@ -463,7 +462,7 @@ void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)
 
   if (institution.name().length() == 0
       || institution.id().length() != 0)
-    throw MYMONEYEXCEPTION("Not a new institution");
+    throw MYMONEYEXCEPTION_CSTRING("Not a new institution");
 
   d->checkTransaction(Q_FUNC_INFO);
 
@@ -493,9 +492,9 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
     // account does not exist
     auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
-      throw MYMONEYEXCEPTION("Cannot store split with no account assigned");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot store split with no account assigned");
     if (isStandardAccount(split.accountId()))
-      throw MYMONEYEXCEPTION("Cannot store split referencing standard account");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot store split referencing standard account");
     if (acc.isLoan() && (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)))
       loanAccountAffected = true;
   }
@@ -562,12 +561,12 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
 
     // now check that it is the same
     if (!(account == _account))
-      throw MYMONEYEXCEPTION("Unable to modify the standard account groups");
+      throw MYMONEYEXCEPTION_CSTRING("Unable to modify the standard account groups");
   }
 
   if (account.accountType() != acc.accountType() &&
       !account.isLiquidAsset() && !acc.isLiquidAsset())
-    throw MYMONEYEXCEPTION("Unable to change account type");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to change account type");
 
   // if the account was moved to another institution, we notify
   // the old one as well as the new one and the structure change
@@ -597,17 +596,17 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 
   // check that it's not one of the standard account groups
   if (isStandardAccount(acc.id()))
-    throw MYMONEYEXCEPTION("Unable to reparent the standard account groups");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to reparent the standard account groups");
 
   if (acc.accountGroup() == parent.accountGroup()
       || (acc.accountType() == Account::Type::Income && parent.accountType() == Account::Type::Expense)
       || (acc.accountType() == Account::Type::Expense && parent.accountType() == Account::Type::Income)) {
 
     if (acc.isInvest() && parent.accountType() != Account::Type::Investment)
-      throw MYMONEYEXCEPTION("Unable to reparent Stock to non-investment account");
+      throw MYMONEYEXCEPTION_CSTRING("Unable to reparent Stock to non-investment account");
 
     if (parent.accountType() == Account::Type::Investment && !acc.isInvest())
-      throw MYMONEYEXCEPTION("Unable to reparent non-stock to investment account");
+      throw MYMONEYEXCEPTION_CSTRING("Unable to reparent non-stock to investment account");
 
     // keep a notification of the current parent
     MyMoneyAccount curParent = account(acc.parentAccountId());
@@ -619,7 +618,7 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, acc);
 
   } else
-    throw MYMONEYEXCEPTION("Unable to reparent to different account type");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to reparent to different account type");
 }
 
 MyMoneyInstitution MyMoneyFile::institution(const QString& id) const
@@ -652,7 +651,7 @@ MyMoneyAccount MyMoneyFile::accountByName(const QString& name) const
 {
   try {
     return d->m_storage->accountByName(name);
-  } catch(const MyMoneyException&) {
+  } catch (const MyMoneyException &) {
   }
   return MyMoneyAccount();
 }
@@ -672,7 +671,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
   for (const auto& split : splits) {
     auto acc = account(split.accountId());
     if (acc.isClosed())
-      throw MYMONEYEXCEPTION(i18n("Cannot remove transaction that references a closed account."));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove transaction that references a closed account."));
     d->addCacheNotification(split.accountId(), tr.postDate());
     //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
@@ -733,10 +732,10 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   // check that it's not one of the standard account groups
   if (isStandardAccount(account.id()))
-    throw MYMONEYEXCEPTION("Unable to remove the standard account groups");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to remove the standard account groups");
 
   if (hasActiveSplits(account.id())) {
-    throw MYMONEYEXCEPTION("Unable to remove account with active splits");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to remove account with active splits");
   }
 
   // collect all sub-ordinate accounts for notification
@@ -764,14 +763,14 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
 {
   if (level > 100)
-    throw MYMONEYEXCEPTION("Too deep recursion in [MyMoneyFile::removeAccountList]!");
+    throw MYMONEYEXCEPTION_CSTRING("Too deep recursion in [MyMoneyFile::removeAccountList]!");
 
   d->checkTransaction(Q_FUNC_INFO);
 
   // upon entry, we check that we could proceed with the operation
   if (!level) {
     if (!hasOnlyUnusedAccounts(account_list, 0)) {
-      throw MYMONEYEXCEPTION("One or more accounts cannot be removed");
+      throw MYMONEYEXCEPTION_CSTRING("One or more accounts cannot be removed");
     }
   }
 
@@ -798,7 +797,7 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
 bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigned int level)
 {
   if (level > 100)
-    throw MYMONEYEXCEPTION("Too deep recursion in [MyMoneyFile::hasOnlyUnusedAccounts]!");
+    throw MYMONEYEXCEPTION_CSTRING("Too deep recursion in [MyMoneyFile::hasOnlyUnusedAccounts]!");
   // process all accounts in the list and test if they have transactions assigned
   for (const auto& sAccount : account_list) {
     if (transactionCount(sAccount) != 0)
@@ -906,8 +905,8 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
 
     ft.commit();
   } catch (const MyMoneyException &e) {
-    qWarning("Unable to create account: %s", qPrintable(e.what()));
-    throw MYMONEYEXCEPTION(e.what());
+    qWarning("Unable to create account: %s", e.what());
+    throw;
   }
 }
 
@@ -923,19 +922,19 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // it's own ID is not set and it does not have a pointer to (MyMoneyFile)
 
   if (account.name().length() == 0)
-    throw MYMONEYEXCEPTION("Account has no name");
+    throw MYMONEYEXCEPTION_CSTRING("Account has no name");
 
   if (account.id().length() != 0)
-    throw MYMONEYEXCEPTION("New account must have no id");
+    throw MYMONEYEXCEPTION_CSTRING("New account must have no id");
 
   if (account.accountList().count() != 0)
-    throw MYMONEYEXCEPTION("New account must have no sub-accounts");
+    throw MYMONEYEXCEPTION_CSTRING("New account must have no sub-accounts");
 
   if (!account.parentAccountId().isEmpty())
-    throw MYMONEYEXCEPTION("New account must have no parent-id");
+    throw MYMONEYEXCEPTION_CSTRING("New account must have no parent-id");
 
   if (account.accountType() == Account::Type::Unknown)
-    throw MYMONEYEXCEPTION("Account has invalid type");
+    throw MYMONEYEXCEPTION_CSTRING("Account has invalid type");
 
   // make sure, that the parent account exists
   // if not, an exception is thrown. If it exists,
@@ -968,13 +967,13 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // that the parent for a stock account must be an investment. Also,
   // an investment cannot have another investment account as it's parent
   if (parent.isInvest())
-    throw MYMONEYEXCEPTION("Stock account cannot be parent account");
+    throw MYMONEYEXCEPTION_CSTRING("Stock account cannot be parent account");
 
   if (account.isInvest() && parent.accountType() != Account::Type::Investment)
-    throw MYMONEYEXCEPTION("Stock account must have investment account as parent ");
+    throw MYMONEYEXCEPTION_CSTRING("Stock account must have investment account as parent ");
 
   if (!account.isInvest() && parent.accountType() == Account::Type::Investment)
-    throw MYMONEYEXCEPTION("Investment account can only have stock accounts as children");
+    throw MYMONEYEXCEPTION_CSTRING("Investment account can only have stock accounts as children");
 
   // if an institution is set, verify that it exists
   if (account.institutionId().length() != 0) {
@@ -1091,7 +1090,7 @@ QString MyMoneyFile::openingBalanceTransaction(const MyMoneyAccount& acc) const
 MyMoneyAccount MyMoneyFile::openingBalanceAccount(const MyMoneySecurity& security)
 {
   if (!security.isCurrency())
-    throw MYMONEYEXCEPTION("Opening balance for non currencies not supported");
+    throw MYMONEYEXCEPTION_CSTRING("Opening balance for non currencies not supported");
 
   try {
     return openingBalanceAccount_internal(security);
@@ -1118,7 +1117,7 @@ MyMoneyAccount MyMoneyFile::openingBalanceAccount(const MyMoneySecurity& securit
 MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySecurity& security) const
 {
   if (!security.isCurrency())
-    throw MYMONEYEXCEPTION("Opening balance for non currencies not supported");
+    throw MYMONEYEXCEPTION_CSTRING("Opening balance for non currencies not supported");
 
   MyMoneyAccount acc;
   QList<MyMoneyAccount> accounts;
@@ -1144,9 +1143,8 @@ MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySecurity
     }
   }
 
-  if (acc.id().isEmpty()) {
-    throw MYMONEYEXCEPTION(QString("No opening balance account for %1").arg(security.tradingSymbol()));
-  }
+  if (acc.id().isEmpty())
+    throw MYMONEYEXCEPTION(QString::fromLatin1("No opening balance account for %1").arg(security.tradingSymbol()));
 
   return acc;
 }
@@ -1205,9 +1203,9 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
   // first perform all the checks
   if (!transaction.id().isEmpty())
-    throw MYMONEYEXCEPTION("Unable to add transaction with id set");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to add transaction with id set");
   if (!transaction.postDate().isValid())
-    throw MYMONEYEXCEPTION("Unable to add transaction with invalid postdate");
+    throw MYMONEYEXCEPTION_CSTRING("Unable to add transaction with invalid postdate");
 
   // now check the splits
   auto loanAccountAffected = false;
@@ -1217,11 +1215,11 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     // account does not exist or is one of the standard accounts
     auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
-      throw MYMONEYEXCEPTION("Cannot add split with no account assigned");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot add split with no account assigned");
     if (acc.isLoan())
       loanAccountAffected = true;
     if (isStandardAccount(split.accountId()))
-      throw MYMONEYEXCEPTION("Cannot add split referencing standard account");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing standard account");
   }
 
   // change transfer splits between asset/liability and loan accounts
@@ -1577,7 +1575,7 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
     qWarning("Missing price info for conversion from %s to %s", qPrintable(from.name()), qPrintable(to.name()));
 
   } catch (const MyMoneyException &e) {
-    qWarning("Missing security caught in MyMoneyFile::warningMissingRate(): %s(%ld) %s", qPrintable(e.file()), e.line(), qPrintable(e.what()));
+    qWarning("Missing security caught in MyMoneyFile::warningMissingRate(). %s", e.what());
   }
 }
 
@@ -1718,9 +1716,9 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
     // account does not exist or is one of the standard accounts
     const auto acc = account(split.accountId());
     if (acc.id().isEmpty())
-      throw MYMONEYEXCEPTION("Cannot add split with no account assigned");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot add split with no account assigned");
     if (isStandardAccount(split.accountId()))
-      throw MYMONEYEXCEPTION("Cannot add split referencing standard account");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing standard account");
   }
 
   d->m_storage->addSchedule(sched);
@@ -1736,9 +1734,9 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
     // account does not exist or is one of the standard accounts
     auto acc = MyMoneyFile::account(split.accountId());
     if (acc.id().isEmpty())
-      throw MYMONEYEXCEPTION("Cannot store split with no account assigned");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot store split with no account assigned");
     if (isStandardAccount(split.accountId()))
-      throw MYMONEYEXCEPTION("Cannot store split referencing standard account");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot store split referencing standard account");
   }
 
   d->m_storage->modifySchedule(sched);
@@ -1940,7 +1938,7 @@ QStringList MyMoneyFile::consistencyCheck()
       try {
         child = account(accountID);
         if (child.parentAccountId() != (*it_a).id()) {
-          throw MYMONEYEXCEPTION("Child account has a different parent");
+          throw MYMONEYEXCEPTION_CSTRING("Child account has a different parent");
         }
       } catch (const MyMoneyException &) {
         problemCount++;
@@ -2446,7 +2444,7 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
   QString categoryText;
 
   if (base.id() != expense().id() && base.id() != income().id())
-    throw MYMONEYEXCEPTION("Invalid base category");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid base category");
 
   QStringList subAccounts = name.split(AccountSeparator);
   QStringList::Iterator it;
@@ -2474,7 +2472,7 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
              qPrintable(categoryAccount.name()),
              qPrintable(parent.name()),
              qPrintable(categoryText),
-             qPrintable(e.what()));
+             e.what());
     }
 
     parent = categoryAccount;
@@ -2609,7 +2607,7 @@ void MyMoneyFile::removeCurrency(const MyMoneySecurity& currency)
   d->checkTransaction(Q_FUNC_INFO);
 
   if (currency.id() == d->m_baseCurrency.id())
-    throw MYMONEYEXCEPTION("Cannot delete base currency.");
+    throw MYMONEYEXCEPTION_CSTRING("Cannot delete base currency.");
 
   // FIXME check that security is not referenced by other object
 
@@ -2629,7 +2627,7 @@ MyMoneySecurity MyMoneyFile::currency(const QString& id) const
 
     return currency;
 
-  } catch(const MyMoneyException&) {
+  } catch (const MyMoneyException &) {
     const auto security = d->m_storage->security(id);
     if (security.id().isEmpty()) {
       throw MYMONEYEXCEPTION(QString::fromLatin1("Security '%1' not found.").arg(id));
@@ -3435,7 +3433,7 @@ MyMoneyFileTransaction::~MyMoneyFileTransaction()
 {
   try {
     rollback();
-  } catch (const MyMoneyException & e) {
+  } catch (const MyMoneyException &e) {
     qDebug() << e.what();
   }
   Q_D(MyMoneyFileTransaction);

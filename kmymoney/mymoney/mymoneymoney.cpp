@@ -145,7 +145,7 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 {
   if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
 
   *this = AlkValue(QString::fromLatin1("%1/%2").arg(Amount).arg(denom), eMyMoney::Money::_decimalSeparator);
 }
@@ -162,7 +162,7 @@ MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 {
   if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(iAmount, denom);
 }
 
@@ -178,7 +178,7 @@ MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
 {
   if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(QString::fromLatin1("%1/%2").arg(iAmount).arg(denom), eMyMoney::Money::_decimalSeparator);
 }
 

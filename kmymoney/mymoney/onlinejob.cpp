@@ -135,14 +135,14 @@ onlineJob::~onlineJob()
 onlineTask* onlineJob::task()
 {
   if (m_task == 0)
-    throw emptyTask(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION();
   return m_task;
 }
 
 const onlineTask* onlineJob::task() const
 {
   if (m_task == 0)
-    throw emptyTask(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION();
   return m_task;
 }
 

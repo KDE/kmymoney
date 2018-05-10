@@ -114,7 +114,9 @@ public:
               index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
             );
         return iban->electronicIban();
-      } catch (payeeIdentifier::exception&) {
+      } catch (const payeeIdentifier::empty &) {
+        return QVariant();
+      } catch (const payeeIdentifier::badCast &) {
         return QVariant();
       }
     }
@@ -172,7 +174,8 @@ void ibanBicCompleter::slotActivated(const QModelIndex &index) const
         );
     emit activatedIban(iban->electronicIban());
     emit activatedBic(iban->storedBic());
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 }
 
@@ -188,7 +191,8 @@ void ibanBicCompleter::slotHighlighted(const QModelIndex &index) const
         );
     emit highlightedIban(iban->electronicIban());
     emit highlightedBic(iban->storedBic());
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 }
 
@@ -412,7 +416,8 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
   try {
     payeeIdentifier ident = getOnlineJobTyped().task()->originAccountIdentifier();
     payeeIban = ident.data<payeeIdentifiers::ibanBic>()->electronicIban();
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 
   if (settings->isBicMandatory(payeeIban, iban)) {
@@ -433,7 +438,7 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
     QString iban;
     try {
       iban = payee.data<payeeIdentifiers::ibanBic>()->electronicIban();
-    } catch (payeeIdentifier::badCast&) {
+    } catch (const payeeIdentifier::badCast &) {
     }
 
     if (settings->isBicMandatory(iban , ui->beneficiaryIban->text())) {

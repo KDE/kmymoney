@@ -430,7 +430,7 @@ namespace NewAccountWizard
           ft.commit();
           account = acc;
         } catch (const MyMoneyException &e) {
-          KMessageBox::error(nullptr, i18n("Unable to create account: %1", e.what()));
+          KMessageBox::error(nullptr, i18n("Unable to create account: %1", QString::fromLatin1(e.what())));
         }
       }
     }

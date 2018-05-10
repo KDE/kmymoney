@@ -509,7 +509,7 @@ void MyMoneyStorageMgrTest::testReparentAccount()
     QCOMPARE(m->account(ex1.id()).accountCount(), 2);
     QCOMPARE(ex3.parentAccountId(), ex1.id());
   } catch (const MyMoneyException &e) {
-    std::cout << std::endl << qPrintable(e.what()) << std::endl;
+    std::cout << std::endl << e.what() << std::endl;
     QFAIL("Unexpected exception");
   }
 }
@@ -1508,7 +1508,7 @@ void MyMoneyStorageMgrTest::testScheduleList()
     m->addSchedule(schedule3);
     m->addSchedule(schedule4);
   } catch (const MyMoneyException &e) {
-    qDebug("Error: %s", qPrintable(e.what()));
+    qDebug("Error: %s", e.what());
     QFAIL("Unexpected exception");
   }
 

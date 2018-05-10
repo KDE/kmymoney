@@ -258,7 +258,7 @@ void KReportsView::slotSaveView()
       try {
         tab->saveAs(newName, true);
       } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Failed to save: %1", e.what()));
+        KMessageBox::error(this, i18n("Failed to save: %1", QString::fromLatin1(e.what())));
       }
     }
   }
@@ -327,7 +327,7 @@ void KReportsView::slotConfigure()
         d->addReportTab(newreport);
       }
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Failed to configure report: %1", e.what()));
+      KMessageBox::error(this, i18n("Failed to configure report: %1", QString::fromLatin1(e.what())));
     }
   }
   delete dlg;

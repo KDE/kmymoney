@@ -225,7 +225,7 @@ void SQLStorage::slotSaveAsDatabase()
       try {
         rc = saveAsDatabase(url);
       } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(nullptr, i18n("Cannot save to current database: %1", e.what()));
+        KMessageBox::sorry(nullptr, i18n("Cannot save to current database: %1", QString::fromLatin1(e.what())));
       }
     }
   }

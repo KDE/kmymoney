@@ -229,9 +229,8 @@ int main(int argc, char *argv[])
     try {
       rc = runKMyMoney(app, std::move(splash), url, isNoFileOption);
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
-                                 i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
-      throw e;
+      KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"), QString::fromLatin1(e.what()));
+      throw;
     }
   }
 

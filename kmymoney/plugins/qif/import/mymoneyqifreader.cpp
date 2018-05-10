@@ -648,7 +648,7 @@ void MyMoneyQifReader::processQifEntry()
         break;
     }
   } catch (const MyMoneyException &e) {
-    if (e.what() != "USERABORT") {
+    if (QString::fromLatin1(e.what()).contains("USERABORT")) {
       qDebug() << "Line " << m_linenumber << ": Unhandled error: " << e.what();
     } else {
       m_userAbort = true;
@@ -911,7 +911,7 @@ MyMoneyAccount MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const My
       }
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(0, i18n("Unable to find account: %1", e.what()));
+    KMessageBox::error(0, i18n("Unable to find account: %1", QString::fromLatin1(e.what())));
   }
   return nullAccount;
 }
@@ -1008,9 +1008,9 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
     // remember which account we created
     d->st.m_accountId = m_account.id();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(0,
+    KMessageBox::detailedError(nullptr,
                                i18n("Error while creating opening balance transaction"),
-                               QString("%1(%2):%3").arg(e.file()).arg(e.line()).arg(e.what()),
+                               e.what(),
                                i18n("File access error"));
   }
 }
@@ -1101,7 +1101,7 @@ void MyMoneyQifReader::processTransactionEntry()
         break;
 
       case KMessageBox::Cancel:
-        throw MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION_CSTRING("USERABORT");
         break;
     }
   }
@@ -1329,7 +1329,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
         break;
 
       case KMessageBox::Cancel:
-        throw MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION_CSTRING("USERABORT");
         break;
     }
   }

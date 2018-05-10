@@ -208,8 +208,7 @@ void KPayeesView::slotRenameSinglePayee(QListWidgetItem* p)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
   } else {
     p->setText(new_name);
@@ -319,7 +318,7 @@ void KPayeesView::slotSelectPayee()
     d->showTransactions();
 
   } catch (const MyMoneyException &e) {
-    qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
+    qDebug("exception during display of payee: %s", e.what());
     d->ui->m_register->clear();
     d->m_selectedPayeesList.clear();
     d->m_payee = MyMoneyPayee();
@@ -433,8 +432,7 @@ void KPayeesView::slotUpdatePayee()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -500,8 +498,7 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
       MyMoneyFile::instance()->modifyPayee(d->m_payee);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
   }
 
@@ -646,7 +643,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
       }
     }
   } catch (const MyMoneyException &e) {
-    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", qPrintable(e.what()));
+    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", e.what());
   }
 }
 

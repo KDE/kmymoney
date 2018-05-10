@@ -53,7 +53,7 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
 {
   Q_D(MyMoneySplit);
   if (d->getElName(Split::Element::Split) != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not SPLIT");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not SPLIT");
 
   clearId();
 

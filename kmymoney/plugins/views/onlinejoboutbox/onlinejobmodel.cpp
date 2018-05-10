@@ -113,7 +113,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
 
   try {
     job = MyMoneyFile::instance()->getOnlineJob(m_jobIdList[index.row()]);
-  } catch (const MyMoneyException&) {
+  } catch (const MyMoneyException &) {
     return QVariant();
   }
 
@@ -196,8 +196,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
         return QVariant(ibanBic->ownerName());
       }
     }
-  } catch (MyMoneyException&) {
-  } catch (payeeIdentifier::exception&) {
+  } catch (const MyMoneyException &) {
   }
 
   return QVariant();

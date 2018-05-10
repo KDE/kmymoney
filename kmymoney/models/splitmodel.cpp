@@ -263,7 +263,7 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
     case (int)Role::PayeeName:
       try {
         rc = MyMoneyFile::instance()->payee(split.payeeId()).name();
-      } catch(MyMoneyException&e) {
+      } catch (const MyMoneyException &e) {
       }
       break;
 
@@ -362,7 +362,7 @@ void SplitModel::addSplit(const QString& transactionSplitId)
     if(transactionId != d->m_transaction.id()) {
       try {
         d->m_transaction = MyMoneyFile::instance()->transaction(transactionId);
-      } catch(MyMoneyException& e) {
+      } catch (const MyMoneyException &e) {
         d->m_transaction = MyMoneyTransaction();
       }
     }
@@ -370,7 +370,7 @@ void SplitModel::addSplit(const QString& transactionSplitId)
       beginInsertRows(QModelIndex(), rowCount(), rowCount());
       d->m_splits.append(d->m_transaction.splitById(splitId));
       endInsertRows();
-    } catch(MyMoneyException& e) {
+    } catch (const MyMoneyException &e) {
       d->m_transaction = MyMoneyTransaction();
     }
   }

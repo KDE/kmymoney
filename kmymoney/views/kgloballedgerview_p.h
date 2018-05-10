@@ -1215,7 +1215,7 @@ public:
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(q, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(q, i18n("Unable to delete transaction(s)"), e.what());
     }
     emit q->slotStatusProgress(-1, -1);
   }
@@ -1294,9 +1294,9 @@ public:
       MyMoneyFileTransaction ft;
       try {
         if (startMatchTransaction.id().isEmpty())
-          throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching"));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("No manually entered transaction selected for matching"));
         if (endMatchTransaction.id().isEmpty())
-          throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("No imported transaction selected for matching"));
 
         TransactionMatcher matcher(m_currentAccount);
         matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit, true);
@@ -1377,7 +1377,7 @@ public:
       emit q->slotStatusProgress(-1, -1);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(q, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(q, i18n("Unable to modify transaction"), e.what());
     }
   }
 

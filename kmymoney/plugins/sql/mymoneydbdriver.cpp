@@ -176,7 +176,7 @@ QExplicitlySharedDataPointer<MyMoneyDbDriver> MyMoneyDbDriver::create(const QStr
     return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
   else if (type == "SQLCIPHER")
     return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlCipher3Driver());
-  else throw MYMONEYEXCEPTION(QString("Unknown database driver type").arg(type));
+  else throw MYMONEYEXCEPTION_CSTRING("Unknown database driver type.");
 }
 
 MyMoneyDbDriver::MyMoneyDbDriver()
@@ -691,7 +691,7 @@ QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatabase& d
     case QSql::AllTables:
       selectString = QString("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%1'").arg(db.databaseName());
       if (!q.exec(selectString)) {
-        throw MYMONEYEXCEPTION("select names failed in mymoneydbdriver.cpp");
+        throw MYMONEYEXCEPTION_CSTRING("select names failed in mymoneydbdriver.cpp");
       }
       while (q.next())
         tableList.append(q.value(0).toString());

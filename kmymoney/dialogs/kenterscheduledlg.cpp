@@ -186,7 +186,7 @@ MyMoneyTransaction KEnterScheduleDlg::transaction()
       KMyMoneyUtils::calculateAutoLoan(d->m_schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(this, i18n("Unable to load schedule details"), e.what());
+    KMessageBox::detailedError(this, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
   }
 
   t.clearId();

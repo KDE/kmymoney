@@ -98,11 +98,11 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   // allow matching two manual transactions
 
   if ((!allowImportedTransactions && tm.isImported()) || sm.isMatched())
-    throw MYMONEYEXCEPTION(i18n("First transaction does not match requirement for matching"));
+    throw MYMONEYEXCEPTION_CSTRING("First transaction does not match requirement for matching");
 
   // verify that the amounts are the same, otherwise we should not be matching!
   if (sm.shares() != si.shares()) {
-    throw MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", d->m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), d->m_account, sec), MyMoneyUtils::formatMoney(si.shares(), d->m_account, sec)));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Splits for %1 have conflicting values (%2,%3)").arg(d->m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), d->m_account, sec), MyMoneyUtils::formatMoney(si.shares(), d->m_account, sec)));
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
@@ -116,8 +116,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
         tm.modifySplit(sm);
       }
     } catch (const MyMoneyException &e) {
-      QString estr = e.what();
-      throw MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)", estr));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to match all splits (%1)").arg(e.what()));
     }
   }
   //

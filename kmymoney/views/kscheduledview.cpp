@@ -281,7 +281,7 @@ void KScheduledView::slotListItemExecuted(QTreeWidgetItem* item, int)
     emit selectByObject(sch, eView::Intent::None);
     emit selectByObject(sch, eView::Intent::OpenContextMenu);
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Error executing item"), e.what());
+    KMessageBox::detailedSorry(this, i18n("Error executing item"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -315,7 +315,7 @@ void KScheduledView::slotAccountActivated()
 
     d->refreshSchedule(false, d->m_currentSchedule.id());
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(this, i18n("Unable to filter account"), e.what());
+    KMessageBox::detailedError(this, i18n("Unable to filter account"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -370,7 +370,7 @@ void KScheduledView::slotSetSelectedItem()
     try {
       sch = item->data(0, Qt::UserRole).value<MyMoneySchedule>();
     } catch (const MyMoneyException &e) {
-      qDebug("KScheduledView::slotSetSelectedItem: %s", qPrintable(e.what()));
+      qDebug("KScheduledView::slotSetSelectedItem: %s", e.what());
     }
   }
 
@@ -407,7 +407,7 @@ void KScheduledView::slotDeleteSchedule()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to remove scheduled transaction '%1'", d->m_currentSchedule.name()), e.what());
+      KMessageBox::detailedSorry(this, i18n("Unable to remove scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -436,7 +436,7 @@ void KScheduledView::slotDuplicateSchedule()
         emit selectByObject(sch, eView::Intent::None);
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_currentSchedule.name()), e.what());
+      KMessageBox::detailedSorry(this, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -449,7 +449,7 @@ void KScheduledView::slotEnterSchedule()
       auto schedule = MyMoneyFile::instance()->schedule(d->m_currentSchedule.id());
       d->enterSchedule(schedule);
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), e.what());
+      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -462,7 +462,7 @@ void KScheduledView::slotSkipSchedule()
       auto schedule = MyMoneyFile::instance()->schedule(d->m_currentSchedule.id());
       d->skipSchedule(schedule);
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), e.what());
+      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
     }
   }
 }

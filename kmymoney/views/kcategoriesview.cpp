@@ -277,7 +277,7 @@ void KCategoriesView::slotEditCategory()
       emit selectByObject(account, eView::Intent::None);
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), e.what()));
+      KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), QString::fromLatin1(e.what())));
     }
   }
 
@@ -387,7 +387,7 @@ void KCategoriesView::slotDeleteCategory()
           //        slotStatusProgressBar(blist.count(), 0);
         }
       } catch (MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_currentCategory.name(), newCategory.name(), e.what()));
+        KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_currentCategory.name(), newCategory.name(), QString::fromLatin1(e.what())));
         //    slotStatusProgressBar(-1, -1);
         return;
       }
@@ -415,7 +415,7 @@ void KCategoriesView::slotDeleteCategory()
             emit selectByObject(d->m_currentCategory, eView::Intent::None);
             ft.commit();
           } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, e.what()));
+            KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
           }
         }
         return;
@@ -479,7 +479,7 @@ void KCategoriesView::slotDeleteCategory()
         // the old account list, which is no longer valid
         d->m_currentCategory = file->account(d->m_currentCategory.id());
       } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>", selectedAccountName, e.what()));
+        KMessageBox::error(this, i18n("<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
         return;
       }
     }
@@ -492,7 +492,7 @@ void KCategoriesView::slotDeleteCategory()
       emit selectByObject(MyMoneyAccount(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, e.what()));
+      KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
     }
 }
 

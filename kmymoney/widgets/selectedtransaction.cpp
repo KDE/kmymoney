@@ -121,7 +121,7 @@ int SelectedTransaction::warnLevel() const
       else if (split.reconcileFlag() == eMyMoney::Split::State::Reconciled && warnLevel < 1)
         warnLevel = 1;
     } catch (const MyMoneyException &) {
-      //qDebug("Exception in SelectedTransaction::warnLevel(): %s", qPrintable(e.what()));
+      //qDebug("Exception in SelectedTransaction::warnLevel(): %s", e.what());
       warnLevel = 0;
     }
   }

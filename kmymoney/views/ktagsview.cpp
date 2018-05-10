@@ -158,8 +158,7 @@ void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
     }
   } else {
     ta->setText(new_name);
@@ -265,7 +264,7 @@ void KTagsView::slotSelectTag()
     showTransactions();
 
   } catch (const MyMoneyException &e) {
-    qDebug("exception during display of tag: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
+    qDebug("exception during display of tag: %s", e.what());
     d->ui->m_register->clear();
     d->m_tag = MyMoneyTag();
   }
@@ -393,8 +392,7 @@ void KTagsView::slotUpdateTag()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -552,7 +550,7 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString&
       }
     }
   } catch (const MyMoneyException &e) {
-    qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", qPrintable(e.what()));
+    qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", e.what());
   }
 }
 
@@ -735,8 +733,7 @@ void KTagsView::slotDeleteTag()
         } // for - Schedules
 
       } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to reassign tag of transaction/split"),
-                                   i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+        KMessageBox::detailedSorry(this, i18n("Unable to reassign tag of transaction/split"), QString::fromLatin1(e.what()));
       }
     } // if !translist.isEmpty()
 
@@ -752,7 +749,6 @@ void KTagsView::slotDeleteTag()
     slotSelectTags(QList<MyMoneyTag>());
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"), QString::fromLatin1(e.what()));
   }
 }

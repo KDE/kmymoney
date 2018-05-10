@@ -415,7 +415,7 @@ bool KEditLoanWizard::validateCurrentPage()
             split = (*it).splitByAccount(m_account.id());
             balance += split.value();
 
-          } catch(const MyMoneyException &e) {
+          } catch (const MyMoneyException &e) {
             // account is not referenced within this transaction
           }
         }

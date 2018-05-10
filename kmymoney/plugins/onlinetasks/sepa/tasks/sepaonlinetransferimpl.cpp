@@ -158,7 +158,8 @@ bool sepaOnlineTransferImpl::isValid() const
   try {
     payeeIdentifier ident = originAccountIdentifier();
     iban = ident.data<payeeIdentifiers::ibanBic>()->electronicIban();
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 
   QSharedPointer<const sepaOnlineTransfer::settings> localSettings = getSettings();

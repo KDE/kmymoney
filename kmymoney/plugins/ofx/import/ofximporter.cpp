@@ -783,7 +783,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(0 , i18n("Error connecting to bank: %1", e.what()));
+    KMessageBox::information(0 , i18n("Error connecting to bank: %1", QString::fromLatin1(e.what())));
   }
 
   return false;

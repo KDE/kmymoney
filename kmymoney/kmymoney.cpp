@@ -401,7 +401,7 @@ public:
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
-      qDebug("Error %s updating currency names", qPrintable(e.what()));
+      qDebug("Error %s updating currency names", e.what());
     }
   }
 
@@ -470,7 +470,7 @@ public:
               // add new levels above. Don't forget to increase currentFixVersion() for all
               // the storage backends this fix applies to
             default:
-              throw MYMONEYEXCEPTION(i18n("Unknown fix level in input file"));
+              throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown fix level in input file"));
           }
         }
         ft.commit();
@@ -649,7 +649,7 @@ public:
     try {
       baseId = MyMoneyFile::instance()->baseCurrency().id();
     } catch (const MyMoneyException &e) {
-      qDebug("%s", qPrintable(e.what()));
+      qDebug("%s", e.what());
     }
 
     if (baseId.isEmpty()) {
@@ -662,7 +662,7 @@ public:
     try {
       baseId = MyMoneyFile::instance()->baseCurrency().id();
     } catch (const MyMoneyException &e) {
-      qDebug("%s", qPrintable(e.what()));
+      qDebug("%s", e.what());
     }
 
     if (!baseId.isEmpty()) {
@@ -684,7 +684,7 @@ public:
         try {
           if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
             cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
-        } catch (const MyMoneyException& e) {
+        } catch (const MyMoneyException &e) {
           qDebug() << QLatin1String("Account") << (*it).id() << (*it).name() << e.what();
         }
 
@@ -695,7 +695,7 @@ public:
             file->modifyAccount(*it);
             ft.commit();
           } catch (const MyMoneyException &e) {
-            qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), qPrintable((*it).id()), qPrintable(e.what()));
+            qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), qPrintable((*it).id()), e.what());
           }
         }
       }
@@ -766,7 +766,7 @@ public:
         haveAt = false;
         isEncrypted = true;
       } else {
-        throw MYMONEYEXCEPTION(QString::fromLatin1("%1").arg(i18n("GPG is not available for decryption of file <b>%1</b>", fileName)));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("GPG is not available for decryption of file <b>%1</b>").arg(fileName));
       }
     } else {
       // we can't use file directly, as we delete qfile later on
@@ -808,7 +808,7 @@ public:
     if ((magic0 == MAGIC_0_50 && magic1 == MAGIC_0_51) ||
         magic0 < 30) {
       // we do not support this file format anymore
-      throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>%1</qt>").arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.", fileName)));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.</qt>").arg(fileName));
     }
 
     // Scan the first 70 bytes to see if we find something
@@ -973,7 +973,7 @@ public:
     auto rc = true;
     try {
       if (! url.isValid()) {
-        throw MYMONEYEXCEPTION(i18n("Malformed URL '%1'", url.url()));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Malformed URL '%1'").arg(url.url()));
       }
 
       if (url.scheme() == QLatin1String("sql")) {
@@ -988,7 +988,7 @@ public:
             }
 
           if(!pluginFound)
-            throw MYMONEYEXCEPTION(i18n("Couldn't find suitable plugin to save your storage."));
+            throw MYMONEYEXCEPTION(QString::fromLatin1("Couldn't find suitable plugin to save your storage."));
 
         } else if (url.isLocalFile()) {
           filename = url.toLocalFile();
@@ -999,7 +999,7 @@ public:
               }
             saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
           } catch (const MyMoneyException &) {
-            throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+            throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to write changes to '%1'").arg(filename));
           }
         } else {
 
@@ -1013,13 +1013,13 @@ public:
           file.open(QIODevice::ReadOnly);
           KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
           if (!putjob->exec()) {
-              throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+              throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
             }
           file.close();
         }
       m_fileType = KMyMoneyApp::KmmXML;
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(q, e.what());
+      KMessageBox::error(q, QString::fromLatin1(e.what()));
       MyMoneyFile::instance()->setDirty();
       rc = false;
     }
@@ -1130,7 +1130,7 @@ public:
     ft.commit();
 
     if (!device || !device->open(QIODevice::WriteOnly)) {
-      throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to open file '%1' for writing.").arg(localFile));
     }
 
     pWriter->setProgressCallback(&KMyMoneyApp::progressCallback);
@@ -1140,7 +1140,7 @@ public:
     // Check for errors if possible, only possible for KGPGFile
     QFileDevice *fileDevice = qobject_cast<QFileDevice*>(device.get());
     if (fileDevice && fileDevice->error() != QFileDevice::NoError) {
-      throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
     }
 
     if (writeFile != localFile) {
@@ -1148,7 +1148,7 @@ public:
       // If a temporary file was created, it is made in a way that the name is definitely different. So no
       // symlinks etc. have to be evaluated.
       if (!QFile::remove(localFile) || !QFile::rename(writeFile, localFile))
-        throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
     }
     QFile::setPermissions(localFile, m_fmode);
     pWriter->setProgressCallback(0);
@@ -1394,7 +1394,7 @@ public:
         MyMoneyFile::instance()->modifySchedule(sched);
       }
     } catch (const MyMoneyException &e) {
-      qWarning("Unable to update broken schedule: %s", qPrintable(e.what()));
+      qWarning("Unable to update broken schedule: %s", e.what());
     }
   }
 
@@ -1412,7 +1412,7 @@ public:
                                     , acc.name()),
                                i18n("Account problem"));
 
-      throw MYMONEYEXCEPTION("Fix LoanAccount0 not supported anymore");
+      throw MYMONEYEXCEPTION_CSTRING("Fix LoanAccount0 not supported anymore");
     }
   }
 
@@ -2635,7 +2635,7 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     }
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", e.what()));
+    KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", QString::fromLatin1(e.what())));
   }
   updateCaption();
   emit fileLoaded(d->m_fileName);
@@ -2972,7 +2972,7 @@ void KMyMoneyApp::slotFileViewPersonal()
       file->setUser(user);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to store user information: %1", e.what()));
+      KMessageBox::information(this, i18n("Unable to store user information: %1", QString::fromLatin1(e.what())));
     }
   }
   delete editPersonalDataDlg;
@@ -2995,7 +2995,7 @@ void KMyMoneyApp::slotLoadAccountTemplates()
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to import template(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to import template(s)"), QString::fromLatin1(e.what()));
     }
   }
   delete dlg;
@@ -3403,7 +3403,7 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
     file->createAccount(newAccount, parentAccount, brokerageAccount, openingBal);
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(this, i18n("Unable to add account: %1", e.what()));
+    KMessageBox::information(this, i18n("Unable to add account: %1", QString::fromLatin1(e.what())));
   }
 }
 
@@ -3438,7 +3438,7 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
       // We assume at least 2 splits in the transaction
       MyMoneyTransaction t = newSchedule.transaction();
       if (t.splitCount() < 2) {
-        throw MYMONEYEXCEPTION("Transaction for schedule has less than 2 splits!");
+        throw MYMONEYEXCEPTION_CSTRING("Transaction for schedule has less than 2 splits!");
       }
 
       MyMoneyFileTransaction ft;
@@ -3454,10 +3454,10 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
         }
         ft.commit();
       } catch (const MyMoneyException &e) {
-        KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e.what()));
+        KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())));
       }
     } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e.what()));
+      KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())));
     }
   }
 }
@@ -3583,7 +3583,7 @@ void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyI
     MyMoneyFile::instance()->modifyAccount(src);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>", src.name(), _dst.name(), e.what()));
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>", src.name(), _dst.name(), QString::fromLatin1(e.what())));
   }
 }
 
@@ -3596,7 +3596,7 @@ void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyA
     MyMoneyFile::instance()->reparentAccount(src, dst);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>", src.name(), dst.name(), e.what()));
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>", src.name(), dst.name(), QString::fromLatin1(e.what())));
   }
 }
 

@@ -705,7 +705,7 @@ void KMyMoneySplitTable::slotDuplicateSplit()
       d->m_transaction.addSplit(split);
       emit transactionChanged(d->m_transaction);
     } catch (const MyMoneyException &e) {
-      qDebug("Cannot duplicate split: %s", qPrintable(e.what()));
+      qDebug("Cannot duplicate split: %s", e.what());
     }
   }
 }
@@ -730,7 +730,7 @@ void KMyMoneySplitTable::slotDeleteSplit()
           selectRow(d->m_currentRow);
         emit transactionChanged(d->m_transaction);
       } catch (const MyMoneyException &e) {
-        qDebug("Cannot remove split: %s", qPrintable(e.what()));
+        qDebug("Cannot remove split: %s", e.what());
       }
     }
   }
@@ -848,7 +848,7 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
       }
       emit transactionChanged(d->m_transaction);
     } catch (const MyMoneyException &e) {
-      qDebug("Cannot add/modify split: %s", qPrintable(e.what()));
+      qDebug("Cannot add/modify split: %s", e.what());
     }
   }
   this->setFocus();

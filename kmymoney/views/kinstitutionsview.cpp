@@ -141,7 +141,7 @@ void KInstitutionsView::slotNewInstitution()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Cannot add institution: %1", e.what()));
+      KMessageBox::information(this, i18n("Cannot add institution: %1", QString::fromLatin1(e.what())));
     }
   }
   delete dlg;
@@ -176,13 +176,13 @@ void KInstitutionsView::slotEditInstitution()
         ft.commit();
         emit selectByObject(dlg->institution(), eView::Intent::None);
       } catch (const MyMoneyException &e) {
-        KMessageBox::information(this, i18n("Unable to store institution: %1", e.what()));
+        KMessageBox::information(this, i18n("Unable to store institution: %1", QString::fromLatin1(e.what())));
       }
     }
     delete dlg;
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(this, i18n("Unable to edit institution: %1", e.what()));
+    KMessageBox::information(this, i18n("Unable to edit institution: %1", QString::fromLatin1(e.what())));
   }
 }
 
@@ -230,9 +230,9 @@ void KInstitutionsView::slotDeleteInstitution()
       emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
+      KMessageBox::information(this, i18n("Unable to delete institution: %1", QString::fromLatin1(e.what())));
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
+    KMessageBox::information(this, i18n("Unable to delete institution: %1", QString::fromLatin1(e.what())));
   }
 }

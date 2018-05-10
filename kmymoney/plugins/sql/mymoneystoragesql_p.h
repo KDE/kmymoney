@@ -123,10 +123,10 @@ public:
     } else {
       try{
         m_db.endCommitUnit(m_name);
-      } catch(MyMoneyException&) {
+      } catch (const MyMoneyException &) {
         try {
           m_db.cancelCommitUnit(m_name);
-        } catch (const MyMoneyException & e) {
+        } catch (const MyMoneyException &e) {
           qDebug() << e.what();
         }
       }
@@ -184,6 +184,8 @@ public:
 #define GETDATETIME(a) getDateTime(GETSTRING(a))
 #define GETINT(a) query.value(a).toInt()
 #define GETULL(a) query.value(a).toULongLong()
+#define MYMONEYEXCEPTIONSQL(exceptionMessage) MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, exceptionMessage))
+#define MYMONEYEXCEPTIONSQL_D(exceptionMessage) MYMONEYEXCEPTION(d->buildError(query, Q_FUNC_INFO, exceptionMessage))
 
 class MyMoneyStorageSqlPrivate
 {
@@ -248,7 +250,7 @@ public:
     QSqlQuery query(*q);
 
     if (!query.exec(m_driver->highestNumberFromIdString(tableName, tableField, prefixLength)) || !query.next())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("retrieving highest ID number"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("retrieving highest ID number");
 
     return query.value(0).toULongLong();
   }
@@ -275,7 +277,7 @@ public:
     QList<QString> dbList;
     QSqlQuery query(*q);
     query.prepare("SELECT id FROM kmmInstitutions;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Institution list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Institution list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     const QList<MyMoneyInstitution> list = m_storage->institutionList();
@@ -308,7 +310,7 @@ public:
       }
       query.prepare("DELETE FROM kmmInstitutions WHERE id = :id");
       query.bindValue(":id", deleteList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Institution"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Institution");
 
       deleteKeyValuePairs("OFXSETTINGS", deleteList);
     }
@@ -322,7 +324,7 @@ public:
     QSqlQuery query(*q);
     query.prepare("SELECT id FROM kmmPayees;");
     if (!query.exec())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Payee list")); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("building Payee list"); // krazy:exclude=crashy
 
     QList<QString> dbList;
     dbList.reserve(query.numRowsAffected());
@@ -359,7 +361,7 @@ public:
     QList<QString> dbList;
     QSqlQuery query(*q);
     query.prepare("SELECT id FROM kmmTags;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Tag list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Tag list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     QList<MyMoneyTag> list = m_storage->tagList();
@@ -385,7 +387,7 @@ public:
       }
       query.prepare(m_db.m_tables["kmmTags"].deleteString());
       query.bindValue(":id", deleteList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Tag"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Tag");
       m_tags -= query.numRowsAffected();
     }
   }
@@ -397,7 +399,7 @@ public:
     QList<QString> dbList;
     QSqlQuery query(*q);
     query.prepare("SELECT id FROM kmmAccounts;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Account list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Account list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     QList<MyMoneyAccount> list;
@@ -489,7 +491,7 @@ public:
         }
       }
       query.bindValue(":id", kvpList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Account"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Account");
 
       deleteKeyValuePairs("ACCOUNT", kvpList);
       deleteKeyValuePairs("ONLINEBANKING", kvpList);
@@ -503,7 +505,7 @@ public:
     QList<QString> dbList;
     QSqlQuery query(*q);
     query.prepare("SELECT id FROM kmmTransactions WHERE txType = 'N';");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Transaction list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Transaction list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     MyMoneyTransactionFilter filter;
@@ -538,7 +540,7 @@ public:
     QList<QString> dbList;
     QSqlQuery query(*q);
     query.prepare("SELECT id FROM kmmSchedules;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Schedule list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Schedule list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     const auto list = m_storage->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
@@ -576,7 +578,7 @@ public:
     QSqlQuery query(*q);
     QSqlQuery query2(*q);
     query.prepare("SELECT id FROM kmmSecurities;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building security list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building security list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     const QList<MyMoneySecurity> securityList = m_storage->securityList();
@@ -603,11 +605,11 @@ public:
       query.prepare("DELETE FROM kmmSecurities WHERE id = :id");
       query2.prepare("DELETE FROM kmmPrices WHERE fromId = :id OR toId = :id");
       query.bindValue(":id", idList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Security"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Security");
 
       query2.bindValue(":fromId", idList);
       query2.bindValue(":toId", idList);
-      if (!query2.execBatch()) throw MYMONEYEXCEPTION(buildError(query2, Q_FUNC_INFO, "deleting Security"));
+      if (!query2.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Security");
 
       deleteKeyValuePairs("SECURITY", idList);
     }
@@ -620,7 +622,7 @@ public:
     // easiest way is to delete all and re-insert
     QSqlQuery query(*q);
     query.prepare("DELETE FROM kmmPrices");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("deleting Prices"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting Prices"); // krazy:exclude=crashy
     m_prices = 0;
 
     const MyMoneyPriceList list = m_storage->priceList();
@@ -639,7 +641,7 @@ public:
     QSqlQuery query(*q);
     QSqlQuery query2(*q);
     query.prepare("SELECT ISOCode FROM kmmCurrencies;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Currency list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Currency list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     const QList<MyMoneySecurity> currencyList = m_storage->currencyList();
@@ -665,7 +667,7 @@ public:
       }
 
       query.bindValue(":ISOCode", isoCodeList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Currency"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Currency");
     }
   }
 
@@ -683,12 +685,12 @@ public:
     QSqlQuery query(*q);
     query.prepare("SELECT count(*) FROM kmmFileInfo;");
     if (!query.exec() || !query.next())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "checking fileinfo")); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("checking fileinfo"); // krazy:exclude=crashy
 
     if (query.value(0).toInt() == 0) {
       // Cannot use "INSERT INTO kmmFileInfo DEFAULT VALUES;" because it is not supported by MySQL
       query.prepare(QLatin1String("INSERT INTO kmmFileInfo (version) VALUES (null);"));
-      if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "inserting fileinfo")); // krazy:exclude=crashy
+      if (!query.exec()) throw MYMONEYEXCEPTIONSQL("inserting fileinfo"); // krazy:exclude=crashy
     }
 
     query.prepare(QLatin1String(
@@ -790,7 +792,7 @@ public:
     query.bindValue(":budgets", (unsigned long long) m_budgets);
 
     if (!query.exec())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing FileInfo"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("writing FileInfo"); // krazy:exclude=crashy
   }
 
   void writeReports()
@@ -801,7 +803,7 @@ public:
     QSqlQuery query(*q);
     QSqlQuery query2(*q);
     query.prepare("SELECT id FROM kmmReportConfig;");
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Report list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Report list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
     QList<MyMoneyReport> list = m_storage->reportList();
@@ -827,7 +829,7 @@ public:
       }
 
       query.bindValue(":id", idList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Report"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Report");
     }
   }
 
@@ -840,7 +842,7 @@ public:
     QSqlQuery query2(*q);
     query.prepare("SELECT name FROM kmmBudgetConfig;");
     if (!query.exec())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Budget list")); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("building Budget list"); // krazy:exclude=crashy
     while (query.next())
       dbList.append(query.value(0).toString());
 
@@ -868,7 +870,7 @@ public:
 
       query.bindValue(":name", idList);
       if (!query.execBatch())
-        throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Budget"));
+        throw MYMONEYEXCEPTIONSQL("deleting Budget");
     }
   }
 
@@ -877,7 +879,7 @@ public:
     Q_Q(MyMoneyStorageSql);
     QSqlQuery query(*q);
     if (!query.exec("DELETE FROM kmmOnlineJobs;"))
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QLatin1String("Clean kmmOnlineJobs table")));
+      throw MYMONEYEXCEPTIONSQL("Clean kmmOnlineJobs table");
 
     const QList<onlineJob> jobs(m_storage->onlineJobList());
     signalProgress(0, jobs.count(), i18n("Inserting online jobs."));
@@ -887,7 +889,7 @@ public:
     foreach (const onlineJob& job, jobs) {
       try {
         q->addOnlineJob(job);
-      } catch (MyMoneyException& e) {
+      } catch (const MyMoneyException &e) {
         // Do not save e as this may point to an inherited class
         failedJobs.append(QPair<onlineJob, QString>(job, e.what()));
         qDebug() << "Failed to save onlineJob" << job.id() << "Reson:" << e.what();
@@ -898,7 +900,7 @@ public:
 
     if (!failedJobs.isEmpty()) {
       /** @todo Improve error message */
-      throw MYMONEYEXCEPTION(i18np("Could not save one onlineJob.", "Could not save %1 onlineJobs.", failedJobs.count()));
+      throw MYMONEYEXCEPTION_CSTRING("Could not save onlineJob.");
     }
   }
   /** @} */
@@ -943,7 +945,7 @@ public:
     query.bindValue(":telephone", telephoneList);
 
     if (!query.execBatch())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Institution")));
+      throw MYMONEYEXCEPTIONSQL("writing Institution");
     writeKeyValuePairs("OFXSETTINGS", idList, kvpPairsList);
     // Set m_hiIdInstitutions to 0 to force recalculation the next time it is requested
     m_hiIdInstitutions = 0;
@@ -978,7 +980,7 @@ public:
 
     query.bindValue(":matchKeys", matchKeys);
     if (!query.exec()) // krazy:exclude=crashy
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Payee"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("writing Payee"); // krazy:exclude=crashy
 
     if (!isUserInfo)
       m_hiIdPayees = 0;
@@ -992,7 +994,7 @@ public:
     if (ta.isClosed()) query.bindValue(":closed", "Y");
     else query.bindValue(":closed", "N");
     query.bindValue(":notes", ta.notes());
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Tag"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Tag"); // krazy:exclude=crashy
     m_hiIdTags = 0;
   }
 
@@ -1083,7 +1085,7 @@ public:
     query.bindValue(":transactionCount", transactionCountList);
 
     if (!query.execBatch())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Account")));
+      throw MYMONEYEXCEPTIONSQL("writing Account");
 
     //Add in Key-Value Pairs for accounts.
     writeKeyValuePairs("ACCOUNT", idList, pairs);
@@ -1102,7 +1104,7 @@ public:
     query.bindValue(":bankId", tx.bankID());
 
     if (!query.exec()) // krazy:exclude=crashy
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Transaction"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("writing Transaction"); // krazy:exclude=crashy
 
     m_txPostDate = tx.postDate(); // FIXME: TEMP till Tom puts date in split object
     QList<MyMoneySplit> splitList = tx.splits();
@@ -1130,7 +1132,7 @@ public:
     QSqlQuery query(*q);
     query.prepare("SELECT splitId FROM kmmSplits where transactionId = :id;");
     query.bindValue(":id", txId);
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "building Split list")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Split list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toUInt());
 
     QSqlQuery query2(*q);
@@ -1171,7 +1173,7 @@ public:
       }
       query.bindValue(":txId", txIdList.toList());
       query.bindValue(":splitId", splitIdList);
-      if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Splits"));
+      if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Splits");
     }
   }
 
@@ -1201,7 +1203,7 @@ public:
     query.bindValue(":tagId", tagIdList);
     query.bindValue(":splitId", splitIdList_TagSplits);
     query.bindValue(":transactionId", txIdList);
-    if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing tagSplits")));
+    if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("writing tagSplits");
   }
 
   void writeSplitList
@@ -1298,7 +1300,7 @@ public:
     query.bindValue(":checkNumber", checkNumberList);
     query.bindValue(":postDate", postDateList);
     query.bindValue(":bankId", bankIdList);
-    if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Split")));
+    if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("writing Split");
     deleteKeyValuePairs("SPLIT", kvpIdList);
     writeKeyValuePairs("SPLIT", kvpIdList, kvpPairsList);
   }
@@ -1335,19 +1337,19 @@ public:
     query.bindValue(":nextPaymentDue", sch.nextDueDate().toString(Qt::ISODate));
     query.bindValue(":weekendOption", (int)sch.weekendOption());
     query.bindValue(":weekendOptionString", MyMoneySchedule::weekendOptionToString(sch.weekendOption()));
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Schedules"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Schedules"); // krazy:exclude=crashy
 
     //store the payment history for this scheduled task.
     //easiest way is to delete all and re-insert; it's not a high use table
     query.prepare("DELETE FROM kmmSchedulePaymentHistory WHERE schedId = :id;");
     query.bindValue(":id", sch.id());
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("deleting  Schedule Payment History"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting  Schedule Payment History"); // krazy:exclude=crashy
 
     query.prepare(m_db.m_tables["kmmSchedulePaymentHistory"].insertString());
     foreach (const QDate& it, sch.recordedPayments()) {
       query.bindValue(":schedId", sch.id());
       query.bindValue(":payDate", it.toString(Qt::ISODate));
-      if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Schedule Payment History"))); // krazy:exclude=crashy
+      if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Schedule Payment History"); // krazy:exclude=crashy
     }
 
     //store the transaction data for this task.
@@ -1377,7 +1379,7 @@ public:
     query.bindValue(":pricePrecision", security.pricePrecision());
     query.bindValue(":tradingCurrency", security.tradingCurrency());
     query.bindValue(":tradingMarket", security.tradingMarket());
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Securities"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Securities"); // krazy:exclude=crashy
 
     //Add in Key-Value Pairs for security
     QVariantList idList;
@@ -1408,7 +1410,7 @@ public:
     query.bindValue(":price", p.rate(QString()).toString());
     query.bindValue(":priceFormatted", p.rate(QString()).formatMoney("", 2));
     query.bindValue(":priceSource", p.source());
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Prices"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Prices"); // krazy:exclude=crashy
   }
 
   void writeCurrency(const MyMoneySecurity& currency, QSqlQuery& query)
@@ -1433,7 +1435,7 @@ public:
     query.bindValue(":smallestCashFraction", currency.smallestCashFraction());
     query.bindValue(":smallestAccountFraction", currency.smallestAccountFraction());
     query.bindValue(":pricePrecision", currency.pricePrecision());
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Currencies"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Currencies"); // krazy:exclude=crashy
   }
 
   void writeReport(const MyMoneyReport& rep, QSqlQuery& query)
@@ -1445,7 +1447,7 @@ public:
     query.bindValue(":id", rep.id());
     query.bindValue(":name", rep.name());
     query.bindValue(":XML", d.toString());
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Reports"))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Reports"); // krazy:exclude=crashy
   }
 
   void writeBudget(const MyMoneyBudget& bud, QSqlQuery& query)
@@ -1459,7 +1461,7 @@ public:
     query.bindValue(":start", bud.budgetStart());
     query.bindValue(":XML", d.toString());
     if (!query.exec()) // krazy:exclude=crashy
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing Budgets"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("writing Budgets"); // krazy:exclude=crashy
   }
 
   void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs)
@@ -1491,7 +1493,7 @@ public:
     query.bindValue(":kvpId", id);
     query.bindValue(":kvpKey", key);
     query.bindValue(":kvpData", value);
-    if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing KVP")));
+    if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("writing KVP");
     m_kvps += pairCount;
   }
 
@@ -1520,7 +1522,7 @@ public:
     query.bindValue(":type", pid.iid());
     if (!query.exec()) { // krazy:exclude=crashy
       qWarning() << buildError(query, Q_FUNC_INFO, QString("modifying payeeIdentifier"));
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("modifying payeeIdentifier"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("modifying payeeIdentifier"); // krazy:exclude=crashy
     }
   }
     /** @} */
@@ -1560,9 +1562,9 @@ public:
     );
 
     if (!query.exec())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("reading FileInfo"))); // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL("reading FileInfo"); // krazy:exclude=crashy
     if (!query.next())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("retrieving FileInfo")));
+      throw MYMONEYEXCEPTIONSQL("retrieving FileInfo");
 
     QSqlRecord rec = query.record();
     m_storage->setCreationDate(GETDATE(rec.indexOf("created")));
@@ -1657,7 +1659,7 @@ public:
     query1.prepare("SELECT tagId from kmmTagSplits where splitId = :id and transactionId = :transactionId");
     query1.bindValue(":id", GETSTRING(splitIdCol));
     query1.bindValue(":transactionId", GETSTRING(transactionIdCol));
-    if (!query1.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("reading tagId in Split"))); // krazy:exclude=crashy
+    if (!query1.exec()) throw MYMONEYEXCEPTIONSQL("reading tagId in Split"); // krazy:exclude=crashy
     while (query1.next())
       tagIdList << query1.value(0).toString();
 
@@ -1687,8 +1689,8 @@ public:
     query.prepare("SELECT kvpKey, kvpData from kmmKeyValuePairs where kvpType = :type and kvpId = :id;");
     query.bindValue(":type", kvpType);
     query.bindValue(":id", kvpId);
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("reading Kvp for %1 %2").arg(kvpType) // krazy:exclude=crashy
-                                            .arg(kvpId)));
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("reading Kvp for %1 %2").arg(kvpType) // krazy:exclude=crashy
+                                            .arg(kvpId));
     while (query.next()) list.setValue(query.value(0).toString(), query.value(1).toString());
     return (list);
   }
@@ -1709,7 +1711,7 @@ public:
 
     query.prepare(sQuery);
     query.bindValue(":type", kvpType);
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("reading Kvp List for %1").arg(kvpType))); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("reading Kvp List for %1").arg(kvpType)); // krazy:exclude=crashy
 
     // Reserve enough space for all values.
     retval.reserve(kvpIdList.size());
@@ -1807,19 +1809,19 @@ public:
     idList << id;
     query.prepare("DELETE FROM kmmSplits WHERE transactionId = :transactionId;");
     query.bindValue(":transactionId", idList);
-    if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Splits"));
+    if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Splits");
 
     query.prepare("DELETE FROM kmmKeyValuePairs WHERE kvpType = 'SPLIT' "
               "AND kvpId LIKE '?%'");
     query.bindValue(1, idList);
-    if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Splits KVP"));
+    if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Splits KVP");
 
     m_splits -= query.numRowsAffected();
     deleteKeyValuePairs("TRANSACTION", idList);
     query.prepare(m_db.m_tables["kmmTransactions"].deleteString());
     query.bindValue(":id", idList);
     if (!query.execBatch())
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Transaction"));
+      throw MYMONEYEXCEPTIONSQL("deleting Transaction");
   }
 
   void deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList)
@@ -1838,7 +1840,7 @@ public:
     query.prepare("DELETE FROM kmmTagSplits WHERE transactionId = :transactionId AND splitId = :splitId");
     query.bindValue(":splitId", iList);
     query.bindValue(":transactionId", transactionIdList);
-    if (!query.execBatch()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("deleting tagSplits")));
+    if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting tagSplits");
   }
 
   void deleteSchedule(const QString& id)
@@ -1848,10 +1850,10 @@ public:
     QSqlQuery query(*q);
     query.prepare("DELETE FROM kmmSchedulePaymentHistory WHERE schedId = :id");
     query.bindValue(":id", id);
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Schedule Payment History")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting Schedule Payment History"); // krazy:exclude=crashy
     query.prepare(m_db.m_tables["kmmSchedules"].deleteString());
     query.bindValue(":id", id);
-    if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "deleting Schedule")); // krazy:exclude=crashy
+    if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting Schedule"); // krazy:exclude=crashy
     //FIXME: enable when schedules have KVPs.
     //deleteKeyValuePairs("SCHEDULE", id);
   }
@@ -1872,7 +1874,7 @@ public:
       for (int i = 0; i < idList.size(); ++i) {
         idString.append(idList[i].toString() + ' ');
       }
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("deleting kvp for %1 %2").arg(kvpType).arg(idString)));
+      throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("deleting kvp for %1 %2").arg(kvpType).arg(idString));
     }
     m_kvps -= query.numRowsAffected();
   }
@@ -1990,8 +1992,8 @@ public:
       maindb.setUserName(url.userName());
       maindb.setPassword(url.password());
       if (!maindb.open()) {
-        throw MYMONEYEXCEPTION(QString("opening database %1 in function %2")
-                               .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("opening database %1 in function %2")
+                                  .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
       } else {
         QSqlQuery qm(maindb);
         QString qs = m_driver->createDbString(dbName) + ';';
@@ -2063,7 +2065,7 @@ public:
     for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
       if (lowerTables.contains(tt.key().toLower())) {
         if (!query.exec("DROP VIEW " + tt.value().name() + ';')) // krazy:exclude=crashy
-          throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("dropping view %1").arg(tt.key())));
+          throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("dropping view %1").arg(tt.key()));
       }
     }
 
@@ -2131,8 +2133,7 @@ public:
     for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
       if (!lowerTables.contains(tt.key().toLower())) {
         if (!query.exec(tt.value().createString())) // krazy:exclude=crashy
-          throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO,
-                                            QString("creating view %1").arg(tt.key())));
+          throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating view %1").arg(tt.key()));
       }
     }
 
@@ -2502,7 +2503,7 @@ public:
     QSqlQuery query(*q);
     for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
       if (!lowerTables.contains(tt.key().toLower())) {
-        if (!query.exec(tt.value().createString())) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("creating view %1").arg(tt.key())));
+        if (!query.exec(tt.value().createString())) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating view %1").arg(tt.key()));
       }
     }
 
@@ -2514,7 +2515,7 @@ public:
       query.bindValue(0, m_dbVersion);
       query.bindValue(1, m_storage->fileFixVersion());
       if (!query.exec())
-        throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("Saving database version")));
+        throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("Saving database version"));
     }
 
     return upgradeDb();
@@ -2527,7 +2528,7 @@ public:
     QStringList ql = t.generateCreateSQL(m_driver, version).split('\n', QString::SkipEmptyParts);
     QSqlQuery query(*q);
     foreach (const QString& i, ql) {
-      if (!query.exec(i)) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("creating table/index %1").arg(t.name())));
+      if (!query.exec(i)) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating table/index %1").arg(t.name()));
     }
   }
 
@@ -2584,7 +2585,7 @@ public:
     QSqlQuery query(*q);
     while (it != m_db.tableEnd()) {
       query.prepare(QString("DELETE from %1;").arg(it.key()));
-      if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("cleaning database"))); // krazy:exclude=crashy
+      if (!query.exec()) throw MYMONEYEXCEPTIONSQL("cleaning database"); // krazy:exclude=crashy
       ++it;
     }
   }
@@ -2598,8 +2599,8 @@ public:
     QSqlQuery query(*q);
     while ((tt != m_db.tableEnd()) && (recordCount == 0)) {
       query.prepare(QString("select count(*) from %1;").arg((*tt).name()));
-      if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "getting record count")); // krazy:exclude=crashy
-      if (!query.next()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, "retrieving record count"));
+      if (!query.exec()) throw MYMONEYEXCEPTIONSQL("getting record count"); // krazy:exclude=crashy
+      if (!query.next()) throw MYMONEYEXCEPTIONSQL("retrieving record count");
       recordCount += query.value(0).toInt();
       ++tt;
     }
@@ -2658,7 +2659,7 @@ public:
     );
 
     if (plugin == 0)
-      throw MYMONEYEXCEPTION(QString("Could not load sqlStoragePlugin '%1', (error: %2)").arg(iid, errorMsg));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not load sqlStoragePlugin '%1', (error: %2)").arg(iid, errorMsg));
 
     MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
     if (plugin->setupDatabase(*q)) {
@@ -2666,7 +2667,7 @@ public:
       return true;
     }
 
-    throw MYMONEYEXCEPTION(QString("Could not install sqlStoragePlugin '%1' in database.").arg(iid));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Could not install sqlStoragePlugin '%1' in database.").arg(iid));
   }
 
   void insertStorableObject(const databaseStoreableObject& obj, const QString& id)
@@ -2674,7 +2675,7 @@ public:
     Q_Q(MyMoneyStorageSql);
     setupStoragePlugin(obj.storagePluginIid());
     if (!obj.sqlSave(*q, id))
-      throw MYMONEYEXCEPTION(QString("Could not save object with id '%1' in database (plugin failed).").arg(id));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not save object with id '%1' in database (plugin failed).").arg(id));
   }
 
   void updateStorableObject(const databaseStoreableObject& obj, const QString& id)
@@ -2682,7 +2683,7 @@ public:
     Q_Q(MyMoneyStorageSql);
     setupStoragePlugin(obj.storagePluginIid());
     if (!obj.sqlModify(*q, id))
-      throw MYMONEYEXCEPTION(QString("Could not modify object with id '%1' in database (plugin failed).").arg(id));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not modify object with id '%1' in database (plugin failed).").arg(id));
   }
 
   void deleteStorableObject(const databaseStoreableObject& obj, const QString& id)
@@ -2690,7 +2691,7 @@ public:
     Q_Q(MyMoneyStorageSql);
     setupStoragePlugin(obj.storagePluginIid());
     if (!obj.sqlRemove(*q, id))
-      throw MYMONEYEXCEPTION(QString("Could not remove object with id '%1' from database (plugin failed).").arg(id));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not remove object with id '%1' from database (plugin failed).").arg(id));
   }
 
   void alert(QString s) const // FIXME: remove...

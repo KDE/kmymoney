@@ -495,7 +495,7 @@ void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Sched
         ft.commit();
 
       } catch (const MyMoneyException &e) {
-        KMessageBox::error(nullptr, i18n("Unable to add scheduled transaction: %1", e.what()), i18n("Add scheduled transaction"));
+        KMessageBox::error(nullptr, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())), i18n("Add scheduled transaction"));
       }
     }
   }
@@ -545,7 +545,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                 delete transactionEditor;
                 ft.commit();
               } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), e.what());
+                KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), QString::fromLatin1(e.what()));
               }
             }
             delete transactionEditor;
@@ -563,7 +563,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
               MyMoneyFile::instance()->modifyAccount(loan_wiz->account());
               ft.commit();
             } catch (const MyMoneyException &e) {
-              KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), e.what());
+              KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), QString::fromLatin1(e.what()));
             }
           }
           delete loan_wiz;
@@ -574,7 +574,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
       }
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), e.what());
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), QString::fromLatin1(e.what()));
     }
 }
 

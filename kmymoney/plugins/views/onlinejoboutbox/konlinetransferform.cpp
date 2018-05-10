@@ -127,7 +127,7 @@ void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration:
 
     if (showWidget)
       showEditWidget(widget);
-  } catch (MyMoneyException&) {
+  } catch (const MyMoneyException &) {
     qWarning("Error while loading a plugin (IonlineJobEdit).");
   }
 }
@@ -219,7 +219,7 @@ void kOnlineTransferForm::accountChanged()
   const QString accountId = ui->originAccount->getSelected();
   try {
     ui->orderAccountBalance->setValue(MyMoneyFile::instance()->balance(accountId));
-  } catch (const MyMoneyException&) {
+  } catch (const MyMoneyException &) {
     // @todo this can happen until the selection allows to select correct accounts only
     ui->orderAccountBalance->setText("");
   }

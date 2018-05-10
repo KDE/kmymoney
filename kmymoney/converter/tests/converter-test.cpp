@@ -129,7 +129,7 @@ void ConverterTest::testWebQuotesDefault()
     // Quote value should at least be positive
     QVERIFY(qr.m_price.isPositive());
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 #endif
 }
@@ -152,7 +152,7 @@ void ConverterTest::testWebQuotes()
     QVERIFY(qr.m_price.isPositive());
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 #endif
 }
@@ -196,6 +196,6 @@ void ConverterTest::testDateFormat()
     QVERIFY(format.convertString("1/1/90", false, 2000) == QDate(1990, 1, 1));
     QVERIFY(format.convertString("december 31st, 5", false) == QDate(2005, 12, 31));
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }

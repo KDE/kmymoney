@@ -59,7 +59,7 @@ MyMoneyTag::MyMoneyTag(const QDomElement& node) :
   MyMoneyObject(*new MyMoneyTagPrivate, node)
 {
   if (nodeNames[nnTag] != node.tagName()) {
-    throw MYMONEYEXCEPTION("Node was not TAG");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not TAG");
   }
   Q_D(MyMoneyTag);
   d->m_name = node.attribute(d->getAttrName(Tag::Attribute::Name));

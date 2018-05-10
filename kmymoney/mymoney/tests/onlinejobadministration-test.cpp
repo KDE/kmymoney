@@ -50,8 +50,8 @@ void onlineJobAdministrationTest::initTestCase()
     file->addAccount(account , asset);
     accountId = account.id();
     transaction.commit();
-  } catch (const MyMoneyException& ex) {
-    QFAIL(qPrintable("Unexpected exception " + ex.what()));
+  } catch (const MyMoneyException &ex) {
+    QFAIL(qPrintable(QString::fromLatin1("Unexpected exception %1").arg(ex.what())));
   }
 }
 

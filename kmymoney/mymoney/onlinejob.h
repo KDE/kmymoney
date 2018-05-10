@@ -20,6 +20,11 @@
 #ifndef ONLINEJOB_H
 #define ONLINEJOB_H
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define BADTASKEXCEPTION(what) badTaskCast("Casted onlineTask with wrong type. " __FILE__ ":" TOSTRING(__LINE__))
+#define EMPTYTASKEXCEPTION(what) emptyTask("Requested onlineTask of onlineJob without any task. " __FILE__ ":" TOSTRING(__LINE__))
+
 #include <QMetaType>
 #include <QString>
 #include "mymoneyobject.h"
@@ -288,21 +293,19 @@ public:
    *
    * This is inspired by std::bad_cast
    */
-  class badTaskCast : public MyMoneyException
+  class badTaskCast : public std::runtime_error
   {
   public:
-    explicit badTaskCast(const QString& file = QString(), const long unsigned int& line = 0)
-      : MyMoneyException("Casted onlineTask with wrong type", file, line) {}
+    explicit badTaskCast(const char *msg) : std::runtime_error(msg) {}
   };
 
   /**
    * @brief Thrown if a task of an invalid onlineJob is requested
    */
-  class emptyTask : public MyMoneyException
+  class emptyTask : public std::runtime_error
   {
   public:
-    explicit emptyTask(const QString& file = QString(), const long unsigned int& line = 0)
-      : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line) {}
+    explicit emptyTask(const char *msg) : std::runtime_error(msg) {}
   };
 
   /** @brief onlineTask attatched to this job */
@@ -337,7 +340,8 @@ T* onlineJob::task()
 {
   T* ret = dynamic_cast<T*>(m_task);
   if (ret == 0)
-    throw badTaskCast(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION();
+//    throw badTaskCast(__FILE__, __LINE__);
   return ret;
 }
 
@@ -346,7 +350,8 @@ const T* onlineJob::task() const
 {
   const T* ret = dynamic_cast<const T*>(m_task);
   if (ret == 0)
-    throw badTaskCast(__FILE__, __LINE__);
+    throw BADTASKEXCEPTION();
+//    throw badTaskCast(__FILE__, __LINE__);
   return ret;
 }
 

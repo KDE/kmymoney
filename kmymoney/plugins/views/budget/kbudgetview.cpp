@@ -131,7 +131,7 @@ void KBudgetView::slotNewBudget()
     MyMoneyFile::instance()->addBudget(budget);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -160,7 +160,7 @@ void KBudgetView::slotDeleteBudget()
       file->removeBudget(budget);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to remove budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to remove budget."), QString::fromLatin1(e.what()));
   }
 }
 
@@ -177,7 +177,7 @@ void KBudgetView::slotCopyBudget()
       MyMoneyFile::instance()->addBudget(budget);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -214,7 +214,7 @@ void KBudgetView::slotChangeBudgetYear()
           MyMoneyFile::instance()->modifyBudget(budget);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+          KMessageBox::detailedSorry(this, i18n("Unable to modify budget."), QString::fromLatin1(e.what()));
         }
       }
     }
@@ -252,7 +252,7 @@ void KBudgetView::slotBudgetForecast()
         ft.commit();
       }
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify budget."), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -272,8 +272,7 @@ void KBudgetView::slotResetBudget()
     }
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Unable to reset budget"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to reset budget"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -286,8 +285,7 @@ void KBudgetView::slotUpdateBudget()
     ft.commit();
     d->refreshHideUnusedButton();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Unable to modify budget"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to modify budget"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -380,8 +378,7 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify budget"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify budget"), QString::fromLatin1(e.what()));
     }
   } else {
     pBudget->setText(0, new_name);

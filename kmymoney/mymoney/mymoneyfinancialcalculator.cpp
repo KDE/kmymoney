@@ -169,7 +169,7 @@ double MyMoneyFinancialCalculator::numPayments()
   const unsigned short mask = PV_SET | IR_SET | PMT_SET | FV_SET;
 
   if ((d->m_mask & mask) != mask)
-    throw MYMONEYEXCEPTION("Not all parameters set for calculation of numPayments");
+    throw MYMONEYEXCEPTION_CSTRING("Not all parameters set for calculation of numPayments");
 
   double eint = d->eff_int();
 
@@ -194,7 +194,7 @@ double MyMoneyFinancialCalculator::payment()
   const unsigned short mask = PV_SET | IR_SET | NPP_SET | FV_SET;
 
   if ((d->m_mask & mask) != mask)
-    throw MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
+    throw MYMONEYEXCEPTION_CSTRING("Not all parameters set for calculation of payment");
 
   double eint = d->eff_int();
 
@@ -218,7 +218,7 @@ double MyMoneyFinancialCalculator::presentValue()
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | FV_SET;
 
   if ((d->m_mask & mask) != mask)
-    throw MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
+    throw MYMONEYEXCEPTION_CSTRING("Not all parameters set for calculation of payment");
 
   double eint = d->eff_int();
 
@@ -243,7 +243,7 @@ double MyMoneyFinancialCalculator::futureValue()
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | PV_SET;
 
   if ((d->m_mask & mask) != mask)
-    throw MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
+    throw MYMONEYEXCEPTION_CSTRING("Not all parameters set for calculation of payment");
 
   double eint = d->eff_int();
 

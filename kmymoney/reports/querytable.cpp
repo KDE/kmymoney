@@ -345,7 +345,7 @@ void QueryTable::init()
       m_group << ctInstitution << ctTopAccount;
       break;
     default:
-      throw MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
+      throw MYMONEYEXCEPTION_CSTRING("QueryTable::QueryTable(): unhandled row type");
   }
 
   QVector<cellTypeE> sort = QVector<cellTypeE>::fromList(m_group) << QVector<cellTypeE>::fromList(m_columns) << ctID << ctRank;

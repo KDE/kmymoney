@@ -73,7 +73,8 @@ void ibanBicItemEdit::setIdentifier(const payeeIdentifier& ident)
     d->ui->bicEdit->setText(identTyped->storedBic());
     d->ui->ibanEdit->setText(identTyped->paperformatIban());
     d->m_identifier = ident;
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 }
 

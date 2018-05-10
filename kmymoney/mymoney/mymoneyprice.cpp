@@ -65,7 +65,7 @@ MyMoneyPrice::MyMoneyPrice(const QString& from,
   d_ptr(new MyMoneyPricePrivate)
 {
   if ("PRICE" != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not PRICE");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not PRICE");
 
   Q_D(MyMoneyPrice);
   d->m_fromSecurity = from;
@@ -122,8 +122,7 @@ MyMoneyMoney MyMoneyPrice::rate(const QString& id) const
   if (id == d->m_fromSecurity)
     return d->m_invRate;
 
-  QString msg = QString("Unknown security id %1 for price info %2/%3.").arg(id).arg(d->m_fromSecurity).arg(d->m_toSecurity);
-  throw MYMONEYEXCEPTION(msg);
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown security id %1 for price info %2/%3.").arg(id, d->m_fromSecurity, d->m_toSecurity));
 }
 
 QDate MyMoneyPrice::date() const

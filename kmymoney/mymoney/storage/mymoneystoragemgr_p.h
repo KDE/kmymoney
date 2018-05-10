@@ -193,7 +193,7 @@ public:
     }
 
     if (account.accountType() == eMyMoney::Account::Type::Stock && parent.accountType() != eMyMoney::Account::Type::Investment)
-      throw MYMONEYEXCEPTION("Cannot move a stock acocunt into a non-investment account");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot move a stock acocunt into a non-investment account");
 
     newParent = m_accountList.find(parent.id());
     childAccount = m_accountList.find(account.id());

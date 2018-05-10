@@ -605,8 +605,7 @@ public:
           }
 
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(q, i18n("Unable to reassign payee of transaction/split"),
-                                     i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+          KMessageBox::detailedSorry(q, i18n("Unable to reassign payee of transaction/split"), e.what());
         }
       } else { // if !translist.isEmpty()
         if (type == KPayeeReassignDlg::TypeMerge) {
@@ -668,8 +667,7 @@ public:
       m_selectedPayeesList.clear();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(q, i18n("Unable to remove payee(s)"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(q, i18n("Unable to remove payee(s)"), e.what());
     }
 
     return true;

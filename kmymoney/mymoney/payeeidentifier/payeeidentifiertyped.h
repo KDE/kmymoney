@@ -65,7 +65,7 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(T* pid)
     m_payeeIdentifierTyped(pid)
 {
   if (m_payeeIdentifierTyped == 0)
-    throw payeeIdentifier::empty(__FILE__, __LINE__);
+    throw PAYEEIDENTIFIEREMPTYEXCEPTION();
 }
 
 template< class T >
@@ -98,8 +98,8 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifier& other)
   m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
   if (m_payeeIdentifierTyped == 0) {
     if (payeeIdentifier::data() == 0)
-      throw payeeIdentifier::empty(__FILE__, __LINE__);
-    throw payeeIdentifier::badCast(__FILE__, __LINE__);
+      throw PAYEEIDENTIFIEREMPTYEXCEPTION();
+    throw PAYEEIDENTIFIERBADCASTEXCEPTION();
   }
 }
 

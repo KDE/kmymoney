@@ -19,12 +19,19 @@
 #ifndef PAYEEIDENTIFIER_H
 #define PAYEEIDENTIFIER_H
 
+#define KMM_STRINGIFY(x) #x
+#define KMM_TOSTRING(x) KMM_STRINGIFY(x)
+
 #include <QMetaType>
 #include <QString>
 #include <qglobal.h>
+#include "mymoneyexception.h"
 
 /** @todo fix include path after upgrade to cmake 3 */
 #include "payeeidentifier/kmm_payeeidentifier_export.h"
+
+#define PAYEEIDENTIFIERBADCASTEXCEPTION(exceptionMessage) payeeIdentifier::badCast("Casted payeeIdentifier with wrong type " __FILE__ ":" KMM_TOSTRING(__LINE__))
+#define PAYEEIDENTIFIEREMPTYEXCEPTION(exceptionMessage) payeeIdentifier::empty("Requested payeeIdentifierData of empty payeeIdentifier " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
 // Q_DECLARE_METATYPE requries this include
 
@@ -102,44 +109,23 @@ public:
   QString iid() const;
 
   /**
-   * @brief Base for exceptions thrown by payeeIdentifier
-   *
-   * @internal Using MyMoneyException instead is not possible because
-   * it would lead to cyclic inter-target dependenies. We could create a new
-   * shared library which includes MyMoneyException only, but this could be over-
-   * powered.
-   */
-  class exception
-    {};
-
-  /**
    * @brief Thrown if a cast of a payeeIdentifier fails
    *
    * This is inspired by std::bad_cast
-   * @todo inherit from MyMoneyException
    */
-  class badCast : public exception
+  class badCast : public MyMoneyException
   {
   public:
-    explicit badCast(const QString& file = "", const long unsigned int& line = 0)
-    //: MyMoneyException("Casted payeeIdentifier with wrong type", file, line)
-    {
-      Q_UNUSED(file); Q_UNUSED(line);
-    }
+    explicit badCast(const char *exceptionMessage) : MyMoneyException(exceptionMessage) {}
   };
 
   /**
    * @brief Thrown if one tried to access the data of a null payeeIdentifier
-   * @todo inherit from MyMoneyException
    */
-  class empty : public exception
+  class empty : public MyMoneyException
   {
   public:
-    explicit empty(const QString& file = "", const long unsigned int& line = 0)
-    //: MyMoneyException("Requested payeeIdentifierData of empty payeeIdentifier", file, line)
-    {
-      Q_UNUSED(file); Q_UNUSED(line);
-    }
+    explicit empty(const char *exceptionMessage) : MyMoneyException(exceptionMessage) {}
   };
 
 private:
@@ -160,7 +146,7 @@ T* payeeIdentifier::data()
 {
   T *const ident = dynamic_cast<T*>(operator->());
   if (ident == 0)
-    throw badCast(__FILE__, __LINE__);
+    throw PAYEEIDENTIFIERBADCASTEXCEPTION();
   return ident;
 }
 
@@ -169,7 +155,7 @@ const T* payeeIdentifier::data() const
 {
   const T *const ident = dynamic_cast<const T*>(operator->());
   if (ident == 0)
-    throw badCast(__FILE__, __LINE__);
+    throw PAYEEIDENTIFIERBADCASTEXCEPTION();
   return ident;
 }
 

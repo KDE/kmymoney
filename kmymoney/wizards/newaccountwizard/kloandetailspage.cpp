@@ -230,7 +230,7 @@ namespace NewAccountWizard
           // calculate the number of payments out of the other information
           val = calc.numPayments();
           if (val == 0)
-            throw MYMONEYEXCEPTION("incorrect fincancial calculation");
+            throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
 
           // if the number of payments has a fractional part, then we
           // round it to the smallest integer and calculate the balloon payment
@@ -262,7 +262,7 @@ namespace NewAccountWizard
               || (moneyLend && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
               // case a)
               qDebug("Future Value is %f", val);
-              throw MYMONEYEXCEPTION("incorrect fincancial calculation");
+              throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
 
             } else if ((moneyBorrowed && val < 0 && qAbs(val) <= qAbs(calc.payment()))
                        || (moneyLend && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
@@ -275,7 +275,7 @@ namespace NewAccountWizard
 
           if (!d->ui->m_balloonAmount->lineedit()->text().isEmpty()) {
               if ((d->ui->m_balloonAmount->value().abs() - refVal.abs()).abs().toDouble() > 1) {
-                  throw MYMONEYEXCEPTION("incorrect fincancial calculation");
+                  throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
                 }
               result = i18n("KMyMoney has successfully verified your loan information.");
             }

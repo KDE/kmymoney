@@ -564,7 +564,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
     try {
       baseId = MyMoneyFile::instance()->baseCurrency().id();
     } catch (const MyMoneyException &e) {
-      qDebug("%s", qPrintable(e.what()));
+      qDebug("%s", e.what());
     }
 
     if (baseCurrency.id() != baseId) {
@@ -573,7 +573,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
         MyMoneyFile::instance()->setBaseCurrency(baseCurrency);
         ft.commit();
       } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", baseCurrency.name(), e.what()), i18n("Set base currency"));
+        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", baseCurrency.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
       }
     }
     AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
@@ -625,7 +625,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       // We assume at least 2 splits in the transaction
       MyMoneyTransaction t = newSchedule.transaction();
       if (t.splitCount() < 2) {
-        throw MYMONEYEXCEPTION("Transaction for schedule has less than 2 splits!");
+        throw MYMONEYEXCEPTION_CSTRING("Transaction for schedule has less than 2 splits!");
       }
       // now search the split that does not have an account reference
       // and set it up to be the one of the account we just added
@@ -652,7 +652,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to add schedule: %1", e.what()));
+      KMessageBox::information(this, i18n("Unable to add schedule: %1", QString::fromLatin1(e.what())));
     }
   }
 }

@@ -31,16 +31,8 @@ void MyMoneyExceptionTest::cleanup()
 
 void MyMoneyExceptionTest::testDefaultConstructor()
 {
-  const MyMoneyException &e = MYMONEYEXCEPTION("Message");
-  QVERIFY(e.what() == "Message");
-  QVERIFY(e.line() == __LINE__ - 2);
-  QVERIFY(e.file() == __FILE__);
-}
-
-void MyMoneyExceptionTest::testConstructor()
-{
-  MyMoneyException e("New message", "Joe's file", 1234);
-  QVERIFY(e.what() == "New message");
-  QVERIFY(e.line() == 1234);
-  QVERIFY(e.file() == "Joe's file");
+  const MyMoneyException &e = MYMONEYEXCEPTION_CSTRING("Message");
+  QVERIFY(QString::fromLatin1(e.what()).startsWith("Message"));
+  QVERIFY(QString::fromLatin1(e.what()).contains(QString::number(__LINE__ - 2)));
+  QVERIFY(QString::fromLatin1(e.what()).contains(QString::fromLatin1(__FILE__)));
 }

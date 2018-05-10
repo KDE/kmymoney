@@ -80,7 +80,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
     MyMoneyObject(*new MyMoneySchedulePrivate, node)
 {
   if (nodeNames[nnScheduleTX] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not SCHEDULED_TX");
 
   Q_D(MyMoneySchedule);
   d->m_name = node.attribute(d->getAttrName(Schedule::Attribute::Name));
@@ -102,7 +102,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   // read in the associated transaction
   QDomNodeList nodeList = node.elementsByTagName(nodeNames[nnTransaction]);
   if (nodeList.count() == 0)
-    throw MYMONEYEXCEPTION("SCHEDULED_TX has no TRANSACTION node");
+    throw MYMONEYEXCEPTION_CSTRING("SCHEDULED_TX has no TRANSACTION node");
 
   setTransaction(MyMoneyTransaction(nodeList.item(0).toElement(), false), true);
 
@@ -447,37 +447,37 @@ void MyMoneySchedule::validate(bool id_check) const
    */
   Q_D(const MyMoneySchedule);
   if (id_check && !d->m_id.isEmpty())
-    throw MYMONEYEXCEPTION("ID for schedule not empty when required");
+    throw MYMONEYEXCEPTION_CSTRING("ID for schedule not empty when required");
 
   if (d->m_occurrence == Schedule::Occurrence::Any)
-    throw MYMONEYEXCEPTION("Invalid occurrence type for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid occurrence type for schedule");
 
   if (d->m_type == Schedule::Type::Any)
-    throw MYMONEYEXCEPTION("Invalid type for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid type for schedule");
 
   if (!nextDueDate().isValid())
-    throw MYMONEYEXCEPTION("Invalid next due date for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid next due date for schedule");
 
   if (d->m_paymentType == Schedule::PaymentType::Any)
-    throw MYMONEYEXCEPTION("Invalid payment type for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid payment type for schedule");
 
   if (d->m_transaction.splitCount() == 0)
-    throw MYMONEYEXCEPTION("Scheduled transaction does not contain splits");
+    throw MYMONEYEXCEPTION_CSTRING("Scheduled transaction does not contain splits");
 
   // Check the payment types
   switch (d->m_type) {
     case Schedule::Type::Bill:
       if (d->m_paymentType == Schedule::PaymentType::DirectDeposit || d->m_paymentType == Schedule::PaymentType::ManualDeposit)
-        throw MYMONEYEXCEPTION("Invalid payment type for bills");
+        throw MYMONEYEXCEPTION_CSTRING("Invalid payment type for bills");
       break;
 
     case Schedule::Type::Deposit:
       if (d->m_paymentType == Schedule::PaymentType::DirectDebit || d->m_paymentType == Schedule::PaymentType::WriteChecque)
-        throw MYMONEYEXCEPTION("Invalid payment type for deposits");
+        throw MYMONEYEXCEPTION_CSTRING("Invalid payment type for deposits");
       break;
 
     case Schedule::Type::Any:
-      throw MYMONEYEXCEPTION("Invalid type ANY");
+      throw MYMONEYEXCEPTION_CSTRING("Invalid type ANY");
       break;
 
     case Schedule::Type::Transfer:

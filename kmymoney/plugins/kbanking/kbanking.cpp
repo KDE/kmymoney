@@ -664,7 +664,7 @@ QStringList KBanking::availableJobs(QString accountId)
       d->jobList.clear();
       d->fileId = id;
     }
-  } catch (const MyMoneyException&) {
+  } catch (const MyMoneyException &) {
     // Exception usually means account was not found
     return QStringList();
   }

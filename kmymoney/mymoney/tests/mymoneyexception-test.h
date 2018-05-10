@@ -19,7 +19,6 @@
 
 #include <QObject>
 
-#include "mymoneyutils.h"
 #include "mymoneyexception.h"
 
 class MyMoneyExceptionTest : public QObject
@@ -31,8 +30,5 @@ private Q_SLOTS:
   void cleanup();
 
   void testDefaultConstructor();
-
-  void testConstructor();
-
 };
 #endif

@@ -139,7 +139,7 @@ TransactionHelper::~TransactionHelper()
   try {
     MyMoneyFile::instance()->removeTransaction(*this);
     ft.commit();
-  } catch (const MyMoneyException & e) {
+  } catch (const MyMoneyException &e) {
     qDebug() << e.what();
   }
 }
@@ -475,7 +475,7 @@ void XMLandback(MyMoneyReport& filter)
   if (readRCFfromXMLDoc(list, doc) && !list.isEmpty())
     filter = list[0];
   else
-    throw MYMONEYEXCEPTION("Failed to load report from XML");
+    throw MYMONEYEXCEPTION_CSTRING("Failed to load report from XML");
 
   delete doc;
 

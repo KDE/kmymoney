@@ -55,7 +55,7 @@ MyMoneyCostCenter::MyMoneyCostCenter(const QDomElement& node) :
     MyMoneyObject(*new MyMoneyCostCenterPrivate, node)
 {
   if (nodeNames[nnCostCenter] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not COSTCENTER");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not COSTCENTER");
 
   Q_D(MyMoneyCostCenter);
   d->m_name = node.attribute(getAttrName(Attribute::Name));

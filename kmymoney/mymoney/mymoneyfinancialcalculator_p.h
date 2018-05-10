@@ -84,7 +84,7 @@ public:
   double _Bx(const double eint) const
   {
     if (eint == 0.0)
-      throw MYMONEYEXCEPTION("Zero interest");
+      throw MYMONEYEXCEPTION_CSTRING("Zero interest");
 
     if (m_bep == false)
       return static_cast<double>(1.0) / eint;

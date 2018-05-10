@@ -49,7 +49,7 @@ MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const QDomElement& node) :
   Q_D(MyMoneyKeyValueContainer);
   if (!node.isNull()) {
     if (nodeNames[nnKeyValuePairs] != node.tagName())
-      throw MYMONEYEXCEPTION("Node was not KEYVALUEPAIRS");
+      throw MYMONEYEXCEPTION_CSTRING("Node was not KEYVALUEPAIRS");
 
     d->m_kvp.clear();
 

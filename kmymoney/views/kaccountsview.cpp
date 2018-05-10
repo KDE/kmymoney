@@ -355,7 +355,7 @@ void KAccountsView::slotDeleteAccount()
     emit selectByObject(MyMoneyAccount(), eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e.what()));
+    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
   }
 }
 
@@ -437,7 +437,7 @@ void KAccountsView::slotAccountUnmapOnline()
       // The mapping could disable the online task system
       onlineJobAdministration::instance()->updateOnlineTaskProperties();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e.what()));
+      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", QString::fromLatin1(e.what())));
     }
   }
   updateActions(d->m_currentAccount);
@@ -515,7 +515,7 @@ void KAccountsView::slotAccountMapOnline()
         // The mapping could enable the online task system
         onlineJobAdministration::instance()->updateOnlineTaskProperties();
       } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Unable to map account to online account: %1", e.what()));
+        KMessageBox::error(this, i18n("Unable to map account to online account: %1", QString::fromLatin1(e.what())));
       }
     }
   }

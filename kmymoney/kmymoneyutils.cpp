@@ -319,7 +319,7 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
   try {
     MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e.what());
+    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -470,7 +470,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
       calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (const MyMoneyException &e) {
-    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e.what()));
+    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), e.what());
   }
 
   t.clearId();
@@ -718,8 +718,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
       id = p.id();
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee"), QString::fromLatin1(e.what()));
       doit = false;
     }
   }
@@ -766,8 +765,7 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
       id = ta.id();
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(nullptr, i18n("Unable to add tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to add tag"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -783,7 +781,7 @@ void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)
     ft.commit();
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(nullptr, i18n("Cannot add institution: %1", e.what()));
+    KMessageBox::information(nullptr, i18n("Cannot add institution: %1", QString::fromLatin1(e.what())));
   }
 }
 

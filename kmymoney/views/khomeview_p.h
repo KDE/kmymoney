@@ -851,7 +851,7 @@ public:
         }
       }
     } catch (const MyMoneyException &e) {
-      qDebug("Unable to display schedule entry: %s", qPrintable(e.what()));
+      qDebug("Unable to display schedule entry: %s", e.what());
     }
   }
 

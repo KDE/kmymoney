@@ -119,7 +119,7 @@ public:
     try {
       const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob(jobId);
       editJob(constJob);
-    } catch (MyMoneyException&) {
+    } catch (const MyMoneyException &) {
       // Prevent a crash in very rare cases
     }
   }
@@ -128,7 +128,7 @@ public:
   {
     try {
       editJob(onlineJobTyped<creditTransfer>(job));
-    } catch (MyMoneyException&) {
+    } catch (const MyMoneyException &) {
     }
   }
 

@@ -58,7 +58,7 @@ LedgerSplit::LedgerSplit(const MyMoneyTransaction& t, const MyMoneySplit& s) :
   if(!d->m_payeeId.isEmpty()) {
     try {
       d->m_payeeName = MyMoneyFile::instance()->payee(d->m_payeeId).name();
-    } catch(MyMoneyException&) {
+    } catch (const MyMoneyException &) {
       qDebug() << "payee" << d->m_payeeId << "not found.";
     }
   }

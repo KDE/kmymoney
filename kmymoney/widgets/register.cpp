@@ -920,7 +920,7 @@ namespace KMyMoneyRegister
           // different view, then this view is restored. In this case, new
           // data is about to be loaded into the view anyway, so just remove
           // the item from the register and swallow the exception.
-          //qDebug("%s", qPrintable(e.what()));
+          //qDebug("%s", e.what());
           removeItem(t);
         }
         w = qMax(w, nw);

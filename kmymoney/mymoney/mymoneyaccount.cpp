@@ -64,7 +64,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
 {
   if (nodeNames[nnAccount] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not ACCOUNT");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not ACCOUNT");
 
   Q_D(MyMoneyAccount);
   setName(node.attribute(d->getAttrName(Account::Attribute::Name)));
@@ -103,12 +103,10 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     qWarning("XMLREADER: Account %s had invalid or no account type information.", qPrintable(name()));
   }
 
-  if (node.hasAttribute(d->getAttrName(Account::Attribute::OpeningBalance))) {
-    if (!MyMoneyMoney(node.attribute(d->getAttrName(Account::Attribute::OpeningBalance))).isZero()) {
-      QString msg = i18n("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.", d->m_name);
-      throw MYMONEYEXCEPTION(msg);
-    }
-  }
+  if (node.hasAttribute(d->getAttrName(Account::Attribute::OpeningBalance)))
+    if (!MyMoneyMoney(node.attribute(d->getAttrName(Account::Attribute::OpeningBalance))).isZero())
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.").arg(d->m_name));
+
   setDescription(node.attribute(d->getAttrName(Account::Attribute::Description)));
 
   d->m_id = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));

@@ -269,7 +269,7 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(MyMoneyMoney(rows[21][ListTable::ctValue]) == -moParent2);
     QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 
   // Test querytable::TableRow::operator> and operator==
@@ -408,7 +408,7 @@ void QueryTableTest::testAccountQuery()
     QVERIFY(MyMoneyMoney(rows[3][ListTable::ctValue]) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
     QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }
 
@@ -606,7 +606,7 @@ void QueryTableTest::testInvestment()
 #endif
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }
 
@@ -659,7 +659,7 @@ void QueryTableTest::testSplitShares()
     QVERIFY(MyMoneyMoney(rows[0][ListTable::ctBuys]) == sharesAtTheEnd * priceAfterSplit * MyMoneyMoney(-1));
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }
 
@@ -698,7 +698,7 @@ void QueryTableTest::testConversionRate()
     QVERIFY(MyMoneyMoney(rows[2][ListTable::ctPrice]) == secondConversionRate);
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 
 }
@@ -750,7 +750,7 @@ void QueryTableTest::testBalanceColumn()
     QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 
 }
@@ -870,7 +870,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">&nbsp;-1.00</td><td>&nbsp;-3.00</td></tr>") > 0);
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }
 
@@ -899,6 +899,6 @@ void QueryTableTest::testTaxReport()
     QString html = qtbl_3.renderHTML();
     QVERIFY(rows.count() == 5);
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }

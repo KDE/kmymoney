@@ -112,7 +112,7 @@ void PivotTableTest::testNetWorthSingle()
     QVERIFY(networth_f.m_grid.m_total[eActual][5] == moCheckingOpen);
     QVERIFY(networth_f.m_grid.m_total[eActual][6] == moCheckingOpen);
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }
 
@@ -974,7 +974,7 @@ void PivotTableTest::testInvestment()
 #endif
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }
 

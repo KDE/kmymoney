@@ -112,7 +112,7 @@ void ObjectInfoTable::init()
       m_subtotal << ctCurrentBalance;
       break;
     default:
-      throw MYMONEYEXCEPTION("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
+      throw MYMONEYEXCEPTION_CSTRING("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
   }
 
   QVector<cellTypeE> sort = QVector<cellTypeE>::fromList(m_group) << QVector<cellTypeE>::fromList(m_columns) << ctID << ctRank;

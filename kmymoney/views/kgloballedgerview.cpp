@@ -585,7 +585,7 @@ void KGlobalLedgerView::slotContinueReconciliation()
             ft.commit();
 
           } catch (const MyMoneyException &e) {
-            qWarning("interest transaction not stored: '%s'", qPrintable(e.what()));
+            qWarning("interest transaction not stored: '%s'", e.what());
           }
 
           // reload the account object as it might have changed in the meantime
@@ -1048,7 +1048,7 @@ void KGlobalLedgerView::slotSortOptions()
           MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          qDebug("Unable to update sort order for account '%s': %s", qPrintable(d->m_currentAccount.name()), qPrintable(e.what()));
+          qDebug("Unable to update sort order for account '%s': %s", qPrintable(d->m_currentAccount.name()), e.what());
         }
       }
     }
@@ -1504,7 +1504,7 @@ void KGlobalLedgerView::slotDuplicateTransaction()
       if (!d->m_currentAccount.id().isEmpty())
         slotLedgerSelected(d->m_currentAccount.id(), lt.id());
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to duplicate transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
     }
     // switch off the progress bar
     emit selectByVariant(QVariantList {QVariant(-1), QVariant(-1)}, eView::Intent::ReportProgress);
@@ -1579,7 +1579,7 @@ void KGlobalLedgerView::slotAcceptTransaction()
     emit selectByVariant(QVariantList {QVariant(-1), QVariant(-1)}, eView::Intent::ReportProgress);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to accept transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -1620,7 +1620,7 @@ void KGlobalLedgerView::slotEditSplits()
           d->m_transactionEditor->enterTransactions(id);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+          KMessageBox::detailedSorry(this, i18n("nable to modify transaction"), QString::fromLatin1(e.what()));
         }
       }
     }

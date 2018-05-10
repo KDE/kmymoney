@@ -182,7 +182,7 @@ MyMoneyReport::MyMoneyReport(ERowType rt,
   //throw exception if the type is inconsistent
   if ((rt > static_cast<ERowType>(sizeof(kTypeArray) / sizeof(kTypeArray[0])))
       || (d->m_reportType == eNoReport))
-    throw MYMONEYEXCEPTION("Invalid report type");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid report type");
 
   //add the corresponding account groups
   if (rt == MyMoneyReport::eAssetLiability) {

@@ -396,7 +396,7 @@ void LedgerModel::addTransaction(const QString& transactionSplitId)
     if(transactionId != d->m_lastTransactionStored.id()) {
       try {
         d->m_lastTransactionStored = MyMoneyFile::instance()->transaction(transactionId);
-      } catch(MyMoneyException& e) {
+      } catch (const MyMoneyException &) {
         d->m_lastTransactionStored = MyMoneyTransaction();
       }
     }
@@ -405,7 +405,7 @@ void LedgerModel::addTransaction(const QString& transactionSplitId)
       beginInsertRows(QModelIndex(), rowCount(), rowCount());
       d->m_ledgerItems.append(new LedgerTransaction(d->m_lastTransactionStored, split));
       endInsertRows();
-    } catch(MyMoneyException& e) {
+    } catch (const MyMoneyException &) {
       d->m_lastTransactionStored = MyMoneyTransaction();
     }
   }

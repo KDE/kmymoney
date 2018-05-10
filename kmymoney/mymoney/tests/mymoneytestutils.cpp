@@ -20,9 +20,6 @@
 
 QString unexpectedExceptionString(const MyMoneyException &e)
 {
-  return QString("Unexpected exception: %1 thrown in %2:%3")
-         .arg(e.what())
-         .arg(e.file())
-         .arg(e.line());
+  return QString("Unexpected exception: %1").arg(e.what());
 }
 

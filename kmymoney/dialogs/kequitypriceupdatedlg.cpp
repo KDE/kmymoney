@@ -549,7 +549,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
       MyMoneyFile::instance()->modifySecurity(security);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _webID, e.what()) + QString("</qt>"), i18n("Price Update Failed"));
+      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _webID, QString::fromLatin1(e.what())) + QString("</qt>"), i18n("Price Update Failed"));
     }
   }
 

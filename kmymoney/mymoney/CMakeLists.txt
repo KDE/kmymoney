@@ -10,7 +10,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneyobject.cpp
   mymoneypayeeidentifiercontainer.cpp
   mymoneysplit.cpp mymoneyinstitution.cpp
-  mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
+  mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyschedule.cpp
   mymoneypayee.cpp mymoneytracer.cpp
   mymoneytag.cpp

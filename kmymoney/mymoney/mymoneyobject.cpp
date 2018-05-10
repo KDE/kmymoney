@@ -47,7 +47,7 @@ MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd,
   Q_D(MyMoneyObject);
   d->m_id = node.attribute(QStringLiteral("id"));
   if (d->m_id.length() == 0 && forceId)
-    throw MYMONEYEXCEPTION("Node has no ID");
+    throw MYMONEYEXCEPTION_CSTRING("Node has no ID");
 }
 
 MyMoneyObject::~MyMoneyObject()

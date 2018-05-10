@@ -164,7 +164,7 @@ public:
           MyMoneyFile::instance()->setBaseCurrency(cur);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::sorry(q, i18n("Cannot set %1 as base currency: %2", cur.name(), e.what()), i18n("Set base currency"));
+          KMessageBox::sorry(q, i18n("Cannot set %1 as base currency: %2", cur.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
         }
       }
     }
@@ -185,11 +185,11 @@ public:
           m_currentCurrency = currency;
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::sorry(q, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
+          KMessageBox::sorry(q, i18n("Cannot update currency. %1", QString::fromLatin1(e.what())), i18n("Update currency"));
         }
       }
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(q, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
+      KMessageBox::sorry(q, i18n("Cannot update currency. %1", QString::fromLatin1(e.what())), i18n("Update currency"));
     }
   }
 
@@ -301,7 +301,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   try {
     baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
   } catch (const MyMoneyException &e) {
-    qDebug("%s", qPrintable(e.what()));
+    qDebug("%s", e.what());
   }
 
   // construct a transparent 16x16 pixmap
@@ -557,7 +557,7 @@ void KCurrencyEditDlg::slotEditCurrency()
       file->modifyCurrency(currency);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      qDebug("%s", qPrintable(e.what()));
+      qDebug("%s", e.what());
     }
   }
   delete d->m_currencyEditorDlg;
@@ -574,7 +574,7 @@ void KCurrencyEditDlg::slotNewCurrency()
       MyMoneyFile::instance()->addCurrency(currency);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", e.what()), i18n("New currency"));
+      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", QString::fromLatin1(e.what())), i18n("New currency"));
     }
     slotSelectCurrency(id);
   }
@@ -599,7 +599,7 @@ void KCurrencyEditDlg::slotDeleteCurrency()
       MyMoneyFile::instance()->removeCurrency(d->m_currentCurrency);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_currentCurrency.name(), e.what()), i18n("Delete currency"));
+      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())), i18n("Delete currency"));
     }
   }
 }
@@ -614,7 +614,7 @@ void KCurrencyEditDlg::slotSetBaseCurrency()
         MyMoneyFile::instance()->setBaseCurrency(d->m_currentCurrency);
         ft.commit();
       } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_currentCurrency.name(), e.what()), i18n("Set base currency"));
+        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
       }
     }
   }

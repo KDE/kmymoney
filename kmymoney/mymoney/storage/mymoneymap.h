@@ -67,7 +67,7 @@ public:
 
   void rollbackTransaction(void) {
     if (m_stack.isEmpty())
-      throw MYMONEYEXCEPTION("No transaction started to rollback changes");
+      throw MYMONEYEXCEPTION_CSTRING("No transaction started to rollback changes");
 
     // undo all actions
     MyMoneyMapAction* action;
@@ -80,7 +80,7 @@ public:
 
   bool commitTransaction(void) {
     if (m_stack.isEmpty())
-      throw MYMONEYEXCEPTION("No transaction started to commit changes");
+      throw MYMONEYEXCEPTION_CSTRING("No transaction started to commit changes");
 
     bool rc = m_stack.count() > 1;
     // remove all actions from the stack
@@ -94,7 +94,7 @@ public:
 
   void insert(const Key& key, const T& obj) {
     if (m_stack.isEmpty())
-      throw MYMONEYEXCEPTION("No transaction started to insert new element into container");
+      throw MYMONEYEXCEPTION_CSTRING("No transaction started to insert new element into container");
 
     // check if information about the object identified by 'key'
     // is already present in the stack
@@ -109,12 +109,12 @@ public:
 
   void modify(const Key& key, const T& obj) {
     if (m_stack.isEmpty())
-      throw MYMONEYEXCEPTION("No transaction started to modify element in container");
+      throw MYMONEYEXCEPTION_CSTRING("No transaction started to modify element in container");
 
 #if 0
     // had to take this out, because we use QPair in one instance as key
     if (key.isEmpty())
-      throw MYMONEYEXCEPTION("No key to update object");
+      throw MYMONEYEXCEPTION_CSTRING("No key to update object");
 #endif
 
     // check if information about the object identified by 'key'
@@ -129,12 +129,12 @@ public:
 
   void remove(const Key& key) {
     if (m_stack.isEmpty())
-      throw MYMONEYEXCEPTION("No transaction started to remove element from container");
+      throw MYMONEYEXCEPTION_CSTRING("No transaction started to remove element from container");
 
 #if 0
     // had to take this out, because we use QPair in one instance as key
     if (key.isEmpty())
-      throw MYMONEYEXCEPTION("No key to remove object");
+      throw MYMONEYEXCEPTION_CSTRING("No key to remove object");
 #endif
 
     // check if information about the object identified by 'key'
@@ -149,7 +149,7 @@ public:
 
   MyMoneyMap<Key, T>& operator= (const QMap<Key, T>& m) {
     if (!m_stack.isEmpty()) {
-      throw MYMONEYEXCEPTION("Cannot assign whole container during transaction");
+      throw MYMONEYEXCEPTION_CSTRING("Cannot assign whole container during transaction");
     }
     QMap<Key, T>::operator=(m);
     return *this;

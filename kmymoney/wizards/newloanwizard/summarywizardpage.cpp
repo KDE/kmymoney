@@ -91,7 +91,7 @@ void SummaryWizardPage::initializePage()
   try {
     QStringList sel = field("interestAccountEdit").toStringList();
     if (sel.count() != 1)
-      throw MYMONEYEXCEPTION("Need a single selected interest category");
+      throw MYMONEYEXCEPTION_CSTRING("Need a single selected interest category");
     MyMoneyAccount acc = MyMoneyFile::instance()->account(sel.first());
     ui->m_summaryInterestCategory->setText(acc.name());
   } catch (const MyMoneyException &) {
@@ -104,7 +104,7 @@ void SummaryWizardPage::initializePage()
   try {
     QStringList sel = field("paymentAccountEdit").toStringList();
     if (sel.count() != 1)
-      throw MYMONEYEXCEPTION("Need a single selected payment account");
+      throw MYMONEYEXCEPTION_CSTRING("Need a single selected payment account");
     MyMoneyAccount acc = MyMoneyFile::instance()->account(sel.first());
     ui->m_summaryPaymentAccount->setText(acc.name());
   } catch (const MyMoneyException &) {

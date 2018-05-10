@@ -85,7 +85,7 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
     if ((nodeNames[nnSecurity] != tag)
         && (nodeNames[nnEquity] != tag)
         && (nodeNames[nnCurrency] != tag))
-      throw MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
+      throw MYMONEYEXCEPTION_CSTRING("Node was not SECURITY or CURRENCY");
   }
 
   Q_D(MyMoneySecurity);

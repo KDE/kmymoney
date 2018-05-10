@@ -1289,7 +1289,7 @@ void testMoveSplits() {
                 QCOMPARE(m->account("A000001").transactionCount(), 0);
                 QCOMPARE(m->account("A000002").transactionCount(), 1);
                 QCOMPARE(m->account("A000003").transactionCount(), 1);
-        } catch(const MyMoneyException &e) {
+        } catch (const MyMoneyException &e) {
                 QFAIL("Unexpected exception!");
         }
 }
@@ -1553,7 +1553,7 @@ void MyMoneyFileTest::testPayeeWithIdentifier()
       QFAIL("Unexpected exception");
     }
     QCOMPARE(iban->electronicIban(), QLatin1String("DE82200700240066644600"));
-  } catch (const MyMoneyException& e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }

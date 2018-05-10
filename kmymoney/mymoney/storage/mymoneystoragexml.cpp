@@ -491,7 +491,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
     delete m_doc;
     m_doc = 0;
     signalProgress(-1, -1);
-    throw MYMONEYEXCEPTION("File was not parsable!");
+    throw MYMONEYEXCEPTION_CSTRING("File was not parsable!");
   }
 
   // check if we need to build up the account balances

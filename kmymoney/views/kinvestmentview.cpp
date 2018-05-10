@@ -301,7 +301,7 @@ void KInvestmentView::slotDeleteInvestment()
       file->removeAccount(d->m_currentEquity);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to delete investment: %1", e.what()));
+      KMessageBox::information(this, i18n("Unable to delete investment: %1", QString::fromLatin1(e.what())));
     }
   } else {
     // we should not keep the 'no' setting because that can confuse people like
@@ -343,7 +343,7 @@ void KInvestmentView::slotUpdatePriceManually()
       calc->exec();
       delete calc;
     } catch (const MyMoneyException &e) {
-      qDebug("Error in price update: %s", qPrintable(e.what()));
+      qDebug("Error in price update: %s", e.what());
     }
   }
 }

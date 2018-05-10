@@ -403,7 +403,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
     t.modifySplit(s2);
 
   } catch (const MyMoneyException &e) {
-    qDebug("%s", qPrintable(e.what()));
+    qDebug("%s", e.what());
     t = MyMoneyTransaction();
     return false;
   }

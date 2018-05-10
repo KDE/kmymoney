@@ -68,7 +68,7 @@ MyMoneyPayee payeeIdentifierModel::payeeByIndex(const QModelIndex& index) const
   if (index.isValid() && index.row() >= 0 && index.row() < m_payeeIdentifierIds.count()) {
     try {
       return MyMoneyFile::instance()->payee(m_payeeIdentifierIds.at(index.row()));
-    } catch (MyMoneyException&) {
+    } catch (const MyMoneyException &) {
     }
   }
 

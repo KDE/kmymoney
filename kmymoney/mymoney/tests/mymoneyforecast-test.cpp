@@ -52,7 +52,7 @@ MyMoneyForecastTest::MyMoneyForecastTest() :
     this->moT3 = MyMoneyMoney(84, 1);
     this->moT4 = MyMoneyMoney(62, 1);
     this->moT5 = MyMoneyMoney(104, 1);
-  } catch (const MyMoneyException & e) {
+  } catch (const MyMoneyException &e) {
     qDebug() << e.what();
   }
 }
@@ -287,12 +287,12 @@ void MyMoneyForecastTest::testCalculateAccountTrend()
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, 0);
   } catch (const MyMoneyException &e) {
-    QVERIFY(e.what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
+    QVERIFY(QString::fromLatin1(e.what()).startsWith("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0"));
   }
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, -10);
   } catch (const MyMoneyException &e) {
-    QVERIFY(e.what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
+    QVERIFY(QString::fromLatin1(e.what()).startsWith("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0"));
   }
 
   //test that it calculates correctly

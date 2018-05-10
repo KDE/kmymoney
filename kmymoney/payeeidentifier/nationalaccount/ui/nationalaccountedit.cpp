@@ -49,7 +49,8 @@ payeeIdentifier nationalAccountEdit::identifier() const
       payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident(d->m_identifier);
       ident->setAccountNumber(d->ui.accountNumberEdit->text());
       ident->setBankCode(d->ui.institutionCodeEdit->text());
-    } catch (payeeIdentifier::exception&) {
+    } catch (const payeeIdentifier::empty &) {
+    } catch (const payeeIdentifier::badCast &) {
     }
   }
   return d->m_identifier;
@@ -78,7 +79,8 @@ void nationalAccountEdit::setIdentifier(const payeeIdentifier& ident)
     d->ui.accountNumberEdit->setText(identTyped->accountNumber());
     d->ui.institutionCodeEdit->setText(identTyped->bankCode());
     d->m_identifier = ident;
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 }
 
