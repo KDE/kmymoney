@@ -179,13 +179,13 @@ payeeIdentifier sepaOnlineTransferImpl::originAccountIdentifier() const
 {
   if (!_originAccount.isEmpty()) {
     QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > idents;
-#ifndef Q_OS_WIN
+//#ifndef Q_OS_WIN
     /// @todo Fix loading originAccountIdentifier on MS-Windows
     // the next statment causes problems on MS Windows () according to
     // https://phabricator.kde.org/D10125 which was pushed in commit
     // 44f846f13d0f7c7cca1178d56492471cb9f5092b
     idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::ibanBic>();
-#endif
+//#endif
     if (!idents.isEmpty()) {
       payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = idents[0];
       ident->setOwnerName(MyMoneyFile::instance()->user().name());

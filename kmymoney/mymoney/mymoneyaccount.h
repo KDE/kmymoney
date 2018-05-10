@@ -323,7 +323,7 @@ public:
    * @see MyMoneyPayeeIdentifierContainer::payeeIdentifiersByType()
    */
   template< class type >
-  QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
+  KMM_MYMONEY_EXPORT QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
 
   /**
     * This method is used to update m_lastModified to the current date
@@ -594,14 +594,14 @@ inline MyMoneyAccount & MyMoneyAccount::operator=(MyMoneyAccount other) // krazy
 }
 
 template< class type >
-QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
+KMM_MYMONEY_EXPORT QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
 {
   QList< payeeIdentifierTyped<type> > typedList;
   return typedList;
 }
 
 template<>
-QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const;
+KMM_MYMONEY_EXPORT QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const;
 
 /**
  * Make it possible to hold @ref MyMoneyAccount objects,
