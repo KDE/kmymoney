@@ -216,7 +216,7 @@
                   <widget class="KComboBox" name="m_weekendOptionEdit">
                     <item>
                       <property name="text">
-                        <string>Do nothing</string>
+                        <string>Do not change the date</string>
                       </property>
                     </item>
                     <item>
