@@ -28,6 +28,7 @@
 #include <QQuickView>
 #include <QQuickItem>
 #include <QPushButton>
+#include <QRegExpValidator>
 #include <QStandardPaths>
 
 #include <KLocalizedString>
