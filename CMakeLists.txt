@@ -258,11 +258,22 @@ include(KDECompilerSettings)
 kde_enable_exceptions()
 
 # Set linker flags
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
-  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed -Wl,--no-undefined")
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed")
+
+  # CI builds are crashing on FreeBSD with --no-undefined. Probably because -DECM_ENABLE_SANITIZERS='address'
+  # more can be read on the following site https://bugs.freedesktop.org/show_bug.cgi?id=100120
+  if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed")
+  endif()
+
   # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
   set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--as-needed -Wl,--allow-multiple-definition")
+
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+  set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--allow-multiple-definition")
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:Multiple")
@@ -284,19 +295,17 @@ endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-    if(CMAKE_BUILD_TYPE MATCHES "DebugKMM" OR CMAKE_BUILD_TYPE MATCHES "Debugfull" OR CMAKE_BUILD_TYPE MATCHES "Profile")
-        # DebugKMM, Debugfull, Profile
-        set(CMAKE_CXX_FLAGS_DEBUGKMM
-            "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
-        set(CMAKE_CXX_FLAGS_DEBUGFULL
-            "-g3 -fno-inline")
-        set(CMAKE_CXX_FLAGS_PROFILE
-            "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
+  # DebugKMM, Debugfull, Profile
+  set(CMAKE_CXX_FLAGS_DEBUGKMM
+      "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
+  set(CMAKE_CXX_FLAGS_DEBUGFULL
+      "-g3 -fno-inline")
+  set(CMAKE_CXX_FLAGS_PROFILE
+      "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
 
-        # preprocessor definitions in case this is a debug build
-        set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
-        set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
-    endif()
+  # preprocessor definitions in case this is a debug build
+  set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DQT_STRICT_ITERATORS -DKMM_DEBUG")
+  set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
 endif()
 
 # and a variable we can use in the build environment to detect debug builds
