@@ -1746,13 +1746,13 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
 KMyMoneyApp::~KMyMoneyApp()
 {
-  d->removeStorage();
   // delete cached objects since they are in the way
   // when unloading the plugins
   onlineJobAdministration::instance()->clearCaches();
 
   // we need to unload all plugins before we destroy anything else
   KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Unload, d->m_plugins, this, guiFactory());
+  d->removeStorage();
 
 #ifdef KF5Holidays_FOUND
   delete d->m_holidayRegion;
