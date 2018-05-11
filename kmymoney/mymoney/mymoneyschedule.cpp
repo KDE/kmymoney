@@ -1196,7 +1196,7 @@ QString MyMoneySchedule::weekendOptionToString(Schedule::WeekendOption weekendOp
       text = I18N_NOOP("Change the date to the next processing day");
       break;
     case Schedule::WeekendOption::MoveNothing:
-      text = I18N_NOOP("Do Nothing");
+      text = I18N_NOOP("Do not change the date");
       break;
   }
   return text;
