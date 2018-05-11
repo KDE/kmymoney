@@ -26,6 +26,7 @@
 #include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -78,13 +79,24 @@ void QIFImporter::slotQifImport()
   m_action->setEnabled(true);
 }
 
-bool QIFImporter::slotGetStatements(QList<MyMoneyStatement> &statements)
+bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement> &statements)
 {
   auto ret = true;
-  foreach (const auto statement, statements)
-    ret &= statementInterface()->import(statement);
+  QStringList importSummary;
+  for (const auto& statement : statements) {
+    const auto singleImportSummary = statementInterface()->import(statement);
+    if (singleImportSummary.isEmpty())
+      ret = false;
+
+    importSummary.append(singleImportSummary);
+  }
 
   delete m_qifReader;
+
+  if (!importSummary.isEmpty())
+    KMessageBox::informationList(nullptr,
+                               i18n("The statement has been processed with the following results:"), importSummary, i18n("Statement stats"));
+
   return ret;
 }
 

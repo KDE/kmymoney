@@ -73,7 +73,7 @@ void CSVImporter::startWizardRun()
 
 bool CSVImporter::slotGetStatement(MyMoneyStatement& s)
 {
-  bool ret = statementInterface()->import(s, m_silent);
+  const auto ret = !statementInterface()->import(s, m_silent).isEmpty();
   delete m_importer;
   return ret;
 }

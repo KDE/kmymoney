@@ -53,7 +53,7 @@ public:
   /**
     * This method imports a MyMoneyStatement into the engine
     */
-  virtual bool import(const MyMoneyStatement& s, bool silent = false) = 0;
+  virtual QStringList import(const MyMoneyStatement& s, bool silent = false) = 0;
 
   /**
    * This method returns the account for a given @a key - @a value pair.

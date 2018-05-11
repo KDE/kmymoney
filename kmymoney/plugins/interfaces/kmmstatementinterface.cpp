@@ -40,13 +40,10 @@ KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(QObject* parent, co
 {
 }
 
-bool KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s, bool silent)
+QStringList KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s, bool silent)
 {
   qDebug("KMyMoneyPlugin::KMMStatementInterface::import start");
-  if (MyMoneyStatementReader::importStatement(s, silent).isEmpty())
-    return false;
-  else
-    return true;
+  return MyMoneyStatementReader::importStatement(s, silent);
 }
 
 MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const

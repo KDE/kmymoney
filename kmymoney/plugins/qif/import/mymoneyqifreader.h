@@ -285,7 +285,7 @@ private:
   void createOpeningBalance(eMyMoney::Account::Type accType = eMyMoney::Account::Type::Checkings);
 
 Q_SIGNALS:
-  void statementsReady(QList<MyMoneyStatement> &);
+  void statementsReady(const QList<MyMoneyStatement> &);
 
 private Q_SLOTS:
   void slotSendDataToFilter();

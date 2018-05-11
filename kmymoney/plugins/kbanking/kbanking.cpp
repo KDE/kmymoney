@@ -819,7 +819,7 @@ void KBanking::slotImport()
 
 bool KBanking::importStatement(const MyMoneyStatement& s)
 {
-  return statementInterface()->import(s);
+  return !statementInterface()->import(s).isEmpty();
 }
 
 

@@ -76,6 +76,7 @@ public:
   KOnlineBankingStatus* m_statusDlg;
   Wallet *m_wallet;
   QDate m_updateStartDate;
+  QStringList m_importSummary;
 };
 
 
@@ -110,7 +111,7 @@ void OFXImporter::createActions()
 {
   QAction *action = actionCollection()->addAction("file_import_ofx");
   action->setText(i18n("OFX..."));
-  connect(action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
+  connect(action, &QAction::triggered, this, static_cast<void (OFXImporter::*)()>(&OFXImporter::slotImportFile));
 }
 
 void OFXImporter::slotImportFile()
@@ -129,11 +130,18 @@ void OFXImporter::slotImportFile()
 
   if (url.isValid()) {
     if (isMyFormat(url.path())) {
+      d->m_importSummary.clear();
       slotImportFile(url.path());
+
+      if (!d->m_importSummary.isEmpty()) {
+        KMessageBox::informationList(nullptr,
+                                   i18n("The statement has been processed with the following results:"), d->m_importSummary, i18n("Statement stats"));
+        d->m_importSummary.clear();
+      }
+
     } else {
       KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.toDisplayString()), i18n("Incorrect format"));
     }
-
   }
   delete option;
   delete widget;
@@ -637,10 +645,10 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
   return 0;
 }
 
-bool OFXImporter::importStatement(const MyMoneyStatement& s)
+QStringList OFXImporter::importStatement(const MyMoneyStatement &s)
 {
   qDebug("OfxImporterPlugin::importStatement start");
-  return statementInterface()->import(s);
+  return statementInterface()->import(s, true);
 }
 
 MyMoneyAccount OFXImporter::account(const QString& key, const QString& value) const
@@ -735,9 +743,9 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       // Save the value of preferName to be used by ofxTransactionCallback
       d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName")).toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
+      d->m_importSummary.clear();
 
-      connect(dlg, SIGNAL(statementReady(QString)),
-              this, SLOT(slotImportFile(QString)));
+      connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
 
       // get the date of the earliest transaction that we are interested in
       // from the settings for this account
@@ -764,6 +772,12 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         dlg->exec();
       delete dlg;
 
+      if (!d->m_importSummary.isEmpty()) {
+        KMessageBox::informationList(nullptr,
+                                   i18n("The statement has been processed with the following results:"), d->m_importSummary, i18n("Statement stats"));
+        d->m_importSummary.clear();
+      }
+
       // reset the earliest-interesting-transaction date to the non-specific account setting
       d->m_updateStartDate = QDate(1900,1,1);
 
@@ -783,11 +797,12 @@ void OFXImporter::slotImportFile(const QString& url)
   }
 }
 
-bool OFXImporter::storeStatements(QList<MyMoneyStatement>& statements)
+bool OFXImporter::storeStatements(const QList<MyMoneyStatement> &statements)
 {
-  bool hasstatements = (statements.count() > 0);
-  bool ok = true;
-  bool abort = false;
+  if (statements.isEmpty())
+    return true;
+  auto ok = true;
+  auto abort = false;
 
   // FIXME Deal with warnings/errors coming back from plugins
   /*if ( ofx.errors().count() )
@@ -802,18 +817,22 @@ bool OFXImporter::storeStatements(QList<MyMoneyStatement>& statements)
       abort = true;
   }*/
 
-  qDebug("OfxImporterPlugin::storeStatements() with %d statements called", static_cast<int>(statements.count()));
-  QList<MyMoneyStatement>::const_iterator it_s = statements.constBegin();
-  while (it_s != statements.constEnd() && !abort) {
-    ok = ok && importStatement((*it_s));
-    ++it_s;
+  qDebug("OfxImporterPlugin::storeStatements() with %d statements called", statements.count());
+
+  for (const auto& statement : statements) {
+    if (abort)
+      break;
+    const auto importSummary = importStatement(statement);
+    if (importSummary.isEmpty())
+      ok = false;
+
+    d->m_importSummary.append(importSummary);
   }
 
-  if (hasstatements && !ok) {
-    KMessageBox::error(0, i18n("Importing process terminated unexpectedly."), i18n("Failed to import all statements."));
-  }
+  if (!ok)
+    KMessageBox::error(nullptr, i18n("Importing process terminated unexpectedly."), i18n("Failed to import all statements."));
 
-  return (!hasstatements || ok);
+  return ok;
 }
 
 void OFXImporter::addnew()
