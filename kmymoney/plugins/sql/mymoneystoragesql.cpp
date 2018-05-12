@@ -71,7 +71,7 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     d->m_override = options.contains("override");
 
     // create the database connection
-    QString dbName = url.path();
+    QString dbName = url.path().remove(0, 1);   // remove separator slash
     setDatabaseName(dbName);
     setHostName(url.host());
     setUserName(url.userName());

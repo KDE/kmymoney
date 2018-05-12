@@ -161,8 +161,9 @@ const QUrl KSelectDatabaseDlg::selectedURL()
   url.setUserName(m_widget->textUserName->text());
   url.setPassword(m_widget->textPassword->text());
   url.setHost(m_widget->textHostName->text());
+  // set path which begins with a separator slash that will be removed when retrieved from path()
   if (m_sqliteSelected)
-    url.setPath('/' + m_widget->urlSqlite->url().path());
+    url.setPath('/' + m_widget->urlSqlite->url().toLocalFile());
   else
     url.setPath('/' + m_widget->textDbName->text());
   QString qs = QString("driver=%1")
