@@ -346,6 +346,9 @@ void KOnlineJobOutboxView::slotEditJob()
 
 void KOnlineJobOutboxView::slotEditJob(const QModelIndex &index)
 {
+  if (!pActions[eMenu::Action::EditOnlineJob]->isEnabled())
+    return;
+
   Q_D(KOnlineJobOutboxView);
   auto jobId = d->ui->m_onlineJobView->model()->data(index, onlineJobModel::OnlineJobId).toString();
   d->editJob(jobId);
@@ -354,6 +357,9 @@ void KOnlineJobOutboxView::slotEditJob(const QModelIndex &index)
 
 void KOnlineJobOutboxView::contextMenuEvent(QContextMenuEvent*)
 {
+  if (!pActions[eMenu::Action::EditOnlineJob]->isEnabled())
+    return;
+
   Q_D(KOnlineJobOutboxView);
   QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedIndexes();
   if (!indexes.isEmpty()) {
