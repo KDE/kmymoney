@@ -594,7 +594,7 @@ inline MyMoneyAccount & MyMoneyAccount::operator=(MyMoneyAccount other) // krazy
 }
 
 template< class type >
-KMM_MYMONEY_EXPORT QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
+QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
 {
   QList< payeeIdentifierTyped<type> > typedList;
   return typedList;
