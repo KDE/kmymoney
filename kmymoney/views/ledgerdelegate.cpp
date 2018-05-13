@@ -312,7 +312,7 @@ bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) con
         if (rc) {
           // check if this the spot for the online balance data
           rc &= ((date <= m_entries.firstKey())
-            && (model->data(nextIdx, (int)m_role).toDate() >= m_entries.firstKey()));
+            && (model->data(nextIdx, (int)m_role).toDate() > m_entries.firstKey()));
         }
       } else {
         rc = (date <= m_entries.firstKey());
