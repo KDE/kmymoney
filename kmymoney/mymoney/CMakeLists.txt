@@ -40,9 +40,7 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/mymoneystoragenames.cpp
     )
 
-  if(KMM_DEBUG)
-    list(APPEND storage_a_SOURCES ./storage/mymoneystoragedump.cpp)
-  endif()
+list(APPEND storage_a_SOURCES $<$<OR:$<CONFIG:Debug>,$<CONFIG:DebugFull>,$<CONFIG:DebugKMM>>: ./storage/mymoneystoragedump.cpp>)
 
 list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
 
