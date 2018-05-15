@@ -306,10 +306,9 @@ bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) con
           // in case it's the same date, we need to check if this is the last real transaction
           // and the next one is a scheduled transaction
           if(!model->data(nextIdx, (int) eLedgerModel::Role::ScheduleId).toString().isEmpty() ) {
-            rc = true;
+            rc = (date <= m_entries.firstKey());
           }
-        }
-        if (rc) {
+        } else {
           // check if this the spot for the online balance data
           rc &= ((date <= m_entries.firstKey())
             && (model->data(nextIdx, (int)m_role).toDate() > m_entries.firstKey()));
