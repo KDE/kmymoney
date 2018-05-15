@@ -259,19 +259,25 @@ kde_enable_exceptions()
 
 # Set linker flags
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-  # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
-  set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -Wl,--allow-multiple-definition")
 
-  # CI builds are crashing on FreeBSD with --no-undefined. Probably because -DECM_ENABLE_SANITIZERS='address'
-  # more can be read on the following site https://bugs.freedesktop.org/show_bug.cgi?id=100120
-  if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD" AND NOT CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
-  endif()
-
+  # There is no way to detect linker in cmake (see https://gitlab.kitware.com/cmake/cmake/issues/17596)
+  # and linkers aren't compatible with each other, so we need to assume something
   if(NOT CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed")
-    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--as-needed")
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed -Wl,--warn-common")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed -Wl,--warn-common")
+    # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
+    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--as-needed -Wl,--warn-common -Wl,--allow-multiple-definition")
+    # CI builds are crashing on FreeBSD with --no-undefined. Probably because -DECM_ENABLE_SANITIZERS='address'
+    # more can be read on the following site https://bugs.freedesktop.org/show_bug.cgi?id=100120
+    if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+      set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--no-undefined")
+      set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+      set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--no-undefined")
+    endif()
+  else()
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-dead_strip -Wl,-warn_commons -Wl,-undefined")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip -Wl,-warn_commons -Wl,-undefined -Wl,-mark_dead_strippable_dylib")
+    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,-dead_strip -Wl,-warn_commons -Wl,-undefined")
   endif()
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
