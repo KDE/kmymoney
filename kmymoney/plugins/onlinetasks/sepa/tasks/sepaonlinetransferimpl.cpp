@@ -23,11 +23,13 @@
 
 #include "mymoneyutils.h"
 #include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoney/onlinejobadministration.h"
 #include "misc/validators.h"
 #include "payeeidentifiertyped.h"
+#include "ibanbic.h"
 #include "tasks/sepaonlinetransfer.h"
 
 static const unsigned short defaultTextKey = 51;
@@ -178,19 +180,17 @@ bool sepaOnlineTransferImpl::isValid() const
 payeeIdentifier sepaOnlineTransferImpl::originAccountIdentifier() const
 {
   if (!_originAccount.isEmpty()) {
-    QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > idents;
-//#ifndef Q_OS_WIN
-    /// @todo Fix loading originAccountIdentifier on MS-Windows
-    // the next statment causes problems on MS Windows () according to
-    // https://phabricator.kde.org/D10125 which was pushed in commit
-    // 44f846f13d0f7c7cca1178d56492471cb9f5092b
-    idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::ibanBic>();
-//#endif
-    if (!idents.isEmpty()) {
-      payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = idents[0];
-      ident->setOwnerName(MyMoneyFile::instance()->user().name());
-      return ident;
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(new payeeIdentifiers::ibanBic);
+    auto acc = MyMoneyFile::instance()->account(_originAccount);
+    ident->setIban(acc.value(QStringLiteral("iban")));
+
+    if (!acc.institutionId().isEmpty()) {
+      const auto institution = MyMoneyFile::instance()->institution(acc.institutionId());
+      ident->setBic(institution.value(QStringLiteral("bic")));
     }
+
+    ident->setOwnerName(MyMoneyFile::instance()->user().name());
+    return ident;
   }
   return payeeIdentifier(new payeeIdentifiers::ibanBic);
 }

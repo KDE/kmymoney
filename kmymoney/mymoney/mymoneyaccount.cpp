@@ -407,25 +407,6 @@ void MyMoneyAccount::setCostCenterRequired(bool required)
   }
 }
 
-template<>
-QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
-{
-  Q_D(const MyMoneyAccount);
-  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(new payeeIdentifiers::ibanBic);
-  ident->setIban(value(d->getAttrName(Account::Attribute::IBAN)));
-
-  if (!institutionId().isEmpty()) {
-    const MyMoneyInstitution institution = MyMoneyFile::instance()->institution(institutionId());
-    ident->setBic(institution.value(d->getAttrName(Account::Attribute::BIC)));
-  }
-
-  ident->setOwnerName(MyMoneyFile::instance()->user().name());
-
-  QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > typedList;
-  typedList << ident;
-  return typedList;
-}
-
 void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   auto el = document.createElement(nodeNames[nnAccount]);

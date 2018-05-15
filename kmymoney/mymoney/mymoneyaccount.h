@@ -40,7 +40,6 @@ class MyMoneySecurity;
 class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
-namespace payeeIdentifiers { class ibanBic; }
 namespace eMyMoney { namespace Account { enum class Type; } }
 template <class T> class payeeIdentifierTyped;
 
@@ -320,12 +319,6 @@ public:
   QList< payeeIdentifier > payeeIdentifiers() const;
 
   /**
-   * @see MyMoneyPayeeIdentifierContainer::payeeIdentifiersByType()
-   */
-  template< class type >
-  KMM_MYMONEY_EXPORT QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
-
-  /**
     * This method is used to update m_lastModified to the current date
     */
   void touch();
@@ -592,16 +585,6 @@ inline MyMoneyAccount & MyMoneyAccount::operator=(MyMoneyAccount other) // krazy
   swap(*this, other);
   return *this;
 }
-
-template< class type >
-QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
-{
-  QList< payeeIdentifierTyped<type> > typedList;
-  return typedList;
-}
-
-template<>
-KMM_MYMONEY_EXPORT QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const;
 
 /**
  * Make it possible to hold @ref MyMoneyAccount objects,
