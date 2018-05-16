@@ -398,6 +398,16 @@ void QueryTable::init()
   qSort(m_rows);
 }
 
+/**
+ * helper function used by querytabletest
+ * @param date date to create the string from
+ * @return string with formatted date
+ */
+QString QueryTable::toDateString(const QDate &date)
+{
+    return date.toString(Qt::DefaultLocaleLongDate);
+}
+
 void QueryTable::constructTransactionTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -458,8 +468,8 @@ void QueryTable::constructTransactionTable()
     pd = (* it_transaction).postDate();
     qA["monthsort"] = qS["monthsort"] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
     qA["weeksort"] = qS["weeksort"] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
-    qA["month"] = qS["month"] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::DefaultLocaleLongDate));
-    qA["week"] = qS["week"] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::DefaultLocaleLongDate));
+    qA["month"] = qS["month"] = i18n("Month of %1", toDateString(QDate(pd.year(), pd.month(), 1)));
+    qA["week"] = qS["week"] = i18n("Week of %1", toDateString(pd.addDays(1 - pd.dayOfWeek())));
 
     qA["currency"] = qS["currency"] = "";
 

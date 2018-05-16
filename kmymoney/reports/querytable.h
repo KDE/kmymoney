@@ -63,6 +63,7 @@ class QueryTable : public ListTable
 public:
   QueryTable(const MyMoneyReport&);
   void init();
+  static QString toDateString(const QDate &date);
 
 protected:
   void constructAccountTable();

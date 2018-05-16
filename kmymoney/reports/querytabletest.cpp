@@ -243,9 +243,9 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(rows[11]["postdate"] == "2005-09-01");
 
     html = qtbl_5.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-01-01") == -moSolo);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-11-01") == -(moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-05-01") == -moParent1 + moCheckingOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of " + QueryTable::toDateString(QDate(2004,1,1))) == -moSolo);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of " + QueryTable::toDateString(QDate(2004,11,1))) == -(moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of " + QueryTable::toDateString(QDate(2004,5,1))) == -moParent1 + moCheckingOpen);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::Row::Week);
@@ -268,9 +268,9 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(rows[11]["postdate"] == "2005-09-01");
 
     html = qtbl_6.renderBody();
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2003-12-29") == -moSolo);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2004-11-01") == -(moChild) * 3);
-    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2005-08-29") == -moParent2);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of " + QueryTable::toDateString(QDate(2003, 12, 29))) == -moSolo);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of " + QueryTable::toDateString(QDate(2004, 11, 1))) == -(moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of " + QueryTable::toDateString(QDate(2005, 8, 29))) == -moParent2);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
   } catch (const MyMoneyException &e) {
     QFAIL(qPrintable(e.what()));
