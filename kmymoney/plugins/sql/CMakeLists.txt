@@ -1,4 +1,5 @@
 add_subdirectory(payeeidentifier)
+add_subdirectory(onlinetasks)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sqlstorage.json.in ${CMAKE_CURRENT_BINARY_DIR}/sqlstorage.json @ONLY)
 

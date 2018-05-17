@@ -40,7 +40,6 @@ target_link_libraries(settings PUBLIC
   KF5::KCMUtils
   KF5::ItemViews
   Alkimia::alkimia
-  Qt5::Sql
 )
 
 if (KF5Holidays_FOUND)

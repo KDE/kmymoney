@@ -62,7 +62,7 @@ ki18n_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
 
-target_link_libraries(views PUBLIC newaccountwizard KChart KF5::KIOFileWidgets KF5::Notifications KF5::Archive KF5::TextWidgets Qt5::Sql Qt5::PrintSupport Alkimia::alkimia)
+target_link_libraries(views PUBLIC newaccountwizard KChart KF5::KIOFileWidgets KF5::Notifications KF5::Archive KF5::TextWidgets Qt5::PrintSupport Alkimia::alkimia)
 
 if(ENABLE_WEBENGINE)
  target_link_libraries(views PUBLIC Qt5::WebEngineWidgets)

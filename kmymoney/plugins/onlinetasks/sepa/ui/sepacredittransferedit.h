@@ -22,7 +22,7 @@
 #include <KLocalizedString>
 
 #include "mymoney/onlinejobtyped.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 
 class KMandatoryFieldGroup;

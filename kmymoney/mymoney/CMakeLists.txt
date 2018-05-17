@@ -40,9 +40,15 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/mymoneystoragenames.cpp
     )
 
+  set(onlineTask_a_SOURCES
+  ./onlinetasks/sepa/sepaonlinetransferimpl.cpp
+  ./onlinetasks/sepa/sepaonlinetransfer.cpp
+  )
+
 list(APPEND storage_a_SOURCES $<$<OR:$<CONFIG:Debug>,$<CONFIG:DebugFull>,$<CONFIG:DebugKMM>>: ./storage/mymoneystoragedump.cpp>)
 
 list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
+list(APPEND kmm_mymoney_LIB_SRCS ${onlineTask_a_SOURCES})
 
 set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h

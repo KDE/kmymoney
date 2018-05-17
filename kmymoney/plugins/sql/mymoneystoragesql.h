@@ -52,7 +52,6 @@ class MyMoneyReport;
 class MyMoneyPrice;
 class payeeIdentifier;
 class onlineJob;
-class databaseStoreableObject;
 class MyMoneyStorageSql;
 class MyMoneyStorageMgr;
 

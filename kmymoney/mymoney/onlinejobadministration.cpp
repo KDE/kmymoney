@@ -31,7 +31,6 @@
 #include <QPluginLoader>
 #include <QJsonArray>
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <KServiceTypeTrader>
@@ -176,16 +175,6 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
   }
   qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
   return new unavailableTask(element);
-}
-
-onlineTask* onlineJobAdministration::createOnlineTaskFromSqlDatabase(const QString& iid, const QString& onlineTaskId, QSqlDatabase connection) const
-{
-  onlineTask* task = rootOnlineTask(iid);
-  if (task)
-    return task->createFromSqlDatabase(connection, onlineTaskId);
-
-  qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
-  return nullptr;
 }
 
 /**

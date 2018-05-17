@@ -19,7 +19,6 @@ target_link_libraries(reports
   PUBLIC
     KChart
     Alkimia::alkimia
-    Qt5::Sql
     Qt5::PrintSupport
     kmymoney_common
     kmm_settings

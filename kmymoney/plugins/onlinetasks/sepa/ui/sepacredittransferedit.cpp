@@ -28,7 +28,7 @@
 #include "kguiutils.h"
 
 #include "mymoney/payeeidentifiermodel.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanvalidator.h"
 #include "payeeidentifier/ibanandbic/widgets/bicvalidator.h"
 #include "payeeidentifier/payeeidentifiertyped.h"

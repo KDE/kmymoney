@@ -25,7 +25,7 @@
 #include "mymoneyfile.h"
 #include "onlinejobadministration.h"
 
-#include "plugins/onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"
 
 onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const QVariantList &args) :

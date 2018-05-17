@@ -30,7 +30,6 @@
  */
 class sepaOnlineTransfer : public onlineTask, public creditTransfer
 {
-  Q_INTERFACES(creditTransfer)
 
 public:
   ONLINETASK_META(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa");
@@ -68,7 +67,9 @@ public:
   virtual QString jobTypeName() const override = 0;
 
   virtual unsigned short int textKey() const = 0;
+  virtual void setTextKey(unsigned short int textKey) = 0;
   virtual unsigned short int subTextKey() const = 0;
+  virtual void setSubTextKey(unsigned short int setSubTextKey) = 0;
 
   virtual bool hasReferenceTo(const QString& id) const override = 0;
 
@@ -126,7 +127,5 @@ protected:
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const override = 0;
 
 };
-
-Q_DECLARE_INTERFACE(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa")
 
 #endif // SEPAONLINETRANSFER_H

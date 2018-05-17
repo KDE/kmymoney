@@ -2,15 +2,8 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.json.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.json @ONLY)
 
 set( sepaOnlineTasks_SRCS
-  tasks/sepaonlinetransferimpl.cpp
-  tasks/sepaonlinetransfer.cpp
   ui/sepacredittransferedit.cpp
-  sepastorageplugin.cpp
   sepaonlinetasksloader.cpp
-)
-
-set( sepaOnlineTasks_HEADER
-  tasks/sepaonlinetransfer.h
 )
 
 ki18n_wrap_ui( sepaOnlineTasks_SRCS
@@ -39,7 +32,6 @@ target_link_libraries( konlinetasks_sepa_interface
   Qt5::Xml
   Qt5::Core
   Qt5::Gui
-  Qt5::Sql
 )
 
 target_link_libraries(konlinetasks_sepa
@@ -54,6 +46,3 @@ target_link_libraries(konlinetasks_sepa
     KF5::ItemModels
 )
 
-install(FILES ${sepaOnlineTasks_HEADER}
-        DESTINATION "${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/sepa/"
-        COMPONENT Devel)

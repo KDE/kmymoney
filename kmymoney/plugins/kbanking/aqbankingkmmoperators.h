@@ -28,7 +28,7 @@
 #include <QSharedPointer>
 
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 
 struct AB_ACCOUNT;
 struct AB_TRANSACTION_LIMITS;

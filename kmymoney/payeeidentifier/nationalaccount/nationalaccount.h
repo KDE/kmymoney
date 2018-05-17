@@ -43,12 +43,6 @@ public:
   nationalAccount* createFromXml(const QDomElement& element) const final override;
   void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
-  QString storagePluginIid() const final override;
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const final override;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const final override;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const final override;
-  nationalAccount* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const final override;
-
   void setBankCode(const QString& bankCode) {
     m_bankCode = bankCode;
   }
@@ -83,8 +77,6 @@ public:
   }
 
 private:
-  bool writeQuery(QSqlQuery& query, const QString& id) const;
-
   QString m_ownerName;
   QString m_country;
   QString m_bankCode;

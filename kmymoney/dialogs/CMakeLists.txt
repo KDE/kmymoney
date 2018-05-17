@@ -83,7 +83,6 @@ target_link_libraries(dialogs
     KF5::TextWidgets
     KF5::Completion
     Qt5::Widgets
-    Qt5::Sql
     Alkimia::alkimia
     kmm_mymoney
     onlinetask_interfaces

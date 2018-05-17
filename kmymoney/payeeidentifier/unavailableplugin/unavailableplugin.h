@@ -49,19 +49,6 @@ public:
   /** @todo make private */
   explicit payeeIdentifierUnavailable(QDomElement data);
 
-  /**
-   * @name SqlMethods
-   * @{
-   * For SQL databases this plugin is not needed nor used. So these functions
-   * do not have a real implementation.
-   */
-  QString storagePluginIid() const final override;
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
-  payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const final override;
-  /** @} */
-
 protected:
   payeeIdentifierUnavailable* clone() const final override;
 

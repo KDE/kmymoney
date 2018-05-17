@@ -17,6 +17,7 @@
  */
 
 #include "unavailabletask.h"
+
 #include <KLocalizedString>
 
 unavailableTask::unavailableTask(const QDomElement& element)
@@ -27,42 +28,6 @@ unavailableTask::unavailableTask(const QDomElement& element)
 QString unavailableTask::jobTypeName() const
 {
   return i18n("Could not load responsible plugin to view this task.");
-}
-
-QString unavailableTask::storagePluginIid() const
-{
-  return QString();
-}
-
-bool unavailableTask::sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const
-{
-  Q_UNUSED(databaseConnection);
-  Q_UNUSED(onlineJobId);
-  Q_ASSERT(false);
-  return false;
-}
-
-bool unavailableTask::sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const
-{
-  Q_UNUSED(databaseConnection);
-  Q_UNUSED(onlineJobId);
-  Q_ASSERT(false);
-  return false;
-}
-
-bool unavailableTask::sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const
-{
-  Q_UNUSED(databaseConnection);
-  Q_UNUSED(onlineJobId);
-  Q_ASSERT(false);
-  return false;
-}
-
-onlineTask* unavailableTask::createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const
-{
-  Q_UNUSED(connection);
-  Q_UNUSED(onlineJobId);
-  return 0;
 }
 
 QString unavailableTask::responsibleAccount() const

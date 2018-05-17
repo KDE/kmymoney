@@ -52,39 +52,6 @@ payeeIdentifierUnavailable* payeeIdentifierUnavailable::createFromXml(const QDom
   return new payeeIdentifierUnavailable(element);
 }
 
-QString payeeIdentifierUnavailable::storagePluginIid() const
-{
-  return QString();
-}
-
-bool payeeIdentifierUnavailable::sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const
-{
-  Q_UNUSED(databaseConnection)
-  Q_UNUSED(onlineJobId)
-  return false;
-}
-
-bool payeeIdentifierUnavailable::sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const
-{
-  Q_UNUSED(databaseConnection)
-  Q_UNUSED(onlineJobId)
-  return false;
-}
-
-bool payeeIdentifierUnavailable::sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const
-{
-  Q_UNUSED(databaseConnection)
-  Q_UNUSED(onlineJobId)
-  return false;
-}
-
-payeeIdentifierData* payeeIdentifierUnavailable::createFromSqlDatabase(QSqlDatabase db, const QString& identId) const
-{
-  Q_UNUSED(db);
-  Q_UNUSED(identId);
-  return 0;
-}
-
 bool payeeIdentifierUnavailable::isValid() const
 {
   return false;

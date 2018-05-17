@@ -231,13 +231,6 @@ public:
 
   static const int ibanMaxLength;
 
-  QString storagePluginIid() const final override {
-    return QLatin1String("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin");
-  }
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const final override;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const final override;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const final override;
-
 private:
   /**
    * @brief Business Identifier Code
@@ -258,9 +251,6 @@ private:
 
   static ::ibanBicData* getIbanBicData();
   static ::ibanBicData* m_ibanBicData;
-
-  bool writeQuery(QSqlQuery& query, const QString& id) const;
-  payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const final override;
 
   static QString canonizeBic(const QString& bic);
 };

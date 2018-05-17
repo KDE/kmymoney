@@ -40,18 +40,6 @@ public:
   QString jobTypeName() const final override {
     return QLatin1String("Dummy credit transfer");
   }
-  QString storagePluginIid() const final override {
-    return QString();
-  }
-  bool sqlModify(QSqlDatabase, const QString&) const final override {
-    return false;
-  }
-  bool sqlSave(QSqlDatabase, const QString&) const final override {
-    return false;
-  }
-  bool sqlRemove(QSqlDatabase, const QString&) const final override {
-    return false;
-  }
 
 protected:
 
@@ -63,9 +51,6 @@ protected:
   }
   void writeXML(QDomDocument&, QDomElement&) const final override {}
   onlineTaskDummy3* createFromXml(const QDomElement &) const final override {
-    return (new onlineTaskDummy3);
-  }
-  onlineTask* createFromSqlDatabase(QSqlDatabase, const QString&) const final override {
     return (new onlineTaskDummy3);
   }
   QString responsibleAccount() const final override {

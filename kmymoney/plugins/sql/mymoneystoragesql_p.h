@@ -78,7 +78,12 @@
 #include "mymoneyutils.h"
 #include "mymoneydbdef.h"
 #include "mymoneydbdriver.h"
-#include "payeeidentifier/payeeidentifierdata.h"
+#include "payeeidentifierdata.h"
+#include "payeeidentifier.h"
+#include "payeeidentifiertyped.h"
+#include "ibanbic.h"
+#include "nationalaccount.h"
+#include "onlinetasks/sepa/sepaonlinetransferimpl.h"
 #include "mymoneyenums.h"
 #include "mymoneystoragenames.h"
 
@@ -237,6 +242,12 @@ public:
   ~MyMoneyStorageSqlPrivate()
   {
   }
+
+  enum class SQLAction {
+    Save,
+    Modify,
+    Remove
+  };
 
   /**
    * MyMoneyStorageSql get highest ID number from the database
@@ -2644,57 +2655,330 @@ public:
    */
   bool setupStoragePlugin(QString iid)
   {
-    Q_UNUSED(iid)
     Q_Q(MyMoneyStorageSql);
     // setupDatabase has to be called every time because this simple technique to check if was updated already
     // does not work if a user opens another file
     // also the setup is removed if the current database transaction is rolled back
     if (iid.isEmpty() /*|| m_loadedStoragePlugins.contains(iid)*/)
       return false;
+    QString sqlIID;
+
+    if (iid == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      sqlIID = QString::fromLatin1("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin");
+    else if (iid == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      sqlIID = QLatin1String("org.kmymoney.payeeIdentifier.nationalAccount.sqlStoragePlugin");
+    else if (iid == sepaOnlineTransferImpl::name())
+      sqlIID = QLatin1String("org.kmymoney.creditTransfer.sepa.sqlStoragePlugin");
+    else
+      return false;
 
     QString errorMsg;
     KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
       QLatin1String("KMyMoney/sqlStoragePlugin"),
-      QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(iid.replace(QLatin1Char('\''), QLatin1String("\\'"))),
+      QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(sqlIID.replace(QLatin1Char('\''), QLatin1String("\\'"))),
       0,
       QVariantList(),
       &errorMsg
     );
 
     if (plugin == 0)
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not load sqlStoragePlugin '%1', (error: %2)").arg(iid, errorMsg));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not load sqlStoragePlugin '%1', (error: %2)").arg(sqlIID, errorMsg));
 
     MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
     if (plugin->setupDatabase(*q)) {
-      m_loadedStoragePlugins.insert(iid);
+      m_loadedStoragePlugins.insert(sqlIID);
       return true;
     }
 
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Could not install sqlStoragePlugin '%1' in database.").arg(iid));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Could not install sqlStoragePlugin '%1' in database.").arg(sqlIID));
   }
 
-  void insertStorableObject(const databaseStoreableObject& obj, const QString& id)
+  bool actOnIBANBICObjectInSQL(SQLAction action, const payeeIdentifier &obj)
   {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> payeeIdentifier = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(obj);
+
     Q_Q(MyMoneyStorageSql);
-    setupStoragePlugin(obj.storagePluginIid());
-    if (!obj.sqlSave(*q, id))
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not save object with id '%1' in database (plugin failed).").arg(id));
+    QSqlQuery query(*q);
+
+    auto writeQuery = [&]() {
+      query.bindValue(":id", obj.idString());
+      query.bindValue(":iban", payeeIdentifier->electronicIban());
+      const auto bic = payeeIdentifier->fullStoredBic();
+      query.bindValue(":bic", (bic.isEmpty()) ? QVariant(QVariant::String) : bic);
+      query.bindValue(":name", payeeIdentifier->ownerName());
+      if (!query.exec()) { // krazy:exclude=crashy
+        qWarning("Error while saving ibanbic data for '%s': %s", qPrintable(obj.idString()), qPrintable(query.lastError().text()));
+        return false;
+      }
+      return true;
+    };
+
+    switch(action) {
+      case SQLAction::Save:
+        query.prepare("INSERT INTO kmmIbanBic "
+                      " ( id, iban, bic, name )"
+                      " VALUES( :id, :iban, :bic, :name ) "
+                     );
+        return writeQuery();
+
+      case SQLAction::Modify:
+        query.prepare("UPDATE kmmIbanBic SET iban = :iban, bic = :bic, name = :name WHERE id = :id;");
+        return writeQuery();
+
+      case SQLAction::Remove:
+        query.prepare("DELETE FROM kmmIbanBic WHERE id = ?;");
+        query.bindValue(0, obj.idString());
+        if (!query.exec()) {
+          qWarning("Error while deleting ibanbic data '%s': %s", qPrintable(obj.idString()), qPrintable(query.lastError().text()));
+          return false;
+        }
+        return true;
+    }
+    return false;
   }
 
-  void updateStorableObject(const databaseStoreableObject& obj, const QString& id)
+  bool actOnNationalAccountObjectInSQL(SQLAction action, const payeeIdentifier &obj)
   {
+    payeeIdentifierTyped<payeeIdentifiers::nationalAccount> payeeIdentifier = payeeIdentifierTyped<payeeIdentifiers::nationalAccount>(obj);
+
     Q_Q(MyMoneyStorageSql);
-    setupStoragePlugin(obj.storagePluginIid());
-    if (!obj.sqlModify(*q, id))
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not modify object with id '%1' in database (plugin failed).").arg(id));
+    QSqlQuery query(*q);
+
+    auto writeQuery = [&]() {
+      query.bindValue(":id", obj.idString());
+      query.bindValue(":countryCode", payeeIdentifier->country());
+      query.bindValue(":accountNumber", payeeIdentifier->accountNumber());
+      query.bindValue(":bankCode", (payeeIdentifier->bankCode().isEmpty()) ? QVariant(QVariant::String) : payeeIdentifier->bankCode());
+      query.bindValue(":name", payeeIdentifier->ownerName());
+      if (!query.exec()) { // krazy:exclude=crashy
+        qWarning("Error while saving national account number for '%s': %s", qPrintable(obj.idString()), qPrintable(query.lastError().text()));
+        return false;
+      }
+      return true;
+
+    };
+
+    switch(action) {
+      case SQLAction::Save:
+        query.prepare("INSERT INTO kmmNationalAccountNumber "
+                      " ( id, countryCode, accountNumber, bankCode, name )"
+                      " VALUES( :id, :countryCode, :accountNumber, :bankCode, :name ) "
+                     );
+        return writeQuery();
+
+      case SQLAction::Modify:
+        query.prepare("UPDATE kmmNationalAccountNumber SET countryCode = :countryCode, accountNumber = :accountNumber, bankCode = :bankCode, name = :name WHERE id = :id;");
+        return writeQuery();
+
+      case SQLAction::Remove:
+        query.prepare("DELETE FROM kmmNationalAccountNumber WHERE id = ?;");
+        query.bindValue(0, obj.idString());
+        if (!query.exec()) {
+          qWarning("Error while deleting national account number '%s': %s", qPrintable(obj.idString()), qPrintable(query.lastError().text()));
+          return false;
+        }
+        return true;
+    }
+    return false;
   }
 
-  void deleteStorableObject(const databaseStoreableObject& obj, const QString& id)
+  bool actOnSepaOnlineTransferObjectInSQL(SQLAction action, const onlineTask &obj, const QString& id)
   {
     Q_Q(MyMoneyStorageSql);
-    setupStoragePlugin(obj.storagePluginIid());
-    if (!obj.sqlRemove(*q, id))
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not remove object with id '%1' from database (plugin failed).").arg(id));
+    QSqlQuery query(*q);
+    const auto& task = dynamic_cast<const sepaOnlineTransferImpl &>(obj);
+
+    auto bindValuesToQuery = [&]() {
+      query.bindValue(":id", id);
+      query.bindValue(":originAccount", task.responsibleAccount());
+      query.bindValue(":value", task.value().toString());
+      query.bindValue(":purpose", task.purpose());
+      query.bindValue(":endToEndReference", (task.endToEndReference().isEmpty()) ? QVariant() : QVariant::fromValue(task.endToEndReference()));
+      query.bindValue(":beneficiaryName", task.beneficiaryTyped().ownerName());
+      query.bindValue(":beneficiaryIban", task.beneficiaryTyped().electronicIban());
+      query.bindValue(":beneficiaryBic", (task.beneficiaryTyped().storedBic().isEmpty()) ? QVariant() : QVariant::fromValue(task.beneficiaryTyped().storedBic()));
+      query.bindValue(":textKey", task.textKey());
+      query.bindValue(":subTextKey", task.subTextKey());
+    };
+
+    switch(action) {
+      case SQLAction::Save:
+        query.prepare("INSERT INTO kmmSepaOrders ("
+                      " id, originAccount, value, purpose, endToEndReference, beneficiaryName, beneficiaryIban, "
+                      " beneficiaryBic, textKey, subTextKey) "
+                      " VALUES( :id, :originAccount, :value, :purpose, :endToEndReference, :beneficiaryName, :beneficiaryIban, "
+                      "         :beneficiaryBic, :textKey, :subTextKey ) "
+                     );
+        bindValuesToQuery();
+        if (!query.exec()) {
+          qWarning("Error while saving sepa order '%s': %s", qPrintable(id), qPrintable(query.lastError().text()));
+          return false;
+        }
+        return true;
+
+      case SQLAction::Modify:
+        query.prepare(
+          "UPDATE kmmSepaOrders SET"
+          " originAccount = :originAccount,"
+          " value = :value,"
+          " purpose = :purpose,"
+          " endToEndReference = :endToEndReference,"
+          " beneficiaryName = :beneficiaryName,"
+          " beneficiaryIban = :beneficiaryIban,"
+          " beneficiaryBic = :beneficiaryBic,"
+          " textKey = :textKey,"
+          " subTextKey = :subTextKey "
+          " WHERE id = :id");
+        bindValuesToQuery();
+        if (!query.exec()) {
+          qWarning("Could not modify sepaOnlineTransfer '%s': %s", qPrintable(id), qPrintable(query.lastError().text()));
+          return false;
+        }
+        return true;
+
+      case SQLAction::Remove:
+        query.prepare("DELETE FROM kmmSepaOrders WHERE id = ?");
+        query.bindValue(0, id);
+        return query.exec();
+    }
+    return false;
+  }
+
+  void actOnPayeeIdentifierObjectInSQL(SQLAction action, const payeeIdentifier& obj)
+  {
+    Q_Q(MyMoneyStorageSql);
+
+    setupStoragePlugin(obj->payeeIdentifierId());
+    auto isSuccessfull = false;
+
+    if (obj->payeeIdentifierId() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      isSuccessfull = actOnIBANBICObjectInSQL(action, obj);
+    else if (obj->payeeIdentifierId() == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      isSuccessfull = actOnNationalAccountObjectInSQL(action, obj);
+
+    if (!isSuccessfull) {
+      switch (action) {
+        case SQLAction::Save:
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Could not save object with id '%1' in database (plugin failed).").arg(obj.idString()));
+        case SQLAction::Modify:
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Could not modify object with id '%1' in database (plugin failed).").arg(obj.idString()));
+        case SQLAction::Remove:
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Could not remove object with id '%1' from database (plugin failed).").arg(obj.idString()));
+      }
+    }
+  }
+
+  void actOnOnlineJobInSQL(SQLAction action, const onlineTask& obj, const QString& id)
+  {
+    Q_Q(MyMoneyStorageSql);
+
+    setupStoragePlugin(obj.taskName());
+    auto isSuccessfull = false;
+
+    if (obj.taskName() == sepaOnlineTransferImpl::name())
+      isSuccessfull = actOnSepaOnlineTransferObjectInSQL(action, obj, id);
+
+    if (!isSuccessfull) {
+      switch (action) {
+        case SQLAction::Save:
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Could not save object with id '%1' in database (plugin failed).").arg(id));
+        case SQLAction::Modify:
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Could not modify object with id '%1' in database (plugin failed).").arg(id));
+        case SQLAction::Remove:
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Could not remove object with id '%1' from database (plugin failed).").arg(id));
+      }
+    }
+  }
+
+  payeeIdentifierData* createIBANBICObject(QSqlDatabase db, const QString& identId) const
+  {
+    QSqlQuery query(db);
+    query.prepare("SELECT iban, bic, name FROM kmmIbanBic WHERE id = ?;");
+    query.bindValue(0, identId);
+    if (!query.exec() || !query.next()) {
+      qWarning("Could load iban bic identifier from database");
+      return nullptr;
+    }
+
+    payeeIdentifiers::ibanBic *const ident = new payeeIdentifiers::ibanBic;
+    ident->setIban(query.value(0).toString());
+    ident->setBic(query.value(1).toString());
+    ident->setOwnerName(query.value(2).toString());
+    return ident;
+  }
+
+  payeeIdentifierData* createNationalAccountObject(QSqlDatabase db, const QString& identId) const
+  {
+    QSqlQuery query(db);
+    query.prepare("SELECT countryCode, accountNumber, bankCode, name FROM kmmNationalAccountNumber WHERE id = ?;");
+    query.bindValue(0, identId);
+    if (!query.exec() || !query.next()) {
+      qWarning("Could load national account number from database");
+      return nullptr;
+    }
+
+    payeeIdentifiers::nationalAccount *const ident = new payeeIdentifiers::nationalAccount;
+    ident->setCountry(query.value(0).toString());
+    ident->setAccountNumber(query.value(1).toString());
+    ident->setBankCode(query.value(2).toString());
+    ident->setOwnerName(query.value(3).toString());
+    return ident;
+  }
+
+  payeeIdentifier createPayeeIdentifierObject(QSqlDatabase db, const QString& identifierType, const QString& identifierId) const
+  {
+    payeeIdentifierData* identData = nullptr;
+    if (identifierType == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      identData = createIBANBICObject(db, identifierId);
+    else if (identifierType == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      identData = createNationalAccountObject(db, identifierId);
+
+    return payeeIdentifier(identifierId, identData);
+  }
+
+  onlineTask* createSepaOnlineTransferObject(QSqlDatabase connection, const QString& onlineJobId) const
+  {
+    Q_ASSERT(!onlineJobId.isEmpty());
+    Q_ASSERT(connection.isOpen());
+
+    QSqlQuery query = QSqlQuery(
+                        "SELECT originAccount, value, purpose, endToEndReference, beneficiaryName, beneficiaryIban, "
+                        " beneficiaryBic, textKey, subTextKey FROM kmmSepaOrders WHERE id = ?",
+                        connection
+                      );
+    query.bindValue(0, onlineJobId);
+    if (query.exec() && query.next()) {
+      sepaOnlineTransferImpl* task = new sepaOnlineTransferImpl();
+      task->setOriginAccount(query.value(0).toString());
+      task->setValue(MyMoneyMoney(query.value(1).toString()));
+      task->setPurpose(query.value(2).toString());
+      task->setEndToEndReference(query.value(3).toString());
+      task->setTextKey(query.value(7).toUInt());
+      task->setSubTextKey(query.value(8).toUInt());
+
+      payeeIdentifiers::ibanBic beneficiary;
+      beneficiary.setOwnerName(query.value(4).toString());
+      beneficiary.setIban(query.value(5).toString());
+      beneficiary.setBic(query.value(6).toString());
+      task->setBeneficiary(beneficiary);
+      return task;
+    }
+
+    return nullptr;
+  }
+
+  onlineTask* createOnlineTaskObject(const QString& iid, const QString& onlineTaskId, QSqlDatabase connection) const
+  {
+    onlineTask* taskOnline = nullptr;
+    if (iid == sepaOnlineTransferImpl::name()) {
+      // @todo This is probably memory leak but for now it works alike to original code
+      onlineJobAdministration::instance()->registerOnlineTask(new sepaOnlineTransferImpl);
+      taskOnline = createSepaOnlineTransferObject(connection, onlineTaskId);
+    }
+    if (!taskOnline)
+      qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
+
+    return taskOnline;
   }
 
   void alert(QString s) const // FIXME: remove...

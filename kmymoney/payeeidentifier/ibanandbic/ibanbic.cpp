@@ -23,8 +23,6 @@
 #include <gmpxx.h>
 
 #include <QDebug>
-#include <QSqlQuery>
-#include <QSqlError>
 
 #include "ibanbicdata.h"
 #include "mymoney/mymoneyexception.h"
@@ -67,23 +65,6 @@ ibanBic* ibanBic::clone() const
   return (new ibanBic(*this));
 }
 
-payeeIdentifierData* ibanBic::createFromSqlDatabase(QSqlDatabase db, const QString& identId) const
-{
-  QSqlQuery query(db);
-  query.prepare("SELECT iban, bic, name FROM kmmIbanBic WHERE id = ?;");
-  query.bindValue(0, identId);
-  if (!query.exec() || !query.next()) {
-    qWarning("Could load iban bic identifier from database");
-    return 0;
-  }
-
-  ibanBic *const ident = new ibanBic;
-  ident->setIban(query.value(0).toString());
-  ident->setBic(query.value(1).toString());
-  ident->setOwnerName(query.value(2).toString());
-  return ident;
-}
-
 ibanBic* ibanBic::createFromXml(const QDomElement& element) const
 {
   ibanBic* ident = new ibanBic;
@@ -103,49 +84,6 @@ void ibanBic::writeXML(QDomDocument& document, QDomElement& parent) const
     parent.setAttribute("bic", m_bic);
   if (!m_ownerName.isEmpty())
     parent.setAttribute("ownerName", m_ownerName);
-}
-
-bool ibanBic::writeQuery(QSqlQuery& query, const QString& id) const
-{
-  query.bindValue(":id", id);
-  query.bindValue(":iban", electronicIban());
-  const QString bic = fullStoredBic();
-  query.bindValue(":bic", (bic.isEmpty()) ? QVariant(QVariant::String) : bic);
-  query.bindValue(":name", ownerName());
-  if (!query.exec()) { // krazy:exclude=crashy
-    qWarning("Error while saving ibanbic data for '%s': %s", qPrintable(id), qPrintable(query.lastError().text()));
-    return false;
-  }
-  return true;
-}
-
-bool ibanBic::sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const
-{
-  QSqlQuery query(databaseConnection);
-  query.prepare("INSERT INTO kmmIbanBic "
-                " ( id, iban, bic, name )"
-                " VALUES( :id, :iban, :bic, :name ) "
-               );
-  return writeQuery(query, objectId);
-}
-
-bool ibanBic::sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const
-{
-  QSqlQuery query(databaseConnection);
-  query.prepare("UPDATE kmmIbanBic SET iban = :iban, bic = :bic, name = :name WHERE id = :id;");
-  return writeQuery(query, objectId);
-}
-
-bool ibanBic::sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const
-{
-  QSqlQuery query(databaseConnection);
-  query.prepare("DELETE FROM kmmIbanBic WHERE id = ?;");
-  query.bindValue(0, objectId);
-  if (!query.exec()) {
-    qWarning("Error while deleting ibanbic data '%s': %s", qPrintable(objectId), qPrintable(query.lastError().text()));
-    return false;
-  }
-  return true;
 }
 
 QString ibanBic::paperformatIban(const QString& separator) const

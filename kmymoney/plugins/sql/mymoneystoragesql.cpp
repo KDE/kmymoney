@@ -948,7 +948,7 @@ void MyMoneyStorageSql::addOnlineJob(const onlineJob& job)
 
   try {
     // Save online task
-    d->insertStorableObject(*job.constTask(), job.id());
+    d->actOnOnlineJobInSQL(MyMoneyStorageSqlPrivate::SQLAction::Save, *job.constTask(), job.id());
   } catch (onlineJob::emptyTask&) {
   }
 }
@@ -976,7 +976,7 @@ void MyMoneyStorageSql::modifyOnlineJob(const onlineJob& job)
 
   try {
     // Modify online task
-    d->updateStorableObject(*job.constTask(), job.id());
+    d->actOnOnlineJobInSQL(MyMoneyStorageSqlPrivate::SQLAction::Modify, *job.constTask(), job.id());
   } catch (onlineJob::emptyTask&) {
     // If there is no task attached this is fine as well
   }
@@ -992,7 +992,7 @@ void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
 
   try {
     // Remove task
-    d->deleteStorableObject(*job.constTask(), job.id());
+    d->actOnOnlineJobInSQL(MyMoneyStorageSqlPrivate::SQLAction::Remove, *job.constTask(), job.id());
   } catch (onlineJob::emptyTask&) {
   }
 
@@ -1017,7 +1017,7 @@ void MyMoneyStorageSql::addPayeeIdentifier(payeeIdentifier& ident)
   ++d->m_payeeIdentifier;
 
   try {
-    d->insertStorableObject(*ident.data(), ident.idString());
+    d->actOnPayeeIdentifierObjectInSQL(MyMoneyStorageSqlPrivate::SQLAction::Save, ident);
   } catch (const payeeIdentifier::empty &) {
   }
 }
@@ -1039,7 +1039,7 @@ void MyMoneyStorageSql::modifyPayeeIdentifier(const payeeIdentifier& ident)
     // Delete old identifier if type changed
     const payeeIdentifier oldIdent(fetchPayeeIdentifier(ident.idString()));
     try {
-      d->deleteStorableObject(*oldIdent.data(), ident.idString());
+      d->actOnPayeeIdentifierObjectInSQL(MyMoneyStorageSqlPrivate::SQLAction::Modify, oldIdent);
     } catch (const payeeIdentifier::empty &) {
       // Note: this should not happen because the ui does not offer a way to change
       // the type of an payeeIdentifier if it was not correctly loaded.
@@ -1055,9 +1055,9 @@ void MyMoneyStorageSql::modifyPayeeIdentifier(const payeeIdentifier& ident)
 
   try {
     if (typeChanged)
-      d->insertStorableObject(*ident.data(), ident.idString());
+      d->actOnPayeeIdentifierObjectInSQL(MyMoneyStorageSqlPrivate::SQLAction::Save, ident);
     else
-      d->updateStorableObject(*ident.data(), ident.idString());
+      d->actOnPayeeIdentifierObjectInSQL(MyMoneyStorageSqlPrivate::SQLAction::Modify, ident);
   } catch (const payeeIdentifier::empty &) {
   }
 }
@@ -1070,7 +1070,7 @@ void MyMoneyStorageSql::removePayeeIdentifier(const payeeIdentifier& ident)
   // Remove first, the table could have a contraint which prevents removal
   // of row in kmmPayeeIdentifier
   try {
-    d->deleteStorableObject(*ident.data(), ident.idString());
+    d->actOnPayeeIdentifierObjectInSQL(MyMoneyStorageSqlPrivate::SQLAction::Remove, ident);
   } catch (const payeeIdentifier::empty &) {
   }
 
@@ -1371,7 +1371,7 @@ QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& i
 
   while (query.next()) {
     const QString& id = query.value(0).toString();
-    onlineTask *const task = onlineJobAdministration::instance()->createOnlineTaskFromSqlDatabase(query.value(1).toString(), id, *this);
+    onlineTask *const task = d->createOnlineTaskObject(query.value(1).toString(), id, *this);
     onlineJob job = onlineJob(task, id);
     job.setJobSend(query.value(2).toDateTime());
     onlineJob::sendingState state;
@@ -1434,8 +1434,8 @@ QMap< QString, payeeIdentifier > MyMoneyStorageSql::fetchPayeeIdentifiers(const 
   QMap<QString, payeeIdentifier> identList;
 
   while (query.next()) {
-    const QString id = query.value(0).toString();
-    identList.insert(id, payeeIdentifierLoader::instance()->createPayeeIdentifierFromSqlDatabase(*this, query.value(1).toString(), id));
+    const auto id = query.value(0).toString();
+    identList.insert(id, d->createPayeeIdentifierObject(*this, query.value(1).toString(), id));
   }
 
   return identList;

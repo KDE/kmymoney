@@ -19,7 +19,7 @@
 #ifndef CREDITTRANSFERSETTINGSBASE_H
 #define CREDITTRANSFERSETTINGSBASE_H
 
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 
 /**
  * @brief Base class for sepaCreditTransfer and germanCreditTransfer settings

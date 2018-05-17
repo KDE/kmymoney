@@ -13,7 +13,6 @@ target_link_libraries( payeeidentifier_nationalAccount
     kmm_payeeidentifier
     Qt5::Core
     Qt5::Xml
-    Qt5::Sql
 )
 
 set_target_properties(payeeidentifier_nationalAccount PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})

@@ -22,7 +22,6 @@
 #include <QString>
 
 #include <qobject.h>
-#include "storage/databasestoreableobject.h"
 
 class onlineJob;
 
@@ -105,10 +104,9 @@ class onlineJob;
  *
  * @see onlineJob
  */
-class QSqlDatabase;
 class QDomDocument;
 class QDomElement;
-class onlineTask : public databaseStoreableObject
+class onlineTask
 {
 public:
   ONLINETASK_META_BASE(onlineTask, "org.kmymoney.onlineTask", /* no attribute here */);
@@ -151,13 +149,6 @@ protected:
    * @return A pointer to a new instance, caller takes ownership
    */
   virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
-
-  /**
-   * @brief Create new instance of this task from a SQL database
-   *
-   * Equivalent to createFromXml()
-   */
-  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const = 0;
 
   /**
    * @brief Account this job is related to

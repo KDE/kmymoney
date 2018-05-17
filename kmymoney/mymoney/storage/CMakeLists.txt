@@ -6,7 +6,6 @@ set(storage_HEADERS
   imymoneystorageformat.h
   mymoneystoragemgr.h
   kmymoneystorageplugin.h
-  databasestoreableobject.h
   )
 
 ########### install files ###############

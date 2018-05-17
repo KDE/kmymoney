@@ -21,15 +21,13 @@
 #include <KPluginFactory>
 
 #include "mymoney/onlinejobadministration.h"
-#include "tasks/sepaonlinetransferimpl.h"
+#include "onlinetasks/sepa/sepaonlinetransferimpl.h"
 #include "ui/sepacredittransferedit.h"
-#include "sepastorageplugin.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(sepaOnlineTasksFactory,
                            "kmymoney-sepaorders.json",
                            registerPlugin<sepaOnlineTasksLoader>("sepaOnlineTasks");
                            registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
-                           registerPlugin<sepaStoragePlugin>("sepaSqlStoragePlugin");
                           )
 
 sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList& /*options*/)

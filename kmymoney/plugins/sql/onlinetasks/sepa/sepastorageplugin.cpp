@@ -17,8 +17,13 @@
  */
 
 #include "sepastorageplugin.h"
+
+#include <KPluginFactory>
+
 #include <QSqlQuery>
 #include <QSqlError>
+
+K_PLUGIN_FACTORY_WITH_JSON(sepaStoragePluginFactory, "kmymoney-sepa-storageplugin.json", registerPlugin<sepaStoragePlugin>();)
 
 const QString sepaStoragePlugin::iid = QLatin1String("org.kmymoney.creditTransfer.sepa.sqlStoragePlugin");
 
@@ -94,3 +99,5 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
 
   return false;
 }
+
+#include "sepastorageplugin.moc"

@@ -19,15 +19,15 @@
 #ifndef SEPAONLINETRANSFERIMPL_H
 #define SEPAONLINETRANSFERIMPL_H
 
+#include "kmm_mymoney_export.h"
+
 #include "sepaonlinetransfer.h"
-#include "../sepastorageplugin.h"
 
 /**
  * @brief SEPA Credit Transfer
  */
-class sepaOnlineTransferImpl : public sepaOnlineTransfer
+class KMM_MYMONEY_EXPORT sepaOnlineTransferImpl : public sepaOnlineTransfer
 {
-  Q_INTERFACES(sepaOnlineTransfer)
 
 public:
   ONLINETASK_META(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa");
@@ -77,18 +77,21 @@ public:
   bool isValid() const final override;
 
   QString jobTypeName() const final override;
-  QString storagePluginIid() const final override {
-    return sepaStoragePlugin::iid;
-  }
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override;
 
   unsigned short int textKey() const final override {
     return _textKey;
   }
+
+  void setTextKey(unsigned short int textKey) final override {
+    _textKey = textKey;
+  }
+
   unsigned short int subTextKey() const final override {
     return _subTextKey;
+  }
+
+  void setSubTextKey(unsigned short int subTextKey) final override {
+    _subTextKey = subTextKey;
   }
 
   bool hasReferenceTo(const QString& id) const final override;
@@ -99,12 +102,9 @@ protected:
   sepaOnlineTransfer* clone() const final override;
 
   sepaOnlineTransfer* createFromXml(const QDomElement &element) const final override;
-  onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const final override;
   void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
 private:
-  void bindValuesToQuery(QSqlQuery& query, const QString& id) const;
-
   mutable QSharedPointer<const settings> _settings;
 
   QString _originAccount;

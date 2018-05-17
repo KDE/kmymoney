@@ -55,19 +55,6 @@ public:
   int testNumber() {
     return m_testNumber;
   }
-  QString storagePluginIid() const final override {
-    return QString();
-  }
-
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override {
-    Q_UNUSED(databaseConnection); Q_UNUSED(onlineJobId); return false;
-  }
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override {
-    Q_UNUSED(databaseConnection); Q_UNUSED(onlineJobId); return false;
-  }
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const final override {
-    Q_UNUSED(databaseConnection); Q_UNUSED(onlineJobId); return false;
-  }
 
 protected:
 
@@ -81,9 +68,7 @@ protected:
   dummyTask* createFromXml(const QDomElement&) const final override {
     return (new dummyTask);
   }
-  onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const final override {
-    Q_UNUSED(connection); Q_UNUSED(onlineJobId);  return (new dummyTask);
-  }
+
   QString responsibleAccount() const final override {
     return QString();
   }

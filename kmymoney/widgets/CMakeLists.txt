@@ -78,7 +78,6 @@ target_link_libraries(kmm_widgets PUBLIC
   KF5::ItemViews
   KF5::I18n
   Qt5::Gui
-  Qt5::Sql
   Qt5::Core
   Alkimia::alkimia
   kmm_mymoney
@@ -156,7 +155,7 @@ add_custom_target(generate_base_ui_srcs DEPENDS
 # We can compile the uncritical sources without KMM_DESIGNER flags
 add_library(kmymoney_base STATIC ${_uncritial_common_sources})
 # TODO: fix dependencies
-target_link_libraries(kmymoney_base KF5::XmlGui KF5::TextWidgets KF5::IconThemes KF5::I18n KF5::ConfigWidgets KF5::ConfigCore KF5::Completion KF5::Service Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Xml kmm_settings Alkimia::alkimia)
+target_link_libraries(kmymoney_base KF5::XmlGui KF5::TextWidgets KF5::IconThemes KF5::I18n KF5::ConfigWidgets KF5::ConfigCore KF5::Completion KF5::Service Qt5::Gui Qt5::Widgets Qt5::Xml kmm_settings Alkimia::alkimia)
 
 add_dependencies(kmymoney_base kmm_settings)
 

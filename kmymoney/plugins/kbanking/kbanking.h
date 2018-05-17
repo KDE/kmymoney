@@ -51,7 +51,7 @@ class KBAccountSettings;
 #include "mymoneykeyvaluecontainer.h"
 
 #include "mymoney/onlinejobtyped.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 
 #include "banking.hpp"
 

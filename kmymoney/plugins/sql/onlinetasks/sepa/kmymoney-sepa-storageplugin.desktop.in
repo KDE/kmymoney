@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KMyMoney/sqlStoragePlugin
+
+X-KMyMoney-PluginIid=org.kmymoney.creditTransfer.sepa.sqlStoragePlugin
+
+Name=credittransfer_sepa_storageplugin
+X-KDE-Library=kmymoney/credittransfer_sepa_storageplugin
+X-KDE-PluginInfo-Author=Christian David
+X-KDE-PluginInfo-Email=christian-david@web.de
+X-KDE-PluginInfo-Version=${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=https://kmymoney.org
+X-KDE-PluginInfo-License=GPLv2+
+X-KDE-PluginInfo-EnabledByDefault=true

@@ -38,19 +38,6 @@ public:
   bool isValid() const override;
   QString jobTypeName() const override;
 
-  /**
-   * @name SqlMethods
-   * @{
-   * For sql databases this plugin is not needed nor used. So these functions
-   * do not have a real implementation.
-   */
-  QString storagePluginIid() const override;
-  bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const override;
-  bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const override;
-  bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const override;
-  onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const override;
-  /** @} */
-
 protected:
   QString responsibleAccount() const override;
   unavailableTask* createFromXml(const QDomElement& element) const override;

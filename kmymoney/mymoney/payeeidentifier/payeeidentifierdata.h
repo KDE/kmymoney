@@ -27,8 +27,6 @@
 #include <QMetaType>
 #include <QDomElement>
 
-#include "storage/databasestoreableobject.h"
-
 class payeeIdentifier;
 class payeeIdentifierLoader;
 
@@ -81,7 +79,7 @@ class payeeIdentifierLoader;
  * To identify the type of an payeeIdentifier you must use the macro @ref PAYEEIDENTIFIER_IID()
  * in the public section of your subclass.
  */
-class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifierData : public databaseStoreableObject
+class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifierData
 {
 public:
   virtual ~payeeIdentifierData() {}
@@ -114,7 +112,6 @@ public:
    * @param element Note: there could be more data in that elemenet than you created in writeXML()
    */
   virtual payeeIdentifierData* createFromXml(const QDomElement &element) const = 0;
-  virtual payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const = 0;
 
   /**
    * @see MyMoneyObject::writeXML()
