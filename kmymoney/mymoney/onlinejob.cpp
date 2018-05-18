@@ -43,9 +43,9 @@ onlineJob::onlineJob() :
   d->m_locked = false;
 }
 
-onlineJob::onlineJob(onlineTask* task, const QString &id) :
+onlineJob::onlineJob(onlineTask* onlinetask, const QString &id) :
   MyMoneyObject(*new onlineJobPrivate, id),
-  m_task(task)
+  m_task(onlinetask)
 {
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();
@@ -55,9 +55,9 @@ onlineJob::onlineJob(onlineTask* task, const QString &id) :
   d->m_locked = false;
 }
 
-onlineJob::onlineJob(onlineTask* task) :
+onlineJob::onlineJob(onlineTask* onlinetask) :
     MyMoneyObject(*new onlineJobPrivate, QString()),
-    m_task(task)
+    m_task(onlinetask)
 {
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();

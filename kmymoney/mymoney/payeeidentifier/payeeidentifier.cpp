@@ -37,21 +37,21 @@ payeeIdentifier::payeeIdentifier(const payeeIdentifier& other)
     m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
-payeeIdentifier::payeeIdentifier(payeeIdentifierData*const data)
+payeeIdentifier::payeeIdentifier(payeeIdentifierData*const identifierdata)
     : m_id(0),
-    m_payeeIdentifier(data)
+    m_payeeIdentifier(identifierdata)
 {
 }
 
-payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const data)
+payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const identifierdata)
     : m_id(id),
-    m_payeeIdentifier(data)
+    m_payeeIdentifier(identifierdata)
 {
 }
 
-payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData*const data)
+payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData*const identifierdata)
     : m_id(id.mid(5).toUInt()),
-    m_payeeIdentifier(data)
+    m_payeeIdentifier(identifierdata)
 {
   bool ok = false; // hopefully the compiler optimizes this away if compiled in non-debug mode
   Q_ASSERT(id.mid(5).toUInt(&ok) && ok);

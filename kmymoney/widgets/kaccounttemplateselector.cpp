@@ -105,14 +105,14 @@ void loadHierarchy()
   ui->m_accountList->clear();
 
   QRegExp exp("(.*):(.*)");
-  for (QMap<QString, QTreeWidgetItem*>::iterator it_m = m_templateHierarchy.begin(); it_m != m_templateHierarchy.end(); ++it_m) {
-    if (exp.indexIn(it_m.key()) == -1) {
-      (*it_m) = new QTreeWidgetItem(ui->m_accountList);
-      (*it_m)->setText(0, it_m.key());
+  for (QMap<QString, QTreeWidgetItem*>::iterator it_h = m_templateHierarchy.begin(); it_h != m_templateHierarchy.end(); ++it_h) {
+    if (exp.indexIn(it_h.key()) == -1) {
+      (*it_h) = new QTreeWidgetItem(ui->m_accountList);
+      (*it_h)->setText(0, it_h.key());
     } else {
-      (*it_m) = hierarchyItem(exp.cap(1), exp.cap(2));
+      (*it_h) = hierarchyItem(exp.cap(1), exp.cap(2));
     }
-    (*it_m)->setExpanded(true);
+    (*it_h)->setExpanded(true);
   }
 
   ui->m_description->clear();

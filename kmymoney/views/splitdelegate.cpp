@@ -324,11 +324,11 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   QStyleOptionViewItem opt = option;
   if(index.isValid()) {
     // check if we are showing the edit widget
-    const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
-    if (view) {
-      QModelIndex editIndex = view->model()->index(index.row(), 0);
+    const QAbstractItemView *viewWidget = qobject_cast<const QAbstractItemView *>(opt.widget);
+    if (viewWidget) {
+      QModelIndex editIndex = viewWidget->model()->index(index.row(), 0);
       if(editIndex.isValid()) {
-        QWidget* editor = view->indexWidget(editIndex);
+        QWidget* editor = viewWidget->indexWidget(editIndex);
         if(editor) {
           size = editor->minimumSizeHint();
           return size;

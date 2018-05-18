@@ -535,19 +535,19 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString&
         //make sure the tag selection is updated and transactions are updated accordingly
         slotSelectTag();
 
-        KMyMoneyRegister::RegisterItem *item = 0;
-        for (int i = 0; i < d->ui->m_register->rowCount(); ++i) {
-          item = d->ui->m_register->itemAtRow(i);
-          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
+        KMyMoneyRegister::RegisterItem *registerItem = 0;
+        for (i = 0; i < d->ui->m_register->rowCount(); ++i) {
+          registerItem = d->ui->m_register->itemAtRow(i);
+          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(registerItem);
           if (t) {
             if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
-              d->ui->m_register->selectItem(item);
-              d->ui->m_register->ensureItemVisible(item);
+              d->ui->m_register->selectItem(registerItem);
+              d->ui->m_register->ensureItemVisible(registerItem);
               break;
             }
           }
         }
-        // quit out of for() loop
+        // quit out of outer for() loop
         break;
       }
     }

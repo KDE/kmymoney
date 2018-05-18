@@ -132,9 +132,9 @@ public:
   LedgerSeparatorDate(eLedgerModel::Role role);
   virtual ~LedgerSeparatorDate() {}
 
-  virtual bool rowHasSeparator(const QModelIndex& index) const;
-  virtual QString separatorText(const QModelIndex& index) const;
-  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
+  virtual bool rowHasSeparator(const QModelIndex& index) const override;
+  virtual QString separatorText(const QModelIndex& index) const override;
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const override;
 
 protected:
   QString getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const;
@@ -147,9 +147,9 @@ public:
   LedgerSeparatorOnlineBalance(eLedgerModel::Role role);
   virtual ~LedgerSeparatorOnlineBalance() {}
 
-  virtual bool rowHasSeparator(const QModelIndex& index) const;
-  virtual QString separatorText(const QModelIndex& index) const;
-  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
+  virtual bool rowHasSeparator(const QModelIndex& index) const override;
+  virtual QString separatorText(const QModelIndex& index) const override;
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const override;
 
   void setSeparatorData(const QDate& date, const MyMoneyMoney& amount, int fraction);
 

@@ -66,8 +66,8 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     d->m_driver = MyMoneyDbDriver::create(QUrlQuery(url).queryItemValue("driver"));
     //get the input options
     QStringList options = QUrlQuery(url).queryItemValue("options").split(',');
-    d->m_loadAll = true || // force loading whole database into memory since unification of storages
-                   options.contains("loadAll")/*|| m_mode == 0*/;
+    d->m_loadAll = true; // force loading whole database into memory since unification of storages
+                   // options.contains("loadAll")/*|| m_mode == 0*/;
     d->m_override = options.contains("override");
 
     // create the database connection
