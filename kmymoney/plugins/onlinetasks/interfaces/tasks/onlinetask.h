@@ -63,17 +63,19 @@ class onlineJob;
  *
  * Activate the meta system using ONLINETASK_META() in your classes public section.
  */
-#define ONLINETASK_META(onlineTaskClass, IID) \
+#define ONLINETASK_META_BASE(onlineTaskClass, IID, ATTRIBUTE) \
   /** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
   static const QString& name() { \
     static const QString _name = IID; \
     return _name; \
   } \
   /** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
-  virtual QString taskName() const { \
+  virtual QString taskName() const ATTRIBUTE { \
     return onlineTaskClass::name(); \
   } \
   friend class onlineJobAdministration
+
+#define ONLINETASK_META(onlineTaskClass, IID) ONLINETASK_META_BASE(onlineTaskClass, IID, override)
 
 /**
  * @brief Base class for tasks which can be proceeded by online banking plugins
@@ -109,8 +111,7 @@ class QDomElement;
 class onlineTask : public databaseStoreableObject
 {
 public:
-  ONLINETASK_META(onlineTask, "org.kmymoney.onlineTask");
-
+  ONLINETASK_META_BASE(onlineTask, "org.kmymoney.onlineTask", /* no attribute here */);
   onlineTask();
   virtual ~onlineTask() {}
 
