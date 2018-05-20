@@ -1620,7 +1620,7 @@ void KGlobalLedgerView::slotEditSplits()
           d->m_transactionEditor->enterTransactions(id);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(this, i18n("nable to modify transaction"), QString::fromLatin1(e.what()));
+          KMessageBox::detailedSorry(this, i18n("Unable to modify transaction"), QString::fromLatin1(e.what()));
         }
       }
     }
