@@ -30,5 +30,6 @@ private Q_SLOTS:
   void cleanup();
 
   void testDefaultConstructor();
+  void testCatching();
 };
 #endif
