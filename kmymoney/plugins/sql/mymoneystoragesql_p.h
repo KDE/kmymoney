@@ -2605,10 +2605,13 @@ public:
       ++tt;
     }
 
-    if (recordCount != 0) {
-      return (-1); // not empty
+    // a fresh created database contains at least one record (see createTables()) in
+    // the kmmFileInfo table providing file and fix version. So we report empty
+    // even if there is a recordCount of 1
+    if (recordCount > 1) {
+      return -1;    // not empty
     } else {
-      return (0);
+      return 0;
     }
   }
 
