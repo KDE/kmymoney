@@ -71,7 +71,21 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     d->m_override = options.contains("override");
 
     // create the database connection
-    QString dbName = url.path().remove(0, 1);   // remove separator slash
+    // regarding the construction of the database name see the discussion on
+    // https://phabricator.kde.org/D12681. In case of a local file based DB
+    // driver we cut off the leading slash only in those cases, where we
+    // a) have a file based DB on Windows systems and
+    // b) have a server based DB.
+    // so that we do not modify the absolute path on *nix based systems
+    // in case of a DB based driver
+    QString dbName = url.path();
+    if(d->m_driver->requiresExternalFile()) {
+#ifdef Q_OS_WIN
+      dbName = url.path().remove(0, 1);   // remove separator slash for files on Windows
+#endif
+    } else {
+      dbName = url.path().remove(0, 1);   // remove separator slash for server based databases
+    }
     setDatabaseName(dbName);
     setHostName(url.host());
     setUserName(url.userName());
