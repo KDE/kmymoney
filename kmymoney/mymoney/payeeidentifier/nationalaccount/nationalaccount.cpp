@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "nationalaccount.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 #include <typeinfo>
 

@@ -27,9 +27,13 @@ set_target_properties(qifimporter
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(qifimporter
-  kmm_settings
-  kmm_plugin
-  Alkimia::alkimia
+  PUBLIC
+    kmm_plugin
+  PRIVATE
+    KF5::Completion
+    KF5::KIOWidgets
+    Alkimia::alkimia
+    kmm_settings
 )
 
 ########### install files ###############

@@ -19,8 +19,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -37,12 +35,7 @@ template <class Key, class T> class QMap;
 
 namespace KMyMoneyPlugin
 {
-  class Plugin;
-  class OnlinePlugin;
-  class OnlinePluginExtended;
-  class ImporterPlugin;
-  class StoragePlugin;
-
+  class Container;
   enum class eListing;
 
   /**
@@ -61,17 +54,6 @@ namespace KMyMoneyPlugin
     OnlineBankOperations,
     PayeeIdentifier,
     StandardPlugin
-  };
-
-  /**
-   * @brief The Container struct to hold all plugin interfaces
-   */
-  struct Container {
-    QMap<QString, Plugin*>               standard;  // this should contain all loaded plugins because every plugin should inherit Plugin class
-    QMap<QString, OnlinePlugin*>         online;    // casted standard plugin, if such interface is available
-    QMap<QString, OnlinePluginExtended*> extended;  // casted standard plugin, if such interface is available
-    QMap<QString, ImporterPlugin*>       importer;  // casted standard plugin, if such interface is available
-    QMap<QString, StoragePlugin*>        storage;   // casted standard plugin, if such interface is available
   };
 
   Category pluginCategory(const KPluginMetaData& pluginInfo);

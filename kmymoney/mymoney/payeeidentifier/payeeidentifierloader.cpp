@@ -17,63 +17,19 @@
 
 #include "payeeidentifier/payeeidentifierloader.h"
 
-#include "payeeidentifier/unavailableplugin/unavailableplugin.h"
-
-#include "payeeidentifier/ibanandbic/ibanbic.h"
-#include "payeeidentifier/nationalaccount/nationalaccount.h"
-#include "payeeidentifierdata.h"
-
 #include <QDebug>
 #include <QAbstractItemDelegate>
 
-#include <KLocalizedString>
 #include <KServiceTypeTrader>
 
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
 payeeIdentifierLoader::payeeIdentifierLoader()
-    : m_identifiers(QHash<QString, payeeIdentifierData*>())
 {
-  addPayeeIdentifier(new payeeIdentifiers::ibanBic());
-  addPayeeIdentifier(new payeeIdentifiers::nationalAccount());
 }
 
 payeeIdentifierLoader::~payeeIdentifierLoader()
 {
-  qDeleteAll(m_identifiers);
-}
-
-void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identifier)
-{
-  Q_CHECK_PTR(identifier);
-  m_identifiers.insertMulti(identifier->payeeIdentifierId(), identifier);
-}
-
-payeeIdentifier payeeIdentifierLoader::createPayeeIdentifier(const QString& payeeIdentifierId)
-{
-  const payeeIdentifierData* ident = m_identifiers.value(payeeIdentifierId);
-  if (ident != nullptr) {
-    return payeeIdentifier(ident->clone());
-  }
-
-  return payeeIdentifier();
-}
-
-payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromXML(const QDomElement& element)
-{
-  const QString payeeIdentifierId = element.attribute("type");
-  const payeeIdentifierData* identData = m_identifiers.value(payeeIdentifierId);
-  payeeIdentifier ident;
-
-  if (identData != nullptr) {
-    payeeIdentifierData* newIdent = identData->createFromXml(element);
-    ident = payeeIdentifier(newIdent);
-  } else {
-    ident = payeeIdentifier(new payeeIdentifiers::payeeIdentifierUnavailable(element));
-  }
-
-  ident.m_id = element.attribute("id", 0).toUInt();
-  return ident;
 }
 
 /**
@@ -110,14 +66,4 @@ QStringList payeeIdentifierLoader::availableDelegates()
     list.append(offer->property("X-KMyMoney-payeeIdentifierIds", QVariant::StringList).toStringList());
   }
   return list;
-}
-
-QString payeeIdentifierLoader::translatedDelegateName(const QString& payeeIdentifierId)
-{
-  if (payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
-    return i18n("IBAN and BIC");
-  else if (payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
-    return i18n("National Account Number");
-
-  return QString();
 }

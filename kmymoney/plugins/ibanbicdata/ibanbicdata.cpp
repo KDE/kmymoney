@@ -19,15 +19,56 @@
 #include "ibanbicdata.h"
 
 #include <KServiceTypeTrader>
+#include <KLocalizedString>
+
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QStandardPaths>
 #include <QDebug>
 
-#include "ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "ibanbicdataenums.h"
+#include "bicmodel.h"
+
+ibanBicData::ibanBicData(QObject *parent, const QVariantList &args) :
+  KMyMoneyPlugin::Plugin(parent, "ibanbicdata"/*must be the same as X-KDE-PluginInfo-Name*/)
+{
+  Q_UNUSED(args)
+  setComponentName("ibanbicdata", i18n("IBAN/BIC Data"));
+
+  // For information, announce that we have been loaded.
+  qDebug("Plugins: ibanbicdata loaded");
+}
 
 ibanBicData::~ibanBicData()
 {
+  qDebug("Plugins: ibanbicdata unloaded");
+}
+
+QVariant ibanBicData::requestData(const QString &arg, uint type)
+{
+  switch (type) {
+    case eIBANBIC::DataType::bbanLength:
+      return QVariant::fromValue(bbanLength(arg));
+    case eIBANBIC::DataType::bankIdentifierPosition:
+      return QVariant::fromValue(bankIdentifierPosition(arg));
+    case eIBANBIC::DataType::bankIdentifierLength:
+      return QVariant::fromValue(bankIdentifierLength(arg));
+    case eIBANBIC::DataType::iban2Bic:
+      return QVariant::fromValue(iban2Bic(arg));
+    case eIBANBIC::DataType::bankNameByBic:
+      return QVariant::fromValue(bankNameByBic(arg));
+    case eIBANBIC::DataType::bankNameAndBic:
+      return QVariant::fromValue(bankNameAndBic(arg));
+    case eIBANBIC::DataType::extractBankIdentifier:
+      return QVariant::fromValue(extractBankIdentifier(arg));
+    case eIBANBIC::DataType::isBicAllocated:
+      return QVariant::fromValue(static_cast<uint>(isBicAllocated(arg)));
+    case eIBANBIC::DataType::bicModel:
+      return QVariant::fromValue(static_cast<QAbstractItemModel *>(new bicModel()));
+    default:
+      return QVariant();
+  }
 }
 
 int ibanBicData::bankIdentifierLength(const QString& countryCode)
@@ -184,12 +225,12 @@ QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
   return QPair<QString, QString>(QString(""), QString(""));
 }
 
-ibanBicData::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
+eIBANBIC::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
 {
   // Get countryCode
   const QString countryCode = bic.mid(4, 2);
   if (countryCode.length() != 2)
-    return bicNotAllocated;
+    return eIBANBIC::bicAllocationStatus::bicNotAllocated;
 
   // Get services which have a database entry
   KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
@@ -197,11 +238,11 @@ ibanBicData::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
                                                              );
 
   if (services.isEmpty())
-    return bicAllocationUncertain;
+    return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
 
   QSqlDatabase db = createDatabaseConnection(services.first()->property(QLatin1String("X-KMyMoney-Bankdata-Database"), QVariant::String).toString());
   if (!db.isOpen())   // This is an error
-    return bicAllocationUncertain;
+    return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
 
   QSqlQuery query(db);
   query.prepare("SELECT ? IN (SELECT bic FROM institutions)");
@@ -209,17 +250,17 @@ ibanBicData::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
 
   if (!query.exec() || !query.next()) {
     qWarning() << QString("Could not execute query on \"%1\" to check if bic exists. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
-    return bicAllocationUncertain;
+    return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
   }
 
   if (query.value(0).toBool())   // Bic found
-    return bicAllocated;
+    return eIBANBIC::bicAllocationStatus::bicAllocated;
 
   // Bic not found, test if database is complete
   if (services.first()->property(QLatin1String("X-KMyMoney-Bankdata-IsComplete"), QVariant::Bool).toBool())
-    return bicNotAllocated;
+    return eIBANBIC::bicAllocationStatus::bicNotAllocated;
 
-  return bicAllocationUncertain;
+  return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
 }
 
 QVariant ibanBicData::findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type)
@@ -274,3 +315,7 @@ QSqlDatabase ibanBicData::createDatabaseConnection(const QString& database)
 
   return db;
 }
+
+K_PLUGIN_FACTORY_WITH_JSON(ibanBicDataFactory, "ibanbicdata.json", registerPlugin<ibanBicData>();)
+
+#include "ibanbicdata.moc"

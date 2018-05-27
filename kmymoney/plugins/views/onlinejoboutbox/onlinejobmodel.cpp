@@ -32,7 +32,7 @@
 #include "mymoney/onlinejobtyped.h"
 #include "payeeidentifier.h"
 #include "payeeidentifiertyped.h"
-#include "ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 

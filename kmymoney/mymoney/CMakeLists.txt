@@ -36,19 +36,29 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/mymoneystoragexml.cpp
     ./storage/mymoneystoragemgr.cpp
     ./storage/mymoneystorageanon.cpp
-    ./storage/kmymoneystorageplugin.cpp
     ./storage/mymoneystoragenames.cpp
     )
 
   set(onlineTask_a_SOURCES
   ./onlinetasks/sepa/sepaonlinetransferimpl.cpp
   ./onlinetasks/sepa/sepaonlinetransfer.cpp
+  ./onlinetasks/unavailabletask/tasks/unavailabletask.cpp
+  )
+
+  # NOTE: this payeeIdentifier and its cmake file cannot be used as a template
+  # This payeeIdentifier must be linked with payeeIdentifierLoader because it
+  # is a fallback if something failed during loading of plugins (for xml files only)
+  set(payeeidentifier_a_SOURCES
+  ./payeeidentifier/ibanbic/ibanbic.cpp
+  ./payeeidentifier/nationalaccount/nationalaccount.cpp
+  ./payeeidentifier/unavailableplugin/unavailableplugin.cpp
   )
 
 list(APPEND storage_a_SOURCES $<$<OR:$<CONFIG:Debug>,$<CONFIG:DebugFull>,$<CONFIG:DebugKMM>>: ./storage/mymoneystoragedump.cpp>)
 
 list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${onlineTask_a_SOURCES})
+list(APPEND kmm_mymoney_LIB_SRCS ${payeeidentifier_a_SOURCES})
 
 set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h
@@ -81,18 +91,16 @@ target_link_libraries(kmm_mymoney
                       Qt5::Xml
                       Qt5::Core
                       Qt5::Gui
-                      Qt5::Sql
                       KF5::Service
                       KF5::I18n
                       Alkimia::alkimia
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
-                      payeeidentifier_iban_bic
-                      payeeidentifier_nationalAccount
+                      kmm_plugin
                       # TODO: fix this
                       KF5::XmlGui
                       PRIVATE
-                      onlinetask_unavailabletask
+                      onlinetask_interfaces
 )
 
 if(KMM_ADDRESSBOOK_FOUND)

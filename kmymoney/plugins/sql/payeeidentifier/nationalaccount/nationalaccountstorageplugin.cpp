@@ -24,7 +24,7 @@
 #include <KExportPlugin>
 #include <KPluginFactory>
 
-#include "kmymoneystorageplugin.h"
+#include "sql/kmymoneystorageplugin.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(nationalAccountStoragePluginFactory, "kmymoney-nationalaccountnumberplugin.json", registerPlugin<nationalAccountStoragePlugin>();)
 

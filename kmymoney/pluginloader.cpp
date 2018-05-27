@@ -18,6 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -91,6 +93,7 @@ namespace KMyMoneyPlugin
           ctnPlugins.extended.remove(it.key());
           ctnPlugins.importer.remove(it.key());
           ctnPlugins.storage.remove(it.key());
+          ctnPlugins.data.remove(it.key());
 
           guiFactory->removeClient(it.value());
           it.value()->unplug();
@@ -144,6 +147,10 @@ namespace KMyMoneyPlugin
           auto IStorage = qobject_cast<StoragePlugin *>(plugin);
           if (IStorage)
             ctnPlugins.storage.insert((*it).pluginId(), IStorage);
+
+          auto IData = qobject_cast<DataPlugin *>(plugin);
+          if (IData)
+            ctnPlugins.data.insert((*it).pluginId(), IData);
 
         }
       }

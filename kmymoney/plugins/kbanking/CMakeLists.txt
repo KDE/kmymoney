@@ -33,7 +33,6 @@ target_link_libraries(kbanking
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
-                      payeeidentifier_nationalAccount
                       KF5::ConfigCore
                       KF5::ConfigGui
                       Qt5::Core

@@ -5,7 +5,6 @@ endif()
 set(storage_HEADERS
   imymoneystorageformat.h
   mymoneystoragemgr.h
-  kmymoneystorageplugin.h
   )
 
 ########### install files ###############

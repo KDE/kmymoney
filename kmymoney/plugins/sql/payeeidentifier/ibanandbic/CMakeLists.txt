@@ -4,6 +4,7 @@ configure_file(kmymoney-ibanbic-storageplugin.desktop.in kmymoney-ibanbic-storag
 
 set ( IBAN_BIC_STORAGE_PLUGIN_SCRS
   ibanbicstorageplugin.cpp
+  ../../kmymoneystorageplugin.cpp
 )
 
 add_library( payeeidentifier_ibanbic_storageplugin MODULE
@@ -15,8 +16,6 @@ target_link_libraries( payeeidentifier_ibanbic_storageplugin
   Qt5::Sql
   kmm_mymoney
 )
-# The json files of payeeidentifier_iban_bic are currently required
-add_dependencies(payeeidentifier_ibanbic_storageplugin payeeidentifier_iban_bic)
 
 kcoreaddons_desktop_to_json(payeeidentifier_ibanbic_storageplugin
   "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop"

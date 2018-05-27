@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,6 +31,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "interfaceloader.h"
+
+KMyMoneyPlugin::Container pPlugins;
 
 KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
     QObject(),

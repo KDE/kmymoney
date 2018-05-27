@@ -17,7 +17,6 @@ set_target_properties(kmm_payeeidentifier PROPERTIES VERSION ${PROJECT_VERSION} 
 generate_export_header( kmm_payeeidentifier )
 
 target_link_libraries( kmm_payeeidentifier
-  Qt5::Sql
   Qt5::Core
   Qt5::Xml
 )
@@ -35,19 +34,22 @@ set ( PAYEEIDENTIFIER_LOADER_SCRS
   payeeidentifierloader.cpp
 )
 
-add_library( kmm_payeeidentifier_loader STATIC
+add_library( kmm_payeeidentifier_loader SHARED
   ${PAYEEIDENTIFIER_LOADER_SCRS}
 )
 
+generate_export_header(kmm_payeeidentifier_loader BASE_NAME kmm_payeeidentifier_loader)
+
 target_link_libraries( kmm_payeeidentifier_loader
-  kmm_payeeidentifier
-  payeeidentifier_iban_bic
-  payeeidentifier_nationalAccount
-  payeeidentifier_unavailable
-  KF5::I18n
-  Qt5::Widgets
-  Qt5::Core
+  PUBLIC
+    Qt5::Core
+  PRIVATE
+    Qt5::Widgets
+    KF5::Service
 )
+
+install(TARGETS kmm_payeeidentifier_loader
+  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 if(BUILD_TESTING)
   add_subdirectory(tests)

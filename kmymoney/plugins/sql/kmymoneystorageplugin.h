@@ -18,8 +18,6 @@
 #ifndef KMYMONEYSTORAGEPLUGIN_H
 #define KMYMONEYSTORAGEPLUGIN_H
 
-#include "kmm_mymoney_export.h"
-
 #include <QObject>
 #include <QVariantList>
 
@@ -31,7 +29,7 @@ namespace KMyMoneyPlugin
  * @brief Interface for plugins which store data in an sql database
  *
  */
-class KMM_MYMONEY_EXPORT storagePlugin : public QObject
+class storagePlugin : public QObject
 {
   Q_OBJECT
 

@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 

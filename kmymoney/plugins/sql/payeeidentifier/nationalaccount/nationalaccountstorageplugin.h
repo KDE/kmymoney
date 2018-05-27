@@ -19,7 +19,7 @@
 #ifndef NATIONALACCOUNTSTORAGEPLUGIN_H
 #define NATIONALACCOUNTSTORAGEPLUGIN_H
 
-#include "mymoney/storage/kmymoneystorageplugin.h"
+#include "sql/kmymoneystorageplugin.h"
 
 class nationalAccountStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {

@@ -24,8 +24,13 @@ set_target_properties(csvexporter
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(csvexporter
-  kmm_mymoney kmm_plugin
-  Alkimia::alkimia
+  PUBLIC
+    kmm_mymoney
+    Alkimia::alkimia
+  PRIVATE
+    KF5::Completion
+    KF5::KIOWidgets
+    kmm_plugin
 )
 
 ########### install files ###############

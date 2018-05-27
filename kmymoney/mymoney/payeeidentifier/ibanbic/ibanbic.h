@@ -28,6 +28,8 @@
 
 class ibanBicData;
 
+namespace KMyMoneyPlugin { class DataPlugin; }
+
 namespace payeeIdentifiers
 {
 /**
@@ -137,9 +139,7 @@ public:
    *
    * Uses any available information to return an institutionName
    */
-  QString institutionName() const {
-    return institutionNameByBic(bic());
-  }
+  QString institutionName() const;
 
   bool operator==(const payeeIdentifierData& other) const final override;
   bool operator==(const ibanBic& other) const;
@@ -249,8 +249,7 @@ private:
 
   QString m_ownerName;
 
-  static ::ibanBicData* getIbanBicData();
-  static ::ibanBicData* m_ibanBicData;
+  static KMyMoneyPlugin::DataPlugin *getIbanBicData();
 
   static QString canonizeBic(const QString& bic);
 };

@@ -20,6 +20,10 @@
 #include <QDebug>
 
 #include "payeeidentifier/payeeidentifierloader.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifier/unavailableplugin/unavailableplugin.h"
+#include "payeeidentifier.h"
 
 MyMoneyPayeeIdentifierContainer::MyMoneyPayeeIdentifierContainer()
     : m_payeeIdentifiers(QList< ::payeeIdentifier >())
@@ -91,7 +95,23 @@ void MyMoneyPayeeIdentifierContainer::loadXML(QDomElement node)
   const uint identifierNodesLength = identifierNodes.length();
   for (uint i = 0; i < identifierNodesLength; ++i) {
     const QDomElement element = identifierNodes.item(i).toElement();
-    ::payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML(element);
+
+    const auto payeeIdentifierId = element.attribute("type");
+    payeeIdentifierData* identData;
+    if (payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid()) {
+      auto creator = new payeeIdentifiers::ibanBic();
+      identData = creator->createFromXml(element);
+      delete creator;
+    } else if (payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()) {
+      auto creator = new payeeIdentifiers::nationalAccount();
+      identData = creator->createFromXml(element);
+      delete creator;
+    } else {
+      identData = new payeeIdentifiers::payeeIdentifierUnavailable(element);
+    }
+    ::payeeIdentifier ident(identData);
+    ident.m_id = element.attribute("id", 0).toUInt();
+
     if (ident.isNull()) {
       qWarning() << "Could not load payee identifier" << element.attribute("type", "*no pidid set*");
       continue;

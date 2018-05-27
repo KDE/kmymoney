@@ -29,6 +29,9 @@ set_target_properties(gncimporter
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(gncimporter
-  kmm_plugin
-  Alkimia::alkimia
+  PUBLIC
+    kmm_plugin
+  PRIVATE
+    KF5::Completion
+    Alkimia::alkimia
 )

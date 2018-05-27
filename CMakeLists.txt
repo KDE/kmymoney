@@ -51,8 +51,8 @@ else()
 endif()
 
 find_package(Qt5 5.6 REQUIRED
-  COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport
-  OPTIONAL_COMPONENTS Concurrent QuickWidgets)
+  COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport
+  OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
 
 find_package(KF5 5.2 REQUIRED
   COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
@@ -140,6 +140,11 @@ cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
 
 add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database (note: no encryption yet supported).")
+
+cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
+                       "Qt5Sql_FOUND" OFF)
+
+add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
 # check for optional QWebEngine
 option(ENABLE_WEBENGINE "Enable QWebEngine" OFF)

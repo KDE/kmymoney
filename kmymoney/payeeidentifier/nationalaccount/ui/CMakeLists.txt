@@ -16,9 +16,9 @@ add_library( payeeidentifier_nationalAccount_ui MODULE
 )
 
 target_link_libraries( payeeidentifier_nationalAccount_ui
-  payeeidentifier_nationalAccount
   Qt5::Core
   kmm_widgets
+  kmm_mymoney
 )
 
 install(TARGETS payeeidentifier_nationalAccount_ui

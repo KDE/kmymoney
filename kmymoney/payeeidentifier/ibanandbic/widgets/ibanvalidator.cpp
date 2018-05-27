@@ -18,7 +18,7 @@
 
 #include "ibanvalidator.h"
 
-#include "../ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include <KLocalizedString>
 
 #include "widgetenums.h"

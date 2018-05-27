@@ -21,7 +21,7 @@
 
 #include <QStyledItemDelegate>
 
-#include "../nationalaccount.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 
 class nationalAccountDelegate : public QStyledItemDelegate

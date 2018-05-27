@@ -10,6 +10,7 @@ set(sqlstorage_SOURCES
   mymoneydbdriver.cpp
   kselectdatabasedlg.cpp
   kgeneratesqldlg.cpp
+  kmymoneystorageplugin.cpp
   )
 
 ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
@@ -30,6 +31,8 @@ target_link_libraries(sqlstorage
   PUBLIC
     kmm_plugin
     kmm_widgets
+  PRIVATE
+    Qt5::Sql
     kmm_utils_platformtools
 )
 

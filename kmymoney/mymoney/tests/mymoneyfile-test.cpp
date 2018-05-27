@@ -39,7 +39,7 @@
 #include "mymoneyenums.h"
 #include "onlinejob.h"
 
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiertyped.h"
 
@@ -1536,7 +1536,7 @@ void MyMoneyFileTest::testPayeeWithIdentifier()
 
     p = m->payee(p.id());
 
-    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(ident);
     iban->setIban(QLatin1String("DE82 2007 0024 0066 6446 00"));
 

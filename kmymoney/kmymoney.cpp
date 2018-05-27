@@ -151,6 +151,7 @@
 #include "plugins/interfaceloader.h"
 #include "plugins/onlinepluginextended.h"
 #include "pluginloader.h"
+#include "kmymoneyplugin.h"
 
 #include "tasks/credittransfer.h"
 
@@ -268,11 +269,6 @@ public:
 
   /** the configuration object of the application */
   KSharedConfigPtr m_config;
-
-  /**
-   * @brief Structure of plugins objects by their interfaces
-   */
-  KMyMoneyPlugin::Container m_plugins;
 
   /**
     * The following variable represents the state while crafting a backup.
@@ -833,7 +829,7 @@ public:
       m_fileType = KMyMoneyApp::KmmXML;
     } else if (gncexp.indexIn(txt) != -1) {
 
-      for (const auto& plugin : m_plugins.storage) {
+      for (const auto& plugin : pPlugins.storage) {
         if (plugin->formatName().compare(QLatin1String("GNC")) == 0) {
           pReader = plugin->reader();
           break;
@@ -900,7 +896,7 @@ public:
 
     auto rc = false;
     auto pluginFound = false;
-    for (const auto& plugin : m_plugins.storage) {
+    for (const auto& plugin : pPlugins.storage) {
       if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
         rc = plugin->open(pStorage, url);
         pluginFound = true;
@@ -978,7 +974,7 @@ public:
       if (url.scheme() == QLatin1String("sql")) {
           rc = false;
           auto pluginFound = false;
-          for (const auto& plugin : m_plugins.storage) {
+          for (const auto& plugin : pPlugins.storage) {
               if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
                   rc = plugin->save(url);
                   pluginFound = true;
@@ -1700,10 +1696,10 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // now initialize the plugin structure
   createInterfaces();
-  KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, d->m_plugins, this, guiFactory());
-  onlineJobAdministration::instance()->setOnlinePlugins(d->m_plugins.extended);
-  d->m_myMoneyView->setOnlinePlugins(d->m_plugins.online);
-  d->m_myMoneyView->setStoragePlugins(d->m_plugins.storage);
+  KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, pPlugins, this, guiFactory());
+  onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
+  d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
+  d->m_myMoneyView->setStoragePlugins(pPlugins.storage);
 
   setCentralWidget(frame);
 
@@ -1750,7 +1746,7 @@ KMyMoneyApp::~KMyMoneyApp()
   onlineJobAdministration::instance()->clearCaches();
 
   // we need to unload all plugins before we destroy anything else
-  KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Unload, d->m_plugins, this, guiFactory());
+  KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Unload, pPlugins, this, guiFactory());
   d->removeStorage();
 
 #ifdef KF5Holidays_FOUND
@@ -2519,7 +2515,7 @@ void KMyMoneyApp::slotFileOpen()
   fileExtensions.append(i18n("KMyMoney files (*.kmy *.xml)"));
   fileExtensions.append(QLatin1String(";;"));
 
-  for (const auto& plugin : d->m_plugins.storage) {
+  for (const auto& plugin : pPlugins.storage) {
     const auto fileExtension = plugin->fileExtension();
     if (!fileExtension.isEmpty()) {
       fileExtensions.append(fileExtension);
@@ -2543,8 +2539,8 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   bool result = false;
 
   // Iterate through the plugins and see if there's a loaded plugin who can handle it
-  QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = d->m_plugins.importer.constBegin();
-  while (it_plugin != d->m_plugins.importer.constEnd()) {
+  QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
+  while (it_plugin != pPlugins.importer.constEnd()) {
     if ((*it_plugin)->isMyFormat(url.path())) {
       result = true;
       break;
@@ -2555,7 +2551,7 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   // If we did not find a match, try importing it as a KMM statement file,
   // which is really just for testing.  the statement file is not exposed
   // to users.
-  if (it_plugin == d->m_plugins.importer.constEnd())
+  if (it_plugin == pPlugins.importer.constEnd())
     if (MyMoneyStatement::isStatementFile(url.path()))
       result = true;
 
@@ -2658,7 +2654,7 @@ bool KMyMoneyApp::slotFileSave()
   setEnabled(false);
   if (isDatabase()) {
     auto pluginFound = false;
-    for (const auto& plugin : d->m_plugins.storage) {
+    for (const auto& plugin : pPlugins.storage) {
       if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
         rc = plugin->save(d->m_fileName);
         pluginFound = true;
@@ -3082,11 +3078,11 @@ void KMyMoneyApp::slotShowCredits()
 void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 {
   if(dialogName.compare(QLatin1String("Plugins")) == 0) {
-    KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, d->m_plugins, this, guiFactory());
+    KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, pPlugins, this, guiFactory());
     onlineJobAdministration::instance()->updateActions();
-    onlineJobAdministration::instance()->setOnlinePlugins(d->m_plugins.extended);
-    d->m_myMoneyView->setOnlinePlugins(d->m_plugins.online);
-    d->m_myMoneyView->setStoragePlugins(d->m_plugins.storage);
+    onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
+    d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
+    d->m_myMoneyView->setStoragePlugins(pPlugins.storage);
     return;
   }
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
@@ -4103,8 +4099,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         // remove the statement files
         d->unlinkStatementXML();
 
-        QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = d->m_plugins.importer.constBegin();
-        while (it_plugin != d->m_plugins.importer.constEnd()) {
+        QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
+        while (it_plugin != pPlugins.importer.constEnd()) {
           if ((*it_plugin)->isMyFormat(url)) {
             QList<MyMoneyStatement> statements;
             if (!(*it_plugin)->import(url)) {
@@ -4119,7 +4115,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         // If we did not find a match, try importing it as a KMM statement file,
         // which is really just for testing.  the statement file is not exposed
         // to users.
-        if (it_plugin == d->m_plugins.importer.constEnd())
+        if (it_plugin == pPlugins.importer.constEnd())
           if (MyMoneyStatement::isStatementFile(url))
             MyMoneyStatementReader::importStatement(url, false, &progressCallback);
 

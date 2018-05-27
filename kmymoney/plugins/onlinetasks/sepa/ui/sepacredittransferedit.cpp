@@ -33,7 +33,7 @@
 #include "payeeidentifier/ibanandbic/widgets/bicvalidator.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "misc/charvalidator.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "styleditemdelegateforwarder.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
 #include "onlinejobtyped.h"

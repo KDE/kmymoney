@@ -1,5 +1,4 @@
 add_subdirectory( onlinetasks )
-add_subdirectory( ibanbicdata )
 add_subdirectory( interfaces )
 add_subdirectory( csv )
 add_subdirectory( qif )
@@ -12,6 +11,10 @@ add_subdirectory( views )
 
 if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
+endif()
+
+if(ENABLE_IBANBICDATA)
+  add_subdirectory(ibanbicdata)
 endif()
 
 if (ENABLE_KBANKING)
@@ -44,7 +47,7 @@ set(kmm_plugin_LIB_SRCS
   interfaceloader.cpp
 )
 
-set(plugins_HEADERS
+set(plugin_HEADERS
   appinterface.h
   importinterface.h
   kmymoneyplugin.h
@@ -58,12 +61,15 @@ add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
 target_link_libraries(kmm_plugin
   PUBLIC
-  KF5::XmlGui
-  KF5::KCMUtils
-  KF5::KIOWidgets
-  Qt5::Gui
-  Qt5::Widgets
-  kmm_mymoney
+    Qt5::Core
+    KF5::XmlGui
+  PRIVATE
+    KF5::KCMUtils
+    KF5::KIOWidgets
+    Qt5::Gui
+    Qt5::Widgets
+  INTERFACE
+    kmm_mymoney
 )
 
 set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
@@ -73,7 +79,7 @@ set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION
 install(TARGETS kmm_plugin
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(FILES ${plugins_HEADERS}
+install(FILES ${plugin_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
 install(FILES

@@ -18,25 +18,22 @@
 #ifndef PAYEEIDENTIFIERLOADER_H
 #define PAYEEIDENTIFIERLOADER_H
 
-#include "payeeidentifier.h"
-
-#include <QHash>
-#include <QDomElement>
+#include "kmm_payeeidentifier_loader_export.h"
 
 class QAbstractItemDelegate;
+class QString;
+class QObject;
+class QStringList;
 
 /**
  *
  * @todo Load delegates dynamically
  */
-class payeeIdentifierLoader
+class KMM_PAYEEIDENTIFIER_LOADER_EXPORT payeeIdentifierLoader
 {
 public:
   payeeIdentifierLoader();
   ~payeeIdentifierLoader();
-
-  payeeIdentifier createPayeeIdentifier(const QString& payeeIdentifierId);
-  payeeIdentifier createPayeeIdentifierFromXML(const QDomElement& element);
 
   /**
    * @brief Create a delegate to show/edit
@@ -61,20 +58,11 @@ public:
    */
   QStringList availableDelegates();
 
-  /**
-   * @brief Human readable name of a delegate for a given payeeIdentifierId
-   */
-  QString translatedDelegateName(const QString& payeeIdentifierId);
-
-  /** I take ownership */
-  void addPayeeIdentifier(payeeIdentifierData *const identifier);
-
   static payeeIdentifierLoader* instance() {
     return &m_self;
   }
 
 private:
-  QHash<QString, payeeIdentifierData*> m_identifiers;
   static payeeIdentifierLoader m_self;
 };
 

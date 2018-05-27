@@ -22,6 +22,8 @@
 
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "models/payeeidentifiercontainermodel.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
@@ -54,10 +56,16 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
 
   comboBox->addItem(i18n("Please select the account number type"));
   payeeIdentifierLoader *const loader = payeeIdentifierLoader::instance();
-  QStringList pidids = loader->availableDelegates();
-  Q_FOREACH(QString pidid, pidids) {
-    comboBox->addItem(loader->translatedDelegateName(pidid), QVariant(pidid));
+
+  for (const auto &pidid : loader->availableDelegates()) {
+    QString delegateName;
+    if (pidid == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      delegateName = i18n("IBAN and BIC");
+    else if (pidid == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      delegateName = i18n("National Account Number");
+    comboBox->addItem(delegateName, QVariant(pidid));
   }
+
   return comboBox;
 }
 
@@ -66,7 +74,13 @@ void payeeIdentifierSelectionDelegate::setModelData(QWidget* editor, QAbstractIt
   QComboBox *const comboBox = qobject_cast<QComboBox*>(editor);
   const QString selectedPidType = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0), Qt::UserRole).toString();
   payeeIdentifier orig = model->data(index, payeeIdentifierContainerModel::payeeIdentifier).value<payeeIdentifier>();
-  payeeIdentifier ident(orig.id(), payeeIdentifierLoader::instance()->createPayeeIdentifier(selectedPidType));
+
+  payeeIdentifier ident;
+  if (selectedPidType == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+    ident = payeeIdentifier(orig.id(), new payeeIdentifiers::ibanBic());
+  else if (selectedPidType == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+    ident = payeeIdentifier(orig.id(), new payeeIdentifiers::nationalAccount());
+
   model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierContainerModel::payeeIdentifier);
 }
 

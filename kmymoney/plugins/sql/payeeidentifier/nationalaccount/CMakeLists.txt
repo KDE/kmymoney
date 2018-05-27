@@ -2,6 +2,7 @@
 
 set ( nationalAccount_STORAGE_PLUGIN_SCRS
   nationalaccountstorageplugin.cpp
+  ../../kmymoneystorageplugin.cpp
 )
 
 add_library( payeeidentifier_nationalaccount_storageplugin MODULE

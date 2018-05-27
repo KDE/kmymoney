@@ -2,6 +2,7 @@
 
 set ( sepa_STORAGE_PLUGIN_SCRS
   sepastorageplugin.cpp
+  ../../kmymoneystorageplugin.cpp
 )
 
 add_library( credittransfer_sepa_storageplugin MODULE

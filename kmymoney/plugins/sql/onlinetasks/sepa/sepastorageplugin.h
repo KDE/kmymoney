@@ -19,7 +19,7 @@
 #ifndef SEPASTORAGEPLUGIN_H
 #define SEPASTORAGEPLUGIN_H
 
-#include "kmymoneystorageplugin.h"
+#include "sql/kmymoneystorageplugin.h"
 
 #include <QVariantList>
 

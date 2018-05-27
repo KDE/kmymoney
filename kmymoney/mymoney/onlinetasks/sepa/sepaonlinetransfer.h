@@ -22,7 +22,7 @@
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 
 /**
  * @brief SEPA Credit Transfer

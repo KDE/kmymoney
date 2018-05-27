@@ -19,7 +19,7 @@
 #ifndef IBANBICSTORAGEPLUGIN_H
 #define IBANBICSTORAGEPLUGIN_H
 
-#include "mymoney/storage/kmymoneystorageplugin.h"
+#include "sql/kmymoneystorageplugin.h"
 
 class ibanBicStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {

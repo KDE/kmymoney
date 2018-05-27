@@ -20,7 +20,7 @@
 
 #include <KLocalizedString>
 
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "widgetenums.h"
 
 bicValidator::bicValidator(QObject* parent)

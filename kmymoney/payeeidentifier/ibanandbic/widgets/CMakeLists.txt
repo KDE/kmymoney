@@ -37,10 +37,10 @@ target_include_directories(payeeidentifier_iban_bic_widgets
 )
 
 target_link_libraries( payeeidentifier_iban_bic_widgets PUBLIC
-  payeeidentifier_iban_bic
   Qt5::Core
   kmm_mymoney
   kmm_widgets
+  kmm_plugin
 )
 
 generate_export_header( payeeidentifier_iban_bic_widgets )
@@ -59,9 +59,9 @@ add_library( payeeidentifier_iban_bic_delegates MODULE
 )
 
 target_link_libraries( payeeidentifier_iban_bic_delegates
-  payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   kmm_widgets
+  kmm_mymoney
   Qt5::Core
 )
 

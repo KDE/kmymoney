@@ -49,7 +49,7 @@
 #include "mymoneyinstitution.h"
 #include "mymoneypayee.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "mymoneystoragenames.h"
 #include "icons/icons.h"

@@ -25,9 +25,10 @@
 #include <QStyle>
 #include <QAbstractItemView>
 
-#include "../bicmodel.h"
+#include "kmymoneyplugin.h"
 #include "bicvalidator.h"
 #include "kmymoneyvalidationfeedback.h"
+#include "plugins/ibanbicdata/ibanbicdataenums.h"
 
 class bicItemDelegate : public QStyledItemDelegate
 {
@@ -44,9 +45,10 @@ KBicEdit::KBicEdit(QWidget* parent)
   : KLineEdit(parent)
 {
   QCompleter* completer = new QCompleter(this);
+  if (auto plugin = pPlugins.data.value(QString::fromLatin1("ibanbicdata"), nullptr))
+    if (auto model = plugin->requestData(QString(), eIBANBIC::DataType::bicModel).value<QAbstractItemModel *>())
+      completer->setModel(model);
 
-  bicModel* model = new bicModel(this);
-  completer->setModel(model);
   m_popupDelegate = new bicItemDelegate(this);
   completer->popup()->setItemDelegate(m_popupDelegate);
 
@@ -104,7 +106,7 @@ void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
   QFontMetrics smallMetrics(smallFont);
   QRect nameRect = style->alignedRect(opt.direction, Qt::AlignBottom, QSize(textArea.width(), smallMetrics.lineSpacing()), textArea);
   painter->setFont(smallFont);
-  style->drawItemText(painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, index.model()->data(index, bicModel::InstitutionNameRole).toString(), option.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Mid);
+  style->drawItemText(painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, index.model()->data(index, eIBANBIC::DisplayRole::InstitutionNameRole).toString(), option.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Mid);
   painter->restore();
 
   // Paint BIC

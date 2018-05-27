@@ -6,5 +6,5 @@ ecm_add_tests(${tests_sources}
     "ibanandbic-"
   LINK_LIBRARIES
     Qt5::Test
-    payeeidentifier_iban_bic
+    kmm_mymoney
 )

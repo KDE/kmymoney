@@ -27,7 +27,7 @@
 #include "mymoney/onlinejobadministration.h"
 #include "misc/validators.h"
 #include "payeeidentifiertyped.h"
-#include "ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "sepaonlinetransfer.h"
 
 static const unsigned short defaultTextKey = 51;

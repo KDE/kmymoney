@@ -23,9 +23,13 @@
 #  define KMM_MYMONEY_UNIT_TESTABLE
 #endif
 
+#include "kmymoneyplugin.h"
+
 #include <QObject>
 #include <QVariant>
 #include <QSqlDatabase>
+
+namespace eIBANBIC {enum bicAllocationStatus : unsigned int;}
 
 /**
  * @brief This class implements everything that needs lookup
@@ -35,19 +39,17 @@
  *
  * @interal This class is made if a cache will be needed in future.
  */
-class ibanBicData : public QObject
+class ibanBicData : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPlugin
 {
   Q_OBJECT
+  Q_INTERFACES(KMyMoneyPlugin::DataPlugin)
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  ~ibanBicData();
+    explicit ibanBicData(QObject *parent, const QVariantList &args);
+  ~ibanBicData() override;
 
-  enum bicAllocationStatus {
-    bicAllocated = 0,
-    bicNotAllocated,
-    bicAllocationUncertain
-  };
+  QVariant requestData(const QString &arg, uint type) override;
 
   int bbanLength(const QString& countryCode);
   int bankIdentifierPosition(const QString& countryCode);
@@ -76,7 +78,7 @@ public:
 
   QString extractBankIdentifier(const QString& iban);
 
-  bicAllocationStatus isBicAllocated(const QString& bic);
+  eIBANBIC::bicAllocationStatus isBicAllocated(const QString& bic);
 
 private:
   QVariant findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type);

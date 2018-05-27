@@ -17,8 +17,8 @@
  */
 
 #include "internationalaccountidentifier-test.h"
-#include "../ibanbic.h"
-#include "../ibanbicdata.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "plugins/ibanbicdata/ibanbicdata.h"
 
 #include <QtTest>
 
