@@ -913,7 +913,6 @@ public:
 
     if(!rc) {
       removeStorage();
-      delete pStorage;
       return false;
     }
 
