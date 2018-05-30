@@ -372,9 +372,9 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
       //
       //  Actions.
       //
-      if ((*itSplit).action() == QLatin1String("Dividend")) {
+      if ((*itSplit).action() == MyMoneySplit::ActionDividend) {
         strAction = QLatin1String("DivX");
-      } else if ((*itSplit).action() == QLatin1String("IntIncome")) {
+      } else if ((*itSplit).action() == MyMoneySplit::ActionInterestIncome) {
         strAction = QLatin1String("IntIncX");
       }
       if ((strAction == QLatin1String("DivX")) || (strAction == QLatin1String("IntIncX"))) {
@@ -384,21 +384,21 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                              i18n("Invalid transaction"));
           return;
         }
-      } else if ((*itSplit).action() == QLatin1String("Buy")) {
+      } else if ((*itSplit).action() == MyMoneySplit::ActionBuyShares) {
         qty = (*itSplit).shares();
         if (qty.isNegative()) {
           strAction = QLatin1String("Sell");
         } else {
           strAction = QLatin1String("Buy");
         }
-      } else if ((*itSplit).action() == QLatin1String("Add")) {
+      } else if ((*itSplit).action() == MyMoneySplit::ActionAddShares) {
         qty = (*itSplit).shares();
         if (qty.isNegative()) {
           strAction = QLatin1String("Shrsout");
         } else {
           strAction = QLatin1String("Shrsin");
         }
-      } else if ((*itSplit).action() == QLatin1String("Reinvest")) {
+      } else if ((*itSplit).action() == MyMoneySplit::ActionReinvestDividend) {
         qty = (*itSplit).shares();
         strAmount = (*itSplit).value().formatMoney("", 2).remove(localeThousands) + m_separator;
         strAction = QLatin1String("ReinvDiv");

@@ -339,16 +339,16 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
       value = (*it).value();
 
       accName = acc.name();
-      if ((actionType == "Dividend") || (actionType == "Buy") || (actionType == "IntIncome")) {
+      if ((actionType == MyMoneySplit::ActionDividend) || (actionType == MyMoneySplit::ActionBuyShares) || (actionType == MyMoneySplit::ActionInterestIncome)) {
         isXfer = true;
       }
       //
       //  Actions.
       //
       QString action;
-      if ((*it).action() == "Dividend") {
+      if ((*it).action() == MyMoneySplit::ActionDividend) {
         action = "DivX";
-      } else if ((*it).action() == "IntIncome") {
+      } else if ((*it).action() == MyMoneySplit::ActionInterestIncome) {
         action = "IntIncX";
       }
       if ((action == "DivX") || (action == "IntIncX")) {
@@ -364,21 +364,21 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
         if (noError) {
           s += 'T' + txt + '\n';
         }
-      } else if ((*it).action() == "Buy") {
+      } else if ((*it).action() == MyMoneySplit::ActionBuyShares) {
 
         if (qty.isNegative()) {
           action = "Sell";
         } else {
           action = "Buy";
         }
-      } else if ((*it).action() == "Add") {
+      } else if ((*it).action() == MyMoneySplit::ActionAddShares) {
         qty = (*it).shares();
         if (qty.isNegative()) {
           action = "Shrsout";
         } else {
           action = "Shrsin";
         }
-      } else if ((*it).action() == "Reinvest") {
+      } else if ((*it).action() == MyMoneySplit::ActionReinvestDividend) {
         action = "ReinvDiv";
       } else {
         action = (*it).action();
