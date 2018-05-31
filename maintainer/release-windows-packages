@@ -93,6 +93,7 @@ movepackage) ## move windows binary packages into upload folder
         mkdir -p out
         find tmp/ -type f -name '*.exe' -exec cp {} out \;
         find tmp/ -type f -name '*.7z' -exec cp {} out \;
+        find tmp/ -type f -name '*.xz' -exec cp {} out \;
         touch $1.finished
         ;;
 
@@ -105,12 +106,12 @@ repacksource) ## repackage source tar ball to 7z
         ;;
 
 createsha) ## create sha256sums
-        (cd work/out; find -type f -name '*.7z' -o -name '*.exe' | sed 's,\./,,g' | sort | xargs sha256sum > $NAME.sha256sum)
+        (cd work/out; find -type f -name '*.7z' -o -name '*.exe' -o -name '*.xz' | sed 's,\./,,g' | sort | xargs sha256sum > $NAME.sha256sum)
         touch work/$1.finished
         ;;
 
 upload) ## upload files to staging area
-        for i in $(find work/out -name '*.7z' -o -name '*.exe'); do
+        for i in $(find work/out -name '*.7z' -o -name '*.exe' -o -name '*.xz'); do
             curl -T $i  ftp://upload.kde.org/incoming/
         done
         touch work/$1.finished
