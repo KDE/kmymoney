@@ -761,6 +761,13 @@ void kMyMoneySplitTable::slotCancelEdit()
 {
   MYMONEYTRACER(tracer);
   if (isEditMode()) {
+    /*
+     * Prevent asking to add a new category which happens if the user entered any text
+     * caused by emitting signals in KMyMoneyCombo::focusOutEvent() on focus out event.
+     * (see bug 344409)
+     */
+    if (m_editCategory)
+      m_editCategory->lineEdit()->setText(QString());
     destroyEditWidgets();
     this->setFocus();
   }
