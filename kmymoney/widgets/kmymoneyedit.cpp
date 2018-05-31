@@ -206,6 +206,21 @@ static const uchar resetButtonImage[] = {
   0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
 };
 
+/**
+ * Force geometry update of a hidden widget,
+ * see https://stackoverflow.com/a/3996525 for details
+ *
+ * @parem widget widget to force update
+ */
+void forceUpdate(QWidget *widget)
+{
+    widget->setAttribute(Qt::WA_DontShowOnScreen);
+    widget->show();
+    widget->updateGeometry();
+    widget->hide();
+    widget->setAttribute(Qt::WA_DontShowOnScreen, false);
+}
+
 void kMyMoneyEdit::init()
 {
   allowEmpty = false;
@@ -225,7 +240,7 @@ void kMyMoneyEdit::init()
   m_calculatorFrame->setLineWidth(3);
 
   m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
-  m_calculatorFrame->hide();
+  forceUpdate(m_calculatorFrame);
 
   m_calcButton = new KPushButton(KIcon("accessories-calculator"), QString(""), this);
   m_calcButton->setFocusProxy(m_edit);
