@@ -47,9 +47,9 @@ clean) ## clean working area
 download) ## download rpm packages
         cd work
         rm -rf binaries
-        osc $oscoptions getbinaries $ROOT32 $PACKAGENAME32-installer $REPO x86_64
+        osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
         if test -n "$ROOT64"; then
-            osc $oscoptions getbinaries $ROOT64 $PACKAGENAME64-installer $REPO x86_64
+            osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
         fi
         cd ..
         $self downloadsrc
