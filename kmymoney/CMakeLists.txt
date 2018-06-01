@@ -105,7 +105,7 @@ install(FILES org.kde.kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
 install(FILES org.kde.kmymoney.appdata.xml
-  DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/
+  DESTINATION ${SHARE_INSTALL_PREFIX}/metainfo/
   )
 
 install(FILES x-kmymoney.xml
