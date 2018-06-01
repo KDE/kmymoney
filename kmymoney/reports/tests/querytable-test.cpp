@@ -33,7 +33,6 @@
 #include "mymoneysplit.h"
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
-#include "mymoneystoragexml.h"
 #include "mymoneyexception.h"
 #include "kmymoneysettings.h"
 

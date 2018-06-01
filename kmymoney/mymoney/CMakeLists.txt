@@ -33,9 +33,7 @@ set(kmm_mymoney_LIB_SRCS
   # which are in fact available in kmm_mymoney
   set(storage_a_SOURCES
     ./storage/imymoneystorageformat.cpp
-    ./storage/mymoneystoragexml.cpp
     ./storage/mymoneystoragemgr.cpp
-    ./storage/mymoneystorageanon.cpp
     ./storage/mymoneystoragenames.cpp
     )
 

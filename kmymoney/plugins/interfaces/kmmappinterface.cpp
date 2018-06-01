@@ -46,9 +46,19 @@ bool KMyMoneyPlugin::KMMAppInterface::isDatabase()
   return m_app->isDatabase();
 }
 
+bool KMyMoneyPlugin::KMMAppInterface::isNativeFile()
+{
+  return m_app->isNativeFile();
+}
+
 QUrl KMyMoneyPlugin::KMMAppInterface::filenameURL() const
 {
   return m_app->filenameURL();
+}
+
+void KMyMoneyPlugin::KMMAppInterface::writeFilenameURL(const QUrl &url)
+{
+  m_app->writeFilenameURL(url);
 }
 
 QUrl KMyMoneyPlugin::KMMAppInterface::lastOpenedURL()
@@ -79,4 +89,24 @@ void KMyMoneyPlugin::KMMAppInterface::updateCaption(bool skipActions)
 QTimer* KMyMoneyPlugin::KMMAppInterface::autosaveTimer()
 {
  return m_app->autosaveTimer();
+}
+
+KMyMoneyAppCallback KMyMoneyPlugin::KMMAppInterface::progressCallback()
+{
+  return m_app->progressCallback();
+}
+
+void KMyMoneyPlugin::KMMAppInterface::writeLastUsedDir(const QString &directory)
+{
+  m_app->writeLastUsedDir(directory);
+}
+
+QString KMyMoneyPlugin::KMMAppInterface::readLastUsedDir() const
+{
+  return m_app->readLastUsedDir();
+}
+
+void KMyMoneyPlugin::KMMAppInterface::consistencyCheck(bool alwaysDisplayResult)
+{
+  m_app->consistencyCheck(alwaysDisplayResult);
 }

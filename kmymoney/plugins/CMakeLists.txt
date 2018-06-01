@@ -13,6 +13,10 @@ if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
 endif()
 
+# if(ENABLE_XMLSTORAGE)
+  add_subdirectory(xml)
+# endif()
+
 if(ENABLE_IBANBICDATA)
   add_subdirectory(ibanbicdata)
 endif()

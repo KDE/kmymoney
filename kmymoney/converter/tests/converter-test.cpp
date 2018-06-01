@@ -31,7 +31,6 @@ using namespace test;
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
 #include "mymoneyexception.h"
-#include "storage/mymoneystoragexml.h"
 #include "storage/mymoneystoragedump.h"
 #include "webpricequote.h"
 

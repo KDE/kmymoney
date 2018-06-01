@@ -59,13 +59,8 @@
 
 #include "kmymoneysettings.h"
 #include "kmymoneytitlelabel.h"
-#include <libkgpgfile/kgpgfile.h>
 #include "kcurrencyeditdlg.h"
-#include "mymoneystoragemgr.h"
-#include "mymoneystoragebin.h"
 #include "mymoneyexception.h"
-#include "mymoneystoragexml.h"
-#include "mymoneystorageanon.h"
 #include "khomeview.h"
 #include "kaccountsview.h"
 #include "kcategoriesview.h"

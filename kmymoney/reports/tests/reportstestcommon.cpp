@@ -39,7 +39,6 @@ using namespace reports;
 #include "mymoneyreport.h"
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
-#include "mymoneystoragexml.h"
 
 namespace test
 {

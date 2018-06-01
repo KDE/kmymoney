@@ -62,6 +62,7 @@ class creditTransfer;
 class IMyMoneyOperationsFormat;
 
 template <class T> class onlineJobTyped;
+typedef  void (*KMyMoneyAppCallback)(int, int, const QString &);
 
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eMenu { enum class Action;
@@ -330,8 +331,9 @@ public:
 
   QString filename() const;
   QUrl filenameURL() const;
+  void writeFilenameURL(const QUrl &url);
 
-  void addToRecentFiles(const QUrl& url);
+  void addToRecentFiles(const QUrl &url);
   QTimer* autosaveTimer();
 
   /**
@@ -364,6 +366,10 @@ public:
   bool isNativeFile();
 
   bool fileOpen() const;
+
+  KMyMoneyAppCallback progressCallback();
+
+  void consistencyCheck(bool alwaysDisplayResult);
 
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
@@ -446,14 +452,6 @@ public Q_SLOTS:
     * @retval true save operation was successful
     */
   bool slotFileSave();
-
-  /**
-    * ask the user for the filename and save the current document
-    *
-    * @retval false save operation failed
-    * @retval true save operation was successful
-    */
-  bool slotFileSaveAs();
 
   /** asks for saving if the file is modified, then closes the actual file and window */
   void slotFileCloseWindow();

@@ -22,8 +22,6 @@
 #ifndef MYMONEYSTORAGEXML_H
 #define MYMONEYSTORAGEXML_H
 
-#include "kmm_mymoney_export.h"
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -67,7 +65,7 @@ typedef QPair<QString, QString> MyMoneySecurityPair;
 typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
 typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
-class KMM_MYMONEY_EXPORT MyMoneyStorageXML : public IMyMoneyOperationsFormat
+class MyMoneyStorageXML : public IMyMoneyOperationsFormat
 {
   friend class MyMoneyXmlContentHandler;
 public:

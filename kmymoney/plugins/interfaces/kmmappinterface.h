@@ -56,13 +56,19 @@ namespace KMyMoneyPlugin
     bool fileOpen() override;
 
     bool isDatabase() override;
+    bool isNativeFile() override;
     QUrl filenameURL() const override;
+    void writeFilenameURL(const QUrl &url) override;
     QUrl lastOpenedURL() override;
     void writeLastUsedFile(const QString& fileName) override;
     void slotFileOpenRecent(const QUrl &url) override;
     void addToRecentFiles(const QUrl& url) override;
     void updateCaption(bool skipActions = false) override;
     QTimer* autosaveTimer() override;
+    KMyMoneyAppCallback progressCallback() override;
+    void writeLastUsedDir(const QString &directory) override;
+    QString readLastUsedDir() const override;
+    void consistencyCheck(bool alwaysDisplayResult) override;
 
   private:
     KMyMoneyApp* m_app;

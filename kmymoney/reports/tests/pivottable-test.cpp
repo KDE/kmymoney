@@ -33,7 +33,6 @@
 #include "mymoneypayee.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragedump.h"
-#include "mymoneystoragexml.h"
 #include "mymoneyenums.h"
 
 #include "pivottable.h"

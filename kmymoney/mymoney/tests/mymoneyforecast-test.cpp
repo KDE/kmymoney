@@ -26,7 +26,6 @@
 #include "mymoneyexception.h"
 
 #include "mymoneystoragedump.h"
-#include "mymoneystoragexml.h"
 #include "reportstestcommon.h"
 
 #include "mymoneyinstitution.h"
