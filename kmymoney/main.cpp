@@ -304,7 +304,6 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
     kmymoney->slotFileQuit();
   }
 
-  kmymoney->updateCaption();
   kmymoney->centralWidget()->setEnabled(true);
   kmymoney->show();
   splash.reset();

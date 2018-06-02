@@ -127,6 +127,10 @@ void KGlobalLedgerView::executeCustomAction(eView::Action action)
       }
       break;
 
+    case eView::Action::DisableViewDepenedendActions:
+      pActions[Action::SelectAllTransactions]->setEnabled(false);
+      break;
+
     default:
       break;
   }
@@ -183,6 +187,7 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
     emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
   }
 
+  pActions[Action::SelectAllTransactions]->setEnabled(true);
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
@@ -264,7 +269,7 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
     Action::CancelTransaction, Action::DeleteTransaction, Action::MatchTransaction,
     Action::AcceptTransaction, Action::DuplicateTransaction, Action::ToggleReconciliationFlag, Action::MarkCleared,
     Action::GoToAccount, Action::GoToPayee, Action::AssignTransactionsNumber, Action::NewScheduledTransaction,
-    Action::CombineTransactions, Action::SelectAllTransactions, Action::CopySplits,
+    Action::CombineTransactions, Action::CopySplits,
   };
 
   for (const auto& a : actionsToBeDisabled)
@@ -279,7 +284,6 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
   pMenus[Menu::MarkTransaction]->setEnabled(false);
   pMenus[Menu::MarkTransactionContext]->setEnabled(false);
 
-  pActions[Action::SelectAllTransactions]->setEnabled(true);
   if (!d->m_selectedTransactions.isEmpty() && !d->m_selectedTransactions.first().isScheduled()) {
     // enable 'delete transaction' only if at least one of the
     // selected transactions does not reference a closed account
@@ -668,6 +672,10 @@ void KGlobalLedgerView::slotSelectByVariant(const QVariantList& variant, eView::
     case eView::Intent::ShowTransaction:
       if (variant.count() == 2)
         slotLedgerSelected(variant.at(0).toString(), variant.at(1).toString());
+      break;
+    case eView::Intent::SelectRegisterTransactions:
+      if (variant.count() == 1)
+        updateLedgerActions(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>());
       break;
     default:
       break;

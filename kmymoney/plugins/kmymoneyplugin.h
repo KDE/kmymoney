@@ -48,6 +48,8 @@ namespace KMyMoneyPlugin { class ImportInterface; }
 namespace KMyMoneyPlugin { class StatementInterface; }
 namespace KMyMoneyPlugin { class ViewInterface; }
 
+namespace eKMyMoney { enum class StorageType; }
+
 /**
  * @defgroup KMyMoneyPlugin
  *
@@ -295,7 +297,7 @@ public:
    * @param url URL of the file
    * @return true if successfully opened
    */
-  virtual bool open(MyMoneyStorageMgr *storage, const QUrl &url) = 0;
+  virtual MyMoneyStorageMgr *open(const QUrl &url) = 0;
 
   /**
    * @brief Saves storage into file
@@ -305,16 +307,17 @@ public:
   virtual bool save(const QUrl &url) = 0;
 
   /**
-   * @brief Returns storage reader
-   * @return storage reader
+   * @brief Saves storage into file
+   * @param url URL of the file
+   * @return true if successfully saved
    */
-  virtual IMyMoneyOperationsFormat* reader();
+  virtual bool saveAs() = 0;
 
   /**
    * @brief Storage identifier
    * @return Storage identifier
    */
-  virtual QString formatName() const = 0;
+  virtual eKMyMoney::StorageType storageType() const = 0;
 
   virtual QString fileExtension() const = 0;
 };

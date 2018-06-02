@@ -22,7 +22,6 @@ set(libdialogs_a_SOURCES
   kequitypriceupdatedlg.cpp
   kequitypriceupdateconfdlg.cpp
   kfindtransactiondlg.cpp
-  kgpgkeyselectiondlg.cpp
   kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp
   kmymoneyfileinfodlg.cpp
@@ -42,6 +41,7 @@ set(libdialogs_a_SOURCES
   transactioneditor.cpp
   stdtransactioneditor.cpp
   transactionmatcher.cpp
+  ksaveasquestion.cpp
 )
 
 set(dialogs_HEADERS
@@ -59,7 +59,6 @@ set(dialogs_UI
   kenterscheduledlg.ui
   kequitypriceupdatedlg.ui kequitypriceupdateconfdlg.ui
   kfindtransactiondlg.ui
-  kgpgkeyselectiondlg.ui
   kloadtemplatedlg.ui
   kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
   knewaccountdlg.ui knewbankdlg.ui
@@ -69,6 +68,7 @@ set(dialogs_UI
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
+  ksaveasquestion.ui
 )
 
 ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )

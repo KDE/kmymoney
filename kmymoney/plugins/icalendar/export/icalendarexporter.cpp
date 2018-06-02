@@ -37,6 +37,7 @@
 
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
+#include "viewinterface.h"
 
 struct iCalendarExporter::Private {
   QAction* m_action;
@@ -83,9 +84,11 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) 
   if (!icalFilePath.isEmpty())
     actionName = i18n("Schedules to iCalendar [%1]", icalFilePath);
 
-  d->m_action = actionCollection()->addAction("file_export_icalendar");
+  const auto &kpartgui = QStringLiteral("file_export_icalendar");
+  d->m_action = actionCollection()->addAction(kpartgui);
   d->m_action->setText(actionName);
   connect(d->m_action, &QAction::triggered, this, &iCalendarExporter::slotFirstExport);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 iCalendarExporter::~iCalendarExporter()

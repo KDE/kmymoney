@@ -94,6 +94,7 @@
 #include "dialogs/kequitypriceupdatedlg.h"
 #include "dialogs/kmymoneyfileinfodlg.h"
 #include "dialogs/knewbankdlg.h"
+#include "dialogs/ksaveasquestion.h"
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "dialogs/knewaccountdlg.h"
 #include "dialogs/editpersonaldatadlg.h"
@@ -105,7 +106,6 @@
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
 #include "dialogs/kloadtemplatedlg.h"
-#include "dialogs/kgpgkeyselectiondlg.h"
 #include "dialogs/ktemplateexportdlg.h"
 #include "dialogs/transactionmatcher.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
@@ -177,6 +177,7 @@
 #include "dialogenums.h"
 #include "viewenums.h"
 #include "menuenums.h"
+#include "kmymoneyenums.h"
 
 #include "misc/platformtools.h"
 
@@ -188,7 +189,6 @@
 using namespace Icons;
 using namespace eMenu;
 
-static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 //static constexpr char recoveryKeyId[] = "0xD2B08440";
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
@@ -210,15 +210,10 @@ class KMyMoneyApp::Private
 public:
   Private(KMyMoneyApp *app) :
       q(app),
-      m_statementXMLindex(0),
-      m_balanceWarning(0),
       m_backupState(backupStateE::BACKUP_IDLE),
       m_backupResult(0),
       m_backupMount(0),
       m_ignoreBackupExitCode(false),
-      m_fileOpen(false),
-      m_fmode(QFileDevice::ReadUser | QFileDevice::WriteUser),
-      m_fileType(KMyMoneyApp::KmmXML),
       m_myMoneyView(nullptr),
       m_startDialog(false),
       m_progressBar(nullptr),
@@ -228,9 +223,6 @@ public:
       m_progressTimer(nullptr),
       m_autoSavePeriod(0),
       m_inAutoSaving(false),
-      m_saveEncrypted(nullptr),
-      m_additionalKeyLabel(nullptr),
-      m_additionalKeyButton(nullptr),
       m_recentFiles(nullptr),
 #ifdef KF5Holidays_FOUND
       m_holidayRegion(nullptr),
@@ -247,7 +239,6 @@ public:
 
   }
 
-  void closeFile();
   void unlinkStatementXML();
   void moveInvestmentTransaction(const QString& fromId,
                                  const QString& toId,
@@ -256,14 +247,17 @@ public:
       const QList<QPair<MyMoneyTransaction, MyMoneySplit> > &transactions,
       const MyMoneyMoney &amount);
 
+  struct storageInfo {
+    eKMyMoney::StorageType type {eKMyMoney::StorageType::None};
+    bool isOpened {false};
+    QUrl url;
+  };
 
+  storageInfo m_storageInfo;
   /**
     * The public interface.
     */
   KMyMoneyApp * const q;
-
-  int                           m_statementXMLindex;
-  KBalanceWarning*              m_balanceWarning;
 
   /** the configuration object of the application */
   KSharedConfigPtr m_config;
@@ -295,18 +289,10 @@ public:
     */
   bool    m_ignoreBackupExitCode;
 
-  bool m_fileOpen;
-  QFileDevice::Permissions m_fmode;
-
-  KMyMoneyApp::fileTypeE m_fileType;
-
   KProcess m_proc;
 
   /// A pointer to the view holding the tabs.
   KMyMoneyView *m_myMoneyView;
-
-  /// The URL of the file currently being edited when open.
-  QUrl  m_fileName;
 
   bool m_startDialog;
   QString m_mountpoint;
@@ -325,16 +311,8 @@ public:
   int                   m_autoSavePeriod;
   bool                  m_inAutoSaving;
 
-  // Pointer to the combo box used for key selection during
-  // File/Save as
-  KComboBox*            m_saveEncrypted;
-
   // id's that need to be remembered
   QString               m_accountGoto, m_payeeGoto;
-
-  QStringList           m_additionalGpgKeys;
-  QLabel*               m_additionalKeyLabel;
-  QPushButton*          m_additionalKeyButton;
 
   KRecentFilesAction*   m_recentFiles;
 
@@ -565,43 +543,34 @@ public:
                Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
   }
 
-  /**
-   * This method is used after a file or database has been
-   * read into storage, and performs various initialization tasks
-   *
-   * @retval true all went okay
-   * @retval false an exception occurred during this process
-   */
-  bool initializeStorage()
+  bool askAboutSaving()
   {
-    const auto blocked = MyMoneyFile::instance()->blockSignals(true);
+    const auto isFileNotSaved = q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->isEnabled();
+    const auto isNewFileNotSaved = m_storageInfo.isOpened && m_storageInfo.url.isEmpty();
+    auto fileNeedsToBeSaved = false;
 
-    updateAccountNames();
-    updateCurrencyNames();
-    selectBaseCurrency();
-
-    // setup the standard precision
-    AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-    KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-
-    if (!applyFileFixes())
-      return false;
-
-    MyMoneyFile::instance()->blockSignals(blocked);
-
-    emit q->kmmFilePlugin(KMyMoneyApp::postOpen);
-
-    Models::instance()->fileOpened();
-    connectStorageToModels();
-
-    // inform everyone about new data
-    MyMoneyFile::instance()->forceDataChanged();
-
-    q->slotCheckSchedules();
-
-    m_myMoneyView->slotFileOpened();
-
-    onlineJobAdministration::instance()->updateActions();
+    if (isFileNotSaved && KMyMoneySettings::autoSaveOnClose()) {
+      fileNeedsToBeSaved = true;
+    } else if (isFileNotSaved || isNewFileNotSaved) {
+      switch (KMessageBox::warningYesNoCancel(q, i18n("The file has been changed, save it?"))) {
+        case KMessageBox::ButtonCode::Yes:
+          fileNeedsToBeSaved = true;
+          break;
+        case KMessageBox::ButtonCode::No:
+          fileNeedsToBeSaved = false;
+          break;
+        case KMessageBox::ButtonCode::Cancel:
+        default:
+          return false;
+          break;
+      }
+    }
+    if (fileNeedsToBeSaved) {
+      if (isFileNotSaved)
+        return q->slotFileSave();
+      else if (isNewFileNotSaved)
+        return q->slotFileSaveAs();
+    }
     return true;
   }
 
@@ -697,193 +666,6 @@ public:
   }
 
   /**
-    * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
-    * data structures in memory.  The return result is examined to make sure no
-    * errors occurred whilst parsing.
-    *
-    * @param url The URL to read from.
-    *            If no protocol is specified, file:// is assumed.
-    *
-    * @return Whether the read was successful.
-    */
-  bool openXMLFile(const QUrl &url)
-  {
-    // open the database
-    auto pStorage = MyMoneyFile::instance()->storage();
-    if (!pStorage)
-      pStorage = new MyMoneyStorageMgr;
-
-    auto rc = false;
-    auto pluginFound = false;
-    for (const auto& plugin : pPlugins.storage) {
-      if (plugin->formatName().compare(QLatin1String("XML")) == 0) {
-        rc = plugin->open(pStorage, url);
-        pluginFound = true;
-        break;
-      }
-    }
-
-    if(!pluginFound)
-      KMessageBox::error(q, i18n("Couldn't find suitable plugin to read your storage."));
-
-    if(!rc) {
-      removeStorage();
-      return false;
-    }
-
-    if (pStorage) {
-      MyMoneyFile::instance()->detachStorage();
-      MyMoneyFile::instance()->attachStorage(pStorage);
-    }
-
-    m_fileType = KMyMoneyApp::KmmXML;
-    return true;
-  }
-
-  bool isGNCFile(const QUrl &url)
-  {
-    if (!url.isValid())
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid URL %1").arg(qPrintable(url.url())));
-    if (!url.isLocalFile())
-      return false;
-
-    const auto fileName = url.toLocalFile();
-    const auto sFileToShort = QString::fromLatin1("File %1 is too short.").arg(fileName);
-
-    QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly))
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
-
-    QByteArray qbaFileHeader(2, '\0');
-    if (file.read(qbaFileHeader.data(), 2) != 2)
-      throw MYMONEYEXCEPTION(sFileToShort);
-
-    file.close();
-
-    QIODevice* qfile = nullptr;
-    QString sFileHeader(qbaFileHeader);
-    if (sFileHeader == QString("\037\213"))        // gzipped?
-      qfile = new KCompressionDevice(fileName, COMPRESSION_TYPE);
-    else
-      return false;
-
-    if (!qfile->open(QIODevice::ReadOnly)) {
-      delete qfile;
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
-    }
-
-    // Scan the first 70 bytes to see if we find something
-    // we know. For now, we support our own XML format and
-    // GNUCash XML format. If the file is smaller, then it
-    // contains no valid data and we reject it anyway.
-    qbaFileHeader.resize(70);
-    if (qfile->read(qbaFileHeader.data(), 70) != 70)
-      throw MYMONEYEXCEPTION(sFileToShort);
-
-    QString txt(qbaFileHeader);
-
-    qfile->close();
-    delete qfile;
-
-    QRegExp gncexp("<gnc-v(\\d+)");
-    if (!(gncexp.indexIn(txt) != -1))
-      return false;
-    return true;
-  }
-
-  bool openGNCFile(const QUrl &url)
-  {
-    IMyMoneyOperationsFormat* pReader = nullptr;
-    for (const auto& plugin : pPlugins.storage) {
-      if (plugin->formatName().compare(QLatin1String("GNC")) == 0) {
-        pReader = plugin->reader();
-        break;
-      }
-    }
-    if (!pReader) {
-      KMessageBox::error(q, i18n("Couldn't find suitable plugin to read your storage."));
-      return false;
-    }
-    m_fileType = KMyMoneyApp::GncXML;
-
-    // disconnect the current storga manager from the engine
-    MyMoneyFile::instance()->detachStorage();
-
-    // create a new empty storage object
-    auto storage = new MyMoneyStorageMgr;
-
-    QIODevice* qfile = new KCompressionDevice(url.toLocalFile(), COMPRESSION_TYPE);
-    pReader->setProgressCallback(&KMyMoneyApp::progressCallback);
-    pReader->readFile(qfile, storage);
-    pReader->setProgressCallback(0);
-    delete pReader;
-
-    // attach the storage before reading the file, since the online
-    // onlineJobAdministration object queries the engine during
-    // loading.
-    MyMoneyFile::instance()->attachStorage(storage);
-
-    qfile->close();
-    delete qfile;
-    return true;
-  }
-
-  /**
-   * This method is called from readFile to open a database file which
-   * is to be processed in 'proper' database mode, i.e. in-place updates
-   *
-   * @param dbaseURL pseudo-QUrl representation of database
-   *
-   * @retval true Database opened successfully
-   * @retval false Could not open or read database
-   */
-  bool openDatabase(const QUrl &url)
-  {
-    // open the database
-    auto pStorage = MyMoneyFile::instance()->storage();
-    if (!pStorage)
-      pStorage = new MyMoneyStorageMgr;
-
-    auto rc = false;
-    auto pluginFound = false;
-    for (const auto& plugin : pPlugins.storage) {
-      if (plugin->formatName().compare(QLatin1String("SQL")) == 0) {
-        rc = plugin->open(pStorage, url);
-        pluginFound = true;
-        break;
-      }
-    }
-
-    if(!pluginFound)
-      KMessageBox::error(q, i18n("Couldn't find suitable plugin to read your storage."));
-
-    if(!rc) {
-      removeStorage();
-      return false;
-    }
-
-    if (pStorage) {
-      MyMoneyFile::instance()->detachStorage();
-      MyMoneyFile::instance()->attachStorage(pStorage);
-    }
-
-    m_fileType = KMyMoneyApp::KmmDb;
-    return true;
-  }
-
-  /**
-    * Close the currently opened file and create an empty new file.
-    *
-    * @see MyMoneyFile
-    */
-  void newFile()
-  {
-    closeFile();
-    m_fileType = KMyMoneyApp::KmmXML; // assume native type until saved
-    m_fileOpen = true;
-  }
-
-  /**
     * Call this to see if the MyMoneyFile contains any unsaved data.
     *
     * @retval true if any data has been modified but not saved
@@ -891,7 +673,7 @@ public:
     */
   bool dirty()
   {
-    if (!m_fileOpen)
+    if (!m_storageInfo.isOpened)
       return false;
 
     return MyMoneyFile::instance()->dirty();
@@ -1351,8 +1133,19 @@ public:
     qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
   }
 
-
-
+  /**
+    * This method is used to update the caption of the application window.
+    * It sets the caption to "filename [modified] - KMyMoney".
+    *
+    * @param skipActions if true, the actions will not be updated. This
+    *                    is usually onyl required by some early calls when
+    *                    these widgets are not yet created (the default is false).
+    */
+  void updateCaption();
+  void updateActions();
+  bool canFileSaveAs() const;
+  bool canUpdateAllAccounts() const;
+  void fileAction(eKMyMoney::FileAction action);
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -1377,8 +1170,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
-  updateCaption(true);
-
   QFrame* frame = new QFrame;
   frame->setFrameStyle(QFrame::NoFrame);
   // values for margin (11) and spacing(6) taken from KDialog implementation
@@ -1401,23 +1192,15 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   pActions = initActions();
   pMenus = initMenus();
 
-  d->newStorage();
   d->m_myMoneyView = new KMyMoneyView;
   layout->addWidget(d->m_myMoneyView, 10);
-  connect(d->m_myMoneyView, &KMyMoneyView::aboutToChangeView, this, &KMyMoneyApp::slotResetSelections);
   connect(d->m_myMoneyView, &KMyMoneyView::viewActivated, this, &KMyMoneyApp::slotViewSelected);
-  connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
-          this, SLOT(slotUpdateActions()));
-
   connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
-
-  connect(this, &KMyMoneyApp::fileLoaded, d->m_myMoneyView, &KMyMoneyView::slotRefreshViews);
 
   // Initialize kactivities resource instance
 #ifdef KF5Activities_FOUND
   d->m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId(), this);
-  connect(this, &KMyMoneyApp::fileLoaded, d->m_activityResourceInstance, &KActivities::ResourceInstance::setUri);
 #endif
 
   const auto viewActions = d->m_myMoneyView->actionsToBeConnected();
@@ -1434,7 +1217,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, pPlugins, this, guiFactory());
   onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
   d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
-  d->m_myMoneyView->setStoragePlugins(pPlugins.storage);
 
   setCentralWidget(frame);
 
@@ -1456,22 +1238,15 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   connect(d->m_autoSaveTimer, SIGNAL(timeout()), this, SLOT(slotAutoSave()));
   connect(d->m_progressTimer, SIGNAL(timeout()), this, SLOT(slotStatusProgressDone()));
 
-  // make sure, we get a note when the engine changes state
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotDataChanged()));
-
   // connect the WebConnect server
   connect(d->m_webConnect, SIGNAL(gotUrl(QUrl)), this, SLOT(webConnect(QUrl)));
-  // make sure we have a balance warning object
-  d->m_balanceWarning = new KBalanceWarning(this);
 
   // setup the initial configuration
   slotUpdateConfiguration(QString());
 
   // kickstart date change timer
   slotDateChanged();
-
-  connect(this, SIGNAL(fileLoaded(QUrl)), onlineJobAdministration::instance(), SLOT(updateOnlineTaskProperties()));
-
+  d->fileAction(eKMyMoney::FileAction::Closed);
 }
 
 KMyMoneyApp::~KMyMoneyApp()
@@ -1502,7 +1277,7 @@ KMyMoneyApp::~KMyMoneyApp()
 
 QUrl KMyMoneyApp::lastOpenedURL()
 {
-  QUrl url = d->m_startDialog ? QUrl() : d->m_fileName;
+  QUrl url = d->m_startDialog ? QUrl() : d->m_storageInfo.url;
 
   if (!url.isValid()) {
     url = QUrl::fromUserInput(readLastUsedFile());
@@ -1589,7 +1364,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   KStandardAction::open(this, &KMyMoneyApp::slotFileOpen, aC);
   d->m_recentFiles = KStandardAction::openRecent(this, &KMyMoneyApp::slotFileOpenRecent, aC);
   KStandardAction::save(this, &KMyMoneyApp::slotFileSave, aC);
-//  KStandardAction::saveAs(this, &KMyMoneyApp::slotFileSaveAs, aC);
+  KStandardAction::saveAs(this, &KMyMoneyApp::slotFileSaveAs, aC);
   KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC);
   KStandardAction::quit(this, &KMyMoneyApp::slotFileQuit, aC);
   lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotPrintView, aC));
@@ -1973,41 +1748,22 @@ void KMyMoneyApp::readOptions()
   d->m_startDialog = grp.readEntry("StartDialog", true);
 }
 
+#ifdef KMM_DEBUG
 void KMyMoneyApp::resizeEvent(QResizeEvent* ev)
 {
   KMainWindow::resizeEvent(ev);
-  updateCaption(true);
+  d->updateCaption();
 }
-
-int KMyMoneyApp::askSaveOnClose()
-{
-  int ans;
-  if (KMyMoneySettings::autoSaveOnClose()) {
-    ans = KMessageBox::Yes;
-  } else {
-    ans = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it?"));
-  }
-  return ans;
-}
+#endif
 
 bool KMyMoneyApp::queryClose()
 {
   if (!isReady())
     return false;
 
-  if (d->dirty()) {
-    int ans = askSaveOnClose();
+  if (!slotFileClose())
+    return false;
 
-    if (ans == KMessageBox::Cancel)
-      return false;
-    else if (ans == KMessageBox::Yes) {
-      bool saved = slotFileSave();
-      saveOptions();
-      return saved;
-    }
-  }
-//  if (d->m_myMoneyView->isDatabase())
-//    slotFileClose(); // close off the database
   saveOptions();
   return true;
 }
@@ -2140,109 +1896,19 @@ void KMyMoneyApp::slotPerformanceTest()
 //  MyMoneyFile::instance()->preloadCache();
 }
 
-void KMyMoneyApp::slotFileNew()
-{
-  KMSTATUS(i18n("Creating new document..."));
-
-  slotFileClose();
-
-  if (!d->m_fileOpen) {
-    // next line required until we move all file handling out of KMyMoneyView
-    d->newFile();
-
-    d->m_fileName = QUrl();
-    updateCaption();
-
-    NewUserWizard::Wizard *wizard = new NewUserWizard::Wizard();
-
-    if (wizard->exec() == QDialog::Accepted) {
-      MyMoneyFileTransaction ft;
-      MyMoneyFile* file = MyMoneyFile::instance();
-      try {
-        // store the user info
-        file->setUser(wizard->user());
-
-        // create and setup base currency
-        file->addCurrency(wizard->baseCurrency());
-        file->setBaseCurrency(wizard->baseCurrency());
-
-        // create a possible institution
-        MyMoneyInstitution inst = wizard->institution();
-        if (inst.name().length()) {
-          file->addInstitution(inst);
-        }
-
-        // create a possible checking account
-        auto acc = wizard->account();
-        if (acc.name().length()) {
-          acc.setInstitutionId(inst.id());
-          MyMoneyAccount asset = file->asset();
-          file->addAccount(acc, asset);
-
-          // create possible opening balance transaction
-          if (!wizard->openingBalance().isZero()) {
-            file->createOpeningBalanceTransaction(acc, wizard->openingBalance());
-          }
-        }
-
-        // import the account templates
-        QList<MyMoneyTemplate> templates = wizard->templates();
-        QList<MyMoneyTemplate>::iterator it_t;
-        for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
-          (*it_t).importTemplate(progressCallback);
-        }
-
-        d->m_fileName = wizard->url();
-        ft.commit();
-        KMyMoneySettings::setFirstTimeRun(false);
-
-        // FIXME This is a bit clumsy. We re-read the freshly
-        // created file to be able to run through all the
-        // fixup logic and then save it to keep the modified
-        // flag off.
-        slotFileSave();
-        if (d->openXMLFile(d->m_fileName)) {
-          d->m_fileOpen = true;
-          d->initializeStorage();
-        }
-        slotFileSave();
-
-        // now keep the filename in the recent files used list
-        //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action(KStandardAction::name(KStandardAction::OpenRecent)));
-        //if(p)
-        d->m_recentFiles->addUrl(d->m_fileName);
-        writeLastUsedFile(d->m_fileName.url());
-
-      } catch (const MyMoneyException &) {
-        // next line required until we move all file handling out of KMyMoneyView
-        d->closeFile();
-      }
-      if (wizard->startSettingsAfterFinished())
-        slotSettings();
-    } else {
-      // next line required until we move all file handling out of KMyMoneyView
-      d->closeFile();
-    }
-    delete wizard;
-    updateCaption();
-
-    emit fileLoaded(d->m_fileName);
-  }
-}
-
 bool KMyMoneyApp::isDatabase()
 {
-  return (d->m_fileOpen && ((d->m_fileType == KmmDb)));
+  return (d->m_storageInfo.isOpened && ((d->m_storageInfo.type == eKMyMoney::StorageType::SQL)));
 }
 
 bool KMyMoneyApp::isNativeFile()
 {
-  return (d->m_fileOpen && (d->m_fileType < MaxNativeFileType));
+  return (d->m_storageInfo.isOpened && (d->m_storageInfo.type == eKMyMoney::StorageType::SQL || d->m_storageInfo.type == eKMyMoney::StorageType::XML));
 }
 
 bool KMyMoneyApp::fileOpen() const
 {
-  return d->m_fileOpen;
+  return d->m_storageInfo.isOpened;
 }
 
 KMyMoneyAppCallback KMyMoneyApp::progressCallback()
@@ -2253,35 +1919,6 @@ KMyMoneyAppCallback KMyMoneyApp::progressCallback()
 void KMyMoneyApp::consistencyCheck(bool alwaysDisplayResult)
 {
   d->consistencyCheck(alwaysDisplayResult);
-}
-
-// General open
-void KMyMoneyApp::slotFileOpen()
-{
-  KMSTATUS(i18n("Open a file."));
-
-  QString prevDir = readLastUsedDir();
-  QString fileExtensions;
-  fileExtensions.append(i18n("KMyMoney files (*.kmy *.xml)"));
-  fileExtensions.append(QLatin1String(";;"));
-
-  for (const auto& plugin : pPlugins.storage) {
-    const auto fileExtension = plugin->fileExtension();
-    if (!fileExtension.isEmpty()) {
-      fileExtensions.append(fileExtension);
-      fileExtensions.append(QLatin1String(";;"));
-    }
-  }
-  fileExtensions.append(i18n("All files (*)"));
-
-  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), prevDir, fileExtensions);
-  dialog->setFileMode(QFileDialog::ExistingFile);
-  dialog->setAcceptMode(QFileDialog::AcceptOpen);
-
-  if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
-    slotFileOpenRecent(dialog->selectedUrls().first());
-  }
-  delete dialog;
 }
 
 bool KMyMoneyApp::isImportableFile(const QUrl &url)
@@ -2331,174 +1968,6 @@ bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
   return false;
 }
 
-void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
-{
-  KMSTATUS(i18n("Loading file..."));
-  if (isFileOpenedInAnotherInstance(url)) {
-    KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
-    return;
-  }
-
-  if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
-    KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
-    return;
-  }
-
-  if (d->m_fileOpen)
-    slotFileClose();
-
-  if (d->m_fileOpen)
-    return;
-
-  try {
-    auto isOpened = false;
-    if (url.scheme() == QLatin1String("sql"))
-      isOpened = d->openDatabase(url);
-    else if (d->isGNCFile(url))
-      isOpened = d->openGNCFile(url);
-    else
-      isOpened = d->openXMLFile(url);
-
-    if (!isOpened)
-      return;
-
-    d->m_fileOpen = true;
-    if (!d->initializeStorage()) {
-      d->m_fileOpen = false;
-      return;
-    }
-
-    if (isNativeFile()) {
-      d->m_fileName = url;
-      updateCaption();
-      writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
-      /* Don't use url variable after KRecentFilesAction::addUrl
-       * as it might delete it.
-       * More in API reference to this method
-       */
-      d->m_recentFiles->addUrl(url);
-    } else {
-      d->m_fileName = QUrl(); // imported files have no filename
-    }
-
-  } catch (const MyMoneyException &e) {
-    KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", QString::fromLatin1(e.what())));
-  }
-  updateCaption();
-  emit fileLoaded(d->m_fileName);
-}
-
-bool KMyMoneyApp::slotFileSave()
-{
-  // if there's nothing changed, there's no need to save anything
-  if (!d->dirty())
-    return true;
-
-  bool rc = false;
-
-  KMSTATUS(i18n("Saving file..."));
-
-  if (d->m_fileName.isEmpty())
-    return false;
-
-  d->consistencyCheck(false);
-
-  setEnabled(false);
-  QString format;
-  switch (d->m_fileType) {
-    case KMyMoneyApp::KmmXML:
-    case KMyMoneyApp::GncXML:
-      format = QStringLiteral("XML");
-      break;
-    case KMyMoneyApp::KmmDb:
-      format = QStringLiteral("SQL");
-      break;
-    default:
-      return false;
-  }
-
-  auto pluginFound = false;
-  for (const auto& plugin : pPlugins.storage) {
-    if (plugin->formatName().compare(format) == 0) {
-      rc = plugin->save(d->m_fileName);
-      pluginFound = true;
-      break;
-    }
-  }
-  if(!pluginFound)
-    KMessageBox::error(this, i18n("Couldn't find suitable plugin to save your storage."));
-
-  setEnabled(true);
-
-  d->m_autoSaveTimer->stop();
-
-  updateCaption();
-  return rc;
-}
-
-void KMyMoneyApp::slotFileCloseWindow()
-{
-  KMSTATUS(i18n("Closing window..."));
-
-  if (d->dirty()) {
-    int answer = askSaveOnClose();
-    if (answer == KMessageBox::Cancel)
-      return;
-    else if (answer == KMessageBox::Yes)
-      slotFileSave();
-  }
-  close();
-}
-
-void KMyMoneyApp::slotFileClose()
-{
-//  bool okToSelect = true;
-
-  // check if transaction editor is open and ask user what he wants to do
-//  slotTransactionsCancelOrEnter(okToSelect);
-
-//  if (!okToSelect)
-//    return;
-
-  // no update status here, as we might delete the status too early.
-  if (d->dirty()) {
-    int answer = askSaveOnClose();
-    if (answer == KMessageBox::Cancel)
-      return;
-    else if (answer == KMessageBox::Yes)
-      slotFileSave();
-  }
-
-  d->closeFile();
-}
-
-void KMyMoneyApp::slotFileQuit()
-{
-  // don't modify the status message here as this will prevent quit from working!!
-  // See the beginning of queryClose() and isReady() why. Thomas Baumgart 2005-10-17
-
-  bool quitApplication = true;
-
-  QList<KMainWindow*> memberList = KMainWindow::memberList();
-  if (!memberList.isEmpty()) {
-
-    QList<KMainWindow*>::const_iterator w_it = memberList.constBegin();
-    for (; w_it != memberList.constEnd(); ++w_it) {
-      // only close the window if the closeEvent is accepted. If the user presses Cancel on the saveModified() dialog,
-      // the window and the application stay open.
-      if (!(*w_it)->close()) {
-        quitApplication = false;
-        break;
-      }
-    }
-  }
-
-  // We will only quit if all windows were processed and not cancelled
-  if (quitApplication) {
-    QCoreApplication::quit();
-  }
-}
-
 void KMyMoneyApp::slotShowTransactionDetail()
 {
 
@@ -2525,7 +1994,7 @@ void KMyMoneyApp::slotShowAllAccounts()
 #ifdef KMM_DEBUG
 void KMyMoneyApp::slotFileFileInfo()
 {
-  if (!d->m_fileOpen) {
+  if (!d->m_storageInfo.isOpened) {
     KMessageBox::information(this, i18n("No KMyMoneyFile open"));
     return;
   }
@@ -2620,7 +2089,7 @@ void KMyMoneyApp::progressCallback(int current, int total, const QString& msg)
 
 void KMyMoneyApp::slotFileViewPersonal()
 {
-  if (!d->m_fileOpen) {
+  if (!d->m_storageInfo.isOpened) {
     KMessageBox::information(this, i18n("No KMyMoneyFile open"));
     return;
   }
@@ -2759,10 +2228,11 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 {
   if(dialogName.compare(QLatin1String("Plugins")) == 0) {
     KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, pPlugins, this, guiFactory());
+    actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(d->canFileSaveAs());
     onlineJobAdministration::instance()->updateActions();
     onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
     d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
-    d->m_myMoneyView->setStoragePlugins(pPlugins.storage);
+    d->updateActions();
     return;
   }
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
@@ -2848,12 +2318,12 @@ void KMyMoneyApp::slotBackupFile()
 
 
 
-  if (d->m_fileName.isEmpty())
+  if (d->m_storageInfo.url.isEmpty())
     return;
 
-  if (!d->m_fileName.isLocalFile()) {
+  if (!d->m_storageInfo.url.isLocalFile()) {
     KMessageBox::sorry(this,
-                       i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.", d->m_fileName.url()),
+                       i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.", d->m_storageInfo.url.url()),
 
                        i18n("Local files only"));
     return;
@@ -2899,9 +2369,9 @@ void KMyMoneyApp::slotBackupMount()
 
 bool KMyMoneyApp::slotBackupWriteFile()
 {
-  QFileInfo fi(d->m_fileName.fileName());
+  QFileInfo fi(d->m_storageInfo.url.fileName());
   QString today = QDate::currentDate().toString("-yyyy-MM-dd.") + fi.suffix();
-  QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
+  QString backupfile = d->m_mountpoint + '/' + d->m_storageInfo.url.fileName();
   KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
 
   // check if file already exists and ask what to do
@@ -2917,10 +2387,10 @@ bool KMyMoneyApp::slotBackupWriteFile()
   d->m_proc.clearProgram();
 #ifdef Q_OS_WIN
   d->m_proc << "cmd.exe" << "/c" << "copy" << "/b" << "/y";
-  d->m_proc << (QDir::toNativeSeparators(d->m_fileName.toLocalFile()) + "+ nul") << QDir::toNativeSeparators(backupfile);
+  d->m_proc << (QDir::toNativeSeparators(d->m_storageInfo.url.toLocalFile()) + "+ nul") << QDir::toNativeSeparators(backupfile);
 #else
   d->m_proc << "cp" << "-f";
-  d->m_proc << d->m_fileName.toLocalFile() << backupfile;
+  d->m_proc << d->m_storageInfo.url.toLocalFile() << backupfile;
 #endif
   d->m_backupState = BACKUP_COPYING;
   d->m_proc.start();
@@ -3362,110 +2832,79 @@ void KMyMoneyApp::slotPrintView()
   d->m_myMoneyView->slotPrintView();
 }
 
-void KMyMoneyApp::updateCaption(bool skipActions)
+void KMyMoneyApp::Private::updateCaption()
 {
-  QString caption;
-
-  caption = d->m_fileName.fileName();
-
-  if (caption.isEmpty() && d->m_myMoneyView && d->m_fileOpen)
-    caption = i18n("Untitled");
-
-  // MyMoneyFile::instance()->dirty() throws an exception, if
-  // there's no storage object available. In this case, we
-  // assume that the storage object is not changed. Actually,
-  // this can only happen if we are newly created early on.
-  bool modified;
-  try {
-    modified = MyMoneyFile::instance()->dirty();
-  } catch (const MyMoneyException &) {
-    modified = false;
-    skipActions = true;
-  }
+  auto caption = m_storageInfo.url.isEmpty() && m_myMoneyView && m_storageInfo.isOpened  ?
+        i18n("Untitled") :
+        m_storageInfo.url.fileName();
 
 #ifdef KMM_DEBUG
-  caption += QString(" (%1 x %2)").arg(width()).arg(height());
+  caption += QString(" (%1 x %2)").arg(q->width()).arg(q->height());
 #endif
 
-  setCaption(caption, modified);
-
-  if (!skipActions) {
-    d->m_myMoneyView->enableViewsIfFileOpen(d->m_fileOpen);
-    slotUpdateActions();
-  }
+  q->setCaption(caption, MyMoneyFile::instance()->dirty());
 }
 
-void KMyMoneyApp::slotUpdateActions()
+void KMyMoneyApp::Private::updateActions()
+{
+  const QVector<Action> actions
+  {
+    Action::FilePersonalData, Action::FileInformation, Action::FileImportTemplate, Action::FileExportTemplate,
+#ifdef KMM_DEBUG
+    Action::FileDump,
+#endif
+    Action::EditFindTransaction, Action::NewCategory, Action::ToolCurrencies, Action::ToolPrices, Action::ToolUpdatePrices,
+    Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule
+  };
+
+  for (const auto &action : actions)
+    pActions[action]->setEnabled(m_storageInfo.isOpened);
+  pActions[Action::FileBackup]->setEnabled(m_storageInfo.isOpened && m_storageInfo.type == eKMyMoney::StorageType::XML);
+
+  auto aC = q->actionCollection();
+  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
+  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
+  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(canUpdateAllAccounts());
+}
+
+bool KMyMoneyApp::Private::canFileSaveAs() const
+{
+  return (m_storageInfo.isOpened &&
+          (!pPlugins.storage.isEmpty() &&
+           !(pPlugins.storage.count() == 1 && pPlugins.storage.first()->storageType() == eKMyMoney::StorageType::GNC)));
+}
+
+bool KMyMoneyApp::Private::canUpdateAllAccounts() const
 {
   const auto file = MyMoneyFile::instance();
-  const bool fileOpen = d->m_fileOpen;
-  const bool modified = file->dirty();
-//  const bool importRunning = (d->m_smtReader != 0);
-  auto aC = actionCollection();
+  auto rc = false;
+  if (!file->storageAttached())
+    return rc;
 
-  // *************
-  // Disabling actions based on conditions
-  // *************
-  {
-    QString tooltip = i18n("Create a new transaction");
-    const QVector<QPair<Action, bool>> actionStates {
-//      {qMakePair(Action::FileOpenDatabase, true)},
-//      {qMakePair(Action::FileSaveAsDatabase, fileOpen)},
-      {qMakePair(Action::FilePersonalData, fileOpen)},
-      {qMakePair(Action::FileBackup, (fileOpen && !isDatabase()))},
-      {qMakePair(Action::FileInformation, fileOpen)},
-      {qMakePair(Action::FileImportTemplate, fileOpen/* && !importRunning*/)},
-      {qMakePair(Action::FileExportTemplate, fileOpen/* && !importRunning*/)},
-#ifdef KMM_DEBUG
-      {qMakePair(Action::FileDump, fileOpen)},
-#endif
-      {qMakePair(Action::EditFindTransaction, fileOpen)},
-      {qMakePair(Action::ToolCurrencies, fileOpen)},
-      {qMakePair(Action::ToolPrices, fileOpen)},
-      {qMakePair(Action::ToolUpdatePrices, fileOpen)},
-      {qMakePair(Action::ToolConsistency, fileOpen)},
-      {qMakePair(Action::NewAccount, fileOpen)},
-      {qMakePair(Action::NewCategory, fileOpen)},
-      {qMakePair(Action::AccountCreditTransfer, onlineJobAdministration::instance()->canSendCreditTransfer())},
-      {qMakePair(Action::NewInstitution, fileOpen)},
-//      {qMakePair(Action::TransactionNew, (fileOpen && d->m_myMoneyView->canCreateTransactions(KMyMoneyRegister::SelectedTransactions(), tooltip)))},
-      {qMakePair(Action::NewSchedule, fileOpen)},
-//      {qMakePair(Action::CurrencyNew, fileOpen)},
-//      {qMakePair(Action::PriceNew, fileOpen)},
-    };
-
-    for (const auto& a : actionStates)
-      pActions[a.first]->setEnabled(a.second);
+  QList<MyMoneyAccount> accList;
+  file->accountList(accList);
+  QList<MyMoneyAccount>::const_iterator it_a;
+  auto it_p = pPlugins.online.constEnd();
+  for (it_a = accList.constBegin(); (it_p == pPlugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
+    if ((*it_a).hasOnlineMapping()) {
+      // check if provider is available
+      it_p = pPlugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+      if (it_p != pPlugins.online.constEnd()) {
+        QStringList protocols;
+        (*it_p)->protocols(protocols);
+        if (!protocols.isEmpty()) {
+          rc = true;
+          break;
+        }
+      }
+    }
   }
-
-  // *************
-  // Disabling standard actions based on conditions
-  // *************
-  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(modified /*&& !d->m_myMoneyView->isDatabase()*/);
-//  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(fileOpen);
-  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(fileOpen);
-  aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Print)))->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
-}
-
-void KMyMoneyApp::slotResetSelections()
-{
-  d->m_myMoneyView->slotObjectSelected(MyMoneyAccount());
-  d->m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
-  d->m_myMoneyView->slotObjectSelected(MyMoneySchedule());
-  d->m_myMoneyView->slotObjectSelected(MyMoneyTag());
-  d->m_myMoneyView->slotSelectByVariant(QVariantList {QVariant::fromValue(KMyMoneyRegister::SelectedTransactions())}, eView::Intent::SelectRegisterTransactions);
-  slotUpdateActions();
+  return rc;
 }
 
 void KMyMoneyApp::slotDataChanged()
 {
-  // As this method is called every time the MyMoneyFile instance
-  // notifies a modification, it's the perfect place to start the timer if needed
-  if (d->m_autoSaveEnabled && !d->m_autoSaveTimer->isActive()) {
-    d->m_autoSaveTimer->setSingleShot(true);
-    d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);  //miliseconds
-  }
-  updateCaption();
+  d->fileAction(eKMyMoney::FileAction::Changed);
 }
 
 void KMyMoneyApp::slotCurrencyDialog()
@@ -3485,7 +2924,6 @@ void KMyMoneyApp::slotPriceDialog()
 void KMyMoneyApp::slotFileConsistencyCheck()
 {
   d->consistencyCheck(true);
-  updateCaption();
 }
 
 void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
@@ -3624,7 +3062,6 @@ void KMyMoneyApp::slotCheckSchedules()
         rc = eDialogs::ScheduleResultCode::Enter;
       }
     }
-    updateCaption();
   }
 }
 
@@ -3691,17 +3128,17 @@ QString KMyMoneyApp::readLastUsedFile() const
 
 QString KMyMoneyApp::filename() const
 {
-  return d->m_fileName.url();
+  return d->m_storageInfo.url.url();
 }
 
 QUrl KMyMoneyApp::filenameURL() const
 {
-  return d->m_fileName;
+  return d->m_storageInfo.url;
 }
 
 void KMyMoneyApp::writeFilenameURL(const QUrl &url)
 {
-  d->m_fileName = url;
+  d->m_storageInfo.url = url;
 }
 
 void KMyMoneyApp::addToRecentFiles(const QUrl& url)
@@ -3779,12 +3216,12 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
       //KStartupInfo::setNewStartupId(this, asn_id);
 
       // Make sure we have an open file
-      if (! d->m_fileOpen &&
+      if (! d->m_storageInfo.isOpened &&
           KMessageBox::warningContinueCancel(this, i18n("You must first select a KMyMoney file before you can import a statement.")) == KMessageBox::Continue)
         slotFileOpen();
 
       // only continue if the user really did open a file.
-      if (d->m_fileOpen) {
+      if (d->m_storageInfo.isOpened) {
         KMSTATUS(i18n("Importing a statement via Web Connect"));
 
         // remove the statement files
@@ -3946,6 +3383,350 @@ void KMyMoneyApp::preloadHolidays()
 #endif
 }
 
+bool KMyMoneyApp::slotFileNew()
+{
+  KMSTATUS(i18n("Creating new document..."));
+
+  if (!slotFileClose())
+    return false;
+
+  NewUserWizard::Wizard wizard;
+  if (wizard.exec() != QDialog::Accepted)
+    return false;
+
+  d->m_storageInfo.isOpened = true;
+  d->m_storageInfo.type = eKMyMoney::StorageType::None;
+  d->m_storageInfo.url = QUrl();
+
+  try {
+    auto storage = new MyMoneyStorageMgr;
+    MyMoneyFile::instance()->attachStorage(storage);
+
+    MyMoneyFileTransaction ft;
+    auto file = MyMoneyFile::instance();
+    // store the user info
+    file->setUser(wizard.user());
+
+    // create and setup base currency
+    file->addCurrency(wizard.baseCurrency());
+    file->setBaseCurrency(wizard.baseCurrency());
+
+    // create a possible institution
+    MyMoneyInstitution inst = wizard.institution();
+    if (inst.name().length()) {
+      file->addInstitution(inst);
+    }
+
+    // create a possible checking account
+    auto acc = wizard.account();
+    if (acc.name().length()) {
+      acc.setInstitutionId(inst.id());
+      MyMoneyAccount asset = file->asset();
+      file->addAccount(acc, asset);
+
+      // create possible opening balance transaction
+      if (!wizard.openingBalance().isZero()) {
+        file->createOpeningBalanceTransaction(acc, wizard.openingBalance());
+      }
+    }
+
+    // import the account templates
+    for (auto &tmpl : wizard.templates())
+      tmpl.importTemplate(progressCallback);
+
+    ft.commit();
+    KMyMoneySettings::setFirstTimeRun(false);
+
+    d->fileAction(eKMyMoney::FileAction::Opened);
+    if (actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->isEnabled())
+      slotFileSaveAs();
+  } catch (const MyMoneyException & e) {
+    slotFileClose();
+    d->removeStorage();
+    KMessageBox::detailedError(this, i18n("Couldn't create a new file."), e.what());
+    return false;
+  }
+
+  if (wizard.startSettingsAfterFinished())
+    slotSettings();
+  return true;
+}
+
+void KMyMoneyApp::slotFileOpen()
+{
+  KMSTATUS(i18n("Open a file."));
+
+  const QVector<eKMyMoney::StorageType> desiredFileExtensions {eKMyMoney::StorageType::XML, eKMyMoney::StorageType::GNC};
+  QString fileExtensions;
+  for (const auto &extension : desiredFileExtensions) {
+    for (const auto &plugin : pPlugins.storage) {
+      if (plugin->storageType() == extension) {
+        fileExtensions += plugin->fileExtension() + QLatin1String(";;");
+        break;
+      }
+    }
+  }
+
+  if (fileExtensions.isEmpty()) {
+    KMessageBox::error(this, i18n("Couldn't find any plugin for opening storage."));
+    return;
+  }
+
+  fileExtensions.append(i18n("All files (*)"));
+
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), readLastUsedDir(), fileExtensions);
+  dialog->setFileMode(QFileDialog::ExistingFile);
+  dialog->setAcceptMode(QFileDialog::AcceptOpen);
+
+  if (dialog->exec() == QDialog::Accepted && dialog != nullptr)
+    slotFileOpenRecent(dialog->selectedUrls().first());
+  delete dialog;
+}
+
+bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
+{
+  KMSTATUS(i18n("Loading file..."));
+
+  if (!url.isValid())
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid URL %1").arg(qPrintable(url.url())));
+
+  if (isFileOpenedInAnotherInstance(url)) {
+    KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
+    return false;
+  }
+
+  if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
+    return false;
+  }
+
+  if (d->m_storageInfo.isOpened)
+    if (!slotFileClose())
+      return false;
+
+  // open the database
+  d->m_storageInfo.type = eKMyMoney::StorageType::None;
+  for (auto &plugin : pPlugins.storage) {
+    try {
+      if (auto pStorage = plugin->open(url)) {
+        MyMoneyFile::instance()->attachStorage(pStorage);
+        d->m_storageInfo.type = plugin->storageType();
+        if (plugin->storageType() != eKMyMoney::StorageType::GNC) {
+          d->m_storageInfo.url = url;
+          writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
+          /* Don't use url variable after KRecentFilesAction::addUrl
+         * as it might delete it.
+         * More in API reference to this method
+         */
+          d->m_recentFiles->addUrl(url);
+        }
+        d->m_storageInfo.isOpened = true;
+        break;
+      }
+    } catch (const MyMoneyException &e) {
+      KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", QString::fromLatin1(e.what())));
+      return false;
+    }
+  }
+
+  if(d->m_storageInfo.type == eKMyMoney::StorageType::None) {
+    KMessageBox::error(this, i18n("Could not read your data source. Please check the KMyMoney settings that the necessary plugin is enabled."));
+    return false;
+  }
+
+  d->fileAction(eKMyMoney::FileAction::Opened);
+  return true;
+}
+
+bool KMyMoneyApp::slotFileSave()
+{
+  KMSTATUS(i18n("Saving file..."));
+
+  for (const auto& plugin : pPlugins.storage) {
+    if (plugin->storageType() == d->m_storageInfo.type) {
+      d->consistencyCheck(false);
+      try {
+        if (plugin->save(d->m_storageInfo.url)) {
+          d->fileAction(eKMyMoney::FileAction::Saved);
+          return true;
+        }
+        return false;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::detailedError(this, i18n("Failed to save your storage."), e.what());
+        return false;
+      }
+    }
+  }
+
+  KMessageBox::error(this, i18n("Couldn't find suitable plugin to save your storage."));
+  return false;
+}
+
+bool KMyMoneyApp::slotFileSaveAs()
+{
+  KMSTATUS(i18n("Saving file as...."));
+
+  QVector<eKMyMoney::StorageType> availableFileTypes;
+  for (const auto& plugin : pPlugins.storage) {
+    switch (plugin->storageType()) {
+      case eKMyMoney::StorageType::GNC:
+        break;
+      default:
+        availableFileTypes.append(plugin->storageType());
+        break;
+    }
+  }
+
+  auto chosenFileType = eKMyMoney::StorageType::None;
+  switch (availableFileTypes.count()) {
+    case 0:
+      KMessageBox::error(this, i18n("Couldn't find any plugin for saving storage."));
+      return false;
+    case 1:
+      chosenFileType = availableFileTypes.first();
+      break;
+    default:
+      {
+        KSaveAsQuestion dlg(availableFileTypes, this);
+        if (dlg.exec() != QDialog::Accepted)
+          return false;
+        chosenFileType = dlg.fileType();
+      }
+  }
+
+  for (const auto &plugin : pPlugins.storage) {
+    if (chosenFileType == plugin->storageType()) {
+      try {
+        d->consistencyCheck(false);
+        if (plugin->saveAs()) {
+          d->fileAction(eKMyMoney::FileAction::Saved);
+          d->m_storageInfo.type = plugin->storageType();
+          return true;
+        }
+      } catch (const MyMoneyException &e) {
+        KMessageBox::detailedError(this, i18n("Failed to save your storage."), e.what());
+      }
+    }
+  }
+  return false;
+}
+
+bool KMyMoneyApp::slotFileClose()
+{
+  if (!d->m_storageInfo.isOpened)
+    return true;
+
+  if (!d->askAboutSaving())
+    return false;
+
+  d->fileAction(eKMyMoney::FileAction::Closing);
+
+  d->removeStorage();
+
+  d->m_storageInfo = KMyMoneyApp::Private::storageInfo();
+
+  d->fileAction(eKMyMoney::FileAction::Closed);
+  return true;
+}
+
+void KMyMoneyApp::slotFileQuit()
+{
+  // don't modify the status message here as this will prevent quit from working!!
+  // See the beginning of queryClose() and isReady() why. Thomas Baumgart 2005-10-17
+
+  bool quitApplication = true;
+
+  QList<KMainWindow*> memberList = KMainWindow::memberList();
+  if (!memberList.isEmpty()) {
+
+    QList<KMainWindow*>::const_iterator w_it = memberList.constBegin();
+    for (; w_it != memberList.constEnd(); ++w_it) {
+      // only close the window if the closeEvent is accepted. If the user presses Cancel on the saveModified() dialog,
+      // the window and the application stay open.
+      if (!(*w_it)->close()) {
+        quitApplication = false;
+        break;
+      }
+    }
+  }
+
+  // We will only quit if all windows were processed and not cancelled
+  if (quitApplication) {
+    QCoreApplication::quit();
+  }
+}
+
+void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
+{
+  switch(action) {
+    case eKMyMoney::FileAction::Opened:
+      q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+      updateAccountNames();
+      updateCurrencyNames();
+      selectBaseCurrency();
+
+      // setup the standard precision
+      AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+      KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+
+      applyFileFixes();
+      Models::instance()->fileOpened();
+      connectStorageToModels();
+      // inform everyone about new data
+      MyMoneyFile::instance()->forceDataChanged();
+      updateActions();
+      m_myMoneyView->slotFileOpened();
+      onlineJobAdministration::instance()->updateActions();
+      m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
+      m_myMoneyView->slotRefreshViews();
+      onlineJobAdministration::instance()->updateOnlineTaskProperties();
+      q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+
+#ifdef KF5Activities_FOUND
+      m_activityResourceInstance->setUri(m_storageInfo.url);
+#endif
+      break;
+
+    case eKMyMoney::FileAction::Saved:
+      q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+      q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+      m_autoSaveTimer->stop();
+      break;
+
+    case eKMyMoney::FileAction::Closing:
+      disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+      m_myMoneyView->slotFileClosed();
+      // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
+      Models::instance()->fileClosed();
+      break;
+
+    case eKMyMoney::FileAction::Closed:
+      q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+      disconnectStorageFromModels();
+      q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+      m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
+      updateActions();
+      break;
+
+    case eKMyMoney::FileAction::Changed:
+      q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+      q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(true && !m_storageInfo.url.isEmpty());
+      // As this method is called every time the MyMoneyFile instance
+      // notifies a modification, it's the perfect place to start the timer if needed
+      if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
+        m_autoSaveTimer->setSingleShot(true);
+        m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000);  //miliseconds
+      }
+      pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(canUpdateAllAccounts());
+      break;
+
+    default:
+      break;
+  }
+
+  updateCaption();
+}
+
 KMStatus::KMStatus(const QString &text)
 {
   m_prevText = kmymoney->slotStatusMsg(text);
@@ -3963,40 +3744,4 @@ void KMyMoneyApp::Private::unlinkStatementXML()
     qDebug("Remove %s", qPrintable(d[i]));
     d.remove(KMyMoneySettings::logPath() + QString("/%1").arg(d[i]));
   }
-  m_statementXMLindex = 0;
-}
-
-void KMyMoneyApp::Private::closeFile()
-{
-  m_myMoneyView->slotObjectSelected(MyMoneyAccount());
-  m_myMoneyView->slotObjectSelected(MyMoneyInstitution());
-  m_myMoneyView->slotObjectSelected(MyMoneySchedule());
-  m_myMoneyView->slotObjectSelected(MyMoneyTag());
-  m_myMoneyView->slotSelectByVariant(QVariantList {QVariant::fromValue(KMyMoneyRegister::SelectedTransactions())}, eView::Intent::SelectRegisterTransactions);
-
-  m_myMoneyView->finishReconciliation(MyMoneyAccount());
-
-  m_myMoneyView->slotFileClosed();
-
-  disconnectStorageFromModels();
-
-  // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
-  Models::instance()->fileClosed();
-
-  emit q->kmmFilePlugin(KMyMoneyApp::preClose);
-  if (q->isDatabase())
-    MyMoneyFile::instance()->storage()->close(); // to log off a database user
-  newStorage();
-
-  emit q->kmmFilePlugin(postClose);
-  m_fileOpen = false;
-
-  m_fileName = QUrl();
-  q->updateCaption();
-
-  // just create a new balance warning object
-  delete m_balanceWarning;
-  m_balanceWarning = new KBalanceWarning(q);
-
-  emit q->fileLoaded(m_fileName);
 }

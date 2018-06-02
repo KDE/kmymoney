@@ -44,7 +44,6 @@ class ResourceInstance;
 namespace eAccountsModel { enum class Column; }
 namespace eMenu { enum class Action; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
-namespace KMyMoneyPlugin { class StoragePlugin; }
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eView { enum class Intent; }
 namespace eView { enum class Action; }
@@ -91,29 +90,7 @@ enum class View;
 class KMyMoneyView : public KPageWidget
 {
   Q_OBJECT
-public:
-  // file actions for plugin
-  enum fileActions {
-    preOpen, postOpen, preSave, postSave, preClose, postClose
-  };
-
 private:
-  enum menuID {
-    AccountNew = 1,
-    AccountOpen,
-    AccountReconcile,
-    AccountEdit,
-    AccountDelete,
-    AccountOnlineMap,
-    AccountOnlineUpdate,
-    AccountOfxConnect,
-    CategoryNew
-  };
-
-  enum storageTypeE {
-    Memory = 0,
-    Database
-  } _storageType;
 
   KPageWidgetModel* m_model;
 
@@ -122,9 +99,6 @@ private:
 
   KMyMoneyTitleLabel* m_header;
 
-  QMap<QString, KMyMoneyPlugin::StoragePlugin*>* m_storagePlugins;
-
-private:
   void viewAccountList(const QString& selectAccount); // Show the accounts view
 
   void createSchedule(MyMoneySchedule s, MyMoneyAccount& a);
@@ -174,7 +148,6 @@ public:
   void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
 
   void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
-  void setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin*>& plugins);
 
   // TODO: remove that function
   /**
@@ -297,15 +270,6 @@ private Q_SLOTS:
    */
   void slotContextMenuRequested(const MyMoneyObject& obj);
 
-protected Q_SLOTS:
-  /**
-   * eventually replace this with KMyMoneyApp::slotCurrencySetBase().
-   * it contains the same code
-   *
-   * @deprecated
-   */
-  void slotSetBaseCurrency(const MyMoneySecurity& baseCurrency);
-
 private:
 
   /**
@@ -313,7 +277,7 @@ private:
     */
   void accountNew(const bool createCategory);
 
-  void resetViewSelection(const View);
+  void resetViewSelection();
 
 Q_SIGNALS:
    /**
@@ -321,11 +285,6 @@ Q_SIGNALS:
     * The parameter @p view is identified as one of KMyMoneyView::viewID.
     */
   void viewActivated(View view);
-
-  /**
-    * This signal is emitted whenever a new view is about to be selected.
-    */
-  void aboutToChangeView();
 
   void accountSelectedForContextMenu(const MyMoneyAccount& acc);
 

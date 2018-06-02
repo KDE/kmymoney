@@ -33,5 +33,6 @@ target_link_libraries(gncimporter
     kmm_plugin
   PRIVATE
     KF5::Completion
+    KF5::Archive
     Alkimia::alkimia
 )

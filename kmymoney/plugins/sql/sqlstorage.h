@@ -42,9 +42,10 @@ public:
   QAction *m_saveAsDBaction;
   QAction *m_generateDB;
 
-  bool open(MyMoneyStorageMgr *storage, const QUrl &url) override;
+  MyMoneyStorageMgr *open(const QUrl &url) override;
   bool save(const QUrl &url) override;
-  QString formatName() const override;
+  bool saveAs() override;
+  eKMyMoney::StorageType storageType() const override;
   QString fileExtension() const override;
 
 protected:
@@ -60,11 +61,9 @@ private:
    * @retval true save operation was successful
    */
   bool saveAsDatabase(const QUrl &url);
-  bool saveDatabase(const QUrl &url);
 
 private Q_SLOTS:
   void slotOpenDatabase();
-  void slotSaveAsDatabase();
   void slotGenerateSql();
 };
 

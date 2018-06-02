@@ -48,6 +48,7 @@
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 #include "importinterface.h"
+#include "viewinterface.h"
 #include "ui_importoption.h"
 
 //#define DEBUG_LIBOFX
@@ -109,9 +110,11 @@ OFXImporter::~OFXImporter()
 
 void OFXImporter::createActions()
 {
-  QAction *action = actionCollection()->addAction("file_import_ofx");
-  action->setText(i18n("OFX..."));
-  connect(action, &QAction::triggered, this, static_cast<void (OFXImporter::*)()>(&OFXImporter::slotImportFile));
+  const auto &kpartgui = QStringLiteral("file_import_ofx");
+  auto a = actionCollection()->addAction(kpartgui);
+  a->setText(i18n("OFX..."));
+  connect(a, &QAction::triggered, this, static_cast<void (OFXImporter::*)()>(&OFXImporter::slotImportFile));
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 void OFXImporter::slotImportFile()

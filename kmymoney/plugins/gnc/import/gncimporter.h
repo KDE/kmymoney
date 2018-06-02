@@ -38,10 +38,11 @@ public:
   explicit GNCImporter(QObject *parent, const QVariantList &args);
   ~GNCImporter() override;
 
-  bool open(MyMoneyStorageMgr *storage, const QUrl &url) override;
+  MyMoneyStorageMgr *open(const QUrl &url) override;
   bool save(const QUrl &url) override;
-  IMyMoneyOperationsFormat* reader() override;
-  QString formatName() const override;
+  bool saveAs() override;
+
+  eKMyMoney::StorageType storageType() const override;
   QString fileExtension() const override;
 };
 

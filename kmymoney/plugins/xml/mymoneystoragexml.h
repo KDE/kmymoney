@@ -77,8 +77,11 @@ public:
     Writing = 1           /**< version to be used when writing a file */
   };
 
-protected:
-  void          setProgressCallback(void(*callback)(int, int, const QString&)) override;
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void setProgressCallback(void(*callback)(int, int, const QString&)) override;
+
+  protected:
   void          signalProgress(int current, int total, const QString& = "");
 
   /**
@@ -143,9 +146,6 @@ protected:
   virtual void writeCurrencies(QDomElement& currencies);
 
   virtual QDomElement writeKeyValuePairs(const QMap<QString, QString> pairs);
-
-  virtual void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
-  virtual void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
 
   bool readUserInformation(const QDomElement& userElement);
 

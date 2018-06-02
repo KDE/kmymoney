@@ -76,6 +76,7 @@
 #include "securitiesmodel.h"
 #include "icons.h"
 #include "amountedit.h"
+#include "onlinejobadministration.h"
 #include "kmymoneyaccounttreeview.h"
 #include "accountsviewproxymodel.h"
 #include "mymoneyprice.h"
@@ -83,6 +84,7 @@
 #include "mymoneysplit.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
+#include "mymoneytag.h"
 #include "kmymoneyedit.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
@@ -98,8 +100,7 @@ typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
 
 KMyMoneyView::KMyMoneyView()
     : KPageWidget(nullptr),
-    m_header(0),
-    m_storagePlugins(nullptr)
+    m_header(0)
 {
   // this is a workaround for the bug in KPageWidget that causes the header to be shown
   // for a short while during page switch which causes a kind of bouncing of the page's
@@ -201,10 +202,14 @@ void KMyMoneyView::slotFileOpened()
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
   #endif
   switchToDefaultView();
+  slotObjectSelected(MyMoneyAccount()); // in order to enable update all accounts on file reload
 }
 
 void KMyMoneyView::slotFileClosed()
 {
+  slotShowHomePage();
+  if (viewBases.contains(View::Home))
+    viewBases[View::Home]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
 
   if (viewBases.contains(View::Reports))
     viewBases[View::Reports]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
@@ -215,7 +220,10 @@ void KMyMoneyView::slotFileClosed()
   #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
   #endif
-  slotShowHomePage();
+
+  pActions[eMenu::Action::Print]->setEnabled(false);
+  pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(false);
+  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(false);
 }
 
 void KMyMoneyView::slotShowHomePage()
@@ -374,11 +382,6 @@ void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>
     viewBases[View::OnlineJobOutbox]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
 }
 
-void KMyMoneyView::setStoragePlugins(QMap<QString, KMyMoneyPlugin::StoragePlugin*>& plugins)
-{
-  m_storagePlugins = &plugins;
-}
-
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
 {
   return static_cast<KScheduledView*>(viewBases[View::Schedules])->enterSchedule(schedule, autoEnter, extendedKeys);
@@ -500,14 +503,14 @@ void KMyMoneyView::showPage(View idView)
     return;
 
   setCurrentPage(viewFrames[idView]);
-  pActions[eMenu::Action::Print]->setEnabled(canPrint());
-  emit aboutToChangeView();
+  resetViewSelection();
 }
 
 bool KMyMoneyView::canPrint()
 {
-  return ((viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage()) ||
-          (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage())
+  return (MyMoneyFile::instance()->storageAttached() &&
+          ((viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage()) ||
+          (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage()))
          );
 }
 
@@ -550,30 +553,6 @@ void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
   static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 
-void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
-{
-  if (!baseCurrency.id().isEmpty()) {
-    QString baseId;
-    try {
-      baseId = MyMoneyFile::instance()->baseCurrency().id();
-    } catch (const MyMoneyException &e) {
-      qDebug("%s", e.what());
-    }
-
-    if (baseCurrency.id() != baseId) {
-      MyMoneyFileTransaction ft;
-      try {
-        MyMoneyFile::instance()->setBaseCurrency(baseCurrency);
-        ft.commit();
-      } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", baseCurrency.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
-      }
-    }
-    AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-    KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-  }
-}
-
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 {
   if (viewFrames[View::Accounts] != currentPage())
@@ -604,9 +583,9 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
   if (m_header)
     m_header->setText(m_model->data(current, KPageModel::HeaderRole).toString());
 
+  const auto view = currentPage();
   // remember the selected view if there is a real change
   if (previous.isValid()) {
-    const KPageWidgetItem* view = currentPage();
     QHash<View, KPageWidgetItem*>::const_iterator it;
     for(it = viewFrames.cbegin(); it != viewFrames.cend(); ++it) {
       if ((*it) == view) {
@@ -615,6 +594,12 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
       }
     }
   }
+
+  if (viewBases.contains(View::Ledgers) && view != viewFrames.value(View::Ledgers))
+    viewBases[View::Ledgers]->executeCustomAction(eView::Action::DisableViewDepenedendActions);
+
+  pActions[eMenu::Action::Print]->setEnabled(canPrint());
+  pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(onlineJobAdministration::instance()->canSendCreditTransfer());
 }
 
 void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)
@@ -668,9 +653,15 @@ void KMyMoneyView::slotPrintView()
     viewBases[View::Home]->executeCustomAction(eView::Action::Print);
 }
 
-void KMyMoneyView::resetViewSelection(const View)
+void KMyMoneyView::resetViewSelection()
 {
-  emit aboutToChangeView();
+  if (!MyMoneyFile::instance()->storageAttached())
+    return;
+  slotObjectSelected(MyMoneyAccount());
+  slotObjectSelected(MyMoneyInstitution());
+  slotObjectSelected(MyMoneySchedule());
+  slotObjectSelected(MyMoneyTag());
+  slotSelectByVariant(QVariantList {QVariant::fromValue(KMyMoneyRegister::SelectedTransactions())}, eView::Intent::SelectRegisterTransactions);
 }
 
 void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
@@ -786,8 +777,11 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
       break;
 
     case eView::Intent::SelectRegisterTransactions:
-      if (variant.count() == 1)
+      if (variant.count() == 1) {
         emit transactionsSelected(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>()); // for plugins
+        if (viewBases.contains(View::Ledgers))
+          viewBases[View::Ledgers]->slotSelectByVariant(variant, intent);
+      }
       break;
 
     case eView::Intent::AccountReconciled:
@@ -808,7 +802,7 @@ void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
 {
   switch (action) {
     case eView::Action::AboutToShow:
-      emit aboutToChangeView();
+      resetViewSelection();
       break;
     case eView::Action::SwitchView:
       showPage(view);

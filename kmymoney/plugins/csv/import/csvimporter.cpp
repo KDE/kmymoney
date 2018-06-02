@@ -36,6 +36,7 @@
 #include "core/csvimportercore.h"
 #include "csvwizard.h"
 #include "statementinterface.h"
+#include "viewinterface.h"
 
 CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -55,9 +56,11 @@ CSVImporter::~CSVImporter()
 
 void CSVImporter::createActions()
 {
-  m_action = actionCollection()->addAction("file_import_csv");
+  const auto &kpartgui = QStringLiteral("file_import_csv");
+  m_action = actionCollection()->addAction(kpartgui);
   m_action->setText(i18n("CSV..."));
   connect(m_action, &QAction::triggered, this, &CSVImporter::startWizardRun);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 void CSVImporter::startWizardRun()

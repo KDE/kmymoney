@@ -16,8 +16,7 @@
  */
 
 #include "csvexporter.h"
-#include "csvexportdlg.h"
-#include "csvwriter.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,6 +33,10 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "csvexportdlg.h"
+#include "csvwriter.h"
+#include "viewinterface.h"
 
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -53,9 +56,11 @@ CSVExporter::~CSVExporter()
 
 void CSVExporter::createActions()
 {
-  m_action = actionCollection()->addAction("file_export_csv");
+  const auto &kpartgui = QStringLiteral("file_export_csv");
+  m_action = actionCollection()->addAction(kpartgui);
   m_action->setText(i18n("&CSV..."));
   connect(m_action, &QAction::triggered, this, &CSVExporter::slotCsvExport);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 void CSVExporter::slotCsvExport()

@@ -418,8 +418,9 @@ public:
     m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     QList<MyMoneyAccount> list;
-    MyMoneyFile::instance()->accountList(list);
-    if (list.count() == 0) {
+    if (MyMoneyFile::instance()->storage())
+      MyMoneyFile::instance()->accountList(list);
+    if (list.isEmpty()) {
       m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
     } else {
       //clear the forecast flag so it will be reloaded

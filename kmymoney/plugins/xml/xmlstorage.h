@@ -43,9 +43,10 @@ public:
 
   QAction *m_saveAsXMLaction;
 
-  bool open(MyMoneyStorageMgr *storage, const QUrl &url) override;
+  MyMoneyStorageMgr *open(const QUrl &url) override;
   bool save(const QUrl &url) override;
-  QString formatName() const override;
+  bool saveAs() override;
+  eKMyMoney::StorageType storageType() const override;
   QString fileExtension() const override;
 
 private:
@@ -70,10 +71,6 @@ private:
   void saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* pWriter, bool plaintext, const QString& keyList);
 
   QString m_encryptionKeys;
-private Q_SLOTS:
-  void slotSaveAsXML();
-
-
 };
 
 #endif

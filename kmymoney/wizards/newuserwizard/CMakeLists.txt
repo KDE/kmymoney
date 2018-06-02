@@ -5,7 +5,6 @@ set (libnewuserwizard_a_SOURCES
   kaccountpage.cpp
   kcategoriespage.cpp
   kcurrencypage.cpp
-  kfilepage.cpp
   kgeneralpage.cpp
   kintropage.cpp
   kpreferencepage.cpp
@@ -13,7 +12,7 @@ set (libnewuserwizard_a_SOURCES
 
 set (libnewuserwizard_a_UI
   kaccountpage.ui kcurrencypage.ui
-  kfilepage.ui kgeneralpage.ui
+  kgeneralpage.ui
   kintropage.ui kpreferencepage.ui
   kpasswordpage.ui
   )

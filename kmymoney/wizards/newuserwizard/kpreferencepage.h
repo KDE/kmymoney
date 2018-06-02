@@ -49,8 +49,6 @@ namespace NewUserWizard
     explicit PreferencePage(Wizard* parent);
     ~PreferencePage() override;
 
-    KMyMoneyWizardPage* nextPage() const override;
-
   private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, PreferencePage)
     friend class Wizard;

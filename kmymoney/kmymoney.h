@@ -65,6 +65,7 @@ class IMyMoneyOperationsFormat;
 template <class T> class onlineJobTyped;
 typedef  void (*KMyMoneyAppCallback)(int, int, const QString &);
 
+namespace eKMyMoney { enum class FileAction; }
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eMenu { enum class Action;
                   enum class Menu; }
@@ -245,21 +246,6 @@ protected Q_SLOTS:
   void slotStatusProgressDone();
 
 public:
-  enum fileActions {
-    preOpen, postOpen, preSave, postSave, preClose, postClose
-  };
-
-  // Keep a note of the file type
-  typedef enum _fileTypeE {
-    KmmBinary = 0,  // native, binary
-    KmmXML,        // native, XML
-    KmmDb,         //  SQL database
-    /* insert new native file types above this line */
-    MaxNativeFileType,
-    /* and non-native types below */
-    GncXML         // Gnucash XML
-  } fileTypeE;
-
   /**
     * This method checks if there is at least one asset or liability account
     * in the current storage object. If not, it starts the new account wizard.
@@ -298,16 +284,6 @@ public:
     * Returns whether there is an importer available that can handle this file
     */
   bool isImportableFile(const QUrl &url);
-
-  /**
-    * This method is used to update the caption of the application window.
-    * It sets the caption to "filename [modified] - KMyMoney".
-    *
-    * @param skipActions if true, the actions will not be updated. This
-    *                    is usually onyl required by some early calls when
-    *                    these widgets are not yet created (the default is false).
-    */
-  void updateCaption(bool skipActions = false);
 
   /**
     * This method returns a list of all 'other' dcop registered kmymoney processes.
@@ -422,7 +398,9 @@ protected:
 
   void slotCheckSchedules();
 
+#ifdef KMM_DEBUG
   void resizeEvent(QResizeEvent*) final override;
+#endif
 
   void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
 
@@ -435,40 +413,7 @@ public Q_SLOTS:
 
   void slotFileInfoDialog();
 
-  /** */
-  void slotFileNew();
-
-  /** open a file and load it into the document*/
-  void slotFileOpen();
-
   bool isFileOpenedInAnotherInstance(const QUrl &url);
-
-  /** opens a file from the recent files menu */
-
-  void slotFileOpenRecent(const QUrl &url);
-
-  /**
-    * saves the current document. If it has no name yet, the user
-    * will be queried for it.
-    *
-    * @retval false save operation failed
-    * @retval true save operation was successful
-    */
-  bool slotFileSave();
-
-  /** asks for saving if the file is modified, then closes the actual file and window */
-  void slotFileCloseWindow();
-
-  /** asks for saving if the file is modified, then closes the actual file */
-  void slotFileClose();
-
-  /**
-    * closes all open windows by calling close() on each memberList item
-    * until the list is empty, then quits the application.
-    * If queryClose() returns false because the user canceled the
-    * saveModified() dialog, the closing breaks.
-    */
-  void slotFileQuit();
 
   void slotFileConsistencyCheck();
 
@@ -575,17 +520,10 @@ public Q_SLOTS:
     */
   void slotToolsStartKCalc();
 
-  void slotResetSelections();
-
   /**
     * Brings up the new account wizard and saves the information.
     */
   void slotAccountNew(MyMoneyAccount&);
-
-  /**
-    * This method updates all KAction items to the current state.
-    */
-  void slotUpdateActions();
 
   void webConnect(const QString& sourceUrl, const QByteArray &asn_id);
   void webConnect(const QUrl url) { webConnect(url.path(), QByteArray()); }
@@ -615,14 +553,6 @@ private:
     * Re-implemented from IMyMoneyProcessingCalendar
     */
   bool isProcessingDate(const QDate& date) const final override;
-
-  /**
-    * Depending on the setting of AutoSaveOnQuit, this method
-    * asks the user to save the file or not.
-    *
-    * @returns see return values of KMessageBox::warningYesNoCancel()
-    */
-  int askSaveOnClose();
 
 Q_SIGNALS:
   /**
@@ -687,6 +617,21 @@ private:
    */
   /// \internal d-pointer instance.
   Private* d;
+
+public Q_SLOTS:
+  bool slotFileNew();
+  void slotFileOpen();
+  bool slotFileOpenRecent(const QUrl &url);
+  bool slotFileSave();
+  bool slotFileSaveAs();
+  bool slotFileClose();
+  /**
+    * closes all open windows by calling close() on each memberList item
+    * until the list is empty, then quits the application.
+    * If queryClose() returns false because the user canceled the
+    * saveModified() dialog, the closing breaks.
+    */
+  void slotFileQuit();
 };
 
 extern KMyMoneyApp *kmymoney;

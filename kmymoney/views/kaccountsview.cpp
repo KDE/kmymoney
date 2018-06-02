@@ -128,25 +128,6 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
 
   const auto file = MyMoneyFile::instance();
 
-  if (d->m_onlinePlugins) {
-    QList<MyMoneyAccount> accList;
-    file->accountList(accList);
-    QList<MyMoneyAccount>::const_iterator it_a;
-    auto it_p = d->m_onlinePlugins->constEnd();
-    for (it_a = accList.constBegin(); (it_p == d->m_onlinePlugins->constEnd()) && (it_a != accList.constEnd()); ++it_a) {
-      if ((*it_a).hasOnlineMapping()) {
-        // check if provider is available
-        it_p = d->m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-        if (it_p != d->m_onlinePlugins->constEnd()) {
-          QStringList protocols;
-          (*it_p)->protocols(protocols);
-          if (!protocols.isEmpty())
-            pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(true);
-        }
-      }
-    }
-  }
-
   if (typeid(obj) != typeid(MyMoneyAccount) &&
       (obj.id().isEmpty() && d->m_currentAccount.id().isEmpty())) // do not disable actions that were already disabled)
     return;
@@ -157,7 +138,8 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
         eMenu::Action::NewAccount, eMenu::Action::EditAccount, eMenu::Action::DeleteAccount,
         eMenu::Action::CloseAccount, eMenu::Action::ReopenAccount,
         eMenu::Action::ChartAccountBalance,
-        eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount, eMenu::Action::UpdateAccount
+        eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount,
+        eMenu::Action::UpdateAccount
   };
 
   for (const auto& a : actionsToBeDisabled)

@@ -833,7 +833,7 @@ class MyMoneyGncReader
 #endif // _GNCFILEANON
 public:
   MyMoneyGncReader();
-  virtual ~MyMoneyGncReader();
+  ~MyMoneyGncReader() override;
   /**
     * Import a GnuCash XML file
     *
@@ -848,6 +848,7 @@ public:
   void writeFile(QIODevice*, MyMoneyStorageMgr*) final override {
     return ;
   } // dummy entry needed by kmymoneywiew. we will not be writing
+  void setProgressCallback(void(*callback)(int, int, const QString&)) final override;
 #else
   void readFile(QString, QString);
 #endif // _GNCFILEANON
@@ -916,7 +917,6 @@ protected:
   void postMessage(const QString&, const unsigned int, const char *, const char *);
   void postMessage(const QString&, const unsigned int, const char *, const char *, const char *);
   void postMessage(const QString&, const unsigned int, const QStringList&);
-  void setProgressCallback(void(*callback)(int, int, const QString&)) final override;
   void signalProgress(int current, int total, const QString& = "");
   /** user options */
   /**

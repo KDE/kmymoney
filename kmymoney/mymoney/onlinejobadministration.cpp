@@ -388,6 +388,9 @@ bool onlineJobAdministration::canSendAnyTask()
     registerAllOnlineTasks();
   }
 
+  if (!MyMoneyFile::instance()->storageAttached())
+    return false;
+
   // Check if any plugin supports a loaded online task
   foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, *m_onlinePlugins) {
     QList<MyMoneyAccount> accounts;
@@ -411,6 +414,9 @@ bool onlineJobAdministration::canSendCreditTransfer()
   if (m_onlineTasks.isEmpty()) {
     registerAllOnlineTasks();
   }
+
+  if (!MyMoneyFile::instance()->storageAttached())
+    return false;
 
   foreach (onlineTask* task, m_onlineTasks) {
     // Check if a online task has the correct type

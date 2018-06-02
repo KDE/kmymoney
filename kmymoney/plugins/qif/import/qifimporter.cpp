@@ -34,6 +34,7 @@
 #include "kimportdlg.h"
 #include "mymoneyqifreader.h"
 #include "statementinterface.h"
+#include "viewinterface.h"
 
 class MyMoneyStatement;
 
@@ -55,9 +56,11 @@ QIFImporter::~QIFImporter()
 
 void QIFImporter::createActions()
 {
-  m_action = actionCollection()->addAction("file_import_qif");
+  const auto &kpartgui = QStringLiteral("file_import_qif");
+  m_action = actionCollection()->addAction(kpartgui);
   m_action->setText(i18n("QIF..."));
   connect(m_action, &QAction::triggered, this, &QIFImporter::slotQifImport);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 void QIFImporter::slotQifImport()

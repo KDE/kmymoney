@@ -65,7 +65,8 @@ namespace eView {
     EditInstitution,
     EditSchedule,
     CleanupBeforeFileClose,
-    InitializeAfterFileOpen
+    InitializeAfterFileOpen,
+    DisableViewDepenedendActions
   };
 
 }

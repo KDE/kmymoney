@@ -60,13 +60,10 @@ namespace KMyMoneyPlugin
     virtual void writeLastUsedFile(const QString& fileName) = 0;
     virtual void slotFileOpenRecent(const QUrl &url) = 0;
     virtual void addToRecentFiles(const QUrl& url) = 0;
-    virtual void updateCaption(bool skipActions = false) = 0;
-    virtual QTimer* autosaveTimer() = 0;
     virtual KMyMoneyAppCallback progressCallback() = 0;
     virtual void writeLastUsedDir(const QString &directory) = 0;
     virtual QString readLastUsedDir() const = 0;
     virtual void consistencyCheck(bool alwaysDisplayResult) = 0;
-
 
    Q_SIGNALS:
     void kmmFilePlugin(unsigned int);

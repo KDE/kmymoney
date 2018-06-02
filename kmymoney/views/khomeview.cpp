@@ -58,6 +58,7 @@ void KHomeView::wheelEvent(QWheelEvent* event)
 
 void KHomeView::executeCustomAction(eView::Action action)
 {
+  Q_D(KHomeView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
@@ -65,6 +66,10 @@ void KHomeView::executeCustomAction(eView::Action action)
 
     case eView::Action::Print:
       slotPrintView();
+      break;
+
+    case eView::Action::CleanupBeforeFileClose:
+      d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
       break;
 
     default:

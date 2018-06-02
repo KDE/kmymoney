@@ -112,8 +112,3 @@ KMyMoneyPlugin::ImporterPlugin::ImporterPlugin()
 KMyMoneyPlugin::ImporterPlugin::~ImporterPlugin()
 {
 }
-
-IMyMoneyOperationsFormat* KMyMoneyPlugin::StoragePlugin::reader()
-{
-  return nullptr;
-}

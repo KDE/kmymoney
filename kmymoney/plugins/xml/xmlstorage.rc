@@ -1,8 +1,0 @@
-<!DOCTYPE kpartgui>
-<kpartgui name="kmymoneyplugin-xmlstorage" version="0">
-  <MenuBar>
-    <Menu name="file">
-      <Action name="saveas_xml" group="save_db_group"/>
-    </Menu>
-  </MenuBar>
-</kpartgui>

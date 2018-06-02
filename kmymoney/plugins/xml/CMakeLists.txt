@@ -32,9 +32,6 @@ target_link_libraries(xmlstorage
     kmymoney_common
 )
 
-install(FILES xmlstorage.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/xmlstorage")
-
 # install(FILES kmymoney-xmlstorageplugin.desktop
 #   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 # )

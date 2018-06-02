@@ -69,7 +69,7 @@ namespace NewUserWizard
     QList<MyMoneySecurity>::const_iterator it;
 
     QString localCurrency(QLocale().currencySymbol(QLocale::CurrencyIsoCode));
-    QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
+    QString baseCurrency = MyMoneyFile::instance()->storageAttached() ? MyMoneyFile::instance()->baseCurrency().id() : QString();
 
 
     ui->m_currencyList->clear();

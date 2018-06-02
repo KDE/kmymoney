@@ -44,9 +44,10 @@
 #include "mymoneyfile.h"
 #include "mymoneystoragesql.h"
 #include "mymoneyexception.h"
-//#include "mymoneystoragemgr.h"
+#include "mymoneystoragemgr.h"
 #include "icons.h"
 #include "kmymoneysettings.h"
+#include "kmymoneyenums.h"
 
 using namespace Icons;
 
@@ -66,8 +67,12 @@ SQLStorage::~SQLStorage()
   qDebug("Plugins: sqlstorage unloaded");
 }
 
-bool SQLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)
+MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
 {
+  if (url.scheme() != QLatin1String("sql"))
+    return nullptr;
+
+  auto storage = new MyMoneyStorageMgr;
   auto reader = std::make_unique<MyMoneyStorageSql>(storage, url);
 
   QUrl dbURL(url);
@@ -81,10 +86,12 @@ bool SQLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)
         KMessageBox::detailedError(nullptr,
                                    i18n("Cannot open database %1\n", dbURL.toDisplayString()),
                                    reader->lastError());
-        return false;
+        delete storage;
+        return nullptr;
       case -1: // retryable error
         if (KMessageBox::warningYesNo(nullptr, reader->lastError(), PACKAGE) == KMessageBox::No) {
-          return false;
+          delete storage;
+          return nullptr;
         } else {
           QUrlQuery query(dbURL);
           const QString optionKey = QLatin1String("options");
@@ -110,25 +117,90 @@ bool SQLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)
                                i18n("An unrecoverable error occurred while reading the database"),
                                reader->lastError().toLatin1(),
                                i18n("Database malfunction"));
-    return false;
+    delete storage;
+    return nullptr;
   }
 //  reader->setProgressCallback(0);
-  return true;
+  return storage;
 }
 
 bool SQLStorage::save(const QUrl &url)
 {
-  return saveDatabase(url);
+  auto rc = false;
+  if (!appInterface()->fileOpen()) {
+    KMessageBox::error(nullptr, i18n("Tried to access a file when it has not been opened"));
+    return (rc);
+  }
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
+  writer->open(url, QIODevice::WriteOnly);
+//  writer->setProgressCallback(&KMyMoneyView::progressCallback);
+  if (!writer->writeFile()) {
+    KMessageBox::detailedError(nullptr,
+                               i18n("An unrecoverable error occurred while writing to the database.\n"
+                                    "It may well be corrupt."),
+                               writer->lastError().toLatin1(),
+                               i18n("Database malfunction"));
+    rc =  false;
+  } else {
+    rc = true;
+  }
+  writer->setProgressCallback(0);
+  delete writer;
+  return rc;
 }
 
-QString SQLStorage::formatName() const
+bool SQLStorage::saveAs()
 {
-  return QStringLiteral("SQL");
+  auto rc = false;
+  QUrl oldUrl;
+  // in event of it being a database, ensure that all data is read into storage for saveas
+  if (appInterface()->isDatabase())
+    oldUrl = appInterface()->filenameURL().isEmpty() ? appInterface()->lastOpenedURL() : appInterface()->filenameURL();
+
+  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
+  QUrl url = oldUrl;
+  if (!dialog->checkDrivers()) {
+    delete dialog;
+    return rc;
+  }
+
+  while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != 0) {
+    url = dialog->selectedURL();
+    // If the protocol is SQL for the old and new, and the hostname and database names match
+    // Let the user know that the current database cannot be saved on top of itself.
+    if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
+        && oldUrl.host() == url.host()
+        && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
+        && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
+      KMessageBox::sorry(nullptr, i18n("Cannot save to current database."));
+    } else {
+      try {
+        rc = saveAsDatabase(url);
+      } catch (const MyMoneyException &e) {
+        KMessageBox::sorry(nullptr, i18n("Cannot save to current database: %1", QString::fromLatin1(e.what())));
+      }
+    }
+  }
+  delete dialog;
+
+  if (rc) {
+    //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+    //if(p)
+    appInterface()->addToRecentFiles(url);
+    appInterface()->writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
+    appInterface()->writeFilenameURL(url);
+  }
+  return rc;
+}
+
+eKMyMoney::StorageType SQLStorage::storageType() const
+{
+  return eKMyMoney::StorageType::SQL;
 }
 
 QString SQLStorage::fileExtension() const
 {
-  return QString();
+  return i18n("Database files (*.db *.sql)");
 }
 
 void SQLStorage::createActions()
@@ -137,11 +209,6 @@ void SQLStorage::createActions()
   m_openDBaction->setText(i18n("Open database..."));
   m_openDBaction->setIcon(Icons::get(Icon::SVNUpdate));
   connect(m_openDBaction, &QAction::triggered, this, &SQLStorage::slotOpenDatabase);
-
-  m_saveAsDBaction = actionCollection()->addAction("saveas_database");
-  m_saveAsDBaction->setText(i18n("Save as database..."));
-  m_saveAsDBaction->setIcon(Icons::get(Icon::FileArchiver));
-  connect(m_saveAsDBaction, &QAction::triggered, this, &SQLStorage::slotSaveAsDatabase);
 
   m_generateDB = actionCollection()->addAction("tools_generate_sql");
   m_generateDB->setText(i18n("Generate Database SQL"));
@@ -197,51 +264,6 @@ void SQLStorage::slotOpenDatabase()
   delete dialog;
 }
 
-void SQLStorage::slotSaveAsDatabase()
-{
-  bool rc = false;
-  QUrl oldUrl;
-  // in event of it being a database, ensure that all data is read into storage for saveas
-  if (appInterface()->isDatabase())
-    oldUrl = appInterface()->filenameURL().isEmpty() ? appInterface()->lastOpenedURL() : appInterface()->filenameURL();
-
-  QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
-  QUrl url = oldUrl;
-  if (!dialog->checkDrivers()) {
-    delete dialog;
-    return;
-  }
-
-  while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != 0) {
-    url = dialog->selectedURL();
-    // If the protocol is SQL for the old and new, and the hostname and database names match
-    // Let the user know that the current database cannot be saved on top of itself.
-    if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
-        && oldUrl.host() == url.host()
-        && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
-        && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
-      KMessageBox::sorry(nullptr, i18n("Cannot save to current database."));
-    } else {
-      try {
-        rc = saveAsDatabase(url);
-      } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(nullptr, i18n("Cannot save to current database: %1", QString::fromLatin1(e.what())));
-      }
-    }
-  }
-  delete dialog;
-
-  if (rc) {
-    //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-    //if(p)
-    appInterface()->addToRecentFiles(url);
-    appInterface()->writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
-  }
-  appInterface()->autosaveTimer()->stop();
-  appInterface()->updateCaption();
-  return;
-}
-
 void SQLStorage::slotGenerateSql()
 {
   QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(nullptr);
@@ -272,7 +294,7 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
   }
   if (canWrite) {
     delete writer;
-    saveDatabase(url);
+    save(url);
     return true;
   } else {
     KMessageBox::detailedError(nullptr,
@@ -282,31 +304,6 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
     delete writer;
     return false;
   }
-}
-
-bool SQLStorage::saveDatabase(const QUrl &url)
-{
-  auto rc = false;
-  if (!appInterface()->fileOpen()) {
-    KMessageBox::error(nullptr, i18n("Tried to access a file when it has not been opened"));
-    return (rc);
-  }
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
-  writer->open(url, QIODevice::WriteOnly);
-//  writer->setProgressCallback(&KMyMoneyView::progressCallback);
-  if (!writer->writeFile()) {
-    KMessageBox::detailedError(nullptr,
-                               i18n("An unrecoverable error occurred while writing to the database.\n"
-                                    "It may well be corrupt."),
-                               writer->lastError().toLatin1(),
-                               i18n("Database malfunction"));
-    rc =  false;
-  } else {
-    rc = true;
-  }
-  writer->setProgressCallback(0);
-  delete writer;
-  return rc;
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(SQLStorageFactory, "sqlstorage.json", registerPlugin<SQLStorage>();)

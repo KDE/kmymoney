@@ -45,6 +45,7 @@
 #include "appinterface.h"
 #include "viewinterface.h"
 #include "mymoneyfile.h"
+#include "mymoneystoragemgr.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragebin.h"
 #include "mymoneystoragexml.h"
@@ -54,6 +55,7 @@
 #include "kmymoneyutils.h"
 #include "kgpgfile.h"
 #include "kgpgkeyselectiondlg.h"
+#include "kmymoneyenums.h"
 
 using namespace Icons;
 
@@ -66,8 +68,6 @@ XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
 {
   Q_UNUSED(args)
   setComponentName("xmlstorage", i18n("XML storage"));
-  setXMLFile("xmlstorage.rc");
-  createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: xmlstorage loaded");
 }
@@ -77,10 +77,10 @@ XMLStorage::~XMLStorage()
   qDebug("Plugins: xmlstorage unloaded");
 }
 
-bool XMLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)
+MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
 {
-  if (!url.isValid())
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid URL %1").arg(qPrintable(url.url())));
+  if (url.scheme() == QLatin1String("sql"))
+    return nullptr;
 
   QString fileName;
   auto downloadedFile = false;
@@ -187,27 +187,20 @@ bool XMLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)
   else
     ungetString(qfile, qbaFileHeader.data(), 70);
 
-  IMyMoneyOperationsFormat* pReader = nullptr;
   QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
   QByteArray txt(qbaFileHeader, 70);
-  if (kmyexp.indexIn(txt) != -1) {
-    pReader = new MyMoneyStorageXML;
-  } else {
-    throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>%1</qt>").arg(i18n("File <b>%1</b> contains an unknown file format.", fileName)));
-  }
-
-  // disconnect the current storga manager from the engine
-  MyMoneyFile::instance()->detachStorage();
+  if (kmyexp.indexIn(txt) == -1)
+    return nullptr;
 
   // attach the storage before reading the file, since the online
   // onlineJobAdministration object queries the engine during
   // loading.
-  MyMoneyFile::instance()->attachStorage(storage);
 
-  pReader->setProgressCallback(appInterface()->progressCallback());
-  pReader->readFile(qfile, storage);
-  pReader->setProgressCallback(0);
-  delete pReader;
+  auto storage = new MyMoneyStorageMgr;
+  MyMoneyStorageXML pReader;
+  pReader.setProgressCallback(appInterface()->progressCallback());
+  pReader.readFile(qfile, storage);
+  pReader.setProgressCallback(0);
 
   qfile->close();
   delete qfile;
@@ -218,13 +211,19 @@ bool XMLStorage::open(MyMoneyStorageMgr *storage, const QUrl &url)
   if (downloadedFile)
     QFile::remove(fileName);
 
-  // encapsulate transactions to the engine to be able to commit/rollback
-  MyMoneyFileTransaction ft;
   // make sure we setup the encryption key correctly
-  if (isEncrypted && MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty())
-    MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneySettings::gpgRecipientList().join(","));
-  ft.commit();
-  return true;
+  if (isEncrypted) {
+    MyMoneyFile::instance()->attachStorage(storage);
+    if (MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty()) {
+      // encapsulate transactions to the engine to be able to commit/rollback
+      MyMoneyFileTransaction ft;
+      MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneySettings::gpgRecipientList().join(","));
+      ft.commit();
+    }
+    MyMoneyFile::instance()->detachStorage();
+  }
+
+  return storage;
 }
 
 bool XMLStorage::save(const QUrl &url)
@@ -249,7 +248,7 @@ bool XMLStorage::save(const QUrl &url)
   QString keyList;
   if (!appInterface()->filenameURL().isEmpty())
     keyList = MyMoneyFile::instance()->value("kmm-encryption-key");
-  else
+  if (keyList.isEmpty())
     keyList = m_encryptionKeys;
 
   // actually, url should be the parameter to this function
@@ -268,8 +267,9 @@ bool XMLStorage::save(const QUrl &url)
               KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
             }
           saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
-        } catch (const MyMoneyException &) {
-          throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to write changes to '%1'").arg(filename));
+        } catch (const MyMoneyException &e) {
+          qWarning("Unable to write changes to: %s\nReason: %s", qPrintable(filename), e.what());
+          throw;
         }
       } else {
 
@@ -295,22 +295,92 @@ bool XMLStorage::save(const QUrl &url)
   return rc;
 }
 
-QString XMLStorage::formatName() const
+bool XMLStorage::saveAs()
 {
-  return QStringLiteral("XML");
+  auto rc = false;
+  QStringList m_additionalGpgKeys;
+  m_encryptionKeys.clear();
+
+  QString selectedKeyName;
+  if (KGPGFile::GPGAvailable() && KMyMoneySettings::writeDataEncrypted()) {
+    // fill the secret key list and combo box
+    QStringList keyList;
+    KGPGFile::secretKeyList(keyList);
+
+    QPointer<KGpgKeySelectionDlg> dlg = new KGpgKeySelectionDlg(nullptr);
+    dlg->setSecretKeys(keyList, KMyMoneySettings::gpgRecipient());
+    dlg->setAdditionalKeys(KMyMoneySettings::gpgRecipientList());
+    rc = dlg->exec();
+    if ((rc == QDialog::Accepted) && (dlg != 0)) {
+      m_additionalGpgKeys = dlg->additionalKeys();
+      selectedKeyName = dlg->secretKey();
+    }
+    delete dlg;
+    if (rc != QDialog::Accepted) {
+      return rc;
+    }
+  }
+
+  QString prevDir; // don't prompt file name if not a native file
+  if (appInterface()->isNativeFile())
+    prevDir = appInterface()->readLastUsedDir();
+
+  QPointer<QFileDialog> dlg =
+    new QFileDialog(nullptr, i18n("Save As"), prevDir,
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.kmy")).arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml")).arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
+  dlg->setAcceptMode(QFileDialog::AcceptSave);
+
+  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+    QUrl newURL = dlg->selectedUrls().first();
+    if (!newURL.fileName().isEmpty()) {
+      appInterface()->consistencyCheck(false);
+      QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
+
+      // append extension if not present
+      if (!newName.endsWith(QLatin1String(".kmy"), Qt::CaseInsensitive) &&
+          !newName.endsWith(QLatin1String(".xml"), Qt::CaseInsensitive))
+        newName.append(QLatin1String(".kmy"));
+      newURL = QUrl::fromUserInput(newName);
+
+      // If this is the anonymous file export, just save it, don't actually take the
+      // name, or remember it! Don't even try to encrypt it
+      if (newName.endsWith(QLatin1String(".anon.xml"), Qt::CaseInsensitive))
+        rc = save(newURL);
+      else {
+        appInterface()->writeFilenameURL(newURL);
+        QRegExp keyExp(".* \\((.*)\\)");
+        if (keyExp.indexIn(selectedKeyName) != -1) {
+          m_encryptionKeys = keyExp.cap(1);
+          if (!m_additionalGpgKeys.isEmpty()) {
+            if (!m_encryptionKeys.isEmpty())
+              m_encryptionKeys.append(QLatin1Char(','));
+            m_encryptionKeys.append(m_additionalGpgKeys.join(QLatin1Char(',')));
+          }
+        }
+        rc = save(newURL);
+        appInterface()->addToRecentFiles(newURL);
+        //write the directory used for this file as the default one for next time.
+        appInterface()->writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
+        appInterface()->writeLastUsedFile(newName);
+      }
+    }
+  }
+  (*appInterface()->progressCallback())(0,0, i18nc("Application is ready to use", "Ready."));
+  delete dlg;
+  return rc;
+}
+
+eKMyMoney::StorageType XMLStorage::storageType() const
+{
+  return eKMyMoney::StorageType::XML;
 }
 
 QString XMLStorage::fileExtension() const
 {
-  return QString();
-}
-
-void XMLStorage::createActions()
-{
-  m_saveAsXMLaction = actionCollection()->addAction("saveas_xml");
-  m_saveAsXMLaction->setText(i18n("Save as XML..."));
-  m_saveAsXMLaction->setIcon(Icons::get(Icon::FileArchiver));
-  connect(m_saveAsXMLaction, &QAction::triggered, this, &XMLStorage::slotSaveAsXML);
+  return i18n("KMyMoney files (*.kmy *.xml)");
 }
 
 void XMLStorage::ungetString(QIODevice *qfile, char *buf, int len)
@@ -431,85 +501,6 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
   }
   QFile::setPermissions(localFile, QFileDevice::ReadUser | QFileDevice::WriteUser);
   pWriter->setProgressCallback(0);
-}
-
-void XMLStorage::slotSaveAsXML()
-{
-  bool rc = false;
-  QStringList m_additionalGpgKeys;
-  m_encryptionKeys.clear();
-
-  QString selectedKeyName;
-  if (KGPGFile::GPGAvailable() && KMyMoneySettings::writeDataEncrypted()) {
-    // fill the secret key list and combo box
-    QStringList keyList;
-    KGPGFile::secretKeyList(keyList);
-
-    QPointer<KGpgKeySelectionDlg> dlg = new KGpgKeySelectionDlg(nullptr);
-    dlg->setSecretKeys(keyList, KMyMoneySettings::gpgRecipient());
-    dlg->setAdditionalKeys(KMyMoneySettings::gpgRecipientList());
-    rc = dlg->exec();
-    if ((rc == QDialog::Accepted) && (dlg != 0)) {
-      m_additionalGpgKeys = dlg->additionalKeys();
-      selectedKeyName = dlg->secretKey();
-    }
-    delete dlg;
-    if (rc != QDialog::Accepted) {
-      return;
-    }
-  }
-
-  QString prevDir; // don't prompt file name if not a native file
-  if (appInterface()->isNativeFile())
-    prevDir = appInterface()->readLastUsedDir();
-
-  QPointer<QFileDialog> dlg =
-    new QFileDialog(nullptr, i18n("Save As"), prevDir,
-                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.kmy")).arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
-                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
-                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml")).arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
-                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
-  dlg->setAcceptMode(QFileDialog::AcceptSave);
-
-  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-    QUrl newURL = dlg->selectedUrls().first();
-    if (!newURL.fileName().isEmpty()) {
-      appInterface()->consistencyCheck(false);
-      QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
-
-      // append extension if not present
-      if (!newName.endsWith(QLatin1String(".kmy"), Qt::CaseInsensitive) &&
-          !newName.endsWith(QLatin1String(".xml"), Qt::CaseInsensitive))
-        newName.append(QLatin1String(".kmy"));
-      newURL = QUrl::fromUserInput(newName);
-      appInterface()->addToRecentFiles(newURL);
-
-      // If this is the anonymous file export, just save it, don't actually take the
-      // name, or remember it! Don't even try to encrypt it
-      if (newName.endsWith(QLatin1String(".anon.xml"), Qt::CaseInsensitive))
-        rc = save(newURL);
-      else {
-        appInterface()->writeFilenameURL(newURL);
-        QRegExp keyExp(".* \\((.*)\\)");
-        if (keyExp.indexIn(selectedKeyName) != -1) {
-          m_encryptionKeys = keyExp.cap(1);
-          if (!m_additionalGpgKeys.isEmpty()) {
-            if (!m_encryptionKeys.isEmpty())
-              m_encryptionKeys.append(QLatin1Char(','));
-            m_encryptionKeys.append(m_additionalGpgKeys.join(QLatin1Char(',')));
-          }
-        }
-        rc = save(newURL);
-        //write the directory used for this file as the default one for next time.
-        appInterface()->writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
-        appInterface()->writeLastUsedFile(newName);
-      }
-      appInterface()->autosaveTimer()->stop();
-    }
-  }
-  (*appInterface()->progressCallback())(0,0, i18nc("Application is ready to use", "Ready."));
-  delete dlg;
-  appInterface()->updateCaption();
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(XMLStorageFactory, "xmlstorage.json", registerPlugin<XMLStorage>();)

@@ -81,16 +81,6 @@ void KMyMoneyPlugin::KMMAppInterface::addToRecentFiles(const QUrl& url)
   m_app->addToRecentFiles(url);
 }
 
-void KMyMoneyPlugin::KMMAppInterface::updateCaption(bool skipActions)
-{
- m_app->updateCaption(skipActions);
-}
-
-QTimer* KMyMoneyPlugin::KMMAppInterface::autosaveTimer()
-{
- return m_app->autosaveTimer();
-}
-
 KMyMoneyAppCallback KMyMoneyPlugin::KMMAppInterface::progressCallback()
 {
   return m_app->progressCallback();
