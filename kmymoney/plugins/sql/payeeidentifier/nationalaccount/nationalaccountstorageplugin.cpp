@@ -26,7 +26,7 @@
 
 #include "sql/kmymoneystorageplugin.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(nationalAccountStoragePluginFactory, "kmymoney-nationalaccountnumberplugin.json", registerPlugin<nationalAccountStoragePlugin>();)
+K_PLUGIN_FACTORY_WITH_JSON(nationalAccountStoragePluginFactory, "kmymoney-nationalaccount-storageplugin.json", registerPlugin<nationalAccountStoragePlugin>();)
 
 QString nationalAccountStoragePlugin::iid()
 {

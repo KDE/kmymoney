@@ -23,7 +23,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-K_PLUGIN_FACTORY_WITH_JSON(ibanBicStoragePluginFactory, "ibanbicdata.json", registerPlugin<ibanBicStoragePlugin>();)
+K_PLUGIN_FACTORY_WITH_JSON(ibanBicStoragePluginFactory, "kmymoney-ibanbic-storageplugin.json", registerPlugin<ibanBicStoragePlugin>();)
 
 QString ibanBicStoragePlugin::iid()
 {
