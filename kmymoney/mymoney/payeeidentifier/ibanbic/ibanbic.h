@@ -19,12 +19,13 @@
 #ifndef PAYEEIDENTIFIER_IBANBIC_H
 #define PAYEEIDENTIFIER_IBANBIC_H
 
+#include "kmm_mymoney_export.h"
+
 #include <QString>
 #include <QChar>
 
 #include "payeeidentifier/payeeidentifierdata.h"
 #include "mymoneyunittestable.h"
-#include "iban_bic_identifier_export.h"
 
 class ibanBicData;
 
@@ -38,7 +39,7 @@ namespace payeeIdentifiers
  * Can store a pair of an International Bank Account Number (ISO 13616) and Business Identifier Code (ISO 9362).
  *
  */
-class IBAN_BIC_IDENTIFIER_EXPORT ibanBic : public payeeIdentifierData
+class KMM_MYMONEY_EXPORT ibanBic : public payeeIdentifierData
 {
   KMM_MYMONEY_UNIT_TESTABLE
 public:

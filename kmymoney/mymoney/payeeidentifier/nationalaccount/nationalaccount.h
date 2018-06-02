@@ -19,13 +19,14 @@
 #ifndef NATIONALACCOUNTID_H
 #define NATIONALACCOUNTID_H
 
+#include "kmm_mymoney_export.h"
+
 #include "mymoney/payeeidentifier/payeeidentifierdata.h"
-#include "nationalaccount_identifier_export.h"
 
 namespace payeeIdentifiers
 {
 
-class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifierData
+class KMM_MYMONEY_EXPORT nationalAccount : public payeeIdentifierData
 {
 public:
   PAYEEIDENTIFIER_IID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
