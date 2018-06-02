@@ -221,6 +221,7 @@ bool MyMoneyStorageSql::readFile()
     d->readPrices();
     d->readReports();
     d->readBudgets();
+    d->readOnlineJobs();
     //FIXME - ?? if (m_mode == 0)
     //m_storage->rebuildAccountBalances();
     // this seems to be nonsense, but it clears the dirty flag
