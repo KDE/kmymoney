@@ -51,8 +51,8 @@ void QWidgetContainer::removeOrphans()
     if ((*it_w) && (*it_w)->parent())
       ++it_w;
     else {
-      delete(*it_w);
       remove(it_w.key());
+      delete(*it_w);
       it_w = begin();
     }
   }
