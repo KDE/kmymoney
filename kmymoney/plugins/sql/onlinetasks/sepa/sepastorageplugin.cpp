@@ -57,7 +57,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
 
   // Create database in it's most recent version if version is 0
   // (version 0 means the database was not installed)
-  if (currentVersion == 0) {
+  if (currentVersion <= 1) {
     // If the database is recreated the table may be still there. So drop it if needed. No error handling needed
     // as this step is not necessary - only the creation is important.
     if (!query.exec("DROP TABLE IF EXISTS kmmSepaOrders;"))
@@ -65,7 +65,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
 
     if (!query.exec(
           "CREATE TABLE kmmSepaOrders ("
-          "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ),"
+          "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ) ON UPDATE CASCADE ON DELETE CASCADE,"
           "  originAccount varchar(32) REFERENCES kmmAccounts( id ) ON UPDATE CASCADE ON DELETE SET NULL,"
           "  value text DEFAULT '0',"
           "  purpose text,"
@@ -81,9 +81,13 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
       return false;
     }
 
+    query.prepare("DELETE FROM kmmPluginInfo WHERE iid = ?;");
+    query.bindValue(0, iid);
+    query.exec();
+
     query.prepare("INSERT INTO kmmPluginInfo (iid, versionMajor, versionMinor, uninstallQuery) VALUES(?, ?, ?, ?)");
     query.bindValue(0, iid);
-    query.bindValue(1, 1);
+    query.bindValue(1, 2);
     query.bindValue(2, 0);
     query.bindValue(3, "DROP TABLE kmmSepaOrders;");
     if (query.exec())
@@ -94,7 +98,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
 
   // Check if version is valid with this plugin
   switch (currentVersion) {
-    case 1: return true;
+    case 2: return true;
   }
 
   return false;

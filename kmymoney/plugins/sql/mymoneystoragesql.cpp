@@ -252,6 +252,11 @@ bool MyMoneyStorageSql::writeFile()
   d->m_onlineJobs = d->m_payeeIdentifier = 0;
   d->m_displayStatus = true;
   try {
+    if (this->driverName().compare(QLatin1String("QSQLITE")) == 0) {
+      QSqlQuery query(*this);
+      query.exec("PRAGMA foreign_keys = ON"); // this is needed for "ON UPDATE" and "ON DELETE" to work
+    }
+
     MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
     d->writeInstitutions();
     d->writePayees();

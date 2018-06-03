@@ -892,9 +892,6 @@ public:
     if (!query.exec("DELETE FROM kmmOnlineJobs;"))
       throw MYMONEYEXCEPTIONSQL("Clean kmmOnlineJobs table");
 
-    if (!query.exec("DELETE FROM kmmSepaOrders;"))
-      throw MYMONEYEXCEPTIONSQL("Clean kmmSepaOrders table");
-
     const QList<onlineJob> jobs(m_storage->onlineJobList());
     signalProgress(0, jobs.count(), i18n("Inserting online jobs."));
     // Create list for onlineJobs which failed and the reason therefor
