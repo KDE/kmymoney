@@ -38,7 +38,7 @@ void MyMoneyMoneyTest::init()
   m_2 = new MyMoneyMoney(2, 100);
   m_3 = new MyMoneyMoney(123, 1);
   m_4 = new MyMoneyMoney(1234, 1000);
-  m_5 = new MyMoneyMoney(195883, 100000);
+  m_5 = new MyMoneyMoney(static_cast<qint64>(195883), 100000);
   m_6 = new MyMoneyMoney(1.247658435, 1000000000);
 
   MyMoneyMoney::setDecimalSeparator('.');
@@ -74,6 +74,9 @@ void MyMoneyMoneyTest::testIntConstructor()
   //QVERIFY(m_0->valueRef().get_den() == 100);
   QVERIFY(m_0->valueRef().get_num() == 3);
   QVERIFY(m_0->valueRef().get_den() == 25);
+
+  QVERIFY(m_5->valueRef().get_num() == 195883);
+  QVERIFY(m_5->valueRef().get_den() == 100000);
 
   MyMoneyMoney a(123, 10000);
   QVERIFY(a.valueRef().get_num() == 123);
@@ -542,6 +545,9 @@ void MyMoneyMoneyTest::testUnaryMinus()
 
 void MyMoneyMoneyTest::testDoubleConstructor()
 {
+  QVERIFY(m_6->valueRef().get_num() == 249531687);
+  QVERIFY(m_6->valueRef().get_den() == 200000000);
+
   for (int i = -123456; i < 123456; ++i) {
     // int i = -123456;
     double d = i;
