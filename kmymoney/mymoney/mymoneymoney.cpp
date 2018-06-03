@@ -147,9 +147,9 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 //            denom  - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
+MyMoneyMoney::MyMoneyMoney(qint64 Amount, const unsigned int denom)
 {
-  if (!denom)
+  if (denom == 0)
     throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
 
   *this = AlkValue(QString::fromLatin1("%1/%2").arg(Amount).arg(denom), eMyMoney::Money::_decimalSeparator);
@@ -164,9 +164,9 @@ MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 //            denom   - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
+MyMoneyMoney::MyMoneyMoney(const int iAmount, const unsigned int denom)
 {
-  if (!denom)
+  if (denom == 0)
     throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(iAmount, denom);
 }
@@ -180,9 +180,9 @@ MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 //            denom   - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
+MyMoneyMoney::MyMoneyMoney(const long int iAmount, const unsigned int denom)
 {
-  if (!denom)
+  if (denom == 0)
     throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(QString::fromLatin1("%1/%2").arg(iAmount).arg(denom), eMyMoney::Money::_decimalSeparator);
 }

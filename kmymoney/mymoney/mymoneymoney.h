@@ -53,11 +53,11 @@ class KMM_MYMONEY_EXPORT MyMoneyMoney : public AlkValue
 public:
   // construction
   MyMoneyMoney();
-  explicit MyMoneyMoney(const int iAmount, const signed64 denom);
-  explicit MyMoneyMoney(const long int iAmount, const signed64 denom);
+  explicit MyMoneyMoney(const int iAmount, const unsigned int denom);
+  explicit MyMoneyMoney(const long int iAmount, const unsigned int denom);
   explicit MyMoneyMoney(const QString& pszAmount);
-  explicit MyMoneyMoney(const signed64 Amount, const signed64 denom);
-  explicit MyMoneyMoney(const double dAmount, const signed64 denom = 100);
+  explicit MyMoneyMoney(const qint64 Amount, const unsigned int denom);
+  explicit MyMoneyMoney(const double dAmount, const unsigned int denom = 100);
 
   // copy constructor
   MyMoneyMoney(const MyMoneyMoney& Amount);
@@ -188,7 +188,7 @@ inline MyMoneyMoney::MyMoneyMoney() :
 //            denom   - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom) :
+inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const unsigned int denom) :
     AlkValue(dAmount, denom)
 {
 }
