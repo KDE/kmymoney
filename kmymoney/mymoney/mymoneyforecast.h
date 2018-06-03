@@ -90,7 +90,7 @@ public:
    * Collects and processes all transactions in the past for the
    * same period of forecast and calculates the balance trend
    */
-  static MyMoneyMoney calculateAccountTrend(const MyMoneyAccount& acc, int forecastDays);
+  static MyMoneyMoney calculateAccountTrend(const MyMoneyAccount& acc, qint64 forecastDays);
 
   /**
    * Returns the forecast balance trend for account @a acc for day @p QDate
@@ -102,7 +102,7 @@ public:
    * offset is days from current date, inside forecast days.
    * Returns 0 if offset not in range of forecast days.
    */
-  MyMoneyMoney forecastBalance(const MyMoneyAccount& acc, int offset);
+  MyMoneyMoney forecastBalance(const MyMoneyAccount& acc, qint64 offset);
 
   /**
    * Returns true if an account @a acc is an account to be forecast
@@ -113,14 +113,14 @@ public:
    * returns the number of days when a given account is forecast to be below minimum balance
    * returns -1 if it will not be below minimum balance in the forecast period
    */
-  int daysToMinimumBalance(const MyMoneyAccount& acc);
+  qint64 daysToMinimumBalance(const MyMoneyAccount& acc);
 
   /**
    * returns the number of days when a given account is forecast to be below zero if it is an asset accounts
    * or above zero if it is a liability account
    * returns -1 if it will not happen in the forecast period
    */
-  int daysToZeroBalance(const MyMoneyAccount& acc);
+  qint64 daysToZeroBalance(const MyMoneyAccount& acc);
 
   /**
    * amount of variation of a given account in one cycle
@@ -155,18 +155,18 @@ public:
   /**
    * number of days to go back in history to calculate forecast
    */
-  int historyDays() const;
+  qint64 historyDays() const;
 
-  void setAccountsCycle(int accountsCycle);
-  void setForecastCycles(int forecastCycles);
-  void setForecastDays(int forecastDays);
+  void setAccountsCycle(qint64 accountsCycle);
+  void setForecastCycles(qint64 forecastCycles);
+  void setForecastDays(qint64 forecastDays);
   void setBeginForecastDate(const QDate &beginForecastDate);
-  void setBeginForecastDay(int beginDay);
-  void setForecastMethod(int forecastMethod);
+  void setBeginForecastDay(qint64 beginDay);
+  void setForecastMethod(qint64 forecastMethod);
   void setHistoryStartDate(const QDate &historyStartDate);
   void setHistoryEndDate(const QDate &historyEndDate);
-  void setHistoryStartDate(int daysToStartDate);
-  void setHistoryEndDate(int daysToEndDate);
+  void setHistoryStartDate(qint64 daysToStartDate);
+  void setHistoryEndDate(qint64 daysToEndDate);
   void setForecastStartDate(const QDate &_startDate);
   void setForecastEndDate(const QDate &_endDate);
   void setSkipOpeningDate(bool _skip);
@@ -175,11 +175,11 @@ public:
   void setForecastDone(bool _bool);
   void setIncludeFutureTransactions(bool _bool);
   void setIncludeScheduledTransactions(bool _bool);
-  int accountsCycle() const;
-  int forecastCycles() const;
-  int forecastDays() const;
+  qint64 accountsCycle() const;
+  qint64 forecastCycles() const;
+  qint64 forecastDays() const;
   QDate beginForecastDate() const;
-  int beginForecastDay() const;
+  qint64 beginForecastDay() const;
   QDate historyStartDate() const;
   QDate historyEndDate() const;
   QDate forecastStartDate() const;

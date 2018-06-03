@@ -35,7 +35,7 @@ template <class Key, class T> class QMap;
 
 namespace KMyMoneyPlugin
 {
-  class Container;
+  struct Container;
   enum class eListing;
 
   /**

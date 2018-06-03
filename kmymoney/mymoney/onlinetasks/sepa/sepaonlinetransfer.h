@@ -18,6 +18,8 @@
 #ifndef SEPAONLINETRANSFER_H
 #define SEPAONLINETRANSFER_H
 
+#include "kmm_mymoney_export.h"
+
 #include "misc/validators.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
@@ -27,7 +29,7 @@
 /**
  * @brief SEPA Credit Transfer
  */
-class sepaOnlineTransfer : public onlineTask, public creditTransfer
+class KMM_MYMONEY_EXPORT sepaOnlineTransfer : public onlineTask, public creditTransfer
 {
 
 public:

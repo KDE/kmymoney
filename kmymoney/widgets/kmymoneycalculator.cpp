@@ -205,8 +205,8 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
 
   d->buttons[KMyMoneyCalculatorPrivate::EQUAL]->setFocus();
 
-  d->op1 = 0.0;
-  d->stackedOp = d->op = d->op0 = 0;
+  d->op1 = d->op0 = 0.0;
+  d->stackedOp = d->op = 0;
   d->operand.clear();
   changeDisplay("0");
 

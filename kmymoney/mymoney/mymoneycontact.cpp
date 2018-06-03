@@ -83,6 +83,7 @@ void MyMoneyContact::fetchContact(const QString &email)
     job->start();
   }
 #else
+  Q_UNUSED(email);
   ContactData contact;
   emit contactFetched(contact);
 #endif

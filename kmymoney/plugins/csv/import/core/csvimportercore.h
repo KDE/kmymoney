@@ -59,7 +59,7 @@ enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
 
 
-class KMM_CSVIMPORTERCORE_NO_EXPORT CSVProfile
+class KMM_CSVIMPORTERCORE_EXPORT CSVProfile
 {
 protected:
   CSVProfile() :

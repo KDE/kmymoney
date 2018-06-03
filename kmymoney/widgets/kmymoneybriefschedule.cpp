@@ -109,7 +109,7 @@ public:
             if (m_date.isValid())
               startD = m_date;
 
-            int days = startD.daysTo(QDate::currentDate());
+            auto days = startD.daysTo(QDate::currentDate());
             int transactions = sched.paymentDates(startD, QDate::currentDate()).count();
 
             text += "<br><font color=red>";

@@ -137,9 +137,9 @@ public:
 
     if (m_prec > 0) {
       f = pow(10.0, m_prec);
-      r = qRound64(x * f) / f;
+      r = static_cast<double>(qRound64(x * f) / f);
     } else {
-      r = qRound64(x);
+      r = static_cast<double>(qRound64(x));
     }
     return r;
   }

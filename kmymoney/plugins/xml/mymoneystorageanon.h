@@ -19,7 +19,6 @@
 #ifndef MYMONEYSTORAGEANON_H
 #define MYMONEYSTORAGEANON_H
 
-#include "kmm_mymoney_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -57,7 +56,7 @@ class MyMoneyKeyValueContainer;
   * @author Ace Jones <ace.j@hotpop.com>
   */
 
-class KMM_MYMONEY_EXPORT MyMoneyStorageANON : public MyMoneyStorageXML
+class MyMoneyStorageANON : public MyMoneyStorageXML
 {
 public:
   MyMoneyStorageANON();

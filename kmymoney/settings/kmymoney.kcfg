@@ -396,25 +396,25 @@
    <label>Method to calculate forecast</label>
    <default>0</default>
   </entry>
-  <entry name="forecastDays" type="Int">
+  <entry name="forecastDays" type="LongLong">
    <label>Days to forecast</label>
    <default>90</default>
    <min>1</min>
    <max>999</max>
   </entry>
-  <entry name="forecastAccountCycle" type="Int">
+  <entry name="forecastAccountCycle" type="LongLong">
    <label>Days of normal account cycle</label>
    <default>30</default>
    <min>1</min>
    <max>999</max>
   </entry>
-  <entry name="forecastCycles" type="Int">
+  <entry name="forecastCycles" type="LongLong">
    <label>Number of historic cycles to use in forecast</label>
    <default>3</default>
    <min>1</min>
    <max>999</max>
   </entry>
-  <entry name="beginForecastDay" type="Int">
+  <entry name="beginForecastDay" type="LongLong">
    <label>Day of month to start forecast</label>
    <default>0</default>
    <min>0</min>

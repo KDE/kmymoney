@@ -2855,8 +2855,6 @@ public:
 
   void actOnPayeeIdentifierObjectInSQL(SQLAction action, const payeeIdentifier& obj)
   {
-    Q_Q(MyMoneyStorageSql);
-
     setupStoragePlugin(obj->payeeIdentifierId());
     auto isSuccessfull = false;
 
@@ -2879,8 +2877,6 @@ public:
 
   void actOnOnlineJobInSQL(SQLAction action, const onlineTask& obj, const QString& id)
   {
-    Q_Q(MyMoneyStorageSql);
-
     setupStoragePlugin(obj.taskName());
     auto isSuccessfull = false;
 

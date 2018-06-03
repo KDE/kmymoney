@@ -60,7 +60,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 {
   const QList<SortField>& sortOrder = i1->getParent()->sortOrder();
   QList<SortField>::const_iterator it;
-  int rc = 0;
+  auto rc = 0;
   bool ok1, ok2;
   qulonglong n1, n2;
 

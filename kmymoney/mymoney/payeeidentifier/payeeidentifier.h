@@ -29,8 +29,8 @@
 /** @todo fix include path after upgrade to cmake 3 */
 #include "payeeidentifier/kmm_payeeidentifier_export.h"
 
-#define PAYEEIDENTIFIERBADCASTEXCEPTION(exceptionMessage) payeeIdentifier::badCast("Casted payeeIdentifier with wrong type " __FILE__ ":" KMM_TOSTRING(__LINE__))
-#define PAYEEIDENTIFIEREMPTYEXCEPTION(exceptionMessage) payeeIdentifier::empty("Requested payeeIdentifierData of empty payeeIdentifier " __FILE__ ":" KMM_TOSTRING(__LINE__))
+#define PAYEEIDENTIFIERBADCASTEXCEPTION payeeIdentifier::badCast("Casted payeeIdentifier with wrong type " __FILE__ ":" KMM_TOSTRING(__LINE__))
+#define PAYEEIDENTIFIEREMPTYEXCEPTION payeeIdentifier::empty("Requested payeeIdentifierData of empty payeeIdentifier " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
 // Q_DECLARE_METATYPE requries this include
 
@@ -145,7 +145,7 @@ T* payeeIdentifier::data()
 {
   T *const ident = dynamic_cast<T*>(operator->());
   if (ident == 0)
-    throw PAYEEIDENTIFIERBADCASTEXCEPTION();
+    throw PAYEEIDENTIFIERBADCASTEXCEPTION;
   return ident;
 }
 
@@ -154,7 +154,7 @@ const T* payeeIdentifier::data() const
 {
   const T *const ident = dynamic_cast<const T*>(operator->());
   if (ident == 0)
-    throw PAYEEIDENTIFIERBADCASTEXCEPTION();
+    throw PAYEEIDENTIFIERBADCASTEXCEPTION;
   return ident;
 }
 

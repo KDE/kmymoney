@@ -1304,7 +1304,7 @@ void PivotTable::createRow(const QString& outergroup, const ReportAccount& row, 
 int PivotTable::columnValue(const QDate& _date) const
 {
   if (m_config.isColumnsAreDays())
-    return (m_beginDate.daysTo(_date));
+    return (static_cast<int>(m_beginDate.daysTo(_date)));
   else
     return (_date.year() * 12 + _date.month());
 }

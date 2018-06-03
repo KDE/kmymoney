@@ -79,14 +79,14 @@ payeeIdentifier::~payeeIdentifier()
 payeeIdentifierData* payeeIdentifier::operator->()
 {
   if (m_payeeIdentifier == 0)
-    throw PAYEEIDENTIFIEREMPTYEXCEPTION();
+    throw PAYEEIDENTIFIEREMPTYEXCEPTION;
   return m_payeeIdentifier;
 }
 
 const payeeIdentifierData* payeeIdentifier::operator->() const
 {
   if (m_payeeIdentifier == 0)
-    throw PAYEEIDENTIFIEREMPTYEXCEPTION();
+    throw PAYEEIDENTIFIEREMPTYEXCEPTION;
   return m_payeeIdentifier;
 }
 

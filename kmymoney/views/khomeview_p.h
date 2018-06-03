@@ -1046,11 +1046,11 @@ public:
     if (accList.count() > 0) {
       // sort the accounts by name
       qStableSort(accList.begin(), accList.end(), accountNameLess);
-      int i = 0;
+      auto i = 0;
 
-      int colspan = 1;
+      auto colspan = 1;
       //get begin day
-      int beginDay = QDate::currentDate().daysTo(m_forecast.beginForecastDate());
+      auto beginDay = QDate::currentDate().daysTo(m_forecast.beginForecastDate());
       //if begin day is today skip to next cycle
       if (beginDay == 0)
         beginDay = m_forecast.accountsCycle();
@@ -1061,7 +1061,7 @@ public:
       m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
       m_html += i18n("Account");
       m_html += "</td>";
-      int colWidth = 55 / (m_forecast.forecastDays() / m_forecast.accountsCycle());
+      auto colWidth = 55 / (m_forecast.forecastDays() / m_forecast.accountsCycle());
       for (i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
         m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
@@ -1082,8 +1082,8 @@ public:
         m_html += QString("<td width=\"40%\">") +
                      link(VIEW_LEDGER, QString("?id=%1").arg((*it_account).id())) + (*it_account).name() + linkend() + "</td>";
 
-        int dropZero = -1; //account dropped below zero
-        int dropMinimum = -1; //account dropped below minimum balance
+        auto dropZero = -1; //account dropped below zero
+        auto dropMinimum = -1; //account dropped below minimum balance
         QString minimumBalance = (*it_account).value("minimumBalance");
         MyMoneyMoney minBalance = MyMoneyMoney(minimumBalance);
         MyMoneySecurity currency;
@@ -1097,7 +1097,7 @@ public:
           currency = file->security((*it_account).currencyId());
         }
 
-        for (int f = beginDay; f <= m_forecast.forecastDays(); f += m_forecast.accountsCycle()) {
+        for (auto f = beginDay; f <= m_forecast.forecastDays(); f += m_forecast.accountsCycle()) {
           forecastBalance = m_forecast.forecastBalance(*it_account, QDate::currentDate().addDays(f));
           QString amount;
           amount = MyMoneyUtils::formatMoney(forecastBalance, *it_account, currency);

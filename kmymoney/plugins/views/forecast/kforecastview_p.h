@@ -291,8 +291,6 @@ public:
   {
     MyMoneyForecast forecast = KMyMoneyUtils::forecast();
     QList<MyMoneyAccount> accList;
-    int dropMinimum;
-    int dropZero;
 
     const auto file = MyMoneyFile::instance();
 
@@ -310,14 +308,14 @@ public:
     headerLabels << i18nc("Today's forecast", "Current");
 
     //if beginning of forecast is today, set the begin day to next cycle to avoid repeating the first cycle
-    int daysToBeginDay;
+    qint64 daysToBeginDay;
     if (QDate::currentDate() < forecast.beginForecastDate()) {
       daysToBeginDay = QDate::currentDate().daysTo(forecast.beginForecastDate());
     } else {
       daysToBeginDay = forecast.accountsCycle();
     }
-    for (int i = 0; ((i*forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-      int intervalDays = ((i * forecast.accountsCycle()) + daysToBeginDay);
+    for (auto i = 0; ((i*forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
+      auto intervalDays = ((i * forecast.accountsCycle()) + daysToBeginDay);
       headerLabels << i18np("1 day", "%1 days", intervalDays);
     }
 
@@ -374,10 +372,10 @@ public:
       MyMoneyMoney minBalance = MyMoneyMoney(minimumBalance);
 
       //Check if the account is going to be below minimal balance
-      dropMinimum = forecast.daysToMinimumBalance(acc);
+      auto dropMinimum = forecast.daysToMinimumBalance(acc);
 
       //Check if the account is going to be below zero in the future
-      dropZero = forecast.daysToZeroBalance(acc);
+      auto dropZero = forecast.daysToZeroBalance(acc);
 
       // spit out possible warnings
       QString msg;
@@ -467,7 +465,7 @@ public:
     QList<MyMoneyAccount> accList;
     MyMoneySecurity baseCurrency = file->baseCurrency();
     MyMoneyForecast forecast = KMyMoneyUtils::forecast();
-    int daysToBeginDay;
+    qint64 daysToBeginDay;
 
     //get the settings from current page
     forecast.setForecastDays(ui->m_forecastDays->value());
@@ -505,11 +503,11 @@ public:
     }
 
     //add columns
-    for (int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
+    for (auto i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
       headerLabels << i18n("Min Bal %1", i);
       headerLabels << i18n("Min Date %1", i);
     }
-    for (int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
+    for (auto i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
       headerLabels << i18n("Max Bal %1", i);
       headerLabels << i18n("Max Date %1", i);
     }
@@ -538,7 +536,7 @@ public:
       advancedItem = new QTreeWidgetItem(ui->m_advancedList, advancedItem, false);
       advancedItem->setText(0, acc.name());
       advancedItem->setIcon(0, acc.accountPixmap());
-      int it_c = 1; // iterator for the columns of the listview
+      auto it_c = 1; // iterator for the columns of the listview
 
       //get minimum balance list
       QList<QDate> minBalanceList = forecast.accountMinimumBalanceDateList(acc);
@@ -869,9 +867,9 @@ public:
   void updateSummary(QTreeWidgetItem *item)
   {
     MyMoneyMoney amountMM;
-    int it_c = 1; // iterator for the columns of the listview
+    auto it_c = 1; // iterator for the columns of the listview
     const auto file = MyMoneyFile::instance();
-    int daysToBeginDay;
+    qint64 daysToBeginDay;
 
     MyMoneyForecast forecast = item->data(0, ForecastRole).value<MyMoneyForecast>();
 

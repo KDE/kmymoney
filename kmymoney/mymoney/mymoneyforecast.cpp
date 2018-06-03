@@ -132,7 +132,7 @@ public:
       case 0:
       case 1: {
         for (QDate f_day = q->forecastStartDate(); f_day <= q->forecastEndDate();) {
-          for (int t_day = 1; t_day <= q->accountsCycle(); ++t_day) {
+          for (auto t_day = 1; t_day <= q->accountsCycle(); ++t_day) {
             MyMoneyMoney balanceDayBefore = m_accountList[acc.id()][(f_day.addDays(-1))];//balance of the day before
             MyMoneyMoney accountDailyTrend = m_accountTrendList[acc.id()][t_day]; //trend for that day
             //balance of the day is the balance of the day before multiplied by the trend for the day
@@ -147,8 +147,8 @@ public:
         break;
       case 2: {
         QDate baseDate = QDate::currentDate().addDays(-q->accountsCycle());
-        for (int t_day = 1; t_day <= q->accountsCycle(); ++t_day) {
-          int f_day = 1;
+        for (auto t_day = 1; t_day <= q->accountsCycle(); ++t_day) {
+          auto f_day = 1;
           QDate fDate = baseDate.addDays(q->accountsCycle() + 1);
           while (fDate <= q->forecastEndDate()) {
 
@@ -179,7 +179,7 @@ public:
       auto acc = file->account(*it_n);
 
       for (QDate f_date = q->forecastStartDate(); f_date <= q->forecastEndDate();) {
-        for (int f_day = 1; f_day <= q->accountsCycle() && f_date <= q->forecastEndDate(); ++f_day) {
+        for (auto f_day = 1; f_day <= q->accountsCycle() && f_date <= q->forecastEndDate(); ++f_day) {
           MyMoneyMoney accountDailyTrend = m_accountTrendList[acc.id()][f_day]; //trend for that day
           //check for leap year
           if (f_date.month() == 2 && f_date.day() == 29)
@@ -309,7 +309,7 @@ public:
         auto acc = file->account(*it_n);
         it_a = m_accountList.find(*it_n);
         s << "\"" << acc.name() << "\",";
-        for (int i = 0; i < 90; ++i) {
+        for (auto i = 0; i < 90; ++i) {
           s << "\"" << (*it_a)[i].formatMoney("") << "\",";
         }
         s << "\n";
@@ -400,7 +400,7 @@ public:
                   if (q->isForecastAccount(accountFromSplit)) {
                     dailyBalances balance;
                     balance = m_accountList[accountFromSplit.id()];
-                    //int offset = QDate::currentDate().daysTo(nextDate);
+                    //auto offset = QDate::currentDate().daysTo(nextDate);
                     //if(offset <= 0) {  // collect all overdues on the first day
                     //  offset = 1;
                     //}
@@ -442,7 +442,7 @@ public:
         auto acc = file->account(*it_n);
         it_a = m_accountList.find(*it_n);
         s << "\"" << acc.name() << "\",";
-        for (int i = 0; i < 90; ++i) {
+        for (auto i = 0; i < 90; ++i) {
           s << "\"" << (*it_a)[i].formatMoney("") << "\",";
         }
         s << "\n";
@@ -554,7 +554,7 @@ public:
    * With a term of 1 month and 3 terms, it calculates the trend taking the transactions occurred
    * at that day and the day before,for the last 3 months
    */
-  MyMoneyMoney accountMovingAverage(const MyMoneyAccount& acc, const int trendDay, const int forecastTerms)
+  MyMoneyMoney accountMovingAverage(const MyMoneyAccount& acc, const qint64 trendDay, const int forecastTerms)
   {
     Q_Q(MyMoneyForecast);
     //Calculate a daily trend for the account based on the accounts of a given number of terms
@@ -562,7 +562,7 @@ public:
     //for the last 3 months
     MyMoneyMoney balanceVariation;
 
-    for (int it_terms = 0; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms) { //sum for each term
+    for (auto it_terms = 0; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms) { //sum for each term
       MyMoneyMoney balanceBefore = m_accountListPast[acc.id()][q->historyStartDate().addDays(trendDay+(q->accountsCycle()*it_terms)-2)]; //get balance for the day before
       MyMoneyMoney balanceAfter = m_accountListPast[acc.id()][q->historyStartDate().addDays(trendDay+(q->accountsCycle()*it_terms)-1)];
       balanceVariation += (balanceAfter - balanceBefore); //add the balance variation between days
@@ -574,12 +574,12 @@ public:
   /**
    * Returns the weighted moving average for a given @p trendDay
    */
-  MyMoneyMoney accountWeightedMovingAverage(const MyMoneyAccount& acc, const int trendDay, const int totalWeight)
+  MyMoneyMoney accountWeightedMovingAverage(const MyMoneyAccount& acc, const qint64 trendDay, const int totalWeight)
   {
     Q_Q(MyMoneyForecast);
     MyMoneyMoney balanceVariation;
 
-    for (int it_terms = 0, weight = 1; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms, ++weight) { //sum for each term multiplied by weight
+    for (auto it_terms = 0, weight = 1; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms, ++weight) { //sum for each term multiplied by weight
       MyMoneyMoney balanceBefore = m_accountListPast[acc.id()][q->historyStartDate().addDays(trendDay+(q->accountsCycle()*it_terms)-2)]; //get balance for the day before
       MyMoneyMoney balanceAfter = m_accountListPast[acc.id()][q->historyStartDate().addDays(trendDay+(q->accountsCycle()*it_terms)-1)];
       balanceVariation += ((balanceAfter - balanceBefore) * MyMoneyMoney(weight, 1));   //add the balance variation between days multiplied by its weight
@@ -591,14 +591,14 @@ public:
   /**
    * Returns the linear regression for a given @p trendDay
    */
-  MyMoneyMoney accountLinearRegression(const MyMoneyAccount &acc, const int trendDay, const int actualTerms, const MyMoneyMoney& meanTerms)
+  MyMoneyMoney accountLinearRegression(const MyMoneyAccount &acc, const qint64 trendDay, const qint64 actualTerms, const MyMoneyMoney& meanTerms)
   {
     Q_Q(MyMoneyForecast);
     MyMoneyMoney meanBalance, totalBalance, totalTerms;
     totalTerms = MyMoneyMoney(actualTerms, 1);
 
     //calculate mean balance
-    for (int it_terms = q->forecastCycles() - actualTerms; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms) { //sum for each term
+    for (auto it_terms = q->forecastCycles() - actualTerms; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms) { //sum for each term
       totalBalance += m_accountListPast[acc.id()][q->historyStartDate().addDays(trendDay+(q->accountsCycle()*it_terms)-1)];
     }
     meanBalance = totalBalance / MyMoneyMoney(actualTerms, 1);
@@ -608,7 +608,8 @@ public:
 
     //first calculate x - mean x multiplied by y - mean y
     MyMoneyMoney totalXY, totalSqX;
-    for (int it_terms = q->forecastCycles() - actualTerms, term = 1; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms, ++term) { //sum for each term
+    auto term = 1;
+    for (auto it_terms = q->forecastCycles() - actualTerms; (trendDay + (q->accountsCycle()*it_terms)) <= q->historyDays(); ++it_terms, ++term) { //sum for each term
       MyMoneyMoney balance = m_accountListPast[acc.id()][q->historyStartDate().addDays(trendDay+(q->accountsCycle()*it_terms)-1)];
 
       MyMoneyMoney balMeanBal = balance - meanBalance;
@@ -638,7 +639,7 @@ public:
     Q_Q(MyMoneyForecast);
     auto file = MyMoneyFile::instance();
     int auxForecastTerms;
-    int totalWeight = 0;
+    auto totalWeight = 0;
 
     //Calculate account trends
     QSet<QString>::ConstIterator it_n;
@@ -665,7 +666,7 @@ public:
       switch (q->historyMethod()) {
       //moving average
       case 0: {
-        for (int t_day = 1; t_day <= q->accountsCycle(); t_day++)
+        for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
           m_accountTrendList[acc.id()][t_day] = accountMovingAverage(acc, t_day, auxForecastTerms); //moving average
         break;
       }
@@ -676,10 +677,11 @@ public:
           totalWeight = (auxForecastTerms * (auxForecastTerms + 1)) / 2; //totalWeight is the triangular number of auxForecastTerms
         } else {
           //if only taking a few periods, totalWeight is the sum of the weight for most recent periods
-          for (int i = 1, w = q->forecastCycles(); i <= auxForecastTerms; ++i, --w)
+          auto i = 1;
+          for (auto w = q->forecastCycles(); i <= auxForecastTerms; ++i, --w)
             totalWeight += w;
         }
-        for (int t_day = 1; t_day <= q->accountsCycle(); t_day++)
+        for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
           m_accountTrendList[acc.id()][t_day] = accountWeightedMovingAverage(acc, t_day, totalWeight);
         break;
       }
@@ -687,7 +689,7 @@ public:
         //calculate mean term
         MyMoneyMoney meanTerms = MyMoneyMoney((auxForecastTerms * (auxForecastTerms + 1)) / 2, 1) / MyMoneyMoney(auxForecastTerms, 1);
 
-        for (int t_day = 1; t_day <= q->accountsCycle(); t_day++)
+        for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
           m_accountTrendList[acc.id()][t_day] = accountLinearRegression(acc, t_day, auxForecastTerms, meanTerms);
         break;
       }
@@ -824,12 +826,12 @@ public:
    *   that date will be used, otherwise it will add account cycle to beginDay until it is past current date
    * It returns the total amount of Forecast Days from current date.
    */
-  int calculateBeginForecastDay()
+  qint64 calculateBeginForecastDay()
   {
     Q_Q(MyMoneyForecast);
-    int fDays = q->forecastDays();
-    int beginDay = q->beginForecastDay();
-    int accCycle = q->accountsCycle();
+    auto fDays = q->forecastDays();
+    auto beginDay = q->beginForecastDay();
+    auto accCycle = q->accountsCycle();
     QDate beginDate;
 
     //if 0, beginDate is current date and forecastDays remains unchanged
@@ -903,17 +905,17 @@ public:
   /**
    * cycle of accounts in days
    */
-  int m_accountsCycle;
+  qint64 m_accountsCycle;
 
   /**
    * number of cycles to use in forecast
    */
-  int m_forecastCycles;
+  qint64 m_forecastCycles;
 
   /**
    * number of days to forecast
    */
-  int m_forecastDays;
+  qint64 m_forecastDays;
 
   /**
    * date to start forecast
@@ -923,7 +925,7 @@ public:
   /**
    * day to start forecast
    */
-  int m_beginForecastDay;
+  qint64 m_beginForecastDay;
 
   /**
    * forecast method
@@ -1096,7 +1098,7 @@ QList<MyMoneyAccount> MyMoneyForecast::accountList()
   return accList;
 }
 
-MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, int trendDays)
+MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, qint64 trendDays)
 {
   auto file = MyMoneyFile::instance();
   MyMoneyTransactionFilter filter;
@@ -1173,13 +1175,13 @@ MyMoneyMoney MyMoneyForecast::forecastBalance(const MyMoneyAccount& acc, const Q
  * offset is days from current date, inside forecast days.
  * Returns 0 if offset not in range of forecast days.
  */
-MyMoneyMoney MyMoneyForecast::forecastBalance(const MyMoneyAccount& acc, int offset)
+MyMoneyMoney MyMoneyForecast::forecastBalance(const MyMoneyAccount& acc, qint64 offset)
 {
   QDate forecastDate = QDate::currentDate().addDays(offset);
   return forecastBalance(acc, forecastDate);
 }
 
-int MyMoneyForecast::daysToMinimumBalance(const MyMoneyAccount& acc)
+qint64 MyMoneyForecast::daysToMinimumBalance(const MyMoneyAccount& acc)
 {
   Q_D(MyMoneyForecast);
   QString minimumBalance = acc.value("minBalanceAbsolute");
@@ -1202,7 +1204,7 @@ int MyMoneyForecast::daysToMinimumBalance(const MyMoneyAccount& acc)
   return -1;
 }
 
-int MyMoneyForecast::daysToZeroBalance(const MyMoneyAccount& acc)
+qint64 MyMoneyForecast::daysToZeroBalance(const MyMoneyAccount& acc)
 {
   Q_D(MyMoneyForecast);
   dailyBalances balance;
@@ -1242,7 +1244,7 @@ MyMoneyMoney MyMoneyForecast::accountCycleVariation(const MyMoneyAccount& acc)
     switch (historyMethod()) {
     case 0:
     case 1: {
-      for (int t_day = 1; t_day <= accountsCycle() ; ++t_day) {
+      for (auto t_day = 1; t_day <= accountsCycle() ; ++t_day) {
         cycleVariation += d->m_accountTrendList[acc.id()][t_day];
       }
     }
@@ -1267,14 +1269,14 @@ MyMoneyMoney MyMoneyForecast::accountTotalVariation(const MyMoneyAccount& acc)
 QList<QDate> MyMoneyForecast::accountMinimumBalanceDateList(const MyMoneyAccount& acc)
 {
   QList<QDate> minBalanceList;
-  int daysToBeginDay;
+  qint64 daysToBeginDay;
 
   daysToBeginDay = QDate::currentDate().daysTo(beginForecastDate());
 
-  for (int t_cycle = 0; ((t_cycle * accountsCycle()) + daysToBeginDay) < forecastDays() ; ++t_cycle) {
+  for (auto t_cycle = 0; ((t_cycle * accountsCycle()) + daysToBeginDay) < forecastDays() ; ++t_cycle) {
     MyMoneyMoney minBalance = forecastBalance(acc, (t_cycle * accountsCycle() + daysToBeginDay));
     QDate minDate = QDate::currentDate().addDays(t_cycle * accountsCycle() + daysToBeginDay);
-    for (int t_day = 1; t_day <= accountsCycle() ; ++t_day) {
+    for (auto t_day = 1; t_day <= accountsCycle() ; ++t_day) {
       if (minBalance > forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day)) {
         minBalance = forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day);
         minDate = QDate::currentDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay + t_day);
@@ -1288,15 +1290,15 @@ QList<QDate> MyMoneyForecast::accountMinimumBalanceDateList(const MyMoneyAccount
 QList<QDate> MyMoneyForecast::accountMaximumBalanceDateList(const MyMoneyAccount& acc)
 {
   QList<QDate> maxBalanceList;
-  int daysToBeginDay;
+  qint64 daysToBeginDay;
 
   daysToBeginDay = QDate::currentDate().daysTo(beginForecastDate());
 
-  for (int t_cycle = 0; ((t_cycle * accountsCycle()) + daysToBeginDay) < forecastDays() ; ++t_cycle) {
+  for (auto t_cycle = 0; ((t_cycle * accountsCycle()) + daysToBeginDay) < forecastDays() ; ++t_cycle) {
     MyMoneyMoney maxBalance = forecastBalance(acc, ((t_cycle * accountsCycle()) + daysToBeginDay));
     QDate maxDate = QDate::currentDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay);
 
-    for (int t_day = 0; t_day < accountsCycle() ; ++t_day) {
+    for (auto t_day = 0; t_day < accountsCycle() ; ++t_day) {
       if (maxBalance < forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day)) {
         maxBalance = forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day);
         maxDate = QDate::currentDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay + t_day);
@@ -1310,7 +1312,7 @@ QList<QDate> MyMoneyForecast::accountMaximumBalanceDateList(const MyMoneyAccount
 MyMoneyMoney MyMoneyForecast::accountAverageBalance(const MyMoneyAccount& acc)
 {
   MyMoneyMoney totalBalance;
-  for (int f_day = 1; f_day <= forecastDays() ; ++f_day) {
+  for (auto f_day = 1; f_day <= forecastDays() ; ++f_day) {
     totalBalance += forecastBalance(acc, f_day);
   }
   return totalBalance / MyMoneyMoney(forecastDays(), 1);
@@ -1410,25 +1412,25 @@ void MyMoneyForecast::createBudget(MyMoneyBudget& budget, QDate historyStart, QD
     }
   }
 }
-int MyMoneyForecast::historyDays() const
+qint64 MyMoneyForecast::historyDays() const
 {
   Q_D(const MyMoneyForecast);
   return (d->m_historyStartDate.daysTo(d->m_historyEndDate) + 1);
 }
 
-void MyMoneyForecast::setAccountsCycle(int accountsCycle)
+void MyMoneyForecast::setAccountsCycle(qint64 accountsCycle)
 {
   Q_D(MyMoneyForecast);
   d->m_accountsCycle = accountsCycle;
 }
 
-void MyMoneyForecast::setForecastCycles(int forecastCycles)
+void MyMoneyForecast::setForecastCycles(qint64 forecastCycles)
 {
   Q_D(MyMoneyForecast);
   d->m_forecastCycles = forecastCycles;
 }
 
-void MyMoneyForecast::setForecastDays(int forecastDays)
+void MyMoneyForecast::setForecastDays(qint64 forecastDays)
 {
   Q_D(MyMoneyForecast);
   d->m_forecastDays = forecastDays;
@@ -1440,13 +1442,13 @@ void MyMoneyForecast::setBeginForecastDate(const QDate &beginForecastDate)
   d->m_beginForecastDate = beginForecastDate;
 }
 
-void MyMoneyForecast::setBeginForecastDay(int beginDay)
+void MyMoneyForecast::setBeginForecastDay(qint64 beginDay)
 {
   Q_D(MyMoneyForecast);
   d->m_beginForecastDay = beginDay;
 }
 
-void MyMoneyForecast::setForecastMethod(int forecastMethod)
+void MyMoneyForecast::setForecastMethod(qint64 forecastMethod)
 {
   Q_D(MyMoneyForecast);
   d->m_forecastMethod = static_cast<eForecastMethod>(forecastMethod);
@@ -1464,12 +1466,12 @@ void MyMoneyForecast::setHistoryEndDate(const QDate &historyEndDate)
   d->m_historyEndDate = historyEndDate;
 }
 
-void MyMoneyForecast::setHistoryStartDate(int daysToStartDate)
+void MyMoneyForecast::setHistoryStartDate(qint64 daysToStartDate)
 {
   setHistoryStartDate(QDate::currentDate().addDays(-daysToStartDate));
 }
 
-void MyMoneyForecast::setHistoryEndDate(int daysToEndDate)
+void MyMoneyForecast::setHistoryEndDate(qint64 daysToEndDate)
 {
   setHistoryEndDate(QDate::currentDate().addDays(-daysToEndDate));
 }
@@ -1522,19 +1524,19 @@ void MyMoneyForecast::setIncludeScheduledTransactions(bool _bool)
   d->m_includeScheduledTransactions = _bool;
 }
 
-int MyMoneyForecast::accountsCycle() const
+qint64 MyMoneyForecast::accountsCycle() const
 {
   Q_D(const MyMoneyForecast);
   return d->m_accountsCycle;
 }
 
-int MyMoneyForecast::forecastCycles() const
+qint64 MyMoneyForecast::forecastCycles() const
 {
   Q_D(const MyMoneyForecast);
   return d->m_forecastCycles;
 }
 
-int MyMoneyForecast::forecastDays() const
+qint64 MyMoneyForecast::forecastDays() const
 {
   Q_D(const MyMoneyForecast);
   return d->m_forecastDays;
@@ -1546,7 +1548,7 @@ QDate MyMoneyForecast::beginForecastDate() const
   return d->m_beginForecastDate;
 }
 
-int MyMoneyForecast::beginForecastDay() const
+qint64 MyMoneyForecast::beginForecastDay() const
 {
   Q_D(const MyMoneyForecast);
   return d->m_beginForecastDay;
