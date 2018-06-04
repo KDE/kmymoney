@@ -48,6 +48,8 @@ target_link_libraries( kmm_payeeidentifier_loader
     KF5::Service
 )
 
+set_target_properties(kmm_payeeidentifier_loader PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
+
 install(TARGETS kmm_payeeidentifier_loader
   ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
