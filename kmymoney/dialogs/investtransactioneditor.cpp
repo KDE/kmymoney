@@ -523,6 +523,7 @@ void InvestTransactionEditor::slotCreateSecurity(const QString& name, QString& i
 
     if (!id.isEmpty()) {
       slotUpdateSecurity(id);
+      slotReloadEditWidgets();
     }
   }
 }
