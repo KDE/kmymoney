@@ -23,6 +23,17 @@
 
 #include <QtTest/QtTest>
 
+namespace QTest {
+    // compare QChar with char
+    inline bool qCompare(QChar const &_t1, char const &_t2,
+                const char *actual, const char *expected, const char *file, int line)
+    {
+        QString t1(_t1);
+        QString t2(_t2);
+        return qCompare(t1, t2, actual, expected, file, line);
+    }
+}
+
 #include <config-kmymoney.h>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
@@ -447,6 +458,11 @@ void MyMoneyMoneyTest::testSetThousandSeparator()
   QVERIFY(m2.formatMoney("", 2) == QString("2:000.00"));
 
   QVERIFY(MyMoneyMoney::thousandSeparator() == ':');
+
+  MyMoneyMoney::setThousandSeparator(' ');
+  QCOMPARE(MyMoneyMoney::thousandSeparator(), ' ');
+  QCOMPARE(m1.formatMoney("", 2), QString("1 000.00"));
+  QCOMPARE(m2.formatMoney("", 2), QString("2 000.00"));
 }
 
 void MyMoneyMoneyTest::testFormatMoney()
