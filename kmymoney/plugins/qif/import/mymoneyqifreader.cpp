@@ -2007,12 +2007,12 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
   return acc.id();
 }
 
-void MyMoneyQifReader::setProgressCallback(void(*callback)(int, int, const QString&))
+void MyMoneyQifReader::setProgressCallback(void(*callback)(qint64, qint64, const QString&))
 {
   m_progressCallback = callback;
 }
 
-void MyMoneyQifReader::signalProgress(int current, int total, const QString& msg)
+void MyMoneyQifReader::signalProgress(qint64 current, qint64 total, const QString& msg)
 {
   if (m_progressCallback != 0)
     (*m_progressCallback)(current, total, msg);

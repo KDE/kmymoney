@@ -33,7 +33,7 @@ class TransactionDlg : public QDialog
   Q_OBJECT
 
 public:
-  TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol,
+  TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const int typeCol,
               const QList<eMyMoney::Transaction::Action>& validActionTypes);
   ~TransactionDlg();
 
@@ -63,7 +63,7 @@ private:
   /**
   * This method displays the transaction line in tableWidget
   */
-  void             displayLine(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol);
+  void             displayLine(const QStringList& colList, const QStringList& colHeaders, const int typeCol);
 
   /**
   * This will add appropriate icons to cbActionTypes entries

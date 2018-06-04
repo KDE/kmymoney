@@ -37,7 +37,7 @@
 
 using namespace Icons;
 
-TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol,
+TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const int typeCol,
                          const QList<eMyMoney::Transaction::Action>& validActionTypes) : ui(new Ui::TransactionDlg)
 {
   ui->setupUi(this);
@@ -116,9 +116,9 @@ void TransactionDlg::updateWindowSize()
 }
 
 
-void TransactionDlg::displayLine(const QStringList& colList, const QStringList& colHeaders, const qint8& typeCol)
+void TransactionDlg::displayLine(const QStringList& colList, const QStringList& colHeaders, const int typeCol)
 {
-  qint8 colCount = colList.count();
+  auto colCount = colList.count();
   ui->tableWidget->setColumnCount(colCount);
   ui->tableWidget->setHorizontalHeaderLabels(colHeaders);
   for (int col = 0; col < colCount; ++col) {

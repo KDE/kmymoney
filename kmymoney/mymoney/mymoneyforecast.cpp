@@ -638,8 +638,8 @@ public:
   {
     Q_Q(MyMoneyForecast);
     auto file = MyMoneyFile::instance();
-    int auxForecastTerms;
-    auto totalWeight = 0;
+    qint64 auxForecastTerms;
+    qint64 totalWeight = 0;
 
     //Calculate account trends
     QSet<QString>::ConstIterator it_n;

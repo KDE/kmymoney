@@ -2991,13 +2991,13 @@ public:
     qDebug() << s;
   }
 
-  void signalProgress(int current, int total, const QString& msg) const
+  void signalProgress(qint64 current, qint64 total, const QString& msg) const
   {
     if (m_progressCallback != 0)
       (*m_progressCallback)(current, total, msg);
   }
 
-  void signalProgress(int current, int total) const
+  void signalProgress(qint64 current, qint64 total) const
   {
     signalProgress(current, total, QString());
   }

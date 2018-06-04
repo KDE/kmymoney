@@ -3907,7 +3907,7 @@ void KMyMoneyApp::preloadHolidays()
   //only do this if it is a valid region
   if (d->m_holidayRegion && d->m_holidayRegion->isValid()) {
     //load holidays for the forecast days plus 1 cycle, to be on the safe side
-    int forecastDays = KMyMoneySettings::forecastDays() + KMyMoneySettings::forecastAccountCycle();
+    auto forecastDays = KMyMoneySettings::forecastDays() + KMyMoneySettings::forecastAccountCycle();
     QDate endDate = QDate::currentDate().addDays(forecastDays);
 
     //look for holidays for the next 2 years as a minimum. That should give a good margin for the cache
