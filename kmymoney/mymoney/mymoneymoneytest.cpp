@@ -232,8 +232,6 @@ void MyMoneyMoneyTest::testStringConstructor()
 
 
   MyMoneyMoney::setDecimalSeparator(',');
-  MyMoneyMoney::setThousandSeparator('.');
-  MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::ParensAround);
   m1 = new MyMoneyMoney("x1.234,567 EUR");
   QVERIFY(m1->valueRef().get_num() == (1234567));
   QVERIFY(m1->valueRef().get_den() == 1000);
