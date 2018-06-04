@@ -204,10 +204,6 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
   }
   QString memo = split.memo();
   memo.replace('\n', '~').remove('\'');
-  QString localeThousands = QLocale().groupSeparator();  //  In case of clash with field separator
-  if (m_separator == localeThousands) {
-    memo.replace(localeThousands, QString());
-  }
 
   str += QString("%1" + m_separator).arg(memo);
 
@@ -335,7 +331,6 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
   //  Add date.
   //
   QString str = QString("\n%1" + m_separator).arg(t.postDate().toString(Qt::ISODate));
-  QString localeThousands = QLocale().groupSeparator();  //  In case of clash with field separator
   for (itSplit = lst.begin(); itSplit != lst.end(); ++itSplit) {
     MyMoneyAccount acc = file->account((*itSplit).accountId());
     //
@@ -345,7 +340,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
       chkAccntId = (*itSplit).accountId();
       chkAccnt = file->account(chkAccntId).name();
       strCheckingAccountName = file->accountToCategory(chkAccntId) + m_separator;
-      strAmount = (*itSplit).value().formatMoney("", 2).remove(localeThousands) + m_separator;
+      strAmount = (*itSplit).value().formatMoney("", 2, false) + m_separator;
     } else if (acc.accountType() == eMyMoney::Account::Type::Income) {
       //
       //  eMyMoney::Account::Type::Income.
@@ -397,7 +392,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         }
       } else if ((*itSplit).action() == QLatin1String("Reinvest")) {
         qty = (*itSplit).shares();
-        strAmount = (*itSplit).value().formatMoney("", 2).remove(localeThousands) + m_separator;
+        strAmount = (*itSplit).value().formatMoney("", 2, false) + m_separator;
         strAction = QLatin1String("ReinvDiv");
       } else {
         strAction = (*itSplit).action();
