@@ -2183,7 +2183,7 @@ void KMyMoneyApp::slotFileNew()
         QList<MyMoneyTemplate> templates = wizard->templates();
         QList<MyMoneyTemplate>::iterator it_t;
         for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
-          (*it_t).importTemplate(&progressCallback);
+          (*it_t).importTemplate(progressCallback);
         }
 
         d->m_fileName = wizard->url();
@@ -2660,7 +2660,7 @@ void KMyMoneyApp::slotLoadAccountTemplates()
       QList<MyMoneyTemplate> templates = dlg->templates();
       QList<MyMoneyTemplate>::iterator it_t;
       for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
-        (*it_t).importTemplate(&progressCallback);
+        (*it_t).importTemplate(progressCallback);
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
@@ -2708,7 +2708,7 @@ void KMyMoneyApp::slotSaveAccountTemplates()
           templ.setTitle(dlg->title());
           templ.setShortDescription(dlg->shortDescription());
           templ.setLongDescription(dlg->longDescription());
-          templ.exportTemplate(&progressCallback);
+          templ.exportTemplate(progressCallback);
           templ.saveTemplate(QUrl::fromLocalFile(newName));
       }
       delete dlg;
@@ -3796,7 +3796,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         // to users.
         if (it_plugin == pPlugins.importer.constEnd())
           if (MyMoneyStatement::isStatementFile(url))
-            MyMoneyStatementReader::importStatement(url, false, &progressCallback);
+            MyMoneyStatementReader::importStatement(url, false, progressCallback);
 
       }
       // remove the current processed item from the queue
