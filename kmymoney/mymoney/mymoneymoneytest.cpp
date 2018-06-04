@@ -253,6 +253,11 @@ void MyMoneyMoneyTest::testStringConstructor()
   QVERIFY(m1->valueRef().get_num() == (9));
   QVERIFY(m1->valueRef().get_den() == 1);
   delete m1;
+
+  m1 = new MyMoneyMoney("x1 234,567 EUR");
+  QVERIFY(m1->valueRef().get_num() == (1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
+  delete m1;
 }
 
 void MyMoneyMoneyTest::testConvert()
