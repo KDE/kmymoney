@@ -101,7 +101,7 @@ onlineJobTyped<T>::onlineJobTyped(T* task, const QString& id)
     m_taskTyped(task)
 {
   if (!task)
-    throw EMPTYTASKEXCEPTION();
+    throw EMPTYTASKEXCEPTION;
 }
 
 template<class T>
@@ -127,7 +127,7 @@ onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
 {
   m_taskTyped = dynamic_cast<T*>(onlineJob::task()); // can throw emptyTask
   if (!m_taskTyped)
-    throw BADTASKEXCEPTION();
+    throw BADTASKEXCEPTION;
 }
 
 template<class T>

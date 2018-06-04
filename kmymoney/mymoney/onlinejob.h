@@ -20,8 +20,8 @@
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
-#define BADTASKEXCEPTION(what) badTaskCast("Casted onlineTask with wrong type. " __FILE__ ":" TOSTRING(__LINE__))
-#define EMPTYTASKEXCEPTION(what) emptyTask("Requested onlineTask of onlineJob without any task. " __FILE__ ":" TOSTRING(__LINE__))
+#define BADTASKEXCEPTION badTaskCast("Casted onlineTask with wrong type. " __FILE__ ":" TOSTRING(__LINE__))
+#define EMPTYTASKEXCEPTION emptyTask("Requested onlineTask of onlineJob without any task. " __FILE__ ":" TOSTRING(__LINE__))
 
 #include <QMetaType>
 #include <QString>
@@ -338,8 +338,7 @@ T* onlineJob::task()
 {
   T* ret = dynamic_cast<T*>(m_task);
   if (ret == 0)
-    throw EMPTYTASKEXCEPTION();
-//    throw badTaskCast(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION;
   return ret;
 }
 
@@ -348,8 +347,7 @@ const T* onlineJob::task() const
 {
   const T* ret = dynamic_cast<const T*>(m_task);
   if (ret == 0)
-    throw BADTASKEXCEPTION();
-//    throw badTaskCast(__FILE__, __LINE__);
+    throw BADTASKEXCEPTION;
   return ret;
 }
 
