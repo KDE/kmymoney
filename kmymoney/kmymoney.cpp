@@ -189,8 +189,8 @@ using namespace Icons;
 using namespace eMenu;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
-static constexpr char recoveryKeyId[] = "0xD2B08440";
-static constexpr char recoveryKeyId2[] = "59B0F826D2B08440";
+//static constexpr char recoveryKeyId[] = "0xD2B08440";
+static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
 // define the default period to warn about an expiring recoverkey to 30 days
 // but allows to override this setting during build time
@@ -2799,7 +2799,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
     if (KGPGFile::GPGAvailable()) {
       KGPGFile file;
-      QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId2));
+      QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId));
       if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
         bool skipMessage = false;
 

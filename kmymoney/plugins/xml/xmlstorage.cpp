@@ -58,8 +58,8 @@
 using namespace Icons;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
-static constexpr char recoveryKeyId[] = "0xD2B08440";
-static constexpr char recoveryKeyId2[] = "59B0F826D2B08440";
+// static constexpr char recoveryKeyId[] = "0xD2B08440";
+static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
 XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "xmlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
