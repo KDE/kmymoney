@@ -23,6 +23,17 @@
 
 #include <QtTest/QtTest>
 
+namespace QTest {
+    // compare QChar with char
+    inline bool qCompare(QChar const &_t1, char const &_t2,
+                const char *actual, const char *expected, const char *file, int line)
+    {
+        QString t1(_t1);
+        QString t2(_t2);
+        return qCompare(t1, t2, actual, expected, file, line);
+    }
+}
+
 #include <config-kmymoney.h>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
@@ -221,8 +232,6 @@ void MyMoneyMoneyTest::testStringConstructor()
 
 
   MyMoneyMoney::setDecimalSeparator(',');
-  MyMoneyMoney::setThousandSeparator('.');
-  MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::ParensAround);
   m1 = new MyMoneyMoney("x1.234,567 EUR");
   QVERIFY(m1->valueRef().get_num() == (1234567));
   QVERIFY(m1->valueRef().get_den() == 1000);
@@ -241,6 +250,11 @@ void MyMoneyMoneyTest::testStringConstructor()
   m1 = new MyMoneyMoney("09");
   QVERIFY(m1->valueRef().get_num() == (9));
   QVERIFY(m1->valueRef().get_den() == 1);
+  delete m1;
+
+  m1 = new MyMoneyMoney("x1 234,567 EUR");
+  QVERIFY(m1->valueRef().get_num() == (1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
 }
 
@@ -447,6 +461,11 @@ void MyMoneyMoneyTest::testSetThousandSeparator()
   QVERIFY(m2.formatMoney("", 2) == QString("2:000.00"));
 
   QVERIFY(MyMoneyMoney::thousandSeparator() == ':');
+
+  MyMoneyMoney::setThousandSeparator(' ');
+  QCOMPARE(MyMoneyMoney::thousandSeparator(), ' ');
+  QCOMPARE(m1.formatMoney("", 2), QString("1 000.00"));
+  QCOMPARE(m2.formatMoney("", 2), QString("2 000.00"));
 }
 
 void MyMoneyMoneyTest::testFormatMoney()

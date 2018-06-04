@@ -84,10 +84,7 @@ MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition()
 
 void MyMoneyMoney::setThousandSeparator(const QChar &separator)
 {
-  if (separator != ' ')
-    _thousandSeparator = separator;
-  else
-    _thousandSeparator = 0;
+  _thousandSeparator = separator;
 }
 
 const QChar MyMoneyMoney::thousandSeparator()

@@ -338,7 +338,6 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
   //  Add date.
   //
   QString str = QString("\n%1" + m_separator).arg(t.postDate().toString(Qt::ISODate));
-  QString localeThousands = KGlobal::locale()->thousandsSeparator();  //  In case of clash with field separator
   for (itSplit = lst.begin(); itSplit != lst.end(); ++itSplit) {
     MyMoneyAccount acc = file->account((*itSplit).accountId());
     //
@@ -348,7 +347,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
       chkAccntId = (*itSplit).accountId();
       chkAccnt = file->account(chkAccntId).name();
       strCheckingAccountName = file->accountToCategory(chkAccntId) + m_separator;
-      strAmount = (*itSplit).value().formatMoney("", 2).remove(localeThousands) + m_separator;
+      strAmount = (*itSplit).value().formatMoney("", 2, false) + m_separator;
     } else if (acc.accountType() == MyMoneyAccount::Income) {
       //
       //  MyMoneyAccount::Income.
@@ -400,7 +399,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         }
       } else if ((*itSplit).action() == MyMoneySplit::ActionReinvestDividend) {
         qty = (*itSplit).shares();
-        strAmount = (*itSplit).value().formatMoney("", 2).remove(localeThousands) + m_separator;
+        strAmount = (*itSplit).value().formatMoney("", 2, false) + m_separator;
         strAction = QLatin1String("ReinvDiv");
       } else {
         strAction = (*itSplit).action();

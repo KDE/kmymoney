@@ -305,8 +305,7 @@ MyMoneyMoney kMyMoneyEdit::value() const
 
 void kMyMoneyEdit::setValue(const MyMoneyMoney& value)
 {
-  // load the value into the widget but don't use thousandsSeparators
-  QString txt = value.formatMoney("", m_prec, false);
+  QString txt = value.formatMoney("", m_prec);
   loadText(txt);
 }
 

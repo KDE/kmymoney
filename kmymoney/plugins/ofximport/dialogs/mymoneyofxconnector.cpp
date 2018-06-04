@@ -541,7 +541,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::bankStatementResponse(const QDate&
                          .element("CURDEF", "USD")
                          .subtag(Tag("BANKACCTFROM").element("BANKID", iban()).element("ACCTID", accountnum()).element("ACCTTYPE", "CHECKING"))
                          .subtag(Tag("BANKTRANLIST").element("DTSTART", dtstart_string).element("DTEND", dtnow_string).data(transactionlist))
-                         .subtag(Tag("LEDGERBAL").element("BALAMT", file->balance(m_account.id()).formatMoney(QString(), 2)).element("DTASOF", dtnow_string)));
+                         .subtag(Tag("LEDGERBAL").element("BALAMT", file->balance(m_account.id()).formatMoney(QString(), 2, false)).element("DTASOF", dtnow_string)));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardStatementResponse(const QDate& _dtstart) const
@@ -567,7 +567,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardStatementResponse(const 
                          .element("CURDEF", "USD")
                          .subtag(Tag("CCACCTFROM").element("ACCTID", accountnum()))
                          .subtag(Tag("BANKTRANLIST").element("DTSTART", dtstart_string).element("DTEND", dtnow_string).data(transactionlist))
-                         .subtag(Tag("LEDGERBAL").element("BALAMT", file->balance(m_account.id()).formatMoney(QString(), 2)).element("DTASOF", dtnow_string)));
+                         .subtag(Tag("LEDGERBAL").element("BALAMT", file->balance(m_account.id()).formatMoney(QString(), 2, false)).element("DTASOF", dtnow_string)));
 }
 
 QString MyMoneyOfxConnector::investmentStatementResponse(const QDate& _dtstart) const
@@ -637,7 +637,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::transaction(const MyMoneyTransacti
   // but libofx requires it to be there in order to import the file.
   .element("TRNTYPE", "DEBIT")
   .element("DTPOSTED", _t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")))
-  .element("TRNAMT", s.value().formatMoney(QString(), 2));
+  .element("TRNAMT", s.value().formatMoney(QString(), 2, false));
 
   if (! _t.bankID().isEmpty())
     result.element("FITID", _t.bankID());
@@ -676,9 +676,9 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
              .subtag(Tag("INVSELL")
                      .subtag(invtran)
                      .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
-                     .element("UNITS", QString(((s.shares())).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
-                     .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")))
-                     .element("TOTAL", QString((-s.value()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("UNITS", QString(((s.shares())).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.]")))
+                     .element("TOTAL", QString((-s.value()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.\\-]")))
                      .element("SUBACCTSEC", "CASH")
                      .element("SUBACCTFUND", "CASH"))
              .element("SELLTYPE", "SELL");
@@ -687,9 +687,9 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
              .subtag(Tag("INVBUY")
                      .subtag(invtran)
                      .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
-                     .element("UNITS", QString((s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
-                     .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")))
-                     .element("TOTAL", QString((-(s.value())).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("UNITS", QString((s.shares()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.]")))
+                     .element("TOTAL", QString((-(s.value())).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.\\-]")))
                      .element("SUBACCTSEC", "CASH")
                      .element("SUBACCTFUND", "CASH"))
              .element("BUYTYPE", "BUY");
@@ -702,10 +702,10 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
            .subtag(invtran)
            .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
            .element("INCOMETYPE", "DIV")
-           .element("TOTAL", QString((-s.value()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+           .element("TOTAL", QString((-s.value()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.\\-]")))
            .element("SUBACCTSEC", "CASH")
-           .element("UNITS", QString((s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
-           .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")));
+           .element("UNITS", QString((s.shares()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.\\-]")))
+           .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9.]")));
   } else if (s.action() == MyMoneySplit::ActionDividend) {
     // find the split with the category, which has the actual amount of the dividend
     QList<MyMoneySplit> splits = _t.splits();
@@ -726,7 +726,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
              .subtag(invtran)
              .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
              .element("INCOMETYPE", "DIV")
-             .element("TOTAL", QString((-(*it_split).value()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9\\.\\-]")))
+             .element("TOTAL", QString((-(*it_split).value()).formatMoney(QString(), 2, false)).remove(QRegExp("[^0-9\\.\\-]")))
              .element("SUBACCTSEC", "CASH")
              .element("SUBACCTFUND", "CASH");
     else

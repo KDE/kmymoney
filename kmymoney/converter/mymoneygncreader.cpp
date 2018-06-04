@@ -271,8 +271,7 @@ QString GncObject::hide(QString data, unsigned int anonClass)
         if (data == "-1/0") in = MyMoneyMoney();
         mresult  = MyMoneyMoney(m_moneyHideFactor) * in;
         mresult.convert(10000);
-        mresult.setThousandSeparator(' ');
-        result = mresult.formatMoney("", 2);
+        result = mresult.formatMoney("", 2, false);
         break;
     }
     return (result);
