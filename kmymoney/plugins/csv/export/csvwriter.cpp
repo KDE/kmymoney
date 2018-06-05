@@ -160,13 +160,12 @@ void CsvWriter::writeCategoryEntries(QTextStream &s)
 void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, const QString& leadIn)
 {
   MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
-  QString name = acc.name();
+  QString name = format(acc.name());
 
-  s << leadIn << name << m_separator;
+  s << leadIn << name;
   s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? QLatin1Char('E') : QLatin1Char('I'));
   s << endl;
 
-  name += m_separator;
   foreach (const auto sAccount, acc.accountList())
     writeCategoryEntry(s, sAccount, name);
 }
@@ -192,20 +191,16 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
 
   str += QString("%1" + m_separator).arg(t.postDate().toString(Qt::ISODate));
   MyMoneyPayee payee = file->payee(split.payeeId());
-  str += QString("%1" + m_separator).arg(payee.name());
+  str += format(payee.name());
 
-  QString txt = split.value().formatMoney("", 2, false);
-  str += QString("%1" + m_separator).arg(txt);
+  str += format(split.value());
 
   if (splits.count() > 1) {
     MyMoneySplit sp = t.splitByAccount(accountId, false);
-    QString tmp = QString("%1").arg(file->accountToCategory(sp.accountId()));
-    str += tmp + m_separator;
+    str += format(file->accountToCategory(sp.accountId()));
   }
-  QString memo = split.memo();
-  memo.replace('\n', '~').remove('\'');
 
-  str += QString("%1" + m_separator).arg(memo);
+  str += format(split.memo());
 
   switch (split.reconcileFlag()) {
     case eMyMoney::Split::State::Cleared:
@@ -222,7 +217,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
       break;
   }
 
-  str += split.number();
+  str += format(split.number(), false);
 
   if (splits.count() > 2) {
     QList<MyMoneySplit>::ConstIterator it;
@@ -243,24 +238,16 @@ void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const i
     str += m_separator;
   }
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString splt = QString("%1").arg(file->accountToCategory(split.accountId()));
-  str += splt + m_separator;
+  str += format(file->accountToCategory(split.accountId()));
 
   if (splitCount > m_highestSplitCount) {
     m_highestSplitCount++;
     m_headerLine << QString(i18n("splitCategory")) << QString(i18n("splitMemo")) << QString(i18n("splitAmount"));
     m_headerLine.join(m_separator);
   }
-  QString m = split.memo();
-  m.replace(QLatin1Char('\n'), QLatin1Char('~'));
-  QString localeThousands = QLocale().groupSeparator();  //  In case of clash with field separator
-  if (m_separator == localeThousands) {
-    m.replace(localeThousands, QString());
-  }
-  str += QString("%1" + m_separator).arg(m);
+  str += format(split.memo());
 
-  QString txt = QString("%1" + m_separator).arg(split.value().formatMoney("", 2, false));
-  str += txt;
+  str += format(split.value());
 }
 
 void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate)
@@ -339,28 +326,27 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
     if ((acc.accountType() == eMyMoney::Account::Type::Checkings) || (acc.accountType() == eMyMoney::Account::Type::Cash) || (acc.accountType() == eMyMoney::Account::Type::Savings)) {
       chkAccntId = (*itSplit).accountId();
       chkAccnt = file->account(chkAccntId).name();
-      strCheckingAccountName = file->accountToCategory(chkAccntId) + m_separator;
-      strAmount = (*itSplit).value().formatMoney("", 2, false) + m_separator;
+      strCheckingAccountName = format(file->accountToCategory(chkAccntId));
+      strAmount = format((*itSplit).value());
     } else if (acc.accountType() == eMyMoney::Account::Type::Income) {
       //
       //  eMyMoney::Account::Type::Income.
       //
       qty = (*itSplit).shares();
       value = (*itSplit).value();
-      strInterest = value.formatMoney("", 2, false) + m_separator;
+      strInterest = format(value);
     } else if (acc.accountType() == eMyMoney::Account::Type::Expense) {
       //
       //  eMyMoney::Account::Type::Expense.
       //
       qty = (*itSplit).shares();
       value = (*itSplit).value();
-      strFees = value.formatMoney("", 2, false) + m_separator;
+      strFees = format(value);
     }  else if (acc.accountType() == eMyMoney::Account::Type::Stock) {
       //
       //  eMyMoney::Account::Type::Stock.
       //
-      strMemo = QString("%1" + m_separator).arg((*itSplit).memo());
-      strMemo.replace(QLatin1Char('\n'), QLatin1Char('~')).remove('\'');
+      strMemo = format((*itSplit).memo());
       //
       //  Actions.
       //
@@ -392,7 +378,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         }
       } else if ((*itSplit).action() == QLatin1String("Reinvest")) {
         qty = (*itSplit).shares();
-        strAmount = (*itSplit).value().formatMoney("", 2, false) + m_separator;
+        strAmount = format((*itSplit).value());
         strAction = QLatin1String("ReinvDiv");
       } else {
         strAction = (*itSplit).action();
@@ -403,14 +389,14 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
       if ((strAction == QLatin1String("Buy")) || (strAction == QLatin1String("Sell")) || (strAction == QLatin1String("ReinvDiv"))) {
         //
         //  Add total.
-        //
+        // TODO: value is not used below
         if (strAction == QLatin1String("Sell")) {
           value = -value;
         }
         //
         //  Add price.
         //
-        strPrice = (*itSplit).price().formatMoney("", 6, false);
+        strPrice = format((*itSplit).price(), 6);
         if (!qty.isZero()) {
           //
           //  Add quantity.
@@ -418,7 +404,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
           if (strAction == QLatin1String("Sell")) {
             qty = -qty;
           }
-          strQuantity = qty.formatMoney("", 2, false);
+          strQuantity = format(qty);
         }
       } else if ((strAction == QLatin1String("Shrsin")) || (strAction == QLatin1String("Shrsout"))) {
         //
@@ -427,13 +413,10 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         if (strAction == QLatin1String("Shrsout")) {
           qty = -qty;
         }
-        strQuantity = qty.formatMoney("", 2, false);
+        strQuantity = format(qty);
       }
-      strAccName = acc.name();
-      strAccName += m_separator;
+      strAccName = format(acc.name());
       strAction += m_separator;
-      strQuantity += m_separator;
-      strPrice += m_separator;
     }
     if (strCheckingAccountName.isEmpty()) {
       strCheckingAccountName = m_separator;
@@ -448,4 +431,35 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
   str += strAccName + strAction + strAmount + strQuantity + strPrice + strInterest + strFees + strCheckingAccountName + strMemo + strStatus;
   QString date = t.postDate().toString(Qt::ISODate);
   m_map.insertMulti(date, str);
+}
+
+/**
+ * Format string field according to csv rules
+ * @param s string to format
+ * @param withSeparator append field separator to string (default = true)
+ * @return csv formatted string
+ */
+QString CsvWriter::format(const QString &s, bool withSeparator)
+{
+  if (s.isEmpty())
+    return withSeparator ? m_separator : QString();
+  QString m = s;
+  m.remove('\'');
+#if QT_VERSION >= 0x050000
+  m.replace(QLatin1Char('"'), QStringLiteral("\"\""));
+#else
+  m.replace(QLatin1Char('"'), QLatin1String("\"\""));
+#endif
+  return QString("\"%1\"%2").arg(m, withSeparator ? m_separator : QString());
+}
+
+/**
+ * format money value according to csv rules
+ * @param value value to format
+ * @param prec precision used for formatting (default = 2)
+ * @return formatted value as string
+ */
+QString CsvWriter::format(const MyMoneyMoney &value, int prec)
+{
+  return QString("\"%1\"%2").arg(value.formatMoney("", prec, false), m_separator);
 }

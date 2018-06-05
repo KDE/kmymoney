@@ -35,6 +35,7 @@ class QTextStream;
 class MyMoneyTransaction;
 class MyMoneySplit;
 class CSVExporter;
+class MyMoneyMoney;
 
 /**
   * @author Thomas Baumgart
@@ -143,6 +144,8 @@ private:
 
   bool m_noError;
 
+  QString format(const QString &s, bool withSeparator = true);
+  QString format(const MyMoneyMoney &value, int prec = 2);
 };
 
 #endif
