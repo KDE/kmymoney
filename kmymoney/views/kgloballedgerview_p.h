@@ -1109,25 +1109,27 @@ public:
 
   bool canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
   {
-    MyMoneyAccount acc;
-    QString closedAccount;
     if (m_register->focusItem() == 0)
       return false;
 
-//    bool rc = true;
-    if (list.warnLevel() == 3) {  //Closed account somewhere
-      auto it_t = list.first();
-//      for (auto it_t = list.cbegin(); rc && it_t != list.cend(); ++it_t) {
-        auto splitList = it_t.transaction().splits();
-        auto id = splitList.first().accountId();
-        acc = MyMoneyFile::instance()->account(id);
-        if (!acc.isClosed()) {  //wrong split, try other
-          id = splitList.last().accountId();
-          acc = MyMoneyFile::instance()->account(id);
+    bool rc = true;
+    if (list.warnLevel() == KMyMoneyRegister::SelectedTransaction::OneAccountClosed) {
+      // scan all splits for the first closed account
+      QString closedAccount;
+      for(const auto selectedTransaction : list) {
+        for(const auto split : selectedTransaction.transaction().splits()) {
+          const auto id = split.accountId();
+          const auto acc = MyMoneyFile::instance()->account(id);
+          if (acc.isClosed()) {
+            closedAccount = acc.name();
+            // we're done
+            rc = false;
+            break;
+          }
         }
-        closedAccount = acc.name();
-//        break;
-//      }
+        if(!rc)
+          break;
+      }
       tooltip = i18n("Cannot process transactions in account %1, which is closed.", closedAccount);
       showTooltip(tooltip);
       return false;

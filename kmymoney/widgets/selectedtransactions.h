@@ -47,7 +47,7 @@ namespace KMyMoneyRegister
     /**
    * @return the highest warnLevel of all transactions in the list
    */
-    int warnLevel() const;
+    SelectedTransaction::warnLevel_t warnLevel() const;
 
     bool canModify() const;
     bool canDuplicate() const;

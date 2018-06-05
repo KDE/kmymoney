@@ -36,12 +36,12 @@ SelectedTransactions::SelectedTransactions(const Register* r)
   r->selectedTransactions(*this);
 }
 
-int SelectedTransactions::warnLevel() const
+SelectedTransaction::warnLevel_t SelectedTransactions::warnLevel() const
 {
-  int warnLevel = 0;
+  SelectedTransaction::warnLevel_t warnLevel = SelectedTransaction::NoWarning;
   SelectedTransactions::const_iterator it_t;
-  for (it_t = begin(); warnLevel < 3 && it_t != end(); ++it_t) {
-    int thisLevel = (*it_t).warnLevel();
+  for (it_t = begin(); warnLevel < SelectedTransaction::OneAccountClosed && it_t != end(); ++it_t) {
+    SelectedTransaction::warnLevel_t thisLevel = (*it_t).warnLevel();
     if (thisLevel > warnLevel)
       warnLevel = thisLevel;
   }

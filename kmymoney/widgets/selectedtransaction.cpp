@@ -108,21 +108,21 @@ QString SelectedTransaction::scheduleId() const
   return d->m_scheduleId;
 }
 
-int SelectedTransaction::warnLevel() const
+SelectedTransaction::warnLevel_t SelectedTransaction::warnLevel() const
 {
-  auto warnLevel = 0;
+  auto warnLevel = NoWarning;
   foreach (const auto split, transaction().splits()) {
     try {
       auto acc = MyMoneyFile::instance()->account(split.accountId());
       if (acc.isClosed())
-        warnLevel = 3;
+        warnLevel = OneAccountClosed;
       else if (split.reconcileFlag() == eMyMoney::Split::State::Frozen)
-        warnLevel = 2;
+        warnLevel = OneSplitFrozen;
       else if (split.reconcileFlag() == eMyMoney::Split::State::Reconciled && warnLevel < 1)
-        warnLevel = 1;
+        warnLevel = OneSplitReconciled;
     } catch (const MyMoneyException &) {
       //qDebug("Exception in SelectedTransaction::warnLevel(): %s", e.what());
-      warnLevel = 0;
+      warnLevel = NoWarning;
     }
   }
   return warnLevel;

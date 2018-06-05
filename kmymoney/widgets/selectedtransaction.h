@@ -57,6 +57,12 @@ namespace KMyMoneyRegister
     bool isScheduled() const;
     QString scheduleId() const;
 
+    typedef enum {
+      NoWarning = 0,
+      OneSplitReconciled,
+      OneSplitFrozen,
+      OneAccountClosed
+    } warnLevel_t;
     /**
    * checks the transaction for specific reasons which would
    * speak against editing/modifying it.
@@ -65,7 +71,7 @@ namespace KMyMoneyRegister
    * @retval 2 some transactions cannot be changed anymore - parts of them are frozen
    * @retval 3 some transactions cannot be changed anymore - they touch closed accounts
    */
-    int warnLevel() const;
+    SelectedTransaction::warnLevel_t warnLevel() const;
 
   private:
     SelectedTransactionPrivate* d_ptr;
