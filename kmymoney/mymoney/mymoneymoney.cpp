@@ -225,7 +225,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // and limit the precision to 9 digits (the max we can
   // present with 31 bits
 #if 1
-  signed int denominator;
+  signed long denominator;
   if (mpz_fits_sint_p(denom.get_mpz_t())) {
     denominator = mpz_get_si(denom.get_mpz_t());
   } else {
