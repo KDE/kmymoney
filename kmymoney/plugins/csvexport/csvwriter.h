@@ -145,6 +145,8 @@ private:
 
   bool m_noError;
 
+  QString format(const QString &s, bool withSeparator = true);
+  QString format(const MyMoneyMoney &value, int prec = 2);
 };
 
 #endif
