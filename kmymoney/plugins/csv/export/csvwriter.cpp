@@ -311,7 +311,6 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
           strStatus.clear();
           break;
       }
-      strStatus += m_separator;
     }
   }
   //
@@ -418,6 +417,16 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
       strAccName = format(acc.name());
       strAction += m_separator;
     }
+
+   if (strAmount.isEmpty())
+      strAmount = m_separator;
+
+   if (strQuantity.isEmpty())
+      strQuantity = m_separator;
+
+    if (strPrice.isEmpty())
+      strPrice = m_separator;
+
     if (strCheckingAccountName.isEmpty()) {
       strCheckingAccountName = m_separator;
     }
