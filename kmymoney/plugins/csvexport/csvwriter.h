@@ -113,7 +113,7 @@ private:
     */
   void writeCategoryEntry(QTextStream &s, const QString &accountId, const QString &leadIn);
   void writeTransactionEntry(const MyMoneyTransaction& t, const QString& accountId, const int count);
-  void writeSplitEntry(QString& str, const MyMoneySplit& split, const int splitCount);
+  void writeSplitEntry(QString& str, const MyMoneySplit& split, const int splitCount, const int lastEntry);
   void extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate);
   void writeInvestmentEntry(const MyMoneyTransaction& t, const int count);
 
@@ -146,7 +146,7 @@ private:
   bool m_noError;
 
   QString format(const QString &s, bool withSeparator = true);
-  QString format(const MyMoneyMoney &value, int prec = 2);
+  QString format(const MyMoneyMoney &value, int prec = 2, bool withSeparator = true);
 };
 
 #endif

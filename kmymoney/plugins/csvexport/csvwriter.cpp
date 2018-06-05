@@ -223,7 +223,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
     QList<MyMoneySplit>::ConstIterator it;
     for (it = splits.constBegin(); it != splits.constEnd(); ++it) {
       if (!((*it) == split)) {
-        writeSplitEntry(str, *it, splits.count() - 1);
+        writeSplitEntry(str, *it, splits.count() - 1, it+1 == splits.constEnd());
       }
     }
   }
@@ -231,7 +231,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
   m_map.insertMulti(date, str);
 }
 
-void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const int splitCount)
+void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const int splitCount, const int lastEntry)
 {
   if (m_firstSplit) {
     m_firstSplit = false;
@@ -247,7 +247,7 @@ void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const i
   }
   str += format(split.memo());
 
-  str += format(split.value());
+  str += format(split.value(), 2, !lastEntry);
 }
 
 void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate)
@@ -468,9 +468,10 @@ QString CsvWriter::format(const QString &s, bool withSeparator)
  * format money value according to csv rules
  * @param value value to format
  * @param prec precision used for formatting (default = 2)
+ * @param withSeparator append field separator to string (default = true)
  * @return formatted value as string
  */
-QString CsvWriter::format(const MyMoneyMoney &value, int prec)
+QString CsvWriter::format(const MyMoneyMoney &value, int prec, bool withSeparator)
 {
-  return QString("\"%1\"%2").arg(value.formatMoney("", prec, false), m_separator);
+  return QString("\"%1\"%2").arg(value.formatMoney("", prec, false), withSeparator ? m_separator : QString());
 }
