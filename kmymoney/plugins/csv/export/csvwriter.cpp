@@ -105,7 +105,7 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
   QString type = account.accountTypeToString(account.accountType());
   data = QString(i18n("Account Type:"));
 
-  if (type == QLatin1String("Investment")) {
+  if (account.accountType() == eMyMoney::Account::Type::Investment) {
     data += QString("%1\n\n").arg(type);
     m_headerLine << QString(i18n("Date")) << QString(i18n("Security")) << QString(i18n("Action/Type")) << QString(i18n("Amount")) << QString(i18n("Quantity")) << QString(i18n("Price")) << QString(i18n("Interest")) << QString(i18n("Fees")) << QString(i18n("Account")) << QString(i18n("Memo")) << QString(i18n("Status"));
     data += m_headerLine.join(m_separator);
