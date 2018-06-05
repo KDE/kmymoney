@@ -678,7 +678,7 @@ public:
         } else {
           //if only taking a few periods, totalWeight is the sum of the weight for most recent periods
           auto i = 1;
-          for (auto w = q->forecastCycles(); i <= auxForecastTerms; ++i, --w)
+          for (qint64 w = q->forecastCycles(); i <= auxForecastTerms; ++i, --w)
             totalWeight += w;
         }
         for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
