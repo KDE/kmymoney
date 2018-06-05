@@ -1082,8 +1082,8 @@ public:
         m_html += QString("<td width=\"40%\">") +
                      link(VIEW_LEDGER, QString("?id=%1").arg((*it_account).id())) + (*it_account).name() + linkend() + "</td>";
 
-        auto dropZero = -1; //account dropped below zero
-        auto dropMinimum = -1; //account dropped below minimum balance
+        qint64 dropZero = -1; //account dropped below zero
+        qint64 dropMinimum = -1; //account dropped below minimum balance
         QString minimumBalance = (*it_account).value("minimumBalance");
         MyMoneyMoney minBalance = MyMoneyMoney(minimumBalance);
         MyMoneySecurity currency;

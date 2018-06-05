@@ -621,7 +621,7 @@ void MyMoneyForecastTest::testDaysToZeroBalance()
 
   //test when not a forecast account
   MyMoneyAccount a_solo = file->account(acSolo);
-  int iSolo = a.daysToZeroBalance(a_Solo);
+  auto iSolo = a.daysToZeroBalance(a_Solo);
 
   QVERIFY(iSolo == -2);
 
@@ -768,7 +768,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
   //set up environment
   MyMoneyForecast a;
   QDate beginDate;
-  int beginDay;
+  qint64 beginDay;
 
   a.setForecastMethod(1);
   a.setForecastDays(90);
