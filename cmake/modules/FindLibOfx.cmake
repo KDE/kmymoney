@@ -26,11 +26,6 @@ IF (NOT WIN32 AND NOT APPLE)
    # in the FIND_PATH() and FIND_LIBRARY() calls
    FIND_PACKAGE(PkgConfig)
    PKG_CHECK_MODULES(LIBOFX libofx>=${LIBOFX_MIN_VERSION})
-   # I am not sure what the next statement should do, since the
-   # var LIBOFX_DEFINITIONS is not used anywhere. Leave it here
-   # in case I overlooked something, but it could really go
-   # at some point in time (ipwizard, 2011-02-15)
-   # SET(LIBOFX_DEFINITIONS ${LIBOFX_CFLAGS_OTHER})
 
 ELSE (NOT WIN32 AND NOT APPLE)
   FIND_PATH(LIBOFX_INCLUDE_DIR libofx/libofx.h
