@@ -25,8 +25,6 @@ set_target_properties(sqlstorage
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
-kde_target_enable_exceptions(sqlstorage PUBLIC)
-
 target_link_libraries(sqlstorage
   PUBLIC
     kmm_plugin

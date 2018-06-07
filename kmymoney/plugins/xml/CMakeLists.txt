@@ -20,8 +20,6 @@ set_target_properties(xmlstorage
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
-# kde_target_enable_exceptions(xmlstorage PUBLIC)
-
 target_link_libraries(xmlstorage
   PUBLIC
     kmm_plugin

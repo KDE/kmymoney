@@ -77,9 +77,6 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   )
 
 add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
-kde_target_enable_exceptions(kmm_mymoney PUBLIC)
-
-target_compile_features(kmm_mymoney PUBLIC cxx_nullptr PRIVATE cxx_decltype cxx_lambdas cxx_constexpr cxx_range_for)
 
 generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 

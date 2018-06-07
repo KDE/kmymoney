@@ -3,8 +3,6 @@ kconfig_add_kcfg_files( kmm_settings_SRCS kmymoneysettings.kcfgc )
 
 add_library(kmm_settings SHARED  ${kmm_settings_SRCS})
 
-target_compile_features(kmm_settings PUBLIC cxx_nullptr PRIVATE cxx_decltype cxx_lambdas cxx_constexpr cxx_range_for)
-
 set_target_properties(kmm_settings PROPERTIES
       VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR} )
 

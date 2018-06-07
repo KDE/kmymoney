@@ -43,9 +43,6 @@ target_link_libraries(kbanking
                       aqbanking::aqbanking
 )
 
-# List might not be complete
-target_compile_features(kbanking PRIVATE cxx_generalized_initializers cxx_nullptr)
-
 # Add new menu entries if debugging is enabled
 set(KMM_BANKING_DEBUG_OPTIONS)
 # preprocessor definitions in case this is a debug build
