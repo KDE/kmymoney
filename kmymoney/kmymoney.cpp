@@ -1491,6 +1491,8 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d->m_activityResourceInstance;
 #endif
 
+  // make sure all settings are written to disk
+  KMyMoneySettings::self()->save();
   delete d;
 }
 
