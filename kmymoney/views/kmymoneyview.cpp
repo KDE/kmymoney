@@ -610,7 +610,7 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
     QHash<View, KPageWidgetItem*>::const_iterator it;
     for(it = viewFrames.cbegin(); it != viewFrames.cend(); ++it) {
       if ((*it) == view) {
-        KMyMoneySettings::setLastViewSelected(static_cast<int>(it.key()));
+        emit viewActivated(it.key());
         break;
       }
     }

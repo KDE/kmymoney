@@ -316,6 +316,12 @@ private:
   void resetViewSelection(const View);
 
 Q_SIGNALS:
+   /**
+    * This signal is emitted whenever a view is selected.
+    * The parameter @p view is identified as one of KMyMoneyView::viewID.
+    */
+  void viewActivated(View view);
+
   /**
     * This signal is emitted whenever a new view is about to be selected.
     */

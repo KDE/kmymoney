@@ -1405,6 +1405,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   d->m_myMoneyView = new KMyMoneyView;
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, &KMyMoneyView::aboutToChangeView, this, &KMyMoneyApp::slotResetSelections);
+  connect(d->m_myMoneyView, &KMyMoneyView::viewActivated, this, &KMyMoneyApp::slotViewSelected);
   connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
           this, SLOT(slotUpdateActions()));
 
@@ -1475,6 +1476,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
 KMyMoneyApp::~KMyMoneyApp()
 {
+  // don't keep track of selected view anymore as this might change by unloading plugins
+  disconnect(d->m_myMoneyView, &KMyMoneyView::viewActivated, this, &KMyMoneyApp::slotViewSelected);
+
   // delete cached objects since they are in the way
   // when unloading the plugins
   onlineJobAdministration::instance()->clearCaches();
@@ -3021,6 +3025,11 @@ void KMyMoneyApp::slotShowPreviousView()
 void KMyMoneyApp::slotShowNextView()
 {
 
+}
+
+void KMyMoneyApp::slotViewSelected(View view)
+{
+  KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
 }
 
 void KMyMoneyApp::slotGenerateSql()

@@ -46,6 +46,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyenums.h"
+#include "viewenums.h"
 
 class QResizeEvent;
 class MyMoneyObject;
@@ -204,6 +205,8 @@ protected Q_SLOTS:
   void slotShowPreviousView();
 
   void slotShowNextView();
+
+  void slotViewSelected(View view);
 
   /**
     * Calls the print logic for the current view
