@@ -121,7 +121,6 @@ private:
   QHash<View, KMyMoneyViewBase*> viewBases;
 
   KMyMoneyTitleLabel* m_header;
-  int m_lastViewSelected;
 
   QMap<QString, KMyMoneyPlugin::StoragePlugin*>* m_storagePlugins;
 
@@ -317,12 +316,6 @@ private:
   void resetViewSelection(const View);
 
 Q_SIGNALS:
-  /**
-    * This signal is emitted whenever a view is selected.
-    * The parameter @p view is identified as one of KMyMoneyView::viewID.
-    */
-  void viewActivated(int view);
-
   /**
     * This signal is emitted whenever a new view is about to be selected.
     */

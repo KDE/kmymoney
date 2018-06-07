@@ -99,7 +99,6 @@ typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
 KMyMoneyView::KMyMoneyView()
     : KPageWidget(nullptr),
     m_header(0),
-    m_lastViewSelected(0),
     m_storagePlugins(nullptr)
 {
   // this is a workaround for the bug in KPageWidget that causes the header to be shown
@@ -191,7 +190,6 @@ KMyMoneyView::KMyMoneyView()
 
 KMyMoneyView::~KMyMoneyView()
 {
-  KMyMoneySettings::setLastViewSelected(m_lastViewSelected);
 }
 
 void KMyMoneyView::slotFileOpened()
@@ -600,13 +598,23 @@ void KMyMoneyView::slotShowTransactionDetail(bool detailed)
   slotRefreshViews();
 }
 
-void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QModelIndex)
+void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous)
 {
-  // remember the current page
-  m_lastViewSelected = current.row();
   // set the current page's title in the header
   if (m_header)
     m_header->setText(m_model->data(current, KPageModel::HeaderRole).toString());
+
+  // remember the selected view if there is a real change
+  if (previous.isValid()) {
+    const KPageWidgetItem* view = currentPage();
+    QHash<View, KPageWidgetItem*>::const_iterator it;
+    for(it = viewFrames.cbegin(); it != viewFrames.cend(); ++it) {
+      if ((*it) == view) {
+        KMyMoneySettings::setLastViewSelected(static_cast<int>(it.key()));
+        break;
+      }
+    }
+  }
 }
 
 void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)
