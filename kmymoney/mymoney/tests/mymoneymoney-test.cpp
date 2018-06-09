@@ -700,15 +700,6 @@ void MyMoneyMoneyTest::testReduce()
 
 void MyMoneyMoneyTest::testZeroDenominator()
 {
-  try {
-    MyMoneyMoney m((int)1, 0);
-    QFAIL("Missing expected exception");
-  } catch (const MyMoneyException &) {
-  }
-
-  try {
-    MyMoneyMoney m((signed64)1, 0);
-    QFAIL("Missing expected exception");
-  } catch (const MyMoneyException &) {
-  }
+  QVERIFY_EXCEPTION_THROWN(MyMoneyMoney m((int)1, 0), MyMoneyException);
+  QVERIFY_EXCEPTION_THROWN(MyMoneyMoney m((signed64)1, 0), MyMoneyException);
 }
