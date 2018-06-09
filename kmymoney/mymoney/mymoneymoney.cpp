@@ -225,7 +225,14 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // and limit the precision to 9 digits (the max we can
   // present with 31 bits
 #if 1
-  signed long denominator;
+  // MPIR and GMP use different types for the return value of mpz_get_si()
+  // which causes warnings on some compilers.
+#ifdef mpir_version     // MPIR is used
+  mpir_si denominator;
+#else                   // GMP is used
+  long int denominator;
+#endif
+
   if (mpz_fits_sint_p(denom.get_mpz_t())) {
     denominator = mpz_get_si(denom.get_mpz_t());
   } else {

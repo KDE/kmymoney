@@ -94,7 +94,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
        * that this is not possible
        */
       d->m_editor = 0;
-      SplitDelegate* const that = const_cast<SplitDelegate* const>(this);
+      SplitDelegate* that = const_cast<SplitDelegate*>(this);
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
