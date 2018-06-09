@@ -436,7 +436,7 @@ QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewIte
        * editor that can handle multiple transactions at once
        */
       d->m_editor = 0;
-      LedgerDelegate* const that = const_cast<LedgerDelegate* const>(this);
+      LedgerDelegate* that = const_cast<LedgerDelegate*>(this);
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
