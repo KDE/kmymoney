@@ -38,9 +38,9 @@ target_link_libraries(xmlstorage
 #   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 # )
 
-# if(BUILD_TESTING)
-#   add_subdirectory(tests)
-# endif()
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
 
 
 # the KCM module

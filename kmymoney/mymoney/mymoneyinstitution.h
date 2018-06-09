@@ -90,15 +90,6 @@ public:
     */
   MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other);
 
-  /**
-    * This is the constructor for an institution that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyInstitution(const QDomElement& el);
-
   QString manager() const;
   void setManager(const QString& manager);
 

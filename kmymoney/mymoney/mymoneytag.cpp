@@ -53,23 +53,6 @@ MyMoneyTag::MyMoneyTag(const QString& name, const QColor& tabColor) :
   d->m_tag_color = tabColor;
 }
 
-MyMoneyTag::MyMoneyTag(const QDomElement& node) :
-  MyMoneyObject(*new MyMoneyTagPrivate, node)
-{
-  if (nodeNames[nnTag] != node.tagName()) {
-    throw MYMONEYEXCEPTION_CSTRING("Node was not TAG");
-  }
-  Q_D(MyMoneyTag);
-  d->m_name = node.attribute(d->getAttrName(Tag::Attribute::Name));
-  if (node.hasAttribute(d->getAttrName(Tag::Attribute::TagColor))) {
-    d->m_tag_color.setNamedColor(node.attribute(d->getAttrName(Tag::Attribute::TagColor)));
-  }
-  if (node.hasAttribute(d->getAttrName(Tag::Attribute::Notes))) {
-    d->m_notes = node.attribute(d->getAttrName(Tag::Attribute::Notes));
-  }
-  d->m_closed = node.attribute(d->getAttrName(Tag::Attribute::Closed), "0").toUInt();
-}
-
 MyMoneyTag::MyMoneyTag(const MyMoneyTag& other) :
   MyMoneyObject(*new MyMoneyTagPrivate(*other.d_func()), other.id())
 {
@@ -120,6 +103,12 @@ void MyMoneyTag::setTagColor(const QColor& val)
 {
   Q_D(MyMoneyTag);
   d->m_tag_color = val;
+}
+
+void MyMoneyTag::setNamedTagColor(const QString &val)
+{
+  Q_D(MyMoneyTag);
+  d->m_tag_color.setNamedColor(val);
 }
 
 QString MyMoneyTag::notes() const

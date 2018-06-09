@@ -52,15 +52,11 @@ private Q_SLOTS:
   //void testAddDuplicateAccount();
   //void testModifyDuplicateAccount();
   void testWriteXML();
-  void testReadXML();
-  void testReadXMLEx();
   void testAutoCalc();
   void testHasReferenceTo();
   void testIsStockSplit();
   void testAddMissingAccountId();
   void testModifyMissingAccountId();
   void testReplaceId();
-  void testElementNames();
-  void testAttributeNames();
 };
 #endif

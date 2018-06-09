@@ -31,13 +31,8 @@ private Q_SLOTS:
   void testSetFunctions();
   void testCopyConstructor();
   void testAssignmentConstructor();
-  void testOverdue();
-  void testNextPayment();
   void testAddHalfMonths();
-  void testPaymentDates();
   void testWriteXML();
-  void testReadXML();
-  void testHasReferenceTo();
   void testAdjustedNextDueDate();
   void testModifyNextDueDate();
   void testDaysBetweenEvents();
@@ -47,14 +42,9 @@ private Q_SLOTS:
   void testOccurrencePeriod();
   void testSimpleToFromCompoundOccurrence();
   void testProcessingDates();
-  void testPaidEarlyOneTime();
   void testAdjustedNextPayment();
-  void testReplaceId();
   void testAdjustedWhenItWillEnd();
   void testProcessLastDayInMonth();
-  void testNextPaymentOnLastDayOfMonth();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif

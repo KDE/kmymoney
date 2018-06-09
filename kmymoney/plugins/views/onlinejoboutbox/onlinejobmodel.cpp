@@ -144,11 +144,11 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
         return Icons::get(Icon::TaskOngoing);
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return Icons::get(Icon::TaskComplete);
-        case onlineJob::sendingError:
-        case onlineJob::abortedByUser:
-        case onlineJob::rejectedByBank: return Icons::get(Icon::TaskReject);
-        case onlineJob::noBankAnswer: break;
+        case eMyMoney::OnlineJob::sendingState::acceptedByBank: return Icons::get(Icon::TaskComplete);
+        case eMyMoney::OnlineJob::sendingState::sendingError:
+        case eMyMoney::OnlineJob::sendingState::abortedByUser:
+        case eMyMoney::OnlineJob::sendingState::rejectedByBank: return Icons::get(Icon::TaskReject);
+        case eMyMoney::OnlineJob::sendingState::noBankAnswer: break;
       }
       if (job.sendDate().isValid()) {
         return Icons::get(Icon::TaskAccepted);
@@ -160,11 +160,11 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
         return i18n("Job is being processed at the moment.");
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
-        case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).", job.sendDate().toString(Qt::DefaultLocaleShortDate));
-        case onlineJob::abortedByUser: return i18n("Sending this job was manually aborted.");
-        case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
-        case onlineJob::noBankAnswer:
+        case eMyMoney::OnlineJob::sendingState::acceptedByBank: return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+        case eMyMoney::OnlineJob::sendingState::sendingError: return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).", job.sendDate().toString(Qt::DefaultLocaleShortDate));
+        case eMyMoney::OnlineJob::sendingState::abortedByUser: return i18n("Sending this job was manually aborted.");
+        case eMyMoney::OnlineJob::sendingState::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+        case eMyMoney::OnlineJob::sendingState::noBankAnswer:
           if (job.sendDate().isValid())
             return i18nc("Arg 1 is a date/time", "The bank accepted this job on %1.", job.sendDate().toString(Qt::DefaultLocaleShortDate));
           else if (!job.isValid())

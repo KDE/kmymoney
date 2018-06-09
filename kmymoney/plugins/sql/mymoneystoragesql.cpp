@@ -1380,18 +1380,18 @@ QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& i
     onlineTask *const task = d->createOnlineTaskObject(query.value(1).toString(), id, *this);
     onlineJob job = onlineJob(task, id);
     job.setJobSend(query.value(2).toDateTime());
-    onlineJob::sendingState state;
+    eMyMoney::OnlineJob::sendingState state;
     const QString stateString = query.value(4).toString();
     if (stateString == "acceptedByBank")
-      state = onlineJob::acceptedByBank;
+      state = eMyMoney::OnlineJob::sendingState::acceptedByBank;
     else if (stateString == "rejectedByBank")
-      state = onlineJob::rejectedByBank;
+      state = eMyMoney::OnlineJob::sendingState::rejectedByBank;
     else if (stateString == "abortedByUser")
-      state = onlineJob::abortedByUser;
+      state = eMyMoney::OnlineJob::sendingState::abortedByUser;
     else if (stateString == "sendingError")
-      state = onlineJob::sendingError;
+      state = eMyMoney::OnlineJob::sendingState::sendingError;
     else // includes: stateString == "noBankAnswer"
-      state = onlineJob::noBankAnswer;
+      state = eMyMoney::OnlineJob::sendingState::noBankAnswer;
 
     job.setBankAnswer(state, query.value(4).toDateTime());
     job.setLock(query.value(5).toString() == QLatin1String("Y") ? true : false);

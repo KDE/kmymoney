@@ -77,39 +77,6 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
   d->m_sortcode = sortcode;
 }
 
-MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
-  MyMoneyObject(*new MyMoneyInstitutionPrivate, node),
-  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
-{
-  if (nodeNames[nnInstitution] != node.tagName())
-    throw MYMONEYEXCEPTION_CSTRING("Node was not INSTITUTION");
-
-  Q_D(MyMoneyInstitution);
-  d->m_sortcode = node.attribute(d->getAttrName(Institution::Attribute::SortCode));
-  d->m_name = node.attribute(d->getAttrName(Institution::Attribute::Name));
-  d->m_manager = node.attribute(d->getAttrName(Institution::Attribute::Manager));
-
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Institution::Element::Address));
-  if (nodeList.isEmpty())
-    throw MYMONEYEXCEPTION(QString::fromLatin1("No ADDRESS in institution %1").arg(d->m_name));
-
-  QDomElement addrNode = nodeList.item(0).toElement();
-  d->m_street = addrNode.attribute(d->getAttrName(Institution::Attribute::Street));
-  d->m_town = addrNode.attribute(d->getAttrName(Institution::Attribute::City));
-  d->m_postcode = addrNode.attribute(d->getAttrName(Institution::Attribute::Zip));
-  d->m_telephone = addrNode.attribute(d->getAttrName(Institution::Attribute::Telephone));
-
-  d->m_accountList.clear();
-
-  nodeList = node.elementsByTagName(d->getElName(Institution::Element::AccountIDS));
-  if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Institution::Element::AccountID));
-    for (int i = 0; i < nodeList.count(); ++i) {
-      d->m_accountList << nodeList.item(i).toElement().attribute(d->getAttrName(Institution::Attribute::ID));
-    }
-  }
-}
-
 MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other) :
   MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), other.id()),
   MyMoneyKeyValueContainer(other)

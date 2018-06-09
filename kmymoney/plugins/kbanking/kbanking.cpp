@@ -920,9 +920,9 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         job.setJobSend();
 
       if (abStatus == AB_Job_StatusFinished)
-        job.setBankAnswer(onlineJob::acceptedByBank);
+        job.setBankAnswer(eMyMoney::OnlineJob::sendingState::acceptedByBank);
       else if (abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
-        job.setBankAnswer(onlineJob::sendingError);
+        job.setBankAnswer(eMyMoney::OnlineJob::sendingState::sendingError);
 
       job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Debug, "KBanking", "Job was processed"));
       m_parent->m_onlineJobQueue.insert(jobIdent, job);

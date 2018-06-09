@@ -51,14 +51,6 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
   explicit MyMoneyTag(const QString& name,
                       const QColor& tagColor
                       );
-  /**
-    * This is the constructor for a tag that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyTag(const QDomElement& node);
 
   MyMoneyTag(const QString& id,
              const MyMoneyTag& tag);
@@ -78,6 +70,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 
   QColor tagColor() const;
   void setTagColor(const QColor& val);
+  void setNamedTagColor(const QString &val);
 
   QString notes() const;
   void setNotes(const QString& val);

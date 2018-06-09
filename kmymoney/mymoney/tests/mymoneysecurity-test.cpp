@@ -213,13 +213,3 @@ void MyMoneySecurityTest::testAccountIDList () {
 
 }
 */
-
-void MyMoneySecurityTest::testAttributeNames()
-{
-  for (auto i = (int)Security::Attribute::Name; i < (int)Security::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneySecurityPrivate::getAttrName(static_cast<Security::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}

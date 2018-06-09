@@ -73,48 +73,6 @@ MyMoneyPayee::MyMoneyPayee(const QString& name,
   d->m_matchKeyIgnoreCase = true;
 }
 
-MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneyPayeePrivate, node)
-{
-  if (nodeNames[nnPayee] != node.tagName()) {
-    throw MYMONEYEXCEPTION_CSTRING("Node was not PAYEE");
-  }
-
-  Q_D(MyMoneyPayee);
-  d->m_name = node.attribute(d->getAttrName(Payee::Attribute::Name));
-  d->m_reference = node.attribute(d->getAttrName(Payee::Attribute::Reference));
-  d->m_email = node.attribute(d->getAttrName(Payee::Attribute::Email));
-
-  d->m_matchingEnabled = node.attribute(d->getAttrName(Payee::Attribute::MatchingEnabled), "0").toUInt();
-  if (d->m_matchingEnabled) {
-    setMatchData((node.attribute(d->getAttrName(Payee::Attribute::UsingMatchKey), "0").toUInt() != 0) ? eMyMoney::Payee::MatchType::Key : eMyMoney::Payee::MatchType::Name,
-                 node.attribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), "0").toUInt(),
-                 node.attribute(d->getAttrName(Payee::Attribute::MatchKey)));
-  }
-
-  if (node.hasAttribute(d->getAttrName(Payee::Attribute::Notes))) {
-    d->m_notes = node.attribute(d->getAttrName(Payee::Attribute::Notes));
-  }
-
-  if (node.hasAttribute(d->getAttrName(Payee::Attribute::DefaultAccountID))) {
-    d->m_defaultAccountId = node.attribute(d->getAttrName(Payee::Attribute::DefaultAccountID));
-  }
-
-  // Load Address
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Payee::Element::Address));
-  if (nodeList.isEmpty())
-    throw MYMONEYEXCEPTION(QString::fromLatin1("No ADDRESS in payee %1").arg(d->m_name));
-
-  QDomElement addrNode = nodeList.item(0).toElement();
-  d->m_address = addrNode.attribute(d->getAttrName(Payee::Attribute::Street));
-  d->m_city = addrNode.attribute(d->getAttrName(Payee::Attribute::City));
-  d->m_postcode = addrNode.attribute(d->getAttrName(Payee::Attribute::PostCode));
-  d->m_state = addrNode.attribute(d->getAttrName(Payee::Attribute::State));
-  d->m_telephone = addrNode.attribute(d->getAttrName(Payee::Attribute::Telephone));
-
-  MyMoneyPayeeIdentifierContainer::loadXML(node);
-}
-
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& other) :
   MyMoneyObject(*new MyMoneyPayeePrivate(*other.d_func()), other.id()),
   MyMoneyPayeeIdentifierContainer(other)

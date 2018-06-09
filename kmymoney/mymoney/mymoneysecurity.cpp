@@ -76,41 +76,6 @@ MyMoneySecurity::MyMoneySecurity(const QString& id,
     d->m_smallestAccountFraction = smallestCashFraction;
 }
 
-MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
-  MyMoneyObject(*new MyMoneySecurityPrivate, node),
-  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
-{
-  {
-    const auto tag = node.tagName();
-    if ((nodeNames[nnSecurity] != tag)
-        && (nodeNames[nnEquity] != tag)
-        && (nodeNames[nnCurrency] != tag))
-      throw MYMONEYEXCEPTION_CSTRING("Node was not SECURITY or CURRENCY");
-  }
-
-  Q_D(MyMoneySecurity);
-  d->m_name = node.attribute(d->getAttrName(Security::Attribute::Name));
-  d->m_tradingSymbol = node.attribute(d->getAttrName(Security::Attribute::Symbol));
-  d->m_securityType = static_cast<eMyMoney::Security::Type>(node.attribute(d->getAttrName(Security::Attribute::Type)).toInt());
-  d->m_roundingMethod = static_cast<AlkValue::RoundingMethod>(node.attribute(d->getAttrName(Security::Attribute::RoundingMethod)).toInt());
-  d->m_smallestAccountFraction = node.attribute(d->getAttrName(Security::Attribute::SAF)).toUInt();
-  d->m_pricePrecision = node.attribute(d->getAttrName(Security::Attribute::PP)).toUInt();
-
-  if (d->m_smallestAccountFraction == 0)
-    d->m_smallestAccountFraction = 100;
-  if (d->m_pricePrecision == 0 || d->m_pricePrecision > 10)
-    d->m_pricePrecision = 4;
-
-  if (isCurrency()) {
-    d->m_smallestCashFraction = node.attribute(d->getAttrName(Security::Attribute::SCF)).toUInt();
-    if (d->m_smallestCashFraction == 0)
-      d->m_smallestCashFraction = 100;
-  } else {
-    d->m_tradingCurrency = node.attribute(d->getAttrName(Security::Attribute::TradingCurrency));
-    d->m_tradingMarket = node.attribute(d->getAttrName(Security::Attribute::TradingMarket));
-  }
-}
-
 MyMoneySecurity::MyMoneySecurity(const MyMoneySecurity& other) :
   MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), other.id()),
   MyMoneyKeyValueContainer(other)

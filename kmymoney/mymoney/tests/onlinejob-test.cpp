@@ -35,7 +35,7 @@ void onlineJobTest::testDefaultConstructor()
   QVERIFY(job.isNull());
   QVERIFY(job.sendDate().isNull());
   QVERIFY(job.bankAnswerDate().isNull());
-  QVERIFY(job.bankAnswerState() == onlineJob::noBankAnswer);
+  QVERIFY(job.bankAnswerState() == eMyMoney::OnlineJob::sendingState::noBankAnswer);
   QVERIFY(job.jobMessageList().isEmpty());
   QVERIFY(job.isLocked() == false);
 
@@ -70,7 +70,7 @@ void onlineJobTest::testCopyAssignment()
 void onlineJobTest::testCopyConstructorWithNewId()
 {
   onlineJob originalJob = onlineJob(new dummyTask, "O000001");
-  originalJob.setBankAnswer(onlineJob::acceptedByBank);
+  originalJob.setBankAnswer(eMyMoney::OnlineJob::sendingState::acceptedByBank);
   QVERIFY(!originalJob.isNull());
 
   onlineJob jobCopy = onlineJob("O000002", originalJob);
@@ -78,24 +78,4 @@ void onlineJobTest::testCopyConstructorWithNewId()
   QCOMPARE(jobCopy.id(), QString("O000002"));
   QVERIFY(originalJob.task() != jobCopy.task());
   QVERIFY(jobCopy.bankAnswerDate().isNull());
-}
-
-void onlineJobTest::testElementNames()
-{
-  for (auto i = (int)OnlineJob::Element::OnlineTask; i <= (int)OnlineJob::Element::OnlineTask; ++i) {
-    auto isEmpty = onlineJobPrivate::getElName(static_cast<OnlineJob::Element>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty element's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}
-
-void onlineJobTest::testAttributeNames()
-{
-  for (auto i = (int)OnlineJob::Attribute::Send; i < (int)OnlineJob::Attribute::LastAttribute; ++i) {
-    auto isEmpty = onlineJobPrivate::getAttrName(static_cast<OnlineJob::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
-  }
 }

@@ -107,15 +107,6 @@ public:
   MyMoneyAccount(const QString& id,
                  const MyMoneyAccount& other);
 
-  /**
-    * This is the constructor for an account that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyAccount(const QDomElement& el);
-
   MyMoneyAccount(const MyMoneyAccount & other);
   MyMoneyAccount(MyMoneyAccount && other);
   MyMoneyAccount & operator=(MyMoneyAccount other);

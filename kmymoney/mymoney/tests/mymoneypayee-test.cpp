@@ -35,44 +35,6 @@ using namespace std;
 
 QTEST_GUILESS_MAIN(MyMoneyPayeeTest)
 
-void MyMoneyPayeeTest::testXml()
-{
-  QDomDocument doc;
-  QDomElement parent = doc.createElement("Test");
-  doc.appendChild(parent);
-  MyMoneyPayee payee1;
-  payee1.d_func()->m_id = "some random id";//if the ID isn't set, w ethrow an exception
-  payee1.writeXML(doc, parent);
-  QString temp1 = "Account1";
-  payee1.setDefaultAccountId(temp1);
-  payee1.writeXML(doc, parent);
-  QString temp2 = "Account2";
-  payee1.setDefaultAccountId(temp2);
-  payee1.writeXML(doc, parent);
-  payee1.setDefaultAccountId();
-  payee1.writeXML(doc, parent);
-  QDomElement el = parent.firstChild().toElement();
-  QVERIFY(!el.isNull());
-  MyMoneyPayee payee2(el);
-  QVERIFY(!payee2.defaultAccountEnabled());
-  QVERIFY(payee2.defaultAccountId().isEmpty());
-  el = el.nextSibling().toElement();
-  QVERIFY(!el.isNull());
-  MyMoneyPayee payee3(el);
-  QVERIFY(payee3.defaultAccountEnabled());
-  QVERIFY(payee3.defaultAccountId() == temp1);
-  el = el.nextSibling().toElement();
-  QVERIFY(!el.isNull());
-  MyMoneyPayee payee4(el);
-  QVERIFY(payee4.defaultAccountEnabled());
-  QVERIFY(payee4.defaultAccountId() == temp2);
-  el = el.nextSibling().toElement();
-  QVERIFY(!el.isNull());
-  MyMoneyPayee payee5(el);
-  QVERIFY(!payee5.defaultAccountEnabled());
-  QVERIFY(payee5.defaultAccountId().isEmpty());
-}
-
 void MyMoneyPayeeTest::testDefaultAccount()
 {
   MyMoneyPayee payee;
@@ -214,24 +176,4 @@ void MyMoneyPayeeTest::testMatchNameExact()
   QCOMPARE(payee.matchData(ignoreCase, keys), eMyMoney::Payee::MatchType::NameExact);
   QCOMPARE(ignoreCase, false);
   QVERIFY(keys.isEmpty());
-}
-
-void MyMoneyPayeeTest::testElementNames()
-{
-  for (auto i = (int)Payee::Element::Address; i <= (int)Payee::Element::Address; ++i) {
-    auto isEmpty = MyMoneyPayeePrivate::getElName(static_cast<Payee::Element>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty element's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}
-
-void MyMoneyPayeeTest::testAttributeNames()
-{
-  for (auto i = (int)Payee::Attribute::Name; i < (int)Payee::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyPayeePrivate::getAttrName(static_cast<Payee::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
-  }
 }

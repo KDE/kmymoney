@@ -41,7 +41,6 @@ private Q_SLOTS:
   void testSubAccounts();
   void testEquality();
   void testWriteXML();
-  void testReadXML();
   void testHasReferenceTo();
   void testAdjustBalance();
   void testSetClosed();
@@ -49,8 +48,6 @@ private Q_SLOTS:
   void specialAccountTypes_data();
   void addReconciliation();
   void reconciliationHistory();
-  void testElementNames();
-  void testAttributeNames();
   void testHasOnlineMapping();
 };
 

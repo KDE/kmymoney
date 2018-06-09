@@ -26,6 +26,9 @@
 
 #include "mymoneyobject_p.h"
 #include "onlinejobmessage.h"
+#include "mymoneyenums.h"
+
+namespace eMyMoney { namespace OnlineJob { enum class sendingState; } }
 
 namespace OnlineJob {
   enum class Element { OnlineTask };
@@ -90,7 +93,7 @@ public:
    *
    * combined with m_jobBankAnswerDate
    */
-  onlineJob::sendingState m_jobBankAnswerState;
+  eMyMoney::OnlineJob::sendingState m_jobBankAnswerState;
 
   /**
    * @brief Validation result status

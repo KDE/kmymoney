@@ -209,6 +209,12 @@ public:
    */
   void updateActions();
 
+  /**
+   * @brief Creates an onlineTask by its iid and xml data
+   * @return pointer to task, caller gains ownership. Can be 0.
+   */
+  onlineTask* createOnlineTaskByXml(const QString& iid, const QDomElement& element) const;
+
 Q_SIGNALS:
   /**
    * @brief Emitted if canSendAnyTask() changed
@@ -260,12 +266,6 @@ private:
    * @return pointer to task, caller gains ownership. Can be 0.
    */
   onlineTask* createOnlineTask(const QString& iid) const;
-
-  /**
-   * @brief Creates an onlineTask by its iid and xml data
-   * @return pointer to task, caller gains ownership. Can be 0.
-   */
-  onlineTask* createOnlineTaskByXml(const QString& iid, const QDomElement& element) const;
 
   // Must be able to call createOnlineTaskByXml
   friend class onlineJob;

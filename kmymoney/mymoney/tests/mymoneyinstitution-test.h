@@ -42,9 +42,6 @@ private Q_SLOTS:
   void testInequality();
   void testAccountIDList();
   void testWriteXML();
-  void testReadXML();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif

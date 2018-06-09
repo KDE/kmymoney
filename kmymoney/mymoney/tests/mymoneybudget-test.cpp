@@ -274,23 +274,3 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthByMonth()
   QVERIFY(a0.totalBalance() == MyMoneyMoney(23400, 1));
   QVERIFY(a1.totalBalance() == MyMoneyMoney(15600, 1));
 }
-
-void MyMoneyBudgetTest::testElementNames()
-{
-  for (auto i = (int)Budget::Element::Budget; i <= (int)Budget::Element::Period; ++i) {
-    auto isEmpty = MyMoneyBudgetPrivate::getElName(static_cast<Budget::Element>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty element's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}
-
-void MyMoneyBudgetTest::testAttributeNames()
-{
-  for (auto i = (int)Budget::Attribute::ID; i < (int)Budget::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyBudgetPrivate::getAttrName(static_cast<Budget::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}

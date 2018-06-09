@@ -353,7 +353,7 @@ namespace eMyMoney {
     /**
      * @brief The state of a job given by the onlinePlugin
      */
-    enum sendingState {
+    enum class sendingState {
       noBankAnswer, /**< Used during or before sending or if sendDate().isValid() the job was successfully sent */
       acceptedByBank, /**< bank definetly confirmed the job */
       rejectedByBank, /**< bank definetly rejected this job */

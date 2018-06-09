@@ -41,7 +41,6 @@ private Q_SLOTS:
   void testInequality();
   // void testMyMoneyFileConstructor();
   // void testAccountIDList ();
-  void testAttributeNames();
 };
 
 #endif

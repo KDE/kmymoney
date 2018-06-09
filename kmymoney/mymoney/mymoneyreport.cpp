@@ -134,15 +134,6 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
 #endif
 }
 
-MyMoneyReport::MyMoneyReport(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneyReportPrivate, node)
-{
-  // properly initialize the object before reading it
-  *this = MyMoneyReport();
-  if (!read(node))
-    clearId();
-}
-
 MyMoneyReport::MyMoneyReport(const MyMoneyReport& other) :
   MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), other.id()),
   MyMoneyTransactionFilter(other)
@@ -166,6 +157,12 @@ eMyMoney::Report::ReportType MyMoneyReport::reportType() const
 {
   Q_D(const MyMoneyReport);
   return d->m_reportType;
+}
+
+void MyMoneyReport::setReportType(eMyMoney::Report::ReportType rt)
+{
+  Q_D(MyMoneyReport);
+  d->m_reportType = rt;
 }
 
 QString MyMoneyReport::name() const

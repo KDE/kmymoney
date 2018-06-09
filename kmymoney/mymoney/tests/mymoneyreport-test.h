@@ -34,7 +34,5 @@ protected:
 private Q_SLOTS:
   void init();
   void cleanup();
-  void testElementNames();
-  void testAttributeNames();
 };
 #endif

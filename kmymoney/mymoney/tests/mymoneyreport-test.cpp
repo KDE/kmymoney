@@ -34,23 +34,3 @@ void MyMoneyReportTest::cleanup()
 {
   delete m;
 }
-
-void MyMoneyReportTest::testElementNames()
-{
-  for (auto i = (int)Report::Element::Payee; i <= (int)Report::Element::AccountGroup; ++i) {
-    auto isEmpty = MyMoneyReportPrivate::getElName(static_cast<Report::Element>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty element's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}
-
-void MyMoneyReportTest::testAttributeNames()
-{
-  for (auto i = (int)Report::Attribute::ID; i < (int)Report::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyReportPrivate::getAttrName(static_cast<Report::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}

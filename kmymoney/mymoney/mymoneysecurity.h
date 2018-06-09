@@ -68,8 +68,6 @@ public:
                            const int smallestAccountFraction = 100,
                            const int pricePrecision = 4);
 
-  explicit MyMoneySecurity(const QDomElement& node);
-
   MyMoneySecurity(const QString& id,
                   const MyMoneySecurity& other);
 

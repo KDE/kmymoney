@@ -1517,11 +1517,11 @@ public:
     query.bindValue(":jobSend", job.sendDate());
     query.bindValue(":bankAnswerDate", job.bankAnswerDate());
     switch (job.bankAnswerState()) {
-      case onlineJob::acceptedByBank: query.bindValue(":state", QLatin1String("acceptedByBank")); break;
-      case onlineJob::rejectedByBank: query.bindValue(":state", QLatin1String("rejectedByBank")); break;
-      case onlineJob::abortedByUser: query.bindValue(":state", QLatin1String("abortedByUser")); break;
-      case onlineJob::sendingError: query.bindValue(":state", QLatin1String("sendingError")); break;
-      case onlineJob::noBankAnswer:
+      case eMyMoney::OnlineJob::sendingState::acceptedByBank: query.bindValue(":state", QLatin1String("acceptedByBank")); break;
+      case eMyMoney::OnlineJob::sendingState::rejectedByBank: query.bindValue(":state", QLatin1String("rejectedByBank")); break;
+      case eMyMoney::OnlineJob::sendingState::abortedByUser: query.bindValue(":state", QLatin1String("abortedByUser")); break;
+      case eMyMoney::OnlineJob::sendingState::sendingError: query.bindValue(":state", QLatin1String("sendingError")); break;
+      case eMyMoney::OnlineJob::sendingState::noBankAnswer:
       default: query.bindValue(":state", QLatin1String("noBankAnswer"));
     }
     query.bindValue(":locked", QVariant::fromValue<QString>(job.isLocked() ? QLatin1String("Y") : QLatin1String("N")));

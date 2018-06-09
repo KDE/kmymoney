@@ -86,12 +86,6 @@ public:
                          eMyMoney::Report::DetailLevel ss,
                          const QString& name,
                          const QString& comment);
-  /**
-    * This constructor creates an object based on the data found in the
-    * QDomElement referenced by @p node. If problems arise, the @p id of
-    * the object is cleared (see MyMoneyObject::clearId()).
-    */
-  explicit MyMoneyReport(const QDomElement& node);
 
   MyMoneyReport(const QString& id,
                 const MyMoneyReport& other);
@@ -104,6 +98,7 @@ public:
   ~MyMoneyReport();
 
   eMyMoney::Report::ReportType reportType() const;
+  void setReportType(eMyMoney::Report::ReportType rt);
 
   QString name() const;
   void setName(const QString& s);

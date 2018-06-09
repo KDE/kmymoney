@@ -58,20 +58,12 @@ public:
   explicit MyMoneyPayee(const QString &id);
 
   explicit MyMoneyPayee(const QString& name,
-                        const QString& address = QString(),
+                        const QString& address,
                         const QString& city = QString(),
                         const QString& state = QString(),
                         const QString& postcode = QString(),
                         const QString& telephone = QString(),
                         const QString& email = QString());
-  /**
-    * This is the constructor for a payee that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyPayee(const QDomElement& node);
 
   MyMoneyPayee(const QString& id,
                const MyMoneyPayee& other);

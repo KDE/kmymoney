@@ -33,8 +33,6 @@ private Q_SLOTS:
   void testCopyConstructor();
   void testCopyAssignment();
   void testCopyConstructorWithNewId();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif // ONLINEJOBTEST_H

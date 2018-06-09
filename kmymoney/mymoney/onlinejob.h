@@ -32,6 +32,8 @@
 class onlineTask;
 class MyMoneyAccount;
 
+namespace eMyMoney { namespace OnlineJob { enum class sendingState; } }
+
 /**
  * @brief Class to share jobs which can be procceded by an online banking plugin
  *
@@ -76,9 +78,6 @@ public:
    */
   onlineJob(onlineTask* task, const QString& id); // krazy:exclude=explicit
   onlineJob(onlineTask* task); // krazy:exclude=explicit
-
-  /** @brief Contruct from xml */
-  explicit onlineJob(const QDomElement&);
 
   /**
    * @brief Create new onlineJob as copy of other
@@ -142,17 +141,6 @@ public:
   /** @todo implement */
   bool hasReferenceTo(const QString &id) const override;
   void writeXML(QDomDocument &document, QDomElement &parent) const override;
-
-  /**
-   * @brief The state of a job given by the onlinePlugin
-   */
-  enum sendingState {
-    noBankAnswer, /**< Used during or before sending or if sendDate().isValid() the job was successfully sent */
-    acceptedByBank, /**< bank definetly confirmed the job */
-    rejectedByBank, /**< bank definetly rejected this job */
-    abortedByUser, /**< aborted by user during sending */
-    sendingError /**< an error occurred, the job is certainly not executed by the bank */
-  };
 
   /**
    * @brief Account this job is related to
@@ -222,8 +210,8 @@ public:
    *
    * Set dateTime to QDateTime() and bankAnswer to noState to mark unsend. If bankAnswer == noState dateTime.isNull() must be true!
    */
-  void setBankAnswer(const sendingState state, const QDateTime &dateTime);
-  void setBankAnswer(const sendingState state);
+  void setBankAnswer(const eMyMoney::OnlineJob::sendingState state, const QDateTime &dateTime);
+  void setBankAnswer(const eMyMoney::OnlineJob::sendingState state);
 
   /**
    * @brief DateTime of the last status update by the bank
@@ -235,7 +223,7 @@ public:
    * @brief Returns last status sand by bank
    * @return
    */
-  sendingState bankAnswerState() const;
+  eMyMoney::OnlineJob::sendingState bankAnswerState() const;
 
   /**
    * @brief locks the onlineJob for sending it

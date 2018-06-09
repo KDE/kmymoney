@@ -90,8 +90,6 @@ public:
                            bool fixed,
                            bool autoEnter);
 
-  explicit MyMoneySchedule(const QDomElement& node);
-
   MyMoneySchedule(const QString& id,
                   const MyMoneySchedule& other);
 
@@ -212,6 +210,18 @@ public:
     * @return MyMoneyTransaction The transaction data for the instance.
     */
   MyMoneyTransaction transaction() const;
+
+  /**
+    * Simple method that sets the transaction for the schedule.
+    * The transaction must have a valid postDate set, otherwise
+    * it will not be accepted. This test is bypassed, if @a noDateCheck
+    * is set to true
+    *
+    * @param transaction The new transaction.
+    * @param noDateCheck if @a true, the date check is bypassed
+    * @return none
+    */
+  void setTransaction(const MyMoneyTransaction& transaction, bool noDateCheck);
 
   /**
     * Simple method that returns the schedules last payment. If the
@@ -662,18 +672,6 @@ private:
     * @param date reference to QDate object to be checked and adjusted
     */
   void fixDate(QDate& date) const;
-
-  /**
-    * Simple method that sets the transaction for the schedule.
-    * The transaction must have a valid postDate set, otherwise
-    * it will not be accepted. This test is bypassed, if @a noDateCheck
-    * is set to true
-    *
-    * @param transaction The new transaction.
-    * @param noDateCheck if @a true, the date check is bypassed
-    * @return none
-    */
-  void setTransaction(const MyMoneyTransaction& transaction, bool noDateCheck);
 
   /**
     * This method adds a number of Half Months to the given Date.

@@ -37,8 +37,6 @@ private Q_SLOTS:
   void addMonthByMonthToYearly();
   void addMonthByMonthToMonthByMonth();
   void cleanup();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif

@@ -27,7 +27,6 @@ class MyMoneyPayeeTest : public QObject
 {
   Q_OBJECT
 private Q_SLOTS:
-  void testXml();
   void testDefaultAccount();
   void testEmptyMatchKeyBegin();
   void testEmptyMatchKeyEnd();
@@ -38,8 +37,6 @@ private Q_SLOTS:
   void testMatchKeyAllowSpaceAtStart();
   void testMatchKeyAllowSpaceAtEnd();
   void testMatchNameExact();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif

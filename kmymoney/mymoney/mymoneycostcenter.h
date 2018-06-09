@@ -45,15 +45,6 @@ public:
   MyMoneyCostCenter();
   explicit MyMoneyCostCenter(const QString &id);
 
-  /**
-    * This is the constructor for a tag that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyCostCenter(const QDomElement& el);
-
   MyMoneyCostCenter(const QString& id,
                     const MyMoneyCostCenter& other);
   MyMoneyCostCenter(const MyMoneyCostCenter & other);
