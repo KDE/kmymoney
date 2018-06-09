@@ -3425,6 +3425,7 @@ void KMyMoneyApp::slotUpdateActions()
       {qMakePair(Action::ToolUpdatePrices, fileOpen)},
       {qMakePair(Action::ToolConsistency, fileOpen)},
       {qMakePair(Action::NewAccount, fileOpen)},
+      {qMakePair(Action::NewCategory, fileOpen)},
       {qMakePair(Action::AccountCreditTransfer, onlineJobAdministration::instance()->canSendCreditTransfer())},
       {qMakePair(Action::NewInstitution, fileOpen)},
 //      {qMakePair(Action::TransactionNew, (fileOpen && d->m_myMoneyView->canCreateTransactions(KMyMoneyRegister::SelectedTransactions(), tooltip)))},
