@@ -135,7 +135,6 @@ void KCategoriesView::updateActions(const MyMoneyObject& obj)
     {
       const auto file = MyMoneyFile::instance();
       auto b = file->isStandardAccount(acc.id()) ? false : true;
-      pActions[eMenu::Action::NewCategory]->setEnabled(true);
       pActions[eMenu::Action::EditCategory]->setEnabled(b);
       // enable delete action, if category/account itself is not referenced
       // by any object except accounts, because we want to allow
@@ -153,13 +152,10 @@ void KCategoriesView::updateActions(const MyMoneyObject& obj)
       break;
     }
     default:
-    {
-      pActions[eMenu::Action::NewCategory]->setEnabled(false);
       pActions[eMenu::Action::EditCategory]->setEnabled(false);
       pActions[eMenu::Action::DeleteCategory]->setEnabled(false);
       d->m_currentCategory = MyMoneyAccount();
       break;
-    }
   }
 }
 
