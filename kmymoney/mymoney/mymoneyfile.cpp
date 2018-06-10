@@ -2736,6 +2736,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("CRC", i18n("Costa Rican Colon"),      QChar(0x20A1)));
   currencyList.append(MyMoneySecurity("HRK", i18n("Croatian Kuna")));
   currencyList.append(MyMoneySecurity("CUP", i18n("Cuban Peso")));
+  currencyList.append(MyMoneySecurity("CUC", i18n("Cuban Convertible Peso")));
   currencyList.append(MyMoneySecurity("CZK", i18n("Czech Koruna")));
   currencyList.append(MyMoneySecurity("DKK", i18n("Danish Krone"),           "kr"));
   currencyList.append(MyMoneySecurity("DJF", i18n("Djibouti Franc")));
